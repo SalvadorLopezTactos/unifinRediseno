@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Aktivni se procesi pokreću na ovoj definiciji procesa. Ažuriranje definicije utjecat će na te procese. Želite li i dalje urediti ovu definiciju procesa?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Aktivni se procesi pokreću na ovoj definiciji procesa. Ažuriranje definicije utjecat će na te procese. Želite li i dalje isključiti ovu definiciju procesa?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatski stvorite novi zapis s definicijama procesa tako da uvezete datoteku *.bpm iz sustava datoteke.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Učitaj datoteku .bpm kako biste uvezli definiciju procesa.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Definicije procesa uspješno su uvezene u sustav.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Odaberite ispravnu datoteku *.bpm.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Uvezena je definicija procesa, ali sadrži jednu ili više radnji poslovnog pravila za koju nisu odabrana poslovna pravila.',
+    'LBL_BPM_IMPORT_SELECT' => 'Ova definicija procesa sadrži sljedeća poslovna pravila i predloške e-pošte. '
+        . 'Odaberite one koje želite uvesti.',
+    'LBL_BUSINESS_RULES' => 'Poslovna pravila',
+    'LBL_EMAIL_TEMPLATES' => 'Predlošci e-pošte',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Poništi',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Vrati',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Spremi',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Provjeri valjanost',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Spremi i provjeri valjanost',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Pokreni provjeru valjanosti radi provjere ima li pogrešaka',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivnost',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Izbriši',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtriraj',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Povezano s',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriteriji',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Trajanje',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Jedinica',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Polja',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Procjena polja modula',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Povezano s',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Polje',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Vrijednost',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Procjena odgovora na obrazac',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nije',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nije jednako',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Svi povezani zapisi',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bilo koji povezani zapis',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Vrijeme izvođenja',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Dodaj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zatvori',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Timovi',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Korisnik iz %MODULE% koji je stvorio zapis',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Korisnik iz %MODULE% koji je zadnji izmijenio zapis',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Korisnik iz %MODULE% koji je dodijeljen zapisu',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Korisnik iz %MODULE% koji je dodijeljen zapisu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Korisnik iz %MODULE% koji je voditelj osobe koja je stvorila zapis',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Korisnik iz %MODULE% koji je voditelj osobe koja je zadnja izmijenila zapis',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Korisnik iz %MODULE% koji je voditelj osobe koja je dodijeljena zapisu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Korisnik iz %MODULE% koji je voditelj osobe koja je bila dodijeljena zapisu',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% povezano s modulom %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Korisnik koji je stvorio modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Korisnik koji je posljednji izmijenio modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Korisnik kojem je dodijeljen modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Korisnik kojem je bio dodijeljen modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Voditelj korisniku koji je stvorio modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Voditelj korisniku koji je posljednji izmijenio modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Voditelj korisniku kojem je dodijeljen modul %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Voditelj korisniku kojem je bio dodijeljen modul %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'uloga: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'tim: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Prijedlozi',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Neispravna sintaksa izraza.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Nije moguće upotrebljavati dvije različite valute u istom izrazu.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Definicija procesa provjere valjanosti: dohvaćanje postavki elemenata',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Definicija procesa provjere valjanosti: provjera valjanosti postavki elemenata',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Osvježavanje popisa pogrešaka...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Provjera valjanosti završena! Pronađeni problemi: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemi',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Provjera valjanosti u tijeku',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Upozorenje: Proces se može zaustaviti na ovom elementu ili može imati druge nepredviđene učinke',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Pogreška: Proces se neće zaustaviti na ovom elementu',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Nije moguća provjera valjanosti elementa',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Element ne ispunjava minimalan broj dolaznih tijekova',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Ovaj element mora imati minimalni broj dolaznih puteva. Provjerite broj puteva koji se spajaju na ovaj element kako biste bili sigurni da je postignut minimalni broj.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Element premašuje maksimalan broj dolaznih tijekova',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Ovaj element ima maksimalni broj dolaznih puteva koji se ne smije premašiti. Provjerite broj puteva koji se spajaju na ovaj element kako biste bili sigurni da nije premašen maksimalni broj.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Element ne ispunjava minimalan broj odlaznih tijekova',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Ovaj element mora imati minimalni broj odlaznih puteva. Provjerite broj puteva koji vode izvan ovog elementa kako biste bili sigurni da je postignut minimalni broj.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Element premašuje maksimalan broj odlaznih tijekova',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Ovaj element ima maksimalni broj odlaznih puteva koji se ne smiju premašiti. Provjerite broj puteva koji vode izvan ovog elementa kako biste bili sigurni da nije premašen maksimalni broj.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Obavezno polje nije postavljeno',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Ovaj element ima polje koje je obvezno, no nije postavljeno. Provjerite postavke elemenata kako biste osigurali da je polje ispravno postavljeno, a zatim svakako kliknite gumb „Spremi”.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Podaci trenutačno ne postoje u sustavu',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Postavke za ovaj element upućuju na određeni podatak koji ne postoji u bazi podataka. Provjerite postavke elementa kako biste osigurali da svi podaci na koje se upućuje postoje (tj. određeni korisnici, polja modula, timovi itd.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Izraz okvira s kriterijima nikad neće biti procijenjen kao istinit',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Okviri s kriterijima sadržavaju logičke izraze I/ILI/NE. Ova pogreška znači da je okvir s kriterijima u postavkama elemenata konfiguriran tako da taj izraz nikad neće biti istinit. Označite okvir s kriterijima radi eliminacije svih nelogičnih kontradikcija zbog kojih izraz nije istinit.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Element nije dostupan',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Kako bi se element izvršio u procesu, na njega mora biti spojen put. Lanac puteva koji vode do tog elementa mora početi s početnim elementom. Provjerite lanac dolaznih puteva koji vode do tog elementa kako biste bili sigurni da lanac počinje s početnim elementom.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Kriteriji vremena čekanja moraju sadržavati točno jednu konstantu datuma i vremena',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Ovaj element događaja čekanja konfiguriran je putem okvira s kriterijima „Fiksni datum”. Taj okvir mora sadržavati točno jednu konstantu „Fiksni datum i vrijeme” ili referencu polja Datum i vrijeme. Svi ostali izrazi moraju biti matematički operatori (+/-) ili konstante „Vremensko razdoblje”.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Određena vrijednost trajanja ne smije biti jednaka nuli',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Ovaj element događaja čekanja konfiguriran je putem postavke „Trajanje”. Ta postavka ne smije biti jednaka nuli ili će doći do pogreške. Provjerite postavke elemenata kako biste se pobrinuli da „Trajanje” nije postavljeno na nulu.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Nisu postavljeni parametri vremena čekanja',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Nijedna postavka ovog elementa događaja čekanja nije konfigurirana. Provjerite postavke elemenata kako biste bili sigurni da je odabrano „Trajanje” ili „Fiksni datum”, unesite željene vrijednosti i kliknite gumb „Spremi”.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Očekivano vrijeme manje je od nule',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'U postavkama „Obrasci” za ovaj element aktivnosti, očekivano vrijeme postavljeno je na negativnu vrijednost, što će uzrokovati zamrzavanje elementa pri dosezanju elementa. Otvorite postavke „Obrasci” kako bi taj element izmijenio očekivano vrijeme u broj koji nije negativan.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Vrsta radnje je [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Za ovaj element radnje nije određena namijenjena vrsta. To je moguće promijeniti desnim klikom na element radnje i odabirom vrste iz popisa „Vrsta radnje”.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Ne jamči se uporaba puta',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Ova poruka o pogrešci pojavljuje se jer postoji mogućnost da se neće odabrati nijedan put koji vodi izvan ovog elementa pristupnika, što će uzrokovati prekid procesa. Preporučuje se postavljanje zadanog puta za uporabu u slučaju da nijedan izraz okvira s kriterijima u postavkama elemenata nije zadovoljen. To se može izvršiti desnim klikom na element pristupnika i odabirom elementa u izborniku „Zadani tijek”. Ako zadani put nije određen, izraze okvira s kriterijima u postavkama elemenata potrebno je izmijeniti kako bi se osiguralo da će barem jedan od njih biti istinit tijekom izvršavanja procesa.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Vrsta pristupnika za skupljanje ne odgovara vrsti pristupnika dolaznog tijeka',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Pristupnici za širenje proširuju procese u više ogranaka. Pri uporabi pristupnika za skupljanje radi ponovnog skupljanja tih ogranaka u jedan put potrebno je upotrijebiti ispravnu vrstu pristupnika za skupljanje, zavisno od vrste pristupnika za širenje koji je korišten za izradu tih ogranaka. Za ogranke izrađene isključivim pristupnicima za širenje ili pristupnicima za širenje koji se temelje na događaju upotrijebite isključivi pristupnik za njihovo ponovno skupljanje. Za ogranke izrađene paralelnim ili uključivim pristupnicima upotrijebite paralelni pristupnik za skupljanje kako biste ih ponovno skupili.',
 );

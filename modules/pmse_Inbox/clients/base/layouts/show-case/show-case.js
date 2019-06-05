@@ -144,7 +144,7 @@
             app.logger.fatal('Record not found.');
         }
 
-        // Override the templates and buttons to use Advanced Workflow's templates and buttons
+        // Override the templates and buttons to use SugarBPM templates and buttons
         record.xmeta = {
             template: 'pmse-case',
             buttons: data.case.buttons
@@ -487,7 +487,7 @@
             /**
              * @override
              *
-             * Allows checking Advanced Workflow readonly and required fields
+             * Allows checking SugarBPM readonly and required fields
              */
             setEditableFields: function() {
                 delete this.editableFields;
@@ -629,7 +629,7 @@
             },
 
             /**
-             * Check if the field is set to readonly by Advanced Workflow
+             * Check if the field is set to readonly by SugarBPM
              * @param field The field
              * @returns {boolean} `true` or `false`
              */
@@ -644,7 +644,7 @@
             },
 
             /**
-             * Check if the field is set to required by Advanced Workflow
+             * Check if the field is set to required by SugarBPM
              * @param field The field
              * @returns {boolean} `true` or `false`
              */

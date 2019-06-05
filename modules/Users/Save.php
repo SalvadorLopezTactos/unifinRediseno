@@ -21,7 +21,16 @@ if (!function_exists('verifyAndCleanup')) {
         $data = array(
             'status' => $status,
             'error_string' => $user->error_string,
+            'error_password' => '',
         );
+
+        if ($user->portal_only && !$user->check_password_rules($_POST['new_password'])) {
+            $data['status'] = false;
+            $data['error_password'] =
+                $GLOBALS['mod_strings']['ERR_PASSWORD_CHANGE_FAILED_1']
+                . $user->user_name
+                . $GLOBALS['mod_strings']['ERR_PASSWORD_CHANGE_FAILED_3'];
+        }
         header('Content-Type: application/json');
         echo json_encode($data);
         sugar_cleanup(true);
@@ -292,6 +301,14 @@ if (!$focus->is_group && !$focus->portal_only) {
         );
     }
     $focus->setPreference('currency_show_preferred', isset($_POST['currency_show_preferred']), false, 'global');
+
+    $focus->setPreference(
+        'currency_create_in_preferred',
+        isset($_POST['currency_create_in_preferred']),
+        false,
+        'global'
+    );
+
     if (isset($_POST['num_grp_sep'])) {
         $focus->setPreference('num_grp_sep', $_POST['num_grp_sep'], 0, 'global');
     }

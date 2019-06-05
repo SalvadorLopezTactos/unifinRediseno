@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Pronađene su greške u toku provere kompatibilnosti. Kako bi Vaša SugarCRM instalacija pravilno funkcionisala, molim preduzmite odgovarajuće korake vezane za dole navedene stavke i pritisnite dugme Ponovna provera, ili pokrenite ponovo instalaciju.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Opcija Allow Call Time Pass Reference je uključena (trebalo bi da je isključena u php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: planer Sugar će funkcionisati sa ograničenom funkcionalnošću. Usluga Arhiviranje e-pošte neće raditi.',
+	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: Sugar planer će raditi sa ograničenom funkcionalnošću. Usluga arhiviranja email poruka neće raditi.',
     'ERR_CHECKSYS_IMAP'					=> 'Nije nađeno: Dolazne email poruke i Kampanje (Email) zahtevaju IMAP biblioteke. Ni jedna od navedenih funkcija neće raditi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC opcija ne može da bude uključena kada se koristi MS SQL server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Upozorenje:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Za optimalno iskustvo korišćenja IIS/FastCGI sapi, podesite fastcgi.logging na 0 u php.ini fajlu.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalirana PHP verzija nije podržana : ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Baza nije dostupna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Proverite da li imate potrebne upravljačke programe za jednu od navedenih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati da uklonite komentar sa proširenja u datoteci php.ini ili da je ponovo kompajlirate sa ispravnom binarnom datotekom u zavisnosti od vaše verzije PHP-a. Više informacija o tome kako da uključite Podršku za bazu podataka potražite u priručniku za PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Proverite da li imate potrebne upravljačke programe za jednu od navedenih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati da uklonite komentar sa ekstenzije u datoteci php.ini ili da je ponovo kompajlirate sa ispravnom binarnom datotekom u zavisnosti od vaše verzije PHP-a. Više informacija o tome kako da uključite Podršku za bazu podataka potražite u priručniku za PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nisu nađene funkcije povezane sa bibliotekama XML parsiranja koje su neophodne za Sugar aplikaciju. Možda ćete morati da uklonite ekstenziju u php.ini fajlu , ili da ga ponovo kompajlirate sa tačnim binarnim fajlom, u zavisnosti od Vaše verzije PHP-a. Za više informacija molimo da pogledate PHP priručnik.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator nasumičnog broja',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije koje zavise od Multibyte Strings PHP ekstenzije (mbstring), a koje su neophodne za ispravan rad Sugar aplikacije, nisu pronađene. <br/><br/>Generalno, mbstring modul podrazumevano nije omogućen u PHP-u i mora se posebno aktivirati uključivanjem opcije --enable-mbstring za vreme bildovanja PHP binarnog fajla. Za više informacija, molimo konsultujte vašu PHP dokumentaciju.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Podešavanje session.save_path u Vašem PHP konfiguracionom fajlu (php.ini) nije postavljeno ili je postavljno na folder koji ne postoji. Možda ćete morati da postavite podešavanja save_path u php.ini ili da verifikujete da postavke foldera u save_path postoje.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Podešavanje session.save_path u Vašem php konfiguracionom fajlu (php.ini) su postavljena na folder u koji nije dozvoljen upis. Molim da uradite neophdne korake kako bi mogli da upisujete u folder.  <br>U zavisnosti od vašeg operativnog sistema moraćete da promenite dozvole nad fajlom pokretanjem opcije chmod 766, ili desnim klikom na ime fajla pristupiti svojstvima i isključiti opciju "read only".',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfiguracioni fajl postoji ali u njega nije dozvoljen upis. Molimo, preduzmite neophodne korake da bi u njega bio dozoljen upis. U zavisnosti od vašeg operativnog sistema moraćete da promenite dozvole nad fajlom pokretanjem opcije chmod 766, ili desnim klikom na ime fajla pristupiti svojstvima i isključiti opciju "read only".',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP Modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings Modul',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'U redu (Bez ograničenja)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'U redu (Neograničeno)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP memorijsko ograničenje',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informacije o novom nalogu',
         'description' => 'Ovaj šablon se koristi kada Administrator sistema šalje novu lozinku korisniku.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Ovo je privremeno korisničko ime i lozinka za Vaš nalog:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Nakon prijave na sistem sa ovom lozinkom, potrebno je da promenite lozinku.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ovo je privremeno korisničko ime i lozinka za Vaš nalog:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Nakon prijave na sistem sa ovom lozinkom, potrebno je da promenite lozinku.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Ovo je privremeno korisničko ime i lozinka za Vaš nalog:<br />Korisničko ime : $contact_user_user_name<br />Lozinka : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Nakon prijave na sistem sa ovom lozinkom, potrebno je da promenite lozinku.',
         'name' => 'Email sa sistemski generisanom lozinkom',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetovanje lozinke Vašeg naloga',
         'description' => "Ovaj šablon se koristi za slanje linka korisniku za resetovanje lozinke korisničkog naloga.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Nedavno ste zatražili $contact_user_pwd_last_changed mogućnost da resetujete lozinku svog naloga. </p><p>Kliknite na link ispod da resetujete svoju lozinku:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Nedavno ste zatražili $contact_user_pwd_last_changed mogućnost da resetujete lozinku svog naloga. </p><p>Kliknite na link ispod da resetujete svoju lozinku:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Nedavno ste zatražili $contact_user_pwd_last_changed mogućnost da resetujete lozinku svog naloga. Kliknite na link ispod da resetujete svoju lozinku:</p><p> $contact_user_link_guid',
         'name' => 'Email Zaboravljena lozinka',

@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Dodeljeno:',
   'LBL_ASSIGNED_TO_NAME' => 'Korisnik:',  	  
   'LBL_WORK_LOG' => 'Dnevnik rada:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Autor:',
   'LBL_DATE_CREATED' => 'Datum kreiranja:',
   'LBL_DATE_ENTERED' => 'Datum kreiranja:',

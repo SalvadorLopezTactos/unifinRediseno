@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Kopieer naar Factuuradres',
 	'LBL_PUSH_SHIPPING' => 'Kopieer naar Verzendadres',
 	'LBL_SAVE_ACCOUNT' => 'Organisatie Opslaan',
+    'LBL_SERVICE_LEVEL' => 'Serviceniveau',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Afleveradres Stad:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Afleveradres Land:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Afleveradres Postcode:',

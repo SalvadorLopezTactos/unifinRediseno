@@ -123,8 +123,25 @@ class OAuth2Api extends SugarApi
                  && $GLOBALS['current_user']->isAdmin() ) {
                 // Let them through
             } else {
+                if ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
+                    $GLOBALS['log']->error($loginStatus['message']);
+                    $e = new SugarApiExceptionLicenseSeatsNeeded(
+                        'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS',
+                        null,
+                        null,
+                        0,
+                        'license_seats_needed'
+                    );
+                    throw $e;
+                }
                 // This is no good, they shouldn't be allowed in.
-                $e = new SugarApiExceptionMaintenance($loginStatus['message'], null, null, 0, $loginStatus['level']);
+                $e = new SugarApiExceptionMaintenance(
+                    $loginStatus['message'],
+                    null,
+                    null,
+                    0,
+                    $loginStatus['level']
+                );
                 if (!empty($loginStatus['url'])) {
                     $e->setExtraData("url", $loginStatus['url']);
                 }

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE :',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Utilisateur ou mot de passe incorrect',
-	'ERR_BODY_TOO_LONG'		=> '\\rLe Corps du message est trop long pour le récupérer dans sa totalité. Message tronqué.',
+	'ERR_BODY_TOO_LONG'		=> '\rLe Corps du message est trop long pour le récupérer dans sa totalité. Message tronqué.',
 	'ERR_INI_ZLIB'			=> 'Impossible de désactiver temporairement la compression Zlib. "Tester Paramétrage" peut échouer.',
 	'ERR_MAILBOX_FAIL'		=> 'Ne peut accéder à aucune boîte email.',
 	'ERR_NO_IMAP'			=> 'Librairie IMAP non trouvée. Merci de résoudre le problème avant de poursuivre le paramétrage des emails entrants',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Renseigner les files d&#39;attente depuis les équipes',
 	'LBL_GROUPFOLDER_ID'	=> 'ID du Dossier de Groupe',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => '"Dossier de Groupe"<br>stockant les emails entrants',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Autoriser les utilisateurs à envoyer des emails en utilisant les informations du "From" nom et adresse en adresse de réponse (reply-to).',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Lorsque cette option est sélectionnée, les informations "From" nom et adresse associée avec ce compte email de groupe apparaîtront en option pour le champ "From" lorsque les utilisateurs qui ont accès à ce compte de messagerie de groupe.',
     'LBL_STATUS_ACTIVE'     => 'Actif',
     'LBL_STATUS_INACTIVE'   => 'Inactif',
     'LBL_IS_PERSONAL' => 'Personnel',

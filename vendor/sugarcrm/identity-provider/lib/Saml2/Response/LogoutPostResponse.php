@@ -12,7 +12,10 @@
 
 namespace Sugarcrm\IdentityProvider\Saml2\Response;
 
-class LogoutPostResponse extends \OneLogin_Saml2_LogoutResponse
+use OneLogin\Saml2\LogoutResponse;
+use OneLogin\Saml2\Utils;
+
+class LogoutPostResponse extends LogoutResponse
 {
     /**
      * last error
@@ -23,7 +26,7 @@ class LogoutPostResponse extends \OneLogin_Saml2_LogoutResponse
     /**
      * @inheritdoc
      */
-    public function isValid($requestId = null, $retrieveParametersFromServer = false)
+    public function isValid($requestId = null, $retrieveParametersFromServer = false): bool
     {
         $isValid = parent::isValid($requestId, $retrieveParametersFromServer);
 
@@ -35,7 +38,7 @@ class LogoutPostResponse extends \OneLogin_Saml2_LogoutResponse
         $securityData = $this->_settings->getSecurityData();
         if (!empty($securityData['wantMessagesSigned'])) {
             try {
-                $isValid = \OneLogin_Saml2_Utils::validateSign(
+                $isValid = Utils::validateSign(
                     $this->document,
                     $idpData['x509cert'],
                     null,
@@ -55,7 +58,7 @@ class LogoutPostResponse extends \OneLogin_Saml2_LogoutResponse
      * Only one error(parent or self) can be set at one moment
      * @return string
      */
-    public function getError()
+    public function getError(): string
     {
         return $this->lastError . parent::getError();
     }
@@ -66,7 +69,7 @@ class LogoutPostResponse extends \OneLogin_Saml2_LogoutResponse
      *
      * @return LogoutPostResponse
      */
-    public function setLastError($lastError)
+    public function setLastError($lastError): LogoutPostResponse
     {
         $this->lastError = $lastError;
 

@@ -159,6 +159,8 @@ class EmailsApi extends ModuleApi
                             'config_type' => $oe->type,
                             'from_email' => $oe->email_address,
                             'from_name' => $oe->name,
+                            'replyto_email' => $oe->reply_to_email_address,
+                            'replyto_name' => $oe->reply_to_name,
                         ],
                         $oe
                     );

@@ -52,7 +52,11 @@ class ErasedFieldsHandler extends AbstractHandler implements
      */
     protected function retrieveErasedFields(\SugarBean $bean)
     {
-        return json_encode($this->getErasedFieldsRepository()->getBeanFields($bean->table_name, $bean->id));
+        if (isset($bean->erased_fields)) {
+            return json_encode($bean->erased_fields);
+        } else {
+            return json_encode($this->getErasedFieldsRepository()->getBeanFields($bean->table_name, $bean->id));
+        }
     }
 
     /**

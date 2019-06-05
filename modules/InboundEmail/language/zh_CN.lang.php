@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> '答复：',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> '登录名或者密码错误',
-	'ERR_BODY_TOO_LONG'		=> '\\r电子邮件正文太长无法捕获完整的电子邮件。请调整。',
+	'ERR_BODY_TOO_LONG'		=> '\r电子邮件正文太长无法捕获完整的电子邮件。请调整。',
 	'ERR_INI_ZLIB'			=> '暂时无法关闭 Zlib 压缩。“测试设置”可能失败。',
 	'ERR_MAILBOX_FAIL'		=> '不能检索任何电子邮件帐户。',
 	'ERR_NO_IMAP'			=> '未发现 IMAP 类。请在继续使用收件箱前解决这个问题。',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> '团队的种子队列',
 	'LBL_GROUPFOLDER_ID'	=> '组文件夹 ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => '分配至组文件夹',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => '允许用户使用“发件人”姓名和地址作为答复地址发送电子邮件',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => '当选中这个选项时，发件人姓名和电邮地址与本组邮件帐户相关联，对组邮件账户有访问权限的用户在撰写电子邮件时将作为发件人的一个选项显示。',
     'LBL_STATUS_ACTIVE'     => '启用',
     'LBL_STATUS_INACTIVE'   => '停用',
     'LBL_IS_PERSONAL' => '个人',

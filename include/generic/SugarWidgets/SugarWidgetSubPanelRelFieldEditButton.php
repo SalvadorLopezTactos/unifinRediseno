@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelEditButton.php 54581 2010-02-18 00:01:21Z dwheeler $
 
 
 //TODO Rename this to edit link

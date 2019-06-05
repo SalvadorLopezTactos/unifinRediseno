@@ -425,8 +425,51 @@ class PMSEHistoryLogWrapper
             $entry['data_info'] = $dataString;
             $entries[] = $entry;
         }
+
+        $statusEntry = $this->getProcessStatus($this->case_id);
+        if (!empty($statusEntry)) {
+            $entries[] = $statusEntry;
+        }
+
         return $entries;
     }
+
+    /**
+     * Get log structure that contains the status and date modified of a process.
+     * @param id of the process.
+     * @return object with the same structure as the logs or null if there is no status(Should never happen)
+     */
+    private function getProcessStatus($case_id)
+    {
+        $q = new SugarQuery();
+        $fields = array(
+            'cas_status',
+            'date_modified',
+        );
+        $q->select($fields);
+        $q->from(BeanFactory::newBean('pmse_Inbox'));
+        $q->where()->equals('cas_id', $case_id);
+        $q->limit('1');
+        $rows = $q->execute();
+        // If the status is IN PROGRESS then the status is not shown.
+        if (!empty($rows[0]) && !empty($rows[0]['cas_status']) && $rows[0]['cas_status'] != "IN PROGRESS") {
+            $statusEntry['image'] = "label label-module label-pmse_Inbox pull-left";
+            $statusEntry['script'] = true;
+            $statusEntry['show_user'] = false;
+            $statusEntry['end_date'] = PMSEEngineUtils::getDateToFE($rows[0]['date_modified'], 'datetime');
+            $statusEntry['current_date'] = PMSEEngineUtils::getDateToFE(TimeDate::getInstance()->nowDb(), 'datetime');
+            $statusEntry['completed'] = true;
+            $statusEntry['cas_status'] = $rows[0]['cas_status'];
+            $label = 'LBL_PMSE_HISTORY_STATUS_' . strtoupper($rows[0]['cas_status']);
+            $statusEntry['data_info'] = translate($label, 'pmse_Inbox');
+            if ($label == $statusEntry['data_info']) {
+                $statusEntry['data_info'] = $statusEntry['cas_status']; // The data_info is the Raw Status if the label is not found.
+            }
+            return $statusEntry;
+        }
+        return [];
+    }
+
 
     /**
      * Get Module name by id. make the query and return the name of an sugar module
@@ -459,10 +502,10 @@ class PMSEHistoryLogWrapper
 
         return PMSEEngineUtils::getModuleLabelFromModuleName($sugarModuleBean->$relatedModule->getRelatedModuleName());
     }
-    
+
     /**
      * Get the relevant fields in the result array to the proper values
-     * in the case of a generic Advanced Workflow user
+     * in the case of a generic SugarBPM user
      * @param array &$entry
      */
     private function setProcessUser(&$entry)

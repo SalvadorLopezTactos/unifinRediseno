@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: zip_utils.php 16276 2006-08-22 18:56:15Z awu $
 function unzip( $zip_archive, $zip_dir)
 {
    return unzip_file($zip_archive, null, $zip_dir);
@@ -24,7 +23,10 @@ function unzip_file( $zip_archive, $archive_file, $zip_dir)
         	$GLOBALS['log']->fatal("Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist.");
         	return false;
         } else {
-            die( "Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist." );
+            $GLOBALS['log']->fatal(
+                "Unable to extract file '$zip_archive'. Target directory '$zip_dir' does not exist."
+            );
+            die("Unable to extract file. Target directory does not exist.");
         }
     }
 
@@ -35,10 +37,27 @@ function unzip_file( $zip_archive, $archive_file, $zip_dir)
     if($res !== TRUE) {
         if (defined('SUGAR_PHPUNIT_RUNNER') || defined('SUGARCRM_INSTALL'))
         {
-        	$GLOBALS['log']->fatal(sprintf("ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)", $res, $zip->status, $zip_archive, $zip_dir));
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    "ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)",
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
             return false;
         } else {
-        	die(sprintf("ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)", $res, $zip->status, $zip_archive, $zip_dir));
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    "ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)",
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
+            die(sprintf("Unable to extract file. ZIP Error(%d): Status(%s)", $res, $zip->status));
         }
 
     }
@@ -52,10 +71,27 @@ function unzip_file( $zip_archive, $archive_file, $zip_dir)
     if($res !== TRUE) {
         if (defined('SUGAR_PHPUNIT_RUNNER') || defined('SUGARCRM_INSTALL'))
         {
-        	$GLOBALS['log']->fatal(sprintf("ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)", $res, $zip->status, $zip_archive, $zip_dir));
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    "ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)",
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
             return false;
         } else {
-        	die(sprintf("ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)", $res, $zip->status, $zip_archive, $zip_dir));
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    "ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)",
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
+            die(sprintf("Unable to extract file. ZIP Error(%d): Status(%s)", $res, $zip->status));
         }
     }
     return true;

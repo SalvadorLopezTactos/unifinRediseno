@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: DetailView.js 55503 2010-03-22 15:01:56Z jmertic $
 
 function generatepwd(id)
 {

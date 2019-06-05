@@ -183,7 +183,7 @@ abstract class SAMLFlowTest extends AppFlowTest
         $this->webClient->followRedirect();
 
         $this->assertContains(
-            'User is authenticated successfully',
+            'You are logged in',
             $this->webClient->getResponse()->getContent()
         );
     }
@@ -280,7 +280,9 @@ abstract class SAMLFlowTest extends AppFlowTest
             ['SAMLResponse' => $this->encodeSAMLAssertion(file_get_contents($responseFile))]
         );
         $this->webClient->followRedirect();
-        $this->assertContains('User is logged out', $this->webClient->getResponse()->getContent());
+        $cookies = $this->webClient->getCookieJar();
+        $this->assertEquals(1, $cookies->get('cloud-log')->getValue());
+        $this->assertContains('Log In', $this->webClient->getResponse()->getContent());
     }
 
     /**

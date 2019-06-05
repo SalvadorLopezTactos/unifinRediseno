@@ -30,7 +30,7 @@
     /**
      * The currently-selected config panel
      */
-    selectedPanel: '',
+    selectedPanel: undefined,
 
     /**
      * The current HowTo data Object
@@ -49,17 +49,23 @@
     /**
      * @inheritdoc
      */
-    _render: function () {
+    _render: function() {
+        var $toggles;
+
         this._super('_render');
 
         //This is because backbone injects a wrapper element.
         this.$el.addClass('accordion');
         this.$el.attr('id', this.collapseDivId);
+        $toggles = this.$('.accordion-toggle');
+        // ignore the first accordion toggle
+        $toggles.splice(0, 1);
+        $toggles.addClass('collapsed');
 
         //apply the accordion to this layout
         this.$('.collapse').collapse({
-            toggle:false,
-            parent:'#' + this.collapseDivId
+            toggle: false,
+            parent: '#' + this.collapseDivId
         });
 
         // select the first panel in metadata
@@ -76,9 +82,6 @@
     selectPanel: function(panelName) {
         this.selectedPanel = panelName;
         this.$('#' + panelName + 'Collapse').collapse('show');
-        // manually trigger the accordion to toggle
-        // but don't pass event so it uses the selectedPanel name
-        this.onAccordionToggleClicked();
     },
 
     /**
@@ -87,10 +90,36 @@
      * @param {jQuery.Event|undefined} evt
      */
     onAccordionToggleClicked: function(evt) {
-        var helpId = (evt) ? $(evt.currentTarget).data('help-id') : this.selectedPanel;
-        this._switchHowToData(helpId);
+        var panelName = (evt) ? $(evt.currentTarget).data('help-id') : this.selectedPanel;
+        var oldPanel;
+        var newPanel;
+
+        if (evt && panelName === this.selectedPanel) {
+            // dont allow closing the same tab
+            return false;
+        }
+
+        this._switchHowToData(panelName);
 
         this.context.trigger('config:howtoData:change', this.currentHowToData);
+
+        if (this.selectedPanel) {
+            oldPanel = _.find(this._components, function(component) {
+                return component.name === this.selectedPanel;
+            }, this);
+
+            if (oldPanel) {
+                oldPanel.$('.accordion-toggle').addClass('collapsed');
+                oldPanel.trigger('config:panel:hide');
+            }
+        }
+
+        this.selectedPanel = panelName;
+
+        newPanel = _.find(this._components, function(component) {
+            return component.name === panelName;
+        }, this);
+        newPanel.trigger('config:panel:show');
     },
 
     /**
@@ -104,7 +133,7 @@
     /**
      * Handles switching the HowTo text and info by a specific accordion view being toggled
      *
-     * @param {String} helpId The
+     * @param {string} helpId The panel component name
      * @private
      */
     _switchHowToData: function(helpId) {

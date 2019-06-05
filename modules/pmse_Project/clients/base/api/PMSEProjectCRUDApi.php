@@ -103,7 +103,8 @@ class PMSEProjectCRUDApi extends ModuleApi
         $project['_module']['project'] = 'pmse_Project';
 
         // The importation always changes the project status to INACTIVE except when the case is Copy from a Process Definition
-        $savedProject = $importer->saveProjectData($project['project'], true);
+        $importer->setOption('isCopy', true);
+        $savedProject = $importer->saveProjectData($project['project']);
         $project['project']['id'] = $savedProject['id'];
         $project['project']['warnings'] = array($savedProject['br_warning'], $savedProject['et_warning']);
 

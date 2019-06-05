@@ -57,10 +57,11 @@ class TrackableArray extends \ArrayObject
                 }
             }
 
-            $this->modifiedKeys[$offset] = true;
-            if (isset($this->unsetKeys[$offset])) {
-                unset($this->unsetKeys[$offset]);
+            if (!isset($this[$offset]) || $this[$offset] !== $value) {
+                $this->modifiedKeys[$offset] = true;
             }
+
+            unset($this->unsetKeys[$offset]);
         }
         //Multidimensional support
         if (is_array($value)) {
@@ -85,11 +86,13 @@ class TrackableArray extends \ArrayObject
     public function offsetUnset($offset)
     {
         if ($this->track) {
-            $this->unsetKeys[$offset] = true;
-            if (isset($this->modifiedKeys[$offset])) {
-                unset($this->modifiedKeys[$offset]);
+            if (isset($this[$offset])) {
+                $this->unsetKeys[$offset] = true;
             }
+
+            unset($this->modifiedKeys[$offset]);
         }
+
         if ($this->offsetExists($offset)) {
             parent::offsetUnset($offset);
         }
@@ -202,7 +205,7 @@ class TrackableArray extends \ArrayObject
             $ret = array_merge($ret, array_keys($this->unsetKeys));
         }
 
-        return array_unique($ret);;
+        return array_unique($ret);
     }
 
     public function __toString()

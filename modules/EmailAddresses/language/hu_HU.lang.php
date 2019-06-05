@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Törlés',
     'LBL_MODULE_NAME' => 'E-mail címek',
     'LBL_MODULE_NAME_SINGULAR' => 'E-mail cím',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Megerősítés kérése intézkedése foganatosítva',
+    'LBL_CONFIRMATION_TITLE' => 'Köszönjük',
+    'LBL_CONFIRMATION_MESSAGE' => 'Az előfizetés megerősítése megtörtént. Hozzáadtuk Önt a listánkhoz, és hamarosan felvesszük Önnel a kapcsolatot.',
 );

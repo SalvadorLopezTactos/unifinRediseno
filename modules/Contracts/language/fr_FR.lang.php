@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: en_us.lang.php 56510 2010-05-17 18:54:49Z jenny $
 $mod_strings = array (
 	// module labels
 	'LBL_MODULE_NAME' => 'Contrats',

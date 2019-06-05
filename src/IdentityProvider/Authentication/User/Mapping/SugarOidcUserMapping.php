@@ -16,6 +16,8 @@ use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
 use Sugarcrm\IdentityProvider\Authentication\User as IdmUser;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class SugarOidcUserMapping implements MappingInterface
@@ -23,12 +25,17 @@ class SugarOidcUserMapping implements MappingInterface
     const OIDC_USER_STATUS_ACTIVE = 0;
     const OIDC_USER_STATUS_INACTIVE = 1;
 
+    const IDM_USER_TYPE_REGULAR = 0;
+    const IDM_USER_TYPE_ADMINISTRATOR = 1;
+
     protected $userMapping = [
         'user_name' => 'preferred_username',
         'first_name' => 'given_name',
         'last_name' => 'family_name',
         'phone_work' => 'phone_number',
         'email' => 'email',
+        'title' => 'title',
+        'department' => 'department',
     ];
 
     protected $addressMapping = [
@@ -37,6 +44,14 @@ class SugarOidcUserMapping implements MappingInterface
         'address_state' => 'region',
         'address_country' => 'country',
         'address_postalcode' => 'postal_code',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $languageMapping = [
+        'en_US' => 'en_us',
+        'it_IT' => 'it_it',
     ];
 
     /**
@@ -50,7 +65,11 @@ class SugarOidcUserMapping implements MappingInterface
             return [];
         }
 
-        $userData = ['status' => $this->getUserStatus($response)];
+        $userData = [
+            'status' => $this->getUserStatus($response),
+            'is_admin' => $this->getIsAdmin($response),
+            'preferred_language' => $this->getUserLanguage($response),
+        ];
 
         foreach ($this->userMapping as $mangoKey => $oidcKey) {
             $userData[$mangoKey] = $this->getAttribute($response, $oidcKey);
@@ -139,5 +158,55 @@ class SugarOidcUserMapping implements MappingInterface
         return (int) $status == self::OIDC_USER_STATUS_ACTIVE
             ? User::USER_STATUS_ACTIVE
             : User::USER_STATUS_INACTIVE;
+    }
+
+    /**
+     * Returns is_admin flag
+     *
+     * @param array $response
+     * @return null|bool
+     */
+    protected function getIsAdmin(array $response)
+    {
+        $userType = $this->getAttribute($response, 'user_type');
+        if (is_null($userType)) {
+            return null;
+        }
+        return (int)$userType == self::IDM_USER_TYPE_ADMINISTRATOR;
+    }
+
+    /**
+     * Returns language for user
+     *
+     * @param array $response
+     * @return string
+     */
+    protected function getUserLanguage(array $response): ?string
+    {
+        $userLanguage = $this->getAttribute($response, 'locale');
+
+        if (empty($userLanguage)) {
+            return null;
+        }
+
+        $languageParts = explode('-', $userLanguage);
+
+        if (count($languageParts) === 1) {
+            $languageParts[1] = strtoupper($languageParts[0]);
+        }
+
+        $userLanguage = implode('_', $languageParts);
+
+
+        if (array_key_exists($userLanguage, $this->languageMapping)) {
+            $userLanguage = $this->languageMapping[$userLanguage];
+        }
+
+        $violations = Validator::getService()->validate($userLanguage, [new Language()]);
+        if ($violations->count() > 0) {
+            return null;
+        }
+
+        return $userLanguage;
     }
 }

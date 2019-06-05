@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -15,7 +15,7 @@
  *
  */
 
-$config = array(
+$config = [
 
     /**
      * Setup the following parameters to match the directory of your installation.
@@ -191,7 +191,7 @@ $config = array(
      * This is an array of outputs. Each output has at least a 'class' option, which
      * selects the output.
      */
-    'statistics.out' => array(// Log statistics to the normal log.
+    'statistics.out' => [// Log statistics to the normal log.
         /*
         array(
             'class' => 'core:Log',
@@ -205,7 +205,7 @@ $config = array(
             'directory' => '/var/log/stats',
         ),
         */
-    ),
+    ],
 
 
 
@@ -250,7 +250,7 @@ $config = array(
      * options for the master (shown above) with the exception of the table
      * prefix.
      */
-    'database.slaves' => array(
+    'database.slaves' => [
         /*
         array(
             'dsn' => 'mysql:host=myslave;dbname=saml',
@@ -259,7 +259,7 @@ $config = array(
             'persistent' => false,
         ),
         */
-    ),
+    ],
 
 
 
@@ -411,12 +411,12 @@ $config = array(
     /*
      * Languages available, RTL languages, and what language is default
      */
-    'language.available' => array(
+    'language.available' => [
         'en', 'no', 'nn', 'se', 'da', 'de', 'sv', 'fi', 'es', 'fr', 'it', 'nl', 'lb', 'cs',
         'sl', 'lt', 'hr', 'hu', 'pl', 'pt', 'pt-br', 'tr', 'ja', 'zh', 'zh-tw', 'ru', 'et',
         'he', 'id', 'sr', 'lv', 'ro', 'eu'
-    ),
-    'language.rtl' => array('ar', 'dv', 'fa', 'ur', 'he'),
+    ],
+    'language.rtl' => ['ar', 'dv', 'fa', 'ur', 'he'],
     'language.default' => 'en',
 
     /*
@@ -521,12 +521,12 @@ $config = array(
      * Authentication processing filters that will be executed for all IdPs
      * Both Shibboleth and SAML 2.0
      */
-    'authproc.idp' => array(
-        3 => array(
+    'authproc.idp' => [
+        3 => [
             'class' => 'saml:AttributeNameID',
             'attribute' => 'email',
             'Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
-        ),
+        ],
         /* Enable the authproc filter below to add URN Prefixces to all attributes
          10 => array(
              'class' => 'core:AttributeMap', 'addurnprefix'
@@ -576,12 +576,12 @@ $config = array(
          */
         // If language is set in Consent module it will be added as an attribute.
         99 => 'core:LanguageAdaptor',
-    ),
+    ],
     /*
      * Authentication processing filters that will be executed for all SPs
      * Both Shibboleth and SAML 2.0
      */
-    'authproc.sp' => array(
+    'authproc.sp' => [
         /*
         10 => array(
             'class' => 'core:AttributeMap', 'removeurnprefix'
@@ -604,7 +604,7 @@ $config = array(
         // Adopts language from attribute to use in UI
         90 => 'core:LanguageAdaptor',
 
-    ),
+    ],
 
 
     /*
@@ -683,9 +683,9 @@ $config = array(
      *     array('type' => 'flatfile')
      *     ),
      */
-    'metadata.sources' => array(
-        array('type' => 'flatfile'),
-    ),
+    'metadata.sources' => [
+        ['type' => 'flatfile'],
+    ],
 
 
     /*
@@ -773,11 +773,11 @@ $config = array(
      * ),
      *
      */
-    'memcache_store.servers' => array(
-        array(
-            array('hostname' => 'localhost'),
-        ),
-    ),
+    'memcache_store.servers' => [
+        [
+            ['hostname' => 'localhost'],
+        ],
+    ],
 
 
     /*
@@ -862,6 +862,6 @@ $config = array(
      * Example:
      *   'trusted.url.domains' => array('sp.example.com', 'app.example.com'),
      */
-    'trusted.url.domains' => array(),
+    'trusted.url.domains' => [],
 
-);
+];

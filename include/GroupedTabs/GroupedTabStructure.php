@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: GroupedTabStructure.php 53336 2009-12-21 22:44:20Z mitani $
 
 
 SugarAutoLoader::requireWithCustom('include/tabConfig.php', true) ; // include custom/ too

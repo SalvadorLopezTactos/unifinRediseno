@@ -11,13 +11,22 @@
  */
 --}}
 {{#each value}}
-    {{#if hasAnchor}}
-        <a rel="tooltip"{{#if ../../dir}} dir="{{../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}" href="javascript:void(0);" data-action="email" data-email-address-id="{{email_address_id}}" data-email-to="{{email_address}}" data-email-opt-out="{{opt_out}}" track="click:email_address">{{email_address}}</a>
-    {{else}}
-        {{#if invalid_email}}
-            <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</del>
+    <div class="control-group email">
+        {{#if hasAnchor}}
+            <a rel="tooltip"{{#if ../../dir}} dir="{{../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}" href="javascript:void(0);" data-action="email" data-email-address-id="{{email_address_id}}" data-email-to="{{email_address}}" data-email-opt-out="{{opt_out}}" track="click:email_address">{{email_address}}</a>
         {{else}}
-            <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</span>
+            {{#if invalid_email}}
+                <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</del>
+            {{else}}
+                <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</span>
+            {{/if}}
         {{/if}}
-    {{/if}}
+        {{#if opt_out}}
+            <div class="btn-toolbar prevent-mousedown">
+                <div class="btn-group">
+                    <button type="button" class="btn" data-clipboard="enabled" data-clipboard-text="{{confirmation_url}}" data-email-address-id="{{email_address_id}}" rel="tooltip" title="{{str 'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' ../../module}}" aria-label="{{str 'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' ../../module}}"><i class="fa fa-link"></i></button>
+                </div>
+            </div>
+        {{/if}}
+    </div>
 {{/each}}

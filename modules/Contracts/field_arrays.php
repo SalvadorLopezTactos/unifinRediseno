@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: field_arrays.php 13782 2006-06-06 17:58:55Z majed $
 $fields_array['Contract'] = array (
 	'column_fields' => array(
 		'id',

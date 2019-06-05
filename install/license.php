@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: license.php 54512 2010-02-12 19:13:35Z jmertic $
 global $sugar_version, $js_custom_version;
 if( !isset( $install_script ) || !$install_script ){
     die('Unable to process script directly.');

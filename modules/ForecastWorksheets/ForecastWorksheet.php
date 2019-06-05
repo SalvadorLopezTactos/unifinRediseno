@@ -399,7 +399,8 @@ class ForecastWorksheet extends SugarBean
             if (is_array($field)) {
                 // if we have an array it should be a key value pair, where the key is the destination value and the value,
                 // is the seed value
-                list($key, $field) = each($field);
+                $key = key($field);
+                $field = current($field);
             }
             // make sure the field is set, as not to cause a notice since a field might get unset() from the $seed class
             if (isset($seed[$field])) {

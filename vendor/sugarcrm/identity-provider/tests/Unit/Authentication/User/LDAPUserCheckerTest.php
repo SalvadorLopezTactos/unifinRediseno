@@ -19,6 +19,9 @@ use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
+/**
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\User\LDAPUserChecker
+ */
 class LDAPUserCheckerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -63,8 +66,13 @@ class LDAPUserCheckerTest extends \PHPUnit_Framework_TestCase
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      * @expectedExceptionMessageRegExp ~User not found~
      */
-    public function testUserIsNotCreatedIfAutoCreateUsersIsFalse()
+    public function testUserIsNotCreatedIfAutoCreateUsersIsFalse(): void
     {
+        $this->user
+        ->method('getAttribute')
+        ->willReturnMap([
+            ['identityValue', 'user_login']
+        ]);
         $config = ['auto_create_users' => false];
         $this->localUserProvider->method('loadUserByFieldAndProvider')
             ->willThrowException(new UsernameNotFoundException('User not found'));
@@ -75,6 +83,7 @@ class LDAPUserCheckerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::checkPostAuth
+     * @covers ::getLocalUser
      */
     public function testUserIsCreatedIfAutoCreateUsersIsTrue()
     {
@@ -84,15 +93,59 @@ class LDAPUserCheckerTest extends \PHPUnit_Framework_TestCase
         ]);
         $config = ['auto_create_users' => true];
 
-        $this->localUserProvider->expects($this->once())
+        $this->localUserProvider->expects($this->at(0))
             ->method('loadUserByFieldAndProvider')
             ->with('max', Providers::LDAP)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->at(1))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max', Providers::LOCAL)
             ->willThrowException(new UsernameNotFoundException('User not found'));
 
         $this->localUserProvider->expects($this->once())
             ->method('createUser')
             ->with('max', Providers::LDAP, ['a' => 'b'])
             ->willReturn($user);
+
+        $userChecker = new LDAPUserChecker($this->localUserProvider, $config);
+        $userChecker->checkPostAuth($user);
+    }
+
+    /**
+     * Test Linking to existing Local user Autocreated LDAP user
+     * @covers ::checkPostAuth
+     * @covers ::getLocalUser
+     */
+    public function testLinkNewUserWithLocal(): void
+    {
+        $user = new User('max', '', [
+            'identityValue' => 'max',
+            'attributes' => ['a' => 'b'],
+        ]);
+        $localUser = new User('max', '', [
+            'id' => 'seed_max_id',
+            'identity_value' => 'max',
+        ]);
+        $config = ['auto_create_users' => true];
+
+        $this->localUserProvider->expects($this->at(0))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max', Providers::LDAP)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->at(1))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max', Providers::LOCAL)
+            ->willReturn($localUser);
+
+        $this->localUserProvider->expects($this->never())
+            ->method('createUser');
+        $this->localUserProvider->expects($this->once())
+            ->method('linkUser')
+            ->with(
+                'seed_max_id',
+                Providers::LDAP,
+                'max'
+            );
 
         $userChecker = new LDAPUserChecker($this->localUserProvider, $config);
         $userChecker->checkPostAuth($user);

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Nome Utente o Password Non Corretti',
-	'ERR_BODY_TOO_LONG'		=> '\\rCorpo del testo troppo lungo per bloccare tutta la email. Assettato.',
+	'ERR_BODY_TOO_LONG'		=> '\rCorpo del testo troppo lungo per bloccare tutta la email. Assettato.',
 	'ERR_INI_ZLIB'			=> 'Non è possibile bloccare temporaneamente la compressione Zlib. Le "Impostazioni Test" potrebbero essere incomplete.',
 	'ERR_MAILBOX_FAIL'		=> 'Impossibile trovare le caselle di posta elettronica.',
 	'ERR_NO_IMAP'			=> 'Nessuna libreria IMAP trovata. Si prega di risolvere questo problema prima di continuare con le email in ingresso',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Esegui il seed delle code dai team',
 	'LBL_GROUPFOLDER_ID'	=> 'Id Cartella di Gruppo',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Assegna alla Cartella di Gruppo',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Permettere agli utenti di inviare email usando il Nome e l´Indirizzo "Da"',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Quando questa opzione viene selezionata, il nome e l´indirizzo email del mittente associati a questo account email di gruppo appariranno come opzione del campo Da nelle email degli utenti che hanno accesso all´account email di gruppo.',
     'LBL_STATUS_ACTIVE'     => 'Attivo',
     'LBL_STATUS_INACTIVE'   => 'Inattivo',
     'LBL_IS_PERSONAL' => 'Account Email Personale',

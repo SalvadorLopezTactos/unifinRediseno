@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Vedr.:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Ugyldig brukernavn eller passord.',
-	'ERR_BODY_TOO_LONG'		=> '\\rBrødteksten er for lang for FULLSTENDIG e-post. Ble trimmet.',
+	'ERR_BODY_TOO_LONG'		=> '\rBrødteksten er for lang for FULLSTENDIG e-post. Ble trimmet.',
 	'ERR_INI_ZLIB'			=> 'Kan ikke slå av Zlib-komprimering midlertidig. "Test-innstillinger" kan feile.',
 	'ERR_MAILBOX_FAIL'		=> 'Klarte ikke hente noen av e-postkontoene.',
 	'ERR_NO_IMAP'			=> 'Fant ingen IMAP-biblioteker. Løs dette problemet før du fortsetter med Innkommet e-post.',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Ta køer fra gruppene',
 	'LBL_GROUPFOLDER_ID'	=> 'Gruppemappe-ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Tildel til gruppemappe',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Tillat brukere å sende e-postmeldinger med "Fra" navn og adresse som svaradresse.',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Når dette alternativet er valgt, vil Fra-navn og Fra-e-postadressen som er tilknyttet denne gruppens e-postkonto, vises som et alternativ i Fra-feltet når brukere som har tilgang til denne e-postkontoen, skriver e-postmeldinger.',
     'LBL_STATUS_ACTIVE'     => 'Aktiv',
     'LBL_STATUS_INACTIVE'   => 'Inaktive',
     'LBL_IS_PERSONAL' => 'Personlig e-postkonto',

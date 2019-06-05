@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Hi ha processos actius executats contra aquesta Definició de procés. Actualitzar-la podria afectar aquests processos. Encara voleu editar aquesta Definició de processos?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Hi ha processos actius executats en contra d&#39;aquesta Definició de processos. Actualitzar-la podria afectar aquests processos. Encara voleu inhabilitar aquesta Definició de processos?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Creeu automàticament un nou registre de definicions de processos mitjançant la importació d&#39;un arxiu *.bpm des del sistema d&#39;arxius.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Carregueu un arxiu .bpm per importar una Definició de procés.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Les definicions de processos s&#39;han importat correctament al sistema.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Seleccioneu un arxiu *.bpm vàlid.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'La definició del procés s&#39;ha importat, però conté una o més accions de regla empresarial per a les quals no s&#39;han seleccionat regles.',
+    'LBL_BPM_IMPORT_SELECT' => 'Aquesta Definició de procés conté les següents Normes de negoci i Plantilles de correu electrònic. '
+        . 'Seleccioneu les que voleu importar.',
+    'LBL_BUSINESS_RULES' => 'Normes de negoci',
+    'LBL_EMAIL_TEMPLATES' => 'Plantilles de correu electrònic',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Desfer',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Repetir',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Desa',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Valida',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Desa i valida',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Executa la validació per comprovar si hi ha errors',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activitat',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Esborrar',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Mòdul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtra',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Relacionat amb',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Criteris',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Durada',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Unitat',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Camps',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Avaluació de camps de mòduls',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Mòdul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Relacionat amb',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Camp',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Valor',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'De la resposta d&#39;avaluació',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'no és',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'no és igual a',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tots els registres relacionats',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Qualsevol registre relacionat',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Temps d´execució',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Afegeix',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Tanca',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Equips',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Usuari de %MODULE% que ha creat el registre',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Darrer usuari de %MODULE% que va modificar el registre',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Usuari de %MODULE% que està assignat al registre',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Usuari de %MODULE% assignat al registre',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Usuari de %MODULE% que és gerent de qui va crear el registre',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Usuari de %MODULE% que és gerent de la última persona que va modificar el registre',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Usuari de %MODULE% que és gerent de qui està assignat al registre',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Usuari de %MODULE% que és gerent de la persona assignada al registre',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% relacionat amb %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Usuari que ha creat %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Usuari que ha modificat %MODULE% la darrera vegada',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Usuari assignat a %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Usuari que estava assignat a%MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Gerent que ha creat %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Gerent que ha modificat %MODULE% la darrera vegada',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Gerent assignat a %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Gerent que estava assignat a %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'funció: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'equip: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Suggeriments',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'La sintaxis de l&#39;expressió no és vàlida.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Validant la definició del procés: Recuperant la configuració de l&#39;element',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Validant la definició del procés: Validant la configuració de l&#39;element',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Actualitzant la llista d&#39;errors...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Validació completa. Problemes trobats: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemes',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'La validació està en curs',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Advertiment: és possible que el procés s&#39;aturi a aquest element o que tingui altres efectes imprevistos',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Error: el procés s&#39;aturarà a aquest element',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'No s&#39;ha pogut validar l&#39;element',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'L&#39;element no compleix la quantitat mínima de fluxos d&#39;entrada',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Aquest element ha de tenir una quantitat mínima de rutes d&#39;entrada. Comproveu la quantitat de rutes que connecten amb aquest element i assegureu-vos que compleix la quantitat mínima.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'L&#39;element supera la quantitat màxima de fluxos d&#39;entrada',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Aquest element té una quantitat màxima de rutes d&#39;entrada que no s&#39;ha de superar. Comproveu la quantitat de rutes que connecten amb aquest element i assegureu-vos que no se supera la quantitat màxima.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'L&#39;element no compleix la quantitat mínima de fluxos de sortida',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Aquest element ha de tenir una quantitat mínima de rutes de sortida. Comproveu la quantitat de rutes que surten d&#39;aquest element i assegureu-vos que compleix la quantitat mínima.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'L&#39;element supera la quantitat màxima de fluxos de sortida',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Aquest element té una quantitat màxima de rutes de sortida que no s&#39;ha de superar. Comproveu la quantitat de rutes que surten d&#39;aquest element i assegureu-vos que no se supera la quantitat màxima.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'El camp obligatori no està establert',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Aquest element té un camp obligatori, pero aquest no s&#39;ha establert. Comproveu la configuració de l&#39;element per assegurar-vos que el camp s&#39;ha establert correctament, i feu clic al botó "Desa".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Les dades no existeixen actualment al sistema',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'La configuració d&#39;aquest element fan referència a una dada específica que no existeix a la base de dades. Comproveu la configuració de l&#39;element per assegurar-vos que totes les dades a les que es fa referència existeixen (usuaris específics, camps del mòdul, equips, etc.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'L&#39;expressió de la caixa de criteris mai s&#39;evaluarà com a certa',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Les caixes de criteris contenen expressión lògiques AND/OR/NOT. Aquest error significa que una caixa de criteris de la configuració de l&#39;element s&#39;ha configurat de tal manera que l&#39;expressió mai serà certa. Comproveu la caixa de criteris per eliminar qualsevol contradicció lògica que evita que l&#39;expressió sigui certa.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'No es pot obtenir l&#39;element',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Per tal que un element s&#39;executi en un procés, ha de tenir una ruta connectada. La cadena de rutes que condueix a aquest element ha de començar amb un element d&#39;inici. Comproveu la cadena de rutes d&#39;entrada d&#39;aquest element per assegurar-vos que aquesta comença amb un element d&#39;inici.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'El criteri de temps d&#39;espera ha de contenir exactament una constant de data i hora',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Aquest element de l&#39;esdeveniment d&#39;espera s&#39;ha configurat amb la caixa de criteries "Data fixa". Aquesta caixa ha de contenir exactament una constant "Data i hora fixa" o una referència a un camp de data i hora. Totes les altres peces de l&#39;expressió han de ser operadors matemàtics (+/-) o constants de "Període de temps".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'El valor de la duració especificat no ha de ser zero',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Aquest element de l&#39;esdeveniment d&#39;espera s&#39;ha configurat amb la configuració "Duració". Aquesta configuració no ha de ser igual a zero, o es produirà un error. Comproveu la configuració de l&#39;element per assegurar-vos que la "Duració" no està establerta en zero.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'No s&#39;han establert els paràmetres del temps d&#39;espera',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Aquest element de l&#39;esdeveniment d&#39;espera no té cap ajust configurat. Comproveu la configuració de l&#39;element per assegurar-vos que s&#39;ha seleccionat "Duració" o "Data fixa", introduïu el valor desitjat i feu clic al botó "Desa".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'El temps esperat és inferior a zero',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'A la configuració de "Formularis" d&#39;aquest element de l&#39;activitat, el temps esperat està establert a un valor negatiu, la qual cosa provocará que el procés s&#39;aturi quan arribi a l&#39;element. Obriu la configuració de "Formularis" d&#39;aquest element per canviar el temps esperat a un número que no sigui negatiu.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'El tipus d&#39;acció és [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Aquest element d&#39;acció no té un tipus dessignat. Això es pot canviar si feu clic amb el botó dret sobre l&#39;element d&#39;acció i seleccioneu un tipus de la llista "Tipus d&#39;acció".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'No es garanteix que s&#39;agafi una ruta',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Aquest missatge d&#39;error es produeix perquè existeix la possibilitat que no s&#39;agafi cap de les rutes que surten d&#39;aquest element de la passarel·la, la qual cosa provocarà que el procés s&#39;aturi. Es recomana que establiu una ruta predeterminada que s&#39;agafi en el cas que no se satisfaci cap de les expressions de les caixes de criteris de la configuració de l&#39;element. Per fer això podeu fer clic amb el botó dret sobre l&#39;element de la passarel·la i seleccioneu un element del menú "Flux predeterminat". Si no s&#39;especifica una ruta predeterminada, s&#39;hauran de canviar les expressions de la caixa de criteris de l&#39;element per garantir que com a mínim una d&#39;elles serà certa quan s&#39;executi el procés.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'El tipus de passarel·la convergent no coincideix amb el tipus de passarel·la del flux d&#39;entrada',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Les passarel·les divergents expandeixen els processos en diverses ramificacions. Quan utilitzeu una passarel·la convergent per fer tornar a convergir aquestes ramificacions en una ruta, s&#39;ha d&#39;utilitzar el tipus correcte de passarel·la convergent, segons el tipus de passarel·la divergent que s&#39;hagi utilitzat per crear les ramificacions. Per a ramificacions creades amb passarel·les divergents exclusives o basades en esdeveniments, utilitzeu una passarel·la convergent exclusiva per fer que tornin a convergir. Per a ramificacions creades amb passarel·les divergents paral·leles o inclusives, utilitzeu una passarel·la convergent paral·lela per fer que tornin a convergir.',
 );

@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider;
 
+use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -44,9 +46,16 @@ class SugarOIDCUserProvider implements UserProviderInterface
      * @param string $srn
      * @return User
      */
-    public function loadUserBySrn($srn)
+    public function loadUserBySrn(string $srn): User
     {
-        $user = new User(null, null);
+        $userSrn = Converter::fromString($srn);
+        $srnObject = $userSrn->getResource();
+
+        if ($srnObject[0] === 'sa') {
+            $user = new ServiceAccount(null, null);
+        } else {
+            $user = new User(null, null);
+        }
         $user->setSrn($srn);
         return $user;
     }

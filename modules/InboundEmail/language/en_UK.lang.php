@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login or Password Incorrect',
-	'ERR_BODY_TOO_LONG'		=> '\\rBody text too long to capture FULL email.  Trimmed.',
+	'ERR_BODY_TOO_LONG'		=> '\rBody text too long to capture FULL email.  Trimmed.',
 	'ERR_INI_ZLIB'			=> 'Could not turn off Zlib compression temporarily.  "Test Settings" may fail.',
 	'ERR_MAILBOX_FAIL'		=> 'Could not retrieve any mail accounts.',
 	'ERR_NO_IMAP'			=> 'No IMAP libraries found.  Please resolve this before continuing with Inbound Email',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Seed Queues From Teams',
 	'LBL_GROUPFOLDER_ID'	=> 'Group Folder Id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Assign To Group Folder',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Allow users to send emails using the "From" Name and Address as the reply to address',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'When this option is selected, the From Name and From Email Address associated with this group mail account will appear as an option for the From field when composing emails for users that have access to the group mail account.',
     'LBL_STATUS_ACTIVE'     => 'Active',
     'LBL_STATUS_INACTIVE'   => 'Inactive',
     'LBL_IS_PERSONAL' => 'personal',

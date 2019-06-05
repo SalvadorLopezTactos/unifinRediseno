@@ -14,7 +14,6 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
  * Description of PMSECriteriaEvaluator
- * 
  */
 class PMSECriteriaEvaluator
 {
@@ -24,10 +23,9 @@ class PMSECriteriaEvaluator
     {
         $this->expressionEvaluator = ProcessManager\Factory::getPMSEObject('PMSEExpressionEvaluator');
     }
-    
+
     public function isCriteriaToken($token)
     {
-        $result = false;
         $criteriaTypes = array (
             'MODULE',
             'CONTROL',
@@ -37,13 +35,9 @@ class PMSECriteriaEvaluator
             'USER_IDENTITY'
         );
 
-        if (in_array($token->expType, $criteriaTypes)) {
-            $result = true;
-        }
-        
-        return $result;
+        return in_array($token->expType, $criteriaTypes);
     }
-    
+
     public function evaluateCriteriaToken($criteriaToken)
     {
         $resultToken = new stdClass();
@@ -53,17 +47,41 @@ class PMSECriteriaEvaluator
         if (!isset($expSubtype)) {
             $criteriaToken->expSubtype = '';
         }
-        $resultToken->expValue = $this->expressionEvaluator->routeFunctionOperator(
-            $operationGroup,
-            $criteriaToken->currentValue,
-            $criteriaToken->expOperator,
-            $criteriaToken->expValue,
-            $criteriaToken->expSubtype
-        );
+        if (isset($criteriaToken->expRel)) {
+            $resultToken->expValue = false;
+            foreach ($criteriaToken->currentValue as $currentValue) {
+                $resultToken->expValue = $this->expressionEvaluator->routeFunctionOperator(
+                    $operationGroup,
+                    $currentValue,
+                    $criteriaToken->expOperator,
+                    $criteriaToken->expValue,
+                    $criteriaToken->expSubtype,
+                    !empty($criteriaToken->isUpdate)
+                );
+                if ($criteriaToken->expRel == 'All') {
+                    if (!$resultToken->expValue) {
+                        break;
+                    }
+                } else {
+                    if ($resultToken->expValue) {
+                        break;
+                    }
+                }
+            }
+        } else {
+            $resultToken->expValue = $this->expressionEvaluator->routeFunctionOperator(
+                $operationGroup,
+                $criteriaToken->currentValue[0],
+                $criteriaToken->expOperator,
+                $criteriaToken->expValue,
+                $criteriaToken->expSubtype,
+                !empty($criteriaToken->isUpdate)
+            );
+        }
         $this->expressionEvaluator->processTokenAttributes($resultToken);
         return $resultToken;
     }
-    
+
     public function evaluateCriteriaTokenList($tokenArray)
     {
         foreach ($tokenArray as $key => $token) {

@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Hozzárendelés a csoporthoz',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Azok a csoportok fognak alapértelmezettként megjelenni a mezőkben, amelyeknek Ön már tagja.',
 	'LBL_DEFAULT_TEAM'					=> 'Alapértelmezett csoportok',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Alapértelmezett elsődleges csoport',
 	'LBL_LIST_DESCRIPTION'				=> 'Leírás',
 	'LBL_MY_TEAMS'						=> 'Csoportjaim',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Magán csoport',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Címzett email címe',
 	'ERR_SERVER_STATUS'					=> 'A kiszolgáló állapota',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'A rendszer nem tud emailt elküldeni a felhasználónak. Kérjük, ellenőrizze a kimenő levelek konfigurációját az Email beállítások menüpontban!',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'A felhasználó IDM módban kizárólag a <a href="{0}" target="_blank">Felhőkonzol</a> felületen hozható létre.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Az elsődleges e-mail cím kizárólag a <a href="{0}" target="_blank">Felhőkonzol</a> felületen frissíthető.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email cím',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Jelszó megerősítése',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'A felhasználó típusát megváltoztatta Rendszergazda felhasználóról Normál felhasználóra. A mentés után a Felhasználónak megszűnnek a rendszer adminisztrátori jogosultságai.\\n\\nNyomja meg az OK gombot a folytatáshoz!\\nNyomja meg a Mégsem gombot, ha vissza akar térni a rekordhoz.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'A felhasználó típusát megváltoztatta Rendszergazda felhasználóról Normál felhasználóra. A mentés után a Felhasználónak megszűnnek a rendszer adminisztrátori jogosultságai.\n\nNyomja meg az OK gombot a folytatáshoz!\nNyomja meg a Mégsem gombot, ha vissza akar térni a rekordhoz.',
 	'LBL_COUNTRY'						=> 'Ország',
 	'LBL_CURRENCY_TEXT'					=> 'Válassza ki az alapértelmezett fizetőeszközt új rekord létrehozásánál. Ez a fizetőeszköz fog megjelenni a Lehetőségek listázásában az Összeg oszlopban is.',
 	'LBL_CURRENCY'						=> 'Pénznem',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Ábrázolandó tizedes helyek száma, a tizedes jegyű- és lebegőpontos számoknál az egész rendszerben, úgy mint a valutáknál és az átlagoknál a Jelentésekben.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Preferált pénznem mutatása',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Alap pénznem konvertálása a preferált pénznemre a lista- és rekordnézetekben',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Hozzon létre bevételi sorelemeket a preferált pénznemben',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Egy lehetőséghez, a termékkatalógusból hozzáadott bevételi sorelemeket a rendszer abban az esetben váltja át a felhasználó preferált pénznemére, ha az eltér a termékkatalógus elemnél használatos pénznemtől.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Ezres elválasztó',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'ezresek elválasztását jelző karakter',
 	'LBL_DECIMAL_SEP'					=> 'Tizedesjel',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Adjon meg egy felhasználónevet és egy email címet.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Ez jelenleg nem engedélyezett. Vegye fel a kapcsolatot rendszergazdájával!',
 	'LBL_PUBLISH_KEY'					=> 'Kulcs közzététele',
-
+    'LBL_SITE_USER_ID' => 'A(z) site_url és user_id kivonata',
     'LBL_QUOTAS'                        => 'Előírások',
     'LBL_FORECASTS'                     => 'Előrejelzések',
     'LBL_WORKSHEETS'                    => 'Munkalapok',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Felhasználói profil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Ha egyes mezők nem szerkeszthetők, a mezők kezeléséhez jelentkezzen be a Felhőkonzol felületen',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Amennyiben módosítani kíván egyes nem szerkeszthető mezőket, ' .
-        'vegye fel a kapcsolatot a Rendszergazdával, és tájékoztassa ezekről a módosításokról',
+        'Ha csak olvasható mezőket kíván módosítani, vegye fel a kapcsolatot a Sugar rendszergazdával.',
 ); // END STRINGS DEFS
-
-?>

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SubPanelDefinitions.php 56966 2010-06-15 18:20:24Z dwheeler $
 
 
 //input
@@ -366,6 +365,8 @@ class aSubPanel
 				}
 			}
 		}
+
+        return $display_fields;
 	}
 
 	function isDatasourceFunction ()

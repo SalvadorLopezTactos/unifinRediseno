@@ -36,6 +36,8 @@ function perform_save($focus)
 
     //Store the base currency value
     if (isset($focus->amount) && !number_empty($focus->amount)) {
+        // Triming the amount value if any case there is a white space
+        $focus->amount = trim($focus->amount);
         $focus->amount_usdollar = SugarCurrency::convertWithRate($focus->amount, $focus->base_rate);
     }
 }

@@ -49,12 +49,18 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
 
         $GLOBALS["log"]->debug("-----> in Reports foreach() loop");
 
-        $savedReport = BeanFactory::getBean('Reports', $scheduleInfo['report_id']);
+        $savedReport = BeanFactory::getBean('Reports', $scheduleInfo['report_id'], array('use_cache' => false));
+        if (!$savedReport || !$savedReport->id || !$savedReport->ACLAccess('view')) {
+            $GLOBALS["log"]->error('ScheduleReport: User ' . $current_user->id . ' can not access report id ' . $scheduleInfo['report_id']);
+            $this->job->succeedJob();
+            return true;
+        }
 
         $GLOBALS["log"]->debug("-----> Generating Reporter");
         $reporter = new Report(from_html($savedReport->content));
 
         $reporter->is_saved_report = true;
+        $reporter->isScheduledReport = true;
         $reporter->saved_report = $savedReport;
         $reporter->saved_report_id = $savedReport->id;
 
@@ -103,21 +109,25 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             try {
                 $GLOBALS["log"]->debug("-----> Generating Mailer");
                 $mailer = MailerFactory::getSystemDefaultMailer();
-
+                $timedate = TimeDate::getInstance();
+                $reportTime = $timedate->getNow();
+                $reportTime = $timedate->asUser($reportTime) . ' ' . $reportTime->format('T');
+                $reportName = empty($savedReport->name) ? "Report" : $savedReport->name;
                 // set the subject of the email
-                $subject = empty($savedReport->name) ? "Report" : $savedReport->name;
+                $subject = $mod_strings["LBL_SUBJECT_SCHEDULED_REPORT"] . $reportName .
+                    $mod_strings["LBL_SUBJECT_AS_OF"] . $reportTime;
                 $mailer->setSubject($subject);
 
                 // add the recipient
                 $mailer->addRecipientsTo(new EmailIdentity($recipientEmailAddress, $recipientName));
 
-                // attach the report, using the subject as the name of the attachment
-                $charsToRemove  = array("\r", "\n");
+                // attach the report
+                $charsToRemove = array("\r", "\n");
                 // remove these characters from the attachment name
-                $attachmentName = str_replace($charsToRemove, "", $subject);
+                $attachmentName = str_replace($charsToRemove, "", $reportName . ' ' . $reportTime);
                 // replace spaces with the underscores
                 $attachmentName = str_replace(" ", "_", "{$attachmentName}.pdf");
-                $attachment     = new Attachment($reportFilename, $attachmentName, Encoding::Base64, "application/pdf");
+                $attachment = new Attachment($reportFilename, $attachmentName, Encoding::Base64, "application/pdf");
                 $mailer->addAttachment($attachment);
 
                 // set the body of the email
@@ -129,10 +139,11 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
 
                 $body .= ",\n\n" .
                     $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
-                    $savedReport->date_entered .
+                    "\n\n" .
                     $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
-                    $savedReport->name .
-                    $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"];
+                    $reportName . "\n\n" .
+                    $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"] .
+                    $reportTime;
 
                 $textOnly = EmailFormatter::isTextOnly($body);
                 if ($textOnly) {

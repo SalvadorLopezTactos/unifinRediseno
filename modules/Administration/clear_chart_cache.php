@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: clear_chart_cache.php 45763 2009-04-01 19:16:18Z majed $
 
 global $sugar_config, $mod_strings;
 

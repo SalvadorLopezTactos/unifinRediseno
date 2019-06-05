@@ -24,6 +24,8 @@ var PMSE = PMSE || {};
 PMSE.Form = function(options) {
     PMSE.Panel.call(this, options);
 
+    this._type = null;
+
     /**
      * Defines if the form has a proxy
      * @type {Boolean}
@@ -96,6 +98,7 @@ PMSE.Form.prototype.type = 'PMSE.Form';
  */
 PMSE.Form.prototype.initObject = function(options) {
     var defaults = {
+        type: null,
         url: null,
         data: null,
         proxyEnabled: true,
@@ -150,6 +153,7 @@ PMSE.Form.prototype.initObject = function(options) {
     this.language = defaults.language;
 
     this._setCloseOnClickContext(defaults.closeOnClickContext)
+        .setType(defaults.type)
         .setUrl(defaults.url)
         .setData(defaults.data)
         .setProxyEnabled(defaults.proxyEnabled)
@@ -193,6 +197,11 @@ PMSE.Form.prototype._setCloseOnClickContext = function(context) {
         context = document.body;
     }
     this._closeOnClickContext = context;
+    return this;
+};
+
+PMSE.Form.prototype.setType = function (type) {
+    this._type = type;
     return this;
 };
 
@@ -534,6 +543,22 @@ PMSE.Form.prototype.getData = function() {
     var i, result = {};
     for (i = 0; i < this.items.length; i += 1) {
         $.extend(result, this.items[i].getObjectValue());
+    }
+    if (this._type == 'action') {
+        var params = {};
+        if (result.act_field_filter) {
+            params = result.act_field_filter;
+        } else {
+            params.module = result.act_field_module;
+        }
+        if (result.act_field_filter_related) {
+            params.chainedRelationship = result.act_field_filter_related;
+        } else if (result.act_field_related) {
+            params.chainedRelationship = {
+                module: result.act_field_related
+            };
+        }
+        result.act_params = JSON.stringify(params);
     }
     return result;
 };

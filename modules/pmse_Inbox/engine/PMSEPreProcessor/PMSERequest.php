@@ -18,61 +18,58 @@
 class PMSERequest
 {
     /**
-     *
      * @var SugarBean
      */
     protected $bean;
 
     /**
-     *
      * @var boolean
      */
     protected $createThread;
 
     /**
-     *
      * @var string
      */
-    protected $externalAction;
+    protected $externalAction = '';
 
     /**
-     *
      * @var array
      */
-    protected $arguments;
+    protected $arguments = [];
 
     /**
-     *
      * @var string
      */
     protected $type;
 
     /**
-     *
+     * List of handler types
      * @var array
      */
-    protected $validTypes = array('hook', 'direct', 'cron', 'queue', 'engine');
+    protected $validTypes = [
+        'hook',
+        'direct',
+        'cron',
+        'queue',
+        'engine',
+    ];
 
     /**
-     *
      * @var boolean
      */
     protected $validated;
 
     /**
-     *
      * @var string
      */
     protected $status;
 
     /**
-     *
      * @var array
      */
     protected $flowData;
 
     /**
-     *
      * @var array
      */
     protected $result;
@@ -133,12 +130,23 @@ class PMSERequest
     }
 
     /**
-     *
-     * @return type
+     * The request arguments.
+     * @return array
      */
-    public function getArguments()
+    public function getArguments() : array
     {
-        return $this->arguments;
+        // Base case is the arguments property is already an array
+        if (is_array($this->arguments)) {
+            return $this->arguments;
+        }
+
+        // If for some reason it is null, return an empty array
+        if ($this->arguments === null) {
+            return [];
+        }
+
+        // Anything else, return the thing as an array
+        return [$this->arguments];
     }
 
     /**

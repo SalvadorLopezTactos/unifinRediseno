@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 /*******************************************************************************
  jquery.mb.components
  Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy

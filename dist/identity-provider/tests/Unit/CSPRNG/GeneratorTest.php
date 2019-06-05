@@ -89,7 +89,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Testing generator.
-     * 
+     *
      * @covers ::generate
      * @dataProvider generatorProvider
      * @param int $size
@@ -99,7 +99,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->generator->generate($size, $prefix);
 
-        if ($prefix){
+        if ($prefix) {
             $this->assertStringStartsWith($prefix, $result);
         }
 

@@ -26,7 +26,7 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
     }
 
     /**
-     * Process the data into the current JIT Chart Format
+     * Process the data into the current Chart Format
      *
      * @return array
      */

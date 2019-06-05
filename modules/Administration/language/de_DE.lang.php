@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Gruppenattribut:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Mit Benutzer-DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Beziehen Sie die Benutzer-DN in den Benutzerattributen ein, wenn Sie die Gruppenzugehörigkeit überprüfen möchten',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Jegliche zusätzlichen Filterparameter, die für die Authentifizierung der Benutzer angewendet werden sollen, z. B.\\nis_sugar_user=1 oder (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Jegliche zusätzlichen Filterparameter, die für die Authentifizierung der Benutzer angewendet werden sollen, z. B.\nis_sugar_user=1 oder (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login-Eigenschaft:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind-Attribut:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Für die Einbindung des LDAP-Benutzers<br>Beispiele:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;< ',
@@ -935,12 +935,21 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
     'WARN_INSTALLER_LOCKED'=>'<b>Warnung:</b> Für den Schutz der Daten muss der Installer gesperrt werden; dazu in config.php "installer_locked" auf "true" setzen.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Hinweis:</b> Ihr Lizenzschlüssel läuft ab in ",
     'WARN_LICENSE_EXPIRED2' =>" Tag(en). Bitte gehen Sie in die <a href='index.php?action=LicenseSettings&module=Administration'>Lizenzverwaltung</a> im Admin-Bereich.",
-    'WARN_LICENSE_SEATS'=>  "<b>Warnung:</b> Benutzerlizenzen überschritten um ",
-    'WARN_LICENSE_SEATS2' => ". Kontaktieren Sie bitte Ihren Betreuer oder senden Sie eine E-Mail an <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Warnung:</b> Es gibt",
+    'WARN_LICENSE_SEATS2' => " aktive Benutzer, wenn es Ihr Abonnement nur zulässt",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Bitte deaktivieren Sie einige Benutzer und wenden Sie sich an Ihren Partner oder Vertriebsmitarbeiter,"
+        . " oder schreiben Sie eine E-Mail an <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Weitere Informationen finden Sie unter"
+        . "<ein Target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Alles, was Sie über Benutzertypen und Sugar-Lizenzen wissen müssen</a> article.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Warnung:</b> Die Anzahl der aktiven Benutzerlizenzen hat die maximale Anzahl erreicht: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Warnung:</b> Die Anzahl der aktiven Benutzerlizenzen hat die maximale Anzahl erreicht",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Warnung:</b> Die Anzahl der aktiven Benutzerlizenzen hat die maximale Anzahl erreicht. Es können keine weiteren aktiven Benutzer hinzugefügt werden.",
-    'WARN_REPAIR_CONFIG' => '<b>Warnung:</b> Die Datei config.php muss repariert werden. Bitte benutzen Sie den Link <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Config-Datei wiederherstellen</a> im Admin-Bereich.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Warnung:</b> Sie werden keine zusätzlichen aktiven Benutzer erstellen können."
+        . " Bitte kaufen Sie weitere Abonnements.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Warnung:</b> Sie werden keine zusätzlichen aktiven Benutzer erstellen können."
+        . " Bitte kaufen Sie weitere Abonnements.",
+    'WARN_REPAIR_CONFIG' => '<b>Warnung:</b> Die config.php-Datei muss repariert werden. Verwenden Sie bitte zum Reparieren der Config-Datei das Skript <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Wiederherstellung der Config-Datei</a> auf der Reparatur-Seite im Admin-Bereich.',
     'WARN_UPGRADE_APP'=> "Eine aktualisierte Version der Anwendung ist jetzt verfügbar.",
     'WARN_UPGRADE' => '<b>Warnung:</b> Bitte aktualisieren Sie ',
     'WARN_UPGRADENOTE' => 'Hinweis: ',
@@ -1249,15 +1258,17 @@ Alle Integrationen, die auf dieser Plattform beruhen, funktionieren dann nicht m
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatendatei wurde nicht gefunden.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Einstellungen',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Konfigurieren der Einstellungen für Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Protokoll-Viewer',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Zugreifen auf das Advanced Workflow-Protokoll.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Greifen Sie auf das',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => 'Protokoll zu.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Prozessverwaltung',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Auf die Prozessverwaltung kann hier zugegriffen werden.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurieren der',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => 'Einstellungen und Anzeigen der Protokolle. Verwalten aller BPM-Prozesse für alle Benutzer über das Prozessmanagement.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfigurieren der Einstellungen von Advanced Workflow und Anzeigen der Protokolle. Verwalten aller BPM-Prozesse für alle Benutzer über das Prozessmanagement.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfiguration von Angeboten',
+    'LBL_MANAGE_QUOTES' => 'Konfigurieren Sie das Layout des Arbeitsblatts Angebote',
 );

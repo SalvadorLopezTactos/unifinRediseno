@@ -8,7 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: User.js 54569 2010-02-17 19:28:11Z jmertic $
 
 function clearInboundSettings() {
 	var url = document.getElementById('server_url');

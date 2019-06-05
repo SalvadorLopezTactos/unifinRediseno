@@ -25,7 +25,9 @@
         <ul class="dropdown-inset">
             {{#each templateCollection.models}}
                 <li>
-                    <a href="javascript:void(0);" data-action="{{../../../def.action}}" data-id="{{attributes.id}}">{{attributes.name}}</a>
+                    <a href="javascript:void(0);"
+                       data-action="{{../../../def.action}}" data-id="{{attributes.id}}"
+                       data-title="{{attributes.name}}-{{attributes.id}}">{{attributes.name}}</a>
                 </li>
             {{/each}}
         </ul>

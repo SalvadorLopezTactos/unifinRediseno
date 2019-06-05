@@ -23,13 +23,8 @@
       * @private
       */
      _done: function() {
-         var massCollection = this.context.get('mass_collection');
-
-         if (massCollection) {
-             app.drawer.close(massCollection);
-         } else {
-             this._cancel();
-         }
+        var selectedList = this.selectList(this.collection.models);
+        !_.isEmpty(selectedList) ? app.drawer.close(selectedList) : this._cancel();
      },
 
     /**
@@ -39,5 +34,47 @@
      */
     _cancel: function() {
         app.drawer.close();
+    },
+
+    /**
+     * Creates and returns a list of all the fields the User selected for either
+     * Current, Old or Both values.
+     * If the value is Both there will be 2 models with the values Current and Old
+     * for the same field.
+     * Current translates to future on the backend.
+     *
+     * @param {Object} models List of all the modules.
+     * @return {Object} selectedList.
+     */
+    selectList: function(models) {
+        var selectedList = [];
+        var i;
+        var old;
+        var future;
+        for (i = 0 ; i < models.length; i++) {
+            if (models[i].attributes.process_et_field_type === 'none') {
+                continue;
+            }
+
+            if (models[i].attributes.process_et_field_type == 'both') {
+                // Get clones of the model for old and new
+                future = models[i].clone();
+                old = models[i].clone();
+
+                // Set the field type for the current field
+                future.attributes.process_et_field_type = 'future';
+
+                // Set the field type for the old field
+                old.attributes.process_et_field_type = 'old';
+
+                // Add them to the stack
+                selectedList.push(future);
+                selectedList.push(old);
+            } else {
+                // Since this is one or the other, take it as is
+                selectedList.push(models[i]);
+            }
+        }
+        return selectedList;
     }
 })

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: ForEmails.php 16255 2006-08-22 00:53:43Z majed $
 $subpanel_layout = array(
 	'top_buttons' => array(
 		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Cases'),

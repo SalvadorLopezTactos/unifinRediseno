@@ -10,25 +10,34 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
- * Exports a record of Project
+ * Exports a Business Process Management Project, including the Process
+ * design and all related elements for it
  *
- * This class extends the class PMSEExporter to export a record
- * from the tables related with a pmse_Project to transport it from one instance to another.
  * @package PMSE
  * @codeCoverageIgnore
  */
 class PMSEProjectExporter extends PMSEExporter
 {
+    /**
+     * @inheritDoc
+     */
+    protected $beanModule = 'pmse_Project';
 
-    public function __construct()
-    {
-        $this->bean = BeanFactory::newBean('pmse_Project'); //new BpmEmailTemplate();
-        $this->uid = 'id';
-        $this->name = 'name';
-        $this->extension = 'bpm';
-    }
+    /**
+     * @inheritDoc
+     */
+    protected $uid = 'id';
+
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'bpm';
 
     /**
      * Method to retrieve a record of the database to export.
@@ -37,16 +46,17 @@ class PMSEProjectExporter extends PMSEExporter
      */
     public function getProject(array $args)
     {
-        $this->bean->retrieve($args['id']);
+        $bean = $this->getBean();
+        $bean->retrieve($args['id']);
 
         $project = array();
 
-        if ($this->bean->fetched_row != false) {
-            $project= PMSEEngineUtils::unsetCommonFields($this->bean->fetched_row, array('name', 'description', 'assigned_user_id'));
-            $project['process'] = $this->getProjectProcess($this->bean->id);
-            $project['diagram'] = $this->getProjectDiagram($this->bean->id);
-            $project['definition'] = $this->getProcessDefinition($this->bean->id);
-            $project['dynaforms'] = $this->getDynaforms($this->bean->id);
+        if (($data = $this->getBeanData($bean)) !== []) {
+            $project= PMSEEngineUtils::unsetCommonFields($data, array('name', 'description', 'assigned_user_id'));
+            $project['process'] = $this->getProjectProcess($bean->id);
+            $project['diagram'] = $this->getProjectDiagram($bean->id);
+            $project['definition'] = $this->getProcessDefinition($bean->id);
+            $project['dynaforms'] = $this->getDynaforms($bean->id);
 
             return array("metadata" => $this->getMetadata(), "project" => $project);
         } else {

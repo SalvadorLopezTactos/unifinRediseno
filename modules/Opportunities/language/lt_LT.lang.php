@@ -186,24 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulis suteikia jums galimybę sekti atskiras pardavimo operacijas nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas pateikia numatomą pardavimą ir apima reikšmingą pardavimo informaciją tuo pat metu nustatydamas ryšį su kitais svarbiais įrašais kaip {{quotes_module}}, {{contacts_module}} ir t. t. {{module_name}} paprastai pereis per keletą pardavimo etapų, kol bus pažymėtas kaip Užbaigtas sėkmingas arba Užbaigtas nesėkmingas. {{plural_module_name}} gali būti naudojamas pakartotinai, naudojant „Sugar“ {{forecasts_singular_module}} modulį pardavimo tendencijoms suprasti ir prognozuoti, o taip pat ir siekiant įvykdyti pardavimo kvotas.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas pateikia numatomą pardavimą ir apima reikšmingą pardavimo informaciją, tuo pat metu nustatydamas ryšį su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir t. t. {{module_name}} paprastai pereis per keletą pardavimo etapų, kol bus pažymėtas kaip „Užbaigtas sėkmingai“ arba „Užbaigtas nesėkmingai“. {{plural_module_name}} gali būti naudojamas toliau, naudojant „Sugar“ {{forecasts_singular_module}} modulį pardavimo tendencijoms suprasti ir prognozuoti, o taip pat ir pardavimo kvotoms įvykdyti.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimui priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir apima susijusius pardavimo duomenis bei su kitais svarbiais įrašais susijusią informaciją, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
-- Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką Redaguoti.
-- Peržiūrėkite arba keiskite kitų įrašų saitus antriniuose skydeliuose perjungdami apatinę kairiąją sritį į Duomenų rodinys.
-- Komentuokite ir peržiūrėkite vartotojų komentarus ir įrašų keitimo retrospektyvą {{activitystream_singular_module}} perjungdami apatinę kairiąją sritį į Veiklos srautas.
+
+- Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką „Redaguoti“.
+- Peržiūrėkite arba keiskite kitų įrašų saitus antriniuose skydeliuose, perjungdami apatinę kairiąją sritį į „Duomenų rodinys“.
+- Komentuokite ir peržiūrėkite vartotojų komentarus ir įrašų keitimo retrospektyvą modulyje {{activitystream_singular_module}}, perjungdami apatinę kairiąją sritį į „Veiklos srautas“.
 - Stebėkite arba įtraukite į parankinius šį įrašą naudodami įrašo autoriaus vardo dešinėje esančias piktogramas.
-- Mygtuko Redaguoti dešinėje esančiame išplečiamajame meniu Veiksmai rodomi papildomi galimi veiksmai.',
+- Mygtuko „Redaguoti“ dešinėje esančiame išskleidžiamajame meniu „Veiksmai“ rodomi papildomi galimi veiksmai.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimui priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir apima susijusius pardavimo duomenis bei su kitais svarbiais įrašais susijusią informaciją, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
 
-Norėdami sukurti {{module_name}}:
-1. Pateikite pageidaujamų laukų reikšmes.
- - Laukai, pažymėti Būtinas, prieš įrašant turi būti užpildyti.
- - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite Rodyti daugiau.
-2. Spustelėję Įrašyti užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
+Norėdami sukurti modulį {{module_name}}:
+1. Pateikite laukų reikšmes taip, kaip pageidaujate.
+ - Laukai, pažymėti „Būtinas“, prieš išsaugant turi būti užpildyti.
+ - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite „Rodyti daugiau“.
+2. Spustelėję „Išsaugoti“ užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
 
 // END ENT/ULT
 

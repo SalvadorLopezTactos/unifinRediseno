@@ -97,6 +97,7 @@
             containerCssClass: "select2-choices-pills-close",
             containerCss: "border: none",
             formatSelection: this.formatCustomSelection,
+            formatResultCssClass: this.formatCustomResultCssClass,
             dropdownCssClass: "search-filter-dropdown",
             escapeMarkup: function(m) { return m; },
             width: '100%'
@@ -121,18 +122,33 @@
             }, this)
         );
     },
+
     /**
      * Formats pill selections
-     * 
-     * @param item selected item
+     *
+     * @param {Object} item The selected item
+     * @param {jQuery} container The jQuery container element
      */
-    formatCustomSelection: function(item) {        
-        return '<span class="select2-choice-type" disabled="disabled">' + app.lang.get("LBL_FILTER") + '</span><a class="select2-choice-filter" rel="'+ item.id + '" href="javascript:void(0)">'+ item.text +'</a>';
+    formatCustomSelection: function(item, container) {
+        $(container.prevObject).addClass(item.id + '-select-choice');
+        return '<span class="select2-choice-type" disabled="disabled">' + app.lang.get('LBL_FILTER') +
+            '</span><a class="select2-choice-filter" rel="' + item.id +
+            '" href="javascript:void(0)">' + item.text + '</a>';
+    },
+
+    /**
+     * Adds custom css class for result items
+     *
+     * @param {Object} object The selected item
+     */
+    formatCustomResultCssClass: function(object) {
+        return object.id + '-select-result';
     },
 
     /**
      * Gets the list of filters that correspond to the forecasts range settings that were selected by the admin during
      * configuration of the forecasts module.
+     *
      * @return {Array} array of the selected ranges
      */
     _getRangeFilters: function() {

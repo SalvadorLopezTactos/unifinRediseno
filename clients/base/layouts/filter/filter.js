@@ -625,6 +625,12 @@
                 if (linkName !== 'all_modules' && this.layout.module === moduleName) {
                     moduleName = app.data.getRelatedModule(moduleName, linkName) || moduleName;
                 }
+
+                // For subpanels where layoutType is record and linkName is all_modules,
+                // only the all_records filter should be used.
+                if (linkName === 'all_modules') {
+                    filterId = 'all_records';
+                }
             }
         }
 

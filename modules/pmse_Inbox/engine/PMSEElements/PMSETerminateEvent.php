@@ -38,7 +38,7 @@ class PMSETerminateEvent extends PMSEEndEvent
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
-        $this->caseFlowHandler->terminateCase($flowData, $bean);
+        $this->caseFlowHandler->terminateCase($flowData, $bean, 'TERMINATED');
         //parent::execute($flowData, $bean);
         $flowData['cas_flow_status'] = 'TERMINATED';
 

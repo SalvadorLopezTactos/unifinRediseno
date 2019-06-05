@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiuj adres alternatywny do adresu podstawowego',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiuj adres podstawowy do adresu alternatywnego',
     'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
     'NTC_REMOVE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten kontakt ze zgłoszenia?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord jako raport bezpośredni?',
 

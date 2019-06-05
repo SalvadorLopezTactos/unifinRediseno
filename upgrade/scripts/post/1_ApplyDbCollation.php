@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,8 @@
  */
 
 /**
- * Applies collation defined in DB configuration to all DB objects for consistency
+ * Applies the collation defined in the dbconfigoption.collation configuration -- or the default collation -- to all
+ * database objects for consistency.
  */
 class SugarUpgradeApplyDbCollation extends UpgradeScript
 {
@@ -21,20 +21,17 @@ class SugarUpgradeApplyDbCollation extends UpgradeScript
 
     public function run()
     {
-        if (version_compare($this->from_version, '7.6.2', '>=')) {
+        if (version_compare($this->from_version, '8.1.0', '>=')) {
             return;
         }
 
-        $db = DBManagerFactory::getInstance();
-        if (!$db->supports('collation')) {
+        if (!$this->db->supports('collation')) {
+            $this->log('The database does not support collation');
             return;
         }
 
-        $collation = $db->getOption('collation');
-        if (!$collation) {
-            return;
-        }
-
-        $db->setCollation($collation);
+        $collation = $this->db->getOption('collation') ?? $this->db->getDefaultCollation();
+        $this->log("Applying the '{$collation}' collation to the database and all existing tables");
+        $this->db->setCollation($collation);
     }
 }

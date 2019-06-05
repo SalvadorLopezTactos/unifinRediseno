@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Skupinové atribúty:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'S používateľským DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Pri kontrole členstva v skupine použiť spolu s používateľským atribútom aj používateľské DN',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Akékoľvek ďalšie parametre filtra, ktoré treba použiť pri overovaní používateľov, napr. \\nis_sugar_user=1 alebo (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Akékoľvek ďalšie parametre filtra, ktoré treba použiť pri overovaní používateľov, napr. \nis_sugar_user=1 alebo (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atribút prihlásenia:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atribút väzby:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Na naviazanie používateľa LDAP <br>Príklady:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -936,12 +936,21 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
     'WARN_INSTALLER_LOCKED'=>'<b>Upozornenie:</b>V záujme zabezpečenia vašich dát musí byť inštalátor uzamknutý nastavením príkazu "installer_locked" v súbore config.php na možnosť "true".',
  	'WARN_LICENSE_EXPIRED'=> "<b>Upozornenie:</b> Platnosť vašej licencie skončí o ",
     'WARN_LICENSE_EXPIRED2' =>" deň (dni/dní). Prejdite do časti \"<a href='index.php?action=LicenseSettings&module=Administration'>'\"Správa licencie\"</a> na obrazovke administrácie.",
-    'WARN_LICENSE_SEATS'=>  "<b>Upozornenie:</b> Počet používateľských licencií bol prekročený o ",
-    'WARN_LICENSE_SEATS2' => ". Kontaktujte svojho obchodného zástupcu alebo zašlite e-mail na adresu <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Upozornenie:</b> Existujú ",
+    'WARN_LICENSE_SEATS2' => " aktívni používatelia, keď vaše predplatné umožňuje iba ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Deaktivujte, prosím, niektorých používateľov, kontaktujte svojho partnera alebo obchodného zástupcu,"
+        . " alebo zašlite e-mail na adresu <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Ďalšie informácie nájdete na "
+        . "<cieľ=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Pochopenie typov používateľov a licencií Sugar </a> - článok.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Upozornenie:</b> Počet aktívnych používateľov už dosiahol maximálny počet povolených licencií: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Upozornenie:</b> Počet aktívnych používateľov už dosiahol maximálny počet povolených licencií",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Upozornenie:</b> Počet aktívnych používateľov povolený vašou licenciou zodpovedá počtu aktívnych používateľov v systéme. Nebudete už môcť vytvárať ďalších aktívnych používateľov.",
-    'WARN_REPAIR_CONFIG' => '<b>Upozornenie:</b> Súbor config.php je treba opraviť. Použite skript <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Obnoviť konfiguračný súbor</a> na stránke opravy v administrátorskej oblasti a opravte konfiguračný súbor.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Upozornenie:</b> Nebudete už môcť vytvárať ďalších aktívnych používateľov."
+        . " Zakúpte si, prosím, ďalšie odbery.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Upozornenie:</b> Nebudete už môcť vytvárať ďalších aktívnych používateľov."
+        . " Zakúpte si, prosím, ďalšie odbery.",
+    'WARN_REPAIR_CONFIG' => '<b>Upozornenie:</b> Súbor config.php je potrebné opraviť.  Na opravu konfiguračného súboru použite skript <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> na stránke Oprava v administrátorskej oblasti.',
     'WARN_UPGRADE_APP'=> "Aktualizovaná verzia aplikácie je teraz k dispozícii.",
     'WARN_UPGRADE' => '<b>Upozornenie:</b> Vykonajte inováciu ',
     'WARN_UPGRADENOTE' => 'Poznámka:',
@@ -1250,15 +1259,17 @@ Všetky integrácie založené na tejto platforme prestanú fungovať.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Súbor Metadata nie je možné nájsť.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Nastavenia',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Konfigurovanie pokročilých nastavení nástroja Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Prehliadač denníkov',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Získanie prístupu do denníka nástroja Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Prístup k ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' denníku.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Riadenie procesu',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Zobraziť všetky neukončené a prebiehajúce procesy v systéme.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurovanie ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' nastavení a zobrazenie denníkov. Spravovanie všetkých procesov BPM pre všetkých používateľov prostredníctvom riadenia procesu.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfigurovanie nastavení a zobrazenie denníkov nástroja Advanced Workflow. Spravovanie všetkých procesov BPM pre všetkých používateľov prostredníctvom riadenia procesu.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfigurácia ponúk',
+    'LBL_MANAGE_QUOTES' => 'Konfigurácia rozloženia tabuľky ponúk',
 );

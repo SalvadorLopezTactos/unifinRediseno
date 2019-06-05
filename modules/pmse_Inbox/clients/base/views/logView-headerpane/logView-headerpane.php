@@ -13,7 +13,14 @@
 $module_name = 'pmse_Inbox';
 $viewdefs[$module_name]['base']['view']['logView-headerpane'] = array(
     'template' => 'headerpane',
-    'title' => 'LBL_PMSE_TITLE_LOG_VIEWER',
+    'fields' => array(
+        array(
+            'name' => 'title',
+            'type' => 'sugarbpm-header-label',
+            'module' => 'pmse_Inbox',
+            'label' => 'LBL_PMSE_TITLE_LOG_VIEWER',
+        ),
+    ),
     'buttons' => array(
         array(
             'name'    => 'log_pmse_button',

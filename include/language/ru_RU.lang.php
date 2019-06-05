@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Параметры электронной почты',
     'EmailParticipants' => 'Адресаты сообщения',
     'DataPrivacy' => 'Защита данных',
+    'ReportSchedules' => 'Расписания отчетов',
+    'CommentLog' => 'Журнал комментариев',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'Токен аутентификации',
     'Filters' => 'Фильтр',
     'Comments' => 'Комментарий',
+    'CommentLog' => 'Журнал комментариев',
     'Currencies' => 'Валюта',
     'ProductTemplates' => 'Каталог продуктов',
     'ProductTypes' => 'Вид продукта',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Настройка электронной почты',
     'EmailParticipants' => 'Адресат сообщения',
     'DataPrivacy' => 'Защита данных',
+    'ReportSchedules' => 'Расписание отчетов',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Транспортировка',
     'Utilities' => 'Коммунальные системы',
     'Other' => 'Другой',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Уровень 1',
+    'T2' => 'Уровень 2',
+    'T3' => 'Уровень 3',
+    'T4' => 'Уровень 4',
   ),
   'lead_source_default_key' => 'Прямое обращение',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Переместить',
         'donothing' => 'Ничего не делать'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Никогда',
+        30000 => 'Каждые 30 секунд',
+        60000 => 'Каждую минуту',
+        120000 => 'Каждые 2 минуты',
+        180000 => 'Каждые 3 минуты',
+        240000 => 'Каждые 4 минуты',
+        300000 => 'Каждые 5 минут',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Прогноз',
         'sales_stage' => 'Стадия продажи',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Список',
         'activities' => 'Лента мероприятий',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Каждый час',
+        '21600' => 'Каждые 6 часов',
+        '43200' => 'Каждые 12 часов',
+        '86400' => 'Ежедневно',
+        '604800' => 'Еженедельно',
+        '1209600' => 'Каждые 2 недели',
+        '2419200' => 'Каждые 4 недели',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Перейти по ссылке',
   'LBL_TOGGLE_VISIBILITY' => 'Вкл/выкл видимость', // Record view header panel element
   'LBL_ACTIVITIES' => 'Лента мероприятий',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Все права защищены.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar и 3-D куб являются зарегистрированными торговыми марками компании SugarCRM Inc. '.
         'Все другие названия компаний и продуктов, используемые или отображаемые в этом продукте, могут являться торговыми марками '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ являются торговыми марками компании SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Сохранить',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Добавить эту папку в',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Эту папку нельзя изменить',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Вы уверены, что хотите удалить эту папку?\\n Этот процесс необратим.\\n Удаление папки приведёт к удалению всех вложенных папок.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Вы уверены, что хотите удалить эту папку?\n Этот процесс необратим.\n Удаление папки приведёт к удалению всех вложенных папок.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Новое имя папки',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Пожалуйста, выберите папку, а потом выполните это действие.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Управление папками',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Синхронизировать все учетные записи',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Письмо было отправлено на заданный электронный адрес, используя заданные настройки исходящего соединения. Проверьте, пожалуйста, получено ли письмо и убедитесь в правильности настроек.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Это действие синхронизирует учётные записи электронной почты и их содержимое.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Произвести полную синхронизацию?\\nВ случае с большими почтовыми ящиками это может занять несколько минут.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Произвести полную синхронизацию?\nВ случае с большими почтовыми ящиками это может занять несколько минут.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Нажмите клавишу Shift или Ctrl для выделения нескольких папок.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Основные настройки',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Доступные папки групп',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Выберите количество писем на странице во Входящих. Для активирования этих настроек может понадобиться обновление страницы.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Поиск учетной записи',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Правила',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'Настройки успешно сохранены.\\n\\nПерезагрузите страницу для применения новых настроек.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'Настройки успешно сохранены.\n\nПерезагрузите страницу для применения новых настроек.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Перезагрузите страницу, чтобы применить новые настройки.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Отправлять письма только в формате Обычного текста',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Активно',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Требуется активная сессия для экспорта содержимого.',
     'ERR_NO_HEADER_ID' => 'Эта функция недоступна для данной темы.',
     'ERR_NOT_ADMIN' => "У Вас нет доступа к администрированию.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Этот параметр отключен в SugarCRM для режима IDM и доступен в облачной консоли.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Перейдите в <a href=\"%s\" target=\"_blank\">облачную консоль</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Управление паролями доступно только в настройках облака.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Чтобы изменить поля, доступные только для чтения, обратитесь к администратору Sugar.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Пропущены обязательные поля:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Обязательные поля неверно заполнены:',
     'ERR_INVALID_VALUE' => 'Неверное значение:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Текущий пользователь не авторизирован для изменения {moduleName} настроек конфигурации',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'У вас нет прав для того, чтобы добавлять в избранное {moduleName}. Обратитесь к администратору для получения доступа.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'У вас нет прав для того, чтобы подписаться на {moduleName}. Обратитесь к администратору для получения доступа.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields не найдено в полезных данных',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns не является массивом',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields не найдено в полезных данных',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows не является массивом',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields не найдено в полезных данных',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Ваш запрос не был выполнен вследствие неизвестного исключения.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Выберите оператор...',
     'LBL_FILTER_CREATE_NEW' => 'Создать фильтр',
     'LBL_FILTER_CREATE_FILTER' => 'Создать новый фильтр',
+    'LBL_FILTER_CLOSE_FILTER' => 'Закрыть фильтр',
     'LBL_FILTER_EDIT_FILTER' => 'Изменить фильтр',
     'LBL_FILTER_ALL_RECORDS' => 'Все записи',
     'TPL_FILTER_SAVE' => 'Вы успешно создали фильтр {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Все права защищены.<br />SugarCRM, Sugar и 3-D куб являются зарегистрированными торговыми марками компании SugarCRM Inc. '.
         'Все другие названия компаний и продуктов, используемые или отображаемые в этом продукте, могут являться торговыми марками '.
         'соответствующих компаний, с которыми они связаны.',
@@ -3414,7 +3454,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Возобновить',
     'LNK_VIEW_CHANGE_LOG' => 'Просмотр журнала аудита',
     'TPL_AUDIT_LOG_TITLE' => 'Журнал аудита для {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Нажмите для просмотра журнала аудита адреса электронной почты',
 
     'NTC_CLICK_BACK' => 'Пожалуйста, нажмите Назад в браузере и исправьте ошибку.',
     'NTC_DATE_FORMAT' => '(гггг-мм-дд)',
@@ -3451,7 +3491,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Предупреждение: Ваш браузер IE не поддерживает режим сопоставимости",
     'WARN_LICENSE_SEATS'=>  "Предупреждение: Количество активных пользователей уже равно максимальному количеству допустимых лицензий.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Предупреждение: Количество пользовательских лицензий превышено максимальное количество допустимых лицензий.",
-    'WARN_ONLY_ADMINS'=> "Только администраторы могут войти в систему.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Количество активных пользователей превышает ограничение, основанное на количестве лицензий. Обратитесь к своему администратору.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Войти в систему могут только администраторы.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Достигнуто ограничение, основанное на количестве лицензий пользователя. Войти в систему могут только существующие пользователи.',
+    'WARN_ONLY_ADMINS'=> "Войти в систему могут только администраторы.",
     'WARN_UNSAVED_CHANGES'=> "Вы собираетесь покинуть запись, не сохранив изменений, которые Вы, возможно, здесь сделали. Вы уверены, что хотите покинуть запись?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Вы не сохранили изменения. Вы уверены, что хотите уйти со страницы и сбросить изменения?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Вы переходите в модуль Отчёты. Изменения, внесенные Вами в дашлет не будут сохранены. Продолжить?',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "На данный момент у вас нет сохраненных записей <item1>. Запись <item2> сейчас одна.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Вы можете создать <item1> из <item2>. <item3> <item2> списка.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Нажмите здесь",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Добавить в избранное',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Показатели сделки',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Показатели сделки для связанного контрагента.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Выбранное из каталога продуктов',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Список недавно использованных позиций и продуктов, добавленных в избранное',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Недавно использованное',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Избранное',
 
     'LBL_DASHLET_NO_RECORDS' => 'Записи не найдены.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Резюме обращения',
@@ -4256,7 +4306,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Будущие',
     'LBL_REQUIRED_FIELD' => 'Обязательное',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Позиция коммерческого предложения',
+    'LBL_DISCOUNT_TOTAL' => 'Общая сумма скидки',
+    'LBL_TAX' => 'Налог',
+    'LBL_SHIPPING' => 'Доставка',
+    'LBL_GRAND_TOTAL' => 'Общий итог',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Автоматически заполнить юридический адрес из профиля контрагента',
+    'LBL_QLI_ADD_GROUP' => 'Добавить группу',
+    'LBL_QLI_COMMENT' => 'Комментарий',
+    'LBL_SELECT_ACTION' => 'Выбрать действие',
+    'LBL_QLI_GROUP_NAME' => 'Имя группы',
+    'LBL_GROUP_TOTAL' => 'Итог по группе',
+    'LBL_ITEM_NAME' => 'Позиция каталога продуктов',
+    'LBL_QLI_DELETE' => 'Действительно удалить эту позицию каталога продуктов?',
+    'LBL_QLI_COMMENT_DELETE' => 'Действительно удалить этот комментарий к позиции каталога продуктов?',
+    'LBL_QLI_GROUP_DELETE' => 'Действительно удалить группу {0}? Все позиции будут перемещены в группу по умолчанию.',
+    'LBL_QLI_GROUP_EMPTY' => 'Нет позиций коммерческого предложения',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Опционально',
     'LBL_RELATED_MODULE' => 'Связанный {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Связанные {{{this}}}',
@@ -4286,7 +4356,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Подтвердить',
     'LBL_NO_ACCESS' => '(Нет доступа)',
     'LBL_NO_ACCESS_LOWER' => 'Пользователь не имеет доступа к записи',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Нет доступа',
     'LBL_VALUE_ERASED' => 'Значение удалено',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Эти данные были удалены в связи с требованиями политики защиты данных',
     'LBL_CREATE_RELATED_RECORD' => 'Создать связанную запись',
@@ -4914,7 +4984,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Задачи Команды',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP или более старый протокол REST API',
@@ -4975,9 +5045,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Заметка:',
     'LBL_ALERT_TITLE_ERROR' => 'Ошибка:',
     'LBL_ALERT_TITLE_LOADING' => 'Идет загрузка...',
+    'LBL_ALERT_NO_ACCESS' => 'У вас нет доступа к фильтру, используемого для этого раздела.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Продублируйте информационную панель, чтобы настроить этот раздел с помощью собственного фильтра.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Версия Вашего браузера больше не поддерживается, или Вы используете браузер, который не поддерживается.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Рекомендуются следующие версии браузера: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Список рекомендуемых браузеров см. на странице {{link}}.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Поддерживаемые платформы',
     'LBL_ALERT_CONFIRM_DELETE' => 'Вы действительно хотите удалить этот элемент?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Вы действительно хотите удалить эти элементы?',
@@ -5075,7 +5145,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Сводка основных показателей за длительный период',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Больше истории...',
     'LBL_RELATED_CONTACT' => 'Связанный контакт',
     'LBL_MODULE_TYPE' => 'Тип',
@@ -5149,6 +5219,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Отсутствуют настройки сервера SMTP',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Для отправки уведомления о назначении записи, сервер SMTP должен быть настроен в {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Настройки Email',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Доступные новые отчеты о наличных запасах',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Новые отчеты о наличных запасах доступны в вашем ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'модуле отчетов',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Они отмечены как «Отчеты о наличных запасах», и их можно отфильтровать. Отчеты также отмечены как «Продажа и маркетинг», «Отдел обслуживания клиентов», «Защита данных» или «Административные процессы» в зависимости от содержания. Для получения подробных сведений см. ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'документацию',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM позволяет опытным пользователям быстро выполнять определенные задачи с помощью горячих клавиш для повышения производительности. Списки справа описывают имеющиеся клавиши вместе с объяснениями и действиями, которые они выполняют.',
@@ -5258,23 +5333,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Процессы',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'В разделе "Процессы" отображены шаблоны, которые можно использовать в Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'В разделе "Процессы" отображены шаблоны, которые можно использовать в SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Определения процесса',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'В разделе "Определения процесса" отображены шаблоны, которые можно использовать в Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'В разделе "Определения процессов" отображены шаблоны, которые можно использовать в SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Создать определение процесса',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Импортировать определения процесса',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Процесс обработки бизнес-правил',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'В разделе "Процесс обработки бизнес-правил" отображены шаблоны, которые можно использовать в Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'В разделе "Бизнес-правила процессов" отображены шаблоны, которые можно использовать в SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Создать процесс обработки бизнес-правила',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Импортировать процесс обработки бизнес-правила',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Процесс обработки шаблонов Email',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'В разделе "Процесс обработки шаблонов Email" отображены шаблоны, которые можно использовать в Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'В разделе "Email-шаблоны процессов" отображены шаблоны, которые можно использовать в SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Создать процесс обработки шаблона Email',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Импортировать процесс обработки шаблонов Email',
 
@@ -5298,7 +5376,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => 'Отменено',
     'LBL_PMSE_TERMINATED_STATUS' => 'Прервано',
     'LBL_PMSE_ERROR_STATUS' => 'Ошибка',
-    'LBL_PMSE_SETTINGS' => 'Параметры Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'Параметры SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Вы действительно хотите запретить использование этой записи?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Вы действительно хотите разрешить использование этой записи?',
@@ -5322,7 +5400,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Javascript необходим для SugarCRM. Пожалуйста, включите javascript, чтобы продолжить использование SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Сериализованные данные не могут быть несериализованными',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Сериализованные данные не могут быть несериализованными, поскольку содержат ссылки на объекты или классы',
 
@@ -5351,6 +5429,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => 'Личные данные',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Отметить для удаления',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Личная информация для {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Скопировано в буфер обмена',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Не удалось скопировать в буфер обмена',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Скопировать ссылку для подтверждения',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Показать больше...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Показать меньше...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6528,7 +6615,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Внедренный
     'YER' => 'Риалов',
     'ZWD' => 'Долларов Зимбабве',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Одиночная обработка',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Нет',
+        'future' => 'Текущее значение',
+        'old' => 'Старое значение',
+        'both' => 'Текущие и старые значения',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Одиночная обработка',
+    );

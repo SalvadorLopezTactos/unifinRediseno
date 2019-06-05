@@ -11,11 +11,11 @@
  */
 
 $params['db_driver'] = 'pdo_mysql';
-$params['db_host'] = getenv('MYSQL_SERVER_HOST');
-$params['db_port'] = getenv('MYSQL_SERVER_PORT');
-$params['db_name'] = getenv('MYSQL_DATABASE');
-$params['db_user'] = getenv('MYSQL_USER');
-$params['db_password'] = getenv('MYSQL_USER_PASSWORD');
+$params['db_host'] = '127.0.0.1';
+$params['db_port'] = 3306;
+$params['db_name'] = 'idm_db';
+$params['db_user'] = 'root';
+$params['db_password'] = 'Sugar123';
 $params['db_charset'] = 'utf8';
 
 $params['logdir'] = null; // null means use default log directory (<app_dir>/var/logs)
@@ -23,7 +23,8 @@ $params['logdir'] = null; // null means use default log directory (<app_dir>/var
 //Setup a default logging mechanism. For more options see http://silex.sensiolabs.org/doc/2.0/providers/monolog.html
 $params['monolog'] = [
     'monolog.name' => 'IdentityProvider',
-    'monolog.level' => \Monolog\Logger::NOTICE,
+    'monolog.level' => getenv('LOG_LEVEL') ?: \Monolog\Logger::INFO,
+    'monolog.bubble' => true,
 ];
 
 // Configuration for Hydra client.
@@ -40,6 +41,9 @@ $params['idm'] = [
     'partition' => getenv('IDM_PARTITION'),
     // The region the login service is serving
     'region' => getenv('IDM_REGION'),
+    'password_reset' => [
+        'endpoint' => '/password/reset/email',
+    ],
 ];
 
 $params['session.storage.options'] = [
@@ -47,4 +51,75 @@ $params['session.storage.options'] = [
     'cookie_httponly' => true,
     'cookie_domain' => getenv('COOKIE_DOMAIN'),
     'cookie_lifetime' => getenv('COOKIE_LIFETIME') === false ? 24 * 60 * 60 : getenv('COOKIE_LIFETIME'), // in seconds
+];
+
+$params['logout.options'] = [
+    'cookie_secure' => getenv('COOKIE_SECURE'),
+    'cookie_name' => getenv('LOGOUT_COOKIE_NAME'),
+];
+
+$params['discovery'] = [
+    'url' => getenv('DISCOVERY_URL'),
+    'version' => 'v1',
+];
+
+// recaptcha domain registration: https://www.google.com/recaptcha/admin
+// "always pass" keys taken from https://developers.google.com/recaptcha/docs/faq
+$params['recaptcha'] = [
+  'sitekey' => getenv('RECAPTCHA_SITEKEY') ?: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+  'secretkey' => getenv('RECAPTCHA_SECRETKEY') ?: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
+];
+
+$params['honeypot'] = [
+  'name' => 'first_name',
+];
+
+$params['grpc'] = [
+    'disabled' => (bool) getenv('DISABLE_GRPC'),
+];
+
+$params['locales'] = [
+    'en-US' => 'English (US)',
+    'bg-BG' => 'Български',
+    'cs-CZ' => 'Česky',
+    'da-DK' => 'Dansk',
+    'de-DE' => 'Deutsch',
+    'el-EL' => 'Ελληνικά',
+    'es-ES' => 'Español',
+    'fr-FR' => 'Français',
+    'he-IL' => 'עברית',
+    'hu-HU' => 'Magyar',
+    'hr-HR' => 'Hrvatski',
+    'it-iT' => 'Italiano',
+    'lt-LT' => 'Lietuvių',
+    'ja-JP' => '日本語',
+    'ko-KR' => '한국어',
+    'lv-LV' => 'Latviešu',
+    'nb-NO' => 'Norsk',
+    'nl-NL' => 'Nederlands',
+    'pl-PL' => 'Polski',
+    'pt-PT' => 'Português',
+    'ro-RO' => 'Română',
+    'ru-RU' => 'Русский',
+    'sv-SE' => 'Svenska',
+    'th-TH' => 'ไทย',
+    'tr-TR' => 'Türkçe',
+    'zh-TW' => '繁體中文',
+    'zh-CN' => '简体中文',
+    'pt-BR' => 'Português Brasileiro',
+    'ca-ES' => 'Català',
+    'en-UK' => 'English (UK)',
+    'sr-RS' => 'Српски',
+    'sk-SK' => 'Slovenčina',
+    'sq-AL' => 'Shqip',
+    'et-EE' => 'Eesti',
+    'es-LA' => 'Español (Latinoamérica)',
+    'fi-FI' => 'Suomi',
+    'ar-SA' => 'العربية',
+    'uk-UA' => 'Українська',
+];
+
+$params['marketingExtras'] = [
+    'baseUrl' => getenv('MARKETING_EXTRAS_BASE_URL'),
+    'flavor' => getenv('MARKETING_EXTRAS_FLAVOR'),
 ];

@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Grupas atribūts:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Ar lietotāja DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Iekļaut Lietotāja DN ar Lietoāja atribūtu, pārbaudot piederību grupai',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Pieprasīt jebkādus papildus filtra parametrus, kad tiek veikta lietotāju autentificēšana piem.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Pieprasīt jebkādus papildus filtra parametrus, kad tiek veikta lietotāju autentificēšana piem.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Pieteikšanās atribūts:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Sasaistes atribūts:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Piem., lai sasaistītu LDAP lietotājus:[<b>AD:</b> userPrincipalName] [<b>openLDAP:</b> userPrincipalName] [<b>Mac OS X:</b> uid]',
@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Stila vadlīnijas (Lab)',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokumentācija un piemēri',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuāla validācija',
-    'LBL_MANUAL_VALIDATION'=>'Ja Jums ir problēmas ar automātisko validāciju, lūdzu pārbaudiet Starpniekservera konfigurāciju,  <a href="index.php?module=Configurator&action=EditView">Sistēmas iestatījumos</a> administrēšanas panelī.<br />	 Ja Jūsu sistēmas vide aizliedz jūsu sistēmai komunicēt ar licences validācijas serveri caur internetu, Jums jāveic  <a href="javascript:void(0)" onclick="toggleDisplay($#39;mainbody$#39;);toggleDisplay($#39;manualbody$#39;);">Manuālas validācijas</a> soļi.',
+    'LBL_MANUAL_VALIDATION'=>'Ja Jums ir problēmas ar automātisko validāciju, lūdzu pārbaudiet Starpniekservera konfigurāciju,  <a href="index.php?module=Configurator&action=EditView">Sistēmas iestatījumos</a> administrēšanas panelī.<br />	 Ja Jūsu sistēmas vide aizliedz jūsu sistēmai komunicēt ar licences validācijas serveri caur internetu, Jums jāveic   <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manuālas validācijas</a> soļi.',
     'LBL_MANUAL_VALIDATION1'=> '1. solis: Izveidot licences atslēgas failu uzklikšķinot uz sekojošas pogas.',
     'LBL_MANUAL_VALIDATION2'=> 'Tad saglabā failu (sugarkey.lic) lokālajā failu sistēmā.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Brīdinājums: Lai pasargātu datus, instalācijai ir jābūt noslēgtai uzstādījumos īnstaller_locked&#39; uz &#39;true&#39; failā config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Paziņojums: Jūsu licence beidzas",
     'WARN_LICENSE_EXPIRED2' =>"dienu(as). Dodieties uz <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Licences pārvaldība\"</a>  Administrēšanas sadaļā.",
-    'WARN_LICENSE_SEATS'=>  "Brīdinājums. Lietotāju licenču skaits pārsniegts par",
-    'WARN_LICENSE_SEATS2' => ".  Kontaktējies ar pārdošanas pārstāvi vai raksti e-pastu uz <a href=\"mailto:cagroup@sugarcrm.com\">cagroup@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Brīdinājums:</b> Ir ",
+    'WARN_LICENSE_SEATS2' => " aktīvi lietotāji, kaut gan jūsu abonements atļauj tikai ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Lūdzu, deaktivizējiet dažus lietotājus, sazinieties ar savu partneri vai pārdošanas pārstāvi"
+        . " vai rakstiet e-pastu uz <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Lai uzzinātu vairāk, skatiet "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "</a>Raksts</p> par lietotāju veidiem un Sugar licencēm",
     'WARN_LICENSE_SEATS_MAXED'=>  "Brīdinājums: Aktīvo lietotāju skaits pārsniedz pieļaujamo licenžu skaitu:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Brīdinājums: Aktīvo lietotāju skaits pārsniedz pieļaujamo licenžu skaitu",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Brīdinājums:  Licencē atļauto aktīvo lietotāju skaits sakrīt ar sistēmas aktīvo lietotāju skaitu. Tu vairs nevarēsi izveidot papildus aktīvos lietotājus.",
-    'WARN_REPAIR_CONFIG' => 'Brīdinājums: config.php failu ir nepieciešams salabot.  Lūdzu lietojiet <a href="index.php?module=Administration&action=RebuildConfig">Pārtaisīt Config failu</a> skriptu lapā Salabot administrācijas daļā, lai salabotu config failu.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Brīdinājums:</b> Jūs nevarēsiet izveidot papildu aktīvos lietotājus."
+        . " Lūdzu, iegādājieties vairāk abonementu.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Brīdinājums:</b> Jūs nevarēsiet izveidot papildu aktīvos lietotājus."
+        . " Lūdzu, iegādājieties vairāk abonementu.",
+    'WARN_REPAIR_CONFIG' => '<b>Brīdinājums:</b> Failu config.php ir nepieciešams salabot. Lai salabotu konfigurācijas failu, izmantojiet skriptu <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Atjaunot konfigurācijas failu</a> Administrēšanas sadaļas Labošanas lapā.',
     'WARN_UPGRADE_APP'=> "Ir pieejama atjaunināta versija",
     'WARN_UPGRADE' => 'Brīdinājums: Lūdzu atjaunināt',
     'WARN_UPGRADENOTE' => 'Piezīme:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Attīrīt Vardefs datu kešu',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Izņemt vardefs no keša',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Iztīrīt vienotās meklēšanas kešu',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Izņem unified_search_modules.php no keša',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Izņem unified_search_modules.php no kešatmiņas',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Ātri salabot un pārģenerēt',
     'LBL_QUICK_REPAIR_TITLE'=>'Lūdzu atlasi Moduļus(li) salabošanai:',
 	'LBL_FAILED_CONNECTION'=> 'Kļūme pievienojoties:',
@@ -1245,15 +1254,17 @@ Visas no šīs platformas atkarīgās integrācijas pārtrauks darboties.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatu failu nevarēja atrast.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Uzstādījumi',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Žurnāla apskate',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Piekļuve pie ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' žurnāla.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Procesu pārvaldība',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Šeit ir pieejama Procesu pārvaldība',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurēt ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' iestatījumus un skatīt žurnālus. Pārvaldīt visus BPM procesus visiem lietotājiem, izmantojot procesu pārvaldību.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Piedāvājumu konfigurācija',
+    'LBL_MANAGE_QUOTES' => 'Konfigurēt piedāvājumu darblapas izkārtojumu',
 );

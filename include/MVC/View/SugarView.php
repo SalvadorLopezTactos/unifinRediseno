@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
@@ -150,6 +151,11 @@ class SugarView
         $this->preDisplay($params);
         $this->displayErrors($params);
         $this->display($params);
+        // add analytics to html pages
+        if ($this->_getOption('show_javascript')) {
+            $this->addAnalytics();
+        }
+
         if ( !empty($this->module) ) {
             $GLOBALS['logic_hook']->call_custom_logic($this->module, 'after_ui_frame');
         } else {
@@ -167,6 +173,67 @@ class SugarView
 
         //Do not track if there is no module or if module is not a String
         $this->_track();
+    }
+
+    /**
+     * Add javascript for analytics.
+     */
+    protected function addAnalytics()
+    {
+        global $current_user;
+
+        if (empty($current_user->id)) {
+            // user hasn't logged in
+            return;
+        }
+
+        $config = SugarConfig::getInstance()->get('analytics');
+
+        if (!empty($config) && !empty($config['enabled']) &&
+            !empty($config['connector']) && $config['connector'] === 'Pendo' && !empty($config['id'])) {
+            $apiKey = $config['id'];
+
+            // user data
+            $visitorId = $current_user->site_user_id ?? 'unknown_user';
+            $userType = $current_user->isAdmin() ? CurrentUserApi::TYPE_ADMIN : CurrentUserApi::TYPE_USER;
+            $locale = Container::getInstance()->get(Localization::class);
+            $language = $locale->getAuthenticatedUserLanguage();
+            $language = htmlspecialchars($language, ENT_QUOTES, 'UTF-8');
+            $roles = ACLRole::getUserRoles($current_user->id);
+            $roles = count($roles) >= 1 ? implode(',', $roles) : 'no_roles';
+            $roles = htmlspecialchars($roles, ENT_QUOTES, 'UTF-8');
+
+            // account data
+            $manager = new MetaDataManager();
+            $serverInfo = $manager->getServerInfo();
+            $accountId = $serverInfo['site_id'] ?? 'unknown_account';
+            $siteUrl = Container::getInstance()->get(SugarConfig::class)->get('site_url');
+            $version = $serverInfo['version'] ?? 'unknown_version';
+            $flavor = $serverInfo['flavor'] ?? 'unknown_edition';
+
+            echo "<script>
+                (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];
+                    v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++w)(function(m){
+                    o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+                    y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/$apiKey/pendo.js';
+                    z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+
+                pendo.initialize({
+                    visitor: {
+                        id: '$visitorId',
+                        user_type: '$userType',
+                        language: '$language',
+                        roles: '$roles'
+                    },
+                    account: {
+                        id: '$accountId',
+                        domain: '$siteUrl',
+                        edition: '$flavor',
+                        version: '$version'
+                    }
+                });
+            </script>";
+        }
     }
 
     /**

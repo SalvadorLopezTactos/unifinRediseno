@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Varning: För att skydda din data måste &#39;installer_locked&#39; vara satt til true i config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Meddelande: Din licens går ut om",
     'WARN_LICENSE_EXPIRED2' =>"dag(ar). Vänligen gå till <a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>&#39;\"Licenshantering\"</a> .",
-    'WARN_LICENSE_SEATS'=>  "Varning: Licens öveskriden med",
-    'WARN_LICENSE_SEATS2' => ". Vänligen kontakta din försäljare, skicka email till <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Varning:</b> det finns ",
+    'WARN_LICENSE_SEATS2' => " aktiva användare när ditt abonnemang tillåter endast för ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">vänligen avaktivera vissa användare, kontakta din partner eller säljare,"
+        . " eller mejla <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">för mer information, se "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Förstå användartyper och Sugar-licenser</a> artikel.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Varning: Antalet aktiva använd överskrider max antalet som licensen tillåter.",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Varning: Antalet aktiva användare är redan på den nivå som antalet tillåtna licenser.",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Varning: Antalet aktiva användare som tillåts av din licens matchar antalet aktiva användare i systemet. Du kommer inte att kunna skapa ytterligare aktiva användare.",
-    'WARN_REPAIR_CONFIG' => 'Varning: config.php behöver repareras. Vänligen använd <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Återskapa Konfigurationsfil</a>, för att utföra reparationen.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Varning:</b> du inte kommer att kunna skapa ytterligare aktiva användare."
+        . " Köp fler prenumerationer.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Varning:</b> du inte kommer att kunna skapa ytterligare aktiva användare."
+        . " Köp fler prenumerationer.",
+    'WARN_REPAIR_CONFIG' => '<b>varning:</b> config.php filen behöver repareras.  Vänligen Använd <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>återskapa konfigurationsfilen</a> skript i sidan reparation i Admin område för att reparera filen config.',
     'WARN_UPGRADE_APP'=> "En uppdaterad version av SugarCRM finns tillgänglig.",
     'WARN_UPGRADE' => 'Varning: Vänligen uppgradera',
     'WARN_UPGRADENOTE' => 'Notering:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Rensa Temporär data för Vardefs',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Tar bort Vardefs från Temporär data',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Töm temporärdata för gemensamma sökningar',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Tar bort unified_search_modules.php from temporärdatafilen',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Tar bort unified_search_modules.php från temporärdatafilen',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Snabb Reparera och Återskapa',
     'LBL_QUICK_REPAIR_TITLE'=>'Vänligen markera modul(er) att reparera:',
 	'LBL_FAILED_CONNECTION'=> 'Anslutningen misslyckades:',
@@ -1244,15 +1253,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatafilen kunde inte hittas.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Inställningar',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Konfigurera inställningar för avancerat arbetsflöde.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Loggvisare',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Kom åt loggen för Avancerat arbetsflöde.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Tillgång till den ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' loggen.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Processhantering',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Här får du åtkomst till processhantering.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurera ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' inställningar och visa loggar. Hantera alla BPM processer för alla användare via Process Management.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Avancerat arbetsflöde',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfigurera inställningar för Avancerat arbetsflöde och se loggar. Hantera alla BPM-processer för alla användare via Processhantering.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Offertkonfiguration',
+    'LBL_MANAGE_QUOTES' => 'Konfigurera layouten för offertens arbetsblad',
 );

@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Bu sistem hesabıdır.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-Posta Adres Kimliği',
     'LBL_TYPE' => 'Tip',
+    'LBL_REPLY_TO_NAME' => 'Yanıtlanacak İsim',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Yanıtlanacak E-Posta Adresleri',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Yanıtlanacak E-Posta Adresi Kimliği',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Yanıtlanacak E-Posta Adresi',
+    'LBL_PRIMARY_TEAM' => 'Birincil Takım',
 );

@@ -368,17 +368,25 @@
         var bundles = this.model.get('bundles');
         var isConvert = this.context.get('convert');
         var hasItems = 0;
+        var userId = app.user.id;
 
-        if (isConvert) {
-            _.each(bundles.models, function(bundle) {
-                var pbItems = bundle.get('product_bundle_items');
-                _.each(pbItems.models, function(itemModel) {
-                    if (itemModel.module === 'Products' && itemModel.get('revenuelineitem_id')) {
-                        hasItems++;
-                    }
-                }, this);
+        _.each(bundles.models, function(bundle) {
+            var pbItems = bundle.get('product_bundle_items');
+            _.each(pbItems.models, function(itemModel) {
+                // set assigned user id on product so user doesn't get notification when they create one
+                itemModel.set('assigned_user_id', userId);
+
+                if (isConvert && itemModel.module === 'Products' && itemModel.get('revenuelineitem_id')) {
+                    hasItems++;
+                }
             }, this);
-        }
+            bundle.set({
+                product_bundle_items: pbItems,
+                assigned_user_id: userId
+            });
+        }, this);
+
+        this.model.set('assigned_user_id', userId);
 
         if (config && config.opps_view_by === 'RevenueLineItems' && isConvert && hasItems) {
             parentSuccessCallback = options.success;

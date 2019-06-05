@@ -14,6 +14,8 @@ namespace Sugarcrm\IdentityProvider\Authentication\Provider;
 
 use InvalidArgumentException;
 
+use OneLogin\Saml2\Error;
+use OneLogin\Saml2\Response;
 use Sugarcrm\IdentityProvider\Authentication\Exception\ConfigurationException;
 use Sugarcrm\IdentityProvider\Authentication\Exception\SAMLRequestException;
 use Sugarcrm\IdentityProvider\Authentication\Exception\SAMLResponseException;
@@ -151,7 +153,7 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
                                 ->logout($returnTo, $parameters, $nameId, $sessionIndex);
         } catch (\InvalidArgumentException $e) {
             throw new ConfigurationException($e->getMessage(), $e->getCode());
-        } catch (\OneLogin_Saml2_Error $e) {
+        } catch (Error $e) {
             throw new SAMLRequestException($e->getMessage(), $e->getCode());
         } catch (\Exception $e) {
             throw new AuthenticationException($e->getMessage(), $e->getCode());
@@ -192,7 +194,7 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
             $result = $authService->login($returnTo, $parameters, $forceAuthentication, $isPassive, $stay);
         } catch (\InvalidArgumentException $e) {
             throw new ConfigurationException($e->getMessage(), $e->getCode());
-        } catch (\OneLogin_Saml2_Error $e) {
+        } catch (Error $e) {
             throw new SAMLRequestException($e->getMessage(), $e->getCode());
         } catch (\Exception $e) {
             throw new AuthenticationException($e->getMessage(), $e->getCode());
@@ -225,7 +227,7 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
 
         try {
             $authService->processServiceSLO($token->getCredentials());
-        } catch (\OneLogin_Saml2_Error $e) {
+        } catch (Error $e) {
             throw new SAMLResponseException($e->getMessage());
         }
 
@@ -254,7 +256,7 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
         try {
             $relayState = $token->hasAttribute('RelayState') ? $token->getAttribute('RelayState') : null;
             $result = $authService->processIdpSLO($token->getCredentials(), $relayState);
-        } catch (\OneLogin_Saml2_Error $e) {
+        } catch (Error $e) {
             throw new SAMLRequestException($e->getMessage());
         }
         $resultToken = new ResultToken($token->getCredentials(), $token->getAttributes());
@@ -274,7 +276,6 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
      * @throws AuthenticationException When SAML Response is invalid.
      * @throws InvalidArgumentException When there is no authentication service configured for identity provider.
      * @throws Exception When SAML Response could not be processed.
-     * @throws \OneLogin_Saml2_Error If any settings parameter is invalid.
      */
     protected function consume(AcsToken $token)
     {
@@ -337,9 +338,10 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
     /**
      * @param AcsToken $token
      * @param $authService
-     * @return \OneLogin_Saml2_Response
+     * @return Response
+     * @throws \OneLogin\Saml2\ValidationError
      */
-    protected function buildLoginResponse(AcsToken $token, $authService)
+    protected function buildLoginResponse(AcsToken $token, $authService): Response
     {
         return (new ResponseBuilder($authService))->buildLoginResponse($token->getCredentials());
     }

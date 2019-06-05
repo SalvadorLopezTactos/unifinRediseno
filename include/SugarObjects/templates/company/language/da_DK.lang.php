@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Skub fakturering',
 	'LBL_PUSH_SHIPPING' => 'Skub forsendelse',
 	'LBL_SAVE_ACCOUNT' => 'Gem virksomhed',
+    'LBL_SERVICE_LEVEL' => 'Serviceniveau',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Leveringsadresse, By:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Leveringsadresse, Land:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Leveringsadresse, Postnummer:',

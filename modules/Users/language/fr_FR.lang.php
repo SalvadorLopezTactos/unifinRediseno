@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Assigner à une équipe',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Les équipes définies ici seront associées par défaut sur tous les enregistrement créés.',
 	'LBL_DEFAULT_TEAM'					=> 'Équipes par défaut',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Équipe principale',
 	'LBL_LIST_DESCRIPTION'				=> 'Description',
 	'LBL_MY_TEAMS'						=> 'Mes Équipes',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Équipe privée de',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresse email du destinataire',
 	'ERR_SERVER_STATUS'					=> 'Statut de votre serveur',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Le système n&#39;est pas configuré pour envoyer des emails aux utilisateurs. Veuillez valider votre configuration dans la section "Configuration Email" du paneau administration. <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'L&#39;utilisateur ne peut être créé que dans la <a href="{0}" target="_blank">console de nuage</a> pour le mode IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'L&#39;adresse email principale ne peut être mise à jour que dans la <a href="{0}" target="_blank">console de nuage</a> pour le mode IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresse Email',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirmation du mot de passe',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Vous avez changé le type d&#39;utilisateur de Administrateur vers Normal. Après la sauvegarde de cette modification, cet utilisateur n&#39;aura plus les droits pour administrer votre application.\\n\\nCliquez sur "OK" pour valider.\\nCliquer sur "Annuler" pour revenir en arrière.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Vous avez changé le type d&#39;utilisateur de Administrateur vers Normal. Après la sauvegarde de cette modification, cet utilisateur n&#39;aura plus les droits pour administrer votre application.\n\nCliquez sur "OK" pour valider.\nCliquer sur "Annuler" pour revenir en arrière.',
 	'LBL_COUNTRY'						=> 'Pays',
 	'LBL_CURRENCY_TEXT'					=> 'Sélectionnez la devise qui sera affichée par défaut lorsque vous allez créer de nouveaux enregistrements. Cette devise sera également utilisée pour afficher les montants des listes d&#39;Affaires.',
 	'LBL_CURRENCY'						=> 'Devise par défaut',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Nombre de décimales à afficher pour les chiffres dans l&#39;application, comme pour l&#39;affichage des devises ou des calculs dans les rapports.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Préférences de devises',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Convertir les montants dans la devise préférée de l&#39;utilisateur sur les vues liste et enregistrement',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Créer des lignes de revenu dans la devise par défaut',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Les lignes de revenu ajoutées à une affaire du catalogue de produits seront converties dans la devise par défaut de l&#39;utilisateur si elle diffère de la devise utilisée dans l&#39;élément du catalogue de produits.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Séparateur des milliers',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Séparateur des milliers',
 	'LBL_DECIMAL_SEP'					=> 'Symbole décimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Fournir à la fois un Nom d&#39;utilisateur et une adresse Email.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Le rappel de mot de passe n&#39;est pas activé. Veuillez contacter l&#39;administrateur de votre application.',
 	'LBL_PUBLISH_KEY'					=> 'Clé de Publication',
-
+    'LBL_SITE_USER_ID' => 'Hash du site_url et de l&#39;user_id',
     'LBL_QUOTAS'                        => 'Objectifs',
     'LBL_FORECASTS'                     => 'Prévisions',
     'LBL_WORKSHEETS'                    => 'Feuilles de travail',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil utilisateur',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Si certains champs ne sont pas modifiables, veuillez vous connecter à votre console de nuage pour gérer ces champs',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Si vous souhaitez modifier certains champs qui ne sont pas modifiables ' .
-        'veuillez contacter l&#39;administrateur pour le notifier de ces modifications',
+        'Veuillez contacter votre administrateur Sugar si vous souhaitez modifier les champs en lecture seule.',
 ); // END STRINGS DEFS
-
-?>

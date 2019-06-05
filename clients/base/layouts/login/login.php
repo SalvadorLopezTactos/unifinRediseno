@@ -16,5 +16,11 @@ $viewdefs['base']['layout']['login'] = array(
         array(
             'view' => 'login',
         ),
+        array(
+            'view' => array(
+                'name' => 'marketing-extras',
+                'css_class' => 'marketing-extras',
+            ),
+        ),
     ),
 );

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: SugarFavoritesDashlet.en_us.lang.php,v 1.1 2006/10/11 00:53:31 clint Exp $
 
 
 $dashletStrings['SugarFavoritesDashlet'] = array(

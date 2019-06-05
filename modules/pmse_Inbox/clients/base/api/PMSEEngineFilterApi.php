@@ -125,6 +125,11 @@ class PMSEEngineFilterApi extends FilterApi
                 'use_cache' => false,           // TODO: remove this flag once the BeanFactory cache issue is fixed
             );
             $assignedBean = BeanFactory::getBean($value['cas_sugar_module'], $value['cas_sugar_object_id'], $params);
+
+            if (is_null($assignedBean)) {
+                continue;
+            }
+
             $result['records'][$key] = PMSEEngineUtils::appendNameFields($assignedBean, $value);
         }
         return $result;
@@ -573,6 +578,10 @@ class PMSEEngineFilterApi extends FilterApi
             // id to determine if the bean has been deleted or not. This bean
             // will also be used later to get the assigned user of the record.
             $assignedBean = BeanFactory::getBean($bean->fetched_row['cas_sugar_module'], $bean->fetched_row['cas_sugar_object_id']);
+
+            if (is_null($assignedBean)) {
+                continue;
+            }
 
             $arr_aux = array();
             $arr_aux['cas_id'] = (isset($bean->fetched_row['cas_id']))? $bean->fetched_row['cas_id']:$bean->fetched_row['pmse_bpm_flow__cas_id'];

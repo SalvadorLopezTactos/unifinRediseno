@@ -16,7 +16,6 @@ $dictionary['custom_fields'] = array(
         'bean_id' => array(
             'name' => 'bean_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'set_num' => array(
             'name' => 'set_num',

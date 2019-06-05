@@ -38,7 +38,7 @@ $mod_strings = array (
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Uppdatera KBContent-artiklar.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicera godkända artiklar och inaktuella kunskapsbas-artiklar.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Schemalagt jobb för avancerat arbetsflöde',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Schemalagt jobb',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Återskapa denormaliserad gruppsäkerhetsdata',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Aktivera sändning av email-påminnelser',
 'LBL_CLEANJOBQUEUE' => 'Rensa Upp Job Köer',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup gamla postlistor',
-'LBL_PMSEENGINECRON' => 'Schemaläggare för avancerat arbetsflöde',
+'LBL_PMSEENGINECRON' => 'SugarBPM-schemaläggare',
 );
 

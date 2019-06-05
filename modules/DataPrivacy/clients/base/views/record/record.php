@@ -138,6 +138,7 @@ $viewdefs['DataPrivacy']['base']['view']['record'] = array(
                 ),
                 'type',
                 'priority',
+                'follow_up_datetime',
                 array(
                     'name' => 'source',
                     'nl2br' => true,

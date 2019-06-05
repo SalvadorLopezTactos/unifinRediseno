@@ -54,12 +54,18 @@ class TagsHandler extends AbstractHandler implements
      */
     protected function retrieveTagIds(\SugarBean $bean)
     {
+        if (isset($bean->fetchedFtsData['tags'])) {
+            // already retrieved tags
+            return $bean->fetchedFtsData['tags'];
+        }
+
         // setup seed bean once
         if (empty($this->tagSeed)) {
             $this->tagSeed = \BeanFactory::newBean("Tags");
         }
 
         return $this->tagSeed->getTagIdsByBean($bean);
+
     }
 
     /**

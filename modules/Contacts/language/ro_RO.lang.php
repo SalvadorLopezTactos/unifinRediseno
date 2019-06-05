@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiaza adresa alternativa la adresa principala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiaza adresa principala la adresa alternativa',
     'NTC_DELETE_CONFIRMATION' => 'Sunteti sigur ca doriti sa stergeti aceasta inregistrare?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
     'NTC_REMOVE_CONFIRMATION' => 'Sunteţi sigur că doriţi să inlaturati acest contact din caz?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Sunteţi sigur că doriţi să inlaturati aceasta inregistrare ca un raport direct?',
 

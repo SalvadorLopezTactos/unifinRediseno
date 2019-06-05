@@ -226,6 +226,21 @@
                 };
                 break;
 
+            case 'horizontal grouped bar chart':
+                chartConfig = {
+                    orientation: 'horizontal',
+                    barType: 'grouped',
+                    chartType: 'barChart'
+                };
+                break;
+            case 'vertical grouped bar chart':
+                chartConfig = {
+                    orientation: 'vertical',
+                    barType: 'grouped',
+                    chartType: 'barChart'
+                };
+                break;
+
             case 'horizontal bar chart':
             case 'horizontal':
                 chartConfig = {

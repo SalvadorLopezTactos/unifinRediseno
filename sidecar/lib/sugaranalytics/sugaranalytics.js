@@ -149,10 +149,12 @@
 
         init: function() {
             if (!app.config.analytics || !app.config.analytics.enabled ||
-                !app.config.analytics.connector || !app.analytics.connectors[app.config.analytics.connector]
+                !app.config.analytics.connector || app.config.analytics.connector === 'GoogleAnalytics' ||
+                !app.analytics.connectors[app.config.analytics.connector]
             ) {
                 this.trackPageView = function() {};
                 this.trackEvent = function() {};
+                this.track = function() {};
                 return;
             }
 
@@ -183,14 +185,7 @@
                 app.analytics.connector.start(id, app.config.analytics);
 
             }).on('app:sync:complete', function() {
-
-                var serverInfo = app.metadata.getServerInfo();
-
-                app.analytics.connector.set('appName',
-                    'SugarCRM:' + app.config.platform + ':' + (serverInfo.flavor || '').toLowerCase()
-                );
-                app.analytics.connector.set('appVersion', serverInfo.version + ':' + serverInfo.build);
-
+                app.analytics.configure();
             }).on('app:locale:change', function() {
 
                 app.analytics.connector.set('language', app.user.getLanguage());
@@ -198,6 +193,51 @@
                 app.analytics.currentViewId = layout + (params.module ? '/' + params.module : '');
                 app.analytics.trackPageView(app.analytics.currentViewId);
             });
+        },
+
+        /*
+         * Send user and account data.
+         *
+         * @member SUGAR.App.analytics
+         */
+        configure: function() {
+            if (_.isFunction(app.analytics.connector.configure)) {
+                app.analytics.connector.configure();
+                return;
+            }
+            // old connector
+            var serverInfo = app.metadata.getServerInfo();
+
+            app.analytics.connector.set('appName',
+                'SugarCRM:' + app.config.platform + ':' + (serverInfo.flavor || '').toLowerCase()
+            );
+            app.analytics.connector.set('appVersion', serverInfo.version + ':' + serverInfo.build);
+        },
+
+        /*
+         * Track an activity.
+         *
+         * @param {string} trackType Activity type.
+         * @param {Object} trackData Activity metadata.
+         * @member SUGAR.App.analytics
+         */
+        track: function(trackType, trackData) {
+            trackType = trackType || '';
+            trackData = trackData || {};
+            if (_.isFunction(app.analytics.connector.track)) {
+                app.analytics.connector.track(trackType, trackData);
+                return;
+            }
+            // old connector
+            if (trackType === 'pageview' && !_.isEmpty(trackData.page)) {
+                app.analytics.trackPageView(trackData.page);
+            } else if (trackType === 'event') {
+                var category = _.isEmpty(trackData.category) ? '' : trackData.category;
+                var action = _.isEmpty(trackData.action) ? '' : trackData.action;
+                var event = _.isEmpty(trackData.event) ? null : trackData.event;
+                var value = _.isEmpty(trackData.value) ? '' : trackData.value;
+                app.analytics.trackEvent(category, action, event, value);
+            }
         },
 
         /**

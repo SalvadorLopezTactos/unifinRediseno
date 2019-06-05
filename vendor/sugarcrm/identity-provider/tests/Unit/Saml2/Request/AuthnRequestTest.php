@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2\Request;
 
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\Request\AuthnRequest;
 use Sugarcrm\IdentityProvider\CSPRNG\GeneratorInterface;
 
@@ -28,7 +29,7 @@ class AuthnRequestTest extends \PHPUnit_Framework_TestCase
     protected $requestId = 'someRequestId';
 
     /**
-     * @var \OneLogin_Saml2_Settings|\PHPUnit_Framework_MockObject_MockObject
+     * @var Settings|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $settings = null;
 
@@ -152,7 +153,7 @@ class AuthnRequestTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->settings = $this->createMock(\OneLogin_Saml2_Settings::class);
+        $this->settings = $this->createMock(Settings::class);
         $this->settings->method('getSPData')
             ->willReturn(
                 [

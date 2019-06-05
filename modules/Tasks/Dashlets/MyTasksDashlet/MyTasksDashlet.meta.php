@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyTasksDashlet.meta.php 29440 2007-11-09 20:04:52Z awu $
 
 global $app_strings;
 

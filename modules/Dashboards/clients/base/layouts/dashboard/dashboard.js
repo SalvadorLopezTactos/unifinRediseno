@@ -318,11 +318,7 @@
      * 1. The last viewed dashboard
      * 2. The last modified default dashboard
      * 3. The last modified favorite dashboard
-     * 4. Create a new dashboard from metadata
-     * 5. Render dashboard-empty template
-     *
-     *  Generating dashboards from metadata is deprecated and will be removed
-     *  in an upcoming version. Please create the appropriate default dashboards.
+     * 4. Render dashboard-empty template
      */
     setDefaultDashboard: function() {
         if (this.disposed) {
@@ -378,49 +374,7 @@
             // There are no favorite or default dashboards, so the collection
             // is empty.
         } else {
-            var _initDashboard = this._getInitialDashboardMetadata();
-
-            // If there is no initial dashboard, render the empty template and bail
-            if (!_initDashboard || _.isEmpty(_initDashboard.metadata)) {
-                this._renderEmptyTemplate();
-                return;
-            }
-
-            app.logger.warn('Generating dashboards from metadata is deprecated and ' +
-                'will be removed in an upcoming version. Please create the appropriate default dashboards.');
-
-            // Since we have an initial dashboard,
-            // Drill-down to the dashlet level to check permissions for that module.
-            _.each(_initDashboard.metadata.components, function(component, componentKey) {
-                _.each(component.rows, function(row, rowKey) {
-                    // Loop the cells checking access, rebuilding the cell array to only contain permitted dashlets.
-                    _initDashboard.metadata.components[componentKey].rows[rowKey] =
-                        _.filter(row, function(cell) {
-                            var module = (cell.context && cell.context.module) ? cell.context.module : this.module;
-                            return (app.acl.hasAccess('access', module));
-                        });
-                }, this);
-
-                // Now that we've processed all the rows in this component,
-                // rebuild the array to only have rows with dashlets.
-                _initDashboard.metadata.components[componentKey].rows =
-                    _.filter(_initDashboard.metadata.components[componentKey].rows, function(row) {
-                        return (row.length > 0);
-                    });
-            }, this);
-
-            model = this._getNewDashboardObject('model', this.context);
-            model.set(_initDashboard);
-            if (this.context.get('modelId')) {
-                model.set('id', this.context.get('modelId'), {silent: true});
-            }
-
-            if (!_.isUndefined(model.get('metadata'))) {
-                var attributes = this._getDashboardModelAttributes();
-                attributes.my_favorite = true;
-                model.save(attributes, this._getDashboardModelSaveParams());
-                this.collection.add(model);
-            }
+            this._renderEmptyTemplate();
         }
     },
 

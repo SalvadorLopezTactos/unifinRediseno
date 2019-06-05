@@ -17,13 +17,17 @@
 
 <div class="search-filter">
     <div class="control-group">
-        <div class="filter controls controls-two btn-group-fit">
-            <div class="filter-view search" style="padding-top: 3px">
-                <div>
+        <div class="filter controls btn-group-fit">
+            <div class="filter-view search">
+                <span class="table-cell">
                     <input type="hidden" class="select2 search-filter" data-placeholder="{{str "LBL_MODULE"}}">
-                    <div class="choice-filter"></div>
+                    <div class="choice-filter choice-filter-clickable" style="cursor: pointer;">
+                        <span class="choice-filter-label"></span>
+                    </div>
+                </span>
+                <span class="table-cell full-width">
                     <input type="text" size=" " class="search-name" placeholder="{{str "LBL_BASIC_SEARCH"}}&hellip;">
-                </div>
+                </span>
             </div>
         </div>
     </div>

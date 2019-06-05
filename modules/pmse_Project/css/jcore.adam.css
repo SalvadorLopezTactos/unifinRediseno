@@ -144,6 +144,26 @@
   background-position: -565px -510px;
 }
 
+.element-zoom-150-marker {
+  font-size: 30px;
+}
+
+.element-zoom-125-marker {
+  font-size: 25px;
+}
+
+.element-zoom-100-marker {
+  font-size: 20px;
+}
+
+.element-zoom-75-marker {
+  font-size: 15px;
+}
+
+.element-zoom-50-marker {
+  font-size: 10px;
+}
+
 .adam-shape-100-event-start {
   background-position: -3px -3px;
 }
@@ -1316,6 +1336,10 @@ div.line {
   -ms-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.adam-warning-color {
+  color: #ffcc00;
 }
 
 .adam-error-color {

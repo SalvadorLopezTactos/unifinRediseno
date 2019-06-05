@@ -57,11 +57,21 @@
     /**
      * @inheritdoc
      */
+    bindDataChange: function() {
+        this._super('bindDataChange');
+
+        this.on('config:panel:hide', this.onConfigPanelHide, this);
+        this.on('config:panel:show', this.onConfigPanelShow, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
     _render: function() {
         this._super('_render');
 
         // add accordion-group class to wrapper $el div
-        this.$el.addClass('accordion-group');
+        this.$el.addClass(this.name + '-group accordion-group');
 
         // update the title every render
         this.updateTitle();
@@ -100,5 +110,17 @@
             selectedValues: this.titleSelectedValues,
             viewName: this.name
         };
+    },
+
+    /**
+     * Handles when the config panel is hidden
+     */
+    onConfigPanelHide: function() {
+    },
+
+    /**
+     * Handles when the config panel is shown
+     */
+    onConfigPanelShow: function() {
     }
 })

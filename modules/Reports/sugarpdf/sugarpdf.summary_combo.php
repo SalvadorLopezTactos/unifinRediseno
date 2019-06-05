@@ -30,7 +30,12 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
 
             $sugarChart = SugarChartFactory::getInstance();
 
-            if ($sugarChart->supports_image_export) {
+            $shouldIncludeImage = true;
+            // scheduleReportWithImage should not be set to true until chart gen service is in place
+            if ($this->bean->isScheduledReport && empty(SugarConfig::getInstance()->get('schedule_report_with_chart'))) {
+                $shouldIncludeImage = false;
+            }
+            if ($sugarChart->supports_image_export && $shouldIncludeImage) {
                 $imageFile = $sugarChart->get_image_cache_file_name($xmlFile, ".".$sugarChart->image_export_type);
                 // check image size is not '0'
                 if (file_exists($imageFile) && getimagesize($imageFile) > 0) {

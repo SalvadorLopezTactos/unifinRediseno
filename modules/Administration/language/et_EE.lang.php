@@ -375,7 +375,7 @@ Viimane ühenduse loomise katse ',
 	'LBL_LDAP_GROUP_ATTR'=>'Grupi atribuut:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Kaustaja DN-iga:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Kasutaja DN-i kaasamine kasutaja atribuudiga grupi liikmelisuse kontrollimisel',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Mis tahes kasutajate autentimisel rakendatavad täiendavad filtriparameetrid, nt \\nis_sugar_user=1 või (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Mis tahes kasutajate autentimisel rakendatavad täiendavad filtriparameetrid, nt \nis_sugar_user=1 või (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Logimisatribuut:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Sidumisatribuut:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAP kasutaja sidumiseks<br>Näited:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
@@ -938,12 +938,21 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
     'WARN_INSTALLER_LOCKED'=>'<b>Hoiatus:</b> teie andmete kaitsmiseks peab installer olema lukustatud, seades failis config.php suvandi installer_locked väärtusele true.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Märkus:</b> teie litsents aegub ",
     'WARN_LICENSE_EXPIRED2' =>" päeva pärast. Minge ekraanil Admin ossa <a href='index.php?action=LicenseSettings&module=Administration'>'Litsentsihaldus</a>.",
-    'WARN_LICENSE_SEATS'=>  "<b>Hoiatus:</b> kasutaja litsentsid on ületatud ",
-    'WARN_LICENSE_SEATS2' => ". Võtke ühendust oma müügiesindajaga või saatke meil aadressile <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Hoiatus:</b> On ",
+    'WARN_LICENSE_SEATS2' => " aktiivset kasutajat, kui teie tellimus lubab ainult ",
+    'WARN_LICENSE_SEATS3' =>
+        "<p class=\"error\">Palun deaktiveerige mõned kasutajad, võtke ühendust oma partneri või müügiesindajaga,"
+        . " või saatke meil aadressile <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Lisainfo saamiseks vaadake "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Kasutajatüüpide ja Sugari litsentside mõistmise </a>artikkel.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Hoiatus:</b> aktiivsete kasutajate arv ületab maksimaalse lubatud litsentside arvu: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Hoiatus:</b> aktiivsete kasutajate arv ületab maksimaalse lubatud litsentside arvu",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Hoiatus:</b> teie litsentsiga lubatud aktiivsete kasutajate arv ühtib süsteemi aktiivsete kasutajate arvuga. Te ei saa täiendavaid aktiivseid kasutajaid luua.",
-    'WARN_REPAIR_CONFIG' => '<b>Hoiatus:</b> faili config.php tuleb parandada. Kasutage skripti <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Taasta konfiguratsioonifail</a> ala Admin lehel Parandus.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Hoiatus:</b> Te ei saa luua täiendavaid aktiivseid kasutajaid."
+        . " Palun ostke rohkem tellimusi.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Hoiatus:</b> Te ei saa luua täiendavaid aktiivseid kasutajaid."
+        . " Palun ostke rohkem tellimusi.",
+    'WARN_REPAIR_CONFIG' => '<b>Hoiatus:</b> config.php fail vajab parandamist.  Kasutage konfiguratsioonifaili skripti parandamiseks skripti <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Taasta konfiguratsioonifail</a>, mille leiate parandamislehe administreerimisalalt.',
     'WARN_UPGRADE_APP'=> "Rakenduse värskendatud versioon on nüüd saadaval. ",
     'WARN_UPGRADE' => '<b>Hoiatus:</b> palun täiendage ',
     'WARN_UPGRADENOTE' => 'Märkus:',
@@ -1252,15 +1261,17 @@ Pärast seda toimingut ei tööta platvormiga seotud üksused.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metaandmete faili ei leitud.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Sätted',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Logi vaatur',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Avage ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' logi.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Protsessi haldus',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Süsteemi kõigi avatud ja jooksvate protsesside vaatamine.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigureerige ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' sätteid ja vaadake logisid. Kõigi kasutajate kõiki BPM-i protsesse saate hallata protsessihalduse kaudu.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Pakkumiste konfiguratsioon',
+    'LBL_MANAGE_QUOTES' => 'Konfigureerige pakkumiste töölehe paigutust',
 );

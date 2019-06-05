@@ -61,6 +61,7 @@ class UsersViewAuthenticate extends SidecarView
 
         try {
             $this->authorization = $oapi->token($service, $args);
+            $this->authorization['external_login'] = AuthenticationController::getInstance()->isExternal();
         } catch (Exception $e) {
             $GLOBALS['log']->error("Login exception: " . $e->getMessage());
 

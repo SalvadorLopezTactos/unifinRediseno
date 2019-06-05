@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Vartotojo vardas arba slaptažodis neteisingas',
-	'ERR_BODY_TOO_LONG'		=> '\\rTurinio tekstas per didelis, kad nuskaityti laišką. Sutrumpinama.',
+	'ERR_BODY_TOO_LONG'		=> '\rTurinio tekstas per didelis, kad nuskaityti laišką. Sutrumpinama.',
 	'ERR_INI_ZLIB'			=> 'Nepavyko trumpam išjungti Zlib kompresijos.  "Bandyti nustatymai" gali nepavykti.',
 	'ERR_MAILBOX_FAIL'		=> 'Nepavyko ištraukti jokių pašto dėžučių.',
 	'ERR_NO_IMAP'			=> 'Nerastos IMAP bibliotekos. Prašome išspręsti tai, prieš pradedant dirbti su įeinančiu paštu',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Platinti eiles nuo komandų',
 	'LBL_GROUPFOLDER_ID'	=> 'Grupės aplanko Id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Priskirti grupės aplankui',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Leisti vartotojams siunčiant naudoti šį siuntėjo vardą ir adresą, kaip atsakymo adresą',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Kai pasirinkta ši nuostata, Siuntėjo vardas ir Siuntėjo adresas matysis vartotojams kuriant laiškus (Tik tiems vartotojams, kurie turi priėjimą prie grupinės pašto dėžutės).',
     'LBL_STATUS_ACTIVE'     => 'Aktyvus',
     'LBL_STATUS_INACTIVE'   => 'Neaktyvus',
     'LBL_IS_PERSONAL' => 'asmeninis',

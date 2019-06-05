@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: RSSDashlet.en_us.lang.php,v 1.1 2006/10/11 00:53:31 clint Exp $
 
 
 $dashletStrings['RSSDashlet'] = array('LBL_TITLE'            => '新闻订阅',

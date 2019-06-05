@@ -323,7 +323,7 @@
                     if (!_.isUndefined(team.selected) && !this.isTBAEnabled) {
                         team.selected = false;
                     }
-                });
+                }, this);
                 this.model.setDefault(this.name, value);
             }
         }

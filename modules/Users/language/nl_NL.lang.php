@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Wijs toe aan team',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Default team for new records',
 	'LBL_DEFAULT_TEAM'					=> 'Default team',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Standaard Primaire Team',
 	'LBL_LIST_DESCRIPTION'				=> 'Beschrijving',
 	'LBL_MY_TEAMS'						=> 'Mijn Teams',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Persoonlijk team voor',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mailadres van de ontvanger',
 	'ERR_SERVER_STATUS'					=> 'Uw Server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Het systeem kan geen e-mail versturen naar de gebruiker. Controleer de uitgaande e-mail instellingen in <a href="index.php?module=EmailMan&action=config">e-mailinstellingen</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'De gebruiker kan alleen worden aangemaakt in in <a href="{0}" target="_blank">Cloud console</a> voor de IDM-mode.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Het primaire e-mailadres kan alleen worden bijgewerkt in <a href="{0}" target="_blank">Cloud console</a> voor IDM-modus.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailadres:',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Bevestig wachtwoord',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'U heeft het gebruikerstype gewijzigd van systeem administrator naar normale gebruiker. Als u deze wijziging opslaat, zal de gebruiker niet langer administrator rechten hebben. \\n\\nKlik op OK om door te gaan.\\nKlik op annuleren om terug te gaan.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'U heeft het gebruikerstype gewijzigd van systeem administrator naar normale gebruiker. Als u deze wijziging opslaat, zal de gebruiker niet langer administrator rechten hebben. \n\nKlik op OK om door te gaan.\nKlik op annuleren om terug te gaan.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Kies de standaard valuta',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Aantal decimaalplaatsen die worden weergegeven voor decimalen en zweven in het systeem, zoals de valuta en het gemiddelde in rapporten.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Toon voorkeursvaluta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Converteer de basisvaluta naar de voorkeursvaluta van de gebruiker in list en record views.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Omzetregelitems aanmaken in voorkeursvaluta',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Omzetregelitems toegevoegd aan een opportunity uit de productcatalogus worden geconverteerd naar de voorkeursvaluta van de gebruiker als deze afwijken van de valuta die is gebruikt in het productcatalogusitem.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000-tal scheidingsteken',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Karakter voor het scheiden van duizendtallen',
 	'LBL_DECIMAL_SEP'					=> 'Decimaal symbool',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Verstrek zowel een geldige gebruikersnaam als het bijbehorende e-mailadres.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Dit is op dit moment niet mogelijk. Neem contact op met uw administrator.',
 	'LBL_PUBLISH_KEY'					=> 'Publiceer key',
-
+    'LBL_SITE_USER_ID' => 'Hekje van site_url en user_id',
     'LBL_QUOTAS'                        => 'Quotas',
     'LBL_FORECASTS'                     => 'Forecasts',
     'LBL_WORKSHEETS'                    => 'Werkbladen',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Gebruikersprofiel',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Als bepaalde velden niet bewerkt kunnen worden, meldt u zich aan bij uw Cloud Console om deze velden te beheren',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Als u bepaalde velden wilt wijzigen die niet bewerkt kunnen worden, ' .
-        'neem dan contact op met het Beheer om deze wijzigingen door te voeren',
+        'Neem contact op met uw Sugar-beheerder als u veranderingen wilt doorvoeren in alleen-lezen velden.',
 ); // END STRINGS DEFS
-
-?>

@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Foram detectados erros durante a verificação de compatibilidade. Para que a sua instalação SugarCRM funcione corretamente, por favor tome as medidas adequadas para resolver os problemas listados abaixo e prima o botão para verificar novamente ou tente instalar de novo.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Permissão de Passagem por Referência do Tempo de Chamada está Ligada (deverá ser definida para Desligada em php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: o Calendarizador do Sugar irá ser executado com funcionalidades limitadas. O serviço de Arquivamento de E-mail não será executado.',
+	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: o Calendarizador Sugar será executado com funcionalidades limitadas. O serviço de Arquivo de E-mail não será executado.',
     'ERR_CHECKSYS_IMAP'					=> 'Não encontrado: InboundEmail e Campanhas (E-mail) requerem as bibliotecas IMAP. Nenhum deles será funcional.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC não pode ser ligado quando está a utilizar o MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Aviso:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para uma utilização optimizada do sapi IIS/FastCGI, defina fastcgi.logging como 0 no seu ficheiro php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versão de PHP Instalada Não Suportada: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de dados indisponível',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O Suporte da Base de Dados não foi encontrado. Certifique-se de que possui os controladores necessários para um dos seguintes Tipos de Base de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário anular o comentário da extensão no ficheiro php.ini ou recompilar com o ficheiro binário correto, conforme a sua versão de PHP. Consulte o Manual do PHP para obter mais informações sobre como ativar o Suporte da Base de Dados.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O Suporte da Base de Dados não foi encontrado. Certifique-se de que possui os controladores necessários para um dos seguintes Tipos de Base de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário anular o comentário da extensão no ficheiro php.ini ou recompilar com ficheiro binário correto, dependendo da sua versão de PHP. Consulte o Manual do PHP para obter mais informações sobre como ativar o Suporte da Base de Dados. Consulte o seu Manual do PHP para obter mais informações sobre como ativar o Suporte da Base de Dados.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funções associadas às XML Parser Libraries que são necessárias à aplicação Sugar não foram encontradas. Talvez seja necessário anular o comentário da extensão no ficheiro php.ini ou recompilar com ficheiro binário correto, dependendo da sua versão de PHP. Por favor consulte o Manual do PHP para mais informações.',
     'LBL_CHECKSYS_CSPRNG' => 'Gerador de números aleatórios',
     'ERR_CHECKSYS_MBSTRING'             => 'Funções associadas com a extensão Multibyte Strings PHP (mbstring) que são necessárias à aplicação Sugar não foram encontradas. <br/><br/>Geralmente, o módulo mbstring não está ativado por defeito no PHP e deve ser ativado com --enable-mbstring quando o binário PHP é construído. Por favor consulte o Manual do PHP para mais informações sobre como ativar o suporte mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'A definição session.save_path no seu ficheiro de configuração php (php.ini) não está definida ou está definida para uma pasta inexistente. Talvez seja necessário definir o save_path em php.ini ou verificar se a existe a definição save_path numa pasta.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'A definição session.save_path no seu ficheiro de configuração php (php.ini) está definida para uma pasta que não é editável. Por favor tome as medidas necessárias para tornar a pasta editável. <br>Dependendo do seu sistema operativo, pode ser necessário alterar as permissões executando o chmod 766 ou clicando com o botão direito no nome do ficheiro para aceder às propriedades e desmarcar a opção só de leitura.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'O ficheiro de configuração existe mas não é editável. Por favor tome as medidas necessárias para tornar o ficheiro editável. Dependendo do seu sistema operativo, pode ser necessário alterar as permissões executando o chmod 766 ou clicando com o botão direito no nome do ficheiro para aceder às propriedades e desmarcar a opção só de leitura.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Módulo IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Módulo MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Sem Limite)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Ilimitado)',
 	'LBL_CHECKSYS_MEM'					=> 'Limite de Memória PHP',
@@ -487,7 +485,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informação da nova conta',
         'description' => 'Este modelo é utilizado quando o Administrador de Sistema envia a nova palavra-passe para um utilizador.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Aqui está o nome de utilizador e a palavra-passe temporária da sua conta:</p><p>Nome de Utilizador : $contact_user_user_name </p><p>Palavra-passe: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de iniciar sessão com a palavra-passe indicada acima, poderá ser pedido para alterar a palavra-passe por uma à sua escolha.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aqui está o nome de utilizador e a palavra-passe temporária da sua conta:</p><p>Nome de Utilizador : $contact_user_user_name </p><p>Palavra-passe: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de iniciar sessão com a palavra-passe indicada acima, poderá ser pedido para alterar a palavra-passe por uma à sua escolha.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Aqui está o nome de utilizador e a palavra-passe temporária da sua conta:
@@ -502,7 +500,7 @@ Depois de iniciar sessão com a palavra-passe indicada acima, poderá ser necess
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Redefinir a palavra-passe da conta',
         'description' => "Este modelo é utilizado para enviar para o utilizador um link para clicar e indicar uma nova palavra-passe da conta do utilizador.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Recentemente pediu em $contact_user_pwd_last_changed a possibilidade de redefinir a palavra-passe da sua conta. </p><p>Clique no link abaixo para redefinir a sua palavra-passe:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Recentemente pediu em $contact_user_pwd_last_changed a possibilidade de redefinir a palavra-passe da sua conta. </p><p>Clique no link abaixo para redefinir a sua palavra-passe:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Recentemente pediu em $contact_user_pwd_last_changed a possibilidade de redefinir a palavra-passe da sua conta.

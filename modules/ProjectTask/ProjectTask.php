@@ -310,21 +310,21 @@ class ProjectTask extends SugarBean {
             $resource_id = $this->resource_id;
         }
         $db = DBManagerFactory::getInstance();
-        $query = "SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = '" . $resource_id . "'";
-        $result = $db->query($query, true, "Unable to retrieve project resource type");
-        $row = $db->fetchByAssoc($result);
-        if ($row != null) {
-            $resource_table = strtolower($row['resource_type']);
+        $resource_table = $db->getConnection()
+            ->executeQuery(
+                'SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = ?',
+                [$resource_id]
+            )->fetchColumn();
+        if (false !== $resource_table) {
             if (empty($resource_table)) {
                 return '&nbsp;';
             }
-            $resource = $db->concat($resource_table, array('first_name', 'last_name'));
-            $resource_name_qry = "SELECT " . $resource . " as resource_name " .
-                "FROM " . $resource_table . " " .
-                "WHERE id = '" . $resource_id . "'";
-            $result = $db->query($resource_name_qry, true, "Unable to retrieve project resource name");
-            $row = $db->fetchByAssoc($result);
-            return $row['resource_name'];
+            $resource = $db->concat(strtolower($resource_table), array('first_name', 'last_name'));
+            return $db->getConnection()
+                ->executeQuery(
+                    "SELECT {$resource} as resource_name FROM {$resource_table} WHERE id = ?",
+                    [$resource_id]
+                )->fetchColumn();
         } else {
             return '';
         }

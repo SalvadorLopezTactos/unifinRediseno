@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login ou Palavra-passe Incorrecta',
-	'ERR_BODY_TOO_LONG'		=> 'texto \\rBody muito longo para capturar e-mail COMPLETO. Ajustado.',
+	'ERR_BODY_TOO_LONG'		=> 'texto \rBody muito longo para capturar e-mail COMPLETO. Ajustado.',
 	'ERR_INI_ZLIB'			=> 'Não é possível desativar a compressão Zlib temporariamente. "Definições de Teste" podem falhar.',
 	'ERR_MAILBOX_FAIL'		=> 'Não foi possível recuperar nenhumas contas de e-mail.',
 	'ERR_NO_IMAP'			=> 'Nenhuma biblioteca IMAP encontrada. Por favor resolva isto antes de prosseguir com o E-mail Recebido',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Filas Seed das Equipas',
 	'LBL_GROUPFOLDER_ID'	=> 'Id de Pasta de Grupo',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Atribuído a Pasta de Grupo',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Permitir aos utilizadores enviar e-mails usando o `De` (nome e endereço) como o endereço para resposta',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Quando esta opção for selecionada, o nome e endereço de e-mail de origem associados a esta conta de correio do grupo vão aparecer como uma opção para o campo `De` quando se escreve e-mails para utilizadores que têm acesso à conta de correio do grupo.',
     'LBL_STATUS_ACTIVE'     => 'Ativo',
     'LBL_STATUS_INACTIVE'   => 'Inativo',
     'LBL_IS_PERSONAL' => 'pessoal',

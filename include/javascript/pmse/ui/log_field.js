@@ -131,19 +131,16 @@ LogField.prototype.createHTML = function () {
     if (this.script){
         logPicture = this.createHTMLElement('div');
         logPicture.className = this.picture;
-        logPicture.style.marginRight = "15px";
-        logPicture.innerHTML = 'AW';
-        detailDiv.appendChild(logPicture);
+        logPicture.innerHTML = 'PM';
     } else {
         logPicture = this.createHTMLElement('img');
-        logPicture.style.width = '32px';
-        logPicture.style.height = '32px';
         logPicture.style.cssFloat = "left";
-        logPicture.style.marginRight = "10px";
         logPicture.src = this.picture;
-        detailDiv.appendChild(logPicture);
     }
-
+    logPicture.style.width = '32px';
+    logPicture.style.height = '32px';
+    logPicture.style.marginRight = '10px';
+    detailDiv.appendChild(logPicture);
 
     newsItem = this.createHTMLElement('p');
 //    fieldLabel.className = 'adam-form-label';

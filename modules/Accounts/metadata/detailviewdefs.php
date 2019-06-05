@@ -74,6 +74,14 @@ $viewdefs['Accounts']['DetailView'] = array(
 
         array (
           array (
+            'name' => 'service_level',
+            'comment' => 'Service level for this company',
+            'label' => 'LBL_SERVICE_LEVEL',
+          ),
+        ),
+
+        array (
+          array (
             'name' => 'billing_address_street',
             'label' => 'LBL_BILLING_ADDRESS',
             'type' => 'address',

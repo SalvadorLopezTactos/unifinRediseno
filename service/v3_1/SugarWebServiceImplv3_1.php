@@ -178,7 +178,7 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
         global $current_user;
 
         $GLOBALS['log']->info('Begin: SugarWebServiceImpl->set_entry');
-        if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
             $GLOBALS['log']->debug('SoapHelperWebServices->set_entry - input data is ' . var_export($name_value_list, true));
         } // if
         $error = new SoapError();
@@ -310,7 +310,6 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
         $authController = AuthenticationController::getInstance();
 
         if (!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' &&
-            $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser" &&
             !$authController->authController instanceof IdMLDAPAuthenticate &&
             !$authController->authController instanceof OAuth2Authenticate) {
             $user_auth['password'] = md5($user_auth['password']);
@@ -350,16 +349,15 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        } elseif ((!empty($authController->authController->userAuthenticateClass)
-            && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
-            $authController->authController instanceof IdMLDAPAuthenticate)
-                 && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN' )) {
+        } elseif ($authController->authController instanceof IdMLDAPAuthenticate
+            && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN')
+        ) {
             $error->set_error('ldap_error');
             LogicHook::initialize();
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        } elseif (extension_loaded('mcrypt') && !$authController->authController instanceof OAuth2Authenticate) {
+        } elseif (!$authController->authController instanceof OAuth2Authenticate) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))
                 $success = true;

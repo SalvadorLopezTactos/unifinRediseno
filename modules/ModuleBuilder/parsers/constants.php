@@ -19,6 +19,8 @@ define('MB_LISTLAYOUTMETADATA', 'listLayoutMetaData');
 define('MB_LISTVIEW', 'listview');
 define('MB_SIDECARLISTVIEW', 'list');
 define('MB_SIDECARQUOTEDATAGROUPLIST', 'quote-data-group-list');
+define('MB_QUOTEDATAGRANDTOTALHEADER', 'quote-data-grand-totals-header');
+define('MB_QUOTEDATAGRANDTOTALFOOTER', 'quote-data-grand-totals-footer');
 define('MB_SIDECARPOPUPVIEW', 'selection-list');
 define('MB_SIDECARDUPECHECKVIEW', 'dupecheck-list');
 define('MB_SEARCHVIEW', 'searchview');

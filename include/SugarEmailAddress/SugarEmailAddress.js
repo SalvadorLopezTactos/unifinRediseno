@@ -530,11 +530,12 @@
         },
 
         showErrDismissUpdatePrimaryEmail: function() {
+            var label = parent.SUGAR.App.user.get('type') == 'admin' ?
+                'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' :
+                'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE';
             parent.SUGAR.App.alert.show('dismiss_delete_primary_email', {
-                level: 'error',
-                messages: SUGAR.language
-                    .get('Users', 'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE')
-                    .replace('{0}', this.idmMode.cloudConsoleUrl)
+                level: 'info',
+                messages: SUGAR.language.get('app_strings', label).replace('{0}', this.idmMode.cloudConsoleUrl)
             });
         },
 		

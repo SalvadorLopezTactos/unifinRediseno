@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Započni naplatu',
 	'LBL_PUSH_SHIPPING' => 'Započni dostavu',
 	'LBL_SAVE_ACCOUNT' => 'Spremi račun',
+    'LBL_SERVICE_LEVEL' => 'Razina usluge',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Grad za dostavu:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Zemlja za dostavu:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Poštanski broj za dostavu:',

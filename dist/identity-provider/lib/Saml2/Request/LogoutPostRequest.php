@@ -12,7 +12,9 @@
 
 namespace Sugarcrm\IdentityProvider\Saml2\Request;
 
-use OneLogin_Saml2_Settings;
+use OneLogin\Saml2\LogoutRequest;
+use OneLogin\Saml2\Settings;
+use OneLogin\Saml2\Utils;
 use Sugarcrm\IdentityProvider\Authentication\Exception\ConfigurationException;
 
 /**
@@ -21,13 +23,13 @@ use Sugarcrm\IdentityProvider\Authentication\Exception\ConfigurationException;
  * Class LogoutPostRequest
  * @package Sugarcrm\IdentityProvider\Saml2
  */
-class LogoutPostRequest extends \OneLogin_Saml2_LogoutRequest
+class LogoutPostRequest extends LogoutRequest
 {
     /**
      * @inheritdoc
      */
     public function __construct(
-        OneLogin_Saml2_Settings $settings,
+        Settings $settings,
         $request = null,
         $nameId = null,
         $sessionIndex = null
@@ -40,7 +42,7 @@ class LogoutPostRequest extends \OneLogin_Saml2_LogoutRequest
             if (empty($spData['privateKey']) || empty($spData['x509cert'])) {
                 throw new ConfigurationException('Private key and x509cert should be defined');
             }
-            $this->_logoutRequest = \OneLogin_Saml2_Utils::addSign(
+            $this->_logoutRequest = Utils::addSign(
                 $this->_logoutRequest,
                 $spData['privateKey'],
                 $spData['x509cert'],

@@ -986,7 +986,7 @@ abstract class UpgradeDriver
             } else {
                 switch ($token[0]) {
                     case T_WHITESPACE:
-                        continue;
+                        continue 2;
                     case T_EVAL:
                     case T_EXIT:
                         return $this->error("{$token[1]}() is not allowed");
@@ -1289,6 +1289,18 @@ abstract class UpgradeDriver
         }
 
         include('include/entryPoint.php');
+
+        $fromVersion = $this->getFromVersion();
+
+        // if the Redis backend is unavailable and ext-redis v3 is used, Sugar between 8.1 and 8.2
+        // still may want tp use it and fail due to one of the issues fixed in TR-19367 (8.2)
+        if (version_compare($fromVersion[0], '8.1.0') >= 0
+            && version_compare($fromVersion[0], '8.2.0') < 0
+        ) {
+            // we can safely disable the Redis backend since this upgrade is cloud-only
+            $GLOBALS['sugar_config']['external_cache_disabled_redis'] = true;
+        }
+
         $installing = false;
         $GLOBALS['current_language'] = $this->config['default_language'];
         if (empty($GLOBALS['current_language'])) {

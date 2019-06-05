@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'העתק כתובת משית לראשית',
     'NTC_COPY_PRIMARY_ADDRESS' => 'העתק כתובת משנית לראשית',
     'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\\n Please either create a new account or select an existing one.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\n Please either create a new account or select an existing one.',
     'NTC_REMOVE_CONFIRMATION' => 'Are you sure you want to remove this contact from the case?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'אתה בטוח שברצונך להסיר רשומה זו כדוח ישיר?',
 

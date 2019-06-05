@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: UpgradeHistory.php 45763 2009-04-01 19:16:18Z majed $
 
 
 // The history of upgrades on the system
@@ -97,26 +96,25 @@ class UpgradeHistory extends SugarBean
     /**
      * Check if this is an upgrade, if it is then return the latest version before this installation
      */
-    function determineIfUpgrade($id_name, $version){
-        $query = "SELECT id, version FROM " . $this->table_name . " WHERE id_name = '$id_name' ORDER BY date_entered DESC";
-        $result = $this->db->query($query);
-         if(empty($result)){
-            return null;
-         }else{
-            $temp_version = 0;
-            $id = '';
-            while($row = $this->db->fetchByAssoc($result))
-            {
-                if(!$this->is_right_version_greater(explode('.', $row['version']), explode('.', $temp_version))){
-                    $temp_version = $row['version'];
-                    $id = $row['id'];
-                }
-            }//end while
-            if($this->is_right_version_greater(explode('.', $temp_version), explode('.', $version), false))
-                return array('id' => $id, 'version' => $temp_version);
-            else
-                return null;
-         }
+    public function determineIfUpgrade($id_name, $version)
+    {
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                "SELECT id, version FROM {$this->table_name} WHERE id_name = ? ORDER BY date_entered DESC",
+                [$id_name]
+            );
+        $temp_version = 0;
+        $id = '';
+        foreach ($stmt as $row) {
+            if (!$this->is_right_version_greater(explode('.', $row['version']), explode('.', $temp_version))) {
+                $temp_version = $row['version'];
+                $id = $row['id'];
+            }
+        }
+        if ($this->is_right_version_greater(explode('.', $temp_version), explode('.', $version), false)) {
+            return array('id' => $id, 'version' => $temp_version);
+        }
+        return null;
     }
 
     function getAll()
@@ -133,6 +131,15 @@ class UpgradeHistory extends SugarBean
     {
         $query = "SELECT id FROM " . $this->table_name . " where md5sum = '$var_md5'";
         return( parent::build_related_list( $query, $this ) );
+    }
+    public function findInstalledVersion($idName)
+    {
+        $uhTable = $this->table_name;
+        $query = "SELECT * FROM {$uhTable} where id_name = ? AND status = 'installed'";
+        $stmt = $this->db->getConnection()->executeQuery($query, [$idName]);
+        $return = $stmt->fetch();
+
+        return $return;
     }
 
     function UninstallAvailable($patch_list, $patch_to_check)

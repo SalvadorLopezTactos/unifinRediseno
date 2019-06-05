@@ -13,7 +13,7 @@ Feature: User datetime preference
   And Mango has password expiration
   User can login - BR-5763
 
-  @br-5763 @regression
+  @br-5763 @regression @extended
   Scenario: Login user with custom datetime preference
     Given I am on "/"
     When As "sugarAdmin" I create Sugar user with the following properties:
@@ -33,21 +33,13 @@ Feature: User datetime preference
     Then I wait until the loading is completed
     And I wait for the page to be loaded
     Given I login as "userDateTime" with password "userDateTime"
-    Then I wait until the loading is completed
-    And I wait for the page to be loaded
-    And I wait until the loading is completed
-    And I wait for the page to be loaded
+    Then I wait for the element ".headerpane"
     And I should see "Home Dashboard"
-    And I wait until the loading is completed
-    And I wait for the page to be loaded
     And I logout
     And I wait until the loading is completed
     And I wait for the page to be loaded
     # now the second time to check the bug
     Given I login as "userDateTime" with password "userDateTime"
-    Then I wait until the loading is completed
-    And I wait for the page to be loaded
-    And I wait until the loading is completed
-    And I wait for the page to be loaded
+    Then I wait for the element ".headerpane"
     And I should see "Home Dashboard"
     And I logout

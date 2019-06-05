@@ -614,11 +614,7 @@
      * Parses through an array of panels metadata and sets some of them
      * as no edit fields.
      *
-     * FIXME: SC-3940, remove this call to _setNoEditFields when we merge
-     * master_platform into master, as this was fixed by SC-3908.
-     *
-     * @param {Array} [panels] The panels to parse. This default to
-     *   `this.meta.panels`.
+     * @param {Object[]} [panels=this.meta.panels] The panels to parse.
      * @private
      */
     _setNoEditFields: function(panels) {
@@ -636,8 +632,12 @@
                     field.readonly = true;
                 }
 
-                // disable the pencil icon if the user doesn't have ACLs
-                if (field.fields) {
+                /* Disable the pencil icon if the user doesn't have ACLs.
+                   Collection fields may have the "fields" property, but it corresponds to fields
+                   on models in the related collection, not the model itself. */
+                var isCollectionField = this.model.fields[field.name] &&
+                    (this.model.fields[field.name].type === 'collection');
+                if (field.fields && !isCollectionField) {
                     // Some fieldsets have fields that are only for viewing, like the
                     // `copy` field on alternate addresses. Those should be filtered
                     // out of the fields list.
@@ -1071,6 +1071,17 @@
             viewed: true
         };
 
+        // ensure view and field are sent as params so collection-type fields come back in the response to PUT requests
+        // (they're not sent unless specifically requested)
+        options.params = options.params || {};
+        if (this.context.has('dataView') && _.isString(this.context.get('dataView'))) {
+            options.params.view = this.context.get('dataView');
+        }
+
+        if (this.context.has('fields')) {
+            options.params.fields = this.context.get('fields').join(',');
+        }
+
         options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
@@ -1500,6 +1511,9 @@
      * Adjust headerpane such that certain fields can be shown with ellipsis
      */
     adjustHeaderpane: function() {
+        if (this.disposed) {
+            return;
+        }
         this.setContainerWidth();
         this.adjustHeaderpaneFields();
     },
@@ -1708,6 +1722,9 @@
      * Moves overflowing tabs into a dropdown
      */
     overflowTabs: function() {
+        if (this.disposed) {
+            return;
+        }
         var $tabs = this.$('#recordTab > .tab:not(.dropdown)'),
             $dropdownList = this.$('#recordTab .dropdown'),
             $dropdownTabs = this.$('#recordTab .dropdown-menu li'),

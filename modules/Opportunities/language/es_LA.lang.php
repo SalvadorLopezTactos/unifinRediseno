@@ -186,10 +186,10 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Después de que haya iniciado este cambio, los registros de Sub-Oportunidades serán creados para cada {{module_name}} existente. Cuando las Sub-Oportunidades estén completadas y disponibles, será enviada una notificación al correo electrónico de registrado en tu perfil. Por favor toma en cuenta que la instancia debe estar configurada a través de Admin > Ajustes Email para que la notificaciónes sean enviadas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite monitorizar las ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente progresará por las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más utilizando el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo para conseguir las cuotas de venta.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente avanza por las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más si se utiliza el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo para conseguir las cuotas de venta.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite monitorizar ventas individuales y elementos de línea que pertenecen a dichas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales y elementos de línea que pertenecen a dichas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 - Para editar los campos de este registro haga clic en un campo individual o en el botón Editar.
 - Vea o modifique los enlaces con otros registros en los subpaneles cambiando el panel izquierdo inferior a "Vista de datos".
@@ -198,11 +198,11 @@ $mod_strings = array(
 - Hay acciones adicionales en el menú desplegable de acciones a la derecha del botón de Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite monitorizar ventas individuales y las líneas relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes para la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales y elementos de las líneas relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes para la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
 1. Proporcione valores para los campos tal y como desee.
- - Los campos marcados como "Obligatorios" se deben completar antes de guardar.
+ - Los campos marcados como "Obligatorio" se deben completar antes de guardar.
  - Haga clic en "Mostrar más" para mostrar campos adicionales si fuera necesario.
 2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 

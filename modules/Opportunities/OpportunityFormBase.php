@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: OpportunityFormBase.php 53409 2010-01-04 03:31:15Z roger $
 
 class OpportunityFormBase{
 

@@ -109,7 +109,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
             );
             $currency->retrieve($this->bean->currency_id);
             $fields['currency_iso'] = $currency->iso4217;
-            
+
             // Adding Tax Rate Field
             $fields['taxrate_value'] = format_number_sugarpdf($this->bean->taxrate_value, $locale->getPrecision(), $locale->getPrecision(), array('percentage' => true));;
 
@@ -134,13 +134,15 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                         // Special case about discount amount
                         if ($product_bundle_line_item->discount_select) {
                             $bundleFields['products'][$count]['discount_amount'] = format_number($product_bundle_line_item->discount_amount, $locale->getPrecision(), $locale->getPrecision()) . '%';
-                    }
+                        }
+                        // ensure the discount_select field exists in the pdf data
+                        $bundleFields['products'][$count]['discount_select'] = $product_bundle_line_item->discount_select;
 
                         // Special case about ext price
-                        $bundleFields['products'][$count]['ext_price'] = format_number_sugarpdf($product_bundle_line_item->discount_price * $product_bundle_line_item->quantity, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);                                        
+                        $bundleFields['products'][$count]['ext_price'] = format_number_sugarpdf($product_bundle_line_item->discount_price * $product_bundle_line_item->quantity, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
                     }
-                    
-                    
+
+
                     $count++;
                 }
                 $bundles[] = $bundleFields;
@@ -171,7 +173,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
      * @return $email_id
      */
     private function buildEmail ($file_name, $focus) {
-        
+
         global $mod_strings;
         global $current_user;
 
@@ -302,7 +304,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         //Save the email object
         global $timedate;
         $email_object->date_start = $timedate->now();
-        
+
         $email_object->save(FALSE);
         $email_id = $email_object->id;
 
@@ -326,7 +328,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         // Copy the file before saving so that the file size is captured during save.
 	    $source = 'upload://'.$file_name;
         $destination = "upload://{$note->id}";
-        
+
         if (!copy($source, $destination)){
             $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', "Quotes"));
             die($msg);
@@ -340,7 +342,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         //return the email id
         return $email_id;
     }
-    
+
     /**
      * Build the template file for smarty to parse
      *
@@ -375,25 +377,24 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                     '$product',
                     $pdfTemplate->body_html
                 );
-                
+
                 $pdfTemplate->body_html = str_replace(
                     '<!--START_BUNDLE_LOOP-->',
                     '{foreach from=$product_bundles item="bundle"}',
                     $pdfTemplate->body_html
                 );
-                
+
                 $pdfTemplate->body_html = str_replace(
                     '<!--START_PRODUCT_LOOP-->',
                     '{foreach from=$bundle.products item="product"}',
                     $pdfTemplate->body_html
                 );
-                
+
                 $pdfTemplate->body_html = str_replace(
                     array("<!--END_PRODUCT_LOOP-->", "<!--END_BUNDLE_LOOP-->"),
                     '{/foreach}',
                     $pdfTemplate->body_html
                 );
-                
             }
 
             sugar_file_put_contents($tpl_filename, $pdfTemplate->body_html);
@@ -418,7 +419,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         // This case is for "email as PDF"
         if (isset($_REQUEST['to_email']) && $_REQUEST['to_email']=="1") {
             // After the output the object is destroy
-            
+
             $bean = $this->bean;
 
             $tmp = parent::Output('','S');
@@ -528,5 +529,59 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 $this->Cell(0, 0, $pagenumtxt, 'T', 0, 'R');
             }
         }
+    }
+
+    /**
+     * Gets the PDF Filename
+     * @return string
+     */
+    public function getPDFFilename()
+    {
+        return $this->pdfFilename;
+    }
+
+    /**
+     * Forces a download of the PDF in a way our API understands.
+     * @param string $filename The name of the file to force
+     * @return string
+     */
+    public function forceDownload($filename)
+    {
+        $this->sendForceDownloadHeaders($filename);
+        return parent::Output($filename, 'S');
+    }
+
+    /**
+     * Sends the necessary headers to force a download of a PDF file
+     *
+     * This is borrowed entirely from {@see TCPDF::Output}, in the 'D' case for
+     * forcing a download. It is done this way to allow the return of data rather
+     * than echoing data.
+     * @param string $filename The name of the file to force
+     * @return null
+     */
+    protected function sendForceDownloadHeaders($filename)
+    {
+        // Download PDF as file
+        if (ob_get_contents()) {
+            $this->Error('Some data has already been output, can\'t send PDF file');
+        }
+        header('Content-Description: File Transfer');
+        if (headers_sent()) {
+            $this->Error('Some data has already been output to browser, can\'t send PDF file');
+        }
+        header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
+        header('Pragma: public');
+        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+        // force download dialog
+        header('Content-Type: application/force-download');
+        header('Content-Type: application/octet-stream', false);
+        header('Content-Type: application/download', false);
+        header('Content-Type: application/pdf', false);
+        // use the Content-Disposition header to supply a recommended filename
+        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: '.$this->bufferlen);
     }
 }

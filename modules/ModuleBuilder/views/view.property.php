@@ -49,7 +49,7 @@ class ViewProperty extends SugarView
         $this->properties = array();
         foreach ($_REQUEST as $key=>$value) {
             if (substr($key,0,4) == 'name') {
-                $value = $this->request->getValidInputRequest($key, 'Assert\ComponentName');
+                $value = $this->request->getValidInputRequest($key);
                 $this->properties[substr($key,5)]['name'] = $value;
             }
             if (substr($key,0,2) == 'id') {

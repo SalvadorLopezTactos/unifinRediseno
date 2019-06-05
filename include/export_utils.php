@@ -38,7 +38,7 @@ function getDelimiter()
 /**
  * builds up a delimited string for export
  * @param string $type the bean-type to export
- * @param array $records an array of records if coming directly from a query
+ * @param string[] array of records IDs
  * @param boolean $members
  * @param boolean $sample return a sample of records for testing
  * @return string delimited string for export
@@ -55,32 +55,29 @@ function export($type, $records = null, $members = false, $sample = false)
     global $mod_strings;
     global $current_language;
     $sampleRecordNum = 5;
-    $fields_to_exclude = array();
 
     // Array of fields that should not be exported and are only used for logic
     $remove_from_members = array("ea_deleted", "ear_deleted", "primary_address");
-    $focus = 0;
 
     $focus = BeanFactory::newBean($type);
-    $searchFields = array();
     $db = DBManagerFactory::getInstance();
 
     if ($records) {
-        $records = explode(',', $records);
-        $records = "'" . implode("','", array_map(array($db,'quote'), $records)) . "'";
-        $where = "{$focus->table_name}.id in ($records)";
+        $where = sprintf(
+            "{$focus->table_name}.id IN (%s)",
+            implode(',', array_map([$db, 'quoted'], $records))
+        );
     } elseif (isset($_REQUEST['all'])) {
         $where = '';
     } else {
         $current_post = InputValidation::getService()->getValidInputRequest(
-            'current_post', 
+            'current_post',
             array('Assert\PhpSerialized' => array('base64Encoded' => true))
         );
 
         if(!empty($current_post)) {
             $ret_array = generateSearchWhere($type, $current_post);
             $where = $ret_array['where'];
-            $searchFields = $ret_array['searchFields'];
         } else {
             $where = '';
         }
@@ -117,7 +114,16 @@ function export($type, $records = null, $members = false, $sample = false)
     // and when the query is built, it has a "where" as well, so the query was ill-formed.
     // Eliminating the "where" here so that the query can be constructed correctly.
     if ($members == true) {
-           $query = $focus->create_export_members_query($records);
+        if (is_array($records)) {
+            assert(count($records) === 1);
+            $prospectListId = $records[0];
+        } else {
+            $prospectListId = $records;
+        }
+        /**
+         * @var ProspectList $focus
+         */
+        $query = $focus->create_export_members_query($prospectListId);
     } else {
         $beginWhere = substr(trim($where), 0, 5);
         if ($beginWhere == "where") {
@@ -192,16 +198,13 @@ function exportFromApi($args, $sample = false)
     $remove_from_members = array("ea_deleted", "ear_deleted", "primary_address");
 
     $focus = BeanFactory::newBean($type);
-    $searchFields = array();
     $db = DBManagerFactory::getInstance();
 
     if ($records) {
-        // we take an array, but we'll make an exception for one record.
-        if (!is_array($records)) {
-            $records = array($records);
-        }
-        $records = "'" . implode("','", $records) . "'";
-        $where = "{$focus->table_name}.id in ($records)";
+        $where = sprintf(
+            "{$focus->table_name}.id IN (%s)",
+            implode(',', array_map([$db, 'quoted'], is_array($records) ? $records : [$records]))
+        );
     } elseif (isset($args['all'])) {
         $where = '';
     } else {
@@ -238,7 +241,16 @@ function exportFromApi($args, $sample = false)
     // and when the query is built, it has a "where" as well, so the query was ill-formed.
     // Eliminating the "where" here so that the query can be constructed correctly.
     if ($members == true) {
-        $query = $focus->create_export_members_query($records);
+        if (is_array($records)) {
+            assert(count($records) === 1);
+            $prospectListId = $records[0];
+        } else {
+            $prospectListId = $records;
+        }
+        /**
+         * @var ProspectList $focus
+         */
+        $query = $focus->create_export_members_query($prospectListId);
     } else {
         $beginWhere = substr(trim($where), 0, 5);
         if ($beginWhere == "where") {

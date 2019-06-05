@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Forteaza facturare',
 	'LBL_PUSH_SHIPPING' => 'Forteaza Transportul',
 	'LBL_SAVE_ACCOUNT' => 'Salveaza Cont',
+    'LBL_SERVICE_LEVEL' => 'Nivel de servicii',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Oraş Transport:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Tara Transport:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Cod Postal Transport:',

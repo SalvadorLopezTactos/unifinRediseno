@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Sono stati rilevati degli errori durante il controllo di compatibilità. Per fare in modo che l´installazione di SugarCRM funzioni correttamente, si prega di prendere le misure adeguate per risolvere i problemi elencati sotto e premere il tasto "ricontrolla" o riprovare nuovamente l´installazione.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference è attiva "(questa dovrebbe essere impostata su Off in php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Non trovato: Sugar Scheduler verrà eseguito con funzionalità limitate. Il servizio di archiviazione e-mail non verrà eseguito.',
+	'ERR_CHECKSYS_CURL'					=> 'Non trovato: Schedulatore Sugar verrà eseguito con funzionalità limitate. Il servizio di archiviazione email non verrà eseguito.',
     'ERR_CHECKSYS_IMAP'					=> 'Non trovato: le email in arrivo e le campagne (Email) richiedono librerie IMAP. Nessuna delle due funzionerà.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC non può essere impostato su "On" quando si usa MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Attenzione:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Per una prestazione ottimale dell´utilizzo di IIS/FastCGI sapi, imposta fastcgi.logging a 0 nel file php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versione PHP Installata Non Supportata: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database non disponibile',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Supporto database non trovato.  Accertarsi di disporre dei driver necessari per uno dei seguenti tipi di database supportati: MySQL, MS SQLServer, Oracle o DB2.  Potrebbe essere necessario decommentare l\'estensione nel file php.ini o ricompilare con il file binario giusto, a seconda della versione di PHP. Per ulteriori informazioni su come abilitare il supporto di database, consultare il Manuale PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Supporto database non trovato. Verificare di disporre dei driver necessari per uno dei seguenti tipi di database supportati: MySQL, MS SQLServer, Oracle or DB2. Potrebbe essere necessario rimuovere il commento dall\'estensione del file php.ini oppure ricompilare con il file binario giusto, a seconda della versione di PHP. Per ulteriori informazioni su come abilitare il supporto database, consultare il Manuale PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Le funzioni associate a librerie XML Parser richieste dall´applicazione di Sugar non sono state trovate. Potrebbe essere necessario decommentare l´estensione nel file php.ini, o ricompilare con il file binario giusto, a seconda della versione di PHP. Per ulteriori informazioni si prega di consultare il Manuale PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generatore di numeri casuali',
     'ERR_CHECKSYS_MBSTRING'             => 'Le funzioni associate all´estensione di PHP Multibyte Strings (mbstring), richieste dall´applicazione di Sugar, non sono state trovate. <br /><br />Generalmente, il modulo mbstring non è abilitato di default in PHP e deve essere attivato con -- attiva-mbstring quando il PHP binario è costruito. Si prega di consultare il Manuale PHP per ulteriori informazioni su come abilitare il supporto mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'L´impostazione session.save_path nel file di configurazione php (php.ini) non è impostata o è impostata in una cartella che non esisteva. Potrebbe essere necessario configurare l´impostazione save_path in php.ini o verificare che le impostazioni di cartella in save_path esistono.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'L´impostazione session.save_path nel file di configurazione php (php.ini) è configurata in una cartella non scrivibile. Si prega di procedere con le fase necessarie per rendere la cartella scrivibile. <br />A seconda del sistema operativo, questo potrebbe richiedere di modificare i permessi eseguendo chmod 766, o di cliccare il tasto destro sul nome del file per accedere alle proprietà e togliere l´opzione di sola lettura.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Il file di configurazione esiste ma non è scrivibile. Si prega di procedere con le fase necessarie per rendere il file scrivibile. A seconda del sistema operativo, questo potrebbe richiedere di modificare i permessi eseguendo chmod 766, o di cliccare il tasto destro sul nome del file per accedere alle proprietà e togliere l´opzione di sola lettura.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Modulo IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Modulo Stringhe MB',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Nessun Limite)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Illimitato)',
 	'LBL_CHECKSYS_MEM'					=> 'Limite Memoria PHP',
@@ -434,7 +432,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Prima di procedere con l´installazione si prega di leggere le seguenti informazioni. Le informazioni vi aiuteranno a determinare se o non si è pronti per installare l´applicazione in questo momento.',
 
 
-	'LBL_WELCOME_2'						=> 'Per la documentazione di installazione, visitare <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Per contattare un tecnico dell\\\'assistenza SugarCRM e ottenere aiuto per l\\\'installazione, effettuare l\\\'accesso al <a target="_blank" href="http://support.sugarcrm.com">portale di assistenza SugarCRM</a> e inviare una richiesta.',
+	'LBL_WELCOME_2'						=> 'Per la documentazione di installazione, visitare <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Per contattare un tecnico dell&apos;assistenza SugarCRM e ottenere aiuto per l&apos;installazione, effettuare l&apos;accesso al <a target="_blank" href="http://support.sugarcrm.com">portale di assistenza SugarCRM</a> e inviare una richiesta.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> 'Scegli la lingua',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Installazione guidata',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Benvenuto in SugarCRM',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informazioni Nuovo account',
         'description' => 'Questo template viene utilizzato quando l´Amministratore di sistema  invia una nuova password all´utente.',
-        'body' => 'Queste sono la username e la password temporanea del tuo account:<br />Username : $contact_user_user_name<br /><br />Password : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Dopo esserti connesso con questa password, il sistema potrebbe richiederti di reimpostare la password con una di tua scelta.',
+        'body' => 'Queste sono la username e la password temporanea del tuo account:<br />Username : $contact_user_user_name<br /><br />Password : $contact_user_user_hash<br /><br /><a href="$config_site_url">$config_site_url</a><br /><br />Dopo esserti connesso con questa password, il sistema potrebbe richiederti di reimpostare la password con una di tua scelta.',
         'txt_body' =>
 'Queste sono la username e la password temporanea del tuo account:$contact_user_user_name Password : $contact_user_user_hash $config_site_url Dopo esserti connesso con questa password, il sistema potrebbe richiederti di reimpostare la password con una di tua scelta.',
         'name' => 'Email password generata dal sistema',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Reimposta la password del tuo account',
         'description' => "Questo template viene utilizzato per inviare all´utente il link da cliccare per reimpostare la password dell´account.",
-        'body' => 'Recentemente hai richiesto in $contact_user_pwd_last_changed di poter reimpostare la passsword del tuo account<br /><br />Clicca il link seguente per poter reimpostare la password:<br /><br />$contact_user_link_guid',
+        'body' => 'Recentemente hai richiesto in $contact_user_pwd_last_changed di poter reimpostare la passsword del tuo account<br /><br />Clicca il link seguente per poter reimpostare la password:<br /><br /><a href="$contact_user_link_guid">$contact_user_link_guid</a>',
         'txt_body' =>
 'Recentemente hai richiesto in $contact_user_pwd_last_changed di poter reimpostare la passsword del tuo account.Clicca il link seguente per poter reimpostare la password: $contact_user_link_guid',
         'name' => 'Email Password dimenticata',

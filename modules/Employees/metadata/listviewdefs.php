@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: listviewdefs.php 16292 2006-08-22 20:57:23 +0000 (Tue, 22 Aug 2006) awu $
 
 $listViewDefs['Employees'] = array(
     'NAME' => array(

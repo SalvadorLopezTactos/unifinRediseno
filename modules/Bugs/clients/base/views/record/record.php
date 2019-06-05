@@ -168,6 +168,7 @@ $viewdefs['Bugs']['base']['view']['record'] = array(
                 ),
                 'priority',
                 'status',
+                'follow_up_datetime',
                 'type',
                 'source',
                 'product_category',
@@ -176,6 +177,11 @@ $viewdefs['Bugs']['base']['view']['record'] = array(
                 array(
                     'name' => 'description',
                     'nl2br' => true,
+                    'span' => 12,
+                ),
+                array(
+                    'name' => 'commentlog',
+                    'label' => 'LBL_COMMENTLOG',
                     'span' => 12,
                 ),
                 array(

@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'نسخ العنوان البديل إلى العنوان الرئيسي',
     'NTC_COPY_PRIMARY_ADDRESS' => 'نسخ العنوان الرئيسي إلى العنوان البديل',
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
     'NTC_REMOVE_CONFIRMATION' => 'هل تريد بالتأكيد إزالة جهة الاتصال هذه من الحالة؟',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا السجل كتقرير مباشر؟',
 

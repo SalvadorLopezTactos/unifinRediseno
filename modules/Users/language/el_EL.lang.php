@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Ανάθεση σε Ομάδα',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Οι Ομάδες που είναι διαθέσιμες από προεπιλογή στις εγγραφές, είναι εκείνες των οποίων είστε μέλος.',
 	'LBL_DEFAULT_TEAM'					=> 'Ομάδες Προεπιλογής',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Βασική Ομάδα Προεπιλογής',
 	'LBL_LIST_DESCRIPTION'				=> 'Περιγραφή',
 	'LBL_MY_TEAMS'						=> 'Ομάδες Μου',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Ιδιωτική ομάδα για',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Διεύθυνση Email Παραλήπτη',
 	'ERR_SERVER_STATUS'					=> 'Η κατάσταση του διακομιστή σας',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Το σύστημα δεν είναι σε θέση να στείλει email στον χρήστη. Παρακαλώ ελέγξτε τη Διαμόρφωση του Εξερχόμενου Ταχυδρομείου στις <a href="index.php?module=EmailMan&amp;action=config">Ρυθμίσεις Email</a><div>',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Ο χρήστης μπορεί να δημιουργηθεί μόνο στο <a href="{0}" target="_blank">Κονσόλα cloud</a> για λειτουργία IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Η κύρια διεύθυνση ηλεκτρονικού ταχυδρομείου μπορεί να ενημερωθεί μόνο στο <a href="{0}" target="_blank"></a> Κονσόλα cloud για IDM λειτουργία.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Διεύθυνση Email',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Να δείξει τα μέρη των δεκαδικών ψηφίων για δεκαδικούς και να διαδοθεί μέσα από το σύστημα, όπως το νόμισμα και  ο μέσος όρος στις Αναφορές.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Εμφάνιση Νομίσματος Προτίμησης',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Μετατρέψετε το βασικό νόμισμα σε αυτό που προτιμά ο χρήστης στην λίστα προβολής των εγγραφών.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Δημιουργήστε γραμμή εσόδων στο επιλεγμένο νόμισμα',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Τα στοιχεία γραμμής εσόδων που προστέθηκαν σε μια ευκαιρία από τον κατάλογο προϊόντων θα μετατραπούν στο επιλεγμένο νόμισμα του χρήστη, αν αυτό διαφέρει από το νόμισμα που χρησιμοποιείται στο είδος του καταλόγου προϊόντων.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000 διαχωριστικό',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Χαρακτήρας που χρησιμοποιείται για το διαχωρισμό χιλιάδων',
 	'LBL_DECIMAL_SEP'					=> 'Υποδιαστολή',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Δώστε και τα δύο, Όνομα Χρήστη και Διεύθυνση Email.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Δεν είναι διαθέσιμο για την ώρα. Επικοινωνήστε με τον διαχειριστή σας.',
 	'LBL_PUBLISH_KEY'					=> 'Πλήκτρο Δημοσίευσης',
-
+    'LBL_SITE_USER_ID' => 'Hash των site_url και user_id',
     'LBL_QUOTAS'                        => 'Ποσοστώσεις',
     'LBL_FORECASTS'                     => 'Προβλέψεις',
     'LBL_WORKSHEETS'                    => 'Φύλλα εργασίας',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Προφίλ Χειριστή',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Εάν ορισμένα πεδία δεν είναι επεξεργάσιμα, παρακαλώ συνδεθείτε στην Κονσόλα cloud για τη διαχείριση αυτών των πεδίων',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Αν επιθυμείτε να αλλάξετε ορισμένα πεδία που δεν είναι επεξεργάσιμα, ' .
-        'παρακαλώ επικοινωνήστε με το διαχειριστή για να κοινοποιήσει αυτές τις αλλαγές',
+        'Επικοινωνήστε με το διαχειριστή Sugar αν θέλετε να κάνετε αλλαγές σε πεδία που είναι μόνο για ανάγνωση.',
 ); // END STRINGS DEFS
-
-?>

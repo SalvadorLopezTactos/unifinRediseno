@@ -58,6 +58,8 @@
     "include/javascript/tiny_mce/tiny_mce.js",
     "include/javascript/mousetrap/mousetrap.js",
     "include/javascript/sugar7/shortcuts.js",
+    "include/javascript/sugar7/clipboard.js",
+    "include/javascript/clipboardjs/clipboard.min.js",
 
     // jasmine and sinon core files
     "portal2/node_modules/sinon/pkg/sinon.js",

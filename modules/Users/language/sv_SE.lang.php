@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Tilldela till team',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Standardteam för nya poster',
 	'LBL_DEFAULT_TEAM'					=> 'Standard team',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Standard Primärt Team',
 	'LBL_LIST_DESCRIPTION'				=> 'Beskrivning',
 	'LBL_MY_TEAMS'						=> 'Mina team',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privat team för',
@@ -60,7 +59,7 @@ $mod_strings = array (
 	'ERR_PASSWORD_MISMATCH'				=> 'Lösenorden stämmer ej överens.',
 	'ERR_PASSWORD_USERNAME_MISSMATCH'   => 'Du måste ange ett giltigt användarnamn och mailadress.',
 	'ERR_PASSWORD_LINK_EXPIRED'         => 'Din länk är inte giltig längre, var god generera en ny',
-	'ERR_REENTER_PASSWORDS'				=> 'Vänligen skriv in lösenordet igen.	\\"Nytt lösenord\\" och \\"bekräfta lösenord\\" är inte lika.',
+	'ERR_REENTER_PASSWORDS'				=> 'Vänligen skriv in lösenordet igen.	\"Nytt lösenord\" och \"bekräfta lösenord\" är inte lika.',
 	'ERR_REPORT_LOOP'					=> 'Systemet upptäckte en rapporteringsloop. En användare kan inte rapportera till sig själv, en chef kan inte rapportera till en användare.',
 	'ERR_RULES_NOT_MET'                 => 'Det lösenord du angav är inte tillräckligt starkt, var snäll och pröva igen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Användarinformation kunde ej hittas',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottagarens emailadress',
 	'ERR_SERVER_STATUS'					=> 'Din serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan inte skicka ett email till användaren. Var god kontrollera konfigurationen för utgående email under <a href="index.php?module=EmailMan&action=config">Emailinställningar</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Användaren kan endast skapas i <a href="{0}" target="_blank">Cloud konsolen</a> för IDM-läget.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Den primära e-postadressen kan endast uppdateras i<a href="{0}" target="_blank">Cloud konsolen</a> för IDM-läget.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Emailadress',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Antal decimaler att visa i systemet, såsom valutafält och genomsnittliga värden i Rapporter.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Visa föredragna valuta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Konvertera basvaluta till användars föredragna i listan och post visningar',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Skapa intäktsradartiklar i föredragen valuta',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Intäktsradartiklar som läggs till som en affärsmöjlighet från produktkatalogen kommer att konverteras till användarens föredragna valuta om det skiljer sig från den valuta som används i produktkatalogens artikel.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000 separator',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Tecken för att separera tusental',
 	'LBL_DECIMAL_SEP'					=> 'Decimal symbol',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Ange både användarnamn och mailadress.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Detta är för närvarande inte aktiverat. Kontakta administratören.',
 	'LBL_PUBLISH_KEY'					=> 'Publicerings nyckel',
-
+    'LBL_SITE_USER_ID' => 'Hash för site_url och user_id',
     'LBL_QUOTAS'                        => 'Offerter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Arbetsark',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Användarprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Om en del fält inte kan redigeras, vänligen logga in på din Cloud-konsol för att hantera fälten',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Om du vill ändra vissa fält som inte är redigerbara, ' .
-        'vänligen kontakta Administratör för att meddela dessa ändringar',
+        'Vänligen kontakta din Sugar-administratör om du vill ändra i fälten som bara kan läsas.',
 ); // END STRINGS DEFS
-
-?>

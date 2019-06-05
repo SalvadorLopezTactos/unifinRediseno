@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -62,7 +62,7 @@ final class Encrypter implements EncrypterInterface
         $key_management_mode = $this->getKeyManagementMode($jwe);
         $cek = $this->determineCEK($jwe, $content_encryption_algorithm, $key_management_mode, $additional_headers);
 
-        for ($i = 0; $i < $nb_recipients; $i++) {
+        for ($i = 0; $i < $nb_recipients; ++$i) {
             $this->processRecipient($jwe, $jwe->getRecipient($i), $cek, $content_encryption_algorithm, $additional_headers);
         }
 

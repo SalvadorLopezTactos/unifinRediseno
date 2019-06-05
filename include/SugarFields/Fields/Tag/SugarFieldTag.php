@@ -94,7 +94,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      * @param Array containing tag id and tag name with the keys (id, name)
      * @return SugarBean
      */
-    protected function getTagBean($record)
+    public function getTagBean($record)
     {
         // We'll need this no matter what
         $tagBean = BeanFactory::newBean('Tags');

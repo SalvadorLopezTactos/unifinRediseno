@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\Mapping;
 
-use OneLogin_Saml2_Response;
+use OneLogin\Saml2\Response;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\SAMLUserMapping;
 
 /**
@@ -40,7 +40,7 @@ class SugarSAMLUserMapping extends SAMLUserMapping
     }
 
     /**
-     * @param OneLogin_Saml2_Response $response
+     * @param Response $response
      * @return array
      */
     public function map($response)
@@ -62,7 +62,7 @@ class SugarSAMLUserMapping extends SAMLUserMapping
     }
 
     /**
-     * @param OneLogin_Saml2_Response $response
+     * @param Response $response
      * @return array
      */
     public function mapIdentity($response)
@@ -88,7 +88,7 @@ class SugarSAMLUserMapping extends SAMLUserMapping
      *
      * @inheritDoc
      */
-    protected function getIdentityField()
+    public function getIdentityField()
     {
         return !empty($this->config['sp']['sugarCustom']['id']) ? $this->config['sp']['sugarCustom']['id'] : 'email';
     }
@@ -111,11 +111,11 @@ class SugarSAMLUserMapping extends SAMLUserMapping
     /**
      * Extract attribute from SAML response array by its name.
      *
-     * @param OneLogin_Saml2_Response $response
+     * @param Response $response
      * @param string $name
      * @return mixed
      */
-    protected function getAttribute(OneLogin_Saml2_Response $response, $name)
+    protected function getAttribute(Response $response, $name)
     {
         if (!empty($this->config['sp']['sugarCustom']['useXML'])) {
             $xpath = $this->getDOMXPath($response->getXMLDocument());
@@ -133,11 +133,11 @@ class SugarSAMLUserMapping extends SAMLUserMapping
     /**
      * Check existence of an attribute in SAML response.
      *
-     * @param OneLogin_Saml2_Response $response
+     * @param Response $response
      * @param string $name
      * @return bool
      */
-    protected function hasAttribute(OneLogin_Saml2_Response $response, $name)
+    protected function hasAttribute(Response $response, $name)
     {
         return !is_null($this->getAttribute($response, $name));
     }

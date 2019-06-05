@@ -112,6 +112,8 @@ class MetaDataFiles
         MB_FILTERVIEW             => 'default',
         MB_BWCFILTERVIEW          => 'SearchFields',
         MB_SIDECARQUOTEDATAGROUPLIST => 'quote-data-group-list',
+        MB_QUOTEDATAGRANDTOTALHEADER => 'quote-data-grand-totals-header',
+        MB_QUOTEDATAGRANDTOTALFOOTER => 'quote-data-grand-totals-footer',
     );
 
     /**
@@ -828,13 +830,16 @@ class MetaDataFiles
         }
         foreach ($modules as $module) {
             $seed = BeanFactory::newBean($module);
-            $fileList = self::getClientFiles($platforms, $type, $module, $context, $seed);
-            $moduleResults = self::getClientFileContents($fileList, $type, $module, $seed);
+            $fileList = static::getClientFiles($platforms, $type, $module, $context, $seed);
+            $moduleResults = static::getClientFileContents($fileList, $type, $module, $seed);
 
             if ($type == "view") {
                 foreach ($moduleResults as $view => $defs) {
                     if (!is_array($defs) || empty($seed) || empty($seed->field_defs)) {
                         continue;
+                    }
+                    if (!empty($moduleResults[$view]['meta'])) {
+                        static::normalizePanelFields($moduleResults[$view]['meta'], $seed);
                     }
                     $meta = !empty($defs['meta']) ? $defs['meta'] : array();
                     $deps = DependencyManager::getDependenciesForView($meta, ucfirst($view) . "View", $module);
@@ -870,6 +875,45 @@ class MetaDataFiles
     
                 $output = "<?php\n\$clientCache['".$module."']['".$platforms[0]."']['".$type."'] = ".var_export($moduleResults,true).";\n\n";
                 sugar_file_put_contents_atomic($basePath.'/'.$type.'.php', $output);
+            }
+        }
+    }
+
+    /**
+     * Merges the display params into each field entry for a view panel
+     * @param array $meta
+     * @param SugarBean $seed
+     */
+    private static function normalizePanelFields(array &$meta, SugarBean $seed)
+    {
+        if (isset($meta['panels']) && is_array($meta['panels'])) {
+            foreach ($meta['panels'] as $i => $panel) {
+                if (isset($panel['fields']) && is_array($panel['fields'])) {
+                    foreach ($panel['fields'] as $j => $field) {
+                        if (is_string($field)) {
+                            $name = $field;
+                            $field = ['name' => $field];
+                        } elseif (isset($field['name'])) {
+                            $name = $field['name'];
+                        }
+
+                        // First merge any displayParams from the viewdef, these will still lose to
+                        // the properties set in the normal location on the panel
+                        if (isset($field['displayParams']) && is_array($field['displayParams'])) {
+                            $dp = $field['displayParams'];
+                            unset($field['displayParams']);
+                            $field = array_merge($dp, $field);
+                        }
+
+                        // Next merge any displayParams from the vardefs, these will lose to view specific properties
+                        if (isset($seed->field_defs[$name]['displayParams'])
+                            && is_array($seed->field_defs[$name]['displayParams'])
+                        ) {
+                            $field = array_merge($seed->field_defs[$name]['displayParams'], $field);
+                        }
+                        $meta['panels'][$i]['fields'][$j] = $field;
+                    }
+                }
             }
         }
     }
@@ -1060,7 +1104,7 @@ class MetaDataFiles
                         $subpath = "custom" . ucfirst($subpath);
                     }
                     if (isset($results[$subpath]['controller'][$fileInfo['platform']])) {
-                        continue;
+                        continue 2;
                     }
                     $controller = file_get_contents($fileInfo['path']);
                     $results[$subpath]['controller'][$fileInfo['platform']] = $controller;
@@ -1068,7 +1112,7 @@ class MetaDataFiles
                 case 'hbs':
                     $layoutName = substr($fileInfo['file'],0,-4);
                     if ( isset($results[$fileInfo['subPath']]['templates'][$layoutName]) ) {
-                        continue;
+                        continue 2;
                     }
                     $results[$fileInfo['subPath']]['templates'][$layoutName] = self::trimLicense(
                         file_get_contents($fileInfo['path'])
@@ -1077,7 +1121,7 @@ class MetaDataFiles
                 case 'php':
                     $viewdefs = array();
                     if ( isset($results[$fileInfo['subPath']]['meta']) && !strstr($fileInfo['path'], '.ext.php')) {
-                        continue;
+                        continue 2;
                     }
                     //When an extension file is found and NO corresponding metadata has been found so far
                     if (!empty($module) && strstr($fileInfo['path'], '.ext.php') &&
@@ -1105,12 +1149,12 @@ class MetaDataFiles
                         }
                         if ( !is_a($bean,'SugarBean') ) {
                             // I'm not sure what this is, but it's not something we can template
-                            continue;
+                            continue 2;
                         }
                         $viewdefs = self::getModuleMetaDataDefsWithReplacements($bean, $viewdefs);
                         if ( ! isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
                             $GLOBALS['log']->error('Could not generate a metadata file for module '.$module.', platform: '.$fileInfo['platform'].', type: '.$type);
-                            continue;
+                            continue 2;
                         }
 
                         $results[$fileInfo['subPath']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Er zijn actieve processen die worden uitgevoerd tegen deze procesdefinitie. Bijwerken, kan deze processen beïnvloeden. Wilt u nog steeds deze procesdefinitie bewerken?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Er zijn actieve processen die worden uitgevoerd tegen deze procesdefinitie. Bijwerken, kan deze processen beïnvloeden. Wilt u nog steeds deze procesdefinitie uitschakelen?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatisch een record Procesdefinities aanmaken door een *.bpm bestand uit uw bestandssysteem te importeren.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Upload een .bpm bestand om een procesdefinitie te importeren.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Procesdefinities zijn succesvol geïmporteerd in het systeem.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Selecteer een geldig *.bpm bestand.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'De proces-definitie is geïmporteerd maar bevat een of meer zakelijke regelacties waarvoor er geen bedrijfsregels zijn geselecteerd.',
+    'LBL_BPM_IMPORT_SELECT' => 'Deze procesdefinitie bevat de volgende bedrijfsregels en e-mailsjablonen. '
+        . 'Selecteer de onderdelen die u wilt importeren.',
+    'LBL_BUSINESS_RULES' => 'Zakelijke regels',
+    'LBL_EMAIL_TEMPLATES' => 'E-mailsjablonen',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Ongedaan maken',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Opnieuw',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Opslaan',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Valideren',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Opslaan en valideren',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Validatie uitvoeren om te controleren op fouten',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activiteit',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Verwijderen',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Module',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filteren',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Gerelateerd aan',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Criteria',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Looptijd',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Eenheid',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Velden',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluatie moduleveld',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Module',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Gerelateerd aan',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Veld',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Waarde',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Evaluatie formulierrespons',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is niet',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'niet gelijk aan',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle gerelateerd records',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Alle gerelateerd records',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Looptijd',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Toevoegen',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sluiten',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Teams',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Gebruiker in %MODULE% die het record heeft aangemaakt',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Gebruiker in %MODULE% die het record voor het laatst heeft gewijzigd',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Gebruiker in %MODULE% die aan het record is toegewezen',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Gebruiker in %MODULE% die aan het record is toegewezen',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Gebruiker in %MODULE% die beheerder is van degene die het record heeft aangemaakt',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Gebruiker in %MODULE% die beheerder is van degene die voor het laatst het record heeft gewijzigd',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Gebruiker in %MODULE% die beheerder is van degene die aan het record is toegewezen',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Gebruiker in %MODULE% die beheerder is van degene die aan het record is toegewezen',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% gerelateerd aan %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Gebruiker die de %MODULE% heeft aangemaakt',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Gebruiker die de %MODULE% voor het laatst heeft gewijzigd',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Gebruiker die is toegewezen aan de %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Gebruiker die was toegewezen aan de %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Manager van degene die de %MODULE% heeft aangemaakt',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Manager van degene die de %MODULE% voor het laatst heeft gewijzigd',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Manager van degene die is toegewezen aan de %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Manager van degene die was toegewezen aan de %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rol: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'team: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Suggesties',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Ongeldige uitdrukkingssyntax.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Procesdefinitie valideren: Elementinstellingen ophalen',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Procesdefinitie valideren: Elementinstellingen ophalen',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Foutenlijst vernieuwen...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Validatie voltooid! Problemen gevonden: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemen',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Word gevalideerd',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Waarschuwing: het proces kan vastlopen op dit element of andere onbedoelde effecten hebben',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Fout: het proces loopt vast op dit element',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Kan element niet valideren',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Element hoeft niet aan minimum aantal inkomende flows te voldoen',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Dit element moet een minimaal aantal inkomende paden bevatten. Controleer het aantal paden dat aan dit element is verbonden om er zeker van te zijn dat het minimum aantal wordt behaald.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Element overschrijdt het maximale aantal inkomende flows',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Dit element heeft een maximaal aantal inkomende paden dat niet mag worden overschreden. Controleer of het aantal paden dat aan dit element is verbonden om er zeker van te zijn dat het maximum niet overschreden wordt.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Element hoeft niet aan minimum aantal uitgaande flows te voldoen',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Dit element moet een minimum aantal uitgaande paden bevatten. Controleer het aantal paden dat vanuit dit element vertrekt om er zeker van te zijn dat het minimum aantal wordt behaald.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Element overschrijdt het maximale aantal uitgaande flows',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Dit element heeft een maximaal aantal uitgaande paden dat niet mag worden overschreden. Controleer of het aantal paden dat vanuit dit element vertrekt om er zeker van te zijn dat het maximum niet overschreden wordt.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Verplicht veld is niet ingesteld',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Dit element bevat een veld dat verplicht is, maar niet is ingesteld. Controleer de elementinstellingen om er zeker van te zijn of deze juist is ingesteld en klik vervolgens op de knop "Opslaan".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Er komen momenteel geen gegevens voor in het systeem',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'De instellingen voor dit element verwijzen naar een specifiek stukje data dat niet voorkomt in de database. Controleer de elementinstellingen om er zeker van te zijn dat alle gegevens waarnaar verwezen wordt bestaan (d.w.z. specifieke gebruikers, modulevelden, teams, etc.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Uitdrukking criteriaveld wordt niet geëvalueerd als waar',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Criteriavelden bevatten logische uitdrukken zoals EN/OF/NIET. Deze fout betekent dat een criteriaveld in de elementinstellingen zo is geconfigureerd dat de uitdrukking nooit kan kloppen. Controleer het criteriaveld om eventuele logische strijdigheden te verwijderen die voorkomen dat de uitdrukking waar is.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Element is onbereikbaar',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Om een element in een proces uit te voeren, moet hier een pad naartoe lopen. De paden die naar dit element leiden, moeten beginnen met een startelement. Controleer de inkomende paden naar dit element om er zeker van te zijn dat deze beginnen met een startelement.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Wachttijdcriteria moeten precies één datum-tijdconstante bevatten',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Dit wachttijdelement is geconfigureerd voor gebruik van het criteriaveld "Vaste datum". Dit veld moet precies één "Vaste datum-tijdconstante" of een Datum-tijdreferentie bevatten. Alle andere stukken van de uitdrukking moeten wiskundig (+/-) of "Tijdspanne" constanten zijn.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Gespecificeerde duur mag geen nul zijn',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Dit wachtgebeurteniselement is zo geconfigureerd dat het gebruik maakt van de "Duur" instelling. Deze instelling mag geen nul zijn, anders treedt er een fout op. Controleer de elementinstellingen om er zeker van te zijn dat de "Duur" niet op nul staat.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Wachttijdparameters zijn niet ingesteld',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Dit wachgebeurteniselement bevat geen geconfigureerde instellingen. Controleer de elementinstellingen om er zeker van te zijn dat de "Duur" of "Vaste datum" is geselecteerd, voer de gewenste waarden in en klik op de knop "Opslaan".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Verwachte tijd is minder dan nul',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Onder de "Formulieren" instellingen van dit activiteitelement is de verwachte tijd ingesteld op een negatieve waarde, waardoor het proces zal bevriezen als het element bereikt wordt. Open de instellingen voor "Formulieren" voor dit element om de verwachte tijd in te stellen op een cijfer dat niet negatief is.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Type actie is [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Dit actie-element bevat geen vooraf aangewezen type. Dit kan worden veranderd door met de rechter muisknop te klikken op een actie-element en vervolgens een type te selecteren in de lijst "Actietype".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Een pad hoeft niet gegarandeerd te worden genomen',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Dit foutbericht doet zich voor omdat er een kans bestaat dat geen van de paden van dit gateway-element zal worden genomen, waardoor het proces zal vastlopen. Aangeraden wordt om een standaard pad in te stellen indien geen van de uitdrukkingen in criteriavelden in de elementinstellingen voldoende zijn. Dit kan worden gedaan door met de rechter muisknop te klikken op het gateway-element en vervolgens een element te selecteren in het menu "Standaard flow". Als er geen standaard pad is gespecificeerd, moeten de uitdrukkingen in criteriavelden in de elementinstellingen worden veranderd om ervoor te zorgen dat minimaal één ervan waar is en het proces wordt uitgevoerd.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Convergerend type gateway komt niet overeen met type gateway van inkomende flow',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Verschillende gateways breiden processen uit richting meerdere branches. Als u een convergerende gateway gebruikt om deze branches weer naar één pad te lijden, dan moet het juiste type convergerende gateway worden gebruikt, afhankelijk van het type divergerende gateway dat gebruikt is om de branches aan te maken. Voor branches die zijn aangemaakt met exclusieve of op gebeurtenissen gebaseerde divergerende gateways, gebruikt u een exclusieve convergerende gateway om deze opnieuw te convergeren. Voor branches die zijn aangemaakt met parallelle of inclusieve divergerende gateways, gebruikt u een parallelle convergerende gateway om ze opnieuw te convergeren.',
 );

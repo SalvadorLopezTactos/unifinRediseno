@@ -29,7 +29,6 @@ class BaseAuthenticate
      */
     public function postSessionAuthenticate()
     {
-        $_SESSION['userTime']['last'] = time();
         $user_unique_key = (isset($_SESSION['unique_key'])) ? $_SESSION['unique_key'] : '';
         $server_unique_key = \SugarConfig::getInstance()->get('unique_key', '');
         $authenticated = true;

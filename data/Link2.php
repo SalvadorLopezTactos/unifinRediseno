@@ -126,23 +126,29 @@ class Link2 {
     }
 
     /**
-     *  Forces the link to load the relationship rows.
+     * Forces the link to load the relationship rows.
      * Will be called internally when the $rows property is accessed or get() is called
+     *
+     * @param array $params
      * @return void
      */
     public function load($params = array())
     {
-        $data = $this->query($params);
-        $this->rows = $data['rows'];
+        // free previously allocated memory to avoid the issue when <old-dataset> + <new-dataset> = memory limit reached
+        $this->rows = null;
+
+        $this->rows = $this->query($params)['rows'];
         $this->beans = null;
         $this->loaded = true;
     }
 
     /**
-     * Resets the loaded flag on this link so that it must reload the next time it is used
+     * Resets the loaded flag on this link so that it must reload the next time it is used. Also releases used memory.
      */
-    public function resetLoaded() {
+    public function resetLoaded()
+    {
         $this->loaded = false;
+        $this->rows = []; // free memory
     }
 
     /**
@@ -826,7 +832,7 @@ class Link2 {
      *
      */
     public function _get_alternate_key_fields($table_name) {
-        $indices = Link::get_link_table_definition($table_name, null, 'indices');
+        $indices = self::get_link_table_definition($table_name, null, 'indices');
         if (!empty($indices)) {
             foreach ($indices as $index) {
                 if ( isset($index['type']) && $index['type'] == 'alternate_key' ) {
@@ -840,6 +846,36 @@ class Link2 {
             return array($relDef['join_key_lhs'], $relDef['join_key_rhs']);
 
         return array();
+    }
+
+    public static function get_link_table_definition($table_name, $relationshipName, $def_name)
+    {
+        global $dictionary;
+
+        include 'modules/TableDictionary.php';
+        // first check to see if already loaded - assumes hasn't changed in the meantime
+        if (isset($dictionary[$table_name][$def_name])) {
+            return $dictionary[$table_name][$def_name];
+        }
+
+        if ($relationshipName && isset($dictionary[$relationshipName][$def_name])) {
+            return $dictionary[$relationshipName][$def_name];
+        }
+
+        // custom metadata is found in custom/metadata (naturally) and the naming follows
+        // the convention $relationship_name_c, and $relationship_name = $table_name
+        $relationshipName = preg_replace('/_c$/', '', $table_name);
+
+        foreach (SugarAutoLoader::existingCustom("metadata/{$relationshipName}MetaData.php") as $file) {
+            include $file;
+        }
+        if (isset($dictionary[$relationshipName][$def_name])) {
+            return $dictionary[$relationshipName][$def_name];
+        }
+        // couldn't find the metadata for the table in either the standard or custom locations
+        $GLOBALS['log']->debug('Error fetching field defs for join table ' . $table_name);
+
+        return null;
     }
 
     /**

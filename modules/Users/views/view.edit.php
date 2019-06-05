@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+use Sugarcrm\IdentityProvider\Srn;
 
 class UsersViewEdit extends ViewEdit {
 var $useForSubpanel = true;
@@ -40,11 +41,13 @@ var $useForSubpanel = true;
         return parent::getMetaDataFile($userType != 'Regular' ? $this->type . 'group' : null);
     }
 
-    function display() {
+    public function display()
+    {
         global $current_user, $app_list_strings;
 
         $idpConfig = new IdmConfig(\SugarConfig::getInstance());
-        if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate()) {
+        if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate() &&
+            !$idpConfig->isSpecialBeanAction($this->bean, $_REQUEST)) {
             $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
         }
 
@@ -118,7 +121,7 @@ var $useForSubpanel = true;
                     $license_seats_needed = -1;
                 }
                 if( $license_seats_needed >= 0 ){
-                    displayAdminError( translate('WARN_LICENSE_SEATS_USER_CREATE', 'Administration') . translate('WARN_LICENSE_SEATS2', 'Administration')  );
+                    displayAdminError(translate('WARN_LICENSE_SEATS_USER_CREATE', 'Administration'));
                     if( isset($_SESSION['license_seats_needed'])) {
                         unset($_SESSION['license_seats_needed']);
                     }
@@ -135,7 +138,10 @@ var $useForSubpanel = true;
 
         $error_password = $this->request->getValidInputRequest('error_password');
         if ($error_password) {
-            $this->ss->assign('ERROR_PASSWORD', '<span id="error_pwd" class="error">Error: ' . htmlspecialchars($error_password, ENT_QUOTES, 'UTF-8') . '</span>');
+            $this->ss->assign(
+                'ERROR_PASSWORD',
+                'Error: ' . htmlspecialchars($error_password, ENT_QUOTES, 'UTF-8')
+            );
         }
 
         // Build viewable versions of a few fields for non-admins
@@ -219,14 +225,27 @@ EOD
             $this->ss->assign('scroll_to_cal', true);
         }
 
-        // Check for IDM mode.
-        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $idpConfig->isIDMModeEnabled());
-        if ($GLOBALS['current_user']->isAdminForModule('Users') && $this->bean->id !== $GLOBALS['current_user']->id) {
-            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER';
-        } else {
-            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER';
+        // Check for IDM mode and specific User type.
+        $showNonEditableFieldsAlert = $idpConfig->isIDMModeEnabled() &&
+            !$idpConfig->isSpecialBeanAction($this->bean, $_REQUEST);
+        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $showNonEditableFieldsAlert);
+        if ($showNonEditableFieldsAlert) {
+            if ($GLOBALS['current_user']->isAdminForModule('Users')) {
+                $tenantSrn = Srn\Converter::fromString($idpConfig->getIDMModeConfig()['tid']);
+                $srnManager = new Srn\Manager([
+                    'partition' => $tenantSrn->getPartition(),
+                    'region' => $tenantSrn->getRegion(),
+                ]);
+                $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $this->bean->id);
+                $msg = sprintf(
+                    translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
+                    $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
+                );
+            } else {
+                $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER', 'Users');
+            }
+            $this->ss->assign('NON_EDITABLE_FIELDS_MSG', $msg);
         }
-        $this->ss->assign('NON_EDITABLE_FIELDS_MSG', translate($label, 'Users'));
 
         $this->ev->process($processSpecial,$processFormName);
 

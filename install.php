@@ -295,7 +295,7 @@ $langHeader = get_language_header();
       </th>
     </tr>
     <tr>
-      <td colspan="2"  id="ready_image"><IMG src="include/images/install_themes.jpg" width="698" height="247" alt="Sugar Themes" border="0"></td>
+      <td colspan="2"  id="ready_image"><div class="readySection"></div></td>
     </tr>
 
     <tr>

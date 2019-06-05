@@ -91,6 +91,7 @@ $setup_db_sugarsales_password = $_SESSION['setup_db_sugarsales_password'];
 $setup_db_sugarsales_user = $_SESSION['setup_db_sugarsales_user'];
 $setup_site_admin_user_name = $_SESSION['setup_site_admin_user_name'];
 $setup_site_admin_password = $_SESSION['setup_site_admin_password'];
+$setup_site_admin_email = isset($_SESSION['setup_site_admin_email']) ? $_SESSION['setup_site_admin_email'] : '';
 $setup_site_guid = (isset($_SESSION['setup_site_specify_guid']) && $_SESSION['setup_site_specify_guid'] != '') ? $_SESSION['setup_site_guid'] : '';
 $setup_site_url = $_SESSION['setup_site_url'];
 $parsed_url = parse_url($setup_site_url);
@@ -575,6 +576,12 @@ if ($_SESSION['demoData'] != 'no') {
 }
 installLog("done populating the db with seed data");
 
+installLog('Installing Business Process Management designs');
+
+require 'install/installBusinessProcesses.php';
+
+installLog('Completed installation of Business Process Management designs');
+
 if ((!empty($_SESSION['fts_type']) || !empty($_SESSION['setup_fts_type'])) &&
     (empty($_SESSION['setup_fts_skip']))
 ) {
@@ -674,7 +681,7 @@ if (function_exists('imagecreatetruecolor')) {
     rebuildSprites(true);
 }
 
-if (count($bottle) > 0) {
+if (is_array($bottle) && count($bottle) > 0) {
     foreach ($bottle as $bottle_message) {
         $bottleMsg .= "{$bottle_message}\n";
     }

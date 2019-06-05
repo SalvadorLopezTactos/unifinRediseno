@@ -22,59 +22,19 @@ class SugarUpgradeRebuild extends UpgradeScript
     {
         global $dictionary, $beanFiles;
         include "include/modules.php";
-        $rac = new RepairAndClear('', '', false, false);
+        $rac = new RepairAndClear();
+        $rac->execute = true;
         $rac->clearVardefs();
         $rac->rebuildExtensions();
         $rac->clearExternalAPICache();
-        // this is dirty, but otherwise SugarBean caches old defs :(
-        $GLOBALS['reload_vardefs'] = true;
-        $repairedTables = array();
-        foreach ($beanFiles as $bean => $file) {
-            if (file_exists($file)) {
-                unset($GLOBALS['dictionary'][$bean]);
-                require_once $file;
-                $focus = new $bean ();
-                if (empty($focus->table_name) || isset($repairedTables[$focus->table_name])) {
-                    continue;
-                }
+        $rac->setStatementObserver(function (?string $statement) : void {
+            $this->log('Running sql: ' . $statement);
+        });
+        $rac->repairDatabase();
 
-                if (($focus instanceof SugarBean)) {
-                    if (!isset($repairedTables[$focus->table_name])) {
-                        $sql = $this->db->repairTable($focus, true);
-                        if (trim($sql) != '') {
-                            $this->log('Running sql: ' . $sql);
-                        }
-                        $repairedTables[$focus->table_name] = true;
-                    }
-
-                    //Check to see if we need to create the audit table
-                    if ($focus->is_AuditEnabled()) {
-                        $rac->module_list[] = $focus->module_name;
-                    }
-                }
-            }
-        }
         if (!empty($rac->module_list)) {
             $this->log('Verifying audit tables for modules: ' . implode(',', $rac->module_list));
             $rac->rebuildAuditTables();
-        }
-
-        unset ($dictionary);
-        include ("modules/TableDictionary.php");
-        foreach ($dictionary as $meta) {
-            if (empty($meta['table']) || isset($repairedTables[$meta['table']])) {
-                continue;
-            }
-
-            $tablename = $meta['table'];
-            $fielddefs = $meta['fields'];
-            $indices = isset($meta['indices']) ? $meta['indices'] : [];
-	        $sql = $this->db->repairTableParams($tablename, $fielddefs, $indices, true);
-	        if(!empty($sql)) {
-	            $this->log('Running sql: '. $sql);
-	            $repairedTables[$tablename] = true;
-	        }
-
         }
 
         $this->log('Database repaired');

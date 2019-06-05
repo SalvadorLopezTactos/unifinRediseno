@@ -40,12 +40,6 @@ $dictionary['audit_events'] = array(
             'dbType' => 'text',
             'required' => false,
         ),
-        'data' => array(
-            'name' => 'data',
-            'type' => 'json',
-            'dbType' => 'text',
-            'required' => false,
-        ),
         'date_created' => array(
             'name' => 'date_created',
             'type' => 'datetime',
@@ -67,6 +61,13 @@ $dictionary['audit_events'] = array(
                 'parent_id',
                 'type',
                 'date_created',
+            ),
+        ),
+        array(
+            'name' => 'idx_modulename',
+            'type' => 'index',
+            'fields' => array(
+                'module_name',
             ),
         ),
     ),

@@ -56,8 +56,9 @@ $(document).ready(function() {
                 }
             });
         };
+
     var initState = {
-            isTBAEnabled: $('input#tba_set_enabled').attr('checked') === 'checked',
+            isTBAEnabled: $('input#tba_set_enabled').prop('checked'),
             enabledModules: getEnabledModules()
         };
 
@@ -68,7 +69,7 @@ $(document).ready(function() {
      */
     var hasUnsavedChanges = function() {
         var enabledModules = getEnabledModules();
-        var isTBAEnabled = $('input#tba_set_enabled').attr('checked') === 'checked';
+        var isTBAEnabled = $('input#tba_set_enabled').prop('checked');
 
         return initState.isTBAEnabled !== isTBAEnabled
             || !_.isEqual(enabledModules, initState.enabledModules);
@@ -166,14 +167,14 @@ $(document).ready(function() {
         }
     });
 
-    if ($('input#tba_set_enabled').attr('checked') === 'checked') {
+    if ($('input#tba_set_enabled').prop('checked')) {
         $('#tba_em_block').show();
     } else {
         $('#tba_em_block').hide();
     }
 
     $('input#tba_set_enabled').on('click', function() {
-        if ($(this).attr('checked') === 'checked') {
+        if ($(this).prop('checked')) {
             var enabledModules = getEnabledModules();
             _.each($('input[data-group=tba_em]'), function(item) {
                 if (_.indexOf(enabledModules, $(item).val()) !== -1) {
@@ -188,9 +189,9 @@ $(document).ready(function() {
 
     $('input[name=save]').on('click', function() {
         var enabledModules = getEnabledModules();
-        var isTBAEnabled = $('input#tba_set_enabled').attr('checked') === 'checked';
+        var isTBAEnabled = $('input#tba_set_enabled').prop('checked');
 
-        if ((initState.isTBAEnabled && $('input#tba_set_enabled').attr('checked') !== 'checked') ||
+        if ((initState.isTBAEnabled && $('input#tba_set_enabled').prop('checked') === false) ||
             _.difference(initState.enabledModules, enabledModules).length > 0) {
             app.alert.show('submit_tba_confirmation', {
                 level: 'confirmation',

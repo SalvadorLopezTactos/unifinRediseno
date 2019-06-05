@@ -117,12 +117,12 @@ $mod_strings = array(
         'defaultdetailview'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Detailvaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab väljale Sõltuv, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab väljale Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
-        'defaultquickcreate'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu vormis <b>Kiirgeneraator</b>.<br><br>Kiirgeneraatori vorm ilmub mooduli alampaneelides, kui klõpsatakse nuppu Loo.<br/><br/><b>Tööriistakast</b> sisaldab üksust <b>Prügikast</b> ning välja ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli üksusesse <b>Prügikast</b>. Väli on seejärel üksuses Tööriistakast paigutusse lisamiseks saadaval.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Tähistab välja Sõltuv, mis võib olenevalt valemi väärtusest olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Tähistab välja Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
+        'defaultquickcreate'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu vormil <b>Kiirgeneraator</b>.<br><br>Vorm Kiirgeneraator kuvatakse mooduli alampaneelidel, kui klõpsate nuppu Loo.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab sõltuvale väljale, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab arvutuslikule väljale, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Redigeerimisvaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab üksust <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju üksuste <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli üksusesse <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Tähistab välja Sõltuv, mis võib olenevalt valemi väärtusest olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Tähistab välja Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
+        'default'	=> 'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Redigeerimisvaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab sõltuvale väljale, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab arvutuslikule väljale, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
         //this defualt will be used for edit view
         'defaultrecordview'   => 'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Kirje vaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
@@ -744,9 +744,9 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Selle kohandatud välja kustutamine kustutab nii kohandatud välja kui ka kõik andmebaasis kohandatud väljaga seotud andmed. Välja ei kuvata enam üheski mooduli paigutuses.'
         . ' Kui väli on kaasatud mis tahes väljade väärtuste arvutamise valemisse, siis see valem enam ei toimi.'
-        . '\\n\\nVäli pole enam aruannetes kasutamiseks saadaval; see muudatus hakkab kehtima pärast rakendusest välja ja uuesti sisse logimist. Välja sisaldavaid aruandeid tuleb värskendada, et neid oleks võimalik käivitada.'
-        . '\\n\\nKas soovite jätkata?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Kas soovite kindlasti selle seose kustutada?<br>Märkus. See toiming võib võtta mitu minutit aega.',
+        . '\n\nVäli pole enam aruannetes kasutamiseks saadaval; see muudatus hakkab kehtima pärast rakendusest välja ja uuesti sisse logimist. Välja sisaldavaid aruandeid tuleb värskendada, et neid oleks võimalik käivitada.'
+        . '\n\nKas soovite jätkata?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Kas olete kindel, et soovite selle seose kustutada?<br>Märkus. Selle toimingu täitmine võib võtta mitu minutit.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'See muudab selle seose püsivaks. Kas olete kindel, et soovite selle seose juurutada?',
 'LBL_CONFIRM_DONT_SAVE' => 'Pärast teie viimati salvestamist on tehtud muudatusi, kas soovite need salvestada?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Kas salvestada muudatused?',
@@ -763,17 +763,17 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Lubatud</b>: väli kuvatakse funktsioonis Duplikaatide ühendamine, kuid pole kasutamiseks saadaval filtri tingimuste puhul funktsioonis Duplikaatide otsimine.<br><b>Keelatud</b>: välja ei kuvata funktsioonis Duplikaatide ühendamine ja see pole kasutamiseks saadaval filtri tingimuste puhul funktsioonis Duplikaatide otsimine.'
 . '<br><b>Filtris</b>: väli kuvatakse funktsioonis Duplikaatide ühendamine ja on saadaval ka funktsioonis Duplikaatide otsimine.<br><b>Ainult filter</b>: välja ei kuvata funktsioonis Duplikaatide ühendamine, kuid see on saadaval funktsioonis Duplikaatide otsimine.<br><b>Vaikimisi valitud filter</b>: välja kasutatakse vaikimisi filtri tingimuse puhul lehel Duplikaatide otsimine ja kuvatakse ka funktsioonis Duplikaatide ühendamine.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Looge valem, et määrata selles väljas olev väärtus.<br>"
-   . "Tegevust sisaldavad töövoo definitsioonid, mis on määratud seda välja värskendama, ei käivita enam seda toimingut.<br>"
-   . "Valemeid sisaldavate väljade väärtusi ei arvutata reaalajas "
+'LBL_POPHELP_CALCULATED'=>"Looge valem selle välja väärtuse määramiseks.<br>"
+   . "Töövoo definitsioonid, mis sisaldavad seda välja uuendama määratud toimingut, ei käivita enam seda toimingut.<br>"
+   . "Valemeid kasutavaid välju ei arvutata enam reaalajas "
    . "Sugari iseteenindusportaalis ega "
-   . "mobiilsetes redigeerimisvaate paigutustes.",
+   . "Mobiilse redigeerimisvaate paigutustes.",
 
 'LBL_POPHELP_DEPENDENT'=>"Looge valem, et määrata, kas see väli on paigutustes nähtav.<br/>"
-        . "Sõltuvad väljad järgivad brauseripõhises mobiilivaates sõltuvusvalemit, <br/>"
-        . "kuid ei järgi valemit omarakendustes, näiteks iPhone’ile mõeldud Sugar Mobile’is. <br/>"
-        . "Need ei järgi valemit Sugari iseteenindusportaalis.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Valige selle välja kasutamine, kui otsite globaalse otsinguga kirjeid selles moodulis.',
+        . "Sõltuvad väljad jälgivad brauseripõhises mobiilivaates sõltuvusvalemit,<br/>"
+        . "kuid ei jälgi valemit omarakendustes, nagu Sugar Mobile for iPhone.<br/>"
+        . "Need ei jälgi valemit Sugari iseteenindusportaalis.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Valige see väli, kui otsite sellest moodulist kirjeid globaalse otsinguga.',
 //Revert Module labels
 'LBL_RESET' => 'Lähtesta',
 'LBL_RESET_MODULE' => 'Lähtesta moodul',

@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'שגיאות אותרו במהלך בדיקת תאימות. על מנת שהתקנת הSugarCRM שלך תתפקד כראוי, בבקשה תנקוט בצעדים המתאימים כדי לטפל בבעיות המפורטים להלן וגם לחץ על כפתור בדוק מחדש, או נסה להתקין שוב.',
     'ERR_CHECKSYS_CALL_TIME'            => 'הפניית העברת זמן שיחה מופעלת (יש להגדיר את זה לכבויה ב-php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: \'מתזמן Sugar\' יפעל עם פונקציונליות מוגבלת. שירות ההעברה לארכיון של הודעות דוא"ל לא יפעל.',
+	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: מתזמן Sugar יפעל עם פונקציונליות מוגבלת. השירות של אחסון דוא"ל בארכיון לא יפעל.',
     'ERR_CHECKSYS_IMAP'					=> 'לא נמצא: InboundEmail ו-Campaigns (דוא"ל) דורשים ספריות IMAP. שניהם לא יפעלו.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'לא ניתן להפעיל Magic Quotes GPC בעת השימוש בשרת MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warning:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'לחוויה אופטימלית באמצעות sapi IIS/FastCGI, הגדר fastcgi.logging ל0 בקובץ ה-php.ini שלך.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'מותקנת גרסת PHP לא נתמכת: (גרסה',
     'LBL_DB_UNAVAILABLE'                => 'מסד נתונים אינו זמין',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים.  אנא ודא שיש ברשותך את מנהלי ההתקנים הדרושים עבור הסוגים הבאים של מסדי הנתונים הנתמכים: MySQL, MS SQLServer, Oracle או DB2.  ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php. ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת PHP שברשותך. אנא עיין במדריך PHP לקבלת מידע נוסף אודות אופן ההפעלה של תמיכה במסד הנתונים.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים. אנא ודא שבידך מנהלי ההתקנים הדרושים עבור אחד מהסוגים הבאים של מסדי נתונים נתמכים: MySQL‏, MS SQLServer‏, Oracle או DB2. ייתכן שתצטרך להוריד את התגובה של הסיומת בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת PHP שברשותך. אנא עיין במדריך PHP לקבלת מידע נוסף אודות אופן ההפעלה של תמיכה במסד נתונים.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'לא נמצאו פונקציות הקשורות לספריות מנתח XML הנחוצים ליישום ה-Sugar. ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת ה-PHP שלך. נא עיין במדריך PHP שלך לקבלת מידע נוסף.',
     'LBL_CHECKSYS_CSPRNG' => 'מחולל מספרים אקראיים',
     'ERR_CHECKSYS_MBSTRING'             => 'לא נמצאו פונקציות הקשורות לשלוחת מחרוזות מרובות הבתים של PHP (mbstring) הנחוצים ליישום ה-Sugar. <br/><br/>באופן כללי, מודול ה-mbstring לא מופעל כברירת מחדל ב-PHP וחייב להיות מופעל עם --אפשר-mbstring כאשר ה-PHP הבניארי בנוי. נא עיין במדריך PHP שלך לקבלת מידע נוסף על כיצד לאפשר תמיכת mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'ההגדרה של Session.save_path בקובץ תצורת ה-php שלך (php.ini) אינה מוגדרת או מוגדרת לתיקייה שלא הייתה קיימת. ייתכן שתצטרך להגדיר את הגדרת save_path ב-php.ini או לוודא שקיימות ערכות התיקייה ב-save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'ההגדרה של Session.save_path בקובץ תצורת ה-php שלך (php.ini) מוגדרת לתיקייה שאינה ניתנת לכתיבה. אנא נקוט בצעדים הדרושים כדי להפוך את התיקייה לניתנת לכתיבה. <br>בהתאם למערכת ההפעלה שלך, זה עשוי לחייב אותך לשנות את ההרשאות על ידי הפעלת chmod 766, או ללחוץ באמצעות לחצן העכבר הימני על שם הקובץ כדי לגשת לתכונות ולבטל את הסימון של אפשרות \'לקריאה בלבד\'.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'קובץ התצורה קיים, אך הוא אינו ניתן לכתיבה. אנא נקוט בצעדים הדרושים כדי להפוך אותו לניתן לכתיבה. בהתאם למערכת ההפעלה שלך, זה עשוי לחייב אותך לשנות את ההרשאות על ידי הפעלת chmod 766, או ללחוץ באמצעות לחצן העכבר הימני על שם הקובץ כדי לגשת לתכונות ולבטל את סימון האפשרות \'לקריאה בלבד\'.',
@@ -93,7 +92,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_HTACCESS'             => 'בדיקה של כתיבת .htaccess נכשלה. זה בדרך כלל אומר שלא הוגדרה אפשרות דריסה בספריית שוגר',
     'ERR_CHECKSYS_CSPRNG' => 'חריגת CSPRNG',
 	'ERR_DB_ADMIN'						=> 'The provided database administrator username and/or password is invalid, and a connection to the database could not be established.  Please enter a valid user name and password.  (Error:',
-    'ERR_DB_ADMIN_MSSQL'                => 'שם המשתמש המסופק של מנהל מסד הנתונים  ו\\או הסיסמה  לא חוקי\\ת, והתחברות למסד הנתונים לא ניתנת לייצור. נא הזן שם משתמש וסיסמה בתוקף.',
+    'ERR_DB_ADMIN_MSSQL'                => 'שם המשתמש המסופק של מנהל מסד הנתונים  ו\או הסיסמה  לא חוקי\ת, והתחברות למסד הנתונים לא ניתנת לייצור. נא הזן שם משתמש וסיסמה בתוקף.',
 	'ERR_DB_EXISTS_NOT'					=> 'מסד הנתונים שצוין אינו קיים.',
 	'ERR_DB_EXISTS_WITH_CONFIG'			=> 'מסד הנתונים כבר קיים עם נתוני תצורה. כדי להפעיל התקנה עם מסד הנתונים שנבחר, בבקשה הפעל מחדש את ההתקנה ובחר: "שחרר ושחזר טבלאות SugarCRM קיימות?" כדי לשדרג, השתמש באשף השדרוג במסוף הניהול. אנא קרא את תיעוד השדרוג הממוקם ב<a href="http://www.sugarforge.org/content/downloads/" target="_new">here</a>.',
 	'ERR_DB_EXISTS'						=> 'שם מסד הנתונים שסופק כבר קיים - לא יכול ליצור עוד אחד עם אותו שם.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'מודול IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'מודול MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'אישור (ללא הגבלה)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'אישור (ללא הגבלה)',
 	'LBL_CHECKSYS_MEM'					=> 'הגבלת זיכרון PHP',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'פרטי חשבון חדשים',
         'description' => 'תבנית זו מובאת לשימוש כאשר מנהל המערכת שולח סיסמה חדשה למשתמש.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name </p><p>Password : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name </p><p>Password : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Here is your account username and temporary password:<br />Username : $contact_user_user_name<br />Password : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
         'name' => 'דוא"ל סיסמה ביצירת המערכת',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'אפס סיסמת החשבון שלך',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>You recently requested on $contact_user_pwd_last_changed to be able to reset your account password. </p><p>Click on the link below to reset your password:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>You recently requested on $contact_user_pwd_last_changed to be able to reset your account password. </p><p>Click on the link below to reset your password:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'You recently requested on $contact_user_pwd_last_changed to be able to reset your account password.<br /><br />Click on the link below to reset your password:<br /><br />$contact_user_link_guid',
         'name' => 'שכחת את סיסמת הדואר האלקטרוני',

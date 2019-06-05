@@ -43,6 +43,23 @@
     },
 
     /**
+     * Needed to override loadTemplate to check field permissions for Quotes footer views
+     *
+     * @inheritdoc
+     */
+    _loadTemplate: function() {
+        if (!this._checkAccessToAction('list')) {
+            // set the action to noaccess so the field template will get the right class
+            this.action = 'noaccess';
+            // if this is a header or footer currency field and there's no access, show noaccess
+            this.tplName = 'noaccess';
+            this.template = app.template.getField('quote-footer-currency', this.tplName, this.module);
+        } else {
+            this._super('_loadTemplate');
+        }
+    },
+
+    /**
      * Toggles the field to edit if it not in edit
      *
      * @param {jQuery.Event} evt jQuery click event

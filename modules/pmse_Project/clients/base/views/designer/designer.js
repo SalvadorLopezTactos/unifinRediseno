@@ -50,7 +50,7 @@
                     var targetUrl = Backbone.history.getFragment();
                     project.dispose();
                     app.router.navigate(targetUrl , {trigger: true, replace: true });
-                    window.location.reload()
+                    window.location.reload();
                 },
                 onCancel: function () {
                     app.router.navigate('' , {trigger: false, replace: false })

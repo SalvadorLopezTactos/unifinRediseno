@@ -47,10 +47,6 @@ $viewdefs['Reports']['base']['view']['record'] = array(
                 ),
                 'assigned_user_name',
                 array(
-                    'name' => 'next_run',
-                    'readonly' => true,
-                ),
-                array(
                     'name' => 'last_run_date',
                     'readonly' => true,
                 ),

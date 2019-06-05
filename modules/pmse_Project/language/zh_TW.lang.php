@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => '有使用中流程與此「流程定義」相違背。更新此流程定義會影響這些流程。仍然要編輯此「流程定義」嗎？',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => '有使用中流程與此「流程定義」相違背。更新此流程定義會影響這些流程。仍然要停用此「流程定義」嗎？',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '透過從檔案系統匯入 *.bpm 檔案，自動建立新「流程定義」記錄。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '上傳 .bpm 文件以導入流程定義。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => '「流程定義」已成功匯入系統。',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => '請選取有效的 *.bpm 檔案。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '「流程定義」已匯入，但是包含一個或多個「商務規則」動作，而這些動作未選取商務規則。',
+    'LBL_BPM_IMPORT_SELECT' => '此流程定義含有以下商務規則和電子郵件範本。 '
+        . '請選擇要導入的項目。',
+    'LBL_BUSINESS_RULES' => '商務規則',
+    'LBL_EMAIL_TEMPLATES' => '電子郵件範本',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => '復原',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => '取消復原',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => '儲存',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => '驗證',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => '保存并驗證',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => '運行驗證以檢查錯誤',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '活動',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => '刪除',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => '模組',
+    'LBL_PMSE_FORM_LABEL_FILTER' => '篩選器',
+    'LBL_PMSE_FORM_LABEL_RELATED' => '關聯至',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => '準則',
     'LBL_PMSE_FORM_LABEL_DURATION' => '持續時間',
     'LBL_PMSE_FORM_LABEL_UNIT' => '單位',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '欄位',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '模組欄位評估',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '模組',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => '關聯至',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => '欄位',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => '值',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => '表單回應評估',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '不是',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '不等於',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '所有關聯紀錄',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '任何關聯紀錄',
+
     'LBL_PMSE_RUNTIME_BUTTON' => '執行時間',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '新增',
     'LBL_PMSE_FORMPANEL_CLOSE' => '關閉',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => '小組',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '建立記錄的 %MODULE% 中的使用者',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '上次修改記錄的 %MODULE% 中的使用者',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '指派至記錄的 %MODULE% 中的使用者',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '已指派至記錄的 %MODULE% 中的使用者',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE% 中的使用者，為建立記錄人員之經理',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '%MODULE% 中的使用者，為上次修改記錄人員之經理',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '%MODULE% 中的使用者，為指派至記錄人員之經理',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '%MODULE% 中的使用者，為指派至記錄人員之經理',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% 關聯 %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '創建了 %MODULE% 的使用者',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '上次修改 %MODULE% 的使用者',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '分配給 %MODULE% 的使用者',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '曾分配給 %MODULE% 的使用者',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '創建了 %MODULE% 的管理者',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '上次修改 %MODULE% 的管理者',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '分配給 %MODULE% 的管理者',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '曾分配給 %MODULE% 的管理者',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => '角色：%ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => '小組：%TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => '建議',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => '無效運算式語法。',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => '驗證進程定義: 檢索元素設置',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => '驗證流程定義: 驗證元素設置',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => '正在刷新錯誤清單..',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => '驗證已完成！發現問題：',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' 問題',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => '正在進行驗證',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => '警告: 此過程可能會停止此元素或產生其他預想外的影響',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => '錯誤: 此過程將無法再次元素中運行',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => '無法驗證元素',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => '元素不符合傳入流的最小數量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => '此元素必須擁有最小數量的傳入路徑。請檢查連接到此元素的路徑數以確保滿足最小數量。',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => '元素超過傳入流的最大數量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => '此元素具有不可超過的最大傳入路徑數。請檢查連接到此元素的路徑數以確保不超過最大數。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => '元素不符合傳出流的最小數量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => '此元素必須擁有最小數量的傳出路徑。請檢查連接到此元素的路徑數以確保滿足最小數量。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => '元素超過傳出流的最大數量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => '此元素具有不得超過的最大傳出路徑數。請檢查指向此元素的路徑數以確保不超過最大路徑數。',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => '未設置必要欄位',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => '此元素尚未設置所必需的欄位。請檢查元素設置以確保欄位設置正確, 并確保按下 "保存" 按鈕進行保存。',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => '系統中當前沒有數據',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => '此元素在資料庫中不存在設置參考的特定數據。請檢查元素設置以確保擁有所有的引用數據 (即特定使用者、模組欄位、團隊等)。',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => '條件框運算式永遠不會計算為 true',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => '條件框中包含邏輯AND/OR/NOT的運算式。此錯誤意味著元素設置中條件框的配置方式使得運算式永遠不會為真。請選中條件框以消除任何會阻止運算式為真的邏輯矛盾。',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => '元素無法訪問',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => '在進程中需要執行的元素必須連接到其路徑。此元素的路徑鏈必須從啟動元素開始。請檢查此元素的傳入路徑鏈以確保鏈從啟動元素開始。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => '等待時間條件必須只包含一個日期時間常數',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => '此等待事件元素已使用 "固定日期" 條件框進行配置。此框必須只包含一個 "固定日期時間" 常量或日期時間欄位的引用。運算式所有其他的部分必須是數學運算子 (+/-) 或 "時間跨度" 的常量。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => '指定的持續時間值不能為零',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => '此等待事件元素已使用 "持續時間" 設置。此設置不能等於零, 否則將會發生錯誤。檢查元素設置, 以確保 "持續時間" 未設置為零。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => '未設置等待時間參數',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => '此等待事件元素沒有配置任何設置。請檢查元素設置以確保選擇了 "持續時間" 或 "固定日期", 輸入所需的值, 并按下 "保存" 按鈕。',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => '預期時間小於零',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => '在此活動元素的 "表單" 設置下, 預期時間設置為負值，這將導致進程在到達該元素時凍結。請打開此元素的 "表單" 設置，將預期時間更改為非負數。',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => '操作類型為[Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => '此操作元素沒有指定的類型。可以通過按右鍵操作元素，然後從 "操作類型" 清單中選擇類型來進行更改。',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => '未保證路徑被選擇',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => '出現此錯誤訊息可能是由於此閘道元素中的任何路徑都沒有被使用, 這將導致進程中止。建議在元素設置中設置預設路徑，以防任何條件框運算式都不滿足的情況出現。可以通過右鍵單擊閘道元素，並在 "預設流" 功能表下選擇一個元素來實現。如果未指定預設路徑，則應更改元素設置中的條件框運算式，以確保在運行進程時至少有一個條件框運算式為 true。',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '融合閘道類型與傳入流的閘道類型不匹配',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '分散的閘道將流程擴展到多個分支。當使用收斂閘道將這些分支重新融合成一條路徑時，必須使用正確類型的收斂閘道，具體取決於創建分支的收斂閘道類型。對於使用獨佔或基於事件的分散閘道所創建的分支，請使用獨佔聚合閘道重新進行融合。對於使用並行或包含的分散閘道創建的分支, 請使用並行聚合通道重新進行融合。',
 );

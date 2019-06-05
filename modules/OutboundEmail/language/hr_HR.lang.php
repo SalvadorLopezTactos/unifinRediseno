@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ovo je račun sustava.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID adrese e-pošte',
     'LBL_TYPE' => 'Vrsta',
+    'LBL_REPLY_TO_NAME' => 'Ime na koje se šalje odgovor',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adrese e-pošte na koje se šalje odgovor',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID adrese e-pošte na koje se šalje odgovor',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresa e-pošte na koje se šalje odgovor',
+    'LBL_PRIMARY_TEAM' => 'Primarni tim',
 );

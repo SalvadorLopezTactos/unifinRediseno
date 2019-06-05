@@ -227,8 +227,7 @@
              * body.
              * @param {Array} [options.attachments] The email's attachments.
              * @param {Data.Bean} [options.related] The record to which the
-             * email is related. The model is cloned so the original model
-             * is not modified.
+             * email is related.
              * @param {Array} [options.team_name] The teams assigned to the
              * email.
              * @param {string} [options.assigned_user_id] The ID of the
@@ -262,9 +261,13 @@
             /**
              * Returns a copy of the related model for adding to email options
              *
-             * @param {Data.Bean} model
+             * @param {Data.Bean} model The model to clone.
+             * @return {Data.Bean} The cloned model.
+             * @private
+             * @deprecated 8.3.0 May be removed in 9.3.0 or any subsequent release.
              */
             _cloneRelatedModel: function(model) {
+                app.logger.warn('_cloneRelatedModel is deprecated and may be removed in Sugar 9.3.0 or later.');
                 return app.data.createBean(model.module, app.utils.deepCopy(model));
             },
 
@@ -372,11 +375,6 @@
                 }
 
                 options = _.extend(options, optionsFromController, optionsFromLink);
-
-                if (options.related) {
-                    options.related = this._cloneRelatedModel(options.related);
-                }
-
                 return options;
             },
 

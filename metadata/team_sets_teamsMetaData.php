@@ -70,6 +70,14 @@ $dictionary['team_sets_teams'] = array(
                 'team_set_id',
             ),
         ),
+        array(
+            'name' => 'idx_ud_team_id_team_set_id',
+            'type' => 'index',
+            'fields' => array(
+                'team_id',
+                'team_set_id',
+            ),
+        ),
     ),
     'relationships' => array(
         'team_sets_teams' => array(

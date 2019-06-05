@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Neispravna prijava ili lozinka',
-	'ERR_BODY_TOO_LONG'		=> '\\rTekst u tijelu predug za obuhvaćanje CIJELE poruke e-pošte. Skraćen.',
+	'ERR_BODY_TOO_LONG'		=> '\rTekst u tijelu predug za obuhvaćanje CIJELE poruke e-pošte. Skraćen.',
 	'ERR_INI_ZLIB'			=> 'Nije moguće privremeno isključiti sažimanje Zlib. „Postavke testiranja” možda neće biti uspješne.',
 	'ERR_MAILBOX_FAIL'		=> 'Nije moguće dohvatiti nijedan poštanski račun.',
 	'ERR_NO_IMAP'			=> 'Nema pronađenih biblioteka IMAP. Riješite to prije nego što nastavite s dolaznom e-poštom',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Stvori redove čekanja iz timova',
 	'LBL_GROUPFOLDER_ID'	=> 'ID grupne mape',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Dodijeli grupnoj mapi',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Dopusti korisnicima da šalju e-poštu s pomoću imena pošiljatelja i adrese kao adrese na koju se šalje odgovor',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Kad je odabrana ova mogućnost, ime i adresa e-pošte pošiljatelja povezani s ovim grupnim poštanskim računom prikazuju se kao mogućnost za polja pošiljatelja pri sastavljanju poruka e-pošte za korisnike koji imaju pristup grupnom poštanskom računu.',
     'LBL_STATUS_ACTIVE'     => 'Aktivno',
     'LBL_STATUS_INACTIVE'   => 'Neaktivno',
     'LBL_IS_PERSONAL' => 'osobno',

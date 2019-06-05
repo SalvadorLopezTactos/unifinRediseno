@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopēt citu adresi uz pamatadresi',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopēt pamatadresi uz citu adresi',
     'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Lai izveidotu iespēju, nepieciešams uzņēmums.\\n Lūdzu izveidojiet uzņēmumu vai atlasiet esošu uzņēmumu.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Lai izveidotu iespēju, nepieciešams uzņēmums.\n Lūdzu izveidojiet uzņēmumu vai atlasiet esošu uzņēmumu.',
     'NTC_REMOVE_CONFIRMATION' => 'Vai tiešām vēlaties izņemt kontaktpersonu no šī pieteikuma?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Vai tiešām vēlaties izņemt šo ierakstu kā padoto?',
 

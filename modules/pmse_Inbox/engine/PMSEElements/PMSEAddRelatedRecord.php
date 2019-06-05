@@ -144,12 +144,19 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
                         }
                     }
 
-                    $relatedBean = $this->pmseRelatedModule->addRelatedRecord($bean, $arr_module, $fields);
-                    if (!empty($relatedBean) && is_object($relatedBean)) {
-                        $rel_id = $relatedBean->id;
-                        $rel_name = $relatedBean->module_dir;
-                        $this->logger->debug("Create related record " . $rel_name . " ID: $rel_id");
-                        $this->logger->debug("Add relationship $rel_name of $sugarModule");
+                    $relatedBeans = $this->pmseRelatedModule->addRelatedRecord(
+                        $bean,
+                        $arr_module,
+                        $fields,
+                        $definitionBean
+                    );
+                    if (!empty($relatedBeans) && is_array($relatedBeans)) {
+                        foreach ($relatedBeans as $relatedBean) {
+                            $rel_id = $relatedBean->id;
+                            $rel_name = $relatedBean->module_dir;
+                            $this->logger->debug("Create related record " . $rel_name . " ID: $rel_id");
+                            $this->logger->debug("Add relationship $rel_name of $sugarModule");
+                        }
                     } else {
                         $this->logger->info("Not created related record!!!");
                     }

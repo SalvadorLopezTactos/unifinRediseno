@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Ustawienia poczty e-mail',
     'EmailParticipants' => 'Uczestnicy wiadomości e-mail',
     'DataPrivacy' => 'Ochrona danych osobowych',
+    'ReportSchedules' => 'Harmonogramy raportów',
+    'CommentLog' => 'Dziennik komentarzy',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'Token OAuth',
     'Filters' => 'Filtr',
     'Comments' => 'Komentarz',
+    'CommentLog' => 'Dziennik komentarzy',
     'Currencies' => 'Waluta',
     'ProductTemplates' => 'Szablon produktu',
     'ProductTypes' => 'Typ produktu',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Ustawienia poczty e-mail',
     'EmailParticipants' => 'Uczestnik wiadomości e-mail',
     'DataPrivacy' => 'Ochrona danych osobowych',
+    'ReportSchedules' => 'Harmonogram raportów',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transport',
     'Utilities' => 'Usługi',
     'Other' => 'Inne',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Poziom 1',
+    'T2' => 'Poziom 2',
+    'T3' => 'Poziom 3',
+    'T4' => 'Poziom 4',
   ),
   'lead_source_default_key' => 'Samodzielnie generowane',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Przenieś',
         'donothing' => 'Nic nie rób'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Nigdy',
+        30000 => 'Co 30 sekund',
+        60000 => 'Co 1 minutę',
+        120000 => 'Co 2 minuty',
+        180000 => 'Co 3 minuty',
+        240000 => 'Co 4 minuty',
+        300000 => 'Co 5 minut',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'W prognozie',
         'sales_stage' => 'Etap sprzedaży',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Lista',
         'activities' => 'Panel aktywności',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Co godzinę',
+        '21600' => 'Co 6 godzin',
+        '43200' => 'Co 12 godzin',
+        '86400' => 'Codziennie',
+        '604800' => 'Co tydzień',
+        '1209600' => 'Co 2 tygodnie',
+        '2419200' => 'Co 4 tygodnie',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Link obserwacji',
   'LBL_TOGGLE_VISIBILITY' => 'Przełącz widok', // Record view header panel element
   'LBL_ACTIVITIES' => 'Panel aktywności',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Wszelkie prawa zastrzeżone.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar oraz kostka 3-D są zastrzeżonymi znakami towarowymi firmy SugarCRM Inc. '.
         'Wszystkie inne nazwy firm i produktów użyte lub pojawiające się w tym produkcie mogą być znakami towarowymi '.
         'SugarCRM ®, Sugar Enterprise™ oraz Sugar™ są znakami towarowymi SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Zapisz',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Dodaj folder do',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Nie można zmienić tego foldera',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Czy na pewno chcesz usunąć ten folder?\\nTa operacja jest nieodwracalna.\\nUsunięcie tego folderu obejmie również na foldery podrzędne.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Czy na pewno chcesz usunąć ten folder?\nTa operacja jest nieodwracalna.\nUsunięcie tego folderu obejmie również na foldery podrzędne.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Nazwa nowego folderu',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Wybierz folder, aby wykonać tę akcję.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Zarządzanie folderami',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synchronizuj wszystkie konta pocztowe',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'E-mail został wysłany na podany adres przy użyciu podanych ustawień poczty wychodzącej. Sprawdź czy wiadomość została odebrana w celu weryfikacji ustawień.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Wykonanie tej czynności spowoduje zsynchronizowanie kont pocztowych i ich zawartości.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Czy przeprowadzić pełną synchronizację?\\nDuże konta pocztowe będą synchronizować się dłużej.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Czy przeprowadzić pełną synchronizację?\nDuże konta pocztowe będą synchronizować się dłużej.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Naciśnij klawisz Shift lub Ctrl, aby wybrać więcej niż jeden folder.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Ogólne',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Dostępne foldery grupowe',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Wymagana jest aktywna sesja, aby wyeksportować zawartość',
     'ERR_NO_HEADER_ID' => 'Ta funkcja nie jest dostępna w tym motywie.',
     'ERR_NOT_ADMIN' => "Nieautoryzowany dostęp do modułu administracyjnego.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Ta opcja jest wyłączona w SugarCRM dla trybu IDM i dostępna w konsoli chmury.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Przejdź do sekcji <a href=\"%s\" target=\"_blank\">konsola chmury</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Zarządzanie hasłami jest dostępne tylko w ustawieniach chmury.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Skontaktuj się z administratorem systemu Sugar, aby wprowadzić zmiany w polach tylko do odczytu.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Brak wymaganego pola:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Nieprawidłowy format wymaganego pola:',
     'ERR_INVALID_VALUE' => 'Nieprawidłowa wartość:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Ten użytkownik nie jest uprawniony do zmiany ustawień konfiguracji modułu {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Nie posiadasz uprawnień dodania modułu {moduleName} do ulubionych. Aby uzyskać dostęp, skontaktuj się z administratorem.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Nie posiadasz uprawnień subskrypcji modułu {moduleName}. Aby uzyskać dostęp, skontaktuj się z administratorem.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'w danych właściwych nie znaleziono pól_powiązanych_z_kolumnami_arkusza',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'kolumny_podsumowania nie są macierzą',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'w danych właściwych nie znaleziono pól_powiązanych_z_kolumnami_podsumowania',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'wiersze_stopki nie są macierzą',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'w danych właściwych nie znaleziono pól_powiązanych_z_wierszami_stopki',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Twoje żądanie nie powiodło się z nieznanych przyczyn.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Wybierz operatora...',
     'LBL_FILTER_CREATE_NEW' => 'Utwórz',
     'LBL_FILTER_CREATE_FILTER' => 'Utwórz nowy filtr',
+    'LBL_FILTER_CLOSE_FILTER' => 'Zamknij filtr',
     'LBL_FILTER_EDIT_FILTER' => 'Edytuj filtr',
     'LBL_FILTER_ALL_RECORDS' => 'Wszystkie rekordy',
     'TPL_FILTER_SAVE' => 'Filtr {{name}} został utworzony',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Wszelkie prawa zastrzeżone. < br /> SugarCRM, Sugar oraz kostka 3-D są zastrzeżonymi znakami towarowymi firmy SugarCRM Inc. '.
         'Wszystkie inne nazwy firm i produktów użyte lub pojawiające się w tym produkcie mogą być znakami towarowymi '.
         'odpowiednich firm, z którymi są skojarzone.',
@@ -3420,7 +3460,7 @@ Z poważaniem, SugarCRM',
     'LNK_RESUME' => 'Wznów',
     'LNK_VIEW_CHANGE_LOG' => 'Wyświetl dziennik inspekcji',
     'TPL_AUDIT_LOG_TITLE' => 'Dziennik inspekcji dla {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Kliknij, aby wyświetlić dziennik audytu adresów e-mail',
 
     'NTC_CLICK_BACK' => 'Kliknij przycisk Wstecz w przeglądarce i napraw błąd.',
     'NTC_DATE_FORMAT' => '(rrrr-mm-dd)',
@@ -3457,6 +3497,11 @@ Z poważaniem, SugarCRM',
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Uwaga:</b> Twoja przeglądarka pracuje w widoku kompatybilności IE, który nie jest obsługiwany.",
     'WARN_LICENSE_SEATS'=>  "Ostrzeżenie: liczba aktywnych użytkowników wynosi maksimum dozwolonych licencji.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Ostrzeżenie: liczba aktywnych użytkowników przekroczyła maksimum dozwolonych licencji.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Liczba aktywnych użytkowników przekracza limity określone Liczbą licencji. Skontaktuj się ze swoim administratorem.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Tylko administratorzy mogą się zalogować.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Osiągnięto limit Liczby licencji użytkownika. Tylko istniejący użytkownicy mogą się zalogować.',
     'WARN_ONLY_ADMINS'=> "Tylko administratorzy mogą się zalogować.",
     'WARN_UNSAVED_CHANGES'=> "Nastąpi wyjście z tego rekordu bez zapisania wprowadzonych w nim zmian. Czy na pewno wyjść?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Wykryto niezapisane zmiany. Na pewno chcesz opuścić stronę i odrzucić zmiany?',
@@ -3550,6 +3595,7 @@ Z poważaniem, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Aktualnie brak zapisanych rekordów <item1>. <item2> teraz rekord.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Możesz utworzyć <item1> z <item2>. <item3> <item2> listy.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Kliknij tutaj",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Dodaj do moich ulubionych',
@@ -3655,6 +3701,10 @@ Z poważaniem, SugarCRM',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Wskaźniki szans',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Wskaźniki szans dla powiązanego konta.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Szybkie wybieranie w katalogu produktów',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Służy do wyświetlania ostatnio używanych elementów i produktów zapisanych w ulubionych',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Ostatnio używane',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Ulubione',
 
     'LBL_DASHLET_NO_RECORDS' => 'Nie znaleziono żadnych rekordów.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Podsumowanie zgłoszeń',
@@ -4278,7 +4328,27 @@ Z poważaniem, SugarCRM',
 
     'LBL_FUTURE' => 'Nadchodzące',
     'LBL_REQUIRED_FIELD' => 'Wymagane',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Pozycja wiersza oferty',
+    'LBL_DISCOUNT_TOTAL' => 'Całkowity rabat',
+    'LBL_TAX' => 'Podatek',
+    'LBL_SHIPPING' => 'Wysyłka',
+    'LBL_GRAND_TOTAL' => 'Suma całkowita',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Wypełniaj automatycznie adres fakturowania z profilu Kontrahenta',
+    'LBL_QLI_ADD_GROUP' => 'Dodaj Grupę',
+    'LBL_QLI_COMMENT' => 'Komentarz',
+    'LBL_SELECT_ACTION' => 'Wybierz działanie',
+    'LBL_QLI_GROUP_NAME' => 'Nazwa grupy',
+    'LBL_GROUP_TOTAL' => 'Suma dla grupy',
+    'LBL_ITEM_NAME' => 'Pozycja wiersza',
+    'LBL_QLI_DELETE' => 'Czy na pewno chcesz usunąć tę pozycję wiersza?',
+    'LBL_QLI_COMMENT_DELETE' => 'Czy na pewno chcesz usunąć ten komentarz dla pozycji wiersza?',
+    'LBL_QLI_GROUP_DELETE' => 'Czy na pewno chcesz usunąć grupę {0}? Wszystkie pozycje zostaną przeniesione do grupy domyślnej.',
+    'LBL_QLI_GROUP_EMPTY' => 'Brak pozycji wiersza oferty',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Opcjonalne',
     'LBL_RELATED_MODULE' => 'Powiązane — {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Powiązane — {{{this}}}',
@@ -4308,7 +4378,7 @@ Z poważaniem, SugarCRM',
     'LBL_CONFIRM' => 'Potwierdź',
     'LBL_NO_ACCESS' => '(Brak dostępu)',
     'LBL_NO_ACCESS_LOWER' => 'Brak dostępu',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Brak dostępu',
     'LBL_VALUE_ERASED' => 'Wartość usunięta',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Informacja ta została usunięta przez żądanie ochrony danych osobowych',
     'LBL_CREATE_RELATED_RECORD' => 'Utwórz powiązany rekord',
@@ -4936,7 +5006,7 @@ Z poważaniem, SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Zadania zespołu',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'Interfejs SOAP lub stary REST API',
@@ -4997,9 +5067,9 @@ Z poważaniem, SugarCRM',
     'LBL_ALERT_TITLE_NOTICE' => 'Uwaga:',
     'LBL_ALERT_TITLE_ERROR' => 'Błąd:',
     'LBL_ALERT_TITLE_LOADING' => 'Ładowanie',
+    'LBL_ALERT_NO_ACCESS' => 'Brak dostępu do filtra zastosowanego do tego pulpitu podrzędnego.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Powiel pulpit, aby ustawić własny filtr dla tego pulpitu podrzędnego.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Wersja twojej przeglądarki nie jest już wspierana lub korzystasz z niewspieranej przeglądarki.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Zalecane są następujące wersje przeglądarek: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Zobacz stronę {{link}} dla sugerowanych przeglądarek.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Obsługiwane platformy',
     'LBL_ALERT_CONFIRM_DELETE' => 'Czy na pewno chcesz usunąć ten element?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Czy na pewno chcesz usunąć te elementy?',
@@ -5097,7 +5167,7 @@ Z poważaniem, SugarCRM',
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historyczne podsumowanie',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Więcej historii...',
     'LBL_RELATED_CONTACT' => 'Powiązany kontakt',
     'LBL_MODULE_TYPE' => 'Typ',
@@ -5165,6 +5235,11 @@ Z poważaniem, SugarCRM',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Brak ustawień serwera SMTP',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Aby wysyłać powiadomienia o przydzieleniu rekordu, musi zostać skonfigurowany serwer SMTP w {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Ustawienia poczty e-mail',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Dostępne nowe raporty zapasów',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Dostępne są nowe raporty zapasów w ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'module Raporty',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Są oznaczone znacznikiem „Raport zapasów” i można je filtrować. Raporty są też oznaczane znacznikiem „Sprzedaż i marketing”, „Obsługa klienta”, „Ochrona prywatności danych” lub „Administracyjne” na podstawie zawartości. Więcej informacji można znaleźć w ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentacji',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM pozwala użytkownikom na szybkie wykonywanie określonych zadań dzięki skrótom klawiaturowym. Tabele po prawej opisują dostępne skróty razem z klawiszami i działaniami jakie wykonują.',
@@ -5274,23 +5349,26 @@ Z poważaniem, SugarCRM',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesy',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Dashlet Procesy wyświetla szablony, których można używać w Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Na pulpicie podrzędnym Procesy wyświetlane są szablony, których można używać w SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Definicje procesu',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Dashlet Definicje procesów wyświetla szablony, które mogą być używane w Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Na pulpicie podrzędnym Definicje procesów wyświetlane są szablony, których można używać w SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Utwórz definicję procesu',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importuj definicje procesów',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Reguły biznesowe procesu',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Dashlet Reguły biznesowe procesu wyświetla szablony, których można używać w Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Na pulpicie podrzędnym Reguły biznesowe wyświetlane są szablony, których można używać w SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Utwórz regułę biznesową procesu',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importuj reguły biznesowe procesu',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Szablony wiadomości e-mail procesów',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Dashlet Szablony procesów e-mail wyświetla szablony, które mogą być używane w Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Na pulpicie podrzędnym Szablony poczty e-mail wyświetlane są szablony, których można używać w SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Utwórz szablon wiadomości e-mail procesów',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importuj szablony wiadomości e-mail procesów',
 
@@ -5314,7 +5392,7 @@ Z poważaniem, SugarCRM',
     'LBL_PMSE_CANCELLED_STATUS' => 'Anulowane',
     'LBL_PMSE_TERMINATED_STATUS' => 'Zakończone',
     'LBL_PMSE_ERROR_STATUS' => 'Błąd',
-    'LBL_PMSE_SETTINGS' => 'Ustawienia Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'Ustawienia SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Na pewno chcesz wyłączyć ten rekord?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Na pewno chcesz włączyć ten rekord?',
@@ -5338,7 +5416,7 @@ Z poważaniem, SugarCRM',
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 wymaga obsługi Javascript. Włącz obsługę Javascript w przeglądarce, aby móc korzystać z Sugar 7.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Nie można anulować szeregowania uszeregowanych danych',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Nie można anulować szeregowania uszeregowanych danych, ponieważ zawierają one odwołania do obiektów lub klas',
 
@@ -5367,6 +5445,15 @@ Z poważaniem, SugarCRM',
     'LBL_DATAPRIVACY_PII' => 'Informacje osobiste',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Zaznacz do usunięcia',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Osobiste informacje dla {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Skopiowano do schowka.',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nie można skopiować do schowka',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopiuj łącze potwierdzające',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Pokaż więcej...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Pokaż mniej...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6544,7 +6631,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Osadzony plik';
     'YER' => 'Reale',
     'ZWD' => 'Dolary Zimbabwe',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Pojedynczy',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Brak',
+        'future' => 'Bieżąca wartość',
+        'old' => 'Stara wartość',
+        'both' => 'Bieżące i stare wartości',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Pojedynczy',
+    );

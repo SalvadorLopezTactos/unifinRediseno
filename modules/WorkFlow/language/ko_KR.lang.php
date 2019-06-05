@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => '작업흐름 정의',
   'LBL_MODULE_NAME_SINGULAR' => '작업흐름 정의',
-  'LBL_MODULE_ID' => '작업흐름',  
+  'LBL_MODULE_ID' => '작업흐름',
   'LBL_MODULE_TITLE' => '작업 흐름 : 홈',
   'LBL_SEARCH_FORM_TITLE' => '작업흐름 검색',
   'LBL_LIST_FORM_TITLE' => '작업 흐름 목록',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => '목표 모듈',
   'LBL_LIST_ORDER' => '진행 순서',
   'LBL_FROM_NAME' => '발신인',
-  'LBL_FROM_ADDRESS' => '발신 주소',  
+  'LBL_FROM_ADDRESS' => '발신 주소',
   'LNK_NEW_WORKFLOW' => '작업흐름 정의 새로 만들기',
-  'LNK_WORKFLOW' => '작업흐름 정의 목록', 
-  
-  
+  'LNK_WORKFLOW' => '작업흐름 정의 목록',
+
+
   'LBL_ALERT_TEMPLATES' => '알림 템플릿',
   'LBL_CREATE_ALERT_TEMPLATE' => '알림 템플릿 새로 만들기',
   'LBL_SUBJECT' => '제목',
-  
+
   'LBL_RECORD_TYPE' => '적용',
  'LBL_RELATED_MODULE'=> '연관 모듈',
-  
-  
+
+
   'LBL_PROCESS_LIST' => '작업흐름 순서',
 	'LNK_ALERT_TEMPLATES' => '알림 이메일 템플릿',
 	'LNK_PROCESS_VIEW' => '작업흐름 순서',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => '종류',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>알림:</strong> Sugar Workflow 및 Workflow Management 기능이 유지보수 모드입니다. Sugar Enterprise 에디션 고객은 SugarBPM<sup class="trademark">TM</sup>에 의해 제공된 기능을 사용해야 합니다.',
 );
 

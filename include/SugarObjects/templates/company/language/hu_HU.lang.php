@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Számlázás kényszerítése',
 	'LBL_PUSH_SHIPPING' => 'Szállítás kényszerítése',
 	'LBL_SAVE_ACCOUNT' => 'Kliens mentése',
+    'LBL_SERVICE_LEVEL' => 'Szolgáltatási szint',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Szállítási város:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Szállítási ország:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Szállítási irányítószám:',

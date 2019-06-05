@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Gruppeattribut:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Med bruger DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Inkluder bruger DN med bruger Attribut, når du checker gruppe medlemskab',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle yderligere filterparametre, der skal anvendes til godkendelse af brugere, f.eks. \\nis_sugar_user=1 eller "is_sugar_user=1""is_sales=1"',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle yderligere filterparametre, der skal anvendes til godkendelse af brugere, f.eks. \nis_sugar_user=1 eller "is_sugar_user=1""is_sales=1"',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Log på attribut:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Forbind attribut:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Til at forbinde LDAP-brugeren<br>Eksempler: <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Styleguide (Lab)',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokumentation og eksempler',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuel validering',
-    'LBL_MANUAL_VALIDATION'=>'"Hvis du fortsat har problemer med automatisk validering, skal du tjekke konfigurationen af din proxy i administratorpanelet <a href=""index.php?module=Configurator&action=EditView"">Systemindstillinger</a>. Hvis systemmiljøet forhindrer systemet i at kommunikere med licensvalideringsserveren over internettet, skal du fortsætte med trinnene <a href=""#"" =""toggleDisplay"&#39;mainbody&#39;";toggleDisplay"&#39;manualbody&#39;";"">Manuel validering</a>."',
+    'LBL_MANUAL_VALIDATION'=>'"Hvis du fortsat har problemer med automatisk validering, skal du tjekke konfigurationen af din proxy i administratorpanelet <a href=""index.php?module=Configurator&action=EditView"">Systemindstillinger</a>. Hvis systemmiljøet forhindrer systemet i at kommunikere med licensvalideringsserveren over internettet, skal du fortsætte med trinnene <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manuel validering</a>."',
     'LBL_MANUAL_VALIDATION1'=> 'Trin 1: Generer en fil med licensnøgleoplysninger ved at klikke på følgende knap.',
     'LBL_MANUAL_VALIDATION2'=> 'Gem derefter filen "sugarkey.lic" på det lokale filsystem.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Advarsel: Hvis du vil sikre dine data, skal installationsprogrammet låses ved at angive &#39;installer_locked&#39; til &#39;true&#39; i filen config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Bemærk! Din licens udløber om",
     'WARN_LICENSE_EXPIRED2' =>"\" dag\"e\". Gå til <a href=\"index.php?action=LicenseSettings&module=Administration\">\"\"Licensadministration\"\"</a> på skærmen Administration.\"",
-    'WARN_LICENSE_SEATS'=>  "Advarsel: Brugerlicenser er overskredet med",
-    'WARN_LICENSE_SEATS2' => ". Kontakt en salgsmedarbejder, eller send en e-mail til <a href=\"mailto:cagroup@sugarcrm.com\">cagroup@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Warning:</b> Der er ",
+    'WARN_LICENSE_SEATS2' => " aktive brugere, når dit abonnement kun giver mulighed for ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Venligst deaktiver nogle brugere, kontakt din partner eller salgsrepræsentant,"
+        . " eller e-mail <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">For mere information, se den "
+        . "<a target = \"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Forstå brugertyper og sukkerlicenser</a> article.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Advarsel: Antallet af aktive brugere er allerede det maksimale antal tilladte licenser:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Advarsel: Antallet af aktive brugere er allerede det maksimale antal tilladte licenser",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Advarsel: Antallet af aktive brugere, som din licens tillader, svarer til antallet af aktive brugere på systemet. Du kan ikke oprette yderligere aktive brugere.",
-    'WARN_REPAIR_CONFIG' => 'Advarsel: Filen config.php skal repareres. Brug scriptet <a href="index.php?module=Administration&action=RebuildConfig">Gendan filen config</a> på siden Reparer i området Administration til at reparere filen config.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Warning:</b> Du vil ikke kunne oprette yderligere aktive brugere."
+        . " Køb venligst flere abonnementer.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Warning:</b> Du vil ikke kunne oprette yderligere aktive brugere."
+        . " Køb venligst flere abonnementer.",
+    'WARN_REPAIR_CONFIG' => '<b>Warning:</b> Filen config.php skal repareres. Brug venligst <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> scriptet på siden Reparation i Admin-området for at reparere konfig.-filen.',
     'WARN_UPGRADE_APP'=> "En opdateret version af programmet er nu tilgængelig.",
     'WARN_UPGRADE' => 'Advarsel: Opgrader',
     'WARN_UPGRADENOTE' => 'Nore:',
@@ -1245,15 +1254,17 @@ Alle samkøringer, der er baseret på denne platform, vil ikke længere virke.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatafil blev ikke fundet.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Indstillinger',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Konfigurer indstillinger for Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Log Viewer',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Få adgang til Advanced Workflow-loggen.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Få adgang til ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Procesadministration',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Se alle åbne og kørende processer i systemet.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurér ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' indstillinger og visningslogs. Administrér alle BPM-processorer til alle brugere via Procesadministration.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfigurér indstillinger for Advanced Workflow og se logfiler. Administrér alle BPM-processer for alle brugere via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfiguration tilbud',
+    'LBL_MANAGE_QUOTES' => 'Konfigurér tilbuddene i arbejdsark-layout',
 );

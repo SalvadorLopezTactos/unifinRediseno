@@ -36,6 +36,41 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
     protected $beanFlow;
 
     /**
+     * Process states used in determining validity of existing processes
+     * @var array
+     */
+    protected $states = [
+        // Open states have a number of values. For example,
+        // Completed means it can start again
+        'open' => [
+            'IN PROGRESS',
+            'COMPLETED',
+            'FORM',
+            'WAITING',
+            'SLEEPING',
+            'QUEUE',
+            'NEW',
+        ],
+        'closed' => [
+            'TERMINATED',
+            'ERROR',
+            'CLOSED',
+            'DELETED',
+            'INVALID',
+        ],
+    ];
+
+    /**
+     * Gets a list of states by type
+     * @param string $state `open` or `closed`
+     * @return array
+     */
+    protected function getStates($state)
+    {
+        return array_key_exists($state, $this->states) ? $this->states[$state] : [];
+    }
+
+    /**
      *
      * @return type
      * @codeCoverageIgnore
@@ -219,12 +254,9 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function isCaseDuplicated($bean, $flowData, $processFinished = false)
     {
-        $fields = array(
-            'pro_id',
-        );
         $q = $this->getSugarQueryObject();
+        $q->select()->fieldRaw('NULL');
         $q->from($this->getBeanFlow(), array('add_deleted' => true));
-        $q->distinct(true);
         $q->where()
             ->equals('cas_sugar_object_id', $bean->id)
             ->equals('cas_sugar_module', $bean->module_name)
@@ -232,17 +264,15 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
 
         if ($processFinished) {
             $q->where()
-                ->notIn('cas_flow_status', array('CLOSED', 'TERMINATED'));
+                ->in('cas_flow_status', $this->getStates('open'));
         } else {
             $q->where()
                 ->equals('cas_index', 1);
         }
 
-        $q->select($fields);
+        $result = $q->getOne();
 
-        $rows = $q->execute();
-
-        if (!empty($rows)) {
+        if ($result !== false) {
             if (!$processFinished) {
                 $this->getLogger()->debug("Start Event {$bean->id} already exists");
             }

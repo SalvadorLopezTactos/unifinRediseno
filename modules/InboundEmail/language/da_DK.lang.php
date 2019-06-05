@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'SV:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Brugernavn eller adgangskode er forkert',
-	'ERR_BODY_TOO_LONG'		=> '\\rBrødteksten er for lang til at fange hele e-mailen. Trimmes.',
+	'ERR_BODY_TOO_LONG'		=> '\rBrødteksten er for lang til at fange hele e-mailen. Trimmes.',
 	'ERR_INI_ZLIB'			=> '"Zlib-komprimeringen kunne ikke slukkes midlertidigt. ""Testindstillinger"" kan fejle."',
 	'ERR_MAILBOX_FAIL'		=> 'Ingen e-mail-konti kunne hentes.',
 	'ERR_NO_IMAP'			=> 'Ingen IMAP-biblioteker blev fundet. Løs dette problem, før du fortsætter med Indgående e-mail',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Startkøer fra team',
 	'LBL_GROUPFOLDER_ID'	=> 'Gruppemappe-id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Tildel til gruppemappe',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Tillad brugere at sende e-mails ved at anvende "fra" navn og adresse som svar-adressen',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Når denne mulighed er valgt, vil Fra navnet og Fra email adressen tilknyttet denne gruppe mail konto vises som mulighed i Fra felter ved oprettelse af emails fra brugere som har adgang til gruppe mail kontoen.',
     'LBL_STATUS_ACTIVE'     => 'Aktiv',
     'LBL_STATUS_INACTIVE'   => 'Inaktiv',
     'LBL_IS_PERSONAL' => 'personlig',

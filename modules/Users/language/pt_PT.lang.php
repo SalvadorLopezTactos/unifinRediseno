@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Atribuir à Equipa',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'As equipas disponíveis para aparecerem por predefinição nos registos são aquelas das quais é membro.',
 	'LBL_DEFAULT_TEAM'					=> 'Equipa padrão',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Equipa Primária por Defeito',
 	'LBL_LIST_DESCRIPTION'				=> 'Descrição',
 	'LBL_MY_TEAMS'						=> 'As Minhas Equipas',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Equipa Privada para',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Endereço de E-mail do Destinatário',
 	'ERR_SERVER_STATUS'					=> 'O estado do seu servidor',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Não é possível enviar um e-mail para o utilizador. Por favor, verifique a Configuração de E-mail de Saída nas <a href="index.php?module=EmailMan&action=config">Definições de E-mail</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'O utilizador só pode ser criado em <a href="{0}" target="_blank">Cloud console</a> para o modo IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'O endereço de e-mail principal apenas pode ser alterado em <a href="{0}" target="_blank">Cloud console</a> para o modo IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Endereço de E-mail',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirmar Palavra-passe',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Alterou o tipo de utilizador de Administrador de Sistema para Utilizador Comum. Depois de gravar essa alteração, o utilizador não tem privilégios de administrador do sistema.\\n\\nClique em OK para continuar.\\nClique em Cancelar para voltar ao registo.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Alterou o tipo de utilizador de Administrador de Sistema para Utilizador Comum. Depois de gravar essa alteração, o utilizador não tem privilégios de administrador do sistema.\n\nClique em OK para continuar.\nClique em Cancelar para voltar ao registo.',
 	'LBL_COUNTRY'						=> 'País:',
 	'LBL_CURRENCY_TEXT'					=> 'Selecione a moeda padrão.',
 	'LBL_CURRENCY'						=> 'Moeda Preferencial',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Número de casas decimais para mostrar nos campos decimais no sistema, tais como moedas e médias nos Relatórios.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Mostrar moeda preferencial',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Converter moeda base para a preferência do utilizador em visualizações de listagem e de registos.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Criar Itens de Linha de Receita na Moeda Preferencial',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Itens de Linha de Receita adicionados a uma Oportunidade no Catálogo de produtos serão convertidos para a Moeda preferencial do utilizador se for diferente da Moeda usada no item do Catálogo de produtos.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Separador de milhares (1000)',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Carácter utilizado para separador de milhares',
 	'LBL_DECIMAL_SEP'					=> 'Símbolo Decimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Forneça um Nome do Utilizador e um Endereço de E-mail.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Isto não está atualmente ativado. Contacte o seu administrador.',
 	'LBL_PUBLISH_KEY'					=> 'Chave de Publicação:',
-
+    'LBL_SITE_USER_ID' => 'Hash de site_url e user_id',
     'LBL_QUOTAS'                        => 'Quotas',
     'LBL_FORECASTS'                     => 'Previsões',
     'LBL_WORKSHEETS'                    => 'Folhas de Cálculo',
@@ -633,10 +633,7 @@ Clique em Cancelar para sair da página sem reatribuir qualquer registo.',
     'LBL_DETAIL' => 'Perfil do Utilizador',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Se alguns campos não forem editáveis, inicie sessão na sua Cloud Console para administrar estes campos',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Si deseja alterar alguns campos que não sejam editáveis, ' .
-        'contacte o Administrador para notificar essas alterações',
+        'Contacte o seu administrador do Sugar se pretende realizar alterações nos campos apenas de leitura.',
 ); // END STRINGS DEFS
-
-?>

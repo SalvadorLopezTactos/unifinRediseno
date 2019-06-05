@@ -12,6 +12,10 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2;
 
+use OneLogin\Saml2\Constants;
+use OneLogin\Saml2\LogoutRequest;
+use OneLogin\Saml2\LogoutResponse;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\AuthRedirectBinding;
 use Sugarcrm\IdentityProvider\Saml2\AuthResult;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
@@ -42,12 +46,12 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     protected $settings = [];
 
     /**
-     * @var \OneLogin_Saml2_LogoutRequest | \PHPUnit_Framework_MockObject_MockObject
+     * @var LogoutRequest | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $logoutRequest  = null;
 
     /**
-     * @var \OneLogin_Saml2_LogoutResponse | \PHPUnit_Framework_MockObject_MockObject
+     * @var LogoutResponse | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $logoutResponse  = null;
 
@@ -62,7 +66,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     protected $responseBuilder = null;
 
     /**
-     * @var \OneLogin_Saml2_Settings | \PHPUnit_Framework_MockObject_MockObject
+     * @var Settings | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $settingsObject = null;
 
@@ -145,7 +149,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     protected $authnRequest;
 
     /**
-     * @var \OneLogin_Saml2_Settings|\PHPUnit_Framework_MockObject_MockObject
+     * @var Settings|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $authSettings;
 
@@ -161,23 +165,23 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
                 'entityId' => 'spEntityId',
                 'assertionConsumerService' => [
                     'url' => 'http://sp.com/acs',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://sp.com/logout',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' => \OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
             ],
             'idp' => [
                 'entityId' => 'idpEntityId',
                 'singleSignOnService' => [
                     'url' => 'http://idp.com/saml/sso',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://idp.com/saml/slo',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'x509cert' => 'dummyCert',
             ],
@@ -186,7 +190,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
             ],
         ];
 
-        $this->settingsObject = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settingsObject = $this->getMockBuilder(Settings::class)
                                      ->setConstructorArgs([$settings])
                                      ->setMethods(['getSecurityData'])
                                      ->getMock();
@@ -202,11 +206,11 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
 
         $this->auth->method('getSettings')->willReturn($this->settingsObject);
 
-        $this->logoutRequest = $this->getMockBuilder(\OneLogin_Saml2_LogoutRequest::class)
+        $this->logoutRequest = $this->getMockBuilder(LogoutRequest::class)
                                     ->setConstructorArgs([$this->auth->getSettings()])
                                     ->getMock();
 
-        $this->logoutResponse = $this->getMockBuilder(\OneLogin_Saml2_LogoutResponse::class)
+        $this->logoutResponse = $this->getMockBuilder(LogoutResponse::class)
                                      ->setConstructorArgs([$this->auth->getSettings()])
                                      ->getMock();
 
@@ -234,7 +238,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
             ])
             ->setConstructorArgs([$this->settings])
             ->getMock();
-        $this->authSettings = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->authSettings = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->authMocked->method('getRequestBuilder')->willReturn($this->requestBuilder);
@@ -277,7 +281,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML response is not valid
      *
      * @covers ::processServiceSLO
@@ -292,7 +296,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not valid.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage test error
      *
      * @covers ::processServiceSLO
@@ -312,7 +316,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not success.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML response is not success
      *
      * @covers ::processServiceSLO
@@ -344,7 +348,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
         $this->logoutResponse->expects($this->once())->method('isValid')->willReturn(true);
         $this->logoutResponse->expects($this->once())
                              ->method('getStatus')
-                             ->willReturn(\OneLogin_Saml2_Constants::STATUS_SUCCESS);
+                             ->willReturn(Constants::STATUS_SUCCESS);
         $result = $this->auth->processServiceSLO($response);
         $this->assertEquals($result, $this->logoutResponse);
     }
@@ -352,7 +356,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML request is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML request is not valid
      *
      * @covers ::processIdpSLO
@@ -367,7 +371,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML request is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML request is not valid
      *
      * @covers ::processIdpSLO
@@ -478,7 +482,6 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoginSigned()
     {
-        
         $expectedParameters = $this->parameters + [
                 'SAMLRequest' => $this->samlRequest,
                 'RelayState' => $this->returnTo,
@@ -490,7 +493,8 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($this->forceAuthn),
                 $this->equalTo($this->isPassive),
-                $this->equalTo($this->setNameIdPolicy))
+                $this->equalTo($this->setNameIdPolicy)
+            )
             ->willReturn($this->authnRequest);
         $this->authSettings
             ->method('getSecurityData')
@@ -610,7 +614,7 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsUserProvisionNeeded($config, $result)
     {
-        $settingsObject = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $settingsObject = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
         $settingsObject->method('getSPData')->willReturn($config);

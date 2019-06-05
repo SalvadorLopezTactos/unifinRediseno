@@ -213,6 +213,12 @@ class ModuleInstaller{
             $this->rebuild_all(true);
             $rac = new RepairAndClear();
             $rac->repairAndClearAll($selectedActions, $this->installed_modules,true, false);
+            $rac->repairAndClearAll(
+                ['rebuildExtensions', 'clearAdditionalCaches'],
+                [translate('LBL_ALL_MODULES')],
+                true,
+                false
+            );
             $this->updateSystemTabs('Add',$this->tab_modules);
             //Clear out all the langauge cache files.
             clearAllJsAndJsLangFilesWithoutOutput();
@@ -251,17 +257,6 @@ class ModuleInstaller{
             die("No \$installdefs Defined In $this->base_dir/manifest.php");
         }
 
-    }
-
-    function install_user_prefs($module, $hide_from_user=false){
-        UserPreference::updateAllUserPrefs('display_tabs', $module, '', true, !$hide_from_user);
-        UserPreference::updateAllUserPrefs('hide_tabs', $module, '', true, $hide_from_user);
-        UserPreference::updateAllUserPrefs('remove_tabs', $module, '', true, $hide_from_user);
-    }
-    function uninstall_user_prefs($module){
-        UserPreference::updateAllUserPrefs('display_tabs', $module, '', true, true);
-        UserPreference::updateAllUserPrefs('hide_tabs', $module, '', true, true);
-        UserPreference::updateAllUserPrefs('remove_tabs', $module, '', true, true);
     }
 
     function pre_execute(){
@@ -1763,7 +1758,6 @@ class ModuleInstaller{
                 foreach($this->installdefs['beans'] as $bean){
 
                     $installed_modules[] = $bean['module'];
-                    $this->uninstall_user_prefs($bean['module']);
                 }
                 $this->modulesInPackage = $installed_modules;
                 $this->uninstall_beans($installed_modules);
@@ -1798,10 +1792,14 @@ class ModuleInstaller{
             //we need to save the setting to set it back after rebuildAll() completes.
             $silentBak = $this->silent;
             $this->rebuild_all(true);
+            $rac = new RepairAndClear();
+            $rac->repairAndClearAll(
+                ['rebuildExtensions', 'clearAdditionalCaches'],
+                [translate('LBL_ALL_MODULES')],
+                true,
+                false
+            );
             $this->silent = $silentBak;
-
-            //TY-188, clearing session
-            $ACLAllowedModules = getACLAllowedModules(true);
 
             //#27877, If the request from MB redeploy a custom module , we will not remove the ACL actions for this package.
             if( !isset($_REQUEST['action']) || $_REQUEST['action']!='DeployPackage' ){
@@ -1894,6 +1892,7 @@ class ModuleInstaller{
         global $beanFiles, $beanList, $current_user;
         include('include/modules.php');
         include("modules/ACL/remove_actions.php");
+        removeACLActions($current_user, $beanList, $beanFiles, $this->silent);
     }
 
     /**
@@ -2148,7 +2147,6 @@ class ModuleInstaller{
                         // Add this module to the moduleList array
                         $moduleList[] = $module;
                         $str .= "\$moduleList[] = '$module';\n";
-                        $this->install_user_prefs($module, empty($bean['hide_by_default']));
                         $this->tab_modules[] = $module;
                     }else{
                         $str .= "\$modules_exempt_from_availability_check['$module'] = '$module';\n";
@@ -2174,14 +2172,16 @@ class ModuleInstaller{
      * bean/module.
      */
     function install_beans($beans){
+        // We need to force reload var def on SugarBean construction
+        // @TODO delete it and figure out how to reload var defs on module installer part
+        global $isModuleInstalling;
+        $isModuleInstalling = true;
         foreach($beans as $bean){
             // This forces new beans to refresh their vardefs because at this
             // point the global dictionary for this object may be set with just
             // relationship fields.
             $rv = isset($GLOBALS['reload_vardefs']) ? $GLOBALS['reload_vardefs'] : null;
-            $dm = isset($_SESSION['developerMode']) ? $_SESSION['developerMode'] : null;
             $GLOBALS['reload_vardefs'] = true;
-            $_SESSION['developerMode'] = true;
 
             $this->log( translate('LBL_MI_IN_BEAN') . " $bean");
             $mod = BeanFactory::newBean($bean);
@@ -2192,8 +2192,8 @@ class ModuleInstaller{
 
             // Return state. Null values essentially unset what wasn't set before
             $GLOBALS['reload_vardefs'] = $rv;
-            $_SESSION['developerMode'] = $dm;
         }
+        $isModuleInstalling = false;
     }
 
     function uninstall_beans($beans){
@@ -2973,7 +2973,7 @@ class ModuleInstaller{
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => $config->get('site_url') . '/rest/v11_1',
+            'serverUrl' => $config->get('site_url') . '/rest/v11_4',
             'siteUrl' => $config->get('site_url'),
             'unsecureRoutes' => array('signup', 'error'),
             'loadCss' => 'url',
@@ -3028,14 +3028,17 @@ class ModuleInstaller{
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => 'rest/v11_1',
+            'serverUrl' => 'rest/v11_4',
             'siteUrl' => '',
-            'unsecureRoutes' => array('login', 'logout', 'error', 'forgotpassword', 'externalAuthError'),
+            'unsecureRoutes' => array('login', 'logout', 'error', 'forgotpassword', 'externalAuthError', 'stsAuthError'),
             'loadCss' => false,
             'themeName' => 'default',
             'clientID' => 'sugar',
             'collapseSubpanels' => $config->get('collapse_subpanels', false),
             'previewEdit' => $config->get('preview_edit', false),
+            'commentlog' => array(
+                'maxchars' => $config->get('commentlog.maxchars', 500),
+            ),
             'serverTimeout' => self::getBaseTimeoutValue(),
             'metadataTypes' => array(
                 "currencies",

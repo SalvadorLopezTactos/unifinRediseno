@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -12,6 +12,10 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2\Builder;
 
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\LogoutResponse;
+use OneLogin\Saml2\Response;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\AuthRedirectBinding;
 use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\Builder\ResponseBuilder;
@@ -27,7 +31,7 @@ use Sugarcrm\IdentityProvider\Saml2\Response\LogoutPostResponse;
 class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \OneLogin_Saml2_Settings | \PHPUnit_Framework_MockObject_MockObject
+     * @var Settings | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $settingsMock = null;
 
@@ -38,7 +42,7 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->settingsMock = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settingsMock = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -51,10 +55,10 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildLoginResponse()
     {
         $response = 'PG5vdGU+DQogIDx0bz5UZXN0PC90bz4NCjwvbm90ZT4=';
-        $authMock = $this->getMockBuilder(\OneLogin_Saml2_Auth::class)->disableOriginalConstructor()->getMock();
+        $authMock = $this->getMockBuilder(Auth::class)->disableOriginalConstructor()->getMock();
         $authMock->method('getSettings')->willReturn($this->settingsMock);
         $responseBuilder = new ResponseBuilder($authMock);
-        $this->assertInstanceOf(\OneLogin_Saml2_Response::class, $responseBuilder->buildLoginResponse($response));
+        $this->assertInstanceOf(Response::class, $responseBuilder->buildLoginResponse($response));
     }
 
     /**
@@ -65,8 +69,8 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'OneLoginAuth' => [
-                'authClass' => \OneLogin_Saml2_Auth::class,
-                'expectedResponse' => \OneLogin_Saml2_LogoutResponse::class,
+                'authClass' => Auth::class,
+                'expectedResponse' => LogoutResponse::class,
             ],
             'IdmAuth' => [
                 'authClass' => AuthPostBinding::class,
@@ -74,7 +78,7 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ],
             'IdmAuthRedirect' => [
                 'authClass' => AuthRedirectBinding::class,
-                'expectedResponse' => \OneLogin_Saml2_LogoutResponse::class,
+                'expectedResponse' => LogoutResponse::class,
             ],
         ];
     }

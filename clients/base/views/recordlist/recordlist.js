@@ -224,10 +224,10 @@
         if (firstLeftColumn && _.isArray(firstLeftColumn.fields)) {
             //Add Cancel button to left
             firstLeftColumn.fields.push({
-                type:'editablelistbutton',
-                label:'LBL_CANCEL_BUTTON_LABEL',
-                name:'inline-cancel',
-                css_class:'btn-link btn-invisible inline-cancel'
+                type: 'editablelistbutton',
+                label: 'LBL_CANCEL_BUTTON_LABEL',
+                name: 'inline-cancel',
+                css_class: 'btn-link btn-invisible inline-cancel ellipsis_inline'
             });
             this.leftColumns[0] = firstLeftColumn;
         }
@@ -236,10 +236,10 @@
             //Add Save button to right
             firstRightColumn.css_class = 'overflow-visible';
             firstRightColumn.fields.push({
-                type:'editablelistbutton',
-                label:'LBL_SAVE_BUTTON_LABEL',
-                name:'inline-save',
-                css_class:'btn-primary'
+                type: 'editablelistbutton',
+                label: 'LBL_SAVE_BUTTON_LABEL',
+                name: 'inline-save',
+                css_class: 'btn-primary ellipsis_inline'
             });
             this.rightColumns[0] = firstRightColumn;
         }

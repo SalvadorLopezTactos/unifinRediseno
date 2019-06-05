@@ -11,29 +11,17 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Templating;
 
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 class TemplateTest extends TestCase
 {
     /**
      * @dataProvider getTemplateToPathProvider
      */
-    public function testGetPathForTemplatesInABundle($template, $path)
+    public function testGetPathForTemplate($template, $path)
     {
-        if ($template->get('bundle')) {
-            $this->assertEquals($template->getPath(), $path);
-        }
-    }
-
-    /**
-     * @dataProvider getTemplateToPathProvider
-     */
-    public function testGetPathForTemplatesOutOfABundle($template, $path)
-    {
-        if (!$template->get('bundle')) {
-            $this->assertEquals($template->getPath(), $path);
-        }
+        $this->assertSame($template->getPath(), $path);
     }
 
     public function getTemplateToPathProvider()

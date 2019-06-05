@@ -451,9 +451,10 @@ class PMSEUserAssignmentHandler
                 'cas_id' => $caseData['cas_id'],
                 'cas_index' => $caseData['cas_index']
             ));
-        $beanObject = $this->retrieveBean($caseBean->cas_sugar_module,
-            $caseBean->cas_sugar_object_id); //$this->beanFactory->getBean($caseBean->cas_sugar_module);
-        //$beanObject->retrieve($caseBean->cas_sugar_object_id);
+        $beanObject = $this->retrieveBean($caseBean->cas_sugar_module, $caseBean->cas_sugar_object_id);
+        if (is_null($beanObject)) {
+            return false;
+        }
         $beanObject->assigned_user_id = $userId;
 
         if (PMSEEngineUtils::saveAssociatedBean($beanObject)) {

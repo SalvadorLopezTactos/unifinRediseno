@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => '有一些活动的流程违反了该流程定义。更新该流程定义可能会影响这些流程。是否仍要编辑该流程定义？',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => '有一些活动的流程违反了该流程定义。更新该流程定义可能会影响这些流程。是否仍要禁用该流程定义？',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '通过从您的文件系统导入一个 *.bpm 文件来自动创建新流程定义记录。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '上传 .bpm 文件以导入流程定义。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => '流程定义已成功导入系统。',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => '请选择有效的 *.bpm 文件。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '已导入流程定义，但该流程定义含有一个或多个商务规则动作（尚未选择商务规则）。',
+    'LBL_BPM_IMPORT_SELECT' => '此流程定义含有以下商务规则和电子邮件模板。'
+        . '请选择您要导入的项目。',
+    'LBL_BUSINESS_RULES' => '商务规则',
+    'LBL_EMAIL_TEMPLATES' => '电子邮件模板',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => '取消',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => '重做',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => '保存',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => '验证',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => '保存并验证',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => '运行验证以检查错误',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '活动',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => '删除',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => '模块',
+    'LBL_PMSE_FORM_LABEL_FILTER' => '筛选器',
+    'LBL_PMSE_FORM_LABEL_RELATED' => '关联到',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => '条件',
     'LBL_PMSE_FORM_LABEL_DURATION' => '持续时间',
     'LBL_PMSE_FORM_LABEL_UNIT' => '单元',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '字段',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '模块字段评估',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '模块',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => '关联到',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => '字段',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => '值',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => '表格反应评估',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '不是',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '不等于',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '所有相关记录',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '任何相关记录',
+
     'LBL_PMSE_RUNTIME_BUTTON' => '运行时',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '添加',
     'LBL_PMSE_FORMPANEL_CLOSE' => '关闭',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => '团队',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '创建记录的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '最后修改记录的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '被分配至记录的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '曾被分配至记录的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '管理记录创建人的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '管理记录最后修改人的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '管理被分配至记录中的人的 %MODULE% 用户',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '管理曾被分配至记录中的人的 %MODULE% 用户',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% 关联到 %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '创建 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '最后修改 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '分配至 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '分配至 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE% 创建者的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '最后修改 %MODULE% 之人的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '分配至 %MODULE% 之人的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '分配至 %MODULE% 之人的经理',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => '角色：%ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => '团队：%TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => '建议',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => '无效的表达式语法。',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => '验证流程定义：检索元素设置',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => '验证流程定义：验证元素设置',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => '正在刷新错误列表......',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => '验证已完成！发现问题：',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => '问题',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => '正在进行验证',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => '警告：此流程可能会停止此元素或产生其他意料之外的影响',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => '错误：此流程将无法在此元素中运行',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => '无法验证元素',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => '元素不满足传入流的最小数量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => '此元素必须具备最小数量的传入路径。请检查连接到此元素的路径数量，确保达到最小数量。',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => '元素超过传入流的最大数量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => '此元素具有不超过最大数量的传入路径。请检查连接到此元素的路径数量，确保不超过最大数量。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => '元素不满足传出流的最小数量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => '此元素必须具备最小数量的传出路径。请检查连接到此元素的路径数量，确保达到最小数量。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => '元素超过传出流的最大数量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => '此元素具有不超过最大数量的传出路径。请检查连接到此元素的路径数量，确保不超过最大数量。',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => '未设置必填字段',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => '此元素包含必填字段，但还未进行设置。请检查元素设置，确保字段已正确设置，然后请务必点击“保存”按钮。',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => '系统当前不存在数据',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => '此元素的设置引用了数据库中不存在的某个具体数据段。请检查元素设置，确保引用的所有数据均存在于数据库中（比如具体用户、模块字段、团队等等）。',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => '条件框表达式求值永远不会为真',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => '条件框包含逻辑与/或/非表达式。此错误表示元素设置中的一个条件框已经应用此种配置，表达式求值永远不会为真。请勾选条件框，消除所有阻止表达式求值为真的逻辑矛盾。',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => '元素无法到达',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => '为了在流程中执行某个元素，必须具备连接到此元素的路径。连接到此元素的路径链必须从启动元素开始。检查连接到此元素的传入路径链，确保路径链从启动元素开始。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => '等待时间条件必须只包含一个日期时间常数',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => '此等待事件元素已使用 "固定日期" 条件框进行配置。此条件框必须只包含一个 "固定日期时间" 常数或“日期时间”字段引用。表达式的所有其他部分必须是数学运算符 (+/) 或 "时间跨度" 常数。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => '指定的持续时间值不能为零',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => '此等待事件元素已使用“持续时间”设置进行配置。此设置不能等于零，否则就会出现错误。请检查元素设置，确保“持续时间”没有设置为零。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => '未设置等待时间参数',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => '此等待事件元素还未配置任何设置。请检查元素设置，确保已选择“持续时间”或“固定日期”，输入所需的值，然后点击“保存”按钮。',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => '预计时间小于零',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => '在此活动元素“表单”设置的下方，预计时间被设为负值，这会导致流程在到达此元素时冻结。请打开此元素的“表单”设置，将预计时间改为非负数。',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => '操作类型为[Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => '此操作元素没有指定的类型。可以通过右键点击操作元素，然后从“操作类型”清单中选择一个类型来进行更改。',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => '不保证路径被选择',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => '出现此错误信息是因为此网关元素中的任何路径都未被选择，这将导致流程终止。建议设置一个默认选择路径，以防元素设置中的任何条件框表达式都不满足要求。可以通过右键点击网关元素，在“默认流”菜单下选择一个元素来进行设置。如果未指定默认路径，则应更改元素设置中的条件框表达式，以确保流程运行时至少有一个表达式为真。',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '合并网关类型与传入流的网关类型不匹配',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '拆分网关将流程扩展到多个分支。当使用合并网关再次将这些分支合并成一条路径时，必须使用正确的合并网关类型，具体取决于创建分支时使用的拆分网关类型。对于利用排他或基于事件的拆分网关创建的分支，则使用排他合并网关重新进行合并。对于利用并行或包容拆分网关创建的分支，则使用并行合并网关重新进行合并。',
 );

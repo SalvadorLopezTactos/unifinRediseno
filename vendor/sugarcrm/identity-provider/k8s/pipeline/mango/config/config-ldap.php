@@ -12,3 +12,6 @@
 
 $sugar_config['site_url'] = 'http://behat-tests-mango-ldap';
 $sugar_config['verify_client_ip'] = false;
+$sugar_config['logger']['channels']['authentication'] = array('level' => 'debug', 'processors' => ['backtrace']);
+
+$sugar_config['idm_mode']['enabled'] = false;

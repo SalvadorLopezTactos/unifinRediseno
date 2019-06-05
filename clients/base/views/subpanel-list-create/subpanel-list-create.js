@@ -63,14 +63,22 @@
 
         if (oppsConfig.opps_view_by === 'RevenueLineItems') {
             if (!(_.has(userACLs.Opportunities, 'edit') ||
-                    _.has(userACLs.RevenueLineItems, 'access') ||
-                    _.has(userACLs.RevenueLineItems, 'edit'))) {
+                _.has(userACLs.RevenueLineItems, 'access') ||
+                _.has(userACLs.RevenueLineItems, 'edit'))) {
                 // only listen for PCDashlet if this is Opps in Opps/RLI mode and user has access
                 // to both Opportunities and RLIs
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
-                app.controller.context.on('productCatalogDashlet:add', this.onAddFromProductCatalog, this);
+                var viewDetails = this.closestComponent('create') ?
+                    this.closestComponent('create') :
+                    this.closestComponent('record');
+
+                if (!_.isUndefined(viewDetails)) {
+                    app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add',
+                        this.onAddFromProductCatalog,
+                        this);
+                }
             }
         }
 
@@ -348,7 +356,13 @@
      */
     _dispose: function() {
         if (app.controller && app.controller.context) {
-            app.controller.context.off('productCatalogDashlet:add', null, this);
+            var viewDetails = this.closestComponent('create') ?
+                this.closestComponent('create') :
+                this.closestComponent('record');
+
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.off(viewDetails.cid + ':productCatalogDashlet:add', null, this);
+            }
         }
         if (this.context && this.context.parent) {
             this.context.parent.off(null, null, this);

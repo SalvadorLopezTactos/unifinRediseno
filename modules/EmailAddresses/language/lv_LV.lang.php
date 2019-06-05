@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Dzēsts',
     'LBL_MODULE_NAME' => 'E-pasta adreses',
     'LBL_MODULE_NAME_SINGULAR' => 'E-pasta adrese',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Veiktā apstiprinājuma pieprasījuma darbība',
+    'LBL_CONFIRMATION_TITLE' => 'Paldies',
+    'LBL_CONFIRMATION_MESSAGE' => 'Jūsu pierakstīšanās ir apstiprināta. Mēs pievienojām jūs savam sarakstam un drīz ar jums sazināsimies.',
 );

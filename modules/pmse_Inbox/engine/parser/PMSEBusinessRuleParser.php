@@ -16,7 +16,7 @@
  * this token includes a new element that contains the current value of the case
  *
  */
-class PMSEBusinessRuleParser implements PMSEDataParserInterface
+class PMSEBusinessRuleParser extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     private $evaluatedBean;
     private $currentUser;
@@ -121,7 +121,7 @@ class PMSEBusinessRuleParser implements PMSEDataParserInterface
         $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
         $criteriaToken->expToken = $assembledTokenString;
         $criteriaToken = $this->processValueExpression($criteriaToken);
-        $criteriaToken->currentValue = $tokenValue;
+        $criteriaToken->currentValue = array($tokenValue);
         return $criteriaToken;
     }
 

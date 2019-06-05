@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Tyyliopas (Lab)',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokumentaatio ja esimerkkejä',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuaalinen varmennus',
-    'LBL_MANUAL_VALIDATION'=>'If you experience persistent problems with automatic validation, please check your Proxy configuration in the <a href="index.php?module=Configurator&action=EditView">System Settings</a> admin panel.<br />	If your system environment prohibits your system from communicating to the license validation server through the internet, you should proceed with the <a href=&#39;javascript:void(0)&#39; onclick=&#39;toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);&#39;>Manual Validation</a> steps.',
+    'LBL_MANUAL_VALIDATION'=>'If you experience persistent problems with automatic validation, please check your Proxy configuration in the <a href="index.php?module=Configurator&action=EditView">System Settings</a> admin panel.<br />	If your system environment prohibits your system from communicating to the license validation server through the internet, you should proceed with the  <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manual Validation</a> steps.',
     'LBL_MANUAL_VALIDATION1'=> 'Vaihe 1: Luo lisenssiavaimen tietotiedosto painamalla seuraavaa nappia.',
     'LBL_MANUAL_VALIDATION2'=> 'Tallenna sitten tiedosto (sugarkey.lic) paikalliseen tiedostojärjestelmään.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Varoitus: suojataksesi dataasi, asennusohjelma pitää lukita asettamalla “installer_locked”-asetus arvoon “true” <code>config.php</code>-tiedostossa.',
  	'WARN_LICENSE_EXPIRED'=> "Huomautus: lisenssisi umpeutuu",
     'WARN_LICENSE_EXPIRED2' =>"päivässä. Mene <a href=\"index.php?action=LicenseSettings&module=Administration\">lisenssinhallintasivulle</a> hallintosivuilla.",
-    'WARN_LICENSE_SEATS'=>  "Tärkeä ilmoitus: Aktiivisten käyttäjien määrä ylittää lisenssien salliman määrän näin monella käyttäjällä:&nbsp;",
-    'WARN_LICENSE_SEATS2' => ". Ota yhteyttä myyntihenkilöösi tai lähetä (englanninkielistä) sähköpostia osoitteeseen <a href=\"mailto:sales@sugarcrm.com\">sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Varoitus:</b> ",
+    'WARN_LICENSE_SEATS2' => " Aktiivisia käyttäjiä, tilauksesi sallii vain ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Poista käyttäjiä, ota yhteys partneriisi tai myyjän edustajaan,"
+        . " tai lähetä sähköpostia osoitteeseen <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Katso lisätietoja "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Käyttäjätyypit ja Sugar-lisenssit</a> -artikkelista.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Tärkeä ilmoitus: järjestelmässä olevien aktiivisten käyttäjien määrä on jo lisenssinne sallimassa määrässä:&nbsp;",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Tärkeä ilmoitus: järjestelmässä olevien aktiivisten käyttäjien määrä on jo lisenssinne sallimassa määrässä",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Tärkeä ilmoitus: järjestelmässä olevien aktiivisten käyttäjien määrä on jo lisenssinne sallimassa määrässä. Uusia käyttäjiä ei voida luoda.",
-    'WARN_REPAIR_CONFIG' => 'Tärkeä ilmoitus: <code>config.php</code>-tiedosto pitää korjata. Käytä <a href="index.php?module=Administration&action=RebuildConfig">konfigurointitiedoston jälleenrakennusskriptiä</a> korjaussivulla järjestelmänhallinta-alueella korjataksesi konfigurointitiedoston.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Varoitus:</b> Uusia aktiivisia käyttäjiä ei voi luoda."
+        . " Osta lisää tilauksia.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Varoitus:</b> Uusia aktiivisia käyttäjiä ei voi luoda."
+        . " Osta lisää tilauksia.",
+    'WARN_REPAIR_CONFIG' => '<b>Varoitus:</b> config.php-tiedosto täytyy korjata. Korjaa config-tiedosto käyttämällä <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config</a> -komentosarjaa Admin-alueen korjaussivulla.',
     'WARN_UPGRADE_APP'=> "Sovelluksesta on saatavilla päivitetty versio.",
     'WARN_UPGRADE' => 'Tärkeä ilmoitus: Päivitä',
     'WARN_UPGRADENOTE' => 'Huomioi:',
@@ -1242,15 +1251,17 @@ Integroinnit, jotka perustuvat tähän alustaan, lakkaavat toimimasta.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metatietojen tiedostoa ei löytynyt.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Asetukset',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Advanced Workflown asetusten määrittäminen.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Lokinäkymä',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Siirry Advanced Workflow -lokiin.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Pääsy ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' lokiin.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Prosessinhallinta',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Prosessinhallintaan pääsee täältä.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Määritä ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' asetukset ja tarkastele lokeja. Kaikkien käyttäjien kaikkia BPM-prosesseja voi hallita prosessien hallinnassa.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Määritä Advanced Workflown asetukset ja tarkastele lokeja. Hallitse kaikkia BPM-prosesseja kaikille käyttäjille prosessinhallinnan kautta.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Tarjousten määrittely',
+    'LBL_MANAGE_QUOTES' => 'Määritä tarjoustyökirjan ulkoasu',
 );

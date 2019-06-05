@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Downloads-Registerkarte anzeigen',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Wenn ausgewählt, erscheint die Registerkarte Download in den Benutzereinstellungen, wo der Benutzer dann die Sugar Plug-Ins und andere Dateien sieht',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Für SOAP-Authentifizierung bei Verwendung von LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Die Erweiterung php_mcrypt muss in php.ini aktiviert sein.',
     'LBL_ALL' => 'Alle',
     'LBL_MARK_POINT' => 'Markierungspunkt',
     'LBL_NEXT_' => 'Weiter>>',
@@ -443,6 +442,22 @@ Um zusätzliche Systemeinstellungen zu konfigurieren, klicken Sie <a href="index
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activity Streams aktivieren',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Aktiviert Activity Streams für die Anwendung',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Zusätzliche Anmeldebildschirminhalte aktivieren',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Prozessdefinitionen automatisch speichern',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Legt fest, wie oft die Prozessdefinitionen automatisch gespeichert werden sollen, wenn der Designer verwendet wird',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Die Prozessdefinitionen beim automatischen Speichern automatisch überprüfen',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Aktiviert und deaktiviert die Option, die Prozessdefinitionen automatisch zu überprüfen, wenn diese automatisch gespeichert werden. Dies wird nur wirksam, wenn für die Option „Die Prozessdefinitionen automatisch speichern" ein Zeitintervall festgelegt ist',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Die Prozessdefinitionen beim Importieren automatisch überprüfen',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Aktiviert und deaktiviert die Option, die Prozessdefinitionen automatisch zu überprüfen, wenn diese zum ersten Mal importiert werden',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Einstellungen des Kommentarprotokolls',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximal anzuzeigende Zeichen pro Kommentareintrag',
 );
 
 

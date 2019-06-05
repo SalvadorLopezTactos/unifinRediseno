@@ -51,6 +51,8 @@ class Bug extends SugarBean {
 	var $work_log;
 	var $source;
 	var $product_category;
+    public $follow_up_datetime;
+
 	//END Additional fields being added to Bug Tracker
 
 	var $module_dir = 'Bugs';

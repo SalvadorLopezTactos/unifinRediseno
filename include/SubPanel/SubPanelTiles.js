@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SubPanelTiles.js 56952 2010-06-14 21:44:26Z sadek $
 
 var request_id = 0;
 var current_child_field = '';

@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Tildel til team',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Som standard kan de team vises, som du er medlem af.',
 	'LBL_DEFAULT_TEAM'					=> 'Standardteam',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Standard primær team',
 	'LBL_LIST_DESCRIPTION'				=> 'Beskrivelse',
 	'LBL_MY_TEAMS'						=> 'Mine teams',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privat team for',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Modtagers e-mail-adresse',
 	'ERR_SERVER_STATUS'					=> 'Din serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan ikke sende en e-mail til brugeren. Kontrollér e-mail-overførselsagenten i <a href="index.php?module=EmailMan&action=config">E-mail indstillinger</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Brugeren kan kun oprettes i <a href="{0}" target="_blank">Cloud konsol</a> for IDM tilstand.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Den primære e-mailadresse kan kun oprettes i <a href="{0}" target="_blank">Cloud konsol</a> for IDM tilstand.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mail-adresse',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Bekræft adgangskode',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har ændret brugertypen fra Systemadministratorbruger til Almindelig bruger. Når du har gemt denne ændring, har brugeren ikke længere rettigheder som systemadministrator.\\n\\nKlik på OK for at fortsætte.\\nKlik på Annulér for at vende tilbage til posten.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har ændret brugertypen fra Systemadministratorbruger til Almindelig bruger. Når du har gemt denne ændring, har brugeren ikke længere rettigheder som systemadministrator.\n\nKlik på OK for at fortsætte.\nKlik på Annulér for at vende tilbage til posten.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Det er den valuta, der anvendes i listen og postvisningen hvis Vis foretrukken valuta er aktiveret. Dette er også din standard valuta for nye registreringer.',
 	'LBL_CURRENCY'						=> 'Foretrukken valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Antallet af decimaler for at vise decimaler og flydere i hele systemet, som valuta og gennemsnittet i rapporter.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Vis foretrukken valuta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Konverter basisvaluta til brugernes foretrukne, i liste og rapport visning',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Opret indtægtslinjeposter i foretrukken valuta',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Indtægtslinjeposter, der føjes til en salgsmulighed fra produktkataloget, bliver konverteret til brugerens foretrukne valuta, hvis denne afviger fra den valuta, der bruges i produktkatalogpunktet.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Tusindtalsseparator',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Tegn, der skal bruges til at adskille tusinder',
 	'LBL_DECIMAL_SEP'					=> 'Decimaltegn',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Angiv både et brugernavn og en e-mail-adresse.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Denne valuta er i øjeblikket ikke aktiveret. Kontakt din administrator.',
 	'LBL_PUBLISH_KEY'					=> 'Udgiv nøgle',
-
+    'LBL_SITE_USER_ID' => 'Havelåge til site_url og user_id',
     'LBL_QUOTAS'                        => 'Kvoter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
@@ -632,10 +632,7 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
     'LBL_DETAIL' => 'Brugerprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Hvis visse felter ikke kan redigeres, skal du logge på din Cloud konsol for at administrere disse felter',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Hvis du ønsker at ændre visse felter, som ikke er redigerbare, ' .
-        'så kontakt administratoren for at anmelde disse ændringer',
+        'Kontakt venligst Sugar-administratoren, hvis du vil foretage ændringer af skrivebeskyttede felter.',
 ); // END STRINGS DEFS
-
-?>

@@ -39,7 +39,6 @@ $dictionary['Subscription'] = array(
         'parent_id' => array(
             'name'     => 'parent_id',
             'type'     => 'id',
-            'len'      => 36,
             'required' => true,
         ),
     ),
@@ -61,6 +60,7 @@ $dictionary['Subscription'] = array(
     // default instead of basic.
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

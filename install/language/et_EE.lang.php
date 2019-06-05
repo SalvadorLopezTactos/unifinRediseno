@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Ühilduvuse kontrolli käigus leiti vigu. SugarCRM-i installimise õigesti toimimiseks rakendage järgmiselt loetletud probleemide osas asjakohaseid meetmeid ja klõpsake uuesti kontrollimise nuppu või proovige uuesti installida.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Suvand Luba kõneaja viite vahelejätmine on seatud suvandile Sees (peaks olema seatud failis php.ini suvandile Väljas)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ei leitud: Sugari planeerija töötab piiratud funktsioonidega. Meilide arhiveerimise teenus ei tööta.',
+	'ERR_CHECKSYS_CURL'					=> 'Ei leitud: Sugari planeerija töötab piiratud funktsionaalsusega. Meilide arhiveerimise teenus ei tööta.',
     'ERR_CHECKSYS_IMAP'					=> 'Ei leitud: Sissetulev meil ja kampaaniad (meil) nõuavad IMAP-i andmekogusid. Kumbki pole toimiv.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL-serveri kasutamisel ei saa Magic-päringud GPC olla sisse lülitatud.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Hoiatus:',
@@ -79,7 +79,6 @@ $mod_strings = array(
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugari rakenduseks vajaliku XML parseri teegiga seotud funktsioone ei leitud. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks vaadake PHP juhendit.',
     'LBL_CHECKSYS_CSPRNG' => 'Juhusliku arvu generaator',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugari rakenduseks vajaliku mitmebaidiste stringide PHP laiendiga (mbstring) seotud funktsioone ei leitud. <br/><br/>Üldjuhul pole moodul mbstring PHP-s vaikimisi lubatud ja tuleb aktiveerida suvandiga --enable-mbstring when the PHP-kahendfaili loomisel. Lisateabe saamiseks mbstring toe lubamise kohta vaadake PHP juhendit.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt-moodul pole laaditud. Lisateabe saamiseks mcrypt mooduli laadimise kohta vaadake PHP juhendit.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Säte session.save_path teie php konfiguratsioonifailis (php.ini) pole seadistatud või on seatud kaustale, mida pole olemas. Teil võib olla vaja seadistada säte save_path failis php.ini või kontrollida, kas kausta sätted on suvandis save_path olemas.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Säte session.save_path teie php konfiguratsioonifailis (php.ini) on seatud kaustale, mis pole kirjutatav. Tehke kausta kirjutatavaks muutmiseks vajalikud toimingud. <br>Teie operatsioonisüsteemist olenevalt võib selleks olla vaja lubasid muuta, käivitades chmodi 766 või paremklõpsates faili nimel, et pääseda atribuutide juurde ja eemaldada kirjutuskaitstuse suvandi märge.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfiguratsioonifail on olemas, kuid pole kirjutatav. Tehke faili kirjutatavaks muutmiseks vajalikud toimingud. Teie operatsioonisüsteemist olenevalt võib selleks olla vaja lubasid muuta, käivitades chmodi 766 või paremklõpsates faili nimel, et pääseda atribuutide juurde ja eemaldada kirjutuskaitstuse suvandi märge.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP-moodul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic-päringud GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB stringide moodul',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt-moodul',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (piirang puudub)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (piiramatu)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP mälu piirang',
@@ -537,7 +535,7 @@ Lisateabe saamiseks vaadake installijuhendit.                                ",
     'advanced_password_new_account_email' => array(
         'subject' => 'Uue konto teave',
         'description' => 'See mall on kasutusel, kui süsteemiadministraator saadab kasutajale uue parooli.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Siin on teie konto kasutajanimi ja ajutine parool:</p><p>Kasutajanimi: $contact_user_user_name </p><p>Parool: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pärast ülaltoodud parooliga sisselogimist võidakse teilt nõuda uue parooli määramist.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Siin on teie konto kasutajanimi ja ajutine parool:</p><p>Kasutajanimi: $contact_user_user_name </p><p>Parool: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pärast ülaltoodud parooliga sisselogimist võidakse teilt nõuda uue parooli määramist.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Siin on teie konto kasutajanimi ja ajutine parool:
@@ -552,7 +550,7 @@ Pärast ülaltoodud parooliga sisselogimist võidakse teilt nõuda uue parooli m
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Lähtesta oma konto parool',
         'description' => "Seda malli kasutatakse lingi saatmiseks kasutajale, mida klõpsata kasutaja konto parooli lähtestamiseks.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Nõudsite hiljuti, et $contact_user_pwd_last_changed saaks teie konto parooli lähtestada. </p><p>Parooli lähtestamiseks klõpsake allolevat linki:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Nõudsite hiljuti, et $contact_user_pwd_last_changed saaks teie konto parooli lähtestada. </p><p>Parooli lähtestamiseks klõpsake allolevat linki:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Nõudsite hiljuti, et $contact_user_pwd_last_changed saaks teie parooli lähtestada.

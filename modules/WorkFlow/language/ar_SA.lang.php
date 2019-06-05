@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'تعريفات سير العمل',
   'LBL_MODULE_NAME_SINGULAR' => 'تعريف سير العمل',
-  'LBL_MODULE_ID' => 'سير العمل',  
+  'LBL_MODULE_ID' => 'سير العمل',
   'LBL_MODULE_TITLE' => 'سير العمل: الصفحة الرئيسية',
   'LBL_SEARCH_FORM_TITLE' => 'البحث في سير العمل',
   'LBL_LIST_FORM_TITLE' => 'قائمة سير العمل',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'الوحدة المستهدفة:',
   'LBL_LIST_ORDER' => 'ترتيب العملية:',
   'LBL_FROM_NAME' => 'اسم "من":',
-  'LBL_FROM_ADDRESS' => 'عنوان "من":',  
+  'LBL_FROM_ADDRESS' => 'عنوان "من":',
   'LNK_NEW_WORKFLOW' => 'إنشاء تعريف سير العمل',
-  'LNK_WORKFLOW' => 'قائمة تعريفات سير العمل', 
-  
-  
+  'LNK_WORKFLOW' => 'قائمة تعريفات سير العمل',
+
+
   'LBL_ALERT_TEMPLATES' => 'قوالب التنبيه',
   'LBL_CREATE_ALERT_TEMPLATE' => 'إنشاء قالب تنبيه:',
   'LBL_SUBJECT' => 'الموضوع:',
-  
+
   'LBL_RECORD_TYPE' => 'ينطبق على:',
  'LBL_RELATED_MODULE'=> 'الوحدة ذات الصلة:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'تسلسل سير العمل',
 	'LNK_ALERT_TEMPLATES' => 'قوالب تنبيه البريد الإلكتروني',
 	'LNK_PROCESS_VIEW' => 'تسلسل سير العمل',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'النوع',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>ملاحظة:</strong> سيتم إزالة Sugar Workflow وقدرات Workflow Management الوظيفية من الإصدارات اللاحقة من Sugar. ينبغي على عملاء إصدار Sugar Enterprise البدء في استخدام القدرات الوظيفية المتاحة بواسطة Sugar Advanced Workflow. انقر <a href="http://www.sugarcrm.com/wf-eol" target="_blank">هنا</a> لمزيد من المعلومات.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>ملاحظة:</strong> وظيفة Sugar Workflow وWorkflow Management في وضع الصيانة. ينبغي على عملاء إصدار Sugar Enterprise البدء في استخدام الوظائف المتاحة بواسطة SugarBPM<sup class="trademark">TM</sup>.',
 );
 

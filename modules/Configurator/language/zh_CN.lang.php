@@ -63,7 +63,7 @@ $mod_strings = array (
 	'LBL_MAILMERGE_DESC' => '只有您安装了Microsoft&reg; Word&reg;的Sugar插件，这个标记才会被检查;。',
 	'LBL_MAILMERGE' => '邮件合并',
 	'LBL_MIN_AUTO_REFRESH_INTERVAL' => '仪表盘自动刷新最小时间间隔',
-	'LBL_MIN_AUTO_REFRESH_INTERVAL_HELP' => '选择仪表盘能自动刷新的最小值 。设置为\\从未\\停用仪表盘的自动刷新。',
+	'LBL_MIN_AUTO_REFRESH_INTERVAL_HELP' => '选择仪表盘能自动刷新的最小值 。设置为\从未\停用仪表盘的自动刷新。',
 	'LBL_MODULE_FAVICON'               => '显示模块图标为偏好图标',
     'LBL_MODULE_FAVICON_HELP'   => '如果模块中存在着图标，则在浏览标签中使用模块图标作为偏好图标，替代主题偏好图标。',
 	'LBL_MODULE_NAME'=>'系统设置',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'显示下载标签',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'在选中此选项时，下载标签会出现在用户设置中，使用户能够访问Sugar插件和其他可用文件。',
     'LBL_LDAP_ENC_KEY_DESC'	=> '当使用LDAP时，SOAP验证。',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => '必须启用php.ini文件中的php_mcrypt扩展。',
     'LBL_ALL' => '全部',
     'LBL_MARK_POINT' => '标记要点',
     'LBL_NEXT_' => '下一个>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '活动流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '启用活动流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '打开应用程序的活动流',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => '启用其他登录画面内容',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '自动保存流程定义',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => '确定使用设计器时自动保存流程定义的频率',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => '自动验证自动保存的流程定义',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => '切换自动保存时是否自动验证流程定义。只有对“自动保存流程定义”设置了时间间隔以后，此功能才会生效。',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => '导入时自动验证流程定义',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => '切换在首次导入时是否自动验证流程定义',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => '评论日志设置',
+    'LBL_COMMENT_LOG_MAX_CHARS' => '每个评论条目能显示的最大字符数',
 );
 
 

@@ -92,9 +92,9 @@ class Factory
 
 
     /**
-     * Gets an Advanced Workflow class. This expects a mapping of file basename to
-     * class name. This method allows for extending an Advanced Workflow class using
-     * the 'Custom' prefix on a classname OR overriding an Advanced Workflow class
+     * Gets a SugarBPM class. This expects a mapping of file basename to
+     * class name. This method allows for extending a SugarBPM class using
+     * the 'Custom' prefix on a classname OR overriding a SugarBPM class
      * completely by reusing the name of the class/file. Priority is given to
      * Custom classes before overrides.
      *
@@ -157,9 +157,9 @@ class Factory
     }
 
     /**
-     * Gets an Advanced Workflow object. This expects a mapping of file basename to
-     * class name. This method allows for extending an Advanced Workflow class using
-     * the 'Custom' prefix on a classname OR overriding an Advanced Workflow class
+     * Gets a SugarBPM object. This expects a mapping of file basename to
+     * class name. This method allows for extending a SugarBPM class using
+     * the 'Custom' prefix on a classname OR overriding a SugarBPM class
      * completely by reusing the name of the class/file. Priority is given to
      * Custom classes before overrides.
      *

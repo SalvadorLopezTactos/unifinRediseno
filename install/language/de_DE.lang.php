@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Während der Kompatibilitätsprüfung sind Fehler aufgetreten. Bitte beheben Sie die unten angegebenen Probleme, um eine ordnungsgemäße Installation sicherzustellen oder versuchen Sie daraufhin, Sugar erneut zu installieren.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference ist aktiviert (sollte in php.ini deaktiviert sein)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nicht gefunden: Der Sugar-Zeitplaner wird mit limitierter Funktionalität ausgeführt. Der E-Mail-Archivierungsdienst wird nicht ausgeführt.',
+	'ERR_CHECKSYS_CURL'					=> 'Nicht gefunden: der Sugar-Zeitplaner wird mit eingeschränkter Funktionalität ausgeführt. Der E-Mail-Archivierungsdienst wird nicht ausgeführt.',
     'ERR_CHECKSYS_IMAP'					=> 'Eingebende E-Mails und Kampangnen benötigen die IMAP-Bibliotheken. Die beiden genannten Module können sonst nicht funktionieren.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Wenn Sie einen MS SQK-Server benutzen, kann Magic Quotes GPC nicht aktiviert werden.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warnung:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Für optimale Leistung oder Ergebnisse mit IIS/FastCGI sapi sollte fastcgi.logging in der php.ini auf 0 gesetzt sein.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nicht unterstützte PHP-Version installiert: (Ver.',
     'LBL_DB_UNAVAILABLE'                => 'Die Datenbank ist nicht verfügbar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Keine Datenbankunterstützung gefunden. Bitte stellen Sie sicher, dass Sie über die nötigen Treiber für die folgenden unterstützten Datenbanktypen verfügen: MySQL, MS SQLServer, Oracle oder DB2. Möglicherweise müssen Sie die entsprechende Erweiterung, je nach PHP-Version, in der php.ini-Datei auskommentieren oder mit der richtigen Binärdatei neu kompilieren. In Ihrem PHP-Handbuch finden Sie mehr Informationen zur Aktivierung der Datenbankunterstützung.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Der Datenbank-Support wurde nicht gefunden. Stellen Sie sicher, dass Sie über die erforderlichen Treiber für einen der folgenden unterstützten Datenbanktypen verfügen: MySQL, MS SQLServer, Oracle oder DB2. Möglicherweise müssen Sie die Erweiterung in der php.ini-Datei  auskommentieren oder die richtige Binärdatei neu kompilieren, je nachdem, welche PHP-Version Sie haben. Weitere Informationen zum Aktivieren der Datenbankunterstützung finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Die Funktionen verbunden mit XML Parser-Bibliotheken, die von SugarCRM gebraucht werden, wurden nicht gefunden. Sie können versuchen, die Kommentare in php.ini zu löschen, oder mit der richtigen Binary-Datei wieder zu kompilieren, abhängig von Ihrer PHP-Version. Nähere Informationen hierzu finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_CSPRNG' => 'Zufallszahlengenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Die Multibyte Strings PHP-Erweiterung (mbstring) scheint zu fehlen. <br/><br/>Dieses Modul ist normalerweise nicht aktiviert und muss mit --enable-mbstring aktiviert werden. In Ihrem PHP-Handbuch finden Sie mehr Informationen hierzu.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Die Einstellung session.save_path in Ihrer PHP-Konfigurationsdatei (php.ini) ist nicht konfiguriert oder der dort angegebene Ordner existiert nicht. Bitte konfigurieren Sie die Einstellung und stellen sicher, dass der angegebene Ordner existiert.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Die Einstellung session.save_path in Ihrer PHP-Konfigurationsdatei (php.ini) verweist auf einen Ordner, der nicht beschreibbar ist. Bitte machen Sie den angegebenen Ordner beschreibbar. <br>Je nach Betriebssystem ändern Sie die Berechtigung mit chmod 766 oder durch Rechtsklick auf den Ordner.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Das Konfigurationsdatei existiert zwar, ist aber nicht schreibbar. Bitte machen Sie die Datei schreibbar. Je nach Betriebssystem ändern Sie die Berechtigung mit chmod 766 oder durch Rechtsklick auf die Datei.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP-Modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings-Modul',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Kein Limit)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (unbeschränkt)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP-Speicherlimit >=',
@@ -550,7 +548,7 @@ Nehmen Sie die erforderlichen Änderungen vor, und führen Sie die System-Überp
     'advanced_password_new_account_email' => array(
         'subject' => 'Neue Firmeninformation',
         'description' => 'Diese Vorlage wird verwendet, wenn der Systemadministrator ein Passwort an den Benutzer schickt.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Dies sind Ihr Benutzername und ihr temporäres Passwort:</p><p>Benutzername: $contact_user_user_name<br/><br />Passwort: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url<br /><br/>Wenn Sie sich angemeldet haben, müssen Sie ein neues Passwort definieren.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Dies sind Ihr Benutzername und ihr temporäres Passwort:</p><p>Benutzername: $contact_user_user_name<br/><br />Passwort: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url<br /><br/>Wenn Sie sich angemeldet haben, müssen Sie ein neues Passwort definieren.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Hier sind Ihr Benutzername und temporäres Kennwort:
@@ -565,7 +563,7 @@ Nach der ersten Anmeldung mit dem temporären Passwort müssen SIe das Passwort 
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Kontopasswort zurücksetzen',
         'description' => "Diese Vorlage wird verwendet, um einem Benutzer einen Link zum Zurücksetzen des Kontopassworts zu senden.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Sie haben am $contact_user_pwd_last_changed auf das Zurücksetzen Ihres Passwort angesucht. </p><p>Klicken Sie auf folgenden Link, um Ihr Passwort zurückzusetzen:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Sie haben am $contact_user_pwd_last_changed auf das Zurücksetzen Ihres Passwort angesucht. </p><p>Klicken Sie auf folgenden Link, um Ihr Passwort zurückzusetzen:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Sie haben am $contact_user_pwd_last_changed auf das Zurücksetzen Ihres Passworts angesucht.

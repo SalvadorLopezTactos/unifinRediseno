@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+3.4.0
+-----
+
+ * added an `only` keyword to `form_theme` tag to disable usage of default themes when rendering a form
+ * deprecated `Symfony\Bridge\Twig\Form\TwigRenderer`
+ * deprecated `DebugCommand::set/getTwigEnvironment`. Pass an instance of
+   `Twig\Environment` as first argument  of the constructor instead
+ * deprecated `LintCommand::set/getTwigEnvironment`. Pass an instance of
+   `Twig\Environment` as first argument of the constructor instead
+
 3.3.0
 -----
 
@@ -23,7 +33,7 @@ CHANGELOG
    use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 
    // ...
-   $rendererEngine = new TwigRendererEngine(array('form_div_layout.html.twig'));
+   $rendererEngine = new TwigRendererEngine(['form_div_layout.html.twig']);
    $rendererEngine->setEnvironment($twig);
    $twig->addExtension(new FormExtension(new TwigRenderer($rendererEngine, $csrfTokenManager)));
    ```
@@ -32,13 +42,13 @@ CHANGELOG
 
    ```php
    // ...
-   $rendererEngine = new TwigRendererEngine(array('form_div_layout.html.twig'), $twig);
+   $rendererEngine = new TwigRendererEngine(['form_div_layout.html.twig'], $twig);
    // require Twig 1.30+
-   $twig->addRuntimeLoader(new \Twig\RuntimeLoader\FactoryRuntimeLoader(array(
+   $twig->addRuntimeLoader(new \Twig\RuntimeLoader\FactoryRuntimeLoader([
        TwigRenderer::class => function () use ($rendererEngine, $csrfTokenManager) {
            return new TwigRenderer($rendererEngine, $csrfTokenManager);
        },
-   )));
+   ]));
    $twig->addExtension(new FormExtension());
    ```
  * Deprecated the `TwigRendererEngineInterface` interface.

@@ -198,7 +198,7 @@
              */
             onAttach: function(component, plugin) {
                 this.before('render', this._unbindResizableColumns);
-                this.on('render', _.debounce(this._makeColumnResizable, 100));
+                this.on('render', this._makeColumnResizable);
             },
 
             /**

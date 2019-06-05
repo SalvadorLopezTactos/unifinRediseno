@@ -45,6 +45,7 @@ $viewdefs['Quotes']['base']['view']['preview'] = array(
                 'billing_account_name',
                 'billing_contact_name',
                 array(
+                    'name' => 'billing_address_fieldset',
                     'inline' => false,
                     'type' => 'fieldset',
                     'label' => 'LBL_BILLING_ADDRESS_STREET',
@@ -71,9 +72,34 @@ $viewdefs['Quotes']['base']['view']['preview'] = array(
                         ),
                     ),
                 ),
+                array(
+                    'name' => 'deal_tot',
+                    'label' => 'LBL_LIST_DEAL_TOT',
+                    'css_class' => 'quote-totals-row-item',
+                    'related_fields' => array('deal_tot_discount_percentage'),
+                ),
+                array(
+                    'name' => 'new_sub',
+                    'css_class' => 'quote-totals-row-item',
+                ),
+                array(
+                    'name' => 'tax',
+                    'label' => 'LBL_TAX_TOTAL',
+                    'css_class' => 'quote-totals-row-item',
+                ),
+                array(
+                    'name' => 'shipping',
+                    'css_class' => 'quote-totals-row-item',
+                ),
+                array(
+                    'name' => 'total',
+                    'label' => 'LBL_LIST_GRAND_TOTAL',
+                    'css_class' => 'quote-totals-row-item',
+                ),
                 'shipping_account_name',
                 'shipping_contact_name',
                 array(
+                    'name' => 'shipping_address_fieldset',
                     'inline' => false,
                     'type' => 'fieldset',
                     'label' => 'LBL_SHIPPING_ADDRESS_STREET',

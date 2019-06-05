@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: layout_defs.php 14754 2006-07-18 18:45:17Z awu $
 
 $layout_defs['Products'] = array(
 	// list of what Subpanels to show in the DetailView 

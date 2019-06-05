@@ -43,7 +43,6 @@ $dictionary['Comment'] = array(
         'parent_id' => array(
             'name'     => 'parent_id',
             'type'     => 'id',
-            'len'      => 36,
             'required' => true,
         ),
 
@@ -73,6 +72,7 @@ $dictionary['Comment'] = array(
     // default instead of basic.
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

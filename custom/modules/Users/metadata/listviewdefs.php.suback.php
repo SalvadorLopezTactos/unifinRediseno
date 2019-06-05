@@ -1,9 +1,9 @@
 <?php
-// created: 2018-02-16 18:51:04
+// created: 2018-02-16 20:36:01
 $listViewDefs['Users'] = array (
   'name' => 
   array (
-    'width' => '20%',
+    'width' => '20',
     'label' => 'LBL_LIST_NAME',
     'link' => true,
     'related_fields' => 
@@ -16,7 +16,7 @@ $listViewDefs['Users'] = array (
   ),
   'user_name' => 
   array (
-    'width' => '15%',
+    'width' => '15',
     'label' => 'LBL_USER_NAME',
     'link' => true,
     'default' => true,
@@ -28,12 +28,12 @@ $listViewDefs['Users'] = array (
     'label' => 'LBL_REPORTS_TO_NAME',
     'id' => 'REPORTS_TO_ID',
     'sortable' => false,
-    'width' => '20%',
+    'width' => '20',
     'default' => true,
   ),
   'email' => 
   array (
-    'width' => '20%',
+    'width' => '20',
     'sortable' => false,
     'label' => 'LBL_LIST_EMAIL',
     'link' => true,
@@ -41,21 +41,21 @@ $listViewDefs['Users'] = array (
   ),
   'status' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_STATUS',
     'link' => false,
     'default' => true,
   ),
   'is_admin' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_ADMIN',
     'link' => false,
     'default' => true,
   ),
   'is_group' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_LIST_GROUP',
     'link' => true,
     'default' => false,

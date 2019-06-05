@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: layout_defs.php 14232 2006-06-23 00:33:16Z wayne $
 	
 $layout_defs['ProspectLists'] = array(
 	// list of what Subpanels to show in the DetailView 

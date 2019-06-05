@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Push Faktura',
 	'LBL_PUSH_SHIPPING' => 'Push Forsendelse',
 	'LBL_SAVE_ACCOUNT' => 'Spar Bedrift',
+    'LBL_SERVICE_LEVEL' => 'Servicenivå',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Forsendelse BY:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Forsendelse Land:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Forsendelse Postnummer:',

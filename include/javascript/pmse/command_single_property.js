@@ -32,13 +32,11 @@ CommandSingleProperty.prototype.initObject = function (options) {
 CommandSingleProperty.prototype.execute = function () {
     this.receiver[this.propertyName] = this.after;
     this.receiver.canvas.triggerCommandAdam(this.receiver, [this.propertyName], [this.before], [this.after]);
-    this.receiver.canvas.bpmnValidation();
 };
 
 CommandSingleProperty.prototype.undo = function () {
     this.receiver[this.propertyName] = this.before;
     this.receiver.canvas.triggerCommandAdam(this.receiver, [this.propertyName], [this.after], [this.before]);
-    this.receiver.canvas.bpmnValidation();
 };
 
 CommandSingleProperty.prototype.redo = function () {

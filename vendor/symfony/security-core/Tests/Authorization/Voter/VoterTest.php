@@ -11,11 +11,12 @@
 
 namespace Symfony\Component\Security\Core\Tests\Authorization\Voter;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class VoterTest extends \PHPUnit_Framework_TestCase
+class VoterTest extends TestCase
 {
     protected $token;
 
@@ -65,6 +66,6 @@ class VoterTest_Voter extends Voter
 
     protected function supports($attribute, $object)
     {
-        return $object instanceof \stdClass && in_array($attribute, array('EDIT', 'CREATE'));
+        return $object instanceof \stdClass && \in_array($attribute, array('EDIT', 'CREATE'));
     }
 }

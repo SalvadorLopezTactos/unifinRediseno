@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Piešķirts lietotājam:',
   'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',  	  
   'LBL_WORK_LOG' => 'Darba Žurnāls:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Izveidoja:',
   'LBL_DATE_CREATED' => 'Izveides datums:',
   'LBL_DATE_ENTERED' => 'Izveides datums:',

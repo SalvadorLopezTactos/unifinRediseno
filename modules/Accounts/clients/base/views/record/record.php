@@ -157,6 +157,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 'industry',
                 'parent_name',
                 'account_type',
+                'service_level',
                 'assigned_user_name',
                 'phone_office',
                 array(

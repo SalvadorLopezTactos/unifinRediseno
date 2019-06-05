@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: dashlets.js 24711 2007-07-27 01:51:57Z awu $
 
 SUGAR.dashlets = function() {
 	return {

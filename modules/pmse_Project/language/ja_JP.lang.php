@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'このプロセス定義に対して実行されているアクティブなプロセスがあります。これを更新するとこれらのプロセスに影響が出る可能性があります。本当にこのプロセス定義を編集しますか？',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'このプロセス定義に対して実行されているアクティブなプロセスがあります。これを更新するとこれらのプロセスに影響が出る可能性があります。本当にこのプロセス定義を無効化しますか？',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'ファイルシステムから*.bpmファイルをインポートして新しいプロセス定義レコードを自動的に作成します。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '.bpm ファイルをアップロードして、プロセス定義をインポートします。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'プロセス定義は、システムに正常にインポートされました。',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => '有効な*.bpmファイルを選択してください。',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'プロセス定義がインポートされましたが、ビジネスルールが選択されていないビジネスルールアクションが 1 つ以上含まれています。',
+    'LBL_BPM_IMPORT_SELECT' => 'このプロセス定義には次のビジネスルールとメールテンプレートが含まれます。'
+        . 'インポートしたいものを選択してください。',
+    'LBL_BUSINESS_RULES' => 'ビジネスルール',
+    'LBL_EMAIL_TEMPLATES' => 'メールテンプレート',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => '元に戻す',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => '繰り返す',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => '保存',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => '認証',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => '保存して認証',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => '検証を実行してエラーをチェックします',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'アクティビティ',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => '削除',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'モジュール',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'フィルタ',
+    'LBL_PMSE_FORM_LABEL_RELATED' => '関連先',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => '評価条件',
     'LBL_PMSE_FORM_LABEL_DURATION' => '時間',
     'LBL_PMSE_FORM_LABEL_UNIT' => '単位',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'フィールド',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'モジュールフィールド評価',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'モジュール',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => '関連先',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'フィールド',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => '値',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'フォームレスポンス評価',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'は以下ではない',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '等しくない',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'すべての関連するレコード',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'すべての関連するレコード',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'ランタイム',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '追加',
     'LBL_PMSE_FORMPANEL_CLOSE' => '閉じる',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'チーム',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'レコードを作成した %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'レコードを最後に変更した %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'レコードに割り当てられている %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'レコードに割り当てられた %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'レコードを作成した人のマネージャーである %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'レコードを最後に修正した人のマネージャーである %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'レコードに割り当てられている人のマネージャーである %MODULE% のユーザー',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'レコードに割り当てられた人のマネージャーである %MODULE% のユーザー',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%MODULE%に関連する%RELATED%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '%MODULE%を作成したユーザー',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '%MODULE%を最後に変更したユーザー',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '%MODULE%に割り当てられているユーザー',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '%MODULE%に割り当てられていたユーザー',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE%を作成したマネージャー',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '%MODULE%を最後に変更したマネージャー',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '%MODULE%に割り当てられているマネージャー',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '%MODULE%に割り当てられていたマネージャー',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => '役割: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'チーム: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => '提案',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => '無効な式構文',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'プロセス定義の検証: 要素の設定を取得します。',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'プロセス定義の検証: 要素の設定を取得します。',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'エラー一覧を更新しています...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => '検証の完了! 問題が見つかりました。 ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' 問題',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => '検証進行中',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => '警告: プロセスは、この要素で停止するか、その他の意図しない影響がある可能性があります。',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'エラー: プロセスは、この要素で停止します',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => '要素を検証できません。',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => '要素が受信フローの最小数を満たしていません。',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'この要素は、受信パスの最小数を持つ必要があります。最小数が満たされているかどうかを確認するために、この要素への接続パスの数を確認します。',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => '要素が受信フローの最大数を超えています。',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'この要素には超えてはならない受信パスの最大数があります。最大数を超えないことを確認するために、この要素への接続パスの数を確認します。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => '要素が発信フローの最小数を満たしていません。',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'この要素は、発信パスの最小数を持つ必要があります。最小数が満たされているかどうかを確認するために、この要素から出るパス数を確認します。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => '要素が発信フローの最大数を超えています。',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'この要素には超えてはならない発信パスの最大数があります。最大数を超えないことを確認するために、この要素から出るパス数を確認します。',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => '必要なフィールドが設定されていません。',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'この要素には、設定されていない必須フィールドがあります。要素設定をチェックして、フィールドが正しく設定されていることを確認し、「保存」ボタンをクリックしてしてください。',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => '現在、システムにデータが存在しません。',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'この要素の設定は、データベースに存在しないデータの特定の部分を参照します。要素の設定をチェックして、参照されているすべてのデータ (すなわち特定のユーザー、モジュール フィールド、チームなど) が存在することを確認します。',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => '条件ボックスの式はtrueになりません。',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => '条件ボックスはAND/OR/NOT論理式を含みます。このエラーは、要素設定の条件ボックスが、式は決してtrueにならないように設定されていることを意味します。条件ボックスをチェックして、式がtrueになるのを妨げる論理矛盾を除去します。',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => '要素は到達不能です。',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => '要素をプロセスで実行するために、それに接続しているパスが必要です。この要素につながるパスのチェーンは、開始要素で始まる必要があります。この要素への受信パスのチェーンをクリックして、チェーンが開始要素で始まっていることを確認します。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => '待機時間の条件は、正確に1つの日時定数を含める必要があります。',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'この待機イベントの要素は、「固定の日付」条件ボックスを使用して設定されています。このボックスには、正確に1個「固定の日時」定数または日時フィールド参照を含める必要があります。式の他のすべての部分は、数学演算子 (+/-) または「タイムスパン」定数でなければなりません。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => '指定する期間の値はゼロ以外にする必要があります。',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'この待機イベントの要素は、「時間」設定を使用して設定されています。この設定はゼロ以外にする必要があり、そうでなければエラーが発生します。要素の設定をチェックして、「時間」がゼロに設定されていないことを確認します。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => '待機時間のパラメーターが設定されていません',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'この待機イベント要素は、何も設定されていません。要素設定をチェックして、「時間」または「指定日」が選択されていることを確認し、希望する値を入力し、「保存」ボタンをクリックしてください。',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => '予定時間が0未満です。',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'このアクティビティ要素の「フォーム」の設定で、予定時間が負の値に設定されているため、要素に到達した時にプロセスがフリーズします。この要素の「フォーム」設定を開き、予定時間を負の値以外の数値に変更します。',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'アクションタイプは [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'このアクション要素には、指定されたタイプがありません。アクション要素を右クリックし、「アクションタイプ」リストからタイプを選択することによって変更できます。',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'パスが使用される保証はありません。',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'このエラーメッセージは、このゲートウェイの要素のうちのどれも使用されず、それによってプロセスが停止する可能性があるために発生します。要素設定の条件ボックスの式のどれも満たされなかった場合のために、既定のパスを設定することをお勧めします。ゲートウェイの要素を右クリックして「デフォルトのフロー」メニューの下の要素を選択することによって設定できます。既定のパスを指定しない場合、プロセスが実行されたときに要素設定の条件ボックスの式のうち少なくとも1個が真になるように変更してください。',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '収束ゲートウェイタイプが、受信フローのゲートウェイタイプと一致しません。',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '分岐ゲートウェイは、プロセスを複数のブランチに展開します。収束ゲートウェイを使用して、これらのブランチを1個のパスに再収束するときは、ブランチを作成するために使用された分岐ゲートウェイのタイプにあわせて正しいタイプの収束ゲートウェイを使用する必要があります。の1 つのパスにこれらの枝を再収束、枝を作成に使用された分岐のゲートウェイの種類によって収束ゲートウェイの適切な型する必要があります使用します。排他的またはイベントベースの分岐ゲートウェイで作成されたブランチには、排他的収束ゲートウェイを使用して収束します。並列または包括的分岐ゲートウェイで作成されたブランチには、並列収束ゲートウェイを使用して収束します。',
 );

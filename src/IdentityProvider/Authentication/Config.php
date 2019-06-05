@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
+use OneLogin\Saml2\Constants;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 use Sugarcrm\IdentityProvider\STS\EndpointService;
 
@@ -29,6 +31,11 @@ class Config
      * @var \Administration
      */
     protected $ldapSettings;
+
+    /**
+     * @var \Configurator
+     */
+    protected $configurator;
 
     /**
      * @param \SugarConfig $sugarConfig
@@ -57,7 +64,6 @@ class Config
     public function getSAMLConfig()
     {
         $defaultConfig = $this->getSAMLDefaultConfig();
-        $defaultConfig = array_merge_recursive($defaultConfig, $this->getSugarCustomSAMLSettings());
         return array_replace_recursive($defaultConfig, $this->get('SAML', [])); //update with values from config
     }
 
@@ -67,10 +73,11 @@ class Config
      */
     public function getIDMModeConfig()
     {
-        $config = $this->get('idm_mode');
-        if (empty($config)) {
+        if (!$this->isIDMModeEnabled()) {
             return [];
         }
+
+        $config = $this->get('idm_mode');
 
         $stsUrl = rtrim($config['stsUrl'], '/ ');
         $ipdUrl = rtrim($config['idpUrl'], '/ ');
@@ -85,7 +92,7 @@ class Config
             'clientSecret' => $config['clientSecret'],
             'stsUrl' => $stsUrl,
             'idpUrl' => $ipdUrl,
-            'redirectUri' => rtrim($this->get('site_url'), '/'),
+            'redirectUri' => rtrim($this->get('site_url'), '/') . '/?module=Users&action=OAuth2CodeExchange',
             'urlAuthorize' => $endpointService->getOAuth2Endpoint(EndpointInterface::AUTH_ENDPOINT),
             'urlAccessToken' => $endpointService->getOAuth2Endpoint(EndpointInterface::TOKEN_ENDPOINT),
             'urlResourceOwnerDetails' => $endpointService->getOAuth2Endpoint(EndpointInterface::INTROSPECT_ENDPOINT),
@@ -93,9 +100,10 @@ class Config
             'http_client' => !empty($config['http_client']) ? $config['http_client'] : [],
             'cloudConsoleUrl' => !empty($config['cloudConsoleUrl']) ? $config['cloudConsoleUrl'] : '',
             'cloudConsoleRoutes' => !empty($config['cloudConsoleRoutes']) ? $config['cloudConsoleRoutes'] : [],
-            'caching' => $config['caching'] ?? [],
+            'caching' => array_replace_recursive($this->getIDMModeDefaultCachingConfig(), $config['caching'] ?? []),
             'crmOAuthScope' => $config['crmOAuthScope'] ?? '',
             'requestedOAuthScopes' => $config['requestedOAuthScopes'] ?? [],
+            'allowedSAs' => $config['allowedSAs'] ?? [],
         ];
 
         if ($stsKeySetId) {
@@ -134,13 +142,63 @@ class Config
     }
 
     /**
-     * Checks IDM mode config is present
+     * Checks IDM mode is enabled
      * @return bool
      */
-    public function isIDMModeEnabled()
+    public function isIDMModeEnabled() : bool
     {
-        return !empty($this->getIDMModeConfig());
+        return (bool)$this->get('idm_mode.enabled', false);
     }
+
+    /**
+     * Determine if a bean (and action over bean) is considered a special case.
+     * Thus possibly denoting that IDM-rules are not applicable for it.
+     *
+     * @param \SugarBean $bean
+     * @param array $request the PHP $_REQUEST superglobal
+     * @return bool
+     */
+    public function isSpecialBeanAction(\SugarBean $bean, array $request) : bool
+    {
+        // Group and Portal Users are not a IdM domain entities and are special Users in terms of SugarCRM
+        $creation = empty($bean->id) && in_array(strtolower($request['usertype'] ?? ''), ['portal', 'group']);
+        $isPortalOrGroupUser = $bean->module_name == 'Users' && ($bean->is_group || $bean->portal_only || $creation);
+        return $isPortalOrGroupUser;
+    }
+
+    /**
+     * Enable or disable IDM mode
+     *
+     * @param false|array $config
+     */
+    public function setIDMMode($config) : void
+    {
+        $configurator = $this->getConfigurator();
+        if ($config) {
+            $configurator->config['idm_mode'] = $config;
+        } else {
+            $configurator->config['idm_mode']['enabled'] = false;
+        }
+        $configurator->handleOverride();
+        $configurator->clearCache();
+
+        $this->refreshCache();
+    }
+
+    /**
+     * Refresh config cache
+     */
+    protected function refreshCache(): void
+    {
+        $this->sugarConfig->clearCache('idm_mode');
+        $this->sugarConfig->clearCache('idm_mode.enabled');
+
+        $repairAndClear = new \RepairAndClear();
+        $repairAndClear->repairAndClearAll(['clearAll'], ['Employees', 'Users'], false, false, false);
+
+        \MetaDataManager::refreshSectionCache(\MetaDataManager::MM_CONFIG);
+    }
+
 
     /**
      * return disabled modules in IDM mode
@@ -160,6 +218,17 @@ class Config
         return array_filter($this->getUserVardef(), function ($def) {
             return !empty($def['idm_mode_disabled']);
         });
+    }
+
+    /**
+     * @return \Configurator
+     */
+    protected function getConfigurator() : \Configurator
+    {
+        if (is_null($this->configurator)) {
+            $this->configurator = new \Configurator();
+        }
+        return $this->configurator;
     }
 
     /**
@@ -194,13 +263,13 @@ class Config
                 'entityId' => htmlspecialchars_decode($this->get('SAML_issuer', 'php-saml'), ENT_QUOTES) ?: 'php-saml',
                 'assertionConsumerService' => [
                     'url' => $acsUrl,
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => $sloUrl,
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' =>\OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
                 'x509cert' => $this->get('SAML_request_signing_x509', ''),
                 'privateKey' => $this->get('SAML_request_signing_pkey', ''),
                 'provisionUser' => $this->get('SAML_provisionUser', true),
@@ -210,11 +279,11 @@ class Config
                 'entityId' => htmlspecialchars_decode($this->get('SAML_idp_entityId', $idpSsoUrl), ENT_QUOTES),
                 'singleSignOnService' => [
                     'url' => $idpSsoUrl,
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => $idpSloUrl,
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'x509cert' => $this->get('SAML_X509Cert'),
             ],
@@ -223,7 +292,7 @@ class Config
                 'authnRequestsSigned' => $isSPPrivateKeyCertSet && $this->get('SAML_sign_authn', false),
                 'logoutRequestSigned' => $isSPPrivateKeyCertSet && $this->get('SAML_sign_logout_request', false),
                 'logoutResponseSigned' => $isSPPrivateKeyCertSet && $this->get('SAML_sign_logout_response', false),
-                'signatureAlgorithm' => $this->get('SAML_request_signing_method', \XMLSecurityKey::RSA_SHA256),
+                'signatureAlgorithm' => $this->get('SAML_request_signing_method', XMLSecurityKey::RSA_SHA256),
                 'validateRequestId' => $this->get('saml.validate_request_id', false),
             ],
         ];
@@ -331,7 +400,6 @@ class Config
 
     /**
      * return default config for ldap
-     * @see modules/Users/authentication/LDAPAuthenticate/LDAPConfigs/default.php
      * @return array
      */
     protected function getLdapDefaultConfig()
@@ -356,31 +424,17 @@ class Config
     }
 
     /**
-     * Obtain settings that are placed
-     * in 'modules/Users/authentication/SAMLAuthenticate/settings.php' file (custom one as well).
-     * Used for only a specific range of settings:
-     * saml2_settings, id, useXML, customCreateFunction
+     * Get default IdM mode caching settings
      *
      * @return array
      */
-    protected function getSugarCustomSAMLSettings()
+    protected function getIDMModeDefaultCachingConfig() : array
     {
-        $result = [];
-        $sugarCustomConfig = \SAMLAuthenticate::loadSettings();
-        $sugarCustomConfigParams = [
-            'saml2_settings',
-            'id',
-            'useXML',
-            'customCreateFunction',
-        ];
-        foreach ($sugarCustomConfigParams as $key) {
-            if (isset($sugarCustomConfig->$key)) {
-                $result[$key] = $sugarCustomConfig->$key;
-            }
-        }
         return [
-            'sp' => [
-                'sugarCustom' => $result,
+            'ttl' => [
+                'introspectToken' => 10, // 10 seconds for introspecting user token
+                'userInfo' => 10, // 10 seconds for requesting user info
+                'keySet' => 7 * 24 * 60 * 60, // 7 days for requesting keySet for Mango client
             ],
         ];
     }

@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Atributet e grupit:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Me DN përdoruesi:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Përfshij DN e përdoruesit me atributet e përdoruesit kur kontrollon anëtarësimin e grupit',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Çdo shtesë të parametrave filtër për të aplikuar kur përdoruesit vërtetohen p.sh. \\ nis_sugar_user = 1 ose (is_sugar_user = 1) (is_sales = 1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Çdo shtesë të parametrave filtër për të aplikuar kur përdoruesit vërtetohen p.sh. \ nis_sugar_user = 1 ose (is_sugar_user = 1) (is_sales = 1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Vetitë e hyrjes',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Vetitë e lidhjes',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Për Lidhjen e përdoruesit LDAP <br />Shembuj: AD: userPrincipalName, OpenLDAP: user: userPrincipalName, Mac OS X: uid',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Paralajmërim: Për të mbrojtur të dhënat tuaja, instaluesi duhet të mbyllet nga parametrat $#39;instalues i_mbyllur$#39; në $#39;e vërtetë$#39;  të dosjes së konfigurimit.php.',
  	'WARN_LICENSE_EXPIRED'=> "Vërejtje: Licenca juaj përfundon në",
     'WARN_LICENSE_EXPIRED2' =>"dita. Ju lutemi shkoni në \"Licencën e Menaxhimit\" në ekranin e Adminit.",
-    'WARN_LICENSE_SEATS'=>  "Paralajmërim: Licenca e përdoruesit tejkalohet nga",
-    'WARN_LICENSE_SEATS2' => ". Ju lutemi kontaktoni përfaqësuesin e shitjeve ose në email cagroup@sugarcrm.com.",
+    'WARN_LICENSE_SEATS'=>  "<b>Paralajmërim:</b> Ka ",
+    'WARN_LICENSE_SEATS2' => " përdorues aktivë ndërkohë që abonimi juaj lejon vetëm ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Çaktivizoni disa përdorues, kontaktoni partnerin apo përfaqësuesin e shitjeve,"
+        . " ose dërgoni një email në <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Për më shumë informacion, shihni "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Kuptimi i </a> artikullit</p> për llojet e përdoruesve dhe licencat e \"Sugar\".",
     'WARN_LICENSE_SEATS_MAXED'=>  "Paralajmërim: Numri i përdoruesve aktivë tashmë është numri maksimal i licencave të lejuara:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Paralajmërim: Numri i përdoruesve aktivë tashmë është numri maksimal i licencave të lejuara",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Paralajmërim Numri i përdoruesve aktivë të lejuara nga licenca përputhet me numrin e përdoruesve aktivë në sistem. Ju nuk do të jetë në gjendje për të krijuar përdorues të tjerë aktivë.",
-    'WARN_REPAIR_CONFIG' => 'Paralajmërim: Dosja e konfigurimit.php ka nevojë të riparohet. Ju lutemi përdorni rindërtimin e konfigurimit të dosjes së skenarit në faqën e riparimit në zonën admin për të riparuar dosjen e konfigurimit.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Paralajmërim:</b> Nuk do të mund të krijoni përdorues të tjerë aktivë."
+        . " Blini abonime të tjera.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Paralajmërim:</b> Nuk do të mund të krijoni përdorues të tjerë aktivë."
+        . " Blini abonime të tjera.",
+    'WARN_REPAIR_CONFIG' => '<b>Paralajmërim:</b> Skedari config.php duhet të riparohet.  Përdor skriptin <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rindërto skedarin e konfigurimit</a> në faqen e riparimit në zonën e administratorit për të riparuar skedarin e konfigurimit.',
     'WARN_UPGRADE_APP'=> "Një version i azhurnuar i aplikacionit tani është në dispozicion.",
     'WARN_UPGRADE' => 'Paralajmërim: Ju lutemi azhurnoni',
     'WARN_UPGRADENOTE' => 'Shënim:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Zbrazi të dhënat vardefs nga sasia',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Fshini vardefs nga sasia',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Zbraze sasinë e unifikuar të kërkimit',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Fshirja e kërkimit të moduleve të unifikuara.php nga sasia',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Heq skedarin unified_search_modules.php nga memoria specifike',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Riparim i shpejtë dhe rindërtim',
     'LBL_QUICK_REPAIR_TITLE'=>'Ju lutemi selektoni Modulin(et) për riparimin:',
 	'LBL_FAILED_CONNECTION'=> 'Dështoi për t$#39;u lidhur:',
@@ -1245,15 +1254,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Skedari i metadatave nuk u gjet dot.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Parametrat',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Konfiguroni cilësimet e "Advanced Workflow".',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Shikim logimi',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Hapni evidencën e "Advanced Workflow".',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Hap ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' evidencën.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Proceso listën',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Lista e procesuar mund të adresohet këtu.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfiguro ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' cilësimet dhe shfaq evidencat. Menaxho të gjitha proceset BPM për të gjithë përdoruesit përmes Menaxhimit të proceseve.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfiguroni cilësimet e "Advanced Workflow" dhe shikoni evidencat. Menaxhoni të gjitha proceset BPM për të gjithë përdoruesit nëpërmjet "Menaxhimi i procesit".',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfigurimi i kuotave',
+    'LBL_MANAGE_QUOTES' => 'Konfiguroni formatin e tabelës së kuotave',
 );

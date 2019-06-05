@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -12,32 +12,44 @@
 
 namespace Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap;
 
-use Behat\MinkExtension\Context\MinkContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Testwork\Tester\Result\TestResult;
+use elkan\BehatFormatter\Context\BehatFormatterContext;
 use GuzzleHttp;
 use Behat\Gherkin\Node\TableNode;
 use Psr\Http\Message\ResponseInterface;
+use SensioLabs\Behat\PageObjectExtension\Context\PageObjectAware;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Factory as PageObjectFactory;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends MinkContext
+
+class FeatureContext extends BehatFormatterContext implements PageObjectAware
 {
     /**
      * @var array
      */
     protected $sugarAdmin;
 
+    protected $pageObjectFactory = null;
+
+    /**
+     * @var string
+     */
+    protected $accessToken;
+
     /**
      * SetUp necessary configs.
      *
      * @param array $sugarAdmin
+     * @param string $screenShotPath
      */
-    public function __construct(array $sugarAdmin)
+    public function __construct(array $sugarAdmin, string $screenShotPath = null)
     {
         $this->sugarAdmin = $sugarAdmin;
+        parent::__construct($screenShotPath);
     }
 
     /**
@@ -94,6 +106,7 @@ class FeatureContext extends MinkContext
         $this->switchSidecar();
         $this->waitForThePageToBeLoaded();
         $this->iClick('#userList');
+        $this->waitForElement('.profileactions-logout');
         $this->iClick('.profileactions-logout');
         $this->iWaitUntilTheLoadingIsCompleted();
         $this->waitForThePageToBeLoaded();
@@ -178,6 +191,21 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * Wait for the specific query string
+     * @param string $query
+     * @throws \Exception
+     *
+     * @Then /^I should see "([^"]*)" in url query$/
+     * @And /^/^I should see "([^"]*)" in url query$/
+     */
+    public function iShouldSeeQueryStringInUrl(string $query)
+    {
+        $this->spin(function (FeatureContext $context) use ($query) {
+            return parse_url($context->getSession()->getCurrentUrl(), PHP_URL_QUERY) === $query;
+        }, 10);
+    }
+
+    /**
      * Checks valid redirect in new tab
      * @param $url
      * @Then /^The document should open in a new tab with url "?([^"]*)"?$/
@@ -214,7 +242,26 @@ class FeatureContext extends MinkContext
      */
     public function waitForThePageToBeLoaded()
     {
-        $this->getSession()->wait(10000, "document.readyState === 'complete'");
+        $this->getSession()->wait(20000, "document.readyState === 'complete'");
+    }
+
+    /**
+     * Wait for the ajax to be finished
+     * @And I wait for the ajax to be finished
+     * @When I wait for the ajax to be finished
+     */
+    public function waitForAjaxToBeFinished()
+    {
+        $result = $this->getSession()->wait(5000, '$.active == 0');
+        if (!$result) {
+            $backtrace = debug_backtrace();
+
+            throw new \Exception(
+                "Timeout thrown by " . $backtrace[1]['class'] . "::" . $backtrace[1]['function'] . "()\n" .
+                (array_key_exists('file', $backtrace[1]) ? $backtrace[1]['file'] . ", line " . $backtrace[1]['line'] :
+                    '')
+            );
+        }
     }
 
     /**
@@ -244,12 +291,23 @@ class FeatureContext extends MinkContext
     public function iSkipLoginWizard()
     {
         $this->iWaitUntilTheLoadingIsCompleted();
-        sleep(5);
+
+        $loginWizardElement = $this->getSession()->getPage()->waitFor(
+            5,
+            function () {
+                return $this->getSession()->getPage()->findField('first_name');
+            }
+        );
+
+        if (!$loginWizardElement) {
+            return;
+        }
+
         $accessToken = $this->getAccessToken();
         if ($accessToken) {
             $client = new GuzzleHttp\Client();
             $response = $client->get(
-                $this->getMinkParameter('base_url') . '/rest/v10/me/preferences',
+                $this->getMinkParameter('base_url') . '/rest/v11/me/preferences',
                 ['headers' => ['OAuth-Token' => $accessToken]]
             );
 
@@ -296,6 +354,40 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * Gets access token through REST
+     * @param string $username
+     * @param string $password
+     *
+     * @And /^I get access_token for "([^"]*)" with password "([^"]*)"$/
+     * @Then /^I get access_token for "([^"]*)" with password "([^"]*)"$/
+     *
+     * @throws \RuntimeException
+     */
+    public function iGetAccessTokenForUserWithPassword(string $username, string $password): void
+    {
+        $client = new GuzzleHttp\Client();
+        $url = rtrim($this->getMinkParameter('base_url'), '/') . '/rest/v11/oauth2/token';
+        try {
+            $formParams = [
+                'client_id' => 'sugar',
+                'client_info' => ['current_language' => 'en_us'],
+                'client_secret' => '',
+                'current_language' => 'en_us',
+                'grant_type' => 'password',
+                'password' => $password,
+                'platform' => 'base',
+                'username' => $username,
+            ];
+            $response = $client->post($url, ['form_params' => $formParams]);
+            $body = $response->getBody();
+            $result = json_decode((string)$body, true);
+            $this->accessToken = $result['access_token'];
+        } catch (\Exception $exception) {
+            throw new \RuntimeException('Can not login as ' . $username . ' using password: ' . $password);
+        }
+    }
+
+    /**
      * Updates user preferences
      *
      * @param string $accessToken
@@ -305,7 +397,7 @@ class FeatureContext extends MinkContext
     {
         $client = new GuzzleHttp\Client();
         $client->put(
-            $this->getMinkParameter('base_url') . '/rest/v10/me/preferences',
+            $this->getMinkParameter('base_url') . '/rest/v11/me/preferences',
             [
                 'headers' => ['OAuth-Token' => $accessToken],
                 'body' => json_encode($preferences),
@@ -335,7 +427,7 @@ class FeatureContext extends MinkContext
         }
 
         $accessToken = $this->getAccessToken();
-        $usersUrl = rtrim($this->getMinkParameter('base_url'), '/') . '/rest/v10/Users';
+        $usersUrl = rtrim($this->getMinkParameter('base_url'), '/') . '/rest/v11/Users';
         $client = new GuzzleHttp\Client();
         /** @var ResponseInterface $response */
         $response = $client->post(
@@ -452,34 +544,25 @@ class FeatureContext extends MinkContext
     }
 
     /**
-     * Clears local storage and cookies.
-     */
-    public function clearLocalData()
-    {
-        $this->getSession()->executeScript('localStorage.clear()');
-        $this->getSession()->setCookie('PHPSESSID', null);
-    }
-    
-    /**
      * Closes all alerts on the page
-     * 
+     *
      * @Then I close alerts
      * @And I close alerts
      */
     public function iCloseAlerts()
     {
         $closeElements = $this->getSession()->getPage()->findAll('css', 'button.close.btn.btn-link.btn-invisible');
-         foreach ($closeElements as $closeButton) {
-             $closeButton->click();
-         }
+        foreach ($closeElements as $closeButton) {
+            $closeButton->click();
+        }
     }
-    
+
     /**
      * Override method assertPageContainsText (MinkContext class) to wait for page is loaded
-     * 
+     *
      * Checks, that page contains specified text
      * Example: Then I should see "Who is the Batman?"
-     * Example: And I should see "Who is the Batman?" 
+     * Example: And I should see "Who is the Batman?"
      */
     public function assertPageContainsText($text)
     {
@@ -487,10 +570,10 @@ class FeatureContext extends MinkContext
         $this->iWaitUntilTheLoadingIsCompleted();
         parent::assertPageContainsText($text);
     }
-    
+
     /**
      * Override method assertPageNotContainsText (MinkContext class) to wait for page is loaded
-     * 
+     *
      * Checks, that page doesn't contain specified text
      * Example: Then I should not see "Batman is Bruce Wayne"
      * Example: And I should not see "Batman is Bruce Wayne"
@@ -505,7 +588,7 @@ class FeatureContext extends MinkContext
     /**
      * Take a screenshot of a page if step fails.
      *
-     * @AfterStep
+     * Disabled, use artifacts to see screenshots
      */
     public function takeScreenshotAfterFailedStep($event)
     {
@@ -514,6 +597,7 @@ class FeatureContext extends MinkContext
             try {
                 $screenShot = $this->getSession()->getScreenshot();
 
+                $this->printDecoratedMessage('At: ' . strftime('%c'));
                 $this->printDecoratedMessage("Current page URL: " . $this->getSession()->getCurrentUrl());
 
                 if (empty($screenShot)) {
@@ -541,9 +625,36 @@ class FeatureContext extends MinkContext
      *
      * @return string
      */
-    protected function printDecoratedMessage($message, $decorator='=')
+    protected function printDecoratedMessage($message, $decorator = '=')
     {
         echo str_repeat($decorator, 65) . "\n";
         echo $message . "\n";
+    }
+
+    /**
+     * @AfterScenario
+     * Clear cookies and reset session
+     */
+    public function resetSession()
+    {
+        $this->getSession()->reset();
+    }
+
+    /**
+     * @param PageObjectFactory $pageObjectFactory
+     *
+     * @return null
+     */
+    public function setPageObjectFactory(PageObjectFactory $pageObjectFactory)
+    {
+        $this->pageObjectFactory = $pageObjectFactory;
+    }
+
+    /*
+     * Implicit page object creation via factory.
+     */
+    protected function getPage($pageObjectClass)
+    {
+        return $this->pageObjectFactory->create($pageObjectClass);
     }
 }

@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus serveri',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Artikujtë nënpanel për faqe',
 	'LOG_MEMORY_USAGE'=>'Përdorimi i memorisë hyrëse',
-    'LOG_SLOW_QUERIES' => 'Identifikohuni në pyetjet të ngadalshme',
+    'LOG_SLOW_QUERIES' => 'Regjistro pyetjet e ngadalta',
     'LOCK_HOMEPAGE_HELP'=>'Kjo vendosje është për parandalim<br />1) shtimi i faqeve në shtëpi të reja dhe dashlets në modulin e ballinës,<br />2) përshtatja e vendosjes dashlet në faqët hyrëse nga tërheqja dhe lëshimi.',
     'CURRENT_LOGO'=>'Logoja aktuale',
     'CURRENT_LOGO_HELP'=>'Kjo logo është shfaqur në këndin e majtë të fundfaqës së aplikimit Sugar.',
@@ -158,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Identifikuesi unik i personit që do të përdoren për të kontrolluar nëse ata janë anëtar të grupit në Shembullin: uid',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Atributi i grupit që do të përdoret për të filtruar kundër atributit të përdoruesit në shembullin: memberUid',
 	'LBL_LDAP_GROUP_ATTR'=>'Atributet e grupit:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Çdo shtesë të parametrave filtër për të aplikuar kur përdoruesit vërtetohen p.sh. \\ nis_sugar_user = 1 ose (is_sugar_user = 1) (is_sales = 1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Çdo shtesë të parametrave filtër për të aplikuar kur përdoruesit vërtetohen p.sh. \ nis_sugar_user = 1 ose (is_sugar_user = 1) (is_sales = 1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Vetitë e hyrjes',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Vetitë e lidhjes',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Për Lidhjen e përdoruesit LDAP <br />Shembuj: AD: userPrincipalName, OpenLDAP: user: userPrincipalName, Mac OS X: uid',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Shfaq butonin e shkarkimit',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kur selektohen, skeda e shkarkimit do të shfaqet në parametrat e përdoruesit dhe do të sigurojnë përdoruesit me qasje në Sugar prizat dhe dosjet të tjera në dispozicion',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Për SOAP autentikim gjatë përdorimit të LDAP-së.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Zgjerimi php_mcrypt duhet të jetë i aktivizuar në dosjen php.ini.',
     'LBL_ALL' => 'Të gjitha',
     'LBL_MARK_POINT' => 'Pika e shënimit',
     'LBL_NEXT_' => 'Vijim>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Transmetimi i aktiviteteve',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivizo transmetimin e aktiviteteve',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Aktivizon transmetimet e aktiviteteve për aplikacionin',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktivizo përmbajtje shtesë të ekranit të identifikimit',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Ruaj automatikisht përkufizimet e proceseve',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Përcakton shpeshtësinë e ruajtjes automatike të përkufizimeve të proceseve kur përdoret dizenjatori',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Vërteto automatikisht përkufizimet e proceseve gjatë ruajtjes automatike',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Ndryshon nëse përkufizimet e proceseve vërtetohen automatikisht gjatë ruajtjes automatike. Kjo do të zbatohet vetëm nëse "Ruaj automatikisht përkufizimet e proceseve" është caktuaar në një interval kohor',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Vërteto automatikisht përkufizimet e proceseve gjatë importimit',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Ndryshon nëse përkufizimet e proceseve vërtetohen automatikisht gjatë importimit të parë',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Cilësimet e evidencës së komenteve',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimumi i karaktereve që shfaqen për regjistër komenti',
 );
 
 

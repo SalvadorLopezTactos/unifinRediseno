@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: ygDDListStudio.js 18703 2006-12-15 09:42:43Z majed $
 
 /* Copyright (c) 2006 Yahoo! Inc. All rights reserved. */
 

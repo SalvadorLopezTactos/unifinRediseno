@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Vale kasutajanimi või parool',
-	'ERR_BODY_TOO_LONG'		=> '\\rKehatekst on liiga pikk, et mahutada KOGU e-kirja. Lõigatud.',
+	'ERR_BODY_TOO_LONG'		=> '\rKehatekst on liiga pikk, et mahutada KOGU e-kirja. Lõigatud.',
 	'ERR_INI_ZLIB'			=> 'Zlib-tihendamist ei saanud ajutiselt välja lülitada. Testi sätted võivad nurjuda.',
 	'ERR_MAILBOX_FAIL'		=> 'E-posti kontosid ei leitud.',
 	'ERR_NO_IMAP'			=> 'IMAP-teeke ei leitud. Lahendage see enne sissetulevate e-kirjadega jätkamist',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Paiguta meeskondade järjekorrad külviloendisse',
 	'LBL_GROUPFOLDER_ID'	=> 'Grupi kausta ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Kaust Määra grupile',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Luba kasutajatel saata e-kirju, kasutades vastuse aadressina Saatja nime ja aadressi',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Kui see suvand on valitud, kuvatakse selle grupi e-posti kontoga seotud Saatja nimi ja Saatja e-posti aadress suvandina välja Saatja puhul e-kirjade koostamisel kasutajatele, kellel on juurdepääs grupi e-posti kontole.',
     'LBL_STATUS_ACTIVE'     => 'Aktiivne',
     'LBL_STATUS_INACTIVE'   => 'Inaktiivne',
     'LBL_IS_PERSONAL' => 'personaalne',

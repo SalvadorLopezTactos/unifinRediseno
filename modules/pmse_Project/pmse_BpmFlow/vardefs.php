@@ -274,7 +274,7 @@ $dictionary['pmse_BpmFlow'] = array(
             'vname' => 'Sugarcrm module name',
             'type' => 'varchar',
             'massupdate' => false,
-            'default' => 'ProcessMaker',
+            'default' => '',
             'no_default' => false,
             'comments' => '',
             'help' => '',
@@ -736,6 +736,7 @@ $dictionary['pmse_BpmFlow'] = array(
     'ignore_templates' => array(
         'taggable',
         'lockable_fields',
+        'commentlog',
     ),
     'uses' => array(
         'basic',

@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: email_popup_helper.js 24878 2007-07-31 19:46:34Z chris $
 
 function send_back_selected(module, form, field, error_message, field_to_name_array)
 {

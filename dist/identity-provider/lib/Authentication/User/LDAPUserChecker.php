@@ -13,6 +13,7 @@
 namespace Sugarcrm\IdentityProvider\Authentication\User;
 
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
+use Sugarcrm\IdentityProvider\Authentication\User as LocalUser;
 use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 
 use Symfony\Component\Security\Core\User\UserChecker;
@@ -50,7 +51,7 @@ class LDAPUserChecker extends UserChecker
     {
         $value = $user->getAttribute('identityValue');
         try {
-            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::LDAP);
+            $localUser = $this->getLocalUser($value);
         } catch (UsernameNotFoundException $e) {
             if (empty($this->config['auto_create_users'])) {
                 throw $e;
@@ -64,5 +65,25 @@ class LDAPUserChecker extends UserChecker
         $user->setLocalUser($localUser);
 
         parent::checkPostAuth($user);
+    }
+
+    /**
+     * @param string $value
+     * @return LocalUser
+     * @throws \Throwable
+     */
+    private function getLocalUser(string $value): LocalUser
+    {
+        try {
+            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::LDAP);
+        } catch (UsernameNotFoundException $e) {
+            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::LOCAL);
+            $this->localUserProvider->linkUser(
+                $localUser->getAttribute('id'),
+                Providers::LDAP,
+                $value
+            );
+        }
+        return $localUser;
     }
 }

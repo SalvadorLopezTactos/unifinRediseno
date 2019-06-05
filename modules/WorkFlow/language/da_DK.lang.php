@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Arbejdsgangdefinitioner:',
   'LBL_MODULE_NAME_SINGULAR' => 'Defineret arbejdsproces',
-  'LBL_MODULE_ID' => 'Arbejdsgang',  
+  'LBL_MODULE_ID' => 'Arbejdsgang',
   'LBL_MODULE_TITLE' => 'Arbejdsgang: Startside',
   'LBL_SEARCH_FORM_TITLE' => 'Søg efter arbejdsgang',
   'LBL_LIST_FORM_TITLE' => 'Arbejdsgangliste',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Målgruppemodul:',
   'LBL_LIST_ORDER' => 'Ordrebehandling:',
   'LBL_FROM_NAME' => 'Fra navn:',
-  'LBL_FROM_ADDRESS' => 'Fra adresse:',  
+  'LBL_FROM_ADDRESS' => 'Fra adresse:',
   'LNK_NEW_WORKFLOW' => 'Opret arbejdsgangdefinition',
-  'LNK_WORKFLOW' => 'Vis arbejdsgangdefinitioner', 
-  
-  
+  'LNK_WORKFLOW' => 'Vis arbejdsgangdefinitioner',
+
+
   'LBL_ALERT_TEMPLATES' => 'Beskedskabeloner',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Opret en beskedskabelon:',
   'LBL_SUBJECT' => 'Emne:',
-  
+
   'LBL_RECORD_TYPE' => 'Gælder for:',
  'LBL_RELATED_MODULE'=> 'Relateret modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Arbejdsgangsekvens',
 	'LNK_ALERT_TEMPLATES' => 'E-mail-skabeloner til beskeder',
 	'LNK_PROCESS_VIEW' => 'Arbejdsgangsekvens',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Type',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> Sugar Workflow og Workflow Management-funktionen er i vedligeholdelsestilstand. Sugar Enterprise-kunder bør bruge funktionaliteten, som leveres af SugarBPM<sup class="trademark">TM</sup>.',
 );
 

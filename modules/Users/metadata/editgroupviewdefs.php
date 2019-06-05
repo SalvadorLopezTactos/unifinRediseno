@@ -33,7 +33,8 @@ $viewdefs['Users']['EditView'] = array(
                   ),
                   array(
                       'name'=>'UserType',
-                      'customCode'=>'{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
+                      'customCode' =>
+                          '{if $IS_ADMIN && !$IDM_MODE_ENABLED}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
                   ),
             ),
         ),

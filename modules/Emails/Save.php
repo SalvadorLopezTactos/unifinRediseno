@@ -171,8 +171,8 @@ $focus->bcc_addrs = $_REQUEST['bcc_addrs'];
 $focus->from_addr = $_REQUEST['from_addr'];
 
 // delete the existing relationship of all the email addresses with this email
-$query = "update emails_email_addr_rel set deleted = 1 WHERE email_id = '{$focus->id}'";
-$focus->db->query($query);
+$focus->db->getConnection()
+    ->executeUpdate("UPDATE emails_email_addr_rel SET deleted = 1 WHERE email_id = ?", [$focus->id]);
 
 // delete al the relationship of this email with all the beans
 if(!empty($_REQUEST['to_addrs_ids'])) {

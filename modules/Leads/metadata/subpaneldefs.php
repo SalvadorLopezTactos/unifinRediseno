@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: layout_defs.php 19711 2007-01-31 00:19:51Z eddy $
 
 $layout_defs['Leads'] = array(
 	// sets up which panels to show, in which order, and with what linked_fields

@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Felelős:',
   'LBL_ASSIGNED_TO_NAME' => 'Felhasználó:',  	  
   'LBL_WORK_LOG' => 'Munkanapló:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Létrehozta:',
   'LBL_DATE_CREATED' => 'Létrehozás dátuma:',
   'LBL_DATE_ENTERED' => 'Létrehozás dátuma:',

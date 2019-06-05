@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'El. pašto nustatymai',
     'EmailParticipants' => 'El. pašto dalyviai',
     'DataPrivacy' => 'Duomenų privatumas',
+    'ReportSchedules' => 'Ataskaitos planai',
+    'CommentLog' => 'Komentarų žurnalas',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => '„OAuth“ atpažinimo ženklas',
     'Filters' => 'Filtras',
     'Comments' => 'Komentaras',
+    'CommentLog' => 'Komentarų žurnalas',
     'Currencies' => 'Valiuta',
     'ProductTemplates' => 'Produkto šablonas',
     'ProductTypes' => 'Produkto tipas',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'El. pašto nustatymas',
     'EmailParticipants' => 'El. pašto dalyvis',
     'DataPrivacy' => 'Duomenų privatumas',
+    'ReportSchedules' => 'Ataskaitos planas',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transportavimas',
     'Utilities' => 'Komunalinės paslaugos',
     'Other' => 'Kita',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => '1 lygis',
+    'T2' => '2 lygis',
+    'T3' => '3 lygis',
+    'T4' => '4 lygis',
   ),
   'lead_source_default_key' => 'Savarankiškai sukurtas',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Perkelti',
         'donothing' => 'Nieko nedaryti'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Niekada',
+        30000 => 'Kas 30 sekundžių',
+        60000 => 'Kas minutę',
+        120000 => 'Kas 2 minutes',
+        180000 => 'Kas 3 minutes',
+        240000 => 'Kas 4 minutes',
+        300000 => 'Kas 5 minutes',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Prognozuojama',
         'sales_stage' => 'Pardavimo etapas',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Sąrašas',
         'activities' => 'Veiklos srautas',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Kas valandą',
+        '21600' => 'Kas 6 valandas',
+        '43200' => 'Kas 12 valandų',
+        '86400' => 'Kas dieną',
+        '604800' => 'Kas savaitę',
+        '1209600' => 'Kas 2 savaites',
+        '2419200' => 'Kas 4 savaites',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekti saitą',
   'LBL_TOGGLE_VISIBILITY' => 'Perjungti matomumą', // Record view header panel element
   'LBL_ACTIVITIES' => 'Veiklos srautas',
-  'LBL_COPYRIGHT' => '© „SugarCRM Inc.“, 2004–2018. Visos teisės saugomos.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => '„SugarCRM, Sugar“ ir 3-D kubas yra registruotieji „SugarCRM Inc.“ prekės ženklai. '.
         'Visi kiti šiame produkte naudojami arba pateikti įmonių ir produktų pavadinimai yra '.
         '„SugarCRM ®“, „Sugar Enterprise™“ ir „Sugar™“ yra „SugarCRM Inc.“ prekių ženklai',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sinchronizuoti visus pašto klientus',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'An email was sent to the specified email address using the provided outgoing mail settings. Please check to see if the email was received to verify the settings are correct.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Atliekant šį veiksmą bus sinchronizuota visi pašto klientai ir jų elementai.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Atlikti pilna sinchronizacija ? \\n dideliems pašto klientams, gali užimti kelias minutes.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Atlikti pilna sinchronizacija ? \n dideliems pašto klientams, gali užimti kelias minutes.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Paspauskite Shift klavišą arba  Ctrl klavišą, kad pasirinktumėte kelis katalogus',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Bendra',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Galimi grupių katalogai',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Aktyvi sesija reikalinga eksportuoti turinį.',
     'ERR_NO_HEADER_ID' => 'Ši savybė negalima šiai temai.',
     'ERR_NOT_ADMIN' => "Neautorizuotas priėjimas prie administracinės zonos.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Ši parinktis „SugarCRM“ IDM režimui išjungta ir pasiekiama debesies konsolėje.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Pereikite į <a href=\"%s\" target=\"_blank\">debesies konsolę</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Slaptažodžio valdymas pasiekiamas tik debesies nustatymų srityje.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Jei norite atlikti laukų, skirtų tik skaityti, pakeitimų, susisiekite su „Sugar“ administratoriumi.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Privalomi laukai:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Neteisingas privalomas laukas:',
     'ERR_INVALID_VALUE' => 'Neteisinga reikšmė:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Current User not authorized to change {moduleName} configuration settings',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'You are not authorized to favorite {moduleName}. Contact your administrator if you need access.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'You are not authorized to subscribe to {moduleName}. Contact your administrator if you need access.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields neįtraukta į krovinio svorio informaciją',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns nėra indeksas',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields nėra įtraukta į krovinio svorio informaciją',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows nėra indeksas',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields neįtraukta į krovinio svorio informaciją',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Jūsų užklausa neįvykdyta, dėl nežinomos klaidos.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Sukurti',
     'LBL_FILTER_CREATE_FILTER' => 'Sukurti naują filtrą',
+    'LBL_FILTER_CLOSE_FILTER' => 'Uždaryti filtrą',
     'LBL_FILTER_EDIT_FILTER' => 'Redaguoti filtrą',
     'LBL_FILTER_ALL_RECORDS' => 'All Records',
     'TPL_FILTER_SAVE' => 'You successfully created the filter {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">„SugarCRM Inc.“</a>, 2004–2018 '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Visos teisės saugomos.<br />„SugarCRM, Sugar“ ir 3-D kubas yra registruotieji „SugarCRM Inc.“ prekės ženklai. '.
         'Visi kiti šiame produkte naudojami arba pateikti įmonių ir produktų pavadinimai yra '.
         'atitinkamų įmonių, su kuriomis jie susiję, prekės ženklai.',
@@ -3457,7 +3497,12 @@ Sincerely, SugarCRM',
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Perspėjimas: Jūsų IE naršyklė yra tokia režime, kuris nėra palaikomas",
     'WARN_LICENSE_SEATS'=>  "Perspėjimas: Aktyvių vartotojų skaičius pasiekė maksimaliai leistiną licencijų skaičių.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Perspėjimas: Aktyvių vartotojų skaičius viršijo maksimaliai leistiną licencijų skaičių.",
-    'WARN_ONLY_ADMINS'=> "Prisijungimas tik su administratoriaus teisėmis.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Aktyvių vartotojų skaičius viršija leidžiamąją licencijų skaičiaus ribą. Kreipkitės į savo administratorių.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Prisijungti gali tik administratoriai.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Pasiekta vartotojo licencijų skaičiaus leidžiamoji riba. Prisijungti gali tik esami vartotojai.',
+    'WARN_ONLY_ADMINS'=> "Prisijungti gali tik administratoriai.",
     'WARN_UNSAVED_CHANGES'=> "Ar tikrai norite išeiti iš šio įrašo, neišsaugoję pakeitimų?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Neįrašėte pakeitimų. Ar tikrai norite išeiti iš puslapio ir atsisakyti pakeitimų?',
     'LBL_NAVIGATE_TO_REPORTS' => 'You are moving to the Reports module. Your changes to dashlet will not be saved. Continue?',
@@ -3550,6 +3595,7 @@ Sincerely, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "You currently have no <item1> records saved. <item2> one now.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Spauskite čia",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Pridėti į mano mėgstamiausius',
@@ -3655,6 +3701,10 @@ Sincerely, SugarCRM',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Susijusios paskyros galimybės metrika.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Greitojo pasirinkimo prekių katalogas',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Pateikiami vėliausiai naudoti elementai ir kaip mėgstamiausi išsaugoti produktai',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Naudota vėliausiai',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Mėgstamiausi',
 
     'LBL_DASHLET_NO_RECORDS' => 'No records were found at this time.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
@@ -4262,7 +4312,27 @@ Sincerely, SugarCRM',
 
     'LBL_FUTURE' => 'Future',
     'LBL_REQUIRED_FIELD' => 'Privalomas',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Įvykdyto pasiūlymo eilutės prekė',
+    'LBL_DISCOUNT_TOTAL' => 'Visa nuolaida',
+    'LBL_TAX' => 'Mokesčiai',
+    'LBL_SHIPPING' => 'Pristatymas',
+    'LBL_GRAND_TOTAL' => 'Bendra suma',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Automatiškai užpildykite sąskaitų siuntimo adresą naudodami paskyros profilio duomenis',
+    'LBL_QLI_ADD_GROUP' => 'Pridėti grupę',
+    'LBL_QLI_COMMENT' => 'Komentaras',
+    'LBL_SELECT_ACTION' => 'Pasirinkti veiksmą',
+    'LBL_QLI_GROUP_NAME' => 'Grupės pavadinimas',
+    'LBL_GROUP_TOTAL' => 'Bendra grupinė suma',
+    'LBL_ITEM_NAME' => 'Eilutės prekė',
+    'LBL_QLI_DELETE' => 'Ar tikrai norite ištrinti šią eilutės prekę?',
+    'LBL_QLI_COMMENT_DELETE' => 'Ar tikrai norite ištrinti šį eilutės prekės komentarą?',
+    'LBL_QLI_GROUP_DELETE' => 'Ar tikrai norite ištrinti grupę „{0}“? Visos prekės bus perkeltos į numatytą grupę.',
+    'LBL_QLI_GROUP_EMPTY' => 'Įvykdyto pasiūlymo eilutės prekių nėra',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Neprivalomas',
     'LBL_RELATED_MODULE' => 'Susijęs {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Susiję {{{this}}}',
@@ -4920,7 +4990,7 @@ Sincerely, SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team Tasks',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Išplėstinė darbo eiga',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP arba senoji REST API',
@@ -4981,9 +5051,9 @@ Sincerely, SugarCRM',
     'LBL_ALERT_TITLE_NOTICE' => 'Notice:',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Kraunama',
+    'LBL_ALERT_NO_ACCESS' => 'Jūs neturite prieigos prie šio skydelio filtro.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Padvigubinkite ataskaitų sritį, kad galėtumėte konfigūruoti skydelį naudodami savo filtrą.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Your browser version is no longer supported or you are using an unsupported browser.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Rekomenduojamos tolesnės naršyklių versijos: <ul><li>„Internet Explorer 11“</li><li>„Firefox 41“</li><li>„Safari 7.1“</li><li>„Chrome 47“</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
     'LBL_ALERT_CONFIRM_DELETE' => 'Ar tikrai norite ištrinti šį elementą?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Ar tikrai norite ištrinti šiuos elementus?',
@@ -5081,7 +5151,7 @@ Sincerely, SugarCRM',
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historical Summary',
-    'TPL_HISTORICAL_SUMMARY' => '{{{name}}} istorinė santrauka',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'More history...',
     'LBL_RELATED_CONTACT' => 'Related Contact',
     'LBL_MODULE_TYPE' => 'Tipas',
@@ -5155,6 +5225,11 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Missing SMTP Server settings',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'To send record assignment notifications, an SMTP server must be configured in {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Pašto nustatymai',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Yra naujų sandėlio ataskaitų',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Yra naujų sandėlio ataskaitų jūsų ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Ataskaitos modulis',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Jos yra pažymėtos kaip „Sandėlio ataskaita“ ir jas galima filtruoti. Be to, pagal turinį ataskaitos yra pažymėtos kaip „Pardavimas ir rinkodara“, „Klientų aptarnavimas“, „Duomenų privatumas“ arba „Administravimo“. Daugiau informacijos ieškokite ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentacijoje',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM enables power users to quickly perform certain tasks with keyboard shortcuts to increase productivity. The tables on the right describe available shortcuts along with the keys and the actions they perform.',
@@ -5264,23 +5339,26 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesai',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Procesų skydelyje rodomi šablonai, kuriuos galima naudoti „SugarBPM“.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Proceso apibrėžimai',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Procesų aprašų skydelyje rodomi šablonai, kuriuos galima naudoti „SugarBPM“.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Create Process Definition',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Import Process Definitions',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Proceso verslo taisyklės',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Procesų verslo taisyklių skydelyje rodomi šablonai, kuriuos galima naudoti „SugarBPM“.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Create Process Business Rule',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Import Process Business Rules',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Proceso el. laiškų šablonai',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Procesų el. pašto šablonų skydelyje rodomi šablonai, kuriuos galima naudoti „SugarBPM“.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Create Process Email Template',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Import Process Email Templates',
 
@@ -5304,7 +5382,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_PMSE_CANCELLED_STATUS' => 'Atšaukta',
     'LBL_PMSE_TERMINATED_STATUS' => 'Nutraukta',
     'LBL_PMSE_ERROR_STATUS' => 'Klaida',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => '„SugarBPM“ parametrai',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Ar tikrai norite išjungti šį įrašą?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Ar tikrai norite įjungti šį įrašą?',
@@ -5328,7 +5406,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => '„Sugar 7“ reikalingas „javascript“. Kad galėtumėte naudotis „Sugar 7“, savo naršyklėje įgalinkite „Javascript“.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serializuoti duomenys negali tapti neserializuoti',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serializuoti duomenys negali tapti neserializuoti, nes juose yra nuorodų į objektus arba klases',
 
@@ -5343,7 +5421,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_EMAIL_PARTICIPANTS' => 'El. pašto dalyviai',
     'LBL_EMAIL_PARTICIPANT' => 'El. pašto dalyvis',
 
-    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Nebegausite kampanijų el. laiškų',
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
 
     'LBL_DATAPRIVACY' => 'Duomenų privatumas',
     'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Duomenų privatumas',
@@ -5357,6 +5435,15 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_DATAPRIVACY_PII' => 'Asmeninė informacija',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Žymėti ištrinti',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Asmeninė informacija, skirta {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Nukopijuota į jūsų iškarpinę!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nepavyko nukopijuoti į jūsų iškarpinę',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopijos patvirtinimo nuoroda',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Rodyti daugiau...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Rodyti mažiau...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6534,7 +6621,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Įdėtasis failas';
     'YER' => 'Irano rialai',
     'ZWD' => 'Zimbabvės doleriai',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Vienas apsilankymas',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Nėra',
+        'future' => 'Dabartinė reikšmė',
+        'old' => 'Sena reikšmė',
+        'both' => 'Dabartinė ir sena reikšmės',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Vienas apsilankymas',
+    );

@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: JSTransaction.js 18703 2006-12-15 09:42:43Z majed $
    
 function JSTransaction(){
     this.JSTransactions = new Array();
@@ -49,6 +48,3 @@ function JSTransaction(){
             redoFunction(transaction['data']);
         }
     }
-
-
-

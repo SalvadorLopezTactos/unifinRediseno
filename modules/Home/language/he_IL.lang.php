@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - ערכת כלים פשוטה של SAML עבור PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - גלילת העודף עבור ערכת רשת לסלולרי. גלילה טבעית בתוך אלמנט רוחב/גובה קבוע.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas היא ספריית javaScript שמוסיפה תמיכת HTML5 Canvas ל-Internet Explorer. היא מאחזרת צורות ותמונות באמצעות API של Flash. היא תומכת כמעט בכל ה-API של Canvas ובמקרים רבים, פועלת מהר יותר מספריות דומות אחרות שמשתמשות ב-VML או Silverlight.',
-  'LBL_SOURCE_JIT' => 'ערכת כלים javaScript InfoVis - ערכת הכלים javaScript InfoVis מספקת כלים ליצירת ויזואליזציות נתונים אינטראקטיביות לרשת.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - מסגרת יישום אינטרנט מונחית-עצמים עם קוד פתוח עבור PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - מנתח נתוני CSV עבור PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - השתמש בפונקציות של PHP ב-javaScript',

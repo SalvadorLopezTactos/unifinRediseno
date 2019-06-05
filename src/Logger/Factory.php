@@ -129,7 +129,6 @@ class Factory
             $processors[] = $this->createProcessor($processor['type'], $processor['params']);
         }
 
-        // we will remove this wrapper once we drop support for old levels
         return new Logger($channel, $handlers, $processors);
     }
 

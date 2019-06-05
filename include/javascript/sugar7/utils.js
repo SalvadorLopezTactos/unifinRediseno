@@ -128,7 +128,7 @@
 
                         email.get('to_collection').add(records);
                     },
-                    fields: ['id', 'full_name', 'email']
+                    fields: ['id', 'name', 'email']
                 });
             }
         }
@@ -1113,6 +1113,29 @@
                 }).filter(function(link) {
                     return app.data.getRelatedModule(primaryModule, link.name) === relatedModule;
                 }, this).value();
+            },
+
+            /**
+             * Get the full site URL.
+             *
+             * @return {string}
+             */
+            getSiteUrl: function() {
+                var origin;
+
+                if (app.config.siteUrl) {
+                    return app.config.siteUrl;
+                }
+
+                if (window.location.origin) {
+                    origin = window.location.origin;
+                } else {
+                    origin = window.location.protocol + '//' +
+                        window.location.hostname +
+                        (window.location.port ? ':' + window.location.port : '');
+                }
+
+                return origin + window.location.pathname;
             }
         });
     });

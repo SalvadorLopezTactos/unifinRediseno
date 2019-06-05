@@ -141,7 +141,7 @@ class EmailSenderRelationship extends EmailRecipientRelationship
      *
      * {@inheritdoc}
      */
-    public function remove($lhs, $rhs)
+    public function remove($lhs, $rhs, $save = true)
     {
         if (!$this->allowRemove &&
             $lhs->isUpdate() &&

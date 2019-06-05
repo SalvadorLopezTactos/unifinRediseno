@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: radioenum.php 26571 2007-09-11 18:16:23Z roger $
 
 
 $edit_mod_strings = return_module_language($GLOBALS['current_language'], 'EditCustomFields');

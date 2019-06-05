@@ -79,7 +79,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadUser()
     {
-        $entry = new Entry('dn', ['userPrincipalName' => 'uuid']);
+        $entry = new Entry('dn', ['userPrincipalName' => ['uuid']]);
 
         $this->query->method('execute')->willReturn([$entry]);
         $this->ldap->method('escape')->willReturnArgument(0);
@@ -146,7 +146,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
         $this->entries->expects($this->once())
                       ->method('offsetGet')
                       ->with(0)
-                      ->willReturn(new Entry('username', array()));
+                      ->willReturn(new Entry('username', []));
         $result = $this->userProvider->loadUserByToken($this->token);
         $this->assertInstanceOf('Sugarcrm\IdentityProvider\Authentication\User', $result);
     }

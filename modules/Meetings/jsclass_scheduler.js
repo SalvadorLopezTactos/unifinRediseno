@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: jsclass_scheduler.js 56853 2010-06-08 02:36:54Z clee $
 //////////////////////////////////////////////////
 // class: SugarWidgetListView
 // widget to display a list view

@@ -177,7 +177,7 @@ $mod_strings = array(
         'mbHelp'    => '표준 또는 사용자 지정 개체를 기반으로 둔 사용자 지정 모듈을 포함하여 패키지를 생성하려면 <b>모듈 작성기</b>를 사용합니다.',
         'viewBtnEditView' => '모듈 <b>편집보기</b> 레이아웃을 사용자 지정합니다.<br><br>편집 보기는 사용자가 입력한 데이터를 캡처하는 입력 필드를 포함하는 형태입니다.',
         'viewBtnDetailView' => '모듈 <b>상세 보기</b> 레이아웃을 사용자 지정합니다.<br><br>사용자가 입력하는 필드 데이터에 자세히 보기가 나타납니다.',
-        'viewBtnDashlet' => 'Sugar Dashlet\\s 목록보기와 검색을 포함하여 모듈 <b>Sugar 데시렛창</b>을 사용자 지정합니다.<br><br>Sugar 대시렛창은 홈 모듈의 페이지에서 추가할 수 있습니다.',
+        'viewBtnDashlet' => 'Sugar Dashlet\s 목록보기와 검색을 포함하여 모듈 <b>Sugar 데시렛창</b>을 사용자 지정합니다.<br><br>Sugar 대시렛창은 홈 모듈의 페이지에서 추가할 수 있습니다.',
         'viewBtnListView' => '모듈 <b>목록보기</b> 레이아웃을 사용자 지정합니다.<br><br>검색 결과는 목록보기에 나타납니다.',
         'searchBtn' => '모듈 <b>검색</b> 레이아웃을 사용자 지정을 합니다.<br><br>리스트 보기에 표시되는 레코드를 필터링하는데 사용할 수 있는 필드를 확인합니다.',
         'viewBtnQuickCreate' =>  '모듈 <b>빠른생성</b> 레이아웃을 사용자 지정합니다.<br><br>빠른 생성 폼이 서브패널과 이메일 모듈에서 나타납니다.',
@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\\n\\nDo you wish to continue?',
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'이 관계를 삭제하시겠습니까?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'이는 이 관계를 영구보관합니다. 이 관계를 배치하시겠습니까?',
 'LBL_CONFIRM_DONT_SAVE' => '마지막 저장후 다른 변경사항이 발생했습니다. 저장하시겠습니까?',

@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiér alternativ adresse til hovedadresse',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiér hovedadresse til alternativ adresse',
     'NTC_DELETE_CONFIRMATION' => 'Vil du virkelig slette denne oppføringen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves det en bedrift.\\n Vennligst opprett en ny bedrift eller velg å bruke en eksisterende bedrift.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves det en bedrift.\n Vennligst opprett en ny bedrift eller velg å bruke en eksisterende bedrift.',
     'NTC_REMOVE_CONFIRMATION' => 'Vil du virkelig fjerne kontakten fra saken?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Er du sikker på at du vil slette denne oppføringen som en direkterapport?',
 

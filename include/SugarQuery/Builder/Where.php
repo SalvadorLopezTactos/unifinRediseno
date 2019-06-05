@@ -242,30 +242,22 @@ abstract class SugarQuery_Builder_Where
 
     /**
      * @param $field
-     * @param array|SugarQuery $vals
+     * @param array|SugarQuery $set
      * @param SugarBean|null $bean SugarBean, optional
      *
      * @return $this
      */
-    public function in($field, $vals, SugarBean $bean = null)
+    public function in($field, $set, SugarBean $bean = null)
     {
-        $isNull = false;
-        if (is_array($vals)) {
-            $isNull = in_array('', $vals);
-        }
+        if (is_array($set) && in_array('', $set, true)) {
+            $where = $this->queryOr();
+            $where->isNull($field, $bean);
+            $where->condition($field, 'IN', $set, $bean);
 
-        if ($isNull) {
-            $vals = array_filter($vals, 'strlen');
-            if (count($vals) > 0) {
-                $where = $this->queryOr();
-                $where->isNull($field, $bean);
-                $where->in($field, $vals, $bean);
-            } else {
-                $this->isNull($field, $bean);
-            }
             return $this;
         }
-        return $this->condition($field, 'IN', $vals, $bean);
+
+        return $this->condition($field, 'IN', $set, $bean);
     }
 
     /**
@@ -277,7 +269,7 @@ abstract class SugarQuery_Builder_Where
      */
     public function notIn($field, $vals, SugarBean $bean = null)
     {
-        $isNull = in_array('', $vals);
+        $isNull = in_array('', $vals, true);
         if ($isNull) {
             $vals = array_filter($vals, 'strlen');
             if (count($vals) > 0) {

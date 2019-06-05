@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Toegewezen aan:',
   'LBL_ASSIGNED_TO_NAME' => 'Gebruiker:',  	  
   'LBL_WORK_LOG' => 'Werk Log:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Gemaakt door:',
   'LBL_DATE_CREATED' => 'Datum ingevoerd:',
   'LBL_DATE_ENTERED' => 'Datum ingevoerd:',

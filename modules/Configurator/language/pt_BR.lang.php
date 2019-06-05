@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Mostrar a guia de downloads',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Quando selecionado, a guia de downloads aparecerá na configurações do usuário e fornecerá aos usuários acesso a plug-ins e outro arquivos disponíveis do Sugar',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Para autenticação SOAP quando utilizar LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'A extensão php_mcrypt deve ser ativada no seu arquivo php.ini.',
     'LBL_ALL' => 'Todos',
     'LBL_MARK_POINT' => 'Ponto de marcação',
     'LBL_NEXT_' => 'Próximo >>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Fluxos de atividades',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ativar Fluxos de Atividades',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ativa os Fluxos de Atividades para o aplicativo',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Habilitar o conteúdo adicional da tela de login',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Salvar automaticamente as definições do processo',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determina a frequência com que as definições do processo são salvas automaticamente ao usar o designer',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Validar automaticamente as definições do processo ao salvar automaticamente',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Alterna se as definições de processo são automaticamente validadas ao salvar automaticamente. Isso só terá efeito se as "Definições do processo ao salvar automaticamente" estiverem configuradas para um intervalo',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Validar automaticamente as definições do processo ao importar',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Alterna se as definições de processo são automaticamente validadas ao importar pela primeira vez',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Configurações do registo de comentários',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Número máximo de caracteres que podem ser exibidos por entrada de comentário',
 );
 
 

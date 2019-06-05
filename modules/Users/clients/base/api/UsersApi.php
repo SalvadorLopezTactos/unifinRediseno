@@ -47,6 +47,13 @@ class UsersApi extends ModuleApi
      */
     public function deleteUser(ServiceBase $api, array $args)
     {
+        // Users can be deleted only in cloud console for IDM mode.
+        if (in_array($args['module'], $this->idmModeDisabledModules)
+            && $this->isIDMModeEnabled()
+            && empty($args['skip_idm_mode_restrictions'])) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
+
         // Ensure we have admin access to this module
         if (!($api->user->isAdmin() || $api->user->isAdminForModule('Users'))) {
             throw new SugarApiExceptionNotAuthorized();

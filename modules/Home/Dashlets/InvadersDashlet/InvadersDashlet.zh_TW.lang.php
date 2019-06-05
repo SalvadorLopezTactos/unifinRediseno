@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: JotPadDashlet.en_us.lang.php 24343 2007-07-15 21:24:15Z awu $
 
 
 $dashletStrings['InvadersDashlet'] = array(

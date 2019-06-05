@@ -64,7 +64,7 @@
 
         this.listenTo(this.layout, "filterpanel:change:module", this.handleFilterChange);
         this.listenTo(this.layout, "filter:create:open", this.openForm);
-        this.listenTo(this.layout, "filter:create:close", this.render);
+        this.listenTo(this.layout, 'filter:create:close', this.closeForm);
         this.listenTo(this.context, "filter:create:save", this.saveFilter);
         this.listenTo(this.layout, "filter:create:delete", this.confirmDelete);
     },
@@ -151,6 +151,16 @@
                 this.$('[data-action=remove]').last().click();
             }
         });
+    },
+
+    /**
+     * Handler for filter:create:close event
+     */
+    closeForm: function() {
+        this.lastFilterDef = [];
+        this.lastFilterTemplate = [];
+
+        this.render();
     },
 
     /**

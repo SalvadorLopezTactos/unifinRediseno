@@ -1234,7 +1234,6 @@ AdamActivity.prototype.updateScriptType = function (newType) {
     updateCommand.execute();
 
     this.canvas.commandStack.add(updateCommand);
-    this.canvas.bpmnValidation();
     return this;
 };
 
@@ -1880,7 +1879,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
         cssStyle : actionCSS,
         handler: function () {
             root.canvas.showModal();
-            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoClose: false});
+            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoClose: false});
             root.canvas.project.save({
                 success: function () {
                     root.canvas.hideModal();
@@ -2182,6 +2181,7 @@ AdamActivity.prototype.actionFactory = function(type) {
     var actionDef = this.getAction(type, w);
 
     var f = new PMSE.Form({
+        type: 'action',
         proxy: actionDef.proxy,
         items: actionDef.items || [],
         closeContainerOnSubmit: true,
@@ -2250,7 +2250,7 @@ AdamActivity.prototype.actionFactory = function(type) {
             self.canvas.project.save();
             w.show();
             w.html.style.display = 'none';
-            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
         },
         disabled: !_.isUndefined(actionDef.disabled) ? actionDef.disabled : false
     });
@@ -2456,11 +2456,40 @@ AdamActivity.prototype.getAction = function(type, w) {
                 $(".pmse-form-error")
                     .removeClass('pmse-form-error-on')
                     .addClass('pmse-form-error-off');
-                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
+                var optionType = filterModules.selectedFieldOption(this.html, this.options);
+                filterRelated.setFilterFieldDisable(filterRelated, true);
+                if (!optionType || optionType === 'one') {
+                    filterModules.setFilterFieldDisable(filterModules, true);
+                } else {
+                    filterModules.setFilterFieldDisable(filterModules, false);
+                }
+                filterModules.setObjectValue(null);
+                filterModules.setModule(comboModules.value, PROJECT_MODULE);
+                if (!optionType) {
+                    comboRelated.disable();
+                } else {
+                    comboRelated.enable();
+                }
+                comboRelated.removeOptions();
+                comboRelated.value = '';
+                comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
+                    comboModules.getSelectedData().module_name;
+                comboRelated.proxy.getData({removeTarget: true}, {
+                    success: function(data) {
+                        App.alert.dismiss('upload');
+                        if (data) {
+                            data.result.unshift({value: '', text: 'Select...'});
+                            comboRelated.setOptions(data.result);
+                            filterRelated.setObjectValue(null);
+                            filterRelated.setModule(null, null);
+                        }
+                    }
+                });
 
                 updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' + comboModules.value;
                 // Call type set to CF to distinguish from Add Related Record
-                var data = updater_field.proxy.getData({call_type: 'CF', base_module: PROJECT_MODULE}, {
+                updater_field.proxy.getData({call_type: 'CF', base_module: PROJECT_MODULE}, {
                     success: function(data) {
                         App.alert.dismiss('upload');
                         if (data) {
@@ -2471,11 +2500,85 @@ AdamActivity.prototype.getAction = function(type, w) {
                 });
 
             };
+            var changeRelatedFn = function() {
+                $('.pmse-form-error')
+                    .removeClass('pmse-form-error-on')
+                    .addClass('pmse-form-error-off');
+                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
+                var optionType = filterModules.selectedFieldOption(this.html, this.options);
+                if (!optionType || optionType === 'one') {
+                    filterRelated.setFilterFieldDisable(filterRelated, true);
+                } else {
+                    filterRelated.setFilterFieldDisable(filterRelated, false);
+                }
+                filterRelated.setObjectValue(null);
+                filterRelated.setModule(null, null);
+                if (comboRelated.value) {
+                    if (filterRelated.selectField.disabled === false) {
+                        filterRelated.setModule(comboRelated.value, comboModules.getSelectedData().module_name);
+                    }
+                    updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' + comboRelated.value;
+                    updater_field.proxy.getData({
+                        call_type: 'CF',
+                        base_module: comboModules.getSelectedData().module_name
+                    }, {
+                        success: function(data) {
+                            App.alert.dismiss('upload');
+                            if (data) {
+                                updater_field.setOptions(data.result);
+                            }
+
+                        }
+                    });
+                } else {
+                    updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' + comboModules.value;
+                    updater_field.proxy.getData({call_type: 'CF', base_module: PROJECT_MODULE}, {
+                        success: function(data) {
+                            App.alert.dismiss('upload');
+                            if (data) {
+                                updater_field.setOptions(data.result);
+                            }
+
+                        }
+                    });
+                }
+            };
             var comboModules = new ComboboxField({
                 label: translate('LBL_PMSE_FORM_LABEL_MODULE'),
                 name: 'act_field_module',
                 submit: true,
                 change: changeFieldsFn,
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                    uid: PROJECT_MODULE,
+                    callback: null
+                })
+            });
+            var filterModules = new FilterField({
+                label: translate('LBL_PMSE_FORM_LABEL_FILTER'),
+                name: 'act_field_filter',
+                submit: true,
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                    uid: PROJECT_MODULE,
+                    callback: null
+                })
+            });
+            var comboRelated = new ComboboxField({
+                label: translate('LBL_PMSE_FORM_LABEL_RELATED'),
+                name: 'act_field_related',
+                submit: true,
+                change: changeRelatedFn,
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                    uid: PROJECT_MODULE,
+                    callback: null
+                })
+            });
+            var filterRelated = new FilterField({
+                label: translate('LBL_PMSE_FORM_LABEL_FILTER'),
+                name: 'act_field_filter_related',
+                submit: true,
                 proxy: new SugarProxy({
                     url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
                     uid: PROJECT_MODULE,
@@ -2501,7 +2604,7 @@ AdamActivity.prototype.getAction = function(type, w) {
 
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
             var actionCSS = 'adam-menu-icon-configure';
-            var items = [comboModules, updater_field];
+            var items = [comboModules, filterModules, comboRelated, filterRelated, updater_field];
             var proxy = new SugarProxy({
                 url: 'pmse_Project/ActivityDefinition/' + this.id,
                 uid: this.id,
@@ -2509,10 +2612,12 @@ AdamActivity.prototype.getAction = function(type, w) {
             });
             var callback = {
                 'loaded': function(data) {
+                    var params = data.act_params ? JSON.parse(data.act_params) : {};
+
                     self.canvas.emptyCurrentSelection();
 
                     comboModules.proxy.getData({
-                        cardinality: 'one'
+                        cardinality: 'all'
                     }, {
                         success: function(modules) {
                             if (modules && modules.success) {
@@ -2525,13 +2630,74 @@ AdamActivity.prototype.getAction = function(type, w) {
                                         updater_field.setVariables(data);
                                     }
                                 });
-                                updater_field.proxy.uid = PROJECT_MODULE;
-                                updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' + initialModule;
+                                var optionType = filterModules.selectedFieldOption(comboModules.html, modules.result);
+                                if (!optionType) {
+                                    filterModules.setFilterFieldDisable(filterModules, true);
+                                    filterRelated.setFilterFieldDisable(filterRelated, true);
+                                } else if (optionType === 'one') {
+                                    filterModules.setFilterFieldDisable(filterModules, true);
+                                } else {
+                                    filterModules.setFilterFieldDisable(filterModules, false);
+                                }
+                                if (filterModules.valueElements[0].disabled === false) {
+                                    if (params.filter) {
+                                        filterModules.setObjectValue(params.filter);
+                                    }
+                                    filterModules.setModule(comboModules.value, PROJECT_MODULE);
+                                }
+                                if (!optionType) {
+                                    comboRelated.disable();
+                                } else {
+                                    comboRelated.enable();
+                                }
+                                if (params.chainedRelationship) {
+                                    comboRelated.setValue(params.chainedRelationship.module);
+                                }
+                                comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
+                                    comboModules.getSelectedData().module_name;
+                                comboRelated.proxy.getData({removeTarget: true}, {
+                                    success: function(data) {
+                                        if (data) {
+                                            data.result.unshift({value: '', text: 'Select...'});
+                                            comboRelated.setOptions(data.result);
+                                            var optionType = filterModules.selectedFieldOption(
+                                                comboRelated.html,
+                                                data.result
+                                            );
+                                            if (!optionType || optionType === 'one') {
+                                                filterRelated.setFilterFieldDisable(filterRelated, true);
+                                            } else {
+                                                filterRelated.setFilterFieldDisable(filterRelated, false);
+                                            }
+                                            if (filterRelated.valueElements[0].disabled === false) {
+                                                if (params.chainedRelationship) {
+                                                    if (params.chainedRelationship.filter) {
+                                                        filterRelated.setObjectValue(params.chainedRelationship.filter);
+                                                    }
+                                                    filterRelated.setModule(
+                                                        comboRelated.value,
+                                                        comboModules.getSelectedData().module_name
+                                                    );
+                                                } else {
+                                                    filterRelated.setModule(null, null);
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                                if (params.chainedRelationship) {
+                                    updater_field.proxy.uid = comboModules.getSelectedData().module_name;
+                                    updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' +
+                                        params.chainedRelationship.module;
+                                } else {
+                                    updater_field.proxy.uid = PROJECT_MODULE;
+                                    updater_field.proxy.url = 'pmse_Project/CrmData/relatedfields/' + initialModule;
+                                }
                                 // Call type set to CF to distinguish from Add Related Record
-                                updater_field.proxy.getData({call_type: 'CF', base_module: PROJECT_MODULE}, {
+                                updater_field.proxy.getData({call_type: 'CF', base_module: updater_field.proxy.uid}, {
                                     success: function(fields) {
                                         if (fields) {
-                                            updater_field.setOptions(fields.result, true);
+                                            updater_field.setOptions(fields.result);
                                             updater_field.setValue(data.act_fields || null);
                                             updater_field.isValid();
                                             App.alert.dismiss('upload');
@@ -2561,7 +2727,35 @@ AdamActivity.prototype.getAction = function(type, w) {
                 $(".pmse-form-error")
                     .removeClass('pmse-form-error-on')
                     .addClass('pmse-form-error-off');
-                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoClose: false});
+                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoClose: false});
+                var optionType = filterModules.selectedFieldOption(this.html, this.options);
+                if (!optionType) {
+                    filterModules.setFilterFieldDisable(filterModules, true);
+                } else if (optionType === 'one') {
+                    filterModules.setFilterFieldDisable(filterModules, true);
+                } else {
+                    filterModules.setFilterFieldDisable(filterModules, false);
+                }
+                filterModules.setObjectValue(null);
+                filterModules.setModule(comboModules.value, PROJECT_MODULE);
+                if (!optionType) {
+                    comboRelated.disable();
+                } else {
+                    comboRelated.enable();
+                    comboRelated.removeOptions();
+                    comboRelated.value = '';
+                    comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
+                        comboModules.getSelectedData().module_name;
+                    comboRelated.proxy.getData({removeTarget: true, cardinality: 'many'}, {
+                        success: function(data) {
+                            App.alert.dismiss('upload');
+                            if (data) {
+                                data.result.unshift({value: '', text: 'Select...'});
+                                comboRelated.setOptions(data.result);
+                            }
+                        }
+                    });
+                }
                 updater_field.proxy.uid = comboModules.value;
                 updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' + comboModules.value;
                 updater_field.proxy.getData({base_module: PROJECT_MODULE}, {
@@ -2574,12 +2768,66 @@ AdamActivity.prototype.getAction = function(type, w) {
                 });
 
             };
+            var changeRelatedFn = function() {
+                $('.pmse-form-error')
+                    .removeClass('pmse-form-error-on')
+                    .addClass('pmse-form-error-off');
+                App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
+                if (comboRelated.value) {
+                    updater_field.proxy.uid = comboRelated.value;
+                    updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' + comboRelated.value;
+                    updater_field.proxy.getData({
+                        base_module: comboModules.getSelectedData().module_name
+                    }, {
+                        success: function(data) {
+                            App.alert.dismiss('upload');
+                            if (data) {
+                                updater_field.setOptions(data.result);
+                            }
+
+                        }
+                    });
+                } else {
+                    updater_field.proxy.uid = comboModules.value;
+                    updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' + comboModules.value;
+                    updater_field.proxy.getData({base_module: PROJECT_MODULE}, {
+                        success: function(data) {
+                            App.alert.dismiss('upload');
+                            if (data) {
+                                updater_field.setOptions(data.result);
+                            }
+
+                        }
+                    });
+                }
+            };
             var comboModules = new ComboboxField({
                 jtype: 'combobox',
                 label: translate('LBL_PMSE_FORM_LABEL_RELATED_MODULE'),
                 name: 'act_field_module',
                 submit: true,
                 change: changeFieldsFn,
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                    uid: PROJECT_MODULE,
+                    callback: null
+                })
+            });
+            var filterModules = new FilterField({
+                label: translate('LBL_PMSE_FORM_LABEL_FILTER'),
+                name: 'act_field_filter',
+                submit: true,
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
+                    uid: PROJECT_MODULE,
+                    callback: null
+                })
+            });
+            var comboRelated = new ComboboxField({
+                label: translate('LBL_PMSE_FORM_LABEL_RELATED'),
+                name: 'act_field_related',
+                submit: true,
+                change: changeRelatedFn,
                 proxy: new SugarProxy({
                     url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
                     uid: PROJECT_MODULE,
@@ -2603,7 +2851,7 @@ AdamActivity.prototype.getAction = function(type, w) {
             });
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
             var actionCSS = 'adam-menu-icon-configure';
-            var items = [comboModules, updater_field];
+            var items = [comboModules, filterModules, comboRelated, updater_field];
             var proxy = new SugarProxy({
                 url: 'pmse_Project/ActivityDefinition/' + this.id,
                 uid: this.id,
@@ -2611,8 +2859,9 @@ AdamActivity.prototype.getAction = function(type, w) {
             });
             var callback = {
                 'loaded': function(data) {
+                    var params = data.act_params ? JSON.parse(data.act_params) : {};
                     self.canvas.emptyCurrentSelection();
-                    comboModules.proxy.getData({cardinality: 'one-to-many'}, {
+                    comboModules.proxy.getData({cardinality: 'all'}, {
                         success: function(modules) {
                             if (modules && modules.success && modules.result && modules.result.length > 1) {
                                 modules.result = modules.result.splice(1);
@@ -2626,8 +2875,6 @@ AdamActivity.prototype.getAction = function(type, w) {
                                     comboModules.setValid(false);
                                 }
                                 var initialModule = data.act_field_module || modules.result[0].value;
-                                updater_field.proxy.uid = PROJECT_MODULE;
-                                updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' + initialModule;
                                 project.addMetadata('projectModuleFieldsRelated', {
                                     dataURL: 'pmse_Project/CrmData/fields/' + PROJECT_MODULE +
                                         '?base_module=' + PROJECT_MODULE,
@@ -2636,7 +2883,49 @@ AdamActivity.prototype.getAction = function(type, w) {
                                         updater_field.setVariables(data);
                                     }
                                 });
-                                updater_field.proxy.getData({base_module: PROJECT_MODULE}, {
+                                var optionType = filterModules.selectedFieldOption(comboModules.html, modules.result);
+                                if (!optionType) {
+                                    filterModules.setFilterFieldDisable(filterModules, true);
+                                } else if (optionType === 'one') {
+                                    filterModules.setFilterFieldDisable(filterModules, true);
+                                } else {
+                                    filterModules.setFilterFieldDisable(filterModules, false);
+                                }
+                                if (filterModules.valueElements[0].disabled === false) {
+                                    if (params.filter) {
+                                        filterModules.setObjectValue(params.filter);
+                                    }
+                                    filterModules.setModule(comboModules.value, PROJECT_MODULE);
+                                }
+                                if (!optionType) {
+                                    comboRelated.disable();
+                                } else {
+                                    comboRelated.enable();
+                                }
+                                comboModules.setValue(params.module || initialModule);
+                                if (params.chainedRelationship) {
+                                    comboRelated.setValue(params.chainedRelationship.module);
+                                }
+                                comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
+                                    comboModules.getSelectedData().module_name;
+                                comboRelated.proxy.getData({removeTarget: true, cardinality: 'many'}, {
+                                    success: function(data) {
+                                        if (data) {
+                                            data.result.unshift({value: '', text: 'Select...'});
+                                            comboRelated.setOptions(data.result);
+                                        }
+                                    }
+                                });
+                                if (params.chainedRelationship) {
+                                    updater_field.proxy.uid = comboModules.getSelectedData().module_name;
+                                    updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' +
+                                        params.chainedRelationship.module;
+                                } else {
+                                    updater_field.proxy.uid = PROJECT_MODULE;
+                                    updater_field.proxy.url = 'pmse_Project/CrmData/addRelatedRecord/' +
+                                        comboModules.getSelectedData().module_name;
+                                }
+                                updater_field.proxy.getData({base_module: updater_field.proxy.uid}, {
                                     success: function(fields) {
                                         updater_field.setOptions(fields.result);
                                         updater_field.setValue(data.act_fields || null);
@@ -2813,4 +3102,242 @@ AdamActivity.prototype.getWindowDef = function(type) {
         wHeight: wHeight,
         wTitle: translate(wTitle) + ': ' + this.getName()
     };
+};
+
+/**
+ * Retrieves the URL base endpoint for activity element settings data
+ * @return {string} the correct URL base endpoint
+ */
+AdamActivity.prototype.getBaseURL = function() {
+    return 'pmse_Project/ActivityDefinition/';
+};
+
+/**
+ * Returns the proper validation callback function for this activity element
+ * @return {Object} the correct callback function
+ */
+AdamActivity.prototype.getValidationFunction = function() {
+    switch (this.getActivityTaskType()) {
+        case 'USERTASK':
+            return this.callbackFunctionForActivity;
+        case 'SCRIPTTASK':
+            switch (this.getActivityScriptType()) {
+                case 'NONE':
+                    return this.callbackFunctionForUnassignedAction;
+                case 'BUSINESS_RULE':
+                    return this.callbackFunctionForBusinessRuleAction;
+                case 'ASSIGN_USER':
+                    return this.callbackFunctionForAssignUserAction;
+                case 'ASSIGN_TEAM':
+                    return this.callbackFunctionForRoundRobinAction;
+                case 'CHANGE_FIELD':
+                    return this.callbackFunctionForChangeFieldAction;
+                case 'ADD_RELATED_RECORD':
+                    return this.callbackFunctionForAddRelatedRecordAction;
+            }
+    }
+};
+
+/**
+ * Validates an activity's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForActivity = function(data, element, validationTools) {
+    var user;
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Under 'Forms' settings, check that expected time is > 0 (if it is entered)
+    if (data.act_expected_time.time && data.act_expected_time.time < 0) {
+        validationTools.createError(element, 'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME');
+    }
+
+    // Under 'Users' settings, if 'Assignment Method' is set to 'Static Assignment', and a
+    // specific user is selected, check that the user exists
+    if (data.act_assignment_method === 'static') {
+        user = data.act_assign_user;
+        if (user !== 'currentuser' && user !== 'owner' && user !== 'supervisor') {
+            validationTools.validateAtom('USER_IDENTITY', null, null, user, element, validationTools);
+        }
+    }
+};
+
+/**
+ * Validates an unassigned action's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForUnassignedAction = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Action is unassigned, which is an error in itself
+    validationTools.createWarning(element, 'LBL_PMSE_ERROR_ACTION_UNASSIGNED');
+};
+
+/**
+ * Validates a business rule action's settings
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForBusinessRuleAction = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Validate the selected business rule
+    validationTools.validateAtom('ALL_BUSINESS_RULES', null, null, data.act_fields, element, validationTools);
+};
+
+/**
+ * Validates an assign user action's settings
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForAssignUserAction = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Validate the selected process user
+    validationTools.validateAtom('USER_IDENTITY', null, null, data.act_assign_user, element, validationTools);
+};
+
+/**
+ * Validates a round robin action's settings
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForRoundRobinAction = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Validate the selected team
+    validationTools.validateAtom('TEAM', null, null, data.act_assign_team, element, validationTools);
+};
+
+/**
+ * Validates a change field action's settings
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForChangeFieldAction = function(data, element, validationTools) {
+    var criteria = [];
+    var actModule = data.act_field_module;
+    var actParams = data.act_params ? JSON.parse(data.act_params) : null;
+    if (actParams && actParams.chainedRelationship) {
+        actModule = actParams.chainedRelationship.module;
+    }
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // For any selected related fields, ensure that they exist in the current instance of Sugar
+    if (data.act_fields) {
+        criteria = JSON.parse(data.act_fields);
+    }
+    for (var i = 0; i < criteria.length; i++) {
+        validationTools.validateAtom(actModule, criteria[i].field, null, element, validationTools);
+    }
+};
+
+/**
+ * Validates an add related record action's settings
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.callbackFunctionForAddRelatedRecordAction = function(data, element, validationTools) {
+    var actModule = data.act_field_module;
+    var actParams = data.act_params ? JSON.parse(data.act_params) : null;
+    if (actParams && actParams.chainedRelationship) {
+        actModule = actParams.chainedRelationship.module;
+    }
+    var url = App.api.buildURL('pmse_Project/CrmData/addRelatedRecord/' +
+        actModule + '?base_module=' + validationTools.getTargetModule());
+    var options = {
+        'bulk': 'validate_element_settings'
+    };
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, null, element);
+
+    // Validate the module field settings against the current instance
+    validationTools.progressTracker.incrementTotalValidations();
+    App.api.call('read', url, null, {
+        success: function(form) {
+            element.validateAddRelatedRecordForm(form, data, element, validationTools);
+        },
+        error: function(data) {
+            validationTools.createWarning(element, 'LBL_PMSE_ERROR_DATA_NOT_FOUND', 'Module relationship');
+        },
+        complete: function(data) {
+            validationTools.progressTracker.incrementValidated();
+        }
+    }, options);
+};
+
+/**
+ * Validates the field settings in an add related record action
+ * @param  {Object} form is the API response data from the addRelatedRecord endpoint (provides information on
+ *                  required fields for the given module relationship in the current instance)
+ * @param  {Object} data contains the element settings information received from the API call
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.validateAddRelatedRecordForm = function(form, data, element, validationTools) {
+    var i;
+    var requiredFields;
+    var critera = [];
+
+    // Parse the list of field settings for the new record
+    if (data.act_fields) {
+        criteria = JSON.parse(data.act_fields);
+    }
+
+    // Get a list of the required fields of the related module in this instance of Sugar
+    requiredFields = form.result.filter(function(field) {
+        return field.required;
+    });
+
+    // For each required field, check if that field is set in the field settings of the new record
+    for (i = 0; i < requiredFields.length; i++) {
+        element.checkIfRequiredFieldIsSet(requiredFields[i], criteria, element, validationTools);
+    }
+};
+
+/**
+ * Checks an add related record's field settings to ensure a given required field is set
+ * @param  {Object} field is a specific field object obtained from the API response from the
+ *                  addRelatedRecord endpoint, and is a required field in the element settings
+ * @param  {Object} criteria is the set of field settings obtained from the element settings
+ *                  API response
+ * @param  {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamActivity.prototype.checkIfRequiredFieldIsSet = function(field, criteria, element, validationTools) {
+    var i;
+    var requiredFieldIsSet = false;
+
+    // Check if the required field has been set in the new record
+    for (i = 0; i < criteria.length; i++) {
+        if (criteria[i].field === field.value && criteria[i].value) {
+            requiredFieldIsSet = true;
+            break;
+        }
+    }
+
+    if (!requiredFieldIsSet) {
+        validationTools.createWarning(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', field.text);
+    }
 };

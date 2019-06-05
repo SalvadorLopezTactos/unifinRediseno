@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Darbplūsmu definīcijas',
   'LBL_MODULE_NAME_SINGULAR' => 'Darbplūsmas definīcija',
-  'LBL_MODULE_ID' => 'Darbplūsma',  
+  'LBL_MODULE_ID' => 'Darbplūsma',
   'LBL_MODULE_TITLE' => 'Darbplūsma: Sākums',
   'LBL_SEARCH_FORM_TITLE' => 'Darbplūsmas meklēšana',
   'LBL_LIST_FORM_TITLE' => 'Darbplūsmu saraksts',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Mērķa modulis:',
   'LBL_LIST_ORDER' => 'Apstrādes secība:',
   'LBL_FROM_NAME' => 'No vārda:',
-  'LBL_FROM_ADDRESS' => 'No adreses:',  
+  'LBL_FROM_ADDRESS' => 'No adreses:',
   'LNK_NEW_WORKFLOW' => 'Izveidot darbplūsmas definīciju',
-  'LNK_WORKFLOW' => 'Izvadīt darbplūsmas definīcijas', 
-  
-  
+  'LNK_WORKFLOW' => 'Izvadīt darbplūsmas definīcijas',
+
+
   'LBL_ALERT_TEMPLATES' => 'Brīdinājuma veidnes',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Izveidot brīdinājuma veidni:',
   'LBL_SUBJECT' => 'Temats:',
-  
+
   'LBL_RECORD_TYPE' => 'Attiecas uz:',
  'LBL_RELATED_MODULE'=> 'Saistītais modulis:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Darbplūsmu secība',
 	'LNK_ALERT_TEMPLATES' => 'Brīdinājuma e-pasta veidnes',
 	'LNK_PROCESS_VIEW' => 'Darbplūsmas secība',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tips',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Piezīme:</strong> Sugar darbplūsmas un Darbplūsmu pārvaldības funkcijas ir apkopes režīmā. Klientiem, kas izmanto Sugar Enterprise versiju, ir jāizmanto funkcija, ko nodrošina SugarBPM<sup class="trademark">TM</sup>.',
 );
 

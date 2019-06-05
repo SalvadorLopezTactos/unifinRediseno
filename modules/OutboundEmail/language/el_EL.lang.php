@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Αυτός είναι ο λογαριασμός συστήματος.',
     'LBL_EMAIL_ADDRESS_ID' => 'Ταυτότητα διεύθυνσης Email',
     'LBL_TYPE' => 'Τύπος',
+    'LBL_REPLY_TO_NAME' => 'Απάντηση-σε Όνομα',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Απάντηση-σε διευθύνσεις Email',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Απάντηση σε ταυτότητες διευθύνσεων Email',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Απάντηση-σε διεύθυνση Email',
+    'LBL_PRIMARY_TEAM' => 'Κύρια ομάδα',
 );

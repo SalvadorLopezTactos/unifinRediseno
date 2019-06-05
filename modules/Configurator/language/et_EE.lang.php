@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Kuva allalaadimiste vahekaart',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Valimisel kuvatakse kasutaja sätetes vahekaart Allalaadimine, mis pakub kasutajatele juurdepääsu Sugari lisandmoodulite ja muude saadaolevate failide juurde',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP autentimiseks LDAP kasutamisel.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Laiend php_mcrypt peab olema teie php.ini failis lubatud.',
     'LBL_ALL' => 'Kõik',
     'LBL_MARK_POINT' => 'Märgi punkt',
     'LBL_NEXT_' => 'Järgmine>>',
@@ -443,6 +442,22 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tegevusvood',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Luba tegevusvood',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Lülitab tegevusvood rakenduse jaoks sisse',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Luba sisselogimiskuva lisasisu',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automaatsalvesta protsessi definitsioonid',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Määrab kindlaks, kui tihti protsessi definitsioone disainerit kasutades automaatsalvestatakse',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automaatvalideeri protsessi definitsioonid automaatsalvestusega',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Lülitab protsessi definitsioonide automaatse valideerimise automaatsalvestamisel sisse-välja. See toimib ainult siis, kui „Automaatsalvesta protsessi definitsioonid“ on seadistatud ajavahemiku peale',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automaatvalideeri protsessi definitsioonid impordil',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Lülitab protsessi definitsioonide automaatse valideerimise importimisel sisse-välja',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Kommentaaride logi sätted',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimaalne kommentaari kirje kohta kuvatav tärkide arv',
 );
 
 

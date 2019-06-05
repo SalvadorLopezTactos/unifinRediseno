@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelTopButton.php 51841 2009-10-26 20:33:15Z jmertic $
 
 
 

@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InactiveUserException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InvalidUserException;
@@ -106,15 +108,16 @@ class SugarLocalUserProvider implements UserProviderInterface
             throw new UsernameNotFoundException('User was not found by provided name identifier');
         }
 
-        if ($sugarUser->status != User::USER_STATUS_ACTIVE) {
-            throw new InactiveUserException('Inactive user');
+        $sugarUser->emailAddress->handleLegacyRetrieve($sugarUser);
+
+        if ($sugarUser->status !== User::USER_STATUS_ACTIVE) {
+            throw new InactiveUserException('Inactive user', 0, null, $sugarUser);
         }
 
         if (!empty($sugarUser->is_group) || !empty($sugarUser->portal_only)) {
             throw new InvalidUserException('Portal or group user can not log in.');
         }
 
-        $sugarUser->emailAddress->handleLegacyRetrieve($sugarUser);
         $user = new User($nameIdentifier, $sugarUser->user_hash);
         $user->setSugarUser($sugarUser);
 
@@ -135,7 +138,12 @@ class SugarLocalUserProvider implements UserProviderInterface
 
         $sugarUser->new_with_id = isset($additionalFields['id']);
 
-        $sugarUser->save();
+        try {
+            $sugarUser->save();
+        } catch (UniqueConstraintViolationException $e) {
+            //if user already exists try to retrieve
+            $sugarUser->retrieve();
+        }
 
         if (isset($additionalFields['email'])) {
             $sugarUser->emailAddress->addAddress($additionalFields['email'], true);

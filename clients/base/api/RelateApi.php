@@ -33,6 +33,20 @@ class RelateApi extends FilterApi {
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
 
             ),
+            'filterRelatedRecordsLeanCount' => array(
+                'reqType' => 'GET',
+                'minVersion' => '11.4',
+                'path' => array('<module>', '?', 'link', '?', 'filter', 'leancount'),
+                'pathVars' => array('module', 'record', '', 'link_name', '', ''),
+                'jsonParams' => array('filter'),
+                'method' => 'filterRelatedLeanCount',
+                'shortHelp' => 'Gets the "lean" count of filtered related items. ' .
+                    'The count should always be in the range: 0..max_num. ' .
+                    'The response has a boolean flag "has_more" that defines if there are more rows, ' .
+                    'than max_num parameter value.',
+                'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
+
+            ),
             'listRelatedRecords' => array(
                 'reqType' => 'GET',
                 'path' => array('<module>', '?', 'link', '?'),
@@ -49,6 +63,19 @@ class RelateApi extends FilterApi {
                 'jsonParams' => array('filter'),
                 'method' => 'filterRelatedCount',
                 'shortHelp' => 'Counts all filtered related records.',
+                'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
+            ),
+            'listRelatedRecordsLeanCount' => array(
+                'reqType' => 'GET',
+                'minVersion' => '11.4',
+                'path' => array('<module>', '?', 'link', '?', 'leancount'),
+                'pathVars' => array('module', 'record', '', 'link_name', ''),
+                'jsonParams' => array('filter'),
+                'method' => 'filterRelatedLeanCount',
+                'shortHelp' => 'Gets the "lean" count of related items.' .
+                    'The count should always be in the range: 0..max_num. ' .
+                    'The response has a boolean flag "has_more" that defines if there are more rows, ' .
+                    'than max_num parameter value.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
             ),
         );
@@ -132,6 +159,15 @@ class RelateApi extends FilterApi {
         if (!sizeof($q->order_by)) {
             self::addOrderBy($q, $this->defaultOrderBy);
         }
+
+        if (isset($options['relate_collections'])) {
+            $options = $this->removeRelateCollectionsFromSelect($options);
+        }
+
+        // fixing duplicates in the query is not needed since even if it selects many-to-many related records,
+        // they are still filtered by one primary record, so the subset is at most one-to-many
+        $options['skipFixQuery'] = true;
+
         return array($args, $q, $options, $linkSeed);
     }
 
@@ -161,6 +197,39 @@ class RelateApi extends FilterApi {
 
         return array(
             'record_count' => $count,
+        );
+    }
+
+    /**
+     * Checks if the count of related records is lower than the max_num
+     * The number should be in range [0..{max_num+1}]
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function filterRelatedLeanCount(ServiceBase $api, array $args)
+    {
+        if (isset($args['max_num'])) {
+            $args['max_num'] = (int) $args['max_num'];
+        }
+        if (!isset($args['max_num'])
+            || $args['max_num'] <= 0) {
+            throw new SugarApiExceptionMissingParameter('max_num parameter is missing or invalid');
+        }
+        $api->action = 'list';
+        $args['fields'] = 'id';
+        $args['view'] = '';
+
+        /** @var SugarQuery $q */
+        list(, $q) = $this->filterRelatedSetup($api, $args);
+        $q->orderByReset();
+        $stmt = $q->compile()->execute();
+        $count = count($stmt->fetchAll());
+
+        return array(
+            'record_count' => $count > $args['max_num'] ? $args['max_num'] : $count,
+            'has_more' => $count > $args['max_num'],
         );
     }
 

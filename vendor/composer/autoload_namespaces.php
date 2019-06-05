@@ -10,12 +10,10 @@ return array(
     'UltraLite\\Container\\' => array($vendorDir . '/ultra-lite/container/src'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Prometheus\\' => array($vendorDir . '/jimdo/prometheus_client_php/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'Moontoast\\Math' => array($vendorDir . '/moontoast/math/src'),
     'JShrink' => array($vendorDir . '/tedivm/jshrink/src'),
     'HTMLPurifier_' => array($vendorDir . '/HTMLPurifier/standalone'),
     'Etechnika\\IdnaConvert' => array($vendorDir . '/etechnika/idna-convert/src'),
-    'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
-    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
-    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
 );

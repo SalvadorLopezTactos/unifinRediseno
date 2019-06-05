@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'מחק',
     'LBL_MODULE_NAME' => 'כתובות דוא"ל',
     'LBL_MODULE_NAME_SINGULAR' => 'כתובת דוא"ל',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'פעולת בקשת האישור בוצעה',
+    'LBL_CONFIRMATION_TITLE' => 'תודה',
+    'LBL_CONFIRMATION_MESSAGE' => 'המנוי שלך אושר. נוספת לרשימה שלנו ותשמע מאיתנו בקרוב.',
 );

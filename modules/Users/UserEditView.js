@@ -312,9 +312,17 @@ function submit_form(form) {
         data: $(form).serialize(),
         success: function (data) {
             if (!data.status) {
-                $('#ajax_error_string').text(data.error_string);
+                if (data.error_string) {
+                    $('#ajax_error_string').text(data.error_string);
+                }
+                if (data.error_password) {
+                    $('#error_pwd')
+                        .show()
+                        .text('Error: ' + data.error_password);
+                }
             } else {
                 $('#ajax_error_string').hide();
+                $('#error_pwd').hide();
                 form.action.value = action;
                 form.submit();
             }

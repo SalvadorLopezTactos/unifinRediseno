@@ -64,18 +64,21 @@ $viewdefs['Emails']['base']['view']['create'] = array(
                     'type' => 'email-recipients',
                     'label' => 'LBL_TO_ADDRS',
                     'span' => 12,
+                    'decorate_opt_out' => false,
                 ),
                 array(
                     'name' => 'cc_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_CC',
                     'span' => 12,
+                    'decorate_opt_out' => false,
                 ),
                 array(
                     'name' => 'bcc_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_BCC',
                     'span' => 12,
+                    'decorate_opt_out' => false,
                 ),
                 array(
                     'name' => 'name',

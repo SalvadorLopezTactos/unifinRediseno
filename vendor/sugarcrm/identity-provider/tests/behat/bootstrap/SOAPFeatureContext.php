@@ -37,6 +37,7 @@ class SOAPFeatureContext extends SoapContext
      * SetUp necessary configs.
      *
      * @param array $mangoInstances
+     * @param array $sugarAdmin
      */
     public function __construct(array $mangoInstances, array $sugarAdmin)
     {

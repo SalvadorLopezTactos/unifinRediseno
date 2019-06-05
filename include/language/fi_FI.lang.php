@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Sähköpostiasetukset',
     'EmailParticipants' => 'Sähköpostin jakelulista',
     'DataPrivacy' => 'Tietosuoja',
+    'ReportSchedules' => 'Raporttiaikataulut',
+    'CommentLog' => 'Kommenttiloki',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth-avain',
     'Filters' => 'Suodatin',
     'Comments' => 'Kommentti',
+    'CommentLog' => 'Kommenttiloki',
     'Currencies' => 'Valuutta',
     'ProductTemplates' => 'Tuote',
     'ProductTypes' => 'Tuotetyyppi',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Sähköpostiasetus',
     'EmailParticipants' => 'Sähköpostin jakelu',
     'DataPrivacy' => 'Tietosuoja',
+    'ReportSchedules' => 'Raporttiaikataulu',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Kuljetus',
     'Utilities' => 'Hyödykkeet',
     'Other' => 'Muu',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Taso 1',
+    'T2' => 'Taso 2',
+    'T3' => 'Taso 3',
+    'T4' => 'Taso 4',
   ),
   'lead_source_default_key' => 'Itse luotu',
   'lead_source_dom' =>
@@ -1000,7 +1011,7 @@ $app_list_strings = array (
                 '2'=>"helmi",
                 '3'=>"maalis",
                 '4'=>"huhti",
-                '5'=>"toukokuu",
+                '5'=>"touko",
                 '6'=>"kesä",
                 '7'=>"heinä",
                 '8'=>"elo",
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Siirrä',
         'donothing' => 'Älä tee mitään'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Ei koskaan',
+        30000 => '30 sekunnin välein',
+        60000 => 'Minuutin välein',
+        120000 => '2 minuutin välein',
+        180000 => '3 minuutin välein',
+        240000 => '4 minuutin välein',
+        300000 => '5 minuutin välein',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Ennusteessa',
         'sales_stage' => 'Myyntivaihe',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Lista',
         'activities' => 'Aktiviteettivirta',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Tunneittain',
+        '21600' => '6 tunnin välein',
+        '43200' => '12 tunnin välein',
+        '86400' => 'Päivittäin',
+        '604800' => 'Viikoittain',
+        '1209600' => 'Joka toinen viikko',
+        '2419200' => 'Joka neljäs viikko',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seuraa linkkiä',
   'LBL_TOGGLE_VISIBILITY' => 'Vaihda näkyvyyttä', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktiviteettivirta',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Kaikki oikeudet pidätetään.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ja 3-D Cube ovat SugarCRM Inc.:n rekisteröityjä tavaramerkkejä.'.
         'Kaikki muut tässä tuotteessa käytetyt tai näkyvät yritys- ja tuotenimet voivat olla '.
         'SugarCRM&reg;, Sugar Enterprise&trade; ja Sugar&trade; ovat SugarCRM Inc.in tuotemerkkejä.',
@@ -2687,8 +2716,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Istunnon (session) tulee olla aktiivinen jotta tietoja voidaan viedä.',
     'ERR_NO_HEADER_ID' => 'Toiminto ei ole käytettävissä tämän teeman kanssa.',
     'ERR_NOT_ADMIN' => "Ylläpitoliittymään pääsy estetty.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Tämä asetus ei ole käytössä SugarCRM:n IDM-tilassa. Se on käytettävissä Cloud-konsolissa.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Siirry <a href=\"%s\" target=\"_blank\">Cloud-konsoliin</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Salasanojen hallinta on käytettävissä vain Cloud-asetuksissa.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Ota yhteyttä Sugar-järjestelmänvalvojaan, jos haluat tehdä muutoksia vain luku -muotoisiin kenttiin.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Syötä tieto vaadittuihin kenttiin:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Virheellinen vaadittu kenttä:',
     'ERR_INVALID_VALUE' => 'Virheellinen arvo:',
@@ -2723,6 +2754,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Tämänhetkisellä käyttäjällä ei ole oikeuksia muuttaa moduulin ‘{moduleNameLower}’ konfiguraatioasetuksia',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Sinua ei ole autorisoitu valitsemaan {moduleName}-moduulia suosikiksi. Ota yhteyttä järjestelmänvalvojaan jos tarvitset pääsyn.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Sinua ei ole autorisoitu tilaamaan {moduleName}-moduulia. Ota yhteyttä järjestelmänvalvojaan jos tarvitset pääsyn.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'kenttää worksheet_columns_related_fields ei löydy tietosisällöstä',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns ei ole taulukko',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'kenttää summary_columns_related_fields ei löydy tietosisällöstä',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows ei ole taulukko',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'kenttää footer_rows_related_fields ei löydy tietosisällöstä',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Pyyntösi epäonnistui tuntemattoman poikkeuksen takia.',
@@ -2914,6 +2953,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Valise operaattori...',
     'LBL_FILTER_CREATE_NEW' => 'Luo suodatin',
     'LBL_FILTER_CREATE_FILTER' => 'Luo uusi suodatin',
+    'LBL_FILTER_CLOSE_FILTER' => 'Sulje suodatin',
     'LBL_FILTER_EDIT_FILTER' => 'Muokkaa suodatinta',
     'LBL_FILTER_ALL_RECORDS' => 'Kaikki tietueet',
     'TPL_FILTER_SAVE' => 'Suodatin ‘{{name}}‘ luotiin.',
@@ -3303,7 +3343,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Kaikki oikeudet pidätetään.<br/> SugarCRM, Sugar ja 3-D Cube ovat SugarCRM Inc.:n rekisteröityjä tavaramerkkejä. '.
         'Kaikki muut tässä tuotteessa käytetyt tai näkyvät yritys- ja tuotenimet voivat olla '.
         'vastaavien yritysten tavaramerkkejä.',
@@ -3412,7 +3452,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Jatka',
     'LNK_VIEW_CHANGE_LOG' => 'Näytä tarkistusloki',
     'TPL_AUDIT_LOG_TITLE' => 'Tarkistusloki kohteelle {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Napsauta nähdäksesi sähköpostiosoitteen valvontalokin',
 
     'NTC_CLICK_BACK' => 'Napsauta selaimen Takaisin-painiketta ja korjaa ongelma.',
     'NTC_DATE_FORMAT' => '(vvvv-kk-pp)',
@@ -3449,6 +3489,11 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Huomautus:</b> Selaimesi on IE:n yhteensopivuustilassa. Yhteensopivuustilaa ei tueta.",
     'WARN_LICENSE_SEATS'=>  "Varoitus: Aktiivisten käyttäjien määrä ylittää lisenssien salliman määrän.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Varoitus: aktiivisten käyttäjien määrä ylittää sallitun lisenssien enimmäismäärän.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Aktiivisten käyttäjien määrä ylittää lisenssien enimmäismäärän. Ota yhteys järjestelmänvalvojaan.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Vain järjestelmänvalvojat voivat kirjautua sisään.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Käyttäjälisenssien enimmäismäärä on saavutettu. Vain nykyiset käyttäjät voivat kirjautua sisään.',
     'WARN_ONLY_ADMINS'=> "Vain järjestelmänvalvojat voivat kirjautua sisään.",
     'WARN_UNSAVED_CHANGES'=> "Olet lähdössä tästä tietueesta tallentamatta mahdollisesti tekemiäsi muutoksia. Oletko varma että haluat poistua tietueelta?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Sinulla on tallentamattomia muutoksia. Sivulta lähteminen poistaa muutokset. Lähdetäänkö silti?',
@@ -3542,6 +3587,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Ei tietueita. <item2> uusi.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Voit luoda . listasta",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klikkaa tästä",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Lisää suosikkeihin',
@@ -3647,6 +3693,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Myyntimahdollisusmittarit',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Tilin vastaavat mahdollisuusmittarit.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Tuotekatalogin pikavalintatuotteet',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Listaa viimeksi käytetyt kohteet ja suosikkeihin tallennetut tuotteet',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Viimeksi käytetty',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Suosikit',
 
     'LBL_DASHLET_NO_RECORDS' => 'Tietueita ei löytynyt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Tapauksen yhteenveto',
@@ -4254,7 +4304,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Tulevaisuus',
     'LBL_REQUIRED_FIELD' => 'Pakollinen',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Tarjottu tuoterivi',
+    'LBL_DISCOUNT_TOTAL' => 'Alennus yhteensä',
+    'LBL_TAX' => 'Vero',
+    'LBL_SHIPPING' => 'Toimitus',
+    'LBL_GRAND_TOTAL' => 'Loppusumma',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Täytä laskutusosoite automaattisesti tiliprofiilista',
+    'LBL_QLI_ADD_GROUP' => 'Lisää ryhmä',
+    'LBL_QLI_COMMENT' => 'Kommentti',
+    'LBL_SELECT_ACTION' => 'Valitse toiminto',
+    'LBL_QLI_GROUP_NAME' => 'Ryhmän nimi',
+    'LBL_GROUP_TOTAL' => 'Ryhmä yhteensä',
+    'LBL_ITEM_NAME' => 'Tuoterivi',
+    'LBL_QLI_DELETE' => 'Haluatko varmasti poistaa tämän tuoterivin?',
+    'LBL_QLI_COMMENT_DELETE' => 'Haluatko varmasti poistaa tämän tuoterivin kommentin?',
+    'LBL_QLI_GROUP_DELETE' => 'Haluatko varmasti poistaa ryhmän {0}? Kaikki kohteet siirretään oletusryhmään.',
+    'LBL_QLI_GROUP_EMPTY' => 'Ei tarjottua tuoteriviä',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Valinnainen',
     'LBL_RELATED_MODULE' => 'Liittyvä {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Liittyvä {{{this}}}',
@@ -4284,7 +4354,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Vahvista',
     'LBL_NO_ACCESS' => '(Ei pääsyä)',
     'LBL_NO_ACCESS_LOWER' => 'Käyttäjällä ei ole pääsyä tietueeseen',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Ei pääsyä',
     'LBL_VALUE_ERASED' => 'Arvo poistettu',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Nämä tiedot on poistettu tietosuojapyynnön kautta',
     'LBL_CREATE_RELATED_RECORD' => 'Luo liittyvä tietue',
@@ -4912,7 +4982,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Tiimin tehtävät',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Tarkempi työnkulku',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC-käyttöliittymä',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP tai Old REST API',
@@ -4973,9 +5043,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Huomautus:',
     'LBL_ALERT_TITLE_ERROR' => 'Virhe:',
     'LBL_ALERT_TITLE_LOADING' => 'Ladataan',
+    'LBL_ALERT_NO_ACCESS' => 'Sinulla ei ole käyttöoikeutta suodattimeen, jota käytetään tähän ikkunaan.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Luo kaksoiskappale koontinäytöstä ja määritä tämä koontinäytön osa omalla suodattimellasi.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Selainversiotasi ei enää tueta tai käytät tukematonta selainta.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Seuraavia selainversioita suositellaan: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Tuetut alustat',
     'LBL_ALERT_CONFIRM_DELETE' => 'Haluatko varmasti poistaa tämän kohteen?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Haluatko varmasti poistaa nämä kohteet?',
@@ -5073,7 +5143,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historiallinen yhteenveto',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Enemmän historiaa...',
     'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
     'LBL_MODULE_TYPE' => 'Tyyppi',
@@ -5154,6 +5224,11 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Puuttuvat SMTP-palvelinasetukset',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Jotta tietueen­määritys­ilmoituksia voidaan lähettää, pitää {{emailSettingsUrl}} konfiguroida SMTP-palvelin.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'sähkö­posti­asetuk­sissa',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Uudet varastoidut raportit saatavilla',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Uudet varastoidut raportit saatavilla omasta ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Raporttien moduuli',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Ne on merkitty ”varastoiduiksi raporteiksi” ja ne voi suodattaa. Raportit ovat myös merkitty ”myynti ja markkinointi”, ”asiakaspalvelu”, ”tietosuoja” tai ”hallinto” sisällön mukaan. Saat lisätietoja seuraavasta ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentaatio',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM antaa tehokäyttäjien käyttää pikanäppäimiä joidenkin toimintojen suorittamiseen nopeammin. Taulukosta näkee saatavilla olevat pikanäppäimet kuvauksineen.',
@@ -5263,23 +5338,26 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Prosessit',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Prosessit-dashlet näyttää mallit, joita voidaan käyttää Advanced Workflown sisällä.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Prosessit-ikkuna näyttää mallit, joita voidaan käyttää SugarBPM:n sisällä.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Prosessimääritelmät',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Prosessimääritelmät-dashlet näyttää mallit, joita voidaan käyttää Advanced Workflown sisällä.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Prosessimääritykset-ikkuna näyttää mallit, joita voidaan käyttää SugarBPM:n sisällä.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Luo prosessimääritelmä',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Tuo prosessimääritelmiä',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Prosessiyrityssäännöt',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Prosessiyrityssäännöt-dashlet näyttää mallit, joita voidaan käyttää Advanced Workflown sisällä.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Prosessien yrityssäännot-ikkuna näyttää mallit, joita voidaan käyttää SugarBPM:n sisällä.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Luo prosessiyrityssääntö',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Tuo prosessiyrityssääntöjä',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Prosessisähköpostimallit',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Prosessisähköpostimallit-dashlet näyttää mallit, joita voidaan käyttää Advanced Workflown sisällä.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Prosessien sähköpostimallit-ikkuna näyttää mallit, joita voidaan käyttää SugarBPM:n sisällä.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Luo prosessisähköpostimalli',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Tuo prosessisähköpostimalleja',
 
@@ -5303,7 +5381,7 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
     'LBL_PMSE_CANCELLED_STATUS' => 'Peruutettu',
     'LBL_PMSE_TERMINATED_STATUS' => 'Lopetettu',
     'LBL_PMSE_ERROR_STATUS' => 'Virhe',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow -asetukset',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM-asetukset',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Poistetaanko varmasti käytöstä tämä tietue?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Otetaanko varmasti käyttöön tämä tietue?',
@@ -5327,7 +5405,7 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM vaatii Javascriptin toimiakseen. Salli Javascript selaimessasi käyttääksesi SugarCRMää.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Sarjoitettujen tietojen sarjoituksen purkaminen epäonnistui',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Sarjoitettujen tietojen sarjoituksen purku epäonnistui, koska ne sisältävät viittauksia kohteisiin tai luokkiin',
 
@@ -5356,6 +5434,15 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
     'LBL_DATAPRIVACY_PII' => 'Henkilötiedot',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Merkitse poistettavaksi',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Henkilön {{{name}}} tiedot',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopioitu leikepöydällesi!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Ei voitu kopioida leikepöydällesi',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopioi vahvistuslinkki',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Näytä enemmän...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Näytä vähemmän...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6533,7 +6620,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Upotettu tiedosto';
     'YER' => 'Rialia',
     'ZWD' => 'Zimbabwen dollaria',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Yksi osuma',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Tyhjä',
+        'future' => 'Nykyinen arvo',
+        'old' => 'Vanha arvo',
+        'both' => 'Nykyiset ja vanhat arvot',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Yksi osuma',
+    );

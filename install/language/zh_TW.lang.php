@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '相容性檢查時偵測到錯誤。為確保 SugarCRM 安裝正常工作，請採取適當步驟解決下列問題，然後按一下「重新檢查」按鈕或嘗試重新安裝。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference 已開啟（在 php.ini 中此選項應設定為關閉）',
 
-	'ERR_CHECKSYS_CURL'					=> '未找到: Sugar 計畫程式將運行有限的功能。電子郵件存檔服務將無法運行。',
+	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar排程器只能在有限的功能下運行。電子郵件封存功能將不會運行。',
     'ERR_CHECKSYS_IMAP'					=> '未找到：輸入電子郵件和宣傳活動（電子郵件）要求使用 IMAP 庫。兩者均不能正常工作。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '使用 MS SQL Server 時，Magic Quotes GPC 不能轉為「On」。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告：',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '如需獲得最佳體驗，請使用 IIS/FastCGI sapi，並在 php.ini 檔案中將 fastcgi.logging 設定為 0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '已安裝不支援的 PHP 版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '資料庫不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到數據庫支援。請確認您已為所支援的以下任一數據庫類型安裝所需的驅動程式：MySQL、MS SQLServer、Oracle，或 DB2。您可能需要移除 php.ini 文件中有關擴展的註解，或使用正確的二進制文件重新編譯，具體視您的 PHP 版本而定。更多關於如何啟用數據庫支援的資訊，請參考您的PHP手冊。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到資料庫支援。 請確保您擁有以下受支援的資料庫類型之一所需的驅動程式：mysql、ms sqlserver、oracle 或 db2。您可能需要取消對 php. ini 檔中的副檔名的注釋，或使用正確的二進位檔案重新編譯，具體取決於您的 php 版本。有關如何啟用資料庫支援的詳細資訊，請參閱 php 手冊。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '未找到 Sugar 應用程式需要的與 XML 剖析器程式庫關聯的函數。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解更多資訊。',
     'LBL_CHECKSYS_CSPRNG' => '亂數產生器',
     'ERR_CHECKSYS_MBSTRING'             => '未找到 Sugar 應用程式需要的與多位元組字串 PHP 擴充 (mbstring) 關聯的函數。<br/><br/>一般，mbstring 模組在 PHP 中預設為不啟用，它必須在建立 PHP 二進位時用 --enable-mbstring 啟用。請參考 PHP 手冊了解如何啟用 mbstring 支援的更多資訊。',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'PHP 設定檔 (php.ini) 中的 session.save_path 未設定或設定為不存在的資料夾。您需要在 php.ini 中設定 save_path setting 或確認 save_path 中設定的資料夾是否存在。',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'PHP 設定檔 (php.ini) 中的 session.save_path 設定為不可寫入的資料夾。請採取必要的步驟將此資料夾設定為可寫入。<br>根據您採用的作業系統，這可能需要您運行 chmod 766 變更權限，或在檔案名上按右鍵以存取屬性並取消核取只讀選項。',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => '設定檔存在但不可寫入。請採取必要的步驟將此檔案設定為可寫入。根據您採用的作業系統，這可能需要您運行 chmod 766 變更權限，或在檔案名上按右鍵以存取屬性並取消核取只讀選項。',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP 模組',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB 字串模組',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> '確定（無限制）',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> '確定（無限）',
 	'LBL_CHECKSYS_MEM'					=> 'PHP 記憶體限制',
@@ -555,7 +553,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => '新帳戶資訊',
         'description' => '此範本將在系統管理員向使用者傳送新密碼時使用。',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>以下是您的帳戶使用者名稱和臨時密碼：</p><p>使用者名稱：$contact_user_user_name </p><p>密碼：$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>使用上述密碼登入後，可能要求您將其重設為自己選擇的密碼。</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>以下是您的帳戶使用者名稱和臨時密碼：</p><p>使用者名稱：$contact_user_user_name </p><p>密碼：$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>使用上述密碼登入後，可能要求您將其重設為自己選擇的密碼。</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 以下是您的帳戶使用者名稱和臨時密碼：
@@ -570,7 +568,7 @@ $config_site_url
     'advanced_password_forgot_password_email' => array(
         'subject' => '重設您的帳戶密碼',
         'description' => "此範本用於向使用者傳送連結，按一下此連結可重設使用者帳戶密碼。",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>您近期請求 $contact_user_pwd_last_changed 以重設您的帳戶密碼。</p><p>按一下下列連結即可重設密碼：</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>您近期請求 $contact_user_pwd_last_changed 以重設您的帳戶密碼。</p><p>按一下下列連結即可重設密碼：</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 您近期請求 $contact_user_pwd_last_changed 以重設您的帳戶密碼。

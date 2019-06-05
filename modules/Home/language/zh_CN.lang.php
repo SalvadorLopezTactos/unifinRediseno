@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP SAML-一个简单的 PHP 的 SAML 工具包。',
   'LBL_SOURCE_ISCROLL' => 'iScroll - 移动网页的 overflow:scroll 装备。本机在固定的宽度/高度元素内滚动。',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas-FlashCanvas 是一个 JavaScript 库，将 HTML5 画布支持添加到 Internet Explorer。它呈现的形状和图像通过 Flash 绘图 API。它支持几乎所有画布 API，并在许多情况下，运行得比其他类似的库使用 VML 或 Silverlight 快。',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - JavaScript InfoVis 工具包为网站提供创建互动式数据可视化的工具。',
   'LBL_SOURCE_ZEND' => 'Zend Framework - 一个开放源代码，PHP5 网页程序开发框架。',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - 适用于 PHP 的 CSV 数据分解器',
   'LBL_SOURCE_PHPJS' => 'php.js - 在 JavaScript 中使用 PHP 功能',

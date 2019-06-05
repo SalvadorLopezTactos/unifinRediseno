@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Atributo de Grupo:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Com Usuário DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Incluir Usuário DN com o atributo do usuário quando estiver verificando participação no grupo',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Quaisquer parâmetros de filtro adicionais a serem aplicados na autenticação de usuários ex: \\nis_sugar_user=1 ou (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Quaisquer parâmetros de filtro adicionais a serem aplicados na autenticação de usuários ex: \nis_sugar_user=1 ou (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atributo de Logon:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atributo de Vinculação',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Para vincular o usuário LDAP<br>Exemplos:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -935,12 +935,21 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
     'WARN_INSTALLER_LOCKED'=>'<b>Aviso: </b>para guardar em segurança os seus dados, o instalador deverá ser bloqueado configurando "installer_locked" para "verdadeiro" no arquivo config.php.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Nota:</b> a sua licença expira em ",
     'WARN_LICENSE_EXPIRED2' =>"dia(s). Vá para <a href='index.php?action=LicenseSettings&module=Administration'>Gestão de Licença</a> no tela de Administração.",
-    'WARN_LICENSE_SEATS'=>  "<b>Aviso:</b> licenças de usuário excedidas por",
-    'WARN_LICENSE_SEATS2' => "Contate o seu representante de vendas ou envie um e-mail para <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Aviso:</b> há ",
+    'WARN_LICENSE_SEATS2' => " usuários ativos, e sua assinatura permite apenas ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Desative alguns usuários, entre em contato com seu parceiro ou representante de vendas"
+        . " ou envie um e-mail para <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Para mais informações, consulte o artigo "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Noções básicas sobre tipos de usuário e licenças do Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Aviso:</b> o número de usuários ativos já é o número máximo de licenças permitidas:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Aviso: </b>o número de usuários ativos já é o número máximo de licenças permitidas",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Aviso: </b>o número de usuários ativos permitido pela sua licença coincide com o número de usuários ativos no sistema. Você não poderá criar usuários ativos adicionais.",
-    'WARN_REPAIR_CONFIG' => '<b>Aviso:</b> o arquivo config.php precisa ser reparado. Utilize o script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstruir arquivo de Configuração</a> na página Reparar na área de Administração para reparar o seu arquivo de configuração.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Aviso:</b> não será possível criar usuários ativos adicionais."
+        . " Adquira mais assinaturas.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Aviso:</b> não será possível criar usuários ativos adicionais."
+        . " Adquira mais assinaturas.",
+    'WARN_REPAIR_CONFIG' => '<b>Aviso:</b> O arquivo config.php precisa ser reparado. Use o script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstruir arquivo de configuração</a> na página Reparar na área Administração para reparar o arquivo de configuração.',
     'WARN_UPGRADE_APP'=> "Está disponível uma versão atualizada do aplicativo.",
     'WARN_UPGRADE' => '<b>Aviso:</b> atualize',
     'WARN_UPGRADENOTE' => 'Nota:',
@@ -1249,15 +1258,17 @@ Todas as integrações dependentes desta plataforma deixarão de funcionar.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'O arquivo de metadados não foi encontrado.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Configurações',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Definir as configurações do Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Visualizador de Log',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Acessar o log do Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Acessar o ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' registro.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Gerenciamento de Processos',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Ver todos os processos abertos e em execução no sistema.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configure ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' as definições e veja os registos. Gerencie todos os processos BPM para todos os usuários por meio do Gerenciamento de Processos.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configurar definições do Advanced Workflow e visualizar logs. Gerenciar todos os processos BPM para todos os usuários por meio do Gerenciamento de Processos.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configuração de cotações',
+    'LBL_MANAGE_QUOTES' => 'Configurar o layout da planilha de cotações',
 );

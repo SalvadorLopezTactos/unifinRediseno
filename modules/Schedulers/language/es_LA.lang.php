@@ -38,7 +38,7 @@ $mod_strings = array (
 'LBL_OOTB_HEARTBEAT' => 'Señal de Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualizar artículos de KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artículos aprobados y caducar artículos KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Trabajo programado de Advance Workflow',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tarea planificada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruir los datos de seguridad desregularizados del equipo',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Ejecutar envío de recordatorios por correo electrónico',
 'LBL_CLEANJOBQUEUE' => 'Limpiar Cola de Trabajos',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpiar listas de Registros Antiguos',
-'LBL_PMSEENGINECRON' => 'Programador de Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

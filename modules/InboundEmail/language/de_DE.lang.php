@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'AW:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Benutzername oder Passwort inkorrekt',
-	'ERR_BODY_TOO_LONG'		=> '\\rTextkörper zu lang, um die GANZE E-Mail zu speichern. Abgeschnitten.',
+	'ERR_BODY_TOO_LONG'		=> '\rTextkörper zu lang, um die GANZE E-Mail zu speichern. Abgeschnitten.',
 	'ERR_INI_ZLIB'			=> 'Konnte Zlib-Komprimierung nicht ausschalten. "Einstellungen testen" könnte fehlschlagen.',
 	'ERR_MAILBOX_FAIL'		=> 'Konnte keine E-Mail-Konten finden.',
 	'ERR_NO_IMAP'			=> 'Keine IMAP-Bibliotheken gefunden. Bitte korrigieren Sie das, bevor Sie mit eingehenden E-Mails weiterarbeiten',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Seed-Warteschlangen der Teams',
 	'LBL_GROUPFOLDER_ID'	=> 'Gruppenordner-ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'An Gruppenordner zuweisen',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Erlaubt es den Benutzern, E-Mails mit dem "von"-Name und der "von"-Adresse als Antwort-an-Adresse zu senden',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Durch diese Option werden der "von"-Name und die "von"-Adresse, die mit diesem Gruppen-E-Mail-Konto verknüpft sind, als Option für das "von"-Feld angezeigt, wenn E-Mails für Benutzer verfasst werden, die Zugriff auf das Gruppen-E-Mail-Konto haben.',
     'LBL_STATUS_ACTIVE'     => 'Aktiv',
     'LBL_STATUS_INACTIVE'   => 'Inaktiv',
     'LBL_IS_PERSONAL' => 'persönlich',

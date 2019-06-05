@@ -13,8 +13,14 @@
 
 use Doctrine\DBAL\DriverManager as DoctrineDriverManager;
 use Doctrine\DBAL\Logging\SQLLogger;
+use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
+use Sugarcrm\Sugarcrm\Dbal\IbmDb2\Driver as IbmDb2Driver;
+use Sugarcrm\Sugarcrm\Dbal\Mysqli\Driver as MysqliDriver;
+use Sugarcrm\Sugarcrm\Dbal\Oci8\Driver as Oci8Driver;
+use Sugarcrm\Sugarcrm\Dbal\SqlSrv\Driver as SqlSrvDriver;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 
 /**
  * Database driver factory
@@ -32,6 +38,34 @@ class DBManagerFactory
     protected static $dbalLogger;
 
     /**
+     * Mapping of DB driver names to their classes
+     *
+     * @var string[]
+     */
+    protected static $driverClasses = [
+        'ibm_db2' => IbmDb2Driver::class,
+        'mysqli' => MysqliDriver::class,
+        'oci8' => Oci8Driver::class,
+        'sqlsrv' => SqlSrvDriver::class,
+    ];
+
+    /**
+     * Overrides implementation of the given driver
+     *
+     * @param string $name Driver name
+     * @param string $class Implementation class
+     * @throws Exception
+     */
+    public static function setDriverClass(string $name, string $class) : void
+    {
+        if (!isset(self::$driverClasses[$name])) {
+            throw new Exception('Unsupported DB driver ' . $name);
+        }
+
+        self::$driverClasses[$name] = $class;
+    }
+
+    /**
      * Returns a reference to the DB object of specific type
      *
      * @param  string $type DB type
@@ -40,13 +74,12 @@ class DBManagerFactory
      */
     public static function getTypeInstance($type, $config = array())
     {
-        global $sugar_config;
-
         if(empty($config['db_manager'])) {
             $my_db_manager = self::getManagerByType($type, false);
-            if (empty($my_db_manager)) {
+
+            if (!$my_db_manager) {
                 display_stack_trace();
-                $GLOBALS['log']->fatal("unable to load DB manager for: $type");
+                static::getLogger()->alert("unable to load DB manager for: $type");
                 sugar_die("Cannot load DB manager");
             }
         } else {
@@ -63,7 +96,7 @@ class DBManagerFactory
         }
 
         if(class_exists($my_db_manager)) {
-            return new $my_db_manager();
+            return static::createInstance($my_db_manager);
         } else {
             return null;
         }
@@ -125,9 +158,6 @@ class DBManagerFactory
                 if (empty($instanceName) && empty($GLOBALS['db'])) {
                     $GLOBALS['db'] = self::$instances[$instanceName];
                 }
-                if (empty($instanceName) && !empty($GLOBALS['system_config']) && $GLOBALS['system_config'] instanceof Administration && empty($GLOBALS['system_config']->db)) {
-                    $GLOBALS['system_config']->db = self::$instances[$instanceName];
-                }
             }
         } else {
             $old_count++;
@@ -157,20 +187,13 @@ class DBManagerFactory
      */
     public static function createConnection(DBManager $instance)
     {
-        static $driverMap = array(
-            'mysqli' => 'Sugarcrm\Sugarcrm\Dbal\Mysqli\Driver',
-            'sqlsrv' => 'Sugarcrm\Sugarcrm\Dbal\SqlSrv\Driver',
-            'oci8' => 'Sugarcrm\Sugarcrm\Dbal\Oci8\Driver',
-            'ibm_db2' => 'Sugarcrm\Sugarcrm\Dbal\IbmDb2\Driver',
-        );
-
-        if (!isset($driverMap[$instance->variant])) {
+        if (!isset(self::$driverClasses[$instance->variant])) {
             throw new Exception('Unsupported DB driver ' . $instance->variant);
         }
 
         $params = array(
             'wrapperClass' => Connection::class,
-            'driverClass' => $driverMap[$instance->variant],
+            'driverClass' => self::$driverClasses[$instance->variant],
             'connection' => $instance->getDatabase(),
         );
 
@@ -189,6 +212,11 @@ class DBManagerFactory
         $conn->getConfiguration()->setSQLLogger($logger);
 
         return $conn;
+    }
+
+    private static function getLogger() : LoggerInterface
+    {
+        return LoggerFactory::getLogger('db');
     }
 
     /**
@@ -227,11 +255,7 @@ class DBManagerFactory
         self::$instances = array();
         BeanFactory::clearCache();
         $GLOBALS['db'] = null;
-        if (!empty($GLOBALS['system_config']) && $GLOBALS['system_config'] instanceof Administration) {
-            $GLOBALS['system_config']->db = null;
-        }
     }
-
 
     /**
      * Get DB manager class name by type name
@@ -271,7 +295,7 @@ class DBManagerFactory
             if ($re->isAbstract()) {
                 continue;
             }
-            $driver = new $classname;
+            $driver = static::createInstance($classname);
             if(!$validate || $driver->valid()) {
                 if(empty($drivers[$driver->dbType])) {
                     $drivers[$driver->dbType]  = array();
@@ -314,5 +338,23 @@ class DBManagerFactory
             $result[$type] = $tdrivers[0];
         }
         return $result;
+    }
+
+    /**
+     * Creates instance of database manager of the given class
+     *
+     * @param string $class
+     * @return DBManager
+     */
+    private static function createInstance(string $class) : DBManager
+    {
+        /** @var DBManager $instance */
+        $instance = new $class();
+
+        $instance->setLogger(
+            self::getLogger()
+        );
+
+        return $instance;
     }
 }

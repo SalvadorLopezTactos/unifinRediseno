@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: TeamNoticesDashlet.meta.php 54045 2010-01-26 20:25:05Z roger $
 
 global $app_strings, $current_language;
 

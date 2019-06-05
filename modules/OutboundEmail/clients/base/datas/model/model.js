@@ -24,6 +24,9 @@
     initialize: function(attributes) {
         var defaults = {};
         var email = app.user.get('email');
+        var privateTeamId = app.user.get('private_team_id');
+        var privateTeam = _.findWhere(app.user.get('my_teams'), {id: privateTeamId});
+        var privateTeamName = privateTeam ? privateTeam.name : '';
 
         defaults.name = app.user.get('full_name');
         defaults.email_address = app.utils.getPrimaryEmailAddress(app.user);
@@ -33,7 +36,7 @@
             .values()
             .first()
             .value();
-
+        defaults.team_name = [{id: privateTeamId, name: privateTeamName, primary: true}];
         this._defaults = _.extend({}, this._defaults, defaults);
         app.Bean.prototype.initialize.call(this, attributes);
     }

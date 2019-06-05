@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: default.php 15992 2006-08-16 01:51:22Z majed $
 $module_name = '<module_name>';
 $subpanel_layout = array(
 	'top_buttons' => array(

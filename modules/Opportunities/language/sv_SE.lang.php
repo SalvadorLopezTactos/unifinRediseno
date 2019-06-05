@@ -186,19 +186,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter att förändringen påbörjas kommer Inkomstposter att skapas för varje {{module_name}} i bakgrunden. När de är klara och tillgängliga kommer du att få ett meddelande till mailadressen på din profil. Obs. att din instans måste vara inställd på att skicka email via Admin -> Emailinställningar för att meddelanden ska kunna skickas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} låter dig spåra enskilda affärer från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, etc. En {{module_name}} kommer vanligtvis framskrida genom flera försäljningssteg tills det markeras antingen "Stängd vunnen" eller "Stängd förlorad". {{plural_module_name}} kan utnyttjas ännu mer genom att använda Sugars {{forecasts_singular_module}}-modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet för att uppnå säljmål.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulen tllåter dig att följa individuella försäljningar början till slutet. Varje {{module_name}} post representerar en möjlig försäljning och inkluderar relevanta försäljningsdata så väl som den relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, etc. En {{module_name}} kommer vanligtvis att gå igenom flera säljsteg tills den märks antingen "stängd vunnen" eller "stängd förlorad". {{plural_module_name}} kan förbättras ännu mer genom användning av Sugars {{forecasts_singular_module}}modul för att förstå och förutsäga säljtrender så väl som att fokusera arbetet på att uppnå säljmålen.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen låter dig spåra individuella affärer och innehållet i dem från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} låter dig spåra individuella försäljningar och radartiklarna som tillhör dessa försäljningarna från början till slut. Varje {{module_name}} post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, osv.
 
-- Redigera postens fält genom att klicka på dem eller på knappen Redigera.
+- Redigera postens fält genom att klicka på ett enskilt fält eller på knappen Redigera.
 - Visa eller redigera länkar till andra poster i underpanelerna genom att växla den nedre vänstra panelen till "Datavy".
-- Skapa och visa kommentarer, och håll koll på användningshistoriken i {{activitystream_singular_module}} genom att växla den nedre vänstra panelen till "Aktivitetsström".
+- Skapa och visa användarnas kommentarer, och håll koll på användningshistoriken i {{activitystream_singular_module}} genom att växla den nedre vänstra panelen till "Aktivitetsström".
 - Följ eller favoritmarkera posten med ikonerna till höger om postnamnet.
 - Ytterligare åtgärder hittar du i menyn Åtgärder till höger om knappen Redigera.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen låter dig spåra individuella affärer och innehållet i dem från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} låter dig spåra individuella försäljningar och radartiklarna i dem från början till slut. Varje {{module_name}} post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, osv.
 
 För att skapa en {{module_name}}:
 1. Fyll i fälten med aktuella värden.

@@ -1,4 +1,7 @@
 /*
+ * @deprecated
+ */
+/*
 (c) Copyrights 2007 - 2008
 
 Original idea by by Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/

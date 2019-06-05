@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: MyCasesDashlet.php 51865 2009-10-27 00:40:13Z clee $
 
 
 

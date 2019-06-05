@@ -326,11 +326,12 @@ class ImportViewConfirm extends ImportView
 
         $currenciesVars = "";
         $i=0;
-        foreach($locale->currencies as $id => $arrVal)
-        {
-            $currenciesVars .= "currencies[{$i}] = '{$arrVal['symbol']}';\n";
+
+        foreach ($locale->getCurrencies() as $id => ['symbol' => $symbol]) {
+            $currenciesVars .= "currencies[{$i}] = '{$symbol}';\n";
             $i++;
         }
+
         $currencySymbolsJs = <<<eoq
 var currencies = new Object;
 {$currenciesVars}

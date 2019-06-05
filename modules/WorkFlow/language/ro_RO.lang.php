@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definitia debitului de munca',
   'LBL_MODULE_NAME_SINGULAR' => 'Definiție flux de lucru',
-  'LBL_MODULE_ID' => 'Debit de munca',  
+  'LBL_MODULE_ID' => 'Debit de munca',
   'LBL_MODULE_TITLE' => 'Debit de munca : Acasa',
   'LBL_SEARCH_FORM_TITLE' => 'Cauta debit de munca',
   'LBL_LIST_FORM_TITLE' => 'Lista debit de munca',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Modulul tinta',
   'LBL_LIST_ORDER' => 'Proceseaza comanda:',
   'LBL_FROM_NAME' => 'De la Nume:',
-  'LBL_FROM_ADDRESS' => 'De la adresa',  
+  'LBL_FROM_ADDRESS' => 'De la adresa',
   'LNK_NEW_WORKFLOW' => 'Creeaza Definitie Debit de Munca',
-  'LNK_WORKFLOW' => 'Listeaza Definitiile Debitului de Munca', 
-  
-  
+  'LNK_WORKFLOW' => 'Listeaza Definitiile Debitului de Munca',
+
+
   'LBL_ALERT_TEMPLATES' => 'Sabloane alerta',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Creează un şablon alertă:',
   'LBL_SUBJECT' => 'Subiect',
-  
+
   'LBL_RECORD_TYPE' => 'Se aplica :',
  'LBL_RELATED_MODULE'=> 'Modul inrudit',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Secventa debitului de munca',
 	'LNK_ALERT_TEMPLATES' => 'Sablon Alerta Email',
 	'LNK_PROCESS_VIEW' => 'Secventa debitului de munca',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tip',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Notă:</strong> Funcționalitatea opțiunilor Flux de lucru Sugar și Management Flux de Lucru va fi eliminată într-o versiune ulterioară de Sugar. Clienții ediției Sugar Enterprise edition ar trebui să înceapă să utilizeze funcționalitatea furnizată de Flux de Lucru Avansat Sugar. Faceți clic <a href="http://www.sugarcrm.com/wf-eol" target="_blank">aici</a> pentru informații suplimentare.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Notă:</strong> Funcționalitatea opțiunilor Flux de lucru Sugar și Management Flux de Lucru este în modul de întreținere. Clienții ediției Sugar Enterprise ar trebui să înceapă să utilizeze funcționalitatea furnizată de SugarBPM<sup class="trademark">TM</sup>.',
 );
 

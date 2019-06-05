@@ -20,6 +20,7 @@ use Doctrine\DBAL\Connection;
 
 /**
  * Class LocalUserProviderTest.
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider
  */
 class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -73,15 +74,20 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->testPassword, $user->getPassword());
     }
 
-    public function testCreateUser()
+    /**
+     * @param $actual
+     * @param $expected
+     *
+     * @dataProvider createUserProvider
+     */
+    public function testCreateUser($actual, $expected)
     {
-        $tenantId = '123-tenant';
         $db = $this->getMockBuilder(Connection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $userProvider = $this->getMockBuilder(LocalUserProvider::class)
-            ->setConstructorArgs([$db, $tenantId])
+            ->setConstructorArgs([$db, $actual['tenant']])
             ->setMethods(['getProviderId'])
             ->getMock();
 
@@ -99,13 +105,13 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     $this->logicalAnd(
                         $this->isType('array'),
                         $this->arrayHasKey('attributes'),
-                        $this->contains('{}'),
+                        $this->contains(json_encode($expected['attributes']), false, true),
                         $this->arrayHasKey('custom_attributes'),
-                        $this->contains('{"a":"b"}'),
+                        $this->contains(json_encode($expected['custom_attributes']), false, true),
                         $this->arrayHasKey('status'),
-                        $this->contains('active'),
+                        $this->contains(0, false, true),
                         $this->arrayHasKey('tenant_id'),
-                        $this->contains($tenantId),
+                        $this->contains($expected['tenant'], false, true),
                         $this->arrayHasKey('id'),
                         $this->arrayHasKey('create_time'),
                         $this->arrayHasKey('modify_time')
@@ -114,16 +120,130 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     $this->logicalAnd(
                         $this->isType('array'),
                         $this->arrayHasKey('tenant_id'),
-                        $this->contains($tenantId),
+                        $this->contains($expected['tenant'], false, true),
                         $this->arrayHasKey('identity_value'),
-                        $this->contains('max'),
+                        $this->contains($expected['identity_value'], false, true),
                         $this->arrayHasKey('provider_code'),
-                        $this->contains('ldap'),
+                        $this->contains($expected['provider'], false, true),
                         $this->arrayHasKey('user_id')
                     )]
             );
 
-        $userProvider->createUser('max', Providers::LDAP, ['a' => 'b']);
+        /**
+         * @var $user User
+         */
+        $user = $userProvider->createUser($actual['identity_value'], $actual['provider'], $actual['attributes']);
+
+        $this->assertEquals($expected['attributes'], $user->getAttribute('attributes'));
+        $this->assertEquals($expected['custom_attributes'], $user->getAttribute('custom_attributes'));
+    }
+
+    /**
+     * @return array
+     */
+    public function createUserProvider()
+    {
+        return [
+            [
+                [
+                    'identity_value' => 'john@ex.com',
+                    'provider' => Providers::LDAP,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'given_name' => 'John',
+                        'family_name' => 'Smith',
+                        'non-oidc' => 'some-value',
+                    ]
+                ],
+                [
+                    'identity_value' => 'john@ex.com',
+                    'provider' => Providers::LDAP,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'Smith',
+                        'email' => 'john@ex.com',
+                        'given_name' => 'John',
+                    ],
+                    'custom_attributes' => [
+                        'non-oidc' => 'some-value',
+                    ]
+                ],
+            ],
+            [
+                [
+                    'identity_value' => 'max@ex.com',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [],
+                ],
+                [
+                    'identity_value' => 'max@ex.com',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'max@ex.com',
+                        'email' => 'max@ex.com',
+                    ],
+                    'custom_attributes' => [],
+                ],
+            ],
+            [
+                [
+                    'identity_value' => 'max@ex',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [],
+                ],
+                [
+                    'identity_value' => 'max@ex',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'max_at_ex@some-tenant-id.com',
+                        'email' => 'max_at_ex@some-tenant-id.com',
+                    ],
+                    'custom_attributes' => [],
+                ],
+            ],
+            [
+                [
+                    'identity_value' => 'max',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [],
+                ],
+                [
+                    'identity_value' => 'max',
+                    'provider' => Providers::SAML,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'max@some-tenant-id.com',
+                        'email' => 'max@some-tenant-id.com',
+                    ],
+                    'custom_attributes' => [],
+                ],
+            ],
+            [
+                [
+                    'identity_value' => 'max@ex',
+                    'provider' => Providers::LDAP,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'Smith',
+                    ],
+                ],
+                [
+                    'identity_value' => 'max@ex',
+                    'provider' => Providers::LDAP,
+                    'tenant' => 'some-tenant-id',
+                    'attributes' => [
+                        'family_name' => 'Smith',
+                        'email' => 'max_at_ex@some-tenant-id.com',
+                    ],
+                    'custom_attributes' => [],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -149,7 +269,6 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                 'create_time' => '',
                 'modify_time' => '',
             ], $data);
-
         } else {
             $rowData = null;
         }
@@ -158,5 +277,150 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
             ->willReturn($rowData);
 
         return $userProvider;
+    }
+
+    /**
+     * @covers ::linkUser
+     */
+    public function testLinkUser(): void
+    {
+        $tenantId = 'some-tenant-id';
+        $identityValue = 'john@ex.com';
+        $provider = Providers::LDAP;
+        $userId = 'some-user-id';
+
+        $db = $this->getMockBuilder(Connection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $db->expects($this->once())
+            ->method('insert')
+            ->with(
+                'user_providers',
+                $this->equalTo([
+                    'tenant_id' => $tenantId,
+                    'user_id' => $userId,
+                    'provider_code' => $provider,
+                    'identity_value' => $identityValue,
+                ])
+            );
+
+        $userProvider = new LocalUserProvider($db, $tenantId);
+        $userProvider->linkUser($userId, $provider, $identityValue);
+    }
+
+    /**
+     * @see testUpdateUserAttributes
+     * @return array
+     */
+    public function updateUserAttributesProvider(): array
+    {
+        $userId = 'some-user-id';
+        $tenantId = 'some-tenant-id';
+        $attributes = [
+            'given_name' => 'given_name.value',
+            'family_name' => 'family_name.value',
+            'middle_name' => 'middle_name.value',
+            'nickname' => 'nickname.value',
+            'address' => [
+                'street_address' => 'address.street_address.value',
+                'locality' => 'address.locality.value',
+                'region' => 'address.region.value',
+            ],
+            'email' => 'email.value',
+            'phone_number' => 'phone_number.value',
+        ];
+        $customAttributes = [
+            'given_name.custom' => 'given_name.custom.value',
+            'family_name.custom' => 'family_name.custom.value',
+        ];
+        $expectsIdentifier = [
+            'id' => $userId,
+            'tenant_id' => $tenantId,
+        ];
+
+        return [
+            'default' => [
+                'in' => [
+                    'userId' => $userId,
+                    'tenantId' => $tenantId,
+                    'data' => array_merge($attributes, $customAttributes),
+                ],
+                'expects' => [
+                    'data' => [
+                        'attributes' => json_encode($attributes),
+                        'custom_attributes' => json_encode($customAttributes),
+                    ],
+                    'identifier' => $expectsIdentifier,
+                ],
+            ],
+            'emptyAddressArray' => [
+                'in' => [
+                    'userId' => $userId,
+                    'tenantId' => $tenantId,
+                    'data' => array_merge($attributes, $customAttributes, ['address' => []]),
+                ],
+                'expects' => [
+                    'data' => [
+                        'attributes' => json_encode(array_merge($attributes, ['address' => new \stdClass])),
+                        'custom_attributes' => json_encode($customAttributes),
+                    ],
+                    'identifier' => $expectsIdentifier,
+                ],
+            ],
+            'emptyAttributes' => [
+                'in' => [
+                    'userId' => $userId,
+                    'tenantId' => $tenantId,
+                    'data' => $customAttributes,
+                ],
+                'expects' => [
+                    'data' => [
+                        'attributes' => '{}',
+                        'custom_attributes' => json_encode($customAttributes),
+                    ],
+                    'identifier' => $expectsIdentifier,
+                ],
+            ],
+            'emptyCustomAttributes' => [
+                'in' => [
+                    'userId' => $userId,
+                    'tenantId' => $tenantId,
+                    'data' => $attributes,
+                ],
+                'expects' => [
+                    'data' => [
+                        'attributes' => json_encode($attributes),
+                        'custom_attributes' => '{}',
+                    ],
+                    'identifier' => $expectsIdentifier,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider updateUserAttributesProvider
+     * @covers ::updateUserAttributes
+     * @param array $in
+     * @param array $expects
+     */
+    public function testUpdateUserAttributes(array $in, array $expects)
+    {
+        /** @var  \PHPUnit_Framework_MockObject_MockObject|Connection $db */
+        $db = $this->getMockBuilder(Connection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $userProvider = new LocalUserProvider($db, $in['tenantId']);
+
+        $db->expects($this->once())
+            ->method('update')
+            ->with(
+                $this->equalTo('users'),
+                $this->equalTo($expects['data']),
+                $this->equalTo($expects['identifier'])
+            );
+
+        $userProvider->updateUserAttributes($in['data'], $in['userId']);
     }
 }

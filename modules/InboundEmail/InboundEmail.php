@@ -3979,18 +3979,26 @@ class InboundEmail extends SugarBean {
 				$this->email = BeanFactory::newBean('Emails');
 			}
 
-			$q = "";
 			if ($this->isPop3Protocol()) {
-				$this->email->name = $app_strings['LBL_EMAIL_ERROR_MESSAGE_DELETED'];
-                $q = "DELETE FROM email_cache WHERE message_id = ". $this->db->quoted($uid) . " AND ie_id = " .
-                    $this->db->quoted($this->id) . " AND mbox = " . $this->db->quoted($this->mailbox);
+                $identifier = [
+                    'message_id' => $uid,
+                    'ie_id' => $this->id,
+                    'mbox' => $this->mailbox,
+                ];
 			} else {
 				$this->email->name = $app_strings['LBL_EMAIL_ERROR_IMAP_MESSAGE_DELETED'];
-                $q = "DELETE FROM email_cache WHERE imap_uid = {$uid} AND ie_id = " . $this->db->quoted($this->id) .
-                    " AND mbox = " . $this->db->quoted($this->mailbox);
+                $identifier = [
+                    'imap_uid' => $uid,
+                    'ie_id' => $this->id,
+                    'mbox' => $this->mailbox,
+                ];
 			} // else
 			// delete local cache
-			$r = $this->db->query($q);
+            $this->db->getConnection()
+                ->delete(
+                    'email_cache',
+                    $identifier
+                );
 
 			$this->email->date_sent = $timedate->nowDb();
 			return false;

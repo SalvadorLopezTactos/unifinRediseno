@@ -38,23 +38,30 @@ class RelatedFieldExpression extends GenericExpression
                     global $timedate;
                     if ($bean->field_defs[$relfield]['type'] == "date")
                     {
-                        $ret = $timedate->fromDbDate($bean->$relfield);
-                        if (!$ret) {
-                            $ret = $timedate->fromUserDate($bean->$relfield);
-                        }
-                        if ($ret) {
-                            $ret->isDate = true;
-                            $ret->def = $bean->field_defs[$relfield];
+                        $ret = $bean->$relfield;
+                        if (!empty($bean->$relfield)) {
+                            $ret = $timedate->fromDbDate($bean->$relfield);
+                            if (!$ret) {
+                                $ret = $timedate->fromUserDate($bean->$relfield);
+                            }
+                            if ($ret) {
+                                $ret->isDate = true;
+                                $ret->def = $bean->field_defs[$relfield];
+                            }
                         }
                         return $ret;
                     }
                     if ($bean->field_defs[$relfield]['type'] == "datetime"
                         || $bean->field_defs[$relfield]['type'] == "datetimecombo") {
-                        $ret = $timedate->fromDb($bean->$relfield);
-                        if (!$ret)
-                            $ret = $timedate->fromUser($bean->$relfield);
-                        if ($ret) {
-                            $ret->def = $bean->field_defs[$relfield];
+                        $ret = $bean->$relfield;
+                        if (!empty($bean->$relfield)) {
+                            $ret = $timedate->fromDb($bean->$relfield);
+                            if (!$ret) {
+                                $ret = $timedate->fromUser($bean->$relfield);
+                            }
+                            if ($ret) {
+                                $ret->def = $bean->field_defs[$relfield];
+                            }
                         }
                         return $ret;
                     }

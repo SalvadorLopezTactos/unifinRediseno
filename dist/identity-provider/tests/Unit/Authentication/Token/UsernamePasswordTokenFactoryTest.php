@@ -19,7 +19,7 @@ use Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * @coversDefaultClass Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory
  */
 class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
 {

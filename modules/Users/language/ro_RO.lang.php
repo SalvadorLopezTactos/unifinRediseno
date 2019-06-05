@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Alocare la Echipe',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Echipe disponibil să apară în mod implicit în înregistrările sunt cele de care sunteţi membru.',
 	'LBL_DEFAULT_TEAM'					=> 'Echipe implicita',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Echipa Implicita',
 	'LBL_LIST_DESCRIPTION'				=> 'Descriere',
 	'LBL_MY_TEAMS'						=> 'Echiplele mele',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Echipa privata pentru:',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa de email destinatar',
 	'ERR_SERVER_STATUS'					=> 'Server-ul dvs. de stare',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemul este în imposibilitatea de a trimite un e-mail pentru utilizator. Vă rugăm să verificaţi Outgoing Mail Configuration în Setări e-mail.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Utilizatorul poate fi creat doar în <a href="{0}" target="_blank">Consola cloud</a> pentru modul IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Adresa de e-mail principală poate fi actualizată doar în <a href="{0}" target="_blank">Consola cloud</a> pentru modul IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresă Email',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirma parola',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Aţi schimbat tipul de utilizator de la System Administrator utilizator la utilizator obişnuit. După salvarea acestei schimbari, utilizatorul nu va mai avea privilegii de administrator de sistem \\ n \\ nFaceţi clic pe OK pentru a continua.. \\ NFaceţi clic pe Anulare pentru a reveni la înregistrare.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Aţi schimbat tipul de utilizator de la System Administrator utilizator la utilizator obişnuit. După salvarea acestei schimbari, utilizatorul nu va mai avea privilegii de administrator de sistem \ n \ nFaceţi clic pe OK pentru a continua.. \ NFaceţi clic pe Anulare pentru a reveni la înregistrare.',
 	'LBL_COUNTRY'						=> 'Tara:',
 	'LBL_CURRENCY_TEXT'					=> 'Selectaţi moneda in care vor fi afişate în mod implicit atunci când creaţi noi inregistrari. Aceasta este, de asemenea, moneda care va fi afişata în coloanele Suma în Vedere Lista Oportunităţi.',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Numărul de zecimale de afişat pentru zecimale şi numere float în sistem, precum moneda şi media în Rapoarte.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Afişează moneda preferată',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Schimbă moneda de bază în cea preferată de utilizator în ferestrele de vizualizare liste şi înregistrări',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Creare articole de venituri în moneda preferată',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Articolele de venituri adăugate la o oportunitate din catalogul de produse vor fi convertite în moneda preferată a utilizatorului dacă aceasta diferă de moneda utilizată de articolul din catalogul de produse.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000 separator',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Caractere utilizate pentru separarea miilor',
 	'LBL_DECIMAL_SEP'					=> 'Simbol zecimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Ofera atât un nume de utilizator şi o adresă de email.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Momentan această funcţie nu este activată. Vă rugăm să contactaţi administratorul.',
 	'LBL_PUBLISH_KEY'					=> 'Publica cheie',
-
+    'LBL_SITE_USER_ID' => 'Cod hash al site_url și user_id',
     'LBL_QUOTAS'                        => 'Contingente',
     'LBL_FORECASTS'                     => 'Previziuni',
     'LBL_WORKSHEETS'                    => 'Foi de lucru',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil utilizator',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Dacă anumite câmpuri nu sunt editabile, autentificați-vă în Consola cloud pentru a administra aceste câmpuri',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Dacă doriți să modificați anumite câmpuri care nu sunt editabile, ' .
-        'contactați Administratorul pentru a notifica aceste modificări',
+        'Vă rugăm să luați legătura cu administratorul site-ului web Sugar dacă doriți să modificați câmpurile disponibile numai pentru citire.',
 ); // END STRINGS DEFS
-
-?>

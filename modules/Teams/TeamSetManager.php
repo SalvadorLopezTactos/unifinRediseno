@@ -58,7 +58,6 @@ class TeamSetManager {
 	 *
 	 */
 	public static function cleanUp(){
-		$teamSetModule = BeanFactory::newBean('TeamSetModules');
 		//maintain a list of the team set ids we would like to remove
 		$setsToRemove = array();
 		$setsToKeep = array();
@@ -109,20 +108,7 @@ class TeamSetManager {
 		//now we have our list of team_set_ids we would like to remove, let's go ahead and do it and remember
 		//to update the TeamSetModule table.
 		foreach($arrayDiff as $team_set_id => $key){
-            //1) remove from team_sets_teams
-            $conn->delete('team_sets_teams', array(
-                'team_set_id' => $team_set_id,
-            ));
-
-            //2) remove from team_sets
-            $conn->delete('team_sets', array(
-                'id' => $team_set_id,
-            ));
-
-            //3) remove from team_sets_modules
-            $conn->delete($teamSetModule->table_name, array(
-                'team_set_id' => $team_set_id,
-            ));
+            self::deleteTeamSet($team_set_id);
 		}
 	}
 
@@ -152,57 +138,115 @@ class TeamSetManager {
     /**
      * Check if one or more records attached to a team still exist in the database
      *
-     * @param string $moduleTableName Module table name
-     * @param string $teamSetId       TeamSet id
-     * @param string $beanId          Record to exclude from search
+     * @param string $table Table name
+     * @param string $teamSetId TeamSet ID
+     * @param string $excludeId Record to exclude from search
      * @return boolean
+     *
+     * @throws DBALException
      */
-    public static function doesRecordWithTeamSetExist($moduleTableName, $teamSetId, $beanId = null)
+    public static function doesRecordWithTeamSetExist($table, $teamSetId, $excludeId = null)
     {
-		$whereStmt = 'team_set_id = ? AND deleted = 0';
-		$params = array($teamSetId);
-		if ($beanId) {
-			$whereStmt .= ' AND id != ?';
-			$params[] = $beanId;
-		}
-		$connection = DBManagerFActory::getConnection();
-		$queryBuilder = $connection->createQueryBuilder();
-		$queryBuilder->select('id')
-				->from($moduleTableName)
-				->where($whereStmt);
-		// set the maximum number of records to be 1 to avoid scanning extra records in database
-		$query = $queryBuilder->setMaxResults(1)->getSQL();
-		$numRows = $connection->executeQuery($query, $params)->rowCount();
-		return ($numRows == 1);
+        $columns = array_intersect_key([
+            'team_set_id' => $teamSetId,
+            'acl_team_set_id' => $teamSetId,
+        ], DBManagerFactory::getInstance()->get_columns($table));
+
+        if (count($columns) < 1) {
+            return false;
+        }
+
+        $connection = DBManagerFactory::getConnection();
+        $platform = $connection->getDatabasePlatform();
+        foreach ($columns as $column => $value) {
+            $query = $platform->modifyLimitQuery(
+                sprintf(
+                    'SELECT id FROM %s WHERE %s = ? and deleted = ?',
+                    $table,
+                    $column
+                ),
+                $excludeId === null ? 1 : 2
+            );
+            $ids = $connection->executeQuery($query, [$teamSetId, 0])
+                ->fetchAll(\PDO::FETCH_COLUMN);
+
+            foreach ($ids as $id) {
+                if ($excludeId === null || $id != $excludeId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
      * Removes TeamSet module if no records exist
      *
      * @param SugarBean $focus
-     * @param String    $teamSetid Team set to remove
+     * @param string    $teamSetId Team set to remove
+     *
+     * @throws DBALException
      */
-    public static function removeTeamSetModule($focus, $teamSetId)
+    public static function removeTeamSetModule(SugarBean $focus, $teamSetId)
     {
         if (empty($teamSetId)) {
             return;
         }
-        
+
         if (self::doesRecordWithTeamSetExist($focus->table_name, $teamSetId, $focus->id)) {
             return;
         }
 
-        $query = 'DELETE FROM team_sets_modules WHERE team_set_id = ? AND module_table_name = ?';
-        DBManagerFactory::getConnection()
-            ->executeQuery($query, array($teamSetId, $focus->table_name));
+        $conn = DBManagerFactory::getConnection();
+
+        $conn->delete('team_sets_modules', [
+            'team_set_id' => $teamSetId,
+            'module_table_name' => $focus->table_name,
+        ]);
+
+        $platform = $conn->getDatabasePlatform();
+        $query = $platform->modifyLimitQuery('SELECT NULL FROM team_sets_modules WHERE team_set_id = ?', 1);
+        $stmt = $conn->executeQuery($query, [$teamSetId]);
+
+        if ($stmt->fetchColumn() !== false) {
+            return;
+        }
+
+        self::deleteTeamSet($teamSetId);
     }
 
-	/**
-	 * The above method "save" will flush the entire cache, saveTeamSetModule will just save one entry.
-	 *
-	 * @param guid $teamSetId	the GUID of the team set id we wish to save
-	 * @param string $tableName	the corresponding table name
-	 */
+    /**
+     * @param $teamSetId
+     * @throws DBALException
+     */
+    private static function deleteTeamSet($teamSetId) : void
+    {
+        $conn = DBManagerFactory::getConnection();
+
+        $conn->delete('team_sets_modules', array(
+            'team_set_id' => $teamSetId,
+        ));
+
+        $conn->delete('team_sets_teams', array(
+            'team_set_id' => $teamSetId,
+        ));
+
+        $conn->delete('team_sets', array(
+            'id' => $teamSetId,
+        ));
+
+        Container::getInstance()
+            ->get(Listener::class)
+            ->teamSetDeleted($teamSetId);
+    }
+
+   /**
+    * Saves the association between a team set and a bean table
+    *
+    * @param string $teamSetId The ID of the team set
+    * @param string $tableName The table name
+    */
 	public static function saveTeamSetModule($teamSetId, $tableName){
 		//if this entry is set in the config file, then store the set
 		//and modules in the team_set_modules table
@@ -368,7 +412,6 @@ class TeamSetManager {
         $conn = DBManagerFactory::getConnection();
 
         $teamSet = BeanFactory::newBean('TeamSets');
-        $listener = Container::getInstance()->get(Listener::class);
 
         $query = 'SELECT team_set_id
 FROM team_sets_teams
@@ -405,22 +448,7 @@ SQL;
                 ));
             }
 
-            //Remove the team set entry
-            $conn->delete('team_sets', array(
-                'id' => $teamSetId,
-            ));
-
-            //Remove the team_sets_teams entries
-            $conn->delete('team_sets_teams', array(
-                'team_set_id' => $teamSetId,
-            ));
-
-            //Remove the team_sets_modules entries
-            $conn->delete('team_sets_modules', array(
-                'team_set_id' => $teamSetId,
-            ));
-
-            $listener->teamSetDeleted($teamSetId);
+            self::deleteTeamSet($teamSetId);
         }
     }
 

@@ -146,6 +146,7 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
             'placeholders' => true,
             'fields' => array(
                 'website',
+                'service_level',
                 'phone_office',
                 'employees',
                 'phone_alternate',

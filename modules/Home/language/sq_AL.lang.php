@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - E thjesht SAML vegla për PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Mbi rrjedhja: lëviz për celularin WebKit. Lëvizja amtare në brendësi të elementit të caktuar të gjerësisë/lartësisë.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas është JavaScript biblioteka e cila shton mbështetjen HTML5 Canvas për Eksploruesin e Internetit. Kjo ofron forma dhe imazhet nëpërmjet blic vizatimit API. Ajo mbështet pothuajse të gjitha Canvas APIs dhe, në shumë raste, drejton më shpejt se bibliotekat e tjera të ngjashme të cilat i përdorin VML apo Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript Informacion i raportit udhëzues - JavaScript Infoormacion i raportit udhëzues siguron mjete për krijimin e të dhënave Interaktive të vizualitetit për faqën.',
   'LBL_SOURCE_ZEND' => 'Zend Kornizë - Një burim i hapur, orientimi i objektit në faqën e aplikacionit të kornizës për PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV të dhënat parser për PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - Përdorni funksionet e PHP në JavaScript',

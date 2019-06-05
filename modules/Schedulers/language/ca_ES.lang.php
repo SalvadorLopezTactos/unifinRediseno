@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Crear períodes futurs de temps',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualització d&#39;articles KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar articles aprovats i fer que caduquin articles de la base de coneixement.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tasca planifica de l&#39;Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiqueu articles aprovats i articles de la base de coneixement caducats.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tasca planificada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Comprovar Comptes de Correu Entrant',
 'LBL_PERFORMFULLFTSINDEX' => 'Cerca de text complet Sistema d&#39;Índex',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Esborra els arxius PDF temporals',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiqueu articles aprovats i feu que caduquin articles de la base de coneixement.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiqueu articles aprovats i articles de la base de coneixement caducats.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planificador de tasques de cerca d&#39;Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Esborra els arxius de les eines de diagnòstic',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Esborra els arxius temporals',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Executa l&#39;enviament de recordatoris per correu electrònic',
 'LBL_CLEANJOBQUEUE' => 'Alliberar espai en cua de treball',
 'LBL_CLEANOLDRECORDLISTS' => 'Netejar antigues llistes de registres',
-'LBL_PMSEENGINECRON' => 'Planificador de l&#39;Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

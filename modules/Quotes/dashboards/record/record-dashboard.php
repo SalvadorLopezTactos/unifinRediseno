@@ -26,6 +26,18 @@ return array(
                     array(
                         array(
                             'view' => array(
+                                'type' => 'product-quick-picks-dashlet',
+                                'label' => 'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME',
+                            ),
+                            'context' => array(
+                                'module' => 'Opportunities',
+                            ),
+                            'width' => 12,
+                        ),
+                    ),
+                    array(
+                        array(
+                            'view' => array(
                                 'type' => 'planned-activities',
                                 'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
                             ),

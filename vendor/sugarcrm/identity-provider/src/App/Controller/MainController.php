@@ -14,26 +14,27 @@ namespace Sugarcrm\IdentityProvider\App\Controller;
 
 use Sugarcrm\IdentityProvider\App\Application;
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentToken;
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
+use Sugarcrm\IdentityProvider\App\Constraints as CustomAssert;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
 use Sugarcrm\IdentityProvider\Srn;
+use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ResultToken as SAMLResultToken;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Class MainController.
  */
 class MainController
 {
-    const MAIN_FORM_TOKEN_ID = 'main_form_token';
-
     /**
      * @param Application $app Silex application instance.
      * @param Request $request
@@ -64,12 +65,47 @@ class MainController
      */
     public function renderFormAction(Application $app, Request $request)
     {
-        $tenantConfigInitializer = new TenantConfigInitializer($app);
-        if ($tenantConfigInitializer->hasTenant($request)) {
-            $tenantConfigInitializer->initConfig($request);
-            $tenant = Srn\Converter::fromString($app->getSession()->get('tenant'));
+        $token = $app->getRememberMeService()->retrieve();
+        $session = $app->getSession();
+        if ($token) {
+            $session->set(TenantConfigInitializer::SESSION_KEY, $token->getAttribute('tenantSrn'));
+            return $this->redirectAuthenticatedUser($app, $token);
         }
-        return $this->renderLoginForm($app, ['tid' => !empty($tenant) ? $tenant->getTenantId() : '']);
+
+        $tenantConfigInitializer = new TenantConfigInitializer($app);
+        $params = ['tid' => '', 'user_name' => '', 'show_sso_button' => true, 'ssoLogin' => false];
+        if ($tenantConfigInitializer->hasTenant($request)) {
+
+            // handle invalid tenant hint
+            try {
+                $tenantConfigInitializer->initConfig($request);
+            } catch (\RuntimeException $e) {
+                $app->getLogger()->debug('Invalid tenant id', [
+                    'errors' => $e->getMessage(),
+                    'tags' => ['IdM.main'],
+                ]);
+                return $this->processUnauthenticatedUser($app, $e->getMessage());
+            }
+
+            $config = $app->getConfig();
+
+            $tenant = Srn\Converter::fromString($session->get(TenantConfigInitializer::SESSION_KEY));
+            $params['tid'] = $tenant->getTenantId();
+
+            // Do not show SSO-login button if SAML is not configured for tenant.
+            $params['show_sso_button'] = in_array(Providers::SAML, $config['enabledProviders']);
+
+            if (!empty($config['saml'])) {
+                $params['ssoLogin'] = true;
+                $params['show_sso_button'] = false;
+            }
+        }
+
+        if ($request->query->has('login_hint')) {
+            $params['user_name'] = $request->query->get('login_hint');
+        }
+
+        return $this->renderLoginForm($app, $params);
     }
 
     /**
@@ -81,6 +117,7 @@ class MainController
     {
         /** @var Session $sessionService */
         $sessionService = $app->getSession();
+        $flashBag = $sessionService->getFlashBag();
 
         // collect data
         $data = [
@@ -98,13 +135,7 @@ class MainController
             'tid' => [new Assert\NotBlank()],
             'user_name' => [new Assert\NotBlank()],
             'password' => [new Assert\NotBlank()],
-            'csrf_token' => [
-                new Assert\NotBlank(),
-                new Assert\Callback([
-                    'callback' => [$this, 'checkCsrfToken'],
-                    'payload' => $app->getCsrfTokenManager(),
-                ]),
-            ],
+            'csrf_token' => [new CustomAssert\Csrf($app->getCsrfTokenManager())],
         ]);
         $violations = $app->getValidatorService()->validate($data, $constraint);
         if (count($violations) > 0) {
@@ -115,45 +146,47 @@ class MainController
                 'errors' => $errors,
                 'tags' => ['IdM.main'],
             ]);
-            return $this->renderLoginForm($app, [
-                'tid' => $data['tid'],
-                'user_name' => $data['user_name'],
-                'messages' => ['All fields are required.'],
-            ]);
+            $flashBag->add('error', 'All fields are required');
+            return new RedirectResponse($app->getUrlGeneratorService()->generate('loginRender', [
+                TenantConfigInitializer::REQUEST_KEY => $data['tid'],
+                'login_hint' => $data['user_name'],
+            ]));
         }
 
-        $messages = [];
         try {
-            call_user_func(new TenantConfigInitializer($app), $request);
+            $tenantConfigInitializer = new TenantConfigInitializer($app);
+            $tenantConfigInitializer($request);
+
             $token = $app->getUsernamePasswordTokenFactory(
                 $data['user_name'],
                 $data['password']
             )->createAuthenticationToken();
             $app->getLogger()->info('Authentication token for user:{user_name} in tenant:{tid}', [
                 'user_name' => $token->getUsername(),
-                'tid' => $sessionService->get('tenant'),
+                'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
                 'tags' => ['IdM.main'],
             ]);
             $token = $app->getAuthManagerService()->authenticate($token);
         } catch (BadCredentialsException $e) {
-            $messages[] = 'Invalid credentials';
+            $flashBag->add('error', 'Invalid credentials');
 
             $app->getLogger()->notice('Bad credentials occurred for user:{user_name} in tenant:{tid}', [
                 'user_name' => $token->getUsername(),
-                'tid' => $sessionService->get('tenant'),
+                'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
                 'tags' => ['IdM.main'],
             ]);
         } catch (AuthenticationException $e) {
-            $messages[] = $e->getMessage();
+            $flashBag->add('error', $e->getMessage());
 
             $app->getLogger()->warning('Authentication Exception occurred for user:{user_name} in tenant:{tid}', [
                 'user_name' => $token->getUsername(),
-                'tid' => $sessionService->get('tenant'),
+                'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
                 'exception' => $e,
                 'tags' => ['IdM.main'],
             ]);
         } catch (\InvalidArgumentException $e) {
-            $messages[] = 'Invalid credentials';
+            $flashBag->add('error', 'Invalid credentials');
+
             $app->getLogger()->warning('User:{user_name} try login with invalid tenant:{tid}', [
                 'user_name' => $data['user_name'],
                 'tid' => $data['tid'],
@@ -161,7 +194,8 @@ class MainController
                 'tags' => ['IdM.main'],
             ]);
         } catch (\RuntimeException $e) {
-            $messages[] = 'Invalid credentials';
+            $flashBag->add('error', 'Invalid credentials');
+
             $app->getLogger()->warning('User:{user_name} try login with not existing tenant:{tid}', [
                 'user_name' => $data['user_name'],
                 'tid' => $data['tid'],
@@ -169,60 +203,127 @@ class MainController
                 'tags' => ['IdM.main'],
             ]);
         } catch (\Exception $e) {
-            $messages[] = 'APP ERROR: ' . $e->getMessage();
+            $flashBag->add('error', 'APP ERROR: ' . $e->getMessage());
 
             $app->getLogger()->error('Exception occurred for user:{user_name} in tenant:{tid}', [
                 'user_name' => $data['user_name'],
-                'tid' => $sessionService->get('tenant'),
+                'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
                 'exception' => $e,
                 'tags' => ['IdM.main'],
             ]);
         }
 
         if (!empty($token) && $token->isAuthenticated()) {
-            $tenantSrn = Srn\Converter::fromString($sessionService->get('tenant'));
-            $userIdentity = $token->getUser()->getLocalUser()->getAttribute('id');
-            $userSrn = $app->getSrnManager()->createUserSrn($tenantSrn->getTenantId(), $userIdentity);
-            $token->setAttribute('srn', Srn\Converter::toString($userSrn));
-            if ($sessionService->get('consent')) {
-                $sessionService->set('authenticatedUser', $token);
-                return $app->redirect($app->getUrlGeneratorService()->generate('consentConfirmation'));
-            }
+            $tenant = $sessionService->get(TenantConfigInitializer::SESSION_KEY);
+            $tenantSrn = Srn\Converter::fromString($tenant);
 
-            $app->getLogger()->info('Redirect user:{user_name} in tenant:{tid} to route:{route}', [
-                'user_name' => $token->getUsername(),
-                'tid' => $sessionService->get('tenant'),
-                'route' => 'loginEndPoint',
+            $userIdentity = $token->getUser()->getLocalUser()->getAttribute('id');
+            $userSrn = $app->getSrnManager($tenantSrn->getRegion())
+                ->createUserSrn($tenantSrn->getTenantId(), $userIdentity);
+            $user = Srn\Converter::toString($userSrn);
+
+            $token->setAttribute('srn', $user);
+            $token->setAttribute('tenantSrn', $tenant);
+            $app->getRememberMeService()->store($token);
+
+            $app->getLogger()->info('Authentication success for {user_name} and {tenant} from {ip}', [
+                'user_name' =>  $user,
+                'tenant' => $tenant,
+                'ip' => $request->getClientIp(),
                 'tags' => ['IdM.main'],
             ]);
-            return RedirectResponse::create($app->getUrlGeneratorService()->generate(
-                'loginEndPoint',
-                [
-                    'tid' => $sessionService->get('tenant'),
-                    'user_name' => $token->getUsername(),
-                    'provider' => $token->getProviderKey(),
-                ]
-            ));
+
+            return $this->redirectAuthenticatedUser($app, $token);
         }
 
-        return $this->renderLoginForm($app, [
-            'tid' => $sessionService->get('tenant'),
-            'user_name' => $data['user_name'],
-            'messages' => $messages,
-        ]);
+        return new RedirectResponse($app->getUrlGeneratorService()->generate('loginRender', [
+            TenantConfigInitializer::REQUEST_KEY => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
+            'login_hint' => $data['user_name'],
+        ]));
     }
 
     /**
-     * check if csrf token is valid
-     * @param $value
-     * @param ExecutionContextInterface $context
-     * @param CsrfTokenManagerInterface $csrfManager
+     * LogOut action
+     * @param Application $app
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function checkCsrfToken($value, ExecutionContextInterface $context, CsrfTokenManagerInterface $csrfManager)
+    public function logoutAction(Application $app, Request $request): RedirectResponse
     {
-        if (!$csrfManager->isTokenValid(new CsrfToken(self::MAIN_FORM_TOKEN_ID, $value))) {
-            $context->buildViolation('CSRF attack detected.')->addViolation();
+        $token = $app->getRememberMeService()->retrieve();
+        if ($token instanceof SAMLResultToken) {
+            $user = $token->getUser();
+            $url = $app->getUrlGeneratorService()->generate(
+                'samlLogoutInit',
+                [
+                    'nameId' => $user->getAttribute('identityValue'),
+                    'redirect_uri' => $app->getLogoutService()->getRedirectUrl($request),
+                    'sessionIndex' => $token->getAttribute('IdPSessionIndex'),
+                ]
+            );
+            return RedirectResponse::create($url);
         }
+        return $app->getLogoutService()->logout($request);
+    }
+
+    /**
+     * Redirect user to consent or landing page
+     *
+     * @param Application $app
+     * @param TokenInterface $token Authenticated result token
+     * @return RedirectResponse
+     */
+    protected function redirectAuthenticatedUser(Application $app, TokenInterface $token): RedirectResponse
+    {
+        if ($app->getUserPasswordChecker()->isPasswordExpired($token)) {
+            return $app->redirect($app->getUrlGeneratorService()->generate('showChangePasswordForm'));
+        }
+
+        $sessionService = $app->getSession();
+
+        if ($sessionService->get('consent')) {
+            /** @var ConsentToken $consentToken */
+            $consentToken = $sessionService->get('consent');
+            $consentToken->setTenantSRN($token->getAttribute('tenantSrn'));
+
+            $sessionService->set('authenticatedUser', $token);
+            return $app->redirect($app->getUrlGeneratorService()->generate('consentConfirmation'));
+        }
+
+        $app->getLogger()->info('Redirect user:{user_name} in tenant:{tid} to route:{route}', [
+            'user_name' => $token->getUsername(),
+            'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
+            'route' => 'loginEndPoint',
+            'tags' => ['IdM.main'],
+        ]);
+        return RedirectResponse::create($app->getUrlGeneratorService()->generate(
+            'loginEndPoint',
+            [
+                'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
+                'user_name' => $token->getUsername(),
+                'provider' => $token->getProviderKey(),
+            ]
+        ));
+    }
+
+    /**
+     * Process unauthenticated user
+     * @param Application $app
+     * @param string $error
+     * @return RedirectResponse|string
+     */
+    protected function processUnauthenticatedUser(Application $app, $error)
+    {
+        $session = $app->getSession();
+        $session->getFlashBag()->add('error', $error);
+        if ($session->get('consent')) {
+            return $app->redirect($app->getUrlGeneratorService()->generate('consentCancel'));
+        }
+
+        return $this->renderLoginForm(
+            $app,
+            ['tid' => '', 'user_name' => '', 'show_sso_button' => true, 'ssoLogin' => false]
+        );
     }
 
     /**
@@ -237,10 +338,8 @@ class MainController
             'tags' => ['IdM.main'],
         ]);
         $params = array_merge($params, [
-            'csrf_token' => $app->getCsrfTokenManager()->getToken(self::MAIN_FORM_TOKEN_ID)
+            'csrf_token' => $app->getCsrfTokenManager()->getToken(CustomAssert\Csrf::FORM_TOKEN_ID)
         ]);
-        return $app->getTwigService()->render('main/login.html.twig', array_merge([
-            'alert' => (!empty($params['messages'])) ? join('. ', $params['messages']) : null,
-        ], $params));
+        return $app->getTwigService()->render('main/login.html.twig', $params);
     }
 }

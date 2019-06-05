@@ -494,21 +494,23 @@ in use by a data set, especially if the data set has the custom layout enabled.
 	}
 
 	function remove_layout($column_name){
-
-
-		$query = "	SELECT dataset_layouts.id 'id', dataset_layouts.parent_id 'parent_id'
-					FROM dataset_layouts
-					LEFT JOIN data_sets ON data_sets.id = dataset_layouts.parent_id
-					WHERE data_sets.query_id = '".$this->id."'
-					AND dataset_layouts.parent_value='".$column_name."'
-					AND data_sets.deleted = 0
-					AND dataset_layouts.deleted = 0
-					";
-        $result = $this->getSlaveDb()->query($query, true, "Error running query removing layout for column");
-		$GLOBALS['log']->debug("check custom binding remove layout: result is ".print_r($result,true));
-		//data sets exists with this query and custom layout enabled
-        while (($row = $this->getSlaveDb()->fetchByAssoc($result)) != null) {
-
+        $query = <<<SQL
+SELECT dataset_layouts.id 'id', dataset_layouts.parent_id 'parent_id'
+FROM dataset_layouts
+LEFT JOIN data_sets ON data_sets.id = dataset_layouts.parent_id
+WHERE data_sets.query_id = ?
+AND dataset_layouts.parent_value= ?
+AND data_sets.deleted = 0
+AND dataset_layouts.deleted = 0
+SQL;
+        $stmt = $this->getSlaveDb()
+            ->getConnection()
+            ->executeQuery(
+                $query,
+                [$this->id, $column_name]
+            );
+        //data sets exists with this query and custom layout enabled
+        foreach ($stmt as $row) {
 			//First re-order the list_order_x
 				$layout_object = new DataSet_Layout();
 				$layout_object->retrieve($row['id']);
@@ -521,14 +523,13 @@ in use by a data set, especially if the data set has the custom layout enabled.
 				$layout_object->mark_deleted($row['id']);
 
 			//Third, remove the attribute records
-				$query = "	UPDATE dataset_attributes
-							SET deleted=1
-							WHERE parent_id='".$row['id']."'
-							AND deleted=0
-						";
-				$this->db->query($query,true,"Error deleting query_id from datasets: ");
+            $this->db->getConnection()
+                ->update(
+                    'dataset_attributes',
+                    ['deleted' => 1],
+                    ['parent_id' => $row['id'], 'deleted' => 0]
+                );
 
-			//end while
 			}
 		//end if rows exist
 		//}

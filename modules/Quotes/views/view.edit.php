@@ -229,7 +229,7 @@ class QuotesViewEdit extends ViewEdit
                         format_money($product_bundle->shipping, false) . "' );\n";
 
 					if (is_array($bundle_list)) {
-						while (list($key, $line_item) = each ($bundle_list)) {
+                        foreach ($bundle_list as $line_item) {
 							if ($line_item->object_name == "Product") {
 								/* @var $line_item Product */
                                 $tax_class_name = isset($line_item->tax_class) ? $line_item->tax_class : "";
@@ -298,7 +298,7 @@ class QuotesViewEdit extends ViewEdit
                         //bug 39573 - Comments are not duplicated in quotes
                         $bundle_list = $product_bundle->get_product_bundle_line_items();
                         if (is_array($bundle_list)){
-                            while (list($key, $line_item) = each ($bundle_list)){
+                            foreach ($bundle_list as $line_item) {
                                 if ($line_item->object_name == "ProductBundleNote"){
                                     $encoded_description = js_escape(br2nl($line_item->description));
                                     $add_row[] = "quotesManager.addCommentRow('$line_item->id', 'group_$product_bundle->id', '$encoded_description');\n";

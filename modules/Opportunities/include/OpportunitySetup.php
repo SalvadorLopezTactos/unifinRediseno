@@ -709,7 +709,12 @@ EOL;
         if (!empty($this->reportchange['redefine'])) {
             $default_reports_mapped = array();
 
-            $default_reports = get_default_reports();
+            $default_reports = array_merge(
+                get_sales_marketing_reports(),
+                get_customer_service_reports(),
+                get_data_privacy_reports(),
+                get_admin_reports()
+            );
             foreach ($default_reports as $row) {
                 $default_reports_mapped[$row[1]] = $row;
             }

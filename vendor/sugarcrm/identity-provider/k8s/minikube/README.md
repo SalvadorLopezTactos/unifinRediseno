@@ -50,7 +50,7 @@ Run `./build-docker-minikube.sh` with appropriate flags:
 
 This will roll out all the needed kubernetes namespaces, deployments, pods and services inside minikube.
 
-1. Run `kubectl --namespace idm-ns get pods` and `kubectl --namespace idm-ns get deployments` to be sure all pods and
+1. Run `kubectl --namespace idm-ns-localhost get pods` and `kubectl --namespace idm-ns-localhost get deployments` to be sure all pods and
 deployments are running.
 
     **READY** column should be like *1/1*, **STATUS** column should be *Running*.
@@ -63,14 +63,17 @@ deployments are running.
     or are currently in the process of pull/deployment.
 
 1. Additionally you may want to see your services and/or obtain their DNS names inside kubernetes cloud.
-You can do that by running `kubectl --namespace idm-ns get services`
+You can do that by running `kubectl --namespace idm-ns-localhost get services`
 
 1. Connect to deployment with Selenium and Chrome via VNC:
     * In the second terminal tab run
-`kubectl --namespace idm-ns port-forward $(kubectl --namespace idm-ns get pods --selector=app=selenium --output=name | cut -d'/' -f 2) 5900:5900`
+`kubectl --namespace idm-ns-localhost port-forward $(kubectl --namespace idm-ns-localhost get pods --selector=app=selenium --output=name | cut -d'/' -f 2) 5900:5900`
     * Run `open vnc://127.0.0.1:5900` (command for macOS. Other OS should behave similarly).
     * In VNC window enter password "secret" ([see](https://github.com/SeleniumHQ/docker-selenium#debugging))
-Now you should see VNC window with Linux running Chrome browser. Here Behat tests will be physically launched. 
+Now you should see VNC window with Linux running Chrome browser. Here Behat tests will be physically launched.
+ 
+    *Please note that all tests run in '--headless' mode. It means that Chrome browser is not visible. If you want to
+     see Chrome you should remove this option from behat.yml.template*
 
 1. Given kubernetes objects are up and running you can run one of the Behat suites:
     * *Local* - "default"
@@ -78,11 +81,11 @@ Now you should see VNC window with Linux running Chrome browser. Here Behat test
     * *SAML* - "saml"
 
     To do that run 
-    `kubectl --namespace idm-ns exec -it idm -- tests/behat/behat.sh -u ${mangoUrl} -s ${suite} -e selenium -l ldap -n idm-ns`
+    `kubectl --namespace idm-ns-localhost exec -it idm -- tests/behat/behat.sh -u ${mangoUrl} -s ${suite} -e selenium -l ldap -n idm-ns-localhost`
     
     If you see an error message similar to `tests/behat/behat.sh: line 123: ../../vendor/bin/behat: No such file or directory`,
     it means that you do not have installed vendors in `idm` image (and hence locally).
-    To solve this issue simply run: `kubectl --namespace idm-ns exec -it idm -- composer install`
+    To solve this issue simply run: `kubectl --namespace idm-ns-localhost exec -it idm -- composer install`
 
     Where:
     * `${mangoUrl}` is URL of the container with installed SugarCRM

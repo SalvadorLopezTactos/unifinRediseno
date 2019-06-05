@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Feil ble funnet under kompatibilitetskontrollen.  For at SugarCRM-installasjonenen skal fungere riktig, utfører du de passende tiltakene for å løse problemene nedenfor, og trykker enten på knappe «sjekk på nytt» eller prøv å installere på nytt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Tillat Call Time Pass Reference er på (dette bør settes til av i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ikke funnet: Sugar Scheduler vil kjøre med begrenset funksjonalitet. E-postarkiveringstjenesten vil ikke kjøre.',
+	'ERR_CHECKSYS_CURL'					=> 'Finner ikke: Sugar Scheduler vil kjøres med begrenset funksjonalitet. Tjenesten e-postarkivering kjøres ikke.',
     'ERR_CHECKSYS_IMAP'					=> 'Finner ikke: InnkommendeE-post og kampanjer (e-post) krever IMAP-bibliotek. Ingen av dem kommer til å være funksjonell.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan ikke slås «På» når du bruker MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Advarsel: ',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For den optimale bruken av IIS/FastCGI sapi, angi fastcgi.logging til 0 i php.ini-filen.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Ikke-støttet PHP-versjon installert: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er utilgjengelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasestøtte ble ikke funnet. Sørg for at du har nødvendige drivere for en av følgende støttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du må kanskje fjerne kommentering av utvidelsen i php.ini-filen, eller rekompilere med rett binær fil, avhengig av din versjon av PHP. Se din PHP-håndbok for mer informasjon om hvordan du aktiverer databasestøtte.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Finner ikke database-støtte.  Kontroller at du har de nødvendige driverne for en av følgende støttede databasetyper: MySQL, MS SQL, Oracle eller DB2.  Du må kanskje avkommentere utvidelsen i filen php.ini, eller rekompilere med rett binærfil, avhengig av din versjon av PHP.  Se PHP-håndboken for mer informasjon om hvordan du aktiverer Databasestøtte.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Finner ikke funksjonene tilknyttet XML-analysebibliotekene som Sugar-programmet trenger. Du må kanskje avkommentere utvidelsen i php.ini-filen, eller omkompilere med rett binærfil, avhengig av din  PHP-versjon. Se PHP-veiledningen for mer informasjon.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptallsgeneratoren',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksjoner knyttet til Multibyte Strings PHP-forlengelsen (mbstring) som Sugar-programmet trenger ble ikke funnet. <br/> <br/> Vanligvis er ikke mbstring-modulen aktivert som standard i PHP, og må aktiveres med --enable-mbstring når PHP binære bygges. Se PHP-veiledningen for mer informasjon om hvordan du aktiverer mbstring-støtte.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Innstillingen session.save_path i php-konfigurasjonsfilen (php.ini) er ikke angitt eller er satt til en mappe som ikke finnes. Du må kanskje angi innstillingen save_path i php.ini eller bekrefte at mappesettene i save_path finnes.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Innstillingen session.save_path i php konfigurasjonsfilen (php.ini) er satt til en mappe som ikke kan redigeres. Utfør de nødvendige tiltakene for å gjøre mappen redigerbar.<br>Avhengig av operativsystemet, krever dette at du endre tillatelsene ved å kjøre chmod 766 eller høyreklikker på filnavnet for å få tilgang til egenskapene og fjerner merkingen av skrivebeskyttet-alternativet.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfigurasjonsfilen finnes, men kan ikke redigeres.  Utfør nødvendige tiltak for å gjøre filen redigerbar.  Avhengig av operativsystemet, kan dette krever at du endre tillatelsene ved å kjøre chmod 766 eller høyreklikk på filnavnet for å få tilgang til egenskapene og fjerne merkingen av skrivebeskyttet-alternativet.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP-modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB-strengmodul',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (ingen grense)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (ubegrenset)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP-minnegrense',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Ny kontoinformasjon',
         'description' => 'Denne malen brukes når systemadministratoren sender et nytt passord til en bruker.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Her er ditt kontobrukernavn og midlertidige passord:</p><p>Brukernavn : $contact_user_user_name </p><p>Passord : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Etter du logger inn med passordet ovenfor, blir du kanskje bedt om å endre passordet.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Her er ditt kontobrukernavn og midlertidige passord:</p><p>Brukernavn : $contact_user_user_name </p><p>Passord : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Etter du logger inn med passordet ovenfor, blir du kanskje bedt om å endre passordet.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Her er ditt kontobrukernavn og midlertidige passord:
@@ -496,7 +494,7 @@ Etter du har logget på med passordet ovenfor, bes du kanskje om å endre passor
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Tilbakestill kontopassordet',
         'description' => "Denne malen brukes til å sende en bruker en lenk for å tilbakestille brukerens passord.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Nylig ba du på $contact_user_pwd_last_changed om å få endre kontopassordet ditt. </p><p>Klikk på lenken nedenfor for å tilbakestille passordet:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Nylig ba du på $contact_user_pwd_last_changed om å få endre kontopassordet ditt. </p><p>Klikk på lenken nedenfor for å tilbakestille passordet:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Nylig ba du på $contact_user_pwd_last_changed om å få endre kontopassordet ditt. 

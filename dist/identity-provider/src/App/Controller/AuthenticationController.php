@@ -13,7 +13,6 @@
 namespace Sugarcrm\IdentityProvider\App\Controller;
 
 use Sugarcrm\IdentityProvider\App\Application;
-use Sugarcrm\IdentityProvider\App\Authentication\OpenId\StandardClaims;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Srn;
@@ -69,6 +68,9 @@ class AuthenticationController
             $initializer = new TenantConfigInitializer($app);
             $initializer->__invoke($request);
 
+            $tenantSrn = Srn\Converter::fromString($request->getSession()->get(TenantConfigInitializer::SESSION_KEY));
+            $app->getBearerAuthentication()->authenticateClient($request, $tenantSrn);
+
             $token = $app->getUsernamePasswordTokenFactory(
                 $data['user_name'],
                 $data['password']
@@ -78,13 +80,15 @@ class AuthenticationController
                 'tags' => ['IdM.rest.authentication'],
             ]);
             $token = $app->getAuthManagerService()->authenticate($token);
-            $tenantSrn = Srn\Converter::fromString($request->getSession()->get('tenant'));
             /** @var User $localUser */
             $localUser = $token->getUser()->getLocalUser();
             $userIdentity = $localUser->getAttribute('id');
-            $userSrn = $app->getSrnManager()->createUserSrn($tenantSrn->getTenantId(), $userIdentity);
+            $userSrn = $app->getSrnManager($tenantSrn->getRegion())->createUserSrn(
+                $tenantSrn->getTenantId(),
+                $userIdentity
+            );
 
-            $claims = (new StandardClaims())->getUserClaims($localUser);
+            $claims = $app->getOIDCClaimsService()->getUserClaims($localUser);
             $claims['tid'] = Srn\Converter::toString($tenantSrn);
 
             $result = [
@@ -94,16 +98,22 @@ class AuthenticationController
                     'id_ext' => $claims,
                 ],
             ];
+            $app->getLogger()->info('Authentication success for {user_name} and {tenant} from {ip}', [
+                'user_name' =>  Srn\Converter::toString($userSrn),
+                'tenant' => Srn\Converter::toString($tenantSrn),
+                'ip' => $request->getClientIp(),
+                'tags' => ['IdM.rest.authentication'],
+            ]);
             return new JsonResponse($result);
         } catch (BadCredentialsException $e) {
             $app->getLogger()->notice('Bad credentials occurred for user:{user_name}', [
-                'user_name' => $token->getUsername(),
+                'user_name' => $data['user_name'],
                 'tags' => ['IdM.rest.authentication'],
             ]);
             return $this->getUnauthorizedResponse('Invalid credentials');
         } catch (AuthenticationException $e) {
             $app->getLogger()->warning('Authentication Exception occurred for user:{user_name}', [
-                'user_name' => $token->getUsername(),
+                'user_name' => $data['user_name'],
                 'exception' => $e,
                 'tags' => ['IdM.rest.authentication'],
             ]);

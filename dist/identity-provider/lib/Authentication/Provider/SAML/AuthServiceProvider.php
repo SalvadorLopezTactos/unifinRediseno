@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\Provider\SAML;
 
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\Constants;
 use Sugarcrm\IdentityProvider\Saml2;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ActionTokenInterface;
 
@@ -26,7 +28,7 @@ class AuthServiceProvider
     protected $authServiceSettings = [];
 
     /**
-     * @var \OneLogin_Saml2_Auth[]
+     * @var Auth[]
      */
     protected $authServices = [];
 
@@ -36,8 +38,8 @@ class AuthServiceProvider
      * @var array
      */
     protected $authBinding = [
-        \OneLogin_Saml2_Constants::BINDING_HTTP_POST => Saml2\AuthPostBinding::class,
-        \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT => Saml2\AuthRedirectBinding::class,
+        Constants::BINDING_HTTP_POST => Saml2\AuthPostBinding::class,
+        Constants::BINDING_HTTP_REDIRECT => Saml2\AuthRedirectBinding::class,
     ];
 
     /**
@@ -59,7 +61,7 @@ class AuthServiceProvider
      *
      * @param ActionTokenInterface $token
      *
-     * @return \OneLogin_Saml2_Auth
+     * @return Auth
      */
     public function getAuthService(ActionTokenInterface $token)
     {
@@ -75,7 +77,7 @@ class AuthServiceProvider
      *
      * @param string $action
      *
-     * @return \OneLogin_Saml2_Auth
+     * @return Auth
      * @throws \InvalidArgumentException
      */
     protected function buildAuthService($action)

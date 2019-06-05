@@ -12,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
-
 // load the correct demo data and main application language file depending upon the installer language selected; if
 // it's not found fall back on en_us
 
@@ -55,7 +54,7 @@ if(empty($app_list_strings)) {
  * Seed the random number generator with a fixed constant.  This will make all installs of the same code have the same
  * seed data.  This facilitates cross database testing..
  */
-mt_srand(93285903);
+mt_srand(93285904);
 $db = DBManagerFactory::getInstance();
 $timedate = TimeDate::getInstance();
 // Set the max time to one hour (helps Windows load the seed data)
@@ -921,9 +920,6 @@ installLog("DemoData: Done Email Templates");
 echo '.';
 
 //enable portal
-$system_config = new Administration();
-$system_config->retrieveSettings();
-$GLOBALS['system_config'] = $system_config;
 $installerStrings = $GLOBALS['mod_strings'];
 $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'ModuleBuilder');
 include('modules/ModuleBuilder/parsers/parser.portalconfig.php');

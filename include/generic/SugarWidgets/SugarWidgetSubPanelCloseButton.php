@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelCloseButton.php 40493 2008-10-13 21:10:05Z jmertic $
 
 
 //TODO Rename this to close button field

@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definiciones de Flujo de Actividad',
   'LBL_MODULE_NAME_SINGULAR' => 'Definición de Flujo de Actividad',
-  'LBL_MODULE_ID' => 'Flujo de Actividad',  
+  'LBL_MODULE_ID' => 'Flujo de Actividad',
   'LBL_MODULE_TITLE' => 'Flujo de Actividad: Inicio',
   'LBL_SEARCH_FORM_TITLE' => 'Búsqueda de Flujo de Actividad',
   'LBL_LIST_FORM_TITLE' => 'Lista de Flujo de Actividad',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Módulo Objetivo:',
   'LBL_LIST_ORDER' => 'Órden de Proceso:',
   'LBL_FROM_NAME' => 'Nombre del Remitente:',
-  'LBL_FROM_ADDRESS' => 'Dirección del Remitente:',  
+  'LBL_FROM_ADDRESS' => 'Dirección del Remitente:',
   'LNK_NEW_WORKFLOW' => 'Crear Definición de Flujo de Actividad',
-  'LNK_WORKFLOW' => 'Listar Definiciones de Flujo de Actividad', 
-  
-  
+  'LNK_WORKFLOW' => 'Listar Definiciones de Flujo de Actividad',
+
+
   'LBL_ALERT_TEMPLATES' => 'Plantillas de Alertas',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Crear una plantilla de alerta:',
   'LBL_SUBJECT' => 'Asunto:',
-  
+
   'LBL_RECORD_TYPE' => 'Aplica a:',
  'LBL_RELATED_MODULE'=> 'Módulo Relacionado:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Secuencia de Flujo de Actividad',
 	'LNK_ALERT_TEMPLATES' => 'Plantillas de Emails de Alerta',
 	'LNK_PROCESS_VIEW' => 'Secuencia de Flujo de Actividad',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> Las funciones de Flujo de Trabajo de Sugar y Administación de Flujo de trabajo se eliminarán en versiones futuras de Sugar. Los clientes de la edición Sugar Enterprise deberían comenzar a utilizar las funciones brindadas por Flujo de Trabajo Avanzado de Sugar. Haga clic <a href="http://www.sugarcrm.com/wf-eol" target="_blank">aquí</a> para más información.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> La funcionalidad de Sugar Workflow and la Administración de Workflow está en modo de mantenimiento. Los clientes de la edición Sugar Enterprise deberían utilizar la funcionalidad proporcionada por SugarBPM<sup class="trademark">TM</sup>.',
 );
 

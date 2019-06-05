@@ -27,16 +27,15 @@
  */
 class JSON
 {
-
     /**
      * JSON encode a string
      *
-     * @param string $string
+     * @param mixed $value
      * @return string
      */
-    public static function encode($string)
+    public static function encode($value)
     {
-        return json_encode($string, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT);
+        return json_encode($value, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT);
     }
 
     /**

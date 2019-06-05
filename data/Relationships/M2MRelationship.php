@@ -453,8 +453,14 @@ class M2MRelationship extends SugarRelationship
             }
         }
         $rel_table = $this->getRelationshipTable();
-
-        $where = "$rel_table.$knownKey = '{$link->getFocus()->id}'" . $this->getRoleWhere();
+        $db = $link->getFocus()->db;
+        $where = sprintf(
+            '%s.%s = %s %s',
+            $rel_table,
+            $knownKey,
+            $db->quoted($link->getFocus()->id),
+            $this->getRoleWhere()
+        );
 
         //Add any optional where clause
         if (!empty($params['where']) && !empty($whereTable)){
@@ -496,7 +502,7 @@ class M2MRelationship extends SugarRelationship
             //Limit is not compatible with return_as_array
             if (!empty($params['limit']) && $params['limit'] > 0) {
                 $offset = isset($params['offset']) ? $params['offset'] : 0;
-                $query = DBManagerFactory::getInstance()->limitQuery($query, $offset, $params['limit'], false, "", false);
+                $query = $db->limitQuery($query, $offset, $params['limit'], false, "", false);
             }
             return $query;
         }
@@ -560,6 +566,11 @@ class M2MRelationship extends SugarRelationship
         $query->select(array(array("$rel_table.$targetKey", 'id'))); // id is an alias here
         foreach ($this->getAdditionalFields() as $field => $def) {
             $query->select()->addField("$rel_table.$field");
+        }
+
+        $ownerField = $relatedSeed->getOwnerField();
+        if ($ownerField) {
+            $query->select([[$ownerField, 'related_owner_id']]);
         }
 
         $query->where()->equals("$rel_table.$knownKey", $link->getFocus()->id);

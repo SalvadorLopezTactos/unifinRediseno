@@ -120,9 +120,11 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
         if (!$this->getId()) {
             return;
         }
-        if (function_exists('session_status') && session_status() != PHP_SESSION_ACTIVE) {
+
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             return;
         }
+
         session_write_close();
         $_SESSION = $this;
         $this->closed = true;
@@ -149,7 +151,7 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
     }
 
     /**
-     * Restart the last used php session without producing side effects.
+     * Restart the last used php session.
      */
     protected function restart()
     {
@@ -157,22 +159,8 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
             return;
         }
 
-        $options = array(
-            'session.use_cookies' => false,
-            'session.cache_limiter' => null,
-        );
-
-        $backup = array();
-        foreach ($options as $key => $value) {
-            $backup[$key] = ini_set($key, $value);
-        }
-
         session_id($this->lastId);
         session_start();
-
-        foreach ($backup as $key => $value) {
-            ini_set($key, $value);
-        }
     }
 
     protected static function registerShutdownFunction($previousUserId)
@@ -186,9 +174,10 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
                     if (!$sessionObject->isClosed()) {
                         $_SESSION = $sessionObject->getArrayCopy();
                     } else {
-                        // session_start() sends http headers such as 'Cache-Control' depending on php configs
-                        // flush ob to send out these headers so they won't be overwritten
-                        while (@ob_end_flush());
+                        if (!$sessionObject->getChangedKeys()) {
+                            return;
+                        }
+
                         $sessionObject->restart();
                         //First verify that the sessions still match and we didn't somehow switch users.
                         if ((!isset($_SESSION['user_id']) && $previousUserId) ||

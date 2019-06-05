@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -85,6 +85,7 @@ final class KeyConverter
 
             return $values;
         }
+
         throw new \InvalidArgumentException('Unable to load the certificate');
     }
 
@@ -152,10 +153,10 @@ final class KeyConverter
         self::sanitizePEM($pem);
 
         $res = openssl_pkey_get_private($pem);
-        if ($res === false) {
+        if (false === $res) {
             $res = openssl_pkey_get_public($pem);
         }
-        Assertion::false($res === false, 'Unable to load the key');
+        Assertion::false(false === $res, 'Unable to load the key');
 
         $details = openssl_pkey_get_details($res);
         Assertion::isArray($details, 'Unable to get details of the key');
@@ -206,6 +207,7 @@ final class KeyConverter
             if (false === $x509) {
                 $last_issuer = null;
                 $last_subject = null;
+
                 break;
             }
             $parsed = openssl_x509_parse($x509);
@@ -214,6 +216,7 @@ final class KeyConverter
             if (false === $parsed) {
                 $last_issuer = null;
                 $last_subject = null;
+
                 break;
             }
             if (null === $last_subject) {
@@ -227,6 +230,7 @@ final class KeyConverter
                 } else {
                     $last_issuer = null;
                     $last_subject = null;
+
                     break;
                 }
             }

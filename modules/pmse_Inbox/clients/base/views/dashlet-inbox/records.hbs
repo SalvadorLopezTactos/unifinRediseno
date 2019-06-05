@@ -49,7 +49,13 @@
                         <date class="date">{{relativeTime attributes.date_modified}}</date>
                         <strong>{{fieldValue this "task_name"}}</strong>
                                 <br/>
-                        <strong>{{fieldValue this "pro_title"}}</strong>
+                        {{#if attributes.linkToPD}}
+                            <a href="#{{buildRoute module="pmse_Project" id=attributes.prj_id action="detail"}}">
+                                {{fieldValue this "pro_title"}}
+                            </a>
+                        {{else}}
+                            <strong>{{fieldValue this "pro_title"}}</strong>
+                        {{/if}}
                         {{#if useRelativeTime}}
                             Due
                             {{relativeTime attributes.cas_due_date class='date'}}

@@ -112,8 +112,14 @@ $vardefs = array (
             'duplicate_on_record_copy' => 'always',
 			'comment' => 'Free-form text used to denote activities of interest'
 		),
-
-
+        'follow_up_datetime' => array(
+            'name' => 'follow_up_datetime',
+            'vname' => 'LBL_FOLLOW_UP_DATETIME',
+            'type' => 'datetimecombo',
+            'dbType' => 'datetime',
+            'comment' => 'Deadline for following up on an issue',
+            'audited' => true,
+        ),
 	),
 	'indices'=>array(
 		 'number'=>array('name' =>strtolower($module).'numk', 'type' =>'unique', 'fields'=>array($_object_name . '_number'))

@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Creați perioadele viitoare de timp',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualizaţi articolele KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicare articole aprobate şi Expirare articole KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicați articole aprobate și articole KB expirate.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Funcție programată',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruire date de securitate echipă denormalizate',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Verificaţi Conturi Inbound Mail',
 'LBL_PERFORMFULLFTSINDEX' => 'Full-text de căutare sistem de index',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Eliminare fişiere PDF temporare',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicare articole aprobate şi Expirare articole KB.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicați articole aprobate și articole KB expirate.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Programator de coadă Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eliminare fişiere instrument de diagnosticare',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eliminare fişiere temporare',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Rulare trimitere mementouri e-mail',
 'LBL_CLEANJOBQUEUE' => 'Curăţare coadă de operaţii',
 'LBL_CLEANOLDRECORDLISTS' => 'Curăţare liste înregistrări vechi',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'Programator SugarBPM',
 );
 

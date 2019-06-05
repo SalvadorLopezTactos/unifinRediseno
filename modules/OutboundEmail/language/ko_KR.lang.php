@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => '이것은 시스템 계정입니다.',
     'LBL_EMAIL_ADDRESS_ID' => '이메일 주소 ID',
     'LBL_TYPE' => '유형',
+    'LBL_REPLY_TO_NAME' => '답장할 이름',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => '답장할 이메일 주소',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '답장할 이메일 주소 ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => '답장할 이메일 주소',
+    'LBL_PRIMARY_TEAM' => '기본 팀',
 );

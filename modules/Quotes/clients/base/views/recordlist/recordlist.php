@@ -17,7 +17,7 @@ $viewdefs['Quotes']['base']['view']['recordlist'] = array(
         'type' => 'multi',
         'actions' => array(
             array(
-                'name' => 'edit_button',
+                'name' => 'massupdate_button',
                 'type' => 'button',
                 'label' => 'LBL_MASS_UPDATE',
                 'primary' => true,

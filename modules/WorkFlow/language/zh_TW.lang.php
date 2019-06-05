@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => '工作流程定義',
   'LBL_MODULE_NAME_SINGULAR' => '工作流程定義',
-  'LBL_MODULE_ID' => '工作流程',  
+  'LBL_MODULE_ID' => '工作流程',
   'LBL_MODULE_TITLE' => '工作流程：首頁',
   'LBL_SEARCH_FORM_TITLE' => '工作流程搜尋',
   'LBL_LIST_FORM_TITLE' => '工作流程清單',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => '目標模組：',
   'LBL_LIST_ORDER' => '流程順序：',
   'LBL_FROM_NAME' => '發件者名稱：',
-  'LBL_FROM_ADDRESS' => '發件者地址：',  
+  'LBL_FROM_ADDRESS' => '發件者地址：',
   'LNK_NEW_WORKFLOW' => '建立工作流程釋義',
-  'LNK_WORKFLOW' => '列出工作流程釋義', 
-  
-  
+  'LNK_WORKFLOW' => '列出工作流程釋義',
+
+
   'LBL_ALERT_TEMPLATES' => '警示範本',
   'LBL_CREATE_ALERT_TEMPLATE' => '建立警示範本：',
   'LBL_SUBJECT' => '主題：',
-  
+
   'LBL_RECORD_TYPE' => '適用於：',
  'LBL_RELATED_MODULE'=> '相關模組：',
-  
-  
+
+
   'LBL_PROCESS_LIST' => '工作流程順序',
 	'LNK_ALERT_TEMPLATES' => '警示電子郵件範本',
 	'LNK_PROCESS_VIEW' => '工作流程順序',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => '類型',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>附註：</strong> Sugar工作流與工作流管理功能正處於維護模式。Sugar企業版用戶可使用 SugarBPM<sup class="trademark">TM</sup>提供的功能。',
 );
 

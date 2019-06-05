@@ -158,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Унікальний ідентифікатор користувача, який використовується для перевірки належності користувача до певної групи, наприклад <em>uid</em>',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Унікальний атрибут групи, наприклад: <em>memberUid</em>',
 	'LBL_LDAP_GROUP_ATTR'=>'Атрибут групи:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Авторизація користувача LDAP <br> наприклад : <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Відображати панель завантажень',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Коли ця опція включена, панель завантажень буде відображатися в налаштуваннях користувача і надавати користувач доступ до розширень Sugar і іншим доступним файлів.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Для SOAP-авторизації при використанні LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Розширення php_mcrypt повинно бути включено у файлі php.ini або ж php повинен бути скомпільований із зазначенням відповідного ключа.',
     'LBL_ALL' => 'Всі',
     'LBL_MARK_POINT' => 'Встановити контрольну точку',
     'LBL_NEXT_' => 'Наступний',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Активності',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активація стрічки активностей',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Активація стрічки активностей для додатку',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Відображати додатковий вміст екрана входу',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Автоматичне збереження визначень процесів',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Визначає, як часто виконується автоматичне збереження визначень процесів під час використання конструктора',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Автоматично перевіряти визначення процесів під час автоматичного збереження',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Визначає, чи перевіряються автоматично визначення процесів під час автоматичного збереження. Цей параметр застосовується, лише якщо для параметра «Автоматичне збереження визначень процесів» задано певний проміжок часу',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Автоматично перевіряти визначення процесів під час імпорту',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Визначає, чи перевіряються автоматично визначення процесів під час першого імпорту',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Параметри журналу коментарів',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Максимальна кількість символів для відображення в записі коментаря',
 );
 
 

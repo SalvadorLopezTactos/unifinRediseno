@@ -19,7 +19,6 @@ var gutil = require('gulp-util');
 var os = require('os');
 var todo = require('gulp-todo');
 var insert = require('gulp-insert');
-const path = require('path');
 const execa = require('execa');
 
 /**
@@ -52,6 +51,11 @@ function splitByCommas(val) {
 }
 
 gulp.task('karma', function(done) {
+
+    var execSync = require('child_process').execSync;
+    var loadCache = 'php include/Expressions/updatecache.php';
+    execSync(loadCache);
+
     var Server = require('karma').Server;
 
     // get command-line arguments for karma tests
@@ -211,6 +215,9 @@ gulp.task('karma', function(done) {
         // Karma's return status is not compatible with gulp's streams
         // See: http://stackoverflow.com/questions/26614738/issue-running-karma-task-from-gulp
         // or: https://github.com/gulpjs/gulp/issues/587 for more information
+        const rimraf = require('rimraf');
+        rimraf.sync('cache/Expressions/');
+        rimraf.sync('cache/class_map.php');
         done(exitStatus ? 'There are failing unit tests' : undefined);
     }).start();
 });
@@ -239,6 +246,8 @@ gulp.task('test:unit:php', function(done) {
         .option('--ci', 'Set up CI-specific environment')
         .option('--path <path>', 'Set base output path')
         .option('--coverage', 'Enable code coverage')
+        .option('--file <path>', 'File to execute')
+        .option('--suite <suite>', 'Test suite to execute')
         .parse(process.argv);
 
     var workspace = commander.path || process.env.WORKSPACE || os.tmpdir();
@@ -256,6 +265,12 @@ gulp.task('test:unit:php', function(done) {
     if (commander.coverage) {
         args.push('--coverage-html', path.join(workspace, 'coverage'));
         process.stdout.write('Coverage reports will be generated to: ' + path.join(workspace, 'coverage') + '\n');
+    }
+
+    if (commander.file) {
+        args.push(commander.file);
+    } else if (commander.suite) {
+        args.push('--testsuite', commander.suite);
     }
 
     var phpunitPath = path.join('..', '..', 'vendor', 'bin', 'phpunit');
@@ -471,7 +486,13 @@ gulp.task('check-license', function(done) {
             // lock files
             'lock',
             // checksum lists
-            'md5'
+            'md5',
+            // YAML files
+            'yml',
+            // Business Process Management Suite files
+            'bpm',
+            'pbr',
+            'pet'
         ],
         licenseFile: 'LICENSE',
         // Add paths you want to exclude in the whiteList file.
@@ -622,4 +643,71 @@ gulp.task('copy-sucrose', function() {
             'node_modules/d3fc-rebind/LICENSE',
         ])
         .pipe(gulp.dest('include/javascript/d3fc-rebind/'));
+});
+
+gulp.task('bdd:api', function() {
+    const cucumberG = require('gulp-cucumber');
+    commander
+        .option('--url <url>', 'URL of Sugar instance under test')
+        .option('--tags <tags>', 'Tags to run')
+        .parse(process.argv);
+    let url = commander.url;
+    if (!url) {
+        console.log('Instance URL must be specified');
+        return -1;
+    }
+    //Ensure there is always a trailing '/'
+    if (url.substr(-1) !== '/') {
+        url += '/';
+    }
+    let tags;
+    if (commander.tags) {
+        tags = commander.tags + ' and @api';
+    } else {
+        tags = '@api';
+    }
+    process.env.SERVER_CUCUMBER_URL = url;
+    console.log('Running ' + tags + ' tags');
+    return gulp.src('features/*.feature').pipe(cucumberG({
+        'steps': 'tests/api/step_definitions/*.js',
+        'tags': tags
+    }));
+});
+
+gulp.task('bdd:e2e', function() {
+    const exec = require('child_process').exec;
+    commander
+        .option('--url <url>', 'URL of Sugar instance under test')
+        .option('--tags <tags>', 'Tags to run')
+        .parse(process.argv);
+    let url = commander.url;
+    if (!url) {
+        console.log('Instance URL must be specified');
+        return -1;
+    }
+    if (url.substr(-1) !== '/') {
+        url += '/';
+    }
+    let tags = commander.tags || [];
+    let tagStr = '@e2e';
+    if (tags.length > 0) {
+        tagStr = `"${tagStr} and ${tags}"`;
+    }
+    let command = 'node ./tests/end-to-end/node_modules/@sugarcrm/seedbed/bin/seedbed.js ' +
+        `--features ../../features --cfg ./tests/end-to-end/config.js --sp ${url} -u ${url} -t ${tagStr}`;
+    let e2eProcess =  exec(command, {
+        //seedbed can be VERY verbose and needs a huge buffer
+        maxBuffer: 10 * 1024 * 1024
+    });
+    e2eProcess.stdout.on('data', function(data) {
+        console.log(data);
+    });
+    e2eProcess.on('close', function(code, signal) {
+        if (code !== 0) {
+            console.log(`Exiting due to ${signal} code ${code}`);
+        }
+    });
+    e2eProcess.on('error', function(err) {
+        console.log(`Erroring out due to ${err}`);
+    });
 });

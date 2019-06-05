@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'นี่คือบัญชีระบบ',
     'LBL_EMAIL_ADDRESS_ID' => 'ID ที่อยู่อีเมล',
     'LBL_TYPE' => 'ประเภท',
+    'LBL_REPLY_TO_NAME' => 'ชื่อสำหรับตอบกลับ',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'ที่อยู่อีเมลสำหรับตอบกลับ',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID ที่อยู่อีเมลสำหรับตอบกลับ',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'ที่อยู่อีเมลสำหรับตอบกลับ',
+    'LBL_PRIMARY_TEAM' => 'ทีมหลัก',
 );

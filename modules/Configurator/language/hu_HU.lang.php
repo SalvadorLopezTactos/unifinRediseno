@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Letöltés fül megjelenítése',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kiválasztása esetén a Letöltés fül megjelenik a Felhasználói beállításokban és hozzáférést biztosít a Sugar illesztőprogramokhoz, illetve az egyéb elérhető fájlokhoz.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP hitelesítés LDAP használata esetén.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'A php_mcrypt kiterjesztést engedélyezni kell a php.ini fájlban.',
     'LBL_ALL' => 'Bárki',
     'LBL_MARK_POINT' => 'Pont kijelölése',
     'LBL_NEXT_' => 'Tovább>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tevékenységfolyamok',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Tevékenységfolyamok engedélyezése',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Bekapcsolja a tevékenységfolyamokat az alkalmazásban',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Bejelentkezési képernyő kiegészítő tartalmának engedélyezése',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Folyamatdefiníciók automatikus mentése',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Meghatározza, hogy a folyamatdefiníciók automatikus mentése milyen gyakran történik a tervező használata során',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Folyamatdefiníciók automatikus érvényesítése automatikus mentéskor',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Átkapcsolhatja, hogy a folyamatdefiníciókat a rendszer automatikusan érvényesítse-e automatikus mentéskor. Ez csak abban az esetben működik, ha a „Folyamatdefiníciók automatikus mentése” opciót időintervallumra állítja',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Folyamatdefiníciók automatikus érvényesítése importáláskor',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Átkapcsolhatja, hogy a folyamatdefiníciókat a rendszer automatikusan érvényesítse-e első importáláskor',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Megjegyzés naplózási beállítások',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Megjeleníthető karakterek maximális száma megjegyzések bejegyzésnél',
 );
 
 

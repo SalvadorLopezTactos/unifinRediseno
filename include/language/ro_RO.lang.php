@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Setări e-mail',
     'EmailParticipants' => 'Participanți e-mail',
     'DataPrivacy' => 'Confidențialitate date',
+    'ReportSchedules' => 'Raportare Programe',
+    'CommentLog' => 'Jurnal de comentarii',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'Simbol OAuth',
     'Filters' => 'Filtru',
     'Comments' => 'Comentariu',
+    'CommentLog' => 'Jurnal de comentarii',
     'Currencies' => 'Moneda',
     'ProductTemplates' => 'Model produs',
     'ProductTypes' => 'Tipul produsului',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Setare e-mail',
     'EmailParticipants' => 'Participant e-mail',
     'DataPrivacy' => 'Confidențialitate date',
+    'ReportSchedules' => 'Raportare Program',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transport',
     'Utilities' => 'Utilitati',
     'Other' => 'Altul',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Nivel 1',
+    'T2' => 'Nivel 2',
+    'T3' => 'Nivel 3',
+    'T4' => 'Nivel 4',
   ),
   'lead_source_default_key' => 'Autogenerat',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Muta',
         'donothing' => 'Nu face nimic'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Niciodată',
+        30000 => 'La fiecare 30 de secunde',
+        60000 => 'La fiecare 1 minut',
+        120000 => 'La fiecare 2 minute',
+        180000 => 'La fiecare 3 minute',
+        240000 => 'La fiecare 4 minute',
+        300000 => 'La fiecare 5 minute',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'In previziuni',
         'sales_stage' => 'Stadiu vanzare',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Listă',
         'activities' => 'Flux de activități',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'În fiecare oră',
+        '21600' => 'O dată la 6 ore',
+        '43200' => 'O dată la 12 ore',
+        '86400' => 'Zilnic',
+        '604800' => 'Săptămânal',
+        '1209600' => 'O dată la două săptămâni',
+        '2419200' => 'O dată la patru săptămâni',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Urmareste linkul',
   'LBL_TOGGLE_VISIBILITY' => 'Modifica vizibilitatea', // Record view header panel element
   'LBL_ACTIVITIES' => 'Flux de activităţi',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Toate drepturile rezervate.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sincronizeaza toate conturile de email',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Un mesaj a fost trimis catre adresa de email specificata folosind setarile specificate pentru trimitere mesaje. Verifica daca mesajul a fost primit pentru a verifica daca setarile sunt corecte.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Aceasta actiune va sincroniza conturile de email si continutul lor.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vrei sa executi o sincronizare totala?\\nPentru conturile mari de email aceasta actiune poate dura cateva minute.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vrei sa executi o sincronizare totala?\nPentru conturile mari de email aceasta actiune poate dura cateva minute.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Apasa tasta Shift sau Ctrl pentru a selecta mai multe foldere.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Generalităţi',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Grup Foldere disponibile',
@@ -2687,8 +2716,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Este necesara o sesiune activa pentru exportul de continut.',
     'ERR_NO_HEADER_ID' => 'Aceasta functie nu este disponibila in aceasta tema.',
     'ERR_NOT_ADMIN' => "Acces neautorizat in zona de administrare.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Această opțiune este dezactivată în SugarCRM pentru modul IDM și este disponibilă în Consola cloud.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Accesați <a href=\"%s\" target=\"_blank\">Consola cloud</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Gestionarea parolei este disponibilă numai prin setările pentru cloud.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Vă rugăm să luați legătura cu administratorul site-ului web Sugar dacă doriți să modificați câmpurile disponibile numai pentru citire.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Camp obligatoriu lipsa:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Camp obligatoriu invalid:',
     'ERR_INVALID_VALUE' => 'Valoare invalida:',
@@ -2723,6 +2754,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Utilizatorul curent nu are dreptul de a modifica setarile de configurare ale {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Nu ai dreptul de marca {moduleName} ca favorit. Contacteaza administratorul daca ai nevoie de acces.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Nu ai dreptul sa te abonezi la {moduleName}. Contacteaza administratorul daca ai nevoie de acces.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields not found in payload',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns is not an array',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields not found in payload',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows is not an array',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields not found in payload',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Cererea ta a esuat datorita unei exceptii necunoscute.',
@@ -2914,6 +2953,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Alege operaturul...',
     'LBL_FILTER_CREATE_NEW' => 'Creează',
     'LBL_FILTER_CREATE_FILTER' => 'Creare filtru nou',
+    'LBL_FILTER_CLOSE_FILTER' => 'Închidere filtru',
     'LBL_FILTER_EDIT_FILTER' => 'Editare filtru',
     'LBL_FILTER_ALL_RECORDS' => 'Toate înregistrările',
     'TPL_FILTER_SAVE' => 'Ai creat cu succes filtrul {{name}}.',
@@ -3303,7 +3343,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Toate drepturile rezervate.<br />SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'companiilor respective cu care sunt asociate.',
@@ -3412,7 +3452,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Reluare',
     'LNK_VIEW_CHANGE_LOG' => 'Vizualizare jurnal de audit',
     'TPL_AUDIT_LOG_TITLE' => 'Jurnal de audit pentru {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Faceți clic pentru vizualizarea jurnalului de audit pentru adresa de e-mail',
 
     'NTC_CLICK_BACK' => 'Apasa butonul Inapoi al browser-ului pentru a corecta eroarea.',
     'NTC_DATE_FORMAT' => '(aaaa-ll-zz)',
@@ -3449,7 +3489,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Atentie:</b> Browser-ul tau functioneaza in modul compatibility view care nu este recomandat.",
     'WARN_LICENSE_SEATS'=>  "Atentie: Numarul de utilizatori activi este deja egal cu numarul maxim de licente permis.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Atentie: Numarul de utilizatori activi depaseste numarul maxim de licente permis.",
-    'WARN_ONLY_ADMINS'=> "Doar administratorii se pot loga.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Numărul de utilizatori activi depășește limita prevăzută de licență. Luați legătura cu administratorul dvs.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Numai administratorii se pot autentifica.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'S-a atins numărul de utilizatori prevăzut de licență. Numai utilizatorii existenți se pot autentifica.',
+    'WARN_ONLY_ADMINS'=> "Numai administratorii se pot autentifica.",
     'WARN_UNSAVED_CHANGES'=> "Parasesti aceasta inregistrare fara a salva modificarile facute. Esti sigur ca vrei sa parasesti inregistrarea?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Ai efectuat modificari care nu au fost salvate. Esti sigur ca vrei sa parasesti pagina si sa renunti la modificari?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Te muti in modulul Rapoarte. Modificarile facute in acest dashlet nu vor fi salvate. Vrei sa continui?',
@@ -3542,6 +3587,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "You currently have no records saved. <item2> one now.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Puteţi crea <item1> dintr-o listă <item2>. <item3> <item2>.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Faceţi clic aici",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Adăugare la Favoritele mele',
@@ -3647,6 +3693,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Indicatori de performanta pentru Oportunitate',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Măsurători de oportunitate pentru contul asociat.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Selectare rapidă din catalogul de produse',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Afișează elementele utilizate recent și produsele salvate ca preferințe',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Utilizate recent',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favorite',
 
     'LBL_DASHLET_NO_RECORDS' => 'Nu s-a găsit nicio înregistrare moemntan.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Sumar tichete',
@@ -4272,7 +4322,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Viitor',
     'LBL_REQUIRED_FIELD' => 'Obligatoriu',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Articol din ofertă',
+    'LBL_DISCOUNT_TOTAL' => 'Total reducere',
+    'LBL_TAX' => 'Taxă',
+    'LBL_SHIPPING' => 'Curierat',
+    'LBL_GRAND_TOTAL' => 'Total General',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Completare automată a adresei de facturare din profilul contului',
+    'LBL_QLI_ADD_GROUP' => 'Adăugare grup',
+    'LBL_QLI_COMMENT' => 'Comentariu',
+    'LBL_SELECT_ACTION' => 'Selectați acțiunea',
+    'LBL_QLI_GROUP_NAME' => 'Nume Grup',
+    'LBL_GROUP_TOTAL' => 'Total grup',
+    'LBL_ITEM_NAME' => 'Articol',
+    'LBL_QLI_DELETE' => 'Sigur doriți să ștergeți acest articol?',
+    'LBL_QLI_COMMENT_DELETE' => 'Sigur doriți să ștergeți acest comentariu al articolului?',
+    'LBL_QLI_GROUP_DELETE' => 'Sigur doriţi să ştergeţi grupul {0}? Toate elementele vor fi mutate în grupul implicit.',
+    'LBL_QLI_GROUP_EMPTY' => 'Niciun articol în ofertă',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Opţional',
     'LBL_RELATED_MODULE' => '{{{this}}} asociat',
     'LBL_RELATED_MODULE_PLURAL' => '{{{this}}} asociat',
@@ -4302,7 +4372,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Confirm',
     'LBL_NO_ACCESS' => '(Fără acces)',
     'LBL_NO_ACCESS_LOWER' => 'Fără acces',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Imposibilitate de accesare',
     'LBL_VALUE_ERASED' => 'Valoare ștearsă',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Aceste informații au fost șterse prin solicitarea de confidențialitate a datelor',
     'LBL_CREATE_RELATED_RECORD' => 'Creare înregistrare asociată',
@@ -4930,7 +5000,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Task-uri echipa',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Flux de lucru avansat',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'UI BWC',
     'LBL_AUDIT_SUBJECT_API-REST' => 'API REST',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'API SOAP sau Old REST',
@@ -4991,9 +5061,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Aviz:',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
+    'LBL_ALERT_NO_ACCESS' => 'Nu aveți acces la filtrul aplicat acestui dashlet.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Duplicați tabloul de bord pentru a configura acest dashlet cu filtrul propriu.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Versiunea browserului dvs. nu mai este acceptată sau utilizaţi un browser neacceptat.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Sunt recomandate următoarele versiuni de browser: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Consultaţi pagina {{link}} pentru browserele recomandate.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Platforme acceptate',
     'LBL_ALERT_CONFIRM_DELETE' => 'Sigur doriți să ștergeți acest articol?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Sigur doriți să ștergeți aceste articole?',
@@ -5091,7 +5161,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Rezumat istoric',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Mai mult istoric...',
     'LBL_RELATED_CONTACT' => 'Contact corelat',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5165,6 +5235,11 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Setări server SMTP lipsă',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Pentru a trimite notificări de atribuire a înregistrărilor, trebuie să se configureze un server SMTP în {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Setări de e-mail',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Sunt disponibile noi rapoarte de stoc',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Sunt disponibile noi rapoarte de stoc în [...] dumneavoastră ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Modul rapoarte',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Sunt etichetate ca „Raport de stoc” și pot fi filtrate. Rapoartele sunt etichetate și ca „Vânzări și marketing,” „Servicii clienți”, „Confidențialitatea datelor” sau „Administrativ” în funcție de conținut. Pentru mai multe informații, consultați ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'documentație',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM le permite utilizaţilor performanţi să efectueze rapid anumite operaţii cu comenzi rapide de la tastatură, pentru a spori productivitatea. Tabelele din partea dreaptă descriu comenzile rapide disponibile, preucm şi tastele şi acţiunile pe care le execută.',
@@ -5274,23 +5349,26 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procese',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Dashlet-ul Procese afișează șabloanele care pot fi utilizate în cadrul SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Definiţii procese',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Dashlet-ul Definiții procese afișează șabloanele care pot fi utilizate în cadrul SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Creează Definiţie procese',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importă Definiţii procese',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Reguli operative de proces',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Dashlet-ul Norme corporative privind procesele afișează șabloanele care pot fi utilizate în cadrul SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Creează Regulă operativă de proces',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importă Reguli operative de proces',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Şabloane E-mail proces',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Dashlet-ul Șabloane e-mail ale proceselor afișează șabloanele care pot fi utilizate în cadrul SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Creează Şablon E-mail proces',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importă Şabloane E-mail proces',
 
@@ -5314,7 +5392,7 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_PMSE_CANCELLED_STATUS' => 'Anulat',
     'LBL_PMSE_TERMINATED_STATUS' => 'Încheiat',
     'LBL_PMSE_ERROR_STATUS' => 'Eroare',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'Setări SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Sigur doriţi să dezactivaţi această înregistrare?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Sigur doriţi să activaţi această înregistrare?',
@@ -5338,7 +5416,7 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM necesită javascript. Vă rugăm să activaţi javascript pentru a continua să utilizaţi SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Datele serializate nu au putut fi deserializate',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Datele serializate nu au putut fi deserializate, deoarece conţin referiri la obiecte sau clase',
 
@@ -5367,6 +5445,15 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_DATAPRIVACY_PII' => 'Informații personale',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Marcare pentru ștergere',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Informații personale pentru {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Copiat în clipboard!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Eroare la copiere în clipboard',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Copiere link de confirmare',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Afişare mai multe...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Afișare mai puține...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6544,7 +6631,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fişier încorporat'
     'YER' => 'Riali',
     'ZWD' => 'Dolari din Zimbabwe',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Verificare unică',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Niciuna',
+        'future' => 'Valoare curentă',
+        'old' => 'Valoare anterioară',
+        'both' => 'Valori curente și anterioare',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Verificare unică',
+    );

@@ -116,17 +116,37 @@
             }
         );
     },
+    /**
+     * Adds placeholders fields the textbox content.
+     *
+     * @param {Object} recipients List of fields to create the placeholders.
+     * @return {string} textbox content with the placeholders.
+     */
     buildVariablesString: function(recipients) {
-        var result = '' , newExpression = '', currentValue, i, aux, aux2;
-        _.each(recipients.models, function(model) {
-            newExpression += '{::' + model.attributes.rhs_module + '::' + model.attributes.id + '::}';
-        });
-
+        var newExpression = this.buildPlaceholders(recipients);
         var bm = this._htmleditor.selection.getBookmark();
         this._htmleditor.selection.moveToBookmark(bm);
         this._htmleditor.selection.setContent(newExpression);
 
-        return currentValue = this._htmleditor.getContent();
+        return this._htmleditor.getContent();
+    },
+
+    /**
+     * Creates the placeholders for Email Template Modules.
+     *
+     * @param {Object} recipients List of fields to create the placeholders.
+     * @return {string} newExpression.
+     */
+    buildPlaceholders: function(recipients) {
+        var newExpression = '';
+        _.each(recipients, function(model) {
+            newExpression += '{::' + model.get('rhs_module') + '::' + model.get('id');
+            if (model.get('process_et_field_type') == 'old') {
+                newExpression += '::' + model.get('process_et_field_type');
+            }
+            newExpression += '::}';
+        });
+        return newExpression;
     },
 
     /**

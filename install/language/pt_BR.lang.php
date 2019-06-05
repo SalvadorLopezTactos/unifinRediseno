@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Foram detectados erros durante a verificação de compatibilidade. Para que a sua instalação do SugarCRM funcione corretamente, tome as medidas adequadas para resolver os problemas listados abaixo e pressione o botão para verificar novamente ou tente instalar de novo.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Permissão de Passagem por Referência do Tempo de Chamada está Ligada (deverá ser definida para Desligada em php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: o Agendador do Sugar será executado com funcionalidades limitadas. O serviço de Arquivamento de E-mail não será executado.',
+	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: o Agendador Sugar será executado com funcionalidades limitadas. O serviço de arquivo de e-mail não será executado.',
     'ERR_CHECKSYS_IMAP'					=> 'Não encontrado: InboundEmail e Campanhas (E-mail) requerem as bibliotecas IMAP. Nenhum deles será funcional.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'O Magic Quotes GPC não pode ser ligado durante a utilização do MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Aviso:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para uma utilização otimizada do sapi IIS/FastCGI, defina fastcgi.logging para 0 no seu arquivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versão de PHP instalada não suportada: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Banco de dados indisponível',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O Suporte ao Banco de Dados não foi encontrado. Certifique-se de que você possui os drivers necessários para um dos seguintes Tipos de Banco de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário anular o comentário da extensão no arquivo php.ini ou recompilar com o arquivo binário correto, conforme a sua versão de PHP. Consulte o Manual do PHP para mais informações sobre como ativar o Suporte ao Banco de Dados.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O suporte ao banco de dados não foi encontrado. Verifique se você tem os drivers necessários para um dos seguintes tipos de banco de dados compatíveis: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário remover a marcação de comentário da extensão no arquivo php. ini, ou recompilar o arquivo binário correto, dependendo da sua versão do PHP. Consulte o manual do PHP para mais informações sobre como ativar o suporte ao banco de dados.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funções associadas às XML Parser Libraries que são necessárias para executar o aplicativo Sugar não foram encontradas. Talvez seja necessário remover comentário da extensão no arquivo php.ini ou recompilar com arquivo binário correto, dependendo da sua versão de PHP. Consulte o Manual do PHP para obter mais informações sobre como ativar o Suporte do Banco de Dados.',
     'LBL_CHECKSYS_CSPRNG' => 'Gerador de números aleatórios',
     'ERR_CHECKSYS_MBSTRING'             => 'Funções associadas com a extensão Multibyte Strings PHP (mbstring) que são necessárias para executar o aplicativo Sugar não foram encontradas. <br/><br/>Geralmente, o módulo mbstring não está ativado por defeito no PHP e deve ser ativado com --enable-mbstring quando o binário PHP é construído. Consulte o Manual do PHP para obter mais informações sobre como ativar o suporte mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'A definição session.save_path no seu arquivo de configuração php (php.ini) não está configurada ou está definida em uma pasta inexistente. Talvez seja necessário definir o save_path em php.ini ou verificar se a pasta definida em save_path existe.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'A definição session.save_path no seu arquivo de configuração php (php.ini) está configurada em uma pasta não editável. Tome as medidas necessárias para tornar a pasta editável. <br>Dependendo do seu sistema operacional, pode ser necessário alterar as permissões executando o chmod 766, ou clicar com o botão direito no nome do arquivo para acessar as propriedades e desmarcar a opção somente leitura.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'O arquivo de configuração existe mas não é editável. Tome as medidas necessárias para tornar o arquivo editável. Dependendo do seu sistema operacional, pode ser necessário alterar as permissões executando o chmod 766 ou clicando com o botão direito no nome do arquivo para acessar as propriedades e desmarcar a opção somente leitura.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Módulo IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Módulo MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (sem limite)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (ilimitado)',
 	'LBL_CHECKSYS_MEM'					=> 'Limite de memória PHP',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informação de Nova Conta',
         'description' => 'Este template é usado quando o Administrador de Sistema envia a nova senha para um usuário.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Aqui está o nome de usuário e senha temporária da sua conta:</p><p>Nome de usuário : $contact_user_user_name </p><p>senha: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de efectuar a autenticação com a senha indicada acima, poderá ser pedido para alterar a senha por uma à sua escolha.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aqui está o nome de usuário e senha temporária da sua conta:</p><p>Nome de usuário : $contact_user_user_name </p><p>senha: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de efectuar a autenticação com a senha indicada acima, poderá ser pedido para alterar a senha por uma à sua escolha.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 'Aqui está o nome de usuário senha da sua conta: Nome de usuário: $contact_user_user_name senha: $contact_user_user_hash $config_site_url. Depois de se autenticar com a senha indicada, poderá ser necessário indicar uma nova senha.',
         'name' => 'Email de senha gerada pelo sistema',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Indicar uma nova senha',
         'description' => "Este template é usado para enviar para o usuário um link para clicar e indicar uma nova senha da conta do usuário.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Recentemente pediu em $contact_user_pwd_last_changed a possibilidade de alterar a senha da sua conta. </p><p>Clicar no link abaixo para alterar a sua senha:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid </a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Recentemente pediu em $contact_user_pwd_last_changed a possibilidade de alterar a senha da sua conta. </p><p>Clicar no link abaixo para alterar a sua senha:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid </a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 'Recentemente pediu em $contact_user_pwd_last_changed que tenha a possibilidade de indicar uma nova senha da sua conta. Clicar no link abaixo para indicar uma nova senha: $contact_user_link_guid',
         'name' => 'E-mail de esquecimento da senha',

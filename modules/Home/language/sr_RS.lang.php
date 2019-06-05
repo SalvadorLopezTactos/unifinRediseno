@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - Jednostavan SAML alat za PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - scroll za mobilni web alat  Prirodno skrolovanje unutar elementa sa fiksnom širinom/visinom.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas je JavaScript biblioteka koja dodaje podršku Internet Exploreru za HTML5 Canvas. Renderuje oblike i slike pomoću Flash drawing API-ja. Podržava skoro sve Canvas API-je i u mnogo slučajeva je brži od sličnih biblioteka koje koriste VML ili Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - JavaScript InfoVis Toolkit obezbeđuje alate za kreiranje  Interactive Data Visualizations za Web.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Radni okvir za web aplikacije za PHP5',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV parser podataka za PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - Korišćenje PHP funkcija u JavaScript skriptama',

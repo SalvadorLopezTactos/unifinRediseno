@@ -181,6 +181,8 @@
         this.action = 'list';
         this.viewName = this.isCreateView ? 'edit' : 'list';
 
+        // combine qliListMetadata's panels into this.meta
+        this.meta = _.extend(this.meta, this.qliListMetadata);
         this._fields = _.flatten(_.pluck(this.qliListMetadata.panels, 'fields'));
 
         this.toggledModels = {};
@@ -237,7 +239,7 @@
         _.each(this.$('div.checkall input'), function(item) {
             var $item = $(item);
             //only trigger if the item isn't checked.
-            if (_.isUndefined($item.attr('checked'))) {
+            if (!$item.prop('checked')) {
                 $item.trigger('click');
             }
         });
@@ -251,7 +253,7 @@
         _.each(this.$('div.checkall input'), function(item) {
             var $item = $(item);
             //only trigger if the item IS checked.
-            if (!_.isUndefined($item.attr('checked'))) {
+            if ($item.prop('checked')) {
                 $item.trigger('click');
             }
         });
@@ -479,6 +481,19 @@
         // if the data has a _module, remove it
         if (!_.isEmpty(prepopulateData)) {
             delete prepopulateData._module;
+
+            if (moduleName === 'Products' && prepopulateData.product_template_id) {
+                var metadataFields = app.metadata.getModule('Products', 'fields');
+
+                // getting the fields from metadata of the module and mapping them to prepopulateData
+                if (metadataFields && metadataFields.product_template_name &&
+                    metadataFields.product_template_name.populate_list) {
+                    _.each(metadataFields.product_template_name.populate_list, function(val, key) {
+                        prepopulateData[val] = prepopulateData[key];
+                    }, this);
+                }
+            }
+
         }
 
         if (prepopulateData && prepopulateData._forcePosition) {

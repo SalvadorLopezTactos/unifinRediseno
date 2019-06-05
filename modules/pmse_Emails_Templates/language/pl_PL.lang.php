@@ -48,4 +48,5 @@ $mod_strings = array (
     'LBL_SUGAR_LINK_SELECTOR' => 'Selektor linku rekordu',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Powiązano z modułem docelowym',
     'LBL_SELECT_BUTTON_LABEL' => 'Wybierz',
+    'LBL_FIELD_SELECTOR_DROPDOWN' => 'Typ wartości pola',
 );

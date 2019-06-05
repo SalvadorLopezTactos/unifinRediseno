@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Визуализация на табулатор "Изтегляне на програми"',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Когато опцията е маркирана, табулаторът "Изтегляне на програми" ще бъде визуализиран в профилите на потребителите и през него те ще имат достъп до приложения за връзка на Sugar с външни програми и други файлове',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Използване на SOAP за идентификация през ldap.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Разширението php_mcrypt трябва да бъде разрешено в конфигурационния файл php.ini.',
     'LBL_ALL' => 'Всички',
     'LBL_MARK_POINT' => 'Маркирай Точка',
     'LBL_NEXT_' => 'Следващ>>',
@@ -443,6 +442,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Дейности',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активирай дейностите',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Включва Дейностите за приложението',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Разрешаване на допълнително съдържание на екрана за влизане',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Автоматично запазване на дефинициите на процесите',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Определя колко често дефинициите на процесите се записват автоматично при използване на дизайнера',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Автоматично валидиране на дефинициите на процесите при автоматично записване',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Превключва дали дефинициите на процесите да се валидират автоматично, когато се записват автоматично. Това ще действа само ако "Автоматично запазване на дефинициите на процесите" е зададено като интервал от време',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Автоматично валидиране на дефинициите на процесите при импортиране',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Превключва дали дефинициите на процесите да се валидират автоматично, когато се импортират за пръв път',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Настройки на журнала на коментарите',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Максимален брой символи, които да бъдат показвани за въведен коментар',
 );
 
 

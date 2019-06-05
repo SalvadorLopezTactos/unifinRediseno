@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter du indleder denne ændring, vil indtægt lije. emneposter blive oprettet for hver eksisterende {{module_name}} i baggrunden. Når indtægt linje-emner er fuldstændige og tilgængelige, vil en meddelelse blive sendt til e-mailadressen på din brugerprofil. Bemærk, at dit eksempel skal konfigureres til at sende e-mail via Admin > E-mail-indstillinger, for at beskeden kan sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modul giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata samt data vedrørende andre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil typisk gå videre gennem flere salgsfaser, indtil det markeres som enten "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugar&#39;s {{forecasts_singular_module}}ing modul til at forstå og forudsige salgstendenser samt fokusere arbejde mhp. at opnå salgskvoter.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} -modulet giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata samt vedrørende andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil typisk komme videre gennem flere salgsstadier, før det markeres enten "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugars {{forecasts_singular_module}}ing modul til at forstå og forudsige salgstendenser samt fokusere arbejdet mhp. at opnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modulet giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt data der relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} -modulet gør det mulgit for dig at følge enkelte salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og indeholder relevante salgsdata samt relaterer til andre vigtige poster, som for eksempel {{quotes_module}}, {{contacts_module}} etc.
 
-- Rediger denne posts felter ved at klikke på et individuelt felt eller på knappen Rediger.
-- Vis eller rediger links til andre poster i underpanelerne ved at skifte den nederste venstre rude til "Datavisning".
-- Opret og vis brugerkommentarer og registrér postændringer i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Activity Stream".
-- Følg eller sæt denne post til favorit med ikonerne til højre for postnavnet.
-- Yderligere handlinger er tilgængelige i dropdown-menuen Handlinger til højre for redigeringsknappen.',
+- Rediger denne posts felter ved at klikke på det enkelte felt eller Edit-knappen.
+- Se eller modificer links til andre poster ved at skifte det nederste venstre vindue til "Data View".
+- Skriv eller se brugerkommentarer og ændringer i postens historie i {{activitystream_singular_module}} ved at skifte det nederste venstre vindue til "Activity Stream".
+- Følg eller gør denne post til en favorit ved hjælp af ikonerne til højre for postens navn.
+- Yderligere handlinger findes i dropdown-menuen Actions til højre for Edit-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt data der relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} -modulet giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt data der relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}} etc.
 
 For at oprette et {{module_name}}:
-1. Angiv værdier i felterne som ønsket.
+1. Angiv værdier for felterne som ønsket.
  - Felter med "Påkrævet" skal være udfyldte inden der gemmes.
- - Klik "Se mere" for at vise yderligere felter hvis det er nødvendigt.
-2. Klik "Gem" for at afslutte den nye post og vende tilbage til den foregående side.',
+ - Klik på "Se mere" for at vise yderligere felter, hvis det er nødvendigt.
+2. Klik på "Gem" for at afslutte den nye post og vende tilbage til den foregående side.',
 
 // END ENT/ULT
 

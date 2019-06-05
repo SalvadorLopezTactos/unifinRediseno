@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'There are active processes running against this Process Definition. Updating it could impact these processes. Do you still want to edit this Process Definition?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'There are active processes running against this Process Definition. Updating it could impact these processes. Do you still want to disable this Process Definition?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatically create a new Process Definitions record by importing a *.bpm file from your file system.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Protsessi määratluse importimiseks laadige üles .bpm-fail.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Process Definitions was successfully imported into the system.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Please select a valid *.bpm file.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'The Process Definition has been imported but contains one or more Business Rule actions for which business rules have not been selected.',
+    'LBL_BPM_IMPORT_SELECT' => 'See protsessi määratlus sisaldab järgmisi ärireegleid ja e-kirja malle. '
+        . 'Valige need, mida soovite importida.',
+    'LBL_BUSINESS_RULES' => 'Ärireeglid',
+    'LBL_EMAIL_TEMPLATES' => 'E-posti mallid',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Tagasi',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Tee ümber',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Salvesta',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Valideeri',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Salvesta ja valideeri',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Käivitage vigade otsimiseks valideerimine',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Tegevus',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Kustuta',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Moodul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filter',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Seotud',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Criteria',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Kestus',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Unit',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Fields',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Module Field Evaluation',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moodul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Seoses',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Väli',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Väärtus',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Form Response Evaluation',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is not',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'not equal to',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Kõik seotud kirjed',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Mis tahes seotud kirjed',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Käivitusaeg',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisa',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulge',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Meeskonnad',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'User in %MODULE% who created the record',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'User in %MODULE% who last modified the record',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'User in %MODULE% who is assigned to the record',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'User in %MODULE% who was assigned to the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'User in %MODULE% who is manager of who created the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'User in %MODULE% who is manager of who last modified the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'User in %MODULE% who is manager of who is assigned to the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'User in %MODULE% who is manager of who was assigned to the record',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% seoses mooduliga %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Kasutaja, kes lõi mooduli %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Kasutaja, kes viimati muutis moodulit %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Kasutaja, kes on määratud moodulile %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Kasutaja, kes oli määratud moodulile %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Haldur, kes lõi mooduli %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Haldur, kes viimati muutis moodulit %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Haldur, kes on määratud moodulile %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Haldur, kes oli määratud moodulile %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'role: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'team: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Suggestions',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Invalid expression syntax.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Valideerimisprotsessi definitsioon: elemendi sätete hankimine',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Valideerimisprotsessi definitsioon: elemendi sätete valideerimine',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Vigade loendi värskendamine...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Valideerimine lõpetatud! Leitud probleemid: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' probleemid',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Valideerib',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Hoiatus: protsess võib selle elemendi juures seiskuda või ilmnevad muud soovitamatud efektid',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Viga: protsess seiskub selle elemendi juures',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Elemendi valideerimine ei ole võimalik',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Element ei vasta minimaalsele sissetulevate voogude arvule',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Sellel elemendil peab olema minimaalne arv sissetulevaid teid. Kontrollige seda elementi ühendavate teede arvu veendumaks, et minimaalne arv on saavutatud.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Element ületab maksimaalset sissetulevate voogude arvu',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Sellel elemendil on maksimaalne sissetulevate teede arv, mida ei tohi ületada. Kontrollige seda elementi ühendavate teede arvu veendumaks, et maksimaalset arvu ei ületata.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Element ei vasta minimaalsele väljuvate voogude arvule',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Sellel elemendil peab olema minimaalne arv väljuvaid teid. Kontrollige sellest elemendist väljuvate teede arvu veendumaks, et minimaalne arv on saavutatud.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Element ületab maksimaalset väljaminevate voogude arvu',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Sellel elemendil on maksimaalne väljaminevate teede arv, mida ei tohi ületada. Kontrollige sellest elemendist väljuvate teede arvu veendumaks, et maksimaalset arvu ei ületata.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Nõutud väli ei ole määratud',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Sellel elemendil on nõutud väli, kuid see ei ole määratud. Kontrollige elemendi sätteid veendumaks, et väli on õigesti määratud, seejärel vajutage kindlasti nuppu Salvesta.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Andmeid ei ole hetkel süsteemis',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Selle elemendi sätted viitavad teatud andmetele, mida andmebaasis ei ole. Kontrollige elemendi sätteid veendumaks, et kõik viidatud andmed on olemas (st. teatud kasutajad, mooduli väljad, meeskonnad jne).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Kriteeriumi kasti avaldist ei hinnata kunagi tõeseks',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kriteeriumi kastid sisaldavad loogilisi JA/VÕI/EI väljendeid. See viga tähendab, et elemendi sätete kriteeriumi kast on konfigureeritud nii, et avaldis ei ole kunagi tõene. Kontrollige kriteeriumi kasti, et kõrvaldada mistahes loogilised vastukolud, mis ei lase avaldusel tõene olla.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Element on kättesaamatu',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Elementi protsessi kasutamiseks peab sellega olema ühendatud tee. Selle elemendini viiv teede kett peab algama alguselemendist. Kontrollige selle elemendi sissetulevate teede ketti veendumaks, et see kett algab alguselemendist.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Ooteaja kriteerium peab sisaldama täpselt ühte kuupäeva ja kellaaja konstanti',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'See ootamise element on konfigureeritud kasutama kriteeriumikasti Fikseeritud kuupäev. See kast peab sisaldama täpselt ühte fikseeritud kuupäeva ja kellaaja konstanti või kuupäeva ja kellaaja välja viidet. Kõik teised väljenduse osad peavad olema matemaatilised operaatorid (+/-) või ajavahemiku konstandid.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Määratletud kestuse väärtus ei tohi olla null',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'See ootamise element on konfigureeritud kasutama sätet Kestus. See säte ei tohi olla võrdne nulliga, muidu tekib viga. Kontrollige elemendi sätteid veendumaks, et Kestus ei ole määratud nulli peale.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Ooteaja parameetreid ei ole määratud',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Sellele ootamise elemendile ei ole sätteid konfigureeritud. Kontrollige elemendi sätteid veendumaks, et valitud on kas Kestus või Fikseeritud kuupäev, sisestage soovitud väärtused ja klõpsake nuppu Salvesta.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Oodatav aeg on vähem kui null',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Selle aktiivsuselemendi sätetes Vormid, on oodatav aeg määratud negatiivsele väärtusele, mis põhjustab elemendini jõudes protsessi hangumise. Avage selle elemendi sätted Vormid, et muuta oodatud aeg mittenegatiivsele arvule.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Tegevuse tüüp on [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Sellele tegevuse elemendil ei ole kindlaksmääratud tüüpi. Seda saab muuta tehes paremklõpsu tegevuse elemendil ja valides tüübi loendist Tegevuse tüüp.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Raja võtmine ei ole garanteeritud',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Seda veateadet näidatakse, sest on võimalus, et ei kasutata ühtegi sellest värava elemendist väljaminevat teed, mis põhjustab protsessi seiskumise. Soovitatav on määrata vaikimisi rada juhuks, kui ükski kriteeriumi kasti avaldustest elemendi sätetes ei ole rahuldatud. Seda saab teha paremklõpsates värava elemendil ja valides elemendi menüüst Vaikimisi voog. Kui vaikimisi teed ei ole määratud, tuleks muuta kriteeriumi kasti avaldusi elemendi sätetes veendumaks, et vähemalt üks neist on protsessi käivitamisel tõene.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Koonduv värava tüüp ei vasta sissetuleva voo värava tüübile',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Hargnevad väravad laiendavad protsessid mitmele harule. Kasutades koonduvat väravat nende harude uuesti üheks koondamiseks, tuleb kasutada õiget tüüpi koondavat väravat, selle hargneva värava tüübi kohaselt, mida neid harusid luues kasutati. Eksklusiivsete või sündmusepõhiste koondavate väravatega loodud harude korral kasutage eksklusiivset koondavat väravat nende uuesti koondamiseks. Paralleelsete või kaasavate hargnevate väravatega loodud harude korral kasutage nende uuesti koondamiseks paralleelset koondavat väravat.',
 );

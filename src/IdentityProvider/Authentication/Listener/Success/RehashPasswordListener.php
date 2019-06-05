@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success;
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 
 /**
@@ -26,8 +27,15 @@ class RehashPasswordListener
     public function execute(AuthenticationEvent $event)
     {
         $token = $event->getAuthenticationToken();
+        /** @var User $user */
+        $user = $token->getUser();
+
+        if ($user->isServiceAccount()) {
+            return;
+        }
+
         if ($token->hasAttribute('isPasswordEncrypted') && !$token->getAttribute('isPasswordEncrypted')) {
-            $token->getUser()->getSugarUser()->rehashPassword($token->getAttribute('rawPassword'));
+            $user->getSugarUser()->rehashPassword($token->getAttribute('rawPassword'));
         }
     }
 }

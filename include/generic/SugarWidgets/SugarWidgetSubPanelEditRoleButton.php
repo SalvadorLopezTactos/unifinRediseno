@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelEditRoleButton.php 40541 2008-10-14 17:42:09Z jmertic $
 
 
 

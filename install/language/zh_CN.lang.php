@@ -79,7 +79,6 @@ $mod_strings = array(
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '找不到Sugar应用程序需要的XML解析库功能。您可能要移除php.ini文件中有关扩展的注释，或重新编译正确的二进制文件，具体视您的PHP版本而定。欲知详情，请参考您的PHP手册。',
     'LBL_CHECKSYS_CSPRNG' => '随机数字生成器',
     'ERR_CHECKSYS_MBSTRING'             => '找不到Sugar应用程序需要的多字节字符串扩展(mbstring)功能。<br/><br/>一般来说，PHP默认不启用mbstring模块并且必须使用PHP自建的库--enable-mbstring来启动。欲知详情，请参考您的PHP手册。',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => '您的PHP配置文件（php.ini）中的session.save_path未设置或设置到不存在的文件夹中。您需要在php.inin中设置save_path或确定php.ini中所设置的save_path文件夹存在。',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => '您的PHP配置文件（php.ini）中的session.save_path文件夹不可写入。请采取必需步骤将文件夹设置为可写入。<br>这可能需要您运行chmod 766来变更权限或按右键单击文件名查看属性并取消只读选项，具体视您所用操作系统而定。',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => '配置文件存在但不可写入，请采取必要步骤以确保这个文件可写入。这可能需要您运行chmod 766来变更权限或按右键单击文件名查看属性并取消只读选项，具体视您所用操作系统而定。',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP 模块',
 	'LBL_CHECKSYS_MQGPC'				=> '神奇的的报价 GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings 模块',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK(无限制)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK（无限制）',
 	'LBL_CHECKSYS_MEM'					=> 'PHP 内存限额',
@@ -496,7 +494,7 @@ SugarCRM兼容版本：<br>
     'advanced_password_new_account_email' => array(
         'subject' => '新帐户信息',
         'description' => '这个模板是管理员用来发送新密码给用户的。',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>这里是您的用户名和临时密码：</p><p>用户名 : $contact_user_user_name </p><p>密码 : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>当您使用上述密码登录后。您也许将被要求重新设置您的密码。</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>这里是您的用户名和临时密码：</p><p>用户名 : $contact_user_user_name </p><p>密码 : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>当您使用上述密码登录后。您也许将被要求重新设置您的密码。</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '下面是您的帐户用户名和帐户临时密码：
 用户名 : $contact_user_user_name
@@ -509,7 +507,7 @@ $config_site_url
     'advanced_password_forgot_password_email' => array(
         'subject' => '重置您的帐户密码',
         'description' => "这个模板是用来提供给用户一个可以点击并重置他们密码的链接。",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>您最近请求了 $contact_user_pwd_last_changed 能够重置您的帐户密码。 </p><p>点击下列链接来重置您的密码：</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>您最近请求了 $contact_user_pwd_last_changed 能够重置您的帐户密码。 </p><p>点击下列链接来重置您的密码：</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 您最近在 $contact_user_pwd_last_changed上要求重置您帐户的密码。点击下面的链接来重置您的密码：$contact_user_link_guid',

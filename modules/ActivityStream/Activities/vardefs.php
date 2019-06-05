@@ -214,7 +214,6 @@ $dictionary['Activity'] = array(
         'parent_id' => array(
             'name'     => 'parent_id',
             'type'     => 'id',
-            'len'      => 36,
         ),
 
         'parent_type' => array(
@@ -280,6 +279,7 @@ $dictionary['Activity'] = array(
     // default instead of basic.
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

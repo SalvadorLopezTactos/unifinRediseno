@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Servidor Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Elements de subplafó per pàgina (Mòbil)',
 	'LOG_MEMORY_USAGE'=>'Registrar utilització de memòria',
-    'LOG_SLOW_QUERIES' => 'Registrar consultes lentas',
+    'LOG_SLOW_QUERIES' => 'Registra consultes lentes',
     'LOCK_HOMEPAGE_HELP'=>'Aquesta opció serveix per <BR> 1) la creació de noves pàgines d´inici en el mòdul Inici, i <BR>2) la personalització de la ubicació del dashlet en les pàgines d´inici usant arrosegar i soltar.',
     'CURRENT_LOGO'=>'Logo actual',
     'CURRENT_LOGO_HELP'=>'Aquest logo es mostra a la cantonada superior esquerra de l&#39;aplicació Sugar.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Descàrregues pantalla Tab',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Quan es selecciona, la fitxa de descàrrega apareixerà a la configuració d&#39;usuari i proporcionar als usuaris l&#39;accés als plug-ins i altres arxius de Sugar disponibles',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Per l´autentificació SOAP al usar LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'L´extensió php_mcrypt ha d´estar habilitada en el seu arxiu php.ini.',
     'LBL_ALL' => 'Tot',
     'LBL_MARK_POINT' => 'Marcar Punt',
     'LBL_NEXT_' => 'Següent>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Seqüències d&#39;activitats',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Habilita les seqüències d&#39;activitats',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activa les seqüències d&#39;activitats per a les aplicación',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Habilita contingut addicional de la pantalla d&#39;inici de sessió',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Desa automàticament les definicions de processos',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determina la freqüència amb que es desen automàticament les definicions de processos quan s&#39;utilitza el dissenyador',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Valida automàticament les definicions de processos quan es desen automàticament',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Activa i desactiva l&#39;opció de validació automàtica de les definicions de processos quan es desen automàticament. Això només tindrà efecte si l&#39;opció "Desa automàticament les definicions de processos" té un interval de temps establert',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Valida automàticament les definicions de processos quan s&#39;importen',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Activa i desactiva l&#39;opció de validar automàticament les definicions de processos quan s&#39;importen per primer cop',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Configuració del registre de comentaris',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Nombre màxim de caràcters que es mostraran per entrada de comentaris',
 );
 
 

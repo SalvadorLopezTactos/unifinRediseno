@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Toon Downloads Tab',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Indien geselecteerd, zal er een Download Tabblad verschijnen in de gebruikersgegevens zodat er toegang is tot de Sugar Plug-ins en andere beschikbare bestanden.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Voor SOAP-authenticatie bij gebruik van LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'De php_mcrypt extensie moet zijn ingeschakeld in uw php.ini.',
     'LBL_ALL' => 'Alle',
     'LBL_MARK_POINT' => 'Markeerpunt',
     'LBL_NEXT_' => 'Volgende >>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activity Streams inschakelen',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Schakelt Activity Streams in voor de toepassing',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aanvullende inhoud aanmeldscherm inschakelen',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Procesdefinities automatisch opslaan',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Bepaalt hoe vaak procesdefinities automatisch worden opgeslagen als u de designer gebruikt',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Procesdefinities automatisch valideren bij automatisch opslaan',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Bepaalt of procesdefinities automatisch worden gevalideerd als deze automatisch worden opgeslagen. Dit gaat alleen van kracht als "Procesdefinities automatisch opslaan" is ingesteld op een tijdsinterval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Procesdefinities automatisch valideren bij importeren',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Bepaalt of procesdefinities automatisch worden gevalideerd als deze voor het eerst worden geïmporteerd',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Instellingen opmerkingenlogboek',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximaal aantal tekens per opmerkingeninvoer',
 );
 
 

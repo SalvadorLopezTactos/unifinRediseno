@@ -72,6 +72,22 @@ $viewdefs['Reports']['base']['view']['recordlist'] = array(
             ),
             array(
                 'type' => 'rowaction',
+                'name' => 'create_schedule_button',
+                'label' => 'LBL_SCHEDULE_REPORT_BUTTON',
+                'event' => 'list:schedulereport:fire',
+                'acl_module' => 'ReportSchedules',
+                'acl_action' => 'edit',
+            ),
+            array(
+                'type' => 'rowaction',
+                'name' => 'view_schedules_button',
+                'label' => 'LBL_VIEW_SCHEDULES_BUTTON',
+                'event' => 'list:viewschedules:fire',
+                'acl_module' => 'ReportSchedules',
+                'acl_action' => 'list',
+            ),
+            array(
+                'type' => 'rowaction',
                 'name' => 'delete_button',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',

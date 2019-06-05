@@ -21,7 +21,7 @@ class SugarChartFactory
      * instance if one is not specified
      *
      * @param string $chartEngine optional, name of the chart engine from $sugar_config['chartEngine']
-     * @param string $module optional, name of module extension for chart engine (see JitReports or SugarFlashReports)
+     * @param string $module optional, name of module extension for chart engine
      * @return object ChartEngine instance
      */
     public static function getInstance($chartEngine = '', $module = '')

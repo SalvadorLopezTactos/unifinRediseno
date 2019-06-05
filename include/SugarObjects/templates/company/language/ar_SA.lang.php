@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'الفوترة بالدفع',
 	'LBL_PUSH_SHIPPING' => 'الشحن بالدفع',
 	'LBL_SAVE_ACCOUNT' => 'حفظ الحساب',
+    'LBL_SERVICE_LEVEL' => 'مستوى الخدمة',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'مدينة الشحن:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'بلد الشحن:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'الرمز البريدي للشحن:',

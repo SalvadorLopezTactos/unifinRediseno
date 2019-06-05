@@ -145,7 +145,7 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'이메일 주소',
   'LBL_CONTACTS_SYNC' => '연락처',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        '직원은 IDM 모드의 <a href="{0}" target="_blank">클라우드 콘솔</a>에서만 생성할 수 있습니다.',
+        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
 );
 
 

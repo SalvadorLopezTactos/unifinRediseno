@@ -1,5 +1,5 @@
 SUGAR_ENV ?= dev
-SUGAR_SIDECAR_DOCKER_VERSION ?= 6.10.3
+SUGAR_SIDECAR_DOCKER_VERSION ?= 8.9.2
 
 # V := 1 # When V is set, print commands and build progress.
 Q := $(if $V,,@)

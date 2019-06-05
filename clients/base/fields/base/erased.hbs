@@ -13,15 +13,6 @@
 <span class="label"
     rel="tooltip"
     data-placement="bottom"
-    title="{{str 'LBL_VALUE_ERASED_TOOLTIP' this.module}}">
-        {{str "LBL_VALUE_ERASED" this.module}}
+    title="{{str 'LBL_VALUE_ERASED_TOOLTIP' this.module}}{{#if href}}. {{str 'LBL_FOLLOW_LINK' this.module}}{{/if}}">
+    {{partial 'hyperlink-label' this href=href labelName="LBL_VALUE_ERASED" moduleName=this.module}}
 </span>
-{{#if href}}
-    <a href="{{href}}"
-       class="btn btn-invisible btn-link"
-       rel="tooltip"
-       data-placement="bottom"
-       title="{{str 'LBL_FOLLOW_LINK' this.module}}">
-        <i class="fa fa-link"></i>
-    </a>
-{{/if}}

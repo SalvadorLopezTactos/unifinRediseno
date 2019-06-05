@@ -562,7 +562,6 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'name' => 'repeat_parent_id',
     'vname' => 'LBL_REPEAT_PARENT_ID',
     'type' => 'id',
-    'len' => 36,
     'comment' => 'Id of the first element of recurring records',
     'importable' => 'false',
     'massupdate' => false,
@@ -616,6 +615,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
             ),
             'order_by' => 'name:asc',
             'studio' => false,
+            'hideacl' => true,
         ),
     'auto_invite_parent' => array(
         'name' => 'auto_invite_parent',
@@ -747,8 +747,10 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     ),
 );
 
-VardefManager::createVardef('Calls','Call', array('default', 'assignable',
-'team_security',
+VardefManager::createVardef('Calls', 'Call', array(
+    'default',
+    'assignable',
+    'team_security',
 ));
 
 $dictionary['Call']['fields']['description']['full_text_search']['boost'] = 0.54;

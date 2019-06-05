@@ -28,6 +28,11 @@ require_once 'include/MetaDataManager/MetaDataManager.php';
 
 function scriptErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
 {
+    // ignore redis initialization error when upgrading from 8.1
+    if (basename($errfile) === 'Redis.php') {
+        return false;
+    }
+
     $GLOBALS['log']->fatal("PHP: [$errno] $errstr in $errfile at $errline"."\n".var_export(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
 }
 

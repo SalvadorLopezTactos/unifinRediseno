@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Přiděl týmu',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Přiřazuje základní tým k novým záznamům',
 	'LBL_DEFAULT_TEAM'					=> 'Defaultní tým',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Výchozí primární tým',
 	'LBL_LIST_DESCRIPTION'				=> 'Popis',
 	'LBL_MY_TEAMS'						=> 'Můj tým',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Soukromý tým pro',
@@ -50,8 +49,8 @@ $mod_strings = array (
 	'ERR_IE_MISSING_REQUIRED'			=> "V nastavení příchozí pošty chybí informace. Zkontrolujte prosím nastavení a zkuste to ještě jednou. Pokud nenastavujete příchozí poštu, nechte všechny položky v sekci prázdné.",
 	'ERR_INVALID_PASSWORD'				=> 'Musíte zadat platné uživatelské jméno a heslo.',
 	'ERR_NO_LOGIN_MOBILE'				=> 'Tvůj první login do aplikace nesmí být proveden přes mobilní telefon, ale přes normální prohlížeč z důvodů nastavení systému.',
-	'ERR_LAST_ADMIN_1'					=> 'Uživatel \\"',
-	'ERR_LAST_ADMIN_2'					=> '\\" je poslední uživatel s administrátorskymi právy. Nejméně jeden uživatel musí být administrátor.',
+	'ERR_LAST_ADMIN_1'					=> 'Uživatel \"',
+	'ERR_LAST_ADMIN_2'					=> '\" je poslední uživatel s administrátorskymi právy. Nejméně jeden uživatel musí být administrátor.',
 	'ERR_PASSWORD_CHANGE_FAILED_1'		=> 'Změna hesla pro uživatele',
 	'ERR_PASSWORD_CHANGE_FAILED_2'		=> 'selhalo. Nové heslo musí být zadáno.',
 	'ERR_PASSWORD_CHANGE_FAILED_3'		=> 'Nové heslo je neplatné.',
@@ -60,7 +59,7 @@ $mod_strings = array (
 	'ERR_PASSWORD_MISMATCH'				=> 'Hesla se neschodují.',
 	'ERR_PASSWORD_USERNAME_MISSMATCH'   => 'Musíte zadat správnou adresu a heslo',
 	'ERR_PASSWORD_LINK_EXPIRED'         => 'Váš odkaz vypršel, generujte prosím nový',
-	'ERR_REENTER_PASSWORDS'				=> 'Prosím napište znovu hesla. \\"Nové heslo\\" a \\"Potvrzení hesla\\" se neshodují.',
+	'ERR_REENTER_PASSWORDS'				=> 'Prosím napište znovu hesla. \"Nové heslo\" a \"Potvrzení hesla\" se neshodují.',
 	'ERR_REPORT_LOOP'					=> 'System detekoval smyčku. Uživatel se nemůže zodpovídat sám sobě, nebo žádný jejich manažer se nemůže zodpovídat jemu.',
 	'ERR_RULES_NOT_MET'                 => 'Heslo, které jste vložili neodpovídá pořadavkům na heslo. Prosím vložte nové.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Info o uživateli nenalezeno',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email Adresu příjemce',
 	'ERR_SERVER_STATUS'					=> 'Status Vašeho serveru',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'System není schopen odeslat email. Prosím ověřte nastavení odesílání pošty na <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Uživatel může být vytvořen pouze v <a href="{0}" target="_blank">Cloudové konzoli</a> pro režim IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primární e-mailová adresa může být vytvořena pouze v <a href="{0}" target="_blank">Cloudové konzoli</a> pro režim IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailová adresa',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdit heslo',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\\n\\nClick “OK�? to proceed.\\nClick “Cancel�? to return to the record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\n\nClick “OK�? to proceed.\nClick “Cancel�? to return to the record.',
 	'LBL_COUNTRY'						=> 'Země',
 	'LBL_CURRENCY_TEXT'					=> 'Zvolte výchozí měnu',
 	'LBL_CURRENCY'						=> 'Měna',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Počet desetinných míst zobrazených u desetinných čísel a čísel s plovoucí desetinnou čárkou v systému, například měna nebo průměr v Sestavách.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Zobrazit preferovanou měnu',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Konvertovat výchozí měnu na uživatelskou v pohledech seznamu a detailu',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Vytvořte položky řádků tržeb v preferované měně',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Pokud se preferovaná měna uživatele liší od měny použité v položce katalogu produktů, budou položky řádků tržeb přidané k příležitosti z katalogu produktů převedeny na preferovanou měnu uživatele.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Oddělovač tisíců',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Znak oddělovače tisíců',
 	'LBL_DECIMAL_SEP'					=> 'Desetinný oddělovač',
@@ -209,7 +209,7 @@ $mod_strings = array (
 	'LBL_PICTURE_FILE'					=> 'Obrázek',
 	'LBL_LOCALE_EXAMPLE_NAME_FORMAT'	=> 'Příklad',
 	'LBL_LOCALE_NAME_FORMAT_DESC'		=> 'Nastavte jak se budou zobrazovat jména',
-	'LBL_LOCALE_NAME_FORMAT_DESC_2'	=> '<i>\\"s\\" Oslovení <br>\\"f\\" Křestní jméno <br> \\"l\\" Příjmení</i>',
+	'LBL_LOCALE_NAME_FORMAT_DESC_2'	=> '<i>\"s\" Oslovení <br>\"f\" Křestní jméno <br> \"l\" Příjmení</i>',
     'LBL_SAVED_SEARCH'                  => 'Uložená hledání a rozvržení',
 	// LOGIN PAGE STRINGS
 	'LBL_LOGIN_BUTTON_KEY'				=> 'L',
@@ -281,7 +281,7 @@ $mod_strings = array (
 	'LBL_PSW_MODIFIED'                  => 'heslo naposledy změněno',
     'LBL_PHONE'							=> 'Telefon',
 	'LBL_PICK_TZ_WELCOME'				=> 'Vítejte v Sugar Suite.',
-	'LBL_PICK_TZ_DESCRIPTION'           => 'Před pokračováním prosím potvrďte Vaši časovou zónu z výběrového listu. Později si můžete časovou zónu změnit v \\"Můj účet\\".',
+	'LBL_PICK_TZ_DESCRIPTION'           => 'Před pokračováním prosím potvrďte Vaši časovou zónu z výběrového listu. Později si můžete časovou zónu změnit v \"Můj účet\".',
 	'LBL_PORTAL_ONLY_DESC'				=> 'Použitelné jen pro Portál API. Tento typ nemůže se přihlásit přes webové rozhraní Sugar.',
 	'LBL_PORTAL_ONLY_USER'					=> 'Portál API užívatel',
 	'LBL_POSTAL_CODE'					=> 'PSČ',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Zadejte User Name a Email Adresu.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Momentálně nedostupné. Prosím kontaktujte svého administrátora.',
 	'LBL_PUBLISH_KEY'					=> 'Uveřejňovací klíč',
-
+    'LBL_SITE_USER_ID' => 'Hodnota hash adresy url webu a id uživatele',
     'LBL_QUOTAS'                        => 'Kvóty',
     'LBL_FORECASTS'                     => 'Předpovědi',
     'LBL_WORKSHEETS'                    => 'Listy',
@@ -463,7 +463,7 @@ $mod_strings = array (
 	'LBL_EMAIL_OUTBOUND_TITLE'			=> 'Nastavení odchozího emailu',
 	'LBL_LOGIN'							=> 'Uživatelské jméno',
 	'LBL_MAILBOX_DEFAULT'				=> 'DORUČENÁ POŠTA',
-	'LBL_MAILBOX_SSL_DESC'				=> 'se SSL when connecting. If this does not work, check that your PHP installation included \\"--with-imap-ssl\\" in the configuration.',
+	'LBL_MAILBOX_SSL_DESC'				=> 'se SSL when connecting. If this does not work, check that your PHP installation included \"--with-imap-ssl\" in the configuration.',
 	'LBL_MAILBOX'						=> 'Monitorovaná složka',
 	'LBL_MAILBOX_TYPE'					=> 'Možné akce',
 	'LBL_MARK_READ_NO'					=> 'Po importu emaily smazat',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil uživatele',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Pokud některá pole nejsou upravitelná, přihlaste se prosím ke Cloudové konzoli, abyste mohli tato pole spravovat',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Chcete-li změnit některá pole, která nejsou upravitelná, ' .
-        'obraťte se prosím na správce a oznamte mu tyto změny',
+        'Chcete-li provést změny v polích určených jen pro čtení, kontaktujte svého správce programu Sugar.',
 ); // END STRINGS DEFS
-
-?>

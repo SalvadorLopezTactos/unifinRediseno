@@ -46,9 +46,14 @@ class ReportsUtilities
      *
      * @throws MailerException Allows exceptions to bubble up for the caller to report if desired.
      */
-    public function sendNotificationOfDisabledReport($report_id, User $owner = null, User $subscriber = null)
+    public function sendNotificationOfDisabledReport($report_id, User $owner = null, array $subscriber = null, $reportName = '')
     {
-        $recipients = array($owner, $subscriber);
+        global $sugar_config;
+
+        $recipients = array($owner);
+        foreach ($subscriber as $s) {
+            $recipients[] = $s;
+        }
         $recipients = array_filter($recipients);
 
         // return early in case there are no recipients specified
@@ -59,7 +64,14 @@ class ReportsUtilities
         $mod_strings = return_module_language($this->language, 'Reports');
         $subject = $mod_strings['ERR_REPORT_DEACTIVATED_SUBJECT'];
 
-        $body = string_format($mod_strings['ERR_REPORT_DEACTIVATED'], array($report_id));
+        $report_id = htmlspecialchars($report_id);
+        $reportName = htmlspecialchars($reportName);
+
+        $reportUrl = $sugar_config['site_url'] . '/index.php#bwc/index.php?module=Reports&action=DetailView&record=' . urlencode($report_id);
+        $body = string_format(
+            $mod_strings['ERR_REPORT_DEACTIVATED'],
+            array('<a href="' . $reportUrl . '">' . $reportName . '</a>', $report_id)
+        );
 
         // make sure that the same user doesn't receive the notification twice
         $unique = array();
@@ -68,7 +80,9 @@ class ReportsUtilities
         }
 
         foreach ($unique as $recipient) {
-            $this->sendNotificationOfReport($recipient, $subject, $body);
+            if ($recipient->deleted == 0 && $recipient->status = 'Active') {
+                $this->sendNotificationOfReport($recipient, $subject, $body);
+            }
         }
     }
 

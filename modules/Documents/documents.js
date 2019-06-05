@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: documents.js 24191 2007-07-11 03:39:18Z clee $
 
 var rhandle=new RevisionListHandler();
 var from_popup_return  = false;

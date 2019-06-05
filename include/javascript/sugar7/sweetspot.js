@@ -48,14 +48,11 @@
                 return action;
             }
 
-            if (action.acl_action === 'admin') {
-                //Edge case for admin link. We only show the Admin link when
-                //user has the "Admin & Developer" or "Developer" (so developer
-                //in either case; see SP-1827)
-                if (!app.acl.hasAccessToAny('developer')) {
-                    return false;
-                }
-                return action;
+            //Edge case for admin link. We only show the Admin link when
+            //user has the "Admin & Developer" or "Developer" (so developer
+            //in either case; see SP-1827)
+            if (action.acl_action === 'admin' && !app.acl.hasAccessToAny('developer')) {
+                return false;
             }
 
             return action;
@@ -137,7 +134,7 @@
                 }
 
                 var profileActionObj = {
-                    name: app.lang.get(action.label, action.module),
+                    name: app.lang.get(action.label),
                     route: action.route,
                     icon: action.icon,
                     weight: 10

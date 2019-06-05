@@ -112,10 +112,6 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
         $field_value = (bool)$field_value;
     }
 
-    if ($target_type === 'text' || $target_type === 'longtext') {
-        $field_value = nl2html($field_value);
-    }
-
     $sugarField = SugarFieldHandler::getSugarField($target_type);
     //$GLOBALS['log']->debug("Field: $field is of type $target_type, before: $field_value");
     $field_value = $sugarField->getEmailTemplateValue($field_value, $temp_module->field_defs[$field], $context);

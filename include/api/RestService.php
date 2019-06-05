@@ -12,8 +12,10 @@
 
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\User;
+use Sugarcrm\Sugarcrm\Security\Subject\IdentityAwareServiceAccount;
 use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Rest as RestApiClient;
 
 /** @noinspection PhpInconsistentReturnPointsInspection */
@@ -52,7 +54,7 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.1';
+    protected $max_version = '11.4';
 
     /**
      * An array of api settings
@@ -153,7 +155,15 @@ class RestService extends ServiceBase
                     $this->platform = $_SESSION['platform'];
                 }
 
-                $subject = new User($GLOBALS['current_user'], $subject);
+                if (isset($authenticateUser['serviceAccount']) &&
+                    $authenticateUser['serviceAccount'] instanceof ServiceAccount) {
+                    $subject = new IdentityAwareServiceAccount(
+                        $authenticateUser['serviceAccount'],
+                        $subject
+                    );
+                } else {
+                    $subject = new User($GLOBALS['current_user'], $subject);
+                }
             } else {
                 // Since we don't have a session we have to allow the user to specify their platform
                 // However, since the results from the same URL will be different with
@@ -203,9 +213,19 @@ class RestService extends ServiceBase
                 && !($systemStatus['level'] == 'maintenance' && isset($this->user) && $this->user->isAdmin())
                 && empty($route['ignoreSystemStatusError'])) {
                 // The system is unhappy and the route isn't flagged to let them through
-                $e = new SugarApiExceptionMaintenance($systemStatus['message'], null, null, 0, $systemStatus['level']);
-                $e->setExtraData("url", $systemStatus['url']);
-                throw $e;
+                // but user detail request needs to be honored to check if user should be deactivated
+                if (!(!empty($argArray['module']) && $argArray['module'] === 'Users'
+                    && !empty($route['method']) && $route['method'] === 'retrieveRecord')) {
+                    $e = new SugarApiExceptionMaintenance(
+                        $systemStatus['message'],
+                        null,
+                        null,
+                        0,
+                        $systemStatus['level']
+                    );
+                    $e->setExtraData("url", $systemStatus['url']);
+                    throw $e;
+                }
             }
             //END REQUIRED CODE DO NOT MODIFY
 
@@ -471,6 +491,7 @@ class RestService extends ServiceBase
     protected function authenticateUser()
     {
         $valid = false;
+        $tokenInfo = [];
 
         $token = $this->grabToken();
 
@@ -478,7 +499,7 @@ class RestService extends ServiceBase
         if ( !empty($token) ) {
             try {
                 $oauthServer = \SugarOAuth2Server::getOAuth2Server($platform);
-                $oauthServer->verifyAccessToken($token);
+                $tokenInfo = $oauthServer->verifyAccessToken($token);
                 if (isset($_SESSION['authenticated_user_id'])) {
                     $authController = AuthenticationController::getInstance();
                     // This will return false if anything is wrong with the session
@@ -513,7 +534,16 @@ class RestService extends ServiceBase
             return array('isLoggedIn' => false, 'exception' => $exception);
         }
 
-        return array('isLoggedIn' => true, 'exception' => false);
+        $authResult = [
+            'isLoggedIn' => true,
+            'exception' => false,
+        ];
+
+        if (isset($tokenInfo['serviceAccount'])) {
+            $authResult['serviceAccount'] = $tokenInfo['serviceAccount'];
+        }
+
+        return $authResult;
     }
 
     /**
@@ -545,13 +575,17 @@ class RestService extends ServiceBase
             // So we have to go for a hunt
             $headers = apache_request_headers();
             foreach ($headers as $key => $value) {
-                // Check for oAuth 2.0 header
-                if ($token = $this->getOAuth2AccessToken($key, $value)) {
-                    $sessionId = $token;
+                $key = strtolower($key);
+                /**
+                 * Check for oAuth 2.0 bearer header.
+                 * @link https://tools.ietf.org/html/rfc6750
+                 */
+                if ($key == 'authorization' && preg_match('~^Bearer (.*)$~', $value, $matches)) {
+                    $sessionId = $matches[1];
                     break;
                 }
-                $check = strtolower($key);
-                if ( $check == 'oauth_token' || $check == 'oauth-token') {
+
+                if ($key == 'oauth_token' || $key == 'oauth-token') {
                     $sessionId = $value;
                     break;
                 }
@@ -559,25 +593,6 @@ class RestService extends ServiceBase
         }
 
         return $sessionId;
-    }
-
-    /**
-     * Check oAuth 2.0 header
-     * @param $header
-     * @param $value
-     * @return string
-     */
-    protected function getOAuth2AccessToken($header, $value)
-    {
-        $token = false;
-        $platform = !empty($_REQUEST['platform']) ? $_REQUEST['platform'] : 'base';
-        $config = SugarConfig::getInstance()->get('idm_mode', false);
-        $preCheck = is_array($config) && $platform == 'opi' && $header == 'Authorization';
-
-        if ($preCheck && preg_match('~^Bearer (.*)$~i', $value, $matches)) {
-            $token = $matches[1];
-        }
-        return $token;
     }
 
     /**

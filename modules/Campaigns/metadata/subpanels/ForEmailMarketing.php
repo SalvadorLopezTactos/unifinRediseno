@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: ForEmailMarketing.php 13782 2006-06-06 17:58:55Z majed $
 $subpanel_layout = array(
 	'buttons' => array(
             array('widget_class' => 'SubPanelTopCreateButton'),

@@ -197,11 +197,13 @@ class UserViewHelper {
      *
      * This function handles setting up the user type dropdown field.  It determines which user types are available for the current user.
      * At the end of the function two Smarty variables (USER_TYPE_DROPDOWN and USER_TYPE_READONLY) are assigned.
+     * Also IDM_MODE_ENABLED Smarty variable is assigned to disable field editing in IDM-mode.
      *
      */
     public function setupUserTypeDropdown() {
         global $current_user;
 
+        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
 
         //if this is an existing bean and the type is empty, then populate user type
         if(!empty($this->bean->id) && empty($this->bean->user_type))
@@ -271,6 +273,7 @@ class UserViewHelper {
         $this->ss->assign('USER_TYPE_DROPDOWN',$userTypeDropdown);
         $this->ss->assign('USER_TYPE_READONLY',$userTypes[$userType]['label'] . "<input type='hidden' id='UserType' value='{$userType}'><div id='UserTypeDesc'>&nbsp;</div>");
 
+        $this->ss->assign('IDM_MODE_ENABLED', $idpConfig->isIDMModeEnabled());
     }
 
     protected function setupPasswordTab() {
@@ -309,7 +312,7 @@ class UserViewHelper {
                             && !$enable_syst_generate_pwd)
                 )
                 && !$this->bean->external_auth_only
-                && !$idpConfig->isIDMModeEnabled()) {
+                && (!$idpConfig->isIDMModeEnabled() || $this->usertype == 'PORTAL_ONLY')) {
             $this->ss->assign('CHANGE_PWD', '1');
         } else {
             $this->ss->assign('CHANGE_PWD', '0');
@@ -442,11 +445,13 @@ class UserViewHelper {
             $this->ss->assign('EXTERNAL_AUTH_CLASS', $sugar_config['authenticationClass']);
             $authclass = $sugar_config['authenticationClass'];
         }else{
-            if(!empty($GLOBALS['system_config']->settings['system_ldap_enabled'])){
+            $system_config = Administration::getSettings('system');
+
+            if (!empty($system_config->settings['system_ldap_enabled'])) {
                 $this->ss->assign('EXTERNAL_AUTH_CLASS_1', translate('LBL_LDAP','Users'));
                 $this->ss
                         ->assign('EXTERNAL_AUTH_CLASS', translate('LBL_LDAP_AUTHENTICATION','Users'));
-                $authclass = 'LDAPAuthenticate';
+                $authclass = 'IdMLDAPAuthenticate';
             }
         }
         if(!empty($this->bean->external_auth_only)) {
@@ -607,11 +612,17 @@ class UserViewHelper {
 
         // convert base currency values to user preferred
         $this->ss->assign("currency_show_preferred", $locale->getPrecedentPreference('currency_show_preferred', $this->bean));
+        $this->ss->assign(
+            "currency_create_in_preferred",
+            $locale->getPrecedentPreference('currency_create_in_preferred', $this->bean)
+        );
 
         $currencyList = array();
-        foreach($locale->currencies as $id => $val ) {
-            $currencyList[$id] = $val['symbol'];
+
+        foreach ($locale->getCurrencies() as $id => ['symbol' => $symbol]) {
+            $currencyList[$id] = $symbol;
         }
+
         $currencySymbolJSON = json_encode($currencyList);
         $this->ss->assign('currencySymbolJSON', $currencySymbolJSON);
 
@@ -706,7 +717,18 @@ class UserViewHelper {
         if ( $this->ss->get_template_vars("REQUIRED_EMAIL_ADDRESS") == '0' ) {
             $GLOBALS['dictionary']['User']['fields']['email1']['required'] = false;
         }
-        $this->ss->assign("NEW_EMAIL",  '<span id="email_span">' . getEmailAddressWidget($this->bean, "email1", $this->bean->email1, $this->viewType) . '</span>');
+        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        $skipIdmRestrictions = $idpConfig->isIDMModeEnabled() && $idpConfig->isSpecialBeanAction($this->bean, []);
+        $this->ss->assign('NEW_EMAIL', '<span id="email_span">'
+            . getEmailAddressWidget(
+                $this->bean,
+                'email1',
+                $this->bean->email1,
+                $this->viewType,
+                '0',
+                $skipIdmRestrictions
+            )
+            . '</span>');
         // hack to undo that previous hack
         if ( $this->ss->get_template_vars("REQUIRED_EMAIL_ADDRESS") == '0' ) {
             $GLOBALS['dictionary']['User']['fields']['email1']['required'] = true;

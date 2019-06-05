@@ -9,4 +9,4 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-kubectl delete namespace idm-ns
+kubectl delete namespace idm-ns-localhost

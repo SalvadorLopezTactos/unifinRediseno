@@ -106,8 +106,27 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
 		if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db' && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table']))
 		{
 			$value = encodeMultienumValue(array($value)); 
+        } elseif ($this->isCustomModule($this->reporter->module)) {
+            $value = encodeMultienumValue(array($value));
 		}
 		return $value;
+    }
+
+    /**
+     * Check if it is a custom module
+     * @return bool
+     */
+    public function isCustomModule($module)
+    {
+        $customModules = array();
+        $customFiles = glob('modules/*/*_sugar.php', GLOB_NOSORT);
+        foreach ($customFiles as $customFile) {
+            $moduleName = str_replace('_sugar', '', pathinfo($customFile, PATHINFO_FILENAME));
+            if ($module === $moduleName) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

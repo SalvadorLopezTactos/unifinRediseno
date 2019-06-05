@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyMeetingsDashlet.data.php 57148 2010-06-25 16:23:33Z kjing $
 
 global $current_user;
 

@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Tests;
 
+use OneLogin\Saml2\Constants;
+
 /**
  * Helper class to retrieve necessary certificates for tests.
  * Class ConfigHelper
@@ -75,13 +77,13 @@ class IDMFixturesHelper
                 'entityId' => 'https://localhost/saml/metadata',
                 'assertionConsumerService' => [
                     'url' => 'https://localhost/saml/acs',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => 'https://localhost/saml/logout',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' => \OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
                 'x509cert' => static::getSpPublicKey(),
                 'privateKey' => static::getSpPrivateKey(),
             ],
@@ -90,11 +92,11 @@ class IDMFixturesHelper
                 'entityId' => 'https://vmstack104.test.com/adfs/services/trust',
                 'singleSignOnService' => [
                     'url' => 'https://vmstack104.test.com/adfs/ls',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => 'https://vmstack104.test.com/adfs/ls',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'x509cert' => static::getIdpX509Key('ADFS'),
             ],
@@ -122,13 +124,13 @@ class IDMFixturesHelper
                 'entityId' => 'http://localhost:8000/saml/metadata',
                 'assertionConsumerService' => [
                     'url' => 'http://localhost:8000/saml/acs',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://localhost:8000/saml/logout',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' => \OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
                 'x509cert' => static::getSpPublicKey(),
                 'privateKey' => static::getSpPrivateKey(),
             ],
@@ -137,11 +139,11 @@ class IDMFixturesHelper
                 'entityId' => 'http://www.okta.com/exk9f6zk3cchXSMkP0h7',
                 'singleSignOnService' => [
                     'url' => 'https://dev-432366.oktapreview.com/app/sugarcrmdev432366_sugarcrmidmdev_1/exk9f6zk3cchXSMkP0h7/sso/saml',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => 'https://dev-432366.oktapreview.com/app/sugarcrmdev432366_sugarcrmidmdev_1/exk9f6zk3cchXSMkP0h7/slo/saml',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'x509cert' => static::getIdpX509Key('Okta'),
             ],
@@ -167,13 +169,13 @@ class IDMFixturesHelper
                 'entityId' => 'idpdev',
                 'assertionConsumerService' => [
                     'url' => 'http://localhost:8000/saml/acs',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://localhost:8000/saml/logout',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' => \OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
                 'x509cert' => static::getSpPublicKey(),
                 'privateKey' => static::getSpPrivateKey(),
             ],
@@ -182,11 +184,11 @@ class IDMFixturesHelper
                 'entityId' => 'https://app.onelogin.com/saml/metadata/622315',
                 'singleSignOnService' => [
                     'url' => 'https://sugarcrm-idmeloper-dev.onelogin.com/trust/saml2/http-post/sso/622315',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => 'https://sugarcrm-idmeloper-dev.onelogin.com/trust/saml2/http-redirect/slo/622315',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'x509cert' => static::getIdpX509Key('OneLogin'),
             ],
@@ -208,14 +210,26 @@ class IDMFixturesHelper
      *
      * @return string
      */
+    /**
+     * Returns a valid JWT token with:
+     * 'aud' => 'audTest',
+     * 'exp' => 1529826678,
+     * 'jti' => 'jtiTest',
+     * 'redir' => 'http://sugarcrm.test/auth',
+     * 'scp' => ['core', 'hydra'],
+     *
+     * travis.key used for sign.
+     *
+     * @return string
+     */
     public static function getValidJWT()
     {
-        return 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.' .
-            'eyJhdWQiOiJhdWRUZXN0IiwiZXhwIjoxNTI5ODI2Njc4LCJqdGkiOiJqdGlUZXN0IiwicmVkaXIiOiJodHRwOlwvXC9zdWdhcmNybS50' .
-            'ZXN0XC9hdXRoIiwic2NwIjpbImNvcmUiLCJoeWRyYSJdfQ.SV0aOQKZbw2DeYZHlmvsXX9C5hUlgFbnP9AM6uAjuPnkxO_ODSdgqE8bs' .
-            'K4g201a6p4EnJiIqjuGbEBJDj-oenYKrK6YNirkHWUIJJq5W4M7rJG7V3YRHm0s1mPBAqvhQRTofzP6acMUgN689m0lLLzH8EBkgEryn' .
-            'e_nXSMCGEtPO8pqjBCu4o_w13nbPpjRVtgphhmsaUlQ_d4oG4WkVEILM1KQFWaoV8tgRqDdh_1kiTA_aX5AYtdMXs4LGlBp4ScnvA5x1' .
-            'uSOxVr7tGsMHBM21VBIlCFyf-AM3PUCz-jJc2PXE0adXlhTEOL13EanGxrvDTEzuGqXrZm-0T_zzA';
+        return 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Mjk5MTIwMTcsImV4cCI6MTcwMjcxMjAxNywiYXVkIjoiYXVkVGV' .
+            'zdCIsImp0aSI6Imp0aVRlc3QiLCJzY3AiOlsiY29yZSIsImh5ZHJhIl0sImlkX2V4dCI6W10sImF0X2V4dCI6W10sInJlZGlyIjoiaH' .
+            'R0cDpcL1wvc3VnYXJjcm0udGVzdFwvYXV0aCJ9.Umz66v7dxsYHu6L1vktx0B9Apvfj4hbu1jeyWbqDbfxuPPlrWfq1DyemyzyxgMhf' .
+            'HMTWKHI6TDoF7M4s6RJaTOW2SAjorkciGp-eZtytaaxjnnr14YNDLNTHqBZ5HpT6jWuDd70di75DWx9aNDYiR8SpYHRN8DkcCGlten9' .
+            'p5xXaX-uwMEj0T43FK4n7ncNIVJtkvMCuIrr1y0KPq8w1lw1JlIUEoUfFLAffwCeLDmuZKAZzIi1_BbmbZKlwWPAqN7UU99XGLUtgvH' .
+            'YzlffeFs8nWDuj_0HNESP0mZOmsMOV3OFitqZjMu7QwSVyT2OWivaH4IvrajHhYIEq3umBnQ';
     }
 
     /**

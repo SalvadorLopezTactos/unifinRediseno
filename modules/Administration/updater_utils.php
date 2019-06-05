@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
 ********************************************************************************/
 
 /**
@@ -412,20 +411,27 @@ function checkDownloadKey($data){
 
 	}
 
+    $settings = [
+        // default the number of licensed users to 1 in order to avoid the error message
+        // when the administrator has already logged in but hasn't yet validated the license
+        'users'                     => $data['license_users'] ?? 1,
+        'num_lic_oc'                => $data['license_num_lic_oc'] ?? 0,
+        'num_portal_users'          => $data['license_num_portal_users'] ?? 0,
+        'validation_key'            => $data['license_validation_key'] ?? null,
+        'vk_end_date'               => $data['license_vk_end_date'] ?? null,
+        'expire_date'               => $data['license_expire_date'] ?? null,
+        'last_validation_success'   => TimeDate::getInstance()->nowDb(),
+        'validation_notice'         => '',
+        'enforce_portal_user_limit' => $data['enforce_portal_user_limit'] ?? 0,
+    ];
 
-	$GLOBALS['license']->saveSetting('license', 'users', $data['license_users']);
-	$GLOBALS['license']->saveSetting('license', 'num_lic_oc', (empty($data['license_num_lic_oc']) ? 0 : $data['license_num_lic_oc']));
-	if(empty($data['license_num_portal_users'])) $data['license_num_portal_users'] = 0;
-	$GLOBALS['license']->saveSetting('license', 'num_portal_users', $data['license_num_portal_users']);
-	$GLOBALS['license']->saveSetting('license', 'validation_key', $data['license_validation_key']);
-	$GLOBALS['license']->saveSetting('license', 'vk_end_date', $data['license_vk_end_date']);
-	$GLOBALS['license']->saveSetting('license', 'expire_date', $data['license_expire_date']);
-	$GLOBALS['license']->saveSetting('license', 'last_validation_success', TimeDate::getInstance()->nowDb());
-	$GLOBALS['license']->saveSetting('license', 'validation_notice', '');
-	$GLOBALS['license']->saveSetting('license', 'enforce_portal_user_limit', (isset($data['enforce_portal_user_limit'])&&$data['enforce_portal_user_limit']=='1') ? '1' : '0');
+    if (isset($data['enforce_user_limit'])) {
+        $settings['enforce_user_limit'] = $data['enforce_user_limit'];
+    }
 
-	if(isset($data['enforce_user_limit']))
-		$GLOBALS['license']->saveSetting('license', 'enforce_user_limit', $data['enforce_user_limit']);
+    foreach ($settings as $parameter => $value) {
+        $GLOBALS['license']->saveSetting('license', $parameter, $value);
+    }
 
 	loadLicense(true);
 	return 'Validation Complete';
@@ -551,12 +557,12 @@ function checkSystemLicenseStatus()
 
 /**
  * Check if system status is OK
- * @param string $forceReload
+ * @param bool $forceReload
  * @return array|true True on OK or array with system status problem
  */
 function apiCheckSystemStatus($forceReload = false)
 {
-    global $sugar_config, $sugar_flavor, $db;
+    global $sugar_config;
 
     if (!isset($sugar_config['installer_locked']) || $sugar_config['installer_locked'] == false ){
         return array(
@@ -609,7 +615,7 @@ function apiCheckSystemStatus($forceReload = false)
 
 /**
  * Get system status from cache or settings or calculate it
- * @param string $forceReload
+ * @param bool $forceReload
  * @return array|boolean
  */
 function apiLoadSystemStatus($forceReload = false)
@@ -666,26 +672,26 @@ function apiActualLoadSystemStatus()
     global $sugar_flavor, $db;
 
     checkSystemLicenseStatus();
-    if (!isset($_SESSION['LICENSE_EXPIRES_IN'])) {
-        // BEGIN CE-OD License User Limit Enforcement
-        if (isset($sugar_flavor) &&
-            (!empty($admin->settings['license_enforce_user_limit']))) {
-            $query = "SELECT count(id) as total from users WHERE ".User::getLicensedUsersWhere();
-            $result = $db->query($query, true, "Error filling in user array: ");
-            $row = $db->fetchByAssoc($result);
-            $admin = Administration::getSettings();
-            $license_users = $admin->settings['license_users'];
-            $license_seats_needed = $row['total'] - $license_users;
-            if( $license_seats_needed > 0 ){
-                $_SESSION['EXCEEDS_MAX_USERS'] = 1;
-                return array(
+    $admin = Administration::getSettings();
+
+    if (!empty($admin->settings['license_enforce_user_limit'])) {
+        // BEGIN License User Limit Enforcement
+        $query = "SELECT count(id) as total from users WHERE ".User::getLicensedUsersWhere();
+        $result = $db->query($query, true, "Error filling in user array: ");
+        $row = $db->fetchByAssoc($result);
+
+        $license_users = $admin->settings['license_users'];
+        $license_seats_needed = $row['total'] - $license_users;
+        if ($license_seats_needed > 0) {
+            $_SESSION['license_seats_needed'] = $license_seats_needed;
+            $_SESSION['EXCEEDS_MAX_USERS'] = 1;
+            return array(
                     'level'  =>'admin_only',
-                    'message'=>'WARN_LICENSE_SEATS_MAXED',
-                    'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-                );
-            }
+                    'message'=>'ERROR_LICENSE_SEATS_MAXED',
+                    'url'    =>'#bwc/index.php?module=Users&action=index',
+            );
         }
-        // END CE-OD License User Limit Enforcement
+        // END License User Limit Enforcement
     }
 
     // Only allow administrators because of altered license issue

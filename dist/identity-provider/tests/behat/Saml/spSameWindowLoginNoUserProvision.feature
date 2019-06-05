@@ -7,7 +7,7 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-@saml @login @sp @same-window @no-user-provision
+@saml @login @sp @same-window @no-user-provision @extended
 Feature: SAML SP Initiated Login
   SugarCRM instance is configured:
   - to use external SAML authentication
@@ -21,6 +21,7 @@ Feature: SAML SP Initiated Login
     Given I am on "/"
     When I wait for element ".welcome"
     And I wait for the page to be loaded
+    And I wait until the loading is completed
     And I click "a[title='Log In']"
     Then I wait for the page to be loaded
     And I wait until the loading is completed

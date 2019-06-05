@@ -64,6 +64,9 @@ class MixedAuthenticationProvider implements AuthenticationProviderInterface
                 try {
                     return $provider->authenticate($authToken);
                 } catch (\Exception $e) {
+                    if (!empty($e->errorLabel) && $e->errorLabel === 'license_seats_needed') {
+                        throw $e;
+                    }
                     $lastException = $e;
                 }
             }

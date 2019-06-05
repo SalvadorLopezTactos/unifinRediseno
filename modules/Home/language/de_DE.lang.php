@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - Ein einfaches SAML-Toolkit für PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Der overflow:scroll für mobiles Webkit. Natives Scrollen innerhalb eines Elements mit fixer Höhe/Breite.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas ist eine JavaScript Bibliothek which adds the HTML5 Canvas support to Internet Explorer. It renders shapes and images via Flash drawing API. It supports almost all Canvas APIs and, in many cases, runs faster than other similar libraries which use VML or Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - das JavaScript InfoVis-Toolkit bietet Tools für die Erstellung interaktiver Datenvisualisierungen für das Web.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Ein Open Source-Web-Framework für PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV Daten-Parser für PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - PHP-Funktionen in JavaScript verwenden',

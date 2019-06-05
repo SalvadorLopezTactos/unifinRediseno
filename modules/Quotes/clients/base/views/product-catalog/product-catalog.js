@@ -76,21 +76,55 @@
     currentFilterTerm: undefined,
 
     /**
+     * The main Tree-level module to use when fetching data for the dashlet
+     */
+    treeModule: undefined,
+
+    /**
+     * The config settings and variables for the hierarchy tree
+     */
+    treeConfig: undefined,
+
+    /**
+     * The SpriteSheet object containing id, imagePath, and dataPath
+     */
+    spriteSheetManifest: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
 
         this.activeFetchCt = 0;
-        this.searchText = app.lang.get('LBL_SEARCH_CATALOG_PLACEHOLDER', 'Quotes');
+        this.searchText = this.getSearchTextPlaceholder();
 
         this.dataLoaded = false;
         this.phaserReady = false;
+
+        this.initializeProviderModules();
+        this.treeConfig = this.getTreeStateConfigSettings();
+        this.spriteSheetManifest = this.getSpriteSheetManifestObject();
 
         this.context.on('phaserio:ready', function() {
             this.phaserReady = true;
             this.checkBuildPhaser();
         }, this);
+    },
+
+    /**
+     * Returns the placeholder string for the Search text input
+     * @return {string}
+     */
+    getSearchTextPlaceholder: function() {
+        return app.lang.get('LBL_SEARCH_CATALOG_PLACEHOLDER', 'Quotes');
+    },
+
+    /**
+     * Initializes any modules needed for data fetching
+     */
+    initializeProviderModules: function() {
+        this.treeModule = 'ProductTemplates';
     },
 
     /**
@@ -101,10 +135,23 @@
 
         this._super('bindDataChange');
 
-        // need to trigger on app.controller.context because of contexts changing between
-        // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
-        // app.controller.context is the only consistent context to use
-        app.controller.context.on('productCatalogDashlet:add:complete', this._onProductDashletAddComplete, this);
+        // adding PC Dashlet just return
+        if (this.isConfig) {
+            return;
+        }
+
+        var viewDetails = this.closestComponent('record') ?
+            this.closestComponent('record') :
+            this.closestComponent('create');
+
+        if (!_.isUndefined(viewDetails)) {
+            // need to trigger on app.controller.context because of contexts changing between
+            // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+            // app.controller.context is the only consistent context to use
+            app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add:complete',
+                this._onProductDashletAddComplete, this);
+        }
+
         $(window).on('resize', _.bind(this._resizePhaserCanvas, this));
 
         sidebarLayout = this.closestComponent('sidebar');
@@ -148,7 +195,7 @@
         var method = 'read';
         var payload = {};
 
-        url = 'ProductTemplates/tree';
+        url = this.treeModule + '/tree';
 
         if (term) {
             method = 'create';
@@ -199,7 +246,7 @@
      * and parses data to be used by the tree
      *
      * @param response
-     * @private
+     * @protected
      */
     _onCatalogFetchSuccess: function(response) {
         this.jsTreeData = response;
@@ -250,7 +297,7 @@
      * this function handles it and passes the delta info to Phaser
      *
      * @param {MouseEvent} mouseEvent The mouse scroll wheel event
-     * @private
+     * @protected
      */
     _onMouseWheelChange: function(mouseEvent) {
         var delta = mouseEvent.type === 'mousewheel' ?
@@ -269,25 +316,234 @@
     },
 
     /**
-     * This function creates the actual PhaserIO game object
+     * Wraps getting spritesheets
      *
-     * @private
+     * @return {{atlasJSONHash: (*|{imagePath: string, id: string, dataPath: string}[])}}
      */
-    _createPhaser: function() {
-        var $el;
-        var gameConfig;
-        var bootState;
-        var loadState;
-        var treeState;
-        var manifest = {
-            atlasJSONHash: [
-                {
-                    id: 'prodCatTS',
-                    imagePath: 'modules/Quotes/clients/base/views/product-catalog/product-catalog-ss.png',
-                    dataPath: 'modules/Quotes/clients/base/views/product-catalog/product-catalog-ss.json'
-                }
-            ]
+    getSpriteSheetManifestObject: function() {
+        return {
+            atlasJSONHash: this._getSpriteSheets()
         };
+    },
+
+    /**
+     * Returns an array of SpriteSheet location objects and ids for each spritesheet
+     *
+     * @return {{imagePath: string, id: string, dataPath: string}[]}
+     * @protected
+     */
+    _getSpriteSheets: function() {
+        return [{
+            id: 'prodCatTS',
+            imagePath: 'modules/Quotes/clients/base/views/product-catalog/product-catalog-ss.png',
+            dataPath: 'modules/Quotes/clients/base/views/product-catalog/product-catalog-ss.json'
+        }];
+    },
+
+    /**
+     * Returns the Hex-value color to use for the node
+     *
+     * @param {string} itemType The Item type of the node
+     * @param {Object} node The Phaser node we need an icon name
+     * @return {string}
+     * @protected
+     */
+    _getTreeNodeTextColor: function(itemType, node) {
+        var textColor = '';
+        if (itemType === 'category') {
+            textColor = this.treeConfig.categoryColor;
+        } else if (itemType === 'product' || itemType === 'showMore') {
+            textColor = this.treeConfig.itemColor;
+        }
+
+        return textColor;
+    },
+
+    /**
+     * Returns the icon name to use for the node
+     *
+     * @param {string} itemType The Item type of the node
+     * @param {Object} node The Phaser node we need an icon name
+     * @return {string}
+     * @protected
+     */
+    _getTreeNodeIconName: function(itemType, node) {
+        var iconName = '';
+        if (itemType === 'category') {
+            iconName = node.state === 'closed' ?
+                this._getTreeIconClosedStateName() :
+                this._getTreeIconOpenStateName();
+        } else if (itemType === 'product') {
+            iconName = 'list-alt';
+        } else if (itemType === 'showMore') {
+            iconName = 'empty';
+        }
+
+        return iconName;
+    },
+
+    /**
+     * Returns the open icon name for the open state of a folder
+     *
+     * @return {string}
+     * @protected
+     */
+    _getTreeIconOpenStateName: function() {
+        return 'folder-open-o';
+    },
+
+    /**
+     * Returns the closed icon name for the closed state of a folder
+     *
+     * @return {string}
+     * @protected
+     */
+    _getTreeIconClosedStateName: function() {
+        return 'folder';
+    },
+
+    /**
+     * Extensible function to allow Icon Height to be tweaked based on the icon or node
+     *
+     * @param {string} iconName
+     * @param {Object} node The Phaser node we need an icon height
+     * @return {number}
+     * @protected
+     */
+    _getTreeIconHeight: function(iconName, node) {
+        return iconName === 'list-alt' ? 12 : this.treeConfig.iconHeight;
+    },
+
+    /**
+     * Extensible function to allow Icon Height to be tweaked based on the icon or node
+     *
+     * @param {string} iconName
+     * @param {Object} node The Phaser node we need an icon height
+     * @return {number}
+     * @protected
+     */
+    _getTreeIconWidth: function(iconName, node) {
+        return this.treeConfig.iconWidth;
+    },
+
+    /**
+     *
+     * @param {string} itemType The Item type of the node
+     * @param {string} iconName The name of the icon
+     * @param {Object} node The Phaser node we need an icon name
+     * @return {string} The ID of the SpriteSheet to use
+     * @protected
+     */
+    _getTreeNodeSpriteSheetId: function(itemType, iconName, node) {
+        return 'prodCatTS';
+    },
+
+    /**
+     * Handles when any item on the stage is clicked.
+     * This is inside the Phaser conxtext, not the view
+     *
+     * @param {Phaser.Image|Phaser.Text} target The Phaser text or icon that was clicked
+     * @protected
+     */
+    _onTreeNodeItemClicked: function(target) {
+        var isIcon = target instanceof Phaser.Image;
+
+        if (target._itemType === 'category' || target._itemType === 'showMore') {
+            this.game._view._onTreeNodeCategoryClicked(target, isIcon);
+        } else {
+            if (isIcon) {
+                this.game._view._onTreeNodeIconClicked(target);
+            } else {
+                this.game._view._onTreeNodeNameClicked(target);
+            }
+        }
+    },
+
+    /**
+     * Handles when a Product Category or "Show More" is clicked
+     * This is the View context, not Phaser
+     *
+     * @param {Phaser.Image|Phaser.Text} target The Phaser text or icon that was clicked
+     * @param {boolean} isIcon If the `target` is an image/icon or Text
+     * @protected
+     */
+    _onTreeNodeCategoryClicked: function(target, isIcon) {
+        var changeYDelta;
+        var isVisible;
+        var icon = isIcon ? target : target.parent._icon;
+        var isShowMore = target._itemType === 'showMore';
+        var openName = this._getTreeIconOpenStateName();
+        var closedName = this._getTreeIconClosedStateName();
+        var newFrameName = icon.frameName === closedName ? openName : closedName;
+        var currentState = this.phaser.state.getCurrentState();
+
+        if (isIcon) {
+            icon = target;
+            target = _.find(target.parent.children, function(item) {
+                return item instanceof Phaser.Text && item._itemId === target._itemId;
+            });
+        } else {
+            icon = _.find(target.parent.children, function(item) {
+                return item instanceof Phaser.Image && item._itemId === target._itemId;
+            });
+        }
+
+        if (target._isFetching) {
+            return;
+        }
+
+        if (isShowMore || newFrameName === openName) {
+            currentState._getMoreRecords(target, icon, isShowMore);
+        } else {
+            icon.frameName = newFrameName;
+            // subtract the group height from the game world height and update
+            currentState.gameWorldHeight -= target.parent.childGroup.height;
+            currentState._updateGameWorldSize();
+        }
+
+        if (target.parent.childGroup) {
+            isVisible = !target.parent.childGroup.visible;
+            target.parent.childGroup.visible = isVisible;
+            changeYDelta = target.parent.childGroup.height;
+
+            if (!isVisible) {
+                changeYDelta = -changeYDelta;
+            }
+
+            target.parent._events.onChangeY.dispatch(changeYDelta, target.parent);
+        }
+    },
+
+    /**
+     * When a tree item's icon gets clicked
+     *
+     * @param {Phaser.Image} target The icon that was clicked
+     * @protected
+     */
+    _onTreeNodeIconClicked: function(target) {
+        this._fetchRecord(target._itemId, {
+            success: _.bind(this._openItemInDrawer, this)
+        });
+    },
+
+    /**
+     * When a tree item's name gets clicked
+     *
+     * @param {Phaser.Text} target The text label that was clicked
+     * @protected
+     */
+    _onTreeNodeNameClicked: function(target) {
+        this._fetchRecord(target._itemId, {
+            success: _.bind(this._sendItemToRecord, this)
+        });
+    },
+
+    /**
+     * Returns an EventHub object containing any event Signals the tree will use
+     *
+     * @return {EventHub} The Event Hub to use with Phaser
+     */
+    getPhaserEventHub: function() {
         var EventHub = function() {};
         EventHub.prototype = {
 
@@ -324,6 +580,58 @@
                 }
             }
         };
+        return EventHub;
+    },
+
+    /**
+     * Returns the canvas ID name Phaser should use
+     *
+     * @return {string}
+     * @protected
+     */
+    _getPhaserCanvasId: function() {
+        return 'product-catalog-canvas-' + this.cid;
+    },
+
+    /**
+     * Returns the Phaser game config
+     *
+     * @return {Object}
+     */
+    getPhaserGameConfig: function() {
+        var elIdName = this._getPhaserCanvasId();
+        var $el = this.$('#' + elIdName);
+        var gameConfig = {
+            height: 260,
+            parent: elIdName,
+            renderer: Phaser.CANVAS,
+            transparent: true,
+            width: $el.width()
+        };
+
+        return this._getPhaserGameConfig(gameConfig);
+    },
+
+    /**
+     * Extensible function to tweak anything in the game config before sending it to Phaser
+     *
+     * @param {Object} gameConfig
+     * @return {Object}
+     * @protected
+     */
+    _getPhaserGameConfig: function(gameConfig) {
+        return gameConfig;
+    },
+
+    /**
+     * This function creates the actual PhaserIO game object
+     *
+     * @protected
+     */
+    _createPhaser: function() {
+        var gameConfig = this.getPhaserGameConfig();
+        var EventHub = this.getPhaserEventHub();
+        var states;
 
         // remove the phaser console log
         window.PhaserGlobal = {
@@ -335,16 +643,6 @@
             this.phaser.destroy();
         }
 
-        $el = this.$('#product-catalog-canvas-' + this.cid);
-        gameConfig = {
-            height: 260,
-            parent: 'product-catalog-canvas-' + this.cid,
-            renderer: Phaser.CANVAS,
-            transparent: true,
-            width: $el.width()
-        };
-
-        // use 100% for the width and 260px for the height
         this.phaser = new Phaser.Game(gameConfig);
 
         this.phaser._view = this;
@@ -362,7 +660,36 @@
         this.phaser.events = new EventHub();
         this.phaser.events.onTreeReady.add(this.onPhaserTreeReadyHandler, this);
 
-        bootState = {
+        states = this.getStates();
+        _.each(states, function(state, index) {
+            this.phaser.state.add(index, state);
+        }, this);
+
+        this.phaser.state.start('boot');
+    },
+
+    /**
+     * Gets the states needed to be added to Phaser
+     *
+     * @return {Object} The states to add to Phaser
+     */
+    getStates: function() {
+        var states = {
+            boot: this._getBootState(),
+            load: this._getLoadState(),
+            tree: this._getTreeState()
+        };
+
+        return this._getAdditionalStates(states);
+    },
+
+    /**
+     * Returns the Phaser.State object for the Boot state
+     *
+     * @protected
+     */
+    _getBootState: function() {
+        return {
             /**
              * Preload is called as the BootState initializes and lets us set any flags we need later.
              * This is the place for setting any Phaser variables we might need at runtime.
@@ -378,15 +705,22 @@
                 this.game.state.start('load');
             }
         };
+    },
 
-        loadState = {
+    /**
+     * Returns the Phaser.State object for the Load state
+     *
+     * @protected
+     */
+    _getLoadState: function() {
+        return {
             /**
              * Preload is called as the LoadState initializes and lets us load any assets we'll use later.
              * This would also be the place to add preloading progressbar
              */
             preload: function() {
                 // loop over anything in the manifest and load it
-                _.each(manifest, function(itemsToLoad, key) {
+                _.each(this.game._view.spriteSheetManifest, function(itemsToLoad, key) {
                     if (!_.isEmpty(itemsToLoad)) {
                         _.each(itemsToLoad, function(item) {
                             switch (key) {
@@ -412,8 +746,10 @@
                 this.game.state.start('tree');
             }
         };
+    },
 
-        treeState = {
+    getTreeStateConfigSettings: function() {
+        var config = {
             categoryColor: '#000000',
             itemColor: '#167DE5',
             itemFont: '12px open sans',
@@ -427,6 +763,45 @@
             itemRowYPadding: 21,
             childRowYPadding: 10,
             containerRowStartY: 0,
+            showMoreNode: {
+                data: app.lang.get('LBL_SHOW_MORE'),
+                type: 'showMore'
+            },
+            showMoreNodeIconName: 'folder-open-o',
+            scrollBarBkgdBorderLineSize: 1,
+            scrollBarBkgdWidth: 15,
+            scrollBarBkgdBorderColor: 0xE8E8E8,
+            scrollBarBkgdFill: 0xFAFAFA,
+            scrollBarBkgdFillIE: 0xF0F0F0,
+            scrollThumbWidth: 8,
+            scrollThumbHeight: 16,
+            scrollThumbFillColor: 0xC1C1C1,
+            scrollThumbFillHoverColor: 0x7D7D7D,
+            scrollThumbTopBottomPadding: 3
+        };
+
+        return this._getTreeStateConfigSettings(config);
+    },
+
+    /**
+     * Extensible function if anything needs to be added or removed from cfg
+     *
+     * @param cfg
+     * @return {Object}
+     * @protected
+     */
+    _getTreeStateConfigSettings: function(cfg) {
+        return cfg;
+    },
+
+    /**
+     * Returns the Phaser.State object for the Tree state
+     *
+     * @protected
+     */
+    _getTreeState: function() {
+        var treeConfig = this.treeConfig = this.getTreeStateConfigSettings();
+        var treeState = {
             isLoading: false,
             groups: undefined,
             rootGroup: undefined,
@@ -435,29 +810,15 @@
             gameWorldWidth: undefined,
             cameraY: undefined,
             GroupEventHub: undefined,
-            showMoreNode: {
-                data: 'Show More',
-                type: 'showMore'
-            },
             scrollBarImg: undefined,
-            scrollBarBkgdBorderLineSize: 1,
-            scrollBarBkgdWidth: 15,
-            scrollBarBkgdBorderColor: 0xE8E8E8,
-            scrollBarBkgdFill: 0xFAFAFA,
-            scrollBarBkgdFillIE: 0xF0F0F0,
             scrollBarThumbImg: undefined,
             scrollThumbHoverImg: undefined,
             scrollThumbImg: undefined,
-            scrollThumbWidth: 8,
-            scrollThumbHeight: 16,
-            scrollThumbFillColor: 0xC1C1C1,
-            scrollThumbFillHoverColor: 0x7D7D7D,
             previousScrollThumbY: 0,
             scrollPercentHeight: 0,
             scrollThumbHoverInTween: undefined,
             scrollThumbHoverOutTween: undefined,
             maxScrollY: undefined,
-            scrollThumbTopBottomPadding: 3,
             useScrollbar: true,
             isLangRTL: false,
 
@@ -465,7 +826,7 @@
              * Preload is called as the TreeState initializes and lets us setup any vars we need for the state
              */
             preload: function() {
-                var $el = this.game._view.$('#product-catalog-canvas-' + this.game._view.cid);
+                var $el = this.game._view.$('#' + this.game._view._getPhaserCanvasId());
 
                 this.groups = [];
                 this.gameWorldHeight = 0;
@@ -603,7 +964,8 @@
              */
             _setTreeData: function(treeData) {
                 var groupIndex = 0;
-                var $el = this.game._view.$('#product-catalog-canvas-' + this.game._view.cid);
+                var elIdName = this.game._view._getPhaserCanvasId();
+                var $el = this.game._view.$('#' + elIdName);
 
                 this.dashletHeight = $el.height();
                 this.gameWorldWidth = $el.width();
@@ -724,17 +1086,12 @@
                 var itemName = node.data;
                 var startX;
                 var startY;
+                var gameView = this.game._view;
+                var iconSpriteSheetId;
 
-                if (itemType === 'category') {
-                    textColor = this.categoryColor;
-                    iconName = node.state === 'closed' ? 'folder' : 'folder-open-o';
-                } else if (itemType === 'product') {
-                    textColor = this.itemColor;
-                    iconName = 'list-alt';
-                } else if (itemType === 'showMore') {
-                    textColor = this.itemColor;
-                    iconName = 'empty';
-                }
+                textColor = gameView._getTreeNodeTextColor(itemType, node);
+                iconName = gameView._getTreeNodeIconName(itemType, node);
+                iconSpriteSheetId = gameView._getTreeNodeSpriteSheetId(itemType, iconName, node);
 
                 startX = this.iconStartX + 8;
                 startY = this.iconYOffset;
@@ -747,11 +1104,11 @@
                 icon = this.game.add.image(
                     startX,
                     startY,
-                    'prodCatTS',
+                    iconSpriteSheetId,
                     iconName
                 );
-                icon.height = this.iconHeight;
-                icon.width = this.iconWidth;
+                icon.height = gameView._getTreeIconHeight(iconName, node);
+                icon.width = gameView._getTreeIconWidth(iconName, node);
                 icon.anchor.setTo(0.5, 0.5);
                 icon._itemName = itemName;
                 icon._itemId = itemId;
@@ -761,10 +1118,9 @@
                 }, 3600, null, false, 0, -1);
 
                 icon.inputEnabled = true;
-                icon.events.onInputDown.add(this._itemClicked, this);
+                icon.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
                 icon.input.useHandCursor = true;
 
-                startY = this.textYOffset;
                 if (this.isLangRTL) {
                     startX -= this.iconWidth - this.iconTextPadding;
                 } else {
@@ -782,7 +1138,7 @@
                 );
 
                 if (this.isLangRTL) {
-                    text.anchor.setTo(1,0);
+                    text.anchor.setTo(1, 0);
                 }
 
                 text._itemName = itemName;
@@ -790,7 +1146,7 @@
                 text._itemType = itemType;
 
                 text.inputEnabled = true;
-                text.events.onInputDown.add(this._itemClicked, this);
+                text.events.onInputDown.add(gameView._onTreeNodeItemClicked, this);
                 text.input.useHandCursor = true;
 
                 group.name = group.name + '-' + itemName;
@@ -801,77 +1157,6 @@
                 group._text = text;
                 group.add(icon);
                 group.add(text);
-            },
-
-            /**
-             * Handles when any item on the stage is clicked.
-             *
-             * @param {Phaser.Image|Phaser.Text} target The Phaser text or icon that was clicked
-             * @private
-             */
-            _itemClicked: function(target) {
-                var isIcon = target instanceof Phaser.Image;
-
-                if (target._itemType === 'category' || target._itemType === 'showMore') {
-                    this._categoryClicked(target, isIcon);
-                } else {
-                    if (isIcon) {
-                        this._iconClicked(target);
-                    } else {
-                        this._nameClicked(target);
-                    }
-                }
-            },
-
-            /**
-             * Handles when a Product Category or "Show More" is clicked
-             *
-             * @param {Phaser.Image|Phaser.Text} target The Phaser text or icon that was clicked
-             * @param {boolean} isIcon If the `target` is an image/icon or Text
-             * @private
-             */
-            _categoryClicked: function(target, isIcon) {
-                var changeYDelta;
-                var isVisible;
-                var icon = isIcon ? target : target.parent._icon;
-                var isShowMore = target._itemType === 'showMore';
-                var newFrameName = icon.frameName === 'folder' ? 'folder-open-o' : 'folder';
-
-                if (isIcon) {
-                    icon = target;
-                    target = _.find(target.parent.children, function(item) {
-                        return item instanceof Phaser.Text && item._itemId === target._itemId;
-                    });
-                } else {
-                    icon = _.find(target.parent.children, function(item) {
-                        return item instanceof Phaser.Image && item._itemId === target._itemId;
-                    });
-                }
-
-                if (target._isFetching) {
-                    return;
-                }
-
-                if (isShowMore || newFrameName === 'folder-open-o') {
-                    this._getMoreRecords(target, icon, isShowMore);
-                } else {
-                    icon.frameName = newFrameName;
-                    // subtract the group height from the game world height and update
-                    this.gameWorldHeight -= target.parent.childGroup.height;
-                    this._updateGameWorldSize();
-                }
-
-                if (target.parent.childGroup) {
-                    isVisible = !target.parent.childGroup.visible;
-                    target.parent.childGroup.visible = isVisible;
-                    changeYDelta = target.parent.childGroup.height;
-
-                    if (!isVisible) {
-                        changeYDelta = -changeYDelta;
-                    }
-
-                    target.parent._events.onChangeY.dispatch(changeYDelta, target.parent);
-                }
             },
 
             /**
@@ -903,7 +1188,7 @@
                         _.bind(this._setMoreRecordsData, this, target, icon, isShowMore)
                     );
                 } else {
-                    icon.frameName = 'folder-open-o';
+                    icon.frameName = this.game._view._getTreeIconOpenStateName();
                     // add the group height to the game world height and update
                     this.gameWorldHeight += target.parent.childGroup.height;
                     this._updateGameWorldSize();
@@ -1168,7 +1453,7 @@
                     this._createLevel(childGroup, this.showMoreNode, groupIndex, data.next_offset);
                 }
 
-                icon.frameName = 'folder-open-o';
+                icon.frameName = this.showMoreNodeIconName;
                 icon.angle = 0;
                 icon._tween.stop();
 
@@ -1199,37 +1484,20 @@
 
                 this._updateGameWorldSize();
             },
-
-            /**
-             * When a ProductCatalog item's icon gets clicked
-             *
-             * @param {Phaser.Image} target The icon that was clicked
-             * @private
-             */
-            _iconClicked: function(target) {
-                this.game._view._fetchProductTemplate(target._itemId, {
-                    success: _.bind(this.game._view._openItemInDrawer, this.game._view)
-                });
-            },
-
-            /**
-             * When a ProductCatalog item's name gets clicked
-             *
-             * @param {Phaser.Text} target The text label that was clicked
-             * @private
-             */
-            _nameClicked: function(target) {
-                this.game._view._fetchProductTemplate(target._itemId, {
-                    success: _.bind(this.game._view._sendItemToQuote, this.game._view)
-                });
-            }
         };
 
-        this.phaser.state.add('boot', bootState);
-        this.phaser.state.add('load', loadState);
-        this.phaser.state.add('tree', treeState);
+        return $.extend({}, treeConfig, treeState);
+    },
 
-        this.phaser.state.start('boot');
+    /**
+     * Extensible function to add any additional states needed
+     *
+     * @param {Object} states
+     * @return {Object}
+     * @protected
+     */
+    _getAdditionalStates: function(states) {
+        return states;
     },
 
     /**
@@ -1238,12 +1506,12 @@
      * @param {string} id The parent hash id for the record
      * @param {int} offset
      * @param callback
-     * @private
+     * @protected
      */
     _fetchMoreRecords: function(id, offset, isShowMore, callback) {
         var callbacks;
         var method = 'create';
-        var url = app.api.buildURL('ProductTemplates/tree', method);
+        var url = app.api.buildURL(this.treeModule + '/tree', method);
         var payload = {};
 
         if (!_.isUndefined(id)) {
@@ -1276,24 +1544,55 @@
     },
 
     /**
-     * Fetchs a Product Template record given the ID, and sends the response data to `callbacks.success`
+     * Fetchs a Record given the ID, and sends the response data to `callbacks.success`
      *
      * @param {string} id The ProductTemplate ID Hash to fetch
      * @param {Object} callbacks The callback object with any success/error/complete handler functions
-     * @private
+     * @protected
      */
-    _fetchProductTemplate: function(id, callbacks) {
-        var url = app.api.buildURL('ProductTemplates/' + id, 'read');
+    _fetchRecord: function(id, callbacks) {
+        var module = this.getFetchRecordModule();
+        var url = app.api.buildURL(module + '/' + id, 'read');
         app.api.call('read', url, null, null, callbacks);
+    },
+
+    /**
+     * Returns the module name to use for fetching records
+     * before sending them to the drawer or record
+     *
+     * @return {string}
+     */
+    getFetchRecordModule: function() {
+        return this.treeModule;
     },
 
     /**
      * Sends the ProductTemplate data item to the Quote
      *
      * @param {Object} data The ProductTemplate data
-     * @private
+     * @protected
      */
-    _sendItemToQuote: function(data) {
+    _sendItemToRecord: function(data) {
+        this._massageDataBeforeSendingToRecord(data);
+
+        var viewDetails = this.closestComponent('record') ?
+            this.closestComponent('record') :
+            this.closestComponent('create');
+        // need to trigger on app.controller.context because of contexts changing between
+        // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+        // app.controller.context is the only consistent context to use
+        if (!_.isUndefined(viewDetails)) {
+            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+        }
+    },
+
+    /**
+     * Allows `data` to be manipulated and updated before sending to the record
+     *
+     * @param {Object} data The data we're sending to the Record
+     * @protected
+     */
+    _massageDataBeforeSendingToRecord: function(data) {
         data.position = 0;
         data._forcePosition = true;
 
@@ -1303,24 +1602,25 @@
 
         // remove ID/etc since we dont want Template ID to be the record id
         delete data.id;
+        delete data.status;
         delete data.date_entered;
         delete data.date_modified;
         delete data.pricing_formula;
-
-        // need to trigger on app.controller.context because of contexts changing between
-        // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
-        // app.controller.context is the only consistent context to use
-        app.controller.context.trigger('productCatalogDashlet:add', data);
     },
 
     /**
      * Sends the ProductTemplate data item to a Drawer layout
      *
      * @param {Object} data The ProductTemplate data
-     * @private
+     * @protected
      */
     _openItemInDrawer: function(data) {
         var model = app.data.createBean('ProductTemplates', data);
+        var viewDetails = this.closestComponent('record') ?
+            this.closestComponent('record').cid :
+            this.closestComponent('create').cid;
+
+        model.viewId = viewDetails;
         app.drawer.open({
             layout: 'product-catalog-dashlet-drawer-record',
             context: {
@@ -1333,7 +1633,7 @@
     /**
      * Handles when sending ProductTemplate data has been complete and we can enable the tree again
      *
-     * @private
+     * @protected
      */
     _onProductDashletAddComplete: function() {
         this.isFetchActive = false;
@@ -1343,7 +1643,7 @@
     /**
      * Resizes the Phaser Canvas width and height when the window is resized
      *
-     * @private
+     * @protected
      */
     _resizePhaserCanvas: function() {
         var $el = this.$('.product-catalog-container-' + this.cid);
@@ -1380,9 +1680,19 @@
         // remove window resize event
         $(window).off('resize');
         if (app.controller && app.controller.context) {
-            app.controller.context.off('productCatalogDashlet:add:complete', null, this);
-        }
+            if (this.isConfig) {
+                this._super('_dispose');
+                return;
+            }
 
+            var viewDetails = this.closestComponent('record') ?
+                this.closestComponent('record') :
+                this.closestComponent('create');
+
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.off(viewDetails.cid + ':productCatalogDashlet:add:complete', null, this);
+            }
+        }
         this._super('_dispose');
     }
 })

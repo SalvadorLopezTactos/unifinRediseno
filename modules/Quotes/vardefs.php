@@ -78,6 +78,9 @@ $dictionary['Quote'] = array(
             'type' => 'currency',
             'len' => '26,6',
             'default' => 0,
+            'formula' => '$taxrates.value',
+            'calculated' => true,
+            'enforced' => true,
             'studio' => false,
             'massupdate' => false,
             'comment' => 'Tax Rate Value',
@@ -305,6 +308,7 @@ $dictionary['Quote'] = array(
             'dbType' => 'decimal',
             'type' => 'currency',
             'len' => '26,6',
+            'default' => '0',
             'related_fields' => array(
                 'currency_id',
                 'base_rate'
@@ -817,6 +821,7 @@ $dictionary['Quote'] = array(
             'vname' => 'LBL_PRODUCT_BUNDLES',
             'links' => array('product_bundles'),
             'source' => 'non-db',
+            'hideacl' => true,
         ),
         'opportunities' => array(
             'name' => 'opportunities',
@@ -877,6 +882,7 @@ $dictionary['Quote'] = array(
             'source' => 'non-db',
             'rname' => 'id',
             'id_name' => 'id',
+            'vname' => 'LBL_OPPORTUNITY_ID',
             'table' => 'opportunities',
             'module' => 'Opportunities',
             'link' => 'opportunities',
@@ -1028,6 +1034,10 @@ $dictionary['Quote'] = array(
     'duplicate_check' => array(
         'enabled' => false,
     ),
+    'ignore_templates' => array(
+        // FIXME: Disable commentlog on Quotes until we can handle collection resets of bundles
+        'commentlog',
+    ),
 );
 VardefManager::createVardef(
     'Quotes',
@@ -1036,7 +1046,7 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
-        'currency'
+        'currency',
     )
 );
 

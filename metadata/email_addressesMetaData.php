@@ -13,6 +13,7 @@
 $dictionary['emails_email_addr_rel'] = array(
     'table' => 'emails_email_addr_rel',
     'comment' => 'Normalization of address fields FROM, TO, CC, and BCC',
+    'activity_enabled' => false,
     'fields' => array(
         'id' => array(
             'name' => 'id',

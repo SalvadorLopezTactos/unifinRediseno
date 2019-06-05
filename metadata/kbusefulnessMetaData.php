@@ -16,25 +16,21 @@ $dictionary['kbusefulness'] = array(
         'id' => array(
             'name' => 'id',
             'type' => 'id',
-            'len' => 36,
             'required' => true,
         ),
         'kbarticle_id' => array(
             'name' => 'kbarticle_id',
             'type' => 'id',
-            'len' => 36,
             'required' => true,
         ),
         'user_id' => array(
             'name' => 'user_id',
             'type' => 'id',
-            'len' => 36,
             'required' => true,
         ),
         'contact_id' => array(
             'name' => 'contact_id',
             'type' => 'id',
-            'len' => 36,
             'required' => false,
             'isnull' => true,
         ),

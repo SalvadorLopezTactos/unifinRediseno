@@ -137,21 +137,23 @@ class PMSEActivityDefinitionWrapper
                 if (!empty($this->activityDefinition->fetched_row['act_fields'])) {
                     $act_fields = json_decode($this->activityDefinition->fetched_row['act_fields']);
                     $needs_save = false;
-                    foreach ($act_fields as &$act_field) {
-                        if ($act_field->type == 'team_list') {
-                            $needs_save = true;
-                            $value = [];
-                            foreach ($act_field->value as $team_id) {
-                                $team_bean = BeanFactory::getBean('Teams', $team_id);
-                                $team = new stdClass();
-                                $team->id = $team_id;
-                                $team->valid = isset($team_bean->id);
-                                $value[] = $team;
+                    if (is_array($act_fields)) {
+                        foreach ($act_fields as &$act_field) {
+                            if ($act_field->type == 'team_list') {
+                                $needs_save = true;
+                                $value = [];
+                                foreach ($act_field->value as $team_id) {
+                                    $team_bean = BeanFactory::getBean('Teams', $team_id);
+                                    $team = new stdClass();
+                                    $team->id = $team_id;
+                                    $team->valid = isset($team_bean->id);
+                                    $value[] = $team;
+                                }
+                                $act_field->value = $value;
                             }
-                            $act_field->value = $value;
                         }
+                        unset($act_field);
                     }
-                    unset($act_field);
                     if ($needs_save) {
                         $this->activityDefinition->fetched_row['act_fields'] = json_encode($act_fields);
                     }

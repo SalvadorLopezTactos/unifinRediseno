@@ -27,19 +27,47 @@
         var dom;
         var attrs;
         var userCurrencyId;
+        var userCurrency = app.user.getCurrency();
+        var createInPreferred = userCurrency.currency_create_in_preferred;
+        var currencyFields;
+        var currencyFromRate;
 
         if (bean.has('sales_stage')) {
             dom = app.lang.getAppListStrings('sales_probability_dom');
             attrs = {
                 probability: dom[bean.get('sales_stage')]
             };
+        }
 
-            if (!skipCurrency) {
-                userCurrencyId = app.user.getPreference('currency_id') || app.currency.getBaseCurrencyId();
-                attrs.currency_id = userCurrencyId;
-                attrs.base_rate = app.metadata.getCurrency(userCurrencyId).conversion_rate;
-            }
+        if (skipCurrency && createInPreferred) {
+            // force the line item to the user's preferred currency and rate
+            attrs.currency_id = userCurrency.currency_id;
+            attrs.base_rate = userCurrency.currency_rate;
 
+            // get any currency fields on the model
+            currencyFields = _.filter(this.model.fields, function(field) {
+                return field.type === 'currency';
+            });
+            currencyFromRate = bean.get('base_rate');
+
+            _.each(currencyFields, function(field) {
+                // if the field exists on the bean, convert the value to the new rate
+                // do not convert any base currency "_usdollar" fields
+                if (bean.has(field.name) && field.name.indexOf('_usdollar') === -1) {
+                    attrs[field.name] = app.currency.convertWithRate(
+                        bean.get(field.name),
+                        currencyFromRate,
+                        userCurrency.currency_rate
+                    );
+                }
+            }, this);
+        } else if (!skipCurrency) {
+            userCurrencyId = userCurrency.currency_id || app.currency.getBaseCurrencyId();
+            attrs.currency_id = userCurrencyId;
+            attrs.base_rate = app.metadata.getCurrency(userCurrencyId).conversion_rate;
+        }
+
+        if (!_.isEmpty(attrs)) {
             // we need to set the defaults
             bean.setDefault(attrs);
             // just to make sure that any attributes that were already set, are set again.

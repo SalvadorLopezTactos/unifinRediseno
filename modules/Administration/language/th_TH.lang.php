@@ -375,7 +375,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'แอททริบิวของกลุ่ม:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'ใช้ DN ของผู้ใช้:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'รวม DN ของผู้ใช้กับแอททริบิวผู้ใช้เมื่อตรวจสอบการเป็นสมาชิกกลุ่ม',
-	'LBL_LDAP_USER_FILTER_DESC'=>'พารามิเตอร์ของตัวกรองเพิ่มเติมที่จะใช้เมื่อตรวจสอบสิทธิ์ผู้ใช้ เช่น\\nis_sugar_user=1 หรือ (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'พารามิเตอร์ของตัวกรองเพิ่มเติมที่จะใช้เมื่อตรวจสอบสิทธิ์ผู้ใช้ เช่น\nis_sugar_user=1 หรือ (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'แอททริบิวของล็อกอิน:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'แอททริบิวไบนด์:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'สำหรับการเชื่อมโยงผู้ใช้ LDAP<br>ตัวอย่าง:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
@@ -938,12 +938,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>คำเตือน:</b> เพื่อป้องกันข้อมูลของคุณ คุณจะต้องล็อคโปรแกรมติดตั้งโดยตั้งค่า &#39;installer_locked&#39; เป็น &#39;true&#39; ในไฟล์ config.php',
  	'WARN_LICENSE_EXPIRED'=> "<b>ประกาศ:</b> ใบอนุญาตของคุณจะหมดอายุภายใน ",
     'WARN_LICENSE_EXPIRED2' =>" วัน โปรดไปที่ <a href='index.php?action=LicenseSettings&module=Administration'>'\"การจัดการใบอนุญาต\"</a> ในหน้าจอการดูแลระบบ",
-    'WARN_LICENSE_SEATS'=>  "<b>คำเตือน:</b> ใบอนุญาตของผู้ใช้เกิน ",
-    'WARN_LICENSE_SEATS2' => "โปรดติดต่อตัวแทนฝ่ายขายหรือส่งอีเมลถึง <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>",
+    'WARN_LICENSE_SEATS'=>  "<b>คำเตือน:</b> มี ",
+    'WARN_LICENSE_SEATS2' => " ผู้ใช้งานอยู่เมื่อค่าสมาชิกของคุณให้สิทธิ์สำหรับ ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">กรุณาปิดการใช้งานของผู้ใช้บากคน และติดต่อคู่ค้าหรือตัวแทนจำหน่ายของคุณ"
+        . " หรือส่งอีเมลมาที่ <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">ดูข้อมูลเพิ่มเติมได้ที่ "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "</a>บทความ</p>ทำความเข้าใจประเภทผู้ใช้และใบอนุญาต Sugar",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>คำเตือน:</b> จำนวนผู้ใช้ที่ใช้งานเท่ากับจำนวนใบอนุญาตสูงสุดที่ใช้ได้แล้ว: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>คำเตือน:</b> จำนวนผู้ใช้ที่ใช้งานเท่ากับจำนวนใบอนุญาตสูงสุดที่ใช้ได้แล้ว",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>คำเตือน:</b> จำนวนผู้ใช้ที่ใช้งานซึ่งอนุญาตโดยใบอนุญาตของคุณเท่ากับจำนวนผู้ใช้ที่ใช้งานในระบบนี้แล้ว คุณจะสร้างผู้ใช้ที่ใช้งานเพิ่มอีกไม่ได้",
-    'WARN_REPAIR_CONFIG' => '<b>คำเตือน:</b> ไฟล์ config.php ต้องมีการซ่อมแซม โปรดใช้สคริปต์ <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>สร้างไฟล์การกำหนดค่าอีกครั้ง</a> ในเพจซ่อมแซมของพื้นที่การดูแลระบบเพื่อซ่อมแซมไฟล์การกำหนดค่า',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>คำเตือน;</b>คุณจะไม่สามารถสร้างผู้ที่ใช้งานอยู่เพิ่มเติมได้"
+        . " โปรดซื้อค่าสมาชิกเพิ่ม",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>คำเตือน;</b>คุณจะไม่สามารถสร้างผู้ที่ใช้งานอยู่เพิ่มเติมได้"
+        . " โปรดซื้อค่าสมาชิกเพิ่ม",
+    'WARN_REPAIR_CONFIG' => '<b>คำเตือน:</b> ไฟล์ config.php จำเป็นต้องได้รับการซ่อมแซม กรุณาใช้ <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;> เพื่อสร้างไฟล์ Config ใหม่</a> สคริปต์หน้า Repair ในพื้นที่ของผู้ดูแลระบบเพื่อซ่อมแซมไฟล์ config',
     'WARN_UPGRADE_APP'=> "ขณะนี้เวอร์ชันที่อัปเดตของแอปพลิเคชันสามารถใช้ได้แล้ว ",
     'WARN_UPGRADE' => '<b>คำเตือน:</b> โปรดอัปเกรด ',
     'WARN_UPGRADENOTE' => 'หมายเหตุ: ',
@@ -960,7 +969,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'ล้างแคชข้อมูลของ Vardef',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'ย้าย vardef ออกจากแคช',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'ล้างแคชการค้นหาแบบรวมศูนย์',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'ย้าย unified_search_modules.php ออกจากแคช',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'ถอดถอน unified_search_modules.php ออกจากแคช',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'การซ่อมแซมด่วนและสร้างใหม่',
     'LBL_QUICK_REPAIR_TITLE'=>'โปรดเลือกโมดูลที่จะซ่อมแซม:',
 	'LBL_FAILED_CONNECTION'=> 'ไม่สามารถเชื่อมต่อ:',
@@ -1253,15 +1262,17 @@ $mod_strings = array (
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'ไม่พบไฟล์ Metadata',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'การตั้งค่า',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'ออกแบบการตั้งค่า Advanced Workflow',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'เครื่องมือดูล็อก',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'เข้าถึงบันทึก Advanced Workflow',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'เข้าถึง ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'การจัดการกระบวนการ',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'ดูกระบวนการที่เปิดและเรียกใช้ทั้งหมดในระบบ',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'กำหนดค่า ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' การตั้งค่าและดูบันทึก จัดการกระบวนการ BPM ทั้งหมดสำหรับผู้ใช้ทั้งหมดผ่านการจัดการกระบวนการ',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'ออกแบบการตั้งค่า Advanced Workflow และดูบันทึก จัดการกระบวนการ BPM ทั้งหมดสำหรับผู้ใช้ทั้งหมดผ่านการจัดการกระบวนการ',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'โครงร่างใบเสนอราคา',
+    'LBL_MANAGE_QUOTES' => 'ร่างโครงแผ่นงานใบเสนอราคา',
 );

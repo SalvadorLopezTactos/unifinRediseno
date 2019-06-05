@@ -13,16 +13,18 @@
 <div class="block preview-data">
 {{#each meta.panels}}
 {{#each fields}}
-    <div class="record-cell field-row{{#if ../hide}}{{#if ../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
-        <div class="field-label ellipsis_inline" data-name="{{name}}">
-            <span class="preview-lock-link-wrapper hide" data-name="{{name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
+    {{#if name}}
+    <div class="record-cell field-row{{#if ../../hide}}{{#if ../../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
+        <div class="field-label ellipsis_inline" data-name="{{../name}}">
+            <span class="preview-lock-link-wrapper hide" data-name="{{../name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
                 <i class="fa fa-lock"></i>
             </span>
-            {{str  label ../../model.module}}</div>
-        <div class="field-value" data-type="{{type}}" name="{{name}}" data-name="{{name}}">
-            {{field ../../this model=../../model template="preview"}}
+            {{str  label ../../../model.module}}</div>
+        <div class="field-value" data-type="{{../type}}" name="{{../name}}" data-name="{{../name}}">
+            {{field ../../../this model=../../../model template="preview"}}
         </div>
     </div>
+    {{/if}}
 {{/each}}
 {{/each}}
     <div class="field-row">

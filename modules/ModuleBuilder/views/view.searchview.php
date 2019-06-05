@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: EditView.php 18703 2006-12-15 09:42:43Z majed $
 
 
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;

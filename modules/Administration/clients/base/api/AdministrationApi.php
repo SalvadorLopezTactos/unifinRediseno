@@ -179,6 +179,29 @@ class AdministrationApi extends SugarApi
                     'SugarApiExceptionSearchUnavailable',
                 ),
             ),
+
+            // Enable migration mode for Idm
+            'enableIdmMigration' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'idm', 'migration', 'enable'],
+                'pathVars' => [''],
+                'method' => 'enableIdmMigration',
+                'shortHelp' => 'Enable IDM api to perform migrations',
+                'longHelp' => 'include/api/help/administration_enable_idm_migrations_post_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'minVersion' => '11.2',
+            ],
+            // Disable migration mode for Idm
+            'disableIdmMigration' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'idm', 'migration', 'disable'],
+                'pathVars' => [''],
+                'method' => 'disableIdmMigration',
+                'shortHelp' => 'Disable IDM migrations',
+                'longHelp' => 'include/api/help/administration_disable_idm_migrations_post_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'minVersion' => '11.2',
+            ],
         );
     }
 
@@ -542,5 +565,60 @@ class AdministrationApi extends SugarApi
 
         $engine = $this->getSearchEngine(true);
         return $engine->getContainer()->indexManager->enableReplicas();
+    }
+
+    /**
+     * Enable idm migrations.
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function enableIdmMigration(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $configurator = $this->getConfigurator();
+        $configurator->config['maintenanceMode'] = true;
+        $configurator->config['idmMigration'] = true;
+        $configurator->handleOverride();
+        return ['success' => 'true'];
+    }
+
+    /**
+     * Disable idm migrations.
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function disableIdmMigration(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $configurator = $this->getConfigurator();
+        $configurator->config['maintenanceMode'] = false;
+        $configurator->config['idmMigration'] = false;
+        $configurator->handleOverride();
+        $this->clearCache();
+        return ['success' => 'true'];
+    }
+
+    /**
+     * Factory method to mock Configurator
+     *
+     * @return Configurator
+     */
+    protected function getConfigurator(): Configurator
+    {
+        return new Configurator();
+    }
+
+    /**
+     * Clears required metadata cache
+     */
+    protected function clearCache(): void
+    {
+        \MetaDataManager::refreshSectionCache(\MetaDataManager::MM_CONFIG);
     }
 }

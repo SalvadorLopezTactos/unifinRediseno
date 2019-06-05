@@ -18,9 +18,13 @@ use League\OAuth2\Client\Token\AccessToken;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
 use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\IdmNonrecoverableException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\OAuth2\Client\Provider\IdmProvider;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\Checker;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\CodeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\IntrospectToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\JWTBearerToken;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\RefreshToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\SugarOIDCUserChecker;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider\SugarOIDCUserProvider;
@@ -60,6 +64,11 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     protected $userMapping;
 
     /**
+     * @var Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\Checker
+     */
+    protected $SAChecker;
+
+    /**
      * List of handlers that can be used to handle tokens.
      * Actually, they correspond to steps of SAML authentication flow.
      *
@@ -68,6 +77,8 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     protected $handlers = [
         IntrospectToken::class => 'introspectToken',
         JWTBearerToken::class => 'jwtBearerGrantTypeAuth',
+        RefreshToken::class => 'refreshTokenGrantTypeAuth',
+        CodeToken::class => 'authCodeGrantTypeAuth',
     ];
 
     /**
@@ -81,12 +92,14 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         AbstractProvider $oAuthProvider,
         UserProviderInterface $userProvider,
         UserCheckerInterface $userChecker,
-        MappingInterface $userMapping
+        MappingInterface $userMapping,
+        Checker $SAChecker
     ) {
         $this->oAuthProvider = $oAuthProvider;
         $this->userProvider = $userProvider;
         $this->userChecker = $userChecker;
         $this->userMapping = $userMapping;
+        $this->SAChecker = $SAChecker;
     }
 
     /**
@@ -110,7 +123,55 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         } catch (AuthenticationException $e) {
             throw $e;
         } catch (\Exception $e) {
-            throw new AuthenticationException($e->getMessage());
+            throw new AuthenticationException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Processes exchange oauth2 code to access token.
+     *
+     * @param TokenInterface $token
+     * @return TokenInterface
+     *
+     * @throws AuthenticationException
+     */
+    protected function authCodeGrantTypeAuth(TokenInterface $token): TokenInterface
+    {
+        try {
+            $accessToken = $this->oAuthProvider->getAccessToken(
+                'authorization_code',
+                ['code' => $token->getCredentials(), 'scope' => explode(' ', $token->getScope())]
+            );
+
+            $resultToken = new CodeToken($token->getCredentials(), $token->getScope());
+            $this->populateAuthenticatedTokenByAccessToken($accessToken, $resultToken);
+
+            return $resultToken;
+        } catch (\Exception $e) {
+            throw new AuthenticationException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @param TokenInterface $token
+     * @return TokenInterface
+     *
+     * @throws AuthenticationException
+     */
+    protected function refreshTokenGrantTypeAuth(TokenInterface $token): TokenInterface
+    {
+        try {
+            $accessToken = $this->oAuthProvider->getAccessToken(
+                'refresh_token',
+                ['refresh_token' => $token->getCredentials()]
+            );
+
+            $resultToken = new RefreshToken($accessToken->getRefreshToken());
+            $this->populateAuthenticatedTokenByAccessToken($accessToken, $resultToken);
+
+            return $resultToken;
+        } catch (\Exception $e) {
+            throw new AuthenticationException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -129,15 +190,37 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
             throw new AuthenticationException('OIDC Token is not valid');
         }
 
+        if (empty($result['sub'])) {
+            throw new AuthenticationException('Empty subject in OIDC token');
+        }
+
         $resultScopes = explode($this->oAuthProvider->getScopeSeparator(), $result['scope'] ?? '');
         if (!in_array($token->getCrmOAuthScope(), $resultScopes)) {
-            throw new AuthenticationException(
+            throw new IdmNonrecoverableException(
                 sprintf('Access token should contain %s scope', $token->getCrmOAuthScope())
             );
         }
 
+        $resultToken = new IntrospectToken($token->getCredentials(), $token->getTenant(), $token->getCrmOAuthScope());
+        $resultToken->setAttributes($result);
+        $resultToken->setAttribute('platform', $token->getAttribute('platform'));
+
+        /** @var User $user */
+        $user = $this->userProvider->loadUserBySrn($result['sub']);
+
+        if ($user->isServiceAccount()) {
+            if (!$this->SAChecker->isAllowed($result['sub'])) {
+                throw new AuthenticationException(
+                    sprintf('Service account is not allowed: %s', $result['sub'])
+                );
+            }
+            $resultToken->setUser($user);
+            $resultToken->setAuthenticated(true);
+            return $resultToken;
+        }
+
         if (isset($result['ext']['tid']) && $token->getTenant() != $result['ext']['tid']) {
-            throw new AuthenticationException(
+            throw new IdmNonrecoverableException(
                 sprintf('Access token does not belong to tenant %s', $token->getTenant())
             );
         }
@@ -145,27 +228,24 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $userSRN = Converter::fromString($result['sub'] ?? '');
         $tenantSRN = Converter::fromString($token->getTenant());
         if ($userSRN->getTenantId() != $tenantSRN->getTenantId()) {
-            throw new AuthenticationException(
+            throw new IdmNonrecoverableException(
                 sprintf('Access token claims should belong to tenant %s', $token->getTenant())
             );
         }
 
-        $resultToken = new IntrospectToken($token->getCredentials(), $token->getTenant(), $token->getCrmOAuthScope());
-        $resultToken->setAttributes($result);
-        $resultToken->setAttribute('platform', $token->getAttribute('platform'));
-        /** @var User $user */
-        $user = $this->userProvider->loadUserBySrn($result['sub']);
         $userInfo = $this->oAuthProvider->getUserInfo($accessToken);
-
-        // TODO change one attribute to separate attributes!!!
-        // TODO don't use oidc_data for update exists sugar user
         $user->setAttribute('oidc_data', $this->userMapping->map($userInfo));
         $user->setAttribute('oidc_identify', $this->userMapping->mapIdentity($result));
 
         foreach ($result as $key => $value) {
             $user->setAttribute($key, $value);
         }
-        $this->userChecker->checkPostAuth($user);
+        try {
+            $this->userChecker->checkPostAuth($user);
+        } catch (\Exception $e) {
+            throw new IdmNonrecoverableException($e->getMessage());
+        }
+
         $resultToken->setUser($user);
         $resultToken->setAuthenticated(true);
 
@@ -197,19 +277,28 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $token->setAttribute('iat', time());
 
         $accessToken = $this->oAuthProvider->getJwtBearerAccessToken((string)$token);
-        $extraValues = $accessToken->getValues();
-
         $resultToken = clone $token;
-        $resultToken->setAttribute('token', $accessToken->getToken());
-        $resultToken->setAttribute('exp', $accessToken->getExpires());
-        $resultToken->setAttribute('expires_in', $accessToken->getExpires() - time());
-        $resultToken->setAttribute('scope', isset($extraValues['scope']) ? $extraValues['scope'] : null);
-        $resultToken->setAttribute(
-            'token_type',
-            isset($extraValues['token_type']) ? $extraValues['token_type'] : 'bearer'
-        );
-        $resultToken->setAuthenticated(true);
+        $this->populateAuthenticatedTokenByAccessToken($accessToken, $resultToken);
         return $resultToken;
+    }
+
+    /**
+     * Populates Authenticated Token by data stored in Access Token
+     * @param AccessToken $source
+     * @param TokenInterface $destination
+     */
+    protected function populateAuthenticatedTokenByAccessToken(AccessToken $source, TokenInterface $destination): void
+    {
+        $extraValues = $source->getValues();
+        $destination->setAttribute('token', $source->getToken());
+        $destination->setAttribute('exp', $source->getExpires());
+        $destination->setAttribute('expires_in', $source->getExpires() - time());
+        $destination->setAttribute('token_type', $extraValues['token_type'] ?? 'bearer');
+        $destination->setAttribute('scope', $extraValues['scope'] ?? null);
+        if ($source->getRefreshToken()) {
+            $destination->setAttribute('refresh_token', $source->getRefreshToken());
+        }
+        $destination->setAuthenticated(true);
     }
 
     /**

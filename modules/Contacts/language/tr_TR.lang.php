@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
     'NTC_REMOVE_CONFIRMATION' => 'Talepten bu kontağı silmek istediğinizden emin misiniz?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Doğrudan raporlanan kişi olarak bu kaydı silmek istediğinizden emin misiniz?',
 

@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -36,6 +36,9 @@ trait Storable
     public function setFilename($filename)
     {
         Assertion::string($filename, 'Invalid filename.');
+        if (!is_dir(dirname($filename))) {
+            mkdir(dirname($filename), 0777, true);
+        }
         Assertion::directory(dirname($filename), 'The selected directory does not exist.');
         Assertion::writeable(dirname($filename), 'The selected directory is not writable.');
         $this->filename = $filename;
@@ -134,9 +137,13 @@ trait Storable
      */
     public function getLastModificationTime()
     {
+        clearstatcache(null, $this->getFilename());
+
         if (file_exists($this->getFilename())) {
             return filemtime($this->getFilename());
         }
+
+        return null;
     }
 
     /**

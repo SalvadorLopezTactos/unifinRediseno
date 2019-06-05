@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => '推送账单',
 	'LBL_PUSH_SHIPPING' => '推送货运',
 	'LBL_SAVE_ACCOUNT' => '保存客户',
+    'LBL_SERVICE_LEVEL' => '服务等级',
 	'LBL_SHIPPING_ADDRESS_CITY' => '货运城市：',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => '货运国家/地区：',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => '货运邮编：',

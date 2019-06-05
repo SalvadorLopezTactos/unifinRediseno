@@ -734,9 +734,9 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Pašalinus šį pasirinktinį lauką bus pašalintas ir laukas, ir visi su pasirinktiniu lauku susiję duomenys duomenų bazėje. Laukas nebebus rodomas nė viename modulio makete.'
         . ' Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks.'
-        . '\\n\\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
-        . '\\n\\nAr norite tęsti?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite naikinti šį ryšį?<br>Pastaba. Ši operacija gali užtrukti ilgiau nei kelias minutes.',
+        . '\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
+        . '\n\nAr norite tęsti?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite ištrinti šį ryšį?<br>Pastaba: ši operacija gali trukti keletą minučių.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
@@ -753,17 +753,17 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
 . '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę šio lauko vertei apibrėžti.<br>"
-   . "Darbo eigos apibrėžimai nebevykdys veiksmo, kuriuo atnaujinamas šis laukas.<br>"
-   . "Laukai, naudojantys formules, esamu laiku nebus skaičiuojami "
-   . "„Sugar“ savitarnos portale arba "
-   . "Mobiliuosiuose redagavimo rodinio maketuose.",
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad nustatytumėte šio lauko reikšmę.<br>"
+   . "Darbo sekos, į kurias įtrauktas veiksmas ir kurios yra nustatytos atnaujinti šį lauką, nebegalės vykdyti veiksmo.<br>"
+   . "Laukų, kuriuose yra formulių, reikšmės nebus apskaičiuojamos realiuoju laiku "
+   . "„Sugar“ savitarnos portale ir "
+   . "mobiliojo redagavimo rodinio išdėstymuose.",
 
-'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas maketuose.<br/>"
-        . "Priklausomi laukai naršyklės pagrindu sukurtame mobiliajame rodinyje bus nustatyti pagal priklausomybės formulę,<br/>"
-        . "tačiau pagal formulę nebus nustatyti vietinėse programose, pvz., „iPhone“ skirtame „Sugar Mobile“.<br/>"
-        . "Pagal formulę jie nebus nustatyti „Sugar“ savitarnos portale.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite naudoti šį lauką, kai šiame modulyje ieškosite įrašų naudodami visuotinės ieškos funkciją.',
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas išdėstymuose.<br/>"
+        . "Priklausomų laukų reikšmės bus apskaičiuojamos pagal formulę, naudojamą mobiliojoje interneto naršyklėje, <br/>"
+        . "tačiau ne pagal formulę, kuri naudojama vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“. <br/>"
+        . "Jos nebus apskaičiuojamos pagal formulę, naudojamą „Sugar“ savitarnos portale.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite, kad šis laukas būtų naudojamas, kai ieškote įrašų pasitelkę globalią paiešką šiame modulyje.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
 'LBL_RESET_MODULE' => 'Atstatyti modulį',

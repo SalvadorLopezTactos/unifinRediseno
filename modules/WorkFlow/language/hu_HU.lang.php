@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Munkafolyamat meghatározások',
   'LBL_MODULE_NAME_SINGULAR' => 'Munkafolyamat meghatározása',
-  'LBL_MODULE_ID' => 'Munkafolyamat',  
+  'LBL_MODULE_ID' => 'Munkafolyamat',
   'LBL_MODULE_TITLE' => 'Munkafolyamatok: Főoldal',
   'LBL_SEARCH_FORM_TITLE' => 'Munkafolyamat keresés',
   'LBL_LIST_FORM_TITLE' => 'Munkafolyamat lista',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Cél modul:',
   'LBL_LIST_ORDER' => 'Végrehajtás sorrendje:',
   'LBL_FROM_NAME' => 'Feladó neve:',
-  'LBL_FROM_ADDRESS' => 'Feladó címe:',  
+  'LBL_FROM_ADDRESS' => 'Feladó címe:',
   'LNK_NEW_WORKFLOW' => 'Munkafolyamat szabály létrehozása',
-  'LNK_WORKFLOW' => 'Munkafolyamat szabályok listája', 
-  
-  
+  'LNK_WORKFLOW' => 'Munkafolyamat szabályok listája',
+
+
   'LBL_ALERT_TEMPLATES' => 'Riasztási sablonok',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Figyelmeztető sablon létrehozása:',
   'LBL_SUBJECT' => 'Tárgy:',
-  
+
   'LBL_RECORD_TYPE' => 'Alkalmazható:',
  'LBL_RELATED_MODULE'=> 'Kapcsolódó modulok:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Munkafolyamat végrehajtási sorrendje',
 	'LNK_ALERT_TEMPLATES' => 'Figyelmeztető email sablonok',
 	'LNK_PROCESS_VIEW' => 'Munkafolyamat végrehajtási sorrendje',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Típus',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Megjegyzés:</strong> A Sugar munkafolyamat és munkafolyamat kezelés funkcionalitás karbantartási módban található. A Sugar Enterprise kiadás ügyfelei használhatják a SugarBPM<sup class="trademark">TM</sup> által nyújtott funkcionalitást.',
 );
 

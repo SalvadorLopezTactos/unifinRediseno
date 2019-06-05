@@ -48,7 +48,7 @@
                         break;
                     case 'bootstrap_core':
                         return array(
-                            'include/javascript/jquery/bootstrap/bootstrap.min.js'       =>   $target,
+                            'include/javascript/twitterbootstrap/bootstrap.min.js'       =>   $target,
                             'include/javascript/jquery/jquery.popoverext.js'             =>   $target,
                         );
                         break;
@@ -57,7 +57,7 @@
                             'include/javascript/jquery/jquery-min.js'               =>  $target,
                             'include/javascript/jquery/jquery-ui-min.js'            =>  $target,
                             'include/javascript/jquery/jquery.json-2.3.js'          =>  $target,
-                            'include/javascript/jquery/jquery-migrate-1.2.1.min.js' =>  $target,
+                            'include/javascript/jquery/jquery-migrate.min.js' =>  $target,
                         );
                         break;
                     case 'jquery_menus':
@@ -325,6 +325,7 @@
                     'include/javascript/fuse/fuse.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/clipboardjs/clipboard.min.js' => 'include/javascript/sugar_sidecar.min.js',
                 )
            ),
 
@@ -351,6 +352,7 @@
                 'include/javascript/sugar7/accessibility/accessibility.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/accessibility/click.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/accessibility/label.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/clipboard.js' => 'include/javascript/sugar_grp7.min.js',
             ),
 
             $sugar_grp_portal2 = array(
@@ -374,6 +376,7 @@
                 'include/javascript/sugar7/accessibility/label.js' => 'portal2/sugar_portal.min.js',
                 'custom/include/javascript/voodoo.js' => 'portal2/sugar_portal.min.js',
                 'include/javascript/sugar7/shortcuts.js' => 'portal2/sugar_portal.min.js',
+                'include/javascript/sugar7/clipboard.js' => 'portal2/sugar_portal.min.js',
             ),
 
             $pmse_designer = array(
@@ -429,6 +432,7 @@
                 'include/javascript/pmse/ui/modal.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/proxy.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/element.js' => 'include/javascript/pmse.ui.min.js',
+                'include/javascript/pmse/ui/element_helper.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/container.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/window.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/action.js' => 'include/javascript/pmse.ui.min.js',

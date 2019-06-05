@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Save.php 55779 2010-04-02 19:51:23Z jmertic $
 
 
 require_once ('include/formbase.php');

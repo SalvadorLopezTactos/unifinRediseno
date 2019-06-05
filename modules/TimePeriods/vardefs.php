@@ -19,7 +19,6 @@ $dictionary['TimePeriod'] = array(
                 'name' => 'id',
                 'vname' => 'LBL_NAME',
                 'type' => 'id',
-                'len' => '36',
                 'required' => true,
                 'reportable' => false,
             ),
@@ -87,7 +86,6 @@ $dictionary['TimePeriod'] = array(
                 'name' => 'created_by',
                 'vname' => 'LBL_CREATED_BY',
                 'type' => 'id',
-                'len' => '36',
             ),
         'date_entered' =>
             array(

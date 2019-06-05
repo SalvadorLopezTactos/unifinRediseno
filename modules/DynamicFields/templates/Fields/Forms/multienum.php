@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: multienum.php 35784 2008-05-20 21:31:40Z dwheeler $
 
 
 $edit_mod_strings = return_module_language($GLOBALS['current_language'], 'EditCustomFields');

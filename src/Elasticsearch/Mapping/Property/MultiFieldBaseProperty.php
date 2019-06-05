@@ -62,7 +62,11 @@ class MultiFieldBaseProperty extends RawProperty implements PropertyInterface
     public function addField($name, MultiFieldProperty $property)
     {
         if (isset($this->fields[$name])) {
-            throw new MappingException("Field '{$name}' already exists as multi field");
+            if ($this->fields[$name] != $property->getMapping()) {
+                throw new MappingException("Field '{$name}' already exists as multi field");
+            } else {
+                return;
+            }
         }
         $this->fields[$name] = $property->getMapping();
     }

@@ -47,8 +47,7 @@ class Lockout
         if (empty($logoutTime)) {
             return false;
         }
-        $lockoutDurationMins =
-            $this->getConfigValue('lockoutexpirationtime') * $this->getConfigValue('lockoutexpirationtype');
+        $lockoutDurationMins = $this->getLockoutDurationMins();
         return $this->getTimeDate()
             ->fromDb($logoutTime)
             ->modify("+$lockoutDurationMins minutes")
@@ -143,6 +142,18 @@ class Lockout
     }
 
     /**
+     * Return Lockout Expiration minutes from config.
+     *
+     * @return int
+     */
+    public function getLockoutDurationMins(): int
+    {
+        $time = (int) $this->getConfigValue('lockoutexpirationtime', 0);
+        $type = (int) $this->getConfigValue('lockoutexpirationtype', 0);
+        return $time * $type;
+    }
+
+    /**
      * @return \TimeDate
      */
     public function getTimeDate()
@@ -168,9 +179,9 @@ class Lockout
      * return lockout type
      * @return int
      */
-    protected function getLockType()
+    public function getLockType(): int
     {
-        return $this->getConfigValue('lockoutexpiration', self::LOCKOUT_DISABLED);
+        return (int)$this->getConfigValue('lockoutexpiration', self::LOCKOUT_DISABLED);
     }
 
     /**

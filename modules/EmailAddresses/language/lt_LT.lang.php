@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Trinti',
     'LBL_MODULE_NAME' => 'El. pašto adresai',
     'LBL_MODULE_NAME_SINGULAR' => 'El. pašto adresas',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Imtasi patvirtinimo užklausos veiksmų',
+    'LBL_CONFIRMATION_TITLE' => 'Dėkojame',
+    'LBL_CONFIRMATION_MESSAGE' => 'Jūsų prenumerata patvirtinta. Jūs įtrauktas į mūsų sąrašą ir mes su jumis greitai susisieksime.',
 );

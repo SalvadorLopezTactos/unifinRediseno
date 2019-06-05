@@ -10,7 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+/**
+ * @deprecated Use Sugarcrm\Sugarcrm\Cache\Backend\InMemory instead
+ */
 class SugarCacheMemory extends SugarCacheAbstract
 {
     /**

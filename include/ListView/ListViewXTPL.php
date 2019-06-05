@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
- // $Id: ListViewXTPL.php 55799 2010-04-05 20:00:37Z jmertic $
 
 	
 class ListViewXTPL extends ListViewDisplay{

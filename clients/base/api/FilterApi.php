@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\FetchMode;
+
 class FilterApi extends SugarApi
 {
     public function registerApiRest()
@@ -658,7 +660,7 @@ class FilterApi extends SugarApi
             $ids = $options['id_query']
                 ->compile()
                 ->execute()
-                ->fetchAll(PDO::FETCH_COLUMN);
+                ->fetchAll(FetchMode::COLUMN);
 
             if (count($ids) < 1) {
                 return [
@@ -671,6 +673,10 @@ class FilterApi extends SugarApi
                 ->in('id', $ids);
             $q->offset(null);
             $q->limit(null);
+            $queryOptions['skipFixQuery'] = true;
+        }
+
+        if (!empty($options['skipFixQuery'])) {
             $queryOptions['skipFixQuery'] = true;
         }
 
@@ -758,10 +764,6 @@ class FilterApi extends SugarApi
         // Grab the string of bean_ids for use in the IN clause, making sure to
         // quote them according their own DB
         $bean_ids = array_keys($beans);
-        array_walk($bean_ids, function (&$val, $key, $db) {
-            $val = $db->quoted($val);
-        }, DBManagerFactory::getInstance());
-        $bean_ids = implode(",", $bean_ids);
 
         foreach ($options['relate_collections'] as $name => $def) {
             // Parent bean

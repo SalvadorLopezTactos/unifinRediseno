@@ -9,6 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * Namespace for Sugar Objects
  */
@@ -110,6 +111,31 @@ var lastSubmitTime = 0;
 var alertList = new Array();
 var oldStartsWith = '';
 
+// Similar to removed $.browser for compatibility
+if (!SUGAR.browser) {
+    SUGAR.browser = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+        /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+        /(msie) ([\w.]+)/.exec(ua) ||
+        ua.indexOf('compatible') < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+        [];
+    var matched = {browser: match[1] || '', version: match[2] || '0'};
+
+    if (matched.browser) {
+        SUGAR.browser[matched.browser] = true;
+        SUGAR.browser.version = matched.version;
+    }
+
+    // Chrome is Webkit, but Webkit is also Safari.
+    if (SUGAR.browser.chrome) {
+        SUGAR.browser.webkit = true;
+    } else if (SUGAR.browser.webkit) {
+        SUGAR.browser.safari = true;
+    }
+}
+
 /**
  * @deprecated
  *
@@ -125,8 +151,8 @@ function isSupportedIE() {
     var userAgent = navigator.userAgent.toLowerCase();
 
     // IE Check supports ActiveX controls
-    if ($.browser.msie) {
-        var version = $.browser.version;
+    if (SUGAR.browser.msie) {
+        var version = SUGAR.browser.version;
         if (version >= 5.5 && version < 15) {
             return true;
         } else {
@@ -138,8 +164,8 @@ function isSupportedIE() {
 SUGAR.isUnsupportedIE = function () {
     var userAgent = navigator.userAgent.toLowerCase();
     // IE Check supports ActiveX controls
-    if ($.browser.msie) {
-        var version = $.browser.version;
+    if (SUGAR.browser.msie) {
+        var version = SUGAR.browser.version;
         return version < 15;
     }
     return false;
@@ -165,34 +191,33 @@ function checkMaxSupported(c, s) {
     return true;
 }
 
-SUGAR.isSupportedBrowser = function(){
+SUGAR.isSupportedBrowser = function() {
     var supportedBrowsers = {
         msie : {min:9, max:11}, // IE 9, 10, 11
         safari : {min:537}, // Safari 7.1
         mozilla : {min:41}, // Firefox 41,42
         chrome : {min:537.36} // Chrome 47
     };
-    var current = String($.browser.version);
-        var supported;
-        if ($.browser.msie){ // Internet Explorer
-            supported = supportedBrowsers['msie'];
+    var current = String(SUGAR.browser.version);
+    var supported;
+    if (SUGAR.browser.msie) { // Internet Explorer
+        supported = supportedBrowsers.msie;
+    } else if (SUGAR.browser.mozilla) { // Firefox
+        supported = supportedBrowsers.mozilla;
+    } else {
+        SUGAR.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+        if (SUGAR.browser.chrome) { // Chrome
+            supported = supportedBrowsers.chrome;
+        } else if (SUGAR.browser.safari) { // Safari
+            supported = supportedBrowsers.safari;
         }
-        else if ($.browser.mozilla) { // Firefox
-            supported = supportedBrowsers['mozilla'];
-        }
-        else {
-            $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
-            if($.browser.chrome){ // Chrome
-                supported = supportedBrowsers['chrome'];
-            }
-            else if($.browser.safari){ // Safari
-                supported = supportedBrowsers['safari'];
-            }
-        }
-        if (current && supported)
-            return checkMinSupported(current, String(supported.min)) && (!supported.max || checkMaxSupported(current, String(supported.max)));
-        else
-            return false;
+    }
+    if (current && supported) {
+        return checkMinSupported(current, String(supported.min)) &&
+                (!supported.max || checkMaxSupported(current, String(supported.max)));
+    } else {
+        return false;
+    }
 }
 
 SUGAR.isIECompatibilityMode = function(){
@@ -1528,8 +1553,8 @@ function getXMLHTTPinstance() {
     var userAgent = navigator.userAgent.toLowerCase();
 
     // IE Check supports ActiveX controls
-    if ($.browser.msie) {
-        var version = $.browser.version;
+    if (SUGAR.browser.msie) {
+        var version = SUGAR.browser.version;
         if (version >= 5.5) {
             try {
                 xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -2896,7 +2921,7 @@ SUGAR.util = function () {
             }
         },
 	    evalScript:function(text){
-            var elements = $.parseHTML(text, document, true);
+            var elements = $.parseHTML(text, null, true);
             YUI({comboBase: 'index.php?entryPoint=getYUIComboFile&'}).use("io-base", "get", function(Y) {
                 var scripts = $("<div/>").append(elements).find("script");
                 _.each(scripts, function(el) {
@@ -4837,7 +4862,7 @@ function convertReportDateTimeToDB(dateValue, timeValue)
     var time_match = timeValue.match(/([0-9]{1,2})\:([0-9]{1,2})([ap]m)/);
     if ( date_match != null && time_match != null) {
         time_match[1] = parseInt(time_match[1]);
-        if (time_match[3] == 'pm') {
+        if (time_match[3] == 'pm' && time_match[1] < 12) {
             time_match[1] = time_match[1] + 12;
             if (time_match[1] >= 24) {
                 time_match[1] = time_match[1] - 24;

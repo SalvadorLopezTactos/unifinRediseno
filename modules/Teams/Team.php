@@ -202,7 +202,7 @@ class Team extends SugarBean
 			$team->add_user_to_team($user->id);
 		}
 
-        $su = BeanFactory::retrieveBean('Users', $user->id);
+        $su = BeanFactory::retrieveBean('Users', $user->id, ['use_cache' => false]);
         if (!$su) {
             return;
         }
@@ -427,8 +427,10 @@ class Team extends SugarBean
 				$membershipExists = true;
 			}
 
-			// This is an error.  There should not be a memberhsip row that does not have implicit or explicit asisgnments.
-			$GLOBALS['log']->error("Membership record found (id $membership->id) that does not have a implicit or explicit assignment");
+            if (!$membershipExists) {
+                // This is an error.  There should not be a memberhsip row that does not have implicit or explicit asisgnments.
+                $GLOBALS['log']->error("Membership record found (id $membership->id) that does not have a implicit or explicit assignment");
+            }
 		}
 
         if (!$membershipExists)
@@ -896,7 +898,7 @@ AND team_id = ?';
         $user = null
         )
     {
-        $team_array = sugar_cache_retrieve('team_array:'. $add_blank.'ADDBLANK'.$user->id);
+        $team_array = sugar_cache_retrieve('team_array-'. $add_blank.'ADDBLANK'.$user->id);
         if(!empty($team_array))
             return $team_array;
 
@@ -913,8 +915,8 @@ AND team_id = ?';
             $query = 'SELECT t.id, t.name, t.name_2
 FROM teams t
 INNER JOIN team_memberships tm
-ON tm.team_id = t.id 
-AND tm.deleted = 0 
+ON tm.team_id = t.id
+AND tm.deleted = 0
 WHERE tm.user_id = ?
 AND t.deleted = 0
 ORDER BY t.private, t.name';
@@ -934,7 +936,7 @@ ORDER BY t.private, t.name';
                 $team_array[$row['id']] = trim($row['name'] . ' ' . $row['name_2']);
         }
 
-        sugar_cache_put('team_array:'.$add_blank.'ADDBLANK'.$current_user->id, $team_array);
+        sugar_cache_put('team_array-'.$add_blank.'ADDBLANK'.$current_user->id, $team_array);
 
         return $team_array;
     }

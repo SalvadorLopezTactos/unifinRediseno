@@ -30,6 +30,8 @@ use Symfony\Component\Ldap\Exception\LdapException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 /**
+ * Class TenantConfigInitializerTest
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\Provider\LdapAuthenticationProvider
  * @requires extension ldap
  */
 class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase

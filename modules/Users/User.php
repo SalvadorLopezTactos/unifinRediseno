@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+require_once 'modules/Administration/updater_utils.php';
+
 use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
@@ -75,6 +77,7 @@ class User extends Person {
 	var $user_preferences;
 
 	var $importable = true;
+    public $site_user_id;
 
     static protected $demoUsers = array(
         'jim',
@@ -433,6 +436,23 @@ class User extends Person {
 	}
 
     /**
+     * Returns TRUE if user should complete setup wizard for category
+     *
+     * @param string $category default 'global'
+     * @return bool
+     */
+    public function shouldUserCompleteWizard($category = 'global')
+    {
+        $systemStatus = apiCheckSystemStatus();
+        if ($systemStatus !== true) {
+            // System isn't ok, so no need to configure it
+            return false;
+        }
+        $ut = $this->getPreference('ut', $category);
+        return !filter_var($ut, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
      * Interface for the User object to calling the UserPreference::removePreference() method
      * in modules/UserPreferences/UserPreference.php
      *
@@ -575,41 +595,55 @@ class User extends Person {
 
 		global $sugar_flavor;
         $admin = Administration::getSettings();
-		if((isset($sugar_flavor) && $sugar_flavor != null) &&
-            (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
+        if (!empty($sugar_flavor) && !empty($admin->settings['license_enforce_user_limit'])) {
 	        // Begin Express License Enforcement Check
 			// this will cause the logged in admin to have the licensed user count refreshed
-				if( isset($_SESSION['license_seats_needed']))
-			        unset($_SESSION['license_seats_needed']);
-		     	if ($this->portal_only != 1 && $this->is_group != 1 && (empty($this->fetched_row) || $this->fetched_row['status'] == 'Inactive' || $this->fetched_row['status'] == '') && $this->status == 'Active'){
-			        global $sugar_flavor;
-			            $license_users = $admin->settings['license_users'];
-			            if ($license_users != '') {
-	            			global $db;
-							$result = $db->query($query, true, "Error filling in user array: ");
-							$row = $db->fetchByAssoc($result);
-				            $license_seats_needed = $row['total'] - $license_users;
-			            }
-				        else
-				        	$license_seats_needed = -1;
-				        if( $license_seats_needed >= 0 ){
-						    if (isset($_REQUEST['action']) && $_REQUEST['action'] != 'MassUpdate' && $_REQUEST['action'] != 'Save') {
-					            die(translate('WARN_LICENSE_SEATS_EDIT_USER', 'Administration'). ' ' . translate('WARN_LICENSE_SEATS2', 'Administration'));
-						    }
-							else if (isset($_REQUEST['action'])){ // When this is not set, we're coming from the installer.
-								$sv = new SugarView();
-							    $sv->init('Users');
-							    $sv->renderJavascript();
-							    $sv->displayHeader();
-		        				$sv->errors[] = translate('WARN_LICENSE_SEATS_EDIT_USER', 'Administration'). ' ' . translate('WARN_LICENSE_SEATS2', 'Administration');
-                                $sv->displayErrors();
-                                $sv->displayFooter();
-							    die();
-						  	}
-				        }
-		     	}
-			}
-            // End Express License Enforcement Check
+            unset($_SESSION['license_seats_needed']);
+            if ($this->portal_only != 1 && $this->is_group != 1 && $this->status == 'Active'
+                  && (empty($this->fetched_row)
+                      || $this->fetched_row['status'] == 'Inactive'
+                      || $this->fetched_row['status'] == '')) {
+                $license_users = $admin->settings['license_users'];
+                $license_seats_needed = -1;
+                if ($license_users != '') {
+                    global $db;
+                    $result = $db->query($query, true, "Error filling in user array: ");
+                    $row = $db->fetchByAssoc($result);
+                    $license_seats_needed = $row['total'] - $license_users;
+                }
+                if ($license_seats_needed >= 0) {
+                    $GLOBALS['log']->error(
+                        'The number of active users is already the maximum number of licenses allowed.'
+                        . ' New user cannot be created or activated.'
+                    );
+                    if (!empty($this->external_auth_only)) {
+                        $e = new SugarApiExceptionLicenseSeatsNeeded(
+                            'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS',
+                            null,
+                            null,
+                            0,
+                            'license_seats_needed'
+                        );
+                        throw $e;
+                    }
+                    $msg = translate('WARN_LICENSE_SEATS_EDIT_USER', 'Administration');
+                    if (isset($_REQUEST['action'])
+                        && ($_REQUEST['action'] == 'MassUpdate' || $_REQUEST['action'] == 'Save')) {
+                        $sv = new SugarView();
+                        $sv->init('Users');
+                        $sv->renderJavascript();
+                        $sv->displayHeader();
+                        $sv->errors[] = $msg;
+                        $sv->displayErrors();
+                        $sv->displayFooter();
+                        $msg = '';
+                    }
+                    // When action is not set, we're coming from the installer or non-UI source.
+                    die($msg);
+                }
+            }
+        }
+        // End Express License Enforcement Check
 
 
 		// wp: do not save user_preferences in this table, see user_preferences module
@@ -635,6 +669,14 @@ class User extends Person {
 
         // track the current reports to id to be able to use it if it has changed
         $old_reports_to_id = isset($this->fetched_row['reports_to_id']) ? $this->fetched_row['reports_to_id'] : '';
+
+        if (empty($this->site_user_id)) {
+            if (!$this->id) {
+                $this->id = create_guid();
+                $this->new_with_id = true;
+            }
+            $this->site_user_id = getSiteHash($this->id);
+        }
 
 		parent::save($check_notify);
 
@@ -1364,80 +1406,6 @@ class User extends Person {
         return $result;
     }
 
-	/** Returns a list of the associated users
-	 * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
-	 * All Rights Reserved..
-	 * Contributor(s): ______________________________________..
-	*/
-	function get_meetings() {
-		// First, get the list of IDs.
-		$query = "SELECT meeting_id as id from meetings_users where user_id='$this->id' AND deleted=0";
-		return $this->build_related_list($query, BeanFactory::newBean('Meetings'));
-	}
-	function get_calls() {
-		// First, get the list of IDs.
-		$query = "SELECT call_id as id from calls_users where user_id='$this->id' AND deleted=0";
-		return $this->build_related_list($query, BeanFactory::newBean('Calls'));
-	}
-
-	/**
-	 * generates Javascript to display I-E mail counts, both personal and group
-	 */
-	function displayEmailCounts() {
-		global $theme;
-		$new = translate('LBL_NEW', 'Emails');
-		$default = 'index.php?module=Emails&action=ListView&assigned_user_id='.$this->id;
-		$count = '';
-		$verts = array('Love', 'Links', 'Pipeline', 'RipCurl', 'SugarLite');
-
-		if($this->hasPersonalEmail()) {
-			$r = $this->db->query('SELECT count(*) AS c FROM emails WHERE deleted=0 AND assigned_user_id = \''.$this->id.'\' AND type = \'inbound\' AND status = \'unread\'');
-			$a = $this->db->fetchByAssoc($r);
-			if(in_array($theme, $verts)) {
-				$count .= '<br />';
-			} else {
-				$count .= '&nbsp;&nbsp;&nbsp;&nbsp;';
-			}
-			$count .= '<a href='.$default.'&type=inbound>'.translate('LBL_LIST_TITLE_MY_INBOX', 'Emails').': ('.$a['c'].' '.$new.')</a>';
-
-			if(!in_array($theme, $verts)) {
-				$count .= ' - ';
-			}
-		}
-
-		$r = $this->db->query('SELECT id FROM users WHERE users.is_group = 1 AND deleted = 0');
-		$groupIds = '';
-		$groupNew = '';
-		while($a = $this->db->fetchByAssoc($r)) {
-			if($groupIds != '') {$groupIds .= ', ';}
-			$groupIds .= "'".$a['id']."'";
-		}
-
-		$total = 0;
-		if(strlen($groupIds) > 0) {
-			$groupQuery = 'SELECT count(*) AS c FROM emails ';
-			$this->add_team_security_where_clause($groupQuery);
-			$groupQuery .= ' WHERE emails.deleted=0 AND emails.assigned_user_id IN ('.$groupIds.') AND emails.type = \'inbound\' AND emails.status = \'unread\'';
-			$r = $this->db->query($groupQuery);
-			if(is_resource($r)) {
-				$a = $this->db->fetchByAssoc($r);
-				if($a['c'] > 0) {
-					$total = $a['c'];
-				}
-			}
-		}
-		if(in_array($theme, $verts)) $count .= '<br />';
-		if(empty($count)) $count .= '&nbsp;&nbsp;&nbsp;&nbsp;';
-		$count .= '<a href=index.php?module=Emails&action=ListViewGroup>'.translate('LBL_LIST_TITLE_GROUP_INBOX', 'Emails').': ('.$total.' '.$new.')</a>';
-
-		$out  = '<script type="text/javascript" language="Javascript">';
-		$out .= 'var welcome = document.getElementById("welcome");';
-		$out .= 'var welcomeContent = welcome.innerHTML;';
-		$out .= 'welcome.innerHTML = welcomeContent + "'.$count.'";';
-		$out .= '</script>';
-
-		echo $out;
-	}
 
 	function getPreferredEmail() {
 		$ret = array ();
@@ -2493,7 +2461,9 @@ class User extends Person {
         //Add the tab hash to include the change of tabs (e.g. module order) as a part of the user hash
         $tabs = new TabController();
         $tabHash = $tabs->getMySettingsTabHash();
-        return md5($this->id . $this->hashTS . $tabHash);
+        // User hash must depends on user wizard completion
+        $isUserWizardCompleted = intval($this->shouldUserCompleteWizard());
+        return md5($this->id . $isUserWizardCompleted . $this->hashTS . $tabHash);
     }
 
     public function setupSession() {

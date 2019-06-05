@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Időperiódusok létrehozása',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent cikkek frissítése.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Jóváhagyott cikkek közzététele és KB cikkek lejárttá tétele.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow ütemezett feladat',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Jóváhagyott cikkek és elévült KB cikkek publikálása.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ütemezett feladat',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalizált csapat biztonsági adatok újraépítése',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Ellenőrizze a beérkező leveleit',
 'LBL_PERFORMFULLFTSINDEX' => 'Rendszerindexálás szöveges kereséshez',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Ideiglenes PDF fájlok eltávolítása',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Jóváhagyott cikkek publikálása és KB cikkek elévültté nyilvánítása.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Jóváhagyott cikkek és elévült KB cikkek publikálása.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch sorütemező',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnosztikai eszközfájlok törlése',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ideiglenes fájlok törlése',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Email emlékeztetők küldésének futtatása',
 'LBL_CLEANJOBQUEUE' => 'Munkalista törlése',
 'LBL_CLEANOLDRECORDLISTS' => 'Régi rekord listák törlése',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow ütemező',
+'LBL_PMSEENGINECRON' => 'SugarBPM Ütemező',
 );
 

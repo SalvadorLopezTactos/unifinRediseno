@@ -11,7 +11,7 @@
  */
 --}}
 <input type="hidden" class="select2 search-filter" data-placeholder='{{str labelDropdownTitle}}'>
-<button type="button" class="choice-filter" tabindex="0" aria-label="{{str 'LBL_FILTER_CREATE_FILTER'}}">
-    <span class="choice-filter-label"></span>
-    <span class="choice-filter-close"><i class="fa fa-times-circle"></i></span>
-</button>
+<div class="choice-filter">
+    <span class="choice-filter-label" tabindex="0" role="button" aria-label="{{str 'LBL_FILTER_CREATE_FILTER'}}"></span>
+    <span class="choice-filter-close" tabindex="0" role="button" aria-label="{{str 'LBL_FILTER_CLOSE_FILTER'}}"><i class="fa fa-times-circle"></i></span>
+</div>

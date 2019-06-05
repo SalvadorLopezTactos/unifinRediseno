@@ -1,4 +1,4 @@
-<!--
+{#
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,10 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
--->
+#}
+{% extends "index.html.twig" %}
 
-    <br/>
-    <b>User is logged out</b><br/>
-    <br/>
-    <br/>
-    <a href="{{ url('samlRender') }}">back</a>
+{% block content %}
+    <div class="thumbnail idm-consent">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            {{ 'User is logged out'|trans }}
+        </section>
+        <nav class="nav tcenter">
+            <form action="{{ path('samlRender') }}"  method="get" >
+                <button id="logout_btn" class="btn btn-primary">{{ 'Back'|trans }}</button>
+            </form>
+        </nav>
+    </div>
+{% endblock %}

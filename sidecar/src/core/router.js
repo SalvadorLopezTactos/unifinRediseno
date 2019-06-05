@@ -455,13 +455,6 @@ const Router = Backbone.Router.extend({
                     // If we have success then show the megamenu again
                     Events.trigger('app:login:success');
                     SUGAR.App.router.refresh();
-                },
-                error: function() {
-                    Alert.show('needs_login_error', {
-                        level: 'error',
-                        messages: Language.getModString('ERR_INVALID_PASSWORD', 'Users'),
-                        title: Language.get('LBL_INVALID_CREDS_TITLE')
-                    });
                 }
             });
         }

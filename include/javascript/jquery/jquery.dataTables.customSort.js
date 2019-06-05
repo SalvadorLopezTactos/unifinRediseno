@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 (function($){
     /**
      * Custom sort method for numbers.  Set sSortDataType:"dom-number" to use

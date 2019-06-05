@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Rādīt lejupielāžu cilni',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kad atzīmēts, Lietotāja iestatījumos parādīsies Lejupielādes cilne  un lietotājiem būs pieeja Sugar spraudņiem un citiem pieejamiem failiem.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP autentificēšanai, kad izmanto LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt paplašinājums jāaktivē php.ini failā.',
     'LBL_ALL' => 'Visi',
     'LBL_MARK_POINT' => 'Atzīmes punkts',
     'LBL_NEXT_' => 'Nākamais>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Darbību plūsmas',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Iespējot darbību plūsmas',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ieslēdz darbību plūsmas lietojumprogrammai',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Iespējot papildu pieteikšanās ekrāna saturu',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automātiski saglabā procesu definīcijas',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Nosaka, cik bieži procesu definīcijas tiek automātiski saglabātas, izmantojot noformētāju',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automātiski validē procesu definīcijas automātiskās saglabāšanas laikā',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Pārbauda, vai procesu definīcijas tiek automātiski validētas automatiskās saglabāšanas laikā. Tas darbosies tikai tad, ja parametram "Automātiski saglabāt procesu definīcijas" ir iestatīts laika intervāls',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automātiski validē procesu definīcijas importēšanas laikā',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Pārbauda, vai procesu definīcijas tiek automātiski validētas pirmās importēšanas laikā',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Komentāru žurnāla iestatījumi',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimālais rakstzīmju skaits komentāra ieraksta parādīšanai',
 );
 
 

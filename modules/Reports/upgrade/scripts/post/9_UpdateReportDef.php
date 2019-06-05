@@ -34,14 +34,11 @@ class SugarUpgradeUpdateReportDef extends UpgradeScript
      */
     public function updateReports()
     {
-        $q = new SugarQuery();
-        $q->select(array('id'));
-        $q->from(BeanFactory::newBean('Reports'));
-        $rows = $q->execute();
-        foreach ($rows as $row) {
-            $saved_report = BeanFactory::getBean('Reports', $row['id'], array('encode' => false));
+        $sql = 'SELECT id, name, content FROM saved_reports WHERE deleted = 0';
+        $q = $this->db->query($sql);
+        while ($row = $this->db->fetchByAssoc($q, false)) {
             // Running through the Report constructor sanitizes the report def
-            $oldContent = $saved_report->content;
+            $oldContent = $row['content'];
             $report = new Report($oldContent);
 
             // No need to save if there aren't any changes
@@ -49,12 +46,13 @@ class SugarUpgradeUpdateReportDef extends UpgradeScript
                 continue;
             }
 
-            $saved_report->content = $report->report_def_str;
-            // Don't update date modfied and modified by
-            $saved_report->update_date_modified = false;
-            $saved_report->update_modified_by = false;
-            $saved_report->save();
-            $this->log('Updated report definition for Report: ' . $saved_report->name);
+            $update = sprintf(
+                "UPDATE saved_reports SET content = %s WHERE id = %s",
+                $this->db->quoted($report->report_def_str),
+                $this->db->quoted($row['id'])
+            );
+            $this->db->query($update);
+            $this->log('Updated report definition for Report: ' . $row['name']);
         }
     }
 }

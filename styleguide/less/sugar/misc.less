@@ -410,13 +410,26 @@ hr.soften {
   .fa-spin { height: 0.9em; }
 }
 
-.noaccess a {
-  i {
-    color: @linkColor;
-  }
+.noaccess,
+.erased {
+  .label {
+    a {
+      &,
+      &:hover {
+        .fa {
+          color: @white;
+          text-decoration: inherit;
+        }
+      }
 
-  &:hover i {
-    color: @linkColor !important;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .fa {
+      width: auto;
+    }
   }
 }
 

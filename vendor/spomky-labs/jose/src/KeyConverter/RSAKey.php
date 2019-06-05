@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -174,7 +174,7 @@ final class RSAKey extends Sequence
      *
      * @return \Jose\KeyConverter\RSAKey
      */
-    public static function toPublic(RSAKey $private)
+    public static function toPublic(self $private)
     {
         $data = $private->toArray();
         $keys = ['p', 'd', 'q', 'dp', 'dq', 'qi'];
@@ -241,11 +241,11 @@ final class RSAKey extends Sequence
 
         $this->values['kty'] = 'RSA';
         $keys = [
-            'n'  => 'n',
-            'e'  => 'e',
-            'd'  => 'd',
-            'p'  => 'p',
-            'q'  => 'q',
+            'n' => 'n',
+            'e' => 'e',
+            'd' => 'd',
+            'p' => 'p',
+            'q' => 'q',
             'dp' => 'dmp1',
             'dq' => 'dmq1',
             'qi' => 'iqmp',
@@ -404,13 +404,14 @@ final class RSAKey extends Sequence
      * @param BigInteger $d
      * @param BigInteger $e
      * @param BigInteger $n
+     *
      * @return array
      */
     private function findPrimeFactors(BigInteger $d, BigInteger $e, BigInteger $n)
     {
         $zero = BigInteger::createFromDecimal(0);
-        $one  = BigInteger::createFromDecimal(1);
-        $two  = BigInteger::createFromDecimal(2);
+        $one = BigInteger::createFromDecimal(1);
+        $two = BigInteger::createFromDecimal(2);
 
         $k = $d->multiply($e)->subtract($one);
 
@@ -426,7 +427,7 @@ final class RSAKey extends Sequence
             $found = false;
             $y = null;
 
-            for($i = 1; $i <= 100; $i++) {
+            for ($i = 1; $i <= 100; ++$i) {
                 $g = BigInteger::random($n->subtract($one));
                 $y = $g->modPow($r, $n);
 
@@ -439,6 +440,7 @@ final class RSAKey extends Sequence
 
                     if ($x->equals($one)) {
                         $found = true;
+
                         break;
                     }
 
@@ -452,6 +454,7 @@ final class RSAKey extends Sequence
                 $x = $y->modPow($two, $n);
                 if ($x->equals($one)) {
                     $found = true;
+
                     break;
                 }
             }

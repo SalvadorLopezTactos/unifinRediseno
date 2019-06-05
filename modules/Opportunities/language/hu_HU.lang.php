@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Miután Ön kezdeményezi ezt a változtatást, a Bevételi Sortételek adatai minden meglévő {{module_name}} modulra vonatkozóan a háttérben megjelennek. Ha a Bevételi Sortételek adatai készen vannak és rendelkezésre állnak a rendszer értesítést küld az Ön felhasználói profiljának e-mail címére. Kérjük, vegye figyelembe, hogy a példánya úgy kell legyen konfigurálva, hogy tudjon e-mailt küldeni az Admin > Email Beállításokon keresztül, hogy az értesítés elküldhető legyen.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat az elejétől a végéig. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} jellemzően több értékesítési fázison megy át, amíg „Lezárt, megnyert” vagy „Lezárt, elveszített” minősítést nem kap. A(z) {{plural_module_name}}  ennél tovább is emelhető a Sugar {{forecasts_singular_module}} modul használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
+    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} jellemzően több értékesítési fázison megy át, amíg „Lezárt, megnyert” vagy „Lezárt, elveszített” minősítést nem kap. A(z) {{plural_module_name}} ennél tovább is emelhető a Sugar {{forecasts_singular_module}} modul használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb.
 
-- Szerkesztheti a bejegyzés mezőit az adott mezőre vagy a Szerkeszt gombra kattintással.
-- Megtekintheti vagy módosíthatja az egyéb bejegyzésekhez kapcsolódó hivatkozásokat az alpanelekben a bal alsó „Adatnézet” tábla átkapcsolásával.
-- Felhasználói megjegyzéseket készíthet és tekinthet meg, illetve rögzítheti a módosítási előzményeket a(z) {{activitystream_singular_module}} modulban a bal alsó „Tevékenységfolyam” tábla átkapcsolásával.
-- A bejegyzés neve mellett található ikonok segítségével bejelölheti kedvencének a tartalmat, illetve követheti annak utóéletét.
-- Egyéb műveletek a Szerkesztés gombtól jobbra szereplő Műveletek legördülő menüben találhatók.',
+- Szerkessze ennek a rekordnak a mezőit külön-külön, vagy kattintson a Szerkesztés gombra.
+- Tekintse meg, vagy szerkessze a hivatkozásokat a bal alsó „Adatnézet” kapcsoló használatával.
+- A bal alsó modul „Tevékenységfolyam” lehetőségre való kapcsolásával felhasználói hozzászólásokat írhat és tekinthet meg, illetve rögzítheti a módosítási előzményeket a(z) {{activitystream_singular_module}} modulban.
+- A rekord neve mellett jobbra található ikonok segítségével jelölje be kedvencének a tartalmat, vagy kövesse annak utóéletét!
+- Egyéb tevékenységek a Szerkesztés gombtól jobbra szereplő műveleti gomb legördülő menüjében találhatók.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb.
+    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. 
 
-{{module_name}} létrehozása:
+{{module_name}} létrehozásához:
 1. Adjon meg értékeket a mezőkben szükség szerint.
- - Mentés előtt mindenképpen töltse ki a „Kötelező” mezőket.
- - Szükség szerint kattintson a „Több mutatása” parancsra további mezők megjelenítéséhez.
-2. Az új bejegyzés véglegesítéséhez kattintson a „Mentés” gombra, és így visszatérhet az előző oldalra.',
+ - A „kötelező” jelöléssel rendelkező mezők kitöltése nélkül mentés nem lehetséges.
+ - Kattintson a „Több mutatása” lehetőségre további mezők megjelenítéséhez, szükség szerint.
+2. Kattintson a „Mentés” gombra a rekord mentéséhez és a korábbi nézethez való visszatéréshez.',
 
 // END ENT/ULT
 

@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -81,7 +81,7 @@ class UserCleaner
     protected function getUsers()
     {
         $accessToken = $this->getAccessToken();
-        $usersUrl = rtrim($this->context->getMinkParameter('base_url'), '/') . '/rest/v10/Users';
+        $usersUrl = rtrim($this->context->getMinkParameter('base_url'), '/') . '/rest/v11/Users';
         $client = new GuzzleHttp\Client();
         /** @var ResponseInterface $response */
         $response = $client->get($usersUrl, ['headers' => ['OAuth-Token' => $accessToken]]);
@@ -102,7 +102,7 @@ class UserCleaner
         $client = new GuzzleHttp\Client();
         $deletePromises = [];
         foreach ($userIds as $index => $userId) {
-            $userUrl =  rtrim($this->context->getMinkParameter('base_url'), '/'). '/rest/v10/Users/' . $userId;
+            $userUrl =  rtrim($this->context->getMinkParameter('base_url'), '/'). '/rest/v11/Users/' . $userId;
             $deletePromises[] = $client->deleteAsync($userUrl, ['headers' => ['OAuth-Token' => $accessToken]]);
         }
         if ($deletePromises) {
@@ -119,10 +119,10 @@ class UserCleaner
     {
         if (empty($this->accessToken)) {
             $client = new GuzzleHttp\Client();
-            $url =  rtrim($this->context->getMinkParameter('base_url'), '/'). '/rest/v10/oauth2/token';
+            $url =  rtrim($this->context->getMinkParameter('base_url'), '/'). '/rest/v11/oauth2/token';
             $username = $this->adminCredentials['username'];
             $password = $this->adminCredentials['password'];
-            try{
+            try {
                 $formParams = [
                     'client_id' => 'sugar',
                     'client_info' => ['current_language' => 'en_us'],
@@ -137,8 +137,8 @@ class UserCleaner
                 $body = $response->getBody();
                 $result = json_decode((string)$body, true);
                 $this->accessToken = $result['access_token'];
-            }catch (\Exception $exception){
-                throw new \RuntimeException("Can not login as admin usin credentials:{$username}|{$password}");
+            } catch (\Exception $exception) {
+                throw new \RuntimeException("Can not login as admin using credentials:{$username}|{$password}");
             }
         }
         return $this->accessToken;

@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Une fois que vous avez lancé cette modification, des enregistrements de ligne de revenu seront créés pour chaque module {{module_name}} existant en tâche de fond. Lorsque les lignes de revenu seront complètes et disponibles, une notification sera envoyée à l&#39;adresse email de votre profil utilisateur. Veuillez noter que votre instance doit être configurée pour envoyer un email via Admin > Configuration email pour que la notification soit envoyée.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera typiquement à travers plusieurs phases de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore d&#39;avantage en utilisant le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire des tendances de vente ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
+    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera à travers plusieurs étapes de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore plus en utilisation le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de ventes, ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les articles associés à celles-ci depuis le début jusqu&#39;à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
-- Éditez les champs de cet enregistrement en cliquant sur un champ individuel ou sur le bouton Éditer.
-- Visualisez ou modifiez des liens à d&#39;autres enregistrements dans les sous-panneaux en changeant le panneau en bas à gauche à « Vue des données ».
-- Créez et visualisez des commentaires d&#39;utilisateur et enregistrez l&#39;historique de changements dans le {{activitystream_singular_module}} en changeant le panneau en bas à gauche à « Flux d&#39;activité ».
-- Suivez ou ajoutez à favoris cet enregistrement à l&#39;aide des icônes à la droite du nom de l&#39;enregistrement.
-- Des actions supplémentaires sont disponibles dans le menu déroulant d&#39;Actions à la droite du bouton Éditer.',
+- Éditer chaque champs en cliquant directement sur le champ concerné ou en cliquant sur le bouton Éditer. 
+- Afficher ou modifier les liaisons avec les autres enregistrements dans les sous-panneaux et voir l&#39;historique des modifications en cliquant sur le bouton « Flux d’activité » en bas à gauche. 
+- Afficher et participer aux commentaire et au flux d&#39;activité via le module {{activitystream_singular_module}} en cliquant sur le bouton.
+- Suivre ou mettre en favoris l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
+- Des actions complémentaires sont disponibles dans la listes déroulantes des actions à droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les articles associés à celles-ci depuis le début jusqu&#39;à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
 Pour créer un {{module_name}} :
-1. Remplissez les champs souhaités.
-- Les champs marqués « Obligatoire » doivent être remplis avant la sauvegarde.
-- Cliquez sur « Voir plus » pour afficher des champs supplémentaires, si nécessaire.
-2. Cliquez sur « Sauvegarder » pour finaliser le nouvel enregistrement et retourner à la page précédente.',
+1. Fournir des valeurs pour les champs à volonté.
+ - Les champs marqués « Requis » doivent être remplis avant la sauvegarde.
+ - Cliquer « Voir plus » pour exposer des champs supplémentaires si nécessaire.
+2. Cliquer sur « Sauvegarder » pour finaliser le nouvel enregistrement et revenir à la page antérieure.',
 
 // END ENT/ULT
 

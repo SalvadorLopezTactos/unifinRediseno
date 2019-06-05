@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -44,10 +44,16 @@ class SamlFeatureContext extends FeatureContext
      * @param array $sugarAdmin
      * @param array $mangoInstances
      * @param string $defaultInstance
+     * @param string $screenShotPath
      */
-    public function __construct($samlServer, array $sugarAdmin, array $mangoInstances, $defaultInstance)
-    {
-        parent::__construct($sugarAdmin);
+    public function __construct(
+        $samlServer,
+        array $sugarAdmin,
+        array $mangoInstances,
+        $defaultInstance,
+        string $screenShotPath
+    ) {
+        parent::__construct($sugarAdmin, $screenShotPath);
         $this->samlServer = $samlServer;
         $this->mangoInstances = $mangoInstances;
         $this->defaultBaseUrl = $this->mangoInstances[$defaultInstance];
@@ -87,7 +93,7 @@ class SamlFeatureContext extends FeatureContext
             throw new \RuntimeException("Only two windows must be opened at one moment.");
         }
         $second = array_filter($windows, function ($window) use ($current) {
-                return $window != $current;
+            return $window != $current;
         });
         $second = array_pop($second);
         $this->getSession()->switchToWindow($second);
@@ -118,7 +124,7 @@ class SamlFeatureContext extends FeatureContext
      */
     public function IWaitRedirectToSamlServer()
     {
-        $this->spin(function (FeatureContext $context){
+        $this->spin(function (FeatureContext $context) {
             $currentUrl = $context->getSession()->getCurrentUrl();
             return $this->samlServer == substr($currentUrl, 0, strlen($this->samlServer));
         }, 10);

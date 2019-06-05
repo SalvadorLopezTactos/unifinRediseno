@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Push Billing',
 	'LBL_PUSH_SHIPPING' => 'Push Shipping',
 	'LBL_SAVE_ACCOUNT' => 'Gravar Conta',
+    'LBL_SERVICE_LEVEL' => 'Nível de serviço',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Cidade de Endereço de Envio:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'País de Endereço de Envio:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Código Postal de Endereço de Envio:',

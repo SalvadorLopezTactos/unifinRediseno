@@ -23,6 +23,10 @@ class SugarOAuth2StorageOIDC extends SugarOAuth2Storage
      */
     public function checkUserCredentials($client_id, $username, $password)
     {
+        if ($this->hasPortalStore($client_id)) {
+            return parent::checkUserCredentials($client_id, $username, $password);
+        }
+
         try {
             // noHooks since we'll take care of the hooks on API level, to make it more generalized
             $loginResult = $this->getAuthController()->login(
@@ -38,6 +42,17 @@ class SugarOAuth2StorageOIDC extends SugarOAuth2Storage
         }
 
         throw new SugarApiExceptionNeedLogin($this->getTranslatedMessage('ERR_INVALID_PASSWORD', 'Users'));
+    }
+
+    /**
+     * @param $client_id
+     * @return bool
+     */
+    public function hasPortalStore($client_id): bool
+    {
+        $clientInfo = $this->getClientDetails($client_id);
+        $isPortalClientType = $clientInfo && $clientInfo['client_type'] === 'support_portal';
+        return $this->platformStore instanceof SugarOAuth2StoragePortal || $isPortalClientType;
     }
 
     /**

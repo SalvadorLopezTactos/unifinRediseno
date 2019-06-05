@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: layout_defs.php 14232 2006-06-23 00:33:16 +0000 (Fri, 23 Jun 2006) wayne $
 
 
 global $modules_exempt_from_availability_check;

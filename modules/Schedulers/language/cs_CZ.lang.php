@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Vytvořit budoucí časovou periodu',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Aktualizovat články KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikovat schválené články a vypršet platnost článkům znalostní báze.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Plánovaná úloha Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikovat schválené články a články znalostní báze s ukončenou platností.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Naplánovaná úloha',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Znovu sestavit nenormalizovaná data zabezpečení týmu',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Zkontrolovat Inbound Mail Accounts',
 'LBL_PERFORMFULLFTSINDEX' => 'Full-textový vyhledávač',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Odstranit dočasné soubory PDF',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikovat schválené články a ukončit platnost článkům znalostní báze.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikovat schválené články a články znalostní báze s ukončenou platností.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Plánovač fronty vyhledávače Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Odstranit soubory diagnostického nástroje',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Odstranit dočasné soubory',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Spustit odesílání připomenutí e-mailem',
 'LBL_CLEANJOBQUEUE' => 'Vyčištění fronty úloh',
 'LBL_CLEANOLDRECORDLISTS' => 'Vyčistit seznamy starých záznamů',
-'LBL_PMSEENGINECRON' => 'Plánovač Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Plánovač SugarBPM',
 );
 

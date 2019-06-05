@@ -73,6 +73,7 @@ $viewdefs['Users']['base']['view']['subpanel-list'] = array(
         'actions' => array(
             array(
                 'type' => 'unlink-action',
+                'name' => 'unlink_button',
                 'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),

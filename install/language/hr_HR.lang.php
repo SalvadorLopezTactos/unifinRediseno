@@ -79,7 +79,6 @@ $mod_strings = array(
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcije povezane s bibliotekama za raščlanjivanje XML koje su potrebne za aplikaciju Sugar nisu pronađene. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator slučajnih brojeva',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije povezane s proširenjem Multibyte Strings PHP (mbstring) koje su potrebne za aplikaciju Sugar nisu pronađene. <br/><br/>Modul mbstring inače nije zadano uključen u PHP-u i mora ga se aktivirati s pomoću opcije --enable-mbstring nakon ugradnje binarne datoteke PHP. Više informacija o tome kako uključiti podršku za mbstring potražite u svojem priručniku za PHP.',
-    'ERR_CHECKSYS_MCRYPT'               => "Modul mcrypt nije učitan. Više informacija o tome kako učitati modul mcrypt potražite u svojem priručniku za PHP.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Postavka session.save_path u vašoj datoteci za konfiguraciju php-a (php.ini) nije postavljena ili je postavljena u mapu koja ne postoji. Možda ćete morati postaviti postavku save_path u php.ini ili provjeriti postoji li mapa postavljena u save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Postavka session.save_path u vašoj datoteci za konfiguraciju php-a (php.ini) postavljena je u mapu u koju se ne može pisati. Poduzmite potrebne korake da biste omogućili pisanje u mapi. <br>Ovisno o vašem operacijskom sustavu, možda ćete morati promijeniti dopuštenja tako da pokrenete chmod 766 ili desnom tipkom miša kliknuti na naziv datoteke da biste pristupili svojstvima i poništili opciju „samo za čitanje”.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfiguracijska datoteka postoji, ali se u nju ne može pisati. Poduzmite potrebne korake da biste omogućili pisanje u njoj. Ovisno o vašem operacijskom sustavu, možda ćete morati promijeniti dopuštenja tako da pokrenete chmod 766 ili desnom tipkom miša kliknuti na naziv datoteke da biste pristupili svojstvima i poništili opciju „samo za čitanje”.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Modul IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Modul MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'Modul MCrypt',
 	'LBL_CHECKSYS_MEM_OK'				=> 'U redu (bez ograničenja)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'U redu (neograničeno)',
 	'LBL_CHECKSYS_MEM'					=> 'Memorijsko ograničenje PHP-a',
@@ -560,7 +558,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informacije o novom računu',
         'description' => 'Ovaj predložak upotrebljava se kad administrator sustava korisniku pošalje novu lozinku.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>U nastavku slijede vaše korisničko ime i privremena lozinka za račun:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Nakon što se prijavite s pomoću navedene lozinke, možda ćete morati ponovno postaviti lozinku na neku po vašem izboru.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>U nastavku slijede vaše korisničko ime i privremena lozinka za račun:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Nakon što se prijavite s pomoću navedene lozinke, možda ćete morati ponovno postaviti lozinku na neku po vašem izboru.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 U nastavku slijede vaše korisničko ime i privremena lozinka za račun:
@@ -575,7 +573,7 @@ Nakon što se prijavite s pomoću navedene lozinke, možda ćete morati ponovno 
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Ponovno postavite svoju lozinku za račun',
         'description' => "Ovaj se predložak upotrebljava za slanje poveznice za ponovno postavljanje lozinke korisničkog računa korisniku.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Nedavno ste na $contact_user_pwd_last_changed zatražili ponovno postavljanje lozinke za račun. </p><p>Kliknite na poveznicu u nastavku da biste ponovno postavili lozinku:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Nedavno ste na $contact_user_pwd_last_changed zatražili ponovno postavljanje lozinke za račun. </p><p>Kliknite na poveznicu u nastavku da biste ponovno postavili lozinku:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Nedavno ste na $contact_user_pwd_last_changed zatražili ponovno postavljanje lozinke za račun.

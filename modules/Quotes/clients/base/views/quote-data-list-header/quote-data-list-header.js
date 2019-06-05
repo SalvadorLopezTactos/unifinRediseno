@@ -68,6 +68,14 @@
             this.meta.panels = qliListMetadata.panels;
         }
 
+        _.each(this.meta.panels, function(panel) {
+            _.each(panel.fields, function(field) {
+                if (!field.labelModule) {
+                    field.labelModule = 'Quotes';
+                }
+            }, this);
+        }, this);
+
         this.isCreateView = this.context.get('create') || false;
 
         if (this.layout.isCreateView) {

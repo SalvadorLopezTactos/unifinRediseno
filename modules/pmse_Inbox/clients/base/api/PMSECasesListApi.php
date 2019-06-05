@@ -233,6 +233,10 @@ class PMSECasesListApi extends FilterApi
                 $params = array('erased_fields' => true);
                 $assignedBean = BeanFactory::getBean($list[$key]['cas_sugar_module'], $list[$key]['cas_sugar_object_id'], $params);
 
+                if (is_null($assignedBean)) {
+                    continue;
+                }
+
                 $list[$key] = PMSEEngineUtils::appendNameFields($assignedBean, $value);
 
                 $list[$key]['cas_create_date'] = PMSEEngineUtils::getDateToFE($value['cas_create_date'], 'datetime');

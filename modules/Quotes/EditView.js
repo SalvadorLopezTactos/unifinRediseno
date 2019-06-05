@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: EditView.js 51846 2009-10-26 21:25:33Z clee $
 
 function set_billing_return(popup_reply_data)
 {

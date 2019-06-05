@@ -26,7 +26,7 @@
                     {{#each menulist}}
                         {{#if css_class}}<li class="{{css_class}}">{{else}}<li>{{/if}}
                         <a href="{{route}}" {{#if openwindow}}target="_blank"{{/if}} track="click:userAction-{{label}}" tabindex="-1">
-                            {{#if img_url}}<span><img src="{{img_url}}" alt="{{../../userName}}" class="avatar avatar-sm"></span>{{else}}{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}{{/if}}{{str label module}}</a>
+                            {{#if img_url}}<span><img src="{{img_url}}" alt="{{../../userName}}" class="avatar avatar-sm"></span>{{else}}{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}{{/if}}{{str label}}</a>
                     </li>
                     {{/each}}
                 </ul>

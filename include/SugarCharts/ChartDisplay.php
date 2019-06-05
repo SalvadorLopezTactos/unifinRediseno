@@ -105,7 +105,7 @@ class ChartDisplay
     {
         if ($this->canDrawChart()) {
 
-            /* @var $sugarChart JitReports */
+            /* @var $sugarChart SugarChart or its sub class */
             $sugarChart = SugarChartFactory::getInstance('', 'Reports');
 
             $sugarChart->setData($this->chartRows);
@@ -260,7 +260,7 @@ class ChartDisplay
             $total = $total_row['cells'][$total];
 
             if(is_string($total) && !is_numeric($total)) {
-                $total = unformat_number($total, true);
+                $total = unformat_number($total);
             }
             if ($total > 100000) {
                 $do_thousands = true;
@@ -348,9 +348,23 @@ class ChartDisplay
                     $this->chartType = 'horizontal bar chart';
                 }
                 break;
+            case 'hGBarF':
+                if ($this->isStackable()) {
+                    $this->chartType = 'horizontal grouped bar chart';
+                } else {
+                    $this->chartType = 'horizontal bar chart';
+                }
+                break;
             case 'vBarF':
                 if ($this->isStackable()) {
                     $this->chartType = 'stacked group by chart';
+                } else {
+                    $this->chartType = 'bar chart';
+                }
+                break;
+            case 'vGBarF':
+                if ($this->isStackable()) {
+                    $this->chartType = 'vertical grouped bar chart';
                 } else {
                     $this->chartType = 'bar chart';
                 }

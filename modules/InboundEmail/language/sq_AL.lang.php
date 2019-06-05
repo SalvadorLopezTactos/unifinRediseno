@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Përgjigje:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Hyrja ose fjalëkalimi janë të gabuara',
-	'ERR_BODY_TOO_LONG'		=> '\\rTrupi tekstual është shumë i gjatë për ta kapur Emaili i plotë. Është shkrurtuar.',
+	'ERR_BODY_TOO_LONG'		=> '\rTrupi tekstual është shumë i gjatë për ta kapur Emaili i plotë. Është shkrurtuar.',
 	'ERR_INI_ZLIB'			=> 'Nuk mund të c&#39;kyc ngjeshjen e përkohshme Zlib. "Testi i Parametrave" mund të dështojë.',
 	'ERR_MAILBOX_FAIL'		=> 'Nuk mund të rigjej asnjë mail llogari.',
 	'ERR_NO_IMAP'			=> 'Nuk janë gjetur IMAP biblioteka. Ju lutemi të zgjidhni këtë para se të azhdoni me Emailin e drejtuar përbrenda.',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Pasardhësit e Radhëve Nga Ekipet',
 	'LBL_GROUPFOLDER_ID'	=> 'Id e folderit të grupit',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Drejtuar Folderit të grupit',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Lejoni përdoruesit të dërgojnë emaila duke përdorur "Nga" emrin dhe adresën si përgjigje për të adresuar',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Kur ky opsion është selektuar, nga emri dhe nga adresa e emailit të shoqëruar me këtë llogari të postës së grupit do të shfaqet si një opsion për Nga fusha kur kompozimi i emailave për shfrytëzuesit kanë qasje në llogarinë e postës së grupit.',
     'LBL_STATUS_ACTIVE'     => 'aktive',
     'LBL_STATUS_INACTIVE'   => 'pasive',
     'LBL_IS_PERSONAL' => 'personale',

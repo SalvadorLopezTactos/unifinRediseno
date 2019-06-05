@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -10,8 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$sugar_config_si = array (
+$sugar_config_si = [
     'setup_db_host_name' => '127.0.0.1', // we use local mysql installed by us into docker container
+    'setup_db_port_num' => 3306,
     'setup_db_database_name' => 'sugarcrm',
     'setup_db_drop_tables' => 1,
     'setup_db_create_database' => 1,
@@ -46,4 +47,4 @@ $sugar_config_si = array (
     'setup_fts_type' => 'Elastic',
     'setup_fts_host' => 'behat-tests-env-elastic', //Your Elastic server host
     'setup_fts_port' => '9200', //Your Elastic server port
-);
+];

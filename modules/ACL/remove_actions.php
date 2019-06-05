@@ -10,30 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-global $current_user,$beanList, $beanFiles;
-$actionarr = ACLAction::getDefaultActions();
-if(is_admin($current_user)){
-	$arr = array();
-	$foundOne = false;
-	foreach($actionarr as $actionobj){
-		if (empty($actionobj->category)) {
-			continue;
-		}
-		if(!isset($beanList[$actionobj->category]) || !file_exists($beanFiles[$beanList[$actionobj->category]])){
-			if(!isset($_REQUEST['upgradeWizard'])){
-				if (!in_array($actionobj->category, $arr)) {
-					array_push($arr, $actionobj->category);
-					echo 'Removing for ' . $actionobj->category . '<br>';
-				}
-			}
-			$foundOne = true;
-			ACLAction::removeActions($actionobj->category);
-		}
-	}
-	if(!$foundOne)
-		echo 'No ACL modules found that needed to be removed';
+function removeACLActions($current_user, $beanList, $beanFiles, $silent)
+{
+    $actionarr = ACLAction::getDefaultActions();
+    if (is_admin($current_user)) {
+        $arr = array();
+        foreach ($actionarr as $actionobj) {
+            if (empty($actionobj->category)) {
+                continue;
+            }
+            if (!isset($beanList[$actionobj->category]) || !file_exists($beanFiles[$beanList[$actionobj->category]])) {
+                if (!isset($_REQUEST['upgradeWizard'])) {
+                    if (!in_array($actionobj->category, $arr)) {
+                        array_push($arr, $actionobj->category);
+                        if (!$silent) {
+                            echo 'Removing for ' . $actionobj->category . '<br>';
+                        }
+                    }
+                }
+                ACLAction::removeActions($actionobj->category);
+            }
+        }
+    }
 }
-
 
 ?>

@@ -60,8 +60,11 @@
      * @protected
      */
     _saveConfig: function() {
-        var url = app.api.buildURL(this.module, 'config');
-        app.api.call('create', url, this.model.attributes, {
+        app.api.call(
+            'create',
+            this._getSaveConfigURL(),
+            this._getSaveConfigAttributes(),
+            {
                 success: _.bind(function() {
                     this.showSavedConfirmation();
                     if (app.drawer.count()) {
@@ -81,12 +84,32 @@
     },
 
     /**
+     * Extensible function that returns the module/config URL for save
+     *
+     * @return {string} The Config Save URL
+     * @protected
+     */
+    _getSaveConfigURL: function() {
+        return app.api.buildURL(this.module, 'config');
+    },
+
+    /**
+     * Extensible function that returns the model attributes for save
+     *
+     * @return {Object} The Config Save attributes object
+     * @protected
+     */
+    _getSaveConfigAttributes: function() {
+        return this.model.toJSON();
+    },
+
+    /**
      * Noop for use if model needs updating before save.
      * Gets called before the model actually saves.
      *
      * Override this method to provide custom logic.
      *
-     * @private
+     * @protected
      * @template
      * @return {boolean} The default implementation returns `true` allowing the save.
      */
@@ -138,7 +161,7 @@
      *
      * Override this method to provide custom logic.
      *
-     * @private
+     * @protected
      * @template
      * @return {boolean} The default implementation returns `true` allowing the cancel.
      */

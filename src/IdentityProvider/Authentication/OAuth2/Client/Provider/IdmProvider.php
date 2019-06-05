@@ -207,7 +207,10 @@ class IdmProvider extends BasicGenericProvider
      */
     public function remoteIdpAuthenticate($username, $password, $tenant)
     {
-        $accessToken = $this->getAccessToken('client_credentials', ['scope' => 'idp.auth.password']);
+        $accessToken = $this->getAccessToken(
+            'client_credentials',
+            ['scope' => 'https://apis.sugarcrm.com/auth/iam.password']
+        );
         $authHeaders = $this->getAuthorizationHeaders($accessToken->getToken());
         $options = [
             'headers' => [

@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Obriši',
     'LBL_MODULE_NAME' => 'E-adrese',
     'LBL_MODULE_NAME_SINGULAR' => 'E-adresa',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Podnešen zahtev za potvrdu',
+    'LBL_CONFIRMATION_TITLE' => 'Hvala vam',
+    'LBL_CONFIRMATION_MESSAGE' => 'Vaša prijava je potvrđena. Dodati ste u našu bazu i uskoro ćemo vam se javiti.',
 );

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Pret šo procesa definīciju darbojas aktīvi procesi. Definīcijas atjaunošana var ietekmēt šos procesus. Vai tomēr vēlaties rediģēt šo procesa definīciju?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Pret šo procesa definīciju darbojas aktīvi procesi. Definīcijas atjaunošana var ietekmēt šos procesus. Vai tomēr vēlaties atspējot šo procesa definīciju?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automātiski izveidot jaunu procesa definīcijas ierakstu, importējot *.bpm failu no jūsu failu sistēmas.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Augšupielādēt .bpm failu, lai importētu procesa definīciju.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Procesa definīcijas tika veiksmīgi importētas sistēmā.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Izvēlieties derīgu *.bpm failu.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Procesu definīcijas ir importētas, bet satur vienu vai vairākas Biznesa noteikumu darbības, kurām biznesa noteikumi nav izvēlēti.',
+    'LBL_BPM_IMPORT_SELECT' => 'Šī procesa definīcija satur tālāk norādītos biznesa noteikumus un e-pasta veidnes. '
+        . 'Atlasiet, ko vēlaties importēt.',
+    'LBL_BUSINESS_RULES' => 'Biznesa noteikumi',
+    'LBL_EMAIL_TEMPLATES' => 'E-pasta veidnes',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Atsaukt',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Atatsaukt',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Saglabāt',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Validēt',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Saglabāt un validēt',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Ieslēgt validēšanu, lai pārbaudītu kļūdas',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Darbības',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Dzēst',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modulis',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtrs',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Atteicas uz',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kritēriji',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Ilgums',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Vienība',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Lauki',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Moduļa lauka izvērtēšana',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modulis',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Saistīts ar',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Lauks',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Vērtība',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Formas atbildes izvērtēšana',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nav',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nav vienāds ar',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Visi saistītie ieraksti',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Jebkuri saistītie ieraksti',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Izpildes laiks',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pievienot',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Aizvērt',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Darba grupas',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Lietotājs %MODULE%, kurš izveidoja ierakstu',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Lietotājs %MODULE%, kurš pēdējais pārveidoja ierakstu',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Lietotājs %MODULE%, kuram ir piešķirts ieraksts',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Lietotājs %MODULE%, kuram bija piešķirts ieraksts',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Lietotājs %MODULE%, kurš ir tā lietotāja menedžeris, kurš izveidoja ierakstu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Lietotājs %MODULE%, kurš ir tā lietotāja menedžeris, kurš pēdējais pārveidoja ierakstu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Lietotājs %MODULE%, kurš ir tā lietotāja menedžeris, kuram ir piešķirts ieraksts',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Lietotājs %MODULE%, kurš ir tā lietotāja menedžeris, kuram bija piešķirts ieraksts',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% saistīs ar %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Lietotājs, kurš izveidoja %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Lietotājs, kurš pēdējais pārveidoja %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Lietotājs, kuram ir piešķirts %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Lietotājs, kuram bija piešķirts %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Vadītājs, kurš izveidoja %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Vadītājs, kurš pēdējais pārveidoja %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Vadītājs, kuram ir piešķirts %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Vadītājs, kuram bija piešķirts %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'loma: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'darba grupa: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Ieteikumi',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Nederīga izteiksme sintakse.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Validē procesa definīciju: izgūst elementa iestatījumus',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Validē procesa definīciju: validē elementa iestatījumus',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Atjaunina kļūdu sarakstu...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Validēšana pabeigta! Atrastas problēmas: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problēmas',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Notiek validēšana',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Brīdinājums: process var apstāties pie šā elementa, vai arī var būt citas nevēlamas sekas',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Kļūda: Process apstāsies pie šā elementa',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Nevar validēt elementu',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elements neatbilst ienākošo plūsmu minimālajam skaitam',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Šim elementam ir jābūt ienākošo ceļu minimālam skaitam. Pārbaudiet to ceļu skaitu, kas savienojas ar šo elementu, lai pārliecinātos, ka tas atbilst minimālajam skaitam.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Elements pārsniedz ienākošo plūsmu maksimālo skaitu',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Šim elementam ir ienākošo ceļu maksimālais skaits, ko nedrīkst pārsniegt. Pārbaudiet to ceļu skaitu, kas savienojas ar šo elementu, lai pārliecinātos, ka tas nepārsniedz maksimālo skaitu.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elements neatbilst izejošo plūsmu minimālajam skaitam',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Šim elementam ir jābūt izejošo ceļu minimālam skaitam. Pārbaudiet to ceļu skaitu, kas iet prom no šī elementa, lai pārliecinātos, ka tas atbilst minimālajam skaitam.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elements pārsniedz izejošo plūsmu maksimālo skaitu',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Šim elementam ir izejošo ceļu maksimālais skaits, ko nedrīkst pārsniegt. Pārbaudiet to ceļu skaitu, kas iet prom no šī elementa, lai pārliecinātos, ka tas nepārsniedz maksimālo skaitu.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Obligātais lauks nav iestatīts',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Šim elementam ir lauks, kas ir obligāts, bet nav iestatīts. Pārbaudiet elementa iestatījumus, lai pārliecinātos, ka lauks ir iestatīts pareizi, pēc tam obligāti noklikšķinuet uz pogas "Saglabāt".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Datu šobrīd sistēmā nav',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Šā elementa iestatījumi atsaucas uz konkrētu datu fragmentu, kura nav datu bāzē. Pārbaudiet elementa iestatījumus, lai pārliecinātos, ka ir visi minētie dati (t.i. konkrēti lietotāji, moduļa lauki, darba drupas utt.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Kritēriju lodziņa izteikums nekad netiks novērtēts kā patiess',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kritēriju lauki satur loģiskos izteikumus UN/VAI/NE. Šī kļūda nozīmē, ka kritērija lauks elementa iestatījumos ir konfigurēts tā, lai izteikums nekad nebūtu patiess. Pārbaudiet kritērija lauku, lai novērstu jebkādas loģiskās pretrunas, kas neļauj izteikumam kļūt patiesam.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Elements nav sasniedzams',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Lai elements tiktu izpildīts procesā, pie tā ir jāved ceļam. Pie šā elementa vedošo ceļu ķēdei ir jāsākas ar sākuma elementu. Pārbaudiet pie šā elementa vedošo ienākošo ceļu kēdi, lai pārliecinātos, ka ķēde sākas ar sākuma elementu.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Gaidīšanas laika kritērijam ir jāsatur tieši viena datuma/laika konstante',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Šis gaidīšanas notikuma elements ir konfigurēts, izmantojot kritērija lauku "Fiksēts datums". Šim laukam ir jāsatur tieši viena konstante "Fiksēts datums/laiks" vai atsauce uz datuma/laika lauku. Visām pārējām izteikuma daļām ir jabūt matemātiskiem operatoriem (+/-) vai konstantēm "Laika posms".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Norādītā ilguma vērtība nevar būt nulle',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Šis gaidīšanas notikuma elements ir konfigurēts, izmantojot iestatījumu "Ilgums". Šis iestatījums nevar būt nulle, pretējā gadījumā radīsies kļūda. Pārbaudiet elementa iestatījumus, lai pārliecinātos, ka "Ilgums" nav iestatīts uz nulli.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Gaidīšanas laika parametri nav iestatīti',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Šim gaidīšanas notikuma elementam nav konfigurētu iestatījumu. Pārbaudiet elementa iestatījumus, lai pārliecinātos, ka ir atlasīts "Ilgums" vai "Fiksēts datums", ievadiet vēlamās vērtības un uzklikšķiniet uz pogas "Saglabāt".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Sagaidāmais laiks ir mazāks par nulli',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Šā darbības elementa iestatījumos "Formas" sagaidāmajam laikam ir iestatīta negatīva vērtība, kas iesaldēs procesu, kad tiks sasniegts šis elements. Atveriet šā elementa iestatījumus "Formas", lai mainītu sagaidāmo laiku uz nenegatīvu skaitli.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Darbības veids ir [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Šim darbības elementam nav piešķirts veids. To var mainīt, uzklikšķinot ar peles labo pogu uz darbības elementa, pēc tam atlasot veidu no saraksta "Darbības veids".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Ceļa izvēle netiek garantēta',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Šis kļūdas paziņojums parādas tāpēc, ka pastāv iespēja, ka neviens no šā vārtejas elementa ceļiem netisk izvēlēts, un tas novedīs pie procesa apturēšanas. Ieteicams iestatīt noklusējuma ceļu gadījumam, ja neviens no kritērija lauka izteikumiem elementa iestatījumos netiek apmierināts. To var izdarīt, uzklikšķinot ar peles labo pogu uz vārtejas elementa, pēc tam atlasot variantu no izvēlnes "Noklusējuma plūsma". Ja noklusējuma ceļš nav norādīts, ir jāmaina kritērija lauka izteikumi elementa iestatījumos tā, lai nodrošinātu, ka vismaz viens no tiem ir patiess procesa izpildes laikā.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Saplūšanas vārtejas veids nesakrīt ar ienākošās plūsmas vārtejas veidu',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Sadales vārtejas sadala procesus vairākos zaros. Izmantojot saplūšanas vārteju, lai šos zarus atkārtoti apvienotu vienā ceļā, ir jāizmanto saplūšanas vārtejas pareizais veids atkarībā no sadales vārtejas veida, kas tika izmantots zaru izveidei. Tādu zaru atkārtotai apvienošanai, kas tika izveidoti, izmantojot ekskluzīvo vai uz notikumu bāzēto sadales vārteju, izmantojot ekskluzīvo saplūšanas vārteju. Lai atkārtoti apvienotu tādus zarus, kas tika izveidoti ar paralēlo vai inkluzīvo sadales vārteju, izmantojiet paralēlo saplūšanas vārteju.',
 );

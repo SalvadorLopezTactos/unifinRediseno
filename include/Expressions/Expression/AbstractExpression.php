@@ -199,13 +199,18 @@ abstract class AbstractExpression
 		// we require multiple but params only has 1
 		if ( $count > 1 && !is_array($params) )
             throw new Exception($op_name . ": Requires exactly $count parameter(s), only one passed in");
-		// we require only 1 and params has multiple
-		if ( $count == 1 && is_array($params) )
-			throw new Exception($op_name . ": Requires exactly $count parameter(s), more than one passed in");
 
-		// check parameter count
-		if ( $count != AbstractExpression::$INFINITY && sizeof($params) != $count )
-			throw new Exception($op_name . ": Requires exactly $count parameter(s)");
+        // we require only 1 and params has multiple
+        if ($count == 1) {
+            if (is_array($params)) {
+                throw new Exception($op_name . ": Requires exactly $count parameter(s), more than one passed in");
+            }
+        } elseif ($count != AbstractExpression::$INFINITY) {
+            // check parameter count
+            if (count($params) != $count) {
+                throw new Exception($op_name . ": Requires exactly $count parameter(s)");
+            }
+        }
 
 		// if a generic type is specified
 		if ( is_string( $types ) ) {

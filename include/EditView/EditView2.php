@@ -563,6 +563,7 @@ class EditView
             $this->focus->ACLFilterFieldList($this->fieldDefs, array(), array("add_acl" => true));
             if (in_array($this->focus->module_name, $this->idpConfig->getIDMModeDisabledModules())
                 && $this->idpConfig->isIDMModeEnabled()
+                && !$this->idpConfig->isSpecialBeanAction($this->focus, $_REQUEST)
             ) {
                 $this->disableIDMModeFields();
             }

@@ -30,7 +30,7 @@
                 {{#each ../../filteredCollection}}
                 <tr name="{{module}}_{{attributes.id}}" data-fieldname="{{attributes.field_name}}" class="single">
                     {{#each fields}}
-                        <td{{#if align}} class="{{align}}"{{/if}}>
+                        <td{{#if align}} class="{{align}}"{{/if}} data-column="{{name}}">
                             {{field ../../../../this model=../this template=../../../../this.action}}
                         </td>
                     {{/each}}

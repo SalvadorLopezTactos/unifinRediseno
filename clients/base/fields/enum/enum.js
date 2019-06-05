@@ -231,6 +231,11 @@
             // default value.
             $el.select2('val', this.value, !!defaultValue);
         }
+
+        if (this.tplName === 'detail') {
+            $('.select2-drop').select2('close');
+        }
+
         return this;
     },
 
@@ -740,7 +745,6 @@
                 this.model.set(this.name + '_replace', this.appendValue ? '1' : '0');
             }, this));
         }
-
     },
 
     /**
@@ -762,10 +766,32 @@
     },
 
     /**
+     * Need to check not only if there is no value, but if there is a value and
+     * it is an empty array.
+     *
+     * @override
+     */
+    _isErasedField: function() {
+        if (!this.model) {
+            return false;
+        }
+
+        var value = this.model.get(this.name);
+
+        return (!value || _.isArray(value) && _.isEmpty(value)) &&
+            _.contains(this.model.get('_erased_fields'), this.name);
+    },
+
+    /**
      * @inheritdoc
      */
     _dispose: function() {
         this.unbindKeyDown();
+        var $el = this.$(this.fieldTag);
+        var plugin = $el.data('select2');
+        if (plugin) {
+            plugin.close();
+        }
         this._super('_dispose');
     }
 })

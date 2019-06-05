@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: listviewdefs.php 24202 2007-07-11 16:57:22Z roger $
 
 $listViewDefs['ContractTypes'] = array(
     'NAME' => array(

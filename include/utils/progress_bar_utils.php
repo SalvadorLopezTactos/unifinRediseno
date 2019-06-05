@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: progress_bar_utils.php 53116 2009-12-10 01:24:37Z mitani $
 function progress_bar_flush()
 {
 	if(ob_get_level()) {

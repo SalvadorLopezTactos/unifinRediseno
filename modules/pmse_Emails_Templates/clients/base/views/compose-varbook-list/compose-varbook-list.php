@@ -13,14 +13,17 @@
 
 $viewdefs['pmse_Emails_Templates']['base']['view']['compose-varbook-list'] = array(
     'template'   => 'flex-list',
-    'selection'  => array(
-        'type'                     => 'multi',
-        'actions'                  => array(),
-        'disable_select_all_alert' => true,
-    ),
     'panels'     => array(
         array(
             'fields' => array(
+                array(
+                    'name' => 'process_et_field_type',
+                    'label' => 'LBL_FIELD_SELECTOR_DROPDOWN',
+                    'type' => 'enum',
+                    'options' => 'process_et_field_type',
+                    'sortable' => false,
+                    'default' => 'none',
+                ),
                 array(
                     'name'    => 'name',
                     'label'   => 'LBL_LIST_NAME',

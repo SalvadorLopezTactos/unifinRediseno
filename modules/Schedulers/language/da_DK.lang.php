@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Opret fremtidige tidsperioder',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Opdatér KBContent artikler.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Udgiv godkendte artikler & udløb KB-artikler.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow planlagt Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Udgiv godkendte artikler og udløbne KB-artikler.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlagt job',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Genopbyg unormale team-sikkerhedsdata',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Tjek indgående e-mail-konti',
 'LBL_PERFORMFULLFTSINDEX' => 'Fuldtekst søgeindeks system',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Fjern midlertidige PDF-filer',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Udgiv godkendte artikler & udløb KB-artikler.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Udgiv godkendte artikler og udløbne KB-artikler.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch kø-planlægger',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern diagnosticeringsværktøjsfiler',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Kør e-mail-påmindelser sender',
 'LBL_CLEANJOBQUEUE' => 'Rens job kø',
 'LBL_CLEANOLDRECORDLISTS' => 'Oprydning i gamle rekord lister',
-'LBL_PMSEENGINECRON' => 'Avanceret Workflow planlægger',
+'LBL_PMSEENGINECRON' => 'SugarBPM-planlægger',
 );
 

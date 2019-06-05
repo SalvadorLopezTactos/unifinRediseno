@@ -1123,9 +1123,11 @@ class ModuleBuilderController extends SugarController
 
     public function action_portalsyncsync()
     {
+        $system_config = new Administration();
+
         $option = str_replace(array('soap.php', 'index.php', 'portal_sync.php'), '', $_REQUEST ['portalURL']);
-        $GLOBALS ['system_config']->saveSetting('system', 'portal_url', $option);
-        $GLOBALS ['system_config']->settings ['system_portal_url'] = $option;
+        $system_config->saveSetting('system', 'portal_url', $option);
+
         $this->view = 'portalsync';
     }
 

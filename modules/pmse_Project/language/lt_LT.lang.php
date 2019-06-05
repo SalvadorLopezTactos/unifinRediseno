@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'There are active processes running against this Process Definition. Updating it could impact these processes. Do you still want to edit this Process Definition?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'There are active processes running against this Process Definition. Updating it could impact these processes. Do you still want to disable this Process Definition?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatically create a new Process Definitions record by importing a *.bpm file from your file system.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Įkelti .bpm failą, kad būtų importuotas proceso apibrėžimas.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Process Definitions was successfully imported into the system.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Please select a valid *.bpm file.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'The Process Definition has been imported but contains one or more Business Rule actions for which business rules have not been selected.',
+    'LBL_BPM_IMPORT_SELECT' => 'Šiame proceso apibrėžime yra šios verslo taisyklės ir el. laiškų šablonai. '
+        . 'Pasirinkite tuos, kuriuos norite importuoti.',
+    'LBL_BUSINESS_RULES' => 'Verslo taisyklės',
+    'LBL_EMAIL_TEMPLATES' => 'El. laiškų šablonai',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Atstatyti',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Sutaisyti',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Saugoti',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Tikrinti',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Išsaugoti ir patikrinti',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Vykdyti patikrinimą, siekiant nustatyti, ar yra klaidų',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Priminimas',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Ištrinti',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modulis',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtruoti',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Susijęs su',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Criteria',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Trukmė',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Vienetas',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Laukai',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Module Field Evaluation',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modulis',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Susij. su',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Laukas',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Reikšmė',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Form Response Evaluation',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is not',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'not equal to',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Visi susiję įrašai',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bet kurie susiję įrašai',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Vykdymo laikas',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pridėti',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Uždaryti',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Komandos',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'User in %MODULE% who created the record',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'User in %MODULE% who last modified the record',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'User in %MODULE% who is assigned to the record',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'User in %MODULE% who was assigned to the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'User in %MODULE% who is manager of who created the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'User in %MODULE% who is manager of who last modified the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'User in %MODULE% who is manager of who is assigned to the record',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'User in %MODULE% who is manager of who was assigned to the record',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% susij. su %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Vartotojas, kuris sukūrė %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Vartotojas, kuris paskutinis pakeitė %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Vartotojas, kuris priskirtas %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Vartotojas, kuris buvo priskirtas %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Vartotojo, kuris sukūrė %MODULE%, vadovas',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Vartotojo, kuris paskutinis pakeitė %MODULE%, vadovas',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Vartotojo, kuris priskirtas %MODULE%, vadovas',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Vartotojo, kuris buvo priskirtas %MODULE%, vadovas',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'role: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'team: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Suggestions',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Invalid expression syntax.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Patikrinimo proceso apibrėžimas: elemento nustatymų gavimas',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Patikrinimo proceso apibrėžimas: elemento nustatymų tikrinimas',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Atnaujinamas klaidų sąrašas...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Tikrinimas baigtas! Rasta problemų: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' probl.',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Atliekamas tikrinimas',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Įspėjimas: šis procesas gali būti sustabdytas ties šiuo elementu arba jame gali būti kitų nenumatytų efektų',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Klaida: šis procesas bus sustabdytas ties šiuo elementu',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Nepavyko patikrinti elemento',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elementas neatitinka mažiausio gaunamų srautų kiekio',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Šiame elemente turi būti naudojamas mažiausias gaunamų kelių kiekis. Patikrinkite su šiuo elementu susietų kelių kiekį ir įsitikinkite, kad jis atitinka mažiausią reikiamą.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Elementas viršija didžiausią gaunamų srautų kiekį',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Šiame elemente naudojamas didžiausias gaunamų kelių kiekis, kurio viršyti negalima. Patikrinkite su šiuo elementu susietų kelių kiekį ir įsitikinkite, kad neviršytas didžiausias kiekis.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elementas neatitinka mažiausio išsiunčiamų srautų kiekio',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Šiame elemente turi būti naudojamas mažiausias išsiunčiamų kelių kiekis. Patikrinkite iš šio elemento išeinančių kelių kiekį ir įsitikinkite, kad jis atitinka mažiausią reikiamą.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elementas viršija didžiausią išsiunčiamų srautų kiekį',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Šiame elemente naudojamas didžiausias išsiunčiamų kelių kiekis, kurio viršyti negalima. Patikrinkite iš šio elemento išeinančių kelių kiekį ir įsitikinkite, kad neviršytas didžiausias kiekis.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Nenustatytas privalomas laukas',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Šiame elemente pateiktas privalomas laukas, tačiau jis nenustatytas. Patikrinkite elemento nustatymus ir įsitikinkite, kad laukas nustatytas tinkamai, tada nepamirškite spustelėti mygtuko „Išsaugoti“.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Šiuo metu sistemoje duomenų nėra',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Šio elemento nustatymuose nurodytas konkretus duomenų, kurių nėra duomenų bazėje, kiekis. Patikrinkite elemento nustatymus ir įsitikinkite, kad visi nurodyti duomenys yra (t. y. konkretūs vartotojai, modulio laukai, komandos ir pan.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Kriterijų langelio išraiška niekada nebus įvertinta kaip teisinga',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kriterijų langeliuose yra loginių AND / OR / NOT išraiškų. Ši klaida reiškia, kad kriterijų langelis elemento nustatymuose sukonfigūruotas taip, kad išraiška niekada nebus teisinga. Patikrinkite kriterijų langelį ir pašalinkite loginius prieštaravimus, dėl kurių išraiška negali būti teisinga.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Elementas nepasiekiamas',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Tam, kad elementas šiame procese būtų vykdomas, su juo turi būti susietas kelias. Kelių grandinė, vedanti į šį elementą, turi būti pradedama pradiniu elementu. Patikrinkite gaunamų kelių, vedančių į šį elementą, grandinę ir įsitikinkite, kad grandinė pradedama pradiniu elementu.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Laukimo laiko kriterijuose turi būti nurodyta tik viena datos ir laiko konstanta',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Šis laukimo įvykis sukonfigūruotas naudojant kriterijų langelį „Fiksuota data“. Šiame langelyje turi būti ne daugiau kaip viena „Fiksuota data ir laikas“ konstanta arba datos ir laiko lauko nuoroda. Kitos išraiškos dalys turi būti matematiniai operatoriai (+ / -) arba „Laiko trukmė“ konstantos.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Nurodyta trukmės reikšmė negali būti nulis',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Šis įvykio elementas sukonfigūruotas naudojant nustatymą „Trukmė“. Šis nustatymas negali būti lygus nuliui, antraip įvyks klaida. Patikrinkite elemento nustatymus ir įsitikinkite, kad nustatymo „Trukmė“ reikšmė nėra nulis.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Laukimo laiko parametrai nenustatyti',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Šiam laukimo elementui nesukonfigūruoti jokie nustatymai. Patikrinkite elemento nustatymus ir įsitikinkite, kad „Trukmė“ ir „Fiksuota data“ yra pasirinkti, tada įveskite pageidaujamas reikšmes ir spustelėkite mygtuką „Išsaugoti“.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Numatytas laikas mažesnis už nulį',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Šio veiklos elemento nustatymų srityje „Formos“ numatytajam laikui nustatyta neigiama reikšmė, dėl ko, bandant pasiekti elementą, procesas užstrigs. Atidarykite šio elemento nustatymų sritį „Formos“ ir numatytojo laiko reikšmę pakeiskite teigiamu skaičiumi.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Veiksmo tipas yra [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Nenurodytas šio veiksmo elemento tipas. Tai pakeisti galima ties veiksmo elementu spustelėjus dešiniuoju pelės klavišu ir iš sąrašo „Veiksmo tipas“ pasirinkus tipą.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Nėra garantuota, kad keliu bus naudojamasi',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Šis klaidos pranešimas pateikiamas, nes yra tikimybė, kad nebus naudojamasi nė vienu šio šliuzo elementu, o dėl to procesas bus sustabdytas. Patariama nustatyti numatytąjį kelią, kuriuo būtų naudojamasi, jei nebūtų atitikta nė viena iš kriterijų langelio išraiškų, pateiktų elemento nuostatų srityje. Tai padaryti galima dešiniuoju pelės klavišu spustelėjus ties šliuzo elementu ir pasirinkus elementą meniu „Numatytasis srautas“. Jei numatytasis kelias nenurodytas, elemento nuostatų srityje pateiktas kriterijų langelio išraiškas reikia pakeisti, siekiant užtikrinti, kad pradėjus vykdyti procesą bent viena iš jų bus teisinga.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Sueinančio šliuzo tipas neatitinka gaunamo srauto šliuzo tipo',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Išsiskiriantys šliuzai išskaido procesus į keletą šakų. Naudojant sueinantį šliuzą ir norint, kad šakos būtų grąžintos į vieną kelią, reikia naudoti tinkamą sueinančio šliuzo tipą, kuris priklauso nuo išsiskiriančio šliuzo, naudoto kuriant šakas, tipo. Šakų, kurios buvo sukurtos naudojant išskirtinius arba įvykiu pagrįstus išsiskiriančius šliuzus, atveju naudokite išskirtinį sueinantį šliuzą, kad sulietumėte šakas iš naujo. Šakų, kurios buvo sukurtos naudojant lygiagrečius arba įtrauktinus išsiskiriančius šliuzus, atveju naudokite lygiagretų sueinantį šliuzą, kad sulietumėte šakas iš naujo.',
 );

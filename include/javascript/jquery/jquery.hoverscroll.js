@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 /**
  * HoverScroll jQuery Plugin
  *

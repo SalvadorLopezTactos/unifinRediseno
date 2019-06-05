@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -10,39 +10,39 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$config = array(
+$config = [
 
-    'admin' => array(
+    'admin' => [
         'core:AdminPassword',
-    ),
+    ],
 
-    'example-userpass' => array(
+    'example-userpass' => [
         'exampleauth:UserPass',
-        'user1:user1pass' => array(
-            'uid' => array('1'),
-            'eduPersonAffiliation' => array('group1'),
+        'user1:user1pass' => [
+            'uid' => ['1'],
+            'eduPersonAffiliation' => ['group1'],
             'email' => 'user1@example.com',
-        ),
-        'user2:user2pass' => array(
-            'uid' => array('2'),
-            'eduPersonAffiliation' => array('group2'),
+        ],
+        'user2:user2pass' => [
+            'uid' => ['2'],
+            'eduPersonAffiliation' => ['group2'],
             'email' => 'user2@example.com',
-        ),
-        'user3:user3pass' => array(
-            'uid' => array('3'),
-            'eduPersonAffiliation' => array('group1'),
+        ],
+        'user3:user3pass' => [
+            'uid' => ['3'],
+            'eduPersonAffiliation' => ['group1'],
             'email' => 'user3@example.com',
-        ),
-        'user4:user4pass' => array(
-            'uid' => array('4'),
-            'eduPersonAffiliation' => array('group2'),
+        ],
+        'user4:user4pass' => [
+            'uid' => ['4'],
+            'eduPersonAffiliation' => ['group2'],
             'email' => 'user4@example.com',
-        ),
-        'user5:user5pass' => array(
-            'uid' => array('5'),
-            'eduPersonAffiliation' => array('group1'),
+        ],
+        'user5:user5pass' => [
+            'uid' => ['5'],
+            'eduPersonAffiliation' => ['group1'],
             'email' => 'user5@example.com',
-        ),
-    ),
+        ],
+    ],
 
-);
+];

@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2;
 
+use OneLogin\Saml2\Constants;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\AuthResult;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
@@ -132,12 +134,12 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     protected $responseBuilder = null;
 
     /**
-     * @var \OneLogin_Saml2_Settings | \PHPUnit_Framework_MockObject_MockObject
+     * @var Settings | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $settingsObject = null;
 
     /**
-     * @var \OneLogin_Saml2_Settings|\PHPUnit_Framework_MockObject_MockObject
+     * @var Settings|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $authSettings;
 
@@ -160,7 +162,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
 
         $this->settings = IDMFixturesHelper::getOktaParameters();
 
-        $this->settingsObject = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settingsObject = $this->getMockBuilder(Settings::class)
                                ->setConstructorArgs([$this->settings])
                                ->setMethods(['getSecurityData'])
                                ->getMock();
@@ -197,7 +199,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
         $this->auth->method('getRequestBuilder')->willReturn($this->requestBuilder);
         $this->auth->method('getResponseBuilder')->willReturn($this->responseBuilder);
         
-        $this->authSettings = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->authSettings = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->authnRequest = $this->getMockBuilder(AuthnRequest::class)
@@ -292,7 +294,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML response is not valid
      *
      * @covers ::processServiceSLO
@@ -307,7 +309,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not valid.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage test error
      *
      * @covers ::processServiceSLO
@@ -327,7 +329,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML response is not success.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML response is not success
      *
      * @covers ::processServiceSLO
@@ -359,7 +361,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
         $this->logoutResponse->expects($this->once())->method('isValid')->willReturn(true);
         $this->logoutResponse->expects($this->once())
                              ->method('getStatus')
-                             ->willReturn(\OneLogin_Saml2_Constants::STATUS_SUCCESS);
+                             ->willReturn(Constants::STATUS_SUCCESS);
         $result = $this->auth->processServiceSLO($response);
         $this->assertEquals($result, $this->logoutResponse);
     }
@@ -367,7 +369,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML request is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML request is not valid
      *
      * @covers ::processIdpSLO
@@ -382,7 +384,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
     /**
      * Checking behaviour when SAML request is not created by some reasons.
      *
-     * @expectedException \OneLogin_Saml2_Error
+     * @expectedException OneLogin\Saml2\Error
      * @expectedExceptionMessage SAML request is not valid
      *
      * @covers ::processIdpSLO
@@ -512,7 +514,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
         $this->requestBuilder
             ->method('buildLoginRequest')
             ->with(
-                $this->equalTo($this->forceAuthn), 
+                $this->equalTo($this->forceAuthn),
                 $this->equalTo($this->isPassive),
                 $this->equalTo($this->setNameIdPolicy)
             )->willReturn($this->authnRequest);
@@ -632,7 +634,7 @@ class AuthPostBindingTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsUserProvisionNeeded($config, $result)
     {
-        $settingsObject = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $settingsObject = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
         $settingsObject->method('getSPData')->willReturn($config);

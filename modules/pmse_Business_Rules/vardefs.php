@@ -16,6 +16,10 @@ $dictionary['pmse_Business_Rules'] = array(
     'audited' => false,
     'activity_enabled' => true,
     'duplicate_merge' => true,
+    // Will be uncommented when BR-6677 is merged
+    //'unified_search' => true,
+    //'full_text_search' => true,
+    //'unified_search_default_enabled' => true,
     'fields' => array(
         'name' => array(
             'name' => 'name',
@@ -23,7 +27,7 @@ $dictionary['pmse_Business_Rules'] = array(
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => '255',
-            'unified_search' => false,
+            'unified_search' => true,
             'required' => true,
             'importable' => 'required',
             'duplicate_merge' => 'enabled',
@@ -38,6 +42,7 @@ $dictionary['pmse_Business_Rules'] = array(
             'reportable' => true,
             'calculated' => false,
             'size' => '20',
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.55),
         ),
         'rst_uid' => array(
             'name' => 'rst_uid',
@@ -153,7 +158,7 @@ $dictionary['pmse_Business_Rules'] = array(
             'required' => false,
             'name' => 'rst_source_definition',
             'vname' => 'LBL_RST_SOURCE_DEFINITION',
-            'type' => 'text',
+            'type' => 'longtext',
             'massupdate' => false,
             'no_default' => false,
             'comments' => '',
@@ -286,13 +291,13 @@ $dictionary['pmse_Business_Rules'] = array(
     // templates we can safely remove these as this module will implement
     // default instead of basic.
     'ignore_templates' => array(
-        'taggable',
         'lockable_fields',
     ),
     'uses' => array(
         'basic',
         'team_security',
         'assignable',
+        'taggable',
     ),
 );
 VardefManager::createVardef('pmse_Business_Rules', 'pmse_Business_Rules');

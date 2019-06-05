@@ -73,6 +73,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Urýchlenie fakturácie',
 	'LBL_PUSH_SHIPPING' => 'Urýchlenie dodania',
 	'LBL_SAVE_ACCOUNT' => 'Uložiť účet',
+    'LBL_SERVICE_LEVEL' => 'Úroveň služieb',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Mesto dodania:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Krajina dodania:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'PSČ dodania:',

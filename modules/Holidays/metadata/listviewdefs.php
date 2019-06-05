@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: listviewdefs.php 16705 2006-09-12 23:59:52 +0000 (Tue, 12 Sep 2006) jenny $
 
 $listViewDefs['Holidays'] = array(
 	'HOLIDAY_DATE' => array(

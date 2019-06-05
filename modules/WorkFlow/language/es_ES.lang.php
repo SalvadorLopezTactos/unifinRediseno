@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definiciones de Workflow',
   'LBL_MODULE_NAME_SINGULAR' => 'Definición de Workflow',
-  'LBL_MODULE_ID' => 'Workflow',  
+  'LBL_MODULE_ID' => 'Workflow',
   'LBL_MODULE_TITLE' => 'Workflow: Inicio',
   'LBL_SEARCH_FORM_TITLE' => 'Búsqueda de Workflows',
   'LBL_LIST_FORM_TITLE' => 'Lista de Workflows',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Módulo Objetivo:',
   'LBL_LIST_ORDER' => 'Órden de Proceso:',
   'LBL_FROM_NAME' => 'Nombre del Remitente:',
-  'LBL_FROM_ADDRESS' => 'Dirección del Remitente:',  
+  'LBL_FROM_ADDRESS' => 'Dirección del Remitente:',
   'LNK_NEW_WORKFLOW' => 'Crear Definición de Workflow',
-  'LNK_WORKFLOW' => 'Listar Definiciones de Workflow', 
-  
-  
+  'LNK_WORKFLOW' => 'Listar Definiciones de Workflow',
+
+
   'LBL_ALERT_TEMPLATES' => 'Plantillas de Alertas',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Crear una plantilla de alerta:',
   'LBL_SUBJECT' => 'Asunto:',
-  
+
   'LBL_RECORD_TYPE' => 'Aplica a:',
  'LBL_RELATED_MODULE'=> 'Módulo Relacionado:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Secuencia de Workflow',
 	'LNK_ALERT_TEMPLATES' => 'Plantillas de Emails de Alerta',
 	'LNK_PROCESS_VIEW' => 'Secuencia de Workflow',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> Las funcionalidades de Sugar Workflow y Workflow Management se eliminarán en versiones futuras de Sugar. Los clientes de la edición Sugar Enterprise deben comenzar a utilizar la funcionalidad proporcionada con Sugar Advanced Workflow. Haga clic en <a href="http://www.sugarcrm.com/wf-eol" target="_blank">aquí</a> para obtener más información.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> La funcionalidad de Sugar Workflow and la Administración de Workflow está en modo de mantenimiento. Los clientes de la edición Sugar Enterprise deberían utilizar la funcionalidad proporcionada por SugarBPM<sup class="trademark">TM</sup>.',
 );
 

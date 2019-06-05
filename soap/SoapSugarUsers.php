@@ -62,7 +62,7 @@ $server->register(
  *      created.  Error is set if there was any error during creation.
  */
 function login($user_auth, $application){
-	global $sugar_config, $system_config;
+    global $sugar_config;
 
 	$error = new SoapError();
 	$user = BeanFactory::newBean('Users');
@@ -94,14 +94,14 @@ function login($user_auth, $application){
 			LogicHook::initialize();
 			$GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
 			return array('id'=>-1, 'error'=>$error);
-    } elseif (extension_loaded('mcrypt')) {
-		$password = decrypt_string($user_auth['password']);
+    } else {
+        $password = decrypt_string($user_auth['password']);
         $authController = AuthenticationController::getInstance();
         $authController->loggedIn = false; // reset login attempt to try again with decrypted password
-		if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id'])){
-			$success = true;
-		} // if
-	} // else if
+        if ($authController->login($user_auth['user_name'], $password)) {
+            $success = true;
+        }
+    }
 
 	if($success){
 		session_start();
@@ -109,6 +109,7 @@ function login($user_auth, $application){
 		//$current_user = $user;
 		login_success();
 		$current_user->loadPreferences();
+        $_SESSION['authenticated_user_id'] = $current_user->id;
 		$_SESSION['is_valid_session']= true;
 		$_SESSION['ip_address'] = query_client_ip();
 		$_SESSION['user_id'] = $current_user->id;

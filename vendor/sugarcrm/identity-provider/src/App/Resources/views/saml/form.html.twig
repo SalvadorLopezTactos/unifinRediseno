@@ -1,4 +1,4 @@
-<!--
+{#
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,12 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
--->
-<h1>LOGIN WITH SAML</h1>
-<p><b>Issuer: {{ issuer }}</b></p>
+#}
+{% extends "index-with-alerts.html.twig" %}
 
-<a href="{{ url('samlInit') }}">login</a>
-{% if messages is defined %}
-    <br/><br/>
-    {{ messages|join('<br/>')|raw}}
-{% endif %}
+{% block content %}
+    <div class="thumbnail login">
+        <div class="tcenter">
+            {% include 'logo.html.twig' %}
+        </div>
+        <section class="content tcenter">
+            <h5>{{ 'Login using SAML'|trans }}</h5><br /><br />
+        </section>
+        <nav class="nav tcenter">
+            <form action="{{  path('samlInit') }}"  method="get" >
+                <button id="sso_btn" class="btn btn-primary">{{ 'Single Sign-On'|trans }}</button>
+            </form>
+        </nav>
+    </div>
+{% endblock %}

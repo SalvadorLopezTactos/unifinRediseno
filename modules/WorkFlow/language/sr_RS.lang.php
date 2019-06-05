@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definicije radnog toka',
   'LBL_MODULE_NAME_SINGULAR' => 'Definicija Radnog Toka',
-  'LBL_MODULE_ID' => 'Radni tok',  
+  'LBL_MODULE_ID' => 'Radni tok',
   'LBL_MODULE_TITLE' => 'Radni tok: Početna strana',
   'LBL_SEARCH_FORM_TITLE' => 'Pratraga radnog toka',
   'LBL_LIST_FORM_TITLE' => 'Lista radnih tokova',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Ciljani modul:',
   'LBL_LIST_ORDER' => 'Redosled procesiranja:',
   'LBL_FROM_NAME' => 'Ime pošiljaoca:',
-  'LBL_FROM_ADDRESS' => 'Adresa pošiljaoca:',  
+  'LBL_FROM_ADDRESS' => 'Adresa pošiljaoca:',
   'LNK_NEW_WORKFLOW' => 'Kreiraj definiciju radnog toka',
-  'LNK_WORKFLOW' => 'Lista definicija radnog toka', 
-  
-  
+  'LNK_WORKFLOW' => 'Lista definicija radnog toka',
+
+
   'LBL_ALERT_TEMPLATES' => 'Šabloni upozorenja',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Kreiraj šablon upozorenja:',
   'LBL_SUBJECT' => 'Naslov:',
-  
+
   'LBL_RECORD_TYPE' => 'Odnosi se na:',
  'LBL_RELATED_MODULE'=> 'Povezani modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Redosled radnog toka',
 	'LNK_ALERT_TEMPLATES' => 'Šabloni Email upozorenja',
 	'LNK_PROCESS_VIEW' => 'Redosled radnog toka',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tip',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napomena:</strong> Funkcionalnosti Sugar tok posla i Upravljanje tokom posla će biti uklonjene u sledećem izdanju Sugar-a. Korisnici izdanja Sugar Enterprise bi trebalo da počnu da koriste funkcionalnost koju omogućava Sugar napredni tok posla. Kliknite na <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> za više informacija.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napomena:</strong> Funkcionalnosti Sugar tok posla i Upravljanje tokom je u režimu održavanja. Korisnici izdanja Sugar Enterprise treba da koriste funkcionalnost koju omogućava SugarBPM <sup class="trademark">TM</sup>.',
 );
 

@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Tai yra sistemos paskyra.',
     'LBL_EMAIL_ADDRESS_ID' => 'El. pašto adreso ID',
     'LBL_TYPE' => 'Tipas',
+    'LBL_REPLY_TO_NAME' => 'Kam atsakyti: vardas',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Kam atsakyti: el. pašto adresai',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Kam atsakyti: el. pašto adreso ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Kam atsakyti: el. pašto adresas',
+    'LBL_PRIMARY_TEAM' => 'Pagrindinė komanda',
 );

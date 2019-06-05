@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Se han detectado errores durante las comprobaciones de compatibilidad.  Para que su Instalación de SugarCRM funcione correctamente, siga los pasos adecuados para corregir los problemas enumerados a continuación y haga clic en el botón comprobar de nuevo, o inicie de nuevo la instalación.',
     'ERR_CHECKSYS_CALL_TIME'            => '"Allow Call Time Pass Reference" está Habilitado (establézcalo a Off en php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'No se ha encontrado: el Planificador Sugar se ejecutará con funcionalidad limitada. El servicio de archivado de correo electrónico no funcionará.',
+	'ERR_CHECKSYS_CURL'					=> 'No se ha encontrado: el programador de Sugar funcionará con funcionalidad limitada. El servicio de archivado de correo electrónico no funcionará.',
     'ERR_CHECKSYS_IMAP'					=> 'No encontrado: Email Entrante y Campañas (Email) requieren las bibliotecas de IMAP. Ninguno funcionará.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC no se puede activar cuando se usa MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Aviso:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para unos resultados óptimos al utilizar el sapi IIS/FastCGI, ajuste fastcgi.logging en 0 en su archivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versión de PHP Instalada No Compatible: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de datos no disponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No se encontró la compatibilidad con la base de datos. Asegúrese de que tiene los controladores necesarios para uno de los siguientes tipos de base de datos compatibles: MySQL, MS SQLServer, Oracle o DB2. Es posible que necesite eliminar los comentarios de la extensión en el archivo php.ini o recompilar con el archivo binario correcto, dependiendo de la versión de PHP. Consulte el Manual de PHP para obtener más información sobre cómo habilitar la compatibilidad con la base de datos.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No se ha encontrado la asistencia de la base de datos. Asegúrese de tener los controladores necesarios para uno de los siguientes tipos de bases de datos compatibles: MySQL, MS SQLServer, Oracle o DB2. Tal vez necesite eliminar los comentarios de la extensión del archivo php.ini, o vuélvalo a compilar con el archivo binario correcto, según su versión de PHP. Consulte su Manual de PHP para obtener más información sobre como habilitar la asistencia de la base de datos.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'No se han encontrado las funciones asociadas con las Bibliotecas de Análisis de XML requeridas por la aplicación Sugar.  Es posible que tenga que quitar la marca del comentario de la extensión en el archivo php.ini, o recompilarlo con el archivo binario apropiado, dependiendo de la versión de PHP.  Consulte el manual de PHP para más información.',
     'LBL_CHECKSYS_CSPRNG' => 'Generador de números aleatorios',
     'ERR_CHECKSYS_MBSTRING'             => 'No se han encontrado las funciones asociadas con la extensión de PHP para Cadenas Multibyte (mbstring) requeridas por la aplicación Sugar. <br/><br/>Normalmente, el módulo mbstring no está habilitado por defecto en PHP y debe ser activado con --enable-mbstring en la compilación de PHP. Consulte el manual de PHP para más información sobre cómo habilitar la compatibilidad de mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'La opción session.save_path de su archivo de configuración php (php.ini) no se ha ajustado o se ha ajustado una carpeta que no existe. Tal vez tenga que establecer la opción save_path setting en php.ini o verificar que existe la carpeta establecida en save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'La opción session.save_path de su archivo de configuración php (php.ini) seha establecido en una carpeta que no es escribible.  Siga los pasos necesarios para hacer la carpeta escribible.  <br>Dependiendo de su Sistema Operativo, es posible que tenga que cambiar los permisos usando chmod 766, o hacer clic con el botón derecho del ratón sobre el archivo para acceder a las propiedades y desmarcar la opción de sólo lectura.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'El archivo de configuración existe pero no es escribible.  Siga los pasos necesarios para hacerlo escribible.  Dependiendo de su Sistema Operativo, tal vez tenga que cambiar los permisos usando chmod 766, o hacer clic con el botón derecho del ratón sobre el archivo para acceder a las propiedades y desmarcar la opción de sólo lectura.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Módulo IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Módulo de Cadenas MB',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'Correcto (Sin Límite)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'Correcto (Ilimitado)',
 	'LBL_CHECKSYS_MEM'					=> 'Límite de Memoria PHP',
@@ -544,7 +542,7 @@ Para información más detallada, consulte la Guía de Instalación.            
     'advanced_password_new_account_email' => array(
         'subject' => 'Información de la nueva cuenta',
         'description' => 'Esta plantilla se utiliza cuando el Administrador de Sistemas envía una nueva contraseña al usuario.',
-        'body' => '<<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Aquí dispone de su nombre de usuario y una contraseña temporal:</p><p>Nombre de usuario : $contact_user_user_name </p><p>Contraseña : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Después de iniciar sesión en el sistema con esta contraseña, tal vez deba restablecerla por una propia.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aquí dispone de su nombre de usuario y una contraseña temporal:</p><p>Nombre de usuario : $contact_user_user_name </p><p>Contraseña : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Después de iniciar sesión en el sistema con esta contraseña, tal vez deba restablecerla por una propia.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Aquí tiene su nombre de usuario y una contraseña temporal:
@@ -559,7 +557,7 @@ Después de iniciar sesión en el sistema con esta contraseña, tal vez deba res
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Restablecer la contraseña de cuenta',
         'description' => "Esta plantilla se utiliza para enviar al usuario un enlace para restablecer la contraseña de su cuenta.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Recientemente ha solicitado en $contact_user_pwd_last_changed poder restablecer la contraseña de la cuenta. </p><p>Haga clic en el siguiente enlace para restablecer la contraseña:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Recientemente ha solicitado en $contact_user_pwd_last_changed poder restablecer la contraseña de la cuenta. </p><p>Haga clic en el siguiente enlace para restablecer la contraseña:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Recientemente a solicitado en $contact_user_pwd_last_changed poder restablecer la contraseña de la cuenta.

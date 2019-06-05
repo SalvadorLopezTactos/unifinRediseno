@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Удалить',
     'LBL_MODULE_NAME' => 'Адреса электронной почты',
     'LBL_MODULE_NAME_SINGULAR' => 'Адрес электронной почты',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Выполненное действие по запросу подтверждения',
+    'LBL_CONFIRMATION_TITLE' => 'Спасибо',
+    'LBL_CONFIRMATION_MESSAGE' => 'Ваша подписка подтверждена. Мы добавили вас в наш список и в ближайшее время свяжемся с вами.',
 );

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: studio.php 16622 2006-09-05 23:03:50Z awu $
 
 $GLOBALS['studioDefs']['Calls'] = array(
 	'LBL_DETAILVIEW'=>array(

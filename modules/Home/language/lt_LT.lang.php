@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - Paprastas SAML įrankis darbui su  PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - The overflow:scroll for mobile webkit. Native scrolling inside a fixed width/height element.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - JavaScrip biblioteka suteikianti HTML5 Canvas palaikymą Internet Explorer naršyklėje.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - įrankiai interaktyviam duomenų visualizavimui tinklalapiuose.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - atviro kodo objektinė taikomoji žiniatinklio programa',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV duomenų valdymas PHP kalba',
   'LBL_SOURCE_PHPJS' => 'php.js - PHP funkcijų naudojimas JavaScript kalboje',

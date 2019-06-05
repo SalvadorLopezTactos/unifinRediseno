@@ -10,11 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Query\QueryBuilder;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Uuid;
-use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
  * Base database driver implementation.
@@ -69,8 +72,10 @@ use Doctrine\DBAL\Query\QueryBuilder;
  * default   This field sets the default value for the field definition.
  * @api
  */
-abstract class DBManager
+abstract class DBManager implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @var string
      */
@@ -132,12 +137,6 @@ abstract class DBManager
 	 * @var TimeDate
 	 */
 	protected $timedate;
-
-	/**
-	 * PHP Logger
-	 * @var Logger
-	 */
-	protected $log;
 
     /**
      * @var Request
@@ -420,7 +419,7 @@ abstract class DBManager
 	public function __construct()
 	{
 		$this->timedate = TimeDate::getInstance();
-		$this->log = $GLOBALS['log'];
+        $this->setLogger(new NullLogger());
 		$this->helper = $this; // compatibility
 		if(defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
 		    $this->encode = false;
@@ -435,7 +434,7 @@ abstract class DBManager
      */
 	public function __get($p)
 	{
-		$this->log->deprecated('Call to DBManager::$'.$p.' is deprecated');
+        $this->logger->notice('Call to DBManager::$' . $p . ' is deprecated');
 		return $this->$p;
 	}
 
@@ -504,7 +503,9 @@ abstract class DBManager
 			if(empty($message)) {
 			    $message = "Database error";
 			}
-			$this->log->fatal($message);
+
+            $this->logger->alert($message);
+
 			if ($dieOnError || $this->dieOnError) {
 				if(isset($GLOBALS['app_strings']['ERR_DB_FAIL'])) {
 					sugar_die($GLOBALS['app_strings']['ERR_DB_FAIL']);
@@ -551,11 +552,17 @@ abstract class DBManager
         if ($do_the_dump) {
             if ($slow_query_time_msec < ($this->query_time * 1000)) {
                 // Then log both the query and the query time
-                $this->log->fatal('Slow Query (time:'.$this->query_time."\n".$query);
+                $this->logger->alert(sprintf(
+                    'Slow Query (time: %.3f s): %s',
+                    $this->query_time,
+                    $query
+                ));
                 $this->track_slow_queries($query);
+
                 return true;
             }
         }
+
         return false;
     }
 
@@ -693,7 +700,7 @@ abstract class DBManager
         }
 
         if (empty($indices)) {
-            $this->log->warn('CHECK QUERY: Could not find index definitions for table ' . $table);
+            $this->logger->warning('CHECK QUERY: Could not find index definitions for table ' . $table);
             return false;
         }
 
@@ -730,11 +737,7 @@ abstract class DBManager
 
             $warning = 'Missing Index For Order By Table: ' . $table . ' Order By:' . $orderBy ;
 
-            if (!empty($GLOBALS['sugar_config']['dump_slow_queries'])) {
-                $this->log->fatal('CHECK QUERY:' .$warning);
-            } else {
-                $this->log->warn('CHECK QUERY:' .$warning);
-            }
+            $this->logger->warning('CHECK QUERY:' . $warning);
         }
 
         return false;
@@ -1146,8 +1149,6 @@ abstract class DBManager
             }
 
             $name = strtolower($value['name']);
-            // add or fix the field defs per what the DB is expected to give us back
-            $this->massageFieldDef($value,$tableName);
 
             $ignorerequired=false;
 
@@ -1172,7 +1173,7 @@ abstract class DBManager
                     $this->addColumn($tableName, $value);
                 }
                 $take_action = true;
-            } elseif ( !$this->compareVarDefs($compareFieldDefs[$name],$value)) {
+            } elseif (!$this->compareVarDefs($compareFieldDefs[$name], $this->createColumnDefinition($value))) {
                 //fields are different lets alter it
                 $sql .=	"/*MISMATCH WITH DATABASE - $name -  ROW ";
                 foreach($compareFieldDefs[$name] as $rKey => $rValue) {
@@ -1243,6 +1244,19 @@ abstract class DBManager
             }
         }
         return ($take_action === true) ? $sql : '';
+    }
+
+    /**
+     * Creates a DB column definition from the CRM field definition
+     *
+     * @param mixed[] $fieldDefinition
+     * @return mixed[]
+     */
+    private function createColumnDefinition(array $fieldDefinition) : array
+    {
+        $this->massageFieldDef($fieldDefinition);
+
+        return $fieldDefinition;
     }
 
     /**
@@ -1693,6 +1707,8 @@ abstract class DBManager
 	 */
 	public function dropTableName($name)
 	{
+        unset(self::$table_descriptions[$name]);
+
 		$sql = $this->dropTableNameSQL($name);
 		return $this->query($sql,true,"Error dropping table $name:");
 	}
@@ -1741,7 +1757,7 @@ abstract class DBManager
      */
 	public function generateInsertSQL(SugarBean $bean, $select_query, $start, $count = -1, $table, $is_related_query = false)
 	{
-		$this->log->info('call to DBManager::generateInsertSQL() is deprecated');
+        $this->logger->info('call to DBManager::generateInsertSQL() is deprecated');
 		global $sugar_config;
 
 		$rows_found = 0;
@@ -2001,8 +2017,9 @@ abstract class DBManager
             && (empty($GLOBALS['current_user']) || !$current_user->isDeveloperForAnyModule())
         ) {
             if ($sql) {
-                $GLOBALS['log']->fatal("Last query before failure:\n" . $sql);
+                $this->logger->alert("Last query before failure:\n" . $sql);
             }
+
             $resourceManager = ResourceManager::getInstance();
             $resourceManager->notifyObservers('ERR_QUERY_LIMIT');
         }
@@ -2125,7 +2142,7 @@ abstract class DBManager
 	 */
 	public function getOne($sql, $dieOnError = false, $msg = '', $encode = true)
 	{
-		$this->log->info("Get One: |$sql|");
+        $this->logger->info("Get One: |$sql|");
 		if(!$this->hasLimit($sql)) {
 		    $queryresult = $this->limitQuery($sql, 0, 1, $dieOnError, $msg);
 		} else {
@@ -2155,7 +2172,7 @@ abstract class DBManager
 	 */
 	public function fetchOne($sql, $dieOnError = false, $msg = '', $encode = true)
 	{
-		$this->log->info("Fetch One: |$sql|");
+        $this->logger->info("Fetch One: |$sql|");
 		$this->checkConnection();
 		$queryresult = $this->query($sql, $dieOnError, $msg);
 		$this->checkError($msg.' Fetch One Failed:' . $sql, $dieOnError);
@@ -2181,7 +2198,7 @@ abstract class DBManager
 	 */
 	public function fetchOneOffset($sql, $offset, $dieOnError = false, $msg = '', $encode = true)
 	{
-		$this->log->info("fetch OneOffset: |$sql|");
+        $this->logger->info("fetch OneOffset: |$sql|");
 		$this->checkConnection();
 
 		if(!$this->hasLimit($sql)) {
@@ -2534,7 +2551,7 @@ abstract class DBManager
 	}
 
     /**
-     * Called in SearchForm and QuickSearch and overriden in OracleManager to 
+     * Called in SearchForm and QuickSearch and overriden in OracleManager to
      * support case insensitive search.
      *
      * @param  string $name column name
@@ -2638,22 +2655,22 @@ abstract class DBManager
         return $forPrepared ? $val : $this->convert($this->quoted($val), $type);
     }
 
-	/**
-	 * Massages the field defintions to fill in anything else the DB backend may add
-	 *
-	 * @param  array  $fieldDef
-	 * @param  string $tablename
-	 * @return array
-	 */
-	public function massageFieldDef(&$fieldDef, $tablename)
-	{
+    /**
+     * Modifies the field definition by replacing CRM-level properties (e.g. type) with the ones specific
+     * for the currently used database platform.
+     *
+     * @param mixed[] $fieldDef
+     */
+    public function massageFieldDef(array &$fieldDef) : void
+    {
 		if ( !isset($fieldDef['dbType']) ) {
 			if ( isset($fieldDef['dbtype']) )
 				$fieldDef['dbType'] = $fieldDef['dbtype'];
 			else
 				$fieldDef['dbType'] = $fieldDef['type'];
 		}
-		$type = $this->getColumnType($fieldDef['dbType'],$fieldDef['name'],$tablename);
+
+        $type = $this->getColumnType($fieldDef['dbType']);
 		$matches = array();
         // len can be a number or a string like 'max', for example, nvarchar(max)
         preg_match_all('/(\w+)(?:\(([0-9]+,?[0-9]*|\w+)\)|)/i', $type, $matches);
@@ -2938,7 +2955,7 @@ abstract class DBManager
 	 * @param  bool   $ignoreRequired  Optional, true if we should ignore this being a required field
 	 * @param  string $table           Optional, table name
 	 * @param  bool   $return_as_array Optional, true if we should return the result as an array instead of sql
-	 * @return string or array if $return_as_array is true
+     * @return string|string[]
 	 */
 	protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
 	{
@@ -3402,8 +3419,9 @@ abstract class DBManager
                 if (!($this->_emptyValue($before_value,$field_type) && $this->_emptyValue($after_value,$field_type))) {
                     $change = false;
 
-                    $check_before = is_object($before_value)?$before_value:trim($before_value);
-                    $check_after = is_object($after_value)?$after_value:trim($after_value);
+                    // Only scalar values should be run through trim()
+                    $check_before = !is_scalar($before_value)?$before_value:trim($before_value);
+                    $check_after = !is_scalar($after_value)?$after_value:trim($after_value);
                     if ($check_before !== $check_after) {
                         // Bug #42475: Don't directly compare numeric values, instead do the subtract and see if the comparison comes out to be "close enough", it is necessary for floating point numbers.
                         // Manual merge of fix 95727f2eed44852f1b6bce9a9eccbe065fe6249f from DBHelper
@@ -3695,7 +3713,8 @@ abstract class DBManager
     }
 
 	/**
-	 * List of available collation settings
+     * Returns the default collation for the database.
+     *
      * @abstract
 	 * @return string
 	 */
@@ -3907,10 +3926,10 @@ abstract class DBManager
 					if(!in_array($table, $skipTables)) {
 						return call_user_func(array($this, $check), $table, $query);
 					} else {
-						$this->log->debug("Skipping table $table as blacklisted");
+                        $this->logger->debug("Skipping table $table as blacklisted");
 					}
 				} else {
-					$this->log->debug("No verification for $qstart on {$this->dbType}");
+                    $this->logger->debug("No verification for $qstart on {$this->dbType}");
 				}
 				break;
 			}
@@ -3926,10 +3945,10 @@ abstract class DBManager
 	 */
 	protected function verifyCreateTable($table, $query)
 	{
-		$this->log->debug('verifying CREATE statement...');
+        $this->logger->debug('verifying CREATE statement...');
 
 		// rewrite DDL with _temp name
-		$this->log->debug('testing query: ['.$query.']');
+        $this->logger->debug('testing query: ['.$query.']');
 		$tempname = $table."__uw_temp";
 		$tempTableQuery = str_replace("CREATE TABLE {$table}", "CREATE TABLE $tempname", $query);
 
@@ -3945,7 +3964,8 @@ abstract class DBManager
 		}
 
 		// check if table exists
-		$this->log->debug('testing for table: '.$table);
+        $this->logger->debug('testing for table: '.$table);
+
 		if(!$this->tableExists($tempname)) {
 			return "Failed to create temp table!";
 		}
@@ -3987,7 +4007,9 @@ abstract class DBManager
 
         if(is_int($encode) && func_num_args() == 3) {
             // old API: $result, $rowNum, $encode
-            $GLOBALS['log']->deprecated("Using row number in fetchByAssoc is not portable and no longer supported. Please fix your code.");
+            $this->logger->notice(
+                'Using row number in fetchByAssoc is not portable and no longer supported. Please fix your code.'
+            );
             $encode = func_get_arg(2);
             $freeResult = false;
         }
@@ -4068,7 +4090,7 @@ abstract class DBManager
 	 */
 	public function commit()
 	{
-		$this->log->info("DBManager.commit() stub");
+        $this->logger->info("DBManager.commit() stub");
 		return true;
 	}
 
@@ -4081,7 +4103,7 @@ abstract class DBManager
 	 */
 	public function rollback()
 	{
-		$this->log->info("DBManager.rollback() stub");
+        $this->logger->info("DBManager.rollback() stub");
 		return false;
 	}
 
@@ -4515,7 +4537,7 @@ abstract class DBManager
 	 * @param array  $fieldDefs
 	 * @param string $action
 	 * @param bool   $ignoreRequired Optional, true if we should ignor this being a required field
-	 * @return string|array
+     * @return string|string[]
 	 */
 	abstract protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false);
 
@@ -4643,6 +4665,21 @@ abstract class DBManager
      * @return string
      */
 	abstract public function getGuidSQL();
+
+    /**
+     * get DB random number function, to get random number >= $min and <= $max
+     *
+     * This function works for underline db which supports 'FLOOR()' and 'RAND()',
+     * only exception is Oracle, which needs overwrite this method
+     *
+     * @param int $min
+     * @param int $max
+     * @return string, the DB function
+     */
+    public function getDbRandomNumberFunction(int $min, int $max) : string
+    {
+        return sprintf('FLOOR(%d + RAND() * %d)', $min, $max - $min + 1);
+    }
 
 	/**
 	 * List of SQL reserved words

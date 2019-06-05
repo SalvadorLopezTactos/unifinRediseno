@@ -21,9 +21,6 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
 
     public function __construct()
     {
-        //Override module_name to distinguish bean for BeanFactory
-        $this->module_name = 'QuarterTimePeriods';
-
         parent::__construct();
 
         //The time period type
@@ -158,7 +155,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
      */
     public function getChartLabelsKey($dateClosed)
     {
-        $key = $this->id . ':keys';
+        $key = $this->id . '-keys';
         $keys = sugar_cache_retrieve($key);
         $timedate = TimeDate::getInstance();
         $ts = $timedate->fromDbDate($dateClosed)->getTimestamp();

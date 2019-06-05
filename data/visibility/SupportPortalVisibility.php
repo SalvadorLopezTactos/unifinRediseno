@@ -187,6 +187,7 @@ class SupportPortalVisibility extends SugarVisibility
             case 'pmse_Project/pmse_BpmProcessDefinition':
             case 'pmse_Project/pmse_BpmRelatedDependency':
             case 'pmse_Project/pmse_BpmThread':
+            case 'pmse_EmailMessage':
                 // PA tables need to be visible in Portal without restrictions because they are acting globally
             case 'pmse_Project/pmse_BpmConfig':
                 // This is absolutely needed otherwise PMSESettings cannot

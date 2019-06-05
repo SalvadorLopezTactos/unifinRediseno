@@ -503,21 +503,33 @@ class CalendarUtils
             return;
         }
 
-        $query = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = '{$beanId}' AND deleted = 0 ORDER BY date_start";
-        $result = $db->query($query);
-
+        $query = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = ? AND deleted = 0 ORDER BY date_start";
+        $conn = $db->getConnection();
+        $stmt = $conn->executeQuery($query, [$beanId]);
         $date_modified = $GLOBALS['timedate']->nowDb();
 
         $new_parent_id = false;
-        while ($row = $db->fetchByAssoc($result)) {
+        foreach ($stmt as $row) {
             $id = $row['id'];
             if (!$new_parent_id) {
                 $new_parent_id = $id;
-                $query = "UPDATE {$bean->table_name} SET repeat_parent_id = NULL, recurring_source = NULL, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+                $params = [
+                    'repeat_parent_id' => null,
+                    'recurring_source' => null,
+                    'date_modified' => $date_modified,
+                ];
             } else {
-                $query = "UPDATE {$bean->table_name} SET repeat_parent_id = '{$new_parent_id}', date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+                $params = [
+                    'repeat_parent_id' => $new_parent_id,
+                    'date_modified' => $date_modified,
+                ];
             }
-            $db->query($query);
+            $db->updateParams(
+                $bean->table_name,
+                $bean->field_defs,
+                $params,
+                ['id' => $id]
+            );
         }
     }
 

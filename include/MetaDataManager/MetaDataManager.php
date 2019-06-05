@@ -294,9 +294,13 @@ class MetaDataManager implements LoggerAwareInterface
             'enabled_modules' => true,
         ),
         'preview_edit' => true,
+        'commentlog' => array(
+            'maxchars' => true,
+        ),
         'max_aggregate_email_attachments_bytes' => true,
         'new_email_addresses_opted_out' => true,
         'activity_streams_enabled' => true,
+        'marketing_extras_enabled' => true,
     );
 
     /**
@@ -1442,9 +1446,6 @@ class MetaDataManager implements LoggerAwareInterface
             // clear the platform cache from sugar_cache to avoid out of date data as well as platform component files
             $platforms = self::getPlatformList();
             foreach ($platforms as $platform) {
-                $platformKey = $platform == "base" ?  "base" : implode(",", array($platform, "base"));
-                $hashKey = "metadata:$platformKey:hash";
-                sugar_cache_clear($hashKey);
                 $jsFiles = glob(sugar_cached("javascript/{$platform}/").'*');
                 if (is_array($jsFiles) ) {
                     foreach ($jsFiles as $jsFile) {
@@ -2035,6 +2036,25 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * Gets a value for an instance version variable
+     * @param string $var The string name of the variable to get a value for
+     * @return mixed
+     */
+    protected function getInstanceVersionValue($var)
+    {
+        if (isset($GLOBALS[$var])) {
+            return $GLOBALS[$var];
+        }
+
+        include 'sugar_version.php';
+        if (isset($$var)) {
+            return $$var;
+        }
+
+        return null;
+    }
+
+    /**
      * Gets server information
      *
      * @return array of ServerInfo
@@ -2042,9 +2062,16 @@ class MetaDataManager implements LoggerAwareInterface
     public function getServerInfo()
     {
         $system_config = Administration::getSettings(false, true);
+        $data['flavor'] = $this->getInstanceVersionValue('sugar_flavor');
+        $data['version'] = $this->getInstanceVersionValue('sugar_version');
+        $data['build'] = $this->getInstanceVersionValue('sugar_build');
+        $data['marketing_version'] = $this->getInstanceVersionValue('sugar_mar_version');
+        /*
         $data['flavor'] = $GLOBALS['sugar_flavor'];
         $data['version'] = $GLOBALS['sugar_version'];
         $data['build'] = $GLOBALS['sugar_build'];
+        $data['marketing_version'] = $GLOBALS['sugar_mar_version'];
+        */
         // Product Name for Professional edition.
         $data['product_name'] = "SugarCRM Professional";
         // Product Name for Enterprise edition.
@@ -2078,6 +2105,11 @@ class MetaDataManager implements LoggerAwareInterface
         $admin = Administration::getSettings();
         //Property 'on' of category 'portal' must be a boolean.
         $data['portal_active'] = !empty($admin->settings['portal_on']);
+
+        // needed for Pendo analytics
+        if (!empty($admin->settings['site_id'])) {
+            $data['site_id'] = $admin->settings['site_id'];
+        }
         return $data;
     }
 
@@ -2110,13 +2142,11 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        if (!empty($sugarConfig['authenticationClass'])) {
-            $auth = new AuthenticationController($sugarConfig['authenticationClass']);
+        $auth = AuthenticationController::getInstance($sugarConfig['authenticationClass'] ?? null);
 
-            if($auth->isExternal()) {
-                $configs['externalLogin'] = true;
-                $configs['externalLoginSameWindow'] = SugarConfig::getInstance()->get('SAML_SAME_WINDOW');
-            }
+        if ($auth->isExternal()) {
+            $configs['externalLogin'] = true;
+            $configs['externalLoginSameWindow'] = SugarConfig::getInstance()->get('SAML_SAME_WINDOW');
         }
 
         if (isset($sugarConfig['analytics'])) {
@@ -2153,6 +2183,7 @@ class MetaDataManager implements LoggerAwareInterface
         // IDM mode
         $configs['idmModeEnabled'] = $idpConfig->isIDMModeEnabled();
         if ($configs['idmModeEnabled']) {
+            $configs['externalLoginSameWindow'] = true;
             $idmModeConfig = $idpConfig->getIDMModeConfig();
             $configs['cloudConsoleForgotPasswordUrl'] = $idpConfig->buildCloudConsoleUrl(
                 'forgotPassword',
@@ -2161,6 +2192,14 @@ class MetaDataManager implements LoggerAwareInterface
             $configs['stsUrl'] = $idmModeConfig['stsUrl'];
             $configs['tenant'] = $idmModeConfig['tid'];
         }
+
+        // SugarBPM settings
+        $configs['autoValidateProcessesOnImport'] = isset($sugarConfig['processes_auto_validate_on_import']) ?
+            $sugarConfig['processes_auto_validate_on_import'] : true;
+        $configs['autoValidateProcessesOnAutosave'] = isset($sugarConfig['processes_auto_validate_on_autosave']) ?
+            $sugarConfig['processes_auto_validate_on_autosave'] : true;
+        $configs['processDesignerAutosaveInterval'] = isset($sugarConfig['processes_auto_save_interval']) ?
+            $sugarConfig['processes_auto_save_interval'] : 30000;
 
         return $configs;
     }
@@ -2418,14 +2457,6 @@ class MetaDataManager implements LoggerAwareInterface
         if (!$this->public && !$isDefaultContext) {
             $contextData = $this->loadAndCacheMetadata(false, $context, $ignoreCache, $data['_hash']);
             $data = array_merge($data, $contextData);
-        }
-
-        // We need to see if we need to send any warnings down to the user
-        $systemStatus = apiCheckSystemStatus();
-        if ($systemStatus !== true) {
-            // Something is up with the system status
-            // We need to tack it on and refresh the hash
-            $data['config']['system_status'] = $systemStatus;
         }
 
         return $data;
@@ -3671,16 +3702,6 @@ class MetaDataManager implements LoggerAwareInterface
             if (!$this->verifyJSSource($data)) {
                 //The jssource file is invalid, we need to invalidate the hash as well.
                 return false;
-            }
-        }
-
-        if ($hash) {
-            // We need to see if we need to send any warnings down to the user
-            $systemStatus = apiCheckSystemStatus();
-            if ($systemStatus !== true) {
-                // Something is up with the system status, let the client know
-                // by mangling the hash
-                $hash = md5($hash.serialize($systemStatus));
             }
         }
 

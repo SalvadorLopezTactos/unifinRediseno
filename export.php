@@ -35,7 +35,17 @@ if(!empty($_REQUEST['sample'])){
     $content = exportSample(clean_string($_REQUEST['module']));
 
 }else if(!empty($_REQUEST['uid'])){
-	$content = export(clean_string($_REQUEST['module']), $_REQUEST['uid'], isset($_REQUEST['members']) ? $_REQUEST['members'] : false);
+    $recordsIds = array_map(
+        function ($id) {
+            return trim($id);
+        },
+        explode(',', $_REQUEST['uid'])
+    );
+    $content = export(
+        clean_string($_REQUEST['module']),
+        $recordsIds,
+        isset($_REQUEST['members']) ? $_REQUEST['members'] : false
+    );
 }else{
 	$content = export(clean_string($_REQUEST['module']));
 }

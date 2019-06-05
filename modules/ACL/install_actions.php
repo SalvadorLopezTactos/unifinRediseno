@@ -68,15 +68,19 @@ $role1 = BeanFactory::newBean('ACLRoles');
 
 $role_id = $GLOBALS['db']->fetchOne("SELECT id FROM acl_roles where name = 'Tracker'");
 
-if(!empty($role_id['id'])) {
-   $role_id = $role_id['id'];
-   $role1->retrieve($role_id);
-   $count = $GLOBALS['db']->fetchOne("SELECT count(role_id) as count FROM acl_roles_actions where role_id = '{$role_id}'");
-   // If there are no corresponding entries in acl_roles_actions, then we need to add it
-   if(empty($count['count'])) {
-        $missingAclRolesActions = true;
-   }
-} else {
+    if (!empty($role_id['id'])) {
+        $role_id = $role_id['id'];
+        $role1->retrieve($role_id);
+        $count = $GLOBALS['db']->getConnection()
+            ->executeQuery(
+                'SELECT count(role_id) as count FROM acl_roles_actions where role_id = ?',
+                [$role_id]
+            )->fetchColumn();
+        // If there are no corresponding entries in acl_roles_actions, then we need to add it
+        if (empty($count)) {
+            $missingAclRolesActions = true;
+        }
+    } else {
    $role1->name = "Tracker";
    $role1->description = "Tracker Role";
    $role1_id = $role1->save();

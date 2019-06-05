@@ -189,7 +189,7 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad {{quotes_module}}, {{contacts_module}} a pod. {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené získané“, alebo „Uzatvorené nezískané“. Modul {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať sa na prácu s cieľom dosiahnuť kvóty predaja.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
 
 – Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo stlačením tlačidla Upraviť.
 – Prepojenia na ďalšie záznamy v podpaneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panelu na „Zobrazenie údajov“.

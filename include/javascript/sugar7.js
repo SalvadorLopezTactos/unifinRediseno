@@ -72,6 +72,22 @@
                 }
             },
             {
+                name: 'stsAuthError',
+                route: 'stsAuthError',
+                callback: function() {
+                    app.controller.loadView({
+                        module: 'Logout',
+                        layout: 'logout',
+                        create: true
+                    });
+                    app.alert.show('needs_login_error', {
+                        level: 'error',
+                        messages: app.lang.getAppString('LBL_UNAUTHORIZED'),
+                        title: app.lang.get('LBL_UNAUTHORIZED_TITLE')
+                    });
+                }
+            },
+            {
                 name: 'about',
                 route: 'about',
                 callback: function() {

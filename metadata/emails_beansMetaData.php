@@ -15,22 +15,16 @@ $dictionary['emails_beans'] = array(
     'fields' => array(
         'id' => array(
             'name' => 'id',
-            'type' => 'varchar',
-            'dbType' => 'id',
-            'len' => '36',
+            'type' => 'id',
         ),
         'email_id' => array(
             'name' => 'email_id',
-            'type' => 'varchar',
-            'dbType' => 'id',
-            'len' => '36',
+            'type' => 'id',
             'comment' => 'FK to emails table',
         ),
         'bean_id' => array(
             'name' => 'bean_id',
-            'dbType' => 'id',
-            'type' => 'varchar',
-            'len' => '36',
+            'type' => 'id',
             'comment' => 'FK to various beans\'s tables',
         ),
         'bean_module' => array(
@@ -260,8 +254,6 @@ $dictionary['emails_text'] = array(
             'name' => 'email_id',
             'vname' => 'LBL_ID',
             'type' => 'id',
-            'dbType' => 'id',
-            'len' => 36,
             'required' => true,
             'reportable' => true,
             'comment' => 'Foriegn key to emails table',

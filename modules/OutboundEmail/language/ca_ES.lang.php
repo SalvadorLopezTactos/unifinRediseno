@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Aquest és el compte de sistema.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID d&#39;adreça electrònica',
     'LBL_TYPE' => 'Tipus',
+    'LBL_REPLY_TO_NAME' => 'Nom de Contesta-a',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adreces electròniques de Contesta-a',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID d&#39;adreça electrònica de Contesta-a',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adreça electrònica de Contesta-a',
+    'LBL_PRIMARY_TEAM' => 'Equip principal',
 );

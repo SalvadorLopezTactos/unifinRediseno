@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: JSTransaction.js 26474 2007-09-07 16:28:22Z tyoung $
    
 function JSTransaction(){
     this.JSTransactions = new Array();

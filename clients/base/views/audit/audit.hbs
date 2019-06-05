@@ -28,9 +28,9 @@
         <tbody>
             {{#if ../filteredCollection.length}}
                 {{#each ../../filteredCollection}}
-                <tr name="{{module}}_{{attributes.id}}" class="single">
+                <tr name="{{module}}_{{attributes.id}}" data-fieldname="{{attributes.field_name}}" class="single">
                     {{#each fields}}
-                        <td{{#if align}} class="{{align}}"{{/if}}>{{field ../../../../this model=../this template="audit"}}</td>
+                        <td{{#if align}} class="{{align}}"{{/if}} data-column="{{name}}">{{field ../../../../this model=../this template="audit"}}</td>
                     {{/each}}
                 </tr>
                 {{/each}}

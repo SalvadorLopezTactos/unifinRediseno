@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: MyAccountsDashlet.data.php 56127 2010-04-27 00:03:05Z clee $
 
 global $current_user;
 

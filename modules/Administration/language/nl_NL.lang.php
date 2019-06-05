@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Attribuut groep:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Met User DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Sluit de gebruikers-DN in met het gebruikersattribuut wanneer het groepslidmaatschap wordt gecontroleerd',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuele extra filter params toe te passen bij de authenticatie van gebruikers bijv. \\nis_sugar_user = 1 of (is_sugar_user = 1) (is_sales = 1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuele extra filter params toe te passen bij de authenticatie van gebruikers bijv. \nis_sugar_user = 1 of (is_sugar_user = 1) (is_sales = 1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Attribuut aanmelden:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Attribuut binden:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For Binding the LDAP User<br>Examples: <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Waarschuwing: Om je data te beschermen moet de Sugar Installatiewizzard worden uitgeschakeld door in config.php het veld &#39;installer_locked&#39; op &#39;true&#39; te zetten.',
  	'WARN_LICENSE_EXPIRED'=> "Opmerking: De Sugar Licentie verloopt in",
     'WARN_LICENSE_EXPIRED2' =>"dag(en). Ga naar het &#39;Licentie Management&#39; gedeelte in de Beheer pagina.",
-    'WARN_LICENSE_SEATS'=>  "Waarschuwing: Gebruikers licentie overschreden met",
-    'WARN_LICENSE_SEATS2' => ". Ga naar het &#39;Licentie Management&#39; gedeelte in de Beheer pagina.",
+    'WARN_LICENSE_SEATS'=>  "<b>Waarschuwing:</b>Er zijn ",
+    'WARN_LICENSE_SEATS2' => " actieve gebruikers, maar uw abonnement voorziet er slechts in ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Deactiveer enkele gebruikers, neem contact op met uw partner of vertegenwoordiger"
+        . " of stuur een e-mail naar <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Zie voor meer informatie die "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "</a>artikel Soorten gebruikers en Sugar-licenties begrijpen.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Waarschuwing:</b> Het maximum aantal actieve gebruikers is reeds bereikt:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Warning: The number of active users is already the maximum number of licenses allowed",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Warning: The number of active users allowed by your license matches the number of active users in the system. You will not be able to create additional active users.",
-    'WARN_REPAIR_CONFIG' => 'WAARSCHUWING: Het CONFIG.PHP bestand moet worden gerepareerd. Gebruik de &#39;Reparatie&#39; link in de Beheer pagina',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Waarschuwing:</b> U kunt geen actieve gebruikers meer aanmaken."
+        . " Schaf meer abonnementen aan.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Waarschuwing:</b> U kunt geen actieve gebruikers meer aanmaken."
+        . " Schaf meer abonnementen aan.",
+    'WARN_REPAIR_CONFIG' => '<b>Waarschuwing:</b> Het config.php bestand moet worden gerepareerd. Gebruik het script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Configuratiebestand opnieuw opbouwen</a> op de pagina Reparatie in Beheer om het configuratiebestand te repareren.',
     'WARN_UPGRADE_APP'=> "Een bijgewerkte versie van de applicatie in nu beschikbaar.",
     'WARN_UPGRADE' => 'Waarschuwing: Upgrade het systeem',
     'WARN_UPGRADENOTE' => 'Opmerking:',
@@ -1245,15 +1254,17 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatabestand kon niet worden gevonden.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Settings',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Instellingen Advanced Workflow configureren.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Log Viewer',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Het logboek van de Advanced Workflow openen.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Open het ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' logboek.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Procesbeheer',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Process Management can be accessed here.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configureer ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' instellingen configureren en logs bekijken. Beheer alle BPM processen voor alle gebruikers via Procesbeheer.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Instellingen Advanced Workflow configureren en logs bekijken. Beheer alle BPM processen voor alle gebruikers via Procesbeheer.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Offerteconfiguratie',
+    'LBL_MANAGE_QUOTES' => 'Configureer de lay-out van het offertewerkblad',
 );

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelLoadSignedButton.php 40541 2008-10-14 17:42:09Z jmertic $
 
 
 //this widget is used only by the document subpanel under contracts.

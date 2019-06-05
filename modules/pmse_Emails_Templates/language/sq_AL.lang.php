@@ -48,4 +48,5 @@ $mod_strings = array (
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Zgjidh',
+    'LBL_FIELD_SELECTOR_DROPDOWN' => 'Lloji i vlerës së fushës',
 );

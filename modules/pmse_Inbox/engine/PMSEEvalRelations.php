@@ -14,12 +14,14 @@ trait PMSEEvalRelations
 {
     /**
      * Method that evaluates the relation between two values with the given operator
-     * @param string $value1 value
+     * @param string $value1 The left side value of the evaluation
      * @param string $operator This value should be one in either $arrayRelationsSig or $arrayRelationsLit
-     * @param string $value2 value
+     * @param string $value2 The left side value of the evaluation
+     * @param string $type The data type for the value
+     * @param boolean $isUpdate Is this an update (versus new record) process
      * @return int
      */
-    public function evalRelations($value1, $operator, $value2, $typeDate = 'typeDefault')
+    public function evalRelations($value1, $operator, $value2, $type = 'typeDefault', $isUpdate = false)
     {
         $arrayRelationsSig = array(
             "==",
@@ -44,7 +46,11 @@ trait PMSEEvalRelations
             "changes_from",
             "changes_to",
         );
+
+        // Set the result
         $result = 0;
+
+        // Get the operator
         if (!in_array($operator, $arrayRelationsLit)) {
             $index = array_search($operator, $arrayRelationsSig);
             if ($index === false) {
@@ -52,46 +58,51 @@ trait PMSEEvalRelations
             }
             $operator = $arrayRelationsLit[$index];
         }
-        if (isset($value1)) {
-            $value1 = $this->typeData($value1, $typeDate);
-        }
-        if (isset($value2)) {
-            $value2 = $this->typeData($value2, $typeDate);
-        }
+
+        // Get proper values for the data we are working with
+        $value1 = $value1 === null ? $value1 : $this->typeData($value1, $type);
+        $value2 = $value2 === null ? $value2 : $this->typeData($value2, $type);
+
+        // Used for reporting back to the caller
         $this->condition .= ':(' . is_array($value1) ? encodeMultienumValue($value1) : $value1 . '):';
+
+        // Handle evaluations...
         switch ($operator) {
             case 'equals':
-                $result = $value1 == $value2 ? 1 : 0;
+                $result = $value1 == $value2;
                 break;
             case 'changes':
-                $result = isset($value1) ? 1 : 0;
+                // Changes should only evaluate to true for update processes
+                $result = $value1 !== null && $isUpdate === true;
                 break;
             case 'changes_from':
             case 'changes_to':
-                $result = (isset($value1) && $value1 == $value2) ? 1 : 0;
+                // Changes to/from should only evaluate to true for update processes
+                $result = $value1 !== null && $isUpdate === true && $value1 == $value2;
                 break;
             case 'not_equals':
-                $result = $value1 != $value2 ? 1 : 0;
+                $result = $value1 != $value2;
                 break;
             case 'major_equals_than':
-                $result = $value1 >= $value2 ? 1 : 0;
+                $result = $value1 >= $value2;
                 break;
             case 'minor_equals_than':
-                $result = $value1 <= $value2 ? 1 : 0;
+                $result = $value1 <= $value2;
                 break;
             case 'major_than':
-                $result = $value1 > $value2 ? 1 : 0;
+                $result = $value1 > $value2;
                 break;
             case 'minor_than':
-                $result = $value1 < $value2 ? 1 : 0;
+                $result = $value1 < $value2;
                 break;
             case 'starts_with':
                 $len2 = strlen($value2);
+                $result = false;
                 if (strlen($value1) >= $len2) {
-                    $result = 1;
+                    $result = true;
                     for ($i = 0; $i < $len2; $i++) {
                         if ($value1[$i] != $value2[$i]) {
-                            $result = 0;
+                            $result = false;
                             break;
                         }
                     }
@@ -100,25 +111,27 @@ trait PMSEEvalRelations
             case 'ends_with':
                 $len1 = strlen($value1);
                 $len2 = strlen($value2);
+                $result = false;
                 if ($len1 >= $len2) {
-                    $result = 1;
+                    $result = true;
                     $len1 -= $len2;
                     for ($i = 0; $i < $len2; $i++) {
                         if ($value1[$len1 + $i] != $value2[$i]) {
-                            $result = 0;
+                            $result = false;
                             break;
                         }
                     }
                 }
                 break;
             case 'contains':
-                $result = strpos($value1, $value2) === false ? 0 : 1;
+                $result = strpos($value1, $value2) !== false;
                 break;
             case 'does_not_contain':
-                $result = strpos($value1, $value2) === false ? 1 : 0;
+                $result = strpos($value1, $value2) === false;
                 break;
             default:
         }
-        return $result;
+
+        return $this->typeData($result, 'int');
     }
 }

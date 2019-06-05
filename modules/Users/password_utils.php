@@ -17,6 +17,7 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 
 function canSendPassword() {
     global $mod_strings,
@@ -72,6 +73,11 @@ function canSendPassword() {
  */
 function hasPasswordExpired($user, $updateNumberLogins = false)
 {
+    $idmConfig = new IdmConfig(\SugarConfig::getInstance());
+    if ($idmConfig->isIDMModeEnabled()) {
+        return false;
+    }
+
     if (!$user instanceof User) {
         $usr_id = BeanFactory::newBean('Users')->retrieve_user_id($user);
         $user = BeanFactory::getBean('Users', $usr_id);

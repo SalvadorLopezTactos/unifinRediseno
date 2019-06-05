@@ -22,8 +22,10 @@
     className: "table-cell",
 
     events: {
-        "click .choice-filter.choice-filter-clickable": "handleEditFilter",
-        "click .choice-filter-close": "handleClearFilter"
+        'click .choice-filter.choice-filter-clickable': 'handleEditFilter',
+        'keydown .choice-filter.choice-filter-clickable': 'handleEditFilter',
+        'click .choice-filter-close': 'handleClearFilter',
+        'keydown .choice-filter-close': 'handleClearFilter',
     },
 
     /**
@@ -272,17 +274,13 @@
         }
 
         // Update the text for the selected filter.
-        this.$('.choice-filter-label').html(safeString);
-        this.$('.choice-filter')
-            .attr('aria-label', a11yLabel);
-        this.$('.choice-filter')
+        this.$('.choice-filter-label')
+            .html(safeString)
+            .attr('aria-label', a11yLabel)
             .attr('tabindex', a11yTabindex);
 
-        if (item.id !== 'all_records') {
-            this.$('.choice-filter-close').show();
-        } else {
-            this.$('.choice-filter-close').hide();
-        }
+        this.$('.choice-filter-close').toggle(item.id !== 'all_records');
+        this.$('.choice-filter').toggleClass('with-close', item.id !== 'all_records');
 
         ctx.label = app.lang.get(this.labelDropdownTitle);
         ctx.enabled = this.filterDropdownEnabled;
@@ -341,11 +339,9 @@
      * @param {boolean} active `true` for a pointer cursor, `false` for a not allowed cursor
      */
     toggleFilterCursor: function(editable) {
-        if (editable) {
-            this.$('.choice-filter').css("cursor", "pointer").addClass('choice-filter-clickable').attr('tabindex', 0);
-        } else {
-            this.$('.choice-filter').css("cursor", "not-allowed").removeClass('choice-filter-clickable').attr('tabindex', -1);
-        }
+        this.$('.choice-filter')
+            .css('cursor', editable ? 'pointer' : 'not-allowed')
+            .toggleClass('choice-filter-clickable', editable);
     },
 
     /**
@@ -374,9 +370,19 @@
     },
 
     /**
-     * Handler for when the user selects a filter in the filter bar.
+     * Handler for when the user selects a filter in the filter bar,
+     * or user clicks the filter button to create or edit.
      */
-    handleEditFilter: function() {
+    handleEditFilter: function(evt) {
+        if (evt && evt.type === 'keydown') {
+            if (evt.keyCode !== $.ui.keyCode.SPACE && evt.keyCode !== $.ui.keyCode.ENTER) {
+                return;
+            }
+            // Prevent scrolling page with space
+            evt.preventDefault();
+            evt.stopPropagation();
+        }
+
         var filterId = this.filterNode.val(),
             filterModel,
             a11yTabindex = 0;
@@ -396,7 +402,7 @@
             a11yTabindex = 0;
         }
 
-        this.$('.choice-filter')
+        this.$('.choice-filter-label')
             .attr('aria-label', app.lang.get('LBL_FILTER_EDIT_FILTER'))
             .attr('tabindex', a11yTabindex);
     },
@@ -413,6 +419,11 @@
      * @param {Event} evt
      */
     handleClearFilter: function(evt) {
+        if (evt && evt.type === 'keydown' &&
+            !(evt.keyCode === $.ui.keyCode.ENTER ||  evt.keyCode === $.ui.keyCode.SPACE)) {
+            return;
+        }
+
         //This event is fired within .choice-filter and another event is attached to .choice-filter
         //We want to stop propagation so it doesn't bubble up.
         evt.stopPropagation();

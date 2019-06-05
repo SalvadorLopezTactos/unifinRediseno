@@ -61,10 +61,6 @@
       .tab-focus();
     }
 
-    .choice-filter-label {
-      vertical-align: top;
-    }
-
     .choice-filter-close {
       font-size: 14px;
       height: 12px;
@@ -331,15 +327,22 @@
     }
     .controls[data-filter='value'] {
       .input-prepend.input-append {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .date-wrapper {
+          width: 70%;
+          flex-grow: 1;
+        }
+
         .add-on:first-child {
           background: none;
           color: @grayLight;
           left: 0;
-          width: calc(~"30% - 6px");
-        }
-
-        .datepicker {
-          width: 70%;
+          display: inline-block;
+          padding: 3px 3px 10px;
+          min-width: calc(~'30% - 6px');
         }
       }
       //For flex-relate field
@@ -625,13 +628,31 @@
   .choice-filter {
     /* additive */
     position: relative;
-    top: -1px;
+    vertical-align: top;
+    cursor: pointer;
 
     /* override */
     border-radius: 4px;
+    padding: 0;
 
     /* override */
     background: @PrimaryButton;
+
+    .choice-filter-label {
+      padding: 5px 4px;
+      display: inline-block;
+
+      &:focus {
+        .tab-focus()
+      }
+    }
+
+    .choice-filter-close {
+      /* override */
+      vertical-align: middle;
+      height: 16px;
+      margin: 0;
+    }
   }
 
   // select2 filter pills

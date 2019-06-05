@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyContactsDashlet.data.php 56115 2010-04-26 17:08:09Z kjing $
 
 global $current_user;
 $dashletData['MyContactsDashlet']['searchFields'] = array('date_entered'     => array('default' => ''),

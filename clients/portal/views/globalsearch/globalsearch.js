@@ -95,7 +95,10 @@
             var currentTarget = this.$(event.currentTarget),
                 currentTargetLabel = currentTarget.closest('label');
 
-            currentTarget.attr('checked') ? currentTargetLabel.addClass('active') : currentTargetLabel.removeClass('active');
+            // Covering multiple lines because on one line, this is 125 characters long and coding standards hate that
+            currentTarget.prop('checked') ?
+                currentTargetLabel.addClass('active') :
+                currentTargetLabel.removeClass('active');
 
             if (checkedModules.length) {
                 searchAll.removeAttr('checked');
@@ -193,7 +196,7 @@
      * @return {Array}
      */
     _getSearchModuleNames: function() {
-        if (this.$('input:checkbox[data-module="all"]').attr('checked')) {
+        if (this.$('input:checkbox[data-module="all"]').prop('checked')) {
             return [];
         }
         else {

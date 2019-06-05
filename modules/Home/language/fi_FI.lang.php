@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML – Yksinkertainen SAML-työkalupakki PHP:lle.',
   'LBL_SOURCE_ISCROLL' => 'iScroll – The overflow: vieritys mobile webkitille. Natiivivieritystoiminto vakiolevyiseen/-korkuiseen elementtiin.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas – FlashCanvas on JavaScript-kirjasto, joka lisää the HTML5 Canvas -tuen Internet Explorer -selaimeen. Se renderöi muodot ja kuvat käyttäen Flashin piirtorajapintaa. Se tukee lähes kaikkia muita Canvas API:ja ja useissa tapauksissa ajaa nopeammin kuin vastaavanlaiset kirjastot, jotka käyttävät VML:ää tai Silverlightia.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - JavaScript InfoVis Toolkit tarjoaa työkalut vuorovaikutteisten datavisualisointien tekemiseen verkkoon.',
   'LBL_SOURCE_ZEND' => 'Zend Framework – avoimen lähdekoodin oliopohjainen web-sovelluskehikko PHP5:lle.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV – CSV-dataparseri PHP:lle',
   'LBL_SOURCE_PHPJS' => 'php.js – Käytä PHP-funktioita Javascriptissa',

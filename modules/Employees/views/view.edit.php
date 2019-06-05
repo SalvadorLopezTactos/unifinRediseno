@@ -12,14 +12,16 @@
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+use Sugarcrm\IdentityProvider\Srn;
 
 class EmployeesViewEdit extends ViewEdit {
     var $useForSubpanel = true;
 
- 	function display() {
-       	if(is_admin($GLOBALS['current_user'])) {
+    public function display()
+    {
+        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
 
-            $idpConfig = new IdmConfig(\SugarConfig::getInstance());
+        if (is_admin($GLOBALS['current_user'])) {
             if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate()) {
                 $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
             }
@@ -61,14 +63,25 @@ class EmployeesViewEdit extends ViewEdit {
         }
 
         // Check for IDM mode.
-        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
-        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $idpConfig->isIDMModeEnabled());
-        if ($GLOBALS['current_user']->isAdminForModule('Users') && $this->bean->id !== $GLOBALS['current_user']->id) {
-            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER';
-        } else {
-            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER';
+        $isIDMModeEnabled = (new Authentication\Config(\SugarConfig::getInstance()))->isIDMModeEnabled();
+        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $isIDMModeEnabled);
+        if ($isIDMModeEnabled) {
+            if ($GLOBALS['current_user']->isAdminForModule('Users')) {
+                $tenantSrn = Srn\Converter::fromString($idpConfig->getIDMModeConfig()['tid']);
+                $srnManager = new Srn\Manager([
+                    'partition' => $tenantSrn->getPartition(),
+                    'region' => $tenantSrn->getRegion(),
+                ]);
+                $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $this->bean->id);
+                $msg = sprintf(
+                    translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
+                    $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
+                );
+            } else {
+                $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER', 'Users');
+            }
+            $this->ss->assign('NON_EDITABLE_FIELDS_MSG', $msg);
         }
-        $this->ss->assign('NON_EDITABLE_FIELDS_MSG', translate($label, 'Users'));
 
  		parent::display();
  	}

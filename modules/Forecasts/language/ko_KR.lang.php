@@ -313,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '회계 연도 시작일',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '예측모듈에 사용될 기간을 구성하십시요. <br />회계연도의 시작일을 선택함으로 시작되며 예측 하고자하는 기간을 선택합니다. 날짜 기간은 자동으로 선택사항에 기초하여 계산됩니다. 하위 기간은 예측 워크시트에 근거합니다.<br />볼수있는 미래와 과거 기간은 보기가능한 예측모듈의 하위기간을 지정합니다. 사용자는 볼수있는 하위기간의 예측 숫자를 보거나 편집할수 있습니다.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}}의 원하는 범주화 방법을 구성합니다. <br><br>범위 설정은 처음 확정한 후 변경되지 않는다는 것에 유의하십시오. 업그레이드의 경우에 범위 설정이 기존 예측 데이터로 고정됩니다.<br><br>확률 범위에 근거하여 둘 또는 그 이상의 범주를 선택하거나 확률에 근거하지 않는 범주들을 생성할 수 있습니다. <br><br>사용자 지정 범주의 왼쪽에 확인 상자가 있습니다; 이 상자를 사용하여 관리자에게 약속 및 보고한 예상 금액 내에 어떤 범위를 포함할 것인지 결정합니다. <br><br>사용자는 자신들의 워크시트에서 {{forecastByModule}}의 포함/제외 상태와 범주를 수작업으로 변경할 수 있습니다.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} 카테고리 분류를 설정합니다. <br><br>범위를 처음 설정한 뒤에는 변경이 불가하오니 주의하십시오. 업그레이드할 때 범위 설정은 기존의 예측 데이터로 잠기게 됩니다.<br><br>가능성 범위에 근거해 2개 이상의 카테고리를 선택하거나 가능성에 근거하지 않은 카테고리를 생성할 수 있습니다.<br><br>커스텀 카테고리 왼편의 체크박스를 이용하여 확정된 예측 범위 내에서 포함될 범위를 결정하고, 매니저에게 보고하십시오.<br><br>사용자는 자신의 워크시트에서 {{forecastByModule}}의 카테고리를 수동으로 포함/제외할 수 있습니다.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '각각의  {{forecastByModuleSingular}}를 위한 사용자가 예측지를 완성하도록 칼럼을 선택하십시요. 가능 금액은 {{forecastByModule}}에 나타나는 금액과 같으며 이러한 이유로 가능 금액을 숨길수 없습니다.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '예측모듈에서 보고자하는 칼럼을 선택하십시요. 필드목록을 기획자료를 포함하며 사용자가 보기을 구성하도록 선택할수 있게 합니다.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'how-to text!에 의한 예측 플레이스 홀더입니다.',

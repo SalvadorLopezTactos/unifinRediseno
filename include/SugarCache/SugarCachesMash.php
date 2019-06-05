@@ -10,7 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+/**
+ * @deprecated
+ */
 class SugarCachesMash extends SugarCacheAbstract
 {
     /**

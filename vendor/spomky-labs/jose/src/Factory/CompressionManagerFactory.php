@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -66,8 +66,8 @@ final class CompressionManagerFactory
     private static function getSupportedMethods()
     {
         return [
-            'DEF'  => '\Jose\Compression\Deflate',
-            'GZ'   => '\Jose\Compression\GZip',
+            'DEF' => '\Jose\Compression\Deflate',
+            'GZ' => '\Jose\Compression\GZip',
             'ZLIB' => '\Jose\Compression\ZLib',
         ];
     }

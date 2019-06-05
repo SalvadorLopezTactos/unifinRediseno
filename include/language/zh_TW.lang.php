@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => '電子郵件設定',
     'EmailParticipants' => '電子郵件的參與者',
     'DataPrivacy' => '數據隱私',
+    'ReportSchedules' => '報表排程',
+    'CommentLog' => '評論日誌',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth Token',
     'Filters' => '篩選器',
     'Comments' => '註解',
+    'CommentLog' => '評論日誌',
     'Currencies' => '貨幣',
     'ProductTemplates' => '產品範本',
     'ProductTypes' => '產品類型',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => '電子郵件設定',
     'EmailParticipants' => '電子郵件的參與者',
     'DataPrivacy' => '數據隱私',
+    'ReportSchedules' => '報表排程',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => '交通',
     'Utilities' => '公共事業',
     'Other' => '其他',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => '第1層',
+    'T2' => '第2層',
+    'T3' => '第3層',
+    'T4' => '第4層',
   ),
   'lead_source_default_key' => '自我產生式',
   'lead_source_dom' =>
@@ -1568,7 +1579,7 @@ $app_list_strings = array (
     'duration_intervals' => array('0'=>'00',
                                     '15'=>'15',
                                     '30'=>'30',
-                                    '45'=>'所有相關的'),
+                                    '45'=>'45'),
 
     'repeat_type_dom' => array(
     	'' => '無',
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '。',
         ':' => '：',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => '移動',
         'donothing' => '不操作'
   ),
+  'processes_auto_save_interval' => array(
+        0 => '從不',
+        30000 => '每30秒',
+        60000 => '每1分鐘',
+        120000 => '每2分鐘',
+        180000 => '每3分鐘',
+        240000 => '每4分鐘',
+        300000 => '每5分鐘',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => '預測',
         'sales_stage' => '銷售階段',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => '清單',
         'activities' => '活動流',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => '每小時',
+        '21600' => '每 6 小時',
+        '43200' => '每 12 小時',
+        '86400' => '每天',
+        '604800' => '每週',
+        '1209600' => '每 2 週',
+        '2419200' => '每 4 週',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '關注連結',
   'LBL_TOGGLE_VISIBILITY' => '切換可見度', // Record view header panel element
   'LBL_ACTIVITIES' => '活動流',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. 版權所有。保留所有權利。',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         'SugarCRM ®、Sugar Enterprise™ 和 Sugar™ 是 SugarCRM 公司的商標。',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => '同步所有郵件帳戶',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => '已使用外寄郵件設定將電子郵件傳送至指定電子郵件地址。請查看能否收到郵件以驗證設定是否正確。',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => '執行此動作將同步郵件帳戶及其內容。',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '執行完全同步？\\n較大的郵件帳戶可能需要幾分鐘時間。',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '執行完全同步？\n較大的郵件帳戶可能需要幾分鐘時間。',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => '按一下 Shift 鍵或 Ctrl 鍵以選取多個資料夾。',
     'LBL_EMAIL_SETTINGS_GENERAL'            => '一般',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => '可用群組資料夾',
@@ -2687,8 +2716,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '需要一個使用中工作階段才能匯出內容。',
     'ERR_NO_HEADER_ID' => '該功能在此主題中不可用。',
     'ERR_NOT_ADMIN' => "未經授權存取管理。",
-    'ERR_DISABLED_FOR_IDM_MODE' => "此選項已在 SugarCRM 中為 IDM 模式禁用，但在雲端主控制台中可用。",
-    'ERR_GOTO_CLOUD_CONSOLE' => "請前往<a href=\"%s\" target=\"_blank\">雲端主控台</a>。",
+    'ERR_DISABLED_FOR_IDM_MODE' => '密碼管理僅在雲設置中可用。',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '如果要更改唯讀欄位, 請與您的Sugar管理員聯繫。',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填欄位：',
     'ERR_INVALID_REQUIRED_FIELDS' => '無效的必填欄位：',
     'ERR_INVALID_VALUE' => '無效值：',
@@ -2723,6 +2754,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => '目前使用者沒有權限變更 {moduleName} 配置設定。',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => '您沒有權限將 {moduleName} 添加為最愛。如需權限，請連絡您的管理員。',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => '您沒有權限訂閱 {moduleName}。如需權限，請連絡您的管理員。',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => '負載中worksheet_columns_related_fields不存在',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns 不是陣列',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => '負載中 summary_columns_related_fields不存在',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows 不是陣列',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => '負載中footer_rows_related_fields不存在',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => '您的請求由於未知的例外狀況而失敗。',
@@ -2914,6 +2953,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => '選取操作員...',
     'LBL_FILTER_CREATE_NEW' => '建立',
     'LBL_FILTER_CREATE_FILTER' => '建立新的篩選條件',
+    'LBL_FILTER_CLOSE_FILTER' => '關閉過濾器',
     'LBL_FILTER_EDIT_FILTER' => '編輯篩選器',
     'LBL_FILTER_ALL_RECORDS' => '所有記錄',
     'TPL_FILTER_SAVE' => '您已成功建立篩選器 {{name}}。',
@@ -3303,7 +3343,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有權利。<br />SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         '與此類名稱有關的公司的商標。',
@@ -3415,7 +3455,7 @@ $app_strings = array (
     'LNK_RESUME' => '繼續',
     'LNK_VIEW_CHANGE_LOG' => '查看稽核紀錄',
     'TPL_AUDIT_LOG_TITLE' => '{{{name}}} 稽核記錄',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => '點擊查看電子郵件地址審核記錄',
 
     'NTC_CLICK_BACK' => '請按一下瀏覽器返回按鈕，並修復此錯誤。',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3452,6 +3492,11 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>警告：</b>您的瀏覽器在 IE 相容性檢視中是不支援的。",
     'WARN_LICENSE_SEATS'=>  "警告：現用使用者的數量已超過授權允許的最大數量。",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告：現用使用者的數量超過了授權允許的最大數量。",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        '活動使用者數超過了許可證限制。請與管理員聯繫。',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => '只有管理員才能登入。',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        '用戶通行證已達上限。只有現存用戶可以登入。',
     'WARN_ONLY_ADMINS'=> "只有管理員才能登入。",
     'WARN_UNSAVED_CHANGES'=> "您將在未儲存您對記錄做出的任何修改的情況下離開此記錄。您確定要離開這個記錄瀏覽嗎？",
     'LBL_WARN_UNSAVED_CHANGES' => '您還有未儲存的變更。您確定要離開此頁面並放棄變更嗎？',
@@ -3545,6 +3590,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "您目前未儲存任何 <item1> 記錄。立即儲存 <item2> 記錄。",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "您可從 <item2> 建立 <item1>。<item3><item2>清單。",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "按一下此處",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => '新增至我的最愛',
@@ -3650,6 +3696,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '商機計量',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '關聯帳戶的商機指標。',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => '產品目錄快速精選',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> '列出最近使用的專案和產品，并保存為最愛',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '最近使用',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '最愛',
 
     'LBL_DASHLET_NO_RECORDS' => '目前未找到任何記錄。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '實例摘要',
@@ -4270,7 +4320,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => '未來',
     'LBL_REQUIRED_FIELD' => '必填',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => '報價項目',
+    'LBL_DISCOUNT_TOTAL' => '總折扣',
+    'LBL_TAX' => '稅',
+    'LBL_SHIPPING' => '運送',
+    'LBL_GRAND_TOTAL' => '總計',
+    'LBL_QUOTES_POPULATE_ADDRESS' => '使用帳戶的個人資料自動輸入帳單寄送地址',
+    'LBL_QLI_ADD_GROUP' => '新增群組',
+    'LBL_QLI_COMMENT' => '註解',
+    'LBL_SELECT_ACTION' => '選取動作',
+    'LBL_QLI_GROUP_NAME' => '群組名稱',
+    'LBL_GROUP_TOTAL' => '群組合計',
+    'LBL_ITEM_NAME' => '項目',
+    'LBL_QLI_DELETE' => '您確定要刪除此報價項目嗎？',
+    'LBL_QLI_COMMENT_DELETE' => '您確定要刪除此報價項目註解嗎？',
+    'LBL_QLI_GROUP_DELETE' => '是否確實要刪除群組 {0}？所有項目都將被移動到預設群組。',
+    'LBL_QLI_GROUP_EMPTY' => '無報價項目',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => '可選',
     'LBL_RELATED_MODULE' => '相關 {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => '相關 {{{this}}}',
@@ -4300,7 +4370,7 @@ $app_strings = array (
     'LBL_CONFIRM' => '確認',
     'LBL_NO_ACCESS' => '（無存取權限）',
     'LBL_NO_ACCESS_LOWER' => '沒有存取權限',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => '沒有存取權限',
     'LBL_VALUE_ERASED' => '值已刪除',
     'LBL_VALUE_ERASED_TOOLTIP' => '此資訊已通過資料隱私請求刪除',
     'LBL_CREATE_RELATED_RECORD' => '建立關聯記錄',
@@ -4928,7 +4998,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '小組工作',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP 或舊 REST API',
@@ -4989,9 +5059,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => '通知：',
     'LBL_ALERT_TITLE_ERROR' => '錯誤：',
     'LBL_ALERT_TITLE_LOADING' => '載入中',
+    'LBL_ALERT_NO_ACCESS' => '您沒有訪問應用於此儀表板的篩選器。',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => '使用您自己的篩選器複製儀表板以配置此儀表板。',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '不再支援您的瀏覽器版本，或者您正在使用不受支援的瀏覽器。',
-    'LBL_ALERT_BROWSER_SUPPORT' => '建議使用以下瀏覽器版本 ︰ <ul><li>Internet Explorer 11</li><li> Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => '請查看 {{link}} 頁面了解建議使用的瀏覽器。',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => '支援的平台',
     'LBL_ALERT_CONFIRM_DELETE' => '您確定要刪除此項目嗎？',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => '您確定要刪除這些項目嗎？',
@@ -5089,7 +5159,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => '歷史摘要',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => '更多歷史...',
     'LBL_RELATED_CONTACT' => '相關連絡人',
     'LBL_MODULE_TYPE' => '類型',
@@ -5163,6 +5233,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => '缺少 SMTP 伺服器設定',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => '如需傳送記錄分配通知，必須在 {{emailSettingsUrl}} 設定 SMTP 伺服器。',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => '電子郵件設定',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => '新庫存報表可用',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => '新庫存報表已存在於你的 ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => '報表模組',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => '他們備標為"庫存報表"，可以進行篩選。報告也根據內容被標記為"銷售與營銷"、"客戶服務"、"數據隱私"或"管理"。更多訊息請參閱',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => '文件',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM 允許進階使用者使用鍵盤捷徑快速執行特定任務，以提高生產力。右側表格說明了可用捷徑和鍵位，及其對應的功能。',
@@ -5272,23 +5347,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => '流程',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => '進程儀表板顯示可在SugarBPM內部使用的範本。',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => '流程定義',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => '進程定義儀錶盤顯示可在SugarBPM內部使用的範本。',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => '建立流程定義',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => '匯入流程定義',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => '流程商務規則',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => '流程商務規則儀錶盤顯示可在SugarBPM內部使用的範本。',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => '建立流程商務規則',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => '匯入流程商務規則',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => '流程電子郵件範本',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => '處理電子郵件範本儀錶盤顯示可在SugarBPM內部使用的範本。',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => '建立流程電子郵件範本',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => '匯入流程電子郵件範本',
 
@@ -5312,7 +5390,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => '已取消',
     'LBL_PMSE_TERMINATED_STATUS' => '已終止',
     'LBL_PMSE_ERROR_STATUS' => ' 錯誤',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM設置',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => '您確定要停用此記錄嗎？',
     'LBL_PRO_ENABLE_CONFIRMATION' => '您確定要啟用此記錄嗎？',
@@ -5336,7 +5414,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 要求使用 javascript。請在瀏覽器中啟用 javascript 以使用 Sugar 7。',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => '已序列化資料無法取消序列化',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => '序列化資料無法取消序列化，因為其含有對象或等級參考',
 
@@ -5365,6 +5443,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => '個人資訊',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '標記擦除',
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 的個人資訊',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '複製到剪貼簿!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '無法複製到剪貼簿',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '複製確認鏈接',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => '顯示更多...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => '顯示小於...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6542,7 +6629,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '已嵌入檔案';
     'YER' => '裡亞爾',
     'ZWD' => '辛巴威元',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => '按一下',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => '無',
+        'future' => '當前值',
+        'old' => '舊值',
+        'both' => '當前和舊值',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => '按一下',
+    );

@@ -14,13 +14,12 @@ namespace Sugarcrm\IdentityProvider\App\Authentication;
 
 use GuzzleHttp\Exception\RequestException;
 
-use League\OAuth2\Client\Token\AccessToken;
-
-use Sugarcrm\IdentityProvider\App\Authentication\OpenId\StandardClaims;
+use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\HttpFoundation\Response;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentTokenInterface;
+use Sugarcrm\IdentityProvider\App\Authentication\OpenId\StandardClaimsService;
 use Sugarcrm\IdentityProvider\STS\EndpointService;
 use Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider as OAuth2Provider;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +27,8 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class OAuth2Service
 {
+    use QueryBuilderTrait;
+
     /**
      * @var EndpointService
      */
@@ -39,6 +40,11 @@ class OAuth2Service
     protected $oAuth2Provider;
 
     /**
+     * @var StandardClaimsService
+     */
+    protected $claimsService;
+
+    /**
      * @var string
      */
     protected $accessToken;
@@ -47,9 +53,14 @@ class OAuth2Service
      * OAuth2Service constructor.
      * @param EndpointService $stsEndpoint
      * @param OAuth2Provider $oAuth2Provider
+     * @param StandardClaimsService $claimsService
      */
-    public function __construct(EndpointService $stsEndpoint, OAuth2Provider $oAuth2Provider)
-    {
+    public function __construct(
+        EndpointService $stsEndpoint,
+        OAuth2Provider $oAuth2Provider,
+        StandardClaimsService $claimsService
+    ) {
+        $this->claimsService = $claimsService;
         $this->stsEndpoint = $stsEndpoint;
         $this->oAuth2Provider = $oAuth2Provider;
     }
@@ -96,10 +107,29 @@ class OAuth2Service
      * @return array
      * @throws AuthenticationException
      */
-    public function introspectToken($token)
+    public function introspectToken($token): array
     {
-        $accessToken = new AccessToken(['access_token' => $token]);
-        $result = $this->oAuth2Provider->introspectToken($accessToken);
+        $request = $this->oAuth2Provider->getAuthenticatedRequest(
+            OAuth2Provider::METHOD_POST,
+            $this->stsEndpoint->getOAuth2Endpoint(EndpointService::INTROSPECT_ENDPOINT),
+            $this->getAccessToken(),
+            [
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Accept' => 'application/json',
+                ],
+                'body' => $this->buildQueryString(['token' => $token]),
+            ]
+        );
+
+        try {
+            $result = $this->oAuth2Provider->getParsedResponse($request);
+        } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
+            $this->refreshAccessToken();
+            throw new AuthenticationException(
+                sprintf('Introspect token is invalid, reason: %s, refreshing. Please try again', $e->getMessage())
+            );
+        }
 
         if (empty($result) || empty($result['active'])) {
             throw new AuthenticationException('OIDC Token is not valid');
@@ -145,11 +175,11 @@ class OAuth2Service
         /** @var User $user */
         $user = $userToken->getUser();
 
-        $claims = (new StandardClaims())->getUserClaims($user);
+        $claims = $this->claimsService->getUserClaims($user);
         $claims['tid'] = $token->getTenantSRN();
 
         $body = [
-            'grantScopes' => $token->getScope(),
+            'grantScopes' => $token->getScopes(),
             'subject' => $userToken->getAttribute('srn'),
             'idTokenExtra' => $claims,
             'accessTokenExtra' => $claims,
@@ -203,5 +233,40 @@ class OAuth2Service
         if ($response->getStatusCode() != Response::HTTP_NO_CONTENT) {
             throw new \RuntimeException('Wrong consent reject response status code');
         }
+    }
+
+    /**
+     * Return access token
+     *
+     * @return string
+     */
+    public function getAccessToken(): string
+    {
+        if (!$this->accessToken) {
+            $this->accessToken = $this->oAuth2Provider->getAccessToken(
+                'client_credentials',
+                [
+                    'scope' => implode(
+                        ' ',
+                        [
+                            'hydra.keys.get',
+                            'hydra.consent',
+                            'hydra.introspect',
+                            'https://apis.sugarcrm.com/auth/iam',
+                        ]
+                    ),
+                ]
+            );
+        }
+        return (string)$this->accessToken;
+    }
+
+    /**
+     * Call token inject refresh token endpoint
+     * @return bool
+     */
+    public function refreshAccessToken()
+    {
+        return $this->oAuth2Provider->refreshAccessToken();
     }
 }

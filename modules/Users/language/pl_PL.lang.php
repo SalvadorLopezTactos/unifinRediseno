@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Przydziel do zespołu',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Zespoły dostępne do wyświetlania domyślnego w rekordach to te, których jesteś członkiem.',
 	'LBL_DEFAULT_TEAM'					=> 'Domyślne zespoły',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Domyślny zespół podstawowy',
 	'LBL_LIST_DESCRIPTION'				=> 'Opis',
 	'LBL_MY_TEAMS'						=> 'Moje zespoły',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Prywatny zespół dla',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adres e-mail odbiorcy',
 	'ERR_SERVER_STATUS'					=> 'Status Twojego serwera',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'System nie mógł wysłać wiadomości e-mail do użytkownika. Sprawdź ustawienia poczty wychodzącej w <a href="index.php?module=EmailMan&action=config">Ustawieniach poczty e-mail</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Użytkownika można utworzyć tylko w sekcji <a href="{0}" target="_blank">konsola chmury</a> dla trybu IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Główny adres e-mail można zaktualizować tylko w sekcji <a href="{0}" target="_blank">konsola chmury</a> dla trybu IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adres e-mail',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potwierdź hasło',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Typ użytkownika został zmieniony z administratora systemu na użytkownika standardowego. Po zapisaniu tych zmian użytkownik nie będzie miał dostępu do panelu administratora.\\n\\nKliknij OK, aby kontynuować.\\nKliknij Anuluj, aby powrócić do rekordu.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Typ użytkownika został zmieniony z administratora systemu na użytkownika standardowego. Po zapisaniu tych zmian użytkownik nie będzie miał dostępu do panelu administratora.\n\nKliknij OK, aby kontynuować.\nKliknij Anuluj, aby powrócić do rekordu.',
 	'LBL_COUNTRY'						=> 'Kraj',
 	'LBL_CURRENCY_TEXT'					=> 'To jest waluta używana w widokach listy i rekordu, jeśli włączono opcję Wyświetl preferowaną walutę. Jest to również domyślna waluta dla nowych rekordów.',
 	'LBL_CURRENCY'						=> 'Preferowana waluta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Liczba miejsc dziesiętnych wyświetlanych w przypadku liczb dziesiętnych i zmiennoprzecinkowych w systemie, np. walut lub średnich w Raportach.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Pokaż preferowaną walutę',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Przelicz walutę podstawową na walutę preferowaną przez użytkownika w widoku listy oraz rekordu',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Utwórz pozycje wiersza szansy w preferowanej walucie',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Pozycje wiersza szansy dodane do Szansy z Katalogu produktów zostaną przekonwertowane na walutę preferowaną przez użytkownika, jeśli jest ona inna niż Waluta używana dla pozycji Katalogu produktów.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Separator tysięcy',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Znak separatora tysięcy',
 	'LBL_DECIMAL_SEP'					=> 'Symbol dziesiętny',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Podaj nazwę użytkownika oraz adres e-mail.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Funkcja nie jest aktywna. Skontaktuj się z administratorem.',
 	'LBL_PUBLISH_KEY'					=> 'Klucz dostępu',
-
+    'LBL_SITE_USER_ID' => 'Skrót site_url i user_id',
     'LBL_QUOTAS'                        => 'Targety',
     'LBL_FORECASTS'                     => 'Prognozy',
     'LBL_WORKSHEETS'                    => 'Arkusze',
@@ -633,10 +633,7 @@ Kliknij Anuluj, aby wyjść ze strony bez ponownego przydzielenia jakiegokolwiek
     'LBL_DETAIL' => 'Profil użytkownika',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Jeśli niektóre pola nie są edytowalne, zaloguj się do konsoli chmury w celu zarządzania tymi polami',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Jeżeli chcesz zmienić określone pola, które nie są dostępne do edycji, ' .
-        'skontaktuj się z administratorem, aby powiadomić o tych zmianach',
+        'Skontaktuj się z administratorem systemu Sugar, aby wprowadzić zmiany w polach tylko do odczytu.',
 ); // END STRINGS DEFS
-
-?>

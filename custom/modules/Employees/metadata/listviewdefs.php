@@ -1,6 +1,6 @@
 <?php
-$listViewDefs['Employees'] = 
-array (
+// created: 2019-06-04 19:10:00
+$listViewDefs['Employees'] = array (
   'name' => 
   array (
     'width' => '20',

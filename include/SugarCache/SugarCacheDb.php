@@ -18,6 +18,8 @@ use Psr\Log\LogLevel;
 /**
  * SQL SugarCache backend - currently only MySQL backends are supported
  * awaiting full optimized upsert capability on the other DB backends.
+ *
+ * @deprecated
  */
 class SugarCacheDb extends SugarCacheAbstract
 {

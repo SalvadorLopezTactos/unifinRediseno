@@ -117,11 +117,11 @@ $mod_strings = array(
         'defaultdetailview'=>'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú v časti <b>Zobrazenie podrobností</b>. <br/> <br/> Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať. <br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia. <br> <br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na prípadne pridanie do rozloženia.'
     . '<br/> <br/> <!--not_in_theme!--> <img src="themes/default/images/SugarLogic/icon_dependent.png"/> Označuje závislé pole, ktoré môže alebo nemusí byť viditeľné v závislosti od hodnoty vzorca. <br/> <!--not_in_theme!--> <img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označuje vypočítavané pole, ktorého hodnota sa automaticky určí na základe vzorca.'
     ,
-        'defaultquickcreate'=>'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú vo formulári <b>Rýchle vytvorenie</b>.<br><br>Keď kliknete na tlačidlo Vytvoriť, formulár Rýchle vytvorenie sa zobrazí v podpaneloch modulu.<br/><br/> Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať.<br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na pridanie do rozloženia.'
+        'defaultquickcreate'=>'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú vo formulári <b>Rýchle vytvorenie</b>.<br><br>Formulár Rýchle vytvorenie sa zobrazuje v podpaneloch pre modul pri kliknutí na tlačidlo Vytvoriť.<br/><br/>Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať.<br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na prípadné pridanie do rozloženia.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označuje závislé pole, ktoré môže alebo nemusí byť viditeľné v závislosti od hodnoty vzorca.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označuje vypočítavané pole, ktorého hodnota sa automaticky určí na základe vzorca.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú v časti <b>Zobrazenie na úpravy</b>.<br/><br/>Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať.<br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na pridanie do rozloženia.'
+        'default'	=> 'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú v časti <b>Zobrazenie na úpravy</b>.<br/><br/>Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať.<br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na prípadné pridanie do rozloženia.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označuje závislé pole, ktoré môže alebo nemusí byť viditeľné v závislosti od hodnoty vzorca.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označuje vypočítavané pole, ktorého hodnota sa automaticky určí na základe vzorca.'
     ,
         //this defualt will be used for edit view
@@ -744,9 +744,9 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Vymazaním tohto vlastného poľa odstránite vlastné pole a všetky údaje súvisiace s vlastným poľom v databáze. Pole sa už nebude zobrazovať v žiadnom z rozložení modulu.'
         . ' Ak je pole zahrnuté vo vzorci na výpočet hodnôt pre všetky polia, vzorec prestane fungovať.'
-        . '\\n\\nPole už bude k dispozícii na použitie v hláseniach, táto zmena sa prejaví po odhlásení a opätovnom prihlásení do aplikácie. Všetky hlásenia, ktoré obsahujú pole, bude treba aktualizovať, aby ich bolo možné spustiť.'
-        . '\\n\\nChcete pokračovať?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Naozaj chcete vymazať tento vzťah?<br>Poznámka: Táto operácia môže trvať niekoľko minút.',
+        . '\n\nPole už bude k dispozícii na použitie v hláseniach, táto zmena sa prejaví po odhlásení a opätovnom prihlásení do aplikácie. Všetky hlásenia, ktoré obsahujú pole, bude treba aktualizovať, aby ich bolo možné spustiť.'
+        . '\n\nChcete pokračovať?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Naozaj chcete vymazať tento vzťah?<br>Poznámka: Vykonávanie tejto operácie môže trvať niekoľko minút.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Vzťah sa tak stane trvalým. Naozaj chcete použiť tento vzťah?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od posledného uloženia boli vykonané zmeny. Chcete ich uložiť?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Uložiť zmeny?',
@@ -764,16 +764,16 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
 . '<br><b>Vo filtri</b>: pole sa zobrazí vo funkcii Zlúčenie duplikátov a bude k dispozícii aj vo funkcii Vyhľadávanie duplikátov. <br><b>Iba filter</b>: pole sa nezobrazí vo funkcii Zlúčenie duplikátov, ale bude k dispozícii vo funkcii Vyhľadávanie duplikátov. <br><b>Predvolene vybratý filter</b>: pole sa predvolene použije pre podmienky filtrovania na stránke vyhľadávania duplikátov a zobrazí sa aj vo funkcii Zlúčenie duplikátov.'
 ,
 'LBL_POPHELP_CALCULATED'=>"Vytvorte vzorec na určenie hodnoty v tomto poli.<br>"
-   . "Definície pracovného postupu, ktoré obsahujú akciu nastavenú na aktualizáciu tohto poľa, už túto akciu nevykonajú.<br>"
+   . "Definície pracovného postupu obsahujúce akciu, ktoré sú nastavené na aktualizáciu tohto poľa, už nebudú vykonávať danú akciu.<br>"
    . "Polia používajúce vzorce sa nebudú vypočítavať v reálnom čase v "
-   . "samoobslužnom portáli aplikácie Sugar ani "
-   . "v rozloženiach Zobrazenie na úpravy pre mobilné telefóny.",
+   . "samoobslužný portál Sugar alebo "
+   . "Rozloženia Zobrazenia na úpravy pre mobilné telefóny.",
 
-'LBL_POPHELP_DEPENDENT'=>"Vytvorte vzorec na určenie toho, či je toto pole viditeľné v rozloženiach.<br/>"
-        . "Závislé polia budú dodržiavať vzorec závislosti pre zobrazenie v prehliadači v mobilných zariadeniach, <br/>"
-        . "ale nebudú sa riadiť vzorcami v natívnych aplikáciách, ako je napríklad Sugar Mobile pre iPhone. <br/>"
-        . "Nebudú dodržiavať vzorec v samoobslužnom portáli aplikácie Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vyberte na použitie tohto poľa pri vyhľadávaní záznamov pomocou globálneho vyhľadávania v tomto module.',
+'LBL_POPHELP_DEPENDENT'=>"Vytvorte vzorec na určenie, či je toto pole viditeľné v rozloženiach.<br/>"
+        . "Závislé polia sa budú riadiť vzorcom závislosti v mobilnom zobrazení založenom na prehliadači, <br/>"
+        . "ale nebudú sa riadiť vzorcom v natívnych aplikáciách, napríklad Sugar Mobile pre iPhone. <br/>"
+        . "Nebudú sa riadiť vzorcom v samoobslužnom portáli Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pri vyhľadávaní záznamov s použitím globálneho vyhľadávania na tomto module si vyberte použitie tohto poľa.',
 //Revert Module labels
 'LBL_RESET' => 'Obnoviť',
 'LBL_RESET_MODULE' => 'Obnoviť modul',

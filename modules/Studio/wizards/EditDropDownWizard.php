@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: EditDropDownWizard.php 18703 2006-12-15 09:42:43Z majed $
 
 class EditDropDownWizard extends StudioWizard {
 	var $wizard = 'EditDropDownWizard';

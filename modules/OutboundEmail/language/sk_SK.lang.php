@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'To je systémový účet.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID e-mailovej adresy',
     'LBL_TYPE' => 'Typ',
+    'LBL_REPLY_TO_NAME' => 'Meno na zaslanie odpovede',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'E-mailové adresy na zaslanie odpovede',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID e-mailovej adresy na zaslanie odpovede',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'E-mailová adresa na zaslanie odpovede',
+    'LBL_PRIMARY_TEAM' => 'Primárny tím',
 );

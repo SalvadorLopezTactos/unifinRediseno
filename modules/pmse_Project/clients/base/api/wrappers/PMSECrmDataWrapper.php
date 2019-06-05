@@ -155,26 +155,13 @@ class PMSECrmDataWrapper implements PMSEObservable
     protected $logger;
 
     /**
-     *
      * @global type $beanList
      * @global type $db
      * @codeCoverageIgnore
      */
     public function __construct()
     {
-        /**
-         * List of Beans in SugarCRM
-         * @global array $GLOBALS ['beanList']
-         * @name $beanList
-         */
         global $beanList;
-        /**
-         * Database variable
-         * @global array $GLOBALS ['db']
-         * @name $db
-         */
-        global $db;
-
         $this->defaultDynaform = ProcessManager\Factory::getPMSEObject('PMSEDynaForm');
         $this->teamsBean = BeanFactory::newBean('Teams');
         $this->usersBean = BeanFactory::newBean('Users');
@@ -184,7 +171,7 @@ class PMSECrmDataWrapper implements PMSEObservable
 
         $this->beanList = $beanList;
         $this->observers = array();
-        $this->db = $db;
+        $this->db = DBManagerFactory::getInstance();
 
         $this->logger = PMSELogger::getInstance();
     }
@@ -201,14 +188,33 @@ class PMSECrmDataWrapper implements PMSEObservable
     }
 
     /**
-     * Set global variable $beanList.
+     * Set the bean list
      * @codeCoverageIgnore
-     * @param object $beanList
-     * @return void
+     * @param array
      */
     public function setBeanList($beanList)
     {
         $this->beanList = $beanList;
+    }
+
+    /**
+     * Gets the beanList from this object
+     * @codeCoverageIgnore
+     * @return array
+     */
+    public function getBeanList()
+    {
+        return $this->beanList;
+    }
+
+    /**
+     * Checks if the given element is a bean element
+     * @param string $element String name of a bean module to check
+     * @return boolean
+     */
+    public function isBeanElement(string $element)
+    {
+        return isset($this->beanList[$element]);
     }
 
     /**
@@ -703,7 +709,8 @@ class PMSECrmDataWrapper implements PMSEObservable
                 break;
             case 'related':
                 $cardinality = isset($args['cardinality']) ? $args['cardinality'] : 'all';
-                $output = $this->retrieveRelatedBeans($filter, $cardinality);
+                $removeTarget = isset($args['removeTarget']) ? $args['removeTarget'] : false;
+                $output = $this->retrieveRelatedBeans($filter, $cardinality, $removeTarget);
                 $outputType = 1;
                 break;
             case 'oneToOneRelatedModules':
@@ -1242,9 +1249,9 @@ class PMSECrmDataWrapper implements PMSEObservable
      * @param $filter
      * @return object
      */
-    public function retrieveRelatedBeans($filter, $relationship = 'all')
+    public function retrieveRelatedBeans($filter, $relationship = 'all', $removeTarget = false)
     {
-        return $this->pmseRelatedModule->getRelatedBeans($filter, $relationship);
+        return $this->pmseRelatedModule->getRelatedBeans($filter, $relationship, $removeTarget);
     }
 
     /**
@@ -1254,20 +1261,12 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveRelatedModules($filter)
     {
-//        $res = new stdClass();
-//        $res->search = $filter;
-//        $res->success = true;
-        global $beanList;
-        if (isset($beanList[$filter])) {
-            $newModuleFilter = $filter;
-        } else {
-            $newModuleFilter = array_search($filter, $beanList);
-        }
+        $newModuleFilter = $this->getBeanModuleName($filter);
         $output_11 = array();
         $output_1m = array();
         $output = array();
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        //$relatedModules = is_object($moduleBean) ? $moduleBean->get_linked_fields() : array();
+
         $relationshipType = array('one-to-one', 'one-to-many', 'many-to-many');
         $ajaxRelationships = '';
         if (is_object($moduleBean)) {
@@ -1538,12 +1537,9 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveFields($filter = '', ModuleApi $moduleApi = null, $type = '', $baseModule = '')
     {
-        global $beanList;
-        if (isset($beanList[$filter])) {
-            $newModuleFilter = $filter;
-        } else {
-            $newModuleFilter = $this->pmseRelatedModule->getRelatedModuleName($baseModule, $filter);
-        }
+        $newModuleFilter = $this->isBeanElement($filter) ?
+                           $filter :
+                           $this->pmseRelatedModule->getRelatedModuleName($baseModule, $filter);
 
         $res = array();
         new stdClass();
@@ -1672,21 +1668,17 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function addRelatedRecord($filter = '', $additionalArgs = array())
     {
-        global $beanList;
-        if (isset($beanList[$filter])) {
+        if ($this->isBeanElement($filter)) {
             $newModuleFilter = $filter;
         } else {
             $related = $this->getRelationshipData($filter);
             $newModuleFilter = $related['rhs_module'];
         }
 
-        $res = array(); //new stdClass();
+        $res = array();
 
         $res['name'] = $newModuleFilter;
 
-        //$module = explode('_', $filter);// pull the related module out.
-        //$filter = ucfirst(isset($module[1])?$module[1]:$module[0]);
-        //$primal_module = ucfirst(isset($module[0])?$module[0]:'');
         $res['search'] = $filter;
         $res['success'] = true;
         $module_strings = return_module_language('en_us', 'ModuleBuilder');
@@ -1821,31 +1813,29 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveRuleSets($filter, $orderBy = 'name')
     {
-        $processDefinitionBean = $this->getProcessDefinition();
-        $projectBean = $this->getProjectBean();
-        $ruleSetBean = $this->getRuleSetBean();
-        $output = array();
-        if ($projectBean->retrieve($filter)) {
-            $processDefinitionBean->retrieve_by_string_fields(array('prj_id' => $projectBean->id));
-            if (isset($this->beanList[$processDefinitionBean->pro_module])) {
-                $newModuleFilter = $processDefinitionBean->pro_module;
-            } else {
-                $newModuleFilter = array_search($processDefinitionBean->pro_module, $this->beanList);
-            }
-            $where = 'pmse_business_rules.rst_module=\'' . $newModuleFilter . '\'';
-            $ruleSetList = $ruleSetBean->get_full_list($orderBy, $where);
+        $q = new SugarQuery;
+        $q->from($this->getRuleSetBean(), 'b');
 
-            if (is_array($ruleSetList)) {
-                foreach ($ruleSetList as $key => $ruleset) {
-                    $tmpArray = array();
-                    $tmpArray['value'] = $ruleset->id;
-                    $tmpArray['text'] = $ruleset->name;
-                    $output[] = $tmpArray;
-                }
-            }
-        }
-        //$res->result = $output;
-        return $output;
+        // This is the pattern that the client expects
+        $q->select([
+            ['id', 'value'],
+            ['name', 'text'],
+        ]);
+
+        // Order is important
+        $q->orderBy('name', 'ASC');
+
+        // Join the business rules table on the project table
+        $q->joinTable(
+            $this->getProjectBean()->getTableName(),
+            [
+                'alias' => 'p',
+            ]
+        )->on()->equalsField('p.prj_module', 'b.rst_module');
+
+        // And filter all of it based on the process definition requesting this
+        $q->where()->equals('p.id', $filter);
+        return $q->execute();
     }
 
     /**
@@ -1891,35 +1881,31 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveEmailTemplates($module)
     {
-        $output = array();
-        if (!isset($module)) {
-            return $output;
+        // Empty modules means no data
+        if (empty($module)) {
+            return [];
         }
 
-        $emailTemplateBean = $this->getEmailTemplateBean();
-        $rows = $emailTemplateBean->get_full_list('', "base_module = '$module'");
-        if (!empty($rows)) {
-            foreach ($rows as $row) {
-                $tmpArray = array();
-                $tmpArray['text'] = $row->name;
-                $tmpArray['value'] = $row->id;
-                $output[] = $tmpArray;
-            }
-        }
-        //$res->result = $output;
-        return $output;
+        $q = new SugarQuery;
+        $q->from($this->getEmailTemplateBean());
+
+        // This is the pattern that the client expects
+        $q->select([
+            ['id', 'value'],
+            ['name', 'text'],
+        ]);
+
+        // Order is important
+        $q->orderBy('name', 'ASC');
+
+        // And filter all of it based on the process definition requesting this
+        $q->where()->equals('base_module', $module);
+        return $q->execute();
     }
 
     public function getBeanModuleName($beanName)
     {
-//        global $beanList;
-        $beanModuleName = '';
-        if (isset($this->beanList[$beanName])) {
-            $beanModuleName = $beanName;
-        } else {
-            $beanModuleName = array_search($beanName, $this->beanList);
-        }
-        return $beanModuleName;
+        return isset($this->beanList[$beanName]) ? $beanName : array_search($beanName, $this->beanList);
     }
 
     /**
@@ -1929,9 +1915,8 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function validateProjectName($projectName)
     {
-        $res = array(); //new stdClass();
+        $res = array();
         $res['success'] = true;
-//        $projectObject = new BpmnProject();
         $projectObject = $this->getProjectBean();
         $result = true;
         $rsProject = $projectObject->retrieve_by_string_fields(array('name' => $projectName));

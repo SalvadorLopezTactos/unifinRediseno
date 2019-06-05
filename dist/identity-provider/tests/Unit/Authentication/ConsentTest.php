@@ -16,7 +16,7 @@ class ConsentTest extends \PHPUnit_Framework_TestCase
         $this->consent = new Consent();
     }
 
-    public function testSetAndGetClientIdAndTenantId ()
+    public function testSetAndGetClientIdAndTenantId()
     {
         $this->consent->setClientId('client');
         $this->assertEquals('client', $this->consent->getClientId());

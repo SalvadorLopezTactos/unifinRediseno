@@ -7,40 +7,35 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-@passwordManagement @oidc
+@passwordManagement @oidc @extended
 Feature: Password Management
   Verify Password Management page in SugarCRM
   Verify Password Management link in SugarCRM
-  Verify Forgot password page in SugarCRM
 
   Scenario: Verify Password Management page in SugarCRM
     Given I am on the homepage
     And I wait until the loading is completed
-    Given I login as "admin" with password "admin"
+    Then I should see IdP login page
+    Given I do IdP login as "admin" with password "admin"
     And I wait until the loading is completed
     And I wait for the page to be loaded
+    And I skip login wizard
     When I go to "/index.php?module=Administration&action=PasswordManager"
     And I switch to BWC
     And I wait for the element "#contentTable"
-    Then I should see "This option is disabled in SugarCRM for IDM mode and available in Cloud Console"
-    When I switch to sidecar
-    When I click "#userList"
-    And I click ".profileactions-logout"
+    Then I should see "Password Management is only available in Cloud Settings"
+    And I logout
 
   Scenario: Verify Password Management link in SugarCRM
     Given I am on the homepage
     And I wait until the loading is completed
-    Given I login as "admin" with password "admin"
+    Then I should see IdP login page
+    Given I do IdP login as "admin" with password "admin"
     And I wait until the loading is completed
     And I wait for the page to be loaded
+    And I skip login wizard
+    And I wait for element "#userList"
     And I go to administration
     And I follow "Password Management"
     Then The document should open in a new tab with url "http://console.sugarcrm.local/password-management"
-    When I click "#userList"
-    And I click ".profileactions-logout"
-
-  Scenario: Verify Forgot password page in SugarCRM
-    Given I am on the homepage
-    And I wait until the loading is completed
-    Then I click "[href='#forgotpassword']"
-    Then I should be on "http://console.sugarcrm.local/forgot-password/srn%3Acloud%3Aidp%3Aeu%3A0000000001%3Atenant"
+    And I logout

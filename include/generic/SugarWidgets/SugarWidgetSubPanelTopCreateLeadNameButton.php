@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: SugarWidgetSubPanelTopCreateLeadNameButton.php 38393 2008-07-29 19:44:00Z Collin Lee $
 
 
 

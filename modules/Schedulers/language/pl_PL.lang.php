@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Utwórz przyszłe przedziały czasowe',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Aktualizuj artykuły KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikuj zatwierdzone artykuły i zakończ ważność artykułów bazy wiedzy.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Zaplanowane zadanie Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikuj zatwierdzone artykuły i przedawnione artykuły bazy wiedzy.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Zaplanowane zadanie',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Odbuduj zdenormalizowane dane bezpieczeństwa zespołu',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Sprawdź konta poczty przychodzącej',
 'LBL_PERFORMFULLFTSINDEX' => 'System indeksowania wyszukiwania pełnotekstowego',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Usuń tymczasowe pliki PDF',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikuj zatwierdzone artykuły i zakończ ważność artykułów bazy wiedzy.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikuj zatwierdzone artykuły i przedawnione artykuły bazy wiedzy.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Narzędzie harmonogramowania kolejki wyszukiwania Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Usuń pliki diagnostyczne',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Usuń pliki tymczasowe',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Uruchom wysyłanie przypomnienia pocztą e-mail',
 'LBL_CLEANJOBQUEUE' => 'Wyczyść kolejkę zadania',
 'LBL_CLEANOLDRECORDLISTS' => 'Wyczyść stare listy rekordów',
-'LBL_PMSEENGINECRON' => 'Program planujący Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Harmonogram SugarBPM',
 );
 

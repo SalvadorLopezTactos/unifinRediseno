@@ -185,9 +185,13 @@ SUGAR.util.doWhen("typeof($) != 'undefined'", function()
     {literal}
     if ($("#" + targetId).length > 0)
     {
-        var data = $.parseJSON($("#" + targetId).val());
-        if (data && data.values)
-            mapping = data.values;
+        var val = $("#" + targetId).val();
+        if (val) {
+            var data = JSON.parse(val);
+            if (data && data.values) {
+                mapping = data.values;
+            }
+        }
     }
     //Initialize the grids if mapping wasn't empty
     var p = $("#childTable");

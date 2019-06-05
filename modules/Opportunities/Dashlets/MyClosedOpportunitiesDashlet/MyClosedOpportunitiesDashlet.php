@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: MyOpportunitiesDashlet.php 24647 2007-07-26 00:21:25Z awu $
 
 
 class MyClosedOpportunitiesDashlet extends Dashlet 

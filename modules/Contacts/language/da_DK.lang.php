@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiér alternativ adresse til primær adresse',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiér primær adresse til alternativ adresse',
     'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en konto.\\n Opret en ny konto, eller vælg en eksisterende.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en konto.\n Opret en ny konto, eller vælg en eksisterende.',
     'NTC_REMOVE_CONFIRMATION' => 'Er du sikker på, at du vil fjerne denne kontakt fra sagen?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Er du sikker på, at du vil fjerne denne post som en direkte rapport?',
 

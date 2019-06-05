@@ -10,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: process_workflow.php 56510 2010-05-17 18:54:49Z jenny $
 
 
 global $app_list_strings, $app_strings, $current_language;

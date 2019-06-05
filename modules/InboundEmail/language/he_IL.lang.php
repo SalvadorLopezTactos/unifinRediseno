@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'תגובה:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'פרטי כניסה או סיסמה לא נכונים',
-	'ERR_BODY_TOO_LONG'		=> '\\rגוף טקסט ארוך מדי כדי לתפוס דוא"ל מלא. גזור.',
+	'ERR_BODY_TOO_LONG'		=> '\rגוף טקסט ארוך מדי כדי לתפוס דוא"ל מלא. גזור.',
 	'ERR_INI_ZLIB'			=> 'לא ניתן לכבות דחיסת zlib זמנית. "בדוק הגדרות" עלול להיכשל.',
 	'ERR_MAILBOX_FAIL'		=> 'לא ניתן לאחזר חשבונות דואר.',
 	'ERR_NO_IMAP'			=> 'לא נמצאו ספריות IMAP. אנא פתור את זה לפני שתמשיך עם דוא"ל נכנס',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'תורי Seed מצוותים',
 	'LBL_GROUPFOLDER_ID'	=> 'מזהה תיקיית קבוצה',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'הקצה לתיקיית קבוצה',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'הרשה למשתמשים לשלוח הודעות דוא"ל באמצעות שם וכתובת "מאת" בתור התגובה לכתובת',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'כאשר אפשרות זו נבחרת, שם מאת וכתובת הדוא"ל מאת המושיכים לחשבון דואר קבוצתי זה יופיעו בתור אפשרות עבור השדה &#39;מאת&#39; בעת חיבור הודעות דוא"ל עבור משתמשים בעלי גישה לחשבון הדואר הקבוצתי.',
     'LBL_STATUS_ACTIVE'     => 'Active',
     'LBL_STATUS_INACTIVE'   => 'Inactive',
     'LBL_IS_PERSONAL' => 'אישי',

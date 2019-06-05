@@ -85,6 +85,9 @@ function make_sugar_config(&$sugar_config)
     'calculate_response_time' => empty($calculate_response_time) ? true : $calculate_response_time,
     'create_default_user' => empty($create_default_user) ? false : $create_default_user,
     'chartEngine' => 'sucrose',
+    'commentlog' => array(
+        'maxchars' => 500,
+    ),
     'date_formats' => empty($dateFormats) ? array(
     'Y-m-d'=>'2010-12-23',
     'd-m-Y' => '23-12-2010',
@@ -246,10 +249,17 @@ function get_sugar_config_defaults()
     'oauth_token_life' => 86400, // 60*60*24
     'oauth_token_expiry' => 0,
     'admin_export_only' => false,
+    'processes_auto_validate_on_import' => true,
+    'processes_auto_validate_on_autosave' => true,
+    'processes_auto_save_interval' => 30000,
+    'error_number_of_cycles' =>  '10',
     'export_delimiter' => ',',
     'export_excel_compatible' => false,
     'cache_dir' => 'cache/',
     'calculate_response_time' => true,
+    'commentlog' => array(
+        'maxchars' => 500,
+    ),
     'create_default_user' => false,
     'chartEngine' => 'sucrose',
     'date_formats' => array (
@@ -273,6 +283,7 @@ function get_sugar_config_defaults()
     'default_currency_iso4217' => return_session_value_or_default('default_currency_iso4217', 'USD'),
     'default_currency_significant_digits' => return_session_value_or_default('default_currency_significant_digits', 2),
     'default_currency_show_preferred' => false,
+        'currency_create_in_preferred' => false,
     'default_number_grouping_seperator' => return_session_value_or_default('default_number_grouping_seperator', ','),
     'default_decimal_seperator' => return_session_value_or_default('default_decimal_seperator', '.'),
     'default_date_format' => 'm/d/Y',
@@ -445,7 +456,6 @@ function get_sugar_config_defaults()
         'roleBasedViews' => true,
         'pmse_settings_default' => array(
             'logger_level' => 'critical',
-            'error_number_of_cycles' =>  '10',
             'error_timeout' => '40',
         ),
         'sugar_min_int' => -2147483648,
@@ -462,6 +472,16 @@ function get_sugar_config_defaults()
             // minutes) for multiple Data Privacy records to be grouped in a single job before going into execution.
             'erasure_job_delay' => 0,
         ],
+        'idm_mode' => [
+            'enabled' => false,
+        ],
+        'marketing_extras_enabled' => true,
+        'marketing_extras_url' => 'https://marketing.sugarcrm.com/content',
+        'analytics' => array(
+            'enabled' => true,
+            'connector' => 'Pendo',
+            'id' => '1dd345e9-b638-4bd2-7bfb-147a937d4728',
+        ),
     );
 
     if (empty($locale)) {
@@ -2369,28 +2389,17 @@ function cleanup_slashes($value)
 
 function set_register_value($category, $name, $value)
 {
-    return sugar_cache_put("{$category}:{$name}", $value);
+    return sugar_cache_put("{$category}-{$name}", $value);
 }
 
 function get_register_value($category,$name)
 {
-    return sugar_cache_retrieve("{$category}:{$name}");
+    return sugar_cache_retrieve("{$category}-{$name}");
 }
 
 function clear_register_value($category,$name)
 {
-    return sugar_cache_clear("{$category}:{$name}");
-}
-// this function cleans id's when being imported
-function convert_id($string)
-{
-    return preg_replace_callback( '|[^A-Za-z0-9\-]|',
-    create_function(
-    // single quotes are essential here,
-    // or alternative escape all $ as \$
-    '$matches',
-    'return ord($matches[0]);'
-         ) ,$string);
+    return sugar_cache_clear("{$category}-{$name}");
 }
 
 /**
@@ -3023,22 +3032,26 @@ function decodeJavascriptUTF8($str)
 }
 
 /**
- * Will check if a given PHP version string is supported (tested on this ver),
- * unsupported (results unknown), or invalid (something will break on this
- * ver).  Do not pass in any pararameter to default to a check against the
- * current environment's PHP version.
+ * Will check if a given PHP version string is supported.
+ * Do not pass in any parameter to default to a check against the current environment's PHP version.
  *
- * @return 1 implies supported, -1 implies unsupported
+ * @param string $version The version to check
+ *
+ * @return int 1 implies supported, -1 implies unsupported
  */
-function check_php_version($sys_php_version = '')
+function check_php_version(string $version = PHP_VERSION)
 {
-    $sys_php_version = empty($sys_php_version) ? constant('PHP_VERSION') : $sys_php_version;
-
-    if (version_compare($sys_php_version, '7.1.0', '<')) {
+    if (version_compare($version, '7.1.0', '<')) {
         return -1;
     }
 
-    if (version_compare($sys_php_version, '7.2.0-dev', '>=')) {
+    if (version_compare($version, '7.2.0-dev', '>=')
+        && version_compare($version, '7.3.0', '<')
+    ) {
+        return -1;
+    }
+
+    if (version_compare($version, '7.4.0-dev', '>=')) {
         return -1;
     }
 
@@ -3149,7 +3162,6 @@ function sugar_cleanup($exit = false)
         if ($exit) exit; else return;
     }
 
-    Tracker::logPage();
     // Now write the cached tracker_queries
     if (class_exists("TrackerManager")) {
         $trackerManager = TrackerManager::getInstance();
@@ -5810,4 +5822,15 @@ function validate_ip($clientIp, $sessionIp)
 
     return $isValidIP;
 
+}
+
+/**
+ * Generate sha256 hash with $site_url as salt
+ * @param string $str String to be hashed
+ * @return string Hash value
+ */
+function getSiteHash(string $str): string
+{
+    $url = Container::getInstance()->get(SugarConfig::class)->get('site_url');
+    return hash('sha256', $url . $str);
 }

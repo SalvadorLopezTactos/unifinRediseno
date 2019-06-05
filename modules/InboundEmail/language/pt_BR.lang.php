@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login ou senha incorretos',
-	'ERR_BODY_TOO_LONG'		=> '\\rCorpo de texto longo demais para capturar o e-mail completo. Ajustado.',
+	'ERR_BODY_TOO_LONG'		=> '\rCorpo de texto longo demais para capturar o e-mail completo. Ajustado.',
 	'ERR_INI_ZLIB'			=> 'Não foi possível desativar a compressão Zlib temporariamente. A opção "Testar configurações" pode falhar.',
 	'ERR_MAILBOX_FAIL'		=> 'Não foi possível recuperar nenhuma conta de e-mail.',
 	'ERR_NO_IMAP'			=> 'Nenhuma biblioteca IMAP encontrada. Resolva este problema antes de prosseguir com o e-mail de entrada',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Alimentar filas das equipes',
 	'LBL_GROUPFOLDER_ID'	=> 'ID de pasta de grupo',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Atribuir a pasta de grupo',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Permitir aos usuários enviar e-mails usando o nome e o endereço do remetente como o endereço para a resposta',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Quando esta opção estiver selecionada, o nome e o endereço de e-mail do remetente associados a esta conta de e-mail do grupo aparecerão como uma opção para o campo Remetente ao escrever e-mails para usuários que têm acesso à conta de e-mail do grupo.',
     'LBL_STATUS_ACTIVE'     => 'Ativo',
     'LBL_STATUS_INACTIVE'   => 'Inativo',
     'LBL_IS_PERSONAL' => 'pessoal',

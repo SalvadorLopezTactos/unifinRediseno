@@ -261,7 +261,7 @@ NotePanel.prototype.addLog = function (options) {
     $(buttonAnchor).click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        self.app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+        self.app.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
 
         url = self.app.api.buildURL('pmse_Inbox/delete_notes/'+newItem.logId, null, null);
         self.app.api.call('delete', url, {}, {

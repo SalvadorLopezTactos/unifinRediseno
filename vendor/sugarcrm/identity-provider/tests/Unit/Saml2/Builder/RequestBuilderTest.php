@@ -12,6 +12,10 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2\Builder;
 
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\AuthnRequest;
+use OneLogin\Saml2\LogoutRequest;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\AuthRedirectBinding;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
@@ -28,7 +32,7 @@ use Sugarcrm\IdentityProvider\Saml2\Request\LogoutPostRequest;
 class RequestBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \OneLogin_Saml2_Settings | \PHPUnit_Framework_MockObject_MockObject
+     * @var Settings | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $settingsMock = null;
 
@@ -39,7 +43,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->settingsMock = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settingsMock = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -52,10 +56,10 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildLoginRequest()
     {
         $request = 'PG5vdGU+DQogIDx0bz5UZXN0PC90bz4NCjwvbm90ZT4=';
-        $authMock = $this->getMockBuilder(\OneLogin_Saml2_Auth::class)->disableOriginalConstructor()->getMock();
+        $authMock = $this->getMockBuilder(Auth::class)->disableOriginalConstructor()->getMock();
         $authMock->method('getSettings')->willReturn($this->settingsMock);
         $requestBuilder = new RequestBuilder($authMock);
-        $this->assertInstanceOf(\OneLogin_Saml2_AuthnRequest::class, $requestBuilder->buildLoginRequest($request));
+        $this->assertInstanceOf(AuthnRequest::class, $requestBuilder->buildLoginRequest($request));
     }
 
     /**
@@ -66,8 +70,8 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'OneLoginAuth' => [
-                'authClass' => \OneLogin_Saml2_Auth::class,
-                'expectedRequest' => \OneLogin_Saml2_LogoutRequest::class,
+                'authClass' => Auth::class,
+                'expectedRequest' => LogoutRequest::class,
             ],
             'IdmAuth' => [
                 'authClass' => AuthPostBinding::class,
@@ -75,7 +79,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
             ],
             'IdmAuthRedirect' => [
                 'authClass' => AuthRedirectBinding::class,
-                'expectedRequest' => \OneLogin_Saml2_LogoutRequest::class,
+                'expectedRequest' => LogoutRequest::class,
             ],
         ];
     }
@@ -102,7 +106,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $logoutRequest = $requestBuilder->buildLogoutRequest(null, $parameters);
         $this->assertInstanceOf($expectedRequest, $logoutRequest);
         $xmlRequest = base64_decode($logoutRequest->getRequest());
-        $this->assertEquals('test@test.com', \OneLogin_Saml2_LogoutRequest::getNameId($xmlRequest));
-        $this->assertEquals('sIndex', \OneLogin_Saml2_LogoutRequest::getSessionIndexes($xmlRequest)[0]);
+        $this->assertEquals('test@test.com', LogoutRequest::getNameId($xmlRequest));
+        $this->assertEquals('sIndex', LogoutRequest::getSessionIndexes($xmlRequest)[0]);
     }
 }

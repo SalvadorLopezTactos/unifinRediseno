@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: project_relationMetaData.php 16161 2006-08-19 01:02:51 +0000 (Sat, 19 Aug 2006) majed $
 
 $dictionary['project_task_project_tasks'] = array(
 	'table' => 'project_task_project_tasks',

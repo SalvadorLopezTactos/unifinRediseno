@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Slett',
     'LBL_MODULE_NAME' => 'E-postadresser',
     'LBL_MODULE_NAME_SINGULAR' => 'E-postadresse',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Bekreftelsesforespørselshandling tatt',
+    'LBL_CONFIRMATION_TITLE' => 'Takk',
+    'LBL_CONFIRMATION_MESSAGE' => 'Abonnementet ditt har blitt bekreftet. Du har blitt lagt til listen vår og hører snart fra oss.',
 );

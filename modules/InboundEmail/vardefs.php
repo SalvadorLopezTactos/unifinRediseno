@@ -16,7 +16,6 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'vname' => 'LBL_ID',
 			'type' => 'id',
 			'dbType' => 'varchar',
-			'len' => 36,
 			'required' => true,
 			'reportable'=>false,
 			'comment' => 'Unique identifier'
@@ -184,7 +183,6 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'name' => 'template_id',
 			'vname' => 'LBL_AUTOREPLY',
 			'type' => 'id',
-			'len' => '36',
 			'reportable' => false,
 			'comment' => 'Template used for auto-reply'
 		),

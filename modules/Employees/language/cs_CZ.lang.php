@@ -145,7 +145,7 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'E-mailová adresa',
   'LBL_CONTACTS_SYNC' => 'Kontakty',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'Zaměstnanec může být vytvořen pouze v <a href="{0}" target="_blank">Cloudové konzoli</a> pro režim IDM.',
+        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
 );
 
 

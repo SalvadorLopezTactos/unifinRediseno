@@ -35,7 +35,7 @@ class ConsentRepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Sugarcrm\IdentityProvider\App\Repository\Exception\ConsentNotFoundException
      */
     public function testFindConsentByClientIdAndTenantIdNotExist()
     {

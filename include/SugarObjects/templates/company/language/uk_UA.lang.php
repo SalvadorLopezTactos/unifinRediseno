@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Ініціювати процес оплати',
 	'LBL_PUSH_SHIPPING' => 'Ініціювати процес доставки',
 	'LBL_SAVE_ACCOUNT' => 'Зберегти контрагент',
+    'LBL_SERVICE_LEVEL' => 'Рівень обслуговування',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Фактична адреса - Місто:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Фактична адреса - Область:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Фактична адреса - Поштовий індекс:',

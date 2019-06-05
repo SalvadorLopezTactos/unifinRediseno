@@ -67,11 +67,11 @@ class SugarQuery
     public $where;
 
     /**
+     * JOIN objects indexed by their target table alias
+     *
      * @var SugarQuery_Builder_Join[]
      */
     public $join = array();
-
-    protected $joined_tables = array();
 
     protected $jt_index = 0;
 
@@ -537,8 +537,7 @@ class SugarQuery
             if ($field) {
                 $targetTableJoin = $this->join[$this->rname_link];
                 $relationshipTableAlias = $targetTableJoin->relationshipTableAlias;
-                $relateTableJoinKey = $this->joinTableToKey[$relationshipTableAlias];
-                $this->join[$relateTableJoinKey]->on()->equals(
+                $this->join[$relationshipTableAlias]->on()->equals(
                     $relationshipTableAlias . '.' . $field,
                     $options['baseBeanId']
                 );

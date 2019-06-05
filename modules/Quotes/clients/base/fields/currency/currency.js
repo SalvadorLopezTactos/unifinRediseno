@@ -40,6 +40,25 @@
     },
 
     /**
+     * Needed to override loadTemplate to check field permissions for Quotes header and footer views
+     *
+     * @inheritdoc
+     */
+    _loadTemplate: function() {
+        var viewName = this.view.name;
+        if ((viewName === 'quote-data-grand-totals-header' || viewName === 'quote-data-grand-totals-footer') &&
+            !this._checkAccessToAction('list')) {
+            // set the action to noaccess so the field template will get the right class
+            this.action = 'noaccess';
+            // if this is a header or footer currency field and there's no access, show noaccess
+            this.tplName = 'noaccess-' + viewName;
+            this.template = app.template.getField('currency', this.tplName, this.module);
+        } else {
+            this._super('_loadTemplate');
+        }
+    },
+
+    /**
      * Updates `this.valuePercent` for the deal_tot field in the quote-data-grand-totals-header view.
      *
      * @private

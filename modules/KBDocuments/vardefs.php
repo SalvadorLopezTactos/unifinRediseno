@@ -26,6 +26,7 @@ $dictionary['KBDocument'] = array(
     ),
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 VardefManager::createVardef(

@@ -13,11 +13,12 @@ namespace Symfony\Bridge\Twig\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Lists twig functions, filters, globals and tests present in the current project.
@@ -26,18 +27,35 @@ use Twig\Environment;
  */
 class DebugCommand extends Command
 {
+    protected static $defaultName = 'debug:twig';
+
     private $twig;
+    private $projectDir;
 
     /**
-     * {@inheritdoc}
+     * @param Environment $twig
+     * @param string|null $projectDir
      */
-    public function __construct($name = 'debug:twig')
+    public function __construct($twig = null, $projectDir = null)
     {
-        parent::__construct($name);
+        if (!$twig instanceof Environment) {
+            @trigger_error(sprintf('Passing a command name as the first argument of "%s()" is deprecated since Symfony 3.4 and support for it will be removed in 4.0. If the command was registered by convention, make it a service instead.', __METHOD__), E_USER_DEPRECATED);
+
+            parent::__construct($twig);
+
+            return;
+        }
+
+        parent::__construct();
+
+        $this->twig = $twig;
+        $this->projectDir = $projectDir;
     }
 
     public function setTwigEnvironment(Environment $twig)
     {
+        @trigger_error(sprintf('The "%s()" method is deprecated since Symfony 3.4 and will be removed in 4.0.', __METHOD__), E_USER_DEPRECATED);
+
         $this->twig = $twig;
     }
 
@@ -46,16 +64,18 @@ class DebugCommand extends Command
      */
     protected function getTwigEnvironment()
     {
+        @trigger_error(sprintf('The "%s()" method is deprecated since Symfony 3.4 and will be removed in 4.0.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->twig;
     }
 
     protected function configure()
     {
         $this
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('filter', InputArgument::OPTIONAL, 'Show details for all entries matching this filter'),
                 new InputOption('format', null, InputOption::VALUE_REQUIRED, 'The output format (text or json)', 'text'),
-            ))
+            ])
             ->setDescription('Shows a list of twig functions, filters, globals and tests')
             ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command outputs a list of twig functions,
@@ -80,22 +100,31 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $twig = $this->getTwigEnvironment();
 
-        if (null === $twig) {
+        // BC to be removed in 4.0
+        if (__CLASS__ !== \get_class($this)) {
+            $r = new \ReflectionMethod($this, 'getTwigEnvironment');
+            if (__CLASS__ !== $r->getDeclaringClass()->getName()) {
+                @trigger_error(sprintf('Usage of method "%s" is deprecated since Symfony 3.4 and will no longer be supported in 4.0. Construct the command with its required arguments instead.', \get_class($this).'::getTwigEnvironment'), E_USER_DEPRECATED);
+
+                $this->twig = $this->getTwigEnvironment();
+            }
+        }
+        if (null === $this->twig) {
             throw new \RuntimeException('The Twig environment needs to be set.');
         }
 
-        $types = array('functions', 'filters', 'tests', 'globals');
+        $types = ['functions', 'filters', 'tests', 'globals'];
 
         if ('json' === $input->getOption('format')) {
-            $data = array();
+            $data = [];
             foreach ($types as $type) {
-                foreach ($twig->{'get'.ucfirst($type)}() as $name => $entity) {
+                foreach ($this->twig->{'get'.ucfirst($type)}() as $name => $entity) {
                     $data[$type][$name] = $this->getMetadata($type, $entity);
                 }
             }
             $data['tests'] = array_keys($data['tests']);
+            $data['loader_paths'] = $this->getLoaderPaths();
             $io->writeln(json_encode($data));
 
             return 0;
@@ -104,8 +133,8 @@ EOF
         $filter = $input->getArgument('filter');
 
         foreach ($types as $index => $type) {
-            $items = array();
-            foreach ($twig->{'get'.ucfirst($type)}() as $name => $entity) {
+            $items = [];
+            foreach ($this->twig->{'get'.ucfirst($type)}() as $name => $entity) {
                 if (!$filter || false !== strpos($name, $filter)) {
                     $items[$name] = $name.$this->getPrettyMetadata($type, $entity);
                 }
@@ -121,7 +150,60 @@ EOF
             $io->listing($items);
         }
 
+        $rows = [];
+        $firstNamespace = true;
+        $prevHasSeparator = false;
+        foreach ($this->getLoaderPaths() as $namespace => $paths) {
+            if (!$firstNamespace && !$prevHasSeparator && \count($paths) > 1) {
+                $rows[] = ['', ''];
+            }
+            $firstNamespace = false;
+            foreach ($paths as $path) {
+                $rows[] = [$namespace, $path.\DIRECTORY_SEPARATOR];
+                $namespace = '';
+            }
+            if (\count($paths) > 1) {
+                $rows[] = ['', ''];
+                $prevHasSeparator = true;
+            } else {
+                $prevHasSeparator = false;
+            }
+        }
+        if ($prevHasSeparator) {
+            array_pop($rows);
+        }
+        $io->section('Loader Paths');
+        $io->table(['Namespace', 'Paths'], $rows);
+
         return 0;
+    }
+
+    private function getLoaderPaths()
+    {
+        if (!($loader = $this->twig->getLoader()) instanceof FilesystemLoader) {
+            return [];
+        }
+
+        $loaderPaths = [];
+        foreach ($loader->getNamespaces() as $namespace) {
+            $paths = array_map(function ($path) {
+                if (null !== $this->projectDir && 0 === strpos($path, $this->projectDir)) {
+                    $path = ltrim(substr($path, \strlen($this->projectDir)), \DIRECTORY_SEPARATOR);
+                }
+
+                return $path;
+            }, $loader->getPaths($namespace));
+
+            if (FilesystemLoader::MAIN_NAMESPACE === $namespace) {
+                $namespace = '(None)';
+            } else {
+                $namespace = '@'.$namespace;
+            }
+
+            $loaderPaths[$namespace] = $paths;
+        }
+
+        return $loaderPaths;
     }
 
     private function getMetadata($type, $entity)
@@ -137,16 +219,16 @@ EOF
             if (null === $cb) {
                 return;
             }
-            if (is_array($cb)) {
+            if (\is_array($cb)) {
                 if (!method_exists($cb[0], $cb[1])) {
                     return;
                 }
                 $refl = new \ReflectionMethod($cb[0], $cb[1]);
-            } elseif (is_object($cb) && method_exists($cb, '__invoke')) {
+            } elseif (\is_object($cb) && method_exists($cb, '__invoke')) {
                 $refl = new \ReflectionMethod($cb, '__invoke');
-            } elseif (function_exists($cb)) {
+            } elseif (\function_exists($cb)) {
                 $refl = new \ReflectionFunction($cb);
-            } elseif (is_string($cb) && preg_match('{^(.+)::(.+)$}', $cb, $m) && method_exists($m[1], $m[2])) {
+            } elseif (\is_string($cb) && preg_match('{^(.+)::(.+)$}', $cb, $m) && method_exists($m[1], $m[2])) {
                 $refl = new \ReflectionMethod($m[1], $m[2]);
             } else {
                 throw new \UnexpectedValueException('Unsupported callback type');
@@ -196,8 +278,8 @@ EOF
         }
 
         if ('globals' === $type) {
-            if (is_object($meta)) {
-                return ' = object('.get_class($meta).')';
+            if (\is_object($meta)) {
+                return ' = object('.\get_class($meta).')';
             }
 
             return ' = '.substr(@json_encode($meta), 0, 50);

@@ -33,17 +33,21 @@
     </thead>
     <tbody>
         <tr>
-            <td>N/A</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>selectedIds</td>
+            <td>array</td>
+            <td>A list of IDs for dependent elements to import.</td>
+            <td>False</td>
         </tr>
     </tbody>
 </table>
 
 <h3>Request</h3>
 <strong>Note:</strong> A JSON encoded .bpm file attachment should be included with
-the request as part of the form-data.
+the request as part of the form-data. An optional array of IDs can be included to indicate
+which dependent Business Rules and Email Templates to import and link with the Process Definition.
+The file must contain the metadata for the dependent elements as well for the selectedIds to be used.
+
+<strong>Important:</strong> The request format must be multipart/form-data.
 
 <h2>Response Arguments</h2>
 <table class="table table-hover">
@@ -75,3 +79,30 @@ the request as part of the form-data.
     }
 }
 </pre>
+
+<h2>Compatibility</h2>
+SugarBPM<sup class="trademark">TM</sup> files exported from Sugar version 7.6.1.0 or earlier cannot be imported to Sugar instances running 7.6.2.0 or later.
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    <tr>
+        <td>
+            v11_2
+        </td>
+        <td>
+            Added support for <code>selectedIds</code> to specify which dependent elements to import.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            v10
+        </td>
+        <td>
+            Added <code>/pmse_Project/file/project_import</code> POST endpoint.
+        </td>
+    </tr>
+</table>

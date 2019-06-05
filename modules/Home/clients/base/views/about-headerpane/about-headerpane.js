@@ -15,13 +15,35 @@
  */
 ({
     extendsFrom: 'HeaderpaneView',
+
     /**
      * @override
      *
      * Formats the title with the current server info.
      */
     _formatTitle: function(title) {
-        var marketingVersion = '(Spring \'18)';
-        return app.lang.get(title, this.module, app.metadata.getServerInfo()) + ' ' + marketingVersion;
+        var serverInfo = app.metadata.getServerInfo();
+        return app.lang.get(title, this.module, serverInfo) + this._getMarketingVersion(serverInfo.marketing_version);
+    },
+
+    /**
+     * Gets the marketing version, formatted for presentation on the UI
+     * @param {string} ver The marketing version before formatting
+     * @return {string}
+     * @private
+     */
+    _getMarketingVersion: function(ver) {
+        // If ver is null or undefined, reset it
+        ver = ver || '';
+
+        // Clean it up for sanity
+        ver = ver.trim();
+
+        // If the version has content, wrap it in parens
+        if (ver !== '') {
+            ver = ' (' + ver + ')';
+        }
+
+        return ver;
     }
 })

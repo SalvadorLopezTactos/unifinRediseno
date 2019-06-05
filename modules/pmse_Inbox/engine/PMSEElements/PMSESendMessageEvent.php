@@ -110,8 +110,8 @@ class PMSESendMessageEvent extends PMSEIntermediateEvent
             $this->sendEmail($flowData);
             return $this->prepareResponse($flowData, 'NONE', 'NONE');
         } else {
-            $flowData['cas_flow_status'] = 'QUEUE';
-            return $this->prepareResponse($flowData, 'QUEUE', 'CREATE');
+            $this->emailHandler->queueEmail($flowData);
+            return $this->prepareResponse($flowData, 'ROUTE', 'UPDATE');
         }
     }
 
@@ -136,6 +136,4 @@ class PMSESendMessageEvent extends PMSEIntermediateEvent
             if (isset($this->logger)) $this->logger->error($result['ErrorMessage']);
         }
     }
-
-
 }

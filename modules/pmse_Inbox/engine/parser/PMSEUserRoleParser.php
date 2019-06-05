@@ -18,7 +18,7 @@
  * and in each group there current_user,owner and supervisor
  *
  */
-class PMSEUserRoleParser implements PMSEDataParserInterface
+class PMSEUserRoleParser extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     /**
      * Object bean
@@ -159,7 +159,7 @@ class PMSEUserRoleParser implements PMSEDataParserInterface
         $newTokenArray = array('{', 'future', 'Users', 'id', '}');
         $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
         $criteriaToken->expToken = $assembledTokenString;
-        $criteriaToken->currentValue = $tokenValue;
+        $criteriaToken->currentValue = array($tokenValue);
         return $criteriaToken;
     }
 

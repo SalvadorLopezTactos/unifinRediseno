@@ -40,7 +40,7 @@ class WorkFlowViewList extends ViewList
 
         // Add in our sunset message and add back the closing clearing div that
         // was removed earlier
-        $title .= '<span class="error workflow-sunset">' . translate('LBL_WORKFLOW_SUNSET_NOTICE', $this->module) . '</span></div>';
+        $title .= '<span class="workflow-sunset">' . translate('LBL_WORKFLOW_SUNSET_NOTICE', $this->module) . '</span></div>';
 
         return $title;
     }

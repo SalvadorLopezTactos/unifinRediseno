@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'حذف',
     'LBL_MODULE_NAME' => 'عناوين البريد الإلكتروني',
     'LBL_MODULE_NAME_SINGULAR' => 'عنوان البريد الإلكتروني',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'تم اتخاذ إجراء طلب التأكيد',
+    'LBL_CONFIRMATION_TITLE' => 'شكرًا لك',
+    'LBL_CONFIRMATION_MESSAGE' => 'تم تأكيد اشتراكك. تمت إضافتك إلى قائمتنا وسوف نتواصل معك قريبًا.',
 );

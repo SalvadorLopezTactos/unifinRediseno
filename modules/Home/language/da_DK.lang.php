@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - En simpel SAML toolkit til PHP',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Overløbet: Rul for et mobil webkit. Født rulning i et element med fast højde/bredde.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas er et JavaScript bibliotek som tilføjer HTML5 lærred støtte til Internet Explorer. Det laver former og billeder via Flash tegning API. Det understøtter stort set alle lærreder og i mange tilfælde virker hurtigere en tilsvarende bibliotekter som bruger VML eller Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - The JavaScript InfoVis Toolkit levere værktøjer for at lave kreative interaktive data visualisering for Webben.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Et open source, object orienteret web applikations framework til PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV data parser til PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - Brug PHP funktioner i JavaScript',

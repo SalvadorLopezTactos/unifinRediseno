@@ -37,7 +37,7 @@ class ConsentRepository
         );
 
         if (empty($data)) {
-            throw new \RuntimeException('Consent not found.');
+            throw new Exception\ConsentNotFoundException('Consent not found');
         }
         
         return (new Consent())

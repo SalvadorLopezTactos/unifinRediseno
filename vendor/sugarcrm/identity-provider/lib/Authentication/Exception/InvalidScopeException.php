@@ -14,6 +14,6 @@ class InvalidScopeException extends AuthenticationException
      */
     public function getMessageKey()
     {
-        return 'Invalid scope.';
+        return 'Invalid scope';
     }
 }

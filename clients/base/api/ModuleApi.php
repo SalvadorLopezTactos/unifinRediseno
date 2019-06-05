@@ -345,8 +345,10 @@ class ModuleApi extends SugarApi {
         $api->action = 'save';
         $this->requireArgs($args,array('module'));
 
-        // Users can be created only in cloud console for IDM mode mode.
-        if (in_array($args['module'], $this->idmModeDisabledModules) && $this->isIDMModeEnabled()) {
+        // Users can be created only in cloud console for IDM mode.
+        if (in_array($args['module'], $this->idmModeDisabledModules)
+                && $this->isIDMModeEnabled()
+                && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
         }
 
@@ -486,8 +488,10 @@ class ModuleApi extends SugarApi {
     {
         $this->requireArgs($args,array('module','record'));
 
-        // Users can be deleted only in cloud console for IDM mode mode.
-        if (in_array($args['module'], $this->idmModeDisabledModules) && $this->isIDMModeEnabled()) {
+        // Users can be deleted only in cloud console for IDM mode.
+        if (in_array($args['module'], $this->idmModeDisabledModules)
+                && $this->isIDMModeEnabled()
+                && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
         }
 

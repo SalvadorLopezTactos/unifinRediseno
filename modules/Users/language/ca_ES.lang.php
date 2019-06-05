@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Assignar a equip',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Equip per defecte per nous registres',
 	'LBL_DEFAULT_TEAM'					=> 'Equip per defecte',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Equip Principal per Defecte',
 	'LBL_LIST_DESCRIPTION'				=> 'Descripció',
 	'LBL_MY_TEAMS'						=> 'Els Meus Equips',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Equip privat per',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Correu electrònic del Destinatari',
 	'ERR_SERVER_STATUS'					=> 'L&#39;estat del seu servidor',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'El sistema no pot enviar correu a l&#39;usuari. Si us plau, comprovi la Configuració´de Correu sortint en la <a href="index.php?module=EmailMan&action=config">Configuració de Correu</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'L&#39;usuari només es pot crear en la <a href="{0}" target="_blank">Consola del núvol</a> per al mode IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'L&#39;adreça de correu electrònic principal només es pot actualitzar en la <a href="{0}" target="_blank">Consola del núvol</a> per al mode IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adreça electrònica',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirmar clau de pas',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Ha canviat el tipus d\\&#39;usuari d\\&#39;Usuari Administrador del Sistema a Usuari Normal. Després de guardar aquest canvi, l\\&#39;usuari ja no tindrà privilegis d\\&#39;administrador del sistema.\\n\\n Faci clic a "OK" per a procedir.\\n Faci clic a "Cancelar" per a tornar al registre.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Ha canviat el tipus d\&#39;usuari d\&#39;Usuari Administrador del Sistema a Usuari Normal. Després de guardar aquest canvi, l\&#39;usuari ja no tindrà privilegis d\&#39;administrador del sistema.\n\n Faci clic a "OK" per a procedir.\n Faci clic a "Cancelar" per a tornar al registre.',
 	'LBL_COUNTRY'						=> 'País',
 	'LBL_CURRENCY_TEXT'					=> 'Estableix la moneda per defecte',
 	'LBL_CURRENCY'						=> 'Moneda',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Nombre de llocs decimals que es mostrarán per a decimals i punts flotants al sistema, com ara moneda i mitjanes a informes.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Mostra la moneda preferida',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Converteix la moneda base a la preferida de l&#39;usuari en el llistat i vistes de registre.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Creeu elements de línia d&#39;ingressos en la moneda preferida',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Els elements de línia ingressos afegits a una oportunitat del catàleg de productes es convertiran a la moneda preferida de l&#39;usuari, si aquesta és diferent de la moneda utilitzada en l&#39;element del catàleg de productes.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Separador de milers',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Caràcter emprat per separar les unitats de millar',
 	'LBL_DECIMAL_SEP'					=> 'Símbol decimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Proporcioni tant un nom d&#39;Ususari com un Correu Electrònic.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Això actualment no està habilitat. Si us plau, poseu-vos en contacte amb l&#39;administrador.',
 	'LBL_PUBLISH_KEY'					=> 'Clau de Publicació',
-
+    'LBL_SITE_USER_ID' => 'Hash de site_url and user_id',
     'LBL_QUOTAS'                        => 'Quotes',
     'LBL_FORECASTS'                     => 'Previsions',
     'LBL_WORKSHEETS'                    => 'Fulls de treball',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Perfil d&#39;usuari',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Si certs camps no són editables, connecteu-vos a la vostra Consola de núvol per gestionar aquests camps',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Si voleu canviar determinats camps que no són editables, ' .
-        'contacteu amb l&#39;administrador per notificar-li aquests canvis',
+        'Contacteu amb el vostre administrador de Sugar si voleu fer canvis als camps de només lectura.',
 ); // END STRINGS DEFS
-
-?>

@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '보조 주소를 기본 주소로 복사하기',
     'NTC_COPY_PRIMARY_ADDRESS' => '기본 주소를 대체 주소로 복사히기',
     'NTC_DELETE_CONFIRMATION' => '정말로 현재 자료를 삭제하시겠습니까?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
     'NTC_REMOVE_CONFIRMATION' => '정말로 현재 연락처를 선택된 요청사례에서 제거하시겠습니까?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '정말로 현재 자료를 자동 보고 목록에서 제외하시겠습니까?',
 

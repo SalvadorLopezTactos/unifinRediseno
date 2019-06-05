@@ -13,7 +13,7 @@
 namespace Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap;
 
 use Behat\Behat\Context\Context;
-use Rezzza\RestApiBehatExtension\Rest\RestApiBrowser;
+use Ubirak\RestApiBehatExtension\Rest\RestApiBrowser;
 use League\OAuth2\Client\Token\AccessToken;
 
 class AuthenticationRestContext implements Context

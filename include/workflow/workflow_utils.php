@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: workflow_utils.php 53057 2009-12-08 01:36:37Z mitani $
 function get_module_map($start_none = false){
 	global $current_user;
 	global $app_strings;

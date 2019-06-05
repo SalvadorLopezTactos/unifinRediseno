@@ -108,7 +108,6 @@ $dictionary['EmailMarketing'] = array('table' => 'email_marketing'
 	    'name' => 'inbound_email_id',
 	    'vname' => 'LBL_FROM_MAILBOX',
 	    'type' => 'id',
-	    'len' => '36',
   	),
   	'date_start' =>
   	array (

@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Cilësimet e emailit',
     'EmailParticipants' => 'Pjesëmarrësit me email',
     'DataPrivacy' => 'Privatësia e të dhënave',
+    'ReportSchedules' => 'Raporti i planifikimeve',
+    'CommentLog' => 'Evidenca e komenteve',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth shenja',
     'Filters' => 'Filtri',
     'Comments' => 'Koment',
+    'CommentLog' => 'Evidenca e komenteve',
     'Currencies' => 'monedha',
     'ProductTemplates' => 'Shablloni i produktit',
     'ProductTypes' => 'Lloji i produktit',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Cilësimi i emailit',
     'EmailParticipants' => 'Pjesëmarrës me email',
     'DataPrivacy' => 'Privatësia e të dhënave',
+    'ReportSchedules' => 'Raporti i planifikimit',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transportim',
     'Utilities' => 'Shërbimet',
     'Other' => 'Tjetër',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Shkalla 1',
+    'T2' => 'Shkalla 2',
+    'T3' => 'Shkalla 3',
+    'T4' => 'Shkalla 4',
   ),
   'lead_source_default_key' => 'Vetëgjeneruar',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'lëviz',
         'donothing' => 'Mos bë gjë'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Asnjëherë',
+        30000 => 'Çdo 30 sekonda',
+        60000 => 'Çdo 1 minutë',
+        120000 => 'Çdo 2 minuta',
+        180000 => 'Çdo 3 minuta',
+        240000 => 'Çdo 4 minuta',
+        300000 => 'Çdo 5 minuta',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Në parashikim',
         'sales_stage' => 'Faza e shitjes',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Listë',
         'activities' => 'Fluksi i veprimeve',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Për çdo orë',
+        '21600' => 'Çdo 6 orë',
+        '43200' => 'Çdo 12 orë',
+        '86400' => 'Çdo ditë',
+        '604800' => 'Çdo javë',
+        '1209600' => 'Çdo 2 javë',
+        '2419200' => 'Çdo 4 javë',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Ndiq linkun',
   'LBL_TOGGLE_VISIBILITY' => 'Njyjëzo shfaqjen', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetet',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Të gjitha të drejtat të rezervuara.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'SugarCRM ®, Sugar Enterprise™ dhe Sugar™ janë marka tregtare të SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Ruaj',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Shtoja këtë folderin',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Ky folder nuk mund të ndryshojë',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'A jeni të sigurt që dëshironi të fshini këtë folder? Ky proces nuk mund të ndryshohet. Fshirjet e \\nFolderave do të kaskadojnë tek të gjitha folderët e përfshira.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'A jeni të sigurt që dëshironi të fshini këtë folder? Ky proces nuk mund të ndryshohet. Fshirjet e \nFolderave do të kaskadojnë tek të gjitha folderët e përfshira.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'emri i ri i folderit',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Ju lutemi selektoni një folder para se të perfomoni veprimin.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Menaxhmenti i Folderit',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sinkronizo të gjithë mail llogaritë',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Një email është dërguar në adresën e specifikuar të emailit duke përdorur parametrat e ofruara të postës dalëse. Ju lutemi kontrolloni për të parë nëse emaili është pranuar për të verifikuar a janë parametrat e sakta.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Performimi i këtij veprimi do të sinkronizojë mail llogaritë dhe përmbajtjet e tyre.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Performo sinkronizim të plotë? \\n Mail llogaritë e mëdha mund të zgjasin disa minuta.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Performo sinkronizim të plotë? \n Mail llogaritë e mëdha mund të zgjasin disa minuta.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Klikoni butonin Shift ose butonin Ctrl për të selektuar dosje të shumta.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'E përgjithëshme',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Foldera të grupit të disponieshëm',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Selektoni numrin e emailave për faqë në postë. Kjo mund të kërkojë vendosjen e rifreskimit të faqës në mënyrë që të ketë efekt.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Rigjetja e Mail llogarive',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Regullat',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'Parametrat janë ruajtur. \\n\\n Duhet të ringarkoni faqen për parametra të reja për të pasur efekt.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'Parametrat janë ruajtur. \n\n Duhet të ringarkoni faqen për parametra të reja për të pasur efekt.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Ju duhet ringarkoni faqen per kushtet e reja të hyjnë në fuqi.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Dërgoni vetëm emailat e tekstit të thjeshtë',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'aktive',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Sesion aktiv është i nevojshëm për të eksportuar përmbajtien.',
     'ERR_NO_HEADER_ID' => 'Ky funksion është i padisponueshëm në këtë temë.',
     'ERR_NOT_ADMIN' => "Qasje të paautorizuar në administratë.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Ky opsion është çaktivizuar në SugarCRM për modalitetin IDM dhe ofrohet në Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Shko te <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Menaxhimi i fjalëkalimeve disponohet vetëm te cilësimet e serverit virtual.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Kontakto administratorin e Sugar nëse dëshiron të bësh ndryshime te fushat vetëm për lexim.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mungojnë fushat e nevojshme:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Fushë  e nevojshme jo valide',
     'ERR_INVALID_VALUE' => 'Vlerë jo valide:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Përdoruesi aktual nuk është i autorizuar të ndryshojë termat e konfigurimit {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Ju nuk jeni të autorizuar të favorizoni {moduleName}. Kontakoni administratorin tuaj nëse ju duhet qasje.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Ju nuk jeni të autorizuar të paraqiteni në {moduleName}. Kontaktoni administratorin tuaj nëse ju duhet qasje.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields nuk u gjet në ngarkesën e dobishme',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns nuk është renditje',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields nuk u gjet në ngarkesën e dobishme',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows nuk është renditje',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields nuk u gjet në ngarkesën e dobishme',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Kërkesa juaj dështoi për shkaqe të panjohura.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Selekto operatotin...',
     'LBL_FILTER_CREATE_NEW' => 'Krijo',
     'LBL_FILTER_CREATE_FILTER' => 'Krijo filtër të ri',
+    'LBL_FILTER_CLOSE_FILTER' => 'Mbyll filtrin',
     'LBL_FILTER_EDIT_FILTER' => 'Ndrysho filtër',
     'LBL_FILTER_ALL_RECORDS' => 'Të gjitha regjistrimet',
     'TPL_FILTER_SAVE' => 'Ju me sukses krijuat filtrin {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Të gjitha të drejtat të rezervuara.<br />SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'kompanive përkatëse me të cilat lidhen.',
@@ -3414,7 +3454,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Rifillo',
     'LNK_VIEW_CHANGE_LOG' => 'Shiko evidencën e auditimit',
     'TPL_AUDIT_LOG_TITLE' => 'Evidencë auditimi për {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Kliko për të parë adresën e emailit për regjistrin e auditit',
 
     'NTC_CLICK_BACK' => 'Ju lutem klikoni butonin mbrapa shfletuesit dhe rregulloni gabimin.',
     'NTC_DATE_FORMAT' => '(vvvvv-mm-dd)',
@@ -3451,7 +3491,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Paralajmërim: Shfletuesi juaj është në funksion të pajtueshëm me IE e cila nuk është e mbështetur.",
     'WARN_LICENSE_SEATS'=>  "Paralajmërim: Numri i përdoruesve aktivë tashmë është numri maksimal i licencave të lejuara.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Paralajmërim: Numri i përdoruesve aktivë e tejkalon numrin maksimal të licencave të lejuara:",
-    'WARN_ONLY_ADMINS'=> "Vetëm administratorët mund të hynë.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Numri i përdoruesve aktivë i tejkalon kufijtë e numrit të licencës. Kontaktoni me administratorin.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Vetëm administratorët mund të identifikohen.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Është arritur kufiri i numrit të licencës së përdoruesit. Vetëm përdoruesit ekzistues mund të identifikohen.',
+    'WARN_ONLY_ADMINS'=> "Vetëm administratorët mund të identifikohen.",
     'WARN_UNSAVED_CHANGES'=> "Ju jeni gati për të lënë këtë regjistrim pa ruajtur çdo ndryshim që mund të keni bërë në regjistrim. A jeni të sigurtë që doni të navigoni larg nga ky regjistrim?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Ju nuk i keni ruajtur ndryshimet. Jeni të sigurtë që doni të largoheni nga faqja dhe të hidhni ndryshimet?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Ju jeni duke lëvizur në modulin e raportet. Ndryshimet e tua për panelet nuk do të ruhen. Vazhdo?',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Ju aktualisht nuk keni shënime të ruajtura. një tani.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Ju mund të krijoni nga a. lista",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Shtyp këtu",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Sho tek favoritet e mia',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Metrika mundësie',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Statistikat e mundësive për llogarinë e lidhur.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Zgjedhjet e shpejta në katalogun e produkteve',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Rendit artikujt e "Përdorur së fundi" dhe produktet e ruajtura si "Preferencat"',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Përdorur së fundi',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Preferencat',
 
     'LBL_DASHLET_NO_RECORDS' => 'Ska regjistrime të gjatura në këtë kohë.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Përmbledhje shembull',
@@ -4256,7 +4306,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'E ardhmja',
     'LBL_REQUIRED_FIELD' => 'E nevojshme',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Artikulli i linjës së kuotuar',
+    'LBL_DISCOUNT_TOTAL' => 'Totali i zbritjes',
+    'LBL_TAX' => 'Tatimi',
+    'LBL_SHIPPING' => 'Transporti',
+    'LBL_GRAND_TOTAL' => 'Kryetotali',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Popullo automatikisht adresën e faturimit nga profili i llogarisë',
+    'LBL_QLI_ADD_GROUP' => 'Shto një grup',
+    'LBL_QLI_COMMENT' => 'Komento',
+    'LBL_SELECT_ACTION' => 'Zgjidh veprimin',
+    'LBL_QLI_GROUP_NAME' => 'Emri i grupit',
+    'LBL_GROUP_TOTAL' => 'Totali i grupit',
+    'LBL_ITEM_NAME' => 'Artikulli i linjës',
+    'LBL_QLI_DELETE' => 'Je i sigurt për fshirjen e këtij artikulli linje?',
+    'LBL_QLI_COMMENT_DELETE' => 'Je i sigurt për fshirjen e këtij komenti në artikullin e linjës?',
+    'LBL_QLI_GROUP_DELETE' => 'Dëshiron të fshihet grupi {0}? Të gjithë artikujt do të zhvendosen në grupin e paracaktuar.',
+    'LBL_QLI_GROUP_EMPTY' => 'Nuk ka artikull linje të kuotuar',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'fakultativ',
     'LBL_RELATED_MODULE' => 'e lidhur {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'e lidhur {{{this}}}',
@@ -4286,7 +4356,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Konfirmo',
     'LBL_NO_ACCESS' => 'Nuk keni qasje',
     'LBL_NO_ACCESS_LOWER' => 'Ska qasje',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Nuk ka qasje',
     'LBL_VALUE_ERASED' => 'Vlera u fshi',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Të dhënat u fshinë përmes kërkesës për privatësinë e të dhënave',
     'LBL_CREATE_RELATED_RECORD' => 'Krijo të dhëna të lidhura',
@@ -4914,7 +4984,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Detyrat e ekipit',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Rrjedhë punë e përparuar',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP ose Old REST API',
@@ -4975,9 +5045,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Njoftim:',
     'LBL_ALERT_TITLE_ERROR' => 'Gabim',
     'LBL_ALERT_TITLE_LOADING' => 'Ngarkim',
+    'LBL_ALERT_NO_ACCESS' => 'Nuk ke akses në filtrin që i është vënë këtij minipaneli.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Dubliko panelin për ta konfiguruar këtë minipanel me filtrin tënd.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Versioni i shfletuesit më nuk është i mbështetur ose jeni duke përdorur një shfletues të pambuluar.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Rekomandohen versionet e mëposhtme të shfletuesit: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Shiko faqen {{link}} për shfletuesit e sugjeruar.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Platformat e mbështetura',
     'LBL_ALERT_CONFIRM_DELETE' => 'Je i sigurt për fshirjen e këtij artikulli?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Je i sigurt për fshirjen e këtyre artikujve?',
@@ -5075,7 +5145,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Përmbledhje historike',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Më shumë histori...',
     'LBL_RELATED_CONTACT' => 'Kontakt i ndërlidhur',
     'LBL_MODULE_TYPE' => 'Lloji:',
@@ -5143,6 +5213,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Mungojnë parametrat e SMTP Serverit',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Për të dërguar njoftimin e detyrës, serveri i SMTP duhet të jetë i konfiguruar ne {{emailSettingsUrl}}',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Parametrat e emailit',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Ofrohen raporte të reja të aksioneve',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Ofrohen raporte të reja të raporteve në ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Moduli i raporteve',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Ato janë etiketuar si "Raporti i aksioneve" dhe mund të filtrohen. Raportet etiketohen edhe si "Shitje dhe reklamim", "Shërbim ndaj klientit", "Privatësia e të dhënave" ose "Administrim" sipas përmbajtjes. Për më shumë informacion, referoju ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentacion',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM u mundëson përdoruesve të kryejnë me të shpejtë detyra të caktuara nëpërmjet shkurtesave të tastierës, për të rritur produktivitetin. Tabelat në të djathtë përshkruajnë shkurtesat e mundshme, së bashku me tastet dhe veprimet përkatëse.',
@@ -5252,23 +5327,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Proceset',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Minipaneli "Proceset" shfaq shabllonet që mund të përdoren brenda "Advanced Workflow".',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Minipaneli "Proceset" shfaq shabllonet që mund të përdoren brenda SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Definimet e procesit',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Minipaneli "Përcaktimet e proceseve" shfaq shabllonet që mund të përdoren brenda "Advanced Workflow".',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Minipaneli "Përcaktimet e proceseve" shfaq shabllonet që mund të përdoren brenda SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Krijo definimet e procesit',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importo definimet e procesit',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Rregullat e procesit të biznesit',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Minipaneli "Rregullat tregtare të proceseve" shfaq shabllonet që mund të përdoren brenda "Advanced Workflow".',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Minipaneli "Rregullat tregtare të proceseve" shfaq shabllonet që mund të përdoren brenda SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Krijo rregullat e procesit të biznesit',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importo rregullat e procesit të biznesit',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Proceso email templejtat',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Minipaneli "Shabllonet e emaileve të proceseve" shfaq shabllonet që mund të përdoren brenda "Advanced Workflow".',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Minipaneli "Shabllonet e emaileve të proceseve" shfaq shabllonet që mund të përdoren brenda SugarBMP.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Krijo procesimin e email templejtave',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importo templejtat e emailave të procesuar',
 
@@ -5292,7 +5370,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => 'Anuluar',
     'LBL_PMSE_TERMINATED_STATUS' => 'E ndërpritur',
     'LBL_PMSE_ERROR_STATUS' => 'Gabim',
-    'LBL_PMSE_SETTINGS' => 'Cilësimet e "Advanced Workflow"',
+    'LBL_PMSE_SETTINGS' => 'Cilësimet e SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Jeni të sigurt se dëshironi të çaktivizoni këtë regjistrim?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Jeni të sigurt se dëshironi të aktivizoni këtë regjistrim?',
@@ -5316,7 +5394,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM kërkon javascript. Ju lutemi aktivizoni javascript për të vazhduar përdorimin e SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Të dhënat e serializuara nuk mund të çserializoheshin',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Të dhënat e serializuara nuk mund të çserializoheshin sepse përmbajnë referenca ndaj objekteve ose kategorive',
 
@@ -5345,6 +5423,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => 'Të dhëna personale',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Shëno për të fshirë',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Të dhëna personale për {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'U kopjua në kujtesën e fragmenteve!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nuk mund të kopjohet në kujtesën e fragmenteve',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopjo lidhjen e konformimit',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Shfaq më shumë...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Shfaq më pak...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6522,7 +6609,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Skedar i integruar';
     'YER' => 'Rial',
     'ZWD' => 'Dollarë zimbabvian',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Gjuajtje e vetme',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Asnjë',
+        'future' => 'Vlera aktuale',
+        'old' => 'Vlera e vjetër',
+        'both' => 'Vlerat aktuale dhe të vjetra',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Gjuajtje e vetme',
+    );

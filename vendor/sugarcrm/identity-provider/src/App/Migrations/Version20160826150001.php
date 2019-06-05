@@ -35,6 +35,7 @@ class Version20160826150001 extends AbstractMigration
               region VARCHAR(64) NOT NULL,
               status TINYINT(1) DEFAULT 0,
               providers LONGTEXT,
+              logo LONGTEXT,
               PRIMARY KEY (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
@@ -60,7 +61,15 @@ class Version20160826150001 extends AbstractMigration
               status TINYINT(1) DEFAULT 0,
               attributes LONGTEXT,
               custom_attributes LONGTEXT,
+              last_login DATETIME DEFAULT NULL,
+              login_attempts MEDIUMINT UNSIGNED DEFAULT 0,
+              password_last_changed DATETIME DEFAULT NULL,
+              lockout_time DATETIME DEFAULT NULL,
+              is_locked_out BOOL DEFAULT false,
+              failed_login_attempts MEDIUMINT UNSIGNED DEFAULT 0,
+              user_type TINYINT(1) DEFAULT 0,
               PRIMARY KEY (tenant_id, id),
+              KEY idx_users_create_time (create_time),
               FOREIGN KEY fk_users_tenants (tenant_id) REFERENCES tenants(id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
@@ -72,7 +81,8 @@ class Version20160826150001 extends AbstractMigration
               provider_code VARCHAR(50) NOT NULL,
               identity_value VARCHAR(255),
               PRIMARY KEY (tenant_id, user_id, provider_code),
-              FOREIGN KEY fk_user_providers_users (tenant_id, user_id) REFERENCES users(tenant_id, id)
+              CONSTRAINT idx_user_providers_identity UNIQUE (tenant_id, provider_code, identity_value),
+              CONSTRAINT fk_user_providers_users FOREIGN KEY (tenant_id, user_id) REFERENCES users(tenant_id, id) ON DELETE CASCADE              
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
         $this->addSql('
@@ -95,6 +105,19 @@ class Version20160826150001 extends AbstractMigration
           PRIMARY KEY (session_id)
         ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
         ');
+
+        $this->addSql('
+        CREATE TABLE one_time_token
+        (
+          token VARCHAR(255) NOT NULL,
+          tenant_id CHAR(10) NOT NULL,
+          user_id CHAR(36) NOT NULL,
+          expire_time DATETIME,
+          PRIMARY KEY (token, tenant_id, user_id),
+          CONSTRAINT `fk_one_time_token_users` FOREIGN KEY (tenant_id, user_id) 
+          REFERENCES users(tenant_id, id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        ');
     }
 
     /**
@@ -108,5 +131,6 @@ class Version20160826150001 extends AbstractMigration
         $this->addSql('DROP TABLE `tenant_providers`;');
         $this->addSql('DROP TABLE `tenants`;');
         $this->addSql('DROP TABLE `sessions`;');
+        $this->addSql('DROP TABLE `one_time_token`;');
     }
 }

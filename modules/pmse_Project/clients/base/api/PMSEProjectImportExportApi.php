@@ -11,7 +11,8 @@
  */
 
 
-
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\JSON as JSONConstraint;
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEProjectImportExportApi extends vCardApi
@@ -32,6 +33,12 @@ class PMSEProjectImportExportApi extends vCardApi
                 'acl' => 'create',
                 'shortHelp' => 'Imports a Process Definition from a .bpm file',
                 'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_import_help.html',
+                'exceptions' => array(
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionRequestMethodFailure',
+                    'SugarApiExceptionMissingParameter',
+                ),
             ),
             'projectDownload' => array(
                 'reqType' => 'GET',
@@ -93,12 +100,13 @@ class PMSEProjectImportExportApi extends vCardApi
                 && isset($_FILES[$first_key]['size'])
                 && isset($_FILES[$first_key]['size']) > 0
             ) {
-                $importerObject = ProcessManager\Factory::getPMSEObject('PMSEProjectImporter');
+                $importerObject = PMSEImporterFactory::getImporter('project');
                 $name = $_FILES[$first_key]['name'];
                 $extension = pathinfo($name,  PATHINFO_EXTENSION);
+                $options = $this->getOptions();
                 if ($extension == $importerObject->getExtension()) {
                     try {
-                        $data = $importerObject->importProject($_FILES[$first_key]['tmp_name']);
+                        $data = $importerObject->importProject($_FILES[$first_key]['tmp_name'], $options);
                     } catch (SugarApiExceptionNotAuthorized $e) {
                         $e->setMessage('ERROR_UPLOAD_ACCESS_PD');
                         PMSELogger::getInstance()->alert($e->getMessage());
@@ -119,6 +127,21 @@ class PMSEProjectImportExportApi extends vCardApi
             PMSELogger::getInstance()->alert($sugarApiExceptionMissingParameter->getMessage());
             throw $sugarApiExceptionMissingParameter;
         }
+    }
+
+    /**
+     * Get options to pass to importer
+     * @return array
+     */
+    private function getOptions()
+    {
+        $options = [];
+        $sids = isset($_POST['selectedIds']) ? $_POST['selectedIds'] : '';
+        $violations = Validator::getService()->validate($sids, new JSONConstraint());
+        if (count($violations) === 0) {
+            $options['selectedIds'] = json_decode($sids, true);
+        }
+        return $options;
     }
 }
 

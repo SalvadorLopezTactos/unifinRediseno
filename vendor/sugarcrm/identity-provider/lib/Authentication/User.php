@@ -30,6 +30,13 @@ class User implements AdvancedUserInterface
     const STATUS_INACTIVE = 1;
 
     /**
+     * User type
+     * @var integer
+     */
+    const USER_TYPE_REGULAR_USER = 0;
+    const USER_TYPE_ADMINISTRATOR = 1;
+
+    /**
      * OpenId Connect standard attributes
      */
     const OIDC_ATTRIBUTES = [

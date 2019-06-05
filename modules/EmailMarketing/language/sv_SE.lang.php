@@ -18,8 +18,8 @@
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_REPLY_ADDR' => '\\"Svara-till\\" adress:',
-  'LBL_REPLY_NAME' => '\\"Svara-till\\" namn:',
+  'LBL_REPLY_ADDR' => '\"Svara-till\" adress:',
+  'LBL_REPLY_NAME' => '\"Svara-till\" namn:',
 
   'LBL_MODULE_NAME' => 'Emailutskick',
   'LBL_MODULE_NAME_SINGULAR' => 'Emailmarknadsföring',

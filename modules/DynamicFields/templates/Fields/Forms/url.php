@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: url.php 55310 2010-03-15 16:28:43Z jmertic $
 
 
 function get_body(&$ss, $vardef){

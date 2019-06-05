@@ -48,7 +48,6 @@ class SugarRestSerialize extends SugarRest{
 			$er->set_error('invalid_call');
 			$this->fault($er);
 		}else{
-			$method = $_REQUEST['method'];
 			$data = InputValidation::getService()->getValidInputRequest(
                 'rest_data',
                 array('Assert\PhpSerialized' => array('htmlEncoded' => true)),
@@ -56,7 +55,7 @@ class SugarRestSerialize extends SugarRest{
             );
 			if(!is_array($data))$data = array($data);
 			$GLOBALS['log']->info('End: SugarRestSerialize->serve');
-			return call_user_func_array(array( $this->implementation, $method),$data);
+            return $this->invoke($_REQUEST['method'], $data);
 		} // else
 	} // fn
 

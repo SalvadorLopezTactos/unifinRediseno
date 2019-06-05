@@ -38,8 +38,10 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
 	function queryFilterOn($layout_def)
 	{
-		global $timedate;
-        $begin = $layout_def['input_name0'];
+        global $timedate;
+
+        $begin = $this->getTZOffsetByUser($layout_def['input_name0']);
+
         $hasTime = $this->hasTime($begin);
         if(!$hasTime)
         {
@@ -86,11 +88,36 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	    }
 	}
 
+    /**
+     * This function converts the input $date to the correct date/time
+     * based on the timezone that is defined in the input $user's profile.
+     *
+     * @param $date String value of the date to be converted to timezone offset
+     * @param $user An user bean that contains user timezone
+     * @return $offset TimeDate object with offset applied
+     */
+    protected function getTZOffsetByUser(string $date, User $user = null)
+    {
+        global $timedate;
+
+        if ($user === null) {
+            global $current_user;
+            $user = $current_user;
+        }
+        $offset = $timedate->handle_offset(
+            $date,
+            $this->hasTime($date) ? $timedate->get_db_date_time_format() : $timedate->get_db_date_format(),
+            false,
+            $user
+        );
+        return $offset;
+    }
+
 	function queryFilterBefore($layout_def)
 	{
         $column = $this->_get_column_select($layout_def);
 
-        $begin = $this->expandDate($layout_def['input_name0']);
+        $begin = $this->getTZOffsetByUser($this->expandDate($layout_def['input_name0']));
 
         return $this->queryDateOp($column, $begin, '<', "datetime");
 	}
@@ -99,7 +126,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	{
         $column = $this->_get_column_select($layout_def);
 
-        $begin = $this->expandDate($layout_def['input_name0'], true);
+        $begin = $this->getTZOffsetByUser($this->expandDate($layout_def['input_name0'], true));
 
         return $this->queryDateOp($column, $begin, '>', "datetime");
 	}
@@ -188,10 +215,12 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
     public function queryFilterNot_Equals_str($layout_def)
 	{
-		global $timedate;
+        global $timedate;
 
         $column = $this->_get_column_select($layout_def);
-        $begin = $layout_def['input_name0'];
+
+        $begin = $this->getTZOffsetByUser($layout_def['input_name0']);
+
         $hasTime = $this->hasTime($begin);
         if(!$hasTime){
      	    $end = $this->expandDate($begin, true);

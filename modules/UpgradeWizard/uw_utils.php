@@ -2040,30 +2040,6 @@ function getAllTables() {
     return $db->getTablesArray();
 }
 
-function printAlterTableSql($tables)
-{
-	$alterTableSql = '';
-
-	foreach($tables as $table)
-		$alterTableSql .= "ALTER TABLE " . $table . " CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;" . "\n";
-
-	return $alterTableSql;
-}
-
-function executeConvertTablesSql($tables)
-{
-	global $db;
-
-	foreach($tables as $table){
-		$query = "ALTER TABLE " . $table . " CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
-		if(!empty($table)){
-			logThis("Sending query: ".$query);
-            $db->query($query);//, true, "An error has occured while performing db query.  See log file for details.<br>");
-         }
-	}
-	return true;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 ////	SYSTEM CHECK FUNCTIONS
 /**

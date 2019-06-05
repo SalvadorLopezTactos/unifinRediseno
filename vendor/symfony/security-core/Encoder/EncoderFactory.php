@@ -40,7 +40,7 @@ class EncoderFactory implements EncoderFactoryInterface
             $encoderKey = $encoderName;
         } else {
             foreach ($this->encoders as $class => $encoder) {
-                if ((is_object($user) && $user instanceof $class) || (!is_object($user) && (is_subclass_of($user, $class) || $user == $class))) {
+                if ((\is_object($user) && $user instanceof $class) || (!\is_object($user) && (is_subclass_of($user, $class) || $user == $class))) {
                     $encoderKey = $class;
                     break;
                 }
@@ -48,7 +48,7 @@ class EncoderFactory implements EncoderFactoryInterface
         }
 
         if (null === $encoderKey) {
-            throw new \RuntimeException(sprintf('No encoder has been configured for account "%s".', is_object($user) ? get_class($user) : $user));
+            throw new \RuntimeException(sprintf('No encoder has been configured for account "%s".', \is_object($user) ? \get_class($user) : $user));
         }
 
         if (!$this->encoders[$encoderKey] instanceof PasswordEncoderInterface) {
@@ -61,14 +61,15 @@ class EncoderFactory implements EncoderFactoryInterface
     /**
      * Creates the actual encoder instance.
      *
-     * @param array $config
-     *
      * @return PasswordEncoderInterface
      *
      * @throws \InvalidArgumentException
      */
     private function createEncoder(array $config)
     {
+        if (isset($config['algorithm'])) {
+            $config = $this->getEncoderConfigFromAlgorithm($config);
+        }
         if (!isset($config['class'])) {
             throw new \InvalidArgumentException(sprintf('"class" must be set in %s.', json_encode($config)));
         }
@@ -79,5 +80,48 @@ class EncoderFactory implements EncoderFactoryInterface
         $reflection = new \ReflectionClass($config['class']);
 
         return $reflection->newInstanceArgs($config['arguments']);
+    }
+
+    private function getEncoderConfigFromAlgorithm($config)
+    {
+        switch ($config['algorithm']) {
+            case 'plaintext':
+                return array(
+                    'class' => PlaintextPasswordEncoder::class,
+                    'arguments' => array($config['ignore_case']),
+                );
+
+            case 'pbkdf2':
+                return array(
+                    'class' => Pbkdf2PasswordEncoder::class,
+                    'arguments' => array(
+                        $config['hash_algorithm'],
+                        $config['encode_as_base64'],
+                        $config['iterations'],
+                        $config['key_length'],
+                    ),
+                );
+
+            case 'bcrypt':
+                return array(
+                    'class' => BCryptPasswordEncoder::class,
+                    'arguments' => array($config['cost']),
+                );
+
+            case 'argon2i':
+                return array(
+                    'class' => Argon2iPasswordEncoder::class,
+                    'arguments' => array(),
+                );
+        }
+
+        return array(
+            'class' => MessageDigestPasswordEncoder::class,
+            'arguments' => array(
+                $config['algorithm'],
+                $config['encode_as_base64'],
+                $config['iterations'],
+            ),
+        );
     }
 }

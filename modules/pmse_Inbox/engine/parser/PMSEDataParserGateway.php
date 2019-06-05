@@ -20,7 +20,7 @@
 
 use Sugarcrm\Sugarcrm\ProcessManager;
 
-class PMSEDataParserGateway implements PMSEDataParserInterface
+class PMSEDataParserGateway extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     protected $beanFactory;
     protected $dataParser;
@@ -137,6 +137,7 @@ class PMSEDataParserGateway implements PMSEDataParserInterface
                 if ($isDefault) {
                     $parsedArray[$key] = $criteriaToken;
                 } else {
+                    $this->dataParser->setCriteriaToken($criteriaToken);
                     $this->dataParser->setEvaluatedBean($bean);
                     $this->dataParser->setCurrentUser($currentUser);
                     $this->dataParser->setBeanList($beanList);

@@ -16,14 +16,12 @@ $dictionary['activities_users'] = array(
         'id' => array(
             'name' => 'id',
             'type' => 'id',
-            'len' => 36,
             'required' => true,
         ),
 
         'activity_id' => array(
             'name' => 'activity_id',
             'type' => 'id',
-            'len' => 36,
             'required' => true,
         ),
 
@@ -34,9 +32,8 @@ $dictionary['activities_users'] = array(
         ),
 
         'parent_id' => array(
-            'name'     => 'parent_id',
-            'type'     => 'id',
-            'len'      => 36,
+            'name' => 'parent_id',
+            'type' => 'id',
         ),
 
         'fields' => array(

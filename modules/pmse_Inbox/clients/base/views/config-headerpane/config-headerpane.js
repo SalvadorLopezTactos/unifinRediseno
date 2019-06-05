@@ -23,7 +23,6 @@
     _save: function() {
         var fieldPmse=new Object();
         fieldPmse.logger_level={name: "logger_level", required: true};
-        fieldPmse.error_number_of_cycles={name: "error_number_of_cycles", required: true, type: 'int'};
         fieldPmse.error_timeout={name: "error_timeout", required: true, type: 'int'};
 //        console.log('mmm',fieldPmse);
         this.model.doValidate(fieldPmse, _.bind(this.validationCompleteSettings, this));
@@ -34,7 +33,6 @@
             app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
             var value = {}, data = {};
             data.logger_level = self.model.get('logger_level');
-            data.error_number_of_cycles = self.model.get('error_number_of_cycles');
             data.error_timeout = self.model.get('error_timeout');
             value.data = data;
             //console.log('Values->',value);

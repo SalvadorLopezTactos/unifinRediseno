@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: layout_defs.php 14230 2006-06-23 00:17:38Z wayne $
 
 $layout_defs['Cases'] = array(
 	// list of what Subpanels to show in the DetailView

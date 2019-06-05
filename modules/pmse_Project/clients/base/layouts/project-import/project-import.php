@@ -31,6 +31,9 @@ $viewdefs[$module_name]['base']['layout']['project-import'] = array(
                                 array(
                                     'view' => 'project-import',
                                 ),
+                                array(
+                                    'view' => 'dependency-picker',
+                                ),
                             ),
                         ),
                     ),

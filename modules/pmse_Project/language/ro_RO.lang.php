@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Există procese active care rulează împotriva acestei Definiţii de proces. Actualizarea acesteia ar putea avea impact asupra acestor procese. Doriţi să editaţi în continuare această Definiţie de proces?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Există procese active care rulează împotriva acestei Definiţii de proces. Actualizarea acesteia ar putea avea impact asupra acestor procese. Doriţi să dezactivaţi în continuare această Definiţie de proces?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Creează automat o înregistrare nouă Definiţii proces importând un fişier *.bpm din sistemul dvs. de fişiere.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Încărcare fișier .bpm pentru importarea unei definiții de proces.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Înregistrarea Definiţii proces a fost importată cu succes în sistem.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Vă rugăm să selectaţi un fişier *.bpm valabil.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definiţia de proces a fost importată, însă conţine una sau mai multe acţiuni de tip regulă operativă pentru care regulile operative nu au fost selectate.',
+    'LBL_BPM_IMPORT_SELECT' => 'Această definiție de proces conține următoarele reguli operative și modele de e-mail. '
+        . 'Vă rugăm să le selectați pe cele pe care doriți să le importați.',
+    'LBL_BUSINESS_RULES' => 'Reguli operative',
+    'LBL_EMAIL_TEMPLATES' => 'Modele de e-mail',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Anulare',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Refacere',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Salveaza',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Validare',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Salvare și validare',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Rulați validarea pentru a verifica dacă există erori.',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activitate',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Ștergere',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtrare',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Asociat cu',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Criterii',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Durata',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Unitate',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Campuri',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluarea câmpului modulului',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Asociat cu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Camp:',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Valoare',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Evaluare răspunsuri din formular',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nu este',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nu este egal cu',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Toate înregistrările aferente',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Orice înregistrări aferente',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Timp de rulare',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adăugare',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Închidere',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Echipe',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizatorul din %MODULE% care a creat înregistrarea',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Utilizatorul din %MODULE% care a modificat ultima dată înregistrarea',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Utilizatorul din %MODULE% care este alocat înregistrării',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Utilizatorul din %MODULE% care a fost alocat înregistrării',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Utilizatorul din %MODULE% care este managerul persoanei care a creat înregistrarea',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Utilizatorul din %MODULE% care este managerul persoanei care a modificat ultima dată înregistrarea',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Utilizatorul din %MODULE% care este managerul persoanei alocate înregistrării',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Utilizatorul din %MODULE% care este managerul persoanei care a fost alocată înregistrării',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED%asociat cu %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizatorul care a creat %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Utilizatorul care a efectuat ultima modificare a %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Utilizatorul care este desemnat în %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Utilizatorul care a fost desemnat în %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Managerul care a creat %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Managerul care a efectuat ultima modificare a %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Managerul care este desemnat în %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Managerul care a fost desemnat în %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rol: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'echipă: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Sugestii',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Sintaxă expresie nevalidă.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Se validează definiția procesului: se recuperează setările elementului.',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Se validează definițiile procesului: se validează setările elementului.',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Se reîmprospătează lista erorilor...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Validare finalizată! S-au detectat următoarele probleme: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' probleme',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Validare în desfășurare',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Atenție: este posibil ca procesul să se oprească la acest element sau să aibă alte efecte nedorite.',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Eroare: procesul se va opri la acest element.',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Nu s-a putut valida elementul.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elementul nu îndeplinește numărul minim de fluxuri de intrare.',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Acest element trebuie să aibă un număr minim de căi de intrare. Verificați numărul de căi care se conectează la acest element pentru a vă asigura că numărul minim este atins.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Elementul depășește numărul maxim de fluxuri de intrare.',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Acest element are un număr maxim de căi de intrare care nu trebuie depășit. Verificați numărul de căi care se conectează la acest element pentru a vă asigura că numărul maxim nu este depășit.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elementul nu îndeplinește numărul minim de fluxuri de ieșire.',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Acest element trebuie să aibă un număr minim de căi de ieșire. Verificați numărul de căi care părăsesc acest element pentru a vă asigura că numărul minim este atins.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elementul depășește numărul maxim de fluxuri de ieșire.',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Acest element are un număr maxim de căi de ieșire care nu trebuie depășit. Verificați numărul de căi care părăsesc acest element pentru a vă asigura că numărul maxim nu este depășit.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Câmpul obligatoriu nu este setat.',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Acest element conține un câmp care este obligatoriu, dar nu a fost setat. Verificați setările elementului pentru a vă asigura că ați setat corect acest câmp, apoi nu uitați să faceți clic pe butonul „Salvare”.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Nu există date în sistem momentan.',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Setările acestui element fac trimitere la o anumită informație care nu există în baza de date. Verificați setările elementului pentru a vă asigura că toate informațiile la care se face trimitere există (și anume utilizatori specifici, câmpurile modulului, echipe etc.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Expresia casetei de criterii nu va fi niciodată evaluată ca adevărată.',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Caseta de criterii conține expresii logice ȘI/SAU/NU. Această eroare înseamnă că o casetă de criterii din setările elementului a fost configurată astfel încât expresia să nu fie niciodată adevărată. Verificați caseta de criterii pentru a elimina contradicțiile logice care nu permit ca expresia să fie adevărată.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Elementul nu este accesibil.',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Pentru ca elementul să poată fi executat într-un proces, o cale trebuie să fie conectată la element. Lanțul de căi care duc la element trebuie să înceapă cu un element de pornire. Verificați lanțul de căi de intrare către acest element pentru a vă asigura că lanțul începe cu un element de pornire.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Criteriile privind timpul de așteptare trebuie să conțină o singură constantă dată/oră.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Acest element de așteptare a fost configurat utilizând caseta de criterii „Dată fixată”. Această casetă trebuie să conțină o singură constantă „Dată/Oră fixată” sau o valoare a câmpului Dată/Oră. Toate celelalte părți ale expresiei trebuie să fie simboluri matematice (+/-) sau constante „Interval de timp”.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Valoarea duratei specificată nu trebuie să fie zero.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Acest element de așteptare a fost configurat utilizând setarea „Durată”. Această setare nu trebuie să fie egală cu zero, întrucât se va produce o eroare. Verificați setările elementului pentru a vă asigura că „Durată” nu este setată la zero.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Parametrii timpului de așteptare nu au fost setați.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Nu s-au configurat setările acestui element de așteptare. Verificați setările elementului pentru a vă asigura că „Durată” sau „Dată fixată” sunt selectate, introduceți valorile dorite și faceți clic pe butonul „Salvare”.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Timpul estimat este mai mic decât zero.',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'În setările pentru „Formulare” ale acestui element, timpul estimat este setat la o valoare negativă, ceea ce duce la înghețarea procesului atunci când va atinge acest element. Deschideți setările pentru „Formulare” ale acestui element pentru a modifica timpul estimat la un număr care nu este negativ.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Tipul acțiunii este [Unassigned].',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Nu s-a atribuit niciun tip acestui element al acțiunii. Puteți modifica acest lucru dacă faceți clic dreapta pe elementul acțiunii și apoi selectați un tip din lista „Tipul acțiunii”.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Nu se garantează că se va alege o cale.',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Acest mesaj de eroare se produce întrucât este posibil ca niciuna dintre căile care părăsesc acest element gateway să nu fie aleasă, ceea ce va produce oprirea procesului. Se recomandă să setați o cale implicită de ales în cazul în care niciuna dintre expresiile casetei de criterii din setările elementului nu este îndeplinită. Puteți face acest lucru dacă faceți clic dreapta pe elementul gateway și selectați un element din meniul „Flux implicit”. Dacă nu este specificată o cale implicită, expresiile casetei de criterii din setările elementului ar trebui modificate pentru a vă asigura că cel puțin una dintre acestea va fi adevărată atunci când se rulează procesul.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Tipul convergent de gateway nu se potrivește cu tipul de gateway al unui flux de intrare.',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Elementele gateway divergente extind procesele în mai multe ramuri. Atunci când utilizați un element gateway convergent pentru a le regrupa spre o singură cale, trebuie să utilizați tipul corect de element gateway convergent, în funcție de tipul de element gateway divergent care este utilizat pentru a crea ramuri. Pentru ramurile create cu elemente gateway divergente, utilizați un element gateway convergent exclusiv pentru a le regrupa. Pentru ramurile create cu elemente gateway divergente paralele sau inclusive, utilizați un element gateway convergent paralel pentru a le regrupa.',
 );

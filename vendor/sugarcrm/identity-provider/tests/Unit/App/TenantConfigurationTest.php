@@ -12,13 +12,13 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\App;
 
-use Sugarcrm\IdentityProvider\App\Authentication\Adapter\ConfigAdapterFactory;
+use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\ConfigAdapterFactory;
+use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\AbstractConfigAdapter;
 use Sugarcrm\IdentityProvider\App\TenantConfiguration;
 use Sugarcrm\IdentityProvider\Srn\Srn;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class TenantConfigurationTest
@@ -53,7 +53,12 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
     protected $tenantConfiguration;
 
     /**
-     * @var UrlGeneratorInterface
+     * @var AbstractConfigAdapter|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $configAdapter;
+
+    /**
+     * @var ConfigAdapterFactory|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $configAdapterFactory;
 
@@ -64,8 +69,8 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->configAdapterFactory = new ConfigAdapterFactory($urlGenerator);
+        $this->configAdapter = $this->createMock(AbstractConfigAdapter::class);
+        $this->configAdapterFactory = $this->createMock(ConfigAdapterFactory::class);
 
         $this->srn = $this->createMock(Srn::class);
         $this->statement = $this->createMock(Statement::class);
@@ -89,7 +94,7 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
      * @see testMerge
      * @return array
      */
-    public function expectedConfigs()
+    public function expectedConfigs(): array
     {
         $baseConfig = ['some' => 'base', 'config' => 'value'];
         $provider = 'someProviderName';
@@ -99,6 +104,12 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
             'host' => 'hostValue',
         ];
         $providerAttributeMap = [
+            ['destination' => 'provider',    'source' => 'some',    'overwrite' => true],
+            ['destination' => 'value',       'source' => 'map',     'overwrite' => true],
+            ['destination' => 'val',         'source' => 'ignore',  'overwrite' => false],
+            ['destination' => 'email',       'source' => 'name',    'overwrite' => true],
+        ];
+        $providerAttributeMapExpects = [
             'some' => 'provider',
             'map' => 'value',
             'name' => 'email',
@@ -109,15 +120,18 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
                 'listConfig' => [
                     [
                         'provider_code' => $provider,
-                        'config' => null,
+                        'config' => json_encode($providerConfig),
                         'attribute_map' => null,
+                        'enabled_providers' => json_encode([$provider]),
+                        'status' => 0,
                     ],
                 ],
                 'tenantId' => '0000000002',
+                'providerConfig' => $providerConfig,
                 'expectedConfig' => $baseConfig +
                     [
                         'enabledProviders' => [$provider],
-                        $provider => [],
+                        $provider => $providerConfig,
                     ],
             ],
             'expectedConfigAndMap' => [
@@ -127,13 +141,16 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
                         'provider_code' => $provider,
                         'config' => json_encode($providerConfig),
                         'attribute_map' => json_encode($providerAttributeMap),
+                        'enabled_providers' => json_encode([$provider]),
+                        'status' => 0,
                     ],
                 ],
                 'tenantId' => '0000000003',
+                'providerConfig' => $providerConfig,
                 'expectedConfig' => $baseConfig +
                     [
                         'enabledProviders' => [$provider],
-                        $provider => $providerConfig + ['user_mapping' => $providerAttributeMap],
+                        $provider => $providerConfig + ['user_mapping' => $providerAttributeMapExpects],
                     ],
             ],
         ];
@@ -146,19 +163,28 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
      * @param $baseConfig
      * @param $listConfig
      * @param $tenantId
+     * @param $providerConfig
      * @param $expectedConfig
      */
-    public function testMerge($baseConfig, $listConfig, $tenantId, $expectedConfig)
+    public function testMerge($baseConfig, $listConfig, $tenantId, $providerConfig, $expectedConfig): void
     {
+        $this->configAdapterFactory
+            ->expects($this->once())
+            ->method('getAdapter')
+            ->with($listConfig[0]['provider_code'])
+            ->willReturn($this->configAdapter);
+        $this->configAdapter
+            ->expects($this->once())
+            ->method('getConfig')
+            ->with($listConfig[0]['config'])
+            ->willReturn($providerConfig);
+
         $this->srn->method('getTenantId')->willReturn($tenantId);
 
         $this->queryBuilder
             ->expects($this->once())
             ->method('setParameters')
-            ->with([
-                ':tenant_id' => $tenantId,
-                ':tenant_status' => 0,
-            ])
+            ->with([':tenant_id' => $tenantId])
             ->willReturnSelf();
         $this->statement
             ->expects($this->once())
@@ -169,6 +195,29 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
         $config = $this->tenantConfiguration->merge($this->srn, $baseConfig);
 
         $this->assertEquals($expectedConfig, $config);
+    }
+
+    /**
+     * @covers ::merge
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Tenant isn't active
+     */
+    public function testMergeInactiveTenant()
+    {
+        $this->srn->method('getTenantId')->willReturn('0000000002');
+        $this->queryBuilder
+            ->expects($this->once())
+            ->method('setParameters')
+            ->with([':tenant_id' => '0000000002'])
+            ->willReturnSelf();
+        $this->statement
+            ->expects($this->once())
+            ->method('fetchAll')
+            ->with(\PDO::FETCH_ASSOC)
+            ->willReturn([
+                ['status' => 1]
+            ]);
+        $this->tenantConfiguration->merge($this->srn, ['some' => 'base', 'config' => 'value']);
     }
 
     /**
@@ -186,16 +235,29 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->queryBuilder
             ->expects($this->once())
             ->method('setParameters')
-            ->with([
-                ':tenant_id' => $tenantId,
-                ':tenant_status' => 0,
-            ])
+            ->with([':tenant_id' => $tenantId])
             ->willReturnSelf();
         $this->statement
             ->expects($this->once())
             ->method('fetchAll')
             ->with(\PDO::FETCH_ASSOC)
             ->willReturn([]);
+
+        $this->tenantConfiguration->merge($this->srn, ['some' => 'base', 'config' => 'value']);
+    }
+
+    /**
+     * Testing initialize tenant config if tenant not exists.
+     * @covers ::merge
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Tenant id is empty
+     */
+    public function testMergeEmptyTenantId()
+    {
+        $this->srn->method('getTenantId')->willReturn('');
+
+        $this->queryBuilder->expects($this->never())->method('setParameters');
+        $this->statement->expects($this->never())->method('fetchAll');
 
         $this->tenantConfiguration->merge($this->srn, ['some' => 'base', 'config' => 'value']);
     }

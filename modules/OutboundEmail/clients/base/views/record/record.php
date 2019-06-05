@@ -117,6 +117,13 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                 'mail_smtpport',
                 'mail_smtpauth_req',
                 'mail_smtpssl',
+                'reply_to_name',
+                array(
+                    'name' => 'reply_to_email_address',
+                    'type' => 'email-address',
+                    'link' => false,
+                ),
+                'team_name',
             ),
         ),
     ),

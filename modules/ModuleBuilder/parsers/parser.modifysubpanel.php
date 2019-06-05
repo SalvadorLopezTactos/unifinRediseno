@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SubpanelParser.php 20826 2007-03-09 20:18:29Z clee $
 /*
  * Modify an exising Subpanel
  * Typically called from Studio for a deployed (OOB or installed custom module)

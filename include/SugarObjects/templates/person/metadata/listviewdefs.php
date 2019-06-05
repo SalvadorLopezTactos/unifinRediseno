@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: listviewdefs.php 17488 2006-11-06 23:14:29Z wayne $
 $module_name = '<module_name>';
 $listViewDefs[$module_name] = array(
 	'NAME' => array(

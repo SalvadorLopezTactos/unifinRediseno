@@ -94,15 +94,12 @@ class SugarSAMLUserChecker extends UserChecker
             if (!$provision) {
                 throw $e;
             }
-            $sugarUser = $this->processCustomUserCreate($user);
-            if (!$sugarUser) {
-                $userAttributes = array_merge(
-                    $defaultAttributes,
-                    $user->getAttribute('attributes')['create'],
-                    $fixedAttributes
-                );
-                $sugarUser = $this->localUserProvider->createUser($nameIdentifier, $userAttributes);
-            }
+            $userAttributes = array_merge(
+                $defaultAttributes,
+                $user->getAttribute('attributes')['create'],
+                $fixedAttributes
+            );
+            $sugarUser = $this->localUserProvider->createUser($nameIdentifier, $userAttributes);
         }
         $user->setSugarUser($sugarUser);
     }
@@ -130,38 +127,6 @@ class SugarSAMLUserChecker extends UserChecker
 
         if ($updated) {
             $sugarUser->save();
-        }
-    }
-
-    /**
-     * Checks if custom SAML create user function exists.
-     * If function is specified call it and return user.
-     * If function is not specified, skip the whole process of custom user creation.
-     *
-     * This is done for bwc-support of Sugar ability to use custom user-provision function. See BR-5065
-     * When we drop support of such functionality delete this function.
-     *
-     * @param User $user
-     * @return \User|null
-     */
-    protected function processCustomUserCreate(User $user)
-    {
-        $settings = \SAMLAuthenticate::loadSettings();
-        if (isset($settings->customCreateFunction) && $user->getAttribute('XMLResponse')) {
-            $type = \SugarConfig::getInstance()->get('authenticationClass', 'SAMLAuthenticate');
-
-            if (!\SugarAutoLoader::requireWithCustom('modules/Users/authentication/'. $type .'/' . $type . '.php')) {
-                require_once 'modules/Users/authentication/SAMLAuthenticate/SAMLAuthenticate.php';
-            }
-
-            $sugarSamlAuthController = new $type();
-            $userAuth = $sugarSamlAuthController->userAuthenticate;
-
-            $xpath = new \DOMXpath($user->getAttribute('XMLResponse'));
-            $nameId = $user->getUsername();
-            return call_user_func($settings->customCreateFunction, $userAuth, $nameId, $xpath, $settings);
-        } else {
-            return null;
         }
     }
 

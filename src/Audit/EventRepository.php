@@ -51,13 +51,13 @@ class EventRepository
     /**
      * Registers update in EventRepository. Then saves audited fields.
      * @param SugarBean $bean
-     * @param FieldChangeList $changedFields
+     *
      * @return string id of audit event created
      * @throws DBALException
      */
-    public function registerUpdate(SugarBean $bean, FieldChangeList $changedFields)
+    public function registerUpdate(SugarBean $bean)
     {
-        return $this->save($bean, 'update', $this->context, $changedFields);
+        return $this->save($bean, 'update', $this->context);
     }
 
     /**
@@ -65,37 +65,29 @@ class EventRepository
      *
      * @param SugarBean $bean The updated bean
      * @param Subject $subject The subject to attribute the update to
-     * @param FieldChangeList $changedFields
      *
      * @return string id of audit event created
      * @throws DBALException
      */
-    public function registerUpdateAttributedToSubject(
-        SugarBean $bean,
-        Subject $subject,
-        FieldChangeList $changedFields
-    ) {
+    public function registerUpdateAttributedToSubject(SugarBean $bean, Subject $subject)
+    {
         return $this->save($bean, 'update', [
             'subject' => $subject,
             'attributes' => [],
-        ], $changedFields);
+        ]);
     }
 
     /**
      * Registers erasure EventRepository. Then saves audited fields.
+     *
      * @param SugarBean $bean
-     * @param ErasureFieldList $fields list of fields to be erased
+     *
      * @return string id of audit event created
      * @throws DBALException
-     * @throws InvalidArgumentException
      */
-    public function registerErasure(SugarBean $bean, ErasureFieldList $fields)
+    public function registerErasure(SugarBean $bean)
     {
-        if (count($fields) === 0) {
-            throw new InvalidArgumentException("Fields to be erased can not be empty.");
-        }
-
-        return $this->save($bean, 'erasure', $this->context, $fields);
+        return $this->save($bean, 'erasure', $this->context);
     }
 
     /**
@@ -103,11 +95,10 @@ class EventRepository
      * @param SugarBean $bean SugarBean that was changed
      * @param string $eventType Audit event type
      * @param array|JsonSerializable $source The source of the event
-     * @param array|jsonSerializable $data Event data
      * @return string id of record saved
      * @throws DBALException
      */
-    private function save(SugarBean $bean, string $eventType, $source, $data)
+    private function save(SugarBean $bean, string $eventType, $source)
     {
         $id =  Uuid::uuid1();
 
@@ -118,7 +109,6 @@ class EventRepository
             'parent_id' => $bean->id,
             'module_name' => $bean->module_name,
             'source' => json_encode($source),
-            'data' => json_encode($data),
             'date_created' => TimeDate::getInstance()->nowDb(),]
         );
 

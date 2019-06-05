@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'顯示下載標籤',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'選定之後，下載標籤將出現在使用者設定中，供使用者存取 Sugar 外掛程式和其他可用檔案。',
     'LBL_LDAP_ENC_KEY_DESC'	=> '使用 LDAP 時進行 SOAP 驗證。',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => '必須在 php.ini 檔案中啟用 php_mcrypt 副檔名。',
     'LBL_ALL' => '所有',
     'LBL_MARK_POINT' => '標記資料點',
     'LBL_NEXT_' => '下一個>>',
@@ -443,6 +442,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '活動流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '啟用活動流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '打開應用程式的活動流',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => '啟用其他登錄螢幕內容',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '自動儲存程序定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => '確定使用設計器時自動儲存流程定義的頻率',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => '自動驗證自動儲存的程序定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => '切換自動儲存時是否自動驗證流程定義。只有在 "自動儲存程序定義" 設置為時間間隔時，此功能才會生效',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => '導入時自動驗證流程定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => '切換在首次導入時是否自動驗證流程定義。',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => '注釋記錄設定',
+    'LBL_COMMENT_LOG_MAX_CHARS' => '每個注釋條目要顯示的最大字元數',
 );
 
 

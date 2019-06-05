@@ -29,4 +29,29 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Dette er system-kontoen.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-mail-adresse',
     'LBL_TYPE' => 'Type',
+    'LBL_REPLY_TO_NAME' => '$mod_strings[&#39;LBL_REPLY_TO_NAME&#39;]
+Din installation eller brug af denne SugarCRM-fil er underlagt de gældende vilkår i
+http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+Hvis du ikke er enig i alle de gældende vilkår eller ikke har myndighed til at tilknytte enheden som en autoriseret repræsentant, skal du ikke installere eller bruge denne SugarCRM-fil.
+Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => '$mod_strings[&#39;LBL_REPLY_TO_EMAIL_ADDRESSES&#39;]
+Din installation eller brug af denne SugarCRM-fil er underlagt de gældende vilkår i
+http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+Hvis du ikke er enig i alle de gældende vilkår eller ikke er autoriseret til at tilknytte enheden som en autoriseret repræsentant, skal du ikke installere eller bruge denne SugarCRM-fil.
+Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '$mod_strings[&#39;LBL_REPLY_TO_EMAIL_ADDRESS_ID&#39;]
+Din installation eller brug af denne SugarCRM-fil er underlagt de gældende vilkår i
+http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+Hvis du ikke er enig i alle de gældende vilkår eller ikke er autoriseret til at tilknytte enheden som en autoriseret repræsentant, skal du ikke installere eller bruge denne SugarCRM-fil.
+Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => '$mod_strings[&#39;LBL_REPLY_TO_EMAIL_ADDRESS&#39;]
+Din installation eller brug af denne SugarCRM-fil er underlagt de gældende vilkår i
+http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+Hvis du ikke er enig i alle de gældende vilkår eller ikke er autoriseret til at tilknytte enheden som en autoriseret repræsentant, skal du ikke installere eller bruge denne SugarCRM-fil.
+Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
+    'LBL_PRIMARY_TEAM' => '$mod_strings[&#39;LBL_PRIMARY_TEAM&#39;]
+Din installation eller brug af denne SugarCRM-fil er underlagt de gældende vilkår i
+http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+Hvis du ikke er enig i alle de gældende vilkår eller ikke er autoriseret til at tilknytte enheden som en autoriseret repræsentant, skal du ikke installere eller bruge denne SugarCRM-fil.
+Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
 );

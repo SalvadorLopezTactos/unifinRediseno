@@ -208,7 +208,7 @@ ExpressionContainer.prototype.parseValue = function (expression) {
             if (val !== '') {
                 val += ' ';
             }
-            val += table.globalCBControl.getLabel(expression[i]);
+            val += table.globalCBControl.helper.getLabel(expression[i]);
         }
     }
     return val;

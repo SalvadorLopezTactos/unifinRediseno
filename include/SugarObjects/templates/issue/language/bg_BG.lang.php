@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Отговорник:',
   'LBL_ASSIGNED_TO_NAME' => 'Потребител:',  	  
   'LBL_WORK_LOG' => 'Работен дневник на събития:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Създадено от:',
   'LBL_DATE_CREATED' => 'Създадено на:',
   'LBL_DATE_ENTERED' => 'Създадено на:',

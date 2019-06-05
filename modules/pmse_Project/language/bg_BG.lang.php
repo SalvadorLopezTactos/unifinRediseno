@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Има активни процеси срещу тази Дефиниция на процес. Актуализирането и може да окаже влияние върху тези процеси. Все още ли искате да редактирате тази Дефиниция на процес?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Има активни процеси срещу тази Дефиниция на процес. Актуализирането и може да окаже влияние върху тези процеси. Все още ли искате да деактивирате тази Дефиниция на процес?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Автоматично създава запис с Дефиниция на процеси чрез импорт на *.bpm файл.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Зареди .bpm файл за импортиране на дефиниция на процес.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Дефинициите на процеса бяха импортирани успешно в системата.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Моля изберете валиден *.bpm файл.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Дефиницията на процеса е импортирана, но съдържа едно или повече действия за Бизнес правило, за които не са избрани бизнес правила.',
+    'LBL_BPM_IMPORT_SELECT' => 'Тази дефиниция на процес съдържа следните бизнес правила и шаблони на електронни писма. '
+        . 'Моля, изберете тези, които искате да импортирате.',
+    'LBL_BUSINESS_RULES' => 'Бизнес правила',
+    'LBL_EMAIL_TEMPLATES' => 'Шаблони на електронно писмо',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Върни',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Повтори',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Съхрани',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Валидиране',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Запис и валидиране',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Изпълняване на валидиране за проверка за грешки',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Дейност',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Изтриване',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Модул',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Филтър',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Свързано с',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Критерий',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Продължителност',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Единица',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Полета',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Оценка на полето на модула',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Модул',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Свързано с',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Поле',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Стойност',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Оценка на формата за отговор',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'не е',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'не е равно на',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Всички свързани записи',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Евентуални свързани записи',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Реално време',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Добави',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Затвори',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Екип',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Потребител в %MODULE%, който е създал записа',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Потребител в %MODULE%, който последно е променил записа',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Потребител в %MODULE%, който е присвоен на записа',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Потребител в %MODULE%, който е бил присвоен на записа',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Потребител в %MODULE%, който е мениджър на този, който е създал записа',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Потребител в %MODULE%, който е мениджър на този, който последно е променил записа',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Потребител в %MODULE%, който е мениджър на този, който е присвоен на записа',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Потребител в %MODULE%, който е мениджър на този, който е бил присвоен на записа',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% е свързано с %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Потребител, който е създал %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Потребител, който последно е променил %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Потребител, който е зачислен към %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Потребител, който е бил зачислен към %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Ръководител, който е създал %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Ръководител, който последно е променил %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Ръководител, който е зачислен към %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Ръководител, който е бил зачислен към %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'роля: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'екип: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Предложения',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Невалиден синтаксис на израза.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Валидиране на дефиниции на процеси: извличане на настройките на елемент',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Валидиране на дефиниции на процеси: извличане на настройките на елемент',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Обновяване на списъка с грешки...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Валидирането завърши! Намерени проблеми: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' проблема',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Валидирането е в ход',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Предупреждение: Процесът може да спре на този елемент или да има други непредвидени ефекти',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Грешка: Процесът ще спре на този елемент',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Не може да валидира елемент',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Елементът не отговаря на минималния брой на входящите потоци',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Този елемент трябва да има минимален брой входящи пътища. Проверете броя на пътищата, които свързват към този елемент, за да се уверите, че минималният брой е изпълнен.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Елементът надвишава максималния брой на входящите потоци',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Този елемент има максимален брой входящи пътища, който не трябва да бъде надвишен. Проверете броя на пътищата, които свързват към този елемент, за да се уверите, че максималният брой не е надвишен.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Елементът не отговаря на минималния брой на изходящите потоци',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Този елемент трябва да има минимален брой на изходящите пътища. Проверете броя на пътищата, които извеждат от този елемент, за да се уверите, че минималният брой е изпълнен.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Елементът надвишава максималния брой на изходящите потоци',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Този елемент има максимален брой на изходящите пътища, който не трябва да бъде превишаван. Проверете броя на пътища, извеждащи от този елемент, за да сте сигурни, че максималният брой не е надвишен.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Задължително поле не е зададено',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Този елемент има поле, което се изисква, но не е зададено. Проверете настройките на елемента, за да се уверите, че полето е зададено правилно, след това не забравяйте да щракнете върху бутона "Запиши".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'В системата в момента не съществуват данни',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Настройките за този елемент се отнасят за определена част от данни, който не съществуват в базата данни. Проверете настройките на елемента, за да се уверите, че всички данни, за който се отнасят, съществуват (т.е. конкретни потребители, полета на модул, екипи и т.н.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Изразът в кутията за критерии никога няма да се оцени като верен',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Кутиите за критерии съдържат логически изрази И/ИЛИ/НЕ. Тази грешка означава, че кутията за критерии в настройките на елемент е конфигурирана по такъв начин, че изразът никога няма да бъде верен. Проверете кутията за критерии, за да се премахнат всякакви логически противоречия, които пречат изразът да бъде верен.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Елементът не е достижим',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'За да може даден елемент да бъде изпълнен в процес, трябва да има път, свързан с него. Веригата от пътища, водещи до този елемент, трябва да започва с елемент за старт. Проверете веригата на входящите пътища към този елемент, за да се уверите, че веригата започва с елемент за старт.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Критерият за време за изчакване трябва да съдържа точно една константа за дата/час',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Този елемент за събитие с изчакване е конфигуриран с помощта на кутията за критерий "Фиксирана дата". Тази кутия трябва да съдържа само една константа "Фиксирана дата/час" или препратка към полето "Дата/час". Всички други части на израза трябва да бъдат математически оператори (+/-) или константи "Период от време".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Зададената стойност за продължителност не трябва да бъде нула',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Този елемент за събитие с изчакване е конфигуриран с помощта на настройката "Продължителност". Тази настройка не трябва да е равна на нула или ще възникне грешка. Проверете настройките на елемента, за да се уверите, че "Продължителност" не е зададена като нула.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Не са зададени параметри за време за изчакване',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Този елемент за събитие с изчакване няма конфигурирани никакви настройки. Проверете настройките на елемента, за да се уверите, че е избрана "Продължителност" или "Фиксирана дата", въведете желаните стойности и щракнете върху бутона "Запиши".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Очакваното време е по-малко от нула',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'В настройките "Формуляри" за този елемент за дейност очакваното време е зададено като отрицателна стойност, което ще доведе до процеса на спиране при достигане на елемента. Отворете настройките за "Формуляри" за този елемент, за да промените очакваното време на неотрицателно число.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Типът действие е [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Този елемент за действие няма определен тип. Това може да бъде променено, като щракнете с десния бутон върху елемента за действие и изберете тип от списъка "Тип действие".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Няма гаранция, че даден път ще бъде използван',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Това съобщение за грешка възниква, защото има шанс никой от пътищата навън на този елемент за шлюз да не бъде използване, което би предизвикало спиране на процеса. Препоръчително е да зададете път по подразбиране, който да се използва, в случай че нито един от изразите в кутията с критериите в настройките на елемент не е удовлетворен. Това може да стане чрез щракване с десния бутон върху елемента на шлюза и избор на елемент под менюто "Поток по подразбиране". Ако не е зададен път по подразбиране, изразите в кутията с критериите в настройките на елемент трябва да се променят, за да се гарантира, че поне един от тях ще бъде верен, когато процесът се изпълнява.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Типът на концентриращия шлюз не съвпада с типа шлюз на входящия поток',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Разделящите шлюзове разширяват процесите в множество разклонения. Когато се използва концентриращ шлюз за повторно обединяване на тези разклонения в един път, трябва да се използва правилният тип концентриращ шлюз в зависимост от типа на разделящия шлюз, който е използван за създаване на разклоненията. За разклоненията, създадени с ексклузивни или основани на събитие разделящи шлюзове, използвайте ексклузивен концентриращ шлюз, за да ги обедините отново. За разклоненията, създадени с паралелни или инклузивни разделящи шлюзове, използвайте паралелен концентриращ шлюз, за да ги обедините отново.',
 );

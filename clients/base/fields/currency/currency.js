@@ -160,7 +160,9 @@
         var self = this;
         var el = this.$el.find(this.fieldTag);
         el.on('change', function() {
-            var val = self.unformat(el.val());
+            // trimming the value to remove space if any
+            var trimVal = el.val() ? el.val().trim() : el.val();
+            var val = self.unformat(trimVal);
             if (_.isEqual(val, self.model.get(self.name))) {
                 self.setCurrencyValue(val);
             } else {
@@ -186,53 +188,70 @@
         var baseRateField = this.def.base_rate_field || 'base_rate';
         // if the current_user doesn't have edit access to the field
         // don't add these listeners
-        if (this.hasEditAccess && this.view.action !== 'list') {
+        if (this.hasEditAccess && !this.hideCurrencyDropdown) {
             this.model.on('change:' + baseRateField, this.handleBaseRateFieldChange, this);
-            this.model.on('change:' + currencyField, function(model, currencyId, options) {
-                //When model is reset, it should not be called
-                if (!currencyId || !this._lastCurrencyId || options.revert === true) {
-                    this._lastCurrencyId = currencyId;
-                    return;
-                }
-
-                if (_.has(model.changed, this.name)) {
-                    // if this field is on the view more than once, this will trigger x number of times. so if the
-                    // currency_id has changed and this field has already changed on the model, we should ignore it.
-                    return;
-                }
-
-                // update the base rate in the model, set it silently since we are already going to do a re-render
-                this.model.set(baseRateField, app.metadata.getCurrency(currencyId).conversion_rate, {silent: true});
-
-                if (!_.isUndefined(this.view.getField('base_rate'))) {
-                    this.view.getField('base_rate').render();
-                }
-
-                // convert the value to new currency on the model
-                if (model.has(this.name)) {
-                    var val = model.get(this.name);
-                    if (val) {
-                        this.model.set(
-                            this.name,
-                            app.currency.convertAmount(
-                                val,
-                                this._lastCurrencyId,
-                                currencyId
-                            ),
-                            // we don't want to affect other bindings like sugar logic
-                            // when updating a value upon a currency_id change,
-                            // so set the model silently, then update the field value
-                            // directly (see next func call)
-                            {silent: true}
-                        );
-                    }
-                    // now defer changes to the end of the thread to avoid conflicts
-                    // with other events (from SugarLogic, etc.)
-                    this._deferModelChange();
-                }
-                this._lastCurrencyId = currencyId;
-            }, this);
+            this.model.on('change:' + currencyField, this.handleCurrencyFieldChange, this);
         }
+    },
+
+    /**
+     * Listens to currency field changes. Calls the update model value method if required and saves the latest
+     * currencyId
+     * @protected
+     */
+    handleCurrencyFieldChange: function(model, currencyId, options) {
+        var baseRateField = this.def.base_rate_field || 'base_rate';
+        //When model is reset, it should not be called
+        if (!currencyId || !this._lastCurrencyId || options.revert === true) {
+            this._lastCurrencyId = currencyId;
+            return;
+        }
+
+        if (_.has(model.changed, this.name)) {
+            // if this field is on the view more than once, this will trigger x number of times. so if the
+            // currency_id has changed and this field has already changed on the model, we should ignore it.
+            return;
+        }
+
+        // update the base rate in the model, set it silently since we are already going to do a re-render
+        this.model.set(baseRateField, app.metadata.getCurrency(currencyId).conversion_rate, {silent: true});
+
+        if (!_.isUndefined(this.view.getField('base_rate'))) {
+            this.view.getField('base_rate').render();
+        }
+
+        // convert the value to new currency on the model
+        if (model.has(this.name)) {
+            var val = model.get(this.name);
+            this.updateModelWithValue(model, currencyId, val);
+        }
+        this._lastCurrencyId = currencyId;
+    },
+
+    /**
+     * Updates the currency field value when the currency field changes.  Defers model changes and re-renders the field
+     * so that the currency value changes when a 0 amount is switched between currencies.
+     * @protected
+     */
+    updateModelWithValue: function(model, currencyId, val) {
+        if (val) {
+            this.model.set(
+                this.name,
+                app.currency.convertAmount(
+                    val,
+                    this._lastCurrencyId,
+                    currencyId
+                ),
+                // we don't want to affect other bindings like sugar logic
+                // when updating a value upon a currency_id change,
+                // so set the model silently, then update the field value
+                // directly (see next func call)
+                {silent: true}
+            );
+        }
+        // now defer changes to the end of the thread to avoid conflicts
+        // with other events (from SugarLogic, etc.)
+        this._deferModelChange();
     },
 
     /**

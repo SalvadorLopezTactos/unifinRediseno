@@ -11,32 +11,44 @@
 
 const webpack = require('webpack');
 const path = require('path');
+
 const devMode = process.env.DEV;
 
 module.exports = {
+    mode: devMode ? 'development' : 'production',
+    optimization: {
+        minimize: !devMode,
+    },
     devtool: 'source-map',
-
     entry: {
         sidecar: [
             'entry.js',
         ],
     },
-
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|lib)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015'],
-                    },
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        ['env', {
+                            targets: {
+                                browsers: [
+                                    'last 1 chrome version',
+                                    'last 1 firefox version',
+                                    'last 1 safari version',
+                                    'last 1 edge version',
+                                    'ie 11',
+                                ],
+                            },
+                        }],
+                    ],
                 },
-            },
-        ],
+            }],
+        }],
     },
-
     output: {
         path: path.resolve(__dirname, 'minified'),
         filename: '[name].min.js',
@@ -46,19 +58,11 @@ module.exports = {
         devtoolModuleFilenameTemplate: 'sidecar:///[resourcePath]',
         devtoolFallbackModuleFilenameTemplate: 'sidecar:///[resourcePath]?[hash]',
     },
-
-    plugins: [
+    plugins: ([
         new webpack.DefinePlugin({
-            ZEPTO: JSON.stringify(false),
-        }),
-
-        new webpack.optimize.UglifyJsPlugin({
-            compress: !devMode,
-            mangle: devMode ? false : true,
-            sourceMap: true,
-        }),
-    ],
-
+            ZEPTO: 'false',
+        })]
+    ),
     resolve: {
         modules: [
             path.join(__dirname, 'src'),

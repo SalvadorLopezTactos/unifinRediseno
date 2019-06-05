@@ -186,7 +186,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kun aloitat tämän muutosprosessin, jokaista {{module_name}}-tietuetta kohti luodaan tuoterivitietueita. Kun tuoterivit ovat valmiit ja saatavilla, sähköpostiosoiteeseesi lähetetään ilmoitus. [Instanssisi sähköpostiasetusten on oltava kunnossa, jotta sähköposti voidaan lähettää.].',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} etenee yleensä useiden myyntivaiheiden kautta, kunnes se merkitään joko tilaan "Suljettu voitettu" tai "Suljettu menetetty". Moduulia {{plural_module_name}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä työn kohdistamiseen myyntitavoitteiden saavuttamiseen.',
+    'LBL_HELP_RECORDS' => 'Moduulien {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} etenee yleensä useiden myyntivaiheiden kautta, kunnes se merkitään joko tilaan "Suljettu voitettu" tai "Suljettu menetetty". Moduuleja {{plural_module_name}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä työn kohdistamiseen myyntitavoitteiden saavuttamiseen.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne.
@@ -195,15 +195,15 @@ $mod_strings = array(
 - Katsele tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasen alapaneeli "Tietonäkymään". 
 - Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasen alapaneeli "Aktiviteettivirta"-näkymään. 
 - Seuraa tietuetta tai merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita. 
-- Muita toimintoja löytyy Toiminnot-pudotusvalikosta, joka on Muokkaa-painikkeen oikealla puolella.',
+- Muita toimintoja löytyy Muokkaa-painikkeen oikealla puolella olevasta Toiminnot-pudotusvalikosta.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. 
 
 Luo {{module_name}} seuraavasti:
 1. Syötä kenttiin haluamasi arvot.
-- Kentät, joissa on merkintä "Pakollinen", tulee täyttää ennen tallentamista.
-- Tarvittaessa saat lisää kenttiä näkyviin napsauttamalla "Näytä lisää".
+ - Kentät, joissa on merkintä "Pakollinen", tulee täyttää ennen tallentamista.
+ - Tarvittaessa saat lisää kenttiä näkyviin napsauttamalla "Näytä lisää".
 2. Viimeistele uusi tietue ja palaa edelliselle sivulle napsauttamalla "Tallenna".',
 
 // END ENT/ULT

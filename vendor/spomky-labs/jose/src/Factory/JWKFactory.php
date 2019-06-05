@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -60,9 +60,9 @@ final class JWKFactory implements JWKFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public static function createRotatableKeySet($filename, array $parameters, $nb_keys)
+    public static function createRotatableKeySet($filename, array $parameters, $nb_keys, $interval = null)
     {
-        return new RotatableJWKSet($filename, $parameters, $nb_keys);
+        return new RotatableJWKSet($filename, $parameters, $nb_keys, $interval);
     }
 
     /**
@@ -122,7 +122,7 @@ final class JWKFactory implements JWKFactoryInterface
         $curve = $values['crv'];
         if (function_exists('openssl_get_curve_names')) {
             $args = [
-                'curve_name'       => self::getOpensslName($curve),
+                'curve_name' => self::getOpensslName($curve),
                 'private_key_type' => OPENSSL_KEYTYPE_EC,
             ];
             $key = openssl_pkey_new($args);
@@ -146,9 +146,9 @@ final class JWKFactory implements JWKFactoryInterface
                 [
                     'kty' => 'EC',
                     'crv' => $curve,
-                    'x'   => self::encodeValue($private_key->getPublicKey()->getPoint()->getX()),
-                    'y'   => self::encodeValue($private_key->getPublicKey()->getPoint()->getY()),
-                    'd'   => self::encodeValue($private_key->getSecret()),
+                    'x' => self::encodeValue($private_key->getPublicKey()->getPoint()->getX()),
+                    'y' => self::encodeValue($private_key->getPublicKey()->getPoint()->getY()),
+                    'd' => self::encodeValue($private_key->getSecret()),
                 ]
             );
         }
@@ -169,7 +169,7 @@ final class JWKFactory implements JWKFactoryInterface
             $values,
             [
                 'kty' => 'oct',
-                'k'   => Base64Url::encode(random_bytes($size / 8)),
+                'k' => Base64Url::encode(random_bytes($size / 8)),
             ]
         );
 
@@ -188,11 +188,13 @@ final class JWKFactory implements JWKFactoryInterface
                 Assertion::true(function_exists('curve25519_public'), sprintf('Unsupported "%s" curve', $curve));
                 $d = random_bytes(32);
                 $x = curve25519_public($d);
+
                 break;
             case 'Ed25519':
                 Assertion::true(function_exists('ed25519_publickey'), sprintf('Unsupported "%s" curve', $curve));
                 $d = random_bytes(32);
                 $x = ed25519_publickey($d);
+
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Unsupported "%s" curve', $curve));
@@ -203,8 +205,8 @@ final class JWKFactory implements JWKFactoryInterface
             [
                 'kty' => 'OKP',
                 'crv' => $curve,
-                'x'   => Base64Url::encode($x),
-                'd'   => Base64Url::encode($d),
+                'x' => Base64Url::encode($x),
+                'd' => Base64Url::encode($d),
             ]
         );
 

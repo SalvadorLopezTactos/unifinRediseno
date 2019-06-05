@@ -58,10 +58,6 @@ function commitAjaxFinalTouches($persistence) {
 		require('sugar_version.php');
 	}
 
-	// convert to UTF8 if needed
-	if(!empty($persistence['allTables']))
-		executeConvertTablesSql($persistence['allTables']);
-
 	// rebuild
 	logThis('Performing UWrebuild()...');
 	UWrebuild();

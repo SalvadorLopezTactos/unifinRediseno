@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Create Future TimePeriods',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expire KB Articles.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expired KB Articles.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Scheduled Job',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rebuild Denormalised Team Security Data',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Check Inbound Mail Accounts',
 'LBL_PERFORMFULLFTSINDEX' => 'Full-text Search Index System',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Remove temporary PDF files',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publish approved articles & Expire KB Articles.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publish approved articles & Expired KB Articles.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Scheduler',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remove diagnostic tool files',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Remove temporary files',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Run Email Reminders Sending',
 'LBL_CLEANJOBQUEUE' => 'Cleanup Job Queue',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'SugarBPM Scheduler',
 );
 

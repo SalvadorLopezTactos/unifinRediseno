@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => '這是系統帳戶。',
     'LBL_EMAIL_ADDRESS_ID' => '電子郵件地址 ID',
     'LBL_TYPE' => '類型',
+    'LBL_REPLY_TO_NAME' => '收件者名稱',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => '收件者電子郵件地址',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '收件者電子郵件ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => '收件者電子郵件地址',
+    'LBL_PRIMARY_TEAM' => '主要小組',
 );

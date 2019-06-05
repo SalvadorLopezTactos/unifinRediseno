@@ -355,6 +355,8 @@
             case 'horizontal group by chart':
             case 'group by chart':
             case 'stacked group by chart':
+            case 'horizontal grouped bar chart':
+            case 'vertical grouped bar chart':
                 if (reportData.group_defs.length > 1) {
                     var groupIndex = _.findIndex(chartData.values, function(value) {
                         return value.label === chartLabels.groupLabel;
@@ -461,6 +463,21 @@
                     orientation: 'horizontal',
                     barType: 'basic',
                     chartType: 'horizontal group by chart'
+                };
+                break;
+
+            case 'horizontal grouped bar chart':
+                chartConfig = {
+                    orientation: 'horizontal',
+                    barType: 'grouped',
+                    chartType: 'horizontal group by chart'
+                };
+                break;
+            case 'vertical grouped bar chart':
+                chartConfig = {
+                    orientation: 'vertical',
+                    barType: 'grouped',
+                    chartType: 'group by chart'
                 };
                 break;
 
@@ -782,6 +799,8 @@
                 case 'stacked group by chart':
                 case 'horizontal group by chart':
                 case 'group by chart':
+                case 'vertical grouped bar chart':
+                case 'horizontal grouped bar chart':
                     showDimensionOptions = true;
                     showBarOptions = true;
                     showStacked = true;
@@ -805,6 +824,7 @@
             if (showDimensionOptions) {
                 switch (this.settings.get('chart_type')) {
                     case 'horizontal group by chart':
+                    case 'horizontal grouped bar chart':
                     case 'horizontal bar chart':
                     case 'horizontal':
                         showTickOptions = false;

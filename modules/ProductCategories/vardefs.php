@@ -100,6 +100,7 @@ $dictionary['ProductCategory'] = array(
     ),
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

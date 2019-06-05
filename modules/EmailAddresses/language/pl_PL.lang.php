@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Usuń',
     'LBL_MODULE_NAME' => 'Adresy e-mail',
     'LBL_MODULE_NAME_SINGULAR' => 'Adres e-mail',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Wykonano czynność potwierdzenia żądania',
+    'LBL_CONFIRMATION_TITLE' => 'Dziękujemy',
+    'LBL_CONFIRMATION_MESSAGE' => 'Subskrypcja została potwierdzona. Dodano do listy. Wkrótce otrzymasz więcej informacji.',
 );

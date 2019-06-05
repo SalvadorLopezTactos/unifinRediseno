@@ -13,7 +13,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
- * $Header$
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.

@@ -17,5 +17,6 @@
     "tests/unit-js/include/javascript/pmse/*.js",
     "tests/unit-js/include/javascript/pmse/**/*.js",
     "tests/unit-js/include/javascript/twitterbootstrap/**/*.js",
-    "tests/unit-js/include/SugarCharts/sucrose/js/*.js"
+    "tests/unit-js/include/SugarCharts/sucrose/js/*.js",
+    "tests/unit-js/include/Expressions/Expression/**/*.js"
 ]

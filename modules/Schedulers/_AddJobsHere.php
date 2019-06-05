@@ -427,10 +427,15 @@ function updateTrackerSessions() {
 	$db = DBManagerFactory::getInstance();
     require_once('include/utils/db_utils.php');
 	//Update tracker_sessions to set active flag to false
-	$sessionTimeout = db_convert("'".$timedate->getNow()->get("-6 hours")->asDb()."'" ,"datetime");
-	$query = "UPDATE tracker_sessions set active = 0 where date_end < $sessionTimeout";
-	$GLOBALS['log']->info("----->Scheduler is about to update tracker_sessions table by running the query $query");
-	$db->query($query);
+    $sessionTimeout = $timedate->getNow()->get("-6 hours")->asDb();
+    $dateExpression = db_convert('?', "datetime");
+    $statement = "UPDATE tracker_sessions set active = ? where active = ? and date_end < $dateExpression";
+    $params = [0, 1, $sessionTimeout];
+    $db->getConnection()
+        ->executeUpdate(
+            $statement,
+            $params
+        );
 	return true;
 }
 

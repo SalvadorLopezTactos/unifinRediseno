@@ -18,7 +18,7 @@ global $theme;
 
 require_once('include/workflow/workflow_utils.php');
 
-    $target_module = InputValidation::getService()->getValidInputRequest('target_module', 'Assert\Mvc\ModuleName', '');
+    $target_module = InputValidation::getService()->getValidInputRequest('target_module_or_link', null, '');
 
     if (!$target_module) {
         sugar_die("Target_module required");
@@ -108,5 +108,3 @@ echo "</form>";
  	echo $on_start;
 	echo "</script>";
 	echo "</body></html>";
-
-?>

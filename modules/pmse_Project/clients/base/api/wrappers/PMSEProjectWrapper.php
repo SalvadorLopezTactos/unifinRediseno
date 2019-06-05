@@ -1235,7 +1235,8 @@ class PMSEProjectWrapper extends PMSEWrapper implements PMSEObservable
                         'act_field_module' => '',
                         'act_assign_team' => '',
                         'act_update_record_owner' => '',
-                        'act_assign_user' => ''
+                        'act_assign_user' => '',
+                        'act_params' => '',
                     ));
                 }
 

@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-posti sätted',
     'EmailParticipants' => 'E-kirja osapooled',
     'DataPrivacy' => 'Andmete privaatsus',
+    'ReportSchedules' => 'Aruande ajakavad',
+    'CommentLog' => 'Kommentaaride logi',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuthi luba',
     'Filters' => 'Filtri',
     'Comments' => 'Kommentaar',
+    'CommentLog' => 'Kommentaaride logi',
     'Currencies' => 'Valuuta',
     'ProductTemplates' => 'Toote mall',
     'ProductTypes' => 'Tooteliik',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-posti säte',
     'EmailParticipants' => 'E-kirja osapool',
     'DataPrivacy' => 'Andmete privaatsus',
+    'ReportSchedules' => 'Aruande ajakava',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transport',
     'Utilities' => 'Utiliidid',
     'Other' => 'Muud',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => '1. järk',
+    'T2' => '2. järk',
+    'T3' => '3. järk',
+    'T4' => '4. järk',
   ),
   'lead_source_default_key' => 'Ise loodud',
   'lead_source_dom' =>
@@ -996,7 +1007,7 @@ $app_list_strings = array (
                 ),
         'dom_cal_month_short'=>array(
                 '0'=>"",
-                '1'=>"Jan",
+                '1'=>"Jaan",
                 '2'=>"Veebr",
                 '3'=>"Märts",
                 '4'=>"Apr",
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => 'l',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Move',
         'donothing' => 'Do Nothing'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Mitte kunagi',
+        30000 => 'Iga 30 sekundi tagant',
+        60000 => 'Iga 1 minuti tagant',
+        120000 => 'Iga 2 minuti tagant',
+        180000 => 'Iga 3 minuti tagant',
+        240000 => 'Iga 4 minuti tagant',
+        300000 => 'Iga 5 minuti tagant',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'In Forecast',
         'sales_stage' => 'Sales Stage',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Loend',
         'activities' => 'Tegevusvoog',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Tunni kaupa',
+        '21600' => 'Iga 6 tunni tagant',
+        '43200' => 'Iga 12 tunni tagant',
+        '86400' => 'Iga päev',
+        '604800' => 'Iga nädal',
+        '1209600' => 'Iga 2 nädala tagant',
+        '2419200' => 'Iga 4 nädala tagant',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tegevused',
-  'LBL_COPYRIGHT' => 'Autoriõigus © 2004–2018 SugarCRM Inc. Kõik õigused kaitstud.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
         'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Salvesta',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Lisa see kaust',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Seda kausta ei saa muuta',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Kas oled kindel, et soovd seda kausta kustutada?Seda protsessi ei saa tagasi pöörata.\\n Kausta kustutamised laienevad ka teistele sisalduvatele kaustadele.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Kas oled kindel, et soovd seda kausta kustutada?Seda protsessi ei saa tagasi pöörata.\n Kausta kustutamised laienevad ka teistele sisalduvatele kaustadele.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Uus kausta nimi',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Palun vali kaust enne selle tegevuse teostamist.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Kausta haldus',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Vali e-kirjade arv postkastis lehe kohta. See seadistus võib eeldada lehe värskendamist.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'E-posti konto laadimine',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Reeglid',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'See seadistus on salvestatud.\\n\\n Värskenda lehte.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'See seadistus on salvestatud.\n\n Värskenda lehte.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'You must reload the page for the new settings to take effect.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Saada ainult lihttekstina e-kirju',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Aktiivne',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Nõutav on aktiivne sessioon sisu eksportimiseks.',
     'ERR_NO_HEADER_ID' => 'Funktsioon on sel teemal mittesaadaval.',
     'ERR_NOT_ADMIN' => "Administratsiooni jaoks autoriseerimata ligipääs.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "See suvand on keelatud SugarCRM-is IDM-režiimi puhul ja saadaval konsoolis Cloud.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Avage <a href=\"%s\" target=\"_blank\">konsool Cloud</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Paroolihaldus on kättesaadav ainult pilvesätetes.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Kui soovite teha kirjutuskaitstud väljadel muudatusi, võtke ühendust Sugari administraatoriga.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Puuduv nõutud väli:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Kehtetu nõutud väli:',
     'ERR_INVALID_VALUE' => 'Kehtetu väärtus',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Current User not authorized to change {moduleName} configuration settings',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'You are not authorized to favorite {moduleName}. Contact your administrator if you need access.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'You are not authorized to subscribe to {moduleName}. Contact your administrator if you need access.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields ei leitud kasulikus koormuses',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns ei ole reastus',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields ei leitud kasulikus koormuses',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows ei ole reastus',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields ei leitud kasulikus koormuses',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Your request failed due to an unknown exception.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Loo',
     'LBL_FILTER_CREATE_FILTER' => 'Loo uus filter',
+    'LBL_FILTER_CLOSE_FILTER' => 'Sulge filter',
     'LBL_FILTER_EDIT_FILTER' => 'Redigeeri filtrit',
     'LBL_FILTER_ALL_RECORDS' => 'All Records',
     'TPL_FILTER_SAVE' => 'You successfully created the filter {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004–2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Kõik õigused kaitstud.<br />SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
         'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
         'vastavate ettevõtete kaubamärgid, millega need on seotud.',
@@ -3420,7 +3460,7 @@ Sincerely, SugarCRM',
     'LNK_RESUME' => 'Resümee',
     'LNK_VIEW_CHANGE_LOG' => 'Vaata auditi logi',
     'TPL_AUDIT_LOG_TITLE' => 'Auditi logi olemi {{{name}}} jaoks',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'E-posti aadressi auditi logi vaatamiseks klõpsake',
 
     'NTC_CLICK_BACK' => 'Palun kliki lehitseja Tagasi klahvi ja korrasta viga.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3457,7 +3497,12 @@ Sincerely, SugarCRM',
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Warning:</b> Your browser is in IE compatibility view which is not supported.",
     'WARN_LICENSE_SEATS'=>  "Hoiatus: Aktiivsete kasutajate arv on juba maksimaalne, mis litsentsiga lubatud.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Hoiatus: Aktiivsete kasutajate arv ületab maksimaalse, mis litsentsga lubatud.",
-    'WARN_ONLY_ADMINS'=> "Ainult adminid saavad sisselogida.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Aktiivsete kasutajate arv ületab litsentsi arvu piirmäära. Võtke ühendust oma administraatoriga.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Ainult administraatorid võivad sisse logida.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Kasutaja litsentsi arvu piirmäär on saavutatud. Ainult olemasolevad kasutajad võivad sisse logida.',
+    'WARN_ONLY_ADMINS'=> "Ainult administraatorid võivad sisse logida.",
     'WARN_UNSAVED_CHANGES'=> "Oled lahkumas sellest kirjest salvestamata tehtud muudatusi.Kas oled kindel, et soovid navigeerida minema sellest kirjest?",
     'LBL_WARN_UNSAVED_CHANGES' => 'You have unsaved changes. Are you sure you want to leave page and discard changes?',
     'LBL_NAVIGATE_TO_REPORTS' => 'You are moving to the Reports module. Your changes to dashlet will not be saved. Continue?',
@@ -3550,6 +3595,7 @@ Sincerely, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Teil pole praegu ühtegi <item1> salvestatud kirjet. <item2> või kirje.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Click here",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Lisa Minu lemmikutesse',
@@ -3655,6 +3701,10 @@ Sincerely, SugarCRM',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Seotud konto müügivõimaluse mõõdik.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Tootekataloogi kiirvalikud',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Loetleb hiljuti kasutatud elemendid ja lemmikutesse salvestatud tooted',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Hiljuti kasutatud',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Lemmikud',
 
     'LBL_DASHLET_NO_RECORDS' => 'Praegu ei leitud ühtegi kirjet.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
@@ -4279,7 +4329,27 @@ Sincerely, SugarCRM',
 
     'LBL_FUTURE' => 'Future',
     'LBL_REQUIRED_FIELD' => 'Kohustuslik',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Pakkumuse reaüksus',
+    'LBL_DISCOUNT_TOTAL' => 'Allahindlus kokku',
+    'LBL_TAX' => 'Maks',
+    'LBL_SHIPPING' => 'Tarne',
+    'LBL_GRAND_TOTAL' => 'Kõik kokku',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Täida arve aadress automaatselt konto profiilist',
+    'LBL_QLI_ADD_GROUP' => 'Lisa grupp',
+    'LBL_QLI_COMMENT' => 'Kommentaar',
+    'LBL_SELECT_ACTION' => 'Vali tegevus',
+    'LBL_QLI_GROUP_NAME' => 'Rühma nimi',
+    'LBL_GROUP_TOTAL' => 'Rühm kokku',
+    'LBL_ITEM_NAME' => 'Reaüksus',
+    'LBL_QLI_DELETE' => 'Kas olete kindel, et soovite selle reaüksuse kustutada?',
+    'LBL_QLI_COMMENT_DELETE' => 'Kas olete kindel, et soovite selle reaüksuse kommentaari kustutada?',
+    'LBL_QLI_GROUP_DELETE' => 'Kas soovite kindlasti rühma {0} kustutada? Kõik kirjed teisaldatakse vaikimisi rühma.',
+    'LBL_QLI_GROUP_EMPTY' => 'Pakkumuse reaüksus puudub',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Optional',
     'LBL_RELATED_MODULE' => 'Related {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Related {{{this}}}',
@@ -4309,7 +4379,7 @@ Sincerely, SugarCRM',
     'LBL_CONFIRM' => 'Kinnita',
     'LBL_NO_ACCESS' => '(No Access)',
     'LBL_NO_ACCESS_LOWER' => 'No access',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Juurdepääs puudub',
     'LBL_VALUE_ERASED' => 'Väärtus kustutatud',
     'LBL_VALUE_ERASED_TOOLTIP' => 'See teave kustutati andmete privaatsuse taotluse kaudu',
     'LBL_CREATE_RELATED_RECORD' => 'Create Related Record',
@@ -4937,7 +5007,7 @@ Sincerely, SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team Tasks',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Täiustatud töövoog',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP või vana REST API',
@@ -4998,9 +5068,9 @@ Sincerely, SugarCRM',
     'LBL_ALERT_TITLE_NOTICE' => 'Notice:',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
+    'LBL_ALERT_NO_ACCESS' => 'Teil pole sellele dashletile rakendatud filtrile juurdepääsuluba.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Dubleerige armatuurlaud, et konfigureerida see dashlet oma filtriga.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Your browser version is no longer supported or you are using an unsupported browser.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Soovitatav on kasutada järgmisi brauserite versioone: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
     'LBL_ALERT_CONFIRM_DELETE' => 'Kas soovite kindlasti selle üksuse kustutada?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Kas soovite kindlasti need üksused kustutada?',
@@ -5098,7 +5168,7 @@ Sincerely, SugarCRM',
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historical Summary',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'More history...',
     'LBL_RELATED_CONTACT' => 'Related Contact',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5172,6 +5242,11 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Missing SMTP Server settings',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'To send record assignment notifications, an SMTP server must be configured in {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'E-kirja sätted',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Uued laoaruanded on saadaval',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Uued laoaruanded on saadaval asukohas ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Aruannete moodul',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Aruanded on tähistatud nimega „Laoaruanne” ja neid on võimalik filtreerida. Olenevalt sisust võivad aruanded olla ühtlasi tähistatud nimega „Müük ja turundus”, „Andmete privaatsus” või „Halduslik”. Lisateabe saamiseks vt ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentatsioon',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM enables power users to quickly perform certain tasks with keyboard shortcuts to increase productivity. The tables on the right describe available shortcuts along with the keys and the actions they perform.',
@@ -5281,23 +5356,26 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Protsessid',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Protsesside dashletis on kuvatud mallid, mida saate SugarBPM-is kasutada.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Protsessi määratlused',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Protsessi määratluste dashletis on kuvatud mallid, mida saate SugarBPM-is kasutada.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Loo protsessi määratlus',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Impordi protsessi määratlused',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Protsessi ärireeglid',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Protsessi ärireeglite dashletis on kuvatud mallid, mida saate SugarBPM-is kasutada.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Create Process Business Rule',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Import Process Business Rules',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Protsessi e-kirja mallid',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Protsessi meilimallide dashletis on kuvatud mallid, mida saate SugarBPM-is kasutada.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Create Process Email Template',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Import Process Email Templates',
 
@@ -5321,7 +5399,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_PMSE_CANCELLED_STATUS' => 'Tühistatud',
     'LBL_PMSE_TERMINATED_STATUS' => 'Lõpetatud',
     'LBL_PMSE_ERROR_STATUS' => 'Viga',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM-i sätted',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Are you sure you want to disable this record?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Are you sure you want to enable this record?',
@@ -5345,7 +5423,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 requires javascript. Please enable Javascript in your browser to use Sugar 7.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Jadaks teisendatud andmete jadaesitust ei saanud tagasi võtta',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Jadaks teisendatud andmete jadaesitust ei saanud tagasi võtta, sest need sisaldavad viiteid objektidele või klassidele',
 
@@ -5374,6 +5452,15 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_DATAPRIVACY_PII' => 'Isiklik teave',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Märgi kustutamiseks',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Isiku {{{name}}} isiklik teave',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopeeritud teie lõikelauale!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Teie lõikelauale ei olnud võimalik kopeeria',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopeeri kinnituslink',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Näita rohkem...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Näita vähem...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6551,7 +6638,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'YER' => 'Riaalid',
     'ZWD' => 'Zimbabwe dollarid',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Puudub',
+        'future' => 'Praegune väärtus',
+        'old' => 'Vana väärtus',
+        'both' => 'Praegune ja vanad väärtused',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

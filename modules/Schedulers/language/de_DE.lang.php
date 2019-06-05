@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Zukünftige Zeiträume anlegen',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent-Artikel aktualisieren.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Genehmigte Artikel veröffentlichen & Artikel aus der Wissensdatenbank auslaufen lassen.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplante Aufgaben für Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Genehmigte und aus der Wissensdatenbank ausgelaufene Artikel veröffentlichen.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplante Aufgabe',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
 
 // List Labels
@@ -142,7 +142,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_POLLMONITOREDINBOXES' => 'Eingehende E-Mail-Konten prüfen',
 'LBL_PERFORMFULLFTSINDEX' => 'Volltextsuche Index-System',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Temporäre PDF-Dateien entfernen',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Genehmigte Artikel veröffentlichen & Artikel aus der Wissensdatenbank auslaufen lassen.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Genehmigte und aus der Wissensdatenbank ausgelaufene Artikel veröffentlichen.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Warteschlangen-Planer',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnose-Tool-Dateien entfernen',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Temporäre Dateien entfernen',
@@ -161,6 +161,6 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_SENDEMAILREMINDERS'=> 'Senden der E-Mail-Erinnerungen ausführen',
 'LBL_CLEANJOBQUEUE' => 'Auftrags-Warteschlange bereinigen',
 'LBL_CLEANOLDRECORDLISTS' => 'Alte Datensatzlisten bereinigen',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow-Zeitplaner',
+'LBL_PMSEENGINECRON' => 'SugarBPM-Zeitplaner',
 );
 

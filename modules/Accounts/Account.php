@@ -71,6 +71,8 @@ class Account extends Company {
 	var $created_by_name;
 	var $modified_by_name;
 
+    public $service_level;
+
 	// These are for related fields
 	var $opportunity_id;
 	var $case_id;

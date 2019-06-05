@@ -101,7 +101,6 @@ $dictionary['Currency'] = array(
             'reportable' => false,
             'vname' => 'LBL_CREATED_BY',
             'type' => 'id',
-            'len' => '36',
             'required' => true,
             'comment' => 'User ID who created record'
         ),

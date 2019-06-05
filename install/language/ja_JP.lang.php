@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '整合性チェックの際にエラーが検出されました。SugarCRMを正常に動作させるため、以下にリストされた問題を解決し、再チェックボタンをクリックするか、インストールをやり直してください。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass ReferenceがOnになっています（php.iniでOffに設定してください）',
 
-	'ERR_CHECKSYS_CURL'					=> '見つかりません: Sugarスケジューラは機能制限付きで実行されます。Eメールアーカイブは実行されません。',
+	'ERR_CHECKSYS_CURL'					=> '見つかりません: Sugar スケジューラーは機能が制限された状態で実行されます。Eメールアーカイブサービスは実行されません。',
     'ERR_CHECKSYS_IMAP'					=> '見つかりません: インバウンドEメールとキャンペーンEメールを利用するためにはIMAPライブラリが必要です。この２つは動作しません。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'SQL Serverを使用する場合はMagic Quotes GPCをOnにできません。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI SAPIを適切に使用するためには、php.iniファイルで fastcgi.logging を 0 に設定してください。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'このPHPのバージョンはサポート外です:  ( ver',
     'LBL_DB_UNAVAILABLE'                => 'データベースが利用不可能です。',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースサポートが見つかりませんでした。 次のサポートされているデータベースタイプのいずれかのために必要なドライバーがあることを確認してください: MySQL、MS SQLServer、Oracle、またはDB2。PHPのバージョンによっては、php.iniファイル内のエクステンションのコメントを解除するか、適切なバイナリファイルで再コンパイルする必要があります。 データベースサポートを有効にする方法の詳細については、PHPマニュアルを参照してください。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースサポートが見つかりませんでした。 サポートされているいずれかの種類のデータベース（MySQL、MS SQLServer、Oracle、DB2）に必要なドライバーがあることを確認してください。PHP のバージョンによっては、php.ini ファイルでエクステンションのコメントを解除するか、適切なバイナリ・ファイルを使ってコンパイルし直す必要があるかもしれません。データベースの有効化に関する詳細情報については、PHP マニュアルをご覧ください。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XMLパーサライブラリに関連する機能が見つかりません。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、PHPをコンパイルし直す必要があります。データベースをサポートする詳しい方法についてはPHPのマニュアルを参照ください。',
     'LBL_CHECKSYS_CSPRNG' => '乱数ジェネレーター',
     'ERR_CHECKSYS_MBSTRING'             => 'マルチバイトストリングをサポートするエクステンション（mbstring）が見つかりません。エクステンションがインストールされていないか、PHPがコンパイルされる際にmbstringモジュールが有効になっていない可能性があります。mbstringを有効にする方法についてはPHPのマニュアルを参照ください。',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'PHPの設定ファイル(php.ini)にsession.save_pathが設定されていないか、設定されたディレクトリが存在しません。session.save_pathに正しいディレクトリを指定してください。',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'PHPの設定ファイル(php.ini)のsession.save_pathに設定されたディレクトリに書き込みできません。ディレクトリに書き込み権限を与えてください。<br>権限の設定方法はシステムに依存します。対象ディレクトリにchmod 766を実行するか、右クリックのプロパティから読み込み専用のプロパティをはずしてください。',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'configファイルは存在しますが、書き込みできません。ファイルに書き込み権限を与えてください。OSに拠りますが、chmod 766などのパーミッションを変更するコマンドを実行したり、当該ファイルのプロパティで読み取り専用のチェックをはずす必要があります。',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAPモジュール',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Stringsモジュール',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (無制限)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (無制限)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP Memory Limit >=',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'アカウント情報',
         'description' => 'このテンプレートはシステム管理者がユーザに新しいパスワードを送付する際に使用されます。',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>アカウント名と一時パスワードは次の通りです:</p><p>ユーザ名 : $contact_user_user_name </p><p>パスワード : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>上記のパスワードを用いてログインした後、任意のパスワードに変更してください。</p></td></tr><tr><td colspan=\\"2\\"></td></tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>アカウント名と一時パスワードは次の通りです:</p><p>ユーザ名 : $contact_user_user_name </p><p>パスワード : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>上記のパスワードを用いてログインした後、任意のパスワードに変更してください。</p></td></tr><tr><td colspan=\"2\"></td></tr> </tbody></table> </div>',
         'txt_body' =>
 'アカウント名と一時パスワードは次の通りです:<br />ユーザ名 : $contact_user_user_name<br />パスワード : $contact_user_user_hash<br /><br />$config_site_url<br /><br />上記のパスワードを用いてログインした後、任意のパスワードに変更してください。',
         'name' => '自動生成したパスワードのお知らせ',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'アカウントパスワードのリセット',
         'description' => "このテンプレートは、ユーザのアカウントパスワードをリセットするためのリンクを送信する際に用います。",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>あなたは、$contact_user_pwd_last_changed にパスワードのリセットを依頼しました。</p><p>以下のリンクをクリックしてパスワードをリセットしてください:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>あなたは、$contact_user_pwd_last_changed にパスワードのリセットを依頼しました。</p><p>以下のリンクをクリックしてパスワードをリセットしてください:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'あなたは、$contact_user_pwd_last_changed にパスワードのリセットを依頼しました。<br /><br />以下のリンクをクリックしてパスワードをリセットしてください:<br /><br />$contact_user_link_guid',
         'name' => 'パスワードのリセットのお知らせ',

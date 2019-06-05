@@ -10,20 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-$module_name = 'pmse_Emails_Templates';
-$viewdefs[$module_name]['base']['filter']['default'] = array(
+$viewdefs['pmse_Emails_Templates']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'assigned_user_name' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'assigned_user_name' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+        'tag' => [],
+    ],
+];

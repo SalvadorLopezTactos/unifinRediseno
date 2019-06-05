@@ -476,6 +476,13 @@ $dictionary['Note'] = array(
                 'email_type',
             ),
         ),
+                               array(
+                                   'name' => 'idx_note_upload_id',
+                                   'type' => 'index',
+                                   'fields' => array(
+                                       'upload_id',
+                                   ),
+                               ),
     )
 
     //This enables optimistic locking for Saves From EditView
@@ -486,7 +493,12 @@ $dictionary['Note'] = array(
     ),
 );
 
-VardefManager::createVardef('Notes','Note', array('default', 'assignable',
-'team_security',
-));
-
+VardefManager::createVardef(
+    'Notes',
+    'Note',
+    array(
+        'default',
+        'assignable',
+        'team_security',
+    )
+);

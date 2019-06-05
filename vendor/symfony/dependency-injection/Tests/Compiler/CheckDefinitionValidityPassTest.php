@@ -12,7 +12,6 @@
 namespace Symfony\Component\DependencyInjection\Tests\Compiler;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -56,10 +55,10 @@ class CheckDefinitionValidityPassTest extends TestCase
     public function testValidTags()
     {
         $container = new ContainerBuilder();
-        $container->register('a', 'class')->addTag('foo', array('bar' => 'baz'));
-        $container->register('b', 'class')->addTag('foo', array('bar' => null));
-        $container->register('c', 'class')->addTag('foo', array('bar' => 1));
-        $container->register('d', 'class')->addTag('foo', array('bar' => 1.1));
+        $container->register('a', 'class')->addTag('foo', ['bar' => 'baz']);
+        $container->register('b', 'class')->addTag('foo', ['bar' => null]);
+        $container->register('c', 'class')->addTag('foo', ['bar' => 1]);
+        $container->register('d', 'class')->addTag('foo', ['bar' => 1.1]);
 
         $this->process($container);
 
@@ -72,7 +71,7 @@ class CheckDefinitionValidityPassTest extends TestCase
     public function testInvalidTags()
     {
         $container = new ContainerBuilder();
-        $container->register('a', 'class')->addTag('foo', array('bar' => array('baz' => 'baz')));
+        $container->register('a', 'class')->addTag('foo', ['bar' => ['baz' => 'baz']]);
 
         $this->process($container);
     }
@@ -96,7 +95,7 @@ class CheckDefinitionValidityPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $env = $container->getParameterBag()->get('env(BAR)');
-        $container->setAlias("foo.$env", new Alias('class', true));
+        $container->setAlias("foo.$env", 'class')->setPublic(true);
 
         $this->process($container);
     }
@@ -105,8 +104,8 @@ class CheckDefinitionValidityPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $env = $container->getParameterBag()->get('env(BAR)');
-        $container->register("foo.$env", 'class')->setPublic(false);
-        $container->setAlias("bar.$env", new Alias('class', false));
+        $container->register("foo.$env", 'class');
+        $container->setAlias("bar.$env", 'class');
 
         $this->process($container);
 

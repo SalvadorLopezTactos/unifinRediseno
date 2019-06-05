@@ -24,7 +24,7 @@ class SugarFieldPassword extends SugarFieldBase
         ImportFieldSanitize $settings
         )
     {
-        $value = md5($value);
+        $value = User::getPasswordHash($value);
         
         return $value;
     }

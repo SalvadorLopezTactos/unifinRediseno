@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: db_utils.php 56343 2010-05-10 21:18:10Z jenny $
 
 /**
  * @deprecated use DBManager::convert() instead.

@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-mailinstellingen',
     'EmailParticipants' => 'E-maildeelnemers',
     'DataPrivacy' => 'Gegevensprivacy',
+    'ReportSchedules' => 'Schema&#39;s rapporteren',
+    'CommentLog' => 'Opmerkingenlog',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'API OAuth Token',
     'Filters' => 'Filteren',
     'Comments' => 'Commentaar',
+    'CommentLog' => 'Opmerkingenlog',
     'Currencies' => 'Valuta',
     'ProductTemplates' => 'Productsjabloon',
     'ProductTypes' => 'Producttype',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-mailinstelling',
     'EmailParticipants' => 'E-maildeelnemer',
     'DataPrivacy' => 'Gegevensprivacy',
+    'ReportSchedules' => 'Schema rapporteren',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transport',
     'Utilities' => 'Nutsbedrijven',
     'Other' => 'Anders',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Niveau 1',
+    'T2' => 'Niveau 2',
+    'T3' => 'Niveau 3',
+    'T4' => 'Niveau 4',
   ),
   'lead_source_default_key' => 'Zelf gegenereerd',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Verplaatsen',
         'donothing' => 'Doe niets'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Nooit',
+        30000 => 'Elke 30 seconden',
+        60000 => 'Elke minuut',
+        120000 => 'Elke 2 minuten',
+        180000 => 'Elke 3 minuten',
+        240000 => 'Elke 4 minuten',
+        300000 => 'Elke 5 minuten',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Meenemen in forecast',
         'sales_stage' => 'Verkoopstadium',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Lijst',
         'activities' => 'Activity Stream',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Elk uur',
+        '21600' => 'Elke 6 uren',
+        '43200' => 'Elke 12 uren',
+        '86400' => 'Dagelijks',
+        '604800' => 'Wekelijks',
+        '1209600' => 'Elke 2 weken',
+        '2419200' => 'Elke 4 weken',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Volg koppeling',
   'LBL_TOGGLE_VISIBILITY' => 'Toon zichtbaarheid', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Alle rechten voorbehouden.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Opslaan',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Voeg deze map toe aan',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Deze map kan niet worden veranderd',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Weet u zeker dat u deze map wilt verwijderen?\\nDit proces kan niet ongedaan gemaakt worden.\\nOnderliggende mappen worden ook verwijderd.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Weet u zeker dat u deze map wilt verwijderen?\nDit proces kan niet ongedaan gemaakt worden.\nOnderliggende mappen worden ook verwijderd.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Nieuwe map',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Selecteer een map voordat u deze actie uitvoert.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Mappenbeheer',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synchroniseer alle mailaccounts',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Er is een e-mail verzonden naar het opgegeven e-mailadres gebruikmakend van de opgegeven instellingen voor uitgaande e-mail. Controleer of de instellingen correct zijn door te kijken of het bericht is aangekomen.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Deze actie zorgt voor een volledige synchronisatie van de e-mailaccounts en hun inhoud.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Wilt u een volledige synchronisatie doen?\\nBij grote e-mailaccounts kan dit een paar minuten duren.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Wilt u een volledige synchronisatie doen?\nBij grote e-mailaccounts kan dit een paar minuten duren.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Klik op de Shift-toets of de Ctrl-toets om meerdere folders te selecteren.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Algemeen',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Beschikbare groepsfolders',
@@ -2689,8 +2718,10 @@ Gelieve een van de waardes te wijzigen.",
     'ERR_NEED_ACTIVE_SESSION' => 'Om de inhoud te exporteren is een actieve sessie vereist.',
     'ERR_NO_HEADER_ID' => 'Deze functie is niet beschikbaar in dit thema',
     'ERR_NOT_ADMIN' => "Ongeoorloofde toegang tot beheer.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Deze optie is uitgeschakeld in SugarCRM voor IDM-modus en is beschikbaar in Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Ga naar het <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Wachtwoordbeheer is alleen beschikbaar in Cloudinstellingen.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Neem contact op met uw Sugar-beheerder als u veranderingen wilt doorvoeren in alleen-lezen velden.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Vereiste velden ontbreken:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Ongeldig vereist veld:',
     'ERR_INVALID_VALUE' => 'Ongeldige waarde:',
@@ -2725,6 +2756,14 @@ Gelieve een van de waardes te wijzigen.",
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Huidige gebruiker heeft geen rechten om de {moduleName} configuratie instellingen te wijzigen.',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'U heeft geen rechten om {moduleName} favoriet te maken. Neem contact op met uw administrator om toegang te krijgen.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'U heeft geen rechten om {moduleName} te volgen. Neem contact op met uw administrator om toegang te krijgen.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet-columns is geen matrix',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields niet gevonden in uitbetalingslading',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns is geen matrix',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields niet gevonden in uitbetalingslading',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows is geen matrix',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields niet gevonden in uitbetalingslading',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Door een onbekende uitzondering is uw request mislukt.',
@@ -2916,6 +2955,7 @@ Gelieve een van de waardes te wijzigen.",
     'LBL_FILTER_SELECT_OPERATOR' => 'Selecteer operator...',
     'LBL_FILTER_CREATE_NEW' => 'Aanmaken',
     'LBL_FILTER_CREATE_FILTER' => 'Nieuw filter aanmaken',
+    'LBL_FILTER_CLOSE_FILTER' => 'Sluit filter',
     'LBL_FILTER_EDIT_FILTER' => 'Filter bewerken',
     'LBL_FILTER_ALL_RECORDS' => 'Alle records',
     'TPL_FILTER_SAVE' => 'U heeft het filter {{name}} succesvol aangemaakt.',
@@ -3305,7 +3345,7 @@ Gelieve een van de waardes te wijzigen.",
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rechten voorbehouden.<br />SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'respectievelijke bedrijven waar zij aan zijn gekoppeld.',
@@ -3414,7 +3454,7 @@ Gelieve een van de waardes te wijzigen.",
     'LNK_RESUME' => 'Hervatten',
     'LNK_VIEW_CHANGE_LOG' => 'Auditlogboek bekijken',
     'TPL_AUDIT_LOG_TITLE' => 'Auditlogboek voor {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Klik om het auditlog van het e-mailadres te bekijken',
 
     'NTC_CLICK_BACK' => 'Klikt u a.u.b. op de &#39;terug&#39; knop in uw browser en los het probleem op.',
     'NTC_DATE_FORMAT' => '(jjjj-mm-dd)',
@@ -3451,6 +3491,11 @@ Gelieve een van de waardes te wijzigen.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Waarschuwing:</b> Uw browser ingesteld op  &#39;IE compatibility view&#39;. Dit wordt niet ondersteund.",
     'WARN_LICENSE_SEATS'=>  "Waarschuwing: Het aantal actieve gebruikers is al gelijk aan het maximale aantal toegestane licenties.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Waarschuwing: Het aantal actieve gebruikers is hoger dan het maximale aantal toegestane licenties.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Aantal actieve gebruikers overschrijdt Licentielimiet. Neem contact op met uw beheerder.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Alleen admins kunnen inloggen.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'De gebruikerslicentielimiet is bereikt. Alleen bestaande gebruikers kunnen inloggen.',
     'WARN_ONLY_ADMINS'=> "Alleen admins kunnen inloggen.",
     'WARN_UNSAVED_CHANGES'=> "U staat op het punt om het record te verlaten zonder de wijzigingen op te slaan. Weet u zeker dat u dit wil?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Niet alle wijzigingen zijn opgeslagen. Weet u zeker dat u de pagina wilt verlaten en de wijzigingen wilt negeren?',
@@ -3544,6 +3589,7 @@ Gelieve een van de waardes te wijzigen.",
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "U heeft geen records opgeslagen. Maak nu een <item2> record aan.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klik hier",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Voeg toe aan mijn favorieten',
@@ -3649,6 +3695,10 @@ Gelieve een van de waardes te wijzigen.",
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity cijfers',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunitymetriek voor soortgelijk account.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Productcatalogus Snel kiezen',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Geeft recentelijk gebruikte items en producten weer die zijn opgeslagen als favorieten',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Recentelijk gebruikt',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favorieten',
 
     'LBL_DASHLET_NO_RECORDS' => 'Er werden nu geen gegevens gevonden.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Samenvatting van Cases',
@@ -4257,7 +4307,27 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
 
     'LBL_FUTURE' => 'Toekomst',
     'LBL_REQUIRED_FIELD' => 'Vereist',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Geoffreerd regelitem',
+    'LBL_DISCOUNT_TOTAL' => 'Korting totaal',
+    'LBL_TAX' => 'Btw',
+    'LBL_SHIPPING' => 'Verzendkosten',
+    'LBL_GRAND_TOTAL' => 'Eindtotaal',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Factuuradres automatisch invullen vanuit profiel account',
+    'LBL_QLI_ADD_GROUP' => 'Een groep toevoegen',
+    'LBL_QLI_COMMENT' => 'Opmerking',
+    'LBL_SELECT_ACTION' => 'Selecteer actie',
+    'LBL_QLI_GROUP_NAME' => 'Groepsnaam',
+    'LBL_GROUP_TOTAL' => 'Groepstotaal',
+    'LBL_ITEM_NAME' => 'Regelitem',
+    'LBL_QLI_DELETE' => 'Weet u zeker dat u dit regelitem wilt verwijderen?',
+    'LBL_QLI_COMMENT_DELETE' => 'Weet u zeker dat u deze regelitemopmerking wilt verwijderen?',
+    'LBL_QLI_GROUP_DELETE' => 'Weet u zeker dat u groep {0} wilt verwijderen? Alle items moeten naar de standaard groep worden verplaatst.',
+    'LBL_QLI_GROUP_EMPTY' => 'Geen geoffreerd regelitem',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Optioneel',
     'LBL_RELATED_MODULE' => 'Gerelateerd aan {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Gerelateerd aan {{{this}}}',
@@ -4287,7 +4357,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_CONFIRM' => 'Bevestig',
     'LBL_NO_ACCESS' => '(Geen toegang)',
     'LBL_NO_ACCESS_LOWER' => 'Geen toegang',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Geen toegang',
     'LBL_VALUE_ERASED' => 'Waarde gewist',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Deze informatie werd gewist via gegevensaanvraag privacy',
     'LBL_CREATE_RELATED_RECORD' => 'Maak gerelateerd record aan',
@@ -4915,7 +4985,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Taken van team',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Geavanceerde Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP of oude REST API',
@@ -4976,9 +5046,9 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_ALERT_TITLE_NOTICE' => 'Melding:',
     'LBL_ALERT_TITLE_ERROR' => 'Fout:',
     'LBL_ALERT_TITLE_LOADING' => 'Bezig met laden',
+    'LBL_ALERT_NO_ACCESS' => 'U hebt geen toegang tot het toegepaste filter in deze dashlet.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Kopieer het dashboard om deze dashlet te configureren met uw eigen filter.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '(De versie van) uw browser wordt niet (langer) ondersteund.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'De volgende browserversies worden aanbevolen: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Raadpleeg de pagina {{link}} voor aanbevolen browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Ondersteunde platforms',
     'LBL_ALERT_CONFIRM_DELETE' => 'Weet u zeker dat u dit item wilt verwijderen?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Weet u zeker dat u deze items wilt verwijderen?',
@@ -5076,7 +5146,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Samenvatting historie',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Meer historie...',
     'LBL_RELATED_CONTACT' => 'Gekoppeld contact',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5150,6 +5220,11 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'SMTP Server instellingen ontbreken',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Om meldingen bij toewijzen te versturen, dient een SMTP server ingesteld te zijn in {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'E-mailinstellingen',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Nieuwe voorraadrapporten beschikbaar',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Er zijn nieuwe voorraadrapporten beschikbaar in uw ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Rapport module',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Deze zijn getagd als "Voorraadrapport" en kunnen worden gefilterd. Rapporten zijn ook getagd als "Verkoop en marketing", "Klantenservice", "Gegevensprivacy" of "Administratief", op basis van de content. Raadpleeg voor meer informatie de ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'documentatie',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM stelt gebruikers in staat om snel bepaalde taken uit te voeren met toetsenbord sneltoetsen. De tabellen aan de rechterzijde beschrijven de beschikbare sneltoetsen met de toetsen en acties die ze uitvoeren.',
@@ -5259,23 +5334,26 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processen',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Het Processen dashlet toont de templates voor het gebruik in Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Het Processen dashlet toont de templates voor het gebruik in SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Procesdefinities',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Het Procesdefinities dashlet toont de templates die kunnen worden gebruikt in de Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Het Procesdefinities dashlet toont de templates voor het gebruik in SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Nieuwe Process Definitie',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Import Process Definities',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Proces bedrijfsregels',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Het Processen Business Rules dashlet toont de templates voor het gebruik in Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Het Procesbedrijfsregels dashlet toont de templates voor het gebruik in SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Nieuwe Process Business Rule',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Import Process Business Rules',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Process E-mail Templates',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Het Processen E-mail Templates dashlet toont de templates voor het gebruik in Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Het Procese-mailtemplates dashlet toont de templates voor het gebruik in SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Nieuw Process E-mail Template',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Import Process E-mail Templates',
 
@@ -5299,7 +5377,7 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_PMSE_CANCELLED_STATUS' => 'Cancelled',
     'LBL_PMSE_TERMINATED_STATUS' => 'Terminated',
     'LBL_PMSE_ERROR_STATUS' => 'Error',
-    'LBL_PMSE_SETTINGS' => 'Instellingen Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'Instellingen SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Are you sure you want to disable this record?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Are you sure you want to enable this record?',
@@ -5323,7 +5401,7 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM requires javascript. Please enable javascript to continue using SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serienummers van gegevens konden niet ongedaan worden gemaakt',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serienummers van gegevens konden niet ongedaan worden gemaakt omdat deze verwijzingen bevatten naar objecten of klassen',
 
@@ -5352,6 +5430,15 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_DATAPRIVACY_PII' => 'Persoonsgegevens',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Markeren voor wissen',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Persoonsgegevens voor {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Naar uw klembord gekopieerd!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Kon niet naar uw klembord kopiëren',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Link kopieerbevestiging',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Toon meer...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Toon minder...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6529,7 +6616,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Ingesloten bestand';
     'YER' => 'Rials',
     'ZWD' => 'Zimbabwaanse dollar',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Geen',
+        'future' => 'Huidige waarde',
+        'old' => 'Oude waarde',
+        'both' => 'Huidige en oude waarden',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

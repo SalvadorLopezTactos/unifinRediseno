@@ -31,10 +31,11 @@ $viewdefs['Cases']['DetailView'] = array(
 
 	  array (
 	    'status',
-	    'account_name',
+          'follow_up_datetime',
 	  ),
 	  array (
 	      'type',
+          'account_name',
 	  ),
 
 	  array (
@@ -87,4 +88,3 @@ $viewdefs['Cases']['DetailView'] = array(
 
 
 );
-?>

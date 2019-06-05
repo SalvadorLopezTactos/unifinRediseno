@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\User;
 
+use Sugarcrm\IdentityProvider\Authentication\User as LocalUser;
 use Symfony\Component\Security\Core\User\UserChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -58,7 +59,7 @@ class SAMLUserChecker extends UserChecker
         $this->validateIdentifier($field, $value);
 
         try {
-            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::SAML);
+            $localUser = $this->getLocalUser($value);
         } catch (UsernameNotFoundException $e) {
             if (empty($this->config['sp']['provisionUser'])) {
                 throw $e;
@@ -94,5 +95,26 @@ class SAMLUserChecker extends UserChecker
         if ('email' == $field && !filter_var(IdnaConvert::encodeString($nameIdentifier), FILTER_VALIDATE_EMAIL)) {
             throw new IdentifierInvalidFormatException('Invalid format of nameIdentifier email expected');
         }
+    }
+
+    /**
+     * @param $value
+     * @return LocalUser
+     * @throws \Throwable
+     */
+    private function getLocalUser($value): LocalUser
+    {
+        try {
+            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::SAML);
+        } catch (UsernameNotFoundException $e) {
+            $localUser = $this->localUserProvider->loadUserByFieldAndProvider($value, Providers::LOCAL);
+            $this->localUserProvider->linkUser(
+                $localUser->getAttribute('id'),
+                Providers::SAML,
+                $value
+            );
+        }
+
+        return $localUser;
     }
 }

@@ -13,10 +13,9 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\ProcessManager;
-use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
-class PMSEUserTask extends PMSEActivity
+class PMSEUserTask extends PMSEEvent
 {
 
     protected $engineFields;
@@ -66,6 +65,11 @@ class PMSEUserTask extends PMSEActivity
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
+        if ($externalAction != '') {
+            $usesEBGateway = $this->checkIfUsesAnEventBasedGateway($flowData['cas_id'], $flowData['cas_index']);
+            $this->checkIfExistEventBased($flowData['cas_id'], $flowData['cas_index'], $usesEBGateway);
+        }
+
         $redirectAction = $this->processAction($flowData, $externalAction, $arguments);
         $saveBeanData = !empty($arguments) ? true : false;
         switch ($redirectAction) {
@@ -80,7 +84,6 @@ class PMSEUserTask extends PMSEActivity
                 $saveBeanData = false;
                 break;
             case 'REASSIGN':
-                $flowData['cas_index']--;
                 $flowData['cas_adhoc_type'] = isset($arguments['adhoc_type']) ? $arguments['adhoc_type'] : $flowData['cas_adhoc_type'];
                 $flowData['user_name'] = isset($arguments['user_name']) ? $arguments['user_name'] : '';
                 $flowData['full_name'] = isset($arguments['full_name']) ? $arguments['full_name'] : '';
@@ -99,7 +102,6 @@ class PMSEUserTask extends PMSEActivity
                 $routeAction = 'WAIT';
                 break;
             case 'ROUND_TRIP':
-                $flowData['cas_index']--;
                 $this->userAssignmentHandler->roundTripReassign($flowData);
                 $flowData['cas_flow_status'] = 'FORM';
                 $userId = $flowData['cas_user_id'];
@@ -107,7 +109,6 @@ class PMSEUserTask extends PMSEActivity
                 $routeAction = 'WAIT';
                 break;
             case 'ONE_WAY':
-                $flowData['cas_index']--;
                 $this->userAssignmentHandler->oneWayReassign($flowData);
                 $flowData['cas_flow_status'] = 'FORM';
                 $userId = $flowData['cas_user_id'];
@@ -162,7 +163,6 @@ class PMSEUserTask extends PMSEActivity
      */
     public function processUserAction($flowData)
     {
-        $flowData['cas_index']--;
         switch (true) {
             case $this->userAssignmentHandler->isRoundTrip($flowData):
                 $action = 'ROUND_TRIP';
@@ -311,7 +311,7 @@ class PMSEUserTask extends PMSEActivity
      */
     public function lockFlowRoute($id)
     {
-        $registry = Registry\Registry::getInstance();
+        $registry = $this->getRegistry();
 
         // Simplified logic here... get all locked flows or a default array...
         $flows = $registry->get('locked_flows', array());

@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Това е системен профил.',
     'LBL_EMAIL_ADDRESS_ID' => 'Идентификатор на електронна поща',
     'LBL_TYPE' => 'Категория',
+    'LBL_REPLY_TO_NAME' => 'Име на адресата на отговора',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Имейл адреси, на които да се изпрати отговор',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ИД на имейл адреса, на който да се изпрати отговор',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Имейл адрес, на който да се изпрати отговор',
+    'LBL_PRIMARY_TEAM' => 'Основен екип',
 );

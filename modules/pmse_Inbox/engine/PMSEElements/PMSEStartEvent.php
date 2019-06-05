@@ -10,17 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 class PMSEStartEvent extends PMSEEvent
 {
     /**
-     *
-     * @param type $flowData
-     * @param type $bean
-     * @param type $externalAction
-     * @param type $arguments
-     * @return type
+     * Runs the StartEvent element
+     * @param array $flowData The data for this particular flow segment
+     * @param mixed $bean Target bean, related bean or nothing at all
+     * @param string $externalAction The next action to take
+     * @param array $arguments The arguments passed in from the Request
+     * @return array
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
@@ -28,27 +26,33 @@ class PMSEStartEvent extends PMSEEvent
         $regKey = 'triggered_starts';
 
         // Used to read from and write to if necessary
-        $registry = Registry\Registry::getInstance();
+        $registry = $this->getRegistry();
 
         // Get our list of triggered starts
         $triggered = $registry->get($regKey, array());
 
         // See if this start event has already been triggered in this request
-        if (isset($flowData['bpmn_id'])) {
+        if (isset($flowData['bpmn_id']) && !empty($bean->id)) {
             // Will need this for writing
             $startEventID = $flowData['bpmn_id'];
 
             // If this start event has been triggered already, stop now to prevent
             // infinite triggers
-            if (!empty($triggered[$startEventID])) {
+            if (!empty($triggered[$startEventID][$bean->id])) {
                 // Log a message for this event
                 $msg = "Start Event ID $startEventID has already been triggered" .
-                       " in this request and cannot be triggered again.";
+                       " for Bean ID {$bean->id} in this request and cannot be triggered again.";
                 $this->logger->alert($msg);
 
                 // We need to call this method to ensure what is needed later is there
                 return $this->prepareResponse(array(), '', '');
             }
+        }
+
+        // Set the triggered ID into registry now
+        if (isset($startEventID) && !empty($bean->id)) {
+            $triggered[$startEventID][$bean->id] = true;
+            $registry->set($regKey, $triggered, true);
         }
 
         $relatedBean = $this->retrieveRelatedBean($flowData, $bean);
@@ -57,11 +61,8 @@ class PMSEStartEvent extends PMSEEvent
         } else {
             $flowData = $this->createNewCase($bean, $flowData);
         }
-        // Set the triggered ID into registry now
-        if (isset($startEventID)) {
-            $triggered[$startEventID] = true;
-            $registry->set($regKey, $triggered, true);
-        }
+
+        $this->createFlow = true;
 
         return parent::run($flowData, $bean, $externalAction, $arguments);
     }

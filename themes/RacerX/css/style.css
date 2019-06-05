@@ -9163,3 +9163,13 @@ html.touch {
   -moz-transform: rotate(90deg);
   filter: progid:dximagetransform.microsoft.basicimage(rotation=2);
 }
+
+/* Styles for SugarBPM */
+.trademark {
+  color: #999;
+}
+
+sup.trademark,
+sup.heading {
+  font-size: 60%;
+}

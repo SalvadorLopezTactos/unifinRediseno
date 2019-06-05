@@ -23,9 +23,10 @@ $vardefs = array(
             'studio' => array(
                 // Tags are not supported on portal yet
                 'portal' => false,
-                // Tags should not be allowed on popuplist since it is BWC
+                // Tags should not be allowed on popuplist or popupsearch since it is BWC
                 'base' => array(
                     'popuplist' => false,
+                    'popupsearch' => false,
                 ),
                 // Force the tag field to be exposed to mobile edit and detail view
                 // Mobile list, OOTB, will allow tags

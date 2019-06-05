@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Zobraziť záložku s prevzatými materiálmi',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Keď je táto možnosť vybratá, záložka preberania sa zobrazí v používateľských nastaveniach a umožňuje používateľom prístup k doplnkom aplikácie Sugar a iným dostupným súborom',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Pre SOAP overovanie pri použití LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Prípona php_mcrypt musí byť vo vašom súbore php.ini povolená.',
     'LBL_ALL' => 'Všetko',
     'LBL_MARK_POINT' => 'Bod označenia',
     'LBL_NEXT_' => 'Ďalej>>',
@@ -443,6 +442,22 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Povoliť ďalší obsah prihlasovacej obrazovky',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automaticky uložiť definície procesu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Určuje, ako často sa definície procesu automaticky ukladajú pri použití návrhára',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automaticky overiť definície procesu pri automatickom ukladaní',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Prepínanie, či sa definície procesu automaticky overia pri automatickom ukladaní. Bude to mať vplyv len keď je položka „Automaticky uložiť definície procesu“ nastavená na časový interval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automaticky overiť definície procesu pri importovaní',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Prepínanie, či sa definície procesu automaticky overia pri prvom importovaní',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Nastavenia denníka komentárov',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximálny počet znakov, ktoré je možné zobraziť pri jednej položke komentára',
 );
 
 

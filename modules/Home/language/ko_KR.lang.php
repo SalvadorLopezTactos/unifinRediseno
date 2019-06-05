@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - PHP를 위한 간편한 SAML도구상자',
   'LBL_SOURCE_ISCROLL' => 'iScroll - The overflow:모바일 웹키트를 위한 스크롤. 고정된 너비/높이 요소의 내장 스크롤',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas 는 인터넷 익스플로어를 지원하기위한 HTML5 Canvas를 추가한 JavaScript 자료실입니다. 이는 Flash drawing API를 통해 모양과 이미지를 표현합니다.이것은 거의 모든  . It supports almost all Canvas APIs를 지원하며 많은 사례에서 VML 또는 Silverlightand를 사용하는 유사한 자료실보다 빠르게 실행합니다.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - The JavaScript InfoVis Toolkit 는 웹을 위한 대화식 데이타 가시화를 위한 도구를 제공합니다.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - PHP5를 위한 열린 출처, 개체지향의 웹 어플리케이션 구조',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - PHP를 위한 CSV 데이타 구문해석',
   'LBL_SOURCE_PHPJS' => 'php.js - JavaScript에서 PHP 기능을 사용합니다.',

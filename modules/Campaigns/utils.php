@@ -20,44 +20,39 @@
 use Doctrine\DBAL\DBALException;
 use Sugarcrm\Sugarcrm\Util\Serialized;
 
-/*
- *returns a list of objects a message can be scoped by, the list contacts the current campaign
- *name and list of all prospects associated with this campaign..
- *
+/**
+ * Returns a list of objects a message can be scoped by, the list contacts the current campaign
+ * name and list of all prospects associated with this campaign..
+ * @param string $campaign_id
+ * @return array
+ * @throws DBALException
  */
-function get_message_scope_dom($campaign_id, $campaign_name,$db=null, $mod_strings=array()) {
+function get_message_scope_dom($campaign_id): array
+{
 
     //find prospect list attached to this campaign..
-    $query =  "SELECT prospect_list_id, prospect_lists.name ";
-    $query .= "FROM prospect_list_campaigns ";
-    $query .= "INNER join prospect_lists on prospect_lists.id = prospect_list_campaigns.prospect_list_id ";
-	// We need to confirm that the user is a member of the team of the item.
-	$bean = new SugarBean();
-	$bean->disable_row_level_security = false;
-	$bean->add_team_security_where_clause($query, "prospect_lists");
-    $query .= "WHERE prospect_lists.deleted = 0 ";
-    $query .= "AND prospect_list_campaigns.deleted=0 ";
-    $query .= "AND campaign_id='".$campaign_id."'";
-    $query.=" and prospect_lists.list_type not like 'exempt%'";
+    $query = "SELECT prospect_list_id, prospect_lists.name"
+        . " FROM prospect_list_campaigns "
+        . " INNER JOIN prospect_lists"
+        . " ON prospect_lists.id = prospect_list_campaigns.prospect_list_id ";
+    // We need to confirm that the user is a member of the team of the item.
+    $bean = new SugarBean();
+    $bean->disable_row_level_security = false;
+    $bean->add_team_security_where_clause($query, "prospect_lists");
+    $query .= " WHERE prospect_lists.deleted = 0"
+        . " AND prospect_list_campaigns.deleted=0"
+        . " AND campaign_id=? "
+        . " AND prospect_lists.list_type NOT LIKE 'exempt%'";
 
-    if (empty($db)) {
-        $db = DBManagerFactory::getInstance();
+    $stmt = $bean->db->getConnection()
+        ->executeQuery($query, [$campaign_id]);
+    $list = [];
+    foreach ($stmt as $row) {
+        $list[$row['prospect_list_id']] = $row['name'];
     }
-    if (empty($mod_strings) or !isset($mod_strings['LBL_DEFAULT'])) {
-        global $current_language;
-        $mod_strings = return_module_language($current_language, 'Campaigns');
-    }
-
-    //add campaign to the result array.
-    //$return_array[$campaign_id]= $campaign_name . ' (' . $mod_strings['LBL_DEFAULT'] . ')';
-
-    $result=$db->query($query);
-    while(($row=$db->fetchByAssoc($result))!= null) {
-        $return_array[$row['prospect_list_id']]=$row['name'];
-    }
-    if (empty($return_array)) $return_array=array();
-    else return $return_array;
+    return $list;
 }
+
 /**
  * Return bounce handling mailboxes for campaign.
  *

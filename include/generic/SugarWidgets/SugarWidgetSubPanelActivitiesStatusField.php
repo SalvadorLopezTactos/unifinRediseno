@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelActivitiesStatusField.php 45763 2009-04-01 19:16:18Z majed $
 
 
 

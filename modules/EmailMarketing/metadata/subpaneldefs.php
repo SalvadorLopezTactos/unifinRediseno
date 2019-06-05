@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: layout_defs.php 13782 2006-06-06 17:58:55Z majed $
 $layout_defs['EmailMarketing'] = array( 
 	// list of what Subpanels to show in the DetailView 
 	'subpanel_setup' => array(

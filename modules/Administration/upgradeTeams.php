@@ -28,9 +28,13 @@ $results = $GLOBALS['db']->query("SELECT id, user_name FROM users WHERE default_
 $team = BeanFactory::newBean('Teams');
 $user = BeanFactory::newBean('Users');
 while($row = $GLOBALS['db']->fetchByAssoc($results)) {
-	$results2 = $GLOBALS['db']->query("SELECT id, name FROM teams WHERE associated_user_id = '" . $row['id'] . "'");
-	$row2 = $GLOBALS['db']->fetchByAssoc($results2);
-	if(empty($row2['id'])) {
+    $row2 = $GLOBALS['db']->getConnection()
+        ->executeQuery(
+            'SELECT id, name FROM teams WHERE associated_user_id = ?',
+            [$row['id']]
+        )
+        ->fetch();
+    if (false === $row2) {
 		$user->retrieve($row['id']);
 		$team->new_user_created($user);
 		// BUG 10339: do not display messages for upgrade wizard

@@ -130,7 +130,7 @@ class ProductTemplateTreeApi extends SugarApi
         $filter = "%$filter%";
         $unionFilter = "and name like ? ";
 
-        return $this->getTreeData($unionFilter, $unionFilter, $filter, $filter);
+        return $this->getTreeData($unionFilter, $unionFilter, [$filter, $filter]);
     }
 
     protected function getRootedTreeData($root)
@@ -141,34 +141,40 @@ class ProductTemplateTreeApi extends SugarApi
         if ($root == null) {
             $union1Root = "and parent_id is null ";
             $union2Root = "and category_id is null ";
+            $params = [];
         } else {
             $union1Root = "and parent_id = ? ";
             $union2Root = "and category_id = ? ";
+            $params = [$root, $root];
         }
 
-        return $this->getTreeData($union1Root, $union2Root, $root, $root);
+        return $this->getTreeData($union1Root, $union2Root, $params);
     }
 
     /**
      * Gets the tree data
-     * @param $filter filter for the list.
-     * @return mixed
+     *
+     * @param string $union1Filter
+     * @param string $union2Filter
+     * @param array $params Query parameters
+     *
+     * @return mixed[][]
      */
-    protected function getTreeData($union1Filter, $union2Filter, $filter1, $filter2)
+    protected function getTreeData($union1Filter, $union2Filter, array $params)
     {
         $q = "select id, name, 'category' as type from product_categories " .
-                "where deleted = 0 " .
-                    $union1Filter .
+            "where deleted = 0 " .
+            $union1Filter .
             "union all " .
             "select id, name, 'product' as type from product_templates " .
-                "where deleted = 0 " .
-                    $union2Filter .
+            "where deleted = 0 " .
+            $union2Filter .
             "order by type, name";
 
         $conn = $this->getDBConnection();
         $stmt = $conn->prepare($q);
 
-        $stmt->execute(array($filter1, $filter2));
+        $stmt->execute($params);
 
         return $stmt->fetchAll();
     }

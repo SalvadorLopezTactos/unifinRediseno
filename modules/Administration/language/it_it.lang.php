@@ -184,7 +184,7 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Rimuovi file nascosti usati per archiviare dati relativi ai Font PDF',
     'LBL_CONFIG_CHECK' =>'Controllo Configurazione',
     'LBL_CONFIG_FTS' => 'Configura il Motore di Ricerca Full Text',
-    'LBL_CONFIG_TABS'=>'Trascina le seguenti schede per renderle visibili oppure per nasconderle. Se vuoi impedire agli utenti non amministratori di configurare le schede disattiva l´opzione \\"Permetti agli utenti di configurare le schede\\".',
+    'LBL_CONFIG_TABS'=>'Trascina le seguenti schede per renderle visibili oppure per nasconderle. Se vuoi impedire agli utenti non amministratori di configurare le schede disattiva l´opzione \"Permetti agli utenti di configurare le schede\".',
 	'LBL_CONFIG_TABS_DESC'=>'Clicca e trascina i nomi dei moduli sotto per impostare le schede e i sottopannelli da visualizzare o nacondere.',
 	'LBL_CONFIG_LANGS_DESC'=>'Clicca e trascina i nomi delle lingue sotto per attivarle e disattivarle.',
 	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Seleziona questa opzione per permettere agli utenti di scegliere quali schede dei moduli possono vedere. Una volta selezionata, gli utenti potranno scegliere quali schede moduli visualizzare organizzandole nelle proprie Impostazioni Utente.',
@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Attributo utente:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Con DN Utente:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Includere il DN Utente con l´Attributo Utente verificando l´appartenenza al gruppo',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Ogni ulteriore filtro params da applicare all´autenticazione degli utenti e.g.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Ogni ulteriore filtro params da applicare all´autenticazione degli utenti e.g.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Attributo Login:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind Attribute:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Per legare l´utente LDAP<br>Examples:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -937,12 +937,21 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
     'WARN_INSTALLER_LOCKED'=>'Avviso: Per proteggere i tuoi dati, la procedura di installazione deve essere bloccata impostando installer-locked a vero nel file config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Avviso: La licenza scadrà tra",
     'WARN_LICENSE_EXPIRED2' =>"giorni. Vai nell´area <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Gestione Licenze\"</a> nel pannello di amministrazione.",
-    'WARN_LICENSE_SEATS'=>  "Avviso: licenze utenti superate di",
-    'WARN_LICENSE_SEATS2' => ". Si prega di contattare il rappresentate commerciale o inviare una mail all´indirizzo <a href=\"mailto:sales@sugarcrm.com\">sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Avviso:</b> Ci sono ",
+    'WARN_LICENSE_SEATS2' => " utenti attivi mentre la sottoscrizione consente solo ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Disattivare alcuni utenti, contattare il proprio partner o il rappresentante commerciale,"
+        . " o e-mail <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Per ulteriori informazioni, consultare "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Informazioni sui tipi di utenti e sulle licenze Sugar</a> articolo.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Avviso: Il numero di utenti attivi supera il numero massimo consentito dalla licenza.",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Avviso: il numero di utenti attivi è già il numero massimo di licenze permesse",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Avviso: Il numero di utenti attivi permessi dalla tua licenza coincide con il numero di utenti attivi nel sistema. Non sarà possibile creare ulteriori utenti attivi.",
-    'WARN_REPAIR_CONFIG' => 'Avviso: Il file config.php deve essere riparato. Utilizza lo script <a href="index.php?module=Administration&action=RebuildConfig">Ripara il file di configurazione</a> nella pagina Ripara nel pannello di amministrazione per eseguire questa procedura.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Avviso:</b> Non sarà possibile creare ulteriori utenti attivi."
+        . " Acquistare altre sottoscrizioni.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Avviso:</b> Non sarà possibile creare ulteriori utenti attivi."
+        . " Acquistare altre sottoscrizioni.",
+    'WARN_REPAIR_CONFIG' => '<b>Attenzione:</b> il file config.php deve essere riparato.  Per riparare il file config, utilizzare lo script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> nella pagina Ripara nel pannello di amministrazione.',
     'WARN_UPGRADE_APP'=> "Una versione aggiornata dell´applicazione è disponibile.",
     'WARN_UPGRADE' => 'Avviso: Aggiorna',
     'WARN_UPGRADENOTE' => 'Nota:',
@@ -1248,15 +1257,17 @@ Le integrazioni che fanno riferimento a questa piattaforma non funzioneranno pi�
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Impossibile trovare il file di metadati.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Impostazioni',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Registro Log',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Accedere al registro ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => '.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Gestione Flussi',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Qui è possibile accedere alla Gestione Flussi.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configurare ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' le impostazioni e visualizzare i registri. Gestire tutti i flussi BPM per tutti gli utenti mediante Gestione Flussi.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configurazione quote',
+    'LBL_MANAGE_QUOTES' => 'Configurare il layout matrice',
 );

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Параллельно с этим определением процесса выполняются активные процессы. Обновление может повлиять на эти процессы. Вы все еще хотите изменить это определение процесса?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Параллельно с этим определением процесса выполняются активные процессы. Обновление может повлиять на эти процессы. Вы все еще хотите отключить это определение процесса?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Автоматически создать новую запись описания используемых процессов путем импорта файла *.bpm из файловой системы.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Загрузите файл .bpm, чтобы импортировать определение процесса.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Описание используемых процессов было успешно импортировано в систему.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Пожалуйста, выберите допустимый *.bpm файл',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Определение процесса было импортировано, но содержит одно или несколько действий Бизнес-правил, для которых не были выбраны бизнес-правила.',
+    'LBL_BPM_IMPORT_SELECT' => 'Это определение процесса содержит указанные ниже бизнес-правила и шаблоны электронной почты. '
+        . 'Выберите те, которые нужно импортировать.',
+    'LBL_BUSINESS_RULES' => 'Бизнес-правила',
+    'LBL_EMAIL_TEMPLATES' => 'Шаблоны сообщений',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Отмена',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Повторное выполнение',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Сохранить',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Проверить',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Сохранить и проверить',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Выполнить проверку на наличие ошибок',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Мероприятие',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Удалить',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Модуль',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Фильтр',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Относится к',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Критерии',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Продолжительность',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Единица измерения',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Поля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Оценка поля модуля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Модуль',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Связано с',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Поле',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Значение',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Формирование оценки ответа',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'не является',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'не равно',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Все связанные записи',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Любые связанные записи',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Время запуска',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Добавить',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Закрыть',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Команды',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Пользователь в %MODULE%, который создал запись',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Пользователь в %MODULE%, который внес последние изменения в запись',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Пользователь в %MODULE%, ответственный за запись',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Пользователь в %MODULE%, который был назначен ответственным за запись',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Пользователь в %MODULE%, являющийся менеджером пользователя, который создал запись',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Пользователь в %MODULE%, являющийся менеджером пользователя, который внес последние изменения в запись',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Пользователь в %MODULE%, являющийся менеджером пользователя, который является ответственным за запись',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Пользователь в %MODULE%, являющийся менеджером пользователя, который был назначен ответственным за запись',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% связано с %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Пользователь, создавший %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Пользователь, в последний раз изменивший %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Пользователь, ответственный за %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Пользователь, который был ответственным за %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Менеджер, создавший %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Менеджер, в последний раз изменивший %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Менеджер, ответственный за %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Менеджер, который был ответственным за %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'роль: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'команда: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Ссылки',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Неверный синтаксис выражения.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Выполняется проверка определения процесса: получение параметров элемента',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Выполняется проверка определения процесса: проверка параметров элемента',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Обновление списка ошибок...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Проверка завершена. Найдено проблем: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' проблем(-ы)',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Выполняется проверка',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Предупреждение. Выполнение процесса может прерваться на этом элементе или вызвать другие нежелательные последствия',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Ошибка. Выполнение процесса прервется на этом элементе',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Не удалось проверить элемент',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Количество входящих потоков элемента не достигает минимального',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Этот элемент должен содержать минимальное количество входящих путей. Убедитесь, что количество путей, ведущих к этому элементу, соответствует минимальному.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Элемент превышает максимальное количество входящих потоков',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Этот элемент содержит максимальное количество входящих путей, которое нельзя превышать. Убедитесь, что количество путей, ведущих к этому элементу, не превышает максимальное.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Количество исходящих потоков элемента не достигает минимального',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Этот элемент должен содержать минимальное количество исходящих путей. Убедитесь, что количество путей, исходящих из этого элемента, соответствует минимальному.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Элемент превышает максимальное количество исходящих потоков',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Этот элемент содержит максимальное количество исходящих путей, которое нельзя превышать. Убедитесь, что количество путей, исходящих из этого элемента, не превышает максимальное.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Обязательное поле не задано',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Этот элемент содержит обязательное поле, значение которого не задано. Убедитесь, что поле задано правильно в параметрах элемента, а затем нажмите кнопку «Сохранить».',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'В настоящее время данных нет в системе',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Параметры этого элемента ссылаются на определенный фрагмент данных, который отсутствует в базе данных. Убедитесь в наличии всех упоминаемых данных (т. е. конкретных пользователей, полей модуля, команд и т. д.) в параметрах элемента.',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Выражение поля критерия никогда не будет иметь значения «ИСТИНА»',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Поля критериев содержат логические выражения «И»/«ИЛИ»/«НЕ». Эта ошибка означает, что поле критерия в параметрах элемента настроено таким образом, чтобы выражение никогда не имело значения «ИСТИНА». Проверьте поле критерия, чтобы устранить любые логические противоречия, которые не дают выражению получить значение «ИСТИНА».',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Элемент недоступен',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Чтобы элемент выполнялся в процессе, к нему должен вести путь. Цепочка путей, ведущих к этому элементу, должна начинаться с начального элемента. Проверьте цепочку входящих путей, ведущих к этому элементу, и убедитесь, что она начинается с начального элемента.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Критерии времени ожидания должны содержать ровно одну константу даты/времени',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Этот элемент события ожидания настроен с использованием поля критерия «Фиксированная дата». Это поле должно содержать ровно одну константу «Фиксированная дата/время» или ссылку на поле даты/времени. Все другие части выражения должны представлять собой математические операторы (+/-) или константы «Промежуток времени».',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Указанное значение продолжительности не должно быть равно нулю',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Этот элемент события ожидания настроен с использованием параметра «Продолжительность». Этот параметр не должен быть равен нулю, иначе возникнет ошибка. Убедитесь, что значение параметра «Продолжительность» в параметрах элемента не равно нулю.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Параметры времени ожидания не заданы',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Для этого элемента события ожидания не настроены никакие параметры. Убедитесь, что в параметрах элемента выбран параметр «Продолжительность» или «Фиксированная дата», введите необходимые значения и нажмите кнопку «Сохранить».',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Ожидаемое время меньше нуля',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'В разделе параметров «Формы» данного элемента действия установлено отрицательное значение ожидаемого времени. Это вызовет остановку процесса при достижении данного элемента. Откройте раздел параметров «Формы» этого элемента и укажите для ожидаемого времени положительное значение.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Тип действия – [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Этому элементу действия не назначен тип. Это можно изменить, нажав элемент действия правой кнопкой мыши и выбрав тип из списка «Тип действия».',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Выбор пути не гарантируется',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Это сообщение об ошибке отображается, потому что существует вероятность, что из данного элемента шлюза не будет выбран ни один из путей и это приведет к прерыванию процесса. Рекомендуется настроить выбор пути по умолчанию в случае, если не будет удовлетворено ни одно из выражений поля критерия в параметрах элемента. Это можно сделать, нажав правой кнопкой мыши элемент шлюза и выбрав вариант из меню «Поток по умолчанию». Если путь по умолчанию не задан, следует изменить выражения поля критерия в параметрах элемента таким образом, чтобы по крайней мере одно из них имело значение «ИСТИНА» при выполнении процесса.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Тип шлюза схождения не соответствует типу шлюза входящего потока',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Шлюзы расхождения разделяют процессы на несколько ветвей. При использовании шлюза схождения для повторного сведения этих ветвей обратно в один путь необходимо использовать соответствующий тип шлюза схождения в зависимости от типа шлюза расхождения, который использовался для создания ветвей. Чтобы свести ветви, созданные при помощи эксклюзивного или событийного шлюза расхождения, следует использовать эксклюзивный шлюз схождения. Чтобы свести ветви, созданные с помощью параллельного или инклюзивного шлюза расхождения, используйте параллельный шлюз схождения.',
 );

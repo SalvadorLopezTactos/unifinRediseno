@@ -436,12 +436,17 @@ var User = Backbone.Model.extend({
             currencyObj = {};
 
         if (preferences) {
-            currencyObj.currency_id = preferences.currency_id;
-            currencyObj.currency_iso = preferences.currency_iso;
-            currencyObj.currency_name = preferences.currency_name;
-            currencyObj.currency_rate = preferences.currency_rate;
-            currencyObj.currency_show_preferred = preferences.currency_show_preferred;
-            currencyObj.currency_symbol = preferences.currency_symbol;
+            preferences.currency_create_in_preferred = preferences.currency_create_in_preferred || false;
+            currencyObj = _.pick(
+                preferences,
+                'currency_id',
+                'currency_iso',
+                'currency_name',
+                'currency_rate',
+                'currency_show_preferred',
+                'currency_create_in_preferred',
+                'currency_symbol'
+            );
         }
 
         return currencyObj;

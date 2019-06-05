@@ -19,7 +19,7 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\Security\Context;
-use Sugarcrm\Sugarcrm\Security\Subject\AdvancedWorkflow;
+use Sugarcrm\Sugarcrm\Security\Subject\SugarBPM;
 
 /**
  * Class contains utilities as encoder and decoders for codes url, remove bound fields,
@@ -33,7 +33,7 @@ class PMSEEngineUtils
     const MODULES_WHITELIST_CACHE_KEY = 'pmse_logic_hook_modules_whitelist';
 
     /**
-     * Lists of Advanced Workflow supported module names keyed to the module type (target vs related)
+     * Lists of SugarBPM supported module names keyed to the module type (target vs related)
      * @var array
      */
     protected static $supportedModules = array();
@@ -177,7 +177,7 @@ class PMSEEngineUtils
     );
 
     /**
-     * Advanced Workflow does not handle the below field types currently. So skip displaying them.
+     * SugarBPM does not handle the below field types currently. So skip displaying them.
      * @var array
      */
     public static $blacklistedFieldTypes = array('image','password','file');
@@ -1132,7 +1132,6 @@ class PMSEEngineUtils
             'assigned_user_name_owner',
             'assigned_user_name_mod',
             'tags',
-            'tag',
             'tag_lower',
             'tag_link',
             'tn_name',
@@ -1222,7 +1221,7 @@ class PMSEEngineUtils
             return false;
         }
 
-        // Advanced Workflow does not handle some field types like image, password, file, etc currently
+        // SugarBPM does not handle some field types like image, password, file, etc currently
         if (isset($def['type']) && in_array($def['type'], self::$blacklistedFieldTypes)) {
             return false;
         }
@@ -1544,8 +1543,8 @@ class PMSEEngineUtils
         // Get the context object to set the Subject into
         $context = Container::getInstance()->get(Context::class);
 
-        // Create the AdvancedWorkflow subject based on its properties
-        $subject = new AdvancedWorkflow(
+        // Create the SugarBPM subject based on its properties
+        $subject = new SugarBPM(
             BeanFactory::getBean(
                 'pmse_Project',
                 empty($attrs['project_id']) ? null : $attrs['project_id']

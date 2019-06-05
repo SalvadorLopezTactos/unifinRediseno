@@ -289,7 +289,7 @@ YAHOO.util.Event.onContentReady(
 
 // bug 55468 -- IE is too aggressive with onUnload event
 {{literal}}
-if ($.browser.msie){{/literal}} {ldelim}
+if (SUGAR.browser.msie){{/literal}} {ldelim}
 {{literal}}$(document).ready(function() {{/literal}} {ldelim}
    {{literal}} $(".collapseLink,.expandLink").click(function (e) {{/literal}} {ldelim} e.preventDefault(); {rdelim});
   {rdelim});

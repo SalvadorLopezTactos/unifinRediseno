@@ -12,7 +12,6 @@
 
 //TODO move me out of generic
 
-// $Id: SugarWidget.php 38393 2008-07-29 19:44:00Z Collin Lee $
 
 /**
  * Generic Sugar widget

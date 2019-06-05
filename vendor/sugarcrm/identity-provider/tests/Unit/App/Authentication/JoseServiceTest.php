@@ -67,7 +67,7 @@ class JoseServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(JWSInterface::class, $decodedToken);
         $this->assertEquals('audTest', $decodedToken->getClaim('aud'));
-        $this->assertEquals('1529826678', $decodedToken->getClaim('exp'));
+        $this->assertEquals('1702712017', $decodedToken->getClaim('exp'));
         $this->assertEquals('jtiTest', $decodedToken->getClaim('jti'));
         $this->assertEquals('http://sugarcrm.test/auth', $decodedToken->getClaim('redir'));
         $this->assertEquals(['core', 'hydra'], $decodedToken->getClaim('scp'));

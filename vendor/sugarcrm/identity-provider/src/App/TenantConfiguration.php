@@ -13,11 +13,9 @@
 namespace Sugarcrm\IdentityProvider\App;
 
 use Doctrine\DBAL\Connection;
-use Sugarcrm\IdentityProvider\App\Authentication\Adapter\AbstractAdapter;
-use Sugarcrm\IdentityProvider\App\Authentication\Adapter\AdapterFactory;
-use Sugarcrm\IdentityProvider\App\Authentication\Adapter\ConfigAdapterFactory;
+use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\AbstractConfigAdapter;
+use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\ConfigAdapterFactory;
 use Sugarcrm\IdentityProvider\Srn\Srn;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sugarcrm\IdentityProvider\Authentication\Tenant;
 
 /**
@@ -69,8 +67,13 @@ class TenantConfiguration
      */
     protected function get(Srn $tenant)
     {
+        if (empty($tenantId = $tenant->getTenantId())) {
+            throw new \RuntimeException('Tenant id is empty');
+        }
+
         $qb = $this->db->createQueryBuilder()
-            ->select('provider_code, tenant_providers.config, tenant_providers.attribute_map')
+            ->select('tenants.providers as enabled_providers, tenants.status, tenant_providers.provider_code, '
+                . 'tenant_providers.config, tenant_providers.attribute_map')
             ->from('tenants')
             ->innerJoin(
                 'tenants',
@@ -79,16 +82,19 @@ class TenantConfiguration
                 'tenant_providers.tenant_id = tenants.id'
             )
             ->andWhere('tenants.id = :tenant_id')
-            ->andWhere('tenants.status = :tenant_status')
             ->setParameters([
-                ':tenant_id' => $tenant->getTenantId(),
-                ':tenant_status' => Tenant::STATUS_ACTIVE,
+                ':tenant_id' => $tenantId,
             ]);
         $list = $qb->execute()->fetchAll(\PDO::FETCH_ASSOC);
 
         if (0 == count($list)) {
             throw new \RuntimeException('Tenant not exists or deleted');
         }
+
+        if ($list[0]['status'] != Tenant::STATUS_ACTIVE) {
+            throw new \RuntimeException('Tenant isn\'t active');
+        }
+
         return $this->normalize($list);
     }
 
@@ -103,15 +109,18 @@ class TenantConfiguration
         $config = ['enabledProviders' => []];
         foreach ($list as $provider) {
             $providerCode = $provider['provider_code'];
-            $config['enabledProviders'][] = $providerCode;
+            $config['enabledProviders'] = $this->decode($provider['enabled_providers']);
+            if (!in_array($providerCode, $config['enabledProviders'])) {
+                continue;
+            }
             $adapter = $this->configAdapterFactory->getAdapter($providerCode);
-            if ($adapter instanceof AbstractAdapter) {
+            if ($adapter instanceof AbstractConfigAdapter) {
                 $config[$providerCode] = $adapter->getConfig($provider['config']);
             } else {
-                $config[$providerCode] = $this->decode($provider['config']);
+                throw  new \RuntimeException("Unsupported provider: $providerCode");
             }
             if (!empty($provider['attribute_map'])) {
-                $config[$providerCode]['user_mapping'] = $this->decode($provider['attribute_map']);
+                $config[$providerCode]['user_mapping'] = $this->getAttributeMapping($provider['attribute_map']);
             }
         }
         return $config;
@@ -132,5 +141,23 @@ class TenantConfiguration
         } catch (\InvalidArgumentException $e) {
             return [];
         }
+    }
+
+    /**
+     * Decodes attribute mapping
+     *
+     * @param string $encoded
+     * @return array
+     */
+    private function getAttributeMapping(string $encoded): array
+    {
+        $list = $this->decode($encoded);
+        $out = [];
+        foreach ($list as $map) {
+            if ($map['overwrite']) {
+                $out[$map['source']] = $map['destination'];
+            }
+        }
+        return $out;
     }
 }

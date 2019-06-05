@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Kustuta',
     'LBL_MODULE_NAME' => 'E-posti aadressid',
     'LBL_MODULE_NAME_SINGULAR' => 'E-posti aadress',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Kinnituse taotluse tegevus on sooritatud',
+    'LBL_CONFIRMATION_TITLE' => 'Aitäh',
+    'LBL_CONFIRMATION_MESSAGE' => 'Teie tellimus on kinnitatud. Olete meie nimekirja lisatud ja kuulete meist peagi.',
 );

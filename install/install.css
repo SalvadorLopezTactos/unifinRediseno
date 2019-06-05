@@ -173,7 +173,6 @@ table.shell td#help a:link, table.shell td#help a:visited, table.shell td#help a
 
 table.shell td#ready_image {
 background: #666666;
-border-bottom: 1px solid #000000;
 text-align: center;
 padding: 0;
 }
@@ -358,4 +357,10 @@ a.other{
 .yui-panel .bd p 
 {
 	margin:0 !important;
+}
+
+.readySection {
+	background-color: #fff;
+	width: 698px;
+	height: 247px;
 }

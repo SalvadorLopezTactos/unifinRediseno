@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - مجموعة أدوات SAML لـ PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - التدفق:التمرير لمجموعة الويب المتنقلة.  التمرير الأصلي داخل عنصر عرض / ارتفاع ثابت.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas عبارة عن مكتبة JavaScript تضيف دعم HTML5 Canvas إلى Internet Explorer. وهي تهدف إلى عرض الأشكال والصور عبر واجهة برمجة التطبيق (API) للرسومات. وهي تدعم تقريبًا كل واجهات برمجة التطبيق لـ Canvas، وفي العديد من الحالات، تعمل بشكل أسرع من المكتبات المشابهة الأخرى التي تستخدم VML أو Silverlight.',
-  'LBL_SOURCE_JIT' => 'مجموعة أدوات JavaScript InfoVis - توفر مجموعة أدوات JavaScript InfoVis الأدوات اللازمة لإنشاء تصويرات البيانات التفاعلية للويب.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - إطار عمل تطبيق ويب مفتوح المصدر ويعتمد على الكائنات لـ PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - محلل بيانات CSV لـ PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - استخدام كل وظائف PHP في JavaScript',

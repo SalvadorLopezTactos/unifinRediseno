@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyPipelineBySalesStageDashlet.meta.php 16280 2006-08-22 19:47:48Z awu $
 
 
 

@@ -93,6 +93,7 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
                 $count++;
                 $output->writeln("Consuming queue ... finish batch #" . $count);
             }
+            $this->reportIndexingDone();
         }
         $output->writeln("Reindexing complete");
     }
@@ -140,5 +141,13 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
         }
 
         return false;
+    }
+
+    /**
+     * report indexing is done
+     */
+    protected function reportIndexingDone()
+    {
+        $this->container->indexManager->reportIndexingDone();
     }
 }

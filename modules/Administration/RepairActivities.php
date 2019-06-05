@@ -23,9 +23,13 @@ while ($row != null) {
     if (!empty($dateCalled))
     {
         $date_end = $dateCalled->modify("+{$row['duration_hours']} hours {$row['duration_minutes']} mins")->asDb();
-        $updateQuery = "UPDATE calls set calls.date_end='{$date_end}' where calls.id='{$row['id']}'";
         $call = BeanFactory::newBean('Calls');
-        $call->db->query($updateQuery);
+        $call->db->getConnection()
+        ->update(
+            'calls',
+            ['date_end' => $date_end],
+            ['id' => $row['id']]
+        );
         $row = $callBean->db->fetchByAssoc($result);
     }
 }
@@ -40,9 +44,13 @@ while ($row != null) {
     if (!empty($dateCalled))
     {
         $date_end = $dateCalled->modify("+{$row['duration_hours']} hours {$row['duration_minutes']} mins")->asDb();
-        $updateQuery = "UPDATE meetings set meetings.date_end='{$date_end}' where meetings.id='{$row['id']}'";
         $call = BeanFactory::newBean('Calls');
-        $call->db->query($updateQuery);
+        $call->db->getConnection()
+            ->update(
+                'meetings',
+                ['date_end' => $date_end],
+                ['id' => $row['id']]
+            );
         $row = $callBean->db->fetchByAssoc($result);
     }
 }

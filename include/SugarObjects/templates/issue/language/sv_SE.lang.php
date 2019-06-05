@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Tilldelad till:',
   'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till:',  	  
   'LBL_WORK_LOG' => 'Arbetslog:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Skapad av:',
   'LBL_DATE_CREATED' => 'Skapad den:',
   'LBL_DATE_ENTERED' => 'Skapad den:',

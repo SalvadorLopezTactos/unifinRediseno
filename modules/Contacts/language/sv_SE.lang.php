@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiera alternativ adress till primär adress',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiera primär adress till alternativ adress',
     'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\\n Var god skapa en ny organisation eller välj en existerande.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\n Var god skapa en ny organisation eller välj en existerande.',
     'NTC_REMOVE_CONFIRMATION' => 'Är du säker på att du vill ta bort kontakten från ärendet?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Är du säker på att du vill ta bort det här objektet som en direktrapport?',
 

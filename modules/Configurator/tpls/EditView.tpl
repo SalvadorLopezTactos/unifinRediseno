@@ -80,18 +80,18 @@
 		<td width='35%'>
 			<input type='text' name='system_name' value='{$settings.system_name}'>
 		</td>
-    
-        
+
+
         <td  scope="row" nowrap>{$MOD.LBL_USE_REAL_NAMES}: &nbsp;{sugar_help text=$MOD.LBL_USE_REAL_NAMES_DESC}</td>
         {if !empty($config.use_real_names)}
             {assign var='use_real_names' value='CHECKED'}
-        {else} 
+        {else}
             {assign var='use_real_names' value=''}
-        {/if}  
-        <td >  
+        {/if}
+        <td>
             <input type='hidden' name='use_real_names' value='false'>
             <input name='use_real_names'  type="checkbox" value="true" {$use_real_names}>
-        </td>  
+        </td>
     </tr>
     <tr>
         <td  scope="row" width='12%' nowrap>
@@ -145,7 +145,7 @@
             <input type='hidden' name='enable_action_menu' value='false'>
             <input name='enable_action_menu'  type="checkbox" value="true" {$enable_action_menu}>
         </td>
-        
+
         <td  scope="row">{$MOD.LOCK_SUBPANELS}: &nbsp;{sugar_help text=$MOD.LBL_LOCK_SUBPANELS_DESC}</td>
         <td  >
             {if !empty($config.lock_subpanels)}
@@ -155,6 +155,17 @@
             {/if}
             <input type='hidden' name='lock_subpanels' value='false'>
             <input type='checkbox' name='lock_subpanels' value='true' {$lock_subpanels_checked}>
+        </td>
+    <tr>
+        <td scope="row">{$MOD.LBL_ADDITIONAL_MARKETING_CONTENT}: </td>
+        <td>
+            {if !empty($config.marketing_extras_enabled)}
+                {assign var='marketing_extras_enabled_checked' value='CHECKED'}
+            {else}
+                {assign var='marketing_extras_enabled_checked' value=''}
+            {/if}
+            <input type="hidden" name="marketing_extras_enabled" value="false">
+            <input type="checkbox" name="marketing_extras_enabled" value="true" {$marketing_extras_enabled_checked}>
         </td>
     </tr>
 </table>
@@ -271,6 +282,51 @@
 			</td>
 		</tr>
 	</table>
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
+	<tr>
+        <!-- This heading is hard coded because it is NOT intended to be translatable or dynamic -->
+        <th align="left" scope="row" colspan="4"><h4>SugarBPM<sup class="heading">TM</sup></h4></th>
+	</tr>
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL}:&nbsp;{sugar_help text=$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP}</td>
+		<td><select name="processes_auto_save_interval">{$processes_auto_save_options}</select></td>
+		<td width="25%" scope="row">{$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE}&nbsp{sugar_help text=$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP WIDTH=400}</td>
+	    {if !empty($config.processes_auto_validate_on_autosave)}
+	        {assign var='processes_auto_validate_on_autosave_checked' value='CHECKED'}
+	    {else}
+	        {assign var='processes_auto_validate_on_autosave_checked' value=''}
+	    {/if}
+	    <td width="25%">
+			<input type='hidden' name='processes_auto_validate_on_autosave' value='false'>
+			<input name="processes_auto_validate_on_autosave" value="true" class="checkbox" tabindex='1' type="checkbox" {$processes_auto_validate_on_autosave_checked}>
+		</td>
+	</tr>
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT}&nbsp{sugar_help text=$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP WIDTH=400}</td>
+	    {if !empty($config.processes_auto_validate_on_import)}
+	        {assign var='processes_auto_validate_on_import_checked' value='CHECKED'}
+	    {else}
+	        {assign var='processes_auto_validate_on_import_checked' value=''}
+	    {/if}
+	    <td width="25">
+			<input type='hidden' name='processes_auto_validate_on_import' value='false'>
+			<input name="processes_auto_validate_on_import" value="true" class="checkbox" tabindex='1' type="checkbox" {$processes_auto_validate_on_import_checked}>
+		</td>
+		<td scope="row">{$MOD.LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES}  <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td>
+		<td > <input name="error_number_of_cycles" value="{$config.error_number_of_cycles}"></td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
+	<tr>
+		<th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_COMMENT_LOG_SETTINGS}</h4></th>
+	</tr>
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_COMMENT_LOG_MAX_CHARS}</td>
+		<td> <input name="commentlog_maxchars" value="{$config.commentlog.maxchars}"></td>
+	</tr>
+</table>
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
 	<tr>

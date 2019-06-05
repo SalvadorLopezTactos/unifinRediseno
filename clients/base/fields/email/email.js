@@ -447,14 +447,39 @@
     },
 
     /**
-     * Binds DOM changes to set field value on model.
-     * @param {Backbone.Model} model model this field is bound to.
-     * @param {String} fieldName field name.
+     * {@inheritdoc}
+     *
+     * Updates the email address' `confirmation_requested_on` datetime to "now"
+     * when the user copies an opted out email address' confirmation URL to the
+     * clipboard.
      */
     bindDomChange: function() {
         if(this.tplName === 'list-edit') {
             this._super("bindDomChange");
         }
+
+        this.$('[data-clipboard=enabled]').on('clipboard.success', function() {
+            var id = $(this).data('email-address-id');
+            var bean;
+
+            if (!id) {
+                return;
+            }
+
+            bean = app.data.createBean('EmailAddresses', {id: id});
+            bean.set('confirmation_requested_on', app.date().format());
+            bean.save();
+        });
+    },
+
+    /**
+     * {@inheritdoc}
+     *
+     * Removes the listeners for clipboard-enabled elements.
+     */
+    unbindDom: function() {
+        this.$('[data-clipboard=enabled]').off('clipboard');
+        this._super('unbindDom');
     },
 
     /**
@@ -462,6 +487,16 @@
      * @param {string|Array|Object} value single email address or set of email addresses.
      */
     format: function(value) {
+        /**
+         * Get the confirmation URL for an email address.
+         *
+         * @param {string} id
+         * @return {string}
+         */
+        function getConfirmationUrl(id) {
+            return app.utils.getSiteUrl() + '?entryPoint=ConfirmEmailAddress&email_address_id=' + id;
+        }
+
         value = app.utils.deepCopy(value);
         if (_.isArray(value) && value.length > 0) {
             // got an array of email addresses
@@ -469,6 +504,7 @@
                 // On render, determine which e-mail addresses need anchor tag included
                 // Needed for handlebars template, can't accomplish this boolean expression with handlebars
                 email.hasAnchor = this.def.emailLink && !email.invalid_email;
+                email.confirmation_url = getConfirmationUrl(email.email_address_id);
             }, this);
         } else if (_.isObject(value) && !_.isEmpty(value)) {
             // Expecting an object containing attributes for an email address
@@ -476,13 +512,15 @@
                 email_address: value.email_address,
                 email_address_id: value.id,
                 primary_address: value.primary_address,
+                confirmation_url: getConfirmationUrl(value.id)
             }];
         } else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
             // expected an array with a single address but got a string or an empty array
             value = [{
-                email_address:value,
-                primary_address:true,
-                hasAnchor:true
+                email_address: value,
+                primary_address: true,
+                hasAnchor: true,
+                confirmation_url: ''
             }];
         }
 

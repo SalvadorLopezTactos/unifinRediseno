@@ -1147,9 +1147,19 @@ class SugarEmailAddress extends SugarBean
      * @param string $parent_id ID of parent bean, generally $focus
      * @param string $module $focus' module
      * @param bool asMetadata Default false
+     * @param string $tpl
+     * @param string $tabindex
+     * @param bool $skipIdmRestrictions Optional, should we skip IDM restrictions for the field?
      * @return string HTML/JS for widget
      */
-    function getEmailAddressWidgetEditView($id, $module, $asMetadata = false, $tpl = '', $tabindex = '0')
+    public function getEmailAddressWidgetEditView(
+        $id,
+        $module,
+        $asMetadata = false,
+        $tpl = '',
+        $tabindex = '0',
+        $skipIdmRestrictions = false
+    )
     {
         if (!($this->smarty instanceOf Sugar_Smarty))
             $this->smarty = new Sugar_Smarty();
@@ -1157,7 +1167,8 @@ class SugarEmailAddress extends SugarBean
         global $app_strings, $dictionary, $beanList;
 
         $idmConfig = new IdmConfig(\SugarConfig::getInstance());
-        $disabledForModule = $idmConfig->isIDMModeEnabled()
+        $disabledForModule = !$skipIdmRestrictions
+            && $idmConfig->isIDMModeEnabled()
             && in_array($module, $idmConfig->getIDMModeDisabledModules());
         $cloudConsoleUrl = '';
         if ($disabledForModule) {
@@ -1543,9 +1554,11 @@ class SugarEmailAddress extends SugarBean
  * @param string $field unused
  * @param string $value unused
  * @param string $view DetailView or EditView
+ * @param string $tabindex
+ * @param bool   $skipIdmRestrictions Optional, should we skip IDM restrictions for the field
  * @return string
  */
-function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0')
+function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0', $skipIdmRestrictions = false)
 {
     $sea = BeanFactory::newBean('EmailAddresses');
     $sea->setView($view);
@@ -1555,7 +1568,7 @@ function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0')
             $module = $focus->module_dir;
             if ($view == 'ConvertLead' && $module == "Contacts") $module = "Leads";
 
-            return $sea->getEmailAddressWidgetEditView($focus->id, $module, false, '', $tabindex);
+            return $sea->getEmailAddressWidgetEditView($focus->id, $module, false, '', $tabindex, $skipIdmRestrictions);
         }
         elseif ($view == 'wirelessedit') {
             return $sea->getEmailAddressWidgetWirelessEdit($focus->id, $focus->module_dir, false);

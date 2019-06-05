@@ -81,6 +81,7 @@
     <tbody>
     {{#each ../filteredCollection.models}}
     <tr name="{{module}}_{{attributes.id}}" data-forecast="{{attributes.commit_stage}}"
+        data-parent-id="{{attributes.parent_id}}"
         class="single{{#if attributes.includedInForecast}} included{{/if}}">
 
         {{#each ../../leftColumns}}

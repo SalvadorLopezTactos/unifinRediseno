@@ -1,5 +1,5 @@
 <?php
- // created: 2019-04-11 18:11:16
+ // created: 2019-04-23 19:07:21
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -9,7 +9,6 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'R' => 'RECHAZADA CREDITO',
   'K' => 'CANCELADA',
   'CM' => 'RECHAZADA COMITE',
-  'OP' => 'OPERACIÓN DE PROSPECTO',
   'BC' => 'BURO DE CREDITO',
   'EF' => 'ESTADOS FINANCIERO',
   'SC' => 'SCORING',

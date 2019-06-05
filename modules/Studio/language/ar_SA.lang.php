@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: en_us.lang.php 22115 2007-04-20 22:58:03Z clee $
 
 
 

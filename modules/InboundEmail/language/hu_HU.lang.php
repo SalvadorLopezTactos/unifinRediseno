@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Válasz:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Hibás login vagy jelszó',
-	'ERR_BODY_TOO_LONG'		=> '\\rA főszöveg túl hosszú a megjelenítéshez. Le lett rövidítve.',
+	'ERR_BODY_TOO_LONG'		=> '\rA főszöveg túl hosszú a megjelenítéshez. Le lett rövidítve.',
 	'ERR_INI_ZLIB'			=> 'Átmenetileg nem lehet kikapcsolni a Zlib tömörítést. A "Teszt beállítás" végkimenetele sikertelen lehet.',
 	'ERR_MAILBOX_FAIL'		=> 'Nem sikerült letölteni mail fiókot.',
 	'ERR_NO_IMAP'			=> 'Nem található IMAP könyvtár. Kérem, orvosolja a problémát, mielőtt folytatná a bejövő emailek fogadását.',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Várólisták kiemelése a csoportokból',
 	'LBL_GROUPFOLDER_ID'	=> 'Csoport mappa azonosító',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Hozzárendelés a csoport mappához',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Engedélyezze a felhasználók számára, hogy a küldő nevét és email címét használják később válasz címként',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Az opció kiválasztása esetén a csoporttal azonosított feladó név és email cím kiválasztható lesz a csoporttagok számára email írása során.',
     'LBL_STATUS_ACTIVE'     => 'Aktív',
     'LBL_STATUS_INACTIVE'   => 'Inaktív',
     'LBL_IS_PERSONAL' => 'személyes',

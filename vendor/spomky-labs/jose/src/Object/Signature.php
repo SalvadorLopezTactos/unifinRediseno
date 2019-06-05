@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -110,6 +110,7 @@ final class Signature implements SignatureInterface
         if ($this->hasProtectedHeader($key)) {
             return $this->getProtectedHeaders()[$key];
         }
+
         throw new \InvalidArgumentException(sprintf('The protected header "%s" does not exist', $key));
     }
 
@@ -129,6 +130,7 @@ final class Signature implements SignatureInterface
         if ($this->hasHeader($key)) {
             return $this->headers[$key];
         }
+
         throw new \InvalidArgumentException(sprintf('The header "%s" does not exist', $key));
     }
 

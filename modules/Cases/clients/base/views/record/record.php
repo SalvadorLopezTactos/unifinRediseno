@@ -173,10 +173,16 @@ $viewdefs['Cases']['base']['view']['record'] = array(
                 'type',
                 'source',
                 'status',
+                'follow_up_datetime',
                 'assigned_user_name',
                 array(
                     'name' => 'description',
                     'nl2br' => true,
+                    'span' => 12,
+                ),
+                array(
+                    'name' => 'commentlog',
+                    'label' => 'LBL_COMMENTLOG',
                     'span' => 12,
                 ),
                 array(

@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - 基本的なPHP用のSAMLツールキット。',
   'LBL_SOURCE_ISCROLL' => 'iScroll - モバイルWebキット向けのoverflow:scroll。固定幅・高さの中でのスクリール部品。',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - Internet ExplorerにHTML5キャンバスサポートを追加するJavaScriptライブラリ。Flash描画APIを用いて形やイメージをレンダリング。ほとんどのキャンバスAPIをサポートし、VMLやSilverlightを用いる他の類似ライブラリより高速に動作。',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - Interactive Data Visualizationsを生成するツールを提供。',
   'LBL_SOURCE_ZEND' => 'Zend Framework - オープンソースのPHP5用オブジェクト指向ウェブアプリケーションフレームワーク。',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - PHP用CSVデータパーサ。',
   'LBL_SOURCE_PHPJS' => 'php.js - Javascriptで使用するPHPファンクション。',

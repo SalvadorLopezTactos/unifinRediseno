@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	'unified_search' => true, 'full_text_search' => true, 'unified_search_default_enabled' => true,
 	'comment' => 'Meeting activities'
@@ -617,7 +618,6 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 		'name' => 'repeat_parent_id',
 		'vname' => 'LBL_REPEAT_PARENT_ID',
 		'type' => 'id',
-		'len' => 36,
 		'comment' => 'Id of the first element of recurring records',
 		'importable' => 'false',
 		'massupdate' => false,
@@ -671,6 +671,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
             ),
             'order_by' => 'name:asc',
             'studio' => false,
+            'hideacl' => true,
         ),
     'auto_invite_parent' => array(
         'name' => 'auto_invite_parent',
@@ -757,8 +758,10 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     ),
 );
 
-VardefManager::createVardef('Meetings','Meeting', array('default', 'assignable',
-'team_security',
+VardefManager::createVardef('Meetings', 'Meeting', array(
+    'default',
+    'assignable',
+    'team_security',
 ));
 
 //boost value for full text search

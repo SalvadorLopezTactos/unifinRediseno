@@ -51,5 +51,7 @@
         <env name="ACCESS_TOKEN_REFRESH_URL" value="accessTokenRefreshUrl"/>
         <env name="IDM_PARTITION" value="cloud"/>
         <env name="IDM_REGION" value="eu"/>
+        <env name="RECAPTCHA_SITEKEY" value="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"/>
+        <env name="RECAPTCHA_SECRETKEY" value="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"/>
     </php>
 </phpunit>

@@ -10,8 +10,10 @@ $container->loadFromExtension('framework', array(
         ),
     ),
     'http_method_override' => false,
-    'trusted_proxies' => array('127.0.0.1', '10.0.0.1'),
     'esi' => array(
+        'enabled' => true,
+    ),
+    'ssi' => array(
         'enabled' => true,
     ),
     'profiler' => array(
@@ -19,7 +21,7 @@ $container->loadFromExtension('framework', array(
         'enabled' => false,
     ),
     'router' => array(
-        'resource' => '%kernel.root_dir%/config/routing.xml',
+        'resource' => '%kernel.project_dir%/config/routing.xml',
         'type' => 'xml',
     ),
     'session' => array(
@@ -52,11 +54,10 @@ $container->loadFromExtension('framework', array(
     'translator' => array(
         'enabled' => true,
         'fallback' => 'fr',
-        'paths' => array('%kernel.root_dir%/Fixtures/translations'),
+        'paths' => array('%kernel.project_dir%/Fixtures/translations'),
     ),
     'validation' => array(
         'enabled' => true,
-        'cache' => 'validator.mapping.cache.doctrine.apc',
     ),
     'annotations' => array(
         'cache' => 'file',
@@ -67,6 +68,7 @@ $container->loadFromExtension('framework', array(
         'enabled' => true,
         'enable_annotations' => true,
         'name_converter' => 'serializer.name_converter.camel_case_to_snake_case',
+        'circular_reference_handler' => 'my.circular.reference.handler',
     ),
     'property_info' => true,
     'ide' => 'file%%link%%format',

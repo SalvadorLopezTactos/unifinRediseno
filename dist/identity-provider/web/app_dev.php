@@ -12,6 +12,7 @@
 
 use Sugarcrm\IdentityProvider\App\Application;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\HttpFoundation\Request;
 
 ini_set('display_errors', 1);
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -19,4 +20,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 Debug::enable();
 
 $app = new Application(['env' => Application::ENV_DEV]);
+// get requested host from ingress headers
+Request::setTrustedProxies(
+    ['127.0.0.1', $_SERVER['REMOTE_ADDR']],
+    Request::HEADER_X_FORWARDED_PROTO | Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PORT
+);
 $app->run();

@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML — zestaw narzędzi SAML dla PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll — mechanizm paska przewijania (overflow:scroll) dla mobilnych narzędzi sieciowych.  Natywne przewijanie wewnątrz stałej szerokości/wysokości.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas — to biblioteka JavaScript, która dodaje obsługę HTML5 Canvas do przeglądarki Internet Explorer. Renderuje kształty i obrazy poprzez API do rysowania Flash. Obsługuje prawie wszystkie API Canvas, w wielu przypadkach funkcjonuje wydajniej niż podobne biblioteki wykorzystujące VML lub Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit — JavaScript InfoVis Toolkit zapewnia narzędzia do tworzenia interaktywnych wizualizacji danych dla sieci.',
   'LBL_SOURCE_ZEND' => 'Zend Framework — otwarta, obiektowa platforma do aplikacji sieciowych dla PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV — parser danych CSV dla PHP',
   'LBL_SOURCE_PHPJS' => 'php.js — wykorzystanie funkcji PHP w JavaScript',

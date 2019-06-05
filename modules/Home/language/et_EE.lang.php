@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML – lihtne SAML-tööriistakast PHP puhul.',
   'LBL_SOURCE_ISCROLL' => 'iScroll – mobiilse veebikomplekti overflow:scroll. Loomulik kerimine fikseeritud lause/kõrgusega elemendis.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas – FlashCanvas on JavaScripti teek, mis lisab Internet Explorerile HTML5 Canvas toe. See renderdab kujundeid ja pilte Flashi joonistamise API-liidese kaudu. See toetab peaaegu kõiki Canvase API-liideseid ja käivitub enamikel juhtudel kiiremini, kui muud sarnased teegid, mis kasutavad VML-i või Silverlighti.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit – JavaScripti InfoVis tööriistakast pakub tööriistu veebi interaktiivsete andmete visualiseerimiste loomiseks.',
   'LBL_SOURCE_ZEND' => 'Zend Framework – avatud lähtekoodiga objektile orienteeritud veebirakenduse raamistik PHP5 puhul.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV – CSV-andmete parser PHP puhul',
   'LBL_SOURCE_PHPJS' => 'php.js – PHP funktsiioonide kasutamine JavaScriptis',

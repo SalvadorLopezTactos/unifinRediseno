@@ -87,7 +87,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        } elseif (extension_loaded('mcrypt') && !$authController->authController instanceof OAuth2Authenticate) {
+        } elseif (!$authController->authController instanceof OAuth2Authenticate) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             $authController->loggedIn = false; // reset login attempt to try again with decrypted password
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))
@@ -570,7 +570,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
 
     	// get all the related mmodules data.
         $result = self::$helperObject->getRelationshipResults($mod, $link_field_name, $related_fields, $related_module_query,$order_by);
-        if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
     		$GLOBALS['log']->debug('SoapHelperWebServices->get_relationships - return data for getRelationshipResults is ' . var_export($result, true));
         } // if
     	if ($result) {

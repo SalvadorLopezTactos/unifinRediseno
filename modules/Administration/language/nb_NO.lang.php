@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Gruppeegenskap:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Med bruker DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Inkluder bruker DN med brukerens egenskap når du sjekker gruppemedlemskap',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle ekstra filterparametre for godkjenning av brukere for eksempel \\ nis_sugar_user = 1 eller (is_sugar_user = 1) (is_sales = 1):',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle ekstra filterparametre for godkjenning av brukere for eksempel \ nis_sugar_user = 1 eller (is_sugar_user = 1) (is_sales = 1):',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Innloggingsattributt:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Knytt egenskap:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For å knytte LDAP bruker<br />Eksempler: AD: userPrincipalName] [openLDAP: userPrincipalName] [Mac OS X: uid]',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Advarsel: For å sikre dine data, må installasjonen låses ved hjelp av innstillingen &#39;installer_locked&#39; til &#39;true&#39; i config.php-filen.',
  	'WARN_LICENSE_EXPIRED'=> "Merk: Din lisens utløper om",
     'WARN_LICENSE_EXPIRED2' =>"dag(er). Vennligst gå til <a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>&#39;\"License Management\"</a> i Admin-området.",
-    'WARN_LICENSE_SEATS'=>  "Advarsel: Brukerlisenser er overgått med",
-    'WARN_LICENSE_SEATS2' => ". Vennligst kontakt din salgsrepresentant eller send en e-post til cagroup@sugarcrm.com.",
+    'WARN_LICENSE_SEATS'=>  "<b>Advarsel:</b> Det er ",
+    'WARN_LICENSE_SEATS2' => " aktivere brukere når abonnementet ditt kun tillater ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Deaktiver noen brukere, kontakt partneren eller salgsrepresentanten din"
+        . " eller send en e-post til <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">For mer informasjon, se "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Forstå brukertyper og Sugar-lisenser</a>-artikkel.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Advarsel: Antall aktive brukere er allerede det maksimale antall tillatte lisenser:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Advarsel: Antall aktive brukere er allerede det maksimale antall tillatte lisenser",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Advarsel: Antall aktive brukere i henhold til lisensen, stemmer med antall aktive brukere i systemet. Du vil ikke kunne opprette flere aktive brukere.",
-    'WARN_REPAIR_CONFIG' => 'Advarsel: Config.php-filen trenger å bli reparert. Vennligst bruk <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a>-skriptet i Admin-området for å reparere config-filen.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Advarsel:</b> Du vil ikke kunne opprette flere aktive brukere."
+        . "Kjøp flere abonnementer.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Advarsel:</b> Du vil ikke kunne opprette flere aktive brukere."
+        . "Kjøp flere abonnementer.",
+    'WARN_REPAIR_CONFIG' => '<b>Advarsel:</b> config.php-filen må repareres.  Bruk <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>bygge konfigurasjonsfilen</a> skript på siden reparasjon i Admin-området for å reparere konfigurasjonsfilen.',
     'WARN_UPGRADE_APP'=> "En oppdatert versjon av tjenesten er nå tilgjengelig.",
     'WARN_UPGRADE' => 'Advarsel: Vennligst oppdater',
     'WARN_UPGRADENOTE' => 'Merk:',
@@ -1245,15 +1254,17 @@ Alle integrasjoner som avhenger av denne plattformen vil slutte å fungere.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadatafil ble ikke funnet.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Innstillinger',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Loggvisning',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Tilgang til ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => 'logg.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Prosessadministrasjon',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Vis alle åpne og kjørende prosesser i systemet.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurer ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' innstillinger og visningslogger. Behandle alle BPM-prosesser for alle brukere via prosesstyring.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Tilbudskonfigurasjon',
+    'LBL_MANAGE_QUOTES' => 'Konfigurer arbeidsarkoppsett for tilbud',
 );

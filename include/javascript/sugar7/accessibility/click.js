@@ -72,7 +72,7 @@
                 $el = component;
             }
 
-            events = $el.data('events');
+            events = $._data($el[0] || $el, 'events');
 
             // only bother with elements that have click events attached to them
             if (!events || !events.click) {

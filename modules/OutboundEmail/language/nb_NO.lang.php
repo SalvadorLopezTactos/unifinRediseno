@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Dette er system-kontoen.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID for e-postadresse',
     'LBL_TYPE' => 'Type',
+    'LBL_REPLY_TO_NAME' => 'Svar-til-navn',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Svar til e-postadresser',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Svar til e-postadresser-ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Svar til e-postadresse',
+    'LBL_PRIMARY_TEAM' => 'Hovedteam',
 );

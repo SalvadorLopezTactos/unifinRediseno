@@ -38,5 +38,13 @@ $viewdefs['ProductTemplates']['base']['filter']['basic'] = array(
             ),
             'editable' => false,
         ),
+        array(
+            'id' => 'favorites',
+            'name' => 'LBL_FAVORITES',
+            'filter_definition' => array(
+                '$favorite' => '',
+            ),
+            'editable' => false,
+        ),
     ),
 );

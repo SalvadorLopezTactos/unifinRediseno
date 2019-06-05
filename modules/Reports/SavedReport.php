@@ -76,7 +76,8 @@ class SavedReport extends Basic
         $is_published = 0,
         $team_id,
         $chart_type = 'none',
-        $teamSetSelectedId = null
+        $teamSetSelectedId = null,
+        $description = ''
     ) {
 		global $json;
 		global $current_user;
@@ -116,21 +117,36 @@ class SavedReport extends Basic
 		$this->is_published = $is_published;
 		$this->chart_type = $chart_type;
         $this->acl_team_set_id = $teamSetSelectedId;
+        $this->description = $description;
 
 		$this->save();
 		return $result;
 	}
 
-	function mark_deleted($id){
-	    $report_schedule = new ReportSchedule();
-	    $scheduled_reports = $report_schedule->get_report_schedule($id);
-	    foreach($scheduled_reports as $rs_row){
-	        $report_schedule->mark_deleted($rs_row['id']);
-	    }
+    /**
+     * @inheritDoc
+     */
+    public function mark_deleted($id)
+    {
+        $this->deleteSchedules();
 	    parent::mark_deleted($id);
 	}
 
-		function mark_published($flag)
+    /**
+     * Delete the Report Schedules for the Report
+     */
+    protected function deleteSchedules()
+    {
+        if ($this->load_relationship('reportschedules')) {
+            $schedules = $this->reportschedules->getBeans();
+            foreach ($schedules as $schedule) {
+                $schedule->mark_deleted($schedule->id);
+            }
+        }
+    }
+
+
+    public function mark_published($flag)
 		{
 			global $current_user;
 
@@ -438,15 +454,11 @@ class SavedReport extends Basic
  * @param bool $ignoreSessionCache  When true, just ignore any session and re-generate it
  * @return array
  */
-function getACLAllowedModules($ignoreSessionCache = false) {
-
-	if ($ignoreSessionCache === false && isset($_SESSION['reports_getACLAllowedModules'])) {
-        return (array) $_SESSION['reports_getACLAllowedModules'];
-    }
-
+function getACLAllowedModules()
+{
      require_once('modules/Reports/config.php');
 
-     global $beanFiles, $modListHeader;
+     global $modListHeader;
 
      $report_modules = getAllowedReportModules($modListHeader);
 
@@ -457,7 +469,7 @@ function getACLAllowedModules($ignoreSessionCache = false) {
                 unset($report_modules[$module]);
         }
      }
-     $_SESSION['reports_getACLAllowedModules'] = $report_modules;
+
      return $report_modules;
   }
 

@@ -15,3 +15,4 @@ $sugar_config['verify_client_ip'] = false;
 $sugar_config['passwordsetting']['userexpiration'] = '1';
 $sugar_config['passwordsetting']['userexpirationtime'] = '90';
 $sugar_config['passwordsetting']['SystemGeneratedPasswordON'] = '0';
+$sugar_config['logger']['channels']['authentication'] = array('level' => 'debug', 'processors' => ['backtrace']);

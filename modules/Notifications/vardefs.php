@@ -13,7 +13,6 @@
 
 $dictionary['Notifications'] = array(
     'table' => 'notifications',
-    'audited' => true,
     'fields' => array(
         'is_read' => array(
             'required' => false,
@@ -26,7 +25,6 @@ $dictionary['Notifications'] = array(
             'importable' => 'false',
             'duplicate_merge' => 'disabled',
             'duplicate_merge_dom_value' => '0',
-            'audited' => 0,
             'default' => 0,
             'reportable' => 1,
         ),
@@ -102,6 +100,7 @@ $dictionary['Notifications'] = array(
     // default instead of basic.
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

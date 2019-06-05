@@ -13,9 +13,13 @@
 /**
  * Configurator class around `$sugar_config`
  */
-class Configurator {
+class Configurator
+{
+    /**
+     * @var array
+     */
+    public $config;
 
-	var $config = '';
 	var $override = '';
 	var $errors = array ('main' => '');
 	var $logger = NULL;
@@ -204,7 +208,6 @@ class Configurator {
 
 		$overideString = "<?php\n/***CONFIGURATOR***/\n";
 
-		sugar_cache_put('sugar_config', $this->config);
 		$GLOBALS['sugar_config'] = $this->config;
 
 		//print_r($overrideArray);
@@ -326,8 +329,11 @@ class Configurator {
 	    }
 
         // write out contents to file
-        sugar_file_put_contents_atomic('config_override.php', $override);
-	}
+        $result = sugar_file_put_contents_atomic('config_override.php', $override);
+        if ($result === false) {
+            $GLOBALS['log']->fatal("Unable to write to the config_override.php file. Check the php_errors for detail");
+        }
+    }
 
 	function overrideClearDuplicates($array_name, $key) {
 		if (!empty ($this->override)) {

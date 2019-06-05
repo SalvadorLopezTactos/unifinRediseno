@@ -78,16 +78,31 @@
      * @inheritdoc
      */
     _placeComponent: function(comp, def, prepend) {
+        var nameId = 'dashlet_';
         var $body = this.$el.children(".dashlet-row");
+
+        // If this is the last row of the dashlet list, mark it as such
+        if (def.layout.empty) {
+            nameId += 'last_';
+        }
+
+        // Now add the dashlet index
+        nameId += comp.index;
+
         if($body.length === 0) {
             $body = $("<ul></ul>").addClass("dashlet-row");
             this.$el.append($body);
         }
+
         var headerTemplate = app.template.getLayout(this.name + '.header') || app.template.empty,
             $container = $("<div></div>", {'class': 'rows well well-invisible'})
                 .append(headerTemplate())
                 .append(comp.el),
-            $el = $("<li></li>", {'class': 'row-fluid', 'data-sortable': '1'}).data('index', function() {
+            $el = $('<li></li>', {
+                'class': 'row-fluid',
+                'data-sortable': '1',
+                'name': nameId
+            }).data('index', function() {
                 return comp.index + '';
             }).append($container);
 

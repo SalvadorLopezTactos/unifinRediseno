@@ -744,8 +744,8 @@ Se Oportunidades estiver incluído, Contas ou deve ser obrigatório ou deve ser 
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\\n\\nDo you wish to continue?',
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Tem certeza de que deseja excluir este relacionamento?<br>Nota: Esta operação pode levar alguns minutos para ser concluída.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Isso tornará este relacionamento permanente. Tem certeza de que pretende implementar este relacionamento?',
 'LBL_CONFIRM_DONT_SAVE' => 'Foram feitas alterações desde o último salvamento, gostaria de salvar?',

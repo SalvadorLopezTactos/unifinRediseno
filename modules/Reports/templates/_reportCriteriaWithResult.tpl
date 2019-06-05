@@ -36,6 +36,7 @@
 <input type="hidden" name="action" value="ReportCriteriaResults">
 <input type="hidden" name="module" value="Reports">
 <input type="hidden" id="record" name="record" value="{$report_id}">
+<input type="hidden" id="report_name" name="report_name" value="{$reportName}">
 <input type="hidden" id="id" name="id" value="{$id}">
 <input type="hidden" name='report_def' value ="">
 <input type="hidden" name='save_as' value ="">
@@ -238,10 +239,40 @@ function showFilterString() {
 } // fn
 
 function schedulePOPUP(){
-	var id = document.getElementById('record').value;
-	window.open("index.php?module=Reports&action=add_schedule&to_pdf=true&refreshPage=false&id=" + id ,"test","width=650,height=400,resizable=1,scrollbars=1")
+    var id = document.getElementById('record').value;
+    var name = document.getElementById('report_name').value;
+    var sugarApp = SUGAR.App || SUGAR.app || app;
+    var newModel = sugarApp.data.createBean('ReportSchedules');
+    newModel.set({
+        report_id : id,
+        report_name: name
+    });
+    sugarApp.drawer.open({
+        layout: 'create',
+        context: {
+            create: true,
+            module: 'ReportSchedules',
+            model: newModel
+        }
+    });
 }
-
+function viewSchedulesPOPUP(){
+    var id = document.getElementById('record').value;
+    var name = document.getElementById('report_name').value;
+    var sugarApp = SUGAR.App || SUGAR.app || app;
+    var filterOptions = new sugarApp.utils.FilterOptions().config({
+        initial_filter_label: name,
+        initial_filter: 'by_report',
+        filter_populate: {
+            'report_id': [id]
+        }
+    });
+    sugarApp.controller.loadView({
+        module: 'ReportSchedules',
+        layout: 'records',
+        filterOptions: filterOptions.format()
+    });
+}
 function performFavAction(actionToPerfrom) {
 	var callback = {
         success:function(o){},

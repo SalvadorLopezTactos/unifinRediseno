@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Esborrar',
     'LBL_MODULE_NAME' => 'Adreces electròniques',
     'LBL_MODULE_NAME_SINGULAR' => 'Adreça electrònica',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Acció de la petició de confirmación completada',
+    'LBL_CONFIRMATION_TITLE' => 'Gràcies',
+    'LBL_CONFIRMATION_MESSAGE' => 'S&#39;ha confirmat la vostra subscripció. Us hem afegit a la nostra llista i ens posarem en contacte aviat.',
 );

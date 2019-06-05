@@ -199,7 +199,7 @@ $mod_strings = array (
     'LBL_CONTRACT_TITLE'=>'Smlouvy',
     'LBL_CONTRACT_DESC'=>'Definovat typy smluv v modulu smlouvy. Když uživatelé vytvářejí smlouvy, drop-down menu se zobrazí s typy smluv pro výběr.',
     'LBL_CONTRACT_TYPES'=>'Nastavit typy smluv',
-    'LBL_COULD_NOT_CONNECT'=>'Error: Could not connect to the Sugar Server. Please check please check your Proxy Settings value in the <a href=\\"index.php?module=Configurator&amp;action=EditView\\">System Settings</a> admin panel. Last attempted connection @',
+    'LBL_COULD_NOT_CONNECT'=>'Error: Could not connect to the Sugar Server. Please check please check your Proxy Settings value in the <a href=\"index.php?module=Configurator&amp;action=EditView\">System Settings</a> admin panel. Last attempted connection @',
     'LBL_CREATE_RESOTRE_FILE' => 'Soubor restoreExpand.sql byl úspěšně vytvořen. Prosím použijte ho k vrácení změn u sloupců.',
     'LBL_CURRENCY' => 'Nastavení měny a měnových kurzů',
     'LBL_CONNECTOR_SETTINGS' => 'Konektory',
@@ -401,7 +401,7 @@ $mod_strings = array (
     'LBL_LOCALE_DEFAULT_SYSTEM_SETTINGS'        => 'Uživatelské rozhraní',
     'LBL_LOCALE_DEFAULT_TIME_FORMAT'            => 'Formát času',
     'LBL_LOCALE_EXAMPLE_NAME_FORMAT'            => 'Příklad',
-    'LBL_LOCALE_NAME_FORMAT_DESC'               => '\\"s\\" Oslovení <br>\\"f\\" Křestní jméno<br>\\"l\\" Příjmení',
+    'LBL_LOCALE_NAME_FORMAT_DESC'               => '\"s\" Oslovení <br>\"f\" Křestní jméno<br>\"l\" Příjmení',
     'LBL_LOCALE_TITLE'                          => 'Regionální nastavení',
     'LBL_LOCALE' => 'Nastavte výchozí regionální nastavení pro Váš systém.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- jméno uživatele, který operuje s tímto offline klientem',
@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Průvodce styly',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokumentace a vzory',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuální ověření',
-    'LBL_MANUAL_VALIDATION'=>'Jesliže problémy s automatickým ověřením přetrvávají, zkuste zkontrolovat nastavení PROXY v sekci ADMINISTRACE.<br>Je-li  na Vašem systému zakázána komunikace s okolímy servery, přejděte na <a href=\\"http://demo.sugar-crm.cz/lang/dico_adm.php?action=search#\\">Manuální ověření</a>',
+    'LBL_MANUAL_VALIDATION'=>'Jesliže problémy s automatickým ověřením přetrvávají, zkuste zkontrolovat nastavení PROXY v sekci ADMINISTRACE.<br>Je-li  na Vašem systému zakázána komunikace s okolímy servery, přejděte na <a href=\"http://demo.sugar-crm.cz/lang/dico_adm.php?action=search#\">Manuální ověření</a>',
     'LBL_MANUAL_VALIDATION1'=> 'Krok 1: Vygenerujte soubor s licenčním klíčem kliknutím na následující tlačítko.',
     'LBL_MANUAL_VALIDATION2'=> 'Potom soubor uložte (sugarkey.lic) na lokální souborový systém.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -680,7 +680,7 @@ $mod_strings = array (
     'LBL_REPAIR_DATABASE_EXPORT' => "Exportovat",
 	'LBL_REPAIR_DATABASE' =>'Opravit databázi',
     'LBL_REPAIR_DISPLAYSQL' =>'Zobrazit SQL',
-    'LBL_REPAIR_ENTRY_POINTS_DESC' => 'Oprava vstupních bodů. Spusťte tento skript pokud uvidíte chybovou zprávu \\"Toto není platný vstupní bod\\".',
+    'LBL_REPAIR_ENTRY_POINTS_DESC' => 'Oprava vstupních bodů. Spusťte tento skript pokud uvidíte chybovou zprávu \"Toto není platný vstupní bod\".',
     'LBL_REPAIR_ENTRY_POINTS' => 'Opravit vstupní body',
     'LBL_REPAIR_EXECUTESQL' =>'Spustit SQL',
     'LBL_REPAIR_EXPORTSQL' =>'Exportovat SQL',
@@ -931,19 +931,28 @@ $mod_strings = array (
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Jste si jisti, že chcete povolit tohoto offline klienta?',
     'NTC_OC_RESERVED' => 'Vyhrazené',
     'REMOVE_QUESTION'           => 'Jste si jistí, že chcete odstranit vybraný balíček ?',
-    'WARN_INSTALLER_LOCKED'=>'Varování: Pro zajištění bezpečnosti vašich dat nastavte do souboru config.php \\"installer_locked\\"  \\"true.\\"',
+    'WARN_INSTALLER_LOCKED'=>'Varování: Pro zajištění bezpečnosti vašich dat nastavte do souboru config.php \"installer_locked\"  \"true.\"',
  	'WARN_LICENSE_EXPIRED'=> "Poznámka: Vaše licence za",
     'WARN_LICENSE_EXPIRED2' =>"dny.Prosím jděte na stránky <a href=\\\"index.php?action=LicenseSettings&module=Administration\\\"> Správa licenci</a> v sekci ADMINSTRACE.",
-    'WARN_LICENSE_SEATS'=>  "Upozornění: Uživatelské licence jsou překročeny o",
-    'WARN_LICENSE_SEATS2' => "Prosím jděte na stránky <a href=\\\"index.php?action=LicenseSettings&module=Administration\\\"> Správa licenci</a> v sekci ADMINSTRACE.",
+    'WARN_LICENSE_SEATS'=>  "<b>Varování:</b> Jsou zde ",
+    'WARN_LICENSE_SEATS2' => " aktivní uživatelé, i když je vaše předplatné povoleno pouze pro ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Deaktivujte některé uživatele, kontaktujte svého partnera nebo obchodního zástupce,"
+        . " nebo zašlete e-mail na adresu <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Další informace naleznete na adrese "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Porozumění typům uživatelů a licencím systému Sugar</a> article.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Upozornění: Počet aktivních uživatelů překročil maximální počet uživatelů povolených licencí:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Upozornění: Počet aktivních uživatelů překročil maximální počet uživatelů povolených licencí",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Upozornění: Počet aktivních uživatelů překročil maximální počet uživatelů povolených licencí. Nebudete moci vytvářet další aktivní uživatele.",
-    'WARN_REPAIR_CONFIG' => 'Upozornění: Soubor config.php potřebuje být opraven. Prosím použijte odkaz Oprava v adminstrátorském menu.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Varování:</b> Nebudete moci vytvářet další aktivní uživatele."
+        . " Zakupte si další předplatné.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Varování:</b> Nebudete moci vytvářet další aktivní uživatele."
+        . " Zakupte si další předplatné.",
+    'WARN_REPAIR_CONFIG' => '<b>Varování:</b> Soubor config.php je třeba opravit.  Použijte prosím k opravě konfiguračního souboru skript <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> na stránce Oprava v oblasti pro správce.',
     'WARN_UPGRADE_APP'=> "Nová verze aplikace je k dispozici.",
     'WARN_UPGRADE' => 'Varování: Prosím o bezodkladnou aktualizaci',
     'WARN_UPGRADENOTE' => 'Poznámka:',
-    'WARN_UPGRADE2'=>'použitím upgrade v <a href=\\"index.php?module=Administration&amp;action=Upgrade\\">administračním panelu</a>',
+    'WARN_UPGRADE2'=>'použitím upgrade v <a href=\"index.php?module=Administration&amp;action=Upgrade\">administračním panelu</a>',
     'WARN_VALIDATION_EXPIRED'=> "POZNÁMKA: Váš ověřovací klíč vyprší za",
     'WARN_VALIDATION_EXPIRED2' =>"dny.Prosím jděte na stránky <a href=\\\"index.php?action=LicenseSettings&module=Administration\\\"> Správa licenci</a> v sekci ADMINSTRACE.",
     'WARN_NO_SMTP_SERVER_AVAILABLE_ERROR' =>"Poznámka: chcete-li odeslat upozornění, SMTP server musí být správně nastaven v <a href=\"index.php?module=EmailMan&action=config\">Nastavení Emailu</a>.",
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Vymaže vardefs data z cache',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Odstraní vardefs z cache',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Vymazat cache vyhledávání',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Odstranění unified_search_modules.php z cache',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Odstraní unified_search_modules.php z mezipaměti',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Rychlá oprava a obnova',
     'LBL_QUICK_REPAIR_TITLE'=>'Prosím vyberte modul/y k opravě:',
 	'LBL_FAILED_CONNECTION'=> 'Nepodařilo se připojit :',
@@ -1245,15 +1254,17 @@ Všechny integrace závislé na této platformě přestanou fungovat.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Nelze nalézt soubor metadat.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Nastavení',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Proveďte konfiguraci nastavení Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Prohlížeč protokolů',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Vstupte do protokolu Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Otevřete ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' protokol.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Správa procesů',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Zde můžete vstoupit do komponenty Správa procesů.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Nakonfigurujte ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' nastavení a zobrazte protokoly. Spravujte všechny procesy BPM pro všechny uživatele prostřednictvím komponenty Správa procesů.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Proveďte konfiguraci nastavení Advanced Workflow a zobrazte protokoly. Spravujte všechny procesy BPM pro všechny uživatele prostřednictvím komponenty Správa procesů.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfigurace nabídek',
+    'LBL_MANAGE_QUOTES' => 'Proveďte konfiguraci rozvržení listu nabídek',
 );

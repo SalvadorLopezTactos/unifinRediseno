@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Loo tulevased ajaperioodid',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Värskenda KBContent artikleid.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Avaldage heakskiidetud artiklid ja aeguvad teadmusbaasiartiklid.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Avaldage heakskiidetud artiklid ja aegunud teadmusbaasiartiklid.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Plaanitud töö',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Taasta meeskonna denormaliseeritud turbeandmed',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Kontrolli sissetulevate e-kirjade kontosid',
 'LBL_PERFORMFULLFTSINDEX' => 'Täistekstiotsingu indeksi süsteem',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Eemalda ajutised PDF-failid',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Avaldage heakskiidetud artiklid ja aeguvad teadmusbaasiartiklid.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Avaldage heakskiidetud artiklid ja aegunud teadmusbaasiartiklid.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearchi ootejärjekorra plaanija',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eemalda diagnostikatööriista failid',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eemalda ajutised failid',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Käivita meili meeldetuletuste saatmine',
 'LBL_CLEANJOBQUEUE' => 'Puhasta tööde järjekord',
 'LBL_CLEANOLDRECORDLISTS' => 'Puhasta vanade kirjete loendid',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'SugarBPM-i planeerija',
 );
 

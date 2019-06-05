@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Piešķirt darba grupai',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Noklusējuma darba grupa jauniem ierakstiem',
 	'LBL_DEFAULT_TEAM'					=> 'Noklusējuma darba grupa',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Noklusētā primārā darba grupa',
 	'LBL_LIST_DESCRIPTION'				=> 'Apraksts',
 	'LBL_MY_TEAMS'						=> 'Manas darba grupas',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privātā darba grupa',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saņēmēja e-pasts',
 	'ERR_SERVER_STATUS'					=> 'Jūsu servera statuss',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistēma nevar nosūtīt lietotājam e-pastu. Pārbaudiet izejošo e-pastu konfigurāciju <a href="index.php?module=EmailMan&action=config">E-pasta uzstādījumos</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Lietotāju IDM režīmā var izveidot tikai <a href="{0}" target="_blank">mākoņa konsolē</a>.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primāro e-pasta adresi IDM režīmā var izveidot tikai <a href="{0}" target="_blank">mākoņa konsolē</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-pasta adrese',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Apstiprināt paroli',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Jūs nomainījāt lietotāja tipu no Sistēmas administrators uz Parasts lietotājs. Pēc šīs izmaiņas saglabāšanas lietotājam vairs nebūs sistēmas administratora tiesības.\\n\\n Spied OK, lai turpinātu.\\n Spied Atcelt, lai atgrieztos pie ieraksta.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Jūs nomainījāt lietotāja tipu no Sistēmas administrators uz Parasts lietotājs. Pēc šīs izmaiņas saglabāšanas lietotājam vairs nebūs sistēmas administratora tiesības.\n\n Spied OK, lai turpinātu.\n Spied Atcelt, lai atgrieztos pie ieraksta.',
 	'LBL_COUNTRY'						=> 'Valsts',
 	'LBL_CURRENCY_TEXT'					=> 'Norādiet valūtu, kas tiks norādīta pēc noklusējuma, veidojot jaunus ierakstus. Šajā valūtā tiks attēlotas arī darījuma iespēju summas sarakstā.',
 	'LBL_CURRENCY'						=> 'Valūta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Zīmju skaits aiz komata, kas sistēmā tiek rādīts decimāldaļas un peldošā punkta skaitļos, tādos kā valūtas summas un vidējās vērtības atskaitēs',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Parādīt vēlamo valūtu',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Konvertēt bāzes valūtu uz lietotāja vēlamo sarakstos un ieraksta skatos',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Izveidot ieņēmumu posteņus vēlamajā valūtā',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Ieņēmumu posteņi, kas pievienoti darījumam no produktu kataloga, tiks konvertēti lietotāja vēlamajā valūtā, ja tā atšķiras no valūtas, kas tiek izmantota produktu kataloga vienumam.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Tūkstošu atdalītājs',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Rakstzīme tūkstošu atdalīšanai',
 	'LBL_DECIMAL_SEP'					=> 'Decimālais simbols',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Norādiet lietotājvārdu un e-pasta adresi.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Šī iespēja pagaidām nav pieejama. Sazinieties ar administratoru.',
 	'LBL_PUBLISH_KEY'					=> 'Publicēšanas taustiņš',
-
+    'LBL_SITE_USER_ID' => 'site_url un user_id hash',
     'LBL_QUOTAS'                        => 'Kvotas',
     'LBL_FORECASTS'                     => 'Prognozes',
     'LBL_WORKSHEETS'                    => 'Darblapas',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Lietotāja profils',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Ja noteikti tā lauki nav rediģējami, šo lauku pārvaldīšanai piesakieties savā mākoņa konsolē',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Ja vēlaties manīt noteiktus laukus, kuri nav rediģējami, ' .
-        'lūdzu, sazinieties ar administratoru, lai informētu par šīm izmaiņām',
+        'Ja vēlaties veikt izmaiņas tikai lasāmajos laukos, sazinieties ar savu Sugar administratoru.',
 ); // END STRINGS DEFS
-
-?>

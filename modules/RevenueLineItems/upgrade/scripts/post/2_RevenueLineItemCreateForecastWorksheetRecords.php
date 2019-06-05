@@ -56,25 +56,13 @@ class SugarUpgradeRevenueLineItemCreateForecastWorksheetRecords extends UpgradeS
      */
     protected function insertRows($results)
     {
-        $insertSQL = "INSERT INTO forecast_worksheets (
-                        id,
-                        name,
-                        parent_id,
-                        parent_type,
-                        draft) values";
-
-        /* @var $fw ForecastWorksheets */
-        $fw = BeanFactory::newBean('ForecastWorksheets');
-
+        $conn = $this->db->getConnection();
         while ($row = $this->db->fetchByAssoc($results)) {
             $row['id'] = create_guid();
-            foreach ($row as $key => $value) {
-                $row[$key] = $this->db->massageValue($value, $fw->getFieldDefinition($key));
-            }
-
-            $q = $insertSQL . ' (' . join(',', $row) . ');';
-
-            $this->db->query($q);
+            $conn->insert(
+                'forecast_worksheets',
+                $row
+            );
         };
     }
 }

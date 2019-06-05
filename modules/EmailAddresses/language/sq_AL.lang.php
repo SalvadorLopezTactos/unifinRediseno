@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Fshi',
     'LBL_MODULE_NAME' => 'Adresat e emailit',
     'LBL_MODULE_NAME_SINGULAR' => 'Adresa e emailit',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'U ndërmor veprimi për kërkesën e konfirmimit',
+    'LBL_CONFIRMATION_TITLE' => 'Faleminderit',
+    'LBL_CONFIRMATION_MESSAGE' => 'Abonimi yt u konfirmua. Je shtuar në listën tonë dhe do të të kontaktojmë shpejt.',
 );

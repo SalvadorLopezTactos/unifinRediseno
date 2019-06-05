@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: PipelineBySalesStageDashlet.data.php 16280 2006-08-22 19:47:48Z awu $
 
 $dashletData['PipelineBySalesStageDashlet']['searchFields'] = array(
         'pbss_date_start' => array(

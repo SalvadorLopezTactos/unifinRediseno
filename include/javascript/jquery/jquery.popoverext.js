@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 !function( $ ) {
 
  "use strict"

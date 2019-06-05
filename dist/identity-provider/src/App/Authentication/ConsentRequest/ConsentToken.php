@@ -2,7 +2,7 @@
 
 namespace Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest;
 
-use Jose\Object\JWSInterface;
+use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
 
 class ConsentToken implements ConsentTokenInterface
 {
@@ -15,11 +15,6 @@ class ConsentToken implements ConsentTokenInterface
      * @var string
      */
     protected $clientId;
-
-    /**
-     * @var JWSInterface
-     */
-    protected $jwsToken;
 
     /**
      * array of client scope
@@ -40,11 +35,26 @@ class ConsentToken implements ConsentTokenInterface
     protected $redirectUrl;
 
     /**
+     * User name(optional)
+     * @var string
+     */
+    protected $username;
+
+    /**
      * @inheritDoc
      */
     public function getTenantSRN()
     {
         return $this->tenantSrn;
+    }
+
+    /**
+     * set tenant srn
+     * @param string $tenantSrn
+     */
+    public function setTenantSRN($tenantSrn)
+    {
+        $this->tenantSrn = $tenantSrn;
     }
 
     /**
@@ -56,17 +66,9 @@ class ConsentToken implements ConsentTokenInterface
     }
 
     /**
-     * @return JWSInterface
-     */
-    public function getJwsToken()
-    {
-        return $this->jwsToken;
-    }
-
-    /**
      * @return array
      */
-    public function getScope()
+    public function getScopes()
     {
         return $this->scope;
     }
@@ -88,6 +90,14 @@ class ConsentToken implements ConsentTokenInterface
     }
 
     /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * fill fields by oauth2 consent data
      * @param array $data
      * @return ConsentToken
@@ -102,8 +112,12 @@ class ConsentToken implements ConsentTokenInterface
         $queryParams = [];
         parse_str(parse_url($this->redirectUrl, PHP_URL_QUERY), $queryParams);
 
+        if (!empty($queryParams[TenantConfigInitializer::REQUEST_KEY])) {
+            $this->tenantSrn = $queryParams[TenantConfigInitializer::REQUEST_KEY];
+        }
+
         if (!empty($queryParams['login_hint'])) {
-            $this->tenantSrn = $queryParams['login_hint'];
+            $this->username = $queryParams['login_hint'];
         }
 
         return $this;

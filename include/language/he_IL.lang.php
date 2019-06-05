@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'הגדרות דוא"ל',
     'EmailParticipants' => 'המשתתפים בדוא"ל',
     'DataPrivacy' => 'פרטיות נתונים',
+    'ReportSchedules' => 'דווח על לוחות זמנים',
+    'CommentLog' => 'יומן הערות',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth אסימון',
     'Filters' => 'פילטר',
     'Comments' => 'תגובה',
+    'CommentLog' => 'יומן הערות',
     'Currencies' => 'מטבע:',
     'ProductTemplates' => 'תבנית מוצר',
     'ProductTypes' => 'סוג מוצר',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'הגדרת דוא"ל',
     'EmailParticipants' => 'המשתתף בדוא"ל',
     'DataPrivacy' => 'פרטיות נתונים',
+    'ReportSchedules' => 'דווח על לוח זמנים',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'תחבורה',
     'Utilities' => 'שירותים ציבוריים',
     'Other' => 'אחר',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'שכבה 1',
+    'T2' => 'שכבה 2',
+    'T3' => 'שכבה 3',
+    'T4' => 'שכבה 4',
   ),
   'lead_source_default_key' => 'נוצר בעצמו',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'הזז',
         'donothing' => 'אל תעשה דבר'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'אף פעם',
+        30000 => 'כל 30 שניות',
+        60000 => 'כל דקה 1',
+        120000 => 'כל 2 דקות',
+        180000 => 'כל 3 דקות',
+        240000 => 'כל 4 דקות',
+        300000 => 'כל 5 דקות',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'בתחזית',
         'sales_stage' => 'שלב במכירות',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'רשימה',
         'activities' => 'תזרים פעילויות',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'פעם בשעה',
+        '21600' => 'פעם ב- 6 שעות',
+        '43200' => 'פעם ב- 12 שעות',
+        '86400' => 'פעם ביום',
+        '604800' => 'פעם בשבוע',
+        '1209600' => 'פעם בשבועיים',
+        '2419200' => 'פעם ב- 4 שבועות',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'עקוב אחר קישור',
   'LBL_TOGGLE_VISIBILITY' => 'החלף נראות', // Record view header panel element
   'LBL_ACTIVITIES' => 'תזרים פעילויות',
-  'LBL_COPYRIGHT' => 'זכויות יוצרים © 2004-2018. SugarCRM Inc. כל הזכויות שמורות.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'שמירה',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'הוסף ספריה זו אל',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'לא ניתן לשנות ספריה זוd',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'אתה בטוח שברצונך למחוק ספריה זו?\\nתהליך זה לא ניתן לאאחזר.\\nהספריה כולל תת הספריות ימחקו לעד.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'אתה בטוח שברצונך למחוק ספריה זו?\nתהליך זה לא ניתן לאאחזר.\nהספריה כולל תת הספריות ימחקו לעד.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'שם לספריה חדשה',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'לפני ביצוע פעולה זו בחר ספריה.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'ניהול ספריות',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'סנכרן כל חשבונות הדוא"ל',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'הודעת דוא"ל נשלחה לכתובת שצויינה באמצעות הגדרות דואר יוצא שהוגדרו. בדוק בבקשה שהדוא"ל הגיע על מנת לוודא שההגדרות נכונות.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'ביצוע פעולה זו יגרום לסינכרון חשבונות הדוא"ל ותוכנם.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'לבצע סינכרון מלא?\\nחשבונות דוא"ל גדולים יקחו כמה דקות.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'לבצע סינכרון מלא?\nחשבונות דוא"ל גדולים יקחו כמה דקות.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'לבחירת מספר ספריות בבת אחת לחץ על שיפט או קונטרול במקלדת שלך.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'כללי',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'ספריות קבוצה זמינות',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'בחר במספר ההודעות לעמוד בתיבת דואר נכנס. כדי להבחירה תקורן יש לרענן את הספריות.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'מאחזר חשבונות דואר',
     'LBL_EMAIL_SETTINGS_RULES'              => 'כללים',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'ההגדרות נשמרו.\\n\\nכדי שהשינויים כנסו לתוקף עליך להעלות שוב את הדף הזה.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'ההגדרות נשמרו.\n\nכדי שהשינויים כנסו לתוקף עליך להעלות שוב את הדף הזה.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'יש לרענן את הדף על מנת שההגדרות החדשות יכנסו לפעולה',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'שלח הודעות בטקסט פשוט בלבד',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'פעיל',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'לייצוא התוכן חייבת להיות פעילות חוקית.',
     'ERR_NO_HEADER_ID' => 'תכונה זו אינה זמינה בערכת נושא זו.',
     'ERR_NOT_ADMIN' => "גישה לא מורשית למערכת ניהול.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "הפעלת אפשרות זו בוטלה ב- SugarCRM עבור מצב IDM והיא זמינה ב- Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "אנא עבור אל <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'ניהול הססמאות זמין רק ב&#39;הגדרות ענן&#39;/Cloud Settings.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'צור קשר עם מנהל מערכת של Sugar אם ברצונך לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'חסר שדה נדרש:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'שדה נדרש איננו חוקי:',
     'ERR_INVALID_VALUE' => 'ערך חוקי:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'המתשמש הנוכחי אינו רשאי לשנות הגדרות של  {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'אינך מורשה למועדף  {moduleName}',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'אינך מורשה להרשם למועדף  {moduleName}',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields לא נמצאו במטען',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns אינו מערך',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields לא נמצאו במטען',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows אינו מערך',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields לא נמצאו במטען',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'בקשתך נכשלה מסיבה לא ברורה',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'בחר אופרטור...',
     'LBL_FILTER_CREATE_NEW' => 'צור',
     'LBL_FILTER_CREATE_FILTER' => 'צור מסנן חדש',
+    'LBL_FILTER_CLOSE_FILTER' => 'סגור מסנן',
     'LBL_FILTER_EDIT_FILTER' => 'ערוך מסנן',
     'LBL_FILTER_ALL_RECORDS' => 'כל הרשומות',
     'TPL_FILTER_SAVE' => 'יצרת בהצלחה פילטר {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'כל הזכויות שמורות.br />SugarCRM>‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'החברות שאליהן הם משויכים.',
@@ -3414,7 +3454,7 @@ $app_strings = array (
     'LNK_RESUME' => 'המשך',
     'LNK_VIEW_CHANGE_LOG' => 'הצג יומן ביקורת',
     'TPL_AUDIT_LOG_TITLE' => 'יומן ביקורת עבור {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'לחץ כדי להציג יומן סקירה של כתובות דוא"ל',
 
     'NTC_CLICK_BACK' => 'הקש על כפתור אחורה בדפדפן על מנת לתקן שגיאה זו.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3451,7 +3491,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>אזהרה:</b> הדפדפן שלך במצב IE compatibility view שאינו נתמך",
     'WARN_LICENSE_SEATS'=>  "אזהרה: מספר המתמשים הפעילים עבר את מספר הרישיונות שבבעלותכם.",
     'WARN_LICENSE_SEATS_MAXED'=>  "אזהרה: מספר המשתמשים הפעילים עבר את מספר רישיונות הגישה שבידכם.",
-    'WARN_ONLY_ADMINS'=> "רק מנהלי המערכת יכולים לבצע כניסה.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'מספר המשתמשים הפעילים חורג ממגבלות &#39;ספירת הרישיונות&#39;. אנא צור קשר עם מנהל המערכת שלך.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'רק מנהלי המערכת יוכלו להתחבר.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'המערכת הגיעה למגבלת &#39;ספירת רישיונות המשתמש&#39;. רק משתמשים קיימים יוכלו להתחבר.',
+    'WARN_ONLY_ADMINS'=> "רק מנהלי המערכת יוכלו להתחבר.",
     'WARN_UNSAVED_CHANGES'=> "אתה מתכוון לעזוב את הרשומה הזו מבלי לשמור שינויים שערכת בה. אתה בטוח שברצונך לנווט הלאה מרשומה זו?",
     'LBL_WARN_UNSAVED_CHANGES' => 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב דף זה?',
     'LBL_NAVIGATE_TO_REPORTS' => 'אתה עובר למודול דוחות. השינויים שביצעת לא יישמרו. האם להמשיך?',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "אין לך רשומות שמורות.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "באופרותך ליצור מרשימת a",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "הקלק פה",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'הוסף למועדפים שלי',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'מדדי הזדמנויות',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'מדדי הזדמנות עבור החשבון הקשור.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'בחירה מהירה מקטלוג המוצרים',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'פירוט הפריטים שהיו בשימוש לאחרונה ומוצרים שנשמרו כמועדפים',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'היו בשימוש לאחרונה',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'מועדפים',
 
     'LBL_DASHLET_NO_RECORDS' => 'לא נמצאו רשומות',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'סיכום פניית שירות',
@@ -4256,7 +4306,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'עתיד',
     'LBL_REQUIRED_FIELD' => 'חובה',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'שורת פריט עם הצעת מחיר',
+    'LBL_DISCOUNT_TOTAL' => 'סכום ההנחה הכולל',
+    'LBL_TAX' => 'מס',
+    'LBL_SHIPPING' => 'משלוח',
+    'LBL_GRAND_TOTAL' => 'סכום כולל',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'מלא באופן אוטומטי את הכתובת לחיוב מחשבון הפרופיל',
+    'LBL_QLI_ADD_GROUP' => 'הוסף קבוצה',
+    'LBL_QLI_COMMENT' => 'תגובה',
+    'LBL_SELECT_ACTION' => 'בחר פעולה',
+    'LBL_QLI_GROUP_NAME' => 'שם קבוצה',
+    'LBL_GROUP_TOTAL' => 'סה"כ קבוצה',
+    'LBL_ITEM_NAME' => 'שורת פריט',
+    'LBL_QLI_DELETE' => 'האם אתה בטוח שברצונך למחוק את שורת פריט זו?',
+    'LBL_QLI_COMMENT_DELETE' => 'האם אתה בטוח שברצונך למחוק את התגובה לשורת פריט זו?',
+    'LBL_QLI_GROUP_DELETE' => 'האם אתה בטוח שברצונך למחוק את הקבוצה &#39;{0}&#39;? כל הפריטים יועברו לקבוצת ברירת המחדל.',
+    'LBL_QLI_GROUP_EMPTY' => 'אין שורת פריט עם הצעת מחיר',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'אופציונלי',
     'LBL_RELATED_MODULE' => 'קשור ל {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'קשור {{{this}}}',
@@ -4286,7 +4356,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'אשר',
     'LBL_NO_ACCESS' => '(אין גישה)',
     'LBL_NO_ACCESS_LOWER' => 'אין גישה',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'ללא גישה',
     'LBL_VALUE_ERASED' => 'הערך נמחק',
     'LBL_VALUE_ERASED_TOOLTIP' => 'מידע זה נמחק באמצעות בקשת פרטיות נתונים',
     'LBL_CREATE_RELATED_RECORD' => 'צור רשומה קשורה',
@@ -4914,7 +4984,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'משימות צוות',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'זרימת עבודה מתקדמת',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP או Old REST API',
@@ -4975,9 +5045,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'הודעה:',
     'LBL_ALERT_TITLE_ERROR' => 'שגיאה:',
     'LBL_ALERT_TITLE_LOADING' => 'טוען',
+    'LBL_ALERT_NO_ACCESS' => 'אין לך גישה למסנן שהוחל על תאסופית זו.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'שכפל את לוח המחוונים כדי להגדיר תאסופית זו עם מסנן משלך.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'הדפדפן שלך לא נתמך',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'מומלץ להשתמש בגירסאות הדפדפנים שלהלן: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'אנא ראה את הדף {{link}} עבור דפדפנים מומלצים.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'פלטפורמות נתמכות',
     'LBL_ALERT_CONFIRM_DELETE' => 'האם אתה בטוח שברצונך למחוק פריט זה?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'האם אתה בטוח שברצונך למחוק פריטים אלה?',
@@ -5075,7 +5145,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'סיכום היסטורי',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'עוד סיסטוריה...',
     'LBL_RELATED_CONTACT' => 'איש קשר קשור',
     'LBL_MODULE_TYPE' => 'סוג',
@@ -5149,6 +5219,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'הגדרות SMTP חסרות',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'לשליחת משימות יש להגדיר שרת SMTP ב {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'הגדרות דוא"ל',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'דוחות מלאי חדשים זמינים',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'דוחות מלאי חדשים זמינים עבור ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'מודול לדוחות',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'הם מתויגים כ"דוח מלאי" וניתנים לסינון. הדוחות מתויגים גם כ"מכירות ושיווק", "שירות לקוחות", "פרטיות נתונים" או "אדמיניסטרטיבי" בהתאם לתוכן. לקבלת פרטים נוספים ניתן לעיין בסעיף ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'מסמכים',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM מאפשרת למשתמשים חזקים לבצע משימות מסוימות במהרה עם קיצורי דרך של המקלדת כדי להגדיל את היצרנות שלהם. הטבלאות בצד ימין מתארות את קיצורי הדרך הזמינים יחד עם המקשים והפעולות שהם מבצעים.',
@@ -5258,23 +5333,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'תהליכים',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'התאסופית &#39;תהליכים&#39; מציגה את התבניות שבהן ניתן להשתמש ב-SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'הגדרות תהליך',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'התאסופית &#39;הגדרות תהליך&#39; מציגה את התבניות שבהן ניתן להשתמש ב-SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'צור הגדרות תהליך',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'ייבא הגדרות תהליך',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'תהליך כללים עסקיים',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'התאסופית &#39;תהליך כלל עסקי&#39; מציגה את התבניות שבהן ניתן להשתמש ב-SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'צור תהליך כלל עסקי',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'ייבא תהליך ככלים עסקיים',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'תבניות מייל תהליך',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'התאסופית &#39;תבניות מייל תהליך&#39; מציגה את התבניות שבהן ניתן להשתמש ב-SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'צור תבנית מייל תהליך',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'ייבא תבניות מייל תהליך',
 
@@ -5298,7 +5376,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => 'בוטל',
     'LBL_PMSE_TERMINATED_STATUS' => 'הופסק',
     'LBL_PMSE_ERROR_STATUS' => 'שגיאה',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'הגדרות SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'אתה בטוח שברצונך למחוק רשומה זו?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'אתה בטוח שברצונך לאפשר רשומה זו?',
@@ -5322,7 +5400,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'יש לאפשר שימוש ב Javascript כדי להמשיך לעבוד עם שוגר',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'לא ניתן היה לבטל את העריכה בסידרה של הנתונים הערוכים בסידרה',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'לא ניתן היה לבטל את העריכה בסידרה של הנתונים הערוכים בסידרה מאחר שהם מכילים הפניות לאובייקטים או למחלקות',
 
@@ -5351,6 +5429,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => 'מידע אישי',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'סמן למחיקה',
     'TPL_DATAPRIVACY_PII_TITLE' => 'מידע אישי עבור {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'הועתק ללוח שלך!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'לא ניתן להעתיק ללוח שלך',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'העתק את קישור האישור',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'הצג עוד...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'הראה פחות...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6528,7 +6615,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'קובץ מוטמע'
     'YER' => 'ריאל',
     'ZWD' => 'דולר זימבבואי',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'ללא',
+        'future' => 'ערך נוכחי',
+        'old' => 'ערך ישן',
+        'both' => 'ערכים ישנים ונוכחיים',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

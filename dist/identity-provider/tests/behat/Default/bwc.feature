@@ -28,7 +28,7 @@ Feature: bwc
     And I wait until the loading is completed
     And I switch to BWC
     And I follow "Password Management"
-    And I wait for the page to be loaded
+    And I wait for the element "#passRequirementId"
     Then I should see "Password Requirements"
     Then I should see "LDAP Support"
     Then I should see "SAML Authentication"
@@ -37,5 +37,4 @@ Feature: bwc
     When I wait until the loading is completed
     Then I should see "Accounts"
     Then I should see "My Accounts"
-    When I click "#userList"
-    And I click ".profileactions-logout"
+    And I logout

@@ -12620,30 +12620,6 @@ var jCore = (function ($, window) {
             customShape.wasDragged = false;
 
             e.stopPropagation();
-            //select in list item for element panel with errors
-            // Add defensive coding to ensure we are not calling methods on
-            // undefined properties
-            if (listPanelError !== undefined && customShape.BPMNError) {
-                erros = customShape.BPMNError.asArray();
-                if ( erros.length ) {
-                    id = customShape.getID();
-                    item = listPanelError.items.filter( function (item) {
-                        if (item.getErrorId() === id) {
-                            return item
-                        }
-                    });
-                    if (item.length){
-                        item = item[0];
-                        //console.log(item.html);
-                        item.select();
-                        $("#div-bpmn-error")[0].scrollTop = item.html.offsetTop;
-                    }
-                } else {
-                    if (listPanelError.selectedItem){
-                        listPanelError.selectedItem.deselect();
-                    }
-                }
-            }
         };
     };
 
@@ -15929,11 +15905,6 @@ var jCore = (function ($, window) {
                 currentLabel.loseFocus();
                 $(currentLabel.textField).focusout();
             }
-            if (listPanelError){
-                if (listPanelError.selectedItem){
-                    listPanelError.selectedItem.deselect();
-                }
-            }
         };
     };
 
@@ -17262,7 +17233,7 @@ var jCore = (function ($, window) {
             })
             .width(lineWidth)
             .height(lineHeight)
-            .offset(offset);
+            .css(offset);
         if (transform) {
             $(this.html).css({
                 '-webkit-transform': transform,

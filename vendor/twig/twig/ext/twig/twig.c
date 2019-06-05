@@ -870,6 +870,8 @@ PHP_FUNCTION(twig_template_get_attributes)
 
 		if (null === $object) {
 			$message = sprintf('Impossible to invoke a method ("%s") on a null variable', $item);
+		} elseif (is_array($object)) {
+			$message = sprintf('Impossible to invoke a method ("%s") on an array.', $item);
 		} else {
 			$message = sprintf('Impossible to invoke a method ("%s") on a %s variable ("%s")', $item, gettype($object), $object);
 		}
@@ -885,9 +887,9 @@ PHP_FUNCTION(twig_template_get_attributes)
 		type_name = zend_zval_type_name(object);
 		Z_ADDREF_P(object);
 		if (Z_TYPE_P(object) == IS_NULL) {
-			convert_to_string_ex(&object);
-
-			TWIG_RUNTIME_ERROR(template TSRMLS_CC, "Impossible to invoke a method (\"%s\") on a %s variable.", item, type_name);
+			TWIG_RUNTIME_ERROR(template TSRMLS_CC, "Impossible to invoke a method (\"%s\") on a null variable.", item);
+		} else if (Z_TYPE_P(object) == IS_ARRAY) {
+			TWIG_RUNTIME_ERROR(template TSRMLS_CC, "Impossible to invoke a method (\"%s\") on an array.", item);
 		} else {
 			convert_to_string_ex(&object);
 
@@ -957,7 +959,7 @@ PHP_FUNCTION(twig_template_get_attributes)
 	if (!isset(self::$cache[$class]['methods'])) {
 		if ($object instanceof self) {
 			$ref = new ReflectionClass($class);
-			$methods = array();
+			$methods = [];
 
 			foreach ($ref->getMethods(ReflectionMethod::IS_PUBLIC) as $refMethod) {
 				$methodName = strtolower($refMethod->name);
@@ -1079,7 +1081,7 @@ PHP_FUNCTION(twig_template_get_attributes)
 	// Some objects throw exceptions when they have __call, and the method we try
 	// to call is not supported. If ignoreStrictCheck is true, we should return null.
 	try {
-	    $ret = call_user_func_array(array($object, $method), $arguments);
+	    $ret = call_user_func_array([$object, $method], $arguments);
 	} catch (BadMethodCallException $e) {
 	    if ($call && ($ignoreStrictCheck || !$this->env->isStrictVariables())) {
 	        return null;

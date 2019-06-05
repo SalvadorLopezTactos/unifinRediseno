@@ -248,14 +248,14 @@ class PMSEPreProcessor
 
             // Loop the flowdata list and handle the actions necessary
             foreach ($flowDataList as $flowData) {
+                // Massage the flow data for required elements first
+                $flowData = $this->processFlowData($flowData);
+
                 // For handling Security Subject saving later on
                 $this->setSubjectData($flowData);
 
                 // Make sure we start fresh each time with validation and such
                 $request->reset();
-
-                // Process the flow data and also the bean object data
-                $request->setFlowData($this->processFlowData($flowData));
 
                 // Make sure we have a bean to work with
                 $bean = $request->getBean();
@@ -273,6 +273,9 @@ class PMSEPreProcessor
 
                 // Set the bean back onto the request for use in the validators
                 $request->setBean($bean);
+
+                // Set the flow data onto the request for use down the line
+                $request->setFlowData($flowData);
 
                 // It's essential that the request should be initialized as valid
                 // for the next flow. This does not actually validate anything,
@@ -561,7 +564,7 @@ class PMSEPreProcessor
                 rd.rel_element_id = flow.bpmn_id AND
                 flow.cas_flow_status='WAITING' AND
                 flow.cas_sugar_object_id IN (?) AND
-                flow.deleted = 0 
+                flow.deleted = 0
         WHERE
             rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
                 (

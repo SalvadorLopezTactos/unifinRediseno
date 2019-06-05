@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'سمة المجموعة:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'مع DN المستخدم:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'تضمين DN المستخدم مع سمة المستخدم عند التحقق من عضوية المجموعة',
-	'LBL_LDAP_USER_FILTER_DESC'=>'إضافة أي مؤشرات تصفية إضافية عند مصادقة المستخدمين مثال \\nis_sugar_user=1 أو (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'إضافة أي مؤشرات تصفية إضافية عند مصادقة المستخدمين مثال \nis_sugar_user=1 أو (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'سمة تسجيل الدخول:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'سمة الربط:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'أمثلة لربط<br>مستخدم LDAP:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
@@ -936,12 +936,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>تحذير:</b> لحماية بياناتك، لا بد من تأمين المثبت من خلال الإعداد &#39;installer_locked&#39; إلى &#39;صحيح&#39; في الملف config.php.',
  	'WARN_LICENSE_EXPIRED'=> "<b>إشعار:</b> تنتهي صلاحية الترخيص الخاصة بك في ",
     'WARN_LICENSE_EXPIRED2' =>" يوم (أيام). يُرجى الذهاب إلى <a href='index.php?action=LicenseSettings&module=Administration'>'\"إدارة الترخيص\"</a> في شاشة الإدارة.",
-    'WARN_LICENSE_SEATS'=>  "<b>تحذير:</b> تجاوزت تراخيص المستخدم بـ ",
-    'WARN_LICENSE_SEATS2' => ".  يُرجى الاتصال بممثل المبيعات أو إرسال بريد إلكتروني إلى <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>تحذير:</b>هناك ",
+    'WARN_LICENSE_SEATS2' => " مستخدمون نشطون بينما اشتراكك يسمح فقط بـ ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">الرجاء إلغاء تنشيط بعض المستخدمين أو اتصل بشريكك أو مندوب المبيعات،"
+        . " أو أرسل بريدًا إلكترونيًا إلى sales@sugarcrm.com <a href='mailto:sales@sugarcrm.com'></a>.</p>"
+        . "<p class=\"error\">للحصول على مزيد من المعلومات، راجع المقالة "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "فهم أنواع المستخدمين وتراخيص Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>تحذير:</b> وصل عدد المستخدمين النشطين بالفعل إلى عدد التراخيص الأقصى المسموح به: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>تحذير:</b> وصل عدد المستخدمين النشطين بالفعل إلى عدد التراخيص الأقصى المسموح به",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>تحذير:</b> يتطابق عدد المستخدمين النشطين المسموح به لترخيصك مع عدد المستخدمين النشطين في النظام. لن تتمكن من إنشاء مستخدم نشط إضافي.",
-    'WARN_REPAIR_CONFIG' => '<b>تحذير:</b> يتطلب إصلاح الملف config.php.  يُرجى استخدام <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>لإصلاح ملف Config</a> البرنامج النصي في صفحة الإصلاح في منطقة الإدارة لإصلاح الملف config.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>تحذير:</b> لن تستطيع إنشاء مزيد من المستخدمين النشطين."
+        . " الرجاء شراء المزيد من الاشتراكات.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>تحذير:</b> لن تستطيع إنشاء مستخدمين نشطين إضافيين."
+        . " الرجاء شراء المزيد من الاشتراكات.",
+    'WARN_REPAIR_CONFIG' => '<b>تحذير:</b> ملف config.php بحاجة إلى إصلاح.  الرجاء استخدام البرنامج النصي <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>إعادة إنشاء ملف Config</a> في صفحة الإصلاح في مجال الإدارة لإصلاح الملف config.',
     'WARN_UPGRADE_APP'=> "يتوفر الآن إصدار محدث من التطبيق. ",
     'WARN_UPGRADE' => '<b>تحذير:</b> يُرجى ترقية ',
     'WARN_UPGRADENOTE' => 'ملاحظة: ',
@@ -1249,15 +1258,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'تعذر العثور على ملف بيانات التعريف.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'الإعدادات',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'قم بتهيئة إعدادات Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'عارض السجل',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'ادخل إلى سجل Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'الوصول إلى ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' الملف.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'إدارة العمليات',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'يمكن الوصول إلى إدارة العمليات هنا.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'قم بتهيئة ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' الإعدادات واعرض السجلات. قم بإدارة جميع عمليات BPM لجميع المستخدمين من خلال "إدارة العمليات".',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'قم بتهيئة إعدادات Advanced Workflow وسجلات المشاهدة. قم بإدارة جميع عمليات BPM لجميع المستخدمين من خلال "إدارة العمليات".',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'تكوين عروض الأسعار',
+    'LBL_MANAGE_QUOTES' => 'تكوين تخطيط ورقة عمل عروض الأسعار',
 );

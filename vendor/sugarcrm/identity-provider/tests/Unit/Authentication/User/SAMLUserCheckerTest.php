@@ -22,6 +22,10 @@ use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
+/**
+ * Class SAMLUserCheckerTest.
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\User\SAMLUserChecker
+ */
 class SAMLUserCheckerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -133,7 +137,7 @@ class SAMLUserCheckerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers ::checkPostAuth
      */
-    public function testUserIsCreatedIfAutoCreateUsersIsTrue()
+    public function testUserIsCreatedIfAutoCreateUsersIsTrue(): void
     {
         $user = new User('max@test.com', '', [
             'identityValue' => 'max@test.com',
@@ -145,15 +149,64 @@ class SAMLUserCheckerTest extends \PHPUnit_Framework_TestCase
                 'provisionUser' => true,
             ],
         ];
-        $this->localUserProvider->expects($this->once())
+        $this->localUserProvider->expects($this->at(0))
             ->method('loadUserByFieldAndProvider')
             ->with('max@test.com', Providers::SAML)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->at(1))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max@test.com', Providers::LOCAL)
             ->willThrowException(new UsernameNotFoundException('User not found'));
 
         $this->localUserProvider->expects($this->once())
             ->method('createUser')
             ->with('max@test.com', Providers::SAML, ['a' => 'b'])
             ->willReturn($user);
+
+        $userChecker = new SAMLUserChecker($this->localUserProvider, $config);
+        $userChecker->checkPostAuth($user);
+    }
+
+    /**
+     * Test Linking to existing Local users Autocreated SAML users
+     * @covers ::checkPostAuth
+     * @covers ::getLocalUser
+     */
+    public function testLinkNewUserWithLocal(): void
+    {
+        $user = new User('max@test.com', '', [
+            'identityValue' => 'max@test.com',
+            'identityField' => 'email',
+            'attributes' => ['a' => 'b'],
+        ]);
+        $localUser = new User('max@test.com', '', [
+            'id' => 'seed_max_id',
+            'identityValue' => 'max@test.com',
+            'identityField' => 'email',
+        ]);
+        $config = [
+            'sp' => [
+                'provisionUser' => true,
+            ],
+        ];
+        $this->localUserProvider->expects($this->at(0))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max@test.com', Providers::SAML)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->at(1))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max@test.com', Providers::LOCAL)
+            ->willReturn($localUser);
+
+        $this->localUserProvider->expects($this->never())
+            ->method('createUser');
+        $this->localUserProvider->expects($this->once())
+            ->method('linkUser')
+            ->with(
+                'seed_max_id',
+                Providers::SAML,
+                'max@test.com'
+            );
 
         $userChecker = new SAMLUserChecker($this->localUserProvider, $config);
         $userChecker->checkPostAuth($user);

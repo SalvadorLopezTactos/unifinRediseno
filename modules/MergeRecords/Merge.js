@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Merge.js 40493 2008-10-13 21:10:05Z jmertic $
 
 var lbl_remove = SUGAR.language.get('app_strings', 'LBL_REMOVE');
 

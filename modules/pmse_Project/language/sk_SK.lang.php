@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Na základe tejto definície procesu sú spustené aktívne procesy. Aktualizácia definície môže tieto procesy ovplyvniť. Chcete napriek tomu upraviť definíciu tohto procesu?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Na základe tejto definície procesu sú spustené aktívne procesy. Aktualizácia definície môže tieto procesy ovplyvniť. Chcete napriek tomu blokovať definíciu tohto procesu?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automaticky vytvoriť nový záznam definícií procesov importovaním súboru *.bpm z vášho systému súborov.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Ak chcete importovať definíciu procesu, nahrajte súbor .bpm.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Definície procesov boli úspešne importované do systému.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Vyberte platný súbor *.bpm.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definícia procesu bola importovaná, ale obsahuje jednu alebo viacero akcií obchodného pravidla, pre ktoré neboli vybraté obchodné pravidlá.',
+    'LBL_BPM_IMPORT_SELECT' => 'Táto definícia procesu obsahuje nasledujúce obchodné pravidlá a e-mailové šablóny. '
+        . 'Vyberte tie, ktoré chcete importovať.',
+    'LBL_BUSINESS_RULES' => 'Obchodné pravidlá',
+    'LBL_EMAIL_TEMPLATES' => 'E-mailové šablóny',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Zrušiť',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Vrátiť',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Uložiť',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Overiť',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Uložiť a overiť',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Spustiť overenie na kontrolu chýb',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivita',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Vymazať',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filter',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Súvisiace s',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kritériá',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Trvanie',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Jednotka',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Polia',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Hodnotenie polí modulu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Súvisiace s',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Pole',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Hodnota',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Hodnotenie odpoveďového formulára',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nie je',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nerovná sa',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Všetky súvisiace záznamy',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Akékoľvek súvisiace záznamy',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Čas spustenia',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pridať',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavrieť',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Tímy',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Používateľ v %MODULE%, ktorý vytvoril záznam',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Používateľ v %MODULE%, ktorý upravil záznam',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Používateľ v %MODULE%, ktorý priradil záznam',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Používateľ v %MODULE%, ktorému bol priradený záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Používateľ v %MODULE%, ktorý je manažérom používateľa, ktorý vytvoril záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Používateľ v %MODULE%, ktorý je manažérom používateľa, ktorý naposledy upravil záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Používateľ v %MODULE%, ktorý je manažérom používateľa, ktorý priradil záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Používateľ v %MODULE%, ktorý je manažérom používateľa, ktorému bol priradený záznam',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% súvisí s %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Používateľ, ktorý vytvoril %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Používateľ, ktorý naposledy upravil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Používateľ, ktorý je priradený k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Používateľ, ktorý bol priradený k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Manažér, ktorý vytvoril %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Manažér, ktorý naposledy upravil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Manažér, ktorý je priradený k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Manažér, ktorý bol priradený k %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rola: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'tím: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Návrhy',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Syntax výrazu je neplatná.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'V tom istom výraze nemožno použiť dve rôzne meny.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Overenie definície procesu: načítanie nastavení prvku',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Overenie definície procesu: overenie nastavení prvku',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Aktualizuje sa zoznam chýb...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Overenie dokončené! Nájdené problémy: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problémy',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Prebieha overovanie',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Upozornenie: Proces môže pri tomto prvku zastaviť alebo mať iné nezamýšľané účinky',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Chyba: Proces sa pri tomto prvku zastaví',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Prvok nie je možné overiť',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Prvok nespĺňa minimálny počet prichádzajúcich tokov',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Tento prvok musí mať minimálny počet prichádzajúcich ciest. Skontrolujte počet ciest, ktoré sa pripájajú k tomuto prvku, a uistite sa, že je splnený ich minimálny počet.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Prvok prekračuje maximálny počet prichádzajúcich tokov',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Tento prvok má maximálny počet prichádzajúcich ciest, ktorý sa nesmie prekročiť. Skontrolujte počet ciest, ktoré sa pripájajú k tomuto prvku, a uistite sa, že ich maximálny počet nie je prekročený.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Prvok nespĺňa minimálny počet odchádzajúcich tokov',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Tento prvok musí mať minimálny počet odchádzajúcich ciest. Skontrolujte počet ciest, ktoré vedú z tohto prvku, a uistite sa, že je splnený ich minimálny počet.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Prvok prekračuje maximálny počet odchádzajúcich tokov',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Tento prvok má maximálny počet odchádzajúcich ciest, ktorý sa nesmie prekročiť. Skontrolujte počet ciest, ktoré vedú z tohto prvku, a uistite sa, že ich maximálny počet nie je prekročený.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Nie je nastavené povinné pole',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Tento prvok má pole, ktoré je povinné, ale nebolo nastavené. Skontrolujte nastavenia prvku a uistite sa, že bolo pole správne nastavené, potom kliknite na tlačidlo „Uložiť“.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Údaje v súčasnosti v systéme neexistujú',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Nastavenia pre tento prvok odkazujú na konkrétnu časť údajov, ktorá v databáze neexistuje. Skontrolujte nastavenia prvku a uistite sa, že existujú všetky odkazované údaje (t. j. konkrétni používatelia, polia modulu, tímy atď.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Výraz poľa kritérií nebude nikdy vyhodnotený ako pravdivý',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Polia kritérií obsahujú logické výrazy A/ALEBO/NIE. Táto chyba znamená, že pole kritérií v nastaveniach prvku bolo nakonfigurované tak, že výraz nikdy nebude pravdivý. Skontrolujte pole kritérií a odstráňte akékoľvek logické rozpory zabraňujúce tomu, aby bol výraz pravdivý.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Prvok nie je dostupný',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Aby mohol byť prvok v procese vykonaný, musí k nemu byť pripojená cesta. Reťazec ciest vedúcich k tomuto prvku musí začínať začiatočným prvkom. Skontrolujte reťazec prichádzajúcich ciest k tomuto prvku a uistite sa, že reťazec začína začiatočným prvkom.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Kritériá doby čakania musia obsahovať práve jednu konštantu dátum a čas',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Tento prvok udalosti čakania bol nakonfigurovaný pomocou poľa kritérií „Pevne stanovený dátum“. Toto pole musí obsahovať práve jednu konštantu „Pevne stanovený dátum a čas“ alebo odkaz na pole Dátum a čas. Všetky ostatné časti výrazu musia byť matematické operátory (+/-) alebo konštanty „Časové rozpätie“.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Určená hodnota trvania nesmie byť nula',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Tento prvok udalosti čakania bol nakonfigurovaný pomocou nastavenia „Trvanie“. Toto nastavenie sa nesmie rovnať nule, pretože dôjde k chybe. Skontrolujte nastavenia prvku a uistite sa, že „Trvanie“ nie je nastavené na nulu.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Neboli nastavené parametre doby čakania',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Tento prvok udalosti čakania nemá nakonfigurované žiadne nastavenia. Skontrolujte nastavenia prvku a uistite sa, že je zvolená možnosť „Trvanie“ alebo „Pevne stanovený dátum“, zadajte požadované hodnoty a kliknite na tlačidlo „Uložiť“.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Predpokladaná doba je menšia ako nula',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'V nastaveniach „Formuláre“ pre tento prvok aktivity je predpokladaná doba nastavená na zápornú hodnotu, čo spôsobí, že proces pri dosiahnutí tohto prvku zamrzne. Otvorte nastavenia „Formuláre“ pre tento prvok a zmeňte predpokladanú dobu na nezáporné číslo.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Typ akcie je [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Tento prvok akcie nemá určený typ. Môžete to zmeniť kliknutím pravým tlačidlom myši na prvok akcie a následným výberom typu zo zoznamu „Typ akcie“.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Nie je zaručené, že cesta bude prijatá',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Toto chybové hlásenie sa zobrazuje, pretože existuje možnosť, že nebude prijatá žiadna z ciest z tohto prvku brány, čo spôsobí, že sa proces zastaví. Odporúča sa nastaviť predvolenú cestu, ktorá sa prijme v prípade, keď nebude splnený žiadny z výrazov poľa kritérií v nastaveniach prvku. Môžete to urobiť kliknutím pravým tlačidlom myši na prvok brány a následným výberom prvku v ponuke „Štandardný tok“. Ak nie je určená predvolená cesta, mali by sa zmeniť výrazy poľa kritérií v nastaveniach prvku tak, aby sa zaistilo, že pri spustení procesu bude aspoň jeden z nich pravdivý.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ zbiehavej brány nezodpovedá typu brány prichádzajúceho toku',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Rozbiehavé brány rozširujú procesy do niekoľkých vetiev. Pri použití zbiehavej brány na opätovné zbiehanie týchto vetiev späť do jednej cesty sa musí použiť správny typ zbiehavej brány, a to v závislosti od typu rozbiehavej brány, ktorá sa použila na vytvorenie vetiev. Pri vetvách vytvorených pomocou exkluzívnej rozbiehavej brány alebo rozbiehavej brány na báze udalostí použite na ich opätovné zbiehanie exkluzívnu zbiehavú bránu. Pri vetvách vytvorených pomocou paralelnej alebo inkluzívnej rozbiehavej brány použite na ich opätovné zbiehanie paralelnú zbiehavú bránu.',
 );

@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\Token\SAML;
 
+use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\AcsToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ResultToken;
 
@@ -31,6 +32,6 @@ class ResultTokenTest extends \PHPUnit_Framework_TestCase
         $resultToken = new ResultToken($sourceToken->getCredentials(), $sourceToken->getAttributes());
         $this->assertEquals('credentials', $resultToken->getCredentials());
         $this->assertEquals($attributes, $resultToken->getAttributes());
+        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_SAML, $resultToken->getProviderKey());
     }
 }
-

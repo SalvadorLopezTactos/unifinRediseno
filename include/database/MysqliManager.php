@@ -128,7 +128,7 @@ class MysqliManager extends MysqlManager
         }
 
         parent::countQuery($sql);
-        $this->log->info('Query:' . $sql);
+        $this->logger->info('Query:' . $sql);
         $this->checkConnection();
         $this->query_time = microtime(true);
         $this->lastsql = $sql;
@@ -148,7 +148,7 @@ class MysqliManager extends MysqlManager
             $result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
 
         $this->query_time = microtime(true) - $this->query_time;
-        $this->log->info('Query Execution Time:'.$this->query_time);
+        $this->logger->info('Query Execution Time:'.$this->query_time);
 
         // slow query logging
         $this->dump_slow_queries($sql);
@@ -158,7 +158,7 @@ class MysqliManager extends MysqlManager
         }
 
         if ($this->database && mysqli_errno($this->database) == 2006 && $this->retryCount < 1) {
-            $this->log->fatal('mysqli has gone away, retrying');
+            $this->logger->alert('mysqli has gone away, retrying');
             $this->retryCount++;
             $this->disconnect();
             $this->connect();
@@ -203,7 +203,7 @@ class MysqliManager extends MysqlManager
      */
     public function disconnect()
     {
-        $this->log->debug('Calling MySQLi::disconnect()');
+        $this->logger->debug('Calling MySQLi::disconnect()');
 
         if (!empty($this->database)) {
             $this->freeResult();
@@ -317,7 +317,7 @@ class MysqliManager extends MysqlManager
         $this->setCharset();
 
         if ($this->checkError('Could Not Connect', $dieOnError)) {
-            $this->log->info("connected to db");
+            $this->logger->info("connected to db");
         }
 
         mysqli_report(MYSQLI_REPORT_OFF);
@@ -414,8 +414,8 @@ class MysqliManager extends MysqlManager
     protected function setCharset()
     {
         // cn: using direct calls to prevent this from spamming the Logs
-        mysqli_query($this->getDatabase(),"SET CHARACTER SET utf8");
-        $names = "SET NAMES 'utf8'";
+        mysqli_query($this->getDatabase(), 'SET CHARACTER SET utf8mb4');
+        $names = "SET NAMES 'utf8mb4'";
         $collation = $this->getOption('collation');
         if (!empty($collation)) {
             $names .= " COLLATE " . $this->quoted($collation);

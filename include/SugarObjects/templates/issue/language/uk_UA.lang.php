@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Відповідальний (-а)',
   'LBL_ASSIGNED_TO_NAME' => 'Користувач:',  	  
   'LBL_WORK_LOG' => 'Робочий Лог:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Створено:',
   'LBL_DATE_CREATED' => 'Дата створення:',
   'LBL_DATE_ENTERED' => 'Дата створення:',

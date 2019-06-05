@@ -11,7 +11,7 @@
  */
 
 /**
- * Update configuration for Advanced Workflow's new format.
+ * Update configuration for SugarBPM format update.
  */
 class SugarUpgradeFixPARelatedModules extends UpgradeScript
 {

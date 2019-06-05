@@ -16,6 +16,52 @@ require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
+function unzipInstallFiles($fileName, $topDir)
+{
+    $tmpDir = mk_temp_dir($topDir);
+    $unzipDir = $topDir . '/' . basename($tmpDir);
+    unzip($fileName, $unzipDir);
+
+    return $unzipDir;
+}
+
+function getModuleInstaller()
+{
+    SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
+    $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+    return new $moduleInstallerClass();
+}
+
+function cleanPreviousInstall($idName, $unzipDir)
+{
+    $mi = getModuleInstaller();
+    if (isset($GLOBALS['mi_remove_tables'])) {
+        $removeTablesOrig = $GLOBALS['mi_remove_tables'];
+    }
+    $GLOBALS['mi_remove_tables'] = false;
+    $mi->silent = true;
+
+    $uh = new UpgradeHistory();
+    $prevVer = $uh->findInstalledVersion($idName);
+    // unzip into subdir under $unzip_dir
+    $pvUnzipDir = unzipInstallFiles($prevVer['filename'], $unzipDir);
+    $file = $pvUnzipDir . DIRECTORY_SEPARATOR . constant('SUGARCRM_PRE_UNINSTALL_FILE');
+    if (is_file($file)) {
+        include FileLoader::validateFilePath($file);
+        pre_uninstall();
+    }
+
+    $patch = UW_get_patch_for_file($prevVer['filename']);
+    $mi->setPatch($patch);
+    $mi->uninstall($pvUnzipDir);
+
+    if (isset($removeTablesOrig)) {
+        $GLOBALS['mi_remove_tables'] = $removeTablesOrig;
+    } else {
+        unset($GLOBALS['mi_remove_tables']);
+    }
+}
+
 function UWrebuild() {
 	global $log;
 	global $db;
@@ -165,7 +211,7 @@ if ($install_type != "module") {
 	$zip_to_dir = $request->getValidInputRequest('zip_to_dir', null, '.');
 }
 $remove_tables = $request->getValidInputRequest('remove_tables', null, 'true');
-
+$uninstallBeforeUpgrade = $request->getValidInputRequest('uninstall_before_upgrade');
 $overwrite = $request->getValidInputRequest('radio_overwrite');
 $overwrite_files = $overwrite ? ($overwrite != 'do_not_overwrite') : true;
 
@@ -328,16 +374,16 @@ switch( $install_type ){
         }
         break;
     case "module":
-        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
-        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
-        $mi = new $moduleInstallerClass();
+        $mi = getModuleInstaller();
         switch( $mode ){
             case "Install":
                 $patch = UW_get_patch_from_request($_REQUEST);
                 $mi->setPatch($patch);
             //here we can determine if this is an upgrade or a new version
-            	if(!empty($previous_version)){
+                if (!empty($previous_version) && $uninstallBeforeUpgrade) {
+                    cleanPreviousInstall($id_name, $unzip_dir);
             		$mi->install( "$unzip_dir", true, $previous_version);
+                    $shouldClearCache = true;
             	}else{
                 	$mi->install( "$unzip_dir" );
             	}

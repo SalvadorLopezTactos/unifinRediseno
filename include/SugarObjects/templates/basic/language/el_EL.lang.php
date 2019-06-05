@@ -32,5 +32,5 @@ $mod_strings = array(
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Τροποποιήθηκε Από Όνομα',
 
-
+    'LBL_COMMENTLOG' => 'Comment Log',
 );

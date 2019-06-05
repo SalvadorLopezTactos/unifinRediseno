@@ -60,9 +60,9 @@ class FixturesLoadTest extends \PHPUnit_Framework_TestCase
 
         $output = new NullOutput();
         $input = new ArgvInput();
-        $helperSet = new HelperSet(array(
+        $helperSet = new HelperSet([
             'formatter' => new FormatterHelper(),
-        ));
+        ]);
 
         $fixturesLoad->setHelperSet($helperSet);
         $fixturesLoad->setApplicationInstance($app);

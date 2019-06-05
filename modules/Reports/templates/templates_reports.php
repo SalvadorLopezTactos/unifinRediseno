@@ -227,7 +227,10 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	$smarty->assign('report_delete_access', $report_delete_access);
 	$report_export_access = SugarACL::checkAccess('Reports', 'export', $context);
 	$smarty->assign('report_export_access', $report_export_access);
-
+    $schedule_edit_access = SugarACL::checkAccess('ReportSchedules', 'edit');
+    $smarty->assign('schedule_edit_access', $schedule_edit_access);
+    $schedule_list_access = SugarACL::checkAccess('ReportSchedules', 'list');
+    $smarty->assign('schedule_list_access', $schedule_list_access);
     //check to see if exporting is allowed
     $isExportAccess = hasExportAccess($args) && $report_export_access;
 
@@ -300,10 +303,17 @@ EOD
     }
     array_push($buttons, $duplicateButtons);
 
-    if ($report_edit_access) {
+    if ($schedule_edit_access) {
         $buttons[] = <<<EOD
         <input type="button" class="button"  name="scheduleReportButton" id="scheduleReportButton" value="{$mod_strings['LBL_REPORT_SCHEDULE_TITLE']}"
                onclick="schedulePOPUP()">
+EOD
+        ;
+    }
+    if ($schedule_list_access) {
+        $buttons[] = <<<EOD
+        <input type="button" class="button"  name="viewSchedulesButton" id="viewSchedulesButton" value="{$mod_strings['LBL_VIEW_SCHEDULES_TITLE']}"
+               onclick="viewSchedulesPOPUP()">
 EOD
         ;
     }
@@ -969,7 +979,9 @@ function template_reports_chart_options(&$smarty, &$args) {
 	$chart_types = array(
 		'none'=>$mod_strings['LBL_NO_CHART'],
 		'hBarF'=>$mod_strings['LBL_HORIZ_BAR'],
+        'hGBarF'=>$mod_strings['LBL_HORIZ_GBAR'],
 		'vBarF'=>$mod_strings['LBL_VERT_BAR'],
+        'vGBarF'=>$mod_strings['LBL_VERT_GBAR'],
 		'pieF'=>$mod_strings['LBL_PIE'],
 		'funnelF'=>$mod_strings['LBL_FUNNEL'],
 		'lineF'=>$mod_strings['LBL_LINE'],
@@ -1145,8 +1157,7 @@ function hasExportAccess($args = array())
 
     if (// Exports disabled
         !(empty($sugar_config['disable_export']))
-        // Report is not tabular
-        || $args['reporter']->report_def['report_type'] != 'tabular'
+        || !$args['reporter']->allowExport()
         // User doesn't have rights to export the reported module
         || !SugarACL::checkAccess($args['reporter']->module, 'export', $is_owner?array("owner_override" => true):array())
         // Only admins can export, and the user doesn't have admin rights

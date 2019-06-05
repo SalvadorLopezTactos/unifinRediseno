@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -113,6 +113,7 @@ final class JWS implements JWSInterface
         if (isset($this->signatures[$id])) {
             return $this->signatures[$id];
         }
+
         throw new \InvalidArgumentException('The signature does not exist.');
     }
 
@@ -176,9 +177,9 @@ final class JWS implements JWSInterface
 
         $data = [];
         $values = [
-            'payload'   => $this->getEncodedPayload($signature),
+            'payload' => $this->getEncodedPayload($signature),
             'protected' => $signature->getEncodedProtectedHeaders(),
-            'header'    => $signature->getHeaders(),
+            'header' => $signature->getHeaders(),
         ];
 
         foreach ($values as $key => $value) {
@@ -210,7 +211,7 @@ final class JWS implements JWSInterface
             $tmp = ['signature' => Base64Url::encode($signature->getSignature())];
             $values = [
                 'protected' => $signature->getEncodedProtectedHeaders(),
-                'header'    => $signature->getHeaders(),
+                'header' => $signature->getHeaders(),
             ];
 
             foreach ($values as $key => $value) {

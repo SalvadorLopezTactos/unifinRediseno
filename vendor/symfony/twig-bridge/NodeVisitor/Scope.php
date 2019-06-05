@@ -17,10 +17,10 @@ namespace Symfony\Bridge\Twig\NodeVisitor;
 class Scope
 {
     private $parent;
-    private $data = array();
+    private $data = [];
     private $left = false;
 
-    public function __construct(Scope $parent = null)
+    public function __construct(self $parent = null)
     {
         $this->parent = $parent;
     }

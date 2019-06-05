@@ -16,7 +16,7 @@
  * according to the type of evaluation you want returns current value or null
  *
  */
-class PMSEFormResponseParser implements PMSEDataParserInterface
+class PMSEFormResponseParser extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     /**
      * Object Bean
@@ -124,7 +124,7 @@ class PMSEFormResponseParser implements PMSEDataParserInterface
         $newTokenArray = array('{', '_form_', $tokenUid, '}');
         $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
         $criteriaToken->expToken = $assembledTokenString;
-        $criteriaToken->currentValue = $tokenValue;
+        $criteriaToken->currentValue = array($tokenValue);
         return $criteriaToken;
     }
 }

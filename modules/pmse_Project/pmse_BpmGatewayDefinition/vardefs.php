@@ -87,6 +87,7 @@ $dictionary['pmse_BpmGatewayDefinition'] = array(
     'ignore_templates' => array(
         'taggable',
         'lockable_fields',
+        'commentlog',
     ),
     'uses' => array(
         'basic',

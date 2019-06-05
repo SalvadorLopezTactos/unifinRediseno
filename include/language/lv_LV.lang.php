@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-pasta iestatījumi',
     'EmailParticipants' => 'E-pasta dalībnieki',
     'DataPrivacy' => 'Datu privātums',
+    'ReportSchedules' => 'Pārskatu grafiki',
+    'CommentLog' => 'Komentāru žurnāls',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth atslēga',
     'Filters' => 'Filtrs',
     'Comments' => 'Komentārs',
+    'CommentLog' => 'Komentāru žurnāls',
     'Currencies' => 'Valūta',
     'ProductTemplates' => 'Produkta veidne',
     'ProductTypes' => 'Produkta veids',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-pasta iestatījums',
     'EmailParticipants' => 'E-pasta dalībnieks',
     'DataPrivacy' => 'Datu privātums',
+    'ReportSchedules' => 'Pārskata grafiks',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transports',
     'Utilities' => 'Komunālie pakalpojumi',
     'Other' => 'Cits',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Līmenis 1',
+    'T2' => 'Līmenis 2',
+    'T3' => 'Līmenis 3',
+    'T4' => 'Līmenis 4',
   ),
   'lead_source_default_key' => 'Pašģenerēts',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Pārvietot',
         'donothing' => 'Nedarīt neko'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Nekad',
+        30000 => 'Ik pēc 30 sekundēm',
+        60000 => 'Ik pēc 1 minūtes',
+        120000 => 'Ik pēc 2 minūtēm',
+        180000 => 'Ik pēc 3 minūtēm',
+        240000 => 'Ik pēc 4 minūtēm',
+        300000 => 'Ik pēc 5 minūtēm',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'Iekļaut prognozē',
         'sales_stage' => 'Pārdošanas posms',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Saraksts',
         'activities' => 'Darbību plūsma',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Stundā',
+        '21600' => 'Reizi 6 stundās',
+        '43200' => 'Reizi 12 stundās',
+        '86400' => 'Katru dienu',
+        '604800' => 'Katru nedēļu',
+        '1209600' => 'Reizi 2 nedēļās',
+        '2419200' => 'Reizi 4 nedēļās',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekot saitei',
   'LBL_TOGGLE_VISIBILITY' => 'Pārslēgt redzamību', // Record view header panel element
   'LBL_ACTIVITIES' => 'Darbības',
-  'LBL_COPYRIGHT' => 'Autortiesības © 2004-2018. SugarCRM Inc. Visas tiesības aizsargātas.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Saglabāt',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Pievienot šo katalogu',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Šo katalogu nevar izmainīt',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Vai tiešām vēlaties dzēst šo katalogu?\\nProcess ir neatgriežams.\\nKataloga dzēšana tiks attiecināta uz visiem tajā esošajiem katalogiem.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Vai tiešām vēlaties dzēst šo katalogu?\nProcess ir neatgriežams.\nKataloga dzēšana tiks attiecināta uz visiem tajā esošajiem katalogiem.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Jauns kataloga nosaukums',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Pirms šīs darbības veikšanas izvēlieties katalogu.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Kataloga pārvaldība',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sinhronizēt visus pasta kontus',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'E-pasts aizsūtīts uz norādīto adresi, izmantojot piedāvātos izejošā pasta iestatījumus. Lūdzu pārbaudiet, vai e-pasts tika saņemts, lai pārbaudītu vai iestatījumi ir pareizi.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Veicot šo darbību, tiks sinhronizēti pasta konti un to saturs.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vai vēlaties veikt pilnu sinhronizāciju?\\nApjomīgi pasta konti var aizņemt vairākas minūtes.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vai vēlaties veikt pilnu sinhronizāciju?\nApjomīgi pasta konti var aizņemt vairākas minūtes.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Nospiediet Shift pogu vai Ctrl pogu, lai izvēlētos vairākus katalogus.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Vispārīgi',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Pieejamie grupas katalogi',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Lai eksportētu saturu, nepieciešama aktīva sesija.',
     'ERR_NO_HEADER_ID' => 'Šajā motīvā šī iespēja nav pieejama.',
     'ERR_NOT_ADMIN' => "Neautorizēta piekļuve administratora funkcijām.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Šī opcija sistēmā SugarCRM IDM režīmam ir atspējota un pieejama mākoņa konsolē.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Lūdzu, pārejiet uz <a href=\"%s\" target=\"_blank\">mākoņa konsoli</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Paroļu pārvaldība ir pieejama tikai mākoņa iestatījumos.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Ja vēlaties veikt izmaiņas tikai lasāmajos laukos, sazinieties ar savu Sugar administratoru.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nav pieejams obligātais lauks:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Nederīgs obligātais lauks',
     'ERR_INVALID_VALUE' => 'Nederīga vērtība:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Pašreizējais lietotājs nav pilnvarots izmainīt {moduleName} konfigurācijas iestatījumus',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Jums nav piekļuves izlases {moduleName}. Ja nepieciešama piekļuve, sazinieties ar administratoru.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Jums nav tiesību parakstīties uz moduli {moduleName}. Sazinieties ar sistēmas administratoru, ja jums ir nepieciešama piekļuve.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields netika atrasti pieprasījumā',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns nav masīvā',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields netika atrasti pieprasījumā',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows nav masīvā',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields netika atrasti pieprasījumā',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Pieprasījums neizdevās nezināmas kļūdas dēļ.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Atlasiet operatoru...',
     'LBL_FILTER_CREATE_NEW' => 'Izveidot jaunu',
     'LBL_FILTER_CREATE_FILTER' => 'Izveidot jaunu filtru',
+    'LBL_FILTER_CLOSE_FILTER' => 'Aizvērt filtru',
     'LBL_FILTER_EDIT_FILTER' => 'Rediģēt filtru',
     'LBL_FILTER_ALL_RECORDS' => 'Visi ieraksti',
     'TPL_FILTER_SAVE' => 'Jūs veiksmīgi izveidojāt filtru {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Visas tiesības aizsargātas.<br />SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'kas pieder atbilstošiem uzņēmumiem, ar kuriem tie ir saistīti.',
@@ -3414,7 +3454,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Atsākt',
     'LNK_VIEW_CHANGE_LOG' => 'Skatīt audita žurnālu',
     'TPL_AUDIT_LOG_TITLE' => 'Audita žurnāls vienumam {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Klikšķiniet, lai skatītu e-pasta adreses audita žurnālu',
 
     'NTC_CLICK_BACK' => 'Klikšķiniet pārlūka pogu &amp;amp;#39;Back&amp;amp;#39; un izlabojiet kļūdu.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3451,7 +3491,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Uzmanību:</b> Jūsu pārlūks darbojas IE compatibility skatā, kas netiek atbalstīts.",
     'WARN_LICENSE_SEATS'=>  "Brīdinājums: Atļautais lietotāju skaits jau ir sasniedzis maksimumu. Visas licenzes ir izmantotas.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Brīdinājums: Aktīvo lietotāju skaits pārsniedz pieļaujamo licenžu skaitu.",
-    'WARN_ONLY_ADMINS'=> "ierakstīties var tikai administratori.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Aktīvo lietotāju skaits pārsniedz licenču skaita limitus. Lūdzu, sazinieties ar administratoru.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Ierakstīties var tikai administratori.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Ir sasniegts lietotāju licenču skaita limits. Ierakstīties var tikai esošie lietotāji.',
+    'WARN_ONLY_ADMINS'=> "Ierakstīties var tikai administratori.",
     'WARN_UNSAVED_CHANGES'=> "Ieraksta atstāšana bez izmaiņu saglabāšanas. Vai tiešām vēlaties atstāt ierakstu?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Jums ir nesaglabātas izmaiņas. Vai tiešām vēlaties pamest lapu nesaglabājot izmaiņas?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Jūs pārslēdzaties uz atskaišu moduli. Jūsu veiktās izmaiņas netiks saglabātas. Vai turpināt?',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Jums pašlaik nav saglabāts neviens ieraksts.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Jūs variet izveidot <item1> no <item2>. <item3> <item2> saraksta.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klikšķināt šeit",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Pievienot maniem favorītiem',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Iespēju metrikas',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Darījuma rādītāji saistītajam klientam.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Ātrā izvēle no produktu kataloga',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Nesen izmantoto vienumu un produktu saraksti, kas saglabāti izlasē',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nesen izmantots',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Izlase',
 
     'LBL_DASHLET_NO_RECORDS' => 'Tagad netika atrasts  neviens ieraksts.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Pieteikumu kopsavilkums',
@@ -4257,7 +4307,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Nākotnē',
     'LBL_REQUIRED_FIELD' => 'Obligāts',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Piedāvājuma rindas vienums',
+    'LBL_DISCOUNT_TOTAL' => 'Atlaide kopā',
+    'LBL_TAX' => 'Nodoklis',
+    'LBL_SHIPPING' => 'Piegāde',
+    'LBL_GRAND_TOTAL' => 'Kopsumma',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Automātiski aizpildīt norēķinu adresi no klienta profila',
+    'LBL_QLI_ADD_GROUP' => 'Pievienot grupu',
+    'LBL_QLI_COMMENT' => 'Komentārs',
+    'LBL_SELECT_ACTION' => 'Izvēlieties darbību',
+    'LBL_QLI_GROUP_NAME' => 'Grupas nosaukums',
+    'LBL_GROUP_TOTAL' => 'Grupas kopsumma',
+    'LBL_ITEM_NAME' => 'Rindas vienums',
+    'LBL_QLI_DELETE' => 'Vai tiešām vēlaties dzēst šo rindas vienumu?',
+    'LBL_QLI_COMMENT_DELETE' => 'Vai tiešām vēlaties dzēst šo rindas vienuma komentāru?',
+    'LBL_QLI_GROUP_DELETE' => 'Vai tiešām vēlaties dzēst grupu {0}? Visi vienumi tiks pārvietoti uz noklusējuma grupu.',
+    'LBL_QLI_GROUP_EMPTY' => 'Nav piedāvājuma rindas vienuma',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Neobligāts',
     'LBL_RELATED_MODULE' => 'Saistīts {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Saistīts {{{this}}}',
@@ -4287,7 +4357,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Apstiprināt',
     'LBL_NO_ACCESS' => '(Nav pieejas)',
     'LBL_NO_ACCESS_LOWER' => 'Lietotājam nav piekļuves ierakstam',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Nav piekļuves',
     'LBL_VALUE_ERASED' => 'Vērtība izdzēsta',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Šī informācija tika izdzēsta, izmantojot datu privātuma piepresījumu',
     'LBL_CREATE_RELATED_RECORD' => 'Izveidot saistītu ierakstu',
@@ -4915,7 +4985,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Darba grupas uzdevumi',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Paplašinātā darbplūsma',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC lietotāja saskarne',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP vai vecs REST API',
@@ -4976,9 +5046,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Paziņojums:',
     'LBL_ALERT_TITLE_ERROR' => 'Kļūda:',
     'LBL_ALERT_TITLE_LOADING' => 'Ielādē ...',
+    'LBL_ALERT_NO_ACCESS' => 'Jums nav piekļuves filtram, kas ir izmantots šim informācijas laukam.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Dublējiet informācijas paneli, lai konfigurētu šo informācijas lauku ar savu filtru.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Jūsu pārlūkprogrammas versija vairs netiek atbalstīta vai Jūs izmantojat neatbalstītu pārlūkprogrammu.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Ieteicamas šādas pārlūkprogrammas versijas: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Lai aplūkotu ieteicamās pārlūkprogrammas, skat. {{link}} lapu.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Atbalstītās platformas',
     'LBL_ALERT_CONFIRM_DELETE' => 'Vai tiešām vēlaties dzēst šo vienumu?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Vai tiešām vēlaties dzēst šos vienumus?',
@@ -5076,7 +5146,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Vēsturiskais apkopojums',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Vairāk vēstures...',
     'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
     'LBL_MODULE_TYPE' => 'Veids',
@@ -5150,6 +5220,11 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Nav norādīti SMTP servera uzstādījumi',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Lai sūtītu notifikācijas par piešķirto ierakstu ir jānokonfigurē SMTP serveris {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'E-pasta iestatījumi',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Pieejami jauni pārskati par krājumiem',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Pieejami jauni pārskati par pozīcijām, kas nav krājumos, jūsu ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Pārskatu modulī',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Tie ir atzīmēti kā "Pārskats par krājumiem", un tos var filtrēt. Pārskati ir atzīmēti arī kā "Pārdošana un mārketings", "Klientu apkalpošana", "Datu privātums" vai "Administratīvie procesi", pamatojoties uz saturu. Lai saņemtu plašāku informāciju, skatiet ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentāciju',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM sniedz iespēju pieredzējušiem lietotājiem ātri veikt noteiktus uzdevumus, izmantojot tastatūras saīsnes, lai paaugstinātu produktivitāti. Tabulās labajā pusē aprakstīti pieejamie īsceļi kopā ar taustiņiem un to darbību.',
@@ -5259,23 +5334,26 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesi',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Procesu informācijas laukā tiek parādītas veidnes, ko var izmantot SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Procesu definīcijas',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Procesu definīciju informācijas laukā tiek parādītas veidnes, ko var izmantot SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Izveidot proces definīciju',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importēt procesa definīciju',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Procesa biznesa lomas',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Procesu biznesa noteikumu informācijas laukā tiek parādītas veidnes, ko var izmantot SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Izveidot procesa biznesa lomu',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importēt procesa biznesa lomas',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Procesa e-pasta sagataves',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Procesu e-pasta veidņu informācijas laukā tiek parādītas veidnes, ko var izmantot SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Izveidot procesa e-pasta sagatavi',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importēt procesa e-pasta sagataves',
 
@@ -5299,7 +5377,7 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_PMSE_CANCELLED_STATUS' => 'Atcelts',
     'LBL_PMSE_TERMINATED_STATUS' => 'Pārtraukts',
     'LBL_PMSE_ERROR_STATUS' => 'Kļūda',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM iestatījumi',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Vai tiešām vēlaties atspējot šo ierakstu?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Vai tiešām vēlaties iespējot šo ierakstu?',
@@ -5323,7 +5401,7 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM nepieciešams javascript. Lūdzu iespējojiet javascript lai turpinātu lietot SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Sērializētos datus nevarēja atserializēt',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Sērializētos datus nevarēja atserializēt, jo tajos ir atsauces uz objektiem vai klasēm',
 
@@ -5352,6 +5430,15 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_DATAPRIVACY_PII' => 'Personiskā informācija',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Atzīmēt dzēšanai',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personiskā informācija, paredzēta {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Nokopēts jūsu starpliktuvē!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nevarēja nokopēt jūsu starpliktuvē',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopēt apstiprinājuma saiti',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Rādīt vairāk...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Rādīt mazāk...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6529,7 +6616,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Iegultais fails';
     'YER' => 'Riāli',
     'ZWD' => 'Zimbabves dolāri',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Viena soļa',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Nav',
+        'future' => 'Pašreizējā vērtība',
+        'old' => 'Vecā vērtība',
+        'both' => 'Pašreizējā un vecā vērtība',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Viena soļa',
+    );

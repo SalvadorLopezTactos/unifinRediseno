@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Työnnä Laskutus',
 	'LBL_PUSH_SHIPPING' => 'Työnnä toimitus',
 	'LBL_SAVE_ACCOUNT' => 'Tallenna tili',
+    'LBL_SERVICE_LEVEL' => 'Palvelutaso',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Kaupunki:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Toimitusosoitteen maa:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Toimitusosoitteen postinumero:',

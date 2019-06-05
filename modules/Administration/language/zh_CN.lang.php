@@ -375,7 +375,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'组属性：',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => '使用 User DN：',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => '检查组成员时包括用户DN的用户属性，',
-	'LBL_LDAP_USER_FILTER_DESC'=>'验证用户时，可以使用任何任何附加的过滤参数。例如\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'验证用户时，可以使用任何任何附加的过滤参数。例如\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'登陆属性：',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'绑定属性：',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'绑定 LDAP 用户<br>例如:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -937,12 +937,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>警告：</b>为了保护您的数据，此安装器必须设置config.php文件中的&#39;installer_locked&#39; 为“是”来锁定。',
  	'WARN_LICENSE_EXPIRED'=> "<b>通告：</b>您公司的许可证将过期于 ",
     'WARN_LICENSE_EXPIRED2' =>" 天。请到管理员界面<a href='index.php?action=LicenseSettings&module=Administration'>'“用户许可管理”</a>",
-    'WARN_LICENSE_SEATS'=>  "<b>警告：</b>活动用户数量已经超出许可证允许的最大值: ",
-    'WARN_LICENSE_SEATS2' => "请联系你的销售代表或发送电子邮件到<a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>。",
+    'WARN_LICENSE_SEATS'=>  "<b>警告：</b>当 ",
+    'WARN_LICENSE_SEATS2' => "您的订阅仅允许",
+    'WARN_LICENSE_SEATS3' =>
+        "<p class=\"error\">时，有活动用户，请禁用一些用户，联系您的合作伙伴或销售代表，"
+        . "或发送电子邮件至 <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>。</p>"
+        . "<p class=\"error\">如需了解更多信息，请参阅"
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "《了解用户类型和 Sugar 许可证》</a>一文。</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>警告：</b>活动用户数量已经超过许可证允许的最大值： ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：</b>活动用户数量已经超过许可证允许的最大值。",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：</b>活动用户数量已经超过许可证允许的最大值。您将不能再新建用户。",
-    'WARN_REPAIR_CONFIG' => '<b>警告:</b> config.php文件需要被重建. 请在管理员界面的修复页面使用 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>重建配置文件</a> 来修复配置文件。',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：<b>您将无法创建其他活动用户。"
+        . " 请购买更多订阅。",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：<b>您将无法创建其他活动用户。"
+        . " 请购买更多订阅。",
+    'WARN_REPAIR_CONFIG' => '<b>警告：</b> config.php 文件需要修复。请使用“管理”区域的“修复”页中的 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>重建配置文件</a> 脚本来修复配置文件。',
     'WARN_UPGRADE_APP'=> "有新的版本更新可用。",
     'WARN_UPGRADE' => '<b>警告：</b>请升级 ',
     'WARN_UPGRADENOTE' => '笔记：',
@@ -959,7 +968,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'清除 Vardefs 数据缓存',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'从缓存中移除 vardefs',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'清除统一搜索缓存',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'从缓存中移除unified_search_modules.php',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'从缓存移除 unified_search_modules.php',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'快速修理和重建',
     'LBL_QUICK_REPAIR_TITLE'=>'请选择要修复的模块：',
 	'LBL_FAILED_CONNECTION'=> '连接失败：',
@@ -1249,15 +1258,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => '无法找到元数据文件。',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => '设置',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => '日志查看器',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => '访问',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => '日志。',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => '流程列表',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => '可在这里访问流程列表。',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => '配置',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => '设置和查看日志。通过“流程管理”为所有用户管理全部 BPM 流程。',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => '报价配置',
+    'LBL_MANAGE_QUOTES' => '配置报价工作表布局',
 );

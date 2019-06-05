@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: studiodd.js 18703 2006-12-15 09:42:43Z majed $
 /*Portions Copyright (c) 2006 Yahoo! Inc. All rights reserved. */
 
 /**

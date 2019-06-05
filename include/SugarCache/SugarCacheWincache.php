@@ -10,82 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Cache\Backend\WinCache;
 
-class SugarCacheWincache extends SugarCacheAbstract
+/**
+ * @deprecated Use Sugarcrm\Sugarcrm\Cache\Backend\WinCache instead
+ */
+class SugarCacheWincache extends SugarCachePsr
 {
-    /**
-     * @see SugarCacheAbstract::$_priority
-     */
-    protected $_priority = 930;
-    
-    /**
-     * @see SugarCacheAbstract::useBackend()
-     */
-    public function useBackend()
+    public function __construct()
     {
-        if (!parent::useBackend()) {
-            return false;
-        }
-
-        if (!empty($GLOBALS['sugar_config']['external_cache_disabled_wincache'])) {
-            return false;
-        }
-
-        if (!extension_loaded('wincache')) {
-            return false;
-        }
-
-        if (!ini_get('wincache.ucenabled')) {
-            return false;
-        }
-
-        if (php_sapi_name() === 'cli' && !ini_get('wincache.enablecli')) {
-            return false;
-        }
-
-        return true;
-    }
-    
-    /**
-     * @see SugarCacheAbstract::_setExternal()
-     */
-    protected function _setExternal(
-        $key,
-        $value
-        )
-    {
-        wincache_ucache_set($key,$value,$this->_expireTimeout);
-    }
-    
-    /**
-     * @see SugarCacheAbstract::_getExternal()
-     */
-    protected function _getExternal(
-        $key
-        )
-    {
-        if ( !wincache_ucache_exists($key) ) {
-            return null;
-        }
-        
-        return wincache_ucache_get($key);
-    }
-    
-    /**
-     * @see SugarCacheAbstract::_clearExternal()
-     */
-    protected function _clearExternal(
-        $key
-        )
-    {
-        wincache_ucache_delete($key);
-    }
-    
-    /**
-     * @see SugarCacheAbstract::_resetExternal()
-     */
-    protected function _resetExternal()
-    {
-        wincache_ucache_clear();
+        parent::__construct(WinCache::class, 930, 'external_cache_disabled_wincache');
     }
 }

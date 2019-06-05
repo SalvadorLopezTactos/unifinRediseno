@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'ระบุให้:',
   'LBL_ASSIGNED_TO_NAME' => 'ผู้ใช้:',  	  
   'LBL_WORK_LOG' => 'ล็อกการทำงาน:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'สร้างโดย:',
   'LBL_DATE_CREATED' => 'วันที่สร้าง:',
   'LBL_DATE_ENTERED' => 'วันที่สร้าง:',

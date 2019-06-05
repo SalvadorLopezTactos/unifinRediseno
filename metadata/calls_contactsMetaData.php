@@ -16,17 +16,14 @@ $dictionary['calls_contacts'] = array(
         'id' => array(
             'name' => 'id',
             'type' => 'id',
-            'len' => '36',
         ),
         'call_id' => array(
             'name' => 'call_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'contact_id' => array(
             'name' => 'contact_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'required' => array(
             'name' => 'required',

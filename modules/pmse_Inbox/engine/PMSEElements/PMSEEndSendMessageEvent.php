@@ -31,21 +31,29 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
 
     /**
      * @codeCoverageIgnore
+     * @deprecated since version 8.2.0
      */
     public function __construct()
     {
+        $msg = 'The %s method will be removed in a future release and should no longer be used';
+        LoggerManager::getLogger()->deprecated(sprintf($msg, __METHOD__));
+
         $this->definitionBean = BeanFactory::newBean('pmse_BpmEventDefinition');
         parent::__construct();
 
     }
 
     /**
+     * @deprecated since version 8.2.0
      * @param $id
      * @return array
      * @codeCoverageIgnore
      */
     public function retrieveDefinitionData($id)
     {
+        $msg = 'The %s method will be removed in a future release and should no longer be used';
+        LoggerManager::getLogger()->deprecated(sprintf($msg, __METHOD__));
+
         $this->definitionBean->retrieve($id);
         return ($this->definitionBean->toArray());
     }
@@ -75,18 +83,8 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
-        $definitionData = $this->retrieveDefinitionData($flowData['bpmn_id']);
+        $this->emailHandler->queueEmail($flowData);
 
-        $json = htmlspecialchars_decode($definitionData['evn_params']);
-        $addresses = $this->emailHandler->processEmailsFromJson($bean, $json, $flowData);
-        $template_id = $definitionData['evn_criteria'];
-        // probably it's necessary publish the result of the sending to the log
-        // so we store it in that variable.
-        $resultSend = $this->emailHandler->sendTemplateEmail(
-            $flowData['cas_sugar_module'],
-            $flowData['cas_sugar_object_id'], 
-            $addresses, $template_id
-        );
         // since all the actions from now on are exactly the same as the PMSEEndEvent
         // run method we just call the parent implementation
         return parent::run($flowData, $bean, $externalAction, $arguments);

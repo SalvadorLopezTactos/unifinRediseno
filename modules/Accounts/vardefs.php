@@ -68,7 +68,6 @@ $dictionary['Account'] = array(
             'table' => 'accounts',
             'massupdate' => false,
             'source' => 'non-db',
-            'len' => 36,
             'link' => 'member_of',
             'unified_search' => true,
             'importable' => 'true',

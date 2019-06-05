@@ -63,19 +63,43 @@
             }
         );
     },
-    buildVariablesString: function(recipients) {
-        var result = '' , newExpression = '', currentValue, i, aux, aux2;
-        _.each(recipients.models, function(model) {
-            newExpression += '{::' + model.attributes.rhs_module + '::' + model.attributes.id + '::}';
-        });
 
-        var input = this.getFieldElement().get(0);;
+    /**
+     * Adds placeholders fields to the subject field textbox.
+     *
+     * @param {Object} recipients List of fields to create the placeholders.
+     * @return {string} textbox content with the placeholders.
+     */
+    buildVariablesString: function(recipients) {
+        var currentValue;
+        var newExpression = this.buildPlaceholders(recipients);
+
+        var input = this.getFieldElement().get(0);
         currentValue = input.value;
 
         i = input.selectionStart;
         result = currentValue.substr(0, i) + newExpression + currentValue.substr(i);
         return result;
     },
+
+    /**
+     * Creates the placeholders for Email Template Modules.
+     *
+     * @param {Object} recipients List of fields to create the placeholders.
+     * @return {string} newExpression.
+     */
+    buildPlaceholders: function(recipients) {
+        var newExpression = '';
+        _.each(recipients, function(model) {
+            newExpression += '{::' + model.get('rhs_module') + '::' + model.get('id');
+            if (model.get('process_et_field_type') == 'old') {
+                newExpression += '::' + model.get('process_et_field_type');
+            }
+            newExpression += '::}';
+        });
+        return newExpression;
+    },
+
     /**
      * Handles the keyup event in the account create page
      */

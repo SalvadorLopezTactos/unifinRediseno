@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Diese Prozessdefinition wird gegenwärtig durch laufende Prozesse genutzt. Eine Aktualisierung könnte Auswirkungen auf diese Prozesse haben. Möchten Sie die Prozessdefinition trotzdem bearbeiten?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Diese Prozessdefinition wird gegenwärtig durch laufende Prozesse genutzt. Eine Aktualisierung könnte Auswirkungen auf diese Prozesse haben. Möchten Sie die Prozessdefinition trotzdem bearbeiten?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatisch eine Prozessdefinition erstellen durch Importieren einer *.bpm-Datei aus Ihrem Dateisystem.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Laden Sie eine .bpm-Datei hoch, um eine Prozess-Definition zu importieren.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Prozessdefinitionen wurden erfolgreich in das System importiert.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Bitte wählen Sie eine gültige *.bpm-Datei.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Die Prozessdefinition wurde importiert, enthält aber mindestens einen oder mehr Vorgänge für Geschäftsregeln, für die keine Geschäftsregeln ausgewählt wurden.',
+    'LBL_BPM_IMPORT_SELECT' => 'Diese Prozess-Definition enthält die folgenden Geschäftsregeln und E-Mail-Vorlagen. '
+        . 'Bitte wählen Sie die aus, die Sie importieren möchten.',
+    'LBL_BUSINESS_RULES' => 'Geschäftsregeln',
+    'LBL_EMAIL_TEMPLATES' => 'E-Mail-Vorlagen',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Rückgängig',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Wiederholen',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Speichern',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Überprüfen',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Speichern und überprüfen',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Führen Sie eine Überprüfung durch, um es auf Fehler zu überprüfen',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitäten',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Löschen',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filter',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Bezieht sich auf',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriterien',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Dauer',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Einheit',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Felder',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulfeldbewertung',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Bezieht sich auf',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Feld',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Wert',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Antwortformular-Bewertung',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ist nicht',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nicht gleich',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle verknüpften Datensätze',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Alle verknüpften Datensätze',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Laufzeit',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Hinzufügen',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Schließen',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Teams',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Benutzer in %MODULE%, der den Datensatz erstellt hat',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Benutzer in %MODULE%, der den Datensatz als Letzter verändert hat',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Benutzer in %MODULE%, der dem Datensatz zugeordenet ist',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Benutzer in %MODULE%, der dem Datensatz zugeordnet wurde',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Benutzer in %MODULE%, der Manager des Erstellers des Datensatzes ist',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Benutzer in %MODULE%, der Manager der Person ist, die den Datensatz als Letzte verändert hat',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Benutzer in %MODULE%, Manager der Person, die dem Datensatz zugeordenet ist',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Benutzer in %MODULE%, Manager der Person, die dem Datensatz zugeordenet wurde',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% bezieht sich auf %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Benutzer, der %MODULE% erstellt hat',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Benutzer, der %MODULE% zuletzt geändert hat',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Benutzer, der %MODULE% zugewiesen ist',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Benutzer, der %MODULE% zugewiesen wurde',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Manager des Benutzers, der %MODULE% erstellt hat',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Manager des Benutzers, der %MODULE% zuletzt geändert hat',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Manager des Benutzers, der %MODULE% zugewiesen ist',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Manager des Benutzers, der %MODULE% zugewiesen wurde',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'Rolle: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'Team: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Vorschläge',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Ausdruckssyntax ungültig.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Die Prozessdefinitionen werden überprüft: die Einstellungen des Elements werden abgerufen',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Die Prozessdefinitionen werden überprüft: die Einstellungen des Elements werden überprüft',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Fehlerliste wird aktualisiert ...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Überprüfung abgeschlossen! Festgestellte Probleme: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' Probleme',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Die Überprüfung läuft',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Warnung: Der Prozess kann bei diesem Element anhalten oder andere unbeabsichtigte Auswirkungen haben',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Fehler: Der Prozess wird bei diesem Element angehalten',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Das Element kann nicht überprüft werden',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Das Element erfüllt nicht die Mindestanzahl von eingehenden Flüssen',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Dieses Element muss eine Mindestanzahl von eingehenden Pfaden haben. Überprüfen Sie die Anzahl der Pfade, die mit diesem Element verbunden sind, um sicherzustellen, dass die Mindestanzahl erfüllt ist.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Das Element überschreitet die maximale Anzahl von eingehenden Flüssen',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Dieses Element hat eine maximale Anzahl von eingehenden Pfaden, die nicht überschritten werden darf. Überprüfen Sie die Anzahl der Pfade, die mit diesem Element verbunden sind, um sicherzustellen, dass die maximale Anzahl nicht überschritten wird.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Das Element erfüllt nicht die Mindestanzahl von abgehenden Flüssen',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Dieses Element muss eine Mindestanzahl von abgehenden Pfaden haben. Überprüfen Sie die Anzahl der Pfade, die aus diesem Element führen, um sicherzustellen, dass die Mindestanzahl erfüllt ist.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Das Element überschreitet die maximale Anzahl von abgehenden Flüssen',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Dieses Element hat eine maximale Anzahl von abgehenden Pfaden, die nicht überschritten werden darf. Überprüfen Sie die Anzahl der Pfade, die aus diesem Element führen, um sicherzustellen, dass die maximale Anzahl nicht überschritten wird.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Das Pflichtfeld ist nicht festgelegt',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Dieses Element hat ein Feld, das erforderlich ist, aber noch nicht festgelegt wurde. Überprüfen Sie die Einstellungen des Elements, um sicherzustellen, dass das Feld richtig festgelegt wurde. Klicken Sie anschließend auf die Schaltfläche „Speichern".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Derzeit sind keine Daten im System vorhanden',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Die Einstellungen für dieses Element verweisen auf ein bestimmtes Datenteil, das nicht in der Datenbank vorhanden ist. Überprüfen Sie die Einstellungen des Elements, um sicherzustellen, dass alle Daten, auf die verwiesen wird, vorhanden sind (z. B. bestimmte Benutzer, Modulfelder, Teams usw.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Der Ausdruck des Kriterienfelds wird niemals als wahr ausgewertet',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Die Kriterienfelder enthalten logische AND/OR/NOT-Ausdrücke. Dieser Fehler bedeutet, dass ein Kriterienfeld in den Einstellungen des Elements so konfiguriert wurde, dass der Ausdruck niemals wahr ist. Überprüfen Sie das Kriterienfeld, um alle logischen Widersprüche zu beseitigen, die verhindern, dass der Ausdruck wahr ist.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Das Element kann nicht erreicht werden',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Damit ein Element in einem Prozess ausgeführt werden kann, muss es mit einem Pfad verbunden sein. Die Pfadkette, die zu diesem Element führt, muss mit einem Startelement beginnen. Überprüfen Sie die Kette der Pfade, die zu diesem Element führen, um sicherzustellen, dass die Kette mit einem Startelement beginnt.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Das Kriterium der Wartezeit muss exakt eine Datum/Zeit-Konstante enthalten',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Dieses Element eines Warten-Ereignisses wurde mithilfe des Kriterienfelds „Festes Datum" konfiguriert. Dieses Feld muss exakt eine „Feste Datum/Zeit"-Konstante oder einen Datum/Zeit-Feldverweis enthalten. Alle anderen Teile des Ausdrucks müssen mathematische Operatoren (+/-) oder „Zeitspanne"-Konstanten sein.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Der angegebene Wert der Dauer darf nicht Null sein',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Dieses Element eines Warten-Ereignisses wurde mithilfe der Einstellung „Dauer" konfiguriert. Diese Einstellung darf nicht gleich Null sein, da andernfalls ein Fehler auftritt. Überprüfen Sie die Einstellungen des Elements, um sicherzustellen, dass die „Dauer" nicht auf Null gesetzt ist.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Die Parameter der Wartezeit wurden nicht eingestellt',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Für dieses Element eines Warten-Ereignisses sind keine Einstellungen konfiguriert. Überprüfen Sie die Einstellungen des Elements, um sicherzustellen, dass „Dauer" oder „Festes Datum" ausgewählt ist, geben Sie die gewünschten Werte ein und klicken Sie auf die Schaltfläche „Speichern".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Die erwartete Zeit ist kleiner als Null',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Unter den Einstellungen „Formulare" für dieses Aktivitätselement wird die erwartete Zeit auf einen negativen Wert gesetzt, was dazu führt, dass der Prozess angehalten wird, wenn das Element erreicht wird. Öffnen Sie die Einstellungen „Formulare" für dieses Element, um die erwartete Zeit in eine nicht negative Zahl zu ändern.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Der Aktionstyp ist [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Dieses Aktionselement hat keinen bestimmten Typ. Sie können dies ändern, indem Sie mit der rechten Maustaste auf das Aktionselement klicken und dann einen Typ aus der Liste „Aktionstyp" auswählen.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Es kann nicht garantiert werden, dass ein Pfad genommen wird',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Diese Fehlermeldung tritt auf, weil die Möglichkeit besteht, dass keiner der Pfade aus diesem Gateway-Element genommen wird, was dazu führt, dass der Prozess angehalten wird. Es wird empfohlen, einen Standardpfad für den Fall festzulegen, dass keiner der Ausdrücke des Kriterienfelds in den Einstellungen des Elements erfüllt ist. Dazu können Sie mit der rechten Maustaste auf das Gateway-Element klicken und ein Element im Menü „Standardfluss" auswählen. Wenn kein Standardpfad angegeben wird, sollten die Ausdrücke des Kriterienfelds in den Einstellungen des Elements geändert werden, um sicherzustellen, dass mindestens einer von ihnen wahr ist, wenn der Prozess ausgeführt wird.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Der zusammenlaufende Gateway-Typ stimmt nicht mit dem Gateway-Typ eines eingehenden Flusses überein',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Auseinanderlaufende Gateways erweitern Prozesse in mehrere Zweige. Wenn Sie ein zusammenlaufendes Gateway verwenden, um diese Zweige wieder in einen Pfad zusammenzuführen, muss der korrekte Typ des zusammenlaufenden Gateways verwendet werden. Dies hängt jeweils von dem Typ des auseinanderlaufenden Gateways ab, mit dem die Zweige erstellt wurden. Verwenden Sie für Zweige, die mit exklusiven oder Ereignis-basierten auseinanderlaufenden Gateways erstellt wurden, ein exklusives zusammenlaufendes Gateway, um diese erneut zusammenzuführen. Verwenden Sie für Zweige, die mit parallelen oder sogar auseinanderlaufenden Gateways erstellt wurden, ein paralleles zusammenlaufendes Gateway, um diese erneut zusammenzuführen.',
 );

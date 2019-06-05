@@ -12,31 +12,31 @@
 $params = [
     'strict' => false,
     'debug' => true,
-    'sp' => array (
+    'sp' => [
         'entityId' => 'http://localhost:8000/saml/metadata',
-        'assertionConsumerService' => array (
+        'assertionConsumerService' => [
             'url' => 'http://localhost:8000/saml/acs',
             'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-        ),
-        'singleLogoutService' => array (
+        ],
+        'singleLogoutService' => [
             'url' => 'http://localhost:8000/saml/logout',
             'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-        ),
+        ],
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
         'x509cert' => file_get_contents(__DIR__ . '/../../../../../../app/config/certs/travis.crt'),
         'privateKey' => file_get_contents(__DIR__ . '/../../../../../../app/config/certs/travis.key'),
-    ),
+    ],
 
-    'idp' => array (
+    'idp' => [
         'entityId' => 'http://www.okta.com/exk7y9w6b9H1jG46H0h7',
-        'singleSignOnService' => array (
+        'singleSignOnService' => [
             'url' => 'https://dev-178368.oktapreview.com/app/sugarcrmdev280437_testidp_1/exk7y9w6b9H1jG46H0h7/sso/saml',
             'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-        ),
-        'singleLogoutService' => array (
+        ],
+        'singleLogoutService' => [
             'url' => 'https://dev-178368.oktapreview.com/app/sugarcrmdev280437_testidp_1/exk7y9w6b9H1jG46H0h7/slo/saml',
             'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-        ),
+        ],
         'x509cert' => '-----BEGIN CERTIFICATE-----
               MIIDpDCCAoygAwIBAgIGAVad+pKSMA0GCSqGSIb3DQEBBQUAMIGSMQswCQYDVQQGEwJVUzETMBEG
               A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
@@ -56,7 +56,7 @@ $params = [
               0s7jNKhU4VXLkdBe6XcCX5pFYW3H4vKz2LSrCpHmuoidJqs4RaJotoTa4px5uImOn9kbIAqbHHUb
               F2XNRGdksB0l7arTUgTTe+1RsZeshp/L
               -----END CERTIFICATE-----',
-    ),
+    ],
 
     'security' => [
         'authnRequestsSigned' => true,

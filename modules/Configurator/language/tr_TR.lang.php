@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Yüklemeler Tabını Görüntüle',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Seçildiğinde, kullanıcı ayarlarında İndirme Sekmesi görünecek ve Sugar eklentileri ile diğer mevcut dosyalara erişim sağlanacak',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'LDAP kullanırken SOAP için onaylama.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt uzantısı php.ini dosyasında seçilmiş olmalı.',
     'LBL_ALL' => 'Hepsi',
     'LBL_MARK_POINT' => 'İşaret Noktası',
     'LBL_NEXT_' => 'Sonraki>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Aktivite Akışları',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivite Akışlarını Etkinleştir',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uygulama için Aktivite Akışlarını açar',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Ek oturum ekran içeriğini etkinleştir',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'İşlem tanımlarını otomatik kaydet',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Tasarımcı kullanılırken işlem tanımlarının ne kadar sıklıkla otomatik olarak kaydedileceğini belirler',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Otomatik kaydetme esnasında işlem tanımlarını otomatik doğrula',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Otomatik kaydedilirken işlem tanımlarının otomatik olarak doğrulanıp doğrulanmayacağı arasında geçiş yapar',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'İçe aktarma esnasında işlem tanımlarını otomatik doğrula',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'İlk kez içe aktarılırken işlem tanımlarının otomatik olarak doğrulanıp doğrulanmayacağı arasında geçiş yapar',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Yorum Günlüğü Ayarları',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Yorum girişi başına gösterilecek maksimum karakter',
 );
 
 

@@ -61,10 +61,19 @@ foreach ($admin_group_header as $key=>$values) {
             $group_header_value=get_form_header(translate($values[0],'Administration'),$values[1],$values[2]);
         	$group[$j][0] = '<table cellpadding="0" cellspacing="0" width="100%" class="h3Row"><tr ><td width="20%" valign="bottom"><h3>' . translate($values[0]) . '</h3></td></tr>';
         	$addedHeaderGroups[$values[0]] = 1;
-        	if (isset($values[4]))
-    	       $group[$j][1] = '<tr><td style="padding-top: 3px; padding-bottom: 5px;">' . translate($values[4]) . '</td></tr></table>';
-    	    else
-    	       $group[$j][2] = '</tr></table>';
+            if (isset($values[4])) {
+                if (is_array($values[4])) {
+                    $modDesc = '';
+                    foreach ($values[4] as $modDescPart) {
+                        $modDesc = $modDesc . translate($modDescPart, 'Administration');
+                    }
+                    $group[$j][1] = '<tr><td style="padding-top: 3px; padding-bottom: 5px;">' . $modDesc . '</td></tr></table>';
+                } else {
+                    $group[$j][1] = '<tr><td style="padding-top: 3px; padding-bottom: 5px;">' . translate($values[4]) . '</td></tr></table>';
+                }
+            } else {
+                $group[$j][2] = '</tr></table>';
+            }
             $colnum=0;
             $i=0;
             $fix = array_keys($values[3]);
@@ -127,9 +136,15 @@ foreach ($admin_group_header as $key=>$values) {
 
                 $label_tab[$j][$i]= $label;
                 $id_tab[$j][$i] = $link_idx;
-                
-                $description[$j][$i]= translate($admin_option[2],'Administration');
-
+                if (is_array($admin_option[2])) {
+                    $tempDesc = '';
+                    foreach ($admin_option[2] as $descPart) {
+                        $tempDesc = $tempDesc . translate($descPart, 'Administration');
+                    }
+                    $description[$j][$i] = $tempDesc;
+                } else {
+                    $description[$j][$i]= translate($admin_option[2], 'Administration');
+                }
                 if (($colnum % 2) == 0) {
                     $tab[$j][$i]= ($colnum % 2);
                 }

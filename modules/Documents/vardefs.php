@@ -148,7 +148,6 @@ $dictionary['Document'] = array('table' => 'documents',
             'name' => 'document_revision_id',
             'vname' => 'LBL_DOCUMENT_REVISION_ID',
             'type' => 'id',
-            'len' => '36',
             'reportable' => false,
         ),
 
@@ -336,9 +335,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'name' => 'related_doc_id',
             'vname' => 'LBL_RELATED_DOCUMENT_ID',
             'reportable' => false,
-            'dbType' => 'id',
             'type' => 'id',
-            'len' => '36',
         ),
 
         'related_doc_name' =>
@@ -358,7 +355,6 @@ $dictionary['Document'] = array('table' => 'documents',
         'related_doc_rev_id' =>
         array(
             'name' => 'related_doc_rev_id',
-            'type' => 'relate',
             'link' => 'related_docs',
             'rname' => 'document_revision_id',
             'id_name' => 'related_doc_id',
@@ -366,7 +362,6 @@ $dictionary['Document'] = array('table' => 'documents',
             'reportable' => false,
             'dbType' => 'id',
             'type' => 'id',
-            'len' => '36',
         ),
 
         'related_doc_rev_number' =>

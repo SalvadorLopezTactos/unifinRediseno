@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Создать будущие временные промежутки',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публикация одобренных статей и статей базы знаний с истекающим сроком действия.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Запланированное задание Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публикация одобренных статей и статей базы знаний с истекшим сроком действия.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Запланированное задание',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Восстановить денормализованные данные безопасности команды',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Проверять почтовые ящики для входящей почты',
 'LBL_PERFORMFULLFTSINDEX' => 'Полнотекстовая Индекс-система поиска',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Удалить временные PDF-файлы',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публикация одобренных статей и завершение срока действия статей базы знаний.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публикация одобренных статей и статей базы знаний с истекшим сроком действия.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Планировщик очереди Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Удалить файлы средств диагностики',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Удалить временные файлы',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Запуск отправки оповещений по электронной почте',
 'LBL_CLEANJOBQUEUE' => 'Очистка списка задач',
 'LBL_CLEANOLDRECORDLISTS' => 'Очистить списки со старыми записями',
-'LBL_PMSEENGINECRON' => 'Планировщик Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Планировщик SugarBPM',
 );
 

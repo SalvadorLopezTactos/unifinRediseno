@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'การกำหนดเวิร์กโฟลว์',
   'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดเวิร์กโฟลว์',
-  'LBL_MODULE_ID' => 'เวิร์กโฟลว์',  
+  'LBL_MODULE_ID' => 'เวิร์กโฟลว์',
   'LBL_MODULE_TITLE' => 'เวิร์กโฟลว์: หน้าแรก',
   'LBL_SEARCH_FORM_TITLE' => 'การค้นหาเวิร์กโฟลว์',
   'LBL_LIST_FORM_TITLE' => 'รายการเวิร์กโฟลว์',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'โมดูลเป้าหมาย:',
   'LBL_LIST_ORDER' => 'ลำดับของกระบวนการ:',
   'LBL_FROM_NAME' => 'จากชื่อ:',
-  'LBL_FROM_ADDRESS' => 'จากที่อยู่:',  
+  'LBL_FROM_ADDRESS' => 'จากที่อยู่:',
   'LNK_NEW_WORKFLOW' => 'สร้างการกำหนดเวิร์กโฟลว์',
-  'LNK_WORKFLOW' => 'แสดงการกำหนดเวิร์กโฟลว์', 
-  
-  
+  'LNK_WORKFLOW' => 'แสดงการกำหนดเวิร์กโฟลว์',
+
+
   'LBL_ALERT_TEMPLATES' => 'เทมเพลทของการเตือน',
   'LBL_CREATE_ALERT_TEMPLATE' => 'สร้างเทมเพลทของการเตือน:',
   'LBL_SUBJECT' => 'เรื่อง:',
-  
+
   'LBL_RECORD_TYPE' => 'ใช้กับ:',
  'LBL_RELATED_MODULE'=> 'โมดูลที่เกี่ยวข้อง:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'ลำดับเวิร์กโฟลว์',
 	'LNK_ALERT_TEMPLATES' => 'เทมเพลทของอีเมลการเตือน',
 	'LNK_PROCESS_VIEW' => 'ลำดับเวิร์กโฟลว์',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'ประเภท',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>โปรดทราบ:</strong> เวิร์กโฟลว์ Sugar และฟังก์ชันการจัดการเวิร์กโฟลว์อยูในโหมดบำรุงรักษา ลูกค้าบริษัท Sugar ควรใช้ฟังก์ชันที่ SugarBPM <sup class="trademark">TM</sup>มีให้ไว้',
 );
 

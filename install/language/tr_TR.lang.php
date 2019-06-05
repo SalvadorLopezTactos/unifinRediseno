@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Uyumluluk denetimi sırasında hatalar tespit edildi. SugarCRM Kurulum işleminin düzgün çalışması için, lütfen aşağıda sıralanan problemleri gidermek için gerekli adımları atıp, yeniden kontrol butonuna basın ya da yeniden yüklemeyi deneyin.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference değeri On (php.ini içinde Off yapılmalıdır)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Planlayıcı, sınırlı işlevlerle çalışacak. E-posta Arşivleme hizmeti çaılşamayacak.',
+	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Zamanlayıcı sınırlı işlevsellik ile çalışacaktır. E-posta Arşivleme hizmeti çalışmaz.',
     'ERR_CHECKSYS_IMAP'					=> 'Bulunamadı : Gelen E-Posta ve Kampanyalar (E-Posta) için  IMAP kütüphaneleri gerekiyor. İkisi de çalışmayacak.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL Server kullanırken, Magic Quotes GPC "On" olarak değiştirilemez.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Uyarı:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi kullanımının optimal performansı için, php.ini dosyasında fastcgi.logging değerini 0 olarak belirtin.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Desteklenmeyen PHP Versiyonu Yüklendi: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Veritabanı kullanılamaz',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı. Lütfen aşağıdaki desteklenen Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle veya DB2.  PHP sürümünüze bağlı olarak php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya  doğru ikili dosya ile yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğinin nasıl etkinleştirildiğiyle ilgili daha fazla bilgi için lütfen PHP Kılavuzuna bakın.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı. Lütfen desteklenen şu Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle veya DB2. PHP sürümünüze bağlı olarak, php.ini dosyasındaki uzantıyı açmanız veya doğru ikili dosya ile yeniden derlemeniz gerekebilir. Veri Tabanı Desteğini nasıl etkinleştireceğiniz hakkında daha fazla bilgi için lütfen PHP Kılavuzunuza bakın.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar uygulaması tarafından ihtiyaç duyulan XML Ayrıştırıcı Kütüphaneleri fonksiyonları bulunamadı. PHP versiyonun bağlı olarak, php.ini dosyasında eklentileri aktive etmeniz veya doğru seçenekler ile tekrar derlemeniz gerekebilir. Daha fazla bilgi için PHP Kılavuzuna bakınız.',
     'LBL_CHECKSYS_CSPRNG' => 'Rasgele sayı üretici',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar uygulaması tarafından ihtiyaç duyulan Multibyte Strings PHP eki (mbstring) ile ilişkili fonksiyonlar bulunamadı.<br/><br/><br />Genellikle mbstring modülü varsayılan olarak PHP içinde etkin olmayıp, PHP programı oluşturulurken --enable-mbstring seçeneği ile etkinleştirilmelidir. <br /> Mbstring desteğini etkinleştirmek ile ilgili daha fazla bilgi için PHP Kılavuzuna bakınız.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Php yapılandırma dosyasında (php.ini) session.save_path ayarları yapılmadı ya da olmayan bir klasörü işaret ediyor. Php.ini dosyasında save_path değerini ayarlayın ya da işaret edilen klasörün var olduğuna emin olun.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Php yapılandırma dosyanızdaki (php.ini) belirtilen session.save_path ayarı, yazılabilir olmayan bir klasöre işaret etmektedir. Lütfen dosyanızı yazılabilir hale getirmek için gerekli adımları adın.<br /><br> İşletim Sistemine bağlı olarak dosyanın izinlerini değiştirmek (chmod 766 komutunu çalıştırarak)<br />, ya da dosyanın üzerine sağ tıklayıp özelliklerinde sadece okunur seçeneğini kaldırmak zorunda olabilirsiniz.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Config dosyası var ama yazılabilir değil. Lütfen dosyanızın yazılabilir hale getirmek için gerekli adımları atın.<br /> İşletim Sistemine bağlı olarak dosyanın izinlerini değiştirmek (chmod 766 komutunu çalıştırarak)<br /> ya da dosyanın üzerine sağ tıklayıp özelliklerine eriştikten sonra, sadece okunur seçeneğini kaldırmak zorunda olabilirsiniz.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP Modülü',
 	'LBL_CHECKSYS_MQGPC'				=> 'Fiyat Sihirbazı GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings Modülü',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Limitsiz)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Sınırsız)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP Bellek Limiti',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Yeni hesap bilgileri',
         'description' => 'Bu şablon, Sistem Yöneticisi bir kullanıcıya yeni bir şifre gönderirken kullanılır.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Kullanıcı İsminiz ve Geçici Şifreniz aşağıda paylaşılmaktadır: </p><p>Kullanıcı İsmi : $contact_user_user_name </p><p>Şifre : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Yukarıdaki şifreyi kullanarak uygulamaya bağlandıktan sonra, şifreyi değiştirmeniz gerekebilir.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Kullanıcı İsminiz ve Geçici Şifreniz aşağıda paylaşılmaktadır: </p><p>Kullanıcı İsmi : $contact_user_user_name </p><p>Şifre : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Yukarıdaki şifreyi kullanarak uygulamaya bağlandıktan sonra, şifreyi değiştirmeniz gerekebilir.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Aşağıda kullanıcı ismi ve geçici şifre bulunmaktadır:<br />Kullanıcı İsmi :  $contact_user_user_name<br />Şifre: $contact_user_user_hash<br /><br />$config_site_url<br /><br />Üstteki şifreyi kullanıp sisteme girdikten sonra, kendi seçtiğiniz bir parola ile sıfırlama gerekli olabilir.',
         'name' => 'Sistem tarafından oluşturulan E-Posta şifresi',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Hesabınızın şifresini sıfırlayınız',
         'description' => "Bu şablon, kullanıcı hesabının şifresini sıfırlama linkini kullanıcıya göndermek için kullanılır.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Kısa süre önce ($contact_user_pwd_last_changed) hesabınızın şifresinin sıfırlanması için talepte bulunmuşsunuz. </p><p>Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Kısa süre önce ($contact_user_pwd_last_changed) hesabınızın şifresinin sıfırlanması için talepte bulunmuşsunuz. </p><p>Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Kısa süre önce, $contact_user_pwd_last_changed üzerinde hesap şifrenizi sıfırlama isteğinde bulundunuz.<br /><br />Aşağıdaki adrese tıklayarak, şifrenizi sıfırlayabilirsiniz:<br /><br />$contact_user_link_guid',
         'name' => 'Unutulan Şifre e-postası',

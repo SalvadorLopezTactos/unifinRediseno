@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Spingi Fatturazione',
 	'LBL_PUSH_SHIPPING' => 'Spingi Spedizione',
 	'LBL_SAVE_ACCOUNT' => 'Salva Azienda',
+    'LBL_SERVICE_LEVEL' => 'Livello di servizio',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Comune Spedizione:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Provincia Spedizione:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'CAP Spedizione :',

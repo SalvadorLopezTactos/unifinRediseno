@@ -13,6 +13,7 @@
 
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class PMSEElement implements PMSERunnable
 {
@@ -70,6 +71,19 @@ class PMSEElement implements PMSERunnable
     protected $logger;
 
     /**
+     * Flag to create a new pmse_bpm_flow
+     *
+     * @var boolean
+     */
+    protected $createFlow;
+
+    /**
+     * The ProcessManager\Registry object
+     * @var Registry
+     */
+    protected $registry;
+
+    /**
      * Class constructor
      * @codeCoverageIgnore
      */
@@ -83,6 +97,21 @@ class PMSEElement implements PMSERunnable
         $this->emailHandler = ProcessManager\Factory::getPMSEObject('PMSEEmailHandler');
         $this->dbHandler = $db;
         $this->logger = PMSELogger::getInstance();
+        $this->createFlow = false;
+    }
+
+    /**
+     * Gets the Registry object
+     * @return Registry
+     */
+    public function getRegistry()
+    {
+        // Wrapping this static getter in an instance method makes it testable
+        if (empty($this->registry)) {
+            $this->registry = Registry\Registry::getInstance();
+        }
+
+        return $this->registry;
     }
 
     /**
@@ -296,7 +325,11 @@ class PMSEElement implements PMSERunnable
     {
         $response = array();
         $response['route_action'] = $routeAction;
-        $response['flow_action'] = $flowAction;
+        if ($flowAction == 'CREATE') {
+            $response['flow_action'] = $this->createFlow ? 'CREATE' : 'UPDATE';
+        } else {
+            $response['flow_action'] = $flowAction;
+        }
         $response['flow_data'] = $data;
         $response['flow_filters'] = $filters;
         $response['flow_id'] = isset($data['id']) ? $data['id'] : '';
@@ -319,28 +352,37 @@ class PMSEElement implements PMSERunnable
      */
     public function getNextShapeElements($flowData)
     {
-        $nextElements = $this->caseFlowHandler->retrieveFollowingElements($flowData);
-        $eventBean = $this->caseFlowHandler->retrieveBean('pmse_BpmnEvent');
-
-        $nextShapeElements = array();
-        foreach ($nextElements as $element) {
-            $sugarQueryObject = $this->retrieveSugarQueryObject();
-            $sugarQueryObject->select(array(
-                'id',
-                'evn_type',
-                'evn_behavior'
-            ));
-
-            $sugarQueryObject->from($eventBean, array('alias' => 'a'));
-            $sugarQueryObject->joinTable('pmse_bpmn_flow', array('joinType' => 'LEFT', 'alias' => 'b'))
-                ->on()->equalsField('b.flo_element_dest', 'a.id');
-            $sugarQueryObject->where()->queryAnd()
-                ->addRaw('b.id=\'' . $element['bpmn_id'] . '\'');
-
-            $queryResult = $sugarQueryObject->execute();
-            $result = array_pop($queryResult);
-            array_push($nextShapeElements, $result);
-        }
-        return $nextShapeElements;
+        $flowBean = BeanFactory::getBean('pmse_BpmnFlow');
+        $sugarQueryObject = $this->retrieveSugarQueryObject();
+        $sugarQueryObject->from($flowBean, array('alias' => 'f'));
+        $sugarQueryObject->joinTable(
+            'pmse_bpmn_event',
+            array(
+                'joinType' => 'LEFT',
+                'alias' => 'e',
+            )
+        )
+            ->on()
+            ->equalsField('f.flo_element_dest', 'e.id');
+        $sugarQueryObject->joinTable(
+            'pmse_bpmn_activity',
+            array(
+                'joinType' => 'LEFT',
+                'alias' => 'a',
+            )
+        )
+            ->on()
+            ->equalsField('f.flo_element_dest', 'a.id');
+        $sugarQueryObject->select(array(
+            'f.id',
+            'e.evn_type',
+            'e.evn_behavior',
+            'a.act_task_type',
+        ));
+        $sugarQueryObject->where()
+            ->queryAnd()
+            ->addRaw('f.flo_element_origin=\'' . $flowData['bpmn_id'] . '\'');
+        $queryResult = $sugarQueryObject->execute();
+        return $queryResult;
     }
 }

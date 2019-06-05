@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{*  $Id: EditConvertLeadTop.tpl 21451 2007-04-04 22:04:34Z dwheeler $ *}
 
 {*
 <table class="edit view" id="convertLayoutExtraData"><tr>

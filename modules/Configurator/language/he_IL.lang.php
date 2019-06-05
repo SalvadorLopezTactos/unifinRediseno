@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'שרת Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'פריטי פאנל-משנה לדף',
 	'LOG_MEMORY_USAGE'=>'תעד ניצולת זיכרון',
-    'LOG_SLOW_QUERIES' => 'תעד שאילתות איטיות',
+    'LOG_SLOW_QUERIES' => 'התחבר לשאילתות אטיות',
     'LOCK_HOMEPAGE_HELP'=>'הגדרה זו נועדה למנוע את<BR> 1) ההוספה של דפי בית וחלונות חדשים במודול הבית, <BR>2) התאמה אישית של השמת חלונית בדפי הבית על ידי גרירה ושחרור.',
     'CURRENT_LOGO'=>'לוגו נוכחי:',
     'CURRENT_LOGO_HELP'=>'This logo is displayed at the top left-hand corner of the Sugar application.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'הצג לשונית הורדות',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'במידה והאפשרות נבחרת, הלשונית הורדות תופיע בהגדרות המשתמש ותאפשר למשתמשים גישה לתוספים של Sugar ולקבצים זמינים אחרים',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'עבור אימות SOAP בעת שימוש ב-LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'יש להפעיל את ההרחבה php_mycrypt בקובץ php.ini שלך.',
     'LBL_ALL' => 'הכל',
     'LBL_MARK_POINT' => 'נקודת סימון',
     'LBL_NEXT_' => 'הבא>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'זרמי פעילות',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'הפעל &#39;זרמי פעילות&#39;',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'הפעל &#39;זרמי פעילות&#39; עבור היישום',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'הפעל תוכן נוסף במסך ההתחברות',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'שמירה אוטומטית של הגדרות התהליך',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'קביעת התדירות לשמירה אוטומטית של הגדרות התהליך בעת השימוש במעצב',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'אימות אוטומטי של הגדרות התהליך בעת שמירה אוטומטית',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'החלפת מצבים לגבי אימות אוטומטי של הגדרות התהליך בעת שמירה אוטומטית. תהליך זה ייכנס לתוקף רק אם "שמירה אוטומטית של הגדרות התהליך" תוגדר למרווחי זמן',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'אימות אוטומטי של הגדרות התהליך בעת ייבוא',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'החלפת מצבים לגבי אימות אוטומטי של הגדרות המצבים כשהן מיובאות לראשונה',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'הגב על הגדרות יומן הרישום',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'מספר התווים המרבי להצגה בכל רשומת תגובה',
 );
 
 

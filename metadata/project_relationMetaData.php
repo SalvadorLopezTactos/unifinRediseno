@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: project_relationMetaData.php 51971 2009-10-28 15:03:44Z clee $
 
 $dictionary['project_relation'] = array(
 	'table' => 'project_relation',

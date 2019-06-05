@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => '빌링 푸시',
 	'LBL_PUSH_SHIPPING' => '선적 푸시',
 	'LBL_SAVE_ACCOUNT' => '고객 저장하기',
+    'LBL_SERVICE_LEVEL' => '서비스 레벨',
 	'LBL_SHIPPING_ADDRESS_CITY' => '시:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => '국가:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => '우편번호:',

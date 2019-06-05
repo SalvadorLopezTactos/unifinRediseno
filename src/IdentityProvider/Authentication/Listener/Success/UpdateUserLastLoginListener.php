@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success;
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 
 class UpdateUserLastLoginListener
@@ -22,6 +23,13 @@ class UpdateUserLastLoginListener
      */
     public function execute(AuthenticationEvent $event)
     {
-        $event->getAuthenticationToken()->getUser()->getSugarUser()->updateLastLogin();
+        /** @var User $user */
+        $user = $event->getAuthenticationToken()->getUser();
+
+        if ($user->isServiceAccount()) {
+            return;
+        }
+
+        $user->getSugarUser()->updateLastLogin();
     }
 }

@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Дефиниции на работните процеси',
   'LBL_MODULE_NAME_SINGULAR' => 'Дефиниция на работния процес',
-  'LBL_MODULE_ID' => 'Работен процес',  
+  'LBL_MODULE_ID' => 'Работен процес',
   'LBL_MODULE_TITLE' => 'Дефинирани процеси:',
   'LBL_SEARCH_FORM_TITLE' => 'Търсене',
   'LBL_LIST_FORM_TITLE' => 'Списък с процеси:',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Основен модул:',
   'LBL_LIST_ORDER' => 'Поредност:',
   'LBL_FROM_NAME' => 'Подател:',
-  'LBL_FROM_ADDRESS' => 'Адрес на подателя:',  
+  'LBL_FROM_ADDRESS' => 'Адрес на подателя:',
   'LNK_NEW_WORKFLOW' => 'Създаване на Дефиниция на работния процес',
-  'LNK_WORKFLOW' => 'Списък с Дефиниции на работните процеси', 
-  
-  
+  'LNK_WORKFLOW' => 'Списък с Дефиниции на работните процеси',
+
+
   'LBL_ALERT_TEMPLATES' => 'Шаблони на известявания',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Създаване на шаблон на известявания:',
   'LBL_SUBJECT' => 'Относно:',
-  
+
   'LBL_RECORD_TYPE' => 'Валиден за:',
  'LBL_RELATED_MODULE'=> 'Свързан модул:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Управление на дефинирани процеси',
 	'LNK_ALERT_TEMPLATES' => 'Шаблони на известявания',
 	'LNK_PROCESS_VIEW' => 'Управление на дефинирани процеси',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Тип',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Забележка:</strong> Тази функционалност на Работния процес и Управлението на работния процес на Sugar ще бъде премахната в бъдещата версия на Sugar. Клиентите на Sugar - версия за предприятия трябва да започнат да използват функционалността, предоставена от Разширения работен процес на Sugar. Щракнете върху <a href="http://www.sugarcrm.com/wf-eol" target="_blank">тук</a> за повече информация.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Забележка:</strong> Функционалността на Работния процес и Управлението на работния процес на Sugar е в процес на техническа поддръжка. Клиентите на Sugar, версия за предприятия, трябва да използват функционалността, предоставяна от SugarBPM<sup class="trademark">TM</sup>.',
 );
 

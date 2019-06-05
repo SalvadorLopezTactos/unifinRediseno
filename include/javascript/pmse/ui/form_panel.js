@@ -127,6 +127,9 @@ FormPanel.prototype._createField = function (settings) {
         case 'checkbox':
             field = new FormPanelCheckbox(defaults);
             break;
+        case 'radiobutton':
+            field = new FormPanelRadio(defaults);
+            break;
         case 'multiselect':
             field = new FormPanelMultiselect(defaults);
             break;
@@ -736,6 +739,9 @@ FormPanelField.prototype.setLabel = function (label) {
     if(this._htmlLabelContainer) {
         if (jQuery.trim(label)) {
             this._htmlLabelContainer.textContent = label;
+            if (label == 'HIDE_THIS') {
+                this._htmlLabelContainer.style.display = 'none';
+            }
         } else {
             this._htmlLabelContainer.innerHTML = '&nbsp;';
         }
@@ -822,7 +828,7 @@ FormPanelField.prototype._getValueFromControl = function () {
 FormPanelField.prototype.fireDependentFields = function () {
     var dependantField, value = this._value;
     if(this._form) {
-        for(i = 0; i < this._dependantFields.length; i++) {
+        for(var i = 0; i < this._dependantFields.length; i++) {
             dependantField = this._form.getItem(this._dependantFields[i]);
             if (dependantField) {
                 dependantField._fireDependencyHandler(this, value);
@@ -951,6 +957,7 @@ FormPanelText.prototype.type = "FormPanelText";
 
 FormPanelText.prototype.init = function(settings) {
     var defaults = {
+        disabled: false,
         placeholder: "",
         onKeyUp: null,
         maxLength: 0
@@ -959,6 +966,12 @@ FormPanelText.prototype.init = function(settings) {
     this.setPlaceholder(defaults.placeholder)
         .setOnKeyUpHandler(defaults.onKeyUp)
         .setMaxLength(defaults.maxLength);
+
+    if (defaults.disabled) {
+        this.disable();
+    } else {
+        this.enable();
+    }
 };
 
 FormPanelText.prototype.setMaxLength = function (maxLength) {
@@ -1618,6 +1631,7 @@ FormPanelDropdown.prototype.type = "FormPanelDropdown";
 
 FormPanelDropdown.prototype.init = function (settings) {
     var defaults = {
+        disabled: false,
         options: [],
         value: "",
         dataURL: null,
@@ -1644,6 +1658,12 @@ FormPanelDropdown.prototype.init = function (settings) {
         this.load();
     } else {
         this.setOptions(defaults.options);
+    }
+
+    if (defaults.disabled) {
+        this.disable();
+    } else {
+        this.enable();
     }
 };
 
@@ -1704,6 +1724,9 @@ FormPanelDropdown.prototype._onLoadDataSuccess = function () {
     var that = this;
     return function (data) {
         var items = that._dataRoot ? data[that._dataRoot] : data;
+        if (that._name == 'field' || that._name == 'relField') {
+            items.unshift({value: null, text: translate('LBL_PMSE_FORM_OPTION_SELECT'), type: null, optionItem: "none", len: 100});
+        }
         that._removeLoadingMessage();
         that.setOptions(items);
     };
@@ -1900,6 +1923,7 @@ FormPanelDropdown.prototype.createHTML = function () {
 //FormPanelRadio
 var FormPanelRadio = function (settings) {
     FormPanelField.call(this, settings);
+    this._disabled = false;
     this._options = [];
     FormPanelRadio.prototype.init.call(this, settings);
 };
@@ -1910,6 +1934,7 @@ FormPanelRadio.prototype.type = "FormPanelRadio";
 
 FormPanelRadio.prototype.init = function(settings) {
     var defaults = {
+        disabled: false,
         options: []
     };
 
@@ -1930,6 +1955,36 @@ FormPanelRadio.prototype._setValueToControl = function (value) {
         }
     }
     return this;
+};
+
+/**
+ * Disables a radio button
+ */
+FormPanelRadio.prototype.disable = function () {
+    for (var i = 0; i < this._htmlControl.length; i++) {
+        var label = jQuery(this._htmlControl[i]);
+        var input = label.find('input').get(0);
+
+        label.addClass('adam-disabled');
+        input.checked = false;
+        input.disabled = true;
+    }
+
+    FormPanelItem.prototype.disable.call(this);
+};
+
+/**
+ * Enables a radio button
+ */
+FormPanelRadio.prototype.enable = function () {
+    for (var i = 0; i < this._htmlControl.length; i++) {
+        var label = jQuery(this._htmlControl[i]);
+        var input = label.find('input').get(0);
+
+        label.removeClass('adam-disabled');
+        input.disabled = false;
+    }
+    FormPanelItem.prototype.enable.call(this);
 };
 
 FormPanelRadio.prototype.setValue = function (value) {
@@ -1954,6 +2009,10 @@ FormPanelRadio.prototype.setOptions = function (options) {
     return this;
 };
 
+FormPanelRadio.prototype.getValue = function () {
+    return this._getValueFromControl();
+};
+
 FormPanelRadio.prototype._getValueFromControl = function() {
     var $items, i, value = "";
 
@@ -1961,7 +2020,7 @@ FormPanelRadio.prototype._getValueFromControl = function() {
         $items = jQuery(this._htmlControl[0]);
 
         for (i = 1; i < this._htmlControl.length; i += 1) {
-            $items.add(this._htmlControl[i]);
+            $items = $items.add(this._htmlControl[i]);
         }
 
         $items = $items.find(":checked");
@@ -1979,12 +2038,16 @@ FormPanelRadio.prototype._createControl = function () {
     if (!this._htmlControl.length) {
         for (i = 0; i < this._options.length; i += 1) {
             label = this.createHTMLElement('label');
+            if (this._disabled) {
+                label.className = 'adam-disabled';
+            }
             option = this.createHTMLElement('input');
             option.type = "radio";
             option.name = this._name;
             option.value = this._options[i].value;
             option.className = "adam formpanel-radio";
             option.checked= !!this._options[i].selected;
+            option.disabled = this._disabled;
             label.appendChild(option);
             label.appendChild(document.createTextNode(this._options[i].label));
             this._htmlControl.push(label);

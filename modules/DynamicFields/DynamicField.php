@@ -424,34 +424,6 @@ class DynamicField {
                 //Change the field to be marked as a db field instead of custom for the scope of this query
                 $fields[$name] = array_merge($field, array('source' => 'db'));
                 $hasCustomFields = true;
-                if (isset($this->bean->$name)) {
-                    if (in_array(
-                        $field['type'],
-                        array(
-                            'int', 'float', 'double', 'uint', 'ulong', 'long', 'short', 'tinyint', 'currency',
-                            'decimal')
-                    )) {
-                        if (!is_numeric($this->bean->$name)) {
-                            if ($field['required']) {
-                                $this->bean->$name = 0;
-                            } else {
-                                $this->bean->$name = null;
-                            }
-                        }
-                    }
-                    if ($field['type'] == 'bool') {
-                        if ($this->bean->$name === false) {
-                            $this->bean->$name = '0';
-                        } elseif ($this->bean->$name === true) {
-                            $this->bean->$name = '1';
-                        }
-                    }
-
-                    if (($field['type'] == 'date' || $field['type'] == 'datetimecombo')
-                        && (empty($this->bean->$name) || $this->bean->$name == '1900-01-01')) {
-                        $this->bean->$name = ''; // do not set it to string 'NULL'
-                    }
-                }
                 $values[$name] = $this->bean->$name;
             }
             if (!$hasCustomFields) {
@@ -544,7 +516,7 @@ class DynamicField {
      * @param TemplateField $field
      * @return boolean
      */
-    public function addFieldObject(&$field)
+    public function addFieldObject($field)
     {
         $GLOBALS['log']->debug('adding field');
         $object_name = $this->module;
@@ -782,13 +754,7 @@ class DynamicField {
                     "required" => 1,
                 )
             );
-            $ididx = array(
-       			'id'=>array(
-       				'name' =>$this->bean->table_name."_cstm_pk",
-       				'type' =>'primary',
-       				'fields'=>array('id_c')
-                ),
-           );
+            $ididx = $this->getIndexDefinitions();
 
             $query = $GLOBALS['db']->createTableSQLParams($this->bean->table_name."_cstm", $iddef, $ididx);
             if(!$GLOBALS['db']->supports("inline_keys")) {
@@ -845,37 +811,79 @@ class DynamicField {
         return $out;
     }
 
-    public function repairCustomFields($execute = true)
+    /**
+     * Builds the SQL statement to deploy custom table of the underlying bean and executes it.
+     *
+     * @param bool $execute Whether the statement should be executed
+     * @return string
+     */
+    public function repairCustomFields(bool $execute = true) : string
     {
-        $out = $this->createCustomTable($execute);
-        //If the table didn't exist, createCustomTable will have returned all the SQL to create and populate it
-        if (!empty($out))
-            return "/*Checking Custom Fields for module : {$this->module} */\n$out";
-        //Otherwise make sure all the custom fields defined in the vardefs exist in the custom table.
-        //We aren't checking for data types, just that the column exists.
-        $db = $GLOBALS['db'];
-        $tablename = $this->bean->table_name."_cstm";
-        $compareFieldDefs = $db->get_columns($tablename);
-        foreach($this->bean->field_defs as $name=>$data){
-            if(empty($data['source']) || $data['source'] != 'custom_fields')
-                continue;
-            /**
-             * @bug 43471
-             * @issue 43471
-             * @itr 23441
-             *
-             * force the name to be lower as it needs to be lower since that is how it's put into the key
-             * in the get_columns() call above.
-             */
-            if(!empty($compareFieldDefs[strtolower($name)])) {
-                continue;
-            }
-            $out .= $this->add_existing_custom_field($data, $execute);
-        }
-        if (!empty($out))
-            $out = "/*Checking Custom Fields for module : {$this->module} */\n$out";
+        global $db;
 
-        return $out;
+        return $db->repairTableParams(
+            $this->bean->get_custom_table_name(),
+            $this->getFieldDefinitions(),
+            $this->getIndexDefinitions(),
+            $execute
+        );
+    }
+
+    /**
+     * Builds the SQL statement to deploy custom table indices of the underlying bean and executes it.
+     *
+     * @param mixed[][] $deployedIndices Deployed index definitions
+     * @param bool $execute Whether the statement should be executed
+     * @return string
+     */
+    public function repairIndices(array $deployedIndices, bool $execute) : string
+    {
+        global $db;
+
+        return $db->alterTableIndices(
+            $this->bean->get_custom_table_name(),
+            $this->getFieldDefinitions(),
+            $this->getIndexDefinitions(),
+            $deployedIndices,
+            $execute
+        );
+    }
+
+    /**
+     * Returns custom field definitions without the "source" attribute for compliance with
+     * the way how the rest of DB management logic is historically implemeneted.
+     *
+     * @return mixed[][]
+     */
+    private function getFieldDefinitions() : array
+    {
+        return array_merge([
+            'id_c' => [
+                'name' => 'id_c',
+                'type' => 'id',
+                'required' => true,
+            ],
+        ], array_map(function (array $definition) : array {
+            unset($definition['source']);
+
+            return $definition;
+        }, $this->bean->getFieldDefinitions('source', ['custom_fields'])));
+    }
+
+    /**
+     * Returns custom table index definitions.
+     *
+     * @return mixed[][]
+     */
+    private function getIndexDefinitions() : array
+    {
+        return [
+            [
+                'name' => $this->bean->get_custom_table_name() . '_pk',
+                'type' => 'primary',
+                'fields' => ['id_c'],
+            ],
+        ];
     }
 
     /**

@@ -22,7 +22,7 @@ spec:
       containers:
       - name: saml-server
         image: registry.sugarcrm.net/identity-provider/samlserver-test:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - name: saml-server
           containerPort: 80

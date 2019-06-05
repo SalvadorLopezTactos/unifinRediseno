@@ -59,6 +59,10 @@ $viewdefs['Accounts']['EditView'] = array(
         ),
 
         array (
+          'service_level',
+        ),
+
+        array (
 
           array (
             'name' => 'billing_address_street',

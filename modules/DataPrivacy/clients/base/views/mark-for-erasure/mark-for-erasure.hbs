@@ -42,7 +42,7 @@
                             </td>
                         {{/each}}
                         {{#each fields}}
-                            <td{{#if align}} class="{{align}}"{{/if}}>
+                            <td{{#if align}} class="{{align}}"{{/if}} data-column="{{name}}">
                                 {{field ../../../../this model=../this template=../../../../this.action}}
                             </td>
                         {{/each}}

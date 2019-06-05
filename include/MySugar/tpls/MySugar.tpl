@@ -109,13 +109,6 @@ mySugarLoader.addModule({
 	varName: "initMySugar",
 	requires: []
 });
-mySugarLoader.addModule({
-	name :"sugar_charts",
-	type : "js",
-	fullpath: {/literal}"{sugar_getjspath file="include/SugarCharts/Jit/js/mySugarCharts.js"}"{literal},
-	varName: "initmySugarCharts",
-	requires: []
-});
 mySugarLoader.insert();
 var app = window.parent.SUGAR.App;
 app.user.lastState.set('Home:last-visit:Home.', '#bwc/index.php?module=Home&action=bwc_dashboard');

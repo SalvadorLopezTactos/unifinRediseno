@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45 +0000 (Tue, 22 Aug 2006) wayne $
 
 
 $dashletStrings['PipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'Pipeline nach Verkaufsphasen',

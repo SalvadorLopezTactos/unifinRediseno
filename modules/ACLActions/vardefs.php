@@ -129,6 +129,11 @@ $dictionary['ACLAction'] = array(
     array('name' =>'idx_aclaction_id_del', 'type' =>'index', 'fields'=>array('id', 'deleted')),
     array('name' =>'idx_category_name', 'type' =>'index', 'fields'=>array('category', 'name')),
     array(
+        'name' =>'idx_del_category_name',
+        'type' =>'index',
+        'fields'=>array('deleted', 'category', 'name'),
+    ),
+    array(
         'name' =>'idx_del_category_name_acltype_aclaccess',
         'type' =>'index',
         'fields'=>array('deleted', 'category', 'name', 'acltype', 'aclaccess'),

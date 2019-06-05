@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Spausti registracija',
 	'LBL_PUSH_SHIPPING' => 'Spausti veikla',
 	'LBL_SAVE_ACCOUNT' => 'Saugoti klientą',
+    'LBL_SERVICE_LEVEL' => 'Aptarnavimo lygis',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Veiklos adreso miestas:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Veiklos adreso šalis:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Veiklos adreso pašto kodas:',

@@ -313,6 +313,7 @@ $vardefs = array(
         'following',
         'favorite',
         'taggable',
+        'commentlog',
         'lockable_fields',
     ),
     'duplicate_check' => array(

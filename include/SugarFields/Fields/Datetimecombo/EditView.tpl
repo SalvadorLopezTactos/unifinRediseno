@@ -70,9 +70,9 @@ eval(combo_{{$idname}}.jsscript('{{$displayParams.updateCallback}}'));
 //bug 47718: this causes too many addToValidates to be called, resulting in the error messages being displayed multiple times
 //    removing it here to mirror the Datetime SugarField, where the validation is not added at this level
 //addToValidate('{$form_name}',"{{$idname}}_date",'date',false,"{{$idname}}");
-addToValidateBinaryDependency('{$form_name}',"{{$idname}}_hours", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_HOURS}" ,"{{$idname}}_date");
-addToValidateBinaryDependency('{$form_name}', "{{$idname}}_minutes", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MINUTES}" ,"{{$idname}}_date");
-addToValidateBinaryDependency('{$form_name}', "{{$idname}}_meridiem", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MERIDIEM}","{{$idname}}_date");
+addToValidateBinaryDependency('{$form_name}', "{{$idname}}_hours", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|strip} {$APP.LBL_HOURS|strip}", "{{$idname}}_date");
+addToValidateBinaryDependency('{$form_name}', "{{$idname}}_minutes", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|strip} {$APP.LBL_MINUTES|strip}", "{{$idname}}_date");
+addToValidateBinaryDependency('{$form_name}', "{{$idname}}_meridiem", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS|strip} {$APP.LBL_MERIDIEM|strip}", "{{$idname}}_date");
 
 YAHOO.util.Event.onDOMReady(function()
 {ldelim}

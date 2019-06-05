@@ -1223,7 +1223,17 @@ SUGAR.reports = function() {
 				document.getElementById('wizard_outline_div').innerHTML = currentOutline.replace(oldCurrLink,currLink);				
 			SUGAR.reports.populateFieldGrid(current_module,"","");
 		},
+        getLineIndex: function(options) {
+            for (var i = 0; i < options.length; i++) {
+                if (options.item(i).value == 'lineF') {
+                    return i;
+                }
+            }
+            return -1;
+        },
 		showWizardStepChartOptions: function() {
+            var options;
+            var lineIndex;
 			document.getElementById("report_type_div").style.display="none";
 			document.getElementById("module_select_div").style.display="none";
 			document.getElementById("filters_div").style.display="none";
@@ -1238,14 +1248,17 @@ SUGAR.reports = function() {
 
 			currEditorDiv="chart_options";
 
+            options = document.getElementById('chart_type').options;
+            lineIndex = this.getLineIndex(options);
+            if (group_defs.length == 1 && lineIndex != -1) {
+                // one group by, remove line type if it's there
+                chartTypesHolder.push(options.item(lineIndex));
+                options.remove(lineIndex);
+            } else if (group_defs.length > 1 && lineIndex == -1) {
+                // 2+ group bys, add line type if it's not already there
+                options.add(chartTypesHolder.pop());
+            }
 
-			if(group_defs.length == 1 && document.getElementById('chart_type').options.length > 5) {
-				chartTypesHolder.push(document.getElementById('chart_type').options[5]);
-				document.getElementById('chart_type').options.length = 5;
-			}
-			else if (group_defs.length > 1 && document.getElementById('chart_type').options.length < 6) {
-				document.getElementById('chart_type').options[5] = chartTypesHolder.pop();		
-			}
 			if (report_type == 'summation' && currWizardStep < 6) {
 				var reportTypeLabel = SUGAR.language.get('Reports','LBL_SUMMATION_REPORT');
 				if (isMatrix)
@@ -3820,6 +3833,8 @@ SUGAR.reports = function() {
 			var oACDS = myDataSource;
 	        oACDS.queryMatchContains = true; 
 	        var oAutoComp = new YAHOO.widget.AutoComplete("dt_input","dt_ac_container", oACDS);
+            // default is 10
+            oAutoComp.maxResultsDisplayed = 100;
 	        oAutoComp.doBeforeLoadData = function( sQuery , oResponse , oPayload ) {
 	        	SUGAR.reports.myDataTable.initializeTable();
 	        	SUGAR.reports.myDataTable.addRows(oResponse.results);

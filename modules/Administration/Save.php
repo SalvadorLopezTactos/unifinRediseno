@@ -16,7 +16,7 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $current_user;
 
@@ -52,7 +52,8 @@ if(isset($_POST['license_key'])){
 	
 	loadLicense(true);
 	check_now(get_sugarbeat());
-	
+    $licenseKey = InputValidation::getService()->getValidInputPost('license_key');
+    $focus->saveSetting('site', 'id', getSiteHash($licenseKey));
 }
 
 

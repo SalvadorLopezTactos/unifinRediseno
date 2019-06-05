@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: LayoutManager.php 56115 2010-04-26 17:08:09Z kjing $
 
 
 

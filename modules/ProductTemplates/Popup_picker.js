@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Popup_picker.js 16301 2006-08-22 22:16:59Z awu $
 function set_return(treeid) {
     var node = YAHOO.namespace(treeid).selectednode;
     var nm = jQuery('#popup_query_form #name_advanced');

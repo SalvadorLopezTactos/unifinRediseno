@@ -109,7 +109,9 @@ if (!empty($config['is_setup']) && !empty($config['timeperiod_start_date'])) {
 $chart_types = array(
 	'none'=>$mod_strings['LBL_NO_CHART'],
 	'hBarF'=>$mod_strings['LBL_HORIZ_BAR'],
+    'hGBarF'=>$mod_strings['LBL_HORIZ_GBAR'],
 	'vBarF'=>$mod_strings['LBL_VERT_BAR'],
+    'vGBarF'=>$mod_strings['LBL_VERT_GBAR'],
 	'pieF'=>$mod_strings['LBL_PIE'],
 	'funnelF'=>$mod_strings['LBL_FUNNEL'],
 	'lineF'=>$mod_strings['LBL_LINE'],

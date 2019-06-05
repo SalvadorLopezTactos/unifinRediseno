@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: default.php 13782 2006-06-06 17:58:55 +0000 (Tue, 06 Jun 2006) majed $
 $subpanel_layout = array(
 	'top_buttons' => array(
 				array('widget_class' => 'SubPanelTopSelectButton', 'title' => 'LBL_SELECT_USER_RESOURCE', 'popup_module' => 'Users', ),

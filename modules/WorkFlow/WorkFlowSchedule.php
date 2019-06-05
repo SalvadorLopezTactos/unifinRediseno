@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Doctrine\DBAL\Connection;
+
 require_once('include/workflow/workflow_utils.php');
 require_once('include/workflow/action_utils.php');
 
@@ -270,14 +273,14 @@ class WorkFlowSchedule extends SugarBean {
         $this->remove_expired($removeExpired);
     }
 
-    function remove_expired($ids) {
-        $removeQuery = "DELETE FROM $this->table_name
-                        WHERE $this->table_name.id IN ('" . implode("', '", $ids) . "')";
-
-        $this->db->query(
-            $removeQuery,
-            true,
-            " Error remove expired process: "
-        );
+    public function remove_expired($ids)
+    {
+        $this->db->getConnection()
+            ->executeUpdate(
+                "DELETE FROM {$this->table_name}
+                WHERE {$this->table_name}.id IN (?)",
+                [$ids],
+                [Connection::PARAM_STR_ARRAY]
+            );
     }
 }

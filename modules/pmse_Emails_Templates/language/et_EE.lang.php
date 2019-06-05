@@ -48,4 +48,5 @@ $mod_strings = array (
     'LBL_SUGAR_LINK_SELECTOR' => 'Kirje lingi valija',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Seotud eesmärgi mooduliga',
     'LBL_SELECT_BUTTON_LABEL' => 'Vali',
+    'LBL_FIELD_SELECTOR_DROPDOWN' => 'Välja väärtuse tüüp',
 );

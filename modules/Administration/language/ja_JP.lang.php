@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'グループ属性:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => '以下のユーザDNで:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'グループのメンバーシップを確認するにはユーザDNとユーザ属性を含めてください',
-	'LBL_LDAP_USER_FILTER_DESC'=>'ユーザを認証する際の絞り込みのための追加パラメタ 例\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'ユーザを認証する際の絞り込みのための追加パラメタ 例\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'ログイン属性:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'バインド属性:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAPユーザのバインド用<br>例: <b>AD:</b> userPrincipalName <b>openLDAP:</b> userPrincipalName <b>Mac OS X:</b> uid',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'警告: データをセキュアな状態に保持するためインストーラをロックする必要があります。(config.phpでinstaller_lockedをtrueに設定)',
  	'WARN_LICENSE_EXPIRED'=> "注: ライセンスは",
     'WARN_LICENSE_EXPIRED2' =>"日後に期限切れとなります。管理画面の<a href=\"index.php?action=LicenseSettings&module=Administration\">ライセンス管理</a>で設定してください。",
-    'WARN_LICENSE_SEATS'=>  "警告:アクティブユーザがライセンスの上限より",
-    'WARN_LICENSE_SEATS2' => "販売代理店にお問い合わせいただくか、sales@sugarcrm.com宛にEメールで御連絡ください",
+    'WARN_LICENSE_SEATS'=>  "<b>警告：</b> 次が存在します： ",
+    'WARN_LICENSE_SEATS2' => "お使いのサブスクリプションで次のみが許可される際のアクティブユーザー",
+    'WARN_LICENSE_SEATS3' =>
+        "。<p class=\"error\">一部のユーザーを非アクティベートするか、パートナーあるいは営業担当者に連絡するか、"
+        . " <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>にメールをお送りください。</p>"
+        . "<p class=\"error\">詳細についてはこちらをご覧ください："
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "ユーザータイプとSugarのライセンスを理解する</a> の記事。</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告:アクティブユーザがライセンスの上限に達しました。",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "警告: アクティブユーザの数が最大ユーザ数に達しています。",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"警告: ライセンスで許可されているユーザ数とアクティブユーザ数が同じです。これ以上のユーザを作成することはできません。",
-    'WARN_REPAIR_CONFIG' => '警告: config.phpを修復する必要があります。<a href="index.php?module=Administration&action=RebuildConfig">Configファイルの修復</a>を用いてconfigファイルを修復してください。',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：</b>これ以上アクティブユーザーを作成することができません。"
+        . "サブスクリプションをさらにご購入ください。",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：</b>これ以上アクティブユーザーを作成することができません。"
+        . "サブスクリプションをさらにご購入ください。",
+    'WARN_REPAIR_CONFIG' => '<b>警告:</b> config.php ファイルを修復する必要があります。 config ファイルを修復するには、管理領域の修理ページにある <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;></a> スクリプトを使用してください。',
     'WARN_UPGRADE_APP'=> "アプリケーションの新バージョンがリリースされました。",
     'WARN_UPGRADE' => '警告: <a href="index.php?module=Administration&action=Upgrade">管理パネル</a>でアップグレードをしてください。',
     'WARN_UPGRADENOTE' => 'メモ:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'vardefsデータキャッシュのクリア',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'キャッシュされたvardefsを削除します。',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'統合検索キャッシュのクリア',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'キャッシュされたunified_search_modules.phpを削除します。',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'キャッシュから unified_search_modules.php を削除します',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'クイックリペア＆再構築',
     'LBL_QUICK_REPAIR_TITLE'=>'再構築するモジュールを選択してください(複数可):',
 	'LBL_FAILED_CONNECTION'=> '接続できませんでした。',
@@ -1245,15 +1254,17 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'メタデータ ファイルが見つかりませんでした。',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => '設定',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Advanced Workflowの設定を構成します。',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'ログビューワー',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Advanced Workflowログにアクセスします。',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'アクセス',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' ログ。',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'プロセス管理',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => '開始済みおよび現在実行中の全プロセスを閲覧',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => '構成 ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' 設定とログの閲覧。プロセス管理にて全ユーザの全BPMプロセスを管理します。',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Advanced Workflow設定とログの閲覧を行います。また、プロセス管理にて全ユーザの全BPMプロセスを管理します。',
-
+    'LBL_MANAGE_QUOTES_TITLE' => '見積設定',
+    'LBL_MANAGE_QUOTES' => '見積ワークシートのレイアウトを設定します',
 );

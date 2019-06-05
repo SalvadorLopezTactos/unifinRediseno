@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: listviewdefs.php 16278 2006-08-22 19:09:18Z awu $
 
 $module_name = '<module_name>';
 $OBJECT_NAME = '<OBJECT_NAME>';

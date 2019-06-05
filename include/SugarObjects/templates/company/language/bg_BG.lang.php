@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Push Billing',
 	'LBL_PUSH_SHIPPING' => 'Push Shipping',
 	'LBL_SAVE_ACCOUNT' => 'Запазване на организация',
+    'LBL_SERVICE_LEVEL' => 'Ниво на обслужване',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Адрес за кореспонденция: град:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Адрес за кореспонденция: държава:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Адрес за кореспонденция: пощенски код:',

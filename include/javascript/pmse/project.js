@@ -72,6 +72,16 @@ var AdamProject = function (settings) {
      * @type {Number}
      */
     this.saveInterval = 30000;
+    /**
+     * Stores the id of the autosave timer
+     * @type {Object}
+     */
+    this.autosaveTimer = null;
+    /**
+     * Stores whether this project is currently being validated
+     * @type {Object}
+     */
+    this.isBeingValidated = false;
     this.showWarning = false;
     /**
      * Object Structure to save elements without save
@@ -231,7 +241,6 @@ AdamProject.prototype.load = function (id, callback) {
                 callback.success.call(this, data);
             }
             if (canvas){
-                canvas.bpmnValidation();
                 //jQuery(".pane.ui-layout-center").append(countErrors);
             }
         },
@@ -257,9 +266,14 @@ AdamProject.prototype.init = function () {
                 return true;
             }
         };
-        setInterval(function () {
-            self.save();
-        }, this.saveInterval);
+        if (this.saveInterval && typeof this.saveInterval === 'number') {
+            this.autosaveTimer = setInterval(function() {
+                self.save();
+                if (App.config.autoValidateProcessesOnAutosave && !this.isBeingValidated) {
+                    traverseProcess(true);
+                }
+            }, Math.max(this.saveInterval, 30000));
+        }
         this.propertiesGrid = new PropertiesGrid('#properties-grid');
         this.canvas.commandStack.setHandler(AdamProject.prototype.updateUndoRedo);
     }
@@ -1829,6 +1843,7 @@ AdamProject.prototype.getMetadata = function (metadataName) {
 
 AdamProject.prototype.dispose = function () {
     // TODO: dispose the project completely
+    clearInterval(this.autosaveTimer);
     jQuery('body > .adam-modal').remove();
     jCore.dispose();
-}
+};

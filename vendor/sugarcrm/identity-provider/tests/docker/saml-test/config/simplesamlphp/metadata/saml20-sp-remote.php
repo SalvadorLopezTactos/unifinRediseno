@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -174,5 +174,25 @@ $metadata[$name] = [
     'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
     'userid.attribute' => 'email',
     'sign.logout' => true,
+    'certData' => $idpX509Certificate,
+];
+
+/**
+ * The same as samlSameWindowRedirect
+ */
+$name = 'loginUsingOnlyLoginService';
+$metadata[$name] = [
+    'AssertionConsumerService' => $endpoints[$name]['acs'],
+    'SingleLogoutService' => [
+        [
+            'isDefault' => true,
+            'Location' => $endpoints[$name]['slo'],
+            'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
+        ],
+    ],
+    'attributes.NameFormat' => 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+    'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+    'userid.attribute' => 'email',
+    'sign.logout' => false,
     'certData' => $idpX509Certificate,
 ];

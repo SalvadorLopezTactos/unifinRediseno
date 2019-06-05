@@ -72,8 +72,7 @@ class AbstractRelationships
         $browser->loadRelatableModules();
         reset($browser->modules) ;
 
-        while ( list( $moduleName , $module ) = each($browser->modules) )
-        {
+        foreach ($browser->modules as $module) {
             // do not include the submodules of Activities as already have the parent...
             if (! $includeActivitiesSubmodules && in_array ( $module->module, self::$activities ))
                 continue ;
@@ -469,7 +468,7 @@ class AbstractRelationships
         mkdir_recursive ( "$basepath/relationships" ) ;
 
         $installDefs = array ( ) ;
-        list ( $rhs_module, $properties ) = each ( $relationshipMetaData ) ;
+        $properties = current($relationshipMetaData);
         $filename = "$basepath/relationships/{$relationshipName}MetaData.php" ;
         $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveRelationshipMetaData(): saving the following to {$filename}" . print_r ( $properties, true ) ) ;
         write_array_to_file ( 'dictionary["' . $relationshipName . '"]', $properties, "{$filename}", 'w' ) ;

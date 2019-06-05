@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Vis downloadsfane',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Når det er valgt, vil downloadfanen vises i brugerindstillinger, og give brugerne adgang til Sugar plug-ins og andre tilgængelige filer',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Til SOAP-godkendelse, når du bruger LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Udvidelsen php_mcrypt skal være aktiveret i filen php.ini.',
     'LBL_ALL' => 'Alle',
     'LBL_MARK_POINT' => 'Markér point',
     'LBL_NEXT_' => 'Næste>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktiver yderligere indhold på login-skærm',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Gem procesdefinitioner automatisk',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Bestemmer hvor ofte procesdefinitioner gemmes automatisk ved brug af designeren',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Bekræft automatisk procesdefinitioner ved automatisk gem',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Skifter mellem om procesdefinitioner bekræftes automatisk, når de gemmes automatisk. Dette vil kun træde i kraft, hvis "Gem automatisk procesdefinitioner" er indstillet til et tidsinterval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Godkend automatisk procesdefinitioner ved import',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Skifter mellem om procesdefinitioner er automatisk godkendt når først importeret',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Kommentar log-indstillinger',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimum antal tegn at vise pr kommentar',
 );
 
 

@@ -24,6 +24,9 @@ $ yarn
 ## Committing Changes
 If you wish to submit changes to Sidecar, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Sidecar PR merging process
+See [Merging-and-Updating.md](Merging-and-Updating.md).
+
 [backbone]: http://backbonejs.org/
 [nodejs]: http://nodejs.org
 [yarn]: https://yarnpkg.com/en/

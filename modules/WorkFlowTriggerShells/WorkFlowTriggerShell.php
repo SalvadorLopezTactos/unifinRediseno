@@ -381,21 +381,18 @@ class WorkFlowTriggerShell extends SugarBean {
 	
 	
 	function get_time_int($triggershell_id){	
-		
-		$query = "	SELECT ext1, exp_type, operator, lhs_field
-					FROM expressions
-					WHERE expressions.parent_id = '".$triggershell_id."'
-					AND expressions.deleted=0";
-		$result = $this->db->query($query,true," Error grabbing time interval from expression object: ");
 
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
+        $row = $this->db
+            ->getConnection()
+            ->executeQuery(
+                'SELECT ext1, exp_type, operator, lhs_field
+                FROM expressions
+                WHERE expressions.parent_id = ?
+                AND expressions.deleted=0',
+                [$triggershell_id]
+            )->fetch();
 
-		if($row != null)
-		{
-			
-			
-			
+        if ($row !== false) {
 			//datetime time_int;
 			if($row['exp_type']=="datetime" || $row['exp_type']=="date" || $row['exp_type']=="datetimecombo"){
 				$time_int_array['time_int_type'] = "datetime";

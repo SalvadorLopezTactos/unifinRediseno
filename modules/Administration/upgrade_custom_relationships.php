@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Searches through the installed relationships to find broken self referencing one-to-many relationships 
  * (wrong field used in the subpanel, and the left link not marked as left)
@@ -44,7 +46,7 @@ function upgrade_custom_relationships($modules = array())
 					{
 						$dictionary = array($module => array("fields" => array()));
 						$filePath = "custom/Extension/modules/$module/Ext/Vardefs/$file";
-						include($filePath);
+                        include FileLoader::validateFilePath($filePath);
 						if(isset($dictionary[$module]["fields"][$relName]))
 						{
 							$rhsDef = $dictionary[$module]["fields"][$relName];
@@ -71,7 +73,7 @@ function upgrade_custom_relationships($modules = array())
 					{
 						$layout_defs = array($module => array("subpanel_setup" => array()));
 						$filePath = "custom/Extension/modules/$module/Ext/Layoutdefs/$file";
-						include($filePath);
+                        include FileLoader::validateFilePath($filePath);
 
 						$bean = BeanFactory::newBean($module);
 						$fields = $bean->getFieldDefinitions();

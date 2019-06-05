@@ -262,7 +262,9 @@
                 .on('keypress', $.proxy(this.keypress, this))
                 .on('keyup',    $.proxy(this.keyup, this));
 
-            if ($.browser.webkit || $.browser.msie) {
+            if (_.some([/chrome/, /safari/, /opera\//, /webkit/, /msie/], function(rx) {
+                return rx.test(navigator.userAgent.toLowerCase());
+            })) {
                 this.$element.on('keydown', $.proxy(this.keypress, this));
             }
             // This is an optional search button that may reside next to the

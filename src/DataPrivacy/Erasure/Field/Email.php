@@ -48,26 +48,38 @@ final class Email implements Field
     }
 
     /**
+     * Erase email from bean, also need to erase the email from all beans which have this email.
+     * In order to avoid recursive erasure, we need to break the logic into 2 stages:
+     * 1. remove this email from all related beans
+     * 2. erase this email from other related beans
+     *
      * {@inheritDoc}
      */
     public function erase(SugarBean $bean) : void
     {
         $emailBean = \BeanFactory::getBean('EmailAddresses', $this->id);
 
-        // handle all related beans contains this email
+        // get all related beans containing this email address
         $relatedBeans = $this->getAllRelatedBeans($emailBean);
 
+        $beansToEraseEmail = [];
         if (!empty($relatedBeans)) {
+            // remove the email for related beans first
             foreach ($relatedBeans as $relBean) {
                 if (!empty($relBean->emailAddress)) {
                     $relBean->emailAddress->removeAddressById($this->id);
                     $relBean->emailAddress->removeLegacyAddressForBean($relBean, $emailBean->email_address);
                     $relBean->emailAddress->save($relBean->id, $relBean->module_dir);
-                    // this $bean will be saved late
-                    if ($relBean->id != $bean->id) {
-                        $relBean->save();
+                    // only select other related beans, not this $bean
+                    if ($relBean->id != $bean->id || $bean->getModuleName() != $relBean->getModuleName()) {
+                        $beansToEraseEmail[] = $relBean;
                     }
                 }
+            }
+
+            // erase email from other related beans
+            foreach ($beansToEraseEmail as $relBean) {
+                $relBean->erase(new FieldList($this), false);
             }
         }
 

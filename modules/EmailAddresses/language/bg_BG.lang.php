@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Изтриване',
     'LBL_MODULE_NAME' => 'Адреси на електронна поща',
     'LBL_MODULE_NAME_SINGULAR' => 'Електронна поща',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Предприето действие по заявка за потвърждение',
+    'LBL_CONFIRMATION_TITLE' => 'Благодаря',
+    'LBL_CONFIRMATION_MESSAGE' => 'Вашият абонамент е потвърден. Бяхте добавени към нашия списък и скоро ще получите съобщение от нас.',
 );

@@ -13,6 +13,7 @@
 namespace Sugarcrm\IdentityProvider\App\Authentication;
 
 use Sugarcrm\IdentityProvider\App\Application;
+use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
 use Sugarcrm\IdentityProvider\Authentication\Provider\LdapAuthenticationProvider;
 use Sugarcrm\IdentityProvider\Authentication\Provider\SAMLAuthenticationProvider;
 use Sugarcrm\IdentityProvider\Authentication\User;
@@ -22,15 +23,17 @@ use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\SAMLUserProvider;
 use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
 use Sugarcrm\IdentityProvider\Authentication\User\LDAPUserChecker;
+use Sugarcrm\IdentityProvider\Authentication\User\LocalUserChecker;
 use Sugarcrm\IdentityProvider\Authentication\User\SAMLUserChecker;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\IdentityProvider\Srn\Srn;
+use Sugarcrm\IdentityProvider\App\Authentication\Lockout;
+
 use Symfony\Component\Ldap\Adapter\ExtLdap\Adapter;
 use Symfony\Component\Ldap\Ldap;
 use Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager;
 use Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
-use Symfony\Component\Security\Core\User\UserChecker;
 
 class AuthProviderManagerBuilder
 {
@@ -54,7 +57,7 @@ class AuthProviderManagerBuilder
      */
     public function buildAuthProviderManager(Application $app)
     {
-        $this->tenant = Converter::fromString($app->getSession()->get('tenant'));
+        $this->tenant = Converter::fromString($app->getSession()->get(TenantConfigInitializer::SESSION_KEY));
 
         // todo this is an example. need update manager to make it more flexible ane configurable
         $providers = [
@@ -77,25 +80,17 @@ class AuthProviderManagerBuilder
      * @param Application $app Silex application instance.
      * @return DaoAuthenticationProvider
      */
-    protected function getLocalAuthProvider(Application $app)
+    protected function getLocalAuthProvider(Application $app): DaoAuthenticationProvider
     {
         $userProvider = new LocalUserProvider($app->getDoctrineService(), $this->tenant->getTenantId());
-
-        // standard library  user checker
-        $userChecker = new UserChecker();
-
-        $encoderBuilder = new EncoderBuilder();
-
-        $encoderFactory = new EncoderFactory([
-            User::class => $encoderBuilder->buildEncoder($app['config']),
-        ]);
+        $userChecker = new LocalUserChecker(new Lockout($app));
 
         // local auth provider
         $authProvider = new DaoAuthenticationProvider(
             $userProvider,
             $userChecker,
             self::PROVIDER_KEY_LOCAL,
-            $encoderFactory
+            $app->getEncoderFactory()
         );
 
         return $authProvider;

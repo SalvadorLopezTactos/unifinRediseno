@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ovo je sistemski nalog.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID e-adrese',
     'LBL_TYPE' => 'Tip',
+    'LBL_REPLY_TO_NAME' => 'Ime primaoca',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Email adrese primaoca',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID email adrese primaoca',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Email adresa primaoca',
+    'LBL_PRIMARY_TEAM' => 'Osnovni tim',
 );

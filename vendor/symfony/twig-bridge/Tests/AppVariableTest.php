@@ -32,10 +32,10 @@ class AppVariableTest extends TestCase
 
     public function debugDataProvider()
     {
-        return array(
-            'debug on' => array(true),
-            'debug off' => array(false),
-        );
+        return [
+            'debug on' => [true],
+            'debug off' => [false],
+        ];
     }
 
     public function testEnvironment()
@@ -50,8 +50,9 @@ class AppVariableTest extends TestCase
      */
     public function testGetSession()
     {
+        $session = $this->getMockBuilder(Session::class)->disableOriginalConstructor()->getMock();
         $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
-        $request->method('getSession')->willReturn($session = new Session());
+        $request->method('getSession')->willReturn($session);
 
         $this->setRequestStack($request);
 
@@ -165,7 +166,7 @@ class AppVariableTest extends TestCase
     {
         $this->setRequestStack(null);
 
-        $this->assertEquals(array(), $this->appVariable->getFlashes());
+        $this->assertEquals([], $this->appVariable->getFlashes());
     }
 
     /**
@@ -173,12 +174,8 @@ class AppVariableTest extends TestCase
      */
     public function testGetFlashesWithNoSessionStarted()
     {
-        $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
-        $request->method('getSession')->willReturn(new Session());
-
-        $this->setRequestStack($request);
-
-        $this->assertEquals(array(), $this->appVariable->getFlashes());
+        $flashMessages = $this->setFlashMessages(false);
+        $this->assertEquals($flashMessages, $this->appVariable->getFlashes());
     }
 
     /**
@@ -193,15 +190,15 @@ class AppVariableTest extends TestCase
         $this->assertEquals($flashMessages, $this->appVariable->getFlashes(''));
 
         $flashMessages = $this->setFlashMessages();
-        $this->assertEquals($flashMessages, $this->appVariable->getFlashes(array()));
+        $this->assertEquals($flashMessages, $this->appVariable->getFlashes([]));
 
         $flashMessages = $this->setFlashMessages();
-        $this->assertEquals(array(), $this->appVariable->getFlashes('this-does-not-exist'));
+        $this->assertEquals([], $this->appVariable->getFlashes('this-does-not-exist'));
 
         $flashMessages = $this->setFlashMessages();
         $this->assertEquals(
-            array('this-does-not-exist' => array()),
-            $this->appVariable->getFlashes(array('this-does-not-exist'))
+            ['this-does-not-exist' => []],
+            $this->appVariable->getFlashes(['this-does-not-exist'])
         );
 
         $flashMessages = $this->setFlashMessages();
@@ -209,31 +206,31 @@ class AppVariableTest extends TestCase
 
         $flashMessages = $this->setFlashMessages();
         $this->assertEquals(
-            array('notice' => $flashMessages['notice']),
-            $this->appVariable->getFlashes(array('notice'))
+            ['notice' => $flashMessages['notice']],
+            $this->appVariable->getFlashes(['notice'])
         );
 
         $flashMessages = $this->setFlashMessages();
         $this->assertEquals(
-            array('notice' => $flashMessages['notice'], 'this-does-not-exist' => array()),
-            $this->appVariable->getFlashes(array('notice', 'this-does-not-exist'))
+            ['notice' => $flashMessages['notice'], 'this-does-not-exist' => []],
+            $this->appVariable->getFlashes(['notice', 'this-does-not-exist'])
         );
 
         $flashMessages = $this->setFlashMessages();
         $this->assertEquals(
-            array('notice' => $flashMessages['notice'], 'error' => $flashMessages['error']),
-            $this->appVariable->getFlashes(array('notice', 'error'))
+            ['notice' => $flashMessages['notice'], 'error' => $flashMessages['error']],
+            $this->appVariable->getFlashes(['notice', 'error'])
         );
 
         $this->assertEquals(
-            array('warning' => $flashMessages['warning']),
-            $this->appVariable->getFlashes(array('warning')),
+            ['warning' => $flashMessages['warning']],
+            $this->appVariable->getFlashes(['warning']),
             'After getting some flash types (e.g. "notice" and "error"), the rest of flash messages must remain (e.g. "warning").'
         );
 
         $this->assertEquals(
-            array('this-does-not-exist' => array()),
-            $this->appVariable->getFlashes(array('this-does-not-exist'))
+            ['this-does-not-exist' => []],
+            $this->appVariable->getFlashes(['this-does-not-exist'])
         );
     }
 
@@ -256,18 +253,18 @@ class AppVariableTest extends TestCase
         $token->method('getUser')->willReturn($user);
     }
 
-    private function setFlashMessages()
+    private function setFlashMessages($sessionHasStarted = true)
     {
-        $flashMessages = array(
-            'notice' => array('Notice #1 message'),
-            'warning' => array('Warning #1 message'),
-            'error' => array('Error #1 message', 'Error #2 message'),
-        );
+        $flashMessages = [
+            'notice' => ['Notice #1 message'],
+            'warning' => ['Warning #1 message'],
+            'error' => ['Error #1 message', 'Error #2 message'],
+        ];
         $flashBag = new FlashBag();
         $flashBag->initialize($flashMessages);
 
-        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->getMock();
-        $session->method('isStarted')->willReturn(true);
+        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->disableOriginalConstructor()->getMock();
+        $session->method('isStarted')->willReturn($sessionHasStarted);
         $session->method('getFlashBag')->willReturn($flashBag);
 
         $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();

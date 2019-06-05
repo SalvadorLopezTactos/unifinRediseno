@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'תכונת קבוצה:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'עם DN משתמש:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'כלול את ה-DN משתמש עם ערכי המשתמש בעת בדיקת חברות בקבוצה',
-	'LBL_LDAP_USER_FILTER_DESC'=>'כל פרמטר סינון נוסף ליישום כאשר מאמתים משתמשים כגון \\nis_sugar_user=1 או (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'כל פרמטר סינון נוסף ליישום כאשר מאמתים משתמשים כגון \nis_sugar_user=1 או (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'תכונת התחברות:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'תכונת התקשרות:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For Binding the LDAP User<br>Examples:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Warning: To safeguard your data, the installer must be locked by setting &#39;installer_locked&#39; to &#39;true&#39; in the config.php file.',
  	'WARN_LICENSE_EXPIRED'=> "Notice: Your license expires in",
     'WARN_LICENSE_EXPIRED2' =>"day(s). Please go to the <a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>&#39;\"License Management\"</a>  in the Admin screen.",
-    'WARN_LICENSE_SEATS'=>  "Warning: User licenses exceeded by",
-    'WARN_LICENSE_SEATS2' => ".  Please contact your sales representative or email <a href=&#39;mailto:cagroup@sugarcrm.com&#39;>cagroup@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>אזהרה:</b> יש ",
+    'WARN_LICENSE_SEATS2' => " משתמשים פעילים כאשר המנוי שלך מאפשר רק עבור ",
+    'WARN_LICENSE_SEATS3' =>
+        "<p class=\"error\">עליך לבטל משתמשים מסוימים, פנה אל השותף או נציג המכירות שלך,"
+        . " או שלח דוא\"ל אל <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">לקבלת מידע נוסף, ראה "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "</a>מאמר</p> על הבנת סוגי המשתמשים ורישיונות Sugar.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Warning: The number of active users is already the maximum number of licenses allowed:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Warning: The number of active users is already the maximum number of licenses allowed",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Warning: The number of active users allowed by your license matches the number of active users in the system. You will not be able to create additional active users.",
-    'WARN_REPAIR_CONFIG' => 'Warning: The config.php file needs to be repaired.  Please use the <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> script in the Repair page in the Admin area to repair the config file.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>אזהרה:</b> לא תוכל ליצור משתמשים פעילים נוספים."
+        . " עליך לרכוש מנויים נוספים.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>אזהרה:</b> לא תוכל ליצור משתמשים פעילים נוספים."
+        . " עליך לרכוש מנויים נוספים.",
+    'WARN_REPAIR_CONFIG' => '<b>אזהרה:</b> הקובץ config.php מחייב תיקון. השתמש בסקריפט <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>בנה מחדש קובץ Config</a> בעמוד &#39;תקן&#39; שבאזור הניהול כדי לתקן את קובץ ה-Config.',
     'WARN_UPGRADE_APP'=> "An updated version of the application is now available.",
     'WARN_UPGRADE' => 'Warning: Please upgrade',
     'WARN_UPGRADENOTE' => 'Note:',
@@ -1245,15 +1254,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'לא נמצאו קבצי מטה-נתונים.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'הגדרות',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'צפיה בלוג',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'גש אל יומן ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => '.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'רשימת תהליכים',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'ניתן לגשת מכאן לרשימות תהליכים',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'קבע את התצורה של ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' הגדרות והצג יומני רישום. נהל את כל תהליכי BPM עבור כל המשתמשים דרך &#39;ניהול תהליכים&#39;.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'תצורת הצעות מחיר',
+    'LBL_MANAGE_QUOTES' => 'הגדר את פריסת גיליון העבודה של הצעות המחיר',
 );

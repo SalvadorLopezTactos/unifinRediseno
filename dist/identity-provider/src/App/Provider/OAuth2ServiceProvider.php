@@ -42,7 +42,7 @@ class OAuth2ServiceProvider implements ServiceProviderInterface
                     'logger' => $app->getLogger(),
                 ]
             );
-            return new OAuth2Service($stsEndpoint, $oAuth2Provider);
+            return new OAuth2Service($stsEndpoint, $oAuth2Provider, $app['OIDCClaimsService']);
         };
     }
 }

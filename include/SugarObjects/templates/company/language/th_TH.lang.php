@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'การเรียกเก็บเงินแบบพุช',
 	'LBL_PUSH_SHIPPING' => 'การขนส่งแบบพุช',
 	'LBL_SAVE_ACCOUNT' => 'บันทึกบัญชี',
+    'LBL_SERVICE_LEVEL' => 'ระดับบริการ',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'เมืองที่ส่งสินค้า:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'ประเทศที่ส่งสินค้า:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'รหัสไปรษณีย์ที่ส่งสินค้า:',

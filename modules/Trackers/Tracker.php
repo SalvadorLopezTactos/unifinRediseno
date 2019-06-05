@@ -112,15 +112,6 @@ class Tracker extends SugarBean
         }
     }
 
-    static function logPage()
-    {
-        $time_on_last_page = 0;
-        //no need to calculate it if it is a redirection page
-        if(empty($GLOBALS['app']->headerDisplayed ))return;
-        if(!empty($_SESSION['lpage']))$time_on_last_page = time() - $_SESSION['lpage'];
-        $_SESSION['lpage']=time();
-    }
-
     /**
      * create_tables
      * Override this method to insert ACLActions for the tracker beans

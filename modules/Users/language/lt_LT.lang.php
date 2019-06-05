@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Priskirti komandai',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Rodomos tik tos komandos, kurioms Jūs priklausote.',
 	'LBL_DEFAULT_TEAM'					=> 'Numatytos komandos',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Numatyta pagrindinė komanda',
 	'LBL_LIST_DESCRIPTION'				=> 'Aprašymas',
 	'LBL_MY_TEAMS'						=> 'Mano komandos',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Asmeninė komanda',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Gavėjo pašo adresas',
 	'ERR_SERVER_STATUS'					=> 'Jūsų serverio statusas',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistema negali išsiųsti el. pašto gavėjui. Patikrinkite Išeinančio pašto konfigūraciją: <a href="index.php?module=EmailMan&action=config">El. pašto nustatymai</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Vartotoją galima sukurti tik <a href="{0}" target="_blank">debesies konsolėje</a> IDM režimu.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Pagrindinį el. pašto adresą galima atnaujinti tik <a href="{0}" target="_blank">debesies konsolėje</a> IDM režimu.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email Address',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Number of decimal places to show for decimals and floats throughout the system, such as currency and average in Reports.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Show Preferred Currency',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Convert base currency to user preferred in list and record views',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Kurkite pajamų eilutės prekes pageidaujama valiuta',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Pajamų eilutės prekių, iš produktų katalogo įtrauktų į pardavimų skiltį, valiuta bus konvertuojama į vartotojo pageidaujamą valiutą, jei ji skiriasi nuo valiutos produktų kataloge.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000 skirtukas',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Simbolis atskirti tūkstančius',
 	'LBL_DECIMAL_SEP'					=> 'Dešimtainės skirtukas',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Įveskite vartotojo vardą ir pašto adresą.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'This is currently not enabled. Please contact your administrator.',
 	'LBL_PUBLISH_KEY'					=> 'Publikavimo raktas',
-
+    'LBL_SITE_USER_ID' => 'site_url ir user_id maiša',
     'LBL_QUOTAS'                        => 'Kvotos',
     'LBL_FORECASTS'                     => 'Prognozės',
     'LBL_WORKSHEETS'                    => 'Darbalapiai',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Vartotojo profilis',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Jei tam tikrų laukų neįmanoma redaguoti, prisijunkite prie savo debesies konsolės ir tvarkykite šiuos laukus',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Jei norite pakeisti tam tikrus laukus, kurių redaguoti neįmanoma, ' .
-        'susisiekite su administratoriumi ir praneškite jam apie šiuos pakeitimus',
+        'Jei norite atlikti laukų, skirtų tik skaityti, pakeitimų, susisiekite su „Sugar“ administratoriumi.',
 ); // END STRINGS DEFS
-
-?>

@@ -40,6 +40,21 @@ class RepairAndClear
      */
     protected $called = array();
 
+    /**
+     * @var callable
+     */
+    private $statementObserver;
+
+    /**
+     * Sets the callback function which will be invoked with every executed SQL statement
+     *
+     * @param callable $statementObserver
+     */
+    public function setStatementObserver(callable $statementObserver) : void
+    {
+        $this->statementObserver = $statementObserver;
+    }
+
     public function repairAndClearAll($selected_actions, $modules, $autoexecute=false, $show_output=true, $metadata_sections=false)
     {
         global $mod_strings;
@@ -73,8 +88,6 @@ class RepairAndClear
             case 'repairDatabase':
                 if(in_array($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
                     $this->repairDatabase();
-                    // Mark this as called so it doesn't get ran again
-                    $this->called[$current_action] = true;
                 } else {
                     $this->repairDatabaseSelectModules();
                 }
@@ -166,13 +179,16 @@ class RepairAndClear
             return;
         }
 
+        $this->called['repairDatabase'] = true;
+
 		global $dictionary, $mod_strings;
 		if(false == $this->show_output)
 			$_REQUEST['repair_silent']='1';
 		$_REQUEST['execute']=$this->execute;
         $GLOBALS['reload_vardefs'] = true;
         $hideModuleMenu = true;
-		include_once('modules/Administration/repairDatabase.php');
+
+        require 'modules/Administration/repairDatabase.php';
 	}
 
     /**
@@ -596,6 +612,10 @@ class RepairAndClear
 	//
 	private function _clearCache($thedir, $extension)
 	{
+        if (!file_exists($thedir)) {
+            return;
+        }
+
         if ($current = @opendir($thedir)) {
             while (false !== ($children = readdir($current))) {
                 if ($children != "." && $children != "..") {

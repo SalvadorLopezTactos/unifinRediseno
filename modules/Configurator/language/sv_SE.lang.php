@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus-server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Antal subpaneler per sida',
 	'LOG_MEMORY_USAGE'=>'Logga minnesanvändning',
-    'LOG_SLOW_QUERIES' => 'Logga långsamma SQL frågor',
+    'LOG_SLOW_QUERIES' => 'Logga långsamma frågor',
     'LOCK_HOMEPAGE_HELP'=>'Detta inställning finns för att förhindra<BR> 1) nya hemsidor och dashlets från att läggas till i Hemmodulen,<BR>2) anpassa dashletens placering i hemsidorna genom att dra & släppa.',
     'CURRENT_LOGO'=>'Aktuell logotyp som används',
     'CURRENT_LOGO_HELP'=>'Denna logga visas längst upp i vänstra hörnet på Sugar applikation.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Visa Nedladdnings Flik',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'När markerad, kommer Nedladdnings Fliken visas i Användarinställningar och ge användare tillgång till Sugar plug-ings och andra tillgängliga filer.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'För SOAP autentifiering vid ldap användning.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt ändelsen måste vara aktiverad i er php.ini fil.',
     'LBL_ALL' => 'Alla',
     'LBL_MARK_POINT' => 'Markera plats',
     'LBL_NEXT_' => 'Nästa>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktivera ytterligare innehåll för inloggningsskärm',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Auto-spara processdefinitioner',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Avgör hur ofta processdefinitioner auto-sparas när du använder designern',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Auto-validera processdefinitioner vid auto-sparande',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Växlar om processdefinitioner automatiskt valideras närde sparas automatiskt. Detta inträffar endast om ”Auto-spara processdefinitioner” är inställt på ett tidsintervall',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Auto-validera processdefinitioner vid import',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Växlar om processdefinitioner valideras automatiskt när de först importerades',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Kommentarlogginställningar',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximalt antal tecken att visa per kommentarpost',
 );
 
 

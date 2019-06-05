@@ -31,7 +31,6 @@ $dictionary['documents_contacts'] = array(
         'id' => array(
             'name' => 'id',
             'type' => 'id',
-            'len' => 36,
         ),
         'date_modified' => array(
             'name' => 'date_modified',
@@ -47,12 +46,10 @@ $dictionary['documents_contacts'] = array(
         'document_id' => array(
             'name' => 'document_id',
             'type' => 'id',
-            'len' => 36,
         ),
         'contact_id' => array(
             'name' => 'contact_id',
             'type' => 'id',
-            'len' => 36,
         ),
     ),
     'indices' => array(

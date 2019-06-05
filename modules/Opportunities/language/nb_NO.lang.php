@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Etter du starte denne endringen , vil Revenue linjeelement poster opprettes for hver eksisterende { { module_name } } i bakgrunnen . Når Revenue Linjeelementer er komplett og tilgjengelig, vil en melding bli sendt til e-postadressen på din brukerprofil. Vær oppmerksom på at forekomsten må konfigureres til å sende e-post via Admin > E-postinnstillinger for at varsling skal sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spore individuelt salg fra start til slutt. Hver {{module_name}}-oppføring representerer et potensielt salg, inkluderer relevante salgsdata og er også relaterte til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil vanligvis gå gjennom flere salgstrinn før den enten merkes som "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan brukes ytterligere sammen med Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender samt for å fokusere arbeidet på å oppnå salgskvoter.',
+    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg fra start til slutt. Hvert {{module_name}} register representerer et potensielt salg og inkluderer relevante salgsdata så vel som relatert til andre viktige registrere som {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil typisk gå gjennom flere salgsstadier til det er merket enten "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan påvirkes enda mer ved å bruke Sugars {{forecasts_singular_module}}ingmodul for å forstå og forutsi salgstrender så vel som fokusere arbeid for å oppnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produkter som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
 
 – Rediger postfeltet ved å klikke på et enkeltfelt eller Rediger-knappen.
 – Vis eller rediger lenker til andre poster i underpanelene ved å endre panelet nede til venstre til «Datavisning».
 – Lag og se endringslogg for brukerkommentarer og -poster i {{activitystream_singular_module}} ved å endre panelet nede til venstre til «Aktivitetstrøm».
 – Følg eller merk posten som favoritt ved bruk av ikonene til høyre for postnavnet.
-– Ytterlighere handlinger er tilgjengelige i rullegardinmenyen for Handlinger til høyre for Rediger-knappen.',
+– Ytterligere handlinger er tilgjengelige i rullegardinmenyen for Handlinger til høyre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Med {{plural_module_name}} modulen kan du spore individuelle salg og poster som tilhører disse salgene fra start til slutt. Hver {{module_name}} post representerer et potensielt salg og inkludert relevante salgsdata så vel som knyttet til viktige poster som {{quotes_module}}, {{contacts_module}}, osv.
 
-Slik oppretter du {{module_name}}:
-1. Angi verdiene for feltene som ønsket.
-– Felt merket med "Obligatorisk" må fullføres før du lagrer.
-– Klikk på "Vis mer" for å se ytterligere felt ved behov.
-2. Klikk på "Lagre" for å ferdigstille den nye posten og gå tilbake til den forrige siden.',
+For å opprette et {{module_name}}:
+1. Oppgi verdier for felt som ønsket.
+ - Felt merket "Obligatorisk" må fullføres før lagring.
+ - Klikk "Vis mer" for å vise flere felt om nødvendig.
+2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
 
 // END ENT/ULT
 

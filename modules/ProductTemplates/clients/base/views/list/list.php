@@ -9,15 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-/*********************************************************************************
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * Contributor(s): ______________________________________..
- ********************************************************************************/
-
 $viewdefs['ProductTemplates']['base']['view']['list'] = array(
-    'favorites' => false,
     'panels' => array(
         array(
             'name' => 'panel_header',

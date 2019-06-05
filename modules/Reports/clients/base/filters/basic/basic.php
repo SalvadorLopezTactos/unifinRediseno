@@ -66,5 +66,25 @@ $viewdefs['Reports']['base']['filter']['basic'] = array(
             ),
             'editable' => false,
         ),
+        array(
+            'id' => 'stock_reports',
+            'name' => 'LBL_FILTER_STOCK_REPORTS',
+            'filter_definition' => array(
+                'tag' => array(
+                    '$in' => array('Stock Report'),
+                ),
+            ),
+            'editable' => false,
+        ),
+        array(
+            'id' => 'non_stock_reports',
+            'name' => 'LBL_FILTER_NON_STOCK_REPORTS',
+            'filter_definition' => array(
+                'tag' => array(
+                    '$not_in' => array('Stock Report'),
+                ),
+            ),
+            'editable' => false,
+        ),
     ),
 );

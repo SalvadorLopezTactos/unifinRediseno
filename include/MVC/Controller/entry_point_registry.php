@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -45,7 +44,7 @@ $entry_point_registry = array(
     'DetailUserRole' => array('file' => 'modules/ACLRoles/DetailUserRole.php', 'auth' => true),
     'getYUIComboFile' => array('file' => 'include/javascript/getYUIComboFile.php', 'auth' => false),
     'UploadFileCheck' => array('file' => 'modules/Configurator/UploadFileCheck.php', 'auth' => true),
-    'SAML'=>  array('file' => 'modules/Users/authentication/SAMLAuthenticate/index.php', 'auth' => false),
     'tinymce_spellchecker_rpc' => array('file' => 'include/javascript/tiny_mce/plugins/spellchecker/rpc.php', 'auth' => true),
     'jslang'=>  array('file' => 'include/language/getJSLanguage.php', 'auth' => true),
+    'ConfirmEmailAddress' => array('file' => 'modules/EmailAddresses/Confirm.php', 'auth' => false),
 );

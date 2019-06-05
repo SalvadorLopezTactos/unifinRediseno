@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'ลบ',
     'LBL_MODULE_NAME' => 'ที่อยู่อีเมล',
     'LBL_MODULE_NAME_SINGULAR' => 'ที่อยู่อีเมล',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'ดำเนินการร้องขอการยืนยันแล้ว',
+    'LBL_CONFIRMATION_TITLE' => 'ขอบคุณ',
+    'LBL_CONFIRMATION_MESSAGE' => 'การสมัครสมาชิกได้รับการยืนยันแล้ว เราได้เพิ่มคุณเข้าไปในรายการแล้ว และคุณจะได้รับการติดต่อจากเราเร็ว ๆ นี้',
 );

@@ -186,24 +186,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nadat u deze wijziging heeft doorgevoerd zullen de records van het onderdeel Omzetregel op de achtergrond worden aangemaakt voor elke huidige {{module_name}}. Zodra de onderdelen van de Omzetregel voltooid en beschikbaar zijn zal een bericht naar het e-mailadres van uw gebruikersprofiel worden gestuurd. Houd er rekening mee dat uw exemplaar zo moet zijn geconfigureerd dat er een e-mail wordt gestuurd. Dit kunt u doen via Beheer > E-mailinstellingen om het bericht te verzenden.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans verschillende verkoopfases tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" gemarkeerd wordt. {{plural_module_name}} kan nog verder worden gespeculeerd door de module {{forecasts_singular_module}} van Sugar te gebruiken om verkooptrends te begrijpen en voorspellen en om werkzaamheden zo in te richten dat verkoopquota&#39;s worden bereikt.',
+    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u een individuele verkoop van begin tot eind volgen. Elk {{module_name}}-record vertegenwoordigt een verwachte verkoop en bevat zowel relevante verkoopgegevens als andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans meerdere verkoopfasen tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" wordt gemarkeerd. {{plural_module_name}} kan verder worden uitgebreid door middel van de {{forecasts_singular_module}} module van Sugar om verkooptrends te voorspellen en om werk specifiek te richten op het behalen van verkoopquota&#39;s.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een verwachte verkoop en bevat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
 
-- De velden van deze record bewerken door op een individueel veld te klikken of op de knop Bewerken.
-- Koppelingen naar andere records in de subpanelen bekijken of bewerken door het paneel links onderin op "Gegevensweergave" te zetten.
-- Opmerkingen maken en opmerkingen van gebruikers bekijken, evenals de veranderingsgeschiedenis van records bekijken in de {{activitystream_singular_module}} door het paneel links onderin op "Activity Stream" te zetten.
-- Deze record volgen of favoriet maken met de pictogrammen rechts van de naam van de record.
-- Ook andere acties zijn mogelijk in het vervolgkeuzemenu Acties, rechts van de knop Bewerken.',
+- Bewerk de velden van deze record door op een individueel veld te klikken of de knop Bewerken.
+- Bekijk of wijzig links naar andere records in de subpanelen door het paneel links onderin op "Gegevensweergave" te zetten.
+- Maak en bekijk opmerkingen van gebruikers en de recordveranderingsgeschiedenis in de {{activitystream_singular_module}} door het paneel links onderin op "Activity Stream" te zetten.
+- Volg deze record of maak er een favoriet van door de pictogrammen rechts van de naam van de record te gebruiken.
+- Er zijn ook andere acties mogelijk vanuit het vervolgkeuzemenu Acties rechts van de knop Bewerken.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en de regelitems die daarbij horen van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 Eem {{module_name}} aanmaken:
 1. Voer de gewenste waarden in voor de velden.
-- Velden gemarkeerd als "Verplicht" moeten worden voltooid voordat u ze opslaat.
-- Klik op "Toon meer" om indien nodig aanvullende velden te tonen.
+ - Velden gemarkeerd als "Verplicht" moeten worden voltooid voordat u ze opslaat.
+ - Klik op "Toon meer" om indien nodig aanvullende velden te tonen.
 2. Klik op "Opslaan" om de nieuwe record af te ronden en terug te keren naar de vorige pagina.',
 
 // END ENT/ULT

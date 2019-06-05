@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -75,6 +75,7 @@ final class Verifier implements VerifierInterface
         $input = $this->getInputToVerify($jws, $signature, $detached_payload);
         foreach ($jwk_set->getKeys() as $jwk) {
             $algorithm = $this->getAlgorithm($signature);
+
             try {
                 $this->checkKeyUsage($jwk, 'verification');
                 $this->checkKeyAlgorithm($jwk, $algorithm->getAlgorithmName());
@@ -131,7 +132,7 @@ final class Verifier implements VerifierInterface
 
         $nb_signatures = $jws->countSignatures();
 
-        for ($i = 0; $i < $nb_signatures; $i++) {
+        for ($i = 0; $i < $nb_signatures; ++$i) {
             $signature = $jws->getSignature($i);
             $result = $this->verifySignature($jws, $jwk_set, $signature, $detached_payload);
 

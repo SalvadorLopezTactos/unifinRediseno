@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Kjo është llogari sistemi.',
     'LBL_EMAIL_ADDRESS_ID' => 'Identifikuesi i adresës së emailit',
     'LBL_TYPE' => 'Lloji',
+    'LBL_REPLY_TO_NAME' => 'Emri i përgjigjes',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adresat e emailit të përgjigjes',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID-ja e adresave të emailit të përgjigjes',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresa e emailit të përgjigjes',
+    'LBL_PRIMARY_TEAM' => 'Ekipi primar',
 );

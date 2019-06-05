@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Визначення бізнес-процесів',
   'LBL_MODULE_NAME_SINGULAR' => 'Визначення бізнес-процесу',
-  'LBL_MODULE_ID' => 'Бізнес-процес',  
+  'LBL_MODULE_ID' => 'Бізнес-процес',
   'LBL_MODULE_TITLE' => 'Бізнес-процеси: Головна',
   'LBL_SEARCH_FORM_TITLE' => 'Пошук бізнес-процесів',
   'LBL_LIST_FORM_TITLE' => 'Список бізнес-процесів',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Основний модуль:',
   'LBL_LIST_ORDER' => 'Обробити замовлення:',
   'LBL_FROM_NAME' => 'Від (і&#39;мя):',
-  'LBL_FROM_ADDRESS' => 'Від (адреса):',  
+  'LBL_FROM_ADDRESS' => 'Від (адреса):',
   'LNK_NEW_WORKFLOW' => 'Створити визначення бізнес-процесу',
-  'LNK_WORKFLOW' => 'Список визначень бізнес-процесів', 
-  
-  
+  'LNK_WORKFLOW' => 'Список визначень бізнес-процесів',
+
+
   'LBL_ALERT_TEMPLATES' => 'Шаблони сповіщень',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Створити шаблон сповіщення:',
   'LBL_SUBJECT' => 'Тема:',
-  
+
   'LBL_RECORD_TYPE' => 'Застосовується до:',
  'LBL_RELATED_MODULE'=> 'Пов&#39;язаний модуль:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Послідовність бізнес-процесів',
 	'LNK_ALERT_TEMPLATES' => 'Шаблони сповіщень',
 	'LNK_PROCESS_VIEW' => 'Послідовність бізнес-процесів',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Тип',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примітка.</strong> Функцію Sugar Workflow and Workflow Management буде видалено в наступній версії Sugar. Клієнам, які використовують версію Sugar Enterprise, слід почати користуватися функцією, наданою Advanced Workflow. Для отримання додаткових відомостей клацніть <a href="http://www.sugarcrm.com/wf-eol" target="_blank">тут</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примітка.</strong> Функції Sugar Workflow і Workflow Management знаходяться в режимі обслуговування. Клієнтам, які використовують версію Sugar Enterprise, слід користуватися функцією, наданою SugarBPM<sup class="trademark">TM</sup>.',
 );
 

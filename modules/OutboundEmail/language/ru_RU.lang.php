@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Это системная учетная запись.',
     'LBL_EMAIL_ADDRESS_ID' => 'Идентификатор адреса электронной почты',
     'LBL_TYPE' => 'Тип',
+    'LBL_REPLY_TO_NAME' => 'Имя для ответа',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Адреса электронной почты для ответа',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Идентификатор адреса электронной почты для ответа',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Адрес электронной почты для ответа',
+    'LBL_PRIMARY_TEAM' => 'Основная команда',
 );

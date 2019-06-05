@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Project.php 17092 2006-10-16 20:48:09 +0000 (Mon, 16 Oct 2006) awu $
 
 
 

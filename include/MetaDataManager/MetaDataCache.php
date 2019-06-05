@@ -135,7 +135,7 @@ class MetaDataCache implements LoggerAwareInterface
             try {
                 $encoded = base64_encode(gzdeflate(serialize($data)));
             } catch (Exception $e) {
-                $this->logger->fatal("Exception when compressing metadata for $key:" . $e->getMessage());
+                $this->logger->critical("Exception when compressing metadata for $key:" . $e->getMessage());
 
                 return;
             }

@@ -549,8 +549,10 @@ function buildInstall($path){
     private function getLanguageManifestForModule($module, &$installdefs)
     {
     	$lang_path = 'custom' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'language';
-        foreach(scandir($lang_path) as $langFile)
-        {
+        if (!is_dir($lang_path)) {
+            return;
+        }
+        foreach (scandir($lang_path) as $langFile) {
 	        if(substr($langFile, 0, 1) != '.' && is_file($lang_path . DIRECTORY_SEPARATOR . $langFile)){
 	            $lang = substr($langFile, 0, strpos($langFile, '.'));
 	            $installdefs['language'][] = array(

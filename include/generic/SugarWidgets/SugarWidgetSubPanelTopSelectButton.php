@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetSubPanelTopSelectButton.php 54093 2010-01-28 05:12:24Z dwheeler $
 
 
 class SugarWidgetSubPanelTopSelectButton extends SugarWidgetSubPanelTopButton

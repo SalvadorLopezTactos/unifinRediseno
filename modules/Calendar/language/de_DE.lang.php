@@ -142,7 +142,7 @@ $mod_strings = array (
 $mod_list_strings = array(
 	'dom_cal_weekdays'=>
 		array(
-			"Sun",
+			"So",
 			"Mon",
 			"Tue",
 			"Wed",
@@ -152,13 +152,13 @@ $mod_list_strings = array(
 		),
 	'dom_cal_weekdays_long'=>
 		array(
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
+			"Sonntag",
+			"Montag",
+			"Dienstag",
+			"Mittwoch",
+			"Donnerstag",
+			"Freitag",
+			"Samstag",
 		),
 	'dom_cal_month'=>
 		array(
@@ -172,24 +172,24 @@ $mod_list_strings = array(
 			"Jul",
 			"Aug",
 			"Sep",
-			"Oct",
+			"Okt",
 			"Nov",
-			"Dec",
+			"Dez",
 		),
 	'dom_cal_month_long'=>
 		array(
 			"",
-			"January",
-			"February",
-			"March",
+			"Januar",
+			"Februar",
+			"März",
 			"April",
-			"May",
-			"June",
-			"July",
+			"Mai",
+			"Juni",
+			"Juli",
 			"August",
 			"September",
-			"October",
+			"Oktober",
 			"November",
-			"December",
+			"Dezember",
 		),
 );

@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Це системний обліковий запис.',
     'LBL_EMAIL_ADDRESS_ID' => 'Ідентифікатор адреси електронної пошти',
     'LBL_TYPE' => 'Тип',
+    'LBL_REPLY_TO_NAME' => 'Ім&#39;я для відповіді',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Адреси електронної пошти для відповіді',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Ідентифікатор адреси електронної пошти для відповіді',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Адреса електронної пошти для відповіді',
+    'LBL_PRIMARY_TEAM' => 'Основна команда',
 );

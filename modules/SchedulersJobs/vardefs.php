@@ -13,7 +13,6 @@
 $dictionary['SchedulersJob'] = array(
     'table' => 'job_queue',
     'favorites' => true,
-    'audited' => true,
     'activity_enabled' => true,
     'comment' => 'Job queue keeps the list of the jobs executed by this instance',
     'fields' => array(
@@ -21,7 +20,6 @@ $dictionary['SchedulersJob'] = array(
             'name' => 'id',
             'vname' => 'LBL_NAME',
             'type' => 'id',
-            'len' => '36',
             'required' => true,
             'reportable' => false,
         ),
@@ -156,8 +154,7 @@ $dictionary['SchedulersJob'] = array(
         'job_group' => array(
             'name' => 'job_group',
             'vname' => 'LBL_JOB_GROUP',
-            'type' => 'id',
-            'dbType' => 'varchar',
+            'type' => 'varchar',
             'len' => 255,
             'required' => false,
             'reportable' => true,
@@ -183,7 +180,6 @@ $dictionary['SchedulersJob'] = array(
             'vname' => 'LBL_FALLIBLE',
             'type' => 'bool',
             'default' => '0',
-            'audited' => true,
             'comment' => 'An indicator of whether parents failure depends on subtask.'
         ),
         'rerun' => array(

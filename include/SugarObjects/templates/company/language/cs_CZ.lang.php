@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Ověřit fakturaci',
 	'LBL_PUSH_SHIPPING' => 'Ověřit doručení',
 	'LBL_SAVE_ACCOUNT' => 'Uložit účet',
+    'LBL_SERVICE_LEVEL' => 'Úroveň služeb',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Město:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Země:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'PSČ:',

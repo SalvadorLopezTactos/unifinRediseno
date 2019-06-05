@@ -78,13 +78,12 @@ class SugarQuery_Compiler_Doctrine
         }
 
         $hasLimit = $query->limit !== null || $query->offset !== null;
-        $hasOrderBy = count($query->order_by) > 0;
         $platform = $this->db->getConnection()->getDatabasePlatform();
 
-        // in case of a UNION query with LIMIT and ORDER BY, wrap the UNIONs in a sub-query
+        // in case of a UNION query with LIMIT, wrap the UNIONs in a sub-query
         // in order to let Doctrine DBAL apply the LIMIT
         // @link https://github.com/doctrine/dbal/issues/2374
-        if ($hasLimit && $hasOrderBy && $platform instanceof SQLServerPlatform) {
+        if ($hasLimit && $platform instanceof SQLServerPlatform) {
             $sql = 'SELECT * FROM (' . $sql . ') union_tmp';
         }
 
@@ -450,10 +449,20 @@ class SugarQuery_Compiler_Doctrine
             if ($column->column->field == 'id') {
                 return $orderBy;
             }
+            $firstColumn = $firstColumn ?? $column->column;
         }
 
         $uniqueCol = new SugarQuery_Builder_Orderby($query, end($orderBy)->direction);
-        $uniqueCol->addField('id');
+
+        if ($firstColumn instanceof SugarQuery_Builder_Field_Raw) {
+            return $orderBy;
+        }
+
+        if (empty($firstColumn->custom)) {
+            $uniqueCol->addField($firstColumn->table . '.id');
+        } else {
+            $uniqueCol->addRaw($firstColumn->table . '.id_c');
+        }
         $orderBy[] = $uniqueCol;
 
         return $orderBy;
@@ -525,15 +534,19 @@ class SugarQuery_Compiler_Doctrine
         foreach ($expression->conditions as $condition) {
             if ($condition instanceof SugarQuery_Builder_Where) {
                 $compiledField = $this->compileExpression($builder, $condition);
-                if (count($compiledField) > 0) {
+                if ($compiledField) {
                     $expressions[] = $compiledField;
                 }
             } elseif ($condition instanceof SugarQuery_Builder_Condition) {
                 $compiledField = $this->compileCondition($builder, $condition);
-                if (!empty($compiledField)) {
+                if ($compiledField) {
                     $expressions[] = $compiledField;
                 }
             }
+        }
+
+        if (count($expressions) == 0) {
+            return null;
         }
 
         if (count($expressions) == 1) {

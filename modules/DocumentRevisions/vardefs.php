@@ -17,7 +17,6 @@ $dictionary['DocumentRevision'] = array(
             'name' => 'id',
             'vname' => 'LBL_REVISION_NAME',
             'type' => 'id',
-            'len' => '36',
             'required' => true,
             'reportable' => false,
         ),
@@ -27,12 +26,10 @@ $dictionary['DocumentRevision'] = array(
             'type' => 'varchar',
             'len' => '255',
         ),
-
         'document_id' => array(
             'name' => 'document_id',
             'vname' => 'LBL_DOCUMENT',
             'type' => 'id',
-            'len' => '36',
             'required' => false,
             'reportable' => false,
         ),
@@ -173,7 +170,6 @@ $dictionary['DocumentRevision'] = array(
             'name' => 'latest_revision_id',
             'vname' => 'LBL_REVISION',
             'type' => 'id',
-            'len' => '36',
             'source' => 'non-db',
         ),
         'document_name' => array(

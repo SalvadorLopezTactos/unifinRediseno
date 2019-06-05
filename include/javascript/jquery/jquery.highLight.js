@@ -1,4 +1,7 @@
 /*
+ * @deprecated
+ */
+/*
 
  highlight v4
 

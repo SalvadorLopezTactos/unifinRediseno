@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Util;
 
-use Rhumsaa\Uuid\Uuid as UuidBackend;
+use Ramsey\Uuid\Uuid as UuidBackend;
 
 /**
  *

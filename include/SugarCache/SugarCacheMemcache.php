@@ -10,7 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+/**
+ * @deprecated Use Sugarcrm\Sugarcrm\Cache\Backend\Memcached instead
+ */
 class SugarCacheMemcache extends SugarCacheAbstract
 {
     /**

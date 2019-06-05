@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Призначити команді',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'За умовчанням в записах доступні ті команди, членом яких Ви є.',
 	'LBL_DEFAULT_TEAM'					=> 'Команди за умовчанням',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Основна команда за умовчанням',
 	'LBL_LIST_DESCRIPTION'				=> 'Опис',
 	'LBL_MY_TEAMS'						=> 'Мої команди',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Приватна команда для',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mail-адреса одержувача',
 	'ERR_SERVER_STATUS'					=> 'Статус сервера',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Система не в змозі відправити лист користувачеві. Перевірте параметри сервера вихідної пошти в <a href="index.php?module=EmailMan&action=config"> Налаштуваннях E-mail </a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Користувача можна створити лише в <a href="{0}" target="_blank">хмарній консолі</a> для режиму IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Основну адресу електронної пошти можна оновити лише у <a href="{0}" target="_blank">хмарній консолі</a> для режиму IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Адреса Email',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Підтвердити пароль',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Ви змінили тип користувача з адміністратора SugarCRM на Звичайного користувача. Після збереження змін користувач не матиме адміністративних прав. \\ n \\ n Нажміте кнопку "OK" для застосування змін. \\ n Нажміте кнопку "Скасувати" для повернення на редактируемую сторінку.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Ви змінили тип користувача з адміністратора SugarCRM на Звичайного користувача. Після збереження змін користувач не матиме адміністративних прав. \ n \ n Нажміте кнопку "OK" для застосування змін. \ n Нажміте кнопку "Скасувати" для повернення на редактируемую сторінку.',
 	'LBL_COUNTRY'						=> 'Країна',
 	'LBL_CURRENCY_TEXT'					=> 'Виберіть валюту, яка буде відображатися за замовчуванням у всіх створюваних записах. Ця ж валюта буде вказана в колонці <b> Сума </b> при перегляді списку угод.',
 	'LBL_CURRENCY'						=> 'Привілейована валюта',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Кількість знаків після коми вказує на десяткові знаки і числа з плаваючою точкою у всій системі, такі як числа валюти і середня величина в Звітах.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Показати бажану валюту',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Конвертувати базову валюту  встановлену користувачем і відобразити в обліковому поданні та на картці перегляду запису',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Створення позицій доходів у бажаній валюті',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Позиції доходів, додані до угоди з каталогу продуктів, буде конвертовано у вибрану користувачем валюту, якщо вона відрізняється від валюти каталогу продуктів.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Символ роздільника розрядів',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Символ, використовуваний для поділу груп розрядів',
 	'LBL_DECIMAL_SEP'					=> 'Десятковий символ',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Вкажіть ім&#39;я користувача та E-mail.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'На даний момент це не активовано. Будь ласка, зверніться до адміністратора.',
 	'LBL_PUBLISH_KEY'					=> 'Відкритий ключ',
-
+    'LBL_SITE_USER_ID' => 'Хеш параметрів site_url і user_id',
     'LBL_QUOTAS'                        => 'Квоти',
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'Таблиці',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Профіль користувача',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Якщо деякі поля неможливо редагувати, виконайте вхід до хмарної консолі для керування ними',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Якщо вам необхідно змінити деякі незмінювані поля, ' .
-        'зверніться до адміністратора та повідомте про ці зміни',
+        'Щоб змінити поля, доступні тільки для читання, зверніться до адміністратора Sugar.',
 ); // END STRINGS DEFS
-
-?>

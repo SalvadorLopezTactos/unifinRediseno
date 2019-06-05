@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Tähän prosessimääritelmään liittyviä prosesseja suoritetaan tällä hetkellä. Määritelmän päivittäminen saattaa vaikuttaa prosesseihin. Haluatko silti muokata tätä prosessimääritelmää?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Tähän prosessimääritelmään liittyviä prosesseja suoritetaan tällä hetkellä. Määritelmän päivittäminen saattaa vaikuttaa prosesseihin. Haluatko silti poistaa käytöstä tämän prosessimääritelmän?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automaattisesti luo uusi prosessimääritelmätietue tuomalla .bpm-tiedosto tietokoneeltasi.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Lataa .bpm tiedosto tuodaksesi prosessin määrittelyn.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Prosessimääritelmän tuonti järjestelmään onnistui.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Valitse validi .bpm-tiedosto.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Prosessimääritelmä on tuotu, mutta se sisältää vähintään yhden yrityssäännön toiminnon, jonka yrityssääntöjä ei ole valittu.',
+    'LBL_BPM_IMPORT_SELECT' => 'Tämän prosessin määrityksessä on seuraavat Liiketoimintasäännöt ja sähköpostimallit. '
+        . 'Ole hyvä ja valitse ne, jotka haluat tuoda.',
+    'LBL_BUSINESS_RULES' => 'Liiketoimintasäännöt',
+    'LBL_EMAIL_TEMPLATES' => 'Sähköpostimallit',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Kumoa',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Tee uudelleen',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Tallenna',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Varmenna',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Tallenna ja varmenna',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Tarkista virheet suorittamalla varmennus',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktiviteetit',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Poista',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Moduuli',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Suodata',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Liittyy kohteeseen',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriteerit',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Kesto',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Yksikkö',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Kentät',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Moduulikenttäevaluaatio',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduuli',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Liittyy',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Kenttä',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Arvo',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Lomakkeen vastauksen evaluointi',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ei ole',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ei',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Kaikki liittyvät tietueet',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Mitkään liittyvät tietueet',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Ajonaikainen',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisää',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulje',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Tiimit',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Moduulin %MODULE% käyttäjä, joka loi tietueen',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Moduulin %MODULE% käyttäjä, joka viimeksi muokkasi tietuetta',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Moduulin %MODULE% käyttäjä, jolle tietue on merkitty',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Moduulin %MODULE% käyttäjä, jolle tietue merkittiin',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Moduulin %MODULE% käyttäjä, joka on tietueen luojan esimies',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Moduulin %MODULE% käyttäjä, joka on viimeksi tietuetta muokanneen esimies',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Moduulin %MODULE% käyttäjä, joka on sen käyttäjän esimies, jolle tietue on merkitty',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Moduulin %MODULE% käyttäjä, joka on sen käyttäjän esimies, jolle tietue merkittiin',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% liittyy moduuliin %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Moduulin %MODULE% luonut käyttäjä',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Moduulia %MODULE% viimeksi muokannut käyttäjä',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Käyttäjä jolle %MODULE% on määritetty',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Käyttäjä jolle %MODULE% määritettiin',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Moduulin %MODULE% luoneen käyttäjän esimies',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Moduulia %MODULE% viimeksi muokanneen käyttäjän esimies',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Moduulille %MODULE% määritetyn käyttäjän esimies',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Moduulille %MODULE% määritetyn käyttäjän esimies',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'asema: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'ryhmä: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Ehdotukset',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Virheellinen lausekkeen syntaksi.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Varmennetaan prosessimääritystä: haetaan elementin asetukset',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Varmennetaan prosessimääritystä: varmennetaan elementin asetuksia',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Päivitetään virheluettelo...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Varmennus on valmis. Havaitut ongelmat: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' ongelmat',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Varmennus käynnissä',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Varoitus: prosessi voi pysähtyä tämän elementin kohdalla tai se voi aiheuttaa muita tahattomia vaikutuksia',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Virhe: prosessi pysähtyy tähän elementtiin',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Elementtiä ei voi varmentaa',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elementti ei täytä saapuville työnkuluille asettua vähimmäismäärää',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Elementillä on oltava vähimmäismäärä siihen johtavia polkuja. Tarkista tähän elementtiin johtavien polkujen määrä ja varmista, että vähimmäismäärä täyttyy.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Elementtiin tulevien työnkulkujen enimmäismäärä ylittyy',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Tällä elementillä on enimmäismäärä siihen johtavia polkuja, joka ei voi ylittyä. Tarkista tähän elementtiin johtavien polkujen määrä ja varmista, että enimmäismäärä ei ylity.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elementistä lähtevien työnkulkujen vähimmäismäärä ei täyty',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Elementillä on oltava vähimmäismäärä lähteviä polkuja. Tarkista tästä elementistä lähtevien polkujen määrä ja varmista, että vähimmäismäärä täyttyy.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elementistä lähtevien työnkulkujen enimmäismäärä ylittyy',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Tällä elementillä on enimmäismäärä siitä lähteviä polkuja, joka ei voi ylittyä. Tarkista elementistä lähtevien polkujen määrä ja varmista, että enimmäismäärä ei ylity.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Pakollista kenttää ei ole määritetty',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Tässä elementissä on pakollinen kenttä, jota ei ole määritetty. Tarkista elementin asetuksista, että kenttä on määritetty oikein, ja napsauta sen jälkeen ”Tallenna”-painiketta.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Tietoja ei tällä hetkellä ole järjestelmässä',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Tämän elementin asetukset viittaavat tiettyyn tietoon, jota ei ole tietokannassa. Tarkista elementin asetuksista, että kaikki viitatut tiedot ovat olemassa (eli tietyt käyttäjät, moduulikentät, joukkueet jne.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Ehtoruudun lauseke ei koskaan anna arvoksi tosi',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Ehtoruudut sisältävät loogisia AND/OR/NOT-lausekkeita. Tämä virhe merkitsee, että elementin asetuksissa oleva ehtoruutu on määritetty siten, että lauseke ei koskaan ole tosi. Tarkista ehtoruutu ja poista loogiset ristiriidat, jotka estävät sen, että lausekkeen arvo voi olla tosi.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Elementtiin ei ole yhteyttä',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Jotta elementin voi suorittaa prosessissa, siihen on johdettava polku. Polkujen ketjun, joka johtaa tähän elementtiin, on alettava käynnistyselementillä. Tarkista saapuvien polkujen ketju ja varmista, että ketju alkaa käynnistyselementillä.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Odotusajan ehtoihin tulee sisältyä täsmälleen yksi päivämäärän vakio',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Tämä odotustapahtumaelementti on määritetty käyttämällä "Määritetty päivämäärä" -ehtoruutua. Tämän ruudun tulee sisältää täsmälleen yksi "Määritetty päivämäärä" -vakio tai päivämääräkentän viittaus. Kaikkien muiden lausekkeen osien on oltava matemaattisia operaattoreita (+/-) tai "Ajanjakso"-vakioita.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Määritetty "Kesto"-arvo ei voi olla nolla',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Tämä odotustapahtumaelementti on määritetty käyttämällä "Kesto"-asetusta. Jos sen arvo on nolla, se aiheuttaa virheen. Tarkista elementin asetuksista, että "Kesto"-asetuksen arvo ei ole nolla.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Odotusajan parametrejä ei ole määritetty',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Tämän odotustapahtumaelementin asetuksia ei ole määritetty. Tarkista elementin asetuksista, että "Kesto" tai "Määritetty päivämäärä" on valittuna, anna halutut arvot ja napsauta "Tallenna"-painiketta.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Odotettu aika on pienempi kuin nolla',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Tämän aktiviteettielementin "Lomakkeet"-asetuksissa olevan odotetun ajan arvo on negatiivinen, mikä aiheuttaa prosessin jumiutumisen kun se saavuttaa tämän elementin. Avaa tämän elementin "Lomakkeet"-asetukset ja muuta odotetulle ajalle ei-negatiivinen arvo.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Toiminnon tyyppi on [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Tälle toimintoelementille ei ole valittu tyyppiä. Sen voi valita napsauttamalla toimintoelementtiä hiiren kakkospainikkeella ja valitsemalla tyyppi ”Toiminnon tyyppi” -luettelosta.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Tämän polun valintaa ei voi taata',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Tämä virhesanoma ilmenee, koska on mahdollista, että yhtään tästä yhdyskäytäväelementistä johtavaa polkua ei valita, mikä aiheuttaa prosessin pysähtymisen. On suositeltavaa määrittää oletuspolku, jonka voi valita, jos mikään elementin asetusten ehtoruudun lausekkeista ei täyty. Tämän voi tehdä napsauttamalla hiiren kakkospainikkeella yhdyskäytäväelementtiä ja valitsemalla elementti ”Oletustyönkulku”-valikon alta. Jos oletuspolkua ei määritetä, ehtoruudun lausekkeet elementin asetuksissa tulee muuttaa sen varmistamiseksi, että ainakin yhden arvo on tosi, kun prosessi suoritetaan.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergoivan yhdyskäytävän tyyppi ei vastaa saapuvan työnkulun yhdyskäytävän tyyppiä',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergoivat yhdyskäytävät laajentavat prosessit useisiin haaroihin. Käytettäessä konvergoivaa yhdyskäytävää näiden haarojen konvergoimiseen uudelleen yhdeksi poluksi on käytettävä oikeaa konvergoivan yhdyskäytävän tyyppiä riippuen haarojen luontiin käytetyn divergoivan yhdyskäytävän tyypistä. Jos konvergoit uudelleen haaroja, jotka on luotu eksklusiivisilla tai tapahtumaperustaisilla divergoivilla yhdyskäytävillä, käytä eksklusiivista konvergoivaa yhdyskäytävää. Jos konvergoit uudelleen haaroja, jotka on luotu paralleeleilla tai inklusiivisilla divergoivilla yhdyskäytävillä, käytä paralleelia konvergoivaa yhdyskäytävää.',
 );

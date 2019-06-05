@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyEmailsDashlet.data.php 17070 2006-10-13 22:09:18Z awu $
 
 global $current_user, $app_strings;
 

@@ -20,17 +20,16 @@
      * @inheritdoc
      */
     bindDataChange: function() {
-        this.context.on('config:howtoData:change', function(howtoData) {
-            this.howtoData = howtoData;
-            this._render();
-        }, this);
+        this.context.on('config:howtoData:change', this.onHowtoDataChange, this);
     },
 
     /**
-     * @inheritdoc
+     * Handles updating the howto data when it changes
+     *
+     * @param howtoData
      */
-    _render: function() {
-        // manually render this template with just the howtoData
-        this.$el.html(this.template(this.howtoData))
+    onHowtoDataChange: function(howtoData) {
+        this.howtoData = howtoData;
+        this.render();
     }
 })

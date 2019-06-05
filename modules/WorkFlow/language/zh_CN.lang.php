@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => '工作流定义',
   'LBL_MODULE_NAME_SINGULAR' => '工作流定义',
-  'LBL_MODULE_ID' => '工作流',  
+  'LBL_MODULE_ID' => '工作流',
   'LBL_MODULE_TITLE' => '工作流：首页',
   'LBL_SEARCH_FORM_TITLE' => '搜索工作流',
   'LBL_LIST_FORM_TITLE' => '工作流列表',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => '目标模块：',
   'LBL_LIST_ORDER' => '流程顺序：',
   'LBL_FROM_NAME' => '发件人姓名：',
-  'LBL_FROM_ADDRESS' => '发件人地址：',  
+  'LBL_FROM_ADDRESS' => '发件人地址：',
   'LNK_NEW_WORKFLOW' => '创建工作流定义',
-  'LNK_WORKFLOW' => '工作流程定义列表', 
-  
-  
+  'LNK_WORKFLOW' => '工作流程定义列表',
+
+
   'LBL_ALERT_TEMPLATES' => '警惕模板',
   'LBL_CREATE_ALERT_TEMPLATE' => '创建警惕模板：',
   'LBL_SUBJECT' => '主题：',
-  
+
   'LBL_RECORD_TYPE' => '适用于：',
  'LBL_RELATED_MODULE'=> '相关模块：',
-  
-  
+
+
   'LBL_PROCESS_LIST' => '工作流序列',
 	'LNK_ALERT_TEMPLATES' => '警惕电子邮件模板',
 	'LNK_PROCESS_VIEW' => '工作流序列',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => '类型',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>注意：</strong> Sugar “工作流”和“工作流管理”功能正处于维护模式。Sugar 企业版客户应使用 SugarBPM<sup class="trademark">TM</sup>提供的功能。',
 );
 

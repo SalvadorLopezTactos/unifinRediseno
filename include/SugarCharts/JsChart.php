@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id$
 
 
 class JsChart extends SugarChart {
@@ -38,6 +37,8 @@ class JsChart extends SugarChart {
 			"gauge chart",
 			"funnel chart 3D",
 			"line chart",
+            "horizontal grouped bar chart",
+            "vertical grouped bar chart",
 		);
 
 		if(in_array($chartType,$charts)) {
@@ -177,12 +178,16 @@ class JsChart extends SugarChart {
 			return array ("gaugeType" => "basic","tip" => "name","chartType" => "gaugeChart");
 		} elseif($chartType == "stacked group by chart") {
 			return array ("orientation" => "vertical","barType" => "stacked","tip" => "name","chartType" => "barChart");
+        } elseif ($chartType == "vertical grouped bar chart") {
+            return array ("orientation" => "vertical", "barType" => "grouped", "tip" => "name", "chartType" => "barChart");
 		} elseif($chartType == "group by chart") {
 			return array("orientation" => "vertical", "barType" => "grouped", "tip" => "title","chartType" => "barChart");
 		} elseif($chartType == "bar chart") {
 			return array("orientation" => "vertical", "barType" => "basic", "tip" => "label","chartType" => "barChart");
 		} elseif ($chartType == "horizontal group by chart") {
 			return array("orientation" => "horizontal", "barType" => "stacked", "tip" => "name","chartType" => "barChart");
+        } elseif ($chartType == "horizontal grouped bar chart") {
+            return array("orientation" => "horizontal", "barType" => "grouped", "tip" => "name", "chartType" => "barChart");
 		} elseif ($chartType == "horizontal bar chart" || "horizontal") {
 			return array("orientation" => "horizontal","barType" => "basic","tip" => "label","chartType" => "barChart");
 		} else {
@@ -191,7 +196,8 @@ class JsChart extends SugarChart {
 	}
 	function getChartDimensions($xmlStr) {
 		if($this->getNumNodes($xmlStr) > 9 && $this->chartType != "pie chart") {
-			if($this->chartType == "horizontal group by chart" || $this->chartType == "horizontal bar chart") {
+            if ($this->chartType == "horizontal group by chart" || $this->chartType == "horizontal bar chart" ||
+                $this->chartType == "horizontal grouped bar chart") {
 				$height = ($this->getNumNodes($xmlStr) * 40);
 				return array("width"=>$this->width, "height"=>($height));
 			} else {
@@ -570,6 +576,8 @@ class JsChart extends SugarChart {
             || $this->chartType == "horizontal group by chart"
             || $this->chartType == 'line chart'
             || $this->chartType == 'stacked group by chart'
+            || $this->chartType == 'horizontal grouped bar chart'
+            || $this->chartType == 'vertical grouped bar chart'
         )
         {
 			$groups = $xml->data->group[0]->subgroups->group;

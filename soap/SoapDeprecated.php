@@ -184,32 +184,31 @@ function end_session($user_name)
  * @return false -- If the session is not created
  */
 function validate_user($user_name, $password){
-	global $server, $current_user, $sugar_config;
-	$user = BeanFactory::newBean('Users');
-	$user->user_name = $user_name;
-	$authController = AuthenticationController::getInstance();
+    global $server, $current_user;
+    $user = BeanFactory::newBean('Users');
+    $user->user_name = $user_name;
+    $authController = AuthenticationController::getInstance();
 
-	// Check to see if the user name and password are consistent.
-	if($user->authenticate_user($password)){
-		// we also need to set the current_user.
-		$user->retrieve($user->id);
-		$current_user = $user;
+    // Check to see if the user name and password are consistent.
+    if ($user->authenticate_user($password)) {
+        // we also need to set the current_user.
+        $user->retrieve($user->id);
+        $current_user = $user;
         login_success();
-		return true;
-    } elseif (extension_loaded('mcrypt')) {
-		$password = decrypt_string($password);
-		if($authController->login($user_name, $password) && isset($_SESSION['authenticated_user_id'])){
-			$user->retrieve($_SESSION['authenticated_user_id']);
-			$current_user = $user;
-			login_success();
-			return true;
-		}
-	}else{
-		$GLOBALS['log']->fatal("SECURITY: failed attempted login for $user_name using SOAP api");
-		$server->setError("Invalid username and/or password");
-		return false;
-	}
+        return true;
+    }
 
+    $password = decrypt_string($password);
+    if ($authController->login($user_name, $password) && isset($_SESSION['authenticated_user_id'])) {
+        $user->retrieve($_SESSION['authenticated_user_id']);
+        $current_user = $user;
+        login_success();
+        return true;
+    }
+
+    $GLOBALS['log']->fatal("SECURITY: failed attempted login for $user_name using SOAP api");
+    $server->setError("Invalid username and/or password");
+    return false;
 }
 
 /**

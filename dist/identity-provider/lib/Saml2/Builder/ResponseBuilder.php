@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\IdentityProvider\Saml2\Builder;
 
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\LogoutResponse;
+use OneLogin\Saml2\Response;
 use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\Response\LogoutPostResponse;
 
@@ -24,14 +27,14 @@ use Sugarcrm\IdentityProvider\Saml2\Response\LogoutPostResponse;
  */
 class ResponseBuilder
 {
-    /** @var  \OneLogin_Saml2_Auth*/
+    /** @var  Auth*/
     private $auth;
 
     /**
      * ResponseBuilder constructor.
-     * @param \OneLogin_Saml2_Auth $auth
+     * @param Auth $auth
      */
-    public function __construct(\OneLogin_Saml2_Auth $auth)
+    public function __construct(Auth $auth)
     {
         $this->auth = $auth;
     }
@@ -39,8 +42,9 @@ class ResponseBuilder
     /**
      * Creates SAML logout response object.
      *
-     * @param $responseData
-     * @return \OneLogin_Saml2_LogoutResponse|LogoutPostResponse
+     * @param null $responseData
+     * @return LogoutResponse|LogoutPostResponse
+     * @throws \OneLogin\Saml2\Error
      */
     public function buildLogoutResponse($responseData = null)
     {
@@ -48,17 +52,18 @@ class ResponseBuilder
             return new LogoutPostResponse($this->auth->getSettings(), $responseData);
         }
 
-        return new \OneLogin_Saml2_LogoutResponse($this->auth->getSettings(), $responseData);
+        return new LogoutResponse($this->auth->getSettings(), $responseData);
     }
 
     /**
      * Creates SAML response object.
      *
      * @param $responseData
-     * @return \OneLogin_Saml2_Response
+     * @return Response
+     * @throws \OneLogin\Saml2\ValidationError
      */
-    public function buildLoginResponse($responseData)
+    public function buildLoginResponse($responseData): Response
     {
-        return new \OneLogin_Saml2_Response($this->auth->getSettings(), $responseData);
+        return new Response($this->auth->getSettings(), $responseData);
     }
 }

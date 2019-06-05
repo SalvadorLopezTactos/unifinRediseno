@@ -48,15 +48,12 @@ class StandardField extends DynamicField
     }
     
     /**
-     * Adds a custom field using a field object
-     *
-     * @param Field Object $field
-     * @return boolean
+     * {@inheridDoc}
      */
-    function addFieldObject(&$field){
+    public function addFieldObject($field)
+    {
         global $dictionary, $beanList;
-        
-        
+
         if (empty($beanList[$this->module]))
             return false;
 

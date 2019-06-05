@@ -509,7 +509,7 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
                     }
                     var id = relModel.id ? relModel.id : relModel.cid;
                     var value = relModel.get(field);
-                    if (isCurrency) {
+                    if (isCurrency && relModel.has(field) && relModel.has('currency_id')) {
                         value = App.currency.convertToBase(
                             value,
                             relModel.get('currency_id')

@@ -744,8 +744,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\\n\\nDo you wish to continue?',
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您確定要刪除這個關係嗎？<br>注意：此作業可能無法在數分鐘內完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'這將使這個關係永久化。您確定要部署此關係嗎？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次儲存以來已進行變更，您想要儲存嗎？',

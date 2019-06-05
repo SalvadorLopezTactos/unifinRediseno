@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: OpportunitiesByLeadSourceByOutcomeDashlet.data.php 16280 2006-08-22 19:47:48Z awu $
 
 $dashletData['OpportunitiesByLeadSourceByOutcomeDashlet']['searchFields'] = array(
         'lsbo_lead_sources' => array(

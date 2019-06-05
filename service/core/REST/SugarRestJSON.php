@@ -68,12 +68,11 @@ class SugarRestJSON extends SugarRestSerialize{
 			$er->set_error('invalid_call');
 			$this->fault($er);
 		}else{
-			$method = $_REQUEST['method'];
 			$json = getJSONObj();
 			$data = $json->decode($json_data);
 			if(!is_array($data))$data = array($data);
-			$res = call_user_func_array(array( $this->implementation, $method),$data);
-			$GLOBALS['log']->info('End: SugarRestJSON->serve');
+            $res = $this->invoke($_REQUEST['method'], $data);
+            $GLOBALS['log']->info('End: SugarRestJSON->serve');
 			return $res;
 		} // else
 	} // fn

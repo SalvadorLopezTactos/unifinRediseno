@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Fel har upptäckts under kompatibilitetskontrollen. Rätta till problemen som listas nedan och klicka sedan på Försök igen eller starta om installationen för att se till att din SugarCRM-installation fungerar felfritt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Referenser får just nu skickas vid anrop (detta bör inaktiveras i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Hittades inte: Sugar-schemaläggare kommer att fungera i begränsad utsträckning. Tjänsten för e-postarkivering kommer inte att fungera.',
+	'ERR_CHECKSYS_CURL'					=> 'Hittades inte: Sugar Scheduler kommer att köras med begränsad funktionalitet. Tjänsten för arkivering av e-post kommer inte att köras.',
     'ERR_CHECKSYS_IMAP'					=> 'Hittades inte: InboundEmail och Campaigns (Email) kräver de nya IMAP-biblioteken. De kommer inte att fungera.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan inte aktiveras när du använder MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warning:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'För en optimal upplevelse använd IIS/FastCGI sapi, sätt fastcgi.loggin till 0 i din php.ini fil.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Den installerade PHP-versionen stöds inte: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen otillgänglig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Support för databas hittades inte. Vänligen, säkerställ att du har de nödvändiga drivrutinerna för en av de följande databastyperna som stöds: MySQL, MS SQLServer, Oracle eller DB2. Du kan behöva avkommentera tillägget i php.ini-filen eller kompilera om med den korrekta binära filen, beroende på vilken version av PHP som du använder. Vänligen, se din PHP-manual för mer information om hur du aktiverar support för databasen.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Support för databasen hittades inte.  Vänligen kontrollera att du har nödvändiga drivrutiner för en av följande stödda databastyper: MySQL, MS SQLServer, Oracle eller DB2.  Du kan behöva avkommentera tillägget i php.ini-filen, eller kompilera om med den rätta binära filen, beroende på din version av PHP.  Se din PHP Manual för mer information om hur du aktiverar databasstöd.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner som hör till XML Parser Libraries som Sugar behöver hittades inte. Du kanske behöver avkommentera ändelsen i php.ini eller kompilera om med rätt binärfil beroende på din PHP-version. Se PHP-manualen för mer information.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptalsgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner som hör till Multibyte Strings PHP-tillägget (mbstring) som Sugar behöver hittades inte. <br/><br/>I allmänhet är modulen mbstring inte aktiverat som standard i PHP, utan den måste aktiveras med --enable-mbstring när du bygger PHP. Se PHP-manualen för mer information om hur mbstring-stöd aktiveras.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Inställningen session.save_path i din PHP-konfiguration (php.ini) är antingen tom eller satt till en mapp som inte finns. Du behöver antingen ange en sökväg eller dubbelkolla att mappen finns.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Inställningen session.save_path i din PHP-konfiguration (php.ini) är satt till en mapp utan skrivrättigheter. Vidta åtgärder för att få tag i skrivrättigheter. <br>Beroende på ditt operativsystem kan du behöva köra chmod 766 eller högerklicka på filnamnet och kryssa ur "Skrivskyddad".',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Inställningsfilen finns, men är inte skrivbar. Vidta åtgärder för att få tag i skrivrättigheter. Beroende på ditt operativsystem kan du behöva köra chmod 766 eller högerklicka på filnamnet och kryssa ur "Skrivskyddad".',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings Module',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (ingen gräns)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (obegränsad)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP Memory Limit >=',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Ny kontoinformation',
         'description' => 'Den här mallen används när System Administratören skickar ett nytt lösenord till en användare.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Här är ditt användarnamn och ditt tillfälliga lösenord:</p><p>Användarnamn : $contact_user_user_name </p><p>Lösenord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Efter att du loggat in med ovanstående lösenord, kommer du behöva ändra lösenordet till ett eget.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Här är ditt användarnamn och ditt tillfälliga lösenord:</p><p>Användarnamn : $contact_user_user_name </p><p>Lösenord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Efter att du loggat in med ovanstående lösenord, kommer du behöva ändra lösenordet till ett eget.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'är är ditt användarnamn och ditt tillfälliga lösenord: <br />Användarnamn : $contact_user_user_name<br />Lösenord : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
         'name' => 'Systemgenererat lösenordsemail',

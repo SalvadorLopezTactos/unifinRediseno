@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Team zuweisen',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Die Teams, die in Datensätzen standardmäßig angezeigt werden, sind jene, in denen Sie Mitglied sind.',
 	'LBL_DEFAULT_TEAM'					=> 'Standardteams',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Standard-Primärteam',
 	'LBL_LIST_DESCRIPTION'				=> 'Beschriftung',
 	'LBL_MY_TEAMS'						=> 'Meine Teams',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privates Team für',
@@ -50,8 +49,8 @@ $mod_strings = array (
 	'ERR_IE_MISSING_REQUIRED'			=> "Es fehlen Informationen für eingehende E-Mails.\n Bitte überprüfen Sie Ihre Einstellungen und versuchen Sie es daraufhin erneut.\n\nWenn Sie keine eingehende E-Mail konfigurieren möchten, belassen Sie alle Felder in diesem Abschnitt leer.",
 	'ERR_INVALID_PASSWORD'				=> 'Sie müssen einen gültigen Benutzernamen und ein Passwort angeben.',
 	'ERR_NO_LOGIN_MOBILE'				=> 'Ihre erste Anmeldung bei dieser Anwendung muss von einem nicht mobilen Browser oder im normalen Modus vorgenommen werden. Bitte versuchen Sie es mit einem anderen Browser oder klicken Sie auf den normalen Link unten. Wir entschuldigen uns für alle Unannehmlichkeiten.',
-	'ERR_LAST_ADMIN_1'					=> 'Der Benutzername \\"',
-	'ERR_LAST_ADMIN_2'					=> '\\" ist der letzte Benutzer mit Administratorrechten. Es muß jedoch immer mindestens ein Administrator im System existieren.',
+	'ERR_LAST_ADMIN_1'					=> 'Der Benutzername \"',
+	'ERR_LAST_ADMIN_2'					=> '\" ist der letzte Benutzer mit Administratorrechten. Es muß jedoch immer mindestens ein Administrator im System existieren.',
 	'ERR_PASSWORD_CHANGE_FAILED_1'		=> 'Die Passwortänderung ist fehlgeschlagen für ',
 	'ERR_PASSWORD_CHANGE_FAILED_2'		=> ' schlug fehl. Das neue Passwort muss noch einmal eingegeben werden..',
 	'ERR_PASSWORD_CHANGE_FAILED_3'		=> '. Das neue Kennwort ist ungültig.',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-Mail-Adresse Empfänger',
 	'ERR_SERVER_STATUS'					=> 'Ihr Serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Das System kann keine E-Mail an den Benutzder senden. Bitte die Konfiguration für ausgehende E-Mails unter <a href="index.php?module=EmailMan&action=config">E-Mail Einstellungen</a> prüfen.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Der Benutzer wurde nur in der <a href="{0}" target="_blank">Cloud-Konsole</a> für den IDM-Modus erstellt.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Die primäre E-Mail-Adresse kann nur in der <a href="{0}" target="_blank">Cloud-Konsole</a> für den IDM-Modus aktualisiert werden.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-Mail-Adresse',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Passwort bestätigen',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Sie haben den Benutzertyp von Systemadministrator auf normalen Benutzer geändert. Wenn Sie diese Änderung speichern, hat der Benutzer keine Administratorrechte mehr.\\n\\nKlicken Sie auf OK, um fortzufahren.\\n\\nKlicken Sie auf "Abbrechen", um zum Datensatz zurückzukehren.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Sie haben den Benutzertyp von Systemadministrator auf normalen Benutzer geändert. Wenn Sie diese Änderung speichern, hat der Benutzer keine Administratorrechte mehr.\n\nKlicken Sie auf OK, um fortzufahren.\n\nKlicken Sie auf "Abbrechen", um zum Datensatz zurückzukehren.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Dies ist die in den Listen- und Datensatzansichten verwendete Währung, wenn "Bevorzugte Währung anzeigen" aktiviert ist. Dies ist auch die Standardwährung für neue Einträge.',
 	'LBL_CURRENCY'						=> 'Bevorzugte Währung',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Anzahl der Dezimalstellen, die für Dezimalzahlen und Fließtext, wie Währung und Durchschnitt, in Berichten im gesamten System angezeigt werden.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Bevorzugte Währung anzeigen',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Standardwährung in Listen- und Datensatz-Ansichten in bevorzugte Währung konvertieren',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Umsatzposten in bevorzugter Währung erstellen',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Die einer Verkaufschance aus dem Produktkatalog hinzugefügten Umsatzposten werden in die vom Benutzer bevorzugte Währung konvertiert, wenn sie sich von der Währung unterscheidet, die für das Produkt im Produktkatalog verwendet wird.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000er-Trennzeichen',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Tausender-Trennzeichen',
 	'LBL_DECIMAL_SEP'					=> 'Dezimalzeichen',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Geben Sie einen gültigen Benutzernamen und eine gültige E-Mail-Adresse ein.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Diese Funktion ist derzeit deaktiviert. Bitte kontaktieren Sie Ihren Administrator.',
 	'LBL_PUBLISH_KEY'					=> 'Schlüssel für Veröffentlichung',
-
+    'LBL_SITE_USER_ID' => 'Hash der site_url und user_id',
     'LBL_QUOTAS'                        => 'Quoten',
     'LBL_FORECASTS'                     => 'Prognosen',
     'LBL_WORKSHEETS'                    => 'Arbeitsblätter',
@@ -633,10 +633,7 @@ Klicken Sie aus "Abbrechen", um die Seite zu schließen, ohne Datensätze zu ver
     'LBL_DETAIL' => 'Benutzerprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Wenn bestimmte Felder nicht bearbeitbar sind, melden Sie sich in Ihrer Cloud-Konsole an, um diese Felder zu verwalten',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Falls Sie bestimmte Felder ändern möchten, die nicht bearbeitbar sind, ' .
-        'kontaktieren Sie bitte den Administrator, um diese Änderungen zu melden',
+        'Bitte wenden Sie sich an Ihren Sugar-Administrator, wenn Sie Änderungen an schreibgeschützten Feldern vornehmen möchten.',
 ); // END STRINGS DEFS
-
-?>

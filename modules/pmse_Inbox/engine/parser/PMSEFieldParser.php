@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 /**
  * Class that analyzes the data type of a bean
@@ -18,7 +19,7 @@ use Sugarcrm\Sugarcrm\ProcessManager;
  * if there is a date data type used the classes TimeDate()
  *
  */
-class PMSEFieldParser implements PMSEDataParserInterface
+class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     /**
      * Object Bean
@@ -56,6 +57,18 @@ class PMSEFieldParser implements PMSEDataParserInterface
         'supervisor' => 'parseSupervisor',
         'owner' => 'parseOwner',
     );
+
+    /**
+     * Getting the PMSERelatedModule object
+     * @return object
+     */
+    private function getRelatedModuleObject()
+    {
+        if (!isset($this->pmseRelatedModule)) {
+            $this->pmseRelatedModule = ProcessManager\Factory::getPMSEObject('PMSERelatedModule');
+        }
+        return $this->pmseRelatedModule;
+    }
 
     /**
      * gets the bean list
@@ -157,54 +170,8 @@ class PMSEFieldParser implements PMSEDataParserInterface
     public function parseCriteria($criteriaToken, $params = array())
     {
         $tokenArray = array($criteriaToken->expModule, $criteriaToken->expField, $criteriaToken->expOperator);
-        $criteriaToken->currentValue = $this->parseTokenValue($tokenArray);
-        if (isset($criteriaToken->valType) && $criteriaToken->valType == 'MODULE') {
-            $tokenArray = array($criteriaToken->valModule, $criteriaToken->valField, $criteriaToken->expOperator);
-            $criteriaToken->expValue = $this->parseTokenValue($tokenArray);
-        } else {
-            $criteriaToken->expValue = $this->setExpValueFromCriteria($criteriaToken);
-        }
-
-        // We need to check to see if the evaluated bean (sometimes the target
-        // and sometimes the related bean) is the right bean to work on
-        $eBean = $this->evaluatedBean;
-        if (isset($eBean->field_defs[$criteriaToken->expField])) {
-            // We are good to go, so set the working bean as the evaluated bean
-            $workingBean = $eBean;
-        } else {
-            // Evaluted bean is not the right bea, so prepare to log some relevant
-            // information, starting with the module name we failed on
-            $eModule = $eBean->getModuleName();
-
-            // Write a simple message to log, to start with
-            $msg = "Could not find {$criteriaToken->expField} on the target module $eModule";
-
-            // Look at the related bean, since that could be what we are after
-            // since the target bean is NOT what we are after
-            $rBean = $this->getRelatedBean($criteriaToken->expModule);
-
-            // Is there a related module?
-            if ($rBean !== null) {
-                // Does *it* have the field we are looking for?
-                if (isset($rBean->field_defs[$criteriaToken->expField])) {
-                    // The related bean is the one we want, so set THAT as the working bean
-                    $workingBean = $rBean;
-                } else {
-                    // We will need this for a bit of enhanced logging
-                    $rModule = $rBean->getModuleName();
-                    $msg .= " or the related module $rModule";
-
-                    // Log this as an alert, since this is fairly high priority
-                    PMSELogger::getInstance()->warning($msg);
-                    return $criteriaToken;
-                }
-            } else {
-                // A null related bean means we have nothing further to do, so
-                // log this the same as above and return
-                PMSELogger::getInstance()->warning($msg);
-                return $criteriaToken;
-            }
-        }
+        $criteriaToken->currentValue = $this->parseTokenValue($tokenArray, $params);
+        $criteriaToken->expValue = $this->setExpValueFromCriteria($criteriaToken);
 
         // Use the working bean now to get what we are after
         if (isset($criteriaToken->expField)) {
@@ -232,6 +199,7 @@ class PMSEFieldParser implements PMSEDataParserInterface
     {
         $tokenArray = array($criteriaToken->expModule, $criteriaToken->expValue, $criteriaToken->expOperator);
         $tokenValue = $this->parseTokenValue($tokenArray);
+        $tokenValue = $tokenValue[0];
         if ($criteriaToken->expSubtype == 'Currency') {
             $value = json_decode($tokenValue);
             // in some use cases, value can be numeric instead of array
@@ -267,17 +235,19 @@ class PMSEFieldParser implements PMSEDataParserInterface
     /**
      * Gets the related bean to the evaluated bean, if one is set
      * @param string $link The link name to get the related bean from
-     * @return SugarBean
+     * @return array SugarBeans
      */
     public function getRelatedBean($link)
     {
-        // If we have a related bean, send it back now
-        if (!empty($this->relatedBeans[$link])) {
-            return $this->relatedBeans[$link];
+        if (empty($this->relatedBeans[$link])) {
+            // There are times when the process bean is not the bean needed for
+            // evaluations
+            $bean = $this->getBeanForEvaluation();
+
+            // Get and set the related bean since we don't have it yet
+            $this->relatedBeans[$link] = $this->getRelatedModuleObject()->getRelatedModuleBeans($bean, $link);
         }
 
-        // Get and set the related bean since we don't have it yet
-        $this->relatedBeans[$link] = $this->pmseRelatedModule->getRelatedModule($this->evaluatedBean, $link);
         return $this->relatedBeans[$link];
     }
 
@@ -285,47 +255,58 @@ class PMSEFieldParser implements PMSEDataParserInterface
     /**
      * parser a token for a field element, is this: bool or custom fields
      * @param string $token field contains a parser
-     * @return string field value, in the case of a currency type it returns a serialized array with the amount and
+     * @return array of field values, in the case of a currency type it returns a serialized array with the amount and
      * the currency id.
      */
-    public function parseTokenValue($token)
+    public function parseTokenValue($token, $params = [])
     {
-        $this->pmseRelatedModule = ProcessManager\Factory::getPMSEObject('PMSERelatedModule');
+        $values = array();
 
-        $bean = $this->evaluatedBean;
-        $value = '';
         if (!empty($token)) {
             // This logic is a fairly bad assumption, but works in most cases. The
             // assumption is that a link name won't be in the bean list so try to load
             // a related bean instead.
-            if (!isset($this->beanList[$token[0]])) {
+            if (!isset($this->beanList[$token[0]]) && empty($params['useEvaluatedBean'])) {
                 // Get the related bean instead
-                $bean = $this->getRelatedBean($token[0]);
+                $beans = $this->getRelatedBean($token[0]);
+            } else {
+                $beans = array($this->evaluatedBean);
             }
 
-            $field = $token[1];
-            if (!empty($bean) && is_object($bean)) {
-                if (isset($token[2]) &&
-                    ($token[2] == 'changes' ||
-                        $token[2] == 'changes_from' ||
-                        $token[2] == 'changes_to')) {
-                    if (isset($bean->dataChanges) && isset($bean->dataChanges[$field])) {
-                        if ($token[2] == 'changes_from') {
-                            $value = $bean->dataChanges[$field]['before'];
+            if (is_array($beans)) {
+                $field = $token[1];
+                foreach ($beans as $bean) {
+                    if (isset($token[2]) && in_array($token[2], ['changes', 'changes_from', 'changes_to'])) {
+                        // Get the bean data changes
+                        $bdc = empty($bean->dataChanges) ? [] : $bean->dataChanges;
+
+                        // Get the registry key of changs for this bean
+                        $key = 'bean-data-changes-' . $bean->id;
+
+                        // Get the registry data changes and merge the bean data changes into it
+                        $rdc = Registry\Registry::getInstance()->get($key, []);
+                        $dataChanges = array_merge($rdc, $bdc);
+
+                        // Handle what is changing and to which
+                        if (isset($dataChanges[$field])) {
+                            if ($token[2] == 'changes_from') {
+                                $value = $dataChanges[$field]['before'];
+                            } else {
+                                $value = $dataChanges[$field]['after'];
+                            }
                         } else {
-                            $value = $bean->dataChanges[$field]['after'];
+                            // used as a flag that means no changes
+                            $value = null;
                         }
                     } else {
-                        // used as a flag that means no changes
-                        $value = null;
+                        $value = $this->getRelatedModuleObject()->getFieldValue($bean, $field);
                     }
-                } else {
-                    $value = $this->pmseRelatedModule->getFieldValue($bean, $field);
+                    $values[] = $value;
                 }
             }
         }
 
-        return $value;
+        return $values;
     }
 
     /**
@@ -422,4 +403,25 @@ class PMSEFieldParser implements PMSEDataParserInterface
             $this->currentUser->reports_to_id : $token->expValue;
     }
 
+    /**
+     * Gets the proper bean to work on for evaluation
+     * @return SugarBean
+     */
+    protected function getBeanForEvaluation()
+    {
+        // This is simply a shortcut to make lines shorter
+        $ct = $this->criteriaToken;
+
+        // These items are set onto the token in {{@see PMSEBaseValidator::updateRelateCriteria}}
+        if (!empty($ct->expBeanModule) && !empty($ct->expBeanId)) {
+            if (isset($ct->expLinkName) && $ct->expLinkName === $ct->expModule) {
+                $bean = BeanFactory::retrieveBean($ct->expBeanModule, $ct->expBeanId);
+                if ($bean) {
+                    return $bean;
+                }
+            }
+        }
+
+        return $this->evaluatedBean;
+    }
 }

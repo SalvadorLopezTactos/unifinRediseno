@@ -41,12 +41,26 @@ function get_product_categories($parent_id,$open_nodes_ids=array()) {
     reset($open_nodes_ids);
     $nodes=array();
     if ($parent_id=='') {
-        $query="select * from product_categories where (parent_id is null or parent_id='') and deleted=0 order by list_order";
+        $query = <<<SQL
+SELECT * FROM product_categories 
+WHERE (parent_id IS NULL OR parent_id = '') AND deleted = 0 
+ORDER BY list_order
+SQL;
+        $stmt = $GLOBALS['db']->getConnection()
+            ->executeQuery($query);
     } else {
-        $query="select * from product_categories where parent_id ='$parent_id' and deleted=0 order by list_order";
+        $query = <<<SQL
+SELECT * FROM product_categories 
+WHERE parent_id = ? AND deleted=0 
+ORDER BY list_order
+SQL;
+        $stmt = $GLOBALS['db']->getConnection()
+            ->executeQuery(
+                $query,
+                [$parent_id]
+            );
     }
-    $result=$GLOBALS['db']->query($query);
-    while (($row=$GLOBALS['db']->fetchByAssoc($result))!= null) {
+    foreach ($stmt as $row) {
         $node = new Node($row['id'], $row['name']);
         $node->set_property("href", $href_string);
 

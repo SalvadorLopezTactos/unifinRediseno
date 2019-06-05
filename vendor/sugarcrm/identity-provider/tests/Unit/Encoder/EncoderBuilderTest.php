@@ -14,7 +14,7 @@ namespace Sugarcrm\IdentityProvider\Tests\Unit\Encoder;
 
 use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
 use Sugarcrm\IdentityProvider\Encoder\CryptPasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\BCryptPasswordEncoder;
 
 class EncoderBuilderTest extends \PHPUnit_Framework_TestCase
 {

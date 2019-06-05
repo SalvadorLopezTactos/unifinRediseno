@@ -337,56 +337,6 @@ function create_node($user_id, $href = true, $dynamic = true, $force_direct = fa
 	return $node;
 }
 
-/**used by save_worksheet method.
- *
- */
-function upsert_worksheet_record($owner_id, $timeperiod_id, $forecast_type, $wk_related_id, $related_forecast_type, $best_case, $likely_case, $worst_case,$convert_to_basecurrency=true) {
-
-    global $current_user;
-
-    if ($convert_to_basecurrency) {
-        
-        $currency = BeanFactory::newBean('Currencies');
-        if (isset($current_user)) {
-           $currency->retrieve($current_user->getPreference('currency'));
-        }else{
-           $currency->retrieve('-99');
-        }
-        $best_case = $currency->convertToDollar($best_case);
-        $likely_case = $currency->convertToDollar($likely_case);
-        $worst_case = $currency->convertToDollar($worst_case);
-    }
-
-	$query = "select id from worksheet where user_id='$owner_id' and timeperiod_id='$timeperiod_id' and forecast_type='$forecast_type' and related_id='$wk_related_id' ";
-	if (!empty ($related_forecast_type)) {
-		$query .= " and related_forecast_type='$related_forecast_type' ";
-	}
-	//	_pp($query);
-	$resource = $GLOBALS['db']->query($query);
-	$row = $GLOBALS['db']->fetchByAssoc($resource);
-	if (empty ($row)) {
-		//_pp('inserting');
-		$wk = BeanFactory::newBean('Worksheet');
-
-		$wk->user_id = $owner_id;
-		$wk->timeperiod_id = $timeperiod_id;
-		$wk->forecast_type = $forecast_type;
-		$wk->related_id = $wk_related_id;
-		$wk->related_forecast_type = $related_forecast_type;
-		$wk->best_case = $best_case;
-		$wk->worst_case = $worst_case;
-		$wk->likely_case = $likely_case;
-
-		$ret_id = $wk->save();
-	} else {
-		//		_pp('updating');
-        $date_modified = TimeDate::getInstance()->nowDb();
-		$query = "update worksheet set likely_case=$likely_case, best_case=$best_case, worst_case=$worst_case, modified_user_id='{$current_user->id}', date_modified='{$date_modified}' where id='{$row['id']}'";
-        $resource = $GLOBALS['db']->query($query);
-	}
-
-}
-
 function processnavigation($url_string, $json = null) {
 	$ret = array ();
 	$url_array = explode('?', $url_string);

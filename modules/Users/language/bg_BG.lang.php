@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Възлагане на екип',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Определете екип по подразбиране за нови записи.',
 	'LBL_DEFAULT_TEAM'					=> 'Екип по подразбиране',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Основен екип по подрабиране',
 	'LBL_LIST_DESCRIPTION'				=> 'Описание',
 	'LBL_MY_TEAMS'						=> 'Моите екипи',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Персонален екип за',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Е-мейл адрес на получателя',
 	'ERR_SERVER_STATUS'					=> 'Статус на сървъра',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Системата не може да изпрати електронна поща на потребителя. Моля проверете настройките в секция <a href="index.php?module=EmailMan&action=config">Настройка на електронна поща</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Потребителят може да бъде създаден само в <a href="{0}" target="_blank">раздела Cloud</a> за режим IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Основният имейл адрес може да се актуализира само в <a href="{0}" target="_blank">раздела Cloud</a> за режим IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Електронна поща',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Брой на знаците след десетичната запетая, които да бъдат визуализирани в системата. Например валутни и средни стойности в Справки.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Покажи предпочитана валута',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Преобразувай основната валута в предпочитаната от потребителя при визуализация на списъци и записи.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Създаване на елементи на приходи в предпочитана валута',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Елементите на приходи, добавени към възможност от продуктовия каталог, ще бъдат преобразувани в предпочитана валута на потребителя, ако тя се различава от валутата, използвана за елементите в продуктовия каталог.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Разделител за хилядите',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Знак за разделяне на хилядите',
 	'LBL_DECIMAL_SEP'					=> 'Десетичен знак',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Въведете Потребител и Адрес на електронна поща.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Тази функционалност не е разрешена. Моля свържете се със системния администратор',
 	'LBL_PUBLISH_KEY'					=> 'Публичен ключ',
-
+    'LBL_SITE_USER_ID' => 'Хеш на site_url и user_id',
     'LBL_QUOTAS'                        => 'Квоти',
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'План',
@@ -633,10 +633,7 @@ Click Cancel to exit the page without reassigning any records.',
     'LBL_DETAIL' => 'Профил на потребителя',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Ако някои от полетата не могат да бъдат редактирани, моля влезте във вашата Cloud конзола за да управлявате тези полета',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Ако искате да промените някои полета, които не могат да се редактират, ' .
-        'моля, свържете се с Администратора, за да уведомите за тези промени',
+        'Моля, обърнете се към администратора на Sugar, ако искате да направите промени в полетата, които са само за четене.',
 ); // END STRINGS DEFS
-
-?>

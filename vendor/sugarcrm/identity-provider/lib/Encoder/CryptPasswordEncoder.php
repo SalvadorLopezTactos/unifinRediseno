@@ -68,7 +68,8 @@ class CryptPasswordEncoder extends BasePasswordEncoder
      */
     protected function getSalt($salt)
     {
-        return sprintf('$%d$rounds=%d$%s',
+        return sprintf(
+            '$%d$rounds=%d$%s',
             $this->getAlgoNumber(),
             $this->iterations,
             $salt
@@ -94,6 +95,7 @@ class CryptPasswordEncoder extends BasePasswordEncoder
      */
     public function isPasswordValid($encoded, $raw, $salt)
     {
-        return !$this->isPasswordTooLong($raw) && password_verify($raw, $encoded);
+        return !$this->isPasswordTooLong($raw)
+            && (password_verify($raw, $encoded) || password_verify(md5($raw), $encoded));
     }
 }

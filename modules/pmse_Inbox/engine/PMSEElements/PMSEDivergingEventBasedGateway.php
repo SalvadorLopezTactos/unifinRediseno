@@ -27,7 +27,8 @@ class PMSEDivergingEventBasedGateway extends PMSEDivergingGateway
         $nonFlowElements = $this->getNextShapeElements($flowData);
 
         foreach ($nonFlowElements as $element) {
-            if ($element['evn_type'] != 'INTERMEDIATE' || $element['evn_behavior'] != 'CATCH' || empty($element)) {
+            if (!(($element['evn_type'] == 'INTERMEDIATE' && $element['evn_behavior'] == 'CATCH')
+                || $element['act_task_type'] == 'USERTASK')) {
                 $routeAction = 'WAIT';
             }
         }

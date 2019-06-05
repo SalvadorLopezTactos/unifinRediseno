@@ -51,6 +51,15 @@ class ConfiguratorController extends SugarController
         'logger_file_ext',
 
         'activity_streams_enabled',
+
+        'marketing_extras_enabled',
+        'commentlog_maxchars',
+
+        // SugarBPM settings
+        'processes_auto_validate_on_import',
+        'processes_auto_validate_on_autosave',
+        'processes_auto_save_interval',
+        'error_number_of_cycles',
     );
 
     /**

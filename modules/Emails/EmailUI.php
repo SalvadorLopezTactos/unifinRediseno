@@ -749,25 +749,29 @@ eoq;
 	function getLists() {
 		global $current_user;
 
-		$q = "SELECT id, list_name FROM address_book_lists WHERE assigned_user_id = '{$current_user->id}' ORDER BY list_name";
-		$r = $this->db->query($q);
-		$ret = array();
-		$ids = array();
+        $ret = [];
+        $addressBookLists = $this->db->getConnection()
+            ->executeQuery(
+                'SELECT id, list_name FROM address_book_lists WHERE assigned_user_id = ? ORDER BY list_name',
+                [$current_user->id]
+            );
 
-		while($a = $this->db->fetchByAssoc($r)) {
-			$ret[$a['id']] = array(
-				$a['list_name'] => array()
-			);
+        foreach ($addressBookLists as $addressBookList) {
+            $ret[$addressBookList['id']] = [
+                $addressBookList['list_name'] => [],
+            ];
 
-			$q2 = "SELECT * FROM address_book_list_items WHERE list_id = '{$a['id']}'";
-			$r2 = $this->db->query($q2);
+            $addressBookListItems = $this->db->getConnection()
+                ->executeQuery(
+                    'SELECT * FROM address_book_list_items WHERE list_id = ?',
+                    [$addressBookList['id']]
+                );
+            foreach ($addressBookListItems as $addressBookListItem) {
+                $ret[$addressBookList['id']][$addressBookList['list_name']][] = $addressBookListItem['bean_id'];
+            }
+        }
 
-			while($a2 = $this->db->fetchByAssoc($r2)) {
-				$ret[$a['id']][$a['list_name']][] = $a2['bean_id'];
-			}
-		}
-
-		return $ret;
+        return $ret;
 	}
 
 	/**

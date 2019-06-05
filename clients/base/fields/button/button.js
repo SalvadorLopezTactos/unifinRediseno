@@ -85,7 +85,7 @@
         // FIXME: isDisabled should not check against `this.action`, and should
         // should eliminate the need here to check for the `disabled` class.
         // Should be fixed with SC-3418.
-        if (this.isDisabled() || this.$(this.fieldTag).hasClass('disabled')) {
+        if (this.isDisabled() || (!this.disposed && this.$(this.fieldTag).hasClass('disabled'))) {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             return false;

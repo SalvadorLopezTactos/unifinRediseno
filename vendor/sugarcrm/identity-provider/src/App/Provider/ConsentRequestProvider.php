@@ -23,7 +23,7 @@ class ConsentRequestProvider implements ServiceProviderInterface
     {
         $app['consentRestService'] = function ($app) {
             /** @var Application $app */
-            return new ConsentRestService($app->getOAuth2Service());
+            return new ConsentRestService($app->getOAuth2Service(), $app->getTranslator());
         };
     }
 }

@@ -77,6 +77,14 @@
                         // confirm_password is added to errorName2Keys on initialize
                         errors[field.name] = errors[field.name] || {};
                         errors[field.name]['confirm_password'] = true;
+                        if (this.showPopupAlerts) {
+                            app.alert.show('passwords_mismatch', {
+                                level: 'error',
+                                messages: app.lang.get('ERR_REENTER_PASSWORDS'),
+                                autoClose: true,
+                                autoCloseDelay: 5000,
+                            });
+                        }
                     } else if (!errors[field.name]) {
                         /**
                          * Passwords match

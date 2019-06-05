@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Aseta tiimeille',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Tietueissa näkyvät oletuksena ne tiimit, joissa olet jäsenenä.',
 	'LBL_DEFAULT_TEAM'					=> 'Oletustiimit',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Oletusprimääritiimi',
 	'LBL_LIST_DESCRIPTION'				=> 'Kuvaus',
 	'LBL_MY_TEAMS'						=> 'Omat tiimit',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Yksityistiimi',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Vastaanottajan sähköpostiosoite',
 	'ERR_SERVER_STATUS'					=> 'Palvelimesi tila',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Järjestelmä ei pysty lähettämään sähköpostia käyttäjälle. Tarkista lähtevän postin asetukset <a href=&#39;index.php?module=EmailMan&action=config&#39;>sähköpostiasetuksissa</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Käyttäjän voi luoda vain <a href="{0}" target="_blank">Cloud-konsolissa</a> IDM-tilaa varten.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Ensisijaisen sähköpostiosoitteen voi päivittää vain <a href="{0}" target="_blank">Cloud-konsolissa</a> IDM-tilaa varten.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Sähköpostiosoite',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Kuinka monta numeroa näytetään pilkun jälkeen desimaalinumeroissa.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Näytä suositumpi valuutta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Muuta kantavaluutta käyttäjän suositumpaan valuuttaan lista- ja tietuenäkymissä.',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Luo tuoterivejä haluamassasi valuutassa',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Tuoteluettelosta myyntimahdollisuuteen lisätyt tuoterivit muunnetaan käyttäjän valitsemaan valuuttaan jos se eroaa tuoteluettelossa käytetystä valuutasta.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Tuhansien erotin',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Merkki, jota käytetään tuhansien erottimena',
 	'LBL_DECIMAL_SEP'					=> 'Desimaalierotin',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Tarjoa sekä käyttäjänimi että sähköpostiosoite.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Tämä ominaisuus ei ole käytössä. Ota yhteyttä järjestelmänvalvojaan.',
 	'LBL_PUBLISH_KEY'					=> 'Julkinen avain',
-
+    'LBL_SITE_USER_ID' => 'Tunnisteet kohteille site_url ja user_id',
     'LBL_QUOTAS'                        => 'Tavoitteet',
     'LBL_FORECASTS'                     => 'Ennusteet',
     'LBL_WORKSHEETS'                    => 'Työlistat',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Käyttäjäprofiili',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Jos joitakin kenttiä ei voi muokata, voit hallita näitä kenttiä kirjautumalla Cloud-konsoliin',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Jos haluat muuttaa kenttiä jotka eivät ole muokattavissa, ' .
-        'ota yhteyttä järjestelmänvalvojaan ja ilmoita näistä muutoksista',
+        'Ota yhteyttä Sugar-järjestelmänvalvojaan, jos haluat tehdä muutoksia vain luku -muotoisiin kenttiin.',
 ); // END STRINGS DEFS
-
-?>

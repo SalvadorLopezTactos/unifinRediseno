@@ -386,7 +386,7 @@
          *              if $ul is not given, it will restore back to the original structure
          */
         IEfix: function($ul) {
-            if ($.browser.msie && $.browser.version > 6) {
+            if (SUGAR.browser.msie && SUGAR.browser.version > 6) {
                 if($ul) {
                     if( $ul.hasClass('iefixed') === false)
                         return;

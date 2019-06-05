@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['ProductTemplates']['base']['view']['selection-list'] = array(
-    'favorites' => false,
     'panels' => array(
         array(
             'name' => 'panel_header',

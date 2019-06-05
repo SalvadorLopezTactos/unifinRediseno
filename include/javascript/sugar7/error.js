@@ -42,6 +42,19 @@
        });
     }
 
+    // process authenticated user error
+    function processAuthenticatedUserError(key, title, msg) {
+        // Need to save state before resetAuth
+        var isAuthenticated = app.api.isAuthenticated();
+        backToLogin(true);
+        // Show alert only for authorized user
+        if (isAuthenticated) {
+            // Login can fail for many reasons such as lock out, bad credentials, etc.
+            // Server message to provide details.
+            alertUser(key , title, msg);
+        }
+    }
+
     function alertUser(key,title,msg) {
         app.alert.show(key, {
             level: 'error',
@@ -53,6 +66,9 @@
     //Return the user to the login page when the sync fails
     app.events.on('app:sync:error', function(error) {
         if (error.status !== 0) {
+            if (app.config.idmModeEnabled && error.code === 'idm_nonrecoverable_error') {
+                return;
+            }
             backToLogin(true);
         }
         // Sync can fail for many reasons such as server error, bad cache, auth, etc.
@@ -71,16 +87,15 @@
      */
     app.error.handleNeedLoginError = function(error) {
         backToLogin(true);
-        // Login can fail for many reasons such as lock out, bad credentials, etc.  Server message to provides details.
-        alertUser("needs_login_error" , "LBL_INVALID_CREDS_TITLE", error.message);
+        // Login can fail for many reasons such as lock out, bad credentials, etc. Server message provides details.
+        alertUser('needs_login_error', 'LBL_INVALID_CREDS_TITLE', error.message);
     };
 
     /**
      * This is caused by expired or invalid token. 
      */
     app.error.handleInvalidGrantError = function(error) {
-        backToLogin(true);
-        alertUser("invalid_grant_error", "LBL_INVALID_GRANT_TITLE", "LBL_INVALID_GRANT");
+        processAuthenticatedUserError('invalid_grant_error', 'LBL_INVALID_GRANT_TITLE', 'LBL_INVALID_GRANT');
     };
 
     /**
@@ -118,8 +133,17 @@
      * 401 Unauthorized error handler. 
      */
     app.error.handleUnauthorizedError = function(error) {
-        backToLogin(true);
-        alertUser("unauthorized_request_error", "LBL_UNAUTHORIZED_TITLE", "LBL_UNAUTHORIZED");
+        if (app.config.idmModeEnabled && error.code === 'idm_nonrecoverable_error') {
+            app.alert.dismissAll();
+            app.router.logout();
+            alertUser('unauthorized_request_error', 'LBL_UNAUTHORIZED_TITLE', 'LBL_UNAUTHORIZED');
+        } else {
+            processAuthenticatedUserError(
+                'unauthorized_request_error',
+                'LBL_UNAUTHORIZED_TITLE',
+                'LBL_UNAUTHORIZED'
+            );
+        }
     };
 
     /**

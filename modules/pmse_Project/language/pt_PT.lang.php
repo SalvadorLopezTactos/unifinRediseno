@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Existem processos ativos em execução nesta Definição de processo. A atualização poderia ter impacto nesses processos. Ainda pretende editar esta Definição de processo?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Existem processos ativos em execução nesta Definição de processo. A atualização poderia ter impacto nesses processos. Ainda pretende desativar esta Definição de processo?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Criar automaticamente um novo registo Definições do Processo importando um ficheiro *.bpm a partir do seu sistema de ficheiros.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Carregue um ficheiro .bpm para importar uma Definição do Processo.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'A Definição do Processo foi importado com êxito para o sistema.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Selecione um ficheiro *.bpm válido.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'A Definição de processo foi importada mas contém uma ou mais ações de Regras empresariais para as quais as regras empresariais não foram selecionadas.',
+    'LBL_BPM_IMPORT_SELECT' => 'Esta definição de processo contém as seguintes Regras de Negócio e Modelos de E-mail. '
+        . 'Selecione as que deseja importar.',
+    'LBL_BUSINESS_RULES' => 'Regras de Negócio',
+    'LBL_EMAIL_TEMPLATES' => 'Modelos de E-mail',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Desfazer',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Refazer',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Gravar',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Validar',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Guardar e validar',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Executar a validação para verificar a existência de erros',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Atividade',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Eliminar',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Módulo',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtrar',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Referente a',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Critério',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Duração',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Unidade',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Campos',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Avaliação dos campos do Módulo',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Módulo',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Referente a',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Campo',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Valor',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Avaliação da Resposta do Formulário',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'não é',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'diferente de',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Todos os Registos Relacionados',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Quaisquer Registos Relacionados',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Tempo de execução',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adicionar',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Fechar',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Equipas',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizador no %MODULE% que criou o registo',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Último utilizador no %MODULE% a modificar o registo',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Utilizador no %MODULE% que está atribuído ao registo',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Utilizador no %MODULE% que foi atribuído ao registo',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Utilizador no %MODULE% que é responsável por quem criou o registo',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Utilizador %MODULE% que é responsável por quem modificou o registo pela última vez',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Utilizador no %MODULE% que é responsável pelo utilizador a quem o registo está atribuído',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Utilizador no %MODULE% que é responsável pelo utilizador a quem o registo foi atribuído',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% referente a %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizador que criou o %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'O utilizador que modificou o %MODULE% pela última vez',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Utilizador atribuído ao %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Utilizador que foi atribuído ao %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Gestor de quem criou o %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Gestor de quem modificou o %MODULE% pela última vez',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Gestor de quem está atribuído ao %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Gestor de quem foi atribuído ao %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'função: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'equipa: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Sugestões',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Sintaxe de expressão inválida.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Validação da definição do processo: Recuperação das definições do elemento',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Validação da definição do processo: Validação das definições do elemento',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'A atualizar a lista de erros...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Validação concluída! Problemas encontrados: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemas',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Validação em progresso',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Aviso: O processo pode parar neste elemento ou ter outros efeitos indesejados',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Erro: O processo vai parar neste elemento ou ter outros efeitos',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Não é possível validar o elemento',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'O elemento não cumpre o número mínimo de fluxos de entrada',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Este elemento deve ter um número mínimo de caminhos de entrada. Verifique o número de caminhos associados a este elemento para garantir que o número mínimo é cumprido.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'O elemento excede o número máximo de fluxos de entrada',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Este elemento tem um número máximo de caminhos de entrada que não deve ser excedido. Verifique o número de caminhos associados a este elemento para garantir que o número máximo não é excedido.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'O elemento não cumpre o número mínimo de fluxos de saída',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Este elemento deve ter um número mínimo de caminhos de saída. Verifique o número de caminhos para saída deste elemento para garantir que o número mínimo é cumprido.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'O elemento excede o número máximo de fluxos de saída',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Este elemento tem um número máximo de caminhos de saída que não deve ser excedido. Verifique o número de caminhos para fora deste elemento para garantir que o número máximo não é excedido.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'O campo obrigatório não está preenchido',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Este elemento tem um campo obrigatório, mas que não foi criado. Verifique as definições do elemento para garantir que o campo é corretamente preenchido e, de seguida, certifique-se de que clica no botão "Guardar".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Os dados não existem atualmente no sistema',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'As definições para este elemento fazem referência a uma parte específica de dados que não existe na base de dados. Verifique as definições do elemento para garantir que todos os dados referenciados existem (ou seja, utilizadores específicos, campos do módulo, equipas, etc.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'A expressão da caixa de critérios nunca será avaliada como "verdadeiro"',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'As caixa de critérios contêm expressões lógicas E/OU/NÃO. Este erro significa que uma caixa de critérios nas definições do elemento foi configurada de forma a que a expressão nunca será verdadeira. Verifique a caixa de critérios para eliminar as contradições lógicas que evitam que esta expressão seja verdadeira.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'O elemento não está acessível',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Para um elemento ser executado num processo, deve ter um caminho ligado a si. A cadeia de caminhos que conduzem a esse elemento deve começar com um elemento de início. Verifique a corrente de entrada caminhos para este elemento para certificar-se de que a cadeia começa com um elemento de início.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'O critério de tempo de espera deve conter exatamente uma data/hora constante',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Este elemento de evento de espera foi configurado usando a caixa de critérios de "Data fixa". Esta caixa deve conter exatamente uma "data/hora fixa" constante ou uma referência ao campo de data/hora. Todas as outras partes da expressão devem ser operadores de matemática (+ /-) ou constantes de "Período de tempo".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'O valor de duração especificado não deve ser zero',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Este elemento de evento de espera foi configurado com a definição de "Duração". Esta definição não deve ser igual a zero ou ocorrerá um erro. Verifique as definições do elemento para garantir que a "Duração" não é estabelecida como zero.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Os parâmetros do tempo de espera não foram estabelecidos',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Este elemento de evento de espera não tem quaisquer definições configuradas. Verifique as definições de elemento para garantir que a "Duração" ou "Data fixa" é selecionada, insira os valores desejados e clique no botão "Guardar".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'O tempo esperado é inferior a zero',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Nas definições de "Formulários" para este elemento de atividade, o tempo esperado está definido como valor negativo, o que fará com que o processo seja interrompido quando chegar o elemento. Abra as definições de "Formulários" para este elemento para alterar o tempo esperado para um número não negativo.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'O tipo de ação é [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Este elemento de ação não tem um tipo designado. Isto pode ser alterado clicando com o botão direito no elemento de ação e, em seguida, selecionando um tipo na lista "Tipo de ação".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Não está garantido qualquer caminho a tomar',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Esta mensagem de erro ocorre porque há uma hipótese que não será tomado qualquer dos caminhos para fora deste elemento da porta de entrada, o que fará com que o processo pare. É aconselhável definir um caminho padrão para tomar no caso de nenhuma das expressões da caixa de critérios nas definições do elemento estarem satisfeitas. Isso pode ser feito clicando com o botão direito no elemento da porta de entrada e selecionando um elemento no menu "Fluxo predefinido". Se não for especificado um caminho predefinido, as expressões da caixa de critérios nas definições do elemento devem ser alteradas para garantir que pelo menos uma delas será verdadeira quando o processo é executado.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'O tipo de porta de entrada convergente não coincide com tipo de porta de entrada de um fluxo de entrada',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'As portas de entrada divergentes expandem os processos em vários ramos. Ao usar uma porta de entrada convergente para re-convergir estes ramos de volta para um caminho, deve ser usado o tipo correto de porta de entrada convergente, dependendo do tipo de porta de entrada divergente usado para criar os ramos. Para ramos criados com portas de entrada divergentes exclusivas ou baseadas em eventos, use uma porta de entrada convergente exclusiva para as re-convergir. Para ramos criados com portas de entrada divergentes paralelas ou inclusivas, use uma porta de entrada paralela convergente paralela para as re-convergir.',
 );

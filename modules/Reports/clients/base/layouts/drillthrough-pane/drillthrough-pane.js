@@ -78,7 +78,8 @@
     render: function() {
         var config = this.context.get('dashConfig');
         // Set the title of the side pane
-        this.model.setDefault('title', config.label);
+        // label coming out of BWC html enoded, decode it first
+        this.model.setDefault('title', $('<div/>').html(config.label).text());
         this._super('render');
 
         var dashlet = this.getComponent('dashlet').getComponent('saved-reports-chart');

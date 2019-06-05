@@ -26,23 +26,30 @@ use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
  * future release.
  *
  */
-class UnifiedSearchApi extends SugarListApi {
-    public function registerApiRest() {
-        return array(
-            'globalSearch' => array(
-                'reqType' => 'GET',
-                'path' => array('search'),
-                'pathVars' => array(''),
-                'method' => 'globalSearch',
-                'jsonParams' => array('fields'),
-                'shortHelp' => 'Globally search records',
-                'longHelp' => 'include/api/help/module_get_help.html',
-            )
-        );
-    }
-
+class UnifiedSearchApi extends SugarListApi
+{
     protected $defaultLimit = 20; // How many records should we show if they don't pass up a limit
     protected $defaultModuleLimit = 20; // How many records should we show if they don't pass up a limit
+
+    /**
+     * @var FilterApi
+     */
+    protected $filterApi;
+
+    public function registerApiRest()
+    {
+        return [
+            'globalSearch' => [
+                'reqType' => 'GET',
+                'path' => ['search'],
+                'pathVars' => [''],
+                'method' => 'globalSearch',
+                'jsonParams' => ['fields'],
+                'shortHelp' => 'Globally search records',
+                'longHelp' => 'include/api/help/module_get_help.html',
+            ],
+        ];
+    }
 
     /**
      * This function pulls all of the search-related options out of the $args array and returns a fully-populated array with either the defaults or the provided settings
@@ -52,9 +59,7 @@ class UnifiedSearchApi extends SugarListApi {
      */
     public function parseSearchOptions(ServiceBase $api, array $args)
     {
-        $options = array();
-
-        if ( isset($args['module_list']) && count($args['module_list']) == 1 ) {
+        if (isset($args['module_list']) && is_string($args['module_list'])) {
             // We can create a bean of this type
             $seed = BeanFactory::newBean($args['module_list']);
         } else {
@@ -360,6 +365,9 @@ class UnifiedSearchApi extends SugarListApi {
      * @param $searchEngine SugarSearchEngine The SugarSpot search engine created using the Factory in the caller
      * @param $options array An array of options to pass through to the search engine, they get translated to the $searchOptions array so you can see exactly what gets passed through
      * @return array Two elements, 'records' the list of returned records formatted through FormatBean, and 'next_offset' which will indicate to the user if there are additional records to be returned.
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function globalSearchSpot(ServiceBase $api, array $args, $searchEngine, array $options)
     {
@@ -459,33 +467,40 @@ class UnifiedSearchApi extends SugarListApi {
         }
 
         $searchOptions['erased_fields'] = $args['erased_fields']?? null;
-        $results = $searchEngine->search($options['query'],$offset, $limit, $searchOptions);
-
-        $returnedRecords = array();
 
         $api->action = 'list';
 
-        foreach ( $results as $module => $moduleResults ) {
-            if ( !is_array($moduleResults['data']) ) {
-                continue;
-            }
-            $moduleArgs = $args;
-            // Need to override the filter arg so that it looks like something formatBean expects
-            if ( !empty($options['fieldFilters'][$module]) ) {
-                $moduleFields = $options['fieldFilters'][$module];
-            } else if ( !empty($options['fieldFilters']['_default']) ) {
-                $moduleFields = $options['fieldFilters']['_default'];
-            } else {
-                $moduleFields = array();
-            }
-            $moduleArgs['fields'] = implode(',',$moduleFields);
-            $moduleArgs['erased_fields'] = $args['erased_fields']?? null;
-            foreach ( $moduleResults['data'] as $record ) {
-                $formattedRecord = $this->formatBean($api,$moduleArgs,$record);
-                $formattedRecord['_module'] = $module;
-                // The SQL based search engine doesn't know how to score records, so set it to 1
-                $formattedRecord['_search']['score'] = 1.0;
-                $returnedRecords[] = $formattedRecord;
+        if (empty($options['query']) && empty($searchOptions['custom_where'])) {
+            // use faster method for empty query
+            $returnedRecords = $this->processEmptyQuery($api, $args, $options, $searchOptions);
+        } else {
+            // process using SugarSpot
+            $results = $searchEngine->search($options['query'], $offset, $limit, $searchOptions);
+
+            $returnedRecords = [];
+
+            foreach ($results as $module => $moduleResults) {
+                if (!is_array($moduleResults['data'])) {
+                    continue;
+                }
+                $moduleArgs = $args;
+                // Need to override the filter arg so that it looks like something formatBean expects
+                if (!empty($options['fieldFilters'][$module])) {
+                    $moduleFields = $options['fieldFilters'][$module];
+                } elseif (!empty($options['fieldFilters']['_default'])) {
+                    $moduleFields = $options['fieldFilters']['_default'];
+                } else {
+                    $moduleFields = [];
+                }
+                $moduleArgs['fields'] = implode(',', $moduleFields);
+                $moduleArgs['erased_fields'] = $args['erased_fields'] ?? null;
+                foreach ($moduleResults['data'] as $record) {
+                    $formattedRecord = $this->formatBean($api, $moduleArgs, $record);
+                    $formattedRecord['_module'] = $module;
+                    // The SQL based search engine doesn't know how to score records, so set it to 1
+                    $formattedRecord['_search']['score'] = 1.0;
+                    $returnedRecords[] = $formattedRecord;
+                }
             }
         }
 
@@ -551,5 +566,95 @@ class UnifiedSearchApi extends SugarListApi {
                 }
             }
         }
+    }
+
+    /**
+     * Fetch, format and return a list of records using FilterApi::filterList.
+     * This method is faster than SugarSpot::globalSearch in case of empty "query"
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @param array $options
+     * @param array $searchOptions
+     * @return array
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    protected function processEmptyQuery(ServiceBase $api, array $args, array $options, array $searchOptions): array
+    {
+        if (empty($options['my_items']) && empty($searchOptions['favorites'])
+            && empty($searchOptions['allowEmptySearch'])) {
+            // Unlike filtering, where an empty input means "return all records", a search with an empty input should
+            // yield no records.
+            return [];
+        }
+
+        $returnedRecords = [];
+        foreach ($searchOptions['modules'] as $moduleName) {
+            $moduleName = trim($moduleName);
+            if (!$this->isModuleAccessAllowed($moduleName)) {
+                // No ACL access, skipping
+                continue;
+            }
+
+            // get records for a module and add to the result data set
+            foreach ($this->getFromFilterApi($moduleName, $api, $args) as $record) {
+                $returnedRecords[] = $record;
+            }
+        }
+
+        return $returnedRecords;
+    }
+
+    /**
+     * For a separate module: Fetch, format and return a list of records using FilterApi::filterList
+     *
+     * @param string $moduleName
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    protected function getFromFilterApi(string $moduleName, ServiceBase $api, array $args): array
+    {
+        $records = [];
+
+        $args['module'] = $moduleName;
+        $results = $this->getFilterApi()->filterList($api, $args);
+
+        foreach ($results['records'] ?? [] as $result) {
+            $result['_module'] = $moduleName;
+            // The SQL based search engine doesn't know how to score records, so set it to 1
+            $result['_search']['score'] = 1.0;
+            $records[] = $result;
+        }
+
+        return $records;
+    }
+
+    /**
+     * Getter for filter API
+     *
+     * @return FilterApi
+     */
+    protected function getFilterApi(): FilterApi
+    {
+        $this->filterApi = $this->filterApi ?: new FilterApi();
+        return $this->filterApi;
+    }
+
+    /**
+     * Check ACL permission "ListView" for a $moduleName
+     *
+     * @param string $moduleName
+     * @return bool
+     */
+    protected function isModuleAccessAllowed(string $moduleName): bool
+    {
+        $seed = BeanFactory::newBean($moduleName);
+        return $seed && $seed->ACLAccess('ListView');
     }
 }

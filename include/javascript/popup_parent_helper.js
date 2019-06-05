@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: popup_parent_helper.js 54906 2010-02-25 01:56:40Z dwheeler $
 
 var popup_request_data;
 var close_popup;

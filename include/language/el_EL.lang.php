@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Ρυθμίσεις Email',
     'EmailParticipants' => 'Αποστολή Email στους συμμετέχοντες',
     'DataPrivacy' => 'Πολιτική προστασίας προσωπικών δεδομένων',
+    'ReportSchedules' => 'Χρονοδιαγράμματα Αναφοράς',
+    'CommentLog' => 'Αρχείο σχολίου',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'Ανοιχτή Εξουσιοδότηση',
     'Filters' => 'Φίλτρο',
     'Comments' => 'Σχόλιο',
+    'CommentLog' => 'Αρχείο σχολίου',
     'Currencies' => 'Νόμισμα',
     'ProductTemplates' => 'Πρότυπο Προϊόντος',
     'ProductTypes' => 'Τύπος Προϊόντος',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Ρύθμιση Email',
     'EmailParticipants' => 'Αποστολή Email στον συμμετέχων',
     'DataPrivacy' => 'Πολιτική προστασίας προσωπικών δεδομένων',
+    'ReportSchedules' => 'Χρονοδιάγραμμα Αναφοράς',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Μεταφορές',
     'Utilities' => 'Κοινωφελής Επιχείρηση',
     'Other' => 'Άλλο:',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Βαθμίδα 1',
+    'T2' => 'Βαθμίδα 2',
+    'T3' => 'Βαθμίδα 3',
+    'T4' => 'Βαθμίδα 4',
   ),
   'lead_source_default_key' => 'Αυτο-παραγώμενο',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Μετακίνηση',
         'donothing' => 'Καμία ενέργεια'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Ποτέ',
+        30000 => 'Κάθε 30 δευτερόλεπτα',
+        60000 => 'Κάθε 1 λεπτό',
+        120000 => 'Κάθε 2 λεπτά',
+        180000 => 'Κάθε 3 λεπτά',
+        240000 => 'Κάθε 4 λεπτά',
+        300000 => 'Κάθε 5 λεπτά',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'στην Πρόβλεψη',
         'sales_stage' => 'Στάδιο Πώλησης',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Λίστα',
         'activities' => 'Ροή δραστηριότητας',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Ωριαίος',
+        '21600' => 'Κάθε 6 Ώρες',
+        '43200' => 'Κάθε 12 Ώρες',
+        '86400' => 'Ημερήσια',
+        '604800' => 'Εβδομαδιαία',
+        '1209600' => 'Κάθε 2 Εβδομάδες',
+        '2419200' => 'Κάθε 4 Εβδομάδες',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Εναλλαγή Ορατότητας', // Record view header panel element
   'LBL_ACTIVITIES' => 'Ροή Δραστηριοτήτων',
-  'LBL_COPYRIGHT' => 'Πνευματική ιδιοκτησία © 2004-2018 SugarCRM Inc. Με Επιφύλαξη Παντός Δικαιώματος.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'Tο SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
         'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
         'SugarCRM ®, Sugar Enterprise™ και Sugar™ είναι εμπορικά σήματα της SugarCRM Inc.',
@@ -2687,8 +2716,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Μια ενεργή συνεδρία απαιτείται για την εξαγωγή περιεχομένου.',
     'ERR_NO_HEADER_ID' => 'Αυτο το χαρακτηριστικό δεν είναι διαθέσιμο σε αυτό το θέμα.',
     'ERR_NOT_ADMIN' => "Μη εξουσιοδοτημένη πρόσβαση στη διαχείριση.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Αυτή η επιλογή είναι απενεργοποιημένη στο SugarCRM για λειτουργία IDM και είναι διαθέσιμη στην Κονσόλα cloud.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Παρακαλώ πηγαίνετε στην <a href=\"%s\" target=\"_blank\">Κονσόλα cloud</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Η διαχείριση κωδικού πρόσβασης είναι διαθέσιμη μόνο στις ρυθμίσεις Cloud.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Επικοινωνήστε με το διαχειριστή Sugar αν θέλετε να κάνετε αλλαγές στα πεδία που είναι μόνο για ανάγνωση.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Λείπει το υποχρεωτικό πεδίο:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Άκυρο το υποχρεωτικό πεδίο:',
     'ERR_INVALID_VALUE' => 'Άκυρη Αξία:',
@@ -2723,6 +2754,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Ο Τρέχων Χειριστής δεν επιτρέπεται να αλλάξει τις ρυθμίσεις διαμόρφωσης {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Δεν έχετε εξουσιοδήτηση στα αγαπημένα {moduleName}. Επικοινωνήστε με το διαχειριστή σας, εάν χρειάζεστε πρόσβαση.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Δεν έχετε εξουσιοδήτηση για εγγραφή {moduleName}. Επικοινωνήστε με το διαχειριστή σας, εάν χρειάζεστε πρόσβαση.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'Το worksheet_columns_related_fields δεν βρέθηκε στο έγγραφο',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'Το summary_columns δεν είναι μια σειρά',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'Το summary_columns_related_fields δεν βρέθηκε στο έγγραφο',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'Το footer_rows δεν είναι μια σειρά',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'Το footer_rows_related_fields δεν βρέθηκε στο έγγραφο',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Το αίτημά σας απέτυχε λόγω άγνωστης εξαίρεσης.',
@@ -2914,6 +2953,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Επιλογή τελεστή...',
     'LBL_FILTER_CREATE_NEW' => 'Δημιουργία Φίλτρου',
     'LBL_FILTER_CREATE_FILTER' => 'Δημιουργία νέου φίλτρου',
+    'LBL_FILTER_CLOSE_FILTER' => 'Κλείσιμο φίλτρου',
     'LBL_FILTER_EDIT_FILTER' => 'Επεξεργασία φίλτρου',
     'LBL_FILTER_ALL_RECORDS' => 'Όλες οι Εγγραφές',
     'TPL_FILTER_SAVE' => 'Δημιουργήσατε με επιτυχία το φίλτρο {{name}}.',
@@ -3303,7 +3343,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Με Επιφύλαξη Παντός Δικαιώματος.<br />Το SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
         'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
         'αντίστοιχων εταιριών με τις οποίες συνδέονται.',
@@ -3412,7 +3452,7 @@ $app_strings = array (
     'LNK_RESUME' => 'Επανάληψη',
     'LNK_VIEW_CHANGE_LOG' => 'Προβολή αρχείου καταγραφής ελέγχου',
     'TPL_AUDIT_LOG_TITLE' => 'Αρχείο καταγραφής ελέγχου για {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Κάντε κλικ για να προβάλετε το αρχείο καταγραφής ελέγχου Διεύθυνσης ηλεκτρονικού ταχυδρομείου',
 
     'NTC_CLICK_BACK' => 'Για να διορθωθεί το λάθος, παρακαλώ πατήστε το προηγούμενο πλήκτρο του browser.',
     'NTC_DATE_FORMAT' => '(εεεε-μμ-ηη)',
@@ -3449,6 +3489,11 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Προειδοποίηση:</b> Ο browser σας είναι σε IE συμβατότητα, η οποία δεν υποστηρίζεται.",
     'WARN_LICENSE_SEATS'=>  "Προειδοποίηση: Ο αριθμός των ενεργών χρηστών είναι ήδη ο μέγιστος αριθμός των αδειών που επιτρέπονται.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Προειδοποίηση: Ο αριθμός ενεργών χρηστών υπερβαίνει τον μέγιστο αριθμό αδειών που επιτρέπονται.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Ο αριθμός των ενεργών χρηστών υπερβαίνει τον αριθμό αδειών. Επικοινωνήστε με το διαχειριστή σας.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Μόνο οι διαχειριστές μπορούν να συνδεθούν.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Έχει επιτευχθεί το όριο αριθμού αδειών χρηστών. Μόνο οι υπάρχοντες χρήστες μπορούν να συνδεθούν.',
     'WARN_ONLY_ADMINS'=> "Μόνο οι διαχειριστές μπορούν να συνδεθούν.",
     'WARN_UNSAVED_CHANGES'=> "Είστε έτοιμοι να αφήσετε αυτήν την εγγραφή, χωρίς να αποθηκεύσετε τυχόν αλλαγές που μπορεί να γίνουν στο αρχείο. Είστε βέβαιοι ότι θέλετε να φύγετε από αυτήν την εγγραφή;",
     'LBL_WARN_UNSAVED_CHANGES' => 'Έχετε μη αποθηκευμένες αλλαγές. Είστε βέβαιοι ότι θέλετε να αφήσετε τη σελίδα και να απορρίψετε τις αλλαγές;',
@@ -3542,6 +3587,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Αυτή τη στιγμή έχετε <item1> αποθηκευμένες εγγραφές. <item2> μία τώρα.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Μπορείτε να δημιουργήσετε από μία <item1> from a <item2>. <item3> <item2> λίστα.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Πατήστε εδώ",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Προσθήκη στα Αγαπημένα Μου',
@@ -3647,6 +3693,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Ευκαιρία Μετρήσεων',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Μετρήσεις Ευκαιρίας για Σχετικό Λογαριασμό.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Γρήγορες επιλογές από τον κατάλογο προϊόντων',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Λίστες πρόσφατα χρησιμοποιημένων στοιχείων και προϊόντων που αποθηκεύονται ως αγαπημένα',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Χρησιμοποιήθηκαν πρόσφατα',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Αγαπημένα',
 
     'LBL_DASHLET_NO_RECORDS' => 'Δεν βρέθηκαν εγγραφές αυτή τη στιγμή.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Περίληψη Υπόθεσης',
@@ -4254,7 +4304,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Μέλλον',
     'LBL_REQUIRED_FIELD' => 'Υποχρεωτικό',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Γραμμή Εισηγμένων ειδών',
+    'LBL_DISCOUNT_TOTAL' => 'Συνολική έκπτωση',
+    'LBL_TAX' => 'Φόρος',
+    'LBL_SHIPPING' => 'Παράδοση',
+    'LBL_GRAND_TOTAL' => 'Γενικό Σύνολο',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Αυτόματη συμπλήρωση διεύθυνσης χρέωσης από το προφίλ του λογαριασμού',
+    'LBL_QLI_ADD_GROUP' => 'Προσθήκη μιας ομάδας',
+    'LBL_QLI_COMMENT' => 'Σχόλιο',
+    'LBL_SELECT_ACTION' => 'Επιλογή Ενέργειας',
+    'LBL_QLI_GROUP_NAME' => 'Όνομα ομάδας',
+    'LBL_GROUP_TOTAL' => 'Συνολικό Ομάδας',
+    'LBL_ITEM_NAME' => 'Γραμμή Στοιχείων',
+    'LBL_QLI_DELETE' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στοιχείο γραμμής;',
+    'LBL_QLI_COMMENT_DELETE' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το σχόλιο γραμμής στοιχείου;',
+    'LBL_QLI_GROUP_DELETE' => 'Θέλετε πραγματικά να διαγράψετε την ομάδα {0}; Όλα τα στοιχεία θα μεταφερθούν στην προεπιλεγμένη ομάδα.',
+    'LBL_QLI_GROUP_EMPTY' => 'Δεν υπάρχειΓραμμή Εισηγμένων Ειδών',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Προαιρετικό',
     'LBL_RELATED_MODULE' => 'Σχετικό {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Σχετικό {{{this}}}',
@@ -4284,7 +4354,7 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Επιβεβαίωση',
     'LBL_NO_ACCESS' => '(Δεν έχετε Πρόσβαση)',
     'LBL_NO_ACCESS_LOWER' => 'Κανένα Δικαίωμα Πρόσβασης',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Δεν Υπάρχει πρόσβαση',
     'LBL_VALUE_ERASED' => 'Τιμή διαγράφεται',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Αυτές οι πληροφορίες διαγράφηκαν μέσω αίτησης προστασίας προσωπικών δεδομένων',
     'LBL_CREATE_RELATED_RECORD' => 'Δημιουργία Σχετικής Εγγραφής',
@@ -4912,7 +4982,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Εργασίες Ομάδας',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Σύνθετη Ροή εργασίας',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'UI BWC',
     'LBL_AUDIT_SUBJECT_API-REST' => 'API REST',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'API SOAP ή παλιό REST',
@@ -4973,9 +5043,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Ανακοίνωση:',
     'LBL_ALERT_TITLE_ERROR' => 'Σφάλμα:',
     'LBL_ALERT_TITLE_LOADING' => 'Φορτώνει',
+    'LBL_ALERT_NO_ACCESS' => 'Δεν έχετε πρόσβαση στο φίλτρο που εφαρμόζεται σε αυτό τον πίνακα στοιχείων.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Αντιγράψτε τον πίνακα εργαλείων για να διαμορφώσετε το συγκεκριμένο πίνακα στοιχείων με το δικό σας φίλτρο.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Η έκδοση του προγράμματος περιήγησης δεν υποστηρίζεται πλέον ή χρησιμοποιείτε ένα πρόγραμμα περιήγησης που δεν υποστηρίζεται.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Συνιστώνται οι ακόλουθες εκδόσεις των προγραμμάτων περιήγησης: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
     'LBL_ALERT_CONFIRM_DELETE' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στοιχείο;',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα στοιχεία;',
@@ -5073,7 +5143,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Περίληψη Ιστορικού',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Περισσότερο ιστορικό...',
     'LBL_RELATED_CONTACT' => 'Σχετική Επαφή',
     'LBL_MODULE_TYPE' => 'Τύπος',
@@ -5141,6 +5211,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Λείπουν οι ρυθμίσεις Διακομιστή SMTP',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Για να στείλετε ειδοποιήσεις ανάθεσης εγγραφής , ένας διακομιστής SMTP πρέπει να ρυθμιστεί στο {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Ρυθμίσεις Email',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Νέες Αναφορές Αποθέματος Διαθέσιμες',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Νέες αναφορές αποθεμάτων είναι διαθέσιμες στη ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Ενότητα Αναφορές',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Ονομάζονται «Αναφορά Αποθέματος» και μπορούν να φιλτραριστούν. Οι Αναφορές ονομάζονται επίσης «Πωλήσεις και μάρκετινγκ», «Εξυπηρέτηση πελατών», «Προστασία προσωπικών δεδομένων» ή «Διοίκηση» βάσει του περιεχομένου τους. Για περισσότερες πληροφορίες, ανατρέξτε στο ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'τεκμηρίωση',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'Το SugarCRM επιτρέπει στους δυναμικούς χρήστες να εκτελούν γρήγορα ορισμένες εργασίες με τις συντομεύσεις πληκτρολογίου για την αύξηση της παραγωγικότητας. Οι πίνακες στα δεξιά περιγράφουν διαθέσιμες συντομεύσεις μαζί με τα πλήκτρα και τις ενέργειες που εκτελούν.',
@@ -5250,23 +5325,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Διεργασίες',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων διεργασιών εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν στο εσωτερικό της Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων διεργασιών εμφανίζει το πρότυπο που μπορεί να χρησιμοποιηθεί εντός του SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Ορισμοί Διεργασιών',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων προσδιορισμού διεργασίας εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν στο εσωτερικό της Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων Ορισμών διεργασιών εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν εντός του SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Δημιουργία Ορισμών Διεργασίας',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Εισαγωγή Ορισμών Διεργασίας',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Διεργασία Επιχειρησιακών Κανόνων',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων επιχειρηματικών κανόνων διεργασίας εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν στο εσωτερικό της Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων διεργασιών Επιχειρησιακών κανόνων εμφανίζει το πρότυπο που μπορεί να χρησιμοποιηθεί εντός του SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Δημιουργία Διεργασιών Επιχειρησιακών Κανόνων',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Εισαγωγή Διεργασιών Επιχειρησιακών Κανόνων',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Διεργασία Προτύπου Email',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Ο πίνακας προτύπων ηλεκτρονικών μηνυμάτων διεργασίας εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν στο εσωτερικό της Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Ο πίνακας στοιχείων διεργασιών προτύπων Email εμφανίζει τα πρότυπα που μπορούν να χρησιμοποιηθούν εντός του SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Δημιουργία Διεργασίας Προτύπου Email',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Εισαγωγή Διεργασίας Προτύπου Email',
 
@@ -5290,7 +5368,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => 'Άκυρη',
     'LBL_PMSE_TERMINATED_STATUS' => 'Τερματίστηκε',
     'LBL_PMSE_ERROR_STATUS' => 'Σφάλμα',
-    'LBL_PMSE_SETTINGS' => 'Ρυθμίσεις Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'Ρυθμίσεις SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε αυτή την εγγραφή;',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να ενεργοποιήσετε αυτή την εγγραφή;',
@@ -5314,7 +5392,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Η SugarCRM απαιτεί javascript. Παρακαλώ ενεργοποιήστε το javascript για να συνεχίσετε να χρησιμοποιείτε την SugarCRM.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Τα σειριοποιημένα δεδομένα δεν θα μπορούσαν να είναι μη-σειριοποιημένα',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Τα σειριοποιημένα δεδομένα δεν θα μπορούσαν να είναι μη-σειριοποιημένα επειδή περιέχουν αναφορές σε αντικείμενα ή κλάσεις',
 
@@ -5343,6 +5421,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => 'Προσωπικές πληροφορίες',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Σήμανση για διαγραφή',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Προσωπικές πληροφορίες για {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Αντιγράφηκε στο πρόχειρό σας!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Δεν ήταν δυνατό να αντιγραφεί στο Πρόχειρό σας',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Αντιγράψτε το Σύνδεσμο Επιβεβαίωσης',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Προβολή περισσοτέρων...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Εμφάνιση λιγότερων...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6520,7 +6607,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'YER' => 'Ριάλ',
     'ZWD' => 'Δολάρια Ζιμπάμπουε',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Κανένα',
+        'future' => 'Τρέχουσα τιμή',
+        'old' => 'Παλαιά Τιμή',
+        'both' => 'Τρέχουσα και παλιά αξία',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

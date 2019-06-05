@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Prihlásenie alebo heslo nie je správne',
-	'ERR_BODY_TOO_LONG'		=> '\\rText v tele je príliš dlhý na zaznamenanie CELÉHO e-mailu. Nadbytočný text bol odstránený.',
+	'ERR_BODY_TOO_LONG'		=> '\rText v tele je príliš dlhý na zaznamenanie CELÉHO e-mailu. Nadbytočný text bol odstránený.',
 	'ERR_INI_ZLIB'			=> 'Dočasne sa nepodarilo vypnúť Zlib kompresiu. "Nastavenia testu" môžu zlyhať.',
 	'ERR_MAILBOX_FAIL'		=> 'Nepodarilo sa načítať žiadne e-mailové účty.',
 	'ERR_NO_IMAP'			=> 'Nepodarilo sa nájsť žiadne IMAP knižnice. Vyriešte tento problém pred tým, ako budete pokračovať s prichádzajúcimi e-mailami',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Seed fronty tímov',
 	'LBL_GROUPFOLDER_ID'	=> 'ID skupinového priečinka',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Prideliť k skupinovému priečinku',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Povoliť používateľom odosielať e-maily pomocou mena a adresy v položke "Odosielateľ" ako adresy na zaslanie odpovede',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Keď je táto možnosť vybratá, meno a e-mailová adresa (Odosielateľ) prepojená s týmto skupinovým e-mailovým účtom sa pri vytváraní e-mailov pre používateľov, ktorí majú prístup k tomuto skupinovému e-mailovému účtu, zobrazia ako možnosť pre pole Odosielateľ.',
     'LBL_STATUS_ACTIVE'     => 'Aktívne',
     'LBL_STATUS_INACTIVE'   => 'Neaktívne',
     'LBL_IS_PERSONAL' => 'osobný',

@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Dėmesio: Norint apsaugoti savo duomenis, įdiegimas turi būti uždraustas nustatant &#39;installer_locked&#39; į &#39;true&#39;,  config.php faile.',
  	'WARN_LICENSE_EXPIRED'=> "Pastaba: Jūsų licencija baigiasi už",
     'WARN_LICENSE_EXPIRED2' =>"dieną(-ų). Prašome eiti į <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Licencijos valdymas\"</a>  administracinėje zonoje.",
-    'WARN_LICENSE_SEATS'=>  "Dėmesio: vartotojo licencijų skaičius viršytas",
-    'WARN_LICENSE_SEATS2' => ".  Prašome susisiekti su SugarCRM pardavimų atstovu arba rašyti laišką cagroup@sugarcrm.com.",
+    'WARN_LICENSE_SEATS'=>  "<b>Perspėjimas:</b> yra ",
+    'WARN_LICENSE_SEATS2' => " aktyv. vartotoj., o prenumeruodami galite naudoti tik ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Sulaikykite kai kuriuos vartotojus, susisiekite su partneriu arba pardavimo atstovu,"
+        . " arba el. paštu <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Daugiau informacijos žr. "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "„Kaip suprasti vartotojų tipus ir „Sugar“ licencijas“</a>straipsnis</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Perspėjimas: Aktyvių vartotojų skaičius viršijo maksimaliai leistiną licencijų skaičių.",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Perspėjimas: Aktyvių vartotojų skaičius viršijo maksimaliai leistiną licencijų skaičių.",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Perspėjimas: pasiektas maksimalus aktyvių vartotojų skaičius su Jūsų licencija.",
-    'WARN_REPAIR_CONFIG' => 'Dėmesio: Failui config.php reikia pataisymo.  Prašome naudoti <a href="index.php?module=Administration&action=RebuildConfig">Atstatyti Config gailą</a>  administracinėje zonoje.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Perspėjimas:</b> jūs negalėsite sukurti papildomų aktyvių vartotojų."
+        . " Įsigykite daugiau prenumeratų.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Perspėjimas:</b> jūs negalėsite sukurti papildomų aktyvių vartotojų."
+        . " Įsigykite daugiau prenumeratų.",
+    'WARN_REPAIR_CONFIG' => '<b>Įspėjimas.</b> Reikia pataisyti failą config.php. Norėdami pataisyti konfigūracijos failą, naudokite scenarijų <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Atstatyti konfigūracijos failą</a>, esantį administracinės zonos taisymo puslapyje.',
     'WARN_UPGRADE_APP'=> "Yra išleista naujesnė Sugar versija",
     'WARN_UPGRADE' => 'Dėmesio: Prašome atnaujinti',
     'WARN_UPGRADENOTE' => 'Pastaba:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Išvalyti Vardefs duomenų kešą',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Išvalyti vardefs kešą',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Išvalyti globalios paieškos kešą',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Ištrinti unified_search_modules.php failą iš kešo',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Iš podėlio pašalina unified_search_modules.php',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Greitas taisymas ir atstatymas',
     'LBL_QUICK_REPAIR_TITLE'=>'Prašome pasirinkti modulius taisymui:',
 	'LBL_FAILED_CONNECTION'=> 'Nepavyko prisijungti :',
@@ -1245,15 +1254,17 @@ Visos šiai platformai priklausančios integracijos nebeveiks.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Nepavyko rasti metaduomenų failo.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Nustatymai',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Log Viewer',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Atidarykite',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => 'žurnalą.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Process Management',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'View all open and running Processes in the system.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigūruokite',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => 'parametrus ir peržiūrėkite žurnalus. Naudodamiesi procesų valdymu tvarkykite visus visų vartotojų BPM procesus.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Pasiūlymų konfigūravimas',
+    'LBL_MANAGE_QUOTES' => 'Sukonfigūruokite pasiūlymų darbalapio išdėstymą',
 );

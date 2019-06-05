@@ -85,6 +85,15 @@ class ConfiguratorViewEdit extends ViewEdit
         } else {
             $this->ss->assign('lead_conv_activities', get_select_options_with_id(  Lead::getActivitiesOptions(), ''));
         }
+        $this->ss->assign(
+            'processes_auto_save_options',
+            get_select_options_with_id(
+                $app_list_strings['processes_auto_save_interval'],
+                empty($configurator->config['processes_auto_save_interval']) ?
+                    '' :
+                    $configurator->config['processes_auto_save_interval']
+            )
+        );
         if (!empty($configurator->config['logger']['file']['suffix'])) {
             $this->ss->assign('filename_suffix', get_select_options_with_id(  SugarLogger::$filename_suffix,$configurator->config['logger']['file']['suffix']));
         } else {

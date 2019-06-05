@@ -179,23 +179,33 @@ class ForecastDirectReports extends SugarBean {
     //logged in user.
     //select forecasts in descending order. the system shows only the most recent forecast.
     //join with the worksheet table to get the overide created for that  user's commit amount
-    function create_forecast_query_for_user($this_user,$type,$cur_user_id, $cur_user_forecast_type) {
-    global $current_user;
-        $query = "SELECT ";
-        $query .= " forecasts.id, forecasts.opp_count, forecasts.pipeline_opp_count, forecasts.pipeline_amount, forecasts.opp_weigh_value, forecasts.best_case,forecasts.likely_case,forecasts.worst_case, forecasts.date_entered, '$type' as forecast_type ";
-        $query .= " ,worksheet.id worksheet_id ,worksheet.best_case wk_best_case, worksheet.likely_case wk_likely_case, worksheet.worst_case wk_worst_case";
-        $query .= " FROM forecasts";
+    public function create_forecast_query_for_user($this_user, $type, $cur_user_id, $cur_user_forecast_type)
+    {
+        global $current_user;
 
-        $query .= " LEFT JOIN worksheet on forecasts.user_id = worksheet.related_id and worksheet.user_id='{$current_user->id}' AND worksheet.forecast_type='$cur_user_forecast_type' AND worksheet.timeperiod_id='$this->current_timeperiod_id' AND related_forecast_type='$type'";
+        $query = <<<SQL
+SELECT forecasts.id, forecasts.opp_count, forecasts.pipeline_opp_count, forecasts.pipeline_amount, 
+forecasts.opp_weigh_value, forecasts.best_case,forecasts.likely_case,forecasts.worst_case, forecasts.date_entered,
+%s forecast_type, worksheet.id worksheet_id, worksheet.best_case wk_best_case, 
+worksheet.likely_case wk_likely_case, worksheet.worst_case wk_worst_case
+FROM forecasts
+LEFT JOIN worksheet ON forecasts.user_id = worksheet.related_id AND worksheet.user_id=%s AND worksheet.forecast_type=%s 
+AND worksheet.timeperiod_id=%s AND related_forecast_type=%s
+WHERE forecasts.timeperiod_id = %s AND forecasts.forecast_type = %s AND forecasts.user_id = %s
+ORDER BY forecasts.date_entered DESC
+SQL;
 
-        $query .= " WHERE";
-
-        $query .= "  forecasts.timeperiod_id = '$this->current_timeperiod_id'";
-        $query .= " AND forecasts.forecast_type = '$type'";
-        $query .= " AND forecasts.user_id = '$this_user'";
-
-        $query .= " ORDER BY forecasts.date_entered desc" ;
-        return $query;
+        return sprintf(
+            $query,
+            $this->db->quoted($type),
+            $this->db->quoted($current_user->id),
+            $this->db->quoted($cur_user_forecast_type),
+            $this->db->quoted($this->current_timeperiod_id),
+            $this->db->quoted($type),
+            $this->db->quoted($this->current_timeperiod_id),
+            $this->db->quoted($type),
+            $this->db->quoted($this_user)
+        );
     }
 
 

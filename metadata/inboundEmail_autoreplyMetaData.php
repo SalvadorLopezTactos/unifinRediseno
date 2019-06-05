@@ -50,7 +50,6 @@ $dictionary['InboundEmail_autoreply'] = array ('table' => 'inbound_email_autorep
 			'name' => 'ie_id',
 		    'vname' => 'LBL_INBOUNDEMAIL_ID',
 			'type' => 'id',
-		    'len' => '36',
 		    'default' => '',
 			'required' => true,
 		    'reportable' => false,

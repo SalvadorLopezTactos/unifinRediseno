@@ -129,6 +129,7 @@ $dictionary['pmse_BpmnExtension'] = array(
     'ignore_templates' => array(
         'taggable',
         'lockable_fields',
+        'commentlog',
     ),
     'uses' => array(
         'basic',

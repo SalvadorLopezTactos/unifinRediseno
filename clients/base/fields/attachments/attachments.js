@@ -342,12 +342,8 @@
             showProgress: true
         });
 
-        // pass OAuth token as GET-parameter during file upload.
-        // otherwise, in case if file is too large, the whole request body may
-        // be ignored by interpreter together with the token
         options = {
             format: 'sugar-html-json',
-            oauth_token: app.api.getOAuthToken()
         };
         myURL = app.api.buildURL('Mail/attachment', null, null, options);
         var request = app.api.call('create', myURL, null, {

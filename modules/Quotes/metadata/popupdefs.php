@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: popupdefs.php 54464 2010-02-11 15:55:50Z jmertic $
 
 $popupMeta = array (
 	'moduleMain' => 'Quote',

@@ -189,21 +189,21 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreno kao uspjelo” ili „Zatvoreno kao neuspjelo”. Modul {{plural_module_name}} može se dodatno iskoristiti upotrebom Sugarova modula {{forecasts_singular_module}}ing u svrhu razumijevanja i predviđanja trendova prodaje, kao i usmjeravanja poslovanja prema postizanju prodajnih kvota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. 
 
-- Uredite polja ovog zapisa tako da kliknete na pojedino polje ili gumb Uredi.
-- Pogledajte ili izmijenite poveznice na ostale zapise u podpločama tako da prebacite donje lijevo okno na „Prikaz podataka”.
-- Pišite i pregledavajte komentare korisnika i bilježite povijest promjena u modulu {{activitystream_singular_module}} tako da prebacite donje lijevo okno na „Pregled aktivnosti”. 
-- Slijedite ili označite ovaj zapis kao omiljen s pomoću ikona koje se nalaze desno od naziva zapisa.
+- Uredite polja ovog zapisa tako da kliknete na pojedinačno polje ili gumb Uredi. 
+- Pogledajte ili izmijenite poveznice na ostale zapise u podpločama tako da prebacite donje lijevo okno na „Prikaz podataka”. 
+- Objavljujte i pregledavajte komentare korisnika i bilježite povijest promjena u modulu {{activitystream_singular_module}} tako da prebacite donje lijevo okno na „Pregled aktivnosti”.
+- Slijedite ili označite ovaj zapis kao omiljen s pomoću ikona koje se nalaze desno od naziva zapisa. 
 - Dodatne radnje dostupne su u padajućem izborniku Radnje koji se nalazi desno od gumba Uredi.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. 
 
-Stvaranje modula {{module_name}}:
-1. Unesite vrijednosti polja po želji.
- - Polja označena „Obavezno” moraju se ispuniti prije spremanja.
- - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
+Stvaranje modula {{module_name}}: 
+1. Unesite vrijednosti polja po želji. 
+ - Polja označena kao „Obavezno” moraju se ispuniti prije spremanja. 
+ - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno. 
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
 // END ENT/ULT

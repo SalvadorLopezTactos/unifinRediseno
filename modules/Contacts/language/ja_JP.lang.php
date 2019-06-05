@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '別の住所を主となる住所にコピー',
     'NTC_COPY_PRIMARY_ADDRESS' => '主となる住所を別の住所にコピー',
     'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\\n 取引先を新しく作るか、既存の取引先を選択してください。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\n 取引先を新しく作るか、既存の取引先を選択してください。',
     'NTC_REMOVE_CONFIRMATION' => '本当にこの取引先担当者をケースからはずしてよいですか？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '本当にこの報告先をはずしてよいですか？',
 

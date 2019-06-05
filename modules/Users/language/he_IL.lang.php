@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'הקצה לצוות',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'קבוצות שזמינות להצגה כברירת מחדל ברישומים הן קבוצות שאתה חבר בהן.',
 	'LBL_DEFAULT_TEAM'					=> 'קבוצות ברירת מחדל',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'קבוצה ראשית ברירת מחדל',
 	'LBL_LIST_DESCRIPTION'				=> 'תיאור',
 	'LBL_MY_TEAMS'						=> 'הקבוצות שלי',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'קבוצה פרטית עבור',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'כתובת דוא"ל נמען',
 	'ERR_SERVER_STATUS'					=> 'מצב השרת שלך',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'המערכת לא יכולה לשלוח הודעת דוא"ל למשתמש. אנא בדוק את תצורת הדואר היוצא בתוך <a href="index.php?module=EmailMan&action=config">הגדרות דוא"ל</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'ניתן ליצור משתמש רק באמצעות <a href="{0}" target="_blank">Cloud Console</a> עבור מצב IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'ניתן לעדכן כתובת דוא"ל ראשית רק באמצעות <a href="{0}" target="_blank">Cloud Console</a> עבור מצב IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'כתובת דואר אלקטרוני:',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'אשר סיסמה',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\\n\\nClick “OK�? to proceed.\\nClick “Cancel�? to return to the record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\n\nClick “OK�? to proceed.\nClick “Cancel�? to return to the record.',
 	'LBL_COUNTRY'						=> 'מדינה',
 	'LBL_CURRENCY_TEXT'					=> 'Select the currency that will be displayed by default when you create new records. This is also the currency that will be displayed in the Amount columns in the Opportunities ListView.',
 	'LBL_CURRENCY'						=> 'Currency',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'מספר ספרים להצגה במערכת לאחר הנקודה בשבר עשרוני',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'הצג מטבע מועדף',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'המר מטבע בסיס לבחירת המשתמש במסכים רשימה ורשומות',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'צור פריטי שורה של הכנסות במטבע המועדף עליך',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'פריטי השורה של ההכנסות שנוספו להזדמנות מ"קטלוג המוצרים" יומרו למטבע המועדף של המשתמש אם הוא שונה מהמטבע שמשמש בפריט "קטלוג המוצרים".',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'מפריד אלפים',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'תו המשמש כדי להפריד אלפים',
 	'LBL_DECIMAL_SEP'					=> 'סמל עשרוני',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Provide both a User Name and an Email Address.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'זה לא פעיל כעת. אנא צור קשר עם המנהל',
 	'LBL_PUBLISH_KEY'					=> 'פרסם מפתח',
-
+    'LBL_SITE_USER_ID' => 'קוד Hash של site_url ושל user_id',
     'LBL_QUOTAS'                        => 'מיכסות',
     'LBL_FORECASTS'                     => 'תחזיות',
     'LBL_WORKSHEETS'                    => 'גליונות עבודה',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'פרופיל משתמש',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'אם שדות מסוימים אינם ניתנים לעריכה, אנא התחבר ל- Cloud Console כדי לנהל את שדות אלה',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'אם ברצונך לשנות שדות מסוימים שאינם ניתנים לעריכה, ' .
-        'אנא פנה למנהל המערכת כדי להודיע על שינויים אלה',
+        'צור קשר עם מנהל מערכת של Sugar אם ברצונך לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
 ); // END STRINGS DEFS
-
-?>

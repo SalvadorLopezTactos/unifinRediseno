@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'זהו חשבון המערכת.',
     'LBL_EMAIL_ADDRESS_ID' => 'מזהה כתובת דוא"ל',
     'LBL_TYPE' => 'סוג',
+    'LBL_REPLY_TO_NAME' => 'שם "השב-אל"',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'כתובות דוא"ל "השב-אל"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'מזהה כתובת דוא"ל "השב-אל"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'כתובת דוא"ל "השב-אל"',
+    'LBL_PRIMARY_TEAM' => 'צוות ראשי',
 );

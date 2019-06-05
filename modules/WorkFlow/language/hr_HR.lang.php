@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definicije tijeka rada',
   'LBL_MODULE_NAME_SINGULAR' => 'Definicija tijeka rada',
-  'LBL_MODULE_ID' => 'Tijek rada',  
+  'LBL_MODULE_ID' => 'Tijek rada',
   'LBL_MODULE_TITLE' => 'Tijek rada: početno',
   'LBL_SEARCH_FORM_TITLE' => 'Pretraživanje tijeka rada',
   'LBL_LIST_FORM_TITLE' => 'Popis tijeka rada',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Modul meta:',
   'LBL_LIST_ORDER' => 'Redoslijed procesa:',
   'LBL_FROM_NAME' => 'Ime pošiljatelja:',
-  'LBL_FROM_ADDRESS' => 'Adresa pošiljatelja:',  
+  'LBL_FROM_ADDRESS' => 'Adresa pošiljatelja:',
   'LNK_NEW_WORKFLOW' => 'Stvori definiciju tijeka rada',
-  'LNK_WORKFLOW' => 'Popiši definicije tijeka rada', 
-  
-  
+  'LNK_WORKFLOW' => 'Popiši definicije tijeka rada',
+
+
   'LBL_ALERT_TEMPLATES' => 'Predlošci upozorenja',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Stvori predložak upozorenja:',
   'LBL_SUBJECT' => 'Predmet:',
-  
+
   'LBL_RECORD_TYPE' => 'Primjenjuje se na:',
  'LBL_RELATED_MODULE'=> 'Povezani modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Slijed tijeka rada',
 	'LNK_ALERT_TEMPLATES' => 'Predlošci e-pošte za upozorenje',
 	'LNK_PROCESS_VIEW' => 'Slijed tijeka rada',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Vrsta',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napoma:</strong> Iz budućeg izdanja Sugara uklonit će se funkcije Sugar tijek rada i Upravljanje tijekom rada. Korisnici izdanja Sugar Enterprise trebali bi početi s upotrebom funkcije Sugar napredni tijek rada. Više informacija potražite na <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napomena:</strong> Funkcije Sugar tijek rada i Upravljanje trenutačno su u načinu održavanja. Korisnici izdanja Sugar Enterprise trebali bi se služiti funkcijom koju pruža SugarBPM<sup class="trademark">TM</sup>.',
 );
 

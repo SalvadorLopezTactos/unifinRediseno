@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => '이 프로세스 정의에 대해 실행 중인 활성 프로세스가 있습니다. 이를 업데이트하면 프로세스에 영향을 미칠 수 있습니다. 이 프로세스 정의를 편집하시겠습니까?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => '이 프로세스 정의에 대해 실행 중인 활성 프로세스가 있습니다. 이를 업데이트하면 프로세스에 영향을 미칠 수 있습니다. 이 프로세스 정의를 사용하지 않도록 하시겠습니까?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '자동으로 파일 시스템에서 * .bpm 파일을 가져 와서 새로운 프로세스 정의 레코드를 만듭니다.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '.bpm 파일을 업로드하여 프로세스 정의를 가져옵니다.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => '프로세스 정의가 성공적으로 시스템에 가져 왔습니다.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => '유효한 * .bpm 파일을 선택하십시오.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '프로세스 정의 가져오기가 완료되었지만 비즈니스 규칙이 선택되지 않은 비즈니스 규칙 작업이 하나 이상 포함되어 있습니다.',
+    'LBL_BPM_IMPORT_SELECT' => '이 프로세스 정의에는 다음 비즈니스 규칙 및 이메일 템플릿이 포함됩니다.'
+        . '가져올 항목을 선택하십시오.',
+    'LBL_BUSINESS_RULES' => '비즈니스 규칙',
+    'LBL_EMAIL_TEMPLATES' => '이메일 템플릿',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => '원상태로',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => '다시하기',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => '저장하기',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => '유효성 검사',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => '저장 및 유효성 검사',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => '유효성 검사를 실행하여 오류 확인',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '예정된 활동',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => '삭제하기',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => '모듈',
+    'LBL_PMSE_FORM_LABEL_FILTER' => '필터',
+    'LBL_PMSE_FORM_LABEL_RELATED' => '관련',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => '기준',
     'LBL_PMSE_FORM_LABEL_DURATION' => '기간',
     'LBL_PMSE_FORM_LABEL_UNIT' => '단위',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '필드',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '모듈 필드 평가',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '모듈',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => '관련된 자료',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => '필드',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => '가치',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => '양식 응답 평가',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '가 아닙니다',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '와(과) 같지 않음',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '모든 관련 레코드',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '여하한 관련 레코드',
+
     'LBL_PMSE_RUNTIME_BUTTON' => '실행 시간',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '추가',
     'LBL_PMSE_FORMPANEL_CLOSE' => '닫기',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => '팀',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '레코드를 생성한 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '레코드에서 최근 수정한 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '레코드에 할당되는 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '레코드에 할당된 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '레코드를 작성한 사람의 매니저인 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '레코드를 최근 수정한 사람의 매니저인 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '레코드에 할당되는 사람의 매니저인 %MODULE% 내 사용자',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '레코드에 할당되었던 사람의 매니저인 %MODULE% 내 사용자',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%MODULE% 관련 %RELATED%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '%MODULE% 작성한 사용자',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '%MODULE% 마지막 수정한 사용자',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '%MODULE%에 할당된 사용자',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '%MODULE%에 할당되었던 사용자',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE% 제작 매니저',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '%MODULE% 마지막 수정한 매니저',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '%MODULE%에 할당된 매니저',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '%MODULE%에 할당되었던 매니저',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => '역할: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => '팀: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => '제안',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => '잘못된 식 구문.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => '프로세스 정의 유효성 검사: 요소 설정 검색',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => '프로세스 정의 유효성 검사: 요소 설정 유효성 검사',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => '오류 목록을 새로 고치는 중...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => '유효성 검사 완료! 발견된 문제: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' 문제',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => '유효성 검사 진행 중',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => '경고: 이 요소에서 프로세스가 중단되거나 다른 의도치 않은 효과가 있을 수 있습니다.',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => '오류: 이 요소에서 프로세스가 중단됩니다.',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => '요소를 확인할 수 없습니다.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => '요소가 들어오는 최소 흐름 수를 충족하지 않습니다.',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => '이 요소에 들어오는 최소 경로 수가 있어야 합니다. 최소 수를 충족시키는지 확인하기 위해 이 요소에 연결되는 경로 수를 확인하십시오.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => '요소가 들어오는 최대 흐름 수를 초과합니다.',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => '이 요소에 들어오는 최대 경로 수가 초과하지 합니다. 최대 수를 초과하지 않는지 확인하기 위해 이 요소에 연결되는 경로 수를 확인하십시오.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => '요소가 나가는 최소 흐름 수를 충족하지 않습니다.',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => '이 요소에 들어오는 최소 경로 수가 있어야 합니다. 최소 수를 충족시키는지 확인하기 위해 이 요소를 내보내는 경로 수를 확인하십시오.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => '요소가 나가는 최소 흐름 수를 초과합니다.',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => '이 요소에 나가는 최대 경로 수가 초과하지 합니다. 최대 수를 초과하지 않는지 확인하기 위해 이 요소를 내보내는 경로 수를 확인하십시오.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => '필수 필드가 설정되지 않았습니다.',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => '이 요소에는 필수 필드가 있지만 설정되지 않았습니다. 요소 설정에서 필드가 올바르게 설정되었는지 확인하고 "저장" 버튼을 클릭하십시오.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => '현재 시스템에 데이터가 없습니다.',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => '이 요소의 설정이 데이터베이스에 없는 특정 데이터 부분을 참조합니다. 참조된 모든 데이터가 있는지 요소 설정을 확인하십시오(예: 특정 사용자, 모듈 필드, 팀 등).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => '기준 상자 식은 true로 평가되지 않습니다.',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => '기준 상자에는 논리 AND/OR/NOT 식이 포함됩니다. 이 오류는 요소 설정의 기준 상자가 식이 true가 될 수 없는 방식으로 구성된 것을 의미합니다. 기준 상자를 확인하여 식이 true가 되지 못하게 하는 논리적 모순을 제거하십시오.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => '요소에 연결할 수 없습니다.',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => '프로세스에서 요소를 실행하려면 연결할 경로가 있어야 합니다. 이 요소에 연결되는 경로 체인은 시작 요소로 시작해야 합니다. 체인이 시작 요소로 시작하는지 이 요소에 들어오는 경로 체인을 확인하십시오.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => '대기 시간 기준은 정확하게 하나의 datetime 상수를 포함해야 합니다.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => '이 대기 이벤트 요소는 "Fixed Date" 기준 상자를 사용하여 구성했습니다. 이 상자에는 하나의 "Fixed Datetime" 상수 또는 Datetime 필드 참조가 있어야 합니다. 식의 다른 모든 부분에는 수학 연산자(+/-)나 "Time Span" 상수여야 합니다.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => '지정된 기간 값은 0이 아니어야 합니다.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => '이 대기 이벤트 요소는 "기간" 설정을 사용하여 구성되었습니다. 이 설정은 0이 아니어야 하며 0일 경우 오류가 발생합니다. "기간"이 0으로 설정되지 않았는지 요소 설정을 확인하십시오.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => '대기 시간 매개 변수가 설정되지 않았습니다.',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => '이 대기 이벤트 요소에는 구성된 설정이 없습니다. "기간" 또는 "고정 날짜"가 선태되었는지 요소 설정을 확인하고 원하는 값을 입력한 다음 "저장" 버튼을 클릭하십시오.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => '예상 시간이 0보다 작습니다.',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => '이 활동 요소의 "양식" 설정에서 예상 시간이 음수로 설정되어 요소에 도달했을 때 프로세스가 중지될 수 있습니다. 예상 시간을 음수가 아닌 숫자로 변경하려면 이 요소에 대한 "양식" 설정을 여십시오.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => '작업 유형이 [Unassigned]입니다.',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => '이 작업 요소에 지정된 유형이 없습니다. 작업 요소를 마우스 오른쪽 버튼으로 클릭한 다음 "작업 유형" 목록에서 유형을 선택하여 변경할 수 있습니다.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => '경로가 보장되지 않았습니다.',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => '이 오류 메시지는 이 게이트웨이 요소 밖의 경로가 없어 프로세스가 중지될 가능성이 있기 때문에 발생합니다. 요소 설정의 조건 상자 식이 모두 충족되지 않는 경우 선택할 기본 경로를 설정하는 것이 좋습니다. 기본 경로는 게이트웨어 요소를 마우스 오른쪽 버튼으로 클릭하고 "기본 흐름" 메뉴에서 요소를 선택하여 설정할 수 있습니다. 기본 경로를 지정하지 않으면 요소 설정의 조건 상자 식을 변경하여 프로세스가 실행될 때 그 중 하나 이상이 true인지 확인해야 합니다.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '수렴 게이트웨이 유형이 들어오는 흐름 게이트웨이 유형과 일치하지 않습니다.',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '분기 게이트웨이는 프로세스를 여러 개의 분기로 확장합니다. 이러한 분기들을 하나의 경로로 다시 수렴하기 위해 수렴 게이트웨이를 사용할 때 분기를 생성할 때 사용한 분기 게이트웨이 유형에 따라 올바른 수렴 게이트웨이 유형을 사용해야 합니다. 전용 또는 이벤트 기반 분기 게이트웨이로 생성된 분기의 경우 전용 분기 게이트웨이를 사용하여 다시 수렴하십시오. 병렬 또는 포함 분기 게이트웨이로 생성된 분기의 경우 병렬 수렴 게이트웨이를 사용하여 다시 수렴하십시오.',
 );

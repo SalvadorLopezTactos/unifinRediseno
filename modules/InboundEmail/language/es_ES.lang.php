@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Usuario o contraseña incorrecta',
-	'ERR_BODY_TOO_LONG'		=> '\\rEl texto del cuerpo es demasiado largo para capturar el email COMPLETO. Truncado.',
+	'ERR_BODY_TOO_LONG'		=> '\rEl texto del cuerpo es demasiado largo para capturar el email COMPLETO. Truncado.',
 	'ERR_INI_ZLIB'			=> 'No pudo deshabilitarse la compresión Zlib temporalmente.  Puede que "Comprobar Configuración" falle.',
 	'ERR_MAILBOX_FAIL'		=> 'No se pudo recuperar ninguna cuenta de correo.',
 	'ERR_NO_IMAP'			=> 'No se han encontrado las librerías de IMAP.  Resuelva esto antes de continuar con la configuración de correo entrante',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Colas de fuentes de equipos',
 	'LBL_GROUPFOLDER_ID'	=> 'Id de Carpeta de Grupo',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Asignar a Carpeta de Grupo',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Permitir que los usuarios envíen correo usando el Nombre y la Dirección del campo "De" como dirección de respuesta',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Cuando se selecciona esta opción, el Nombre y Dirección del remitente asociados a la cuenta de correo de este grupo aparecerán como una opción para el campo "De" al escribir un correo para los usuarios que tengan acceso a la cuenta de correo del grupo.',
     'LBL_STATUS_ACTIVE'     => 'Activo',
     'LBL_STATUS_INACTIVE'   => 'Inactivo',
     'LBL_IS_PERSONAL' => 'personal',

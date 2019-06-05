@@ -271,6 +271,10 @@
          * New models can be {@link VirtualCollection#add linked} and existing
          * models can be {@link VirtualCollection#remove unlinked} when the
          * record is synchronized with the server.
+         *
+         * @deprecated 8.3.0 May be removed in 9.3.0 or any subsequent release.
+         * Virtual collections are only used for the invitees field and should
+         * not be used for anything else.
          */
         VirtualCollection = app.MixedBeanCollection.extend({
             /**
@@ -286,6 +290,8 @@
              * the collection without models (`[]`) and subsequently add all
              * models.
              *
+             * @param {Array} models The list of initial models to put in the
+             *   collection.
              * @param {Object} options
              * @param {Object} [options.offsets] The initial offsets for any
              * links in the collection. The keys are the link names and the
@@ -294,6 +300,10 @@
              * in the collection related through that link.
              */
             constructor: function(models, options) {
+                app.logger.warn(
+                    'VirtualCollection is deprecated since 8.3.0 and may be removed in 9.3.0 or any subsequent release.'
+                );
+
                 options || (options = {});
 
                 app.MixedBeanCollection.prototype.constructor.call(this, models, options);
@@ -1105,12 +1115,8 @@
          * {@link Data.Bean} has changed.
          */
         BeanOverrides.prototype.hasChanged = function(attr) {
-            if (attr == null) {
-                // test all collection fields
-                attr = this.model.getCollectionFieldNames();
-            } else if (_.contains(this.model.getCollectionFieldNames(), attr)) {
-                // only test one collection field
-                attr = [attr];
+            if (attr === null || attr === 'invitees') {
+                attr = ['invitees'];
             } else {
                 // don't test any collection fields
                 attr = [];
@@ -1133,13 +1139,11 @@
          */
         BeanOverrides.prototype.changedAttributes = function(diff) {
             var changed = {};
-
-            _.each(this.model.getCollectionFieldNames(), function(attr) {
-                var collection = this.get(attr);
-                if (collection && collection.hasChanged()) {
-                    changed[attr] = collection;
-                }
-            }, this.model);
+            var attr = 'invitees';
+            var collection = this.model.get(attr);
+            if (collection && collection.hasChanged()) {
+                changed[attr] = collection;
+            }
 
             return changed;
         };
@@ -1151,12 +1155,10 @@
          * synchronized.
          */
         BeanOverrides.prototype.revertAttributes = function(options) {
-            _.each(this.model.getCollectionFieldNames(), function(attr) {
-                var collection = this.get(attr);
-                if (collection) {
-                    collection.revert(options);
-                }
-            }, this.model);
+            var collection = this.model.get('invitees');
+            if (collection) {
+                collection.revert(options);
+            }
         };
 
         /**
@@ -1182,13 +1184,11 @@
                 return this.model.get(key);
             }
 
-            _.reduce(this.model.getCollectionFieldNames(), function(memo, attr) {
-                var collection = this.get(attr);
-                if (collection) {
-                    memo[attr] = collection;
-                }
-                return memo;
-            }, syncedAttributes, this.model);
+            var attr = 'invitees';
+            var collection = this.model.get(attr);
+            if (collection) {
+                syncedAttributes[attr] = collection;
+            }
 
             return syncedAttributes;
         };
@@ -1329,9 +1329,13 @@
                  * we want to use the Backbone version.
                  *
                  */
-                this.get = function(attr) {
-                    return Backbone.Model.prototype.get.call(this, attr);
-                };
+                this.get = _.wrap(this.get, function(_super, attr) {
+                    if (attr === 'invitees') {
+                        return Backbone.Model.prototype.get.call(this, attr);
+                    }
+
+                    return _super.call(this, attr);
+                });
 
                 /**
                  * Defers to {@link BeanOverrides#hasChanged} when the
@@ -1394,7 +1398,11 @@
              * @return {Array}
              */
             getCollectionFieldNames: function() {
-                return _.chain(this.fields).where({type: 'collection'}).pluck('name').value();
+                if (this.fields.invitees) {
+                    return ['invitees'];
+                }
+
+                return [];
             }
         });
     });

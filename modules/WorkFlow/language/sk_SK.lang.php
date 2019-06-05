@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definície pracovného postupu',
   'LBL_MODULE_NAME_SINGULAR' => 'Definícia pracovného postupu',
-  'LBL_MODULE_ID' => 'Pracovný postup',  
+  'LBL_MODULE_ID' => 'Pracovný postup',
   'LBL_MODULE_TITLE' => 'Pracovný postup: Domov',
   'LBL_SEARCH_FORM_TITLE' => 'Vyhladať pracovný postup',
   'LBL_LIST_FORM_TITLE' => 'Zoznam pracovného postupu',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Cieľový modul:',
   'LBL_LIST_ORDER' => 'Poradie postupu:',
   'LBL_FROM_NAME' => 'Meno odosielateľa:',
-  'LBL_FROM_ADDRESS' => 'Z adresy:',  
+  'LBL_FROM_ADDRESS' => 'Z adresy:',
   'LNK_NEW_WORKFLOW' => 'Vytvoriť definíciu pracovného postupu',
-  'LNK_WORKFLOW' => 'Zoznam definícií pracovného postupu', 
-  
-  
+  'LNK_WORKFLOW' => 'Zoznam definícií pracovného postupu',
+
+
   'LBL_ALERT_TEMPLATES' => 'Šablóny upozornení',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Vytvoriť šablónu upozornenia:',
   'LBL_SUBJECT' => 'Predmet:',
-  
+
   'LBL_RECORD_TYPE' => 'Platí pre:',
  'LBL_RELATED_MODULE'=> 'Súvisiaci modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sekvencie pracovného postupu',
 	'LNK_ALERT_TEMPLATES' => 'Šablóny e-mailu s upozornením',
 	'LNK_PROCESS_VIEW' => 'Sekvencie pracovného postupu',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Poznámka:</strong> Funkcie Sugar Workflow a Workflow Management budú odstránené v budúcom vydaní systému Sugar. Zákazníci s vydaním Sugar Enterprise by mali začať používať funkcie, ktoré poskytuje nástroj Sugar Advanced Workflow. Kliknutím <a href="http://www.sugarcrm.com/wf-eol" target="_blank">sem</a> zobrazíte ďalšie informácie.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Poznámka:</strong> Funkcie Sugar Workflow a Workflow Management sú v režime údržby. Zákazníci s vydaním Sugar Enterprise by mali používať funkcie, ktoré poskytuje SugarBPM<sup class="trademark">TM</sup>.',
 );
 

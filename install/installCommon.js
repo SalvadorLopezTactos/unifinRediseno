@@ -8,7 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: installCommon.js 13581 2006-05-27 20:00:56Z chris $
 
 function showHelp(step)
 {

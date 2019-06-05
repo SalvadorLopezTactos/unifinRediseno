@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Saml2\Builder;
 
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\LogoutRequest;
 use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\Request\LogoutPostRequest;
 use Sugarcrm\IdentityProvider\Saml2\Request\AuthnRequest;
@@ -25,14 +27,14 @@ use Sugarcrm\IdentityProvider\CSPRNG\Generator as IdGenerator;
  */
 class RequestBuilder
 {
-    /** @var  \OneLogin_Saml2_Auth*/
+    /** @var  Auth*/
     private $auth;
 
     /**
      * RequestBuilder constructor.
-     * @param \OneLogin_Saml2_Auth $auth
+     * @param Auth $auth
      */
-    public function __construct(\OneLogin_Saml2_Auth $auth)
+    public function __construct(Auth $auth)
     {
         $this->auth = $auth;
     }
@@ -42,7 +44,7 @@ class RequestBuilder
      *
      * @param string $requestData
      * @param array $parameters
-     * @return \OneLogin_Saml2_LogoutRequest | LogoutPostRequest
+     * @return LogoutRequest | LogoutPostRequest
      */
     public function buildLogoutRequest($requestData, array $parameters = [])
     {
@@ -57,7 +59,7 @@ class RequestBuilder
             return new LogoutPostRequest($this->auth->getSettings(), $requestData, $nameId, $sessionIndex);
         }
 
-        return new \OneLogin_Saml2_LogoutRequest($this->auth->getSettings(), $requestData, $nameId, $sessionIndex);
+        return new LogoutRequest($this->auth->getSettings(), $requestData, $nameId, $sessionIndex);
     }
 
     /**
@@ -68,7 +70,7 @@ class RequestBuilder
      * @param bool|true $setNameIdPolicy
      * @return AuthnRequest
      */
-    public function buildLoginRequest($forceAuthn = false, $isPassive = false, $setNameIdPolicy = true)
+    public function buildLoginRequest($forceAuthn = false, $isPassive = false, $setNameIdPolicy = true): AuthnRequest
     {
         return new AuthnRequest(
             $this->auth->getSettings(),

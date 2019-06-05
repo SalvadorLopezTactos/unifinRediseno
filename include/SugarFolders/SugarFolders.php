@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\FetchMode;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 
 require_once("vendor/ytree/Tree.php");
@@ -117,14 +120,24 @@ class SugarFolder {
         );
 	}
 
-	function checkEmailExistForFolder($id) {
-        $count = $this->db->getConnection()->executeQuery(
-            "SELECT COUNT(*) FROM folders_rel"
-            . " WHERE polymorphic_module = 'Emails' AND polymorphic_id = ? AND folder_id = ?",
-            [$id, $this->id]
-        )->fetchColumn();
-        return $count > 0;
-	}
+    /**
+     * @param string $id
+     * @return bool
+     * @throws DBALException
+     */
+    public function checkEmailExistForFolder($id)
+    {
+        $connection = $this->db->getConnection();
+        $platform = $connection->getDatabasePlatform();
+        $query = $platform->modifyLimitQuery(
+            "SELECT NULL FROM folders_rel"
+            . " WHERE polymorphic_module = ? AND polymorphic_id = ? AND folder_id = ?",
+            1
+        );
+        $result = $connection->executeQuery($query, ['Emails', $id, $this->id])->fetchColumn();
+        return $result !== false;
+    }
+
 	/**
 	 * Moves beans from one folder to another folder
 	 * @param string fromFolder GUID of source folder
@@ -912,33 +925,34 @@ ENDW;
 		return false;
 	}
 
-	/**
-	 * Deletes all children in a cascade
-	 * @param string $id ID of parent
-	 * @return bool True on success
-	 */
-	function deleteChildrenCascade($id) {
-		global $current_user;
-
+    /**
+     * Deletes all children in a cascade
+     * @param string $id ID of parent
+     * @return bool True on success
+     */
+    public function deleteChildrenCascade($id)
+    {
+        global $current_user;
         $conn = $this->db->getConnection();
-		$canContinue = true;
-        $count = $conn->executeQuery(
-            'SELECT count(*) FROM inbound_email WHERE groupfolder_id = ? and deleted = 0',
-            [$id]
-        )->fetchColumn();
-        if ($count > 0) {
-			return false;
-		} // if
-
-        $count = $conn->executeQuery(
-            "SELECT count(*) c FROM folders_rel where polymorphic_module = 'Emails' and folder_id = ? and deleted = 0",
-            [$id]
-        )->fetchColumn();
-        if ($count > 0) {
-			return false;
-		} // if
-
+        $platform = $conn->getDatabasePlatform();
+        $query = $platform->modifyLimitQuery(
+            "SELECT NULL FROM inbound_email WHERE groupfolder_id = ? and deleted = 0",
+            1
+        );
+        $result = $conn->executeQuery($query, [$id])->fetchColumn();
+        if ($result !== false) {
+            return false;
+        } // if
+        $query = $platform->modifyLimitQuery(
+            "SELECT NULL FROM folders_rel where polymorphic_module = ? and folder_id = ? and deleted = 0",
+            1
+        );
+        $result = $conn->executeQuery($query, ['Emails', $id])->fetchColumn();
+        if ($result !== false) {
+            return false;
+        } // if
         $doesFolderHaveChild = $conn->executeQuery('SELECT has_child FROM folders WHERE id = ?', [$id])->fetchColumn();
+        $canContinue = true;
         if ($doesFolderHaveChild == 1) {
             $subFolderStmt = $conn->executeQuery(
                 'SELECT id FROM folders WHERE parent_folder = ?',
@@ -948,8 +962,7 @@ ENDW;
                 $canContinue = $this->deleteChildrenCascade($subFolder['id']);
             }
         }
-
-		if ($canContinue) {
+        if ($canContinue) {
             // flag deleted
             $update = $conn->createQueryBuilder()
                 ->update('folders')
@@ -965,9 +978,10 @@ ENDW;
             $conn->update('folders_rel', ['deleted' => 1], ['folder_id' => $id]);
             // delete subscriptions
             $conn->delete('folders_subscriptions', ['folder_id' => $id]);
-		}
-		return $canContinue;
-	}
+        }
+        
+        return $canContinue;
+    }
 
     /**
      * Return the default mapping values.
@@ -1077,40 +1091,43 @@ ENDW;
         );
 	}
 
-
-	function updateFolder($fields) {
-		global $current_user;
-
-		$this->dynamic_query = $this->db->quote($this->dynamic_query);
-		$id = $fields['record'];
-		$name = $fields['name'];
-		$parent_folder = $fields['parent_folder'];
-		$team_id = $fields['team_id'];
-		$team_set_id = $fields['team_set_id'];
-		// first do the retrieve
-		$this->retrieve($id);
-		if ($this->has_child) {
-			$childrenArray = array();
-			$this->findAllChildren($id, $childrenArray);
-			if (in_array($parent_folder, $childrenArray)) {
-				return array('status' => "failed", 'message' => "Can not add this folder to its children");
-			}
-		}
-		// update has_child to 0 for this parent folder if this is the only child it has
-        $count = $this->db->getConnection()->executeQuery(
-            sprintf('SELECT COUNT(*) FROM %s WHERE parent_folder = ? AND deleted = 0', $this->table),
-            [$this->parent_folder]
-        )->fetchColumn();
-        if ($count == 1) {
+    /**
+     * @param array $fields
+     * @return array
+     * @throws DBALException
+     */
+    public function updateFolder($fields)
+    {
+        $this->dynamic_query = $this->db->quote($this->dynamic_query);
+        $id = $fields['record'];
+        $name = $fields['name'];
+        $parent_folder = $fields['parent_folder'];
+        $team_id = $fields['team_id'];
+        $team_set_id = $fields['team_set_id'];
+        // first do the retrieve
+        $this->retrieve($id);
+        if ($this->has_child) {
+            $childrenArray = [];
+            $this->findAllChildren($id, $childrenArray);
+            if (in_array($parent_folder, $childrenArray)) {
+                return ['status' => "failed", 'message' => "Can not add this folder to its children"];
+            }
+        }
+        // update has_child to 0 for this parent folder if this is the only child it has
+        $connection = $this->db->getConnection();
+        $platform = $connection->getDatabasePlatform();
+        $query = $platform->modifyLimitQuery(
+            sprintf('SELECT NULL FROM %s WHERE parent_folder = ? AND deleted = 0', $this->table),
+            2
+        );
+        $result = $connection->executeQuery($query, [$this->parent_folder])->fetchAll(FetchMode::COLUMN);
+        if (count($result) == 1) {
             $this->db->getConnection()->update($this->table, ['has_child' => 0], ['id' => $this->parent_folder]);
-		} // if
-
-
-		$this->name = $name;
-		$this->parent_folder = $parent_folder;
-		$this->team_id = $team_id;
-		$this->team_set_id = $team_set_id;
-
+        } // if
+        $this->name = $name;
+        $this->parent_folder = $parent_folder;
+        $this->team_id = $team_id;
+        $this->team_set_id = $team_set_id;
         $values = $this->getFieldValues([
             'dynamic_query',
             'parent_folder',
@@ -1119,12 +1136,11 @@ ENDW;
             'modified_by',
         ]);
         $this->db->updateParams($this->table, $this->fields, $values, ['id' => $this->id]);
-		if (!empty($this->parent_folder)) {
+        if (!empty($this->parent_folder)) {
             $this->db->getConnection()->update($this->table, ['has_child' => 1], ['id' => $this->parent_folder]);
-		} // if
-		return array('status' => "done");
-
-	} // fn
+        } // if
+        return ['status' => "done"];
+    } // fn
 
 	function findAllChildren($folderId, &$childrenArray) {
         $conn = $this->db->getConnection();

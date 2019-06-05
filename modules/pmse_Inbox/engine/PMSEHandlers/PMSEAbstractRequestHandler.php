@@ -14,7 +14,7 @@
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
- * Abstract class that defines the basics of a request handler in Advanced Workflow
+ * Abstract class that defines the basics of a request handler in SugarBPM
  * @codeCoverageIgnore
  */
 abstract class PMSEAbstractRequestHandler

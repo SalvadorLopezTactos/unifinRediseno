@@ -32,4 +32,11 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'acl_module'=>$module_name,
         'icon' => 'fa-bar-chart-o',
     ),
+    array(
+        'route'=>'#ReportSchedules',
+        'label' =>'LNK_REPORT_SCHEDULES',
+        'acl_action'=>'list',
+        'acl_module'=>'ReportSchedules',
+        'icon' => 'fa-bars',
+    ),
 );

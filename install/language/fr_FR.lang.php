@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Des erreurs ont été détectées durant la vérification de compatibilité. Pour que votre installation de SugarCRM se fasse correctement, veuillez effectuer les modifications appropriées pour corriger les problèmes signalés ci-dessous puis cliquez sur le bouton revérification ou relancez l\'installation.',
     'ERR_CHECKSYS_CALL_TIME'            => 'La fonction Allow Call Time Pass Reference est définie sur On (veuillez la désactiver dans le php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Non trouvé : le planificateur de Sugar sera exécuté avec une fonctionnalité réduite. Le service d\'archivage d\'e-mails ne sera pas exécuté.',
+	'ERR_CHECKSYS_CURL'					=> 'Non trouvé : le planificateur de Sugar sera exécuté avec une fonctionnalité réduite. Le service d\'archivage d\'e-mails ne sera pas exécuté.',
     'ERR_CHECKSYS_IMAP'					=> 'Introuvable : Les mails entrants et les campagnes (Email) nécessitent la librairie IMAP dans PHP. Aucun des 2 ne pourra fonctionner.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'La fonction Magic Quotes GPC ne peut pas être mise à "On" lorsque vous utilisez MSSQL SERVER.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Attention : ',
@@ -79,7 +79,6 @@ $mod_strings = array(
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les fonctions associées aux bibliothèques de parsing XML qui sont nécessaires à Sugar n\'ont pas été retrouvées. Vous pourriez avoir besoin de décommenter l\'extension dans le fichier php.ini, ou recompiler avec le bon fichier binaire, en fonction de votre version de PHP. Veuillez vous référer à votre manuel PHP pour plus d\'informations.',
     'LBL_CHECKSYS_CSPRNG' => 'Générateur de nombres aléatoires',
     'ERR_CHECKSYS_MBSTRING'             => 'Les fonctions associées avec l\'extension Multibyte de PHP (mbstring) qui sont nécessaires pour Sugar n\'ont pas été trouvées. <br/><br/>En général, le module mbstring n\'est pas activé par défaut dans PHP et doit être activé avec --enable-mbstring quand le binaire PHP est constitué. Veuillez vous référer au manuel PHP pour plus d\'informations sur l\'activation de mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'session.save_path n\'est pas défini dans le fichier de configuration php (php.ini) ou le répertoire défini n\'existe pas. Vous pourriez avoir besoin de définir un répertoire pour la variable save_path dans le fichier php.ini ou vérifier que le répertoire défini existe.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Le répertoire défini dans la variable session.save_path du fichier de configuration php (php.ini) est non modifiable. Vous devrez peut-être modifier les permissions sur celui-ci (chmod 766) ou faire un clic droit dessus et décocher l\'option de lecture seule, en fonction de votre système d\'exploitation.<br>Veuillez prendre les mesures nécessaires pour permettre l\'accès aux répertoires en écriture.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Le fichier de configuration existe, mais il n\'est pas en écriture. Veuillez prendre les mesures nécessaires pour rendre le fichier en écriture. En fonction de votre système d\'exploitation, ceci pourrait vous demander de changer les permissions en exécutant "chmod 766", ou faire un clic-droit sur le nom du fichier pour accès aux propriétés et décochez l\'option de lecture seule.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Module IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Module MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Pas de limite)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Illimité)',
 	'LBL_CHECKSYS_MEM'					=> 'Limite Mémoire PHP',
@@ -561,7 +559,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Information de votre compte utilisateur',
         'description' => 'Ce modèle est utilisé quand l\'administrateur envoi un nouveau mot de passe à un utilisateur.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Voici votre login utilisateur et mot de passe temporaire :</p><p>Login : $contact_user_user_name </p><p>Mot de passe : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Une fois identifié sur l\'application avec les identifiants ci-dessus, vous devrez réinitialiser votre mot de passe à une valeur de votre choix.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Voici votre login utilisateur et mot de passe temporaire :</p><p>Login : $contact_user_user_name </p><p>Mot de passe : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Une fois identifié sur l\'application avec les identifiants ci-dessus, vous devrez réinitialiser votre mot de passe à une valeur de votre choix.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Voici votre login utilisateur et mot de passe temporaire :
@@ -576,7 +574,7 @@ Une fois identifié sur l\'application avec les identifiants ci-dessus, vous dev
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Réinitialiser le mot de passe de votre compte utilisateur',
         'description' => "Ce modèle est utilisé pour transmettre à un utilisateur un lien à cliquer pour réinitialiser le mot de passe de son compte.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\ »><p>Vous venez de demander le $contact_user_pwd_last_changed de pouvoir réinitialiser le mot de passe de votre compte utilisateur.</p><p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\ »><p>Vous venez de demander le $contact_user_pwd_last_changed de pouvoir réinitialiser le mot de passe de votre compte utilisateur.</p><p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Vouz venez de demander le $contact_user_pwd_last_changed de pouvoir réinitialiser le mot de passe de votre compte utilisateur.

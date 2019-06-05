@@ -89,7 +89,7 @@ class SugarWebServiceImplv4_1 extends SugarWebServiceImplv4
     	// get all the related modules data.
         $result = self::$helperObject->getRelationshipResults($mod, $link_field_name, $related_fields, $related_module_query, $order_by, $offset, $limit);
 
-        if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
     		$GLOBALS['log']->debug('SoapHelperWebServices->get_relationships - return data for getRelationshipResults is ' . var_export($result, true));
         } // if
     	if ($result) {

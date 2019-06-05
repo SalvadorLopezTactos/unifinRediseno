@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id: layout_defs.php 21970 2007-04-18 19:25:19Z Ajay $
 $layout_defs['Campaigns'] = array( 
 	// list of what Subpanels to show in the DetailView 
 	'subpanel_setup' => array(

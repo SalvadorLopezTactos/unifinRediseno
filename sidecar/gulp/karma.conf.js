@@ -92,7 +92,19 @@ module.exports = function(config) {
                         use: {
                             loader: 'babel-loader',
                             options: {
-                                presets: ['es2015'],
+                                presets: [
+                                    ['env', {
+                                        targets: {
+                                            browsers: [
+                                                'last 1 chrome version',
+                                                'last 1 firefox version',
+                                                'last 1 safari version',
+                                                'last 1 edge version',
+                                                'ie 11',
+                                            ],
+                                        },
+                                    }],
+                                ],
                             },
                         },
                     },

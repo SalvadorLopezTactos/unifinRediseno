@@ -26,7 +26,7 @@ array( 'table' => 'emailman', 'comment' => 'Email campaign queue', 'fields' => a
 	'user_id' => array(
 		'name' => 'user_id',
 		'vname' => 'LBL_USER_ID',
-		'type' => 'id','len' => '36',
+        'type' => 'id',
 		'reportable' =>false,
 		'comment' => 'User ID representing assigned-to user',
 	),
@@ -59,7 +59,6 @@ array( 'table' => 'emailman', 'comment' => 'Email campaign queue', 'fields' => a
 		'vname' => 'LBL_LIST_ID',
 		'type' => 'id',
 		'reportable' =>false,
-		'len' => '36',
 		'comment' => 'Associated list',
 	),
 	'send_date_time' => array(
@@ -72,7 +71,6 @@ array( 'table' => 'emailman', 'comment' => 'Email campaign queue', 'fields' => a
 		'vname' => 'LBL_MODIFIED_USER_ID',
 		'type' => 'id',
 		'reportable' =>false,
-		'len' => '36',
 		'comment' => 'User ID who last modified record',
 	),
 	'in_queue' => array(

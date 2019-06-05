@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: vardefs.php 56510 2010-05-17 18:54:49Z jenny $
 $dictionary['ProjectTask'] = array('audited'=>true,
     'table' => 'project_task',
     'favorites' => false,

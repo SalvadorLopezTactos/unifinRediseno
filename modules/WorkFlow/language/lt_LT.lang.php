@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Darbo sekų apibrėžimai',
   'LBL_MODULE_NAME_SINGULAR' => 'Darbo sekos apibrėžimas',
-  'LBL_MODULE_ID' => 'Darbo sekos',  
+  'LBL_MODULE_ID' => 'Darbo sekos',
   'LBL_MODULE_TITLE' => 'Darbo sekos: Pradžia',
   'LBL_SEARCH_FORM_TITLE' => 'Darbo sekos paieška',
   'LBL_LIST_FORM_TITLE' => 'Darbo sekų sąrašas',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Tikslinis modulis:',
   'LBL_LIST_ORDER' => 'Vykdymo seka:',
   'LBL_FROM_NAME' => 'Siuntėjo vardas:',
-  'LBL_FROM_ADDRESS' => 'Siuntėjo adresas',  
+  'LBL_FROM_ADDRESS' => 'Siuntėjo adresas',
   'LNK_NEW_WORKFLOW' => 'Sukurti darbo sekos apibrėžimą',
-  'LNK_WORKFLOW' => 'Darbo sekos apibrėžimai', 
-  
-  
+  'LNK_WORKFLOW' => 'Darbo sekos apibrėžimai',
+
+
   'LBL_ALERT_TEMPLATES' => 'Įspėjimų šablonai',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Sukurti įspėjimų šabloną',
   'LBL_SUBJECT' => 'Tema:',
-  
+
   'LBL_RECORD_TYPE' => 'Taikoma:',
  'LBL_RELATED_MODULE'=> 'Susijęs modulis:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Darbo sekos',
 	'LNK_ALERT_TEMPLATES' => 'Įspėjimų šablonai',
 	'LNK_PROCESS_VIEW' => 'Darbo sekos',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipas',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Pastaba.</strong> „Sugar“ darbo eigos ir darbo eigos valdymo funkcijos veikia techninės priežiūros režimu. „Sugar Enterprise“ leidimą naudojantys klientai turėtų naudoti funkcijas, teikiamas „SugarBPM<sup class="trademark">TM</sup>“.',
 );
 

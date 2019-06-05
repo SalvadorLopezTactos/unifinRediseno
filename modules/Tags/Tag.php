@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Connection;
+
 /**
  * The Tag class handles operations related to the Tags functionality
  **/
@@ -125,10 +127,11 @@ class Tag extends Basic
      * Gets all the tags for every record id given
      *
      * @param $focus
-     * @param $ids array of record ids
+     * @param $ids string|string[] $records Record ID or array of records IDs
      * @return array
+     * @throws \Doctrine\DBAL\DBALException
      */
-    public function getRelatedModuleRecords($focus, $ids)
+    public function getRelatedModuleRecords($focus, $ids): array
     {
         // No ids means nothing to do
         // Not use this in Tags module, use only for other modules
@@ -136,25 +139,24 @@ class Tag extends Basic
             return array();
         }
 
-        // We need to make a reasonable assumption here that ids will either be
-        // an imploded string of ids or an array of ids. If an array, make it a
-        // string of ids.
-        if (is_array($ids)) {
-            $ids = "'" . implode("','", $ids) . "'";
+        $sql = <<<SQL
+SELECT tags.id, tags.name, tbr.bean_id
+FROM tags INNER JOIN tag_bean_rel tbr ON tags.id=tbr.tag_id
+WHERE tbr.bean_module = ? AND tbr.bean_id IN (?) AND tbr.deleted=0
+ORDER BY tags.name_lower ASC
+SQL;
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$focus->module_name, is_array($ids) ? $ids : [$ids]],
+                [null, Connection::PARAM_STR_ARRAY]
+            );
+        $returnArray = [];
+
+        foreach ($stmt as $data) {
+            $returnArray[$data['bean_id']][] = ['id' => $data['id'], 'name' => $data['name']];
         }
 
-        $tableAlias = $this->db->getValidDBName($focus->table_name . '_id', false, 'alias');
-
-        $sql = "SELECT tags.id, tags.name, tbr.bean_id as {$tableAlias}";
-        $sql .= " FROM tags INNER JOIN tag_bean_rel tbr ON tags.id=tbr.tag_id";
-        $sql .= " WHERE tbr.bean_module = '{$focus->module_name}' AND tbr.bean_id in ($ids) AND tbr.deleted=0";
-        $sql .= " ORDER BY tags.name_lower ASC";
-
-        $result = $this->db->query($sql);
-        $returnArray = array();
-        while ($data = $this->db->fetchByAssoc($result)) {
-            $returnArray[$data[$tableAlias]][] = array("id" => $data["id"], "name"=>$data["name"]);
-        }
         return $returnArray;
     }
 

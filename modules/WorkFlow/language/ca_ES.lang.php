@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definicions del flux de treball',
   'LBL_MODULE_NAME_SINGULAR' => 'Definició del flux de treball',
-  'LBL_MODULE_ID' => 'Workflow',  
+  'LBL_MODULE_ID' => 'Workflow',
   'LBL_MODULE_TITLE' => 'Flux de treball: inici',
   'LBL_SEARCH_FORM_TITLE' => 'Cerca de fluxos de treball',
   'LBL_LIST_FORM_TITLE' => 'Llista de fluxos de treball',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Mòdul Objectiu:',
   'LBL_LIST_ORDER' => 'Ordre de Procés:',
   'LBL_FROM_NAME' => 'Nom del remitent:',
-  'LBL_FROM_ADDRESS' => 'Direcció del Remitent:',  
+  'LBL_FROM_ADDRESS' => 'Direcció del Remitent:',
   'LNK_NEW_WORKFLOW' => 'Crear Definició de Workflow',
-  'LNK_WORKFLOW' => 'Llistar Definicions de Workflow', 
-  
-  
+  'LNK_WORKFLOW' => 'Llistar Definicions de Workflow',
+
+
   'LBL_ALERT_TEMPLATES' => 'Plantilles d´Alertes',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Crear una plantilla d´alerta:',
   'LBL_SUBJECT' => 'Assumpte:',
-  
+
   'LBL_RECORD_TYPE' => 'Aplica a:',
  'LBL_RELATED_MODULE'=> 'Mòdul Relacionat:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sequencia de Workflow',
 	'LNK_ALERT_TEMPLATES' => 'Plantilles de Correus d´Alerta',
 	'LNK_PROCESS_VIEW' => 'Sequencia de Workflow',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipus',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> La funcionalitat del flux de treball de Sugar i de la gestió del flux de treball està en mode de manteniment. Clients de l&#39;edició Sugar Enterprise han d&#39;utilitzar la funcionalitat proporcionada per SugarBPM<sup class="trademark">TM</sup>.',
 );
 

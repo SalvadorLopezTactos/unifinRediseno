@@ -29,13 +29,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# Modifications made by SugarCRM Inc. © 2018. These modifications are subject
+# Modifications made by SugarCRM Inc. © 2019. These modifications are subject
 # to the same BSD 3-Clause license terms. For information on the full license
 # terms or related notices, go to http://www.sugarcrm.com/third-party-software.
 #
 # Usage:
 #
-#    Add the follwoing to your ~/.bashrc
+#    Add the following to your ~/.bashrc
 #
 #           source SUGARDIR/src/Console/Resources/sugarcrm-bash-completion
 #

@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Er zijn fouten ontdekt tijdens de compatibiliteitscheck. Om uw SugarCRM installatie goed te laten functioneren, dienen onderstaande issues te worden opgelost, druk daarna op de recheck-button of probeer opnieuw te installeren.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Parameter &#39;Allow Call Time Pass Reference&#39; heeft de waarde &#39;On&#39;  en deze moet &#39;Off&#39; zijn de php.ini',
 
-	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: Sugar Scheduler zal beperkt werken. De e-mailarchiveringsdienst zal niet worden uitgevoerd.',
+	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: Sugar Taakplanner wordt met beperkte functionaliteit uitgevoerd. De e-mailarchiveringsdienst wordt niet uitgevoerd.',
     'ERR_CHECKSYS_IMAP'					=> 'Niet gevonden: Inkomende E-mail en Campagnes (E-mail) vereisen de IMAP-bibliotheken. Geen van beiden zullen functioneel zijn.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan niet  "On" zijn als  MS SQL Server wordt gebruikt.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Waarschuwing:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Voor een optimale ervaring met IIS / FastCGI sapi, stel fastcgi.logging op 0 in je php.ini bestand.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Niet ondersteunde PHP versie geinstalleerd: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database niet beschikbaar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-ondersteuning niet gevonden. Controleer of u de nodige drivers voor een van de volgende ondersteunde soorten databases hebt: MySQL, MS SQLServer, Oracle of DB2. Mogelijk moe u de extensie uit het php.ini bestand verwijderen of moet u, afhankelijk van uw versie van PHP, opnieuw compileren met het juiste binaire bestand. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van database-ondersteuning.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databaseondersteuning werd niet gevonden. Controleer of u de benodigde stuurprogramma\'s hebt voor een van de volgende ondersteunde soorten databases: MySQL, MS SQLServer, Oracle of DB2.  Mogelijk moet u de extensie in het php.ini bestand verwijderen of deze opnieuw compileren met het juiste binaire bestand, afhankelijk van uw versie PHP. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van Databaseondersteuning.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functies behorende bij "XML Parser Libraries" benodigd door SugarCRM zijn niet gevonden. Controleer php.ini of de regels nog als commentaar zijn opgevoerd of hercompileer de binary file, afhankelijk van uw PHP versie. Raadpleeg de PHP handleiding voor meer informatie.',
     'LBL_CHECKSYS_CSPRNG' => 'Willekeurige nummergenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functies behorende bij "Multibyte Strings PHP Extension" benodigd door SugarCRM zijn niet gevonden. N.B. Standaard wordt de module niet geinstalleerd in PHP, om deze alsnog te activeren dient deze met "--enable-mbstring" te worden meegegeven als de PHP Binary wordt opgebouwd. Raadpleeg de PHP handleiding voor meer informatie.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'De "session.save_path" setting in de php.ini bestaat niet of staat ingesteld op een map die niet bestaat.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'De "session.save_path" setting in de php.ini staat ingesteld op een niet schrijfbare map.  Maak deze map aub schrijfbaar door chmod 766 of via de rechtmuisknop afhankelijk van uw besturingssysteem.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Het config bestand bestaat wel, maar is niet schrijfbaar.  Maak dit bestand schrijfbaar door chmod 766 of via de rechtermuisknop, afhankelijk van uw besturingssysteem.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP module',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings Module',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (Geen Limiet)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Ongelimiteerd)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP Memory Limiet',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informatie nieuw account',
         'description' => 'Dit sjabloon wordt gebruikt als de systeembeheerder een nieuw wachtwoord naar een gebruiker stuurt.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Hier is uw gebruikersnaam en tijdelijke wachtwoord:</p><p>Gebruikersnaam : $contact_user_user_name </p><p>Wachtwoord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Als u ingelogd bent, kan u mogelijk verplicht worden om het wachtwoord te wijzigen naar een persoonlijk wachtwoord.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Hier is uw gebruikersnaam en tijdelijke wachtwoord:</p><p>Gebruikersnaam : $contact_user_user_name </p><p>Wachtwoord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Als u ingelogd bent, kan u mogelijk verplicht worden om het wachtwoord te wijzigen naar een persoonlijk wachtwoord.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Hier is uw gebruikersnaam en een tijdelijk wachtwoord:<br />Gebruikersnaam : $contact_user_user_name<br />Wachtwoord : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Nadat u bent ingelogd met bovenstaand wachtwoord, kan u gevraagd worden om het wachtwoord te wijzigen naar een van uw eigen keuze.',
         'name' => 'E-mail wachtwoord dat door het systeem is gegenereerd',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Stel wachtwoord opnieuw in',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>U heeft op $contact_user_pwd_last_changed een verzoek ingediend om uw wachtwoord te wijzigen. </p><p>Klik op de onderstaande link om uw wachtwoord opnieuw in te stellen:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>U heeft op $contact_user_pwd_last_changed een verzoek ingediend om uw wachtwoord te wijzigen. </p><p>Klik op de onderstaande link om uw wachtwoord opnieuw in te stellen:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'U heeft recentelijk aangevraagd op $contact_user_pwd_last_changed om uw wachtwoord opnieuw te kunnen instellen.<br /><br />Klik op de link om uw wachtwoord te kunnen wijzigen:<br /><br />$contact_user_link_guid',
         'name' => 'Vergeten wachtwoord e-mail',

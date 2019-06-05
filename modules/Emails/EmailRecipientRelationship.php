@@ -120,7 +120,17 @@ class EmailRecipientRelationship extends One2MBeanRelationship
             }
         }
 
-        return parent::add($lhs, $rhs, $additionalFields);
+        $result = false;
+
+        try {
+            // We don't want Activity Streams entries for linking recipients.
+            Activity::disable();
+            $result = parent::add($lhs, $rhs, $additionalFields);
+        } finally {
+            Activity::restoreToPreviousState();
+        }
+
+        return $result;
     }
 
     /**
@@ -130,25 +140,33 @@ class EmailRecipientRelationship extends One2MBeanRelationship
      * {@inheritdoc}
      * @throws SugarApiExceptionNotAuthorized
      */
-    public function remove($lhs, $rhs)
+    public function remove($lhs, $rhs, $save = true)
     {
         if ($lhs->isArchived() && !$rhs->deleted && !$lhs->deleted) {
             throw new SugarApiExceptionNotAuthorized("Cannot remove from {$this->name} when the email is archived");
         }
 
-        $result = parent::remove($lhs, $rhs);
+        $result = false;
 
-        // Don't just orphan the row; delete it.
-        if ($result && !$rhs->deleted) {
-            // We're either unlinking or deleting the email, so it is safe to delete the EmailParticipants bean. We
-            // don't want to delete it if it is already being deleted because we would end up in an infinite loop.
-            if ($lhs->isUpdate()) {
-                // We can't rely on EmailParticipant::mark_deleted to save the emails_text data because removing causes
-                // the email_id field to lose its value.
-                $lhs->saveEmailText();
+        try {
+            // We don't want Activity Streams entries for unlinking recipients.
+            Activity::disable();
+            $result = parent::remove($lhs, $rhs);
+
+            // Don't just orphan the row; delete it.
+            if ($result && !$rhs->deleted) {
+                // We're either unlinking or deleting the email, so it is safe to delete the EmailParticipants bean. We
+                // don't want to delete it if it is already being deleted because we would end up in an infinite loop.
+                if ($lhs->isUpdate()) {
+                    // We can't rely on EmailParticipant::mark_deleted to save the emails_text data because removing
+                    // causes the email_id field to lose its value.
+                    $lhs->saveEmailText();
+                }
+
+                $rhs->mark_deleted($rhs->id);
             }
-
-            $rhs->mark_deleted($rhs->id);
+        } finally {
+            Activity::restoreToPreviousState();
         }
 
         return $result;

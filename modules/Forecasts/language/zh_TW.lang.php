@@ -313,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '財政年度起始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置將在預測模組中使用的時間週期。<br><br>請注意：初始設定之後將無法變更時間週期設定。<br><br>首先選擇財政年度的起始日期。然後選擇預測的時間週期類型。系統將根據您的選擇自動個計算時間週期的日期範圍。次要時間週期是預測工作表的基礎。<br><br>可檢視的未來和過去時間週期將決定預測模組中可見字週期的編號。使用者可在可見次要週期內檢視和編輯預測編號。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置您希望對 {{forecastByModule}} 進行分類的方式。 <br><br>請注意，在第一次提交之後 範圍設置不能更改。對於升級後的實例，範圍設置與現有預測資料一起鎖定。<br><br>您可以根據概率範圍選取兩個或多個類別，或者創建不基於概率的類別。 <br><br>在您的自訂類別的左邊有核取方塊; 使用這些確定將在提交的預測金額中包括哪些範圍，並向經理報告。 <br><br>使用者可以從工作表中手動更改包含/排除狀態和 {{forecastByModule}} 類別。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置想要對{{forecastByModule}}進行分類的方式。<br><br>請注意, 在第一次提交後，不能更改範圍設置。作為升級後的實例，"範圍" 設置將使用現有的預測資料鎖定。<br><br>您可以根據概率範圍選取兩個或多個類別，也可以創建不基於概率的類別。<br><br>您的自訂類別左側有核取方塊。使用這些來決定預測金額中將包括在已提交並報告給經理的範圍。<br><br>使用者可以從其工作表中手動更改包含/排除的狀態和{{forecastByModule}}的類別。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '選取您想要使用者在每個 {{forecastByModuleSingular}} 預測中填寫的欄。注意：可能金額與 {{forecastByModule}} 顯示的金額相關聯。因此「可能」 欄無法被隱藏。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '選取您想要在預測模組中檢視的欄。欄位清單將與工作表組合，使用者可選擇如何設定檢視表。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是預測說明文字的預留位置！',

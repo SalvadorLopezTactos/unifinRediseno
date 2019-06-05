@@ -17,8 +17,6 @@
 class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
 
     public function __construct() {
-        $this->module_name = 'AnnualTimePeriods';
-
         parent::__construct();
 
         //The time period type

@@ -102,34 +102,38 @@
      * @param params
      */
     archiveEmail: function(event, params) {
-        var parentName = app.utils.getRecordName(this.model);
+        var metadata = app.metadata.getModule(this.model.module) || {};
+        var fields = metadata.fields || {};
+        var modelCanBeRecipient = _.some(fields, function(field) {
+            return field.type === 'email';
+        });
+        var data = {
+            related: this.model
+        };
 
-        app.utils.openEmailCreateDrawer(
-            'create',
-            {
-                related: this.model,
-                // Don't set email_address_id. It will be set when the email is
-                // archived.
-                to: app.data.createBean('EmailParticipants', {
-                    _link: 'to',
-                    parent: _.extend({type: this.model.module}, app.utils.deepCopy(this.model)),
-                    parent_type: this.model.module,
-                    parent_id: this.model.get('id'),
-                    parent_name: parentName
-                })
-            },
-            _.bind(function(model) {
-                var links;
+        if (modelCanBeRecipient) {
+            // Don't set email_address_id. It will be set when the email is
+            // archived.
+            data.to = app.data.createBean('EmailParticipants', {
+                _link: 'to',
+                parent: _.extend({type: this.model.module}, app.utils.deepCopy(this.model)),
+                parent_type: this.model.module,
+                parent_id: this.model.get('id'),
+                parent_name: app.utils.getRecordName(this.model)
+            });
+        }
 
-                if (model) {
-                    this.layout.reloadDashlet();
-                    links = app.utils.getLinksBetweenModules(this.context.parent.get('module'), 'Emails');
+        app.utils.openEmailCreateDrawer('create', data, _.bind(function(model) {
+            var links;
 
-                    _.each(links, function(link) {
-                        this.context.parent.trigger('panel-top:refresh', link.name);
-                    }, this);
-                }
-            }, this)
-        );
+            if (model) {
+                this.layout.reloadDashlet();
+                links = app.utils.getLinksBetweenModules(this.context.parent.get('module'), 'Emails');
+
+                _.each(links, function(link) {
+                    this.context.parent.trigger('panel-top:refresh', link.name);
+                }, this);
+            }
+        }, this));
     }
 })

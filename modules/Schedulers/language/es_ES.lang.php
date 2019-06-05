@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Nuevos Períodos de Tiempo Futuros',
 'LBL_OOTB_HEARTBEAT' => 'Control Automático de Usuarios de Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualizar artículos de KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artículos aprobados y Hacer expirar artículos KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Trabajo programado de Advance Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artículos aprobados y artículos caducados de la base de conocimientos.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tarea planificada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruir los datos de seguridad desregularizados del equipo',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Comprobar Cuentas de Correo Entrante',
 'LBL_PERFORMFULLFTSINDEX' => 'Búsqueda de texto completo Sistema de Índice',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Eliminar archivos PDF temporales',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicar artículos aprobados y Hacer expirar artículos KB.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicar artículos aprobados y artículos caducados de la base de conocimientos.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Programador de cola de Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eliminar archivos de la herramienta de diagnósticos',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eliminar archivos temporales',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Ejecutar envío de recordatorios por correo electrónico',
 'LBL_CLEANJOBQUEUE' => 'Liberador de la Cola de Trabajos',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpiar las Listas de Registros Antiguos',
-'LBL_PMSEENGINECRON' => 'Programador Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

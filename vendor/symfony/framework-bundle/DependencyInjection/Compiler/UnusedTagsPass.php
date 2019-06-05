@@ -22,7 +22,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class UnusedTagsPass implements CompilerPassInterface
 {
     private $whitelist = array(
+        'annotations.cached_reader',
+        'cache.pool.clearer',
         'console.command',
+        'container.hot_path',
+        'container.service_locator',
+        'container.service_subscriber',
+        'controller.service_arguments',
         'config_cache.resource_checker',
         'data_collector',
         'form.type',
@@ -53,13 +59,11 @@ class UnusedTagsPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $compiler = $container->getCompiler();
-        $formatter = $compiler->getLoggingFormatter();
         $tags = array_unique(array_merge($container->findTags(), $this->whitelist));
 
         foreach ($container->findUnusedTags() as $tag) {
             // skip whitelisted tags
-            if (in_array($tag, $this->whitelist)) {
+            if (\in_array($tag, $this->whitelist)) {
                 continue;
             }
 
@@ -70,7 +74,7 @@ class UnusedTagsPass implements CompilerPassInterface
                     continue;
                 }
 
-                if (false !== strpos($definedTag, $tag) || levenshtein($tag, $definedTag) <= strlen($tag) / 3) {
+                if (false !== strpos($definedTag, $tag) || levenshtein($tag, $definedTag) <= \strlen($tag) / 3) {
                     $candidates[] = $definedTag;
                 }
             }
@@ -81,7 +85,7 @@ class UnusedTagsPass implements CompilerPassInterface
                 $message .= sprintf(' Did you mean "%s"?', implode('", "', $candidates));
             }
 
-            $compiler->addLogMessage($formatter->format($this, $message));
+            $container->log($this, $message);
         }
     }
 }

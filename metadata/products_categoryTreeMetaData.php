@@ -16,7 +16,6 @@ $dictionary['products_category_tree'] = array(
         'self_id' => array(
             'name' => 'self_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'node_id' => array(
             'name' => 'node_id',

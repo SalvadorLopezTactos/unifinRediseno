@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - Vienkārša SAML rīku kopa priekš PHP',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Pārplūde: ritināšana mobilajā webkit. Dabīga ritināšanas funkcionalitāte fiksēta platuma/augstuma elementos.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas ir JavaScript biblioteka, kura nodrošina HTML5 grafikas atbalstu Internet Explorer pārlūkam. Tā dod iepēju vizualizēt figūras un attēlus, izmantojot Flash zīmēšanas API. Tā atbalsta gandrīz visus garfikas API un bieži vien darbojas ātrāk, kā citas bibliotekas, kuras izmanto VML vai Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - JavaScript InfoVis Toolkit piedāvā rīkus tīmekļa interaktīvo datu vizualizāciju veidošanai.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Atvērta koda, objektorientētu web lietojumprogrammu ietvars priekš PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV datu parsers priekš PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - Izmanto PHP funkcijas JavaScript',

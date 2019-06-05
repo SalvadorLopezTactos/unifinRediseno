@@ -37,16 +37,6 @@ $viewdefs[$module_name]['base']['view']['config'] = array(
 //                    'view' => 'edit',
 //                    'required'=>true,
 //                ),
-                array(
-                    'name' => 'error_number_of_cycles',
-                    'label'=>'LBL_PMSE_SETTING_NUMBER_CYCLES',
-//                    'description'=>'LBL_PMSE_SETTING_NUMBER_CYCLES',
-                    'type' => 'int',
-//                    'rows'=>'10',
-//                    'cols'=>'15',
-                    'view' => 'edit',
-                    'required'=>true,
-                ),
 //                array(
 //                    'name' => 'error_timeout',
 //                    'label'=>'LBL_PMSE_SETTING_TIMEOUT',

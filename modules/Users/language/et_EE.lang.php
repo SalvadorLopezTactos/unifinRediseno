@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Määra meeskonnale',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Kirjetes vaikimisi kuvatavad saadaval meeskonnad on need, mille liige olete.',
 	'LBL_DEFAULT_TEAM'					=> 'Vaikemeeskonnad',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Vaikimisi peamine meeskond',
 	'LBL_LIST_DESCRIPTION'				=> 'Kirjeldus',
 	'LBL_MY_TEAMS'						=> 'Minu meeskonnad',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privaatne meeskond',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saaja e-posti aadress',
 	'ERR_SERVER_STATUS'					=> 'Teie serveri olek',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Süsteem ei saa kasutajale e-kirja saata. Kontrollige väljaminevate e-kirjade konfiguratsiooni suvandis <a href="index.php?module=EmailMan&action=config">E-posti sätted</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Kasutajat saab IDM-režiimi puhul luua vaid <a href="{0}" target="_blank">konsoolis Cloud</a>.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Esmast meiliaadressi saab IDM-režiimi puhul värskendada vaid <a href="{0}" target="_blank">konsoolis Cloud</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-posti aadress',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Kinnita parool',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Olete muutnud kasutaja tüüpi süsteemiadministraatorist kasutajalt regulaarsele kasutajale. Pärast selle muudatuse salvestamist pole kasutajal enam süsteemiadministraatori õigusi.\\n\\nJätkamiseks klõpsake nuppu OK.\\nKirje juurde naasmiseks klõpsake nuppu Tühista.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Olete muutnud kasutaja tüüpi süsteemiadministraatorist kasutajalt regulaarsele kasutajale. Pärast selle muudatuse salvestamist pole kasutajal enam süsteemiadministraatori õigusi.\n\nJätkamiseks klõpsake nuppu OK.\nKirje juurde naasmiseks klõpsake nuppu Tühista.',
 	'LBL_COUNTRY'						=> 'Riik',
 	'LBL_CURRENCY_TEXT'					=> 'See on loendis ja kirje vaadetes kuvatav valuuta, kui suvand Kuva eelistatud valuuta on lubatud. See on ka teie vaikevaluuta uute kirjete puhul.',
 	'LBL_CURRENCY'						=> 'Eelistatud valuuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Kümnendike ja ujuvarvude puhul kuvatav kümnendkohtade arv kogu süsteemis, nagu valuuta ja keskmiste puhul aruannetes.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Kuva eelistatud valuuta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Baasvaluuta teisendamine loendis ja kirje vaadetes eelistatud kasutajale',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Looge tuluartikleid eelistatud valuutas',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Tootekataloogist müügivõimalusele lisatud tuluartiklid konverteeritakse kasutaja eelistatud valuutasse, kui see erineb tootekataloogi kirjes kasutatud valuutast.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000ndike eraldaja',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Tuhandike eraldamiseks kasutatav märk',
 	'LBL_DECIMAL_SEP'					=> 'Kümnendiku sümbol',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Esitage nii kehtiv kasutajanimi kui ka e-posti aadress.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'See pole praegu lubatud. Võtke ühendust oma administraatoriga.',
 	'LBL_PUBLISH_KEY'					=> 'Avalda võti',
-
+    'LBL_SITE_USER_ID' => 'Suvandi site_url ja user_id räsi',
     'LBL_QUOTAS'                        => 'Kvoodid',
     'LBL_FORECASTS'                     => 'Prognoosid',
     'LBL_WORKSHEETS'                    => 'Töölehed',
@@ -633,10 +633,7 @@ Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
     'LBL_DETAIL' => 'Kasutaja profiil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Kui mõnda välja ei saa muuta, siis logige nende haldamiseks sisse oma Cloud-konsooli',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Kui soovite muuta mõnda välja, mida ei saa muuta, ' .
-        'siis teavitage administraatorit muudatustest',
+        'Kui soovite teha kirjutuskaitstud väljadel muudatusi, võtke ühendust Sugari administraatoriga.',
 ); // END STRINGS DEFS
-
-?>

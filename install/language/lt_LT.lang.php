@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Norėdami, kad jūsų naudojimosi „IIS/FastCGI SAPI“ patirtis būtų optimali, faile php.ini nustatykite fastcgi.logging reikšmę 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Įdiegta nepalaikoma PHP versija: ( versija',
     'LBL_DB_UNAVAILABLE'                => 'Duomenų bazė neprieinama',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nerasta duomenų bazės palaikymo. Įsitikinkite, kad turite reikiamas tvarkykles, skirtas vienam iš šių palaikomų duomenų bazės tipų: „MySQL“, „MS SQLServer“, „Oracle“ arba DB2. Atsižvelgiant į jūsų PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Norėdami gauti daugiau informacijos, kaip įgalinti duomenų bazės palaikymą, žr. PHP žinyną.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nerastas duomenų bazės palaikymas. Įsitikinkite, kad turite reikiamas tvarkykles, skirtas vienam iš šių palaikomų duomenų bazės tipų: „MySQL“, „MS SQLServer“, „Oracle“ arba DB2. Atsižvelgiant į jūsų PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Norėdami gauti daugiau informacijos, kaip aktyvinti duomenų bazės palaikymą, žr. PHP žinyną.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su XML analizatoriaus bibliotekomis. Atsižvelgiant į naudojamą PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Daugiau informacijos žr. PHP žinyne.',
     'LBL_CHECKSYS_CSPRNG' => 'Atsitiktinio numerio generatorius',
     'ERR_CHECKSYS_MBSTRING'             => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su „Multibyte Strings“ PHP plėtiniu (mbstring). <br/><br/>Paprastai pagal numatytąjį nustatymą modulis mbstring nėra įgalinamas PHP, todėl jį reikia suaktyvinti naudojant --enable-mbstring, kai PHP dvejetainis failas jau būna sukompiliuotas. Daugiau informacijos apie mbstring palaikymą žr. PHP žinyne.',
-    'ERR_CHECKSYS_MCRYPT'               => "Modulis mcrypt neįkeltas. Daugiau informacijos apie modulio mcrypt įkėlimą žr. PHP žinyne.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Parametras session.save_path PHP konfigūracijos faile (php.ini) nenustatytas arba nustatytas nurodant neegzistuojantį aplanką. Gali reikėti nustatyti parametrą save_path faile php.ini arba patikrinti, ar egzistuoja aplankas, nustatytas parametre save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Parametras session.save_path PHP konfigūracijos faile (php.ini) nustatytas nurodant aplanką, į kurį negalima rašyti. Atlikite reikiamus veiksmus, kad būtų galima rašyti į šį aplanką. <br>Atsižvelgiant į operacinę sistemą, tam gali reikėti pakeisti teises paleidžiant chmod 766 arba, spustelėjus dešiniuoju pelės mygtuku failo vardą, prieiti prie ypatybių ir anuliuoti tik skaitymo parinkties žymėjimą.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfigūracijos failas egzistuoja, tačiau į jį negalima rašyti. Atlikite reikiamus veiksmus, kad būtų galima rašyti į šį aplanką. Atsižvelgiant į operacinę sistemą, tam gali reikėti pakeisti teises paleidžiant chmod 766 arba, spustelėjus dešiniuoju pelės mygtuku failo vardą, prieiti prie ypatybių ir anuliuoti tik skaitymo parinkties žymėjimą.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP modulis',
 	'LBL_CHECKSYS_MQGPC'				=> '„Magic Quotes“ GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB eilučių modulis',
-    'LBL_CHECKSYS_MCRYPT'               => '„MCrypt“ modulis',
 	'LBL_CHECKSYS_MEM_OK'				=> 'Gerai (neribojama)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'Gerai (neribotas)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP atminties limitas',
@@ -524,7 +522,7 @@ Išsamesnės informacijos žr. diegimo vadove.                                ",
     'advanced_password_new_account_email' => array(
         'subject' => 'Naujos paskyros informacija',
         'description' => 'Šis šablonas naudojamas, kai sistemos administratorius siunčia vartotojui naują slaptažodį.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Štai jūsų paskyros vartotojo vardas ir laikinas slaptažodis:</p><p>Vartotojo vardas: $contact_user_user_name </p><p>Slaptažodis: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Prisiregistravus šiuo nurodytu slaptažodžiu, gali reikėti tą slaptažodį nustatyti iš naujo, įvedant savo norimą slaptažodį.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Štai jūsų paskyros vartotojo vardas ir laikinas slaptažodis:</p><p>Vartotojo vardas: $contact_user_user_name </p><p>Slaptažodis: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Prisiregistravus šiuo nurodytu slaptažodžiu, gali reikėti tą slaptažodį nustatyti iš naujo, įvedant savo norimą slaptažodį.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Štai jūsų paskyros vartotojo vardas ir laikinas slaptažodis:
@@ -539,7 +537,7 @@ Prisiregistravus šiuo nurodytu slaptažodžiu, gali reikėti tą slaptažodį n
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Iš naujo nustatyti paskyros slaptažodį',
         'description' => "Šis šablonas bus naudojamas siunčiant vartotojui nuorodą, kurią spustelėjęs, vartotojas galės iš naujo nustatyti savo paskyros slaptažodį.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Neseniai pateikėte $contact_user_pwd_last_changed užklausą, kad galėtumėte iš naujo nustatyti savo paskyros slaptažodį:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Neseniai pateikėte $contact_user_pwd_last_changed užklausą, kad galėtumėte iš naujo nustatyti savo paskyros slaptažodį:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Neseniai pateikėte $contact_user_pwd_last_changed užklausą, kad galėtumėte iš naujo nustatyti savo paskyros slaptažodį.

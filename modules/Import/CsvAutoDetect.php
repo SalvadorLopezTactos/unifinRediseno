@@ -99,7 +99,8 @@ class CsvAutoDetect {
     public function __construct($csv_filename, $max_depth = 2) {
         $this->_csv_file = $csv_filename;
 
-        $this->_parser = new parseCSV();
+        // @see https://github.com/parsecsv/parsecsv-for-php/issues/27
+        $this->_parser = new parseCSV(null, null, null, []);
 
         $this->_parser->auto_depth = $max_depth;
 

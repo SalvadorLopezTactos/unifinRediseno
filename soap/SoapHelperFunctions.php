@@ -1086,32 +1086,24 @@ function get_decoded($object){
 
 }
 
-/**
- * decrypt a string use the TripleDES algorithm. This meant to be
- * modified if the end user chooses a different algorithm
- *
- * @param $string - the string to decrypt
- *
- * @return a decrypted string if we can decrypt, the original string otherwise
- */
-function decrypt_string($string){
-    if (extension_loaded('mcrypt')) {
-		$focus = Administration::getSettings();
-		$key = '';
-		if(!empty($focus->settings['ldap_enc_key'])){
-			$key = $focus->settings['ldap_enc_key'];
-		}
-		if(empty($key))
-			return $string;
-		$key = substr(md5($key),0,24);
-	    $iv = "password";
-            require_once 'service/core/SoapHelperWebService.php';
-            return SoapHelperWebServices::decrypt_tripledes($string, $key, $iv);
-	}else{
-		return $string;
-	}
-}
-
+    /**
+     * decrypt a string use the TripleDES algorithm. This meant to be
+     * modified if the end user chooses a different algorithm
+     *
+     * @param $string - the string to decrypt
+     *
+     * @return string, a decrypted string if we can decrypt, the original string otherwise
+     */
+    function decrypt_string($string)
+    {
+        $focus = Administration::getSettings();
+        if (empty($focus->settings['ldap_enc_key'])) {
+            return $string;
+        }
+        $key = substr(md5($focus->settings['ldap_enc_key']), 0, 24);
+        $iv = "password";
+        return SoapHelperWebServices::decrypt_tripledes($string, $key, $iv);
+    }
 }
 
 function canViewPath( $path, $base ){

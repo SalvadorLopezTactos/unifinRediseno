@@ -484,16 +484,16 @@ class WorkFlowGlue {
 		$alert_user_array = "";
 		$user_alert_count = 0;
 
-		$query = "	SELECT * from workflow_alerts
-					WHERE workflow_alerts.deleted='0'
-					AND workflow_alerts.parent_id = '".$alertshell_id."'
-					 ";
-
-		$result = $this->db->query($query,true," Error getting list of users for an alert: ");
+        $query = <<<SQL
+SELECT * from workflow_alerts
+WHERE workflow_alerts.deleted = '0'
+AND workflow_alerts.parent_id = ?
+SQL;
+        $stmt = $this->db->getConnection()
+            ->executeQuery($query, [$alertshell_id]);
 
 		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
-
+        foreach ($stmt as $row) {
 			$user_array_name = "user_".$user_alert_count;
 
 			$alert_user_array .= "\t '".$user_array_name."' => array ( \n\n";
@@ -670,23 +670,25 @@ include_once("include/workflow/alert_utils.php");
 
 	function compile_action_basic($actionshell_id, & $action_component_array){
 
-		$query = "	SELECT * from workflow_actions
-					WHERE workflow_actions.deleted='0'
-					AND workflow_actions.parent_id = '".$actionshell_id."'
-					AND workflow_actions.set_type = 'Basic'
-					 ";
+        $query = <<<SQL
+SELECT * from workflow_actions
+WHERE workflow_actions.deleted = '0'
+AND workflow_actions.parent_id = ?
+AND workflow_actions.set_type = 'Basic'
+SQL;
 
-		$result = $this->db->query($query,true," Error getting action components: ");
-		$action_component_array .= "\t 'basic' => array ( \n\n";
-		$action_component_array_ext = "";
-		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
-			///Start - Add the individual action components
-			$action_component_array .= "\t\t '" . $row['field'] . "' => " . $this->write_escape($row['value']) . ",\n";
-			if($row['ext1']!=""){
-				$action_component_array_ext .= "\t\t '".$row['field']."' => '".$row['ext1']."', \n";
-			}
-			//End - Add user items
+        $stmt = $this->db->getConnection()
+            ->executeQuery($query, [$actionshell_id]);
+        $action_component_array .= "\t 'basic' => array ( \n\n";
+        $action_component_array_ext = "";
+        // Get the id and the name.
+        foreach ($stmt as $row) {
+            ///Start - Add the individual action components
+            $action_component_array .= "\t\t '" . $row['field'] . "' => " . $this->write_escape($row['value']) . ",\n";
+            if ($row['ext1'] != "") {
+                $action_component_array_ext .= "\t\t '" . $row['field'] . "' => '" . $row['ext1'] . "', \n";
+            }
+            //End - Add user items
 
 		//end while
 		}
@@ -699,26 +701,27 @@ include_once("include/workflow/alert_utils.php");
 
 	function compile_action_advanced($actionshell_id, & $action_component_array){
 
-		$query = "	SELECT * from workflow_actions
-					WHERE workflow_actions.deleted='0'
-					AND workflow_actions.parent_id = '".$actionshell_id."'
-					AND workflow_actions.set_type = 'Advanced'
-					 ";
+        $query = <<<SQL
+SELECT * from workflow_actions
+WHERE workflow_actions.deleted = '0'
+AND workflow_actions.parent_id = ?
+AND workflow_actions.set_type = 'Advanced'
+SQL;
 
-		$result = $this->db->query($query,true," Error getting action components: ");
-		$action_component_array .= "\t 'advanced' => array ( \n\n";
-		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
-			$action_component_array .= "\t '".$row['field']."' => array ( \n\n";
-			///Start - Add the individual action components
-				$action_component_array .= "\t\t\t 'value' => " . $this->write_escape($row['value']) . ",\n";
-				$action_component_array .= "\t\t\t 'ext1' => '".$row['ext1']."', \n";
-				$action_component_array .= "\t\t\t 'ext2' => '".$row['ext2']."', \n";
-				$action_component_array .= "\t\t\t 'ext3' => '".$row['ext3']."', \n";
-				$action_component_array .= "\t\t\t 'adv_type' => '".$row['adv_type']."', \n";
-			//End - Add user items
-			$action_component_array .= "\t ), \n\n";
-
+        $stmt = $this->db->getConnection()
+            ->executeQuery($query, [$actionshell_id]);
+        $action_component_array .= "\t 'advanced' => array ( \n\n";
+        // Get the id and the name.
+        foreach ($stmt as $row) {
+            $action_component_array .= "\t '".$row['field']."' => array ( \n\n";
+            ///Start - Add the individual action components
+            $action_component_array .= "\t\t\t 'value' => " . $this->write_escape($row['value']) . ",\n";
+            $action_component_array .= "\t\t\t 'ext1' => '".$row['ext1']."', \n";
+            $action_component_array .= "\t\t\t 'ext2' => '".$row['ext2']."', \n";
+            $action_component_array .= "\t\t\t 'ext3' => '".$row['ext3']."', \n";
+            $action_component_array .= "\t\t\t 'adv_type' => '".$row['adv_type']."', \n";
+            //End - Add user items
+            $action_component_array .= "\t ), \n\n";
 		//end while
 		}
 		$action_component_array .= "\t ), \n\n";
@@ -728,17 +731,18 @@ include_once("include/workflow/alert_utils.php");
 
 	function compile_rel_filter($target_id, $array_name, $parent_type, & $target_component_array){
 
-		$query = "	SELECT lhs_module, lhs_field, operator, rhs_value
-					FROM expressions
-					WHERE expressions.deleted='0'
-					AND expressions.parent_id = '".$target_id."'
-					AND expressions.parent_type = '".$parent_type."'
-					 ";
+        $query = <<<SQL
+SELECT lhs_module, lhs_field, operator, rhs_value
+FROM expressions
+WHERE expressions.deleted = '0'
+AND expressions.parent_id = ?
+AND expressions.parent_type = ?
+SQL;
 
-		$result = $this->db->query($query,true," Error getting base expression object: ");
+        $stmt = $this->db->getConnection()
+            ->executeQuery($query, [$target_id, $parent_type]);
 		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
-
+        foreach ($stmt as $row) {
 			$target_component_array .= $this->build_trigger_array_component($array_name, $row);
 
 		//end while filters
@@ -794,16 +798,17 @@ include_once("include/workflow/alert_utils.php");
 
 /////////////BASE ARRAY
 
-		$query = "	SELECT id, lhs_type, lhs_module, operator, rhs_value, lhs_field
-					FROM expressions
-					WHERE expressions.deleted='0'
-					AND expressions.parent_id = '".$triggershell_id."'
-					AND expressions.parent_type = 'expression'
-					 ";
+        $query = <<<SQL
+SELECT id, lhs_type, lhs_module, operator, rhs_value, lhs_field
+FROM expressions
+WHERE expressions.deleted='0'
+AND expressions.parent_id = ?
+AND expressions.parent_type = 'expression'
+SQL;
 
-		$result = $this->db->query($query,true," Error getting base expression object: ");
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
+        $row = $this->db->getConnection()
+            ->executeQuery($query, [$triggershell_id])
+            ->fetch();
 
 			$base_array['lhs_field'] = $row['lhs_field'];
 			$base_array['lhs_type'] = $row['lhs_type'];
@@ -817,17 +822,18 @@ include_once("include/workflow/alert_utils.php");
 
 		$filter_count = 1;
 
-		$query2 = "	SELECT lhs_field, operator, rhs_value
-					FROM expressions
-					WHERE expressions.deleted='0'
-					AND expressions.parent_exp_id = '".$row['id']."'
-					 ";
+        $query = <<<SQL
+SELECT lhs_field, operator, rhs_value
+FROM expressions
+WHERE expressions.deleted = '0'
+AND expressions.parent_exp_id = ?
+SQL;
 
-		$result2 = $this->db->query($query2,true," Error getting base expression object: ");
-		// Get the id and the name.
-		while($row2 = $this->db->fetchByAssoc($result2)){
-
-			$this->trigger_meta_data .= $this->build_trigger_array_component("filter".$filter_count, $row2);
+        $stmt = $this->db->getConnection()
+            ->executeQuery($query);
+        // Get the id and the name.
+        foreach ($stmt as $row) {
+            $this->trigger_meta_data .= $this->build_trigger_array_component("filter" . $filter_count, $row);
 
 		++$filter_count;
 

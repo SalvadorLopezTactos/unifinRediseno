@@ -49,9 +49,9 @@
 </div>
 
 <script>
-    var search_text = '{$APP.LBL_SEARCH}';
-    var searchTip = '{$APP.LBL_SEARCH_TIPS}';
-    var searchTip2 = '{$APP.LBL_SEARCH_TIPS_2}';
+    var search_text = '{$APP.LBL_SEARCH|strip}';
+    var searchTip = '{$APP.LBL_SEARCH_TIPS|strip}';
+    var searchTip2 = '{$APP.LBL_SEARCH_TIPS_2|strip}';
 {literal}
 $("#sugar_spot_search").ready(function() {
     $("#sugar_spot_search").val(search_text);

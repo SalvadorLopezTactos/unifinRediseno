@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Display Downloads Tab',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'When selected, the Download tab will appear in the User settings and provide users with access to Sugar plug-ins and other available files',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'For SOAP authentication when using LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'The php_mcrypt extension must be enabled in your php.ini file.',
     'LBL_ALL' => 'All',
     'LBL_MARK_POINT' => 'Mark Point',
     'LBL_NEXT_' => 'Next>>',
@@ -443,6 +442,22 @@ To configure additional system settings, click <a href="index.php?module=Adminis
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Enable additional login screen content',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Auto-save process definitions',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determines how often process definitions are auto-saved when using the designer',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Auto-validate process definitions on auto-save',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Toggles whether process definitions are automatically validated when auto-saved. This will only take effect if "Auto-save process definitions" is set to a time interval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Auto-validate process definitions on import',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Toggles whether process definitions are automatically validated when first imported',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Comment Log Settings',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximum characters to show per comment entry',
 );
 
 

@@ -152,7 +152,7 @@
     }
 
     &[data-type="currency"] {
-      min-width: 141px !important;
+      min-width: 155px !important;
       max-width: 100% !important;
 
       .list {
@@ -238,7 +238,7 @@
     .select2-addon {
       input[type="text"] {
         width: 95%;
-        width: calc(~"100% - 100px");
+        width: calc(~"100% - 80px");
       }
 
       .input-append {
@@ -402,6 +402,14 @@
           .btn {
             margin-left: 0;
           }
+
+          > span.edit {
+            .btn {
+              max-width: 56px;
+              padding-left: 0;
+              padding-right: 0;
+            }
+          }
         }
 
         &:last-child {
@@ -415,6 +423,10 @@
 
           > span.edit {
             z-index: 2;
+
+            .btn {
+              max-width: 56px;
+            }
           }
         }
 
@@ -476,8 +488,8 @@
         }
 
         &[data-type="currency"] {
-          min-width: 168px;
-          max-width: 168px !important;
+          min-width: 185px !important;
+          max-width: 185px !important;
         }
 
         &[data-type="parent"] {
@@ -1226,6 +1238,9 @@ span.email-has-attachments {
   td {
     /* new variable */
     background: @tableBackground;
+
+    /*  TODO: This shouldn't be required but is a hack to prevent border rendering errors in firefox */
+    border-left: 0 solid;
   }
 
   /* ---------

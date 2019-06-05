@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Wykryto błędy podczas testu kompatybilności. W celu zapewnienia prawidłowego działania instalacji SugarCRM wykonaj odpowiednie czynności, aby rozwiązać problemy wymienione poniżej, a następnie ponownie wybierz przycisk lub przeprowadź instalację od początku.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Funkcja PHP Allow Call Time Pass Reference jest włączona (zmień ustawienia na Wyłączona w php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nie znaleziono: aplikacja Sugar Scheduler będzie działać z ograniczoną funkcjonalnością. Usługa archiwizacji wiadomości e-mail nie będzie działać.',
+	'ERR_CHECKSYS_CURL'					=> 'Nie znaleziono: harmonogram Sugar będzie działał przy ograniczonych funkcjach. Usługa archiwizowania wiadomości e-mail nie będzie działać.',
     'ERR_CHECKSYS_IMAP'					=> 'Nie odnaleziono: Poczta przychodząca i poczta kampanii wymagają bibliotek IMAP. Nie będą one działać.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Funkcja Magic Quotes GPC nie może być włączona, gdy używasz serwera MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Ostrzeżenie:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'W celu optymalizacji wydajności z wykorzystaniem IIS/FastCGI sapi ustaw fastcgi.logging na 0 w pliku php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Zainstalowano nieobsługiwaną wersję PHP: ( wersja',
     'LBL_DB_UNAVAILABLE'                => 'Baza danych niedostępna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nie znaleziono funkcji obsługi bazy danych. Upewnij się, że posiadasz niezbędne sterowniki dla jednego z następujących obsługiwanych typów baz danych: MySQL, MS SQLServer, Oracle lub DB2. Może musisz usunąć komentarz rozszerzenia w pliku php.ini lub ponownie skompilować go z odpowiednim binarnym plikiem w zależności od posiadanej wersji PHP.  Więcej informacji na temat włączania obsługi bazy danych można znaleźć w Instrukcji obsługi PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nie znaleziono funkcji obsługi bazy danych. Upewnij się, że posiadasz niezbędne sterowniki dla jednego z następujących obsługiwanych typów baz danych: MySQL, MS SQLServer, Oracle lub DB2. Może musisz usunąć komentarz rozszerzenia w pliku php.ini lub ponownie skompilować go z odpowiednim plikiem binarnym w zależności od posiadanej wersji PHP. Więcej informacji na temat włączania obsługi bazy danych można znaleźć w Instrukcji obsługi PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcje powiązane z bibliotekami parsera XML, wymagane przez aplikacje Sugar, nie zostały odnalezione. Może być konieczne usunięcie komentarzy w odpowiednich rozszerzeniach w pliku php.ini lub przekompilowanie przy użyciu odpowiedniego pliku binarnego zależnie od używanej wersji PHP. Więcej informacji można znaleźć w instrukcji PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator liczb losowych',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcje powiązane z rozszerzeniem PHP Multibyte Strings (mbstring), wymagane przez aplikację Sugar, nie zostały znalezione. <br/><br/>Generalnie moduł mbstring nie jest domyślnie włączony w PHP i należy go włączyć przez dodanie opcji --enable-mbstring, podczas budowania i kompilacji pliku binarnego PHP. Więcej informacji o sposobie włączania obsługi mbstring można znaleźć w instrukcji PHP.',
-    'ERR_CHECKSYS_MCRYPT'               => "Moduł mcrypt nie jest załadowany. Więcej informacji na temat ładowania modułu mcrypt można znaleźć w instrukcji języka PHP.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Opcja session.save_path w pliku konfiguracji PHP (php.ini) nie jest zdefiniowana lub wskazuje na folder, który nie istnieje. Być może wystarczy jedynie ustawić parametr dla opcji save_path setting w pliku php.ini lub sprawdzić, czy ustawiony w niej folder istnieje w systemie.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Opcja session.save_path w pliku konfiguracji PHP (php.ini) wskazuje na folder, dla którego nie są ustawione prawa do zapisu. Wykonaj niezbędne kroki w celu umożliwienia zapisu w tym folderze.  <br>Zależnie od systemu operacyjnego może to wymagać zmian praw dostępu poprzez wykonanie polecenia chmod 766 lub kliknięcia prawym przyciskiem nazwy pliku, przejścia do właściwości i anulowania zaznaczenia opcji tylko do odczytu.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Plik config istnieje, ale nie można wprowadzać w nim zmian. Wykonaj niezbędne kroki w celu umożliwienia zapisu w tym folderze. Zależnie od systemu operacyjnego może to wymagać zmian praw dostępu poprzez wykonanie polecenia chmod 766 lub kliknięcia prawym przyciskiem nazwy pliku, przejścia do właściwości i anulowania zaznaczenia opcji tylko do odczytu.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Moduł IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Moduł MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (bez limitu)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (Nielimitowany)',
 	'LBL_CHECKSYS_MEM'					=> 'Limit pamięci PHP',
@@ -548,7 +546,7 @@ W celu uzyskania bardziej szczegółowych informacji sięgnij do Instrukcji inst
     'advanced_password_new_account_email' => array(
         'subject' => 'Informacje o nowym koncie',
         'description' => 'Ten szablon jest używany, gdy administrator systemu wysyła nowe hasło do użytkownika.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Twoja nazwa użytkownika i tymczasowe hasło:</p><p>Nazwa użytkownika: $contact_user_user_name </p><p>Hasło: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Po zalogowaniu przy użyciu powyższego hasła może być wymagana zmiana hasła na Twoje własne.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Twoja nazwa użytkownika i tymczasowe hasło:</p><p>Nazwa użytkownika: $contact_user_user_name </p><p>Hasło: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Po zalogowaniu przy użyciu powyższego hasła może być wymagana zmiana hasła na Twoje własne.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Twoja nazwa użytkownika i tymczasowe hasło:
@@ -563,7 +561,7 @@ Po zalogowaniu przy użyciu powyższego hasła może być wymagana zmiana hasła
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetuj hasło do swojego konta',
         'description' => "Ten szablon jest używany do wysłania użytkownikowi linku do zresetowania hasła do konta użytkownika.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Dnia $contact_user_pwd_last_changed wysłano prośbę o możliwość zresetowania hasła do konta. </p><p>Kliknij link poniżej, aby zresetować hasło:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Dnia $contact_user_pwd_last_changed wysłano prośbę o możliwość zresetowania hasła do konta. </p><p>Kliknij link poniżej, aby zresetować hasło:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Dnia $contact_user_pwd_last_changed wysłano prośbę o możliwość zresetowania hasła do konta.

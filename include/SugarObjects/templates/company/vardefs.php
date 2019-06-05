@@ -354,7 +354,14 @@ $vardefs= array (
     'comment' => 'The country used for the shipping address',
     'merge_filter' => 'enabled',
   ),
-
+  'service_level' => array (
+    'name' => 'service_level',
+    'vname' => 'LBL_SERVICE_LEVEL',
+    'type' => 'enum',
+    'options' => 'service_level_dom',
+    'audited' => true,
+    'comment' => 'An indication of the service level of a company',
+  ),
 ),
 'uses' => array(
     'email_address',

@@ -48,4 +48,5 @@ $mod_strings = array (
     'LBL_SUGAR_LINK_SELECTOR' => 'เครื่องมือเลือกลิงก์ของระเบียน',
     'LBL_RELATED_TO_TARGET_MODULE' => 'เกี่ยวข้องกับโมดูลเป้าหมาย',
     'LBL_SELECT_BUTTON_LABEL' => 'เลือก',
+    'LBL_FIELD_SELECTOR_DROPDOWN' => 'ประเภทค่าของฟิลด์',
 );

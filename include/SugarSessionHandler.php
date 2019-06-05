@@ -89,7 +89,7 @@ class SugarSessionHandler extends SessionHandler
                 $details[] = $var . ': ' . $value;
             }
 
-            $this->log->fatal(sprintf(
+            $this->log->warn(sprintf(
                 '[SessionLock] Session lock for user id %s was held for %d seconds which is longer than the maximum of %d seconds.'
                 . ' Request details: %s',
                 $id,

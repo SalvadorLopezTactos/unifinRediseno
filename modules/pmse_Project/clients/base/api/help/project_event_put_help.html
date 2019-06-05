@@ -43,6 +43,10 @@
 </table>
 
 <h3>Request Payload</h3>
+<span class="lead">
+    There are 5 event types in SugarBPM<sup class="trademark">TM</sup>.
+</span>
+<h4>Start Event</h4>
 <pre class="pre-scrollable">
 {
     "data":
@@ -53,7 +57,111 @@
     }
 }
 </pre>
-
+<h4>Timer Event</h4>
+<pre class="pre-scrollable">
+{
+    "data":
+    {
+        "evn_timer_type":"duration",
+        "evn_duration_criteria":"10",
+        "evn_duration_params":"minute",
+        "evn_criteria":null
+    }
+}
+</pre>
+<h4>Receive Message Event</h4>
+<pre class="pre-scrollable">
+{
+    "data":
+    {
+        "evn_criteria":[
+            {
+              "expType":"MODULE",
+              "expSubtype":"DropDown",
+              "expLabel":"Accounts (Industry is equal to Banking)",
+              "expValue":"Banking",
+              "expOperator":"equals",
+              "expModule":"Accounts",
+              "expField":"industry"
+            }
+        ]
+    }
+}
+</pre>
+<h4>Send Message Event</h4>
+<pre class="pre-scrollable">
+{
+    "data":
+    {
+        "evn_module":"Accounts",
+        "evn_criteria":"8444baae-c73f-11e8-afa5-6c400895ea84",
+        "evn_params":
+        {
+            "to":[
+               {
+                  "type":"recipient",
+                  "module":"calls",
+                  "moduleLabel":"Calls",
+                  "value":"email1",
+                  "label":"%MODULE% : Email Address",
+                  "filter":{
+                     "expType":"MODULE",
+                     "expSubtype":"DropDown",
+                     "expLabel":"Calls (Status is equal to Scheduled)",
+                     "expValue":"Planned",
+                     "expOperator":"equals",
+                     "expModule":"calls",
+                     "expField":"status"
+                  },
+                  "chainedRelationship":{
+                     "module":"contact_parent",
+                     "moduleLabel":"Contacts",
+                     "filter":{
+                        "expType":"MODULE",
+                        "expSubtype":"DropDown",
+                        "expLabel":"Contacts (Lead Source is equal to Cold Call)",
+                        "expValue":"Cold Call",
+                        "expOperator":"equals",
+                        "expModule":"contact_parent",
+                        "expField":"lead_source"
+                     }
+                  }
+               }
+            ],
+            "cc":[],
+            "bcc":[]
+        }
+    }
+}
+</pre>
+<h4>End Event</h4>
+<pre class="pre-scrollable">
+{
+   "data":{
+      "activities":{
+      },
+      "events":{
+         "4849630305bb7e68ae078d5012588603":{
+            "evn_uid":"4849630305bb7e68ae078d5012588603",
+            "evn_behavior":"THROW",
+            "evn_marker":"EMPTY",
+            "evn_message":"",
+            "action":"UPDATE"
+         }
+      },
+      "gateways":{
+      },
+      "flows":{
+      },
+      "artifacts":{
+      },
+      "prj_uid":"389d3d5a-c8ee-11e8-bc27-6c400895ea84"
+   },
+   "id":"389d3d5a-c8ee-11e8-bc27-6c400895ea84",
+   "operation":"update",
+   "wrapper":"Project"
+}
+</pre>
 <h2>Response Arguments</h2>
 <table class="table table-hover">
     <thead>

@@ -13,8 +13,8 @@
 
 
 <script type="text/javascript">
-	var ERR_NO_SINGLE_QUOTE = '{$APP.ERR_NO_SINGLE_QUOTE}';
-	var cannotEq = "{$APP.ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP}";
+	var ERR_NO_SINGLE_QUOTE = '{$APP.ERR_NO_SINGLE_QUOTE|strip}';
+	var cannotEq = "{$APP.ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP|strip}";
 {literal}
 	function verify_data(formName) {
 		var f = document.getElementById(formName);

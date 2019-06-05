@@ -67,14 +67,6 @@ $viewdefs['Reports']['base']['view']['list'] = array(
                     'readonly' => true,
                 ),
                 array(
-                    'name' => 'next_run',
-                    'label' => 'LBL_SCHEDULE_REPORT',
-                    'type' => 'next-run',
-                    'default' => false,
-                    'link' => true,
-                    'readonly' => true,
-                ),
-                array(
                     'name' => 'tag',
                     'label' => 'LBL_TAGS',
                     'enabled' => true,

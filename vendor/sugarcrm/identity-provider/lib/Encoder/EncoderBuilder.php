@@ -12,9 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Encoder;
 
-use Silex\Application;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
-use Sugarcrm\IdentityProvider\Encoder\CryptPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
  * Builds encoder based on application settings
@@ -32,7 +30,7 @@ class EncoderBuilder
      *
      * @param array $config Configuration
      *
-     * @return PasswordEncoderInterfaceInterface
+     * @return PasswordEncoderInterface
      */
     public function buildEncoder(array $config)
     {
@@ -63,6 +61,7 @@ class EncoderBuilder
                         if (PASSWORD_DEFAULT != PASSWORD_BCRYPT) {
                             throw new \RuntimeException('Default encryption is different from Blowfish');
                         }
+                        // no break
                     case PASSWORD_BCRYPT:
                         $encoder = new BCryptPasswordEncoder(
                             isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST

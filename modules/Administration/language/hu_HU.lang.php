@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Csoport attribútum:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Felhasználói névvel:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Kezelje együtt a felhasználói nevet a felhasználói tulajdonságokkal a csoporttagság vizsgálatakor',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Bármilyen további szűrő paramétert lehet alkalmazni a felhasználók hitelesítésére, pl.\\nis_sugar_user=1 vagy (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Bármilyen további szűrő paramétert lehet alkalmazni a felhasználók hitelesítésére, pl.\nis_sugar_user=1 vagy (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login attribútum:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Hozzárendelés attribútuma:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAP felhasználó hozzárendeléséhez<br />Például: AD: userPrincipalName, openLDAP: userPrincipalName, Mac OS X: uid',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Figyelmeztetés: Az adatok megőrzéséhez a telepítőt le kell zárni a config.php fájlban az &#39;installer_locked&#39; változót &#39;true&#39; értékre állítva!',
  	'WARN_LICENSE_EXPIRED'=> "Megjegyzés: Az Ön licence lejár",
     'WARN_LICENSE_EXPIRED2' =>"nap múlva. Keresse fel a licenckezelőt az admin felületen!",
-    'WARN_LICENSE_SEATS'=>  "Figyelem: a felhasználói engedélyek meghaladták",
-    'WARN_LICENSE_SEATS2' => ". Vegye fel a kapcsolatot a helyi értékesítési képviselettel vagy üzenjen nekünk a cagroup@sugarcrm.com címen!",
+    'WARN_LICENSE_SEATS'=>  "<b>Figyelem:</b> Jelenleg ",
+    'WARN_LICENSE_SEATS2' => " aktív felhasználó létezik, azonban az előfizetés csak a következő mennyiséget teszi lehetővé: ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Tiltson le néhány felhasználót, vegye fel a kapcsolatot a partnerrel vagy értékesítési képviselővel,"
+        . " vagy küldjön e-mailt a(z) <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a> címre.</p>"
+        . "<p class=\"error\">További információért lásd a(z) "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Felhasználótípusok és Sugar licencek bemutatása</a> cikket.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Figyelem: az aktív felhasználók száma elérte a licencben foglalt maximumot:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Figyelem: az aktív felhasználók száma elérte a licencben foglalt maximumot",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Figyelem: az aktív felhasználók száma elérte a licencben engedélyezett mennyiséget. Nem hozhat létre további aktív felhasználót.",
-    'WARN_REPAIR_CONFIG' => 'Figyelem: a config.php állomány javításra szorul. Használja a konfigurációs fájl újjáépítése funkciót az admin felület Javítás oldalán!',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Figyelem:</b> Nem tud majd további aktív felhasználókat létrehozni."
+        . " Vásároljon további előfizetéseket.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Figyelem:</b> Nem tud majd további aktív felhasználókat létrehozni."
+        . " Vásároljon további előfizetéseket.",
+    'WARN_REPAIR_CONFIG' => '<b>Figyelem:</b> A config.php fájl javításra szorul.  A konfig fájl javításához használja a <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>konfig fájl újraépítése</a> parancsfájlt, amely az Admin terület Javítás oldalán található.',
     'WARN_UPGRADE_APP'=> "Az alkalmazás újabb verziója érhető el.",
     'WARN_UPGRADE' => 'Figyelem: kérem, frissítsen',
     'WARN_UPGRADENOTE' => 'Megjegyzés:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Karakterdefiníciós adatok törlése a gyorsítótárból',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Karakterdefiníciók eltávolítása a gyorsítótárból',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Keresés előzményeinek törlése a gyorsítótárból',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Undefined_search_modules.php eltávolítása a gyorsítótárból',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Eltávolítja a unified_search_modules.php állományt a gyorsítótárból',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Gyors karbantartás és újjáépítés',
     'LBL_QUICK_REPAIR_TITLE'=>'Válasszon modult a javításhoz:',
 	'LBL_FAILED_CONNECTION'=> 'Hiba a kapcsolatban:',
@@ -1246,15 +1255,17 @@ A platformra támaszkodó bármely integráció működése le fog állni.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'A metaadatok fájl nem található.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Beállítások',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Advanced Workflow beállítások konfigurálása.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Napló Megjelenítő',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Advanced Workflow napló megnyitása.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Nyissa meg a ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' naplót.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Folyamat-Menedzsment',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'A Folyamat-Menedzsment itt hozzáférhető.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfigurálja a ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' beállításokat, és megtekintheti a naplókat. Kezelheti az összes BPM folyamatot valamennyi felhasználóra kiterjedően a folyamat-menedzsmentben.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Konfigurálhatja az Advanced Workflow beállításait, és megtekintheti a naplókat. Kezelheti az összes BPM folyamatot valamennyi felhasználóra kiterjedően a folyamat-menedzsmentben.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Árajánlatok konfiguráció',
+    'LBL_MANAGE_QUOTES' => 'Konfigurálja az árajánlatok munkalap elrendezést',
 );

@@ -46,32 +46,22 @@
      */
     filterAvailableMenu: function(menuMeta){
         var result = [];
-        _.each(menuMeta,function(item){
+        _.each(menuMeta,function(item) {
             item = this.filterMenuProperties(item);
-            if(!_.isEmpty(item['acl_module'])) {
-                if(app.acl.hasAccess(item.acl_action, item.acl_module)) {
-                    result.push(item);
-                }
-            } else if(item['acl_action'] === 'admin') {
-                //Edge case for admin link. We only show the Admin link when
-                //user has the "Admin & Developer" or "Developer" (so developer
-                //in either case; see SP-1827)
-                if (app.acl.hasAccessToAny('developer')) {
-                    result.push(item);
-                }
-            } else {
-                // push the menu item if current user is a admin or
-                // current user has access to admin or current user
-                // is a developer, the last conditon is for
-                // if all three acls checks are not met, it will only
-                // push if the menu item is not admin, which skips the admin menu
-                if(app.acl.hasAccess('admin', 'Administration') ||
-                    app.acl.hasAccessToAny('developer') ||
-                    item['acl_action'] !== 'admin') {
-                    result.push(item);
-                }
+            if (!_.isEmpty(item.acl_module) &&
+                !app.acl.hasAccess(item.acl_action, item.acl_module)) {
+                return;
             }
 
+            // if current user is neither a developer nor allowed to access admin actions,
+            // but the action is reserved for admin, skip this action
+            if (!app.acl.hasAccessToAny('developer') &&
+                !app.acl.hasAccess('admin', 'Administration') &&
+                item.acl_action === 'admin') {
+                return;
+            }
+
+            result.push(item);
         },this);
         return result;
     },

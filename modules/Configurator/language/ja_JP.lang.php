@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plusサーバ',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'サブパネルで表示するページごとのアイテム数',
 	'LOG_MEMORY_USAGE'=>'メモリ使用状況のログ',
-    'LOG_SLOW_QUERIES' => '遅延クエリのログ',
+    'LOG_SLOW_QUERIES' => 'スロークエリーのログ',
     'LOCK_HOMEPAGE_HELP'=>'この設定は以下を非許可にします。<BR> 1) ホームで新規ホームページとダッシュレットを追加 <BR>2) ドラッグアンドドロップによるホームのダッシュレットの配置のカスタマイズ',
     'CURRENT_LOGO'=>'現在のロゴ',
     'CURRENT_LOGO_HELP'=>'このロゴはSugarアプリケーションのフッタの左端に表示されます。',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'ダウンロードタブの表示',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'ユーザ設定画面にダウンロードタブが表示され、ユーザがSugarプラグインなどをダウンロードすることができるようになります。',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'LDAP使用時のSOAP認証用',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php.iniでphp_mcryptエクステンションを有効にする必要があります。',
     'LBL_ALL' => 'すべて',
     'LBL_MARK_POINT' => 'ポイントをマーク',
     'LBL_NEXT_' => '次へ>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'アクティビティストリーム',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'アクティビティストリームを有効にする',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'アプリケーション用のアクティビティストリームをオンにする',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => '追加のログイン画面のコンテンツを有効にします',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '自動保存プロセスの定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'デザイナー使用中のプロセス定義自動保存の頻度を決定します',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => '自動保存の自動有効化プロセス定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => '自動保存時にプロセス定義を自動的に有効化するかどうかを切り替えます。これは、「自動保存プロセス定義」が時間間隔に設定されている場合のみ有効です。',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'インポート時の自動有効化プロセス定義',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => '最初にインポートした時にプロセス定義を自動的に有効化するかどうかを切り替えます',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'コメントログ設定',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'コメントエントリごとの最大表示文字数',
 );
 
 

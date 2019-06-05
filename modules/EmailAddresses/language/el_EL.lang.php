@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Διαγραφή',
     'LBL_MODULE_NAME' => 'Διευθύνσεις Email',
     'LBL_MODULE_NAME_SINGULAR' => 'Διεύθυνση Email',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Επιβεβαίωση εκτέλεσης αιτούμενης ενέργειας',
+    'LBL_CONFIRMATION_TITLE' => 'Ευχαριστούμε',
+    'LBL_CONFIRMATION_MESSAGE' => 'Η συνδρομή σας έχει επιβεβαιωθεί. Σας έχουμε προσθέσει στην λίστα μας και θα ακούσετε από μας σύντομα.',
 );

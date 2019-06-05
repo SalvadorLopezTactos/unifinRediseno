@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Rēķinu izūtīšana',
 	'LBL_PUSH_SHIPPING' => 'Piegāžu izsūtīšana',
 	'LBL_SAVE_ACCOUNT' => 'Saglabāt uzņēmumu',
+    'LBL_SERVICE_LEVEL' => 'Apkalpošanas līmenis',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Piegādes adrese - pilsēta:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Piegādes adrese - valsts:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Piegādes adrese - pasta indekss:',

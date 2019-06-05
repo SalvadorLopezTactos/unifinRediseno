@@ -72,6 +72,15 @@ $dictionary['opportunities_contacts'] = array(
                 'contact_id',
             ),
         ),
+        array(
+            'name' => 'idx_del_opp_con',
+            'type' => 'alternate_key',
+            'fields' => array(
+                'deleted',
+                'opportunity_id',
+                'contact_id',
+            ),
+        ),
     ),
     'relationships' => array(
         'opportunities_contacts' => array(

@@ -145,7 +145,7 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Adres e-mail',
   'LBL_CONTACTS_SYNC' => 'Kontakty',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'Pracownika można utworzyć tylko w sekcji <a href="{0}" target="_blank">konsola chmury</a> dla trybu IDM.',
+        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
 );
 
 

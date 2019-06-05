@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-// $Id$
 $layout_defs['ContractTypes'] = array( 
 	// list of what Subpanels to show in the DetailView 
 	'subpanel_setup' => array(

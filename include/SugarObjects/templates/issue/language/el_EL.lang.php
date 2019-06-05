@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Ανατέθηκε Σε:',
   'LBL_ASSIGNED_TO_NAME' => 'Χειριστής:',  	  
   'LBL_WORK_LOG' => 'Εργασία:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Δημιουργήθηκε Από:',
   'LBL_DATE_CREATED' => 'Ημερομηνία Δημιουργίας:',
   'LBL_DATE_ENTERED' => 'Ημερομηνία Δημιουργίας:',

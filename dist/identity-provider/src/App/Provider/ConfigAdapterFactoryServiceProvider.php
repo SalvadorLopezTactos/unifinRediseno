@@ -14,7 +14,7 @@ namespace Sugarcrm\IdentityProvider\App\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Sugarcrm\IdentityProvider\App\Authentication\Adapter\ConfigAdapterFactory;
+use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\ConfigAdapterFactory;
 
 class ConfigAdapterFactoryServiceProvider implements ServiceProviderInterface
 {

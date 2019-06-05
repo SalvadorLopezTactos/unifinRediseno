@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Serveur Sugar Mobile Edge',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Nombre maximum d&#39;élements affichés dans les "Sous-Panels"',
 	'LOG_MEMORY_USAGE'=>'Tracer l&#39;utilisation de la mémoire',
-    'LOG_SLOW_QUERIES' => 'Tracer les requêtes considérées comme lentes',
+    'LOG_SLOW_QUERIES' => 'Logger les requêtes lentes',
     'LOCK_HOMEPAGE_HELP'=>'Cochez cette case afin d&#39;empêcher les utilisateurs :<br /> 1) d&#39;ajouter de nouveaux onglets et dashlets sur la page d&#39;accueil (Pro et Entreprise).<br />2) de modifier la disposition des Dashlets par glisser-déposer.<br />',
     'CURRENT_LOGO'=>'Logo actuel',
     'CURRENT_LOGO_HELP'=>'Ce logo est affiché dans le coin en haut à gauche de votre application SugarCRM.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Afficher l&#39;onglet "Téléchargement"',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Lorsque cette case est cochée, l&#39;onglet "Téléchargement" présent dans sur la fiche utilisateur sera affiché et permettra ainsi aux utilisateurs d&#39;accéder directement aux plug-ins SugarCRM ainsi qu&#39;aux autres fichiers disponibles.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Pour l&#39;authentification SOAP utilisant LDAP et les Plugins.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'L&#39;extension php_mcrypt doit être activée dans votre fichier php.ini.',
     'LBL_ALL' => 'Tous',
     'LBL_MARK_POINT' => 'Marqueur',
     'LBL_NEXT_' => 'Suivant >>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Flux d&#39;activité',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activer les flux d&#39;activité',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Active les flux d&#39;activité pour l&#39;application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Activer le contenu supplémentaire de l&#39;écran de connexion',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Sauvegarde automatique des définitions processus',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Détermine la fréquence à laquelle les définitions de processus sont sauvegardées automatiquement lors de l&#39;utilisation du concepteur',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Auto-validation des définitions de processus en mode Enregistrement automatique',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Permet de déterminer si les définitions de processus sont automatiquement validées lors de la sauvegarde automatique. Ceci n&#39;est valable que si "Sauvegarde automatique des définitions processus" est défini sur une fréquence',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Auto-validation des définitions de processus à l&#39;importation',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Permet de déterminer si les définitions de processus sont automatiquement validées lors de la première importation',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Paramètres du Log de commentaire',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Nombre maximum de caractères à afficher par entrée de commentaire',
 );
 
 

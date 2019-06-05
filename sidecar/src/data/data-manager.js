@@ -1477,7 +1477,6 @@ const DataManager = _.extend({
      */
     getSyncAbortCallback: function(method, model, options) {
         return _.bind(function(request) {
-            this._updateCollectionProperties(model, options);
             this.trigger('data:sync:abort', method, model, options, request);
             /**
              * Fires on model when the sync operation ends.

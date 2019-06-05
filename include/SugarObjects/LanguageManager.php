@@ -301,15 +301,12 @@ class LanguageManager
      */
     public static function invalidateJsLanguageCache()
     {
-        global $sugar_config, $sugar_version;
-
-        if (empty($sugar_config['js_lang_version'])) {
-            $sugar_config['js_lang_version'] = 1;
-        } else {
-            $sugar_config['js_lang_version']++;
-        }
-
-        rebuildConfigFile($sugar_config, $sugar_version);
+        $configurator = new Configurator();
+        $jsLangVersion = (int) ($configurator->config['js_lang_version'] ?? 0);
+        $jsLangVersion++;
+        $configurator->config['js_lang_version'] = $jsLangVersion;
+        $configurator->saveConfig();
+        SugarConfig::getInstance()->clearCache();
     }
 
 	/**

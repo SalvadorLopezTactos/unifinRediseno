@@ -375,7 +375,7 @@ Por favor, compruebe la Configuración de Proxy en el panel de administración <
 	'LBL_LDAP_GROUP_ATTR'=>'Atributo de Grupo:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Con DN de usuario:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Incluya el DN del usuario con el atributo de usuario al comprobar la pertenencia al grupo',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Cualquier parámetro de filtrado adicional para aplicar a la hora de autenticar usuarios. Por ejemplo:\\nis_sugar_user=1 o (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Cualquier parámetro de filtrado adicional para aplicar a la hora de autenticar usuarios. Por ejemplo:\nis_sugar_user=1 o (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atributo de Inicio de Sesión:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atributo de Conexión:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Para conectarse con el Usuario LDAP<br>Ejemplos:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -938,12 +938,21 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
     'WARN_INSTALLER_LOCKED'=>'<b>Aviso:</b> Para salvaguardar sus datos, el instalador debe estar bloqueado estableciendo &#39;installer_locked&#39; a &#39;verdadero&#39; en el archivo config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Aviso: Su licencia caduca en",
     'WARN_LICENSE_EXPIRED2' =>"días(s). Por favor, vaya a <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Administración de Licencias\"</a>  en la pantalla de Administración.",
-    'WARN_LICENSE_SEATS'=>  "Aviso: Licencias de usuario excedidas por",
-    'WARN_LICENSE_SEATS2' => ".  Por favor, póngase en contacto con su representante de ventas o envíe un correo electrónico a <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Aviso:</b> Hay ",
+    'WARN_LICENSE_SEATS2' => " usuarios activos y su suscripción sólo permite ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Desactive algunos usuarios, póngase en contacto con su socio o representante de ventas,"
+        . " o por correo electrónico a <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Para obtener más información, consulte la "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Artículo para comprender los tipos de usuario y licencias de Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Aviso:</b> La cantidad de usuarios activos ha alcanzado el número máximo de licencias permitidas: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Aviso:</b> La cantidad de usuarios activos ha alcanzado el número máximo de licencias permitidas",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Aviso: El número de usuarios activos permitidos por su licencia es igual al número de usuarios activos en el sistema. No podrá crear usuarios activos adicionales.",
-    'WARN_REPAIR_CONFIG' => '<b>Aviso:</b> El archivo config.php necesita ser reparado.  Por favor, use el enlace <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> en la página Reparar del área de Administración para reparar el archivo de configuración.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Advertencia:</b> No podrá crear más usuarios activos."
+        . " Compre más suscripciones.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Advertencia:</b> No podrá crear más usuarios activos."
+        . " Compre más suscripciones.",
+    'WARN_REPAIR_CONFIG' => '<b>Atenión:</b> El archivo de config.php se tiene que reparar.  Utilice el script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstruir archivo de configuración</a> en la página de Reparación del área de Administración para reparar el archivo de configuración.',
     'WARN_UPGRADE_APP'=> "Existe una versión actualizada disponible de la aplicación. ",
     'WARN_UPGRADE' => 'Aviso: Por favor, actualice',
     'WARN_UPGRADENOTE' => 'Nota:',
@@ -1253,15 +1262,17 @@ Todas las integraciones que dependan de esta plataforma dejarán de funcionar.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'No se pudo encontrar el archivo de metadatos.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Ajustes',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configuración de los ajustes de Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Visualizador de Registro',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Acceso al registro de Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Acceder a ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' registro.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Gestión de Procesos',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Visualice todos los Procesos abiertos y ejecutándose en el sistema.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configurar ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' los parámetros y visualizar los registros. Administrar todos los procesos del BPM para todos los usuarios a través de la Administración de procesos.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configurar los parámetros de Advanced Workflow y visualizar los registros. Administrar todos los procesos del BPM para todos los usuarios a través de la Administración de procesos.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configuración de presupuestos',
+    'LBL_MANAGE_QUOTES' => 'Configure el diseño de la hoja de cálculo de presupuestos',
 );

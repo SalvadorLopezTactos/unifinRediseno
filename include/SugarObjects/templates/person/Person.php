@@ -111,7 +111,6 @@ class Person extends Basic
      */
     public function get_list_view_data()
     {
-        global $system_config;
         global $current_user;
 
         $this->_create_proper_name_field();

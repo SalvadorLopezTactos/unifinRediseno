@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'خادم Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'لائحة العناصر الفرعية في كل صفحة',
 	'LOG_MEMORY_USAGE'=>'استخدام ذاكرة السجل',
-    'LOG_SLOW_QUERIES' => 'سجل الاستعلامات البطيئة',
+    'LOG_SLOW_QUERIES' => 'تسجيل الاستعلامات البطيئة',
     'LOCK_HOMEPAGE_HELP'=>'تهدف هذه الإعدادات إلى منع<BR> 1) إضافة لوحه معلومات في الصفحات الرئيسية الجديدة ولوحه معلومات في الصفحة الرئيسية للوحدة، <BR>2) تخصيص مكان للوحه معلومات في الصفحات الرئيسية من خلال السحب والإفلات.',
     'CURRENT_LOGO'=>'الشعار الحالي:',
     'CURRENT_LOGO_HELP'=>'يظهر هذا الشعار في الجانب الأيسر من تذييل تطبيق Sugar.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'عرض علامة تبويب التنزيلات',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'عند التحديد، سوف تظهر علامة تبويب التنزيلات في إعدادات المستخدم وسوف توفر للمستخدم الوصول إلى مكونات Sugar الإضافية وغيرها من الملفات المتاحة',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'لمصادقة SOAP عند استخدام LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'يجب تمكين ملحق php_mcrypt في ملف php.ini الخاص بك.',
     'LBL_ALL' => 'الكل',
     'LBL_MARK_POINT' => 'مؤشر العلامة',
     'LBL_NEXT_' => 'التالي >>',
@@ -396,7 +395,7 @@ BSOFR
     'ERR_NO_FONT_PATH' => 'خطأ: مسار الخط غير متاح!',
     'ERR_NO_CUSTOM_FONT_PATH' => 'خطأ: مسار خط مخصص غير متاح!',
     'ERR_FONT_NOT_WRITABLE' => 'غير قابل للكتابة.',
-    'ERR_FONT_FILE_DO_NOT_EXIST' => 'غير موجود\\ أو ليس دليلاً.',
+    'ERR_FONT_FILE_DO_NOT_EXIST' => 'غير موجود\ أو ليس دليلاً.',
     'ERR_FONT_MAKEFONT' => 'خطأ: خطأ MakeFont',
     'ERR_FONT_ALREADY_EXIST' => 'خطأ : هذا الخط موجود بالفعل. يتم الآن التراجع...',
     'ERR_PDF_NO_UPLOAD' => 'خطأ أثناء تحميل ملف الخط أو القياس.',
@@ -415,7 +414,7 @@ BSOFR
     'LBL_WIZARD_FINISH_TITLE' => 'تم الانتهاء من نظام التكوين الأساسي',
     'LBL_WIZARD_FINISH' => 'انقر فوق <b>استمرار</b> لتكوين إعدادات المستخدم الخاصة بك.<br/><br /><br />لتكوين نظام إعدادات إضافي، انقر <a href="index.php?module=Administration&action=index" target="_blank">هنا</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'إدراج علامة تجارية',
-    'LBL_WIZARD_SYSTEM_DESC' => 'قم بتوفير اسم المنظمة\\ الخاصة بك وشعارها لإدراج علامة تجارية لـ Sugar خاصة بك.',
+    'LBL_WIZARD_SYSTEM_DESC' => 'قم بتوفير اسم المنظمة\ الخاصة بك وشعارها لإدراج علامة تجارية لـ Sugar خاصة بك.',
     'LBL_WIZARD_LOCALE_DESC' => 'قم بتحديد طريقة ظهور البيانات في Sugare، اعتمادًا على موقعك الجغرافي. الإعدادات التي توفرها هنا سوف تكون الإعدادات الافتراضية. سوف يكون لدى المستخدمين القدرة على تعيين التفضيلات الخاصة بهم.',
     'LBL_WIZARD_SMTP_DESC' => 'قم بتوفير حساب البريد الإلكتروني الذي سوف يتم استخدامه لإرسال رسائل البريد الإلكتروني، مثل إعلامات المهمة، وكلمات مرور المستخدم. سوف يتلقى المستخدمون رسائل البريد الإلكتروني من Sugar، كرسائل مرسلة من حساب بريد إلكتروني معين.',
 	'LBL_GMAIL_LOGO' => 'شعار Gmail' /*for 508 compliance fix*/,
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'سير النشاط',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'تمكين سير النشاط',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'تشغيل سير النشاط للتطبيق',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'تمكين محتوى شاشات تسجيل دخول إضافية',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'الحفظ التلقائي لتعريفات العملية',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'يحدد عدد مرات الحفظ التلقائي لتعاريف العملية عند استخدام المصمم',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'التحقق التلقائي من تعريفات العملية عند الحفظ التلقائي',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'التبديل بين التحقق من صحة تعريفات العملية عند الحفظ التلقائي وغير ذلك. لن يسري مفعول ذلك إلا في حالة ضبط "الحفظ التلقائي لتعريفات العملية" إلى فاصل زمني',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'التحقق التلقائي لتعريفات العملية عند الاستيراد',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'التبديل بين التحقق من صحة تعريفات العملية عند استيرادها لأول مرة وغير ذلك',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'إعدادات سجل التعليق',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'العدد الأقصى للأحرف الذي سيتم إظهاره لكل إدخال تعليق',
 );
 
 

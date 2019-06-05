@@ -22,6 +22,9 @@ class MetaDataManagerMobile extends MetaDataManager
         'detail',
         'forecast-pipeline',
         'dupecheck-list',
+        'quote-data-group-list',
+        'quote-data-grand-totals-footer',
+        'quote-data-group-footer',
     );
 
     protected $allowedModuleLayouts = array(

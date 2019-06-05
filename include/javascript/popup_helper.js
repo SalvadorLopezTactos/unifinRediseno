@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: popup_helper.js 56952 2010-06-14 21:44:26Z sadek $
 
 /**
  * Helper function used in send_backs to close the popup window if closePopup is true.

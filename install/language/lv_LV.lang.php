@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Savietojamības pārbaudes laikā atklātas kļūdas.  Lai SugarCRM instalācija funkcionētu korekti, veic atbilstošus pasākumus, lai atrisinātu zemāk esošās problēmas vai spied pogu Atkārtoti pārbaudīt, vai mēģini instalēt no jauna.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference ir stāvoklī On (šo vajadzētu uzstādīt stāvoklī Off failā php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nav atrasts: Sugar plānotājs darbosies ar ierobežotu funkcionalitāti. E-pastu arhivēšanas pakalpojums nedarbosies.',
+	'ERR_CHECKSYS_CURL'					=> 'Nav atrasts: Sugar plānotājs darbosies ar ierobežotu funkcionalitāti. E-pasta arhivēšana pakalpojums nedarbosies.',
     'ERR_CHECKSYS_IMAP'					=> 'Netika atrasts: Ienākošajiem e-pastiem un Kampaņām (E-pasta) nepieciešamas IMAP bibliotēkas. Pretējā gadījumā funkcionalitāte nedarbosies.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nevar uzstādīt "On" stāvoklī, ja lieto MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Brīdinājums:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Optimālai IIS/FastCGI sapi lietošanai php.ini datnē parametram fastcgi.logging uzstādiet vērtību 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalēta neatbalstīta PHP versija: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Datubāze nav pieejama',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datubāzes atbalsts netika atrasts. Pārliecinieties, ka ir nepieciešamie draiveri kādam no šādiem atbalstītajiem datubāžu tipiem: MySQL, MS SQLServer, Oracle vai DB2. Iespējams, ka atkarībā no jūsu PHP versijas ir jānoņem komentārs paplašinājumam php.ini failā vai jāpārkompilē, izmantojot pareizo bināro failu. Plašāka informācija par to, kā iespējot datubāzes atbalstu, pieejama PHP rokasgrāmatā.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datu bāzes atbalsts netika atrasts. Pārliecinieties, ka jums ir nepieciešamie draiveri kādai no šādām atbalstītajām datu bāzēm: MySQL, MS SQLServer, Oracle vai DB2. Iespējams, ka atkarībā no PHP versijas ir jānoņem komentārs paplašinājumam php.ini failā vai jāpārkompilē, izmantojot pareizu bināro failu. Sīkāka informācija par to, kā nodrošināt datu bāzes atbalstu, pieejama PHP rokasgrāmatā.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nav atrastas Sugar nepieciešamās XML Parser Libraries funkcijas.  Iespējams, ka atkarībā no izmantotās PHP versijas, jānoņem komentārs paplašinājumam php.ini datnē, vai jāpārkompilē ar pareizu bināro failu.  Detalizētaka informācija pieejama PHP rokasgrāmatā.',
     'LBL_CHECKSYS_CSPRNG' => 'Nejaušu skaitļu ģenerators',
     'ERR_CHECKSYS_MBSTRING'             => 'Nav atrastas funkcijas, kas nepieciešamas, lai Sugar  varētu izmantot PHP  Multibyte Strings paplašinājumu (mbstring). <br/><br/>Parasti pēc noklusējuma PHP mbstring modulis nav spējīgots un tā aktivizēšanai jāveic PHP būvējums, izmantojot  --enable-mbstring. Detalizētāka informācija par mbstring atbalstu pieejama PHP rokasgrāmatā.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Parametrs session.save_path Jūsu php konfigurācijas failā (php.ini) nav uzstādīts, vai ir uzstādīts uz neeksistējošu katalogut. Uzstādiet save_path parametru php.inifailā, vai pārbaudiet save_path norādītā kataloga eksistenci.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Parametrs session.save_path Jūsu php konfigurācijas failā (php.ini) norāda uz katalogu, kas nav pieejams rakstīšanai.  Lūdzu izpildiet soļus, kas nepieciešami, lai katalogu padarītu pieejamu rakstīšanai.  <br>Atkarībā no operētājsistēmas šim nolūkam ar chmod 766 palīdzību jāmaina pieejas tiesības,vai arī ar labās pogas klikšķi uz kataloga vārda jāatver tā īpašības (properties) un jānoņem "tikai lasī" (read only) pazīme.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Config fails eksistē, bet tajā nevar ierakstīt. Lūdzu veic nepieciešamās darbības, lai šajā failā varētu ierakstīt. Atkarībā no Jūsu operētājsistēmas, nepieciešams izmainīt tiesības, izpildot chmod 766 vai ar labo peles taustiņu noklikšķinot uz faila nosaukuma, lai piekļūtu faila īpašībām un atceltu iespēju - tikai lasīt.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP modulis',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings modulis',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'Labi (bez ierobežojuma)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'Labi (neierobežots)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP atmiņas ierobežojums',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Jaunā konta informācija',
         'description' => 'Šī veidne tiek lietota, kad sistēmas administrators sūta jaunu paroli lietotājam.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Te ir jūsu lietotājvārds un pagaidu parole:</p><p>Lietotājvārds : $contact_user_user_name </p><p>Parole : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pēc pieteikšanās sistēmā ar norādīto paroli, iespējams, jums tiks prasīts nomainīt šo paroli ar tādu, kādu jūs vēlaties lietot.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Te ir jūsu lietotājvārds un pagaidu parole:</p><p>Lietotājvārds : $contact_user_user_name </p><p>Parole : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pēc pieteikšanās sistēmā ar norādīto paroli, iespējams, jums tiks prasīts nomainīt šo paroli ar tādu, kādu jūs vēlaties lietot.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Te ir jūsu lietotājvārds un pagaidu parole:
@@ -496,7 +494,7 @@ Pēc pieteikšanās sistēmā ar norādīto paroli, iespējams, jums tiks prasī
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Izveidot jaunu paroli jūsu kontam',
         'description' => "Šī veidne tiek lietota, lai nosūtītu lietotājam saiti, kuru noklikšķinot tiks iestatīta jauna konta parole.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Jūs nesen pieprasījāt $contact_user_pwd_last_changed iespēju atkārtoti iestatīt jūsu konta paroli. </p><p>Spiediet uz zemāk redzamās saites, lai iestatītu jaunu paroli:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Jūs nesen pieprasījāt $contact_user_pwd_last_changed iespēju atkārtoti iestatīt jūsu konta paroli. </p><p>Spiediet uz zemāk redzamās saites, lai iestatītu jaunu paroli:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Jūs nesen pieprasījāt $contact_user_pwd_last_changed iespēju atkārtoti iestatīt jūsu konta paroli.

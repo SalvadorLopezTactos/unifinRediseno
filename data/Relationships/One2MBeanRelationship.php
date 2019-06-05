@@ -20,11 +20,6 @@ class One2MBeanRelationship extends One2MRelationship
     //Type is read in sugarbean to determine query construction
     var $type = "one-to-many";
 
-    public function __construct($def)
-    {
-        parent::__construct($def);
-    }
-
     /**
      * @param  $lhs SugarBean left side bean to add to the relationship.
      * @param  $rhs SugarBean right side bean to add to the relationship.
@@ -213,11 +208,14 @@ class One2MBeanRelationship extends One2MRelationship
             $rhsTable = $this->def['rhs_table'];
             $rhsTableKey = "{$rhsTable}.{$this->def['rhs_key']}";
             $deleted = !empty($params['deleted']) ? 1 : 0;
-            $where = "WHERE $rhsTableKey = '{$link->getFocus(
-            )->$lhsKey}' AND {$rhsTable}.deleted=$deleted";
+            $db = DBManagerFactory::getInstance();
+            $where = sprintf(
+                "WHERE $rhsTableKey = %s AND {$rhsTable}.deleted=%s",
+                $db->quoted($link->getFocus()->$lhsKey),
+                $deleted
+            );
 
             //Check for role column
-            $db = DBManagerFactory::getInstance();
             foreach ($this->getRelationshipRoleColumns() as $column => $value) {
                 if (!empty($value)) {
                     $where .= " AND $rhsTable.$column = ".$db->quoted($value);

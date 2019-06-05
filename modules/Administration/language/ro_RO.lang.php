@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Atenţie: Pentru a proteja datele dvs., instalatorul trebuie să fie blocat prin stabilirea unor "installer_locked" la "true" în fişierul config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Notă: Licenţa dumneavoastră expiră în",
     'WARN_LICENSE_EXPIRED2' =>"zi (le). Vă rugăm să mergeţi la \"Managenent Licenta\" în ecranul Admin.",
-    'WARN_LICENSE_SEATS'=>  "Atenţie: licenţele de utilizare a depăşit cu",
-    'WARN_LICENSE_SEATS2' => "Vă rugăm să contactaţi reprezentantul de vânzări sau cagroup@sugarcrm.com e-mail.",
+    'WARN_LICENSE_SEATS'=>  "<b>Atenţie:</b> Există ",
+    'WARN_LICENSE_SEATS2' => " utilizatori activi, dar abonamentul dumneavoastră permite numai ",
+    'WARN_LICENSE_SEATS3' =>
+        ".<p class=\"error\">Dezactivați câțiva utilizatori, luați legătura cu partenerul dumneavoastră sau cu reprezentantul de vânzări,"
+        . " sau prin e-mail la <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Pentru mai multe informații, consultați "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Articolul Înțelegerea tipurilor de utilizatori și a licențelor Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Atenţie: numărul de utilizatori activi este deja numărul maxim de licenţe permise:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Atenţie: numărul de utilizatori activi este deja numărul maxim de licenţe permis",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Atenţie: numărul de utilizatori activi permisi de licenta corespunde cu numărul de utilizatori activi în sistem. Tu nu veti fi capabil de a crea alţi utilizatori activi.",
-    'WARN_REPAIR_CONFIG' => 'Atenţie: fisierul config.php trebuie să fie reparat. Vă rugăm să folosiţi script-ul Reconstruieste Config Fisier e în pagina de reparaţii în zona Admin pentru a repara fişierul de configurare.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Atenție:</b> Nu veți putea să creați utilizatori activi suplimentari."
+        . " Achiziționați mai multe abonamente.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Atenție:</b> Nu veți putea să creați utilizatori activi suplimentari."
+        . " Achiziționați mai multe abonamente.",
+    'WARN_REPAIR_CONFIG' => '<b>Atenție:</b> Fișierul config.php trebuie reparat. Utilizați scriptul <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstruiește fișier de configurare</a> în pagina Reparare din zona Admin pentru a repara fișierul de configurare.',
     'WARN_UPGRADE_APP'=> "O versiune actualizată a aplicaţiei este acum disponibila.",
     'WARN_UPGRADE' => 'Atenţie: Vă rugăm să actualizati',
     'WARN_UPGRADENOTE' => 'Notă:',
@@ -1245,15 +1254,17 @@ Integrările care se bazează pe această platformă nu vor mai funcționa.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Fișierul de metadate nu a putut fi găsit.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Setări',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Vizualizator jurnale',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Accesați ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' jurnal.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Gestionare procese',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Gestionarea proceselor poate fi accesată aici.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configurare ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' setări și jurnale de vizualizare. Gestionați toate procesele BPM pentru toți utilizatorii folosind Management proces.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configurare oferte',
+    'LBL_MANAGE_QUOTES' => 'Configurați aspectul foii de calcul a ofertelor',
 );

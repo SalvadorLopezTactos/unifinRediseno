@@ -34,3 +34,33 @@ $config['sts'] = isset($params['sts']) ? $params['sts'] : [];
 $config['idm'] = isset($params['idm']) ? $params['idm'] : [];
 
 $config['session.storage.options'] = isset($params['session.storage.options']) ? $params['session.storage.options'] : [];
+
+$config['logout.options'] = $params['logout.options'] ?? [];
+
+$config['twig'] = $params['twig'] ?? [];
+
+$config['discovery'] = $params['discovery'] ?? [];
+
+$config['recaptcha'] = [
+    'sitekey' => $params['recaptcha']['sitekey'] ?? '',
+    'secretkey' => $params['recaptcha']['secretkey'] ?? '',
+];
+
+$config['honeypot'] = [
+    'name' => $params['honeypot']['name'],
+];
+
+$config['grpc']['disabled'] = $params['grpc']['disabled'] ?? false;
+
+$config['locales'] = $params['locales'] ?? [];
+
+$config['translation'] = [
+    'default' => 'en-US',
+    'fallback' => ['en'],
+    'resources' => [
+        'en' => '/src/App/Resources/translation/en.xlf',
+        'de' => '/src/App/Resources/translation/de.xlf',
+    ],
+];
+
+$config['marketingExtras'] = $params['marketingExtras'] ?? [];

@@ -12,6 +12,7 @@
 LDAP_SERVER_URL='127.0.0.1'
 SELENIUM_HOST='127.0.0.1'
 DOWNLOAD_SELENIUM=0
+EXTENDED_TESTS=0
 
 while :
 do
@@ -36,6 +37,10 @@ do
             IDP_SERVICE_URL="$2"
             shift 2
             ;;
+        -r)
+            REST_SERVICE_URL="$2"
+            shift 2
+            ;;
         -h)
             HYDRA_URL="$2"
             shift 2
@@ -46,6 +51,10 @@ do
             ;;
         -d)
             DOWNLOAD_SELENIUM=1
+            shift 1
+            ;;
+        -x)
+            EXTENDED_TESTS=1
             shift 1
             ;;
         *)
@@ -81,14 +90,14 @@ then
     TMPDIR="/tmp"
     fi
 
-    SELENIUM_URL="https://goo.gl/UzaKCo"
-    SELENIUM="selenium-server-standalone-3.11.0.jar"
+    SELENIUM_URL="https://bit.ly/2TlkRyu"
+    SELENIUM="selenium-server-standalone-3.141.59.jar"
     SELENIUM_LOG="selenium.log"
 
     if [ "$(uname)" == "Darwin" ]; then
-        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.36/chromedriver_mac64.zip"
+        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.45/chromedriver_mac64.zip"
     else
-        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip"
+        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip"
     fi
     CHROME_DRIVER_PATH_ARCHIVE="chromedriver.zip"
     CHROME_DRIVER="chromedriver"
@@ -137,9 +146,17 @@ cat behat.yml.template | \
     sed -e "s~%%IDP_SERVICE_URL%%~${IDP_SERVICE_URL}~g" | \
     sed -e "s~%%HYDRA_URL%%~${HYDRA_URL}~g" | \
     sed -e "s~%%IDM_NS%%~${IDM_NS}~g" | \
-    sed -e "s~%%LDAP_HOST%%~${LDAP_SERVER_URL}~g" > ${BEHAT_SUITE}_behat.yml
+    sed -e "s~%%BEHAT_SUITE%%~${BEHAT_SUITE}~g"| \
+    sed -e "s~%%LDAP_HOST%%~${LDAP_SERVER_URL}~g" | \
+    sed -e "s~%%REST_SERVICE_URL%%~${REST_SERVICE_URL}~g" \
+    > ${BEHAT_SUITE}_behat.yml
 
-../../vendor/bin/behat -s ${BEHAT_SUITE} --config ${BEHAT_SUITE}_behat.yml
+CMD="../../vendor/bin/behat -s ${BEHAT_SUITE} --config ${BEHAT_SUITE}_behat.yml"
+if [[ ${EXTENDED_TESTS} -eq 0 ]]
+then
+CMD="${CMD} --tags '~@extended'"
+fi
+eval ${CMD}
 
 testsResult=$?
 

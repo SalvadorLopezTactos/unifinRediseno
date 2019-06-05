@@ -94,6 +94,7 @@ $beanList['Import_1']         = 'ImportMap';
 $beanList['Import_2']       = 'UsersLastImport';
 $beanList['Versions']       = 'Version';
 $beanList['Administration'] = 'Administration';
+$beanList['SessionManager'] = 'SessionManager';
 $beanList['vCals']          = 'vCal';
 $beanList['CustomFields']       = 'CustomFields';
 
@@ -119,7 +120,6 @@ $beanList['EmailText'] = 'EmailText';
 $beanList['Relationships'] = 'Relationship';
 $beanList['Employees']      = 'Employee';
 $beanList['Reports']        = 'SavedReport';
-$beanList['Reports_1']      = 'SavedReport';
 $beanList['Teams']          = 'Team';
 $beanList['TeamMemberships']            = 'TeamMembership';
 $beanList['TeamSets']            = 'TeamSet';
@@ -199,11 +199,14 @@ $beanList['pmse_BpmProcessDefinition'] = 'pmse_BpmProcessDefinition';
 $beanList['pmse_BpmConfig'] = 'pmse_BpmConfig';
 $beanList['pmse_BpmGroup'] = 'pmse_BpmGroup';
 $beanList['pmse_BpmGroupUser'] = 'pmse_BpmGroupUser';
+$beanList['pmse_EmailMessage'] = 'pmse_EmailMessage';
 $beanList['Empty'] = 'EmptyBean';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
 $beanList['OutboundEmail'] = 'OutboundEmail';
 $beanList['EmailParticipants'] = 'EmailParticipant';
 $beanList['DataPrivacy'] = 'DataPrivacy';
+$beanList['ReportSchedules'] = 'ReportSchedule';
+
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
 // to create a new module's bean class, add the file definition here
 $beanFiles = array();
@@ -356,6 +359,7 @@ $beanFiles['pmse_BpmProcessDefinition'] = 'modules/pmse_Project/pmse_BpmProcessD
 $beanFiles['pmse_BpmConfig'] = 'modules/pmse_Project/pmse_BpmConfig/pmse_BpmConfig.php';
 $beanFiles['pmse_BpmGroup'] = 'modules/pmse_Project/pmse_BpmGroup/pmse_BpmGroup.php';
 $beanFiles['pmse_BpmGroupUser'] = 'modules/pmse_Project/pmse_BpmGroupUser/pmse_BpmGroupUser.php';
+$beanFiles['pmse_EmailMessage'] = 'modules/pmse_Emails_Templates/pmse_EmailMessage/pmse_EmailMessage.php';
 
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
@@ -363,6 +367,8 @@ $beanFiles['Styleguide'] = 'modules/Styleguide/Styleguide.php';
 $beanFiles['OutboundEmail'] = 'include/OutboundEmail/OutboundEmail.php';
 $beanFiles['EmailParticipant'] = 'modules/EmailParticipants/EmailParticipant.php';
 $beanFiles['DataPrivacy'] = 'modules/DataPrivacy/DataPrivacy.php';
+$beanFiles['ReportSchedule'] = 'modules/ReportSchedules/ReportSchedule.php';
+
 // added these lists for security settings for tabs
 $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
@@ -414,6 +420,8 @@ $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'pmse_BpmConfig',
     'pmse_BpmGroup',
     'pmse_BpmGroupUser',
+    'pmse_EmailMessage',
+    'ReportSchedules',
     );
 $adminOnlyList = array(
                     //module => list of actions  (all says all actions are admin only)
@@ -464,6 +472,7 @@ $modInvisList[] = 'Studio';
 $modInvisList[] = 'Connectors';
 $modInvisList[] = 'Styleguide';
 $modInvisList[] = 'EmailParticipants';
+$modInvisList[] = 'ReportSchedules';
 
 $report_include_modules = array();
 //add prospects
@@ -471,6 +480,7 @@ $report_include_modules['Prospects']='Prospect';
 $report_include_modules['DocumentRevisions'] = 'DocumentRevision';
 $report_include_modules['ProductCategories'] = 'ProductCategory';
 $report_include_modules['ProductTypes'] = 'ProductType';
+$report_include_modules['ProductTemplates'] = 'ProductTemplate';
 $report_include_modules['Contracts']='Contract';
 //add Tracker modules
 
@@ -576,6 +586,7 @@ $objectList['TrackerPerfs'] =  'tracker_perf';
 $objectList['TrackerQueries'] =  'tracker_queries';
 $objectList['TeamNotices'] =  'TeamNotices';
 $objectList['OutboundEmail'] =  'OutboundEmail';
+$objectList['ReportSchedules'] = 'ReportSchedule';
 
 $beanList['PdfManager']     = 'PdfManager';
 $beanFiles['PdfManager']     = 'modules/PdfManager/PdfManager.php';
@@ -682,6 +693,11 @@ $modInvisList[] = 'EmbeddedFiles';
 
 // this module doesn't need a Bean
 $modInvisList[] = 'Feedbacks';
+
+// module for CommentLog
+$beanList['CommentLog'] = 'CommentLog';
+$beanFiles['CommentLog'] = 'modules/CommentLog/CommentLog.php';
+$modInvisList[] = 'CommentLog';
 
 foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
     include $modExtFile;

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'YNT:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Kullanıcı Adı veya Şifre Hatalı',
-	'ERR_BODY_TOO_LONG'		=> '\\rBÜTÜN e-postanın alınması için, İçerik metni çok uzun. Kesildi.',
+	'ERR_BODY_TOO_LONG'		=> '\rBÜTÜN e-postanın alınması için, İçerik metni çok uzun. Kesildi.',
 	'ERR_INI_ZLIB'			=> 'Zlib sıkıştırması geçici süre durdurulamadı.  "Test Ayarları" çalışmayabilir.',
 	'ERR_MAILBOX_FAIL'		=> 'Herhangi bir posta hesabı getirilemedi.',
 	'ERR_NO_IMAP'			=> 'IMAP kütüphanesi bulunamadı.  Gelen Posta ile devam etmeden önce, bu problemi çözün',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Takımlardan Seed Kuyrukları',
 	'LBL_GROUPFOLDER_ID'	=> 'Grup Dizini ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Grup Dizinine Ata',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Kullanıcıların, "Kimden" İsim ve Adresini kullanarak E-Posta cevaplamalarına izin ver',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Bu seçenek seçili ise, grup E-Posta hesabına erişen kullanıcılar için E-Posta oluşturulurken, Grup ile ilişkili Kimden İsmi ve Adresi Kime alanında bir seçenek olarak çıkacaktır.',
     'LBL_STATUS_ACTIVE'     => 'Aktif',
     'LBL_STATUS_INACTIVE'   => 'İnaktif',
     'LBL_IS_PERSONAL' => 'kişisel',

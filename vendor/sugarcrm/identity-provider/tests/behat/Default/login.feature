@@ -21,5 +21,4 @@ Feature: Login
     And I skip login wizard
     Then I should not see "You must specify a valid username and password."
     Then I should see "Home Dashboard"
-    When I click "#userList"
-    And I click ".profileactions-logout"
+    And I logout

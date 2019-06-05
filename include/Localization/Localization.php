@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Doctrine\DBAL\DBALException;
+
 /**
  * Localization manager
  * @api
@@ -48,7 +51,14 @@ class Localization {
 	var $localeNameFormatDefault;
 	var $default_export_charset = 'UTF-8';
 	var $default_email_charset = 'UTF-8';
-	var $currencies = array(); // array loaded with current currencies
+
+    /**
+     * Mapping of currency IDs to their properties
+     *
+     * @var mixed[][]
+     */
+    private $currencies = array();
+
     var $invalidNameFormatUpgradeFilename = 'upgradeInvalidLocaleNameFormat.php';
     /* Charset mappings for iconv */
     var $iconvCharsetMap = array(
@@ -70,7 +80,6 @@ class Localization {
     {
 		global $sugar_config;
 		$this->localeNameFormatDefault = empty($sugar_config['locale_name_format_default']) ? 's f l' : $sugar_config['default_name_format'];
-		$this->loadCurrencies();
 	}
 
     /**
@@ -166,56 +175,53 @@ class Localization {
 
 	///////////////////////////////////////////////////////////////////////////
 	////	CURRENCY HANDLING
-	/**
-	 * wrapper for whatever currency system we implement
-	 */
-	function loadCurrencies() {
-		// trying to use DBManagerFactory here fails in install.php,
-        // so leaving this as global $db.
-        //$db = DBManagerFactory::getInstance();
+    /**
+     * Loads the list of currently active currencies
+     *
+     * @return mixed[][]
+     * @throws DBALException
+     */
+    private function loadCurrencies() : array
+    {
         global $db;
-		global $sugar_config;
+        global $sugar_config;
 
-        if(empty($db)) {
-            return array();
+        if (empty($db)) {
+            return [];
         }
 
-        $load = sugar_cache_retrieve('currency_list');
-        if ( !is_array($load) ) {
-			// load default from config.php
-			$this->currencies['-99'] = array(
-				'name'		=> $sugar_config['default_currency_name'],
-				'symbol'	=> $sugar_config['default_currency_symbol'],
-				'conversion_rate' => 1
-		    );
+        $currencies = [
+            '-99' => [
+                'name' => $sugar_config['default_currency_name'],
+                'symbol' => $sugar_config['default_currency_symbol'],
+                'conversion_rate' => 1,
+            ],
+        ];
 
-            $q = "SELECT id, name, symbol, conversion_rate FROM currencies WHERE status = 'Active' and deleted = 0";
-            $conn = $db->getConnection();
-            $stmt = $conn->executeQuery($q);
+        $query = "SELECT id, name, symbol, conversion_rate FROM currencies WHERE status = 'Active' AND deleted = 0";
+        $stmt = $db->getConnection()->executeQuery($query);
 
-            while ($a = $stmt->fetch()) {
-                $load = array();
-                $load['name'] = $a['name'];
-                $load['symbol'] = $a['symbol'];
-                $load['conversion_rate'] = $a['conversion_rate'];
-
-                $this->currencies[$a['id']] = $load;
-            }
-            sugar_cache_put('currency_list',$this->currencies);
-        } else {
-            $this->currencies = $load;
+        foreach ($stmt as $row) {
+            $currencies[$row['id']] = $row;
         }
 
+        return $currencies;
+    }
 
-	}
+    /**
+     * Returns the list of currently active currencies
+     *
+     * @return mixed[][]
+     * @throws DBALException
+     */
+    public function getCurrencies() : array
+    {
+        if (count($this->currencies) < 1) {
+            $this->currencies = $this->loadCurrencies();
+        }
 
-	/**
-	 * getter for currencies array
-	 * @return array $this->currencies returns array( id => array(name => X, etc
-	 */
-	function getCurrencies() {
-		return $this->currencies;
-	}
+        return $this->currencies;
+    }
 
 	/**
 	 * retrieves default OOTB currencies for sugar_config and installer.

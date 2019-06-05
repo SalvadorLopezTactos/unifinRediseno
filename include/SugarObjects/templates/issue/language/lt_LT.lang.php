@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Kam priskirta:',
   'LBL_ASSIGNED_TO_NAME' => 'Vartotojas:',  	  
   'LBL_WORK_LOG' => 'Darbo istorija',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Kas sukūrė:',
   'LBL_DATE_CREATED' => 'Sukūrimo data:',
   'LBL_DATE_ENTERED' => 'Sukūrimo data:',

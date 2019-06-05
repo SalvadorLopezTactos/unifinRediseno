@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> '팀에 배정',
 	'LBL_DEFAULT_TEAM_TEXT'				=> '구성원으로 있는 가능한 팀이 기록의 초기설정으로 나타납니다.',
 	'LBL_DEFAULT_TEAM'					=> '초기설정 팀',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => '초기설정 기본 팀',
 	'LBL_LIST_DESCRIPTION'				=> '설명:',
 	'LBL_MY_TEAMS'						=> '나의 팀',
 	'LBL_PRIVATE_TEAM_FOR'				=> '개인 팀',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '수신인 이메일 주소',
 	'ERR_SERVER_STATUS'					=> '귀하의 서버 상태',
 	'ERR_SERVER_SMTP_EMPTY'				=> '시스템이 사용자에 이메일을 보낼수 없습니다. 이메일 설정에서 발신 메일 구성을 확인하십시오',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => '사용자는 IDM 모드의 <a href="{0}" target="_blank">클라우드 콘솔</a>에서만 생성할 수 있습니다.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '기본 이메일 주소는 IDM 모드의 <a href="{0}" target="_blank">클라우드 콘솔</a>에서만 업데이트할 수 있습니다.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => '이메일 주소:',
 
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> '소수 자릿수의 수는 보고서에서 통화 및 평균으로 시스템 전반에 걸쳐 소수와 수레를 위해 표시합니다.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => '선호 통화 보기',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => '목록에서 사용자 선호하는 기본 통화 교환하고 의견을 기록합니다',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => '선호 통화로 매출 라인 품목 생성',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => '제품 카탈로그의 잠재고객에 추가된 매출 라인 품목이 제품 카탈로그 품목에서 사용된 통화와 다른 경우 사용자가 선호하는 통화로 변환됩니다.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '천 단위 분리기',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> '천단위 분리위해 사용된 기호',
 	'LBL_DECIMAL_SEP'					=> '소수 기호',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> '사용자명과 이메일 주소를 입력하십시오',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> '이것은 현재 사용이 불가합니다 : 관리자에 문의하십시요.',
 	'LBL_PUBLISH_KEY'					=> '발표키',
-
+    'LBL_SITE_USER_ID' => 'site_url 및 user_id 해시',
     'LBL_QUOTAS'                        => '견적',
     'LBL_FORECASTS'                     => '예상',
     'LBL_WORKSHEETS'                    => '참고 자료지',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => '사용자 프로필',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        '특정 필드를 수정할 수 없는 경우 Cloud Console에 로그인하여 필드를 관리하십시오.',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        '편집 할수 없는 특정 필드를 변경하려면,' .
-        '관리자에게 연락하여 변경사항을 알리십시오.',
+        '읽기 전용 필드를 변경하려면 Sugar 관리자에게 문의하십시오.',
 ); // END STRINGS DEFS
-
-?>

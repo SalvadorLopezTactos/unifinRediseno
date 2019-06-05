@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{* $Id: ConvertLead.tpl 21451 2007-04-04 22:04:34Z wayne $ *}
 {{assign var="selectRelation" value=$selectFields[$module]}}
 <span class="color">{$ERROR}</span>
 {{foreach name=section from=$sectionPanels key=label item=panel}}

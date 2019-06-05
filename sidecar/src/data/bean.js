@@ -937,8 +937,12 @@ const Bean = Backbone.Model.extend({
     revertAttributes: function(options) {
         options = options || {};
         options.revert = true;
-        var changedAttr = this.changedAttributes(this.getSynced());
+        let changedAttr = this.changedAttributes(this.getSynced());
+        let collections = this.getCollectionFields(changedAttr);
         this.set(Utils.deepCopy(changedAttr) || {}, options);
+        _.each(collections, (val, key) => {
+            this.get(key).resetDelta();
+        }, this);
         if (!options.silent) {
             this.trigger('attributes:revert');
         }

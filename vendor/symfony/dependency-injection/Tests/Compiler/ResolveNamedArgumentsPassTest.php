@@ -15,7 +15,11 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Compiler\ResolveNamedArgumentsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\FactoryDummyWithoutReturnTypes;
 use Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\SimilarArgumentsDummy;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition1;
 
 /**
  * @author Kévin Dunglas <dunglas@gmail.com>
@@ -27,18 +31,18 @@ class ResolveNamedArgumentsPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $definition = $container->register(NamedArgumentsDummy::class, NamedArgumentsDummy::class);
-        $definition->setArguments(array(
+        $definition->setArguments([
             2 => 'http://api.example.com',
             '$apiKey' => '123',
             0 => new Reference('foo'),
-        ));
-        $definition->addMethodCall('setApiKey', array('$apiKey' => '123'));
+        ]);
+        $definition->addMethodCall('setApiKey', ['$apiKey' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
 
-        $this->assertEquals(array(0 => new Reference('foo'), 1 => '123', 2 => 'http://api.example.com'), $definition->getArguments());
-        $this->assertEquals(array(array('setApiKey', array('123'))), $definition->getMethodCalls());
+        $this->assertEquals([0 => new Reference('foo'), 1 => '123', 2 => 'http://api.example.com'], $definition->getArguments());
+        $this->assertEquals([['setApiKey', ['123']]], $definition->getMethodCalls());
     }
 
     public function testWithFactory()
@@ -47,13 +51,13 @@ class ResolveNamedArgumentsPassTest extends TestCase
 
         $container->register('factory', NoConstructor::class);
         $definition = $container->register('foo', NoConstructor::class)
-            ->setFactory(array(new Reference('factory'), 'create'))
-            ->setArguments(array('$apiKey' => '123'));
+            ->setFactory([new Reference('factory'), 'create'])
+            ->setArguments(['$apiKey' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
 
-        $this->assertSame(array(0 => '123'), $definition->getArguments());
+        $this->assertSame([0 => '123'], $definition->getArguments());
     }
 
     /**
@@ -64,7 +68,7 @@ class ResolveNamedArgumentsPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $definition = $container->register(NamedArgumentsDummy::class);
-        $definition->setArguments(array('$apiKey' => '123'));
+        $definition->setArguments(['$apiKey' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
@@ -78,7 +82,7 @@ class ResolveNamedArgumentsPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $definition = $container->register(NotExist::class, NotExist::class);
-        $definition->setArguments(array('$apiKey' => '123'));
+        $definition->setArguments(['$apiKey' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
@@ -92,7 +96,7 @@ class ResolveNamedArgumentsPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $definition = $container->register(NoConstructor::class, NoConstructor::class);
-        $definition->setArguments(array('$apiKey' => '123'));
+        $definition->setArguments(['$apiKey' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
@@ -100,16 +104,74 @@ class ResolveNamedArgumentsPassTest extends TestCase
 
     /**
      * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid service "Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy": method "__construct()" has no argument named "$notFound". Check your service definition.
      */
     public function testArgumentNotFound()
     {
         $container = new ContainerBuilder();
 
         $definition = $container->register(NamedArgumentsDummy::class, NamedArgumentsDummy::class);
-        $definition->setArguments(array('$notFound' => '123'));
+        $definition->setArguments(['$notFound' => '123']);
 
         $pass = new ResolveNamedArgumentsPass();
         $pass->process($container);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid service "Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition1": method "Symfony\Component\DependencyInjection\Tests\Fixtures\FactoryDummyWithoutReturnTypes::createTestDefinition1()" has no argument named "$notFound". Check your service definition.
+     */
+    public function testCorrectMethodReportedInException()
+    {
+        $container = new ContainerBuilder();
+
+        $container->register(FactoryDummyWithoutReturnTypes::class, FactoryDummyWithoutReturnTypes::class);
+
+        $definition = $container->register(TestDefinition1::class, TestDefinition1::class);
+        $definition->setFactory([FactoryDummyWithoutReturnTypes::class, 'createTestDefinition1']);
+        $definition->setArguments(['$notFound' => '123']);
+
+        $pass = new ResolveNamedArgumentsPass();
+        $pass->process($container);
+    }
+
+    public function testTypedArgument()
+    {
+        $container = new ContainerBuilder();
+
+        $definition = $container->register(NamedArgumentsDummy::class, NamedArgumentsDummy::class);
+        $definition->setArguments(['$apiKey' => '123', CaseSensitiveClass::class => new Reference('foo')]);
+
+        $pass = new ResolveNamedArgumentsPass();
+        $pass->process($container);
+
+        $this->assertEquals([new Reference('foo'), '123'], $definition->getArguments());
+    }
+
+    public function testResolvesMultipleArgumentsOfTheSameType()
+    {
+        $container = new ContainerBuilder();
+
+        $definition = $container->register(SimilarArgumentsDummy::class, SimilarArgumentsDummy::class);
+        $definition->setArguments([CaseSensitiveClass::class => new Reference('foo'), '$token' => 'qwerty']);
+
+        $pass = new ResolveNamedArgumentsPass();
+        $pass->process($container);
+
+        $this->assertEquals([new Reference('foo'), 'qwerty', new Reference('foo')], $definition->getArguments());
+    }
+
+    public function testResolvePrioritizeNamedOverType()
+    {
+        $container = new ContainerBuilder();
+
+        $definition = $container->register(SimilarArgumentsDummy::class, SimilarArgumentsDummy::class);
+        $definition->setArguments([CaseSensitiveClass::class => new Reference('foo'), '$token' => 'qwerty', '$class1' => new Reference('bar')]);
+
+        $pass = new ResolveNamedArgumentsPass();
+        $pass->process($container);
+
+        $this->assertEquals([new Reference('bar'), 'qwerty', new Reference('foo')], $definition->getArguments());
     }
 }
 

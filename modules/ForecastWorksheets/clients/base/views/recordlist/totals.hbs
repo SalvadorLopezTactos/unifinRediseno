@@ -19,7 +19,7 @@
 
     {{#each this.totalsTemplateObj.orderedFields}}
         {{#if display}}
-            <td class="tright">
+            <td class="tright {{fieldName}}">
                 {{#if access}}
                     {{formatCurrency filtered}}
                 {{else}}
@@ -48,7 +48,7 @@
 
     {{#each this.totalsTemplateObj.orderedFields}}
         {{#if display}}
-            <td class="tright">
+            <td class="tright {{fieldName}}">
                 {{#if access}}
                     {{formatCurrency overall}}
                 {{else}}

@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: upgradeWizard.js 16466 2006-08-26 03:57:26Z chris $
 var req;
 var uw_check_msg = "";
 var find_done = false;

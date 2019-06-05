@@ -48,7 +48,7 @@
         login: 'login',
         needLogin: 'needs_login_error',
         offsetProblem: 'offset_problem',
-        unsupportedBrowser: 'unsupported_browser'
+        loading: 'loading'
     },
 
     /**
@@ -64,6 +64,18 @@
      * @type {String}
      */
     logoUrl: null,
+
+    /**
+     * Is external login in progress?
+     *
+     * @type {boolean}
+     */
+    isExternalLoginInProgress: false,
+
+    /**
+     * Save login popup handler
+     */
+    childLoginPopup: null,
 
     /**
      * Process login on key `Enter`.
@@ -124,17 +136,30 @@
             this.showPasswordReset = true;
         }
 
-        if (config &&
-            app.config.externalLogin === true &&
-            app.config.externalLoginSameWindow === true
+        /**
+         * Set window open handler to save popup handler
+         */
+        app.api.setExternalLoginUICallback(_.bind(function(url, name, params) {
+            this.closeLoginPopup();
+            this.childLoginPopup = window.open(url, name, params);
+        }, this));
+
+        if ((config &&
+            app.config.externalLogin === true && 
+            app.config.externalLoginSameWindow === true) || app.config.idmModeEnabled
         ) {
             this.externalLoginForm = true;
             this.externalLoginUrl = app.config.externalLoginUrl;
             app.api.setExternalLoginUICallback(_.bind(function(url) {
                 this.externalLoginUrl = app.config.externalLoginUrl = url;
-                this.render();
+                if (this.isExternalLoginInProgress || app.config.idmModeEnabled) {
+                    this.isExternalLoginInProgress = false;
+                    app.api.setRefreshingToken(true);
+                    window.location.replace(this.externalLoginUrl);
+                } else {
+                    this.render();
+                }
             }, this));
-
         }
 
         // Set the page title to 'SugarCRM' while on the login screen
@@ -145,6 +170,14 @@
      * @inheritdoc
      */
     _render: function() {
+        if (app.config.idmModeEnabled) {
+            app.alert.show(this._alertKeys.loading, {
+                level: 'process',
+                title: app.lang.get('LBL_LOADING'),
+                autoClose: false
+            });
+            return;
+        }
         this.logoUrl = app.metadata.getLogoUrl();
         //It's possible for errors to prevent the postLogin from triggering so contentEl may be hidden.
         app.$contentEl.show();
@@ -152,22 +185,6 @@
         this._super('_render');
 
         this.refreshAdditionalComponents();
-
-        if (!this._isSupportedBrowser()) {
-            var linkLabel = Handlebars.Utils.escapeExpression(app.lang.get('LBL_ALERT_SUPPORTED_PLATFORMS_LINK'));
-            var link = '<a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">' +  linkLabel + '</a>';
-            var safeLink = new Handlebars.SafeString(link);
-            var label = app.lang.get('TPL_ALERT_BROWSER_SUPPORT', null, {link: safeLink});
-
-            app.alert.show(this._alertKeys.unsupportedBrowser, {
-                level: 'warning',
-                title: '',
-                messages: [
-                    app.lang.get('LBL_ALERT_BROWSER_NOT_SUPPORTED'),
-                    label
-                ]
-            });
-        }
 
         var config = app.metadata.getConfig(),
             level = config.system_status && config.system_status.level;
@@ -208,6 +225,19 @@
             password: this.$('input[name=password]').val(),
             username: this.$('input[name=username]').val()
         });
+
+        // Prepare local auth variables if user chooses local auth
+        if (app.api.isExternalLogin() &&
+            app.config.externalLogin === true &&
+            !_.isNull(app.config.externalLoginSameWindow) &&
+            app.config.externalLoginSameWindow === false
+        ) {
+            app.config.externalLogin = false;
+            app.config.externalLoginUrl = undefined;
+            app.api.setExternalLogin(false);
+            this.closeLoginPopup();
+        }
+
         this.model.doValidate(null,
             _.bind(function(isValid) {
                 if (isValid) {
@@ -225,24 +255,30 @@
                     };
 
                     app.login(args, null, {
-                        error: function() {
-                            app.$contentEl.show();
-                            app.logger.debug('login failed!');
-                        },
+                        error: _.bind(function(error) {
+                            this.showSugarLoginForm(error);
+                        }, this),
                         success: _.bind(function() {
                             app.logger.debug('logged in successfully!');
                             app.alert.dismiss(this._alertKeys.invalidGrant);
                             app.alert.dismiss(this._alertKeys.needLogin);
+                            app.alert.dismiss(this._alertKeys.login);
                             //External login URL should be cleaned up if the login form was successfully used instead.
                             app.config.externalLoginUrl = undefined;
 
                             app.events.on('app:sync:complete', function() {
+                                app.events.trigger('data:sync:complete', 'login', null, {
+                                    'showAlerts': {'process': true}
+                                });
+                                app.api.setRefreshingToken(false);
                                 app.logger.debug('sync in successfully!');
                                 _.defer(_.bind(this.postLogin, this));
                             }, this);
                         }, this),
-                        complete: _.bind(function() {
-                            app.alert.dismiss(this._alertKeys.login);
+                        complete: _.bind(function(request) {
+                            if (request.xhr.status == 401) {
+                                this.showSugarLoginForm();
+                            }
                         }, this)
                     });
                 }
@@ -250,6 +286,40 @@
         );
 
         app.alert.dismiss('offset_problem');
+    },
+
+    /**
+     * When SAML enabled app login error callback will be run only when _refreshToken = true and
+     * app login complete callback will be run when _refreshToken = false
+     * So to avoid form disappearance after second incorrect login we need to run the same code into to two callbacks
+     */
+    showSugarLoginForm: function(error) {
+        if (error !== undefined && error.code == 'license_seats_needed') {
+            app.alert.show(this._alertKeys.adminOnly, {
+                level: 'error',
+                title: '',
+                messages: [
+                    '',
+                    error.message
+                ]
+            });
+            app.logger.debug('Number of seats exceeded license limit.');
+        }
+        app.alert.dismiss(this._alertKeys.login);
+        app.api.setExternalLogin(false);
+        app.config.externalLoginUrl = undefined;
+        app.$contentEl.show();
+        app.logger.debug('login failed!');
+    },
+
+    /**
+     * close log in popup
+     */
+    closeLoginPopup: function() {
+        if (!_.isNull(this.childLoginPopup)) {
+            this.childLoginPopup.close();
+            this.childLoginPopup = null;
+        }
     },
 
     /**
@@ -268,7 +338,7 @@
               success: _.bind(function (data) {
 
                   if (data) {
-                    console.log('Bienvenido');
+                    console.log('Bienvenido!');
                   }
 
               }, this)
@@ -276,7 +346,6 @@
         } catch (e) {
           console.log('Error para recuperar plataforma');
         }
-
 
         if (!app.user.get('show_wizard') && !app.user.get('is_password_expired')) {
 
@@ -300,56 +369,20 @@
     },
 
     /**
-     * Taken from sugar_3.
-     *
-     * @return {Boolean} `true` if the browser is supported, `false` otherwise.
-     * @private
-     */
-    _isSupportedBrowser: function(currentNavigator) {
-        var supportedBrowsers = {
-            // For Safari & Chrome jQuery.Browser returns the webkit revision
-            // instead of the browser version and it's hard to determine this
-            // number.
-            msie: {min: 9, max: 11}, // IE 9, 10, 11
-            safari: {min: 537}, // Safari 7.1
-            mozilla: {min: 41}, // Firefox 41,42
-            chrome: {min: 47} // Chrome 47
-        };
-
-        var current = parseFloat($.browser.version);
-        currentNavigator = currentNavigator || navigator;
-
-        // For IE11, navigator behaves differently in order to conform to HTML5
-        // standards. This changes the behavior of jQuery.Browser and so IE11
-        // will show up as not supported in the above checks when it should be
-        // supported. The following check rectifies this issue.
-        if ((/Trident\/7\./).test(currentNavigator.userAgent)) {
-            var supported = supportedBrowsers['msie'];
-            return current >= supported.min;
-        } else {
-            for (var b in supportedBrowsers) {
-                if ($.browser[b]) {
-                    var supported = supportedBrowsers[b];
-                    return current >= supported.min;
-                }
-            }
-        }
-    },
-
-    /**
      * Process Login
      */
     external_login: function() {
-        if (this.externalLoginUrl) {
-            window.location.replace(this.externalLoginUrl);
-        }
+        this.isExternalLoginInProgress = true;
+        app.api.setRefreshingToken(false);
+        app.api.ping(null, {});
     },
-
+    
     /**
      * Show Login form
      */
     login_form: function() {
         app.config.externalLogin = false;
+        app.api.setExternalLogin(false);
         app.controller.loadView({
             module: "Login",
             layout: "login",

@@ -193,6 +193,10 @@
             this.overdueBadge = tab.overdue_badge;
         }
         _.each(this.collection.models, function(model){
+
+            // only admins and developers have access to process definitions
+            model.set({linkToPD: app.acl.hasAccess('admin', 'pmse_Project')}, {silent: true});
+
             var pictureUrl = App.api.buildFileURL({
                 module: 'Users',
                 id: model.get('assigned_user_id'),

@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Group Attribute:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'With User DN:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Include the User DN with the User Attribute when checking group membership',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Any additional filter params to apply when authenticating users e.g.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Any additional filter params to apply when authenticating users e.g.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login Attribute:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind Attribute:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For Binding the LDAP User<br>Examples:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -936,12 +936,21 @@ If your system environment prohibits your system from communicating to the licen
     'WARN_INSTALLER_LOCKED'=>'<b>Warning:</b> To safeguard your data, the installer must be locked by setting &#39;installer_locked&#39; to &#39;true&#39; in the config.php file.',
  	'WARN_LICENSE_EXPIRED'=> "Notice: Your licence expires in",
     'WARN_LICENSE_EXPIRED2' =>" day(s). Please go to the <a href='index.php?action=LicenseSettings&module=Administration'>'\"Licence Management\"</a>  in the Admin screen.",
-    'WARN_LICENSE_SEATS'=>  "Warning: User licences exceeded by",
-    'WARN_LICENSE_SEATS2' => ".  Please contact your sales representative or email <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Warning:</b> There are ",
+    'WARN_LICENSE_SEATS2' => " active users when your subscription only allows for ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Please deactivate some users, contact your partner or sales representative,"
+        . " or email <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">For more information, see the "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Understanding User Types and Sugar Licences</a> article.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Warning: The number of active users is already the maximum number of licences allowed:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Warning: The number of active users is already the maximum number of licences allowed",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Warning: The number of active users allowed by your licence matches the number of active users in the system. You will not be able to create additional active users.",
-    'WARN_REPAIR_CONFIG' => '<b>Warning:</b> The config.php file needs to be repaired.  Please use the <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> script in the Repair page in the Admin area to repair the config file.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Warning:</b> You will not be able to create additional active users."
+        . " Please purchase more subscriptions.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Warning:</b> You will not be able to create additional active users."
+        . " Please purchase more subscriptions.",
+    'WARN_REPAIR_CONFIG' => '<b>Warning:</b> The config.php file needs to be repaired. Please use the <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> script in the Repair page in the Admin area to repair the config file.',
     'WARN_UPGRADE_APP'=> "An updated version of the application is now available.",
     'WARN_UPGRADE' => 'Warning: Please upgrade',
     'WARN_UPGRADENOTE' => 'Note:',
@@ -1243,15 +1252,17 @@ Any integrations that rely on this platform will stop working.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metadata file could not be found.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Settings',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Log Viewer',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Access the ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Processes List',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Processes List can be accessed here.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configure ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' settings and view logs. Manage all BPM processes for all users via Process Management.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Quotes Configuration',
+    'LBL_MANAGE_QUOTES' => 'Configure the quotes worksheet layout',
 );

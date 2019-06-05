@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'צור תקופות זמן עתידיות',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'עדכן מאמרים של KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'פרסם מאמרים מאושרים והעבר לפג תוקף מאמרי KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'פרסם מאמרים שאושרו ומאמרי KB שפג תוקפם.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' עבודה מתוזמנת',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'בדוק חשבונות דואר נכנס',
 'LBL_PERFORMFULLFTSINDEX' => 'מערכת מפתח לחיפוש טקסט מלא',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'הסר קבצי PDF זמניים',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'פרסם מאמרים שאושרו והעבר מאמרי KB לקטגוריית &#39;פג תוקף&#39;.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'פרסם מאמרים שאושרו ומאמרי KB שפג תוקפם.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'מתזמן תורי Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'הסר קבצים של כלי האבחון',
 'LBL_SUGARJOBREMOVETMPFILES' => 'הסר קבצים זמניים',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'הפעל שליחת תזכורות בדוא"ל',
 'LBL_CLEANJOBQUEUE' => 'ניקוי תור משרות',
 'LBL_CLEANOLDRECORDLISTS' => 'נקה רשימת רשומות ישנה',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'מתזמן SugarBPM',
 );
 

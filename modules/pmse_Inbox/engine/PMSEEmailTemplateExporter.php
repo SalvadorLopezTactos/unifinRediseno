@@ -10,23 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
- * Exports a record of table EmailTemplate
+ * Exports a Business Process Management Email Template
  *
- * This class extends the class ADAMExporter to export a record
- * from the table BPMEmailTemplate to transport it from one instance to another.
  * @package PMSE
  * @codeCoverageIgnore
  */
 class PMSEEmailTemplateExporter extends PMSEExporter
 {
+    /**
+     * @inheritDoc
+     */
+    protected $beanModule = 'pmse_Emails_Templates';
 
-    public function __construct()
-    {
-        $this->bean = BeanFactory::newBean('pmse_Emails_Templates'); //new BpmEmailTemplate();
-        $this->uid = 'id';
-        $this->name = 'name';
-        $this->extension = 'pet';
-    }
+    /**
+     * @inheritDoc
+     */
+    protected $uid = 'id';
+
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'pet';
 }

@@ -1009,6 +1009,22 @@ $dictionary['RevenueLineItem'] = array(
         array('name' => 'idx_revenuelineitem_commit_stage', 'type' => 'index', 'fields' => array('commit_stage')),
         array('name' => 'idx_revenuelineitem_quantity', 'type' => 'index', 'fields' => array('quantity')),
         array('name' => 'idx_revenuelineitem_oppid', 'type' => 'index', 'fields' => array('opportunity_id')),
+        array(
+            'name' => 'idx_rli_account_id_del',
+            'type' => 'index',
+            'fields' => array(
+                'account_id',
+                'deleted',
+            ),
+        ),
+        array(
+            'name' => 'idx_rli_quote_id_del',
+            'type' => 'index',
+            'fields' => array(
+                'quote_id',
+                'deleted',
+            ),
+        ),
     ),
     'relationships' => array(
         'revenuelineitem_tasks' => array(
@@ -1136,7 +1152,7 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
-        'currency'
+        'currency',
     )
 );
 

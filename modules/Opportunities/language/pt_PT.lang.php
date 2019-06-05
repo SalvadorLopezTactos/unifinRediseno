@@ -186,24 +186,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Ao iniciar esta alteração, as notas das linhas de lucro serão criadas para cada {{module_name}} existente em segundo plano. Quando as notas estiverem completadas e disponíveis, será enviada uma notificação para o endereço de e-mail do perfil de utilizador. Tome em atenção de que a sua instancia deverá ser configurada para poder enviar email em Admin -> Definições de E-mail.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais, do início ao fim. Cada registo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} vai normalmente progredir através de vários Estágios de Vendas até ficar marcado como "Ganho" ou "Perdido". O módulo {{plural_module_name}} pode ser ainda mais aproveitado usando o módulo {{forecasts_singular_module}} do Sugar, para entender e prever as tendências de vendas, bem como focar o trabalho para alcançar as quotas de vendas.',
+    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais, do início ao fim. Cada registo do módulo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc. O módulo {{module_name}} vai normalmente progredir através de vários Estágios de Vendas até ficar marcado como "Ganho" ou "Perdido". O módulo {{plural_module_name}} pode ser ainda mais aproveitado usando o módulo {{forecasts_singular_module}} do Sugar, para entender e prever as tendências de vendas, bem como focar o trabalho para alcançar as quotas de vendas.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais e os itens de linha que pertencem a essas vendas, do início ao fim. Cada registo do módulo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite os campos deste registo clicando num campo individual ou no botão Editar.
-- Visualize ou modifique ligações para outros registos nos subpainéis, alternando o painel inferior esquerdo para "Visualização de Dados".
-- Crie e visualize comentários de utilizador e o histórico de alterações de registos em {{activitystream_singular_module}}, alternando o painel esquerdo inferior para "Fluxo de Atividades".
+- Edite campos deste registo, clicando num campo individual ou no botão Editar.
+- Visualize ou modifique as ligações para outros registos nos subpainéis, alternando o painel inferior esquerdo para "Visualização de Dados".
+- Crie e visualize comentários de utilizador e o histórico de alterações de registos no módulo {{activitystream_singular_module}}, alternando o painel esquerdo inferior para "Fluxo de Atividades".
 - Siga ou torne favorito este registo utilizando os ícones à direita do nome do registo.
-- Ações adicionais estão disponíveis no menu pendente Ações à direita do botão Editar.',
+- Estão disponíveis ações adicionais no menu da lista pendente "Ações", à direita do botão Editar.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais e os itens de linha que pertencem a essas vendas, do início ao fim. Cada registo do módulo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
-Para criar um {{module_name}}:
-1. Forneça valores para os campos conforme pretendido.
+Para criar um módulo {{module_name}}:
+1. Forneça valores para os campos, conforme pretendido.
  - Os campos marcados como "Obrigatório" deverão ser preenchidos antes de gravar.
- - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
+ - Clique em "Mostrar Mais" para mostrar campos adicionais, se necessário.
 2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
 
 // END ENT/ULT

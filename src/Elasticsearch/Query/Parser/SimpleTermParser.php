@@ -23,7 +23,8 @@ class SimpleTermParser implements ParserInterface
     const MAX_TERM_SIZE = 15;
 
     protected $defaultOperator;
-    
+    protected $useShortcutOperator = false;
+
     /**
      * default Operator for space
      * @return string
@@ -41,7 +42,16 @@ class SimpleTermParser implements ParserInterface
     {
         $this->defaultOperator = TermParserHelper::getOperator($defaultOperator);
     }
-    
+
+    /**
+     * to set use shortcut operator, such as '&' for AND, '|' for OR, '-' for NOT
+     * @param bool $use
+     */
+    public function setUseShortcutOperator(bool $use)
+    {
+        $this->useShortcutOperator = $use;
+    }
+
     /**
      * @inheritdoc
      * @param string $terms
@@ -81,18 +91,24 @@ class SimpleTermParser implements ParserInterface
         );
         $temp = preg_replace($patterns, $replacedBy, $terms);
 
-        $patterns = array(
-            '/\s+(\-)/',
-            '/\&/',
-            '/\|/',
-        );
-        $replacedBy = array(
-            ' ' . TermParserHelper::OPERATOR_NOT . ' ',
-            ' ' . TermParserHelper::OPERATOR_AND . ' ',
-            ' ' . TermParserHelper::OPERATOR_OR . ' ',
-        );
+        $processed = $temp;
+        if ($this->useShortcutOperator) {
+            $patterns = array(
+                '/\s+(\-)/',
+                '/\&/',
+                '/\|/',
+            );
+            $replacedBy = array(
+                ' ' . TermParserHelper::OPERATOR_NOT . ' ',
+                ' ' . TermParserHelper::OPERATOR_AND . ' ',
+                ' ' . TermParserHelper::OPERATOR_OR . ' ',
+            );
+            $processed = preg_replace($patterns, $replacedBy, $temp);
+        }
 
-        $processed = trim(preg_replace($patterns, $replacedBy, $temp));
+        // remove non-alphanumeric chars, such '$%&' in "a $%& b" => "a b"
+        $patterns = ['/\s+[^a-zA-Z\d\.\(\):]+\s+/'];
+        $processed = trim(preg_replace($patterns, [' '], $processed));
 
         // need to split large term to small size (<= 15)
         $splitted = explode(' ', $processed);

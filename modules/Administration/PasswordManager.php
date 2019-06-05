@@ -11,6 +11,7 @@
  */
 
 
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Sugarcrm\Sugarcrm\Util\Serialized;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -117,7 +118,7 @@ if (!empty($_POST['saveConfig'])) {
 		    $_POST['passwordsetting_lockoutexpiration'] = 2;
 
         // Check SAML settings
-        if (!empty($_POST['authenticationClass']) && $_POST['authenticationClass'] == 'SAMLAuthenticate') {
+        if (!empty($_POST['authenticationClass']) && $_POST['authenticationClass'] == 'IdMSAMLAuthenticate') {
             if (empty($_POST['SAML_loginurl'])) {
                 $configurator->addError($config_strings['ERR_EMPTY_SAML_LOGIN']);
                 break;
@@ -217,8 +218,8 @@ if (!empty($_POST['saveConfig'])) {
         die("
             <script>
                 var app = window.parent.SUGAR.App;
-                app.api.call('read', app.api.buildURL('ping'), null, {
-                    'complete': function () {
+                app.sync({
+                    callback: function() {
                         app.router.navigate('#bwc/index.php?module=Administration&action=index', {
                             trigger:true, 
                             replace:true
@@ -263,12 +264,8 @@ $sugar_smarty->assign('SAML_AVAILABLE_SIGNING_ALGOS', $samlSigningAlgos);
 
 $sugar_smarty->assign('csrf_field_name', \Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator::FORM_TOKEN_FIELD);
 
-if (!extension_loaded('mcrypt')) {
-	$sugar_smarty->assign("LDAP_ENC_KEY_READONLY", 'readonly');
-	$sugar_smarty->assign("LDAP_ENC_KEY_DESC", $config_strings['LDAP_ENC_KEY_NO_FUNC_DESC']);
-}else{
-	$sugar_smarty->assign("LDAP_ENC_KEY_DESC", $config_strings['LBL_LDAP_ENC_KEY_DESC']);
-}
+$sugar_smarty->assign("LDAP_ENC_KEY_DESC", $config_strings['LBL_LDAP_ENC_KEY_DESC']);
+
 $sugar_smarty->assign("settings", $focus->settings);
 
 if ($valid_public_key){

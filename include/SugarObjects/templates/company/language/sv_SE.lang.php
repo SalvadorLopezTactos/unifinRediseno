@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Kopiera Primär',
 	'LBL_PUSH_SHIPPING' => 'Kopiera Sekundär',
 	'LBL_SAVE_ACCOUNT' => 'Spara Organisation',
+    'LBL_SERVICE_LEVEL' => 'Servicenivå',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Sekundär Stad:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Sekundärt Land:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Sekundärt Postnummer:',

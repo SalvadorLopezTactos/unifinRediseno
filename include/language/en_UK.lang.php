@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Email Settings',
     'EmailParticipants' => 'Email Participants',
     'DataPrivacy' => 'Data Privacy',
+    'ReportSchedules' => 'Report Schedules',
+    'CommentLog' => 'Comment Log',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth Token',
     'Filters' => 'Filter',
     'Comments' => 'Comment',
+    'CommentLog' => 'Comment Log',
     'Currencies' => 'Currency',
     'ProductTemplates' => 'Product Template',
     'ProductTypes' => 'Product Type',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Email Setting',
     'EmailParticipants' => 'Email Participant',
     'DataPrivacy' => 'Data Privacy',
+    'ReportSchedules' => 'Report Schedule',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transportation',
     'Utilities' => 'Utilities',
     'Other' => 'Other',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Tier 1',
+    'T2' => 'Tier 2',
+    'T3' => 'Tier 3',
+    'T4' => 'Tier 4',
   ),
   'lead_source_default_key' => 'Self Generated',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Move',
         'donothing' => 'Do Nothing'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Never',
+        30000 => 'Every 30 seconds',
+        60000 => 'Every 1 minute',
+        120000 => 'Every 2 minutes',
+        180000 => 'Every 3 minutes',
+        240000 => 'Every 4 minutes',
+        300000 => 'Every 5 minutes',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'In Forecast',
         'sales_stage' => 'Sales Stage',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'List',
         'activities' => 'Activity Stream',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Hourly',
+        '21600' => 'Every 6 Hours',
+        '43200' => 'Every 12 Hours',
+        '86400' => 'Daily',
+        '604800' => 'Weekly',
+        '1209600' => 'Every 2 Weeks',
+        '2419200' => 'Every 4 Weeks',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activities',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar and the 3-D Cube are registered trademarks of SugarCRM Inc. '.
         'All other company and product names used or appearing in this product may be trademarks of the '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Save',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Add this folder to',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'This folder cannot be changed',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Are you sure you would like to delete this folder?\\nThis process cannot be reversed.\\nFolder deletions will cascade to all contained folders.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Are you sure you would like to delete this folder?\nThis process cannot be reversed.\nFolder deletions will cascade to all contained folders.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'New Folder Name',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Please select a folder before performing this action.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Folder Management',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synchronise All Mail Accounts',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'An email was sent to the specified email address using the provided outgoing mail settings. Please check to see if the email was received to verify the settings are correct.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Performing this action will synchronise mail accounts and their contents.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Perform a full synchronisation?\\nLarge mail accounts may take a few minutes.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Perform a full synchronisation?\nLarge mail accounts may take a few minutes.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Click the Shift key or the Ctrl key to select multiple folders.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'General',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Available Group Folders',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Select the number of emails per page in the Inbox. This setting might require a page refresh in order to take effect.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Retrieving Mail Account',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Rules',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'The settings have been saved.\\n\\nYou must reload the page for the new settings to take effect.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'The settings have been saved.\n\nYou must reload the page for the new settings to take effect.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'You must reload the page for the new settings to take effect.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Send Plain Text Emails Only',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Active',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'An active session is required to export content.',
     'ERR_NO_HEADER_ID' => 'This feature is unavailable in this theme.',
     'ERR_NOT_ADMIN' => "Unauthorised access to administration.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "This option is disabled in SugarCRM for IDM mode and available in Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Please go to <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Password Management is only available in Cloud Settings.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Please contact your Sugar administrator if you would like to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Missing required field:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Invalid required field:',
     'ERR_INVALID_VALUE' => 'Invalid Value:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Current User not authorised to change {moduleName} configuration settings',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'You are not authorised to favourite {moduleName}. Contact your administrator if you need access.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'You are not authorised to subscribe to {moduleName}. Contact your administrator if you need access.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields not found in payload',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns is not an array',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields not found in payload',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows is not an array',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields not found in payload',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Your request failed due to an unknown exception.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Create',
     'LBL_FILTER_CREATE_FILTER' => 'Create new filter',
+    'LBL_FILTER_CLOSE_FILTER' => 'Close filter',
     'LBL_FILTER_EDIT_FILTER' => 'Edit filter',
     'LBL_FILTER_ALL_RECORDS' => 'All Records',
     'TPL_FILTER_SAVE' => 'You successfully created the filter {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'All Rights Reserved.<br />SugarCRM, Sugar and the 3-D Cube are registered trademarks of SugarCRM Inc. '.
         'All other company and product names used or appearing in this product may be trademarks of the '.
         'respective companies with which they are associated.',
@@ -3451,7 +3491,12 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Warning:</b> Your browser is in IE compatibility view which is not supported.",
     'WARN_LICENSE_SEATS'=>  "Warning: The number of active users is already the maximum number of licences allowed.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Warning: The number of active users exceeds the maximum number of licences allowed.",
-    'WARN_ONLY_ADMINS'=> "Only admins may log in.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Number of active users exceeds Licence Count limits. Please contact your Administrator.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Only admins may login.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'The User Licence Count limit has been reached. Only existing users may login.',
+    'WARN_ONLY_ADMINS'=> "Only admins may login.",
     'WARN_UNSAVED_CHANGES'=> "You are about to leave this record without saving any changes you may have made to the record. Are you sure you want to navigate away from this record?",
     'LBL_WARN_UNSAVED_CHANGES' => 'You have unsaved changes. Are you sure you want to leave page and discard changes?',
     'LBL_NAVIGATE_TO_REPORTS' => 'You are moving to the Reports module. Your changes to dashlet will not be saved. Continue?',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "You currently have no records saved. <item2> one now.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Click here",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Add to My Favourites',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunity Metrics for Related Account.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Product Catalogue Quick Picks',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Lists Recently used items and products saved as Favourites',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Recently Used',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favourites',
 
     'LBL_DASHLET_NO_RECORDS' => 'No records were found at this time.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
@@ -4256,7 +4306,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => 'Future',
     'LBL_REQUIRED_FIELD' => 'Required',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Quoted Line Item',
+    'LBL_DISCOUNT_TOTAL' => 'Discount total',
+    'LBL_TAX' => 'Tax',
+    'LBL_SHIPPING' => 'Shipping',
+    'LBL_GRAND_TOTAL' => 'Grand Total',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Auto populate billing address from Account profile',
+    'LBL_QLI_ADD_GROUP' => 'Add a Group',
+    'LBL_QLI_COMMENT' => 'Comment',
+    'LBL_SELECT_ACTION' => 'Select Action',
+    'LBL_QLI_GROUP_NAME' => 'Group Name',
+    'LBL_GROUP_TOTAL' => 'Group Total',
+    'LBL_ITEM_NAME' => 'Line Item',
+    'LBL_QLI_DELETE' => 'Are you sure you want to delete this line item?',
+    'LBL_QLI_COMMENT_DELETE' => 'Are you sure you want to delete this line item comment?',
+    'LBL_QLI_GROUP_DELETE' => 'Do you really want to delete group {0}? All items will be moved to default group.',
+    'LBL_QLI_GROUP_EMPTY' => 'No Quoted Line Item',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Optional',
     'LBL_RELATED_MODULE' => 'Related {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Related {{{this}}}',
@@ -4914,7 +4984,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team Tasks',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP or Old REST API',
@@ -4975,9 +5045,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => 'Notice:',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
+    'LBL_ALERT_NO_ACCESS' => 'You do not have access to the filter applied to this dashlet.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Duplicate the dashboard to configure this dashlet with your own filter.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Your browser version is no longer supported or you are using an unsupported browser.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'The following browser versions are recommended: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
     'LBL_ALERT_CONFIRM_DELETE' => 'Are you sure you want to delete this item?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Are you sure you want to delete these items?',
@@ -5075,7 +5145,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historical Summary',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'More history...',
     'LBL_RELATED_CONTACT' => 'Related Contact',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5149,6 +5219,11 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Missing SMTP Server settings',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'To send record assignment notifications, an SMTP server must be configured in {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Email Settings',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'New Stock Reports Available',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'New Stock reports are available in your ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Reports module',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'They are tagged as "Stock Report" and can be filtered. Reports are also tagged as "Sales and Marketing", "Customer Service", "Data Privacy" or "Administrative" based on the content. For more information, refer to the ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'documentation',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM enables power users to quickly perform certain tasks with keyboard shortcuts to increase productivity. The tables on the right describe available shortcuts along with the keys and the actions they perform.',
@@ -5258,23 +5333,26 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processes',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'The Processes dashlet displays the templates that can be used inside of SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Process Definitions',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'The Process Definitions dashlet displays the templates that can be used inside of SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Create Process Definitions',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Import Process Definitions',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Process Business Rules',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'The Process Business Rules dashlet displays the templates that can be used inside of SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Create Process Business Rule',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Import Process Business Rules',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Process Email Templates',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'The Process Email Templates dashlet displays the templates that can be used inside of SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Create Process Email Template',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Import Process Email Templates',
 
@@ -5298,7 +5376,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_PMSE_CANCELLED_STATUS' => 'Cancelled',
     'LBL_PMSE_TERMINATED_STATUS' => 'Terminated',
     'LBL_PMSE_ERROR_STATUS' => 'Error',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM Settings',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Are you sure you want to disable this record?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Are you sure you want to enable this record?',
@@ -5322,7 +5400,7 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 requires javascript. Please enable Javascript in your browser to use Sugar 7.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serialised data could not be unserialised',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serialised data could not be unserialised because it contains references to objects or classes',
 
@@ -5351,6 +5429,15 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_DATAPRIVACY_PII' => 'Personal Info',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Mark to Erase',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personal Info for {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Copied to your clipboard!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Could not copy to your clipboard',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Copy Confirmation Link',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Show more...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Show less...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6528,7 +6615,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'YER' => 'Rials',
     'ZWD' => 'Zimbabwe Dollars',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'None',
+        'future' => 'Current Value',
+        'old' => 'Old Value',
+        'both' => 'Current and Old Values',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

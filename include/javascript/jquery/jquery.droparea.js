@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 /* The MIT License
 
 Copyright (c) 2011 goker.cebeci, http://gokercebeci.com

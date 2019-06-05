@@ -67,6 +67,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
+  @extended
   Scenario: User should be able to login using LDAP over SSL
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -193,7 +194,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
-  @groups
+  @groups @extended
   Scenario: LDAP user login if it belongs to group and "With User DN" checked
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -223,7 +224,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
-  @groups
+  @groups @extended
   Scenario: LDAP user login if it belongs to group and "User Attribute" value contains comma
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -253,6 +254,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
+  @extended
   Scenario: New LDAP user tries to login if provision is enabled and user filter is present
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -277,6 +279,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
+  @extended
   Scenario: New LDAP user tries to login if provision is enabled and user filter is present. User is not in filter
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -297,6 +300,7 @@ Feature: LDAP
     And I wait for the page to be loaded
     And I should see "You must specify a valid username and password"
 
+  @extended
   Scenario: LDAP user tries to login if provision is enabled and username contains comma
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |
@@ -321,6 +325,7 @@ Feature: LDAP
     And I should see "Home Dashboard"
     Then I logout
 
+  @extended
   Scenario Outline: LDAP Injections in Username Field: User should see correct error message
     Given As "sugarAdmin" filling in the following LDAP settings:
       | field | type | value |

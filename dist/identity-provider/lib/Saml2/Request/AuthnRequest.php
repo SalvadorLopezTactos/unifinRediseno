@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Saml2\Request;
 
+use OneLogin\Saml2\Settings;
+use OneLogin\Saml2\AuthnRequest as Saml2AuthnRequest;
 use Sugarcrm\IdentityProvider\CSPRNG\GeneratorInterface;
 
 /**
@@ -19,7 +21,7 @@ use Sugarcrm\IdentityProvider\CSPRNG\GeneratorInterface;
  * Class AuthnRequest
  * @package Sugarcrm\IdentityProvider\Saml2\Request
  */
-class AuthnRequest extends \OneLogin_Saml2_AuthnRequest
+class AuthnRequest extends Saml2AuthnRequest
 {
     const REQUEST_ID_LENGTH = 40;
 
@@ -43,14 +45,14 @@ class AuthnRequest extends \OneLogin_Saml2_AuthnRequest
     protected $_id;
 
     /**
-     * @param \OneLogin_Saml2_Settings $settings
+     * @param Settings $settings
      * @param GeneratorInterface $generator
      * @param bool|false $forceAuthn
      * @param bool|false $isPassive
      * @param bool|true $setNameIdPolicy
      */
     public function __construct(
-        \OneLogin_Saml2_Settings $settings,
+        Settings $settings,
         GeneratorInterface $generator,
         $forceAuthn = false,
         $isPassive = false,
@@ -72,7 +74,7 @@ class AuthnRequest extends \OneLogin_Saml2_AuthnRequest
     /**
      * @inheritDoc
      */
-    public function getRequest($deflate = null)
+    public function getRequest($deflate = null): string
     {
         $subject = $this->_authnRequest;
 

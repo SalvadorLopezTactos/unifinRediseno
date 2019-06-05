@@ -17,4 +17,15 @@ spec:
   - name: idm
     image: %%IDM_IMAGE%%
     imagePullPolicy: IfNotPresent
-
+    env:
+    - name: OP_SERVICE_URL
+      value: %%OP_SERVICE_URL%%
+    - name: IDP_SERVICE_URL
+      value: %%IDP_SERVICE_URL%%
+    - name: IDM_NAMESPACE
+      value: %%IDM_NAMESPACE%%
+    - name: DISABLE_GRPC
+      value: "1"
+    # This is for keeping pod alive in k8s
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]

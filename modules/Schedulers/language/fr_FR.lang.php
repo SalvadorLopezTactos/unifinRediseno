@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Créer les Périodes futures',
 'LBL_OOTB_HEARTBEAT' => 'Heartbeat Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Mise à jour des articles KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publier les articles approuvés & les articles de la base de connaissances expirés.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tâche planifiée d&#39;Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publier les articles approuvés et les articles expirés de la base de connaissance.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tâche planifiée',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruire les données de sécurité par équipe dénormalisées',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Lancer l&#39;envoi des rappels par email',
 'LBL_CLEANJOBQUEUE' => 'Nettoyer le job de la file d&#39;attente',
 'LBL_CLEANOLDRECORDLISTS' => 'Supprime les ancients enregistrements',
-'LBL_PMSEENGINECRON' => 'Planificateur d&#39;Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Planificateur SugarBPM',
 );
 

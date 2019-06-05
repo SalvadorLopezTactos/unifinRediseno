@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definições de fluxo de trabalho',
   'LBL_MODULE_NAME_SINGULAR' => 'Definição de fluxo de trabalho',
-  'LBL_MODULE_ID' => 'Fluxo de Trabalho',  
+  'LBL_MODULE_ID' => 'Fluxo de Trabalho',
   'LBL_MODULE_TITLE' => 'Fluxo de Trabalho: Tela Principal',
   'LBL_SEARCH_FORM_TITLE' => 'Pesquisa de Fluxo de Trabalho',
   'LBL_LIST_FORM_TITLE' => 'Lista de Fluxo de Trabalho',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Módulo de Destino:',
   'LBL_LIST_ORDER' => 'Ordem de processamento:',
   'LBL_FROM_NAME' => 'Nome De:',
-  'LBL_FROM_ADDRESS' => 'Do Endereço:',  
+  'LBL_FROM_ADDRESS' => 'Do Endereço:',
   'LNK_NEW_WORKFLOW' => 'Criar Definição de fluxo de trabalho',
-  'LNK_WORKFLOW' => 'Lista de Definições de fluxo de trabalho', 
-  
-  
+  'LNK_WORKFLOW' => 'Lista de Definições de fluxo de trabalho',
+
+
   'LBL_ALERT_TEMPLATES' => 'Modelos de Alertas',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Criar um Modelo de Alerta:',
   'LBL_SUBJECT' => 'Assunto:',
-  
+
   'LBL_RECORD_TYPE' => 'Aplica-se a:',
  'LBL_RELATED_MODULE'=> 'Módulo relacionado:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sequência de Fluxo de Trabalho',
 	'LNK_ALERT_TEMPLATES' => 'Modelos de E-mail de Alerta',
 	'LNK_PROCESS_VIEW' => 'Sequência de Fluxo de Trabalho',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> As funcionalidades Sugar Workflow e Gestão de Workflow serão removidas em uma versão futura do Sugar. Os clientes da edição Sugar Enterprise devem começar a usar a funcionalidade fornecida pelo Sugar Advanced Workflow. Clique <a href="http://www.sugarcrm.com/wf-eol" target="_blank">aqui</a> para mais informações.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Observação:</strong> As funcionalidades Sugar Workflow e Workflow Management encontram-se no modo de manutenção. Os clientes da edição Sugar Enterprise devem usar a funcionalidade pelo SugarBPM<sup class="trademark">TM</sup>.',
 );
 

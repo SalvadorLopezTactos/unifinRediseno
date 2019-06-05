@@ -38,6 +38,8 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         MB_SIDECARDUPECHECKVIEW,
         MB_WIRELESSLISTVIEW,
         MB_SIDECARQUOTEDATAGROUPLIST,
+        MB_QUOTEDATAGRANDTOTALHEADER,
+        MB_QUOTEDATAGRANDTOTALFOOTER,
     );
 
     /*

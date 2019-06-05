@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Push Billing',
 	'LBL_PUSH_SHIPPING' => 'Push Shipping',
 	'LBL_SAVE_ACCOUNT' => 'Salvesta konto',
+    'LBL_SERVICE_LEVEL' => 'Teenindustase',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Tarne linn:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Tarne maakond:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Tarne postiindeks:',

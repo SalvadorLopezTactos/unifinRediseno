@@ -66,7 +66,9 @@ abstract class AppFlowTest extends WebTestCase
         // Set up mock of Database connection and executor.
         // You can insert any data to $dbResult if you want it to be returned by any DB fetch call.
         // Is applied throughout the whole Application, so be careful.
+        // ToDo: now we use real mysql inside runner docker image - we can rewrite mocks to actual calls.
         $dbResult = [
+            'id' => 'some_id',
             'identity_value' => 'some-test-username-from-db',
             'password_hash' => '',
             'attributes' => '',
@@ -81,6 +83,7 @@ abstract class AppFlowTest extends WebTestCase
         $statement->method('fetch')->willReturn($dbResult);
         $qb->method('execute')->willReturn($statement);
         $db->method('createQueryBuilder')->willReturn($qb);
+        unset($app['db']);
         $app['db'] = $db;
 
         return $app;

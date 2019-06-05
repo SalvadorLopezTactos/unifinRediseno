@@ -65,6 +65,9 @@ class FavoritesHandler extends AbstractHandler implements
      */
     protected function getFavorites(\SugarBean $bean)
     {
+        if (isset($bean->fetchedFtsData['user_favorites'])) {
+            return $bean->fetchedFtsData['user_favorites'];
+        }
         return \SugarFavorites::getUserIdsForFavoriteRecordByModuleRecord($bean->module_dir, $bean->id);
     }
 }

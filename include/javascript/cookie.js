@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: cookie.js 36440 2008-06-09 17:12:23Z dwheeler $
  
 function Get_Cookie(name) {
   var start = document.cookie.indexOf(name + '=');

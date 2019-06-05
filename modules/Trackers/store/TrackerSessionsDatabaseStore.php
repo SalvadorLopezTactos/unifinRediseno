@@ -61,26 +61,32 @@ class TrackerSessionsDatabaseStore implements Store
     private function cleanSessions($monitor)
     {
         $db = DBManagerFactory::getInstance();
-        $query = "SELECT id, date_start, seconds
-                    FROM $monitor->table_name
-                    WHERE user_id = '" . $db->quote($monitor->getValue('user_id')) . "'
-                    AND active = 1 AND deleted = 0";
-        $result = $db->query($query);
-
+        $query = <<<SQL
+SELECT id, date_start, seconds 
+FROM {$monitor->table_name} 
+WHERE user_id = ? AND active = 1 AND deleted = 0
+SQL;
+        $stmt = $db->getConnection()
+            ->executeQuery(
+                $query,
+                [$monitor->getValue('user_id')]
+            );
         $dateEnd = TimeDate::getInstance()->nowDb();
 
-        while ($row = $db->fetchByAssoc($result)) {
-            $query = "UPDATE $monitor->table_name SET ";
-
+        foreach ($stmt as $row) {
             if (empty($row['seconds'])) {
-                $query .= "date_end = '" . $dateEnd . "',
-                    seconds = '" . (strtotime($dateEnd) - strtotime($row['date_start'])) . "', ";
+                $db->getConnection()
+                    ->executeUpdate(
+                        "UPDATE {$monitor->table_name} SET date_end = ?, seconds = ?, active = 0 WHERE id = ?",
+                        [$dateEnd, strtotime($dateEnd) - strtotime($row['date_start']), $row['id']]
+                    );
+            } else {
+                $db->getConnection()
+                    ->executeUpdate(
+                        "UPDATE {$monitor->table_name} SET active = 0 WHERE id = ?",
+                        [$row['id']]
+                    );
             }
-
-            $query .= "active = 0
-                WHERE id = '{$row['id']}'";
-
-            $db->query($query);
         }
     }
 }

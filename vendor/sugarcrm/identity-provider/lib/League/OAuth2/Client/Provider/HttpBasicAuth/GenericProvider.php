@@ -59,23 +59,14 @@ class GenericProvider extends BasicGenericProvider
         if (isset($data['error']['code']) && isset($data['error']['message']) &&
             $data['error']['code'] == 500 &&
             strpos($data['error']['message'], 'request is not allowed') !== false) {
-            if (!empty($this->accessTokenRefreshUrl)) {
-                // We do a fire-and-forget call to a refresh-token endpoint.
-                $request = $this->getRequestFactory()->getRequestWithOptions(
-                    self::METHOD_GET,
-                    $this->accessTokenRefreshUrl,
-                    ['timeout' => 0.00001]
-                );
-                try {
-                    $this->getHttpClient()->send($request);
-                } catch (\Exception $e) {
-                }
-            } else {
-                $this->logger->warning("Failed to trigger access_token refresh. Please set up Refresh URL in ENV", [
-                    'tags' => ['IdM.oauth.authentication'],
-                ]);
-            }
+            $this->refreshAccessToken();
         }
+
+        if (isset($data['error']) && \is_array($data['error'])) {
+            $data['code'] = $data['error']['code'] ?? 0;
+            $data['error'] = $data['error']['message'] ?? '';
+        }
+
         return parent::checkResponse($response, $data);
     }
 
@@ -127,5 +118,37 @@ class GenericProvider extends BasicGenericProvider
             $options
         );
         return $this->getParsedResponse($request);
+    }
+
+    /**
+     * Call token inject refresh token endpoint
+     * @return boolean
+     */
+    public function refreshAccessToken()
+    {
+        $result = false;
+        if (!empty($this->accessTokenRefreshUrl)) {
+            // We do a fire-and-forget call to a refresh-token endpoint.
+            $request = $this->getRequestFactory()->getRequestWithOptions(
+                self::METHOD_GET,
+                $this->accessTokenRefreshUrl,
+                ['timeout' => 0.00001]
+            );
+            try {
+                $this->getHttpClient()->send($request);
+                $result = true;
+                $this->logger->debug("The access_token is refreshed.", ['tags' => ['IdM.oauth.authentication']]);
+            } catch (\Exception $e) {
+                $this->logger->warning(
+                    sprintf("Failed to send access_token refresh request. Error: %s", $e->getMessage()),
+                    ['tags' => ['IdM.oauth.authentication']]
+                );
+            }
+        } else {
+            $this->logger->warning("Failed to trigger access_token refresh. Please set up Refresh URL in ENV", [
+                'tags' => ['IdM.oauth.authentication'],
+            ]);
+        }
+        return $result;
     }
 }

@@ -38,14 +38,35 @@ class PMSERelatedModule
         ),
     );
 
+    /**
+     * The PMSELogger object
+     * @var PMSELogger
+     */
     private $logger;
 
-    private $relatedRecordApi;
+    /**
+     * @var PMSEEvaluator
+     */
+    private $evaluator;
 
+    /**
+     * Constructor. Deprecated, will be removed in a future release.
+     */
     public function __construct()
     {
-        $this->logger = PMSELogger::getInstance();
-        $this->relatedRecordApi = new RelateRecordApi();
+    }
+
+    /**
+     * Gets the logger object when needed
+     * @return PMSELogger
+     */
+    public function getLogger()
+    {
+        if (!isset($this->logger)) {
+            $this->logger = PMSELogger::getInstance();
+        }
+
+        return $this->logger;
     }
 
     protected function getBean($module)
@@ -78,12 +99,12 @@ class PMSERelatedModule
     {
         $fieldName = $linkField;
         if (empty($moduleBean->field_defs[$fieldName])) {
-            $this->logger->warning("Unable to find field {$fieldName}");
+            $this->getLogger()->warning("Unable to find field {$fieldName}");
             return null;
         }
 
         if (!$moduleBean->load_relationship($fieldName)) {
-            $this->logger->warning("Unable to load relationship $fieldName");
+            $this->getLogger()->warning("Unable to load relationship $fieldName");
             return null;
         }
 
@@ -99,6 +120,121 @@ class PMSERelatedModule
         }
 
         return null;
+    }
+
+    /**
+     * Gets the PMSEEvaluator object
+     * @return PMSEEvaluator
+     */
+    private function getEvaluator()
+    {
+        if (empty($this->evaluator)) {
+            $this->evaluator = ProcessManager\Factory::getPMSEObject('PMSEEvaluator');
+        }
+        return $this->evaluator;
+    }
+
+    /**
+     * Gets the related and related related beans for the provided target bean
+     * @param array $beans Beans to be parsed for related, filtered beans
+     * @param stdClass $def The definition that holds the filter criteria if there is any
+     * @return array
+     */
+    public function getChainedRelationshipBeans(array $beans, $def)
+    {
+        // we don't wanna process if there are no beans
+        // also, no def means no related beans
+        if (empty($beans) || empty($def)) {
+            return $beans;
+        }
+
+        // Create an array of beans to be filtered later on in this method
+        $beansForFilter = [];
+
+        // Loop and handle each bean in the array that was passed in
+        foreach ($beans as $bean) {
+            // We will either be merging the target module or related modules into our list of beans to filter
+            $merge = [];
+
+            // If the module name on the bean is the module name from the def, it is the target record
+            // NOTE: `$def->module` will hold either a module name or a link name
+            if ($bean->getModuleName() === $def->module) {
+                $merge[] = $bean;
+            } else {
+                // This will get records related to the bean
+                $merge = array_values($this->getRelatedModuleBeans($bean, $def->module));
+            }
+
+            // This list ultimately becomes what we will filter on, first on the beansForFilter list, then on the target,
+            // then on the related beans
+            $beansForFilter = array_merge($beansForFilter, $merge);
+        }
+
+        // If there are filter property details, filter our filter list
+        // NOTE: Since `$def` is a stdClass object, this needs to be converted to an array to check for properties to
+        // ensure that the object is not empty
+        if (!empty((array)$def->filter)) {
+            $filteredBeans = $this->filterBeans($beansForFilter, array($def->filter));
+        } else {
+            // Otherwise, use the filter list as-is
+            $filteredBeans = $beansForFilter;
+        }
+
+        // Send back the filtered list of beans now, recursively
+        return $this->getChainedRelationshipBeans(
+            $filteredBeans,
+            isset($def->chainedRelationship) ? $def->chainedRelationship : null
+        );
+    }
+
+    /**
+     * Filters beans on the given filter
+     * @param array $beans An array of beans
+     * @param array $filter Filter definition to apply to the beans
+     * @return array of SugarBean
+     */
+    public function filterBeans($beans, $filter)
+    {
+        if (empty($beans) || empty($filter)) {
+            return $beans;
+        }
+
+        $resultBeans = [];
+
+        // gotta convert it into json cz this is what expression evaluator expects
+        $expression = json_encode($filter);
+
+        foreach ($beans as $bean) {
+            // check if the filter meets the criteria
+            if ($this->getEvaluator()->evaluateExpression($expression, $bean, ['useEvaluatedBean' => true])) {
+                // it did, so add it to result array
+                $resultBeans[] = $bean;
+            }
+        }
+
+        return $resultBeans;
+    }
+
+    /**
+     * * Gets all related records from the list of related beans.
+     * @param SugarBean $moduleBean The left hand side bean
+     * @param string $linkField The link name to get related records from
+     * @return array SugarBeans
+     */
+    public function getRelatedModuleBeans($moduleBean, $linkField)
+    {
+        if (empty($moduleBean->field_defs[$linkField])) {
+            $this->getLogger()->warning("Unable to find field {$linkField}");
+            return array();
+        }
+
+        if (!$moduleBean->load_relationship($linkField)) {
+            $this->getLogger()->warning("Unable to load relationship $linkField");
+            return array();
+        }
+
+        return $moduleBean->$linkField->getBeans(array('orderby' => 'date_entered DESC'));
+
     }
 
     public function getRelatedModuleName($moduleBeanName, $linkField)
@@ -117,7 +253,7 @@ class PMSERelatedModule
         return $moduleName;
     }
 
-    public function getRelatedBeans($filter, $relationship = 'all')
+    public function getRelatedBeans($filter, $relationship = 'all', $removeTarget = false)
     {
         global $beanList, $app_list_strings;
         if (isset($beanList[$filter])) {
@@ -149,8 +285,9 @@ class PMSERelatedModule
                     $moduleLabel = translate($relatedModule);
                 }
 
+                $relMarker = $relType === 'one' ? '*:1' : '*:M';
                 // Parentheses value
-                $pval = "$moduleLabel (" . trim($label, ':') . ": $link)";
+                $pval = "$moduleLabel [$relMarker] (" . trim($label, ':') . ": $link)";
                 $ret = array(
                     'value' => $link,
                     'text' => $pval,
@@ -158,6 +295,7 @@ class PMSERelatedModule
                     'module_label' => $moduleLabel, // Added so that module can be deprecated
                     'module_name' => $relatedModule, // Added so that we have access to the module name
                     'relationship' => $def['relationship'],
+                    'type' => $relType,
                 );
                 if ($relType == 'one') {
                     $output_11[] = $ret;
@@ -192,18 +330,19 @@ class PMSERelatedModule
         // Sort on the label
         array_multisort($labels, SORT_ASC, $output);
 
-        // Send text with pluralized module name
-        $filterText = isset($app_list_strings['moduleList'][$filter]) ? $app_list_strings['moduleList'][$filter] : $filter;
-        $filterArray = array(
-            'value' => $filter,
-            'text' => '<' . $filterText . '>',
-            'module' => $filter,
-            'module_label' => $filterText, // Display value for Module Name
-            'module_name' => $filter, // Actual Module Name Key
-            'relationship' => $filter
-        );
-
-        array_unshift($output, $filterArray);
+        if (!$removeTarget) {
+            // Send text with pluralized module name
+            $filterText = isset($app_list_strings['moduleList'][$filter]) ? $app_list_strings['moduleList'][$filter] : $filter;
+            $filterArray = array(
+                'value' => $filter,
+                'text' => '<' . $filterText . '>',
+                'module' => $filter,
+                'module_label' => $filterText, // Display value for Module Name
+                'module_name' => $filter, // Actual Module Name Key
+                'relationship' => $filter,
+            );
+            array_unshift($output, $filterArray);
+        }
 
         $res['search'] = $filter;
         $res['success'] = true;
@@ -222,7 +361,7 @@ class PMSERelatedModule
         // sent through this.
         if (!isset($newBean->field_defs[$field])) {
             $module = $newBean->getModuleName();
-            $this->logger->warning("Field $field not found on bean for module $module");
+            $this->getLogger()->warning("Field $field not found on bean for module $module");
             return null;
         }
 
@@ -246,28 +385,79 @@ class PMSERelatedModule
     }
 
     /**
-     * Creates a new Related Record
+     * Creates a new Related (or Related Related) Record
      * @param $moduleBean
      * @param $linkField
      * @param $fields
-     * @return null|SugarBean
+     * @param $def - action filter definition if any
+     * @return $relatedRecords - array of added related records
      * @throws Exception
      */
-    public function addRelatedRecord($moduleBean, $linkField, $fields)
+    public function addRelatedRecord($moduleBean, $linkField, $fields, $def = null)
     {
         $fieldName = $linkField;
-        if (empty($moduleBean->field_defs[$fieldName])) {
-            throw ProcessManager\Factory::getException('InvalidData', "Unable to find field {$fieldName}", 1);
+        $params = (isset($def) && !empty($def->act_params)) ? json_decode($def->act_params) : null;
+
+        $chainModuleExists = false;
+        if (!empty($params->chainedRelationship->module)) {
+            $fieldName = $params->chainedRelationship->module;
+            $chainModuleExists = true;
+            unset($params->chainedRelationship);
         }
 
-        if (!$moduleBean->load_relationship($fieldName)) {
-            throw ProcessManager\Factory::getException('InvalidData', "Unable to load relationship $fieldName", 1);
+        $relatedRecords = array();
+        $parentBeans = array();
+        // It calls getChainedRelationshipBeans() only when Related To (module) is set, it adds new record to
+        // the Related To (module). $parentBeans will be Related To (module) in this case.
+        // If Related To (module) is not set (i.e. $chainModuleExists is false), it adds new record to target module.
+        // $parentBeans will contain target module (i.e. $moduleBean) in this case.
+        if ($chainModuleExists === true) {
+            $parentBeans = $this->getChainedRelationshipBeans([$moduleBean], $params);
+        } else {
+            $parentBeans = array($moduleBean);
         }
+        if (is_array($parentBeans) && !empty($parentBeans[0])) {
+            if (empty($parentBeans[0]->field_defs[$fieldName])) {
+                throw ProcessManager\Factory::getException('InvalidData', "Unable to find field {$fieldName}", 1);
+            }
+            $parentBeans[0]->load_relationship($fieldName);
+            $rModule = $parentBeans[0]->$fieldName->getRelatedModuleName();
 
-        $rModule = $moduleBean->$fieldName->getRelatedModuleName();
+            foreach ($parentBeans as $parentBean) {
+                $relatedModuleBean = $this->newBean($rModule);
+                $relatedModuleBean = $this->addRelatedRecordValues($relatedModuleBean, $fields);
 
-        $relatedModuleBean = $this->newBean($rModule);
+                if (isset($relatedModuleBean->field_defs['parent_type'], $relatedModuleBean->field_defs['parent_id'])) {
+                    $relatedModuleBean->parent_type = $parentBean->module_dir;
+                    $relatedModuleBean->parent_id = $parentBean->id;
+                }
 
+                if ($parentBean->module_name == $rModule) {
+                    $relatedModuleBean->pa_related_module_save = true;
+                }
+
+                // Save the new Related Record
+                PMSEEngineUtils::saveAssociatedBean($relatedModuleBean);
+
+                if (!$relatedModuleBean->in_save) {
+                    $rel_id = $relatedModuleBean->id;
+                    $parentBean->load_relationship($fieldName);
+                    $parentBean->$fieldName->add($rel_id);
+                    $relatedRecords[] = $relatedModuleBean;
+                }
+            }
+        }
+        return $relatedRecords;
+    }
+
+    /**
+     * Adds Related Record Values
+     * @param $relatedModuleBean
+     * @param $fields
+     * @return $relatedModuleBean
+     */
+    public function addRelatedRecordValues($relatedModuleBean, $fields)
+    {
         foreach ($fields as $key => $value) {
             if (isset($relatedModuleBean->field_defs[$key])) {
                 // check if is of type link
@@ -294,26 +484,6 @@ class PMSERelatedModule
                 }
             }
         }
-
-        if (isset($relatedModuleBean->field_defs['parent_type'], $relatedModuleBean->field_defs['parent_id'])) {
-            $relatedModuleBean->parent_type = $moduleBean->module_dir;
-            $relatedModuleBean->parent_id = $moduleBean->id;
-        }
-
-        if ($moduleBean->module_name == $rModule) {
-            $relatedModuleBean->pa_related_module_save = true;
-        }
-
-        // Save the new Related Record
-        PMSEEngineUtils::saveAssociatedBean($relatedModuleBean);
-
-
-        if (!$relatedModuleBean->in_save) {
-            $rel_id = $relatedModuleBean->id;
-            $moduleBean->$fieldName->add($rel_id);
-            return $relatedModuleBean;
-        } else {
-            return null;
-        }
+        return $relatedModuleBean;
     }
 }

@@ -112,57 +112,53 @@ class VarDefHandler {
                         $GLOBALS['log']->fatal("Failed to load relationship {$value_array['name']}");
                         continue;
                     }
-                    // Exclude modules on the many side if $mlink == false
-                    if (!$mlink && $this->module_object->{$value_array['name']}->getType() === 'many') {
-                        continue;
+                }
+                // Only include related modules on the one side if $mlink == false
+                if ($mlink || (!$mlink && $value_array['type'] == 'link' &&
+                        $this->module_object->{$value_array['name']}->getType() === 'one')) {
+                    if ($value_array['type'] == 'link' && !$use_field_label) {
+                        $relModName = $this->module_object->{$value_array['name']}->getRelatedModuleName();
+                        if (!empty($app_list_strings['moduleList'][$relModName])) {
+                            $label_name = $app_list_strings['moduleList'][$relModName];
+                        } else {
+                            $label_name = $relModName;
+                        }
+                    } elseif (!empty($value_array['vname'])) {
+                        $label_name = $value_array['vname'];
+                    } else {
+                        $label_name = $value_array['name'];
+                    }
+
+
+                    $label_name = get_label($label_name, $temp_module_strings);
+
+                    if (!empty($value_array['table'])) {
+                        //Custom Field
+                        $column_table = $value_array['table'];
+                    } else {
+                        //Non-Custom Field
+                        $column_table = $this->module_object->table_name;
+                    }
+
+                    if ($value_array['type'] == 'link') {
+                        if ($use_field_name) {
+                            $index = $value_array['name'];
+                        } else {
+                            $index = $this->module_object->$key->getRelatedModuleName();
+                        }
+                    } else {
+                        $index = $key;
+                    }
+
+                    $value = trim($label_name, ':');
+                    if ($remove_dups) {
+                        if (!in_array($value, $this->options_array)) {
+                            $this->options_array[$index] = $value;
+                        }
+                    } else {
+                        $this->options_array[$index] = $value;
                     }
                 }
-                if ($value_array['type'] == 'link' && !$use_field_label) {
-                    $relModName = $this->module_object->{$value_array['name']}->getRelatedModuleName();
-                    if(!empty($app_list_strings['moduleList'][$relModName])){
-                    	$label_name = $app_list_strings['moduleList'][$relModName];
-                    }else{
-                    	$label_name = $relModName;
-                    }
-                }
-				else if(!empty($value_array['vname'])){
-					$label_name = $value_array['vname'];
-				} else {
-					$label_name = $value_array['name'];
-				}
-
-
-				$label_name = get_label($label_name, $temp_module_strings);
-
-				if(!empty($value_array['table'])){
-					//Custom Field
-					$column_table = $value_array['table'];
-				} else {
-					//Non-Custom Field
-					$column_table = $this->module_object->table_name;
-				}
-
-                if($value_array['type'] == 'link'){
-                	if($use_field_name){
-                		$index = $value_array['name'];
-
-                	}else{
-                		$index = $this->module_object->$key->getRelatedModuleName();
-                	}
-                }else{
-					$index = $key;
-                }
-
-				$value = trim($label_name, ':');
-				if($remove_dups){
-					if(!in_array($value, $this->options_array)) {
-						$this->options_array[$index] = $value;
-					}
-				}
-				else {
-					$this->options_array[$index] = $value;
-				}
-
 			//end if field is included
 			}
 
@@ -176,7 +172,6 @@ class VarDefHandler {
 
 	//end get_vardef_array
 	}
-
 
 	function compare_type($value_array) {
 		//Filter nothing?

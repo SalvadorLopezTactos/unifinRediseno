@@ -935,12 +935,21 @@ If you experience persistent problems with automatic validation, please check yo
     'WARN_INSTALLER_LOCKED'=>'<b>Warning:</b> To safeguard your data, the installer must be locked by setting &#39;installer_locked&#39; to &#39;true&#39; in the config.php file.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Важно:</b> Лицензът Ви изтича до ",
     'WARN_LICENSE_EXPIRED2' =>" ден (дни). Моля, посетете раздел <a href='index.php?action=LicenseSettings&module=Administration'>'\"Лицензи\"</a>  от секция Администриране.",
-    'WARN_LICENSE_SEATS'=>  "<b>Внимание:</b> Броят на потребителите надхвърля разрешените от лиценза ",
-    'WARN_LICENSE_SEATS2' => ".  Моля, свържете се с Вашия търговски представител или пишете на <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Предупреждение:</b> Има ",
+    'WARN_LICENSE_SEATS2' => " активни потребители, когато абонаментът ви позволява само ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Моля, деактивирайте някои потребители, обърнете се към вашия партньор или търговски представител,"
+        . " или изпратете имейл на адрес <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">За повече информация вижте статията "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Обяснение на типовете потребители и лицензи за Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Внимание:</b> Броят на потребителите надхвърля разрешените от лиценза: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Warning:</b> The number of active users is already the maximum number of licenses allowed",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Warning:</b> The number of active users allowed by your license matches the number of active users in the system. You will not be able to create additional active users.",
-    'WARN_REPAIR_CONFIG' => '<b>Warning:</b> The config.php file needs to be repaired.  Please use the <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> script in the Repair page in the Admin area to repair the config file.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Предупреждение:</b> Няма да можете да създадете допълнителни активни потребители."
+        . " Моля, закупете повече абонаменти.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Предупреждение:</b> Няма да можете да създадете допълнителни активни потребители."
+        . " Моля, закупете повече абонаменти.",
+    'WARN_REPAIR_CONFIG' => '<b>Предупреждение:</b> Файлът config.php трябва да бъде коригиран. Моля, използвайте скрипта <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Регенериране на конфигурационния файл</a> на страницата Системна поддръжка в раздел Администриране за коригиране на конфигурационния файл.',
     'WARN_UPGRADE_APP'=> "Налична е актуализирана версия на приложението.",
     'WARN_UPGRADE' => '<b>Предупреждение:</b> Моля актуализирайте версията ',
     'WARN_UPGRADENOTE' => 'Бележки: ',
@@ -957,7 +966,7 @@ If you experience persistent problems with automatic validation, please check yo
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Изчистване на кешираната информация за дефинции на полета',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Премахва дефиниции на полета от кеша на системата',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Премахване на кеширана информация за глобално търсене',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Премахва на кеширания файл unified_search_modules.php',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Премахва кеширания файл unified_search_modules.php',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Бързо коригиране и регенериране',
     'LBL_QUICK_REPAIR_TITLE'=>'Изберете модули от списъка, които да бъдат поправени:',
 	'LBL_FAILED_CONNECTION'=> 'Неуспешен опит за свързване :',
@@ -1249,15 +1258,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Файлът с мета данните не беше намерен.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Настройки',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Конфигуриране на настройките на Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Разглеждане на журнали',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Достъп до журнала на Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Влезте в журнала на ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' регистър.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Управление на процеси',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Можете да достъпите Управление на процеси тук.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Конфигурирайте настройките на ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' и разгледайте журнала. Управлявайте всички BPM процеси за всички потребители чрез Управление на процеси.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Конфигурирайте настройките на Advanced Workflow и разгледайте журнала. Управлявайте всички BPM процеси за всички потребители чрез Управление на процеси.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Конфигуриране на оферти',
+    'LBL_MANAGE_QUOTES' => 'Конфигуриране на подредбата на плана на офертите',
 );

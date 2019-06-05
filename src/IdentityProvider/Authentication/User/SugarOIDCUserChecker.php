@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InactiveUserException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider\SugarLocalUserProvider;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -74,6 +75,13 @@ class SugarOIDCUserChecker extends UserChecker
                 $userAttributes
             );
             $sugarUser = $this->localUserProvider->createUser($userAttributes['user_name'], $userAttributes);
+        } catch (InactiveUserException $e) {
+            $sugarUser = $e->getSugarUser();
+            if (!$sugarUser || $userAttributes['status'] !== User::USER_STATUS_ACTIVE) {
+                throw $e;
+            }
+
+            $this->setUserData($sugarUser, $userAttributes);
         }
         $user->setSugarUser($sugarUser);
     }
@@ -95,6 +103,12 @@ class SugarOIDCUserChecker extends UserChecker
             }
             unset($attributes['email']);
         }
+
+        if (array_key_exists('user_name', $attributes)) {
+            unset($attributes['user_name']);
+        }
+
+        $attributes = $this->getDbMassagedAttributes($attributes, $sugarUser);
         foreach ($attributes as $name => $value) {
             if (isset($sugarUser->$name) && strcasecmp($sugarUser->$name, $value) !== 0) {
                 $sugarUser->$name = $value;
@@ -108,5 +122,23 @@ class SugarOIDCUserChecker extends UserChecker
             $sugarUser->emailAddress->addAddress($email, true);
             $sugarUser->emailAddress->save($sugarUser->id, $sugarUser->module_dir);
         }
+    }
+
+    /**
+     * Get Db massaged attributes for comparison
+     *
+     * @param array $attributes
+     * @param \User $sugarUser
+     * @return array
+     */
+    private function getDbMassagedAttributes(array $attributes, \User $sugarUser): array
+    {
+        $db = $sugarUser->db;
+        $fieldDefs = $sugarUser->getFieldDefinitions('name', array_keys($attributes));
+        array_walk($attributes, function (&$value, $key) use ($db, $fieldDefs) {
+            $value = $db->massageValue($value, $fieldDefs[$key], true);
+        });
+
+        return $attributes;
     }
 }

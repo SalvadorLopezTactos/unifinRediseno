@@ -21,7 +21,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: selenium
-        image: library/selenium/standalone-chrome:3.4.0-chromium
+        image: selenium/standalone-chrome:3.141.59-antimony
         imagePullPolicy: IfNotPresent
         ports:
         - name: selenium

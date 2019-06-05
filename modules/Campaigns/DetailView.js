@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: DetailView.js 16301 2006-08-22 22:16:59Z awu $
 
 function set_return_prospect_list_and_save(popup_reply_data)
 {

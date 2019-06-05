@@ -1005,6 +1005,10 @@ a.adam-tooltip-error-off {
   width: 50% !important;
 }
 
+input[type="checkbox"].adam.form-panel-field-control {
+  margin: 0;
+}
+
 .adam.form-panel-field.adam-formpanelmultiselect .select2-choices {
   height: 27px !important;
   overflow: scroll;
@@ -1279,4 +1283,31 @@ a.adam-tooltip-error-off {
 input.adam-team-append {
   display: inline;
   margin-right: 9px;
+}
+
+.adam-filterfield-selectors {
+  margin-right: 2px;
+}
+
+.adam-filterfield-input {
+  position: absolute;
+}
+
+.adam.adam-filterfield-datetime,
+.adam.adam-filterfield-date,
+.adam.adam-filterfield-dropdown,
+.adam.adam-filterfield-currency {
+  height: 28px;
+  margin-right: 2px;
+}
+
+.adam.adam-filterfield-currency-value {
+  width: 45%;
+  text-align: right;
+}
+
+.adam.adam-filterfield-number {
+  height: 18px;
+  text-align: right;
+  margin-bottom: 9px;
 }

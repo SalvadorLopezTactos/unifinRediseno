@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => '电子邮件设置',
     'EmailParticipants' => '电子邮件参与者',
     'DataPrivacy' => '数据隐私',
+    'ReportSchedules' => '报告日程',
+    'CommentLog' => '评论日志',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => '开放认证标记',
     'Filters' => '筛选器',
     'Comments' => '评论',
+    'CommentLog' => '评论日志',
     'Currencies' => '货币',
     'ProductTemplates' => '产品模板',
     'ProductTypes' => '产品类型',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => '电子邮件设置',
     'EmailParticipants' => '电子邮件参与者',
     'DataPrivacy' => '数据隐私',
+    'ReportSchedules' => '报告日程',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => '运输',
     'Utilities' => '公共事业',
     'Other' => '其他',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => '第 1 级',
+    'T2' => '第 2 级',
+    'T3' => '第 3 级',
+    'T4' => '第 4 级',
   ),
   'lead_source_default_key' => '自我生成',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '。',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => '移动',
         'donothing' => '不操作'
   ),
+  'processes_auto_save_interval' => array(
+        0 => '从不',
+        30000 => '每 30 秒',
+        60000 => '每 1 分钟',
+        120000 => '每 2 分钟',
+        180000 => '每 3 分钟',
+        240000 => '每 4 分钟',
+        300000 => '每 5 分钟',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => '预测中',
         'sales_stage' => '销售阶段',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => '列表',
         'activities' => '活动流',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => '每小时',
+        '21600' => '每 6 小时',
+        '43200' => '每 12 小时',
+        '86400' => '每天',
+        '604800' => '每周',
+        '1209600' => '每 2 周',
+        '2419200' => '每 4 周',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '跟踪链接',
   'LBL_TOGGLE_VISIBILITY' => '切换可见选择', // Record view header panel element
   'LBL_ACTIVITIES' => '活动流',
-  'LBL_COPYRIGHT' => 'Copyright ©2004-2018 SugarCRM Inc. 版权所有。保留所有权利。',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方体均为 SugarCRM Inc. 的注册商标。'.
         '该产品中使用或出现的任何其他公司和产品名称可能是 '.
         'SugarCRM ®、Sugar Enterprise™ 和Sugar™ 是 SugarCRM Inc.的商标。',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => '保存',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => '添加新文件夹到',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => '这个文件夹不能被改变',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => '您确定您要删除这个文件夹吗?\\n这个过程不能被回滚。\\n文件夹删除将关联到所有包含的文件夹。',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => '您确定您要删除这个文件夹吗?\n这个过程不能被回滚。\n文件夹删除将关联到所有包含的文件夹。',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => '新文件夹名称',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => '在执行这个操作之前请指定一个文件夹。',
     'LBL_EMAIL_FOLDERS_TITLE'               => '文件夹管理',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => '同步所有邮件帐户',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => '电子邮件已经有设定的发件服务器发送到指定的邮箱。请检查是否收到电子邮件以确定发件服务器设置是否正确。',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => '执行本动作将同步邮件帐户和它们的内容。',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '执行一个全同步吗?\\n大邮件帐户可能会花费几分钟。',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '执行一个全同步吗?\n大邮件帐户可能会花费几分钟。',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => '按Shift键或Ctrl键来选在多个文件夹。',
     'LBL_EMAIL_SETTINGS_GENERAL'            => '全部',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => '有效组文件夹',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => '这些设置将需要页面刷新被激活。',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => '恢复邮件账户',
     'LBL_EMAIL_SETTINGS_RULES'              => '规则',
-    'LBL_EMAIL_SETTINGS_SAVED'              => '设置已经保存。\\n\\n您必须重新加载页面使新设置有效。',
+    'LBL_EMAIL_SETTINGS_SAVED'              => '设置已经保存。\n\n您必须重新加载页面使新设置有效。',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => '你必须重新加载页面为新设置生效。',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => '仅发送纯文本电子邮件',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => '激活邮件账户',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '需要一个可用的会话来导出内容。',
     'ERR_NO_HEADER_ID' => '此功能在本主题中无效',
     'ERR_NOT_ADMIN' => "没有管理权限。",
-    'ERR_DISABLED_FOR_IDM_MODE' => "此选项已在 SugarCRM 中为 IDM 模式禁用，但在云端控制台中可用。",
-    'ERR_GOTO_CLOUD_CONSOLE' => "请前往<a href=\"%s\" target=\"_blank\">云控制台</a>。",
+    'ERR_DISABLED_FOR_IDM_MODE' => '密码管理仅在“云设置”中可用。',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '如果需要更改只读字段，请联系您的 Sugar 管理员。',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段:',
     'ERR_INVALID_REQUIRED_FIELDS' => '无效的必填字段:',
     'ERR_INVALID_VALUE' => '无效值：',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => '当前用户无权更改的 {moduleName} 配置设置',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => '您无权收藏{moduleName}。如果你需要访问与管理员联系。',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => '您无权订阅{moduleName}。如果你需要访问与管理员联系。',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => '有效荷载中未找到 worksheet_columns_related_fields ',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns 不是一个数组',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => '有效荷载中未找到 summary_columns_related_fields',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows 不是一个数组',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => '有效荷载中未找到 footer_rows_related_fields ',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => '您的请求由于未知原因失败。',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => '选择运营商',
     'LBL_FILTER_CREATE_NEW' => '创建',
     'LBL_FILTER_CREATE_FILTER' => '创建新筛选器',
+    'LBL_FILTER_CLOSE_FILTER' => '关闭筛选器',
     'LBL_FILTER_EDIT_FILTER' => '编辑筛选器',
     'LBL_FILTER_ALL_RECORDS' => '所有记录',
     'TPL_FILTER_SAVE' => '成功创建筛选器{{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy;2004 年-2018 年 <a href="http://www.sugarcrm.com"target="_blank"class="copyRightLink"> SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有权利。<br />SugarCRM、Sugar 和 3-D Cube 均为 SugarCRM Inc. 的注册商标。 '.
         '该产品中使用或出现的任何其他公司和产品名称可能是'.
         '与此类名称有关的公司的商标。',
@@ -3414,7 +3454,7 @@ $app_strings = array (
     'LNK_RESUME' => '重试',
     'LNK_VIEW_CHANGE_LOG' => '查看审计日志',
     'TPL_AUDIT_LOG_TITLE' => '{{{name}}} 的审计日志',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => '点击以查看电子邮件地址审计日志',
 
     'NTC_CLICK_BACK' => '请按浏览器的“返回”按钮返回，并纠正错误。',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3451,6 +3491,11 @@ $app_strings = array (
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>警告:</b> 你的IE浏览器在兼容视图下是不支持的.",
     'WARN_LICENSE_SEATS'=>  "警告：活动用户数量已经达到许可证允许的最大值。",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告：活动用户数量已经超过许可证允许的最大值。",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        '活动用户的数量超过许可证数量限制。请联系您的管理员。',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => '只有管理员才可以登录。',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        '已达到用户许可证数量限制。仅当前用户可以登录。',
     'WARN_ONLY_ADMINS'=> "只有管理员才可以登录。",
     'WARN_UNSAVED_CHANGES'=> "您将在没有保存修改的情况下离开。您确定要离开么？",
     'LBL_WARN_UNSAVED_CHANGES' => '您的更改未保存，您确定要离开页面放弃更改吗？',
@@ -3544,6 +3589,7 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "您目前没有保存<item1>记录<item2>。",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "你从 <item2>、<item3>和<item2>列表可以创建 <item1>。",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "点击此处",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => '添加到我的收藏夹',
@@ -3649,6 +3695,10 @@ $app_strings = array (
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '商业机会指标',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '相关账户的商业机会指标。',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => '产品目录快速选择',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> '列出最近使用的条目和产品，保存至收藏夹',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '最近使用的',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '收藏夹',
 
     'LBL_DASHLET_NO_RECORDS' => '没有发现记录。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '客户反馈总结',
@@ -4269,7 +4319,27 @@ $app_strings = array (
 
     'LBL_FUTURE' => '新值',
     'LBL_REQUIRED_FIELD' => '必填',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => '已报价单项',
+    'LBL_DISCOUNT_TOTAL' => '折扣总计',
+    'LBL_TAX' => '税费',
+    'LBL_SHIPPING' => '运费',
+    'LBL_GRAND_TOTAL' => '总计',
+    'LBL_QUOTES_POPULATE_ADDRESS' => '从账户配置文件自动填充付款地址',
+    'LBL_QLI_ADD_GROUP' => '添加一个组',
+    'LBL_QLI_COMMENT' => '备注',
+    'LBL_SELECT_ACTION' => '选择动作',
+    'LBL_QLI_GROUP_NAME' => '组名',
+    'LBL_GROUP_TOTAL' => '组总和',
+    'LBL_ITEM_NAME' => '单项',
+    'LBL_QLI_DELETE' => '您确定要删除这个单项吗？',
+    'LBL_QLI_COMMENT_DELETE' => '您确定要删除这个单项注释吗？',
+    'LBL_QLI_GROUP_DELETE' => '您确实希望删除组{0}吗？全部项都将移至默认组中。',
+    'LBL_QLI_GROUP_EMPTY' => '无已报价单项',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => '可选',
     'LBL_RELATED_MODULE' => '关联{{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => '关联{{{this}}}',
@@ -4299,7 +4369,7 @@ $app_strings = array (
     'LBL_CONFIRM' => '确认',
     'LBL_NO_ACCESS' => '(没有权限)',
     'LBL_NO_ACCESS_LOWER' => '用户未连接到记录',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => '没有权限',
     'LBL_VALUE_ERASED' => '值已删除',
     'LBL_VALUE_ERASED_TOOLTIP' => '此信息已通过数据隐私请求删除',
     'LBL_CREATE_RELATED_RECORD' => '建立关联记录',
@@ -4931,7 +5001,7 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '团队任务',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP 或 Old REST API',
@@ -4992,9 +5062,9 @@ $app_strings = array (
     'LBL_ALERT_TITLE_NOTICE' => '请注意：',
     'LBL_ALERT_TITLE_ERROR' => '错误',
     'LBL_ALERT_TITLE_LOADING' => '加载中 ...',
+    'LBL_ALERT_NO_ACCESS' => '您尚未访问应用于此栏的筛选器。',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => '复制此面板以使用您自己的筛选器配置此栏。',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '您的浏览器版本不再支持或您使用不受支援的浏览器。',
-    'LBL_ALERT_BROWSER_SUPPORT' => '推荐以下浏览器版本：<ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => '请参阅 {{link}} 页面，了解建议的浏览器。',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => '支持的平台',
     'LBL_ALERT_CONFIRM_DELETE' => '您确定要删除这一项吗？',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => '您确定要删除这些项吗？',
@@ -5092,7 +5162,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => '历史总结',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => '更多历史',
     'LBL_RELATED_CONTACT' => '相关联系人',
     'LBL_MODULE_TYPE' => '类型',
@@ -5165,6 +5235,11 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'SMTP服务器未配置',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => '要发送记录分配的提醒，您需要在 {{emailSettingsUrl}}中配置SMTP服务器.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => '电子邮件设置',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => '新库存报告可用',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => '新库存报告已存在于你的',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => '报告模块',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => '他们被标为“库存报告”，可以进行筛选。报告也根据内容被标记为“销售和营销”、“客户服务”、“数据隐私”或“管理” 。更多信息请参阅',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => '文档',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM允许进阶的用户使用键盘快捷键完成某些任务以提高效率。右侧的表格描述了可用快捷键的键位及功能。',
@@ -5274,23 +5349,26 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => '流程',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => '流程栏显示可在 SugarBPM 内部使用的模板。',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => '流程定义',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => '流程定义栏显示可在 SugarBPM 内部使用的模板。',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => '新增流程定义',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => '导入流程定义',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => '流程商务规则',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => '流程商务规则栏显示可在 SugarBPM 内部使用的模板。',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => '新增流程商务规则',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => '导入流程商务规则',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => '流程电子邮件模板',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => '流程电子邮件模板栏显示可在 SugarBPM 内部使用的模板。',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => '新增流程电子邮件模板',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => '导入流程电子邮件模板',
 
@@ -5314,7 +5392,7 @@ $app_strings = array (
     'LBL_PMSE_CANCELLED_STATUS' => '已取消',
     'LBL_PMSE_TERMINATED_STATUS' => '终止',
     'LBL_PMSE_ERROR_STATUS' => '错误',
-    'LBL_PMSE_SETTINGS' => 'Advanced Workflow Settings',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM 设置',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => '您是否确定要关闭这条记录？',
     'LBL_PRO_ENABLE_CONFIRMATION' => '您是否确定要激活这条记录？',
@@ -5338,7 +5416,7 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 需要javascript。请启动Javascript以便继续使用Sugar 7。',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => '已序列化的数据无法进行反序列化',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => '已序列化的数据无法进行反序列化，因为其中包含对象或类别的引用',
 
@@ -5367,6 +5445,15 @@ $app_strings = array (
     'LBL_DATAPRIVACY_PII' => '个人信息',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '标记已删除',
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 的个人信息',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '已复制到您的剪贴板！',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '无法复制到您的剪贴板',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '复制确认链接',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => '显示更多...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => '简略显示...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6544,7 +6631,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '嵌入的文件';
     'YER' => '里亚尔',
     'ZWD' => '津巴布韦元',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => '单击',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => '无',
+        'future' => '当前值',
+        'old' => '旧值',
+        'both' => '当前值和旧值',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => '单击',
+    );

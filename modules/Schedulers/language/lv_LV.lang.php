@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Izveidot nākotnes laika periodus',
 'LBL_OOTB_HEARTBEAT' => 'Sugar pulss',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atjaunināt Zināšanu bāzes satura rakstus.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicēt apstiprinātos rakstus un Expire KB Articles.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicēt apstiprinātos rakstus un KB rakstus, kam beidzies termiņš.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ieplānotais uzdevums',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atjaunot denormalizētos komandas drošības datus',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Pārbaudīt ienākošā e-pasta kontus',
 'LBL_PERFORMFULLFTSINDEX' => 'Pilna teksta meklēšanas indeksēšanas sistēma',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Noņemt pagaidu PDF failus',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicēt apstiprinātos rakstus un Expire KB Articles.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicēt apstiprinātos rakstus un KB rakstus, kam beidzies termiņš.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elastīgās meklēšanas rindas plānotājs',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Noņemt diagnostikas rīka failus',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Noņemt pagaidu failus',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Ieslēgt e-pasta atgādinājumu sūtīšanu',
 'LBL_CLEANJOBQUEUE' => 'Attīrīšanas uzdevumu rinda',
 'LBL_CLEANOLDRECORDLISTS' => 'Iztīrīt vecos ierakstus',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'SugarBPM Plānotājs',
 );
 

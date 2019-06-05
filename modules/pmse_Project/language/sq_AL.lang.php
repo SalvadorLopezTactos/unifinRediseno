@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Ka procese aktive të hapura përkundrejt përcaktimit të këtij procesit. Përditësimi i tij mund t&#39;i prekë këto procese. Të ndryshohet përcaktimi i këtij procesi?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Ka procese aktive të hapura përkundrejt përcaktimit të këtij procesit. Përditësimi i tij mund t&#39;i prekë këto procese. Të çaktivizohet përcaktimi i këtij procesi?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Krijo automatikisht regjistrim të definimeve të reja të proceseve duke importuar skedar *.bpm nga sistemi i skedarëve tuaj.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Ngarko skedarin .bpm file për të importuar një përcaktim procesi.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Definimet e procesit u importuan me sukses në sistem.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Ju lutemi selektoni fajll *.bpm valid.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Përcaktimi i procesit është importuar por përmban një ose më shumë veprime të rregullit të biznesit për të cilin nuk janë zgjedhur rregullat e biznesit.',
+    'LBL_BPM_IMPORT_SELECT' => 'Përcaktimi i procesit përmban rregullat e biznesit dhe shabllonet e mëposhtme të emailit. '
+        . 'Zgjidh ato që dëshiron të importosh.',
+    'LBL_BUSINESS_RULES' => 'Rregullat e biznesit',
+    'LBL_EMAIL_TEMPLATES' => 'Shabllonet e emailit',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Zhbëj',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Ribëj',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Ruaj',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Vërteto',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Ruaj dhe vërteto',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Kryej vërtetimin për të kontrolluar për gabime',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitetet',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Fshi',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Moduli',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtro',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Në lidhje me',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriteri',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Kohëzgjatja',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Njesi',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Fushet',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluimi i fushës së modulit',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduli',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Në lidhje me',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Fusha',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Vlera',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Evaluimi i formës së përgjigjes',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nuk është',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'jo baras me',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Të gjitha regjistrimet e përafërta',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Çdo regjistrim i përafërt',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Koha e ekzekutimit',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Shto',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Mbyll',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Grupet',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Përdoruesi në %MODULE% që krijoi regjistrimin',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Përdoruesi në %MODULE% që modifikoi i fundit regjistrimin',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Përdoruesi në %MODULE% që i është caktuar regjistrimi',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Përdoruesi në %MODULE% të cilit i ishte caktuar regjistrimi',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Përdoruesi në %MODULE% që është menaxheri që krijoi regjistrimin',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Përdoruesi në %MODULE% që është menaxheri që modifikoi i fundit regjistrimin',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Përdoruesi në %MODULE% që është menaxheri të cilit i është caktuar regjistrimi',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Përdoruesi në %MODULE% që është menaxheri të cilit i ishte caktuar regjistrimi',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% në lidhje me %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Përdoruesi që krijoji %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Përdoruesi që modifikoi së fundi %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Përdoruesi i caktuar për %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Përdoruesi që u caktua për %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Menaxheri që krijoji %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Menaxheri që modifikoi së fundi %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Menaxheri i atij që është caktuar për %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Menaxheri i atij që ishte caktuar për %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'roli: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'ekipi: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Sugjerime',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Sintaksë e gabuar shprehjeje.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Po vërtetohet përkufizimi i procesit: Po merren cilësimet e elementit',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Po vërtetohet përkufizimi i procesit: Po vërtetohen cilësimet e elementit',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Po freskohet lista e gabimeve...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Vërtetimi u krye! Problemet e gjetura: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' probleme',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Vërtetimi në progres',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Paralajmërim: Procesi mund të ndalojë te ky element ose të shkaktojë efekte të tjera të pasynuara',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Gabim: Procesi do të ndalojë te ky element',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Elementi nuk mund të vërtetohet',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elementi nuk plotëson numrin minimal të rrjedhave hyrëse',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Ky element duhet të ketë një numër minimal shtigjesh hyrëse. Kontrollo numrin e shtigjeve që lidhen me këtë element për t&#39;u siguruar që është plotësuar numri minimal.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Elementi tejkalon numrin maksimal të rrjedhave hyrëse',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Ky element ka një numër maksimal shtigjesh hyrëse që nuk duhet tejkaluar. Kontrollo numrin e shtigjeve që lidhen me këtë element për t&#39;u siguruar që të mos tejkalohet numri maksimal.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elementi nuk plotëson numrin minimal të rrjedhave dalëse',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Ky element duhet të ketë një numër minimal shtigjesh dalëse. Kontrollo numrin e shtigjeve që të çojnë te ky element për t&#39;u siguruar që është plotësuar numri minimal.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elementi tejkalon numrin maksimal të rrjedhave dalëse',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Ky element ka një numër maksimal shtigjesh dalëse që nuk duhet tejkaluar. Kontrollo numrin e shtigjeve që të çojnë te ky element për t&#39;u siguruar që të mos tejkalohet numri maksimal.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Fusha e domosdoshme nuk është caktuar',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Ky element përmban një fushë të domosdoshme, e cila nuk është caktuar. Kontrollo cilësimet e elementit për t&#39;u siguruar që fusha është caktuar saktë dhe pastaj sigurohu që të klikosh butonin "Ruaj".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Të dhënat nuk ekzistojnë aktualisht në sistem',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Cilësimet për këtë element i referohen disa të dhënave specifike që nuk ekzistojnë në bazën e të dhënave. Kontrollo cilësimet e elementit për t&#39;u siguruar që ekzistojnë të gjitha të dhënat e referuara (d.m.th. përdoruesit specifikë, fushat e moduleve, ekipet etj.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Shprehja e kutisë së kritereve nuk do të ketë kurrë vlerë reale',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kutitë e kritereve përmbajnë shprehje logjike DHE/OSE/NUK. Ky gabim do të thotë se kutia e kritereve në cilësimet e elementit është konfiguruar në mënyrë të tillë që shprehja të mos jetë kurrë reale. Kontrollo kutinë e kritereve për të eliminuar kontradiktat logjike që nuk e lejojnë shprehjen të jetë reale.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Elementi nuk është i arritshëm',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Në mënyrë që elementi të ekzekutohet në një proces, ai duhet të jetë i lidhur me një shteg. Vargu i shtigjeve që të çojnë te ky element duhet të fillojë me një element nisjeje. Kontrollo vargun e shtigjeve hyrëse në këtë element për t&#39;u siguruar që vargu fillon me një element nisjeje.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Kriteret e kohës së pritjes duhet të përmbajnë saktësisht një konstante datë-ore',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Ky element rasti pritjeje është konfiguruar duke përdorur kutinë e kritereve "Datë e përcaktuar". Kjo kuti duhet të përmbajë saktësisht një konstante "Datë-orë e përcaktuar" ose referencë fushe Datë-orë. Të gjitha shprehjet e tjera duhet të jenë veprime matematikore (+/-) ose konstante "Diapazon kohor".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Vlera e specifikuar e kohëzgjatjes nuk duhet të jetë zero',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Ky element rasti pritjeje është konfiguruar duke përdorur cilësimin "Kohëzgjatja". Ky cilësim nuk duhet të jetë i barabartë me zero, përndryshe do të ndodhë një gabim. Kontrollo cilësimet e elementit për t&#39;u siguruar që "Kohëzgjatja" nuk është caktuar në zero.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Parametrat e kohës së pritjes nuk janë caktuar',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Ky element rasti pritjeje nuk ka cilësime të konfiguruara. Kontrollo cilësimet e elementit për t&#39;u siguruar që është zgjedhur "Kohëzgjatja" ose "Datë e përcaktuar", jep vlerat e dëshiruara dhe kliko butonin "Ruaj".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Koha e pritur është më e vogël se zero',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Te cilësimet e "Formularët" për këtë element aktiviteti, koha e pritur është caktuar në një vlerë negative, gjë e cila do të shkaktojë ngrirjen e procesit në momentin e arritjes së elementit. Hap cilësimet e "Formularët" për këtë element për të ndryshuar kohën e pritur në një numër jonegativ.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Lloji i veprimit është [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Këtij elementi veprimi nuk i është përcaktuar lloji. Kjo mund të ndryshohet duke klikuar me të djathtën tek elementi i veprimit dhe duke zgjedhur më pas një lloj nga lista "Lloji i veprimit".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Nuk garantohet marrja e një shtegu',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Ky mesazh gabimi ndodh sepse ka mundësi që të mos merret asnjë nga shtigjet e këtij elementi portëkalimi, gjë e cila do të shkaktojë ndalimin e procesit. Këshillohet që të caktohet marrja e një shtegu të paracaktuar në rast se nuk përmbushet asnjë nga shprehjet e kutisë së kritereve te cilësimet e elementit. Kjo mund të bëhet duke klikuar me të djathtën tek elementi i portëkalimit dhe duke zgjedhur një element te menyja "Rrjedha e paracaktuar". Nëse nuk specifikohet një shteg i paracaktuar, shprehjet e kutisë së kritereve te cilësimet e elementit duhet të ndryshohen për t&#39;u siguruar që të paktën njera prej tyre do të jetë reale gjatë kryerjes së procesit.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Lloji i portëkalimit të mbledhësit nuk përputhet me llojin e portëkalimit të një rrjedhe hyrëse',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Portëkalimet e ndarësit i zgjerojnë proceset në disa degë. Kur përdoret një portëkalim mbledhësi për t&#39;i rimbledhur këto degë sërish në një shteg, duhet të përdoret lloji i duhur i portëkalimit të mbledhësit, në varësi të llojit të portëkalimit të ndarësit që u përdor për të krijuar degët. Për degët e krijuara me portëkalime ndarësi ekskluzive ose të bazuara në raste, përdor një portëkalim mbledhësi ekskluziv për t&#39;i rimbledhur. Për degët e krijuara me portëkalime ndarësi paralele ose përfshirëse, përdor një portëkalim mbledhësi paralel për t&#39;i rimbledhur.',
 );

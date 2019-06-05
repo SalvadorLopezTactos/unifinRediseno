@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Odp.:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Nieprawidłowe hasło lub login',
-	'ERR_BODY_TOO_LONG'		=> '\\rTekst jest za długi, aby pobrać CAŁĄ wiadomość. Przycięto.',
+	'ERR_BODY_TOO_LONG'		=> '\rTekst jest za długi, aby pobrać CAŁĄ wiadomość. Przycięto.',
 	'ERR_INI_ZLIB'			=> 'Nie można czasowo wyłączyć kompresji Zlib. Testowanie ustawień może się nie powieść.',
 	'ERR_MAILBOX_FAIL'		=> 'Nie można sprawdzić żadnych skrzynek pocztowych.',
 	'ERR_NO_IMAP'			=> 'Nie znaleziono bibliotek IMAP.  Rozwiąż ten problem przed kontynuowaniem konfiguracji poczty przychodzącej',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Kolejki recenzentów od zespołów',
 	'LBL_GROUPFOLDER_ID'	=> 'Id grupowego folderu',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Przydziel do grupowego folderu',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Zezwól użytkownikom na odpowiadanie na wiadomość przy użyciu nazwy i adresu nadawcy',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Jeśli ta opcja jest zaznaczona, pola z nazwą i adresem nadawcy wiadomości powiązane z kontem pocztowym tej grupy będą wyświetlane jako opcja dla pola Od podczas tworzenia wiadomości przez użytkowników, którzy mają dostęp do konta pocztowego grupy.',
     'LBL_STATUS_ACTIVE'     => 'Aktywny',
     'LBL_STATUS_INACTIVE'   => 'Nieaktywny',
     'LBL_IS_PERSONAL' => 'osobiste',

@@ -11,7 +11,7 @@
  */
 
 /**
- * @deprecated Use SugarCacheApcu instead
+ * @deprecated Use Sugarcrm\Sugarcrm\Cache\Backend\APCu instead
  */
 class SugarCacheAPC extends SugarCacheAbstract
 {

@@ -17,8 +17,7 @@ a change is done in any of the sidecarFiles, sidecar will be automatically rebui
 
 ## Working with the minified files
 
-If you run the build script, you will change the minified files. Please do not commit these - leave that job to the
-team leaders.
+See [Merging-and-Updating.md](Merging-and-Updating.md).
 
 ## Testing
 

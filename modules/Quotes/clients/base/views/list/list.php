@@ -45,7 +45,7 @@ $viewdefs['Quotes']['base']['view']['list'] = array(
                     'name' => 'quote_stage',
                 ),
                 array(
-                    'label'   => 'LBL_AMOUNT',
+                    'label'   => 'LBL_TOTAL',
                     'enabled' => true,
                     'default' => true,
                     'name'    => 'total',

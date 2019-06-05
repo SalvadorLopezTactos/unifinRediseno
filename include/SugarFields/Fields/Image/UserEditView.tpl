@@ -121,7 +121,7 @@
 				{rdelim}
 			else{ldelim}
 				field.value=null;
-				alert("{$APP.LBL_UPLOAD_IMAGE_FILE_INVALID}");
+				alert("{$APP.LBL_UPLOAD_IMAGE_FILE_INVALID|strip}");
 			{rdelim}
 	{rdelim}
 </script>

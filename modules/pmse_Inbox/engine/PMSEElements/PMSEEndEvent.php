@@ -43,10 +43,10 @@ class PMSEEndEvent extends PMSEEvent
         if ($count <= 1) {
             //close the whole case, flows and remaining threads included
             $this->caseFlowHandler->closeCase($flowData['cas_id']);
-        } else {
-            //close the thread
-            $this->caseFlowHandler->closeThreadByCaseIndex($flowData['cas_id'], $flowData['cas_previous']);
         }
+
+        //close the thread
+        $this->caseFlowHandler->closeThreadByCaseIndex($flowData['cas_id'], $flowData['cas_previous']);
 
         $flowData['cas_flow_status'] = 'CLOSED';
         return $this->prepareResponse($flowData, 'ROUTE', 'CREATE');

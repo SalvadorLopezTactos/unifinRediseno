@@ -11,7 +11,6 @@
 
 SUGAR.inboundEmail = { };
 
-// $Id: InboundEmail.js 54045 2010-01-26 20:25:05Z roger $
 Rot13 = {
     map: null,
 

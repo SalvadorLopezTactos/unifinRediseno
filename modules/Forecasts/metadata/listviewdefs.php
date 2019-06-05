@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: listviewdefs.php 16524 2006-08-29 19:32:05Z ajay $
 $listViewDefs['ForecastOpportunities'] = array(
     'NAME' => array(
         'width' => '25',

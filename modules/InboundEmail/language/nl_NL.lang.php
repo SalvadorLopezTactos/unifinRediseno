@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login of wachtwoord onjuist',
-	'ERR_BODY_TOO_LONG'		=> '\\rBody tekst is te lang voor de volledige e-mail. Derhalve ingekort.',
+	'ERR_BODY_TOO_LONG'		=> '\rBody tekst is te lang voor de volledige e-mail. Derhalve ingekort.',
 	'ERR_INI_ZLIB'			=> 'Kon de Zlib-compressie niet tijdelijk uitzetten. "Test Settings" zouden kunnen mislukken.',
 	'ERR_MAILBOX_FAIL'		=> 'Het is niet mogelijk om mailboxen te ontvangen.',
 	'ERR_NO_IMAP'			=> 'Geen IMAP bibliotheken gevonden. U dient dit eerst op te lossen alvorens verder te gaan met de inkomende e-mail.',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Vul de wachtrij van teams',
 	'LBL_GROUPFOLDER_ID'	=> 'Groepsmap id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Toewijzen aan groepsmap',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Sta toe dat gebruikers e-mail versturen met de "Van" naam én adres, als het "Antwoord aan"-adres.',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Wanneer deze optie is geselecteerd, zullen de "Van" naam en "Van e-mailadres" behorend bij deze groepsmailaccount als optie verschijnen voor het "Van" veld bij het aanmaken van e-mail. Dit geldt alleen voor gebruikers die toegang hebben tot de groepsmailaccount.',
     'LBL_STATUS_ACTIVE'     => 'Actief',
     'LBL_STATUS_INACTIVE'   => 'Inactief',
     'LBL_IS_PERSONAL' => 'persoonlijk',

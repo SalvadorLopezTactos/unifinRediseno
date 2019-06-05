@@ -60,7 +60,8 @@ class Converter
         if (!preg_match(SrnRules::TENANT_REGEX, $components[4])) {
             throw new \InvalidArgumentException('Invalid tenant id');
         }
-        $components[4] = str_pad($components[4], SrnRules::TENANT_LENGTH, '0', STR_PAD_LEFT);
+
+        $components[4] = static::normalizeTenantId($components[4]);
 
         $srn = new Srn();
         return $srn->setPartition($components[1])
@@ -68,6 +69,16 @@ class Converter
             ->setRegion($components[3])
             ->setTenantId($components[4])
             ->setResource(array_slice($components, 5));
+    }
+
+    /**
+     * Converts short tenant to fully length tenant string
+     * @param string $tenantId
+     * @return string
+     */
+    public static function normalizeTenantId(string $tenantId): string
+    {
+        return str_pad($tenantId, SrnRules::TENANT_LENGTH, '0', STR_PAD_LEFT);
     }
 
     /**

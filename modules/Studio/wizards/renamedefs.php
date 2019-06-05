@@ -54,6 +54,8 @@ $renamedefs = array(
             array('name' => 'LBL_OPPORTUNITIES_DESC', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_MANAGE_OPPORTUNITIES_TITLE', 'type' => 'plural', 'source' => 'Opportunities'),
             array('name' => 'LBL_MANAGE_OPPORTUNITIES_DESC', 'type' => 'plural', 'source' => 'Opportunities'),
+            array('name' => 'LBL_MANAGE_QUOTES_TITLE', 'type' => 'plural', 'source' => 'Quotes'),
+            array('name' => 'LBL_MANAGE_QUOTES', 'type' => 'singular', 'source' => 'Quotes'),
         ),
         'Bugs' => array(
             array('name' => 'LBL_NOTES_SUBPANEL_TITLE', 'type' => 'plural', 'source' => 'Notes'),
@@ -720,9 +722,11 @@ $renamedefs = array(
             array('name' => 'LBL_PRODUCT_CATALOG_DESC', 'type' => 'singular', 'source' => 'ProductTemplates'),
             array('name' => 'LBL_PRODUCT_CATALOG_DASHLET_DESC', 'type' => 'singular', 'source' => 'ProductTemplates'),
             array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE', 'type' => 'plural', 'source' => 'Products'),
-            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE', 'type' => 'singular', 'source' => 'Quote'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE', 'type' => 'singular', 'source' => 'Quotes'),
             array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME', 'type' => 'plural', 'source' => 'Products'),
-            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME', 'type' => 'singular', 'source' => 'Quote'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME', 'type' => 'singular', 'source' => 'Quotes'),
+            array('name' => 'LBL_HELP_MORE_INFO', 'type' => 'plural', 'source' => 'Quotes'),
+            array('name' => 'LBL_CONFIG_TITLE_MODULE_SETTINGS', 'type' => 'plural', 'source' => 'Quotes'),
         ),
         'Quotas' => array(
             array('name' => 'LNK_FORECAST_LIST', 'type' => 'singular', 'source' => 'Forecasts'),
@@ -926,6 +930,14 @@ $renamedefs = array(
             array('name' => 'LBL_SEARCH_TP_NAME', 'type' => 'singular', 'source' => 'TimePeriods'),
             array('name' => 'ERR_TIME_PERIOD_DATE_RANGE', 'type' => 'singular', 'source' => 'TimePeriods'),
             array('name' => 'LBL_LIST_WARNING', 'type' => 'singular', 'source' => 'TimePeriods'),
+        ),
+        'Users' => array(
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED', 'type' => 'plural', 'source' => 'RevenueLineItems'),
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED', 'type' => 'singular', 'source' => 'Currencies'),
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'plural', 'source' => 'RevenueLineItems'),
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'singular', 'source' => 'Opportunities'),
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT', 'type' => 'plural', 'source' => 'Currencies'),
         ),
     ),
     'global' => array(

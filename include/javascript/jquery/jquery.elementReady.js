@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 /* jQuery elementReady plugin
  * Version 0.6
  * Copyright (C) 2007-08 Bennett McElwee.

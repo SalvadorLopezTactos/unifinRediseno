@@ -19,7 +19,7 @@
 {sugar_csrf_form_token}
 <input type="hidden" name="module" value="Import">
 <input type="hidden" name="type" value="{$TYPE}">
-<input type="hidden" name="source" id="source" value="{$SOURCE}">
+<input type="hidden" name="source" id="source" value="{$SOURCE|escape:'html':'UTF-8'}">
 <input type="hidden" name="source_id" value="{$SOURCE_ID}">
 <input type="hidden" name="action" value="Step3">
 <input type="hidden" name="import_module" value="{$IMPORT_MODULE}">

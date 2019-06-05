@@ -36,7 +36,7 @@ class SugarUpgradeRenamePAToAWScheduler extends UpgradeScript
     protected function updateAWFScheduledJobsName($table)
     {
         if ($table) {
-            $search = 'Process Author Scheduled Job';
+            $search = 'Advanced Workflow Scheduled Job';
             $name = $this->db->quoted($search);
             $ids = [];
             $sql = "SELECT id FROM $table WHERE name = $name";
@@ -51,8 +51,8 @@ class SugarUpgradeRenamePAToAWScheduler extends UpgradeScript
                 $count = count($ids);
                 $modStrings = $this->getModuleLangArray();
                 $replace = !empty($modStrings) && isset($modStrings['LBL_OOTB_PROCESS_AUTHOR_JOB']) ?
-                    $modStrings['LBL_OOTB_PROCESS_AUTHOR_JOB'] :
-                    'Advanced Workflow Scheduled Job';
+                    "SugarBPM\u{2122}" . $modStrings['LBL_OOTB_PROCESS_AUTHOR_JOB'] :
+                    "SugarBPM\u{2122} Scheduled Job";
                 $name = $this->db->quoted($replace);
                 array_walk($ids, function (&$val, $key, $db) {
                     $val = $db->quoted($val);

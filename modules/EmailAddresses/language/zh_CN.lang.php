@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => '删除',
     'LBL_MODULE_NAME' => '电子邮件地址',
     'LBL_MODULE_NAME_SINGULAR' => '电子邮件地址',
+    'LBL_CONFIRMATION_REQUESTED_ON' => '确认请求采取行动',
+    'LBL_CONFIRMATION_TITLE' => '谢谢',
+    'LBL_CONFIRMATION_MESSAGE' => '您的订阅已确认。您已被添加到我们的列表，即将收到我们的信息。',
 );

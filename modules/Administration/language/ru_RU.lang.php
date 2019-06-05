@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Предупреждение: Для сохранения ваших данных инсталлятор должен быть заблокирован путем установки переменной installer_locked в значение "true" в файле config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Сообщение: До истечения срока действия вашей лицензии осталось:",
     'WARN_LICENSE_EXPIRED2' =>"дня(дней). Пожалуйста, перейдите к <a href=\"index.php?action=LicenseSettings&module=Administration\">\"License Management\"</a>  в панели администратора.",
-    'WARN_LICENSE_SEATS'=>  "Предупреждение: Количество пользовательских лицензий превышено на",
-    'WARN_LICENSE_SEATS2' => ".  Пожалуйста, свяжитесь с Вашим представителем SugarCRM по продажам или отправьте e-mail на <a href=&#39;mailto:sales@sugarcrm.com&#39;>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Предупреждение.</b> Зарегистрировано ",
+    'WARN_LICENSE_SEATS2' => " активных пользователя(-ей), однако условия вашей подписки предусматривают только ",
+    'WARN_LICENSE_SEATS3' =>
+        "<p class=\"error\">Деактивируйте некоторых пользователей, обратитесь к своему партнеру или менеджеру по продажам"
+        . " либо отправьте электронное письмо по адресу <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Подробнее см. в статье "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Типы пользователей и лицензии Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Предупреждение: Количество активных пользователей уже равно максимальному количеству допустимых лицензий:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Предупреждение: Количество активных пользователей уже равно максимальному количеству допустимых лицензий",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Предупреждение: Количество активных пользователей допутимых Вашей лицензией, соответствует количеству активных пользователей в системе. Вы не сможете создать дополнительных активных пользователей.",
-    'WARN_REPAIR_CONFIG' => 'Файл config.php должен быть восстановлен. Пожалуйста, используйте <a href="index.php?module=Administration&action=RebuildConfig">Rebuild Config File</a> скрипт на странице Восстановления в панели администратора для восстановления файла config.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Предупреждение.</b> Вы не сможете создать дополнительных активных пользователей."
+        . " Приобретите дополнительные подписки.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Предупреждение.</b> Вы не сможете создать дополнительных активных пользователей."
+        . " Приобретите дополнительные подписки.",
+    'WARN_REPAIR_CONFIG' => '<b>Предупреждение.</b> Файл config.php требует восстановления. Чтобы восстановить файл конфигурации, используйте сценарий <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Обновление файла конфигурации</a> в области «Администрирование» на странице «Восстановление».',
     'WARN_UPGRADE_APP'=> "В данный момент доступна обновленная версия приложения.",
     'WARN_UPGRADE' => 'Предупреждение: пожалуйста, обновите систему до версии',
     'WARN_UPGRADENOTE' => 'Примечание:',
@@ -1243,15 +1252,17 @@ $mod_strings = array (
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Файл метаданных не найден.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Настройки',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Настройка параметров Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Средство просмотра лога',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Доступ к журналу Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Доступ к ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' журналу.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Список процессов',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Со списком процессов можно ознакомиться здесь.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Настройка ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' параметров и просмотр журналов. Управление всеми процессами BPM для всех пользователей с помощью списка процессов.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Настройка параметров Advanced Workflow и просмотр журналов. Управление всеми процессами BPM для всех пользователей с помощью списка процессов.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Настройка коммерческих предложений',
+    'LBL_MANAGE_QUOTES' => 'Настройка макета таблицы коммерческих предложений',
 );

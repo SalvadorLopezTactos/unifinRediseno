@@ -12,11 +12,10 @@
 
 namespace Sugarcrm\IdentityProvider\App\Authentication;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Psr\Log\LoggerInterface;
+use Sugarcrm\IdentityProvider\Srn;
 
 class BearerAuthentication
 {
@@ -37,7 +36,18 @@ class BearerAuthentication
      */
     protected $requiredScope;
 
-    public function __construct(oAuth2Service $oAuth2Service, $requiredScope, LoggerInterface $logger)
+    /**
+     * @var string
+     */
+    protected $legacyScope = 'idp.auth.password';
+
+    /**
+     * BearerAuthentication constructor.
+     * @param oAuth2Service $oAuth2Service
+     * @param string $requiredScope
+     * @param LoggerInterface $logger
+     */
+    public function __construct(oAuth2Service $oAuth2Service, string $requiredScope, LoggerInterface $logger)
     {
         $this->oAuth2Service = $oAuth2Service;
         $this->requiredScope = $requiredScope;
@@ -46,20 +56,21 @@ class BearerAuthentication
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @param Srn\Srn $tenantSrn
+     * @throws AuthenticationException
      */
-    public function authenticateClient(Request $request)
+    public function authenticateClient(Request $request, Srn\Srn $tenantSrn)
     {
         try {
             $accessToken = $this->getToken($request);
             $result = $this->oAuth2Service->introspectToken($accessToken);
-            $this->checkIsClientAllowed($result);
+            $this->checkIsClientAllowed($result, $tenantSrn);
         } catch (AuthenticationException $exception) {
             $this->logger->warning('Authentication Exception occurred on client Authentication', [
                 'exception' => $exception,
                 'tags' => ['IdM.Bearer.authentication'],
             ]);
-            return $this->getUnauthorizedResponse();
+            throw $exception;
         }
     }
 
@@ -83,30 +94,37 @@ class BearerAuthentication
     /**
      * Check result of introspection
      * @param array $result
+     * @param Srn\Srn $tenantSrn
      * @throws AuthenticationException
      */
-    protected function checkIsClientAllowed(array $result)
+    protected function checkIsClientAllowed(array $result, Srn\Srn $tenantSrn)
     {
         if (!array_key_exists('scope', $result)) {
             throw new AuthenticationException('Field scope in result not exists');
         }
 
-        if (!in_array($this->requiredScope, explode(self::SCOPE_DELIMITER, $result['scope']))) {
+        $res = array_intersect(
+            [$this->requiredScope, $this->legacyScope],
+            explode(self::SCOPE_DELIMITER, $result['scope'])
+        );
+        if (empty($res)) {
             throw new AuthenticationException('Invalid scope');
         }
-    }
+        if (!in_array($this->requiredScope, $res)) {
+            $this->logger->warning('Clients still use legacy scope', [
+                'legacyScope' => $this->legacyScope,
+                'tags' => ['IdM.Bearer.authentication'],
+            ]);
+        }
 
-    /**
-     * Create response if user credentials are invalid.
-     * @return JsonResponse
-     */
-    protected function getUnauthorizedResponse()
-    {
-        $result = [
-            'status' => 'error',
-            'error' => 'The request could not be authorized',
-        ];
-        $response = new JsonResponse($result, Response::HTTP_UNAUTHORIZED);
-        return $response;
+        try {
+            $clientSrn = Srn\Converter::fromString($result['client_id']);
+        } catch (\Exception $e) {
+            throw new AuthenticationException('Wrong client id:' . $e->getMessage());
+        }
+
+        if ($clientSrn->getTenantId() != $tenantSrn->getTenantId()) {
+            throw new AuthenticationException('Tenants mismatch');
+        }
     }
 }

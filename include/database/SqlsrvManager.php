@@ -58,8 +58,6 @@
 * default	This field sets the default value for the field definition.
 */
 
-use Doctrine\DBAL\Query\QueryBuilder;
-
 /**
  * SQL Server (sqlsrv) manager
  */
@@ -78,39 +76,42 @@ class SqlsrvManager extends MssqlManager
         "recursive_query" => true,
     );
 
+    /**
+     * {@inheritDoc}
+     */
     protected $type_map = array(
-            'int'      => 'int',
-            'double'   => 'float',
-            'float'    => 'float',
-            'uint'     => 'int',
-            'ulong'    => 'int',
-            'long'     => 'bigint',
-            'short'    => 'smallint',
-            'varchar'  => 'nvarchar',
-            'text'     => 'nvarchar(max)',
-            'longtext' => 'nvarchar(max)',
-            'date'     => 'datetime',
-            'enum'     => 'nvarchar',
-            'relate'   => 'nvarchar',
-            'multienum'=> 'nvarchar(max)',
-            'html'     => 'nvarchar(max)',
-            'longhtml' => 'nvarchar(max)',
-            'datetime' => 'datetime',
-            'datetimecombo' => 'datetime',
-            'time'     => 'datetime',
-            'bool'     => 'bit',
-            'tinyint'  => 'tinyint',
-            'char'     => 'char',
-            'blob'     => 'nvarchar(max)',
-            'longblob' => 'nvarchar(max)',
-            'currency' => 'decimal(26,6)',
-            'decimal'  => 'decimal',
-            'decimal2' => 'decimal',
-            'id'       => 'varchar(36)',
-            'url'      => 'nvarchar',
-            'encrypt'  => 'nvarchar',
-            'file'     => 'nvarchar',
-	        'decimal_tpl' => 'decimal(%d, %d)',
+        'blob'          => 'nvarchar(max)',
+        'bool'          => 'bit',
+        'char'          => 'char',
+        'currency'      => 'decimal(26,6)',
+        'date'          => 'date',
+        'datetimecombo' => 'datetime2(0)',
+        'datetime'      => 'datetime2(0)',
+        'decimal'       => 'decimal',
+        'decimal2'      => 'decimal',
+        'decimal_tpl'   => 'decimal(%d, %d)',
+        'double'        => 'float',
+        'encrypt'       => 'nvarchar',
+        'enum'          => 'nvarchar',
+        'file'          => 'nvarchar',
+        'float'         => 'float',
+        'html'          => 'nvarchar(max)',
+        'id'            => 'nvarchar(36)',
+        'int'           => 'int',
+        'long'          => 'bigint',
+        'longblob'      => 'nvarchar(max)',
+        'longhtml'      => 'nvarchar(max)',
+        'longtext'      => 'nvarchar(max)',
+        'multienum'     => 'nvarchar(max)',
+        'relate'        => 'nvarchar',
+        'short'         => 'smallint',
+        'text'          => 'nvarchar(max)',
+        'time'          => 'datetime2(0)',
+        'tinyint'       => 'tinyint',
+        'uint'          => 'int',
+        'ulong'         => 'int',
+        'url'           => 'nvarchar',
+        'varchar'       => 'nvarchar',
     );
 
     /**
@@ -160,7 +161,10 @@ class SqlsrvManager extends MssqlManager
         }
         $this->database = sqlsrv_connect($connect_param, $options);
         if(empty($this->database)) {
-            $GLOBALS['log']->fatal("Could not connect to server ".$configOptions['db_host_name']." as ".$configOptions['db_user_name'].".");
+            $this->logger->alert(
+                'Could not connect to server ' . $configOptions['db_host_name']
+                . ' as ' . $configOptions['db_user_name'] . '.'
+            );
             if($dieOnError) {
                     if(isset($GLOBALS['app_strings']['ERR_NO_DB'])) {
                         sugar_die($GLOBALS['app_strings']['ERR_NO_DB']);
@@ -172,14 +176,15 @@ class SqlsrvManager extends MssqlManager
             }
         }
 
-        if($this->checkError('Could Not Connect:', $dieOnError))
-            $GLOBALS['log']->info("connected to db");
+        if ($this->checkError('Could Not Connect:', $dieOnError)) {
+            $this->logger->info('connected to db');
+        }
 
         sqlsrv_query($this->database, 'SET DATEFORMAT mdy');
 
         $this->connectOptions = $configOptions;
 
-        $GLOBALS['log']->info("Connect:".$this->database);
+        $this->logger->info('Connect:' . $this->database);
 
         return true;
     }
@@ -195,14 +200,14 @@ class SqlsrvManager extends MssqlManager
         $sql = $this->_appendN($sql);
 
         $this->countQuery($sql);
-        $GLOBALS['log']->info('Query:' . $sql);
+        $this->logger->info('Query:' . $sql);
         $this->checkConnection();
         $this->query_time = microtime(true);
 
         $result = $suppress?@sqlsrv_query($this->database, $sql):sqlsrv_query($this->database, $sql);
 
         $this->query_time = microtime(true) - $this->query_time;
-        $GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
+        $this->logger->info('Query Execution Time:' . $this->query_time);
 
         $this->dump_slow_queries($sql);
 
@@ -263,26 +268,6 @@ class SqlsrvManager extends MssqlManager
             return parent::convert($string, $type, $additional_parameters);
     }
 
-	/**
-     * Compares two vardefs. Overriding 39098  due to bug: 39098 . IN 6.0 we changed the id columns to dbType = 'id'
-     * for example emails_beans.  In 554 the field email_id was nvarchar but in 6.0 since it id dbType = 'id' we would want to alter
-     * it to varchar. This code will prevent it.
-     *
-     * @param  array  $fielddef1 This is from the database
-     * @param  array  $fielddef2 This is from the vardef
-     * @param bool $ignoreName Ignore name-only differences?
-     * @return bool   true if they match, false if they don't
-     */
-    public function compareVarDefs($fielddef1, $fielddef2, $ignoreName = false)
-    {
-        if((isset($fielddef2['dbType']) && $fielddef2['dbType'] == 'id') || preg_match('/(_id$|^id$)/', $fielddef2['name'])){
-            if(isset($fielddef1['type']) && isset($fielddef2['type'])){
-                $fielddef2['type'] = $fielddef1['type'];
-            }
-        }
-        return parent::compareVarDefs($fielddef1, $fielddef2, $ignoreName);
-    }
-
     /**
      * Disconnects from the database
      *
@@ -290,7 +275,7 @@ class SqlsrvManager extends MssqlManager
      */
     public function disconnect()
     {
-    	$GLOBALS['log']->debug('Calling Mssql::disconnect()');
+        $this->logger->debug('Calling Mssql::disconnect()');
         if(!empty($this->database)){
             $this->freeResult();
             sqlsrv_close($this->database);
@@ -346,7 +331,7 @@ class SqlsrvManager extends MssqlManager
     {
         // Sanity check for getting columns
         if (empty($tablename)) {
-            $this->log->error(__METHOD__ . ' called with an empty tablename argument');
+            $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
         }
 
@@ -448,8 +433,7 @@ EOSQL;
     /**
      * Override method to add support for detecting and dropping fulltext indices.
      *
-     * @see DBManager::changeColumnSQL()
-     * @see MssqlHelper::changeColumnSQL()
+     * {@inheritDoc}
      */
     protected function changeColumnSQL($tablename,$fieldDefs, $action, $ignoreRequired = false)
     {
@@ -523,7 +507,7 @@ EOSQL;
      */
     protected function verifyGenericQueryRollback($type, $table, $query)
     {
-        $this->log->debug("verifying $type statement");
+        $this->logger->debug("verifying $type statement");
         if(!sqlsrv_begin_transaction($this->database)) {
             return "Failed to create transaction";
         }

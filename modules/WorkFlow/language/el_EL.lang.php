@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Ορισμοί Ροής Εργασίας',
   'LBL_MODULE_NAME_SINGULAR' => 'Ορισμός Ροής Εργασίας',
-  'LBL_MODULE_ID' => 'Ροή Εργασίας',  
+  'LBL_MODULE_ID' => 'Ροή Εργασίας',
   'LBL_MODULE_TITLE' => 'Ροή Εργασίας: Αρχή',
   'LBL_SEARCH_FORM_TITLE' => 'Αναζήτηση Ροής Εργασίας',
   'LBL_LIST_FORM_TITLE' => 'Λίστα Ροής Εργασίας',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Ενότητα Στόχου:',
   'LBL_LIST_ORDER' => 'Σειρά Διαδικασίας:',
   'LBL_FROM_NAME' => 'Από Όνομα:',
-  'LBL_FROM_ADDRESS' => 'Μορφή Διεύθυνσης:',  
+  'LBL_FROM_ADDRESS' => 'Μορφή Διεύθυνσης:',
   'LNK_NEW_WORKFLOW' => 'Δημιουργία Ορισμού Ροής Εργασίας',
-  'LNK_WORKFLOW' => 'Ορισμός Λίστας Ροής Εργασίας', 
-  
-  
+  'LNK_WORKFLOW' => 'Ορισμός Λίστας Ροής Εργασίας',
+
+
   'LBL_ALERT_TEMPLATES' => 'Πρότυπο Προειδοποίησης',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Δημιουργία προτύπου προειδοποίησης:',
   'LBL_SUBJECT' => 'Θέμα:',
-  
+
   'LBL_RECORD_TYPE' => 'Ισχύει για:',
  'LBL_RELATED_MODULE'=> 'Σχετικά ενότητα:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Εκτέλεση Εντολών Ροής Εργασίας',
 	'LNK_ALERT_TEMPLATES' => 'Πρότυπο Email Προειδοποίησης',
 	'LNK_PROCESS_VIEW' => 'Εκτέλεση Εντολών Ροής Εργασίας',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Τύπος',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> Η λειτουργία Ροής εργασίων Sugarκαι Διαχείρισης Ροής εργασίων θα αφαιρεθούν σε μελλοντική έκδοση του Sugar. Οι πελάτες της έκδοσης Sugar Enterprise θα πρέπει να ξεκινήσουν να χρησιμοποιούν τη λειτουργία που παρέχεται από το Προχωρημένη Ροής εργασίων Sugar. Κάντε κλικ στο <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> για περισσότερες πληροφορίες.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Σημείωση:</strong> Η Ροή Εργασίας Sugar και η λειτουργία Διαχείρισης ροής εργασίας είναι σε λειτουργία συντήρησης. Οι πελάτες έκδοσης Enterprise του Sugar θα πρέπει να χρησιμοποιούν τη λειτουργικότητα που παρέχεται από το SugarBPM<sup class="trademark">TM</sup>.',
 );
 

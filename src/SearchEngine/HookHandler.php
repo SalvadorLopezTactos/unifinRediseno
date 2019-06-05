@@ -30,7 +30,13 @@ class HookHandler
     {
         // no cookies if you are not a real bean
         if (!$bean instanceof \SugarBean) {
-            $this->getLogger()->fatal("Indexbean: Not bean ->" . var_export(get_class($bean), true));
+            if (is_object($bean)) {
+                $string = get_class($bean);
+            } else {
+                $string = gettype($bean);
+            }
+
+            $this->getLogger()->fatal("IndexBean: Not bean -> " . $string);
             return;
         }
 

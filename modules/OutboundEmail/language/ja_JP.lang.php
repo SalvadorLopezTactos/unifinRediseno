@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'これは、システム アカウントです。',
     'LBL_EMAIL_ADDRESS_ID' => 'EメールアドレスID',
     'LBL_TYPE' => 'タイプ',
+    'LBL_REPLY_TO_NAME' => '返信先 (Reply-To) の名前',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => '返信先 (Reply-To) のEメールアドレス',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '返信先 (Reply-To) の Eメールアドレス ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => '返信先 (Reply-To) の Eメールアドレス',
+    'LBL_PRIMARY_TEAM' => '主チーム',
 );

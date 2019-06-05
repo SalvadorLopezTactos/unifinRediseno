@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyPipelineBySalesStageDashlet.php 24275 2007-07-13 04:26:44Z awu $
 
 
 class MyOpportunitiesGaugeDashlet extends DashletGenericChart 

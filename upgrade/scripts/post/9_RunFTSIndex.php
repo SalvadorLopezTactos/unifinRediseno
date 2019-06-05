@@ -12,6 +12,7 @@
 
 use Elastica\Exception\ResponseException;
 use Elastica\Request;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\CommentLogHandler;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index;
@@ -42,7 +43,7 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
             // or old sugar version <=8.0.0 and Elastic version is 6.x
             $this->dropExistingIndex();
             $this->runFTSIndex();
-        } elseif (version_compare($this->from_version, '8.0.0', '<')) {
+        } elseif (version_compare($this->from_version, '8.3.0', '<')) {
             $this->updateIndexMapping();
         }
     }
@@ -95,9 +96,8 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
         $engine = SearchEngine::getInstance()->getEngine();
         if ($engine instanceof Elastic) {
             try {
-                $handler = new ErasedFieldsHandler();
                 // update mapping
-                $engine->getContainer()->indexManager->updateIndexMappings([], $handler);
+                $engine->getContainer()->indexManager->updateIndexMappings([], new CommentLogHandler());
 
                 $this->log("SugarUpgradeRunFTSIndex: mappings on Elastic server have been updated.");
             } catch (Exception $e) {

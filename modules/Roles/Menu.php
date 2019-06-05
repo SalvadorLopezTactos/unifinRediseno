@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Menu.php 13782 2006-06-06 17:58:55Z majed $
 
 global $mod_strings;
 

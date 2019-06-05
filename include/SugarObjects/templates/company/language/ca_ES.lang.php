@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Emissió de Factures',
 	'LBL_PUSH_SHIPPING' => 'Emissió d&#39;enviaments',
 	'LBL_SAVE_ACCOUNT' => 'Guardar Compte',
+    'LBL_SERVICE_LEVEL' => 'Nivell de servei',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Ciutat d&#39;enviament:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'País d&#39;enviament:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Codi postal d&#39;enviament:',

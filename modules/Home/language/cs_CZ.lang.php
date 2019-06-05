@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML – Jednoduchý panel nástrojů SAML pro PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - The overflow:scroll for mobile webkit. Native scrolling inside a fixed width/height element.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas – FlashCanvas je knihovna jazyka JavaScript, která přidává podporu platformy HTML5 Canvas do prohlížeče Internet Explorer. Vykresluje tvary a obrázky prostřednictvím kreslicího rozhraní API platformy Flash. Podporuje téměř všechna rozhraní API platformy Canvas a v mnoha případech běží rychleji než jiné podobné knihovny využívající technologii VML nebo Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit – JavaScript InfoVis Toolkit poskytuje nástroje pro vytváření interaktivních vizualizací dat pro web.',
   'LBL_SOURCE_ZEND' => 'Zend Framework – Rozhraní webové aplikace s otevřeným kódem a orientované na objekty pro PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV data parser pro PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - PHP funkce v JavaScriptu',

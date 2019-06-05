@@ -130,7 +130,7 @@ class ImportViewStep3 extends ImportView
 
         // Now build template
         $this->ss->assign("TMP_FILE", $uploadFileName );
-        $this->ss->assign("SOURCE",$this->request->getValidInputRequest('source', array('Assert\Choice' => array('choices' => self::getImportSourceOptions())), ''));
+        $this->ss->assign('SOURCE', $_REQUEST['source']);
         $this->ss->assign('TYPE', $this->request->getValidInputRequest('type', array('Assert\Choice' => array('choices' => array('import', 'update', ''))), ''));
         $this->ss->assign("DELETE_INLINE_PNG",  SugarThemeRegistry::current()->getImage('basic_search','align="absmiddle" alt="'.$app_strings['LNK_DELETE'].'" border="0"'));
         $this->ss->assign("PUBLISH_INLINE_PNG",  SugarThemeRegistry::current()->getImage('advanced_search','align="absmiddle" alt="'.$mod_strings['LBL_PUBLISH'].'" border="0"'));

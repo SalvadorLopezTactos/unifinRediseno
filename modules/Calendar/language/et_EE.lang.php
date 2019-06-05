@@ -166,7 +166,7 @@ $mod_list_strings = array(
 			"Jaan",
 			"Veebr",
 			"Märts",
-			"Aprill",
+			"Apr",
 			"Mai",
 			"Juuni",
 			"Juuli",

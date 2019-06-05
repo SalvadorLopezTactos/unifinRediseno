@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Sukurti laiko periodus ateičiai',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expire KB Articles.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikuokite patvirtintus straipsnius ir nebegaliojančius žinių bazės straipsnius.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Suplanuota užduotis',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atkurkite sugadintus komandos saugos duomenis',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Patikrinti įeinančias pašto dėžutes',
 'LBL_PERFORMFULLFTSINDEX' => 'Pilnos teksto paieškos indeksavimo sistema',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Pašalinkite laikinus PDF failus',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Paskelbkite patvirtintus straipsnius ir „Expire KB“ straipsnius.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikuokite patvirtintus straipsnius ir nebegaliojančius žinių bazės straipsnius.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => '„Elasticsearch“ eilės planavimo priemonė',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Pašalinkite diagnostikos įrankio failus',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Pašalinkite laikinus failus',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Siųsti priminimus el. paštu',
 'LBL_CLEANJOBQUEUE' => 'Išvalyti suplanuotą darbų eilę',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => '„SugarBPM“ planuoklė',
 );
 

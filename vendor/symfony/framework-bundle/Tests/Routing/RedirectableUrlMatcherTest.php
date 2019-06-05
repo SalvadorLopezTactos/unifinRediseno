@@ -11,12 +11,13 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Routing;
 
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Routing\RedirectableUrlMatcher;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
-class RedirectableUrlMatcherTest extends \PHPUnit_Framework_TestCase
+class RedirectableUrlMatcherTest extends TestCase
 {
     public function testRedirectWhenNoSlash()
     {
@@ -32,7 +33,7 @@ class RedirectableUrlMatcherTest extends \PHPUnit_Framework_TestCase
                 'scheme' => null,
                 'httpPort' => $context->getHttpPort(),
                 'httpsPort' => $context->getHttpsPort(),
-                '_route' => null,
+                '_route' => 'foo',
             ),
             $matcher->match('/foo')
         );

@@ -145,7 +145,7 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Email cím',
   'LBL_CONTACTS_SYNC' => 'Kapcsolatok',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'Az alkalmazott IDM módban kizárólag a <a href="{0}" target="_blank">Felhőkonzol</a> felületen hozható létre.',
+        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
 );
 
 

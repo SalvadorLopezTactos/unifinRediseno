@@ -12,8 +12,12 @@
 
 namespace Sugarcrm\IdentityProvider\App\Controller;
 
+use OneLogin\Saml2\Error;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\App\Application;
-use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
+use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentToken;
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ConsumeLogoutToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\AcsToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\IdpLogoutToken;
@@ -40,9 +44,9 @@ class SAMLController
     {
         return $app->getTwigService()->render('saml/status.html.twig', [
             'user_name' => $request->get('user_name'),
-            'samlLogout' => true,
+            'tid' => $request->get('tid'),
+            'provider' => strtoupper(Providers::SAML),
             'IdPSessionIndex' => $request->get('IdPSessionIndex'),
-            'user_attributes' => $request->get('user_attributes'),
         ]);
     }
 
@@ -67,21 +71,19 @@ class SAMLController
 
         try {
             $initToken = new InitiateToken();
-            if ($request->get('RelayState')) {
-                $relayState = $request->get('RelayState');
-            } else {
-                $relayState =
-                    $app->getUrlGeneratorService()->generate('samlLoginEndPoint', [], UrlGenerator::ABSOLUTE_URL);
-            }
-
+            $relayState = $request->get(
+                'RelayState',
+                $app->getUrlGeneratorService()->generate('samlLoginEndPoint', [], UrlGenerator::ABSOLUTE_URL)
+            );
             $initToken->setAttribute('returnTo', $relayState);
             $token = $app->getAuthManagerService()->authenticate($initToken);
+
             $url = $token->getAttribute('url');
             if (!empty($url)) {
                 return RedirectResponse::create($url);
-            } else {
-                $messages[] = 'Cannot initiate SAML request';
             }
+
+            $messages[] = 'Cannot initiate SAML request';
         } catch (AuthenticationException $e) {
             $messages[] = $e->getMessage();
         }
@@ -107,19 +109,38 @@ class SAMLController
             $acsToken = new AcsToken($request->get('SAMLResponse'));
             $token = $app->getAuthManagerService()->authenticate($acsToken);
             if ($token->isAuthenticated()) {
-                $tenantSrn = Srn\Converter::fromString($sessionService->get('tenant'));
+                $tenant = $sessionService->get(TenantConfigInitializer::SESSION_KEY);
+                $tenantSrn = Srn\Converter::fromString($tenant);
                 $userIdentity = $token->getUser()->getLocalUser()->getAttribute('id');
-                $userSrn = $app->getSrnManager()->createUserSrn($tenantSrn->getTenantId(), $userIdentity);
-                $token->setAttribute('srn', Srn\Converter::toString($userSrn));
+                $userSrn = $app->getSrnManager($tenantSrn->getRegion())->createUserSrn(
+                    $tenantSrn->getTenantId(),
+                    $userIdentity
+                );
+                $user = Srn\Converter::toString($userSrn);
+                $token->setAttribute('srn', $user);
+                $token->setAttribute('tenantSrn', $tenant);
+
+                $app->getRememberMeService()->store($token);
+                $app->getLogger()->info('Authentication success for {user_name} and {tenant} from {ip}', [
+                    'user_name' =>  $user,
+                    'tenant' => $tenant,
+                    'ip' => $request->getClientIp(),
+                    'tags' => ['IdM.saml'],
+                ]);
+
                 if ($sessionService->get('consent')) {
+                    /** @var ConsentToken $consentToken */
+                    $consentToken = $sessionService->get('consent');
+                    $consentToken->setTenantSRN(Srn\Converter::toString($tenantSrn));
+
                     $sessionService->set('authenticatedUser', $token);
                     return $app->redirect($app->getUrlGeneratorService()->generate('consentConfirmation'));
                 }
 
                 $urlQuery = [
                     'user_name' => $token->getUsername(),
+                    'tid' => $sessionService->get(TenantConfigInitializer::SESSION_KEY),
                     'IdPSessionIndex' => $token->getAttribute('IdPSessionIndex'),
-                    'user_attributes' => $token->getUser()->getAttribute('attributes'),
                 ];
 
                 $url = $request->get('RelayState');
@@ -156,8 +177,7 @@ class SAMLController
             $logoutToken->setAttributes(
                 [
                     'sessionIndex' => $request->get('sessionIndex'),
-                    'returnTo' => $app->getUrlGeneratorService()
-                                      ->generate('samlLogoutEndPoint', [], UrlGenerator::ABSOLUTE_URL),
+                    'returnTo' => $app->getLogoutService()->getRedirectUrl($request),
                 ]
             );
             $nameId = $request->get('nameId');
@@ -215,9 +235,9 @@ class SAMLController
             $url = $resultToken->hasAttribute('url') ? $resultToken->getAttribute('url') : $requestRelayState;
             $parameters = $resultToken->hasAttribute('parameters') ? $resultToken->getAttribute('parameters') : [];
             if (!empty($url)) {
-                return RedirectResponse::create($this->extendUrl($url, $parameters));
+                $url = $this->extendUrl($url, $parameters);
             }
-            return RedirectResponse::create($app->getUrlGeneratorService()->generate('samlLogoutEndPoint'));
+            return $app->getLogoutService()->logout($request, $url);
         }
 
         $messages = ['Invalid SAML logout data'];
@@ -246,37 +266,41 @@ class SAMLController
     public function metadataAction(Application $app, Request $request)
     {
         try {
-            $validateError = true;
-            if (!empty($app['config']['saml'])) {
-                $settings = $this->getSamlSettings($app['config']['saml']);
-                $metadata = $settings->getSPMetadata();
-                $validateError = (bool) $settings->validateMetadata($metadata);
+            $samlConfig = $app->getConfig()['saml'] ?? [];
+            if (empty($samlConfig)) {
+                throw new \RuntimeException('Invalid SAML configuration');
             }
-        } catch (\Exception $e) {
-            $validateError = true;
-        }
 
-        if (!empty($validateError)) {
+            $settings = $this->getSamlSettings($samlConfig);
+            $metadata = $settings->getSPMetadata();
+            if (!empty($errors = $settings->validateMetadata($metadata))) {
+                $msg = $app->getTranslator()->trans('SAML metadata validation failed:') . ' ' .  implode(', ', $errors);
+                throw new \RuntimeException($msg);
+            }
+
+            $response = new Response($metadata);
+            $disposition = $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                'metadata.xml'
+            );
+            $response->headers->set('Content-Disposition', $disposition);
+
+            return $response;
+        } catch (\Exception $e) {
+            $app->getLogger()->error($e->getMessage());
             return $app->redirect($app->getUrlGeneratorService()->generate('samlRender'));
         }
-
-        $response = new Response($metadata);
-        $disposition = $response->headers->makeDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'metadata.xml'
-        );
-        $response->headers->set('Content-Disposition', $disposition);
-        return $response;
     }
 
     /**
-     * create OneLogin_Saml2_Settings
+     * create OneLogin Saml2 Settings
      * @param array $config
-     * @return \OneLogin_Saml2_Settings
+     * @return Settings
+     * @throws Error
      */
-    protected function getSamlSettings(array $config)
+    protected function getSamlSettings(array $config): Settings
     {
-        return new \OneLogin_Saml2_Settings($config);
+        return new Settings($config);
     }
 
     /**
@@ -311,15 +335,17 @@ class SAMLController
      */
     protected function renderLoginForm(Application $app, array $params = [])
     {
+        $session = $app->getSession();
+        $flashBag = $session->getFlashBag();
+
         if (empty($app['config']['saml'])) {
-            return null;
+            $flashBag->add('error', 'SAML is not configured for given tenant');
+            return $app->redirect($app->getUrlGeneratorService()->generate('loginRender'));
         }
-        return $app->getTwigService()->render(
-            'saml/form.html.twig',
-            array_merge(
-                ['issuer' => $app['config']['saml']['idp']['entityId']],
-                $params
-            )
-        );
+        if (isset($params['messages'])) {
+            $flashBag->setAll(['error'=> $params['messages']]);
+        }
+
+        return $app->getTwigService()->render('saml/form.html.twig');
     }
 }

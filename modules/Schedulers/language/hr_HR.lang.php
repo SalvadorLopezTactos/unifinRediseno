@@ -38,7 +38,7 @@ $mod_strings = array (
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Ažurirajte članke sadržaja baze znanja.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Objavite odobrene članke i istekle članke baze znanja.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Zakazani posao',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Ponovna izgradnja denormaliziranih sigurnosnih podataka o timovima',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Pokreni slanje podsjetnika putem e-pošte',
 'LBL_CLEANJOBQUEUE' => 'Čišćenje reda čekanja poslova',
 'LBL_CLEANOLDRECORDLISTS' => 'Čišćenje popisa starih zapisa',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'Planer SugarBPM',
 );
 

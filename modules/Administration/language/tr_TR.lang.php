@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Grup Özelliği:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Kullanıcı DN ile:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Grup üyeliğini kontrol ederken Kullanıcı DN  değerini Kullanıcı Özellikleri ile ekleyin',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Kullanıcıları onaylarken herhangi bir filtre parametresi uygulamak için örn.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Kullanıcıları onaylarken herhangi bir filtre parametresi uygulamak için örn.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Oturum Açma Özelliği:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Özellik bağla:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAP a bağlanmak için Kullanıcı<br>Örnekler: <b>AD:</b> userPrincipalName, <b>openLDAP: </b>userPrincipalName, <b>Mac OS X: </b>uid<br>',
@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Stilrehberi (Lab)',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokümantasyon ve örnekler',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuel Onaylama',
-    'LBL_MANUAL_VALIDATION'=>'Otomatik doğrulama ile sürekli problem yaşarsanız, lütfen <a href="index.php?module=Configurator&action=EditView">Sistem Ayarları</a> admin panelinde yer alan Proxy yapılandırmasını kontrol edin. Eğer sistem ortamınız, sisteminizin lisans onay sunucusu ile internet üzerinden iletişim kurmasını engelliyorsa, <a href="javascript:void(0)" onclick="toggleDisplay("mainbody;toggleDisplay("manualbody");">Manual Doğrulama</a> adımları ile ilerlemelisiniz.',
+    'LBL_MANUAL_VALIDATION'=>'Otomatik doğrulama ile sürekli problem yaşarsanız, lütfen <a href="index.php?module=Configurator&action=EditView">Sistem Ayarları</a> admin panelinde yer alan Proxy yapılandırmasını kontrol edin. Eğer sistem ortamınız, sisteminizin lisans onay sunucusu ile internet üzerinden iletişim kurmasını engelliyorsa,  <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manual Doğrulama</a> adımları ile ilerlemelisiniz.',
     'LBL_MANUAL_VALIDATION1'=> 'Adım 1: Aşağıdaki butona tıklayarak bir lisans anahtar bilgi dosyası üretin.',
     'LBL_MANUAL_VALIDATION2'=> 'Sonra yerel dosya sisteminiz üzerine (sugarkey.lic) dosyasını kaydedin.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Uyarı: Verinizi korumak için, yükleyici &#39;installer_locked&#39; değeri config.php dosyasında &#39;true&#39;  olarak belirtilmelidir.',
  	'WARN_LICENSE_EXPIRED'=> "Uyarı: Lisansınızın geçerli olduğu tarih",
     'WARN_LICENSE_EXPIRED2' =>"gün. Lütfen Admin Ekranlarındaki <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Lisans Yönetimi\"</a>&#39;ne gidin.",
-    'WARN_LICENSE_SEATS'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor",
-    'WARN_LICENSE_SEATS2' => ". Lütfen satış temsilciniz ile veya <a href=\"mailto:sales@sugarcrm.com\">sales@sugarcrm.com</a> ile iletişime geçin.",
+    'WARN_LICENSE_SEATS'=>  "<b>Uyarı:</b> Aboneliğiniz sadece",
+    'WARN_LICENSE_SEATS2' => "izin verdiğinde aktif kullanıcılar mevcuttur",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Lütfen bazı kullanıcıları devre dışı bırakın, ortağınızla veya satış temsilcinizle iletişime geçin"
+        . "veya <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a> adresine e-posta gönderin.</p>"
+        . "<p class=\"error\">Daha fazla bilgi için "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Kullanıcı Türünü Anlama ve Sugar Lisansları</a> makalesi.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Uyarı: Aktif kullanıcı sayısı sisteminizdeki aktif kullanıcı ile lisansınızda izin verilenin uyumu ile sınırlıdır. Ek aktif kullanıcı oluşturamazsınız.",
-    'WARN_REPAIR_CONFIG' => 'Uyarı: config.php  dosyasının onarılmaya ihtiyacı var. Lütfen config dosyasını onarmak için Admin alanındaki Onar sayfasında yer alan  <a href="index.php?module=Administration&action=RebuildConfig">Rebuild Config File</a> metnini kullanın.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Uyarı:</b> İlave aktif kullanıcı oluşturamayacaksınız."
+        . "Lütfen daha fazla abonelik satın alın.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Uyarı:</b> İlave aktif kullanıcı oluşturamayacaksınız."
+        . "Lütfen daha fazla abonelik satın alın.",
+    'WARN_REPAIR_CONFIG' => '<b>Uyarı:</b> config.php dosyasının onarılması gerekli.  Yapılandırma dosyasını onarmak için lütfen Yönetici alanında bulunan Onar sayfasındaki <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Yapılandırma Dosyasını Yeniden Oluştur</a> yazılı yönergesini kullanın.',
     'WARN_UPGRADE_APP'=> "Uygulamanın yükseltilmiş bir versiyonu şimdi mevcut.",
     'WARN_UPGRADE' => 'Uyarı: Lütfen bir üst seviyeye çıkarın',
     'WARN_UPGRADENOTE' => 'Not:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'VarDef&#39;lerin Veri Önbelleğini Temizleyin',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Önbellekten VarDef leri kaldırın',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Birleşik Arama Önbelleğini Temizleyin',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Önbellekten unified_search_modules.php&#39;yi kaldırın',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Önbellekten unified_search_modules.php&#39;yi kaldırır',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Hızlı Onar ve Yeniden Oluştur',
     'LBL_QUICK_REPAIR_TITLE'=>'Onarmak için Modül(leri) seçin:',
 	'LBL_FAILED_CONNECTION'=> 'Başarısız Bağlantı:',
@@ -1245,15 +1254,17 @@ Bu platforma dayanan tüm entegrasyonlar çalışmayı bırakacak.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Metaveri dosyası bulunamadı.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Ayarlar',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Advanced Workflow ayarlarını yapılandırın.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Günlük Görüntüleyici',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Advanced Workflow günlüğüne erişin.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Şuna erişin:',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Süreç Yönetimi',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Süreç Yönetimine buradan erişilebilir',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Ayarları',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => 'yapılandırın ve günlükleri görüntüleyin. Tüm BPM işlemlerini tüm kullanıcılar için İşlem Yönetimi ile yönetin.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Advanced Workflow, standart BPM ürünü ile uyumludur ve SugarCRM işinizi geliştirir.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Teklifler Konfigürasyonu',
+    'LBL_MANAGE_QUOTES' => 'Teklifler çalışma sayfası düzenini yapılandırın',
 );

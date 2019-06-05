@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Luo tulevaisuuteen ajanjaksoja',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Päivitä KBContent-artikkelit.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Julkaise hyväksytyt artikkelit ja sulje KB-artikkelit.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflown ajoitettu työ',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Julkaise hyväksytyt artikkelit ja vanhentuneet tietämyskannan artikkelit.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Vuoronnettu tehtävä',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Tarkista saapuvan postin tilit',
 'LBL_PERFORMFULLFTSINDEX' => 'Täysi tekstinhakuindeksin päivitys',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Poista väliaikaiset PDF-tiedostot',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Julkaise hyväksytyt artikkelit ja sulje KB-artikkelit.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Julkaise hyväksytyt artikkelit ja vanhentuneet tietämyskannan artikkelit.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch jonon ajoittaja',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Poista diagnostiikkatyökalujen tiedostot',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Poista väliaikaiset tiedostot',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Suorita sähköpostimuistutusten lähetys',
 'LBL_CLEANJOBQUEUE' => 'Puhdista työjono',
 'LBL_CLEANOLDRECORDLISTS' => 'Siisti vanhat tietuelistat',
-'LBL_PMSEENGINECRON' => 'Advanced Workflown aikatauluttaja',
+'LBL_PMSEENGINECRON' => 'SugarBPM-vuorontaja',
 );
 

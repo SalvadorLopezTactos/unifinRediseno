@@ -58,7 +58,7 @@ $mod_strings = array (
   'LBL_TIME_INT' => 'على الأقل لـ',
 
     'LBL_REL1' => 'الوحدة ذات الصلة: ',
-  'LBL_REL2' => 'وحدة الوحدة ذات الصلة\\: ',
+  'LBL_REL2' => 'وحدة الوحدة ذات الصلة\: ',
     'LBL_PLEASE_SEL_TARGET'=>'يُرجى تحديد وحدة مستهدفة',
     'LBL_ASSOCIATED_WITH'=>' مقترنة بذات الصلة ',
 

@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'للحصول على أفضل تجربة باستخدام IIS/FastCGI sapi، اضبط دخول fastcgi.logging على 0 في ملف php.ini الخاص بك.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'إصدار PHP مثبت غير مدعوم: (إصدار',
     'LBL_DB_UNAVAILABLE'                => 'قاعدة البيانات غير متاحة',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'لم يتم العثور على دعم قاعدة البيانات. الرجاء التأكد من أنك تملك ملفات التعريف الضرورية لأحد انواع قواعد البيانات المدعومة التالية: MySQL أو MS SQLServer أو Oracle أو DB2. قد تحتاج إلى إلغاء تعليق الامتداد في ملف php.ini أو إعادة تكوينه بالملف الثنائي الصحيح، بحسب إصدار PHP الخاص بك. الرجاء الرجوع إلى دليل PHP لمزيد من المعلومات حول كيفية تمكين دعم قاعدة البيانات.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'لم يتم العثور على دعم قاعدة البيانات. الرجاء التأكد من أنك تملك ملفات التعريف الضرورية لأحد أنواع قواعد البيانات المدعومة التالية: MySQL أو MS SQLServer أو Oracle أو DB2. قد تحتاج إلى إلغاء تعليق الامتداد في ملف php.ini أو إعادة تكوينه بالملف الثنائي الصحيح، بحسب إصدار PHP الخاص بك. الرجاء الرجوع إلى دليل PHP لمزيد من المعلومات حول كيفية تمكين دعم قاعدة البيانات.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'لم يتم العثور على الوظائف المرتبطة بمكتبات XML Parser Libraries الضرورية لتطبيق Sugar.  قد تحتاج إلى عدم التعليق على الامتداد في ملف php.ini، أو إعادة تجميع مع ملف ثنائي صحيح، وفقًا لإصدار PHP الخاص بك.  يُرجى مراجعة دليل PHP للحصول على مزيد من المعلومات.',
     'LBL_CHECKSYS_CSPRNG' => 'منشئ الأرقام العشوائية',
     'ERR_CHECKSYS_MBSTRING'             => 'لم يتم العثور على الوظائف المرتبطة بامتداد Multibyte Strings PHP (mbstring) الضرورية لتطبيق Sugar. <br/><br/>وبشكل عام، لم يتم تفعيل وحدة mbstring افتراضيًا في PHP ويجب تفعيلها باستخدام تفعيل mbstring عند إنشاء ثنائي PHP. يُرجى الرجوع لدليل PHP للحصول على مزيد من المعلومات عن كيفية تفعيل دعم mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'لم يتم تعيين إعداد save_path في ملف تهيئة php الخاص بك (php.ini) أو ضبطه على مجلد غير موجود. قد تحتاج إلى ضبط إعداد save_path في php.ini أو التحقق من وجود المجلد المعين في save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'تم تعيين إعداد save_path في ملف تهيئة php الخاص بك (php.ini) أو ضبطه على مجلد غير قابل للكتابة عليه.  يُرجى اتخاذ الخطوات اللازمة لجعل المجلد قابلاً للكتابة عليه.  <br>وفقًا لنظام التشغيل الخاص بك، قد يحتاج منك هذا تغيير الأذونات بتشغيل chmod 766، أو النقر بزر الماوس الأيمن على اسم الملف للدخول على خصائص وإزالة علامة اختيار خيار للقراءة فقط.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'يوجد ملف التهيئة ولكنه غير قابل للكتابة عليه.  يُرجى اتخاذ الخطوات اللازمة لجعل الملف قابلاً للكتابة عليه.  وفقًا لنظام التشغيل الخاص بك، قد يحتاج منك هذا تغيير الأذونات بتشغيل chmod 766، أو النقر بزر الماوس الأيمن على اسم الملف للدخول على خصائص وإزالة علامة اختيار خيار للقراءة فقط.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'وحدة IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'وحدة MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'موافق (بلا حدود)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'موافق (بلا حدود)',
 	'LBL_CHECKSYS_MEM'					=> 'حد ذاكرة PHP',
@@ -252,7 +250,7 @@ $mod_strings = array(
     'LBL_DBCONF_TITLE_NAME'             => 'اسم قاعدة البيانات المُدخل',
     'LBL_DBCONF_TITLE_USER_INFO'        => 'بيانات مستخدم قاعدة البيانات المُدخل',
 	'LBL_DISABLED_DESCRIPTION_2'		=> 'بعد القيام بهذا التعديل، قد تنقر زر "البدء" أدناه لبدء التثبيت.  <i>بعد الانتهاء من التثبيت، ستحتاج إلى تغيير قيمة \'installer_locked\' إلى \'صحيح\'.</i>',
-	'LBL_DISABLED_DESCRIPTION'			=> 'يقوم هذا المثبت بالعمل مرة واحدة.  وكإجراء أمان، تم تعطيله عن التشغيل لمرة ثانية.  إذا كنت متأكدًا من تشغيله مرة أخرى، فيُرجى الذهاب إلى ملف config.php الخاص بك وتحديد موقع (أو إضافة) متغير يُسمى \'installer_locked\\ وضبطه على \'خطأ\'.  يتعين أن يبدو الخط هكذا:',
+	'LBL_DISABLED_DESCRIPTION'			=> 'يقوم هذا المثبت بالعمل مرة واحدة.  وكإجراء أمان، تم تعطيله عن التشغيل لمرة ثانية.  إذا كنت متأكدًا من تشغيله مرة أخرى، فيُرجى الذهاب إلى ملف config.php الخاص بك وتحديد موقع (أو إضافة) متغير يُسمى \'installer_locked\ وضبطه على \'خطأ\'.  يتعين أن يبدو الخط هكذا:',
 	'LBL_DISABLED_HELP_1'				=> 'لمزيد من المساعدة بخصوص التثبيت، يُرجى زيارة SugarCRM',
     'LBL_DISABLED_HELP_LNK'               => 'http://www.sugarcrm.com/forums/',
 	'LBL_DISABLED_HELP_2'				=> 'منتديات الدعم',
@@ -561,7 +559,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'بيانات حساب جديد',
         'description' => 'يُستخدم هذا القالب عند إرسال مسؤول النظام لكلمة مرور جديدة لمستخدم.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>إليك اسم المستخدم وكلمة المرور المؤقتة لحسابك:</p><p>اسم المستخدم: $contact_user_user_name </p><p>كلمة المرور: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>بعد تسجيلك الدخول باستخدام كلمة المرور الموضحة أعلاه، ربما يُطلب منك إعادة تعيين كلمة المرور إلى أخرى حسب اختيارك.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>إليك اسم المستخدم وكلمة المرور المؤقتة لحسابك:</p><p>اسم المستخدم: $contact_user_user_name </p><p>كلمة المرور: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>بعد تسجيلك الدخول باستخدام كلمة المرور الموضحة أعلاه، ربما يُطلب منك إعادة تعيين كلمة المرور إلى أخرى حسب اختيارك.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 ها هو اسم المستخدم وكلمة المرور المؤقتة الخاصة بحسابك:
@@ -576,7 +574,7 @@ $config_site_url
     'advanced_password_forgot_password_email' => array(
         'subject' => 'أعد تعيين كلمة المرور لحسابك',
         'description' => "يُستخدم هذا القالب لإرسال رابط للمستخدم للنقر فوقه لإعادة تعيين كلمة مرور حساب المستخدم.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>لقد طلبت مؤخرًا $contact_user_pwd_last_changed القدرة على إعادة تعيين كلمة المرور الخاصة بحسابك. </p><p>انقر فوق الرابط أدناه لإعادة تعيين كلمة المرور الخاصة بك:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>لقد طلبت مؤخرًا $contact_user_pwd_last_changed القدرة على إعادة تعيين كلمة المرور الخاصة بحسابك. </p><p>انقر فوق الرابط أدناه لإعادة تعيين كلمة المرور الخاصة بك:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 لقد طلبت مؤخرًا على $contact_user_pwd_last_changed أن تكون قادرًا على إعادة تعيين كلمة المرور الخاصة بحسابك.

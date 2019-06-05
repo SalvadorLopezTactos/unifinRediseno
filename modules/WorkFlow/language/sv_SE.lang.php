@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Arbetsflödesdefinitioner',
   'LBL_MODULE_NAME_SINGULAR' => 'Arbeidsflyt definisjon',
-  'LBL_MODULE_ID' => 'Arbetsflöde',  
+  'LBL_MODULE_ID' => 'Arbetsflöde',
   'LBL_MODULE_TITLE' => 'Arbetsflöden : Hem',
   'LBL_SEARCH_FORM_TITLE' => 'Sök Arbetsflöden',
   'LBL_LIST_FORM_TITLE' => 'Lista Arbetsflöden',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Målmodul',
   'LBL_LIST_ORDER' => 'Processordning',
   'LBL_FROM_NAME' => 'Från namn:',
-  'LBL_FROM_ADDRESS' => 'Från adress:',  
+  'LBL_FROM_ADDRESS' => 'Från adress:',
   'LNK_NEW_WORKFLOW' => 'Skapa Arbetsflödes Definitioner',
-  'LNK_WORKFLOW' => 'Lista Arbetsflöden Definitioner', 
-  
-  
+  'LNK_WORKFLOW' => 'Lista Arbetsflöden Definitioner',
+
+
   'LBL_ALERT_TEMPLATES' => 'Meddelande mallar',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Skapa en meddelande mall:',
   'LBL_SUBJECT' => 'Ämne:',
-  
+
   'LBL_RECORD_TYPE' => 'Tillämpa på:',
  'LBL_RELATED_MODULE'=> 'Relaterad modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Arbetsflöden Sekvens',
 	'LNK_ALERT_TEMPLATES' => 'Mall för varningsmail',
 	'LNK_PROCESS_VIEW' => 'Arbetsflöden Sekvens',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Obs:</strong> Sugar Workflow och Workflow Management-funktionaliteten är i underhållsläge. Sugar Enterprise-utgåvans kunder ska använda funktionen som tillhandahålls av SugarBPM<sup class="trademark">TM</sup>.',
 );
 

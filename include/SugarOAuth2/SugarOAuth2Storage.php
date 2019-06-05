@@ -447,7 +447,7 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
             // Let's close this session and start a new one with the correct ID.
             session_write_close();
         }
-        ini_set('session.use_cookies', false);
+
         if (session_id() != $oauth_token) {
             session_id($oauth_token);
             session_start();

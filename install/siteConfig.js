@@ -8,7 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: siteConfig.js 6337 2005-07-22 00:47:29Z bob $
 
 function toggleSiteDefaults(){
    var theForm = document.forms[0];

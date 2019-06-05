@@ -15,4 +15,16 @@ require_once __DIR__ . '/prod.php';
 
 $config['debug'] = true;
 
-$config['monolog']['monolog.level'] = \Monolog\Logger::INFO;
+$config['twig']['twig.options'] = ['cache' => false];
+
+$config['grpc']['disabled'] = $params['grpc']['disabled'] ?? false;
+
+$config['translation'] = [
+    // set up default in full format. This is mango's requirement
+    'default' => 'en-US',
+    'fallback' => ['en'],
+    'resources' => [
+        'en' => '/src/App/Resources/translation/en.xlf',
+        'de' => '/src/App/Resources/translation/de.xlf',
+    ],
+];

@@ -46,9 +46,10 @@ class CryptPasswordEncoderTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'sha256_valid' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$Sa4x4MSMvm7BYJ.3QjZ3L78pJMU43uVzWiLcyaHKO/6', 'secret', '1234567812345678'],
-            'sha512_valid' => [true, 'CRYPT_SHA512', '$6$rounds=5000$1234567812345678$Wp0T1sROWYtpVmjGEkJgfyqU.0GplKlcpJhL5r9XUJkVRZI/B50T3KBzYtemPYzHRfNV/stOdfwdgcjkt7tY7.', 'secret', '1234567812345678'],
-            'sha256_empty_salt' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$Sa4x4MSMvm7BYJ.3QjZ3L78pJMU43uVzWiLcyaHKO/6', 'secret', ''],
-            'sha256_any_salt' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$Sa4x4MSMvm7BYJ.3QjZ3L78pJMU43uVzWiLcyaHKO/6', 'secret', 'anything, we ignore it'],
+            'sha256_md5_valid' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$s4SFagv7XHmUocBTR44o5tOUhpzRYKkWE46J7OUv9N.', 'secret', '1234567812345678'],
+            'sha512_valid' => [true, 'CRYPT_SHA512', '$6$rounds=5000$1234567812345678$8cCDjsV9bJb39oWflu4fLKQ3FJdWpuETAvVinU9K/wlYRIxsco5sTVzsMFBUu6W.1CRd6VLh21sCDC4kOfapz1', 'secret', '1234567812345678'],
+            'sha256_empty_salt' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$s4SFagv7XHmUocBTR44o5tOUhpzRYKkWE46J7OUv9N.', 'secret', ''],
+            'sha256_any_salt' => [true, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$s4SFagv7XHmUocBTR44o5tOUhpzRYKkWE46J7OUv9N.', 'secret', 'anything, we ignore it'],
             'sha256_invalid' => [false, 'CRYPT_SHA256', '$5$rounds=5000$1234567812345678$wrongHash', 'secret', '1234567812345678'],
         ];
     }

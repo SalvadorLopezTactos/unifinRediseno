@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '將備用地址複製到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '將主要地址複製到備用地址',
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\\n請建立新帳戶或選取現有帳戶。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\n請建立新帳戶或選取現有帳戶。',
     'NTC_REMOVE_CONFIRMATION' => '確定要從實例中移除此連絡人嗎？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '確定要移除此直屬員工記錄嗎？',
 

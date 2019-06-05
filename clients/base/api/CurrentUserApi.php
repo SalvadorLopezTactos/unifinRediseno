@@ -184,9 +184,7 @@ class CurrentUserApi extends SugarApi
      */
     public function shouldShowWizard($category = 'global')
     {
-        $current_user = $this->getUserBean();
-        $isInstanceConfigured = $current_user->getPreference('ut', $category);
-        return !filter_var($isInstanceConfigured, FILTER_VALIDATE_BOOLEAN);
+        return $this->getUserBean()->shouldUserCompleteWizard($category);
     }
 
     /**
@@ -492,7 +490,8 @@ class CurrentUserApi extends SugarApi
         $return['currency_iso'] = $currency->iso4217;
         $return['currency_rate'] = $currency->conversion_rate;
         $return['currency_show_preferred'] = $user->getPreference('currency_show_preferred');
-        
+        $return['currency_create_in_preferred'] = $user->getPreference('currency_create_in_preferred');
+
         // user number formatting prefs
         $return['decimal_precision'] = $locale->getPrecision();
         $return['decimal_separator'] = $locale->getDecimalSeparator();
@@ -602,6 +601,7 @@ class CurrentUserApi extends SugarApi
         if($user_data['is_manager']) {
             $user_data['is_top_level_manager'] = User::isTopLevelManager($current_user->id);
         }
+        $user_data['site_user_id'] = $current_user->site_user_id;
 
         // Email addresses
         $fieldDef = $current_user->getFieldDefinition('email');
@@ -628,7 +628,7 @@ class CurrentUserApi extends SugarApi
             $my_teams[] = array('id' => $id, 'name' => $name,);
         }
         $user_data['my_teams'] = $my_teams;
-
+        $user_data['private_team_id'] = $current_user->getPrivateTeamID();
         $defaultTeams = TeamSetManager::getTeamsFromSet($current_user->team_set_id);
         $defaultSelectedTeamIds = array();
         foreach (TeamSetManager::getTeamsFromSet($current_user->acl_team_set_id) as $selectedTeam) {

@@ -301,17 +301,6 @@ if(function_exists('rebuildSprites') && function_exists('imagecreatetruecolor'))
 //Patch for bug57431 : Module name isn't updated in portal layout editor
 updateRenamedModulesLabels();
 
-//setup forecast defualt settings
-if (version_compare($sugar_version, '6.7.0', '<')) {
-    require_once(clean_path($unzip_dir.'/scripts/upgrade_utils.php'));
-    require_once($unzip_dir.'/'.$zip_from_dir.'/modules/Forecasts/ForecastsDefaults.php');
-    ForecastsDefaults::setupForecastSettings(true, $sugar_version, getUpgradeVersion());
-    ForecastsDefaults::upgradeColumns();
-
-    // do the config update to add the 'support' platform to any config with the category of 'portal'
-    updatePortalConfigToContainPlatform();
-}
-
 // Bug 57216 - Upgrade wizard dying on metadata upgrader because needed files were
 // already called but news needed to replace them. This moves the metadata upgrader
 // later in the process - rgonzalez

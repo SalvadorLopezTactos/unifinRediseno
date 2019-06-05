@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
  * Imports a record of encrypted file.
  *
@@ -21,13 +20,33 @@
  */
 class PMSEEmailTemplateImporter extends PMSEImporter
 {
+    /**
+     * @inheritDoc
+     */
+    protected $beanModule = 'pmse_Emails_Templates';
 
-    public function __construct()
-    {
-        $this->bean = BeanFactory::newBean('pmse_Emails_Templates'); //new BpmEmailTemplate();
-        $this->name = 'name';
-        $this->id = 'id';
-        $this->extension = 'pet';
-        $this->module = 'base_module';
-    }
+    /**
+     * @inheritDoc
+     */
+    protected $id = 'id';
+
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $suffix = '';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'pet';
+
+    /**
+     * @inheritDoc
+     */
+    protected $module = 'base_module';
 }

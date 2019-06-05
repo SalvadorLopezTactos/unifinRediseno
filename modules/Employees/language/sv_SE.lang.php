@@ -90,8 +90,8 @@ $mod_strings = array (
   'LBL_MESSENGER_TYPE' => 'IM typ:',
   'ERR_EMPLOYEE_NAME_EXISTS_1' => 'Namn på anställd',
   'ERR_EMPLOYEE_NAME_EXISTS_2' => 'finns redan. Lika anställningsnamn är ej tillåtet. Ändra namn till ett unikt namn.',
-  'ERR_LAST_ADMIN_1' => 'Den anställdes namn \\"',
-  'ERR_LAST_ADMIN_2' => '\\" är den sista anställda med administratörsrättigheter. Minst en anställd måste vara administratör.',
+  'ERR_LAST_ADMIN_1' => 'Den anställdes namn \"',
+  'ERR_LAST_ADMIN_2' => '\" är den sista anställda med administratörsrättigheter. Minst en anställd måste vara administratör.',
   'LNK_NEW_EMPLOYEE' => 'Skapa anställd',
   'LNK_EMPLOYEE_LIST' => 'Anställda',
   'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
@@ -145,7 +145,7 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Mailadress',
   'LBL_CONTACTS_SYNC' => 'Kontakter',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'Den anställda endast skapas i <a href="{0}" target="_blank">Cloud konsolen</a> för IDM-läge.',
+        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
 );
 
 

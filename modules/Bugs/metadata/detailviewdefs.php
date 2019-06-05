@@ -30,18 +30,21 @@ $viewdefs['Bugs']['DetailView'] = array(
 	      'name' => 'name',
 	      'label' => 'LBL_SUBJECT',
 	    ),
-	    'status',
 	  ),
 
 	  array (
-	    'type',
-	    'source',
+          'status',
+          'follow_up_datetime',
 	  ),
+        array(
+            'type',
+            'source',
+        ),
 
 	  array (
 	    'product_category',
 	    'resolution',
-	  ),
+        ),
 
 	  array (
 	    array (
@@ -97,4 +100,3 @@ $viewdefs['Bugs']['DetailView'] = array(
       ),
 )
 );
-?>

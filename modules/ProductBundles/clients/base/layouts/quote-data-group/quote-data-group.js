@@ -83,6 +83,7 @@
                 currency_id: model.get('currency_id'),
                 base_rate: model.get('base_rate')
             });
+            this._render();
         }, this);
     },
 
@@ -170,7 +171,13 @@
      * @inheritdoc
      */
     _dispose: function() {
+        var model;
         this.quoteDataGroupList = null;
+
+        if (this.context && this.context.parent && this.context.parent.has('model')) {
+            model = this.context.parent.get('model');
+            model.off('change:currency_id', null, this);
+        }
 
         this._super('_dispose');
     }

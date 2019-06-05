@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => '請求する',
 	'LBL_PUSH_SHIPPING' => '出荷する',
 	'LBL_SAVE_ACCOUNT' => '取引先保存',
+    'LBL_SERVICE_LEVEL' => 'サービスレベル',
 	'LBL_SHIPPING_ADDRESS_CITY' => '出荷先市区町村:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => '出荷先国:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => '出荷先郵便番号:',

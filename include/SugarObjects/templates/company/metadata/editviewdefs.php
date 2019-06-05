@@ -33,6 +33,7 @@ $viewdefs[$module_name]['EditView'] = array(
 		        array('ownership','industry'),
 
 		        array($_object_name . '_type', 'annual_revenue'),
+                array('service_level'),
 			    array (
 			      array('name'=>'team_name', 'displayParams'=>array('display'=>true)),
 			      ''

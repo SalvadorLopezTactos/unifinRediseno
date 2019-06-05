@@ -17,5 +17,11 @@ $viewdefs['Opportunities']['base']['layout']['create-preview'] = array(
                 'module' => 'Quotes',
             ),
         ),
+        array(
+            'view' => 'product-quick-picks',
+            'context' => array(
+                'module' => 'Opportunities',
+            ),
+        ),
     ),
 );

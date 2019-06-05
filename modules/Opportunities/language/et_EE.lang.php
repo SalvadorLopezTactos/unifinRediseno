@@ -186,24 +186,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne. Moodul {{module_name}} läbib tavaliselt mitu müügietappi, kuni sellele lisatakse märge „Lõpetatud võidetud” või „Lõpetatud kaotatud”. Mooduleid {{plural_module_name}} saab edasi võimendada, kasutades Sugari moodulit {{forecasts_singular_module}}, et mõista ja prognoosida müügitrende ning seada eesmärgiks müügikvootide täitmine.',
+    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida üksikuid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid ja ka teiste oluliste kirjetega, nagu moodulid {{quotes_module}}, {{contacts_module}} jne seotud andmeid. Moodul {{module_name}} teeb enamasti läbi mitu müügietappi, enne kui sellele lisatakse kas märge „Lõpetatud võidetud“ või „Lõpetatud kaotatud“. Moodulit {{plural_module_name}} on võimalik veelgi enam võimendada, kasutades Sugari moodulit {{forecasts_singular_module}} müügitrendide mõistmiseks ning prognoosimiseks ja müügikvootide täitmisele keskendumiseks.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende juurde kuuluvaid reaüksusi algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida algusest lõpuni individuaalseid müüke ja reaüksusi, mis kuuluvad müükide juurde. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja hõlmab asjakohaseid müügiandmeid, nagu ka muid olulisi kirjeid, näiteks {{quotes_module}}, {{contacts_module}} jms.
 
-- Redigeerige kirje välju, klõpsates individuaalsel väljal või nupul Redigeeri.
-- Vaadake või muutke alampaneelides linke teistele kirjetele, valides alumisel vasakpoolsel paanil kuva Andmevaade.
-- Koostage ja vaadake kasutaja kommentaare ning salvestage muutuse ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil kuva Tegevuste voog.
-- Jälgige või lisage see kirje lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone.
-- Täiendavad toimingud on saadaval tegevuste rippmenüüs, mis asub nupust Redigeeri paremal.',
+- Selle kirje väljade redigeerimiseks klõpsake üksikut välja või nuppu Redigeeri.
+- Vaadake või muutke alampaneelil teiste kirjete linke, valides alumisel vasakpoolsel paanil suvandi Andmevaade.
+- Kirjutage ja vaadake kasutaja kommentaare ning salvestage muutuste ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil suvandi Tegevusvoog.
+- Jälgige nimetatud kirjet või lisage see lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone. 
+- Lisatoiminguid saab valida tegevuste rippmenüüst, mis asub nupust Redigeeri paremal.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende juurde kuuluvaid reaüksusi algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida algusest lõpuni individuaalseid müüke ja reaüksusi, mis kuuluvad müükide juurde. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja hõlmab asjakohaseid müügiandmeid, nagu ka muid olulisi kirjeid, näiteks {{quotes_module}}, {{contacts_module}} jms.
 
 Mooduli {{module_name}} loomiseks tehke järgmist.
-1. Esitage väljade väärtused soovi järgi.
- - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
- - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
+1. Sisestage väljade soovitud väärtused soovi järgi. 
+ - Väljad, millel on märge Kohustuslik, tuleb täita enne salvestamist. 
+ - Lisaväljade avaldamiseks vajaduse korral klõpsake suvandit Kuva rohkem.
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 
 // END ENT/ULT

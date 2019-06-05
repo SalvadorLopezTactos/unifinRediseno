@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: UpgradeWizardCommon.php 53409 2010-01-04 03:31:15Z roger $
 
 require_once('include/utils/db_utils.php');
 require_once('include/utils/zip_utils.php');

@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Podpanela po stranici',
 	'LOG_MEMORY_USAGE'=>'Log korišćenja memorije',
-    'LOG_SLOW_QUERIES' => 'Log sporih upita',
+    'LOG_SLOW_QUERIES' => 'Evidentiraj spore upite',
     'LOCK_HOMEPAGE_HELP'=>'Ovo podešavanje je da onemogući<BR> 1) dodavanje novih početnih strana i dašleta unutar modula Početna, <BR>2) kastomizaciju položaja dashleta na početnim stranama prevlačenjem i spuštanjem.',
     'CURRENT_LOGO'=>'Trenutni logo:',
     'CURRENT_LOGO_HELP'=>'Ovaj logo je prikazan u gornjem levom uglu Sugar aplikacije.',
@@ -158,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Jedinstveni identifikator osobe koji će se koristiti za proveravanje da li je osoba član grupe Primer: <em>uid</em>',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Atribut grupe koji će se koristiti za filtriranje atributa korisnika Primer:<em>memberUid</em>',
 	'LBL_LDAP_GROUP_ATTR'=>'Atribut grupe:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Svi dodatni parametri filtera za primenu pri autentifikaciji korisnika npr.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Svi dodatni parametri filtera za primenu pri autentifikaciji korisnika npr.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atributi prijave:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atribut Povezivanja:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Za vezivanje LDAP Korisnika<br>Primeri: <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Prikaži karticu preuzimanja',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kada se izabere, Kartica preuzimanja će se pojaviti u korisničkim podešavanjima i obezbediti korisnicima pristup Sugar dodacima i drugim dostupnim fajlovima.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Za SOAP autentifikaciju kada se koristi LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Mora biti omogućena php_mcrypt  ekstenzija u Vašem php.ini fajlu.',
     'LBL_ALL' => 'Svi',
     'LBL_MARK_POINT' => 'Tačka oznake',
     'LBL_NEXT_' => 'Sledeće>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregledi aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući preglede aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje preglede aktivnosti za aplikaciju',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Omogući dodatni sadržaj na prijavnom ekranu',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatsko čuvanje definicija procesa',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Određuje koliko se često definicije procesa automatski čuvaju kada koristite dizajner',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automatski potvrđuje valjanost definicije procesa na automastkom čuvanju',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Uključuje/isključuje opciju kojom se automatski potvrđuje valjanost definicije procesa pri automatskom čuvanju. Ovo važi samo u slučaju da je opcija „Automatski sačuvaj definicije procesa” podešena na vremenski interval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automatski proverava valjanost definicije pri uvozu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Uključuje/isključuje opciju kojom se automatski proverava valjanost definicija procesa kada se prvi put uvezu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Podešavanja evidencije komentara',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimalan broj znakova koji mogu da se prikažu po komentaru',
 );
 
 

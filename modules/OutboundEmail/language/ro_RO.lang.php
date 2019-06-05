@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Acesta este contul de sistem.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID adresă e-mail',
     'LBL_TYPE' => 'Tip',
+    'LBL_REPLY_TO_NAME' => 'Nume de răspuns',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adrese de e-mail de răspuns',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID adresă de e-mail de răspuns',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresă de e-mail de răspuns',
+    'LBL_PRIMARY_TEAM' => 'Echipă principală',
 );

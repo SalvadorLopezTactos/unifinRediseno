@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'ตรวจพบข้อผิดพลาดระหว่างการตรวจสอบความเข้ากันได้ หากต้องการให้การติดตั้ง SugarCRM ทำงานอย่างถูกต้อง โปรดทำตามขั้นตอนที่เหมาะสมเพื่อแก้ปัญหาที่ปรากฏด้านล่างนี้ และกดปุ่มตรวจสอบอีกครั้ง หรือลองติดตั้งอีกครั้ง',
     'ERR_CHECKSYS_CALL_TIME'            => 'ตัวเลือกอนุญาตการอ้างอิงการระบุเวลาเรียกมีสถานะเปิด (ตัวเลือกนี้ควรมีสถานะ "ปิด" ใน php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'ไม่พบ: ระบบจัดลำดับงาน Sugar จะดำเนินการด้วยฟังก์ชันที่จำกัด ทั้งนี้ จะไม่มีการดำเนินการบริการเก็บอีเมลแบบถาวร',
+	'ERR_CHECKSYS_CURL'					=> 'ไม่พบ: เครื่องมือวางกำหนดการ Sugar จะทำงานด้วยฟังก์ชันที่จำกัด บริการเก็บอีเมลถาวรจะไม่ทำงาน',
     'ERR_CHECKSYS_IMAP'					=> 'ไม่พบ: InboundEmail และแคมเปญ (อีเมล) ต้องมีไลบรารี IMAP ทั้งสองรายการจะไม่ทำงาน',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'ไม่สามารถ "เปิด" Magic Quotes GPC เมื่อใช้ MS SQL Server',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'คำเตือน: ',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'หากต้องการได้รับประสบการณ์ใช้งาน IIS/FastCGI sapi ที่ดีที่สุด ให้ตั้งค่า fastcgi.logging เป็น 0 ในไฟล์ php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'มีการติดตั้ง PHP เวอร์ชันที่ระบบไม่สนับสนุน: ( เวอร์ชัน',
     'LBL_DB_UNAVAILABLE'                => 'ฐานข้อมูลไม่สามารถใช้ได้',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'ไม่พบการรองรับฐานข้อมูล กรุณาตรวจดูให้แน่ใจว่าคุณมีไดรฟ์เวอร์ที่จำเป็นเพื่อใช้กับฐานข้อมูลรองรับชนิดต่าง ๆ ดังนี้หรือไม่: MySQL, MS SQLServer, Oracle, หรือ DB2 คุณอาจจะต้องทำการ uncomment ส่วนขยายในไฟล์ php.ini หรือแปลโปรแกรมให้เป็นภาษาซีใหม่อีกครั้งโดยใช้แฟ้มข้อมูลฐานสองที่ถูกต้อง ซึ่งจะขึ้นอยู่กับเวอร์ชัน PHP ของคุณ โปรดศึกษาคู่มือ PHP ของคุณเพื่อรับข้อมูลเพิ่มเติมเกี่ยวกับเปิดการใช้งานการรองรับฐานข้อมูล',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'ไม่พบบริการสนับสนุนฐานข้อมูล กรุณาตรวจสอบให้แน่ใจว่าคุณมีไดรฟ์เวอร์ที่สนับสนุนฐานข้อมูลดังต่อไปนี้: MySQL, MS SQLServer, Oracle, หรือ DB2 คุณอาจจะจำเป็นต้อง uncomment ส่วนขยายในไฟล์ php.ini หรือแปลโปรแกรมด้วยไฟล์ไบนารีที่ถูกต้อง ทั้งนี้ขึ้นอยู่กับรุ่น PHP ของคุณ โปรดศึกษาข้อมูลคู่มือ PHP เพื่อรับข้อมูลเพิ่มเติมเกี่ยวกับการเปิดการใช้งานรองรับฐานข้อมูล',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'ไม่พบฟังก์ชันที่เชื่อมโยงกับไลบรารีของตัวแยกวิเคราะห์ XML ซึ่งแอปพลิเคชัน Sugar ต้องการใช้ คุณอาจต้องยกเลิกการใช้ความเห็นสำหรับส่วนขยายในไฟล์ php.ini หรือคอมไพล์อีกครั้งโดยใช้ไฟล์ไบนารีที่ถูกต้อง โดยขึ้นอยู่กับเวอร์ชัน PHP ของคุณ โปรดดูคู่มือ PHP สำหรับข้อมูลเพิ่มเติม',
     'LBL_CHECKSYS_CSPRNG' => 'เครื่องมือสร้างเลขที่สุ่ม',
     'ERR_CHECKSYS_MBSTRING'             => 'ไม่พบฟังก์ชันที่เชื่อมโยงกับส่วนขยาย PHP สำหรับสตริงแบบมัลติไบต์ (mbstring) ซึ่งแอปพลิเคชัน Sugar ต้องการใช้ <br/><br/>โดยทั่วไป โมดูล mbstring จะไม่เปิดใช้งานโดยค่าเริ่มต้นใน PHP และต้องมีการเปิดใช้งานด้วย --enable-mbstring เมื่อมีการสร้างไบนารี PHP โปรดดูข้อมูลเพิ่มเติมเกี่ยวกับวิธีเปิดใช้งานการสนับสนุน mbstring จากคู่มือ PHP',
-    'ERR_CHECKSYS_MCRYPT'               => "ไม่ได้โหลดโมดูล Mcrypt โปรดดูข้อมูลเพิ่มเติมเกี่ยวกับวิธีโหลดโมดูล mcrypt จากคู่มือ PHP",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'ไม่ได้กำหนดการตั้งค่า session.save_path ในไฟล์การกำหนดค่า php (php.ini) ของคุณ หรือมีการตั้งค่าเป็นโฟลเดอร์ที่ไม่มีอยู่ คุณอาจต้องกำหนดการตั้งค่า save_path ใน php.ini หรือยืนยันว่ามีโฟลเดอร์ที่ตั้งค่าใน save_path',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'มีการกำหนดการตั้งค่า session.save_path ในไฟล์การกำหนดค่า php (php.ini) ของคุณเป็นโฟลเดอร์ที่ไม่สามารถเขียนได้ โปรดดำเนินการตามขั้นตอนที่จำเป็นเพื่อกำหนดให้โฟลเดอร์สามารถเขียนได้ <br>คุณอาจต้องเปลี่ยนสิทธิ์ใช้งานโดยเรียกใช้ chmod 766 หรือคลิกขวาที่ชื่อไฟล์เพื่อเข้าถึงคุณสมบัติและยกเลิกการเลือกตัวเลือกอ่านอย่างเดียว ทั้งนี้ขึ้นอยู่กับระบบปฏิบัติการของคุณ',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'มีไฟล์การกำหนดค่าอยู่แต่ไม่สามารถเขียนได้ โปรดดำเนินการตามขั้นตอนที่จำเป็นเพื่อกำหนดให้ไฟล์สามารถเขียนได้ คุณอาจต้องเปลี่ยนสิทธิ์ใช้งานโดยเรียกใช้ chmod 766 หรือคลิกขวาที่ชื่อไฟล์เพื่อเข้าถึงคุณสมบัติและยกเลิกการเลือกตัวเลือกอ่านอย่างเดียว ทั้งนี้ขึ้นอยู่กับระบบปฏิบัติการของคุณ',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'โมดูล IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'โมดูลสตริง MB',
-    'LBL_CHECKSYS_MCRYPT'               => 'โมดูล MCrypt',
 	'LBL_CHECKSYS_MEM_OK'				=> 'ตกลง (ไม่มีขีดจำกัด)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'ตกลง (ไม่จำกัด)',
 	'LBL_CHECKSYS_MEM'					=> 'ขีดจำกัดหน่วยความจำของ PHP',
@@ -561,7 +559,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'ข้อมูลบัญชีใหม่',
         'description' => 'เทมเพลทนี้ใช้เมื่อผู้ดูแลระบบส่งรหัสผ่านใหม่ให้กับผู้ใช้',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>ต่อไปนี้เป็นชื่อผู้ใช้บัญชีของคุณและรหัสผ่านชั่วคราว:</p><p>ชื่อผู้ใช้ : $contact_user_user_name </p><p>รหัสผ่าน : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>หลังจากที่คุณลงชื่อเข้าใช้โดยใช้รหัสผ่านข้างต้น คุณอาจต้องรีเซ็ตรหัสผ่านเป็นรหัสผ่านที่คุณต้องการ</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>ต่อไปนี้เป็นชื่อผู้ใช้บัญชีของคุณและรหัสผ่านชั่วคราว:</p><p>ชื่อผู้ใช้ : $contact_user_user_name </p><p>รหัสผ่าน : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>หลังจากที่คุณลงชื่อเข้าใช้โดยใช้รหัสผ่านข้างต้น คุณอาจต้องรีเซ็ตรหัสผ่านเป็นรหัสผ่านที่คุณต้องการ</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 ต่อไปนี้เป็นชื่อผู้ใช้บัญชีของคุณและรหัสผ่านชั่วคราว:
@@ -576,7 +574,7 @@ $config_site_url
     'advanced_password_forgot_password_email' => array(
         'subject' => 'รีเซ็ตรหัสผ่านบัญชีของคุณ',
         'description' => "เทมเพลทนี้ใช้เพื่อส่งลิงค์สำหรับคลิกเพื่อรีเซ็ตรหัสผ่านบัญชีของผู้ใช้ให้แก่ผู้ใช้",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>คุณได้ส่งคำขอเมื่อ $contact_user_pwd_last_changed เพื่อให้สามารถรีเซ็ตรหัสผ่านบัญชีของคุณ </p><p>คลิกที่ลิงก์ด้านล่างเพื่อรีเซ็ตรหัสผ่านของคุณ:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>คุณได้ส่งคำขอเมื่อ $contact_user_pwd_last_changed เพื่อให้สามารถรีเซ็ตรหัสผ่านบัญชีของคุณ </p><p>คลิกที่ลิงก์ด้านล่างเพื่อรีเซ็ตรหัสผ่านของคุณ:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 คุณได้ส่งคำขอเมื่อ $contact_user_pwd_last_changed เพื่อให้สามารถรีเซ็ตรหัสผ่านบัญชีของคุณ

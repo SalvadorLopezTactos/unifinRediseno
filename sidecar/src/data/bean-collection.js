@@ -325,6 +325,8 @@ const BeanCollection = Backbone.Collection.extend({
      *
      * @return {boolean} `true` if some records are to be created, linked
      * or unlinked to the bean.
+     * @memberOf Data/BeanCollection
+     * @instance
      */
     hasDelta: function() {
         return !_.all([this._add, this._delete, this._create], _.isEmpty);

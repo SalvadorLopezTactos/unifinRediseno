@@ -56,6 +56,7 @@ gulp.task('karma', function(done) {
         .option('--coverage', 'Enable code coverage')
         .option('--ci', 'Enable CI specific options')
         .option('--path <path>', 'Set base output path')
+        .option('--manual', 'Start Karma and wait for browser to connect (manual tests)')
         .option('--browsers <list>',
             'Comma-separated list of browsers to run tests with',
             splitByCommas
@@ -129,7 +130,11 @@ gulp.task('karma', function(done) {
         };
     }
 
-    if (commander.dev) {
+    if (commander.manual) {
+        karmaOptions.browsers = [];
+        karmaOptions.singleRun = false;
+        karmaOptions.autoWatch = true;
+    } else if (commander.dev) {
         karmaOptions.autoWatch = true;
         karmaOptions.singleRun = false;
         if (!commander.browsers) {

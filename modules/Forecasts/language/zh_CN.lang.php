@@ -313,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '财政年度开始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置将在预测模块在使用的时间段。<br><br>请注意，初始设置后无法更改时间段设置。<br><br>首先，通过选择会计年度的开始日期。然后选择要预测时间段的类型。日期范围会根据您的选择自动计算时间期间。子时间周期是预测工作表的基础。<br><br>在可见的未来和过去的时间段将决定可见分时段预测模块的数量。用户能够查看和编辑在可见子期间的预测数字。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置您希望对 {{forecastByModule}} 进行分类的方式。<br><br>请注意，在第一次提交之后, “范围”设置将不能再更改。对于升级后的实例，“范围”设置与现有“预测”数据一起锁定。<br><br>您可以根据概率范围选择两个或多个类别，或者创建不基于概率的类别。<br><br>在自定义类别的左边，有一些复选框；使用这些复选框来确定将在提交和报告给经理的“预测”金额中包括哪些范围。<br><br>用户可以从工作表中手动更改包含/排除状态和 {{forecastByModule}} 类别。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '对{{forecastByModule}}的分类方式进行配置。请注意：首次提交后，“范围”设置无法更改。对于已经升级的实例，“范围”设置已使用现有的预测数据锁定。<br><br>您可以根据可能性范围选择两个或两个以上的类别，或者创建不基于可能性的类别。<br><br>在您的自定义类别左侧有复选框：使用复选框确定向经理提交和报告的预测金额中包含哪些范围。<br><br>用户可以在工作表中手动更改{{forecastByModule}}的包含/不包含状态和类别。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '选择您想让用户填写的每个 {{forecastByModuleSingular}} 预测列。请注意可能的金额会绑定{{forecastByModule}}中显示的金额，原因是不能隐藏这个可能列。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '选择您想在预测模块中查看哪些列。将结合工作表字段列表，并允许用户选择如何配置其视图。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是预测帮助文本的一个占位符',

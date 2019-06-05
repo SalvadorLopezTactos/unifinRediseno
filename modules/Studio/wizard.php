@@ -10,12 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: wizard.php 18703 2006-12-15 09:42:43Z majed $
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
-
-require_once 'modules/Studio/config.php';
 
 $wizard = InputValidation::getService()->getValidInputRequest('wizard', null, 'StudioWizard');
 

@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Τιμολόγηση',
 	'LBL_PUSH_SHIPPING' => 'Παράδοση',
 	'LBL_SAVE_ACCOUNT' => 'Αποθήκευση Λογαριασμού',
+    'LBL_SERVICE_LEVEL' => 'Επίπεδο υπηρεσίας',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Διεύθυνση Παράδοσης, Πόλη:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Διεύθυνση Παράδοσης, Χώρα:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Διεύθυνση Παράδοσης, Τ.Κ:',

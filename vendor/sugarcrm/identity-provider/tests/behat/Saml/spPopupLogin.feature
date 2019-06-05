@@ -55,7 +55,7 @@ Feature: SAML SP Initiated Login
     And I wait until login popup is opened
     And I switch to login popup
     Then I should see "Enter your username and password"
-    And I fill in "user1" for "username"
+    When I fill in "user1" for "username"
     And I fill in "user1pass" for "password"
     And I press "Login"
     And I switch to main window

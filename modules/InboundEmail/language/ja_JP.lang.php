@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'ログインIDかパスワードが不正です',
-	'ERR_BODY_TOO_LONG'		=> '\\r本文が長すぎてEメール全体を取り込めません。整形されました。',
+	'ERR_BODY_TOO_LONG'		=> '\r本文が長すぎてEメール全体を取り込めません。整形されました。',
 	'ERR_INI_ZLIB'			=> 'Zlibコンプレッションを一時的に無効にできませんでした。設定テストが失敗する可能性があります。',
 	'ERR_MAILBOX_FAIL'		=> 'メールアカウントを検索できませんでした。',
 	'ERR_NO_IMAP'			=> 'IMAPライブラリが見つかりませんでした。インバウンドEメールを継続する前に解決してください。',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'チームからのシードキュー',
 	'LBL_GROUPFOLDER_ID'	=> 'グループフォルダID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'グループフォルダにアサイン',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'ユーザがEメールを送信する際に「From」の名前とアドレスをReply Toに利用することを許可する。',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'このオプションが選択された場合、このグループアカウントに関連付けられたFromの名前とアドレスは送信元の選択リストに表示されます。',
     'LBL_STATUS_ACTIVE'     => 'アクティブ',
     'LBL_STATUS_INACTIVE'   => '非アクティブ',
     'LBL_IS_PERSONAL' => '個人',

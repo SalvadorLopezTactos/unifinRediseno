@@ -73,6 +73,7 @@
             }
             var $target = $(event.target);
             this._$currentTip = $target.data('bs.tooltip').tip();
+            $target.on('remove', this.clear);
         },
 
         /**

@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Visualizar la pestaña de descargas',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Cuando se selecciona, la pestaña de descarga aparecerá en la configuración del usuario y ofrece a los usuarios el acceso a los plug-ins y otros archivos de Sugar disponibles',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Para la autenticación SOAP al usar LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'La extensión php_mcrypt debe estar habilitada en su archivo php.ini.',
     'LBL_ALL' => 'Todo',
     'LBL_MARK_POINT' => 'Marcar Punto',
     'LBL_NEXT_' => 'Siguiente>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Habilitar el contenido adicional de la pantalla de inicio de sesión',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Guardar automáticamente las definiciones de procesos',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determina con qué frecuencia se guardan automáticamente las definiciones al usar el diseñador',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Validar automáticamente las definiciones de procesos al guardar automáticamente',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Activa y desctiva la opción de validación automática de las definiciones de procesos al guardarlas automáticamente. Esto solo tendrá efecto si la opción "Guardar automáticamente las definiciones de procesos" tiene un intervalo de tiempo establecido',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Validar automáticamente las definiciones de procesos al importar',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Activa y desactiva la opción de validación automática de las definiciones de procesos al importarlas por primera vez',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Configuración del registro de comentarios',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Número máximo de caracteres que se mostrarán por entrada de comentario',
 );
 
 

@@ -128,7 +128,7 @@
      * @private
      */
     _drawerCancelClicked: function() {
-        app.controller.context.trigger('productCatalogDashlet:add:complete');
+        app.controller.context.trigger(this.model.viewId + ':productCatalogDashlet:add:complete');
         app.drawer.close();
     },
 
@@ -152,6 +152,7 @@
         delete data.id;
         delete data.date_entered;
         delete data.date_modified;
+        delete data.my_favorite;
 
         // close this drawer first, then trigger event
         app.drawer.close();
@@ -161,12 +162,12 @@
         // app.controller.context is the only consistent context to use
         if (this.isCreateView) {
             // immediately send event
-            app.controller.context.trigger('productCatalogDashlet:add', data);
+            app.controller.context.trigger(this.model.viewId + ':productCatalogDashlet:add', data);
         } else {
             // any other view we need to wait for the drawer to close, then trigger the event
-            _.delay(function() {
-                app.controller.context.trigger('productCatalogDashlet:add', data);
-            }, 750);
+            _.delay(function(viewId) {
+                app.controller.context.trigger(viewId + ':productCatalogDashlet:add', data);
+            }, 750, this.model.viewId);
         }
     }
 })

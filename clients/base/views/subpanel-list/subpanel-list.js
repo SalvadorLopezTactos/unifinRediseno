@@ -91,6 +91,10 @@
             success: function() {
                 var redirect = self._targetUrl !== self._currentUrl;
                 self._modelToUnlink = null;
+                var options = {
+                    previousModels: _.clone(self.collection.models),
+                    context: self.context
+                };
                 self.collection.remove(model, { silent: redirect });
 
                 if (redirect) {
@@ -102,7 +106,7 @@
 
                 // We trigger reset after removing the model so that
                 // panel-top will re-render and update the count.
-                self.collection.trigger('reset');
+                self.collection.trigger('reset', self.collection, options);
                 self.render();
             }
         });

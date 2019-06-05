@@ -83,6 +83,72 @@
     },
 
     /**
+     * Filter the metadata in order to initiate the searchable fields.
+     * @protected
+     */
+    _initFilter: function() {
+        var filter = this._filter || _.chain(this.getFields())
+            .filter(function(field) {
+                return field.filter;
+            })
+            .map(function(field) {
+                return {
+                    name: field.name,
+                    label: app.lang.get(field.label, this.module),
+                    filter: field.filter,
+                    type: field.type
+                };
+            }, this)
+            .value();
+        this.context.trigger('filteredlist:filter:set', _.pluck(filter, 'label'));
+
+        if (_.isEmpty(filter)) {
+            return;
+        }
+        this._filter = filter;
+    },
+
+    /**
+     * Filtering collection that matches with search term.
+     * In order to activate filtering on the field,
+     * the filter term should be defined in the metadata.
+     * There are three types of filter type (startsWith, contains, endsWith).
+     */
+    filterCollection: function() {
+        var term = this.escapeRegExp(this.searchTerm);
+        var filter = this._filter;
+        var baseFields = this.model.fields;
+
+        if (!_.isEmpty(term) && _.isString(term)) {
+            this.filteredCollection = this.collection.filter(function(model) {
+                return _.some(filter, function(params) {
+                    var pattern = this._patternToReg[params.filter].replace('term', term);
+                    var tester = new RegExp(pattern, 'i');
+                    var fieldValue = '';
+                    if (params.type === 'fieldtype') {
+                        fieldValue = app.lang.get(baseFields[model.get(params.name)].vname, this.baseModule);
+                    } else {
+                        fieldValue = model.get(params.name);
+                    }
+                    if (_.isArray(fieldValue)) {
+                        fieldValue = _.pluck(fieldValue, 'name').join(', ');
+                    }
+                    return tester.test(fieldValue);
+                }, this);
+            }, this);
+        }
+    },
+
+    /**
+     * Escape reserved chars of regular expression.
+     *
+     * @param {string} string Search term.
+     */
+    escapeRegExp: function(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    },
+
+    /**
      * Apply erased field information from the model to records.
      *
      * @private

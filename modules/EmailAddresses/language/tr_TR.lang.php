@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Sil',
     'LBL_MODULE_NAME' => 'E-Posta Adresleri',
     'LBL_MODULE_NAME_SINGULAR' => 'E-Posta Adresi',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Onay İsteği İşlemi Alındı',
+    'LBL_CONFIRMATION_TITLE' => 'Teşekkür ederiz',
+    'LBL_CONFIRMATION_MESSAGE' => 'Aboneliğiniz onaylandı. Sizi listemize ekledik ve kısa süre içerisinde bizden haber alacaksınız.',
 );

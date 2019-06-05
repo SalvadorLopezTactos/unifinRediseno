@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'هذا هو حساب النظام.',
     'LBL_EMAIL_ADDRESS_ID' => 'معرف عنوان البريد الإلكتروني',
     'LBL_TYPE' => 'النوع',
+    'LBL_REPLY_TO_NAME' => 'اسم "الرد على"',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'عناوين "الرد على"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'مُعرف عنوان "الرد على"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'عنوان "الرد على"',
+    'LBL_PRIMARY_TEAM' => 'الفريق الأساسي',
 );

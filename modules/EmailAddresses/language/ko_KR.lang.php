@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => '삭제하기',
     'LBL_MODULE_NAME' => '이메일 주소',
     'LBL_MODULE_NAME_SINGULAR' => '이메일 주소:',
+    'LBL_CONFIRMATION_REQUESTED_ON' => '확인 요청 동작 취해짐',
+    'LBL_CONFIRMATION_TITLE' => '감사합니다',
+    'LBL_CONFIRMATION_MESSAGE' => '구독이 확인되었습니다. 목록에 추가 완료되었으며 곧 이메일을 발송해 드립니다.',
 );

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: UpgradeWizard_prepare.php 55665 2010-03-29 23:55:22Z dwheeler $
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -148,6 +147,12 @@ if( isset( $manifest['remove_tables']) ){
 if($remove_tables != 'prompt'){
 	$hidden_fields .= "<input type=hidden name=\"remove_tables\" value='".$remove_tables."'>";
 }
+
+if (isset($manifest['uninstall_before_upgrade'])) {
+    $hidden_fields .= "<input type=hidden name=\"uninstall_before_upgrade\" value='"
+        . (int) $manifest['uninstall_before_upgrade'] ."'>";
+}
+
 if(file_exists($readme_file) || !empty($manifest['readme'])){
         $found_readme = true;
    }

@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> '分配给团队',
 	'LBL_DEFAULT_TEAM_TEXT'				=> '可用于记录在默认情况下显示的团队都属于您的成员。',
 	'LBL_DEFAULT_TEAM'					=> '默认团队',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => '默认主团队',
 	'LBL_LIST_DESCRIPTION'				=> '说明',
 	'LBL_MY_TEAMS'						=> '我的团队',
 	'LBL_PRIVATE_TEAM_FOR'				=> '私有团队属于',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '收件人电子邮件地址',
 	'ERR_SERVER_STATUS'					=> '您的服务器状态',
 	'ERR_SERVER_SMTP_EMPTY'				=> '系统无法发送邮件给用户。请到 <a href="index.php?module=EmailMan&action=config">电子邮件设置</a>检查系统发信配置。',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => '只能在 <a href="{0}" target="_blank">云控制台</a>中为 IDM 模式创建用户。',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '只能在 <a href="{0}" target="_blank">云控制台</a>中为 IDM 模式更新主要电子邮件地址。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => '电子邮件地址',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> '确认密码',
-	'LBL_CONFIRM_REGULAR_USER'			=> '您已将该用户类型从系统管理员转换为普通用户。保存更改之后，该用户将没有系统管理权限。\\n\\n单击 “确定”继续操作 。\\n单击 “取消”以返回至该记录。',
+	'LBL_CONFIRM_REGULAR_USER'			=> '您已将该用户类型从系统管理员转换为普通用户。保存更改之后，该用户将没有系统管理权限。\n\n单击 “确定”继续操作 。\n单击 “取消”以返回至该记录。',
 	'LBL_COUNTRY'						=> '国家',
 	'LBL_CURRENCY_TEXT'					=> '如果已启用显示首选货币，则在列表和记录视图中使用货币。这也是新记录的默认货币。',
 	'LBL_CURRENCY'						=> '首选货币',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> '小数位数显示为小数的地方和整个系统，如货币和报告中的平均值。',
     'LBL_CURRENCY_SHOW_PREFERRED'       => '显示首选货币',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => '转换基准货币为列表和记录视图中的用户首选项',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => '创建首选货币的营收单项',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => '如果从产品目录添加至机会的营收单项与产品目录项中使用的货币不同，那么，该营收单项将被转换成用户的首选货币。',
 	'LBL_NUMBER_GROUPING_SEP'			=> '千位分隔符',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> '分隔千位的字符',
 	'LBL_DECIMAL_SEP'					=> '小数符号',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> '提供有效的用户名和电子邮件地址。',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> '目前未启用。请联系您的系统管理员',
 	'LBL_PUBLISH_KEY'					=> '发布密钥',
-
+    'LBL_SITE_USER_ID' => 'Hash of site_url 和 user_id',
     'LBL_QUOTAS'                        => '定额',
     'LBL_FORECASTS'                     => '预测',
     'LBL_WORKSHEETS'                    => '工作表',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => '用户配置文件',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        '如果某些字段不可编辑，请登录到云控制台以管理这些字段',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        '如果要更改某些不可编辑的字段，' .
-        '请联系管理员以告知这些更改',
+        '如果需要更改只读字段，请联系您的 Sugar 管理员。',
 ); // END STRINGS DEFS
-
-?>

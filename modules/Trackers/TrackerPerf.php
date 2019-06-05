@@ -9,17 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
- * Description:  TODO: To be written.
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * Contributor(s): ______________________________________..
- ********************************************************************************/
-
-
-class TrackerPerf extends SugarBean {
-
+class TrackerPerf extends SugarBean
+{
     var $module_dir = 'Trackers';
     var $object_name = 'tracker_perf';
     var $module_name = 'TrackerPerfs';
@@ -37,4 +29,3 @@ class TrackerPerf extends SugarBean {
         return false;
     }
 }
-?>

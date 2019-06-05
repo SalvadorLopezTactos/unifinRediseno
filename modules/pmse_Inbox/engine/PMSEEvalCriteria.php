@@ -172,7 +172,7 @@ class PMSEEvalCriteria
         } else {
             //We set the array to check for groups within the array
             $this->verifyGroups($array);
-            //check if you have the same amount of (, ) y/o [, ] y/o {, } 
+            //check if you have the same amount of (, ) y/o [, ] y/o {, }
             if (!$this->verifyEqualsGroups()) {
                 return 0;
             }
@@ -411,51 +411,46 @@ class PMSEEvalCriteria
      * (array) - array
      * (object) - object
      * (unset) - NULL (PHP 5)
-     * @param type $value
-     * @param type $tipeDate
-     * @return type
+     * @param mixed $value The value to case. This could be a null.
+     * @param string $type The data type to cast to
+     * @return mixed
      */
-    public function typeData($value, $typeDate)
+    public function typeData($value, $type)
     {
 
-        switch (strtolower($typeDate)) {
-            case 'address'://varchar
-            case 'relate'://varchar
+        switch (strtolower($type)) {
+            case 'address':
+            case 'relate':
             case 'text':
-            case 'url'://varchar
-            case 'textfield'://varchar
-            case 'name'://varchar
-            case 'varchar'://varchar
-            case 'parent_type'://varchar
+            case 'url':
+            case 'textfield':
+            case 'name':
+            case 'varchar':
+            case 'parent_type':
                 $newValue = (string)$value;
                 break;
-            case 'bool'://bool 
+            case 'bool'://bool
             case 'boolean':
             case 'radioenum':
             case 'checkbox':
                 $newValue = (boolean)$value;
                 break;
-            case 'date'://date
-            case 'datetime'://datetime
-            case 'datetimecombo'://datetime
-                $newValue = strtotime($value);
+            case 'date':
+            case 'datetime':
+            case 'datetimecombo':
+                // A strtotime on a null returns false, so just return null
+                $newValue = $value === null ? $value : strtotime($value);
                 break;
             case 'enum'://int
             case 'int':
+            case 'integer':
                 $newValue = (int)$value;
                 break;
             case 'float':
                 $newValue = (float)$value;
                 break;
-            case 'integer':
-                $newValue = (integer)$value;
-                break;
-            case 'decimal'://decimal
-                $newValue = $value; ////////////////////////////////
-                break;
-            case 'currency'://double
-                $newValue = $value;
-                break;
+            case 'decimal':
+            case 'currency':
             case 'encrypt':
             case 'html':
             case 'iframe':

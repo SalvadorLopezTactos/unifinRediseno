@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Tildelt til:',
   'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',  	  
   'LBL_WORK_LOG' => 'Arbieds Log:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Opprettet av:',
   'LBL_DATE_CREATED' => 'Opprettet dato:',
   'LBL_DATE_ENTERED' => 'Opprettet dato:',

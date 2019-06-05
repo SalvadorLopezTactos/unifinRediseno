@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Der er fundet fejl under kompatibilitetskontrolen. For at din SugarCRM-installation kan fungere korrekt, skal du sørge for at løse problemerne nedenfor og enten trykke på knappen Tjek igen eller prøve at udføre installationen igen.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Tillad overførsel af opkaldstid som reference er aktiveret "Til" "den skal være deaktiveret "Fra" i php.ini"',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ikke fundet: Sugar Scheduler vil køre med begrænset funktionalitet. E-mail-arkiveringsfunktionen vil ikke køre.',
+	'ERR_CHECKSYS_CURL'					=> 'Ikke fundet: Sugar Scheduler vil køre med begrænset funktionalitet. E-mail-arkiveringstjenesten kører ikke.',
     'ERR_CHECKSYS_IMAP'					=> 'Blev ikke fundet: InboundEmail og Kampagner "e-mail" kræver IMAP-bibliotekerne. Ingen af dem fungerer.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '"Magic Quotes GPC kan ikke slås ""Til"", når du bruger MS SQL Server."',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Advarsel:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Du kan få den optimale oplevelse med IIS/FastCGI sapi ved at angive fastcgi.logging til 0 i filen php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'En ikke-understøttet PHP-version er installeret: "ver.',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er ikke tilgængelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database supoort ikke fundet. Sørg venligst for at du har de nødvendige drivere til en af følgende understøttede datatyper: MySQL, MS SQLServer, Oracle eller DB2. Det kan være nødvendigt at afkommentere udvidelsen i php.ini filen eller at genoversætte med den rette binære fil, afhængigt af hvilken version af PHP du anvender. Se venligst din PHP manual for yderligere information om hvordan database support aktiveres.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasesupport blev ikke fundet. Sørg venligst for, at du har de nødvendige drev til en af de følgende understøttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du er måske nødt til at afkommentere forlængelsen i php.ini-filen eller rekompilere med den rette binære fil, afhængigt af din version af PHP. Se venligst din PHP Manual for mere information om, hvordan man aktiverer Databasesupport.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner knyttet til XML-parserbiblioteker, som skal bruges af Sugar-programmet, blev ikke fundet. Du skal måske fjerne kommentaren fra udvidelsen i filen php.ini eller genkompilere med den korrekte binære fil afhængigt af din version af PHP. Du kan finde flere oplysninger i PHP-vejledningen.',
     'LBL_CHECKSYS_CSPRNG' => 'Tilfældigt talgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner knyttet til udvidelsen Multibyte Strings PHP "mbstring", som skal bruges af Sugar-programmet, blev ikke fundet. <br/><br/>Normalt er mbstring-modulet ikke aktiveret som standard i PHP og skal aktiveres med -aktivér-mbstring, når den binære PHP-fil bygges. Du kan finde flere oplysninger om, hvordan du aktiverer mbstring-understøttelse, i PHP-vejledningen.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Indstillingen session.save_path i din php-konfigurationsfil "php.ini" er ikke angivet eller er angivet til en mappe, som ikke findes. Du skal måske angive indstillingen save_path i php.ini eller kontrollere, at mappesættene i save_path findes.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Indstillingen session.save_path i din php-konfigurationsfil "php.ini" er angivet til en ikke-skrivbar mappe. Sørg for at gøre mappen skrivbar. <br>Afhængigt af operativsystemet skal du måske ændre tilladelserne ved at køre chmod 766 eller højreklikke på filnavnet for at få adgang til egenskaberne og fjerne markeringen af indstillingen Skrivebeskyttet.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Filen config findes, men den er ikke skrivbar. Sørg for at gøre filen skrivbar. Afhængigt af operativsystemet skal du måske ændre tilladelserne ved at køre chmod 766 eller højreklikke på filnavnet for at få adgang til egenskaberne og fjerne markeringen af indstillingen Skrivebeskyttet.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP-modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Modulet MB-strenge',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK "ingen grænse"',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK "ubegrænset"',
 	'LBL_CHECKSYS_MEM'					=> 'PHP-hukommelsesgrænse',
@@ -549,9 +547,9 @@ id, der sikrer, at sessioner af et Sugar-eksempel ikke bruges af andre forekomst
     'advanced_password_new_account_email' => array(
         'subject' => 'Ny kontoinformation',
         'description' => 'Denne skabelon bruges når systemadministratoren sender en nyt adgangskode til en bruger.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p> Her er din kontos brugernavn og midlertidige adgangskode:</p><p>Brugernavn : 
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p> Her er din kontos brugernavn og midlertidige adgangskode:</p><p>Brugernavn : 
 $contact_user_user_name </p><p>Adgangskode : 
-$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Efter du er logged på ved brug af ovenstående adgangskode, kan systemet kræve at du laver en selvvalgt adgangskode.</p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Efter du er logged på ved brug af ovenstående adgangskode, kan systemet kræve at du laver en selvvalgt adgangskode.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Her er dit brugernavn og midlertidige adgangskode: 
@@ -566,8 +564,8 @@ Når du logger på ved hjælp af ovenstående adgangskode, kan du blive bedt om 
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Nulstil din adgangskode',
         'description' => "Denne skabelon bruges til at sende en bruger et link til at klikke på for at nulstille brugerens adgangskode.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Du har for nylig anmodet om på $contact_user_pwd_last_changed at få lov til at nulstille din adgangskode. </p><p>Klik på nedenstående link for at nulstille din adgangskode:
-href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Du har for nylig anmodet om på $contact_user_pwd_last_changed at få lov til at nulstille din adgangskode. </p><p>Klik på nedenstående link for at nulstille din adgangskode:
+href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 '
 Du har for nylig anmodet om på $contact_user_pwd_last_changed at få lov til at nulstille din adgangskode. 

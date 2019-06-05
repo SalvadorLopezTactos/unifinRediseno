@@ -201,6 +201,8 @@ class PMSEExpressionEvaluator
      * @param string $firstOperand assess value
      * @param string $operator type of operator that evaluates
      * @param string $secondOperand assess value
+     * @param string $tokenType
+     * @param boolean $isUpdate Flag that determines if this is a record update or record add
      * @return type
      */
     public function routeFunctionOperator(
@@ -208,7 +210,8 @@ class PMSEExpressionEvaluator
         $firstOperand,
         $operator,
         $secondOperand = null,
-        $tokenType = null
+        $tokenType = null,
+        $isUpdate = false
     ) {
         switch ($operation) {
             case 'unary':
@@ -236,12 +239,7 @@ class PMSEExpressionEvaluator
                 $result = $this->executeSpanSpanOp($firstOperand, $operator, $secondOperand);
                 break;
             case 'relation':
-                $result = (bool)$this->evalRelations(
-                    $firstOperand,
-                    $operator,
-                    $secondOperand,
-                    $tokenType
-                );
+                $result = (bool)$this->evalRelations($firstOperand, $operator, $secondOperand, $tokenType, $isUpdate);
                 break;
             case 'logic':
                 $result = $this->executeLogicOp($firstOperand, $operator, $secondOperand);

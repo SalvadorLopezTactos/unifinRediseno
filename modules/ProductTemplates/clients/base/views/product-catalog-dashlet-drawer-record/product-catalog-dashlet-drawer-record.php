@@ -63,6 +63,12 @@ $viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-re
                 array(
                     'name' => 'name',
                 ),
+                array(
+                    'name' => 'favorite',
+                    'label' => 'LBL_FAVORITE',
+                    'type' => 'favorite',
+                    'dismiss_label' => true,
+                ),
             ),
         ),
         array(

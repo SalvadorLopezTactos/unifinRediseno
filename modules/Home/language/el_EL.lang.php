@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - Μια απλή SAML εργαλειοθήκη για την PHP.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Η υπερχείλιση: κύλιση για mobile webkit. Εγγενής κύλιση μέσα σε ένα σταθερό στοιχείο πλάτος / ύψος.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas is a JavaScript βιβλιοθήκη η οποία προσθέτει Canvas HTML5 υποστήριξη για τον Internet Explorer. Καθιστά τα σχήματα και τις εικόνες μέσω του Flash API σχεδίασης. Υποστηρίζει σχεδόν όλους τους Canvas API και, σε πολλές περιπτώσεις, τρέχει γρηγορότερα από άλλες παρόμοιες βιβλιοθήκες που χρησιμοποιούν VML ή το Silverlight.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - The JavaScript InfoVis Toolkit παρέχει εργαλεία για τη δημιουργία Διαδραστικών Απεικονίσεων των Δεδομένων για τον Παγκόσμιο Ιστό.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Μια ανοικτή πηγή, αντικειμενοστραφές πλαίσιο ιστοχώρου για την εφαρμογή PHP5.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV δεδομένα parser για PHP',
   'LBL_SOURCE_PHPJS' => 'php.js - Χρησιμοποιήστε τις λειτουργίες της PHP σε JavaScript',

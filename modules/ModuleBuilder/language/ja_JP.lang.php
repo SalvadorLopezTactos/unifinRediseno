@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\\n\\nDo you wish to continue?',
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'本当にこの関連を削除してよいですか？',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'この関連付けを永続化します。本当にこの関連付けを配置してよいですか？',
 'LBL_CONFIRM_DONT_SAVE' => '最後に保存された状態から変更が加えられています。保存しますか？',

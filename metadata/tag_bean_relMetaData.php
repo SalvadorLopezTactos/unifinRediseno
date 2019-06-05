@@ -70,5 +70,24 @@ $dictionary['tag_bean_rel'] = array(
                 'bean_id',
             ),
         ),
+        array(
+            'name' => 'idx_del_tagid_beanid',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'tag_id',
+                'bean_id',
+            ),
+        ),
+        array(
+            'name' => 'idx_bid_tid_bm_del',
+            'type' => 'index',
+            'fields' => array(
+                'bean_id',
+                'tag_id',
+                'bean_module',
+                'deleted',
+            ),
+        ),
     ),
 );

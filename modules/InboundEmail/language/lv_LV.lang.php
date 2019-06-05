@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Atb:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Pieteikšanās vārds vai parole nav pareiza',
-	'ERR_BODY_TOO_LONG'		=> '\\r Ķermeņa teksts ir pārāk garš lai attēlotu PILNU e-pastu. Apgriezts.',
+	'ERR_BODY_TOO_LONG'		=> '\r Ķermeņa teksts ir pārāk garš lai attēlotu PILNU e-pastu. Apgriezts.',
 	'ERR_INI_ZLIB'			=> 'Pagaidām nevar izslēgt "Zlib" kompresiju.  "Iestatījumu pārbaude" var neizdoties.',
 	'ERR_MAILBOX_FAIL'		=> 'Nevar izgūt nevienu pasta kontu.',
 	'ERR_NO_IMAP'			=> 'Nav atrastas IMAP bibliotēkas.  Atrisiniet šo problēmu pirms ienākošo e-pastu procedūras turpināšanas',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Atdaliet rindas no darba grupām',
 	'LBL_GROUPFOLDER_ID'	=> 'Grupas mapes id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Piešķirt grupu mapei',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Atļaut lietotājiem izmanto kā atbildes adresi sūtītāja vārdu un adresi',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Ja opcija tiks atzīmēta, tad lietotājiem, kuriem ir pieeja grupas e-pasta konta, veidojot jaunus e-pastu, kā sūtītāja vārds un adrese var tikt izmantots grupas parametros norādītais sūtītāja vārds un adrese.',
     'LBL_STATUS_ACTIVE'     => 'Aktīvs',
     'LBL_STATUS_INACTIVE'   => 'Neaktīvs',
     'LBL_IS_PERSONAL' => 'Privāts',

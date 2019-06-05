@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -10,11 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(!defined('sugarEntry'))define('sugarEntry', true);
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 
 chdir(dirname(__FILE__));
 define('ENTRY_POINT_TYPE', 'api');
 require_once 'include/entryPoint.php';
 
-MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_CONFIG));
-MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO));
+// enable portal
+$portalConfig = new ParserModifyPortalConfig();
+$portalConfig->setUpPortal();
+ModuleInstaller::handlePortalConfig();
+
+// refresh cache
+MetaDataManager::refreshSectionCache(MetaDataManager::MM_CONFIG, ['base', 'portal']);
+MetaDataManager::refreshSectionCache(MetaDataManager::MM_SERVERINFO, ['base', 'portal']);

@@ -313,7 +313,7 @@ function process_dynamic_listview($source_module, $sugarbean,$subpanel_def)
 
         $module_name = '';
 
-        while (list($aVal, $aItem) = each($data)) {
+        foreach ($data as $aItem) {
             $subpanel_item_count++;
             $aItem->check_date_relationships_load();
             // TODO: expensive and needs to be removed and done better elsewhere
@@ -1588,9 +1588,9 @@ function getUserVariable($localVarName, $varName) {
         //mail merge list
         $mergeList = array();
         $module = '';
+
         //todo what is this?  It is using an array as a boolean
-        while(list($aVal, $aItem) = each($data))
-        {
+        foreach ($data as $aVal => $aItem) {
             if(isset($this->data_array)) {
                 $fields = $this->data_array;
             } else {

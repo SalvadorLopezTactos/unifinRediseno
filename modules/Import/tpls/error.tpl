@@ -20,7 +20,7 @@
     var cancelLBL = '{$MOD.LBL_CANCEL}';
     var actionVAR = '{$ACTION}';
     var importModuleVAR = '{$IMPORT_MODULE}';
-    var sourceVAR = '{$SOURCE}';
+    var sourceVAR = '{$SOURCE|escape:'javascript':'UTF-8'}';
     var showCancelVAR = '{$SHOWCANCEL}';
     {if !empty($CANCELLABEL)}
         cancelLBL = '{$CANCELLABEL}';

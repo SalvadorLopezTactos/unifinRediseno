@@ -10,14 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['tracker_tracker_queries'] = array ( 
-'table' => 'tracker_tracker_queries', 
-'fields' => array (
-      'id'=>array('name' => 'id', 'vname' => 'LBL_ID', 'type' => 'int', 'len' => '11', 'isnull' => 'false', 'auto_increment' => true, 'reportable'=>false),      
-      'monitor_id'=>array('name' =>'monitor_id', 'type' =>'id', 'len'=>'36'),
-      'query_id'=>array('name' =>'query_id', 'type' =>'id', 'len'=>'36'),
-      'date_modified'=>array ('name' => 'date_modified','type' => 'datetime')
-),
+$dictionary['tracker_tracker_queries'] = array(
+    'table' => 'tracker_tracker_queries',
+    'fields' => array(
+          'id' => array(
+              'name' => 'id',
+              'vname' => 'LBL_ID',
+              'type' => 'int',
+              'isnull' => 'false',
+              'auto_increment' => true,
+              'reportable' => false,
+          ),
+          'monitor_id' => array(
+              'name' => 'monitor_id',
+              'type' =>'id',
+          ),
+          'query_id' => array(
+              'name' =>'query_id',
+              'type' =>'id',
+          ),
+          'date_modified' => array(
+              'name' => 'date_modified',
+              'type' => 'datetime',
+          ),
+    ),
 'indices' => array (
       array('name' =>'tracker_tracker_queriespk', 'type' =>'primary', 'fields'=>array('id')),
       array('name' =>'idx_tracker_tq_monitor', 'type' =>'index', 'fields'=>array('monitor_id')),
@@ -31,6 +47,4 @@ $dictionary['tracker_tracker_queries'] = array (
 		'join_table'=> 'tracker_tracker_queries', 'join_key_lhs'=>'monitor_id', 'join_key_rhs'=>'query_id'
 	 )
 )
-);                              
-
-?>
+);

@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Atanan Kişi:',
   'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi:',  	  
   'LBL_WORK_LOG' => 'İş Tarihçesi:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Oluşturan:',
   'LBL_DATE_CREATED' => 'Oluşturulma Tarihi:',
   'LBL_DATE_ENTERED' => 'Oluşturulma Tarihi:',

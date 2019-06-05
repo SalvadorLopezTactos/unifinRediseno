@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Määratud kasutajale:',
   'LBL_ASSIGNED_TO_NAME' => 'Kasutaja:',  	  
   'LBL_WORK_LOG' => 'Töö logi:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Looja:',
   'LBL_DATE_CREATED' => 'Loomiskuupäev:',
   'LBL_DATE_ENTERED' => 'Loomiskuupäev:',

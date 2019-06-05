@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definicionet e rrjedhës së punës',
   'LBL_MODULE_NAME_SINGULAR' => 'definicioni fletë pune',
-  'LBL_MODULE_ID' => 'Rrjedha e punës',  
+  'LBL_MODULE_ID' => 'Rrjedha e punës',
   'LBL_MODULE_TITLE' => 'Rrjedha e punës: Ballina',
   'LBL_SEARCH_FORM_TITLE' => 'Kërkimi i rrjedhës së punës',
   'LBL_LIST_FORM_TITLE' => 'Lista e rrjedhës së punës',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Moduli i synimit',
   'LBL_LIST_ORDER' => 'Procesi i urdhërit',
   'LBL_FROM_NAME' => 'Nga emri',
-  'LBL_FROM_ADDRESS' => 'Nga adresa',  
+  'LBL_FROM_ADDRESS' => 'Nga adresa',
   'LNK_NEW_WORKFLOW' => 'Krijo definiicion të rrjedhës së punës',
-  'LNK_WORKFLOW' => 'Lista e definicioneve të rrjedhës së punës', 
-  
-  
+  'LNK_WORKFLOW' => 'Lista e definicioneve të rrjedhës së punës',
+
+
   'LBL_ALERT_TEMPLATES' => 'Shabllonet e alarmeve',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Krijo shabllon të alarmit',
   'LBL_SUBJECT' => 'Subjekti',
-  
+
   'LBL_RECORD_TYPE' => 'i aplikohet',
  'LBL_RELATED_MODULE'=> 'Mouli lidhës',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sekuenca e rrjedhës së punës',
 	'LNK_ALERT_TEMPLATES' => 'Shabllonet e emaileve alarmuese',
 	'LNK_PROCESS_VIEW' => 'Sekuenca e rrjedhës së punës',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Lloji',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Shënim:</strong> Funksioni "Rrjedha e punës" dhe "Administrimi i rrjedhës së punës" të "Sugar" do të hiqen në versionin e ardhshëm të "Sugar". Klientët e versionit "Sugar Enterprise" duhet të fillojnë të përdorin funksionin "Advanced Workflow" të "Sugar". Kliko <a href="http://www.sugarcrm.com/wf-eol" target="_blank">këtu</a> për më shumë informacion.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Shënim:</strong> Funksioni "Rrjedha e punës" dhe "Administrimi i rrjedhës së punës" të "Sugar" është në modalitet mirëmbajtjeje. Klientët e versionit "Sugar Enterprise" duhet të fillojnë të përdorin funksionin e ofruar nga SugarBPM<sup class="trademark">TM</sup>.',
 );
 

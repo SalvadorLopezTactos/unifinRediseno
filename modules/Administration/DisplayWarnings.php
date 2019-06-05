@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-global $db;
 function displayAdminError($errorString){
 	$output = '<p class="error">' . $errorString .'</p>';
 	if(!empty($GLOBALS['buffer_system_notifications'])){
@@ -20,6 +18,16 @@ function displayAdminError($errorString){
 	}else{
 		echo $output;
 	}
+}
+
+function getLicenseUsers()
+{
+    global $db;
+    $focus = Administration::getSettings();
+    $license_users = isset($focus->settings['license_users'])?$focus->settings['license_users']:'';
+    $activeUsers = $db->getOne("SELECT count(id) as total from users WHERE " . User::getLicensedUsersWhere());
+
+    return ['license_users' => $license_users, 'active_users' => $activeUsers];
 }
 
 if(!empty($_SESSION['display_lotuslive_alert'])){
@@ -157,16 +165,17 @@ if($smtp_error) {
 	        }
     }
 
-        if( !isset($_SESSION['license_seats_needed']) ){
-            $focus = Administration::getSettings();
-            $license_users = isset($focus->settings['license_users'])?$focus->settings['license_users']:'';
+    if (!isset($_SESSION['license_seats_needed'])) {
+        $licenseInfo = getLicenseUsers();
+        $_SESSION['license_seats_needed'] =  $licenseInfo['active_users'] - $licenseInfo['license_users'];
+    }
 
-            $_SESSION['license_seats_needed'] = $db->getOne("SELECT count(id) as total from users WHERE ".User::getLicensedUsersWhere()) - $license_users;
-        }
-
-        if( $_SESSION['license_seats_needed'] > 0 ){
-            displayAdminError( translate('WARN_LICENSE_SEATS', 'Administration'). $_SESSION['license_seats_needed'] . translate('WARN_LICENSE_SEATS2', 'Administration')  );
-        }
+    if ($_SESSION['license_seats_needed'] > 0) {
+        $licenseInfo = $licenseInfo ?? getLicenseUsers();
+        displayAdminError(translate('WARN_LICENSE_SEATS', 'Administration')
+            . $licenseInfo['active_users'] . translate('WARN_LICENSE_SEATS2', 'Administration')
+            .  $licenseInfo['license_users'] . translate('WARN_LICENSE_SEATS3', 'Administration'));
+    }
         //END REQUIRED CODE DO NOT MODIFY
         if(empty($GLOBALS['sugar_config']['admin_access_control'])){
 			if (isset($_SESSION['available_version'])){

@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'הוקצה עבור:',
   'LBL_ASSIGNED_TO_NAME' => 'משתמש:',  	  
   'LBL_WORK_LOG' => 'יומן עבודה:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'נוצר על ידי:',
   'LBL_DATE_CREATED' => 'נוצר בתאריך:',
   'LBL_DATE_ENTERED' => 'נוצר בתאריך:',

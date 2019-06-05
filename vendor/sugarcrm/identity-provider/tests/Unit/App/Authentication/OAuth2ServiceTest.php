@@ -17,6 +17,7 @@ use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentTokenInterface;
 use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
+use Sugarcrm\IdentityProvider\App\Authentication\OpenId\StandardClaimsService;
 use Sugarcrm\IdentityProvider\STS\EndpointService;
 use Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Sugarcrm\IdentityProvider\Authentication\User;
 
 /**
- * @coversDefaultClass Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service
  */
 class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,6 +44,11 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
      * @var EndpointService | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $endpointService;
+
+    /**
+     * @var StandardClaimsService | \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $claimsService;
 
     /**
      * @var string
@@ -81,6 +87,7 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->oAuth2Provider = $this->createMock(GenericProvider::class);
         $this->endpointService = $this->createMock(EndpointService::class);
+        $this->claimsService = $this->createMock(StandardClaimsService::class);
         $this->request = $this->createMock(RequestInterface::class);
         $this->response = $this->createMock(ResponseInterface::class);
         $this->consentToken = $this->createMock(ConsentTokenInterface::class);
@@ -94,7 +101,11 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
                              ->with('client_credentials', $this->arrayHasKey('scope'))
                              ->willReturn($this->accessToken);
 
-        $this->oAuth2Service = new OAuth2Service($this->endpointService, $this->oAuth2Provider);
+        $this->oAuth2Service = new OAuth2Service(
+            $this->endpointService,
+            $this->oAuth2Provider,
+            $this->claimsService
+        );
     }
 
     /**
@@ -254,12 +265,31 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
      * @dataProvider invalidIntrospectTokenDataProvider
      * @param $result
      */
-    public function testInvalidIntrospectToken($result)
+    public function testInvalidIntrospectToken($result): void
     {
         $token = '--some--token--';
+        $this->endpointService->expects($this->once())
+            ->method('getOAuth2Endpoint')
+            ->with('introspect')
+            ->willReturn($url = 'http://test/oauth2/introspect');
+
         $this->oAuth2Provider->expects($this->once())
-            ->method('introspectToken')
-            ->with(new AccessToken(['access_token' => $token]))
+            ->method('getAuthenticatedRequest')
+            ->with(
+                'POST',
+                'http://test/oauth2/introspect',
+                'accessToken',
+                [
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                        'Accept' => 'application/json',
+                    ],
+                    'body' => 'token=--some--token--',
+                ]
+            )->willReturn($this->request);
+
+        $this->oAuth2Provider->expects($this->once())
+            ->method('getParsedResponse')
             ->willReturn($result);
 
         $this->oAuth2Service->introspectToken($token);
@@ -267,14 +297,55 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::introspectToken
+     * @expectedExceptionMessage Introspect token is invalid, reason: invalid_scope, refreshing. Please try again
+     * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
      */
-    public function testIntrospectToken()
+    public function testExpiredIntrospectToken(): void
+    {
+        $token = '--some--token--';
+        $this->oAuth2Provider->expects($this->once())
+            ->method('getAuthenticatedRequest')
+            ->willReturn($this->request);
+        $this->oAuth2Provider->expects($this->once())
+            ->method('getParsedResponse')
+            ->will(
+                $this->throwException(
+                    new \League\OAuth2\Client\Provider\Exception\IdentityProviderException('invalid_scope', 0, 'body')
+                )
+            );
+        $this->oAuth2Service->introspectToken($token);
+    }
+
+    /**
+     * @covers ::introspectToken
+     */
+    public function testIntrospectToken(): void
     {
         $token = '--some--token--';
         $expectedResult = ['active' => true, 'scope' => 'someScopeValue'];
+
+        $this->endpointService->expects($this->once())
+            ->method('getOAuth2Endpoint')
+            ->with('introspect')
+            ->willReturn($url = 'http://test/oauth2/introspect');
+
         $this->oAuth2Provider->expects($this->once())
-            ->method('introspectToken')
-            ->with(new AccessToken(['access_token' => $token]))
+            ->method('getAuthenticatedRequest')
+            ->with(
+                'POST',
+                'http://test/oauth2/introspect',
+                'accessToken',
+                [
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                        'Accept' => 'application/json',
+                    ],
+                    'body' => 'token=--some--token--',
+                ]
+            )->willReturn($this->request);
+
+        $this->oAuth2Provider->expects($this->once())
+            ->method('getParsedResponse')
             ->willReturn($expectedResult);
 
         $result = $this->oAuth2Service->introspectToken($token);
@@ -326,7 +397,7 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->user);
 
         $this->consentToken->expects($this->once())
-            ->method('getScope')
+            ->method('getScopes')
             ->willReturn($scope = ['offline', 'openid', 'hydra.*']);
 
         $this->consentToken->expects($this->once())
@@ -357,6 +428,10 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->willReturn(Response::HTTP_NO_CONTENT);
 
+        $this->claimsService->expects($this->once())
+            ->method('getUserClaims')
+            ->with($this->user);
+
         $this->oAuth2Service->acceptConsentRequest($this->consentToken, $this->userToken);
     }
 
@@ -376,7 +451,7 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->user);
 
         $this->consentToken->expects($this->once())
-            ->method('getScope')
+            ->method('getScopes')
             ->willReturn($scope = ['offline', 'openid', 'hydra.*']);
 
         $this->consentToken->expects($this->once())
@@ -474,5 +549,16 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn(Response::HTTP_NOT_FOUND);
 
         $this->oAuth2Service->rejectConsentRequest($requestId, 'invalid scope');
+    }
+
+    /**
+     * @covers ::refreshAccessToken
+     */
+    public function testRefreshAccessToken()
+    {
+        $this->oAuth2Provider->expects($this->once())
+            ->method('refreshAccessToken')
+            ->willReturn(true);
+        $this->assertTrue($this->oAuth2Service->refreshAccessToken());
     }
 }

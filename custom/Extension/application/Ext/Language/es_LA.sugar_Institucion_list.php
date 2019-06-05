@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:11:40
+ // created: 2019-04-29 10:31:06
 
 $app_list_strings['Institucion_list']=array (
   '' => '',
@@ -45,7 +45,6 @@ $app_list_strings['Institucion_list']=array (
   'BNP' => 'BNP',
   'JP MORGAN' => 'JP MORGAN',
   'MONEX' => 'MONEX',
-  'VE POR MAS' => 'VE POR MAS',
   'BANK ONE' => 'BANK ONE',
   'FUJI' => 'FUJI',
   'ING' => 'ING',
@@ -88,4 +87,5 @@ $app_list_strings['Institucion_list']=array (
   'BANCO S3' => 'BANCO S3',
   'BANORTE' => 'BANORTE',
   'OBRERO' => 'OBRERO',
+  'BXMAS' => 'BX+',
 );

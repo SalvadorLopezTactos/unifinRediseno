@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Smazat',
     'LBL_MODULE_NAME' => 'E-mailové adresy',
     'LBL_MODULE_NAME_SINGULAR' => 'E-mailová adresa',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Provedena akce žádosti o potvrzení',
+    'LBL_CONFIRMATION_TITLE' => 'Děkujeme',
+    'LBL_CONFIRMATION_MESSAGE' => 'Vaše přihlášení k odběru bylo potvrzeno. Byl(a) jste přidán(a) do našeho seznamu a brzy se vám ozveme.',
 );

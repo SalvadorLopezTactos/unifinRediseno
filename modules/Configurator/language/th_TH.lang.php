@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'เซิร์ฟเวอร์ Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'รายการแผงข้อมูลย่อยต่อเพจ',
 	'LOG_MEMORY_USAGE'=>'การใช้หน่วยความจำของล็อก',
-    'LOG_SLOW_QUERIES' => 'ล็อกการสืบค้นที่ทำงานช้า',
+    'LOG_SLOW_QUERIES' => 'บันทึกคิวรีแบบช้า',
     'LOCK_HOMEPAGE_HELP'=>'การตั้งค่านี้มีไว้เพื่อป้องกัน<BR> 1) การเพิ่มหน้าแรกและส่วนข้อมูลใหม่ในโมดูลหน้าแรก <BR>2) การปรับแต่งตำแหน่งของส่วนข้อมูลในหน้าแรกโดยการลากและวาง',
     'CURRENT_LOGO'=>'โลโก้ปัจจุบัน:',
     'CURRENT_LOGO_HELP'=>'โลโก้นี้จะปรากฎที่มุมด้านซ้ายของส่วนท้ายในแอปพลิเคชัน Sugar',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'แสดงแท็บดาวน์โหลด',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'เมื่อเลือกไว้ แท็บดาวน์โหลดจะปรากฏในการตั้งค่าของผู้ใช้ และทำให้ผู้ใช้สามารถเข้าถึงปลั๊กอินของ Sugar และไฟล์อื่นๆ ที่ใช้ได้',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'สำหรับการตรวจสอบสิทธิ์ SOAP เมื่อใช้ LDAP',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'ต้องเปิดใช้งาน php_mcrypt ในไฟล์ php.ini ของคุณ',
     'LBL_ALL' => 'ทั้งหมด',
     'LBL_MARK_POINT' => 'จุดทำเครื่องหมาย',
     'LBL_NEXT_' => 'ถัดไป>>',
@@ -443,6 +442,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'สตรีมกิจกรรม',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'เปิดการใช้งานสตรีมกิจกรรม',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'เปิดสตรีมกิจกรรมสำหรับแอปพลิเคชัน',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'เปิดการใช้งานเนื้อหาการเข้าสู่ระบบหน้าจอเพิ่มเติม',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'การกำหนดกระบวนการบันทึกอัตโนมัติ',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'กำหนดวิธีการกำหนดกระบวนการบันทึกอัตโนมัติเมื่อใช้การออกแบบ',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'การกำหนดกระบวนการตรวจสอบอัตโนมัติอยู่ในโหมดบันทึกอัตโนมัติ',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'สลับไม่ว่าการกำหนดกระบวนการจะได้รับการจรวจสอบเมื่อมีการบันทึกอัตโนมัติหรือไม่ การตั้งค่านี้จะมีผลเมื่อมีการกำหนด "การกำหนดกระบวนการบันทึกอัตโนมัติ" ในช่วงเวลาใดเวลาหนึ่ง',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'การกำหนดกระบวนการตรวจสอบอัตโนมัติกำลังอยู่ระหว่างการนำเข้า',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'สลับไม่ว่าการกำหนดกระบวนการจะได้รับการตรวจสอบโดยอัตโนมัติหรือไม่เมื่อนำเข้ามาในครั้งแรก',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'การตั้งค่าการบันทึกความคิดเห็น',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'จำนวนอักขระสูงสุดที่จะแสดงในแต่ละความคิดเห็น',
 );
 
 

@@ -7,29 +7,43 @@ use Sugarcrm\IdentityProvider\Srn\Srn;
 
 class TenantTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Tenant
-     */
-    protected $tenant;
-
-    protected function setUp()
-    {
-        $this->tenant = new Tenant();
-    }
-
     public function testSetAndGet()
     {
-        $this->tenant->setId($id = '1234567890');
-        $this->tenant->setDisplayName($name = 'solarwind');
-        $this->tenant->setDomainName($domain = 'solarwind.net');
-        $this->tenant->setRegion($region = 'us');
-        $this->tenant->setDeleted(1);
+        $tenant = Tenant::fromArray([
+            'id' => $id = '1234567890',
+            'region' => $region = 'us',
+            'display_name' => $displayName = 'solarwind',
+            'logo' => $logo = 'some_log',
+        ]);
 
-        $this->assertEquals($id, $this->tenant->getId());
-        $this->assertEquals($name, $this->tenant->getDisplayName());
-        $this->assertEquals($domain, $this->tenant->getDomainName());
-        $this->assertEquals($region, $this->tenant->getRegion());
-        $this->assertTrue($this->tenant->isDeleted());
+        $this->assertEquals($id, $tenant->getId());
+        $this->assertEquals($region, $tenant->getRegion());
+        $this->assertEquals($displayName, $tenant->getDisplayName());
+        $this->assertEquals($logo, $tenant->getLogo());
+        $this->assertEquals(Tenant::STATUS_ACTIVE, $tenant->getStatus());
+        $this->assertTrue($tenant->isActive());
+
+        $tenant = Tenant::fromArray([
+            'id' => $id = '1234567890',
+            'region' => $region = 'us',
+            'status' => $status = Tenant::STATUS_INACTIVE,
+        ]);
+
+        $this->assertEquals($id, $tenant->getId());
+        $this->assertEquals($region, $tenant->getRegion());
+        $this->assertEquals('', $tenant->getDisplayName());
+        $this->assertEquals('', $tenant->getLogo());
+        $this->assertEquals(Tenant::STATUS_INACTIVE, $tenant->getStatus());
+        $this->assertFalse($tenant->isActive());
+
+        $tenant = Tenant::new($id = '1234567890', $region = 'us');
+
+        $this->assertEquals($id, $tenant->getId());
+        $this->assertEquals($region, $tenant->getRegion());
+        $this->assertEquals('', $tenant->getDisplayName());
+        $this->assertEquals('', $tenant->getLogo());
+        $this->assertEquals(Tenant::STATUS_ACTIVE, $tenant->getStatus());
+        $this->assertTrue($tenant->isActive());
     }
 
     public function testFillBySRN()
@@ -38,8 +52,8 @@ class TenantTest extends \PHPUnit_Framework_TestCase
         $srn->setRegion('eu');
         $srn->setTenantId('1234567890');
 
-        $this->tenant->fillFromSRN($srn);
-        $this->assertEquals('eu', $this->tenant->getRegion());
-        $this->assertEquals('1234567890', $this->tenant->getId());
+        $tenant = Tenant::fromSrn($srn);
+        $this->assertEquals('1234567890', $tenant->getId());
+        $this->assertEquals('eu', $tenant->getRegion());
     }
 }

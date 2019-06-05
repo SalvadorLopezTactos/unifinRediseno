@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Dodijeli timu',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Timovi čiji ste članovi dostupni su za zadani prikaz u zapisima.',
 	'LBL_DEFAULT_TEAM'					=> 'Zadani timovi',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Zadani primarni tim',
 	'LBL_LIST_DESCRIPTION'				=> 'Opis',
 	'LBL_MY_TEAMS'						=> 'Moji timovi',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privatni tim za',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa e-pošte primatelja',
 	'ERR_SERVER_STATUS'					=> 'Vaš status poslužitelja',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sustav ne može poslati e-poštu korisniku. Provjerite konfiguraciju za odlaznu poštu u <a href="index.php?module=EmailMan&action=config">Postavkama e-pošte</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Korisnika je moguće stvoriti samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM način rada.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primarnu adresu e-pošte je moguće ažurirati samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM način rada.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresa e-pošte',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdi lozinku',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Promijenili ste vrstu korisnika s korisnika administratora sustava na redovnog korisnika. Nakon spremanja ove promjene korisnik više neće imati administratorske povlastice.\\n\\nZa nastavak kliknite na U redu.\\nKliknite na Odustani da biste se vratili na zapis.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Promijenili ste vrstu korisnika s korisnika administratora sustava na redovnog korisnika. Nakon spremanja ove promjene korisnik više neće imati administratorske povlastice.\n\nZa nastavak kliknite na U redu.\nKliknite na Odustani da biste se vratili na zapis.',
 	'LBL_COUNTRY'						=> 'Zemlja',
 	'LBL_CURRENCY_TEXT'					=> 'Ova se valuta upotrebljava na prikazu popisa i zapisa ako je uključena opcija Prikaži željenu valutu. To je također vaša zadana valuta za nove zapise.',
 	'LBL_CURRENCY'						=> 'Željena valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Broj decimalnih mjesta za decimalne i realne brojeve u sustavu, poput valuta i prosječnih vrijednosti u izvješćima.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Prikaži željenu valutu',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Pretvori osnovnu valutu u onu koju korisnik želi na prikazu popisa i zapisa',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Stvori stavke prihoda u željenoj valuti',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Stavke prihoda iz kataloga proizvoda koje su dodane prilici pretvorit će se u željenu valutu korisnika ako je različita od valute koja se koristi u stavci kataloga proizvoda.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Razdjelnik tisućica',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Znak kojim se razdvajaju tisućice',
 	'LBL_DECIMAL_SEP'					=> 'Decimalni znak',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Unesite ispravno korisničko ime i adresu e-pošte.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Ovo trenutačno nije uključeno. Obratite se administratoru.',
 	'LBL_PUBLISH_KEY'					=> 'Šifra objavljivanja',
-
+    'LBL_SITE_USER_ID' => 'Raspršivanje elemenata site_url i user_id',
     'LBL_QUOTAS'                        => 'Kvote',
     'LBL_FORECASTS'                     => 'Predviđanja',
     'LBL_WORKSHEETS'                    => 'Radni listovi',
@@ -633,10 +633,7 @@ Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
     'LBL_DETAIL' => 'Korisnički profil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Ako određena polja nije moguće urediti, prijavite se na Cloud konzolu kako biste mogli upravljati ovim poljima',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Ako želite promijeniti određena polja koja nije moguće urediti, ' .
-        'obratite se administratoru da biste prijavili te izmjene',
+        'Ako želite izvršiti izmjene na poljima koja su samo za čitanje, obratite se administratoru za Sugar.',
 ); // END STRINGS DEFS
-
-?>

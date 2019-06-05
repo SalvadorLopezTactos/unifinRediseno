@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ceci est le compte système.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID d&#39;adresse e-mail',
     'LBL_TYPE' => 'Type',
+    'LBL_REPLY_TO_NAME' => 'Nom du "Répondre à"',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adresses e-mail du "Répondre à"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID d&#39;adresse e-mail du "Répondre à"',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresse e-mail du "Répondre à"',
+    'LBL_PRIMARY_TEAM' => 'Équipe principale',
 );

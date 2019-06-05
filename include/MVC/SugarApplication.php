@@ -20,6 +20,7 @@ use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Bwc;
 use Sugarcrm\Sugarcrm\Security\Subject\User;
 use Sugarcrm\Sugarcrm\Session\SessionStorage;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
 /**
  * SugarCRM application
@@ -289,8 +290,9 @@ class SugarApplication
         }
 
         // If we're authenticating, do not redirect
-        if (!empty($_REQUEST['module']) && !empty($_REQUEST['action'])
-            && 'Users' == $_REQUEST['module'] && 'authenticate' == strtolower($_REQUEST['action'])) {
+        $module = $this->request->getValidInputRequest('module');
+        $action = $this->request->getValidInputRequest('action');
+        if ($module === 'Users' && in_array(strtolower($action), ['authenticate', 'oauth2codeexchange'], true)) {
             return false;
         }
 
@@ -321,7 +323,17 @@ EOF;
 
     }
 
-    public function getMobileUrl(){
+    /**
+     * return mobile url or redirect to auth in IDM mode
+     * @return string
+     */
+    public function getMobileUrl()
+    {
+        $auth = AuthenticationController::getInstance();
+        $config = new Config(SugarConfig::getInstance());
+        if ($config->isIDMModeEnabled() && !$auth->sessionAuthenticate()) {
+            return $auth->getLoginUrl(['platform' => 'mobile']);
+        }
         return 'mobile/';
     }
 
@@ -382,7 +394,7 @@ EOF;
         if(!empty($this->controller->allowed_actions)) {
             $allowed_actions =  $this->controller->allowed_actions;
         } else {
-            $allowed_actions = ['Authenticate', 'Login', 'Logout', 'LoggedOut'];
+            $allowed_actions = ['Authenticate', 'Login', 'Logout', 'LoggedOut', 'OAuth2CodeExchange'];
         }
 
         if (($user_unique_key != $server_unique_key) && (!in_array($this->controller->action, $allowed_actions))
@@ -559,13 +571,16 @@ EOF;
         if (empty($GLOBALS['current_user']->id)) {
             $GLOBALS['app_strings']['NTC_WELCOME'] = '';
         }
-        if (!empty($GLOBALS['system_config']->settings['system_name'])) {
-            $GLOBALS['app_strings']['LBL_BROWSER_TITLE'] = $GLOBALS['system_config']->settings['system_name'];
+
+        $system_config = Administration::getSettings('system');
+
+        if (!empty($system_config->settings['system_name'])) {
+            $GLOBALS['app_strings']['LBL_BROWSER_TITLE'] = $system_config->settings['system_name'];
         }
+
         $GLOBALS['app_list_strings'] = return_app_list_strings_language($GLOBALS['current_language']);
         $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], $this->controller->module);
     }
-
 
     /**
      * checkDatabaseVersion
@@ -737,6 +752,7 @@ EOF;
         'wizard',
         'historyContactsEmails',
         'GoogleOauth2Redirect',
+        'OAuth2CodeExchange',
     );
 
     /**

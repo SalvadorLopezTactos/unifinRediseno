@@ -67,17 +67,71 @@ class PMSEProjectImporter extends PMSEImporter
     protected $warningET = false;
 
     /**
-     * The class constructor
-     * @codeCoverageIgnore
+     * @inheritDoc
      */
-    public function __construct()
+    protected $beanModule = 'pmse_Project';
+
+    /**
+     * @inheritDoc
+     */
+    protected $id = 'prj_id';
+
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'bpm';
+
+    /**
+     * @inheritDoc
+     */
+    protected $module = 'prj_module';
+
+    /**
+     * List of keys created as part of this import
+     * @var array
+     */
+    protected $projectKeys = [];
+
+    /**
+     * @inheritDoc
+     */
+    protected function initialize()
     {
-        $this->bean = BeanFactory::newBean('pmse_Project');
-        $this->dependenciesWrapper = ProcessManager\Factory::getPMSEObject('PMSERelatedDependencyWrapper');
-        $this->name = 'name';
-        $this->id = 'prj_id';
-        $this->extension = 'bpm';
-        $this->module = 'prj_module';
+        $this->setDependenciesWrapper();
+    }
+
+    /**
+     * Sets a key and key value into this object
+     * @param string $key The key to set
+     * @param string $val The value for this key
+     */
+    protected function addKey($key, $val)
+    {
+        $this->projectKeys[$key] = $val;
+    }
+
+    /**
+     * Gets a single value for a key, or null if key is not set
+     * @param string $key The key to get the value for
+     * @return string
+     */
+    protected function getKey($key)
+    {
+        return array_key_exists($key, $this->projectKeys) ? $this->projectKeys[$key] : null;
+    }
+
+    /**
+     * Gets all keys
+     * @return array
+     */
+    protected function getKeys()
+    {
+        return $this->projectKeys;
     }
 
     /**
@@ -107,6 +161,10 @@ class PMSEProjectImporter extends PMSEImporter
      */
     public function getDependenciesWrapper()
     {
+        if (empty($this->dependenciesWrapper)) {
+            $this->setDependenciesWrapper();
+        }
+
         return $this->dependenciesWrapper;
     }
 
@@ -115,9 +173,13 @@ class PMSEProjectImporter extends PMSEImporter
      * @param type $dependenciesWrapper
      * @codeCoverageIgnore
      */
-    public function setDependenciesWrapper($dependenciesWrapper)
+    public function setDependenciesWrapper(PMSERelatedDependencyWrapper $dependenciesWrapper = null)
     {
-        $this->dependenciesWrapper = $dependenciesWrapper;
+        if ($dependenciesWrapper === null) {
+            $this->dependenciesWrapper = ProcessManager\Factory::getPMSEObject('PMSERelatedDependencyWrapper');
+        } else {
+            $this->dependenciesWrapper = $dependenciesWrapper;
+        }
     }
 
     /**
@@ -179,124 +241,254 @@ class PMSEProjectImporter extends PMSEImporter
     }
 
     /**
-     * Save the project data into the bpm project, and process beans, validates the uniqueness of
-     * ids and also saves the rest.
-     * @param $projectData
-     * @return bool|void
+     * Gets the name of the project record, appended with numbers if need be
+     * @param array $projectData Project data array
+     * @return string
      */
-    public function saveProjectData($projectData, $isCopy = false)
+    protected function getProjectName(array $projectData)
     {
-        global $current_user;
-        $projectBean = $this->getBean();
-        $keysArray = array();
-        $result = array('success' => false);
-        // This will be needed down the road
-        $this->setTargetModule($projectData[$this->module]);
+        $name = !empty($projectData['prj_name']) ? $projectData['prj_name'] : $projectData[$this->name];
 
-        unset($projectData[$this->id]);
-        //Unset common fields
+        if ($this->getOption('keepName', false) === false) {
+            $name = $this->getNameWithSuffix($name);
+        }
+
+        return $name;
+    }
+
+    /**
+     * Initialized the project data array
+     * @param array $projectData Project data array
+     * @return array
+     */
+    protected function initProjectData(array $projectData)
+    {
+        // Only nuke ids if needed
+        if ($this->getOption('keepIds') !== true) {
+            unset($projectData[$this->id]);
+        }
+
+        // Unset common fields
         $this->unsetCommonFields($projectData);
         if (!isset($projectData['assigned_user_id'])) {
-            $projectData['assigned_user_id'] = $current_user->id;
+            $projectData['assigned_user_id'] = $this->getCurrentUser()->id;
         }
 
-        if (isset($projectData['prj_name']) && !empty($projectData['prj_name'])) {
-            $name = $this->getNameWithSuffix($projectData['prj_name']);
-        } else {
-            $name = $this->getNameWithSuffix($projectData[$this->name]);
-        }
+        // This gets the name of the project
+        $name = $this->getProjectName($projectData);
 
+        // This adds the project name to the various related records
         $projectData['name'] = $name;
         $projectData['process']['name'] = $name;
         $projectData['diagram']['name'] = $name;
 
-        $diagramData = (!empty($projectData['diagram'])) ? $projectData['diagram'] : array();
-        $processData = (!empty($projectData['process'])) ? $projectData['process'] : array();
-        $processDefinitionData = (!empty($projectData['definition'])) ? $projectData['definition'] : array();
-        $dynaFormData = (!empty($projectData['dynaforms'])) ? $projectData['dynaforms'] : array();
-
-        unset($projectData['diagram'], $projectData['process'], $projectData['definition'], $projectData['dynaforms']);
-
-        $projectData['prj_uid'] = PMSEEngineUtils::generateUniqueID();
-
-        if (!$isCopy) {
-            $projectData['prj_status'] = 'INACTIVE';
+        // Only nuke ids if needed
+        if ($this->getOption('keepIds') !== true || empty($projectData['prj_uid'])) {
+            $projectData['prj_uid'] = Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
         }
 
-        foreach ($projectData as $key => $value) {
-            if (isset($projectBean->field_defs[$key])){
-                $projectBean->$key = $value;
-            }
+        // Imported/copied/installed process definitions should always be inactive
+        $projectData['prj_status'] = 'INACTIVE';
+
+        return $projectData;
+    }
+
+    /**
+     * Gets an element from the $project data array and unsets it if needed
+     * @param array &$project A reference to the project data array
+     * @param string $element The element type to get
+     * @param  boolean $unset Flag that determines if a property needs to be unset
+     * @return array
+     */
+    protected function getProjectDataElement(&$project, $element, $unset = true)
+    {
+        $return = !empty($project[$element]) ? $project[$element] : [];
+
+        if ($unset) {
+            unset($project[$element]);
         }
 
-        $keysArray['prj_id'] = $projectBean->save();
+        return $return;
+    }
 
-        $diagramBean = BeanFactory::newBean('pmse_BpmnDiagram');
-        unset($diagramData['dia_id']);
-        $diagramData['prj_id'] = $keysArray['prj_id'];
-        $diagramData['dia_uid'] = PMSEEngineUtils::generateUniqueID();
-        foreach ($diagramData as $key => $value) {
-            if (isset($diagramBean->field_defs[$key])){
-                $diagramBean->$key = $value;
-            }
-        }
-        $keysArray['dia_id'] = $diagramBean->save();
+    /**
+     * Saves the project bean
+     * @param array $projectData The project data
+     * @return array
+     */
+    protected function saveProjectBean(array $project)
+    {
+        $this->handleProjectBeanSave($project);
+        $this->addKey('prj_id', $this->getBeanId());
 
-        $processBean = BeanFactory::newBean('pmse_BpmnProcess');
-        unset($processData['pro_id']);
-        $processData['prj_id'] = $keysArray['prj_id'];
-        $processData['dia_id'] = $keysArray['dia_id'];
-        $processData['pro_uid'] = PMSEEngineUtils::generateUniqueID();
-        foreach ($processData as $key => $value) {
-            if (isset($processBean->field_defs[$key])){
-                $processBean->$key = $value;
-            }
-        }
-        if ($isCopy && !empty($projectData['assigned_user_id'])) {
-            $processBean->assigned_user_id = $projectData['assigned_user_id'];
-        }
-        $keysArray['pro_id'] = $processBean->save();
+        return $project;
+    }
 
-        $processDefinitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition');
-        unset($projectData['definition']['pro_id']);
-        $processDefinitionData['prj_id'] = $keysArray['prj_id'];
-        foreach ($processDefinitionData as $key => $value) {
-            if (isset($processDefinitionBean->field_defs[$key])){
-                $processDefinitionBean->$key = $value;
-            }
+    /**
+     * Saves the diagram bean
+     * @param array $diagramData The Diagram data array
+     * @return array
+     */
+    protected function saveDiagramBean(array $diagram)
+    {
+        $bean = BeanFactory::newBean('pmse_BpmnDiagram');
+
+        // If we need to keep IDs, keep them
+        if ($this->getOption('keepIds') !== true) {
+            unset($diagram['dia_id']);
         }
-        $processDefinitionBean->id = $keysArray['pro_id'];
-        $processDefinitionBean->pro_status = 'INACTIVE';
-        $processDefinitionBean->new_with_id = true;
-        if ($isCopy && !empty($projectData['prj_status'])) {
+
+        $diagram['prj_id'] = $this->getKey('prj_id');
+        if ($this->getOption('keepIds') !== true || empty($diagram['dia_uid'])) {
+            $diagram['dia_uid'] = Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+        }
+
+        $this->loadBeanFromArray($bean, $diagram);
+        $this->addKey('dia_id', $bean->save());
+
+        return $diagram;
+    }
+
+    /**
+     * Saves the process bean with data from both the process and project
+     * @param array $processData Process data array
+     * @param array &$projectData Reference to the project data array
+     * @return array
+     */
+    protected function saveProcessBean(array $process, array &$project)
+    {
+        $bean = BeanFactory::newBean('pmse_BpmnProcess');
+
+        if ($this->getOption('keepIds') !== true) {
+            unset($process['pro_id']);
+        }
+
+        $process['prj_id'] = $this->getKey('prj_id');
+        $process['dia_id'] = $this->getKey('dia_id');
+
+        if ($this->getOption('keepIds') !== true || empty($process['pro_uid'])) {
+            $process['pro_uid'] = Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+        }
+
+        $this->loadBeanFromArray($bean, $process);
+
+        if ($this->getOption('isCopy') === true && !empty($project['assigned_user_id'])) {
+            $bean->assigned_user_id = $project['assigned_user_id'];
+        }
+        $this->addKey('pro_id', $bean->save());
+
+        return $process;
+    }
+
+    /**
+     * Saves a process definitionbean
+     * @param array $data The process definition data array
+     * @param array &$project A reference to the project data
+     * @return array
+     */
+    protected function saveProcessDefinitionBean($data, &$project)
+    {
+        $bean = BeanFactory::newBean('pmse_BpmProcessDefinition');
+        if ($this->getOption('keepIds') !== true) {
+            unset($project['definition']['pro_id']);
+        }
+
+        $data['prj_id'] = $this->getKey('prj_id');
+        $this->loadBeanFromArray($bean, $data);
+
+        // Relate the process definition to the project
+        // This is a one to one relationship
+        $bean->id = $this->getKey('pro_id');
+        $bean->pro_status = 'INACTIVE';
+        $bean->new_with_id = true;
+
+        if ($this->getOption('isCopy') === true && !empty($project['prj_status'])) {
             // make PD's status consistent with project status
-            $processDefinitionBean->pro_status = $projectData['prj_status'];
+            $bean->pro_status = $project['prj_status'];
         } else {
             // by default an imported project should be disabled
-            $processDefinitionBean->pro_status = 'INACTIVE';
-        }
-        if ($isCopy && !empty($projectData['assigned_user_id'])) {
-            $processDefinitionBean->assigned_user_id = $projectData['assigned_user_id'];
-        }
-        $processDefinitionBean->save();
-
-        // terminate fields
-        if (!empty($processDefinitionBean->pro_terminate_variables) && $processDefinitionBean->pro_terminate_variables != '[]'){
-            $this->createRelatedDependencyTerminateProcess($processDefinitionBean->id, $processDefinitionBean->pro_terminate_variables);
+            $bean->pro_status = 'INACTIVE';
         }
 
-        $this->saveProjectActivitiesData($diagramData['activities'], $keysArray);
-        $this->saveProjectEventsData($diagramData['events'], $keysArray);
-        $this->saveProjectGatewaysData($diagramData['gateways'], $keysArray);
-        $this->saveProjectArtifactsData($diagramData['artifacts'], $keysArray);
-        $this->saveProjectFlowsData($diagramData['flows'], $keysArray);
-        $this->saveProjectDynaFormsData($dynaFormData, $keysArray);
+        if ($this->getOption('isCopy') === true && !empty($project['assigned_user_id'])) {
+            $bean->assigned_user_id = $project['assigned_user_id'];
+        }
+
+        $bean->save();
+
+        // Process termination definition, which has to come after the save so we have an ID
+        if (!empty($bean->pro_terminate_variables) && $bean->pro_terminate_variables != '[]') {
+            $this->createRelatedDependencyTerminateProcess($bean->id, $bean->pro_terminate_variables);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Save the project data into the bpm project, and process beans, validates the uniqueness of
+     * ids and also saves the rest.
+     * @param array $projectData The project data from the import file
+     * @param boolean $isCopy Deprecated. Please use {@see setOption()}.
+     * @return bool|void
+     */
+    public function saveProjectData($projectData, $isCopy = false)
+    {
+        // Handling for isCopy, which should be removed in 10.0.0
+        LoggerManager::getLogger()->deprecated(
+            sprintf(
+                'The isCopy flag in %s::%s is deprecated. Please use $i->setOption(\'isCopy\', true).',
+                __CLASS__,
+                __METHOD__
+            )
+        );
+
+        if (isset($isCopy) && $isCopy === true) {
+            $this->setOption('isCopy', true);
+        }
+
+        // The return data...
+        $result = ['success' => false];
+
+        // This will be needed down the road
+        $this->setTargetModule($projectData[$this->module]);
+
+        // Handle initial decoration of the project data
+        $projectData = $this->initProjectData($projectData);
+
+        // Since we need the various elements of the project, but need the projectData
+        // array without it, grab what we need then unset what we grabbed
+        $diagramData = $this->getProjectDataElement($projectData, 'diagram');
+        $processData = $this->getProjectDataElement($projectData, 'process');
+        $processDefinitionData = $this->getProjectDataElement($projectData, 'definition');
+        $dynaFormData = $this->getProjectDataElement($projectData, 'dynaforms');
+
+        // Project Bean handling
+        $projectData = $this->saveProjectBean($projectData);
+
+        // Handle the diagram records now
+        $diagramData = $this->saveDiagramBean($diagramData);
+
+        // Handle Process data now
+        $processData = $this->saveProcessBean($processData, $projectData);
+
+        // Process definitions now
+        $processDefinitionData = $this->saveProcessDefinitionBean($processDefinitionData, $projectData);
+
+        // Now save the rest of what is needed for the process definition diagram
+        $this->saveProjectActivitiesData($diagramData['activities'], $this->getKeys());
+        $this->saveProjectEventsData($diagramData['events'], $this->getKeys());
+        $this->saveProjectGatewaysData($diagramData['gateways'], $this->getKeys());
+        $this->saveProjectArtifactsData($diagramData['artifacts'], $this->getKeys());
+        $this->saveProjectFlowsData($diagramData['flows'], $this->getKeys());
+        $this->saveProjectDynaFormsData($dynaFormData, $this->getKeys());
         $this->processDefaultFlows();
 
+        // Package up and send back the result
         $result['success'] = true;
-        $result['id'] = $keysArray['prj_id'];
+        $result['id'] = $this->getKey('prj_id');
         $result['br_warning'] = $this->warningBR;
         $result['et_warning'] = $this->warningET;
+
         return $result;
     }
 
@@ -366,9 +558,11 @@ class PMSEProjectImporter extends PMSEImporter
             $definition['pro_id'] = $keysArray['pro_id'];
             if ($element['act_task_type'] == 'SCRIPTTASK' &&
                 $element['act_script_type'] == 'BUSINESS_RULE') {
-                //TODO implement automatic import for business rules
-                $definition['act_fields'] = '';
-                $this->warningBR = true;
+                $definition = $this->addDependencyIdToDefinition($definition, 'act_fields');
+
+                if ($definition['act_fields'] == '') {
+                    $this->warningBR = true;
+                }
             }
             foreach ($definition as $key => $value) {
                 if (isset($definitionBean->field_defs[$key])){
@@ -430,12 +624,14 @@ class PMSEProjectImporter extends PMSEImporter
             $boundBean->save();
 
             $definition['pro_id'] = $keysArray['pro_id'];
-            if ($element['evn_type'] == 'INTERMEDIATE' &&
+            if (($element['evn_type'] == 'INTERMEDIATE' || $element['evn_type'] == 'END') &&
                 $element['evn_marker'] == 'MESSAGE' &&
                 $element['evn_behavior'] == 'THROW' ) {
-                //TODO implement automatic import for emails templates
-                $definition['evn_criteria'] = '';
-                $this->warningET = true;
+                $definition = $this->addDependencyIdToDefinition($definition, 'evn_criteria');
+
+                if ($definition['evn_criteria'] == '') {
+                    $this->warningET = true;
+                }
             }
             foreach ($definition as $key => $value) {
                 if (isset($definitionBean->field_defs[$key])){
@@ -448,7 +644,7 @@ class PMSEProjectImporter extends PMSEImporter
 
             if (!empty($currentID)) {
                 $definitionBean->evn_id = $currentID;
-                $this->dependenciesWrapper->processRelatedDependencies($eventBean->toArray() + $definitionBean->toArray());
+                $this->getDependenciesWrapper()->processRelatedDependencies($eventBean->toArray() + $definitionBean->toArray());
             }
         }
     }
@@ -615,6 +811,16 @@ class PMSEProjectImporter extends PMSEImporter
                                                 $tokenExpression[$_key]->expField = $this->changedUidElements[$_value->expField]['new_uid'];
                                                 $flowBean->$key = json_encode($tokenExpression);
                                                 break;
+                                            case 'BUSINESS_RULES':
+                                                // Need to adjust references to business rule actions to reflect their new ID after being imported
+                                                $oldBusinessRuleActionID = $_value->expField;
+                                                $importedActivities = $this->getSavedElements()['bpmnActivity'];
+                                                if (isset($importedActivities[$oldBusinessRuleActionID])) {
+                                                    $newBusinessRuleActionID = $importedActivities[$oldBusinessRuleActionID];
+                                                    $value = str_replace($oldBusinessRuleActionID, $newBusinessRuleActionID, $value);
+                                                }
+                                                $flowBean->$key = $value;
+                                                break;
                                             default:
                                                 $flowBean->$key = $value;
                                         }
@@ -736,6 +942,21 @@ class PMSEProjectImporter extends PMSEImporter
         }
     }
 
+
+    /**
+     * Save the ID from the dependencyKeys array if it exists
+     * @param array $definition
+     * @param string $field
+     * @return array Updated $defintion with ID set
+     */
+    public function addDependencyIdToDefinition(array $definition, string $field)
+    {
+        $oldId = $definition[$field];
+        $dependencyKeys = $this->getDependencyKeys();
+        $definition[$field] = $dependencyKeys[$oldId] ?? '';
+        return $definition;
+    }
+
     /**
      * @codeCoverageIgnore
      * Displays the import result response as a JSON string
@@ -815,6 +1036,6 @@ class PMSEProjectImporter extends PMSEImporter
             'evn_behavior' => 'CATCH',
             'pro_id' => $pro_id
         );
-        $this->dependenciesWrapper->processRelatedDependencies($fakeEventData);
+        $this->getDependenciesWrapper()->processRelatedDependencies($fakeEventData);
     }
 }

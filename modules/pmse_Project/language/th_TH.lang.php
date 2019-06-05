@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'มีกระบวนการที่ทำงานกับการกำหนดกระบวนการนี้อยู่ การอัปเดตจะมีผลกับกระบวนการเหล่านี้ คุณยังต้องการแก้ไขการกำหนดกระบวนการนี้หรือไม่',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'มีกระบวนการที่ทำงานกับการกำหนดกระบวนการนี้อยู่ การอัปเดตจะมีผลกับกระบวนการเหล่านี้ คุณยังต้องการปิดใช้งานการกำหนดกระบวนการนี้หรือไม่',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'สร้างระเบียนการกำหนดกระบวนการใหม่โดยการอืมพอร์ทไฟล์ *.bpm จากระบบไฟล์ของคุณ',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'อัปโหลดไฟล์ .bpm เพื่อนำเข้านิยามกระบวนการ',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'นำเข้าการกำหนดกระบวนการเข้าสู่ระบบสำเร็จแล้ว',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'โปรดเลือกไฟล์ *.bpm ที่ถูกต้อง',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'นำเข้าการกำหนดกระบวนการแล้ว แต่มีการดำเนินการกับกฎทางธุรกิจอย่างน้อยหนึ่งรายการที่ไม่ได้เลือกกฎทางธุรกิจไว้',
+    'LBL_BPM_IMPORT_SELECT' => 'นิยามกระบวนการประกอบด้วยกฎการทำธุรกิจ และเทมเพลตอีเมลดังต่อไปนี้ '
+        . 'กรุณาเลือกไฟล์ที่คุณต้องการนำเข้า',
+    'LBL_BUSINESS_RULES' => 'กฎทางธุรกิจ',
+    'LBL_EMAIL_TEMPLATES' => 'เทมเพลตอีเมล',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'ยกเลิก',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'ทำซ้ำ',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'บันทึก',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'ตรวจสอบ',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'บันทึกและตรวจสอบ',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'ดำเนินการตรวจสอบเพื่อตรวจดูข้อผิดพลาด',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'กิจกรรม',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'ลบ',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'โมดูล',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'ตัวกรอง',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'เกี่ยวข้องกับ',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'เกณฑ์',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'ระยะเวลา',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'หน่วย',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'ฟิลด์',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'การประมวลผลฟิลด์ของโมดูล',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'โมดูล',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'เกี่ยวข้องกับ',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'ฟิลด์',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'ค่า',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'การประมวลผลคำตอบของฟอร์ม',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ไม่ใช่',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ไม่เท่ากับ',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'บันทึกทั้งหมดที่เกี่ยวข้อง',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'บันทึกทั้งหมดที่เกี่ยวข้อง',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'ระยะเวลาดำเนินการ',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'เพิ่ม',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'ปิด',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'ทีม',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'ผู้ใช้ใน %MODULE% ที่สร้างระเบียน',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'ผู้ใช้ใน %MODULE% ที่แก้ไขระเบียนครั้งล่าสุด',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'ผู้ใช้ใน %MODULE% ที่ระบุให้กับระเบียน',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'ผู้ใช้ใน %MODULE% ที่ระบุให้กับระเบียน',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'ผู้ใช้ใน %MODULE% ที่เป็นผู้จัดการซึ่งสร้างระเบียน',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'ผู้ใช้ใน %MODULE% ที่เป็นผู้จัดการซึ่งแก้ไขระเบียนครั้งล่าสุด',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'ผู้ใช้ใน %MODULE% ที่เป็นผู้จัดการซึ่งระบุให้กับระเบียน',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'ผู้ใช้ใน %MODULE% ที่เป็นผู้จัดการซึ่งระบุให้กับระเบียน',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% เกี่ยวข้องกับ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'ผู้ใช้ที่สร้าง %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'ผู้ใช้ที่ทำการเปลี่ยนแปลง %MODULE% ครั้งล่าสุด',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'ผู้ใช้ที่ได้รับการมอบหมาย %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'ผู้ใช้ที่เคยได้รับการมอบหมาย %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'ผู้จัดการที่สร้าง %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'ผู้จัดการที่ทำการเปลี่ยนแปลง %MODULE% ครั้งล่าสุด',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'ผู้จัดการที่ได้รับการมอบหมาย %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'ผู้จัดการที่เคยได้รับการมอบหมาย %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'บทบาท: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'ทีม: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'คำแนะนำ',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'รูปแบบคำสั่งของเอ็กซ์เพรสชันไม่ถูกต้อง',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'ไม่สามารถใช้สกุลเงินต่างกันในเอ็กซ์เพรสชันเดียวกัน',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'การกำหนดค่ากระบวนการตรวจสอบ: กำลังเรียกการตั้งค่าอีลิเมนต์',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'การกำหนดค่ากระบวนการตรวจสอบ: กำลังตรวจสอบการตั้งค่าอีลิเมนต์',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'กำลังรีเฟรชรายการข้อผิดพลาด...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'การตรวจสอบเสร็จสิ้น! พบปัญหา: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' ปัญหา',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'อยู่ระหว่างการตรวจสอบ',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'คำเตือน: กระบวนการนี้อาจจะหยุดการทำงานที่อีลิเมนต์นี้ หรืออาจมีผลกระทบที่ไม่คาดคิดอย่างอื่น',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'ข้อผิดพลาด: กระบวนการจะหยุดที่อีลิเมนต์นี้',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'ไม่สามารถตรวจสอบอีลิเมนต์ได้',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'อีลิเมนต์ไม่เป็นไปตามจำนวนต่ำสุดของโฟลว์ขาเข้า',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'อีลิเมนต์นี้ต้องมีจำนวนต่ำสุดของเส้นทางขาเข้า กรุณาตรวจสอบจำนวนเส้นทางที่เชื่อมต่อกับอีลิเมนต์นี้เพื่อให้แน่ใจว่ามีจำนวนต่ำสุดที่ตรงกัน',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'อีลิเมนต์เกินจำนวนสูงสุดของโฟลว์ขาเข้า',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'อีลิเมนต์นี้มีจำนวนสูงสุดของเส้นทางขาเข้าที่มีจำนวนเกินไม่ได้ กรุณาตรวจสอบจำนวนเส้นทางที่เชื่อมต่อกับอีลิเมนต์นี้เพื่อให้แน่ใจว่ามีไม่เกินจำนวนสูงสุด',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'อีลิเมนต์ไม่เป็นไปตามจำนวนต่ำสุดของโฟลว์ขาออก',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'อีลิเมนต์นี้ต้องมีจำนวนต่ำสุดของเส้นทางขาออก กรุณาตรวจสอบจำนวนเส้นทางที่นำทางออกจากอีลิเมนต์นี้เพื่อให้แน่ใจว่ามีจำนวนต่ำสุดที่ตรงกัน',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'อีลิเมนต์เกินจำนวนสูงสุดของโฟลว์ขาออก',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'อีลิเมนต์นี้มีจำนวนสูงสุดของเส้นทางขาออกที่มีจำนวนเกินไม่ได้ กรุณาตรวจสอบจำนวนเส้นทางที่เชื่อมต่อกับอีลิเมนต์นี้เพื่อให้แน่ใจว่ามีไม่เกินจำนวนสูงสุด',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'ไม่ได้ตั้งฟิลด์ที่ต้องระบุ',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'อีลิเมนต์นี้มีฟิลด์ที่ต้องระบุแต่ไม่ได้ตั้งค่าไว้ ตรวจการตั้งค่าอีลิเมนต์เพื่อให้แน่ใจว่าได้ตั้งค่าฟิลด์อย่างถูกต้อง จากนั้นจึงคลิกปุ่ม "บันทึก"',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'ขณะนี้ไม่มีข้อมูลในระบบ',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'การตั้งค่าของของอีลิเมนต์นี้อ้างอิงถึงข้อมูลเฉพาะที่ไม่มีอยู่ในฐานข้อมูลนี้ กรุณาตรวจสอบการตั้งค่าอีลิเมนต์เพื่อให้แน่ใจว่ามีข้อมูลที่อ้างอิงทั้งหมด (เช่น ผู้ใช้บางราย ฟิลด์โมดูล ทีม เป็นต้น)',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'เอ็กซ์เพรสชันช่องเกณฑ์จะไม่สามารถวัดความจริงได้',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'ช่องเกณฑ์ประกอบไปด้วยเอ็กเพรสชัน และ/หรือ/ไม่ และข้อผิดพลาดนี้หมายความว่าได้มีการกำหนดช่องเกณฑ์ในการตั้งค่าอีลิเมนต์ไว้เพื่อให้เอ็กเพรสชันไม่มีทางเป็นความจริง กรุณาตรวจช่องเกณฑ์เพื่อกำจัดข้อมูลที่ไม่เป็นไปตามตรรกะซึ่งเป็นตัวทำให้เอ็กเพรสชันไม่สามารถเป็นความจริงได้',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'เข้าถึงอีลิเมนต์ไม่ได้',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'ในการที่จะให้อีลิเมนต์ทำงานในกระบวนการใดได้ จะต้องเชื่อมต่อเส้นทางไว้กับอีลิเมนต์ ห่วงโซ่เส้นทางที่นำมายังอีลิเมนต์นี้จะต้องเริ่มต้นด้วยอีลิเมนต์เริ่มต้น กรุณาตรวจสอบห่วงโช่เส้นทางขาเข้าที่มายังอีลิเมนต์นี้เพื่อให้แน่ใจว่าโ๙่เริ่มด้วยอีลิเมนต์เริ่มต้น',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'เกณฑ์เวลารอต้องประกอบด้วยค่าคงที่วันและเวลาหนึ่งค่าที่ตรงกัน',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'อีลิเมนต์เหตุการณ์นี้ถูกกำหนดค่าโดยใช้ช่องเกณฑ์ "วันที่แน่นอน" ช่องนี้จะต้องประกอบด้วยค่าคงที่ "วันและเวลาที่แน่นอน" หนึ่งค่า หรือฟิลด์ที่อ้างถึงวันที่และเวลา ชิ้นส่วนอื่น ๆ ของเอ็กเพรสชันจะต้องเป็นการคำนวณคณิตศาสตร์ (+/-) หรือ ค่าคงที่ "ระยะเวลา"',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'ค่าระยะเวลาที่ระบุจะต้องไม่เป็นศูนย์',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'อีลิเมนต์เหตุการณ์การรอนี้ได้ถูกกำหนดค่าโดยใช้การตั้งค่า "ระยะเวลา" การตั้งค่านี้จะต้องไม่มีค่าเท่ากับศูนย์ ไม่เช่นนั้นจะก่อให้เกิดข้อผิดพลาด กรุณาตรวจการตั้งค่าอีลิเมนต์เพื่อให้แน่ใจว่า "ระยะเวลา" ไม่ถูกตั้งเป็นศูนย์',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'ไม่ได้ตั้งค่าพารามิเตอร์เวลารอ',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'อีลิเมนต์การรอนี้ไม่ได้มีการกำหนดการตั้งค่าใด ๆก กรุณาตรวจดูที่การตั้งค่าอีลิเมนต์เพื่อให้แน่ใจว่าได้มีการเลือกช่อง "ระยะเวลา" หรือ "วันที่แน่นอน" จากนั้นกรอกค่าที่ต้องการ และคลิกที่ปุ่ม "บันทึก"',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'เวลาที่คาดไว้น้อยกว่าศูนย์',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'เวลาที่คาดไว้ที่อยู่ภายใต้ "แบบฟอร์ม" การตั้งค่าของอีลิเมนต์กิจกรรมนี้ถูกตั้งเป็นค่าลบ ซึ่งจะทำให้กระบวนการหยุดชะงักขณะกำลังเข้าถึงอีลิเมนต์นี้ กรุณาเปิดการตั้งค่า "แบบฟอร์ม" ของอีลิเมนต์นี้เพื่อเปลี่ยนเวลาที่คาดไว้ให้ไม่เป็นจำนวนค่าติดลบ',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => '[Unassigned] ประเภทการดำเนินการ',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'อีลิเมนต์การดำเนินการนี้ไม่มีการกำหนดประเภท ซึ่งสามารถทำการเปลี่ยนแปลงได้โดยคลิกขวาที่อีลิเมนต์การดำเนินการ จากนั้นจึงเลือกประเภทจากรายการใน "ประเภทการดำเนินการ"',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'ไม่ได้รับการรับรองว่าจะใช้เส้นทาง',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'ข้อความการผิดพลาดนี้เกิดขึ้นเพราะ มีโอกาสที่จะไม่ได้ใช้เส้นทางใดที่อยู่นอกอีลิเมนต์เกตเวย์ซึ่งจะก่อให้การดำเนินการหยุดชะงัก ขอแนะนำให้ตั้งเส้นทางค่าเริ่มต้นในการใช้ในกรณีที่ไม่มีเอ็กเพรสชันช่องเกณฑ์ในการตั้งค่าอีลิเมนต์ใดตรงตามค่าที่กำหนดเลย ซึ่งสามารถตั้งได้โดยคลิกขวาที่อีลิเมนต์เกตเวย์ และเลือกอีลิเมนต์ที่อยู่ภายใต้เมนู "โฟลว์เริ่มต้น" หากยังไม่มีการระบุเส้นทางค่าเริ่มต้น จึงควรเปลี่ยนช่องเกณฑ์เอ็กเพรสชันในการตั้งค่าอีลิเมนต์ เพื่อให้แน่ใจว่าอย่างน้อยหนึ่งเกณฑ์จะเป็นความจริงเมื่อดำเนินการขั้นตอน',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'ประเภทเกตเวย์ที่บรรจบกันไม่ตรงกับประเภทเกตเวย์ของโฟลว์ขาเข้า',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'เกตเวย์ที่แยกกันขยายกระบวนการไปยังหลายสาขา เมื่อเราใช้เกตเวย์แบบบรรจบกันเพื่อรวมสาขาเหล่านี้กลับมาเป็นเส้นทางเดียวกัน เราจะต้องใช้ประเภทเกตเวย์แบบบรรจบกันที่ถูกต้อง ซึ่งจะขึ้นอยู่กับประเภทของเกตเวย์แบบบรรจบกันที่ใช้ในการสร้างสาขาเหล่านั้น ทั้งนี้ สำหรับสาขาที่สร้างด้วยเกตเวย์แบบบรรจบกันที่ตั้งอยู่บนเกตเวย์เฉพาะตัว หรือเกตเวย์ตามเหตุการณ์ ให้ใช้เกตเบย์เฉพาะตัวในการรวมมันเข้ากันอีกครั้ง และสำหรับสาขาที่สร้างด้วยเกตเวย์ขนาน หรือเกตเวย์แบบรวม ให้ใช้เกตเวย์ขนานในการรวมเกตเวย์เพื่อบรรจบมันเข้าไว้ด้วยกันอีกครั้ง',
 );

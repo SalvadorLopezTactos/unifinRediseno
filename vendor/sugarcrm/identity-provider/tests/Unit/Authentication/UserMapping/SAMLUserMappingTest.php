@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\UserMapping;
 
+use OneLogin\Saml2\Response;
 use PHPUnit_Framework_TestCase;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\SAMLUserMapping;
 use Sugarcrm\IdentityProvider\Authentication\User;
@@ -32,7 +33,7 @@ class SAMLUserMappingTest extends PHPUnit_Framework_TestCase
      */
     public function testMap($mappingConfig, $attributes, $nameId, $expected)
     {
-        $samlResponse = $this->getMockBuilder('OneLogin_Saml2_Response')->disableOriginalConstructor()->getMock();
+        $samlResponse = $this->getMockBuilder(Response::class)->disableOriginalConstructor()->getMock();
         $samlResponse->method('getAttributes')->willReturn($attributes);
         $samlResponse->method('getNameId')->willReturn($nameId);
 
@@ -128,7 +129,7 @@ class SAMLUserMappingTest extends PHPUnit_Framework_TestCase
      */
     public function testMapIdentity($mappingConfig, $idField, $idValue)
     {
-        $samlResponse = $this->createMock(\OneLogin_Saml2_Response::class);
+        $samlResponse = $this->createMock(Response::class);
         $samlResponse->method('getNameId')->willReturn($idValue);
 
         $mapping = new SAMLUserMapping($mappingConfig);

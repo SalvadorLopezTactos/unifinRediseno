@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'See on süsteemi konto.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-posti aadressi ID',
     'LBL_TYPE' => 'Tüüp',
+    'LBL_REPLY_TO_NAME' => 'Vastamise nimi',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Vastamise aadressid',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Vastamise aadressi ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Vastamise aadress',
+    'LBL_PRIMARY_TEAM' => 'Esmane meeskond',
 );

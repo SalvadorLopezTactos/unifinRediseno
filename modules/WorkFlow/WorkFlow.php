@@ -216,7 +216,7 @@ class WorkFlow extends SugarBean
 		if(empty($this->status)) $this->status = "Inactive";
 		if($this->status == 1 || $this->status== "checked") $this->status = "Active";
 
-		$temp_array['STATUS'] = $app_list_strings['oc_status_dom'][$this->status];
+        $temp_array['STATUS'] = $app_list_strings['user_status_dom'][$this->status];
 		return $temp_array;
 	}
 	/**

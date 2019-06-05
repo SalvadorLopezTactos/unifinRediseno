@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>Avís:</b> Per salvaguardar les seves dades, l´instal·lador ha d´estar bloquejat establint &#39;installer_locked&#39; a &#39;true&#39; en l´arxiu config.php.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Avís:</b> La seva llicència caduca en ",
     'WARN_LICENSE_EXPIRED2' =>"dies(s). Si us plau, vagi a <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Administració de Llicències\"</a> a la pantalla d&#39;Administració.",
-    'WARN_LICENSE_SEATS'=>  "<b>Avís:</b> Licencias de usuario excedidas por ",
-    'WARN_LICENSE_SEATS2' => ".  Por favor, vaya a <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Administración de Licencias\"</a>  en la pantalla de Administración.",
+    'WARN_LICENSE_SEATS'=>  "<b>Avís:</b> Hi ha ",
+    'WARN_LICENSE_SEATS2' => " usuaris actius quan la subscripció només permet ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Desactiveu alguns usuaris, contacteu amb el vostre soci o representant de vendes,"
+        . " o envieu un correu electrònic a <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Per obtenir més informació, vegeu la "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Article per entendre els tipus d'usuari i llicències de Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Avís:</b> El número d´usuaris actius supera el màxim número de llicencies permeses: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Avís:</b> El número d&#39;usuaris actius ha arribat al màxim número de llicencies permeses",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Avís:</b> El número d&#39;usuaris actius permesos per la seva llicència es igual al número d&#39;usuaris actius al sistema. No podrà crear usuaris actius adicionals.",
-    'WARN_REPAIR_CONFIG' => 'Avís: L´arxiu config.php necessita ser reparat. Si us plau, usi l´enllaç "Repair" a la pantalla Administració per reparar la seva arxiu de configuració.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Avís:</b> No podreu crear usuaris actius addicionals."
+        . " Compreu més subscripcions.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Avís:</b> No podreu crear usuaris actius addicionals."
+        . " Compreu més subscripcions.",
+    'WARN_REPAIR_CONFIG' => '<b>Advertència:</b> L&#39;arxiu config.php s&#39;ha de reparar. Utilitzeu l&#39;script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstrueix l&#39;arxiu de configuració</a> a la pàgina de Reparació de l&#39;àrea d&#39;Administració per reparar l&#39;arxiu de configuració.',
     'WARN_UPGRADE_APP'=> "Hay disponible una versión actualizada de la aplicación.",
     'WARN_UPGRADE' => '<b>Avís:</b> Por favor, actualice ',
     'WARN_UPGRADENOTE' => 'Nota:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Neteja la Caché de dades de Vardefs',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Treure les vardefs del caché',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Neteja la Caché Unificada de Recerques',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Treure l´arxiu unified_search_modules.php de la caché',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Suprimeix unified_search_modules.php de la memòria cau',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Reparació i Reconstrucció Ràpida',
     'LBL_QUICK_REPAIR_TITLE'=>'Si us plau, seleccioneu el mòdul(s) per reparar:',
 	'LBL_FAILED_CONNECTION'=> 'Error en connexió:',
@@ -1243,15 +1252,17 @@ Qualsevol integració depenent d&#39;aquesta plataforma deixarà de funcionar.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'No s&#39;ha trobat l&#39;arxiu de metadades.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Configuració',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Ajusteu la configuració de l&#39;Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Visualitzador de registres',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Accediu al registre de l&#39;Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Accediu a ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' registre.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Gestió de processos',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Aquí es pot accedir a la gestió de processos.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configura ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' configuració i els registres de visualització. Gestioneu tots els processos de BPM per a tots els usuaris amb l&#39;administració de processos.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Ajusteu la configuració de l&#39;Advanced Workflow i els registres de visualització. Gestioneu tots els processos de BPM per a tots els usuaris amb l&#39;administració de processos.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configuració de pressuposts',
+    'LBL_MANAGE_QUOTES' => 'Configura el disseny del full de càlcul de pressuposts',
 );

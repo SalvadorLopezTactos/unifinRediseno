@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: studiotabgroups.js 18703 2006-12-15 09:42:43Z majed $
 
 if(typeof('console') == 'undefined'){
 console = {

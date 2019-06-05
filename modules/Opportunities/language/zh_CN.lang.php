@@ -186,13 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您第一次执行此变更之后，系统会为每个现有的 {{module_name}} 在背景中创建营收单项记录。营收单项完成并可用后，系统会发送通知至您保存在用户资料中的电子邮件地址。请注意：您的实例必须通过“管理 > 电子邮件设置”配置为可发送电子邮件，才可能完成发送通知的动作。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 一般会经历几个销售阶段，直到被标记为“谈成结束”或“丢单结束”。通过 Sugar 的 {{forecasts_singular_module}}ing 模块可以进一步利用{{plural_module_name}} 来了解和预测销售趋势，并着力于达到销售定额。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 一般会经历几个销售阶段，直到被标记为“谈成结束”或“丢单结束”。通过 Sugar 的 {{forecasts_singular_module}}ing 模块可以进一步利用 {{plural_module_name}} 来了解和预测销售趋势，并着力于达到销售定额。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个{{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。 - 通过点击单个字段或“编辑”按钮，编辑此记录的字段。 - 通过切换左下角窗格至“数据视图”，查看或修改子面板其它记录的链接。- 通过切换左下角窗格至“数据视图”，查看或修改子面板其它记录的链接。- 通过切换左下角窗格至“活动流”，在 {{activitystream_singular_module}} 中执行和查看用户注释以及记录更改历史。 - 使用记录名称右侧的图标关注此记录或将此记录新增至收藏夹。 - “编辑”按钮右侧的下拉“操作”菜单提供其它操作选项。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
+
+- 通过点击单个字段或“编辑”按钮，编辑此记录的字段。 
+- 通过切换左下角窗格至“数据视图”，查看或修改子面板其他记录的链接。 
+- 通过切换左下角窗格至“活动流”，在 {{activitystream_singular_module}} 中撰写和查看用户注释以及记录更改历史。 
+- 使用记录名称右侧的图标关注此记录或将其新增至收藏夹。 
+- “编辑”按钮右侧的下拉“操作”菜单提供其他操作选项。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。创建 {{module_name}}：1. 按需提供字段值。 - 标记为“必填”的字段在保存前必须先填写完整。 - 如有需要，点击“显示更多”以显示其它字段。 2. 点击“保存”以完成新纪录，并返回至上一页。',
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您全程追踪销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
+
+若要创建 {{module_name}}：
+1. 按需提供字段值。
+ - 标记为“必填”的字段在保存前必须先填写完整。
+ - 如有需要，点击“显示更多”以显示其他字段。
+2. 点击“保存”以完成新记录，并返回至上一页。',
 
 // END ENT/ULT
 

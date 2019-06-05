@@ -699,7 +699,7 @@ class ModuleScanner{
 				switch($token[0]){
                     case T_WHITESPACE:
                     case T_COMMENT:
-                        continue;
+                        continue 2;
 					case T_EVAL:
 						if(in_array('eval', $this->blackList) && !in_array('eval', $this->blackListExempt))
 						$issues[]= translate('ML_INVALID_FUNCTION') . ' eval()';

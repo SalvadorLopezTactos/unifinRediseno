@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Открити са грешки по време на тесвта за съвместимост.  За да функционира коректно инсталацията на SugarCRM моля предприемете стъпки за разрешаване на идентифицираните казуси, след което натиснете бутона за нова проверка или стартирайте инсталацията отново.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Параметърът Allow Call Time Pass Reference е със стойност On (трябва да бъде променен на Off във файла php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Не беше намерено: Автоматизираните задачи на Sugar ще работят с ограничена функционалност. Услугата за архивиране на електронната поща няма да работи.',
+	'ERR_CHECKSYS_CURL'					=> 'Не бяха намерени: Автоматизираните задачи на Sugar ще работят с ограничена функционалност. Услугата за архивиране на имейли няма да функционира.',
     'ERR_CHECKSYS_IMAP'					=> 'Липсващи библиотеки: За функциониране на входяща поща и маркетингови кампании са необходими библиотеките IMAP. Тези функции няма да бъдат достъпни в системата.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Опцията "Magic Quotes GPC" не може да има стойност "On" когато се използва "MS SQL Server".',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Внимание: ',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'За по-добра производителност при използване на IIS/FastCGI sapi, моля задайте стойност 0 на параметъра fastcgi.logging във файла php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Инсталираната версия на PHP не се поддържа: ( версия',
     'LBL_DB_UNAVAILABLE'                => 'Базата данни е недостъпна.',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Не е открита Поддръжка на базата данни. Проверете дали имате необходимите драйвери за един от следните поддържани типове бази данни: MySQL, MS SQLServer, Oracle или DB2. Вероятно трябва да премахнете коментара пред реда за съответното разширение във файла php.ini или да компилирате отново с правилния двоичен файл в зависимост от вашата версия на PHP. Моля, направете справка с вашето PHP ръководство за повече информация относно това как да активирате Поддръжката на базата данни.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Не е открита поддръжка на базата данни. Проверете дали имате необходимите драйвери за един от следните поддържани типове бази данни: MySQL, MS SQLServer, Oracle или DB2. Може да се наложи да откоментирате разширението в php.ini файла или да прекомпилирате с подходящия бинарен файл в зависимост от вашата версия на PHP. Направете справка с вашето ръководство за PHP за повече информация относно това как да активирате поддръжката на базата данни.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Функции предоставяни от библиотеките XML Parser Libraries и необходими за функционирането на SugarCRM не са открити. Вероятно трябва да премахнете коментара пред реда за съответното разширение във файла  php.ini или да компилирате отново PHP. Можете да се обърнете към ръководството на използваната PHP версия за повече информация.',
     'LBL_CHECKSYS_CSPRNG' => 'Генератор на случайни номера',
     'ERR_CHECKSYS_MBSTRING'             => 'Функции предоставяни от разширението mbstring и необходими за функционирането на SugarCRM не са открити.  <br/><br/>Разширението mbstring обикновено не е разрешено по подразбиране в PHP инсталациите и трябва да бъде активирано чрез опцията --enable-mbstring в процеса на компилиране на приложението. Моля обърнете се към ръководството на използваната PHP версия за повече информация как да разрешите разширението mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Няма зададена стойност на параметъра session.save_path в конфигурационния файл на php.ini или зададената папка не съществува. Трябва да зададете стойност на параметъра save_path setting или да се уверите, че зададената папка съществува.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Променливата session.save_path в конфигурационния файл php.ini сочи към папка, за която няма права за писане.  Моля предприемете необходимите стъпки, за да коригирате правата на достъп.  <br>В зависимост от използваната операционна система вие трябва да промените правата на достъп (chmod 766) или да премахнете опцията, даваща права единствено за четене.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Конфигурационният файл config.php съществува, но не са налични права за неговото редактиране. Моля предприемете необходимите стъпки, за да коригирате правата на достъп. В зависимост от използваната операционна система вие трябва да промените правата на достъп (chmod 766) или да премахнете опцията, даваща права единствено за четене.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Модул IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Модул MB Strings',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (без ограничение)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'ОК (неограничено)',
 	'LBL_CHECKSYS_MEM'					=> 'Лимит на паметта за PHP >=',
@@ -555,7 +553,7 @@ Server или Oracle</li>
     'advanced_password_new_account_email' => array(
         'subject' => 'Информация за нов потребител',
         'description' => 'Шаблонът се използва за изпращане на нова потребилска парола от Системен администратор',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name</p><p>Password : $contact_user_user_hash</p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p></td></tr><tr><td colspan=\\"2\\"></td></tr></tbody></table></div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name</p><p>Password : $contact_user_user_hash</p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p></td></tr><tr><td colspan=\"2\"></td></tr></tbody></table></div>',
         'txt_body' =>
 'Here is your account username and temporary password: Username : $contact_user_user_name Password : $contact_user_user_hash $config_site_url After you log in using the above password, you may be required to reset the password to one of your own choice.',
         'name' => 'Поща за системно генерирана парола',
@@ -563,7 +561,7 @@ Server или Oracle</li>
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Нова потребителска парола',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>You recently requested on $contact_user_pwd_last_changed to be able to reset your account password.</p><p>Click on the link below to reset your password:</p><p><a href="$contact_user_link_guid">$contact_user_link_guid</a></p></td></tr><tr><td colspan=\\"2\\"></td></tr></tbody></table></div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>You recently requested on $contact_user_pwd_last_changed to be able to reset your account password.</p><p>Click on the link below to reset your password:</p><p><a href="$contact_user_link_guid">$contact_user_link_guid</a></p></td></tr><tr><td colspan=\"2\"></td></tr></tbody></table></div>',
         'txt_body' =>
 'You recently requested on $contact_user_pwd_last_changed to be able to reset your account password. Click on the link below to reset your password: $contact_user_link_guid',
         'name' => 'Поща за забравена парола',

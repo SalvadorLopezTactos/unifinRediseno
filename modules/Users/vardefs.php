@@ -181,7 +181,7 @@ $dictionary['User'] = array(
             'type' => 'bool',
             'default' => '0',
             'studio' => array('listview' => false, 'searchview'=>false, 'related' => false),
-            // Remove from Advanced Workflow
+            // Remove from SugarBPM
             // To add finer grain validation, you could do something like this
             // 'processes' => array(
             //    'isCurrentUserAdmin',
@@ -412,6 +412,7 @@ $dictionary['User'] = array(
             'idm_mode_disabled' => true,
         ) ,
         // This is a fake field for the edit view
+        // This field is disabled for IDM-mode in UserViewHelper explicitly.
         'UserType' => array(
             'name' => 'UserType',
             'vname' => 'LBL_USER_TYPE',
@@ -422,14 +423,12 @@ $dictionary['User'] = array(
             'import' => false,
             'reportable' => false,
             'studio' => array('formula' => false),
-            'idm_mode_disabled' => true,
         ),
         'default_team' => array(
             'name' => 'default_team',
             'vname' => 'LBL_DEFAULT_TEAM',
             'reportable' => false,
             'type' => 'id',
-            'len' => '36',
             'studio' => array(
                 'listview' => false,
                 'searchview'=>false,
@@ -445,7 +444,6 @@ $dictionary['User'] = array(
             'reportable' => false,
         	'source' => 'non-db',
             'type' => 'id',
-            'len' => '36',
             'studio' => array('listview' => false, 'searchview'=>false, 'formula' => false),
         ) ,
 			'team_set_id' =>
@@ -505,7 +503,6 @@ $dictionary['User'] = array(
 				'massupdate' => false,
 				'dbType' => 'varchar',
 				'source' => 'non-db',
-				'len' => 36,
 				'custom_type' => 'teamset',
                 'studio' => array(
                     'listview'    => false,
@@ -532,19 +529,6 @@ $dictionary['User'] = array(
 		      'source' => 'non-db',
 		      'duplicate_merge' => 'disabled',
 		      'studio' => 'false',
-                'reportable'=>false,
-		    ),
-            'default_primary_team' => array (
-                'name' => 'default_primary_team',
-                'type' => 'link',
-                'relationship' => 'users_team',
-                'vname' => 'LBL_DEFAULT_PRIMARY_TEAM',
-                'link_type' => 'one',
-                'module' => 'Teams',
-                'bean_name' => 'Team',
-                'source' => 'non-db',
-                'duplicate_merge' => 'disabled',
-                'studio' => 'false',
                 'side' => 'right',
             ),
 		    'team_count_link' =>
@@ -678,7 +662,6 @@ $dictionary['User'] = array(
             'vname' => 'LBL_REPORTS_TO_ID',
             'type' => 'id',
             'required' => false,
-            'idm_mode_disabled' => true,
         ) ,
         'reports_to_name' => array(
             'name' => 'reports_to_name',
@@ -694,7 +677,6 @@ $dictionary['User'] = array(
             'source' => 'non-db',
             'duplicate_merge' => 'disabled',
             'side' => 'right',
-            'idm_mode_disabled' => true,
         ) ,
         'reports_to_link' => array(
             'name' => 'reports_to_link',
@@ -704,7 +686,6 @@ $dictionary['User'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_REPORTS_TO',
-            'idm_mode_disabled' => true,
         ) ,
         'reportees' => array(
             'name' => 'reportees',
@@ -957,7 +938,14 @@ $dictionary['User'] = array(
             'link_type'=>'one',
             'vname'=>'LBL_FORECASTS',
         ),
-
+        'reportschedules' =>
+        array (
+            'name' => 'reportschedules',
+            'type' => 'link',
+            'relationship' => 'reportschedules_users',
+            'source'=>'non-db',
+            'vname'=>'LBL_REPORTSCHEDULES',
+        ),
     'preferred_language' =>
       array(
          'name' => 'preferred_language',
@@ -997,6 +985,17 @@ $dictionary['User'] = array(
             'type' => 'link',
             'relationship' => 'users_acl_role_sets',
             'source' => 'non-db',
+        ),
+        // site_user_id is used as an analytics id
+        'site_user_id' => array(
+            'name' => 'site_user_id',
+            'vname' => 'LBL_SITE_USER_ID',
+            'type' => 'varchar',
+            'len' => '64',
+            'reportable' => false,
+            'importable' => false,
+            'studio' => array('editview' => false, 'detailview' => false, 'listview' => false, 'searchview'=>false, 'related' => false),
+            'readonly' => true,
         ),
     ) ,
     'name_format_map' => array(

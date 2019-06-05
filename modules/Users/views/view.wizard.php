@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
- * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -131,7 +130,7 @@ class ViewWizard extends SugarView
 			$this->ss->assign("CURRENCY", $selectCurrency);
         }
 
-        $currenciesArray = $locale->currencies;
+        $currenciesArray = $locale->getCurrencies();
         $currenciesVars = $this->correctCurrenciesSymbolsSort($currenciesArray);
 
         $currencySymbolsJs = <<<eoq

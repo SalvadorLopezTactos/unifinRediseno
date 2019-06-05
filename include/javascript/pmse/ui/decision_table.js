@@ -878,7 +878,7 @@ var PMSE = PMSE || {};
 
     DecisionTable.prototype.getFields = function(defaultValue) {
         if (!this.conditionFieldsReady || !this.conclusionFieldsReady) {
-            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+            App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoclose: false});
             if (!this.conditionFieldsReady) {
                 this.getConditionFields(defaultValue);
             }

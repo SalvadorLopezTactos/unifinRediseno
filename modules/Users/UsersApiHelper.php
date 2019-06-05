@@ -58,7 +58,8 @@ class UsersApiHelper extends SugarBeanApiHelper
 
     public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
     {
-        if ($this->getIdpConfig()->isIDMModeEnabled()) {
+        if ($this->getIdpConfig()->isIDMModeEnabled()
+                && empty($submittedData['skip_idm_mode_restrictions'])) {
             $submittedData = $this->filterIDMModeDisabledFields($bean, $submittedData);
         }
         parent::populateFromApi($bean, $submittedData, $options);

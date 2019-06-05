@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: CustomizeFields.php 42345 2008-12-04 15:18:11Z jmertic $
 
 global $app_strings;
 global $app_list_strings;

@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Rechnungsinfos',
 	'LBL_PUSH_SHIPPING' => 'Versandinfos',
 	'LBL_SAVE_ACCOUNT' => 'Firma speichern',
+    'LBL_SERVICE_LEVEL' => 'Service-Level',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Lieferadresse Stadt:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Lieferadresse Land:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Lieferadresse PLZ:',

@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: quicksearch.js 52760 2009-11-25 08:16:47Z clee $
 
 /**
  * browse document for quickSearch fields

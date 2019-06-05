@@ -39,4 +39,5 @@ require('./sidecar');
 require('utils/cookie.js');
 require('sugaranalytics/sugaranalytics.js');
 require('sugaranalytics/googleanalyticsconnector.js');
+require('sugaranalytics/pendoconnector.js');
 require('sugar/sugar.liverelativedate.js');

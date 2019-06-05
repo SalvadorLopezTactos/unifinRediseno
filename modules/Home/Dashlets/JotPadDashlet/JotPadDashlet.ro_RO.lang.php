@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: JotPadDashlet.en_us.lang.php 51719 2009-10-22 17:18:00Z mitani $
 
 $defaultText = "";
 $dashletStrings['JotPadDashlet'] = array('LBL_TITLE'            => 'Jot Pad',

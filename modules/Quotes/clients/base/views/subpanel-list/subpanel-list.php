@@ -78,6 +78,7 @@ $viewdefs['Quotes']['base']['view']['subpanel-list'] = array(
             ),
             array(
                 'type' => 'unlink-action',
+                'name' => 'unlink_button',
                 'icon' => 'fa-trash-o',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),

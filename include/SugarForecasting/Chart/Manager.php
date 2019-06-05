@@ -33,7 +33,7 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
     }
 
     /**
-     * Process the data into the current JIT Chart Format
+     * Process the data into the current Chart Format
      *
      * @return array
      */

@@ -12,30 +12,26 @@
 
 namespace Sugarcrm\IdentityProvider\App\Controller;
 
-use Assert\AssertionFailedException;
-
-use Jose\Object\JWSInterface;
+use Sugarcrm\Apis\Iam\App\V1alpha as AppApi;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentToken;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentTokenInterface;
+use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\ConsentNotFoundException;
 use Sugarcrm\IdentityProvider\Authentication\Consent\ConsentChecker;
 use Sugarcrm\IdentityProvider\Authentication\Tenant;
-use GuzzleHttp\Exception\RequestException;
+use Sugarcrm\IdentityProvider\Srn;
 
 use Sugarcrm\IdentityProvider\App\Application;
 use Sugarcrm\IdentityProvider\App\Authentication\JoseService;
 use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
-use Sugarcrm\IdentityProvider\Authentication\Exception\InvalidScopeException;
-use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class ConsentController
@@ -77,12 +73,28 @@ class ConsentController
      */
     public function consentInitAction(Application $app, Request $request)
     {
+        if (!$request->query->has('consent')) {
+            throw new BadRequestHttpException('Consent not found', null, 400);
+        }
+
         $consentToken = $app->getConsentRestService()->getToken($request->query->get('consent'));
-        if ($consentToken->getTenantSRN()) {
-            $this->sessionService->set('tenant', $consentToken->getTenantSRN());
+        $tenantSrn = $consentToken->getTenantSRN();
+        if ($tenantSrn) {
+            if (preg_match(Srn\SrnRules::TENANT_REGEX, $tenantSrn)) {
+                $storedTenant = $app->getTenantRepository()->findTenantById($tenantSrn);
+                $tenantSrn = Srn\Converter::toString(
+                    $app->getSrnManager($storedTenant->getRegion())->createTenantSrn($tenantSrn)
+                );
+                $consentToken->setTenantSRN($tenantSrn);
+            }
+            $this->sessionService->set(TenantConfigInitializer::SESSION_KEY, $tenantSrn);
+        }
+        $params = [];
+        if ($consentToken->getUsername()) {
+            $params['login_hint'] = $consentToken->getUsername();
         }
         $this->sessionService->set('consent', $consentToken);
-        return $app->redirect($app->getUrlGeneratorService()->generate('loginRender'));
+        return $app->redirect($app->getUrlGeneratorService()->generate('loginRender', $params));
     }
 
     /**
@@ -103,40 +115,127 @@ class ConsentController
         if (is_null($consentToken)) {
             throw new AuthenticationCredentialsNotFoundException('Consent session not found');
         }
+        $consentChecker = $this->getConsentChecker($app, $consentToken);
+        if (!$consentChecker || !$consentChecker->check()) {
+            return $app->getTwigService()->render('consent/app_consent_restricted.html.twig');
+        }
 
+        /** @var UsernamePasswordToken $userToken */
+        $userToken = $this->sessionService->get('authenticatedUser');
+
+        if ($app->getUserPasswordChecker()->isPasswordExpired($userToken)) {
+            return $app->redirect($app->getUrlGeneratorService()->generate('showChangePasswordForm'));
+        }
+
+        $clientId = $consentToken->getClientId();
+        if ($this->isConsentAutomaticallyApproved($clientId)) {
+            $app->getLogger()->info(
+                'Automatically approved consent',
+                [
+                    'tenant' => $consentToken->getTenantSRN(),
+                    'client' => $clientId,
+                    'user_name' => $userToken->getUser()->getUsername(),
+                    'scopes' => $consentToken->getScopes(),
+                    'tags' => ['IdM.consent'],
+                ]
+            );
+            return $this->consentFinishAction($app, $request);
+        }
+        $clientName = $clientId;
+        $clientApp = $this->getClientApp($app, $clientId);
+        if ($clientApp && !empty($clientApp->getClientName())) {
+            $clientName = $clientApp->getClientName();
+        }
         return $app->getTwigService()->render('consent/confirmation.html.twig', [
-            'scope' =>  $consentToken->getScope(),
-            'client' => $consentToken->getClientId(),
+            'are_scopes_empty' => $consentChecker->areScopesEmpty(),
+            'scopes' =>  $app->getConsentRestService()->mapScopes($consentToken->getScopes()),
+            'client' => $clientName,
+            'tenant' => $this->sessionService->get(TenantConfigInitializer::SESSION_KEY),
         ]);
     }
 
     /**
-     * check consent in consent token
+     * get client application info from APP API
      * @param Application $app
-     * @param ConsentTokenInterface $token
+     * @param $appId
+     * @return null|AppApi\App
+     */
+    protected function getClientApp(Application $app, $appId): ?AppApi\App
+    {
+        if ($app->getConfig()['grpc']['disabled']) {
+            return null;
+        }
+        $grpcAppApi = $app->getGrpcAppApi();
+        $grpcGetAppRequest = new AppApi\GetAppRequest();
+        $grpcGetAppRequest->setName($appId);
+        [$clientApp, $status] = $grpcAppApi->GetApp($grpcGetAppRequest)->wait();
+        if ($status && $status->code === \Grpc\CALL_OK) {
+            $app->getLogger()->info(sprintf('Application %s information is received.', $appId), ['consent', 'app-api']);
+            return $clientApp;
+        }
+        $app->getLogger()->warning('Invalid app-api response GetApp', ['consent', 'app-api']);
+        return null;
+    }
+
+    /**
+     * Check application type is consent automatically approved
+     *
+     * @param string $clientId
      * @return bool
      */
-    protected function checkConsent(Application $app, ConsentTokenInterface $token)
+    private function isConsentAutomaticallyApproved(string $clientId): bool
     {
-        $tenant = (new Tenant())->fillFromSRN(Converter::fromString($token->getTenantSRN()));
-        $consent = $app->getConsentRepository()->findConsentByClientIdAndTenantId(
-            $token->getClientId(),
-            $tenant->getId()
-        );
-        $checker = new ConsentChecker($consent, $token);
-        return $checker->check();
+        try {
+            $srn = Converter::fromString($clientId);
+        } catch (\InvalidArgumentException $e) {
+            return false;
+        }
+        return Srn\Manager::isWeb($srn) || Srn\Manager::isCrm($srn);
+    }
+
+    /**
+     * return filled consent checker
+     * @param Application $app
+     * @param ConsentTokenInterface $token
+     * @return ConsentChecker|null
+     */
+    protected function getConsentChecker(Application $app, ConsentTokenInterface $token): ?ConsentChecker
+    {
+        $tenant = Tenant::fromSrn(Converter::fromString($token->getTenantSRN()));
+        try {
+            $consent = $app->getConsentRepository()->findConsentByClientIdAndTenantId(
+                $token->getClientId(),
+                $tenant->getId()
+            );
+
+            return new ConsentChecker($consent, $token);
+        } catch (ConsentNotFoundException $e) {
+            return null;
+        }
     }
 
     /**
      * @param Application $app
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse|string
      */
     public function consentFinishAction(Application $app, Request $request)
     {
         /** @var ConsentToken $consentToken */
+        $consentToken = $this->getConsent();
+
         /** @var UsernamePasswordToken $userToken */
-        list($consentToken, $userToken) = $this->getConsentAndUserToken();
+        $userToken = $this->getUserToken();
+
+        $consentChecker = $this->getConsentChecker($app, $consentToken);
+        if (!$consentChecker || !$consentChecker->check()) {
+            return $app->getTwigService()->render('consent/app_consent_restricted.html.twig');
+        }
+
+        if ($app->getUserPasswordChecker()->isPasswordExpired($userToken)) {
+            $this->sessionService->set(TenantConfigInitializer::SESSION_KEY, $consentToken->getTenantSRN());
+            return $app->redirect($app->getUrlGeneratorService()->generate('showChangePasswordForm'));
+        }
 
         $this->oAuth2Service->acceptConsentRequest($consentToken, $userToken);
         return $app->redirect($consentToken->getRedirectUrl());
@@ -149,35 +248,50 @@ class ConsentController
      */
     public function consentCancelAction(Application $app, Request $request)
     {
-        /** @var ConsentToken $consentToken */
-        list($consentToken, ) = $this->getConsentAndUserToken();
+        $errors = $this->sessionService->getFlashBag()->get('error', ['No consent']);
 
-        $this->oAuth2Service->rejectConsentRequest($consentToken->getRequestId(), "No consent");
+        /** @var ConsentToken $consentToken */
+        $consentToken = $this->getConsent();
+
+        $this->oAuth2Service->rejectConsentRequest($consentToken->getRequestId(), implode(', ', $errors));
         return $app->redirect($consentToken->getRedirectUrl());
     }
 
     /**
-     * return array of consent and user token
-     * @return array
+     * Return session consent token and clear session
+     * @throws AuthenticationCredentialsNotFoundException
+     * @return ConsentToken
      */
-    protected function getConsentAndUserToken()
+    protected function getConsent()
     {
         /** @var ConsentToken $consentToken */
         $consentToken = $this->sessionService->get('consent');
-        /** @var UsernamePasswordToken $userToken */
-        $userToken = $this->sessionService->get('authenticatedUser');
 
-        $this->sessionService->remove('tenant');
+        $this->sessionService->remove(TenantConfigInitializer::SESSION_KEY);
         $this->sessionService->remove('consent');
-        $this->sessionService->remove('authenticatedUser');
 
         if (is_null($consentToken)) {
             throw new AuthenticationCredentialsNotFoundException('Consent session not found');
         }
 
+        return $consentToken;
+    }
+
+    /**
+     * Return session authenticated user and clear session
+     * @throws AuthenticationCredentialsNotFoundException
+     * @return UsernamePasswordToken
+     */
+    protected function getUserToken()
+    {
+        /** @var UsernamePasswordToken $userToken */
+        $userToken = $this->sessionService->get('authenticatedUser');
+
+        $this->sessionService->remove('authenticatedUser');
+
         if (is_null($userToken)) {
             throw new AuthenticationCredentialsNotFoundException('User is not authenticated');
         }
-        return [$consentToken, $userToken];
+        return $userToken;
     }
 }

@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Forms.js 16301 2006-08-22 22:16:59Z awu $
 function set_form_return(popup_reply_data)
 {
 	var form_name = popup_reply_data.form_name;

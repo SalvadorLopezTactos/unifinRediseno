@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Aktív folyamatok futnak ezzel a folyamat-definícióval szemben. A frissítés kihathat ezekre a folyamatokra. Még mindig szeretné szerkeszteni a folyamatdefiníciót?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Aktív folyamatok futnak ezzel a folyamat-definícióval szemben. A frissítés kihathat ezekre a folyamatokra. Még mindig szeretné letiltani a folyamatdefiníciót?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Új Folyamatdefiníció automatikus létrehozása egy *.bpm fájl importálásával az Ön fájlrendszeréből.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Folyamatdefiníció importálásához töltsön fel egy .bpm fájlt.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'A Folyamatdefiníció sikeresen importálásra került a rendszerbe.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Kérjük, válasszon ki egy érvényes *.bpm fájlt.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'A folyamatmehatározás importálásra került, de egy vagy több olyan üzleti szabály műveletet tartalmaz, amelyre üzleti szabályok nem lettek kiválasztva.',
+    'LBL_BPM_IMPORT_SELECT' => 'A folyamatdefiníció a következő üzleti szabályokat és e-mail sablonokat tartalmazza. '
+        . 'Válassza ki az importálni kívánt elemeket.',
+    'LBL_BUSINESS_RULES' => 'Üzleti szabályok',
+    'LBL_EMAIL_TEMPLATES' => 'E-mail sablonok',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Visszavon',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Ismét',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Mentés',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Érvényesítés',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Mentés és érvényesítés',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Érvényesítés futtatása hibák kereséséhez',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Tevékenység',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Törlés',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Szűrő',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'A következővel kapcsolatban',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Feltétel',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Időtartam',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Egység',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Mezők',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulmező Értékelése',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'A következővel kapcsolatban:',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Mező',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Érték',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Válasz Kiértékelési Nyomtatvány',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nem ez:',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nem egyenlő ezzel',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Összes kapcsolódó rekord',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bármely kapcsolódó rekord',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Futtatás',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Hozzáadás',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Bezárás',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Csoportok',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Felhasználó %MODULE%-ban, aki létrehozta a rekordot',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Felhasználó %MODULE%-ban, aki utoljára módosította a rekordot',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Felhasználó %MODULE%-ban, aki hozzá van rendelve a rekordhoz',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Felhasználó %MODULE%-ban, aki hozzá lett rendelve a rekordhoz',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Felhasználó %MODULE%-ban, aki a rekord létrehozójának felettese',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Felhasználó %MODULE%-ban, aki a rekordot utoljára módosítónak a felettese',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Felhasználó %MODULE%-ban aki a rekordhoz hozzárendelt személynek a felettese',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Felhasználó %MODULE%-ban, aki a rekordhoz korábban hozzárendelt személynek a felettese',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% kapcsolódik a(z) %MODULE% modulhoz',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'A(z) %MODULE% modult létrehozó felhasználó',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'A(z) %MODULE% modult utoljára módosító felhasználó',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'A(z) %MODULE% modulhoz jelenleg hozzárendelt felhasználó',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'A(z) %MODULE% modulhoz a múltban hozzárendelt felhasználó',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'A(z) %MODULE% modult létrehozó felettes',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'A(z) %MODULE% modult utoljára módosító felettes',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'A(z) %MODULE% modulhoz jelenleg hozzárendelt felettes',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'A(z) %MODULE% modulhoz a múltban hozzárendelt felettes',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'szerep: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'csapat: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Javaslatok',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Érvénytelen kifejezés szintaxis.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Folyamatdefiníció érvényesítése: elembeállítások lekérése',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Folyamatdefiníció érvényesítése: elembeállítások érvényesítése folyamatban',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Hibalista frissítése...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Az érvényesítés befejeződött! Észlelt hibák: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' hiba',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Érvényesítés folyamatban',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Figyelmezteés: A folyamat leállhat ennél az elemnél, vagy egyéb nemkívánatos hatások jelentkezhetnek',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Hiba: A folyamat le fog állni ennél az elemnél',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Az elem érvényesítése sikertelen',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Az elem nem felel meg a bejövő folyamatok minimális száma tekintetében',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Az elemnek rendelkeznie minimum egy adott bejövő útvonallal. Ellenőrizze az elemhez csatlakozó útvonalak számát, és bizonyosodjon meg arról, hogy a minimális értéknek eleget tesz.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Az elem meghaladja a bejövő folyamatok maximális számát',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Az elem bejövő útvonalainak a száma meghaladja a maximális értéket. Ellenőrizze az elemhez csatlakozó útvonalak számát, és bizonyosodjon meg arról, hogy a maximális értéket nem haladja meg az illető szám.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Az elem nem felel meg a kimenő folyamatok minimális száma tekintetében',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Az elemnek rendelkeznie minimum egy adott kimenő útvonallal. Ellenőrizze az elemtől távozó útvonalak számát, és bizonyosodjon meg arról, hogy a minimális értéknek eleget tesz.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Az elem meghaladja a kimenő folyamatok maximális számát',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Az elem kimenő útvonalainak a száma meghaladja a maximális értéket. Ellenőrizze az elemtől távozó útvonalak számát, és bizonyosodjon meg arról, hogy a maximális értéket nem haladja meg az illető szám.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Szükséges mező kitöltetlen',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Az elem rendelkezik egy kötelezően kitöltendő mezővel, ami azonban üres. Ellenőrizze az elem beállításait a mező megfelelő kitöltésének biztosítása érdekében, majd nyomja meg a „Mentés” gombot.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Adatok jelenleg nem léteznek a rendszerben',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Jelen elem beállításai egy olyan adatra mutatnak, amelyik nem létezik a rendszerben. Ellenőrizze az elem beállításait, és biztosítsa azt, hogy az összekapcsolt adatok léteznek (vagyis adott felhasználók, modulmezők, csapatok stb.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'A kritérium mezőben meghatározott kifejezés soha nem lesz igaz',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'A kritérium mezők ÉS/VAGY/NEM logikai kifejezéseket tartalmaznak. Ez a hiba azt jelenti, hogy az elem beállításai között a kritérium mezők úgy lettek meghatározva, hogy a kifejezés soha nem lesz igaz. Ellenőrizze a kritérium mezőt bármely olyan logikai ellentmondás kiszűréséhez, amely meggátolja, hogy a kifejezés igaz lehessen.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Az elem nem érhető el',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Egy elem folyamatban való végrehajtásához egy útvonalnak kell csatlakoznia hozzá. Az elemhez vezető útvonalak láncának egy start elemmel kell kezdődnie. Ellenőrizze az elemhez vezető bejövő útvonalak láncát, és bizonyosodjon meg arról, hogy start elemmel kezdődik.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'A várakozási idő kritériumnak pontosan egy dátum/idő állandót kell tartalmaznia',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Ez a várakozási elem a „Meghatározott dátum” kritérium mezővel lett konfigurálva. A mezőnek tartalmaznia kell pontosan egy „Meghatározott dátum/idő” állandót vagy dátum/idő mező referenciát. A kifejezés összes többi eleme matematikai műveleti jelek (+/-) vagy „Időtartam” állandók lehetnek.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'A megadott időtartam érték nem lehet nulla',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Ez a várakozási esemény elem az „Időtartam” beállítással lett konfigurálva. Ez a beállítás nem lehet egyenlő nullával, különben hiba merül fel. Ellenőrizze az elem beállításokat annak biztosításához, hogy az „Időtartam” értéke nem nulla.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'A várakozási idő paraméter nincs beállítva',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Ez a várakozási esemény elem nem rendelkezik semmilyen konfigurált beállítással. Ellenőrizze az elem beállításokat, és bizonyosodjon meg arról, hogy az „Időtartam” vagy „Meghatározott dátum” van kiválasztva, adja meg a kívánt értékeket, majd kattintson a „Mentés” gombra.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'A várt idő nullánál kisebb',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Ezen tevékenység elem „Űrlapok” beállításainál a várt idő negatív értékre lett beállítva, aminek köszönhetően az elem elérésekor a folyamat le fog fagyni. Nyissa meg az „Űrlapok” beállításokat az elem vonatkozásában a várt idő nem negatív értékre állításához.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'A művelettípus [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'A művelet elem nem rendelkezik meghatározott típussal. Ez módosítható a művelet elemre jobb egérgombbal kattintással, majd válassza a típust a „Művelettípus” listában.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Az útvonal nem garantáltan elfoglalt',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Ez a hibaüzenet azért jelentkezik, mert fennáll a lehetősége annak, hogy az átjáró elemből távozó egyik útvonal sem lesz elfoglalva, aminek az eredményeképpen a folyamat leállhat. Javasoljuk, hogy állítsa be egy alapértelmezett útvonal elfoglalását, amennyiben az elem beállítások kritérium mező kifejezéseinek egyike sem teljesül. Ehhez kattintson jobb egérgombbal az átjáró elemen, majd válasszon ki egy elemet az „Alapértelmezett folyamat” menüből. Amennyiben nem határoz meg alapértelmezett útvonalat, az elem beállítások kritérium mező kifejezéseit módosítsa, hogy legalább egyik igaz legyen a folyamat futtatásakor.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'A konvergáló átjáró típus nem felel meg a bejövő folyamat átjáró típusának',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'A divergáló átjárók kiterjesztik a folyamatokat több ágra. Amikor konvergáló átjárót használ ezeknek az ágaknak egy útvonalra való visszatereléséhez a megfelelő konvergáló átjáró típust kell használnia, attól függően, milyen divergáló átjáró alkalmazása történt az ágak létrehozásához. Amennyiben exkluzív vagy eseményalapú divergáló átjárók révén létesültek az ágak, használjon exkluzív konvergáló átjárót az ágak visszatereléséhez. Párhuzamos vagy inkuzív divergáló átjárók révén létesült ágak esetén használjon párhuzamos konvergáló átjárót az ismételt konvergáláshoz.',
 );

@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => '削除',
     'LBL_MODULE_NAME' => 'Eメールアドレス',
     'LBL_MODULE_NAME_SINGULAR' => 'Eメールアドレス',
+    'LBL_CONFIRMATION_REQUESTED_ON' => '確認リクエストアクションが行われました',
+    'LBL_CONFIRMATION_TITLE' => 'ありがとうございます',
+    'LBL_CONFIRMATION_MESSAGE' => 'サブスクリプションが確認されました。当社の一覧に追加されましたので、近々ご連絡します。',
 );

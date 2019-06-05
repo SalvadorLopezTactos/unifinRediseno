@@ -41,9 +41,15 @@ class UserPasswordListener
      */
     public function execute(AuthenticationEvent $event)
     {
-        $isExpired = false;
+        $token = $event->getAuthenticationToken();
         /** @var User $user */
-        $user = $event->getAuthenticationToken()->getUser();
+        $user = $token->getUser();
+
+        if ($user->isServiceAccount()) {
+            return;
+        }
+
+        $isExpired = false;
         $expirationType = (int) $this->getConfigValue($user->getPasswordType(), 'expiration', 0);
         switch ($expirationType) {
             case User::PASSWORD_EXPIRATION_TYPE_TIME:

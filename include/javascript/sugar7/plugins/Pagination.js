@@ -51,6 +51,27 @@
          **/
         app.plugins.register('Pagination', ['view'], {
             onAttach: function(component, plugin) {
+                var origBDC = component.bindDataChange;
+                this.bindDataChange = function() {
+                    if (origBDC) {
+                        origBDC.call(this);
+                    }
+                    if (this.collection) {
+                        //No need to do a full render if we are just getting the reset from the initial data load
+                        this.collection.off('reset', this.render, this);
+                        this.collection.on('reset', function(collection, options) {
+                            //Verify the table header has rendered, but we don't have any rows yet.
+                            if (options && _.isEmpty(options.previousModels) &&
+                                this.$('tbody > tr').length === 0 && this.$('thead > tr').length > 0
+                            ) {
+                                this._renderRows(collection, collection.models);
+                            } else {
+                                this.render();
+                            }
+                        }, this);
+                    }
+                };
+
                 this.on('init', function() {
                     this.rowTemplate = app.template.getView(this.name + '.row', this.module) ||
                         app.template.getView(this.name + '.row') ||
@@ -134,24 +155,8 @@
                     if (this.disposed) {
                         return;
                     }
-                    if (this.module !== collection.module) {
-                        this.rowTemplate = app.template.getView(this.name + '.row', collection.module) ||
-                            this.rowTemplate;
-                    }
-                    if (_.isEmpty(this.$tableBody) || !this.rowTemplate) {
-                        app.logger.warn('Create a row.hbs template to avoid a full render.');
-                        this.render();
-                        return;
-                    }
+                    this._renderRows(collection, data);
 
-                    // FIXME Remove this event-driven behaviour for SC-2605
-                    if (!this.triggerBefore('render:rows', data)) {
-                        return false;
-                    }
-                    _.each(data, function(model) {
-                        this._renderRow(this.collection.get(model.id));
-                    }, this);
-                    this.trigger('render:rows');
                 }, this);
 
                 if (this.limit) {
@@ -189,6 +194,35 @@
                         self.fields[sfId].render();
                     }
                 });
+
+                return $row;
+            },
+
+            /**
+             * Render rows from partials for a given collection and record set
+             * @param {Backbone.Collection} collection
+             * @param {Backbone.Model[]} data
+             * @private
+             */
+            _renderRows: function(collection, data) {
+                if (this.module !== collection.module) {
+                    this.rowTemplate = app.template.getView(this.name + '.row', collection.module) ||
+                        this.rowTemplate;
+                }
+                if (_.isEmpty(this.$tableBody) || !this.rowTemplate) {
+                    app.logger.warn('Create a row.hbs template to avoid a full render.');
+                    this.render();
+                    return;
+                }
+
+                // FIXME Remove this event-driven behaviour for SC-2605
+                if (!this.triggerBefore('render:rows', data)) {
+                    return;
+                }
+                _.each(data, function(model) {
+                    this._renderRow(this.collection.get(model.id));
+                }, this);
+                this.trigger('render:rows');
             }
         });
     });

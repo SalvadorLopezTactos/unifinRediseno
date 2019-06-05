@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Отображать панель загрузок',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Когда данная опция включена, панель загрузок будет отображаться в настройках пользователя и предоставлять пользователь доступ к расширениям Sugar и другим доступным файлам.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Для SOAP-авторизации при использовании LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Расширение php_mcrypt должно быть включено в файле php.ini или же php должен быть скомпилирован с указанием соответствующего ключа.',
     'LBL_ALL' => 'Все',
     'LBL_MARK_POINT' => 'Установить контрольную точку',
     'LBL_NEXT_' => 'Далее>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Мероприятия',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активация ленты мероприятий',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Активация ленты мероприятий для приложения',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Отображать дополнительное содержание экрана входа',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Автоматическое сохранение определений процессов',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Определяет, как часто выполняется автоматическое сохранение определений процессов при использовании конструктора',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Автоматически проверять определения процессов при автоматическом сохранении',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Определяет, проверяются ли автоматически определения процессов при автоматическом сохранении. Этот параметр применяется, только если для параметра «Автоматическое сохранение определений процессов» задан промежуток времени',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Автоматически проверять определения процессов при импорте',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Определяет, проверяются ли автоматически определения процессов при первом импорте',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Параметры журнала комментариев',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Максимальное количество символов для отображения в записи комментария',
 );
 
 

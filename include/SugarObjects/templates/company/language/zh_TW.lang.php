@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => '發送帳單',
 	'LBL_PUSH_SHIPPING' => '發送運送資訊',
 	'LBL_SAVE_ACCOUNT' => '儲存帳戶',
+    'LBL_SERVICE_LEVEL' => '服務等級',
 	'LBL_SHIPPING_ADDRESS_CITY' => '送貨城市：',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => '送貨國家：',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => '送貨郵遞區號：',

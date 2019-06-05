@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '复制备用地址到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '复制主要地址到备用地址',
     'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\\n 您可以新建账户或选择现有账户。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\n 您可以新建账户或选择现有账户。',
     'NTC_REMOVE_CONFIRMATION' => '您确定要将联系人从这个事件中删除吗?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '您确定要将作为直接报告的此记录移除吗?',
 

@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Toekomstige tijdperioden aanmaken',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent artikelen bijwerken.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Goedgekeurde artikelen & verlopen KB-artikelen publiceren.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplande Taak Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Goedgekeurde artikelen & vervallen KB artikelen publiceren.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplande taak',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Gedenormaliseerde teambeveiligingsgegevens opnieuw opbouwen',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Inkomende mailaccounts controleren',
 'LBL_PERFORMFULLFTSINDEX' => 'Volledig tekst zoeken indexsysteem',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Tijdelijke PDF bestanden verwijderen',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Goedgekeurde artikelen & vervallen KB artikelen publiceren',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Goedgekeurde artikelen & vervallen KB artikelen publiceren.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch rijplanning',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Bestanden van het diagnostische middel verwijderen',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Tijdelijke bestanden verwijderen',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'E-mailherinneringen verzenden uitvoeren',
 'LBL_CLEANJOBQUEUE' => 'Gooi de wachtrij voor taak leeg',
 'LBL_CLEANOLDRECORDLISTS' => 'Oude recordlijsten opschonen',
-'LBL_PMSEENGINECRON' => 'Planner Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'SugarBPM Taakplanner',
 );
 

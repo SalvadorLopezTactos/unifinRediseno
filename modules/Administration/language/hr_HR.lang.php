@@ -375,7 +375,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Grupni atribut:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'S pomoću korisničkog DN-a:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Uključi korisnički DN uz korisnički atribut pri provjeri članstva u grupi',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Dodatni parametri filtra primjenjuju se pri provjeri autentičnosti korisnika, npr. \\nis_sugar_user=1 ili (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Dodatni parametri filtra primjenjuju se pri provjeri autentičnosti korisnika, npr. \nis_sugar_user=1 ili (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atribut za prijavu:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atribut za povezivanje:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Za povezivanje korisnika LDAP-a<br>Primjeri:&nbsp;<b>AD</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
@@ -941,12 +941,21 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
     'WARN_INSTALLER_LOCKED'=>'<b>Upozorenje:</b> za zaštitu vaših podataka instalacijski program mora biti zaključan postavljanjem funkcije „installer_locked” u „točno” u datoteci config.php.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Obavijest:</b> vaša licenca istječe za ",
     'WARN_LICENSE_EXPIRED2' =>" dan/a. Idite u <a href='index.php?action=LicenseSettings&module=Administration'>'„Upravljanje licencama”</a> na administratorskom zaslonu.",
-    'WARN_LICENSE_SEATS'=>  "<b>Upozorenje:</b> korisničke licence premašene su za ",
-    'WARN_LICENSE_SEATS2' => ". Obratite se svojem prodajnom predstavniku ili pošaljite poruku e-pošte na adresu <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Upozorenje:</b> Postoji ",
+    'WARN_LICENSE_SEATS2' => " aktivnih korisnika, a vaša pretplata dozvoljava samo ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Deaktivirajte neke korisnike, obratite se svom partneru ili prodajnom predstavniku,"
+        . " ili pošaljite e-mail na <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a></p>"
+        . "<p class=\"error\">Više informacija potražite u "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "</a>Članak</p>Razumijevanje vrsta korisnika i Sugar licenci.",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Upozorenje:</b> broj aktivnih korisnika već je najveći broj dozvoljenih licenci: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Upozorenje:</b> broj aktivnih korisnika već je najveći broj dozvoljenih licenci",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Upozorenje:</b> broj aktivnih korisnika koji dozvoljava vaša licenca odgovara broju aktivnih korisnika u sustavu. Nećete moći stvoriti dodatne aktivne korisnike.",
-    'WARN_REPAIR_CONFIG' => '<b>Upozorenje:</b> datoteku config.php treba popraviti. Upotrijebite skriptu <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Ponovna izgradnja konfiguracijske datoteke</a> na stranici za popravak u administratorskom području da biste popravili konfiguracijsku datoteku.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Upozorenje:</b>Nećete moći stvoriti dodatne aktivne korisnike."
+        . " Kupite više pretplata.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Upozorenje:</b>Nećete moći stvoriti dodatne aktivne korisnike."
+        . " Kupite više pretplata.",
+    'WARN_REPAIR_CONFIG' => '<b>Upozorenje:</b> Datoteku config.php potrebno je popraviti. Molimo vas da upotrijebite skriptu <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> na stranici za popravak na administratorskom području kako biste popravili konfiguracijsku datoteku.',
     'WARN_UPGRADE_APP'=> "Sada je dostupna ažurirana verzija aplikacije. ",
     'WARN_UPGRADE' => '<b>Upozorenje:</b> ažurirajte ',
     'WARN_UPGRADENOTE' => 'Napomena: ',
@@ -1251,15 +1260,17 @@ Integracije koje se oslanjaju na tu platformu prestat će raditi.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Ne može se pronaći datoteka metapodataka.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Postavke',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Preglednik zapisnika',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Pristup ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' zapisniku.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Upravljanje procesima',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Prikažite sve otvorene i pokrenute procese u sustavu.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Konfiguriraj ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' postavke i pregledaj zapisnike. Upravljaj svim procesima BPM za sve korisnike putem Upravljanja procesima.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfiguracija ponuda',
+    'LBL_MANAGE_QUOTES' => 'Konfigurirajte izgled radnog lista ponuda',
 );

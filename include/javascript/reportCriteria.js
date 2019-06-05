@@ -87,6 +87,16 @@ function getAllFieldsMapped(module) {
 			all_fields[i+":"+module_defs[join_module].field_defs[j].name] = {"field_def": module_defs[join_module].field_defs[j],"linked_field_name":i,"label_prefix":link_defs[i].label};
 		}
 
+        for (var k in module_defs[join_module].group_by_field_defs) {
+            if (typeof module_defs[join_module].group_by_field_defs[k].field_def_name !== 'undefined') {
+                all_fields[i + ':' + module_defs[join_module].group_by_field_defs[k].name] = {
+                    'field_def': module_defs[join_module].group_by_field_defs[k],
+                    'linked_field_name': i,
+                    'label_prefix': link_defs[i].label
+                };
+            }
+        }
+
 		for(var j in module_defs[join_module].summary_field_defs) {
 			var sum_field_def = module_defs[join_module].summary_field_defs[j];
 

@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您開始此變更后，會在後台建立各現有 {{module_name}} 的「營收項目」記錄。在「營收項目」完成且可用后，會向您使用者設定檔上的電子郵件地址傳送通知。請注意，實例必須設定為透過「管理」>「電子郵件設定」傳送電子郵件，以便能夠傳送通知。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售。每個 {{module_name}} 紀錄都代表一次未来的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。{{module_name}} 通常經過幾個銷售階段實現進步，直到被標記為“談成结束”或“丢單结束”。甚至可以使用 Sugar 的 {{forecasts_singular_module}}ing 模組進一步調節{{plural_module_name}}，以便理解和預測銷售趨勢，以及集中精力達成銷售定額。',
+    'LBL_HELP_RECORDS' => '模組{{plural_module_name}}允許您從頭至尾追蹤個人的銷售情況。每個 {{module_name}}記錄都代表預期銷售，包括相關的銷售資料以及與{{quotes_module}}，{{contacts_module}}等其他重要記錄有關的資料。一個 {{module_name}}通常會在幾個銷售階段取得進展，直到它被標記為 "競標成功" 或 "競標失敗"。 通過使用 Sugar 的{{forecasts_singular_module}}模組可以進一步利用{{plural_module_name}}來瞭解和預測銷售趨勢，同時集中操作實現銷售配額。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 紀錄都代表一次未来的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模塊允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包括相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
 
-- 通過點擊單個字段或“編輯”按鈕來編輯此紀錄的字段。
-- 通過切換左下角窗格至“數據視圖”來查看或修改子面板中其他紀錄的連結。
-- 通過切換左下角窗格至“活動流”在{{activitystream_singular_module}} 中撰寫和查看用戶評論和紀錄更改歷史。
-- 使用紀錄名稱右側的圖標關注此紀錄或將此紀錄新增至收藏夾。
-- “編輯”按鈕右側的下拉“操作”菜單提供其他操作選項。',
+- 通過點擊單個字段或"編輯"按鈕，編輯此記錄的字段。
+- 通過切換右下角窗格至"數據視圖"，查看或修改子麵板其他記錄的鏈接。
+- 通過切換左下角窗格至"活動流"，在 {{activitystream_singular_module}} 在撰寫和查看用戶註釋以及記錄更改歷史。
+- 使用記錄名稱右側的圖標關注此記錄或將其新增至收藏夾。
+- "編輯"按鈕右側的下拉"操作"菜單提供其他操作選項。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 紀錄都代表一次未來的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模塊允許您全程追蹤銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包含相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
 
 若要創建 {{module_name}}：
 1. 按需提供字段值。
- - 標記為“必填”的字段在保存前必須先填寫完整。
- - 如有需要，點擊“顯示更多”以顯示其他字段。
-2. 點擊“保存”以完成新紀錄，並返回至上一頁。',
+ - 標記為"必填"的字段在保存前必須先填寫完整。
+ - 如有需要，點擊"顯示更多"以顯示其他字段。
+2. 點擊"保存"以完成新記錄，並返回至上一頁。',
 
 // END ENT/ULT
 

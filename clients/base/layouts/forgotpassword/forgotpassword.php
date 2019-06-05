@@ -16,6 +16,12 @@ $viewdefs['base']['layout']['forgotpassword'] = array(
         array(
             'view' => "forgotpassword"
         ),
+        array(
+            'view' => array(
+                'name' => 'marketing-extras',
+                'css_class' => 'marketing-extras',
+            ),
+        ),
     ),
 );
 

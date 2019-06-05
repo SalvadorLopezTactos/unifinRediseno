@@ -10,13 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span class="label">{{str "LBL_NO_FIELD_ACCESS" this.module}}</span>
-{{#if def.link}}
-    <a href="{{href}}"
-       class="btn btn-invisible btn-link"
-       rel="tooltip"
-       data-placement="bottom"
-       title="{{str 'LBL_FOLLOW_LINK' this.module}}">
-        <i class="fa fa-link"></i>
-    </a>
-{{/if}}
+<span class="label">
+    {{partial 'hyperlink-label' this href=href labelName="LBL_NO_FIELD_ACCESS" moduleName=this.module}}
+</span>

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: action_utils.php 56841 2010-06-05 00:44:19Z smalyshev $
 
 include_once('include/workflow/workflow_utils.php');
 include_once('include/workflow/field_utils.php');

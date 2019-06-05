@@ -27,7 +27,7 @@ $viewdefs['base']['view']['profileactions'] = array(
     ),
     array(
         'route' => '#bwc/index.php?module=Administration&action=index',
-        'label' => 'LBL_MODULE_NAME',
+        'label' => 'LBL_ADMIN',
         'css_class' => 'administration',
         'module' => 'Administration',
         'acl_action' => 'admin',

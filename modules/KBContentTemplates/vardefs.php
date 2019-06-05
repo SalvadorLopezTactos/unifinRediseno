@@ -34,6 +34,7 @@ $dictionary['KBContentTemplate'] = array(
     ),
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
     'acls' => array(
         'SugarACLKB' => true,

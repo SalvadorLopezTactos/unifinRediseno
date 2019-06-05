@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: ForTargets.php 17937 2006-11-27 21:26:57Z ajay $
 $subpanel_layout = array(
 	'top_buttons' => array(
 	),

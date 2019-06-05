@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>Προειδοποίηση:</b> Για την ασφαλή φύλαξη των δεδομένων σας, το πρόγραμμα εγκατάστασης πρέπει να κλειδωθεί από τη ρύθμιση &#39;installer_locked&#39; to &#39;true&#39; in the config.php file.',
  	'WARN_LICENSE_EXPIRED'=> "Ειδοποίηση:  Η άδεια σας λήγει σε",
     'WARN_LICENSE_EXPIRED2' =>"ημέρα(ες).  Παρακαλώ πηγαίνετε στην <a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>\"Διαχείριση Αδειών\"</a>  στην οθόνη Διαχειριστή.",
-    'WARN_LICENSE_SEATS'=>  "Προειδοποίηση: Υπέρβαση Αδειών Χρήσης",
-    'WARN_LICENSE_SEATS2' => ".  Παρακαλώ επικοινωνήστε με τον αντιπρόσωπο πωλήσεων ή στο email<a href=&#39;mailto:sales@sugarcrm.com&#39;>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "Προειδοποίηση <b>:</b> Υπάρχουν ",
+    'WARN_LICENSE_SEATS2' => " ενεργοί χρήστες όταν η συνδρομή σας δίνει τη δυνατότητα μόνο για ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Παρακαλώ απενεργοποιήσετε ορισμένους χρήστες, επικοινωνήστε με το συνεργάτη ή αντιπρόσωπο πωλήσεων,"
+        . " ή στείλτε email στο sales@sugarcrm.com <a href='mailto:sales@sugarcrm.com'></a>.</p>"
+        . "<p class=\"error\">Για περισσότερες πληροφορίες, ανατρέξτε στο "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Άρθρο</a> Κατανόηση των τύποων χρηστών και των αδειών Sugar.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Προειδοποίηση: Ο αριθμός ενεργών χειριστών υπερβαίνει τον μέγιστο αριθμό αδειών που επιτρέπονται:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Προειδοποίηση: Ο αριθμός ενεργών χειριστών υπερβαίνει τον μέγιστο αριθμό αδειών που επιτρέπονται:",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Προειδοποίηση: Ο αριθμός των ενεργών χειριστών που επιτρέπεται από την άδεια σας, ταιριάζει με τον αριθμό των ενεργών χειριστών στο σύστημα. Δεν θα είστε σε θέση να δημιουργήσετε επιπλέον ενεργούς χειριστές.",
-    'WARN_REPAIR_CONFIG' => 'Προειδοποίηση: Το config.php αρχείο χρειάζεται επιδιόρθωση.  Παρακαλώ χρησιμοποιήστε το σενάριο <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Ανοικοδόμηση Διαμόρφωση Αρχείου</a> στην σελίδα Επιδιόρθωση, στην περιοχή Διαχειριστή, για επιδιόρθωση της διαμόρφωσης αρχείου.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Προειδοποίηση:</b>Δεν θα είστε σε θέση να δημιουργήσετε πρόσθετες ενεργούς χρήστες."
+        . " Παρακαλώ προμηθευτείτε περισσότερες συνδρομές.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Προειδοποίηση:</b>Δεν θα είστε σε θέση να δημιουργήσετε πρόσθετες ενεργούς χρήστες."
+        . " Παρακαλώ προμηθευτείτε περισσότερες συνδρομές.",
+    'WARN_REPAIR_CONFIG' => '<b>Προειδοποίηση:</b> Το αρχείο config.php file πρέπει να επιδιορθωθεί. Παρακαλώ χρησιμοποιήστε το σενάριο <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Ανοικοδόμηση Αρχείου Παραμέτρων</a> στην σελίδα επιδιόρθωσης της περιοχής διαχειριστή για να επιδιορθώσετε το αρχείο διαμόρφωσης.',
     'WARN_UPGRADE_APP'=> "Μια ενημερωμένη έκδοση της εφαρμογής είναι τώρα διαθέσιμη.",
     'WARN_UPGRADE' => 'Προσοχή: Παρακαλώ αναβαθμίστε',
     'WARN_UPGRADENOTE' => 'Σημείωση:',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Εκκαθάριση Vardefs Δεδομένων Cache',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Αφαιρεί vardefs από τη μνήμη cache',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Εκκαθάριση Ενοποιημένης Αναζήτησης Cache',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Αφαιρεί ενοποιημένη_αναζήτηση_ενοτήτων.php από την cache',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Αφαιρεί το ενοποιημένη_αναζήτηση_ενοτήτων.php από την cache',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Γρήγορη Επιδιόρθωση και Αναδόμηση',
     'LBL_QUICK_REPAIR_TITLE'=>'Παρακαλώ επιλέξτε Ενότητα(ες) για επιδιόρθωση:',
 	'LBL_FAILED_CONNECTION'=> 'Αποτυχία στην σύνδεση :',
@@ -1244,15 +1253,17 @@ $mod_strings = array (
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Δεν βρέθηκε αρχείο μετα-δεδομένων.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Ρυθμίσεις',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Διαμόρφωση ρυθμίσεων Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Καταγραφή Προβολέα',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Πρόσβαση στο αρχείο καταγραφής Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Πρόσβαση στο ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' αρχείο καταγραφής.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Διεργασίες Λίστας',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Οι Διεργασίες Λίστας,  μπορούν να προσεγγιστούν εδώ.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Διαμόρφωση ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' των ρυθμίσεων και προβολή των αρχείων καταγραφής. Διαχειριστείτε όλες τις διεργασίες BPM για όλους τους χρήστες μέσω της διαδικασία διαχείρισης.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Διαμόρφωση ρυθμίσεων και αρχείων καταγραφής Advanced Workflow. Διαχείριση όλων των διεργασιών BPM για όλους τους χρήστες μέσω της διαδικασίας διαχείρισης.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Ρύθμιση προσφορών',
+    'LBL_MANAGE_QUOTES' => 'Ρυθμίστε τη διάταξη του φύλλου εργασίας προσφορών',
 );

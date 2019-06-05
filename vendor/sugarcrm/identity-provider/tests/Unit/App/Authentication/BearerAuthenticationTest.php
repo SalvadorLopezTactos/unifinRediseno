@@ -16,6 +16,7 @@ use Psr\Log\LoggerInterface;
 
 use Sugarcrm\IdentityProvider\App\Authentication\BearerAuthentication;
 use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
+use Sugarcrm\IdentityProvider\Srn;
 
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -54,7 +55,12 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    private $requiredScope = 'idp.auth.password';
+    private $requiredScope = 'https://apis.sugarcrm.com/auth/iam.password';
+
+    /**
+     * @var string
+     */
+    private $legacyScope = 'idp.auth.password';
 
     /**
      * @var Request | \PHPUnit_Framework_MockObject_MockObject
@@ -77,6 +83,11 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
     protected $oAuth2Service;
 
     /**
+     * @var Srn\Srn
+     */
+    protected $tenantSrn;
+
+    /**
      * @inheritDoc
      */
     protected function setUp()
@@ -92,6 +103,8 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
         $this->request = $this->createMock(Request::class);
         $this->requestHeaders = $this->createMock(HeaderBag::class);
         $this->request->headers = $this->requestHeaders;
+
+        $this->tenantSrn = Srn\Converter::fromString('srn:dev:iam:na:1012725962:tenant');
 
         $this->bearerAuthentication = new BearerAuthentication(
             $this->oAuth2Service,
@@ -119,6 +132,20 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
                'oAuth2ServiceResult' => ['scope' => $this->requiredScope . 'someSuffix'],
                'exception' => new AuthenticationException('Invalid scope'),
             ],
+            'valid token with invalid client id' => [
+               'oAuth2ServiceResult' => [
+                   'scope' => $this->requiredScope,
+                   'client_id' => 'WRONG-CLIENT-ID',
+               ],
+               'exception' => new AuthenticationException('Wrong client id:Invalid number of components in SRN'),
+            ],
+            'valid token with client id with wrong tenant' => [
+               'oAuth2ServiceResult' => [
+                   'scope' => $this->requiredScope,
+                   'client_id' => 'srn:dev:iam:na:123123123:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+               ],
+               'exception' => new AuthenticationException('Tenants mismatch'),
+            ],
         ];
     }
 
@@ -128,7 +155,7 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
      * @param $oAuth2ServiceResult
      * @param $exception
      */
-    public function testInvalidScopeToken($oAuth2ServiceResult, $exception)
+    public function testInvalidScopeToken($oAuth2ServiceResult, AuthenticationException $exception)
     {
         $this->requestHeaders
             ->expects($this->once())
@@ -143,16 +170,17 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
         $this->logger
             ->expects($this->once())
             ->method('warning')
-            ->with('Authentication Exception occurred on client Authentication',
+            ->with(
+                'Authentication Exception occurred on client Authentication',
                 [
                     'exception' => $exception,
                     'tags' => ['IdM.Bearer.authentication'],
-                ]);
+                ]
+            );
 
-        $result = $this->bearerAuthentication->authenticateClient($this->request);
-
-        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $result->getStatusCode());
-        $this->assertEquals($this->errorResult, json_decode($result->getContent(), true));
+        $this->expectException(get_class($exception));
+        $this->expectExceptionMessage($exception->getMessage());
+        $this->bearerAuthentication->authenticateClient($this->request, $this->tenantSrn);
     }
 
     /**
@@ -173,16 +201,16 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
         $this->logger
             ->expects($this->once())
             ->method('warning')
-            ->with('Authentication Exception occurred on client Authentication',
+            ->with(
+                'Authentication Exception occurred on client Authentication',
                 [
                     'exception' => $exception,
                     'tags' => ['IdM.Bearer.authentication'],
-                ]);
-
-        $result = $this->bearerAuthentication->authenticateClient($this->request);
-
-        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $result->getStatusCode());
-        $this->assertEquals($this->errorResult, json_decode($result->getContent(), true));
+                ]
+            );
+        $this->expectException(get_class($exception));
+        $this->expectExceptionMessage($exception->getMessage());
+        $this->bearerAuthentication->authenticateClient($this->request, $this->tenantSrn);
     }
 
     /**
@@ -209,6 +237,7 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidHeader($authorizationHeader)
     {
+        $exception = new AuthenticationException('Empty Authorization token received');
         $this->requestHeaders
             ->expects($this->once())
             ->method('get')
@@ -221,16 +250,17 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
         $this->logger
             ->expects($this->once())
             ->method('warning')
-            ->with('Authentication Exception occurred on client Authentication',
+            ->with(
+                'Authentication Exception occurred on client Authentication',
                 [
                     'exception' => new AuthenticationException('Empty Authorization token received'),
                     'tags' => ['IdM.Bearer.authentication'],
-                ]);
+                ]
+            );
 
-        $result = $this->bearerAuthentication->authenticateClient($this->request);
-
-        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $result->getStatusCode());
-        $this->assertEquals($this->errorResult, json_decode($result->getContent(), true));
+        $this->expectException(get_class($exception));
+        $this->expectExceptionMessage($exception->getMessage());
+        $this->bearerAuthentication->authenticateClient($this->request, $this->tenantSrn);
     }
 
     /**
@@ -243,19 +273,26 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
             'valid token with one scope' => [
                 'input' => [
                     'header' => "Bearer $this->token",
-                    'oAuth2ServiceResult' => ['scope' => $this->requiredScope],
+                    'oAuth2ServiceResult' => [
+                        'scope' => $this->requiredScope,
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+                    ],
                 ],
             ],
             'valid token with lover case authorization type' => [
                 'input' => [
                     'header' => "bearer $this->token",
-                    'oAuth2ServiceResult' => ['scope' => $this->requiredScope],
+                    'oAuth2ServiceResult' => [
+                        'scope' => $this->requiredScope,
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+                    ],
                 ],
             ],
             'valid token with more then one scope' => [
                 'input' => [
                     'header' => "Bearer $this->token",
                     'oAuth2ServiceResult' => [
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
                         'scope' => implode(
                             BearerAuthentication::SCOPE_DELIMITER,
                             ['Scope1', $this->requiredScope, 'someOtherScope']
@@ -288,6 +325,78 @@ class BearerAuthenticationTest extends \PHPUnit_Framework_TestCase
             ->expects($this->never())
             ->method('warning');
 
-        $this->assertNull($this->bearerAuthentication->authenticateClient($this->request)) ;
+        $this->bearerAuthentication->authenticateClient($this->request, $this->tenantSrn);
+    }
+
+    /**
+     * @see testIntrospectionValidToken
+     * @return array
+     */
+    public function validLegacyTokenDataProvider()
+    {
+        return [
+            'valid token with one scope' => [
+                'input' => [
+                    'header' => "Bearer $this->token",
+                    'oAuth2ServiceResult' => [
+                        'scope' => $this->legacyScope,
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+                    ],
+                ],
+            ],
+            'valid token with lover case authorization type' => [
+                'input' => [
+                    'header' => "bearer $this->token",
+                    'oAuth2ServiceResult' => [
+                        'scope' => $this->legacyScope,
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+                    ],
+                ],
+            ],
+            'valid token with more then one scope' => [
+                'input' => [
+                    'header' => "Bearer $this->token",
+                    'oAuth2ServiceResult' => [
+                        'scope' => implode(
+                            BearerAuthentication::SCOPE_DELIMITER,
+                            ['Scope1', $this->legacyScope, 'someOtherScope']
+                        ),
+                        'client_id' => 'srn:dev:iam:na:1012725962:app:crm:5c4c0477-7ac8-41b0-81eb-02f0cf9adadb',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Testing valid cases
+     * @dataProvider validLegacyTokenDataProvider
+     * @covers ::authenticateClient
+     * @param array $input
+     */
+    public function testIntrospectionValidLegacyToken(array $input)
+    {
+        $this->requestHeaders
+            ->expects($this->once())
+            ->method('get')
+            ->with('Authorization')
+            ->willReturn($input['header']);
+        $this->oAuth2Service
+            ->expects($this->once())
+            ->method('introspectToken')
+            ->with($this->token)
+            ->willReturn($input['oAuth2ServiceResult']);
+        $this->logger
+            ->expects($this->once())
+            ->method('warning')
+            ->with(
+                'Clients still use legacy scope',
+                [
+                    'legacyScope' => $this->legacyScope,
+                    'tags' => ['IdM.Bearer.authentication'],
+                ]
+            );
+
+        $this->bearerAuthentication->authenticateClient($this->request, $this->tenantSrn);
     }
 }

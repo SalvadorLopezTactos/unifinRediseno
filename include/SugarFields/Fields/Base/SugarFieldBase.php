@@ -193,6 +193,27 @@ class SugarFieldBase {
     }
 
     /**
+     * Perform any additional ACL operations mandated by this field type.
+     *
+     * @param array $data (Reference to) array of result data.
+     * @param SugarBean $bean The bean.
+     * @param string $fieldName Name of this field.
+     * @param string $action Action we are attempting (view, list).
+     * @param array $fieldDef Field definition.
+     * @param ServiceBase $service REST API service.
+     */
+    public function processAdditionalAcls(
+        array &$data,
+        SugarBean $bean,
+        string $fieldName,
+        string $action,
+        array $fieldDef,
+        ServiceBase $service = null
+    ) {
+        // nothing to do for most fields
+    }
+
+    /**
      * Ensures that necessary arguments of apiFormatField() are passed
      *
      * @param array $fieldList The $fieldList argument of apiFormatField()

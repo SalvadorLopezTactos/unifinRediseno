@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'สร้างช่วงเวลาในอนาคต',
 'LBL_OOTB_HEARTBEAT' => 'สถานะของ Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'อัปเดตบทความ KBContent',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'เผยแพร่บทความที่อนุมัติและกำหนดให้บทความ KB หมดอายุ',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'งานที่จัดลำดับไว้ของ Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'บทความที่ได้รับการอนุมัติให้เผยแพร่และบทความ KB ที่หมดอายุแล้ว',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' งานตามกำหนดการ',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'ตรวจสอบบัญชีอีเมลขาเข้า',
 'LBL_PERFORMFULLFTSINDEX' => 'ระบบดัชนีการค้นหาข้อความแบบเต็ม',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'นำไฟล์ PDF ชั่วคราวออก',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'เผยแพร่บทความที่อนุมัติและกำหนดให้บทความ KB หมดอายุ.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'บทความที่ได้รับการอนุมัติให้เผยแพร่และบทความ KB ที่หมดอายุแล้ว',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'เครื่องมือวางกำหนดการคิว Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'นำไฟล์ของเครื่องมือวินิจฉัยออก',
 'LBL_SUGARJOBREMOVETMPFILES' => 'นำไฟล์ชั่วคราวออก',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'เรียกใช้การส่งการแจ้งเตือนทางอีเมล',
 'LBL_CLEANJOBQUEUE' => 'ล้างข้อมูลคิวงาน',
 'LBL_CLEANOLDRECORDLISTS' => 'ล้างข้อมูลรายการระเบียนเก่า',
-'LBL_PMSEENGINECRON' => 'ตัวจัดลำดับของ Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'เครื่องมือวางกำหนดการ SugarBPM',
 );
 

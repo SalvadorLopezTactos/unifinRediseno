@@ -10,18 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$sugar_config['site_url'] = 'http://behat-tests-mango-oidc.idm-ns';
+$sugar_config['site_url'] = 'http://behat-tests-mango-oidc.idm-ns-localhost';
 $sugar_config['verify_client_ip'] = false;
 $sugar_config['passwordsetting']['SystemGeneratedPasswordON'] = '0';
 
-$sugar_config['idm_mode']['clientId'] = 'mangoOIDCClientId';
+$sugar_config['idm_mode']['enabled'] = true;
+$sugar_config['idm_mode']['clientId'] = 'srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a';
 $sugar_config['idm_mode']['clientSecret'] = 'mangoOIDCClientSecret';
 $sugar_config['idm_mode']['stsUrl'] = 'http://sts.sugarcrm.local'; // or just http://sts.namespace
 $sugar_config['idm_mode']['idpUrl'] = 'http://login.sugarcrm.local'; // or just http://idp.namespace
 $sugar_config['idm_mode']['stsKeySetId'] = 'mangoOIDCKeySet';
 $sugar_config['idm_mode']['http_client']['retry_count'] = 0;
 $sugar_config['idm_mode']['http_client']['delay_strategy'] = 'linear';
-$sugar_config['idm_mode']['tid'] = 'srn:cloud:idp:eu:0000000001:tenant';
+$sugar_config['idm_mode']['tid'] = 'srn:cloud:iam:eu:0000000001:tenant';
 $sugar_config['idm_mode']['crmOAuthScope'] = 'https://apis.sugarcrm.com/auth/crm';
 $sugar_config['idm_mode']['requestedOAuthScopes'] = [
     'offline',

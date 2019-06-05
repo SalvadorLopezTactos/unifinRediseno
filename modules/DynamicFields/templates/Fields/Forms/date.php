@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: date.php 30233 2007-12-05 00:31:22Z majed $
 
 function get_body(&$ss, $vardef){
 	$td = new TemplateDate();

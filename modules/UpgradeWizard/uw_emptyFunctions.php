@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: uw_emptyFunctions.php 36031 2008-05-29 15:43:38Z vineet $
 
 
 //empty function getJSPath().. there is some dependency in meta upgrade

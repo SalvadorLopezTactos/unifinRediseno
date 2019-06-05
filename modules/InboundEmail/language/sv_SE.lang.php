@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Felaktigt användarnamn eller lösenord',
-	'ERR_BODY_TOO_LONG'		=> '\\rMeddelandetexten för lång för att kunna spara hela meddelandet.  Har trimmats',
+	'ERR_BODY_TOO_LONG'		=> '\rMeddelandetexten för lång för att kunna spara hela meddelandet.  Har trimmats',
 	'ERR_INI_ZLIB'			=> 'Kunde inte stänga av Zlib kompressionen temporärt. "Testa inställningar" kan misslyckas.',
 	'ERR_MAILBOX_FAIL'		=> 'Kunde inte hämta några emailkonton.',
 	'ERR_NO_IMAP'			=> 'Inga IMAP-bibliotek hittades. Var god lös detta innan du fortsätter med inkommande email',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Skicka köer från team',
 	'LBL_GROUPFOLDER_ID'	=> 'Gruppkatalog Id',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Tilldela till gruppkatalog',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Låt användare skicka mail med avsändarnamnet och adressen som &#39;svara till&#39;-adress',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Om detta alternativ är valt, kommer avsändaradresss och namn associerat med gruppen att synas som alternativ för avsändare om användare med tillgång till gruppmailkontot skriver ett mail.',
     'LBL_STATUS_ACTIVE'     => 'Aktiv',
     'LBL_STATUS_INACTIVE'   => 'Inaktiv',
     'LBL_IS_PERSONAL' => 'personlig',

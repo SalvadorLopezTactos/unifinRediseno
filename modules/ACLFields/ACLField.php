@@ -11,8 +11,13 @@
  */
 
 require_once('modules/ACLFields/actiondefs.php');
+
 /**
  * Field-level ACLs
+ * @property string aclaccess
+ * @property string category
+ * @property string name
+ * @property string role_id
  * @api
  */
 class ACLField extends SugarBean
@@ -31,12 +36,12 @@ class ACLField extends SugarBean
     public static $acl_fields = array();
 
     /**
-    * static getAvailableFields($module, $object=false)
-    * Adds available fields for module
-    * @internal
-    * @param STRING $module
-    * @param STRING $object object name
-    */
+     * Adds available fields for module.
+     * @internal
+     * @param string $module Module name.
+     * @param bool|string $object Object name.
+     * @return array List of fields available for ACL control.
+     */
     static function getAvailableFields($module, $object=false)
     {
         static $exclude = array('deleted', 'assigned_user_id');
@@ -54,43 +59,37 @@ class ACLField extends SugarBean
             }
 
             $availableFields = array();
-            foreach($fieldDefs as $field=>$def){
-
-                // FIXME this condition needs some refactoring to make any sense at all
-                // we also need to document the rules because currently studio fields
-                // should follow the same rules as our vardefs...
-                if ((
-                        !empty($def['source']) && $def['source'] == 'custom_fields') &&
-                        $def['type'] != 'id' && (empty($def['dbType']) || ($def['dbType'] != 'id')
-                    ) ||
-                    (!empty($def['group']) && empty($def['hideacl'])) ||
-                    (
-                        empty($def['hideacl']) && !empty($def['type']) && !in_array($field, $exclude) &&
-                        (
-                            (
-                                empty($def['source']) && $def['type'] != 'id' &&
-                                (empty($def['dbType']) || ($def['dbType'] != 'id'))
-                            ) || !empty($def['link']) || in_array($def['type'], SugarBean::$relateFieldTypes)
-                        )
-                    )
-                ) {
-                        if(empty($def['vname']))$def['vname'] = '';
-                        $fkey = (!empty($def['group']))? $def['group']: $field;
-                        $label = (!empty($fieldDefs[$fkey]['vname']))?$fieldDefs[$fkey]['vname']:$def['vname'];
-                        $fkey = strtolower($fkey);
-                        $field = strtolower($field);
-                        $required = !empty($def['required']);
-                        if($field == 'name'){
-                            $required = true;
+            foreach ($fieldDefs as $field => $def) {
+                if (self::shouldFieldBeAvailable($field, $def, $exclude)) {
+                    if (empty($def['vname'])) {
+                        $def['vname'] = '';
+                    }
+                    $fkey = (!empty($def['group'])) ? $def['group'] : $field;
+                    $label = (!empty($fieldDefs[$fkey]['vname'])) ? $fieldDefs[$fkey]['vname'] : $def['vname'];
+                    $fkey = strtolower($fkey);
+                    $field = strtolower($field);
+                    $required = !empty($def['required']);
+                    if ($field == 'name') {
+                        $required = true;
+                    }
+                    if (empty($availableFields[$fkey])) {
+                        $availableFields[$fkey] = array(
+                            'id' => $fkey,
+                            'required' => $required,
+                            'key' => $fkey,
+                            'name' => $field,
+                            'label' => $label,
+                            'category' => $module,
+                            'role_id' => '',
+                            'aclaccess' => ACL_ALLOW_DEFAULT,
+                            'fields' => array($field => $label),
+                        );
+                    } else {
+                        if (!empty($required)) {
+                            $availableFields[$fkey]['required'] = 1;
                         }
-                        if(empty($availableFields[$fkey])){
-                            $availableFields[$fkey] = array('id'=>$fkey, 'required'=>$required, 'key'=>$fkey, 'name'=> $field, 'label'=>$label, 'category'=>$module, 'role_id'=> '', 'aclaccess'=>ACL_ALLOW_DEFAULT, 'fields'=>array($field=>$label) );
-                        }else{
-                            if(!empty($required)){
-                                $availableFields[$fkey]['required'] = 1;
-                            }
-                            $availableFields[$fkey]['fields'][strtolower($field)] = $label;
-                        }
+                        $availableFields[$fkey]['fields'][strtolower($field)] = $label;
+                    }
                 }
             }
             $modulesAvailableFields[$module] = $availableFields;
@@ -448,11 +447,15 @@ AND deleted = 0';
     }
 
     /**
+     * Set ACL rules for the given field that will apply to the given role.
+     *
      * @internal
-     * @param string $module
-     * @param string $role_id
-     * @param string $field_id
-     * @param string $access
+     * @param string $module Module in which the field exists.
+     * @param string $role_id ID for the role this ACL will apply to.
+     * @param string $field_id Name of the field.
+     * @param integer? $access Access level.
+     * @return bool? false if no value was given and no value has been
+     *   saved before. Otherwise, void.
      */
     public static function setAccessControl($module, $role_id, $field_id, $access)
     {
@@ -471,6 +474,18 @@ AND deleted = 0';
         $acl->role_id = $role_id;
         $acl->save();
 
+        // For collection fields, any change to the field itself also needs to be propagated to its link(s)
+        $vardefs = MetaDataManager::getManager()->getVarDef($module);
+        $fields = $vardefs['fields'] ?? null;
+        if (isset($fields[$field_id]['type']) &&
+            $fields[$field_id]['type'] === 'collection' &&
+            isset($fields[$field_id]['links']) &&
+            is_array($fields[$field_id]['links'])
+        ) {
+            foreach ($fields[$field_id]['links'] as $link) {
+                self::setAccessControl($module, $role_id, $fields[$link]['name'], $access);
+            }
+        }
     }
 
     public static function clearACLCache()
@@ -510,5 +525,47 @@ AND deleted = 0';
     protected static function storeToCache($user_id, $type, $data)
     {
         return AclCache::getInstance()->store($user_id, $type, $data);
+    }
+
+    /**
+     * @param string $fieldName Name of the field.
+     * @param array $def Fielddef.
+     * @param array $exclude List of field types to explicitly exclude.
+     * @return bool true if this field should be avaiable for field-level ACL's,
+     *   false otherwise.
+     */
+    private static function shouldFieldBeAvailable(string $fieldName, array $def, array $exclude): bool
+    {
+        $isCustomFields = !empty($def['source']) && $def['source'] === 'custom_fields';
+        $hasType = !empty($def['type']);
+        $typeIsId = $hasType && ($def['type'] === 'id');
+        $hasDbType = !empty($def['dbType']);
+        $dbTypeIsId = $hasDbType && ($def['dbType'] === 'id');
+        $hasGroup = !empty($def['group']);
+        $hasHideACL = !empty($def['hideacl']);
+        $hasSource = !empty($def['source']);
+        $hasLink = !empty($def['link']);
+
+        $isRelateFieldType = $hasType && in_array($def['type'], SugarBean::$relateFieldTypes);
+        $isExplicitlyExcludedField = in_array($fieldName, $exclude);
+        $isIdField = $typeIsId || $dbTypeIsId;
+        $isNonIdFieldWithoutSource = !$hasSource && !$isIdField;
+        $isCollectionField = $hasType && ($def['type'] === 'collection');
+
+        $shouldBeAvailable = ($isCustomFields && !$isIdField) || // custom non-ID field
+            ($hasGroup && !$hasHideACL) || // groups without explicit hideacl
+            (
+                $hasType &&
+                !$hasHideACL &&
+                !$isExplicitlyExcludedField &&
+                ($isNonIdFieldWithoutSource || $hasLink || $isRelateFieldType || $isCollectionField)
+            ); /* non-excluded, non-ACL-hidden fields, with a type, which either:
+                    * have a link;
+                    * are relate fields;
+                    * are non-ID fields without a source; or
+                    * are collection fields
+                */
+
+        return $shouldBeAvailable;
     }
 }

@@ -11,10 +11,10 @@
 /**
  * @class View.Fields.Base.Products.DiscountField
  * @alias SUGAR.App.view.fields.BaseProductsDiscountField
- * @extends View.Fields.Base.CurrencyField
+ * @extends View.Fields.Base.Products.CurrencyField
  */
 ({
-    extendsFrom: 'CurrencyField',
+    extendsFrom: 'ProductsCurrencyField',
 
     /**
      * @inheritdoc
@@ -100,6 +100,8 @@
         if (this.model.get('discount_select') == true) {
             return app.utils.formatNumberLocale(value);
         } else {
+            //In edit mode hide the currency dropdown for the discount field
+            this.hideCurrencyDropdown = this.tplName === 'edit' ? true : false;
             return this._super('format', [value]);
         }
     },

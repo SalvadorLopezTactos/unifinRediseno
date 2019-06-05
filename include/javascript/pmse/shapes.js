@@ -30,6 +30,16 @@ var AdamShape = function (options) {
      * @type {jCore.ArrayList}
      */
     this.markersArray = new jCore.ArrayList();
+    /**
+     * Stores whether this shape currently has a warning
+     * @type {boolean}
+     */
+    this.hasWarning = false;
+    /**
+     * Stores whether this shape currently has an error
+     * @type {boolean}
+     */
+    this.hasError = false;
 };
 AdamShape.prototype = new jCore.CustomShape();
 
@@ -62,25 +72,13 @@ AdamShape.prototype.setName = function (value) {
     var item;
     if (this.label) {
         this.label.setMessage(value);
-        if (listPanelError){
-            if ( listPanelError.items.length ) {
-                item = listPanelError.getItemById(this.id);
-                if ( item ) {
-                    if ( value.trim().length ) {
-                        item.setTitle(value);                        
-                    } else {
-                        item.setTitle("[unnamed]");
-                    }
-                }
-            }
-        }
     }
     return this;
 };
 
 AdamShape.prototype.saveProject = function (root, App, w) {
     root.canvas.showModal();
-    App.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoClose: false});
+    App.alert.show('upload', {level: 'process', title: 'LBL_LOADING_NO_DOTS', autoClose: false});
     root.canvas.project.save({
         success: function () {
             root.canvas.hideModal();
@@ -212,6 +210,26 @@ AdamShape.prototype.dropBehaviorFactory = function (type, selectors) {
     }
 };
 
+/**
+ * Returns an array of elements that have this shape as a destination
+ * @return {Array} The array of source elements
+ */
+AdamShape.prototype.getSourceElements = function() {
+    var elements = [];
+    var i;
+    var port;
+    var connection;
+
+    for (i = 0; i < this.getPorts().getSize(); i += 1) {
+        port = this.getPorts().get(i);
+        connection = port.connection;
+        if (connection.srcPort.parent.getID() !== this.getID()) {
+            elements.push(connection.srcPort.parent);
+        }
+    }
+    return elements;
+};
+
 AdamShape.prototype.getDestElements = function () {
     var elements = [],
         i,
@@ -226,6 +244,25 @@ AdamShape.prototype.getDestElements = function () {
         }
     }
     return elements;
+};
+
+/**
+ * Returns the name of a shape that is connected to this shape with the given floID
+ * @param  {string} floID is the unique ID number of the flow going to the destination shape
+ * @return {string} The name of the destination shape, or undefined if this shape does not have
+ *                  a flow with the given floID
+ */
+AdamShape.prototype.getDestElementName = function(floID) {
+    var i;
+    var flow;
+    var ports = this.getPorts().asArray();
+
+    for (i = 0; i < ports.length; i++) {
+        flow = ports[i].connection;
+        if (flow.flo_uid === floID) {
+            return flow.destPort.parent.getName();
+        }
+    }
 };
 
 /**
@@ -297,112 +334,6 @@ AdamShape.prototype.getFamilyNumber = function (shape) {
     return map[shape.getType()];
 };
 
-AdamShape.prototype.attachErrorToShape = function (objArray) {
-    var i, j,
-        sw,
-        message,
-        ruleArray,
-        testCount,
-        rule,
-        error,
-        sizeItems,
-        allErrors = [];
-    this.BPMNError = new jCore.ArrayList();
-    for (i = 0; i < objArray.length; i += 1) {
-        message  = objArray[i].message;
-        ruleArray = objArray[i].rules;
-
-        sw = (objArray[i].family === 8 && objArray[i].familyType === 4) ?
-            false : true;
-        for (j = 0; j < ruleArray.length; j += 1) {
-            rule = ruleArray[j];
-
-            testCount = this.countFlow(rule.element, rule.direction);
-            if (objArray[i].family === 8 && objArray[i].familyType === 4) {
-                sw = sw || (testCount > rule.value);
-            } else if (objArray[i].family === 5 && objArray[i].familyType === 1 && objArray[i].familySubType === 1) {
-                switch (rule.compare){
-                    case '!=':
-                        sw = sw && ('NONE' !== rule.value);
-                        break;
-                }
-            } else {
-                switch (rule.compare){
-                    case '=':
-                        sw = sw && (testCount === rule.value);
-                        break;
-                    case '>':
-                        sw = sw && (testCount > rule.value);
-                        break;
-                    case '<':
-                        sw = sw && (testCount < rule.value);
-                        break;
-                }
-            }
-        }
-        if (!sw){
-            //TODO attach error to shape
-            this.BPMNError.insert({
-                code: objArray[i].id,
-                //element: rule.element,
-                direction: rule.direction,
-                description: message
-            });
-            //this.canvas.diagram.refreshErrorGrid(this);
-
-        }
-    }
-    if (this.BPMNError.getSize() > 0) {
-        this.addErrorLayer('error', 2);
-
-    } else {
-        this.clearErrors();
-    }
-
-    //listPanelError.setItems(items)
-    //console.log(listPanelError);
-    listPanelError.setItems(this.getShapeWithErros());
-        if (countErrors){
-            if (listPanelError.getItems().length){
-                countErrors.style.display = "block";
-                sizeItems = listPanelError.getAllErros();
-                countErrors.textContent =  sizeItems === 1 ? sizeItems + translate('LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL') : sizeItems + translate('LBL_PMSE_BPMN_WARNING_LABEL');
-                $("#error-div").show();
-            } else {
-                countErrors.textContent = "0" + translate('LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL');
-                $("#error-div").hide();
-            }
-        }
-};
-
-
-AdamShape.prototype.getShapeWithErros = function () {
-    var i, shape, errors, error, f = [], items = [], object = {}, subObject = {};
-    for (i = 0; i < canvas.getCustomShapes().getSize(); i += 1) {
-        shape = canvas.getCustomShapes().get(i);
-        if(shape.BPMNError !== undefined) {
-            if (shape.BPMNError.getSize()){
-                object = {};
-                object.title = shape.getName()||'[unnamed]';
-
-                object.errorType =  this.getShapeType(shape.getType(), shape);
-                object.items = [];
-                object.errorId = shape.getID();
-                errors = shape.BPMNError;
-                for ( j = 0; j < errors.getSize(); j += 1) {
-                    subObject = {};
-                    error = errors.get(j);
-                    subObject.messageId =  error.code;
-                    subObject.message = error.description;
-                    object.items.push(subObject);
-                }
-                items.push(object);
-                }
-        }
-    }
-    return items;
-};
-
 AdamShape.prototype.getShapeType = function (type, shape) {
     var shapeType, shapeMessage, itemType = "";
     switch (type){
@@ -463,9 +394,48 @@ AdamShape.prototype.countFlow = function (element, direction) {
     return count;
 };
 
-AdamShape.prototype.addErrorLayer = function (cssMarker, position) {
+/**
+ * Attaches a warning marker (yellow triangle) to the bottom-right of this shape
+ */
+AdamShape.prototype.showWarningMarker = function() {
+    this.addErrorLayer('error', 5, true);
+};
+
+/**
+ * Attaches an error marker (red circle) to the top-right of this shape
+ */
+AdamShape.prototype.showErrorMarker = function() {
+    this.addErrorLayer('error', 2);
+};
+
+/**
+ * Removes any error or warning markers attached to this shape
+ */
+AdamShape.prototype.clearIssueMarkers = function() {
+    var i;
+    var lMarker;
+    for (i = 0; i < this.markersArray.getSize(); i += 1) {
+        lMarker = this.markersArray.get(i);
+        if (lMarker.position === 2 || lMarker.position === 5) {
+            $('#' + lMarker.id).remove();
+            this.markersArray.remove(lMarker);
+            i--;
+        }
+    }
+};
+
+/**
+ * Adds an error layer to this shape (or re-uses one if it already exists)
+ * and attaches a marker to it in the specified position
+ * @param {string} cssMarker is the type of marker to add
+ * @param {number} position is the position on the shape to attach the marker at
+ *                 (valid options are 0-5. From left-to-right, top-to bottom, 0
+ *                 is top-left and 5 is bottom-right)
+ * @param {boolean} warning indicates whether the marker should be a warning marker
+ */
+AdamShape.prototype.addErrorLayer = function(cssMarker, position, warning) {
     var layer, cl, cs, zoom, options;
-    layer = this.layers.find('id', this.id + 'Layer-Errors');
+    layer = this.layers.find('id', this.id + 'Layer-error-layer');
     if (typeof position === 'undefined' || position === null) {
         cl = cssMarker;
         cs = 'bpmn_zoom';
@@ -491,24 +461,19 @@ AdamShape.prototype.addErrorLayer = function (cssMarker, position) {
         }
     }
     if (typeof position !== 'undefined' && position !== null) {
-        this.addErrors(layer, position);
+        this.addErrors(layer, position, warning);
     }
 };
 
-AdamShape.prototype.clearErrors = function () {
-    var i, lMarker, ifExist;
-    for (i = 0; i < this.markersArray.getSize(); i += 1){
-        lMarker = this.markersArray.get(i);
-        if (lMarker.position === 2) {
-            //ifExist = true;
-
-            lMarker.removeAllClasses();
-            break;
-        }
-    }
-};
-
-AdamShape.prototype.addErrors = function (newLayer, pos) {
+/**
+ * Attaches a marker to a layer in the specified position
+ * @param {Object} newLayer is the layer to attach the marker to
+ * @param {number} pos is the position on the layer to attach the marker at
+ *                 (valid options are 0-5. From left-to-right, top-to bottom, 0
+ *                 is top-left and 5 is bottom-right)
+ * @param {boolean} warning indicates whether the marker should be a warning marker
+ */
+AdamShape.prototype.addErrors = function(newLayer, pos, warning) {
     var  nMarker, x, lMarker, ifExist = false,
         errorArrayClass = [], cls, i;
 
@@ -520,7 +485,11 @@ AdamShape.prototype.addErrors = function (newLayer, pos) {
         }
     }
     for (i = 0; i < newLayer.ZOOMSCALES; i += 1) {
-        cls = 'adam-status-' + ((i * 25) + 50) + '-warning adam-error-color fa fa-exclamation-circle';
+        if (warning) {
+            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-warning-color fa fa-exclamation-triangle';
+        } else {
+            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-error-color fa fa-exclamation-circle';
+        }
         errorArrayClass.push(cls);
     }
     if (!ifExist) {
@@ -537,5 +506,34 @@ AdamShape.prototype.addErrors = function (newLayer, pos) {
         nMarker.setElementClass(errorArrayClass);
     } else {
         lMarker.setElementClass(errorArrayClass);
+    }
+};
+
+/**
+ * Initiates the validation process of an AdamShape.
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamShape.prototype.validate = function(validationTools) {
+    var self = this;
+    var url = App.api.buildURL(this.getBaseURL() + self.id, null, null);
+    var options = {
+        'bulk': 'get_element_settings'
+    };
+    var callback = self.getValidationFunction();
+    self.hasWarning = false;
+    self.hasError = false;
+    if (url && callback) {
+        validationTools.progressTracker.incrementTotalElements();
+        App.api.call('read', url, null, {
+            success: function(data) {
+                callback(data, self, validationTools);
+            },
+            error: function(data) {
+                validationTools.createWarning(element, 'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE', self.getName());
+            },
+            complete: function(data) {
+                validationTools.progressTracker.incrementSettingsGathered();
+            }
+        }, options);
     }
 };

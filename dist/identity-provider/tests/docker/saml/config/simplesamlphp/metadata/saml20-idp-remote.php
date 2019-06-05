@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -15,7 +15,5 @@
  *
  * Remember to remove the IdPs you don't use from this file.
  *
- * See: https://simplesamlphp.org/docs/stable/simplesamlphp-reference-idp-remote 
+ * See: https://simplesamlphp.org/docs/stable/simplesamlphp-reference-idp-remote
  */
-
-

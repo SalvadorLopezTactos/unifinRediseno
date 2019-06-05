@@ -18,6 +18,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\ContainerAwareInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\ContainerAwareTrait;
 use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\CommentLogHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Parser\TermParserHelper;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
@@ -91,6 +92,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         'longtext',
         'htmleditable_tinymce',
         'email',
+        'commentlog',
     );
 
     /**
@@ -131,6 +133,22 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     }
 
     /**
+     * get config flag for shortcut operator
+     * @return bool
+     */
+    public function getUseShortcutOperator() : bool
+    {
+        $ret = false;
+        // using config to override the default shortcut operator
+        global $sugar_config;
+        if (isset($sugar_config['gs_use_shortcut_operator']) && isTruthy($sugar_config['gs_use_shortcut_operator'])) {
+            $ret = true;
+        }
+
+        return $ret;
+    }
+
+    /**
      * Register handlers
      */
     protected function registerHandlers()
@@ -143,6 +161,8 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         $this->addHandler(new FavoritesHandler());
         $this->addHandler(new HtmlHandler());
         $this->addHandler(new ErasedFieldsHandler());
+        // commentlog field
+        $this->addHandler(new CommentLogHandler());
     }
 
     /**
@@ -738,15 +758,9 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         $multiMatch = new MultiMatchQuery();
         $multiMatch->setTerms($this->term);
         $multiMatch->setOperator($this->getDefaultOperator());
+        $multiMatch->setUseShortcutOperator($this->getUseShortcutOperator());
         $multiMatch->setVisibilityProvider($this->container->getProvider('Visibility'));
-
-        $modules = $this->modules;
-        //when searching on a specific module, include tags if necessary
-        if ($this->getTags && !in_array($this->tagModule, $modules)) {
-            $modules[] = $this->tagModule;
-        }
-
-        $multiMatch->setSearchFields($this->buildSearchFields($modules));
+        $multiMatch->setSearchFields($this->buildSearchFields($this->modules));
         $multiMatch->setUser($this->user);
         return $multiMatch;
     }

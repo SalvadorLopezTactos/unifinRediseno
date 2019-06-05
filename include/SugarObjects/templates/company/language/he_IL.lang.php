@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'התחשבנות בדחיפה',
 	'LBL_PUSH_SHIPPING' => 'משלוח בדחיפה',
 	'LBL_SAVE_ACCOUNT' => 'שמור חשבון',
+    'LBL_SERVICE_LEVEL' => 'רמת שירות',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'עיר למשלוח:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'מחוז למשלוח:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'מיקוד למשלוח:',

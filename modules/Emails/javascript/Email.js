@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id:Email.js 24878 2007-07-31 19:46:34Z chris $
 
 var uploads_arr=new Array();
 var uploads_count_map=new Object();

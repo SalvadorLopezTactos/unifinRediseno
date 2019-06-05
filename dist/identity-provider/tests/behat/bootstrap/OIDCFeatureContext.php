@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -12,6 +12,8 @@
 namespace Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap;
 
 use GuzzleHttp;
+use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
+use Sugarcrm\IdentityProvider\Authentication\Exception\RuntimeException;
 
 require_once '../../vendor/autoload.php';
 require_once '../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php';
@@ -21,60 +23,83 @@ class OIDCFeatureContext extends FeatureContext
     use Oauth2ProviderTrait;
 
     /**
-     *
      * @var string
      */
     protected $accessToken;
 
-
     /**
-     *
      * @var string
      */
     protected $responseBody;
 
     /**
+     * @var string
+     */
+    private $loginServiceUrl;
+
+    /**
+     * List configs oidcClient
+     * @var array
+     */
+    private $oidcClients;
+
+    /**
      * SetUp necessary configs.
      *
      * @param array $sugarAdmin
-     * @param array $oidcClient
+     * @param array $oidcClients
+     * @param string $loginServiceUrl
+     * @param string $screenShotPath
      */
-    public function __construct(array $sugarAdmin, array $oidcClient)
+    public function __construct(array $sugarAdmin, array $oidcClients, string $loginServiceUrl, string $screenShotPath)
     {
-        parent::__construct($sugarAdmin);
-        $this->oidcClient = $oidcClient;
+        parent::__construct($sugarAdmin, $screenShotPath);
+        $this->oidcClients = $oidcClients;
+        $this->loginServiceUrl = $loginServiceUrl;
     }
 
     /**
-     * Gets Mango resource for provided platform
-     *
-     * @param string $platform
-     *
-     * @And /^I try to get Mango resource for "([^"]*)" platform$/
-     * @Then /^I try to get Mango resource for "([^"]*)" platform$/
+     * @And /^I use "([^"]*)" client$/
+     * @Then /^I use "([^"]*)" client$/
+     * @param string $clientKey
      */
-    public function iTryToGetMangoResourceForPlatform($platform)
+    public function iUseClient(string $clientKey): void
     {
-        $usersUrl = ($this->getMinkParameter('base_url')) . '/rest/v11/Calls?platform=' . $platform;
+        assertArrayHasKey($clientKey, $this->oidcClients, "Client $clientKey not exists");
+        $this->oidcClient = $this->oidcClients[$clientKey];
+        $this->oauth2Provider = null;
+    }
+
+    /**
+     * Gets Mango public metadata
+     *
+     * @And /^I try to get Mango public metadata$/
+     * @Then /^I try to get Mango public metadata$/
+     */
+    public function iTryToGetMangoPublicMetadata(): void
+    {
+        $usersUrl = $this->getMinkParameter('base_url') . '/rest/v11/metadata/public';
         $ch = @curl_init($usersUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
         $responseArray = (array) json_decode($response, true);
-        $this->oidcUrl = isset($responseArray['url']) ? $responseArray['url'] : '';
+        assertTrue((bool) $responseArray['config']['idmModeEnabled'], 'Assertion failed - idm mode is disabled');
+        $this->oidcUrl = $responseArray['config']['stsUrl'] ?? '';
         assertNotEmpty($this->oidcUrl, "Assertion failed - oidcUrl is empty");
     }
-
 
     /**
      * Navigates to OIDC provider with tenant
      *
      * @param string $tenantSrn
+     * @param string $username
+     * @param string $scope
      *
-     * @And /^I navigate to OIDC provider with tenant "([^"]*)"$/
-     * @Then /^I navigate to OIDC provider with tenant "([^"]*)"$/
+     * @And /^I navigate to OIDC provider with tenant "([^"]*)" and user "([^"]*)" and custom scope "([^"]*)"$/
+     * @Then /^I navigate to OIDC provider with tenant "([^"]*)" and user "([^"]*)" and custom scope "([^"]*)"$/
      */
-    public function iNavigateToOidcProviderWithTenant($tenantSrn)
+    public function iNavigateToOidcProviderWithTenant($tenantSrn, $username, $scope)
     {
         $params = [
             'scope' => implode(' ', [
@@ -87,7 +112,13 @@ class OIDCFeatureContext extends FeatureContext
             ])
         ];
         if (!empty($tenantSrn)) {
-            $params['login_hint'] = $tenantSrn;
+            $params[TenantConfigInitializer::REQUEST_KEY] = $tenantSrn;
+        }
+        if (!empty($username)) {
+            $params['login_hint'] = $username;
+        }
+        if (!empty($scope)) {
+            $params['scope'] .= ' ' . $scope;
         }
         $this->visit($this->getOauth2Provider()->getAuthorizationUrl($params));
         $this->waitForThePageToBeLoaded();
@@ -97,14 +128,25 @@ class OIDCFeatureContext extends FeatureContext
      * Verifies IdP login page is opened
      *
      * @Then I should see IdP login page
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function iShouldSeeIdpLoginPage()
     {
-        $this->assertSession()->elementExists('css', "#nomad");
+        $this->assertSession()->elementExists('css', "#submit_section");
         $this->assertSession()->elementExists('css', "#username");
         $this->assertSession()->elementExists('css', "#password");
     }
 
+    /**
+     * Visit IdP
+     *
+     * @Given I am on IdP login page
+     */
+    public function visitIdP(): void
+    {
+        $this->visit($this->loginServiceUrl);
+        $this->waitForThePageToBeLoaded();
+    }
 
     /**
      * Provides operation for login on IdP login screen.
@@ -114,37 +156,39 @@ class OIDCFeatureContext extends FeatureContext
      *
      * @And /^I do IdP login as "([^"]*)" with password "([^"]*)"$/
      * @When /^I do IdP login as "([^"]*)" with password "([^"]*)"$/
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function iDoIdPLogin($username, $password)
     {
         $page = $this->getSession()->getPage();
-        $page->fillField('user_name', $username);
+        if (!empty($username)) {
+            $page->fillField('user_name', $username);
+        }
         $page->fillField('password', $password);
-        $page->clickLink('login_btn');
+        $page->clickLink('submit_btn');
         $this->waitForThePageToBeLoaded();
     }
-
 
     /**
      * Save access_token
      * Asserts access_token is not empty
      *
-     * @And I get access_token of OPI platform
-     * @Then I get access_token of OPI platform
+     * @And I get access_token from STS
+     * @Then I get access_token from STS
      */
-    public function iGetAccessToken()
+    public function iGetAccessTokenFromSts(): void
     {
         parse_str(parse_url($this->getSession()->getCurrentUrl(), PHP_URL_QUERY), $args);
         assertNotEmpty($args['code'], 'Auth code not found');
-        $this->accessToken = $this->getOauth2Provider()->getAccessToken('authorization_code', [
-            'code' => $args['code']
-        ]);;
+        $accessToken = $this->getOauth2Provider()->getAccessToken('authorization_code', [
+            'code' => $args['code'],
+        ]);
+        $this->accessToken = $accessToken->getToken();
         assertNotEmpty($this->accessToken, "Assertion failed - accessToken is empty");
     }
 
-
     /**
-     * Sends GET request with parameter $request
+     * Sends $method request with parameter $request
      * Uses accessToken
      *
      * @param string $method
@@ -179,8 +223,8 @@ class OIDCFeatureContext extends FeatureContext
     }
 
     /**
-     * @And I get access_token form sugar token response
-     * @Then I get access_token form sugar token response
+     * @And I get access_token from sugar token response
+     * @Then I get access_token from sugar token response
      */
     public function iGetAccessTokenFromSugarTokenResponse()
     {
@@ -223,7 +267,6 @@ class OIDCFeatureContext extends FeatureContext
         }
     }
 
-
     /**
      * Verifies that response contains correct value
      *
@@ -236,7 +279,14 @@ class OIDCFeatureContext extends FeatureContext
     public function iVerifyResponseContainsCorrectValue($field, $value)
     {
         $list = json_decode((string) $this->responseBody, true);
-        assertEquals($value, $list['current_user'][$field]);
+        $fieldValue = $list['current_user'];
+        foreach (explode('.', $field) as $key) {
+            if (!array_key_exists($key, $fieldValue)) {
+                throw new \RuntimeException(sprintf('Field "current_user.%s" not found', $field));
+            }
+            $fieldValue = $fieldValue[$key];
+        }
+        assertEquals($value, $fieldValue);
     }
 
     /**
@@ -251,7 +301,14 @@ class OIDCFeatureContext extends FeatureContext
     public function iVerifyResponseContainsCorrectlyMatchingRegexpValue($field, $regexpValue)
     {
         $list = json_decode((string) $this->responseBody, true);
-        assertRegExp($regexpValue, $list['current_user'][$field]);
+        $fieldValue = $list['current_user'];
+        foreach (explode('.', $field) as $key) {
+            if (!array_key_exists($key, $fieldValue)) {
+                throw new \RuntimeException(sprintf('Field "current_user.%s" not found', $field));
+            }
+            $fieldValue = $fieldValue[$key];
+        }
+        assertRegExp($regexpValue, $fieldValue);
     }
 
     /**
@@ -284,6 +341,24 @@ class OIDCFeatureContext extends FeatureContext
      */
     public function iCheckThatCurrentUrlContains($string)
     {
-        assertTrue(strpos($this->getSession()->getCurrentUrl(), urlencode($string)) !== FALSE);
+        assertTrue(strpos($this->getSession()->getCurrentUrl(), urlencode($string)) !== false);
+    }
+
+    /**
+     * @BeforeScenario @oidc
+     */
+    public function beforeOidcScenario()
+    {
+        $this->useDefaultClient();
+        $this->getSession()->restart();
+    }
+
+    private function useDefaultClient(): void
+    {
+        $defaultKey = 'default';
+        if (!array_key_exists($defaultKey, $this->oidcClients)) {
+            $defaultKey = array_keys($this->oidcClients)[0];
+        }
+        $this->iUseClient($defaultKey);
     }
 }

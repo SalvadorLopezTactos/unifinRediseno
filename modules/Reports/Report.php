@@ -113,6 +113,14 @@ class Report
     // an empty bean
     protected $moduleBean;
 
+    // whether this is used to run a scheduled report
+    public $isScheduledReport = false;
+
+    /**
+     * @var array these types support export
+     */
+    static protected $allowExportType = array('summary', 'tabular', 'detailed_summary', 'Matrix');
+
     /**
      *
      * Default visibility options
@@ -1823,7 +1831,8 @@ class Report
         {
             if (!empty($params['join_id'])) {
                 $this->from .= "LEFT JOIN " . $params['base_table'] . " " . $params['join_table_alias'] . " ON " . $params['join_table_alias'] . ".id = ";
-                $this->from .= $params['join_id'] . "\n";
+                $this->from .= $params['join_id'];
+                $this->from .= ' AND ' . $this->db->convert($params['join_table_alias'] . '.deleted', 'IFNULL', array(0)) . "=0 \n";
             }
             else {
                 $tablename = (empty($params['real_table']) ? $params['base_table'] : $params['real_table']);
@@ -2044,10 +2053,17 @@ class Report
     }
 
 
-    function get_summary_header_row()
+    /**
+     * Gets a list of all display summaries appearing in the summary header.
+     *
+     * @param bool $exporting If true, returns the data in export mode.
+     *   Defaults to false.
+     * @return array A list of the names of all desired display summaries.
+     */
+    public function get_summary_header_row($exporting = false)
     {
         $this->layout_manager->setAttribute('list_type', 'summary');
-        $header_row = $this->get_header_row_generic('summary_columns');
+        $header_row = $this->get_header_row_generic('summary_columns', false, $exporting, false);
         return $header_row;
     }
 
@@ -2059,6 +2075,16 @@ class Report
         return $header_row;
     }
 
+    /**
+     * Get the next header row for this report.
+     *
+     * @param string $column_field_name The column field name.
+     *   Defaults to 'display_columns'.
+     * @param bool $skip_non_group
+     * @param bool $exporting If true, return plaintext output instead of HTML.
+     * @param bool $force_distinct
+     * @return array The next header row.
+     */
     function get_header_row($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
     {
         $this->layout_manager->setAttribute('list_type', 'columns');
@@ -2067,6 +2093,16 @@ class Report
         return $header_row;
     }
 
+    /**
+     * @param string $column_field_name The column field name.
+     *   Defaults to 'display_columns'.
+     * @param bool $skip_non_group If true, skip non-group display columns.
+     *   Defaults to false.
+     * @param bool $exporting If true, set export mode. Defaults to false.
+     * @param bool $force_distinct If true, ensure that all header labels are
+     *   distinct. Defaults to false.
+     * @return array
+     */
     function get_header_row_generic($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
     {
         if ($this->plain_text_output == true) {
@@ -2213,10 +2249,17 @@ class Report
         return $get_next_row;
     }
 
-    function get_summary_next_row()
+    /**
+     * Gets the next summary row.
+     *
+     * @param bool $exporting If true, get the row in export mode.
+     *   Defaults to false.
+     * @return int|array The next summary row, or 0 if there are no rows left.
+     */
+    public function get_summary_next_row($exporting = false)
     {
         $this->_load_currency();
-        $get_next_row = $this->get_next_row('summary_result', 'summary_columns');
+        $get_next_row = $this->get_next_row('summary_result', 'summary_columns', false, $exporting);
         if(isset($get_next_row['count'])) {
             $this->current_summary_row_count = $get_next_row['count'];
         } else {
@@ -2294,6 +2337,15 @@ class Report
         return $field_name;
     }
 
+    /**
+     * Gets the next database row.
+     *
+     * @param string $result_field_name
+     * @param string $column_field_name
+     * @param bool $skip_non_summary_columns
+     * @param bool $exporting If true, return plaintext output instead of HTML.
+     * @return int|array The next database row, or 0 if there are no more rows.
+     */
     function get_next_row($result_field_name = 'result', $column_field_name = 'display_columns', $skip_non_summary_columns = false, $exporting = false)
     {
         global $current_user;
@@ -2360,10 +2412,12 @@ class Report
                 /*nsingh: bug 13554- date and time fields must be displayed using user's locale settings.
                 * Since to_pdf uses plain_text_output=true, we handle the date and time case here by using the 'List' context of the layout_manager
                 */
-                if ($display_column['type'] == 'date' || $display_column['type'] == 'time' || $display_column['type'] == 'datetimecombo')
+                $dateTimeTypes = array('date', 'time', 'datetimecombo', 'datetime');
+                if (!empty($display_column['type']) && in_array($display_column['type'], $dateTimeTypes)) {
                     $this->layout_manager->setAttribute('context', 'List');
-                else
+                } else {
                     $this->layout_manager->setAttribute('context', 'ListPlain');
+                }
             }
             else {
                 $this->layout_manager->setAttribute('context', 'List');
@@ -2541,32 +2595,56 @@ class Report
         return $row;
     }
 
-    function save($report_name)
+    /**
+     * Do we support export for this report
+     *
+     * @return bool
+     */
+    public function allowExport()
     {
-        global $current_user;
-        $saved_vars = array();
+        $type = $this->getReportType();
+        return in_array($type, self::$allowExportType);
+    }
 
-        $saved_report = BeanFactory::newBean('Reports');
-        $report_type = 'tabular';
-        $chart_type = 'none';
-
-        if (isset($this->report_def['chart_type'])) {
-            $chart_type = $this->report_def['chart_type'];
-        }
+    /**
+     * To get the report type
+     *
+     * @return string
+     */
+    public function getReportType()
+    {
+        $reportType = 'tabular';
         if ($this->report_def['report_type'] == 'summary') {
-            $report_type = 'summary';
+            $reportType = 'summary';
             if (!empty($this->report_def['display_columns'])) {
-                $report_type = 'detailed_summary';
+                $reportType = 'detailed_summary';
             } else {
                 if (!empty($this->report_def['group_defs'])) {
                     $group_def_array = $this->report_def['group_defs'];
                     if (isset($this->report_def['layout_options']) &&
                         ((count($group_def_array) == 2) || (count($group_def_array) == 3))
                     ) {
-                        $report_type = 'Matrix';
-                    } // if
-                } // if
-            } // else
+                        $reportType = 'Matrix';
+                    }
+                }
+            }
+        }
+        return $reportType;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function save($report_name)
+    {
+        global $current_user;
+
+        $saved_report = BeanFactory::newBean('Reports');
+        $report_type = $this->getReportType();
+        $chart_type = 'none';
+
+        if (isset($this->report_def['chart_type'])) {
+            $chart_type = $this->report_def['chart_type'];
         }
 
         $record = $this->request->getValidInputRequest('record', 'Assert\Guid', -1) ?: -1;

@@ -12,22 +12,22 @@
 --}}
 {{#if values}}
     <table class="table dataTable erasure">
-        <tr><th>{{str "LBL_NAME"}}</th><th>{{str "LBL_COUNT_FIELDS_MARKED" "DataPrivacy"}}</th></tr>
+        <tr name="erasure-table-columns"><th>{{str "LBL_NAME"}}</th><th>{{str "LBL_COUNT_FIELDS_MARKED" "DataPrivacy"}}</th></tr>
     {{#each values}}
         {{#if count}}
-            <tr><td colspan="2" class="panel header">
+            <tr class="header" data-module="{{../module}}"><td colspan="2" class="panel header">
                 <div class="label label-module label-{{module}} pull-left" aria-hidden="true">{{moduleIconLabel module}}</div>
                 <strong>{{str label ../module}} ({{count}})</strong>
             </td></tr>
             {{#if models}}
                 {{#each models}}
-                <tr>
+                <tr class="record" data-module="{{../module}}" data-record-id="{{model.id}}">
                     <td class="record-name">
                         {{#with nameFieldDef}}
                             {{field ../../../../../../this model=../model}}
                         {{/with}}
                     </td>
-                    <td>({{count}})</td>
+                    <td class="record-field-marked">({{count}})</td>
                 </tr>
                 {{/each}}
             {{/if}}

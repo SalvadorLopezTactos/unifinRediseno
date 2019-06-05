@@ -24,11 +24,10 @@ use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Loader\LoaderChain;
+use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
 use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
 use Symfony\Component\Validator\Mapping\Loader\XmlFileLoader;
-use Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader;
 use Symfony\Component\Validator\Mapping\Loader\YamlFileLoader;
-use Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 /**
@@ -38,24 +37,9 @@ use Symfony\Component\Validator\Validator\RecursiveValidator;
  */
 class ValidatorBuilder implements ValidatorBuilderInterface
 {
-    /**
-     * @var array
-     */
     private $initializers = array();
-
-    /**
-     * @var array
-     */
     private $xmlMappings = array();
-
-    /**
-     * @var array
-     */
     private $yamlMappings = array();
-
-    /**
-     * @var array
-     */
     private $methodMappings = array();
 
     /**
@@ -229,7 +213,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface
      */
     public function setMetadataFactory(MetadataFactoryInterface $metadataFactory)
     {
-        if (count($this->xmlMappings) > 0 || count($this->yamlMappings) > 0 || count($this->methodMappings) > 0 || null !== $this->annotationReader) {
+        if (\count($this->xmlMappings) > 0 || \count($this->yamlMappings) > 0 || \count($this->methodMappings) > 0 || null !== $this->annotationReader) {
             throw new ValidatorException('You cannot set a custom metadata factory after adding custom mappings. You should do either of both.');
         }
 
@@ -283,6 +267,32 @@ class ValidatorBuilder implements ValidatorBuilderInterface
     }
 
     /**
+     * @return LoaderInterface[]
+     */
+    public function getLoaders()
+    {
+        $loaders = array();
+
+        foreach ($this->xmlMappings as $xmlMapping) {
+            $loaders[] = new XmlFileLoader($xmlMapping);
+        }
+
+        foreach ($this->yamlMappings as $yamlMappings) {
+            $loaders[] = new YamlFileLoader($yamlMappings);
+        }
+
+        foreach ($this->methodMappings as $methodName) {
+            $loaders[] = new StaticMethodLoader($methodName);
+        }
+
+        if ($this->annotationReader) {
+            $loaders[] = new AnnotationLoader($this->annotationReader);
+        }
+
+        return $loaders;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getValidator()
@@ -290,33 +300,12 @@ class ValidatorBuilder implements ValidatorBuilderInterface
         $metadataFactory = $this->metadataFactory;
 
         if (!$metadataFactory) {
-            $loaders = array();
-
-            if (count($this->xmlMappings) > 1) {
-                $loaders[] = new XmlFilesLoader($this->xmlMappings);
-            } elseif (1 === count($this->xmlMappings)) {
-                $loaders[] = new XmlFileLoader($this->xmlMappings[0]);
-            }
-
-            if (count($this->yamlMappings) > 1) {
-                $loaders[] = new YamlFilesLoader($this->yamlMappings);
-            } elseif (1 === count($this->yamlMappings)) {
-                $loaders[] = new YamlFileLoader($this->yamlMappings[0]);
-            }
-
-            foreach ($this->methodMappings as $methodName) {
-                $loaders[] = new StaticMethodLoader($methodName);
-            }
-
-            if ($this->annotationReader) {
-                $loaders[] = new AnnotationLoader($this->annotationReader);
-            }
-
+            $loaders = $this->getLoaders();
             $loader = null;
 
-            if (count($loaders) > 1) {
+            if (\count($loaders) > 1) {
                 $loader = new LoaderChain($loaders);
-            } elseif (1 === count($loaders)) {
+            } elseif (1 === \count($loaders)) {
                 $loader = $loaders[0];
             }
 

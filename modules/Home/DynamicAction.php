@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id$
 
 
 $mySugar = new MySugar($_REQUEST['module']);

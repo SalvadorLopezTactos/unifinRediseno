@@ -33,7 +33,6 @@ $dictionary['Tracker'] = array(
             'name' => 'user_id',
             'vname' => 'LBL_USER_ID',
 			'type' => 'id',
-            'len' => '36',
             'isnull' => 'false',
         ),
         'module_name'=>array(
@@ -47,7 +46,6 @@ $dictionary['Tracker'] = array(
             'name' => 'item_id',
             'vname' => 'LBL_ITEM_ID',
             'type' => 'id',
-            'len' => '36',
             'isnull' => 'false',
         ),
         'item_summary'=>array(
@@ -61,7 +59,6 @@ $dictionary['Tracker'] = array(
 			'name' => 'team_id',
 			'vname' => 'LBL_TEAM_ID',
 			'type' => 'id',
-			'len' => '36',
 		),
         'date_modified'=>array(
             'name' => 'date_modified',
@@ -210,7 +207,4 @@ if (!isset($dictionary['tracker_perf']['fields'])) {
 }
 if (!isset($dictionary['tracker_queries']['fields'])) {
     require "modules/Trackers/tracker_queriesMetaData.php";
-}
-if (!isset($dictionary['tracker_tracker_queries']['fields'])) {
-    require "modules/Trackers/tracker_tracker_queriesMetaData.php";
 }

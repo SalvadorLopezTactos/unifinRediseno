@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Der er aktive processer, der kører imod denne procesdefinition. Opdatering af den vil kunne påvirke disse processer. Ønsker du stadig at redigere denne procesdefinition?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Der er aktive processer, der kører mod denne procesdefinition. Opdatering vil kunne påvirke processen. Ønsker du stadig at deaktivere denne procesdefinition?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Opret automatisk en ny procesdefinitions post ved at importere en *.bpm fil fra dit filsystem.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Upload en .bpm fil for at importere en procesdefinition.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Procesdefinitionerne blev importeret til systemet med succes.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Vælg venligst en gyldig *.bmp fil.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Procesdefinitionen blev importeret med succes, men indeholder en eller flere forretningsregel handlinger, hvortil der er valgt forretningsregler.',
+    'LBL_BPM_IMPORT_SELECT' => 'Procesdefinitionen indeholder følgende forretningsregler og e-mailskabeloner. '
+        . 'Vælg venligst dem, du ønsker at importere.',
+    'LBL_BUSINESS_RULES' => 'Forretningsregler',
+    'LBL_EMAIL_TEMPLATES' => 'E-mail-skabeloner',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Fortryd',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Annuller fortryd',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Gem',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Godkend',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Gem og godkend',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Kør godkendelse for at tjekke for fejl',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitet',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Slet',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filter',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Relateret til',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriterie',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Varighed',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Enhed',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Felter',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modulfelt evaluering',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Relateret til',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Felt',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Værdi',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Formular responsevaluering',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'er ikke',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ikke lig med',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle relaterede poster',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Enhver relateret post',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Runtime',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Tilføj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Luk',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Team',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Bruger i %MODULE% der oprettede en post',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Bruger i %MODULE% der sidst modificerede en post',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Bruger i %MODULE% der er tildelt posten',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Bruger i %MODULE% der er tildelt posten',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Bruger i %MODULE% der er manager for den, der oprettede posten',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Bruger i %MODULE% der er manager for den, der sidste modificerede posten',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Bruger i %MODULE% der er manager for den, der er tildelt posten',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Bruger i %MODULE% der er manager for den, der er tildelt posten',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% relateret til %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Bruger som oprettede %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Bruger der sidst ændrede %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Bruger der er tildelt %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Bruger der var tildelt %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Administrator af den der skabte %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Administrator af den der sidst ændrede %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Administrator af den der er tildelt %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Administrator af den der var tildelt %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rolle: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'team: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Forslag',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Ugyldig udtrykssyntaks.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Godkender procesdefinition: Henter elementindstillinger',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Godkender procesdefinition: Godkender elementindstillinger',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Genopfrisker fejlliste ...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Godkendelse udført! Problemer fundet: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemer',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Godkendelse i gang',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Advarsel: Processen kan standse på dette element eller have andre utilsigtede effekter',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Fejl: Processen vil stoppe på dette element',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Kan ikke godkende element',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Elementet opfylder ikke det mindste antal indgående strømme',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Dette element skal have et minimum antal indgående stier. Kontroller antallet af stier, der forbinder til dette element for at sikre, at minimumsantal er opfyldt.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Element overstiger det maksimale antal indgående strømme',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Dette element har et maksimalt antal indgående stier, der ikke må overskrides. Kontroller antallet af stier, der forbinder til dette element for at sikre, at maksimumantallet ikke er overskredet.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Elementet opfylder ikke det mindste antal udgående strømme',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Dette element skal have et minimum antal udgående stier. Kontroller antallet af stier, der fører ud af dette element for at sikre, at minimumsantal er opfyldt.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Elementet overstiger det mindste antal udgående strømme',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Dette element skal have et maksimalt antal udgående stier, der ikke må overstiges. Kontroller antallet af stier, der fører ud af dette element for at sikre, at det maksimale antal ikke er oversteget.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Obligatorisk felt er ikke angivet',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Dette element har et felt, der er nødvendigt, men ikke er blevet indstillet. Kontrollerer indstillinger for elementet for at sørge for, at feltet er angivet korrekt. Klik dernæst på knappen "Gem".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Data findes ikke i øjeblikket i systemet',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Indstillingerne for dette element henviser til et bestemt stykke data, der ikke findes i databasen. Kontroller element-indstillingerne for at sikre, at alle henviste data eksisterer (dvs. bestemte brugere, modul felter, teams osv.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Kriterieboksudtryk vil aldrig evalueres som sandt',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kriterieboksene indeholder logiske OG/ELLER/IKKE udtryk. Denne fejl betyder, at en kriterieboks i indstillingerne for element er blevet konfigureret på en sådan måde, at udtrykket aldrig vil være sandt. Afkryds kriterieboksen for at eliminere enhver logisk modsigelse, der forhindrer udtrykket i at være sandt.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Element kan ikke nås',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'For at et element kan blive udført i en proces, skal det have en tilknyttet sti. Stikæden der fører til dette element skal begynde med et startelement. Tjek kæden med indkommende stier til dette element for at sørge for, at kæden begynder med et startelement.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Ventetidskriterier skal indeholde nøjagtig én datatidskonstant',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Dette vente-element er blevet konfigureret vha. kriterieboksen "Fixed Date". Denne boks skal indeholde nøjagtig en "Fixed Datetime"-konstant eller Datetime-feltreference. Alle andre dele af udtrykket skal være matematikoperatører (+/-) eller "Time Span"-konstanter.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Angiven varighedsværdi må ikke være nul',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Dette vente-element er blevet konfigureret vha. "Duration"-indstillingen. Denne indstilling må ikke være lig nul, eller en fejl vil opstå. Tjek element-indstillingerne for at sikre, at "Duration" ikke er indstillet til nul.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Ventetidsparametre er ikke blevet indstillet',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Dette vente-element har ikke nogen konfigurerede indstillinger. Tjek element-indstillingerne for at sikre, at "Duration" eller "Fixed Date" er valgt, indtast de ønskede værdier, og tryk på "Save"-knappen.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Forventet tid er mindre end nul',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Under "Forms"-indstillinger for dette aktivitet-element, er den forventede tid indstillet til en negativ værdi, hvilket vil få processen til at fryse, når den når elementet. Åbn indstillingerne "Forms" for dette element for at ændre det forventede tidspunkt til et ikke-negativt tal.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Aktionstype er [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Dette handlingselement har ikke en udpeget type. Dette kan ændres ved at højreklikke på elementet handling og derefter vælge en type på listen "Action Type".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'En sti er ikke garanteret at være taget',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Denne fejlmeddelelse opstår, fordi der er en chance for at ingen stier ud af dette gateway-element vil blive taget, hvilket vil få processen til at standse. Det anbefales at angive en standardsti i tilfælde af, at ingen af kriterieboks-udtrykkene i element-indstillingerne er opfyldt. Dette kan gøres ved at højreklikke på elementet gateway og vælge et element under menuen "Default Flow". Hvis der ikke er angivet en standardsti, bør kriterieboks-udtrykkene i element-indstillingerne ændres for at sikre, at mindst ét af dem vil være sandt, når processen køres.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergerende gateway type svarer ikke til gateway type af en indgående strøm',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergerende gateways udvider processer i flere grene. Når du bruger en konvergerende gateway til at rekonvergere disse grene tilbage i én sti, skal den korrekte type af konvergerende gateway bruges, afhængigt af hvilken type divergerende gateway, der blev brugt til at oprette grenene. For grene lavet med eksklusive eller event-baserede divergerende gateways, skal du bruge en eksklusiv konvergerende gateway til at rekonvergere dem. For grene oprettet med parallelle eller inklusive divergerende gateways, skal du bruge en parallel konvergerende gateway til at rekonvergere dem.',
 );

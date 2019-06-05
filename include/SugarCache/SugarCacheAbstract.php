@@ -13,6 +13,7 @@
 /**
  * Abstract cache class
  * @api
+ * @deprecated use Psr\SimpleCache\CacheInterface instead
  */
 abstract class SugarCacheAbstract
 {
@@ -161,7 +162,7 @@ abstract class SugarCacheAbstract
         } else {
             //For BC reasons the setExternal signature will remain the same.
             $previousExpireTimeout = $this->_expireTimeout;
-            $this->_expireTimeout = $ttl;
+            $this->_expireTimeout = (int) $ttl;
             $this->_setExternal($this->_keyPrefix.$key,$value);
             $this->_expireTimeout = $previousExpireTimeout;
         }

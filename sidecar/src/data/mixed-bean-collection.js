@@ -351,6 +351,8 @@ module.exports = BeanCollection.extend({
      * Checks if at least one of the linked collections has a delta.
      *
      * @return {boolean} `true` if at least 1 linked collection has a delta.
+     * @memberOf Data/MixedBeanCollection
+     * @instance
      */
     hasDelta: function() {
         return _.some(this._linkedCollections, (coll) => {
@@ -431,6 +433,8 @@ module.exports = BeanCollection.extend({
      *   the same `order_by` value that was used for the first fetch of the
      *   collection.
      * @return {SUGAR.HttpRequest} The created fetch request.
+     * @memberOf Data/MixedBeanCollection
+     * @instance
      */
     paginate: function(options) {
         options = options || {};
@@ -451,6 +455,9 @@ module.exports = BeanCollection.extend({
     /**
      * In a use case of a collection field, we set the `offset` and
      * `next_offset` to an empty object. In other use cases, we call the parent.
+     *
+     * @memberOf Data/MixedBeanCollection
+     * @instance
      */
     resetPagination: function() {
         if (!this._parentBean) {

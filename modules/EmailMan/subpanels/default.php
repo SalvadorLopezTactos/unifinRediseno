@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: default.php 53349 2009-12-23 16:46:03Z jmertic $
 $subpanel_layout = array(
 	'top_buttons' => array(
 	),

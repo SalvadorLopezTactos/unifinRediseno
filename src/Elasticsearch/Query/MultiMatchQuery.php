@@ -62,6 +62,12 @@ class MultiMatchQuery implements QueryInterface
     protected $defaultOperator;
 
     /**
+     * use shortcut operator for globalsearch, such as '&' for 'AND'
+     * @var bool
+     */
+    protected $useShortcutOperator = false;
+
+    /**
      * Visibility Provider
      * @var Visibility
      */
@@ -84,6 +90,15 @@ class MultiMatchQuery implements QueryInterface
     public function setOperator($operator)
     {
         $this->defaultOperator = TermParserHelper::getOperator($operator);
+    }
+
+    /**
+     * set property $useShortcutOperator
+     * @param bool $use
+     */
+    public function setUseShortcutOperator(bool $use)
+    {
+        $this->useShortcutOperator = $use;
     }
 
     /**
@@ -123,6 +138,7 @@ class MultiMatchQuery implements QueryInterface
         try {
             $parser = new SimpleTermParser();
             $parser->setDefaultOperator($this->defaultOperator);
+            $parser->setUseShortcutOperator($this->useShortcutOperator);
 
             $terms = $parser->parse($this->terms);
             $query = $this->buildBoolQuery($terms);

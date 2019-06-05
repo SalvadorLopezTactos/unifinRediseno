@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: LogView.php 56427 2010-05-13 00:38:18Z smalyshev $
 global $mod_strings;
 if(!is_admin($current_user)){
 	sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);

@@ -1203,7 +1203,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                         name: 'address_to',
                         required: true,
                         submit: false,
-                        fieldWidth: 350,
+                        fieldWidth: 414,
                         change: hiddenFn,
                         suggestionItemName: 'fullName',
                         suggestionItemAddress: 'emailAddress',
@@ -1217,7 +1217,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                         name: 'address_cc',
                         required: false,
                         submit: false,
-                        fieldWidth: 350,
+                        fieldWidth: 414,
                         change: hiddenFn,
                         suggestionItemName: 'fullName',
                         suggestionItemAddress: 'emailAddress',
@@ -1231,7 +1231,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                         name: 'address_bcc',
                         required: false,
                         submit: false,
-                        fieldWidth: 350,
+                        fieldWidth: 414,
                         change: hiddenFn,
                         suggestionItemName: 'fullName',
                         suggestionItemAddress: 'emailAddress',
@@ -1242,7 +1242,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                     hiddenParams
                 ];
                 wHeight = 380;
-                wWidth = 600;
+                wWidth = 690;
                 callback = {
                     loaded: function (data) {
                         var params = null, i, emailPickerFields = [], dataSource, auxProxy;
@@ -1351,7 +1351,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                         auxProxy = new SugarProxy({
                             url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE
                         });
-                        auxProxy.getData({cardinality: 'one'}, {
+                        auxProxy.getData({cardinality: 'all'}, {
                             success: function (data) {
                                 var i;
                                 data = data.result;
@@ -1616,7 +1616,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                     name: 'address_to',
                     required: true,
                     submit: false,
-                    fieldWidth: 350,
+                    fieldWidth: 414,
                     change: hiddenFn,
                     suggestionItemName: 'fullName',
                     suggestionItemAddress: 'emailAddress',
@@ -1630,7 +1630,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                     name: 'address_cc',
                     required: false,
                     submit: false,
-                    fieldWidth: 350,
+                    fieldWidth: 414,
                     change: hiddenFn,
                     suggestionItemName: 'fullName',
                     suggestionItemAddress: 'emailAddress',
@@ -1644,7 +1644,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                     name: 'address_bcc',
                     required: false,
                     submit: false,
-                    fieldWidth: 350,
+                    fieldWidth: 414,
                     change: hiddenFn,
                     suggestionItemName: 'fullName',
                     suggestionItemAddress: 'emailAddress',
@@ -1655,7 +1655,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                 hiddenParams
             ];
             wHeight = 380;
-            wWidth = 600;
+            wWidth = 690;
             callback = {
                 loaded: function (data) {
                     var params = null, i, emailPickerFields = [], dataSource, auxProxy;
@@ -1762,7 +1762,7 @@ AdamEvent.prototype.createConfigureAction = function () {
                     auxProxy = new SugarProxy({
                         url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE
                     });
-                    auxProxy.getData({cardinality: 'one'}, {
+                    auxProxy.getData({cardinality: 'all'}, {
                         success: function (data) {
                             var i;
                             data = data.result;
@@ -1890,4 +1890,288 @@ AdamEvent.prototype.stringify = function () {
         };
     $.extend(true, inheritedJSON, thisJSON);
     return inheritedJSON;
+};
+
+/**
+ * Retrieves the URL base endpoint for event element settings data
+ * @return {string} the correct URL base endpoint
+ */
+AdamEvent.prototype.getBaseURL = function() {
+    return 'pmse_Project/EventDefinition/';
+};
+
+/**
+ * Returns the proper validation callback function for this event element
+ * @return {Object} the correct callback function
+ */
+AdamEvent.prototype.getValidationFunction = function() {
+    switch (this.getEventType()) {
+        case 'START':
+            return this.callbackFunctionForStartEvent;
+        case 'INTERMEDIATE':
+            switch (this.getEventMarker()) {
+                case 'TIMER':
+                    return this.callbackFunctionForWaitEvent;
+                case 'MESSAGE':
+                    switch (this.evn_behavior) {
+                        case 'CATCH':
+                            return this.callbackFunctionForReceiveMessageEvent;
+                        case 'THROW':
+                            return this.callbackFunctionForSendMessageEvent;
+                    }
+            }
+        case 'END':
+            return this.callbackFunctionForEndEvent;
+    }
+};
+
+/**
+ * Validates a start event's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.callbackFunctionForStartEvent = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(null, 0, 1, null, element);
+
+    // Check that the 'Applies to:' field is set
+    if (!data.evn_params) {
+        validationTools.createError(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', 'Applies to');
+    }
+
+    // Validate the criteria box
+    element.validateStartOrReceiveMessageCriteriaBox(data, element, validationTools);
+};
+
+/**
+ * Validates a wait event's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.callbackFunctionForWaitEvent = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, 1, element);
+
+    if (data.evn_params === 'fixed date') {
+
+        // 'Fixed date' is selected, so validate the criteria box
+        element.validateWaitEventCriteriaBox(data, element, validationTools);
+    } else if (data.evn_criteria == 0) {
+
+        // 'Duration' is selected and the time given is 0
+        validationTools.createError(element, 'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION');
+    } else if (!data.evn_params || !data.evn_criteria) {
+
+        // Neither 'Fixed date' or 'Duration' have been selected (no criteria have been set)
+        validationTools.createError(element, 'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS');
+    }
+};
+
+/**
+ * Validates a receive message event's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.callbackFunctionForReceiveMessageEvent = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, 1, element);
+
+    // Validate the criteria box
+    element.validateStartOrReceiveMessageCriteriaBox(data, element, validationTools);
+};
+
+/**
+ * Validates a send message event's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.callbackFunctionForSendMessageEvent = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 1, 1, element);
+
+    // Check that the email template field is set and the template exists
+    validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
+
+    // Validate each of the criteria boxes
+    element.validateSendMessageCriteriaBoxes(data, element, validationTools);
+};
+
+/**
+ * Validates an end event's settings
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.callbackFunctionForEndEvent = function(data, element, validationTools) {
+
+    // Validate the number of incoming and outgoing edges
+    validationTools.validateNumberOfEdges(1, null, 0, 0, element);
+
+    // If this is a send message end event
+    if (element.getEventMarker() === 'MESSAGE') {
+
+        // Validate the email template
+        validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
+
+        // Validate each of the criteria boxes
+        element.validateSendMessageCriteriaBoxes(data, element, validationTools);
+    }
+};
+
+/**
+ * Validates the criteria box of a start event or receive message event configuration
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.validateStartOrReceiveMessageCriteriaBox = function(data, element, validationTools) {
+    var criteria = [];
+
+    // If the criteria box is not empty, its data is a string, so parse it
+    if (data.evn_criteria) {
+        criteria = JSON.parse(data.evn_criteria);
+    }
+
+    // Check if the logic in this criteria box is impossible
+    // In start events, empty criteria boxes are always true
+    // In receive message events, empty criteria boxes are always false
+    element.checkForImpossibleLogic(element, validationTools, criteria);
+
+    // Validate the atoms in the criteria box
+    element.validateCriteriaBoxAtoms(element, validationTools, criteria);
+};
+
+/**
+ * Validates the criteria box of a wait event configuration
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.validateWaitEventCriteriaBox = function(data, element, validationTools) {
+    var criteria = [];
+
+    // If the criteria box is not empty, its data is a string, so parse it
+    if (data.evn_criteria) {
+        criteria = JSON.parse(data.evn_criteria);
+    }
+
+    // Validate the atoms in the criteria box
+    element.validateCriteriaBoxAtoms(element, validationTools, criteria);
+
+    // Check for the correct number of Datetime objects (should be exactly 1)
+    element.validateCorrectNumberOfDateObjects(element, validationTools, criteria);
+};
+
+/**
+ * Validates all criteria/recipient boxes of a send message event configuration
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ */
+AdamEvent.prototype.validateSendMessageCriteriaBoxes = function(data, element, validationTools) {
+    var field;
+    var criteria = [];
+
+    // If the criteria box is not empty, its data is a string, so parse it
+    if (data.evn_params) {
+        criteria = JSON.parse(data.evn_params);
+    }
+
+    // Check that the "To:" field has at least one recipient (required field)
+    if (!criteria.to || !criteria.to.length) {
+        validationTools.createWarning(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', 'To');
+    }
+
+    // Validate the atoms in each criteria box
+    for (field in criteria) {
+        element.validateCriteriaBoxAtoms(element, validationTools, criteria[field], true);
+    }
+};
+
+/**
+ * Validates the individual entries in a criteria box against the database
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ * @param {Array} criteria is an array containing the contents of a criteria box, parsed from the API data
+ * @param {boolean} sendEvent is a boolean indicating whether the criteria box is from a send message event
+ */
+AdamEvent.prototype.validateCriteriaBoxAtoms = function(element, validationTools, criteria, sendEvent) {
+    var i;
+    var atom;
+    var module;
+
+    // Check each atom of the criteria box to ensure the data exists in the database
+    // The atoms from send message and send message end events have different attribute names than
+    // the atoms from other event criteria boxes, which is why we need the ternary check
+    for (i = 0; i < criteria.length; i++) {
+        atom = criteria[i];
+        module = sendEvent ? atom.module : atom.expModule;
+        if (atom.chainedRelationship) {
+            module = atom.chainedRelationship.moduleLabel;
+        }
+        validationTools.validateAtom(
+            sendEvent ? atom.type : atom.expType,
+            module,
+            sendEvent ? atom.field : atom.expField,
+            sendEvent ? atom.value : atom.expValue,
+            element,
+            validationTools);
+    }
+};
+
+/**
+ * Validates that a wait event criteria box contains exactly one Datetime object
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ * @param {Array} criteria is an array containing the contents of a criteria box, parsed from the API data
+ */
+AdamEvent.prototype.validateCorrectNumberOfDateObjects = function(element, validationTools, criteria) {
+    var i;
+    var atom;
+    var datetimeCount = 0;
+
+    // Scan the atoms to count the number of Date or Datetime type criteria
+    for (i = 0; i < criteria.length; i++) {
+        atom = criteria[i];
+        if (atom.expSubtype) {
+            if (atom.expSubtype.toUpperCase() === 'DATETIME' || atom.expSubtype.toUpperCase() === 'DATE') {
+                datetimeCount++;
+            }
+        }
+    }
+
+    // Check that there is exactly 1 criteria of Datetime type
+    if (datetimeCount !== 1) {
+        validationTools.createError(element, 'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME');
+    }
+};
+
+/**
+ * Validates the boolean logic in a criteria box
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} validationTools is a collection of utility functions for validating element data
+ * @param {Array} criteria is an array containing the contents of a criteria box, parsed from the API data
+ */
+AdamEvent.prototype.checkForImpossibleLogic = function(element, validationTools, criteria) {
+    var evaluator;
+
+    // Create the evaluator that will evaluate the logic
+    evaluator = new validationTools.CriteriaEvaluator();
+    evaluator.emptyCriteriaIsTrue = element.getEventType() === 'START' ? true : false;
+
+    // Add the criteria to the evaluator
+    evaluator.addOr(criteria.slice());
+
+    // Check the evaluator to see if the logic is impossible/always false
+    if (evaluator.isAlwaysFalse()) {
+        validationTools.createError(element, 'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE');
+    }
 };

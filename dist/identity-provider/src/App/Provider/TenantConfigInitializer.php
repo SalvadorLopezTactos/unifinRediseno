@@ -22,6 +22,13 @@ use Symfony\Component\HttpFoundation\Request;
 class TenantConfigInitializer
 {
     /**
+     * The key request key value is hardcoded in Mango. Check Mango side before changing this value.
+     */
+    public const REQUEST_KEY = 'tenant_hint';
+
+    public const SESSION_KEY = 'tenant';
+
+    /**
      * @var Application
      */
     protected $app;
@@ -61,8 +68,8 @@ class TenantConfigInitializer
             ]);
             throw new \RuntimeException('Cant build configs without tenant id');
         }
-        $request->getSession()->set('tenant', Srn\Converter::toString($tenant));
         $this->app['config'] = $this->app->getTenantConfiguration()->merge($tenant, $this->app['config']);
+        $request->getSession()->set(self::SESSION_KEY, Srn\Converter::toString($tenant));
     }
 
     /**
@@ -73,33 +80,54 @@ class TenantConfigInitializer
      */
     public function hasTenant(Request $request)
     {
-        return $request->get('login_hint') || $request->get('tid') || $request->getSession()->has('tenant');
+        return $request->get(self::REQUEST_KEY)
+            || $request->get('tid')
+            || $request->getSession()->has(self::SESSION_KEY)
+            || $this->getTenantFromAuthorizedUser();
     }
 
     /**
      * Looks in all the various nooks and crannies and attempts to find an tenant srn
      *
      * @param Request $request
-     * @return Srn
+     * @return \Sugarcrm\IdentityProvider\Srn\Srn
      */
     protected function getTenant(Request $request)
     {
         if (!empty($request->get('tid'))) {
             $tenantString = $request->get('tid');
-        } elseif (!empty($request->get('login_hint'))) {
-            $tenantString = $request->get('login_hint');
-        } elseif ($request->getSession()->has('tenant')) {
-            $tenantString = $request->getSession()->get('tenant');
+        } elseif (!empty($request->get(self::REQUEST_KEY))) {
+            $tenantString = $request->get(self::REQUEST_KEY);
+        } elseif ($request->getSession()->has(self::SESSION_KEY)) {
+            $tenantString = $request->getSession()->get(self::SESSION_KEY);
+        } elseif (!empty($this->getTenantFromAuthorizedUser())) {
+            $tenantString = $this->getTenantFromAuthorizedUser();
         } else {
             return null;
         }
         try {
             return Srn\Converter::fromString($tenantString);
         } catch (\InvalidArgumentException $e) {
+            $storedTenant = $this->app->getTenantRepository()->findTenantById($tenantString);
             //make double convertion to validate generated SRN
             return Srn\Converter::fromString(
-                Srn\Converter::toString($this->app->getSrnManager()->createTenantSrn($tenantString))
+                Srn\Converter::toString(
+                    $this->app->getSrnManager($storedTenant->getRegion())->createTenantSrn($storedTenant->getId())
+                )
             );
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    private function getTenantFromAuthorizedUser(): ?string
+    {
+        $token = $this->app->getRememberMeService()->retrieve();
+        if ($token && $token->hasAttribute('tenantSrn')) {
+            return $token->getAttribute('tenantSrn');
+        } else {
+            return null;
         }
     }
 }

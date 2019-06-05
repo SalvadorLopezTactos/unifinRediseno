@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Menu.php 45763 2009-04-01 19:16:18Z majed $
 
 global $mod_strings;
 global $current_user;

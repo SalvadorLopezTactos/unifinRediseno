@@ -58,6 +58,8 @@ abstract class AbstractMetaDataImplementation
     MB_POPUPLIST                => 'popupMeta',
     MB_LISTVIEW                 => 'listViewDefs',
     MB_SIDECARQUOTEDATAGROUPLIST => 'viewdefs',
+    MB_QUOTEDATAGRANDTOTALHEADER => 'viewdefs',
+    MB_QUOTEDATAGRANDTOTALFOOTER => 'viewdefs',
     MB_SIDECARLISTVIEW          => 'viewdefs',
     MB_SIDECARPOPUPVIEW         => 'viewdefs',
     MB_SIDECARDUPECHECKVIEW     => 'viewdefs',
@@ -322,14 +324,14 @@ abstract class AbstractMetaDataImplementation
         // the defs are pathed from a module
         reset($defs);
         if ($modulePath) {
-            $temp = each($defs);
+            $value = current($defs);
         } else {
-            $temp['value'] = $defs;
+            $value = $defs;
         }
 
-        $GLOBALS['log']->debug( get_class ( $this ) . "->_loadFromFile: returning ".print_r($temp['value'],true)) ;
+        $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile: returning ' . print_r($value, true));
 
-        return $temp['value']; // 'value' contains the value part of 'key'=>'value' part
+        return $value;
     }
 
     protected function _loadFromPopupFile ($filename, $mod, $view, $forSave = false)

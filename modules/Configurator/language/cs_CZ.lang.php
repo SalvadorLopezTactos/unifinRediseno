@@ -85,7 +85,7 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Uživatelské jméno',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Obnova',
 	'LBL_SYSTEM_SETTINGS' => 'Systémové nastavení',
-	'LBL_SKYPEOUT_ON_DESC' => 'Umožňuje uživatelům kliknout na telefonní čísla a volat pomocí SkypeOut®. Čísla musí být ve správném formátu.  Pro více informací klikněte na <a href=\\"http://www.skype.com/help/faq/skypeout.html#calling\\" target=\\"skype\\">skype® faq</a>',
+	'LBL_SKYPEOUT_ON_DESC' => 'Umožňuje uživatelům kliknout na telefonní čísla a volat pomocí SkypeOut®. Čísla musí být ve správném formátu.  Pro více informací klikněte na <a href=\"http://www.skype.com/help/faq/skypeout.html#calling\" target=\"skype\">skype® faq</a>',
 	'LBL_SKYPEOUT_ON' => 'Povolit integraci SkypeOut®?',
 	'LBL_SKYPEOUT_TITLE' => 'SkypeOut®',
     'LBL_TWEETTOCASE_ON_DESC' => 'Umožňuje uživatelům vytvořit případy podpory z Tweetů',
@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Subpanelových položek na stránku',
 	'LOG_MEMORY_USAGE'=>'Logovat využití paměti',
-    'LOG_SLOW_QUERIES' => 'Logovat pomalé dotazy',
+    'LOG_SLOW_QUERIES' => 'Protokolovat pomalé dotazy',
     'LOCK_HOMEPAGE_HELP'=>'Toto nastavení zabraňuje <br /> 1) přidání nových dashletů a domácích stránek na Úvodní stránku, <br /> 2) přetažením dashletu na úvodní stránce',
     'CURRENT_LOGO'=>'Aktuánlí používané logo',
     'CURRENT_LOGO_HELP'=>'Toto logo se zobrazí v levém horním rohu aplikace SugarCRM',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Zobrazit záložku Ke stažení',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Při výběru bude zobrazena záložka Ke stažení v uživatelském nastavení, která poskytuje uživatelům přístup k Sugar plug-inům a jíným užitečným souborům.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Pro SAOP autorizaci při používání LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Rozšíření php_mcrypt musí být v souboru php.ini povoleno',
     'LBL_ALL' => 'Všechno',
     'LBL_MARK_POINT' => 'Označit bod',
     'LBL_NEXT_' => 'Další>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Toky aktivit',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Povolit toky aktivit',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Zapne toky aktivit pro aplikaci',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Povolit obsah další přihlašovací obrazovky',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatické ukládání definic procesu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Určuje, jak často jsou definice procesu automaticky ukládány při použití návrháře',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automatické ověření definice procesu při automatickém ukládání',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Přepíná, zda jsou při automatickém ukládání automaticky ověřeny definice procesu. Bude to mít vliv pouze tehdy, pokud je možnost „Automatické ukládání definic procesu“ nastavena na časový interval.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automatické ověření definice procesu při importu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Přepíná, zda jsou při prvním importu automaticky ověřeny definice procesu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Nastavení protokolu komentářů',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximální počet znaků, které lze zobrazit u jednoho komentáře',
 );
 
 

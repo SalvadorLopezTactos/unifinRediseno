@@ -105,36 +105,23 @@ class Popup_Picker
             $seed_object->show_products = FALSE;
             $the_javascript = <<<END
             <script type='text/javascript' language='JavaScript'>
-                var field_id = null;
-                var field_name = null;
-
                 function set_return(treeid) {
-
-                    if(typeof treeid != 'undefined') {
-                        node=YAHOO.namespace(treeid).selectednode;
-                    } else {
-                        node = {'data': {'id': ''}, 'label': ''};
+                    node=YAHOO.namespace(treeid).selectednode;
+                    if (typeof window.opener.document.forms.search_form != 'undefined') //Search
+                    {
+                        var form = window.opener.document.forms.search_form;
+                        var searchType = (form.searchFormTab.value == 'basic_search') ? 'basic' : 'advanced';
+                        form['category_id_'   + searchType].value = node.data.id;
+                        form['category_name_' + searchType].value = node.label;
                     }
-
-                    if (typeof window.opener.document.forms.search_form != 'undefined' || window.opener.document.forms.popup_query_form != 'undefined') { // Search
-                        var form = (typeof window.opener.document.forms.search_form != 'undefined') ? window.opener.document.forms.search_form : window.opener.document.forms.popup_query_form;
-                        var searchType = (typeof form.searchFormTab != 'undefined' && form.searchFormTab.value == 'basic_search') ? 'basic' : 'advanced';
-
-                        field_id = form['category_id_'   + searchType];
-                        field_name = form['category_name_'   + searchType];
-                    } else if(typeof window.opener.document.ReportsWizardForm != 'undefined') { // reports
-                        field_id = window.opener.document.ReportsWizardForm['ProductCategories:name:id:1'];
-                        field_name = window.opener.document.ReportsWizardForm['ProductCategories:name:name:1'];
-                    } else if(typeof window.opener.document.EditView != 'undefined') {
-                        field_id = window.opener.document.EditView.category_id;
-                        field_name = window.opener.document.EditView.category_name;
+                    else if(typeof window.opener.document.ReportsWizardForm != 'undefined') { // reports
+                        window.opener.document.ReportsWizardForm['ProductCategories:name:id:1'].value = node.data.id;
+                        window.opener.document.ReportsWizardForm['ProductCategories:name:name:1'].value = node.label;
                     }
-
-                    if(field_id != null && field_name != null) {
-                        field_id.value = node.data.id;
-                        field_name.value = node.label;
+                    else if(typeof window.opener.document.EditView != 'undefined'){
+                        window.opener.document.EditView.category_id.value = node.data.id;
+                        window.opener.document.EditView.category_name.value = node.label;
                     }
-
                     window.close();
                 }
             </script>

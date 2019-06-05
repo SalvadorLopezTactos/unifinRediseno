@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML－適用於 PHP 的簡單的 SAML 工具組。',
   'LBL_SOURCE_ISCROLL' => 'iScroll－行動 webkit 的 overflow:scroll。原型在固定寬度/高度元素內滾動。',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas－FlashCanvas 是一個 JavaScript 庫，它可在 Internet Explorer 中新增 HTML5 Canvas 支援。它可透過 Flash drawing API 轉譯圖形和圖像。它幾乎支援所有 Canvas API，在很多實例中，它的運行速度比其他使用 VML 或 Silverlight 的類似庫更快。',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit－JavaScript InfoVis Toolkit 提供建立互動式資料視覺效果的工具。',
   'LBL_SOURCE_ZEND' => 'Zend Framework－適用於 PHP5 的開放來源、物件導向的網頁應用程式框架。',
   'LBL_SOURCE_PARSECSV' => 'parseCSV－適用於 PHP 的 CSV 資料剖析器',
   'LBL_SOURCE_PHPJS' => 'php.js－在 JavaScript 中使用 PHP 函式',

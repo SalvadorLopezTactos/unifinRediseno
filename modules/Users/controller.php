@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
- * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -28,6 +27,11 @@ class UsersController extends SugarController
 			$this->view = 'login';
 		}
 	}
+
+    protected function action_oauth2codeexchange()
+    {
+        $this->view = 'oauth2authenticate';
+    }
 
 	protected function action_authenticate()
 	{

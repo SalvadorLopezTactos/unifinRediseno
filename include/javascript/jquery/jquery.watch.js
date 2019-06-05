@@ -1,3 +1,6 @@
+/*
+ * @deprecated
+ */
 /**
  * jQuery Watch Plugin
  *

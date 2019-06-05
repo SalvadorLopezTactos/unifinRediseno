@@ -281,9 +281,10 @@ table.dataTable {
     }
   }
 
-  td:last-child {
-    .edit {
-      > a.btn {
+  td {
+    &:first-child,
+    &:last-child {
+      .edit > a.btn {
         margin-right: 0;
       }
     }

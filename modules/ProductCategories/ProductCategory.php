@@ -149,16 +149,15 @@ class ProductCategory extends SugarBean
 
         //find parent name if  parentid is there.
         if (!empty($this->parent_id) and $this->parent_id != '') {
-            $query = "select name from product_categories where id='$this->parent_id'";
-            $result = $this->db->query($query);
-            if (!empty($result)) {
-                $row = $this->db->fetchByAssoc($result);
-                if (!empty($row)) {
-                    $this->parent_name = $row['name'];
-                }
+            $productCategoryName = $this->db->getConnection()
+                ->executeQuery(
+                    'SELECT name FROM product_categories WHERE id = ?',
+                    [$this->parent_id]
+                )->fetchColumn();
+            if (false !== $productCategoryName) {
+                $this->parent_name = $productCategoryName;
             }
         }
-
     }
 
     /**

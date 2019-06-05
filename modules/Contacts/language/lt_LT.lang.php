@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopijuoti kitą adresą į pagrindinį',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopijuoti pagrindinį adresą į kitą adresą',
     'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimus reikalingas klientas.\\n Prašome sukurti naują klientą arba pasirinkite jau esamą.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimus reikalingas klientas.\n Prašome sukurti naują klientą arba pasirinkite jau esamą.',
     'NTC_REMOVE_CONFIRMATION' => 'Ar tikrai norite išmesti šį kontaktą iš aptarnavimo ?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Ar tikrai norite išmesti šį įrašą kaip pavaldinį?',
 

@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Dodeli timu',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'U zapisima se podrazumevano pojavljuju dostupni timovi čiji ste član.',
 	'LBL_DEFAULT_TEAM'					=> 'Podrazumevani timovi:',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Podrazumevani primarni tim',
 	'LBL_LIST_DESCRIPTION'				=> 'Opis',
 	'LBL_MY_TEAMS'						=> 'Moji timovi',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privatni tim za:',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email Adresa Primaoca',
 	'ERR_SERVER_STATUS'					=> 'Status Vašeg Servera',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistem nije u mogućnosti da pošalje Email korisniku. Molimo proverite konfiguraciju servera za odlazeći Email u <a href="index.php?module=EmailMan&action=config">Email podešavanje</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Korisnika je moguće napraviti samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM režim.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primarnu e-adresu je moguće ažurirati samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM režim.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email adresa',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdite lozinku',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Promenili ste tip korisnika iz Sistemskog Administratora u običnog korisnika. Posle snimanja ove promene, korisnik više neće imati administratorske privilegije.\\n\\nKlikinte OK da nastavite.\\nKliknite Otkaži da se vratite u zapis.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Promenili ste tip korisnika iz Sistemskog Administratora u običnog korisnika. Posle snimanja ove promene, korisnik više neće imati administratorske privilegije.\n\nKlikinte OK da nastavite.\nKliknite Otkaži da se vratite u zapis.',
 	'LBL_COUNTRY'						=> 'Država',
 	'LBL_CURRENCY_TEXT'					=> 'Izaberite valutu koja će biti prikazana kao podrzumevana kada napravite novi zapis. Ova valuta će takođe biti prikazana u koloni Količina u pregledu u vidu liste Prodajnih prilika.',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Broj decimalnih mesta za prikaz decimala varira kroz sistem, poput valuta i proseka u Izveštajima.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Prikaži preferiranu valutu',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Pretvori osnovnu valutu u korisnikovu preferiranu valutu u pogledu na liste i zapise',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Kreiraj Stavke prihoda u Preferiranoj valuti',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Stavke prihoda dodate prodajnim prilikama iz Kataloga proizvoda će biti konvertovane u preferiranu valutu korisnika ako se razlikuju od valute stavke iz Katalogu proizvoda.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Separator hiljada',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Karakter koji se koristi da bi se razdvojile hiljade',
 	'LBL_DECIMAL_SEP'					=> 'Decimalni simbol',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Unesite korisničko ime i Email adresu.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Ova funkcionalnost trenutno nije omogućena. Molimo vas kontaktirajte vašeg administratora.',
 	'LBL_PUBLISH_KEY'					=> 'Objavi ključ',
-
+    'LBL_SITE_USER_ID' => 'Heš za site_url i user_id',
     'LBL_QUOTAS'                        => 'Kvote',
     'LBL_FORECASTS'                     => 'Prognoze',
     'LBL_WORKSHEETS'                    => 'Radni listovi',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil korisnika',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Ako određena polja nije moguće urediti, prijavite se na Cloud konzolu kako biste mogli da upravljate ovim poljima',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Ako želite da promenite određena polja koja nije moguće urediti, ' .
-        'obratite se administratoru da biste prijavili te izmene',
+        'Kontaktirajte Sugar administratora ako želite da promenite polja koja su samo za čitanje.',
 ); // END STRINGS DEFS
-
-?>

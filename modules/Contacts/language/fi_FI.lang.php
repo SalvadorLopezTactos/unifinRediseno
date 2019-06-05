@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopioi vaihtoehtoinen osoite ensisijaiseksi osoitteeksi',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopioi ensisijainen osoite vaihtoehtoiseksi osoitteeksi',
     'NTC_DELETE_CONFIRMATION' => 'Haluatko poistaa tämän tietueen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii asiakkaan.\\n Luo asiakas tai valitse olemassa oleva asiakas.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii asiakkaan.\n Luo asiakas tai valitse olemassa oleva asiakas.',
     'NTC_REMOVE_CONFIRMATION' => 'Haluatko poistaa tämän kontaktin tapauksesta?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Oletko varma, että haluat poistaa tämän tietueen suorana raporttina?',
 

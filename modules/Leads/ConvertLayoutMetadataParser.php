@@ -84,9 +84,9 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     /**
      * Override parent and noop - we don't use this for convert lead
      *
-     * @param bool $populate
+     * {@inheritDoc}
      */
-    public function handleSave($populate = true)
+    public function handleSave($populate = true, $clearCache = true)
     {
     }
 

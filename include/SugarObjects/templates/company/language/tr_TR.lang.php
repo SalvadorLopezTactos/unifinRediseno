@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Faturalamayı Başlat',
 	'LBL_PUSH_SHIPPING' => 'Gönderimi Başlat',
 	'LBL_SAVE_ACCOUNT' => 'Müşteri Kaydet',
+    'LBL_SERVICE_LEVEL' => 'Hizmet Seviyesi',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Teslim Adresi Şehir:',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Teslim Adresi Ülke:',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Teslim Adresi Posta Kodu:',

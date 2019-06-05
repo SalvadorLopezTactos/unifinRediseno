@@ -27,6 +27,8 @@ class aCase extends Basic
     var $status;
     var $priority;
 
+    public $follow_up_datetime;
+
     var $created_by;
     var $created_by_name;
     var $modified_by_name;

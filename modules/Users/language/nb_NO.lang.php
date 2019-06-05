@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Tilknytt til gruppe',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Forhåndsinnstilt gruppe for nye registre',
 	'LBL_DEFAULT_TEAM'					=> 'Forhåndsinnstilt gruppe',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Standard Primærgruppe',
 	'LBL_LIST_DESCRIPTION'				=> 'Beskrivelse',
 	'LBL_MY_TEAMS'						=> 'Mine grupper',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Privat gruppe for',
@@ -60,7 +59,7 @@ $mod_strings = array (
 	'ERR_PASSWORD_MISMATCH'				=> 'Passordene stemmer ikke overens.',
 	'ERR_PASSWORD_USERNAME_MISSMATCH'   => 'Du må oppgi et gyldig brukernavn og e-postadresse.',
 	'ERR_PASSWORD_LINK_EXPIRED'         => 'Din lenke har utløpt, du må generere en ny',
-	'ERR_REENTER_PASSWORDS'				=> 'Vennligst oppgi passordene igjen. De oppgitte verdiene for \\"nytt passord\\" og \\"bekreft passord\\" stemmer ikke overens.',
+	'ERR_REENTER_PASSWORDS'				=> 'Vennligst oppgi passordene igjen. De oppgitte verdiene for \"nytt passord\" og \"bekreft passord\" stemmer ikke overens.',
 	'ERR_REPORT_LOOP'					=> 'Systemet oppdaget en rapporteringsløkke. En bruker kan ikke rapportere til seg selv, ei heller kan brukerens leder rapportere til brukeren selv.',
 	'ERR_RULES_NOT_MET'                 => 'Passordet du skrev oppfyller ikke kravene til passord. Vennligst prøv igjen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brukerinformasjon ikke funnet',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottakers e-postadresse',
 	'ERR_SERVER_STATUS'					=> 'Din server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan ikke sende en epost til brukeren. Vennligst sjekk konfigurasjinen for utgående e-post  i<a href="index.php?module=EmailMan&action=config">e-post innstillinger</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Brukeren kan bare opprettes i <a href="{0}" target="_blank">Cloud-konsoll</a> for IDM-modus.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Den primære e-postadressen kan bare oppdateres i <a href="{0}" target="_blank">Cloud-konsoll</a> for IDM-modus.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-postadresse',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Bekreft passord',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har endret brukertype fra System Administrator Bruker til vanlig bruker. Når du har lagret denne endringen vil brukeren ikke lenger ha systemadministrator rettigheter. \\n\\nClick OK for å fortsette. \\ nClick Cancel for å gå tilbake til posten.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har endret brukertype fra System Administrator Bruker til vanlig bruker. Når du har lagret denne endringen vil brukeren ikke lenger ha systemadministrator rettigheter. \n\nClick OK for å fortsette. \ nClick Cancel for å gå tilbake til posten.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Velg forhåndsinnstilt valuta',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Antall desimalplasser for som viser desimaler og flyter gjennom systemet, f. eks. valuta og gjennomsnitt i rapporter.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Vis foretrukket valuta',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Konverter basisvalutaen til brukerens foretrukne fra listen og registrer visninger',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Opprett inntektslinjeelement i foretrukket valuta',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Inntektslinjeelementer lagt til en mulighet fra produktkatalogen konverteres til brukerens foretrukne valuta hvis den er forskjellig fra valutaen som brukes i produktkatalogelementet.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Tusenskille',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Tegn som brukes for å separere tusener',
 	'LBL_DECIMAL_SEP'					=> 'Symbol for desimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Oppgi både et brukernavn og en e-post adresse.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Denne valuta er for øyeblikket ikke aktivert. Vennligst kontakt din administrator.',
 	'LBL_PUBLISH_KEY'					=> 'Publisér nøkkel',
-
+    'LBL_SITE_USER_ID' => 'Hash for site_url og user_id',
     'LBL_QUOTAS'                        => 'Budsjetter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Brukerprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Hvis bestemte felt ikke kan redigeres, vennligst logg inn til Cloud-konsollen for å administrere disse feltene',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Hvis du vil endre visse felt som ikke kan redigeres. ' .
-        'kontakt administrator for å varsle om disse endringene',
+        'Kontakt Sugar-administrator hvis du ønsker å endre skrivebeskyttede felt.',
 ); // END STRINGS DEFS
-
-?>

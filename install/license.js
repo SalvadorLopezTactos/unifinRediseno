@@ -8,7 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: license.js 4260 2005-04-18 02:08:11Z bob $
 
 function toggleLicenseAccept(){
     var theForm     = document.forms[0];

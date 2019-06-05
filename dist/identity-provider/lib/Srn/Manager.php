@@ -18,20 +18,35 @@ namespace Sugarcrm\IdentityProvider\Srn;
 class Manager
 {
     const USERS_SERVICE = 'iam';
+
+    // Resource types
+    const RESOURCE_TYPE_APPLICATION = 'app';
+
+    // Application types
+    const APPLICATION_TYPE_WEB = 'web';
+    const APPLICATION_TYPE_NATIVE = 'native';
+    const APPLICATION_TYPE_USER_AGENT = 'ua';
+    const APPLICATION_TYPE_CRM = 'crm';
+
     /**
      * @var array
      */
-    protected $idpCloudConfig;
+    protected $config;
 
     /**
-     * @param array $idpCloudConfig
+     * @param array $config
      */
-    public function __construct(array $idpCloudConfig)
+    public function __construct(array $config)
     {
-        if (empty($idpCloudConfig['partition']) || empty($idpCloudConfig['region'])) {
-            throw new \InvalidArgumentException('Partition and Region MUST be set');
+        if (empty($config['partition'])) {
+            throw new \InvalidArgumentException('Partition MUST be set');
         }
-        $this->idpCloudConfig = $idpCloudConfig;
+
+        if (empty($config['region'])) {
+            $config['region'] = '';
+        }
+
+        $this->config = $config;
     }
 
     /**
@@ -44,9 +59,9 @@ class Manager
     public function createUserSrn($tenantId, $userId)
     {
         $srn = new Srn();
-        return $srn->setPartition($this->idpCloudConfig['partition'])
+        return $srn->setPartition($this->config['partition'])
             ->setService(static::USERS_SERVICE)
-            ->setRegion($this->idpCloudConfig['region'])
+            ->setRegion('')
             ->setTenantId($tenantId)
             ->setResource(['user', $userId]);
     }
@@ -60,10 +75,34 @@ class Manager
     public function createTenantSrn($tenantId)
     {
         $srn = new Srn();
-        return $srn->setPartition($this->idpCloudConfig['partition'])
+        return $srn->setPartition($this->config['partition'])
             ->setService(static::USERS_SERVICE)
-            ->setRegion($this->idpCloudConfig['region'])
+            ->setRegion($this->config['region'])
             ->setTenantId($tenantId)
             ->setResource(['tenant']);
+    }
+
+    /**
+     * Checks whether the given srn belong to web application.
+     *
+     * @param Srn $srn
+     * @return bool
+     */
+    public static function isWeb(Srn $srn): bool
+    {
+        return $srn->getResource()[0] === self::RESOURCE_TYPE_APPLICATION
+            && $srn->getResource()[1] === self::APPLICATION_TYPE_WEB;
+    }
+
+    /**
+     * Checks whether the given srn belong to crm application.
+     *
+     * @param Srn $srn
+     * @return bool
+     */
+    public static function isCrm(Srn $srn): bool
+    {
+        return $srn->getResource()[0] === self::RESOURCE_TYPE_APPLICATION
+            && $srn->getResource()[1] === self::APPLICATION_TYPE_CRM;
     }
 }

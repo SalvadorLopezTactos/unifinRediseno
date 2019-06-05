@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopírovať alternatívnu adresu do primárnej',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopírovať primárnu adresu do alternatívnej',
     'NTC_DELETE_CONFIRMATION' => 'Naozaj chcete vymazať tento záznam?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie príležitosti vyžaduje účet.\\n Buď vytvorte nový účet alebo vyberte existujúci.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie príležitosti vyžaduje účet.\n Buď vytvorte nový účet alebo vyberte existujúci.',
     'NTC_REMOVE_CONFIRMATION' => 'Naozaj chcete odstrániť tento kontakt z prípadu?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Naozaj chcete odstrániť tento záznam zo zoznamu priamych podriadených?',
 

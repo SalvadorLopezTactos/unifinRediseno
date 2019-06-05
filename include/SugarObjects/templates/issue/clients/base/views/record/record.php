@@ -151,6 +151,7 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
                 ),
                 'priority',
                 'status',
+                'follow_up_datetime',
                 'type',
                 'resolution',
                 'assigned_user_name',

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: registered_layout_defs.php 22867 2007-05-16 22:21:10Z majed $
 
 
 /**

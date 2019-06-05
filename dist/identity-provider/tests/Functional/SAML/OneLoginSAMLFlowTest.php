@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Functional\SAML;
 
+use OneLogin\Saml2\Constants;
 use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
 
 /**
@@ -98,7 +99,7 @@ class OneLoginSAMLFlowTest extends SAMLFlowTest
 
         $this->assertEquals($expectedInResponseTo, $logoutResponseNode->getAttribute('InResponseTo'));
         $this->assertEquals($expectedDestinationUrl, $logoutResponseNode->getAttribute('Destination'));
-        $this->assertEquals(\OneLogin_Saml2_Constants::STATUS_SUCCESS, $statusNode->getAttribute('Value'));
+        $this->assertEquals(Constants::STATUS_SUCCESS, $statusNode->getAttribute('Value'));
     }
 
     /**
@@ -139,7 +140,7 @@ class OneLoginSAMLFlowTest extends SAMLFlowTest
 
         $this->assertEquals($expectedInResponseTo, $logoutResponseNode->getAttribute('InResponseTo'));
         $this->assertEquals($expectedDestinationUrl, $logoutResponseNode->getAttribute('Destination'));
-        $this->assertEquals(\OneLogin_Saml2_Constants::STATUS_SUCCESS, $statusNode->getAttribute('Value'));
+        $this->assertEquals(Constants::STATUS_SUCCESS, $statusNode->getAttribute('Value'));
         $this->assertEquals($relayState, $parameters['RelayState']);
     }
     /**

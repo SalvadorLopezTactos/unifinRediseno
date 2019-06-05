@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ez a rendszerfiók.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-mail cím azonosító',
     'LBL_TYPE' => 'Típus',
+    'LBL_REPLY_TO_NAME' => 'Válasz címzettje',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Válasz e-mail címei',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Válasz e-mail cím azonosítója',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Válasz e-mail címe',
+    'LBL_PRIMARY_TEAM' => 'Elsődleges csoport',
 );

@@ -10,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: checkSystem.php 19538 2007-01-23 01:16:25 +0000 (Tue, 23 Jan 2007) chris $
 $_SESSION['setup_license_accept'] = true;
 
 function runCheck($install_script = false, $mod_strings){
@@ -174,26 +173,6 @@ if(!function_exists('mb_strlen')) {
       </tr>';
 }else{
     installLog("MBString Support Found");
-}
-
-// mcrypt extension check
-if (!extension_loaded('mcrypt')) {
-    $error_found = true;
-    installLog(sprintf('ERROR:: %s', $mod_strings['ERR_CHECKSYS_MCRYPT']));
-    $error_txt .= sprintf(
-        '<tr>
-        <td>
-            <strong>%s</strong>
-        </td>
-        <td class="error">
-            <b><span class="stop">%s</font></b>
-        </td>
-    </tr>',
-        $mod_strings['LBL_CHECKSYS_MCRYPT'],
-        $mod_strings['ERR_CHECKSYS_MCRYPT']
-    );
-} else {
-    installLog("MCrypt is loaded");
 }
 
 // zip

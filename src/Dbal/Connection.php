@@ -24,28 +24,6 @@ class Connection extends BaseConnection
 {
     /**
      * {@inheritDoc}
-     */
-    public function connect()
-    {
-        $result = parent::connect();
-
-        if ($result) {
-            $re = new \ReflectionProperty(get_parent_class($this), 'portability');
-            $re->setAccessible(true);
-            $portability = $re->getValue($this);
-
-            // unset the unneeded bits from the resulting value as the DBAL forcedly sets them
-            // @link https://github.com/doctrine/dbal/issues/2644
-            $portability &= ~(self::PORTABILITY_RTRIM | self::PORTABILITY_EMPTY_TO_NULL);
-
-            $re->setValue($this, $portability);
-        }
-
-        return $result;
-    }
-
-    /**
-     * {@inheritDoc}
      *
      * @return \Sugarcrm\Sugarcrm\Dbal\Query\QueryBuilder
      */

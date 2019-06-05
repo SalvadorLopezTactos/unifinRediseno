@@ -18,7 +18,6 @@ $dictionary['UserSignature'] = array(
             'name' => 'user_id',
             'vname' => 'LBL_USER_ID',
             'type' => 'id',
-            'len' => 36,
         ),
         'name' => array(
             'name' => 'name',

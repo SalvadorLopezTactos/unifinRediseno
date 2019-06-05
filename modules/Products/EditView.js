@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: EditView.js 42645 2008-12-18 21:41:08Z awu $
 
 
 function get_popup_product(formName)

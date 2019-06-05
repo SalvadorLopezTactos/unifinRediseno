@@ -72,6 +72,7 @@ $mod_strings = array (
 	'LBL_PUSH_BILLING' => 'Shtyj faturimin',
 	'LBL_PUSH_SHIPPING' => 'Shtyj transportin',
 	'LBL_SAVE_ACCOUNT' => 'Ruaj llogarinë',
+    'LBL_SERVICE_LEVEL' => 'Niveli i shërbimit',
 	'LBL_SHIPPING_ADDRESS_CITY' => 'Qyteti i transportit',
 	'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Shteti i transportit',
 	'LBL_SHIPPING_ADDRESS_POSTALCODE' => 'Kodi postal i transportit',

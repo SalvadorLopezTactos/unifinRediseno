@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'הגדרות זרימת עבודה',
   'LBL_MODULE_NAME_SINGULAR' => 'הגדרת זרימת עבודה',
-  'LBL_MODULE_ID' => 'זרימת עבודה',  
+  'LBL_MODULE_ID' => 'זרימת עבודה',
   'LBL_MODULE_TITLE' => 'זרימת עבודה: בית',
   'LBL_SEARCH_FORM_TITLE' => 'חיפוש זרימת עבודה',
   'LBL_LIST_FORM_TITLE' => 'רשימת זרימות עבודה',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'מודול יעד:',
   'LBL_LIST_ORDER' => 'עבד הזמנה:',
   'LBL_FROM_NAME' => 'משם:',
-  'LBL_FROM_ADDRESS' => 'מכתובת:',  
+  'LBL_FROM_ADDRESS' => 'מכתובת:',
   'LNK_NEW_WORKFLOW' => 'צור הגדרת זרימת עבודה',
-  'LNK_WORKFLOW' => 'ערוך רשימת הגדרות זרימת עבודה', 
-  
-  
+  'LNK_WORKFLOW' => 'ערוך רשימת הגדרות זרימת עבודה',
+
+
   'LBL_ALERT_TEMPLATES' => 'Alert Templates',
   'LBL_CREATE_ALERT_TEMPLATE' => 'צור תבנית התראה:',
   'LBL_SUBJECT' => 'נושא:',
-  
+
   'LBL_RECORD_TYPE' => 'מתייחס אל:',
  'LBL_RELATED_MODULE'=> 'מודול קשור:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'רצף זרימת עבודה',
 	'LNK_ALERT_TEMPLATES' => 'תבניות דוא"ל התראה',
 	'LNK_PROCESS_VIEW' => 'רצף זרימת עבודה',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'סוג:',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>לתשומת לבך:</strong> זרימת העבודה של Sugar ופונקציונליות ניהול העבודה יוסרו במהדורה עתידית של Sugar. לקוחות של גרסת Sugar לארגונים וחברות מתבקשים להתחיל להשתמש בפונקציונליות שסופקה על ידי זרימת העבודה המתקדמת (Advanced Workflow) של Sugar. לחץ <a href="http://www.sugarcrm.com/wf-eol" target="_blank">כאן</a> לקבלת מידע נוסף.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>לתשומת לבך:</strong> הפונקציונליות של &#39;זרימת העבודה של Sugar&#39; ושל &#39;ניהול זרימת עבודה&#39; נמצאת במצב תחזוקה. לקוחות של גרסת Sugar לארגונים מתבקשים להתחיל להשתמש בפונקציונליות שמספק SugarBPM<sup class="trademark">TM</sup>‎.',
 );
 

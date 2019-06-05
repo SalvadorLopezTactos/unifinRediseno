@@ -4,15 +4,34 @@
     - [Environment](#environment)
     - [Application](#application)
     - [Logging](#logging)
+- [Make commands](#make)    
 - [Docker](#docker)
     - [Production](#production)
+    - [Development](#development)
     - [Local deploy](#local-deploy)
     - [Jenkins and minikube](#jenkins-and-minikube)
 - [Testing](#testing)
     - [General](#general)
     - [Continuous integration](#continuous-integration)
-    - [Local test environment](#local-test-environment)
+    - [Local test environment](#local-test-environment)  
 
+# Mango library releases
+| Mango version | Library version |
+|----|---|
+| 9.0.0 | 1.5.0 |
+| 8.3.0 | 1.4.2 |
+| 8.2.1 | 1.3.2 |
+| 8.1.0 | 1.2.1 |
+| 8.0.1 | 1.1.7 |
+| 7.11.0 | 1.1.0|
+
+To release new version:
+
+1. Update IdentityProvider composer with new version
+1. Create new branch if necessary
+1. Create new release on github
+1. Update and checkout required branch for identity-provider git submodule
+1. Update composer in Mango with new identity-provider release
 
 # Installation
 ---
@@ -20,7 +39,20 @@
 
 ### Environment
 * PHP 7.1
+    required extensions:
+    * mcrypt
+    * zip
+    * mysqli
+    * gmp
+    * ldap
+    * apcu (with apcu_bc)
+    * grpc (pecl install grpc)
 * MySQL 5
+
+* For CSS building
+    * nodejs
+    * npm
+    * less
 
 The application requires minimal server config.
 
@@ -43,6 +75,11 @@ into *location* section
 * you can test local authorization using following login / password pairs: user1 / user1pass, user2 / user2pass, ..., user10 / user10pass
 * user3, user6 and user9 are marked as deleted so you cannot pass authorization using theirs credentials
 
+### CSS stylesheets
+* All CSS stylesheets are stored in .less files in src/App/Resources/less
+* Use idm folder to extend styles
+* To build new css file for idm use ./bin/css.sh command
+
 ### Logging
 
 As far as [monolog](https://github.com/Seldaek/monolog) logger is used, this library implements the 
@@ -55,6 +92,34 @@ $params['monolog']['monolog.handlers'] = [
 ];
 ```
 
+# Make
+---
+* Install all 3rd-party library dependencies
+``` make deps ```
+
+* Rebuild grpc client classes
+``` make grpc ```
+
+* Build and rebuild CSS from LESS files
+``` make css ```
+
+* Build and push production docker image to all required registries
+``` make docker-deploy-prod ```
+
+* Run full dockerized production IdentityProvider service locally
+``` make docker-run-local ```
+
+* Run all tests (except Behat E2E tests)
+``` make test ```
+
+* Run unit tests
+``` make test-unit ```
+
+* Run functional tests
+``` make test-functional ```
+
+* Run PSR code-style check test
+``` make test-code-standards ```
 
 # Docker
 ---
@@ -90,7 +155,15 @@ docker push quay.io/sugarcrm/idm-login:manual-YYYYMMDDHHmm
 ```
 
 
-To build and push images to both registries you can run script `deploy-images.sh`
+To build and push images to both registries you can run script `bin/deploy-images.sh`
+
+#### Development
+
+To build docker image with development endpoint run:
+
+```bash
+make docker-dev
+```
 
 #### Local deploy
 

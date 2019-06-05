@@ -10,8 +10,8 @@
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
 # chown to get rid of "Can't open and lock privilege tables: Table 'mysql.host' doesn't exist" fatal error on mysql start
+rm /var/run/mysqld/mysqld.sock.lock
 chown -R mysql:mysql /var/lib/mysql && chown -R mysql:mysql /var/log/mysql && service mysql start
-
 
 # copy config override
 CONFIG_FROM_VOLUME="/var/www/sugarcrm-config/config_override.php"

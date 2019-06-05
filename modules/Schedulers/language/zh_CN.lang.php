@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '创建未来时段',
 'LBL_OOTB_HEARTBEAT' => 'Sugar 中心',
 'LBL_OOTB_KBCONTENT_UPDATE' => '更新 KBContent 文章。',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => '发布已核准的文章和过期的知识库文章。',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => '发布已核准的文章和已过期的知识库文章。',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 已安排的任务',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '重建非规范化团队安全性数据',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => '检查收件帐户',
 'LBL_PERFORMFULLFTSINDEX' => '全文搜索索引系统',
 'LBL_SUGARJOBREMOVEPDFFILES' => '移除临时 PDF 文件',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '发布已核准的文章和过期的知识库文章。',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '发布已核准的文章和已过期的知识库文章。',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch 队列工作计划',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '移除诊断工具文件',
 'LBL_SUGARJOBREMOVETMPFILES' => '移除临时文件',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> '运行电子邮件提醒发送',
 'LBL_CLEANJOBQUEUE' => '清理任务队列',
 'LBL_CLEANOLDRECORDLISTS' => '清除旧记录列表',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'SugarBPM 工作计划',
 );
 

@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Атрибут групи:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'З DN користувем:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Ввімкнути User DN з User Attribute в перевірку членства групи',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Авторизація користувача LDAP <br> наприклад :&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -440,7 +440,7 @@ $mod_strings = array (
     'LBL_MANAGE_STYLEGUIDE' => 'Керівництво по стилю (Lab)',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Документація та шаблони',
     'LBL_MANUAL_VALIDATION_TXT' => 'Підтвердження вручну',
-    'LBL_MANUAL_VALIDATION'=>'У випадку якщо Ви відчуваєте постійні труднощі з автоматичним підтвердженням, будь ласка, перевірте, настройки проксі на <a href="index.php?module=Configurator&action=EditView"> System Settings </a> панелі адміністратора. <br /> Якщо Ваше системне оточення не дозволяє системі зв&#39;язуватися з центром підтвердження ліцензій використовуючи інтернет, Вам необхідно зробити наступні кроки: <a href = "javascript: void (0)" onclick = "toggleDisplay (&#39;mainbody&#39;); toggleDisplay (&#39;manualbody &#39;); "> Manual Validation </a>.',
+    'LBL_MANUAL_VALIDATION'=>'У випадку якщо Ви відчуваєте постійні труднощі з автоматичним підтвердженням, будь ласка, перевірте, настройки проксі на <a href="index.php?module=Configurator&action=EditView"> System Settings </a> панелі адміністратора. <br /> Якщо Ваше системне оточення не дозволяє системі зв&#39;язуватися з центром підтвердження ліцензій використовуючи інтернет, Вам необхідно зробити наступні кроки:  <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manual Validation </a>.',
     'LBL_MANUAL_VALIDATION1'=> 'Крок 1: Натисніть на цю кнопку, щоб сформувати інформаційний файл ліцензійного ключа.',
     'LBL_MANUAL_VALIDATION2'=> 'Потім збережіть файл (sugarkey.lic) в локальній файловій системі.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'Попередження: Для збереження ваших даних інсталятор повинен бути заблокований шляхом установки змінної installer_locked в значення "true" у файлі config.php.',
  	'WARN_LICENSE_EXPIRED'=> "Повідомлення: До закінчення терміну дії вашої ліцензії залишилося:",
     'WARN_LICENSE_EXPIRED2' =>"дня (днів). Будь ласка, перейдіть до <a href=\"index.php?action=LicenseSettings&module=Administration\"> \"License Management\" </a> в панелі адміністратора.",
-    'WARN_LICENSE_SEATS'=>  "<b>Попередження: </b> Кількість користувача ліцензій перевищено на",
-    'WARN_LICENSE_SEATS2' => ". Будь ласка, зв&#39;яжіться з Вашим представником SugarCRM з продажу або надішліть e-mail на <a href=&#39;mailto:sales@sugarcrm.com&#39;> sales@sugarcrm.com </a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Попередження. </b>Зареєстровано ",
+    'WARN_LICENSE_SEATS2' => " активних користувачі(-в), однак умови вашої підписки передбачають лише ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Деактивуйте деяких користувачів, зверніться до свого партнера чи менеджера з продажу"
+        . " або надішліть електронного листа за адресою <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Докладніше див. у статті "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Типи користувачів і ліцензії Sugar</a>.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Попередження: Кількість активних користувачів вже дорівнює максимальній кількості допустимих ліцензій:",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "Попередження: Кількість активних користувачів вже дорівнює максимальній кількості допустимих ліцензій",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"Попередження: Кількість активних користувачів допустимих Вашою ліцензією, відповідає кількості активних користувачів в системі. Ви не зможете створити додаткових активних користувачів.",
-    'WARN_REPAIR_CONFIG' => 'Файл config.php повинен бути відновлений. Будь ласка, використовуйте <a href="index.php?module=Administration&action=RebuildConfig"> Rebuild Config File </a> скрипт на сторінці Відновлення в панелі адміністратора для відновлення файлу config.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Попередження.</b> Ви не зможете створити додаткових активних користувачів."
+        . " Придбайте додаткові підписки.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Попередження.</b> Ви не зможете створити додаткових активних користувачів."
+        . " Придбайте додаткові підписки.",
+    'WARN_REPAIR_CONFIG' => '<b>Попередження.</b> Файл config.php потребує відновлення. Щоб відновити файл конфігурації, використовуйте сценарій <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Оновлення файлу конфігурації</a> в області «Адміністрування» на сторінці «Відновлення».',
     'WARN_UPGRADE_APP'=> "На даний момент доступна оновлена версія програми.",
     'WARN_UPGRADE' => '<b>Попередження: </b>будь ласка, оновіть систему',
     'WARN_UPGRADENOTE' => 'Примітка:',
@@ -1245,15 +1254,17 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Файл метаданих не знайдено.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Налаштування',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Налаштування параметрів Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Засіб перегляду логу',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Доступ до журналу Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Доступ до ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' журналу.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Список процесів',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Зі списком процесів можна ознайомитися тут.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Налаштування ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' параметрів і перегляд журналів. Керування всіма процесами BPM для всіх користувачів за допомогою списку процесів.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Налаштування параметрів Advanced Workflow і перегляд журналів. Керування всіма процесами BPM для всіх користувачів за допомогою списку процесів.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Налаштування комерційних пропозицій',
+    'LBL_MANAGE_QUOTES' => 'Налаштування макета таблиці комерційних пропозицій',
 );

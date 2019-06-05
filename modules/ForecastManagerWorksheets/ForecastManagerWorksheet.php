@@ -338,7 +338,8 @@ class ForecastManagerWorksheet extends SugarBean
             if (is_array($field)) {
                 // if we have an array it should be a key value pair, where the key is the destination
                 // value and the value, is the seed value
-                list($key, $field) = each($field);
+                $key = key($field);
+                $field = current($field);
             }
             // make sure the field is set, as not to cause a notice since a field might get unset() from the $seed class
             if (isset($seed[$field])) {
@@ -585,7 +586,7 @@ class ForecastManagerWorksheet extends SugarBean
 
                     while ($row = $this->db->fetchByAssoc($results)) {
                         $field = substr($row['field_name'], 0, strpos($row['field_name'], '_'));
-                        if ($settings['show_worksheet_' . $field] == "1") {
+                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == "1") {
                             // calculate the difference to make sure it actually changed at 2 digits vs changed at 6 digits
                             $diff = SugarMath::init($row['after_value_string'], 6)->sub(
                                 $row['before_value_string']

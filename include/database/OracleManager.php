@@ -63,41 +63,44 @@ class OracleManager extends DBManager
         'alias' => 30
     );
 
+    /**
+     * {@inheritDoc}
+     */
     protected $type_map = array(
-        'int'      => 'number',
-        'double'   => 'number(38,10)',
-        'float'    => 'number(30,6)',
-        'uint'     => 'number(15)',
-        'ulong'    => 'number(38)',
-        'long'     => 'number(38)',
-        'short'    => 'number(3)',
-        'varchar'  => 'varchar2',
-        'text'     => 'clob',
-        'longtext' => 'clob',
-        'date'     => 'date',
-        'enum'     => 'varchar2(255)',
-        'relate'   => 'varchar2',
-        'multienum'=> 'clob',
-        'html'     => 'clob',
-        'longhtml' => 'clob',
-        'datetime' => 'date',
+        'blob'          => 'blob',
+        'bool'          => 'number(1)',
+        'char'          => 'char',
+        'currency'      => 'number(26,6)',
+        'date'          => 'date',
         'datetimecombo' => 'date',
-        'time'     => 'date',
-        'bool'     => 'number(1)',
-        'tinyint'  => 'number(3)',
-        'char'     => 'char',
-        'id'       => 'varchar2(36)',
-        'blob'     => 'blob',
-        'longblob' => 'blob',
-        'currency' => 'number(26,6)',
-        'decimal'  => 'number(20,2)',
-        'decimal2' => 'number(30,6)',
-        'url'      => 'varchar2',
-        'encrypt'  => 'varchar2(255)',
-        'file'     => 'varchar2(255)',
-        'decimal_tpl' => 'number(%d, %d)',
-        'smallint' => 'number(5)',
-            );
+        'datetime'      => 'date',
+        'decimal'       => 'number(20,2)',
+        'decimal2'      => 'number(30,6)',
+        'decimal_tpl'   => 'number(%d, %d)',
+        'double'        => 'number(38,10)',
+        'encrypt'       => 'varchar2(255)',
+        'enum'          => 'varchar2(255)',
+        'file'          => 'varchar2(255)',
+        'float'         => 'number(30,6)',
+        'html'          => 'clob',
+        'id'            => 'varchar2(36)',
+        'int'           => 'number',
+        'longblob'      => 'blob',
+        'longhtml'      => 'clob',
+        'long'          => 'number(38)',
+        'longtext'      => 'clob',
+        'multienum'     => 'clob',
+        'relate'        => 'varchar2',
+        'short'         => 'number(3)',
+        'smallint'      => 'number(5)',
+        'text'          => 'clob',
+        'time'          => 'date',
+        'tinyint'       => 'number(3)',
+        'uint'          => 'number(15)',
+        'ulong'         => 'number(38)',
+        'url'           => 'varchar2',
+        'varchar'       => 'varchar2',
+    );
 
     /**
      * Integer fields' min and max values
@@ -275,7 +278,7 @@ class OracleManager extends DBManager
             return $this->queryArray($sql, $dieOnError, $msg, $suppress);
         }
         parent::countQuery($sql);
-        $GLOBALS['log']->info('Query: ' . $sql);
+        $this->logger->info('Query: ' . $sql);
         $this->checkConnection();
         $this->query_time = microtime(true);
         $db = $this->getDatabase();
@@ -292,7 +295,7 @@ class OracleManager extends DBManager
 
 			$exec_result = $suppress?@oci_execute($stmt):oci_execute($stmt);
 	        $this->query_time = microtime(true) - $this->query_time;
-	        $GLOBALS['log']->info('Query Execution Time: '.$this->query_time);
+            $this->logger->info('Query Execution Time: '.$this->query_time);
 		    $this->dump_slow_queries($sql);
 			if($exec_result) {
 			    $result = $stmt;
@@ -354,10 +357,10 @@ class OracleManager extends DBManager
                 if(!empty($data)){
                     $warning = ' Table:' . $table . ' Data:' . $data;
                     if(!empty($GLOBALS['sugar_config']['check_query_log'])){
-                        $GLOBALS['log']->fatal($sql);
-                        $GLOBALS['log']->fatal('CHECK QUERY:' .$warning);
+                        $this->logger->alert($sql);
+                        $this->logger->alert('CHECK QUERY:' .$warning);
                     }else{
-                        $GLOBALS['log']->warn('CHECK QUERY:' .$warning);
+                        $this->logger->warning('CHECK QUERY:' .$warning);
                     }
                 }
             }
@@ -385,7 +388,7 @@ class OracleManager extends DBManager
         $start = (int)$start;
         $count = (int)$count;
         preg_match('/^(.*SELECT)(.*?FROM.*WHERE)(.*)$/is',$sql, $matches);
-        $GLOBALS['log']->debug('Limit Query:' . $sql. ' Start: ' .$start . ' count: ' . $count);
+        $this->logger->debug('Limit Query:' . $sql. ' Start: ' .$start . ' count: ' . $count);
         if ($start ==0 && !empty($matches[3])) {
             $sql = 'SELECT /*+ FIRST_ROWS('. $count . ') */ * FROM (' . $matches[1]. $matches[2]. $matches[3] . ') MSI WHERE ROWNUM <= '.$count;
             if(!empty($GLOBALS['sugar_config']['check_query'])){
@@ -503,7 +506,7 @@ class OracleManager extends DBManager
      */
     public function getTablesArray()
     {
-        $GLOBALS['log']->debug('ORACLE fetching table list');
+        $this->logger->debug('ORACLE fetching table list');
 
         if($this->getDatabase()) {
             $tables = array();
@@ -526,7 +529,7 @@ class OracleManager extends DBManager
      */
     public function tableExists($tableName)
     {
-        $GLOBALS['log']->info("tableExists: $tableName");
+        $this->logger->info("tableExists: $tableName");
 
         if ($this->getDatabase()){
             $query = 'SELECT TABLE_NAME
@@ -611,7 +614,7 @@ WHERE OWNER = ?
             $this->database = oci_pconnect($configOptions['db_user_name'], $configOptions['db_password'],$configOptions['db_name'], $charset);
             $err = oci_error();
             if ($err != false) {
-	            $GLOBALS['log']->debug("oci_error:".var_export($err, true));
+                $this->logger->debug("oci_error:".var_export($err, true));
             }
 		}
 
@@ -620,9 +623,10 @@ WHERE OWNER = ?
                 if (!$this->database) {
                 	$err = oci_error();
                 	if ($err != false) {
-			            $GLOBALS['log']->debug("oci_error:".var_export($err, true));
+                        $this->logger->debug("oci_error:".var_export($err, true));
                 	}
-                	$GLOBALS['log']->fatal("Could not connect to server ".$configOptions['db_name']." as ".$configOptions['db_user_name'].".");
+                    $this->logger->alert("Could not connect to server " . $configOptions['db_name']
+                        . " as " . $configOptions['db_user_name'] . ".");
                 	if($dieOnError) {
                         if(isset($GLOBALS['app_strings']['ERR_NO_DB'])) {
                             sugar_die($GLOBALS['app_strings']['ERR_NO_DB']);
@@ -665,11 +669,11 @@ WHERE OWNER = ?
             }
             $this->query($session_query);
 
-		if(!$this->checkError('Could Not Connect', $dieOnError))
-			$GLOBALS['log']->info("connected to db");
+        if (!$this->checkError('Could Not Connect', $dieOnError)) {
+            $this->logger->info('connected to db');
+        }
 
-        $GLOBALS['log']->info("Connect:".$this->database);
-
+        $this->logger->info("Connect:".$this->database);
         return true;
 	}
 
@@ -680,7 +684,7 @@ WHERE OWNER = ?
      */
     public function disconnect()
     {
-    	$GLOBALS['log']->debug('Calling Oracle::disconnect()');
+        $this->logger->debug('Calling Oracle::disconnect()');
         if(!empty($this->database)){
             $this->freeResult();
             oci_close($this->database);
@@ -811,17 +815,22 @@ WHERE OWNER = ?
     }
 
     /**
-     * @see DBManager::fromConvert()
+     * {@inheritDoc}
      */
     public function fromConvert($string, $type)
     {
-        // YYYY-MM-DD HH:MM:SS
-        switch($type) {
-            case 'char': return rtrim($string, ' ');
-            case 'date': return substr($string, 0, 10);
-            case 'time': return substr($string, 11);
-		}
-		return $string;
+        switch ($type) {
+            case 'char':
+                return rtrim($string, ' ');
+
+            case 'date':
+                return substr($string, 0, 10);
+
+            case 'time':
+                return substr($string, 11);
+        }
+
+        return $string;
     }
 
     protected function isNullable($vardef)
@@ -1126,17 +1135,16 @@ WHERE OWNER = ?
         return '';
 	}
 
-	/**
-     * @see DBManager::changeColumnSQL()
-     *
-     * Oracle's ALTER TABLE syntax is a bit different from the other rdbmss
+    /**
+     * {@inheritDoc}
      */
     protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false)
     {
         $tablename = strtoupper($tablename);
         $action = strtoupper($action);
 
-        $columns = "";
+        $pre = $post = [];
+
         if ($this->isFieldArray($fieldDefs)) {
             /**
              *jc: if we are dropping columns we do not need the
@@ -1158,6 +1166,15 @@ WHERE OWNER = ?
         } else {
             $columns = $this->changeOneColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired);
 
+            if ($action == 'MODIFY') {
+                $indices = $this->getColumnFunctionalIndices($tablename, $fieldDefs['name']);
+
+                foreach ($indices as $index) {
+                    $pre[]  = $this->add_drop_constraint($tablename, $index, true);
+                    $post[] = $this->add_drop_constraint($tablename, $index);
+                }
+            }
+
             if ($action == 'DROP') {
                 $action = 'DROP COLUMN';
             }
@@ -1167,9 +1184,32 @@ WHERE OWNER = ?
             return $columns;
         }
 
-        return ($columns == '' || empty($columns))
-            ? ""
-            : "ALTER TABLE $tablename $action $columns";
+        if (!$columns) {
+            return '';
+        }
+
+        $statements = array_merge($pre, ["ALTER TABLE $tablename $action $columns"], $post);
+
+        if (count($statements) === 1) {
+            return $statements[0];
+        }
+
+        return $statements;
+    }
+
+    /**
+     * Returns definitions of functional indices which include the given column
+     *
+     * @param string $table Table name
+     * @param string $column Column name
+     *
+     * @return mixed[][]
+     */
+    public function getColumnFunctionalIndices(string $table, string $column) : array
+    {
+        return array_filter($this->get_indices($table), function (array $index) use ($column) {
+            return in_array(sprintf('upper(%s)', $column), $index['fields'], true);
+        });
     }
 
 	/**
@@ -1426,7 +1466,7 @@ LEFT JOIN all_constraints c
     {
         // Sanity check for getting columns
         if (empty($tablename)) {
-            $this->log->error(__METHOD__ . ' called with an empty tablename argument');
+            $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
         }        
 
@@ -1528,7 +1568,7 @@ LEFT JOIN all_constraints c
         // constraints as indices
         case 'unique':
             if ($drop)
-                $sql = "ALTER TABLE {$table} DROP UNIQUE ({$fields})";
+                $sql = "ALTER TABLE {$table} DROP CONSTRAINT {$name}";
             else
                 $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} UNIQUE ({$fields})";
             break;
@@ -1575,11 +1615,11 @@ LEFT JOIN all_constraints c
     }
 
     /**
-     * @see DBManager::massageFieldDef()
+     * {@inheritDoc}
      */
-    public function massageFieldDef(&$fieldDef, $tablename)
+    public function massageFieldDef(array &$fieldDef) : void
     {
-        parent::massageFieldDef($fieldDef,$tablename);
+        parent::massageFieldDef($fieldDef);
 
         if (!empty($fieldDef['len'])) {
             return;
@@ -1793,7 +1833,7 @@ LEFT JOIN all_constraints c
      */
     protected function verifyGenericQueryRollback($type, $table, $query)
     {
-        $this->log->debug("verifying $type statement");
+        $this->logger->debug("verifying $type statement");
         $stmt = oci_parse($this->database, $query);
         if(!$stmt) {
             return 'Cannot parse statement';
@@ -2033,6 +2073,15 @@ LEFT JOIN all_constraints c
     {
         $guidStart = create_guid_section(3);
       	return "'$guidStart-' || sys_guid()";
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDbRandomNumberFunction(int $min, int $max) : string
+    {
+        $max++;
+        return "FLOOR(DBMS_RANDOM.VALUE($min, $max))";
     }
 
     /**

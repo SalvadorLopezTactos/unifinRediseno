@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -95,27 +94,40 @@ if (isset($_REQUEST['offset']) or isset($_REQUEST['record'])) {
    
 //Query for opportunities won, clickthroughs
 $campaign_id = $focus->id;
-            $opp_query1  = "select camp.name, count(*) opp_count,SUM(opp.amount) as Revenue, SUM(camp.actual_cost) as Investment, 
-                            ROUND((SUM(opp.amount) - SUM(camp.actual_cost))/(SUM(camp.actual_cost)), 2)*100 as ROI";	           
-            $opp_query1 .= " from opportunities opp";
-            $opp_query1 .= " right join campaigns camp on camp.id = opp.campaign_id";
-            $opp_query1 .= " where opp.sales_status = '".Opportunity::STAGE_CLOSED_WON;
-            $opp_query1 .= "' and camp.id='$campaign_id'";
-            $opp_query1 .= " and opp.deleted=0";
-            $opp_query1 .= " group by camp.name";
-            $opp_result1=$focus->db->query($opp_query1);              
-            $opp_data1=$focus->db->fetchByAssoc($opp_result1);
-      if(empty($opp_data1['opp_count'])) $opp_data1['opp_count']=0; 
-     $smarty->assign("OPPORTUNITIES_WON",$opp_data1['opp_count']);
-          
-            $camp_query1  = "select camp.name, count(*) click_thru_link";	           
-            $camp_query1 .= " from campaign_log camp_log";
-            $camp_query1 .= " right join campaigns camp on camp.id = camp_log.campaign_id";
-            $camp_query1 .= " where camp_log.activity_type = 'link' and camp.id='$campaign_id'";
-            $camp_query1 .= " group by camp.name";
-            $opp_query1 .= " and deleted=0";                                  
-            $camp_result1=$focus->db->query($camp_query1);              
-            $camp_data1=$focus->db->fetchByAssoc($camp_result1);
+
+$query = <<<SQL
+SELECT camp.name, count(*) opp_count
+FROM opportunities opp
+RIGHT JOIN campaigns camp ON camp.id = opp.campaign_id
+WHERE opp.sales_status = ?
+AND camp.id = ? AND opp.deleted=0
+GROUP BY camp.name
+SQL;
+
+$wonOpportunities = $focus->db->getConnection()
+    ->executeQuery(
+        $query,
+        [Opportunity::STAGE_CLOSED_WON, $campaign_id]
+    )->fetch();
+
+if (empty($wonOpportunities['opp_count'])) {
+    $wonOpportunities['opp_count'] = 0;
+}
+$smarty->assign("OPPORTUNITIES_WON", $wonOpportunities['opp_count']);
+
+$query = <<<SQL
+SELECT camp.name, count(*) click_thru_link
+FROM campaign_log camp_log
+RIGHT JOIN campaigns camp ON camp.id = camp_log.campaign_id
+WHERE camp_log.activity_type = 'link' AND camp.id = ?
+GROUP BY camp.name
+SQL;
+
+$campaignsData = $focus->db->getConnection()
+    ->executeQuery(
+        $query,
+        [$campaign_id]
+    )->fetch();
             
    if(unformat_number($focus->impressions) > 0){         
     $cost_per_impression= unformat_number($focus->actual_cost)/unformat_number($focus->impressions);
@@ -125,8 +137,10 @@ $campaign_id = $focus->id;
    }
    $smarty->assign("COST_PER_IMPRESSION", SugarCurrency::formatAmountUserLocale($cost_per_impression, $focus->currency_id));
 
-   if(empty($camp_data1['click_thru_link'])) $camp_data1['click_thru_link']=0;
-   $click_thru_links = $camp_data1['click_thru_link'];
+if (empty($campaignsData['click_thru_link'])) {
+    $campaignsData['click_thru_link'] = 0;
+}
+$click_thru_links = $campaignsData['click_thru_link'];
    
    if($click_thru_links >0){
     $cost_per_click_thru= unformat_number($focus->actual_cost)/unformat_number($click_thru_links);   	

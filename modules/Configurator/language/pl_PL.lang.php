@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Serwer usługi Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Maksymalna liczba rekordów w panelu podrzędnym na stronie',
 	'LOG_MEMORY_USAGE'=>'Zapisuj zużycie pamięci w logu',
-    'LOG_SLOW_QUERIES' => 'Zapisuj wolne zapytania w logu',
+    'LOG_SLOW_QUERIES' => 'Rejestruj powolne zapytania w dzienniku',
     'LOCK_HOMEPAGE_HELP'=>'To ustawienie zapobiega:<BR> 1) dodawaniu dashletów do strony głównej, <BR>2) zmiany położenia dashletów na stronie głównej poprzez przeciąganie i upuszczanie.',
     'CURRENT_LOGO'=>'Aktualne logo:',
     'CURRENT_LOGO_HELP'=>'To logo jest wyświetlane w lewym rogu stopki aplikacji Sugar.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Wyświetl zakładkę Do pobrania',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kiedy zaznaczone, zakładka pobierania pojawi się w ustawieniach użytkownika i dostarczy użytkownikom dostęp do rozszerzeń Sugar i innych dostępnych plików',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Dla autentykacji SOAP, kiedy LDAP jest używany.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Rozszerzenie php_mcrypt musi być włączone w pliku php.ini.',
     'LBL_ALL' => 'Wszystko',
     'LBL_MARK_POINT' => 'Punkt zaznaczenia',
     'LBL_NEXT_' => 'Dalej >>',
@@ -443,6 +442,22 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Panele aktywności',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Włącz Panele aktywności',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Włącza Panele aktywności dla aplikacji',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Włącz dodatkową zawartość ekranu logowania',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatycznie zapisuj definicje procesów',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Służy do określania częstotliwości automatycznego zapisu definicji procesów w przypadku korzystania z narzędzia do projektowania',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automatycznie weryfikuj definicje procesów w trakcie automatycznego zapisywania',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Służy do włączania automatycznej weryfikacji definicji procesów podczas automatycznego zapisywania. Ustawienie działa tylko wtedy, gdy w polu „Automatycznie zapisuj definicje procesów” wprowadzono interwał',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automatycznie weryfikuj definicje procesów w trakcie importowania',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Służy do włączania automatycznej weryfikacji definicji procesów podczas pierwszego importowania',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Ustawienia dziennika komentarzy',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksymalna liczba znaków na wpis komentarza',
 );
 
 

@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Gelecek Zaman Aralıkları Oluştur',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Çalışırlık Sinyali',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent makalelerini güncelleyin.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Onaylanan makaleleri yayınla ve KB Makalelerinin süresini sonlandır.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Programlanmış İşi',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Onaylanan makaleleri ve Süresi Sona Eren KB Makalelerini yayınla.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlanmış İş',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Kontrol Et',
 'LBL_PERFORMFULLFTSINDEX' => 'Tam-Metin Arama İndeks Sistemi',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Geçici PDF dosyalarını sil',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Onaylanan makaleleri yayınla ve KB Makalelerinin süresini sonlandır.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Onaylanan makaleleri ve Süresi Sona Eren KB Makalelerini yayınla.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Zamanlayıcısı',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hata bulma aracı dosyalarını sil',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Geçici dosyaları sil',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'E-posta Hatırlatıcısı Göndermeyi çalıştır',
 'LBL_CLEANJOBQUEUE' => 'İş Kuyruğunu Temizle',
 'LBL_CLEANOLDRECORDLISTS' => 'Eski Kayıt Listesini Temizle',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Programlayıcısı',
+'LBL_PMSEENGINECRON' => 'SugarBPM Planlayıcı',
 );
 

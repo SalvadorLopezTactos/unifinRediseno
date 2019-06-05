@@ -177,14 +177,12 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
     {
         if ($this->isApplicable()) {
             $combo = new \Elastica\Query\BoolQuery();
-            $combo->addFilter($provider->createFilter('TeamSet', [
+            $combo->addShould($provider->createFilter('TeamSet', [
                 'user' => $user,
                 'module' => $this->bean->module_name,
                 'field' => 'acl_team_set_id.set',
             ]));
-            $combo->addFilter($provider->createFilter('Owner', [
-                'user_id' => $user->id,
-            ]));
+            $combo->addShould($provider->createFilter('Owner', ['user' => $user]));
             $filter->addMust($combo);
         }
     }

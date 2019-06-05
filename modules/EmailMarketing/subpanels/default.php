@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: default.php 51909 2009-10-27 18:01:09Z clee $
 $subpanel_layout = array(
 	'top_buttons' => array(
         array('widget_class' => 'SubPanelTopCreateButton'),

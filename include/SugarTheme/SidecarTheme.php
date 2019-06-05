@@ -440,7 +440,7 @@ class SidecarTheme
             'custom' => 'custom/themes/clients/' . $client . '/' . $themeName . '/',
             'cache' => sugar_cached('themes/clients/' . $client . '/' . $themeName . '/'),
             'clients' => 'styleguide/less/clients/',
-            'hashKey' => 'theme:' . $client . ':' . $themeName,
+            'hashKey' => 'theme-' . $client . '-' . $themeName,
         );
     }
 

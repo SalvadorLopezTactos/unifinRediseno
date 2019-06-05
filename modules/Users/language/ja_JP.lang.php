@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'チームにアサイン',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'レコードにデフォルトで表示されるチームは自分が所属しているチームです。',
 	'LBL_DEFAULT_TEAM'					=> 'デフォルトチーム',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'デフォルトプライマリチーム',
 	'LBL_LIST_DESCRIPTION'				=> '詳細',
 	'LBL_MY_TEAMS'						=> '私のチーム',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'プライベートチーム',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '受信者のEメールアドレス',
 	'ERR_SERVER_STATUS'					=> 'サーバの状態',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'システムはユーザにEメールを送信することができません。<a href="index.php?module=EmailMan&amp;amp;action=config">Eメールの設定</a>で送信用の設定を確認してください。',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'このユーザは<a href="{0}" target="_blank">クラウドコンソール</a>内でIDMモードの場合にのみ作成できます。',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '主のEメールアドレスは<a href="{0}" target="_blank">クラウドコンソール</a>内でIDMモードの場合にのみ更新できます。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Eメールアドレス',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'パスワードの確認',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'ユーザのタイプをシステム管理者から一般ユーザに変更しました。変更を保存すると、ユーザはシステム管理者としての権限を失います。\\n\\n「OK」をクリックして処理を進めるか\\n「キャンセル」をクリックしてレコードに戻ってください。',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'ユーザのタイプをシステム管理者から一般ユーザに変更しました。変更を保存すると、ユーザはシステム管理者としての権限を失います。\n\n「OK」をクリックして処理を進めるか\n「キャンセル」をクリックしてレコードに戻ってください。',
 	'LBL_COUNTRY'						=> '国',
 	'LBL_CURRENCY_TEXT'					=> '新しいレコードを作成する際にデフォルトで表示される通貨を選択してください。この通貨は商談一覧で金額カラムに表示される通貨となります。',
 	'LBL_CURRENCY'						=> '通貨',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> '小数点以下の桁数は、レポートの通貨と平均など、システム全体の小数などのために表示します。',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'ユーザー指定通貨の表示',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'リストおよびレコードビューで基本通貨をユーザーが指定した通貨に変換します。',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => '設定された通貨の単位で商談品目を作成します',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => '商品カタログで使用されている通貨とユーザーが設定した通貨が異なる場合、商品カタログから商談に追加された商談品目は、ユーザーが設定した通貨に換算されます。',
 	'LBL_NUMBER_GROUPING_SEP'			=> '千単位の桁区切り',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> '千単位の桁区切り文字を指定してください。',
 	'LBL_DECIMAL_SEP'					=> '小数点シンボル',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'ユーザ名とEメールアドレスの両方を指定してください。',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'これは現在使用不可です。管理者に連絡してください。',
 	'LBL_PUBLISH_KEY'					=> 'パブリッシュキー',
-
+    'LBL_SITE_USER_ID' => 'site_url および user_id のハッシュ',
     'LBL_QUOTAS'                        => 'ノルマ',
     'LBL_FORECASTS'                     => '売上予測',
     'LBL_WORKSHEETS'                    => 'ワークシート',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'ユーザプロフィール',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        '特定のフィールドを編集できない場合は、クラウドコンソールにログインしてこれらのフィールドを管理してください。',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        '編集できないフィールドを変更したい場合は、 ' .
-        '管理者に連絡してそれらの変更について伝えてください。',
+        '読み取り専用フィールドを変更したい場合は、Sugar管理者に問い合わせてください。',
 ); // END STRINGS DEFS
-
-?>

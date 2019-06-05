@@ -375,7 +375,7 @@ Ostatnia próba połączenia @ ',
 	'LBL_LDAP_GROUP_ATTR'=>'Atrybut grupy:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'Z DN użytkownika:',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Weź po uwagę DN użytkownika w atrybutach użytkownika podczas sprawdzania przynależności do grupy',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Dowolne dodatkowe parametry filtrów stosowane w celu uwierzytelniania użytkowników, np.\\nis_sugar_user=1 lub (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Dowolne dodatkowe parametry filtrów stosowane w celu uwierzytelniania użytkowników, np.\nis_sugar_user=1 lub (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atrybut logowania:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atrybut powiązania:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Do powiązania użytkowników LDAP<br>Przykłady:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
@@ -937,12 +937,21 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
     'WARN_INSTALLER_LOCKED'=>'<b>Uwaga:</b> aby zapewnić bezpieczeństwo danych, instalator musi być zablokowany przez ustawienie wartości true dla opcji installer_locked w pliku config.php.',
  	'WARN_LICENSE_EXPIRED'=> "<b>Uwaga:</b> Twoja licencja wygaśnie za ",
     'WARN_LICENSE_EXPIRED2' =>" dni. Przejdź do <a href='index.php?action=LicenseSettings&module=Administration'>Zarządzania Licencjami</a>  w Panelu administracyjnym.",
-    'WARN_LICENSE_SEATS'=>  "<b>Ostrzeżenie</b>: liczba licencji użytkowników została przekroczona o ",
-    'WARN_LICENSE_SEATS2' => ".  Skontaktuj się ze swoim przedstawicielem handlowym lub wyślij e-mail na adres <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.",
+    'WARN_LICENSE_SEATS'=>  "<b>Uwaga:</b> jest ",
+    'WARN_LICENSE_SEATS2' => " aktywnych użytkowników, podczas gdy Twoja subskrypcja pozwala na ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">Dezaktywuj niektórych użytkowników, skontaktuj się ze swoim partnerem lub przedstawicielem handlowym,"
+        . " lub napisz na adres e-mail <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Więcej informacji można znaleźć na "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Rozróżnianie typów użytkowników i licencji Sugar</a> – artykuł.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Uwaga</b>: liczba aktywnych użytkowników osiągnęła już maksymalną dozwoloną liczbę licencji: ",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Uwaga</b>: liczba aktywnych użytkowników osiągnęła już maksymalną dozwoloną liczbę licencji",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Uwaga</b>: liczba aktywnych użytkowników dozwolona przez licencje osiągnęła liczbę aktywnych użytkowników w systemie. Nie będzie możliwości tworzenia dodatkowych aktywnych użytkowników.",
-    'WARN_REPAIR_CONFIG' => '<b>Uwaga</b>: plik config.php powinien zostać naprawiony. Przejdź do skryptu <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Skonfiguruj ponownie plik konfiguracyjny</a> na stronie Naprawa w panelu administracyjnym, aby naprawić plik konfiguracyjny.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Uwaga:</b> nie będziesz mieć możliwości stworzenia dodatkowych aktywnych użytkowników."
+        . " Zakup więcej subskrypcji.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Uwaga:</b> nie będziesz mieć możliwości stworzenia dodatkowych aktywnych użytkowników."
+        . " Zakup więcej subskrypcji.",
+    'WARN_REPAIR_CONFIG' => '<b>Ostrzeżenie:</b> Plik config.php wymaga naprawy. Aby go naprawić, użyj skryptu <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Skonfiguruj ponownie plik konfiguracyjny</a> na stronie Napraw w obszarze Administrator.',
     'WARN_UPGRADE_APP'=> "Zaktualizowana wersja aplikacji jest już dostępna.",
     'WARN_UPGRADE' => '<b>Ostrzeżenie:</b> zaktualizuj ',
     'WARN_UPGRADENOTE' => 'Uwaga:',
@@ -959,7 +968,7 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Wyczyść pamięć podręczną danych vardef',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Usuwa vardef z pamięci podręcznej',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Wyczyść pamięć podręczną wyszukiwania globalnego',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Usuwa unified_search_modules.php z pamięci podręcznej',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Umożliwia usunięcie pliku unified_search_modules.php z pamięci podręcznej',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Szybka naprawa i ponowna konfiguracja',
     'LBL_QUICK_REPAIR_TITLE'=>'Wybierz moduły do naprawy:',
 	'LBL_FAILED_CONNECTION'=> 'Nie można nawiązać połączenia:',
@@ -1251,15 +1260,17 @@ Wszelkie zintegrowane funkcje bazujące na tej platformie przestaną działać.'
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Nie można znaleźć źródła metadanych.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Ustawienia',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Skonfiguruj ustawienia Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Dziennik zmian',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Uzyskaj dostęp do rejestru Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Uzyskaj dostęp do ustawień ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Zarządzanie procesami',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'Wyświetl wszystkie otwarte i uruchomione procesy w systemie.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Skonfiguruj ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' ustawienia i wyświetlaj dzienniki. Zarządzaj procesami BPM dla wszystkich użytkowników za pośrednictwem modułu zarządzania procesami.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Skonfiguruj ustawienia Advanced Workflow i wyświetlaj logi. Zarządzaj procesami BPM dla wszystkich użytkowników za pośrednictwem zarządzania procesami.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Konfiguracja ofert',
+    'LBL_MANAGE_QUOTES' => 'Skonfiguruj układ arkusza ofert',
 );

@@ -5,16 +5,9 @@ div.record div.record-cell {
     }
   }
 
-  &[data-type="fieldset"] {
-    .normal > .fieldset {
-      &:not(.edit) .fieldset-field {
-        .address_city,
-        .address_state {
-          float: right;
-          margin-right: 0;
-        }
-      }
-    }
+  :not(.edit).address_city div::after {
+    margin-left: 0;
+    margin-right: -4px;
   }
 
   [dir=ltr] {

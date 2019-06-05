@@ -1484,19 +1484,23 @@ TeamUpdaterItem.prototype._queryFunction = function () {
 };
 
 TeamUpdaterItem.prototype._openSearchMore = function (select) {
-    var that = this, zIndex, $select = jQuery(select);
+    var self = this;
+    var $select = jQuery(select);
+
     return function () {
-        zIndex = $(that.html).closest(".adam-modal").zIndex();
-        $select.select2("close");
-        $(that.html).closest(".adam-modal").zIndex(-1);
+        var zIndex = $(self.html).closest('.adam-modal').css('zIndex');
+
+        $select.select2('close');
+        $(self.html).closest('.adam-modal').css('zIndex', -1);
+
         App.drawer.open({
-                layout: "selection-list",
-                context: {module: "Teams"}
+                layout: 'selection-list',
+                context: {module: 'Teams'}
             },
             _.bind(function (drawerValues) {
-                $(that.html).closest(".adam-modal").zIndex(zIndex);
+                $(self.html).closest('.adam-modal').css('zIndex', zIndex);
                 if (!_.isUndefined(drawerValues)) {
-                    $select.select2("val", drawerValues.id, true);
+                    $select.select2('val', drawerValues.id, true);
                 }
             }, this)
         );
@@ -2731,20 +2735,23 @@ SearchUpdaterItem.prototype.getSelectedText = function() {
  * @private
  */
 SearchUpdaterItem.prototype._openSearchMore = function () {
-    var that = this, zIndex;
+    var self = this;
+
     return function () {
-        zIndex = $(that.html).closest(".adam-modal").zIndex();
-        that.select2Control.select2("close");
-        $(that.html).closest(".adam-modal").zIndex(-1);
+        var zIndex = $(self.html).closest('.adam-modal').css('zIndex');
+
+        self.select2Control.select2('close');
+        $(self.html).closest('.adam-modal').css('zIndex', -1);
+
         App.drawer.open({
-                layout: "selection-list",
-                context: that._searchMore
+                layout: 'selection-list',
+                context: self._searchMore
             },
             _.bind(function (drawerValues) {
-                $(that.html).closest(".adam-modal").zIndex(zIndex);
+                $(self.html).closest('.adam-modal').css('zIndex', zIndex);
                 if (!_.isUndefined(drawerValues)) {
-                    that.setValue(drawerValues.id, drawerValues.name);
-                    that._onChange();
+                    self.setValue(drawerValues.id, drawerValues.name);
+                    self._onChange();
                 }
             }, this)
         );

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Aktywne procesy są uruchomione dla tej Definicji procesu. Uaktualnienie jej może mieć wpływ na te procesy. Czy wciąż chcesz edytować tę Definicję procesu?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Uruchomione są aktywne procesy dla tej Definicji procesu. Uaktualnienie jej może mieć wpływ na te procesy. Czy wciąż chcesz wyłączyć tę Definicję procesu?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatycznie twórz nowy rekord definicji procesów poprzez import pliku *.bpm z systemu plików.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Prześlij plik .bpm, aby zaimportować definicję procesu.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Definicje procesów zostały pomyślnie zaimportowane do systemu.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Wybierz prawidłowy plik *.bpm.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Zaimportowano Definicję procesu, ale zawiera ona jedną lub więcej akcji Reguł biznesowych, dla których Reguły biznesowe nie zostały określone.',
+    'LBL_BPM_IMPORT_SELECT' => 'Ta definicja procesu zawiera następujące reguły biznesowe i szablony wiadomości e-mail. '
+        . 'Wybierz pliki do zaimportowania.',
+    'LBL_BUSINESS_RULES' => 'Reguły biznesowe',
+    'LBL_EMAIL_TEMPLATES' => 'Szablony wiadomości e-mail',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Cofnij',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Ponów',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Zapisz',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Weryfikuj',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Zapisz i weryfikuj',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Uruchom weryfikację, aby sprawdzić błędy',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Wydarzenie',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Usuń',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Moduł',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtruj',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Powiązane z',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kryterium',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Czas trwania',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Jednostka',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Pola',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Ocena pola modułu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduł',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Powiązane z',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Pole',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Wartość',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Ocena odpowiedzi formularza',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nie jest',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nie są równe',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Wszystkie powiązane rekordy',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Dowolne powiązane rekordy',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Czas uruchomienia',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Dodaj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zamknij',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Zespoły',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Użytkownik w module %MODULE%, który utworzył rekord',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Użytkownik w module %MODULE%, który ostatnio zmodyfikował rekord',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Użytkownik w module %MODULE%, który jest przypisany do rekordu',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Użytkownik w module %MODULE%, który był przypisany do rekordu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Użytkownik w module %MODULE%, który jest kierownikiem osoby tworzącej rekord',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Użytkownik w module %MODULE%, który jest kierownikiem osoby ostatnio modyfikującej rekord',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Użytkownik w module %MODULE%, który jest kierownikiem osoby przypisanej do rekordu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Użytkownik w module %MODULE% będący kierownikiem osoby, która była przypisana do rekordu',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% powiązane z %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Użytkownik, który utworzył %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Użytkownik, który jako ostatni modyfikował %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Użytkownik, który jest przypisany do %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Użytkownik, który został przypisany do %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Menedżer, który utworzył %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Menedżer, który jako ostatni modyfikował %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Menedżer, który jest przypisany do %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Menedżer, który został przypisany do %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rola: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'zespół: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Sugestie',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Niewłaściwa składnia wyrażenia.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Nie można użyć dwóch różnych walut w tym samym wyrażeniu.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Weryfikowanie definicji procesu: pobieranie ustawień elementu',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Weryfikowanie definicji procesu: weryfikowanie ustawień elementu',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Odświeżanie listy błędów...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Weryfikacja zakończona. Znalezione problemy: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemów',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Weryfikacja w toku',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Ostrzeżenie: proces może zostać zatrzymany na tym elemencie lub mieć inne niezamierzone skutki',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Błąd: ten proces zostanie zatrzymany na tym elemencie',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Nie można zweryfikować elementu',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Element nie spełnia minimalnej liczby przychodzących przepływów',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Ten element musi mieć minimalną liczbę ścieżek przychodzących. Sprawdź liczbę ścieżek łączących się z tym elementem, aby upewnić się, że spełniono wymóg ich minimalnej liczby.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Element przekracza maksymalną liczbę przychodzących przepływów',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Ten element ma maksymalną liczbę ścieżek przychodzących, której nie wolno przekroczyć. Sprawdź liczbę ścieżek łączących się z tym elementem, aby upewnić się, że nie przekroczono ich maksymalnej liczby.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Element nie spełnia minimalnej liczby wychodzących przepływów',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Ten element musi mieć minimalną liczbę ścieżek wychodzących. Sprawdź liczbę ścieżek wychodzących z tego elementu, aby upewnić się, że spełniono wymóg ich minimalnej liczby.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Element przekracza maksymalną liczbę wychodzących przepływów',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Ten element ma maksymalną liczbę ścieżek wychodzących, której nie wolno przekroczyć. Sprawdź liczbę ścieżek wychodzących z tego elementu, aby upewnić się, że nie przekroczono ich maksymalnej liczby.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Nie ustawiono wymaganego pola',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Ten element ma pole, które jest wymagane, ale nie zostało ustawione. Sprawdź ustawienia elementu, aby upewnić się, że pole zostało ustawione prawidłowo, a następnie kliknij przycisk „Zapisz”.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Dane nie istnieją aktualnie w systemie',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Ustawienia dotyczące tego elementu odwołują się do konkretnej części danych, która nie istnieje w bazie danych. Sprawdź ustawienia tego elementu, aby upewnić się, że wszystkie dane istnieją (tj. konkretni użytkownicy, pola modułu, zespoły itd.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Wyrażenie pola kryteriów nigdy nie będzie mieć wartości prawda',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Pola kryteriów zawierają wyrażenia logiczne AND/OR/NOT. Ten błąd oznacza, że pole kryteriów w ustawieniach elementu zostało skonfigurowane w taki sposób, że wyrażenie nigdy nie będzie mieć wartości prawda. Sprawdź pole kryteriów, aby wyeliminować sprzeczności logiczne uniemożliwiające zwrócenie wartości prawda.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Element jest nieosiągalny',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Aby element mógł być wykonany w procesie, musi mieć połączoną z nim ścieżkę. Łańcuch ścieżek prowadzących do tego elementu musi zaczynać się od elementu początkowego. Sprawdź łańcuch ścieżek przychodzących tego elementu, aby upewnić się, że zaczyna się od elementu początkowego.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Kryteria czasu oczekiwania muszą zawierać dokładnie jedną stałą daty i godziny',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Ten element oczekiwania został skonfigurowany przy użyciu pola kryteriów „Stała data”. To pole musi zawierać dokładnie jedną stałą „Data i czas” lub odwołanie do pola Data i czas. Wszystkie pozostałe części wyrażenia muszą być operatorami (+/-) lub stałymi „Przedział czasu”.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Określona wartość czasu trwania nie może wynosić zero',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Ten element oczekiwania został skonfigurowany przy użyciu ustawienia „Czas trwania”. To ustawienie nie może się równać zero. W przeciwnym razie wystąpi błąd. Sprawdź ustawienia elementu, aby upewnić się, że „Czas trwania” nie ma wartości zero.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Nie ustawiono parametrów czasu oczekiwania',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Ten element zdarzenia oczekiwania nie ma skonfigurowanych żadnych ustawień. Sprawdź ustawienia elementu, aby upewnić się, że wybrano ustawienia „Czas trwania” lub „Stała data”, wprowadź żądane wartości i kliknij przycisk „Zapisz”.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Oczekiwany czas jest mniejszy niż zero',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'W ustawieniach „Formularze” tego elementu wydarzenia oczekiwany czas jest ustawiony na wartość ujemną, co spowoduje zablokowanie procesu po osiągnięciu tego elementu. Otwórz ustawienia „Formularze” tego elementu, aby zmienić oczekiwany czas na wartość inną niż ujemna.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Typ czynności to [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Ten element działania nie ma wyznaczonego typu. Można to zmienić, klikając element działania prawym przyciskiem, a następnie wybierając typ z listy „Typ działania”.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Nie ma gwarancji, że ścieżka zostanie wybrana',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Ten komunikat o błędzie jest wyświetlany, ponieważ istnieje możliwość, że nie zostanie wybrana żadna ze ścieżek wychodzących z tego elementu bramki, co spowoduje zatrzymanie procesu. Zaleca się ustawienie domyślnej ścieżki do wyboru w przypadku niespełnienia żadnego z wyrażeń w polu kryteriów w ustawieniach elementu. Można to zrobić, klikając element bramki prawym przyciskiem, i wybierając element z menu „Domyślny przepływ”. Jeśli domyślna ścieżka nie zostanie określona, należy zmienić wyrażenia w polu kryteriów w ustawieniach elementu tak, aby zagwarantować, że przynajmniej jedno z nich zwróci wartość prawda po uruchomieniu procesu.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ bramki skupiającej jest niezgodny z typem bramki przepływu przychodzącego',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Bramki rozpraszające pozwalają rozdzielać procesy na wiele gałęzi. W przypadku korzystania z bramki skupiającej w celu ponownego skupienia tych gałęzi w jedną ścieżkę należy użyć poprawnego typu bramki skupiającej dopasowanego do typu bramki rozpraszającej użytej do utworzenia tych gałęzi. Jeśli gałęzie zostały utworzone przy użyciu wykluczających bramek rozpraszających lub bramek opartych na zdarzeniach, należy użyć wykluczającej bramki skupiającej. W przypadku gałęzi utworzonych za pomocą równoległych lub włączających bramek rozpraszających należy użyć równoległej bramki skupiającej w celu ich połączenia.',
 );

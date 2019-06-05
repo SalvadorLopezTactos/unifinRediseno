@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Създаване на бъдещи времеви периоди',
 'LBL_OOTB_HEARTBEAT' => 'Статистика на Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Актуализирай статиите от KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публикувай одобрени материали & изтичане на срока на KB материали.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Насрочена задача в Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публикуване на одобрени статии и изтекли статии в базата знания.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Планирана дейност',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Регенерирай денормализираните защитени данни за екипа',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Проверка на пощенски кутии за входяща поща',
 'LBL_PERFORMFULLFTSINDEX' => 'Индексиране на съдържанието за пълнотекстово търсене',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Премахване на временните PDF файлове',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публикувайте одобрени статии и отбележете статии в базата знания като изтекли.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публикуване на одобрени статии и изтекли статии в базата знания.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Планиране на опашка за Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Премахване на файловете на инструмента за диагностика',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Премахване на временните файлове',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Изпълни Изпращане на напомняния по имейла',
 'LBL_CLEANJOBQUEUE' => 'Изчистване на опашките от заявки',
 'LBL_CLEANOLDRECORDLISTS' => 'Изчистване на списъците със стари записи',
-'LBL_PMSEENGINECRON' => 'Автоматизирани задачи на Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Автоматизирани задачи на SugarBPM',
 );
 

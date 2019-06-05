@@ -56,7 +56,7 @@
         var evt = {},
             relate,
             self = this;
-        evt['change ' +  this.getFileNode().selector] = 'uploadFile';
+        evt['change ' + this.fileInputSelector + '[data-type=fileinput]'] = 'uploadFile';
         this.events = _.extend({}, this.events, opts.def.events, evt);
 
         this.fileInputSelector = opts.def.fileinput || '';
@@ -67,25 +67,25 @@
         this._select2formatSelectionTemplate = app.template.get('f.attachments.KBContents.selection-partial');
 
         /**
-         * Selects attachments related module.
-         */
-        if (this.model.id) {
-            relate = this.model.getRelatedCollection(this.def.link);
-            relate.fetch({
-                relate: true,
-                success: function() {
-                    if (self.disposed === true) {
-                        return;
-                    }
-                    self.render();
-                }
-            });
-        }
-
-        /**
          * Override handling on drop attachment.
          */
         this.before('attachments:drop', this._onAttachmentDrop, this);
+    },
+
+    /**
+     * Bind data changes to the field
+     * @override Base attachments field made this a noop
+     */
+    bindDataChange: function() {
+        if (this.model) {
+            this.model.on('change:' + this.name, function() {
+                if (!_.isEmpty(this.$node.data('select2'))) {
+                    this.$node.select2('data', this.getFormattedValue());
+                } else {
+                    this.render();
+                }
+            }, this);
+        }
     },
 
     /**

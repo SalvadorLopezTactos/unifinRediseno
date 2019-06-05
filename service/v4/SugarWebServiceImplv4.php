@@ -49,7 +49,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
         $authController = AuthenticationController::getInstance();
 
         if (!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' &&
-            $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser" &&
             !$authController->authController instanceof IdMLDAPAuthenticate &&
             !$authController->authController instanceof OAuth2Authenticate) {
             $user_auth['password'] = md5($user_auth['password']);
@@ -89,19 +88,16 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        } elseif (extension_loaded('mcrypt')
-            && (!empty($authController->authController->userAuthenticateClass)
-                && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
-                $authController->authController instanceof IdMLDAPAuthenticate)
-            && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN')) {
+        } elseif ($authController->authController instanceof IdMLDAPAuthenticate
+            && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN')
+        ) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             $authController->loggedIn = false; // reset login attempt to try again with decrypted password
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))
                 $success = true;
-        } elseif ((!empty($authController->authController->userAuthenticateClass)
-                && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
-                $authController->authController instanceof IdMLDAPAuthenticate)
-                 && (empty($user_auth['encryption']) || $user_auth['encryption'] == 'PLAIN' )) {
+        } elseif ($authController->authController instanceof IdMLDAPAuthenticate
+            && (empty($user_auth['encryption']) || $user_auth['encryption'] == 'PLAIN')
+        ) {
         	$authController->loggedIn = false; // reset login attempt to try again with md5 password
         	if($authController->login($user_auth['user_name'], md5($user_auth['password']), array('passwordEncrypted' => true))
         		&& isset($_SESSION['authenticated_user_id']))

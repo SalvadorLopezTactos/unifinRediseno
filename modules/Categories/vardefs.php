@@ -84,6 +84,7 @@ $dictionary['Category'] = array(
     ),
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

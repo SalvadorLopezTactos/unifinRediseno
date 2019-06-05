@@ -13,7 +13,7 @@
 /***CONFIGURATOR***/
 $sugar_config['passwordsetting']['onespecial'] = '0';
 $sugar_config['passwordsetting']['systexpirationtype'] = '1';
-$sugar_config['authenticationClass'] = 'SAMLAuthenticate';
+$sugar_config['authenticationClass'] = 'IdMSAMLAuthenticate';
 $sugar_config['SAML_loginurl'] = 'http://saml-server/simplesaml/saml2/idp/SSOService.php';
 $sugar_config['SAML_SLO'] = 'http://saml-server/simplesaml/saml2/idp/SingleLogoutService.php';
 $sugar_config['SAML_idp_entityId'] = 'http://saml-server/simplesaml/saml2/idp/metadata.php';
@@ -48,4 +48,5 @@ $sugar_config['SAML_issuer'] = 'samlSameWindowRedirect';
 $sugar_config['SAML']['strict'] = true;
 $sugar_config['site_url'] = 'http://behat-tests-mango-saml-same-window';
 $sugar_config['verify_client_ip'] = false;
+$sugar_config['logger']['channels']['authentication'] = array('level' => 'debug', 'processors' => ['backtrace']);
 /***CONFIGURATOR***/

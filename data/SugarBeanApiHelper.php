@@ -26,12 +26,13 @@ class SugarBeanApiHelper
     }
 
     /**
-     * Formats the bean so it is ready to be handed back to the API's client. Certian fields will get extra processing
-     * to make them easier to work with from the client end.
+     * Formats the bean so it is ready to be handed back to the API's client.
+     * Certain fields will get extra processing to make them easier to work with
+     * from the client end.
      *
-     * @param $bean SugarBean The bean you want formatted
-     * @param $fieldList array Which fields do you want formatted and returned (leave blank for all fields)
-     * @param $options array Currently no options are supported
+     * @param SugarBean $bean The bean you want formatted
+     * @param array $fieldList Which fields do you want formatted and returned (leave blank for all fields)
+     * @param array $options
      * @return array The bean in array format, ready for passing out the API to clients.
      */
     public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array())
@@ -66,6 +67,9 @@ class SugarBeanApiHelper
                 if (isset($bean->$fieldName)  || $type == 'relate') {
                      $field->apiFormatField($data, $bean, $options, $fieldName, $properties, $fieldList, $this->api);
                 }
+
+                // handle any field-specific ACL rules
+                $field->processAdditionalAcls($data, $bean, $fieldName, "read", $properties, $this->api);
             }
 
             // mark if its a favorite
@@ -253,7 +257,8 @@ class SugarBeanApiHelper
         // check ACLs first
         $acl = !empty($options['acl']) ? $options['acl'] : 'save';
         foreach ($bean->field_defs as $fieldName => $properties) {
-            if ( !isset($submittedData[$fieldName]) ) {
+            if (!isset($submittedData[$fieldName])
+                || (isset($properties['default']) && $properties['default'] == $submittedData[$fieldName])) {
                 // They aren't trying to modify this field
                 continue;
             }

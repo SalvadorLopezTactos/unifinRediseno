@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'krijo periudha kohore te ardhshme',
 'LBL_OOTB_HEARTBEAT' => 'Rrahja e zemrës së Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Përditëso artikujt KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiko artikujt e miratuar dhe artikujt e përfunduar të bazës së njohurive.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Punë e planifikuar e "Advanced Workflow"',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiko artikujt e miratuar dhe artikujt e skaduar të bazës së njohurive.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Punë e planifikuar',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'Kontrollo llogaritë e maileve të drejtuara për brenda',
 'LBL_PERFORMFULLFTSINDEX' => 'Kërkimi i tekstit të plotë në sistemin e indeksit',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'Hiq skedarët e përkohshëm PDF',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiko artikujt e miratuar dhe artikujt e përfunduar të bazës së njohurive.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiko artikujt e miratuar dhe artikujt e skaduar të bazës së njohurive.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planifikuesi i radhës së kërkimit elastik',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hiq skedarët e mjetit diagnostikues',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Hiq skedarët e përkohshëm',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Aktivizo dërgimin e rikujtesave me email',
 'LBL_CLEANJOBQUEUE' => 'Pastrim i punës së reshtit',
 'LBL_CLEANOLDRECORDLISTS' => 'Pastro listat e vjetra të regjistrimit',
-'LBL_PMSEENGINECRON' => 'Planifikuesi i "Advanced Workflow"',
+'LBL_PMSEENGINECRON' => 'Planifikuesi i SugarBPM',
 );
 

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: logic_utils.php 45763 2009-04-01 19:16:18Z majed $
 use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Mvc\ModuleName;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;

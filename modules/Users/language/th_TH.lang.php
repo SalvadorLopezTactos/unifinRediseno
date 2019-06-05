@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'ระบุให้ทีม',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'ทีมที่ปรากฏเป็นค่าเริ่มต้นในระเบียนจะเป็นทีมที่คุณเป็นสมาชิก',
 	'LBL_DEFAULT_TEAM'					=> 'ทีมเริ่มต้น',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'ทีมหลักเริ่มต้น',
 	'LBL_LIST_DESCRIPTION'				=> 'คำอธิบาย',
 	'LBL_MY_TEAMS'						=> 'ทีมของฉัน',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'ทีมส่วนตัวสำหรับ',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'ที่อยู่อีเมลของผู้รับ',
 	'ERR_SERVER_STATUS'					=> 'สถานะเซิร์ฟเวอร์ของคุณ',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'ระบบไม่สามารถส่งอีเมลถึงผู้ใช้ โปรดตรวจสอบการกำหนดค่าอีเมลขาออกใน <a href="index.php?module=EmailMan&action=config">การตั้งค่าอีเมล</a>',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'สำหรับโหมด IDM สามารถสร้างผู้ใช้ใน<a href="{0}" target="_blank">ระบบคอนโซลคลาวด์</a>เท่านั้น',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'สำหรับโหมด IDM ที่อยู่อีเมลหลักจะสามารถอัปเดตได้ใน<a href="{0}" target="_blank">ระบบคอนโซลคลาวด์</a>เท่านั้น',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'ที่อยู่อีเมล',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'ยืนยันรหัสผ่าน',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'คุณเปลี่ยนประเภทผู้ใช้จากผู้ดูแลระบบเป็นผู้ใช้ทั่วไป หลังจากบันทึกการเปลี่ยนแปลงนี้ ผู้ใช้จะไม่มีสิทธิ์ของผู้ดูแลระบบอีก\\n\\nคลิกที่ตกลงเพื่อดำเนินการต่อ\\nคลิกที่ยกเลิกเพื่อกลับไปที่ระเบียน',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'คุณเปลี่ยนประเภทผู้ใช้จากผู้ดูแลระบบเป็นผู้ใช้ทั่วไป หลังจากบันทึกการเปลี่ยนแปลงนี้ ผู้ใช้จะไม่มีสิทธิ์ของผู้ดูแลระบบอีก\n\nคลิกที่ตกลงเพื่อดำเนินการต่อ\nคลิกที่ยกเลิกเพื่อกลับไปที่ระเบียน',
 	'LBL_COUNTRY'						=> 'ประเทศ',
 	'LBL_CURRENCY_TEXT'					=> 'นี่คือสกุลเงินที่ใช้ในมุมมองรายการและระเบียนถ้าเปิดใช้งาน "แสดงสกุลเงินที่ต้องการ" ไว้ และยังเป็นสกุลเงินเริ่มต้นสำหรับระเบียนใหม่ด้วยเช่นกัน',
 	'LBL_CURRENCY'						=> 'สกุลเงินที่ต้องการ',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'จำนวนตำแหน่งทศนิยมที่จะแสดงสำหรับเลขฐานสิบและเลขทศนิยมทั้งระบบ เช่น สกุลเงินและค่าเฉลี่ยในรายงาน',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'แสดงสกุลเงินที่ต้องการ',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'แปลงสกุลเงินหลักเป็นสกุลเงินที่ผู้ใช้ต้องการในมุมมองรายการและระเบียน',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'สร้างไลน์สินค้าทำรายได้ในสกุลเงินที่เลือก',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'ไลน์สินค้าทำรายได้ที่ถูกเพิ่มไปยัง โอกาสการขาย จากแคตตาล็อกสินค้าจะถูกแปลงสกุลเงินเป็นสกุลที่ผู้ใช้เลือก หากสกุลเงินที่ผู้ใช้เลือกนั้นแตกต่างจากสกุลเงินที่ใช้ในแคตตาล็อกสินค้า',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'ตัวคั่นหลักพัน',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'อักขระที่ใช้คั่นหลักพัน',
 	'LBL_DECIMAL_SEP'					=> 'สัญลักษณ์ทศนิยม',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'ระบุชื่อผู้ใช้และที่อยู่อีเมลที่ถูกต้องทั้งสองรายการ',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'ไม่ได้เปิดใช้งานในขณะนี้ โปรดติดต่อผู้ดูแลระบบของคุณ',
 	'LBL_PUBLISH_KEY'					=> 'เผยแพร่คีย์',
-
+    'LBL_SITE_USER_ID' => 'แฮชของเว็บไซต์_url และ id_ผู้ใช้',
     'LBL_QUOTAS'                        => 'โควตา',
     'LBL_FORECASTS'                     => 'ประมาณการ',
     'LBL_WORKSHEETS'                    => 'เวิร์กชีท',
@@ -633,10 +633,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'โปรไฟล์ผู้ใช้',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'หากมีบางช่องที่ไม่สามารถทำการแก้ไขได้ กรุณาลงชื่อเข้าใช้สู่ระบบคอนโซลคลาวด์เพื่อจัดการช่องเหล่านี้',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'หากคุณต้องการที่จะทำการเปลี่ยนแปลงช่องบางช่องที่ไม่สามารถแก้ไขได้ ' .
-        'กรุณาติดต่อผู้ดูแลระบบเพื่อแจ้งการเปลี่ยนแปลงเหล่านั้น',
+        'กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณ ถ้าคุณต้องการทำการเปลี่ยนแปลงลงในช่องที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
 ); // END STRINGS DEFS
-
-?>

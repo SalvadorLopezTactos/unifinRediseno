@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Drejtuar grupit',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Grupet që mund të shfaqen të gabuara në regjistrime janë ato tek të cilët ju jeni anëtar.',
 	'LBL_DEFAULT_TEAM'					=> 'Grupe të gabuara',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Grupi i parazgjedhur primar',
 	'LBL_LIST_DESCRIPTION'				=> 'Përshkrim',
 	'LBL_MY_TEAMS'						=> 'Grupet e mia',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Grup privat për',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email adresa e pranuesit',
 	'ERR_SERVER_STATUS'					=> 'Statusin e serverit tuaj',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemi nuk është në gjendje të dërgoj email përdoruesit. Ju luemi kontrolloni Konfigurimin e Maileve dalëse në Parametrat e Emailit.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Përdoruesi mund të përdoret vetëm në <a href="{0}" target="_blank">Cloud console</a> për modalitetin IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Adresa kryesore e emailit mund të përditësohet vetëm në <a href="{0}" target="_blank">Cloud console</a> për modalitetin IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email adresa',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Konfirmo fjalëkalimin',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Ju keni ndryshuar llojin e përdoruesit nga Sistemi i Administratorit të Përdoruesit për përdoruesin e rregullt. Pas ruajtjes së këtij ndryshimi, përdoruesit nuk do të ketë privilegje nga sistemi i administratorit.\\n\\n Klikoni OK për të vazhduar.\\nKlikoni Anulo për t$#39;u kthyer në regjistrimin.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Ju keni ndryshuar llojin e përdoruesit nga Sistemi i Administratorit të Përdoruesit për përdoruesin e rregullt. Pas ruajtjes së këtij ndryshimi, përdoruesit nuk do të ketë privilegje nga sistemi i administratorit.\n\n Klikoni OK për të vazhduar.\nKlikoni Anulo për t$#39;u kthyer në regjistrimin.',
 	'LBL_COUNTRY'						=> 'Shteti',
 	'LBL_CURRENCY_TEXT'					=> 'Selektoni valutën që do të shfaqet nga parazgjedhja kur ju do të krijoni regjistrimet e reja. Kjo është gjithashtu valuta që do të shfaqet në shumën e shtyllave për mundësinë e pamjes së listës.',
 	'LBL_CURRENCY'						=> 'monedha',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Numri i pas presjes dhjetore për të treguar për decimale dhe gjithandej në të gjithë sistemin, të tilla si monedhe dhe mesatarja në Raportet.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'LBL_VALUTE_SHFAQJE_PREFERENCE',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'LBL_VALUTE_SHFAQJE_PREFERENCE_TEKST',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Krijoni artikuj të linjës së të ardhurave në monedhën e preferuar',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Artikujt e linjës së të ardhurave të shtuar në një "Mundësi" nga katalogu i produkteve do të konvertohet në monedhën e preferuar të përdoruesit nëse ndryshon nga monedha e përdorur në artikullin e katalogut të produktit.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000s separator',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Karakteri që përdoret për të ndarë mijëshin.',
 	'LBL_DECIMAL_SEP'					=> 'Simboli decimal',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Mundëso emër përdoruesi dhe email adresë.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Aktualisht kjo nuk është aktivizuar. Ju lutemi kontaktoni administratorin tuaj.',
 	'LBL_PUBLISH_KEY'					=> 'Çelësi i publikimit',
-
+    'LBL_SITE_USER_ID' => 'Hashi i site_url dhe user_id',
     'LBL_QUOTAS'                        => 'Kuotat',
     'LBL_FORECASTS'                     => 'Parashikimet',
     'LBL_WORKSHEETS'                    => 'fletët e punës',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profili i përdoruesit',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Nëse disa fusha nuk modifikohen, identifikohu në Cloud Console për t&#39;i menaxhuar ato',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Nëse dëshiron të ndryshosh disa fusha që nuk modifikohen, ' .
-        'kontakto administratorin për ta njoftuar për këto ndryshime',
+        'Kontakto administratorin e Sugar nëse dëshiron të bësh ndryshime te fushat vetëm për lexim.',
 ); // END STRINGS DEFS
-
-?>

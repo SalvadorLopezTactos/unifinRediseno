@@ -7,7 +7,7 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-@ldap @login @local
+@ldap @login @local @extended
 Feature: Mixed LDAP and Local authentication
   User with "LDAP auth only" should be able to login with LDAP, but not with Local credentials.
   User without "LDAP auth only" should be able to login both with LDAP and Local credentials.

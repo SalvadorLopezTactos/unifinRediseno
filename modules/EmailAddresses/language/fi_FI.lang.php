@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Poistettu',
     'LBL_MODULE_NAME' => 'Sähköpostiosoitteet',
     'LBL_MODULE_NAME_SINGULAR' => 'Sähköpostiosoite',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Vahvistuspyyntö toiminto suoritettu',
+    'LBL_CONFIRMATION_TITLE' => 'Kiitos',
+    'LBL_CONFIRMATION_MESSAGE' => 'Tilauksesi on vahvistettu. Sinut on lisätty luetteloomme ja kuulet meistä pian.',
 );

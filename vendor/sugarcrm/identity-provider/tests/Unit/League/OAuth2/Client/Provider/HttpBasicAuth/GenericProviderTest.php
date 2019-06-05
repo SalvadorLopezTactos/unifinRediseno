@@ -12,18 +12,79 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\League\OAuth2\Client\Provider\HttpBasicAuth;
 
+use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Grant\ClientCredentials;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\RequestInterface;
 use Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider;
 use League\OAuth2\Client\Tool\RequestFactory;
 use Monolog\Logger;
+use GuzzleHttp\ClientInterface;
 
 /**
  * @coversDefaultClass Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider
  */
 class GenericProviderTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|Logger
+     */
+    protected $logger;
+
+    /**
+     * @var array
+     */
+    protected $options;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactory
+     */
+    protected $requestFactory;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|RequestInterface
+     */
+    protected $request;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|ResponseInterface
+     */
+    protected $response;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface
+     */
+    protected $httpClient;
+
+    /**
+     * GenericProviderTest constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->logger = $this->createMock(Logger::class);
+
+        $this->requestFactory = $this->createMock(RequestFactory::class);
+        $this->request = $this->createMock(RequestInterface::class);
+        $this->response = $this->createMock(ResponseInterface::class);
+        $this->httpClient = $this->createMock(ClientInterface::class);
+
+        $this->options = [
+            'clientId' => 'test',
+            'clientSecret' => 'testSecret',
+            'redirectUri' => '',
+            'urlAuthorize' => 'http://testUrlAuth',
+            'urlAccessToken' => 'http://testUrlAccessToken',
+            'urlResourceOwnerDetails' => 'http://testUrlResourceOwnerDetails',
+            'urlIntrospectToken' => 'http://testUrlIntrospectToken',
+            'accessTokenFile' => '/tmp/bar.php',
+            'accessTokenRefreshUrl' => 'http://some-refresh-url',
+            'logger' => $this->logger
+        ];
+    }
+
     /**
      * @covers ::getRequiredOptions
      * @expectedException \InvalidArgumentException
@@ -179,5 +240,83 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
         $result = $provider->introspectToken($accessToken);
 
         $this->assertEquals($expectedResult, $result);
+    }
+
+    /**
+     * @covers ::refreshAccessToken
+     */
+    public function testRefreshAccessTokenNoAccessTokenRefreshUrl()
+    {
+        $options = $this->options;
+        $options['accessTokenRefreshUrl'] = null;
+        /** @var \PHPUnit_Framework_MockObject_MockObject|GenericProvider $provider */
+        $provider = new GenericProvider($options);
+
+        $this->logger->expects($this->once())
+            ->method('warning')
+            ->with($this->stringContains("trigger access_token refresh"), $this->isType('array'));
+
+        $this->assertFalse($provider->refreshAccessToken());
+    }
+
+    /**
+     * @covers ::refreshAccessToken
+     */
+    public function testRefreshAccessTokenSendRequestFailed()
+    {
+        $provider = new GenericProvider($this->options);
+
+        $provider->setRequestFactory($this->requestFactory);
+        $this->requestFactory->expects($this->once())
+            ->method('getRequestWithOptions')
+            ->with(
+                GenericProvider::METHOD_GET,
+                $this->options['accessTokenRefreshUrl'],
+                ['timeout' => 0.00001]
+            )
+            ->willReturn($this->request);
+
+        $provider->setHttpClient($this->httpClient);
+        $this->httpClient->expects($this->once())
+            ->method('send')
+            ->with($this->request)
+            ->willThrowException(new \Exception('test'));
+
+        $this->logger->expects($this->once())
+            ->method('warning')
+            ->with($this->stringContains("test"), $this->isType('array'));
+
+        $this->assertFalse($provider->refreshAccessToken());
+    }
+
+    /**
+     * @covers ::refreshAccessToken
+     */
+    public function testRefreshAccessToken()
+    {
+        $provider = new GenericProvider($this->options);
+
+        $provider->setRequestFactory($this->requestFactory);
+        $this->requestFactory->expects($this->once())
+            ->method('getRequestWithOptions')
+            ->with(
+                GenericProvider::METHOD_GET,
+                $this->options['accessTokenRefreshUrl'],
+                ['timeout' => 0.00001]
+            )
+            ->willReturn($this->request);
+
+        $provider->setHttpClient($this->httpClient);
+
+        $this->httpClient->expects($this->once())
+            ->method('send')
+            ->with($this->request)
+            ->willReturn($this->response);
+
+        $this->logger->expects($this->once())
+            ->method('debug')
+            ->with("The access_token is refreshed.", $this->isType('array'));
+
+        $this->assertTrue($provider->refreshAccessToken());
     }
 }

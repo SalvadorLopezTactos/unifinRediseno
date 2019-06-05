@@ -112,6 +112,12 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                     'readonly'      => true,
                 ),
                 array(
+                    'name' => 'favorite',
+                    'label' => 'LBL_FAVORITE',
+                    'type' => 'favorite',
+                    'dismiss_label' => true,
+                ),
+                array(
                     'name' => 'name',
                 )
             )

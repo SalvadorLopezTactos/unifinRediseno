@@ -1,4 +1,7 @@
 /*
+ * @deprecated
+ */
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -24,6 +27,7 @@
          * @member SUGAR.analytics.connectors.GoogleAnalytics
          */
         initialize: function() {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.initialize() is deprecated and will be removed in a future Sugar release.");
             // this code is taken directly from Google's analytics.js API
             // https://developers.google.com/analytics/devguides/collection/analyticsjs/advanced
             /* jshint ignore:start */
@@ -43,6 +47,7 @@
          * @member SUGAR.analytics.connectors.GoogleAnalytics
          */
         start: function (id, options) {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.start() is deprecated and will be removed in a future Sugar release.");
             options.gaOptions = options.gaOptions || {};
             _.defaults(options.gaOptions, {
                 cookieDomain: 'none',
@@ -63,6 +68,7 @@
          * @member SUGAR.analytics.connectors.GoogleAnalytics
          */
         trackPageView: function(pageUri) {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.trackPageView() is deprecated and will be removed in a future Sugar release.");
             ga('send', 'pageview', pageUri);
         },
         /* trackEvent()
@@ -77,6 +83,7 @@
          * @member SUGAR.analytics.connectors.GoogleAnalytics
          */
         trackEvent: function(event) {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.trackEvent() is deprecated and will be removed in a future Sugar release.");
             ga('send', 'event', event.category, event.action, event.label, event.value);
         },
 
@@ -86,6 +93,7 @@
          * @param {Mixed} value The value to send to the tracker.
          */
         set: function(key, value) {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.set() is deprecated and will be removed in a future Sugar release.");
             ga('set', key, value);
         },
 
@@ -97,6 +105,7 @@
          * Reference: https://support.google.com/analytics/answer/2763052
          */
         enableIPAnonymization: function() {
+            SUGAR.App.logger.warn("The method App.analytics.connectors.GoogleAnalytics.enableIPAnonymization() is deprecated and will be removed in a future Sugar release.");
             this.set('anonymizeIp', true);
         }
     };

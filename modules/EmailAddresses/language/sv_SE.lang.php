@@ -28,4 +28,7 @@ $mod_strings = array (
     'LBL_DELETED' => 'Radera',
     'LBL_MODULE_NAME' => 'E-postadresser',
     'LBL_MODULE_NAME_SINGULAR' => 'E-postadress',
+    'LBL_CONFIRMATION_REQUESTED_ON' => 'Bekräftelseförfrågan gjord',
+    'LBL_CONFIRMATION_TITLE' => 'Tack',
+    'LBL_CONFIRMATION_MESSAGE' => 'Din prenumeration har bekräftats. Du har lagts till vår lista och vi kommer att kontakta dig inom kort.',
 );

@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'指派至：',
   'LBL_ASSIGNED_TO_NAME' => '使用者：',  	  
   'LBL_WORK_LOG' => '工作記錄：',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => '建立人：',
   'LBL_DATE_CREATED' => '建立日期：',
   'LBL_DATE_ENTERED' => '建立日期：',

@@ -60,7 +60,9 @@ class CaseEmailsLink extends ArchivedEmailsBeanLink
             $this->focus->load_relationship($relation);
             $inside = $this->getEmailsSubquery($relation);
             $join = "INNER JOIN ( SELECT email_id, MIN(source) sources FROM ($inside) email_ids2 GROUP BY email_id ) email_ids ON $table_name.id=email_ids.email_id";
-            $join .= " AND (email_ids.sources = 1 OR {$table_name}.name LIKE '%$where%')";
+            $join .= " AND (email_ids.sources = 1 OR {$table_name}.name LIKE "
+                . $this->focus->db->quoted("%{$where}%")
+                . ')';
             return $join;
         } else {
             return parent::getEmailsJoin($params);

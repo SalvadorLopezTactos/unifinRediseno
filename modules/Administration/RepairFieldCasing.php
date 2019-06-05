@@ -41,8 +41,15 @@ if(is_admin($current_user)) {
 
            foreach($entries as $original_col_name=>$entry) {
                echo '<br>'. string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_FIELD_META_DATA'], array($entry['name']));
-           	   $update_sql = "UPDATE fields_meta_data SET id = '" . $entry['custom_module'] . strtolower($entry['name']) . "', name = '" . strtolower($entry['name']) . "' WHERE id = '" . $entry['id'] . "'";
-           	   $GLOBALS['db']->query($update_sql);
+                $GLOBALS['db']->getConnection()
+                    ->update(
+                        'fields_meta_data',
+                        [
+                            'id' => $entry['custom_module'] . strtolower($entry['name']),
+                            'name' => strtolower($entry['name']),
+                        ],
+                        ['id' => $entry['id']]
+                    );
 
            	   echo '<br>'. string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_CUSTOM_TABLE'], array($entry['name'], $table_name));
 

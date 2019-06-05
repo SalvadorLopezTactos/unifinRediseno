@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'다운로드 탭 전시',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'선택시 사용자 설정에 다운로드 탭이 나타나며 Sugar 플러그인과 다른 사용 가능한 파일을 사용자에 제공합니다.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'LDAP사용시 SOAP 인증',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt 확장은 반드시 귀하의 php.ini 파일에서 작동되어야 합니다.',
     'LBL_ALL' => '전체',
     'LBL_MARK_POINT' => '표시점',
     'LBL_NEXT_' => '다음',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '활동 스트림',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '활동 스트림 활성화',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '이 앱에서 활동 스트림 켜기',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => '추가 로그인 화면 컨텐츠 사용',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '자동 저장 프로세스 정의',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => '디자이너를 사용할 때 프로세스 정의를 자동 저장할 기간을 결정합니다.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => '자동 저장의 자동 확인 프로세스 정의',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => '자동 저장 시 프로세스 정의를 자동으로 확인할지 여부를 토클합니다. "자동 저장 프로세스 정의"가 시간 간격으로 설정된 경우에만 유효합니다.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => '가져올 때 자동 확인 프로세스 정의',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => '처음으로 가져올 때 프로세스 정의를 자동으로 확인할지 여부를 토글합니다.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => '코멘트 로그 설정',
+    'LBL_COMMENT_LOG_MAX_CHARS' => '코멘트 항목마다 표시할 최대 글자 수',
 );
 
 

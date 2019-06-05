@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Töövoo definitsioonid',
   'LBL_MODULE_NAME_SINGULAR' => 'Töövoo definitsioon',
-  'LBL_MODULE_ID' => 'Töövoog',  
+  'LBL_MODULE_ID' => 'Töövoog',
   'LBL_MODULE_TITLE' => 'Töövoog: avaleht',
   'LBL_SEARCH_FORM_TITLE' => 'Töövoo otsing',
   'LBL_LIST_FORM_TITLE' => 'Töövoo loend',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Eesmärgi moodul:',
   'LBL_LIST_ORDER' => 'Töötle tellimust:',
   'LBL_FROM_NAME' => 'Nime alt:',
-  'LBL_FROM_ADDRESS' => 'Aadressilt:',  
+  'LBL_FROM_ADDRESS' => 'Aadressilt:',
   'LNK_NEW_WORKFLOW' => 'Loo töövoo definitsioon',
-  'LNK_WORKFLOW' => 'Loendi töövoo defintsioonid', 
-  
-  
+  'LNK_WORKFLOW' => 'Loendi töövoo defintsioonid',
+
+
   'LBL_ALERT_TEMPLATES' => 'Teavituse mallid',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Loo teavituse mall:',
   'LBL_SUBJECT' => 'Teema:',
-  
+
   'LBL_RECORD_TYPE' => 'Kehtib:',
  'LBL_RELATED_MODULE'=> 'Seotud moodul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Töövoo jada',
 	'LNK_ALERT_TEMPLATES' => 'Teavituse e-kirja mallid',
 	'LNK_PROCESS_VIEW' => 'Töövoo jada',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tüüp',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Märkus.</strong> Sugari tulevases väljalaskes eemaldatakse Sugari töövoo ja töövoo halduse funktsioon. Sugar Enterprise’i väljaande kliendid saavad hakata kasutama Sugari täiustatud töövoo funktsiooni. Lisateabe saamiseks klõpsake <a href="http://www.sugarcrm.com/wf-eol" target="_blank">siin</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Märkus.</strong> Sugari töövoo ja töövoo halduse funktsioon on hooldusrežiimis. Väljaande Sugar Enterprise kliendid peaksid kasutama SugarBPM<sup class="trademark">TM</sup>-i funktsioone.',
 );
 

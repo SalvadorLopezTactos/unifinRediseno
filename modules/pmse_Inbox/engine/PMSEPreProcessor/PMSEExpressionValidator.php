@@ -34,6 +34,13 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
         $flowData = $request->getFlowData();
         if ($flowData['evn_id'] != 'TERMINATE') {
             $paramsRelated = $this->validateParamsRelated($bean, $flowData, $request);
+
+            // If there is a need to update the relate criteria, do that here
+            if (!empty($paramsRelated['updateRelateCriteria'])) {
+                $flowData = $this->updateRelateCriteria($flowData, $request);
+                unset($paramsRelated['updateRelateCriteria']);
+            }
+
             if ($request->isValid()) {
                 $this->validateExpression($bean, $flowData, $request, $paramsRelated);
             }
@@ -52,14 +59,26 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function validateExpression($bean, $flowData, $request, $paramsRelated = array())
     {
-        // Empty criteria is valid
-        $valid = $flowData['evn_criteria'] === '' || $flowData['evn_criteria'] === '[]';
+        // Start with trimming our criteria for evaluation
+        $criteria = trim($flowData['evn_criteria']);
 
-        // Now check if the evaluation is valid as well
-        if ($valid || $this->getEvaluator()->evaluateExpression(trim($flowData['evn_criteria']), $bean, $paramsRelated)) {
+        // Empty criteria is valid
+        $valid = $criteria === '' || $criteria === '[]';
+
+        // If there is no criteria, we are valid straight away
+        if ($valid) {
             $request->validate();
         } else {
-            $request->invalidate();
+            // If we need to evaluate the criteria then we need to check for if
+            // this is an update to handle changes/to/from
+            $criteria = $this->validateUpdateState($criteria, $request->getArguments());
+
+            // Now check if the evaluation is valid as well
+            if ($this->getEvaluator()->evaluateExpression($criteria, $bean, $paramsRelated)) {
+                $request->validate();
+            } else {
+                $request->invalidate();
+            }
         }
 
         $condition = $this->getEvaluator()->condition();
@@ -78,12 +97,21 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
     {
         $paramsRelated = array();
         if ($request->getExternalAction() == 'EVALUATE_RELATED_MODULE') {
+            // If this expression is for a waiting event with criteria on a related
+            // record then evaluation is different when doing an ANY or ALL criteria
+            // evaluation. In this case the bean needs to be the target bean and
+            // we should NOT replace any fields.
             if ($this->hasValidRelationship($bean, $flowData)) {
-                $paramsRelated = array(
-                    'replace_fields' => array(
-                        $flowData['rel_element_relationship'] => $flowData['rel_element_module']
-                    )
-                );
+                // Check if this is an ANY or ALL type operation
+                if ($this->hasAnyOrAllTypeOperation(trim($flowData['evn_criteria']))) {
+                    $paramsRelated['updateRelateCriteria'] = true;
+                } else {
+                    $paramsRelated = array(
+                        'replace_fields' => array(
+                            $flowData['rel_element_relationship'] => $flowData['rel_element_module'],
+                        ),
+                    );
+                }
             } else {
                 $request->invalidate();
             }
@@ -137,6 +165,10 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
 
         // We don't need the entire retrieved bean for this operation...
         $seedBean = BeanFactory::newBean($flowData['cas_sugar_module']);
+
+        if (is_null($seedBean)) {
+            return false;
+        }
 
         // We just need the ID to be able to check relationships
         $seedBean->id = $flowData['cas_sugar_object_id'];

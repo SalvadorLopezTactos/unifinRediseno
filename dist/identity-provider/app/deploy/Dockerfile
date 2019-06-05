@@ -7,10 +7,11 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-FROM php:7.1-apache
+FROM php:7.2-apache-stretch
 
 RUN apt-get update && apt-get install -y \
-        libmcrypt-dev \
+        zlib1g-dev \
+        libzip-dev \
         libxml2-dev \
         libssl-dev \
         libldap2-dev \
@@ -21,10 +22,14 @@ RUN apt-get update && apt-get install -y \
         --no-install-recommends \
     && ln -fs /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/ \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-    && docker-php-ext-install mcrypt zip mysqli pdo_mysql \
     && docker-php-ext-configure ldap --with-ldap-sasl --with-ldap \
-    && docker-php-ext-install ldap \
-    && docker-php-ext-install gmp \
+    && docker-php-ext-install zip mysqli pdo_mysql gmp ldap \
+    && pecl install apcu \
+    && pecl install apcu_bc \
+    && pecl install grpc \
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
+    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini \
+    && docker-php-ext-enable grpc \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o \
     APT::AutoRemove::SuggestsImportant=false
 
@@ -41,6 +46,8 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 RUN composer install
 RUN app/deploy/prepare.sh
+ARG DEV=false
+RUN if [ "$DEV" != "true" ] ; then app/deploy/cleanup.sh ; fi
 RUN set -ex \
     && . "$APACHE_ENVVARS" \
     && chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" /var/www/html/var

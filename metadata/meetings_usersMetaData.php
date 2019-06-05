@@ -16,17 +16,14 @@ $dictionary['meetings_users'] = array(
         'id' => array(
             'name' => 'id',
             'type' => 'id',
-            'len' => '36',
         ),
         'meeting_id' => array(
             'name' => 'meeting_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'user_id' => array(
             'name' => 'user_id',
             'type' => 'id',
-            'len' => '36',
         ),
         'required' => array(
             'name' => 'required',

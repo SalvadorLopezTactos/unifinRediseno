@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 include("metadata/accounts_bugsMetaData.php");
 include("metadata/accounts_casesMetaData.php");
 include("metadata/accounts_contactsMetaData.php");
@@ -54,8 +53,8 @@ include("metadata/projects_opportunitiesMetaData.php");
 
 
 include("metadata/report_cache.php");
-include("metadata/report_schedulesMetaData.php");
 include("metadata/saved_reportsMetaData.php");
+include 'metadata/reportschedules_usersMetaData.php';
 
 include("metadata/product_bundle_noteMetaData.php");
 include("metadata/product_bundle_productMetaData.php");
@@ -79,6 +78,7 @@ include 'metadata/contacts_dataprivacyMetaData.php';
 include 'metadata/leads_dataprivacyMetaData.php';
 include 'metadata/prospects_dataprivacyMetaData.php';
 include 'metadata/accounts_dataprivacyMetaData.php';
+require 'modules/Trackers/tracker_tracker_queriesMetaData.php';
 
 //ACL RELATIONSHIPS
 include("metadata/acl_roles_actionsMetaData.php");
@@ -117,6 +117,9 @@ include "metadata/team_sets_usersMetaData.php";
 
 // Locked fields
 include "metadata/locked_field_bean_relMetaData.php";
+
+// Commentlog relation field
+include 'metadata/commentlog_relMetaData.php';
 
 
 $defs = SugarAutoLoader::loadExtension('tabledictionary');

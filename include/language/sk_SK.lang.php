@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'Nastavenia e-mailu',
     'EmailParticipants' => 'Účastníci e-mailu',
     'DataPrivacy' => 'Ochrana osobných údajov',
+    'ReportSchedules' => 'Plány hlásení',
+    'CommentLog' => 'Denník komentárov',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'Token OAuth',
     'Filters' => 'Filter',
     'Comments' => 'Komentár',
+    'CommentLog' => 'Denník komentárov',
     'Currencies' => 'Mena',
     'ProductTemplates' => 'Šablóna produktu',
     'ProductTypes' => 'Typ produktu',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'Nastavenia e-mailu',
     'EmailParticipants' => 'Účastníci e-mailu',
     'DataPrivacy' => 'Ochrana osobných údajov',
+    'ReportSchedules' => 'Plán hlásení',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Preprava',
     'Utilities' => 'Dodávanie energií',
     'Other' => 'Iné',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Úroveň 1',
+    'T2' => 'Úroveň 2',
+    'T3' => 'Úroveň 3',
+    'T4' => 'Úroveň 4',
   ),
   'lead_source_default_key' => 'Automaticky generované',
   'lead_source_dom' =>
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Premiestniť',
         'donothing' => 'Nerobiť nič'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Nikdy',
+        30000 => 'Každých 30 sekúnd',
+        60000 => 'Každú minútu',
+        120000 => 'Každé 2 minúty',
+        180000 => 'Každé 3 minúty',
+        240000 => 'Každé 4 minúty',
+        300000 => 'Každých 5 minút',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'V prognóze',
         'sales_stage' => 'Fáza predaja',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Zoznam',
         'activities' => 'Aktivity',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Každú hodinu',
+        '21600' => 'Každých 6 hodín',
+        '43200' => 'Každých 12 hodín',
+        '86400' => 'Denne',
+        '604800' => 'Týždenne',
+        '1209600' => 'Každé 2 týždne',
+        '2419200' => 'Každé 4 týždne',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sledovať odkaz',
   'LBL_TOGGLE_VISIBILITY' => 'Prepnúť viditeľnosť', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivity',
-  'LBL_COPYRIGHT' => 'Copyright © 2004 – 2018 SugarCRM Inc. Všetky práva vyhradené.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar a 3-D kocka sú registrované ochranné známky spoločnosti SugarCRM Inc. '.
         'Všetky ostatné názvy spoločností a produktov, ktoré sú pri tomto produkte použité alebo zobrazené, môžu byť ochranné známky '.
         'SugarCRM ®, Sugar Enterprise™ a Sugar™ sú ochranné známky spoločnosti SugarCRM Inc.',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synchronizovať všetky e-mailové účty',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'E-mail bol odoslaný na zadanú e-mailovú adresu pomocou zadaných nastavení odchádzajúcej pošty. Skontrolujte, či bol e-mail prijatý, aby ste overili správnosť nastavení.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Vykonaním tejto akcie zosynchronizujete e-mailové účty a ich obsah.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vykonať úplnú synchronizáciu?\\nV prípade veľkých e-mailových účtov to môže trvať niekoľko minút.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vykonať úplnú synchronizáciu?\nV prípade veľkých e-mailových účtov to môže trvať niekoľko minút.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Kliknite na kláves Shift alebo Ctrl a vyberte viac priečinkov.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Všeobecné',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Dostupné skupinové priečinky',
@@ -2687,8 +2716,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Pre export obsahu je potrebné aktívne spojenie.',
     'ERR_NO_HEADER_ID' => 'Táto funkcia nie je v tejto téme k dispozícii.',
     'ERR_NOT_ADMIN' => "Neoprávnený prístup k administrácii.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Táto možnosť je v aplikácii SugarCRM pre režim IDM zakázaná a je k dispozícii v konzole Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Prejdite do konzoly <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Správa hesiel je k dispozícii len v položke Nastavenia cloudu.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Ak chcete urobiť zmeny v poliach určených iba na čítanie, obráťte sa na administrátora aplikácie Sugar.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chýba povinné pole:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Neplatné povinné pole:',
     'ERR_INVALID_VALUE' => 'Neplatná hodnota:',
@@ -2723,6 +2754,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Aktuálny používateľ nie je oprávnený meniť konfiguračné nastavenia {moduleName}',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Nemáte oprávnenie pridať {moduleName} ako obľúbenú položku. Ak potrebujete získať prístup, obráťte sa na administrátora.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Nemáte oprávnenie prihlásiť sa na odber {moduleName}. Ak potrebujete získať prístup, obráťte sa na administrátora.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'worksheet_columns_related_fields sa nenašlo v údajovej časti',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'summary_columns nie je pole',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'summary_columns_related_fields sa nenašlo v údajovej časti',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rows nie je pole',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rows_related_fields sa nenašlo v údajovej časti',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Vašu požiadavku sa kvôli neznámej výnimke nepodarilo spracovať.',
@@ -2914,6 +2953,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Vybrať operátora...',
     'LBL_FILTER_CREATE_NEW' => 'Vytvoriť',
     'LBL_FILTER_CREATE_FILTER' => 'Vytvoriť nový filter',
+    'LBL_FILTER_CLOSE_FILTER' => 'Zavrieť filter',
     'LBL_FILTER_EDIT_FILTER' => 'Upraviť filter',
     'LBL_FILTER_ALL_RECORDS' => 'Všetky záznamy',
     'TPL_FILTER_SAVE' => 'Úspešne ste vytvorili filter {{name}}.',
@@ -3303,7 +3343,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004 – 2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Všetky práva vyhradené.<br />SugarCRM, Sugar a 3-D kocka sú registrované ochranné známky spoločnosti SugarCRM Inc. '.
         'Všetky ostatné názvy spoločností a produktov, ktoré sú pri tomto produkte použité alebo zobrazené, môžu byť ochranné známky '.
         'príslušných spoločností, s ktorými sú spojené.',
@@ -3418,7 +3458,7 @@ S pozdravom, tím SugarCRM',
     'LNK_RESUME' => 'Pokračovať',
     'LNK_VIEW_CHANGE_LOG' => 'Zobraziť denník auditu',
     'TPL_AUDIT_LOG_TITLE' => 'Denník auditu pre {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Kliknutím zobrazte e-mailovú adresu a denník auditu',
 
     'NTC_CLICK_BACK' => 'Kliknite na tlačidlo Späť v prehliadači a opravte chybu.',
     'NTC_DATE_FORMAT' => '(rrrr-mm-dd)',
@@ -3455,7 +3495,12 @@ S pozdravom, tím SugarCRM',
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Upozornenie:</b> Váš prehliadač je v režime kompatibility s IE, toto nastavenie však nie je podporované.",
     'WARN_LICENSE_SEATS'=>  "Upozornenie: Počet aktívnych používateľov už dosiahol maximálny počet povolených licencií.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Upozornenie: Počet aktívnych používateľov už presiahol maximálny počet povolených licencií.",
-    'WARN_ONLY_ADMINS'=> "Prihlásiť sa môžu iba administrátori.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Počet aktívnych používateľov presahuje limit počtu licencií. Obráťte sa na svojho administrátora.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Prihlásiť sa smú iba administrátori.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Dosiahol sa limit počtu používateľských licencií. Prihlásiť sa smú iba existujúci používatelia.',
+    'WARN_ONLY_ADMINS'=> "Prihlásiť sa smú iba administrátori.",
     'WARN_UNSAVED_CHANGES'=> "Chystáte sa opustiť tento záznam bez uloženia zmien, ktoré ste v zázname vykonali. Naozaj chcete opustiť tento záznam?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Neuložili ste zmeny. Naozaj chcete opustiť túto stránku a zahodiť zmeny?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Presúvate sa do modulu Hlásenia. Vaše zmeny v dashlete sa neuložia. Chcete pokračovať?',
@@ -3548,6 +3593,7 @@ S pozdravom, tím SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Momentálne nemáte žiadne <item1> záznamy uložené. <item2> jeden hneď teraz.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Môžete vytvoriť <item1> z <item2>. <item3> <item2> zoznam.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Kliknite tu",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Pridať do mojich obľúbených',
@@ -3653,6 +3699,10 @@ S pozdravom, tím SugarCRM',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Metriky príležitosti',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Metriky príležitosti pre súvisiaci účet.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Rýchle výbery z katalógu produktov',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Zoznamy naposledy použitých položiek a výrobkov uložených ako obľúbené',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Naposledy použité',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Obľúbené',
 
     'LBL_DASHLET_NO_RECORDS' => 'Nepodarilo sa nájsť žiadne záznamy.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Zhrnutie prípadu',
@@ -4274,7 +4324,27 @@ S pozdravom, tím SugarCRM',
 
     'LBL_FUTURE' => 'Budúce',
     'LBL_REQUIRED_FIELD' => 'Povinné',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Ponúkaná riadková položka',
+    'LBL_DISCOUNT_TOTAL' => 'Zľava celkom',
+    'LBL_TAX' => 'Daň',
+    'LBL_SHIPPING' => 'Doprava',
+    'LBL_GRAND_TOTAL' => 'Celkový súčet',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Automatické vyplnenie fakturačnej adresy z profilu účtu',
+    'LBL_QLI_ADD_GROUP' => 'Pridať skupinu',
+    'LBL_QLI_COMMENT' => 'Komentár',
+    'LBL_SELECT_ACTION' => 'Vybrať akciu',
+    'LBL_QLI_GROUP_NAME' => 'Názov skupiny',
+    'LBL_GROUP_TOTAL' => 'Súčet skupiny',
+    'LBL_ITEM_NAME' => 'Riadková položka',
+    'LBL_QLI_DELETE' => 'Naozaj chcete vymazať túto riadkovú položku?',
+    'LBL_QLI_COMMENT_DELETE' => 'Naozaj chcete vymazať tento komentár k riadkovej položke?',
+    'LBL_QLI_GROUP_DELETE' => 'Naozaj chcete vymazať skupinu {0}? Všetky položky budú presunuté do predvolenej skupiny.',
+    'LBL_QLI_GROUP_EMPTY' => 'Žiadna ponúkaná riadková položka',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Voliteľné',
     'LBL_RELATED_MODULE' => 'Súvisiace {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Súvisiace {{{this}}}',
@@ -4304,7 +4374,7 @@ S pozdravom, tím SugarCRM',
     'LBL_CONFIRM' => 'Potvrdiť',
     'LBL_NO_ACCESS' => '(Žiadny prístup)',
     'LBL_NO_ACCESS_LOWER' => 'Používateľ nemá prístup',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Žiadny prístup',
     'LBL_VALUE_ERASED' => 'Hodnota vymazaná',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Táto informácia bola vymazaná prostredníctvom žiadosti o ochranu osobných údajov',
     'LBL_CREATE_RELATED_RECORD' => 'Vytvoriť súvisiaci záznam',
@@ -4932,7 +5002,7 @@ S pozdravom, tím SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Tímové úlohy',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'Rozhranie REST API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'Rozhranie SOAP alebo staršie REST API',
@@ -4993,9 +5063,9 @@ S pozdravom, tím SugarCRM',
     'LBL_ALERT_TITLE_NOTICE' => 'Poznámka:',
     'LBL_ALERT_TITLE_ERROR' => 'Chyba:',
     'LBL_ALERT_TITLE_LOADING' => 'Načítava sa',
+    'LBL_ALERT_NO_ACCESS' => 'Nemáte prístup k filtru použitému na tento dashlet.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Ak chcete tento dashlet konfigurovať so svojím vlastným filtrom, duplikujte informačný panel.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Vaša verzia prehliadača nie je podporovaná alebo používate nepodporovaný prehliadač.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'Odporúčame nasledujúce verzie prehliadača: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Odporúčané prehliadače nájdete na stránke {{link}}.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Podporované platformy',
     'LBL_ALERT_CONFIRM_DELETE' => 'Naozaj chcete vymazať túto položku?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Naozaj chcete vymazať tieto položky?',
@@ -5093,7 +5163,7 @@ S pozdravom, tím SugarCRM',
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historické zhrnutie',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Viac údajov z histórie...',
     'LBL_RELATED_CONTACT' => 'Súvisiaci kontakt',
     'LBL_MODULE_TYPE' => 'Typ',
@@ -5167,6 +5237,11 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Chýbajúce nastavenia servera SMTP',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Na odoslanie upozornení o priradené záznamov musí byť server SMTP nakonfigurovaný v {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Nastavenia e-mailu',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Dostupné sú nové skladové hlásenia',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Nové skladové hlásenia sú dostupné vo vašom ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Modul hlásení',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'Sú označené ako „Skladové hlásenie“ a môžu sa filtrovať. Hlásenia sú tiež označené ako „Predaj a marketing“, „Služby pre zákazníkov“, „Ochrana osobných údajov“ alebo „Správa“ na základe obsahu. Viac informácií nájdete v ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentácia',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'Aplikácia SugarCRM umožňuje power používateľom vykonať určité úlohy rýchlo vďaka klávesovým skratkám a zvýšiť tak ich produktivitu. V tabuľkách napravo nájdete opis dostupných skratiek s klávesami a akcie, ktoré pomocou nich možno vykonať.',
@@ -5276,23 +5351,26 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Procesy',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Dashlet procesov zobrazuje šablóny, ktoré možno použiť v rámci nástroja Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Dashlet procesov zobrazuje šablóny, ktoré možno použiť v rámci SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Definície procesov',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Dashlet definícií procesov zobrazuje šablóny, ktoré možno použiť v rámci nástroja Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Dashlet definícií procesov zobrazuje šablóny, ktoré možno použiť v rámci SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Vytvoriť definíciu procesu',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importovať definície procesov',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Obchodné pravidlá procesov',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Dashlet obchodných pravidiel procesov zobrazuje šablóny, ktoré možno použiť v rámci nástroja Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Dashlet obchodných pravidiel procesov zobrazuje šablóny, ktoré možno použiť v rámci SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Vytvoriť obchodné pravidlo procesov',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importovať obchodné pravidlá procesov',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'E-mailové šablóny procesov',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Dashlet e-mailových šablón procesov zobrazuje šablóny, ktoré možno použiť v rámci nástroja Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Dashlet e-mailových šablón procesov zobrazuje šablóny, ktoré možno použiť v rámci SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Vytvoriť e-mailové šablónu procesov',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importovať e-mailové šablóny procesov',
 
@@ -5316,7 +5394,7 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_PMSE_CANCELLED_STATUS' => 'Zrušené',
     'LBL_PMSE_TERMINATED_STATUS' => 'Ukončený',
     'LBL_PMSE_ERROR_STATUS' => 'Chyba',
-    'LBL_PMSE_SETTINGS' => 'Nastavenia nástroja Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'Nastavenia SugarBPM',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Naozaj chcete blokovať tento záznam?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Naozaj chcete povoliť tento záznam?',
@@ -5340,7 +5418,7 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Aplikácia Sugar 7 vyžaduje Javascript. Povoľte v prehliadači Javascript, aby ste mohli používať aplikáciu Sugar 7.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Nedá sa zrušiť serializácia serializovaných údajov',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Nedá sa zrušiť serializácia serializovaných údajov, pretože obsahujú odkazy na objekty alebo triedy',
 
@@ -5369,6 +5447,15 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_DATAPRIVACY_PII' => 'Osobné údaje',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Označiť na vymazanie',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Osobné údaje pre {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Skopírované do schránky!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nebolo možné skopírovať do schránky',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopírovať odkaz pre potvrdenie',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Zobraziť viac...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Zobraziť menej...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6546,7 +6633,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vložený súbor';
     'YER' => 'Riálov',
     'ZWD' => 'Zimbabwských dolárov',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Jedna zhoda',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Žiadny',
+        'future' => 'Aktuálna hodnota',
+        'old' => 'Stará hodnota',
+        'both' => 'Aktuálne a staré hodnoty',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Jedna zhoda',
+    );

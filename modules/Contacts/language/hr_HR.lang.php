@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj zamjensku adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu adresu u zamjensku adresu',
     'NTC_DELETE_CONFIRMATION' => 'Jeste li sigurni da želite izbrisati ovaj zapis?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\\n Stvorite novi račun ili odaberite postojeći.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\n Stvorite novi račun ili odaberite postojeći.',
     'NTC_REMOVE_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj kontakt iz slučaja?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj zapis kao izravno izvješće?',
 

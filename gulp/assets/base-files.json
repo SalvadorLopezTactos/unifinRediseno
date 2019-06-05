@@ -16,6 +16,9 @@
     {"pattern": "tests/unit-js/modules/**/fixtures/*.json", "included": false, "served": true, "watched": false},
 
     "sidecar/minified/sidecar.min.js",
+    "sidecar/lib/sugarlogic/expressions.js",
+    "sidecar/lib/sugarlogic/sidecarExpressionContext.js",
+    "cache/Expressions/functions_cache_debug.js",
     {"pattern": "sidecar/minified/sidecar.min.js.map", "included": false},
 
     "include/javascript/sugar7/hbs-helpers.js",
@@ -63,6 +66,8 @@
     "include/javascript/tiny_mce/tiny_mce.js",
     "include/javascript/mousetrap/mousetrap.js",
     "include/javascript/sugar7/shortcuts.js",
+    "include/javascript/sugar7/clipboard.js",
+    "include/javascript/clipboardjs/clipboard.min.js",
 
     // jasmine and sinon core files
     "node_modules/sinon/pkg/sinon.js",
@@ -91,6 +96,7 @@
     "include/javascript/pmse/ui/modal.js",
     "include/javascript/pmse/ui/proxy.js",
     "include/javascript/pmse/ui/element.js",
+    "include/javascript/pmse/ui/element_helper.js",
     "include/javascript/pmse/ui/container.js",
     "include/javascript/pmse/ui/window.js",
     "include/javascript/pmse/ui/action.js",
@@ -175,5 +181,4 @@
 
     {"pattern": "clients/base/**/*.js", "included": false, "served": true, "watched": true},
     {"pattern": "modules/**/clients/base/**/*.js", "included": false, "served": true, "watched": true}
-
 ]

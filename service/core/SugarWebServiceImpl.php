@@ -353,7 +353,7 @@ function get_relationships($session, $module_name, $module_id, $link_field_name,
 
 	// get all the related mmodules data.
     $result = self::$helperObject->getRelationshipResults($mod, $link_field_name, $related_fields, $related_module_query);
-    if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 		$GLOBALS['log']->debug('SoapHelperWebServices->get_relationships - return data for getRelationshipResults is ' . var_export($result, true));
     } // if
 	if ($result) {
@@ -401,7 +401,7 @@ function set_entry($session,$module_name, $name_value_list){
 	global  $current_user;
 
 	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->set_entry');
-    if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 		$GLOBALS['log']->debug('SoapHelperWebServices->set_entry - input data is ' . var_export($name_value_list, true));
     } // if
 	$error = new SoapError();
@@ -489,7 +489,7 @@ function set_entry($session,$module_name, $name_value_list){
  */
 function set_entries($session,$module_name, $name_value_lists){
 	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->set_entries');
-    if (self::$helperObject->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 		$GLOBALS['log']->debug('SoapHelperWebServices->set_entries - input data is ' . var_export($name_value_lists, true));
     } // if
 	$error = new SoapError();
@@ -536,34 +536,35 @@ function set_entries($session,$module_name, $name_value_lists){
 	if($usr_id) {
 		$user->retrieve($usr_id);
 	}
+
         if ($isLoginSuccess) {
-		if ($_SESSION['hasExpiredPassword'] =='1') {
-			$error->set_error('password_expired');
-			$GLOBALS['log']->fatal('password expired for user ' . $user_auth['user_name']);
-			LogicHook::initialize();
-			$GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
-			self::$helperObject->setFaultObject($error);
-			return;
-		} // if
-		if(!empty($user) && !empty($user->id) && !$user->is_group) {
-			$success = true;
-			global $current_user;
-			$current_user = $user;
-		} // if
+            if ($_SESSION['hasExpiredPassword'] =='1') {
+                $error->set_error('password_expired');
+                $GLOBALS['log']->fatal('password expired for user ' . $user_auth['user_name']);
+                LogicHook::initialize();
+                $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
+                self::$helperObject->setFaultObject($error);
+                return;
+            }
+            if (!empty($user) && !empty($user->id) && !$user->is_group) {
+                $success = true;
+                global $current_user;
+                $current_user = $user;
+            }
         } elseif ($usr_id && isset($user->user_name) && ($user->getPreference('lockout') == '1')) {
-			$error->set_error('lockout_reached');
-			$GLOBALS['log']->fatal('Lockout reached for user ' . $user_auth['user_name']);
-			LogicHook::initialize();
-			$GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
-			self::$helperObject->setFaultObject($error);
-			return;
-        } elseif (extension_loaded('mcrypt') && !$authController->authController instanceof OAuth2Authenticate) {
-		$password = self::$helperObject->decrypt_string($user_auth['password']);
-        $authController->loggedIn = false; // reset login attempt to try again with decrypted password
-		if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id'])){
-			$success = true;
-		} // if
-	} // else if
+            $error->set_error('lockout_reached');
+            $GLOBALS['log']->fatal('Lockout reached for user ' . $user_auth['user_name']);
+            LogicHook::initialize();
+            $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
+            self::$helperObject->setFaultObject($error);
+            return;
+        } elseif (!$authController->authController instanceof OAuth2Authenticate) {
+            $password = self::$helperObject->decrypt_string($user_auth['password']);
+            $authController->loggedIn = false; // reset login attempt to try again with decrypted password
+            if ($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id'])) {
+                $success = true;
+            }
+        }
 
 	if($success){
 		session_start();

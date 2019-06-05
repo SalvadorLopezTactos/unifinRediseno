@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: time_utils.php 51719 2009-10-22 17:18:00Z mitani $
 
 include_once('include/workflow/workflow_utils.php');
 include_once('modules/WorkFlow/WorkFlowSchedule.php');

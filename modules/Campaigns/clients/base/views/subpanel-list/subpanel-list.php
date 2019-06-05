@@ -43,6 +43,7 @@ $viewdefs['Campaigns']['base']['view']['subpanel-list'] = array(
             ),
             array(
                 'type' => 'unlink-action',
+                'name' => 'unlink_button',
                 'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),

@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Šis ir sistēmas konts.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-pasta adreses ID',
     'LBL_TYPE' => 'Tips',
+    'LBL_REPLY_TO_NAME' => 'Atbildes saņēmēja vārds',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Atbildes saņēmēja e-pasta adreses',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Atbildes saņēmēja e-pasta adreses ID',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Atbildes saņēmēja e-pasta adrese',
+    'LBL_PRIMARY_TEAM' => 'Primārā darba grupa',
 );

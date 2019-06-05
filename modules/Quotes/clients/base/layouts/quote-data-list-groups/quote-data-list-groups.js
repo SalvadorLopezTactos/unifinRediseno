@@ -85,6 +85,11 @@
     copyBundleCount: undefined,
 
     /**
+     * Keeps track of the copyBundle functionality
+     */
+    copyBundleCompleted: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -124,14 +129,22 @@
         this.context.on('quotes:defaultGroup:save', this._onSaveDefaultQuoteGroup, this);
 
         if (!(_.has(userACLs.Quotes, 'edit') ||
-                _.has(userACLs.Products, 'access') ||
-                _.has(userACLs.Products, 'edit'))) {
+            _.has(userACLs.Products, 'access') ||
+            _.has(userACLs.Products, 'edit'))) {
             // only listen for PCDashlet if this is Quotes and user has access
             // to both Quotes and Products
             // need to trigger on app.controller.context because of contexts changing between
             // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
             // app.controller.context is the only consistent context to use
-            app.controller.context.on('productCatalogDashlet:add', this._onProductCatalogDashletAddItem, this);
+
+            var viewDetails = this.closestComponent('record') ?
+                this.closestComponent('record') :
+                this.closestComponent('create');
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add',
+                    this._onProductCatalogDashletAddItem,
+                    this);
+            }
         }
 
         // check if this is create mode, in which case add an empty array to bundles
@@ -155,7 +168,7 @@
                 var bundles = this.model.get('bundles');
                 this._checkProductsQuoteLink();
 
-                if (bundles.length == 0) {
+                if (bundles.length === 0) {
                     this._onProductBundleChange(bundles);
                 }
             }, this);
@@ -203,6 +216,7 @@
         if (bundleComplete) {
             this.copyBundleCount--;
             if (this.copyBundleCount === 0) {
+                this.copyBundleCompleted = true;
                 this.render();
             }
         }
@@ -310,7 +324,13 @@
         }
 
         // trigger event on the context to let dashlet know this is done adding the product
-        app.controller.context.trigger('productCatalogDashlet:add:complete');
+        var viewDetails = this.closestComponent('record') ?
+            this.closestComponent('record') :
+            this.closestComponent('create');
+
+        if (!_.isUndefined(viewDetails)) {
+            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add:complete');
+        }
     },
 
     /**
@@ -462,7 +482,7 @@
                 '<div class="' + cssClasses + '"></div>'
             );
             this.$el.parent().wrap(
-                '<div class="flex-list-view scroll-width left-actions quote-data-table-scrollable"></div>'
+                '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
             );
         }
     },
@@ -662,6 +682,19 @@
                         this._updateModelWithRecord(model, relatedRecord);
                     }
                 }
+            }
+        }, this);
+
+        _.each(this._components, function(comp) {
+            if (comp.type === 'quote-data-group') {
+                _.each(comp._components, function(subComp) {
+                    if (subComp.type === 'quote-data-group-list') {
+                        // re-initialize the SugarLogic Context on the QuoteDataGroupList
+                        subComp.slContext.initialize(
+                            subComp._getSugarLogicDependenciesForModel(subComp.model)
+                        );
+                    }
+                }, this);
             }
         }, this);
     },
@@ -1086,6 +1119,17 @@
             // remove the deleted group's model from the main bundles
             bundles.remove(deletedGroup.model);
 
+            if (bundles._linkedCollections &&
+                bundles._linkedCollections.product_bundles &&
+                bundles._linkedCollections.product_bundles._delete &&
+                bundles._linkedCollections.product_bundles._delete.length) {
+                // clear out the bundles linkedCollections delete
+                var del = bundles._linkedCollections.product_bundles._delete;
+                bundles._linkedCollections.product_bundles._delete = _.reject(del, function(model) {
+                    return model.cid === deletedGroup.model.cid;
+                });
+            }
+
             // dispose the group
             deletedGroup.dispose();
             // remove the component from the layout
@@ -1289,6 +1333,9 @@
         }, this);
 
         if (!this.isCopy) {
+            this.render();
+        } else if (this.copyBundleCount === 0 && this.copyBundleCompleted) {
+            // Rendering when user tries to create a group in Quote Copy Mode.
             this.render();
         }
     },
@@ -1639,7 +1686,12 @@
     _dispose: function() {
         this.beforeRender();
         if (app.controller && app.controller.context) {
-            app.controller.context.off('productCatalogDashlet:add', null, this);
+            var viewDetails = this.closestComponent('record') ?
+                this.closestComponent('record') :
+                this.closestComponent('create');
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.off(viewDetails.cid + ':productCatalogDashlet:add', null, this);
+            }
         }
         this._super('_dispose');
     }

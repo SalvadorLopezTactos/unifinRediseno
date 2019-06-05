@@ -66,6 +66,7 @@ $dictionary['Tag'] = array(
     // this module will implement default instead of basic.
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
     // These ACLs prevent regular users from taking administrative actions on
     // Tag records. This allows view, list and export only.

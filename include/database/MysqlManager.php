@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-* $Id: MysqlManager.php 53409 2010-01-04 03:31:15Z roger $
 * Description: This file handles the Data base functionality for the application.
 * It acts as the DB abstraction layer for the application. It depends on helper classes
 * which generate the necessary SQL. This sql is then passed to PEAR DB classes.
@@ -82,41 +81,43 @@ abstract class MysqlManager extends DBManager
 		'alias' => 256
 	);
 
-	protected $type_map = array(
-			'int'      => 'int',
-			'double'   => 'double',
-			'float'    => 'float',
-			'uint'     => 'int unsigned',
-			'ulong'    => 'bigint unsigned',
-			'long'     => 'bigint',
-			'short'    => 'smallint',
-			'varchar'  => 'varchar',
-			'text'     => 'text',
-			'longtext' => 'longtext',
-			'date'     => 'date',
-			'enum'     => 'varchar',
-			'relate'   => 'varchar',
-			'multienum'=> 'text',
-			'html'     => 'text',
-			'longhtml' => 'longtext',
-			'datetime' => 'datetime',
-			'datetimecombo' => 'datetime',
-			'time'     => 'time',
-			'bool'     => 'bool',
-			'tinyint'  => 'tinyint',
-			'char'     => 'char',
-			'blob'     => 'blob',
-			'longblob' => 'longblob',
-			'currency' => 'decimal(26,6)',
-			'decimal'  => 'decimal',
-			'decimal2' => 'decimal',
-			'id'       => 'char(36)',
-			'url'      => 'varchar',
-			'encrypt'  => 'varchar',
-			'file'     => 'varchar',
-			'decimal_tpl' => 'decimal(%d, %d)',
-
-	);
+    /**
+     * {@inheritDoc}
+     */
+    protected $type_map = array(
+        'blob'          => 'blob',
+        'bool'          => 'bool',
+        'char'          => 'char',
+        'currency'      => 'decimal(26,6)',
+        'date'          => 'date',
+        'datetimecombo' => 'datetime',
+        'datetime'      => 'datetime',
+        'decimal'       => 'decimal',
+        'decimal2'      => 'decimal',
+        'decimal_tpl'   => 'decimal(%d, %d)',
+        'double'        => 'double',
+        'encrypt'       => 'varchar',
+        'enum'          => 'varchar',
+        'file'          => 'varchar',
+        'float'         => 'float',
+        'html'          => 'text',
+        'id'            => 'char(36)',
+        'int'           => 'int',
+        'long'          => 'bigint',
+        'longblob'      => 'longblob',
+        'longhtml'      => 'longtext',
+        'longtext'      => 'longtext',
+        'multienum'     => 'text',
+        'relate'        => 'varchar',
+        'short'         => 'smallint',
+        'text'          => 'text',
+        'time'          => 'time',
+        'tinyint'       => 'tinyint',
+        'uint'          => 'int unsigned',
+        'ulong'         => 'bigint unsigned',
+        'url'           => 'varchar',
+        'varchar'       => 'varchar',
+    );
 
     /**
      * Integer fields' min and max values
@@ -165,7 +166,7 @@ abstract class MysqlManager extends DBManager
         $count = (int)$count;
 	    if ($start < 0)
 			$start = 0;
-		$GLOBALS['log']->debug('Limit Query:' . $sql. ' Start: ' .$start . ' count: ' . $count);
+        $this->logger->debug('Limit Query:' . $sql. ' Start: ' .$start . ' count: ' . $count);
 
 	    $sql = "$sql LIMIT $start,$count";
 		$this->lastsql = $sql;
@@ -212,11 +213,11 @@ abstract class MysqlManager extends DBManager
 			if(!empty($data)){
 				$warning = ' Table:' . $table . ' Data:' . $data;
 				if(!empty($GLOBALS['sugar_config']['check_query_log'])){
-					$GLOBALS['log']->fatal($sql);
-					$GLOBALS['log']->fatal('CHECK QUERY:' .$warning);
+                    $this->logger->alert($sql);
+                    $this->logger->alert('CHECK QUERY:' .$warning);
 				}
 				else{
-					$GLOBALS['log']->warn('CHECK QUERY:' .$warning);
+                    $this->logger->warning('CHECK QUERY:' .$warning);
 				}
 			}
 		}
@@ -231,7 +232,7 @@ abstract class MysqlManager extends DBManager
 	{
         // Sanity check for getting columns
         if (empty($tablename)) {
-            $this->log->error(__METHOD__ . ' called with an empty tablename argument');
+            $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
         }        
 
@@ -262,7 +263,7 @@ abstract class MysqlManager extends DBManager
 	 */
 	public function getTablesArray()
 	{
-		$this->log->debug('Fetching table list');
+        $this->logger->debug('Fetching table list');
 
 		if ($this->getDatabase()) {
 			$tables = array();
@@ -292,7 +293,7 @@ abstract class MysqlManager extends DBManager
 	 */
 	public function tableExists($tableName)
 	{
-		$this->log->info("tableExists: $tableName");
+        $this->logger->info("tableExists: $tableName");
 
         if ($this->getDatabase() && !empty($this->connectOptions['db_name'])) {
             $query = 'SELECT TABLE_NAME
@@ -467,14 +468,13 @@ WHERE TABLE_SCHEMA = ?
 		return $string;
 	}
 
-	/**
-	 * (non-PHPdoc)
-	 * @see DBManager::fromConvert()
-	 */
-	public function fromConvert($string, $type)
-	{
-		return $string;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function fromConvert($string, $type)
+    {
+        return $string;
+    }
 
 	/**
 	 * Returns the name of the engine to use or null if we are to use the default
@@ -550,12 +550,8 @@ WHERE TABLE_SCHEMA = ?
 		if (!empty($keys))
 			$keys = ",$keys";
 
-		// cn: bug 9873 - module tables do not get created in utf8 with assoc collation
-		$collation = $this->getOption('collation');
-		if(empty($collation)) {
-		    $collation = 'utf8_general_ci';
-		}
-		$sql = "CREATE TABLE $tablename ($columns $keys) CHARACTER SET utf8 COLLATE $collation";
+        $collation = $this->getOption('collation') ?? $this->getDefaultCollation();
+        $sql = "CREATE TABLE $tablename ($columns $keys) CHARACTER SET utf8mb4 COLLATE $collation";
 
 		if (!empty($engine))
 			$sql.= " ENGINE=$engine";
@@ -609,9 +605,9 @@ WHERE TABLE_SCHEMA = ?
 			return "{$ref['name']} {$ref['colType']} {$ref['default']} {$ref['required']} {$ref['auto_increment']}";
 	}
 
-	/**
-	 * @see DBManager::changeColumnSQL()
-	 */
+    /**
+     * {@inheritDoc}
+     */
 	protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false)
 	{
 		$columns = array();
@@ -691,8 +687,6 @@ WHERE TABLE_SCHEMA = ?
 		case 'fulltext':
 			if ($this->full_text_indexing_installed())
 				$columns[] = " FULLTEXT ($fields)";
-			else
-				$GLOBALS['log']->debug('MYISAM engine is not available/enabled, full-text indexes will be skipped. Skipping:',$name);
 			break;
 		}
 	}
@@ -888,12 +882,12 @@ FROM information_schema.statistics';
 		return $this->isEngineEnabled('MyISAM');
 	}
 
-	/**
-	 * @see DBManager::massageFieldDef()
-	 */
-	public function massageFieldDef(&$fieldDef, $tablename)
-	{
-		parent::massageFieldDef($fieldDef,$tablename);
+    /**
+     * {@inheritDoc}
+     */
+    public function massageFieldDef(array &$fieldDef) : void
+    {
+        parent::massageFieldDef($fieldDef);
 
 		if ( isset($fieldDef['default']) &&
 			($fieldDef['dbType'] == 'text'
@@ -963,12 +957,11 @@ FROM information_schema.statistics';
 	}
 
 	/**
-	 * List of available collation settings
-	 * @return string
+     * {@inheritdoc}
 	 */
 	public function getDefaultCollation()
 	{
-		return "utf8_general_ci";
+        return 'utf8mb4_general_ci';
 	}
 
 	/**
@@ -977,7 +970,7 @@ FROM information_schema.statistics';
 	 */
 	public function getCollationList()
 	{
-		$q = "SHOW COLLATION LIKE 'utf8%'";
+        $q = "SHOW COLLATION LIKE 'utf8mb4_%'";
 		$r = $this->query($q);
 		$res = array();
 		while($a = $this->fetchByAssoc($r)) {
@@ -1072,7 +1065,7 @@ FROM information_schema.statistics';
 
 	protected function makeTempTableCopy($table)
 	{
-		$this->log->debug("creating temp table for [$table]...");
+        $this->logger->debug("creating temp table for [$table]...");
 		$result = $this->query("SHOW CREATE TABLE {$table}");
 		if(empty($result)) {
 			return false;
@@ -1090,7 +1083,7 @@ FROM information_schema.statistics';
 		}
 
 		// get sample data into the temp table to test for data/constraint conflicts
-		$this->log->debug('inserting temp dataset...');
+        $this->logger->debug('inserting temp dataset...');
 		$q3 = "INSERT INTO `{$table}__uw_temp` SELECT * FROM `{$table}` LIMIT 10";
 		$this->query($q3, false, "Preflight Failed for: {$q3}");
 		return true;
@@ -1104,11 +1097,11 @@ FROM information_schema.statistics';
 	 */
 	protected function verifyAlterTable($table, $query)
 	{
-		$this->log->debug("verifying ALTER TABLE");
+        $this->logger->debug("verifying ALTER TABLE");
 		// Skipping ALTER TABLE [table] DROP PRIMARY KEY because primary keys are not being copied
 		// over to the temp tables
 		if(strpos(strtoupper($query), 'DROP PRIMARY KEY') !== false) {
-			$this->log->debug("Skipping DROP PRIMARY KEY");
+            $this->logger->debug("Skipping DROP PRIMARY KEY");
 			return '';
 		}
 		if(!$this->makeTempTableCopy($table)) {
@@ -1116,19 +1109,19 @@ FROM information_schema.statistics';
 		}
 
 		// test the query on the test table
-		$this->log->debug('testing query: ['.$query.']');
+        $this->logger->debug('testing query: ['.$query.']');
 		$tempTableTestQuery = str_replace("ALTER TABLE `{$table}`", "ALTER TABLE `{$table}__uw_temp`", $query);
 		if (strpos($tempTableTestQuery, 'idx') === false) {
 			if(strpos($tempTableTestQuery, '__uw_temp') === false) {
 				return 'Could not use a temp table to test query!';
 			}
 
-			$this->log->debug('testing query on temp table: ['.$tempTableTestQuery.']');
+            $this->logger->debug('testing query on temp table: ['.$tempTableTestQuery.']');
 			$this->query($tempTableTestQuery, false, "Preflight Failed for: {$query}");
 		} else {
 			// test insertion of an index on a table
 			$tempTableTestQuery_idx = str_replace("ADD INDEX `idx_", "ADD INDEX `temp_idx_", $tempTableTestQuery);
-			$this->log->debug('testing query on temp table: ['.$tempTableTestQuery_idx.']');
+            $this->logger->debug('testing query on temp table: ['.$tempTableTestQuery_idx.']');
 			$this->query($tempTableTestQuery_idx, false, "Preflight Failed for: {$query}");
 		}
 		$mysqlError = $this->getL();
@@ -1142,13 +1135,13 @@ FROM information_schema.statistics';
 
 	protected function verifyGenericReplaceQuery($querytype, $table, $query)
 	{
-		$this->log->debug("verifying $querytype statement");
+        $this->logger->debug("verifying $querytype statement");
 
 		if(!$this->makeTempTableCopy($table)) {
 			return 'Could not create temp table copy';
 		}
 		// test the query on the test table
-		$this->log->debug('testing query: ['.$query.']');
+        $this->logger->debug('testing query: ['.$query.']');
 		$tempTableTestQuery = str_replace("$querytype `{$table}`", "$querytype `{$table}__uw_temp`", $query);
 		if(strpos($tempTableTestQuery, '__uw_temp') === false) {
 			return 'Could not use a temp table to test query!';
@@ -1258,7 +1251,8 @@ FROM information_schema.statistics';
 	 */
 	public function createDatabase($dbname)
 	{
-		$this->query("CREATE DATABASE `$dbname` CHARACTER SET utf8 COLLATE utf8_general_ci", true);
+        $collation = $this->getOption('collation') ?? $this->getDefaultCollation();
+        $this->query("CREATE DATABASE `$dbname` CHARACTER SET utf8mb4 COLLATE {$collation}", true);
 	}
 
 	/**
@@ -1335,15 +1329,14 @@ FROM information_schema.statistics';
 
         $this->query('ALTER DATABASE ' . $this->connectOptions['db_name']
             . ' DEFAULT COLLATE ' . $this->quoted($collation));
-        $res = $this->query("SHOW TABLES");
+        $res = $this->query("SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'");
 
-        while ($row = $this->fetchRow($res)) {
-            foreach ($row as $key => $table) {
-                $this->query('ALTER TABLE ' . $table . ' COLLATE ' . $this->quoted($collation));
-                $this->query('ALTER TABLE ' . $table
-                    . ' CONVERT TO CHARACTER SET ' . $this->quoted($charset)
-                    . ' COLLATE ' . $this->quoted($collation));
-            }
+        while (($row = $this->fetchRow($res)) !== false) {
+            $table = array_values($row)[0];
+            $this->query('ALTER TABLE `' . $table . '` COLLATE ' . $this->quoted($collation));
+            $this->query('ALTER TABLE `' . $table
+                . '` CONVERT TO CHARACTER SET ' . $this->quoted($charset)
+                . ' COLLATE ' . $this->quoted($collation));
         }
     }
 
@@ -1368,6 +1361,13 @@ FROM information_schema.statistics';
       	return 'UUID()';
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getRandInt(int $min, int $max)
+    {
+        return sprintf('FLOOR(%d + RAND() * %d)', $min, $max - $min + 1);
+    }
 
 	/**
 	* Check if the value is empty value for this type

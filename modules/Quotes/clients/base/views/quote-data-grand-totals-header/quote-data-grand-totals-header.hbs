@@ -15,8 +15,11 @@
         {{field ../this model=../model template='list-header'}}
     {{/each}}
 </div>
-{{#each meta.panels}}
-    {{#each fields}}
-        {{field ../../this model=../../model template=../../action}}
+<div class="quote-data-header-fields">
+    {{#each meta.panels}}
+        {{#each fields}}
+            {{field ../../this model=../../model template=../../action}}
+        {{/each}}
     {{/each}}
-{{/each}}
+</div>
+

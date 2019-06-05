@@ -373,7 +373,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'Attribut de Groupe :',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => 'DN Utilisateur',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => 'Inclus le DN Utilisateur avec l&#39;attribut utilisateur lors de la vérification de l&#39;appartenance au groupe',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Tout paramètre additionnel à appliquer lors de l&#39;authentification des utilisateurs, exemple\\n <em>is_sugar_user=1 ou (is_sugar_user=1)(is_sales=1)</em>',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Tout paramètre additionnel à appliquer lors de l&#39;authentification des utilisateurs, exemple\n <em>is_sugar_user=1 ou (is_sugar_user=1)(is_sales=1)</em>',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Attribut du Login :',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Attribut de connexion :',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Pour mapper (binding) les utilisateurs LDAP<br>Exemples :&nbsp;<b>AD :</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP :</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X :</b>&nbsp;uid',
@@ -442,7 +442,7 @@ $mod_strings = array (
     'LBL_MANUAL_VALIDATION_TXT' => 'Validation Manuelle',
     'LBL_MANUAL_VALIDATION'=>'
 Si vous rencontrez des problèmes persistants avec la validation automatique, veuillez vérifier les paramètres de votre proxy dans la rubrique <a href="index.php?module=Configurator&action=EditView">Paramètres de configuration</a> dans le panneau Administration. 
-Si la configuration de votre réseau interdit la communication avec le serveur de validation via Internet, vous devrez procéder à la <a href="javascript :void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Validation manuelle</a>.',
+Si la configuration de votre réseau interdit la communication avec le serveur de validation via Internet, vous devrez procéder à la <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Validation manuelle</a>.',
     'LBL_MANUAL_VALIDATION1'=> 'Étape 1 : Générer un fichier de clé de licence en cliquant sur le bouton suivant. ',
     'LBL_MANUAL_VALIDATION2'=> 'Ensuite sauvegardez le fichier (sugarkey.lic) sur votre ordinateur.',
     'LBL_MANUAL_VALIDATION3'=> 'Step 2: Transfer the sugarkey.lic file to a system where you can access the internet with a web browser.   <br<br>Go to {{manualValidation3Url}} and submit the sugarkey.lic file.  <br><br>The license validation web site will perform the validation immediately and return you the validation key file (sugarvalidationkey.lic) if the validation is successful.  Your browser should prompt you to save the file.  ',
@@ -936,12 +936,21 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'WARN_INSTALLER_LOCKED'=>'ATTENTION : Pour sécuriser vos données, l&#39;installateur Sugar doit être verrouillé en mettant &#39;installer_locked&#39; à &#39;true&#39; dans le fichier config.php.',
  	'WARN_LICENSE_EXPIRED'=> "INFO : Votre licence expire dans",
     'WARN_LICENSE_EXPIRED2' =>"jour(s). Veuillez aller dans la rubrique <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Licence\"</a>  dans l'administration.",
-    'WARN_LICENSE_SEATS'=>  "ATTENTION : Le nombre d'utilisateurs actifs autorisés est dépassé de :",
-    'WARN_LICENSE_SEATS2' => "utilisateur(s) actif(s) de trop. Merci de contacter votre commercial SugarCRM afin de régulariser votre situation.",
+    'WARN_LICENSE_SEATS'=>  "<b>Attention :</b> Il y a ",
+    'WARN_LICENSE_SEATS2' => " utilisateurs actifs lorsque votre abonnement permet uniquement ",
+    'WARN_LICENSE_SEATS3' =>
+        ".<p class=\"error\">Veuillez désactiver des utilisateurs, contactez votre partenaire ou vos commerciaux,"
+        . " ou envoyez un e-mail à <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
+        . "<p class=\"error\">Pour plus d'informations, consultez le "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "Comprendre les types d'utilisateurs et les licences Sugar</a> article.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "ATTENTION : Vous avez déjà atteint le nombre maximal d'utilisateurs actifs et autorisés par votre licence :",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "ATTENTION : Le nombre d'utilisateurs actifs autorisés est déjà atteint",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"ATTENTION : Le nombre d'utilisateurs actifs autorisés par votre licence est déjà atteint. Vous ne pouvez donc pas créer d'utilisateur supplémentaire.",
-    'WARN_REPAIR_CONFIG' => 'ATTENTION : Le fichier de configuration a besoin d&#39;être reconstruit. Veuillez utiliser le lien <a href="index.php?module=Administration&action=RebuildConfig">"Réparations"</a> dans l&#39;interface d&#39;administration pour réparer le fichier de configuration config.php.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Attention :</b> Vous ne pourrez pas créer d'utilisateurs actifs supplémentaires."
+        . " Veuillez acheter plus d'abonnements.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Attention :</b> Vous ne pourrez pas créer d'utilisateurs actifs supplémentaires."
+        . " Veuillez acheter plus d'abonnements.",
+    'WARN_REPAIR_CONFIG' => '<b>Attention :</b> Le fichier config.php doit être réparé. Veuillez utiliser le script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Reconstruire le fichier de configuration</a> dans la page de Réparations de l&#39;administration pour réparer le fichier de configuration.',
     'WARN_UPGRADE_APP'=> "une nouvelle version de l'application est disponible.",
     'WARN_UPGRADE' => 'ATTENTION : Veuillez mettre à jour',
     'WARN_UPGRADENOTE' => 'INFO :',
@@ -958,7 +967,7 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'Vider le cache des vardefs compilés',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'Supprime les fichiers vardefs compilés du cache',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'Vider le cache des recherches globales',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Supprime le fichier unified_search_modules.php du cache',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'Supprime unified_search_modules.php du cache',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'Réparations Rapides et Reconstructions',
     'LBL_QUICK_REPAIR_TITLE'=>'Veuillez sélectionner les modules à réparer :',
 	'LBL_FAILED_CONNECTION'=> 'Échec de connexion :',
@@ -1243,15 +1252,17 @@ Toute intégration qui repose sur cette plateforme cessera de fonctionner.',
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => 'Le fichier de métadonnées n&#39;a pas pu être trouvé.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => 'Paramètres',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configurer les paramètres d&#39;Advanced Workflow.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => 'Visualisateur de log',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Acceder au log d&#39;Advanced Workflow.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => 'Accès le ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' fichier journal.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => 'Liste des Process',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => 'La liste des process est accessible ici.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => 'Configurer ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' paramètres et afficher les fichiers journaux. Gérer tous les processus BPM pour tous les utilisateurs par l’intermédiaire de processus de gestion.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configurer les paramètres d&#39;Advanced Workflow et afficher les logs. Gérer tous les processus du BPM pour tous les utilisateurs à travers le gestionnaire de processus.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => 'Configuration des devis',
+    'LBL_MANAGE_QUOTES' => 'Configurer la mise en page des tableaux de devis',
 );

@@ -38,7 +38,7 @@ $mod_strings = array (
 'LBL_OOTB_HEARTBEAT' => 'Sugarハートビート',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent の記事を更新します。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '承認された記事を公開し、KB 記事を期限切れにします。',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflowでスケジュール済みのジョブ',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' スケジュール済みジョブ',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '非正規チームのセキュリティ データを再構築',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Eメールリマインダ送信を実行',
 'LBL_CLEANJOBQUEUE' => 'ジョブキューのクリーンアップ',
 'LBL_CLEANOLDRECORDLISTS' => '古いレコードリストをクリーンアップする',
-'LBL_PMSEENGINECRON' => 'Advanced Workflowスケジューラー',
+'LBL_PMSEENGINECRON' => 'SugarBPM スケジューラー',
 );
 

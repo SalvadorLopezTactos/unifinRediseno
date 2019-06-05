@@ -799,6 +799,9 @@ class PMSEEngineApi extends SugarApi
                 $inboxBean->retrieve_by_string_fields(array('cas_id' => $id));
                 $flowBean->retrieve_by_string_fields(array('cas_id' => $id));
                 $bean = BeanFactory::retrieveBean($flowBean->cas_sugar_module, $flowBean->cas_sugar_object_id);
+                if (is_null($bean)) {
+                    throw new Exception($flowBean->cas_sugar_object_id . ' in "' . $flowBean->cas_sugar_module . '" is not a valid record.');
+                }
                 $auxCasId['cas_id'] = $id;
                 if (($inboxBean->cas_status != 'CANCELLED' && $inboxBean->cas_status != 'TERMINATED' && $inboxBean->cas_status != 'COMPLETED')) {
                     $this->caseFlowHandler->terminateCase($auxCasId, $bean, 'CANCELLED');
@@ -1011,6 +1014,10 @@ class PMSEEngineApi extends SugarApi
                     // will also be used later to get the assigned user of the record.
                     $params = array('erased_fields' => true);
                     $assignedBean = BeanFactory::getBean($arrayCases[$arrayId]['cas_sugar_module'], $arrayCases[$arrayId]['cas_sugar_object_id'], $params);
+
+                    if (is_null($assignedBean)) {
+                        continue;
+                    }
 
                     $row = PMSEEngineUtils::appendNameFields($assignedBean, $row);
 

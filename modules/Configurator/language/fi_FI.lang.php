@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Näytä Lataukset-välilehti',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kun valittu, lataukset- välilehti ilmestyy Käyttäjäasetuksiin ja tarjoaa käyttäjille pääsyn Sugarin laajennuksiin ja muihin saatavilla oleviin tiedostoihin',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP -autentikointi, kun käytetään LDAPia.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt -laajennus pitää olla päällä php.ini -tiedostossa.',
     'LBL_ALL' => 'Kaikki',
     'LBL_MARK_POINT' => 'Merkintäpiste',
     'LBL_NEXT_' => 'Seuraava >>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Salli ylimääräinen kirjautumisnäytön sisältö',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Prosessimääritysten automaattinen tallennus',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Määrittää, kuinka usein prosessimääritykset tallennetaan automaattisesti käytettäessä Designer-työkalua',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Prosessimääritysten automaattinen varmennus automaattisen tallennuksen yhteydessä',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Määrittää, varmennetaanko prosessimääritykset automaattisesti automaattisen tallennuksen yhteydessä vai ei. Voimassa vain, jos prosessimääritysten automaattisessa tallennuksessa on määritetty jokin aikaväli',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Prosessimääritysten automaattinen varmennus tuonnin yhteydessä',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Määrittää, varmennetaanko prosessimääritykset automaattisesti kun ne tuodaan ensimmäisen kerran',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Kommenttilokin asetukset',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Näytettävä enimmäismerkkimäärä kommenttimerkintää kohden',
 );
 
 

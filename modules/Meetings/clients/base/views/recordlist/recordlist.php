@@ -90,6 +90,7 @@ $viewdefs['Meetings']['base']['view']['recordlist'] = array(
             ),
             array(
                 'type' => 'rowaction',
+                'name' => 'delete_button',
                 'icon' => 'fa-trash-o',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',

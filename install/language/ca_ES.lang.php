@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'S´han detectat errors durant les comprovacions de compatibilitat. Perquè la seva Instal·lació de SugarCRM funcioni correctament, du a terme els següents passos per corregir els problemes llistats a continuació i faci clic al botó comprovar de nou, o iniciï de nou la instal·lació, si us plau.',
     'ERR_CHECKSYS_CALL_TIME'            => '"Allow Call Time Pass Reference" està Habilitat (si us plau, ho estableixi a Off en php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'No s\'ha trobat: el Planificador de Sugar s\'executarà amb una funcionalitat limitada. El servei d\'arxivament de correu electrònic no s\'executarà.',
+	'ERR_CHECKSYS_CURL'					=> 'No s\'ha trobat: el Planificador de Sugar executarà amb funcionalitat limitada. El servei d\'arxiu de correu electrònic no funcionarà.',
     'ERR_CHECKSYS_IMAP'					=> 'No trobat: Correu Entrant i Campanyes (Correu Electrònic) requereixen les biblioteques d´IMAP. Cap no serà funcional .',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC no pot ser activat quan s´usa  MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Avís:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Per a una òptima experiència d&#39;ús de IIS/FastCGI sapi, estableixi fastcgi.logging a 0 en el seu arxiu php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versió de PHP Instalada No Suportada: ( veure',
     'LBL_DB_UNAVAILABLE'                => 'Base de dades no disponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat compatibilitat amb la base de dades. Comproveu que disposeu dels controladors necessaris per un dels següents tipus de base de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. És possible que hagiu de retirar els comentaris de l\'extensió de l\'arxiu php.ini, o recompilar amb l\'arxiu binari correcte, depenent de la vostra versió de PHP. Consulteu el manual PHP per obtenir més informació sobre com activar la compatibilitat de bases de dades.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat l\'assitència de la base de dades. Assegureu-vos que teniu els controladors necessaris per a una de les següents bases de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. Tal vegada caldrà que elimineu els comentaris de l\'extensió de l\'arxiu php.ini file, o que torneu a compilar l\'arxiu binari correcte, segons la vostra versió de PHP. Consulteu el manual de PHP per obtenir més informació relativa a com habilitar l\'assistència de bases de dades.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les funcions associades amb les Biblioteques d´Anàlisi de l´XML que són requerides per l´aplicació Sugar no han estat trobades. És possible que hagi de descomentar l´extensió a l´arxiu php.ini, o recompilar-lo amb l´arxiu binari apropiat, depenent de la versió de PHP. Si us plau, consulti el manual de PHP per a més informació.',
     'LBL_CHECKSYS_CSPRNG' => 'Generador de nombres aleatoris',
     'ERR_CHECKSYS_MBSTRING'             => 'Les funcions associades amb l´extensió de PHP per a Cadenes Multibyte (mbstring) que són requerides per l´aplicació Sugar no han estat trobades. <br/><br/> Normalment, el mòdul mbstring no està habilitat per defecte en PHP i ha de ser activat amb --enable-mbstring en la compilació de PHP. Si us plau, consulti el manual de PHP per a més informació sobre com habilitar el suport de mbstring.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'L´opció session.save_path del seu arxiu de configuració php (php.ini) no ha estat establerta o ha estat establerta a una carpeta que no existeix. És possible que hagi d´establir l´opció save_path setting en php.ini o verificar que existeix la carpeta establerta en save_path.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'L´opció session.save_path del seu arxiu|arxivament de configuració php (php.ini) ha estat establerta a una carpeta que no és escribible. Si us plau, dugui a terme els passos necessaris per fer la carpeta escribible. <br>Dependiendo del seu Sistema Operatiu, és possible que hagi de canviar els permisos usant chmod 766, o fer clic amb el botó dret del ratolí sobre l´arxiu per accedir a les propietats i desmarcar l´opció de només lectura.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'L´arxiu|arxivament de configuració (config.php) existeix però no és escribible. Si us plau, dugui a terme els passos necessaris per fer-ho escribible. Depenent del seu Sistema Operatiu, és possible que hagi de canviar els permisos usant chmod 766, o fer clic amb el botó dret del ratolí sobre l´arxiu per accedir a les propietats i desmarcar l´opció de només lectura.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'Mòdul IMAP',
 	'LBL_CHECKSYS_MQGPC'				=> 'Citacions de màgics GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'Mòdulo de Cadenes MB',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'Correcte (Sense Límit)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'Correcte (Sense Límit)',
 	'LBL_CHECKSYS_MEM'					=> 'Límit de Memòria PHP >=',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informació nova del compte',
         'description' => 'Aquesta plantilla s&#39;utilitza quan l&#39;administrador del sistema envia una nova contrasenya a un usuari.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Aquí tens el teu nom d&#39;usuari i contrasenya temporal:</p><p>Usuari : $contact_user_user_name </p><p>Contrasenya : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Després d&#39;iniciar sessió amb la contrasenya anterior, vostè pot ser requerit per restablir la contrasenya a un de la seva pròpia elecció.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aquí tens el teu nom d&#39;usuari i contrasenya temporal:</p><p>Usuari : $contact_user_user_name </p><p>Contrasenya : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Després d&#39;iniciar sessió amb la contrasenya anterior, vostè pot ser requerit per restablir la contrasenya a un de la seva pròpia elecció.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Aquí tens el teu nom d&#39;usuari i contrasenya temporal:
 Usuari : $contact_user_user_name
@@ -495,7 +493,7 @@ Després d&#39;iniciar sessió amb la contrasenya anterior, vostè pot ser reque
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Restablir contrasenya del seu compte',
         'description' => "Aquesta plantilla s&#39;utilitza per enviar un usuari faci clic a un enllaç per restablir la contrasenya del compte de l&#39;usuari.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Que recentment ha sol·licitat a $contact_user_pwd_last_changed per poder restablir la contrasenya del compte. </p><p>Feu clic a l&#39;enllaç de sota per restablir la contrasenya:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\\"2\\"></td> </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Que recentment ha sol·licitat a $contact_user_pwd_last_changed per poder restablir la contrasenya del compte. </p><p>Feu clic a l&#39;enllaç de sota per restablir la contrasenya:</p><p> <a href="$contact_user_link_guid">$contact_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
         'txt_body' =>
 'Que recentment ha sol·licitat a $contact_user_pwd_last_changed per poder restablir la contrasenya del compte.
 

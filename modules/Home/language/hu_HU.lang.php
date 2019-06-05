@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - egyszerű SAML eszközrendszer PHP-hez',
   'LBL_SOURCE_ISCROLL' => 'iScroll - Túlcsordulás: scroll mobil csomaghoz. Natív görgetési lehetőség fix szélességű/magasságú elemen belül.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - egy olyan JavaScript könyvtár, amely HTML5 Canvas támogatást ad Internet Exprorer-hez. A Flash rajzoló API segítségével legenerálja a görbéket és a képeket. Támogatja az összes Canvas API-t, és a legtöbb esetben jóval gyorsabb, mint a hasonló VML vagy Silverlight megoldásokat használó könyvtár.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - ez a csomag a weben megjelenő interaktív adat vizualizációk létrehozásához nyújt támogatást.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - nyílt forráskódú, tárgyorientált PHP5-ös webes alkalmazásfejlesztési keretrendszer.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - CSV adatelemző PHP-hoz',
   'LBL_SOURCE_PHPJS' => 'php.js - PHP funkciók használata JavaScript-ben',

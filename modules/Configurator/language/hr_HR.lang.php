@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Prikaz kartice s preuzimanjima',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kad je označeno, kartica s preuzimanjima prikazivat će se u korisničkim postavkama i pružati korisnicima pristup priključcima Sugara i drugim dostupnim datotekama',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Za provjeru autentičnosti SOAP pri upotrebi LDAP-a.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Proširenje php_mcrypt mora biti omogućeno u datoteci php.ini.',
     'LBL_ALL' => 'Sve',
     'LBL_MARK_POINT' => 'Točka oznake',
     'LBL_NEXT_' => 'Sljedeće>>',
@@ -443,6 +442,22 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregled aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući pregled aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje pregled aktivnosti za aplikaciju',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Omogući dodatni sadržaj na zaslonu za prijavu',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Definicije procesa automatskog spremanja',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Utvrđuje učestalost automatskog spremanja definicija procesa pri uporabi dizajnera',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Definicije postupaka automatske provjere valjanosti automatski se spremaju',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Odabire hoće li se pri automatskom spremanju automatski provjeravati valjanost definicija procesa. To će se primijeniti samo ako je opcija „Definicije procesa automatskog spremanja” postavljena na vremenski interval',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automatski provjeri valjanost definicija procesa pri uvozu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Odabire hoće li se automatski provjeravati valjanost definicija procesa pri prvom uvozu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Postavke zapisnika komentara',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimalni broj znakova za prikaz po unosu komentara',
 );
 
 

@@ -27,8 +27,8 @@ class ConsentCheckerTest extends \PHPUnit_Framework_TestCase
     public function providerTestCheck()
     {
         return [
-            ['match', ['match'], true],
-            ['not match', ['notMatch'], false],
+            [['match'], ['match'], true],
+            [['match'], ['match', 'not match'], false],
         ];
     }
 
@@ -42,7 +42,7 @@ class ConsentCheckerTest extends \PHPUnit_Framework_TestCase
     {
         $this->consent->setScopes($consentScope);
         $this->token->expects($this->any())
-            ->method('getScope')
+            ->method('getScopes')
             ->willReturn($tokenScope);
 
         $checker = new ConsentChecker($this->consent, $this->token);

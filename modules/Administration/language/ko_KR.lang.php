@@ -934,12 +934,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'경고:데이타를 보호하려면 설치자가 반드시 config.php 파일의  &#39;installer_locked&#39; 설정을 &#39;true&#39; 로 설정해야합니다.',
  	'WARN_LICENSE_EXPIRED'=> "알림:귀하의 라이센스가 다음에 만료됩니다.",
     'WARN_LICENSE_EXPIRED2' =>"일. 관리자 화면의 라이센스 관리에 접속하십시오.",
-    'WARN_LICENSE_SEATS'=>  "경고: 현재 적용된 라이센스의 최대 허용 접속자를 초과하였습니다.",
-    'WARN_LICENSE_SEATS2' => "귀하의 판매 대행인에 문의하거나 sales@sugarcrm.com.로 이메일 하십시오.",
+    'WARN_LICENSE_SEATS'=>  "<b>경고:</b> ",
+    'WARN_LICENSE_SEATS2' => " 구독이 다음 상황에만 가능한 활성 사용자가 있습니다 ",
+    'WARN_LICENSE_SEATS3' =>
+        ". <p class=\"error\">일부 사용자를 비활성화하거나, 파트너 또는 판매 대리점에 연락하거나,"
+        . " <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>로 이메일을 보내십시오.</p>"
+        . "<p class=\"error\">자세한 정보는 다음을 참조하십시오. "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "사용자 종류 및 Sugar 라이선스 이해</a> 문서.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "경고: 라이센스가 허용가능한 접속사용자를 초과하였습니다.",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "경고: 라이센스가 허용가능한 접속사용자를 초과하였습니다.",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>경고:</b>활동중인 사용자의 숫자는 귀하의 라이선스가 시스템의 활동 중 사용자의 숫자와 일치에 따라 허용됩니다. 추가 활동 사용자의 생성이 불가합니다.",
-    'WARN_REPAIR_CONFIG' => '경고: config.php 파일이 수리되어야 합니다. 관리자 지역의 수리페이지의  config.파일 다시 만들기 스크립트를 사용하십시오.',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>경고:</b> 활성 사용자를 추가로 생성할 수 없습니다."
+        . " 구독을 추가 구매하십시오.",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>경고:</b> 활성 사용자를 추가로 생성할 수 없습니다."
+        . "구독을 추가 구매하십시오.",
+    'WARN_REPAIR_CONFIG' => '<b>경고:</b> config.php 파일을 다시 만들어야 합니다. 관리자 영역의 다시 만들기 페이지의 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Config 파일 다시 만들기</a> 스크립트로 config 파일을 다시 만드십시오.',
     'WARN_UPGRADE_APP'=> "어플리케이션의 업데이트 버전이 사용가능합니다.",
     'WARN_UPGRADE' => '경고:업그레이드 하십시오.',
     'WARN_UPGRADENOTE' => '노트',
@@ -956,7 +965,7 @@ $mod_strings = array (
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'=>'vardefs 데이타 캐시 비우기',
 	'LBL_CLEAR_VARDEFS_DATA_CACHE_DESC'=>'캐시로부터 vardefs 제거합니다.',
 	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_TITLE'=>'통일검색 캐시 비우기',
-	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'캐시로부터 단일_검색_모듈.php 을 제거합니다.',
+	'LBL_CLEAR_UNIFIED_SEARCH_CACHE_DESC'=>'캐시로부터 unified_search_modules.php 을 제거합니다.',
 	'LBL_QUICK_REPAIR_AND_REBUILD'=>'빠른 수리와 다시 만들기',
     'LBL_QUICK_REPAIR_TITLE'=>'수리할 모듈을 선택하십시오.',
 	'LBL_FAILED_CONNECTION'=> '연결 실패',
@@ -1241,15 +1250,17 @@ $mod_strings = array (
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => '메타데이터 파일을 찾을 수 없습니다.',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => '설정',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => '로그 뷰어',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => '액세스 ',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => ' 로그.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => '프로세스 관리',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => '프로세스 관리는 여기에 액세스 할 수 있습니다.',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => '설정 ',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' 설정 및 로그 보기. 프로세스 관리를 통해 모든 사용자에 대한 모든 BPM 프로세스를 관리합니다.',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => '견적 설정',
+    'LBL_MANAGE_QUOTES' => '견적 워크시트 레이아웃 설정',
 );

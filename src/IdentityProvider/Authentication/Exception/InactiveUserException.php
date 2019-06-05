@@ -19,4 +19,29 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class InactiveUserException extends AuthenticationException
 {
+    /**
+     * @var \User
+     */
+    protected $user;
+
+    /**
+     * InactiveUserException constructor.
+     * @param string $message
+     * @param int $code
+     * @param $previous
+     * @param \User|null $user
+     */
+    public function __construct(string $message = '', int $code = 0, $previous = null, \User $user = null)
+    {
+        parent::__construct($message, $code, $previous);
+        $this->user = $user;
+    }
+
+    /**
+     * @return \User
+     */
+    public function getSugarUser(): ?\User
+    {
+        return $this->user;
+    }
 }

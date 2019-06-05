@@ -241,10 +241,6 @@ if(empty($errors)) {
 				    global $moduleList;
 					include($file);
 					post_install();
-				// cn: only run conversion if admin selects "Sugar runs SQL"
-				if(!empty($_SESSION['allTables']) && $_SESSION['schema_change'] == 'sugar') {
-					executeConvertTablesSql($_SESSION['allTables']);
-                }
 				//set process to done
 				$progArray['post_install']='done';
 				post_install_progress($progArray,'set');

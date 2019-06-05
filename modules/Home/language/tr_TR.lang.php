@@ -242,7 +242,6 @@ $mod_strings = array (
   'LBL_SOURCE_PHPSAML' => 'PHP-SAML - PHP için basit SAML araç kiti.',
   'LBL_SOURCE_ISCROLL' => 'iScroll - The overflow:scroll for mobile webkit.  Sabit bir genişlik / yükseklik öğesi içinde doğal kaydırma.',
   'LBL_SOURCE_FLASHCANVAS' => 'FlashCanvas - FlashCanvas, Internet Explorer için HTML5 Canvas desteği ekleyen bir JavaScript kütüphanesidir. Flash çizim API üzerinden şekil ve görüntü vermektedir. Hemen hemen tüm Canvas API fonksiyonlarını destekler, birçok durumda VML veya Silverlight kullanan diğer benzer kütüphanelerden daha hızlı çalışır.',
-  'LBL_SOURCE_JIT' => 'JavaScript InfoVis Toolkit - JavaScript InfoVis Toolkit Web için Etkileşimli Veri Görselleri oluşturma araçları sağlar.',
   'LBL_SOURCE_ZEND' => 'Zend Framework - Açık kaynak kodlu, PHP5 için nesne tabanlı web uygulama framework.',
   'LBL_SOURCE_PARSECSV' => 'parseCSV - PHP için CSV veri ayrıştırıcı',
   'LBL_SOURCE_PHPJS' => 'php.js - JavaScript içinde PHP fonksiyonlarını kullanın',

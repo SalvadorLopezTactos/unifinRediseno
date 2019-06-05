@@ -21,14 +21,33 @@
  */
 class PMSEBusinessRuleImporter extends PMSEImporter
 {
+    /**
+     * @inheritDoc
+     */
+    protected $beanModule = 'pmse_Business_Rules';
 
-    public function __construct()
-    {
-        $this->bean = BeanFactory::newBean('pmse_Business_Rules'); //new BpmRuleSet();
-        $this->name = 'name';
-        $this->id = 'rst_id';
-        $this->suffix = 'rst_';
-        $this->extension = 'pbr';
-        $this->module = 'rst_module';
-    }
+    /**
+     * @inheritDoc
+     */
+    protected $id = 'rst_id';
+
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $suffix = 'rst_';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'pbr';
+
+    /**
+     * @inheritDoc
+     */
+    protected $module = 'rst_module';
 }

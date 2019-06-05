@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -40,13 +40,14 @@ interface JWKFactoryInterface
     public static function createStorableKeySet($filename, array $parameters, $nb_keys);
 
     /**
-     * @param string $filename
-     * @param array  $parameters
-     * @param int    $nb_keys
+     * @param string   $filename
+     * @param array    $parameters
+     * @param int      $nb_keys
+     * @param int|null $interval
      *
      * @return \Jose\Object\JWKSetInterface
      */
-    public static function createRotatableKeySet($filename, array $parameters, $nb_keys);
+    public static function createRotatableKeySet($filename, array $parameters, $nb_keys, $interval = null);
 
     /**
      * @param string $filename
@@ -92,7 +93,7 @@ interface JWKFactoryInterface
     public static function createOKPKey(array $values);
 
     /**
-     * @param array $values Values to configure the key.
+     * @param array $values values to configure the key
      *
      * @return \Jose\Object\JWKInterface
      */

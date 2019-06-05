@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Netačno korisničko ime i lozinka',
-	'ERR_BODY_TOO_LONG'		=> '\\r Tekst je predugačak za dohvatanje kompletnog email-a. Skraćeno.',
+	'ERR_BODY_TOO_LONG'		=> '\r Tekst je predugačak za dohvatanje kompletnog email-a. Skraćeno.',
 	'ERR_INI_ZLIB'			=> 'Ne mogu da trajno isključim Zlib kompresiju. "Test podešavanje" možda beće uspeti.',
 	'ERR_MAILBOX_FAIL'		=> 'Nijedan email nalog ne može da se povrati.',
 	'ERR_NO_IMAP'			=> 'Nisu nađene IMAP biblioteke. Molim, rešite ovaj problem pre nego što nastavite sa dolaznom e-poštom',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> 'Početni redovi za timove',
 	'LBL_GROUPFOLDER_ID'	=> 'Id broj grupnog foldera',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => 'Dodeli grupnom folderu',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => 'Dozvoli korisnicima da šalju email poruke koristeći ime i adresu "Pošiljaoca" kao odgovor na adresu.',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => 'Kada je izabrana ova opcija , Ime i Adresa "Pošiljaoca" povezanog sa ovim grupnim mail nalogom će se pojaviti kao opcija za polje "Od" pri sastavljanju email poruka za korisnike koji imaju pristupgrupnom mail nalogu.',
     'LBL_STATUS_ACTIVE'     => 'Aktivan',
     'LBL_STATUS_INACTIVE'   => 'Neaktivan',
     'LBL_IS_PERSONAL' => 'lični',

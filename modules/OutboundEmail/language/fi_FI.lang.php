@@ -29,4 +29,9 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Tämä on järjestelmätili.',
     'LBL_EMAIL_ADDRESS_ID' => 'Sähköpostiosoitteen tunnus',
     'LBL_TYPE' => 'Tyyppi',
+    'LBL_REPLY_TO_NAME' => 'Vastauksen vastaanottajan nimi',
+    'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Vastausosoitteet',
+    'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Vastausosoitteen tunnus',
+    'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Vastausosoite',
+    'LBL_PRIMARY_TEAM' => 'Ensisijainen tiimi',
 );

@@ -52,12 +52,16 @@
         var isChecked = this._isChecked();
 
         // do not sync field mappings if this is a quote record copy
-        if (this.isCopy && this.firstRun) {
+        if (this.isCopy) {
             enable = false;
-            this.firstRun = false;
         }
 
         this._super('sync', [enable]);
+
+        // do not sync field mappings if this is a quote record copy
+        if (this.firstRun) {
+            this.firstRun = false;
+        }
 
         // if this is coming from a Ship To subpanel and the Copy Billing to Shipping box
         // is not checked then re-enable the Shipping Account Name field so it can be canceled
@@ -66,6 +70,57 @@
             if (shippingAcctNameField) {
                 shippingAcctNameField.setDisabled(false);
             }
+        }
+    },
+
+    /**
+     * @inheritdoc
+     * Overwriting the copy method so that the billing and shipping details are correct when a quote is created from
+     * Accounts Quotes Bill-to or Ship-to subpanel
+     */
+    copy: function(from, to) {
+        var _link = this.context.get('fromLink');
+        var _fromModule = this.context.previous('parentModel') ?
+            this.context.previous('parentModel').get('_module') :
+            '';
+
+        // came from Accounts Quote Bill-To
+        if (_link === 'quotes' && this.firstRun === true && _fromModule === 'Accounts') {
+            var billingAccounts = this.model.get('billing_accounts');
+
+            if (!this.model.has(from)) {
+                return;
+            }
+
+            if (_.isUndefined(this._initialValues[to])) {
+                this._initialValues[to] = this.model.get(to);
+            }
+
+            if (to === 'shipping_account_name') {
+                this.model.set(to, billingAccounts.name);
+            } else if (to === 'shipping_account_id') {
+                this.model.set(to, billingAccounts.id);
+            } else if (app.acl.hasAccessToModel('edit', this.model, to)) {
+                this.model.set(to, billingAccounts[to]);
+            }
+
+        } else if (_link === 'quotes_shipto' && this.firstRun === true && _fromModule === 'Accounts') { // came from
+            // Accounts Quote Ship-To
+            var shippingAccounts = this.model.get('shipping_accounts');
+
+            if (_.isUndefined(this._initialValues[to])) {
+                this._initialValues[to] = this.model.get(to);
+            }
+
+            if (to === 'shipping_account_name') {
+                this.model.set(from, shippingAccounts.name);
+            } else if (to === 'shipping_account_id') {
+                this.model.set(from, shippingAccounts.id);
+            } else if (app.acl.hasAccessToModel('edit', this.model, from)) {
+                this.model.set(from, shippingAccounts[from]);
+            }
+        } else {
+            this._super('copy', [from, to]);
         }
     },
 

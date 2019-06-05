@@ -80,7 +80,7 @@
     </thead>
     <tbody>
     {{#each ../collection.models}}
-    <tr name="{{module}}_{{attributes.id}}" class="single">
+    <tr name="{{module}}_{{attributes.id}}" data-parent-id="{{attributes.user_id}}" class="single" >
         {{#each ../../leftColumns}}
         <td>
              {{field ../../../this model=../this template=../../../this.viewName}}

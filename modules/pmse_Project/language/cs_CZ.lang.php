@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Existují aktivní procesy běžící proti definici procesu. Aktualizace definice procesu může tyto procesy ovlivnit. Opravdu chcete upravit tuto definici procesu?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Existují aktivní procesy běžící proti definici procesu. Aktualizace definice procesu může tyto procesy ovlivnit. Opravdu chcete zakázat tuto definici procesu?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automaticky vytvořit nový záznam Definice procesu importováním .bpm souboru ze systému.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Chcete-li importovat definici procesu, nahrajte soubor .bpm.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Process Definitions byly úspěšně importovány do Vašeho systému',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Prosím, vyberte platný *.bpm soubor',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definice procesu byla naimportována, ale obsahuje jednu nebo více akcí obchodních pravidel, pro něž nebyla vybrána obchodní pravidla.',
+    'LBL_BPM_IMPORT_SELECT' => 'Tato definice procesu obsahuje následující obchodní pravidla a šablony e-mailů. '
+        . 'Vyberte ty, které chcete importovat.',
+    'LBL_BUSINESS_RULES' => 'Obchodní pravidla',
+    'LBL_EMAIL_TEMPLATES' => 'Šablony e-mailů',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Zpět',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'Znovu',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Uložit',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Ověřit',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Uložit a ověřit',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Spustit ověřování v rámci kontroly chyb',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivity',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Smazat',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modul',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtr',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'Souvisí s',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kritéria',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Doba trvání',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Jednotka',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Pole',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluace políček modulu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'Souvisí s',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Pole',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Hodnota',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Evaluace responsivní formy',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'není',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nerovno',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Všechny související záznamy',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Jakékoli související záznamy',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Doba spuštění',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Přidat',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavřít',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Týmy',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Uživatel v modulu %MODULE%, který vytvořil záznam',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Uživatel v modulu %MODULE%, který naposledy upravil záznam',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Uživatel v modulu %MODULE%, který je přidělen k záznamu',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Uživatel v modulu %MODULE%, který byl přidělen k záznamu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Uživatel v modulu %MODULE%, který je nadřízeným osoby, jež vytvořila záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Uživatel v modulu %MODULE%, který je nadřízeným osoby, jež naposledy upravila záznam',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Uživatel v modulu %MODULE%, který je nadřízeným osoby, jež je přidělena záznamu',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Uživatel v modulu %MODULE%, který je nadřízeným osoby, jež byla přidělena záznamu',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% souvisí s %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Uživatel, který vytvořil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Uživatel, který naposledy upravil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'Uživatel, který je přiřazen k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Uživatel, který byl přiřazen k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Manažer, který vytvořil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Manažer, který naposledy upravil %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Manažer, který je přiřazen k %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Manažer, který byl přiřazen k %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'role: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'tým: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Doporučení',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Syntaxe výrazu je neplatná.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Ověřování definice procesu: nastavení načítání prvku',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Ověřování definice procesu: nastavení ověřování prvku',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Aktualizace seznamu chyb...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Ověřování dokončeno! Nalezené problémy: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problémy',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Probíhá ověřování',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Varování: Proces se může u tohoto prvku zastavit nebo mít jiné nezamýšlené účinky',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Chyba: Proces se zastaví u tohoto prvku',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Prvek nelze ověřit',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Prvek nesplňuje minimální počet příchozích toků',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Tento prvek musí mít minimální počet příchozích cest. Zkontrolujte počet cest, které se připojují k tomuto prvku, a ujistěte se, že je splněn jejich minimální počet.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Prvek překračuje maximální počet příchozích toků',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Tento prvek má maximální počet příchozích cest, které nesmí být překročeny. Zkontrolujte počet cest, které se připojují k tomuto prvku, a ujistěte se, že není překročen jejich maximální počet.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Prvek nesplňuje minimální počet odchozích toků',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Tento prvek musí mít minimální počet odchozích cest. Zkontrolujte počet cest vedoucích z tohoto prvku a ujistěte se, že je splněn jejich minimální počet.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Prvek překračuje maximální počet odchozích toků',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Tento prvek má maximální počet odchozích cest, které nesmí být překročeny. Zkontrolujte počet cest vedoucích z tohoto prvku a ujistěte se, že není překročen jejich maximální počet.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Není nastaveno povinné pole',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Tento prvek má pole, které je povinné, ale nebylo nastaveno. Zkontrolujte nastavení prvku a ujistěte se, že bylo pole správně nastaveno, poté nezapomeňte kliknout na tlačítko „Uložit“.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Data v současné době v systému neexistují',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Nastavení pro tento prvek se odkazuje na určitou část dat, která v databázi neexistují. Zkontrolujte nastavení prvku a ujistěte se, že všechna odkazovaná data existují (tj. konkrétní uživatelé, pole modulu, týmy atd.).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Výraz pole kritérií nebude nikdy vyhodnocen jako pravda',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Pole kritérií obsahují logické výrazy A/NEBO/NE. Tato chyba znamená, že pole kritérií v nastavení prvku bylo nakonfigurováno tak, že výraz nikdy nebude pravda. Zkontrolujte pole kritérií a odstraňte jakékoli logické rozpory zabraňující tomu, že výraz nebude pravda.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Prvek není dostupný',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Aby mohl být prvek v procesu proveden, musí k němu mít připojenu cestu. Řetězec cesty vedoucí k tomuto prvku musí začínat počátečním prvkem. Zkontrolujte řetězec příchozích cest k tomuto prvku, a ujistěte se, že řetězec začíná počátečním prvkem.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Kritéria doby čekání musí obsahovat právě jednu konstantu Datum a čas',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Tento prvek události čekání byl nakonfigurován pomocí pole kritéria „Pevné datum“. Toto pole musí obsahovat právě jednu konstantu „Pevné datum a čas“ nebo odkaz na pole Datum a čas. Všechny ostatní části výrazu musí být matematické operátory (+/-) nebo konstanty „Časové období“.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Zadaná hodnota doby trvání nesmí být nula',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Tento prvek události čekání byl nakonfigurován pomocí nastavení „Doba trvání“. Toto nastavení nesmí být rovno nule, nebo dojde k chybě. Zkontrolujte nastavení prvku a ujistěte se, že „Doba trvání“ není nastavena na nulu.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Nebyly nastaveny parametry doby čekání',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Tento prvek události čekání nemá nakonfigurováno žádné nastavení. Zkontrolujte nastavení prvku a ujistěte se, že je vybrána možnost „Doba trvání“ nebo „Pevné datum“, zadejte požadované hodnoty a klikněte na tlačítko „Uložit“.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Očekávaná doba je menší než nula',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'V nastavení „Formuláře“ pro tento prvek aktivity je očekávaná doba nastavena na zápornou hodnotu, což způsobí, že se proces při dosažení prvku zablokuje. Otevřete nastavení „Formuláře“ pro tento prvek a změňte očekávanou dobu na nezáporné číslo.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Typ akce je [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Tento prvek akce nemá přiřazen typ. Můžete to změnit kliknutím pravým tlačítkem myši na prvek akce, poté vyberte typ ze seznamu „Typ akce“.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Není zaručeno, že bude cesta přijata',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'K této chybové zprávě dochází, protože existuje šance, že nebude přijata žádná z cest z tohoto prvku brány, což způsobí, že se proces zastaví. V případě, že není splněn žádný z výrazů pole kritérií v nastavení prvku, doporučuje se nastavit pro přijetí výchozí cestu. Provedete to kliknutím pravým tlačítkem myši na prvek brány a výběrem prvku pod nabídkou „Výchozí tok“. Pokud výchozí cesta není zadána, je třeba změnit výrazy pole kritérií v nastavení prvku, aby se zajistilo, že když je proces spuštěn, bude alespoň jeden z nich pravda.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ sbíhající brány neodpovídá typu brány příchozího toku',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Rozbíhající brány rozšiřují procesy do několika větví. Při použití sbíhající brány k opětovnému sbíhání těchto větví zpět do jedné cesty se musí použít správný typ sbíhající brány, a to v závislosti na typu rozbíhající brány, která byla použita k vytvoření větví. U větví vytvořených pomocí výhradní rozbíhající brány nebo rozbíhající brány založené na událostech použijte k jejich opětovnému sbíhání výhradní sbíhající bránu. U větví vytvořených pomocí paralelní nebo zahrnující rozbíhající brány použijte k jejich opětovnému sbíhání paralelní sbíhající bránu.',
 );

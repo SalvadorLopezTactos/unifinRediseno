@@ -5,12 +5,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults public="false" />
 
-        <service id="cache.app" parent="cache.adapter.filesystem">
-            <tag name="cache.pool" />
+        <service id="cache.app" parent="cache.adapter.filesystem" public="true">
+            <tag name="cache.pool" clearer="cache.app_clearer" reset="reset" />
         </service>
 
-        <service id="cache.system" parent="cache.adapter.system">
+        <service id="cache.system" parent="cache.adapter.system" public="true">
             <tag name="cache.pool" />
         </service>
 
@@ -22,9 +23,13 @@
             <tag name="cache.pool" />
         </service>
 
+        <service id="cache.annotations" parent="cache.system" public="false">
+            <tag name="cache.pool" />
+        </service>
+
         <service id="cache.adapter.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" abstract="true">
             <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache" />
-            <tag name="cache.pool" clearer="cache.default_clearer" />
+            <tag name="cache.pool" clearer="cache.system_clearer" />
             <tag name="monolog.logger" channel="cache" />
             <argument /> <!-- namespace -->
             <argument>0</argument> <!-- default lifetime -->
@@ -84,9 +89,26 @@
             </call>
         </service>
 
-        <service id="cache.default_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="false">
-            <tag name="kernel.cache_clearer" />
+        <service id="cache.adapter.memcached" class="Symfony\Component\Cache\Adapter\MemcachedAdapter" abstract="true">
+            <tag name="cache.pool" provider="cache.default_memcached_provider" clearer="cache.default_clearer" reset="reset" />
+            <tag name="monolog.logger" channel="cache" />
+            <argument /> <!-- Memcached connection service -->
+            <argument /> <!-- namespace -->
+            <argument>0</argument> <!-- default lifetime -->
+            <call method="setLogger">
+                <argument type="service" id="logger" on-invalid="ignore" />
+            </call>
         </service>
 
+        <service id="cache.default_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer">
+            <argument type="collection" />
+        </service>
+
+        <service id="cache.system_clearer" parent="cache.default_clearer" public="true" />
+
+        <service id="cache.global_clearer" parent="cache.default_clearer" public="true" />
+        <service id="cache.app_clearer" alias="cache.default_clearer" public="true" />
+        <service id="Psr\Cache\CacheItemPoolInterface" alias="cache.app" />
+        <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app" />
     </services>
 </container>

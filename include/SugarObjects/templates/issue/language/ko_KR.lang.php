@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'담당자:',
   'LBL_ASSIGNED_TO_NAME' => '사용자:',  	  
   'LBL_WORK_LOG' => '활동기록:',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => '생성자:',
   'LBL_DATE_CREATED' => '생성일자:',
   'LBL_DATE_ENTERED' => '생성일자:',

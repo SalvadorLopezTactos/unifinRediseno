@@ -308,6 +308,16 @@
             };
         }
 
+        // FIXME: Quotes renders duplicate QLI's if it encounters collection resets for bundles
+        // Ensure that we do not pass view or fields in params as a result to ensure PUT requests
+        // do not get bundles in the response
+        if (options.params) {
+            var params = _.clone(options.params);
+            params.view = null; // don't just delete; specifically null it out to ensure we overwrite it
+            params.fields = null;
+            returnObject.params = params;
+        }
+
         return returnObject;
     },
 

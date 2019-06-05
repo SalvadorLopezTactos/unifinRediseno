@@ -158,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Den unike identikatoren for personen som brukes til å sjekke om de er medlem av gruppen Eksempel: uid',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Guppens egenskap som brukes til å filtrere brukeregenskap Eksempel: memberUid',
 	'LBL_LDAP_GROUP_ATTR'=>'Gruppeegenskap:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle ekstra filterparametre for godkjenning av brukere for eksempel \\ nis_sugar_user = 1 eller (is_sugar_user = 1) (is_sales = 1):',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Eventuelle ekstra filterparametre for godkjenning av brukere for eksempel \ nis_sugar_user = 1 eller (is_sugar_user = 1) (is_sales = 1):',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Innloggingsattributt:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind-atttributt:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For å oppbinde LDAP-brukereksempler:[<b>AD:</b> userPrincipalName] [<b>openLDAP:</b> userPrincipalName] [<b>Mac OS X:</b> uid]',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Vis nedlastinger fanen.',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Når valgt, vil Download kategorien vises i Brukerinnstillinger og gi brukerne tilgang til Sugar plug-ins og andre tilgjengelige filer',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'For SOA-autentisering ved bruk av ldap.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Php_mcrypt-forlengelsen må være aktivert i din php.ini-fil.',
     'LBL_ALL' => 'Alle',
     'LBL_MARK_POINT' => 'Merkepunkt',
     'LBL_NEXT_' => 'Neste>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktiver ekstra påloggingsskjerminnhold',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatisk lagring av prosessdefinisjoner',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Angir hvor ofte prosessdefinisjoner er lagret automatisk når du bruker designeren',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Auto-godkjenne prosessdefinisjoner på autolagring',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Aktiverer/deaktiverer om prosessdefinisjoner automatisk godkjennes når automatisk lagret. Dette trer bare i kraft hvis "Automatisk lagring av prosessdefinisjoner" er satt til et tidsintervall',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Auto-godkjenne prosessdefinisjoner på import',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Velger om prosessdefinisjoner godkjennes automatisk når først importert',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Kommentarlogginnstillinger',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimum tegn å vise per kommentaroppføring',
 );
 
 

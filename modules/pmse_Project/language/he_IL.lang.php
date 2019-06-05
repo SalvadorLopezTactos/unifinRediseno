@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'יש תהליכים פעילים הפועלים מול הגדרת תהליך זו. עדכון שלה יכול להשפיע על תהליכים אלה. האם אתה עדיין רוצה לערוך הגדרת תהליך זו?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'יש תהליכים פעילים הפועלים מול הגדרת תהליך זו. עדכון שלה יכול להשפיע על תהליכים אלה. האם אתה עדיין רוצה לבטל הגדרת תהליך זו?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'צור רשומת הגדרות תהליך חדשה על ידי ייבוא קובץ מסוג bpm מהמערכת שלך',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'העלה קובץ .bpm לייבוא של הגדרת תהליך.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'הגדרות תהליך ייובאו בהצלחה למערכת',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'אנא בחר קובץ .bpm  חוקי',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'הגדרת התהליך יובאה, אך היא מכילה פעולת כלל עסקי אחת או יותר עבורה לא נבחרו כללים עסקיים.',
+    'LBL_BPM_IMPORT_SELECT' => 'הגדרת תהליך זו מכילה את תבניות הדוא"ל ואת הכללים העסקיים הבאים. '
+        . 'עליך לבחור את אלה שברצונך לייבא.',
+    'LBL_BUSINESS_RULES' => 'כללים עסקיים',
+    'LBL_EMAIL_TEMPLATES' => 'תבניות דוא"ל',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'בטל',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'בצע שנית',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'שמירה',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'אמת',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'שמור ואמת',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'הפעל את האימות כדי לבדוק אם יש שגיאות',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'פעילות',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'מחק',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'מודול',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'סינון',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'קשור(ים) אל',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'קריטריון',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'משך',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'יחידה',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'שדות',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'מודול הערכת שדה',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'מודול',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'קשור/ים אל',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'שדה',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'ערך',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'הערכת משוב מטופס',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'אינו',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'לא שווה ל-',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'כל הרשומות הקשורות',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'כל רשומה קשורה שהיא',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'זמן ריצה',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'הוסף',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'סגור',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'קבוצות',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'משתמש ב %MODULE% שהוא מייצר הרשומה',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'משתמש ב %MODULE% שהוא האחרון ששינה את הרשומה',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'משתמש ב %MODULE% שהוא המוקצה לרשומה',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'משתמש ב %MODULE% שהוא הוקצה לרשומה',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'משתמש ב %MODULE% שהוא המנהל של מייצר הרשומה',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'משתמש ב %MODULE% שהוא המנהל של האחרון ששינה את הרשומה',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'משתמש ב %MODULE% שהוא המנהל של המוקצה לרשומה',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'משתמש ב %MODULE% שהוא מנהל של מי שהוקצה לרשומה',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% קשור/ים אל %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'המשתמש שיצר את %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'המשתמש ששינה לאחרונה את %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'המשתמש שמוקצה למודול &#39;%MODULE%&#39;',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'המשתמש שהוקצה למודול %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'המנהל של מי שיצר את המודול &#39;%MODULE%&#39;',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'המנהל של מי ששינה לאחרונה את %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'המנהל של מי שמוקצה למודול &#39;%MODULE%&#39;',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'המנהל של מי שהוקצה למודול &#39;%MODULE%&#39;',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'תפקיד: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'צוות: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'הצעות',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'תחביר ביטוי שגוי.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'מאמת את הגדרת התהליך: מאחזר הגדרות רכיבים',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'מאמת את הגדרת התהליך: מאמת הגדרות רכיבים',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'מרענן רשימת שגיאות...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'האימות הושלם! הבעיות שנמצאו: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' בעיות',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'מבצע אימות',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'אזהרה: התהליך עשוי לעצור על רכיב זה או שיש לו השפעות בלתי רצויות אחרות',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'שגיאה: התהליך יעצור ברכיב זה',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'לא ניתן לאמת רכיב',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'הרכיב אינו עומד במספר המינימלי של התהליכים הנכנסים',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'רכיב זה חייב לכלול מספר מינימלי של נתיבים נכנסים. בדוק את מספר הנתיבים שמתחברים לרכיב זה כדי לוודא עמידה במספר המינימלי.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'הרכיב חורג מן המספר המקסימלי של התהליכים הנכנסים',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'לרכיב זה הוגדר מספר מקסימלי של נתיבים נכנסים שממנו אין לחרוג. בדוק את מספר הנתיבים שמתחברים לרכיב זה כדי לוודא שאין חריגה מהמספר המקסימלי.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'הרכיב אינו עומד במספר המינימלי של התהליכים היוצאים',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'רכיב זה חייב לכלול מספר מינימלי של נתיבים יוצאים. בדוק את מספר הנתיבים שיוצאים מרכיב זה כדי לוודא עמידה במספר המינימלי.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'הרכיב חורג מן המספר המקסימלי של התהליכים היוצאים',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'לרכיב זה הוגדר מספר מקסימלי של נתיבים יוצאים שממנו אין לחרוג. בדוק את מספר הנתיבים שיוצאים מרכיב זה כדי לוודא שאין חריגה מהמספר המקסימלי.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'לא הוגדר שדה חובה',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'יש לרכיב זה שדה חובה, אך הוא אינו מוגדר. בדוק את הגדרות הרכיב כדי לוודא שהשדה הוגדר באופן מתאים, ולאחר מכן הקפד ללחוץ על לחצן &#39;שמור&#39;.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'הנתונים אינם קיימים כרגע במערכת',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'ההגדרות עבור רכיב זה מפנות למקטע נתונים ספציפי שאינו קיים במסד הנתונים. בדוק את הגדרות הרכיב כדי לוודא שכל הנתונים שאליהם יש הפניה, אכן קיימים (לדוגמה, משתמשים ספציפיים, שדות מודולים, צוותים, ועוד).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'ביטוי תיבת הקריטריונים לא יעריך לעולם כ&#39;נכון&#39;/true',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'תיבות הקריטריונים מכילות את הביטויים הלוגיים AND/OR/NOT. משמעות שגיאה זו שהיא שתיבת הקריטריונים בהגדרות הרכיב הוגדרה כך שהביטוי לא יהיה נכון לעולם. בדוק את תיבת הקריטריונים כדי לבטל את כל הסתירות הלוגיות שמונעות את נכונות הביטוי.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'הרכיב אינו נגיש',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'כדי להבטיח ביצוע של רכיב בתהליך, עליו להיות מחובר לנתיב. שרשרת הנתיבים שמובילה לרכיב זה חייבת להתחיל ברכיב התחלה. בדוק את שרשרת הנתיבים הנכנסים לרכיב זה כדי לוודא שהשרשרת מתחילה ברכיב התחלה.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'הקריטריונים של זמן ההמתנה חייבים להכיל קבוע תאריך-שעה אחד בלבד',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'רכיב &#39;אירוע המתנה&#39; זה הוגדר באמצעות תיבת קריטריונים "תאריך קבוע". על תיבה זו להכיל קבוע אחד בלבד מסוג "תאריך-שעה קבועים"/Fixed Datetime או הפניית שדה תאריך-שעה. כל שאר חלקי הביטוי חייבים להיות אופרטורים מתמטיים (+/-) או קבועים מסוג "טווח זמן".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'ערך המשך שצוין אינו יכול להיות אפס',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'רכיב &#39;אירוע המתנה&#39; זה הוגדר באמצעות הגדרת "משך". הגדרה זו אינה יכולה להיות שווה לאפס, או ששגיאה תתרחש. בדוק את הגדרות הרכיב כדי לוודא ש"משך" אינו מוגדר כאפס.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'לא הוגדרו פרמטרים לזמן המתנה',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'אין הגדרות תצורה לרכיב &#39;אירוע המתנה&#39; זה. בדוק את הגדרות הרכיב כדי לוודא שנבחר "משך" או "תאריך קבוע", הזן את הערכים הרצויים ולחץ על לחצן "שמור".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'הזמן הצפוי הוא פחות מאפס',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'הזמן הצפוי מוגדר כערך שלילי בהגדרות ה"טפסים" עבור רכיב פעילות זה, ויגרום לתהליך לקפוא כאשר יגיע לרכיב זה. פתח את הגדרות ה"טפסים" עבור רכיב זה כדי לשנות את הזמן הצפוי למספר לא-שלילי.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'סוג הפעולה הוא [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'אין לרכיב פעולה זה סוג מיועד. ניתן לשנות זאת על ידי לחיצה ימנית על רכיב הפעולה ובחירה בסוג מן הרשימה "סוג פעולה"/Action Type.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'לא ניתן להבטיח את הבחירה בנתיב',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'הודעת שגיאה זו מתרחשת כיוון שיש סיכוי שאף נתיב מתוך רכיב שער זה ייבחר לשימוש, מה שיגרום לעצירת התהליך. מומלץ להגדיר נתיב ברירת מחדל שבו יש לבחור כאשר לא ניתן לעמוד באף ביטוי מתיבת הקריטריונים. ניתן לבצע זאת על ידי לחיצה ימנית על רכיב השער, ובחירת רכיב מתוך התפריט "תהליך ברירת מחדל"/Default Flow. אם לא צוין נתיב כברירת מחדל, יש לשנות את הביטויים בתיבת הקריטריונים שבהגדרות הרכיב כדי להבטיח שלפחות אחד מהם יהיה נכון בעת הפעלת התהליך.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'סוג השער המתכנס אינו תואם לסוג השער עבור תהליך נכנס',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'שערים מתפצלים ירחיבו תהליכים להסתעפויות מרובות. בעת השימוש בשער מתכנס כדי לכנס התפצלויות אלה שוב לנתיב אחד, יש להשתמש בסוג השער המתכנס הנכון, בהתאם לסוג השער המתפצל ששימש כדי ליצור את ההתפצלויות. עבור התפצלויות שנוצרו באמצעות שערים מתפצלים בלעדיים או מבוססי-אירועים, יש להשתמש בשער מתכנס בלעדי כדי לכנס אותן שוב. עבור התפצלויות שנוצרו באמצעות שערים מתפצלים מקבילים או כוללניים, השתמש בשער מתכנס מקביל כדי לכנס אותם שוב.',
 );

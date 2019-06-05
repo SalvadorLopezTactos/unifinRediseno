@@ -186,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pēc tam, kad jūs uzsāksiet šo izmaiņu, fonā tiks izveidoti ieņēmumu posteņu ieraksti katram esošajam {{module_name}}. Kad ieņēmumu posteņi tiks pabeigti un būs pieejami, paziņojums tiks nosūtīts uz e-pasta adresi jūsu lietotāja profilā. Lūdzu, ņemiet vērā, ka jūsu instancei ir jābūt konfigurētai uz e-pastu nosūtīšanu caur Admin > e-pasta iestatījumiem, lai paziņojumi tiktu nosūtīti.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-noslēgts” vai „Aizvērts-zaudēts”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-noslēgts” vai „Aizvērts-zaudēts”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduli {{quotes_module}}, {{contacts_module}}, utt.
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}}, utt.
 
-- Rediģējiet ieraksta laukus, klikšķinot uz atsevišķā laika vai pogas Rediģēt.
-- Apskatiet vai rediģējiet saites uz citiem ierakstiem, apakšpaneļos ieslēdzot datu skatu kreisajā apakšējā panelī.
-- Veidojiet un apskatiet lietotāju komentārus un ierakstu izmaiņu vēsturi modulī {{activitystream_singular_module}}, ieslēdzot darbību plūsmu kreisajā apakšējā panelī.
+- Rediģējiet ieraksta laukus, klikšķinot uz atsevišķa lauka vai pogas Rediģēt.
+- Apskatiet vai rediģējiet saites uz citiem ierakstiem apakšpaneļos, pārslēdzot kreiso apakšējo paneli režīmā "Datu skatījums".
+- Veidojiet un apskatiet lietotāju komentārus, un ierakstiet izmaiņu vēsturi modulī {{activitystream_singular_module}}, pārslēdzot kreiso apakšējo paneli režīmā "Darbību plūsma".
 - Sekojiet šim ierakstam vai pievienojiet to izlasei, izmantojot ikonas pa labi no ieraksta nosaukuma.
 - Papildu darbības ir pieejamas nolaižamajā darbību izvēlnē pa labi no pogas Rediģēt.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduli {{quotes_module}}, {{contacts_module}}, utt.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}}, utt.
 
 Lai izveidotu moduli {{module_name}}:
-1. Ievadiet atbilstošos laukos vērtības.
- - Pirms saglabāšanas ir jāaizpilda lauki, kuri ir atzīmēti kā obligāti.
- - Ja nepieciešams redzēt papildu laukus spiediet, "Rādīt vairāk".
-2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
+1. Piešķiriet laukiem vēlamās vērtības.
+ - Ar “Obligāts” atzīmētie lauki pirms saglabāšanas ir jāaizpilda.
+ - Ja nepieciešams redzēt papildu laukus, noklikšķiniet “Rādīt vairāk”.
+ 2. Lai pabeigtu jauno ierakstu un atgrieztos iepriekšējā lapā, noklikšķiniet “Saglabāt”.',
 
 // END ENT/ULT
 

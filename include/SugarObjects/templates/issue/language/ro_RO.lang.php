@@ -29,6 +29,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO_ID'=>'Atribuit ID Utilizator',
   'LBL_ASSIGNED_TO_NAME' => 'Utilizator:',  	  
   'LBL_WORK_LOG' => 'Jurnal de munca',
+    'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Creat de:',
   'LBL_DATE_CREATED' => 'Data creării:',
   'LBL_DATE_ENTERED' => 'Data creării:',

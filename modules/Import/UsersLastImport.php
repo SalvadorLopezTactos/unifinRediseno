@@ -97,38 +97,46 @@ class UsersLastImport extends SugarBean
     {
         global $current_user;
 
-        $query1 = "SELECT bean_id, bean_type FROM users_last_import WHERE assigned_user_id = '$current_user->id'
-                   AND id = '$id' AND deleted=0";
+        $sql = <<<SQL
+SELECT bean_id, bean_type 
+FROM users_last_import 
+WHERE assigned_user_id = ? AND id = ? AND deleted=0
+SQL;
 
-        $result1 = $this->db->query($query1);
-        if ( !$result1 )
-            return false;
-
-        while ( $row1 = $this->db->fetchByAssoc($result1))
-            $this->_deleteRecord($row1['bean_id'],$row1['bean_type']);
-
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$current_user->id, $id]
+            );
+        foreach ($stmt as $row) {
+            $this->_deleteRecord($row['bean_id'], $row['bean_type']);
+        }
         return true;
     }
 
     /**
      * Undo an import
      *
-     * @param string $module  module being imported into
+     * @param string $module module being imported into
      */
     public function undo($module)
     {
         global $current_user;
 
-        $query1 = "SELECT bean_id, bean_type FROM users_last_import WHERE assigned_user_id = '$current_user->id'
-                   AND import_module = '$module' AND deleted=0";
+        $sql = <<<SQL
+SELECT bean_id, bean_type 
+FROM users_last_import 
+WHERE assigned_user_id = ? AND import_module = ? AND deleted=0
+SQL;
 
-        $result1 = $this->db->query($query1);
-        if ( !$result1 )
-            return false;
-
-        while ( $row1 = $this->db->fetchByAssoc($result1))
-            $this->_deleteRecord($row1['bean_id'],$row1['bean_type']);
-
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$current_user->id, $module]
+            );
+        foreach ($stmt as $row) {
+            $this->_deleteRecord($row['bean_id'], $row['bean_type']);
+        }
         return true;
     }
 
@@ -147,40 +155,56 @@ class UsersLastImport extends SugarBean
             $focus = BeanFactory::newBeanByName($module);
         }
 
-        $focus->mark_relationships_deleted($bean_id);
+        // delete this bean
+        $bean = BeanFactory::getBean($focus->getModuleName(), $bean_id);
+        $bean->mark_deleted($bean_id);
 
-        $result = $this->db->query(
-            "DELETE FROM {$focus->table_name}
-                WHERE id = '{$bean_id}'"
-            );
-        if (!$result)
-            return false;
+        $this->db->getConnection()
+            ->delete($focus->table_name, ['id' => $bean_id]);
+
         // Bug 26318: Remove all created e-mail addresses ( from jchi )
-        $result2 = $this->db->query(
-            "SELECT email_address_id
-                FROM email_addr_bean_rel
-                WHERE email_addr_bean_rel.bean_id='{$bean_id}'
-                    AND email_addr_bean_rel.bean_module='{$focus->module_dir}'");
-        $this->db->query(
-            "DELETE FROM email_addr_bean_rel
-                WHERE email_addr_bean_rel.bean_id='{$bean_id}'
-                    AND email_addr_bean_rel.bean_module='{$focus->module_dir}'"
+
+        $sql = <<<SQL
+SELECT email_address_id
+FROM email_addr_bean_rel
+WHERE email_addr_bean_rel.bean_id = ?
+AND email_addr_bean_rel.bean_module = ?
+SQL;
+
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$bean_id, $focus->module_dir]
             );
 
-        while ( $row2 = $this->db->fetchByAssoc($result2)) {
-            if ( !$this->db->getOne(
-                    "SELECT email_address_id
-                        FROM email_addr_bean_rel
-                        WHERE email_address_id = '{$row2['email_address_id']}'") )
-                $this->db->query(
-                    "DELETE FROM email_addresses
-                        WHERE id = '{$row2['email_address_id']}'");
+        $this->db->getConnection()
+            ->delete(
+                'email_addr_bean_rel',
+                ['bean_id' => $bean_id, 'bean_module' => $focus->module_dir]
+            );
+
+        foreach ($stmt as $row) {
+            $isEmailAddressIdExists = $this->db->getConnection()
+                ->executeQuery(
+                    'SELECT NULL FROM email_addr_bean_rel WHERE email_address_id = ?',
+                    [$row['email_address_id']]
+                )->fetchColumn();
+            if ($isEmailAddressIdExists === false) {
+                $this->db->getConnection()
+                    ->delete(
+                        'email_addresses',
+                        ['id' => $row['email_address_id']]
+                    );
+            }
         }
 
-        if ($focus->hasCustomFields())
-            $this->db->query(
-                "DELETE FROM {$focus->table_name}_cstm
-                    WHERE id_c = '{$bean_id}'");
+        if ($focus->hasCustomFields()) {
+            $this->db->getConnection()
+                ->delete(
+                    $focus->table_name,
+                    ['id_c' => $bean_id]
+                );
+        }
     }
 
     /**

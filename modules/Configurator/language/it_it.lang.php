@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Voci per pagina per sottopannello (Wireless)',
 	'LOG_MEMORY_USAGE'=>'Registra utilizzo memoria',
-    'LOG_SLOW_QUERIES' => 'Registra interrogazioni database lente',
+    'LOG_SLOW_QUERIES' => 'Registra query lente',
     'LOCK_HOMEPAGE_HELP'=>'Questa impostazione è per impedire<BR> 1) l´aggiunta di nuove pagine nella Home <BR>2) personalizzazione nel collocamento delle dashlet nella home page con la funzione drag & drop.',
     'CURRENT_LOGO'=>'Attuale logo in uso',
     'CURRENT_LOGO_HELP'=>'Questo logo appare nell´angolo in alto a sinistra dell´applicazione Sugar.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Visualizza Tab Downloads',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Se selezionato, il tab di Donwload apparirà nelle impostazioni dell´Utente e fornirà agli utenti l´accesso ai plug-ins di Sugar e ad altri file disponibili.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP per l´autenticazione quando si utilizza ldap.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Estensione php_mcrypt deve essere abilitata nel file php.ini.',
     'LBL_ALL' => 'Tutto',
     'LBL_MARK_POINT' => 'Punto di contrassegno',
     'LBL_NEXT_' => 'Prossimo>>',
@@ -443,6 +442,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Abilita Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Attiva Activity Streams per l&#39;applicazione',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Abilita contenuto aggiuntivo della schermata di accesso',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Salva automaticamente le definizioni del processo',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determina la frequenza di salvataggio automatico delle definizioni del processo quando si utilizza lo strumento di progettazione',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Convalida automaticamente le definizioni del processo con il salvataggio automatico',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Determina se le definizioni del processo devono essere convalidate automaticamente o meno quando viene eseguito il salvataggio automatico. Ciò avrò effetto solo se è stato impostato un intervallo di tempo per l&#39;opzione "Salva automaticamente le definizioni del processo"',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Convalida automaticamente le definizioni del processo con l&#39;importazione',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Determina se le definizioni di processo devono essere convalidate automaticamente o meno con la prima importazione',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Impostazioni del Registro commenti',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Numero massimo di caratteri da visualizzare per commento',
 );
 
 

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Bu Süreç Tanımına dayalı çalışan aktif süreçler mevcut. Süreç Tanımının güncellenmesi bu süreçlerin etkilenmesine neden olabilir. Yine de bu Süreç Tanımını düzenlemek istiyor musunuz?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Bu Süreç Tanımına dayalı çalışan aktif süreçler mevcut. Süreç Tanımının güncellenmesi bu süreçlerin etkilenmesine neden olabilir. Yine de bu Süreç Tanımını devre dışı bırakmak istiyor musunuz?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Dosya Sisteminizden *.bpm dosyası yükleyip, otomatik olarak yeni Süreç Tanımları kaydı oluştur.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Bir Süreç Tanımını içe aktarmak için bir .bpm dosyası yükleyin.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Süreç Tanımları sisteme başarıyla yüklendi.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Lütfen geçerli bir *.bpm dosyası seçin.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'İşlem Tanımı içe aktarıldı ancak İş Kuralı seçilmeyen bir veya daha fazla İş Kuralı eylemi içermektedir.',
+    'LBL_BPM_IMPORT_SELECT' => 'Bu Süreç Tanımı, aşağıdaki İş Kurallarını ve E-posta Şablonlarını içerir. '
+        . 'Lütfen içe aktarmak istediklerinizi seçin.',
+    'LBL_BUSINESS_RULES' => 'İş Kuralları',
+    'LBL_EMAIL_TEMPLATES' => 'E-Posta Şablonları',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'Geri Al',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'İleri Al',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'Kaydet',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'Doğrula',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'Kaydet ve doğrula',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'Hataları kontrol etmek için doğrulamayı çalıştırın',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivite',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Sil',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Modül',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'Filtre',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'İlişkili',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'Kriter',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'Süre',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'Birim',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Alanlar',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Modül Alanı Değerlendirmesi',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modül',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'İlişkili',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'Alan',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'Değer',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'Yanıt Değerlendirmesi Formu',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'değildir',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'eşit değil',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tüm İlişkili Kayıtlar',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bazı İlişkili Kayıtlar',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'Çalışma Zamanı',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Ekle',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Kapat',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Takımlar',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Kaydı oluşturan %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'Kaydı en son değiştiren %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'User in %MODULE% who is assigned to the record',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'Kayda atanan %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'Kayda oluşturanın yöneticisi olan %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'Kaydı en son değiştirenin yöneticisi olan %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'Kayda atananın yöneticisi olan %MODULE% modülündeki kullanıcı',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'Kayda atananın yöneticisi olan %MODULE% modülündeki kullanıcı',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% %MODULE% ile ilişkili',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '%MODULE% modülünü oluşturan kullanıcı',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '%MODULE% modülünü son olarak değiştiren kullanıcı',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '%MODULE% modülüne atanan kullanıcı',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '%MODULE% modülüne atanmış kullanıcı',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE% modülünü oluşturanın yöneticisi',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '%MODULE% modülünü son olarak değiştirenin yöneticisi',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '%MODULE% modülüne atananın yöneticisi',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '%MODULE% modülüne atanmış olanın yöneticisi',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'rol: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'takım: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'Öneriler',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'Geçersiz ifade söz dizimi.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'Doğrulama işlemi tanımı: Öğe ayarlarını alma',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'Doğrulama işlemi tanımı: Öğe ayarlarını doğrulama',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'Hata listesi yenileniyor...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'Doğrulama tamamlandı! Bulunan problemler: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' problemler',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'Doğrulama devam ediyor',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'Uyarı: İşlem, bu öğede durabilir veya başka istenmeyen etkilere sahip olabilir',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'Hata: İşlem, bu öğede duracak',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'Öğe doğrulanamıyor',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'Öğe, gelen akışların minimum sayısını karşılamıyor',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'Bu öğe, gelen yolların minimum sayısına sahip olmalıdır. Minimum sayının karşılığından emin olmak için bu öğeye bağlanan yolların sayısını kontrol edin.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'Öğe, gelen akışların maksimum sayısını aşıyor',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'Bu öğe, aşılmaması gereken gelen yolların maksimum sayısına sahip. Maksimum sayının aşılmadığından emin olmak için bu öğeye bağlanan yolların sayısını kontrol edin.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'Öğe, giden akışların minimum sayısını karşılamıyor',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'Bu öğe, giden yolların minimum sayısına sahip olmalıdır. Minimum sayının karşılandığından emin olmak için bu öğenin dışarı çıkan yollarının sayısını kontrol edin.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'Öğe, giden akışların maksimum sayısını aşıyor',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'Bu öğe, aşılmaması gereken giden yolların minimum sayısına sahip. Maksimum sayının aşılmadığından emin olmak için bu öğenin dışarı çıkan yollarının sayısını kontrol edin.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'Gerekli alan ayarlanmamış',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'Bu öğe, ayarlanması gereken bir akana sahip ancak bu alan ayarlanmamış. Alanın doğru şekilde ayarlanmasını sağlamak için öğe ayarlarını kontrol edin ardından "Kaydet" düğmesine bastığınızdan emin olun.',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'Veri, şu anda sistemde mevcut değil',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'Bu öğenin ayarları, veri tabanında mevcut olmayan verinin belirli bir bölümüne başvuruyor. Başvurulan her verinin (ör. belirli kullanıcılar, modül alanları, ekipler gibi) mevcut olduğundan emin olmak için öğe ayarlarını kontrol edin.',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'Kriter kutusu ifadesi, asla doğruyu değerlendirmeyecek',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'Kriter kutuları, mantıksal VE/VEYA/DEĞİL ifadelerini içerir. Bu hata, öğe ayarlarındaki bir kriter kutusunun, ifadenin asla doğru olmayacak şekilde yapılandırıldığı anlamına gelir. İfadenin doğru olmasını önleyen tüm mantıksal çelişkileri gidermek için kriter kutusunu kontrol edin.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'Öğeye ulaşılamıyor',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'Bir öğenin bir işlemde yürütülmesi için ona bağlı bir yolu olması gereklidir. Bu öğeye giden yolların zinciri, bir yıldız öğeyle başlamalıdır. Zincirin bir yıldız öğeyle başladığından emin olmak için bu öğeye gelen yolların zincirini kontrol edin.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'Bekleme süresi kriteri, tam olarak bir tarih saat sabiti içermelidir',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'Bu bekleme olayı öğesi, "Sabit Tarih" kriter kutusu kullanılarak yapılandırılmıştır. Bu kutu, tam olarak bir "Sabit Tarih Saat" sabiti veya Tarih Saat alan referansı içermelidir. İfadenin diğer tüm parçaları, matematiksel işlemciler (+/-) veya "Zaman Süreci" sabitleri olmalıdır.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'Belirtilen süre değeri, sıfır olmamalıdır',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'Bu bekleme olayı öğesi, "Süre" ayarları kullanılarak yapılandırılmıştır. Bu ayar, sıfıra eşit olmamalıdır aksi takdirde bir hata oluşur. "Sürenin" sıfır olarak ayarlanmadığından emin olmak için öğe ayarlarını kontrol edin.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'Bekleme süresi parametreleri ayarlanmamış',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'Bu bekleme olayı öğesi, yapılandırmış hiçbir ayara sahip değil. "Zaman" veya" "Sabit Tarih"in seçili olduğundan emin olmak için öğe ayarlarını kontrol edin, istediğiniz değerleri girin ve "Kaydet" düğmesine tıklayın.',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'Beklenen zaman sıfırdan küçük',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'Bu etkinlik öğesinin "Formlar" ayarlarının altında beklenen süre, negatif bir değere ayarlı, bu durum öğeye ulaşılırken işlemin donmasına neden olur. Beklenen süreyi negatif olmayan bir sayı olarak değiştirmek için bu öğenin "Formlar" ayarlarını açın.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'Eylem türü [Atanmamış]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'Bu eylem öğesi, belirlenmiş türe sahip değil. Bu, eylem öğesi üzerinde sağ tıklayarak ardından "Eylem Türü" listesinden bir tür formu seçilerek değiştirilebilir.',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'Bir yolun alınacağı garanti edilmemektedir',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'Bu hata iletisi, işlemin durmasına neden olacak bu ağ geçidi öğesinin dışındaki hiçbir yolun alınmama ihtimali olduğu için meydana gelir. Öğe ayarlarındaki kriter kutusu ifadelerinin hiçbirinin karşılanmaması durumunda alınması gereken bir varsayılan yolun ayarlanması önerilir. Bu, ağ geçidi öğesine sağ tıklayarak ve "Varsayılan Akış" menüsünün altında bir öğe seçerek yapılabilir. Varsayılan yol belirtilmemişse öğe ayarları içindeki kriter kutusu ifadeleri, işlem yürütüldüğünde en az birinin doğru olacağından emin olmak için değiştirilmelidir.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Birleşen ağ geçidi tipi, gelen akışın ağ geçidi türüyle eşleşmiyor',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Farklılaşan ağ geçitleri, işlemleri çoklu dallara genişletir. Bu dalları tek yolda yeniden birleştirmek için bir birleştirme ağ geçidi kullanılırken birleştirme ağ geçidinin doğru türü, dalların oluşturulması için kullanılan dağıtma ağ geçidinin türüne bağlı olarak kullanılmalıdır. Hariç tutan veya olay bazlı dağıtma ağ geçitleriyle oluşturulan dalları yeniden birleştirmek için hariç tutan bir birleştirme ağ geçidi kullanın. Paralel veya kapsayıcı birleştirme ağ geçitleriyle oluşturulan dalları yeniden birleştirmek için bir paralel veya kapsayıcı aş geçidi kullanın.   ',
 );

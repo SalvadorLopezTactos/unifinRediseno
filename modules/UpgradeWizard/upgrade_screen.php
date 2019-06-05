@@ -20,6 +20,8 @@ $step = isset($_REQUEST['confirm_id']) ? 2 : 0;
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="styleguide/assets/css/upgrade.css?v=<?php echo time();?>"/>
 <script src='include/javascript/jquery/jquery-min.js'></script>
+<script src='include/javascript/jquery/jquery-migrate.min.js'></script>
+<script type="text/javascript" src="<?php echo getJSPath('cache/include/javascript/sugar_grp1_yui.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo getJSPath('cache/include/javascript/sugar_grp1.js'); ?>"></script>
 
 <script>
@@ -267,11 +269,13 @@ $(window).bind("load", function () {
                         uploader.displayError("A server error occurred, please check your logs");
                     }
                 }
-            ).complete(function (data) {
-                    $next.removeClass("disabled");
-
+            ).always(function(data, textStatus, jqXHR) {
+                $next.removeClass("disabled");
+                if (textStatus !== 'success') {
+                    uploader.displayError(data.statusText);
+                } else {
                     try {
-                        var response = $.parseJSON(data.responseText);
+                        var response = JSON.parse(jqXHR.responseText);
                         if (response.status == 'error') {
                             uploader.displayError(response.message);
                         } else {
@@ -290,9 +294,8 @@ $(window).bind("load", function () {
                     } catch (e) {
                         uploader.displayError(data);
                     }
-
-                });
-
+                }
+            });
         };
 
         uploader.displayLicense = function (response) {

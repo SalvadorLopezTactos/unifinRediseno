@@ -17,7 +17,7 @@ $themedef = array(
     'directionality' => 'rtl',
     'parentTheme' => 'RacerX',
     'version' => array(
-        'regex_matches' => array('[6|7|8]\.*.*'),
+        'regex_matches' => array('\d{1,2}(\.\d+){2}(\.\d)?'),
         ),
     'group_tabs' => true,
     );

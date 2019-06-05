@@ -233,7 +233,7 @@ DropdownSelector.prototype._appendPanel = function () {
     }
     siblings = appendPanelTo.children;
     for (i = 0; i < siblings.length; i += 1) {
-        aux = jQuery(siblings[i]).zIndex();
+        aux = jQuery(siblings[i]).css('zIndex');
         if (aux > zIndex) {
             zIndex = aux;
         }

@@ -375,7 +375,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_ATTR'=>'群組屬性：',
     'LBL_LDAP_GROUP_ATTR_REQ_DN' => '使用者 DN 為：',
     'LBL_LDAP_GROUP_ATTR_REQ_DN_DESC' => '檢查群組成員資格時，將包含「使用者屬性」的「使用者 DN」包括在內',
-	'LBL_LDAP_USER_FILTER_DESC'=>'驗證使用者時使用的任何附加的篩選參數，範例：\\nis_sugar_user=1 或 (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'驗證使用者時使用的任何附加的篩選參數，範例：\nis_sugar_user=1 或 (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'登入屬性：',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'繫結屬性：',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'對於繫結 LDAP 使用者<br>範例：&nbsp;<b>AD：</b>&nbsp;userPrincipalName，&nbsp;<b>openLDAP：</b>&nbsp;userPrincipalName，&nbsp;<b>Mac&nbsp;OS&nbsp;X：</b>&nbsp;uid ',
@@ -938,12 +938,21 @@ $mod_strings = array (
     'WARN_INSTALLER_LOCKED'=>'<b>警告：</b> 為保護您的資料，必須在 config.php 檔案中將「installer_locked」設為「真」，以鎖定安裝程式。',
  	'WARN_LICENSE_EXPIRED'=> "<b>通知：</b> 您的授權在以下時間過期",
     'WARN_LICENSE_EXPIRED2' =>" 天。請前往「管理員」螢幕的<a href='index.php?action=LicenseSettings&module=Administration'>「授權管理」</a>。",
-    'WARN_LICENSE_SEATS'=>  "<b>警告：</b> 使用者授權超過",
-    'WARN_LICENSE_SEATS2' => "。請連絡您的銷售代表或傳送電子郵件至 <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>。",
+    'WARN_LICENSE_SEATS'=>  "<b>警告：</b>當 ",
+    'WARN_LICENSE_SEATS2' => " 您的訂閱僅允許 ",
+    'WARN_LICENSE_SEATS3' =>
+        "<p class=\"error\">時，有活動用戶，請進用一些用戶，聯絡您的合作夥伴或銷售代表，"
+        . " 或發送電子郵件至 <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>。</p>"
+        . "<p class=\"error\">如需了解更多訊息，請參閱 "
+        . "<a target=\"_blank\" "
+        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
+        . "了解用戶類型和 Sugar 許可證</a>一文。</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>警告：</b>使用中使用者的數量已達到授權允許的最大數量：",
-    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：</b>使用中使用者的數量已達到授權允許的最大數量",
-    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：</b> 授權所允許的使用中使用者數符合系統中的使用中使用者數。您將無法建立其他使用中使用者。",
-    'WARN_REPAIR_CONFIG' => '<b>警告：</b> config.php 檔案需進行修復。請使用「管理員」區域「修復」頁中的 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>「重建設定檔案」</a>指令碼，以修復設定檔案。',
+    'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告:</b> 您無法再創建其他活動使用者。"
+        . " 請購買更多的訂閱。",
+    'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告:</b> 您無法再創建其他活動使用者。"
+        . " 請購買更多的訂閱。",
+    'WARN_REPAIR_CONFIG' => '<b>警告:</b> config. php檔需要修復。 請使用 "管理" 區域 "修復" 頁中的 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>重建設定檔</a>腳本來修復設定檔。',
     'WARN_UPGRADE_APP'=> "目前可提供更新的應用程式版本。",
     'WARN_UPGRADE' => '<b>警告：</b> 請升級',
     'WARN_UPGRADENOTE' => '注意：',
@@ -1251,15 +1260,17 @@ $mod_strings = array (
     'WRONG_IMPORT_FILE_NOT_FOUND_ERROR' => '無法找到元數據文件。',
 
     'LBL_PMSE_ADMIN_TITLE_SETTINGS' => '設定',
-    'LBL_PMSE_ADMIN_DESC_SETTINGS' => 'Configure Advanced Workflow settings.',
 
     'LBL_PMSE_ADMIN_TITLE_ENGINELOGS' => '記錄檢視器',
-    'LBL_PMSE_ADMIN_DESC_ENGINELOGS' => 'Access the Advanced Workflow log.',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1' => '訪問',
+    'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2' => 'log.',
 
     'LBL_PMSE_ADMIN_TITLE_CASESLIST' => '流程管理',
     'LBL_PMSE_ADMIN_DESC_CASESLIST' => '檢視系統中的所有開放和執行中「流程」。',
+    
+    'LBL_PMSE_ADMIN_DESC_MODULE_1' => '設定',
+    'LBL_PMSE_ADMIN_DESC_MODULE_2' => ' 設置并查看記錄。通過流程管理管理所有使用者的所有BPM流程。',
 
-    'LBL_PMSE_ADMIN_TITLE_MODULE' => 'Advanced Workflow',
-    'LBL_PMSE_ADMIN_DESC_MODULE' => 'Configure Advanced Workflow settings and view logs. Manage all BPM processes for all users via Process Management.',
-
+    'LBL_MANAGE_QUOTES_TITLE' => '報價設定',
+    'LBL_MANAGE_QUOTES' => '配置報價單工作表佈局',
 );

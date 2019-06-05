@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2\Response;
 
+use OneLogin\Saml2\Constants;
+use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\Response\LogoutPostResponse;
 use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
 
@@ -23,7 +25,7 @@ use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
 class LogoutPostResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \OneLogin_Saml2_Settings | \PHPUnit_Framework_MockObject_MockObject
+     * @var Settings | \PHPUnit_Framework_MockObject_MockObject
      */
     protected $settingsMock = null;
 
@@ -34,7 +36,7 @@ class LogoutPostResponseTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->settingsMock = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settingsMock = $this->getMockBuilder(Settings::class)
                                    ->disableOriginalConstructor()
                                    ->getMock();
 
@@ -43,13 +45,13 @@ class LogoutPostResponseTest extends \PHPUnit_Framework_TestCase
                 'entityId' => 'spEntityId',
                 'assertionConsumerService' => [
                     'url' => 'http://sp.com/acs',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://sp.com/logout',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
-                'NameIDFormat' => \OneLogin_Saml2_Constants::NAMEID_EMAIL_ADDRESS,
+                'NameIDFormat' => Constants::NAMEID_EMAIL_ADDRESS,
                 'x509cert' => IDMFixturesHelper::getSpPublicKey(),
                 'privateKey' => IDMFixturesHelper::getSpPrivateKey(),
             ]
@@ -59,11 +61,11 @@ class LogoutPostResponseTest extends \PHPUnit_Framework_TestCase
                 'entityId' => 'idpEntityId',
                 'singleSignOnService' => [
                     'url' => 'http://idp.com/saml/sso',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                    'binding' => Constants::BINDING_HTTP_REDIRECT,
                 ],
                 'singleLogoutService' => [
                     'url' => 'http://idp.com/saml/slo',
-                    'binding' => \OneLogin_Saml2_Constants::BINDING_HTTP_POST,
+                    'binding' => Constants::BINDING_HTTP_POST,
                 ],
                 'x509cert' => IDMFixturesHelper::getIdpX509Key('Okta'),
             ]

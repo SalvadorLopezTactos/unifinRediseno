@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Takıma Ata',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Üyesi olduğunuz ve Mevcut kayıtlara otomatik olarak atanan takımlar.',
 	'LBL_DEFAULT_TEAM'					=> 'Varsayılan Takımlar',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Varsayılan Brincil Takım',
 	'LBL_LIST_DESCRIPTION'				=> 'Tanım',
 	'LBL_MY_TEAMS'						=> 'Takımlarım',
 	'LBL_PRIVATE_TEAM_FOR'				=> '...için özel takım',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Alıcı E-Posta Adresi',
 	'ERR_SERVER_STATUS'					=> 'Sunucunuzun Durumu',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistem kullanıcıya E-Posta gönderemiyor. Lütfen <a href="index.php?module=EmailMan&action=config">E-Posta Ayarları</a> sayfasındaki Giden E-Posta Yapılandırma değerlerini kontrol ediniz.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Kullanıcı sadece <a href="{0}" target="_blank">Cloud console</a> içerisinde IDM modu için oluşturulabilir.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Birincil e-posta adresi sadece <a href="{0}" target="_blank">Cloud console</a> içerisinde IDM modu için güncellenebilir.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-Posta Adresi',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Şifreyi Onaylayın',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Kullanıcı tipini, Sistem Yöneticisi Kullanıcısından, Normal Kullanıcıya çevirdiniz. Bu değişikliği kaydettikten sonra, sistem yöneticisi yetkileriniz kalmayacak.\\n\\nDevam için Tamam tıklayın.\\nKayda dönmek için İptal seçin.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Kullanıcı tipini, Sistem Yöneticisi Kullanıcısından, Normal Kullanıcıya çevirdiniz. Bu değişikliği kaydettikten sonra, sistem yöneticisi yetkileriniz kalmayacak.\n\nDevam için Tamam tıklayın.\nKayda dönmek için İptal seçin.',
 	'LBL_COUNTRY'						=> 'Ülke',
 	'LBL_CURRENCY_TEXT'					=> 'Tercih Edilen Para Birimini Göster işaretlendiyse, liste veya kayıt görünümünde, bu para birimi kullanılacak. Ayrıca yeni kayıtlarınız için varsayılan para birimidir.',
 	'LBL_CURRENCY'						=> 'Tercih edilen Para Birimi',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Sistem içinde, para birimi veya Raporlardaki ortalama değer gibi decimal ve float tipindeki değerlerde gösterilecek ondalık rakam adedi.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Tercih edilen Para Birimini Göster',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Listemede kullanıcı için  tercih edilen temel para birimi dönüştürme ve görünüşlerini kaydedebilmelidir',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Gelir Kalemlerini Tercih Edilen Para Biriminde oluşturun',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Ürün Kataloğundan bir Fırsata eklenen Gelir Kalemleri Ürün Kataloğu kaleminde kullanılan Para Biriminden farklıysa kullanıcının tercih edilen Para Birimine dönüştürülür.',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000&#39;ler ayıracı',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Binleri ayırmak için kullanılan karakter',
 	'LBL_DECIMAL_SEP'					=> 'Ondalık Sembolü',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Geçerli bir Kullanıcı Adı ve E-posta Adresi sağlayın.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Bu şu anda etkin değil. Lütfen Sistem Yöneticinize başvurun.',
 	'LBL_PUBLISH_KEY'					=> 'Yayın Anahtarı',
-
+    'LBL_SITE_USER_ID' => 'site_url ve user_id değeri',
     'LBL_QUOTAS'                        => 'Kotalar',
     'LBL_FORECASTS'                     => 'Tahminler',
     'LBL_WORKSHEETS'                    => 'Çalışma Sayfaları',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Kullanıcı Profili',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Belirli alanlar, düzenlenebilir değilse bu alanları yönetmek için lütfen Cloud Console&#39;unuzda oturum açın',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Düzenlenebilir olmayan belirli alanları değiştirmek istiyorsanız ' .
-        'lütfen bu değişiklikler  ',
+        'Salt okunur dosyalarda değişiklik yapmak istiyorsanız lütfen Sugar yöneticinizle iletişime geçin.',
 ); // END STRINGS DEFS
-
-?>

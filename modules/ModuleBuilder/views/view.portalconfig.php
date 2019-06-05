@@ -73,13 +73,12 @@ class ViewPortalConfig extends SugarView
         if ($label !== null) {
             $smarty->assign('label', $label);
         }
-        $options = (!empty($GLOBALS['system_config']->settings['system_portal_url'])) ? $GLOBALS['system_config']->settings['system_portal_url'] : 'https://';
-        $smarty->assign('options',$options);
+
         $ajax = new AjaxCompose();
         $ajax->addCrumb(translate('LBL_SUGARPORTAL', 'ModuleBuilder'), 'ModuleBuilder.main("sugarportal")');
         $ajax->addCrumb(ucwords(translate('LBL_PORTAL_CONFIGURE')), '');
         $ajax->addSection('center', translate('LBL_SUGARPORTAL', 'ModuleBuilder'), $smarty->fetch('modules/ModuleBuilder/tpls/portalconfig.tpl'));
-		$GLOBALS['log']->debug($smarty->fetch('modules/ModuleBuilder/tpls/portalconfig.tpl'));
+
         echo $ajax->getJavascript();
 	}
 }

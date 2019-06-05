@@ -13,7 +13,7 @@
 <div style="position: absolute;display:none;">
     <input id="import_metadata_file" type="file">
 </div>
-{if !empty($config.authenticationClass) && $config.authenticationClass == 'SAMLAuthenticate'}
+{if !empty($config.authenticationClass) && $config.authenticationClass == 'IdMSAMLAuthenticate'}
     {assign var='saml_enabled_checked' value='CHECKED'}
     {assign var='saml_display' value='inline'}
 {else}
@@ -815,7 +815,7 @@
                     <td valign='middle'>
 
                         <input name="authenticationClass" id="system_saml_enabled" class="checkbox"
-                               value="SAMLAuthenticate" type="checkbox"
+                               value="IdMSAMLAuthenticate" type="checkbox"
                                {if $saml_enabled_checked}checked="1"{/if}
                                onclick='toggleDisplay("saml_top_buttons");
                                toggleDisplay("saml_bottom_buttons");

@@ -617,8 +617,8 @@ function handleDbCharsetCollation() {
 
     if($_SESSION['setup_db_type'] == 'mysql') {
          $db = getDbConnection();
-         $db->query("ALTER DATABASE `{$setup_db_database_name}` DEFAULT CHARACTER SET utf8", true);
-         $db->query("ALTER DATABASE `{$setup_db_database_name}` DEFAULT COLLATE utf8_general_ci", true);
+         $db->query("ALTER DATABASE `{$setup_db_database_name}` DEFAULT CHARACTER SET utf8mb4", true);
+         $db->query("ALTER DATABASE `{$setup_db_database_name}` DEFAULT COLLATE utf8mb4_general_ci", true);
     }
 }
 
@@ -1258,6 +1258,7 @@ function create_default_users(){
     global $setup_site_admin_user_name;
     global $create_default_user;
     global $sugar_config;
+    global $setup_site_admin_email;
 
     require_once('install/UserDemoData.php');
 
@@ -1275,6 +1276,12 @@ function create_default_users(){
     $user->email = '';
     $user->picture = UserDemoData::_copy_user_image($user->id);
     $user->save();
+
+    if (!empty($setup_site_admin_email)) {
+        $user->emailAddress->addAddress($setup_site_admin_email, true);
+        $user->emailAddress->save($user->id, $user->module_dir);
+    }
+
     //Bug#53793: Keep default current user in the global variable in order to store 'created_by' info as default user
     //           while installation is proceed.
     $GLOBALS['current_user'] = $user;
@@ -1345,18 +1352,36 @@ function update_license_settings($users, $expire_date, $key)
 
     $query = "DELETE FROM config WHERE category='license' AND name='users'";
     $db->query($query);
-    $query = "INSERT INTO config (value, category, name) VALUES ('$users', 'license', 'users')";
-    $db->query($query);
+
+    $connection = $db->getConnection();
+    $connection
+        ->insert(
+            'config',
+            ['value' => $users, 'category' => 'license', 'name' => 'users']
+        );
 
     $query = "DELETE FROM config WHERE category='license' AND name='expire_date'";
     $db->query($query);
-    $query = "INSERT INTO config (value, category, name) VALUES ('$expire_date', 'license', 'expire_date')";
-    $db->query($query);
+
+    $connection
+        ->insert(
+            'config',
+            ['value' => $expire_date, 'category' => 'license', 'name' => 'expire_date']
+        );
 
     $query = "DELETE FROM config WHERE category='license' AND name='key'";
     $db->query($query);
-    $query = "INSERT INTO config (value, category, name) VALUES ('$key', 'license', 'key')";
-    $db->query($query);
+
+    $connection
+        ->insert(
+            'config',
+            ['value' => $key, 'category' => 'license', 'name' => 'key']
+        );
+
+    $connection->insert(
+        'config',
+        ['value' => getSiteHash($key), 'category' => 'site', 'name' => 'id']
+    );
 }
 
 

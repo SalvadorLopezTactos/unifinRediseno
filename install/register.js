@@ -8,7 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// $Id: register.js 8223 2005-10-03 23:55:49Z lam $
 
 function submitbutton()
 {

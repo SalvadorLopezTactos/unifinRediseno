@@ -12,11 +12,14 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\App\Controller;
 
+use OneLogin\Saml2\Error;
+use OneLogin\Saml2\Settings;
+use Psr\Log\LoggerInterface;
 use Sugarcrm\IdentityProvider\App\Application;
 use Sugarcrm\IdentityProvider\App\Controller\SAMLController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\Translator;
 
 class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,9 +44,19 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
     protected $generator;
 
     /**
+     * @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $logger;
+
+    /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
     protected $application;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
 
     /**
      * @inheritdoc
@@ -55,7 +68,7 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
         $this->controller = $this->getMockBuilder(SAMLController::class)
             ->setMethods(['getSamlSettings'])
             ->getMock();
-        $this->settings = $this->getMockBuilder(\OneLogin_Saml2_Settings::class)
+        $this->settings = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->setMethods(['getSPMetadata', 'validateMetadata'])
             ->getMock();
@@ -68,9 +81,20 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
             ->method('generate')
             ->willReturn('test');
 
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)
+            ->setMethods(['error'])
+            ->getMockForAbstractClass();
+
         $this->application = $this->getMockBuilder(Application::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getUrlGeneratorService', 'offsetGet', 'offsetExists', 'redirect'])
+            ->setMethods([
+                'getUrlGeneratorService',
+                'offsetGet',
+                'offsetExists',
+                'redirect',
+                'getLogger',
+                'getTranslator'
+            ])
             ->getMock();
 
         $this->application->expects($this->any())
@@ -80,6 +104,14 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
         $this->application->expects($this->any())
             ->method('offsetExists')
             ->willReturn(true);
+
+        $this->application->expects($this->any())
+            ->method('getLogger')
+            ->willReturn($this->logger);
+
+        $this->application->expects($this->any())
+            ->method('getTranslator')
+            ->willReturn($this->translator = new Translator('en'));
 
         $this->request = $this->createMock(Request::class);
     }
@@ -104,19 +136,20 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
             ->method('validateMetadata')
             ->willReturn([]);
 
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with('Invalid SAML configuration');
+
         $this->assertTrue($this->controller->metadataAction($this->application, $this->request));
     }
 
     public function testMetadataActionWrongConfig()
     {
         $config = ['saml' => ['test']];
-        $this->application->expects($this->exactly(2))
+        $this->application->expects($this->once())
             ->method('offsetGet')
-            ->withConsecutive(
-                [$this->equalTo('config')],
-                [$this->equalTo('config')]
-            )
-            ->willReturnOnConsecutiveCalls($config, $config);
+            ->with($this->equalTo('config'))
+            ->willReturn($config);
 
         $this->application->expects($this->once())
             ->method('redirect')
@@ -125,11 +158,15 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->settings->expects($this->once())
             ->method('getSPMetadata')
-            ->willThrowException(new \OneLogin_Saml2_Error('test'));
+            ->willThrowException(new Error('test'));
 
         $this->settings->expects($this->never())
             ->method('validateMetadata')
             ->willReturn(['test']);
+
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with('test');
 
         $this->assertTrue($this->controller->metadataAction($this->application, $this->request));
     }
@@ -137,13 +174,10 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
     public function testMetadataActionValidateErrors()
     {
         $config = ['saml' => ['test']];
-        $this->application->expects($this->exactly(2))
+        $this->application->expects($this->once())
             ->method('offsetGet')
-            ->withConsecutive(
-                [$this->equalTo('config')],
-                [$this->equalTo('config')]
-            )
-            ->willReturnOnConsecutiveCalls($config, $config);
+            ->with($this->equalTo('config'))
+            ->willReturn($config);
 
         $this->application->expects($this->once())
             ->method('redirect')
@@ -157,6 +191,10 @@ class FailedMetadataSAMLControllerTest extends \PHPUnit_Framework_TestCase
         $this->settings->expects($this->once())
             ->method('validateMetadata')
             ->willReturn(['test']);
+
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with('SAML metadata validation failed: test');
 
         $this->assertTrue($this->controller->metadataAction($this->application, $this->request));
     }

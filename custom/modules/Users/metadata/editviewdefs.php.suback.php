@@ -5,13 +5,6 @@ array (
   array (
     'templateMeta' => 
     array (
-      'includes' => 
-      array (
-        0 => 
-        array (
-          'file' => 'custom/modules/Users/js/customValidation.js',
-        ),
-      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -31,6 +24,13 @@ array (
         'headerTpl' => 'modules/Users/tpls/EditViewHeader.tpl',
         'footerTpl' => 'modules/Users/tpls/EditViewFooter.tpl',
       ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Users/js/customValidation.js',
+        ),
+      ),
       'useTabs' => false,
       'tabDefs' => 
       array (
@@ -39,7 +39,22 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL4' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -51,6 +66,10 @@ array (
       'LBL_USER_INFORMATION' => 
       array (
         0 => 
+        array (
+          0 => 'picture',
+        ),
+        1 => 
         array (
           0 => 
           array (
@@ -69,12 +88,49 @@ array (
             ),
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 'first_name',
           1 => 'last_name',
         ),
-        2 => 
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'iniciales_c',
+            'label' => 'LBL_INICIALES',
+          ),
+          1 => 
+          array (
+            'name' => 'nombre_completo_c',
+            'label' => 'LBL_NOMBRE_COMPLETO_C',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 'description',
+          1 => 
+          array (
+            'name' => 'UserType',
+            'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'ext_c',
+            'label' => 'LBL_EXT',
+          ),
+          1 => 'phone_mobile',
+        ),
+      ),
+      'lbl_editview_panel4' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -82,27 +138,22 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_PUESTOUSUARIO',
           ),
+          1 => 'reports_to_name',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'region_c',
+            'label' => 'LBL_REGION',
+          ),
           1 => 
           array (
-            'name' => 'aut_caratulariesgo_c',
-            'label' => 'LBL_AUT_CARATULARIESGO',
+            'name' => 'tct_team_address_txf_c',
+            'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
           ),
         ),
-        3 => 
-        array (
-          0 => 'phone_work',
-          1 => 
-          array (
-            'name' => 'ext_c',
-            'label' => 'LBL_EXT',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 'phone_mobile',
-          1 => 'picture',
-        ),
-        5 => 
+        2 => 
         array (
           0 => 
           array (
@@ -117,44 +168,7 @@ array (
             'label' => 'LBL_EQUIPOS_C',
           ),
         ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'tct_team_address_txf_c',
-            'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
-          ),
-          1 => 
-          array (
-            'name' => 'region_c',
-            'label' => 'LBL_REGION',
-          ),
-        ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'sucursal_c',
-            'studio' => 'visible',
-            'label' => 'LBL_SUCURSAL',
-          ),
-          1 => '',
-        ),
-        8 => 
-        array (
-          0 => 
-          array (
-            'name' => 'productos_c',
-            'studio' => 'visible',
-            'label' => 'LBL_PRODUCTOS',
-          ),
-          1 => 
-          array (
-            'name' => 'UserType',
-            'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
-          ),
-        ),
-        9 => 
+        3 => 
         array (
           0 => 
           array (
@@ -162,10 +176,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_TIPODEPRODUCTO',
           ),
-        ),
-        10 => 
-        array (
-          0 => 'reports_to_name',
+          1 => 
+          array (
+            'name' => 'productos_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRODUCTOS',
+          ),
         ),
       ),
       'lbl_editview_panel1' => 
@@ -193,6 +209,57 @@ array (
             'name' => 'confirmarnuevacontrasenia_c',
             'label' => 'LBL_CONFIRMARNUEVACONTRASENIA_C',
           ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_altaproveedor_chk_c',
+            'label' => 'LBL_TCT_ALTAPROVEEDOR_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_alta_clientes_chk_c',
+            'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_alta_cd_chk_c',
+            'label' => 'LBL_TCT_ALTA_CD_CHK_C',
+          ),
+          1 => 
+          array (
+            'name' => 'cac_c',
+            'label' => 'LBL_CAC',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'optout_c',
+            'label' => 'LBL_OPTOUT',
+          ),
+          1 => 
+          array (
+            'name' => 'aut_caratulariesgo_c',
+            'label' => 'LBL_AUT_CARATULARIESGO',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_propietario_real_chk_c',
+            'label' => 'LBL_TCT_PROPIETARIO_REAL_CHK',
+          ),
+          1 => '',
         ),
       ),
     ),

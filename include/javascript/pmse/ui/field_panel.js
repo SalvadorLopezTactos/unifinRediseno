@@ -234,13 +234,13 @@ FieldPanel.prototype._append = function () {
     }
     appendTo = this._getUsableAppendTo();
     siblings = appendTo.children;
+
     for (i = 0; i < siblings.length; i += 1) {
-        aux = jQuery(siblings[i]).zIndex();
+        aux = jQuery(siblings[i]).css('zIndex');
         if (aux > zIndex) {
             zIndex = aux;
         }
     }
-
     this.setZOrder(zIndex + 1);
 
     if (!owner || isInDOM(owner)) {
@@ -362,6 +362,7 @@ FieldPanel.prototype.attachListeners = function () {
     var that = this;
     if (this.html && !this._attachedListeners) {
         jQuery('.adam-modal').add(this._context).on("click", function (e) {
+
             var $selector = $(that.html);
             if (that._owner) {
                 $selector = isHTMLElement(that._owner) ? $selector.add(that._owner) : $selector.add(that._owner.html);

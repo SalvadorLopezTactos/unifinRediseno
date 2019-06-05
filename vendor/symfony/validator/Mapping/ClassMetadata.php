@@ -47,7 +47,7 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     public $defaultGroup;
 
     /**
-     * @var MemberMetadata[]
+     * @var MemberMetadata[][]
      *
      * @internal This property is public in order to reduce the size of the
      *           class' serialized representation. Do not access it. Use
@@ -179,18 +179,12 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
      */
     public function addConstraint(Constraint $constraint)
     {
-        if (!in_array(Constraint::CLASS_CONSTRAINT, (array) $constraint->getTargets())) {
-            throw new ConstraintDefinitionException(sprintf(
-                'The constraint "%s" cannot be put on classes.',
-                get_class($constraint)
-            ));
+        if (!\in_array(Constraint::CLASS_CONSTRAINT, (array) $constraint->getTargets())) {
+            throw new ConstraintDefinitionException(sprintf('The constraint "%s" cannot be put on classes.', \get_class($constraint)));
         }
 
         if ($constraint instanceof Valid) {
-            throw new ConstraintDefinitionException(sprintf(
-                'The constraint "%s" cannot be put on classes.',
-                get_class($constraint)
-            ));
+            throw new ConstraintDefinitionException(sprintf('The constraint "%s" cannot be put on classes.', \get_class($constraint)));
         }
 
         if ($constraint instanceof Traverse) {
@@ -278,6 +272,30 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     }
 
     /**
+     * Adds a constraint to the getter of the given property.
+     *
+     * @param string     $property   The name of the property
+     * @param string     $method     The name of the getter method
+     * @param Constraint $constraint The constraint
+     *
+     * @return $this
+     */
+    public function addGetterMethodConstraint($property, $method, Constraint $constraint)
+    {
+        if (!isset($this->getters[$property])) {
+            $this->getters[$property] = new GetterMetadata($this->getClassName(), $property, $method);
+
+            $this->addPropertyMetadata($this->getters[$property]);
+        }
+
+        $constraint->addImplicitGroupName($this->getDefaultGroup());
+
+        $this->getters[$property]->addConstraint($constraint);
+
+        return $this;
+    }
+
+    /**
      * @param string       $property
      * @param Constraint[] $constraints
      *
@@ -293,26 +311,40 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     }
 
     /**
-     * Merges the constraints of the given metadata into this object.
+     * @param string       $property
+     * @param string       $method
+     * @param Constraint[] $constraints
      *
-     * @param ClassMetadata $source The source metadata
+     * @return $this
      */
-    public function mergeConstraints(ClassMetadata $source)
+    public function addGetterMethodConstraints($property, $method, array $constraints)
     {
+        foreach ($constraints as $constraint) {
+            $this->addGetterMethodConstraint($property, $method, $constraint);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Merges the constraints of the given metadata into this object.
+     */
+    public function mergeConstraints(self $source)
+    {
+        if ($source->isGroupSequenceProvider()) {
+            $this->setGroupSequenceProvider(true);
+        }
+
         foreach ($source->getConstraints() as $constraint) {
             $this->addConstraint(clone $constraint);
         }
 
         foreach ($source->getConstrainedProperties() as $property) {
-            if ($this->hasPropertyMetadata($property)) {
-                continue;
-            }
-
             foreach ($source->getPropertyMetadata($property) as $member) {
                 $member = clone $member;
 
                 foreach ($member->getConstraints() as $constraint) {
-                    if (in_array($constraint::DEFAULT_GROUP, $constraint->groups, true)) {
+                    if (\in_array($constraint::DEFAULT_GROUP, $constraint->groups, true)) {
                         $member->constraintsByGroup[$this->getDefaultGroup()][] = $constraint;
                     }
 
@@ -365,7 +397,7 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     /**
      * Sets the default group sequence for this class.
      *
-     * @param array $groupSequence An array of group names
+     * @param string[]|GroupSequence $groupSequence An array of group names
      *
      * @return $this
      *
@@ -377,15 +409,15 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
             throw new GroupDefinitionException('Defining a static group sequence is not allowed with a group sequence provider');
         }
 
-        if (is_array($groupSequence)) {
+        if (\is_array($groupSequence)) {
             $groupSequence = new GroupSequence($groupSequence);
         }
 
-        if (in_array(Constraint::DEFAULT_GROUP, $groupSequence->groups, true)) {
+        if (\in_array(Constraint::DEFAULT_GROUP, $groupSequence->groups, true)) {
             throw new GroupDefinitionException(sprintf('The group "%s" is not allowed in group sequences', Constraint::DEFAULT_GROUP));
         }
 
-        if (!in_array($this->getDefaultGroup(), $groupSequence->groups, true)) {
+        if (!\in_array($this->getDefaultGroup(), $groupSequence->groups, true)) {
             throw new GroupDefinitionException(sprintf('The group "%s" is missing in the group sequence', $this->getDefaultGroup()));
         }
 
@@ -399,7 +431,7 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
      */
     public function hasGroupSequence()
     {
-        return $this->groupSequence && count($this->groupSequence->groups) > 0;
+        return $this->groupSequence && \count($this->groupSequence->groups) > 0;
     }
 
     /**
@@ -462,11 +494,6 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
         return CascadingStrategy::NONE;
     }
 
-    /**
-     * Adds a property metadata.
-     *
-     * @param PropertyMetadataInterface $metadata
-     */
     private function addPropertyMetadata(PropertyMetadataInterface $metadata)
     {
         $property = $metadata->getPropertyName();

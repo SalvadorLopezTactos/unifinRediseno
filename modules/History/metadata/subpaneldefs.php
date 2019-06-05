@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: layout_defs.php 13968 2006-06-12 22:00:08Z jacob $
 
 $layout_defs['History'] = array(
 	// default subpanel provided by this SugarBean

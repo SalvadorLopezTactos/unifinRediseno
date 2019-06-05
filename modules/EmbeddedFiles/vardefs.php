@@ -43,6 +43,7 @@ $dictionary['EmbeddedFile'] = array(
     ),
     'ignore_templates' => array(
         'taggable',
+        'commentlog',
     ),
 );
 

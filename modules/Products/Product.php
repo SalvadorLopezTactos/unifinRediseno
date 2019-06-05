@@ -276,6 +276,37 @@ class Product extends SugarBean
         }
     }
 
+    /**
+     * @inheritdoc
+     *
+     * Overriden here to ensure that the ProductBundles bean is saved before the Quotes bean in all cases.
+     *
+     * @return array
+     */
+    protected function getRelatedCalcFields()
+    {
+        global $dictionary;
+
+        $links = $dictionary[$this->object_name]['related_calc_fields'];
+        $quotesIndex = array_search('quotes', $links);
+        $pbIndex = array_search('product_bundles', $links);
+
+        // make sure both indices exist in the fields, otherwise do nothing to the order
+        $bothIndicesExist = $quotesIndex !== false && $pbIndex !== false;
+
+        if ($bothIndicesExist && $pbIndex > $quotesIndex) {
+            if (!function_exists('pbQuotesArraySwap')) {
+                function pbQuotesArraySwap(&$array, $swapFirst, $swapSecond)
+                {
+                    list($array[$swapFirst], $array[$swapSecond]) = array($array[$swapSecond], $array[$swapFirst]);
+                }
+            }
+            pbQuotesArraySwap($links, $quotesIndex, $pbIndex);
+        }
+
+        return $links;
+    }
+
     public function save($check_notify = false)
     {
         //If an opportunity_id value is provided, lookup the Account information (if available)
@@ -306,6 +337,10 @@ class Product extends SugarBean
         }
         if ($this->deal_calc == '') {
             $this->deal_calc = 0;
+        }
+
+        if (!isset($this->assigned_user_id) || empty($this->assigned_user_id)) {
+            $this->assigned_user_id = $GLOBALS['current_user']->id;
         }
 
         $this->checkQuantity();

@@ -11,154 +11,214 @@
 
 namespace Symfony\Component\Security\Csrf\Tests;
 
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class CsrfTokenManagerTest extends \PHPUnit_Framework_TestCase
+class CsrfTokenManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @dataProvider getManagerGeneratorAndStorage
      */
-    private $generator;
+    public function testGetNonExistingToken($namespace, $manager, $storage, $generator)
+    {
+        $storage->expects($this->once())
+            ->method('hasToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue(false));
+
+        $generator->expects($this->once())
+            ->method('generateToken')
+            ->will($this->returnValue('TOKEN'));
+
+        $storage->expects($this->once())
+            ->method('setToken')
+            ->with($namespace.'token_id', 'TOKEN');
+
+        $token = $manager->getToken('token_id');
+
+        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
+        $this->assertSame('token_id', $token->getId());
+        $this->assertSame('TOKEN', $token->getValue());
+    }
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @dataProvider getManagerGeneratorAndStorage
      */
-    private $storage;
+    public function testUseExistingTokenIfAvailable($namespace, $manager, $storage)
+    {
+        $storage->expects($this->once())
+            ->method('hasToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue(true));
+
+        $storage->expects($this->once())
+            ->method('getToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue('TOKEN'));
+
+        $token = $manager->getToken('token_id');
+
+        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
+        $this->assertSame('token_id', $token->getId());
+        $this->assertSame('TOKEN', $token->getValue());
+    }
 
     /**
-     * @var CsrfTokenManager
+     * @dataProvider getManagerGeneratorAndStorage
      */
-    private $manager;
+    public function testRefreshTokenAlwaysReturnsNewToken($namespace, $manager, $storage, $generator)
+    {
+        $storage->expects($this->never())
+            ->method('hasToken');
+
+        $generator->expects($this->once())
+            ->method('generateToken')
+            ->will($this->returnValue('TOKEN'));
+
+        $storage->expects($this->once())
+            ->method('setToken')
+            ->with($namespace.'token_id', 'TOKEN');
+
+        $token = $manager->refreshToken('token_id');
+
+        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
+        $this->assertSame('token_id', $token->getId());
+        $this->assertSame('TOKEN', $token->getValue());
+    }
+
+    /**
+     * @dataProvider getManagerGeneratorAndStorage
+     */
+    public function testMatchingTokenIsValid($namespace, $manager, $storage)
+    {
+        $storage->expects($this->once())
+            ->method('hasToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue(true));
+
+        $storage->expects($this->once())
+            ->method('getToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue('TOKEN'));
+
+        $this->assertTrue($manager->isTokenValid(new CsrfToken('token_id', 'TOKEN')));
+    }
+
+    /**
+     * @dataProvider getManagerGeneratorAndStorage
+     */
+    public function testNonMatchingTokenIsNotValid($namespace, $manager, $storage)
+    {
+        $storage->expects($this->once())
+            ->method('hasToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue(true));
+
+        $storage->expects($this->once())
+            ->method('getToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue('TOKEN'));
+
+        $this->assertFalse($manager->isTokenValid(new CsrfToken('token_id', 'FOOBAR')));
+    }
+
+    /**
+     * @dataProvider getManagerGeneratorAndStorage
+     */
+    public function testNonExistingTokenIsNotValid($namespace, $manager, $storage)
+    {
+        $storage->expects($this->once())
+            ->method('hasToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue(false));
+
+        $storage->expects($this->never())
+            ->method('getToken');
+
+        $this->assertFalse($manager->isTokenValid(new CsrfToken('token_id', 'FOOBAR')));
+    }
+
+    /**
+     * @dataProvider getManagerGeneratorAndStorage
+     */
+    public function testRemoveToken($namespace, $manager, $storage)
+    {
+        $storage->expects($this->once())
+            ->method('removeToken')
+            ->with($namespace.'token_id')
+            ->will($this->returnValue('REMOVED_TOKEN'));
+
+        $this->assertSame('REMOVED_TOKEN', $manager->removeToken('token_id'));
+    }
+
+    public function testNamespaced()
+    {
+        $generator = $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface')->getMock();
+        $storage = $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface')->getMock();
+
+        $requestStack = new RequestStack();
+        $requestStack->push(new Request(array(), array(), array(), array(), array(), array('HTTPS' => 'on')));
+
+        $manager = new CsrfTokenManager($generator, $storage, null, $requestStack);
+
+        $token = $manager->getToken('foo');
+        $this->assertSame('foo', $token->getId());
+    }
+
+    public function getManagerGeneratorAndStorage()
+    {
+        $data = array();
+
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('', new CsrfTokenManager($generator, $storage, ''), $storage, $generator);
+
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('https-', new CsrfTokenManager($generator, $storage), $storage, $generator);
+
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('aNamespace-', new CsrfTokenManager($generator, $storage, 'aNamespace-'), $storage, $generator);
+
+        $requestStack = new RequestStack();
+        $requestStack->push(new Request(array(), array(), array(), array(), array(), array('HTTPS' => 'on')));
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('https-', new CsrfTokenManager($generator, $storage, $requestStack), $storage, $generator);
+
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('generated-', new CsrfTokenManager($generator, $storage, function () {
+            return 'generated-';
+        }), $storage, $generator);
+
+        $requestStack = new RequestStack();
+        $requestStack->push(new Request());
+        list($generator, $storage) = $this->getGeneratorAndStorage();
+        $data[] = array('', new CsrfTokenManager($generator, $storage, $requestStack), $storage, $generator);
+
+        return $data;
+    }
+
+    private function getGeneratorAndStorage()
+    {
+        return array(
+            $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface')->getMock(),
+            $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface')->getMock(),
+        );
+    }
 
     protected function setUp()
     {
-        $this->generator = $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface')->getMock();
-        $this->storage = $this->getMockBuilder('Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface')->getMock();
-        $this->manager = new CsrfTokenManager($this->generator, $this->storage);
+        $_SERVER['HTTPS'] = 'on';
     }
 
     protected function tearDown()
     {
-        $this->generator = null;
-        $this->storage = null;
-        $this->manager = null;
-    }
+        parent::tearDown();
 
-    public function testGetNonExistingToken()
-    {
-        $this->storage->expects($this->once())
-            ->method('hasToken')
-            ->with('token_id')
-            ->will($this->returnValue(false));
-
-        $this->generator->expects($this->once())
-            ->method('generateToken')
-            ->will($this->returnValue('TOKEN'));
-
-        $this->storage->expects($this->once())
-            ->method('setToken')
-            ->with('token_id', 'TOKEN');
-
-        $token = $this->manager->getToken('token_id');
-
-        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
-        $this->assertSame('token_id', $token->getId());
-        $this->assertSame('TOKEN', $token->getValue());
-    }
-
-    public function testUseExistingTokenIfAvailable()
-    {
-        $this->storage->expects($this->once())
-            ->method('hasToken')
-            ->with('token_id')
-            ->will($this->returnValue(true));
-
-        $this->storage->expects($this->once())
-            ->method('getToken')
-            ->with('token_id')
-            ->will($this->returnValue('TOKEN'));
-
-        $token = $this->manager->getToken('token_id');
-
-        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
-        $this->assertSame('token_id', $token->getId());
-        $this->assertSame('TOKEN', $token->getValue());
-    }
-
-    public function testRefreshTokenAlwaysReturnsNewToken()
-    {
-        $this->storage->expects($this->never())
-            ->method('hasToken');
-
-        $this->generator->expects($this->once())
-            ->method('generateToken')
-            ->will($this->returnValue('TOKEN'));
-
-        $this->storage->expects($this->once())
-            ->method('setToken')
-            ->with('token_id', 'TOKEN');
-
-        $token = $this->manager->refreshToken('token_id');
-
-        $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfToken', $token);
-        $this->assertSame('token_id', $token->getId());
-        $this->assertSame('TOKEN', $token->getValue());
-    }
-
-    public function testMatchingTokenIsValid()
-    {
-        $this->storage->expects($this->once())
-            ->method('hasToken')
-            ->with('token_id')
-            ->will($this->returnValue(true));
-
-        $this->storage->expects($this->once())
-            ->method('getToken')
-            ->with('token_id')
-            ->will($this->returnValue('TOKEN'));
-
-        $this->assertTrue($this->manager->isTokenValid(new CsrfToken('token_id', 'TOKEN')));
-    }
-
-    public function testNonMatchingTokenIsNotValid()
-    {
-        $this->storage->expects($this->once())
-            ->method('hasToken')
-            ->with('token_id')
-            ->will($this->returnValue(true));
-
-        $this->storage->expects($this->once())
-            ->method('getToken')
-            ->with('token_id')
-            ->will($this->returnValue('TOKEN'));
-
-        $this->assertFalse($this->manager->isTokenValid(new CsrfToken('token_id', 'FOOBAR')));
-    }
-
-    public function testNonExistingTokenIsNotValid()
-    {
-        $this->storage->expects($this->once())
-            ->method('hasToken')
-            ->with('token_id')
-            ->will($this->returnValue(false));
-
-        $this->storage->expects($this->never())
-            ->method('getToken');
-
-        $this->assertFalse($this->manager->isTokenValid(new CsrfToken('token_id', 'FOOBAR')));
-    }
-
-    public function testRemoveToken()
-    {
-        $this->storage->expects($this->once())
-            ->method('removeToken')
-            ->with('token_id')
-            ->will($this->returnValue('REMOVED_TOKEN'));
-
-        $this->assertSame('REMOVED_TOKEN', $this->manager->removeToken('token_id'));
+        unset($_SERVER['HTTPS']);
     }
 }

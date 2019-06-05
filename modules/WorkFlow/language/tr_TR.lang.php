@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'İş Akış Tanımları',
   'LBL_MODULE_NAME_SINGULAR' => 'İş Akışı Tanımı',
-  'LBL_MODULE_ID' => 'İş Akışı',  
+  'LBL_MODULE_ID' => 'İş Akışı',
   'LBL_MODULE_TITLE' => 'İş Akışı: Ana Sayfa',
   'LBL_SEARCH_FORM_TITLE' => 'İş Akışı Arama',
   'LBL_LIST_FORM_TITLE' => 'İş Akışı Listesi',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Temel Modül:',
   'LBL_LIST_ORDER' => 'İşlem Sırası:',
   'LBL_FROM_NAME' => 'Kimden İsmi:',
-  'LBL_FROM_ADDRESS' => 'Kimden Adresi:',  
+  'LBL_FROM_ADDRESS' => 'Kimden Adresi:',
   'LNK_NEW_WORKFLOW' => 'İş Akış Tanımı Oluştur',
-  'LNK_WORKFLOW' => 'İş Akış Tanımlarını Listele', 
-  
-  
+  'LNK_WORKFLOW' => 'İş Akış Tanımlarını Listele',
+
+
   'LBL_ALERT_TEMPLATES' => 'Uyarı Şablonları',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Uyarı şablonu oluştur:',
   'LBL_SUBJECT' => 'Konusu:',
-  
+
   'LBL_RECORD_TYPE' => 'Uygulandığı Yer:',
  'LBL_RELATED_MODULE'=> 'İlişkili Modüller:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'İş Akışı Sırası',
 	'LNK_ALERT_TEMPLATES' => 'Uyarı E-Posta Şablonları',
 	'LNK_PROCESS_VIEW' => 'İş Akışı Sırası',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipi',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> Sugar Workflow ve Workflow Management fonksiyonu, Sugar&#39;ın gelecekteki bir sürümünde kaldırılacak. Sugar Enterprise sürüm müşterileri, Sugar Advanced Workflow tarafından sağlanan fonksiyonu kullanmaya başlamalıdır. Daha fazla bilgi için <a href="http://www.sugarcrm.com/wf-eol" target="_blank">buraya</a> tıklayın.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Not:</strong> Sugar İş Akışı ve İş Akışı Yönetimi işlevi bakım modundadır. Sugar Enterprise sürümü müşterileri, SugarBPM<sup class="trademark">TM</sup> tarafından sağlanan işlevselliği kullanmalıdır.',
 );
 

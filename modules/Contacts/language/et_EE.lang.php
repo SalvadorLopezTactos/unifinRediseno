@@ -169,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopeeri alternatiivne aadress esmaseks aadressiks',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopeeri esmane aadress alternatiivseks aadressiks',
     'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab kontot.\\n Looge kas uus konto või valige olemasolev.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab kontot.\n Looge kas uus konto või valige olemasolev.',
     'NTC_REMOVE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kontakti juhtumist eemaldada?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje eemaldada otsese aruandena?',
 

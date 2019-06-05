@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: StudioWizard.php 20582 2007-03-02 03:54:00Z majed $
 
 
 class StudioWizard{

@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Security\Csrf\Tests\TokenStorage;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
 
 /**
@@ -19,7 +20,7 @@ use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class NativeSessionTokenStorageTest extends \PHPUnit_Framework_TestCase
+class NativeSessionTokenStorageTest extends TestCase
 {
     const SESSION_NAMESPACE = 'foobar';
 
@@ -27,14 +28,6 @@ class NativeSessionTokenStorageTest extends \PHPUnit_Framework_TestCase
      * @var NativeSessionTokenStorage
      */
     private $storage;
-
-    public static function setUpBeforeClass()
-    {
-        ini_set('session.save_handler', 'files');
-        ini_set('session.save_path', sys_get_temp_dir());
-
-        parent::setUpBeforeClass();
-    }
 
     protected function setUp()
     {
@@ -119,5 +112,33 @@ class NativeSessionTokenStorageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('TOKEN', $this->storage->removeToken('token_id'));
         $this->assertFalse($this->storage->hasToken('token_id'));
+    }
+
+    public function testClearRemovesAllTokensFromTheConfiguredNamespace()
+    {
+        $this->storage->setToken('foo', 'bar');
+        $this->storage->clear();
+
+        $this->assertFalse($this->storage->hasToken('foo'));
+        $this->assertArrayNotHasKey(self::SESSION_NAMESPACE, $_SESSION);
+    }
+
+    public function testClearDoesNotRemoveSessionValuesFromOtherNamespaces()
+    {
+        $_SESSION['foo']['bar'] = 'baz';
+        $this->storage->clear();
+
+        $this->assertArrayHasKey('foo', $_SESSION);
+        $this->assertArrayHasKey('bar', $_SESSION['foo']);
+        $this->assertSame('baz', $_SESSION['foo']['bar']);
+    }
+
+    public function testClearDoesNotRemoveNonNamespacedSessionValues()
+    {
+        $_SESSION['foo'] = 'baz';
+        $this->storage->clear();
+
+        $this->assertArrayHasKey('foo', $_SESSION);
+        $this->assertSame('baz', $_SESSION['foo']);
     }
 }

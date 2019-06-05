@@ -11,11 +11,11 @@
  */
 if (!defined('sugarEntry')) {
     //This script is designed to be runnable stand alone
-    define('sugarEntry', true);
     require_once 'include/utils.php';
     require_once 'include/utils/array_utils.php';
     require_once 'include/SugarObjects/SugarConfig.php';
     require_once 'include/utils/autoloader.php';
+    SugarAutoLoader::init();
 }
 
 
@@ -292,11 +292,8 @@ EOQ;
     }
 }
 
-
-global $updateSilent;
-
 if (!isset($exec) || $exec) {
-    $silent = isset($GLOBALS['updateSilent']) ? $GLOBALS['updateSilent'] : false;
+    $silent = isset($GLOBALS['updateSilent']) ? $GLOBALS['updateSilent'] : true;
     create_cache_directory("Expressions/functions_cache.js");
     buildCache(sugar_cached("Expressions"), $silent, true);
 }

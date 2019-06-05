@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Определения бизнес-процессов',
   'LBL_MODULE_NAME_SINGULAR' => 'Определение бизнес-процессов',
-  'LBL_MODULE_ID' => 'Бизнес-процесс',  
+  'LBL_MODULE_ID' => 'Бизнес-процесс',
   'LBL_MODULE_TITLE' => 'Бизнес-процесс: Главная',
   'LBL_SEARCH_FORM_TITLE' => 'Найти бизнес-процесс',
   'LBL_LIST_FORM_TITLE' => 'Список бизнес-процессов',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Основной модуль:',
   'LBL_LIST_ORDER' => 'Обработать заказ:',
   'LBL_FROM_NAME' => 'От (имя):',
-  'LBL_FROM_ADDRESS' => 'От (адрес):',  
+  'LBL_FROM_ADDRESS' => 'От (адрес):',
   'LNK_NEW_WORKFLOW' => 'Создать определение бизнес-процесса',
-  'LNK_WORKFLOW' => 'Список определений бизнес-процессов', 
-  
-  
+  'LNK_WORKFLOW' => 'Список определений бизнес-процессов',
+
+
   'LBL_ALERT_TEMPLATES' => 'Шаблоны уведомлений',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Создать шаблон уведомления:',
   'LBL_SUBJECT' => 'Тема:',
-  
+
   'LBL_RECORD_TYPE' => 'Применяется к:',
  'LBL_RELATED_MODULE'=> 'Связанный модуль:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Последовательность бизнес-процесса',
 	'LNK_ALERT_TEMPLATES' => 'Шаблоны уведомлений',
 	'LNK_PROCESS_VIEW' => 'Последовательность бизнес-процесса',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Тип',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примечание.</strong>Функция Sugar Workflow and Workflow Management будет удалена в следующей версии Sugar. Клиентам, использующим версию Sugar Enterprise, следует начать использовать функцию, предоставляемую Advanced Workflow. Для получения дополнительной информации щелкните <a href="http://www.sugarcrm.com/wf-eol" target="_blank">здесь</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примечание.</strong> Функции Sugar Workflow и Workflow Management находятся в режиме обслуживания. Клиентам с версией Sugar Enterprise следует использовать функцию, предоставляемую SugarBPM<sup class="trademark">TM</sup>.',
 );
 

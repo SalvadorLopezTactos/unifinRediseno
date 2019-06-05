@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: Popup_picker.php 56510 2010-05-17 18:54:49Z jenny $
 
 
 

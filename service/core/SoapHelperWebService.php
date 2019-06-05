@@ -124,50 +124,49 @@ class SoapHelperWebServices {
 	} // fn
 
 	function setFaultObject($errorObject) {
-		if ($this->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 			$GLOBALS['log']->debug('SoapHelperWebServices->setFaultObject - ' . var_export($errorObject, true));
 		}
 		global $service_object;
 		$service_object->error($errorObject);
 	} // fn
 
-/**
- * Validate the user session based on user name and password hash.
- *
- * @param string $user_name -- The user name to create a session for
- * @param string $password -- The MD5 sum of the user's password
- * @return true -- If the session is created
- * @return false -- If the session is not created
- */
-function validate_user($user_name, $password){
-	$GLOBALS['log']->info('Begin: SoapHelperWebServices->validate_user');
-	global $server, $current_user, $sugar_config;
-	$user = BeanFactory::newBean('Users');
-	$user->user_name = $user_name;
-	$authController = AuthenticationController::getInstance();
-	// Check to see if the user name and password are consistent.
-	if($user->authenticate_user($password)){
-		// we also need to set the current_user.
-		$user->retrieve($user->id);
-		$current_user = $user;
+    /**
+     * Validate the user session based on user name and password hash.
+     *
+     * @param string $user_name -- The user name to create a session for
+     * @param string $password -- The MD5 sum of the user's password
+     * @return bool true -- If the session is created
+     * @return bool false -- If the session is not created
+     */
+    public function validate_user($user_name, $password)
+    {
+        $GLOBALS['log']->info('Begin: SoapHelperWebServices->validate_user');
+        global $server, $current_user;
+        $user = BeanFactory::newBean('Users');
+        $user->user_name = $user_name;
+        $authController = AuthenticationController::getInstance();
+        // Check to see if the user name and password are consistent.
+        if ($user->authenticate_user($password)) {
+            // we also need to set the current_user.
+            $user->retrieve($user->id);
+            $current_user = $user;
+            $GLOBALS['log']->info('End: SoapHelperWebServices->validate_user - validation passed');
+            return true;
+        }
 
-		$GLOBALS['log']->info('End: SoapHelperWebServices->validate_user - validation passed');
-		return true;
-    } elseif (extension_loaded('mcrypt')) {
-		$password = $this->decrypt_string($password);
-		if($authController->login($user_name, $password) && isset($_SESSION['authenticated_user_id'])){
-			$user->retrieve($_SESSION['authenticated_user_id']);
-			$current_user = $user;
-			$GLOBALS['log']->info('End: SoapHelperWebServices->validate_user - validation passed');
-			return true;
-		}
-	}else{
-		$GLOBALS['log']->fatal("SECURITY: failed attempted login for $user_name using SOAP api");
-		$server->setError("Invalid username and/or password");
-		return false;
-	}
+        $password = $this->decrypt_string($password);
+        if ($authController->login($user_name, $password) && isset($_SESSION['authenticated_user_id'])) {
+            $user->retrieve($_SESSION['authenticated_user_id']);
+            $current_user = $user;
+            $GLOBALS['log']->info('End: SoapHelperWebServices->validate_user - validation passed');
+            return true;
+        }
 
-}
+        $GLOBALS['log']->info("SECURITY: failed attempted login for $user_name using SOAP api");
+        $server->setError("Invalid username and/or password");
+        return false;
+    }
 
 	/**
 	 * Validate the provided session information is correct and current.  Load the session.
@@ -475,7 +474,7 @@ function validate_user($user_name, $password){
 			} // foreach
 		} // if
 		$GLOBALS['log']->info('End: SoapHelperWebServices->get_name_value_list_for_fields');
-		if ($this->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 			$GLOBALS['log']->debug('SoapHelperWebServices->get_name_value_list_for_fields - return data = ' . var_export($list, true));
 		} // if
 		return $list;
@@ -635,7 +634,7 @@ function validate_user($user_name, $password){
 			return array();
 		}
 
-		if ($this->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 			$GLOBALS['log']->debug('SoapHelperWebServices->get_return_value_for_link_fields - link info = ' . var_export($link_name_to_value_fields_array, true));
 		} // if
 		$link_output = array();
@@ -670,7 +669,7 @@ function validate_user($user_name, $password){
 			} // if
 		} // foreach
 		$GLOBALS['log']->debug('End: SoapHelperWebServices->get_return_value_for_link_fields');
-		if ($this->isLogLevelDebug()) {
+        if ($GLOBALS['log']->wouldLog('debug')) {
 			$GLOBALS['log']->debug('SoapHelperWebServices->get_return_value_for_link_fields - output = ' . var_export($link_output, true));
 		} // if
 		return $link_output;
@@ -1158,9 +1157,12 @@ function validate_user($user_name, $password){
      * @param string $iv
      * @return string
      */
-    public static function decrypt_tripledes($string, $key, $iv)
+    public static function decrypt_tripledes(string $string, string $key, string $iv) : string
     {
-        return mcrypt_decrypt(MCRYPT_3DES, $key, pack("H*", $string), MCRYPT_MODE_CBC, $iv);
+        return rtrim(
+            openssl_decrypt(hex2bin($string), 'des-ede3-cbc', $key, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv),
+            "\0"
+        );
     }
 
 	/**
@@ -1171,37 +1173,24 @@ function validate_user($user_name, $password){
 	 *
 	 * @return a decrypted string if we can decrypt, the original string otherwise
 	 */
-	function decrypt_string($string){
-		$GLOBALS['log']->info('Begin: SoapHelperWebServices->decrypt_string');
-        if (extension_loaded('mcrypt')) {
-			$focus = Administration::getSettings();
-			$key = '';
-			if(!empty($focus->settings['ldap_enc_key'])){
-				$key = $focus->settings['ldap_enc_key'];
-			}
-			if(empty($key)) {
-				$GLOBALS['log']->info('End: SoapHelperWebServices->decrypt_string - empty key');
-				return $string;
-			} // if
-			$key = substr(md5($key),0,24);
-		    $iv = "password";
-			$GLOBALS['log']->info('End: SoapHelperWebServices->decrypt_string');
-            return self::decrypt_tripledes($string, $key, $iv);
-		}else{
-			$GLOBALS['log']->info('End: SoapHelperWebServices->decrypt_string');
-			return $string;
-		}
-	} // fn
+    public function decrypt_string($string)
+    {
+        $GLOBALS['log']->info('Begin: SoapHelperWebServices->decrypt_string');
 
-	function isLogLevelDebug() {
-		if (isset($GLOBALS['sugar_config']['logger'])) {
-			if (isset($GLOBALS['sugar_config']['logger']['level'])) {
-				return ($GLOBALS['sugar_config']['logger']['level'] == 'debug');
-			} // if
-		}
-		return false;
-	} // fn
-
+        $focus = Administration::getSettings();
+        $key = '';
+        if (!empty($focus->settings['ldap_enc_key'])) {
+            $key = $focus->settings['ldap_enc_key'];
+        }
+        if (empty($key)) {
+            $GLOBALS['log']->info('End: SoapHelperWebServices->decrypt_string - empty key');
+            return $string;
+        }
+        $key = substr(md5($key), 0, 24);
+        $iv = "password";
+        $GLOBALS['log']->info('End: SoapHelperWebServices->decrypt_string');
+        return self::decrypt_tripledes($string, $key, $iv);
+    }
 
     /**
      * returnFieldsWithAccess

@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Assegnato al Gruppo',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'I Gruppi che si possono visualizzare di default nei records sono quelli a cui tu appartieni.',
 	'LBL_DEFAULT_TEAM'					=> 'Gruppo predefinito',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Gruppo Primario di default',
 	'LBL_LIST_DESCRIPTION'				=> 'Descrizione',
 	'LBL_MY_TEAMS'						=> 'I miei Gruppi',
 	'LBL_PRIVATE_TEAM_FOR'				=> 'Gruppo privato per',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Indirizzi Email dei destinatari.',
 	'ERR_SERVER_STATUS'					=> 'Stato del server',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Il sistema non è in grado di inviare la email all´utente. Si prega di controllare si Mail Transfer Agent nelle Importazioni Email.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'L&#39;utente può essere creato solo in <a href="{0}" target="_blank">Pannello cloud</a> per la modalità IDM.',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'L&#39;indirizzo e-mail principale può essere aggiornato solo in <a href="{0}" target="_blank">Pannello cloud</a> per la modalità IDM.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Indirizzo Email',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Conferma Nuova Password',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'È stato modificato il tipo utente da Amministratore del sistema a Utente Normale. Dopo il salvataggio di questa modifica, l´utente non avrà più i privilegi amministrativi.\\n\\nCliccare OK per procedere.\\nClicare Annulla per tornare al record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'È stato modificato il tipo utente da Amministratore del sistema a Utente Normale. Dopo il salvataggio di questa modifica, l´utente non avrà più i privilegi amministrativi.\n\nCliccare OK per procedere.\nClicare Annulla per tornare al record.',
 	'LBL_COUNTRY'						=> 'Nazione',
 	'LBL_CURRENCY_TEXT'					=> 'Scegli la valuta predefinita',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Il numero di posti decimali da mostrare per i decimali e i float nel sistema, ad esempio valuta e media in Report.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Mostra Valuta Preferita',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Converti la valuta di base in quella preferita dell´utente nella vista di elenco e di dettaglio',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => 'Crea elementi dell&#39;opportunità nella valuta preferita',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => 'Gli elementi dell&#39;opportunità aggiunti a un&#39;Opportunità dal Catalogo prodotti verranno convertiti nella valuta preferita dall&#39;utente, se risulta diversa dalla valuta utilizzata nell&#39;articolo del Catalogo prodotti.',
 	'LBL_NUMBER_GROUPING_SEP'			=> 'Separatore migliaia',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Carattere usato per separare le migliaia',
 	'LBL_DECIMAL_SEP'					=> 'Separatore decimale',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Fornire sia un nome utente che un indirizzo email.',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> 'Questo al momento non è disponibile. Si prega di contattare l´amministratore di sistema.',
 	'LBL_PUBLISH_KEY'					=> 'Password per la Pubblicazione',
-
+    'LBL_SITE_USER_ID' => 'Hash di site_url e user_id',
     'LBL_QUOTAS'                        => 'Budget',
     'LBL_FORECASTS'                     => 'Previsioni',
     'LBL_WORKSHEETS'                    => 'Fogli di Lavoro',
@@ -622,10 +622,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profilo utente',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Se alcuni campi non sono modificabili, eseguire l&#39;accesso al Pannello Cloud per gestire questi campi',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        'Se si desidera modificare alcuni campi che non sono modificabili, ' .
-        'contattare l&#39;Amministratore per notificare queste modifiche',
+        'Se desideri apportare modifiche ai campi di sola lettura, contatta l&#39;amministratore Sugar.',
 ); // END STRINGS DEFS
-
-?>

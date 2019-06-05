@@ -72,6 +72,19 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
     // and if basic bar chart is displayed as discrete by default
     var isReportView = chartConfig.reportView || false;
 
+    if (chartConfig.chartType === 'barChart') {
+        if (isReportView) {
+            if (params.vertical) {
+                params.allowScroll = true;
+            }
+            if (chartConfig.barType === 'grouped') {
+                params.stacked = false;
+            }
+        } else if (chartConfig.barType === 'basic') {
+            params.stacked = true;
+        }
+    }
+
     // locale config object based on user/system preferences
     var myLocale = SUGAR.charts.getLocale();
     var tooltipTemplate = SUGAR.charts._getTooltipTemplate(chartConfig.chartType);
@@ -666,6 +679,10 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
          * @param firstQuarter the currently configured fiscal time period
          */
         setFiscalStartDate: function(firstQuarter) {
+            // it will be false if timeperiods are not set up
+            if (!firstQuarter) {
+                return;
+            }
             var fiscalYear = firstQuarter.start_date.split('-')[0];
             var quarterNumber = firstQuarter.name.match(/.*Q(\d{1})/)[1];  // [1-4]
             var quarterDateStart = new Date(firstQuarter.start_date);      // 2017-01-01
@@ -1414,7 +1431,7 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
             $(window).on('resize.' + this.sfId, _.debounce(_.bind(function() {
                 if (chart.render) {
                     chart.render();
-                } else {
+                } else if (chart.update) {
                     chart.update();
                 }
             }, this), 300));
@@ -1437,6 +1454,8 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
             var svgChartId = id ? 'svg_' + id : 'svg_c3090c86-2b12-a65e-967f-51b642ac6165';
             var legendShowState = chart.legend.showAll();
             var textureFillState = true;
+            // save allowScroll value if supported
+            var allowScrollState = chart.allowScroll ? chart.allowScroll() : null;
 
             var completeCallback = complete || _.bind(function() {
                 chart.legend.showAll(legendShowState); //restore showAll state for web render
@@ -1444,12 +1463,22 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                 if (chart.textureFill) {
                     chart.textureFill(textureFillState);
                 }
+
+                // reset allowScroll value if supported
+                if (chart.allowScroll) {
+                    chart.allowScroll(allowScrollState);
+                }
+
                 // now that image is generated
                 // it is ok to render the visible chart
                 this.renderChart(id, chart, json);
             }, this);
 
             chart.legend.showAll(true); //set showAll legend property for images
+            // no scroll for image file
+            if (chart.allowScroll) {
+                chart.allowScroll(false);
+            }
 
             // temporarily turn off texture filling for onclick feedback
             if (chart.textureFill) {
@@ -1498,6 +1527,8 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                                 var ctx = oCanvas.getContext('2d');
                                 $.post(saveToUrl, {imageStr: uri, filename: filename});
                                 ctx.clearRect(0, 0, 1440, 960);
+                                // fix chrome crash caused by large image
+                                d3sugar.select(d3ChartId + ' svg').remove();
                                 completeCallback();
                             }
                         };

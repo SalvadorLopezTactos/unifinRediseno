@@ -23,7 +23,9 @@
     mapping: {
         none: 'LBL_NO_CHART',
         hBarF: 'LBL_HORIZ_BAR',
+        hGBarF: 'LBL_HORIZ_GBAR',
         vBarF: 'LBL_VERT_BAR',
+        vGBarF: 'LBL_VERT_GBAR',
         pieF: 'LBL_PIE',
         funnelF: 'LBL_FUNNEL',
         lineF: 'LBL_LINE',

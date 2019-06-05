@@ -24,5 +24,7 @@ interface PMSEDataParserInterface
 
     public function setBeanList($beanList);
 
+    public function setCriteriaToken($criteriaToken);
+
     public function parseCriteriaToken($criteriaToken, $params = array());
 }

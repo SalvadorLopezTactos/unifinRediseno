@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Workflow:',
   'LBL_MODULE_NAME_SINGULAR' => 'Workflow',
-  'LBL_MODULE_ID' => 'Workflow',  
+  'LBL_MODULE_ID' => 'Workflow',
   'LBL_MODULE_TITLE' => 'Flusso di lavoro: Home',
   'LBL_SEARCH_FORM_TITLE' => 'Cerca Workflow',
   'LBL_LIST_FORM_TITLE' => 'Elenco Workflow',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Modulo obiettivo:',
   'LBL_LIST_ORDER' => 'Processo d´Ordine:',
   'LBL_FROM_NAME' => 'Da Nome:',
-  'LBL_FROM_ADDRESS' => 'Da Indirizzo:',  
+  'LBL_FROM_ADDRESS' => 'Da Indirizzo:',
   'LNK_NEW_WORKFLOW' => 'Nuovo Workflow',
-  'LNK_WORKFLOW' => 'Visualizza Workflow', 
-  
-  
+  'LNK_WORKFLOW' => 'Visualizza Workflow',
+
+
   'LBL_ALERT_TEMPLATES' => 'Modelli Avvisi',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Crea Modello per Avvisi:',
   'LBL_SUBJECT' => 'Oggetto:',
-  
+
   'LBL_RECORD_TYPE' => 'Applica a:',
  'LBL_RELATED_MODULE'=> 'Modulo correlato:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sequenza Workflow',
 	'LNK_ALERT_TEMPLATES' => 'Avvisi Modelli Email',
 	'LNK_PROCESS_VIEW' => 'Sequenza Workflow',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> le funzionalità Workflow e Amministrazione workflow di Sugar saranno eliminate nella prossima versione di Sugar. I clienti dell&#39;edizione Sugar Enterprise dovranno iniziare a utilizzare la funzionalità fornita da Sugar Advanced Workflow. Per maggiori informazioni, fare clic su <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> Le funzionalità Workflow e Amministrazione Workflow di Sugar sono in modalità manutenzione. I clienti di Sugar edizione Enterprise devono utilizzare le funzionalità fornite da SugarBPM<sup class="trademark">TM</sup>.',
 );
 

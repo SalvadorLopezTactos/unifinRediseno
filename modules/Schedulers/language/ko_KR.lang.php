@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '추후 기간 생성',
 'LBL_OOTB_HEARTBEAT' => '설탕 하트 비트',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent 기사를 업데이트하십시오.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => '승인 된 조항 & 만료 KB 조항을 게시 합니다.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => '승인된 조항 & 만료 KB 조항을 게시합니다.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 예정된 작업',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '정규화되지 않은 팀 보안 데이터 다시 빌드',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> '이메일 알림 전송 실행',
 'LBL_CLEANJOBQUEUE' => '대기중 작업 마무리하기',
 'LBL_CLEANOLDRECORDLISTS' => '예전 기록목록을 삭제합니다.',
-'LBL_PMSEENGINECRON' => 'Advanced Workflow Scheduler',
+'LBL_PMSEENGINECRON' => 'SugarBPM 일정관리',
 );
 

@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'إنشاء فترات زمنية في المستقبل',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'تحديث مقالات KBContent.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'انشر المقالات المعتمدة ومقالات KB منتهية الصلاحية.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'وظيفة Advanced Workflow المجدولة',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'نشر المقابلات المعتمدة ومقابلات قواعد المعارف منتهية الصلاحية.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' وظيفة مجدولة',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'إعادة إنشاء بيانات أمان الفريق غير المتوافقة',
 
 // List Labels
@@ -139,7 +139,7 @@ $mod_strings = array (
 'LBL_POLLMONITOREDINBOXES' => 'التحقق من حسابات البريد الداخلية',
 'LBL_PERFORMFULLFTSINDEX' => 'نظام فهرسة البحث عن كامل النص',
 'LBL_SUGARJOBREMOVEPDFFILES' => 'إزالة ملفات PDF المؤقتة',
-'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'انشر المقالات المعتمدة ومقالات KB منتهية الصلاحية.',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'نشر المقابلات المعتمدة ومقابلات قواعد المعارف منتهية الصلاحية.',
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'مجدول قائمة انتظار Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'إزالة ملفات الأدوات التشخيصية',
 'LBL_SUGARJOBREMOVETMPFILES' => 'إزالة الملفات المؤقتة',
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'تشغيل إرسال تذكيرات البريد الإلكتروني',
 'LBL_CLEANJOBQUEUE' => 'تنظيف قوائم انتظار الوظائف',
 'LBL_CLEANOLDRECORDLISTS' => 'تنظيف لوائح السجلات القديمة',
-'LBL_PMSEENGINECRON' => 'مجدول Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'جدولة SugarBPM',
 );
 

@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Εμφάνιση Λήψης Καρτέλας',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Όταν επιλεχθεί, η Λήψη καρτέλας θα εμφανιστεί στις "Ρυθμίσεις Χρήστη" και θα παρέχει στους χρήστες πρόσβαση στο Sugar plug-ins και σε άλλα διαθέσιμα αρχεία.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Για SOAP πιστοποίηση όταν χρησιμοποιείται LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'The php_mcrypt επέκταση πρέπει να ενεργοποιηθεί στο php.ini αρχείο σας.',
     'LBL_ALL' => 'Όλες',
     'LBL_MARK_POINT' => 'Σημείο Σημείωσης',
     'LBL_NEXT_' => 'Επόμενο>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Ροές δραστηριότητας',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ενεργοποίηση ροών δραστηριοτήτων',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ενεργοποιεί τις Ροές δραστηριοτήτων για την εφαρμογή',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Ενεργοποιήσετε πρόσθετο περιεχόμενο οθόνης σύνδεσης',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Αυτόματη αποθήκευση διαδικασίας ορισμών',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Καθορίζει πόσο συχνά αποθηκεύονται αυτόματα οι διαδικασίες ορισμών όταν χρησιμοποιείτε τη σχεδίαση',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Αυτόματη επικύρωση διαδικασίας ορισμών για αυτόματη αποθήκευση',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Καθορίζει εάν η διαδικασία ορισμών όταν επικυρώνεται αυτόματα κατά τη διαδικασία αυτόματης αποθήκευσης. Αυτό ενεργοποιείται μόνο εάν το «Αυτόματη αποθήκευση διαδικασία ορισμών» ρυθμιστεί για συγκεκριμένο χρονικό διάστημα',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Αυτόματη επικύρωση διαδικασίας ορισμών κατά την εισαγωγή',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Καθορίζει εάν η διαδικασίες ορισμών επικυρώνονται αυτόματα κατά την πρώτη εισαγωγή',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Ρυθμίσεις Αρχείου σχολίου',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Μέγιστος αριθμός χαρακτήρων που θα εμφανίζονται ανά καταχώρηση σχολίου',
 );
 
 

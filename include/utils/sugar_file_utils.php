@@ -125,36 +125,40 @@ function sugar_file_put_contents($filename, $data, $flags=null, $context=null){
 }
 
 /**
- * sugar_file_put_contents_atomic
  * This is an atomic version of sugar_file_put_contents.  It attempts to circumvent the shortcomings of file_put_contents
  * by creating a temporary unique file and then doing an atomic rename operation.
  *
- * @param $filename - String value of the file to create
- * @param $data - The data to be written to the file
- * @param string $mode String value of the parameter to specify the type of access you require to the file stream
- * @param boolean $use_include_path set to '1' or TRUE if you want to search for the file in the include_path too
- * @param context $context Context to pass into fopen operation
+ * @param string $filename Path to the file where the data should be written
+ * @param string $data     The data to be written to the file
+ *
  * @return boolean - Returns true if $filename was created, false otherwise.
  */
-function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_include_path=false, $context=null){
-
-    $dir = dirname($filename);
-    $temp = @tempnam($dir, 'temp');
-
-    if ($temp === false || !($f = @fopen($temp, $mode))) {
-        // delete the file created by tempnam
-        if ($temp) {
-            @unlink($temp);
-        }
-        $temp =  $dir . DIRECTORY_SEPARATOR . uniqid('temp');
-        if (!($f = @fopen($temp, $mode))) {
-            trigger_error("sugar_file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
-            return false;
-        }
+function sugar_file_put_contents_atomic($filename, $data)
+{
+    if (!is_windows()) {
+        // On NFS, we want to interact with the target file system only at the final moment of rename
+        // in order to avoid race conditions, therefore, creating the temporary file in the temporary directory
+        $dir = sys_get_temp_dir();
+    } else {
+        // On Windows, we have to create the temporary file in the destination directory because otherwise,
+        // it will inherit the default permissions of the temporary directory which will block the web server
+        // from accessing the file
+        $dir = dirname($filename);
     }
 
-    fwrite($f, $data);
-    fclose($f);
+    $temp = tempnam($dir, 'sugar');
+
+    if ($temp === false) {
+        return false;
+    }
+
+    if (file_put_contents($temp, $data) === false) {
+        unlink($temp);
+
+        return false;
+    }
+
+    sugar_chmod($temp);
 
     if (!@rename($temp, $filename))
     {
@@ -165,11 +169,8 @@ function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_inclu
             @unlink($temp);
             trigger_error("sugar_file_put_contents_atomic() : fatal rename failure '$temp' -> '$filename'", E_USER_ERROR);
         }
-    }
-
-    if(file_exists($filename))
-    {
-        return sugar_chmod($filename);
+    } else {
+        return file_exists($filename);
     }
 
     return false;

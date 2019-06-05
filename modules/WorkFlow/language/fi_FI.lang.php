@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Work Flow -määritelmät',
   'LBL_MODULE_NAME_SINGULAR' => 'Work Flow -määritelmä',
-  'LBL_MODULE_ID' => 'Work Flow',  
+  'LBL_MODULE_ID' => 'Work Flow',
   'LBL_MODULE_TITLE' => 'Work Flow: Etusivu',
   'LBL_SEARCH_FORM_TITLE' => 'Work Flow -haku',
   'LBL_LIST_FORM_TITLE' => 'Work Flow -lista',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Kantamoduuli',
   'LBL_LIST_ORDER' => 'Prosessijärjestys:',
   'LBL_FROM_NAME' => 'Lähettäjän nimi:',
-  'LBL_FROM_ADDRESS' => 'Lähettäjän osoite:',  
+  'LBL_FROM_ADDRESS' => 'Lähettäjän osoite:',
   'LNK_NEW_WORKFLOW' => 'Luo Work Flow -määritelmä',
-  'LNK_WORKFLOW' => 'Listaa Work Flow -määritelmät', 
-  
-  
+  'LNK_WORKFLOW' => 'Listaa Work Flow -määritelmät',
+
+
   'LBL_ALERT_TEMPLATES' => 'Homautusmallit',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Luo huomautusmalli:',
   'LBL_SUBJECT' => 'Aihe:',
-  
+
   'LBL_RECORD_TYPE' => 'Soveltuu:',
  'LBL_RELATED_MODULE'=> 'Liittyvä moduuli:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Work Flow -sekvenssi',
 	'LNK_ALERT_TEMPLATES' => 'Sähköpostihuomautusmallit',
 	'LNK_PROCESS_VIEW' => 'Work Flow -sekvenssi',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tyyppi',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Huomautus:</strong> Sugarin työnkulku ja työnkulun hallintatoiminto ovat huoltotilassa. Sugar Enterprise -asiakkaiden tulisi käyttää SugarBPM<sup class="trademark">TM</sup>:n tarjoamaa toimintoa.',
 );
 

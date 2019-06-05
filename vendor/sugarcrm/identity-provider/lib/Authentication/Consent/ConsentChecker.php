@@ -31,15 +31,19 @@ class ConsentChecker
      * check token consent
      * @return bool
      */
-    public function check()
+    public function check(): bool
     {
-        foreach ($this->consent->getScopes() as $consentScope) {
-            foreach ($this->token->getScope() as $tokenScope) {
-                if ($tokenScope == $consentScope) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        $restrictedScopes = array_diff($this->token->getScopes(), $this->consent->getScopes());
+        return empty($restrictedScopes) || $this->areScopesEmpty();
+    }
+
+    /**
+     * Are scopes empty?
+     * @return bool
+     */
+    public function areScopesEmpty(): bool
+    {
+        $scopes = $this->token->getScopes();
+        return empty($scopes) || (count($scopes) == 1 && empty($scopes[0]));
     }
 }

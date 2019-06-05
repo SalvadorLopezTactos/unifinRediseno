@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SugarWidgetReportField.php 58357 2010-09-29 23:22:03Z kjing $
 
 
 

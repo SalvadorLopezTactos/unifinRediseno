@@ -121,11 +121,20 @@ class SearchViewMetaDataParser extends ListLayoutMetaDataParser
        return true;
     }
 
-    /*
+    /**
      * Save the modified searchLayout
-     * Have to preserve the original layout format, which is array('metadata'=>array,'layouts'=>array('basic'=>array,'advanced'=>array))
+     *
+     * Have to preserve the original layout format, which is array(
+     *    'metadata' => array(),
+     *    'layouts' => array(
+     *        'basic' => array(),
+     *        'advanced' => array(),
+     *    );
+     *)
+     *
+     * {@inheritDoc}
      */
-    function handleSave ($populate = true)
+    public function handleSave($populate = true, $clearCache = true)
     {
         if ($populate)
             $this->_populateFromRequest() ;

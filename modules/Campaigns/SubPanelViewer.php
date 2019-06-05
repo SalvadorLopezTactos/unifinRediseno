@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: SubPanelViewer.php 50894 2009-09-17 06:26:45Z weidong $
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 

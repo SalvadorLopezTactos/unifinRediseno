@@ -59,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Chyby byly zjištěny při kontrole kompatibility. Aby se vaše SugarCRM instalace mohla správně fungovat, prosim, vykonejte správné kroky k řešení problémů uvedených níže, a pak pokračujte stisknutím tlačítka překontrolovat, nebo zkuste nainstalovat znovu.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Položka Povolit času volání předat referenci je zapnuta (mělo by být vypnuto v souboru php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Plánovač systému Sugar se spustí s omezenou funkčností. Služba Archivování e-mailů nebude spuštěna.',
+	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Plánovač Sugar bude fungovat s omezenou funkčností. Nebude fungovat služba Archivování e-mailů.',
     'ERR_CHECKSYS_IMAP'					=> 'Nenaleyeno: Prichodzí Email a kampaně (e-mail) vyžadují IMAP knihovny. Ani jedno nebude funkční.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nemůže být "On" při použití MS SQL Serveru.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Varování:',
@@ -75,11 +75,10 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pro optimální vzužití pomocí IIS / FastCGI SAPI, nastavte fastcgi.logging na 0 v souboru php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nepodporovaná PHP verze nainstalovaná: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databáze není k dispozici',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nebyla nalezena. Zkontrolujte, zda máte potřebné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQL Server, Oracle nebo DB2. Možná bude v závislosti na verzi PHP potřeba odkomentovat rozšíření v souboru php.ini, nebo překompilovat správný binární soubor. Více informací o povolení podpory databáze naleznete v příručce PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nenalezena. Zkontrolujte, zda máte potřebné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQLServer, Oracle nebo DB2. Možná budete muset v závislosti na verzi PHP odkomentovat rozšíření v souboru php.ini, nebo překompilovat správný binární soubor. Více informací o tom, jak povolit podporu databáze, naleznete v příručce PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkce spojené s XML Parser Knihovami, které jsou potřebné pro aplikaci Sugar nebyly nalezeny. Možná bude nutné odkomentovat rozšíření v souboru php.ini, nebo překompilovat s právami binární soubor, v závislosti na verzi PHP. Podívejte se do vašeho PHP Manuálu pro více informací.',
     'LBL_CHECKSYS_CSPRNG' => 'Generátor náhodných čísel',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkce spojené s Multibyte Strings PHP rozšířením (mbstring), které jsou potřebné pro aplikaci Sugar nebyly nalezeny.<br /><br />Obecně platí, že je modul mbstring není povolen ve výchozím nastavení v PHP a musí být aktivován pomocí - enable-mbstring, když je compilovaný binární PHP. Podívejte se do vašeho PHP Manuálu pro více informací o tom, jak povolit mbstring podporu.',
-    'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Nastavení Session.save_path v konfiguračním souboru PHP (php.ini) není nastaveno nebo je nastaveno na složku, která neexistuje. Možná budete muset nastavit save_path nastavení v php.ini, nebo ověřit, zda složky v save_path existují.',
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_WRITABLE'  => 'Nastavení Session.save_path v konfiguračním souboru PHP (php.ini) je nastaveno na složku, která není zapisovatelná. Prosím, podniknete nezbytné kroky, aby se do složky zapisovat.<br />V závislosti na používaném operačním systému, mohlo by to vyžadovat změnu oprávnění spuštěním chmod 766, nebo klikněte pravým tlačítkem myši na název souboru pro přístup k vlastnostem a odškrtněte volbu jen pro čtení.',
     'ERR_CHECKSYS_CONFIG_NOT_WRITABLE'  => 'Konfigurační soubor existuje, ale není zapisovatelný. Prosím, podniknete nezbytné kroky, aby se do souboru dalo zapisovat. V závislosti na používaném operačním systému, mohlo by to vyžadovat změnu oprávnění spuštěním chmod 766, nebo klikněte pravým tlačítkem myši na název souboru pro přístup k vlastnostem a odškrtněte volbu jen pro čtení.',
@@ -175,7 +174,6 @@ $mod_strings = array(
 	'LBL_CHECKSYS_IMAP'					=> 'IMAP modul',
 	'LBL_CHECKSYS_MQGPC'				=> 'Magic Quotes GPC',
 	'LBL_CHECKSYS_MBSTRING'				=> 'MB Strings Module',
-    'LBL_CHECKSYS_MCRYPT'               => 'MCrypt Module',
 	'LBL_CHECKSYS_MEM_OK'				=> 'OK (bez limitu)',
 	'LBL_CHECKSYS_MEM_UNLIMITED'		=> 'OK (neomezeně)',
 	'LBL_CHECKSYS_MEM'					=> 'PHP Memory Limit',
@@ -481,7 +479,7 @@ $mod_strings = array(
     'advanced_password_new_account_email' => array(
         'subject' => 'Informace o novém účtu',
         'description' => 'Tato šablona se používá, když správce systému pošle nové heslo uživateli.',
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Zde je Vaše uživatelské jméno a dočasné heslo:</p><p>Uživatelské jméno: $contact_user_user_name </p><p>Heslo: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Poté co se přihlásíte s heslem uvedeným výše, budete požádán o změnu hesla dle Vašeho uvážení</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Zde je Vaše uživatelské jméno a dočasné heslo:</p><p>Uživatelské jméno: $contact_user_user_name </p><p>Heslo: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Poté co se přihlásíte s heslem uvedeným výše, budete požádán o změnu hesla dle Vašeho uvážení</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Zde je Vaše uživatelské jméno a dočasné heslo:<br />Uživatelské jméno: $contact_user_user_name<br />Heslo: $contact_user_user_hash<br /><br />$config_site_url<br /><br />Poté co se přihlásíte s heslem uvedeným výše, budete požádán o změnu hesla dle Vašeho uvážení.',
         'name' => 'Systémem vytvořené heslo mailu',
@@ -489,7 +487,7 @@ $mod_strings = array(
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetujte si vlastní heslo',
         'description' => "Tato šablona se využívá v momentě, kdy je uživateli obnoveno heslo.",
-        'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"center\\"><tbody><tr><td colspan=\\"2\\"><p>Dne $contact_user_pwd_last_changed jste si vyžádal možnosti obnovení hesla.</p><p>Klikněte na odkaz níže pro obnovení Vašeho hesla:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"center\"><tbody><tr><td colspan=\"2\"><p>Dne $contact_user_pwd_last_changed jste si vyžádal možnosti obnovení hesla.</p><p>Klikněte na odkaz níže pro obnovení Vašeho hesla:</p><p> $contact_user_link_guid </p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'Dne $contact_user_pwd_last_changed jste si vyžádal možnosti obnovení hesla.<br /><br />Klikněte na odkaz níže pro obnovení Vašeho hesla:<br /><br />$contact_user_link_guid',
         'name' => 'Poslat zapomenuté heslo',

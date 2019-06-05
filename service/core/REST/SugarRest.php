@@ -14,8 +14,8 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * This class is a base class implementation of REST protocol
  * @api
  */
- class SugarRest{
-
+class SugarRest
+{
  	/**
  	 * Constructor
  	 *
@@ -54,8 +54,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 				$this->fault($er);
 			}
 		}else{
-			$method = $_REQUEST['method'];
-			return  $this->implementation->$method();
+            return $this->invoke($_REQUEST['method'], []);
 		} // else
 	} // fn
 
@@ -86,4 +85,22 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 		} // else
 	}
 
-} // clazz
+    protected function invoke($method, array $arguments)
+    {
+        $re = new ReflectionMethod($this->implementation, $method);
+        $numRequiredArgs = $re->getNumberOfRequiredParameters();
+
+        if (count($arguments) < $numRequiredArgs) {
+            $GLOBALS['log']->warn(sprintf(
+                'The "%s" API endpoint requires %d arguments, %d given',
+                $method,
+                $numRequiredArgs,
+                count($arguments)
+            ));
+
+            $arguments = array_pad($arguments, $numRequiredArgs, null);
+        }
+
+        return $re->invokeArgs($this->implementation, $arguments);
+    }
+}

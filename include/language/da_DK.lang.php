@@ -114,6 +114,8 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-mail-indstillinger',
     'EmailParticipants' => 'E-mail-deltagere',
     'DataPrivacy' => 'Beskyttelse af personlige oplysninger',
+    'ReportSchedules' => 'Posttidsplaner',
+    'CommentLog' => 'Kommentarregister',
   ),
 
     'moduleIconList' =>
@@ -220,6 +222,7 @@ $app_list_strings = array (
     'OAuthTokens' => 'OAuth Token',
     'Filters' => 'Filter',
     'Comments' => 'Kommentar',
+    'CommentLog' => 'Kommentarregister',
     'Currencies' => 'Valuta',
     'ProductTemplates' => 'Produkt skabelon',
     'ProductTypes' => 'Produkttype:',
@@ -232,6 +235,7 @@ $app_list_strings = array (
     'OutboundEmail' => 'E-mail-indstilling',
     'EmailParticipants' => 'Email-deltager',
     'DataPrivacy' => 'Beskyttelse af personlige oplysninger',
+    'ReportSchedules' => 'Posttidsplan',
   ),
 
 /*
@@ -309,6 +313,13 @@ $app_list_strings = array (
     'Transportation' => 'Transport',
     'Utilities' => 'Forsyningsvirksomhed',
     'Other' => 'Andet',
+  ),
+  'service_level_dom' => array (
+    '' => '',
+    'T1' => 'Tier 1',
+    'T2' => 'Tier 2',
+    'T3' => 'Tier 3',
+    'T4' => 'Tier 4',
   ),
   'lead_source_default_key' => 'Selvgenereret',
   'lead_source_dom' =>
@@ -1005,9 +1016,9 @@ $app_list_strings = array (
                 '7'=>"Jul",
                 '8'=>"Aug",
                 '9'=>"Sep",
-                '10'=>"Okt.",
+                '10'=>"Okt",
                 '11'=>"Nov",
-                '12'=>"Dec.",
+                '12'=>"Dec",
                 ),
         'dom_cal_day_long'=>array(
                 '0'=>"",
@@ -1943,7 +1954,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\\t',
+        '\t' => '\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2076,6 +2087,15 @@ $app_list_strings = array (
         'move' => 'Flyt',
         'donothing' => 'Gør ingenting'
   ),
+  'processes_auto_save_interval' => array(
+        0 => 'Aldrig',
+        30000 => 'Hver 30. sekund',
+        60000 => 'Hvert minut',
+        120000 => 'Hvert 2. minut',
+        180000 => 'Hvert 3. minut',
+        240000 => 'Hvert 4. minut',
+        300000 => 'Hvert 5. minut',
+  ),
     'forecasts_chart_options_group' => array(
         'forecast' => 'I prognose',
         'sales_stage' => 'Salgsfase',
@@ -2104,6 +2124,15 @@ $app_list_strings = array (
         'records' => 'Liste',
         'activities' => 'Activity Stream',
     ),
+    'reportschedule_time_interval_dom' => array(
+        '3600' => 'Pr. time',
+        '21600' => 'Hver 6. time',
+        '43200' => 'Hver 12. time',
+        '86400' => 'Dagligt',
+        '604800' => 'Ugentligt',
+        '1209600' => 'Hver 2. uge',
+        '2419200' => 'Hver 4. uge',
+    ),
 );
 
 $app_strings = array (
@@ -2115,7 +2144,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Følg link',
   'LBL_TOGGLE_VISIBILITY' => 'Skift mellem visning', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktiviteter',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Alle rettigheder forbeholdt.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar og 3D-terning er registrerede varemærker af SugarCRM Inc. '.
         'Alle andre firma- og produktnavne, som er anvendt eller optræder i dette produkt kan være varemærker tilhørende de '.
         'SugarCRM ®, Sugar Enterprise™ og Sugar™ er varemærker af SugarCRM Inc.',
@@ -2393,7 +2422,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Gem',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Tilføj denne mappe til',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Denne mappe kan ikke ændres',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Er du sikker på, at du vil slette denne mappe?\\nDenne handling kan ikke fortrydes.\\nSletningen gælder for alle de mapper, der indeholder den.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Er du sikker på, at du vil slette denne mappe?\nDenne handling kan ikke fortrydes.\nSletningen gælder for alle de mapper, der indeholder den.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Nyt mappenavn',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Vælg en mappe, før du udfører denne handling.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Administration af mapper',
@@ -2552,7 +2581,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synkroniser alle e-mail-konti',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'En e-mail er sendt til den angivne e-mail-adresse ved hjælp af de angivne indstillinger for udgående e-mail. Kontrollér, om e-mailen er modtaget, for at bekræfte, at indstillingerne er korrekte.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Når du udfører denne handling, synkroniseres e-mail-konti og deres indhold.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vil du udføre en fuldstændig synkronisering?\\nMed store e-mail-konti kan det tage et par minutter.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vil du udføre en fuldstændig synkronisering?\nMed store e-mail-konti kan det tage et par minutter.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Tryk på Skift eller Ctrl for at vælge flere mapper.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Generelt',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Tilgængelige gruppemapper',
@@ -2566,7 +2595,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Disse indstillinger kan kræve en opdatering af siden for at aktivere.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Henter e-mail-konto',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Regler',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'Indstillingerne er gemt.\\n\\nDu skal genindlæse siden, før de nye indstillinger træder i kraft.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'Indstillingerne er gemt.\n\nDu skal genindlæse siden, før de nye indstillinger træder i kraft.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Du skal genindlæse siden før de nye indstillinger træder i kraft.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Send kun e-mails som almindelig tekst',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Aktiv',
@@ -2689,8 +2718,10 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'En aktiv session skal eksportere indhold.',
     'ERR_NO_HEADER_ID' => 'Denne funktion er ikke tilgængelig i dette tema.',
     'ERR_NOT_ADMIN' => "Uautoriseret adgang til administration.",
-    'ERR_DISABLED_FOR_IDM_MODE' => "Funktionen er deaktiveret i SugarCRM for IDM-tilstand og findes i Cloud Console.",
-    'ERR_GOTO_CLOUD_CONSOLE' => "Gå venligst til <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
+    'ERR_DISABLED_FOR_IDM_MODE' => 'Password Management er kun tilgængelig i Cloud-indstillinger.',
+    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Kontakt venligst Sugar-administratoren, hvis du vil foretage ændringer af skrivebeskyttede felter.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mangler obligatorisk felt:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Ugyldigt obligatorisk felt:',
     'ERR_INVALID_VALUE' => 'Ugyldig værdi:',
@@ -2725,6 +2756,14 @@ $app_strings = array (
     'EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED' => 'Nuværende bruger ikke autoriseret til at ændre {moduleName} konfigurationsindstillinger',
     'EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED' => 'Du er ikke autoriseret til at gemme denne som en favorit {moduleName}. Kontakt din administrator for at få adgang.',
     'EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED' => 'Du er ikke autoriseret til at abonnere på den {moduleName}. Kontakt din administrator for at få adgang.',
+
+    //Quotes Config Api Specific exceptions
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS' => 'worksheet_columns is not an array',
+    'EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS' => 'arbejdsark_kolonner_tilhørende_felter ikke fundet i data',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS' => 'resumé_kolonner er ikke et array',
+    'EXCEPTION_MISSING_SUMMARY_COLUMNS_RELATED_FIELDS' => 'resumé_kolonner_tilhørende_felter ikke fundet i data',
+    'EXCEPTION_MISSING_FOOTER_ROWS' => 'footer_rækker er ikke et array',
+    'EXCEPTION_MISSING_FOOTER_ROWS_RELATED_FIELDS' => 'footer_rækker_tilhørende_felter ikke fundet i data',
 
     // Default SugarApiException error messages
     'EXCEPTION_UNKNOWN_EXCEPTION'       => 'Din forespørgsel fejlede pga. en ukendt fejl.',
@@ -2916,6 +2955,7 @@ $app_strings = array (
     'LBL_FILTER_SELECT_OPERATOR' => 'Vælg operatør ...',
     'LBL_FILTER_CREATE_NEW' => 'Opret',
     'LBL_FILTER_CREATE_FILTER' => 'Opret nyt filter',
+    'LBL_FILTER_CLOSE_FILTER' => 'Luk filter',
     'LBL_FILTER_EDIT_FILTER' => 'Rediger filter',
     'LBL_FILTER_ALL_RECORDS' => 'Alle poster',
     'TPL_FILTER_SAVE' => 'Du oprettet filtret {{name}}.',
@@ -3305,7 +3345,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rettigheder forbeholdt. <br />SugarCRM, Sugar og 3D-terning er registrerede varemærker af SugarCRM Inc. '.
         'Alle andre firma- og produktnavne, som er anvendt eller optræder i dette produkt kan være varemærker tilhørende de '.
         'respektive selskaber, som de er forbundet med.',
@@ -3420,7 +3460,7 @@ Med venlig hilsen, SugarCRM',
     'LNK_RESUME' => 'Genoptag',
     'LNK_VIEW_CHANGE_LOG' => 'Se revisionslog',
     'TPL_AUDIT_LOG_TITLE' => 'Revisionslog for {{{name}}}',
-    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Klik for at se revisionslog for e-mails',
 
     'NTC_CLICK_BACK' => 'Klik på browserens tilbage-knap, og ret fejlen.',
     'NTC_DATE_FORMAT' => '"åååå-mm-dd"',
@@ -3457,7 +3497,12 @@ Med venlig hilsen, SugarCRM',
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Advarsel: Din browser er IE kompatibilitetsvisning, som ikke understøttes.",
     'WARN_LICENSE_SEATS'=>  "Advarsel: Antallet af aktive brugere er allerede det maksimale antal tilladte licenser.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Advarsel: Antallet af aktive brugere overstiger det maksimale antal tilladte licenser.",
-    'WARN_ONLY_ADMINS'=> "Kun administratorer må logge på.",
+    'ERROR_LICENSE_SEATS_MAXED'=>
+        'Antal aktive brugere overstiger licensgrænsen. Kontakt din administrator.',
+    'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Kun admins kan logge ind.',
+    'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
+        'Brugerlicensgrænsen er nået. Kun eksisterende brugere kan logge ind.',
+    'WARN_ONLY_ADMINS'=> "Kun admins kan logge ind.",
     'WARN_UNSAVED_CHANGES'=> "Du er ved at forlade denne post uden at gemme eventuelle ændringer, du måtte have foretaget til posten. Er du sikker på du vil navigere væk fra denne post?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ikke-gemte ændringer. Er du sikker på du vil forlade siden og kassere ændringerne?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flytter til Reports modulet. Dine ændringer til dashlet vil ikke blive gemt. Fortsæt?',
@@ -3550,6 +3595,7 @@ Med venlig hilsen, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Du har i øjeblikket ingen poster gemt. en nu.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Du kan oprette <item1> fra en <item2>. <item3> <item2> liste.",
 
+    'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Klik her",
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Føj til mine favoritter',
@@ -3655,6 +3701,10 @@ Med venlig hilsen, SugarCRM',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Salgsmulighed metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Salgsmulighedsværdier for relateret konto.',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME' => 'Produktkataloget Quick Picks',
+    'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Oplister nyligt brugte varer og produkter, der er gemt som favoritter',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nyligt brugt',
+    'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoritter',
 
     'LBL_DASHLET_NO_RECORDS' => 'Ingen optegnelser blev fundet på dette tidspunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Resumé af sagen',
@@ -4262,7 +4312,27 @@ Med venlig hilsen, SugarCRM',
 
     'LBL_FUTURE' => 'Fremtiden',
     'LBL_REQUIRED_FIELD' => 'Obligatorisk',
-    // for nomad mobile
+
+    // For nomad mobile
+    // start of: Quotes related
+    'LBL_QLI_SINGLE_TITLE' => 'Angiven linjepost',
+    'LBL_DISCOUNT_TOTAL' => 'Rabat i alt',
+    'LBL_TAX' => 'Skat',
+    'LBL_SHIPPING' => 'Forsendelse',
+    'LBL_GRAND_TOTAL' => 'Samlet beløb',
+    'LBL_QUOTES_POPULATE_ADDRESS' => 'Udfyld automatisk faktureringsadresse fra kontoprofil',
+    'LBL_QLI_ADD_GROUP' => 'Tilføj en gruppe',
+    'LBL_QLI_COMMENT' => 'Kommentar',
+    'LBL_SELECT_ACTION' => 'Vælg handling',
+    'LBL_QLI_GROUP_NAME' => 'Gruppenavn',
+    'LBL_GROUP_TOTAL' => 'Samlet gruppe',
+    'LBL_ITEM_NAME' => 'Linjepost',
+    'LBL_QLI_DELETE' => 'Er du sikker på, at du ønsker at slette denne linjepost?',
+    'LBL_QLI_COMMENT_DELETE' => 'Er du sikker på, at du ønsker at slette denne linjepost-kommentar?',
+    'LBL_QLI_GROUP_DELETE' => 'Ønsker du at slette gruppe {0}? Alle emner vil blive flyttet til standardgruppen.',
+    'LBL_QLI_GROUP_EMPTY' => 'Intet angivet linjepunkt',
+    // end of: Quotes related
+
     'LBL_OPTIONAL' => 'Valgfri',
     'LBL_RELATED_MODULE' => 'Relateret {{{this}}}',
     'LBL_RELATED_MODULE_PLURAL' => 'Relateret {{{this}}}',
@@ -4292,7 +4362,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_CONFIRM' => 'Bekræft',
     'LBL_NO_ACCESS' => '(Ingen adgang)',
     'LBL_NO_ACCESS_LOWER' => 'Ingen adgang',
-    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_NO_FIELD_ACCESS' => 'Ingen adgang',
     'LBL_VALUE_ERASED' => 'Værdi slettet',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Disse oplysninger er blevet slettet gennem anmodning om beskyttelse af personlige oplysninger',
     'LBL_CREATE_RELATED_RECORD' => 'Opret relateret post',
@@ -4920,7 +4990,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team Opgaver',
 
     //Audit subjects
-    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanceret Workflow',
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
     'LBL_AUDIT_SUBJECT_API-REST' => 'REST. API',
     'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP eller gammel REST. API',
@@ -4981,9 +5051,9 @@ Med venlig hilsen, SugarCRM',
     'LBL_ALERT_TITLE_NOTICE' => 'Bemærk:',
     'LBL_ALERT_TITLE_ERROR' => 'Fejl:',
     'LBL_ALERT_TITLE_LOADING' => 'Indlæser ...',
+    'LBL_ALERT_NO_ACCESS' => 'Du har ikke adgang til filtret, der er anvendt til denne dashlet.',
+    'LBL_ALERT_NO_ACCESS_SUPPORT' => 'Duplikér dashboardet for at konfigurere denne dashlet med dit eget filter.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Din browser-version understøttes ikke længere, eller du bruger en ikke-understøttet browser.',
-    'LBL_ALERT_BROWSER_SUPPORT' => 'De følgende browserversioner anbefales: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
-    'TPL_ALERT_BROWSER_SUPPORT' => 'Se venligst siden {{link}} med foreslåede browsere.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Understøttede platforme',
     'LBL_ALERT_CONFIRM_DELETE' => 'Er du sikker på at du vil slette dette emne?',
     'LBL_ALERT_CONFIRM_DELETE_PLURAL' => 'Er du sikker på, at du vil slette disse emner?',
@@ -5081,7 +5151,7 @@ Med venlig hilsen, SugarCRM',
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historisk oversigt',
-    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{name}}',
     'LBL_MORE_HISTORY' => 'Mere historie...',
     'LBL_RELATED_CONTACT' => 'Relateret kontakt',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5149,6 +5219,11 @@ Med venlig hilsen, SugarCRM',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Mangler SMTP Server-indstillinger',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'For at sende post opgave notifikationer, skal en SMTP-server konfigureres i {{emailSettingsUrl}}.',
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'E-mail-indstillinger',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_SUBJECT' => 'Nye lagerrapporter tilgængelige',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1' => 'Nye lagerrapporter er tilgængelige i dit ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2' => 'Rapportmodul',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3' => 'De er mærket som "Lagerrapport" og kan filtreres. Rapporter er også mærket som "Salg og marketing", "Kundeservice", "Databeskyttelse" eller "Administration" afhængig af indholdet. For yderligere information, se ',
+    'LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4' => 'dokumentation',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'For at øge produktiviteten, gør SugarCRM det muligt for superbrugere hurtigt at udføre visse opgaver, ved hjælp af tastaturgenveje. Tabellerne til højre beskriver de tilgængelige genvejstaster, såvel som tastekombinationerne og de handlinger som disse udfører.',
@@ -5258,23 +5333,26 @@ Med venlig hilsen, SugarCRM',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processer',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processer dashlet viser de skabeloner, der kan bruges inde i Advanced Workflow.',
+    // SugarBPM should be SugarBPM<sup class="trademark>TM</sup> here, but we don't have a mechanism on the front end to
+    // not escape HTML in a dynamic list collection. So for now, this, and the next three instances of SugarBPM, must
+    // stay plain.
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processer-dashlet viser de skabeloner, der kan bruges inde i SugarBPM.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => 'Procesdefinitioner',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Procesdefinitioner dashlet viser de skabeloner, der kan bruges inde i Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Procesdefinitioner-dashlet viser de skabeloner, der kan bruges inde i SugarBPM.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => 'Opret procesdefinition',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => 'Importér procesdefinitioner',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => 'Proces forretningsregler',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Proces forretningsregler dashlet viser de skabeloner, der kan bruges inde i Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Procesforretningsregler-dashlet viser de skabeloner, der kan bruges inde i SugarBPM.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => 'Opret proces forretningsregler',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => 'Importér procesforretningsregler',
 
     //PMSE Email Templates Dashlet
     'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => 'Proces e-mail-skabeloner',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Proces e-mail-skabeloner dashlet viser de skabeloner, der kan bruges inde i Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Procesmailskabeloner-dashlet viser de skabeloner, der kan bruges inde i SugarBPM.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => 'Opret proces e-mail-skabeloner',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => 'Importér proces e-mail-skabeloner',
 
@@ -5298,7 +5376,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_PMSE_CANCELLED_STATUS' => 'Annulleret',
     'LBL_PMSE_TERMINATED_STATUS' => 'Fratrådt',
     'LBL_PMSE_ERROR_STATUS' => 'Fejl',
-    'LBL_PMSE_SETTINGS' => 'Indstillinger for Advanced Workflow',
+    'LBL_PMSE_SETTINGS' => 'SugarBPM-indstillinger',
 
     'LBL_PRO_DISABLE_CONFIRMATION' => 'Er du sikker på du vil deaktivere denne post?',
     'LBL_PRO_ENABLE_CONFIRMATION' => 'Er du sikker på du vil aktivere denne post?',
@@ -5322,7 +5400,7 @@ Med venlig hilsen, SugarCRM',
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 kræver JavaScript. Slå Javascript til i din browser for at bruge Sugar 7.',
 
-    // Failure handling in Advanced Workflow upgraders
+    // Failure handling in SugarBPM upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serialiserede data kunne ikke fjernes fra serie',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serialiserede data kunne ikke fjernes fra serie, fordi de indeholder referencer til objekter eller klasser',
 
@@ -5351,6 +5429,15 @@ Med venlig hilsen, SugarCRM',
     'LBL_DATAPRIVACY_PII' => 'Personlige oplysninger',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Marker til sletning',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personlige oplysninger til {{{name}}}',
+
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopieret til dit clipboard!',
+    'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Kunne ikke kopieres til dit clipboard',
+
+    'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopier bekræftelseslink',
+
+    // Comment Log
+    'LBL_COMMENT_LOG_SHOW_MORE' => 'Vis mere ...',
+    'LBL_COMMENT_LOG_SHOW_LESS' => 'Vis mindre ...',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6528,7 +6615,12 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Integreret fil';
     'YER' => 'Rialer',
     'ZWD' => 'Zimbabwe Dollars',
     );
-
-$app_list_strings['business_rule_type_list'] = array(
-    'single' => 'Single-Hit',
-);
+    $app_list_strings['process_et_field_type'] = array(
+        'none' => 'Ingen',
+        'future' => 'Nuværende værdi',
+        'old' => 'Gammel værdi',
+        'both' => 'Nuværende og gamle værdier',
+    );
+    $app_list_strings['business_rule_type_list'] = array(
+        'single' => 'Single-Hit',
+    );

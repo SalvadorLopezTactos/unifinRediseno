@@ -15,12 +15,16 @@ namespace Sugarcrm\IdentityProvider\App;
 use Silex\Application as App;
 use Silex\Api\ControllerProviderInterface;
 use Silex\ControllerCollection;
-use Sugarcrm\IdentityProvider\App\Authentication\BearerAuthentication;
 use Sugarcrm\IdentityProvider\App\Controller\AuthenticationController;
+use Sugarcrm\IdentityProvider\App\Controller\ChangePasswordController;
 use Sugarcrm\IdentityProvider\App\Controller\ConsentController;
 use Sugarcrm\IdentityProvider\App\Controller\MainController;
 use Sugarcrm\IdentityProvider\App\Controller\SAMLController;
+use Sugarcrm\IdentityProvider\App\Controller\SetPasswordController;
+use Sugarcrm\IdentityProvider\App\Controller\ForgotPasswordController;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ControllerProvider implements ControllerProviderInterface
 {
@@ -38,25 +42,41 @@ class ControllerProvider implements ControllerProviderInterface
         $mainController = new MainController();
         $samlController = new SAMLController();
         $consentController = new ConsentController($app);
+        $setPasswordController = new SetPasswordController();
+        $changePasswordController = new ChangePasswordController();
         $authenticationController = new AuthenticationController();
-        $restBearerAuthentication = new BearerAuthentication(
-            $app['oAuth2Service'],
-            'idp.auth.password',
-            $app['logger']
-        );
-        $controllers->before(function ($request) use ($tenantConfigInitializer) {
+        $forgotPasswordController = new ForgotPasswordController();
+        $controllers->before(function (Request $request, App $app) use ($tenantConfigInitializer) {
             $exceptionRoutes = [
                 'loginProcess',
                 'loginRender',
                 'consentInit',
-                'consentFinish',
-                'restAuthenticate'
+                'consentCancel',
+                'restAuthenticate',
+                'forgotPasswordRender',
+                'forgotPasswordProcess',
+                'logout',
             ];
             //TODO This constraint should be more complex solution Or need to be removed.
             if (!in_array($request->attributes->get('_route'), $exceptionRoutes)) {
-                call_user_func($tenantConfigInitializer, $request);
+                try {
+                    call_user_func($tenantConfigInitializer, $request);
+                } catch (\RuntimeException $e) {
+                    $session = $app->getSession();
+                    $flashBag = $session->getFlashBag();
+                    $flashBag->add('error', 'Invalid tenant ID');
+
+                    return $app->redirect($app->getUrlGeneratorService()->generate('loginRender'));
+                }
             }
         });
+
+        $clearLogoutFunction = function (Request $request, Response $response, Application $app) {
+            $token = $app->getRememberMeService()->retrieve();
+            if ($token && $token->isAuthenticated()) {
+                $app->getLogoutService()->clearLogoutCookies($request, $response);
+            }
+        };
 
         $controllers
             ->get('/login-end-point', [$mainController, 'loginEndPointAction'])
@@ -67,11 +87,26 @@ class ControllerProvider implements ControllerProviderInterface
             ->bind('loginRender');
         $controllers
             ->post('/', [$mainController, 'postFormAction'])
-            ->bind('loginProcess');
+            ->bind('loginProcess')
+            ->after($clearLogoutFunction);
+
+        $controllers
+            ->get('/password/forgot', [$forgotPasswordController, 'renderForgotPasswordForm'])
+            ->bind('forgotPasswordRender');
+        $controllers
+            ->get('/password/success-sent', [$forgotPasswordController, 'successSent'])
+            ->bind('forgotPasswordSuccessSent');
+
+        $controllers
+            ->post('/password/forgot', [$forgotPasswordController, 'forgotPasswordAction'])
+            ->bind('forgotPasswordProcess');
+
+        $controllers
+            ->match('/logout', [$mainController, 'logoutAction'])
+            ->bind('logout');
 
         $controllers
             ->post('/authenticate', [$authenticationController, 'authenticate'])
-            ->before([$restBearerAuthentication, 'authenticateClient'])
             ->bind('restAuthenticate');
 
         $controllers
@@ -88,7 +123,8 @@ class ControllerProvider implements ControllerProviderInterface
             ->bind('samlInit');
         $controllers
             ->post('/saml/acs', [$samlController, 'acsAction'])
-            ->bind('samlAcs');
+            ->bind('samlAcs')
+            ->after($clearLogoutFunction);
         $controllers
             ->match('/saml/logout', [$samlController, 'logoutAction'])
             ->bind('samlLogout');
@@ -114,6 +150,22 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers
             ->get('/consent/cancel', [$consentController, 'consentCancelAction'])
             ->bind('consentCancel');
+
+        $controllers
+            ->get('/password/set', [$setPasswordController, 'showSetPasswordForm'])
+            ->bind('showSetPasswordForm');
+        $controllers
+            ->post('/password/set', [$setPasswordController, 'setPassword'])
+            ->bind('setPassword');
+
+        $controllers
+            ->get('/password/change', [$changePasswordController, 'showChangePasswordForm'])
+            ->bind('showChangePasswordForm')
+            ->before([$changePasswordController, 'preCheck']);
+        $controllers
+            ->post('/password/change', [$changePasswordController, 'changePasswordAction'])
+            ->bind('changePassword')
+            ->before([$changePasswordController, 'preCheck']);
 
         return $controllers;
     }

@@ -121,6 +121,17 @@ class SugarApiExceptionPortalNotConfigured extends SugarApiException
     public $errorLabel = 'portal_not_configured';
     public $messageLabel = 'EXCEPTION_PORTAL_NOT_CONFIGURED';
 }
+// @codingStandardsIgnoreStart
+/**
+ * # of active users exceeds license seats
+ */
+class SugarApiExceptionLicenseSeatsNeeded extends SugarApiException
+{
+    public $httpCode = 403;
+    public $errorLabel = 'license_seats_needed';
+    public $messageLabel = 'EXCEPTION_LICENSE_SEATS_NEEDED';
+}
+// @codingStandardsIgnoreEnd
 /**
  * URL does not resolve into a valid REST API method.
  */

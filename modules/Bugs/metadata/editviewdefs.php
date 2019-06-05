@@ -38,13 +38,16 @@ $viewdefs['Bugs']['EditView'] = array(
 
 		    array (
 		      'priority',
-		      'type',
-		    ),
+            ),
+
+               array(
+                   'status',
+                   'follow_up_datetime',
+               ),
 
 		    array (
+                'type',
 		      'source',
-		      'status',
-
 		    ),
 
 		    array (
@@ -95,4 +98,3 @@ $viewdefs['Bugs']['EditView'] = array(
 ),
 
 );
-?>

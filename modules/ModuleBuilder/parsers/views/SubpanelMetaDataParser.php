@@ -61,10 +61,10 @@ class SubpanelMetaDataParser extends ListLayoutMetaDataParser
         $GLOBALS['log']->debug ( get_class($this)."->__construct(): invisibleFields = ".print_r($this->_invisibleFields,true));
     }
 
-    /*
-     * Save the layout
+    /**
+     * @inheritDoc
      */
-    function handleSave ($populate = true)
+    public function handleSave($populate = true, $clearCache = true)
     {
         if ($populate)
         {

@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'subpanou articole pe pagină (Mobil)',
 	'LOG_MEMORY_USAGE'=>'Log utilizarea memoriei',
-    'LOG_SLOW_QUERIES' => 'Log interogări lent',
+    'LOG_SLOW_QUERIES' => 'Log interogări lente',
     'LOCK_HOMEPAGE_HELP'=>'Această setare este pentru a preveni<br />1) adăugarea de pagini noi acasă şi dashlets în modulul Home,<br />2) personalizarea dashlet de plasare în paginile de pornire de glisare şi fixare.',
     'CURRENT_LOGO'=>'Logo-ul actual:',
     'CURRENT_LOGO_HELP'=>'Acest logo este afişat în colţul din stânga-sus al aplicatiei Sugar.',
@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Afişaţi fila Descărcări',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Când este selectata, fila Download va apărea în Setări utilizator şi  oferia utilizatorilor acces la plug-in-uri de Sugar şi alte fişiere disponibile',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'Pentru autentificarea SOAP atunci când se utilizează LDAP.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Prelungirea php_mcrypt trebuie să fie activată în fişierul dvs. php.ini.',
     'LBL_ALL' => 'Toti',
     'LBL_MARK_POINT' => 'Punct de marcare',
     'LBL_NEXT_' => 'urmatorul',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Fluxuri de activități',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activare Fluxuri de activități',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activează Fluxurile de activități pentru aplicație',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Permite conţinut suplimentar pe ecranul de autentificare',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Salvare automată a definițiilor procesului',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Determină cât de des sunt salvate definițiile procesului atunci când se utilizează proiectantul.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Validare automată a definițiilor procesului în momentul salvării automate',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Modifică opțiunea de validare automată a definițiilor procesului în momentul salvării automate. Această modificare se va aplica numai dacă opțiunea „Salvare automată a definițiilor procesului” este setată la un anumit interval de timp.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Validare automată a definițiilor procesului în momentul importului',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Modifică opțiunea de validare automată a definițiilor procesului atunci când sunt importate inițial.',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Setări jurnal de comentarii',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Număr maxim de caractere de afișat pentru fiecare comentariu',
 );
 
 

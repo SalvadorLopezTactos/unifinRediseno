@@ -26,7 +26,7 @@ if ($idpConfig->isIDMModeEnabled()) {
     $passwordManagerUrl = $idpConfig->buildCloudConsoleUrl('passwordManagement');
     $passwordManagerTarget = '_blank';
     $passwordManagerOnClick = sprintf(
-        'onclick = "app.alert.show(\'disabled-for-idm-mode\', {level: \'warning\', messages: \'%s\'});"',
+        'onclick = "app.alert.show(\'disabled-for-idm-mode\', {level: \'info\', messages: \'%s\'});"',
         $GLOBALS['app_strings']['ERR_DISABLED_FOR_IDM_MODE']
     );
 } else {
@@ -201,6 +201,12 @@ $admin_option_defs['Products']['shipping_providers']= array('Shippers','LBL_SHIP
 $admin_option_defs['Products']['product_types']= array('Product_Types','LBL_PRODUCT_TYPES_TITLE','LBL_PRODUCT_TYPES','javascript:parent.SUGAR.App.router.navigate("ProductTypes", {trigger: true});');
 
 $admin_option_defs['Quotes']['tax_rates']= array('TaxRates','LBL_TAXRATES_TITLE','LBL_TAXRATES','javascript:parent.SUGAR.App.router.navigate("TaxRates", {trigger: true});');
+$admin_option_defs['Quotes']['quotes_config'] = array(
+    'Quotes',
+    'LBL_MANAGE_QUOTES_TITLE',
+    'LBL_MANAGE_QUOTES',
+    'javascript:void(parent.SUGAR.App.router.navigate("Quotes/config", {trigger: true}));',
+);
 
 $admin_group_header[]= array('LBL_PRICE_LIST_TITLE','',false,$admin_option_defs, 'LBL_PRICE_LIST_DESC');
 //bug tracker.
@@ -228,12 +234,6 @@ $admin_group_header[]= array($app_list_strings['moduleList']['Contracts'],'',fal
 
 $admin_option_defs = array(
     'pmse_Project' => array(
-        'Settings' => array(
-            'Settings',
-            'LBL_PMSE_ADMIN_TITLE_SETTINGS',
-            'LBL_PMSE_ADMIN_DESC_SETTINGS',
-            'javascript:parent.SUGAR.App.router.navigate("pmse_Inbox/layout/config", {trigger: true});',
-        ),
         'CasesList' => array(
             'CasesList',
             'LBL_PMSE_ADMIN_TITLE_CASESLIST',
@@ -243,17 +243,29 @@ $admin_option_defs = array(
         'EngineLogs' => array(
             'EngineLogs',
             'LBL_PMSE_ADMIN_TITLE_ENGINELOGS',
-            'LBL_PMSE_ADMIN_DESC_ENGINELOGS',
+            // Some language strings that contain parts that do not need translation are
+            // broken into pieces to support assembly in the template
+            [
+                'LBL_PMSE_ADMIN_DESC_ENGINELOGS_1',
+                'SugarBPM<sup class="trademark">TM</sup>',
+                'LBL_PMSE_ADMIN_DESC_ENGINELOGS_2',
+            ],
             'javascript:parent.SUGAR.App.router.navigate("pmse_Inbox/layout/logView", {trigger: true});',
         ),
     )
 );
 $admin_group_header []= array(
-    'LBL_PMSE_ADMIN_TITLE_MODULE',
+    'SugarBPM<sup class="heading">TM</sup>',
     '',
     false,
     $admin_option_defs,
-    'LBL_PMSE_ADMIN_DESC_MODULE'
+    // Some language strings that contain parts that do not need translation are
+    // broken into pieces to support assembly in the template
+    [
+        'LBL_PMSE_ADMIN_DESC_MODULE_1',
+        'SugarBPM<sup class="trademark">TM</sup>',
+        'LBL_PMSE_ADMIN_DESC_MODULE_2',
+    ],
 );
 
 

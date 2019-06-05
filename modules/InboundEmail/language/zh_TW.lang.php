@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> '回覆：',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> '登入名或密碼不正確',
-	'ERR_BODY_TOO_LONG'		=> '\\r正文文字過長，無法擷取完整電子郵件。已修剪。',
+	'ERR_BODY_TOO_LONG'		=> '\r正文文字過長，無法擷取完整電子郵件。已修剪。',
 	'ERR_INI_ZLIB'			=> '暫時無法關閉 Zlib 壓縮。「測試設定」可能失敗。',
 	'ERR_MAILBOX_FAIL'		=> '無法抓取任何郵件帳戶。',
 	'ERR_NO_IMAP'			=> '未發現 IMAP 庫。請在繼續使用輸入電子郵件之前解決此問題。',
@@ -165,8 +165,6 @@ $mod_strings = array(
 	'LNK_SEED_QUEUES'		=> '小組的種子佇列',
 	'LBL_GROUPFOLDER_ID'	=> '群組資料夾 ID',
 	'LBL_ASSIGN_TO_GROUP_FOLDER' => '指派至群組資料夾',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE' => '允許使用者發送電子郵件時使用發件者姓名和地址作為回覆收件者地址。',
-    'LBL_ALLOW_OUTBOUND_GROUP_USAGE_DESC' => '選取此選項後，在為擁有群組郵件帳戶存取權限的使用者撰寫電子郵件時，與該群組郵件帳戶相關的發件者姓名和發件者電子郵件地址將作為「發件者」欄位的一個選項。',
     'LBL_STATUS_ACTIVE'     => '使用中',
     'LBL_STATUS_INACTIVE'   => '非使用中',
     'LBL_IS_PERSONAL' => '個人',

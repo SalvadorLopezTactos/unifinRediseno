@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -31,10 +31,11 @@ class LdapFeatureContext extends FeatureContext
      *
      * @param array $sugarAdmin
      * @param array $ldapConfig
+     * @param string $screenShotPath
      */
-    public function __construct(array $sugarAdmin, array $ldapConfig)
+    public function __construct(array $sugarAdmin, array $ldapConfig, string $screenShotPath)
     {
-        parent::__construct($sugarAdmin);
+        parent::__construct($sugarAdmin, $screenShotPath);
         $this->ldapConfig = $ldapConfig;
         $this->userCleaner = new UserCleaner($this, $sugarAdmin);
     }
@@ -55,7 +56,6 @@ class LdapFeatureContext extends FeatureContext
     public function afterLdapScenario()
     {
         $this->restartSessionAndGoToHomePage();
-        $this->disableLdap();
         $this->userCleaner->clean();
         $this->restartSessionAndGoToHomePage();
     }
@@ -130,7 +130,8 @@ class LdapFeatureContext extends FeatureContext
             }
         }
         $this->pressButton('btn_save');
-        $this->waitForThePageToBeLoaded();
+        $this->switchBwc();
+        $this->waitForElement('#password_management');
         $this->iLogout();
     }
 

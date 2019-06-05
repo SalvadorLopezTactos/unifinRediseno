@@ -133,6 +133,7 @@ $dictionary['pmse_BpmnLane'] = array(
     'ignore_templates' => array(
         'taggable',
         'lockable_fields',
+        'commentlog',
     ),
     'uses' => array(
         'basic',

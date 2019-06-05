@@ -10,81 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Cache\Backend\APCu;
+
 /**
  * APCu cache backend
+ *
+ * @deprecated Use Sugarcrm\Sugarcrm\Cache\Backend\APCu instead
  */
-class SugarCacheApcu extends SugarCacheAbstract
+class SugarCacheApcu extends SugarCachePsr
 {
-    /**
-     * {@inheritDoc}
-     */
-    protected $_priority = 935;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function useBackend()
+    public function __construct()
     {
-        global $sugar_config;
-
-        if (!parent::useBackend()) {
-            return false;
-        }
-
-        if (!empty($sugar_config['external_cache_disabled_apcu'])) {
-            return false;
-        }
-
-        if (!extension_loaded('apcu')) {
-            return false;
-        }
-
-        if (!ini_get('apc.enabled')) {
-            return false;
-        }
-
-        if (php_sapi_name() === 'cli' && !ini_get('apc.enable_cli')) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _setExternal($key, $value)
-    {
-        apcu_store($key, $value, $this->_expireTimeout);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _getExternal($key)
-    {
-        $value = apcu_fetch($key, $success);
-
-        if (!$success) {
-            return null;
-        }
-
-        return $value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _clearExternal($key)
-    {
-        apcu_delete($key);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _resetExternal()
-    {
-        apcu_clear_cache();
+        parent::__construct(APCu::class, 935, 'external_cache_disabled_apcu');
     }
 }

@@ -46,10 +46,14 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'توجدعمليات نشطة تعمل مقابل تعريف العملية هذا. قد يؤدي تحديثها إلى التأثير سلبًا على هذه العمليات. هل ما زلت تريد تعديل تعريف هذه العملية؟',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'توجدعمليات نشطة تعمل مقابل تعريف العملية هذا. قد يؤدي تحديثها إلى التأثير سلبًا على هذه العمليات. هل ما زلت تريد تعطيل تعريف هذه العملية؟',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'إنشاء سجل تعريفات عملية جديد من خلال استيراد ملف *.bpm من نظام الملفات الخاص بك.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'تحميل ملف .bpm لاستيراد تعريف عملية.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'نجح استيراد تعريفات العملية إلى النظام.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'الرجاء تحديد ملف *.bpm صالح.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'تم استيراد تعريف العملية إلا أنه يحتوي على إجراء أو أكثر من إجراءات قاعدة الأعمال التي لم يتم اختيار قواعد الأعمال لها.',
+    'LBL_BPM_IMPORT_SELECT' => 'يحتوي تعريف العملية على قواعد العمل وقوالب البريد الإلكتروني التالية. '
+        . 'الرجاء اختيار ما تريد.',
+    'LBL_BUSINESS_RULES' => 'قواعد العمل',
+    'LBL_EMAIL_TEMPLATES' => 'قوالب البريد الإلكتروني',
 
 
 //    /*PMSE*/
@@ -85,6 +89,9 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_UNDO' => 'تراجع',
     'LBL_PMSE_ADAM_DESIGNER_REDO' => 'إعادة',
     'LBL_PMSE_ADAM_DESIGNER_SAVE' => 'حفظ',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => 'تحقق',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => 'حفظ وتحقق',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => 'تشغيل التحقق لمراجعة الأخطاء',
 
     /**ELEMENTS NAMES**/
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'النشاط',
@@ -111,6 +118,8 @@ $mod_strings = array (
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'حذف',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'الوحدة',
+    'LBL_PMSE_FORM_LABEL_FILTER' => 'تصفية',
+    'LBL_PMSE_FORM_LABEL_RELATED' => 'مرتبط بـ',
     'LBL_PMSE_FORM_LABEL_CRITERIA' => 'المعايير',
     'LBL_PMSE_FORM_LABEL_DURATION' => 'المدة',
     'LBL_PMSE_FORM_LABEL_UNIT' => 'الوحدة',
@@ -262,6 +271,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'الحقول',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'تقييم حقل الوحدة',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'الوحدة',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => 'ذو صلة',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => 'الحقل',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => 'القيمة',
     'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => 'تقييم استجابة النموذج',
@@ -334,20 +344,24 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ليس هو',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'لا يساوي',
 
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'جميع السجلات ذات الصلة',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'أي سجلات ذات صلة',
+
     'LBL_PMSE_RUNTIME_BUTTON' => 'وقت التشغيل',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'إضافة',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'إغلاق',
 
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'الفرق',
-    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'المستخدم في %MODULE% الذي أنشأ السجل',
-    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'المستخدم في %MODULE% الذي قام بآخر تعديل على السجل',
-    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'المستخدم في %MODULE% الذي تم تعيينه للسجل',
-    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'المستخدم في %MODULE% الذي تم تعيينه للسجل',
-    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'المستخدم في %MODULE% الذي يقووم بدور مدير من أنشأ السجل',
-    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'مستخدم في %MODULE% الذي يقوم بدور مدير من قام بآخر تعديل في السجل',
-    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'المستخدم في %MODULE% الذي يقوم بدور مدير الذي يتم تعيينه إلى السجل',
-    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'المستخدم في %MODULE% الذي يقوم بدور مدير الذي تم تعيينه إلى السجل',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% ذو الصلة بـ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'المستخدم الذي أنشأ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => 'المستخدم الذي قام بآخر تحديث لـ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => 'المستخدم المُعين إلى %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => 'المستخدم الذي عُين إلى %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => 'المدير الذي أنشأ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => 'المدير الذي قام بآخر تحديث لـ %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => 'المدير المُعين إلى %MODULE%',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => 'المدير الذي عُين إلى %MODULE%',
     'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => 'الدور: %ROLE%',
     'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => 'فريق: %TEAM%',
     'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => 'الاقتراحات',
@@ -382,4 +396,62 @@ $mod_strings = array (
 
     'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => 'سياق تعبير غير صالح.',
     'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => 'التحقق من تعريفات العملية: استرداد إعدادات العنصر',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => 'التحقق من تعريف العملية: استرداد إعدادات العنصر',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => 'يجري تحديث قائمة الأخطاء...',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => 'اكتمل التحقق! تم العثور على مشكلات: ',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => ' مشكلات',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => 'التحقق جاري',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => 'تحذير: قد تتعطل العملية عند هذا العنصر أو تحدث تأثيرات غير معروفة',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => 'خطأ: سوف تتوقف العملية عند هذا العنصر',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => 'تعذر التحقق من العنصر',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => 'لا يفي العنصر بأقل عدد من التدفقات الواردة',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => 'يجب أن يكون لهذا العنصر عددًا أدنى من المسارات الواردة. راجع عدد المسارات التي تتصل بهذا العنصر للتأكد من الالتزام بالعدد الأدنى.',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => 'العنصر يتجاوز العدد الأقصى من التدفقات الواردة',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => 'يملك هذا العنصر عددًا أقصى من المسارات الواردة التي لا يجب تجاوزها. راجع عدد المسارات التي ترتبط بهذا العنصر للتأكد من عدم تجاوز العدد الأقصى.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => 'لا يفي العنصر بأقل عدد من التدفقات الصادرة',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => 'يجب أن يكون لهذا العنصر عددًا أدنى من المسارات الصادرة. راجع عدد المسارات الخارجة من هذا العنصر للتأكد من الالتزام بالعدد الأدنى.',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => 'العنصر يتجاوز العدد الأقصى من التدفقات الصادرة',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => 'يملك هذا العنصر عددًا أقصى من المسارات الصادرة لا يجب تجاوزه. راجع عدد المسارات الخارجة من هذا العنصر للتأكد من عدم تجاوز العدد الأدنى.',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => 'لم يتم تعيين الحقل المطلوب',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => 'يملك هذا العنصر حقلأً مطلوبًا، لكن لم يتم تعيينه. راجع إعدادات العنصر لضمان تعيين الحقل بشكل صحيح، ثم تأكد من النقر على الزر "حفظ".',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => 'البيانات لا توجد حاليًا في النظام',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => 'تشير إعدادات هذا العنصر مرجعيًا إلى جزء معين من البيانات لا يوجد في قاعدة البيانات. راجع إعدادات العنصر لضمان وجود جميع البيانات المشار إليها مرجعيًا (أي مستخدمين معينين، حقول وحدات، فرق، إلخ).',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => 'لن يتم تقييم تعبير مربع معايير إلى صواب',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => 'تحتوي مربعات معايير على تعبيرات AND/OR/NOT المنطقية. هذا الخطأ يعني أن مربع معايير في إعدادات عنصر قد تم تكوينه بطريقة لن يكون بها التعبير صحيحًا. تحقق من مربع معايير للقضاء على أي تناقضات منطقية تمنع التعبير من أن يكون حقيقة.',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => 'لا يمكن الوصول إلى العنصر',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => 'من أجل تنفيذ عنصر في عملية، يجب أن يكون لديه مسار مرتبط به. يجب أن تبدأ سلسلة المسارات المؤدية إلى هذا العنصر بعنصر بدء. راجع سلسلة المسارات الواردة إلى هذا العنصر للتأكد من أن هذا العنصر يبدأ بعنصر بدء.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => 'يجب أن تتضمن معايير وقت الانتظار ثابت تاريخ ووقت واحد بالضبط',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => 'تم تكوين عنصر حدث الانتظار باستخدام مربع معايير "تاريخ ثابت". يجب أن يحتوي هذا المربع بالضبط على ثابت "تاريخ ووقت ثابت" أو مرجع حقل تاريخ ووقت واحد. يجب أن تكون جميع الأجزاء الأخرى من التعبير معاملات رياضية (+/-) أو ثوابت "الفترة الزمنية".',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => 'لا يجب أن تكون قيمة المدة المحددة صفرًا',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => 'تم تكوين عنصر حدث الانتظار باستخدام إعداد "المدة". لا يجب أن يساوي هذا الإعداد صفرًا وإلا سيحدث خطأ. راجع إعدادات العنصر للتأكد من أن "المدة" لم تعين إلى صفر.',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => 'لم يتم تعيين معلمات وقت الانتظار',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => 'لا يملك عنصر عنصر حدث الانتظار أي إعدادات مكونة. تحقق من إعدادات عنصر للتأكد من تحديد "المدة" أو "تاريخ ثابت"، قم بإدخال القيم المطلوبة، وانقر فوق الزر "حفظ".',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => 'الوقت المتوقع أقل من صفر',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => 'تحت إعدادات "النماذج" لهذا العنصر من عناصر النشاط، تم ضبط الوقت المتوقع على قيمة سلبية، مما سوف يؤدي إلى تجميد العملية عند الوصول إلى العنصر. افتح إعدادات "النماذج" لهذا العنصر لتغيير الوقت المتوقع لعدد غير سالب.',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => 'نوع الإجراء [Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => 'لا يملك عنصر الإجراء نوعًا محددًا. يمكن تغيير ذلك بالنقر بالزر الأيمن على عنصر الإجراء، ثم تحديد نوع من قائمة "نوع الإجراء".',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => 'مسار غير مضمون اتخاذه',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => 'تظهر رسالة الخطأ لأن هناك احتمال ألا يتم اتخاذ أيًا من المسارات الخارجة من عنصر البوابة هذا، مما سيؤدي إلى توقف العملية. ينصح بتعيين مسار افتراضي لاتخاذه في حالة عدم تلبية أي من تعبيرات مربع معايير في إعدادات العنصر. يمكن أن يتم هذا بالنقر بالزر الأيمن على عنصر البوابة، وتحديد عنصر ضمن قائمة "التدفق الافتراضي". إذا لم يتم تحديد مسار افتراضي، يجب تغيير التعبيرات في إعدادات العنصر للتأكد من أن واحدًا منها على الأقل سوف تكون صحيحة عندما يتم تشغيل العملية.',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'نوع بوابة التقارب لايطابق نوع بوابة تدفق وارد',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'توسع بوابات التقارب العمليات إلى فروع متعددة. عند استخدام بوابة تقارب لإعادة تقريب هذه الفروع إلى مسار واحد، يجب استخدام النوع الصحيح من بوابة التقارب اعتمادًا على نوع بوابة التقارب المستخجمة لإنشاء الفروع. بالنسبة إلى الفروع المنشأة ببوابات حصرية أو متقارية مستندة إلى الحدث، استخدم بوابة تقارب حصرية لإعادة تقريبها. للفروع المنشأة باستخدام بوابات تقارب متوازية أو شاملة، استخدم بوابة تقارب موازية لإعادة تقريبها.',
 );

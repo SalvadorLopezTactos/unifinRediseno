@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 use Sugarcrm\IdentityProvider\Authentication\User as IdmUser;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
 
 class User extends IdmUser
 {
@@ -192,5 +193,13 @@ class User extends IdmUser
         } else {
             return null;
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isServiceAccount(): bool
+    {
+        return $this instanceof ServiceAccount;
     }
 }

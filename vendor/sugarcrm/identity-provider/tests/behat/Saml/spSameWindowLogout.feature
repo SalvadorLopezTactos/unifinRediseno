@@ -7,7 +7,7 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-@saml @logout @sp @same-window
+@saml @logout @sp @same-window @extended
 Feature: SAML SP Initiated Logout
   SugarCRM instance is configured:
   - to use external SAML authentication
@@ -39,5 +39,6 @@ Feature: SAML SP Initiated Logout
     And I wait for the page to be loaded
     And I wait for element ".welcome"
     Then I wait for element "a[name='external_login_button']"
+    And I wait for the ajax to be finished
     And I should not see a "a.disabled[name='external_login_button']" element
     And I should see "Log In"

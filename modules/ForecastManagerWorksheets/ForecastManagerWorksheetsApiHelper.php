@@ -81,7 +81,7 @@ class ForecastManagerWorksheetsApiHelper extends SugarBeanApiHelper
 
                     while ($row = $db->fetchByAssoc($results)) {
                         $field = substr($row['field_name'], 0, strpos($row['field_name'], '_'));
-                        if ($settings['show_worksheet_' . $field] == "1") {
+                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == "1") {
                             // calculate the difference to make sure it actually changed at 2 digits vs changed at 6
                             $diff = SugarMath::init($row['after_value_string'], 6)->sub(
                                 $row['before_value_string']

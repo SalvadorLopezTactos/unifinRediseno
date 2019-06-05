@@ -46,7 +46,11 @@ class ViewPortalSync extends SugarView
         if ($label !== null) {
             $smarty->assign('label', $label);
         }
-        $options = (!empty($GLOBALS['system_config']->settings['system_portal_url'])) ? $GLOBALS['system_config']->settings['system_portal_url'] : 'https://';
+
+        $system_config = Administration::getSettings('system');
+        $options = !empty($system_config->settings['system_portal_url'])
+            ? $system_config->settings['system_portal_url'] : 'https://';
+
         $smarty->assign('options',$options);
         $ajax = new AjaxCompose();
         $ajax->addCrumb(translate('LBL_SUGARPORTAL', 'ModuleBuilder'), 'ModuleBuilder.main("sugarportal")');

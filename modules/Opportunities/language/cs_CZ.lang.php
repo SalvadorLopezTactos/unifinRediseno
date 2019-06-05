@@ -189,22 +189,21 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam modulu {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Vyhráno“ nebo „Prohráno“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam modulu {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-- Upravte pole záznamu kliknutím na jednotlivá pole nebo na tlačítko Upravit.
-- Zobrazte nebo upravte vazby na ostatní záznamy v dílčích panelech tím, že přepnete spodní levý panel na „Zobrazení dat“.
-- Vytvořte a zobrazte uživatelské komentáře a historii změn záznamu v modulu {{activitystream_singular_module}} přepnutím spodního levého panelu na „Tok aktivit“.
-- Sledujte nebo označte záznam jako oblíbený pomocí ikon vpravo od názvu záznamu.
-- Další akce jsou dostupné v rozbalovacím menu Akce vpravo od tlačítka Upravit.',
+- Upravte pole záznamu kliknutím na jednotlivé pole nebo na tlačítko Upravit. 
+- Zobrazte nebo upravte odkazy na jiné záznamy v dílčích panelech přepnutím spodního levého podokna na „Zobrazení dat“. 
+- Vytvořte a prohlédněte si uživatelské komentáře a historii změn záznamu v {{activitystream_singular_module}} tím, že přepnete spodní levý panel na „Přehled aktivit“. 
+- Sledujte záznam nebo jej označte jako oblíbený pomocí ikon vpravo od názvu záznamu. 
+- Další akce jsou k dispozici v rozbalovací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-Chcete-li vytvořit modul {{module_name}}:
-1. Vyplňte hodnoty polí dle potřeby.
- - Pole označená jako „Povinné“ musí být vyplněna před uložením.
- - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
-2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
+Chcete-li vytvořit modul {{module_name}}: 
+1. Vyplňte hodnoty polí dle potřeby. 
+ - Pole označená jako „Povinné“ musí být před uložením vyplněna. 
+ - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí. 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END ENT/ULT
 

@@ -1,18 +1,37 @@
+var oldData = jQuery.data;
 
-var oldFnData = jQuery.fn.data;
+jQuery.data = function( elem, name, value ) {
+	var curData;
 
-jQuery.fn.data = function( name ) {
-	var ret, evt,
-		elem = this[0];
+	// Name can be an object, and each entry in the object is meant to be set as data
+	if ( name && typeof name === "object" && arguments.length === 2 ) {
+		curData = jQuery.hasData( elem ) && oldData.call( this, elem );
+		var sameKeys = {};
+		for ( var key in name ) {
+			if ( key !== jQuery.camelCase( key ) ) {
+				migrateWarn( "jQuery.data() always sets/gets camelCased names: " + key );
+				curData[ key ] = name[ key ];
+			} else {
+				sameKeys[ key ] = name[ key ];
+			}
+		}
 
-	// Handles 1.7 which has this behavior and 1.8 which doesn't
-	if ( elem && name === "events" && arguments.length === 1 ) {
-		ret = jQuery.data( elem, name );
-		evt = jQuery._data( elem, name );
-		if ( ( ret === undefined || ret === evt ) && evt !== undefined ) {
-			migrateWarn("Use of jQuery.fn.data('events') is deprecated");
-			return evt;
+		oldData.call( this, elem, sameKeys );
+
+		return name;
+	}
+
+	// If the name is transformed, look for the un-transformed name in the data object
+	if ( name && typeof name === "string" && name !== jQuery.camelCase( name ) ) {
+		curData = jQuery.hasData( elem ) && oldData.call( this, elem );
+		if ( curData && name in curData ) {
+			migrateWarn( "jQuery.data() always sets/gets camelCased names: " + name );
+			if ( arguments.length > 2 ) {
+				curData[ name ] = value;
+			}
+			return curData[ name ];
 		}
 	}
-	return oldFnData.apply( this, arguments );
+
+	return oldData.apply( this, arguments );
 };

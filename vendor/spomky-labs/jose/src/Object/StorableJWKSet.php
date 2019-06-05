@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Spomky-Labs
+ * Copyright (c) 2014-2018 Spomky-Labs
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -156,6 +156,14 @@ class StorableJWKSet implements StorableInterface, JWKSetInterface
     /**
      * {@inheritdoc}
      */
+    public function prependKey(JWKInterface $key)
+    {
+        //Not available
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeKey($index)
     {
         // Not available
@@ -219,7 +227,7 @@ class StorableJWKSet implements StorableInterface, JWKSetInterface
     protected function createNewObject()
     {
         $jwkset = new JWKSet();
-        for ($i = 0; $i < $this->nb_keys; $i++) {
+        for ($i = 0; $i < $this->nb_keys; ++$i) {
             $key = $this->createJWK();
             $jwkset->addKey($key);
         }

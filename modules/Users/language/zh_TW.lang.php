@@ -22,7 +22,6 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> '指派至小組',
 	'LBL_DEFAULT_TEAM_TEXT'				=> '記錄中預設可顯示的小組，是您為其成員的小組。',
 	'LBL_DEFAULT_TEAM'					=> '預設小組',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => '預設主要小組',
 	'LBL_LIST_DESCRIPTION'				=> '描述',
 	'LBL_MY_TEAMS'						=> '我的小組',
 	'LBL_PRIVATE_TEAM_FOR'				=> '私人小組',
@@ -76,8 +75,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '收件者電子郵件地址',
 	'ERR_SERVER_STATUS'					=> '您的伺服器狀態',
 	'ERR_SERVER_SMTP_EMPTY'				=> '系統無法向使用者傳送電子郵件。請檢查<a href="index.php?module=EmailMan&action=config">「電子郵件設定」</a>中的「外寄郵件設定」。',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => '只能在 <a href="{0}" target="_blank">雲端主控台</a> 中為 IDM 模式創建使用者。',
-    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '只能在 <a href="{0}" target="_blank">雲端主控台</a>中為 IDM 模式更新主要電子郵件地址。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => '電子郵件地址',
 
@@ -114,7 +112,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> '確認密碼',
-	'LBL_CONFIRM_REGULAR_USER'			=> '您已將使用者類型從「系統管理員使用者」變更為「常規使用者」。儲存此變更后，使用者將不再擁有系統管理員權限。\\n\\n按一下「確定」以繼續。\\n按一下「取消」以返回記錄。',
+	'LBL_CONFIRM_REGULAR_USER'			=> '您已將使用者類型從「系統管理員使用者」變更為「常規使用者」。儲存此變更后，使用者將不再擁有系統管理員權限。\n\n按一下「確定」以繼續。\n按一下「取消」以返回記錄。',
 	'LBL_COUNTRY'						=> '國家',
 	'LBL_CURRENCY_TEXT'					=> '若啟用「顯示偏好貨幣」，則此貨幣是清單和記錄檢視中使用的貨幣。此貨幣同樣是新記錄的預設貨幣。',
 	'LBL_CURRENCY'						=> '偏好貨幣',
@@ -123,6 +121,8 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> '整個系統的小數和浮點數顯示的小數位數，比如「報表」中的貨幣和平均值。',
     'LBL_CURRENCY_SHOW_PREFERRED'       => '顯示偏好貨幣',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => '在清單和記錄檢視中將基準貨幣轉換為使用者偏好貨幣',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED' => '以設定貨幣單位創建收入項目',
+    'LBL_CURRENCY_CREATE_IN_PREFERRED_TEXT' => '若產品目錄的貨幣設定與用戶設定的不同，從產品目錄添加到商機的收入項目將轉換為用戶設定的貨幣。',
 	'LBL_NUMBER_GROUPING_SEP'			=> '千位分隔符',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> '用於分隔千的字元',
 	'LBL_DECIMAL_SEP'					=> '小數點符號',
@@ -291,7 +291,7 @@ $mod_strings = array (
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> '提供有效的「使用者名稱」和「電子郵件地址」。',
     'LBL_FORGOTPASSORD_NOT_ENABLED' 	=> '這目前未啟用。請連絡您的管理員。',
 	'LBL_PUBLISH_KEY'					=> '發佈金鑰',
-
+    'LBL_SITE_USER_ID' => 'site_url與user_id雜湊',
     'LBL_QUOTAS'                        => '配額',
     'LBL_FORECASTS'                     => '預測',
     'LBL_WORKSHEETS'                    => '工作表',
@@ -634,10 +634,7 @@ SugarCRM 支援部提供的有關在 Sugar 中執行常見工作和流程的提�
     'LBL_DETAIL' => '使用者設定檔',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        '如果某些欄位不可編輯，請登錄到雲端主控台以管理這些欄位',
+        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
-        '如果希望更改某些不可編輯的欄位， ' .
-        '請與管理員聯繫以通知這些更改',
+        '如果要更改唯讀欄位, 請與您的Sugar管理員聯繫。',
 ); // END STRINGS DEFS
-
-?>

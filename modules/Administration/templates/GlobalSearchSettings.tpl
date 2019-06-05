@@ -256,7 +256,7 @@
             var port = document.getElementById('fts_port').value;
             var typeEl = document.getElementById('fts_type');
             var type = typeEl.options[typeEl.selectedIndex].value;
-            var clearData = $('#clearDataOnIndex').attr('checked') ? 1 : 0;
+            var clearData = $('#clearDataOnIndex').prop('checked') ? 1 : 0;
 
             var modules = SUGAR.getEnabledModulesForFTSSched();
             if(modules.length == 0)

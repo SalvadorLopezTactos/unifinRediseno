@@ -175,7 +175,6 @@ $mod_strings = array (
 	'SHOW_DOWNLOADS_TAB' =>'Rodyti parsisiuntimų kortelę',
 	'SHOW_DOWNLOADS_TAB_HELP' =>'Kai pasirinkta, parsisiuntimų kortelė bus matoma Vartotojo nustatymuose.',
     'LBL_LDAP_ENC_KEY_DESC'	=> 'SOAP autentifikacijai kai naudojamas ldap.',
-    'LDAP_ENC_KEY_NO_FUNC_DESC' => 'php_mcrypt plėtiniui turi būti įjungta php.ini failas.',
     'LBL_ALL' => 'Visi',
     'LBL_MARK_POINT' => 'Pažymėjimo taškas',
     'LBL_NEXT_' => 'Toliau>>',
@@ -442,6 +441,22 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Veiklos srautai',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Įgalinti veiklos srautus',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Įjungiami programos veiklos srautus',
+
+    // Marketing content settings
+    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Įjungti papildomą prisijungimo ekrano turinį',
+
+    // SugarBPM settings
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatinio išsaugojimo proceso apibrėžimai',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL_HELP' => 'Nustatoma, kaip dažnai automatiškai išsaugojami proceso apibrėžimai naudojant kūrimo įrankį',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE' => 'Automatinio patikrinimo proceso apibrėžimai naudojant automatinio išsaugojimo funkciją',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_SAVE_HELP' => 'Perjungia, ar automatiškai išsaugant proceso apibrėžimai yra automatiškai tikrinami. Šis nustatymas veiks tik tada, jei parinkčiai „Automatinio išsaugojimo proceso apibrėžimai“ bus nustatytas laiko intervalas',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT' => 'Automatinio patikrinimo proceso apibrėžimai importavimo metu',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_IMPORT_HELP' => 'Perjungia, ar proceso apibrėžimai automatiškai patvirtinami pirmą kartą importuojant',
+    'LBL_ADVANCED_WORKFLOW_SETTINGS_CYCLES' => 'Error number of cycles',
+
+    //Comment log settings
+    'LBL_COMMENT_LOG_SETTINGS' => 'Komentarų žurnalo nustatymai',
+    'LBL_COMMENT_LOG_MAX_CHARS' => 'Didžiausias rodomas komentaro įrašo simbolių skaičius',
 );
 
 

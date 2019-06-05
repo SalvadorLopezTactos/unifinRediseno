@@ -12,6 +12,7 @@
 
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class PMSEChangeField extends PMSEScriptTask
 {
@@ -126,112 +127,120 @@ class PMSEChangeField extends PMSEScriptTask
         //Save original bean of project definition
         $beanModule = $bean;
 
-        if (!isset($beanList[$act_field_module])) {
-            $bean = $this->pmseRelatedModule->getRelatedModule($bean, $act_field_module);
+        $beans = [];
+        if (isset($bpmnElement['act_params'])) {
+            $beans = $this->pmseRelatedModule->getChainedRelationshipBeans([$bean], json_decode($bpmnElement['act_params']));
             $isRelated = true;
+        } elseif (!isset($beanList[$act_field_module])) {
+            $beans[] = $this->pmseRelatedModule->getRelatedModule($bean, $act_field_module);
+            $isRelated = true;
+        } else {
+            $beans[] = $bean;
         }
 
-        if (isset($bean) && is_object($bean)) {
-            $historyData = $this->retrieveHistoryData($moduleName);
-            if ($act_field_module == $moduleName || $isRelated) {
-                foreach ($fields as $field) {
-                    if (isset($bean->field_defs[$field->field])) {
-                        // check if of type link
-                        if ((isset($bean->field_defs[$field->field]['type'])) &&
-                            ($bean->field_defs[$field->field]['type'] == 'link') &&
-                            !(empty($bean->field_defs[$field->field]['name']))) {
-
-                            // if its a link then go through cases on basis of "name" here.
-                            // Currently only supporting teams
-                            switch ($bean->field_defs[$field->field]['name']) {
-                                case 'teams':
-                                    PMSEEngineUtils::changeTeams($bean, $field);
-                                    break;
-                            }
-
-                        }
-                        else if (isset($bean->field_defs[$field->field]['type']) &&
-                            $bean->field_defs[$field->field]['type'] == 'multienum') {
-                            $bean->{$field->field} = encodeMultienumValue($field->value);
-                        } else {
-                            if (!$this->emailHandler->doesPrimaryEmailExists($field, $bean, $historyData)) {
-                                $historyData->savePredata($field->field, $bean->{$field->field});
-                                $newValue = '';
-                                if (is_array($field->value)) {
-                                    // Handle regular evaluation of values
-                                    $newValue = $this->beanHandler->processValueExpression($field->value, $beanModule);
-                                    // For null values only
-                                    if (!isset($newValue)) {
-                                        // Used to set these fields to null in db
-                                        $newValue = '';
+        foreach ($beans as $bean) {
+            if (isset($bean) && is_object($bean)) {
+                if ($act_field_module == $moduleName || $isRelated) {
+                    foreach ($fields as $field) {
+                        if (isset($bean->field_defs[$field->field])) {
+                            // check if of type link
+                            if ((isset($bean->field_defs[$field->field]['type'])) &&
+                                ($bean->field_defs[$field->field]['type'] == 'link') &&
+                                !(empty($bean->field_defs[$field->field]['name']))) {
+                                // if its a link then go through cases on basis of "name" here.
+                                // Currently only supporting teams
+                                switch ($bean->field_defs[$field->field]['name']) {
+                                    case 'teams':
+                                        PMSEEngineUtils::changeTeams($bean, $field);
+                                        break;
+                                }
+                            } elseif (isset($bean->field_defs[$field->field]['type']) &&
+                                $bean->field_defs[$field->field]['type'] == 'multienum') {
+                                $bean->{$field->field} = encodeMultienumValue($field->value);
+                            } else {
+                                if (!$this->emailHandler->doesPrimaryEmailExists($field, $bean, null)) {
+                                    if (is_array($field->value)) {
+                                        // Handle regular evaluation of values
+                                        $newValue = $this->beanHandler->processValueExpression($field->value, $beanModule);
+                                        // For null values only
+                                        if (!isset($newValue)) {
+                                            // Used to set these fields to null in db
+                                            $newValue = '';
+                                        } else {
+                                            // Handle special field type processing
+                                            $newValue = $this->handleFieldTypeProcessing($newValue, $field, $bean);
+                                        }
                                     } else {
-                                        // Handle special field type processing
-                                        $newValue = $this->handleFieldTypeProcessing($newValue, $field, $bean);
+                                        if ($field->field == 'assigned_user_id') {
+                                            $field->value = $this->getCustomUser($field->value, $beanModule);
+                                        }
+                                        $newValue = $this->beanHandler->mergeBeanInTemplate($beanModule, $field->value);
                                     }
-                                } else {
-                                    if ($field->field == 'assigned_user_id') {
-                                        $field->value = $this->getCustomUser($field->value, $beanModule);
+                                    if (!empty($bean->field_defs[$field->field]['required'])) {
+                                        $invalid = false;
+                                        switch (gettype($newValue)) {
+                                            case 'boolean':
+                                            case 'integer':
+                                            case 'double':
+                                                break;
+                                            case 'string':
+                                                $invalid = !strlen($newValue);
+                                                break;
+                                            default:
+                                                $invalid = empty($newValue);
+                                        }
+                                        if ($invalid) {
+                                            throw new PMSEElementException('Cannot fill a required field ' . $field->field . ' with an empty value', $flowData, $this);
+                                        }
                                     }
-                                    $newValue = $this->beanHandler->mergeBeanInTemplate($beanModule, $field->value);
+                                    // Finally, set the new value of the field onto
+                                    // the bean
+                                    $bean->{$field->field} = $newValue;
                                 }
-                                if (!empty($bean->field_defs[$field->field]['required'])) {
-                                    $invalid = false;
-                                    switch (gettype($newValue)) {
-                                        case 'boolean':
-                                        case 'integer':
-                                        case 'double':
-                                            break;
-                                        case 'string':
-                                            $invalid = !strlen($newValue);
-                                            break;
-                                        default:
-                                            $invalid = empty($newValue);
-                                    }
-                                    if ($invalid) {
-                                        throw new PMSEElementException('Cannot fill a required field ' . $field->field . ' with an empty value', $flowData, $this);
-                                    }
-                                }
-
-                                // Finally, set the new value of the field onto
-                                // the bean
-                                $bean->{$field->field} = $newValue;
                             }
+                            $ifields++;
                         }
-
-                        $historyData->savePostdata($field->field, $field->value);
-                        $ifields++;
                     }
+                    $bean->new_with_id = false;
+
+                    // When mutiple PDs are triggered for the same target module, we need to register the dataChanges
+                    // for later use as the saveAssociatedBean($bean) will override the original dataChanges in $bean.
+                    if ($bean->dataChanges) {
+                        $key = 'bean-data-changes-' . $bean->id;
+                        $dc = Registry\Registry::getInstance()->get($key, []);
+                        $dc = array_merge($dc, $bean->dataChanges);
+                        Registry\Registry::getInstance()->set($key, $dc, true);
+                    }
+
+                    PMSEEngineUtils::saveAssociatedBean($bean);
+                } else {
+                    $this->logger->warning(
+                        "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
+                        . "Trying to use '$act_field_module' fields to be set in $moduleName"
+                    );
                 }
-
-                $bean->new_with_id = false;
-                PMSEEngineUtils::saveAssociatedBean($bean);
-
-                $params = array();
-                $params['cas_id'] = $flowData['cas_id'];
-                $params['cas_index'] = $flowData['cas_index'];
-                $params['act_id'] = $bpmnElement['id'];
-                $params['pro_id'] = $bpmnElement['pro_id'];
-                $params['user_id'] = $this->currentUser->id;
-                $params['frm_action'] = 'Event Changed Fields';
-                $params['frm_comment'] = 'Changed Fields Applied';
-                $params['log_data'] = $historyData->getLog();
-                $this->caseFlowHandler->saveFormAction($params);
-            } else {
-                $this->logger->warning(
+                $this->logger->info(
                     "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
-                    . "Trying to use '$act_field_module' fields to be set in $moduleName"
+                    . "number of fields changed: {$ifields}"
+                );
+            } else {
+                $this->logger->info(
+                    "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
+                    . "Fields cannot be changed, none Module was set."
                 );
             }
-            $this->logger->info(
-                "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
-                . "number of fields changed: {$ifields}"
-            );
-        } else {
-            $this->logger->info(
-                "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
-                . "Fields cannot be changed, none Module was set."
-            );
         }
+
+        $params = array();
+        $params['cas_id'] = $flowData['cas_id'];
+        $params['cas_index'] = $flowData['cas_index'];
+        $params['act_id'] = $bpmnElement['id'];
+        $params['pro_id'] = $bpmnElement['pro_id'];
+        $params['user_id'] = $this->currentUser->id;
+        $params['frm_action'] = 'Event Changed Fields';
+        $params['frm_comment'] = 'Changed Fields Applied';
+        $this->caseFlowHandler->saveFormAction($params);
+
         return $this->prepareResponse($flowData, 'ROUTE', $flowAction);
     }
 

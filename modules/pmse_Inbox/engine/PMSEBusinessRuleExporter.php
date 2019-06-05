@@ -10,29 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
- * Exports a record of table BusinessRules
+ * Exports a Business Process Management Business Ruleset
  *
- * This class extends the class ADAMExporter to export a record
- * from the table BPMRuleSet to transport it from one instance to another.
  * @package PMSE
  * @codeCoverageIgnore
  */
 class PMSEBusinessRuleExporter extends PMSEExporter
 {
-    protected $bean;
-    protected $id;
-    protected $uid;
-    protected $name;
-    protected $extension;
+    /**
+     * @inheritDoc
+     */
+    protected $beanModule = 'pmse_Business_Rules';
 
-    public function __construct()
-    {
-        $this->bean = BeanFactory::newBean('pmse_Business_Rules'); //new BpmRuleSet();
-        $this->uid = 'id';
-        $this->name = 'name';
-        $this->extension = 'pbr';
-    }
+    /**
+     * @inheritDoc
+     */
+    protected $uid = 'id';
 
+    /**
+     * @inheritDoc
+     */
+    protected $name = 'name';
+
+    /**
+     * @inheritDoc
+     */
+    protected $extension = 'pbr';
 }

@@ -20,7 +20,7 @@
 $mod_strings = array (
   'LBL_MODULE_NAME' => 'Definice Workflow',
   'LBL_MODULE_NAME_SINGULAR' => 'Definice WorkFlow',
-  'LBL_MODULE_ID' => 'WorkFlow',  
+  'LBL_MODULE_ID' => 'WorkFlow',
   'LBL_MODULE_TITLE' => 'Workflow: Domů',
   'LBL_SEARCH_FORM_TITLE' => 'Vyhledání Workflow',
   'LBL_LIST_FORM_TITLE' => 'Seznam Workflow',
@@ -36,19 +36,19 @@ $mod_strings = array (
   'LBL_BASE_MODULE' => 'Cílový Modul:',
   'LBL_LIST_ORDER' => 'Pořadí provedení:',
   'LBL_FROM_NAME' => 'Od (Jméno):',
-  'LBL_FROM_ADDRESS' => 'Od (adresa):',  
+  'LBL_FROM_ADDRESS' => 'Od (adresa):',
   'LNK_NEW_WORKFLOW' => 'Vytvořit definici Workflow',
-  'LNK_WORKFLOW' => 'Seznam definic Workflow', 
-  
-  
+  'LNK_WORKFLOW' => 'Seznam definic Workflow',
+
+
   'LBL_ALERT_TEMPLATES' => 'Šablony upozornění',
   'LBL_CREATE_ALERT_TEMPLATE' => 'Vytvoření šablony upozornění:',
   'LBL_SUBJECT' => 'Předmět:',
-  
+
   'LBL_RECORD_TYPE' => 'Aplikovat na:',
  'LBL_RELATED_MODULE'=> 'Připojený Modul:',
-  
-  
+
+
   'LBL_PROCESS_LIST' => 'Sekvence workflow',
 	'LNK_ALERT_TEMPLATES' => 'Šablony e-mailových upozornění',
 	'LNK_PROCESS_VIEW' => 'Sekvence workflow',
@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Poznámka:</strong> Funkce Sugar Workflow a Workflow Management budou v budoucí verzi aplikace Sugar odebrány. Zákazníci s edicí Sugar Enterprise by měli začít používat funkce, které poskytuje Sugar Advanced Workflow. Další informace získáte kliknutím na <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Poznámka:</strong> Funkce Sugar Workflow a Správa workflow jsou v režimu údržby. Zákazníci s edicí Sugar Enterprise by měli používat funkce, které poskytuje SugarBPM<sup class="trademark">TM</sup>.',
 );
 

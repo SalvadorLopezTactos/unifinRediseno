@@ -24,7 +24,7 @@
     _placeComponent: function(comp, def) {
         var span = 'dashlet-container span' + (def.width || 12),
             self = this;
-        this.$el.append($("<li>", {'class': span}).data("index", function() {
+        this.$el.append($('<li>', {'class': span, name: 'dashlet_' + comp.index}).data('index', function() {
             var index = def.layout.index.split('').pop();
             return self.index + '' + index;
         }).append(comp.el));

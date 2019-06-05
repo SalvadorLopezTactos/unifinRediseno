@@ -32,7 +32,7 @@
 
                         {if $actionDisabledLink ne ""}<div class='selectActionsDisabled' id='select_actions_disabled_{$action_menu_location}'>
                             {$actionDisabledLink}
-                            {if $actionsLink.buttons|@count gt 1}<span class='ab'></span>{else}&nbsp;{/if}
+                            {if isset($actionsLink) && $actionsLink.buttons|@count gt 1}<span class='ab'></span>{else}&nbsp;{/if}
                         {/if}
                         {$selectedObjectsSpan}
 					</td>

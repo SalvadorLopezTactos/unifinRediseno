@@ -37,8 +37,8 @@ $mod_strings = array (
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Δημιουργία Μελλοντικών Χρονικών Περιόδων',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
-'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Άρθρα εγκεκριμένα προς δημοσίευση & Άρθρα ληγμένου KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Προγραμματισμένη εργασία στην Advanced Workflow',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Δημοσιεύστε τα εγκεκριμένα άρθρα και τα ληγμένα άρθρα KB.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Χρονοπρογραμματισμένη Εργασία',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
 
 // List Labels
@@ -158,6 +158,6 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Εκτελέστε αποστολή υπενθύμισης μέσω ηλεκτρονικού ταχυδρομείου',
 'LBL_CLEANJOBQUEUE' => '<b>Εκκαθάριση Εργασιών Ουράς Αναμονής</b>',
 'LBL_CLEANOLDRECORDLISTS' => 'Εκκαθάριση Λιστών Παλαιών Εγγραφών',
-'LBL_PMSEENGINECRON' => 'Χρονοπρογραμματιστής εργασιών Advanced Workflow',
+'LBL_PMSEENGINECRON' => 'Χρονοδιάγραμμα SugarBPM',
 );
 

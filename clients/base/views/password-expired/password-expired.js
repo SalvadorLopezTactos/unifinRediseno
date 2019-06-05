@@ -30,6 +30,11 @@
         });
         this.fieldsToValidate = fields;
         app.view.View.prototype.initialize.call(this, options);
+        // Field name in defs doesn't match rendered field name
+        // So remove this validation task
+        this.model.removeValidationTask('sidecar');
+        // This flag allows change-password field to show alerts
+        this.model.showPopupAlerts = true;
     },
     /**
      * @override
@@ -65,6 +70,7 @@
     },
     savePassword: function() {
         var self = this, callbacks, newPass, oldPass = self.$('[name=current_password]').val();
+        app.alert.dismiss('passwords_mismatch');
         self.model.doValidate(this.fieldsToValidate, function(isValid) {
             if (isValid) {
                 // A robot has reached into the honey pot. Do not submit (name_field not real)

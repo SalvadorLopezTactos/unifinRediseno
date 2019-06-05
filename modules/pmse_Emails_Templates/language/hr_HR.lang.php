@@ -48,4 +48,5 @@ $mod_strings = array (
     'LBL_SUGAR_LINK_SELECTOR' => 'Birač poveznice zapisa',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Povezano s modulom meta',
     'LBL_SELECT_BUTTON_LABEL' => 'Odaberi',
+    'LBL_FIELD_SELECTOR_DROPDOWN' => 'Vrsta vrijednosti polja',
 );

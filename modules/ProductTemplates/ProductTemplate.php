@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Doctrine\DBAL\Connection;
+
 /**
  * Data access class for the product_template table
  */
@@ -165,27 +168,36 @@ class ProductTemplate extends SugarBean {
      */
 	function update_currency_id($fromid, $toid){
         $GLOBALS['log']->deprecated('ProductTemplate::update_currency_id() has been deprecated in 7.8');
-		$idequals = '';
+        $currency = BeanFactory::getBean('Currencies', $toid);
+        if (empty($fromid)) {
+            return;
+        }
 
-		$currency = BeanFactory::getBean('Currencies', $toid);
-		foreach($fromid as $f){
-			if(!empty($idequals)){
-				$idequals .=' or ';
-			}
-			$idequals .= "currency_id='$f'";
-		}
+        $sql = <<<SQL
+SELECT cost_price, list_price, discount_price, id FROM {$this->table_name} WHERE currency_id IN(?) AND deleted=0 
+SQL;
 
-		if(!empty($idequals)){
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$fromid],
+                [Connection::PARAM_STR_ARRAY]
+            );
+        foreach ($stmt as $row) {
+            $this->db->getConnection()
+                ->update(
+                    $this->table_name,
+                    [
+                        'currency_id' => $currency->id,
+                        'cost_usdollar' => $currency->convertToDollar($row['cost_price']),
+                        'list_usdollar' => $currency->convertToDollar($row['list_price']),
+                        'discount_usdollar' => $currency->convertToDollar($row['discount_price']),
+                    ],
+                    ['id' => $row['id']]
+                );
 
-			$query = "select cost_price, list_price, discount_price, id from ".$this->table_name."  where (". $idequals. ") and deleted=0 ;";
-			$result = $this->db->query($query);
-			while($row = $this->db->fetchByAssoc($result)){
-				$query = "update ".$this->table_name." set currency_id='".$currency->id."', cost_usdollar='".$currency->convertToDollar($row['cost_price'])."', list_usdollar='".$currency->convertToDollar($row['list_price'])."', discount_usdollar='".$currency->convertToDollar($row['discount_price'])."' where id='".$row['id']."';";
-				$this->db->query($query);
-
-			}
-		}
-	}
+        }
+    }
 
 	function get_list_view_data(){
 		global $app_list_strings;

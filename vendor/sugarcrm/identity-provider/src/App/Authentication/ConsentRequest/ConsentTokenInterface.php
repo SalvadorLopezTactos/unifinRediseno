@@ -10,7 +10,6 @@ interface ConsentTokenInterface
      */
     public function getTenantSRN();
 
-
     /**
      * Return STS client id
      * @return string
@@ -21,7 +20,7 @@ interface ConsentTokenInterface
      * return STS client allowed scopes
      * @return array
      */
-    public function getScope();
+    public function getScopes();
 
     /**
      * return consent request id

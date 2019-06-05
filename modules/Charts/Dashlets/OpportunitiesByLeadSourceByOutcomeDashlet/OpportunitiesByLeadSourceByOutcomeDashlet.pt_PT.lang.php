@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45Z wayne $
 
 
 $dashletStrings['OpportunitiesByLeadSourceByOutcomeDashlet'] = array('LBL_TITLE'       => 'Todas as Oportunidades Por Origem do Cliente Potencial Por Resultado',

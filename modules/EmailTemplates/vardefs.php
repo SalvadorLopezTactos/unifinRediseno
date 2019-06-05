@@ -80,7 +80,6 @@ $dictionary['EmailTemplate'] = array(
 			'name' => 'created_by',
 			'vname' => 'LBL_CREATED_BY',
 			'type' => 'id',
-			'len'=> '36',
 			'comment' => 'User who created record'
 		),
         'created_by_name' => array(

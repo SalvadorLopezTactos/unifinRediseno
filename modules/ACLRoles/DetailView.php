@@ -28,7 +28,8 @@ $hidden_categories = array(
     "EmailMarketing",
     "Forecasts",
     "PdfManager",
-    "Reports"
+    "Reports",
+    "ReportSchedules",
 );
 foreach ($categories as $name => $category) {
     $objName = BeanFactory::getObjectName($name) ?: $name;
