@@ -42,6 +42,15 @@ class LeadNV_hook
             $beanNV->tct_competencia_quien_ca_txf_c = $leadNoViale['quienca'];
             $beanNV->tct_competencia_porque_ca_txf_c = $leadNoViale['porqueca'];
             $beanNV->no_producto_requiere_ca_ddw_c = $leadNoViale['noproducca'];
+            $beanNV->tct_razon_cf_l_ddw_c = $leadNoViale ['razoncfl'];
+            $beanNV->tct_razon_ni_l_ddw_c = $leadNoViale['razonnil'];
+            $beanNV->tct_que_producto_l_txf_c = $leadNoViale['queprodl'];
+            $beanNV->tct_razon_cf_f_ddw_c = $leadNoViale['razoncff'];
+            $beanNV->tct_razon_ni_f_ddw_c = $leadNoViale['razonnif'];
+            $beanNV->tct_que_producto_f_txf_c = $leadNoViale['queprodf'];
+            $beanNV->tct_razon_cf_ca_ddw_c = $leadNoViale['razoncfca'];
+            $beanNV->tct_razon_ni_ca_ddw_c = $leadNoViale['razonnica'];
+            $beanNV->tct_que_producto_ca_txf_c = $leadNoViale['queprodca'];
             $beanNV->user_id_c= $leadNoViale['PromotorLeasing'];
             $beanNV->user_id1_c= $leadNoViale['PromotorFactoraje'];
             $beanNV->user_id2_c= $leadNoViale['PromotorCreditA'];

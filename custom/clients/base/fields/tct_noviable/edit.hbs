@@ -63,6 +63,29 @@
                         {{/each}}
                     </select>
                 </div>
+                <div class="campo19" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <select class="row-fluid select2  campo19nvl" data-field="campo19L">
+                        {{#each razones_cf_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razoncfl}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campo22" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <input type="text" class="campo22nvl" value="{{leadNoViable.queprodl}}"
+                           data-field="campo22AP" data-name="Otro" maxlength="255"/>
+                </div>
+                <div class="campo25" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <select class="row-fluid select2  campo25nvl" data-field="campo25L">
+                        {{#each tct_razon_ni_l_ddw_c_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razonnil}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
             </td>
             <td valign="top" class="factorajep">
                 <div class="campo5" style="margin-left:0px;">
@@ -102,6 +125,29 @@
                         {{/each}}
                     </select>
                 </div>
+                <div class="campo20" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <select class="row-fluid select2  campo20nvf" data-field="campo19L">
+                        {{#each razones_cf_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razoncff}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campo23" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <input type="text" class="campo23nvf" value="{{leadNoViable.queprodf}}"
+                           data-field="campo23FF" data-name="Otro" maxlength="255"/>
+                </div>
+                <div class="campo26" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <select class="row-fluid select2  campo26nvf" data-field="campo26F">
+                        {{#each tct_razon_ni_l_ddw_c_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razonnif}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
             </td>
             <td valign="top" class="creditoautop">
                 <div class="campo6" style="margin-left:0px;">
@@ -138,6 +184,29 @@
                         {{#each no_producto_requiere_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.noproducca}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campo21" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <select class="row-fluid select2  campo21nvca" data-field="campo21ca">
+                        {{#each razones_cf_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razoncfca}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campo24" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <input type="text" class="campo24nvca" value="{{leadNoViable.queprodca}}"
+                           data-field="campo23FF" data-name="Producto" maxlength="255"/>
+                </div>
+                <div class="campo27" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <select class="row-fluid select2  campo27nvca" data-field="campo27ca">
+                        {{#each tct_razon_ni_l_ddw_c_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../leadNoViable.razonnica}}>{{this}}</option>
                         {{/each}}
                     </select>
                 </div>

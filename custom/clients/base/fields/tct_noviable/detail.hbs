@@ -35,7 +35,7 @@
                 <div class="campo7" style="margin: 1px;">
                     <label class="record-label" style="margin-left:0px">Fuera de Perfil (Razón)</label>
                     <label class="normal row-fluid select2  campo7nvl" style="margin-left:0px" data-field="campo7L">
-                        {{leadNoViable.fueraperfilL}}
+                        {{getUnifinListValue 'fuera_de_perfil_ddw_list' leadNoViable.fueraperfilL}}
                     </label>
                 </div>
                 <div class="campo10" style="margin: 1px;">
@@ -49,10 +49,28 @@
                         {{leadNoViable.porquel}}
                     </label>
                 </div>
-                <div class="campo16" style="margin: 1px;">
+                <div class="campo16" style="margin: 10px 0px;">
                     <label class="record-label" style="margin-left:0px">¿Qué producto?</label>
                     <label class="normal row-fluid select2 campo16nvl" style="margin-left:0px">
-                        {{leadNoViable.noproducl}}
+                        {{getUnifinListValue 'no_producto_requiere_list' leadNoViable.noproducl}}
+                    </label>
+                </div>
+                <div class="campo19" style="margin: 12px -8px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <label class="normal row-fluid select2 campo19nvl" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'razones_cf_list' leadNoViable.razoncfl}}
+                    </label>
+                </div>
+                <div class="campo22" style="margin-left:-5px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <label class="normal campo22nvl" type="text" style="margin-left:5px" data-name="producto">
+                        {{leadNoViable.queprodl}}
+                    </label>
+                </div>
+                <div class="campo25" style="margin: 12px -8px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <label class="normal row-fluid select2 campo25nvl" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' leadNoViable.razonnil}}
                     </label>
                 </div>
             </td>
@@ -66,7 +84,7 @@
                 <div class="campo8" style="margin: 1px;">
                     <label class="record-label" style="margin-left:12px">Fuera de Perfil (Razón)</label>
                     <label class="normal row-fluid select2 campo8nvf" style="margin-left:12px">
-                        {{leadNoViable.fueraperfilF}}
+                        {{getUnifinListValue 'fuera_de_perfil_ddw_list' leadNoViable.fueraperfilF}}
                     </label>
                 </div>
                 <div class="campo11" style="margin-left:12px;">
@@ -79,10 +97,28 @@
                     <label class="normal campo14nvf" type="text" style="margin-left:12px" data-name="porque"/>
                     {{leadNoViable.porquef}}
                 </div>
-                <div class="campo17" style="margin: 1px;">
-                    <label class="record-label" style="margin-left:12px">¿Qué producto?</label>
-                    <label class="normal row-fluid select2  campo17nvf" style="margin-left:12px" data-field="campo17L">
-                        {{leadNoViable.noproducf}}
+                <div class="campo17" style="margin: 10px 0px;">
+                    <label class="record-label" style="margin-left:10px">¿Qué producto?</label>
+                    <label class="normal row-fluid select2  campo17nvf" style="margin-left:10px" data-field="campo17L">
+                        {{getUnifinListValue 'no_producto_requiere_list' leadNoViable.noproducf}}
+                    </label>
+                </div>
+                <div class="campo20" style="margin: 12px 1px 1px 1px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <label class="normal row-fluid select2 campo20nvf" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'razones_cf_list' leadNoViable.razoncff}}
+                    </label>
+                </div>
+                <div class="campo23" style="margin: 0px 4px 1px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <label class="normal campo23nvf" type="text" style="margin-left:5px" data-name="producto">
+                        {{leadNoViable.queprodf}}
+                    </label>
+                </div>
+                <div class="campo26" style="margin: 12px 4px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <label class="normal row-fluid select2 campo26nvf" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' leadNoViable.razonnif}}
                     </label>
                 </div>
 
@@ -97,7 +133,7 @@
                 <div class="campo9" style="margin: 1px;">
                     <label class="record-label" style="margin-left:27px">Fuera de Perfil (Razón)</label>
                     <label class="normal row-fluid select2 campo9nvca" style="margin-left:27px">
-                        {{leadNoViable.fueraperfilCA}}
+                        {{getUnifinListValue 'fuera_de_perfil_ddw_list' leadNoViable.fueraperfilCA}}
                     </label>
                 </div>
                 <div class="campo12" style="margin-left:27px;">
@@ -110,10 +146,28 @@
                     <label class="normal campo15nvca" type="text" style="margin-left:27px" data-name="porque"/>
                     {{leadNoViable.porqueca}}
                 </div>
-                <div class="campo18" style="margin: 1px;">
+                <div class="campo18" style="margin: 10px 0px;">
                     <label class="record-label" style="margin-left:27px">¿Qué producto?</label>
                     <label class="normal row-fluid select2 campo18nvca" style="margin-left:27px">
-                        {{leadNoViable.noproducca}}
+                        {{getUnifinListValue 'no_producto_requiere_list' leadNoViable.noproducca}}
+                    </label>
+                </div>
+                <div class="campo21" style="margin: 12px 20px;">
+                    <label class="record-label">Condiciones Financieras</label>
+                    <label class="normal row-fluid select2 campo21nvca" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'razones_cf_list' leadNoViable.razoncfca}}
+                    </label>
+                </div>
+                <div class="campo24" style="margin: 0px 20px;">
+                    <label class="record-label">¿Qué producto?</label>
+                    <label class="normal campo24nvca" type="text" style="margin-left:5px" data-name="producto">
+                        {{leadNoViable.queprodca}}
+                    </label>
+                </div>
+                <div class="campo27" style="margin: 12px 20px;">
+                    <label class="record-label">Razón No se encuentra interesado</label>
+                    <label class="normal row-fluid select2 campo27nvca" style="margin: 5px 7px;">
+                        {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' leadNoViable.razonnica}}
                     </label>
                 </div>
             </td>
