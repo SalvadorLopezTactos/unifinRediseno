@@ -77,9 +77,11 @@
 
         $('.selected').each(function (index, value) {
             if(btnState == "On"){
-                $(value).attr("checked", true);
+                //$(value).attr("checked", true);
+                $(value).prop('checked', true);
             }else{
-                $(value).attr("checked", false);
+                //$(value).attr("checked", false);
+                $(value).prop('checked', false);
             }
         });
 
@@ -266,7 +268,7 @@
             seleccionarTodo = JSON.parse(crossSeleccionados);
         }
 
-        if($(e.target).attr("checked")){
+        if($(e.target).is(':checked')){
             seleccionarTodo.push($(e.target).val());
             this.seleccionados = seleccionarTodo;
         }else{
