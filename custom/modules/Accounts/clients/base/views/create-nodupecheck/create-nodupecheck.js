@@ -479,8 +479,8 @@
                         title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
                         autoClose: false
                     });
-                    errors['email_telefono'] = errors['email_telefono'] || {};
-                    errors['email_telefono'].required = true;
+                    errors['email'] = errors['email_telefono'] || {};
+                    errors['email'].required = true;
                     errors['account_telefonos'] = errors['account_telefonos'] || {};
                     errors['account_telefonos'].required = true;
                 }
@@ -960,6 +960,10 @@
             if (errors.account_telefonos){
                 campos= campos.replace("Telefonos","Teléfono");
             }
+        }else{
+            campos = campos.replace("<b>Telefonos</b><br>","");
+            campos = campos.replace("<b>Direcciones</b><br>","");
+            campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>","");
         }
 
         if(campos) {
