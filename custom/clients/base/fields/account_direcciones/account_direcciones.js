@@ -1937,7 +1937,7 @@ populateColoniasByMunicipio:function(evt){
         }
 
         //Valida tipo de direccion Multiselect
-        if ($('#multi_tipo').val() == null) {
+        if ($('#multi_tipo').val() == null || $('#multi_tipo').val() == "") {
             errorMsg = 'Tipo de direccion requerido';
             dirError = true; dirErrorCounter++;
             $('#s2id_multi_tipo ul').css('border-color', 'red');
@@ -1946,7 +1946,7 @@ populateColoniasByMunicipio:function(evt){
         }
 
         //Valida indicador
-        if ($('#multi1').val() == null) {
+        if ($('#multi1').val() == null || $('#multi1').val() == "") {
             errorMsg = 'Indicador de direcci\u00F3n requerido';
 
             dirError = true; dirErrorCounter++;
