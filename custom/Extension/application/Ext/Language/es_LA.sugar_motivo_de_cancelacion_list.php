@@ -1,6 +1,5 @@
 <?php
- // created: 2019-06-03 12:20:53
-
+ // created: 2019-06-10 19:16:36
 $app_list_strings['motivo_de_cancelacion_list']=array (
   '' => '',
   'Precio Condiciones' => 'Precio / condiciones',
@@ -13,6 +12,4 @@ $app_list_strings['motivo_de_cancelacion_list']=array (
   'Duplicado' => 'Duplicado',
   'Otro' => 'Otro',
   'Mes posterior' => 'Mes posterior',
-  'Cliente no interesado' => 'Cliente no interesado',
-  'No viable' => 'No viable',
 );

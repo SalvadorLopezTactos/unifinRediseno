@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-23 13:47:29
+ // created: 2019-06-10 17:27:10
 
 $app_list_strings['tct_detalle_origen_ddw_list']=array (
   '' => '',
@@ -12,6 +12,6 @@ $app_list_strings['tct_detalle_origen_ddw_list']=array (
   'Llamadas Inbound' => 'Llamadas Inbound',
   'Parques Industriales' => 'Parques Industriales',
   'Offline' => 'Offline',
-  'Cartera Promotores' => 'Cartera Promotores',
+  'Cartera Promotores' => 'Cartera de Asesores',
   'Recomendacion' => 'Recomendación',
 );
