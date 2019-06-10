@@ -64,7 +64,10 @@
 
             for(var i=0;i<this.persistNoSeleccionados.length;i++){
 
-                this.full_cuentas.push(this.persistNoSeleccionados[i])
+                //Añadir el elemento solo si no existe en arreglo full_cuentas
+                if(!this.full_cuentas.includes(this.persistNoSeleccionados[i])){
+                    this.full_cuentas.push(this.persistNoSeleccionados[i])
+                }
             }
 
             this.persistNoSeleccionados=[];
