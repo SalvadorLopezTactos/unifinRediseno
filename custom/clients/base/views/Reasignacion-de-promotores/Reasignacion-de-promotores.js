@@ -23,6 +23,7 @@
 
         this.cuentas = '';
         this.seleccionados = [];
+        this.persistNoSeleccionados=[];
         this.flagSeleccionados=0;
         this.model.on('change:users_accounts_1users_ida', this._setOffset, this);
 
@@ -59,6 +60,21 @@
 
     seleccionarTodo: function(e){
 
+        if(this.persistNoSeleccionados!=undefined && this.persistNoSeleccionados.length>0){
+
+            for(var i=0;i<this.persistNoSeleccionados.length;i++){
+
+                this.full_cuentas.push(this.persistNoSeleccionados[i])
+            }
+
+            this.persistNoSeleccionados=[];
+
+        }else{
+
+            this.persistNoSeleccionados=[];
+        }
+        
+
         //Control de bandera para saber si se ha oprimido el botón de "Seleccionar Todo" y de esta manera saber si el siguiente "offset" de la tabla
         // debe mostrarse con los check como true
         if(this.flagSeleccionados==0){
@@ -91,7 +107,7 @@
             seleccionarTodo = JSON.parse(crossSeleccionados);
         }
 
-        if($('.selected').attr("checked")) {
+        if($('.selected').prop("checked")) {
             $(this.cuentas).each(function (index, value) {
                 seleccionarTodo.push(value.id);
             });
@@ -190,13 +206,44 @@
 
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
-                    this.full_cuentas=data.full_cuentas;
+                    //Controlar los checks deseleccionados para que persistan al volver a obtener valores de la petición al api
+                    if(this.persistNoSeleccionados!=undefined && this.persistNoSeleccionados.length>0){
+
+                        var tempArray=data.full_cuentas;
+                        for(var i=0;i<this.persistNoSeleccionados.length;i++){
+                            if(tempArray.includes(this.persistNoSeleccionados[i])){
+                                var index = tempArray.indexOf(this.persistNoSeleccionados[i]);
+                                if (index > -1) {
+                                  tempArray.splice(index, 1);
+                                }                                
+                            }
+                        }
+
+                        this.full_cuentas=tempArray;
+
+                    }else{
+                        this.full_cuentas=data.full_cuentas;
+                    }
                     this.render();
 
                     if(this.flagSeleccionados==1){
                         $('#btn_STodo').attr('btnstate','On');
+                        var context=this;
                         $('.selected').each(function (index, value) {
-                            $(value).attr("checked", true);
+                            //Validación para persistir valores de los checks en caso de que se haya "Seleccionado Todo"
+                            //y se hayan deseleccionado registros individualmente
+                            if(context.persistNoSeleccionados!=undefined && context.persistNoSeleccionados.length>0){
+
+                                if(context.persistNoSeleccionados.includes($(this).attr('value'))){
+                                    $(value).prop("checked", false)
+                                }else{
+                                    $(value).prop("checked", true);
+                                }
+                            }else{
+
+                                $(value).prop("checked", true);
+
+                            }
                         });
 
                     }
@@ -242,7 +289,7 @@
                             $('.selected').each(function (index, value) {
 
                                 if(selected == value.value){
-                                    $(value).attr("checked", true);
+                                    $(value).prop("checked", true);
                                 }
 
                             });
@@ -290,10 +337,20 @@
             var idAccount=$(e.target).val();
             if(this.full_cuentas.includes(idAccount)){
                 //Validar que el check ha sido seleccionado o no, en caso de que no se haya "activado", se elimina del arreglo de full_cuentas
-                if($(e.target).attr("checked")!="checked"){
+                if($(e.target).prop("checked")==false){
                     var position=this.full_cuentas.indexOf(idAccount)
                     this.full_cuentas.splice(position,1);
+
+                    this.persistNoSeleccionados.push(idAccount);
+
                 }
+            }else{
+
+                if($(e.target).prop("checked")){
+                    var position=this.full_cuentas.indexOf(idAccount)
+                    this.full_cuentas.splice(position,0,idAccount);
+                }
+
             }
 
         }
