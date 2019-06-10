@@ -3045,6 +3045,11 @@
           		  }
        	    }, this);
         }, this);
+        //Remueve campos custom: Teléfonos, Direcciones, Correo
+        campos = campos.replace("<b>Telefonos</b><br>","");
+        campos = campos.replace("<b>Direcciones</b><br>","");
+        campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>","");
+        
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
