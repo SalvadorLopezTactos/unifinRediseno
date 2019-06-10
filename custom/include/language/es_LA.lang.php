@@ -8300,3 +8300,4 @@ $app_strings['ERR_QUOTE_CONVERTED']='This Quote has already been converted to an
 $app_strings['LBL_QUOTE_TO_OPPORTUNITY_LABEL']='Create Solicitud y Líneaes from Quote';
 $app_strings['LBL_QUOTE_TO_OPPORTUNITY_TITLE']='Create Solicitud y Líneaes from Quote';
 $app_strings['NTC_UNLINK_SUCCESS']='Desvinculó el registro de {0}.';
+$app_strings['LBL_RECORD_SAVED_SUCCESS'] ='Ha creado con éxito el registro de {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.';

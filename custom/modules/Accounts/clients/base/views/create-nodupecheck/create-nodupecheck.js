@@ -479,8 +479,8 @@
                         title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
                         autoClose: false
                     });
-                    errors['email_telefono'] = errors['email_telefono'] || {};
-                    errors['email_telefono'].required = true;
+                    errors['email'] = errors['email_telefono'] || {};
+                    errors['email'].required = true;
                     errors['account_telefonos'] = errors['account_telefonos'] || {};
                     errors['account_telefonos'].required = true;
                 }
@@ -914,7 +914,7 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real'))) {
+        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real') && !this.model.get('tipo_relacion_c').includes('Contacto') )) {
             if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
@@ -960,6 +960,10 @@
             if (errors.account_telefonos){
                 campos= campos.replace("Telefonos","Teléfono");
             }
+        }else{
+            campos = campos.replace("<b>Telefonos</b><br>","");
+            campos = campos.replace("<b>Direcciones</b><br>","");
+            campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>","");
         }
 
         if(campos) {
@@ -1098,7 +1102,7 @@
                         $(this).css('border-color', '');
                     }
                 }
-              }              
+              }
             });
             $('.existingPais').each(function () {
                 if($(this).val()==''){

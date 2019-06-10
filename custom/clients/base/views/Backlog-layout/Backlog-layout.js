@@ -291,14 +291,15 @@
 
      ocultarColumnas:function(){
          console.log(self.rolAutorizacion);
-         if(self.rolAutorizacion != "DGA"){
+         //2019-06-07 AF: Se solicita eliminar validación para ocultar columnas
+         /*if(self.rolAutorizacion != "DGA"){
              app.alert.show('periodo_de_aprobacion', {
                  level: 'error',
                  messages: 'No cuenta con privilegios para modificar la estructura del tablero.',
                  autoClose: false
              });
              return;
-         }
+         }*/
          //Mostrar modal
          var modalCols = $('#myModalHideCols');
          modalCols.show();
