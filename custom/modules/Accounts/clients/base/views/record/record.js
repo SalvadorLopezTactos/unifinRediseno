@@ -1660,11 +1660,11 @@
             });
             return;
         }
-        var validacion =  this.validaContactado();
+        /*var validacion =  this.validaContactado();
         if(validacion == 1){
             return;
 
-        }
+        }*/
 
         self=this;
         self.flagheld=0;
@@ -3049,7 +3049,7 @@
         campos = campos.replace("<b>Telefonos</b><br>","");
         campos = campos.replace("<b>Direcciones</b><br>","");
         campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>","");
-        
+
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
