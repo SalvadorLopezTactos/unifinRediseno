@@ -148,6 +148,19 @@ array (
             'label' => 'LBL_PRODUCTOS',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_id_uni2_txf_c',
+            'label' => 'LBL_TCT_ID_UNI2_TXF',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_id_unics_txf_c',
+            'label' => 'LBL_TCT_ID_UNICS_TXF',
+          ),
+        ),
       ),
       'lbl_detailview_panel1' => 
       array (
