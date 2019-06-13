@@ -215,6 +215,13 @@ class Meetings_Hooks
    * */
   function insertAuditFields ($bean, $event, $args)
   {
+    //Valida cambio de estado
+    if ($bean->fetched_row['status'] != 'Planned' && !empty($bean->fetched_row['status']) && $bean->fetched_row['status'] != "") {
+      $bean->status = $bean->fetched_row['status'];
+    }
+
+
+    //Ingresa registro en auditoria
     $GLOBALS['log']->fatal('TCT - insertAuditFields -');
     global $current_user;
     $date= TimeDate::getInstance()->nowDb();

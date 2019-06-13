@@ -132,8 +132,8 @@ class ValidaCamposSolicitud extends SugarApi
             $relaciones = 0;
 
             foreach ($relatedBeansRel as $clave ) {
-               $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
-                if ($resultado>=0){
+               $resultado= strpos($clave->relaciones_activas , "Propietario Real");
+                if (!empty($resultado) && $resultado>=0){
                     $relaciones++;
                 }
             }
