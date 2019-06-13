@@ -8,4 +8,12 @@ $hook_array['before_save'][] = Array(
     'method_changeCustomPassword'
 );
 
+$hook_array['before_save'][] = Array(
+    3,
+    'Función para validar id ingresados en los cambios UD uni2 y unics',
+    'custom/modules/Users/LogicHooks/IDUsuarios.php',
+    'UsuarioID',
+    'validausuariosid'
+);
+
 ?>
