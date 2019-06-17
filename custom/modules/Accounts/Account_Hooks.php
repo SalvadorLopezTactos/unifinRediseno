@@ -962,4 +962,34 @@ where rfc_c = '{$bean->rfc_c}' and
         }
         $GLOBALS['log']->fatal('Finaliza y crea Resumen para vista 360');
     }
+
+    //Función para validar que una cuenta tenga asesor asignado, si no tiene usuario establece 9.-Sin gestor
+    /*
+      Condiciones:
+      Tipo =  Prospecto
+      Asesor L,CA, F = Vacío
+    */
+    public function valida_asesor($bean = null, $event = null, $args = null)
+    {
+        // $GLOBALS['log']->fatal('L- '. $bean->user_id_c . ' - '. $bean->promotorleasing_c);
+        // $GLOBALS['log']->fatal('F- '. $bean->user_id1_c . ' - '. $bean->promotorfactoraje_c);
+        // $GLOBALS['log']->fatal('C- '. $bean->user_id2_c . ' - '. $bean->promotorcredit_c);
+
+        $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
+        //Valida Cuenta tipo promotor
+        if($bean->tipo_registro_c == 'Prospecto'){
+          //Valida promotor Leasing
+          if ((empty($bean->user_id_c) || $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
+              $bean->user_id_c = $idSinGestor;
+          }
+          //Valida promotor Factoraje
+          if ((empty($bean->user_id1_c) || $bean->user_id1_c =="") && empty($bean->promotorfactoraje_c)) {
+              $bean->user_id1_c = $idSinGestor;
+          }
+          //Valida promotor CA
+          if ((empty($bean->user_id2_c) || $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
+              $bean->user_id2_c = $idSinGestor;
+          }
+        }
+    }
 }
