@@ -580,7 +580,7 @@
 
     _doValidateDireccionFiscalCorrespondencia: function (fields, errors, callback){
 
-        if(this.counterEmptyFields==0){
+        //if(this.counterEmptyFields==0){
 
             if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
             {
@@ -632,7 +632,7 @@
                 }
             }
 
-        }
+        //}
 
         callback(null, fields, errors);
     },
