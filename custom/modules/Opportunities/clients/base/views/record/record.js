@@ -227,7 +227,7 @@
   				}
   				app.alert.show("Moto Modificado", {
   					level: "info",
-  					title: "El disponible de la linea despues de autorizar esta solicitud de " + tipo + " sera de " + monto.formatMoney(2, '.', ','),
+  					title: "El disponible de la l\u00EDnea despu\u00E9s de autorizar esta solicitud de " + tipo + " ser\u00E1 de " + monto.formatMoney(2, '.', ','),
   					autoClose: false
   				});
   			}
@@ -241,7 +241,7 @@
   				if((this.model.get('tipo_operacion_c') == 3 || this.model.get('tipo_operacion_c') == 4 ) && parseFloat(this.model.get('amount')) != parseFloat(this.model.get('monto_c'))){
   					app.alert.show("Moto de colocacion", {
   							level: "alert",
-  							title: "El monto a operar se igualara al monto de la colocación.",
+  							title: "El monto a operar se igualar\u00E1 al monto de la colocaci\u00F3n.",
   							autoClose: false
   						});
   					this.model.set('amount',this.model.get('monto_c'));
@@ -266,7 +266,7 @@
   				if((this.model.get('tipo_operacion_c') == 3 || this.model.get('tipo_operacion_c') == 4 ) && parseFloat(this.model.get('amount')) != parseFloat(this.model.get('monto_c'))){
   					app.alert.show("Moto de colocacion", {
   							level: "alert",
-  							title: "El monto de la colocación se igualara al monto a operar",
+  							title: "El monto de la colocaci\u00F3n se igualar\u00E1 al monto a operar",
   							autoClose: false
   						});
   					this.model.set('monto_c',this.model.get('amount'));
