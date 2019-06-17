@@ -73,6 +73,14 @@ $hook_array['after_save'][] = Array(
 
 $hook_array['before_save'][] = Array(
     1,
+    'Valida que tenga asesor asignado',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'valida_asesor'
+);
+
+$hook_array['before_save'][] = Array(
+    2,
     'Check for Duplicates and Prevent the Save',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -80,7 +88,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    2,
+    3,
     'Set the Primary team for Accounts',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -88,7 +96,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    3,
+    4,
     'change all text fields to UpperCase',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -96,7 +104,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    4,
+    5,
     'detecta si estamos insertando o actualizando un servicio',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -104,7 +112,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    5,
+    6,
     'API call, generarFolioProspecto',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -112,7 +120,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    6,
+    7,
     'API call, generarFolioCliente',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
@@ -120,7 +128,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    7,
+    8,
     'API call, Lista Negra',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
