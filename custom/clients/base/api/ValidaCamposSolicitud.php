@@ -85,7 +85,8 @@ class ValidaCamposSolicitud extends SugarApi
 
                 if ($beanPersona->$key == "" || $beanPersona->$key == null) {
                     $label = $beanPersona->field_defs[$key]['labelValue'];
-
+                    $label = ($key=="estado_nacimiento_c") ? "Estado de Constitución" : $label;
+                    $label = ($key=="pais_nacimiento_c") ? "País de Constitución" : $label;
                     array_push($array_errores, $label);
                 }
             }
