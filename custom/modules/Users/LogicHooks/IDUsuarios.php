@@ -30,7 +30,7 @@ class UsuarioID
                         $contador++;
                     }
                     if ($contador > 0) {
-                        $errores= $errores . "El ID " . $valorid. " de unics ya existe. Número de conincidencias: " . $contador;
+                        $errores= $errores . "El ID <b>" . $valorid. "</b> de unics ya existe. Número de conincidencias: " ."<b>". $contador ."</b>";
                     }
                 }
             } catch (Exception $e) {
@@ -53,7 +53,7 @@ class UsuarioID
                         $contador2++;
                     }
                     if ($contador2 > 0) {
-                        $errores= $errores . "<br>El ID " .$valorid. " de uni2 ya existe. Número de conincidencias: " . $contador2;
+                        $errores= $errores . "<br>El ID <b>" .$valorid. "</b> de uni2 ya existe. Número de conincidencias: " ."<b>". $contador2 ."</b>";
                     }
                 }
             } catch (Exception $e) {
