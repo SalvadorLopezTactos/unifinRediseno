@@ -387,6 +387,20 @@ extendsFrom: 'RecordView',
                             });
                         });
 
+                        //Removiendo elementos 'undefined' del arreglo
+                        if(self.RequeridosFaltantes.includes(undefined)){
+
+                            for(var i=0;i<self.RequeridosFaltantes.length;i++){
+
+                                var pos=self.RequeridosFaltantes.indexOf(undefined);
+                                if(pos !=-1){
+                                    self.RequeridosFaltantes.splice(pos,1);
+                                }
+
+                            }
+
+                        }
+
                         if(self.RequeridosFaltantes != "" && self.RequeridosFaltantes != null){
                             relContext.RequeridosFaltantes = self.RequeridosFaltantes;
                             app.drawer.open({
