@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:12:47
+ // created: 2019-06-19 13:02:45
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -18,4 +18,11 @@ $app_list_strings['resultado_list']=array (
   14 => 'Aclaración de pagos',
   15 => 'Se logró parcialmente, se necesita una segunda cita',
   16 => 'No se aclararon los pagos',
+  19 => 'Está interesado. Se agendó otra llamada',
+  17 => 'Cita con persona no clave (Tomador de decisiones)',
+  18 => 'No viable',
+  20 => 'Se procede a generar expediente',
+  21 => 'No Interesado. Cita Forzada',
+  22 => 'No se pudo contactar al Prospecto para confirmar cita',
+  23 => 'Está interesado, solicita cotización para proceder',
 );
