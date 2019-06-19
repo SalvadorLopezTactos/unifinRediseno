@@ -385,7 +385,18 @@ SQL;
 
         public function setEtapaSubetapa($bean = null, $event = null, $args = null){
 
-            global $app_list_strings;
+            global $app_list_strings, $db;
+
+            //Generar consulta a BD
+            $query_estatus_c = "SELECT estatus_c from opportunities_cstm where id_c='{$bean->id}'";
+            $estatus_c_db = $db->query($query_estatus_c);
+            while ($row = $db->fetchByAssoc($estatus_c_db)) {
+                if($row['estatus_c'] == 'P' && $bean->estatus_c == 'PE'){
+                    $update_estatus_c_pe = "update opportunities_cstm set estatus_c = 'PE' where id_c = '".$bean->id."'";
+                    $result_update = $db->query($update_estatus_c_pe);
+                }
+            }
+
 
             $etapa="";
             $subetapa="";
@@ -401,7 +412,6 @@ SQL;
             //Obtener etiquetas
             $bean->tct_estapa_subetapa_txf_c=trim($etapa) ." ".trim($subetapa);
             //Actualiza BD
-            global $db;
             $query = "update opportunities_cstm set tct_estapa_subetapa_txf_c = '".trim($bean->tct_estapa_subetapa_txf_c)."' where id_c = '".$bean->id."'";
             $queryResult = $db->query($query);
 
