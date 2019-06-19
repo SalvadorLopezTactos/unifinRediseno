@@ -55,8 +55,8 @@ $hook_array['before_save'][] = Array(
     'creaRatificacion'
 );
 
-$hook_array['before_save'][] = Array(
-    7,
+$hook_array['after_save'][] = Array(
+    9,
     'Establece campo tct_estapa_subetapa_txf_c con la concatenación entre campos tct_etapa_ddw_c y estatus_c',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class

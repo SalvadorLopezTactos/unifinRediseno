@@ -400,6 +400,10 @@ SQL;
 
             //Obtener etiquetas
             $bean->tct_estapa_subetapa_txf_c=trim($etapa) ." ".trim($subetapa);
+            //Actualiza BD
+            global $db;
+            $query = "update opportunities_cstm set tct_estapa_subetapa_txf_c = '".trim($bean->tct_estapa_subetapa_txf_c)."' where id = '".$bean->id."'";
+            $queryResult = $db->query($query);
 
         }
 
