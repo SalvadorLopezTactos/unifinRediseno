@@ -1,5 +1,5 @@
 <?php
- // created: 2019-06-06 00:15:24
+ // created: 2019-06-19 12:16:51
 $dictionary['minut_Minutas']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['minut_Minutas']['fields']['resultado_c']['dependency']='';
 $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
@@ -21,6 +21,7 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       10 => '20',
       11 => '21',
       12 => '22',
+      13 => '23',
     ),
     2 => 
     array (
@@ -33,6 +34,7 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       6 => '19',
       7 => '6',
       8 => '7',
+      9 => '23',
     ),
     3 => 
     array (
@@ -55,6 +57,7 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       6 => '19',
       7 => '6',
       8 => '7',
+      9 => '23',
     ),
     6 => 
     array (
@@ -67,6 +70,7 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       6 => '19',
       7 => '6',
       8 => '7',
+      9 => '23',
     ),
     7 => 
     array (
@@ -130,6 +134,8 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       6 => '3',
       7 => '2',
       8 => '17',
+      9 => '22',
+      10 => '23',
     ),
     'Planned' => 
     array (
