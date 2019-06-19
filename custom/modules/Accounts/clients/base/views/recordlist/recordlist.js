@@ -40,6 +40,12 @@
             $(".choice-filter-close").attr('style', 'display:none;');
             $("#s2id_autogen1").attr('style', 'pointer-events:none;');
             $("[data-action=filter-delete]").attr('style', 'display:none;');
+            $(".choice-filter-close").attr('style', 'pointer-events:none;'); //desabilita boton de filtros
+            if ($(".choice-filter-label").eq(1)[0]) {
+                if($(".choice-filter-label").eq(1)[0].innerHTML != "Mis Cuentas") {
+                    location.reload();
+                }
+            }
         }
 
     },
