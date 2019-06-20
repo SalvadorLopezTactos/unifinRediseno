@@ -1,5 +1,5 @@
 <?php
- // created: 2019-06-04 01:10:17
+ // created: 2019-06-19 13:02:46
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -24,4 +24,5 @@ $app_list_strings['resultado_list']=array (
   20 => 'Se procede a generar expediente',
   21 => 'No Interesado. Cita Forzada',
   22 => 'No se pudo contactar al Prospecto para confirmar cita',
+  23 => 'Está interesado, solicita cotización para proceder',
 );
