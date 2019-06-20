@@ -26,6 +26,7 @@
       'click #orderByCesion': 'orderCesion',
       'click #orderByCesionVencimiento': 'orderCesionVencimiento',
       'click .btn-Guardar': 'Save_comentario',
+      'click #btn-Descargar':'descargapdf',
 
   },
 
@@ -497,5 +498,14 @@
     d.setMonth(s[1]);
     d.setDate(s[0]);
     return d;
-  }
+  },
+    //Funcion para descargar el pdf de la seccion vista 360
+    descargapdf: function() {
+
+        var url_list= App.lang.getAppListStrings('noticias_list');
+        var url = url_list[1];
+        window.open(url, 'Download');
+
+},
+
 })
