@@ -23,15 +23,27 @@
 
     },
 
+    _renderHtml: function(){
+
+        this.noEditFields.push('tct_comments_rel_txa_c');
+
+        this._super('_renderHtml');
+
+    },
+
     setNoEditAllFields: function () {
         //Estableciendo registro completo como solo lectura
 
         //Se establecen todos los campos como solo lectura
         $('.record-cell').attr("style", "pointer-events:none");
+
         //Excepto los campos de tipo relacionado para permitir la navegación hacia el registro
         $('.record-cell[data-type="relate"]').removeAttr("style");
         $('.record-cell[data-name="date_entered_by"]').removeAttr("style");
         $('.record-cell[data-name="date_modified_by"]').removeAttr("style");
+
+        //Habilitar pointer-events en campo textarea
+        $('.record-cell[data-name="tct_comments_rel_txa_c"]').removeAttr("style");
 
         //Se oculta botón de edición
         $('[name="edit_button"]').hide();
