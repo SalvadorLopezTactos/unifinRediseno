@@ -504,8 +504,8 @@
 
         var url_list= App.lang.getAppListStrings('noticias_list');
         var url = url_list[1];
-        window.open(url, 'Download');
+        window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
 
-},
+    },
 
 })
