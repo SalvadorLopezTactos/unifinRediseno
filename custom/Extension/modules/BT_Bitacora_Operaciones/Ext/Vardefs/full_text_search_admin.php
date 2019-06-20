@@ -1,3 +1,3 @@
 <?php
- // created: 2019-04-15 17:19:11
+ // created: 2019-06-17 13:01:51
 $dictionary['BT_Bitacora_Operaciones']['full_text_search']=false;
