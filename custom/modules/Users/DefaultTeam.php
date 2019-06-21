@@ -30,11 +30,11 @@ require_once('modules/Teams/Team.php');
 
 class DefaultTeam
 {
-    /** 
+    /**
      * This method creates the private team for a new user and makes it default.
      * Uncomment line 46, 47 to add this user to the global team.
      */
-    public function new_user_created($user, $event, $arguments) 
+    public function new_user_created($user, $event, $arguments)
     {
 
         $GLOBALS['log']->fatal("Ejecuta LH iniciales: ");
@@ -131,14 +131,112 @@ SQL;
     {
         global $db;
         $idUser = $bean->id;
-        $GLOBALS['log']->fatal('Genera Usuario e impide salir del grupo Global');
+        //$GLOBALS['log']->fatal('Genera Usuario e impide salir del grupo Global');
 
         if ($idUser!= null || $idUser!= ''){
             $GLOBALS['log']->fatal('Entra a condición para salir de gpo global');
-            $query="UPDATE team_memberships SET implicit_assign=1 
+            $query="UPDATE team_memberships SET implicit_assign=1
             WHERE user_id='{$idUser}' and team_id='1'";
             $results = $GLOBALS['db']->query($query);
         }
-        $GLOBALS['log']->fatal('Finaliza salir del gpo global');
+        //$GLOBALS['log']->fatal('Finaliza salir del gpo global');
     }
+
+    /*
+      AF.2019-06-20
+      Funcionalidad para validar y establecer agrupador(team_sets) con equipo privado y equipo principal unics del usuario
+    */
+    public function create_team_sets($bean = null, $event = null, $args = null)
+    {
+        //$GLOBALS['log']->fatal('TCT - Inicio LH creación de team_set');
+        //Define variables
+        global $db;
+        $idUser = $bean->id;
+        $idDefaultTeam = $bean->default_team;
+        $result = 0;
+
+        //Valida: Si el valor para default team es diferente de 1 y vacío, ejecuta validaciones
+        //$GLOBALS['log']->fatal('TCT - Valor default team: '.$idDefaultTeam );
+        if(!empty($idDefaultTeam) && $idDefaultTeam!= 1 ){
+            //Establece id para team_set_id
+            $idTeamSets = substr($idDefaultTeam,0,33) . 'af0'; //Concatena primeros 33 caracteres del default_id + af0(valor constante para identificar teams_sets creados manualmente)
+            // Consulta existencia de team_set
+            $query="select id from team_sets where id='".$idTeamSets."';";
+            $queryResult = $GLOBALS['db']->query($query);
+            while ($row = $db->fetchByAssoc($queryResult)) {
+                //Obtiene el team de BO
+                $result ++;
+            }
+
+
+            //Validación: Comprueba que no existan registros para crear nuevo agrupador
+            // $GLOBALS['log']->fatal('TCT - Valor consulta existene: ');
+            // $GLOBALS['log']->fatal($query);
+            // $GLOBALS['log']->fatal(print_r($result,true));
+            if($result==0){
+                //No existe: Genera nuevo registro agrupador
+                // Inserta team_sets_teams n1
+                $insert_team_1 = "insert IGNORE into team_sets_teams(id, team_set_id, team_id, date_modified,deleted)
+                  select
+                  	UUID() as id,
+                      concat(left(u.team_set_id, 33),'af0')  as team_set_id,
+                      replace(case
+                  		when uc.equipo_c = '1' then 'UNO'
+                          when uc.equipo_c = '0' then 'CERO'
+                  		else uc.equipo_c end,' ', '') as team_id,
+                      NOW() as date_modified,
+                      0 as deleted
+                  from
+                  	users u, users_cstm uc
+                  where
+                  	u.id = uc.id_c
+                    and u.status = 'Active'
+                    and u.id='".$idUser."'
+                ;";
+                //Inserta team_sets_teams n2
+                $insert_team_2 = "insert IGNORE into team_sets_teams(id, team_set_id, team_id, date_modified,deleted)
+                  select
+                  	UUID() as id,
+                      concat(left(u.team_set_id, 33),'af0')  as team_set_id,
+                      u.team_set_id as team_id,
+                      NOW() as date_modified,
+                      0 as deleted
+                  from
+                  	users u, users_cstm uc
+                  where
+                  	u.id = uc.id_c
+                    and u.status = 'Active'
+                    and u.id='".$idUser."'
+                ;";
+
+                //Insert team_sets
+                $insert_team_sets = "insert IGNORE into team_sets(id, name, team_md5, team_count,date_modified,deleted,created_by)
+                  select
+                  	concat(left(u.team_set_id, 33),'af0')  as id,
+                      md5(concat(left(u.team_set_id, 33),'af0')) as name,
+                      md5(concat(left(u.team_set_id, 33),'af0')) as team_md5,
+                      2 as team_count,
+                      NOW() as date_modified,
+                      0 as deleted,
+                      1 as created_by
+                  from
+                  	users u
+                  where
+                      u.status = 'Active'
+                      and u.id='".$idUser."'
+                ;";
+
+                //Ejecuta inserts
+                // $GLOBALS['log']->fatal('TCT - Valor insert1: '.$insert_team_1 );
+                // $GLOBALS['log']->fatal('TCT - Valor insert2: '.$insert_team_2 );
+                // $GLOBALS['log']->fatal('TCT - Valor insert3: '.$insert_team_sets );
+                $results = $GLOBALS['db']->query($insert_team_1);
+                $results = $GLOBALS['db']->query($insert_team_2);
+                $results = $GLOBALS['db']->query($insert_team_sets);
+
+             }
+        }
+        //$GLOBALS['log']->fatal('TCT - Fin LH creación de team_set');
+    }
+
 }
