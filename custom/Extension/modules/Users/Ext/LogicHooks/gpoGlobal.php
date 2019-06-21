@@ -13,3 +13,11 @@ $hook_array['after_save'][] = Array(
     'DefaultTeam',
     'gpoGlobal'
 );
+
+$hook_array['after_save'][] = Array(
+    13,
+    'Valida y agrega team_sets con equipo privado y equipo principal unics',
+    'custom/modules/Users/DefaultTeam.php',
+    'DefaultTeam',
+    'create_team_sets'
+);
