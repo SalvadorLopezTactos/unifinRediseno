@@ -213,6 +213,7 @@ WHERE accounts.id = '{$value}'
 SQL;
                 $queryResult = $db->query($query);
 */
+                /*
                 if ($product == "LEASING") {
                     $query = <<<SQL
                 update lev_backlog lev
@@ -225,11 +226,21 @@ SQL;
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  Update para reasignacion de BL: " . print_r($query, 1));
                     $queryResult = $db->query($query);
                 }
+                */
 
+                //Actualizar el usuario asignado a registros de Backlog relacionados a las cuentas
                 //Obtener Backlogs de la cuenta que sean de meses futuros
                 $anio_actual=date("Y");
                 $mes_actual= intval(date("n"));
-                $bl_cuenta="SELECT b.id,b.mes FROM lev_backlog b WHERE b.account_id_c='{$value}' AND b.mes>{$mes_actual} and b.anio={$anio_actual} and deleted=0;";
+                $hoy= date("d");
+                $bl_cuenta="SELECT b.id, b.mes,b.description
+FROM
+    lev_backlog b
+WHERE
+    b.account_id_c = '{$value}'
+        AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))
+        AND deleted = 0;
+";
 
                 $result_bl_cuentas = $db->query($bl_cuenta);
 
@@ -240,6 +251,7 @@ SQL;
                         $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
                         if($bl != null){
                             $bl->assigned_user_id=$reAsignado;
+                            $bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
                             $bl->save();
                         }
                     }
