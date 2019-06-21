@@ -226,6 +226,27 @@ SQL;
                     $queryResult = $db->query($query);
                 }
 
+                //Obtener Backlogs de la cuenta que sean de meses futuros
+                $anio_actual=date("Y");
+                $mes_actual= intval(date("n"));
+                $bl_cuenta="SELECT b.id,b.mes FROM lev_backlog b WHERE b.account_id_c='{$value}' AND b.mes>{$mes_actual} and b.anio={$anio_actual} and deleted=0;";
+
+                $result_bl_cuentas = $db->query($bl_cuenta);
+
+                if($result_bl_cuentas->num_rows>0 && $result_bl_cuentas != null){
+
+                    while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
+
+                        $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
+                        if($bl != null){
+                            $bl->assigned_user_id=$reAsignado;
+                            $bl->save();
+                        }
+                    }
+
+                }
+
+
                 $query = <<<SQL
 select CASE WHEN idcliente_c > 0 THEN idcliente_c ELSE 0 END idCliente from accounts_cstm where id_c = '{$value}'
 SQL;
