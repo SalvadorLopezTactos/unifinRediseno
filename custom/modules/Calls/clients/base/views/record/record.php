@@ -371,40 +371,47 @@ array (
               ),
               14 => 
               array (
+                'name' => 'calls_meeting_call',
+                'studio' => 'visible',
+                'label' => 'calls_meeting_call',
+                'span' => 12,
+              ),
+              15 => 
+              array (
                 'name' => 'tct_calificacion_conferencia_c',
                 'label' => 'LBL_TCT_CALIFICACION_CONFERENCIA',
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'tct_conferencia_fecha_dat_c',
                 'label' => 'LBL_TCT_CONFERENCIA_FECHA_DAT',
               ),
-              16 => 
+              17 => 
               array (
                 'name' => 'tct_motivo_ilocalizable_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
                 'span' => 12,
               ),
-              17 => 
+              18 => 
               array (
                 'name' => 'tct_fecha_cita_dat_c',
                 'label' => 'LBL_TCT_FECHA_CITA_DAT',
                 'span' => 12,
               ),
-              18 => 
+              19 => 
               array (
                 'name' => 'tct_usuario_cita_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_USUARIO_CITA_REL',
                 'span' => 12,
               ),
-              19 => 
+              20 => 
               array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
                 'span' => 12,
               ),
-              20 => 
+              21 => 
               array (
                 'name' => 'tct_motivo_desinteres_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
