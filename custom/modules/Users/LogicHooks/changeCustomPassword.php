@@ -41,7 +41,7 @@ class class_changeCustomPassword{
 				}
 
 				//Manipular respuesta
-		    $bean->description = $result;
+		    //$bean->description = $result;
 	    	//Limpia variables
 	    	$bean->contraseniaactual_c="";
 				$bean->nuevacontrasenia_c="";
