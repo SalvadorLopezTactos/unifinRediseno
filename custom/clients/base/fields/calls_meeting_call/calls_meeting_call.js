@@ -61,7 +61,30 @@
                         var d1=new Date(selfRella.reunLlam.records[0].date_end);
                         selfRella.reunLlam.records[0].date_end=d1.toLocaleString();
                         _.extend(selfRella, selfRella.reunLlam);
-                        selfRella.render();
+                        if(modulo=='Calls'){
+                            selfRella.render();
+                        }
+
+                        //Obtener objetivos relacionados
+                        if(modulo=='Meetings'){
+                            app.api.call('GET', app.api.buildURL('Meetings/' + data.records[0].id + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
+                                success: function (data) {
+                                    //Reiniciando arreglos de registros eliminados
+                                    selfRella.myDeletedObj={};
+                                    selfRella.myDeletedObj.records=[];
+                                    selfRella.myIndexDeleted=[];
+
+                                    selfRella.myobject = data;
+                                    selfRella.myOriginal = data;
+                                    _.extend(this, selfRella.myobject);
+                                    _.extend(this, selfRella.myOriginal);
+                                    selfRella.render();
+                                },
+                                error: function (e) {
+                                    throw e;
+                                }
+                            });
+                        }
                     }
 
                 },
@@ -89,7 +112,7 @@
                     "objetivoG":"",
                     "objetivoE":"",
                     "account_id_c":this.model.get('parent_id'),
-                    //"tct_relacionado_con_c":this.model.get('tct_relacionado_con_c'),
+                    "account_name":this.model.get('parent_name'),
                     "assigned_user_id":this.model.get('assigned_user_id'),
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
@@ -143,7 +166,55 @@
         selfRella.objetivoG_list = app.lang.getAppListStrings('objetivo_list');
         $('select.objetivoG').select2();
 
+        //Condición para que valores de vista de detalle persistan en vista de edición
+        if (this.tplName === 'edit') {
+            if(this.reunLlam != null){
 
+                //Name
+                $('.newCampo1A').val(this.reunLlam.records[0].name);
+                //Fecha inicio
+                var fecha_formatear=this.reunLlam.records[0].date_start.split(" ")[0].split("/");
+                var mes_formatear=fecha_formatear[1];
+                if(mes_formatear<10){
+                    mes_formatear="0"+mes_formatear;
+                }
+
+                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+fecha_formatear[0]);
+                //Hora inicio
+                var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
+                $(".newTime1").val(this.tConvert(hora_formatear));
+
+                //Fecha fin
+                var fecha_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[0].split("/");
+                var mes_formatear_fin=fecha_formatear_fin[1];
+                if(mes_formatear_fin<10){
+                    mes_formatear_fin="0"+mes_formatear_fin;
+                }
+
+                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+fecha_formatear_fin[0]);
+                //Hora fin
+                var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
+                $(".newTime2").val(this.tConvert(hora_formatear_fin));
+
+                //Objetivo General
+                $('select.objetivoG').select2('val',this.reunLlam.records[0].objetivo_c);
+
+            }
+        }
+
+
+    },
+
+    tConvert:function (time) {
+        // Check correct time format and split into components
+        time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+        if (time.length > 1) { // If time format correct
+            time = time.slice (1);  // Remove full string match value
+            time[5] = +time[0] < 12 ? 'am' : 'pm'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join (''); // return adjusted time or original string
     },
 
     addNewReuLam:function(evt){
@@ -230,6 +301,22 @@
             $('.record-cell[data-type="calls_meeting_call"]').show();
             $("#Objetivos").show();
             selfRella.nuevoRegistro.tipo_registro = "reunion";
+
+            //Condición para establecer campos relacionados al intentar editar campo custom
+            if(this.reunLlam !=null){
+                if(this.reunLlam.records.length>0){
+
+                    selfRella.nuevoRegistro.account_id_c = this.reunLlam.records[0].parent_id;
+                    selfRella.nuevoRegistro.account_name = this.reunLlam.records[0].parent_name;
+
+                    selfRella.nuevoRegistro.assigned_user_id = this.reunLlam.records[0].assigned_user_id;
+                    selfRella.nuevoRegistro.assigned_user_name = this.reunLlam.records[0].assigned_user_name;
+
+                    //selfRella.myobject.records=[{"name":"HOLA"},{"name":"adios"}];
+                }
+
+            }
+
         }
 
         else if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
@@ -237,6 +324,21 @@
             $('.record-cell[data-type="calls_meeting_call"]').show();
             $("#Objetivos").hide();
             selfRella.nuevoRegistro.tipo_registro="llamada";
+
+            //Condición para establecer campos relacionados al intentar editar campo custom
+            if(this.reunLlam !=null){
+                if(this.reunLlam.records.length>0){
+
+                    selfRella.nuevoRegistro.account_id_c = this.reunLlam.records[0].parent_id;
+                    selfRella.nuevoRegistro.account_name = this.reunLlam.records[0].parent_name;
+
+                    selfRella.nuevoRegistro.assigned_user_id = this.reunLlam.records[0].assigned_user_id;
+                    selfRella.nuevoRegistro.assigned_user_name = this.reunLlam.records[0].assigned_user_name;
+
+                    //selfRella.myobject.records=[{"name":"HOLA"},{"name":"adios"}];
+                }
+
+            }
 
         }else{
             $('.record-cell[data-type="calls_meeting_call"]').hide();
