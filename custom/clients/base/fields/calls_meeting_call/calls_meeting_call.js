@@ -269,6 +269,23 @@
     },
 
     SaveMeetCall:function(fields, errors, callback){
+
+        /*Todo*/
+        //Establecerlo de nuevo solo si es modo edición y ya se tiene un id
+        selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
+        selfRella.nuevoRegistro.date_start=$('.newDate').val();
+        selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
+        selfRella.nuevoRegistro.date_end=$('.newDate2').val();
+        selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
+        selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
+
+        diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
+        minutosTotales = Math.floor((diferencia/1000)/60);
+        horas = (minutosTotales/60>>0);
+        minutos = minutosTotales%60;
+        selfRella.nuevoRegistro.duracion_hora=horas;
+        selfRella.nuevoRegistro.duracion_minuto=minutos;
+
         this.model.set('calls_meeting_call', selfRella.nuevoRegistro);
         callback(null, fields, errors);
     },
@@ -469,6 +486,7 @@
             //Condición para establecer campos relacionados al intentar editar campo custom
             if(this.reunLlam !=null){
                 if(this.reunLlam.records.length>0){
+                    selfRella.nuevoRegistro.id = this.reunLlam.records[0].id;
 
                     selfRella.nuevoRegistro.account_id_c = this.reunLlam.records[0].parent_id;
                     selfRella.nuevoRegistro.account_name = this.reunLlam.records[0].parent_name;
