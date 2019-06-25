@@ -15,7 +15,12 @@ fecha: 21/06/2019
 			<tbody>
 				{{#each reunLlam.records}}
 				<tr>
-					<td class="CampoAsunto">{{name}}</td>
+					<td class="CampoAsunto">
+                        <a href="#{{str_link}}" data-type="relate" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                            {{name}}
+                        </a>
+
+                    </td>
 					<td class="CamFechaIni">{{date_start}}</td>
 					<td class="CamFechaFin">{{date_end}}</td>
 				</tr>

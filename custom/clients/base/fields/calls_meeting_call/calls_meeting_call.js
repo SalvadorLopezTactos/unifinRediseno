@@ -9,12 +9,16 @@
     events:{
         'change .newItem': 'addNewReuLam',
         'click  .addObjetivoE': 'addObjetivoEFunction',
+        'change #tp11': 'setOptionsDateEnd'
     },
     initialize: function (options) {
 
         this._super('initialize', [options]);
 
         this.loadData(); //Carga de Datos
+        this.model.addValidationTask('validaRequiredFields', _.bind(this.validaRequiredFields, this));
+        this.model.addValidationTask('validaFechaInicialCall', _.bind(this.validaFechaInicialCall, this));
+        
         this.model.addValidationTask('Guardarobjetivos', _.bind(this.almacenaobjetivosE, this));
         this.model.addValidationTask('validaobjetivosave', _.bind(this.validaobjetivosE, this));
         this.model.addValidationTask('GuardaReunionLlamada', _.bind(this.SaveMeetCall, this));
@@ -60,6 +64,8 @@
                         selfRella.reunLlam.records[0].date_start=d.toLocaleString();
                         var d1=new Date(selfRella.reunLlam.records[0].date_end);
                         selfRella.reunLlam.records[0].date_end=d1.toLocaleString();
+
+                        selfRella.reunLlam.records[0].str_link=modulo+'/'+selfRella.reunLlam.records[0].id;
                         _.extend(selfRella, selfRella.reunLlam);
                         if(modulo=='Calls'){
                             selfRella.render();
@@ -139,8 +145,18 @@
 
         this._super("_render");
         this.showHideMeetingCall();
+        var d=new Date();
+        var horas=d.getHours();
+        var minutos=d.getMinutes();
+        var hora_actual=horas+":"+minutos;
+        //Redondear minutos
+        var current_hour_round=this.roundMinutes(hora_actual);
+        hora_actual=this.tConvert(current_hour_round);
 
-        $('#tp11').timepicker();
+        $('#tp11').timepicker({
+                'minTime': hora_actual,
+                'maxTime': '11:30pm',
+            });
         $('#tp12').timepicker();
         //Función para eliminar objetivos especificos
         $('.deleteObjetivoE').click(function(evt) {
@@ -257,6 +273,131 @@
         callback(null, fields, errors);
     },
 
+    validaRequiredFields:function(fields, errors, callback){
+        var bandera=0;
+        var msjError="Favor de completar la siguiente informaci\u00F3n:<br>";
+        //Aplicar validaciones solo si el campo custom es visible
+        if($(".record-cell[data-type='calls_meeting_call']").is(':visible')){
+
+            $('.newCampo1A').css('border-color','');
+            $('.select2-container.objetivoG').css('border', '');
+            $('.newDate').css('border-color','');
+            $('.newTime1').css('border-color','');
+            $('.newDate2').css('border-color','');
+            $('.newTime2').css('border-color','');
+            $('.newObjetivoE1').css('border-color', '');
+
+            if($('.newCampo1A').val()==""){
+                $('.newCampo1A').css('border-color','red');
+                msjError+="<b>Asunto</b><br>";
+                bandera+=1;
+
+            }
+
+            if($('#Objetivos').is(':visible')){
+
+                    if($('select.objetivoG').val()==""){
+                    $('.select2-container.objetivoG').css('border', '1px solid red');
+                    msjError+="<b>Objetivo General</b><br>";
+                    bandera+=1;
+                }
+
+            }
+            
+            if($('.newDate').val()==""){
+                $('.newDate').css('border-color','red');
+                msjError+="<b>Fecha inicio</b><br>";
+                bandera+=1;
+
+            }
+
+            if($('.newTime1').val()==""){
+                $('.newTime1').css('border-color','red');
+                msjError+="<b>Hora inicio</b><br>";
+                bandera+=1;
+                
+            }
+
+            if($('.newDate2').val()==""){
+                $('.newDate2').css('border-color','red');
+                msjError+="<b>Fecha fin</b><br>";
+                bandera+=1;
+
+            }
+
+            if($('.newTime2').val()==""){
+                $('.newTime2').css('border-color','red');
+                msjError+="<b>Hora fin</b><br>"
+                bandera+=1;
+                
+            }
+
+            if(this.myobject.records.length==0 && this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
+                $('.newObjetivoE1').css('border-color', 'red');
+                msjError+="<b>Objetivo espec\u00EDfico</b><br>"
+                bandera+=1;
+            }
+
+            if(bandera>0){
+
+                var alertOptions = {title: msjError, level: "error"};
+                app.alert.show('validation', alertOptions);
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].required = true;
+            }
+
+        }
+        
+        callback(null, fields, errors);
+
+    },
+
+    validaFechaInicialCall: function (fields, errors, callback) {
+
+        var module='';
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
+            module="Reuni\u00F3n";
+        }
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+            module="Llamada";
+        }
+        
+        // FECHA INICIO
+        var dateSplit=$('.newDate').val().split('-');
+        var d = dateSplit[2];
+        var m = dateSplit[1];
+        var y = dateSplit[0];
+        var fechaCompleta = [m, d, y].join('/');
+        // var dateFormat = dateInicio.toLocaleDateString();
+        var fechaInicio = Date.parse(fechaCompleta);
+
+
+        // FECHA ACTUAL
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
+
+
+        if (fechaInicio < fechaActual) {
+            app.alert.show("Fecha no valida", {
+                level: "error",
+                title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
+                autoClose: false
+            });
+
+            $('.newDate').css('border-color','red');
+            $('.newTime1').css('border-color','red');
+
+            errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+            errors['calls_meeting_call_'].custom_message1 = true;
+        }
+        callback(null, fields, errors);
+    },
+
     almacenaobjetivosE:function(fields, errors, callback) {
         myObjetivos={};
         myObjetivos.records=[];
@@ -305,7 +446,7 @@
             //Condición para establecer campos relacionados al intentar editar campo custom
             if(this.reunLlam !=null){
                 if(this.reunLlam.records.length>0){
-
+                    selfRella.nuevoRegistro.id = this.reunLlam.records[0].id;
                     selfRella.nuevoRegistro.account_id_c = this.reunLlam.records[0].parent_id;
                     selfRella.nuevoRegistro.account_name = this.reunLlam.records[0].parent_name;
 
@@ -379,6 +520,30 @@
             selfRella.myobject.records.push(item);
             selfRella.render();
         }
+    },
+
+    setOptionsDateEnd:function(evt){
+
+        var hora_select=$(evt.currentTarget).val();
+        //Establece opciones de hora fin dependiendo de la hora de inicio seleccionada
+        $('#tp12').timepicker({
+                'minTime': hora_select,
+                'maxTime': '11:30pm',
+            });
+
+    },
+
+    /*
+    * Función para redondear los minutos de la hora actual y poder establecer la hora por default
+    * en el campo de hora inicio
+    */
+    roundMinutes:function(t) {
+        function format(v) { return v < 10 ? '0' + v: v; }
+
+        var m = t.split(':').reduce(function (h, m) { return h * 60 + +m; });
+    
+        m = Math.ceil(m / 15) * 15;
+        return [Math.floor(m / 60), m % 60].map(format).join(':');
     },
 
     /**
