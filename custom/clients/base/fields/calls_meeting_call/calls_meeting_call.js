@@ -56,7 +56,7 @@
         //Para la vista de detalle
         if(this.model.get('id') !=undefined && this.model.get('id') !="" && (this.model.get('tct_resultado_llamada_ddw_c') =="Cita" || this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada")){
             var idCall=this.model.get('id');
-            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][description][$equals]=' + idCall), null, {
+            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][tct_parent_call_id_txf_c][$equals]=' + idCall), null, {
                 success: function(data){
                     if(data.records.length){
                         selfRella.reunLlam=data;
