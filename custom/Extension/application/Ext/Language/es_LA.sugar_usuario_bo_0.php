@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:13:09
+ // created: 2019-06-25 10:41:41
 
 $app_list_strings['usuario_bo_0']=array (
   '' => '',
@@ -28,4 +28,5 @@ $app_list_strings['usuario_bo_0']=array (
   'BACKOFFICE_TOL' => 'BACKOFFICE TOL',
   'BACKOFFICE_F4' => 'BACKOFFICE F4',
   'BACKOFFICE_F5' => 'BACKOFFICE F5',
+  'BACKOFFICE_EXP' => 'BACKOFFICE EXP',
 );

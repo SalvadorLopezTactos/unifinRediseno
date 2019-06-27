@@ -1,3 +1,3 @@
 <?php
- // created: 2019-04-15 17:19:11
-$dictionary['Bug']['full_text_search']=true;
+ // created: 2019-06-17 13:01:51
+$dictionary['Bug']['full_text_search']=false;
