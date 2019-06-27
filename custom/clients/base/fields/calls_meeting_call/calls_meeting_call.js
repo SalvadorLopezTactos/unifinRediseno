@@ -123,6 +123,30 @@
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
         }
+        else{ //Entra cuando es vista de detalle y aún no se establece el resultado
+
+            selfRella.nuevoRegistro=
+                {
+                    "id":"",
+                    "tipo_registro":"",
+                    "nombre":"",
+                    "date_start":"",
+                    "time_start":"",
+                    "date_end":"",
+                    "time_end":"",
+                    "duracion_hora":"",
+                    "duracion_minuto":"",
+                    "cuenta":"",
+                    "asignado":"",
+                    "objetivoG":"",
+                    "objetivoE":"",
+                    "account_id_c":this.model.get('parent_id'),
+                    "account_name":this.model.get('parent_name'),
+                    "assigned_user_id":this.model.get('assigned_user_id'),
+                    "assigned_user_name":this.model.get('assigned_user_name')
+                };
+
+        }
 
         var today = new Date();
         var dd = today.getDate();
