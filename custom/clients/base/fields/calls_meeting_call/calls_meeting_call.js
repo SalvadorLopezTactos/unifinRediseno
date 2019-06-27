@@ -144,6 +144,7 @@
     _render: function () {
 
         this._super("_render");
+
         this.showHideMeetingCall();
         var d=new Date();
         var horas=d.getHours();
@@ -457,6 +458,8 @@
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita") {
 
             $('.record-cell[data-type="calls_meeting_call"]').show();
+            //oculta etiqueta de campo
+            $('.record-label[data-name="calls_meeting_call"]').addClass('hide');
             $("#Objetivos").show();
             selfRella.nuevoRegistro.tipo_registro = "reunion";
 
@@ -480,6 +483,8 @@
         else if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
 
             $('.record-cell[data-type="calls_meeting_call"]').show();
+            //oculta etiqueta de campo
+            $('.record-label[data-name="calls_meeting_call"]').addClass('hide');
             $("#Objetivos").hide();
             selfRella.nuevoRegistro.tipo_registro="llamada";
 

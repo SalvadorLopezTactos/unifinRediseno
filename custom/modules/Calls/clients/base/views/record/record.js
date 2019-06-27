@@ -161,13 +161,30 @@
             self.noEditFields.push('parent_name');
         }
         else {
-        this.$('[data-name="parent_name"]').attr('style', '');
-        //this.setButtonStates(this.STATE.EDIT);
-        this.action = 'detail';
-        this.toggleEdit(false);
-        //this.setRoute('edit');
+            this.$('[data-name="parent_name"]').attr('style', '');
+            //this.setButtonStates(this.STATE.EDIT);
+            this.action = 'detail';
+            this.toggleEdit(false);
+            //this.setRoute('edit');
+        }
+
+        this.disableFieldCallMeeting();
+    },
+
+    disableFieldCallMeeting:function(){
+
+        //Reemplazo de etiqueta
+
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            //Establecer como solo lectura el campo custom para creación de Reuniones o llamadas
+
+            //Se remueve la clase record-edit-link-wrapper para evitar que se muestre el template edit del campo custom
+            $('span[data-name="calls_meeting_call"]').siblings('span.record-edit-link-wrapper').removeClass('record-edit-link-wrapper');
+            //Remover ícono de lapiz
+            $('span[data-name="calls_meeting_call"]').find('.fa-pencil').remove();
         }
     },
+
 
     VaildaFecha: function(fields, errors, callback)
     {
