@@ -258,6 +258,28 @@
         return time.join (''); // return adjusted time or original string
     },
 
+    convertTo24Format:function(time){
+
+        var time = time;
+        var hours = Number(time.match(/^(\d+)/)[1]);
+        var minutes = Number(time.match(/:(\d+)/)[1]);
+        var AMPM = "";
+        if(time.search('pm')!= -1){
+            AMPM="pm";
+        }
+        if(time.search('am')!= -1){
+            AMPM="am";
+        }
+        if(AMPM == "pm" && hours<12) hours = hours+12;
+        if(AMPM == "am" && hours==12) hours = hours-12;
+        var sHours = hours.toString();
+        var sMinutes = minutes.toString();
+        if(hours<10) sHours = "0" + sHours;
+        if(minutes<10) sMinutes = "0" + sMinutes;
+        return sHours + ":" + sMinutes;
+
+    },
+
     addNewReuLam:function(evt){
         selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
         selfRella.nuevoRegistro.date_start=$('.newDate').val();
@@ -404,39 +426,82 @@
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
             module="Llamada";
         }
-        
-        // FECHA INICIO
-        var dateSplit=$('.newDate').val().split('-');
-        var d = dateSplit[2];
-        var m = dateSplit[1];
-        var y = dateSplit[0];
-        var fechaCompleta = [m, d, y].join('/');
-        // var dateFormat = dateInicio.toLocaleDateString();
-        var fechaInicio = Date.parse(fechaCompleta);
 
 
-        // FECHA ACTUAL
-        var dateActual = new Date();
-        var d1 = dateActual.getDate();
-        var m1 = dateActual.getMonth() + 1;
-        var y1 = dateActual.getFullYear();
-        var dateActualFormat = [m1, d1, y1].join('/');
-        var fechaActual = Date.parse(dateActualFormat);
+        if($('.newDate').val()!="" && $('.newDate2').val()!=""){
+
+            // FECHA INICIO
+            var dateSplit=$('.newDate').val().split('-');
+            var d = dateSplit[2];
+            var m = dateSplit[1];
+            var y = dateSplit[0];
+            var fechaCompleta = [m, d, y].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaInicio = Date.parse(fechaCompleta);
+
+            // FECHA FIN
+            var dateFinSplit=$('.newDate2').val().split('-');
+            var df = dateFinSplit[2];
+            var mf = dateFinSplit[1];
+            var yf = dateFinSplit[0];
+            var fechaFinCompleta = [mf, df, yf].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaFin = Date.parse(fechaFinCompleta);
 
 
-        if (fechaInicio < fechaActual) {
-            app.alert.show("Fecha no valida", {
-                level: "error",
-                title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
-                autoClose: false
-            });
+            // FECHA ACTUAL
+            var dateActual = new Date();
+            var d1 = dateActual.getDate();
+            var m1 = dateActual.getMonth() + 1;
+            var y1 = dateActual.getFullYear();
+            var dateActualFormat = [m1, d1, y1].join('/');
+            var fechaActual = Date.parse(dateActualFormat);
 
-            $('.newDate').css('border-color','red');
-            $('.newTime1').css('border-color','red');
 
-            errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
-            errors['calls_meeting_call_'].custom_message1 = true;
+            if (fechaInicio < fechaActual) {
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
+                    autoClose: false
+                });
+
+                $('.newDate').css('border-color','red');
+                $('.newTime1').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+            }
+
         }
+
+        //Comparar fecha inicio vs fecha fin
+        if($(".newTime1").val()!="" && $(".newTime2").val()){
+            //Fecha inicio
+            var fechaInicioCompletaConHora=fechaCompleta+" "+this.convertTo24Format($(".newTime1").val());
+            var fechaInicioCompare=Date.parse(new Date(fechaInicioCompletaConHora));
+            //Fecha fin
+            var fechaFinCompletaConHora=fechaFinCompleta+" "+this.convertTo24Format($(".newTime2").val());
+            var fechaFinCompare=Date.parse(new Date(fechaFinCompletaConHora));
+
+            if(fechaFinCompare < fechaInicioCompare){
+
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "La fecha fin no puede ser antes de la fecha inicio",
+                    autoClose: false
+                });
+
+                $('.newDate2').css('border-color','red');
+                $('.newTime2').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+
+            }
+
+        }
+
+
         callback(null, fields, errors);
     },
 
@@ -478,6 +543,25 @@
     },
 
     showHideMeetingCall:function(){
+
+        if(this.collection != undefined){
+            //Si cambian el resultado de la llamada, hay que limpiar los campos
+            if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c')){
+
+                //Asunto
+                $('.newCampo1A').val("");
+                //Fecha inicio
+                $('.newDate').val("");
+                //Hora inicio
+                $('.newTime1').val("");
+                //Fecha fin
+                $('.newDate2').val("");
+                //Hora fina
+                $('.newTime2').val("");
+                //Objetivo General
+                $('select.objetivoG').select2('val','');
+            }
+        }
 
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita") {
 
