@@ -5,7 +5,7 @@
     Extensión de output(campos custom) para CurrentUserApi
 
 */
-require_once 'clients/base/api/CurrentUserApi.php';
+require_once("clients/base/api/CurrentUserApi.php");
 
 class CustomCurrentUserApi extends CurrentUserApi
 {
@@ -17,7 +17,7 @@ class CustomCurrentUserApi extends CurrentUserApi
      * @param $args
      * @return array
      */
-    public function retrieveCurrentUser($api, $args)
+    public function retrieveCurrentUser(ServiceBase $api, array $args)
     {
         $current_user = $this->getUserBean();
 
