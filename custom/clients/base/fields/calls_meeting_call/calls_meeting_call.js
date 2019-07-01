@@ -215,24 +215,33 @@
                 $('.newCampo1A').val(this.reunLlam.records[0].name);
                 //Fecha inicio
                 var fecha_formatear=this.reunLlam.records[0].date_start.split(" ")[0].split("/");
+                var dia_formatear=fecha_formatear[0];
+                if(dia_formatear<10){
+                    dia_formatear="0"+dia_formatear;
+                }
                 var mes_formatear=fecha_formatear[1];
                 if(mes_formatear<10){
                     mes_formatear="0"+mes_formatear;
                 }
 
-                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+fecha_formatear[0]);
+                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+dia_formatear);
                 //Hora inicio
                 var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
                 $(".newTime1").val(this.tConvert(hora_formatear));
 
                 //Fecha fin
                 var fecha_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[0].split("/");
+                var dia_formatear_fin=fecha_formatear_fin[0];
+                if(dia_formatear_fin<10){
+                    dia_formatear_fin="0"+dia_formatear_fin;
+                }
+
                 var mes_formatear_fin=fecha_formatear_fin[1];
                 if(mes_formatear_fin<10){
                     mes_formatear_fin="0"+mes_formatear_fin;
                 }
 
-                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+fecha_formatear_fin[0]);
+                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+dia_formatear_fin);
                 //Hora fin
                 var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
                 $(".newTime2").val(this.tConvert(hora_formatear_fin));
