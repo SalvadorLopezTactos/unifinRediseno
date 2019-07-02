@@ -215,24 +215,33 @@
                 $('.newCampo1A').val(this.reunLlam.records[0].name);
                 //Fecha inicio
                 var fecha_formatear=this.reunLlam.records[0].date_start.split(" ")[0].split("/");
+                var dia_formatear=fecha_formatear[0];
+                if(dia_formatear<10){
+                    dia_formatear="0"+dia_formatear;
+                }
                 var mes_formatear=fecha_formatear[1];
                 if(mes_formatear<10){
                     mes_formatear="0"+mes_formatear;
                 }
 
-                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+fecha_formatear[0]);
+                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+dia_formatear);
                 //Hora inicio
                 var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
                 $(".newTime1").val(this.tConvert(hora_formatear));
 
                 //Fecha fin
                 var fecha_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[0].split("/");
+                var dia_formatear_fin=fecha_formatear_fin[0];
+                if(dia_formatear_fin<10){
+                    dia_formatear_fin="0"+dia_formatear_fin;
+                }
+
                 var mes_formatear_fin=fecha_formatear_fin[1];
                 if(mes_formatear_fin<10){
                     mes_formatear_fin="0"+mes_formatear_fin;
                 }
 
-                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+fecha_formatear_fin[0]);
+                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+dia_formatear_fin);
                 //Hora fin
                 var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
                 $(".newTime2").val(this.tConvert(hora_formatear_fin));
@@ -256,6 +265,28 @@
             time[0] = +time[0] % 12 || 12; // Adjust hours
         }
         return time.join (''); // return adjusted time or original string
+    },
+
+    convertTo24Format:function(time){
+
+        var time = time;
+        var hours = Number(time.match(/^(\d+)/)[1]);
+        var minutes = Number(time.match(/:(\d+)/)[1]);
+        var AMPM = "";
+        if(time.search('pm')!= -1){
+            AMPM="pm";
+        }
+        if(time.search('am')!= -1){
+            AMPM="am";
+        }
+        if(AMPM == "pm" && hours<12) hours = hours+12;
+        if(AMPM == "am" && hours==12) hours = hours-12;
+        var sHours = hours.toString();
+        var sMinutes = minutes.toString();
+        if(hours<10) sHours = "0" + sHours;
+        if(minutes<10) sMinutes = "0" + sMinutes;
+        return sHours + ":" + sMinutes;
+
     },
 
     addNewReuLam:function(evt){
@@ -404,39 +435,82 @@
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
             module="Llamada";
         }
-        
-        // FECHA INICIO
-        var dateSplit=$('.newDate').val().split('-');
-        var d = dateSplit[2];
-        var m = dateSplit[1];
-        var y = dateSplit[0];
-        var fechaCompleta = [m, d, y].join('/');
-        // var dateFormat = dateInicio.toLocaleDateString();
-        var fechaInicio = Date.parse(fechaCompleta);
 
 
-        // FECHA ACTUAL
-        var dateActual = new Date();
-        var d1 = dateActual.getDate();
-        var m1 = dateActual.getMonth() + 1;
-        var y1 = dateActual.getFullYear();
-        var dateActualFormat = [m1, d1, y1].join('/');
-        var fechaActual = Date.parse(dateActualFormat);
+        if($('.newDate').val()!="" && $('.newDate2').val()!=""){
+
+            // FECHA INICIO
+            var dateSplit=$('.newDate').val().split('-');
+            var d = dateSplit[2];
+            var m = dateSplit[1];
+            var y = dateSplit[0];
+            var fechaCompleta = [m, d, y].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaInicio = Date.parse(fechaCompleta);
+
+            // FECHA FIN
+            var dateFinSplit=$('.newDate2').val().split('-');
+            var df = dateFinSplit[2];
+            var mf = dateFinSplit[1];
+            var yf = dateFinSplit[0];
+            var fechaFinCompleta = [mf, df, yf].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaFin = Date.parse(fechaFinCompleta);
 
 
-        if (fechaInicio < fechaActual) {
-            app.alert.show("Fecha no valida", {
-                level: "error",
-                title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
-                autoClose: false
-            });
+            // FECHA ACTUAL
+            var dateActual = new Date();
+            var d1 = dateActual.getDate();
+            var m1 = dateActual.getMonth() + 1;
+            var y1 = dateActual.getFullYear();
+            var dateActualFormat = [m1, d1, y1].join('/');
+            var fechaActual = Date.parse(dateActualFormat);
 
-            $('.newDate').css('border-color','red');
-            $('.newTime1').css('border-color','red');
 
-            errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
-            errors['calls_meeting_call_'].custom_message1 = true;
+            if (fechaInicio < fechaActual) {
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
+                    autoClose: false
+                });
+
+                $('.newDate').css('border-color','red');
+                $('.newTime1').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+            }
+
         }
+
+        //Comparar fecha inicio vs fecha fin
+        if($(".newTime1").val()!="" && $(".newTime2").val()){
+            //Fecha inicio
+            var fechaInicioCompletaConHora=fechaCompleta+" "+this.convertTo24Format($(".newTime1").val());
+            var fechaInicioCompare=Date.parse(new Date(fechaInicioCompletaConHora));
+            //Fecha fin
+            var fechaFinCompletaConHora=fechaFinCompleta+" "+this.convertTo24Format($(".newTime2").val());
+            var fechaFinCompare=Date.parse(new Date(fechaFinCompletaConHora));
+
+            if(fechaFinCompare < fechaInicioCompare){
+
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "La fecha fin no puede ser antes de la fecha inicio",
+                    autoClose: false
+                });
+
+                $('.newDate2').css('border-color','red');
+                $('.newTime2').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+
+            }
+
+        }
+
+
         callback(null, fields, errors);
     },
 
@@ -478,6 +552,25 @@
     },
 
     showHideMeetingCall:function(){
+
+        if(this.collection != undefined){
+            //Si cambian el resultado de la llamada, hay que limpiar los campos
+            if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c')){
+
+                //Asunto
+                $('.newCampo1A').val("");
+                //Fecha inicio
+                $('.newDate').val("");
+                //Hora inicio
+                $('.newTime1').val("");
+                //Fecha fin
+                $('.newDate2').val("");
+                //Hora fina
+                $('.newTime2').val("");
+                //Objetivo General
+                $('select.objetivoG').select2('val','');
+            }
+        }
 
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita") {
 
