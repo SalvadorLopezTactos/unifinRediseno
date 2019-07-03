@@ -823,8 +823,12 @@
     * */
     cancelClicked: function() {
 
-        if(this.aux_reunLlam.records.length>0){
-            this.reunLlam=this.aux_reunLlam;
+        if(this.aux_reunLlam !=null){
+
+            if(this.aux_reunLlam.records.length>0){
+                this.reunLlam=this.aux_reunLlam;
+            }
+
         }
 
         //Llamando a función cancelClicked de caja de la vista de Llamadas
