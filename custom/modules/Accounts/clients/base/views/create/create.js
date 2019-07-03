@@ -350,7 +350,8 @@
         //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
         this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
 
-
+        //campo Pais que expide el RFC nace oculto.
+        $('[data-name=tct_pais_expide_rfc_c]').hide();
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -429,6 +430,10 @@
          Ajuste: Ocultar campo dependiente de multiselect "�Instrumento monetario con el que espera realizar los pagos?"
          */
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
+        /*
+       AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
+     */
+        this.model.on('change:tct_pais_expide_rfc_c',this.ocultaRFC, this);
 
         this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
@@ -929,7 +934,7 @@
     },
 
     _doValidateRFC: function (fields, errors, callback) {
-        if (this.model.get('rfc_c') && (this.model.get('rfc_c')!='XXXX010101XXX' && this.model.get('rfc_c')!='XXX010101XXX')) {
+        if (this.model.get('rfc_c') && (this.model.get('rfc_c')!='XXXX010101XXX' && this.model.get('rfc_c')!='XXX010101XXX' && this.model.get('tct_pais_expide_rfc_c')=="2")) {
             var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", 'rfc_c'];
             var RFC = this.model.get('rfc_c');
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -965,7 +970,7 @@
         }
 
         RFC = this.model.get('rfc_c');
-        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX')) {
+        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && this.model.get('tct_pais_expide_rfc_c')=="2")) {
             //étodo que tiene la función de validar el rfc
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
@@ -2264,8 +2269,8 @@
           ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
           ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
           ProductosPLD.arrendamientoPuro.campo4 = $('.campo4ddw-ap').select2('val');
-          ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
-          ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
+        //ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
+        //ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
           ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
           // ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
           // ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
@@ -2283,8 +2288,8 @@
           ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
           ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
           ProductosPLD.factorajeFinanciero.campo4 = $('.campo4ddw-ff').select2('val');
-          ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
-          ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
+        //ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
+        //ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
           ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
           ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
           ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
@@ -2298,16 +2303,16 @@
           ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
           ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
           ProductosPLD.creditoAutomotriz.campo4 = $('.campo4ddw-ca').select2('val');
-          ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
-          ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
+        //ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
+        //ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
           ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
           // ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
           ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
           ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
           ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
           ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
-          ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
-          ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
+        //ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
+        //ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
           ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val').toString();
           ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
           ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
@@ -2365,4 +2370,14 @@
 
             callback(null,fields,errors);
     },
+
+    ocultaRFC: function () {
+        if (this.model.get('tct_pais_expide_rfc_c')!="2" ){
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
+        }else{
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
+        }
+
+    },
+
 })

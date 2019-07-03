@@ -291,7 +291,7 @@
                     self.model.set('account_direcciones', data.records);
                     self.model._previousAttributes.account_direcciones = data.records;
                     self.model._syncedAttributes.account_direcciones = data.records;
-                    self.format();
+                    //self.format();
                     self._render();
                   } catch (e) {
                     console.log(e.message);
@@ -2869,11 +2869,15 @@ populateColoniasByMunicipio:function(evt){
         }
         else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
             // expected an array with a single direccion but got a string or an empty array
-            value = [{
-                direccion_direccion: value[0].direccion,
-                principal: true,
-                hasAnchor: true
-            }];
+            try {
+                value = [{
+                    direccion_direccion: value[0].direccion,
+                    principal: true,
+                    hasAnchor: true
+                }];
+            }catch (e) {
+                console.log(e.message);
+            }
         }
 
         value = this.addFlagLabels(value);

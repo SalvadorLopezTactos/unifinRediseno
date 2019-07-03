@@ -64,6 +64,7 @@
         */
 
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
+        this.model.addValidationTask('proveedorDeRecursos',_.bind(this.proveedorRecursos, this));
 
         /*
          Eduardo Carrasco
@@ -120,6 +121,11 @@
          */
         //this.changeInstMonetario();
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
+
+        /*
+        AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
+      */
+        this.model.on('change:tct_pais_expide_rfc_c',this.ocultaRFC, this);
 
         /*
          Salvador Lopez
@@ -211,8 +217,8 @@
         pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
         pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo4 = $('.campo4ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
-        pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
+      //pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
+      //pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
       // pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
       // pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
@@ -230,8 +236,8 @@
         pld.ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo4 = $('.campo4ddw-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
+      //pld.ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
+      //pld.ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
@@ -245,16 +251,16 @@
         pld.ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
         pld.ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
         pld.ProductosPLD.creditoAutomotriz.campo4 = $('.campo4ddw-ca').select2('val');
-        pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
-        pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
+      //pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
+      //pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
         pld.ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
        // pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
         pld.ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
         pld.ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
-        pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
+      //pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
+      //pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val').toString();
         pld.ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
         pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
@@ -757,6 +763,7 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super('_renderHtml');
+        this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
     },
 
     _render: function (options) {
@@ -2103,7 +2110,7 @@
     //revisa que no exista un nombre o RFC duplicado
     _doValidateRFC: function (fields, errors, callback) {
         var RFC = this.model.get('rfc_c');
-        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX')) {
+        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && this.model.get('tct_pais_expide_rfc_c')=="2")) {
             /*Método que tiene la función de validar el rfc*/
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
@@ -3064,6 +3071,7 @@
         var faltantesAP = "";
         var faltantesFF = "";
         var faltantesCA = "";
+        var faltantesCS= "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_c');
@@ -3093,12 +3101,12 @@
                   $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
               }*/
               //Pregunta: campo5rel-ap
-              if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
+              /*if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
                   $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo5rel-ap').find('.select2-choice').css('border-color','');
-              }
+              }*/
               /*//Pregunta: campo7ddw-ap
               if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                   $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
@@ -3171,12 +3179,12 @@
                   $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
               }*/
               //Pregunta: campo5rel-ff
-              if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
+              /*if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
                   $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
                   faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo5rel-ff').find('.select2-choice').css('border-color','');
-              }
+              }*/
               //Pregunta: campo21ddw-ff
             /*  if($('.campo21ddw-ff').select2('val') == ''){
                   $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
@@ -3230,12 +3238,12 @@
                   $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
               }*/
               //Pregunta: campo5rel-ca
-              if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
+             /* if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
                   $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
                   faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo5rel-ca').find('.select2-choice').css('border-color','');
-              }
+              }*/
               //Pregunta: campo6ddw-ca
             /*  if($('.campo6ddw-ca').select2('val') == ''){
                   $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
@@ -3244,7 +3252,19 @@
                   $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
               }*/
           }
+            if($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
+                $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
+                faltantesCS = faltantesCS + '<b>- ' + $('.campo2ddw-cs')[1].getAttribute('data-name') + '<br></b>';
+            }
+            if (faltantesCS !="") {
+                errors['error_CS'] = errors['error_CS'] || {};
+                errors['error_CS'].required = true;
+                app.alert.show("Faltante preguntas de Credito Simple", {
+                    level: "error",
+                    title: "PLD Crédito Simple - Faltan las siguientes preguntas por contestar: <br>" + faltantesCS,
+                });
 
+            }
           //Genera alertas
           if(faltantesAP != ""){
               errors['PreguntasAP'] = "";
@@ -3527,5 +3547,113 @@
             }
             },
 
+            ocultaRFC: function () {
+                if (this.model.get('tct_pais_expide_rfc_c')!="2" ){
+                    this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
+                }else{
+                    this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
+                }
+        
+            },
+            proveedorRecursos: function (fields, errors, callback){
+                if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" ||  $('.campo4ddw-ff').select2('val') == "2" ||  $('.campo4ddw-cs').select2('val') == "2") {
+
+                    var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
+                    app.api.call('GET', apicall, {}, {
+                        success: _.bind(function (data) {
+
+                            var relacionl = 0;
+                            var relacionca = 0;
+                            var relacionff = 0;
+                            var relacioncs = 0;
+                            var productos ="";
+                            if (data.records.length > 0) {
+                                for (var l = 0; l < data.records.length; l++) {
+                                    //Producto Arrendamiento Puro
+                                    if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
+
+                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
+                                            relacionl++;
+                                        }
+                                    }
+                                    //Producto Credito Automotriz
+                                    if (App.user.attributes.productos_c.includes(3) && $('.campo4ddw-ca').select2('val') == "2") {
+
+                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')) {
+                                            relacionca++;
+                                        }
+                                    }
+                                    //Producto Factoraje Financiero
+                                    if (App.user.attributes.productos_c.includes(4) && $('.campo4ddw-ff').select2('val') == "2") {
+
+                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')) {
+                                            relacionff++;
+                                        }
+                                    }
+                                    //Producto Credito Simple
+                                    if ($('.campo4ddw-cs').select2('val') == "2") {
+
+                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
+                                            relacioncs++;
+                                        }
+                                    }
+                                }
+                            }
+
+                            //Validacion Arrendamiento Puro
+                            if (relacionl == 0 && $('.campo4ddw-ap').select2('val') == "2") {
+                                $('.campo4ddw-ap').find('.select2-choice').css('border-color', 'red');
+                                productos= productos + '<b>Arrendamiento Puro</b><br>';
+                                errors['error_leasingPR'] = errors['error_leasingPR'] || {};
+                                errors['error_leasingPR'].required = true;
+                            } else {
+                                $('.campo4ddw-ap').find('.select2-choice').css('border-color', '');
+                            }
+                            //Validacion Credito Automotriz
+                            if (relacionca == 0 && $('.campo4ddw-ca').select2('val') == "2") {
+                                $('.campo4ddw-ca').find('.select2-choice').css('border-color', 'red');
+                                productos= productos + '<b>Crédito Automotriz</b><br>';
+                                errors['error_CAPR'] = errors['error_CAPR'] || {};
+                                errors['error_CAPR'].required = true;
+                            } else {
+                                $('.campo4ddw-ca').find('.select2-choice').css('border-color', '');
+                            }
+                            //Validacion Factoraje Financiero
+                            if (relacionff == 0 && $('.campo4ddw-ff').select2('val') == "2") {
+                                $('.campo4ddw-ff').find('.select2-choice').css('border-color', 'red');
+                                productos= productos + '<b>Factoraje Financiero</b><br>';
+                                errors['error_FPR'] = errors['error_FPR'] || {};
+                                errors['error_FPR'].required = true;
+                            } else {
+                                $('.campo4ddw-ff').find('.select2-choice').css('border-color', '');
+                            }
+
+                            //Validacion Credito Simple
+                            if (relacioncs == 0 && $('.campo4ddw-cs').select2('val') == "2") {
+                                $('.campo4ddw-cs').find('.select2-choice').css('border-color', 'red');
+                                productos= productos + '<b>Crédito Simple</b><br>';
+                                errors['error_FPR'] = errors['error_FPR'] || {};
+                                errors['error_FPR'].required = true;
+                            } else {
+                                $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
+                            }
+                            if (productos!= "") {
+                                app.alert.show("Faltante Relacion Proveedor de Recursos", {
+                                    level: "error",
+                                    messages: 'Hace falta completar la siguiente información en la <b>Cuenta:</b><br> (Se debe agregar una relación de tipo <b>Proveedor de Recursos</b> para el/los producto(s):<br>' + productos,
+                                    autoClose: false
+                                });
+                            }
+
+                            callback(null, fields, errors);
+                        }, this)
+                    });
+
+
+                }else{
+                    callback(null, fields, errors);
+                }
+
+            },
 
 })
