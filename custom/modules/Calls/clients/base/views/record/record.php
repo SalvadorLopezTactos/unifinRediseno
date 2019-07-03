@@ -394,24 +394,11 @@ array (
               ),
               18 => 
               array (
-                'name' => 'tct_fecha_cita_dat_c',
-                'label' => 'LBL_TCT_FECHA_CITA_DAT',
-                'span' => 12,
-              ),
-              19 => 
-              array (
-                'name' => 'tct_usuario_cita_rel_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_USUARIO_CITA_REL',
-                'span' => 12,
-              ),
-              20 => 
-              array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
                 'span' => 12,
               ),
-              21 => 
+              19 => 
               array (
                 'name' => 'tct_motivo_desinteres_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
