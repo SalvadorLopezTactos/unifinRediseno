@@ -39,6 +39,12 @@
         //this.model.on('change:tct_resultado_llamada_ddw_c', this.showHideMeetingCall, this);
         this.model.on('change', this.showHideMeetingCall, this);
 
+        this.context.on('button:cancel_button:click', this.cancelClicked, this);
+
+        this.model.on("change:tct_resultado_llamada_ddw_c", this.setTempArray, this);
+
+        this.aux_reunLlam=[];
+
     },
 
     loadData: function (options) {
@@ -56,7 +62,7 @@
         //Para la vista de detalle
         if(this.model.get('id') !=undefined && this.model.get('id') !="" && (this.model.get('tct_resultado_llamada_ddw_c') =="Cita" || this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada")){
             var idCall=this.model.get('id');
-            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][tct_parent_call_id_txf_c][$equals]=' + idCall), null, {
+            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][tct_parent_call_id_txf_c][$equals]=' + idCall+'&max_num=1&order_by=date_entered:desc'), null, {
                 success: function(data){
                     if(data.records.length){
                         selfRella.reunLlam=data;
@@ -551,25 +557,51 @@
         callback(null, fields, errors);
     },
 
-    showHideMeetingCall:function(){
-
+    showHideMeetingCall:function(e){
+        var evento=e;
         if(this.collection != undefined){
             //Si cambian el resultado de la llamada, hay que limpiar los campos
-            if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c')){
+            if(evento!=undefined){
+                var fields_changed=Object.keys(e.changed);
+                if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c') && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c')){
+                    //this.aux_reunLlam=this.reunLlam;
+                    this.reunLlam=null;
+                    this.nuevoRegistro=
+                        {
+                            "id":"",
+                            "tipo_registro":"",
+                            "nombre":"",
+                            "date_start":"",
+                            "time_start":"",
+                            "date_end":"",
+                            "time_end":"",
+                            "duracion_hora":"",
+                            "duracion_minuto":"",
+                            "cuenta":"",
+                            "asignado":"",
+                            "objetivoG":"",
+                            "objetivoE":"",
+                            "account_id_c":this.model.get('parent_id'),
+                            "account_name":this.model.get('parent_name'),
+                            "assigned_user_id":this.model.get('assigned_user_id'),
+                            "assigned_user_name":this.model.get('assigned_user_name')
+                        };
+                    //Asunto
+                    $('.newCampo1A').val("");
+                    //Fecha inicio
+                    $('.newDate').val("");
+                    //Hora inicio
+                    $('.newTime1').val("");
+                    //Fecha fin
+                    $('.newDate2').val("");
+                    //Hora fina
+                    $('.newTime2').val("");
+                    //Objetivo General
+                    $('select.objetivoG').select2('val','');
+                }
 
-                //Asunto
-                $('.newCampo1A').val("");
-                //Fecha inicio
-                $('.newDate').val("");
-                //Hora inicio
-                $('.newTime1').val("");
-                //Fecha fin
-                $('.newDate2').val("");
-                //Hora fina
-                $('.newTime2').val("");
-                //Objetivo General
-                $('select.objetivoG').select2('val','');
             }
+
         }
 
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita") {
@@ -697,5 +729,20 @@
             }
         }, this);
     },
+
+    cancelClicked: function() {
+        //Llamando a función cancelClicked de caja de la vista de Llamadas
+        this.reunLlam=this.aux_reunLlam;
+        this.view._super('cancelClicked');
+
+    },
+
+    setTempArray: function(e){
+        var fields_changed=Object.keys(e.changed);
+        if(e.get('tct_resultado_llamada_ddw_c')!= e._previousAttributes.tct_resultado_llamada_ddw_c && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c') ){
+            this.aux_reunLlam=this.reunLlam;
+        }
+
+    }
 
 })
