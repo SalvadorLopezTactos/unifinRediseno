@@ -57,12 +57,15 @@ fecha: 21/06/2019
 			<div class="span6">
 				<div class="record-label">Asignada a</div>
 				<span class=" row-fluid asignadoA newItem">
-                     <a href="#Employees/{{{nuevoRegistro.assigned_user_id}}}"
+                    <!--
+                    <a href="#Employees/{{{nuevoRegistro.assigned_user_id}}}"
                         class="campo3rel-ap PR-link"
                         data-type="relate" data-field="campo3AP"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{nuevoRegistro.assigned_user_name}}
                      </a>
+                    -->
+                    <input type="hidden" class="bigdrop" id="reunion_llamada_related"/>
                 </span>
 			</div>
 		</div>

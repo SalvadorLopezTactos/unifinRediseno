@@ -125,7 +125,7 @@
                     "objetivoE":"",
                     "account_id_c":this.model.get('parent_id'),
                     "account_name":this.model.get('parent_name'),
-                    "assigned_user_id":this.model.get('assigned_user_id'),
+                    "assigned_user_id":"",
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
         }
@@ -148,7 +148,7 @@
                     "objetivoE":"",
                     "account_id_c":this.model.get('parent_id'),
                     "account_name":this.model.get('parent_name'),
-                    "assigned_user_id":this.model.get('assigned_user_id'),
+                    "assigned_user_id":"",
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
 
@@ -173,9 +173,17 @@
 
     _render: function () {
 
+        //Obteniendo valores de usuario asignado para que el valor persista al agregar un obejtivo específico
+        var id_assigned_user="";
+        var name_assigned_user="";
+        if($('.bigdrop').select2('data') !=null && $('.bigdrop').select2('data').id!=undefined){
+            id_assigned_user=$('.bigdrop').select2('data').id;
+            name_assigned_user=$('.bigdrop').select2('data').text;
+        }
         this._super("_render");
 
         this.showHideMeetingCall();
+        var self = this;
         var d=new Date();
         var horas=d.getHours();
         var minutos=d.getMinutes();
@@ -189,6 +197,40 @@
                 'maxTime': '11:30pm',
             });
         $('#tp12').timepicker();
+
+        $('.bigdrop').each(function( index, value ) {
+            $('#'+this.id).select2({
+                placeholder: "Seleccionar Usuario...",
+                minimumInputLength: 1,
+                allowClear: true,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: window.location.origin + window.location.pathname+"rest/v11_1/searchaccount?param=related",
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {q:term};
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {results: data.records};
+                    }
+                },
+                formatResult: function(m) { return m.text; },
+                formatSelection: function(m) { return m.text; }
+            }).on('select2-open', _.bind(self._onSelect2Open, self))
+                .on('searchmore', function() {
+                    $(this).select2('close');//<------------
+                    self.openSelectDrawer('#'+this.id);
+                })
+            //.on('change', _.bind(self._onSelect2Change, self));
+        });
+
+        //Usuario Asignado
+        if(id_assigned_user !="" && name_assigned_user != ""){
+            $('.bigdrop').select2('data', {id: id_assigned_user, text:name_assigned_user});
+
+        }
+
+
         //Función para eliminar objetivos especificos
         $('.deleteObjetivoE').click(function(evt) {
             var row = $(this).closest("tr");    // Find the row
@@ -252,6 +294,9 @@
                 var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
                 $(".newTime2").val(this.tConvert(hora_formatear_fin));
 
+                //Usuario Asignado
+                $('.bigdrop').select2('data', {id: this.reunLlam.records[0].assigned_user_id, text:this.reunLlam.records[0].assigned_user_name});
+
                 //Objetivo General
                 $('select.objetivoG').select2('val',this.reunLlam.records[0].objetivo_c);
 
@@ -259,6 +304,35 @@
         }
 
 
+    },
+
+    openSelectDrawer: function (id) {
+        app.drawer.open({
+            layout: 'selection-list',
+            context: {
+                module: "Users",
+                fields: ["id", "first_name","last_name"],
+                filterOptions: undefined
+            }
+        },function(context, model) {
+            $(id).select2("data",{id: context.id,text: context.value}).trigger("change");
+        })
+    },
+
+    _onSelect2Open:function(e){
+        var plugin = this.$(e.currentTarget).data('select2');
+        if (plugin.searchmore) {
+            return;
+        }
+        var label = app.lang.get('LBL_SEARCH_AND_SELECT_ELLIPSIS', this.module);
+        var $tpl = $('<div/>').addClass('select2-result-label').html(label);
+        var onMouseDown = function() {
+            plugin.opts.element.trigger($.Event('searchmore'));
+            plugin.close();
+        };
+        var $content = $('<li class="select2-result">').append($tpl).mousedown(onMouseDown);
+        plugin.searchmore = $('<ul class="select2-results">').append($content);
+        plugin.dropdown.append(plugin.searchmore);
     },
 
     tConvert:function (time) {
@@ -302,6 +376,7 @@
         selfRella.nuevoRegistro.date_end=$('.newDate2').val();
         selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
         //selfRella.nuevoRegistro.objetivoE='';
+        selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
         selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
         diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
         minutosTotales = Math.floor((diferencia/1000)/60);
@@ -339,8 +414,8 @@
         selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
         selfRella.nuevoRegistro.date_end=$('.newDate2').val();
         selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
+        selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
         selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
-
         diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
         minutosTotales = Math.floor((diferencia/1000)/60);
         horas = (minutosTotales/60>>0);
@@ -409,6 +484,14 @@
                 msjError+="<b>Hora fin</b><br>"
                 bandera+=1;
                 
+            }
+
+            if($('.bigdrop').select2('val')==""){
+
+                $('.select2-container.bigdrop').css('border', '1px solid red');
+                msjError+="<b>Usuario asignado</b><br>";
+                bandera+=1;
+
             }
 
             if(this.myobject.records.length==0 && this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
@@ -587,7 +670,7 @@
                             "objetivoE":"",
                             "account_id_c":this.model.get('parent_id'),
                             "account_name":this.model.get('parent_name'),
-                            "assigned_user_id":this.model.get('assigned_user_id'),
+                            "assigned_user_id":"",
                             "assigned_user_name":this.model.get('assigned_user_name')
                         };
                     //Asunto
@@ -739,8 +822,16 @@
     this.reunLlam se llene con el arreglo auxiliar y de esta manera se observen los datos correctamente en la vista detail.hbs
     * */
     cancelClicked: function() {
+
+        if(this.aux_reunLlam !=null){
+
+            if(this.aux_reunLlam.records.length>0){
+                this.reunLlam=this.aux_reunLlam;
+            }
+
+        }
+
         //Llamando a función cancelClicked de caja de la vista de Llamadas
-        this.reunLlam=this.aux_reunLlam;
         this.view._super('cancelClicked');
 
     },
