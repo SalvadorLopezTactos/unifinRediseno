@@ -561,6 +561,10 @@
         var evento=e;
         if(this.collection != undefined){
             //Si cambian el resultado de la llamada, hay que limpiar los campos
+            /*
+            Al disparar esta función desde un model.on 'change', ésta se ejecuta múltiples veces, así que las siguientes validaciones se aplican
+            para limpiar los campos, solo cuando se ha cambiado el valor del campo tct_resultado_llamada_ddw_c
+            */
             if(evento!=undefined){
                 var fields_changed=Object.keys(e.changed);
                 if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c') && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c')){
@@ -730,6 +734,10 @@
         }, this);
     },
 
+    /*
+    Función para que en caso de que se haya actualizado este campo y después se haya seleccionado 'Cancelar',
+    this.reunLlam se llene con el arreglo auxiliar y de esta manera se observen los datos correctamente en la vista detail.hbs
+    * */
     cancelClicked: function() {
         //Llamando a función cancelClicked de caja de la vista de Llamadas
         this.reunLlam=this.aux_reunLlam;
@@ -737,6 +745,10 @@
 
     },
 
+    /*
+    Función que establece un arreglo auxiliar para que, en caso de que el usuario haya actualizado este campo personalizado y después seleccione cancelar,
+    los valores que se muestran en la vista detail.hbs sigan persistiendo
+     */
     setTempArray: function(e){
         var fields_changed=Object.keys(e.changed);
         if(e.get('tct_resultado_llamada_ddw_c')!= e._previousAttributes.tct_resultado_llamada_ddw_c && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c') ){
