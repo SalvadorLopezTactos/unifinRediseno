@@ -39,6 +39,12 @@
         //this.model.on('change:tct_resultado_llamada_ddw_c', this.showHideMeetingCall, this);
         this.model.on('change', this.showHideMeetingCall, this);
 
+        this.context.on('button:cancel_button:click', this.cancelClicked, this);
+
+        this.model.on("change:tct_resultado_llamada_ddw_c", this.setTempArray, this);
+
+        this.aux_reunLlam=[];
+
     },
 
     loadData: function (options) {
@@ -56,7 +62,7 @@
         //Para la vista de detalle
         if(this.model.get('id') !=undefined && this.model.get('id') !="" && (this.model.get('tct_resultado_llamada_ddw_c') =="Cita" || this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada")){
             var idCall=this.model.get('id');
-            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][tct_parent_call_id_txf_c][$equals]=' + idCall), null, {
+            app.api.call('GET', app.api.buildURL(modulo+'?filter[0][tct_parent_call_id_txf_c][$equals]=' + idCall+'&max_num=1&order_by=date_entered:desc'), null, {
                 success: function(data){
                     if(data.records.length){
                         selfRella.reunLlam=data;
@@ -119,7 +125,7 @@
                     "objetivoE":"",
                     "account_id_c":this.model.get('parent_id'),
                     "account_name":this.model.get('parent_name'),
-                    "assigned_user_id":this.model.get('assigned_user_id'),
+                    "assigned_user_id":"",
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
         }
@@ -142,7 +148,7 @@
                     "objetivoE":"",
                     "account_id_c":this.model.get('parent_id'),
                     "account_name":this.model.get('parent_name'),
-                    "assigned_user_id":this.model.get('assigned_user_id'),
+                    "assigned_user_id":"",
                     "assigned_user_name":this.model.get('assigned_user_name')
                 };
 
@@ -167,9 +173,17 @@
 
     _render: function () {
 
+        //Obteniendo valores de usuario asignado para que el valor persista al agregar un obejtivo específico
+        var id_assigned_user="";
+        var name_assigned_user="";
+        if($('.bigdrop').select2('data') !=null && $('.bigdrop').select2('data').id!=undefined){
+            id_assigned_user=$('.bigdrop').select2('data').id;
+            name_assigned_user=$('.bigdrop').select2('data').text;
+        }
         this._super("_render");
 
         this.showHideMeetingCall();
+        var self = this;
         var d=new Date();
         var horas=d.getHours();
         var minutos=d.getMinutes();
@@ -183,6 +197,40 @@
                 'maxTime': '11:30pm',
             });
         $('#tp12').timepicker();
+
+        $('.bigdrop').each(function( index, value ) {
+            $('#'+this.id).select2({
+                placeholder: "Seleccionar Usuario...",
+                minimumInputLength: 1,
+                allowClear: true,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: window.location.origin + window.location.pathname+"rest/v11_1/searchaccount?param=related",
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {q:term};
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {results: data.records};
+                    }
+                },
+                formatResult: function(m) { return m.text; },
+                formatSelection: function(m) { return m.text; }
+            }).on('select2-open', _.bind(self._onSelect2Open, self))
+                .on('searchmore', function() {
+                    $(this).select2('close');//<------------
+                    self.openSelectDrawer('#'+this.id);
+                })
+            //.on('change', _.bind(self._onSelect2Change, self));
+        });
+
+        //Usuario Asignado
+        if(id_assigned_user !="" && name_assigned_user != ""){
+            $('.bigdrop').select2('data', {id: id_assigned_user, text:name_assigned_user});
+
+        }
+
+
         //Función para eliminar objetivos especificos
         $('.deleteObjetivoE').click(function(evt) {
             var row = $(this).closest("tr");    // Find the row
@@ -215,27 +263,39 @@
                 $('.newCampo1A').val(this.reunLlam.records[0].name);
                 //Fecha inicio
                 var fecha_formatear=this.reunLlam.records[0].date_start.split(" ")[0].split("/");
+                var dia_formatear=fecha_formatear[0];
+                if(dia_formatear<10){
+                    dia_formatear="0"+dia_formatear;
+                }
                 var mes_formatear=fecha_formatear[1];
                 if(mes_formatear<10){
                     mes_formatear="0"+mes_formatear;
                 }
 
-                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+fecha_formatear[0]);
+                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+dia_formatear);
                 //Hora inicio
                 var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
                 $(".newTime1").val(this.tConvert(hora_formatear));
 
                 //Fecha fin
                 var fecha_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[0].split("/");
+                var dia_formatear_fin=fecha_formatear_fin[0];
+                if(dia_formatear_fin<10){
+                    dia_formatear_fin="0"+dia_formatear_fin;
+                }
+
                 var mes_formatear_fin=fecha_formatear_fin[1];
                 if(mes_formatear_fin<10){
                     mes_formatear_fin="0"+mes_formatear_fin;
                 }
 
-                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+fecha_formatear_fin[0]);
+                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+dia_formatear_fin);
                 //Hora fin
                 var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
                 $(".newTime2").val(this.tConvert(hora_formatear_fin));
+
+                //Usuario Asignado
+                $('.bigdrop').select2('data', {id: this.reunLlam.records[0].assigned_user_id, text:this.reunLlam.records[0].assigned_user_name});
 
                 //Objetivo General
                 $('select.objetivoG').select2('val',this.reunLlam.records[0].objetivo_c);
@@ -244,6 +304,35 @@
         }
 
 
+    },
+
+    openSelectDrawer: function (id) {
+        app.drawer.open({
+            layout: 'selection-list',
+            context: {
+                module: "Users",
+                fields: ["id", "first_name","last_name"],
+                filterOptions: undefined
+            }
+        },function(context, model) {
+            $(id).select2("data",{id: context.id,text: context.value}).trigger("change");
+        })
+    },
+
+    _onSelect2Open:function(e){
+        var plugin = this.$(e.currentTarget).data('select2');
+        if (plugin.searchmore) {
+            return;
+        }
+        var label = app.lang.get('LBL_SEARCH_AND_SELECT_ELLIPSIS', this.module);
+        var $tpl = $('<div/>').addClass('select2-result-label').html(label);
+        var onMouseDown = function() {
+            plugin.opts.element.trigger($.Event('searchmore'));
+            plugin.close();
+        };
+        var $content = $('<li class="select2-result">').append($tpl).mousedown(onMouseDown);
+        plugin.searchmore = $('<ul class="select2-results">').append($content);
+        plugin.dropdown.append(plugin.searchmore);
     },
 
     tConvert:function (time) {
@@ -258,6 +347,28 @@
         return time.join (''); // return adjusted time or original string
     },
 
+    convertTo24Format:function(time){
+
+        var time = time;
+        var hours = Number(time.match(/^(\d+)/)[1]);
+        var minutes = Number(time.match(/:(\d+)/)[1]);
+        var AMPM = "";
+        if(time.search('pm')!= -1){
+            AMPM="pm";
+        }
+        if(time.search('am')!= -1){
+            AMPM="am";
+        }
+        if(AMPM == "pm" && hours<12) hours = hours+12;
+        if(AMPM == "am" && hours==12) hours = hours-12;
+        var sHours = hours.toString();
+        var sMinutes = minutes.toString();
+        if(hours<10) sHours = "0" + sHours;
+        if(minutes<10) sMinutes = "0" + sMinutes;
+        return sHours + ":" + sMinutes;
+
+    },
+
     addNewReuLam:function(evt){
         selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
         selfRella.nuevoRegistro.date_start=$('.newDate').val();
@@ -265,6 +376,7 @@
         selfRella.nuevoRegistro.date_end=$('.newDate2').val();
         selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
         //selfRella.nuevoRegistro.objetivoE='';
+        selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
         selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
         diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
         minutosTotales = Math.floor((diferencia/1000)/60);
@@ -302,8 +414,8 @@
         selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
         selfRella.nuevoRegistro.date_end=$('.newDate2').val();
         selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
+        selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
         selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
-
         diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
         minutosTotales = Math.floor((diferencia/1000)/60);
         horas = (minutosTotales/60>>0);
@@ -374,6 +486,14 @@
                 
             }
 
+            if($('.bigdrop').select2('val')==""){
+
+                $('.select2-container.bigdrop').css('border', '1px solid red');
+                msjError+="<b>Usuario asignado</b><br>";
+                bandera+=1;
+
+            }
+
             if(this.myobject.records.length==0 && this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
                 $('.newObjetivoE1').css('border-color', 'red');
                 msjError+="<b>Objetivo espec\u00EDfico</b><br>"
@@ -404,39 +524,82 @@
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
             module="Llamada";
         }
-        
-        // FECHA INICIO
-        var dateSplit=$('.newDate').val().split('-');
-        var d = dateSplit[2];
-        var m = dateSplit[1];
-        var y = dateSplit[0];
-        var fechaCompleta = [m, d, y].join('/');
-        // var dateFormat = dateInicio.toLocaleDateString();
-        var fechaInicio = Date.parse(fechaCompleta);
 
 
-        // FECHA ACTUAL
-        var dateActual = new Date();
-        var d1 = dateActual.getDate();
-        var m1 = dateActual.getMonth() + 1;
-        var y1 = dateActual.getFullYear();
-        var dateActualFormat = [m1, d1, y1].join('/');
-        var fechaActual = Date.parse(dateActualFormat);
+        if($('.newDate').val()!="" && $('.newDate2').val()!=""){
+
+            // FECHA INICIO
+            var dateSplit=$('.newDate').val().split('-');
+            var d = dateSplit[2];
+            var m = dateSplit[1];
+            var y = dateSplit[0];
+            var fechaCompleta = [m, d, y].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaInicio = Date.parse(fechaCompleta);
+
+            // FECHA FIN
+            var dateFinSplit=$('.newDate2').val().split('-');
+            var df = dateFinSplit[2];
+            var mf = dateFinSplit[1];
+            var yf = dateFinSplit[0];
+            var fechaFinCompleta = [mf, df, yf].join('/');
+            // var dateFormat = dateInicio.toLocaleDateString();
+            var fechaFin = Date.parse(fechaFinCompleta);
 
 
-        if (fechaInicio < fechaActual) {
-            app.alert.show("Fecha no valida", {
-                level: "error",
-                title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
-                autoClose: false
-            });
+            // FECHA ACTUAL
+            var dateActual = new Date();
+            var d1 = dateActual.getDate();
+            var m1 = dateActual.getMonth() + 1;
+            var y1 = dateActual.getFullYear();
+            var dateActualFormat = [m1, d1, y1].join('/');
+            var fechaActual = Date.parse(dateActualFormat);
 
-            $('.newDate').css('border-color','red');
-            $('.newTime1').css('border-color','red');
 
-            errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
-            errors['calls_meeting_call_'].custom_message1 = true;
+            if (fechaInicio < fechaActual) {
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
+                    autoClose: false
+                });
+
+                $('.newDate').css('border-color','red');
+                $('.newTime1').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+            }
+
         }
+
+        //Comparar fecha inicio vs fecha fin
+        if($(".newTime1").val()!="" && $(".newTime2").val()){
+            //Fecha inicio
+            var fechaInicioCompletaConHora=fechaCompleta+" "+this.convertTo24Format($(".newTime1").val());
+            var fechaInicioCompare=Date.parse(new Date(fechaInicioCompletaConHora));
+            //Fecha fin
+            var fechaFinCompletaConHora=fechaFinCompleta+" "+this.convertTo24Format($(".newTime2").val());
+            var fechaFinCompare=Date.parse(new Date(fechaFinCompletaConHora));
+
+            if(fechaFinCompare < fechaInicioCompare){
+
+                app.alert.show("Fecha no valida", {
+                    level: "error",
+                    title: "La fecha fin no puede ser antes de la fecha inicio",
+                    autoClose: false
+                });
+
+                $('.newDate2').css('border-color','red');
+                $('.newTime2').css('border-color','red');
+
+                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                errors['calls_meeting_call_'].custom_message1 = true;
+
+            }
+
+        }
+
+
         callback(null, fields, errors);
     },
 
@@ -477,7 +640,56 @@
         callback(null, fields, errors);
     },
 
-    showHideMeetingCall:function(){
+    showHideMeetingCall:function(e){
+        var evento=e;
+        if(this.collection != undefined){
+            //Si cambian el resultado de la llamada, hay que limpiar los campos
+            /*
+            Al disparar esta función desde un model.on 'change', ésta se ejecuta múltiples veces, así que las siguientes validaciones se aplican
+            para limpiar los campos, solo cuando se ha cambiado el valor del campo tct_resultado_llamada_ddw_c
+            */
+            if(evento!=undefined){
+                var fields_changed=Object.keys(e.changed);
+                if(this.collection.models[0]._previousAttributes["tct_resultado_llamada_ddw_c"] != this.model.get('tct_resultado_llamada_ddw_c') && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c')){
+                    //this.aux_reunLlam=this.reunLlam;
+                    this.reunLlam=null;
+                    this.nuevoRegistro=
+                        {
+                            "id":"",
+                            "tipo_registro":"",
+                            "nombre":"",
+                            "date_start":"",
+                            "time_start":"",
+                            "date_end":"",
+                            "time_end":"",
+                            "duracion_hora":"",
+                            "duracion_minuto":"",
+                            "cuenta":"",
+                            "asignado":"",
+                            "objetivoG":"",
+                            "objetivoE":"",
+                            "account_id_c":this.model.get('parent_id'),
+                            "account_name":this.model.get('parent_name'),
+                            "assigned_user_id":"",
+                            "assigned_user_name":this.model.get('assigned_user_name')
+                        };
+                    //Asunto
+                    $('.newCampo1A').val("");
+                    //Fecha inicio
+                    $('.newDate').val("");
+                    //Hora inicio
+                    $('.newTime1').val("");
+                    //Fecha fin
+                    $('.newDate2').val("");
+                    //Hora fina
+                    $('.newTime2').val("");
+                    //Objetivo General
+                    $('select.objetivoG').select2('val','');
+                }
+
+            }
+
+        }
 
         if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita") {
 
@@ -604,5 +816,36 @@
             }
         }, this);
     },
+
+    /*
+    Función para que en caso de que se haya actualizado este campo y después se haya seleccionado 'Cancelar',
+    this.reunLlam se llene con el arreglo auxiliar y de esta manera se observen los datos correctamente en la vista detail.hbs
+    * */
+    cancelClicked: function() {
+
+        if(this.aux_reunLlam !=null){
+
+            if(this.aux_reunLlam.records.length>0){
+                this.reunLlam=this.aux_reunLlam;
+            }
+
+        }
+
+        //Llamando a función cancelClicked de caja de la vista de Llamadas
+        this.view._super('cancelClicked');
+
+    },
+
+    /*
+    Función que establece un arreglo auxiliar para que, en caso de que el usuario haya actualizado este campo personalizado y después seleccione cancelar,
+    los valores que se muestran en la vista detail.hbs sigan persistiendo
+     */
+    setTempArray: function(e){
+        var fields_changed=Object.keys(e.changed);
+        if(e.get('tct_resultado_llamada_ddw_c')!= e._previousAttributes.tct_resultado_llamada_ddw_c && Object.keys(e.changed).length==1 && fields_changed.includes('tct_resultado_llamada_ddw_c') ){
+            this.aux_reunLlam=this.reunLlam;
+        }
+
+    }
 
 })

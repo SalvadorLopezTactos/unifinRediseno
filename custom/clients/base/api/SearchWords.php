@@ -35,17 +35,26 @@ class SearchWords extends SugarApi
      */
     public function searchaccount($api, $args)
     {
-        //$GLOBALS['log']->fatal('------------------------');
-        //$GLOBALS['log']->fatal('>>>>>>>Entro a Api searchaccount');//------------------------------------
 
         $word = $args['q'];
         $arr['records']=[];
 
-        $query = "select id,name as 'text' from accounts where name like '%".$word."%' and deleted=0;";
-        $result = $GLOBALS['db']->query($query);
+        if(!isset($args['param'])){
+            $query = "select id,name as 'text' from accounts where name like '%".$word."%' and deleted=0;";
+            $result = $GLOBALS['db']->query($query);
 
-        while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-         array_push($arr['records'],$row);
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                array_push($arr['records'],$row);
+            }
+
+        }else{
+            $query = "SELECT u.id, concat(u.first_name,' ',u.last_name) AS 'text' FROM users u WHERE concat(u.first_name,' ',u.last_name) like '%".$word."%' and u.employee_status='Active' AND u.deleted=0;";
+            $result = $GLOBALS['db']->query($query);
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                array_push($arr['records'],$row);
+            }
+
         }
 
         return $arr;
