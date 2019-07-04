@@ -763,7 +763,6 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super('_renderHtml');
-        this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
     },
 
     _render: function (options) {
