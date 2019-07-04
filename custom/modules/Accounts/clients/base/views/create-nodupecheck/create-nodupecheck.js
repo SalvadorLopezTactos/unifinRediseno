@@ -1292,11 +1292,11 @@
                 }
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
-                    $('[name=nacionalidad_c]').css('border-color', 'red');
+                    $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color','red');
                 }
                 if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c')== null || this.model.get('tct_macro_sector_ddw_c')== undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('[name=tct_macro_sector_ddw_c]').css('border-color', 'red');
+                    $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color','red');
                 }
                 if (this.model.get('sectoreconomico_c') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
@@ -1326,6 +1326,9 @@
                 }
                 if ((this.model.get('rfc_c') == undefined ||this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c')== undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
                     RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
+                    $('[name=curp_c]').css('border-color', 'red');
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
                 }
 
                 if (RequeridosProvRec != "") {
