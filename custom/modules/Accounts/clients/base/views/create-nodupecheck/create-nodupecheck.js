@@ -499,7 +499,7 @@
     _doValidateRFC: function (fields, errors, callback) {
         var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", 'rfc_c'];
         var RFC = this.model.get('rfc_c');
-        if (RFC != '' && RFC != null) {
+        if (RFC != '' && RFC != null && this.model.get('tct_pais_expide_rfc_c')=="2") {
             /*M�todo que tiene la funci�n de validar el rfc*/
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
