@@ -803,7 +803,7 @@
                                     if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b><br>Almenos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                                     }
-                                    if (data.tipo_registro_c!= Persona) {
+                                    if (data.tipo_registro_c!= 'Persona') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records.length > 0) {
@@ -837,7 +837,7 @@
                                     if (data.rfc_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.tipo_registro_c!= Persona) {
+                                    if (data.tipo_registro_c!= 'Persona') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records <= 0) {
@@ -912,7 +912,7 @@
                                     if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                                     }
-                                    if (data.tipo_registro_c!= Persona) {
+                                    if (data.tipo_registro_c!= 'Persona') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records.length > 0) {
@@ -942,7 +942,7 @@
                                     if (data.rfc_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.tipo_registro_c!= Persona) {
+                                    if (data.tipo_registro_c!= 'Persona') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records <= 0) {
