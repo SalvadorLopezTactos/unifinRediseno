@@ -1,6 +1,6 @@
 <?php
-        
-/* 
+
+/*
     AF - 2018-10-04
     Extensión de output(campos custom) para CurrentUserMobileApi
 
@@ -17,7 +17,7 @@ class CustomCurrentUserMobileApi extends CurrentUserMobileApi
      * @param $args
      * @return array
      */
-    public function retrieveCurrentUser($api, $args)
+    public function retrieveCurrentUser(ServiceBase $api, array $args)
     {
         $current_user = $this->getUserBean();
 

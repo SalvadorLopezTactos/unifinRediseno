@@ -17,14 +17,14 @@ require_once("include/Expressions/Actions/AbstractAction.php");
 class FixedVisibilityAction extends AbstractAction{
 	protected $targetField = array();
 	protected $expression = "";
-	
-	function FixedVisibilityAction($params) {
+
+	function FixedVisibilityActionMethod($params) {
         $this->params = $params;
 		$this->targetField = $params['target'];
 		$this->expression = str_replace("\n", "",$params['value']);
 		$this->view = isset($params['view']) ? $params['view'] : "";
 	}
-	
+
 	/**
 	 * Returns the javascript class equavalent to this php class
 	 *
@@ -58,12 +58,12 @@ class FixedVisibilityAction extends AbstractAction{
 				SUGAR.forms.SetVisibilityAction.initialized = true;
 			}
 		}
-		
+
 		/**
 		 * Triggers this dependency to be re-evaluated again.
 		 */
 		SUGAR.util.extend(SUGAR.forms.SetVisibilityAction, SUGAR.forms.AbstractAction, {
-		
+
 			/**
 			 * Triggers the style dependencies.
 			 */
@@ -206,14 +206,14 @@ class FixedVisibilityAction extends AbstractAction{
 	}
 
 	/**
-	 * Returns the javascript code to generate this actions equivalent. 
+	 * Returns the javascript code to generate this actions equivalent.
 	 *
 	 * @return string javascript.
 	 */
 	function getJavascriptFire() {
 		return "new SUGAR.forms.SetVisibilityAction('{$this->targetField}','{$this->expression}', '{$this->view}')";
 	}
-	
+
 	/**
 	 * Applies the Action to the target.
 	 *
@@ -224,14 +224,14 @@ class FixedVisibilityAction extends AbstractAction{
 		$result = Parser::evaluate($this->expression, $target)->evaluate();
 		if ($result === AbstractExpression::$FALSE) {
 			$target->field_defs[$this->targetField]['hidden'] = true;
-		} else 
+		} else
 		{
 			$target->field_defs[$this->targetField]['hidden'] = false;
 		}
 	}
-	
+
 	static function getActionName() {
 		return "SetVisibility";
 	}
-	
+
 }
