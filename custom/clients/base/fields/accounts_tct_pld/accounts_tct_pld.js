@@ -222,9 +222,9 @@
             pld.Muestracampo1();
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
-        $('.campo4ddw-ap').change(function(evt) {
+        /*$('.campo4ddw-ap').change(function(evt) {
             pld.Muestracampo2();
-        });
+        });*/
         /*//Muestra el campo Número de Registro ante la CNBV o Condusef PERSONA MORAL 1
         $('.campo7ddw-ap').change(function(evt) {
             pld.Muestracampo3();
@@ -250,9 +250,9 @@
             pld.Muestracampo1FF();
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
-        $('.campo4ddw-ff').change(function(evt) {
+        /*$('.campo4ddw-ff').change(function(evt) {
             pld.Muestracampo2FF();
-        });
+        });*/
 
         //Muestra
         $('#multi12').change(function(evt)  {
@@ -272,10 +272,10 @@
 
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
-        $('.campo4ddw-ca').change(function(evt)  {
+       /* $('.campo4ddw-ca').change(function(evt)  {
             pld.Muestracampo2CA();
 
-        });
+        });*/
 
         //Desplegables para Credito Simple
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
@@ -284,10 +284,10 @@
 
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
-        $('.campo4ddw-cs').change(function(evt)  {
+       /* $('.campo4ddw-cs').change(function(evt)  {
             pld.Muestracampo2CS();
 
-        });
+        });*/
 
         $('#multi13').change(function(evt)  {
             pld.InsMonetarioCS();
@@ -320,16 +320,16 @@
         if (pld.ProductosPLD != null) {
             //AF
             $('.campo3rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo3_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo3});
-            $('.campo5rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo5_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo5});
+            //$('.campo5rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo5_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo5});
             //FF
             $('.campo3rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo3_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo3});
-            $('.campo5rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo5_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo5});
+            //$('.campo5rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo5_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo5});
             //CA
             $('.campo3rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo3_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo3});
-            $('.campo5rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo5_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo5});
+            //$('.campo5rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo5_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo5});
             //CS
             $('.campo3rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo3_id, text:  selfPLD.ProductosPLD.creditoSimple.campo3});
-            $('.campo5rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo5_id, text:  selfPLD.ProductosPLD.creditoSimple.campo5});
+            //$('.campo5rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo5_id, text:  selfPLD.ProductosPLD.creditoSimple.campo5});
         }
 
         //Set class to select2
@@ -742,7 +742,7 @@
             //$('.campo11-ap').show();
             //Campos Ocultos Arrendamiento Puro (Desplegables)
             //$('.campo3-ap').show();
-            $('.campo5-ap').show();
+            //$('.campo5-ap').show();
             $('.campo17-ap').show();
             $('.campo15-ap').show();
             $('.campo18-ap').show();
@@ -756,15 +756,15 @@
             //$('.campo26-ap').show(); //Especifique cuenta Cliente
             //Campos Factoraje Financiero
             $('.campo3-ff').show();
-            $('.campo5-ff').show();
+            //$('.campo5-ff').show();
             $('.campo17-ff').show();
 
             //Campos Credito Automotriz
             $('.campo3-ca').show();
-            $('.campo5-ca').show();
+            //$('.campo5-ca').show();
             //Campos Credito Simple
             $('.campo3-cs').show();
-            $('.campo5-cs').show();
+            //$('.campo5-cs').show();
             $('.campo15-cs').show();
             $('.campo19-cs').show();
             //Oculta panels
@@ -820,11 +820,11 @@
                 $('.campo3-ap').hide();
             }
             //Muestra/oculta Proveedor recursos
-            if ($('.campo4ddw-ap').select2('val') == '2' || $('.campo4ddw-ap').attr('data-id') == '2') {
+           /* if ($('.campo4ddw-ap').select2('val') == '2' || $('.campo4ddw-ap').attr('data-id') == '2') {
                 $('.campo5-ap').show();
             } else {
                 $('.campo5-ap').hide();
-            }
+            }*/
             if ($('.campo7ddw-ap').select2('val') == "Si") {
                 $('.campo8-ap').show();
             } else {
@@ -862,11 +862,11 @@
                 $('.campo3-ff').hide();
             }
             //Muestra/oculta Proveedor recursos
-            if ($('.campo4ddw-ff').select2('val') == '2' || $('.campo4ddw-ff').attr('data-id') == '2') {
+           /* if ($('.campo4ddw-ff').select2('val') == '2' || $('.campo4ddw-ff').attr('data-id') == '2') {
                 $('.campo5-ff').show();
             } else {
                 $('.campo5-ff').hide();
-            }
+            }*/
             if ($('#multi12').select2('val').toString().includes("Otro") || $('.campo14chk-ff')[0].checked) {
                 $('.campo17-ff').show();
             } else {
@@ -890,11 +890,11 @@
                 $('.campo3-ca').hide();
             }
             //Muestra/oculta Proveedor recursos
-            if ($('.campo4ddw-ca').select2('val') == '2' || $('.campo4ddw-ca').attr('data-id') == '2') {
+            /*if ($('.campo4ddw-ca').select2('val') == '2' || $('.campo4ddw-ca').attr('data-id') == '2') {
                 $('.campo5-ca').show();
             } else {
                 $('.campo5-ca').hide();
-            }
+            }*/
 
             /*
             **  CS
@@ -907,11 +907,11 @@
                 $('.campo3-cs').hide();
             }
             //Muestra/oculta Proveedor recursos
-            if ($('.campo4ddw-cs').select2('val') == '2' || $('.campo4ddw-cs').attr('data-id') == '2') {
+            /*if ($('.campo4ddw-cs').select2('val') == '2' || $('.campo4ddw-cs').attr('data-id') == '2') {
                 $('.campo5-cs').show();
             } else {
                 $('.campo5-cs').hide();
-            }
+            }*/
             if ($('#multi13').select2('val').toString().includes("otro") || $('.campo14chk-cs')[0].checked) {
                 $('.campo19-cs').show();
             } else {

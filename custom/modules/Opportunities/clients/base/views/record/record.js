@@ -408,17 +408,30 @@
         self=this;
     		var obid=this.model.get('account_id');
     		var caso="2";
+    		var producto= this.model.get('tipo_producto_c');
     		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI'){
-            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2'), null, {
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2/'+ producto), null, {
             success: _.bind(function (data) {
 
                 if (data != "") {
                     var titulo = "Campos Requeridos en Cuentas";
                     var nivel = "error";
+                    var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b>";
+
                     if(this.multiSearchOr(data, ["Propietario Real"])=='1'){
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Propietario real</b>).";
-                    }else {
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data;
+                        var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Propietario real</b>).";
+                    }
+                    if(this.multiSearchOr(data, ["Proveedor de Recursos Leasing"])=='1'){
+                        var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Proveedor de Recursos Leasing</b>).";
+                    }
+                    if(this.multiSearchOr(data, ["Proveedor de Recursos Factoraje Financiero"])=='1'){
+                        var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Proveedor de Recursos Factoraje Financiero</b>).";
+                    }
+                    if(this.multiSearchOr(data, ["Proveedor de Recursos Crédito Automotriz"])=='1'){
+                        var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Proveedor de Recursos Crédito Automotriz</b>).";
+                    }
+                    if(this.multiSearchOr(data, ["Proveedor de Recursos Crédito Simple"])=='1'){
+                        var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Proveedor de Recursos Crédito Simple</b>).";
                     }
 
                     app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';

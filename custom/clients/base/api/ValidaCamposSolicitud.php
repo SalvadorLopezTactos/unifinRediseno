@@ -20,9 +20,9 @@ class ValidaCamposSolicitud extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('ObligatoriosCuentasSolicitud', '?', '?'),
+                'path' => array('ObligatoriosCuentasSolicitud', '?', '?','?'),
                 //endpoint variables
-                'pathVars' => array('module', 'id_cuenta', 'caso'),
+                'pathVars' => array('module', 'id_cuenta', 'caso','producto'),
                 //method to call
                 'method' => 'validaRequeridos',
                 //short help string to be displayed in the help documentation
@@ -39,6 +39,7 @@ class ValidaCamposSolicitud extends SugarApi
     public function validaRequeridos($api, $args)
     {
         $option = $args['caso'];
+        $producto = $args['producto'];
 
         $req_pm = "origendelprospecto_c,tipodepersona_c," .
             "nombre_comercial_c,tct_macro_sector_ddw_c,sectoreconomico_c," .
@@ -140,6 +141,77 @@ class ValidaCamposSolicitud extends SugarApi
             }
             if ($relaciones==0){
                 array_push($array_errores, 'Propietario Real');
+            }
+        }
+        //Recuperar informacion de PLD
+        $beanPersona->load_relationship('accounts_tct_pld_1');
+        $pldRel = $beanPersona->accounts_tct_pld_1->getBeans();
+        $proveedorR = 0;
+
+
+        foreach ($pldRel as $registro) {
+            if ($registro->tct_pld_campo4_ddw=="2" && $registro->description=="AP" && $producto==1 ) {
+                $proveedorR=1;
+            }
+            if ($registro->tct_pld_campo4_ddw=="2" && $registro->description=="FF" && $producto==4 ) {
+                $proveedorR=1;
+            }
+            if ($registro->tct_pld_campo4_ddw=="2" && $registro->description=="CA" && $producto==3 ) {
+                $proveedorR=1;
+            }
+            if ($registro->tct_pld_campo4_ddw=="2" && $registro->description=="CS" && $producto==2 ) {
+                $proveedorR=1;
+            }
+        }
+
+        if ($option == '2') {
+            $beanPersona->load_relationship('rel_relaciones_accounts_1');
+            $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
+            $relaciones = 0;
+
+            if ($producto == 1 && $proveedorR==1) {
+                foreach ($relatedBeansRel as $clave) {
+                    $resultado = strpos($clave->relaciones_activas, "Proveedor de Recursos L");
+                    if (!empty($resultado) && $resultado >= 0) {
+                        $relaciones++;
+                    }
+                }
+                if ($relaciones == 0) {
+                    array_push($array_errores, 'Proveedor de Recursos Leasing');
+                }
+            }
+            if ($producto == 4 && $proveedorR==1) {
+                foreach ($relatedBeansRel as $clave) {
+                    $resultado = strpos($clave->relaciones_activas, "Proveedor de Recursos F");
+                    if (!empty($resultado) && $resultado >= 0) {
+                        $relaciones++;
+                    }
+                }
+                if ($relaciones == 0) {
+                    array_push($array_errores, 'Proveedor de Recursos Factoraje Financiero');
+                }
+            }
+            if ($producto == 3 && $proveedorR==1) {
+                foreach ($relatedBeansRel as $clave) {
+                    $resultado = strpos($clave->relaciones_activas, "Proveedor de Recursos CA");
+                    if (!empty($resultado) && $resultado >= 0) {
+                        $relaciones++;
+                    }
+                }
+                if ($relaciones == 0) {
+                    array_push($array_errores, 'Proveedor de Recursos Crédito Automotriz');
+                }
+            }
+            if ($producto == 2 && $proveedorR==1) {
+                foreach ($relatedBeansRel as $clave) {
+                    $resultado = strpos($clave->relaciones_activas, "Proveedor de Recursos CS");
+                    if (!empty($resultado) && $resultado >= 0) {
+                        $relaciones++;
+                    }
+                }
+                if ($relaciones == 0) {
+                    array_push($array_errores, 'Proveedor de Recursos Crédito Simple');
+                }
             }
         }
         if (count($array_errores) > 0) {

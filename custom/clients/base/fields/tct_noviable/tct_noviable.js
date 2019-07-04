@@ -174,16 +174,18 @@
             $('[data-field="campo1chk"]').attr('style', 'pointer-events:none;');
             $('[data-field="campo2chk"]').attr('style', 'pointer-events:none;');
             $('[data-field="campo3chk"]').attr('style', 'pointer-events:none;');
-
-            lnv.nvproductos();
-            lnv.Muestracampo4();
-            lnv.Muestracampo5();
-            lnv.Muestracampo6();
-            lnv.Campo7();
-            lnv.Campo8();
-            lnv.Campo9();
-            lnv.noeditables();
-
+            try {
+                lnv.nvproductos();
+                lnv.Muestracampo4();
+                lnv.Muestracampo5();
+                lnv.Muestracampo6();
+                lnv.Campo7();
+                lnv.Campo8();
+                lnv.Campo9();
+                lnv.noeditables();
+            }catch (err){
+                console.log(err.message);
+            }
             //Funcion para dar estilo select2 a las listas deplegables.
             var $select = $('select.select2');
             $select.select2();

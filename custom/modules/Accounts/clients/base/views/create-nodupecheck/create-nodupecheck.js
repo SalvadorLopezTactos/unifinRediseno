@@ -35,6 +35,10 @@
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
+        /*
+        AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
+      */
+        this.model.on('change:tct_pais_expide_rfc_c',this.ocultaRFC, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -273,6 +277,9 @@
         /* END CUSTOMIZATION */
         //Ocultarel panel de Lead no viable (checks).
         $('[data-name=tct_noviable]').hide();
+        //campo Pais que expide el RFC nace oculto.
+        $('[data-name=tct_pais_expide_rfc_c]').hide();
+        this.ocultaRFC();
 
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona
         this.model.set('tipo_registro_c', 'Persona');
@@ -492,7 +499,7 @@
     _doValidateRFC: function (fields, errors, callback) {
         var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", 'rfc_c'];
         var RFC = this.model.get('rfc_c');
-        if (RFC != '' && RFC != null) {
+        if (RFC != '' && RFC != null && this.model.get('tct_pais_expide_rfc_c')=="2") {
             /*M�todo que tiene la funci�n de validar el rfc*/
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
@@ -1247,6 +1254,19 @@
            errors['errorcuentamoral'].required = true;
        }
         callback(null, fields, errors);
+
+    },
+
+    ocultaRFC: function () {
+        if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CS') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F')) {
+            $('[data-name=tct_pais_expide_rfc_c]').show();
+        }
+        if (this.model.get('tct_pais_expide_rfc_c')!="2" ){
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
+        }else{
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
+        }
+
 
     },
 

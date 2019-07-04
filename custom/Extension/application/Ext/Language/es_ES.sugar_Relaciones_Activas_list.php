@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:13:04
+ // created: 2019-06-26 13:09:26
 
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
@@ -18,4 +18,10 @@ $app_list_strings['Relaciones_Activas_list']=array (
   'Referencia Proveedor' => 'Referencia Proveedor',
   'Obligado solidario' => 'Obligado solidario',
   'Beneficiario' => 'Beneficiario',
+  'Firmantes VR' => 'Firmantes VR',
+  'Propietario Real' => 'Propietario Real',
+  'Proveedor de Recursos L' => 'Proveedor de los Recursos Leasing',
+  'Proveedor de Recursos F' => 'Proveedor de los Recursos Factoraje Financiero',
+  'Proveedor de Recursos CA' => 'Proveedor de los Recursos Crédito Automotriz',
+  'Proveedor de Recursos CS' => 'Proveedor de los Recursos Crédito Simple',
 );
