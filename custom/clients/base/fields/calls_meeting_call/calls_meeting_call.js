@@ -67,14 +67,16 @@
                 success: function(data){
                     if(data.records.length){
                         selfRella.reunLlam=data;
+                        selfRella.edicion = true;
                         var d = new Date(selfRella.reunLlam.records[0].date_start);
                         selfRella.reunLlam.records[0].date_start=d.toLocaleString();
                         var d1=new Date(selfRella.reunLlam.records[0].date_end);
                         selfRella.reunLlam.records[0].date_end=d1.toLocaleString();
 
                         selfRella.reunLlam.records[0].str_link=modulo+'/'+selfRella.reunLlam.records[0].id;
-                        _.extend(selfRella, selfRella.reunLlam);
+                        //_.extend(selfRella, selfRella.reunLlam);
                         if(modulo=='Calls'){
+                            _.extend(selfRella, selfRella.reunLlam);
                             selfRella.render();
                         }
 
@@ -98,10 +100,11 @@
                                 }
                             });
                         }
-
                     }else{
                       if (selfRella.model.get('tct_resultado_llamada_ddw_c') == 'Cita' || selfRella.model.get('tct_resultado_llamada_ddw_c') == 'Nueva_llamada') {
                             selfRella.edicion = null;
+                            _.extend(selfRella, selfRella.reunLlam);
+                            selfRella.render();
                       }
                     }
 
@@ -444,7 +447,7 @@
         }
 
 
-        if(this.model.get('assigned_user_id') != selfRella.nuevoRegistro.assigned_user_id){
+        if(this.model.get('assigned_user_id') != selfRella.nuevoRegistro.assigned_user_id && selfRella.nuevoRegistro.assigned_user_id!=""){
             selfRella.edicion = null;
         }
 
