@@ -772,6 +772,8 @@
 
         this._super("_render");
 
+        //campo Pais que expide el RFC nace oculto.
+        $('[data-name=tct_pais_expide_rfc_c]').hide();
        // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
@@ -3548,6 +3550,9 @@
             },
 
             ocultaRFC: function () {
+                if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos')) {
+                    $('[data-name=tct_pais_expide_rfc_c]').show();
+                }
                 if (this.model.get('tct_pais_expide_rfc_c')!="2" ){
                     this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
                 }else{
