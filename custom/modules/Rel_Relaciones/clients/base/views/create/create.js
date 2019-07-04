@@ -805,8 +805,12 @@
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records <= 0) {
-                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                                            if (data.records.length > 0) {
+                                                for (var d = 0; d < data.records.length; d++) {
+                                                    if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                        RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                                                    }
+                                                }
                                             }
                                                if (RequeridosProvRec != "") {
                                                         app.alert.show("Campos faltantes en cuenta", {
@@ -904,20 +908,26 @@
                                     if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                                     }
-                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                        success: _.bind(function (data) {
-                                            if (data.records <= 0) {
-                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
-                                            }
-                                            if (RequeridosProvRec != "") {
-                                                app.alert.show("Campos faltantes en cuenta", {
-                                                    level: "error",
-                                                    messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
-                                                    autoClose: false
-                                                });
-                                            }
-                                        }, this)
-                                    });
+                                    if (data.tipo_registro_c!= Persona) {
+                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                            success: _.bind(function (data) {
+                                                if (data.records.length > 0) {
+                                                    for (var d = 0; d < data.records.length; d++) {
+                                                        if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                                                        }
+                                                    }
+                                                }
+                                                if (RequeridosProvRec != "") {
+                                                    app.alert.show("Campos faltantes en cuenta", {
+                                                        level: "error",
+                                                        messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
+                                                        autoClose: false
+                                                    });
+                                                }
+                                            }, this)
+                                        });
+                                    }
                                 }else {
                                     if (data.razonsocial_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';

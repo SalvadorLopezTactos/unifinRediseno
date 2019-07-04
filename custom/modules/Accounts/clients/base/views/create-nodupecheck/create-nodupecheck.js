@@ -480,7 +480,7 @@
 
         } else {
             //Pide teléfono/correo requerido
-            if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor') {
+            if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor' && (!this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA'))) {
                 if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
                     app.alert.show("Correo requerido", {
                         level: "error",
@@ -922,7 +922,8 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real') && !this.model.get('tipo_relacion_c').includes('Contacto') )) {
+        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real') && !this.model.get('tipo_relacion_c').includes('Contacto')
+        && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA'))) {
             if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
@@ -1283,30 +1284,48 @@
                 }*/
                 if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
+                    $('[name=apellidomaterno_c]').css('border-color', 'red');
                 }
                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
+                    $('[name=fechadenacimiento_c]').css('border-color', 'red');
                 }
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                    $('[name=nacionalidad_c]').css('border-color', 'red');
                 }
                 if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c')== null || this.model.get('tct_macro_sector_ddw_c')== undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                    $('[name=tct_macro_sector_ddw_c]').css('border-color', 'red');
                 }
                 if (this.model.get('sectoreconomico_c') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                    $('[name=sectoreconomico_c]').css('border-color', 'red');
                 }
                 if (this.model.get('subsectoreconomico_c') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                    $('[name=subsectoreconomico_c]').css('border-color', 'red');
                 }
                 if (this.model.get('actividadeconomica_c') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                    $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
-                if (this.model.get('account_direcciones') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                var direcciones= 0;
+                var tipodireccion= this.model.get('account_direcciones');
+                if (tipodireccion.length > 0) {
+                    for(var i=0;i<tipodireccion.length;i++){
+                        if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
+                            direcciones++;
+                        }
+                    }
                 }
-                if (this.model.get('rfc_c') == undefined ||this.model.get('rfc_c') == "" && this.model.get('curp_c') == "" || this.model.get('curp_c')== undefined && this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b><br>Almenos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                if (direcciones==0){
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    $('.direcciondashlet').css('border-color', 'red');
+
+                }
+                if ((this.model.get('rfc_c') == undefined ||this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c')== undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
+                    RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                 }
 
                 if (RequeridosProvRec != "") {
@@ -1328,12 +1347,25 @@
                 }*/
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                    $('[name=nacionalidad_c]').css('border-color', 'red');
                 }
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
                 }
-                if (this.model.get('account_direcciones') == "" || this.model.get('account_direcciones') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
+                var direccionesm= 0;
+                var tipodireccion= this.model.get('account_direcciones');
+                if (tipodireccion.length > 0) {
+                    for(var i=0;i<tipodireccion.length;i++){
+                        if(!tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
+                            direccionesm++;
+                        }
+                    }
+                }
+                if (direccionesm==0){
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    $('.direcciondashlet').css('border-color', 'red');
+
                 }
 
                 if (RequeridosProvRec != "") {
