@@ -132,7 +132,7 @@
                   self.model.set('account_telefonos', data.records);
                   self.model._previousAttributes.account_telefonos = data.records;
                   self.model._syncedAttributes.account_telefonos = data.records;
-                  self.format();
+                  //self.format();
                   self._render();
               }
           });
@@ -806,11 +806,15 @@
         }
         else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
             // expected an array with a single address but got a string or an empty array
-            value = [{
-                email_address: value[0].telefono,
-                principal: true,
-                hasAnchor: true
-            }];
+            try {
+                value = [{
+                    email_address: value[0].telefono,
+                    principal: true,
+                    hasAnchor: true
+                }];
+            }catch (e) {
+                console.log(e.message);
+            }
         }
 
         value = this.addFlagLabels(value);

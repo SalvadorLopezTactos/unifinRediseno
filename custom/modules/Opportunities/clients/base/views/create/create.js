@@ -416,10 +416,11 @@
     validacion_proceso_guardar: function (fields, errors, callback) {
 
         self = this;
+        var producto= this.model.get('tipo_producto_c');
 
         if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
-            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1/'+ producto), null, {
                 success: _.bind(function (data) {
 
                     if (data != "") {

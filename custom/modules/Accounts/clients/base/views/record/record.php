@@ -451,6 +451,8 @@ array (
               ),
               13 => 
               array (
+                'name' => 'tct_pais_expide_rfc_c',
+                'label' => 'LBL_TCT_PAIS_EXPIDE_RFC',
               ),
               14 => 
               array (
