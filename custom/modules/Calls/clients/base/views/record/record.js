@@ -183,6 +183,14 @@
             //Remover ícono de lapiz
             $('span[data-name="calls_meeting_call"]').find('.fa-pencil').remove();
         }
+
+        /*Cuando el registro de la llamada ya cuenta con un registro "hijo" (llamada o reunión),
+        se bloquea campo de resultado para evitar que se cree un nuevo registro "hijo" pero de otro tipo*/
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita" || this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+
+            this.noEditFields.push('tct_resultado_llamada_ddw_c');
+
+        }
     },
 
 
