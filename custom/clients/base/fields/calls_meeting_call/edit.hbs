@@ -3,16 +3,17 @@ author: Salvador Lopez Balleza
 fecha: 21/06/2019
 -->
 <div style="border: 2px solid #055993;border-radius: 12px;padding:10px;" id="calls_meeting_call">
-	<div class="list-view">
-		<table id="tableReferencias" class="table table-striped">
-			<thead>
-				<tr bgcolor="#0679c8" style="color:#fff">
-					<th style='text-align:center'>Reunión/LLamada</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-	<div id="input">
+	{{#if edicion}}
+		<div class="list-view">
+			<table id="tableReferencias" class="table table-striped">
+				<thead>
+					<tr bgcolor="#0679c8" style="color:#fff">
+						<th style='text-align:center'>Reunión/LLamada</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div id="input">
 		<!-- Línea 1 -->
 		<div class="row-fluid">
 		  <div class="span12">
@@ -116,4 +117,9 @@ fecha: 21/06/2019
 			</div>
 		</div>
 	</div>
+	{{else}}
+		<div style="color:gray;" class="row-fluid">
+			<div class="span12" align="center"> Se ha creado una {{typeModule}} para un usuario diferente a usted</div>
+		</div>
+	{{/if}}
 </div>

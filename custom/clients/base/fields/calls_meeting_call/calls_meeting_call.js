@@ -6,6 +6,7 @@
 ({
     nuevoRegistro:{},
     reunLlam:null,
+    edicion: true,
     events:{
         'change .newItem': 'addNewReuLam',
         'click  .addObjetivoE': 'addObjetivoEFunction',
@@ -18,7 +19,7 @@
         this.loadData(); //Carga de Datos
         this.model.addValidationTask('validaRequiredFields', _.bind(this.validaRequiredFields, this));
         this.model.addValidationTask('validaFechaInicialCall', _.bind(this.validaFechaInicialCall, this));
-        
+
         this.model.addValidationTask('Guardarobjetivos', _.bind(this.almacenaobjetivosE, this));
         this.model.addValidationTask('validaobjetivosave', _.bind(this.validaobjetivosE, this));
         this.model.addValidationTask('GuardaReunionLlamada', _.bind(this.SaveMeetCall, this));
@@ -97,6 +98,11 @@
                                 }
                             });
                         }
+
+                    }else{
+                      if (selfRella.model.get('tct_resultado_llamada_ddw_c') == 'Cita' || selfRella.model.get('tct_resultado_llamada_ddw_c') == 'Nueva_llamada') {
+                            selfRella.edicion = null;
+                      }
                     }
 
                 },
@@ -108,6 +114,7 @@
 
         //Vista de creacion
         else if(this.context.get('create')){
+            selfRella.edicion = true;
             selfRella.nuevoRegistro=
                 {
                     "id":"",
@@ -180,6 +187,13 @@
             id_assigned_user=$('.bigdrop').select2('data').id;
             name_assigned_user=$('.bigdrop').select2('data').text;
         }
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
+          this.typeModule="Reunión";
+        }
+        if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+          this.typeModule="Llamada";
+        }
+
         this._super("_render");
 
         this.showHideMeetingCall();
@@ -423,7 +437,17 @@
         selfRella.nuevoRegistro.duracion_hora=horas;
         selfRella.nuevoRegistro.duracion_minuto=minutos;
 
-        this.model.set('calls_meeting_call', selfRella.nuevoRegistro);
+        if (selfRella.edicion) {
+            this.model.set('calls_meeting_call', selfRella.nuevoRegistro);
+        }else{
+            this.model.set('calls_meeting_call', '');
+        }
+
+
+        if(this.model.get('assigned_user_id') != selfRella.nuevoRegistro.assigned_user_id){
+            selfRella.edicion = null;
+        }
+
         callback(null, fields, errors);
     },
 
@@ -431,7 +455,7 @@
         var bandera=0;
         var msjError="Favor de completar la siguiente informaci\u00F3n:<br>";
         //Aplicar validaciones solo si el campo custom es visible
-        if($(".record-cell[data-type='calls_meeting_call']").is(':visible')){
+        if($(".record-cell[data-type='calls_meeting_call']").is(':visible') && this.edicion){
 
             $('.newCampo1A').css('border-color','');
             $('.select2-container.objetivoG').css('border', '');
@@ -457,7 +481,7 @@
                 }
 
             }
-            
+
             if($('.newDate').val()==""){
                 $('.newDate').css('border-color','red');
                 msjError+="<b>Fecha inicio</b><br>";
@@ -469,7 +493,7 @@
                 $('.newTime1').css('border-color','red');
                 msjError+="<b>Hora inicio</b><br>";
                 bandera+=1;
-                
+
             }
 
             if($('.newDate2').val()==""){
@@ -483,7 +507,7 @@
                 $('.newTime2').css('border-color','red');
                 msjError+="<b>Hora fin</b><br>"
                 bandera+=1;
-                
+
             }
 
             if($('.bigdrop').select2('val')==""){
@@ -510,7 +534,7 @@
             }
 
         }
-        
+
         callback(null, fields, errors);
 
     },
@@ -525,81 +549,79 @@
             module="Llamada";
         }
 
+        if(module!= '' && this.edicion){
+          if($('.newDate').val()!="" && $('.newDate2').val()!=""){
 
-        if($('.newDate').val()!="" && $('.newDate2').val()!=""){
+              // FECHA INICIO
+              var dateSplit=$('.newDate').val().split('-');
+              var d = dateSplit[2];
+              var m = dateSplit[1];
+              var y = dateSplit[0];
+              var fechaCompleta = [m, d, y].join('/');
+              // var dateFormat = dateInicio.toLocaleDateString();
+              var fechaInicio = Date.parse(fechaCompleta);
 
-            // FECHA INICIO
-            var dateSplit=$('.newDate').val().split('-');
-            var d = dateSplit[2];
-            var m = dateSplit[1];
-            var y = dateSplit[0];
-            var fechaCompleta = [m, d, y].join('/');
-            // var dateFormat = dateInicio.toLocaleDateString();
-            var fechaInicio = Date.parse(fechaCompleta);
-
-            // FECHA FIN
-            var dateFinSplit=$('.newDate2').val().split('-');
-            var df = dateFinSplit[2];
-            var mf = dateFinSplit[1];
-            var yf = dateFinSplit[0];
-            var fechaFinCompleta = [mf, df, yf].join('/');
-            // var dateFormat = dateInicio.toLocaleDateString();
-            var fechaFin = Date.parse(fechaFinCompleta);
-
-
-            // FECHA ACTUAL
-            var dateActual = new Date();
-            var d1 = dateActual.getDate();
-            var m1 = dateActual.getMonth() + 1;
-            var y1 = dateActual.getFullYear();
-            var dateActualFormat = [m1, d1, y1].join('/');
-            var fechaActual = Date.parse(dateActualFormat);
+              // FECHA FIN
+              var dateFinSplit=$('.newDate2').val().split('-');
+              var df = dateFinSplit[2];
+              var mf = dateFinSplit[1];
+              var yf = dateFinSplit[0];
+              var fechaFinCompleta = [mf, df, yf].join('/');
+              // var dateFormat = dateInicio.toLocaleDateString();
+              var fechaFin = Date.parse(fechaFinCompleta);
 
 
-            if (fechaInicio < fechaActual) {
-                app.alert.show("Fecha no valida", {
-                    level: "error",
-                    title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
-                    autoClose: false
-                });
+              // FECHA ACTUAL
+              var dateActual = new Date();
+              var d1 = dateActual.getDate();
+              var m1 = dateActual.getMonth() + 1;
+              var y1 = dateActual.getFullYear();
+              var dateActualFormat = [m1, d1, y1].join('/');
+              var fechaActual = Date.parse(dateActualFormat);
 
-                $('.newDate').css('border-color','red');
-                $('.newTime1').css('border-color','red');
 
-                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
-                errors['calls_meeting_call_'].custom_message1 = true;
-            }
+              if (fechaInicio < fechaActual) {
+                  app.alert.show("Fecha no valida", {
+                      level: "error",
+                      title: "No puedes crear una "+ module +" relacionada con fecha menor al d\u00EDa de hoy",
+                      autoClose: false
+                  });
 
+                  $('.newDate').css('border-color','red');
+                  $('.newTime1').css('border-color','red');
+
+                  errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                  errors['calls_meeting_call_'].custom_message1 = true;
+              }
+
+          }
+          //Comparar fecha inicio vs fecha fin
+          if($(".newTime1").val()!="" && $(".newTime2").val()){
+              //Fecha inicio
+              var fechaInicioCompletaConHora=fechaCompleta+" "+this.convertTo24Format($(".newTime1").val());
+              var fechaInicioCompare=Date.parse(new Date(fechaInicioCompletaConHora));
+              //Fecha fin
+              var fechaFinCompletaConHora=fechaFinCompleta+" "+this.convertTo24Format($(".newTime2").val());
+              var fechaFinCompare=Date.parse(new Date(fechaFinCompletaConHora));
+
+              if(fechaFinCompare < fechaInicioCompare){
+
+                  app.alert.show("Fecha no valida", {
+                      level: "error",
+                      title: "La fecha fin no puede ser antes de la fecha inicio",
+                      autoClose: false
+                  });
+
+                  $('.newDate2').css('border-color','red');
+                  $('.newTime2').css('border-color','red');
+
+                  errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
+                  errors['calls_meeting_call_'].custom_message1 = true;
+
+              }
+
+          }
         }
-
-        //Comparar fecha inicio vs fecha fin
-        if($(".newTime1").val()!="" && $(".newTime2").val()){
-            //Fecha inicio
-            var fechaInicioCompletaConHora=fechaCompleta+" "+this.convertTo24Format($(".newTime1").val());
-            var fechaInicioCompare=Date.parse(new Date(fechaInicioCompletaConHora));
-            //Fecha fin
-            var fechaFinCompletaConHora=fechaFinCompleta+" "+this.convertTo24Format($(".newTime2").val());
-            var fechaFinCompare=Date.parse(new Date(fechaFinCompletaConHora));
-
-            if(fechaFinCompare < fechaInicioCompare){
-
-                app.alert.show("Fecha no valida", {
-                    level: "error",
-                    title: "La fecha fin no puede ser antes de la fecha inicio",
-                    autoClose: false
-                });
-
-                $('.newDate2').css('border-color','red');
-                $('.newTime2').css('border-color','red');
-
-                errors['calls_meeting_call_'] = errors['calls_meeting_call_'] || {};
-                errors['calls_meeting_call_'].custom_message1 = true;
-
-            }
-
-        }
-
-
         callback(null, fields, errors);
     },
 
@@ -607,36 +629,41 @@
         myObjetivos={};
         myObjetivos.records=[];
 
-        //Itera myobject
-        Object.keys(selfRella.myobject.records).forEach(function(key) {
-            myObjetivos.records.push(selfRella.myobject.records[key]);
-        });
+        if (this.edicion) {
+          //Itera myobject
+          Object.keys(selfRella.myobject.records).forEach(function(key) {
+              myObjetivos.records.push(selfRella.myobject.records[key]);
+          });
 
-        //Itera myDeletedObj
-        Object.keys(selfRella.myDeletedObj.records).forEach(function(key) {
-            myObjetivos.records.push(selfRella.myDeletedObj.records[key]);
-        });
+          //Itera myDeletedObj
+          Object.keys(selfRella.myDeletedObj.records).forEach(function(key) {
+              myObjetivos.records.push(selfRella.myDeletedObj.records[key]);
+          });
 
-        selfRella.nuevoRegistro.objetivoE=myObjetivos;
-        // if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null || this.model.get('reunion_objetivos').records.length==0) {
-        //     errors['reunion_objetivos'] = "Al menos un objetivo es requerido.";
-        //     errors['reunion_objetivos'].required = true;
-        // }
+          selfRella.nuevoRegistro.objetivoE=myObjetivos;
+          // if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null || this.model.get('reunion_objetivos').records.length==0) {
+          //     errors['reunion_objetivos'] = "Al menos un objetivo es requerido.";
+          //     errors['reunion_objetivos'].required = true;
+          // }
+        }
+
         callback(null, fields, errors);
     },
 
     validaobjetivosE: function (fields, errors, callback) {
         var cont=0;
-        $('.objetivoEselect').find('.span10').each(function () {
+        if (this.edicion) {
+          $('.objetivoEselect').find('.span10').each(function () {
 
-            if ($(this).val()=="") {
+              if ($(this).val()=="") {
 
-                $(this).css('border-color', 'red');
-                errors[$(this)] = errors['<b>Favor de no añadir Objetivo(s) vac\u00EDos</b>'] || {};
-                errors[$(this)].required = true;
-            }
+                  $(this).css('border-color', 'red');
+                  errors[$(this)] = errors['<b>Favor de no añadir Objetivo(s) vac\u00EDos</b>'] || {};
+                  errors[$(this)].required = true;
+              }
 
-        });
+          });
+        }
         callback(null, fields, errors);
     },
 
@@ -800,7 +827,7 @@
         function format(v) { return v < 10 ? '0' + v: v; }
 
         var m = t.split(':').reduce(function (h, m) { return h * 60 + +m; });
-    
+
         m = Math.ceil(m / 15) * 15;
         return [Math.floor(m / 60), m % 60].map(format).join(':');
     },
@@ -823,13 +850,13 @@
     * */
     cancelClicked: function() {
 
-        if(this.aux_reunLlam !=null){
-
-            if(this.aux_reunLlam.records.length>0){
-                this.reunLlam=this.aux_reunLlam;
-            }
-
+      if(this.aux_reunLlam !=null){
+        if(this.aux_reunLlam.records != undefined){
+          if(this.aux_reunLlam.records.length>0){
+            this.reunLlam=this.aux_reunLlam;
+          }
         }
+      }
 
         //Llamando a función cancelClicked de caja de la vista de Llamadas
         this.view._super('cancelClicked');

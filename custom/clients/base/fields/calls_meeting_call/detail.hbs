@@ -3,29 +3,36 @@ author: Salvador Lopez Balleza
 fecha: 21/06/2019
 -->
 <div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
-	<div>
-		<table id="Reunion-Llamada" class="table table-striped">
-			<thead>
-				<tr bgcolor="#0679c8" style="color:#fff">
-					<th>Asunto</th>
-					<th>Fecha de inicio</th>
-					<th>Fecha de fin</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each reunLlam.records}}
-				<tr>
-					<td class="CampoAsunto">
-                        <a href="#{{str_link}}" data-type="relate" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
-                            {{name}}
-                        </a>
+	{{#if reunLlam.records}}
+		<div>
+			<table id="Reunion-Llamada" class="table table-striped">
+				<thead>
+					<tr bgcolor="#0679c8" style="color:#fff">
+						<th>Asunto</th>
+						<th>Fecha de inicio</th>
+						<th>Fecha de fin</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each reunLlam.records}}
+					<tr>
+						<td class="CampoAsunto">
+	                        <a href="#{{str_link}}" data-type="relate" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+	                            {{name}}
+	                        </a>
 
-                    </td>
-					<td class="CamFechaIni">{{date_start}}</td>
-					<td class="CamFechaFin">{{date_end}}</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</div>
+	                    </td>
+						<td class="CamFechaIni">{{date_start}}</td>
+						<td class="CamFechaFin">{{date_end}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	{{else}}
+		<div style="color:gray;" class="row-fluid">
+			<div class="span12" align="center"> Se ha creado una {{typeModule}} para un usuario diferente a usted</div>
+		</div>
+	{{/if}}
+
 </div>
