@@ -479,17 +479,35 @@
 
         } else {
             //Pide teléfono/correo requerido
-            if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor' && (!this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA'))) {
-                if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
-                    app.alert.show("Correo requerido", {
-                        level: "error",
-                        title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
-                        autoClose: false
-                    });
-                    errors['email'] = errors['email_telefono'] || {};
-                    errors['email'].required = true;
-                    errors['account_telefonos'] = errors['account_telefonos'] || {};
-                    errors['account_telefonos'].required = true;
+            if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor') {
+                var relaciones = this.model.get('tipo_relacion_c');
+                relaciones=relaciones.toString();
+
+                relaciones = relaciones.replace(/Referencia Cliente/g, "");
+                relaciones = relaciones.replace(/Referencia Proveedor/g, "");
+                relaciones = relaciones.replace(/Propietario Real/g, "");
+                relaciones = relaciones.replace(/Contacto/g, "");
+                relaciones = relaciones.replace(/Proveedor de Recursos L/g, "");
+                relaciones = relaciones.replace(/Proveedor de Recursos F/g, "");
+                relaciones = relaciones.replace(/Proveedor de Recursos CA/g, "");
+                relaciones = relaciones.replace(/Proveedor de Recursos CS/g, "");
+                relaciones = relaciones.replace(/^/g, "");
+                relaciones = relaciones.replace(/,/g, "");
+                relaciones = relaciones.replace(/ /g, "");
+
+                if (relaciones != "") {
+
+                    if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+                        app.alert.show("Correo requerido", {
+                            level: "error",
+                            title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                            autoClose: false
+                        });
+                        errors['email'] = errors['email_telefono'] || {};
+                        errors['email'].required = true;
+                        errors['account_telefonos'] = errors['account_telefonos'] || {};
+                        errors['account_telefonos'].required = true;
+                    }
                 }
             }
         }
@@ -921,14 +939,31 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real') && !this.model.get('tipo_relacion_c').includes('Contacto')
-        && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') && !this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA'))) {
-            if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
-                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-                errors['estadocivil_c'].required = true;
+        if (this.model.get('tipo_registro_c') == 'Persona') {
+            var relaciones = this.model.get('tipo_relacion_c');
+            relaciones=relaciones.toString();
+
+            relaciones = relaciones.replace(/Referencia Cliente/g, "");
+            relaciones = relaciones.replace(/Referencia Proveedor/g, "");
+            relaciones = relaciones.replace(/Propietario Real/g, "");
+            relaciones = relaciones.replace(/Contacto/g, "");
+            relaciones = relaciones.replace(/Proveedor de Recursos L/g, "");
+            relaciones = relaciones.replace(/Proveedor de Recursos F/g, "");
+            relaciones = relaciones.replace(/Proveedor de Recursos CA/g, "");
+            relaciones = relaciones.replace(/Proveedor de Recursos CS/g, "");
+            relaciones = relaciones.replace(/^/g, "");
+            relaciones = relaciones.replace(/,/g, "");
+            relaciones = relaciones.replace(/ /g, "");
+
+            if (relaciones != "") {
+                if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
+                    errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                    errors['estadocivil_c'].required = true;
+                }
             }
         }
         callback(null, fields, errors);
+
     },
 
     valida_requeridos: function(fields, errors, callback) {
