@@ -287,9 +287,6 @@
         // this.model.on("change:tipo_registro_c", _.bind(function () {
         //     this.model.set('tipo_registro_c','Persona');
         // }, this));
-        //Añade estilo de multiselect a la vista cuando esta se pierde al crear una cuenta nueva a traves de una relacion.
-        $('.select2-container-multi').attr('style', 'width: 100%');
-        $('.select2-container-multi').addClass("select2-choices-pills-close");
         /*
          * @author Carlos Zaragoza ortiz
          * Ocultar campo de estatus Activo/Inactivo en creaci�n de personas
