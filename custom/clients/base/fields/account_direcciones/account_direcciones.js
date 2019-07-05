@@ -309,6 +309,8 @@
      * @param  {object} evt, Objeto que contiene información del evento
      */
      updateValueIndicadorMultiselect:function (evt) {
+        this.$('.select2-container-multi').attr('style', 'width: 100%');
+        this.$('.select2-container-multi').addClass("select2-choices-pills-close");
         var valores=evt.val;
         var id= this._getIndicador(null,valores)
         //Estableciendo valores para solo 1 valor seleccionado
@@ -322,6 +324,8 @@
       * @param  {object} evt, Objeto que contiene información del evento
       */
      updateValueTipoMultiselect:function(evt){
+         this.$('.select2-container-multi').attr('style', 'width: 100%');
+         this.$('.select2-container-multi').addClass("select2-choices-pills-close");
          var valores=evt.val;
          var id= this._getTipoDireccion(null,valores)
          //Estableciendo valores para solo 1 valor seleccionado
@@ -405,7 +409,7 @@
 
         //contar las direcciones fiscales existentes
         var fiscalCounter = 0;
-        $('.existingIndicador').each(function(){
+        self.$('.existingIndicador').each(function(){
             if (String($(this).find('option:selected').text()).toLowerCase().indexOf('fiscal') >= 0) {
                 fiscalCounter = parseInt(fiscalCounter + 1);
             }
@@ -417,7 +421,7 @@
         }
 
         //contar las direcciones fiscales nuevas
-        $('.newIndicador').each(function(){
+        self.$('.newIndicador').each(function(){
             if (String($(this).find('option:selected').text()).toLowerCase().indexOf('fiscal') >= 0) {
                 fiscalCounter = parseInt(fiscalCounter + 1);
             }
@@ -1125,7 +1129,7 @@ populateColoniasByMunicipio:function(evt){
     $('select.newColoniaTemp').empty();
 
     var id_municipio=$(evt.currentTarget).val();
-    var cp=$('#postalInputTemp').val();
+    var cp=this.$('#postalInputTemp').val();
 
     if(id_municipio != null && id_municipio != "" ){
 
@@ -1159,7 +1163,7 @@ populateColoniasByMunicipio:function(evt){
         //$(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').empty();
 
         var id_municipio=$(evt.currentTarget).val();
-        var cp=$(evt.currentTarget).parent().parent().parent().find('#existingPostalInput').val();
+        var cp=this.$(evt.currentTarget).parent().parent().parent().find('#existingPostalInput').val();
 
         if(id_municipio != null && id_municipio != "" ){
 
@@ -1928,77 +1932,73 @@ populateColoniasByMunicipio:function(evt){
 
 
         //Valida tipo de direccion
-        if ($('.newTipodedireccion').val() == '0' || $('.newTipodedireccion').val() == null) {
+        if (this.$('.newTipodedireccion').val() == '0' || this.$('.newTipodedireccion').val() == null) {
             errorMsg = 'Tipo de direccion requerido';
             dirError = true; dirErrorCounter++;
-            $('.newTipodedireccion').css('border-color', 'red');
+            this.$('.newTipodedireccion').css('border-color', 'red');
         } else {
-            $('.newTipodedireccion').css('border-color', '');
+            this.$('.newTipodedireccion').css('border-color', '');
         }
 
         //Valida tipo de direccion Multiselect
-        if ($('#multi_tipo').val() == null || $('#multi_tipo').val() == "") {
+        if (this.$('#multi_tipo').val() == null || this.$('#multi_tipo').val() == "") {
             errorMsg = 'Tipo de direccion requerido';
             dirError = true; dirErrorCounter++;
-            $('#s2id_multi_tipo ul').css('border-color', 'red');
+            this.$('#s2id_multi_tipo ul').css('border-color', 'red');
         } else {
-            $('#s2id_multi_tipo ul').css('border-color', '');
+            this.$('#s2id_multi_tipo ul').css('border-color', '');
         }
 
         //Valida indicador
-        if ($('#multi1').val() == null || $('#multi1').val() == "") {
+        if (this.$('#multi1').val() == null || this.$('#multi1').val() == "") {
             errorMsg = 'Indicador de direcci\u00F3n requerido';
 
             dirError = true; dirErrorCounter++;
 
-            $('#s2id_multi1 ul').css('border-color', 'red');  //Validación para pintar el campo Indicador.
+            this.$('#s2id_multi1 ul').css('border-color', 'red');  //Validación para pintar el campo Indicador.
         } else {
-            $('#s2id_multi1 ul').css('border-color', '');
+            this.$('#s2id_multi1 ul').css('border-color', '');
             //$('#multi1').css('border-color', '');
 
         }
 
         //Valida código postal
-        if ($('#postalInputTemp').val() == '') {
+        if (this.$('#postalInputTemp').val() == '') {
             errorMsg = 'C\u00F3digo postal requerido';
             dirError = true; dirErrorCounter++;
-            $('#postalInputTemp').css('border-color', 'red');
+            this.$('#postalInputTemp').css('border-color', 'red');
         } else {
-            $('#postalInputTemp').css('border-color', '');
+            this.$('#postalInputTemp').css('border-color', '');
 
         }
 
         //Valida extensión de código postal y valida únicamente números
         var pattern = /^\d+$/;
 
-        if ($('#postalInputTemp').val().length !=5 || !pattern.test($('#postalInputTemp').val())) {
-
-            $('#postalInputTemp').css('border-color', 'red');
-            return;
-
-
+        if (this.$('#postalInputTemp').val().length !=5 || !pattern.test(this.$('#postalInputTemp').val())) {
+            this.$('#postalInputTemp').css('border-color', 'red');
         } else {
-            $('#postalInputTemp').css('border-color', '');
+            this.$('#postalInputTemp').css('border-color', '');
 
         }
 
         //Valida Ciudad
-        if ($('select.newCiudadTemp').val() == '1') {
+        if (this.$('select.newCiudadTemp').val() == '1') {
             errorMsg = 'Favor de seleccionar una ciudad';
             dirError = true; dirErrorCounter++;
-            $('select.newCiudadTemp').css('border-color', 'red');
+            this.$('select.newCiudadTemp').css('border-color', 'red');
         } else {
-            $('select.newCiudadTemp').css('border-color', '');
+            this.$('select.newCiudadTemp').css('border-color', '');
 
         }
 
         //Valida colonia
-        if ($('select.newColoniaTemp').val() == '1') {
+        if (this.$('select.newColoniaTemp').val() == '1') {
             errorMsg = 'Favor de seleccionar una colonia';
             dirError = true; dirErrorCounter++;
-            $('select.newColoniaTemp').css('border-color', 'red');
+            this.$('select.newColoniaTemp').css('border-color', 'red');
         } else {
-            $('select.newColoniaTemp').css('border-color', '');
+            this.$('select.newColoniaTemp').css('border-color', '');
 
         }
 
@@ -2066,22 +2066,22 @@ populateColoniasByMunicipio:function(evt){
          */
 
         //Valida Calle
-        if ($('.newCalle').val() == '' || $('.newCalle').val() == null) {
+        if (this.$('.newCalle').val() == '' || this.$('.newCalle').val() == null) {
             errorMsg = 'Calle es requerida';
             dirError = true; dirErrorCounter++;
-            $('.newCalle').css('border-color', 'red');
+            this.$('.newCalle').css('border-color', 'red');
         } else {
-            $('.newCalle').css('border-color', '');
+            this.$('.newCalle').css('border-color', '');
 
         }
 
         //Valida Num Ext
-        if ($('.newNumExt').val() == '' || $('.newNumExt').val() == null) {
+        if (this.$('.newNumExt').val() == '' || this.$('.newNumExt').val() == null) {
             errorMsg = 'Numero Exterior es requerido';
             dirError = true; dirErrorCounter++;
-            $('.newNumExt').css('border-color', 'red');
+            this.$('.newNumExt').css('border-color', 'red');
         } else {
-            $('.newNumExt').css('border-color', '');
+            this.$('.newNumExt').css('border-color', '');
 
         }
 
@@ -2098,7 +2098,7 @@ populateColoniasByMunicipio:function(evt){
 
         calle = $.trim(calle);
 
-        var nuevaDir = $('.newCalle').val() + $('.newNumExt').val() + $('.newNumInt').val()+ $('.newColoniaTemp').val()+ $('.newMunicipioTemp').val()+$('.newEstadoTemp').val() + $('.newCiudadTemp').val();
+        var nuevaDir = this.$('.newCalle').val() + this.$('.newNumExt').val() + this.$('.newNumInt').val()+ this.$('.newColoniaTemp').val()+ this.$('.newMunicipioTemp').val()+this.$('.newEstadoTemp').val() + this.$('.newCiudadTemp').val();
         nuevaDir=nuevaDir.replace(/ /g, "");
         nuevaDir=nuevaDir.toUpperCase();
         var existingDir = this.model.get("account_direcciones");
@@ -2125,7 +2125,7 @@ populateColoniasByMunicipio:function(evt){
             return;
         }
 
-        if ((calle !== '') && (this._addNewDireccionToModel(calle))) {
+        if ((calle !== '') && (this._ToModel(calle))) {
             // build the new direccion field
             //var country_model = app.metadata.getCountry($('.newPaisDir').val());
             var country_model = app.metadata.getCountry($('.newPaisTemp').val());
@@ -2151,7 +2151,7 @@ populateColoniasByMunicipio:function(evt){
             // console.log($('.newPostal').val());
             direccionFieldHtml = this._buildDireccionFieldHtml({
                 tipodedireccion: $('.newTipodedireccion').val(),
-                tipodedireccion_multi:$("#multi_tipo").val(),
+                tipodedireccion_multi:this.$("#multi_tipo").val(),
                 tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
 
                 //pais: $('.newPaisDir').val(),
@@ -2162,34 +2162,34 @@ populateColoniasByMunicipio:function(evt){
 
                 //estado: $('.newEstado').val(),
                 estado: $('.newEstadoTemp').val(),
-                estado_code_label:$('.newEstadoTemp option:selected').text(),
+                estado_code_label:this.$('.newEstadoTemp option:selected').text(),
 
                 //dire_direccion_dire_estadodire_estado_ida: $('.newEstado').val(),
                 dire_direccion_dire_estadodire_estado_ida: $('.newEstadoTemp').val(),
 
                 //municipio: $('.newMunicipio').val(),
                 municipio: $('.newMunicipioTemp').val(),
-                municipio_code_label:$('.newMunicipioTemp option:selected').text(),
+                municipio_code_label:this.$('.newMunicipioTemp option:selected').text(),
 
                 indicador: $('.newIndicador').val(),
                 indicador_label: dir_indicador_list[$('.newIndicador').val()],
                 //Añadiendo nuevo atributo
-                indicador_multi:$("#multi1").val(),
+                indicador_multi:this.$("#multi1").val(),
 
                 //dire_direccion_dire_municipiodire_municipio_ida: $('.newMunicipio').val(),
                 dire_direccion_dire_municipiodire_municipio_ida: $('.newMunicipioTemp').val(),
 
                 //ciudad: $('.newCiudad').val(),
-                ciudad: $('.newCiudadTemp').val(),
-                ciudad_label: $('.newCiudadTemp option:selected').text(),
+                ciudad: this.$('.newCiudadTemp').val(),
+                ciudad_label: this.$('.newCiudadTemp option:selected').text(),
 
                 //dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudad').val(),
-                dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudadTemp').val(),
+                dire_direccion_dire_ciudaddire_ciudad_ida: this.$('.newCiudadTemp').val(),
 
                 //postal: $('.newPostal').val(),
                 postal: $('#postalHidden').val(),
 
-                postal_code_label: $('#postalInputTemp').val(),
+                postal_code_label: this.$('#postalInputTemp').val(),
 
                 //dire_direccion_dire_codigopostaldire_codigopostal_ida: $('.newPostal').val(),
                 dire_direccion_dire_codigopostaldire_codigopostal_ida: $('#postalHidden').val(),
@@ -2198,15 +2198,15 @@ populateColoniasByMunicipio:function(evt){
                 colonia_new_html: $('.newColoniaTemp').html(),
 
                 //colonia: $('.newColonia').val(),
-                colonia: $('.newColoniaTemp').val(),
-                colonia_label:$('.newColoniaTemp option:selected').text(),
+                colonia: this.$('.newColoniaTemp').val(),
+                colonia_label:this.$('.newColoniaTemp option:selected').text(),
 
                 //dire_direccion_dire_coloniadire_colonia_ida: $('.newColonia').val(),
-                dire_direccion_dire_coloniadire_colonia_ida: $('.newColoniaTemp').val(),
+                dire_direccion_dire_coloniadire_colonia_ida: this.$('.newColoniaTemp').val(),
 
                 calle: calle,
-                numint: $('.newNumInt').val(),
-                numext: $('.newNumExt').val(),
+                numint: this.$('.newNumInt').val(),
+                numext: this.$('.newNumExt').val(),
                 principal: currentValue && (currentValue.length === 1)
             });
 
@@ -2435,16 +2435,16 @@ populateColoniasByMunicipio:function(evt){
      */
 
 
-     _addNewDireccionToModel: function (calle) {
+     _ToModel: function (calle) {
         //var existingDirecciones = this.model.get('account_direcciones');
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
         if (this.context.attributes.create == true && existingDirecciones == undefined) {
           existingDirecciones=[];
         }
-        var country_model = app.metadata.getCountry($('.newPaisDir').val());
-        var country_modelTemp = app.metadata.getCountry($('.newPaisTemp').val());
-        var postal_model = app.metadata.getPostalCode($('.newPostal').val());
-        var postal_modelTemp = app.metadata.getPostalCode($('#postalHidden').val());
+        var country_model = app.metadata.getCountry(this.$('.newPaisDir').val());
+        var country_modelTemp = app.metadata.getCountry(this.$('.newPaisTemp').val());
+        var postal_model = app.metadata.getPostalCode(this.$('.newPostal').val());
+        var postal_modelTemp = app.metadata.getPostalCode(this.$('#postalHidden').val());
         var dir_tipo_list = app.lang.getAppListStrings('tipodedirecion_list');
         var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
 
@@ -2473,8 +2473,8 @@ populateColoniasByMunicipio:function(evt){
        // if(!this.direccionExistente(existingDirecciones,calle))
        // {
         existingDirecciones.push({
-            tipodedireccion: $('.newTipodedireccion').val(),
-            tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
+            tipodedireccion: this.$('.newTipodedireccion').val(),
+            tipo_label: dir_tipo_list[this.$('.newTipodedireccion').val()],
                 //pais: $('.newPaisDir').val(),
 
                 pais: country_idTemp,
@@ -2484,47 +2484,47 @@ populateColoniasByMunicipio:function(evt){
                 dire_direccion_dire_paisdire_pais_ida: country_idTemp,
 
                 //estado: $('.newEstado').val(),
-                estado: $('.newEstadoTemp').val(),
+                estado: this.$('.newEstadoTemp').val(),
 
                 //dire_direccion_dire_estadodire_estado_ida: $('.newEstado').val(),
-                dire_direccion_dire_estadodire_estado_ida: $('.newEstadoTemp').val(),
+                dire_direccion_dire_estadodire_estado_ida: this.$('.newEstadoTemp').val(),
 
                 //municipio: $('.newMunicipio').val(),
-                municipio: $('.newMunicipioTemp').val(),
+                municipio: this.$('.newMunicipioTemp').val(),
 
                 //dire_direccion_dire_municipiodire_municipio_ida: $('.newMunicipio').val(),
-                dire_direccion_dire_municipiodire_municipio_ida: $('.newMunicipioTemp').val(),
+                dire_direccion_dire_municipiodire_municipio_ida: this.$('.newMunicipioTemp').val(),
 
-                indicador: $('.newIndicador').val(),
-                indicador_label: dir_indicador_list[$('.newIndicador').val()],
+                indicador: this.$('.newIndicador').val(),
+                indicador_label: dir_indicador_list[this.$('.newIndicador').val()],
 
                 //ciudad: $('.newCiudad').val(),
-                ciudad: $('.newCiudadTemp').val(),
+                ciudad: this.$('.newCiudadTemp').val(),
 
                 //dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudad').val(),
-                dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudadTemp').val(),
+                dire_direccion_dire_ciudaddire_ciudad_ida: this.$('.newCiudadTemp').val(),
 
                 //postal: $('.newPostal').val(),
-                postal: $('#postalHidden').val(),
+                postal: this.$('#postalHidden').val(),
 
                 //codigopostal: $('.newPostal').val(),
-                codigopostal: $('#postalHidden').val(),
+                codigopostal: this.$('#postalHidden').val(),
 
                 //dire_direccion_dire_codigopostaldire_codigopostal_ida: $('.newPostal').val(),
-                dire_direccion_dire_codigopostaldire_codigopostal_ida: $('#postalHidden').val(),
+                dire_direccion_dire_codigopostaldire_codigopostal_ida: this.$('#postalHidden').val(),
 
                 //colonia: $('.newColonia').val(),
-                colonia: $('.newColoniaTemp').val(),
+                colonia: this.$('.newColoniaTemp').val(),
 
                 //dire_direccion_dire_coloniadire_colonia_ida: $('.newColonia').val(),
-                dire_direccion_dire_coloniadire_colonia_ida: $('.newColoniaTemp').val(),
+                dire_direccion_dire_coloniadire_colonia_ida: this.$('.newColoniaTemp').val(),
 
                 //colonia_new_html: $('.newColonia').html(),
-                colonia_new_html: $('.newColoniaTemp').html(),
+                colonia_new_html: this.$('.newColoniaTemp').html(),
 
                 calle: calle,
-                numint: $('.newNumInt').val(),
-                numext: $('.newNumExt').val(),
+                numint: this.$('.newNumInt').val(),
+                numext: this.$('.newNumExt').val(),
                 principal: (existingDirecciones.length === 0),
                 inactivo: false
             });
@@ -2751,8 +2751,7 @@ populateColoniasByMunicipio:function(evt){
      * @private
      */
      _clearNewDireccionField: function () {
-        this._getNewDireccionField()
-        .val('');
+        this._getNewDireccionField().val('');
         $('.newTipodedireccion').val([]);
         $('.newPaisDir').val('');
         $('.newEstado').val('');
@@ -2767,8 +2766,8 @@ populateColoniasByMunicipio:function(evt){
         $('.newColonia').empty();
 
         //Limpiando campos que se llenan automáticamente por api custom
-        $('#postalInputTemp').val('');
-        $('#postalHidden').val('');
+        this.$('#postalInputTemp').val('');
+        this.$('#postalHidden').val('');
         $('.newPaisTemp').val('');
         $('.newEstadoTemp').val('');
         $('.newMunicipioTemp').val('');
@@ -2776,11 +2775,11 @@ populateColoniasByMunicipio:function(evt){
         $('.newColoniaTemp').val('');
 
         //limpiando campo multiSelect
-        $("#multi1").select2('val',[]);
-        $("#multi1").trigger('change');
+        this.$("#multi1").select2('val',[]);
+        this.$("#multi1").trigger('change');
         //Limpiando campo multiselect de tipo de dirección
-        $("#multi_tipo").select2('val',[]);
-        $("#multi_tipo").trigger('change');
+        this.$("#multi_tipo").select2('val',[]);
+        this.$("#multi_tipo").trigger('change');
         $('[data-type="account_direcciones"]').removeClass('error');
         $('.direcciondashlet').css('border-color', '');
     },
