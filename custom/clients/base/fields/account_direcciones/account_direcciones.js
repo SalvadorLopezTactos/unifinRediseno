@@ -1304,41 +1304,23 @@ populateColoniasByMunicipio:function(evt){
         //var $select = $('#multi1');
         this._super("_render");
         //Se establece formato de multiselect a campo select con id "multi1"
-        /*
         $('#multi1').select2({
             width:'100%',
             //minimumResultsForSearch:7,
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-        */
-        $('select.multi1').each(function(){
-            $(this).select2({
-                width:'100%',
-                closeOnSelect: false,
-                containerCssClass: 'select2-choices-pills-close'
-            });
-        });
 
         //Formato multiselect para campo tipo
-        /*
         $('#multi_tipo').select2({
             width:'100%',
             //minimumResultsForSearch:7,
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-        */
 
-        $('select.multi_tipo').each(function(){
-            $(this).select2({
-                width:'100%',
-                closeOnSelect: false,
-                containerCssClass: 'select2-choices-pills-close'
-            });
-        });
-
-
+        $('.select2-container-multi').attr('style', 'width: 100%');
+        $('.select2-container-multi').addClass("select2-choices-pills-close");
 
         var data = [
         { id: 0, text: 'enhancement' },
