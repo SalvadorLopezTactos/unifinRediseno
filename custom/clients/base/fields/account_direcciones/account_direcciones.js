@@ -1315,6 +1315,9 @@ populateColoniasByMunicipio:function(evt){
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        $('.select2-container-multi').attr('style', 'width: 100%');
+        $('.select2-container-multi').addClass("select2-choices-pills-close");
+
         var data = [
         { id: 0, text: 'enhancement' },
         { id: 1, text: 'bug' },
