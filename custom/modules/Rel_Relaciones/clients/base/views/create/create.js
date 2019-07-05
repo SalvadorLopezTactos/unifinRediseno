@@ -826,6 +826,8 @@
                                                 callback(null, fields, errors);
                                             }, this)
                                         });
+                                    }else{
+                                        callback(null, fields, errors);
                                     }
                                 }else {
                                     if (data.razonsocial_c == "") {
@@ -856,6 +858,8 @@
                                                 callback(null, fields, errors);
                                             }, this)
                                         });
+                                    }else{
+                                        callback(null, fields, errors);
                                     }
                                 }
                             }, this)
@@ -929,8 +933,11 @@
                                                         autoClose: false
                                                     });
                                                 }
+                                                callback(null, fields, errors);
                                             }, this)
                                         });
+                                    }else{
+                                        callback(null, fields, errors);
                                     }
                                 }else {
                                     if (data.razonsocial_c == "") {
@@ -956,9 +963,11 @@
                                                     });
 
                                                 }
-
+                                                callback(null, fields, errors);
                                             }, this)
                                         });
+                                    }else{
+                                        callback(null, fields, errors);
                                     }
                                 }
                             }, this)

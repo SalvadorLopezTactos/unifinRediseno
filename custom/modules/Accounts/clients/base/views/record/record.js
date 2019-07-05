@@ -64,7 +64,6 @@
         */
 
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
-        this.model.addValidationTask('proveedorDeRecursos',_.bind(this.proveedorRecursos, this));
 
         /*
          Eduardo Carrasco
@@ -205,6 +204,8 @@
         this.model.addValidationTask('LeasingNV',_.bind(this.requeridosleasingnv, this));
         this.model.addValidationTask('FactorajeNV',_.bind(this.requeridosfacnv, this));
         this.model.addValidationTask('CreditAutoNV',_.bind(this.requeridoscanv, this));
+        this.model.addValidationTask('proveedorDeRecursos',_.bind(this.proveedorRecursos, this));
+        this.model.addValidationTask('valida_direcciones_de_relaciones_PR',_.bind(this.direccionesparticularPR, this));
 
     },
 
@@ -3578,6 +3579,7 @@
 
                                         if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
                                             relacionl++;
+
                                         }
                                     }
                                     //Producto Credito Automotriz
@@ -3648,16 +3650,37 @@
                                     autoClose: false
                                 });
                             }
-
                             callback(null, fields, errors);
                         }, this)
                     });
-
-
                 }else{
                     callback(null, fields, errors);
                 }
 
             },
+
+    direccionesparticularPR: function (fields, errors, callback){
+        //Valida direcciones en relaciones
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2") {
+            var apicalldir = app.api.buildURL('DireCuenta/' + this.model.get("id"), null);
+            app.api.call('GET', apicalldir, {}, {
+                success: _.bind(function (data) {
+                    if (data!=""){
+                        app.alert.show("Falta direccion Particular en cuenta", {
+                            level: "error",
+                            messages: 'Hace falta agregar una dirección de tipo <b>Particular</b> para la o siguientes <b>Cuentas</b><br> (En una relación de tipo <b>Proveedor de Recursos</b>):<br>' + data,
+                            autoClose: false
+                        });
+                        errors['errordireccionPR'] = errors['errordireccionPR'] || {};
+                        errors['errordireccionPR'].required = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else{
+            callback(null, fields, errors);
+        }
+
+    },
 
 })
