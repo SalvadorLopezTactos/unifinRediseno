@@ -780,11 +780,16 @@
                 }
 
             }else{
-                if(this.context.parent.get('module')=="Calls" && this.context.get('create') && this.model.get("parent_id") !=undefined){
-                    $('.nombreCuenta').find('a').remove();
-                    $('.nombreCuenta').append( '<a href="#Accounts/'+this.model.get("parent_id")+' class="campo3rel-ap PR-link" data-type="relate" data-field="campo3AP" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">'+this.model.get("parent_name")+'</a>');
+                //Condición para mostrar Cuenta relacionada cuando se intenta crear la llamada desde el módulo de llamadas
+                if(this.context.parent!=null && this.context.get('create')!=undefined){
 
+                    if(this.context.parent.get('module')=="Calls" && this.context.get('create') && this.model.get("parent_id") !=undefined){
+                        $('.nombreCuenta').find('a').remove();
+                        $('.nombreCuenta').append( '<a href="#Accounts/'+this.model.get("parent_id")+' class="campo3rel-ap PR-link" data-type="relate" data-field="campo3AP" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">'+this.model.get("parent_name")+'</a>');
+
+                    }
                 }
+
             }
 
 
