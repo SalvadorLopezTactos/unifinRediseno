@@ -1365,7 +1365,7 @@
                     }
                 }
                 if (direccionesm==0){
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
 
                 }
