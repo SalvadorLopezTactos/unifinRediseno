@@ -927,9 +927,24 @@ SQL;
                 }else{
                     $GLOBALS['log']->fatal(" <".$current_user->user_name."> NO Se identificó relacion Beneficiario en:" . print_r($relacionesActivas,true));
                 }
-                //Quita propietario Real
+                //Quita propietario Real && Proveedor de los recursos L,FF,CA,CS
+                $GLOBALS['log']->fatal("relacionesActivas: " . $relacionesActivas);
                 $relacionesActivas = str_replace(',Propietario Real','', $relacionesActivas);
                 $relacionesActivas = str_replace('Propietario Real,','', $relacionesActivas);
+                $relacionesActivas = str_replace(',Proveedor de Recursos L','', $relacionesActivas);
+                $relacionesActivas = str_replace(',Proveedor de Recursos F','', $relacionesActivas);
+                $relacionesActivas = str_replace(',Proveedor de Recursos CA','', $relacionesActivas);
+                $relacionesActivas = str_replace(',Proveedor de Recursos CS','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos L,','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos F,','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos CA,','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos CS,','', $relacionesActivas);
+                $relacionesActivas = str_replace('Propietario Real','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos L','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos F','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos CA','', $relacionesActivas);
+                $relacionesActivas = str_replace('Proveedor de Recursos CS','', $relacionesActivas);
+              
 
                 $fields = array(
                     "oActualizaRelacion" => array(
