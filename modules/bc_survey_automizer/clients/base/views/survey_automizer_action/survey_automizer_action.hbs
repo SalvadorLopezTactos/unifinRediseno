@@ -1,0 +1,112 @@
+<style>
+.row{
+    margin-top:10px;
+    margin-left:20px;
+}
+.survey_automizer_action .accordion-heading{
+    border-top : 1px solid #ccc;
+    border-bottom : 1px solid #ccc;
+    cursor : default;
+    height : 55px;
+}
+.survey_automizer_action a{
+    text-decoration : none;
+    color :#555;
+    font-size :15px;
+    cursor : default;
+}
+.survey_automizer_action select{
+    width : 85%;
+}
+.survey_automizer_action .label-field{
+    font-size:12px;
+    color : #737171;
+}
+.survey_automizer_action .accordion-inner{
+    padding :5px;
+}
+.survey_automizer_action a {
+    cursor : pointer;
+}
+.survey_automizer_action a i{
+    font-size:15px;
+}
+#accordion2{
+    height:100% !important;
+}
+.btn.btn-primary.create_condition, .btn.btn-primary.create_action {
+    font-size: 14px;
+    width: 50px;
+    position: absolute;
+    right: 7px;
+    top: 45px;
+}
+
+.modal.hide.Create_Survey_Auto_Action.in .modal-body {
+    padding: 0 0 45px !important;
+    max-height: 400px;
+}
+</style>
+
+<div class='survey_automizer_action'>
+
+    <div class="accordion" id="accordion2" >
+
+        <div class="accordion-group">
+
+          <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2">
+                  <span style="margin-bottom: -4px; margin-top: -13px;position: absolute;margin-left: -11px;" class="label label-module label-module-lg label-bc_survey_automizer_condition" rel="tooltip" title="" data-placement="right" data-original-title="Survey Automation Action" tabindex="-1">
+                        <i class="fa fa-rocket" style="color:#fff;"></i>
+                    </span> 
+                   <span style="position: absolute; margin-top: -2px; margin-left: 28px; margin-bottom: -13px;"> &nbsp; Survey Automation Action </span>
+                </a>
+                
+          </div>
+
+          <div  class="accordion-body collapse in">
+
+                <div class="accordion-inner">
+                    <div class='btn btn-primary create_action' style='margin-top: -87px; margin-left: 91%;'>Create</div>
+                            
+                    <table class='table table-bordered ActionList'>
+                        <thead>
+                            <tr>
+                                <th width="5%">
+                                        <span class='label-field'>No</span>
+                                </th>
+                                <th width="25%">
+                                        <span class='label-field'>Recipient Type</span>
+                                </th>
+                                <th width="20%">
+                                        <span class='label-field'>Recipient Module</span>
+                                </th>
+                                <th width="7%">
+                                        <span class='label-field'>Email Field</span>
+                                </th>
+                                <th width="27%">
+                                        <span class='label-field'>Survey Title</span>
+                                </th>
+                                <th width="8%" style="text-align:center;">
+                                        <span class='label-field'>Email Template</span>
+                                </th>
+                                <th width="8%" style="text-align:center;">
+                                        <span class='label-field'>Action</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class='ActionListBody'>
+                            
+                        </tbody>
+                    </div>
+
+                </div>
+
+          </div>
+
+        </div>
+        
+       
+    </div>
+
+</div>

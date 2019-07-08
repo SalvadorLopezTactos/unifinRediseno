@@ -1,0 +1,96 @@
+<style>
+.Create_Survey_Auto_Condition select{
+    width : 85%;
+}
+.Create_Survey_Auto_Condition .label-field{
+    font-size:11px;
+    color : #737171;
+}
+.Create_Survey_Auto_Condition .modal-header{
+    background-color:#e8e8e8;
+}
+.Create_Survey_Auto_Condition .modal-footer{
+    height:40px;
+}
+</style>
+<div class="modal hide Create_Survey_Auto_Condition" >
+    
+    <div class="modal-header">
+        <h4 style="width:94%;display: inline-block; vertical-align: top;">Create Survey Automation Condition</h4>
+    </div>
+
+    <div class="modal-body" >
+        
+                <div class='row'>
+                        
+                        <div class='span2'>
+                                <span class='label-field'>Module</span>
+                        </div>
+                        <div class='span10'>
+                                <select class='module_selection'>
+                                        <option>Select Module</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row filter_by_row' style='display:none;'>
+                        <div class='span2'>
+                                <span class='label-field'>Filter By</span>
+                        </div>
+                        <div class='span10'>
+                                <select class='filter_by_selection' >
+                                        <option value='any_related'>Any Related</option>
+                                        <option value='all_related'>All Related</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row condition_field_row'>
+                        <div class='span2'>
+                                <span class='label-field'>Field</span>
+                        </div>
+                        <div class='span10'>
+                                <select class='field_selection' style='display:none;'>
+                                        <option>Select Field</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row condition_operator_row' style='display:none;'>
+                        <div class='span2'>
+                                <span class='label-field'>Operator</span>
+                        </div>
+                        <div class='span10'>
+                                <select class='operator_selection' style='display:none;'>
+                                        <option value='equals_to'>Equals To</option>
+                                        <option value='not_equals_to'>Not Equals To</option>
+                                        <option value='is_null'>Is null</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row condition_type_row' style='display:none;'>
+                        <div class='span2'>
+                                <span class='label-field'>Type</span>
+                        </div>
+                        <div class='span10'>
+                                <select class='type_selection' style='display:none;'>
+                                        <option value='value'>Value</option>
+                                        <option value='field'>Field</option>
+                                        <option value='any_change'>Any Change</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row condition_value_row' style='display:none;'>
+                        <div class='span2'>
+                                <span class='label-field'>Value</span>
+                        </div>
+                        <div class='span10 conditional_value' style='display:none;' >
+                        </div>
+                </div>
+                <div style='height:5px;'>
+                </div>
+                
+    </div>
+     <div class="modal-footer" >
+            <div class='btn btn-primary save_condition' style='float:left; margin-top:-9px; margin-left:-10px;' >Save Condition</div> 
+            <div class='btn cancel_condition' style='float:left; margin-top:-9px; margin-left:4px;' >Cancel</div>           
+     </div>
+</div>
+

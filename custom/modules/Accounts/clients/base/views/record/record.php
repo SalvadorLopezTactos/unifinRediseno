@@ -134,6 +134,22 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
+              13 => 
+              array (
+                'name' => 'send_survey',
+                'type' => 'rowaction',
+                'label' => 'Send Survey',
+                'acl_action' => 'send_survey',
+                'event' => 'button:send_survey:click',
+              ),
+              14 => 
+              array (
+                'name' => 'send_poll',
+                'type' => 'rowaction',
+                'label' => 'Send Poll',
+                'acl_action' => 'send_poll',
+                'event' => 'button:send_poll:click',
+              ),
             ),
           ),
           3 => 

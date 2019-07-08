@@ -1,0 +1,273 @@
+<?php
+
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+
+$dictionary['bc_survey_submit_question'] = array(
+    'table' => 'bc_survey_submit_question',
+    'audited' => true,
+    'activity_enabled' => false,
+    'duplicate_merge' => true,
+    'fields' => array(
+        'receiver_name' =>
+        array(
+            'required' => false,
+            'name' => 'receiver_name',
+            'vname' => 'LBL_RECEIVER_NAME',
+            'type' => 'varchar',
+            'massupdate' => false,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => '1',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'default' => '',
+            'full_text_search' =>
+            array(
+                'enabled' => '0',
+                'boost' => '1',
+                'searchable' => false,
+            ),
+            'calculated' => false,
+            'len' => '255',
+            'size' => '20',
+        ),
+        'survey_title' =>
+        array(
+            'name' => 'survey_title',
+            'vname' => 'LBL_SURVEY_TITLE',
+            'type' => 'varchar',
+            'dbType' => 'varchar',
+            'len' => '255',
+            'unified_search' => false,
+            'full_text_search' =>
+            array(
+                'boost' => 3,
+            ),
+            'required' => true,
+            'importable' => 'required',
+            'duplicate_merge' => 'disabled',
+            'merge_filter' => 'disabled',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'reportable' => true,
+            'size' => '20',
+        ),
+        'question_type' =>
+        array(
+            'required' => false,
+            'name' => 'question_type',
+            'vname' => 'LBL_QUESTION_TYPE',
+            'type' => 'varchar',
+            'massupdate' => false,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => '1',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'default' => '',
+            'full_text_search' =>
+            array(
+                'enabled' => '0',
+                'boost' => '1',
+                'searchable' => false,
+            ),
+            'calculated' => false,
+            'len' => '255',
+            'size' => '20',
+        ),
+        'reciepient_module' =>
+        array(
+            'required' => false,
+            'name' => 'reciepient_module',
+            'vname' => 'LBL_RECIEPIENT_MODULE',
+            'type' => 'varchar',
+            'massupdate' => false,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => '1',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'default' => '',
+            'full_text_search' =>
+            array(
+                'enabled' => '0',
+                'boost' => '1',
+                'searchable' => false,
+            ),
+            'calculated' => false,
+            'len' => '255',
+            'size' => '20',
+        ),
+        'question_id' =>
+        array(
+            'required' => false,
+            'name' => 'question_id',
+            'vname' => 'Question ID',
+            'type' => 'id',
+            'massupdate' => 0,
+            'default' => '',
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => 'visible',
+            'dependency' => false,
+        ),
+        'submission_date' =>
+        array(
+            'required' => false,
+            'name' => 'submission_date',
+            'vname' => 'LBL_SUBMISSION_DATE',
+            'type' => 'datetimecombo',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'size' => '20',
+            'enable_range_search' => false,
+            'dbType' => 'datetime',
+        ),
+        
+        'submission_type' =>
+        array(
+            'required' => false,
+            'name' => 'submission_type',
+            'vname' => 'LBL_SUBMISSION_TYPE',
+            'type' => 'varchar',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+        ),
+        'submission_ip_address' =>
+        array(
+            'required' => false,
+            'name' => 'submission_ip_address',
+            'vname' => 'LBL_SUBMISSION_IP_ADDRESS',
+            'type' => 'varchar',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+        ),
+        'schedule_on' =>
+        array(
+            'required' => false,
+            'name' => 'schedule_on',
+            'vname' => 'LBL_SCHEDULE_ON',
+            'type' => 'datetimecombo',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'size' => '20',
+            'enable_range_search' => false,
+            'dbType' => 'datetime',
+        ),
+         'submission_id' =>
+        array(
+            'required' => false,
+            'name' => 'submission_id',
+            'vname' => 'submission_id',
+            'type' => 'id',
+            'massupdate' => 0,
+            'default' => '',
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => 'visible',
+            'dependency' => false,
+    ),
+         'survey_ID' =>
+        array(
+            'required' => false,
+            'name' => 'survey_ID',
+            'vname' => 'survey_ID',
+            'type' => 'id',
+            'massupdate' => 0,
+            'default' => '',
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'audited' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => 'visible',
+            'dependency' => false,
+        ),
+    ),
+    'relationships' => array(
+    ),
+    'optimistic_locking' => true,
+    'unified_search' => true,
+    'full_text_search' => true,
+);
+
+if (!class_exists('VardefManager')) {
+    require_once 'include/SugarObjects/VardefManager.php';
+}
+VardefManager::createVardef('bc_survey_submit_question', 'bc_survey_submit_question', array('basic', 'team_security', 'assignable', 'taggable'));

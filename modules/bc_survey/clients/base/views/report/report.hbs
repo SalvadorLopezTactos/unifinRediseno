@@ -1,0 +1,177 @@
+
+<link href="custom/include/css/survey_css/report.css" rel="stylesheet"/>
+<link href="custom/include/css/survey_css/pagination.css" rel="stylesheet"/>
+<script type="text/javascript" src="custom/include/js/survey_js/custom_code.js"></script>
+<script type="text/javascript" src="custom/include/js/survey_js/htmlcanvas.js"></script>
+<style>
+.tooltip_chart {
+                                                display:inline-block;
+                                                position:relative;
+                                                border-bottom:1px dotted #666;
+                                                text-align:left;
+                                            }
+
+                                            #switchChartModel  {
+
+                                                min-width:280px;
+                                                transform:translate(-50%, 0);
+                                                padding:10px 20px;
+                                                color:#444444;
+                                                background-color:#EEEEEE;
+                                                font-weight:normal;
+                                                border-radius:15px;
+                                                position:absolute;
+                                                z-index:99999999;
+                                                box-sizing:border-box;
+                                                box-shadow:0 -5px 8px rgba(0,0,0,0.5);
+                                            }
+
+                                             #switchChartModel  i {
+                                                position:absolute;
+                                                left:15%;
+                                                margin-left:-40px;
+                                                width:24px;
+                                                height:12px;
+                                                overflow:hidden;
+transform: rotate(180deg);
+                                                margin-top: 10px;
+                                            }
+
+                                            #switchChartModel i::after {
+                                                content:'';
+                                                position:absolute;
+                                                width:12px;
+                                                height:12px;
+                                                left:50%;
+                                                transform:translate(-50%,50%) rotate(45deg);
+                                                background-color:#EEEEEE;
+                                                box-shadow:0 1px 8px rgba(0,0,0,0.5);
+                                            }
+.score_pannel{
+/*    height:40px;
+    width:40px;*/
+    display: inline-block;
+    padding: 15px 15px 15px 15px;
+    color: #000;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+/*    margin: 0 2px;*/
+    border: 1px #000 solid !important; 
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+.nav-tabs > li {
+    margin-bottom: -1px;
+   /* margin: 10px; */
+    width: 210px;
+}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    text-align: center;
+    font-size: 14px;
+}
+.nav-tabs > li > a {
+    text-align: center;
+    padding: 21px 11px;
+    font-size: 14px;
+}
+#status_report_data_section  .nav-tabs > li:not(.active) > a, #question_report_data_section  .nav-tabs > li:not(.active) > a{
+    background-color : #f0f0f0;
+    height: 0px;
+    padding-top: 12px;
+    padding-bottom: 29px;
+}
+#status_report_data_section  .nav-tabs > .active > a, #question_report_data_section  .nav-tabs > .active > a{
+     height: 0px;
+     padding-top: 10px;
+     padding-bottom: 33px;
+}
+
+.answerHistoryDetail .answerHistory{
+    cursor: text;
+}
+.answerHistoryDetail .subDateRow{
+    margin-top: 5px;
+}
+.answerHistoryDetail .answerRow{
+    border-bottom: 1px solid #eeeeee;
+    margin-left:0px;
+}
+.export-btn-group{display: inline-flex; float: right; align-items: baseline;}
+
+</style>
+<div id="demoImage1" style="height:1px;opacity:0;">
+<div id="demoImage" style=""></div> 
+</div> 
+<div class="row-fluid">
+    <div class="span8">
+        <ul class="nav nav-tabs" id="accordion2">
+            <li class="active status_report_heading"><a><i class="fa fa-pie-chart"   tabindex="-1"  >&nbsp;</i>Status Report</a></li>
+            <li class="question_report_heading"><a><i class="fa fa-bar-chart"  tabindex="-1"  ></i>&nbsp;Question Wise Report</a></li>
+            <li class="individual_report_heading"><a><i class="fa fa-users"  tabindex="-1"></i>&nbsp;Individual Report</a></li>
+        </ul>
+    </div>
+    <div class="span4">
+<form method="post" id="questionWiseImageExport" action="index.php?entryPoint=questionWiseExport" >
+<input type="hidden" name="canvasUrl" value="">
+<input type='hidden' name='userID' value='{{user_id}}'>
+<input type='hidden' name='survey_id' value='{{survey_id}}'>
+<input type='hidden' name='que_id' value=''>
+<input type='hidden' name='exportAS' value=''>
+<input type='hidden' name='textHtml' value=''>
+</form>
+                <input type="hidden" id="current_active_report_tab" value="status">
+<input type="hidden" id="hasSubmissions" value="true">
+                <input type="hidden" id="current_global_filter_logic" value="">
+                <input type="hidden" id="current_question_wise_tab" value="normal">
+                <input type="hidden" id="export_question_selection_details" value="">
+                <input type="hidden" id="export_question_selection_details_trend" value="">
+<div class="export-btn-group">
+                <div id="btn-export-report" title="Export" class="btn btn-primary" onclick="open_export_report_popup(this,'{{survey_id}}','{{user_id}}')" style=" padding: 10px; margin: 0 10px 0 0; float:left; 
+    position: relative;">Export</div>
+                <div class="btn btn-primary pull-right export-back" onclick="window.history.back();" style=" padding: 10px; margin-right:10px;  position: relative; float:left;"><i class="fa fa-rotate-left">&nbsp;</i>Go Back to Survey</div>
+    </div>
+</div>
+</div>
+      
+<div class="row-fluid">
+    <div class="span12"> 
+             <div id="status_report_data_section" style="position: fixed;width: 100%;">
+                 <div class="accordion-inner" id='status_report_data_email' style="background-color: #fff;display:none;">
+                     
+                 </div>
+                 <div class="accordion-inner" id='status_report_data_openended' style="background-color: #fff;display:none;">
+                     
+              </div>
+                 <div class="accordion-inner" id='status_report_data_combined' style="background-color: #fff;">
+       
+                 </div>
+              </div>
+       
+              <div id="question_report_data_section" style="position: fixed;width: 100%;display:none;overflow: scroll;max-height: 600px;">
+                 <div class="accordion-inner" id='question_report_data_email' style="background-color: #fff;display:none;">
+                      
+                 </div>
+                 <div class="accordion-inner" id='question_report_data_openended' style="background-color: #fff;display:none;">
+                      
+              </div>
+                 <div class="accordion-inner" id='question_report_data_combined' style="background-color: #fff;">
+       
+                 </div>
+              </div>
+       
+              <div id="individual_report_data_section" style="position: fixed;width: 100%;display:none;">
+                 <div class="accordion-inner" id='individual_report_data' style="background-color: #fff;overflow: scroll;max-height: 600px;">
+                      
+                 </div>
+              </div>
+          
+    </div>
+    
+</div>
+
+
+
+
+

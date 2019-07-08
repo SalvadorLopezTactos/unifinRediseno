@@ -1,0 +1,120 @@
+<style>
+.Create_Survey_Auto_Action select{
+    width : 85%;
+}
+.Create_Survey_Auto_Action .label-field{
+    font-size:11px;
+    color : #737171;
+}
+.Create_Survey_Auto_Action .modal-header{
+    background-color:#e8e8e8;
+}
+.Create_Survey_Auto_Action .modal-footer{
+    height:40px;
+}
+</style>
+<div class="modal hide Create_Survey_Auto_Action" >
+    
+    <div class="modal-header">
+        <h4 style="width:94%;display: inline-block; vertical-align: top;">Create Survey Automation Action</h4>
+    </div>
+
+    <div class="modal-body" >
+        
+                <div class='row action_type_row'>
+                        
+                        <div class='span3'>
+                                <span class='label-field'>Recipient Type</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='rec_type_selection'>
+                                        <option value="0">Select Recipient Type</option>
+                                        <option value="related_module">{{recipient_type.related_module}}</option>
+                                        <option value="target_module">{{recipient_type.target_module}}</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_module_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Recipient Module</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='rec_module_selection'>
+                                        <option>Select Module</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_filterBy_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Filter By</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='filter_by_selection'>
+                                        <option value='all_related'>All Related</option>
+                                        <option value='any_related'>Any Related</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_field_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Field</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='rec_field_selection'>
+                                        <option value='0'>none</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_operator_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Operator</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='operator_selection'>
+                                        <option value='Equal_To'>Equals to</option>
+                                        <option value='Not_Equal_To'>Not Equals to</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_value_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Value</span>
+                        </div>
+                        <div class='span9 value_selection_div' >
+                                <input/>
+                        </div>
+                </div>
+                <div class='row action_email_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Email Field</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='field_selection' >
+                                        <option value="to">To</option>
+                                        <option value="cc">Cc</option>
+                                        <option value="bcc">Bcc</option>
+                                <select>
+                        </div>
+                </div>
+                <div class='row action_survey_row' style='display:none;'>
+                        <div class='span3'>
+                                <span class='label-field'>Survey</span>
+                        </div>
+                        <div class='span9'>
+                                <select class='survey_selection' >
+                                        <option value='value'>Select Survey</option>
+                                <select>
+                        </div>
+                </div>
+                <div style='height:5px;'>
+                </div>
+                
+    </div>
+     <div class="modal-footer" >
+            <div class='btn btn-primary save_action' style='float:left; margin-top:-9px; margin-left:-5px;' >Save Action</div> 
+            <div class='btn cancel_action' style='float:left; margin-top:-9px; margin-left:4px;' >Cancel</div>           
+            <div class="btn previewEmailTemplate" style="display:none;float: left;margin-top: -9px;margin-left: 5px;" onclick=""><i class="fa  fa-envelope"></i>&nbsp;Preview Email Template</div>
+            <div class="btn createEmailTemplate" style="display:none;float: left;margin-top: -9px;margin-left: 5px;"><i class="fa  fa-envelope"></i>&nbsp;Create Email Template</div>
+     </div>
+</div>
+

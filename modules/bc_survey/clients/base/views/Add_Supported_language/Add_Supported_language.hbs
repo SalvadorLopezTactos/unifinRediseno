@@ -1,0 +1,81 @@
+<style>
+.Add_Supported_language{
+    border:none;
+}
+.Add_Supported_language .row{
+    margin:5px;;
+}
+.Add_Supported_language .modal-header h3 {
+    font-size:15px;
+    font-weight: normal;
+}
+.Add_Supported_language .modal-header{
+    background-color:#e8e8e8;
+    padding:5px; 
+    font-size:16px; 
+    color:#666;
+}
+.Add_Supported_language .modal-body{
+    padding: 5px 0px 0px 5px;
+}
+.Add_Supported_language .modal-body .row-fluid {
+    margin-top: 10px;
+}
+.Add_Supported_language label.span3{
+    font-size: 13px;
+    color: #797979;
+}
+.Add_Supported_language .fa-book{
+    color: #FFF;
+}
+.Add_Supported_language .modal-footer{
+    padding: 5px;
+    bottom: -38px;
+}
+
+</style>
+
+<script src="custom/include/js/survey_js/jquery.datetimepicker.js"></script>
+<div class="modal hide Add_Supported_language" >
+    <div class="modal-header">
+        <h3 class='popup_header' style="width:94%;display: inline-block; vertical-align: top;">Add Language</h3>
+        <a class="" data-dismiss="modal" style="margin-top:5px; width:4%;"><i class="fa fa-times" style="color:#555;margin-top:7px;margin-left:4px;"></i></a>
+    </div>
+    <div class="modal-body" >
+          <input type="hidden" name="lang_id"/>
+          <div class="row">
+                <div class="span2">Language</div>
+                <div class="span4">
+                        <select name='add_new_language'>
+                            <option>Select Language</option>
+                        </select>
+                </div>
+          </div>
+          <div class="row" style='display:none'>
+                <div class="span2">Status</div>
+                <div class="span4">
+                        <select name='status'>
+                            <option value='enabled'>Enabled</option>
+                            <option value='disabled'>Disabled</option>
+                        </select>
+                </div>
+          </div>
+          <div class="row">
+                <div class="span2">Text Direction</div>
+                <div class="span4">
+                        <select name='text_direction'>
+                            <option value='left_to_right'>Left to Right</option>
+                            <option value='right_to_left'>Right to Left</option>
+                        </select>
+                </div>
+          </div>
+          <div class="row">
+                <div class="span6" style='display:none;'><input type='checkbox' class='allow_copy'>&nbsp; Copy survey details and standard messages for this language from an existing survey ?</div> 
+          </div>
+    </div>
+    <div class="modal-footer" >
+      <input class='btn btn-primary' type='button' value='Save' name='save_button' style="float:left;">
+      <input class='btn ' type='button' value='Cancel' name='cancel_button' style="float:left;">
+    </div>
+
+</div>

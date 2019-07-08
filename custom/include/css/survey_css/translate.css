@@ -1,0 +1,126 @@
+body {
+    background: url("../../../../styleguide/assets/img/texture/furley_bg.png");
+}
+.bottom-language .bottom-btn,.bottom-translate .bottom-btn,.lang-span .bottom-language{
+    verticle-align:top;
+    float:left;
+}
+.translate-survey-view{
+    overflow-y:scroll;
+    max-height: 650px;
+}
+.highlidht_field{
+    color: #312525;
+    font-weight: bold;
+}
+.survey_title_tr{
+    /*  background-color:darkgray; */
+}
+.page_title_tr{
+    background-color:#d4d2d2;
+}
+.question_detail_tr{
+    background-color:#f8f8f8;
+}
+.section_detail_tr{
+    background-color:#eceaea;
+}
+.row-fluid input{
+    width : 80%;
+}
+#translate_survey_inner .nav li a:hover{
+    color:#717171;
+}
+
+.thanks_default  img{
+    max-width: 98%;
+    display: block;
+}
+
+.thanks_default  p{
+    max-width: 98%;
+}
+
+.thanks_default  div{
+    max-width: 98%;
+}
+
+.thanks_default  ul{
+    max-width: 98%;
+}
+
+.thanks_default  li{
+    max-width: 98%;
+}
+
+.thanks_default  span{
+    max-width: 98%;
+}
+
+.welcome_default img{
+    max-width: 98%; 
+    display: block;
+}
+
+.welcome_default p{
+    max-width: 98%; 
+}
+
+.welcome_default div{
+    max-width: 98%; 
+}
+
+.welcome_default span{
+    max-width: 98%; 
+}
+
+.welcome_default ul{
+    max-width: 98%; 
+}
+
+.welcome_default li{
+    max-width: 98%; 
+}
+
+.review_default img{
+    max-width: 98%; 
+    display: block;
+}
+
+.review_default p{
+    max-width: 98%; 
+}
+
+.review_default div{
+    max-width: 98%; 
+}
+
+.review_default span{
+    max-width: 98%; 
+}
+
+.review_default ul{
+    max-width: 98%; 
+}
+
+.review_default li{
+    max-width: 98%; 
+}
+
+.survey_language_inner,
+.survey_translate_tables{
+    background: #fff;
+    padding: 20px 20px 50px 20px;
+}
+.table.table-striped{
+    display: table;
+    border: 1px solid #e9e9e9;
+    border-collapse: collapse;    
+}
+.Add_Supported_language .modal-header{
+    padding: 5px 13px !important;
+}
+
+.mceLayout{
+    width: auto !important;
+}

@@ -1,0 +1,65 @@
+<div id="survey_main_div">
+<input name="send_records" id="send_records" value="{{selected_record_ids}}" type="hidden">
+<input name="send_module_name" id="send_module_name" value="{{module}}" type="hidden">
+<div id="survey_content">
+  <div id="button_div">
+     <table class="zebra" style="width: 100%;" cellpadding="0" cellspacing="0">
+       <thead>
+          <tr>
+             <th style="width: 97%;">Survey</th>
+           </tr>
+      </thead>
+      <tfoot>
+          <tr>
+              <td style="width: 97%;">&nbsp;</td>
+          </tr>
+      </tfoot>
+     <tbody style="height: 65px;">
+          <tr>
+              <td style="width: 97%; padding-top: 25px;" align="center">
+                <input class="button" value="Select Existing Survey" name="open_survey_list" type="button">&nbsp;
+                <input class="button" value="Create New Survey" onclick="select_surveys('survey_template');" type="button">
+              </td>
+          </tr>
+     </tbody>
+ </table>
+</div>
+</div>
+
+<div id="survey_list_content" style="display:none;">
+   <div id="survey_list">
+      <table class="zebra" cellpadding="1" cellspacing="1" style="width: 80%;">
+         <thead>
+            <tr>
+               <th style="width: 8%;  height: 21px;">
+                  <div style="text-align:left; font-size: 14px;">No.</div>
+               </th>
+               <th style="width: 86%; padding:10px 10px 10px 10px;height: 21px;" colspan="2">
+                  <div style="float:left; margin-top: 4px; font-size:14px;">Survey</div>
+                  <div style="float:right;">
+                     <form name="survey_search_form" onsubmit=""><input type="text" name="query" value="" style="vertical-align: bottom;"> <input type="button" name="search" value="Search" onclick="search_surveys(this,&quot;survey&quot;)">&nbsp;<input type="button" style="" value="Clear" onclick="select_surveys(&quot;survey&quot;)"></form>
+                  </div>
+               </th>
+            </tr>
+         </thead>
+         <tfoot>
+              <tr>
+                 <td><input class="btn btn-info" type="button" value="Back" name="back_button"></td>
+                 <td><input class="btn btn-danger" type="button" value="Close" name="close_button" onclick="close_survey_div();"></td>
+              </tr>
+              <tr>
+                  <td id="show_error" style="text-align: center; width: 51%; float:left;padding:15px 10px 10px 10px; height:inherit;">&nbsp;</td>
+              </tr>
+         </tfoot>
+         <tbody>
+            <tr>
+               <td style="width: 8%;">1</td>
+               <td style="width: 55%;text-align: left;">abc survey</td>
+               <td style="width: 20%; text-align: right;white-space: nowrap;" colspan="3"><input type="button" value="Send" onclick="schedule_survey('4b9e4bce-ce43-21c5-1afd-56ac5e718ef4','2016-02-01 10:56:38');">&nbsp;<input type="button" value="Send Later" onclick="schedule_survey_form(this,'4b9e4bce-ce43-21c5-1afd-56ac5e718ef4');">&nbsp;<input type="button" value="Preview" onclick="redirectToEmailTemplate('4b9e4bce-ce43-21c5-1afd-56ac5e718ef4');"></td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<a onclick="close_survey_div();" href="javascript:close_survey_div();"></a></div>

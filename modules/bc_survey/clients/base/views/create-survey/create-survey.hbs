@@ -1,0 +1,404 @@
+<link href="custom/include/css/survey_css/report.css" rel="stylesheet"/>
+<style>
+.new-page,.textbox,.commentbox,.multiselectlist,.radio-button,.check-box,.dropdownlist,.contact-information,.rating-survey,.scale,.matrix,.survey-image,.survey-video,.date-time,.doc-attachment,.boolean,.additional-text,.richtextareabox,.netpromoterscore,.emojis{
+    border: 3px solid #747474;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding:5px;
+    background-color: white;
+    cursor:move;
+}
+.question{
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    min-height: 100px;
+    margin: 5px;
+    padding: 3px;
+    font-size: 11px;
+    color: #747474;
+    display: block;
+}
+.error-custom input:not('.score_weight'){
+    border:1px solid red;
+}
+.general_options .row .fa:before{
+    background: #0f7799;
+    padding: 5px 7px;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 3px;
+}
+.general_options .row .fa-exclamation-circle::before{
+    background: none !important;
+    color: red !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+}
+.general_options .row .fa-info-circle::before{
+    background: #0f7799 !important;
+    padding: 5px 7px !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    border-radius: 3px !important;
+}
+.general_options .row .fa-pencil::before{
+    background-color: transparent !important;
+    color: #717171 !important;
+    font-size: 13px !important;
+    padding: 0 !important;
+}
+.general_options .row .span11 .btn > .fa:before,
+.general_options .row .span5 .fa-times::before,
+.general_options .row .span5 .fa-plus::before{
+    background: none !important;
+    padding: 0 !important;
+    color: #717171 !important;
+    font-size: 14px !important;
+}
+.row{
+    margin: 10px;
+}
+.btn-icon i {
+    color: #fff;
+    margin: 8px;
+    font-size: 16px;
+}
+.btn-icon {
+    background-color: #0f7799;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 3px;
+}
+.accordion-inner{
+   background-color: #fff;
+   border-bottom:1px solid #ccc; 
+}
+.accordion .accordion-heading{
+    border-bottom : 1px solid #ccc;
+    height:60px;
+}
+.theme_selection{
+    margin-top:5px;
+    display: inline-block;
+}
+.SurveyTheme .theme-radio,
+.SurveyTheme .theme-label{
+    display: inline-block;
+}
+.SurveyTheme label{
+    border-radius:3px;
+    padding : 3px;
+}
+.accordion-inner .theme_selection .SurveyTheme {
+    width: 24%;
+    padding: 2px;
+    margin: 0 !important;
+    float: left;
+}
+.accordion-inner .theme_selection .SurveyTheme > label{
+    padding:0px;
+    color:#fff;
+    height: 70px;
+    width: auto;
+    max-width: 100%;
+    background-size: cover !important;
+    /*border: 1px solid #e1e1e1;*/
+}
+
+img.zoom{
+    visibility: hidden;
+    scale :0;
+    opacity: 0;
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 28px;
+    top: 500px;
+    border: 7px solid #fff;
+    border-radius: 5px;
+    transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -webkit-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+}
+.accordion-inner .theme_selection .SurveyTheme > label:hover img.zoom{
+    visibility: visible;
+    scale:1;
+    opacity: 1;
+
+}
+.edit_que-type option{
+    padding: 3px;
+}
+@media only screen and (min-width:1120px) and (max-width: 1460px){
+    
+    .accordion-inner .theme_selection .SurveyTheme{
+        width: 32%;
+    }
+    img.zoom{top: 600px;width: 358px;left: 19px;}
+}
+@media only screen and (min-width:1024px) and (max-width: 1119px){
+
+     .accordion-inner .theme_selection .SurveyTheme{
+        width: 48%;
+    }
+    img.zoom{top: 831px;width: 300px;left: 19px;}
+
+}
+@media only screen and (min-width:769px) and (max-width: 1023px){
+    .accordion-inner .theme_selection .SurveyTheme{
+        width: 48%;
+    }
+    img.zoom{top: 850px;width: 300px;left: 15px;}
+}
+
+@media only screen and (min-width:0 ) and (max-width: 767px){
+
+    .btn-toolbar .btn.remove_page{
+        font-size: 0;
+        padding: 3px 5px 2px;
+    }
+    .row > [class*="span"], .container-fluid .row-fluid > [class*="span"]{
+        margin:0px 1px 10px 0px;
+    }
+    .accordion-inner .row{
+        float: left;
+        width: 100%;
+    }
+    .row > .span12{
+        float: none;
+    }
+    #custom_theme.accordion-heading{
+        display: none;
+    }
+    .general_options .row .span5{
+        margin-left: 22px;
+    }
+    .general_options .row .span11{
+        margin-left: 0;
+    }
+    .span8.que-close{
+        float: right;
+    }
+}
+ .logic-data-table th{
+    text-align: left;
+}
+.logic-data-table .ms-search,
+.logic-data-table .ms-search input{
+    width: 100% !important; 
+}
+.logic-data-table .logic-table-first-column{
+    width: 150px;
+    max-width: 150px !important;
+    word-wrap: break-word;
+}
+.logic-data-table .logic-page-select{
+    width: 302px !important;
+    max-width: 302px;
+    cursor: pointer;
+}
+.logic-data-table .logic-url-box{
+    width: 291px !important;
+    max-width: 291px;
+}
+.logic-data-table .logic-page-select option{
+    word-wrap: break-word;
+}
+[data-name=survey_logo],[data-name=survey_background_image]{
+    margin-bottom:3px;
+}
+</style>
+
+
+<div class="create-survey" style="display:none;">
+
+<div class="dashlet-tabs tab3 tabbable nav nav-tabs"> 
+     <div class="dashlet-tabs-row">   
+       <div class="dashlet-tab active page_component" style="font-size: 15px;"><i class="fa  fa-file "  title="close" style="font-size: 15px;" tabindex="-1"  ></i>&nbsp;Page Component</div>     
+       <div class="dashlet-tab survey_theme" style="font-size: 15px;"><i class="fa fa-dashboard" style="font-size: 15px;"   title="open" tabindex="-1" ></i>&nbsp;Theme</div>     
+     </div>    
+ </div>
+
+
+       
+              
+             <div id="page_component_inner" class="page_component_inner">
+                <div class="accordion-inner" id='page_component_data'>
+                        <div class="row" >
+                             <div class="span12" style="">
+                                <div class="new-page " id="new-page" style="margin-top:5px;"><div class="btn-icon"><i class="fa fa-file-o"></i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; New Page</div></div></div> 
+                        </div>
+
+                        <div class="row">    
+                            <div class="span6"> <div class=" check-box "> <div class="btn-icon"><i class="fa  fa-check-square-o"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; CheckBox</div></div> </div>
+                            <div class="span6"> <div class=" dropdownlist "><div class="btn-icon"> <i class="fa fa-chevron-down"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Dropdown List</div></div> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span6"> <div class=" radio-button "><div class="btn-icon"> <i class="fa fa-dot-circle-o"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Radio Button</div></div> </div>
+                            <div class="span6"> <div class=" multiselectlist "> <div class="btn-icon"><i class="fa fa-list-ul"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; MultiSelect List</div></div> </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="span6"> <div class=" boolean "> <div class="btn-icon"><i class="fa  fa-check"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Boolean</div></div> </div>
+                            <div class="span6"> <div class=" matrix "><div class="btn-icon"> <i class="fa fa-th"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Matrix / Grid</div></div> </div>
+                        </div>
+
+                        <div class="row">
+                             <div class="span6"> <div class="textbox "><div class="btn-icon"><i class="fa fa-file-text-o"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; TextBox </div></div></div>
+                             <div class="span6"> <div class=" commentbox "><div class="btn-icon"><i class="fa fa-comments-o"></i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Comment TextBox</div></div></div>
+                        </div>
+                        
+                        <div class="row"> 
+                             <div class="span6"> <div class=" scale "><div class="btn-icon"> <i class="fa fa-arrows-h"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Scale </div></div></div>
+                             <div class="span6"> <div class=" rating-survey"><div class="btn-icon"> <i class="fa fa-star"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Rating </div></div></div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="span6"> <div class=" survey-image "><div class="btn-icon"> <i class="fa fa-picture-o"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Image</div></div> </div>
+                            <div class="span6"> <div class=" survey-video "><div class="btn-icon"> <i class="fa fa-video-camera"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Video </div></div></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="span6"> <div class=" date-time "><div class="btn-icon"> <i class="fa fa-calendar"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; DateTime</div></div> </div>
+                            <div class="span6"> <div class=" contact-information "><div class="btn-icon"> <i class="fa fa-list-alt"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Contact Information</div></div> </div>
+                        </div>
+                        
+                        <div class="row">
+                             <div class="span6"> <div class=" richtextareabox "><div class="btn-icon"> <i class="fa fa-comment" style="margin: 7px 7px;"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Rich TextBox</div></div> </div>
+                             <div class="span6"> <div class=" doc-attachment "><div class="btn-icon"> <i class="fa fa-paperclip fa-large" style="margin: 4px 7px;"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Attachment</div></div> </div>
+                        </div>
+                        <div class="row">
+                             <div class="span6"> <div class="netpromoterscore"><div class="btn-icon"> <i class="fa fa-dashboard" style="margin: 7px 7px;"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; NPS</div></div> </div>
+                             <div class="span6"> <div class="emojis"><div class="btn-icon"> <i class="fa fa-meh-o" style="margin: 7px 7px;"> </i></div><div style="display: inline-block;margin-top: 7px;cursor:move;">&nbsp; Emojis</div></div> </div>
+                        </div>
+              </div>
+              </div>
+        
+
+       
+              <div id="custom_theme_inner" class="custom_theme_inner" style='display:none;'>
+                <div class="accordion-inner" id='custom_theme_data'>
+                      <div>
+                        <div class="theme_selection">
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme0" checked="checked" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme0}}</label>
+                                </div>
+                                <label class='survey_theme_image'  style="background: url(custom/include/survey-img/default-theme.jpg);padding:5px;color:#fff;">
+                                    <img src="custom/include/survey-img/default-theme.jpg" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme1" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme1}}</label>
+                                </div>
+                                <label class='survey_theme_image'  style="background: url(custom/include/survey-img/theme-1-hover.png);padding:5px;color:#fff;">
+                                    <img src="custom/include/survey-img/theme-1-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme2" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme2}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-2-hover.jpg); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-2-hover.jpg" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme3" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme3}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-3-hover.jpg); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-3-hover.jpg" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme4" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme4}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background:url(custom/include/survey-img/theme-4-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-4-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                   <input type="radio" name="survey_theme" value="theme5" aria-label="Survey Theme" class="theme-radio">
+                                   <label class="theme-label">{{theme_list.theme5}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-5-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-5-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme6" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme6}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-6-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-6-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme7" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme7}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-7-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-7-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme8" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme8}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-8-hover.jpg); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-8-hover.jpg" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme9" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme9}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-9-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-9-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                            <div style="vertical-align: top; margin:5px;" class="SurveyTheme">
+                                <div>
+                                    <input type="radio" name="survey_theme" value="theme10" aria-label="Survey Theme" class="theme-radio">
+                                    <label class="theme-label">{{theme_list.theme10}}</label>
+                                </div>
+                                <label class='survey_theme_image' style="background: url(custom/include/survey-img/theme-10-hover.png); padding:5px; color:white;">
+                                    <img src="custom/include/survey-img/theme-10-hover.png" class="zoom">
+                                </label>
+                            </div>
+
+                        </div>
+                      </div>
+                </div>
+              </div>
+
+</div>
