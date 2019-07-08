@@ -17,11 +17,11 @@
         this._super('initialize', [options]);
 
 
-         /* 
+         /*
         	AF. 13/02/2018
-        	Set account_id: Establece id para campo 
+        	Set account_id: Establece id para campo
         		from: 	rel_relaciones_accounts_1accounts_ida
-        		to: 	rel_relaciones_accountsaccounts_ida 
+        		to: 	rel_relaciones_accountsaccounts_ida
         */
         this.model.addValidationTask('set_Account_Related', _.bind(this._setAccount, this));
 
@@ -73,6 +73,7 @@
         if (accountContext==null) {
             accountContext=this.context;
         }
+        /* Works  Ok
         this.initiateSave(_.bind(function () {
             if (this.closestComponent('drawer')) {
                 app.events.trigger('create:model:changed', false);
@@ -80,6 +81,17 @@
                 accountContext.parent.attributes.model.attributes.account_telefonos= accountContext.parent.attributes.model._previousAttributes.account_telefonos;
                 accountContext.parent.attributes.model.attributes.account_direcciones= accountContext.parent.attributes.model._previousAttributes.account_direcciones;
                 app.drawer.close(accountContext);
+            } else {
+                app.navigate(this.context, this.model);
+            }
+        }, this));
+        */
+        //Test
+        this.initiateSave(_.bind(function () {
+            if (this.closestComponent('drawer')) {
+                accountContext.parent.attributes.model.attributes.account_telefonos= accountContext.parent.attributes.model._previousAttributes.account_telefonos;
+                accountContext.parent.attributes.model.attributes.account_direcciones= accountContext.parent.attributes.model._previousAttributes.account_direcciones;
+                app.drawer.close(accountContext, this.model);
             } else {
                 app.navigate(this.context, this.model);
             }
@@ -120,7 +132,7 @@
                 	console.log(arrRelaciones);
                 	for (rel in arrRelaciones){
                 		console.log("Item:" + arrRelaciones[rel]);
-						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario' 
+						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario'
 						|| arrRelaciones[rel] == 'Directivo' || arrRelaciones[rel] == 'Referencia Personal'){
 							app.alert.show("Tipo de relación no permitida", {
 								level: "error",
@@ -137,9 +149,9 @@
                 }
                 callback(null, fields, errors);
             }, this)
-        });	
+        });
 	},
-	
+
 	_doValidateContactFields: function (fields, errors, callback) {
     	var sRelaciones = new String(this.model.get('relaciones_activas'));
         if (sRelaciones.search("Contacto") >= 0) {
@@ -278,7 +290,7 @@
                                                         subvalidacion.campo_dependiente=pr2.labelValue;
                                                     }
 													//self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
-                                                    //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find 
+                                                    //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find
                                                     self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.find(self.RequeridosFaltantes, function (x) { return x == subvalidacion.campo_dependiente }));
                                                 }
                                             });
@@ -444,7 +456,7 @@
 					if(data.length>=1){
 						mensaje = data.length==1?'La relaci\u00F3n '+data.toString()+
                         ' ya existe, favor de verificar':'Las relaciones '+ data.join(", ") + ' ya existen, por favor verificar';
-						
+
 						errors['relaciones_activas'] = mensaje; //errors['relaciones_activas'] || {};
 						errors['relaciones_activas'].required = true;
 
@@ -462,7 +474,7 @@
 	},
 
     Relacionaccionista: function (fields, errors, callback) {
-    	if (this.model.get('relaciones_activas').includes('Accionista')) 
+    	if (this.model.get('relaciones_activas').includes('Accionista'))
     	{
             if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')==null || this.model.get('porcentaje_participacion_c')== "0.00") {
                 app.alert.show("% requerido", {
@@ -871,7 +883,7 @@
         }else {
             callback(null, fields, errors);
         }
-        
+
     },
 
     validaProveedorRecursoschange: function (){

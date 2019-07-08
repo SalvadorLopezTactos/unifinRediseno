@@ -30,8 +30,8 @@ class CuentasRelacion extends SugarApi
 
             //Consulta usuarios relacionados
             $consulta1 = "select distinct relCst.account_id1_c as id, acc.name as name
-            from rel_relaciones_accounts_1_c relAcc 
-            inner join rel_relaciones rel on rel.id = relAcc.rel_relaciones_accounts_1rel_relaciones_idb -- and rel.relaciones_activas like '%Proveedor de Recursos%'
+            from rel_relaciones_accounts_1_c relAcc
+            inner join rel_relaciones rel on rel.id = relAcc.rel_relaciones_accounts_1rel_relaciones_idb and rel.relaciones_activas like '%Proveedor de Recursos%'
             inner join rel_relaciones_cstm relCst on relCst.id_c = rel.id
             inner join accounts acc on acc.id = relCst.account_id1_c
             where relAcc.deleted=0
