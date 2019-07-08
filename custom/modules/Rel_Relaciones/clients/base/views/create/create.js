@@ -301,6 +301,13 @@
 						});
 
 						if(self.RequeridosFaltantes != "" && self.RequeridosFaltantes != null){
+						    if (data.records[0].tipodepersona_c=="Persona Moral"){
+                                relaciones=self.RequeridosFaltantes.toString();
+                                relaciones = relaciones.replace(/Pais de nacimiento/g, "País de Constitución");
+                                relaciones = relaciones.replace(/Estado de nacimiento/g, "Estado de Constitución");
+                                var arrRelaciones = relaciones.split(",");
+                                self.RequeridosFaltantes = arrRelaciones;
+                            }
 							relContext.RequeridosFaltantes = self.RequeridosFaltantes;
 							app.drawer.open({
 								layout:'custom-RequiredFields',
@@ -945,11 +952,11 @@
                                                         autoClose: false
                                                     });
                                                 }
-                                                callback(null, fields, errors);
+                                                return;
                                             }, this)
                                         });
                                     }else{
-                                        callback(null, fields, errors);
+                                        return;
                                     }
                                 }else {
                                     if (data.razonsocial_c == "") {
@@ -975,11 +982,11 @@
                                                     });
 
                                                 }
-                                                callback(null, fields, errors);
+                                                return;
                                             }, this)
                                         });
                                     }else{
-                                        callback(null, fields, errors);
+                                        return;
                                     }
                                 }
                             }, this)
