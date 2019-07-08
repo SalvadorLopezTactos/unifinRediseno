@@ -1393,11 +1393,7 @@
                 var direccionesm= 0;
                 var tipodireccion= this.model.get('account_direcciones');
                 if (tipodireccion.length > 0) {
-                    for(var i=0;i<tipodireccion.length;i++){
-                        if(!tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
-                            direccionesm++;
-                        }
-                    }
+                    direccionesm++;
                 }
                 if (direccionesm==0){
                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
