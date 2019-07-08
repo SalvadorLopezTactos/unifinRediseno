@@ -129,12 +129,14 @@ $(window).load(function(){
   try{
    if (this.app.user.attributes.type != 'admin') {
     //Deshabilita campos
-    $('#equipos_c').attr('disabled','disabled');
+    //$('#equipos_c').attr('disabled','disabled');
+    $('#equipos_c').attr('style','pointer-events:none');//Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
     $('#equipo_c').attr('disabled','disabled');
     $('#tipodeproducto_c').attr('disabled','disabled');
     $('#puestousuario_c').attr('disabled','disabled');
     $('#tct_team_address_txf_c').attr('disabled','disabled');
-    $('#productos_c').attr('disabled','disabled');
+    //$('#productos_c').attr('disabled','disabled');
+    $('#productos_c').attr('style','pointer-events:none');//Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
     $('#btn_clr_reports_to_name').attr('disabled','disabled');
     $('#btn_reports_to_name').attr('disabled','disabled');
     $('#reports_to_name').attr('disabled','disabled');
@@ -155,12 +157,14 @@ $(window).load(function(){
    try{
     if (this.App.user.attributes.type != 'admin') {
       //Deshabilita campos
-      $('#equipos_c').attr('disabled','disabled');
+      //$('#equipos_c').attr('disabled','disabled');
+      $('#equipos_c').attr('style','pointer-events:none');//Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
       $('#equipo_c').attr('disabled','disabled');
       $('#tipodeproducto_c').attr('disabled','disabled');
       $('#puestousuario_c').attr('disabled','disabled');
       $('#tct_team_address_txf_c').attr('disabled','disabled');
-      $('#productos_c').attr('disabled','disabled');
+      //$('#productos_c').attr('disabled','disabled');
+      $('#productos_c').attr('style','pointer-events:none'); //Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
       $('#btn_clr_reports_to_name').attr('disabled','disabled');
       $('#btn_reports_to_name').attr('disabled','disabled');
       $('#reports_to_name').attr('disabled','disabled');
