@@ -144,6 +144,22 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
+              15 => 
+              array (
+                'name' => 'send_survey',
+                'type' => 'rowaction',
+                'label' => 'Send Survey',
+                'acl_action' => 'send_survey',
+                'event' => 'button:send_survey:click',
+              ),
+              16 => 
+              array (
+                'name' => 'send_poll',
+                'type' => 'rowaction',
+                'label' => 'Send Poll',
+                'acl_action' => 'send_poll',
+                'event' => 'button:send_poll:click',
+              ),
             ),
           ),
           3 => 

@@ -1,0 +1,380 @@
+
+<link rel="stylesheet" href="custom/include/css/survey_css/translate.css" />
+
+<script src="include/javascript/tinymce4/tinymce.min.js"></script>
+
+    <div class='row-fluid'>
+        <div class='span1'></div>
+
+        <div class='span10'>
+            <div class='row-fluid'>
+                <div class="dashlet-tabs tab3 tabbable nav nav-tabs"> 
+                 <div class="dashlet-tabs-row">   
+                     <div class='row'>
+                        <div class='span2'>
+                               <div class="dashlet-tab active survey_language_tab" style="font-size: 15px;"><i class="fa  fa-globe "  title="language" style="font-size: 15px;" tabindex="-1"  ></i>&nbsp;Language</div>  
+                        </div>
+                        <div class='span2'>
+                               <div class="dashlet-tab translate_survey_tab" style="font-size: 15px;"><i class="fa  fa-refresh" style="font-size: 15px;"   title="open" tabindex="-1" ></i>&nbsp;Translate {{survey_type}}</div>     
+                        </div>
+                      </div>
+                  </div>    
+                </div>
+            </div>
+
+                <div id="survey_language_inner" class="row survey_language_inner">
+                    <h4><a href="#bc_survey/{{survey_id}}" >{{survey_title}} </a> : Languages</h4>
+                    <br/>
+                    <div class='row-fluid'>
+                        <div class='span6'>
+                            <div class='btn btn-primary add_language'><i class="fa  fa-plus" style="font-size: 12px;"   title="open" tabindex="-1" >&nbsp;</i>Add Language</div>
+                        </div>
+                        <div class='span6'>
+                            <div class='row'>
+                                <div class='span12 lang-span' style='float:right;'>
+                                           <span style='font-size:11px; float:left !important;margin-right:5px;margin-top: 3px;'>{{survey_type}} Default Language</span>
+
+                                           &nbsp;
+                                           <select name="survey_default_language" class='bottom-language'>
+
+                                           </select>
+                                           <div class='bottom-language'>
+                                                    <div class='bottom-btn'>
+                                                            <div class='btn btn-primary' id='save_lang'>Save</div>
+                                                    </div>
+                                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div>
+                        <table class="table table-striped" border="1">
+                            <thead>
+                                <tr style='width:100%;'>
+                                    <th style='width:20%;'>Language</th>
+                                    <th style='width:20%;text-align:center;'>Status</th>
+                                    <th style='width:20%;text-align:center'>Text Direction</th>
+                                    <th style='width:20%;text-align:center;'>Translated</th>
+                                    <th style='width:20%;text-align:center;'>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class='supported_lang_list'>
+                                <tr>
+                                    <td id='default_crm_language'></td>
+                                    <td style='width:20%;text-align:center;'><i class="fa fa-check" style="color:green; font-size:18px;" title="Enabled"></i></td>
+                                    <td style='width:20%;text-align:center;'>Left to Right</td>
+                                    <td style='width:20%;text-align:center;'><i class="fa fa-check" style="color:green; font-size:18px;" title="Yes"></i></td>
+                                    <td style='width:25%;text-align:center;'></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+ 
+                </div>
+
+                <div id="translate_survey_inner" style="display:none;" class="row">
+                        
+                            <h4>
+                                <span><a href="#bc_survey/{{survey_id}}" >{{survey_title}} </a> :  Translate {{survey_type}} in</span>
+                                <span id='trans_lang'></span> Language
+                                <span style="float:right" class="btn btn-primary load_default_survey_data" title="Copy {{survey_type}} details and standard messages for this language from an existing {{survey_type}}">Load data from Default Language</span>
+                            </h4>
+                            <br/>
+                            <ul class="nav nav-tabs">
+                                  <li class="active survey_component_tab disabled">
+                                   <a> {{survey_type}} Components </a>
+                                  </li>
+                                  <li class="survey_msg_tab disabled"><a>Messages</a></li>
+                                  <li class="survey_advance_content_tab disabled"><a>Advance Contents</a></li>
+                            </ul>
+
+                            <div id="survey_component_inner" class="survey_translate_tables" >
+                                    <input type="hidden" value="" id="lang_id"/>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr style='width:100%;'>
+                                                <th style='width:15%;'>Field</th>
+                                                <th style='width:40%;'>Default Text</th>
+                                                <th style='width:40%;'>Translation</th>
+                                            <!--    <th style='width:5%;text-align:center;'>Action</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody class='survey_component_list'>
+                                        </tbody>
+                                    </table>
+
+                                    <div class='bottom-translate'>
+                                            <div class='bottom-btn' style='float:right;'>
+                                                    <div class='btn btn-primary' id='move_to_msg'>Next</div>
+                                            </div>
+                                    </div>
+                            </div>
+
+                            <div id="survey_msg_inner" style="display:none;" class="survey_translate_tables">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3">{{survey_type}} form Buttons</th>
+                                            </tr>
+                                            <tr style='width:100%;'>
+                                                <th style='width:15%;'>Control</th>
+                                                <th style='width:40%;'>Default Text</th>
+                                                <th style='width:40%;'>Translation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='messages_list'>
+                                            <tr>
+                                                <td>Previous Button</td>
+                                                <td>Prev</td>
+                                                <td><input type='text' class='prev_button' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Next Button</td>
+                                                <td>Next</td>
+                                                <td><input type='text' class='next_button' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Submit Button</td>
+                                                <td>Submit</td>
+                                                <td><input type='text' class='submit_button' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3">Validation Messages</th>
+                                            </tr>
+                                            <tr style='width:100%;'>
+                                                <th style='width:15%;'>Control</th>
+                                                <th style='width:40%;'>Default Text</th>
+                                                <th style='width:40%;'>Translation</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Required Message</td>
+                                                <td>This question is mandatory, Please answer this question.</td>
+                                                <td><input type='text' class='required_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Invalid Email Address Message</td>
+                                                <td>Please enter correct Email Address.</td>
+                                                <td><input type='text' class='invalid_email_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Invalid Phone Number Message</td>
+                                                <td>Please enter proper Phone Number.</td>
+                                                <td><input type='text' class='invalid_phn_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Matrix answer required Message</td>
+                                                <td>This question require one answer per row.</td>
+                                                <td><input type='text' class='matrix_required_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Option Selection Limit Message</td>
+                                                <td>You must have to select atleast $min option(s).</td>
+                                                <td><input type='text' class='sel_limit_msg' value=''/>
+                                                    <div class="btn btn-info" title="$min required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Value Limit Message</td>
+                                                <td>Please enter Value between $min-$max.</td>
+                                                <td><input type='text' class='limit_msg' value=''/>
+                                                    <div class="btn btn-info" title="$min and $max required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Min Value Limit Message</td>
+                                                <td>Value can not be less then $min.</td>
+                                                <td><input type='text' class='limit_min_msg' value=''/>
+                                                    <div class="btn btn-info" title="$min required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Max Value Limit Message</td>
+                                                <td>Value can not be more then $max.</td>
+                                                <td><input type='text' class='limit_max_msg' value=''/>
+                                                    <div class="btn btn-info" title="$max required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Precision Point Limit Message</td>
+                                                <td>Please enter atleast $precision precision point.</td>
+                                                <td><input type='text' class='limit_precision_msg' value=''/>
+                                                    <div class="btn btn-info" title="$precision required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maximum char length Message</td>
+                                                <td>Maximum length $maxsize character.</td>
+                                                <td><input type='text' class='max_msg' value=''/>
+                                                    <div class="btn btn-info" title="$maxsize required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Date Range Message</td>
+                                                <td>Date can be between $min to $max.</td>
+                                                <td><input type='text' class='range_msg' value=''/>
+                                                    <div class="btn btn-info" title="$min and $max required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Start Date Message</td>
+                                                <td>Please enter date after $min.</td>
+                                                <td><input type='text' class='start_date_msg' value=''/>
+                                                    <div class="btn btn-info" title="$min required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>End Date Message</td>
+                                                <td>Please enter date before $max.</td>
+                                                <td><input type='text' class='end_date_msg' value=''/>
+                                                    <div class="btn btn-info" title="$max required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3">{{survey_type}} Form Messages</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Success {{survey_type}} Submission Message</td>
+                                                <td>Your response has been submitted successfully and summary email send to your email address.</td>
+                                                <td><input type='text' class='success_submit_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Success {{survey_type}} Submission Message (No review email)</td>
+                                                <td>Your response has been submitted successfully</td>
+                                                <td><input type='text' class='email_success_submit_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Already submitted Message</td>
+                                                <td>You have already submitted this {{survey_type}}.</td>
+                                                <td><input type='text' class='already_sub_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Already submitted from same Location Message</td>
+                                                <td>Response has been already submitted from the same location.</td>
+                                                <td><input type='text' class='location_already_sub_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Submission Request Message</td>
+                                                <td>For request to admin to resubmit your {{survey_type}}</td>
+                                                <td><input type='text' class='req_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{survey_type}} not started Message</td>
+                                                <td>This {{survey_type}} has not started yet, Please try after $startDateTime</td>
+                                                <td><input type='text' class='survey_notstart_msg' value=''/>
+                                                    <div class="btn btn-info" title="$startDateTime required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{survey_type}} expired Message</td>
+                                                <td>Sorry... This {{survey_type}} expired on $endDateTime</td>
+                                                <td><input type='text' class='survey_exp_msg' value=''/>
+                                                    <div class="btn btn-info" title="$endDateTime required as input for this message"><i class="fa fa-info-circle">&nbsp;</i></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{survey_type}} deactivated Message</td>
+                                                <td>Sorry! This {{survey_type}} has been deactivated by the owner. You can't attend it.</td>
+                                                <td><input type='text' class='survey_deleted_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Recipient record deleted Message</td>
+                                                <td>Sorry! This recipient record is deleted by the owner. You can't attend it.</td>
+                                                <td><input type='text' class='rec_deleted_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Resubmit request success Message</td>
+                                                <td>Your request for re-submit {{survey_type}} response is submitted successfully. You will be sent a confirmation email once admin approves your request.Thanks.</td>
+                                                <td><input type='text' class='resubmit_request_success_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Resubmit request fail Message</td>
+                                                <td>Your request for re-submit {{survey_type}} response is not submitted.</td>
+                                                <td><input type='text' class='resubmit_request_fail_msg' value=''/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Resubmit request already sent Message</td>
+                                                <td>You have already requested for re-submit {{survey_type}} response !</td>
+                                                <td><input type='text' class='resubmit_request_already_sent_msg' value=''/></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                    <div class='bottom-translate'>
+                                            <div class='bottom-btn' style='float:left;'>
+                                                    <div class='btn btn-primary prev' id='move_to_component'>Prev</div>
+                                            </div>
+                                            <div class='bottom-btn' style='float:right;'>
+                                                    <div class='btn btn-primary' id='move_to_advance'>Next</div>
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+
+                            <div id="survey_advance_content_inner" style="display:none;" class="survey_translate_tables">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr style='width:100%;'>
+                                                <th style='width:15%;'>Field</th>
+                                                <th style='width:40%;'>Default Text</th>
+                                                <th style='width:40%;'>Translation</th>
+                                          
+                                            </tr>
+                                        </thead>
+                                        <tbody class='survey_advance_content_list'>
+                                            <tr style='width:100%;' class='welcome_tr'>
+                                                <td>{{survey_type}} Welcome Page</td>
+                                                <td ><div class='welcome_default'></div></td>
+                                                <td class='welcome_editor'>
+                                                    <textarea id='survey_welcome_page'></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            <tr style='width:100%;' class='thanks_tr'>
+                                                <td>{{survey_type}} Thanks Page</td>
+                                                <td ><div class='thanks_default'></div></td>
+                                                <td class='thanks_editor'>
+                                                   <textarea id='survey_thanks_page'></textarea> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            <tr style='width:100%;' class='review_tr'>
+                                                <td>{{survey_type}} Review Mail Content</td>
+                                                <td ><div class='review_default'></div></td>
+                                                <td class='review_editor'>
+                                                    <div><textarea id='review_mail_content'></textarea></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class='bottom-translate'>
+                                            <div class='bottom-btn' style='float:left;'>
+                                                    <div class='btn btn-primary' id='move_to_msg'>Prev</div>
+                                            </div>
+                                            <div class='bottom-btn' style='float:right;'>
+                                                    <div class='btn btn-primary' id='save_translate'>Save</div>
+                                            </div>
+                                    </div>
+                            </div>
+
+                        </div>
+                </div>
+
+        </div>
+
+        <div class='span1'></div>
+    </div>

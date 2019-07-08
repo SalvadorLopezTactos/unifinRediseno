@@ -1,5 +1,5 @@
 <?php
- // created: 2019-07-05 15:03:59
+ // created: 2019-07-08 09:43:53
 $dictionary['Account']['fields']['rfc_c']['labelValue']='RFC';
 $dictionary['Account']['fields']['rfc_c']['full_text_search']=array (
   'enabled' => true,

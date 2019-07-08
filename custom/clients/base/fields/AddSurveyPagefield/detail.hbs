@@ -1,0 +1,297 @@
+{{!
+   if field has value or not according to that set layout for field detail view
+}}
+<style>
+.droppable-hover{
+    border: 3px dashed #858585;
+    padding: 0;
+    -webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+    position: relative;
+    margin-bottom: 0 !important;
+    background: #fff;
+    color:#858585;
+    padding: 16px 0;
+    margin-top:10px;
+    opacity:0.4;
+}
+.ui-sortable-helper  {
+    background-color:#E8E8E8;
+}
+.dashlet-title input{
+    border:1px solid #717171;
+}
+.dashlet-tabs .dashlet-tabs-row .dashlet-tab{
+    background:none; 
+   /* border-radius:12px 12px 0px 0px; */
+    height:50px;/*
+    border : 1px solid #ADAAAA*/
+    border:none;
+    border-bottom: 1px solid  #e9e9e9;
+}
+
+.dashlet-tabs .dashlet-tabs-row .dashlet-tab:hover{
+    cursor: pointer;
+    color: #0f7799;
+}
+.dashlet-tabs .dashlet-tabs-row .dashlet-tab.active{
+    font-weight: bold;
+    border-bottom: transparent;
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #fff;
+}
+.dashlet:not(.collapsed):not(.empty) {
+    min-height: 0px;
+}
+.dashlet:(.collapsed) {
+    min-height: 0px;
+}
+.btn-group + .btn-group {
+    margin-left: 0px; 
+}
+.nav-tabs{border-bottom: 0;}
+.nav-tabs > .dashlet-tabs-row > .dashlet-tab{
+    margin-bottom: -1px;
+}
+.question{
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    min-height: 100px;
+    margin: 5px 10px 35px 10px;
+    padding: 3px;
+    padding-left: 25px; 
+    box-shadow: 1px 1px 14px #ddd; 
+} 
+.question-section{
+    border: 1px solid #d5d5d5;
+    border-radius: 10px 10px 0px 0px;
+    min-height: 20px;
+    margin: 5px;
+    padding: 3px;
+    padding-left: 25px; 
+    box-shadow: 1px 1px 14px #ddd; 
+    background-color: transparent;
+    font-size:11px;
+}
+.pages {
+    border: 1px solid #ddd; 
+    padding: 0;
+    -webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 0 2px 1px rgba(0,0,0,0.1); 
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+    position: relative; 
+    margin-bottom: 0 !important; 
+    background: #fff; 
+}
+.row{
+   margin:10px;
+}
+.SurveyPage
+{
+    border: 3px dashed #858585;
+    height: 100px; 
+    padding: 0; 
+    -webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 0 2px 1px rgba(0,0,0,0.1); 
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1); 
+    position: relative; 
+    margin-bottom: 0 !important; 
+    background: #fff; 
+    color:#858585;
+    padding: 16px 0;
+    margin-top:10px; 
+}
+#contact li
+{ 
+    display: inline-block; 
+    list-style-type: none; 
+    margin: 0px 1% 20px 0px; 
+    vertical-align: top; 
+    width: 48%; 
+    margin-left: -30px; 
+}
+ #contact input
+{ 
+    font-size: 15px; 
+    font-weight: 500; 
+    width: 88%; 
+    z-index: 1; 
+    padding: 5px;
+    margin: 5px;
+ } 
+.span11 
+{ 
+    font-size: 11px; 
+    font-weight: 500; 
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.span11 .options input{
+    margin-left: 0;
+}
+.record .record-cell input[type="text"]:not(.select2-input){
+     /*  margin-left: 0; */
+}
+.span11 .btn > .fa, .span5 .btn > .fa {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    line-height: 14px;
+    font-size: 14px;
+    position: relative;
+    top: 1px;
+    color: #717171!important;
+    background: none!important;
+}
+i.fa.fa-pencil.queTypeChange {
+    cursor: pointer;
+}
+.general_options .row input[type="radio"],
+.general_options .row input[type="checkbox"],
+.advance_options .row input[type="radio"],
+.advance_options .row input[type="checkbox"],
+.data-page .question .row input[type="checkbox"],
+.data-page .question .row input[type="radio"]{vertical-align: middle !important;}
+
+
+.advance_options .requiredFields .row input[type="checkbox"]{display: inline-block;width: auto;}
+.advance_options .requiredFields .row .span2 span{display: inline-block;width: 79%;vertical-align: top;}
+
+
+.matrix-tbl-contner{
+    overflow-x:hidden;
+    max-width: 750px; 
+}
+
+.survey_tmp_matrix{
+    width: 100%;
+    padding: 0 0 15px 0;
+}
+.survey_tmp_matrix tbody{
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 750px;
+}
+
+.survey_tmp_matrix tbody .row th,
+.survey_tmp_matrix tbody .row td{
+    padding: 5px 10px;
+    text-align: center;
+    white-space: nowrap;
+    display: table-cell !important;
+    /*word-wrap:normal;*/
+    /*display: block;*/
+}
+
+.survey_tmp_matrix tbody .row{
+    box-sizing:border-box;
+    display: table-row !important;
+}  
+
+.survey-body{
+    margin: 32px 5px 0 !important;
+}
+
+.survey-body .right-close-add-div{
+    margin-top: -41px !important;
+    /*margin-bottom: 30px;*/
+}
+
+.general, .advance, .piping, .change_type_skip_logic, .skip_logic{
+    width:20% !important;
+}
+
+/* Survey Status // Survey Status :: LoadedTech Customization */
+#survey_status_label {
+  position: relative;
+  display: inline-block;
+  width: 34px !important;
+  height: 19px !important;
+}
+
+.switch input {display:none !important;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(0, 128, 0);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* 27-sep-2018 */
+.data-page .image_display { width: 33.33%; float: left; padding-right: 10px; margin-bottom: 15px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+.data-page .image_display:nth-child(3n + 1) { clear: left; }
+.data-page .image_display div { padding: 5px; width: 55%;word-break: break-word; }
+.data-page .image_display img { max-height: 100px; }
+
+@media screen and (max-width: 1024px) {
+  .data-page .image_display {width: 50%;}
+  .data-page .image_display:nth-child(3n + 1) { clear: none; }
+  .data-page .image_display:nth-child(2n + 1) { clear: left; }
+}
+
+@media screen and (max-width: 480px) {
+  .data-page .image_display {width: 100%;}
+}
+
+// Survey Status :: LoadedTech Customization END 
+
+.options img{
+    height:30px !important;
+}
+</style>
+<script type="text/javascript" src="custom/include/js/survey_js/jquery.multiple.select.js"></script>
+<link rel="stylesheet" href="custom/include/css/survey_css/multiple-select.css" type="text/css">
+<script type='text/javascript'>
+$(document).ready(function(){
+$('.show_hide_question').multipleSelect({filter: true});
+});
+</script>
+<div class="Survey_Pages" id="detail_view">
+ 
+
+</div>

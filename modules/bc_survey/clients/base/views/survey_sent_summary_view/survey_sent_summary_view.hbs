@@ -1,0 +1,64 @@
+<div style='width:100%;' id='survey_sent_summary_view_div'>
+{{#compare_value type_view 'pending_res'}}
+<h3 style='text-align: center'>List of {{survey_module}} to whom same Survey Sent, Pending Responses</h3>
+<table border='0' class='table table-striped table-bordered table-condensed' style='margin: 20px 10%;width:80%'>
+             <thead>
+                    <tr>
+                        <td colspan='4'>
+                          <input class='btn btn-primary' type='button' name='SendReminder' id='SendReminder' value='Send Reminder'  data-survey-rem-id='{{survey_id}}' data-survey-rem-module='{{survey_module}}'>
+                        </td>
+                    </tr>
+             </thead>
+             <thead>
+               <tr>
+                   <th style='text-align: left;width: 5%'><input type='checkbox' name='reminder_chkAll' class='reminder_chkAll' value=''></th>
+                   <th style='text-align: left;width: 5%'>No.</th>
+                   <th style='text-align: left;width: 50%'>Customer Name</th>
+                   <th style='text-align: left;width: 40%'>Survey Send Date</th>
+               </tr>
+             </thead>
+<tbody>
+{{#if have_records}}
+{{#each SummaryData}}
+                  <tr class='oddListRowS1' style='height: 20'>
+                         <td style='width: 5%'><input type='checkbox' name='reminder_records' class='reminder_chk' value='{{recordID}}'></td>
+                         <td style='width: 5%'>{{count}}</td>
+                         <td style='width: 50%'>{{recordName}}</td>
+                         <td style='width: 40%'>{{SurveySendDate}}</td>
+                   </tr>
+    {{/each}}
+{{else}}
+<tr><td colspan='4' style='text-align: center;'>No Records Found</td></tr>
+{{/if}}
+{{#if show_more}}
+<tr>
+      <td colspan='4' style='text-align: left;text-decoration: underline;' ><input class="btn" type='button'  name='show_more_button'  value='Show More' data-offset-value='{{offset_param}}'></input></td>
+                        </tr>
+{{/if}}
+ </tbody>
+{{else}}
+<h3 style='text-align: center'>List of All {{survey_module}} whose email addresses are opted out</h3>
+<table border='0' class='table table-striped table-bordered table-condensed' style='margin: 20px 10%;width:80%'>
+            <thead>
+               <tr>
+                   <th style='text-align: left;width: 5%'>No.</th>
+                   <th style='text-align: left;width: 50%'>Customer Name</th>
+                   <th style='text-align: left;width: 40%'>Customer Email</th>
+               </tr>
+            </thead>
+            <tbody>
+
+{{#if have_records}}
+{{#each SummaryData}}
+<tr class='oddListRowS1' style='height: 20'>
+                         <td style='width: 5%'>{{count}}</td>
+                         <td style='width: 50%'>{{record_name}}</td>
+                         <td style='width: 40%'>{{email}}</td>
+                         </tr>
+   {{/each}}
+{{else}}
+<tr><td colspan='4' style='text-align: center;'>No Records Found</td></tr>
+{{/if}}
+</tbody>
+{{/compare_value}}
+</div>

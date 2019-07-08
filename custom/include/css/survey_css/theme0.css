@@ -1,0 +1,653 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    color: #777777;
+    padding-top:0 !important;
+    background: url("../../../../styleguide/assets/img/texture/furley_bg.png");
+}
+.navbar, #content, #footer footer {
+    min-width: 320px !important;
+}
+.navbar {
+    overflow: visible;
+    margin-bottom: 18px;
+}
+.navbar .navbar-inner {
+    border: none;
+    -webkit-box-shadow: 0 4px 0 #e61718;
+    -moz-box-shadow: 0 4px 0 #e61718;
+    box-shadow: 0 4px 0 #e61718;
+    width: 100%;
+    display: table;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+.navbar-inner {
+    min-height: 44px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #282828;
+    background-image: -moz-linear-gradient(top, #282828, #282828);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#282828), to(#282828));
+    background-image: -webkit-linear-gradient(top, #282828, #282828);
+    background-image: -o-linear-gradient(top, #282828, #282828);
+    background-image: linear-gradient(to bottom, #282828, #282828);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff282828', endColorstr='#ff282828', GradientType=0);
+    border: 1px solid #555;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+}
+.navbar .container {
+    width: auto;
+}
+
+.container, .container-fluid {
+    width: auto;
+    padding: 20px;
+}
+
+.container, .container-fluid {
+    width: auto;
+    padding: 0;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+}
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width: 940px;
+}
+.bg{
+    color: #777777;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  /*  -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); */
+    height: 102%; 
+    width: 102%; 
+    position: fixed; 
+    left: -5px; 
+    top: -5px; 
+}
+.top-section {
+    padding: 5px;
+    background: #fff !important;
+    border-left:1px solid #ddd !important;
+    border-right:1px solid #ddd !important;
+}
+.header .logo,.header .survey-logo{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    vertical-align: middle;
+    float: left;
+}
+.header .logo img{
+    vertical-align: middle;
+}
+.header .survey-logo img{
+    vertical-align: middle;
+    height:60px;
+}
+.header .survey-header h2 {
+    color: #000;
+    text-align: -webkit-auto;
+    text-transform: none !important;
+}
+.header .survey-header{
+    padding-left: 10px;
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    text-align: left;
+    float: left;
+    letter-spacing: normal;
+    max-width:80% !important;
+}
+.survey-form.form-desc .form-body{
+    padding-top: 0 !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+}
+
+.bx-wrapper .bx-viewport .bxslider .active-slide{
+    width: 100%;
+}
+
+.page-no {
+    background: none repeat scroll 0 0 #0f9bdc;
+    display: none;
+}
+.survey-container{
+    padding: 0;
+    border-left:1px solid #ddd !important;
+    border-right:1px solid #ddd !important;
+}
+.survey-form .form-header {
+    padding: 0;
+    background: none !important;
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+    min-height: 0;
+}
+.survey-form .form-header h1 {
+    color: #6D6D6D;
+    text-shadow: 1px 1px #ffffff;
+    font-size: 22px;
+    text-transform: capitalize;
+}
+.survey-form.form-desc{
+    margin-bottom: 0;
+}
+.survey-form{
+    margin-bottom: 0;
+}
+textarea.form-control{
+    font-family: "Open Sans";
+    height: 150px !important;
+    max-width: 100%;
+    width: 100% !important;
+}
+.form-control{
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #e1e1e1;
+}
+.survey-form .questions {
+    color: #000000;
+    width: 99% !important;
+    word-break: break-word;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.action-block {
+    height: 100px !important;
+    background: none;
+    border-top: medium none;
+    margin: 0;
+    padding: 30px 0;
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+}
+.action-block .button.btn-submit,
+.button {
+    color: #fff;
+    border-radius: 3px;
+    background-color: #176de5;
+    border: 0;
+    height: 30px !important;
+    font-weight: bold;
+    text-transform:none;
+    margin-right: 22px;
+}
+
+.action-block .bx-prev.button{
+    color: #fff;
+    border-radius: 3px;
+    background-color: #000;
+    border: 0;
+    left: 0;
+    position: absolute;
+    text-transform:none;
+    margin-left: 22px;
+}
+.survey-form .form-body{
+    padding: 20px 0;
+}
+.survey-form .form-body .option.checkbox-list,
+.survey-form .form-body .option.select-list,
+.survey-form .form-body .option.multiselect-list,
+.survey-form .form-body .option.radio-list,
+.survey-form .form-body .option.input-list ul{
+    padding-left: 0px;
+}
+.container,
+.header{
+    width: 100%;
+    border:0;
+    box-shadow: none;
+    margin-bottom: 3px;
+}
+.main-container{
+    position: relative;
+    width: 786px;
+    margin: auto;
+}
+.header{
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    letter-spacing: -0.31em;
+}
+.main-container .clip{
+    display: none;
+}
+.bx-wrapper .survey-form{
+    width:93% !important;
+}
+.survey-form .progress-bar{
+    display: inline-block;
+    width: 100%;
+    margin: 30px 0;
+    vertical-align: top;
+    text-align: center;
+}
+.survey-form .progress-bar li .pro-text{
+    display: block;
+    padding-bottom:5px; 
+    color: #000;
+}
+.survey-form .progress-bar li{
+    /*float: left;*/
+    width: 25%;
+    text-align: center;
+    position: relative;
+    margin: 0;
+}
+.survey-form .progress-bar li+li:after{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #cccccc;
+    position: absolute;
+    left: -50%;
+    top: 45px;
+    z-index: 0;
+}
+.survey-form .progress-bar li+li.active:after,
+.survey-form .progress-bar li+li.completed:after{
+    background: #000;
+}
+.survey-form .progress-bar li a{
+    position: relative;
+    width: 42px;
+    margin: 0 auto;
+    color: #fff;
+    height: 42px;
+    line-height: 38px;
+    font-size: 15px;
+    text-align: center;
+    border: 2px solid transparent; 
+    background: #cccccc;
+    border-radius: 50%;
+    text-decoration: none;
+    display: block;
+    font-weight: 800;
+    z-index: 2;
+}
+.survey-form .progress-bar li.completed a{
+    background: #000;
+}
+.survey-form .progress-bar li.active a{
+    border: 2px dashed #000; 
+    background: #fff;
+    color: #000;
+}
+.md-radio label > .check{
+    background: #000 !important;
+}
+.md-checkbox label > .check {
+    border: 2px solid #000 !important;
+    border-top: none !important;
+    border-left: none !important;
+}
+.tooltip-score, .tooltip_bottom{
+    background-color: rgba(0, 0, 0, 0.73);
+}
+.ui-slider-range {
+    background: #000;
+}
+.progress-bar section div.equal{
+    background: #000; 
+}
+.tooltip-score:before, .tooltip_bottom:before{
+    border-top: 9px solid rgba(0, 0, 0, 0.73);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+.btm-link{
+    text-align: center;
+    width: 100%;
+    padding-top: 115px;
+}
+.btm-link a{
+    text-decoration: none;
+    color: #808080;
+    font-size: 12px;
+    line-height: 28px;
+}
+@media only screen and (min-width:1024px) and (max-width: 1200px){
+    .main-container,
+    .main-container:after,
+    .main-container:before{
+        width: 700px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 1023px){
+    .main-container,
+    .main-container:after,
+    .main-container:before{
+        width: 650px;
+    }
+    .main-container{
+        padding: 20px 18px;
+    }
+    .main-container .clip .clip-1, .main-container .clip .clip-2{
+        top:-106px;
+    }
+    .survey-form .progress-bar li + li::after {
+        top: 43px;
+    }
+    .survey-form .progress-bar li a{
+        width: 36px;
+        height: 36px;
+        line-height: 32px;
+        font-size: 14px;
+    }
+    .survey-form .progress-bar{
+        margin: 15px 0;
+    }
+    .survey-form .form-body{
+        padding: 15px 0;
+    }
+    .bx-wrapper .bx-viewport .bxslider .active-slide{
+        width: 100%;
+    }
+    .survey-form .questions{
+        font-size: 14px;
+    word-break: break-word;
+    white-space: normal;
+    word-wrap: break-word;
+    }
+    .survey-form li label{
+        font-size: 13px; 
+    }
+    .button{
+        // padding: 18px 47px 19px 12px;
+        //  font-size: 14px;
+    }
+    .btm-link{
+        padding-top: 80px;
+    }
+}
+@media only screen and (min-width:0 ) and (max-width: 767px){
+    body{
+        padding: 20px;
+        font-size: 11px;
+    }
+    .main-container,
+    .main-container:after,
+    .main-container:before{
+        width: 100%;
+    }
+    .main-container{
+        margin: 40px 0;
+        float: none;
+        right: auto;
+        padding: 0px;
+    }
+    .header .survey-header{
+        padding: 0;
+    }
+    .header .survey-header h2{
+        font-size: 23px;
+    }/*
+    .main-container::before{
+        -moz-transform: rotate(-1deg);
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+    }
+    .main-container::after{
+        moz-transform: rotate(-0.5deg);
+        -webkit-transform: rotate(-0.5deg);
+        transform: rotate(-0.5deg);
+    }*//*
+    .main-container .clip img{
+        width: 60%;
+    }
+    .main-container .clip .clip-1, .main-container .clip .clip-2{
+        top: -72px;
+    }
+    .main-container .clip .clip-2{
+        right: 5px;
+    }*/
+    .survey-form .progress-bar{
+        margin: 12px 0;
+    }
+    .survey-form .progress-bar li a{
+        width: 30px;
+        height: 30px;
+        line-height: 26px;
+        font-size: 13px;
+        border:2px dashed;
+        position: relative;
+    }
+    .survey-form .progress-bar li.active a:after{
+        content: "";
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        z-index: 2;
+        top: 15px;
+        right: -29px;
+        border-top: 2px dashed;
+        border-left: 2px solid #fff;
+        border-right: 2px dashed;
+        border-bottom: 2px dashed;
+        border-radius: 0 25px 0 0;
+    }
+    .survey-form .progress-bar li.active a:before{
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        z-index: 3;
+        top: 15px;
+        right: -29px;
+        border-radius:100%;
+        box-shadow:inset 0 0 0 5px white, 0 0 0 5px white;;
+        border:solid transparent 5px;
+    }
+    .survey-form .progress-bar li + li::after{
+        top: 36px;
+    }
+    .survey-form .form-body{
+        padding: 12px 0;
+    }
+    .survey-form .questions{
+        font-size: 13px;
+    word-break: break-word;
+    white-space: normal;
+    word-wrap: break-word;
+    }
+    .survey-form .form-body .option.checkbox-list,
+    .survey-form .form-body .option.select-list,
+    .survey-form .form-body .option.multiselect-list,
+    .survey-form .form-body .option.radio-list,
+    .survey-form .form-body .option.input-list ul{
+        padding-left: 0;
+    }
+    .survey-form .two-col li{
+        width: 100%;
+    }
+    .action-block .btn-submit,
+    .button{
+        background: url(../../survey-img/next-arr.png) no-repeat scroll center center #4885d8 !important;
+        padding: 17px 24px 17px 15px;
+        font-size: 0;
+    }
+    .action-block .bx-prev.button{
+        background: url(../../survey-img/back-arr.png) no-repeat scroll center center #8d8d8d !important;
+        padding: 17px 24px 17px 15px;
+    }
+    .survey-form li label{
+        font-size: 12px;
+    }
+    .btm-link{
+        padding-top: 70px;
+    }
+}
+
+.matrix-tbl-contner{
+    overflow-x:auto;
+    max-width: 700px; 
+}
+
+.survey_tmp_matrix{
+    width: 100%;
+    padding: 0 0 15px 0;
+}
+.survey_tmp_matrix tbody{
+    overflow-x: auto;
+    width: 100%;
+    max-width: 750px;
+}
+
+.survey_tmp_matrix tbody .row th,
+.survey_tmp_matrix tbody .row td{
+    padding: 5px 10px;
+    text-align: center;
+    white-space: nowrap;
+    display: table-cell !important;
+    float:none !important;
+    /*word-wrap:normal;*/
+    /*display: block;*/
+}
+
+.survey_tmp_matrix tbody .row{
+    box-sizing:border-box;
+    display: table-row !important;
+}
+
+
+.form-body.boolean .option.boolean-list{
+    margin-left: 24px;
+    margin-top : 9px;
+}
+
+.multiselect{
+    margin-left :20px;
+}
+
+.overlay{
+    top:7% !important;
+}
+
+.main-container .survey-footer {
+    background: #fff;
+    border-left: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
+    padding:2px !important;
+}
+.main-container .survey-footer center {
+    color: #808080;
+    padding-bottom:25px;
+    padding-top:10px !important;
+}
+
+.agreement_section{
+    padding-left : 15px;
+    padding-top: 15px;
+}
+
+
+/********************** 22-8-18 ***********************/
+
+@media (min-width: 320px) and (max-width: 767px){
+.survey-form.welcome-form .form-body p span{ font-size: 24px !important; line-height: 40px !important;word-break: break-word;white-space: normal; }
+.survey-footer center p span{ font-size: 24px !important; line-height: 40px !important }
+.richContect p span {font-size: 24px !important; }
+.survey-footer p span {font-size: 24px !important; }
+}
+
+.survey-form .form-body {
+    word-break: break-all;
+}
+li.md-checkbox label label {
+    padding-left: 0;
+}
+.ui-widget-content {
+    color: #fff !important;
+    word-break: break-word;
+    white-space: normal;   
+    font-size: 11px !important;
+    line-height: 16px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px){
+.survey-form.welcome-form .form-body p span{ font-size: 32px !important; line-height: 40px !important }
+.survey-footer center p span{ font-size: 32px !important; line-height: 40px !important }
+.richContect p span {font-size: 32px !important; }
+.survey-footer p span {font-size: 32px !important; }
+
+}    
+
+/*.survey_tmp_matrix tbody .row th, .survey_tmp_matrix tbody .row td{ display: inline-block !important; }*/  /*commented due to matrix input was not displaying propely on form*/
+
+.option.select-list span {
+    word-break: break-word;
+    white-space: normal;
+}
+ /*30th August,2018 New version*/
+
+.score_pannel{
+/*    height:40px;
+    width:40px;*/
+    display: inline-block;
+    padding: 15px 15px 15px 15px;
+    color: #000;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+/*    margin: 0 2px;*/
+    border: 1px #000 solid; 
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+.nps_submission_table{
+    /*border: 1px solid #000 ;*/
+     border-collapse: collapse;
+}
+
+/* 5-oct-2018 */
+#chart_data_display { width: 98%; margin: 0 auto; }
+.numbers a {line-height: 14px;}
+.score_pannel_wrapper { display: inline-block; }
+.score_pannel_wrapper .score_pannel_result {width: 450px; max-width: 100%;}
+.score_pannel_result span.equal { width: 50%; display: inline-block;}
+.que-rwo .emoji-ans { width: 300px; }
+.que-rwo .emoji-ans img { display: inline-block; vertical-align: middle; width: 30px; }
+.emoji-ans div { display: inline-block; vertical-align: middle; }
+
+
+/*28/12/2018*/
+.top-section { background: #f6f6f6 !important; border: 1px solid #ddd;}
+.survey-form.form-desc {     border-top: 1px solid #ddd !important;}
+.survey-footer center { background: #f6f6f6 !important;border-top: 1px solid #ddd !important; }
+.survey-footer {border-bottom: 1px solid #ddd; }
+.navbar { display: none; }
+#sugarcrm { padding: 90px 0 0;} 
+
+@media (max-width:991px) {
+    #sugarcrm { padding: 0px 0 0;} 
+}
+
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+    body .main-container {     margin: 80px 0 0;}
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+    body .main-container {     padding: 80px 0 0;}
+}
