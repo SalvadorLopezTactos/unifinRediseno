@@ -54,7 +54,7 @@
             if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
                 banderaAsistencia++;
             }
-            if (!objParticipantes[i].correo && objParticipantes[i].asistencia ==1) {
+            if (!objParticipantes[i].correo && objParticipantes[i].asistencia ==1 && objParticipantes[i].unifin != 1) {
                 banderaCorreo++;
             }
         }

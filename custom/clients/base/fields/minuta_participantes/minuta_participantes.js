@@ -120,7 +120,7 @@
         });
         $('.campo2P').change(function(evt) {
           var row = $(this).closest("tr");
-          var correo = row.context.value; //$('.campo2P').eq(row.index()).val();
+          var correo =row.prevObject[0].value; //$('.campo2P').eq(row.index()).val();
           if(correo == "") {
               $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
                 app.alert.show('email_telefono_error', {
