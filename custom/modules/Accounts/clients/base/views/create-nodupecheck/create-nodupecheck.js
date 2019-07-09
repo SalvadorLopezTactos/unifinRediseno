@@ -1020,16 +1020,13 @@
     },
 
     saveProdPLD:function (fields, errors, callback) {
+        if(this.model.get('tipo_registro_c')!='Proveedor' && this.model.get('tipo_registro_c')!='Persona'){
         // Actualizar modelo de pld.ProductosPLD
         var ProductosPLD = {
-            'arrendamientoPuro' : {
-            },
-            'factorajeFinanciero' : {
-            },
-            'creditoAutomotriz' : {
-            },
-            'creditoSimple' : {
-            }
+            'arrendamientoPuro': {},
+            'factorajeFinanciero': {},
+            'creditoAutomotriz': {},
+            'creditoSimple': {}
         };
         // ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
         ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
@@ -1086,11 +1083,13 @@
         ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
         ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
 
-        if ($.isEmptyObject(errors))
-        {
+        if ($.isEmptyObject(errors)) {
             this.model.set('tct_nuevo_pld_c', JSON.stringify(ProductosPLD));
         }
-        callback(null,fields,errors);
+        callback(null, fields, errors);
+        }else {
+            callback(null, fields, errors);
+        }
     },
 
 //@Jesus Carrillo

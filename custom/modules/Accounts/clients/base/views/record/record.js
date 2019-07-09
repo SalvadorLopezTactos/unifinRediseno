@@ -210,6 +210,8 @@
     },
 
     saveProdPLD:function (fields, errors, callback) {
+
+        if(this.model.get('tipo_registro_c')!='Proveedor' && this.model.get('tipo_registro_c')!='Persona'){
 	     // Actualizar modelo de pld.ProductosPLD
        // pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
        if(pld.ProductosPLD != null){
@@ -290,7 +292,10 @@
           });
         }else {
             callback(null,fields,errors);
-        }
+         }
+     }else {
+        callback(null, fields, errors);
+      }
     },
 
     /* F. Javier G. Solar

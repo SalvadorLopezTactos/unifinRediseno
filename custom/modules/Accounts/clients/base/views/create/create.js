@@ -174,6 +174,9 @@
 
        //Oculta campo Lead no viable en la creacion de cuentas
         $('[data-name="tct_noviable"]').hide();
+
+        //campo Pais que expide el RFC nace oculto.
+        $('[data-name=tct_pais_expide_rfc_c]').hide();
         /*
          * @author Salvador Lopez
          * Ocultar panel de fideicomiso y ocultar paneles de Peps para Persona Moral
@@ -2252,7 +2255,7 @@
     },
 
     saveProdPLD:function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') != 'Persona') {
+        if (this.model.get('tipo_registro_c') != 'Persona' && this.model.get('tipo_registro_c')!='Proveedor') {
           // Actualizar modelo de pld.ProductosPLD
           var ProductosPLD = {
               'arrendamientoPuro' : {
@@ -2323,8 +2326,8 @@
           {
             this.model.set('tct_nuevo_pld_c', JSON.stringify(ProductosPLD));
           }
+          callback(null, fields, errors);
         }
-
         callback(null,fields,errors);
     },
 
