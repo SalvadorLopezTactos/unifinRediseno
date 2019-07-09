@@ -50,11 +50,16 @@ class CuentasRelacion extends SugarApi
             from rel_relaciones_accounts_1_c relAcc
             left join rel_relaciones rel on rel.id = relAcc.rel_relaciones_accounts_1rel_relaciones_idb and rel.relaciones_activas like '%Proveedor de Recursos%'
             left join rel_relaciones_cstm relCst on relCst.id_c = rel.id
-            left join accounts_dire_direccion_1_c accDir on accDir.accounts_dire_direccion_1accounts_ida = relCst.account_id1_c
+            left join accounts_dire_direccion_1_c accDir on accDir.accounts_dire_direccion_1accounts_ida = relCst.account_id1_c and accDir.deleted=0
             left join dire_direccion dir  on dir.id = accDir.accounts_dire_direccion_1dire_direccion_idb
             inner join accounts acc on acc.id = relCst.account_id1_c
+            inner join accounts_cstm accCstm on accCstm.id_c = acc.id
             where relAcc.deleted=0 and relAcc.rel_relaciones_accounts_1accounts_ida='" .$idCuenta."'
-            and (dir.tipodedireccion like '%1%' or dir.tipodedireccion like '%3%' or dir.tipodedireccion like '%5%' or dir.tipodedireccion like '%7%');";
+            and (
+      				(accCstm.tipodepersona_c != 'Persona Moral' and (dir.tipodedireccion like '%1%' or dir.tipodedireccion like '%3%' or dir.tipodedireccion like '%5%' or dir.tipodedireccion like '%7%'))
+                      or (accCstm.tipodepersona_c = 'Persona Moral'  and dir.tipodedireccion is not null)
+      			)
+            ;";
             $cuentasDireccion = [];
             $relaciones2 = $GLOBALS['db']->query($consulta2);
             while ($row = $GLOBALS['db']->fetchByAssoc($relaciones2)) {

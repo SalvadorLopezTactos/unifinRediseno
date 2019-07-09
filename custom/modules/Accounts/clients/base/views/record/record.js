@@ -3561,7 +3561,7 @@
                 }else{
                     this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
                 }
-        
+
             },
             proveedorRecursos: function (fields, errors, callback){
                 if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" ||  $('.campo4ddw-ff').select2('val') == "2" ||  $('.campo4ddw-cs').select2('val') == "2") {
@@ -3671,7 +3671,7 @@
                     if (data!=""){
                         app.alert.show("Falta direccion Particular en cuenta", {
                             level: "error",
-                            messages: 'Hace falta agregar una dirección de tipo <b>Particular</b> para la o siguientes <b>Cuentas</b><br> (En una relación de tipo <b>Proveedor de Recursos</b>):<br>' + data,
+                            messages: 'Hace falta agregar una dirección para la(s) siguientes <b>Cuentas</b><br> (En una relación de tipo <b>Proveedor de Recursos</b>):<br>' + data + '<br><br><b>Nota:</b> Se require dirección <b>Particular</b> para persona Física y FCAE. En caso de persona moral al menos un tipo de dirección.',
                             autoClose: false
                         });
                         errors['errordireccionPR'] = errors['errordireccionPR'] || {};
