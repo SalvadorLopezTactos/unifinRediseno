@@ -1349,7 +1349,7 @@ SQL;
         while($row = $db->fetchByAssoc($queryResult))
         {
             //$response[$row['equipo_c']] = $row['equipo_c'];
-            $response[$row['ordenEquipo']] = $row['equipo_c'];
+            $response[$row['equipo_c']] = $row['equipo_c'];
             $users[$row['id']] = $row['id'];
         }
 
