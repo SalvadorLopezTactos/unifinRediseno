@@ -50,39 +50,41 @@
         //Recupera data existente
         // if (pld.action == 'detail') {
         //Recupera datos para vista de detalle
-        var idCuenta = pld.model.get('id');
-        if (idCuenta=="" || idCuenta == undefined) {
-            idCuenta = '1';
-        }
-        app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
-            success: function (data) {
-                //Recupera resultado
-                pld.ProductosPLD = pld.formatDetailPLD(data);
-                //Establece visibilidad por tipo de productos
-                //AP
-                if (App.user.attributes.tipodeproducto_c == '1') {
-                    pld.ProductosPLD.arrendamientoPuro.visible = 'block';
-                }
-                //FF
-                if (App.user.attributes.tipodeproducto_c == '4') {
-                    pld.ProductosPLD.factorajeFinanciero.visible = 'block';
-                }
-                //CA
-                if (App.user.attributes.tipodeproducto_c == '3') {
-                    pld.ProductosPLD.creditoAutomotriz.visible = 'block';
-                }
-                //Agrega data a vardef
-                self.model.set('accounts_tct_pld_1',pld.ProductosPLD);
-                _.extend(this, pld.ProductosPLD);
-                pld.render();
-            },
-            error: function (e) {
-                throw e;
+        if (this.context== null || this.context== undefined) {
+            var idCuenta = pld.model.get('id');
+            if (idCuenta == "" || idCuenta == undefined) {
+                idCuenta = '1';
             }
-        });
-        // }
+            app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
+                success: function (data) {
+                    //Recupera resultado
+                    pld.ProductosPLD = pld.formatDetailPLD(data);
+                    //Establece visibilidad por tipo de productos
+                    //AP
+                    if (App.user.attributes.tipodeproducto_c == '1') {
+                        pld.ProductosPLD.arrendamientoPuro.visible = 'block';
+                    }
+                    //FF
+                    if (App.user.attributes.tipodeproducto_c == '4') {
+                        pld.ProductosPLD.factorajeFinanciero.visible = 'block';
+                    }
+                    //CA
+                    if (App.user.attributes.tipodeproducto_c == '3') {
+                        pld.ProductosPLD.creditoAutomotriz.visible = 'block';
+                    }
+                    //Agrega data a vardef
+                    self.model.set('accounts_tct_pld_1', pld.ProductosPLD);
+                    _.extend(this, pld.ProductosPLD);
+                    pld.render();
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+            // }
 
-        this.render();
+            this.render();
+        }
     },
 
     formatDetailPLD: function (dataPLD) {
