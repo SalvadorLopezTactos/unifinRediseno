@@ -2326,7 +2326,6 @@
           {
             this.model.set('tct_nuevo_pld_c', JSON.stringify(ProductosPLD));
           }
-          callback(null, fields, errors);
         }
         callback(null,fields,errors);
     },

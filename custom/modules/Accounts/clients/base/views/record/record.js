@@ -212,90 +212,88 @@
     saveProdPLD:function (fields, errors, callback) {
 
         if(this.model.get('tipo_registro_c')!='Proveedor' && this.model.get('tipo_registro_c')!='Persona'){
-	     // Actualizar modelo de pld.ProductosPLD
-       // pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
-       if(pld.ProductosPLD != null){
+            // Actualizar modelo de pld.ProductosPLD
+            // pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
+            if(pld.ProductosPLD != null){
 
-        pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
-        pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo4 = $('.campo4ddw-ap').select2('val');
-      //pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
-      //pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
-      // pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
-      // pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
-      // pld.ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
-      // pld.ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
-        pld.ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
-       // pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
-        pld.ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
-        pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val').toString();
-        pld.ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
-        pld.ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
-      //  pld.ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo2 = $('.campo2ddw-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo4 = $('.campo4ddw-ff').select2('val');
-      //pld.ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
-      //pld.ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo16 = $('.campo16ddw-ff').select2('val').toString();
-        pld.ProductosPLD.factorajeFinanciero.campo17 = $('.campo17txt-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
-        pld.ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
-        pld.ProductosPLD.factorajeFinanciero.campo6 = $('.campo6ddw-ff').select2('val');
-       // pld.ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
-        pld.ProductosPLD.creditoAutomotriz.campo2 = $('.campo2ddw-ca').select2('val');
-        pld.ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
-        pld.ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
-        pld.ProductosPLD.creditoAutomotriz.campo4 = $('.campo4ddw-ca').select2('val');
-      //pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
-      //pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
-        pld.ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
-       // pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
-        pld.ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
-        pld.ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
-      //pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
-      //pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val').toString();
-        pld.ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
-        pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
-        pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
+                pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
+                pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
+                pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
+                pld.ProductosPLD.arrendamientoPuro.campo4 = $('.campo4ddw-ap').select2('val');
+                //pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
+                //pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
+                pld.ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
+                // pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
+                // pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
+                // pld.ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
+                // pld.ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
+                pld.ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
+                // pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
+                pld.ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
+                pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val').toString();
+                pld.ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
+                pld.ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
+                pld.ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
+                //pld.ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
+                pld.ProductosPLD.factorajeFinanciero.campo2 = $('.campo2ddw-ff').select2('val');
+                pld.ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
+                pld.ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
+                pld.ProductosPLD.factorajeFinanciero.campo4 = $('.campo4ddw-ff').select2('val');
+                //pld.ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
+                //pld.ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
+                pld.ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
+                pld.ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
+                pld.ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
+                pld.ProductosPLD.factorajeFinanciero.campo16 = $('.campo16ddw-ff').select2('val').toString();
+                pld.ProductosPLD.factorajeFinanciero.campo17 = $('.campo17txt-ff').val();
+                pld.ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
+                pld.ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
+                pld.ProductosPLD.factorajeFinanciero.campo6 = $('.campo6ddw-ff').select2('val');
+                //pld.ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
+                pld.ProductosPLD.creditoAutomotriz.campo2 = $('.campo2ddw-ca').select2('val');
+                pld.ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
+                pld.ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
+                pld.ProductosPLD.creditoAutomotriz.campo4 = $('.campo4ddw-ca').select2('val');
+                //pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
+                //pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
+                pld.ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
+                //pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
+                pld.ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
+                pld.ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
+                pld.ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
+                pld.ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
+                //pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
+                //pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
+                pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val').toString();
+                pld.ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
+                pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
+                pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
+                pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
+            }
 
-       }
-
-        //Valida cambios
-        if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") ))
-        {
-          var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
-          var obj_pld_new=JSON.stringify(pld.ProductosPLD);
-          app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
-              success: function (data) {
-                  if(data!="")
-                  {
-                      console.log("Actualiza pld");
-                  }
-                  callback(null,fields,errors);
-              },
-              error: function (e) {
-                  //throw e;
-                  callback(null,fields,errors);
-              }
-          });
+            //Valida cambios
+            if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") )) {
+                  var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
+                  var obj_pld_new=JSON.stringify(pld.ProductosPLD);
+                  app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
+                      success: function (data) {
+                          if(data!="")
+                          {
+                              console.log("Actualiza pld");
+                          }
+                          callback(null,fields,errors);
+                      },
+                      error: function (e) {
+                          //throw e;
+                          callback(null,fields,errors);
+                      }
+                  });
+            }else {
+                callback(null,fields,errors);
+            }
         }else {
-            callback(null,fields,errors);
-         }
-     }else {
-        callback(null, fields, errors);
-      }
+           callback(null, fields, errors);
+        }
     },
 
     /* F. Javier G. Solar
