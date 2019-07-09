@@ -3661,7 +3661,7 @@
 
     direccionesparticularPR: function (fields, errors, callback){
         //Valida direcciones en relaciones
-        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2") {
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" && this.model.get('tipodepersona_c')!= 'Persona Moral') {
             var apicalldir = app.api.buildURL('DireCuenta/' + this.model.get("id"), null);
             app.api.call('GET', apicalldir, {}, {
                 success: _.bind(function (data) {
