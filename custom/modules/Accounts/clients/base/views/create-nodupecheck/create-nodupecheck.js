@@ -1381,7 +1381,7 @@
                 }*/
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
-                    $('[name=nacionalidad_c]').css('border-color', 'red');
+                    $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color','red');
                 }
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
