@@ -147,7 +147,7 @@
         });
         $('.campo3P').change(function(evt) {
           var row = $(this).closest("tr");
-          var telefono = row.context.value; //$('.campo3P').eq(row.index()).val();
+          var telefono = row.prevObject[0].value; //$('.campo3P').eq(row.index()).val();
           if (!selfData.validaTamano(telefono) && telefono) {
             $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
             app.alert.show('phone_participante_error', {
