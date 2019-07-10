@@ -475,7 +475,7 @@
 
         //contar las direcciones Administrativas existentes
         var adminCounter = 0;
-        $('.existingIndicador').each(function(){
+        self.$('.existingIndicador').each(function(){
             if (String($(this).find('option:selected').text()).toLowerCase().indexOf('administraci\u00F3n') >= 0) {
                 adminCounter = parseInt(adminCounter + 1);
             }
@@ -487,7 +487,7 @@
         }
 
         //contar las direcciones Administrativas nuevas
-        $('.newIndicador').each(function(){
+        self.$('.newIndicador').each(function(){
             if (String($(this).find('option:selected').text()).toLowerCase().indexOf('administraci\u00F3n') >= 0) {
                 adminCounter = parseInt(adminCounter + 1);
             }
@@ -2508,13 +2508,13 @@ populateColoniasByMunicipio:function(evt){
                 dire_direccion_dire_ciudaddire_ciudad_ida: this.$('.newCiudadTemp').val(),
 
                 //postal: $('.newPostal').val(),
-                postal: this.$('#postalHidden').val(),
+                postal: $('#postalHidden').val(),
 
                 //codigopostal: $('.newPostal').val(),
-                codigopostal: this.$('#postalHidden').val(),
+                codigopostal: $('#postalHidden').val(),
 
                 //dire_direccion_dire_codigopostaldire_codigopostal_ida: $('.newPostal').val(),
-                dire_direccion_dire_codigopostaldire_codigopostal_ida: this.$('#postalHidden').val(),
+                dire_direccion_dire_codigopostaldire_codigopostal_ida: $('#postalHidden').val(),
 
                 //colonia: $('.newColonia').val(),
                 colonia: this.$('.newColoniaTemp').val(),
