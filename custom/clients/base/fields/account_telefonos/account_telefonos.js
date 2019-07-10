@@ -266,7 +266,7 @@
 
         var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
-        if (this.context.attributes.create == true && phones == undefined) {
+        if (this.context.attributes.create == true && (phones == undefined || phones.length==0)) {
           phones=[];
         }
 
@@ -280,7 +280,7 @@
 
             var coincidencia=0;
             for(var i=0;i<phones.length;i++){
-                if($('.newTelefono').val()==phones[i].telefono){
+                if(this.$('.newTelefono').val()==phones[i].telefono){
                     coincidencia++;
                 }
             }
@@ -304,13 +304,13 @@
 
                     //funcion
                     var cont=0;
-                    for (var i =0; i < $('.newTelefono')[0].value.length; i++) {
-                        if($('.newTelefono')[0].value.charAt(0)==$('.newTelefono')[0].value.charAt(i)){
+                    for (var i =0; i < this.$('.newTelefono')[0].value.length; i++) {
+                        if(this.$('.newTelefono')[0].value.charAt(0)==this.$('.newTelefono')[0].value.charAt(i)){
                             cont++;
                         }
                     }
                     //$('.newTelefono')[0].value.charAt(0)
-                    if(cont==$('.newTelefono')[0].value.length){
+                    if(cont==this.$('.newTelefono')[0].value.length){
                         //if($input[0].className=='existingTelephono'){
                             app.alert.show('numero_repetido56', {
                             level: 'error',
@@ -318,20 +318,20 @@
                             messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
                             });
                         //$($input).focus();
-                        $('.newtelefono').css('border-color', 'red');
+                        this.$('.newtelefono').css('border-color', 'red');
                         //}
                     }else{
                         this._addNewTelefonoToModel(telefono);
-                        $('.newtelefono').css('border-color', '');
+                        this.$('.newtelefono').css('border-color', '');
 
                         // build the new email field
                         currentValue = this.model.get(this.name);
                         telefonoFieldHtml = this._buildTelefonoFieldHtml({
                             telefono: telefono,
-                            extension: $('.newExtension').val(),
-                            pais: $('.newPais').val(),
-                            tipotelefono: $('.newTipotelefono').val(),
-                            estatus: $('.newEstatus').val(),
+                            extension: this.$('.newExtension').val(),
+                            pais: this.$('.newPais').val(),
+                            tipotelefono: this.$('.newTipotelefono').val(),
+                            estatus: this.$('.newEstatus').val(),
                             principal: currentValue && (currentValue.length === 1)
                         });
                         // append the new field before the new email input
@@ -361,15 +361,9 @@
                     messages: 'Este n\u00FAmero telef\u00F3nico ya existe,favor de corregir.'
                 });
                 //$($input).focus();
-                $('.newTelefono').css('border-color', 'red');
+                this.$('.newTelefono').css('border-color', 'red');
             }
         }else {
-            /*app.alert.show('error_modultel', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
-            });*/
-
 
             if(this.$('.newTipotelefono').val()=='' || this.$('.newTipotelefono').val()==null ){
                 this.$('.newTipotelefono').css('border-color', 'red');
