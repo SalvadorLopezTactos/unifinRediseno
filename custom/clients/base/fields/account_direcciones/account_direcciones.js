@@ -1319,6 +1319,24 @@ populateColoniasByMunicipio:function(evt){
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        //Se añade estilo, cuando se crea una Cuenta desde uns relación
+        //Se cambia el tipo de selector, para ir sobre elementos con clases y no con id
+        $('.select2[multiple="multiple"]').eq(5).select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        $('.select2[multiple="multiple"]').eq(6).select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+
+
         $('.select2-container-multi').attr('style', 'width: 100%');
         $('.select2-container-multi').addClass("select2-choices-pills-close");
 
