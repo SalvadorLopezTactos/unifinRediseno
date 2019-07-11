@@ -61,7 +61,7 @@ class Account_Phones
                         $beanTelefono->tipotelefono = '2';
                         $beanTelefono->principal = true;
                         $beanTelefono->estatus = 'Activo';
-                        $beanTelefono->pais = '52';
+                        $beanTelefono->pais = '2';
 
                         $beanTelefono->save();
 
@@ -76,7 +76,7 @@ class Account_Phones
                     $beanTelefono->tipotelefono = '2';
                     $beanTelefono->principal = true;
                     $beanTelefono->estatus = 'Activo';
-                    $beanTelefono->pais = '52';
+                    $beanTelefono->pais = '2';
 
                     $beanTelefono->save();
                 }
