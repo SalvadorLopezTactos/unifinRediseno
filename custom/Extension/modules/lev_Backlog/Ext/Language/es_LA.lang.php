@@ -66,3 +66,4 @@ $mod_strings['LBL_TCT_QUE_PRODUCTO_TXF'] = '¿Qué producto? ';
 $mod_strings['LBL_TCT_TIPO_OP_LEASING_MLS'] = 'Tipo Operación Leasing';
 $mod_strings['LBL_TCT_CARGA_MASIVA_CHK'] = 'Carga Masiva';
 $mod_strings['LBL_TCT_BLOQUEO_TXF'] = 'Bloqueo';
+$mod_strings['LBL_TCT_CONVERSION'] = 'Probabilidad de Conversión %';
