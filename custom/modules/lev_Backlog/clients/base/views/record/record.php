@@ -198,6 +198,11 @@ array (
               ),
               17 => 
               array (
+                'name' => 'tct_conversion_c',
+                'label' => 'LBL_TCT_CONVERSION',
+              ),
+              18 => 
+              array (
                 'name' => 'monto_comprometido',
                 'related_fields' => 
                 array (
@@ -206,12 +211,15 @@ array (
                 ),
                 'label' => 'LBL_MONTO_COMPROMETIDO',
               ),
-              18 => 
+              19 => 
+              array (
+              ),
+              20 => 
               array (
                 'name' => 'porciento_ri',
                 'label' => 'LBL_PORCIENTO_RI',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'renta_inicial_comprometida',
                 'related_fields' => 
@@ -221,7 +229,7 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIAL_COMPROMETIDA',
               ),
-              20 => 
+              22 => 
               array (
                 'related_fields' => 
                 array (
@@ -231,7 +239,7 @@ array (
                 'name' => 'monto_final_comprometido_c',
                 'label' => 'LBL_MONTO_FINAL_COMPROMETIDO',
               ),
-              21 => 
+              23 => 
               array (
                 'related_fields' => 
                 array (
@@ -241,7 +249,7 @@ array (
                 'name' => 'ri_final_comprometida_c',
                 'label' => 'LBL_RI_FINAL_COMPROMETIDA',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'monto_real_logrado',
                 'related_fields' => 
@@ -251,7 +259,7 @@ array (
                 ),
                 'label' => 'LBL_MONTO_REAL_LOGRADO',
               ),
-              23 => 
+              25 => 
               array (
                 'name' => 'renta_inicial_real',
                 'related_fields' => 
@@ -261,42 +269,42 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIAL_REAL',
               ),
-              24 => 
+              26 => 
               array (
                 'name' => 'etapa',
                 'studio' => 'visible',
                 'label' => 'LBL_ETAPA',
               ),
-              25 => 
+              27 => 
               array (
                 'name' => 'etapa_preliminar',
                 'studio' => 'visible',
                 'label' => 'LBL_ETAPA_PRELIMINAR',
               ),
-              26 => 
+              28 => 
               array (
                 'name' => 'motivo_de_cancelacion',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVO_DE_CANCELACION',
                 'span' => 12,
               ),
-              27 => 
+              29 => 
               array (
                 'name' => 'tct_competencia_quien_txf_c',
                 'label' => 'LBL_TCT_COMPETENCIA_QUIEN_TXF',
-              ),
-              28 => 
-              array (
-              ),
-              29 => 
-              array (
-                'name' => 'tct_que_producto_txf_c',
-                'label' => 'LBL_TCT_QUE_PRODUCTO_TXF',
               ),
               30 => 
               array (
               ),
               31 => 
+              array (
+                'name' => 'tct_que_producto_txf_c',
+                'label' => 'LBL_TCT_QUE_PRODUCTO_TXF',
+              ),
+              32 => 
+              array (
+              ),
+              33 => 
               array (
                 'name' => 'monto_comprometido_cancelado',
                 'related_fields' => 
@@ -306,7 +314,7 @@ array (
                 ),
                 'label' => 'LBL_MONTO_COMPROMETIDO_CANCELADO',
               ),
-              32 => 
+              34 => 
               array (
                 'name' => 'renta_inicialcomp_can',
                 'related_fields' => 
@@ -316,19 +324,19 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIALCOMP_CAN',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              34 => 
+              36 => 
               array (
                 'name' => 'progreso',
                 'studio' => 'visible',
                 'label' => 'LBL_PROGRESO',
                 'span' => 12,
               ),
-              35 => 
+              37 => 
               array (
                 'related_fields' => 
                 array (
@@ -338,7 +346,7 @@ array (
                 'name' => 'monto_prospecto_c',
                 'label' => 'LBL_MONTO_PROSPECTO_C',
               ),
-              36 => 
+              38 => 
               array (
                 'related_fields' => 
                 array (
@@ -348,7 +356,7 @@ array (
                 'name' => 'ri_prospecto_c',
                 'label' => 'LBL_RI_PROSPECTO_C',
               ),
-              37 => 
+              39 => 
               array (
                 'related_fields' => 
                 array (
@@ -358,7 +366,7 @@ array (
                 'name' => 'monto_credito_c',
                 'label' => 'LBL_MONTO_CREDITO_C',
               ),
-              38 => 
+              40 => 
               array (
                 'related_fields' => 
                 array (
@@ -368,7 +376,7 @@ array (
                 'name' => 'ri_credito_c',
                 'label' => 'LBL_RI_CREDITO_C',
               ),
-              39 => 
+              41 => 
               array (
                 'related_fields' => 
                 array (
@@ -378,7 +386,7 @@ array (
                 'name' => 'monto_rechazado_c',
                 'label' => 'LBL_MONTO_RECHAZADO_C',
               ),
-              40 => 
+              42 => 
               array (
                 'related_fields' => 
                 array (
@@ -388,7 +396,7 @@ array (
                 'name' => 'ri_rechazada_c',
                 'label' => 'LBL_RI_RECHAZADA_C',
               ),
-              41 => 
+              43 => 
               array (
                 'related_fields' => 
                 array (
@@ -398,7 +406,7 @@ array (
                 'name' => 'monto_sin_solicitud_c',
                 'label' => 'LBL_MONTO_SIN_SOLICITUD_C',
               ),
-              42 => 
+              44 => 
               array (
                 'related_fields' => 
                 array (
@@ -408,7 +416,7 @@ array (
                 'name' => 'ri_sin_solicitud_c',
                 'label' => 'LBL_RI_SIN_SOLICITUD_C',
               ),
-              43 => 
+              45 => 
               array (
                 'related_fields' => 
                 array (
@@ -418,7 +426,7 @@ array (
                 'name' => 'monto_con_solicitud_c',
                 'label' => 'LBL_MONTO_CON_SOLICITUD_C',
               ),
-              44 => 
+              46 => 
               array (
                 'related_fields' => 
                 array (
@@ -428,7 +436,7 @@ array (
                 'name' => 'ri_con_solicitud_c',
                 'label' => 'LBL_RI_CON_SOLICITUD_C',
               ),
-              45 => 
+              47 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -451,7 +459,7 @@ array (
                   ),
                 ),
               ),
-              46 => 
+              48 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -474,17 +482,17 @@ array (
                   ),
                 ),
               ),
-              47 => 
+              49 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
               ),
-              48 => 
+              50 => 
               array (
                 'name' => 'tct_carga_masiva_chk_c',
                 'label' => 'LBL_TCT_CARGA_MASIVA_CHK',
               ),
-              49 => 
+              51 => 
               array (
                 'name' => 'tct_bloqueo_txf_c',
                 'label' => 'LBL_TCT_BLOQUEO_TXF',
