@@ -35,6 +35,7 @@
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
         
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
 
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -79,6 +80,7 @@
         this.events['keydown [name=monto_comprometido]'] = 'checkInVentas';
         this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
+        this.events['keydown [name=tct_conversion_c]'] = 'checkInVentas';
 
     },
 
@@ -696,4 +698,20 @@
         }
         callback(null, fields, errors);
     },
+
+        validacampoconversion: function(fields, errors, callback){
+          if (parseFloat(this.model.get('tct_conversion_c')) <= 0){
+
+              errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+              errors['tct_conversion_c'].required = true;
+
+              app.alert.show("Campo con valor cero", {
+                  level: "error",
+                  messages: "El campo <b>Probabilidad de Conversión</b> debe ser mayor a cero.",
+                  autoClose: false
+              });
+
+          }
+            callback(null, fields, errors);
+        },
 })
