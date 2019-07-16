@@ -23,6 +23,8 @@
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('Valida_edicionBacklog', _.bind(this.mesbacklog, this));
+        this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
+
 
         // validación de los campos con formato númerico
         this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
@@ -31,6 +33,8 @@
         this.events['keydown [name=monto_comprometido]'] = 'checkInVentas';
         this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
+        this.events['keydown [name=tct_conversion_c]'] = 'checkInVentas';
+
 
         //Se añade evento para establecer registro como Solo Lectura
         this.model.on('sync', this.setNoEditAllFields, this);
@@ -596,4 +600,20 @@
                 $('[data-name="tct_conversion_c"]').attr('style', 'pointer-events:block;');
             }
         },
+
+    validacampoconversion: function(fields, errors, callback){
+        if (parseFloat(this.model.get('tct_conversion_c')) <= 0){
+
+            errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+            errors['tct_conversion_c'].required = true;
+
+            app.alert.show("Campo con valor cero", {
+                level: "error",
+                messages: "El campo <b>Probabilidad de Conversión</b> debe ser mayor a cero.",
+                autoClose: false
+            });
+
+        }
+        callback(null, fields, errors);
+    },
 })
