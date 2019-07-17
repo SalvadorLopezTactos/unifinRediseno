@@ -27,10 +27,10 @@
 
     initialize: function (options) {
         //Inicializa campo custom
-        pld = this;
         options = options || {};
         options.def = options.def || {};
         this._super('initialize', [options]);
+        pld = this;
         this.ListasDetail();
         console.log(this.model.get('id'));
 
@@ -38,11 +38,17 @@
         //  pld.GeneraListas();
 
         //Funcion oculta los panels de productos
-        pld.ocultapanels;
+        //pld.ocultapanels;
         this.model.on('sync', this.loadData, this);
         this.model.on("change:tipodepersona_c", _.bind(function () {
             pld.validaregimen();
         }, this));
+
+        //Valida contexto PLD en relacion Propietario Real
+        if (this.options.def.view==""){
+            this.render();
+
+        }
 
     },
 
@@ -181,8 +187,8 @@
         var direccionsHtml = '';
         this._super("_render");
         var selfPLD = this;
-        $("div.record-label[data-name='accounts_tct_pld']").attr('style', 'display:none;');
-        $('div[data-name=tct_nuevo_pld_c]').parent().attr('style', 'display:none;'); //Oculta campo tct_nuevo_pld_c
+        this.$("div.record-label[data-name='accounts_tct_pld']").attr('style', 'display:none;');
+        this.$('div[data-name=tct_nuevo_pld_c]').parent().attr('style', 'display:none;'); //Oculta campo tct_nuevo_pld_c
 
         $('select.campo16ddw-ap').change(function(evt) {
             var valorEx=evt.val;
@@ -190,8 +196,9 @@
         });
 
         //Función related
-        $('.bigdrop').each(function( index, value ) {
-            $('#'+this.id).select2({
+        pld.$('.bigdrop').each(function( index, value ) {
+            var campoPR=$(this).attr('data-field');
+            pld.$('[data-field="'+campoPR+'"]').select2({
                 placeholder: "Seleccionar Cuenta...",
                 minimumInputLength: 1,
                 allowClear: true,
@@ -208,10 +215,10 @@
                 },
                 formatResult: function(m) { return m.text; },
                 formatSelection: function(m) { return m.text; }
-            }).on('select2-open', _.bind(selfPLD._onSelect2Open, selfPLD))
+            }).on('select2-open', _.bind(pld._onSelect2Open, pld))
                 .on('searchmore', function() {
                     $(this).select2('close');//<------------
-                    selfPLD.openSelectDrawer('#'+this.id);
+                    pld.openSelectDrawer('[data-field="'+campoPR+'"]');
                 })
             //.on('change', _.bind(self._onSelect2Change, self));
         });
@@ -220,7 +227,7 @@
         //Desplegables para Arrendamiento Puro
 
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
-        $('.campo2ddw-ap').change(function(evt) {
+        this.$('.campo2ddw-ap').change(function(evt) {
             pld.Muestracampo1();
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
@@ -248,7 +255,7 @@
 
         //Desplegables para Factoraje Financiero
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
-        $('.campo2ddw-ff').change(function(evt) {
+        this.$('.campo2ddw-ff').change(function(evt) {
             pld.Muestracampo1FF();
         });
         //Muestra campo Proveedor de Recursos al seleccionar la opcion Tercero, pregunta 2
@@ -269,7 +276,7 @@
 
         //Desplegables para Credito Automotriz
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
-        $('.campo2ddw-ca').change(function(evt)  {
+        this.$('.campo2ddw-ca').change(function(evt)  {
             pld.Muestracampo1CA();
 
         });
@@ -281,7 +288,7 @@
 
         //Desplegables para Credito Simple
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
-        $('.campo2ddw-cs').change(function(evt)  {
+        this.$('.campo2ddw-cs').change(function(evt)  {
             pld.Muestracampo1CS();
 
         });
@@ -335,11 +342,11 @@
         }
 
         //Set class to select2
-        $('select.select2').select2();
+        pld.$('select.select2').select2();
 
 
         //Formato multiselect para campo Tipo de Dirección en campo account_direcciones
-        $('#multi_tipo').select2({
+        pld.$('#multi_tipo').select2({
             width:'100%',
             //minimumResultsForSearch:7,
             closeOnSelect: false,
@@ -347,7 +354,7 @@
         });
 
         //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-        $('select.existing_multi_tipo_class').each(function(){
+        pld.$('select.existing_multi_tipo_class').each(function(){
             $(this).select2({
                 width:'100%',
                 closeOnSelect: false,
@@ -356,26 +363,26 @@
         });
 
         //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
-        $('#multi11').select2({
+        $('select.campo16ddw-ap').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
         //Se establece formato de multiselect a campo select con id "multil2 pregunta 2"
-        $('#multi12').select2({
+        $('select.campo16ddw-ff').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
 
         //Se establece formato de multiselect a campo select con id "multil2 pregunta 3"
-        $('#multi13').select2({
+        $('select.campo18ddw-cs').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
         //Se añade este formato del multiselect del campo de direcciones
-        $('#multi1').select2({
+        this.$('#multi1').select2({
             width:'100%',
             //minimumResultsForSearch:7,
             closeOnSelect: false,
@@ -383,7 +390,7 @@
         });
         //Formato para cuenta existente
         //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-        $('select.existingMultiClass').each(function(){
+        this.$('select.existingMultiClass').each(function(){
             $(this).select2({
                 width:'100%',
                 closeOnSelect: false,
@@ -557,10 +564,10 @@
     //Validaciones para mostrar campos de Arrendamiento Puro
     Muestracampo1: function () {
         console.log("Propietario Real AP");
-        if ($('.campo2ddw-ap').select2('val') == "2") {
-            $('.campo3-ap').show();
+        if (this.$('.campo2ddw-ap').select2('val') == "2") {
+            this.$('.campo3-ap').show();
         } else {
-            $('.campo3-ap').hide();
+            this.$('.campo3-ap').hide();
         }
     },
 
@@ -596,21 +603,21 @@
 
     checkpagosmonetarioAP: function () {
         console.log("Esta check");
-        if( $('.campo14chk-ap')[0].checked) {
-            $('.campo17-ap').show();
+        if(this.$('.campo14chk-ap')[0].checked) {
+            this.$('.campo17-ap').show();
         } else {
-            $('.campo17-ap').hide();
+            this.$('.campo17-ap').hide();
         }
     },
 
     InsMonetarioAP: function () {
         console.log("Cambio de Instrumento monetario AP");
-        if ($('.campo16ddw-ap').select2('val').toString().includes("Otro")) {
-            $('.campo14chk-ap').attr("checked", true);
-            $('.campo17-ap').show();
+        if (this.$('.campo16ddw-ap').select2('val').toString().includes("Otro")) {
+            this.$('.campo14chk-ap').attr("checked", true);
+            this.$('.campo17-ap').show();
         } else {
-            $('.campo17-ap').hide();
-            $('.campo14chk-ap').attr("checked", false);
+            this.$('.campo17-ap').hide();
+            this.$('.campo14chk-ap').attr("checked", false);
         }
     },
 
@@ -634,11 +641,10 @@
     //Eventos Change (mostrar campos)
     Muestracampo1FF: function () {
         console.log("Propietario Real FF");
-        if ($('.campo2ddw-ff').select2('val') == "2") {
-
-            $('.campo3-ff').show();
+        if (this.$('.campo2ddw-ff').select2('val') == "2") {
+            this.$('.campo3-ff').show();
         } else {
-            $('.campo3-ff').hide();
+            this.$('.campo3-ff').hide();
         }
     },
 
@@ -653,16 +659,16 @@
 
 
     checkpagosmonetarioFF: function (){
-        if( $('.campo14chk-ff').is(':checked') ) {
-            $('.campo17-ff').show();
+        if(this.$('.campo14chk-ff').is(':checked') ) {
+            this.$('.campo17-ff').show();
         } else {
-            $('.campo17-ff').hide();
+            this.$('.campo17-ff').hide();
         }
     },
 
     InsMonetarioFF: function () {
         console.log("Cambio de Instrumento monetario FF");
-        if ($('#multi12').select2('val').toString().includes("Otro")) {
+        if (this.$('#multi12').select2('val').toString().includes("Otro")) {
             $('.campo14chk-ff').attr("checked", true);
             $('.campo17-ff').show();
         } else {
@@ -675,10 +681,10 @@
     //Validaciones para mostrar campos en Credito Automotriz
     Muestracampo1CA: function () {
         console.log("Propietario Real CA");
-        if ($('.campo2ddw-ca').select2('val') == "2") {
-            $('.campo3-ca').show();
+        if (this.$('.campo2ddw-ca').select2('val') == "2") {
+            this.$('.campo3-ca').show();
         } else {
-            $('.campo3-ca').hide();
+            this.$('.campo3-ca').hide();
         }
     },
 
@@ -696,10 +702,10 @@
 
     Muestracampo1CS: function () {
         console.log("Propietario Real CS");
-        if ($('.campo2ddw-cs').select2('val') == "2") {
-            $('.campo3-cs').show();
+        if (this.$('.campo2ddw-cs').select2('val') == "2") {
+            this.$('.campo3-cs').show();
         } else {
-            $('.campo3-cs').hide();
+            this.$('.campo3-cs').hide();
         }
     },
 
@@ -714,20 +720,20 @@
 
     InsMonetarioCS: function () {
         console.log("Cambio de Instrumento monetario CS");
-        if ($('#multi13').select2('val').toString().includes("otro")) {
-            $('.campo14chk-cs').attr("checked", true);
-            $('.campo19-cs').show();
+        if (this.$('#multi13').select2('val').toString().includes("otro")) {
+            this.$('.campo14chk-cs').attr("checked", true);
+            this.$('.campo19-cs').show();
         } else {
-            $('.campo19-cs').hide();
-            $('.campo14chk-cs').attr("checked", false);
+            this.$('.campo19-cs').hide();
+            this.$('.campo14chk-cs').attr("checked", false);
         }
     },
 
     checkpagosmonetarioCS: function (){
-        if( $('.campo14chk-cs').is(':checked') ) {
-            $('.campo19-cs').show();
+        if(this.$('.campo14chk-cs').is(':checked') ) {
+            this.$('.campo19-cs').show();
         } else {
-            $('.campo19-cs').hide();
+            this.$('.campo19-cs').hide();
         }
     },
 
@@ -736,43 +742,43 @@
         //Campos nacen ocultos Arrendamiento Puro
         try {
 
-            $('.campo2-ap').show();
-            $('.campo4-ap').show();
-            $('.campo6-ap').show();
-            $('.campo16-ap').show();
-            $('.campo14-ap').show();
-            //$('.campo11-ap').show();
+            pld.$('.campo2-ap').show();
+            pld.$('.campo4-ap').show();
+            pld.$('.campo6-ap').show();
+            pld.$('.campo16-ap').show();
+            pld.$('.campo14-ap').show();
+            //pld.$('.campo11-ap').show();
             //Campos Ocultos Arrendamiento Puro (Desplegables)
-            //$('.campo3-ap').show();
-            //$('.campo5-ap').show();
-            $('.campo17-ap').show();
-            $('.campo15-ap').show();
-            $('.campo18-ap').show();
+            //pld.$('.campo3-ap').show();
+            //pld.$('.campo5-ap').show();
+            pld.$('.campo17-ap').show();
+            pld.$('.campo15-ap').show();
+            pld.$('.campo18-ap').show();
             //Campos Persona Moral Arrendamiento Puro
-            $('.campo7-ap').show(); //Pregunta1
-            $('.campo9-ap').show(); //Pregunta2
-            $('.campo8-ap').show();
-            $('.campo10-ap').show();
+            pld.$('.campo7-ap').show(); //Pregunta1
+            pld.$('.campo9-ap').show(); //Pregunta2
+            pld.$('.campo8-ap').show();
+            pld.$('.campo10-ap').show();
 
-            //$('.campo25-ap').show(); //Cuenta Cliente
-            //$('.campo26-ap').show(); //Especifique cuenta Cliente
+            //pld.$('.campo25-ap').show(); //Cuenta Cliente
+            //pld.$('.campo26-ap').show(); //Especifique cuenta Cliente
             //Campos Factoraje Financiero
-            $('.campo3-ff').show();
-            //$('.campo5-ff').show();
-            $('.campo17-ff').show();
+            pld.$('.campo3-ff').show();
+            //pld.$('.campo5-ff').show();
+            pld.$('.campo17-ff').show();
 
             //Campos Credito Automotriz
-            $('.campo3-ca').show();
-            //$('.campo5-ca').show();
+            pld.$('.campo3-ca').show();
+            //pld.$('.campo5-ca').show();
             //Campos Credito Simple
-            $('.campo3-cs').show();
-            //$('.campo5-cs').show();
-            $('.campo15-cs').show();
-            $('.campo19-cs').show();
+            pld.$('.campo3-cs').show();
+            //pld.$('.campo5-cs').show();
+            pld.$('.campo15-cs').show();
+            pld.$('.campo19-cs').show();
             //Oculta panels
-            $('.content_ap').hide();
-            $('.content_ff').hide();
-            $('.content_ca').hide();
+            pld.$('.content_ap').hide();
+            pld.$('.content_ff').hide();
+            pld.$('.content_ca').hide();
 
             var puestousuario = App.user.attributes.puestousuario_c;
             var puestosvisibles = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "20", "33", "36", "44"];
@@ -782,20 +788,20 @@
                 //Establece visibilidad por tipo de productos
                 //AP
                 if (App.user.attributes.tipodeproducto_c == '1') {
-                    $('.content_ap').show();
+                    pld.$('.content_ap').show();
                 }
                 //FF
                 if (App.user.attributes.tipodeproducto_c == '4') {
-                    $('.content_ff').show();
+                    pld.$('.content_ff').show();
                 }
                 //CA
                 if (App.user.attributes.tipodeproducto_c == '3') {
-                    $('.content_ca').show();
+                    pld.$('.content_ca').show();
                 }
             } else {
-                $('.content_ap').show();
-                $('.content_ff').show();
-                $('.content_ca').show();
+                pld.$('.content_ap').show();
+                pld.$('.content_ff').show();
+                pld.$('.content_ca').show();
             }
 
             /*
@@ -803,49 +809,49 @@
             */
             // //Oculta campos de vista de persona fisica en panel de Arrendamiento Puro
             if (this.model.get('tipodepersona_c') == 'Persona Moral') {
-                $('.campo2-ap').hide();
-                $('.campo3-ap').hide();
+                pld.$('.campo2-ap').hide();
+                pld.$('.campo3-ap').hide();
             } else {
-                $('.campo7-ap').hide();
-                $('.campo8-ap').hide();
-                $('.campo9-ap').hide();
-                $('.campo10-ap').hide();
-                //$('.campo11-ap').hide();
-                $('.campo13-ap').hide();
-                //$('.campo25-ap').hide();
-                //$('.campo26-ap').hide();
+                pld.$('.campo7-ap').hide();
+                pld.$('.campo8-ap').hide();
+                pld.$('.campo9-ap').hide();
+                pld.$('.campo10-ap').hide();
+                //pld.$('.campo11-ap').hide();
+                pld.$('.campo13-ap').hide();
+                //pld.$('.campo25-ap').hide();
+                //pld.$('.campo26-ap').hide();
             }
             //Muestra/oculta Propietario real
-            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val') == '2' || $('.campo2ddw-ap').attr('data-id') == '2') {
-                $('.campo3-ap').show();
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && pld.$('.campo2ddw-ap').select2('val') == '2' || pld.$('.campo2ddw-ap').attr('data-id') == '2') {
+                pld.$('.campo3-ap').show();
             } else {
-                $('.campo3-ap').hide();
+                pld.$('.campo3-ap').hide();
             }
             //Muestra/oculta Proveedor recursos
-           /* if ($('.campo4ddw-ap').select2('val') == '2' || $('.campo4ddw-ap').attr('data-id') == '2') {
-                $('.campo5-ap').show();
+            /* if (pld.$('.campo4ddw-ap').select2('val') == '2' || pld.$('.campo4ddw-ap').attr('data-id') == '2') {
+                 pld.$('.campo5-ap').show();
+             } else {
+                 pld.$('.campo5-ap').hide();
+             }*/
+            if (pld.$('.campo7ddw-ap').select2('val') == "Si") {
+                pld.$('.campo8-ap').show();
             } else {
-                $('.campo5-ap').hide();
-            }*/
-            if ($('.campo7ddw-ap').select2('val') == "Si") {
-                $('.campo8-ap').show();
-            } else {
-                $('.campo8-ap').hide();
+                pld.$('.campo8-ap').hide();
             }
-            if ($('.campo9ddw-ap').select2('val') == "Si") {
-                $('.campo10-ap').show();
+            if (pld.$('.campo9ddw-ap').select2('val') == "Si") {
+                pld.$('.campo10-ap').show();
             } else {
-                $('.campo10-ap').hide();
+                pld.$('.campo10-ap').hide();
             }
-            if ($('.campo16ddw-ap').select2('val').toString().includes("Otro") || $('.campo14chk-ap')[0].checked) {
-                $('.campo17-ap').show();
+            if (pld.$('.campo16ddw-ap').select2('val').toString().includes("Otro") || pld.$('.campo14chk-ap')[0].checked) {
+                pld.$('.campo17-ap').show();
             } else {
-                $('.campo17-ap').hide();
+                pld.$('.campo17-ap').hide();
             }
-            /*if ($('.campo11ddw-ap').select2('val') == "No") {
-                $('.campo26-ap').show();
+            /*if (pld.$('.campo11ddw-ap').select2('val') == "No") {
+                pld.$('.campo26-ap').show();
             } else {
-                $('.campo26-ap').hide();
+                pld.$('.campo26-ap').hide();
             }*/
 
             /*
@@ -853,26 +859,26 @@
             */
             // //Oculta campos de vista de persona fisica en panel de Factoraje Financiero
             if (this.model.get('tipodepersona_c') == 'Persona Moral') {
-                $('.campo2-ff').hide();
-                $('.campo3-ff').hide();
+                pld.$('.campo2-ff').hide();
+                pld.$('.campo3-ff').hide();
             } else {
             }
             //Muestra/oculta Propietario real
-            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val') == '2' || $('.campo2ddw-ff').attr('data-id') == '2') {
-                $('.campo3-ff').show();
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && pld.$('.campo2ddw-ff').select2('val') == '2' || pld.$('.campo2ddw-ff').attr('data-id') == '2') {
+                pld.$('.campo3-ff').show();
             } else {
-                $('.campo3-ff').hide();
+                pld.$('.campo3-ff').hide();
             }
             //Muestra/oculta Proveedor recursos
-           /* if ($('.campo4ddw-ff').select2('val') == '2' || $('.campo4ddw-ff').attr('data-id') == '2') {
-                $('.campo5-ff').show();
+            /* if (pld.$('.campo4ddw-ff').select2('val') == '2' || pld.$('.campo4ddw-ff').attr('data-id') == '2') {
+                 pld.$('.campo5-ff').show();
+             } else {
+                 pld.$('.campo5-ff').hide();
+             }*/
+            if (pld.$('#multi12').select2('val').toString().includes("Otro") || pld.$('.campo14chk-ff')[0].checked) {
+                pld.$('.campo17-ff').show();
             } else {
-                $('.campo5-ff').hide();
-            }*/
-            if ($('#multi12').select2('val').toString().includes("Otro") || $('.campo14chk-ff')[0].checked) {
-                $('.campo17-ff').show();
-            } else {
-                $('.campo17-ff').hide();
+                pld.$('.campo17-ff').hide();
             }
 
 
@@ -881,21 +887,21 @@
             */
             // //Oculta campos de vista de persona fisica en panel de Crédito automotriz
             if (this.model.get('tipodepersona_c') == 'Persona Moral') {
-                $('.campo2-ca').hide();
-                $('.campo3-ca').hide();
+                pld.$('.campo2-ca').hide();
+                pld.$('.campo3-ca').hide();
             } else {
             }
             //Muestra/oculta Propietario real
-            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val') == '2' || $('.campo2ddw-ca').attr('data-id') == '2') {
-                $('.campo3-ca').show();
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && pld.$('.campo2ddw-ca').select2('val') == '2' || pld.$('.campo2ddw-ca').attr('data-id') == '2') {
+                pld.$('.campo3-ca').show();
             } else {
-                $('.campo3-ca').hide();
+                pld.$('.campo3-ca').hide();
             }
             //Muestra/oculta Proveedor recursos
-            /*if ($('.campo4ddw-ca').select2('val') == '2' || $('.campo4ddw-ca').attr('data-id') == '2') {
-                $('.campo5-ca').show();
+            /*if (pld.$('.campo4ddw-ca').select2('val') == '2' || pld.$('.campo4ddw-ca').attr('data-id') == '2') {
+                pld.$('.campo5-ca').show();
             } else {
-                $('.campo5-ca').hide();
+                pld.$('.campo5-ca').hide();
             }*/
 
             /*
@@ -903,33 +909,33 @@
             */
             // //Oculta campos de vista de persona fisica en panel de Crédito simple
             //Muestra/oculta Propietario real
-            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val') == '2' || $('.campo2ddw-cs').attr('data-id') == '2') {
-                $('.campo3-cs').show();
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && pld.$('.campo2ddw-cs').select2('val') == '2' || pld.$('.campo2ddw-cs').attr('data-id') == '2') {
+                pld.$('.campo3-cs').show();
             } else {
-                $('.campo3-cs').hide();
+                pld.$('.campo3-cs').hide();
             }
             //Muestra/oculta Proveedor recursos
-            /*if ($('.campo4ddw-cs').select2('val') == '2' || $('.campo4ddw-cs').attr('data-id') == '2') {
-                $('.campo5-cs').show();
+            /*if (pld.$('.campo4ddw-cs').select2('val') == '2' || pld.$('.campo4ddw-cs').attr('data-id') == '2') {
+                pld.$('.campo5-cs').show();
             } else {
-                $('.campo5-cs').hide();
+                pld.$('.campo5-cs').hide();
             }*/
-            if ($('#multi13').select2('val').toString().includes("otro") || $('.campo14chk-cs')[0].checked) {
-                $('.campo19-cs').show();
+            if (pld.$('#multi13').select2('val').toString().includes("otro") || pld.$('.campo14chk-cs')[0].checked) {
+                pld.$('.campo19-cs').show();
             } else {
-                $('.campo19-cs').hide();
+                pld.$('.campo19-cs').hide();
             }
 
-            $('.campo11-ap').hide();
-            $('.campo25-ap').hide();
-            $('.campo26-ap').hide();
+            pld.$('.campo11-ap').hide();
+            pld.$('.campo25-ap').hide();
+            pld.$('.campo26-ap').hide();
         }catch (err){
             console.log(err.message);
         }
 
-        $('.campo11-ap').hide();
-        $('.campo25-ap').hide();
-        $('.campo26-ap').hide();
+        pld.$('.campo11-ap').hide();
+        pld.$('.campo25-ap').hide();
+        pld.$('.campo26-ap').hide();
     },
 
     cuentacliente: function (){
