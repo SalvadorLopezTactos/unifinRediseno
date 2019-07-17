@@ -48,6 +48,26 @@ $viewdefs['RefBa_Referencia_Bancaria']['base']['view']['subpanel-for-accounts-re
       ),
     ),
   ),
+    'rowactions' => array(
+        'actions' => array(
+            array(
+                'type' => 'rowaction',
+                'css_class' => 'btn',
+                'tooltip' => 'LBL_PREVIEW',
+                'event' => 'list:preview:fire',
+                'icon' => 'fa-eye',
+                'acl_action' => 'view',
+            ),
+            array(
+                'type' => 'rowaction',
+                'name' => 'edit_button',
+                'icon' => 'fa-pencil',
+                'label' => 'LBL_EDIT_BUTTON',
+                'event' => 'list:editrow:fire',
+                'acl_action' => 'edit',
+            ),
+        ),
+    ),
   'orderBy' => 
   array (
     'field' => 'date_modified',
