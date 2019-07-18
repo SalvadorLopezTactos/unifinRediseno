@@ -630,12 +630,12 @@
         account.fetch({
             success: _.bind(function (model) {
                 if (model.get('estatus_persona_c') == 'I') {
-                    app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
+                    app.error.errorName2Keys['custom_message'] = 'No se puede iniciar Pre-Solicitud en una cuenta inactiva';
                     errors['account_name_3'] = errors['account_name_3'] || {};
                     errors['account_name_3'].custom_message = true;
                     app.alert.show("cuenta_inactiva", {
                         level: "error",
-                        messages: "No se puede iniciar operación en una cuenta inactiva",
+                        messages: "No se puede iniciar Pre-Solicitud en una cuenta inactiva",
                         autoClose: false
                     });
                 }
