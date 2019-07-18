@@ -60,6 +60,16 @@ $viewdefs['minut_Minutas']['base']['view']['create'] = array(
 		 'click' => 'button:view_document:click',
 		 ),
 	 ),
+	 array (
+		 'type' => 'button',
+		 'event' => 'button:survey_minuta:click',
+		 'name' => 'survey_minuta',
+		 'label' => 'Contestar Encuesta',
+		 'css_class' => 'btn-success',
+		 'events' => array(
+		 	'click' => 'button:survey_minuta:click',
+		 ),
+	 ),
 	 array(
 		 'name' => 'sidebar_toggle',
 		 'type' => 'sidebartoggle',
