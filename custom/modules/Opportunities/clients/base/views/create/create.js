@@ -633,6 +633,11 @@
                     app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
                     errors['account_name_3'] = errors['account_name_3'] || {};
                     errors['account_name_3'].custom_message = true;
+                    app.alert.show("cuenta_inactiva", {
+                        level: "error",
+                        title: "No se puede iniciar operacion en una cuenta inactiva",
+                        autoClose: false
+                    });
                 }
                 callback(null, fields, errors);
             }, this)
