@@ -33,9 +33,9 @@
          */
         this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
-        
-        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+
 
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -699,19 +699,37 @@
         callback(null, fields, errors);
     },
 
-        validacampoconversion: function(fields, errors, callback){
-          if (parseFloat(this.model.get('tct_conversion_c')) <= 0){
+    validacampoconversion: function(fields, errors, callback){
+        if (this.model.get('tct_conversion_c')=="" || this.model.get('tct_conversion_c')==undefined) {
+            errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+            errors['tct_conversion_c'].required = true;
+        }
+        //Valda valor menor o igual a 0
+        if (parseFloat(this.model.get('tct_conversion_c')) <= 0){
 
-              errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
-              errors['tct_conversion_c'].required = true;
+            errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+            errors['tct_conversion_c'].required = true;
 
-              app.alert.show("Campo con valor cero", {
-                  level: "error",
-                  messages: "El campo <b>Probabilidad de Conversión</b> debe ser mayor a cero.",
-                  autoClose: false
-              });
+            app.alert.show("Campo con valor cero", {
+                level: "error",
+                messages: "El campo <b>Probabilidad de Conversión</b> debe ser mayor a cero.",
+                autoClose: false
+            });
 
-          }
-            callback(null, fields, errors);
-        },
+        }
+        // Valida valor mayor a 100
+        if (parseFloat(this.model.get('tct_conversion_c')) > 100){
+
+            errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+            errors['tct_conversion_c'].required = true;
+
+            app.alert.show("conversion_mayor_cien", {
+                level: "error",
+                messages: "El campo <b>Probabilidad de Conversión</b> debe ser menor o igual a cien.",
+                autoClose: false
+            });
+
+        }
+        callback(null, fields, errors);
+    },
 })
