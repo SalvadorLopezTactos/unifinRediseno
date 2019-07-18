@@ -46,5 +46,25 @@ $viewdefs['Notes']['base']['view']['subpanel-for-accounts-notes'] = array (
       ),
     ),
   ),
+    'rowactions' => array(
+        'actions' => array(
+            array(
+                'type' => 'rowaction',
+                'css_class' => 'btn',
+                'tooltip' => 'LBL_PREVIEW',
+                'event' => 'list:preview:fire',
+                'icon' => 'fa-eye',
+                'acl_action' => 'view',
+            ),
+            array(
+                'type' => 'rowaction',
+                'name' => 'edit_button',
+                'icon' => 'fa-pencil',
+                'label' => 'LBL_EDIT_BUTTON',
+                'event' => 'list:editrow:fire',
+                'acl_action' => 'edit',
+            ),
+        ),
+    ),
   'type' => 'subpanel-list',
 );
