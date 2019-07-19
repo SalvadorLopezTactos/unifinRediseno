@@ -1233,7 +1233,7 @@
                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                errors['actividadeconomica_c'].required = true;
            }
-           if ($('.existingTipotelefono').val() == "" || $('.existingTipotelefono').val() == undefined || $('.existingTipotelefono') == null) {
+           if (this.$('.existingTipotelefono').val() == "" || this.$('.existingTipotelefono').val() == undefined || this.$('.existingTipotelefono') == null) {
                errors['account_telefonos'] = errors['account_telefonos'] || {};
                errors['account_telefonos'].required = true;
            }
