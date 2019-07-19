@@ -1,0 +1,113 @@
+{{!--
+/*
+ * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
+ */
+--}}
+<h4>Nueva Dirección</h4>
+<div class="control-group direccion">
+    <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
+        <tr>
+            <td valign="top">
+                <div class="record-label">
+                    Tipo
+                </div>
+                <select id="tipo_multiselect_id" class="select2 multi_tipo" style="width: 100%" multiple="multiple" size="3">
+                    {{#each tipo_direccion_list}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td valign="top">
+                <div class="record-label">
+
+                    Tipo de direcci&oacute;n
+                </div>
+                <select id="indicador_multiselect_id" class="select2 multi1_n" style="width: 100%" multiple="multiple" size="3">
+                    {{#each indicador_list}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td valign="top">
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Código Postal
+                </div>
+
+                <input type="text" id="newPostalInputTemp" class="newPostalInputTemp">
+                <input type="hidden" id="newPostalHidden" data-field="postalHidden">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    País
+                </div>
+                <select class="newPais" data-field="pais" placeholder="" style="font-size: 15px;font-weight: 500;">
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Estado
+                </div>
+                <select class="newEstado" data-field="estado" placeholder="" style="font-size: 15px;font-weight: 500;">
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconEstado" style="display: none"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Municipio
+                </div>
+                <select class="newMunicipio" data-field="municipio" placeholder="" style="font-size: 15px;font-weight: 500;">
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconMunicipio" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Ciudad
+                </div>
+                <select class="newCiudad" data-field="ciudad" placeholder="" style="font-size: 15px;font-weight: 500;">
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconCiudad" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Colonia
+                </div>
+                <select class="newColonia" data-field="colonia" placeholder="" style="font-size: 15px;font-weight: 500;">
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconColonia" style="display: none"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Calle
+                </div>
+                <input type="text" class="newCalle" placeholder="Calle" value="{{calle}}" data-field="calle" style="width: 95%;margin: 0px;"/>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Número Exterior y Número Interior
+                </div>
+                <input type="text" class="newNumExt" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 33%;margin: 0px;">
+                <input type="text" class="newNumInt" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 33%;margin: 0px;">
+            </td>
+            <td>
+                <div class="btn-toolbar prevent-mousedown">
+                    <div class="btn-group">
+                        <a href="javascript:void(0)" class="btn addDireccion" rel="tooltip" title="Add Direccion"><i class="fa fa-check"></i></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</div>
