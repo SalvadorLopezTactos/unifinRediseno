@@ -1358,12 +1358,10 @@ populateColoniasByMunicipio:function(evt){
             $('.rowCPcc').hide();
 
             //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-            $('select.existing_multi_tipo_class').each(function(){
-                $(this).select2({
+            this.$('.select2[multiple="multiple"]').select2({
                     width:'100%',
                     closeOnSelect: false,
                     containerCssClass: 'select2-choices-pills-close'
-                });
             });
 
             //Obteniendo valores de Tipo de direccion multiselect
@@ -1377,12 +1375,10 @@ populateColoniasByMunicipio:function(evt){
 
 
             //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-            $('select.existingMultiClass').each(function(){
-                $(this).select2({
+            this.$('.select2[multiple="multiple"]').select2({
                     width:'100%',
                     closeOnSelect: false,
                     containerCssClass: 'select2-choices-pills-close'
-                });
             });
 
             //Obteniendo valores de Indicador
@@ -2254,12 +2250,10 @@ populateColoniasByMunicipio:function(evt){
 
 
             //Establece formato multiselect a campo select que contenga clase "existingMultiClass"
-            $('select.existingMultiClass').each(function(){
-                $(this).select2({
+            this.$('.select2[multiple="multiple"]').select2({
                     width:'100%',
                     closeOnSelect: false,
                     containerCssClass: 'select2-choices-pills-close'
-                });
             });
 
             //Obteniendo valores de Indicador

@@ -346,7 +346,7 @@
 
 
         //Formato multiselect para campo Tipo de Dirección en campo account_direcciones
-        pld.$('#multi_tipo').select2({
+        $('#multi_tipo').select2({
             width:'100%',
             //minimumResultsForSearch:7,
             closeOnSelect: false,
@@ -354,12 +354,10 @@
         });
 
         //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-        pld.$('select.existing_multi_tipo_class').each(function(){
-            $(this).select2({
+        $('.select2[multiple="multiple"]').select2({
                 width:'100%',
                 closeOnSelect: false,
                 containerCssClass: 'select2-choices-pills-close'
-            });
         });
 
         //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
@@ -390,12 +388,10 @@
         });
         //Formato para cuenta existente
         //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
-        this.$('select.existingMultiClass').each(function(){
-            $(this).select2({
+        $('.select2[multiple="multiple"]').select2({
                 width:'100%',
                 closeOnSelect: false,
                 containerCssClass: 'select2-choices-pills-close'
-            });
         });
 
     },
