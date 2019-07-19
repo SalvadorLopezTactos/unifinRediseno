@@ -7,12 +7,13 @@
 
         'change .newPais': 'populateEdoByPais',
 
-
         //Dependencia entre Municipio y Colonia
         'change .newMunicipio': 'populateColoniasByMunicipio',
 
         //Dependencia entre Estado y Colonia, además llena municipio por Estado
         'change .newEstado': 'populateCiudadesByEstado',
+
+        'click  .addDireccion': 'addNewDireccion',
     },
 
     initialize: function(options) {
@@ -235,6 +236,8 @@
                     this.$('select.newMunicipio').append($("<option>").val(returnArray[i].id).html(returnArray[i].name));     
                 }
 
+              this.$('.newMunicipio').trigger('change');  
+
             }
 
             //Llamando a api para filtrar ciudades
@@ -256,6 +259,118 @@
                 },this)
             });
 
+        }
+    },
+
+    /**
+     * Event handler to add a new direccion field.
+     * @param {Event} evt
+     */
+    addNewDireccion: function (evt) {
+        if (!evt) return;
+
+        var calle = this.$(evt.currentTarget).val() || this.$('.newCalle').val(),
+        currentValue,
+        direccionFieldHtml,
+        $newDireccionField;
+
+        //Validaciones dentro del control de direcciones
+        //TODO: Convertir los mensajes de error a etiquetas dentro del modulo para poder habilitar cambios via studio.
+        var errorMsg = '';
+        var dirErrorCounter = 0;
+        var dirError = false;
+
+
+        //Valida tipo de direccion Multiselect
+        if (this.$('#tipo_multiselect_id').val() == null || this.$('#tipo_multiselect_id').val() == "") {
+            errorMsg = 'Tipo de direccion requerido';
+            dirError = true; dirErrorCounter++;
+            this.$('#s2id_tipo_multiselect_id ul').css('border-color', 'red');
+        } else {
+            this.$('#s2id_tipo_multiselect_id ul').css('border-color', '');
+        }
+
+        //Valida indicador
+        if (this.$('#indicador_multiselect_id').val() == null || this.$('#indicador_multiselect_id').val() == "") {
+            errorMsg = 'Indicador de direcci\u00F3n requerido';
+
+            dirError = true; dirErrorCounter++;
+
+            this.$('#s2id_indicador_multiselect_id ul').css('border-color', 'red');  //Validación para pintar el campo Indicador.
+        } else {
+            this.$('#s2id_indicador_multiselect_id ul').css('border-color', '');
+            //$('#multi1').css('border-color', '');
+
+        }
+
+        //Valida código postal
+        if (this.$('#newPostalInputTemp').val() == '') {
+            errorMsg = 'C\u00F3digo postal requerido';
+            dirError = true; dirErrorCounter++;
+            this.$('#newPostalInputTemp').css('border-color', 'red');
+        } else {
+            this.$('#newPostalInputTemp').css('border-color', '');
+
+        }
+
+        //Valida extensión de código postal y valida únicamente números
+        var pattern = /^\d+$/;
+
+        if (this.$('#newPostalInputTemp').val().length !=5 || !pattern.test(this.$('#newPostalInputTemp').val())) {
+            this.$('#newPostalInputTemp').css('border-color', 'red');
+        } else {
+            this.$('#newPostalInputTemp').css('border-color', '');
+
+        }
+
+        //Valida Ciudad
+        if (this.$('select.newCiudad').val() == '1') {
+            errorMsg = 'Favor de seleccionar una ciudad';
+            dirError = true; dirErrorCounter++;
+            this.$('select.newCiudad').css('border-color', 'red');
+        } else {
+            this.$('select.newCiudad').css('border-color', '');
+
+        }
+
+        //Valida colonia
+        if (this.$('select.newColonia').val() == '1') {
+            errorMsg = 'Favor de seleccionar una colonia';
+            dirError = true; dirErrorCounter++;
+            this.$('select.newColonia').css('border-color', 'red');
+        } else {
+            this.$('select.newColonia').css('border-color', '');
+
+        }
+
+        //Valida Calle
+        if (this.$('.newCalle').val() == '' || this.$('.newCalle').val() == null) {
+            errorMsg = 'Calle es requerida';
+            dirError = true; dirErrorCounter++;
+            this.$('.newCalle').css('border-color', 'red');
+        } else {
+            this.$('.newCalle').css('border-color', '');
+
+        }
+
+        //Valida Num Ext
+        if (this.$('.newNumExt').val() == '' || this.$('.newNumExt').val() == null) {
+            errorMsg = 'Numero Exterior es requerido';
+            dirError = true; dirErrorCounter++;
+            this.$('.newNumExt').css('border-color', 'red');
+        } else {
+            this.$('.newNumExt').css('border-color', '');
+
+        }
+
+        if (dirError) {
+            if(dirErrorCounter > 1) errorMsg = 'Hay campos vac\u00EDos en la direcci\u00F3n.'
+                app.alert.show('list_delete_direccion_info', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: errorMsg
+                });
+            return;
         }
     },
 
