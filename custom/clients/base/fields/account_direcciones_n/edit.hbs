@@ -3,6 +3,108 @@
  * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
  */
 --}}
+<div class="direcciones_list">
+    {{#each direcciones}}
+        <div class="control-group direccion">
+            <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
+                <tr>
+                    <td valign="top">
+                        <div class="record-label">
+                            Tipo
+                        </div>
+                        <select class="select2 multi_tipo_existing" style="width: 100%" multiple="multiple" size="3">
+
+                        </select>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label">
+
+                            Tipo de direcci&oacute;n
+                        </div>
+                        <select class="select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3">
+
+                        </select>
+                    </td>
+                    <td valign="top">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Código Postal
+                        </div>
+
+                        <input type="text" class="postalInputTempExisting" value="{{codigo_postal}}">
+                        <input type="hidden" class="postalHiddenExisting" data-field="postalHiddenExisting" value="{{postal_hidden}}">
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            País
+                        </div>
+                        <select class="paisExisting" data-field="paisExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Estado
+                        </div>
+                        <select class="estadoExisting" data-field="estadoExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconEstado" style="display: none"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Municipio
+                        </div>
+                        <select class="municipioExisting" data-field="municipioExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconMunicipio" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Ciudad
+                        </div>
+                        <select class="ciudadExisting" data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconCiudad" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Colonia
+                        </div>
+                        <select class="coloniaExisting" data-field="coloniaExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconColonia" style="display: none"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Calle
+                        </div>
+                        <input type="text" class="calleExisting" placeholder="Calle" value="{{calle}}" data-field="calle" style="width: 95%;margin: 0px;"/>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Número Exterior y Número Interior
+                        </div>
+                        <input type="text" class="numExtExisting" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 33%;margin: 0px;">
+                        <input type="text" class="numIntExisting" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 33%;margin: 0px;">
+                    </td>
+                    <td valign="top">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    {{/each}}
+</div>
 <h4>Nueva Dirección</h4>
 <div class="control-group direccion">
     <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">

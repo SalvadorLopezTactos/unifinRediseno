@@ -27,6 +27,7 @@
         this.colonias_list={};
 
         self=this;
+        this.direcciones=[];
 
         this.tipo_direccion_list = App.lang.getAppListStrings('dir_tipo_unique_list');
         this.indicador_list = App.lang.getAppListStrings('dir_indicador_unique_list');
@@ -372,6 +373,22 @@
                 });
             return;
         }
+
+        var direccion = {
+            "codigo_postal":"codigo_postal",
+            "postal_hidden":"postal_hidden",
+            "pais":"pais",
+            "estado":"estado",
+            "municipio":"municipio",
+            "ciudad":"ciudad",
+            "colonia":"colonia",
+            "calle":"calle",
+            "numext":"numext",
+            "numint":"numint"
+        };
+
+        this.direcciones.push(direccion);
+        this.render();
     },
 
     /**
