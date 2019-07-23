@@ -3,6 +3,17 @@
  */
 ({
     events: {
+
+        /*
+        'keydown .calleExisting': 'checkcallenum',
+        'keydown .numIntExisting': 'checknumint',
+        'keydown .numExtExisting': 'checkcallenum',
+        */
+
+        'keydown .newCalle': 'limitto100',
+        'keydown .newNumInt': 'limitto50',
+        'keydown .newNumExt': 'limitto100',
+
         'focusout #newPostalInputTemp': 'getInfoAboutCP',
 
         'change .newPais': 'populateEdoByPais',
@@ -409,6 +420,35 @@
                 });
             return;
         }
+
+        var nuevaDir = this.$('.newCalle').val() + this.$('.newNumExt').val() + this.$('.newNumInt').val()+ this.$('.newColonia').val()+ this.$('.newMunicipio').val()+this.$('.newEstado').val() + this.$('.newCiudad').val();
+        nuevaDir=nuevaDir.replace(/ /g, "");
+        nuevaDir=nuevaDir.toUpperCase();
+        var existingDir = this.direcciones;
+        if (this.context.attributes.create == true && existingDir == undefined) {
+            existingDir=[];
+        }
+        var existente = false;
+
+        for(var i=0;i<existingDir.length;i++){
+
+            var actualDir =  existingDir[i].calle+existingDir[i].numext+existingDir[i].numint+existingDir[i].colonia_seleccionada+existingDir[i].municipio_seleccionado+existingDir[i].estado_seleccionado+existingDir[i].ciudad_seleccionada
+            actualDir=actualDir.replace(/ /g, "");
+            actualDir=actualDir.toUpperCase();
+            if (actualDir == nuevaDir){
+                existente = true;
+            }
+        }
+
+        if (existente){
+            app.alert.show("direcciones_duplicadas", {
+                level: "error",
+                title: "Existe una o mas direcciones repetidas",
+                autoClose: true
+            });
+            return;
+        }
+
         var lista_paises_existing={};
         $(".newPais option").each(function(){
             lista_paises_existing[$(this).attr('value')]=$(this).html();
@@ -482,6 +522,41 @@
             $(this).select2('val',indicadores_seleccionados.split(","));
         });
 
+    },
+
+    checkcallenum: function(evt){
+        var limite=this.limitto100(evt);
+        if(limite==false){
+            return false;
+        }
+    },
+
+    checknumint: function(evt){
+        var limite=this.limitto50(evt);
+        if(limite==false){
+            return false;
+        }
+    },
+
+    limitto100: function(evt){
+        if (!evt) return;
+        //get field that changed
+        var $input = this.$(evt.currentTarget);
+
+        var direccion = $input.val();
+
+        if(direccion.length>99 && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            return false;
+        }
+    },
+    limitto50: function(evt){
+        if (!evt) return;
+        //get field that changed
+        var $input = this.$(evt.currentTarget);
+        var direccion = $input.val();
+        if(direccion.length>49 && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            return false;
+        }
     },
 
     /**
