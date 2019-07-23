@@ -6,15 +6,19 @@
 <div class="direcciones_list">
     {{#each direcciones}}
         <div class="control-group direccion">
-            <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
+            <table class="dashlet direcciondashlet" style="width: 100%;" cellspacing="1" cellpadding="5">
                 <tr>
                     <td valign="top">
                         <div class="record-label">
                             Tipo
                         </div>
                         <select class="select2 multi_tipo_existing" style="width: 100%" multiple="multiple" size="3">
-
+                            {{#each tipo_direccion_list}}
+                                <option value="{{@key}}">{{this}}</option>
+                                <!-- <option value="{{@key}}" {{ifMSelected @key ../tipos_seleccionados}}>{{this}}</option> -->
+                            {{/each}}
                         </select>
+                        <input type="hidden" class="multi_tipo_existing_hidden" data-field="multi_tipo_existing_hidden" value="{{tipos_seleccionados}}">
                     </td>
                     <td valign="top">
                         <div class="record-label">
@@ -22,8 +26,11 @@
                             Tipo de direcci&oacute;n
                         </div>
                         <select class="select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3">
-
+                            {{#each indicador_list}}
+                                <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
                         </select>
+                        <input type="hidden" class="multi1_n_existing_hidden" data-field="multi1_n_existing_hidden" value="{{indicadores_seleccionados}}">
                     </td>
                     <td valign="top">
                     </td>
@@ -43,16 +50,24 @@
                             País
                         </div>
                         <select class="paisExisting" data-field="paisExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_paises_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../pais_seleccionado}}>{{this}}</option>
+                            {{/each}}
                         </select>
-                        <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                        <i class="fa fa-spinner fa-spin loadingIconPaisExisting" style="display: none"></i>
                     </td>
                     <td valign="top">
                         <div class="record-label" >
                             Estado
                         </div>
                         <select class="estadoExisting" data-field="estadoExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_estados_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../estado_seleccionado}}>{{this}}</option>
+                            {{/each}}
                         </select>
-                        <i class="fa fa-spinner fa-spin loadingIconEstado" style="display: none"></i>
+                        <i class="fa fa-spinner fa-spin loadingIconEstadoExisting" style="display: none"></i>
                     </td>
                 </tr>
 
@@ -62,24 +77,34 @@
                             Municipio
                         </div>
                         <select class="municipioExisting" data-field="municipioExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_municipios_existing}}
+                                <option value="{{@key}}" {{ifSelected @key ../municipio_seleccionado}}>{{this}}</option>
+                            {{/each}}
                         </select>
-                        <i class="fa fa-spinner fa-spin loadingIconMunicipio" style="display: none"></i>
+                        <i class="fa fa-spinner fa-spin loadingIconMunicipioExisting" style="display: none"></i>
                     </td>
                     <td valign="top">
                         <div class="record-label" >
                             Ciudad
                         </div>
                         <select class="ciudadExisting" data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_ciudades_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../ciudad_seleccionada}}>{{this}}</option>
+                            {{/each}}
                         </select>
-                        <i class="fa fa-spinner fa-spin loadingIconCiudad" style="display: none"></i>
+                        <i class="fa fa-spinner fa-spin loadingIconCiudadExisting" style="display: none"></i>
                     </td>
                     <td valign="top">
                         <div class="record-label" >
                             Colonia
                         </div>
                         <select class="coloniaExisting" data-field="coloniaExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_colonias_existing}}
+                                <option value="{{@key}}" {{ifSelected @key ../colonia_seleccionada}}>{{this}}</option>
+                            {{/each}}
                         </select>
-                        <i class="fa fa-spinner fa-spin loadingIconColonia" style="display: none"></i>
+                        <i class="fa fa-spinner fa-spin loadingIconColoniaExisting" style="display: none"></i>
                     </td>
                 </tr>
 

@@ -51,6 +51,36 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
+
+        /*
+        $('select.newPais').select2({width:'100%'});
+        $('select.newEstado').select2({width:'100%'});
+        $('select.newMunicipio').select2({width:'100%'});
+        $('select.newCiudad').select2({width:'100%'});
+        $('select.newColonia').select2({width:'100%'});
+        */
+
+        /* Estableciendo formato select2 a campos de direccionaes existententes */
+        $('.multi_tipo_existing').select2({
+            width:'100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        $('.multi1_n_existing').select2({
+            width:'100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        $('select.paisExisting').select2({width:'100%'});
+        $('select.estadoExisting').select2({width:'100%'});
+        $('select.municipioExisting').select2({width:'100%'});
+        $('select.ciudadExisting').select2({width:'100%'});
+        $('select.coloniaExisting').select2({width:'100%'});
+
+
+        /*Fin existentes*/
         
 
     },
@@ -85,6 +115,12 @@
                 success: _.bind(function (data) {
 
                     if (data.paises.length == 0) {
+                        self.$('select.newPais').empty();
+                        self.$('select.newEstado').empty();
+                        self.$('select.newMunicipio').empty();
+                        self.$('select.newCiudad').empty();
+                        self.$('select.newColonia').empty();
+
                         app.alert.show('invalid_cp_exist', {
                             level: 'error',
                             autoClose: true,
@@ -373,22 +409,79 @@
                 });
             return;
         }
+        var lista_paises_existing={};
+        $(".newPais option").each(function(){
+            lista_paises_existing[$(this).attr('value')]=$(this).html();
+
+        });
+
+        var lista_estados_existing={};
+        $(".newEstado option").each(function(){
+            lista_estados_existing[$(this).attr('value')]=$(this).html();
+
+        });
+
+        var lista_municipios_existing={};
+        $(".newMunicipio option").each(function(){
+            lista_municipios_existing[$(this).attr('value')]=$(this).html();
+
+        });
+
+        var lista_ciudades_existing={};
+        $(".newCiudad option").each(function(){
+            lista_ciudades_existing[$(this).attr('value')]=$(this).html();
+
+        });
+
+        var lista_colonias_existing={};
+        $(".newColonia option").each(function(){
+            lista_colonias_existing[$(this).attr('value')]=$(this).html();
+
+        });
+
+
 
         var direccion = {
-            "codigo_postal":"codigo_postal",
-            "postal_hidden":"postal_hidden",
-            "pais":"pais",
-            "estado":"estado",
-            "municipio":"municipio",
-            "ciudad":"ciudad",
-            "colonia":"colonia",
-            "calle":"calle",
-            "numext":"numext",
-            "numint":"numint"
+            "tipo_direccion_list":this.tipo_direccion_list,
+            "tipos_seleccionados":$('select.multi_tipo').select2('val').join(),
+            "indicador_list":this.indicador_list,
+            "indicadores_seleccionados":$('select.multi1_n').select2('val').join(),
+            "lista_paises_existing":lista_paises_existing,
+            "pais_seleccionado":$('.newPais').val(),
+            "lista_estados_existing":lista_estados_existing,
+            "estado_seleccionado":$('.newEstado').val(),
+            "lista_municipios_existing":lista_municipios_existing,
+            "municipio_seleccionado":$('.newMunicipio').val(),
+            "lista_ciudades_existing":lista_ciudades_existing,
+            "ciudad_seleccionada":$('.newCiudad').val(),
+            "lista_colonias_existing":lista_colonias_existing,
+            "colonia_seleccionada":$('.newColonia').val(),
+            "codigo_postal":$('.newPostalInputTemp').val(),
+            "postal_hidden":$('#newPostalHidden').val(),
+            "calle":$('.newCalle').val(),
+            "numext":$('.newNumExt').val(),
+            "numint":$('.newNumInt').val()
         };
 
-        this.direcciones.push(direccion);
+        var indexInsert = this.direcciones.push(direccion) - 1;
+        var tipos_seleccionados=$('select.multi_tipo').select2('val');
+        var indicadores_seleccionados=$('select.multi1_n').select2('val');
         this.render();
+
+        //Estableciendo valores para campos de Tipo y Tipo de dirección
+        $('select.multi_tipo_existing').each(function(){
+            //Obtener valores de los hiden
+            var tipos_seleccionados=$(this).next().val();
+            $(this).select2('val',tipos_seleccionados.split(","));
+        });
+
+        //multi1_n_existing
+        $('select.multi1_n_existing').each(function(){
+            //Obtener valores de los hiden
+            var indicadores_seleccionados=$(this).next().val();
+            $(this).select2('val',indicadores_seleccionados.split(","));
+        });
+
     },
 
     /**
