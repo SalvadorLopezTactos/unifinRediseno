@@ -4,6 +4,7 @@
  */
 --}}
 <div class="direcciones_list">
+    <!-- Existentes -->
     {{#each direcciones}}
         <div class="control-group direccion">
             <table class="dashlet direcciondashlet" style="width: 100%;" cellspacing="1" cellpadding="5">
@@ -12,6 +13,13 @@
                         <div class="record-label">
                             Tipo
                         </div>
+
+                        <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;">
+                            {{#each tipo_direccion_list_hide}}
+                                <option value="{{@key}}" {{ifSelected @key ../tipo_seleccionado_hide}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+
                         <select class="select2 multi_tipo_existing" style="width: 100%" multiple="multiple" size="3">
                             {{#each tipo_direccion_list}}
                                 <option value="{{@key}}">{{this}}</option>
@@ -22,9 +30,15 @@
                     </td>
                     <td valign="top">
                         <div class="record-label">
-
                             Tipo de direcci&oacute;n
                         </div>
+
+                        <select class="existingIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
+                            {{#each indicador_list_hide}}
+                                <option value="{{@key}}" {{ifSelected @key ../indicador_seleccionado_hide}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+
                         <select class="select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3">
                             {{#each indicador_list}}
                                 <option value="{{@key}}">{{this}}</option>
@@ -130,6 +144,8 @@
 
     {{/each}}
 </div>
+<!-- Fin direcciones existentes -->
+
 <h4>Nueva Dirección</h4>
 <div class="control-group direccion">
     <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
@@ -138,6 +154,13 @@
                 <div class="record-label">
                     Tipo
                 </div>
+
+                <select class="newTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
+                    {{#each def.dir_tipo_list_html}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                </select>
+
                 <select id="tipo_multiselect_id" class="select2 multi_tipo" style="width: 100%" multiple="multiple" size="3">
                     {{#each tipo_direccion_list}}
                         <option value="{{@key}}">{{this}}</option>
@@ -146,9 +169,15 @@
             </td>
             <td valign="top">
                 <div class="record-label">
-
                     Tipo de direcci&oacute;n
                 </div>
+
+                <select class="newIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
+                    {{#each def.indicador_html}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                </select>
+
                 <select id="indicador_multiselect_id" class="select2 multi1_n" style="width: 100%" multiple="multiple" size="3">
                     {{#each indicador_list}}
                         <option value="{{@key}}">{{this}}</option>
