@@ -15,14 +15,18 @@
         'keydown .newNumExt': 'limitto100',
 
         'focusout #newPostalInputTemp': 'getInfoAboutCP',
+        'change .postalInputTempExisting': 'getInfoAboutCPExisting',
 
         'change .newPais': 'populateEdoByPais',
+        'change .paisExisting': 'populateEdoByPaisExisting',
 
         //Dependencia entre Municipio y Colonia
         'change .newMunicipio': 'populateColoniasByMunicipio',
+        'change .municipioExisting': 'populateColoniasByMunicipioExisting',
 
         //Dependencia entre Estado y Colonia, además llena municipio por Estado
         'change .newEstado': 'populateCiudadesByEstado',
+        'change .estadoExisting': 'populateCiudadesByEstadoExisting',
         'click  .addDireccion': 'addNewDireccion',
 
         //Nuevo evento para actualizar valores de select "Tipo" dependiendo el valor del multiselect
@@ -56,7 +60,7 @@
 
 
         this.direcciones = [];
-        this.dataDireccionesApi=null;
+        this.dataDireccionesApi = null;
 
         this.fiscalCounter = 0;
         this.counterTipoVacio = 0;
@@ -92,7 +96,7 @@
                 success: function (data) {
                     //get mapping arrays and keys
                     //self.direcciones = [];
-                    if(self.flagDirecciones==0){
+                    if (self.flagDirecciones == 0) {
                         self.flagDirecciones++;
                         var dir_tipo_list_html = App.lang.getAppListStrings('tipodedirecion_list');
                         var country_list = app.metadata.getCountries();
@@ -100,7 +104,7 @@
                         var municipio_list = app.metadata.getMunicipalities();
                         var city_list = app.metadata.getCities();
                         var postal_list = app.metadata.getPostalCodes();
-                        this.arrObjDirecciones=[];
+                        this.arrObjDirecciones = [];
                         for (this.i = 0; this.i < data.records.length; this.i++) {
 
                             //Tipo seleccionado
@@ -138,7 +142,7 @@
                                 "inactivo": false
                             };
                             this.arrObjDirecciones.push(this.objDireccion);
-                            this.index=0;
+                            this.index = 0;
                             var contextoApi = this;
                             //LLamada a api custom
                             var strUrl = 'DireccionesCP/' + this.objDireccion.codigo_postal;
@@ -397,6 +401,143 @@
 
     },
 
+    /*
+    * Función que llena los campos de una direccíon ya existente, consumiendo el api DireccionesCP
+    */
+    getInfoAboutCPExisting: function (evt) {
+    
+        this.cpEvt = evt;
+        var cp = evt.currentTarget.value;
+        var str_length = cp.length;
+        var self = this;
+
+        if (str_length == 0) {
+            this.counterEmptyFields++;
+        }
+
+        var pattern = /^\d+$/;
+        var isNumber = pattern.test(cp);
+        if (str_length == 5 && isNumber) {
+
+            this.$(evt.target).css('border-color', '');
+
+            this.$(evt.target).parent().parent().find('select.paisExisting').select2('val','');
+            this.$(evt.target).parent().parent().find('select.paisExisting').empty();
+            this.$(evt.target).parent().parent().find('select.estadoExisting').select2('val','');
+            this.$(evt.target).parent().parent().find('select.estadoExisting').empty();
+            this.$(evt.target).parent().parent().next('tr').children().eq(0).find('select.municipioExisting').select2('val','');
+            this.$(evt.target).parent().parent().next('tr').children().eq(0).find('select.municipioExisting').empty();
+            this.$(evt.target).parent().parent().next('tr').children().eq(1).find('select.ciudadExisting').select2('val','');
+            this.$(evt.target).parent().parent().next('tr').children().eq(1).find('select.ciudadExisting').empty();
+            this.$(evt.target).parent().parent().next('tr').children().eq(2).find('select.coloniaExisting').select2('val','');
+            this.$(evt.target).parent().parent().next('tr').children().eq(2).find('select.coloniaExisting').empty();
+
+            //Arreglo global para llenar campo estadoExisting con base a un idPais
+            this.estados_list = [];
+            this.municipios_list=[];
+
+            //LLamada a api custom
+            var strUrl = 'DireccionesCP/' + cp;
+
+            this.$(evt.target).parent().parent().find('.loadingIconPaisExisting').show();
+            this.$(evt.target).parent().parent().find('.loadingIconEstadoExisting').show();
+            this.$(evt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioExisting').show();
+            this.$(evt.target).parent().parent().next('tr').children().eq(1).find('.loadingIconCiudadExisting').show();
+            this.$(evt.target).parent().parent().next('tr').children().eq(2).find('.loadingIconColoniaExisting').show();
+
+
+            app.api.call('GET', app.api.buildURL(strUrl), evt, {
+                success: _.bind(function (data) {
+                    //self.cpEvt
+
+                    if (data.paises.length == 0) {
+                        app.alert.show('invalid_cp_exist', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'El C\u00F3digo Postal no existe'
+                        });
+                        $(self.cpEvt.target).parent().parent().find('.loadingIconPaisExisting').hide();
+                        $(self.cpEvt.target).parent().parent().find('.loadingIconEstadoExisting').hide();
+                        $(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioExisting').hide();
+                        $(self.cpEvt.target).parent().parent().next('tr').children().eq(1).find('.loadingIconCiudadExisting').hide();
+                        $(self.cpEvt.target).parent().parent().next('tr').children().eq(2).find('.loadingIconColoniaExisting').hide();
+
+                        $(self.cpEvt.target).css('border-color', 'red');
+
+                    } else {
+
+                        //Añadiendo id de cp
+                        //$('#existingPostalHidden').val(data.idCP);
+                        $(self.cpEvt.target).parent().parent().find('input.postalHiddenExisting').val(data.idCP);
+
+                        var list_paises = data.paises;
+                        var list_municipios = data.municipios;
+                        var list_estados = data.estados;
+                        var list_colonias = data.colonias;
+
+                        var paises_options = '';
+                        for (var i = 0; i < list_paises.length; i++) {
+                            $(self.cpEvt.target).parent().parent().find('select.paisExisting').append($("<option>").val(list_paises[i].idPais).html(list_paises[i].namePais));
+
+                        }
+
+                        //Se lanza evento change para poder observar el valor concatenado en el select con formato select2
+                        $(self.cpEvt.target).parent().parent().find('select.paisExisting').trigger('change');
+
+                        for (var i = 0; i < list_estados.length; i++) {
+                            
+                            $(self.cpEvt.target).parent().parent().find('select.estadoExisting').append($("<option>").val(list_estados[i].idEstado).html(list_estados[i].nameEstado));
+                            self.estados_list.push({
+                                'id': list_estados[i].idEstado,
+                                "name": list_estados[i].nameEstado
+                            });
+                        }
+
+
+                        for (var i = 0; i < list_municipios.length; i++) {
+                            
+                            $(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('select.municipioExisting').append($("<option>").val(list_municipios[i].idMunicipio).html(list_municipios[i].nameMunicipio));
+                            self.municipios_list.push({
+                                'id': list_municipios[i].idMunicipio,
+                                "name": list_municipios[i].nameMunicipio
+                            })
+                        }
+
+                        //Ejecutar la carga de estados por país solo si para el CP ingresado existe más de un país
+                        if (list_paises.length > 1) {
+                            //Con este evento change se dispara la función populateEdoByPais
+                            self.$(self.cpEvt.target).parent().parent().find('select.paisExisting').trigger("change");
+                        }
+
+                        //Evento change de municipioExisting para llenar colonias
+                        //Se dispara función populateColoniasByMunicipioExisting
+                        self.$(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('select.municipioExisting').trigger("change");
+
+                        self.$(self.cpEvt.target).parent().parent().find('.loadingIconPaisExisting').hide();
+                        self.$(self.cpEvt.target).parent().parent().find('.loadingIconEstadoExisting').hide();
+                        self.$(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioExisting').hide();
+
+                        //Evento change de estado para llenas ciudades
+                        //Se dispara función populateCiudadesByEstadoExisting
+                        self.$(self.cpEvt.target).parent().parent().find('select.estadoExisting').trigger('change');
+
+                    }
+                }, this)
+            });
+
+        } else {
+
+            app.alert.show('invalid_cp', {
+                level: 'error',
+                autoClose: true,
+                messages: 'C\u00F3digo Postal inv\u00E1lido'
+            });
+
+            this.$(evt.target).css('border-color', 'red');
+        }
+
+    },
+
     populateEdoByPais: function (evt) {
 
         //Establecer estado por pais
@@ -415,6 +556,24 @@
         }
     },
 
+    populateEdoByPaisExisting:function(evt){
+
+        //Establecer estado por pais
+        var id_pais = $(evt.currentTarget).val();
+        var returnArray = this.arraySearch(this.estados_list, id_pais, 'estado');
+
+        if (returnArray.length > 0) {
+            this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').select2('val','');
+            this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').empty();
+            for (var i = 0; i < returnArray.length; i++) {
+
+                this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').append($("<option>").val(returnArray[i].id).html(returnArray[i].name));
+            }
+
+            this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').trigger('change');
+        }
+
+    },
 
     arraySearch: function (arr, val, tipo) {
         var returnArray = [];
@@ -466,6 +625,40 @@
         }
     },
 
+    populateColoniasByMunicipioExisting: function (evt) {
+
+        this.$(evt.currentTarget).parent().parent().find('select.coloniaExisting').select2('val','');
+        this.$(evt.currentTarget).parent().parent().find('select.coloniaExisting').empty();
+
+        var id_municipio = $(evt.currentTarget).val();
+        var cp = this.$(evt.currentTarget).parent().parent().parent().find('.postalInputTempExisting').val();
+
+        if (id_municipio != null && id_municipio != "") {
+
+            //LLamada a api custom
+            var strUrl = 'dire_Colonia?filter[0][codigo_postal]=' + cp + '&filter[0][id][$starts]=' + id_municipio + '&max_num=-1';
+
+            this.$(evt.currentTarget).parent().parent().find(".loadingIconColoniaExisting").show();
+            app.api.call('GET', app.api.buildURL(strUrl), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
+
+                        $(evt.currentTarget).parent().parent().find('select.coloniaExisting').append($("<option>").val("1").html("Seleccionar Colonia"));
+                        for (var i = 0; i < data.records.length; i++) {
+                            $(evt.currentTarget).parent().parent().find('select.coloniaExisting').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                        }
+
+                        //Se lanza evento change para observar el valor concatenado en campo coloniaExisting con formato select2
+                        $(evt.currentTarget).parent().parent().find('select.coloniaExisting').trigger('change');
+
+                        $(evt.currentTarget).parent().parent().find(".loadingIconColoniaExisting").hide();
+                    }
+                }, this)
+            });
+
+        }
+    },
+
     populateCiudadesByEstado: function (evt) {
 
         this.$('select.newCiudad').empty();
@@ -500,6 +693,53 @@
                         }
 
                         $(".loadingIconCiudad").hide();
+
+                    }
+                }, this)
+            });
+
+        }
+    },
+
+    populateCiudadesByEstadoExisting: function (evt) {
+
+        this.$(evt.currentTarget).parent().parent().parent().find('select.ciudadExisting').select2('val','');
+        this.$(evt.currentTarget).parent().parent().parent().find('select.ciudadExisting').empty();
+        this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').select2('val','');
+        this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').empty();
+
+        var id_estado = $(evt.currentTarget).val();
+
+        if (id_estado != null && id_estado != "") {
+            var returnArray = this.arraySearch(this.municipios_list, id_estado, 'municipio');
+
+            if (returnArray.length > 0) {
+                for (var i = 0; i < returnArray.length; i++) {
+
+                    this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').append($("<option>").val(returnArray[i].id).html(returnArray[i].name));
+                }
+
+                this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').trigger('change');
+
+            }
+
+            //Llamando a api para filtrar ciudades
+            var strUrl = 'dire_Ciudad?filter[0][id][$starts]=' + id_estado + '&max_num=-1';
+
+            $(evt.currentTarget).parent().parent().parent().find(".loadingIconCiudadExisting").show();
+            app.api.call('GET', app.api.buildURL(strUrl), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
+
+                        $(evt.currentTarget).parent().parent().parent().find('select.ciudadExisting').append($("<option>").val("1").html("Seleccionar Ciudad"));
+                        for (var i = 0; i < data.records.length; i++) {
+                            $(evt.currentTarget).parent().parent().parent().find('select.ciudadExisting').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                        }
+
+                        //Se lanza evento change para observar el valor concatenado en campo ciudadExisting con formato select2
+                        $(evt.currentTarget).parent().parent().parent().find('select.ciudadExisting').trigger('change');
+
+                        $(evt.currentTarget).parent().parent().parent().find(".loadingIconCiudadExisting").hide();
 
                     }
                 }, this)
@@ -780,22 +1020,22 @@
      * @param  {object} evt, Objeto que contiene información del evento
      */
     updateValueTipoMultiselect: function (evt) {
-        
+
         var $input = this.$(evt.currentTarget).siblings('select');
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
             $index = $inputs.index($input),
             dropdown_value = $input.val();
-       
+
         var valores = evt.val;
         var id = this._getTipoDireccion(null, valores)
         //Estableciendo valores para solo 1 valor seleccionado
         $(evt.currentTarget).siblings('select').val(id);
-        var nuevo_valor=$(evt.currentTarget).siblings('select').val();
+        var nuevo_valor = $(evt.currentTarget).siblings('select').val();
         //$('.newTipodedireccion').val(id);
         //$('.newTipodedireccion').trigger("change");
-        this.updateExistingDireccion($index, nuevo_valor , 'tipo');
+        this.updateExistingDireccion($index, nuevo_valor, 'tipo');
 
     },
 
@@ -989,18 +1229,18 @@
 
             //Obteniendo valores multiselect existing
             /*
-            var valoresExisting = $(evt.target).parent().parent().find('select.multi1_n').select2('val');
-            var indexExisting = valoresExisting.indexOf("2");
-            valoresExisting.splice(indexExisting, 1);
-            $(evt.target).parent().parent().find('select.multi1_n').select2('val', valoresExisting);
-            $(evt.target).val(this._getIndicador(null, valoresExisting));
-            */
+             var valoresExisting = $(evt.target).parent().parent().find('select.multi1_n').select2('val');
+             var indexExisting = valoresExisting.indexOf("2");
+             valoresExisting.splice(indexExisting, 1);
+             $(evt.target).parent().parent().find('select.multi1_n').select2('val', valoresExisting);
+             $(evt.target).val(this._getIndicador(null, valoresExisting));
+             */
 
             $input.focus();
             this.fiscalCounter = 0;
         } else {
             if ($input.attr('class') == 'existingIndicador') {
-                this.updateExistingDireccion($index, dropdown_value , 'indicador');
+                this.updateExistingDireccion($index, dropdown_value, 'indicador');
             }
         }
         /* END CUSTOMIZATION */
@@ -1060,58 +1300,57 @@
 
             //Obteniendo valores multiselect existing
             /*
-            var valoresExisting = $(evt.target).parent().parent().find('select.multi1_n_existing').select2('val');
-            var indexExisting = valoresExisting.indexOf("5");
-            valoresExisting.splice(indexExisting, 4);
-            $(evt.target).parent().parent().find('select.multi1_n_existing').select2('val', valoresExisting);
-            $(evt.target).val(this._getIndicador(null, valoresExisting));
-            */
+             var valoresExisting = $(evt.target).parent().parent().find('select.multi1_n_existing').select2('val');
+             var indexExisting = valoresExisting.indexOf("5");
+             valoresExisting.splice(indexExisting, 4);
+             $(evt.target).parent().parent().find('select.multi1_n_existing').select2('val', valoresExisting);
+             $(evt.target).val(this._getIndicador(null, valoresExisting));
+             */
 
             $input.focus();
             this.adminCounter = 0;
         } else {
             if ($input.attr('class') == 'existingIndicador') {
-                this.updateExistingDireccion($index,dropdown_value , 'indicador');
+                this.updateExistingDireccion($index, dropdown_value, 'indicador');
             }
         }
         /* END CUSTOMIZATION */
     },
 
-    updateExistingInputs:function(evt){
+    updateExistingInputs: function (evt) {
 
         var $input = this.$(evt.currentTarget);
-        var class_name=$input[0].classList[0],
+        var class_name = $input[0].classList[0],
             field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
             $index = $inputs.index($input),
             nuevo_valor = $input.val();
 
-        this.updateExistingDireccion($index, nuevo_valor , field_name);
+        this.updateExistingDireccion($index, nuevo_valor, field_name);
 
     },
 
     updateExistingDireccion: function (index, nuevo_valor, field_name) {
 
-        if(field_name == 'tipo'){
-            this.direcciones[index].tipo_seleccionado_hide=nuevo_valor;
+        if (field_name == 'tipo') {
+            this.direcciones[index].tipo_seleccionado_hide = nuevo_valor;
         }
 
-        if(field_name == 'indicador'){
-            this.direcciones[index].indicador_seleccionado_hide=nuevo_valor;
+        if (field_name == 'indicador') {
+            this.direcciones[index].indicador_seleccionado_hide = nuevo_valor;
         }
 
-        if(field_name == 'calle'){
-            this.direcciones[index].calle=nuevo_valor;
+        if (field_name == 'calle') {
+            this.direcciones[index].calle = nuevo_valor;
         }
 
-        if(field_name == 'numext'){
-            this.direcciones[index].numext=nuevo_valor;
+        if (field_name == 'numext') {
+            this.direcciones[index].numext = nuevo_valor;
         }
 
-        if(field_name == 'numint'){
-            this.direcciones[index].numint=nuevo_valor;
+        if (field_name == 'numint') {
+            this.direcciones[index].numint = nuevo_valor;
         }
-
 
 
     },
