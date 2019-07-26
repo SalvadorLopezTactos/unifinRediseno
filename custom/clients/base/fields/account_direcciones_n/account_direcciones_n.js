@@ -38,6 +38,9 @@
         'change .existingIndicador': 'updateIndicadores',
         'change .newIndicador': 'updateIndicadores',
 
+        //Actualizaciones de calle, num exterior y num interior 
+        'change .inputExisting': 'updateExistingInputs',
+
     },
 
     initialize: function (options) {
@@ -1074,6 +1077,19 @@
         /* END CUSTOMIZATION */
     },
 
+    updateExistingInputs:function(evt){
+
+        var $input = this.$(evt.currentTarget);
+        var class_name=$input[0].classList[0],
+            field_name = $($input).attr('data-field');
+        var $inputs = this.$('.' + class_name),
+            $index = $inputs.index($input),
+            nuevo_valor = $input.val();
+
+        this.updateExistingDireccion($index, nuevo_valor , field_name);
+
+    },
+
     updateExistingDireccion: function (index, nuevo_valor, field_name) {
 
         if(field_name == 'tipo'){
@@ -1083,6 +1099,20 @@
         if(field_name == 'indicador'){
             this.direcciones[index].indicador_seleccionado_hide=nuevo_valor;
         }
+
+        if(field_name == 'calle'){
+            this.direcciones[index].calle=nuevo_valor;
+        }
+
+        if(field_name == 'numext'){
+            this.direcciones[index].numext=nuevo_valor;
+        }
+
+        if(field_name == 'numint'){
+            this.direcciones[index].numint=nuevo_valor;
+        }
+
+
 
     },
 
