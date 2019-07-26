@@ -20,6 +20,9 @@
         'change .newPais': 'populateEdoByPais',
         'change .paisExisting': 'populateEdoByPaisExisting',
 
+        'change .ciudadExisting':'updateExistingCiudad',
+        'change .coloniaExisting':'updateExistingColonia',
+
         //Dependencia entre Municipio y Colonia
         'change .newMunicipio': 'populateColoniasByMunicipio',
         'change .municipioExisting': 'populateColoniasByMunicipioExisting',
@@ -517,6 +520,15 @@
                         self.$(self.cpEvt.target).parent().parent().find('.loadingIconEstadoExisting').hide();
                         self.$(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioExisting').hide();
 
+                        //Actualizando el código postal en el arreglo this.direcciones
+                        var $input = self.$(self.cpEvt.currentTarget);
+                        var class_name = $input[0].className;
+                        var $inputs = self.$('.' + class_name),
+                        $index = $inputs.index($input),
+                        nuevo_valor = $input.siblings('input').val();
+
+                        self.updateExistingDireccion($index, nuevo_valor, 'codigopostal');
+
                         //Evento change de estado para llenas ciudades
                         //Se dispara función populateCiudadesByEstadoExisting
                         self.$(self.cpEvt.target).parent().parent().find('select.estadoExisting').trigger('change');
@@ -560,6 +572,13 @@
 
         //Establecer estado por pais
         var id_pais = $(evt.currentTarget).val();
+
+        //Actualizando el código postal en el arreglo this.direcciones
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className;
+        var $inputs = this.$('select.' + class_name),
+        $index = $inputs.index($input);
+
         var returnArray = this.arraySearch(this.estados_list, id_pais, 'estado');
 
         if (returnArray.length > 0) {
@@ -569,6 +588,8 @@
 
                 this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').append($("<option>").val(returnArray[i].id).html(returnArray[i].name));
             }
+
+            this.updateExistingDireccion($index, id_pais, 'pais');
 
             this.$(evt.currentTarget).parent().parent().find('select.estadoExisting').trigger('change');
         }
@@ -627,10 +648,15 @@
 
     populateColoniasByMunicipioExisting: function (evt) {
 
+        this.evt = evt;
+        var self = this;
+
         this.$(evt.currentTarget).parent().parent().find('select.coloniaExisting').select2('val','');
         this.$(evt.currentTarget).parent().parent().find('select.coloniaExisting').empty();
 
         var id_municipio = $(evt.currentTarget).val();
+
+    
         var cp = this.$(evt.currentTarget).parent().parent().parent().find('.postalInputTempExisting').val();
 
         if (id_municipio != null && id_municipio != "") {
@@ -648,6 +674,16 @@
                             $(evt.currentTarget).parent().parent().find('select.coloniaExisting').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
 
+                        //Creando variables para actualizar municipio en this.direcciones
+                        var $input = self.$(self.evt.currentTarget);
+                        var class_name = $input[0].className;
+                        var $inputs = self.$('select.' + class_name),
+                        $index = $inputs.index($input);
+                        var id_municipio=self.$(self.evt.currentTarget).val();
+
+                        //Actualizando municipio en this.direcciones
+                        this.updateExistingDireccion($index, id_municipio, 'municipio');
+
                         //Se lanza evento change para observar el valor concatenado en campo coloniaExisting con formato select2
                         $(evt.currentTarget).parent().parent().find('select.coloniaExisting').trigger('change');
 
@@ -655,6 +691,8 @@
                     }
                 }, this)
             });
+
+            
 
         }
     },
@@ -710,6 +748,11 @@
 
         var id_estado = $(evt.currentTarget).val();
 
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className;
+        var $inputs = this.$('select.' + class_name),
+        $index = $inputs.index($input);
+
         if (id_estado != null && id_estado != "") {
             var returnArray = this.arraySearch(this.municipios_list, id_estado, 'municipio');
 
@@ -718,6 +761,8 @@
 
                     this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').append($("<option>").val(returnArray[i].id).html(returnArray[i].name));
                 }
+
+                this.updateExistingDireccion($index, id_estado, 'estado');
 
                 this.$(evt.currentTarget).parent().parent().parent().find('select.municipioExisting').trigger('change');
 
@@ -1317,6 +1362,30 @@
         /* END CUSTOMIZATION */
     },
 
+    updateExistingCiudad: function (evt) {
+
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className;
+        var $inputs = this.$('select.' + class_name),
+            $index = $inputs.index($input),
+            nuevo_valor = $input.val();
+
+        this.updateExistingDireccion($index, nuevo_valor, 'ciudad');
+
+    },
+
+    updateExistingColonia: function (evt) {
+
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className;
+        var $inputs = this.$('select.' + class_name),
+            $index = $inputs.index($input),
+            nuevo_valor = $input.val();
+
+        this.updateExistingDireccion($index, nuevo_valor, 'colonia');
+
+    },
+
     updateExistingInputs: function (evt) {
 
         var $input = this.$(evt.currentTarget);
@@ -1340,6 +1409,30 @@
             this.direcciones[index].indicador_seleccionado_hide = nuevo_valor;
         }
 
+        if(field_name =='codigopostal'){
+            this.direcciones[index].postal_hidden = nuevo_valor;
+        }
+
+        if(field_name =='pais'){
+            this.direcciones[index].pais_seleccionado = nuevo_valor;
+        }
+
+        if(field_name =='estado'){
+            this.direcciones[index].estado_seleccionado = nuevo_valor;
+        }
+
+        if(field_name =='municipio'){
+            this.direcciones[index].municipio_seleccionado = nuevo_valor;
+        }
+
+        if(field_name =='ciudad'){
+            this.direcciones[index].ciudad_seleccionada = nuevo_valor;
+        }
+
+        if(field_name =='colonia'){
+            this.direcciones[index].colonia_seleccionada = nuevo_valor;
+        }
+
         if (field_name == 'calle') {
             this.direcciones[index].calle = nuevo_valor;
         }
@@ -1351,8 +1444,6 @@
         if (field_name == 'numint') {
             this.direcciones[index].numint = nuevo_valor;
         }
-
-
     },
 
     _doValidateEmptyTipo: function (fields, errors, callback) {
