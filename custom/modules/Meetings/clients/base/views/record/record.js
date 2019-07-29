@@ -54,6 +54,7 @@
 
     _render: function (options) {
         this._super("_render");
+        reunion = this;
         $('[data-name=reunion_objetivos]').find('.record-label').addClass('hide');
 
         //Ocultar panel con campos de control de check in
@@ -65,6 +66,11 @@
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
         this.enableparentname();
+
+        //Evento para validar acciones
+        $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
+            reunion.hidecheck();
+        });
     },
 
     /**
@@ -192,7 +198,7 @@
 
     cambioFecha: function () {
         this.fechaInicioTemp = Date.parse(this.model.get("date_start"));
-        console.log("Fechas: " + this.fechaInicioTemp);
+        //console.log("Fechas: " + this.fechaInicioTemp);
     },
 
     /*Solo será visible el resultado cuando el estado se Realizada o No Realizada
@@ -277,7 +283,7 @@
         if (fechaInicioTmp != fechaInicioNueva) {
             if (fechaInicioTmp < fechaActual) {
                 if (fechaInicioNueva >= fechaInicioTmp) {
-                    console.log("Guarda por opcion 1");
+                    //console.log("Guarda por opcion 1");
                 }
                 else {
                     app.alert.show("Fecha no valida", {
@@ -295,7 +301,7 @@
             }
             if (fechaInicioTmp >= fechaActual) {
                 if (fechaInicioNueva >= fechaActual) {
-                    console.log("Guarda por opcion 2")
+                    //console.log("Guarda por opcion 2")
                 }
                 else {
                     app.alert.show("Fecha no valida", {
@@ -461,13 +467,13 @@
     */
     hidecheck:function(){
         var fechaActual = new Date(); //obtiene fecha actual
-        var dateend = new Date(this.model.get("date_start"));
-        var d = dateend.getDate();
-        var m = dateend.getMonth() + 1;
-        var y = dateend.getFullYear();
+        var fechainicio = new Date(this.model.get("date_start"));
+        var d = fechainicio.getDate();
+        var m = fechainicio.getMonth() + 1;
+        var y = fechainicio.getFullYear();
         var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
         //Fecha inicio, anterior al dia anterior
-        var fechainicio= new Date(y,m-1,d, 0,0);
+        //var fechainicio= new Date(y,m-1,d, 0,0);
 
         if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
             && fechaActual>fechainicio && fechaActual<fechafin && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
@@ -503,13 +509,13 @@
             && fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
                 myField.listenTo(myField, "render", function () {
                         myField.show();
-                        console.log("field being rendered as: " + myField.tplName);
+                        //console.log("field being rendered as: " + myField.tplName);
                     });
 
             }   else   {
                 myField.listenTo(myField, "render", function () {
                         myField.hide();
-                        console.log("field being rendered as: " + myField.tplName);
+                        //console.log("field being rendered as: " + myField.tplName);
                     });
             }
     },
@@ -519,27 +525,22 @@
      */
     ValidaCuentNoVacia: function () {
         var fechaActual = new Date(); //obtiene fecha actual
-        var dateend = new Date(this.model.get("date_start"));
-        var d = dateend.getDate();
-        var m = dateend.getMonth() + 1;
-        var y = dateend.getFullYear();
+        var fechainicio = new Date(this.model.get("date_start"));
+        var d = fechainicio.getDate();
+        var m = fechainicio.getMonth() + 1;
+        var y = fechainicio.getFullYear();
         var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
-        //Fecha inicio, anterior al dia anterior
-        var fechainicio= new Date(y,m-1,d, 0,0);
-
         var myField = this.getField("new_minuta");
         if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id')
             && fechaActual>fechainicio && fechaActual<fechafin && this.model.get('status')=='Planned'){
             myField.listenTo(myField, "render", function () {
                 myField.show();
-                console.log("field being rendered as: " + myField.tplName);
+                //console.log("field being rendered as: " + myField.tplName);
             });
-        }
-
-        else {
+        }else{
             myField.listenTo(myField, "render", function () {
                 myField.hide();
-                console.log("field being rendered as: " + myField.tplName);
+                //console.log("field being rendered as: " + myField.tplName);
             });
         }
     },
