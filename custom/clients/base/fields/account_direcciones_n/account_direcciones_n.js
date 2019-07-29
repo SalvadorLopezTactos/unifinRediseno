@@ -108,44 +108,44 @@
                         var city_list = app.metadata.getCities();
                         var postal_list = app.metadata.getPostalCodes();
                         this.arrObjDirecciones = [];
-                        for (this.i = 0; this.i < data.records.length; this.i++) {
+                        for (var i = 0; i < data.records.length; i++) {
 
                             //Tipo seleccionado
                             var tipo_seleccionado_hide = '';
                             var tipo_seleccionado_hide_label = '';
 
                             this.objDireccion = {
-                                "id": data.records[this.i].id,
+                                "id": data.records[i].id,
                                 "tipo_direccion_list_hide": App.lang.getAppListStrings('tipodedirecion_list'),
-                                "tipo_seleccionado_hide": data.records[this.i].tipodedireccion[0],
-                                "tipo_seleccionado_hide_label": dir_tipo_list_html[data.records[this.i].tipodedireccion[0]],
+                                "tipo_seleccionado_hide": data.records[i].tipodedireccion[0],
+                                "tipo_seleccionado_hide_label": dir_tipo_list_html[data.records[i].tipodedireccion[0]],
                                 "tipo_direccion_list": self.tipo_direccion_list,
                                 //"tipos_seleccionados":$('select.multi_tipo').select2('val').join(),
                                 "indicador_list_hide": self.def.indicador_html,
-                                "indicador_seleccionado_hide": data.records[this.i].indicador,
-                                "indicador_seleccionado_hide_label": self.def.indicador_html[data.records[this.i].indicador],
+                                "indicador_seleccionado_hide": data.records[i].indicador,
+                                "indicador_seleccionado_hide_label": self.def.indicador_html[data.records[i].indicador],
                                 "indicador_list": self.indicador_list,
                                 //"indicadores_seleccionados":$('select.multi1_n').select2('val').join(),
                                 //"lista_paises_existing":lista_paises_existing,
-                                "pais_seleccionado": data.records[this.i].dire_direccion_dire_paisdire_pais_ida,
+                                "pais_seleccionado": data.records[i].dire_direccion_dire_paisdire_pais_ida,
                                 //"lista_estados_existing":lista_estados_existing,
-                                "estado_seleccionado": data.records[this.i].dire_direccion_dire_estadodire_estado_ida,
+                                "estado_seleccionado": data.records[i].dire_direccion_dire_estadodire_estado_ida,
                                 //"lista_municipios_existing":lista_municipios_existing,
-                                "municipio_seleccionado": data.records[this.i].dire_direccion_dire_municipiodire_municipio_ida,
+                                "municipio_seleccionado": data.records[i].dire_direccion_dire_municipiodire_municipio_ida,
                                 //"lista_ciudades_existing":lista_ciudades_existing,
-                                "ciudad_seleccionada": data.records[this.i].dire_direccion_dire_ciudaddire_ciudad_ida,
+                                "ciudad_seleccionada": data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida,
                                 //"lista_colonias_existing":lista_colonias_existing,
-                                "colonia_seleccionada": data.records[this.i].dire_direccion_dire_coloniadire_colonia_ida,
-                                "codigo_postal": data.records[this.i].dire_direccion_dire_codigopostal_name,
-                                "postal_hidden": data.records[this.i].dire_direccion_dire_codigopostaldire_codigopostal_ida,
-                                "calle": data.records[this.i].calle,
-                                "numext": data.records[this.i].numext,
-                                "numint": data.records[this.i].numint,
-                                "principal": data.records[this.i].principal,
+                                "colonia_seleccionada": data.records[i].dire_direccion_dire_coloniadire_colonia_ida,
+                                "codigo_postal": data.records[i].dire_direccion_dire_codigopostal_name,
+                                "postal_hidden": data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida,
+                                "calle": data.records[i].calle,
+                                "numext": data.records[i].numext,
+                                "numint": data.records[i].numint,
+                                "principal": data.records[i].principal,
                                 "inactivo": false
                             };
                             this.arrObjDirecciones.push(this.objDireccion);
-                            this.index = 0;
+                            
                             var contextoApi = this;
                             //LLamada a api custom
                             var strUrl = 'DireccionesCP/' + this.objDireccion.codigo_postal;
@@ -158,44 +158,44 @@
                                     var list_estados = data.estados;
                                     var list_colonias = data.colonias;
 
-                                    contextoApi.arrObjDirecciones[contextoApi.index].lista_paises_existing = {};
-                                    contextoApi.arrObjDirecciones[contextoApi.index].lista_estados_existing = {};
-                                    contextoApi.arrObjDirecciones[contextoApi.index].lista_municipios_existing = {};
-                                    contextoApi.arrObjDirecciones[contextoApi.index].lista_ciudades_existing = {};
-                                    contextoApi.arrObjDirecciones[contextoApi.index].lista_colonias_existing = {};
+                                    var indice=self.getIndexOfAddress(contextoApi.arrObjDirecciones,data.idCP);
+
+                                    contextoApi.arrObjDirecciones[indice].lista_paises_existing = {};
+                                    contextoApi.arrObjDirecciones[indice].lista_estados_existing = {};
+                                    contextoApi.arrObjDirecciones[indice].lista_municipios_existing = {};
+                                    contextoApi.arrObjDirecciones[indice].lista_ciudades_existing = {};
+                                    contextoApi.arrObjDirecciones[indice].lista_colonias_existing = {};
 
 
                                     var paises_options = '';
                                     for (var i = 0; i < list_paises.length; i++) {
                                         //contextoApi.objDireccion.lista_paises_existing.push({'id':list_paises[i].idPais,"name":list_paises[i].namePais});
-                                        contextoApi.arrObjDirecciones[contextoApi.index].lista_paises_existing[list_paises[i].idPais] = list_paises[i].namePais;
+                                        contextoApi.arrObjDirecciones[indice].lista_paises_existing[list_paises[i].idPais] = list_paises[i].namePais;
                                     }
 
                                     for (var i = 0; i < list_estados.length; i++) {
                                         //contextoApi.objDireccion.lista_estados_existing.push({'id':list_estados[i].idEstado,"name":list_estados[i].nameEstado});
-                                        contextoApi.arrObjDirecciones[contextoApi.index].lista_estados_existing[list_estados[i].idEstado] = list_estados[i].nameEstado;
+                                        contextoApi.arrObjDirecciones[indice].lista_estados_existing[list_estados[i].idEstado] = list_estados[i].nameEstado;
                                     }
 
                                     for (var i = 0; i < list_municipios.length; i++) {
                                         //contextoApi.objDireccion.lista_estados_existing.push({'id':list_estados[i].idEstado,"name":list_estados[i].nameEstado});
-                                        contextoApi.arrObjDirecciones[contextoApi.index].lista_municipios_existing[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
+                                        contextoApi.arrObjDirecciones[indice].lista_municipios_existing[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
                                     }
 
                                     var ciudades = Object.values(city_list);
                                     for (var i = 0; i < ciudades.length; i++) {
-                                        if (ciudades[i].estado_id == contextoApi.arrObjDirecciones[contextoApi.index].estado_seleccionado) {
-                                            contextoApi.arrObjDirecciones[contextoApi.index].lista_ciudades_existing[ciudades[i].id] = ciudades[i].name;
+                                        if (ciudades[i].estado_id == contextoApi.arrObjDirecciones[indice].estado_seleccionado) {
+                                            contextoApi.arrObjDirecciones[indice].lista_ciudades_existing[ciudades[i].id] = ciudades[i].name;
                                         }
                                     }
 
                                     for (var i = 0; i < list_colonias.length; i++) {
                                         //contextoApi.objDireccion.lista_estados_existing.push({'id':list_estados[i].idEstado,"name":list_estados[i].nameEstado});
-                                        contextoApi.arrObjDirecciones[contextoApi.index].lista_colonias_existing[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+                                        contextoApi.arrObjDirecciones[indice].lista_colonias_existing[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
                                     }
 
-                                    self.direcciones.push(contextoApi.arrObjDirecciones[contextoApi.index]);
-
-                                    contextoApi.index++;
+                                    self.direcciones.push(contextoApi.arrObjDirecciones[indice]);
 
                                     //set model so tpl detail tpl can read data
                                     try {
@@ -527,7 +527,8 @@
                         $index = $inputs.index($input),
                         nuevo_valor = $input.siblings('input').val();
 
-                        self.updateExistingDireccion($index, nuevo_valor, 'codigopostal');
+                        //Actualizando el valor hidden del codigo postal
+                        self.updateExistingDireccion($index, nuevo_valor, 'codigopostalhidden');
 
                         //Evento change de estado para llenas ciudades
                         //Se dispara función populateCiudadesByEstadoExisting
@@ -536,6 +537,18 @@
                     }
                 }, this)
             });
+
+            //Obteniendo información para actulizar el valor del cp en el arreglo de this.direcciones
+            var $input = this.$(evt.currentTarget);
+            var class_name = $input[0].className;
+            var $inputs = this.$('.' + class_name),
+            $index = $inputs.index($input),
+            nuevo_valor = $input.val();
+
+            //Actualizando el valor de codigo postal
+            this.updateExistingDireccion($index, nuevo_valor, 'codigopostal');
+
+            
 
         } else {
 
@@ -614,6 +627,32 @@
         }
 
         return returnArray;
+    },
+
+    /**
+     * Busca el código postal y regresa la posición del arreglo en la que se encuentra el valor del cp
+     *
+     * @param {Array} Arreglo sobre el que se va a buscar.
+     * @param {String} Valor que se quiere buscar.
+     * @return {number} Índice encontrado donde se localizó el cp
+     */
+    getIndexOfAddress:function(arr,valor_buscar){
+
+        var index='';
+
+        if(arr.length > 0){
+
+            for(var i=0;i<arr.length;i++){
+
+                if(arr[i].postal_hidden==valor_buscar){
+                    index=i;
+                }
+
+            }
+        }
+
+        return index;
+
     },
 
     populateColoniasByMunicipio: function (evt) {
@@ -1006,6 +1045,10 @@
         }
         var tipos_seleccionados = $('select.multi_tipo').select2('val');
         var indicadores_seleccionados = $('select.multi1_n').select2('val');
+        
+        //Agregando nuevo valor al modelo
+        this.model.set('account_direcciones_n', this.direcciones);
+        
         this.render();
 
         //Estableciendo valores para campos de Tipo y Tipo de dirección
@@ -1410,6 +1453,10 @@
         }
 
         if(field_name =='codigopostal'){
+            this.direcciones[index].codigo_postal = nuevo_valor;
+        }
+
+        if(field_name =='codigopostalhidden'){
             this.direcciones[index].postal_hidden = nuevo_valor;
         }
 
@@ -1444,6 +1491,8 @@
         if (field_name == 'numint') {
             this.direcciones[index].numint = nuevo_valor;
         }
+
+        this.model.set('account_direcciones_n',this.direcciones);
     },
 
     _doValidateEmptyTipo: function (fields, errors, callback) {
