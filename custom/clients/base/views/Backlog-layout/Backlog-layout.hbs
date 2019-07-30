@@ -101,7 +101,7 @@
         max-height: 100%;
         height: 100%;
     }
-/*
+    /*
     <!--.icon-comment -->*/
     /*
     .fa-comment {
@@ -531,6 +531,13 @@
                             </tr>
                         </table>
                     </th>
+                    <th width="15%" class="hide_conversion">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Probabilidad de Conversión %</td>
+                            </tr>
+                        </table>
+                    </th>
 
                 </tr>
 
@@ -564,6 +571,7 @@
                         <th class="totales hide_etapa_preliminar"></th>
                         <th class="totales hide_etapa"></th>
                         <th class="totales hide_progreso"></th>
+                        <th class="totales hide_conversion"></th>
                     </tr>
                 {{/each}}
 
@@ -614,6 +622,7 @@
                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                             <td class="hide_etapa">{{etapa}}</td>
                             <td class="hide_progreso">{{progreso}}</td>
+                            <td class="hide_conversion">{{conversion}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -666,6 +675,7 @@
                                 <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                 <td class="hide_etapa">{{etapa}}</td>
                                 <td class="hide_progreso">{{progreso}}</td>
+                                <td class="hide_conversion">{{conversion}}</td>
                                 <!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
@@ -723,6 +733,7 @@
                                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                             <td class="hide_etapa">{{etapa}}</td>
                                             <td class="hide_progreso">{{progreso}}</td>
+                                            <td class="hide_conversion">{{conversion}}</td>
                                             <!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
@@ -781,6 +792,7 @@
                                         <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
                                         <option value="hide_etapa">Etapa</option>
                                         <option value="hide_progreso">Solicitud</option>
+                                        <option value="hide_conversion">Probabilidad de Conversión %</option>
                                     </select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
