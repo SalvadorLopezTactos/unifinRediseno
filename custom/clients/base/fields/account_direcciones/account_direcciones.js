@@ -264,13 +264,13 @@
             containerCssClass: 'select2-choices-pills-close'
         });
 
-        /*
+        
          $('select.newPais').select2({width:'100%'});
          $('select.newEstado').select2({width:'100%'});
          $('select.newMunicipio').select2({width:'100%'});
          $('select.newCiudad').select2({width:'100%'});
          $('select.newColonia').select2({width:'100%'});
-         */
+         
 
         /* Estableciendo formato select2 a campos de direccionaes existententes */
         $('.multi_tipo_existing').select2({
@@ -324,10 +324,15 @@
         if (str_length == 5 && isNumber) {
 
             //Limpiado campos select
+            this.$('select.newPais').select2('val','');
             this.$('select.newPais').empty();
+            this.$('select.newEstado').select2('val','');
             this.$('select.newEstado').empty();
+            this.$('select.newMunicipio').select2('val','');
             this.$('select.newMunicipio').empty();
+            this.$('select.newCiudad').select2('val','');
             this.$('select.newCiudad').empty();
+            this.$('select.newColonia').select2('val','');
             this.$('select.newColonia').empty();
 
             this.estados_list = [];
@@ -343,10 +348,15 @@
                 success: _.bind(function (data) {
 
                     if (data.paises.length == 0) {
+                        self.$('select.newPais').select2('val','');
                         self.$('select.newPais').empty();
+                        self.$('select.newEstado').select2('val','');
                         self.$('select.newEstado').empty();
+                        self.$('select.newMunicipio').select2('val','');
                         self.$('select.newMunicipio').empty();
+                        self.$('select.newCiudad').select2('val','');
                         self.$('select.newCiudad').empty();
+                        self.$('select.newColonia').select2('val','');
                         self.$('select.newColonia').empty();
 
                         app.alert.show('invalid_cp_exist', {
@@ -377,6 +387,9 @@
                             self.$('select.newPais').append($("<option>").val(list_paises[i].idPais).html(list_paises[i].namePais));
                         }
 
+                        //Se lanza evento change de país para observar el valor "seteado" del dropdown
+                        self.$('select.newPais').trigger('change');
+
                         for (var i = 0; i < list_estados.length; i++) {
                             self.$('select.newEstado').append($("<option>").val(list_estados[i].idEstado).html(list_estados[i].nameEstado));
                             self.estados_list.push({
@@ -405,6 +418,8 @@
                         self.$(".loadingIconMunicipio").hide();
                         //self.$(".loadingIconColonia").hide();
 
+                        //Evento change de estado para llenar ciudades
+                        //Se dispara función populateCiudadesByEstadoExisting
                         self.$('.newEstado').trigger('change');
 
                         //self.$(".loadingIconCiudad").hide();
@@ -675,6 +690,7 @@
 
     populateColoniasByMunicipio: function (evt) {
 
+        this.$('select.newColonia').select2('val','');
         this.$('select.newColonia').empty();
 
         var id_municipio = $(evt.currentTarget).val();
@@ -695,6 +711,10 @@
                             //paises_options +='<option value="' + list_paises[i].idPais + '" >' + list_paises[i].namePais + '</option>';
                             this.$('select.newColonia').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
+
+                        //Se lanza evento change para observar el valor seteado de colonia con formato select2
+                        this.$('select.newColonia').trigger('change');
+
                         $(".loadingIconColonia").hide();
                     }
                 }, this)
@@ -756,7 +776,9 @@
 
     populateCiudadesByEstado: function (evt) {
 
+        this.$('select.newCiudad').select2('val','');
         this.$('select.newCiudad').empty();
+        this.$('select.newMunicipio').select2('val','');
         this.$('select.newMunicipio').empty();
 
         var id_estado = $(evt.currentTarget).val();
@@ -787,6 +809,9 @@
                             this.$('select.newCiudad').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
 
+                        //Se lanza evento change para observar el seteado en en campo de ciudad con formato select2
+                        this.$('select.newCiudad').trigger('change');
+                        
                         $(".loadingIconCiudad").hide();
 
                     }
@@ -919,9 +944,9 @@
             errorMsg = 'Favor de seleccionar una ciudad';
             dirError = true;
             dirErrorCounter++;
-            this.$('select.newCiudad').css('border-color', 'red');
+            this.$('.select2-container.newCiudad').children().eq(0).css('border-color', 'red');
         } else {
-            this.$('select.newCiudad').css('border-color', '');
+            this.$('.select2-container.newCiudad').children().eq(0).css('border-color', '');
 
         }
 
@@ -930,9 +955,9 @@
             errorMsg = 'Favor de seleccionar una colonia';
             dirError = true;
             dirErrorCounter++;
-            this.$('select.newColonia').css('border-color', 'red');
+            this.$('.select2-container.newColonia').children().eq(0).css('border-color', 'red');
         } else {
-            this.$('select.newColonia').css('border-color', '');
+            this.$('.select2-container.newColonia').children().eq(0).css('border-color', '');
 
         }
 
@@ -1038,15 +1063,15 @@
             "indicador_list": this.indicador_list,
             "indicadores_seleccionados": $('select.multi1_n').select2('val').join(),
             "lista_paises_existing": lista_paises_existing,
-            "pais_seleccionado": $('.newPais').val(),
+            "pais_seleccionado": $('.newPais').select2('val'),
             "lista_estados_existing": lista_estados_existing,
-            "estado_seleccionado": $('.newEstado').val(),
+            "estado_seleccionado": $('.newEstado').select2('val'),
             "lista_municipios_existing": lista_municipios_existing,
-            "municipio_seleccionado": $('.newMunicipio').val(),
+            "municipio_seleccionado": $('.newMunicipio').select2('val'),
             "lista_ciudades_existing": lista_ciudades_existing,
-            "ciudad_seleccionada": $('.newCiudad').val(),
+            "ciudad_seleccionada": $('.newCiudad').select2('val'),
             "lista_colonias_existing": lista_colonias_existing,
-            "colonia_seleccionada": $('.newColonia').val(),
+            "colonia_seleccionada": $('.newColonia').select2('val'),
             "codigo_postal": $('.newPostalInputTemp').val(),
             "postal_hidden": $('#newPostalHidden').val(),
             "calle": $('.newCalle').val(),

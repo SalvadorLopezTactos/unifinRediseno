@@ -14,7 +14,7 @@
                             Tipo
                         </div>
 
-                        <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;">
+                        <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;display:none">
                             {{#each tipo_direccion_list_hide}}
                                 <option value="{{@key}}" {{ifSelected @key ../tipo_seleccionado_hide}}>{{this}}</option>
                             {{/each}}
@@ -33,7 +33,7 @@
                             Tipo de direcci&oacute;n
                         </div>
 
-                        <select class="existingIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
+                        <select class="existingIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;display:none">
                             {{#each indicador_list_hide}}
                                 <option value="{{@key}}" {{ifSelected @key ../indicador_seleccionado_hide}}>{{this}}</option>
                             {{/each}}
@@ -166,7 +166,7 @@
                     Tipo
                 </div>
 
-                <select class="newTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
+                <select class="newTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;display:none">
                     {{#each def.dir_tipo_list_html}}
                         <option value="{{@key}}">{{this}}</option>
                     {{/each}}
@@ -183,7 +183,7 @@
                     Tipo de direcci&oacute;n
                 </div>
 
-                <select class="newIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
+                <select class="newIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;display:none">
                     {{#each def.indicador_html}}
                         <option value="{{@key}}">{{this}}</option>
                     {{/each}}
