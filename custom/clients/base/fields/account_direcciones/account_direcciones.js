@@ -232,21 +232,6 @@
 
     _render: function () {
 
-        /*Condición para saber si los valores de direcciones existentes han cambiado
-        y evitar que al dar click en 'Guardar', el campo se pase inmediatamente a su vista de detalle
-        */
-        /*
-        if(this.direcciones.length > 0 && this.dataDireccionesApi.length >0 && 
-            this.direcciones.length == this.dataDireccionesApi.length){
-            for (var i =0;i<this.direcciones.length;i++) {
-                if(this.direcciones[i].postal_hidden!=this.dataDireccionesApi[i]){
-                    this.options.viewName='edit';
-                    this.action='edit';
-                }
-            }
-
-        }
-        */
         this._super("_render");
 
 
@@ -264,53 +249,20 @@
             containerCssClass: 'select2-choices-pills-close'
         });
 
-        
-         $('select.newPais').select2({width:'100%'});
-         $('select.newEstado').select2({width:'100%'});
-         $('select.newMunicipio').select2({width:'100%'});
-         $('select.newCiudad').select2({width:'100%'});
-         $('select.newColonia').select2({width:'100%'});
+        /* Estableciendo formato select2 a campos de nuevas direcciones*/
+        $('select.newPais').select2({width:'100%'});
+        $('select.newEstado').select2({width:'100%'});
+        $('select.newMunicipio').select2({width:'100%'});
+        $('select.newCiudad').select2({width:'100%'});
+        $('select.newColonia').select2({width:'100%'});
          
-
-        /* Estableciendo formato select2 a campos de direccionaes existententes */
-        $('.multi_tipo_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-
-        $('.multi1_n_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-
+        /* Estableciendo formato select2 a campos de direcciones existentes*/
         $('select.paisExisting').select2({width: '100%'});
         $('select.estadoExisting').select2({width: '100%'});
         $('select.municipioExisting').select2({width: '100%'});
         $('select.ciudadExisting').select2({width: '100%'});
         $('select.coloniaExisting').select2({width: '100%'});
-
-        /*Fin existentes*/
-        if (this.tplName === 'edit') {
-            var self = this;
-            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
-            $("select.existingTipodedireccion").each(function (i, obj) {
-                var valuesI = self._getTipoDireccion($(this).val(), null)
-                $('select.multi_tipo_existing').eq(i).select2('val', valuesI);
-
-            });
-
-            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
-            $("select.existingIndicador").each(function (i, obj) {
-                var valuesI = self._getIndicador($(this).val(), null)
-                $('select.multi1_n_existing').eq(i).select2('val', valuesI);
-
-            });
-
-        }
-
-
+        
     },
 
     getInfoAboutCP: function (evt) {
@@ -1636,22 +1588,39 @@
         }, this);
     },
 
-    /**
-     * Called when formatting the value for display
-     * @param value
-     */
-    format: function(value) {
-        console.log('FORMAT DESDE DIRECCIONES');
-        return this._super('format', [value]);
-    },
+    bindDomChange: function() {
+        /* Estableciendo formato select2 a campos de direcciones existentes */
+        $('select.multi_tipo_existing').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
 
-    /**
-     * Called when unformatting the value for storage
-     * @param value
-     */
-    unformat: function(value) {
-        console.log('UNFORMAT DESDE DIRECCIONES');
-        return this._super('unformat', [value]);
-    }
+        $('select.multi1_n_existing').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        if (this.tplName === 'edit') {
+            var self = this;
+            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
+            $("select.existingTipodedireccion").each(function (i, obj) {
+                var valuesI = self._getTipoDireccion($(this).val(), null)
+                $('select.multi_tipo_existing').eq(i).select2('val', valuesI);
+
+            });
+
+            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
+            $("select.existingIndicador").each(function (i, obj) {
+                var valuesI = self._getIndicador($(this).val(), null)
+                $('select.multi1_n_existing').eq(i).select2('val', valuesI);
+
+            });
+
+        }
+
+
+    },
 
 })
