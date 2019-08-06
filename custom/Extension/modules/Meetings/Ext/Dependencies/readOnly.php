@@ -244,7 +244,7 @@ $dependencies['Meetings']['tct_conferencia_chk_c'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'tct_conferencia_chk_c',
-                'value' => 'not(equal($status,"Planned")',
+                'value' => 'not(equal($status,"Planned"))',
             ),
         ),
     ),
