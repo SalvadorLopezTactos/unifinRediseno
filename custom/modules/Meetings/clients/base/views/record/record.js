@@ -12,7 +12,7 @@
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
-        this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
+        //this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
 
         /**
           AF: 2018-12-04
@@ -126,42 +126,43 @@
     },
     CreaMinuta:function(){
 
-        if($('.objetivoSelect').length<=0){
+        /*if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
                     title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b> para generar la minuta",
                     autoClose: false
                 });
-        }else{
+        }else{*/
 
-            var model=App.data.createBean('minut_Minutas');
-            // FECHA ACTUAL
-            var startDate = new Date(this.model.get('date_end'));
-            var startMonth = startDate.getMonth() + 1;
-            var startDay = startDate.getDate();
-            var startYear = startDate.getFullYear();
-            var startDateText = startDay + "/" + startMonth + "/" + startYear;
-            var objetivo=App.lang.getAppListStrings('objetivo_list');
-            model.set('account_id_c', this.model.get('parent_id'));
-            model.set('tct_relacionado_con_c', this.model.get('parent_name'));
-            model.set('objetivo_c', this.model.get('objetivo_c'));
-            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
-            model.set('minut_minutas_meetings_name',this.model.get('name'));
-            model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
-            app.drawer.open({
-                layout: 'create',
-                context: {
+        var model=App.data.createBean('minut_Minutas');
+        // FECHA ACTUAL
+        var startDate = new Date(this.model.get('date_end'));
+        var startMonth = startDate.getMonth() + 1;
+        var startDay = startDate.getDate();
+        var startYear = startDate.getFullYear();
+        var startDateText = startDay + "/" + startMonth + "/" + startYear;
+        var objetivo=App.lang.getAppListStrings('objetivo_list');
+        model.set('account_id_c', this.model.get('parent_id'));
+        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+        model.set('objetivo_c', this.model.get('objetivo_c'));
+        model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
+        model.set('minut_minutas_meetings_name',this.model.get('name'));
+        model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
+        app.drawer.open({
+              layout: 'create',
+              context: {
                     create: true,
                     module: 'minut_Minutas',
                     model: model
                 },
             },
-                function(){
-                //alert('Drawer Cerrado');
-                    location.reload();
+            function(){
+            //alert('Drawer Cerrado');
+                location.reload();
 
-                });
-        }
+            }
+        );
+        //}
     },
 
   _dispose: function() {

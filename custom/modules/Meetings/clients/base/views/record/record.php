@@ -141,6 +141,14 @@ array (
             array (
               0 => 
               array (
+                'name' => 'tct_conferencia_chk_c',
+                'label' => 'LBL_TCT_CONFERENCIA_CHK',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'duration',
                 'type' => 'duration',
                 'label' => 'LBL_START_AND_END_DATE_DETAIL_VIEW',
@@ -184,7 +192,7 @@ array (
                 ),
                 'span' => 9,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'repeat_type',
                 'related_fields' => 
@@ -193,7 +201,7 @@ array (
                 ),
                 'span' => 3,
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'recurrence',
                 'type' => 'recurrence',
@@ -275,8 +283,8 @@ array (
                 ),
                 'span' => 12,
               ),
-              3 => 'location',
-              4 => 
+              5 => 'location',
+              6 => 
               array (
                 'name' => 'reminders',
                 'type' => 'fieldset',
@@ -289,18 +297,18 @@ array (
                   1 => 'email_reminder_time',
                 ),
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'description',
                 'rows' => 3,
                 'span' => 12,
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'parent_name',
                 'span' => 12,
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'invitees',
                 'type' => 'participants',
@@ -321,31 +329,31 @@ array (
                 ),
                 'span' => 12,
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'centro_prospecccion_c',
                 'label' => 'LBL_CENTRO_PROSPECCCION_C',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              13 => 
+              15 => 
               array (
               ),
             ),
