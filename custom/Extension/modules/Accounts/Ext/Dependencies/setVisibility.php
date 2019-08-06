@@ -37,3 +37,19 @@ $dependencies['Accounts']['referenciador_c_Visibility'] = array(
         ),
     ),
 );
+
+$dependencies['Accounts']['tct_status_atencion_ddw_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'tct_status_atencion_ddw_c',
+                'value' => 'or(equal($tipo_registro_c,"Cliente"),equal($tipo_registro_c,"Prospecto"),equal($tipo_registro_c,"Lead"))',
+            ),
+        ),
+    ),
+);

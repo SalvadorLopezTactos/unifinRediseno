@@ -143,6 +143,7 @@ class ResumenClienteAPI extends SugarApi
             "emails" => 0,
             "fecha_completa_cita" => "",
             "fecha_completa_llamada" => "",
+            "estatus_atencion" => "",
             "color" => $Azul
         );
         //Alertas
@@ -175,6 +176,10 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
             $arr_principal['factoring']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_factoring_c;
             $arr_principal['credito_auto']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_ca_c;
+
+            //Estatus atención
+            $arr_principal['historial_contactos']['estatus_atencion']=$beanPersona->tct_status_atencion_ddw_c;
+
 
         }
 

@@ -787,7 +787,6 @@
         //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-
         /*
          @author Salvador Lopez
          Se llaman a la funciones para mostrar u ocultar paneles de Fideicomiso y Peps

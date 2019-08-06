@@ -417,6 +417,7 @@
         * */
         //this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        this.model.addValidationTask('validarequeridosProvRec',_.bind(this.RequeridosProveedorRecursos, this));
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
         * Integración de Expediente
         * Adrian Arauz 4/10/2018
@@ -2381,6 +2382,121 @@
             this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
         }else{
             this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
+        }
+
+    },
+
+    RequeridosProveedorRecursos: function (fields, errors, callback){
+        var RequeridosProvRec = "";
+        if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA')) {
+
+            if (this.model.get('tipodepersona_c') == "Persona Fisica" || this.model.get('tipodepersona_c') == "Persona Fisica con Actividad Empresarial") {
+
+                /*if (this.model.get('primernombre_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Nombre<br></b>';
+                }
+                if (this.model.get('apellidopaterno_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
+                }*/
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
+                    $('[name=apellidomaterno_c]').css('border-color', 'red');
+                }
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
+                    $('[name=fechadenacimiento_c]').css('border-color', 'red');
+                }
+                if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                    $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color','red');
+                }
+                if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c')== null || this.model.get('tct_macro_sector_ddw_c')== undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                    $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color','red');
+                }
+                if (this.model.get('sectoreconomico_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                    $('[name=sectoreconomico_c]').css('border-color', 'red');
+                }
+                if (this.model.get('subsectoreconomico_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                    $('[name=subsectoreconomico_c]').css('border-color', 'red');
+                }
+                if (this.model.get('actividadeconomica_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                    $('[name=actividadeconomica_c]').css('border-color', 'red');
+                }
+                var direcciones= 0;
+                var tipodireccion= this.model.get('account_direcciones');
+                if (tipodireccion.length > 0) {
+                    for(var i=0;i<tipodireccion.length;i++){
+                        if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
+                            direcciones++;
+                        }
+                    }
+                }
+                if (direcciones==0){
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    $('.direcciondashlet').css('border-color', 'red');
+
+                }
+                if ((this.model.get('rfc_c') == undefined ||this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c')== undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
+                    RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
+                    $('[name=curp_c]').css('border-color', 'red');
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
+                }
+
+                if (RequeridosProvRec != "") {
+                    app.alert.show("Campos faltantes en cuenta", {
+                        level: "error",
+                        messages: 'Hace falta completar la siguiente información en la cuenta para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
+                        autoClose: false
+                    });
+                    errors['faltantescuenta'] = errors['faltantescuenta'] || {};
+                    errors['faltantescuenta'].required = true;
+
+                }
+                callback(null, fields, errors);
+            }
+
+            if (this.model.get('tipodepersona_c') == "Persona Moral") {
+                /*if (this.model.get('razonsocial_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
+                }*/
+                if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                    $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color','red');
+                }
+                if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
+                }
+                var direccionesm= 0;
+                var tipodireccion= this.model.get('account_direcciones');
+                if (tipodireccion.length > 0) {
+                    direccionesm++;
+                }
+                if (direccionesm==0){
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
+                    $('.direcciondashlet').css('border-color', 'red');
+
+                }
+
+                if (RequeridosProvRec != "") {
+                    app.alert.show("Campos faltantes en cuenta", {
+                        level: "error",
+                        messages: 'Hace falta completar la siguiente información en la cuenta para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
+                        autoClose: false
+                    });
+                    errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
+                    errors['errorpersonamoral'].required = true;
+
+                }
+                callback(null, fields, errors);
+            }
+        }else {
+            callback(null, fields, errors);
         }
 
     },

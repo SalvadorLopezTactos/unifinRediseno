@@ -12,7 +12,7 @@
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
-        this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
+        //this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
 
         /**
           AF: 2018-12-04
@@ -54,6 +54,7 @@
 
     _render: function (options) {
         this._super("_render");
+        reunion = this;
         $('[data-name=reunion_objetivos]').find('.record-label').addClass('hide');
 
         //Ocultar panel con campos de control de check in
@@ -65,6 +66,11 @@
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
         this.enableparentname();
+
+        //Evento para validar acciones
+        $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
+            reunion.hidecheck();
+        });
     },
 
     /**
@@ -120,42 +126,43 @@
     },
     CreaMinuta:function(){
 
-        if($('.objetivoSelect').length<=0){
+        /*if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
                     title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b> para generar la minuta",
                     autoClose: false
                 });
-        }else{
+        }else{*/
 
-            var model=App.data.createBean('minut_Minutas');
-            // FECHA ACTUAL
-            var startDate = new Date(this.model.get('date_end'));
-            var startMonth = startDate.getMonth() + 1;
-            var startDay = startDate.getDate();
-            var startYear = startDate.getFullYear();
-            var startDateText = startDay + "/" + startMonth + "/" + startYear;
-            var objetivo=App.lang.getAppListStrings('objetivo_list');
-            model.set('account_id_c', this.model.get('parent_id'));
-            model.set('tct_relacionado_con_c', this.model.get('parent_name'));
-            model.set('objetivo_c', this.model.get('objetivo_c'));
-            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
-            model.set('minut_minutas_meetings_name',this.model.get('name'));
-            model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
-            app.drawer.open({
-                layout: 'create',
-                context: {
+        var model=App.data.createBean('minut_Minutas');
+        // FECHA ACTUAL
+        var startDate = new Date(this.model.get('date_end'));
+        var startMonth = startDate.getMonth() + 1;
+        var startDay = startDate.getDate();
+        var startYear = startDate.getFullYear();
+        var startDateText = startDay + "/" + startMonth + "/" + startYear;
+        var objetivo=App.lang.getAppListStrings('objetivo_list');
+        model.set('account_id_c', this.model.get('parent_id'));
+        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+        model.set('objetivo_c', this.model.get('objetivo_c'));
+        model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
+        model.set('minut_minutas_meetings_name',this.model.get('name'));
+        model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
+        app.drawer.open({
+              layout: 'create',
+              context: {
                     create: true,
                     module: 'minut_Minutas',
                     model: model
                 },
             },
-                function(){
-                //alert('Drawer Cerrado');
-                    location.reload();
+            function(){
+            //alert('Drawer Cerrado');
+                location.reload();
 
-                });
-        }
+            }
+        );
+        //}
     },
 
   _dispose: function() {
@@ -192,7 +199,7 @@
 
     cambioFecha: function () {
         this.fechaInicioTemp = Date.parse(this.model.get("date_start"));
-        console.log("Fechas: " + this.fechaInicioTemp);
+        //console.log("Fechas: " + this.fechaInicioTemp);
     },
 
     /*Solo será visible el resultado cuando el estado se Realizada o No Realizada
@@ -277,7 +284,7 @@
         if (fechaInicioTmp != fechaInicioNueva) {
             if (fechaInicioTmp < fechaActual) {
                 if (fechaInicioNueva >= fechaInicioTmp) {
-                    console.log("Guarda por opcion 1");
+                    //console.log("Guarda por opcion 1");
                 }
                 else {
                     app.alert.show("Fecha no valida", {
@@ -295,7 +302,7 @@
             }
             if (fechaInicioTmp >= fechaActual) {
                 if (fechaInicioNueva >= fechaActual) {
-                    console.log("Guarda por opcion 2")
+                    //console.log("Guarda por opcion 2")
                 }
                 else {
                     app.alert.show("Fecha no valida", {
@@ -461,13 +468,13 @@
     */
     hidecheck:function(){
         var fechaActual = new Date(); //obtiene fecha actual
-        var dateend = new Date(this.model.get("date_start"));
-        var d = dateend.getDate();
-        var m = dateend.getMonth() + 1;
-        var y = dateend.getFullYear();
+        var fechainicio = new Date(this.model.get("date_start"));
+        var d = fechainicio.getDate();
+        var m = fechainicio.getMonth() + 1;
+        var y = fechainicio.getFullYear();
         var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
         //Fecha inicio, anterior al dia anterior
-        var fechainicio= new Date(y,m-1,d, 0,0);
+        //var fechainicio= new Date(y,m-1,d, 0,0);
 
         if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
             && fechaActual>fechainicio && fechaActual<fechafin && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
@@ -503,13 +510,13 @@
             && fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
                 myField.listenTo(myField, "render", function () {
                         myField.show();
-                        console.log("field being rendered as: " + myField.tplName);
+                        //console.log("field being rendered as: " + myField.tplName);
                     });
 
             }   else   {
                 myField.listenTo(myField, "render", function () {
                         myField.hide();
-                        console.log("field being rendered as: " + myField.tplName);
+                        //console.log("field being rendered as: " + myField.tplName);
                     });
             }
     },
@@ -519,27 +526,22 @@
      */
     ValidaCuentNoVacia: function () {
         var fechaActual = new Date(); //obtiene fecha actual
-        var dateend = new Date(this.model.get("date_start"));
-        var d = dateend.getDate();
-        var m = dateend.getMonth() + 1;
-        var y = dateend.getFullYear();
+        var fechainicio = new Date(this.model.get("date_start"));
+        var d = fechainicio.getDate();
+        var m = fechainicio.getMonth() + 1;
+        var y = fechainicio.getFullYear();
         var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
-        //Fecha inicio, anterior al dia anterior
-        var fechainicio= new Date(y,m-1,d, 0,0);
-
         var myField = this.getField("new_minuta");
         if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id')
             && fechaActual>fechainicio && fechaActual<fechafin && this.model.get('status')=='Planned'){
             myField.listenTo(myField, "render", function () {
                 myField.show();
-                console.log("field being rendered as: " + myField.tplName);
+                //console.log("field being rendered as: " + myField.tplName);
             });
-        }
-
-        else {
+        }else{
             myField.listenTo(myField, "render", function () {
                 myField.hide();
-                console.log("field being rendered as: " + myField.tplName);
+                //console.log("field being rendered as: " + myField.tplName);
             });
         }
     },

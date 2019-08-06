@@ -42,13 +42,13 @@ Controlador de reuniones-llamadas
   reunion_llamada:function(){
     try {
       if(this.model.get('resultado_c') == 5){
-        console.log("se crea reunion");
+        //console.log("se crea reunion");
         $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
         $("#Objetivos").show();
         selfRella.nuevoRegistro.tipo_registro="reunion";
       }
       if(this.model.get('resultado_c') == 19){
-        console.log("se crea llamada");
+        //console.log("se crea llamada");
         $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
         $("#Objetivos").hide();
         selfRella.nuevoRegistro.tipo_registro="llamada";
@@ -65,18 +65,58 @@ Controlador de reuniones-llamadas
   //Funcion para cambiar el formato de la hora
   validaTiempo:function(time){
     if(time!="" && time!=null && time!=undefined){
-    time = time.replace("pm", " PM");
-    time = time.replace("am", " AM");
-    var hours = Number(time.match(/^(\d+)/)[1]);
-    var minutes = Number(time.match(/:(\d+)/)[1]);
-    var AMPM = time.match(/\s(.*)$/)[1];
-    if(AMPM == "PM" && hours<12) hours = hours+12;
-    if(AMPM == "AM" && hours==12) hours = hours-12;
-    var sHours = hours.toString();
-    var sMinutes = minutes.toString();
-    if(hours<10) sHours = "0" + sHours;
-    if(minutes<10) sMinutes = "0" + sMinutes;
-    return sHours + ":" + sMinutes;
+      time = time.replace("pm", " PM");
+      time = time.replace("am", " AM");
+      var hours = Number(time.match(/^(\d+)/)[1]);
+      var minutes = Number(time.match(/:(\d+)/)[1]);
+      var AMPM = time.match(/\s(.*)$/)[1];
+      if(AMPM == "PM" && hours<12) hours = hours+12;
+      if(AMPM == "AM" && hours==12) hours = hours-12;
+      var sHours = hours.toString();
+      var sMinutes = minutes.toString();
+      if(hours<10) sHours = "0" + sHours;
+      if(minutes<10) sMinutes = "0" + sMinutes;
+      return sHours + ":" + sMinutes;
+    }
+  },
+
+  //Funcion para calcular fecha fin
+  generaDateEnd:function(){
+    if($('.newDate').val()!="" && $('.newTime1').val()!="" ){
+      //Recupera fecha inicio
+      var time_start = new Date($('.newDate').val() +' '+ this.validaTiempo($('.newTime1').val()))
+
+      //Agrega minutos adicionales
+      if(this.model.get('resultado_c') == 5){
+        //console.log("reunion");
+        time_start.setMinutes(time_start.getMinutes()+60);
+      }
+      if(this.model.get('resultado_c') == 19){
+        //console.log("llamada");
+        time_start.setMinutes(time_start.getMinutes()+15);
+      }
+
+      //Genera formato hora
+      var hours = time_start.getHours();
+      var minutes =time_start.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      strTime = strTime.replace(" ","");
+      //Establece fecha fin
+      $('.newTime2').val(strTime);
+
+      //Genera formato de fecha
+      month = '' + (time_start.getMonth() + 1);
+      day = '' + time_start.getDate();
+      year = time_start.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      var strDate = [year,month,day].join('-');
+      $('.newDate2').val(strDate);
+
     }
   },
 
@@ -85,7 +125,7 @@ Controlador de reuniones-llamadas
     selfRella=this;
     var link='';
     modulo='';
-    
+
     if(this.model.get('resultado_c') == 5){
       link='minut_minutas_meetings_2minut_minutas_ida';
       modulo='Meetings';
@@ -156,6 +196,8 @@ Controlador de reuniones-llamadas
     selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
     selfRella.nuevoRegistro.date_start=$('.newDate').val();
     selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
+    //Actualiza fecha fin
+    this.generaDateEnd();
     selfRella.nuevoRegistro.date_end=$('.newDate2').val();
     selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
     //selfRella.nuevoRegistro.objetivoE='';

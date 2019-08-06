@@ -1,5 +1,5 @@
 <?php
- // created: 2019-07-12 02:03:58
+ // created: 2019-07-22 20:51:05
 
 $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   '' => '',
@@ -9,4 +9,5 @@ $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   'No_esta_Interesado' => 'No está Interesado',
   'Fuera_de_Perfil' => 'Fuera de Perfil',
   'Checklist_expediente' => 'Se envía checklist y se procede a generar expediente',
+  'Llamada_servicio' => 'Llamada de Servicio',
 );

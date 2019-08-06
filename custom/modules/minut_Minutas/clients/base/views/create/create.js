@@ -3,6 +3,8 @@
 
     latitude :0,
     longitude:0,
+    urlEncuesta: null,
+
 
     initialize: function (options) {
         //this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
@@ -18,6 +20,8 @@
         //Mantener como último VT a savestatusandlocation
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
+        //Evento para contestar encuesta
+        this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
 
     },
 
@@ -432,7 +436,7 @@
       $('.objetivoG').find('.select2-choice').css('border-color','');
       $('.newObjetivoE1').css('border-color', '');
 
-      //Campos necesarios para Reunion
+      //Campos necesarios para Reunion y llamada
       if(this.model.get('resultado_c')==5 || this.model.get('resultado_c')==19){
         var necesarios="";
         if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null){
@@ -453,7 +457,7 @@
         if(this.model.get('resultado_c')==19){
             registro="Llamada";
         }
-        
+
         if($('.newDate').val()<today){
             $('.newDate').css('border-color', 'red');
             app.alert.show("requeridos_reunion_llamada", {
@@ -464,7 +468,7 @@
         errors['.newDate'] = errors['.newDate'] || {};
         errors['.newDate'].required = true;
         }
-        
+
         var fechain=$('.newDate').val();
         var hora_ini=this.validaTiempo($('.newTime1').val());
         var fechafin=$('.newDate2').val();
@@ -491,18 +495,16 @@
           $('.newTime2').css('border-color', 'red');
         }
       }
-      //Campos Requeridos para llamada
+      //Campos Requeridos para reunión
       if(this.model.get('resultado_c')==5){
         if($('.objetivoG').select2('val')=='' || $('.objetivoG').select2('val')==null || $('.objetivoG').select2('val')==undefined){
           necesarios=necesarios  + '<br><b>Objetivo General</b>'
           $('.objetivoG').find('.select2-choice').css('border-color','red');
         }
-
-        if($('.objetivoEselect').eq(0).find('input').val()=='' || $('.objetivoEselect').eq(0).find('input').val()==null || $('.objetivoEselect').eq(0).find('input').val()==undefined){
+        /*if($('.objetivoEselect').eq(0).find('input').val()=='' || $('.objetivoEselect').eq(0).find('input').val()==null || $('.objetivoEselect').eq(0).find('input').val()==undefined){
           necesarios=necesarios  + '<br><b>Objetivos Especificos</b>'
           $('.newObjetivoE1').css('border-color', 'red');
-        }
-
+        }*/
       }
       if (necesarios != "") {
         app.alert.show("requeridos_reunion_llamada", {
@@ -532,6 +534,78 @@
             if(minutes<10) sMinutes = "0" + sMinutes;
             return sHours + ":" + sMinutes;
         }
+    },
+    open_survey_minuta: function(){
+
+        //Valida que reunión haya sido generada por usuario Agente Teléfonico o Coordinador
+        var idUser = this.context.parent.attributes.model.attributes.created_by;
+        var url = app.api.buildURL("Users/"+idUser, '', {}, {});
+
+        //Valida resultado vacío
+        if (this.model.get('resultado_c') == "") {
+            App.alert.show("survey_no_result", {
+                level: "info",
+                messages: "Favor de indicar resultado de la cita previo a contestar encuesta",
+                autoClose: true,
+            });
+            return;
+        }
+
+        //Valida resultado diferente a El cliente no estuvo presente, cita cancelada
+        if (this.model.get('resultado_c') == "1") {
+            App.alert.show("survey_no_result", {
+                level: "info",
+                messages: "No se puede contestar encuesta para resutado <b>El cliente no estuvo presente,Cita cancelada</b>",
+                autoClose: true,
+            });
+            return;
+        }
+
+        app.api.call("read", url, null, {
+            success: _.bind(function (data) {
+              /*
+              Condiciones
+                puesto
+                  27- Agente teléfonico
+                  31 - Coordinador CP
+                o Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
+              */
+              if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
+                  //Genera apertura de encuesta
+                  var sugarHost = window.location.origin+window.location.pathname + "survey_submission.php?q=";
+                  var url = "";
+                  if (self.urlEncuesta == undefined || self.urlEncuesta == null) {
+                      //Genera petición para obtener url de encuesta
+                      var args = {
+                          'idMeeting': self.model.attributes.minut_minutas_meetingsmeetings_idb,
+                          'idUser': App.user.id,
+                          'nameUser': App.user.attributes.full_name
+                      };
+                      var encuestaURL = app.api.buildURL("createSubmission", '', {}, {});
+                      app.api.call("create", encuestaURL, {data:args}, {
+                          success: _.bind(function (data) {
+                              if (data) {
+                                  self.urlEncuesta = data;
+                                  url = sugarHost + self.urlEncuesta;
+                                  window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
+                              }
+                          }, this)
+                      });
+
+                  }else{
+                      url = sugarHost + self.urlEncuesta;
+                      window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
+                  }
+              }else {
+                  App.alert.show("survey_no_access", {
+                      level: "info",
+                      messages: "No cuenta con permiso para contestar encuesta",
+                      autoClose: true,
+                  });
+                  return;
+              }
+            }, this)
+        });
     },
 
 })

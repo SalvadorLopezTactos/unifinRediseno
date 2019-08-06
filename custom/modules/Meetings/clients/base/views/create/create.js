@@ -9,7 +9,7 @@
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
-        this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
+        //this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
         this.model.addValidationTask('Campos_necesarios', _.bind(this.Campos_necesarios, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         //this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
@@ -60,14 +60,14 @@
             errors['objetivo_c'] = errors['objetivo_c'] || {};
             errors['objetivo_c'].custom_message1 = true;
         }
-        if(this.$('.objetivoSelect').length<=0){
+        /*if(this.$('.objetivoSelect').length<=0){
             necesario=necesario + '<b>Objetivos Espec\u00EDficos</b><br>';
             app.alert.show("Guardar Reunion", {
                 level: "error",
                 title: '<p style="font-weight: normal;">Por lo menos debe agregar un <b>Objetivo Específico</b> para la <b>Reuni\u00F3n</b></p>',
                 autoClose: false
             });
-        }
+        }*/
         if (necesario != ""){
             /*console.log("Confirma necesarios");
             app.alert.show("Guardar Reunion", {

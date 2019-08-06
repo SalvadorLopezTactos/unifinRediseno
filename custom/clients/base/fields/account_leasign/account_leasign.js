@@ -32,8 +32,19 @@
 
   //Inicia
   initialize: function(options) {
-    v360 = this;
     this._super('initialize', [options]);
+
+    //if(typeof v360 == 'undefined'){
+    v360 = this;
+    // }else{
+    //   if (typeof v360.ResumenCliente == 'undefined') {
+    //     v360 = this;
+    //   }else{
+    //     _.extend(this, v360.ResumenCliente);
+    //     v360.render();
+    //   }
+    // }
+
     //Define variables de ordenamiento
     this.sortAnexo = "ASC";
     this.sortAnexoContratacion = "ASC";
