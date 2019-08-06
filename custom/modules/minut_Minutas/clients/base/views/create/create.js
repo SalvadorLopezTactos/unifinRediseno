@@ -63,15 +63,17 @@
             }
         }
         // Valida Asistencias
-        if (banderaAsistencia < 1) {
-            app.alert.show("Asistencia", {
-                level: "error",
-                messages: "Debes marcar <b>asistencia</b> por lo menos a un <b>Participante</b> tipo Cuenta.",
-                autoClose: false,
-                return: false,
-            });
-            errors['xd'] = errors['xd'] || {};
-            errors['xd'].required = true;
+        if (this.model.get('resultado_c') != '1') {
+            if (banderaAsistencia < 1) {
+                app.alert.show("Asistencia", {
+                    level: "error",
+                    messages: "Debes marcar <b>asistencia</b> por lo menos a un <b>Participante</b> tipo Cuenta.",
+                    autoClose: false,
+                    return: false,
+                });
+                errors['xd'] = errors['xd'] || {};
+                errors['xd'].required = true;
+            }
         }
         // Valida Correos
         if (banderaCorreo > 0 && banderaAsistencia >= 1) {
