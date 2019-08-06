@@ -436,7 +436,7 @@
       $('.objetivoG').find('.select2-choice').css('border-color','');
       $('.newObjetivoE1').css('border-color', '');
 
-      //Campos necesarios para Reunion
+      //Campos necesarios para Reunion y llamada
       if(this.model.get('resultado_c')==5 || this.model.get('resultado_c')==19){
         var necesarios="";
         if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null){
@@ -495,18 +495,16 @@
           $('.newTime2').css('border-color', 'red');
         }
       }
-      //Campos Requeridos para llamada
+      //Campos Requeridos para reunión
       if(this.model.get('resultado_c')==5){
         if($('.objetivoG').select2('val')=='' || $('.objetivoG').select2('val')==null || $('.objetivoG').select2('val')==undefined){
           necesarios=necesarios  + '<br><b>Objetivo General</b>'
           $('.objetivoG').find('.select2-choice').css('border-color','red');
         }
-
-        if($('.objetivoEselect').eq(0).find('input').val()=='' || $('.objetivoEselect').eq(0).find('input').val()==null || $('.objetivoEselect').eq(0).find('input').val()==undefined){
+        /*if($('.objetivoEselect').eq(0).find('input').val()=='' || $('.objetivoEselect').eq(0).find('input').val()==null || $('.objetivoEselect').eq(0).find('input').val()==undefined){
           necesarios=necesarios  + '<br><b>Objetivos Especificos</b>'
           $('.newObjetivoE1').css('border-color', 'red');
-        }
-
+        }*/
       }
       if (necesarios != "") {
         app.alert.show("requeridos_reunion_llamada", {
