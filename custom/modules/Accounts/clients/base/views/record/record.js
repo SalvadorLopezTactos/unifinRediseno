@@ -16,6 +16,9 @@
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
 
+        this.context.on('button:cancel_button:click', this.handleCancel, this);
+
+
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
         this.totalllamadas = 0;
@@ -30,7 +33,7 @@
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
         this.model.addValidationTask('check_account_direcciones', _.bind(this._doValidateDireccion, this));
-        this.model.addValidationTask('check_account_direccionesCP', _.bind(this._doValidateDireccionCP, this));
+        //this.model.addValidationTask('check_account_direccionesCP', _.bind(this._doValidateDireccionCP, this));
         //this.model.addValidationTask('check_Tiene_Contactos', _.bind(this._doValidateTieneContactos, this));
         this.model.addValidationTask('check_1900_year', _.bind(this.fechaMenor1900, this));
         this.model.addValidationTask('fechadenacimiento_c', _.bind(this.doValidateDateNac, this));
@@ -106,7 +109,7 @@
          Salvador Lopez
          Se añaden eventos change para mostrar teléfonos y direcciones al vincular o desvincular algún registro relacionado
          */
-        this.model.on('change:account_telefonos', this.refresca, this);
+        //this.model.on('change:account_telefonos', this.refresca, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -303,20 +306,21 @@
     _direccionDuplicada: function (fields, errors, callback) {
 
         /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
-        OBETENER LAS DESDRIPCIONES DE LOS COMBOS*/
+        OBETENER LAS DESCRIPCIONES DE LOS COMBOS*/
 
+        //var objDirecciones = $('.control-group.direccion')
         var objDirecciones = $('.control-group.direccion')
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
-                objDirecciones.eq(i).find('.existingNumExt').val() +
-                objDirecciones.eq(i).find('.existingNumInt').val() +
-                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
-                objDirecciones.eq(i).find('#existingPostalInput').val();
+            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                objDirecciones.eq(i).find('.numExtExisting').val() +
+                objDirecciones.eq(i).find('.numIntExisting').val() +
+                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                objDirecciones.eq(i).find('.postalInputTempExisting').val();
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
@@ -610,14 +614,15 @@
     },
 
     handleCancel: function () {
-        var account_telefonos = this.model._previousAttributes.account_telefonos;
+        var account_telefonos = cont_tel.prev_oTelefonos.prev_telefono;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
         this.model.set('account_telefonos', account_telefonos);
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-        //this.render();
+        cont_tel.oTelefonos.telefono=account_telefonos;
+        cont_tel.render();
     },
 
     bindDataChange: function () {
@@ -883,7 +888,7 @@
         $('div[data-name=account_telefonos]').hide();
         $('div[data-name=email]').hide();
         $('div[data-name=account_direcciones]').hide();
-		self=this;
+		//self=this;
         if(this.model.get('id')!="") {
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
@@ -899,17 +904,14 @@
                         $('div[data-name=account_direcciones]').show();
                     }
                     return data;
-                }, self),
+                }, this),
             });
-            self.render();
+            //self.render();
         }
         console.log("valor fuera " + this.model.get('id'));
     },
 
     disable_panels_rol:function () {
-
-        self=this;
-
         if(this.model.get('id')!="") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -942,17 +944,14 @@
                             }
                         }
                         return data;
-                    }, self),
+                    }, this),
                 });
-                self.render();
+                //self.render();
             }
         }
     },
 
     disable_panels_team:function () {
-
-        self=this;
-
         if(this.model.get('id')!="") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1019,9 +1018,9 @@
 
                         }
                         return data;
-                    }, self),
+                    }, this),
                 });
-                self.render();
+                //self.render();
             }
         }
     },
@@ -1348,52 +1347,67 @@
     _doValidateDireccionCP: function (fields, errors, callback) {
         //Valida CP
         console.log('Validación CP');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].codigopostal == 'xkcd' && isNaN($('input#existingPostalInput.select2').eq(i).val())==false){
-                direcciones[i].codigopostal = $('input#existingPostalInput.select2').eq(i).val();
+        var direcciones = this.model.get('account_direcciones_n');
+        if(direcciones != undefined){
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].codigo_postal == '' || direcciones[i].codigo_postal == null) {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
+
             }
-            if (direcciones[i].codigopostal == 'xkcd' || direcciones[i].codigopostal == null || direcciones[i].codigopostal == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
-            }
+
 
         }
 
         //Valida Ciudad
+        /*
         console.log('Validación Ciudad');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].ciudad == 'xkcd' || direcciones[i].ciudad == null || direcciones[i].ciudad == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
+        //var direcciones = this.model.get('account_direcciones');
+        if(direcciones != undefined){
+
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].ciudad_seleccionada == '1' || direcciones[i].ciudad_seleccionada == null || direcciones[i].ciudad_seleccionada == '') {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
             }
+
         }
+        */
+
 
         //Valida Colonia
-        console.log('Validación Colonia');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].colonia == 'xkcd' || direcciones[i].colonia == null || direcciones[i].colonia == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
+        //console.log('Validación Colonia');
+        //var direcciones = this.model.get('account_direcciones');
+        /*
+        if(direcciones !=undefined){
+
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].colonia_seleccionada == '1' || direcciones[i].colonia_seleccionada == null || direcciones[i].colonia_seleccionada == '') {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
             }
+
+
         }
+        */
 
         //Return
         callback(null, fields, errors);
@@ -1420,7 +1434,7 @@
                     console.log('Validacion Dir.Nacional');
                     var direcciones = this.model.get('account_direcciones');
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
+                        if (direcciones[i].pais_seleccionado == 2) {
                             nacional = 1;
                         }
                     }
@@ -1452,7 +1466,7 @@
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        this.context.on('button:save_button:click', this.borraTel, this);
+       // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
     },
@@ -1580,16 +1594,16 @@
             estatus.push(datos_telefonos[i].estatus);
         }
         for (var i = 0; i < datos_dirreciones.length; i++) {
-            tipolabel2.push(datos_dirreciones[i].tipo_label);
-            cp.push(datos_dirreciones[i].codigopostal);
-            municipio.push(datos_dirreciones[i].municipio);
+            tipolabel2.push(datos_dirreciones[i].tipo_seleccionado_hide_label);
+            cp.push(datos_dirreciones[i].postal_hidden);
+            municipio.push(datos_dirreciones[i].municipio_seleccionado);
             calle.push(datos_dirreciones[i].calle);
-            indicador.push(datos_dirreciones[i].indicador);
-            ciudad.push(datos_dirreciones[i].ciudad);
+            indicador.push(datos_dirreciones[i].indicador_seleccionado_hide);
+            ciudad.push(datos_dirreciones[i].ciudad_seleccionada);
             numext.push(datos_dirreciones[i].numext);
             numint.push(datos_dirreciones[i].numint);
-            estado.push(datos_dirreciones[i].estado);
-            colonia.push(datos_dirreciones[i].colonia);
+            estado.push(datos_dirreciones[i].estado_seleccionado);
+            colonia.push(datos_dirreciones[i].colonia_seleccionada);
         }
         var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
         var allfields2=[];
@@ -2574,15 +2588,29 @@
     validadirecc: function (fields, errors, callback) {
         var cont=0;
 
-        $('.existingIndicador').each(function (index) {
-            if($(this).val()==''){
+        $('.existingTipodedireccion').each(function (index) {
+            if($(this).val()=='' || $(this).val()==null){
                 cont++;
-                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', 'red');
+                //$('#s2id_multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+                $('.multi_tipo_existing ul.select2-choices').eq(index).css('border-color', 'red');
             }else{
-                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                //$('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                $('.multi_tipo_existing ul.select2-choices').eq(index).css('border-color', '');
             }
         });
-        $('.existingPostal').each(function (index) {
+
+
+        $('.existingIndicador').each(function (index) {
+            if($(this).val()=='' || $(this).val()==null){
+                cont++;
+                //$('#s2id_multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+                $('.multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+            }else{
+                //$('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                $('.multi1_n_existing ul.select2-choices').eq(index).css('border-color', '');
+            }
+        });
+        $('.postalInputTempExisting').each(function (index) {
             if($(this).val()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
@@ -2593,33 +2621,42 @@
             }
         });
 
-        $('.existingColoniaTemp').each(function () {
-            if($(this).val()=='1'){
+        $('.ciudadExisting').each(function () {
+            if($(this).select2('val')=='1'){
                 cont++;
-                $(this).css('border-color', 'red');
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', 'red');
             }else{
-                $(this).css('border-color', '');
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', '');
             }
         });
 
-        $('.existingCalle').each(function (index) {
+        $('.coloniaExisting').each(function () {
+            if($(this).select2('val')=='1'){
+                cont++;
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', 'red');
+            }else{
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', '');
+            }
+        });
+
+        $('.calleExisting').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
                 //$(this).eq(index).css('border-color', 'red');
-                $('.existingCalle').eq(index).css('border-color', 'red');
+                $('.calleExisting').eq(index).css('border-color', 'red');
             }else{
-                $('.existingCalle').eq(index).css('border-color', '');
+                $('.calleExisting').eq(index).css('border-color', '');
             }
         });
-        $('.existingNumExt').each(function (index) {
+        $('.numExtExisting').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $('.existingNumExt').eq(index).css('border-color', 'red');
+                $('.numExtExisting').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $('.existingNumExt').eq(index).css('border-color', '');
+                $('.numExtExisting').eq(index).css('border-color', '');
             }
         });
 
@@ -2743,7 +2780,6 @@
 
 
     valida_backoffice: function() {
-        self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list');
         var roles_logged = app.user.attributes.roles;
         var coincide_rol=0;
@@ -2767,13 +2803,12 @@
                         });
                         app.router.navigate('#Accounts', {trigger: true});
                     }
-                }, self),
+                }, this),
             });
         }
     },
 
     valida_centro_prospec: function() {
-        self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
         var roles_logged = app.user.attributes.roles;
         var coincide_rol=0;
@@ -2806,7 +2841,7 @@
                             });
                             app.router.navigate('#Accounts', {trigger: true});
                         }
-                    }, self),
+                    }, this),
                 });
             }
         }
@@ -2851,11 +2886,14 @@
             var value = this.model.get('account_direcciones');
             var totalindicadores = "";
 
+            if(value != undefined){
 
-            for (i=0; i < value.length; i++) {
-                console.log("Valida Cedente");
-                var valorecupera = this._getIndicador(value[i].indicador);
-                totalindicadores = totalindicadores + "," + valorecupera;
+                for (i=0; i < value.length; i++) {
+                    console.log("Valida Cedente");
+                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+
+                }
 
             }
 

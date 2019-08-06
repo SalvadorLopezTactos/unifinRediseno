@@ -656,14 +656,14 @@
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
-                objDirecciones.eq(i).find('.existingNumExt').val() +
-                objDirecciones.eq(i).find('.existingNumInt').val() +
-                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
-                objDirecciones.eq(i).find('#existingPostalInput').val();
+            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                objDirecciones.eq(i).find('.numExtExisting').val() +
+                objDirecciones.eq(i).find('.numIntExisting').val() +
+                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                objDirecciones.eq(i).find('.postalInputTempExisting').val();
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
@@ -1229,7 +1229,7 @@
                     console.log(direcciones);
                     var direcciones = this.model.get('account_direcciones');
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
+                        if (direcciones[i].pais_seleccionado == 2) {
                             nacional = 1;
                         }
                     }
@@ -1802,11 +1802,14 @@
             var value = this.model.get('account_direcciones');
             var totalindicadores = "";
 
+            if(value != undefined){
 
-            for (i = 0; i < value.length; i++) {
-                console.log("Valida Cedente");
-                var valorecupera = this._getIndicador(value[i].indicador);
-                totalindicadores = totalindicadores + "," + valorecupera;
+                for (i=0; i < value.length; i++) {
+                    console.log("Valida Cedente");
+                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+
+                }
 
             }
 
