@@ -12,7 +12,15 @@ $dictionary['Account']['duplicate_check'] = array(
         'filter_template' => array(
             array(
                 '$or' => array(
-                    array('rfc_c' => array('$equals' => '$rfc_c')),
+                    array(
+                            '$and' => array(
+                                array('rfc_c' => array('$equals' => '$rfc_c')),
+                                array(
+                                  'pais_nacimiento_c'=> array('$in' => array('2') )
+                                )
+                            )
+                        ),
+                    
                     array('clean_name' => array('$equals' => '$clean_name')),
                 )
             ),
