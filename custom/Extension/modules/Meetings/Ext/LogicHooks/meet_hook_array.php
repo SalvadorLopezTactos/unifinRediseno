@@ -41,3 +41,12 @@ $hook_array['before_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'insertAuditFields' // name of the function
 );
+
+//Insertar nuevo registro en tabla custom meetings_audit, manteniendo los valores de cuando se desvincula una cuenta de una reunión
+$hook_array['after_relationship_delete'][] = Array(
+    1,
+    'Crea nuevo registro de auditoría para conocer desvinculación entre cuenta y reunión ',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'insertAuditUnlink' // name of the function
+);
