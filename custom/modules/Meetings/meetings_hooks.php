@@ -252,6 +252,19 @@ class Meetings_Hooks
     }
   }
 
+    function insertAuditUnlink ($bean, $event, $args)
+    {
+        global $current_user;
+        $date= TimeDate::getInstance()->nowDb();
+        $id_m_audit=create_guid();
+
+        $plataforma=$GLOBALS['service']->platform;
+        $sqlInsert="insert into meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'parent_id', 'id', '{$args['related_id']}', '', '', '{$plataforma}', '1', '{$date}')";
+        $GLOBALS['db']->query($sqlInsert);
+
+    }
+
   /*
    * Regresa el tipo de dato de un campo
    * @param $bean Object, objeto con la definición completa de la entidad de Meetings
