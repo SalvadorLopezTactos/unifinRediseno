@@ -46,11 +46,28 @@
         </table>
     </div>
 
-    <br>
     <!-- Formulario para nuevo registro-->
     <b>Nueva Referencia</b>
     <!-- Agrupador -->
     <div id="input">
+        <!-- Tipo de Persona -->
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="record-label" >
+                    Régimen Fiscal
+                </div>
+                <select class="refRegimenFiscal span12" style="font-size: 15px;font-weight: 500;">
+                    {{{regimen_fiscal}}}
+                </select>
+            </div>
+            <div class="span8 hide">
+                <div class="record-label" >
+                    Razón Social
+                </div>
+                <input type="text" class="newRazonSocial span3">
+            </div>
+        </div>
+        <br>
         <!-- Línea 1 -->
         <div class="row-fluid">
             <div class="span4">

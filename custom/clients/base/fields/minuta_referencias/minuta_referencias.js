@@ -13,13 +13,21 @@
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
         'keydown .newCampo5R':'checkInVentas',
-        'change .campo4SelectR':'validaMailRef'
+        'change .campo4SelectR':'validaMailRef',
+        'change select.refRegimenFiscal':'showRazonSocial'
     },
 
     initialize: function (options) {
         //Inicializa campo custom
         selfRef= this;
         this._super('initialize', [options]);
+
+        var regimen_list = App.lang.getAppListStrings('tipo');
+         var regimen_options = '<option value=""></option>'
+         for (regimen_id in regimen_list) {
+            regimen_options += '<option value="' + regimen_id + '" >' + regimen_list[regimen_id] + '</option>';
+        }
+        this.regimen_fiscal= regimen_options;
 
         this.model.addValidationTask('GuardarReferencias', _.bind(this.estableceReferencias, this));
 
@@ -39,6 +47,12 @@
 
     _render: function (fields, errors, callback) {
         this._super("_render");
+
+        this.$('select.refRegimenFiscal').select2({
+            width:'100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
 
         $("div.record-label[data-name='minuta_referencias']").attr('style', 'display:none;');
         $("[data-name='tct_ref_json_c']").attr('style', 'display:none;');
@@ -149,10 +163,14 @@
         }
     },
 
-    /* Función para agregar los datos y crear una cuenta LEAD
+    /* Función para agregar los datos y crear:
+     Cuenta tipo Lead y Persona relacionada para "Persona Moral"
+     Cuenta tipo Lead para "Persona Fisica"
      */
     addReferencia: function (options) {
         //Estableciendo el color de borde original en cada campo
+        $('.select2-container.refRegimenFiscal').children().eq(0).css('border-color', '');
+        $('.newRazonSocial').css('border-color','');
         $('.newCampo1R').css('border-color', '');
         $('.newCampo2R').css('border-color', '');
         $('.newCampo3R').css('border-color', '');
@@ -160,14 +178,18 @@
         $('.newCampo5R').css('border-color', '');
 
         //Obteniendo valores de los campos
+        var tipo=$('select.refRegimenFiscal').val();
+        var razon=$('.newRazonSocial').val();
         var valor1 = $('.newCampo1R')[0].value.trim();
         var valor2 = $('.newCampo2R')[0].value.trim();
         var valor3 = $('.newCampo3R')[0].value.trim();
         var valor4 = $('.newCampo4R')[0].value;
         var valor5 = $('.newCampo5R')[0].value;
 
-        var lead = {
+        var registro = {
             "id": "",
+            "regimen_fiscal":tipo,
+            "razon_social":razon,
             "nombres": valor1,
             "apaterno": valor2,
             "amaterno": valor3,
@@ -178,6 +200,16 @@
 
         //Valida campos requeridos
         var faltantes = 0;
+        if(tipo==''){
+            $('.select2-container.refRegimenFiscal').children().eq(0).css('border-color', 'red');
+            faltantes++;
+        }
+
+        if($('.newRazonSocial').is(":visible") && razon.trim()==''){
+
+            $('.newRazonSocial').css('border-color','red');
+            faltantes++;
+        }
         //Nombres
         if (valor1 == '' || valor1.trim() == '') {
 
@@ -316,10 +348,17 @@
             $('.addReferencia').bind('click', false);
 
             // Valida si existen duplicados
-            var nombrecompleto = $(".newCampo1R").val() + $(".newCampo2R").val() + $(".newCampo3R").val();
-            var nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
-
-            var campos = ["primernombre_c", "apellidopaterno_c","apellidomaterno_c"];
+            var nombrecompleto='';
+            if(tipo != 'Persona Moral'){
+                
+                nombrecompleto = $(".newCampo1R").val() + $(".newCampo2R").val() + $(".newCampo3R").val();
+                nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
+            }else{
+                nombrecompleto = $('.newRazonSocial').val();
+                nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
+            }
+            
+            var campos = ["primernombre_c", "apellidopaterno_c","apellidomaterno_c","razonsocial_c","nombre_comercial_c"];
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                 campos: campos.join(','),
                 max_num: 4,
@@ -343,7 +382,7 @@
                         });
                     }
                     else {
-                        selfRef.mReferencias.referencias.push(lead);
+                        selfRef.mReferencias.referencias.push(registro);
                         selfRef.render();
                     }
                     $('.addReferencia').unbind('click', false);
@@ -364,6 +403,16 @@
             banderCorreo=true;
         }
         return banderCorreo;
+    },
+
+    showRazonSocial:function(evt){
+        var tipo=$(evt.currentTarget).val();
+        if(tipo=="Persona Moral"){
+            this.$(".newRazonSocial").parent().removeClass('hide');
+        }else{
+            this.$(".newRazonSocial").parent().addClass('hide');
+        }
+
     },
 
     ValidaCaracter: function(texto)
