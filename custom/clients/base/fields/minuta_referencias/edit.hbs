@@ -22,6 +22,25 @@
                     <td class="filareferencia">
                         <div class="row-fluid">
                             <div class="span4">
+                                <div class="record-label" >
+                                    Régimen Fiscal
+                                </div>
+                                <select class="existingRefRegimenFiscal span12 updateRecords" style="font-size: 15px;font-weight: 500;" data-field="regimen_fiscal">
+                                    {{#each regimen_list}}
+                                        <!-- <option value="{{@key}}">{{this}}</option>-->
+                                        <option value="{{@key}}" {{ifSelected @key ../regimen_fiscal}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="span8 hide">
+                                <div class="record-label" >
+                                    Razón Social
+                                </div>
+                                <input type="text" class="existingRazonSocial span3 updateRecords" value="{{razon_social}}" data-field="razon_social">
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span4">
                                 <input type="text" class="campo1SelectR span3 updateRecords" placeholder="Nombre" value="{{nombres}}" data-field="nombres">
                             </div>
                             <div class="span4">

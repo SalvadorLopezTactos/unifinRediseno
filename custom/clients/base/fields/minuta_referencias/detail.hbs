@@ -20,10 +20,16 @@
             <tbody>
             {{#each detalle}}
                 <tr>
+                    {{#if moral}}
+                        <td class="campo1SelectR">
+                            {{razon_social}}: {{nombres}} {{apaterno}} {{amaterno}}
+                        </td>
+                    {{else}}
+                        <td class="campo1SelectR">
+                            {{nombres}} {{apaterno}} {{amaterno}}
+                        </td>
+                    {{/if}}
 
-                    <td class="campo1SelectR">
-                        {{nombres}} {{apaterno}} {{amaterno}}
-                    </td>
                     <td class="campo2SelectR">
                         {{correo}}
                     </td>

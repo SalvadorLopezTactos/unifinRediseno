@@ -14,7 +14,8 @@
         'keydown .campo5SelectR':'keyDownNewExtension',
         'keydown .newCampo5R':'checkInVentas',
         'change .campo4SelectR':'validaMailRef',
-        'change select.refRegimenFiscal':'showRazonSocial'
+        'change select.refRegimenFiscal':'showRazonSocial',
+        'change select.existingRefRegimenFiscal':'showRazonSocial'
     },
 
     initialize: function (options) {
@@ -48,6 +49,12 @@
     _render: function (fields, errors, callback) {
         this._super("_render");
 
+        this.$('select.existingRefRegimenFiscal').select2({
+            width:'100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
         this.$('select.refRegimenFiscal').select2({
             width:'100%',
             closeOnSelect: false,
@@ -63,10 +70,11 @@
             //Actualiza el objeto mReferencias con el campo ubicao y el valor actualizado
             var campo=$(this).closest("tr");
             var valorch=$(evt.currentTarget).attr('data-field');
-            var nombreCampo = campo.context.getAttribute('data-field');
+            //var nombreCampo = campo.context.getAttribute('data-field');
+            var nombreCampo = valorch;
             selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val();
             //Validacion para campos requeridos solamente
-            if(campo.context.value=="" || campo.context.value==null ){
+            if($(evt.currentTarget).val().trim()=="" || $(evt.currentTarget).val().trim()==null){
                 if( nombreCampo == 'apaterno' || nombreCampo == 'nombres'){
                     selfRef.$(evt.currentTarget).css('border-color', 'red');
                     app.alert.show("ReferenciaVacia", {
@@ -74,6 +82,16 @@
                         title: "La referencia ingresada contiene valor vacío. <br> Se requieren un Nombre y Apellido Paterno.",
                         autoClose: true
                     });
+                }
+                if(nombreCampo=='razon_social'){
+
+                    selfRef.$(evt.currentTarget).css('border-color', 'red');
+                    app.alert.show("ReferenciaVacia", {
+                        level: "error",
+                        title: "La referencia ingresada contiene valor vacío. <br> Se requieren una Razón Social.",
+                        autoClose: true
+                    });
+
                 }
                 if((nombreCampo == 'correo' || nombreCampo == 'telefono') && (selfRef.mReferencias.referencias[campo.index()].correo == "" && selfRef.mReferencias.referencias[campo.index()].telefono=="" )){
                     selfRef.$(evt.currentTarget).css('border-color', 'red');
@@ -85,10 +103,10 @@
                     });
                 }
 
-            }else{
+            }else{ //Validación que entra para cuando el valor actualizado no es vacío
                 selfRef.$(evt.currentTarget).css('border-color', '');
                 if (nombreCampo == 'nombres' || nombreCampo == 'apaterno' || nombreCampo == 'amaterno'){
-                    if(!selfRef.ValidaCaracter(campo.context.value)){
+                    if(!selfRef.ValidaCaracter($(evt.currentTarget).val().trim())){
                         selfRef.$(evt.currentTarget).css('border-color', 'red');
                         selfRef.$(evt.currentTarget).val('');
                         app.alert.show("ReferenciaTelDif", {
@@ -189,6 +207,7 @@
         var registro = {
             "id": "",
             "regimen_fiscal":tipo,
+            "regimen_list":App.lang.getAppListStrings('tipo'),
             "razon_social":razon,
             "nombres": valor1,
             "apaterno": valor2,
@@ -316,10 +335,26 @@
             var duplicados= false;
 
             Object.keys(selfRef.mReferencias.referencias).forEach(function(key) {
-                var iteracion = selfRef.mReferencias.referencias[key].nombres + selfRef.mReferencias.referencias[key].apaterno + selfRef.mReferencias.referencias[key].amaterno;
+                var tipo=$('select.refRegimenFiscal').val();
+                var iteracion="";
+                if(tipo=="Persona Moral"){
+
+                    iteracion = selfRef.mReferencias.referencias[key].razon_social;
+                }else{
+
+                    iteracion = selfRef.mReferencias.referencias[key].nombres + selfRef.mReferencias.referencias[key].apaterno + selfRef.mReferencias.referencias[key].amaterno;
+                }
                 iteracion = iteracion.replace(/\s+/gi,'');
                 iteracion = iteracion.toUpperCase();
-                var valores = $('.newCampo1R').val().trim() + $('.newCampo2R').val().trim() + $('.newCampo3R').val().trim();
+                var valores='';
+                if(tipo=="Persona Moral"){
+
+                    valores=$('.newRazonSocial').val().trim();
+
+                }else{
+
+                    valores = $('.newCampo1R').val().trim() + $('.newCampo2R').val().trim() + $('.newCampo3R').val().trim();
+                }
                 valores = valores.replace(/\s+/gi,'');
                 valores = valores.toUpperCase();
                 if (iteracion == valores) {
@@ -327,6 +362,7 @@
                 }
             });
             if(duplicados== true){
+                $(".newRazonSocial").val("");
                 $(".newCampo1R").val("");
                 $(".newCampo2R").val("");
                 $(".newCampo3R").val("");
@@ -370,6 +406,7 @@
             }), null, {
                 success: _.bind(function (cuenta) {
                     if (cuenta.records.length > 0) {
+                        $(".newRazonSocial").val("");
                         $(".newCampo1R").val("");
                         $(".newCampo2R").val("");
                         $(".newCampo3R").val("");
@@ -382,8 +419,20 @@
                         });
                     }
                     else {
-                        selfRef.mReferencias.referencias.push(registro);
+                        if(registro.regimen_fiscal=='Persona Moral'){
+                            registro.moral="Moral";
+                        }
+                        var indexInsert=selfRef.mReferencias.referencias.push(registro)-1;
                         selfRef.render();
+                        //Instrucción para establecer el valor de regimen fiscal en referencia existente
+                        //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).select2('val',registro.regimen_fiscal);
+                        //Se lanza evento change para mostrat/oculta campo de Razón Social
+                        //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).trigger('change');
+
+                        selfRef.$('select.existingRefRegimenFiscal').each(function(){
+                            $(this).trigger('change');
+                        });
+
                     }
                     $('.addReferencia').unbind('click', false);
                     App.alert.dismiss('loadingRender');
@@ -408,9 +457,11 @@
     showRazonSocial:function(evt){
         var tipo=$(evt.currentTarget).val();
         if(tipo=="Persona Moral"){
-            this.$(".newRazonSocial").parent().removeClass('hide');
+            //this.$(".newRazonSocial").parent().removeClass('hide');
+            this.$(evt.currentTarget).parent().parent().children().eq(1).removeClass('hide');
         }else{
-            this.$(".newRazonSocial").parent().addClass('hide');
+            //this.$(".newRazonSocial").parent().addClass('hide');
+            this.$(evt.currentTarget).parent().parent().children().eq(1).addClass('hide');
         }
 
     },

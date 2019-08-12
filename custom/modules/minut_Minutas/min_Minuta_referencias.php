@@ -96,42 +96,71 @@ class Minuta_Referencias
                     $idLead=$beanCuentas->id;
 
                     if($idLead != null && $idLead != ""){
+                        $clean_name=str_replace(' ', '', $mReferencias[$r]['nombres'] . $mReferencias[$r]['apaterno'] . $mReferencias[$r]['amaterno']);
 
-                        //Creación de Cuenta tipo Persona
-                        $beanPersona = BeanFactory::newBean("Accounts");
-                        $beanPersona->primernombre_c = $mReferencias[$r]['nombres'];
-                        $beanPersona->apellidopaterno_c = $mReferencias[$r]['apaterno'];
-                        $beanPersona->apellidomaterno_c = $mReferencias[$r]['amaterno'];
-                        $beanPersona->clean_name = str_replace(' ', '', $mReferencias[$r]['nombres'] . $mReferencias[$r]['apaterno'] . $mReferencias[$r]['amaterno']);
-                        $beanPersona->phone_office = $mReferencias[$r]['telefono'];
-                        $beanPersona->email1 = $mReferencias[$r]['correo'];
-                        $beanPersona->tipo_registro_c = "Persona";
-                        $beanPersona->tipo_relacion_c = "^Contacto^";
-                        $beanPersona->account_id1_c = $mReferencias[$r]['id_cuenta'];
+                        //Comprobar si la Persona relacionada existe en la bd
+                        $qGetPersona="select accounts.id as idPersona, email_addresses.email_address, accounts.clean_name, accounts.phone_office
+from accounts
+inner join email_addr_bean_rel on email_addr_bean_rel.bean_id = accounts.id and email_addr_bean_rel.bean_module='Accounts'
+inner join email_addresses on email_addresses.id = email_addr_bean_rel.email_address_id
+where 
+accounts.clean_name = '{$clean_name}'
+and (
+email_addresses.email_address = '{$mReferencias[$r]['correo']}'
+or accounts.phone_office = '{$mReferencias[$r]['telefono']}')";
 
-                        $beanPersona->user_id_c = '569246c7-da62-4664-ef2a-5628f649537e';
-                        $beanPersona->promotorleasing_c = '9 - Sin Gestor';
-                        $beanPersona->user_id1_c = '569246c7-da62-4664-ef2a-5628f649537e';
-                        $beanPersona->promotorfactoraje_c = '9 - Sin Gestor';
-                        $beanPersona->user_id2_c = '569246c7-da62-4664-ef2a-5628f649537e';
-                        $beanPersona->promotorcredit_c = '9 - Sin Gestor';
+                        $result=$GLOBALS['db']->query($qGetPersona);
 
-                        if (strpos($current_user->productos_c, '1') != false) {
-                            $beanPersona->user_id_c = $current_user->id;
-                            $beanPersona->promotorleasing_c = 'name';
-                        }
-                        if (strpos($current_user->productos_c, '4') != false) {
-                            $beanPersona->user_id1_c = $current_user->id;
-                            $beanPersona->promotorfactoraje_c = 'name';
-                        }
-                        if (strpos($current_user->productos_c, '3') != false) {
-                            $beanPersona->user_id2_c = $current_user->id;
-                            $beanPersona->promotorcredit_c = 'name';
+                        $encontrados = $result->num_rows;
+                        $idPersona='';
+                        if($encontrados >0){
+
+                            while($row = $GLOBALS['db']->fetchByAssoc($result))
+                            {
+                                $idPersona = $row['idPersona'];
+                            }
+
                         }
 
-                        $beanPersona->save();
-                        $idPersona=$beanPersona->id;
+                        if($idPersona == ''){
 
+                            //Creación de nueva Cuenta tipo Persona
+                            $beanPersona = BeanFactory::newBean("Accounts");
+                            $beanPersona->primernombre_c = $mReferencias[$r]['nombres'];
+                            $beanPersona->apellidopaterno_c = $mReferencias[$r]['apaterno'];
+                            $beanPersona->apellidomaterno_c = $mReferencias[$r]['amaterno'];
+                            $beanPersona->clean_name = str_replace(' ', '', $mReferencias[$r]['nombres'] . $mReferencias[$r]['apaterno'] . $mReferencias[$r]['amaterno']);
+                            $beanPersona->phone_office = $mReferencias[$r]['telefono'];
+                            $beanPersona->email1 = $mReferencias[$r]['correo'];
+                            $beanPersona->tipo_registro_c = "Persona";
+                            $beanPersona->tipo_relacion_c = "^Contacto^";
+                            $beanPersona->account_id1_c = $mReferencias[$r]['id_cuenta'];
+
+                            $beanPersona->user_id_c = '569246c7-da62-4664-ef2a-5628f649537e';
+                            $beanPersona->promotorleasing_c = '9 - Sin Gestor';
+                            $beanPersona->user_id1_c = '569246c7-da62-4664-ef2a-5628f649537e';
+                            $beanPersona->promotorfactoraje_c = '9 - Sin Gestor';
+                            $beanPersona->user_id2_c = '569246c7-da62-4664-ef2a-5628f649537e';
+                            $beanPersona->promotorcredit_c = '9 - Sin Gestor';
+
+                            if (strpos($current_user->productos_c, '1') != false) {
+                                $beanPersona->user_id_c = $current_user->id;
+                                $beanPersona->promotorleasing_c = 'name';
+                            }
+                            if (strpos($current_user->productos_c, '4') != false) {
+                                $beanPersona->user_id1_c = $current_user->id;
+                                $beanPersona->promotorfactoraje_c = 'name';
+                            }
+                            if (strpos($current_user->productos_c, '3') != false) {
+                                $beanPersona->user_id2_c = $current_user->id;
+                                $beanPersona->promotorcredit_c = 'name';
+                            }
+
+                            $beanPersona->save();
+                            $idPersona=$beanPersona->id;
+
+
+                        }
                         //Creación de registro de Relacióm
                         $beanRelacion = BeanFactory::newBean("Rel_Relaciones");
                         $beanRelacion->relaciones_activas='^Contacto^';
@@ -142,8 +171,6 @@ class Minuta_Referencias
                         $beanRelacion->save();
 
                     }
-
-
 
 
                 }//Termina condición para guardar Lead Persona Moral y Cuenta tipo Persona
