@@ -454,7 +454,7 @@
       //Campos necesarios para Reunion y llamada
       if(this.model.get('resultado_c')==5 || this.model.get('resultado_c')==19){
         var necesarios="";
-        if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null){
+        if($('.newCampo1A').val().trim()=='' || $('.newCampo1A').val()==null){
           necesarios=necesarios  + '<br><b>Asunto</b>'
           $('.newCampo1A').css('border-color', 'red');
         }
@@ -566,11 +566,21 @@
             return;
         }
 
-        //Valida resultado diferente a El cliente no estuvo presente, cita cancelada
+        //Valida resultado diferente a: "El cliente no estuvo presente, cita cancelada".
         if (this.model.get('resultado_c') == "1") {
             App.alert.show("survey_no_result", {
                 level: "info",
                 messages: "No se puede contestar encuesta para resutado <b>El cliente no estuvo presente,Cita cancelada</b>",
+                autoClose: true,
+            });
+            return;
+        }
+
+        //Valida resultado diferente a: "No se pudo contactar al Prospecto para confirmar cita".
+        if (this.model.get('resultado_c') == "22") {
+            App.alert.show("survey_no_result_2", {
+                level: "info",
+                messages: "No se puede contestar encuesta para resutado <b>No se pudo contactar al Prospecto para confirmar cita</b>",
                 autoClose: true,
             });
             return;
