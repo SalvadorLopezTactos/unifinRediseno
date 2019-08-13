@@ -1,10 +1,11 @@
 <?php
- /**
- * @file   account_telefonos.php
- * @author trobinson@levementum.com
- * @date   6/5/2015 2:00 PM
- * @brief  $END$
+/**
+ * Created by PhpStorm.
+ * User: adrian
+ * Date: 19/07/19
+ * Time: 08:59 AM
  */
+
 $dictionary['Account']['fields']['account_telefonos'] = array (
     'name' => 'account_telefonos',
     'id_name' => 'account_telefonos',
@@ -13,5 +14,5 @@ $dictionary['Account']['fields']['account_telefonos'] = array (
     'source' => 'non-db',
     'dbType' => 'non-db',
     'studio' => 'visible',
-    'vname' => 'LBL_ACCOUNT_TELEFONOS',
+    'vname' => 'LBL_TEL_V2',
 );

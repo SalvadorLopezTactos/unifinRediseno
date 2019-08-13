@@ -16,13 +16,13 @@
          */
         this._super('initialize', [options]);
 
-
-         /*
-        	AF. 13/02/2018
-        	Set account_id: Establece id para campo
-        		from: 	rel_relaciones_accounts_1accounts_ida
-        		to: 	rel_relaciones_accountsaccounts_ida
-        */
+        this.context.on('button:cancel_button:click', this.handleCancel, this);
+        /*
+           AF. 13/02/2018
+           Set account_id: Establece id para campo
+               from: 	rel_relaciones_accounts_1accounts_ida
+               to: 	rel_relaciones_accountsaccounts_ida
+       */
         this.model.addValidationTask('set_Account_Related', _.bind(this._setAccount, this));
 
         //CVV INICIO
@@ -995,6 +995,14 @@
                 }, this)
             });
         }
+    },
+
+    handleCancel: function () {
+        this._super("handleCancel");
+        cont_tel.oTelefonos= TelPadre.oTelefonos;
+        this.model.set('account_telefonos', cont_tel.oTelefonos.telefono);
+
+        cont_tel.render();
     },
 
 })
