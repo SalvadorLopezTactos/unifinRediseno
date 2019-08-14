@@ -24,13 +24,16 @@ class EncuestaMinuta extends SugarApi
     }
 
     public function createSurveySubmission ($api, $args){
+        // $GLOBALS['log']->fatal('TCT - urlSurvey: ');
+        // $GLOBALS['log']->fatal(print_r($args, true));
         //Recupera variables
         global $db, $current_user, $app_list_strings;
         $idReunion = $args['data']['idMeeting'];
         $idUsuario = $args['data']['idUser'];
+        $email = ($args['data']['email'] == true ) ? 1 : 0;
         $nombreUsuario = $args['data']['nameUser'];
         $listaEncuestas = $app_list_strings['encuestas_ids_list'];
-        $idEncuesta = $listaEncuestas['minuta_agente_telefonico_usuario'];
+        $idEncuesta = ($email == 1) ? $listaEncuestas['minuta_agente_telefonico_usuario_not_held'] : $listaEncuestas['minuta_agente_telefonico_usuario'];
         $idSubmission = "";
 
         //Valida existencia de idReunion
@@ -54,9 +57,22 @@ class EncuestaMinuta extends SugarApi
             $idSubmission = create_guid();
             //$GLOBALS['log']->fatal('TCT - Genera GUID: idSubmission: '. $idSubmission);
 
+            //Cambia valores email/link
+            if ($email == 1) {
+              $description = 'Encuesta enviada desde reunion';
+              $last_send_on = 'utc_timestamp()';
+              $mail_status = 'sent successfully';
+              $submission_type = 'Email';
+            }else{
+              $description = 'Encuesta generada desde minuta';
+              $last_send_on = 'null';
+              $mail_status = '';
+              $submission_type = 'Open Ended';
+            }
+
             //Genera insert a tabla bc_survey_submission: Registro de envío de encuesta a destinatario
             $insertS = "INSERT INTO bc_survey_submission
-            (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `description`, `deleted`, `email_opened`, `survey_send`, `schedule_on`, `status`, `customer_name`, `resubmit`, `resubmit_counter`, `change_request`, `resend`, `resend_counter`, `recipient_as`, `base_score`,`obtained_score`, `score_percentage`, `parent_type`, `parent_id`, `target_parent_type`, `target_parent_id`, `team_id`, `team_set_id`, `submission_type`, `consent_accepted`, `survey_trackdatetime_temp`)
+            (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `description`, `deleted`, `email_opened`, `survey_send`, `schedule_on`, `status`, `customer_name`, `resubmit`, `resubmit_counter`, `change_request`, `resend`, `resend_counter`, `recipient_as`, `base_score`,`obtained_score`, `score_percentage`, `parent_type`, `parent_id`, `target_parent_type`, `target_parent_id`, `team_id`, `team_set_id`, `submission_type`, `consent_accepted`, `survey_trackdatetime_temp`, `last_send_on`, `mail_status`)
             VALUES
             ( '{$idSubmission}',
               '{$nombreUsuario}',
@@ -64,7 +80,7 @@ class EncuestaMinuta extends SugarApi
               utc_timestamp(),
               '{$idUsuario}',
               '{$idUsuario}',
-              'Encuesta generada desde minuta',
+              '{$description}',
               '0',
               '1',
               '1',
@@ -86,9 +102,11 @@ class EncuestaMinuta extends SugarApi
               '{$idUsuario}',
               '1',
               '1',
-              'Open Ended',
+              '{$submission_type}',
               '0',
-              utc_timestamp()
+              utc_timestamp(),
+              {$last_send_on},
+              '{$mail_status}'
             );";
             //Ejecuta insert
             $resultInsertS = $db->query($insertS);
@@ -116,4 +134,5 @@ class EncuestaMinuta extends SugarApi
         return $stringBase64;
 
     }
+
 }
