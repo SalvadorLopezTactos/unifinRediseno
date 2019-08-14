@@ -325,7 +325,13 @@
         });
 
         for (var i = 0; i < objReferencias.length; i++) {
-            var iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+            var iteradas='';
+            if(objReferencias[i].regimen_fiscal=='Persona Moral'){
+                iteradas=objReferencias[i].razon_social.trim();
+            }else{
+                iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+            }
+
             iteradas = iteradas.replace(/\s+/gi,'');
             iteradas = iteradas.toUpperCase();
             if (iteradas=="" || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
@@ -369,8 +375,15 @@
             var contadorR = 0;
             for (var i = 0; i < objReferencias.length; i++) {
                 //Valida si la referencia añadida existe en la db de accounts
-                var nombrecompleto = objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
-                var nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
+                var nombrecompleto='';
+                if(objReferencias[i].regimen_fiscal=='Persona Moral'){
+
+                    nombrecompleto= objReferencias[i].razon_social.trim();
+
+                }else{
+                    nombrecompleto = objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+                }
+                nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
 
 
                 if (nombrecompleto != "") {
