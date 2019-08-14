@@ -61,6 +61,9 @@
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        //Instrucción para alinear el campo con formato select2 con los campos ubicados debajo (nombre y correo)
+        $('.existingRefRegimenFiscal.select2-container').css('margin','0');
+        $('.refRegimenFiscal.select2-container').css('margin','0');
         $("div.record-label[data-name='minuta_referencias']").attr('style', 'display:none;');
         $("[data-name='tct_ref_json_c']").attr('style', 'display:none;');
 
