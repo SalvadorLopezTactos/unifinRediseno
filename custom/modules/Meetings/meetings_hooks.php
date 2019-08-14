@@ -389,8 +389,6 @@ class Meetings_Hooks
    * */
   function surveyNotHeld ($bean, $event, $args)
   {
-      Meetings_Hooks::sendEmailSurvey($bean);
-      /*
       //Criterio 1
       if ($bean->created_by != $bean->assigned_user_id) {
           //Recupera bean Useario creado
@@ -408,7 +406,6 @@ class Meetings_Hooks
               }
           }
       }
-      */
   }
 
   /*
