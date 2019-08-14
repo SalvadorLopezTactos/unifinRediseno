@@ -593,7 +593,7 @@
                 puesto
                   27- Agente teléfonico
                   31 - Coordinador CP
-                o Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
+                Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
               */
               if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
                   //Genera apertura de encuesta
