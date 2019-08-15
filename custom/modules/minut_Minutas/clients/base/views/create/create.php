@@ -65,7 +65,6 @@ $viewdefs['minut_Minutas']['base']['view']['create'] = array(
 		 'event' => 'button:survey_minuta:click',
 		 'name' => 'survey_minuta',
 		 'label' => 'Contestar Encuesta',
-		 'css_class' => 'btn-success',
 		 'events' => array(
 		 	'click' => 'button:survey_minuta:click',
 		 ),

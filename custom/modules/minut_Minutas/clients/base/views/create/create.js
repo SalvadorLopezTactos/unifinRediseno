@@ -25,6 +25,8 @@
         //Evento para contestar encuesta
         this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
 
+        this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
+
         var idUser = this.context.parent.attributes.model.attributes.created_by;
         var url = app.api.buildURL("Users/"+idUser, '', {}, {});
 
@@ -684,5 +686,16 @@
             }, this)
         });
     },
+
+    changeColorSurveyButton:function (evt) {
+
+        if(this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22"){
+            $('[name="survey_minuta"]').addClass('btn-success');
+        }else{
+            $('[name="survey_minuta"]').removeClass('btn-success');
+        }
+
+
+    }
 
 })
