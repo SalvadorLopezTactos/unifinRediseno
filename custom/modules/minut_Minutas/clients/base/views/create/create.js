@@ -49,8 +49,8 @@
 
     },
 
-    render: function(){
-        this._super("render");
+    _render: function(){
+        this._super("_render");
         //Quita etiquetas de campos custom
         $('[data-name=minuta_participantes]').find('.record-label').addClass('hide');
         $('[data-name=minuta_objetivos]').find('.record-label').addClass('hide');
@@ -690,12 +690,25 @@
     changeColorSurveyButton:function (evt) {
 
         if(this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22"){
+
             $('[name="survey_minuta"]').addClass('btn-success');
+
         }else{
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
 
+    },
 
-    }
+    /*
+    * Función habilitada para prevenir que la clase del botón Contestar Minuta se cambie al dar click en el botón Guardar
+    * */
+    enableButtons: function () {
+        this._super("enableButtons");
+        if(this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22"){
+            $('[name="survey_minuta"]').addClass('btn-success');
+        }else{
+            $('[name="survey_minuta"]').removeClass('btn-success');
+        }
+    },
 
 })
