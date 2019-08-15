@@ -58,7 +58,10 @@
 
           //Recupera datos para vista de creación
           idReunion = this.context.parent.attributes.modelId;
-
+          app.alert.show('alert_participants', {
+            level: 'process',         
+            title: 'Cargando...'
+          });
           var moduleid = app.data.createBean('Meetings',{id:idReunion});
           moduleid.fetch({
               success:_.bind(function(modelo){
@@ -71,6 +74,7 @@
                           selfData.mParticipantes= data;
                           _.extend(this, selfData.mParticipantes);
                           selfData.render();
+                          app.alert.dismiss('alert_participants'); 
                       },
                       error: function (e) {
                           throw e;
