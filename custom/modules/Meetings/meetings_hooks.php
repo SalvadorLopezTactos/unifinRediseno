@@ -396,7 +396,7 @@ class Meetings_Hooks
           //Criterio 2
           if ($beanUser->puestousuario_c == '27' || $beanUser->puestousuario_c == '31' || $beanUser->id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31'){
               //Criterio 3a
-              if ($bean->fetched_row['status'] == 'Planned' && $bean->status = 'Not Held'){
+              if ($bean->fetched_row['status'] == 'Planned' && $bean->status == 'Not Held'){
                 //Envía encuesta
                 Meetings_Hooks::sendEmailSurvey($bean);
               //Criterio 3b
