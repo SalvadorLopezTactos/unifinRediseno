@@ -4,6 +4,7 @@
     latitude :0,
     longitude:0,
     urlEncuesta: null,
+    flagPuesto:false,
 
 
     initialize: function (options) {
@@ -12,6 +13,7 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
+        this.model.addValidationTask('validaEncuesta', _.bind(this.validaEncuesta, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
         this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
@@ -22,6 +24,26 @@
         this.context.on('button:view_document:click', this.view_document, this);
         //Evento para contestar encuesta
         this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
+
+        var idUser = this.context.parent.attributes.model.attributes.created_by;
+        var url = app.api.buildURL("Users/"+idUser, '', {}, {});
+
+        app.api.call("read", url, null, {
+            success: _.bind(function (data) {
+
+              /*
+              Condiciones
+                puesto
+                  27- Agente teléfonico
+                  31 - Coordinador CP
+                Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
+              */
+                if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
+
+                    this.flagPuesto=true;
+                }
+            }, this)
+        });
 
     },
 
@@ -276,6 +298,36 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    /*
+    * Validacón para evitar guardar una minuta si no se ha contestado Encuesta
+    */
+    validaEncuesta:function(fields, errors, callback){
+        if (this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22") {
+            var id_meeting=this.model.get('minut_minutas_meetingsmeetings_idb');
+
+            if(id_meeting!= undefined){
+                //Generar petición para validación
+                app.api.call('GET', app.api.buildURL('GetSurveyOfMeeting/' + id_meeting), null, {
+                    success: _.bind(function(data) {
+                                if(!data){
+                                    app.alert.show("survey_required", {
+                                        level: "error",
+                                        messages: "Para guardar la minuta es necesario contestar la <b>Encuesta de Calidad</b>",
+                                        autoClose: false
+                                    });
+                                    errors['encuesta'] = errors['encuesta'] || {};
+                                    errors['encuesta'].required = true;
+                                }
+                                callback(null, fields, errors);
+                            }, this)
+                    });
+            }  
+        }else{
+            callback(null, fields, errors);
+        }
+
     },
 
     view_document: function(){
@@ -570,7 +622,7 @@
         if (this.model.get('resultado_c') == "1") {
             App.alert.show("survey_no_result", {
                 level: "info",
-                messages: "No se puede contestar encuesta para resutado <b>El cliente no estuvo presente,Cita cancelada</b>",
+                messages: "No se puede contestar encuesta para resultado <b>El cliente no estuvo presente,Cita cancelada</b>",
                 autoClose: true,
             });
             return;
@@ -580,7 +632,7 @@
         if (this.model.get('resultado_c') == "22") {
             App.alert.show("survey_no_result_2", {
                 level: "info",
-                messages: "No se puede contestar encuesta para resutado <b>No se pudo contactar al Prospecto para confirmar cita</b>",
+                messages: "No se puede contestar encuesta para resultado <b>No se pudo contactar al Prospecto para confirmar cita</b>",
                 autoClose: true,
             });
             return;
