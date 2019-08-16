@@ -538,6 +538,13 @@
                             </tr>
                         </table>
                     </th>
+                    <th width="15%" class="hide_motivo_rechazo">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Motivo de rechazo</td>
+                            </tr>
+                        </table>
+                    </th>
 
                 </tr>
 
@@ -572,6 +579,7 @@
                         <th class="totales hide_etapa"></th>
                         <th class="totales hide_progreso"></th>
                         <th class="totales hide_conversion"></th>
+                        <th class="totales hide_motivo_rechazo"></th>
                     </tr>
                 {{/each}}
 
@@ -623,6 +631,7 @@
                             <td class="hide_etapa">{{etapa}}</td>
                             <td class="hide_progreso">{{progreso}}</td>
                             <td class="hide_conversion">{{conversion}}</td>
+                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -676,6 +685,7 @@
                                 <td class="hide_etapa">{{etapa}}</td>
                                 <td class="hide_progreso">{{progreso}}</td>
                                 <td class="hide_conversion">{{conversion}}</td>
+                                <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                 <!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
@@ -734,6 +744,7 @@
                                             <td class="hide_etapa">{{etapa}}</td>
                                             <td class="hide_progreso">{{progreso}}</td>
                                             <td class="hide_conversion">{{conversion}}</td>
+                                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                             <!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
@@ -793,6 +804,7 @@
                                         <option value="hide_etapa">Etapa</option>
                                         <option value="hide_progreso">Solicitud</option>
                                         <option value="hide_conversion">Probabilidad de Conversión %</option>
+                                        <option value="hide_motivo_rechazo">Motivo de Rechazo</option>
                                     </select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
