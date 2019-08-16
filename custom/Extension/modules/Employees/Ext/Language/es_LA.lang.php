@@ -24,3 +24,4 @@ $mod_strings['LBL_TCT_VALIDA_PROPIETARIO_REAL'] = 'Valida Propietario Real';
 $mod_strings['LBL_TCT_PROPIETARIO_REAL_CHK'] = 'Valida Propietario Real';
 $mod_strings['LBL_TCT_ID_UNI2_TXF'] = 'ID UNI2';
 $mod_strings['LBL_TCT_ID_UNICS_TXF'] = 'ID UNICS';
+$mod_strings['LBL_VETADOS_CHK'] = 'Vetado';

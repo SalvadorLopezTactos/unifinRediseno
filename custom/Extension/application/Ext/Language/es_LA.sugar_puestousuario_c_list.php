@@ -1,7 +1,8 @@
 <?php
- // created: 2019-05-09 19:56:56
+ // created: 2019-08-16 12:35:17
 
 $app_list_strings['puestousuario_c_list']=array (
+  '' => '',
   1 => 'DGA COMERCIAL LEASING',
   2 => 'DIRECTOR LEASING',
   3 => 'SUBDIRECTOR LEASING',

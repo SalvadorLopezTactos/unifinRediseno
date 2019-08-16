@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:12:55
+ // created: 2019-08-16 12:32:07
 
 $app_list_strings['equipo_list']=array (
   'CASA' => 'CASA',
@@ -36,4 +36,13 @@ $app_list_strings['equipo_list']=array (
   8 => '8',
   'F5' => 'F5',
   'CAN' => 'CAN',
+  '' => '',
+  'CA4' => 'CA4',
+  'CA5' => 'CA5',
+  'CNC' => 'CNC',
+  'Equipo 0' => '0',
+  'EXP' => 'EXP',
+  'IPTO' => 'IPTO',
+  'Sinequipo' => 'Sin equipo',
+  'TIJ' => 'TIJ',
 );
