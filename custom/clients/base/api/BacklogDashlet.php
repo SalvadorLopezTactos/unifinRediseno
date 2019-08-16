@@ -300,7 +300,7 @@ CASE WHEN lb.estatus_de_la_operacion = 'Cancelada' THEN 0 ELSE
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaSinSolicitud%'  THEN  monto_sin_solicitud_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaConSolicitud%' THEN  monto_con_solicitud_c  ELSE 0 END  END*/  END AS bl_actual,
-tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c
+tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c
 FROM lev_backlog lb
 INNER JOIN lev_backlog_cstm blcs ON blcs.id_c = lb.id
 INNER JOIN accounts a ON a.id = lb.account_id_c AND a.deleted = 0
@@ -470,6 +470,7 @@ SQL;
             $response['linea'][$row['id']]['comentado'] = $row['comentado'];
             $response['linea'][$row['id']]['color'] = $row['color'];
             $response['linea'][$row['id']]['conversion'] = $row['tct_conversion_c'];
+            $response['linea'][$row['id']]['motivo_rechazo'] = $row['motivo_rechazo_txf_c'];
         }
 
         return $response;
@@ -1002,9 +1003,10 @@ SQL;
 
         // output the column headings
         fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
-            'MONTO ORIGINAL', 'PAGO '.utf8_decode('Ú').'NICO ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'PAGO '.utf8_decode('Ú').'NICO', 'BACKLOG ACTUAL', 'COLOCACI'.utf8_decode('Ó').'N REAL', 'PAGO '.utf8_decode('Ú').'NICO REAL', 'MONTO CANCELADO',
-            'PAGO '.utf8_decode('Ú').'NICO CANCELADA',  'TIPO DE OPERACI'.utf8_decode('Ó').'N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
-            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %' ));
+
+            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACI'.utf8_decode('Ó').'N REAL', 'RI REAL', 'MONTO CANCELADO',
+            'RI CANCELADA',  'TIPO DE OPERACI'.utf8_decode('Ó').'N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
+            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','RI PROSPECTO','RI CR'.utf8_decode('É').'DITO','RI RECHAZADA','RI SIN SOLICITUD','RI CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {
@@ -1039,7 +1041,6 @@ SQL;
                     foreach ($linea as $backlogId => $backlogValues) {
                         foreach ($backlogValues as $colName => $colValues) {
                             foreach ($colValues as $subColName => $subColValues) {
-                                $subColValues['conversion'] = 'test';
                                 $subColValues['equipo'] = ($subColValues['equipo'] == "Equipo 0") ? "0" : $subColValues['equipo'];
                                 $subColValues['zona'] = ($subColValues['zona'] == "Region 0") ? "0" : $subColValues['zona'];
                                 $subColValues = $this->removeElement($subColValues, "name");
@@ -1070,7 +1071,6 @@ SQL;
                         foreach ($backlogValues as $colName => $colValues) {
                             foreach ($colValues as $subColName => $subColValues) {
                                 foreach ($subColValues as $childrenColName => $childrenColValues) {
-                                    $childrenColValues['conversion'] = 'test';
                                     $childrenColValues['equipo'] = ($childrenColValues['equipo'] == "Equipo 0") ? "0" : $childrenColValues['equipo'];
                                     $childrenColValues['zona'] = ($childrenColValues['zona'] == "Region 0") ? "0" : $childrenColValues['zona'];
                                     $childrenColValues = $this->removeElement($childrenColValues, "name");
