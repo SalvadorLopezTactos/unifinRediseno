@@ -15,7 +15,7 @@
         this._super("initialize", [options]);
         vetados = this;
         this.loadView = false;
-        if(app.user.attributes.puestousuario_c == "28" || app.user.attributes.puestousuario_c == "29" || app.user.attributes.puestousuario_c == "30"){
+        if(app.user.attributes.puestousuario_c == "28" || app.user.attributes.puestousuario_c == "29" || app.user.attributes.puestousuario_c == "30" || app.user.attributes.is_manager == true){
             this.cargalistas();
             //this.generalistas();
             vetados.filtros = {
