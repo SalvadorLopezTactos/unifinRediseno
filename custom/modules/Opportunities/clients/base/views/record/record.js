@@ -382,7 +382,8 @@
             this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
         }
         if(this.model.get('tipo_producto_c')=='1'){
-            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Renta Inicial");
+            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
+            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Único");
         }else{
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Enganche");
 
@@ -772,9 +773,9 @@
                   errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                   errors['ca_importe_enganche_c'].required = true;
 
-                  app.alert.show("Renta inicial requerida", {
+                  app.alert.show("Pago_unico_requerido_monto", {
                       level: "error",
-                      title: "Renta inicial debe ser mayor a cero",
+                      title: "Pago Único debe ser mayor a cero",
                       autoClose: false
                   });
 
@@ -784,9 +785,9 @@
                   errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                   errors['porciento_ri_c'].required = true;
 
-                  app.alert.show("Renta inicial requerida", {
+                  app.alert.show("Pago_unico_requerido_porcent", {
                       level: "error",
-                      title: "% Renta inicial debe ser mayor a cero",
+                      title: "% Pago Único debe ser mayor a cero",
                       autoClose: false
                   });
 
@@ -1241,7 +1242,7 @@ console.log(name);
           if (rentaini > montoop){
               app.alert.show('alerta_mayor_que3', {
                   level: 'warning',
-                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+                  messages: 'El Pago Único no puede ser mayor al Monto a Operar.',
               });
           }
         }
@@ -1273,11 +1274,11 @@ console.log(name);
           }
 
           if (rentaini > montoop){
-              errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
+              errors['ca_importe_enganche_c']= 'pago_unico_mayor_monto_operar';
               errors['ca_importe_enganche_c'].required = true;
               app.alert.show('alerta_mayor_que3', {
                   level: 'error',
-                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+                  messages: 'El Pago Único no puede ser mayor al Monto a Operar.',
               });
           }
         }
@@ -1723,6 +1724,11 @@ console.log(name);
         });
 
         if(campos) {
+            //Remplaza etiquetas para producto Leasing: Renta incial
+            if (this.model.get('tipo_producto_c')=='1') {
+                campos = campos.replace(/Renta Inicial/gi, "Pago Único");
+            }
+
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,

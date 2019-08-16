@@ -50,3 +50,12 @@ $hook_array['after_relationship_delete'][] = Array(
     'Meetings_Hooks', // name of the class
     'insertAuditUnlink' // name of the function
 );
+
+//Genera envío de correo para encuesta: CITA NO REALIZADA
+$hook_array['before_save'][] = Array(
+    3,
+    'Envía correo para cita no realizada',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'surveyNotHeld' // name of the function
+);

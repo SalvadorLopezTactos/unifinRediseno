@@ -49,6 +49,8 @@
         */
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
     },
 
@@ -652,6 +654,44 @@
         callback(null, fields, errors);
     },
 
+    valida_usuarios_inactivos:function (fields, errors, callback) {
+
+        var inivitados=this.model.attributes.invitees.models;
+
+        var ids_usuarios='';
+
+        for(var i=0;i<this.model.attributes.invitees.models.length;i++){
+
+            ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+
+        }
+
+        //Generar petición para validación
+        app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
+            success: _.bind(function(data) {
+                if(data.length>0){
+
+                    var nombres='';
+                    //Armando lista de usuarios
+                    for(var i=0;i<data.length;i++){
+
+                        nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                    }
+
+                    app.alert.show("Usuarios", {
+                        level: "error",
+                        messages: "No es posible generar una reunión con los siguientes usuarios inactivos:<br>"+nombres,
+                        autoClose: false
+                    });
+                    errors['usuariostatus'] = errors['usuariostatus'] || {};
+                    errors['usuariostatus'].required = true;
+                }
+                callback(null, fields, errors);
+            }, this)
+        });
+
+    },
+
     //Valida centro prospeccion, si esta vacio deja editar,de lo contrario, no.
     validaprospeccion:function (){
         var self = this;
@@ -662,4 +702,39 @@
         this.$('div[data-name=centro_prospecccion_c]').css("pointer-events", "");
       }
     },
+
+    valida_usuarios_vetados:function (fields, errors, callback) {
+        if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+            var inivitados=this.model.attributes.invitees.models;
+            var ids_usuarios='';
+
+            for(var i=0;i<this.model.attributes.invitees.models.length;i++){
+                ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+            }
+
+            //Generar petición para validación
+            app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios +'/vetado'), null, {
+                success: _.bind(function(data) {
+                    if(data.length>0){
+                        var nombres='';
+                        //Armando lista de usuarios
+                        for(var i=0;i<data.length;i++){
+                            nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                        }
+                        app.alert.show("Usuarios", {
+                            level: "error",
+                            messages: "No es posible generar una reunión con los siguientes usuarios vetados:<br>"+nombres,
+                            autoClose: false
+                        });
+                        errors['usuariostatus_vetado'] = errors['usuariostatus_vetado'] || {};
+                        errors['usuariostatus_vetado'].required = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+    },
+
 })
