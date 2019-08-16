@@ -23,9 +23,9 @@ class GetStatusOfUser extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('GetStatusOfUser','?'),
+                'path' => array('GetStatusOfUser','?','?'),
                 //endpoint variables
-                'pathVars' => array('method','id_users'),
+                'pathVars' => array('method','id_users','validacion'),
                 //method to call
                 'method' => 'getEtapaEstatusOfUser',
                 //short help string to be displayed in the help documentation
@@ -44,11 +44,12 @@ class GetStatusOfUser extends SugarApi
      *
      * @param array $api
      * @param array $args Array con los parámetros enviados para su procesamiento
-     * @return array $usuarios_inactivos Array con los usuarios inactivos
+     * @return array $usuarios Array con los usuarios inactivos
      */
     public function getEtapaEstatusOfUser($api, $args)
     {
         $id_usuarios=$args['id_users'];
+        $validacion=$args['validacion'];
 
         $id_usuarios=explode(',',$id_usuarios);
         //Quitar el último elemento vacío del arreglo
@@ -69,9 +70,9 @@ class GetStatusOfUser extends SugarApi
         }
 
 
-        $usuarios_inactivos=array();
+        $usuarios=array();
 
-        $query="SELECT concat(first_name,' ',last_name) as full_name,user_name,status FROM users WHERE id IN ({$ids})";
+        $query="SELECT concat(first_name,' ',last_name) as full_name,user_name,status, vetados_chk_c FROM users, users_cstm WHERE id=id_c AND id IN ({$ids})";
 
         $result=$GLOBALS['db']->query($query);
 
@@ -80,16 +81,22 @@ class GetStatusOfUser extends SugarApi
 
             while($row = $GLOBALS['db']->fetchByAssoc($result))
             {
-                if($row['status']=='Inactive'){
-
-                    $usuarios_inactivos[]=array('nombre_usuario'=>$row['full_name']);
-
+                if ($validacion == 'inactivo') {
+                  if($row['status']=='Inactive'){
+                      $usuarios[]=array('nombre_usuario'=>$row['full_name']);
+                  }
                 }
+                if ($validacion == 'vetado') {
+                  if($row['vetados_chk_c']==1){
+                      $usuarios[]=array('nombre_usuario'=>$row['full_name']);
+                  }
+                }
+
 
             }
 
         }
-        return $usuarios_inactivos;
+        return $usuarios;
 
 
     }
