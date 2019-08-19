@@ -1417,6 +1417,24 @@
 
     },
 
+    setButtonStates: function (state) {
+        this._super("setButtonStates", [state]);
+        var $saveButtonEl = this.buttons[this.saveButtonName];
+        if ($saveButtonEl) {
+            switch (state) {
+                case this.STATE.CREATE:
+                case this.STATE.SELECT:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_SAVE_BUTTON_LABEL', this.module));
+                    break;
+                case this.STATE.DUPLICATE:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
+                    //OCULTANDO BOT�N CON JQUERY
+                    $('[name="duplicate_button"]').hide();
+                    break;
+            }
+        }
+    },
+
 
 
 
