@@ -4,6 +4,8 @@
 ({
     listausuarios: null,
     listausuarios_previo:null,
+    filtros: null,
+
 
     events: {
         'click #btn_Asesores': 'buscarCuentas',
@@ -22,7 +24,8 @@
                 "Nombre":"",
                 "Apellidos":"",
                 "Equipo":"",
-                "Puesto":""
+                "Puesto":"",
+                "Total":"0"
             };
 
             this.loadView = true;
@@ -122,11 +125,13 @@
 
                         vetados.listausuarios.push(actual);
                         vetados.listausuarios_previo.push(previo);
+                        vetados.filtros.Total = data.records.length;
                     }
 
                 }else {
                     vetados.listausuarios=[];
                     vetados.listausuarios_previo=[];
+                    vetados.filtros.Total = 0;
                 }
                 $('#processing').hide();
                 vetados.render();
