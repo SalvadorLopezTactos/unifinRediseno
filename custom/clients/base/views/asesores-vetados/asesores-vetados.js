@@ -11,6 +11,7 @@
         'click #btn_Asesores': 'buscarCuentas',
         'click .check-vetado': 'updateVetado',
         'click #btn_guardavetados': 'guardarvetado',
+
     },
 
     initialize: function(options){
@@ -38,6 +39,8 @@
 
     _render: function () {
         this._super("_render");
+        $('#btn_guardavetados').attr('style', 'pointer-events:none;');
+
     },
 
     cargalistas: function () {
@@ -71,72 +74,81 @@
 
 
     buscarCuentas: function(){
-        var AsesorN = $('#AsesorN').val();
-        var AsesorA = $('#AsesorA').val();
+        $('#btn_guardavetados').attr('style', 'pointer-events:none;');
+        var AsesorN = $('#AsesorN').val().trim();
+        var AsesorA = $('#AsesorA').val().trim();
         var equipoA = $("#Equipos").val();
         var puestoA = $("#Puesto").val();
 
-        vetados.filtros = {
-          "Nombre":AsesorN,
-          "Apellidos":AsesorA,
-          "Equipo":equipoA,
-          "Puesto":puestoA
-        };
+        if ( AsesorN!="" || AsesorA !="" || equipoA!="" || puestoA!="") {
+            vetados.filtros = {
+                "Nombre": AsesorN,
+                "Apellidos": AsesorA,
+                "Equipo": equipoA,
+                "Puesto": puestoA
+            };
 
-        $('#successful').hide();
+            $('#successful').hide();
 
-        //var strUrl='Users?fields=id,name,puestousuario_c,vetados_chk_c,equipos_c&filter[][status]=Active&filter[][first_name][$contains]='+AsesorN+'&filter[][last_name][$contains]='+AsesorA+'&filter[][equipos_c][$equals]='+equipoA+'&filter[][puestousuario_c][$equals]='+puestoA+'&max_num=-1';
-        var strUrl='Users?fields=id,name,puestousuario_c,vetados_chk_c,equipos_c&max_num=-1&filter[][status]=Active';
-        if (AsesorN != "" && AsesorN != null) {
-            strUrl= strUrl + '&filter[][first_name][$contains]='+AsesorN;
-        }
-        if (AsesorA != "" && AsesorA != null) {
-            strUrl= strUrl + '&filter[][last_name][$contains]='+AsesorA;
-        }
-        if (equipoA != "" && equipoA != null) {
-            strUrl= strUrl + '&filter[][equipos_c][$contains]='+equipoA;
-        }
-        if (puestoA != "" && puestoA != null) {
-            strUrl= strUrl + '&filter[][puestousuario_c][$equals]='+puestoA;
-        }
-        $('#processing').show();
-        app.api.call("GET", app.api.buildURL(strUrl), null, {
-            success: _.bind(function (data) {
-                if(data.records.length>0){
-                    vetados.listausuarios=[];
-                    vetados.listausuarios_previo=[];
-                    for (var i = 0; i < data.records.length; i++) {
-                        var actual = {
-                            "id": data.records[i].id,
-                            "puestousuario_c": data.records[i].puestousuario_c,
-                            "equipos_c":data.records[i].equipos_c,
-                            "name": data.records[i].name,
-                            "vetados_chk_c": data.records[i].vetados_chk_c
-                        };
+            //var strUrl='Users?fields=id,name,puestousuario_c,vetados_chk_c,equipos_c&filter[][status]=Active&filter[][first_name][$contains]='+AsesorN+'&filter[][last_name][$contains]='+AsesorA+'&filter[][equipos_c][$equals]='+equipoA+'&filter[][puestousuario_c][$equals]='+puestoA+'&max_num=-1';
+            var strUrl = 'Users?fields=id,name,puestousuario_c,vetados_chk_c,equipos_c&max_num=-1&filter[][status]=Active';
+            if (AsesorN != "" && AsesorN != null) {
+                strUrl = strUrl + '&filter[][first_name][$contains]=' + AsesorN;
+            }
+            if (AsesorA != "" && AsesorA != null) {
+                strUrl = strUrl + '&filter[][last_name][$contains]=' + AsesorA;
+            }
+            if (equipoA != "" && equipoA != null) {
+                strUrl = strUrl + '&filter[][equipos_c][$contains]=' + equipoA;
+            }
+            if (puestoA != "" && puestoA != null) {
+                strUrl = strUrl + '&filter[][puestousuario_c][$equals]=' + puestoA;
+            }
+            $('#processing').show();
+            app.api.call("GET", app.api.buildURL(strUrl), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
+                        vetados.listausuarios = [];
+                        vetados.listausuarios_previo = [];
+                        for (var i = 0; i < data.records.length; i++) {
+                            var actual = {
+                                "id": data.records[i].id,
+                                "puestousuario_c": data.records[i].puestousuario_c,
+                                "equipos_c": data.records[i].equipos_c,
+                                "name": data.records[i].name,
+                                "vetados_chk_c": data.records[i].vetados_chk_c
+                            };
 
-                        var previo = {
-                            "id": data.records[i].id,
-                            "puestousuario_c": data.records[i].puestousuario_c,
-                            "equipos_c":data.records[i].equipos_c,
-                            "name": data.records[i].name,
-                            "vetados_chk_c": data.records[i].vetados_chk_c
+                            var previo = {
+                                "id": data.records[i].id,
+                                "puestousuario_c": data.records[i].puestousuario_c,
+                                "equipos_c": data.records[i].equipos_c,
+                                "name": data.records[i].name,
+                                "vetados_chk_c": data.records[i].vetados_chk_c
 
-                        };
+                            };
 
-                        vetados.listausuarios.push(actual);
-                        vetados.listausuarios_previo.push(previo);
-                        vetados.filtros.Total = data.records.length;
+                            vetados.listausuarios.push(actual);
+                            vetados.listausuarios_previo.push(previo);
+                            vetados.filtros.Total = data.records.length;
+                        }
+
+                    } else {
+                        vetados.listausuarios = [];
+                        vetados.listausuarios_previo = [];
+                        vetados.filtros.Total = 0;
                     }
-
-                }else {
-                    vetados.listausuarios=[];
-                    vetados.listausuarios_previo=[];
-                    vetados.filtros.Total = 0;
-                }
-                $('#processing').hide();
-                vetados.render();
-            }, this)
-        });
+                    $('#processing').hide();
+                    vetados.render();
+                }, this)
+            });
+        }else{
+            app.alert.show("Campos faltantes para búsqueda", {
+                level: "error",
+                messages: 'Ingrese algún criterio de búsqueda',
+                autoClose: false
+            });
+        }
     },
 
     updateVetado: function(evt) {
@@ -144,15 +156,16 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         vetados.listausuarios[index].vetados_chk_c= (input[0].checked == true) ? 1 : 0;
+        $('#btn_guardavetados').attr('style', 'pointer-events:block;');
     },
 
 
     guardarvetado: function (){
         //$('.check-vetado').attr('style', 'pointer-events:none;');
-        //$('#btn_guardavetados').attr('style', 'pointer-events:none;');
+        $('#btn_guardavetados').attr('style', 'pointer-events:none;');
         app.alert.show("alerta_vetado_update", {
             level: 'process',
-            title: "Actualizado usuario(s), por favor espere.",
+            title: "Actualizando usuario(s), por favor espere.",
             autoClose: false
         });
         var totalvetados= 0;
@@ -190,7 +203,6 @@
 
                 vetados.listausuarios_previo[i].vetados_chk_c = vetados.listausuarios[i].vetados_chk_c;
                // $('.check-vetado').attr('style', 'pointer-events:block;');
-                //$('#btn_guardavetados').attr('style', 'pointer-events:block;');
             }
         }
     },
