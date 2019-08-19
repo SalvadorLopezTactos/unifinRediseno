@@ -31,13 +31,13 @@
         }
     </style>
 
-    
+
 
 
 
 
     <div class="container" >
-        <h1 id="containerHeader" align="left">Asesores Vetados</h1>
+        <h1 id="containerHeader" align="left">Asesores Vetados ({{filtros.Total}})</h1>
         <hr margin: 5px>
         <table align="left"  width=100%>
             <tr>
@@ -47,7 +47,7 @@
                 <td colspan="2" style="padding-top: 1%;">
                     <select id="Equipos">
                         {{#each lista_equipo}}
-                            <option value="{{@key}}" {{ifSelected @key filtros.Equipo}}>{{this}}</option>
+                            <option value="{{@key}}" {{ifSelected @key ../filtros.Equipo}}>{{this}}</option>
                         {{/each}}
                     </select>
                 </td>
@@ -57,17 +57,17 @@
                 <td colspan="2" style="padding-top: 1%;">
                     <select id="Puesto">
                         {{#each lista_puesto}}
-                            <option value="{{@key}}" {{ifSelected @key filtros.Puesto}}>{{this}}</option>
+                            <option value="{{@key}}" {{ifSelected @key ../filtros.Puesto}}>{{this}}</option>
                         {{/each}}
                     </select>
                 </td>
                 <th> Asesor: </th>
 
                 <td>
-                    <input id="AsesorN" type="text" value="" placeholder="Nombre">
+                    <input id="AsesorN" type="text" value="{{filtros.Nombre}}" placeholder="Nombre">
                 </td>
                 <td>
-                    <input id="AsesorA" type="text" value="" placeholder="Apellido">
+                    <input id="AsesorA" type="text" value="{{filtros.Apellidos}}" placeholder="Apellido">
                 </td>
                 <td>
                     <input type="button" value="Buscar" id="btn_Asesores" class="btn btn-primary" width="20%" />
@@ -129,7 +129,7 @@
             </table>
         {{else}}
             <div class="row-fluid" style="color:gray;">
-                <div class="span12"> No se han encontrado registros</div>
+                <div class="span12"><center> No se han encontrado registros</center></div>
             </div>
         {{/if}}
         <textarea style="display: none" id="crossSeleccionados" value=""></textarea>
