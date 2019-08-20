@@ -6,15 +6,11 @@
             width: 100%;
         }
 
-        .cuentas {
-            display:table;
-            width: 90%;
-        }
-
         .cuentasContainer {
-            margin-top: 2%;
-            overflow-y:auto;
-            height: 400 px;
+            /*margin-top: 2%;*/
+            height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         #containerHeader {
@@ -30,10 +26,6 @@
             color: #33800d;
         }
     </style>
-
-
-
-
 
 
     <div class="container" >
@@ -83,24 +75,25 @@
             <p>Los Asesores fueron Vetados</p>
         </div>
         <br>
+        <table class="table table-striped tablavet" align="center">
+        <tr>
+            <th width="20%" style="text-align:center">VETADO</th>
+            <th width="80%" style="text-align:left">ASESOR</th>
+        </tr>
+        </table>
     <div class="cuentasContainer">
     <table class="table table-striped tablavet" align="center">
         {{#if listausuarios}}
-            <tr>
-                <th width="20%" style="text-align:center">VETADO</th>
-                <th width="80%" style="text-align:left">ASESOR</th>
-            </tr>
             {{#each listausuarios}}
                 <tr class='single'>
-
-                    <td style="text-align:center;">
+                    <td style="text-align:center; width="20%">
                     <span sfuuid='880' class='list'>
                         <input type="checkbox" class="check-vetado"
                                {{#if vetados_chk_c}}checked{{/if}}
                                >
                     </span>
                     </td>
-                    <td>
+                    <td width="80%">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                               <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{name}}</span>
