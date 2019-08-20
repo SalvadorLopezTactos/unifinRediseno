@@ -46,6 +46,7 @@
 
     cargalistas: function () {
         this.lista_equipo = app.lang.getAppListStrings('equipo_list');
+        this.lista_equipo['']=''
         this.lista_puesto = app.lang.getAppListStrings('puestousuario_c_list');
 
     },
