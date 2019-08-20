@@ -40,7 +40,8 @@
     _render: function () {
         this._super("_render");
         $('#btn_guardavetados').attr('style', 'pointer-events:none;');
-
+        this.$("#Equipos option[value='0']").remove(); //Remueve el vaciío de la lista de valores
+        this.$('#Equipos option:eq(8)').insertBefore('#Equipos option:eq(0)');  //Mueve la opcion empty al inicio de la lista.
     },
 
     cargalistas: function () {
