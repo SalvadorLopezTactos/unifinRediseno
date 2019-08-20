@@ -129,14 +129,15 @@
 
 
     handleCancel: function () {
-        var account_telefonos = this.model._previousAttributes.account_telefonos;
+        var account_telefonos = cont_tel.prev_oTelefonos.telefono;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
-        this.model.set("account_telefonos", account_telefonos);
-        this.model.set("account_direcciones", account_direcciones);
+        this.model.set('account_telefonos', account_telefonos);
+        this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-
+        cont_tel.oTelefonos.telefono = account_telefonos;
+        cont_tel.render();
 
         $('.select2-choices').css('border-color', '');
     },
@@ -171,6 +172,8 @@
 
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
+        //Oculta nombre de campo accounts_telefonosV2
+        $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
 
        //Oculta campo Lead no viable en la creacion de cuentas
         $('[data-name="tct_noviable"]').hide();
@@ -328,7 +331,17 @@
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
         this._super("initialize", [options]);
+
+        /*
+          Contexto campos custom
+        */
+        //Teléfonos
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
 
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
@@ -336,6 +349,7 @@
         this.model.on("change:tipo_registro_c", this._hideGuardar, this);
 
         //add validation tasks
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
@@ -767,8 +781,9 @@
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
+                $('#tabletelefonos').css('border', '3px dotted red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -2499,6 +2514,13 @@
             callback(null, fields, errors);
         }
 
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        //Teléfonos
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+
+        callback(null, fields, errors);
     },
 
 })

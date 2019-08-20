@@ -14,9 +14,23 @@
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
+
         this._super("initialize", [options]);
+
+        /*
+          Contexto campos custom
+        */
+        //Teléfonos
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
+
+
         this.enableDuplicateCheck = true;
         //add validation tasks
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
@@ -1415,6 +1429,13 @@
             callback(null, fields, errors);
         }
 
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        //Teléfonos
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+
+        callback(null, fields, errors);
     },
 
 
