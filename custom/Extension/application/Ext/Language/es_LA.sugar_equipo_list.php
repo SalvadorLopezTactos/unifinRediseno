@@ -1,8 +1,7 @@
 <?php
- // created: 2019-08-16 12:32:08
+ // created: 2019-08-20 17:52:55
 
 $app_list_strings['equipo_list']=array (
-  '' => '',
   0 => '',
   1 => '1',
   2 => '2',

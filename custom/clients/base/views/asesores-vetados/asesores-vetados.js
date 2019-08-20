@@ -40,11 +40,13 @@
     _render: function () {
         this._super("_render");
         $('#btn_guardavetados').attr('style', 'pointer-events:none;');
+        this.$("#Equipos option[value='0']").remove(); //Remueve el vaciío de la lista de valores
 
     },
 
     cargalistas: function () {
         this.lista_equipo = app.lang.getAppListStrings('equipo_list');
+        this.lista_equipo['']=''
         this.lista_puesto = app.lang.getAppListStrings('puestousuario_c_list');
 
     },
