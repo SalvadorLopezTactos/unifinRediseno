@@ -174,36 +174,46 @@
                 totalvetados++;
             }
         }
-        var actual= 0;
-        for (var i = 0; i < vetados.listausuarios.length; i++) {
-            if (vetados.listausuarios[i].vetados_chk_c!= vetados.listausuarios_previo[i].vetados_chk_c) {
-                var idvetado= vetados.listausuarios[i].id;
-                var valUrl = app.api.buildURL("Users/"+idvetado);
-                app.api.call("update", valUrl, {'vetados_chk_c': vetados.listausuarios[i].vetados_chk_c}, {
-                    success: _.bind(function (data) {
-                        actual++;
-                        if(actual==totalvetados){
-                            App.alert.dismiss('alerta_vetado_update');
-                            app.alert.show("Confirmacion_vetados", {
-                                level: 'success',
-                                title: "Usuario(s) actualizados correctamente.",
+        if (totalvetados>=1) {
+            var actual = 0;
+            for (var i = 0; i < vetados.listausuarios.length; i++) {
+                if (vetados.listausuarios[i].vetados_chk_c != vetados.listausuarios_previo[i].vetados_chk_c) {
+                    var idvetado = vetados.listausuarios[i].id;
+                    var valUrl = app.api.buildURL("Users/" + idvetado);
+                    app.api.call("update", valUrl, {'vetados_chk_c': vetados.listausuarios[i].vetados_chk_c}, {
+                        success: _.bind(function (data) {
+                            actual++;
+                            if (actual == totalvetados) {
+                                App.alert.dismiss('alerta_vetado_update');
+                                app.alert.show("Confirmacion_vetados", {
+                                    level: 'success',
+                                    title: "Usuario(s) actualizados correctamente.",
+                                    autoClose: true
+                                });
+                            }
+                        }, this),
+                        error: function (error) {
+                            app.alert.dismiss('alerta_vetado_update');
+                            app.alert.show('Confirmacion_error', {
+                                level: 'error',
+                                messages: error,
                                 autoClose: true
                             });
                         }
-                    }, this),
-                    error:function(error) {
-                        app.alert.dismiss('alerta_vetado_update');
-                        app.alert.show('Confirmacion_error', {
-                            level: 'error',
-                            messages: error,
-                            autoClose: true
-                        });
-                    }
-                });
+                    });
 
-                vetados.listausuarios_previo[i].vetados_chk_c = vetados.listausuarios[i].vetados_chk_c;
-               // $('.check-vetado').attr('style', 'pointer-events:block;');
+                    vetados.listausuarios_previo[i].vetados_chk_c = vetados.listausuarios[i].vetados_chk_c;
+                    // $('.check-vetado').attr('style', 'pointer-events:block;');
+                }
             }
+        }else{
+            App.alert.dismiss('alerta_vetado_update');
+            app.alert.show("Confirmacion_no_vetados", {
+                level: 'info',
+                title: "No se encontraron cambios por realizar.",
+                autoClose: true
+            });
+
         }
     },
 })
