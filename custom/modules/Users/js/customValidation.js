@@ -5,6 +5,32 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
         //console.log(document.getElementById("contraseniaactual_c").value);
         //console.log(document.getElementById("nuevacontrasenia_c").value);
         //console.log(document.getElementById("confirmarnuevacontrasenia_c").value);
+        if(document.getElementById("phone_mobile").value!=""){
+            var strExpRegNumeric = new RegExp("^([0-9])*$");
+            var movil= document.getElementById("phone_mobile").value.trim();
+            if(movil.length >= 8 && movil.length<=13) {
+                //Valida Móvil
+                if (!strExpRegNumeric.test(movil)) {
+                    alert("El campo móvil sólo acepta caracteres numéricos");
+                    return false;
+                }else{
+                    var cont= 0;
+                    for (var i = 0; i < movil.length; i++) {
+                        if (movil.charAt(0) == movil.charAt(i)) {
+                            cont++;
+                        }
+                    }
+                    if(cont==movil.length){
+                        alert("El número móvil contiene caracteres repetidos.");
+                        return false;
+                    }
+                }
+
+            }else{
+                alert("El campo móvil debe tener entre 8 y 13 dígitos.");
+                return false;
+            }
+        }
 
          //Valida contraseña
         if(document.getElementById("contraseniaactual_c").value != "" || document.getElementById("nuevacontrasenia_c").value != "")
