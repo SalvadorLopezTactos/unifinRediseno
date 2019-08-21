@@ -240,7 +240,7 @@ SQL;
                     $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
 
                 }else{
-                    $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()) OR (b.mes=month(NOW()) AND b.anio=year(NOW())))";
+                    $condicion=" AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
                 }
 
                 $bl_cuenta="SELECT b.id, b.mes,b.description
