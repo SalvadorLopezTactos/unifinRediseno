@@ -364,6 +364,16 @@
     reAsignarCuentas: function(){
         var reAssignarA = this.model.get('asignar_a_promotor_id');
         var promoActual = this.model.get('users_accounts_1users_ida');
+
+        var radioBl="";
+
+        if($('#optRadioSig:checked').val()=='on'){
+            radioBl="siguientes";
+
+        }else{
+            radioBl="actualSiguientes";
+        }
+
         if(this.flagSeleccionados==1){
             this.seleccionados=this.full_cuentas;
         }
@@ -372,6 +382,7 @@
             var producto_seleccionado = $("#Productos").val();
             if(!_.isEmpty(parametros)) {
                 var Params = {
+                    'optBl':radioBl,
                     'seleccionados': parametros,
                     'reAssignado': reAssignarA,
                     'producto_seleccionado': producto_seleccionado,
