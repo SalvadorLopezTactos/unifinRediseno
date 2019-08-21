@@ -33,6 +33,7 @@ class reAsignarCuentas extends SugarApi
             $reAsignado = $args['data']['reAssignado'];
             $product = $args['data']['producto_seleccionado'];
             $promoActual = $args['data']['promoActual'];
+            $optRadio=$args['data']['optBl'];
             if ($product == "LEASING") {
                 $user_field = "user_id_c"; //user_id_c = promotorleasing_c
             } else if ($product == "FACTORAJE") {
@@ -233,14 +234,21 @@ SQL;
                 $anio_actual=date("Y");
                 $mes_actual= intval(date("n"));
                 $hoy= date("d");
+                $condicion='';
+                if($optRadio=='siguientes'){
+
+                    $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
+
+                }else{
+                    $condicion=" AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
+                }
+
                 $bl_cuenta="SELECT b.id, b.mes,b.description
 FROM
     lev_backlog b
 WHERE
-    b.account_id_c = '{$value}'
-        AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))
-        AND deleted = 0;
-";
+    b.account_id_c = '{$value}'".$condicion."
+        AND deleted = 0;";
 
                 $result_bl_cuentas = $db->query($bl_cuenta);
 
