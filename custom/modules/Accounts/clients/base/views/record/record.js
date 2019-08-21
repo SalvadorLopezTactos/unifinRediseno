@@ -1,18 +1,17 @@
 ({
     extendsFrom: 'RecordView',
-
     /**
      * @author bdekoning@levementum.com
      * @date 6/9/15
      * @brief Override for handleCancel to ensure the account_telefonos attribute is properly reverted
      *
      * @override
-     */
-
-	oculta : 0,
+    */
+    oculta : 0,
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
 
@@ -26,6 +25,7 @@
         this.flagheld=0;
 
         //add validation tasks
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
@@ -183,6 +183,9 @@
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
         //this.model.on('sync', this.checkTelNorepeat, this);
+
+        this.model.on('sync', this.get_phones, this);
+
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique=function(a){
@@ -614,14 +617,14 @@
     },
 
     handleCancel: function () {
-        var account_telefonos = cont_tel.prev_oTelefonos.prev_telefono;
+        var account_telefonos = this.prev_oTelefonos.prev_telefono;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
         this.model.set('account_telefonos', account_telefonos);
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-        cont_tel.oTelefonos.telefono=account_telefonos;
+        this.oTelefonos.telefono=account_telefonos;
         cont_tel.render();
     },
 
@@ -1992,7 +1995,7 @@
     },
 
 
-    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
+    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
             if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
@@ -2003,8 +2006,9 @@
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
+                $('#tabletelefonos').css('border', '3px dotted red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -3726,4 +3730,72 @@
 
     },
 
+    get_phones:function(){
+        //Extiende This
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
+        contexto_cuenta = this;
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+        //Recupera información
+        idCuenta = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_tel_telefonos_1'), null, {
+            success: function (data) {
+                for (var i = 0; i < data.records.length; i++) {
+                    //Asignando valores de los campos
+                    var valor1 = data.records[i].tipotelefono;
+                    var valor2 = data.records[i].pais;
+                    var valor3 = data.records[i].estatus;
+                    var valor4 = data.records[i].telefono;
+                    var valor5 = data.records[i].extension;
+                    var valor6 = (data.records[i].principal==true) ? 1 : 0;
+                    var idtel = data.records[i].id;
+
+                    var telefono = {
+                        "name":valor4,
+                        "tipotelefono": valor1,
+                        "pais": valor2,
+                        "estatus": valor3,
+                        "extension": valor5,
+                        "telefono": valor4,
+                        "principal": valor6,
+                        "id_cuenta": idCuenta,
+                        "id":idtel
+                    };
+
+                    var prev_telefono = {
+                        "name":valor4,
+                        "tipotelefono": valor1,
+                        "pais": valor2,
+                        "estatus": valor3,
+                        "extension": valor5,
+                        "telefono": valor4,
+                        "principal": valor6,
+                        "id_cuenta": idCuenta,
+                        "id":idtel
+                    };
+                    contexto_cuenta.oTelefonos.telefono.push(telefono);
+                    contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
+                }
+
+                cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
+                cont_tel.render();
+                //Oculta campo Accounts_telefonosV2
+                $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
+
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        //Teléfonos
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+
+        callback(null, fields, errors);
+    },
 })
