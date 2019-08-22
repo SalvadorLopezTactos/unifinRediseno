@@ -1053,6 +1053,7 @@
                     $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
                     //OCULTANDO BOT�N CON JQUERY
                     $('[name="duplicate_button"]').hide();
+                    $('[data-event="list:dupecheck-list-select-edit:fire"]').addClass("hidden");
                     break;
             }
         }

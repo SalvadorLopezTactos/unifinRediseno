@@ -22,13 +22,14 @@ $hook_array['after_save'][] = Array(
 //    'emailChangetoUnics'
 //);
 
+/* //Se deshabilita validación lista negra
 $hook_array['after_save'][] = Array(
     2,
     'API call, liberacionLista',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
     'liberaciondeLista'
-);
+);*/
 
 $hook_array['after_save'][] = Array(
     5,
@@ -127,13 +128,14 @@ $hook_array['before_save'][] = Array(
     'crearFolioCliente'
 );
 
+/* //Se deshabilita validación lista negra
 $hook_array['before_save'][] = Array(
     8,
     'API call, Lista Negra',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
     'listaNegraCall'
-);
+);*/
 /*
  * // Se comenta ya que actualmente se valida desde el js
 $hook_array['before_save'][] = Array(
