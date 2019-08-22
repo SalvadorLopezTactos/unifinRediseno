@@ -329,7 +329,9 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-
+        //Funcion que quita los años futuros y menores a -5 del año actual
+        this.quitaanos("loading");
+        this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
@@ -1973,6 +1975,10 @@
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
             }
+            if (this.model.get('tct_ano_ventas_ddw_c')== undefined || this.model.get('tct_ano_ventas_ddw_c')==""){
+                errors['tct_ano_ventas_ddw_c'] = "Se debe seleccionar el año de ventas";
+                errors['tct_ano_ventas_ddw_c'].required = true;
+            }
             if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
                 errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['activo_fijo_c'].required = true;
@@ -2497,6 +2503,26 @@
             callback(null, fields, errors);
         }
 
+    },
+
+    quitaanos: function(stage){
+        var anoactual = ((new Date).getFullYear());
+        var anoactual5= anoactual-5
+        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function(key){
+            //Quita años previos
+            if(key < anoactual5){
+                delete lista[key];
+            }
+            //Quita años futuros al actual
+            if(key > anoactual){
+                delete lista[key];
+            }
+        });
+        this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+        if(stage != "loading"){
+            this.render();
+        }
     },
 
 })

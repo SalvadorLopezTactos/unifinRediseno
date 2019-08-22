@@ -16,6 +16,10 @@
         self = this;
         this._super("initialize", [options]);
         this.enableDuplicateCheck = true;
+
+        //Funcion que quita los años futuros y menores a -5 del año actual
+        this.quitaanos("loading");
+        this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         //add validation tasks
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
@@ -1436,7 +1440,24 @@
         }
     },
 
-
-
+    quitaanos: function(stage){
+        var anoactual = ((new Date).getFullYear());
+        var anoactual5= anoactual-5
+        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function(key){
+            //Quita años previos
+            if(key < anoactual5){
+                delete lista[key];
+            }
+            //Quita años futuros al actual
+            if(key > anoactual){
+                delete lista[key];
+            }
+        });
+        this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+        if(stage != "loading"){
+            this.render();
+        }
+    },
 
 })
