@@ -152,7 +152,8 @@
     <table align="left">
         <tr>
             <td></td>
-            <th width="30%">
+            <th width="30px">Backlog</th>
+            <td>
                 <div class="radio">
                     <input type="radio" name="optradio" id="optRadioActSig" checked>
                 </div>
@@ -161,21 +162,19 @@
                     <input type="radio" name="optradio" id="optRadioSig">
                 </div>
 
-            </th>
+            </td>
             <td>
-                <div class="radio">Mover mes actual y siguiente	</div>
-                <div class="radio">Mover meses siguientes</div>
+                <div class="radio" style="text-align: left;">Mover mes actual y siguientes</div>
+                <div class="radio" style="text-align: left;">Mover meses siguientes</div>
             </td>
         </tr>
         <tr>
-            <td>
-                <th width="30%">
-                    Reasignar a:
-                </th>
-            </td>
+            <td></td>
+            <th width="30%">Reasignar a:</th>
+
             {{#each meta.panelsTo}}
                 {{#each fields}}
-                    <td>
+                    <td colspan="2">
                         {{field ../../this}}
                     </td>
                 {{/each}}
