@@ -421,7 +421,9 @@
                         lnv.leadNoViable.razonnica= $('.campo27nvca').select2('val');
                     }
                     //Establece el objeto lnv.leadNoViable para guardar
-                    this.model.set('tct_noviable',  lnv.leadNoViable);
+                    if ($('.campo1chk')[0].checked== true || $('.campo2chk')[0].checked== true || $('.campo3chk')[0].checked== true) {
+                        this.model.set('tct_noviable',  lnv.leadNoViable);
+                    }
                 }
                 callback(null, fields, errors);
             },
