@@ -330,7 +330,7 @@
         self = this;
         this._super("initialize", [options]);
         //Funcion que quita los años futuros y menores a -5 del año actual
-        this.quitaanos("loading");
+        this.quitaanos();
         this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
@@ -2505,7 +2505,7 @@
 
     },
 
-    quitaanos: function(stage){
+    quitaanos: function(){
         var anoactual = ((new Date).getFullYear());
         var anoactual5= anoactual-5
         var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
@@ -2520,9 +2520,6 @@
             }
         });
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
-        if(stage != "loading"){
-            this.render();
-        }
     },
 
 })
