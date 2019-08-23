@@ -17,6 +17,8 @@
                 inner join users on users.id = meetings.created_by
                 inner join users_cstm on users_cstm.id_c = users.id
                 where meetings.status='Planned'
+                and meetings.parent_type = 'Accounts'
+                and meetings.parent_id is not null
                 and meetings.date_end  <UTC_TIMESTAMP()
                 and meetings.created_by != meetings.assigned_user_id
                 and (users_cstm.puestousuario_c = '27' or users_cstm.puestousuario_c = '31'  or users.id= 'eeae5860-bb05-4ae5-3579-56ddd8a85c31');";
