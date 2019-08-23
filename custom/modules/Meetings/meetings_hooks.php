@@ -381,7 +381,7 @@ class Meetings_Hooks
   /*
    * Función para enviar correo de encuesta: CITA NO REALIZADA
    * Criterios:
-   *  1.- Creado != Asignado
+   *  1.- Creado != Asignado && Se tiene cuenta asociada
    *  2.- Reunión creada por algún usario de centro de prospección; Puesto: 27, 31 o id=eeae5860-bb05-4ae5-3579-56ddd8a85c31
    *  3a.- Reunión.Estado = No realizada
    *    ó
@@ -390,7 +390,7 @@ class Meetings_Hooks
   function surveyNotHeld ($bean, $event, $args)
   {
       //Criterio 1
-      if ($bean->created_by != $bean->assigned_user_id) {
+      if ($bean->created_by != $bean->assigned_user_id && !empty($bean->parent_id) && $bean->parent_type == 'Accounts') {
           //Recupera bean Useario creado
           $beanUser = BeanFactory::getBean('Users', $bean->created_by);
           //Criterio 2
