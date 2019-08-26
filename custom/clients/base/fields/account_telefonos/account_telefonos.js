@@ -304,7 +304,7 @@
             index = inputs.index(input);
         var tipo = input.val();
         this.oTelefonos.telefono[index].tipotelefono = tipo;
-        this.render();
+        //this.render();
     },
 
     updatePaist: function(evt) {
@@ -313,7 +313,7 @@
             index = inputs.index(input);
         var pais = input.val();
         this.oTelefonos.telefono[index].pais = pais;
-        this.render();
+        //this.render();
     },
 
     updateEstatust: function(evt) {
@@ -322,7 +322,7 @@
             index = inputs.index(input);
         var estatus = input.val();
         this.oTelefonos.telefono[index].estatus = estatus;
-        this.render();
+        //this.render();
     },
 
     updateExtensiont: function(evt) {
@@ -331,7 +331,7 @@
             index = inputs.index(input);
         var extension = input.val();
         this.oTelefonos.telefono[index].extension = extension;
-        this.render();
+        //this.render();
     },
 
     updateTelefonot: function(evt) {
@@ -352,7 +352,7 @@
             this.$('[data-name="Teléfono"]').eq(index).css('border-color', '');
             this.oTelefonos.telefono[index].telefono = telefono;
         }
-        this.render();
+        //this.render();
     },
 
 })

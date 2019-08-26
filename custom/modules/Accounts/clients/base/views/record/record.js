@@ -618,7 +618,7 @@
     },
 
     handleCancel: function () {
-        const account_telefonos = this.prev_oTelefonos.prev_telefono;
+        var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
         this.model.set('account_telefonos', account_telefonos);
@@ -3796,7 +3796,7 @@
     setCustomFields:function (fields, errors, callback){
         if ($.isEmptyObject(errors)) {
             //Teléfonos
-            this.prev_oTelefonos.prev_telefono = this.oTelefonos.telefono;
+            this.prev_oTelefonos.prev_telefono = app.utils.deepCopy(this.oTelefonos.telefono);
             this.model.set('account_telefonos',this.oTelefonos.telefono);
         }
 
