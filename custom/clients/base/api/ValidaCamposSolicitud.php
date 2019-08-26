@@ -55,7 +55,7 @@ class ValidaCamposSolicitud extends SugarApi
         if ($option == '2') {
             $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
-                "zonageografica_c,ventas_anuales_c, tct_ano_ventas_ddw_c," .
+                "zonageografica_c,ventas_anuales_c,tct_ano_ventas_ddw_c," .
                 "potencial_cuenta_c,activo_fijo_c";
 
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
