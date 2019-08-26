@@ -1,15 +1,162 @@
 {{!--
 /*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
+ * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
  */
 --}}
+<div class="direcciones_list">
+    <!-- Existentes -->
+    {{#each direcciones}}
+        <div class="control-group direccion">
+            <table class="dashlet direcciondashlet" style="width: 100%;" cellspacing="1" cellpadding="5" id="{{id}}">
+                <tr>
+                    <td valign="top">
+                        <div class="record-label">
+                            Tipo
+                        </div>
+
+                        <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;display:none">
+                            {{#each tipo_direccion_list_hide}}
+                                <option value="{{@key}}" {{ifSelected @key ../tipo_seleccionado_hide}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+
+                        <select class="select2 multi_tipo_existing" style="width: 100%" multiple="multiple" size="3">
+                            {{#each tipo_direccion_list}}
+                                <option value="{{@key}}">{{this}}</option>
+                                <!-- <option value="{{@key}}" {{ifMSelected @key ../tipos_seleccionados}}>{{this}}</option> -->
+                            {{/each}}
+                        </select>
+                        <input type="hidden" class="multi_tipo_existing_hidden" data-field="multi_tipo_existing_hidden" value="{{tipos_seleccionados}}">
+                    </td>
+                    <td valign="top">
+                        <div class="record-label">
+                            Tipo de direcci&oacute;n
+                        </div>
+
+                        <select class="existingIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;display:none">
+                            {{#each indicador_list_hide}}
+                                <option value="{{@key}}" {{ifSelected @key ../indicador_seleccionado_hide}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+
+                        <select class="select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3">
+                            {{#each indicador_list}}
+                                <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <input type="hidden" class="multi1_n_existing_hidden" data-field="multi1_n_existing_hidden" value="{{indicadores_seleccionados}}">
+                    </td>
+                    <td valign="top">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Código Postal
+                        </div>
+
+                        <input type="text" class="postalInputTempExisting" value="{{codigo_postal}}">
+                        <input type="hidden" class="postalHiddenExisting" data-field="postalHiddenExisting" value="{{postal_hidden}}">
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            País
+                        </div>
+                        <select class="paisExisting" data-field="paisExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_paises_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../pais_seleccionado}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconPaisExisting" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Estado
+                        </div>
+                        <select class="estadoExisting" data-field="estadoExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_estados_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../estado_seleccionado}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconEstadoExisting" style="display: none"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Municipio
+                        </div>
+                        <select class="municipioExisting" data-field="municipioExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_municipios_existing}}
+                                <option value="{{@key}}" {{ifSelected @key ../municipio_seleccionado}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconMunicipioExisting" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Ciudad
+                        </div>
+                        <select class="ciudadExisting" data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_ciudades_existing}}
+                                <!--<option value="{{@key}}">{{this}}</option>-->
+                                <option value="{{@key}}" {{ifSelected @key ../ciudad_seleccionada}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconCiudadExisting" style="display: none"></i>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Colonia
+                        </div>
+                        <select class="coloniaExisting" data-field="coloniaExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                            {{#each lista_colonias_existing}}
+                                <option value="{{@key}}" {{ifSelected @key ../colonia_seleccionada}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <i class="fa fa-spinner fa-spin loadingIconColoniaExisting" style="display: none"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" valign="top">
+                        <div class="record-label" >
+                            Calle
+                        </div>
+                        <input type="text" class="calleExisting inputExisting" placeholder="Calle" value="{{calle}}" data-field="calle" style="width: 95%;margin: 0px;"/>
+                    </td>
+                    <td valign="top">
+                        <div class="record-label" >
+                            Número Exterior y Número Interior
+                        </div>
+                        <input type="text" class="numExtExisting inputExisting" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 25%;margin: 0px;">
+                        <input type="text" class="numIntExisting inputExisting" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 25%;margin: 0px;">
+
+                        <div class="btn-toolbar prevent-mousedown">
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="{{#if principal}}active {{/if}}is_primary btn btn-edit" data-direccionproperty="principal" rel="tooltip">
+                                    <i class="fa fa-star"></i></button>
+                            </div>
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="{{#if inactivo}}active {{/if}}is_primary btn btn-edit" data-direccionproperty="inactivo" rel="tooltip" title="inactivo">
+                                    <i class="fa fa-power-off"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                    <td valign="top">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    {{/each}}
+</div>
+<!-- Fin direcciones existentes -->
+
 <h4>Nueva Dirección</h4>
 <div class="control-group direccion">
     <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
@@ -18,108 +165,54 @@
                 <div class="record-label">
                     Tipo
                 </div>
-                <select class="newTipodedireccion hide" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
-                    {{{def.dir_tipo_list_html}}}
+
+                <select class="newTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;display:none">
+                    {{#each def.dir_tipo_list_html}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
                 </select>
-                <select id="multi_tipo" class="select2" style="width: 100%" multiple="multiple" size="3">
-                    {{{def.tipo_direccion_multi_html}}}
+
+                <select id="tipo_multiselect_id" class="select2 multi_tipo" style="width: 100%" multiple="multiple" size="3">
+                    {{#each tipo_direccion_list}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
                 </select>
             </td>
-            <td valign="top" style="display:block;">
+            <td valign="top">
                 <div class="record-label">
-
                     Tipo de direcci&oacute;n
                 </div>
-                <select class="newIndicador hide" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
-                    {{{def.indicador_html}}}
+
+                <select class="newIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;display:none">
+                    {{#each def.indicador_html}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
                 </select>
-                <select id="multi1" class="select2" style="width: 100%" multiple="multiple" size="3">
-                    {{{def.indicador_multi_html}}}
+
+                <select id="indicador_multiselect_id" class="select2 multi1_n" style="width: 100%" multiple="multiple" size="3">
+                    {{#each indicador_list}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
                 </select>
             </td>
             <td valign="top">
-                <!-- <div class="record-label">
-                    Indicador
-                </div>
-                <select id="multi1" class="select2" multiple="multiple" size="3">
-                    {{{def.indicador_multi_html}}}
-                </select> -->
             </td>
         </tr>
-        <tr class="rowPem">
-            <td valign="top">
-                <div class="record-label" >
-                    Pais
-                </div>
-                <select class="newPaisDir" data-field="pais" placeholder="pais" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
-                    {{{def.pais_list_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Estado
-                </div>
-                <select class="newEstado" data-field="estado" placeholder="estado" style="font-size: 15px;font-weight: 500;">
-                    {{{def.estado_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Municipio
-                </div>
-                <select class="newMunicipio" data-field="municipio" placeholder="municipio" style="font-size: 15px;font-weight: 500;">
-                    {{{def.municipio_html}}}
-                </select>
-            </td>
-        </tr>
-        <tr class="rowCPcc">
-            <td valign="top">
-                <div class="record-label" >
-                    Código Postal
-                </div>
-                <select class="newPostal" data-field="codigopostal" placeholder="Codigo Postal" style="font-size: 15px;font-weight: 500;">
-                    {{{postal_html}}}
-                </select>
-                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
-                <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Ciudad
-                </div>
-                <select class="newCiudad" data-field="ciudad" placeholder="ciudad" style="font-size: 15px;font-weight: 500;">
-                    {{{def.ciudad_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Colonia
-                </div>
-                <select class="newColonia" data-field="colonia" placeholder="colonia" style="font-size: 15px;font-weight: 500;">
-                    {{{def.colonia_html}}}
-                </select>
-            </td>
-        </tr>
-        <!-- Nueva fila para rediseño de direcciones-->
+
         <tr>
             <td valign="top">
                 <div class="record-label" >
                     Código Postal
                 </div>
 
-                <!--<select id="postalTemp" class="select2"  data-field="codigopostaltemp" placeholder="Codigo Postal Temp" style="font-size: 15px;font-weight: 500;">-->
-                <!--  {{{def.postal_htmlTemp}}} -->
-                <!--</select>-->
-                <input type="text" id="postalInputTemp" class="select2"/>
-                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
-                <input type="hidden" id="postalHidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
+                <input type="text" id="newPostalInputTemp" class="newPostalInputTemp">
+                <input type="hidden" id="newPostalHidden" data-field="postalHidden">
             </td>
             <td valign="top">
                 <div class="record-label" >
                     País
                 </div>
-                <select class="newPaisTemp" data-field="paisTemp" placeholder="paisTemp" style="font-size: 15px;font-weight: 500;">
-                    {{{def.pais_list_htmlTemp}}}
+                <select class="newPais" data-field="pais" placeholder="" style="font-size: 15px;font-weight: 500;">
                 </select>
                 <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
             </td>
@@ -127,8 +220,7 @@
                 <div class="record-label" >
                     Estado
                 </div>
-                <select class="newEstadoTemp" data-field="estadoTemp" placeholder="estadoTemp" style="font-size: 15px;font-weight: 500;">
-                    {{{def.estado_htmlTemp}}}
+                <select class="newEstado" data-field="estado" placeholder="" style="font-size: 15px;font-weight: 500;">
                 </select>
                 <i class="fa fa-spinner fa-spin loadingIconEstado" style="display: none"></i>
             </td>
@@ -139,18 +231,15 @@
                 <div class="record-label" >
                     Municipio
                 </div>
-                <select class="newMunicipioTemp" data-field="municipioTemp" placeholder="Municipio" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{postal_html}}}-->
+                <select class="newMunicipio" data-field="municipio" placeholder="" style="font-size: 15px;font-weight: 500;">
                 </select>
                 <i class="fa fa-spinner fa-spin loadingIconMunicipio" style="display: none"></i>
-                <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
             </td>
             <td valign="top">
                 <div class="record-label" >
                     Ciudad
                 </div>
-                <select class="newCiudadTemp" data-field="ciudadTemp" placeholder="Ciudad" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{def.ciudad_html}}}-->
+                <select class="newCiudad" data-field="ciudad" placeholder="" style="font-size: 15px;font-weight: 500;">
                 </select>
                 <i class="fa fa-spinner fa-spin loadingIconCiudad" style="display: none"></i>
             </td>
@@ -158,14 +247,12 @@
                 <div class="record-label" >
                     Colonia
                 </div>
-                <select class="newColoniaTemp" data-field="coloniaTemp" placeholder="Colonia" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{def.colonia_html}}}-->
+                <select class="newColonia" data-field="colonia" placeholder="" style="font-size: 15px;font-weight: 500;">
                 </select>
                 <i class="fa fa-spinner fa-spin loadingIconColonia" style="display: none"></i>
             </td>
         </tr>
 
-        <!--fin de fila rediseño de direcciones -->
         <tr>
             <td valign="top">
                 <div class="record-label" >
@@ -188,6 +275,6 @@
                 </div>
             </td>
         </tr>
+
     </table>
 </div>
-{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

@@ -238,6 +238,7 @@ SQL;
         // select type | Street (Calle) | primary | inactive
         // populate relationships from dropdowns
 
+        //Nuevo account_direcciones_n
         if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */
@@ -255,10 +256,10 @@ SQL;
                 $direccion->name = $direccion_row['calle'];
                 //parse array to string for multiselects
                 $tipo_string = "";
-                if (count($direccion_row['tipodedireccion']) > 0) {
-                    $tipo_string .= '^' . $direccion_row['tipodedireccion'][0] . '^';
-                    for ($i = 1; $i < count($direccion_row['tipodedireccion']); $i++) {
-                        $tipo_string .= ',^' . $direccion_row['tipodedireccion'][$i] . '^';
+                if (count($direccion_row['tipo_seleccionado_hide']) > 0) {
+                    $tipo_string .= '^' . $direccion_row['tipo_seleccionado_hide'][0] . '^';
+                    for ($i = 1; $i < count($direccion_row['tipo_seleccionado_hide']); $i++) {
+                        $tipo_string .= ',^' . $direccion_row['tipo_seleccionado_hide'][$i] . '^';
                     }
                 }
                 $direccion->tipodedireccion = $tipo_string;
@@ -267,7 +268,7 @@ SQL;
                 $direccion->inactivo = ($direccion_row['inactivo'] == true);
                 $direccion->numint = $direccion_row['numint'];
                 $direccion->numext = $direccion_row['numext'];
-                $direccion->indicador = $direccion_row['indicador'];
+                $direccion->indicador = $direccion_row['indicador_seleccionado_hide'];
                 //teams
                 $direccion->team_id = $bean->team_id;
                 $direccion->team_set_id = $bean->team_set_id;
@@ -276,8 +277,8 @@ SQL;
                 // populate related account id
                 $direccion->accounts_dire_direccion_1accounts_ida = $bean->id;
 
-                $nombre_colonia_query = "Select name from dire_colonia where id ='". $direccion_row['colonia']."'";
-                $nombre_municipio_query = "Select name from dire_municipio where id ='". $direccion_row['municipio']."'";
+                $nombre_colonia_query = "Select name from dire_colonia where id ='". $direccion_row['colonia_seleccionada']."'";
+                $nombre_municipio_query = "Select name from dire_municipio where id ='". $direccion_row['municipio_seleccionado']."'";
                 $querycolonia = $db->query($nombre_colonia_query);
                 $coloniaName = $db->fetchByAssoc($querycolonia);
                 $querymunicipio = $db->query($nombre_municipio_query);
@@ -288,39 +289,39 @@ SQL;
 
                 // update related records
                 if ($direccion->load_relationship('dire_direccion_dire_pais')) {
-                    if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
+                    if ($direccion_row['pais_seleccionado'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
                         $direccion->dire_direccion_dire_pais->delete($direccion->id);
-                        $direccion->dire_direccion_dire_pais->add($direccion_row['pais']);
+                        $direccion->dire_direccion_dire_pais->add($direccion_row['pais_seleccionado']);
                     }
                 }
 
                 if ($direccion->load_relationship('dire_direccion_dire_estado')) {
-                    if ($direccion_row['estado'] !== $direccion->dire_direccion_dire_estadodire_estado_ida) {
+                    if ($direccion_row['estado_seleccionado'] !== $direccion->dire_direccion_dire_estadodire_estado_ida) {
                         $direccion->dire_direccion_dire_estado->delete($direccion->id);
-                        $direccion->dire_direccion_dire_estado->add($direccion_row['estado']);
+                        $direccion->dire_direccion_dire_estado->add($direccion_row['estado_seleccionado']);
                     }
                 }
 
                 if ($direccion->load_relationship('dire_direccion_dire_municipio')) {
-                    if ($direccion_row['municipio'] !== $direccion->dire_direccion_dire_municipiodire_municipio_ida) {
+                    if ($direccion_row['municipio_seleccionado'] !== $direccion->dire_direccion_dire_municipiodire_municipio_ida) {
                         $direccion->dire_direccion_dire_municipio->delete($direccion->id);
-                        $direccion->dire_direccion_dire_municipio->add($direccion_row['municipio']);
+                        $direccion->dire_direccion_dire_municipio->add($direccion_row['municipio_seleccionado']);
                     }
                 }
 
                 if ($direccion->load_relationship('dire_direccion_dire_ciudad')) {
-                    if ($direccion_row['ciudad'] !== $direccion->dire_direccion_dire_ciudaddire_ciudad_ida) {
+                    if ($direccion_row['ciudad_seleccionada'] !== $direccion->dire_direccion_dire_ciudaddire_ciudad_ida) {
                         $direccion->dire_direccion_dire_ciudad->delete($direccion->id);
-                        $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad']);
+                        $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad_seleccionada']);
                     }
                 }
 
                 if ($direccion->load_relationship('dire_direccion_dire_codigopostal')) {
                     try {
                         //if (!empty($direccion_row['postal'])) {
-                        if ($direccion_row['postal'] !== $direccion->dire_direccion_dire_codigopostal) {
+                        if ($direccion_row['postal_hidden'] !== $direccion->dire_direccion_dire_codigopostal) {
                             $direccion->dire_direccion_dire_codigopostal->delete($direccion->id);
-                            $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal']);
+                            $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal_hidden']);
                         }
                     } catch (Exception $e) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
@@ -328,9 +329,9 @@ SQL;
                 }
 
                 if ($direccion->load_relationship('dire_direccion_dire_colonia')) {
-                    if ($direccion_row['colonia'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
+                    if ($direccion_row['colonia_seleccionada'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
                         $direccion->dire_direccion_dire_colonia->delete($direccion->id);
-                        $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia']);
+                        $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia_seleccionada']);
                     }
                 }
 

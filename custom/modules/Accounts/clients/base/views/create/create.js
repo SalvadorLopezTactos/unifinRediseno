@@ -129,14 +129,15 @@
 
 
     handleCancel: function () {
-        var account_telefonos = this.model._previousAttributes.account_telefonos;
+        var account_telefonos = cont_tel.prev_oTelefonos.telefono;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
-        this.model.set("account_telefonos", account_telefonos);
-        this.model.set("account_direcciones", account_direcciones);
+        this.model.set('account_telefonos', account_telefonos);
+        this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-
+        cont_tel.oTelefonos.telefono = account_telefonos;
+        cont_tel.render();
 
         $('.select2-choices').css('border-color', '');
     },
@@ -171,6 +172,8 @@
 
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
+        //Oculta nombre de campo accounts_telefonosV2
+        $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
 
        //Oculta campo Lead no viable en la creacion de cuentas
         $('[data-name="tct_noviable"]').hide();
@@ -328,16 +331,27 @@
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
         this._super("initialize", [options]);
         //Funcion que quita los años futuros y menores a -5 del año actual
         this.quitaanos();
         this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
+        /*
+          Contexto campos custom
+        */
+        //Teléfonos
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
+
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
         this.model.on("change:tipo_registro_c", this._hideGuardar, this);
 
         //add validation tasks
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
@@ -658,14 +672,14 @@
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
-                objDirecciones.eq(i).find('.existingNumExt').val() +
-                objDirecciones.eq(i).find('.existingNumInt').val() +
-                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
-                objDirecciones.eq(i).find('#existingPostalInput').val();
+            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                objDirecciones.eq(i).find('.numExtExisting').val() +
+                objDirecciones.eq(i).find('.numIntExisting').val() +
+                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                objDirecciones.eq(i).find('.postalInputTempExisting').val();
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
@@ -769,8 +783,9 @@
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
+                $('#tabletelefonos').css('border', '3px dotted red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -1232,7 +1247,7 @@
                     console.log(direcciones);
                     var direcciones = this.model.get('account_direcciones');
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
+                        if (direcciones[i].pais_seleccionado == 2) {
                             nacional = 1;
                         }
                     }
@@ -1805,11 +1820,14 @@
             var value = this.model.get('account_direcciones');
             var totalindicadores = "";
 
+            if(value != undefined){
 
-            for (i = 0; i < value.length; i++) {
-                console.log("Valida Cedente");
-                var valorecupera = this._getIndicador(value[i].indicador);
-                totalindicadores = totalindicadores + "," + valorecupera;
+                for (i=0; i < value.length; i++) {
+                    console.log("Valida Cedente");
+                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+
+                }
 
             }
 
@@ -2520,6 +2538,13 @@
             }
         });
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        //Teléfonos
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+
+        callback(null, fields, errors);
     },
 
 })

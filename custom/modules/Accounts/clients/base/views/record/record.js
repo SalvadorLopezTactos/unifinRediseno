@@ -1,20 +1,22 @@
 ({
     extendsFrom: 'RecordView',
-
     /**
      * @author bdekoning@levementum.com
      * @date 6/9/15
      * @brief Override for handleCancel to ensure the account_telefonos attribute is properly reverted
      *
      * @override
-     */
-
-	oculta : 0,
+    */
+    oculta : 0,
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
+
+        this.context.on('button:cancel_button:click', this.handleCancel, this);
+
 
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
@@ -27,6 +29,7 @@
         this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
 
         //add validation tasks
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
@@ -34,7 +37,7 @@
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
         this.model.addValidationTask('check_account_direcciones', _.bind(this._doValidateDireccion, this));
-        this.model.addValidationTask('check_account_direccionesCP', _.bind(this._doValidateDireccionCP, this));
+        //this.model.addValidationTask('check_account_direccionesCP', _.bind(this._doValidateDireccionCP, this));
         //this.model.addValidationTask('check_Tiene_Contactos', _.bind(this._doValidateTieneContactos, this));
         this.model.addValidationTask('check_1900_year', _.bind(this.fechaMenor1900, this));
         this.model.addValidationTask('fechadenacimiento_c', _.bind(this.doValidateDateNac, this));
@@ -110,7 +113,7 @@
          Salvador Lopez
          Se añaden eventos change para mostrar teléfonos y direcciones al vincular o desvincular algún registro relacionado
          */
-        this.model.on('change:account_telefonos', this.refresca, this);
+        //this.model.on('change:account_telefonos', this.refresca, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -186,6 +189,10 @@
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
         //this.model.on('sync', this.checkTelNorepeat, this);
+
+        //this.model.on('sync', this.get_phones, this);
+        this.get_phones();
+
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique=function(a){
@@ -309,20 +316,21 @@
     _direccionDuplicada: function (fields, errors, callback) {
 
         /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
-        OBETENER LAS DESDRIPCIONES DE LOS COMBOS*/
+        OBETENER LAS DESCRIPCIONES DE LOS COMBOS*/
 
+        //var objDirecciones = $('.control-group.direccion')
         var objDirecciones = $('.control-group.direccion')
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
-                objDirecciones.eq(i).find('.existingNumExt').val() +
-                objDirecciones.eq(i).find('.existingNumInt').val() +
-                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
-                objDirecciones.eq(i).find('#existingPostalInput').val();
+            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                objDirecciones.eq(i).find('.numExtExisting').val() +
+                objDirecciones.eq(i).find('.numIntExisting').val() +
+                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                objDirecciones.eq(i).find('.postalInputTempExisting').val();
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
@@ -616,14 +624,15 @@
     },
 
     handleCancel: function () {
-        var account_telefonos = this.model._previousAttributes.account_telefonos;
+        var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
         this.model.set('account_telefonos', account_telefonos);
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-        //this.render();
+        this.oTelefonos.telefono=account_telefonos;
+        cont_tel.render();
     },
 
     bindDataChange: function () {
@@ -889,7 +898,7 @@
         $('div[data-name=account_telefonos]').hide();
         $('div[data-name=email]').hide();
         $('div[data-name=account_direcciones]').hide();
-		self=this;
+		//self=this;
         if(this.model.get('id')!="") {
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
@@ -905,17 +914,14 @@
                         $('div[data-name=account_direcciones]').show();
                     }
                     return data;
-                }, self),
+                }, this),
             });
-            self.render();
+            //self.render();
         }
         console.log("valor fuera " + this.model.get('id'));
     },
 
     disable_panels_rol:function () {
-
-        self=this;
-
         if(this.model.get('id')!="") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -948,17 +954,14 @@
                             }
                         }
                         return data;
-                    }, self),
+                    }, this),
                 });
-                self.render();
+                //self.render();
             }
         }
     },
 
     disable_panels_team:function () {
-
-        self=this;
-
         if(this.model.get('id')!="") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1025,9 +1028,9 @@
 
                         }
                         return data;
-                    }, self),
+                    }, this),
                 });
-                self.render();
+                //self.render();
             }
         }
     },
@@ -1354,52 +1357,67 @@
     _doValidateDireccionCP: function (fields, errors, callback) {
         //Valida CP
         console.log('Validación CP');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].codigopostal == 'xkcd' && isNaN($('input#existingPostalInput.select2').eq(i).val())==false){
-                direcciones[i].codigopostal = $('input#existingPostalInput.select2').eq(i).val();
+        var direcciones = this.model.get('account_direcciones_n');
+        if(direcciones != undefined){
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].codigo_postal == '' || direcciones[i].codigo_postal == null) {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
+
             }
-            if (direcciones[i].codigopostal == 'xkcd' || direcciones[i].codigopostal == null || direcciones[i].codigopostal == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
-            }
+
 
         }
 
         //Valida Ciudad
+        /*
         console.log('Validación Ciudad');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].ciudad == 'xkcd' || direcciones[i].ciudad == null || direcciones[i].ciudad == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
+        //var direcciones = this.model.get('account_direcciones');
+        if(direcciones != undefined){
+
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].ciudad_seleccionada == '1' || direcciones[i].ciudad_seleccionada == null || direcciones[i].ciudad_seleccionada == '') {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
             }
+
         }
+        */
+
 
         //Valida Colonia
-        console.log('Validación Colonia');
-        var direcciones = this.model.get('account_direcciones');
-        for (i = 0; i < direcciones.length; i++) {
-            if (direcciones[i].colonia == 'xkcd' || direcciones[i].colonia == null || direcciones[i].colonia == '') {
-                errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                errors[$(".account_direcciones")].required = true;
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                    autoClose: false
-                });
+        //console.log('Validación Colonia');
+        //var direcciones = this.model.get('account_direcciones');
+        /*
+        if(direcciones !=undefined){
+
+            for (i = 0; i < direcciones.length; i++) {
+                if (direcciones[i].colonia_seleccionada == '1' || direcciones[i].colonia_seleccionada == null || direcciones[i].colonia_seleccionada == '') {
+                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
+                    errors[$(".account_direcciones")].required = true;
+                    app.alert.show("Direccion requerida", {
+                        level: "error",
+                        title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                        autoClose: false
+                    });
+                }
             }
+
+
         }
+        */
 
         //Return
         callback(null, fields, errors);
@@ -1426,7 +1444,7 @@
                     console.log('Validacion Dir.Nacional');
                     var direcciones = this.model.get('account_direcciones');
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
+                        if (direcciones[i].pais_seleccionado == 2) {
                             nacional = 1;
                         }
                     }
@@ -1458,7 +1476,7 @@
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        this.context.on('button:save_button:click', this.borraTel, this);
+       // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
     },
@@ -1586,16 +1604,16 @@
             estatus.push(datos_telefonos[i].estatus);
         }
         for (var i = 0; i < datos_dirreciones.length; i++) {
-            tipolabel2.push(datos_dirreciones[i].tipo_label);
-            cp.push(datos_dirreciones[i].codigopostal);
-            municipio.push(datos_dirreciones[i].municipio);
+            tipolabel2.push(datos_dirreciones[i].tipo_seleccionado_hide_label);
+            cp.push(datos_dirreciones[i].postal_hidden);
+            municipio.push(datos_dirreciones[i].municipio_seleccionado);
             calle.push(datos_dirreciones[i].calle);
-            indicador.push(datos_dirreciones[i].indicador);
-            ciudad.push(datos_dirreciones[i].ciudad);
+            indicador.push(datos_dirreciones[i].indicador_seleccionado_hide);
+            ciudad.push(datos_dirreciones[i].ciudad_seleccionada);
             numext.push(datos_dirreciones[i].numext);
             numint.push(datos_dirreciones[i].numint);
-            estado.push(datos_dirreciones[i].estado);
-            colonia.push(datos_dirreciones[i].colonia);
+            estado.push(datos_dirreciones[i].estado_seleccionado);
+            colonia.push(datos_dirreciones[i].colonia_seleccionada);
         }
         var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
         var allfields2=[];
@@ -1984,7 +2002,7 @@
     },
 
 
-    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
+    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
             if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
@@ -1995,8 +2013,9 @@
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
+                $('#tabletelefonos').css('border', '3px dotted red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -2580,15 +2599,29 @@
     validadirecc: function (fields, errors, callback) {
         var cont=0;
 
-        $('.existingIndicador').each(function (index) {
-            if($(this).val()==''){
+        $('.existingTipodedireccion').each(function (index) {
+            if($(this).val()=='' || $(this).val()==null){
                 cont++;
-                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', 'red');
+                //$('#s2id_multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+                $('.multi_tipo_existing ul.select2-choices').eq(index).css('border-color', 'red');
             }else{
-                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                //$('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                $('.multi_tipo_existing ul.select2-choices').eq(index).css('border-color', '');
             }
         });
-        $('.existingPostal').each(function (index) {
+
+
+        $('.existingIndicador').each(function (index) {
+            if($(this).val()=='' || $(this).val()==null){
+                cont++;
+                //$('#s2id_multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+                $('.multi1_n_existing ul.select2-choices').eq(index).css('border-color', 'red');
+            }else{
+                //$('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                $('.multi1_n_existing ul.select2-choices').eq(index).css('border-color', '');
+            }
+        });
+        $('.postalInputTempExisting').each(function (index) {
             if($(this).val()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
@@ -2599,33 +2632,42 @@
             }
         });
 
-        $('.existingColoniaTemp').each(function () {
-            if($(this).val()=='1'){
+        $('.ciudadExisting').each(function () {
+            if($(this).select2('val')=='1'){
                 cont++;
-                $(this).css('border-color', 'red');
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', 'red');
             }else{
-                $(this).css('border-color', '');
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', '');
             }
         });
 
-        $('.existingCalle').each(function (index) {
+        $('.coloniaExisting').each(function () {
+            if($(this).select2('val')=='1'){
+                cont++;
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', 'red');
+            }else{
+                $(this).siblings().eq(1).find('.select2-choice').css('border-color', '');
+            }
+        });
+
+        $('.calleExisting').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
                 //$(this).eq(index).css('border-color', 'red');
-                $('.existingCalle').eq(index).css('border-color', 'red');
+                $('.calleExisting').eq(index).css('border-color', 'red');
             }else{
-                $('.existingCalle').eq(index).css('border-color', '');
+                $('.calleExisting').eq(index).css('border-color', '');
             }
         });
-        $('.existingNumExt').each(function (index) {
+        $('.numExtExisting').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $('.existingNumExt').eq(index).css('border-color', 'red');
+                $('.numExtExisting').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $('.existingNumExt').eq(index).css('border-color', '');
+                $('.numExtExisting').eq(index).css('border-color', '');
             }
         });
 
@@ -2749,7 +2791,6 @@
 
 
     valida_backoffice: function() {
-        self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list');
         var roles_logged = app.user.attributes.roles;
         var coincide_rol=0;
@@ -2773,13 +2814,12 @@
                         });
                         app.router.navigate('#Accounts', {trigger: true});
                     }
-                }, self),
+                }, this),
             });
         }
     },
 
     valida_centro_prospec: function() {
-        self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
         var roles_logged = app.user.attributes.roles;
         var coincide_rol=0;
@@ -2812,7 +2852,7 @@
                             });
                             app.router.navigate('#Accounts', {trigger: true});
                         }
-                    }, self),
+                    }, this),
                 });
             }
         }
@@ -2857,11 +2897,14 @@
             var value = this.model.get('account_direcciones');
             var totalindicadores = "";
 
+            if(value != undefined){
 
-            for (i=0; i < value.length; i++) {
-                console.log("Valida Cedente");
-                var valorecupera = this._getIndicador(value[i].indicador);
-                totalindicadores = totalindicadores + "," + valorecupera;
+                for (i=0; i < value.length; i++) {
+                    console.log("Valida Cedente");
+                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+
+                }
 
             }
 
@@ -3716,5 +3759,75 @@
         lista[anoselect]=anoselect;
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
+    get_phones:function(){
+        //Extiende This
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
+        contexto_cuenta = this;
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+        //Recupera información
+        idCuenta = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_tel_telefonos_1'), null, {
+            success: function (data) {
+                for (var i = 0; i < data.records.length; i++) {
+                    //Asignando valores de los campos
+                    var valor1 = data.records[i].tipotelefono;
+                    var valor2 = data.records[i].pais;
+                    var valor3 = data.records[i].estatus;
+                    var valor4 = data.records[i].telefono;
+                    var valor5 = data.records[i].extension;
+                    var valor6 = (data.records[i].principal==true) ? 1 : 0;
+                    var idtel = data.records[i].id;
 
+                    var telefono = {
+                        "name":valor4,
+                        "tipotelefono": valor1,
+                        "pais": valor2,
+                        "estatus": valor3,
+                        "extension": valor5,
+                        "telefono": valor4,
+                        "principal": valor6,
+                        "id_cuenta": idCuenta,
+                        "id":idtel
+                    };
+
+                    var prev_telefono = {
+                        "name":valor4,
+                        "tipotelefono": valor1,
+                        "pais": valor2,
+                        "estatus": valor3,
+                        "extension": valor5,
+                        "telefono": valor4,
+                        "principal": valor6,
+                        "id_cuenta": idCuenta,
+                        "id":idtel
+                    };
+                    contexto_cuenta.oTelefonos.telefono.push(telefono);
+                    contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
+                }
+
+                cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
+                cont_tel.render();
+                //Oculta campo Accounts_telefonosV2
+                $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
+
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        if ($.isEmptyObject(errors)) {
+            //Teléfonos
+            this.prev_oTelefonos.prev_telefono = app.utils.deepCopy(this.oTelefonos.telefono);
+            this.model.set('account_telefonos',this.oTelefonos.telefono);
+        }
+
+        callback(null, fields, errors);
+    },
 })
