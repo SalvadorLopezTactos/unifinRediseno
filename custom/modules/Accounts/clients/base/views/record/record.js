@@ -184,7 +184,8 @@
         this.model.on('sync', this.valida_backoffice, this);
         //this.model.on('sync', this.checkTelNorepeat, this);
 
-        this.model.on('sync', this.get_phones, this);
+        //this.model.on('sync', this.get_phones, this);
+        this.get_phones();
 
 
         //Funcion para eliminar duplicados de arrays
@@ -617,7 +618,7 @@
     },
 
     handleCancel: function () {
-        var account_telefonos = this.prev_oTelefonos.prev_telefono;
+        const account_telefonos = this.prev_oTelefonos.prev_telefono;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
         this.model.set('account_telefonos', account_telefonos);
@@ -3793,8 +3794,12 @@
     },
 
     setCustomFields:function (fields, errors, callback){
-        //Teléfonos
-        this.model.set('account_telefonos',this.oTelefonos.telefono);
+        if ($.isEmptyObject(errors)) {
+            //Teléfonos
+            this.prev_oTelefonos.prev_telefono = this.oTelefonos.telefono;
+            this.model.set('account_telefonos',this.oTelefonos.telefono);
+        }
+
 
         callback(null, fields, errors);
     },
