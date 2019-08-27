@@ -11,7 +11,7 @@ class LeadNV_hook
     public function saveleadnv($bean = null, $event = null, $args = null)
     {
         //
-        $leadNoViale = $bean-> tct_noviable;
+        $leadNoViale = $bean->tct_noviable;
         $GLOBALS['log']->fatal("Entra a Guardar info de Lead no Viable");
         if (!empty($leadNoViale)) {
 

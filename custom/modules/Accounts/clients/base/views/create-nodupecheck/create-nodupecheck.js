@@ -29,6 +29,10 @@
 
 
         this.enableDuplicateCheck = true;
+
+        //Funcion que quita los años futuros y menores a -5 del año actual
+        this.quitaanos();
+        this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         //add validation tasks
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
@@ -1431,6 +1435,25 @@
 
     },
 
+    setButtonStates: function (state) {
+        this._super("setButtonStates", [state]);
+        var $saveButtonEl = this.buttons[this.saveButtonName];
+        if ($saveButtonEl) {
+            switch (state) {
+                case this.STATE.CREATE:
+                case this.STATE.SELECT:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_SAVE_BUTTON_LABEL', this.module));
+                    break;
+                case this.STATE.DUPLICATE:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
+                    //OCULTANDO BOT�N CON JQUERY
+                    $('[name="duplicate_button"]').hide();
+                    $('[data-event="list:dupecheck-list-select-edit:fire"]').addClass("hidden");
+                    break;
+            }
+        }
+    
+      
     setCustomFields:function (fields, errors, callback){
         //Teléfonos
         this.model.set('account_telefonos',this.oTelefonos.telefono);
@@ -1438,7 +1461,21 @@
         callback(null, fields, errors);
     },
 
-
-
+    quitaanos: function(){
+        var anoactual = ((new Date).getFullYear());
+        var anoactual5= anoactual-5
+        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function(key){
+            //Quita años previos
+            if(key < anoactual5){
+                delete lista[key];
+            }
+            //Quita años futuros al actual
+            if(key > anoactual){
+                delete lista[key];
+            }
+        });
+        this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+    },
 
 })

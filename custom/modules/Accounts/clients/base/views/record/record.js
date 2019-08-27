@@ -24,6 +24,10 @@
         this.totalreuniones = 0;
         this.flagheld=0;
 
+        //Funcion que quita los años futuros y menores a -5 del año actual
+        this.quitaanos();
+        this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
+
         //add validation tasks
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
@@ -175,6 +179,8 @@
          AF. 12-02-2018
          Ajuste para mostrar direcciones y teléfonos
          */
+        //Carga de funcion quitar años lista para ventas anuales
+        this.model.on('sync', this.quitaanos, this);
         //this.model.on('sync', this._render, this);
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
@@ -3061,8 +3067,12 @@
                 app.alert.show('Error_ventas_anuales', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'el campo <b>ventas anuales</b> debe tener un valor mayor a 0.'
+                    messages: 'El campo <b>ventas anuales</b> debe tener un valor mayor a 0.'
                 });
+            }
+            if (this.model.get('tct_ano_ventas_ddw_c')== undefined || this.model.get('tct_ano_ventas_ddw_c')==""){
+                errors['tct_ano_ventas_ddw_c'] = "Se debe seleccionar el año de ventas";
+                errors['tct_ano_ventas_ddw_c'].required = true;
             }
             if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
                 errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
@@ -3070,7 +3080,7 @@
                 app.alert.show('Error_activof', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'el campo <b>activo fijo</b> debe tener un valor mayor a 0.'
+                    messages: 'El campo <b>activo fijo</b> debe tener un valor mayor a 0.'
                 });
             }
         }
@@ -3731,6 +3741,24 @@
 
     },
 
+    quitaanos: function(){
+        var anoactual = ((new Date).getFullYear());
+        var anoactual5= anoactual-5
+        var anoselect= this.model.get('tct_ano_ventas_ddw_c');
+        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function(key){
+            //Quita años previos
+            if(key < anoactual5){
+                delete lista[key];
+            }
+            //Quita años futuros al actual
+            if(key > anoactual){
+                delete lista[key];
+            }
+        });
+        lista[anoselect]=anoselect;
+        this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+    },
     get_phones:function(){
         //Extiende This
         this.oTelefonos = [];
@@ -3799,7 +3827,6 @@
             this.prev_oTelefonos.prev_telefono = app.utils.deepCopy(this.oTelefonos.telefono);
             this.model.set('account_telefonos',this.oTelefonos.telefono);
         }
-
 
         callback(null, fields, errors);
     },

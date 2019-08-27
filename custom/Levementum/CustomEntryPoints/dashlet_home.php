@@ -229,7 +229,7 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 
 <!-- Second dashlet; Embeddes Vaadin Application for Activiti Task Detail -->
 
-<section class="detail">
+<section class="detail" style="display: none">
 
     <div style="width: 100%; height: 100%; border: 0px solid green;" id="activiti-taskdetail" class="v-app">
 

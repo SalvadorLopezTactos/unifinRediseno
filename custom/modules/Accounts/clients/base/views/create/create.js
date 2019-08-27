@@ -333,7 +333,9 @@
         self = this;
         contexto_cuenta = this;
         this._super("initialize", [options]);
-
+        //Funcion que quita los años futuros y menores a -5 del año actual
+        this.quitaanos();
+        this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         /*
           Contexto campos custom
         */
@@ -1068,6 +1070,7 @@
                     $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
                     //OCULTANDO BOT�N CON JQUERY
                     $('[name="duplicate_button"]').hide();
+                    $('[data-event="list:dupecheck-list-select-edit:fire"]').addClass("hidden");
                     break;
             }
         }
@@ -1990,6 +1993,10 @@
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
             }
+            if (this.model.get('tct_ano_ventas_ddw_c')== undefined || this.model.get('tct_ano_ventas_ddw_c')==""){
+                errors['tct_ano_ventas_ddw_c'] = "Se debe seleccionar el año de ventas";
+                errors['tct_ano_ventas_ddw_c'].required = true;
+            }
             if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
                 errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['activo_fijo_c'].required = true;
@@ -2514,6 +2521,23 @@
             callback(null, fields, errors);
         }
 
+    },
+
+    quitaanos: function(){
+        var anoactual = ((new Date).getFullYear());
+        var anoactual5= anoactual-5
+        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function(key){
+            //Quita años previos
+            if(key < anoactual5){
+                delete lista[key];
+            }
+            //Quita años futuros al actual
+            if(key > anoactual){
+                delete lista[key];
+            }
+        });
+        this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
 
     setCustomFields:function (fields, errors, callback){

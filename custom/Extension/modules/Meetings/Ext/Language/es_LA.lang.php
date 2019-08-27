@@ -35,3 +35,5 @@ $mod_strings['LBL_PROPECCION_C'] = 'Edita Reunión';
 $mod_strings['LBL_PROSPECCION_C'] = 'LBL_PROSPECCION_C';
 $mod_strings['LBL_CENTRO_PROSPECCCION_C'] = 'Centro de Prospección';
 $mod_strings['LBL_TCT_PARENT_CALL_ID_TXF'] = 'ID Llamada padre';
+$mod_strings['LBL_TCT_CONFERENCIA_CHK'] = 'Conferencia';
+$mod_strings['LNK_ASESORES_VETADOS'] = 'Asesores Vetados';

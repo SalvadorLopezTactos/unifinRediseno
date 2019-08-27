@@ -298,3 +298,4 @@ $mod_strings['ACCOUNTS_TCT_PLD'] = 'Cuestionario PLD';
 $mod_strings['LBL_TCT_PAIS_EXPIDE_RFC'] = 'País que expide el RFC o equivalente';
 $mod_strings['LBL_EMAILS_SUBPANEL_TITLE'] = 'Emails';
 $mod_strings['LBL_TCT_STATUS_ATENCION_DDW'] = 'Estatus de Atención';
+$mod_strings['LBL_TCT_ANO_VENTAS_DDW'] = 'Año de Ventas Anuales';
