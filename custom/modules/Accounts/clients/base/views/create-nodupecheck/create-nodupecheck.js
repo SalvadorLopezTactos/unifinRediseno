@@ -1452,8 +1452,8 @@
                     break;
             }
         }
-    
-      
+    },
+
     setCustomFields:function (fields, errors, callback){
         //Teléfonos
         this.model.set('account_telefonos',this.oTelefonos.telefono);
