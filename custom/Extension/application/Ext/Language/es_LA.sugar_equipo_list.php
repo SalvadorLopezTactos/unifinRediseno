@@ -1,5 +1,5 @@
 <?php
- // created: 2018-10-18 14:28:50
+ // created: 2019-08-20 17:52:55
 
 $app_list_strings['equipo_list']=array (
   0 => '',

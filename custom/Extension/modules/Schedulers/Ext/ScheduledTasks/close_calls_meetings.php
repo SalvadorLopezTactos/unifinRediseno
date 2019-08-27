@@ -12,9 +12,20 @@
                 and calls.date_end < UTC_TIMESTAMP()
                 and calls_cstm.tct_call_issabel_c=0
                 and deleted=0;";
+        $queryMNotSurvey ="select meetings.id id
+                from meetings
+                inner join users on users.id = meetings.created_by
+                inner join users_cstm on users_cstm.id_c = users.id
+                where meetings.status='Planned'
+                and meetings.parent_type = 'Accounts'
+                and meetings.parent_id is not null
+                and meetings.date_end  <UTC_TIMESTAMP()
+                and meetings.created_by != meetings.assigned_user_id
+                and (users_cstm.puestousuario_c = '27' or users_cstm.puestousuario_c = '31'  or users.id= 'eeae5860-bb05-4ae5-3579-56ddd8a85c31');";
         $querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
 
         $resultc = $GLOBALS['db']->query($queryc);
+        $resultMNotSurvey = $GLOBALS['db']->query($queryMNotSurvey);
         $resultm = $GLOBALS['db']->query($querym);
 
         $contadorc=0;
@@ -29,6 +40,15 @@
             $resultUpdatec = $GLOBALS['db']->query($queryUpdatec);
             $contadorc++;
         }
+
+        while($row = $GLOBALS['db']->fetchByAssoc($resultMNotSurvey) )
+        {
+            $beanMeeting = BeanFactory::getBean('Meetings', $row['id']);
+            $beanMeeting->status = 'Not Held';
+            $beanMeeting->modified_user_id = $beanMeeting->assigned_user_id;
+            $beanMeeting->save();
+        }
+
         while($row = $GLOBALS['db']->fetchByAssoc($resultm) )
         {
             $idm = $row['id'];

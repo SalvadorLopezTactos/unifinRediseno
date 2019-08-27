@@ -436,7 +436,7 @@
                     <th width="10%" class="hide_ri_comprometida">
                         <table width="100%">
                             <tr>
-                                <td class="innerTableTd">RI Original</td>
+                                <td class="innerTableTd">Pago Único Original</td>
                             </tr>
                         </table>
                     </th>
@@ -457,7 +457,7 @@
                     <th width="5%" class="hide_ri_final_comprometida">
                         <table width="100%">
                             <tr>
-                                <td class="innerTableTd">Renta Inicial</td>
+                                <td class="innerTableTd">Pago Único</td>
                             </tr>
                         </table>
                     </th>
@@ -485,7 +485,7 @@
                     <th width="10%" class="hide_ri_real">
                         <table width="100%">
                             <tr>
-                                <td class="innerTableTd">RI Real</td>
+                                <td class="innerTableTd">Pago Único Real</td>
                             </tr>
                         </table>
                     </th>
@@ -499,7 +499,7 @@
                     <th width="10%" class="hide_ri_cancelada">
                         <table width="100%">
                             <tr>
-                                <td class="innerTableTd">RI Cancelada</td>
+                                <td class="innerTableTd">Pago Único Cancelada</td>
                             </tr>
                         </table>
                     </th>
@@ -538,6 +538,13 @@
                             </tr>
                         </table>
                     </th>
+                    <th width="15%" class="hide_motivo_rechazo">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Motivo de rechazo</td>
+                            </tr>
+                        </table>
+                    </th>
 
                 </tr>
 
@@ -572,6 +579,7 @@
                         <th class="totales hide_etapa"></th>
                         <th class="totales hide_progreso"></th>
                         <th class="totales hide_conversion"></th>
+                        <th class="totales hide_motivo_rechazo"></th>
                     </tr>
                 {{/each}}
 
@@ -623,6 +631,7 @@
                             <td class="hide_etapa">{{etapa}}</td>
                             <td class="hide_progreso">{{progreso}}</td>
                             <td class="hide_conversion">{{conversion}}</td>
+                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -676,6 +685,7 @@
                                 <td class="hide_etapa">{{etapa}}</td>
                                 <td class="hide_progreso">{{progreso}}</td>
                                 <td class="hide_conversion">{{conversion}}</td>
+                                <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                 <!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
@@ -734,6 +744,7 @@
                                             <td class="hide_etapa">{{etapa}}</td>
                                             <td class="hide_progreso">{{progreso}}</td>
                                             <td class="hide_conversion">{{conversion}}</td>
+                                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                             <!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
@@ -778,21 +789,22 @@
                                         <option value="hide_tipo_bien">Tipo de Bien</option>
                                         <option value="hide_monto_original">Linea Disponible</option>
                                         <option value="hide_monto_comprometido">Monto Original</option>
-                                        <option value="hide_ri_comprometida">RI Original</option>
+                                        <option value="hide_ri_comprometida">Pago Único Original</option>
                                         <option value="hide_monto_diferencia">Diferencia</option>
                                         <option value="hide_monto_final_comprometido">Backlog</option>
-                                        <option value="hide_ri_final_comprometida">Renta Inicial</option>
+                                        <option value="hide_ri_final_comprometida">Pago Único</option>
                                         <!--<option value="hide_bl_actual">Backlog Actual</option>-->
                                         <option value="hide_pipeline_posterior">Colocacion Pipeline</option>
                                         <option value="hide_monto_real">Colocación Real</option>
-                                        <option value="hide_ri_real">RI Real</option>
+                                        <option value="hide_ri_real">Pago Único Real</option>
                                         <option value="hide_monto_cancelado">Monto Cancelado</option>
-                                        <option value="hide_ri_cancelada">RI Cancelada</option>
+                                        <option value="hide_ri_cancelada">Pago Único Cancelada</option>
                                         <option value="hide_tipo_operacion">Tipo de Operacion</option>
                                         <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
                                         <option value="hide_etapa">Etapa</option>
                                         <option value="hide_progreso">Solicitud</option>
                                         <option value="hide_conversion">Probabilidad de Conversión %</option>
+                                        <option value="hide_motivo_rechazo">Motivo de Rechazo</option>
                                     </select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
@@ -971,7 +983,7 @@
                     <td>${{customFormatNumber newCancelar.montoOriginalBacklog}}</td>
                 </tr>
                 <tr>
-                    <td><b>Renta Inicial Original</b></td>
+                    <td><b>Pago Único Original</b></td>
                     <td>${{customFormatNumber newCancelar.rentaInicialOriginal}}</td>
                 </tr>
                 <tr>
@@ -1190,7 +1202,7 @@
                     <td>${{customFormatNumber newRevivir.montoOriginalBacklog}}</td>
                 </tr>
                 <tr>
-                    <td><b>Renta Inicial Original</b></td>
+                    <td><b>Pago Único Original</b></td>
                     <td>${{customFormatNumber newRevivir.rentaInicialOriginal}}</td>
                 </tr>
                 <tr>

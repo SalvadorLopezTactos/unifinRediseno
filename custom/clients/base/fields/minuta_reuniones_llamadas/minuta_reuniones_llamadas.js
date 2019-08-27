@@ -54,6 +54,20 @@ Controlador de reuniones-llamadas
         selfRella.nuevoRegistro.tipo_registro="llamada";
       }
       if(this.model.get('resultado_c') !=5 && this.model.get('resultado_c')!=19){
+        //Limpia valores
+        //Asunto
+        $('.newCampo1A').val("");
+        //Fecha inicio
+        $('.newDate').val("");
+        //Hora inicio
+        $('.newTime1').val("");
+        //Fecha fin
+        $('.newDate2').val("");
+        //Hora fina
+        $('.newTime2').val("");
+        //Objetivo General
+        $('select.objetivoG').select2('val','');
+
         $("[data-panelname='LBL_RECORDVIEW_PANEL5']").hide();
         selfRella.nuevoRegistro.tipo_registro="";
       }

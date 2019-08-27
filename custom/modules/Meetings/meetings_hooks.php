@@ -7,6 +7,8 @@
  */
 
 require_once('modules/Emails/Email.php');
+require_once('custom/clients/base/api/EncuestaMinuta.php');
+
 
 class Meetings_Hooks
 {
@@ -78,7 +80,7 @@ class Meetings_Hooks
   function saveObjetivos ($bean = null, $event = null, $args = null)
   {
         if($bean->reunion_objetivos != null || !empty($bean->reunion_objetivos)){
-            $GLOBALS['log']->fatal('TCT - saveObjetivos -');
+            //$GLOBALS['log']->fatal('TCT - saveObjetivos -');
             //Obtener objetivos relacionados a la reunión actual
             if ($bean->load_relationship('meetings_minut_objetivos_1')) {
                 //Fetch related beans
@@ -169,7 +171,7 @@ class Meetings_Hooks
 
         //Restablece check-in/out time en creación
         if ($GLOBALS['service']->platform!= 'opi') {
-          if (!$args[isUpdate]) {
+          if (!$args['isUpdate']) {
             global $db;
             $update = " update meetings_cstm set check_in_time_c = null, check_out_time_c = null where id_c='{$bean->id}'";
   			    $execute = $db->query($update);
@@ -224,7 +226,7 @@ class Meetings_Hooks
 
 
     //Ingresa registro en auditoria
-    $GLOBALS['log']->fatal('TCT - insertAuditFields -');
+    //$GLOBALS['log']->fatal('TCT - insertAuditFields -');
     global $current_user;
     $date= TimeDate::getInstance()->nowDb();
     if($args['isUpdate']){
@@ -251,6 +253,19 @@ class Meetings_Hooks
 
     }
   }
+
+    function insertAuditUnlink ($bean, $event, $args)
+    {
+        global $current_user;
+        $date= TimeDate::getInstance()->nowDb();
+        $id_m_audit=create_guid();
+
+        $plataforma=$GLOBALS['service']->platform;
+        $sqlInsert="insert into meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'parent_id', 'id', '{$args['related_id']}', '', '', '{$plataforma}', '1', '{$date}')";
+        $GLOBALS['db']->query($sqlInsert);
+
+    }
 
   /*
    * Regresa el tipo de dato de un campo
@@ -362,4 +377,106 @@ class Meetings_Hooks
     ";
     $updateResult = $db->query($update);
   }
+
+  /*
+   * Función para enviar correo de encuesta: CITA NO REALIZADA
+   * Criterios:
+   *  1.- Creado != Asignado && Se tiene cuenta asociada
+   *  2.- Reunión creada por algún usario de centro de prospección; Puesto: 27, 31 o id=eeae5860-bb05-4ae5-3579-56ddd8a85c31
+   *  3a.- Reunión.Estado = No realizada
+   *    ó
+   *  3b.- Reunión.Resultado = "El cliente no estuvo presente, cita cancelada" ó "No se pudo contactar al Prospecto para confirmar cita"
+   * */
+  function surveyNotHeld ($bean, $event, $args)
+  {
+      //Criterio 1
+      if ($bean->created_by != $bean->assigned_user_id && !empty($bean->parent_id) && $bean->parent_type == 'Accounts') {
+          //Recupera bean Useario creado
+          $beanUser = BeanFactory::getBean('Users', $bean->created_by);
+          //Criterio 2
+          if ($beanUser->puestousuario_c == '27' || $beanUser->puestousuario_c == '31' || $beanUser->id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31'){
+              //Criterio 3a
+              if ($bean->fetched_row['status'] == 'Planned' && $bean->status == 'Not Held'){
+                //Envía encuesta
+                Meetings_Hooks::sendEmailSurvey($bean);
+              //Criterio 3b
+              } elseif ($bean->resultado_c == '1' || $bean->resultado_c == '22' ) {
+                //Envía encuesta
+                Meetings_Hooks::sendEmailSurvey($bean);
+              }
+          }
+      }
+  }
+
+  /*
+   * Función para ejecutar envío de correo electrónico: Encuesta: Cita no realizada
+  */
+  function sendEmailSurvey($beanReunion)
+  {
+      //Genrea url - string b64
+      $args = [];
+      $args['data']=[];
+      $args['data']['idMeeting'] = $beanReunion->id;
+      $args['data']['idUser'] = $beanReunion->assigned_user_id;
+      $args['data']['email'] = true;
+      $args['data']['nameUser']= $beanReunion->assigned_user_name;
+      //Recupera site_url
+      global $sugar_config;
+      $sugarHost = $sugar_config['site_url'] . '/survey_submission.php?q=';
+      //Obtiene stringBase64
+      $encuestaMinuta = new EncuestaMinuta();
+      $stringBase64 = $encuestaMinuta->createSurveySubmission('',$args);
+      //Genera url de encuesta
+      $urlSurvey = $sugarHost . $stringBase64;
+      // $GLOBALS["log"]->fatal($sugarHost);
+      // $GLOBALS["log"]->fatal($stringBase64);
+      // $GLOBALS["log"]->fatal($urlSurvey);
+      //Establece parámetros de envío
+      $timedate = new TimeDate();
+      $datetime = $timedate->to_display_date_time($beanReunion->date_start);
+      $beanUser = BeanFactory::getBean('Users', $beanReunion->assigned_user_id);
+      $mailSubject = "DÉJANOS SABER POR QUE NO SE REALIZÓ LA CITA-CONFERENCIA";
+      $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">HOLA! <b>'. $beanUser->first_name . ' ' . $beanUser->last_name .'</b>
+      <br><br>Sabemos que la cita-conferencia que tenías programada con la empresa '. $beanReunion->parent_name .' el día '. $datetime .' no se llevó a cabo.
+      <br><br>Para nosotros es muy importante escucharte, es por eso que te invitamos a contestar esta encuesta para entender cuales fueron los motivos.
+      <br><br>RECUERDA QUE ESTA ENCUESTA SOLO PERMANECERÁ ACTIVA HASTA MAÑANA AL MEDIO DÍA.</font></p>
+      <center><a href="'. $urlSurvey .'">Comenzar la encuesta</a><center>';
+      $mailTo = array(
+          0 => array(
+              'name' => $beanUser->first_name . ' ' . $beanUser->last_name ,
+              'email' => $beanUser->email1,
+          )
+      );
+
+      //Prepara ejecución de correo
+      try {
+          $mailer = MailerFactory::getSystemDefaultMailer();
+          $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+          $mailer->setSubject($mailSubject);
+          $body = trim($mailHTML);
+          $mailer->setHtmlBody($body);
+          $mailer->clearRecipients();
+          $mailer->addRecipientsTo(new EmailIdentity($beanUser->email1, $beanUser->first_name . ' ' . $beanUser->last_name));
+
+          //Ejecuta
+          $result = $mailer->send();
+          if ($result) {
+              //$GLOBALS["log"]->fatal("surveyNotHeld :: Se envío correctamente: " . $urlSurvey);
+          } else {
+              $GLOBALS["log"]->fatal("surveyNotHeld :: El correo no pudo realizarse de forma correcta");
+
+          }
+      } catch (MailerException $me) {
+          $message = $me->getMessage();
+          switch ($me->getCode()) {
+              case \MailerException::FailedToConnectToRemoteServer:
+                  $GLOBALS["log"]->fatal("surveyNotHeld :: error sending email, system smtp server is not set");
+                  break;
+              default:
+                  $GLOBALS["log"]->fatal("surveyNotHeld :: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
+                  break;
+          }
+      }
+  }
+
 }
