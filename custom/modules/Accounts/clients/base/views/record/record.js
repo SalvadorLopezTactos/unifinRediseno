@@ -1585,7 +1585,7 @@
         Metodo para validar campos de telefonos y direcciones
      */
     validar_fields:function(valContacto, validar_fields) {
-        var datos_telefonos = this.model.get('account_telefonos');
+        var datos_telefonos = this.oTelefonos.telefono;
         var tipolabel = [];
         var pais = [];
         var estatus = [];
@@ -2007,7 +2007,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
+            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono) ) {
                 app.alert.show("Correo requerido", {
                     level: "error",
                     title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
@@ -2015,7 +2015,7 @@
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-                $('#tabletelefonos').css('border', '3px dotted red');
+                $('#tabletelefonos').css('border', '2px solid red');
                 errors['account_telefonos1'] = errors['account_telefonos1'] || {};
                 errors['account_telefonos1'].required = true;
             }
@@ -2551,8 +2551,8 @@
      * */
     setPhoneOffice: function () {
 
-        if (!_.isEmpty(this.model.get('account_telefonos'))) {
-            var telefono = this.model.get('account_telefonos');
+        if (!_.isEmpty(this.oTelefonos.telefono)) {
+            var telefono = this.oTelefonos.telefono;
             for (var i = 0; i < telefono.length; i++) {
                 if (telefono[i].principal) {
                     //if (telefono[i].pais!='52'){
@@ -2625,21 +2625,21 @@
                 this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', '');
             }
             //Calle
-            if(direccion[iDireccion].calle == ""){
+            if(direccion[iDireccion].calle.trim() == ""){
                 cont++;
                 this.$('.calleExisting').eq(iDireccion).css('border-color', 'red');
             }else{
                 this.$('.calleExisting').eq(iDireccion).css('border-color', '');
             }
             //Número Exterior
-            if(direccion[iDireccion].numext == ""){
+            if(direccion[iDireccion].numext.trim() == ""){
                 cont++;
                 this.$('.numExtExisting').eq(iDireccion).css('border-color', 'red');
             }else{
                 this.$('.numExtExisting').eq(iDireccion).css('border-color', '');
             }
         }
-
+        //Muestra error en direcciones existentes
         if(cont>0){
             app.alert.show("empty_fields_dire", {
                 level: "error",
@@ -2650,88 +2650,99 @@
             errors['dire_direccion_req'].required = true;
 
         }
+
+        //Valida direcciones duplicadas
+        if(direccion.length>0){
+            var coincidencia = 0;
+            var indices=[];
+            for (var i = 0; i < direccion.length; i++) {
+                for (var j = 0; j < direccion.length; j++) {
+                    if (i!=j && direccion[j].calle + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext + direccion[j].pais + direccion[j].postal == direccion[i].calle + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext + direccion[i].pais + direccion[i].postal) {
+                        coincidencia++;
+                        indices.push(i);
+                        indices.push(j);
+                    }
+                }
+            }
+            indices=indices.unique();
+            if (coincidencia > 0) {
+                    app.alert.show('error_direccion_duplicada', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'Existen direcciones iguales,favor de corregir.'
+                    });
+                    //$($input).focus();
+                    if(indices.length>0) {
+                        for (var i = 0; i < indices.length; i++) {
+                            $('.calleExisting').eq(indices[i]).css('border-color', 'red');
+                            $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
+                            $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
+                        }
+                    }
+                    errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
+                    errors['dire_direccion_duplicada'].required = true;
+            }
+        }
+
         callback(null, fields, errors);
     },
 
     validatelefonos: function (fields, errors, callback) {
-        var expreg =/^[0-9]{8,13}$/;
-        var cont=0;
-        var phones=this.model.get('account_telefonos');
-
-        $('.existingTelephono').each(function () {
-            if(!expreg.test($(this).val())){
-                cont++;
-                $(this).css('border-color', 'red');
-                app.alert.show('error_telefono', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Tel\u00E9fono Inv\u00E1lido. Debe contener 8 o m\u00E1s d\u00EDgitos.'
-                });
-                errors['soshort'] = errors['Tel\u00E9fono Inv\u00E1lido. Debe contener 8 o m\u00E1s d\u00EDgitos.'] || {};
-                errors['soshort'].required = true;
+        var msjError = "";
+        var msjErrorT = "";
+        var telefono=this.oTelefonos.telefono;
+        for (iTelefono=0; iTelefono < telefono.length; iTelefono++) {
+            //Valida valor
+            valor4 = telefono[iTelefono].telefono.trim();
+            if(valor4 == ""){
+                msjError += '<br>-Teléfono vacío';
             }else{
-                //funcion
-                var conta=0;
-                for (var i =0; i < $(this).val().length; i++) {
-                    if($(this).val().charAt(0)==$(this).val().charAt(i)){
-                        conta++;
+                //Valida númerico
+                var valNumerico = /^\d+$/;
+                if (!valNumerico.test(valor4)) {
+                    msjError += '<br>-Solo números son permitidos';
+                }
+                //Valida longitud
+                if (valor4.length<8) {
+                    msjError += '<br>-Debe contener 8 o más dígitos';
+                }
+                //Valida números repetidos
+                if(valor4.length > 1){
+                    var repetido = true;
+                    for (var iValor4 = 0; iValor4 < valor4.length; iValor4++) {
+                      repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
+                    }
+                    if (repetido) {
+                        msjError += '<br>-Caracter repetido';
                     }
                 }
-                if(conta==$(this).val().length){
-                        app.alert.show('numero_repetido1', {
-                        level: 'error',
-                        autoClose: true,
-                        messages: 'Tel\u00E9fono Invalido caracter repetido'
-                        });
-                    errors['rep'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
-                    errors['rep'].required = true;
-                    $(this).css('border-color', 'red');
-                }/* else {
-                    $(this).css('border-color', '');
-                } */
             }
-        });
-        var cont=0;
-        $('div[data-name=account_telefonos]').find('.existingPais').each(function () {
-            if($(this).val()==''){
-                cont++;
-                $(this).css('border-color', 'red');
-            }else{
-                $(this).css('border-color', '');
+            // Agerga teléfono a mensaje de error
+            if(msjError != ""){
+                msjErrorT += '<br><b>'+ valor4+'</b> :'+msjError+'<br>';
+                $('.Telefonot').eq(iTelefono).css('border-color', 'red');
             }
-        });
-
-        $('.existingTipotelefono').each(function () {
-            if($(this).val()==''){
-                cont++;
-                $(this).css('border-color', 'red');
-            }else{
-                $(this).css('border-color', '');
-            }
-        });
-        $('.existingEstatus').each(function () {
-            if($(this).val()==''){
-                cont++;
-                $(this).css('border-color', 'red');
-            }else{
-                $(this).css('border-color', '');
-            }
-        });
-
-        if(cont>0){
-            app.alert.show('error_modultel', {
+            msjError = "";
+        }
+        //Muestra errores
+        if(msjErrorT!= ""){
+            app.alert.show('phone_save_error', {
                 level: 'error',
-                autoClose: true,
-                messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
+                autoClose: false,
+                messages: 'Formato de teléfono(s) incorrecto:'+ msjErrorT
             });
-            errors['xd'] = errors['xd'] || {};
-            errors['xd'].required = true;
-        }else {
+            //Agrega errores
+            errors['Tel_Telefonos_numero'] = errors['Tel_Telefonos_numero'] || {};
+            errors['Tel_Telefonos_numero'].required = true;
+        }
+
+        //Valida duplicados
+        if(telefono.length>0){
             var coincidencia = 0;
             var indices=[];
-            for (var i = 0; i < phones.length; i++) {
-                for (var j = 0; j < phones.length; j++) {
-                    if (phones[j].telefono == phones[i].telefono && i!=j) {
+            for (var i = 0; i < telefono.length; i++) {
+                for (var j = 0; j < telefono.length; j++) {
+                    if (telefono[j].telefono == telefono[i].telefono && i!=j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -2742,17 +2753,17 @@
             if (coincidencia > 0) {
                     app.alert.show('error_sametelefono3', {
                         level: 'error',
-                        autoClose: true,
-                        messages: 'Los n\u00FAmeros telef\u00F3nicos que estas intentando guardar son iguales,favor de corregir.'
+                        autoClose: false,
+                        messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
                     });
                     //$($input).focus();
                     if(indices.length>0) {
                         for (var i = 0; i < indices.length; i++) {
-                            $('.existingTelephono').eq(indices[i]).css('border-color', 'red');
+                            $('.Telefonot').eq(indices[i]).css('border-color', 'red');
                         }
                     }
-                    errors['xd'] = errors['xd'] || {};
-                    errors['xd'].required = true;
+                    errors['Tel_Telefonos_duplicado'] = errors['Tel_Telefonos_duplicado'] || {};
+                    errors['Tel_Telefonos_duplicado'].required = true;
             }
         }
         callback(null, fields, errors);

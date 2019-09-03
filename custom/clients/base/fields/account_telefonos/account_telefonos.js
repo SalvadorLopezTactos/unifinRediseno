@@ -91,13 +91,6 @@
                 }
             }
         }
-        else {
-            /*   app.alert.show("N\u00FAmero incorrecto", {
-               level: "error",
-               title: "Formato invalido",
-               autoClose: true
-               });*/
-        }
         return banderTelefono;
     },
 
@@ -159,21 +152,48 @@
             $('.newTelefono').css('border-color', 'red');
             app.alert.show('error_campo_telefono', {
                 level: 'error',
-                autoClose: true,
+                autoClose: false,
                 messages: 'Favor de agregar un <b>Tel\u00E9fono</b>'
             });
             faltantes++;
         }
         if (valor4 != "") {
-            if (!this.validaTamano(valor4)) {
-                $('.newTelefono').css('border-color', 'red');
+            //Control de errores
+            var msjError = "";
+            //Valida númerico
+            var valNumerico = /^\d+$/;
+            if (!valNumerico.test(valor4)) {
                 faltantes++;
-                app.alert.show('phone_ingreasado_error', {
+                msjError += '<br><b>Solo números son permitidos</b>';
+            }
+            //Valida longitud
+            if (valor4.length<8) {
+                faltantes++;
+                msjError += '<br><b>Debe contener 8 o más dígitos</b>';
+            }
+
+            //Valida números repetidos
+            if(valor4.length > 1){
+                var repetido = true;
+                for (var iValor4 = 0; iValor4 < valor4.length; iValor4++) {
+                  repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
+                }
+                if (repetido) {
+                    faltantes++;
+                    msjError += '<br><b>Caracter repetido</b>';
+                }
+            }
+
+            //Muestra errores
+            if(msjError!= ""){
+                $('.newTelefono').css('border-color', 'red');
+                app.alert.show('phone_add_error', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'Formato de tel\u00E9fono incorrecto'
+                    messages: 'No se puede agregar el número:'+ msjError
                 });
             }
+
         }
         if (faltantes == 0) {
             if (cont_tel.oTelefonos.telefono.length >=1) {
@@ -192,7 +212,7 @@
                     app.alert.show('Numero_duplicado', {
                         level: 'error',
                         autoClose: true,
-                        title: "No se puede agregar el número. <br> Ya ha sido registrado."
+                        messages: "No se puede agregar el número: <br> <b>Ya ha sido registrado.</b>"
                     });
                 }
                 else{
@@ -339,19 +359,19 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var telefono = input.val();
-        if ((this.validaTamano(telefono)==false) || (this.validaTamano(telefono) && telefono=="")) {
-            this.$('[data-name="Teléfono"]').eq(index).css('border-color', 'red');
-            app.alert.show('telfono_cuenta_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Formato de tel\u00E9fono incorrecto'
-            });
-            this.$('.Telefonot').eq(index).find('input').val('');
-        }
-        else {
-            this.$('[data-name="Teléfono"]').eq(index).css('border-color', '');
-            this.oTelefonos.telefono[index].telefono = telefono;
-        }
+        // if ((this.validaTamano(telefono)==false) || (this.validaTamano(telefono) && telefono=="")) {
+        //     this.$('[data-name="Teléfono"]').eq(index).css('border-color', 'red');
+        //     app.alert.show('telfono_cuenta_error', {
+        //         level: 'error',
+        //         autoClose: true,
+        //         messages: 'Formato de tel\u00E9fono incorrecto'
+        //     });
+        //     this.$('.Telefonot').eq(index).find('input').val('');
+        // }
+        // else {
+        //     this.$('[data-name="Teléfono"]').eq(index).css('border-color', '');
+        this.oTelefonos.telefono[index].telefono = telefono;
+        //}
         //this.render();
     },
 
