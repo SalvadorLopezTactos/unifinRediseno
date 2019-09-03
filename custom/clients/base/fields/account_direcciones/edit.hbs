@@ -1,193 +1,253 @@
 {{!--
 /*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
+ * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
  */
 --}}
-<h4>Nueva Dirección</h4>
-<div class="control-group direccion">
-    <table class="dashlet direcciondashlet" style="border: solid lightblue; width: 100%;" cellspacing="1" cellpadding="5">
-        <tr>
-            <td valign="top">
-                <div class="record-label">
-                    Tipo
-                </div>
-                <select class="newTipodedireccion hide" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
-                    {{{def.dir_tipo_list_html}}}
-                </select>
-                <select id="multi_tipo" class="select2" style="width: 100%" multiple="multiple" size="3">
-                    {{{def.tipo_direccion_multi_html}}}
-                </select>
-            </td>
-            <td valign="top" style="display:block;">
-                <div class="record-label">
+<script>
+    //Agrega estilo select2
+    this.$('#DireccionesExistente').find('select.select2').select2({
+      width:'100%'
+    });
+    this.$('#DireccionNueva').find('select.select2').select2({
+      width:'100%'
+    });
 
-                    Tipo de direcci&oacute;n
-                </div>
-                <select class="newIndicador hide" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
-                    {{{def.indicador_html}}}
-                </select>
-                <select id="multi1" class="select2" style="width: 100%" multiple="multiple" size="3">
-                    {{{def.indicador_multi_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <!-- <div class="record-label">
-                    Indicador
-                </div>
-                <select id="multi1" class="select2" multiple="multiple" size="3">
-                    {{{def.indicador_multi_html}}}
-                </select> -->
-            </td>
-        </tr>
-        <tr class="rowPem">
-            <td valign="top">
-                <div class="record-label" >
-                    Pais
-                </div>
-                <select class="newPaisDir" data-field="pais" placeholder="pais" style="font-size: 15px;font-weight: 500;width: 90%;margin: 0px;">
-                    {{{def.pais_list_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Estado
-                </div>
-                <select class="newEstado" data-field="estado" placeholder="estado" style="font-size: 15px;font-weight: 500;">
-                    {{{def.estado_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Municipio
-                </div>
-                <select class="newMunicipio" data-field="municipio" placeholder="municipio" style="font-size: 15px;font-weight: 500;">
-                    {{{def.municipio_html}}}
-                </select>
-            </td>
-        </tr>
-        <tr class="rowCPcc">
-            <td valign="top">
-                <div class="record-label" >
-                    Código Postal
-                </div>
-                <select class="newPostal" data-field="codigopostal" placeholder="Codigo Postal" style="font-size: 15px;font-weight: 500;">
-                    {{{postal_html}}}
-                </select>
-                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
-                <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Ciudad
-                </div>
-                <select class="newCiudad" data-field="ciudad" placeholder="ciudad" style="font-size: 15px;font-weight: 500;">
-                    {{{def.ciudad_html}}}
-                </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Colonia
-                </div>
-                <select class="newColonia" data-field="colonia" placeholder="colonia" style="font-size: 15px;font-weight: 500;">
-                    {{{def.colonia_html}}}
-                </select>
-            </td>
-        </tr>
-        <!-- Nueva fila para rediseño de direcciones-->
-        <tr>
-            <td valign="top">
-                <div class="record-label" >
-                    Código Postal
-                </div>
+    //Agrega estilo multiselect
+    this.$('[data-field="multi_tipo_existing"].multi_tipo_existing').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multi1_n_existing"].multi1_n_existing').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multiTipoNew"].multiTipoNew').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    this.$('[data-field="multiIndicadorNew"].multiIndicadorNew').select2({
+        width:'100%',
+        minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
 
-                <!--<select id="postalTemp" class="select2"  data-field="codigopostaltemp" placeholder="Codigo Postal Temp" style="font-size: 15px;font-weight: 500;">-->
-                <!--  {{{def.postal_htmlTemp}}} -->
-                <!--</select>-->
-                <input type="text" id="postalInputTemp" class="select2"/>
-                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
-                <input type="hidden" id="postalHidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    País
-                </div>
-                <select class="newPaisTemp" data-field="paisTemp" placeholder="paisTemp" style="font-size: 15px;font-weight: 500;">
-                    {{{def.pais_list_htmlTemp}}}
-                </select>
-                <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Estado
-                </div>
-                <select class="newEstadoTemp" data-field="estadoTemp" placeholder="estadoTemp" style="font-size: 15px;font-weight: 500;">
-                    {{{def.estado_htmlTemp}}}
-                </select>
-                <i class="fa fa-spinner fa-spin loadingIconEstado" style="display: none"></i>
-            </td>
-        </tr>
+</script>
+<div class="direcciones_list">
+    <!-- Existentes -->
+    <table style="width: 100%;" cellspacing="1" cellpadding="5" id="DireccionesExistente">
+        {{#each oDirecciones.direccion}}
+            <tr style="border-bottom: 1px solid;   border-color:#cfcfcf;">
+                <td>
+                    <div>
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--Fila 1 -->
+                            <div class="span4">
+                                    <label class="record-label">Tipo</label>
+                                    <select class="row-fluid select2 multi_tipo_existing" style="width: 100%" multiple="multiple" size="3" id="multiTipo" data-field="multi_tipo_existing">
+                                        {{#each listTipo}}
+                                            <option value="{{@key}}" {{ifMSelected @key ../tipoSeleccionados}}>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                            </div>
+                             <div class="span4">
+                                    <label class="record-label">Tipo de direcci&oacute;n</label>
+                                    <select class="row-fluid select2 multi1_n_existing" style="width: 100%" multiple="multiple" size="3" id="multiIndicador" data-field="multi1_n_existing">
+                                        {{#each listIndicador}}
+                                        <option value="{{@key}}" {{ifMSelected @key ../indicadorSeleccionados}}>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                              </div>
+                        </div>  <!--Cierre Fila1 -->
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 2-->
+                                        <div class="span4">
+                                            <label class="record-label">Código Postal</label>
+                                            <input type="text" class="postalInputTempExisting" value="{{valCodigoPostal}}">
+                                        </div>
+                                        <div class="span4">
+                                            <label class="record-label">País</label>
+                                            <select class="row-fluid paisExisting select2" data-field="paisExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                                {{#each listPais}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../pais}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="span4">
+                                            <label class="record-label">Estado</label>
+                                            <select class="row-fluid estadoExisting select2" data-field="estadoExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                                {{#each listEstado}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../estado}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                        </div> <!--Cierre Fila 2 -->
+                        <div class="row-fluid" style="margin-top: 10px;"> <!-- Fila 3 -->
+                                <div class="span4">
+                                    <label class="record-label">Municipio</label>
+                                    <select class="row-fluid municipioExisting select2" data-field="municipioExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                        {{#each listMunicipio}}
+                                            <option value="{{@key}}" {{ifSelected @key ../municipio}}>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="span4">
+                                    <label class="record-label">Ciudad</label>
+                                    <select class="row-fluid ciudadExisting select2" data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                        {{#each listCiudad}}
+                                            <option value="{{@key}}" {{ifSelected @key ../ciudad}}>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="span4">
+                                    <label class="record-label">Colonia</label>
+                                    <select class="row-fluid coloniaExisting select2" data-field="coloniaExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                        {{#each listColonia}}
+                                            <option value="{{@key}}" {{ifSelected @key ../colonia}}>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                        </div>  <!-- Cierre Fila 3 -->
+                        <div class="row-fluid" style="margin-top: 10px;"> <!-- Fila 4 -->
+                                <div class="span4">
+                                    <label class="record-label">Calle</label>
+                                    <input type="text" class="calleExisting" placeholder="Calle" value="{{calle}}" data-field="calle"/>
+                                </div>
+                                <div class="span4">
+                                    <label class="record-label">Número Exterior y Número Interior</label>
+                                    <input type="text" class="numExtExisting" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 49%;margin: 0px;">
+                                    <input type="text" class="numIntExisting" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 49%;margin: 0px;">
 
-        <tr>
-            <td valign="top">
-                <div class="record-label" >
-                    Municipio
-                </div>
-                <select class="newMunicipioTemp" data-field="municipioTemp" placeholder="Municipio" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{postal_html}}}-->
-                </select>
-                <i class="fa fa-spinner fa-spin loadingIconMunicipio" style="display: none"></i>
-                <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Ciudad
-                </div>
-                <select class="newCiudadTemp" data-field="ciudadTemp" placeholder="Ciudad" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{def.ciudad_html}}}-->
-                </select>
-                <i class="fa fa-spinner fa-spin loadingIconCiudad" style="display: none"></i>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Colonia
-                </div>
-                <select class="newColoniaTemp" data-field="coloniaTemp" placeholder="Colonia" style="font-size: 15px;font-weight: 500;">
-                    <!--{{{def.colonia_html}}}-->
-                </select>
-                <i class="fa fa-spinner fa-spin loadingIconColonia" style="display: none"></i>
-            </td>
-        </tr>
-
-        <!--fin de fila rediseño de direcciones -->
-        <tr>
-            <td valign="top">
-                <div class="record-label" >
-                    Calle
-                </div>
-                <input type="text" class="newCalle" placeholder="Calle" value="{{calle}}" data-field="calle" style="width: 95%;margin: 0px;"/>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Número Exterior y Número Interior
-                </div>
-                <input type="text" class="newNumExt" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 33%;margin: 0px;">
-                <input type="text" class="newNumInt" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 33%;margin: 0px;">
-            </td>
-            <td>
-                <div class="btn-toolbar prevent-mousedown">
-                    <div class="btn-group">
-                        <a href="javascript:void(0)" class="btn addDireccion" rel="tooltip" title="Add Direccion"><i class="fa fa-check"></i></a>
+                                </div>
+                                <div class="span4">
+                                    <label class="record-label">&nbsp;</label>
+                                        <div class="btn-group" data-toggle="buttons-checkbox">
+                                          <a href="javascript:void(0)" class="btn principal" title="Principal">
+                                              {{#if principal}}
+                                                  <i class="fa fa-star" style="color: #3399FF"></i>
+                                              {{else}}
+                                                  <i class="fa fa-star"></i>
+                                              {{/if}}
+                                          </a>
+                                        </div>
+                                        <div class="btn-group" data-toggle="buttons-checkbox">
+                                          <a href="javascript:void(0)" class="btn inactivo" title="Inactivo">
+                                              {{#if inactivo}}
+                                                  <i class="fa fa-power-off" style="color: #e83e33"></i>
+                                              {{else}}
+                                                  <i class="fa fa-power-off"></i>
+                                              {{/if}}
+                                          </a>
+                                        </div>
+                                </div>
+                        </div>  <!-- Cierre Fila 4-->
                     </div>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+</div>
+<!-- Fin direcciones existentes -->
+<h4>&nbsp; Nueva Dirección</h4>
+<div class="control-group direccion">
+    <table style="border: 2px solid lightblue; width: 100%;" cellspacing="1" cellpadding="5" id="DireccionNueva">
+        <tr>
+            <td>
+                <div>
+                    <div class="row-fluid" style="margin-top: 10px;">  <!--Fila 1 -->
+                       <div class="span4">
+                            <label class="record-label">Tipo</label>
+                            <select id="multiTipoNew" class="row-fluid select2 multiTipoNew" style="width: 100%" multiple="multiple" size="3" data-field="multiTipoNew">
+                                {{#each nuevaDireccion.listTipo}}
+                                    <option value="{{@key}}" {{ifMSelected @key ../nuevaDireccion.tipoSeleccionados}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                       </div>
+
+                        <div class="span4">
+                            <label class="record-label">Tipo de direcci&oacute;n</label>
+                            <select id="multiIndicadorNew" class="row-fluid select2 multiIndicadorNew" style="width: 100%" multiple="multiple" size="3" data-field="multiIndicadorNew">
+                                {{#each nuevaDireccion.listIndicador}}
+                                    <option value="{{@key}}" {{ifMSelected @key ../nuevaDireccion.indicadorSeleccionados}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+                    </div> <!-- Cierra fila 1-->
+                    <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 2-->
+                        <div class="span4">
+                            <label class="record-label">Código Postal</label>
+                            <input type="text" id="newPostalInputTemp" class="newPostalInputTemp" value="{{nuevaDireccion.valCodigoPostal}}">
+                        </div>
+                        <div class="span4">
+                            <label class="record-label">País</label>
+                            <select class="row-fluid newPais select2" data-field="pais" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                {{#each nuevaDireccion.listPais}}
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.pais}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="span4">
+                            <label class="record-label">Estado</label>
+                            <select class="row-fluid newEstado select2" data-field="estado" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                {{#each nuevaDireccion.listEstado}}
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.estado}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div> <!-- Cierra fila 2-->
+                    <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 3-->
+                        <div class="span4">
+                            <label class="record-label">Municipio</label>
+                            <select class="row-fluid newMunicipio select2" data-field="municipio" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                {{#each nuevaDireccion.listMunicipio}}
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.municipio}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="span4">
+                            <label class="record-label">Ciudad</label>
+                            <select class="row-fluid newCiudad select2" data-field="ciudad" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                {{#each nuevaDireccion.listCiudad}}
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.ciudad}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="span4">
+                            <label class="record-label">Colonia</label>
+                            <select class="row-fluid newColonia select2" data-field="colonia" placeholder="" style="font-size: 15px;font-weight: 500;">
+                                {{#each nuevaDireccion.listColonia}}
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.colonia}}>{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div> <!-- Cierra fila 3-->
+                        <div class="row-fluid" style="margin-top: 10px;">  <!--- Fila 4-->
+                            <div class="span4">
+                                <label class="record-label">Calle</label>
+                                <input type="text" class="newCalle" placeholder="Calle" value="{{nuevaDireccion.calle}}" data-field="calle" maxlength = "100"/>
+                            </div>
+                            <div class="span4">
+                                <label class="record-label">Número Exterior y Número Interior</label>
+                                <br>
+                                <input type="text" class="newNumExt" placeholder="numExt" value="{{nuevaDireccion.numext}}" data-field="numext" style="width: 49%;margin: 0px;" maxlength = "50">
+                                <input type="text" class="newNumInt" placeholder="numInt" value="{{nuevaDireccion.numint}}" data-field="numint" style="width: 49%;margin: 0px;" maxlength = "100">
+                            </div>
+                            <div class="span4" style="margin-top: 20px;">
+                                <label class="record-label">&nbsp;</label>
+                                <div class="btn-toolbar prevent-mousedown">
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" class="btn addDireccion" rel="tooltip" title="Add Direccion"><i class="fa fa-check"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Cierra fila 4-->
                 </div>
             </td>
         </tr>
     </table>
 </div>
-{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

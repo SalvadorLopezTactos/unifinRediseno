@@ -238,6 +238,7 @@ SQL;
         // select type | Street (Calle) | primary | inactive
         // populate relationships from dropdowns
 
+        //Nuevo account_direcciones_n
         if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */

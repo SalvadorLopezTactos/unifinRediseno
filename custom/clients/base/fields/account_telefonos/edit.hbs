@@ -1,69 +1,120 @@
-{{!--
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
---}}
-<h4 class="pull-left">Nuevo Teléfono</h4>
-<div class="control-group telefonos">
-    <table class="dashlet" style="border: solid lightblue;min-height: 0px; width: 100%;" cellspacing="1" cellpadding="5">
-        <tr>
-            <td valign="top">
-                <div class="record-label" >
-                    Tipo de Teléfono
-                </div>
-                <select class="newTipotelefono" data-field="tipotelefono" style="font-size: 15px;font-weight: 500;width: 92%" placeholder="Add Tipo">
-                    {{{def.tel_tipo_list_html}}}
+<script>
+    var $selectTelE = this.$('#TelefonosExist').find('select.select2');
+    var $selectTelN = this.$('#tabletelefonos').find('select.select2');
+    $selectTelE.select2();
+    $selectTelN.select2();
+</script>
+<!--Teléfonos existentes -->
+<table id="TelefonosExist" style="width:100%">
+  {{#each oTelefonos.telefono}}
+    <tr style="border-bottom: 1px solid;   border-color:#cfcfcf;">
+      <td>
+        <div>
+          <!-- Fila 1-->
+          <div class="row-fluid" style="margin-top: 10px;">
+            <div class="span4 campo1-tel ">
+              <label class="record-label">Tipo de Teléfono</label>
+              <select class="row-fluid select2 Tipotelefonot updatet" data-field="campo1tel">
+                {{#each ../tel_tipo_list}}
+                  <option value="{{@key}}" {{ifSelected @key ../tipotelefono}}>{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="span4 campo2-tel">
+              <label class="record-label">País</label>
+                <select class="row-fluid select2  Paist updatet" data-field="campo2tel">
+                  {{#each ../pais_list}}
+                    <option value="{{@key}}" {{ifSelected @key ../pais}}>{{this}}</option>
+                  {{/each}}
                 </select>
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    País
-                </div>
-                <select class="newPais" data-field="pais" style="font-size: 15px;font-weight: 500;width: 92%" placeholder="Lada">
-                    {{{def.pais_list_html}}}
-                </select>
-            </td>
-            <td valign="top">
-            </td>
-            <td valign="top">
-            </td>			
-		</tr>
-        <tr>
-            <td valign="top">
-                <div class="record-label" >
-                    Teléfono
-                </div>
-                <input type="text" class="newTelefono" maxlength="13" placeholder="Telefono"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} style="width: 92%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Extensión
-                </div>
-                <input type="text" class="newExtension" maxlength="6" placeholder="Extension" value="{{extension}}" data-field="extension" style="width: 92%;margin: 0px;">
-            </td>
-            <td valign="top">
-                <div class="record-label" >
-                    Estatus
-                </div>
-                <select class="newEstatus" data-field="estatus" style="font-size: 15px;font-weight: 500;width:92%" placeholder="Add Estatus">
-                    {{{def.tel_estatus_list_html}}}
-                </select>
-            </td>
-            <td valign="bottom">
-                <div class="btn-toolbar prevent-mousedown">
-                   <div class="btn-group">
-                      <a href="javascript:void(0)" class="btn addTelefono" rel="tooltip" title="Add Telefono"><i class="fa fa-check"></i></a>
-                   </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-</div>
-{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+            </div>
+            <div class="span4 campo3-tel">
+              <label class="record-label">Estatus</label>
+              <select class="row-fluid select2  Estatust updatet" data-field="campo3tel">
+                {{#each ../estatus_list}}
+                  <option value="{{@key}}" {{ifSelected @key ../estatus}}>{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <!-- Fila 2-->
+          <div class="row-fluid" style="margin-top: 10px;">
+            <div class="campo4-tel span4">
+              <label class="record-label">Teléfono</label>
+              <input type="text" class="Telefonot" placeholder="Teléfono" value="{{telefono}}" data-field="campo4-tel" data-name="Teléfono" maxlength="13"/>
+            </div>
+            <div class="campo4-tel span4" >
+              <label class="record-label">Extensión</label>
+              <input type="text" class="Extensiont" placeholder="Extensión" value="{{extension}}" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
+            </div>
+            <div class="btn-group" style="margin: 15px 37px">
+              <a href="javascript:void(0)" class="btn principal">
+                {{#if principal}}
+                  <i class="fa fa-star" style="color: #3399FF"></i>
+                {{else}}
+                  <i class="fa fa-star"></i>
+                {{/if}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+<!-- Nuevo teléfono-->
+<h4>
+  &nbsp; Nuevo Teléfono
+</h4>
+<table id="tabletelefonos" style="border: 2px solid lightblue; width: 100%;">
+  <tr>
+    <td>
+      <div>
+        <!-- Fila 1 -->
+        <div class="row-fluid">
+          <div class="span4 campo1-tel ">
+            <label class="record-label">Tipo de Teléfono</label>
+            <select class="row-fluid select2  newTipotelefono" data-field="campo1tel">
+              {{#each tel_tipo_list}}
+                <option value="{{@key}}" {{ifSelected @key "1"}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="span4 campo2-tel">
+            <label class="record-label">País</label>
+            <select class="row-fluid select2  newPais" data-field="campo2tel">
+              {{#each pais_list}}
+                <option value="{{@key}}" {{ifSelected @key "2"}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="span4 campo3-tel">
+            <label class="record-label">Estatus</label>
+            <select class="row-fluid select2  newEstatus" data-field="campo3tel">
+              {{#each estatus_list}}
+                <option value="{{@key}}" {{ifSelected @key "Activo"}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <!-- Fila 2 -->
+        <div class="row-fluid" style="margin-top: 10px;">
+          <div class="campo4-tel span4">
+            <label class="record-label">Teléfono</label>
+            <input type="text" class="newTelefono" placeholder="Teléfono" data-field="campo4-tel" data-name="Teléfono" maxlength="13"/>
+          </div>
+          <div class="campo4-tel span4" >
+            <label class="record-label">Extensión</label>
+            <input type="text" class="newExtension" placeholder="Extensión" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
+          </div>
+          <div class="btn-toolbar prevent-mousedown span4">
+            <div class="btn-group" style="margin: 6px 0px">
+              <a href="javascript:void(0)" class="btn addTelefono" rel="tooltip" title="Añadir Teléfono"><i class="fa fa-check"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

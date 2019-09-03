@@ -14,7 +14,26 @@
 
     initialize: function (options) {
         self = this;
+        contexto_cuenta = this;
+
         this._super("initialize", [options]);
+
+        /*
+          Contexto campos custom
+        */
+        //Teléfonos
+        this.oTelefonos = [];
+        this.oTelefonos.telefono = [];
+        this.prev_oTelefonos=[];
+        this.prev_oTelefonos.prev_telefono=[];
+
+        //Direcciones
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones=[];
+        this.prev_oDirecciones.prev_direccion=[];
+
+
         this.enableDuplicateCheck = true;
 
         //Funcion que quita los años futuros y menores a -5 del año actual
@@ -87,6 +106,7 @@
         /* END */
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
 
         this.enableDuplicateCheck = true;
 
@@ -451,7 +471,7 @@
 
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
-            if (_.isEmpty(this.model.get('account_direcciones'))) {
+            if (_.isEmpty(this.oDirecciones.direccion)) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
                 $('.direcciondashlet').css('border-color', 'red');
@@ -1241,7 +1261,7 @@
                errors['account_telefonos'] = errors['account_telefonos'] || {};
                errors['account_telefonos'].required = true;
            }
-           if (this.model.get('account_direcciones') == "" || this.model.get('account_direcciones') == undefined) {
+           if (this.oDirecciones.direccion == "" || this.oDirecciones.direccion == undefined) {
                errors['account_direcciones'] = errors['account_direcciones'] || {};
                errors['account_direcciones'].required = true;
            }
@@ -1347,7 +1367,7 @@
                     $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
                 var direcciones= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     for(var i=0;i<tipodireccion.length;i++){
                         if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
@@ -1393,7 +1413,7 @@
                     $('[name=rfc_c]').css('border-color', 'red');
                 }
                 var direccionesm= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     direccionesm++;
                 }
@@ -1438,6 +1458,15 @@
                     break;
             }
         }
+    },
+
+    setCustomFields:function (fields, errors, callback){
+        //Teléfonos
+        this.model.set('account_telefonos',this.oTelefonos.telefono);
+        //Direcciones
+        this.model.set('account_direcciones',this.oDirecciones.direccion);
+
+        callback(null, fields, errors);
     },
 
     quitaanos: function(){

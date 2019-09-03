@@ -23,9 +23,9 @@ class GetDireccionesCP extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('DireccionesCP', '?'),
+                'path' => array('DireccionesCP', '?','?'),
                 //endpoint variables
-                'pathVars' => array('module', 'cp'),
+                'pathVars' => array('module', 'cp','indice'),
                 //method to call
                 'method' => 'getAddressByCP',
                 //short help string to be displayed in the help documentation
@@ -53,7 +53,7 @@ class GetDireccionesCP extends SugarApi
     {
 
         $cp=$args['cp'];
-
+        $indice= (strval($args['indice'])=="")? "0" : $args['indice'];
 
         $query = "SELECT
   cp.id                                                   AS idCP,
@@ -146,6 +146,7 @@ WHERE cp.name = '{$cp}'";
         }
 
         $arrPadre['idCP']=$idCP;
+        $arrPadre['indice']=$indice;
 
         return $arrPadre;
 
