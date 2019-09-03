@@ -1380,11 +1380,11 @@
         //Valida Ciudad
         /*
         console.log('Validación Ciudad');
-        //var direcciones = this.model.get('account_direcciones');
+        //var direcciones = this.oDirecciones.direccion;
         if(direcciones != undefined){
 
             for (i = 0; i < direcciones.length; i++) {
-                if (direcciones[i].ciudad_seleccionada == '1' || direcciones[i].ciudad_seleccionada == null || direcciones[i].ciudad_seleccionada == '') {
+                if (direcciones[i].ciudad == '1' || direcciones[i].ciudad == null || direcciones[i].ciudad == '') {
                     errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
                     errors[$(".account_direcciones")].required = true;
                     app.alert.show("Direccion requerida", {
@@ -1401,12 +1401,12 @@
 
         //Valida Colonia
         //console.log('Validación Colonia');
-        //var direcciones = this.model.get('account_direcciones');
+        //var direcciones = this.oDirecciones.direccion;
         /*
         if(direcciones !=undefined){
 
             for (i = 0; i < direcciones.length; i++) {
-                if (direcciones[i].colonia_seleccionada == '1' || direcciones[i].colonia_seleccionada == null || direcciones[i].colonia_seleccionada == '') {
+                if (direcciones[i].colonia == '1' || direcciones[i].colonia == null || direcciones[i].colonia == '') {
                     errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
                     errors[$(".account_direcciones")].required = true;
                     app.alert.show("Direccion requerida", {
@@ -1446,7 +1446,7 @@
                     console.log('Validacion Dir.Nacional');
                     var direcciones = this.oDirecciones.direccion;
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais_seleccionado == 2) {
+                        if (direcciones[i].pais == 2) {
                             nacional = 1;
                         }
                     }
@@ -1589,7 +1589,7 @@
         var tipolabel = [];
         var pais = [];
         var estatus = [];
-        var datos_dirreciones = this.model.get('account_direcciones');
+        var datos_dirreciones = this.oDirecciones.direccion;
         var tipolabel2 = [];
         var cp = [];
         var municipio = [];
@@ -1606,16 +1606,16 @@
             estatus.push(datos_telefonos[i].estatus);
         }
         for (var i = 0; i < datos_dirreciones.length; i++) {
-            tipolabel2.push(datos_dirreciones[i].tipo_seleccionado_hide_label);
-            cp.push(datos_dirreciones[i].postal_hidden);
-            municipio.push(datos_dirreciones[i].municipio_seleccionado);
+            tipolabel2.push(datos_dirreciones[i].tipodedireccion);
+            cp.push(datos_dirreciones[i].postal);
+            municipio.push(datos_dirreciones[i].municipio);
             calle.push(datos_dirreciones[i].calle);
-            indicador.push(datos_dirreciones[i].indicador_seleccionado_hide);
-            ciudad.push(datos_dirreciones[i].ciudad_seleccionada);
+            indicador.push(datos_dirreciones[i].indicador);
+            ciudad.push(datos_dirreciones[i].ciudad);
             numext.push(datos_dirreciones[i].numext);
             numint.push(datos_dirreciones[i].numint);
-            estado.push(datos_dirreciones[i].estado_seleccionado);
-            colonia.push(datos_dirreciones[i].colonia_seleccionada);
+            estado.push(datos_dirreciones[i].estado);
+            colonia.push(datos_dirreciones[i].colonia);
         }
         var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
         var allfields2=[];
@@ -2604,14 +2604,14 @@
         var direccion = this.oDirecciones.direccion;
         for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
             //Tipo
-            if(direccion[iDireccion].tipo_seleccionado_hide == ""){
+            if(direccion[iDireccion].tipodedireccion == ""){
                 cont++;
                 this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
             }else{
                 this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
             }
             //Indicador
-            if(direccion[iDireccion].indicador_seleccionado_hide == ""){
+            if(direccion[iDireccion].indicador == ""){
                 cont++;
                 this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
             }else{
@@ -2863,14 +2863,14 @@
         if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
 
 
-            var value = this.model.get('account_direcciones');
+            var value = this.oDirecciones.direccion;
             var totalindicadores = "";
 
             if(value != undefined){
 
                 for (i=0; i < value.length; i++) {
                     console.log("Valida Cedente");
-                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    var valorecupera = this._getIndicador(value[i].indicador);
                     totalindicadores = totalindicadores + "," + valorecupera;
 
                 }
@@ -3836,32 +3836,32 @@
 
                         //Parsea a objeto direccion
                         var direccion = {
-                            "tipo_seleccionado_hide":tipo,
+                            "tipodedireccion":tipo,
                             "listTipo":listTipo,
                             "tipoSeleccionados":tipoSeleccionados,
-                            "indicador_seleccionado_hide":indicador,
+                            "indicador":indicador,
                             "listIndicador": listIndicador,
                             "indicadorSeleccionados":indicadorSeleccionados,
                             "valCodigoPostal":valCodigoPostal,
-                            "postal_hidden":idCodigoPostal,
+                            "postal":idCodigoPostal,
                             "valPais":valPais,
-                            "pais_seleccionado":idPais,
+                            "pais":idPais,
                             "listPais":{},
                             "listPaisFull":{},
                             "valEstado":valEstado,
-                            "estado_seleccionado":idEstado,
+                            "estado":idEstado,
                             "listEstado":{},
                             "listEstadoFull":{},
                             "valMunicipio":valMunicipio,
-                            "municipio_seleccionado":idMunicipio,
+                            "municipio":idMunicipio,
                             "listMunicipio":{},
                             "listMunicipioFull":{},
                             "valCiudad":valCiudad,
-                            "ciudad_seleccionada":idCiudad,
+                            "ciudad":idCiudad,
                             "listCiudad":{},
                             "listCiudadFull":{},
                             "valColonia":valColonia,
-                            "colonia_seleccionada":idColonia,
+                            "colonia":idColonia,
                             "listColonia":{},
                             "listColoniaFull":{},
                             "calle":calle,

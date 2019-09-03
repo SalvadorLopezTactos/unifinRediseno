@@ -471,7 +471,7 @@
 
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
-            if (_.isEmpty(this.model.get('account_direcciones'))) {
+            if (_.isEmpty(this.oDirecciones.direccion)) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
                 $('.direcciondashlet').css('border-color', 'red');
@@ -1261,7 +1261,7 @@
                errors['account_telefonos'] = errors['account_telefonos'] || {};
                errors['account_telefonos'].required = true;
            }
-           if (this.model.get('account_direcciones') == "" || this.model.get('account_direcciones') == undefined) {
+           if (this.oDirecciones.direccion == "" || this.oDirecciones.direccion == undefined) {
                errors['account_direcciones'] = errors['account_direcciones'] || {};
                errors['account_direcciones'].required = true;
            }
@@ -1367,7 +1367,7 @@
                     $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
                 var direcciones= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     for(var i=0;i<tipodireccion.length;i++){
                         if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
@@ -1413,7 +1413,7 @@
                     $('[name=rfc_c]').css('border-color', 'red');
                 }
                 var direccionesm= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     direccionesm++;
                 }

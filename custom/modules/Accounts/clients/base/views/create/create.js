@@ -1231,7 +1231,7 @@
 
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
-            if (_.isEmpty(this.model.get('account_direcciones'))) {
+            if (_.isEmpty(this.oDirecciones.direccion)) {
                 //errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 //errors[$(".addDireccion")].required = true;
                 errors['account_direcciones'] = errors['account_direcciones'] || {};
@@ -1249,9 +1249,9 @@
                     var nacional = 0;
                     console.log('Validacion Dir.Nacional');
                     console.log(direcciones);
-                    var direcciones = this.model.get('account_direcciones');
+                    var direcciones = this.oDirecciones.direccion;
                     for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais_seleccionado == 2) {
+                        if (direcciones[i].pais == 2) {
                             nacional = 1;
                         }
                     }
@@ -1821,14 +1821,14 @@
         if ( this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
 
 
-            var value = this.model.get('account_direcciones');
+            var value = this.oDirecciones.direccion;
             var totalindicadores = "";
 
             if(value != undefined){
 
                 for (i=0; i < value.length; i++) {
                     console.log("Valida Cedente");
-                    var valorecupera = this._getIndicador(value[i].indicador_seleccionado_hide);
+                    var valorecupera = this._getIndicador(value[i].indicador);
                     totalindicadores = totalindicadores + "," + valorecupera;
 
                 }
@@ -2453,7 +2453,7 @@
                     $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
                 var direcciones= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     for(var i=0;i<tipodireccion.length;i++){
                         if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
@@ -2499,7 +2499,7 @@
                     $('[name=rfc_c]').css('border-color', 'red');
                 }
                 var direccionesm= 0;
-                var tipodireccion= this.model.get('account_direcciones');
+                var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     direccionesm++;
                 }
