@@ -557,7 +557,7 @@
         }
 
         //Código postal
-        if (this.nuevaDireccion.valCodigoPostal == "") {
+        if (this.nuevaDireccion.valCodigoPostal == "" || this.nuevaDireccion.valCodigoPostal.trim()=="") {
             errorMsg += '<br><b>Código Postal</b>';
             dirError = true;
             dirErrorCounter++;
@@ -567,7 +567,7 @@
         }
 
         //Calle
-        if (this.nuevaDireccion.calle == "") {
+        if (this.nuevaDireccion.calle == "" || this.nuevaDireccion.calle.trim()=="") {
             errorMsg += '<br><b>Calle</b>';
             dirError = true;
             dirErrorCounter++;
@@ -577,7 +577,7 @@
         }
 
         //Num Ext
-        if (this.nuevaDireccion.numext == "") {
+        if (this.nuevaDireccion.numext == "" || this.nuevaDireccion.numext.trim()=="") {
             errorMsg += '<br><b>Número Exterior</b>';
             dirError = true;
             dirErrorCounter++;
@@ -598,6 +598,7 @@
 
         //Valida duplicado, nueva dirección contra direcciones existente
         var duplicado = 0 ;
+        var cDuplicado = 0;
         var cDireccionFiscal = 0;
         var direccion = cont_dir.oDirecciones.direccion;
         Object.keys(direccion).forEach(key => {
@@ -614,14 +615,18 @@
             cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2')) ? cDireccionFiscal+1 : cDireccionFiscal;
             //Valida duplicado
             if(duplicado == 8){
-                app.alert.show('nueva_direccion_duplicada', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'La dirección ya existe, favor de validar.'
-                });
-                return;
+                cDuplicado++;
             }
         });
+        //Muestra error
+        if (cDuplicado>=1) {
+            app.alert.show('nueva_direccion_duplicada', {
+                level: 'error',
+                autoClose: true,
+                messages: 'La dirección ya existe, favor de validar.'
+            });
+            return;
+        }
 
         //Valida multiples direcciones fiscales
         if(cDireccionFiscal >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('2')){
