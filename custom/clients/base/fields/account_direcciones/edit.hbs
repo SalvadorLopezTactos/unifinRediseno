@@ -73,7 +73,7 @@
                                             <label class="record-label">País</label>
                                             <select class="row-fluid paisExisting select2" data-field="paisExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                                 {{#each listPais}}
-                                                    <option value="{{@key}}" {{ifSelected @key ../pais_seleccionado}}>{{this}}</option>
+                                                    <option value="{{@key}}" {{ifSelected @key ../pais}}>{{this}}</option>
                                                 {{/each}}
                                             </select>
                                         </div>
@@ -81,7 +81,7 @@
                                             <label class="record-label">Estado</label>
                                             <select class="row-fluid estadoExisting select2" data-field="estadoExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                                 {{#each listEstado}}
-                                                    <option value="{{@key}}" {{ifSelected @key ../estado_seleccionado}}>{{this}}</option>
+                                                    <option value="{{@key}}" {{ifSelected @key ../estado}}>{{this}}</option>
                                                 {{/each}}
                                             </select>
                                         </div>
@@ -91,7 +91,7 @@
                                     <label class="record-label">Municipio</label>
                                     <select class="row-fluid municipioExisting select2" data-field="municipioExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                         {{#each listMunicipio}}
-                                            <option value="{{@key}}" {{ifSelected @key ../municipio_seleccionado}}>{{this}}</option>
+                                            <option value="{{@key}}" {{ifSelected @key ../municipio}}>{{this}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -99,7 +99,7 @@
                                     <label class="record-label">Ciudad</label>
                                     <select class="row-fluid ciudadExisting select2" data-field="ciudadExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                         {{#each listCiudad}}
-                                            <option value="{{@key}}" {{ifSelected @key ../ciudad_seleccionada}}>{{this}}</option>
+                                            <option value="{{@key}}" {{ifSelected @key ../ciudad}}>{{this}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -107,7 +107,7 @@
                                     <label class="record-label">Colonia</label>
                                     <select class="row-fluid coloniaExisting select2" data-field="coloniaExisting" placeholder="" style="font-size: 15px;font-weight: 500;">
                                         {{#each listColonia}}
-                                            <option value="{{@key}}" {{ifSelected @key ../colonia_seleccionada}}>{{this}}</option>
+                                            <option value="{{@key}}" {{ifSelected @key ../colonia}}>{{this}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -187,7 +187,7 @@
                             <label class="record-label">País</label>
                             <select class="row-fluid newPais select2" data-field="pais" placeholder="" style="font-size: 15px;font-weight: 500;">
                                 {{#each nuevaDireccion.listPais}}
-                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.pais_seleccionado}}>{{this}}</option>
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.pais}}>{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -195,7 +195,7 @@
                             <label class="record-label">Estado</label>
                             <select class="row-fluid newEstado select2" data-field="estado" placeholder="" style="font-size: 15px;font-weight: 500;">
                                 {{#each nuevaDireccion.listEstado}}
-                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.estado_seleccionado}}>{{this}}</option>
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.estado}}>{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -205,7 +205,7 @@
                             <label class="record-label">Municipio</label>
                             <select class="row-fluid newMunicipio select2" data-field="municipio" placeholder="" style="font-size: 15px;font-weight: 500;">
                                 {{#each nuevaDireccion.listMunicipio}}
-                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.municipio_seleccionado}}>{{this}}</option>
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.municipio}}>{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -213,7 +213,7 @@
                             <label class="record-label">Ciudad</label>
                             <select class="row-fluid newCiudad select2" data-field="ciudad" placeholder="" style="font-size: 15px;font-weight: 500;">
                                 {{#each nuevaDireccion.listCiudad}}
-                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.ciudad_seleccionada}}>{{this}}</option>
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.ciudad}}>{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -221,7 +221,7 @@
                             <label class="record-label">Colonia</label>
                             <select class="row-fluid newColonia select2" data-field="colonia" placeholder="" style="font-size: 15px;font-weight: 500;">
                                 {{#each nuevaDireccion.listColonia}}
-                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.colonia_seleccionada}}>{{this}}</option>
+                                    <option value="{{@key}}" {{ifSelected @key ../nuevaDireccion.colonia}}>{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
