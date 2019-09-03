@@ -27,6 +27,12 @@
         this.prev_oTelefonos=[];
         this.prev_oTelefonos.prev_telefono=[];
 
+        //Direcciones
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones=[];
+        this.prev_oDirecciones.prev_direccion=[];
+
 
         this.enableDuplicateCheck = true;
 
@@ -34,7 +40,6 @@
         this.quitaanos();
         this.model.on("change:tct_ano_ventas_ddw_c", _.bind(this.quitaanos, this));
         //add validation tasks
-        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
@@ -101,6 +106,7 @@
         /* END */
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
 
         this.enableDuplicateCheck = true;
 
@@ -1457,6 +1463,8 @@
     setCustomFields:function (fields, errors, callback){
         //Teléfonos
         this.model.set('account_telefonos',this.oTelefonos.telefono);
+        //Direcciones
+        this.model.set('account_direcciones',this.oDirecciones.direccion);
 
         callback(null, fields, errors);
     },

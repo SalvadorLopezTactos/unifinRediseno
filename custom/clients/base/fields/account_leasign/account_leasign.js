@@ -50,7 +50,7 @@
     this.sortAnexoContratacion = "ASC";
     this.sortAnexoTerminacion = "ASC";
 
-    this.model.on('sync', this.loadData, this);
+    //this.model.on('sync', this.loadData, this);
   },
 
   loadData: function(options){

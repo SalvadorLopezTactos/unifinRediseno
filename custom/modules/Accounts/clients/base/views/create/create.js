@@ -1,4 +1,3 @@
-
 /**
  * Created by Jorge on 6/16/2015.
  */
@@ -129,16 +128,17 @@
 
 
     handleCancel: function () {
-        var account_telefonos = cont_tel.prev_oTelefonos.telefono;
-        var account_direcciones = this.model._previousAttributes.account_direcciones;
         this._super("handleCancel");
+        var account_telefonos = cont_tel.prev_oTelefonos.telefono;
+        var account_direcciones = cont_dir.prev_oDirecciones.direccion;;
         this.model.set('account_telefonos', account_telefonos);
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
         cont_tel.oTelefonos.telefono = account_telefonos;
+        cont_dir.oDirecciones.direccion = account_direcciones;
         cont_tel.render();
-
+        cont_dir.render();
         $('.select2-choices').css('border-color', '');
     },
 
@@ -344,6 +344,11 @@
         this.oTelefonos.telefono = [];
         this.prev_oTelefonos=[];
         this.prev_oTelefonos.prev_telefono=[];
+        //Direcciones
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones=[];
+        this.prev_oDirecciones.prev_direccion=[];
 
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
@@ -351,7 +356,6 @@
         this.model.on("change:tipo_registro_c", this._hideGuardar, this);
 
         //add validation tasks
-        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
@@ -639,7 +643,7 @@
         this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
-
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
 
     },
 
@@ -2543,6 +2547,8 @@
     setCustomFields:function (fields, errors, callback){
         //Teléfonos
         this.model.set('account_telefonos',this.oTelefonos.telefono);
+        //Direcciones
+        this.model.set('account_direcciones',this.oDirecciones.direccion);
 
         callback(null, fields, errors);
     },
