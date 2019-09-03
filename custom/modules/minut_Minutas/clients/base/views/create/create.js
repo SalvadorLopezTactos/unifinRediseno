@@ -325,7 +325,7 @@
                                 callback(null, fields, errors);
                             }, this)
                     });
-            }  
+            }
         }else{
             callback(null, fields, errors);
         }
@@ -652,6 +652,7 @@
               if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
                   //Genera apertura de encuesta
                   var sugarHost = window.location.origin+window.location.pathname + "survey_submission.php?q=";
+                  sugarHost = sugarHost.replace(/index.php/gi, "");
                   var url = "";
                   if (self.urlEncuesta == undefined || self.urlEncuesta == null) {
                       //Genera petición para obtener url de encuesta
