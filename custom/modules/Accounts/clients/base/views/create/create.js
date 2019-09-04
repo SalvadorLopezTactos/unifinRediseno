@@ -349,6 +349,12 @@
         this.oDirecciones.direccion = [];
         this.prev_oDirecciones=[];
         this.prev_oDirecciones.prev_direccion=[];
+        //v360
+        this.ResumenCliente = [];
+        //PLD
+        this.ProductosPLD = [];
+        this.prev_ProductosPLD=[];
+
 
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
@@ -873,7 +879,7 @@
                     }
                 }
             }
-            indices=indices.unique();
+            //indices=indices.unique();
             if (coincidencia > 0) {
                     app.alert.show('error_sametelefono3', {
                         level: 'error',
@@ -959,7 +965,7 @@
                   }
               }
           }
-          indices=indices.unique();
+          //indices=indices.unique();
           if (coincidencia > 0) {
                   app.alert.show('error_direccion_duplicada', {
                       level: 'error',

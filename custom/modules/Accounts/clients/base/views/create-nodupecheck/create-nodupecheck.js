@@ -33,6 +33,13 @@
         this.prev_oDirecciones=[];
         this.prev_oDirecciones.prev_direccion=[];
 
+        //v360
+        this.ResumenCliente = [];
+
+        //PLD
+        this.ProductosPLD = [];
+        this.prev_ProductosPLD=[];
+
 
         this.enableDuplicateCheck = true;
 
@@ -548,7 +555,7 @@
                     }
                 }
             }
-            indices=indices.unique();
+            //indices=indices.unique();
             if (coincidencia > 0) {
                     app.alert.show('error_direccion_duplicada', {
                         level: 'error',
@@ -1264,7 +1271,7 @@
                     }
                 }
             }
-            indices=indices.unique();
+            //indices=indices.unique();
             if (coincidencia > 0) {
                     app.alert.show('error_sametelefono3', {
                         level: 'error',
@@ -1336,11 +1343,11 @@
                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                errors['actividadeconomica_c'].required = true;
            }
-           if (this.$('.existingTipotelefono').val() == "" || this.$('.existingTipotelefono').val() == undefined || this.$('.existingTipotelefono') == null) {
+           if (this.oTelefonos.telefono.length == 0) {
                errors['account_telefonos'] = errors['account_telefonos'] || {};
                errors['account_telefonos'].required = true;
            }
-           if (this.oDirecciones.direccion == "" || this.oDirecciones.direccion == undefined) {
+           if (this.oDirecciones.direccion.length == 0) {
                errors['account_direcciones'] = errors['account_direcciones'] || {};
                errors['account_direcciones'].required = true;
            }

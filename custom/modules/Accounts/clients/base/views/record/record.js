@@ -219,6 +219,8 @@
         this.get_phones();
         this.get_addresses();
         this.get_v360();
+        this.get_pld();
+        //this.get_noviable();
 
 
         //Funcion para eliminar duplicados de arrays
@@ -2664,7 +2666,7 @@
                     }
                 }
             }
-            indices=indices.unique();
+            //indices=indices.unique();
             if (coincidencia > 0) {
                     app.alert.show('error_direccion_duplicada', {
                         level: 'error',
@@ -2749,7 +2751,7 @@
                     }
                 }
             }
-            indices=indices.unique();
+            //indices=indices.unique();
             if (coincidencia > 0) {
                     app.alert.show('error_sametelefono3', {
                         level: 'error',
@@ -3747,7 +3749,7 @@
         this.oTelefonos.telefono = [];
         this.prev_oTelefonos=[];
         this.prev_oTelefonos.prev_telefono=[];
-        contexto_cuenta = this;
+        //contexto_cuenta = this;
         this.model.set('account_telefonos',this.oTelefonos.telefono);
         //Recupera información
         idCuenta = this.model.get('id');
@@ -3939,11 +3941,6 @@
                                         }
                                     }
                                 }
-                                // for (var i = 0; i < ciudades.length; i++) {
-                                //     if (ciudades[i].estado_id == contexto_cuenta.oDirecciones.direccion[data.indice].idEstado) {
-                                //         listCiudad[ciudades[i].id] = ciudades[i].name;
-                                //     }
-                                // }
                                 contexto_cuenta.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
                                 contexto_cuenta.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
 
@@ -3968,7 +3965,7 @@
     get_v360: function(){
         //Extiende This
         this.ResumenCliente = [];
-        contexto_cuenta = this;
+        //contexto_cuenta = this;
 
         //Recupera id de cliente
         var id = this.model.id;
@@ -3978,15 +3975,55 @@
             //Ejecuta petición ResumenCliente
             var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
             app.api.call('GET', url, {},{
-              success: function (data){
+              success: _.bind(function (data) {
                   v360.ResumenCliente = data;
                   //_.extend(this, v360.ResumenCliente);
                   v360.render();
-              }
+              }, contexto_cuenta)
             });
         }
 
 
+    },
+
+    get_pld: function(){
+        //Extiende This
+        this.ProductosPLD = [];
+        this.prev_ProductosPLD=[];
+        //Recupera id Cuenta
+        var idCuenta = this.model.get('id');
+        //Recupera información de PLD
+        if (idCuenta) {
+            app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
+                success: _.bind(function (data) {
+                    //Recupera resultado
+                    contexto_cuenta.ProductosPLD = pld.formatDetailPLD(data);
+                    //Establece visibilidad por tipo de productos
+                    //AP
+                    if (App.user.attributes.tipodeproducto_c == '1') {
+                        contexto_cuenta.ProductosPLD.arrendamientoPuro.visible = 'block';
+                    }
+                    //FF
+                    if (App.user.attributes.tipodeproducto_c == '4') {
+                        contexto_cuenta.ProductosPLD.factorajeFinanciero.visible = 'block';
+                    }
+                    //CA
+                    if (App.user.attributes.tipodeproducto_c == '3') {
+                        contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
+                    }
+                    //Genera objeto con valores previos para control de cancelar
+                    contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
+                    pld.ProductosPLD = contexto_cuenta.ProductosPLD;
+
+                    //Aplica render a campo custom
+                    pld.render();
+
+                }, contexto_cuenta),
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
     },
 
     setCustomFields:function (fields, errors, callback){
