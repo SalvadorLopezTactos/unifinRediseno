@@ -913,6 +913,13 @@
     			$('div[data-name=email]').show();
     			$('div[data-name=account_direcciones]').show();
     		}
+
+        //Evento para validar acciones
+        $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
+            contexto_cuenta.hideButton_Conversion_change();
+        });
+
+
     },
 
     hideconfiinfo:function () {
@@ -1066,10 +1073,6 @@
       * con las condiciones de visibilidad .
       * */
     hideButton_Conversion: function () {
-
-        // var hideButton1 = this.getField('regresalead');
-        // var hideButton2 = this.getField('prospectocontactado');
-
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
@@ -1125,8 +1128,49 @@
                 myField1.hide();
             });
         }
-
     },
+
+    hideButton_Conversion_change: function () {
+        //oculta botones
+        $('[name="regresalead"]').hide();
+        $('[name="prospectocontactado"]').hide();
+        $('[name="conviertelead"]').hide();
+
+        //Evaluación para mostrar botones
+        /*
+          * Regresar a lead:
+          * tipo_registro_c = Prospecto
+          * && subtipo_cuenta_c = Contactado
+        */
+        if (contexto_cuenta.model.get('tipo_registro_c') == "Prospecto" && contexto_cuenta.model.get('subtipo_cuenta_c') == "Contactado") {
+            $('[name="regresalead"]').show();
+            $('[name="prospectocontactado"]').hide();
+            $('[name="conviertelead"]').hide();
+        }
+
+        //Evaluación para mostrar botones
+        /*
+        * Prospecto contactado:
+        * tipo_registro_c = Lead
+        */
+        if (contexto_cuenta.model.get('tipo_registro_c') == 'Lead') {
+            $('[name="regresalead"]').hide();
+            $('[name="prospectocontactado"]').show();
+            $('[name="conviertelead"]').hide();
+        }
+
+        /*
+        * Conviert a Lead:
+        * tipo_registro_c = Persona
+        * OR tipo_registro_c = Proveedor
+        */
+        if (contexto_cuenta.model.get('tipo_registro_c') == 'Persona' || contexto_cuenta.model.get('tipo_registro_c') == 'Proveedor') {
+            $('[name="regresalead"]').hide();
+            $('[name="prospectocontactado"]').hide();
+            $('[name="conviertelead"]').show();
+        }
+    },
+
 
 
     /* @author F. Javier Garcia S. 10/07/2018
@@ -1392,54 +1436,7 @@
                 }
 
             }
-
-
         }
-
-        //Valida Ciudad
-        /*
-        console.log('Validación Ciudad');
-        //var direcciones = this.oDirecciones.direccion;
-        if(direcciones != undefined){
-
-            for (i = 0; i < direcciones.length; i++) {
-                if (direcciones[i].ciudad == '1' || direcciones[i].ciudad == null || direcciones[i].ciudad == '') {
-                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                    errors[$(".account_direcciones")].required = true;
-                    app.alert.show("Direccion requerida", {
-                        level: "error",
-                        title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                        autoClose: false
-                    });
-                }
-            }
-
-        }
-        */
-
-
-        //Valida Colonia
-        //console.log('Validación Colonia');
-        //var direcciones = this.oDirecciones.direccion;
-        /*
-        if(direcciones !=undefined){
-
-            for (i = 0; i < direcciones.length; i++) {
-                if (direcciones[i].colonia == '1' || direcciones[i].colonia == null || direcciones[i].colonia == '') {
-                    errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
-                    errors[$(".account_direcciones")].required = true;
-                    app.alert.show("Direccion requerida", {
-                        level: "error",
-                        title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
-                        autoClose: false
-                    });
-                }
-            }
-
-
-        }
-        */
-
         //Return
         callback(null, fields, errors);
     },
@@ -1521,6 +1518,10 @@
             level: 'success',
             messages: 'Cambio realizado',
         });
+        //Actualiza modelo vista v360
+        v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
+        v360.render();
+
 
     },
 
@@ -1706,6 +1707,9 @@
                 level: 'success',
                 messages: 'Cambio realizado',
             });
+            //Actualiza modelo vista v360
+            v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
+            v360.render();
         }
     },
     /* @Jesus Carrillo
@@ -2010,13 +2014,14 @@
                     this.model.set("subtipo_cuenta_list", "En Calificacion");
 					          //this.model.set("show_panel_c",0);
                     this.model.save();
-                    console.log ('Guarda a Lead');
                     app.alert.show('success', {
                         level: 'success',
                         messages: 'Proceso Finalizado.',
 
                     });
-                    this.render();
+                    //this.render();
+                    v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
+                    v360.render();
 
                 }, this)
             });
@@ -2680,7 +2685,7 @@
             var indices=[];
             for (var i = 0; i < direccion.length; i++) {
                 for (var j = 0; j < direccion.length; j++) {
-                    if (i!=j && direccion[j].calle + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext + direccion[j].pais + direccion[j].postal == direccion[i].calle + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext + direccion[i].pais + direccion[i].postal) {
+                    if (i!=j && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);

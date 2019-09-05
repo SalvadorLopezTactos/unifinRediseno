@@ -600,6 +600,7 @@
         var duplicado = 0 ;
         var cDuplicado = 0;
         var cDireccionFiscal = 0;
+        var cDireccionAdmin = 0;
         var direccion = cont_dir.oDirecciones.direccion;
         Object.keys(direccion).forEach(key => {
             //Compara
@@ -610,9 +611,10 @@
             duplicado = (direccion[key].municipio == this.nuevaDireccion.municipio) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].ciudad == this.nuevaDireccion.ciudad) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].colonia == this.nuevaDireccion.colonia) ? duplicado+1 : duplicado;
-            duplicado = (direccion[key].calle == this.nuevaDireccion.calle) ? duplicado+1 : duplicado;
-            duplicado = (direccion[key].numext == this.nuevaDireccion.numext) ? duplicado+1 : duplicado;
+            duplicado = (direccion[key].calle.toLowerCase() == this.nuevaDireccion.calle.toLowerCase()) ? duplicado+1 : duplicado;
+            duplicado = (direccion[key].numext.toLowerCase() == this.nuevaDireccion.numext.toLowerCase()) ? duplicado+1 : duplicado;
             cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2')) ? cDireccionFiscal+1 : cDireccionFiscal;
+            cDireccionAdmin = (direccion[key].indicadorSeleccionados.includes('16')) ? cDireccionAdmin+1 : cDireccionAdmin;
             //Valida duplicado
             if(duplicado == 8){
                 cDuplicado++;
@@ -634,6 +636,17 @@
                 level: 'error',
                 autoClose: true,
                 messages: 'No se pueden agregar múltiples direcciones fiscales, favor de validar.'
+            });
+            this.$('.multiIndicadorNew').children().eq(0).css('border-color', 'red');
+            return;
+        }
+
+        //Valida multiples direcciones administración
+        if(cDireccionAdmin >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('16')){
+            app.alert.show('multiple_admin', {
+                level: 'error',
+                autoClose: true,
+                messages: 'No se pueden agregar múltiples direcciones de Administración, favor de validar.'
             });
             this.$('.multiIndicadorNew').children().eq(0).css('border-color', 'red');
             return;
@@ -1051,6 +1064,7 @@
      * ValidationTask: Validaciones para indicador en dirección
      * 1.- No existan multiples direcciones fiscales
      * 2.- Exista dirección fiscal y correspondencia para; Clientes,
+     * 3.- No existan multiples direcciones de administración
      * @param fields
      * @param errors
      * @param callback
@@ -1058,6 +1072,7 @@
     _doValidateDireccionIndicador: function (fields, errors, callback) {
         //Itera direcciones y suma a contadores
         var cDireccionFiscal = 0;
+        var cDireccionAdmin = 0;
         var cDireccionCorrs = 0;
         if (cont_dir.oDirecciones != undefined) {
             var direccion = cont_dir.oDirecciones.direccion;
@@ -1070,6 +1085,11 @@
                 if(direccion[iDireccion].indicadorSeleccionados.includes('2')){
                     cDireccionFiscal++;
                 }
+                //Indicador: 16 = Administración
+                if(direccion[iDireccion].indicadorSeleccionados.includes('16')){
+                    cDireccionAdmin++;
+                }
+
             }
 
             //Validación 1: Si existe más de 1 dirección fiscal regresa error y muestra alerta
@@ -1094,6 +1114,17 @@
                     errors['account_direcciones_corr_fiscal'] = errors['account_direcciones_corr_fiscal'] || {};
                     errors['account_direcciones_corr_fiscal'].required = true;
                 }
+            }
+
+            //Validación 3: Si existe más de 1 dirección Administración regresa error y muestra alerta
+            if (cDireccionAdmin > 1) {
+                app.alert.show('multiple_admin', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'M\u00FAltiples direcciones de Administración, favor de corregir.'
+                });
+                errors['account_direcciones_admin'] = errors['account_direcciones_admin'] || {};
+                errors['account_direcciones_admin'].required = true;
             }
         }
         //Callback para validación
