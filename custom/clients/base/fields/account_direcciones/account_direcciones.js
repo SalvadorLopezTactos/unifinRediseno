@@ -611,8 +611,8 @@
             duplicado = (direccion[key].municipio == this.nuevaDireccion.municipio) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].ciudad == this.nuevaDireccion.ciudad) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].colonia == this.nuevaDireccion.colonia) ? duplicado+1 : duplicado;
-            duplicado = (direccion[key].calle.toLowerCase() == this.nuevaDireccion.calle.toLowerCase()) ? duplicado+1 : duplicado;
-            duplicado = (direccion[key].numext.toLowerCase() == this.nuevaDireccion.numext.toLowerCase()) ? duplicado+1 : duplicado;
+            duplicado = (direccion[key].calle.trim().toLowerCase() == this.nuevaDireccion.calle.trim().toLowerCase()) ? duplicado+1 : duplicado;
+            duplicado = (direccion[key].numext.trim().toLowerCase() == this.nuevaDireccion.numext.trim().toLowerCase()) ? duplicado+1 : duplicado;
             cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2')) ? cDireccionFiscal+1 : cDireccionFiscal;
             cDireccionAdmin = (direccion[key].indicadorSeleccionados.includes('16')) ? cDireccionAdmin+1 : cDireccionAdmin;
             //Valida duplicado
