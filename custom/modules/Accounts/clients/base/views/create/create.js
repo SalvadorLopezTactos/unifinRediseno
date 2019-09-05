@@ -958,7 +958,7 @@
           var indices=[];
           for (var i = 0; i < direccion.length; i++) {
               for (var j = 0; j < direccion.length; j++) {
-                  if (i!=j && direccion[j].calle + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext + direccion[j].pais + direccion[j].postal == direccion[i].calle + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext + direccion[i].pais + direccion[i].postal) {
+                  if (i!=j && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal) {
                       coincidencia++;
                       indices.push(i);
                       indices.push(j);
