@@ -2386,7 +2386,11 @@
 
           if ($.isEmptyObject(errors))
           {
+            contexto_cuenta.ProductosPLD = pld.formatDetailPLD(ProductosPLD);
             this.model.set('tct_nuevo_pld_c', JSON.stringify(ProductosPLD));
+            this.ProductosPLD = ProductosPLD;
+            pld.ProductosPLD = this.ProductosPLD;
+            pld.render();
           }
         }
         callback(null,fields,errors);

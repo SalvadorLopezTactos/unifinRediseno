@@ -45,10 +45,9 @@
         }, this));
 
         //Valida contexto PLD en relacion Propietario Real
-        if (this.options.def.view==""){
-            this.render();
-
-        }
+        // if (this.options.def.view==""){
+        //     this.render();
+        // }
 
     },
 
@@ -184,7 +183,6 @@
 
 
     _render: function () {
-        var direccionsHtml = '';
         this._super("_render");
 
         var selfPLD = this;
@@ -197,7 +195,7 @@
         });
 
         //Función related
-        pld.$('.bigdrop').each(function( index, value ) {
+        selfPLD.$('.bigdrop').each(function( index, value ) {
             var campoPR=$(this).attr('data-field');
             pld.$('[data-field="'+campoPR+'"]').select2({
                 placeholder: "Seleccionar Cuenta...",
@@ -343,7 +341,7 @@
         }
 
         //Set class to select2
-        pld.$('select.select2').select2();
+        selfPLD.$('select.select2').select2();
 
         /*Apartado que se añade para evitar que se pierda el estilo select2 en campo account_direcciones
         al dar click en botón Editar
