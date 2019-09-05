@@ -39,7 +39,7 @@
 
         //Funcion oculta los panels de productos
         //pld.ocultapanels;
-        this.model.on('sync', this.loadData, this);
+        //this.model.on('sync', this.loadData, this);
         this.model.on("change:tipodepersona_c", _.bind(function () {
             pld.validaregimen();
         }, this));
