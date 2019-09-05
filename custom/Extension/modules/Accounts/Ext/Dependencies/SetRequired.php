@@ -689,7 +689,7 @@ $dependencies['Accounts']['ApellidoMaterno_required'] = array(
                 'target' => 'apellidomaterno_c',
                 'label' => 'apellidomaterno_c_label',
                 //'value' => 'and(equal($tipodepersona_c,"Persona Fisica"), equal($tipo_registro_c,"Prospecto"), equal($subtipo_cuenta_c,"Interesado"))',
-                'value' => 'not(or(equal($tipodepersona_c,"Persona Moral"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($tipo_registro_c,"Proveedor"),equal($tipo_registro_c,"Persona")))',
+                'value' => 'and(or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Interesado")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
