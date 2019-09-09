@@ -121,35 +121,41 @@
 
 	RelacionesPermitidas: function(fields, errors, callback){
 		//Valida los tipos de relación permitidos para el regimen de la persona relacionada
-		var account = app.data.createBean('Accounts', {id:this.model.get('account_id1_c')});
-        account.fetch({
-            success: _.bind(function (model) {
-            	console.log("El regimen fiscal de la persona relacionada es " + model.get('tipodepersona_c'));
-                if (model.get('tipodepersona_c') == 'Persona Moral') {
-                	var sRelaciones = new String(this.model.get('relaciones_activas'));
-                	var arrRelaciones = sRelaciones.split(",");
-                	console.log("Cadena sRelaciones:" + sRelaciones);
-                	console.log(arrRelaciones);
-                	for (rel in arrRelaciones){
-                		console.log("Item:" + arrRelaciones[rel]);
-						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario'
-						|| arrRelaciones[rel] == 'Directivo' || arrRelaciones[rel] == 'Referencia Personal'){
-							app.alert.show("Tipo de relación no permitida", {
-								level: "error",
-								title: "Una persona moral no puede ser " + arrRelaciones[rel],
-								autoClose: false
-							});
-		        			errors['relacion_c'] = errors['relacion_c'] || {};
-							errors['relacion_c'].required = true;
+    if (this.model.get("account_id1_c") == "" || this.model.get("account_id1_c") == undefined) {
+      errors['relaciones_activas'] = "Seleccione la cuenta relacionada"; //errors['relaciones_activas'] || {};
+      errors['relaciones_activas'].required = true;
+      callback(null, fields, errors);
+    }else{
+  		var account = app.data.createBean('Accounts', {id:this.model.get('account_id1_c')});
+          account.fetch({
+              success: _.bind(function (model) {
+              	console.log("El regimen fiscal de la persona relacionada es " + model.get('tipodepersona_c'));
+                  if (model.get('tipodepersona_c') == 'Persona Moral') {
+                  	var sRelaciones = new String(this.model.get('relaciones_activas'));
+                  	var arrRelaciones = sRelaciones.split(",");
+                  	console.log("Cadena sRelaciones:" + sRelaciones);
+                  	console.log(arrRelaciones);
+                  	for (rel in arrRelaciones){
+                  		console.log("Item:" + arrRelaciones[rel]);
+  						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario'
+  						|| arrRelaciones[rel] == 'Directivo' || arrRelaciones[rel] == 'Referencia Personal'){
+  							app.alert.show("Tipo de relación no permitida", {
+  								level: "error",
+  								title: "Una persona moral no puede ser " + arrRelaciones[rel],
+  								autoClose: false
+  							});
+  		        			errors['relacion_c'] = errors['relacion_c'] || {};
+  							errors['relacion_c'].required = true;
 
-							errors['relaciones_activas'] = errors['relaciones_activas'] || {};
-							errors['relaciones_activas'].required = true;
-						}
-					}
-                }
-                callback(null, fields, errors);
-            }, this)
-        });
+  							errors['relaciones_activas'] = errors['relaciones_activas'] || {};
+  							errors['relaciones_activas'].required = true;
+  						}
+  					}
+                  }
+                  callback(null, fields, errors);
+              }, this)
+          });
+      }
 	},
 
 	_doValidateContactFields: function (fields, errors, callback) {
@@ -450,34 +456,39 @@
 		callback(null, fields, errors);
 	},
 	relacionesDuplicadas: function (fields, errors, callback){
-		console.log("relacionesDuplicadas");
+		//console.log("relacionesDuplicadas");
 
-		var verificaDuplicidadURL = app.api.buildURL("obtieneRelacionesDuplicadas",'',{},{});
-		app.api.call("create",verificaDuplicidadURL, {'guid_cliente':  this.model.get("rel_relaciones_accountsaccounts_ida"),
-			'guid_relacion':  this.model.get("account_id1_c"),
-			'relacion': String(this.model.get('relaciones_activas')),
-			'previas' : this.previas},{
-			success: _.bind(function(data){
-                console.log(data);
-				if(data!=null){
-					if(data.length>=1){
-						mensaje = data.length==1?'La relaci\u00F3n '+data.toString()+
-                        ' ya existe, favor de verificar':'Las relaciones '+ data.join(", ") + ' ya existen, por favor verificar';
+    if (this.model.get("account_id1_c") == "" || this.model.get("account_id1_c") == undefined) {
+      errors['relaciones_activas'] = "Seleccione la cuenta relacionada"; //errors['relaciones_activas'] || {};
+      errors['relaciones_activas'].required = true;
+    }else{
+  		var verificaDuplicidadURL = app.api.buildURL("obtieneRelacionesDuplicadas",'',{},{});
+  		app.api.call("create",verificaDuplicidadURL, {'guid_cliente':  this.model.get("rel_relaciones_accountsaccounts_ida"),
+  			'guid_relacion':  this.model.get("account_id1_c"),
+  			'relacion': String(this.model.get('relaciones_activas')),
+  			'previas' : this.previas},{
+  			success: _.bind(function(data){
+                  console.log(data);
+  				if(data!=null){
+  					if(data.length>=1){
+  						mensaje = data.length==1?'La relaci\u00F3n '+data.toString()+
+                          ' ya existe, favor de verificar':'Las relaciones '+ data.join(", ") + ' ya existen, por favor verificar';
 
-						errors['relaciones_activas'] = mensaje; //errors['relaciones_activas'] || {};
-						errors['relaciones_activas'].required = true;
+  						errors['relaciones_activas'] = mensaje; //errors['relaciones_activas'] || {};
+  						errors['relaciones_activas'].required = true;
 
-						app.alert.show("RelacionesRepetidas", {
-							level: "error",
-							title: mensaje,
-							autoClose: false
-						});
-					}
+  						app.alert.show("RelacionesRepetidas", {
+  							level: "error",
+  							title: mensaje,
+  							autoClose: false
+  						});
+  					}
 
-				}
-			},this)
-		});
-        callback(null, fields, errors);
+  				}
+  			},this)
+  		});
+    }
+    callback(null, fields, errors);
 	},
 
     Relacionaccionista: function (fields, errors, callback) {
@@ -782,113 +793,119 @@
 
     validaProveedorRecursos: function (fields, errors, callback){
         var RequeridosProvRec = "";
-        if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') && this.model.get("relacion_c").trim()!= "") {
+        if (this.model.get("account_id1_c") == "" || this.model.get("account_id1_c") == undefined) {
+            errors['faltantescuenta'] = "Seleccione la cuenta relacionada"; //errors['relaciones_activas'] || {};
+            errors['faltantescuenta'].required = true;
+            callback(null, fields, errors);
+        }else{
+            if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') && this.model.get("relacion_c").trim()!= "") {
 
-            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
-                success: _.bind(function (data) {
-                    if (data.tipodepersona_c != "") {
+                app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
+                    success: _.bind(function (data) {
+                        if (data.tipodepersona_c != "") {
 
-                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c")), null, {
-                            success: _.bind(function (data) {
-                                if (data.tipodepersona_c == "Persona Fisica" || data.tipodepersona_c == "Persona Fisica con Actividad Empresarial") {
+                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c")), null, {
+                                success: _.bind(function (data) {
+                                    if (data.tipodepersona_c == "Persona Fisica" || data.tipodepersona_c == "Persona Fisica con Actividad Empresarial") {
 
-                                    if (data.primernombre_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Nombre<br></b>';
-                                    }
-                                    if (data.apellidopaterno_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
-                                    }
-                                    if (data.apellidomaterno_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
-                                    }
-                                    if (data.fechadenacimiento_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
-                                    }
-                                    if (data.nacionalidad_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
-                                    }
-                                    if (data.tct_macro_sector_ddw_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                                    }
-                                    if (data.sectoreconomico_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                                    }
-                                    if (data.subsectoreconomico_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                                    }
-                                    if (data.actividadeconomica_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                                    }
-                                    if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b><br>Almenos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
-                                    }
-                                    if (data.tipo_registro_c!= 'Persona') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                            success: _.bind(function (data) {
-                                                if (data.records.length > 0) {
-                                                    for (var d = 0; d < data.records.length; d++) {
-                                                        if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
-                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                                        if (data.primernombre_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Nombre<br></b>';
+                                        }
+                                        if (data.apellidopaterno_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
+                                        }
+                                        if (data.apellidomaterno_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
+                                        }
+                                        if (data.fechadenacimiento_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
+                                        }
+                                        if (data.nacionalidad_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                                        }
+                                        if (data.tct_macro_sector_ddw_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                                        }
+                                        if (data.sectoreconomico_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                                        }
+                                        if (data.subsectoreconomico_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                                        }
+                                        if (data.actividadeconomica_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                        }
+                                        if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
+                                            RequeridosProvRec = RequeridosProvRec + '<b><br>Almenos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                                        }
+                                        if (data.tipo_registro_c!= 'Persona') {
+                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                                success: _.bind(function (data) {
+                                                    if (data.records.length > 0) {
+                                                        for (var d = 0; d < data.records.length; d++) {
+                                                            if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                                                            }
                                                         }
                                                     }
-                                                }
-                                                if (RequeridosProvRec != "") {
-                                                    app.alert.show("Campos faltantes en cuenta", {
-                                                        level: "error",
-                                                        messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo Proveedor de Recursos:<br> ' + RequeridosProvRec,
-                                                        autoClose: false
-                                                    });
-                                                    errors['faltantescuenta'] = errors['faltantescuenta'] || {};
-                                                    errors['faltantescuenta'].required = true;
+                                                    if (RequeridosProvRec != "") {
+                                                        app.alert.show("Campos faltantes en cuenta", {
+                                                            level: "error",
+                                                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo Proveedor de Recursos:<br> ' + RequeridosProvRec,
+                                                            autoClose: false
+                                                        });
+                                                        errors['faltantescuenta'] = errors['faltantescuenta'] || {};
+                                                        errors['faltantescuenta'].required = true;
 
-                                                }
-                                                callback(null, fields, errors);
-                                            }, this)
-                                        });
-                                    }else{
-                                        callback(null, fields, errors);
-                                    }
-                                }else {
-                                    if (data.razonsocial_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
-                                    }
-                                    if (data.nacionalidad_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
-                                    }
-                                    if (data.rfc_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
-                                    }
-                                    if (data.tipo_registro_c!= 'Persona') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                            success: _.bind(function (data) {
-                                                if (data.records <= 0) {
-                                                    RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
-                                                }
-                                                if (RequeridosProvRec != "") {
-                                                    app.alert.show("Campos faltantes en cuenta", {
-                                                        level: "error",
-                                                        messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo Proveedor de Recursos:<br> ' + RequeridosProvRec,
-                                                        autoClose: false
-                                                    });
-                                                    errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
-                                                    errors['errorpersonamoral'].required = true;
+                                                    }
+                                                    callback(null, fields, errors);
+                                                }, this)
+                                            });
+                                        }else{
+                                            callback(null, fields, errors);
+                                        }
+                                    }else {
+                                        if (data.razonsocial_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
+                                        }
+                                        if (data.nacionalidad_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
+                                        }
+                                        if (data.rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
+                                        }
+                                        if (data.tipo_registro_c!= 'Persona') {
+                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                                success: _.bind(function (data) {
+                                                    if (data.records <= 0) {
+                                                        RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
+                                                    }
+                                                    if (RequeridosProvRec != "") {
+                                                        app.alert.show("Campos faltantes en cuenta", {
+                                                            level: "error",
+                                                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo Proveedor de Recursos:<br> ' + RequeridosProvRec,
+                                                            autoClose: false
+                                                        });
+                                                        errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
+                                                        errors['errorpersonamoral'].required = true;
 
-                                                }
-                                                callback(null, fields, errors);
-                                            }, this)
-                                        });
-                                    }else{
-                                        callback(null, fields, errors);
+                                                    }
+                                                    callback(null, fields, errors);
+                                                }, this)
+                                            });
+                                        }else{
+                                            callback(null, fields, errors);
+                                        }
                                     }
-                                }
-                            }, this)
-                        });
+                                }, this)
+                            });
 
-                    }
-                }, this)
-            });
-        }else {
-            callback(null, fields, errors);
+                        }
+                    }, this)
+                });
+            }else {
+                callback(null, fields, errors);
+            }
         }
 
     },
