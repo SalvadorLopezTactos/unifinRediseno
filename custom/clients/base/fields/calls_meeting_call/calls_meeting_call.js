@@ -69,9 +69,11 @@
                         selfRella.reunLlam=data;
                         selfRella.edicion = true;
                         var d = new Date(selfRella.reunLlam.records[0].date_start);
-                        selfRella.reunLlam.records[0].date_start=d.toLocaleString();
+                        selfRella.reunLlam.records[0].date_start=d;
+                        selfRella.reunLlam.records[0].date_start_format=d.toLocaleString();
                         var d1=new Date(selfRella.reunLlam.records[0].date_end);
-                        selfRella.reunLlam.records[0].date_end=d1.toLocaleString();
+                        selfRella.reunLlam.records[0].date_end=d1;
+                        selfRella.reunLlam.records[0].date_end_format=d1.toLocaleString();
 
                         selfRella.reunLlam.records[0].str_link=modulo+'/'+selfRella.reunLlam.records[0].id;
                         //_.extend(selfRella, selfRella.reunLlam);
@@ -124,8 +126,10 @@
                     "tipo_registro":"",
                     "nombre":"",
                     "date_start":"",
+                    "date_start_format":"",
                     "time_start":"",
                     "date_end":"",
+                    "date_end_format":"",
                     "time_end":"",
                     "duracion_hora":"",
                     "duracion_minuto":"",
@@ -147,8 +151,10 @@
                     "tipo_registro":"",
                     "nombre":"",
                     "date_start":"",
+                    "date_start_format":"",
                     "time_start":"",
                     "date_end":"",
+                    "date_end_format":"",
                     "time_end":"",
                     "duracion_hora":"",
                     "duracion_minuto":"",
@@ -279,37 +285,40 @@
                 //Name
                 $('.newCampo1A').val(this.reunLlam.records[0].name);
                 //Fecha inicio
-                var fecha_formatear=this.reunLlam.records[0].date_start.split(" ")[0].split("/");
-                var dia_formatear=fecha_formatear[0];
+                var fecha_formatear=this.reunLlam.records[0].date_start;
+                var dia_formatear=fecha_formatear.getDate();
                 if(dia_formatear<10){
                     dia_formatear="0"+dia_formatear;
                 }
-                var mes_formatear=fecha_formatear[1];
+                var mes_formatear=fecha_formatear.getMonth()+1;
                 if(mes_formatear<10){
                     mes_formatear="0"+mes_formatear;
                 }
-
-                $(".newDate").val(fecha_formatear[2]+"-"+mes_formatear+"-"+dia_formatear);
+                anio_formatear = fecha_formatear.getFullYear();
+                $(".newDate").val(anio_formatear+"-"+mes_formatear+"-"+dia_formatear);
                 //Hora inicio
-                var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
-                $(".newTime1").val(this.tConvert(hora_formatear));
+                // var hora_formatear=this.reunLlam.records[0].date_start.split(" ")[1];
+                // $(".newTime1").val(this.tConvert(hora_formatear));
+                $('.newTime1').timepicker('setTime', this.reunLlam.records[0].date_start);
+
 
                 //Fecha fin
-                var fecha_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[0].split("/");
-                var dia_formatear_fin=fecha_formatear_fin[0];
+                var fecha_formatear_fin=this.reunLlam.records[0].date_end;
+                var dia_formatear_fin=fecha_formatear_fin.getDate();
                 if(dia_formatear_fin<10){
                     dia_formatear_fin="0"+dia_formatear_fin;
                 }
-
-                var mes_formatear_fin=fecha_formatear_fin[1];
+                var mes_formatear_fin=fecha_formatear_fin.getMonth()+1;
                 if(mes_formatear_fin<10){
                     mes_formatear_fin="0"+mes_formatear_fin;
                 }
+                var anio_formatear_fin = fecha_formatear_fin.getFullYear();
 
-                $(".newDate2").val(fecha_formatear_fin[2]+"-"+mes_formatear_fin+"-"+dia_formatear_fin);
+                $(".newDate2").val(anio_formatear_fin+"-"+mes_formatear_fin+"-"+dia_formatear_fin);
                 //Hora fin
-                var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
-                $(".newTime2").val(this.tConvert(hora_formatear_fin));
+                // var hora_formatear_fin=this.reunLlam.records[0].date_end.split(" ")[1];
+                // $(".newTime2").val(this.tConvert(hora_formatear_fin));
+                $('.newTime2').timepicker('setTime', this.reunLlam.records[0].date_end);
 
                 //Usuario Asignado
                 $('.bigdrop').select2('data', {id: this.reunLlam.records[0].assigned_user_id, text:this.reunLlam.records[0].assigned_user_name});
@@ -426,29 +435,31 @@
 
         /*Todo*/
         //Establecerlo de nuevo solo si es modo edición y ya se tiene un id
-        selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
-        selfRella.nuevoRegistro.date_start=$('.newDate').val();
-        selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
-        selfRella.nuevoRegistro.date_end=$('.newDate2').val();
-        selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
-        selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
-        selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
-        diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
-        minutosTotales = Math.floor((diferencia/1000)/60);
-        horas = (minutosTotales/60>>0);
-        minutos = minutosTotales%60;
-        selfRella.nuevoRegistro.duracion_hora=horas;
-        selfRella.nuevoRegistro.duracion_minuto=minutos;
+        if ($('.newCampo1A').val()!= undefined && $('.newDate').val()!= undefined) {
+            selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
+            selfRella.nuevoRegistro.date_start=$('.newDate').val();
+            selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
+            selfRella.nuevoRegistro.date_end=$('.newDate2').val();
+            selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
+            selfRella.nuevoRegistro.assigned_user_id=$('.bigdrop').select2('val');
+            selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
+            diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
+            minutosTotales = Math.floor((diferencia/1000)/60);
+            horas = (minutosTotales/60>>0);
+            minutos = minutosTotales%60;
+            selfRella.nuevoRegistro.duracion_hora=horas;
+            selfRella.nuevoRegistro.duracion_minuto=minutos;
 
-        if (selfRella.edicion) {
-            this.model.set('calls_meeting_call', selfRella.nuevoRegistro);
-        }else{
-            this.model.set('calls_meeting_call', '');
-        }
+            if (selfRella.edicion) {
+                this.model.set('calls_meeting_call', selfRella.nuevoRegistro);
+            }else{
+                this.model.set('calls_meeting_call', '');
+            }
 
 
-        if(this.model.get('assigned_user_id') != selfRella.nuevoRegistro.assigned_user_id && selfRella.nuevoRegistro.assigned_user_id!=""){
-            selfRella.edicion = null;
+            if(this.model.get('assigned_user_id') != selfRella.nuevoRegistro.assigned_user_id && selfRella.nuevoRegistro.assigned_user_id!=""){
+                selfRella.edicion = null;
+            }
         }
 
         callback(null, fields, errors);
@@ -553,7 +564,7 @@
         }
 
         if(module!= '' && this.edicion){
-          if($('.newDate').val()!="" && $('.newDate2').val()!=""){
+          if($('.newDate').val()!="" && $('.newDate2').val()!="" && $('.newDate').val()!=undefined && $('.newDate2').val()!=undefined ){
 
               // FECHA INICIO
               var dateSplit=$('.newDate').val().split('-');
