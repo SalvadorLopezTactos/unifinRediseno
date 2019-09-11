@@ -1,0 +1,61 @@
+<!--
+ * Created by AF. Tactos
+ * Date 2019/09/09
+
+ Vista:
+  - Gestión de noticias
+ Objetivo:
+  - Administrar contenido para Noticia general, mostrada en Vista 360 de Cuentas
+  - Administrar PDF para descarga en vista 360 de Cuentas
+-->
+
+<!-- Agrupador -->
+<div class="container-fluid">
+  <!--Cabecera-->
+  <div class="row-fluid">
+    <div class="span12">
+      <h1 align="left" style="color:#22608c"><b>Gestión de noticias</b></h1>
+    </div>
+  </div>
+  <br>
+  <!--Contenido-->
+  <!-- Noticia General -->
+  <div class="row-fluid">
+    <div class="span12" style="color: #e2efe2;background-color:#22608c;border-color:#22608c; border-radius: 10px;">
+     <h1>
+       <p style="vertical-align: middle;  margin: 5px;">
+          &nbsp; Noticia General
+         </p>
+       </h1>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <textarea rows="15" style="width: 100%; overflow: scroll; resize: none; text-align:justify; color:#22608c; border-radius: 10px;" id="txtNoticia" class="span12">{{noticia_general}}</textarea>
+    </div>
+  </div>
+  <br><br>
+  <!-- Carga PDF -->
+  <div class="row-fluid">
+    <div class="span12" style="color: #e2efe2;background-color:#22608c;border-color:#22608c; border-radius: 10px;">
+     <h1>
+       <p style="vertical-align: middle;  margin: 5px;">
+          &nbsp; PDF para descarga
+         </p>
+       </h1>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <input type="file" name="pdfNoticias" style="margin:8px" accept=".pdf">
+    </div>
+  </div>
+  <!-- Guardar -->
+  <div class="row-fluid">
+    <div style="text-align:right">
+      <p>
+        <a class="btn btn-success btnSave"><i class="fa fa-save"></i> Guardar cambios</a>
+      </p>
+    </div>
+  </div>
+</div>
