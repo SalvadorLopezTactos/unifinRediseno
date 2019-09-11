@@ -215,10 +215,11 @@
         var current_hour_round=this.roundMinutes(hora_actual);
         hora_actual=this.tConvert(current_hour_round);
 
-        $('#tp11').timepicker({
-                'minTime': hora_actual,
-                'maxTime': '11:30pm',
-            });
+        // $('#tp11').timepicker({
+        //         'minTime': '12:00am',
+        //         'maxTime': '11:30pm',
+        //     });
+        $('#tp11').timepicker();
         $('#tp12').timepicker();
 
         $('.bigdrop').each(function( index, value ) {
@@ -849,10 +850,10 @@
 
         var hora_select=$(evt.currentTarget).val();
         //Establece opciones de hora fin dependiendo de la hora de inicio seleccionada
-        $('#tp12').timepicker({
-                'minTime': hora_select,
-                'maxTime': '11:30pm',
-            });
+        // $('#tp12').timepicker({
+        //         'minTime': '12',
+        //         'maxTime': '11:30pm',
+        //     });
 
     },
 
