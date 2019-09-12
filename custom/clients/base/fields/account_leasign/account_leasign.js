@@ -513,10 +513,9 @@
     //Funcion para descargar el pdf de la seccion vista 360
     descargapdf: function() {
 
-        var url_list= App.lang.getAppListStrings('noticias_list');
-        var url = url_list[1];
+        var url = window.location.origin+window.location.pathname+'custom/pdf/NoticiasUnifin.pdf';
+        url = url.replace(/index.php/gi, "");
         window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
-
     },
 
 })
