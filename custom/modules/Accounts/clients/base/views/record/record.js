@@ -4065,4 +4065,12 @@
         //Callback a validation task
         callback(null, fields, errors);
     },
+
+    handleSave: function() {
+        this._super("handleSave");
+        //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
+        this.get_phones();
+        this.get_addresses();
+        this.get_pld();
+    },
 })
