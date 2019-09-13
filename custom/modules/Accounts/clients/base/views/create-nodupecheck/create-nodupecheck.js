@@ -291,7 +291,7 @@
 
         this.model.fields['tipo_registro_c'].options = new_options;
 
-
+        this.model.on('change:name', this.cleanName, this);
     },
 
     _render: function () {
@@ -1574,6 +1574,43 @@
             }
         });
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+    },
+
+    cleanName: function () {
+        var original_name = this.model.get("name");
+        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+
+        var clean_name_split = [];
+        clean_name_split = original_name.split(" ");
+        _.each(clean_name_split, function (value, key) {
+            _.each(simbolos, function (simbolo, index) {
+                var clean_value = value.split(simbolo).join('');
+                if (clean_value != value) {
+                    clean_name_split[key] = clean_value;
+                }
+            });
+        });
+
+        _.each(clean_name_split, function (value, key) {
+            _.each(list_check, function (index, nomenclatura) {
+                var upper_value = value.toUpperCase();
+                if (upper_value == nomenclatura) {
+                    var clean_value = upper_value.replace(nomenclatura, "");
+                    clean_name_split[key] = clean_value;
+                }
+            });
+        });
+
+        var clean_name = "";
+        _.each(clean_name_split, function (value, key) {
+            clean_name += value;
+        });
+
+        clean_name = clean_name.toUpperCase();
+        this.model.set("clean_name", clean_name);
+
+        //this.DuplicateCheck_Name();
     },
 
 })
