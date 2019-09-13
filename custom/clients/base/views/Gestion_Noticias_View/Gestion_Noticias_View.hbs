@@ -34,6 +34,15 @@
       <textarea rows="15" style="width: 100%; overflow: scroll; resize: none; text-align:justify; color:#22608c; border-radius: 10px;" id="txtNoticia" class="span12">{{noticia_general}}</textarea>
     </div>
   </div>
+    <br>
+  <div class="row-fluid">
+      <div style="text-align:right">
+          <br>
+          <!-- Botones de acción de la noticia -->
+          <a class="btn btn-link btnBorrar"><i class="fa fa-eraser"></i> Borrar Contenido</a>
+          <a class="btn btn-success btnSave"><i class="fa fa-save"></i> Actualizar Noticia</a>
+      </div>
+  </div>
   <br><br>
   <!-- Carga PDF -->
   <div class="row-fluid">
@@ -46,16 +55,13 @@
     </div>
   </div>
   <div class="row-fluid">
-    <div class="span12">
-      <input type="file" name="pdfNoticias" style="margin:8px" accept=".pdf">
+    <div class="span8">
+      <input type="file" name="pdfNoticias" style="margin:8px" accept=".pdf" class="adjunto">
     </div>
-  </div>
-  <!-- Guardar -->
-  <div class="row-fluid">
-    <div style="text-align:right">
-      <p>
-        <a class="btn btn-success btnSave"><i class="fa fa-save"></i> Guardar cambios</a>
-      </p>
-    </div>
+      <br>
+      <!-- Subir el PDF -->
+      <div class="span4" style="text-align:right">
+          <a class="btn btn-success btnSubir"><i class="fa fa-arrow-up"></i> Subir PDF</a>
+      </div>
   </div>
 </div>

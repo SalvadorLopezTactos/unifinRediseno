@@ -20,7 +20,15 @@ class NoticiasCuentas extends SugarApi
                 'method' => 'guardaNoticiaMethod',
                 'shortHelp' => 'Guarda noticia general para vista 360 en cuentas',
             ),
-            'POST_Noticias_PDF' => array(
+
+            'GET_Noticias_Cuentas' => array(
+                'reqType' => 'GET',
+                'path' => array('recuperaNoticia'),
+                'pathVars' => array(''),
+                'method' => 'recuperaNoticiaMethod',
+                'shortHelp' => 'Recupera noticia general para vista 360 en cuentas',
+            ),
+           'POST_Noticias_PDF' => array(
                 'reqType' => 'POST',
                 'path' => array('guardaNoticiaPDF'),
                 'pathVars' => array(''),
@@ -32,14 +40,12 @@ class NoticiasCuentas extends SugarApi
 
     public function guardaNoticiaMethod ($api, $args){
         //Recupera variables
-      /*
+
         global $db, $current_user, $app_list_strings;
-        $noticia = $args['data']['noticia'];
-        $idUsuario = $args['data']['idUser'];
+        $noticia = $args['data']['noticiaGeneral'];
         $resultado = [];
         $resultado['estado']="";
         $resultado['descripcion']="";
-
         //Valida existencia de idReunion
         if(empty($noticia)|| $noticia == "" ){
             return false;
@@ -47,34 +53,66 @@ class NoticiasCuentas extends SugarApi
 
         //Guarda contenido
         $filename = 'custom/pdf/noticiaGeneral.txt';
-        $somecontent = $noticia;
+        //$somecontent = $noticia;
+        file_put_contents($filename, $noticia);
 
-        // Let's make sure the file exists and is writable first.
+        // Verifica que el archivo puede ser escrito primero.
         if (is_writable($filename)) {
 
-            // In our example we're opening $filename in append mode.
-            // The file pointer is at the bottom of the file hence
-            // that's where $somecontent will go when we fwrite() it.
+           //Valida para poder escribir en el archivo (si este está protegido contra escritura).
             if (!$handle = fopen($filename, 'a')) {
-                 $resultado['descripcion'] "Cannot open file ($filename)";
+                 $resultado['descripcion'] ="Cannot open file ($filename)";
                  return $resultado;
             }
 
-            // Write $somecontent to our opened file.
-            if (fwrite($handle, $somecontent) === FALSE) {
-                $resultado['descripcion']= "Cannot write to file ($filename)";
+            // Escribe $somecontent en nuestro archivo abierto.
+            if (fwrite($handle,'') === FALSE) {
                 return $resultado;
             }
 
-            $resultado['descripcion']= "Success, wrote ($somecontent) to file ($filename)";
             fclose($handle);
 
         } else {
             $resultado['descripcion']= "The file $filename is not writable";
         }
-*/
         return $resultado;
-
     }
 
+
+    public function recuperaNoticiaMethod ($api, $args){
+        //Recupera variables
+        $filename = 'custom/pdf/noticiaGeneral.txt';
+        $resultado = [];
+        $resultado['estado']="";
+        $resultado['descripcion']="";
+
+        //funcion fopen abre el archivo con la ruta del mismo y el mode r (read)
+        $file = fopen( $filename,"r");
+        //Controla accion del archivo ($resultado contiene la info del archivo abierto)
+        while(!feof($file)) {
+            $resultado['descripcion'] .= fgets($file);
+        }
+        //Cierra el archivo
+        fclose($file);
+        return $resultado;
+    }
+
+
+    public function guardaNoticiaPDFMethod ($api, $args)
+    {
+
+        global $db, $current_user, $app_list_strings;
+        //Definir argumento (obtenido del js del archivo
+        $archivopdf = $args['data']['documento'];
+        // Nombre del archivo
+        $name = "NoticiasUnifin.pdf";
+        //Ruta del archivo
+        $rute = "custom/pdf/" . $name;
+        //Se elimina la cabecera de la data codificada (encode)
+        $archivopdf = str_replace('data:application/pdf;base64,', '', $archivopdf);
+        // decodificar a base64
+        $decodeFile = base64_decode($archivopdf);
+        // Copiar el contenido de la data al pdf
+        file_put_contents($rute, $decodeFile);
+    }
 }

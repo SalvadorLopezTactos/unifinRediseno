@@ -529,7 +529,19 @@ class ResumenClienteAPI extends SugarApi
                 //Recupera Leasing
                 $arr_principal['leasing']['fecha_pago']= $beanResumen->leasing_fecha_pago;
                 //Victor
-                $arr_principal['noticia_general']['noticia']=$beanResumen->tct_noticia_general_c;
+                //codigo para cargar el contenido del .txt de la noticia actualizada
+                $filename = 'custom/pdf/noticiaGeneral.txt';
+                $resultado = "";
+
+                //funcion fopen abre el archivo con la ruta del mismo y el mode r (read)
+                $file = fopen( $filename,"r");
+
+                //Controla accion del archivo ($resultado contiene la info del archivo abierto)
+                while(!feof($file)) {
+                    $resultado.= fgets($file);
+                }
+                fclose($file);
+                $arr_principal['noticia_general']['noticia']=$resultado;
                 $arr_principal['noticia_macro_sector']['noticia']=$beanResumen->tct_noticia_sector_c;
                 $arr_principal['noticia_region']['noticia']=$beanResumen->tct_noticia_region_c;
                 $arr_principal['datos_clave']['dato_clave']=$beanResumen->tct_datos_clave_txa_c;
