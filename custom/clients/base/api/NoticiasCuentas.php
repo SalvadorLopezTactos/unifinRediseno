@@ -43,12 +43,9 @@ class NoticiasCuentas extends SugarApi
 
         global $db, $current_user, $app_list_strings;
         $noticia = $args['data']['noticiaGeneral'];
-        $idUsuario = $args['data']['idUser'];
         $resultado = [];
         $resultado['estado']="";
         $resultado['descripcion']="";
-        $GLOBALS['log']->fatal('Recupera variables');
-
         //Valida existencia de idReunion
         if(empty($noticia)|| $noticia == "" ){
             return false;
@@ -58,8 +55,6 @@ class NoticiasCuentas extends SugarApi
         $filename = 'custom/pdf/noticiaGeneral.txt';
         //$somecontent = $noticia;
         file_put_contents($filename, $noticia);
-        $GLOBALS['log']->fatal('Declara contenido del txt');
-
 
         // Verifica que el archivo puede ser escrito primero.
         if (is_writable($filename)) {
@@ -71,12 +66,10 @@ class NoticiasCuentas extends SugarApi
             }
 
             // Escribe $somecontent en nuestro archivo abierto.
-            if (fwrite($handle, $somecontent) === FALSE) {
-                $resultado['descripcion']= "Cannot write to file ($filename)";
+            if (fwrite($handle,'') === FALSE) {
                 return $resultado;
             }
 
-            $resultado['descripcion']= "Success, wrote ($somecontent) to file ($filename)";
             fclose($handle);
 
         } else {
@@ -88,13 +81,10 @@ class NoticiasCuentas extends SugarApi
 
     public function recuperaNoticiaMethod ($api, $args){
         //Recupera variables
-        $resultado['descripcion']="";
-        global $db, $current_user, $app_list_strings;
-        $noticia = $args['data']['noticiaGeneral'];
-        $idUsuario = $args['data']['idUser'];
         $filename = 'custom/pdf/noticiaGeneral.txt';
         $resultado = [];
         $resultado['estado']="";
+        $resultado['descripcion']="";
 
         //funcion fopen abre el archivo con la ruta del mismo y el mode r (read)
         $file = fopen( $filename,"r");

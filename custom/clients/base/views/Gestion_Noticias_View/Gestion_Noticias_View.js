@@ -16,7 +16,6 @@
         noticias = this;
         this.noticia_general = "";
         this.pdf = "";
-        console.log('Carga info');
         //Api Call para recuperar información del archivo txt y mostrarlo en pantalla
         app.api.call('GET', app.api.buildURL('recuperaNoticia'), null, {
             success: _.bind(function (data) {
@@ -112,7 +111,6 @@
                 var Url = app.api.buildURL("guardaNoticiaPDF", '', {}, {});
                 app.api.call("create", Url, {data: archivopdf}, {
                     success: _.bind(function (data) {
-                        console.log("SubePDF");
                         app.alert.show('subida_archivo_pdf', {
                             level: 'success',
                             messages: "Se ha cargado el archivo satisfactoriamente.",
@@ -127,7 +125,6 @@
                 });
             };
             reader.onerror = function (error) {
-                console.log('Error: ', error);
                 app.alert.show('error_archivo_pdf', {
                     level: 'error',
                     messages: "Ha habido un problema al cargar el archivo, intente de nuevo.",
