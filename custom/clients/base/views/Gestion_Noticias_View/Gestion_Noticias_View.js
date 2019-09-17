@@ -8,7 +8,8 @@
     events:{
         'click .btnSave': 'saveChanges',
         'click .btnBorrar': 'limpiatxt',
-        'click .btnSubir': 'guardaPDF'
+        'click .btnSubir': 'guardaPDF',
+        'change #txtNoticia': 'enablelimpiatxt'
     },
 
     initialize: function(options){
@@ -35,6 +36,9 @@
                     noticias.noticia_general= data.descripcion;
                     _.extend(this, noticias.noticia_general);
                     noticias.render();
+                    if (data.descripcion == "") {
+                        $('.btnBorrar').attr('style', 'pointer-events:none;');
+                    }
                 },this),
                 error: function (e) {
             throw e;
@@ -99,11 +103,11 @@
                 autoClose: false,
                 onConfirm: function () {
                     $('#txtNoticia').val("");
+                    $('.btnBorrar').attr('style', 'pointer-events:none;');
                 },
                 onCancel: function () {
                     console.log("No se elimina info");
                 }
-
             });
         }
     },
@@ -153,6 +157,12 @@
             });
         }
 
+    },
+
+    enablelimpiatxt: function(){
+        if($('#txtNoticia').val() != ""){
+            $('.btnBorrar').attr('style', 'pointer-events:block;');
+        }
     },
 
 })
