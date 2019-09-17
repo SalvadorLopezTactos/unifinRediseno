@@ -15,7 +15,7 @@
         this._super("initialize", [options]);
 
         //Valida rol de usuario
-        if (App.user.attributes.roles.includes('Gestion Noticias') || App.user.attributes.is_manager) {
+        if (App.user.attributes.roles.includes('Gestion Noticias') || App.user.attributes.is_manager || App.user.attributes.type == 'admin') {
             this.loadData();
         }else{
             var route = App.router.buildRoute('Accounts', null, '');
@@ -92,23 +92,25 @@
 
     limpiatxt: function(){
         //Funcion para poder eliminar el contenido de la noticia al actualizar
-        app.alert.show("warning_informacion", {
-            level: "confirmation",
-            messages: '¿Desea eliminar el contenido de la noticia?',
-            autoClose: false,
-            onConfirm: function () {
-                $('#txtNoticia').val("");
-            },
-            onCancel: function () {
-                console.log("No se elimina info");
-            }
+        if ($('#txtNoticia').val()!="") {
+            app.alert.show("warning_informacion", {
+                level: "confirmation",
+                messages: '¿Desea eliminar el contenido de la noticia?',
+                autoClose: false,
+                onConfirm: function () {
+                    $('#txtNoticia').val("");
+                },
+                onCancel: function () {
+                    console.log("No se elimina info");
+                }
 
-        });
+            });
+        }
     },
 
     guardaPDF: async function(){
         //Funcion para guardar el pdf añadido
-        if ($(".adjunto")[0].value!="" || $(".adjunto")[0].value!=null){
+        if ($(".adjunto")[0].value!="" && $(".adjunto")[0].value!=null){
             //Obtener la URL del archivo cargado
             var file = document.querySelector('.adjunto').files[0];
             //Funcion carga que el archivo
@@ -144,6 +146,11 @@
                     autoClose: false
                 });
             };
+        }else{
+            app.alert.show("procesa_pdf", {
+                level: "info",
+                messages: 'No hay archivo seleccionado por subir.'
+            });
         }
 
     },
