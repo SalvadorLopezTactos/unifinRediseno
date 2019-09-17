@@ -11,11 +11,24 @@
         'click .btnSubir': 'guardaPDF'
     },
 
+    initialize: function(options){
+        this._super("initialize", [options]);
+
+        //Valida rol de usuario
+        if (App.user.attributes.roles.includes('Gestion Noticias') || App.user.attributes.is_manager) {
+            this.loadData();
+        }else{
+            var route = App.router.buildRoute('Accounts', null, '');
+            App.router.navigate(route, {trigger: true});
+        }
+    },
+
     loadData: function(options) {
-        //Inicializa variables
+        //noticias = this;
         noticias = this;
         this.noticia_general = "";
         this.pdf = "";
+
         //Api Call para recuperar información del archivo txt y mostrarlo en pantalla
         app.api.call('GET', app.api.buildURL('recuperaNoticia'), null, {
             success: _.bind(function (data) {
