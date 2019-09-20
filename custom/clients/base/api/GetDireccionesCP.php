@@ -53,7 +53,11 @@ class GetDireccionesCP extends SugarApi
     {
 
         $cp=$args['cp'];
-        $indice= (strval($args['indice'])=="")? "0" : $args['indice'];
+        $indice = "0";
+        if (!empty($args['indice'])) {
+          $indice = $args['indice'];
+        }
+        //$indice= (strval($args['indice'])=="")? "0" : $args['indice'];
 
         $query = "SELECT
   cp.id                                                   AS idCP,
