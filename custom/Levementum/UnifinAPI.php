@@ -944,7 +944,7 @@ SQL;
                 $relacionesActivas = str_replace('Proveedor de Recursos F','', $relacionesActivas);
                 $relacionesActivas = str_replace('Proveedor de Recursos CA','', $relacionesActivas);
                 $relacionesActivas = str_replace('Proveedor de Recursos CS','', $relacionesActivas);
-              
+
 
                 $fields = array(
                     "oActualizaRelacion" => array(
@@ -1363,7 +1363,7 @@ SQL;
         {
             try {
                 global $db, $current_user;
-                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Ingreso a getSecuenciaDireccionFiscal ");
+                //error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Ingreso a getSecuenciaDireccionFiscal ");
                 $query = <<<SQL
 SELECT secuencia, indicador FROM dire_direccion
 LEFT JOIN accounts_dire_direccion_1_c ON accounts_dire_direccion_1_c.accounts_dire_direccion_1dire_direccion_idb = dire_direccion.id AND accounts_dire_direccion_1_c.deleted = 0
@@ -1373,17 +1373,17 @@ SQL;
                 $queryResult = $db->query($query);
                 $FiscalSecuencia = '';
                 if (mysqli_num_rows($queryResult) == 0){
-                    error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Sin dirección fiscal registrada! ");
+                    //error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Sin dirección fiscal registrada! ");
                     $FiscalSecuencia = 1;
                 }else {
                     while ($row = $db->fetchByAssoc($queryResult)) {
                         $FiscalSecuencia = $row['secuencia'];
-                        error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . print_r($row,true));
+                        //error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . print_r($row,true));
                     }
                 }
                 return $FiscalSecuencia;
             } catch (Exception $e) {
-                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . $e->getMessage());
+                //error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . $e->getMessage());
                 $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
             }
         }
