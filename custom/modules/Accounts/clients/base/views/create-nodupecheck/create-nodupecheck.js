@@ -87,11 +87,12 @@
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
         //this.model.on('change:pais_nacimiento_c',this.validaExtranjerosRFC, this);
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
+        //Validacion para el formato de los campos nombre y apellidos.
+        this.model.addValidationTask('validaformato3campos',_.bind(this.validaformato,this));
 
-        this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
-        this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
-        this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
-        this.events['keydown input[name=apellidopaterno_c]'] = 'checkTextOnly';
+        this.model.on('change:primernombre_c',this.checkTextOnly, this);
+        this.model.on('change:apellidomaterno_c',this.checkTextOnly,this);
+        this.model.on('change:apellidopaterno_c',this.checkTextOnly,this);
         this.events['keydown input[name=ifepasaporte_c]'] = 'checkTextAndNum';
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
@@ -856,17 +857,40 @@
         }
     },
 
-    //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
-    checkTextOnly: function (evt) {
-        if ($.inArray(evt.keyCode, [9, 16, 17, 110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
-            if (evt.keyCode != 186) {
-                app.alert.show("Caracter Invalido", {
-                    level: "error",
-                    title: "Solo texto es permitido en este campo.",
-                    autoClose: true
-                });
-                return false;
+    //Evento no acepta numeros, solo letras (a-z).
+    checkTextOnly: function () {
+        app.alert.dismiss('Error_validacion_Campos');
+        var camponame= "";
+        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+        if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!=undefined){
+            var nombre=this.model.get('primernombre_c');
+            var comprueba = expresion.test(nombre);
+            if(comprueba!= true){
+                camponame= camponame + '<b>-Primer Nombre<br></b>'; ;
             }
+        }
+        if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
+            var apaterno=this.model.get('apellidopaterno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            var validaap = expresion.test(apaterno);
+            if(validaap!= true){
+                camponame= camponame + '<b>-Apellido Paterno<br></b>'; ;
+            }
+        }
+        if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
+            var amaterno=this.model.get('apellidomaterno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            var validaam = expresion.test(amaterno);
+            if(validaam!= true){
+                camponame= camponame + '<b>-Apellido Materno<br></b>'; ;
+            }
+        }
+        if (camponame){
+            app.alert.show("Error_validacion_Campos", {
+                level: "error",
+                messages: 'Los siguientes campos no permiten caracteres especiales:<br>'+ camponame,
+                autoClose: false
+            });
         }
     },
 
@@ -1611,6 +1635,50 @@
         this.model.set("clean_name", clean_name);
 
         //this.DuplicateCheck_Name();
+    },
+    validaformato: function (fields, errors, callback) {
+        //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
+        var errorescampos="";
+        if (this.model.get('primernombre_c')!="" || this.model.get('apellidopaterno_c')!="" || this.model.get('apellidomaterno_c')!="") {
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!= undefined){
+                var nombre=this.model.get('primernombre_c');
+                var res = expresion.test(nombre);
+                if(res!= true){
+                    errorescampos= errorescampos + '<b>-Primer Nombre<br></b>'; ;
+                    errors['primernombre_c'] = errors['primernombre_c'] || {};
+                    errors['primernombre_c'].required = true;
+                }
+            }
+            if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
+                var apaterno=this.model.get('apellidopaterno_c');
+                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+                var res = expresion.test(apaterno);
+                if(res!= true){
+                    errorescampos= errorescampos + '<b>-Apellido Paterno<br></b>'; ;
+                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                    errors['apellidopaterno_c'].required = true;
+                }
+            }
+            if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
+                var amaterno=this.model.get('apellidomaterno_c');
+                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+                var res = expresion.test(amaterno);
+                if(res!= true){
+                    errorescampos= errorescampos + '<b>-Apellido Materno<br></b>'; ;
+                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                    errors['apellidomaterno_c'].required = true;
+                }
+            }
+            if (errorescampos){
+                app.alert.show("Errores Formato Campos Texto", {
+                    level: "error",
+                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
+                    autoClose: false
+                });
+            }
+        }
+        callback(null, fields, errors);
     },
 
 })
