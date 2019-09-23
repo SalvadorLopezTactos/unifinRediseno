@@ -1222,7 +1222,7 @@
     checkTextOnly: function () {
         app.alert.dismiss('Error_validacion_Campos');
         var camponame= "";
-        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
         if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!=undefined){
             var nombre=this.model.get('primernombre_c');
             var comprueba = expresion.test(nombre);
@@ -1232,7 +1232,7 @@
         }
         if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
             var apaterno=this.model.get('apellidopaterno_c');
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaap = expresion.test(apaterno);
             if(validaap!= true){
                 camponame= camponame + '<b>-Apellido Paterno<br></b>'; ;
@@ -1240,7 +1240,7 @@
         }
         if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
             var amaterno=this.model.get('apellidomaterno_c');
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaam = expresion.test(amaterno);
             if(validaam!= true){
                 camponame= camponame + '<b>-Apellido Materno<br></b>'; ;
@@ -4167,7 +4167,7 @@
         //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
         var errorescampos="";
         if (this.model.get('primernombre_c')!="" || this.model.get('apellidopaterno_c')!="" || this.model.get('apellidomaterno_c')!="") {
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!= undefined){
                 var nombre=this.model.get('primernombre_c');
                 var res = expresion.test(nombre);
@@ -4179,7 +4179,7 @@
             }
             if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
                 var apaterno=this.model.get('apellidopaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(apaterno);
                 if(res!= true){
                     errorescampos= errorescampos + '<b>-Apellido Paterno<br></b>'; ;
@@ -4189,7 +4189,7 @@
             }
             if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
                 var amaterno=this.model.get('apellidomaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)+$/g);
+                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(amaterno);
                 if(res!= true){
                     errorescampos= errorescampos + '<b>-Apellido Materno<br></b>'; ;
