@@ -1671,7 +1671,7 @@
                 }
             }
             if (errorescampos){
-                app.alert.show("Errores Formato Campos Texto", {
+                app.alert.show("Error_validacion_Campos", {
                     level: "error",
                     messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
                     autoClose: false
