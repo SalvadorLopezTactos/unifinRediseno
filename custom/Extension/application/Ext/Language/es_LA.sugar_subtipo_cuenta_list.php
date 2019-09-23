@@ -1,5 +1,5 @@
 <?php
- // created: 2019-04-16 15:38:30
+ // created: 2019-09-23 13:52:05
 
 $app_list_strings['subtipo_cuenta_list']=array (
   'Contactado' => 'Contactado',
@@ -16,5 +16,6 @@ $app_list_strings['subtipo_cuenta_list']=array (
   'Venta Activo' => 'Venta Activo',
   'En Calificacion' => 'En Calificación',
   'No Viable' => 'No Viable',
+  'Credito Simple' => 'Crédito Simple',
   '' => '',
 );

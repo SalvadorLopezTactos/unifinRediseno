@@ -320,6 +320,11 @@
             this.model.set("tipo_registro_c", 'Cliente');
 
         }
+        if (App.user.attributes.tct_alta_credito_simple_chk_c) {
+
+            this.model.set("tipo_registro_c", 'Cliente');
+            this.model.set("subtipo_cuenta_c", 'Credito Simple');
+        }
 
 
         //VM 14/09/2018
@@ -616,7 +621,15 @@
                     delete new_options[key];
                 }
             });
-        }else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
+            //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
+        }else if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
+            Object.keys(new_options).forEach(function (key) {
+                if (key != "Cliente") {
+                    delete new_options[key];
+                }
+            });
+        }
+        else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
 
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Proveedor") {
