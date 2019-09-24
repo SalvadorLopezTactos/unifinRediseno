@@ -317,8 +317,8 @@
          var backlogUrl = app.api.buildURL("CrearArchivoCSV", '', {}, {});
          app.api.call("create", backlogUrl, {data: backlog_options}, {
              success: _.bind(function (data) {
-                 //window.open("#bwc/index.php?entryPoint=exportarBacklog&backlog_doc=" + data);
-                 var blDownCSV = app.api.buildURL("ExportBL/"+data, '', {}, {});
+                 window.open("#bwc/index.php?entryPoint=exportarBacklog&backlog_doc=" + data);
+                 /*var blDownCSV = app.api.buildURL("ExportBL/"+data, '', {}, {});
 
                  app.api.call('GET', blDownCSV,{}, {
                      success: _.bind(function (response) {
@@ -341,7 +341,7 @@
                  }
 
                  // console.log(data);
-                 _.extend(self, {backlogs: data});
+                 _.extend(self, {backlogs: data});*/
 
              })
          });
