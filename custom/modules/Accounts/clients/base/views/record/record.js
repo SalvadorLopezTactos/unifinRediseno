@@ -620,20 +620,40 @@
     },
 
     readOnlyOrigen: function () {
+        //Recupera variables
         var origen = this.model.get('origendelprospecto_c');
-        if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
+        var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
+        /*
+          -- Bloquea campos si;
+          1.- Origen es Marketing o Inteligencia de negocio
+          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
+        */
+        if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
+            //Establece como no editables campos de origen
+            this.noEditFields.push('origendelprospecto_c');
+            this.noEditFields.push('tct_detalle_origen_ddw_c');
+            this.noEditFields.push('tct_origen_base_ddw_c');
+            this.noEditFields.push('tct_origen_busqueda_txf_c');
+            this.noEditFields.push('medio_digital_c');
+            this.noEditFields.push('tct_punto_contacto_ddw_c');
+            this.noEditFields.push('evento_c');
+            this.noEditFields.push('camara_c');
+            this.noEditFields.push('tct_que_promotor_rel_c');
+            this.noEditFields.push('como_se_entero_c');
+            this.noEditFields.push('cual_c');
+            //Deshabilita campos de Origen
+            this.$("[data-name='origendelprospecto_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tct_detalle_origen_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tct_origen_base_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tct_origen_busqueda_txf_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='medio_digital_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tct_punto_contacto_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='evento_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='camara_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tct_que_promotor_rel_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='como_se_entero_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='cual_c']").attr('style', 'pointer-events:none;');
 
-            //Establecer como solo lectura campos de origen y campos dependientes
-            this.$("[data-name='origendelprospecto_c']").prop("disabled", true);
-            this.$("[data-name='tct_detalle_origen_ddw_c']").prop("disabled", true);
-            this.$("[data-name='tct_origen_base_ddw_c']").prop("disabled", true);
-            this.$("[data-name='tct_origen_ag_tel_rel_c']").prop("disabled", true);
-            this.$("[data-name='tct_origen_busqueda_txf_c']").prop("disabled", true);
-            this.$("[data-name='medio_digital_c']").prop("disabled", true);
-            this.$("[data-name='tct_punto_contacto_ddw_c']").prop("disabled", true);
-            this.$("[data-name='evento_c']").prop("disabled", true);
-            this.$("[data-name='camara_c']").prop("disabled", true);
-            this.$("[data-name='tct_que_promotor_rel_c']").prop("disabled", true);
         }
     },
 

@@ -6,14 +6,14 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.customPopulateMenu();
+        //this.customPopulateMenu();
     },
-	
+
     handleRouteEvent: function(event) {
         var currentRoute,
             $currentTarget = this.$(event.currentTarget),
             route = $currentTarget.data('route');
-		
+
         switch (route) {
         	case '#Cotizador':
         		route = '#bwc/index.php?entryPoint=OpportunidadVaadin';
