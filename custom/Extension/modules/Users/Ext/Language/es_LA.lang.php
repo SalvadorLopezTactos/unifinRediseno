@@ -40,3 +40,4 @@ $mod_strings['LBL_TCT_PROPIETARIO_REAL_CHK'] = 'Valida Propietario Real';
 $mod_strings['LBL_TCT_ID_UNI2_TXF'] = 'ID UNI2';
 $mod_strings['LBL_TCT_ID_UNICS_TXF'] = 'ID UNICS';
 $mod_strings['LBL_VETADOS_CHK'] = 'Vetado';
+$mod_strings['LBL_TCT_ALTA_CREDITO_SIMPLE_CHK'] = 'Alta Cliente Crédito Simple';
