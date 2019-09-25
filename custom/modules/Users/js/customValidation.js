@@ -5,6 +5,12 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
         //console.log(document.getElementById("contraseniaactual_c").value);
         //console.log(document.getElementById("nuevacontrasenia_c").value);
         //console.log(document.getElementById("confirmarnuevacontrasenia_c").value);
+        //Validación para el campo de credito simple y alta clientes, solo uno puede estar activo.
+        if (document.getElementById('tct_alta_credito_simple_chk_c').checked==true && document.getElementById('tct_alta_clientes_chk_c').checked==true){
+            alert("No se permite seleccionar los dos campos de Alta Cliente, favor de seleccionar sólo uno.");
+            return false;
+        }
+
         if(document.getElementById("phone_mobile").value!=""){
             var strExpRegNumeric = new RegExp("^([0-9])*$");
             var movil= document.getElementById("phone_mobile").value.trim();

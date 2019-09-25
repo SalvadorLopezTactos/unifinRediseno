@@ -212,6 +212,15 @@ array (
           ),
           1 => '',
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_alta_credito_simple_chk_c',
+            'label' => 'LBL_TCT_ALTA_CREDITO_SIMPLE_CHK',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
