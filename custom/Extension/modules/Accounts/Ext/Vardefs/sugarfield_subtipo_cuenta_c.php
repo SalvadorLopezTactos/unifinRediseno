@@ -1,5 +1,5 @@
 <?php
-// created: 2019-04-16 15:39:12
+ // created: 2019-09-24 10:36:20
 $dictionary['Account']['fields']['subtipo_cuenta_c']['labelValue']='Subtipo de Cuenta';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['dependency']='';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['visibility_grid']=array (
@@ -23,12 +23,20 @@ $dictionary['Account']['fields']['subtipo_cuenta_c']['visibility_grid']=array (
       4 => 'Dormido',
       5 => 'Perdido',
       6 => 'Venta Activo',
+      7 => 'Credito Simple',
     ),
     'Lead' => 
     array (
       0 => 'En Calificacion',
       1 => 'No Viable',
     ),
+    'Persona' => 
+    array (
+    ),
+    'Proveedor' => 
+    array (
+    ),
   ),
 );
+
  ?>

@@ -312,16 +312,13 @@
         if (App.user.attributes.tct_altaproveedor_chk_c) {
 
             this.model.set("tipo_registro_c", 'Proveedor');
-
         }
-
         if (App.user.attributes.tct_alta_clientes_chk_c) {
 
             this.model.set("tipo_registro_c", 'Cliente');
-
         }
         if (App.user.attributes.tct_alta_credito_simple_chk_c) {
-
+            //Valida que el check este marcado, de ser así setea el tipo de cuenta con CS
             this.model.set("tipo_registro_c", 'Cliente');
             this.model.set("subtipo_cuenta_c", 'Credito Simple');
         }
@@ -421,7 +418,7 @@
          * */
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         /* END */
-
+        this.model.on('change:subtipo_cuenta_c', this.cambiaCliente, this);
         //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
@@ -621,15 +618,7 @@
                     delete new_options[key];
                 }
             });
-            //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
-        }else if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
-            Object.keys(new_options).forEach(function (key) {
-                if (key != "Cliente") {
-                    delete new_options[key];
-                }
-            });
-        }
-        else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
+        }else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
 
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Proveedor") {
@@ -647,6 +636,15 @@
         }
         if (App.user.attributes.tct_alta_cd_chk_c == true){
             new_options["Persona"]="Persona";
+        }
+        //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
+        if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
+            /* Object.keys(new_options).forEach(function (key) {
+                 if (key != "Cliente") {
+                     delete new_options[key];
+                 }
+             });*/
+            new_options["Cliente"]="Cliente";
         }
 
         this.model.fields['tipo_registro_c'].options = new_options;
@@ -2668,5 +2666,13 @@
            }
        }
         callback(null, fields, errors);
+    },
+
+    cambiaCliente: function (){
+        //Funcion que habilita la opcion credito simple al cambiar el tipo de registro (en tipo Cliente).
+        if (this.model.get('tipo_registro_c')=="Cliente" && App.user.attributes.tct_alta_credito_simple_chk_c == 1){
+                this.model.fields['subtipo_cuenta_c'].options="Credito Simple";
+                this.model.set("subtipo_cuenta_c", 'Credito Simple');
+      }
     },
 })
