@@ -231,39 +231,41 @@ SQL;
 
                 //Actualizar el usuario asignado a registros de Backlog relacionados a las cuentas
                 //Obtener Backlogs de la cuenta que sean de meses futuros
-                $anio_actual=date("Y");
-                $mes_actual= intval(date("n"));
-                $hoy= date("d");
-                $condicion='';
-                if($optRadio=='siguientes'){
+                if ($product == 'LEASING') {
+                  $anio_actual=date("Y");
+                  $mes_actual= intval(date("n"));
+                  $hoy= date("d");
+                  $condicion='';
+                  if($optRadio=='siguientes'){
 
-                    $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
+                      $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
 
-                }else{
-                    $condicion=" AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
-                }
+                  }else{
+                      $condicion=" AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
+                  }
 
-                $bl_cuenta="SELECT b.id, b.mes,b.description
-FROM
-    lev_backlog b
-WHERE
-    b.account_id_c = '{$value}'".$condicion."
-        AND deleted = 0;";
+                  $bl_cuenta="SELECT b.id, b.mes,b.description
+  FROM
+      lev_backlog b
+  WHERE
+      b.account_id_c = '{$value}'".$condicion."
+          AND deleted = 0;";
 
-                $result_bl_cuentas = $db->query($bl_cuenta);
+                  $result_bl_cuentas = $db->query($bl_cuenta);
 
-                if($result_bl_cuentas->num_rows>0 && $result_bl_cuentas != null){
+                  if($result_bl_cuentas->num_rows>0 && $result_bl_cuentas != null){
 
-                    while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
+                      while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                        $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
-                        if($bl != null){
-                            $bl->assigned_user_id=$reAsignado;
-                            $bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
-                            $bl->save();
-                        }
-                    }
+                          $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
+                          if($bl != null){
+                              $bl->assigned_user_id=$reAsignado;
+                              $bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
+                              $bl->save();
+                          }
+                      }
 
+                  }
                 }
 
 
