@@ -385,6 +385,9 @@
             }else{
                 iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
             }
+            if(objReferencias[i].nombres.trim()=="" || objReferencias[i].apaterno.trim()==""){
+                banderaRef++;
+            }
 
             iteradas = iteradas.replace(/\s+/gi,'');
             iteradas = iteradas.toUpperCase();
