@@ -4,12 +4,6 @@
 
     events: {
         'click  .addReferencia': 'addReferencia',
-        'keydown .newCampo1R': 'OnlyText',
-        'keydown .newCampo2R': 'OnlyText',
-        'keydown .newCampo3R': 'OnlyText',
-        'keydown .campo1SelectR': 'OnlyText',
-        'keydown .campo2SelectR': 'OnlyText',
-        'keydown .campo3SelectR': 'OnlyText',
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
         'keydown .newCampo5R':'checkInVentas',
@@ -162,6 +156,12 @@
     estableceReferencias:function(fields, errors, callback) {
         //Establece el objeto mReferencias a minuta_referencias para guardar y a un campo cstm para obtener de él sus datos para visualizacion
 
+        Object.keys(selfRef.mReferencias.referencias).forEach(function (key) {
+            if(!selfRef.ValidaCaracter(selfRef.mReferencias.referencias[key].nombre)){
+
+            }
+        });
+
         this.model.set('minuta_referencias',  selfRef.mReferencias.referencias);
         this.model.set('tct_ref_json_c',  JSON.stringify(selfRef.mReferencias.referencias));
 
@@ -169,20 +169,6 @@
         callback(null, fields, errors);
     },
 
-    //Funcion que acepta solo letras (a-z), puntos(.) y comas(,)
-    OnlyText: function (evt) {
-        //console.log(evt.keyCode);
-        if ($.inArray(evt.keyCode, [9, 16, 17, 110,190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
-            if (evt.keyCode != 186) {
-                app.alert.show("Caracter Invalido", {
-                    level: "error",
-                    title: "Solo texto es permitido en este campo.",
-                    autoClose: true
-                });
-                return false;
-            }
-        }
-    },
 
     /* Función para agregar los datos y crear:
      Cuenta tipo Lead y Persona relacionada para "Persona Moral"
@@ -469,13 +455,13 @@
 
     },
 
-    ValidaCaracter: function(texto)
-    {
+    ValidaCaracter: function(texto) {
         var valido=false;
-        var letter = /^[a-zA-Z\s]+$/;
-        if(texto.match(letter))
-        {
-            valido = true;
+        if (texto!="" && texto!=undefined) {
+            var letter = /^[a-zA-ZÀ-ÿ\s]*$/g;
+            if (texto.match(letter)) {
+                valido = true;
+            }
         }
         return valido;
     },

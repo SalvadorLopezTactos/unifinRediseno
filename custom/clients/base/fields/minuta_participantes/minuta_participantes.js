@@ -6,9 +6,6 @@
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
         'click  .addParticipantes': 'addParticipantesFunction',
-        'keydown .newCampo1P': 'checkText',
-        'keydown .newCampo2P': 'checkText',
-        'keydown .newCampo3P': 'checkText',
         'change .newCampo5P': 'validaTamano'
     },
 
@@ -152,34 +149,59 @@
         $('.campo3P').change(function(evt) {
           var row = $(this).closest("tr");
           var telefono = row.prevObject[0].value; //$('.campo3P').eq(row.index()).val();
-          if (!selfData.validaTamano(telefono) && telefono) {
-            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
-            app.alert.show('phone_participante_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Formato de tel\u00E9fono incorrecto'
-            });
-            $('.campo3SelectP').eq(row.index()).find('input').val('');
-          }
-          else {
-            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
-            selfData.mParticipantes.participantes[row.index()].telefono = telefono;
-          }
-        });
-    },
+            if(telefono!="" && telefono!= selfData.mParticipantes.participantes[row.index()].tel_previo) {
+                if (!selfData.validaTamano(telefono) && telefono) {
+                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                    app.alert.show('phone_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de tel\u00E9fono incorrecto'
+                    });
+                    $('.campo3SelectP').eq(row.index()).find('input').val('');
+                }else {
 
-    //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
-    checkText: function (evt) {
-         if ($.inArray(evt.keyCode, [9, 16, 17, 110, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
-            if (evt.keyCode != 186) {
-                app.alert.show("Caracter Invalido", {
-                    level: "error",
-                    title: "Solo texto es permitido en este campo.",
-                    autoClose: true
-                });
-                return false;
+                    var idtelefono=  selfData.mParticipantes.participantes[row.index()].id;
+                    var urlapi = app.api.buildURL("Accounts/" + idtelefono + "/link/accounts_tel_telefonos_1");
+                    var repetido= 0;
+
+                    app.api.call("read", urlapi, null, null, {
+                        success: _.bind(function (data) {
+                            if (data.records.length > 0) {
+                                Object.keys(data.records).forEach(function (key) {
+                                    if (telefono == data.records[key].telefono) {
+                                        repetido++;
+                                    }
+                                });
+                                if (repetido>0) {
+                                    var nombrec= selfData.mParticipantes.participantes[row.index()].nombres;
+                                    var apellidoc=selfData.mParticipantes.participantes[row.index()].apaterno;
+                                    var apellidomc=selfData.mParticipantes.participantes[row.index()].amaterno;
+                                    var idcuenta= selfData.mParticipantes.participantes[row.index()].id;
+                                    app.alert.show('Error_telefono_repetido', {
+                                        level: 'error',
+                                        autoClose: false,
+                                        messages: 'El número <b>' + telefono + '</b> ya existe en la cuenta '+'<a href="#Accounts/'+idcuenta+'" target= "_blank">'+ nombrec +' '+ apellidoc +' '+apellidomc+' </a>',
+                                    });
+
+                                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                                    selfData.mParticipantes.participantes[row.index()].telefono = selfData.mParticipantes.participantes[row.index()].tel_previo;
+                                    selfData.render();
+                                }
+                                else{
+                                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
+                                    selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                                }
+                            }else{
+                                $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
+                                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                            }
+                        }, this),
+                    });
+                }
+            }else{
+                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
             }
-        }
+        });
     },
 
     /*
@@ -213,7 +235,8 @@
                 "unifin": 0,
                 "tipo_contacto": valor6,
                 "asistencia": 1,
-                "activo" : "1"
+                "activo" : "1",
+                "tel_previo":valor3
             };
 
             //Valida campos requeridos
@@ -565,15 +588,15 @@
         return banderTelefono;
     },
 
-    ValidaCaracter: function(texto)
-    {
-        var valido=false;
-        var letter = /^[a-zA-Z\s]+$/;
-        if(texto.match(letter)) 
-        {
-          valido = true;
+    ValidaCaracter: function(texto) {
+        var valido = false;
+        if (texto!="" && texto!=undefined) {
+            var letter = /^[a-zA-ZÀ-ÿ\s]*$/g;
+            if (texto.match(letter)) {
+                valido = true;
+            }
         }
-        return valido;
+            return valido;
     },
 
     validaMail:function(correo1) {

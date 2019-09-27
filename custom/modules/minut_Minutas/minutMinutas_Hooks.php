@@ -125,7 +125,7 @@ class minutMinutas_Hooks
               if($objArrParticipnates[$j]['id'] && $objArrParticipnates[$j]['origen']=="C")
               {
                 $beanCuenta = BeanFactory::getBean('Accounts', $objArrParticipnates[$j]['id']);
-                $beanCuenta->phone_office = $objArrParticipnates[$j]['telefono'];
+                $beanCuenta->phone_office = ($objArrParticipnates[$j]['telefono']!="") ? $objArrParticipnates[$j]['telefono'] : $beanCuenta->phone_office;
                 $beanCuenta->email1 = $objArrParticipnates[$j]['correo'];
                 $beanCuenta->save();
               }

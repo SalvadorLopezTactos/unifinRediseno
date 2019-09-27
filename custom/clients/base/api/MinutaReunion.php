@@ -70,7 +70,7 @@ class MinutaReunion extends SugarApi
                     "tipo_contacto" => "",
                     "asistencia" => $value->id==$current_user->id?1:0,
                     "activo" => $value->id==$current_user->id?"":"1",
-
+                    "tel_previo"=>$value->phone_work,
                 ];
                 //$respuestaJson['participantes']['id']=$value->id ;
                 array_push($respuestaJson['participantes'], $participantes);
@@ -106,6 +106,7 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
                 "tipo_contacto" => "",
                 "asistencia" => 0,
                 "activo" => "1",
+                "tel_previo"=> $beanCuentas->phone_office,
             ];
             array_push($respuestaJson['participantes'], $participantesCuentas);
         }
