@@ -710,12 +710,12 @@
      */
     updateValueTipoMultiselect: function (evt) {
         //Aplica estilo
-        this.$('[data-field="multiTipoNew"].multiTipoNew').select2({
-           width:'100%',
-           minimumResultsForSearch:7,
-           closeOnSelect: false,
-           containerCssClass: 'select2-choices-pills-close'
-       });
+       //  this.$('[data-field="multiTipoNew"].multiTipoNew').select2({
+       //     width:'100%',
+       //     minimumResultsForSearch:7,
+       //     closeOnSelect: false,
+       //     containerCssClass: 'select2-choices-pills-close'
+       // });
         //Recupera valor
         var tipoSeleccionados = this.$('#multiTipoNew').val().toString();
         //Limpia borde
@@ -737,12 +737,12 @@
     */
     updateValueIndicadorMultiselect: function (evt) {
         //Aplica estilo
-       this.$('[data-field="multiIndicadorNew"].multiIndicadorNew').select2({
-           width:'100%',
-           minimumResultsForSearch:7,
-           closeOnSelect: false,
-           containerCssClass: 'select2-choices-pills-close'
-       });
+       // this.$('[data-field="multiIndicadorNew"].multiIndicadorNew').select2({
+       //     width:'100%',
+       //     minimumResultsForSearch:7,
+       //     closeOnSelect: false,
+       //     containerCssClass: 'select2-choices-pills-close'
+       // });
 
         //Recupera valor seleccionado
         var indicadorSeleccionados = this.$('#multiIndicadorNew').val().toString();
@@ -1144,40 +1144,40 @@
         }, this);
     },
 
-    bindDomChange: function() {
-        /* Estableciendo formato select2 a campos de direcciones existentes */
-        $('select.multi_tipo_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-        $('select.multi1_n_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-
-        if (this.tplName === 'edit') {
-          /*  var self = this;
-            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
-
-            $("select.existingTipodedireccion").each(function (i, obj) {
-                var valuesI = self._getTipoDireccion($(this).val(), null)
-                $('select.multi_tipo_existing').eq(i).select2('val', valuesI);
-
-            });
-
-            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
-            $("select.existingIndicador").each(function (i, obj) {
-                var valuesI = self._getIndicador($(this).val(), null)
-                $('select.multi1_n_existing').eq(i).select2('val', valuesI);
-
-            });*/
-
-        }
-
-
-    },
+    // bindDomChange: function() {
+    //     /* Estableciendo formato select2 a campos de direcciones existentes */
+    //     // $('select.multi_tipo_existing').select2({
+    //     //     width: '100%',
+    //     //     closeOnSelect: false,
+    //     //     containerCssClass: 'select2-choices-pills-close'
+    //     // });
+    //     // $('select.multi1_n_existing').select2({
+    //     //     width: '100%',
+    //     //     closeOnSelect: false,
+    //     //     containerCssClass: 'select2-choices-pills-close'
+    //     // });
+    //
+    //     if (this.tplName === 'edit') {
+    //       /*  var self = this;
+    //         //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
+    //
+    //         $("select.existingTipodedireccion").each(function (i, obj) {
+    //             var valuesI = self._getTipoDireccion($(this).val(), null)
+    //             $('select.multi_tipo_existing').eq(i).select2('val', valuesI);
+    //
+    //         });
+    //
+    //         //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
+    //         $("select.existingIndicador").each(function (i, obj) {
+    //             var valuesI = self._getIndicador($(this).val(), null)
+    //             $('select.multi1_n_existing').eq(i).select2('val', valuesI);
+    //
+    //         });*/
+    //
+    //     }
+    //
+    //
+    // },
 
     updateValueCalle: function(evt) {
         //Recupera valor

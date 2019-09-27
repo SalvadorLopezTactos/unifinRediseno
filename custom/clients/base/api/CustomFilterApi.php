@@ -15,7 +15,7 @@ class CustomFilterApi extends FilterApi
         return parent::registerApiRest();
     }
 
-    public function filterListSetup(ServiceBase $api, array $args, $acl = 'list')
+    /*public function filterListSetup(ServiceBase $api, array $args, $acl = 'list')
     {
 
         if ($args['module'] != "Accounts") {
@@ -56,7 +56,7 @@ class CustomFilterApi extends FilterApi
 
 
         return array($args, $q, $options, $seed);
-    }
+    }*/
 
     protected static function addFilters(array $filterDefs, SugarQuery_Builder_Where $where, SugarQuery $q) {
         static $sfh;

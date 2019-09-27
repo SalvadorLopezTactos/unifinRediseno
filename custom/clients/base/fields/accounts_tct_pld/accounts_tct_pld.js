@@ -346,50 +346,50 @@
         /*Apartado que se añade para evitar que se pierda el estilo select2 en campo account_direcciones
         al dar click en botón Editar
         */
-        $('select.multi_tipo_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-
-        $('select.multi1_n_existing').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-        /*Fin sobre ajuste para mantener formato select2 en campo account_direcciones*/
-
-        //Estableciendo formato select2 a campo "Tipo" en account_direcciones
-        $('select.multi_tipo').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-
-        //Estableciendo formato select2 a campo "Tipo de dirección" en account_direcciones
-        $('select.multi1_n').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
+        // $('select.multi_tipo_existing').select2({
+        //     width: '100%',
+        //     closeOnSelect: false,
+        //     containerCssClass: 'select2-choices-pills-close'
+        // });
+        //
+        // $('select.multi1_n_existing').select2({
+        //     width: '100%',
+        //     closeOnSelect: false,
+        //     containerCssClass: 'select2-choices-pills-close'
+        // });
+        // /*Fin sobre ajuste para mantener formato select2 en campo account_direcciones*/
+        //
+        // //Estableciendo formato select2 a campo "Tipo" en account_direcciones
+        // $('select.multi_tipo').select2({
+        //     width: '100%',
+        //     closeOnSelect: false,
+        //     containerCssClass: 'select2-choices-pills-close'
+        // });
+        //
+        // //Estableciendo formato select2 a campo "Tipo de dirección" en account_direcciones
+        // $('select.multi1_n').select2({
+        //     width: '100%',
+        //     closeOnSelect: false,
+        //     containerCssClass: 'select2-choices-pills-close'
+        // });
 
 
 
         //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
-        $('select.campo16ddw-ap').select2({
+        this.$('select.campo16ddw-ap').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
         //Se establece formato de multiselect a campo select con id "multil2 pregunta 2"
-        $('select.campo16ddw-ff').select2({
+        this.$('select.campo16ddw-ff').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
 
         //Se establece formato de multiselect a campo select con id "multil2 pregunta 3"
-        $('select.campo18ddw-cs').select2({
+        this.$('select.campo18ddw-cs').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
