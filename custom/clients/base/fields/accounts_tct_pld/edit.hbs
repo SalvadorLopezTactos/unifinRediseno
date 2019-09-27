@@ -18,16 +18,17 @@
 
 </style>
 <script>
-    $('#states3').select2({
+    this.$('#states3').select2({
         minimumResultsForSearch: 5,
         allowClear: true
     });
-    $('#states2').select2({
+    this.$('#states2').select2({
         minimumResultsForSearch: 5,
         allowClear: true
     });
-    var $select = $('select.select2');
-    $select.select2();
+    //var $selectPLD = this.$('select.select2');
+    var $selectPLD = this.$('[data-name="accounts_tct_pld"]').find('select.select2');
+    $selectPLD.select2();
 
 </script>
 <div class="control-group">
@@ -142,7 +143,7 @@
             <!-- Fila 8 AP -->
             <div class="row-fluid Fila8-AP">
                <div class="span6 campo25-ap" style="display:none">
-                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados	
+                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
                         a <font COLOR="red">*</font></label>
                     <select class="campo25ddw-ap select2 row-fluid" data-field="campo25AP" data-name="Los recursos con los que va a celebrar su operación están destinados a" >
                         {{#each campo25_list}}
