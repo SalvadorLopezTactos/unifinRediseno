@@ -177,7 +177,7 @@ $(window).load(function(){
     $('#tct_id_uni2_txf_c').attr('disabled','disabled');
        $('#first_name').attr('disabled','disabled');
        $('#last_name').attr('disabled','disabled');
-     //$('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
+       $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
     }
    }catch(error){
       console.log(error.message);
@@ -208,7 +208,7 @@ $(window).load(function(){
       $('#tct_id_uni2_txf_c').attr('disabled','disabled');
         $('#first_name').attr('disabled','disabled');
         $('#last_name').attr('disabled','disabled');
-      //$('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
+        $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
 
     }
    }
