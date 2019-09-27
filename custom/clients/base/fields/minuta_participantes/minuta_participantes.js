@@ -149,19 +149,58 @@
         $('.campo3P').change(function(evt) {
           var row = $(this).closest("tr");
           var telefono = row.prevObject[0].value; //$('.campo3P').eq(row.index()).val();
-          if (!selfData.validaTamano(telefono) && telefono) {
-            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
-            app.alert.show('phone_participante_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Formato de tel\u00E9fono incorrecto'
-            });
-            $('.campo3SelectP').eq(row.index()).find('input').val('');
-          }
-          else {
-            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
-            selfData.mParticipantes.participantes[row.index()].telefono = telefono;
-          }
+            if(telefono!="" && telefono!= selfData.mParticipantes.participantes[row.index()].tel_previo) {
+                if (!selfData.validaTamano(telefono) && telefono) {
+                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                    app.alert.show('phone_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de tel\u00E9fono incorrecto'
+                    });
+                    $('.campo3SelectP').eq(row.index()).find('input').val('');
+                }else {
+
+                    var idtelefono=  selfData.mParticipantes.participantes[row.index()].id;
+                    var urlapi = app.api.buildURL("Accounts/" + idtelefono + "/link/accounts_tel_telefonos_1");
+                    var repetido= 0;
+
+                    app.api.call("read", urlapi, null, null, {
+                        success: _.bind(function (data) {
+                            if (data.records.length > 0) {
+                                Object.keys(data.records).forEach(function (key) {
+                                    if (telefono == data.records[key].telefono) {
+                                        repetido++;
+                                    }
+                                });
+                                if (repetido>0) {
+                                    var nombrec= selfData.mParticipantes.participantes[row.index()].nombres;
+                                    var apellidoc=selfData.mParticipantes.participantes[row.index()].apaterno;
+                                    var apellidomc=selfData.mParticipantes.participantes[row.index()].amaterno;
+                                    var idcuenta= selfData.mParticipantes.participantes[row.index()].id;
+                                    app.alert.show('Error_telefono_repetido', {
+                                        level: 'error',
+                                        autoClose: false,
+                                        messages: 'El número <b>' + telefono + '</b> ya existe en la cuenta '+'<a href="#Accounts/'+idcuenta+'" target= "_blank">'+ nombrec +' '+ apellidoc +' '+apellidomc+' </a>',
+                                    });
+
+                                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                                    selfData.mParticipantes.participantes[row.index()].telefono = selfData.mParticipantes.participantes[row.index()].tel_previo;
+                                    selfData.render();
+                                }
+                                else{
+                                    $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
+                                    selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                                }
+                            }else{
+                                $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
+                                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+                            }
+                        }, this),
+                    });
+                }
+            }else{
+                selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+            }
         });
     },
 
@@ -196,7 +235,8 @@
                 "unifin": 0,
                 "tipo_contacto": valor6,
                 "asistencia": 1,
-                "activo" : "1"
+                "activo" : "1",
+                "tel_previo":valor3
             };
 
             //Valida campos requeridos
