@@ -221,6 +221,8 @@
                     this.render();
                 }
             }else{
+                //Actualiza estado como activo
+                telefono.estatus = 'Activo';
                 this.oTelefonos.telefono.push(telefono);
                 this.model.set('account_telefonos', this.oTelefonos.telefono);
                 this.render();
@@ -310,10 +312,19 @@
               input = this.$(evt.currentTarget),
               index = inputs.index(input);
           if (this.oTelefonos.telefono[index].principal == 0) {
-              for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
-                  this.oTelefonos.telefono[i].principal = 0;
+              if (this.oTelefonos.telefono[index].estatus == "Activo") {
+                  for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
+                      this.oTelefonos.telefono[i].principal = 0;
+                  }
+                  this.oTelefonos.telefono[index].principal = 1;
+              }else{
+                  //No puede marcar como principal teléfono inactivo
+                  app.alert.show('no_principal', {
+                      level: 'warning',
+                      messages: 'No se puede tener un teléfono inactivo como principal',
+                      autoClose: true
+                  });
               }
-              this.oTelefonos.telefono[index].principal = 1;
           }
           this.render();
     },
@@ -341,8 +352,18 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var estatus = input.val();
-        this.oTelefonos.telefono[index].estatus = estatus;
-        //this.render();
+        //valida que no sea principal
+        if (this.oTelefonos.telefono[index].principal == 1 && estatus == "Inactivo") {
+            //No puede marcar como principal teléfono inactivo
+            app.alert.show('no_principal_estatus', {
+                level: 'warning',
+                messages: 'No se puede tener un teléfono inactivo como principal',
+                autoClose: true
+            });
+        }else{
+            this.oTelefonos.telefono[index].estatus = estatus;
+        }
+        this.render();
     },
 
     updateExtensiont: function(evt) {
