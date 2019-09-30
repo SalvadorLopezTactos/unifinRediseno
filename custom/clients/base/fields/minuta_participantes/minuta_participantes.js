@@ -56,7 +56,7 @@
           //Recupera datos para vista de creación
           idReunion = this.context.parent.attributes.modelId;
           app.alert.show('alert_participants', {
-            level: 'process',         
+            level: 'process',
             title: 'Cargando...'
           });
           var moduleid = app.data.createBean('Meetings',{id:idReunion});
@@ -71,7 +71,7 @@
                           selfData.mParticipantes= data;
                           _.extend(this, selfData.mParticipantes);
                           selfData.render();
-                          app.alert.dismiss('alert_participants'); 
+                          app.alert.dismiss('alert_participants');
                       },
                       error: function (e) {
                           throw e;
@@ -122,13 +122,22 @@
         $('.campo2P').change(function(evt) {
           var row = $(this).closest("tr");
           var correo =row.prevObject[0].value; //$('.campo2P').eq(row.index()).val();
-          if(correo == "") {
-              $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
-                app.alert.show('email_telefono_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Favor de agregar un <b>Correo</b>'
-              });
+          if(correo.trim() == "") {
+                if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
+                    $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                    //Alerta coreo requerido
+                    app.alert.show('email_telefono_error', {
+                      level: 'error',
+                      autoClose: true,
+                      messages: 'El correo es requerido para un paprticipante con asistencia,'
+                    });
+                }
+                //Alerta correo vacío
+                app.alert.show('email_vacio', {
+                  level: 'warning',
+                  autoClose: true,
+                  messages: 'El Correo solo se eliminará de la información de la minuta, no de la cuenta del participante.'
+                });
           }else{
               $('.campo2SelectP').eq(row.index()).find('input').css('border-color', '');
               if (!selfData.validaMail(correo)) {
@@ -147,8 +156,17 @@
           selfData.mParticipantes.participantes[row.index()].correo = correo;
         });
         $('.campo3P').change(function(evt) {
-          var row = $(this).closest("tr");
-          var telefono = row.prevObject[0].value; //$('.campo3P').eq(row.index()).val();
+            var row = $(this).closest("tr");
+            var telefono = row.prevObject[0].value; //$('.campo3P').eq(row.index()).val();
+            //Notifica teléfono vacío
+            if (telefono.trim() == "") {
+                //Alerta correo vacío
+                app.alert.show('telefono_vacio', {
+                  level: 'warning',
+                  autoClose: true,
+                  messages: 'El Teléfono solo se eliminará de la información de la minuta, no de la cuenta del participante.'
+                });
+            }
             if(telefono!="" && telefono!= selfData.mParticipantes.participantes[row.index()].tel_previo) {
                 if (!selfData.validaTamano(telefono) && telefono) {
                     $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
@@ -355,7 +373,7 @@
                     title: "No se puede agregar al participante. <br> Esta persona ya ha sido registrada."
                   });
                 }
-              }              
+              }
               if(!duplicados)
               {
                 $('.addParticipante').bind('click', false);
@@ -456,7 +474,7 @@
                 }
               }
               if(!duplicados)
-              {              
+              {
                 App.alert.show('loadingParticipantes', {
                     level: 'process',
                     title: 'Cargando, por favor espere.',
@@ -517,14 +535,14 @@
             else
             {
               if(campos)
-              {            
+              {
                 app.alert.show('campos_requeridos', {
                   level: 'error',
                   autoClose: false,
                   messages: "Hace falta completar la siguiente información en los <b>Participantes:</b><br>" + campos
                 });
               }
-            }            
+            }
     },
 
     // /**
