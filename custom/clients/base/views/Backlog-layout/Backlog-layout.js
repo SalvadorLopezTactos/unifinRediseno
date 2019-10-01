@@ -1753,8 +1753,30 @@
            return;
         }
         self.render();
-        var modal = $('#myModalRe');
-        modal.show();
+        //Valida existencia de registros duplicados
+        if (backlog.numero_de_backlog == "") {
+            app.alert.show('numero_invalido', {
+                level: 'error',
+                messages: 'El número de backlog no es valido',
+                autoClose: true
+             });
+        } else {
+            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_de_la_operacion]=Comprometida&fields=numero_de_backlog,mes";
+            app.api.call("read", app.api.buildURL (url), {}, {
+                success: _.bind(function (data) {
+                    if (data.records.length>0) {
+                        app.alert.show('backlog_repetido', {
+                            level: 'error',
+                            messages: 'No se puede revivir backlog.<br> Este backlog ya se encuentra comprometido en otro mes',
+                            autoClose: true
+                        });
+                    }else{
+                        var modal = $('#myModalRe');
+                        modal.show();
+                    }
+                }, this)
+            });
+        }
     },
 
     ocultaRevivir:function(){
