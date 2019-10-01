@@ -1817,32 +1817,55 @@
             $('#mes_revivir').css('border-color', 'red');
             return;
         }
-        //Notificacion de inicio de proceso
-       app.alert.show('RevivirAlert', {
-            level: 'process',
-            title: 'Cargando, por favor espere.',
-        });
-       $('#btn-CancelarRe').prop('disabled',true);
-       $('#btn-GuardarRe').prop('disabled',true);
 
-        var Url = app.api.buildURL("RevivirBacklog", '', {}, {});
-        app.api.call("create", Url, {data: Params}, {
-           success: _.bind(function (data) {
-                if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
+        //Valida existencia de backlog en el mes
+        var backlog=self.backlogs.backlogs.MyBacklogs.linea[this.newRevivir.idBacklog];
+        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][estatus_de_la_operacion]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
+        app.api.call("read", app.api.buildURL (url), {}, {
+            success: _.bind(function (data) {
+                if (data.records.length>0) {
+                    app.alert.show('backlog_repetido_cliente', {
+                        level: 'error',
+                        messages: 'No se puede revivir backlog.<br> El cliente ya cuenta con un backlog comprometido en este mes.',
+                        autoClose: true
+                    });
+                }else{
+                    //Notificacion de inicio de proceso
+                    app.alert.show('RevivirAlert', {
+                        level: 'process',
+                        title: 'Cargando, por favor espere.',
+                    });
+                    $('#btn-CancelarRe').prop('disabled',true);
+                    $('#btn-GuardarRe').prop('disabled',true);
+
+                    var Url = app.api.buildURL("RevivirBacklog", '', {}, {});
+                    app.api.call("create", Url, {data: Params}, {
+                        success: _.bind(function (data) {
+                            if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
+                            }
+                            $('#btn-CancelarRe').prop('disabled',false);
+                            $('#btn-GuardarRe').prop('disabled',false);
+                            app.alert.dismiss('RevivirAlert');
+                            self.ocultaRevivir();
+                            self.render();
+                        },this),
+                        error:function(error){
+                            $('#btn-CancelarRe').prop('disabled',false);
+                            $('#btn-GuardarRe').prop('disabled',false);
+                            app.alert.dismiss('RevivirAlert');
+                            app.alert.show('errorAlertRe', {
+                                level: 'error',
+                                messages: error,
+                                autoClose: true
+                            });
+                        }
+                  });
                 }
-                $('#btn-CancelarRe').prop('disabled',false);
-                $('#btn-GuardarRe').prop('disabled',false);
-                app.alert.dismiss('RevivirAlert');
-                self.ocultaRevivir();
-                self.render();
-            },this),
+            }, this),
             error:function(error){
-                $('#btn-CancelarRe').prop('disabled',false);
-                $('#btn-GuardarRe').prop('disabled',false);
-                app.alert.dismiss('RevivirAlert');
-                app.alert.show('errorAlertRe', {
+                app.alert.show('errorAlertRevivir', {
                     level: 'error',
                     messages: error,
                     autoClose: true
