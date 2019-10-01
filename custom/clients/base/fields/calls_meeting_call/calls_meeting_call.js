@@ -533,12 +533,6 @@
 
             }
 
-            if(this.myobject.records.length==0 && this.model.get('tct_resultado_llamada_ddw_c')=="Cita"){
-                $('.newObjetivoE1').css('border-color', 'red');
-                msjError+="<b>Objetivo espec\u00EDfico</b><br>"
-                bandera+=1;
-            }
-
             if(bandera>0){
 
                 var alertOptions = {title: msjError, level: "error"};
