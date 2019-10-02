@@ -1723,7 +1723,7 @@
                 }
             }
             if (campoPass) {
-                app.alert.show("Error_validacion_Campos", {
+                app.alert.show("Error_validacion_Passport", {
                     level: "error",
                     messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + campoPass,
                     autoClose: false
