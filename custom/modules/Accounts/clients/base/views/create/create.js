@@ -452,6 +452,7 @@
         * */
         //Validacion para el formato de los campos nombre y apellidos.
         this.model.addValidationTask('validaformato3campos',_.bind(this.validaformato,this));
+        this.model.addValidationTask('validacamposcurppass',_.bind(this.validapasscurp,this));
 
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -474,7 +475,8 @@
         this.model.on('change:apellidopaterno_c',this.checkTextOnly,this);
 
         this.events['keydown input[name=rfc_c]'] = 'checkTextAndNumRFC';
-        this.events['keydown input[name=ifepasaporte_c]'] = 'checkTextAndNum';
+        this.model.on('change:ifepasaporte_c',this.checkTextAndNum,this);
+        this.model.on('change:curp_c',this.checkTextAndNum,this);
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
@@ -1511,15 +1513,32 @@
         }
     },
 
-    checkTextAndNum: function (evt) {
-        //console.log(evt.keyCode);
-        if ($.inArray(evt.keyCode, [110, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192, 186, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
-            app.alert.show("Caracter Invalido", {
+    checkTextAndNum: function () {
+        //Modificacion a validacion del campo, debe cumplir un formato.
+        app.alert.dismiss('Error_validacion_Passport');
+        var campoPass= "";
+        var expresion = new RegExp(/^[0-9a-zA-Z]+$/g);
+        if (this.model.get('ifepasaporte_c')!="" && this.model.get('ifepasaporte_c')!=undefined){
+            var nombre=this.model.get('ifepasaporte_c');
+            var comprueba = expresion.test(nombre);
+            if(comprueba!= true){
+                campoPass= campoPass + '<b>-IFE/Pasaporte<br></b>';
+            }
+        }
+        if (this.model.get('curp_c')!="" && this.model.get('curp_c')!=undefined){
+            var expresionC = new RegExp(/^[0-9a-zA-Z]+$/g);
+            var curp=this.model.get('curp_c');
+            var comprueba = expresionC.test(curp);
+            if(comprueba!= true){
+                campoPass= campoPass + '<b>-CURP<br></b>';
+            }
+        }
+        if (campoPass){
+            app.alert.show("Error_validacion_Passport", {
                 level: "error",
-                title: "Caracter Inv\u00E1lido.",
-                autoClose: true
+                messages: 'Los siguientes campos no permiten el ingreso de caracteres especiales:<br>'+ campoPass,
+                autoClose: false
             });
-            return false;
         }
     },
 
@@ -2674,5 +2693,39 @@
                 this.model.fields['subtipo_cuenta_c'].options="Credito Simple";
                 this.model.set("subtipo_cuenta_c", 'Credito Simple');
       }
+    },
+
+    validapasscurp: function (fields, errors, callback){
+        if (this.model.get('ifepasaporte_c')!="" || this.model.get('curp_c')!="") {
+            var campoPass = "";
+            var expresion = new RegExp(/^[0-9a-zA-Z]+$/g);
+            if (this.model.get('ifepasaporte_c') != "" && this.model.get('ifepasaporte_c') != undefined) {
+                var nombre = this.model.get('ifepasaporte_c');
+                var comprueba = expresion.test(nombre);
+                if (comprueba != true) {
+                    campoPass = campoPass + '<b>-IFE/Pasaporte<br></b>';
+                    errors['ifepasaporte_c'] = errors['ifepasaporte_c'] || {};
+                    errors['ifepasaporte_c'].required = true;
+                }
+            }
+            if (this.model.get('curp_c') != "" && this.model.get('curp_c') != undefined) {
+                var expresionC = new RegExp(/^[0-9a-zA-Z]+$/g);
+                var curp = this.model.get('curp_c');
+                var comprueba = expresionC.test(curp);
+                if (comprueba != true) {
+                    campoPass = campoPass + '<b>-CURP<br></b>';
+                    errors['curp_c'] = errors['curp_c'] || {};
+                    errors['curp_c'].required = true;
+                }
+            }
+            if (campoPass) {
+                app.alert.show("Error_validacion_Campos", {
+                    level: "error",
+                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + campoPass,
+                    autoClose: false
+                });
+            }
+        }
+        callback(null, fields, errors);
     },
 })
