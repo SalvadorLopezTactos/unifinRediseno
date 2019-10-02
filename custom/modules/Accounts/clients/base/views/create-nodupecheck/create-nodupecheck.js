@@ -89,6 +89,7 @@
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
         //Validacion para el formato de los campos nombre y apellidos.
         this.model.addValidationTask('validaformato3campos',_.bind(this.validaformato,this));
+        this.model.addValidationTask('validacamposcurppass',_.bind(this.validapasscurp,this));
 
         this.model.on('change:primernombre_c',this.checkTextOnly, this);
         this.model.on('change:apellidomaterno_c',this.checkTextOnly,this);
@@ -1692,6 +1693,39 @@
                 app.alert.show("Error_validacion_Campos", {
                     level: "error",
                     messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
+                    autoClose: false
+                });
+            }
+        }
+        callback(null, fields, errors);
+    },
+    validapasscurp: function (fields, errors, callback){
+        if (this.model.get('ifepasaporte_c')!="" || this.model.get('curp_c')!="") {
+            var campoPass = "";
+            var expresion = new RegExp(/^[0-9a-zA-Z]+$/g);
+            if (this.model.get('ifepasaporte_c') != "" && this.model.get('ifepasaporte_c') != undefined) {
+                var nombre = this.model.get('ifepasaporte_c');
+                var comprueba = expresion.test(nombre);
+                if (comprueba != true) {
+                    campoPass = campoPass + '<b>-IFE/Pasaporte<br></b>';
+                    errors['ifepasaporte_c'] = errors['ifepasaporte_c'] || {};
+                    errors['ifepasaporte_c'].required = true;
+                }
+            }
+            if (this.model.get('curp_c') != "" && this.model.get('curp_c') != undefined) {
+                var expresionC = new RegExp(/^[0-9a-zA-Z]+$/g);
+                var curp = this.model.get('curp_c');
+                var comprueba = expresionC.test(curp);
+                if (comprueba != true) {
+                    campoPass = campoPass + '<b>-CURP<br></b>';
+                    errors['curp_c'] = errors['curp_c'] || {};
+                    errors['curp_c'].required = true;
+                }
+            }
+            if (campoPass) {
+                app.alert.show("Error_validacion_Campos", {
+                    level: "error",
+                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + campoPass,
                     autoClose: false
                 });
             }
