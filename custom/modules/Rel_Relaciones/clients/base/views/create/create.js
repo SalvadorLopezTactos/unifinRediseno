@@ -492,19 +492,30 @@
 	},
 
     Relacionaccionista: function (fields, errors, callback) {
-    	if (this.model.get('relaciones_activas').includes('Accionista'))
-    	{
-            if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')==null || this.model.get('porcentaje_participacion_c')== "0.00") {
-                app.alert.show("% requerido", {
-                    level: "error",
-                    title: "El valor de Porcentaje de Participaci\u00F3n debe ser mayor a cero.",
-                    autoClose: false
-                });
+    	if (this.model.get('relaciones_activas').includes('Accionista')) {
+            if (parseFloat(this.model.get('porcentaje_participacion_c')) <= 0.0000){
                 errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
                 errors['porcentaje_participacion_c'].required = true;
+
+                app.alert.show("Participacion_mayor_a_cero", {
+                    level: "error",
+                    messages: "El valor de <b>Porcentaje de Participaci\u00F3n</b> debe ser mayor a cero.",
+                    autoClose: false
+                });
+            }
+            // Valida valor mayor a 100
+            if (parseFloat(this.model.get('porcentaje_participacion_c')) > 100.00) {
+
+                errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
+                errors['porcentaje_participacion_c'].required = true;
+
+                app.alert.show("Participacion_menor_a_cero", {
+                    level: "error",
+                    messages: "El valor de <b>Porcentaje de Participaci\u00F3n</b> debe ser menor o igual a cien.",
+                    autoClose: false
+                });
             }
         }
-
         callback(null, fields, errors);
     },
 
@@ -969,7 +980,7 @@
                                                         autoClose: false
                                                     });
                                                 }
-                                                return;
+                                                Relacionaccionistareturn;
                                             }, this)
                                         });
                                     }else{

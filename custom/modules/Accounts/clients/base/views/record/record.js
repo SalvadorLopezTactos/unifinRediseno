@@ -111,6 +111,7 @@
         //Validacion para el formato de los campos nombre y apellidos.
         this.model.addValidationTask('validaformato3campos',_.bind(this.validaformato,this));
         this.model.addValidationTask('validacamposcurppass',_.bind(this.validapasscurp,this));
+        this.model.addValidationTask('porcentajeIVA',_.bind(this.validaiva, this));
 
         /*
          Salvador Lopez
@@ -4277,6 +4278,34 @@
                     autoClose: false
                 });
             }
+        }
+        callback(null, fields, errors);
+    },
+    validaiva:function (fields, errors, callback){
+        if (this.model.get('iva_c')!="" && this.model.get('iva_c')!=undefined && (Number(this.model.get('iva_c')) < 0 || Number(this.model.get('iva_c')) > 100.00)) {
+            if (parseFloat(this.model.get('iva_c')) <= 0.0000){
+                errors['iva_c'] = errors['iva_c'] || {};
+                errors['iva_c'].required = true;
+
+                app.alert.show("Iva_mayor_a_cero", {
+                    level: "error",
+                    messages: "El campo <b>% de IVA</b> debe ser mayor a cero.",
+                    autoClose: false
+                });
+            }
+            // Valida valor mayor a 100
+            if (parseFloat(this.model.get('iva_c')) > 100.00) {
+
+                errors['iva_c'] = errors['iva_c'] || {};
+                errors['iva_c'].required = true;
+
+                app.alert.show("Iva_menor_a_cero", {
+                    level: "error",
+                    messages: "El campo <b>% de IVA</b> debe ser menor o igual a cien.",
+                    autoClose: false
+                });
+            }
+
         }
         callback(null, fields, errors);
     },
