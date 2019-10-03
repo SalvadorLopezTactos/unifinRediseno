@@ -240,7 +240,7 @@ extendsFrom: 'RecordView',
                 });
             }
             // Valida valor mayor a 100
-            if (parseFloat(this.model.get('porcentaje_participacion_c')) > 100) {
+            if (parseFloat(this.model.get('porcentaje_participacion_c')) > 100.00) {
 
                 errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
                 errors['porcentaje_participacion_c'].required = true;

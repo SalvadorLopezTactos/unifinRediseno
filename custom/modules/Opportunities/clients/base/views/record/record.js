@@ -52,9 +52,10 @@
 	    	this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
 		    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
+        this.model.addValidationTask('pagounico',_.bind(this.validapagounico, this));
+
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld',_.bind(this.valida_pld, this));
-        this.model.addValidationTask('pagounico',_.bind(this.validapagounico, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -1740,7 +1741,7 @@ console.log(name);
     },
 
     validapagounico:function (fields, errors, callback){
-        if (this.model.get('porciento_ri_c')!="" || this.model.get('porciento_ri_c')!=undefined || (Number(this.model.get('porciento_ri_c')) < 0 || Number(this.model.get('porciento_ri_c')) > 99.999999)) {
+        if (this.model.get('porciento_ri_c')!="" && this.model.get('porciento_ri_c')!=undefined && (Number(this.model.get('porciento_ri_c')) < 0 || Number(this.model.get('porciento_ri_c')) > 100.00)) {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000){
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
@@ -1753,7 +1754,7 @@ console.log(name);
                 });
             }
             // Valida valor mayor a 100
-            if (parseFloat(this.model.get('porciento_ri_c')) > 100) {
+            if (parseFloat(this.model.get('porciento_ri_c')) > 100.00) {
 
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                 errors['porciento_ri_c'].required = true;
