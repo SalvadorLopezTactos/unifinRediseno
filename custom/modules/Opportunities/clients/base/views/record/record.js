@@ -1741,7 +1741,7 @@ console.log(name);
     },
 
     validapagounico:function (fields, errors, callback){
-        if (this.model.get('porciento_ri_c')!="" && this.model.get('porciento_ri_c')!=undefined && (Number(this.model.get('porciento_ri_c')) < 0 || Number(this.model.get('porciento_ri_c')) > 100.00)) {
+        if (this.model.get('porciento_ri_c')!="" && this.model.get('porciento_ri_c')!=undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00)) {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000){
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
