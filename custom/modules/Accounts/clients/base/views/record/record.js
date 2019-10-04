@@ -4282,7 +4282,7 @@
         callback(null, fields, errors);
     },
     validaiva:function (fields, errors, callback){
-        if (this.model.get('tiporegistro_c')=="Proveedor" || this.model.get('esproveedor_c')== true) {
+        if (this.model.get('tipo_registro_c')=="Proveedor" || this.model.get('esproveedor_c')== true) {
             if (this.model.get('iva_c') !== "" && this.model.get('iva_c') != undefined && (Number(this.model.get('iva_c')) <= 0 || Number(this.model.get('iva_c')) > 100.00)) {
                 if (parseFloat(this.model.get('iva_c')) <= 0.0000) {
                     errors['iva_c'] = errors['iva_c'] || {};
