@@ -515,6 +515,10 @@
                     autoClose: false
                 });
             }
+            if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')== undefined){
+                errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
+                errors['porcentaje_participacion_c'].required = true;
+            }
         }
         callback(null, fields, errors);
     },
