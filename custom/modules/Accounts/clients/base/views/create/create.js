@@ -191,6 +191,8 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL7']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
+        //Se oculta check de cuenta homonima
+        $('div[data-name=tct_homonimo_chk_c]').hide();
 
         //Ocultar Div "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
