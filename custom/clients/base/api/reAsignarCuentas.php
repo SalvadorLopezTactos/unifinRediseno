@@ -40,7 +40,10 @@ class reAsignarCuentas extends SugarApi
                 $user_field = "user_id1_c"; //user_id1_c = promotorfactoraje_c
             } else if ($product == "CREDITO AUTOMOTRIZ") {
                 $user_field = "user_id2_c"; //user_id2_c = promotorcredit_c
+            } else if ($product == "FLEET") {
+                $user_field = "user_id6_c";
             }
+
 
             $IntValue = new DropdownValuesHelper();
             $callApi = new UnifinAPI();
@@ -65,6 +68,9 @@ SQL;
                         break;
                     case 'FACTORAJE':
                         $account->user_id1_c = $reAsignado;
+                        break;
+                    case 'FLEET':
+                        $account->user_id6_c = $reAsignado;
                         break;
                     default:
                         $account->user_id_c = $reAsignado;
@@ -120,6 +126,7 @@ SQL;
 				if($product == 'LEASING') $producto = 1;
 				if($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
 				if($product == 'FACTORAJE') $producto = 4;
+                if($product == 'FLEET') $producto = 6;
                 $query = <<<SQL
 UPDATE opportunities
 INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
