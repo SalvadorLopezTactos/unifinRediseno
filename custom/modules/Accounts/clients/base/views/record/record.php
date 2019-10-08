@@ -233,6 +233,8 @@ array (
               ),
               4 => 
               array (
+                  'name' => 'tct_homonimo_chk_c',
+                  'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
               5 => 
               array (
@@ -242,20 +244,20 @@ array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              7 => 
+              7 =>
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              8 => 
+              8 =>
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              9 => 
+              9 =>
               array (
               ),
-              10 => 
+              10 =>
               array (
                 'name' => 'tct_noviable',
                 'studio' => 'visible',
