@@ -169,3 +169,4 @@ $mod_strings['LBL_OPPORTUNITY_TYPE'] = 'Tipo de Solicitud y Línea';
 $mod_strings['LBL_OPPS_CONFIG_VIEW_BY_LABEL'] = 'Jerarquía de Solicitud y Línea';
 $mod_strings['LBL_OPPS_CONFIG_SALES_STAGE_1b'] = 'la Etapa de Venta de la Solicitud y Línea se encuentra en &quot;Cerrada/Ganada&quot;.';
 $mod_strings['LBL_OPPS_CONFIG_SALES_STAGE_2b'] = 'la Etapa de Venta de la Solicitud y Línea se encuentra en &quot;Cerrada/Perdida&quot;.';
+$mod_strings['LBL_TCT_NUMERO_VEHICULOS'] = 'Número de vehículos';
