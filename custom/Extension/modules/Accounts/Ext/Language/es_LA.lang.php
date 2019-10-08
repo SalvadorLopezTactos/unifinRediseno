@@ -300,3 +300,5 @@ $mod_strings['LBL_EMAILS_SUBPANEL_TITLE'] = 'Emails';
 $mod_strings['LBL_TCT_STATUS_ATENCION_DDW'] = 'Estatus de Atención';
 $mod_strings['LBL_TCT_ANO_VENTAS_DDW'] = 'Año de Ventas Anuales';
 $mod_strings['LNK_GESTION_NOTICIAS'] = 'Gestión de noticias';
+$mod_strings['LBL_TCT_HOMONINO_CHK'] = 'Cuenta Homónima';
+$mod_strings['LBL_TCT_HOMONIMO_CHK'] = 'Cuenta Homónima';

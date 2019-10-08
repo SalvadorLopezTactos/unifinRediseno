@@ -219,6 +219,10 @@
         this.model.on('sync', this._hideNPS, this);
         this.model.on('sync', this.hideButton_Conversion, this);
 
+        //Validacion para mostrar chk para cuentas homonimas
+        this.model.on('sync',this.homonimo, this);
+
+
         //this.model.on('sync', this.get_phones, this);
         //Recupera datos para custom fields
         this.get_phones();
@@ -877,7 +881,8 @@
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
 
-
+        //Se oculta check de cuenta homonima
+        $('div[data-name=tct_homonimo_chk_c]').hide();
         //@Jesus Carrillo
         //Ocultar Div y boton "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
@@ -2117,80 +2122,84 @@
     },
 
     DuplicateCheck: function (fields, errors, callback) {
-        if (this.duplicadosName > 0) {
-            app.alert.show("DuplicateCheck", {
-                level: "error",
-                title: "Ya existe una persona registrada con el mismo nombre.",
-                autoClose: false
-            });
+            if (this.duplicadosName > 0) {
+                if (this.model.get('tct_homonimo_chk_c')!= true) {
+                    app.alert.show("DuplicateCheck", {
+                        level: "error",
+                        title: "Ya existe una persona registrada con el mismo nombre.",
+                        autoClose: false
+                    });
 
-            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                errors['primernombre_c'] = errors['primernombre_c'] || {};
-                errors['primernombre_c'].required = true;
-                errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                errors['apellidopaterno_c'].required = true;
-                errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                errors['apellidomaterno_c'].required = true;
+                    if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                        errors['primernombre_c'] = errors['primernombre_c'] || {};
+                        errors['primernombre_c'].required = true;
+                        errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                        errors['apellidopaterno_c'].required = true;
+                        errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                        errors['apellidomaterno_c'].required = true;
+                    } else {
+                        errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                        errors['razonsocial_c'].required = true;
+                    }
+                }
             } else {
-                errors['razonsocial_c'] = errors['razonsocial_c'] || {};
-                errors['razonsocial_c'].required = true;
-            }
-        } else {
-            if (this.duplicadosRFC > 0) {
-                app.alert.show("DuplicateCheck", {
-                    level: "error",
-                    title: "Ya existe una persona registrada con el mismo RFC.",
-                    autoClose: false
-                });
+                if (this.duplicadosRFC > 0) {
+                    app.alert.show("DuplicateCheck", {
+                        level: "error",
+                        title: "Ya existe una persona registrada con el mismo RFC.",
+                        autoClose: false
+                    });
 
-                errors['rfc_c'] = errors['rfc_c'] || {};
-                errors['rfc_c'].required = true;
+                    errors['rfc_c'] = errors['rfc_c'] || {};
+                    errors['rfc_c'].required = true;
+                }
             }
-        }
         callback(null, fields, errors);
     },
 
     DuplicateCheck_Name: function () {
-        var clean_name = this.model.get('clean_name');
-        app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-            fields: "clean_name",
-            max_num: 5,
-            "filter": [
-                {
-                    "clean_name": clean_name,
-                    "id": {
-                        $not_equals: this.model.id,
+        if (this.model.get('tct_homonimo_chk_c')!= true) {
+            var clean_name = this.model.get('clean_name');
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: "clean_name",
+                max_num: 5,
+                "filter": [
+                    {
+                        "clean_name": clean_name,
+                        "id": {
+                            $not_equals: this.model.id,
+                        }
                     }
-                }
-            ]
-        }), null, {
-            success: _.bind(function (data) {
-                if (data.records.length > 0) {
-                    this.duplicadosName = 1;
-                    console.log('this.duplicadosName SI');
-                    /*app.alert.show("DuplicateCheck", {
-                     level: "error",
-                     title: "Ya existe una persona registrada con el mismo nombre.",
-                     autoClose: false
-                     });
+                ]
+            }), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
+                        this.duplicadosName = 1;
+                        console.log('this.duplicadosName SI');
+                        /*app.alert.show("DuplicateCheck", {
+                         level: "error",
+                         title: "Ya existe una persona registrada con el mismo nombre.",
+                         autoClose: false
+                         });
 
-                     if (this.model.get('tipodepersona_c') != 'Persona Moral'){
-                     errors['primernombre_c'] = errors['primernombre_c'] || {};
-                     errors['primernombre_c'].required = true;
-                     errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                     errors['apellidopaterno_c'].required = true;
-                     errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                     errors['apellidomaterno_c'].required = true;
-                     }else{
-                     errors['razonsocial_c'] = errors['razonsocial_c'] || {};
-                     errors['razonsocial_c'].required = true;
-                     }*/
-                } else {
-                    this.duplicadosName = 0;
-                    console.log('this.duplicadosName NO');
-                }
-            }, this)
-        });
+                         if (this.model.get('tipodepersona_c') != 'Persona Moral'){
+                         errors['primernombre_c'] = errors['primernombre_c'] || {};
+                         errors['primernombre_c'].required = true;
+                         errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                         errors['apellidopaterno_c'].required = true;
+                         errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                         errors['apellidomaterno_c'].required = true;
+                         }else{
+                         errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                         errors['razonsocial_c'].required = true;
+                         }*/
+                    } else {
+                        this.duplicadosName = 0;
+                        console.log('this.duplicadosName NO');
+                    }
+                }, this)
+            });
+        }
 
         //callback(null, fields, errors);
     },
@@ -4310,5 +4319,17 @@
             }
         }
         callback(null, fields, errors);
+    },
+
+    homonimo: function (){
+        var listahom= App.lang.getAppListStrings('usuarios_permiso_homonimos_list');
+        var usr1 = listahom[1];
+        var usr2 = listahom[2]
+        var userlogueado = App.user.attributes.id;
+        if (usr1 == userlogueado || usr2== userlogueado) {
+             $('div[data-name=tct_homonimo_chk_c]').show();
+        } else {
+            $('div[data-name=tct_homonimo_chk_c]').hide();
+        }
     },
 })
