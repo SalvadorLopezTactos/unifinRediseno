@@ -173,6 +173,10 @@
                     this.model.set('tipo_producto_c','5');
                     //console.log("5");
                 }
+                else if(this.productos[0] == "6"){
+                    this.model.set('tipo_producto_c','6');
+                    //console.log("5");
+                }
 
             },this)
         });
@@ -659,6 +663,9 @@
                         break;
                     case 4:
                         id:promotor = modelo.get('user_id1_c');
+                        break;
+                    case 6:
+                        id:promotor = modelo.get('user_id6_c');
                         break;
                     default:
                         id:promotor = modelo.get('user_id_c');
@@ -1219,7 +1226,8 @@
   		$('[data-name="tipo_producto_c"]').show();
   		$('[data-name="monto_c"]').show();
   		$('[data-name="assigned_user_name"]').show();
-      $('[data-name="picture"]').show();
+        $('[data-name="picture"]').show();
+        $('[data-name="tct_numero_vehiculos_c"]').show();
 		  //Ocultando el panel de Oportunidad perdida
       $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
