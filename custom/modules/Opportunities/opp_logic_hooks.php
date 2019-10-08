@@ -182,7 +182,7 @@
         global $db, $current_user;
 
         $GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI') || empty($bean->id_process_c)){//@jesus
+        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || empty($bean->id_process_c) && $bean->tipo_producto_c !='6'){//@jesus
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
