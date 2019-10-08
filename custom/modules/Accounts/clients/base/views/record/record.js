@@ -4073,7 +4073,7 @@
         //Forma Petición de datos
         if (id!= '' && id != undefined && id!= null) {
             //Ejecuta petición ResumenCliente
-            var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
+            var url = app.api.buildURL('ResumenCliente/'+id, null, null);
             app.api.call('GET', url, {},{
               success: _.bind(function (data) {
                   v360.ResumenCliente = data;

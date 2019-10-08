@@ -654,21 +654,17 @@ AF - 18-01-18
                 <!-- Línea 1 -->
                 <div class="row-fluid" style="background-color: #f9f9f9">
                     <div class="span6"><strong>Línea Aproximada</strong> </div>
-                    <div class="span6">$ {{customFormatNumber ResumenCliente.credito_auto.linea_autorizada}}</div>
+                    <div class="span6">$ {{customFormatNumber ResumenCliente.fleet.linea_aproximada}}</div>
                 </div>
                 <!-- Línea 2 -->
                 <div class="row-fluid"  style="background-color: #ffffff">
                     <div class="span6"><strong>Número de vehículos</strong></div>
-                    <div class="span6">{{ResumenCliente.credito_auto.fecha_vencimiento}}</div>
+                    <div class="span6">{{ResumenCliente.fleet.numero_vehiculos}}</div>
                 </div>
                 <!-- Línea 3 -->
-                <div class="row-fluid" style="background-color: #f9f9f9">
-                    <div class="span6"><strong>Asesor</strong> </div>
-                    <div class="span6">
-                        <font {{#if ResumenCliente.credito_auto.color}}color="{{ResumenCliente.credito_auto.color}}"{{/if}}>
-                            $ {{customFormatNumber ResumenCliente.credito_auto.linea_disponible}}
-                        </font>
-                    </div>
+                <div class="row-fluid"  style="background-color: #ffffff">
+                    <div class="span6"><strong>Asesor</strong></div>
+                    <div class="span6">{{ResumenCliente.fleet.promotor}}</div>
                 </div>
 
             </div>
