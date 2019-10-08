@@ -759,6 +759,13 @@
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Enganche");
 
         }
+
+        if(this.model.get('tipo_producto_c')=='6'){
+            this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+        }else{
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
+
+        }
         // CVV - 28/03/2016 - Se reemplaza por control de condiciones financieras
         /*
         if(this.model.get('tipo_producto_c')=='3'){
