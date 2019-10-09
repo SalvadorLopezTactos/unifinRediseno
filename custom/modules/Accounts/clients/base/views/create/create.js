@@ -493,7 +493,7 @@
         //Funcion para validar que no hayan direcciones repetidas al momento de darle en el check
 
         /* hay que traer el campo del usaurio
-         * PREOMOTORES POR DEFAULT
+         * PROMOTORES POR DEFAULT
          LEASING:
          9 - Sin Gestor
          SinGestor
@@ -566,13 +566,23 @@
                     this.model.set('promotorcredit_c', '9 - Sin Gestor');
                     this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
-                if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
+                if (contains.call(modelo.get('productos_c'), "6")) {
+                    this.model.set('promotorfleet_c', modelo.get('name'));
+                    this.model.set('user_id6_c', modelo.get('id'));
+                } else {
+                    this.model.set('promotorfleet_c', '9 - Sin Gestor');
+                    this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                     this.model.set('promotorleasing_c', '9 - Sin Gestor');
                     this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
                     this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     this.model.set('promotorcredit_c', '9 - Sin Gestor');
                     this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    this.model.set('promotorfleet_c', '9 - Sin Gestor');
+                    this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+
                 }
             }, this)
         });

@@ -802,6 +802,9 @@ array (
               ),
               3 => 
               array (
+                'name' => 'promotorfleet_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORFLEET',
               ),
             ),
           ),

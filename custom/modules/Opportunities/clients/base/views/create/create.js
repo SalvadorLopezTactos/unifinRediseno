@@ -173,6 +173,10 @@
                     this.model.set('tipo_producto_c','5');
                     //console.log("5");
                 }
+                else if(this.productos[0] == "6"){
+                    this.model.set('tipo_producto_c','6');
+                    //console.log("5");
+                }
 
             },this)
         });
@@ -660,6 +664,9 @@
                     case 4:
                         id:promotor = modelo.get('user_id1_c');
                         break;
+                    case 6:
+                        id:promotor = modelo.get('user_id6_c');
+                        break;
                     default:
                         id:promotor = modelo.get('user_id_c');
                         break;
@@ -757,6 +764,13 @@
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Renta Inicial");
         }else if (this.model.get('tipo_producto_c')=='3'){
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Enganche");
+
+        }
+
+        if(this.model.get('tipo_producto_c')=='6'){
+            this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+        }else{
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
 
         }
         // CVV - 28/03/2016 - Se reemplaza por control de condiciones financieras
@@ -1212,7 +1226,8 @@
   		$('[data-name="tipo_producto_c"]').show();
   		$('[data-name="monto_c"]').show();
   		$('[data-name="assigned_user_name"]').show();
-      $('[data-name="picture"]').show();
+        $('[data-name="picture"]').show();
+        $('[data-name="tct_numero_vehiculos_c"]').show();
 		  //Ocultando el panel de Oportunidad perdida
       $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },

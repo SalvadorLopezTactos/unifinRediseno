@@ -137,6 +137,10 @@ class ResumenClienteAPI extends SugarApi
             "nivel_satisfaccion" => "Sin Clasificar",
             "promotor" => "",
             "color" => "");
+        $arr_principal['fleet'] = array("linea_aproximada" => "",
+            "numero_vehiculos" => "",
+            "promotor" => "",
+            "color" => "");
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -174,6 +178,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
+            $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -202,6 +207,10 @@ class ResumenClienteAPI extends SugarApi
             $linea_disp_leasing = 0;
             $linea_disp_factoring = 0;
             $linea_disp_credito_aut = 0;
+
+            //Linea aproximada fleet
+            $linea_aprox_fleet=0;
+            $numero_vehiculos_fleet=0;
 
             //Fecha de vencimiento
             $vencimiento_leasing = '';//date("Y-m-d");
@@ -322,6 +331,16 @@ class ResumenClienteAPI extends SugarApi
                         $GLOBALS['log']->fatal($vencimiento_factoring);
                         */
                     }
+                }
+
+                // Control para fleet
+                if ($opps->tipo_producto_c == 6) {
+                    $linea_aprox_fleet +=$opps->monto_c;
+                    $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
+
+                    $arr_principal['fleet']['linea_aproximada']=$linea_aprox_fleet;
+                    $arr_principal['fleet']['numero_vehiculos']=$numero_vehiculos_fleet;
+
                 }
 
               }

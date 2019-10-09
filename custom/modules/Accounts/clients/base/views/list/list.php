@@ -70,12 +70,22 @@ array (
               ),
               6 => 
               array (
+                'name' => 'promotorfleet_c',
+                'label' => 'LBL_PROMOTORFLEET',
+                'enabled' => true,
+                'id' => 'USER_ID6_C',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              7 => 
+              array (
                 'name' => 'subtipo_cuenta_c',
                 'label' => 'LBL_SUBTIPO_CUENTA',
                 'enabled' => true,
                 'default' => false,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'tipo_registro_c',
                 'label' => 'LBL_TIPO_REGISTRO',
