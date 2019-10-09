@@ -40,6 +40,8 @@ class ReasignaciondePromotoresBusqueda extends SugarApi
                  $user_field = "user_id1_c"; //user_id1_c = promotorfactoraje_c
              }else if($product == "CREDITO AUTOMOTRIZ"){
                  $user_field = "user_id2_c"; //user_id2_c = promotorcredit_c
+             }else if($product == "FLEET"){
+                 $user_field = "user_id6_c";
              }
 
             $total_rows = <<<SQL

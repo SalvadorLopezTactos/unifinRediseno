@@ -2071,13 +2071,22 @@
                         this.model.set('promotorcredit_c', '9 - Sin Gestor');
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
+                    if (contains.call(modelo.get('productos_c'), "6")) {
+                        this.model.set('promotorfleet_c', modelo.get('name'));
+                        this.model.set('user_id6_c', modelo.get('id'));
+                    } else {
+                        this.model.set('promotorfleet_c', '9 - Sin Gestor');
+                        this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    }
+                    if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
                         this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotorcredit_c', '9 - Sin Gestor');
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                        this.model.set('promotorfleet_c', '9 - Sin Gestor');
+                        this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
                     this.model.set("tipo_registro_c", "Lead");
@@ -4073,7 +4082,7 @@
         //Forma Petición de datos
         if (id!= '' && id != undefined && id!= null) {
             //Ejecuta petición ResumenCliente
-            var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
+            var url = app.api.buildURL('ResumenCliente/'+id, null, null);
             app.api.call('GET', url, {},{
               success: _.bind(function (data) {
                   v360.ResumenCliente = data;

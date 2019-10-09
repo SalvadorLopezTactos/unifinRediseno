@@ -69,7 +69,8 @@ class GetUsersTeams extends SugarApi
             $usrLeasing = $beanModule->user_id_c;
             $usrFactoraje = $beanModule->user_id1_c;
             $usrCredito = $beanModule->user_id2_c;
-            array_push($arrayTeamUsrs,$usrLeasing,$usrFactoraje,$usrCredito );
+            $usrFleet = $beanModule->user_id6_c;
+            array_push($arrayTeamUsrs,$usrLeasing,$usrFactoraje,$usrCredito,$usrFleet);
 
         } else {
             // Si no es cuentas se obtiene el asignado a
@@ -77,7 +78,7 @@ class GetUsersTeams extends SugarApi
             array_push($arrayTeamUsrs, $usrAsignadoA);
         }
 
-        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog == $usrAsignadoA) {
+        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog == $usrFleet || $usuarioLog == $usrAsignadoA) {
             $flag = true;
         }
 

@@ -85,6 +85,7 @@ class GetUsersBoss extends SugarApi
         $usrLeasing = $beanAccounts->user_id_c;
         $usrFactoraje = $beanAccounts->user_id1_c;
         $usrCredito = $beanAccounts->user_id2_c;
+        $usrFleet = $beanAccounts->user_id6_c;
         $usuarioLog = $current_user->id;
         $queryR = "Select R.id, R.name
 		 from acl_roles R
@@ -97,7 +98,7 @@ class GetUsersBoss extends SugarApi
          * Modificación para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
         **/
 
-        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito) {
+        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog==$usrFleet) {
             $flag = true;
         }
 
@@ -108,7 +109,7 @@ class GetUsersBoss extends SugarApi
                 and length(@pv := concat(@pv,',',id));";
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)){
-                if (  $row['id'] == $usrLeasing ||  $row['id'] == $usrFactoraje ||  $row['id'] ==$usrCredito) {
+                if (  $row['id'] == $usrLeasing ||  $row['id'] == $usrFactoraje ||  $row['id'] ==$usrCredito || $row['id'] == $usrFleet) {
                     $flag = true;
                 }
             }
@@ -146,7 +147,7 @@ class GetUsersBoss extends SugarApi
             //Recupera equipos de promotores
             $queryP = "select group_concat(replace(concat( equipos_c, ',', equipo_c),'^',''),'') as equipos
                       from users_cstm
-                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}')";
+                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}'),'{$usrFleet}'";
             $resultP = $GLOBALS['db']->query($queryP);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultP)){
                 if($row['equipos'] !='' && $row['equipos']!= null) {
