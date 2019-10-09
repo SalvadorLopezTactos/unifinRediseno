@@ -935,4 +935,42 @@ SQL;
             }
             return $etapa;
         }
+
+        public function actualizatipoprod($bean = null, $event = null, $args = null){
+            global $db;
+            $cliente = $bean->account_id; //ID de la Cuenta
+
+            $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
+            $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$cliente);
+
+            if (!empty($bean_Resumen && estatus_c=="N")) { //Etapa solicitud= N= Autorizada
+                global $app_list_strings; //Obtención de listas de valores
+                $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
+                $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
+                $etitipo = $tipo["Cliente"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etisubtipo = $subtipo["Con Linea Vigente"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+
+                //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
+                //LEASING
+                if ($bean->tipo_producto_c=="1") {
+                    $bean_Resumen->tct_tipo_l_txf_c = $etitipo;
+                    $bean_Resumen->tct_subtipo_l_txf_c = $etisubtipo;
+                    $bean_Resumen->tct_tipo_cuenta_l_c = trim($etitipo . ' ' . $etisubtipo);
+                }
+                //FACTORAJE
+                if($bean->tipo_producto_c=="4") {
+                    $bean_Resumen->tct_tipo_f_txf_c = $etitipo;
+                    $bean_Resumen->tct_subtipo_f_txf_c = $etisubtipo;
+                    $bean_Resumen->tct_tipo_cuenta_f_c = trim($etitipo . ' ' . $etisubtipo);
+                }
+                //CREDITO AUTOMOTRIZ
+                if($bean->tipo_producto_c=="3") {
+                    $bean_Resumen->tct_tipo_ca_txf_c = $etitipo;
+                    $bean_Resumen->tct_subtipo_ca_txf_c = $etisubtipo;
+                    $bean_Resumen->tct_tipo_cuenta_ca_c = trim($etitipo . ' ' . $etisubtipo);
+                }
+                //GUARDA REGISTRO DE RESUMEN
+                $bean_Resumen->save();
+            }
+        }
     }

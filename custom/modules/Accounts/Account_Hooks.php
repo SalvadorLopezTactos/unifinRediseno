@@ -954,11 +954,31 @@ where rfc_c = '{$bean->rfc_c}' and
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
 
         if ($bean_Resumen= null || empty($bean_Resumen)){
+            global $app_list_strings; //Obtención de listas de valores
+            $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
+            $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
+            $etitipo= $tipo[$bean->tipo_registro_c];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
+            $etisubtipo= $subtipo[$bean->subtipo_cuenta_c]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+
             $GLOBALS['log']->fatal('Entra a condición para crear Resumen');
             $bean_Resumen = BeanFactory::newBean('tct02_Resumen');
             $bean_Resumen->new_with_id = true;
             $bean_Resumen->name = $bean->name;
             $bean_Resumen->id = $idCuenta;
+            //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
+            //LEASING
+            $bean_Resumen->tct_tipo_l_txf_c= $etitipo;
+            $bean_Resumen->tct_subtipo_l_txf_c=$etisubtipo;
+            $bean_Resumen->tct_tipo_cuenta_l_c= trim($etitipo.' '.$etisubtipo);
+            //FACTORAJE
+            $bean_Resumen->tct_tipo_f_txf_c= $etitipo;
+            $bean_Resumen->tct_subtipo_f_txf_c=$etisubtipo;
+            $bean_Resumen->tct_tipo_cuenta_f_c= trim($etitipo.' '.$etisubtipo);
+            //CREDITO AUTOMOTRIZ
+            $bean_Resumen->tct_tipo_ca_txf_c= $etitipo;
+            $bean_Resumen->tct_subtipo_ca_txf_c=$etisubtipo;
+            $bean_Resumen->tct_tipo_cuenta_ca_c= trim($etitipo.' '.$etisubtipo);
+            //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
         }
         $GLOBALS['log']->fatal('Finaliza y crea Resumen para vista 360');
