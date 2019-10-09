@@ -315,6 +315,10 @@
         /* END CUSTOMIZATION */
         //Ocultarel panel de Lead no viable (checks).
         $('[data-name=tct_noviable]').hide();
+
+        //Se oculta check de cuenta homonima
+        $('div[data-name=tct_homonimo_chk_c]').hide();
+
         //campo Pais que expide el RFC nace oculto.
         $('[data-name=tct_pais_expide_rfc_c]').hide();
         this.ocultaRFC();

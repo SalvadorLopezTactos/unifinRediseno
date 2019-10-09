@@ -302,3 +302,4 @@ $mod_strings['LBL_TCT_ANO_VENTAS_DDW'] = 'Año de Ventas Anuales';
 $mod_strings['LNK_GESTION_NOTICIAS'] = 'Gestión de noticias';
 $mod_strings['LBL_PROMOTORFLEET_USER_ID'] = 'Asesor Fleet (relacionado Usuario ID)';
 $mod_strings['LBL_PROMOTORFLEET'] = 'Asesor Fleet';
+$mod_strings['LBL_TCT_HOMONINO_CHK'] = 'Cuenta Homónima';
