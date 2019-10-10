@@ -97,8 +97,12 @@ Controlador de reuniones-llamadas
   //Funcion para calcular fecha fin
   generaDateEnd:function(){
     if($('.newDate').val()!="" && $('.newTime1').val()!="" ){
-      //Recupera fecha inicio
-      var time_start = new Date($('.newDate').val() +' '+ this.validaTiempo($('.newTime1').val()))
+        var tiempo= $('.newDate').val();
+        tiempo=tiempo.replace(/-/g, "/");
+        var hora=this.validaTiempo($('.newTime1').val());
+      //Recupera fecha inicioreplace
+      var time_start = new Date(tiempo+' '+ hora);
+
 
       //Agrega minutos adicionales
       if(this.model.get('resultado_c') == 5){
@@ -216,7 +220,7 @@ Controlador de reuniones-llamadas
     selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
     //selfRella.nuevoRegistro.objetivoE='';
     selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
-    diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
+    diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start.replace(/-/g,"/") +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end.replace(/-/g,"/")+' '+selfRella.nuevoRegistro.time_end));
     minutosTotales = Math.floor((diferencia/1000)/60);
     horas = (minutosTotales/60>>0);
     minutos = minutosTotales%60;
