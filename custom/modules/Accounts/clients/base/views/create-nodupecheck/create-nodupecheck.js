@@ -321,6 +321,9 @@
 
         //campo Pais que expide el RFC nace oculto.
         $('[data-name=tct_pais_expide_rfc_c]').hide();
+        //Oculta panel del campo Tipo de Cuenta por Producto
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL17']").hide();
+
         this.ocultaRFC();
 
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona

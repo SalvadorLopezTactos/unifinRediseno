@@ -967,17 +967,17 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->id = $idCuenta;
             //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
             //LEASING
-            $bean_Resumen->tct_tipo_l_txf_c= $etitipo;
-            $bean_Resumen->tct_subtipo_l_txf_c=$etisubtipo;
-            $bean_Resumen->tct_tipo_cuenta_l_c= trim($etitipo.' '.$etisubtipo);
+            $bean_Resumen->tct_tipo_l_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_l_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_l_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //FACTORAJE
-            $bean_Resumen->tct_tipo_f_txf_c= $etitipo;
-            $bean_Resumen->tct_subtipo_f_txf_c=$etisubtipo;
-            $bean_Resumen->tct_tipo_cuenta_f_c= trim($etitipo.' '.$etisubtipo);
+            $bean_Resumen->tct_tipo_f_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_f_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_f_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //CREDITO AUTOMOTRIZ
-            $bean_Resumen->tct_tipo_ca_txf_c= $etitipo;
-            $bean_Resumen->tct_subtipo_ca_txf_c=$etisubtipo;
-            $bean_Resumen->tct_tipo_cuenta_ca_c= trim($etitipo.' '.$etisubtipo);
+            $bean_Resumen->tct_tipo_ca_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_ca_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_ca_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
         }
@@ -1013,4 +1013,6 @@ where rfc_c = '{$bean->rfc_c}' and
           }
         }
     }
+
+
 }

@@ -269,7 +269,7 @@ array (
           3 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL17',
             'label' => 'LBL_RECORDVIEW_PANEL17',
             'columns' => 2,
