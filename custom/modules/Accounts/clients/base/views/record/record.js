@@ -217,7 +217,7 @@
             Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
          */
         this.model.on('sync', this._hideNPS, this);
-        this.model.on('sync', this.hideButton_Conversion, this);
+        //this.model.on('sync', this.hideButton_Conversion, this);
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync',this.homonimo, this);
@@ -228,6 +228,7 @@
         this.get_phones();
         this.get_addresses();
         this.get_v360();
+        this.get_Oproductos();
         this.get_pld();
         //this.get_noviable();
 
@@ -883,6 +884,8 @@
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
+        //Oculta etiqueta del campo Tipo de Cuenta por Producto
+        this.$('div[data-name=cuenta_productos]').find('div.record-label').addClass('hide');
         //@Jesus Carrillo
         //Ocultar Div y boton "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
@@ -1106,12 +1109,15 @@
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
+        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
+        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
+        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
+        var userprod= App.user.attributes.tipodeproducto_c;
+        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
+        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
+        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
 
-        if (this.model.get('tct_prospecto_contactado_chk_c') == true &&
-            this.model.get('tipo_registro_c') == "Prospecto" &&
-            this.model.get('subtipo_cuenta_c') == "Contactado") {
-            //$('.btn-regresa-alead').show();
-
+        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1')) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4")) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3"))) {
         }
         else{
 
@@ -1125,9 +1131,8 @@
         }
 
 
-        if (this.model.get('tct_prospecto_contactado_chk_c') == false) {
-        }
-        else {
+        if ((leasingprod=="Lead" && userprod.includes('1')) || (factprod=="Lead" && userprod.includes("4")) || (caprod=="Lead" && userprod.includes("3"))) {
+        }else{
             if (myField1) {
                 myField1.listenTo(myField1, "render", function () {
                     myField1.hide();
@@ -1137,7 +1142,7 @@
             }
         }
         //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-        if (this.model.get('tipo_registro_c') == "Persona") {
+        if((leasingprod=="Persona" && userprod.includes('1')) || (factprod=="Persona" && userprod.includes("4")) || (caprod=="Persona" && userprod.includes("3"))){
             myField1.listenTo(myField1, "render", function () {
                 myField1.hide();
             });
@@ -1150,7 +1155,7 @@
             }
         }
 
-        if(this.model.get('tipo_registro_c')=="Proveedor"){
+        if((leasingprod=="Proveedor" && userprod.includes('1')) || (factprod=="Proveedor" && userprod.includes("4")) || (caprod=="Proveedor" && userprod.includes("3"))){
              myField2.listenTo(myField2, "render", function () {
                 myField2.show();
             });
@@ -1161,6 +1166,14 @@
     },
 
     hideButton_Conversion_change: function () {
+
+        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
+        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
+        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
+        var userprod= App.user.attributes.tipodeproducto_c;
+        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
+        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
+        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
         //oculta botones
         $('[name="regresalead"]').hide();
         $('[name="prospectocontactado"]').hide();
@@ -1172,7 +1185,7 @@
           * tipo_registro_c = Prospecto
           * && subtipo_cuenta_c = Contactado
         */
-        if (contexto_cuenta.model.get('tipo_registro_c') == "Prospecto" && contexto_cuenta.model.get('subtipo_cuenta_c') == "Contactado") {
+        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1')) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4")) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3"))) {
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').hide();
@@ -1183,7 +1196,7 @@
         * Prospecto contactado:
         * tipo_registro_c = Lead
         */
-        if (contexto_cuenta.model.get('tipo_registro_c') == 'Lead') {
+        if ((leasingprod=="Lead" && userprod.includes('1')) || (factprod=="Lead" && userprod.includes("4")) || (caprod=="Lead" && userprod.includes("3"))) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
             $('[name="conviertelead"]').hide();
@@ -1194,7 +1207,7 @@
         * tipo_registro_c = Persona
         * OR tipo_registro_c = Proveedor
         */
-        if (contexto_cuenta.model.get('tipo_registro_c') == 'Persona' || contexto_cuenta.model.get('tipo_registro_c') == 'Proveedor') {
+        if (((leasingprod=="Persona" || leasingprod=="Proveedor" ) && userprod.includes('1')) || ((factprod=="Persona" || factprod=="Proveedor") && userprod.includes("4")) || ((caprod=="Persona" || caprod=="Proveedor") && userprod.includes("3"))) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
@@ -1576,23 +1589,77 @@
     * */
 
     regresa_leadClicked: function () {
-        //alert("boton precionado");
-        this.model.set("tipo_registro_c", "Lead");
-        this.model.set("subtipo_cuenta_c", "En Calificacion");
-        this.model.set("tct_tipo_subtipo_txf_c","Lead En Calificacion");
-        this.model.set("tct_prospecto_contactado_chk_c", false);
-		    //this.model.set("show_panel_c",0);
-        this.model.save();
-        //this._render();
-        app.alert.show('alert_change_success', {
-            level: 'success',
-            messages: 'Cambio realizado',
+        App.alert.show('RegresaAlead', {
+            level: 'process',
+            title: 'Convirtiendo cuenta, por favor espere.',
         });
-        //Actualiza modelo vista v360
-        v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-        v360.render();
+        var totalProspecto= 0;
+        //alert("boton precionado");
+        //Validacion para actualizar el producto del usuario logueado asi como el tipo de registro de la cuenta
+        if(Oproductos.productos.tct_tipo_l_txf_c=="Prospecto"){
+            totalProspecto++;
+        }
+        if(Oproductos.productos.tct_tipo_f_txf_c=="Prospecto"){
+            totalProspecto++;
+        }
+        if(Oproductos.productos.tct_tipo_ca_txf_c=="Prospecto"){
+            totalProspecto++;
+        }
+        if (this.model.get("tipo_registro_c")=="Prospecto" && totalProspecto==1) {
+            //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
+            v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
+            this.model.set("tipo_registro_c", "Lead");
+            this.model.set("subtipo_cuenta_c", "En Calificacion");
+            this.model.set("tct_tipo_subtipo_txf_c", "LEAD EN CALIFICACIÓN");
+            this.model.set("tct_prospecto_contactado_chk_c", false);
+            //this.model.set("show_panel_c",0);
+            this.model.save();
+        }
+        var productousuario= App.user.attributes.tipodeproducto_c;
 
+        if (productousuario.includes('1')){
+            var api_params={
+                "tct_tipo_l_txf_c": "Lead",
+                "tct_subtipo_l_txf_c":"En Calificacion",
+                "tct_tipo_cuenta_l_c":"LEAD EN CALIFICACIÓN"
+            }
+        }
+        if (productousuario.includes('3')){
+            var api_params={
+                "tct_tipo_ca_txf_c": "Lead",
+                "tct_subtipo_ca_txf_c":"En Calificacion",
+                "tct_tipo_cuenta_ca_c":"LEAD EN CALIFICACIÓN"
+            }
+        }
+        if (productousuario.includes('4')){
+            var api_params={
+                "tct_tipo_f_txf_c": "Lead",
+                "tct_subtipo_f_txf_c":"En Calificación",
+                "tct_tipo_cuenta_f_c":"LEAD EN CALIFICACIÓN"
+            }
+        }
+        if (api_params!=undefined) {
 
+            var idC = this.model.get('id');
+            var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+            app.api.call('update', url, api_params, {
+                success: _.bind(function (data) {
+                    //this._render();
+                    app.alert.dismiss('RegresaAlead');
+                    Oproductos.productos=data;
+                    app.alert.show('alert_change_success', {
+                        level: 'success',
+                        messages: 'Cambio realizado',
+                    });
+                    //Actualiza modelo vista v360
+                    v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
+                    v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
+                    v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                    Oproductos.render();
+                    v360.render();
+                },)
+            });
+        }
     },
 
     cotizadorClicked: function () {
@@ -1679,6 +1746,11 @@
         Metodo para validar campos de telefonos y direcciones
      */
     validar_fields:function(valContacto, validar_fields) {
+        App.alert.show('loadingConvertir', {
+            level: 'process',
+            title: 'Convirtiendo cuenta, por favor espere',
+        });
+
         var datos_telefonos = this.oTelefonos.telefono;
         var tipolabel = [];
         var pais = [];
@@ -1742,6 +1814,7 @@
         var valMedios = 0;
 
         if(fieldstelefono.includes(false)==true){
+            App.alert.dismiss('loadingConvertir');
             app.alert.show('alert_fields_empty1', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un <b>Tel\u00E9fono</b>',
@@ -1767,19 +1840,59 @@
             } */
 
         if(valMedios==0 && valContacto==0 && validar_fields==0) {
-            this.model.set('tipo_registro_c','Prospecto');
-            this.model.set('subtipo_registro_c','Contactado');
-            this.model.set('tct_prospecto_contactado_chk_c',true);
-			      //this.model.set("show_panel_c",1);
-            this.model.save();
-            //this._render();
-            app.alert.show('alert_change_success', {
-                level: 'success',
-                messages: 'Cambio realizado',
-            });
-            //Actualiza modelo vista v360
-            v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
-            v360.render();
+            if (this.model.get('tipo_registro_c') == "Lead") {
+                this.model.set('tipo_registro_c', 'Prospecto');
+                this.model.set('subtipo_registro_c', 'Contactado');
+                this.model.set('tct_prospecto_contactado_chk_c', true);
+                //this.model.set("show_panel_c",1);
+                this.model.save();
+            }
+            var productousuario= App.user.attributes.tipodeproducto_c;
+
+            if (productousuario.includes('1')){
+                var api_params={
+                    "tct_tipo_l_txf_c": "Prospecto",
+                    "tct_subtipo_l_txf_c":"Contactado",
+                    "tct_tipo_cuenta_l_c":"PROSPECTO CONTACTADO"
+                }
+            }
+            if (productousuario.includes('3')){
+                var api_params={
+                    "tct_tipo_ca_txf_c": "Prospecto",
+                    "tct_subtipo_ca_txf_c":"Contactado",
+                    "tct_tipo_cuenta_ca_c":"PROSPECTO CONTACTADO"
+                }
+            }
+            if (productousuario.includes('4')){
+                var api_params={
+                    "tct_tipo_f_txf_c": "Prospecto",
+                    "tct_subtipo_f_txf_c":"Contactado",
+                    "tct_tipo_cuenta_f_c":"PROSPECTO CONTACTADO"
+                }
+            }
+            if (api_params!=undefined) {
+
+                var idC = this.model.get('id');
+                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                app.api.call('update', url, api_params, {
+                    success: _.bind(function (data) {
+                        //this._render();
+                        Oproductos.productos=data;
+                        app.alert.dismiss('loadingConvertir');
+                        app.alert.show('alert_change_success', {
+                            level: 'success',
+                            messages: 'Cambio realizado',
+                        });
+                        //Actualiza modelo vista v360
+                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
+                        v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
+                        v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
+                        v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                        Oproductos.render();
+                        v360.render();
+                    },)
+                });
+            }
         }
     },
     /* @Jesus Carrillo
@@ -1788,8 +1901,13 @@
        * 22-08-2018 Victor Martínez
         */
     prospectocontactadoClicked:function(){
+        App.alert.show('convierteLead_a_Prospecto', {
+            level: 'process',
+            title: 'Convirtiendo cuenta, por favor espere',
+        });
         if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked) &&
             (this.model.get('user_id_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")){
+            app.alert.dismiss('convierteLead_a_Prospecto');
             app.alert.show("Cumple 3 checks", {
             level: "error",
                 title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable en los tres productos.',
@@ -1837,7 +1955,7 @@
                             var valRelacionados = 0;
                             //self.getllamadas();
                             //self.getreuniones();
-
+                            app.alert.dismiss('convierteLead_a_Prospecto');
                             app.alert.show('loadcontactado', {
                                 level: 'process',
                             });
@@ -1847,7 +1965,7 @@
                         }
                             else
                             {
-
+                                app.alert.dismiss('convierteLead_a_Prospecto');
                                 app.alert.show("No acceso", {
                                     level: "error",
                                     title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
@@ -1877,7 +1995,7 @@
                             var valRelacionados = 0;
                         //self.getllamadas();
                         //self.getreuniones();
-
+                        app.alert.dismiss('convierteLead_a_Prospecto');
                         app.alert.show('loadcontactado', {
                             level: 'process',
                         });
@@ -1911,6 +2029,7 @@
         // if (self.totalllamadas != undefined && self.totalreuniones != undefined) {
         if (self.flagheld>=2) {
             if (self.totalllamadas == 0 && self.totalreuniones == 0) {
+                app.alert.dismiss('loadingConvertir');
                 app.alert.show('alert_calls', {
                     level: 'error',
                     messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
@@ -1922,6 +2041,7 @@
             var valContacto = self.validaContactado();
             self.validar_fields(valContacto, valRelacionados);
             app.alert.dismiss('loadcontactado');
+            app.alert.dismiss('loadingConvertir');
 
         }
 
@@ -1953,6 +2073,7 @@
         }
 
         if(campos!=""){
+            app.alert.dismiss('loadingConvertir');
             console.log ('Validacion Campos OK');
             app.alert.show('alert_calls2', {
                 level: 'error',
@@ -1967,30 +2088,25 @@
 
     //Validaciòn para convertir el tipo de cuenta Persona a LEAD, Adrian Arauz 21/08/2018
     validalead: function () {
+        App.alert.show('conviertePaL', {
+            level: 'process',
+            title: 'Convirtiendo cuenta, por favor espere',
+        });
         var reqs= "";
-
-        /*if (this.model.get('origendelprospecto_c') =="" || this.model.get('origendelprospecto_c')==null){
-            reqs= reqs + '<b><br>Origen<br></b>';
-        }*/
-
         if (this.model.get('name') =="" || this.model.get('name')==null){
             reqs= reqs + '<b>Nombre<br></b>';
         }
-
         if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
             reqs= reqs + '<b>Apellido Paterno<br></b>';
         }
-
         if (this.model.get('email') =="" || this.model.get('email')==null){
             reqs= reqs + '<b>Email<br></b>';
         }
-
         if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
-
             reqs= reqs + '<b>Nombre Comercial<br></b>';
         }
-
         if(reqs!="") {
+            app.alert.dismiss('conviertePaL');
             console.log('Validacion Campos LEAD');
             app.alert.show('alert_calls4', {
                 level: 'error',
@@ -1998,25 +2114,6 @@
             });
         }
         else {
-            /* hay que traer el campo del usaurio
-                   * PREOMOTORES POR DEFAULT
-                   LEASING:
-                   9 - Sin Gestor
-                   SinGestor
-                   569246c7-da62-4664-ef2a-5628f649537e
-                   CREDIT:
-                   ADRIANA GAYOSSO CRUZ
-                   agayosso
-                   7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
-                   FACTORAJE:
-                   //ANGEL TAMARIZ GALINDO
-                   //angel.tamariz
-                   //3f232cae-4ee1-c9b0-266d-562a600fa9d7
-                   Maria de Lourdes Campos Toca
-                   lcampos
-                   a04540fc-e608-56a7-ad47-562a6078519d
-                   */
-
             var usuario = app.data.createBean('Users', {id: app.user.id});
             usuario.fetch({
                 success: _.bind(function (modelo) {
@@ -2089,21 +2186,64 @@
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
-                    this.model.set("tipo_registro_c", "Lead");
-                    this.model.set("subtipo_cuenta_list", "En Calificacion");
-					          //this.model.set("show_panel_c",0);
-                    this.model.save();
-                    app.alert.show('success', {
-                        level: 'success',
-                        messages: 'Proceso Finalizado.',
-
-                    });
-                    //this.render();
-                    v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-                    v360.render();
-
+                    if (this.model.get("tipo_registro_c")=="Persona" || this.model.get('tipo_registro_c')=="Proveedor") {
+                        v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
+                        this.model.set("tipo_registro_c", "Lead");
+                        this.model.set("subtipo_cuenta_list", "En Calificacion");
+                        this.model.set("show_panel_c", 1);
+                        this.model.save();
+                    }
                 }, this)
             });
+            var productousuario= App.user.attributes.tipodeproducto_c;
+
+            if (productousuario.includes('1')){
+                var api_params={
+                    "tct_tipo_l_txf_c": "Lead",
+                    "tct_subtipo_l_txf_c":"En Calificacion",
+                    "tct_tipo_cuenta_l_c":"LEAD EN CALIFICACIÓN"
+                }
+            }
+            if (productousuario.includes('3')){
+                var api_params={
+                    "tct_tipo_ca_txf_c": "Lead",
+                    "tct_subtipo_ca_txf_c":"En Calificación",
+                    "tct_tipo_cuenta_ca_c":"LEAD EN CALIFICACIÓN"
+                }
+            }
+            if (productousuario.includes('4')){
+                var api_params={
+                    "tct_tipo_f_txf_c": "Lead",
+                    "tct_subtipo_f_txf_c":"En Calificación",
+                    "tct_tipo_cuenta_f_c":"LEAD EN CALIFICACIÓN"
+                }
+            }
+            if (api_params!=undefined) {
+
+                var idC = this.model.get('id');
+                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                app.api.call('update', url, api_params, {
+                    success: _.bind(function (data) {
+                        //this._render();
+                        app.alert.dismiss('conviertePaL');
+                        Oproductos.productos=data;
+                        app.alert.show('alert_change_success', {
+                            level: 'success',
+                            messages: 'Cambio realizado',
+                        });
+                        //Actualiza modelo vista v360
+                        v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
+                        v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
+                        v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                        Oproductos.render();
+                        v360.render();
+                        //Deja activa la pestaña de la vista360
+                        $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                        $("#recordTab>li.tab").removeClass('active');
+                        $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                    },)
+                });
+            }
 
 
         }
@@ -4086,14 +4226,39 @@
             app.api.call('GET', url, {},{
               success: _.bind(function (data) {
                   v360.ResumenCliente = data;
+                  //Oproductos=data;
                   //_.extend(this, v360.ResumenCliente);
                   v360.render();
               }, contexto_cuenta)
             });
         }
+    },
+
+    get_Oproductos: function(){
+        //Extiende This
+        this.productos = [];
+        //contexto_cuenta = this;
+
+        //Recupera id de cliente
+        var id = this.model.id;
+
+        //Forma Petición de datos
+        if (id!= '' && id != undefined && id!= null) {
+            //Ejecuta petición ResumenCliente
+            var url = app.api.buildURL('tct02_Resumen/'+id, null, null);
+            app.api.call('read', url, {},{
+                success: _.bind(function (data) {
+                    Oproductos.productos=data;
+                    contexto_cuenta.hideButton_Conversion();
+                    //_.extend(this, v360.ResumenCliente);
+                    Oproductos.render();
+                }, contexto_cuenta)
+            });
+        }
 
 
     },
+
 
     get_pld: function(){
         //Extiende This

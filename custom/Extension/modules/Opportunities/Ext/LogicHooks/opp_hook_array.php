@@ -78,3 +78,11 @@ $hook_array['after_save'][] = Array(
     'OpportunityLogic', // name of the class
     'bitacora_estatus'
 );
+
+$hook_array['before_save'][] = Array(
+    11,
+    'Actualizar estado de los campos de tipo de producto en la cuenta al avanzar en las etapas de solicitud',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'actualizatipoprod'
+);
