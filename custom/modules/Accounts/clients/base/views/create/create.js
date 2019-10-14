@@ -1823,13 +1823,15 @@
     },
 
     cleanName: function () {
+        //Recupera variables
         var original_name = this.model.get("name");
-
         var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
         var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
-
+        //Define arreglos para guardar nombre de cuenta
         var clean_name_split = [];
+        var clean_name_split_full = [];
         clean_name_split = original_name.split(" ");
+        //Elimina simbolos: Ej. . , -
         _.each(clean_name_split, function (value, key) {
             _.each(simbolos, function (simbolo, index) {
                 var clean_value = value.split(simbolo).join('');
@@ -1838,7 +1840,10 @@
                 }
             });
         });
+        clean_name_split_full = App.utils.deepCopy(clean_name_split);
 
+        //Elimina tipos de sociedad: Ej. SA, de , CV...
+        var totalVacio = 0;
         _.each(clean_name_split, function (value, key) {
             _.each(list_check, function (index, nomenclatura) {
                 var upper_value = value.toUpperCase();
@@ -1848,11 +1853,23 @@
                 }
             });
         });
-
+        //Genera clean_name con arreglo limpio
         var clean_name = "";
         _.each(clean_name_split, function (value, key) {
             clean_name += value;
+            //Cuenta elementos vacíos
+            if (value == "") {
+                totalVacio ++;
+            }
         });
+
+        //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
+        if( (clean_name_split.length - totalVacio) <= 1){
+            clean_name = "";
+            _.each(clean_name_split_full, function (value, key) {
+                clean_name += value;
+            });
+        }
 
         clean_name = clean_name.toUpperCase();
         this.model.set("clean_name", clean_name);
