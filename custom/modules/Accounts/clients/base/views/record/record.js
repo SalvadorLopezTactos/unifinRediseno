@@ -18,8 +18,6 @@
         this.context.on('button:cancel_button:click', this.handleCancel, this);
 
 
-        this.duplicadosName = 0;
-        this.duplicadosRFC = 0;
         this.totalllamadas = 0;
         this.totalreuniones = 0;
         this.flagheld=0;
@@ -31,6 +29,7 @@
         //add validation tasks
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
+        this.model.addValidationTask('validaduplicadoRFC', _.bind(this.RFC_DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
@@ -103,9 +102,6 @@
                     }, this)
                 });
             }
-
-
-            this.RFC_DuplicateCheck();
         }, this));
 
         //Validacion para el formato de los campos nombre y apellidos.
@@ -2271,42 +2267,7 @@
     },
 
     DuplicateCheck: function (fields, errors, callback) {
-            if (this.duplicadosName > 0) {
-                if (this.model.get('tct_homonimo_chk_c')!= true) {
-                    app.alert.show("DuplicateCheck", {
-                        level: "error",
-                        title: "Ya existe una persona registrada con el mismo nombre.",
-                        autoClose: false
-                    });
-
-                    if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                        errors['primernombre_c'] = errors['primernombre_c'] || {};
-                        errors['primernombre_c'].required = true;
-                        errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                        errors['apellidopaterno_c'].required = true;
-                        errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                        errors['apellidomaterno_c'].required = true;
-                    } else {
-                        errors['razonsocial_c'] = errors['razonsocial_c'] || {};
-                        errors['razonsocial_c'].required = true;
-                    }
-                }
-            } else {
-                if (this.duplicadosRFC > 0) {
-                    app.alert.show("DuplicateCheck", {
-                        level: "error",
-                        title: "Ya existe una persona registrada con el mismo RFC.",
-                        autoClose: false
-                    });
-
-                    errors['rfc_c'] = errors['rfc_c'] || {};
-                    errors['rfc_c'].required = true;
-                }
-            }
-        callback(null, fields, errors);
-    },
-
-    DuplicateCheck_Name: function () {
+        //Valida homonimo
         if (this.model.get('tct_homonimo_chk_c')!= true) {
             var clean_name = this.model.get('clean_name');
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -2320,41 +2281,44 @@
                         }
                     }
                 ]
-            }), null, {
+                }), null, {
                 success: _.bind(function (data) {
-                    if (data.records.length > 0) {
-                        this.duplicadosName = 1;
-                        console.log('this.duplicadosName SI');
-                        /*app.alert.show("DuplicateCheck", {
-                         level: "error",
-                         title: "Ya existe una persona registrada con el mismo nombre.",
-                         autoClose: false
-                         });
+                      if (data.records.length > 0) {
+                          var usuarios= App.lang.getAppListStrings('usuarios_homonimo_name_list');
+                          var etiquetas= "";
+                          Object.keys(usuarios).forEach(function(key){
+                              if(key != ''){
+                                  etiquetas+=usuarios[key]+'<br>';
+                              }
+                          });
+                            app.alert.show("DuplicateCheck", {
+                                level: "error",
+                                messages: "Ya existe una persona registrada con el mismo nombre. Favor de comunicarse con alguno de los siguientes usuarios:<br><b>"+etiquetas+"</b>",
+                                autoClose: false
+                            });
 
-                         if (this.model.get('tipodepersona_c') != 'Persona Moral'){
-                         errors['primernombre_c'] = errors['primernombre_c'] || {};
-                         errors['primernombre_c'].required = true;
-                         errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                         errors['apellidopaterno_c'].required = true;
-                         errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                         errors['apellidomaterno_c'].required = true;
-                         }else{
-                         errors['razonsocial_c'] = errors['razonsocial_c'] || {};
-                         errors['razonsocial_c'].required = true;
-                         }*/
-                    } else {
-                        this.duplicadosName = 0;
-                        console.log('this.duplicadosName NO');
-                    }
+                            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                                errors['primernombre_c'] = errors['primernombre_c'] || {};
+                                errors['primernombre_c'].required = true;
+                                errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                                errors['apellidopaterno_c'].required = true;
+                                errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                                errors['apellidomaterno_c'].required = true;
+                            } else {
+                                errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                                errors['razonsocial_c'].required = true;
+                            }
+
+                            }
+                    callback(null, fields, errors);
                 }, this)
-            });
+                });
+        }else {
+            callback(null, fields, errors);
         }
-
-        //callback(null, fields, errors);
     },
 
-    //RFC_DuplicateCheck: function(fields, errors, callback){
-    RFC_DuplicateCheck: function () {
+    RFC_DuplicateCheck: function(fields, errors, callback){
         var RFC = this.model.get('rfc_c');
         if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && RFC != 'XXX010101000')) {
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -2371,25 +2335,21 @@
             }), null, {
                 success: _.bind(function (data) {
                     if (data.records.length > 0) {
-                        this.duplicadosRFC = 1;
-                        console.log('duplicadosRFC SI');
-                        /*app.alert.show("DuplicateCheck", {
+                         app.alert.show("DuplicateCheck", {
                          level: "error",
                          title: "Ya existe una persona registrada con el mismo RFC.",
                          autoClose: false
                          });
 
                          errors['rfc_c'] = errors['rfc_c'] || {};
-                         errors['rfc_c'].required = true;*/
-                    } else {
-                        this.duplicadosRFC = 0;
-                        console.log('duplicadosRFC NO');
+                         errors['rfc_c'].required = true;
                     }
+                    callback(null, fields, errors);
                 }, this)
             });
+        }else {
+            callback(null, fields, errors);
         }
-
-        //callback(null, fields, errors);
     },
 
     //revisa que no exista un nombre o RFC duplicado
@@ -2763,7 +2723,6 @@
         clean_name = clean_name.toUpperCase();
         this.model.set("clean_name", clean_name);
 
-        this.DuplicateCheck_Name();
     },
 
     /*
