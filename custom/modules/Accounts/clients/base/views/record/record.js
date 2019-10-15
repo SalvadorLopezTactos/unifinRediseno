@@ -842,6 +842,7 @@
             self.noEditFields.push('promotorleasing_c');
             self.noEditFields.push('promotorfactoraje_c');
             self.noEditFields.push('promotorcredit_c');
+            self.noEditFields.push('promotorfleet_c');
         }
 
         var origen = this.model.get('origendelprospecto_c');
