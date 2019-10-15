@@ -411,6 +411,20 @@
             this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
+
+        //Se agrega condición para ocultar campo que no pertenecen a Fleet
+        if(this.model.get('tipo_producto_c')=='6'){
+
+          this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+          //Se oculta Monto a Operar
+          this.$('[data-name="amount"]').hide();
+          //Pago mensual
+          this.$('[data-name="ca_pago_mensual_c"]').hide();
+          //% Renta inicial
+          this.$('[data-name="porciento_ri_c"]').hide();
+
+        }
+
 	  },
 
     validacionCuentaSubcuentaCheck:function (fields, errors, callback) {
@@ -1018,7 +1032,7 @@ console.log(name);
 
 	condicionesFinancierasCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6) {
                 if (_.isEmpty(this.model.get('condiciones_financieras'))) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
