@@ -1161,7 +1161,7 @@
                                tipo=data.tct_tipo_f_txf_c;
                                break;
                        }
-                       if(tipo != "Prospecto" && tipo!= "Cliente" && self.model.get('tipo_producto_c')!='6'){
+                       if(tipo != "Prospecto" && tipo!= "Cliente"){
                                app.alert.show("Cliente no v\u00E1lido", {
                                    level: "error",
                                    title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +tipo,
