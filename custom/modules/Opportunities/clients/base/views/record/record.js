@@ -365,6 +365,12 @@
                 this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial R/I");
                 this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
             }
+
+            if(this.model.get('tipo_producto_c')=='6'){
+                this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+            }else{
+                this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
+            }
         },this));
 
         //Actualiza las etiquetas de acuerdo al tipo de operacion Solicitud/Cotizacion
