@@ -259,7 +259,7 @@
 
     saveProdPLD:function (fields, errors, callback) {
 
-        if(this.model.get('tipo_registro_c')!='Proveedor') {
+        if(this.model.get('tipo_registro_c')!='') {
             // Actualizar modelo de this.ProductosPLD
             // this.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
             if(this.ProductosPLD != null && typeof(this.$('.campo4ddw-cs').select2('val')) == "string")  {
