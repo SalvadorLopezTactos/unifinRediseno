@@ -126,47 +126,6 @@
         }
     },
 
-
-    handleCancel: function () {
-        this._super("handleCancel");
-        var account_telefonos = cont_tel.prev_oTelefonos.telefono;
-        var account_direcciones = cont_dir.prev_oDirecciones.direccion;;
-        this.model.set('account_telefonos', account_telefonos);
-        this.model.set('account_direcciones', account_direcciones);
-        this.model._previousAttributes.account_telefonos = account_telefonos;
-        this.model._previousAttributes.account_direcciones = account_direcciones;
-        cont_tel.oTelefonos.telefono = account_telefonos;
-        cont_dir.oDirecciones.direccion = account_direcciones;
-        cont_tel.render();
-        cont_dir.render();
-        $('.select2-choices').css('border-color', '');
-    },
-
-
-    /*
-     bindDataChange: function () {
-     this._super("bindDataChange");
-     //var self = this;
-     this.model.on("change:tipodepersona_c", _.bind(function () {
-     if(this.model._previousAttributes.tipodepersona_c == 'Persona Fisica'){
-     if(this.model.get('tipodepersona_c') == 'Persona Moral'){
-     this.model.set('tipodepersona_c','Persona Fisica');
-     }
-     }
-     if(this.model._previousAttributes.tipodepersona_c == 'Persona Fisica con Actividad Empresarial'){
-     if(this.model.get('tipodepersona_c') == 'Persona Moral'){
-     this.model.set('tipodepersona_c','Persona Fisica con Actividad Empresarial');
-     }
-     }
-     if(this.model._previousAttributes.tipodepersona_c == 'Persona Moral'){
-     if(this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial'){
-     this.model.set('tipodepersona_c','Persona Moral');
-     }
-     }
-     }, this));
-     },
-     */
-
     _render: function (fields, errors, callback) {
         this._super("_render");
 
@@ -806,10 +765,10 @@
         var tipo = this.model.get('tipo_registro_c');
         var puesto = app.user.get('puestousuario_c');
         if ((tipo == "Prospecto" || tipo == "Cliente" || tipo == "Lead") && (puesto == 6 || puesto == 12 || puesto == 17)) {
-            $('[name="save_button"]').hide();
+            this.$('[name="save_button"]').hide();
         }
         else {
-            $('[name="save_button"]').show();
+            this.$('[name="save_button"]').show();
         }
     },
 
@@ -2403,7 +2362,7 @@
     },
 
     saveProdPLD:function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') != 'Persona' && this.model.get('tipo_registro_c')!='Proveedor') {
+        if (this.model.get('tipo_registro_c') != 'Persona') {
           // Actualizar modelo de pld.ProductosPLD
           var ProductosPLD = {
               'arrendamientoPuro' : {
