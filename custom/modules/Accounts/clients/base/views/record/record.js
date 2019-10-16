@@ -713,6 +713,11 @@
         // this.model._previousAttributes.account_telefonos = account_telefonos;
         // this.model._previousAttributes.account_direcciones = account_direcciones;
 
+        this.$('[data-name="promotorleasing_c"]').attr('style','');
+        this.$('[data-name="promotorfactoraje_c"]').attr('style','');
+        this.$('[data-name="promotorcredit_c"]').attr('style','');
+        this.$('[data-name="promotorfleet_c"]').attr('style','');
+
     },
 
     bindDataChange: function () {
@@ -949,7 +954,15 @@
             contexto_cuenta.hideButton_Conversion_change();
         });
 
+    },
 
+    editClicked: function() {
+        this._super("editClicked");
+
+        this.$('[data-name="promotorleasing_c"]').attr('style','pointer-events:none');
+        this.$('[data-name="promotorfactoraje_c"]').attr('style','pointer-events:none');
+        this.$('[data-name="promotorcredit_c"]').attr('style','pointer-events:none');
+        this.$('[data-name="promotorfleet_c"]').attr('style','pointer-events:none');
     },
 
     hideconfiinfo:function () {
