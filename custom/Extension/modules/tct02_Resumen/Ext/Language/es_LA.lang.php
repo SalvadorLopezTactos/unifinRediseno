@@ -46,3 +46,6 @@ $mod_strings['LBL_TCT_SUBTIPO_CA_TXF'] = 'Subtipo Producto CA';
 $mod_strings['LBL_TCT_TIPO_CUENTA_L'] = 'Tipo de Cuenta Leasing';
 $mod_strings['LBL_TCT_TIPO_CUENTA_F_C'] = 'Tipo de Cuenta Factoraje';
 $mod_strings['LBL_TCT_TIPO_CUENTA_CA_C'] = 'Tipo de Cuenta CA';
+$mod_strings['LBL_TCT_TIPO_FL_TXF_C'] = 'Tipo Producto Fleet';
+$mod_strings['LBL_TCT_SUBTIPO_FL_TXF_C'] = 'Subtipo Producto Fleet';
+$mod_strings['LBL_TCT_TIPO_CUENTA_FL_C'] = 'Tipo de Cuenta Fleet';

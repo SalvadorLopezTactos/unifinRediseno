@@ -978,6 +978,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->tct_tipo_ca_txf_c= $bean->tipo_registro_c;
             $bean_Resumen->tct_subtipo_ca_txf_c=$bean->subtipo_cuenta_c;
             $bean_Resumen->tct_tipo_cuenta_ca_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            //FLEET
+            $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
         }

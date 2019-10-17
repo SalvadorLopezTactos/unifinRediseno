@@ -1108,12 +1108,21 @@
         var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
         var factprod= Oproductos.productos.tct_tipo_f_txf_c;
         var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-        var userprod= App.user.attributes.tipodeproducto_c;
+        var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
         var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
         var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
         var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
+        var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
+        var userprod= App.user.attributes.tipodeproducto_c;
+        var logueado= App.user.id;
+        var asesorL=this.model.get('user_id_c');
+        var asesorF=this.model.get('user_id1_c');
+        var asesorCA=this.model.get('user_id2_c');
+        var asesorFL=this.model.get('user_id6_c');
 
-        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1')) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4")) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3"))) {
+
+        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL== logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF== logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA== logueado) ||
+        (fleetprod=="Prospecto" && fleetsub=="Contactado" && userprod.includes('6') && asesorFL== logueado)) {
         }
         else{
 
@@ -1127,7 +1136,8 @@
         }
 
 
-        if ((leasingprod=="Lead" && userprod.includes('1')) || (factprod=="Lead" && userprod.includes("4")) || (caprod=="Lead" && userprod.includes("3"))) {
+        if ((leasingprod=="Lead" && userprod.includes('1') && asesorL== logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF== logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA== logueado) ||
+            (fleetprod=="Lead" && userprod.includes('6') && asesorFL== logueado)) {
         }else{
             if (myField1) {
                 myField1.listenTo(myField1, "render", function () {
@@ -1138,7 +1148,8 @@
             }
         }
         //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-        if((leasingprod=="Persona" && userprod.includes('1')) || (factprod=="Persona" && userprod.includes("4")) || (caprod=="Persona" && userprod.includes("3"))){
+        if((leasingprod=="Persona" && userprod.includes('1') && asesorL== logueado) || (factprod=="Persona" && userprod.includes("4") && asesorF== logueado) || (caprod=="Persona" && userprod.includes("3") && asesorCA== logueado) ||
+            (fleetprod=="Persona" && userprod.includes('6') && asesorFL== logueado)){
             myField1.listenTo(myField1, "render", function () {
                 myField1.hide();
             });
@@ -1151,7 +1162,8 @@
             }
         }
 
-        if((leasingprod=="Proveedor" && userprod.includes('1')) || (factprod=="Proveedor" && userprod.includes("4")) || (caprod=="Proveedor" && userprod.includes("3"))){
+        if((leasingprod=="Proveedor" && userprod.includes('1') && asesorL== logueado) || (factprod=="Proveedor" && userprod.includes("4") && asesorF== logueado) || (caprod=="Proveedor" && userprod.includes("3") && asesorCA== logueado) ||
+            (fleetprod=="Proveedor" && userprod.includes('6') && asesorFL== logueado)){
              myField2.listenTo(myField2, "render", function () {
                 myField2.show();
             });
@@ -1166,10 +1178,18 @@
         var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
         var factprod= Oproductos.productos.tct_tipo_f_txf_c;
         var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-        var userprod= App.user.attributes.tipodeproducto_c;
+        var tipofleet= Oproductos.productos.tct_tipo_fl_txf_c;
+        var userprod= App.user.attributes.productos_c;
         var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
         var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
         var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
+        var subtipofleet= Oproductos.productos.tct_subtipo_fl_txf_c;
+
+        var logueado= App.user.id;
+        var asesorL=this.model.get('user_id_c');
+        var asesorF=this.model.get('user_id1_c');
+        var asesorCA=this.model.get('user_id2_c');
+        var asesorFL=this.model.get('user_id6_c');
         //oculta botones
         $('[name="regresalead"]').hide();
         $('[name="prospectocontactado"]').hide();
@@ -1181,7 +1201,8 @@
           * tipo_registro_c = Prospecto
           * && subtipo_cuenta_c = Contactado
         */
-        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1')) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4")) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3"))) {
+        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL==logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF==logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA==logueado) ||
+            (tipofleet=="Prospecto" && subtipofleet=="Contactado" && userprod.includes('6') && asesorFL==logueado)) {
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').hide();
@@ -1192,7 +1213,7 @@
         * Prospecto contactado:
         * tipo_registro_c = Lead
         */
-        if ((leasingprod=="Lead" && userprod.includes('1')) || (factprod=="Lead" && userprod.includes("4")) || (caprod=="Lead" && userprod.includes("3"))) {
+        if ((leasingprod=="Lead" && userprod.includes('1') && asesorL==logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF==logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA==logueado) || (tipofleet=="Lead" && userprod.includes('6') && asesorFL==logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
             $('[name="conviertelead"]').hide();
@@ -1203,7 +1224,7 @@
         * tipo_registro_c = Persona
         * OR tipo_registro_c = Proveedor
         */
-        if (((leasingprod=="Persona" || leasingprod=="Proveedor" ) && userprod.includes('1')) || ((factprod=="Persona" || factprod=="Proveedor") && userprod.includes("4")) || ((caprod=="Persona" || caprod=="Proveedor") && userprod.includes("3"))) {
+        if (((leasingprod=="Persona" || leasingprod=="Proveedor" ) && userprod.includes('1') && asesorL==logueado) || ((factprod=="Persona" || factprod=="Proveedor") && userprod.includes("4") && asesorF==logueado) || ((caprod=="Persona" || caprod=="Proveedor") && userprod.includes("3") && asesorCA==logueado) || ((tipofleet=="Persona" || tipofleet=="Proveedor") && userprod.includes('6') && asesorFL==logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
@@ -1590,18 +1611,53 @@
             title: 'Convirtiendo cuenta, por favor espere.',
         });
         var totalProspecto= 0;
-        //alert("boton precionado");
+        var totalProspectoG=0;
+        var productousuario= App.user.attributes.productos_c;
+        var api_params={};
+
         //Validacion para actualizar el producto del usuario logueado asi como el tipo de registro de la cuenta
-        if(Oproductos.productos.tct_tipo_l_txf_c=="Prospecto"){
-            totalProspecto++;
+        //Leasing
+        if(Oproductos.productos.tct_tipo_l_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_l_txf_c=="Contactado"){
+            totalProspectoG++;
+            if(productousuario.includes('1') && App.user.id==this.model.get('user_id_c') ) {
+                api_params["tct_tipo_l_txf_c"] = "Lead";
+                api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
+                api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
+                totalProspecto++;
+            }
         }
-        if(Oproductos.productos.tct_tipo_f_txf_c=="Prospecto"){
-            totalProspecto++;
+        //Factoraje
+        if(Oproductos.productos.tct_tipo_f_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_f_txf_c=="Contactado"){
+            totalProspectoG++;
+            if(productousuario.includes('4') && App.user.id==this.model.get('user_id1_c')) {
+                totalProspecto++;
+                api_params["tct_tipo_f_txf_c"] = "Lead";
+                api_params["tct_subtipo_f_txf_c"] = "En Calificación";
+                api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
+            }
+
         }
-        if(Oproductos.productos.tct_tipo_ca_txf_c=="Prospecto"){
-            totalProspecto++;
+        //CA
+        if(Oproductos.productos.tct_tipo_ca_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_ca_txf_c=="Contactado"){
+            totalProspectoG++;
+            if(productousuario.includes('3') && App.user.id==this.model.get('user_id2_c')) {
+                totalProspecto++;
+                api_params["tct_tipo_ca_txf_c"] = "Lead";
+                api_params["tct_subtipo_ca_txf_c"] = "En Calificacion";
+                api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
+            }
         }
-        if (this.model.get("tipo_registro_c")=="Prospecto" && totalProspecto==1) {
+        //Fleet
+        if(Oproductos.productos.tct_tipo_fl_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_fl_txf_c=="Contactado"){
+            totalProspectoG++;
+            if(productousuario.includes('6')&& App.user.id==this.model.get('user_id6_c')) {
+                totalProspecto++;
+                api_params["tct_tipo_fl_txf_c"] = "Lead";
+                api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
+                api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
+            }
+        }
+        if (this.model.get("tipo_registro_c")=="Prospecto" && this.model.get("subtipo_cuenta_c")=="Contactado" && totalProspecto==totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
             v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
             this.model.set("tipo_registro_c", "Lead");
@@ -1610,29 +1666,6 @@
             this.model.set("tct_prospecto_contactado_chk_c", false);
             //this.model.set("show_panel_c",0);
             this.model.save();
-        }
-        var productousuario= App.user.attributes.tipodeproducto_c;
-
-        if (productousuario.includes('1')){
-            var api_params={
-                "tct_tipo_l_txf_c": "Lead",
-                "tct_subtipo_l_txf_c":"En Calificacion",
-                "tct_tipo_cuenta_l_c":"LEAD EN CALIFICACIÓN"
-            }
-        }
-        if (productousuario.includes('3')){
-            var api_params={
-                "tct_tipo_ca_txf_c": "Lead",
-                "tct_subtipo_ca_txf_c":"En Calificacion",
-                "tct_tipo_cuenta_ca_c":"LEAD EN CALIFICACIÓN"
-            }
-        }
-        if (productousuario.includes('4')){
-            var api_params={
-                "tct_tipo_f_txf_c": "Lead",
-                "tct_subtipo_f_txf_c":"En Calificación",
-                "tct_tipo_cuenta_f_c":"LEAD EN CALIFICACIÓN"
-            }
         }
         if (api_params!=undefined) {
 
@@ -1651,6 +1684,7 @@
                     v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
                     v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
                     v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                    v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
                     Oproductos.render();
                     v360.render();
                 },)
@@ -1843,27 +1877,35 @@
                 //this.model.set("show_panel_c",1);
                 this.model.save();
             }
-            var productousuario= App.user.attributes.tipodeproducto_c;
+            var productousuario= App.user.attributes.productos_c;
+            var api_params={};
 
-            if (productousuario.includes('1')){
-                var api_params={
-                    "tct_tipo_l_txf_c": "Prospecto",
-                    "tct_subtipo_l_txf_c":"Contactado",
-                    "tct_tipo_cuenta_l_c":"PROSPECTO CONTACTADO"
+            if (productousuario.includes('1') && Oproductos.productos.tct_tipo_l_txf_c=="Lead"){
+                if(App.user.id==this.model.get('user_id_c')) {
+                    api_params["tct_tipo_l_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_l_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (productousuario.includes('3')){
-                var api_params={
-                    "tct_tipo_ca_txf_c": "Prospecto",
-                    "tct_subtipo_ca_txf_c":"Contactado",
-                    "tct_tipo_cuenta_ca_c":"PROSPECTO CONTACTADO"
+            if (productousuario.includes('3') && Oproductos.productos.tct_tipo_ca_txf_c=="Lead"){
+                if(App.user.id==this.model.get('user_id2_c')) {
+                    api_params["tct_tipo_ca_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_ca_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (productousuario.includes('4')){
-                var api_params={
-                    "tct_tipo_f_txf_c": "Prospecto",
-                    "tct_subtipo_f_txf_c":"Contactado",
-                    "tct_tipo_cuenta_f_c":"PROSPECTO CONTACTADO"
+            if (productousuario.includes('4') && Oproductos.productos.tct_tipo_f_txf_c=="Lead"){
+                if(App.user.id==this.model.get('user_id1_c')) {
+                    api_params["tct_tipo_f_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_f_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO CONTACTADO";
+                }
+            }
+            if (productousuario.includes('6') && Oproductos.productos.tct_tipo_fl_txf_c=="Lead"){
+                if(App.user.id==this.model.get('user_id6_c')) {
+                    api_params["tct_tipo_fl_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_fl_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO CONTACTADO";
                 }
             }
             if (api_params!=undefined) {
@@ -1884,6 +1926,7 @@
                         v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
                         v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
                         v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                        v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
                         v360.render();
                     },)
@@ -2143,31 +2186,31 @@
                      * Carlos Zaragoza
                      * Enero 25, 2016 10:15 AM
                      * */
-                    if (contains.call(modelo.get('productos_c'), "1")) {
+                    if (contains.call(modelo.get('productos_c'), "1") && this.model.get('user_id_c')=="") {
                         this.model.set('promotorleasing_c', modelo.get('name'));
                         this.model.set('user_id_c', modelo.get('id'));
-                    } else {
+                    } else if(this.model.get('user_id_c')=="") {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "4")) {
+                    if (contains.call(modelo.get('productos_c'), "4") && this.model.get('user_id_c')=="") {
                         this.model.set('promotorfactoraje_c', modelo.get('name'));
                         this.model.set('user_id1_c', modelo.get('id'));
-                    } else {
+                    } else if (this.model.get('user_id_c')==""){
                         this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
                         this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "3")) {
+                    if (contains.call(modelo.get('productos_c'), "3") && this.model.get('user_id_c')=="") {
                         this.model.set('promotorcredit_c', modelo.get('name'));
                         this.model.set('user_id2_c', modelo.get('id'));
-                    } else {
+                    } else if( this.model.get('user_id_c')=="") {
                         this.model.set('promotorcredit_c', '9 - Sin Gestor');
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "6")) {
+                    if (contains.call(modelo.get('productos_c'), "6")  && this.model.get('user_id_c')=="") {
                         this.model.set('promotorfleet_c', modelo.get('name'));
                         this.model.set('user_id6_c', modelo.get('id'));
-                    } else {
+                    } else if(this.model.get('user_id_c')==""){
                         this.model.set('promotorfleet_c', '9 - Sin Gestor');
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
@@ -2191,27 +2234,36 @@
                     }
                 }, this)
             });
-            var productousuario= App.user.attributes.tipodeproducto_c;
+            var productousuario= App.user.attributes.productos_c;
+            var api_params={};
 
-            if (productousuario.includes('1')){
-                var api_params={
-                    "tct_tipo_l_txf_c": "Lead",
-                    "tct_subtipo_l_txf_c":"En Calificacion",
-                    "tct_tipo_cuenta_l_c":"LEAD EN CALIFICACIÓN"
+            if ((Oproductos.productos.tct_tipo_l_txf_c=="Persona" || Oproductos.productos.tct_tipo_l_txf_c=="Proveedor") && productousuario.includes('1')){
+                if(App.user.id==this.model.get('user_id_c')) {
+                    api_params["tct_tipo_l_txf_c"] = "Lead";
+                    api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
+                    api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
+                }
+
+            }
+            if ((Oproductos.productos.tct_tipo_ca_txf_c=="Persona" ||  Oproductos.productos.tct_tipo_ca_txf_c=="Proveedor") && productousuario.includes('3')){
+                if(App.user.id==this.model.get('user_id2_c')) {
+                    api_params["tct_tipo_ca_txf_c"] = "Lead";
+                    api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
+                    api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if (productousuario.includes('3')){
-                var api_params={
-                    "tct_tipo_ca_txf_c": "Lead",
-                    "tct_subtipo_ca_txf_c":"En Calificación",
-                    "tct_tipo_cuenta_ca_c":"LEAD EN CALIFICACIÓN"
+            if ((Oproductos.productos.tct_tipo_f_txf_c=="Persona" || Oproductos.productos.tct_tipo_f_txf_c=="Proveedor") && productousuario.includes('4')){
+                if(App.user.id==this.model.get('user_id1_c')) {
+                    api_params["tct_tipo_f_txf_c"] = "Lead";
+                    api_params["tct_subtipo_f_txf_c"] = "En Calificación";
+                    api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if (productousuario.includes('4')){
-                var api_params={
-                    "tct_tipo_f_txf_c": "Lead",
-                    "tct_subtipo_f_txf_c":"En Calificación",
-                    "tct_tipo_cuenta_f_c":"LEAD EN CALIFICACIÓN"
+            if ((Oproductos.productos.tct_tipo_fl_txf_c=="Persona" || Oproductos.productos.tct_tipo_fl_txf_c=="Proveedor") && productousuario.includes('6')){
+                if(App.user.id==this.model.get('user_id6_c')) {
+                    api_params["tct_tipo_fl_txf_c"] = "Lead";
+                    api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
+                    api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
             if (api_params!=undefined) {
@@ -2231,6 +2283,7 @@
                         v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
                         v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
                         v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
+                        v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
                         v360.render();
                         //Deja activa la pestaña de la vista360
