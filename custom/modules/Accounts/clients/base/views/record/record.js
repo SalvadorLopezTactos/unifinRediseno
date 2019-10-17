@@ -213,7 +213,7 @@
             Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
          */
         this.model.on('sync', this._hideNPS, this);
-        //this.model.on('sync', this.hideButton_Conversion, this);
+        this.model.on('sync', this.hideButton_Conversion, this);
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync',this.homonimo, this);
@@ -1127,7 +1127,7 @@
         var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
         var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
         var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
-        var userprod= App.user.attributes.tipodeproducto_c;
+        var userprod= App.user.attributes.productos_c;
         var logueado= App.user.id;
         var asesorL=this.model.get('user_id_c');
         var asesorF=this.model.get('user_id1_c');
