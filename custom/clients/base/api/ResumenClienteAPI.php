@@ -138,6 +138,7 @@ class ResumenClienteAPI extends SugarApi
             "promotor" => "",
             "color" => "");
         $arr_principal['fleet'] = array("linea_aproximada" => "",
+            "tipo_cuenta"=>"",
             "numero_vehiculos" => "",
             "promotor" => "",
             "color" => "");
@@ -603,7 +604,8 @@ class ResumenClienteAPI extends SugarApi
                     $arr_principal['credito_auto']['anexos_historicos']= $beanResumen->cauto_anexos_historicos;
                 }
 
-
+                //Recupera Fleet
+                $arr_principal['fleet']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_fl_c;
             }
         }
 

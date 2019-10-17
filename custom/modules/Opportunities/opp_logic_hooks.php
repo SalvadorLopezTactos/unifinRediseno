@@ -959,7 +959,6 @@ SQL;
                  $etisubtipo = $subtipo["Interesado"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
                  switch ($producto) {
                      case '1':
-                         $GLOBALS['log']->fatal('Entra a producto 1 Leasing');
                          if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
                              $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
                              $bean_Resumen->tct_subtipo_l_txf_c = "Interesado";
@@ -978,6 +977,13 @@ SQL;
                              $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
                              $bean_Resumen->tct_subtipo_f_txf_c = "Interesado";
                              $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                         }
+                         break;
+                     case '6':
+                         if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
+                             $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
+                             $bean_Resumen->tct_subtipo_fl_txf_c = "Interesado";
+                             $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                          }
                          break;
                      default:
@@ -1010,6 +1016,12 @@ SQL;
                             $bean_Resumen->tct_subtipo_f_txf_c = "Integracion de Expediente";
                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                         }
+                    case '6':
+                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
+                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
+                            $bean_Resumen->tct_subtipo_fl_txf_c = "Integracion de Expediente";
+                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                        }
                         break;
                     default:
                 }
@@ -1041,6 +1053,12 @@ SQL;
                             $bean_Resumen->tct_subtipo_f_txf_c = "Credito";
                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                         }
+                    case '6':
+                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
+                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
+                            $bean_Resumen->tct_subtipo_fl_txf_c = "Credito";
+                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                        }
                         break;
                     default:
                 }
@@ -1071,6 +1089,12 @@ SQL;
                             $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_f_txf_c = "Rechazado";
                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                        }
+                    case '6':
+                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
+                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
+                            $bean_Resumen->tct_subtipo_fl_txf_c = "Rechazado";
+                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                         }
                         break;
                     default:
@@ -1104,6 +1128,12 @@ SQL;
                             $bean_Resumen->tct_subtipo_f_txf_c = "Credito";
                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                         }
+                    case '6':
+                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
+                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
+                            $bean_Resumen->tct_subtipo_fl_txf_c = "Credito";
+                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                        }
                         break;
                     default:
                 }
@@ -1134,6 +1164,12 @@ SQL;
                     $bean_Resumen->tct_tipo_ca_txf_c = "Cliente";
                     $bean_Resumen->tct_subtipo_ca_txf_c = "Con Linea Vigente";
                     $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
+                }
+                //FLEET
+                if($bean->tipo_producto_c=="6") {
+                    $bean_Resumen->tct_tipo_fl_txf_c = "Cliente";
+                    $bean_Resumen->tct_subtipo_fl_txf_c = "Con Linea Vigente";
+                    $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                 }
                 //GUARDA REGISTRO DE RESUMEN
                 $bean_Resumen->save();
