@@ -75,6 +75,7 @@
         this.model.addValidationTask('Valida al Guardar',_.bind(this.validacion_proceso_guardar,this));
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_no_vehiculos',_.bind(this._Validavehiculo, this));
 
         /*
         * @author Carlos Zaragoza Ortiz
@@ -1160,6 +1161,9 @@
                            case "4":
                                tipo=data.tct_tipo_f_txf_c;
                                break;
+                           case "6":
+                               tipo=data.tct_tipo_fl_txf_c;
+                               break;
                        }
                        if(tipo != "Prospecto" && tipo!= "Cliente"){
                                app.alert.show("Cliente no v\u00E1lido", {
@@ -1525,6 +1529,20 @@
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
+
+    _Validavehiculo: function (fields, errors, callback) {
+        if (this.model.get('tct_numero_vehiculos_c') <= 0 && this.model.get('tipo_producto_c')=="6") {
+            errors['tct_numero_vehiculos_c'] = errors['tct_numero_vehiculos_c'] || {};
+            errors['tct_numero_vehiculos_c'].required = true;
+
+            app.alert.show("Numero de Vehiculos", {
+                level: "error",
+                messages: "El Número de vehículos debe ser mayor a cero.",
                 autoClose: false
             });
         }

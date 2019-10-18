@@ -56,6 +56,7 @@
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld',_.bind(this.valida_pld, this));
+        this.model.addValidationTask('valida_no_vehiculos',_.bind(this._Validavehiculo, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -1786,6 +1787,20 @@ console.log(name);
                 });
             }
 
+        }
+        callback(null, fields, errors);
+    },
+
+    _Validavehiculo: function (fields, errors, callback) {
+        if (this.model.get('tct_numero_vehiculos_c') <= 0 && this.model.get('tipo_producto_c')=="6") {
+            errors['tct_numero_vehiculos_c'] = errors['tct_numero_vehiculos_c'] || {};
+            errors['tct_numero_vehiculos_c'].required = true;
+
+            app.alert.show("Numero de Vehiculos", {
+                level: "error",
+                messages: "El Número de vehículos debe ser mayor a cero.",
+                autoClose: false
+            });
         }
         callback(null, fields, errors);
     },

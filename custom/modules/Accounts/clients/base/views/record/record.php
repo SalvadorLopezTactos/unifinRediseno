@@ -805,6 +805,12 @@ array (
                 'name' => 'promotorfleet_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORFLEET',
+                'initial_filter' => 'filterPromotorTemplate',
+                'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
+                'filter_populate' =>
+                 array (
+                  'tipodeproducto_c' => '6',
+                ),
               ),
             ),
           ),
