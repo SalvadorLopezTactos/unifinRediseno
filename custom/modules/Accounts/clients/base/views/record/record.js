@@ -1119,72 +1119,88 @@
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
-        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
-        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
-        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-        var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
-        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
-        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
-        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
-        var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
-        var userprod= App.user.attributes.productos_c;
-        var logueado= App.user.id;
-        var asesorL=this.model.get('user_id_c');
-        var asesorF=this.model.get('user_id1_c');
-        var asesorCA=this.model.get('user_id2_c');
-        var asesorFL=this.model.get('user_id6_c');
-
-
-        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL== logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF== logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA== logueado) ||
-        (fleetprod=="Prospecto" && fleetsub=="Contactado" && userprod.includes('6') && asesorFL== logueado)) {
-        }
-        else{
 
             if (myField) {
                 myField.listenTo(myField, "render", function () {
+                    var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
+                    var factprod= Oproductos.productos.tct_tipo_f_txf_c;
+                    var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
+                    var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
+                    var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
+                    var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
+                    var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
+                    var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
+                    var userprod= App.user.attributes.productos_c;
+                    var logueado= App.user.id;
+                    var asesorL=this.model.get('user_id_c');
+                    var asesorF=this.model.get('user_id1_c');
+                    var asesorCA=this.model.get('user_id2_c');
+                    var asesorFL=this.model.get('user_id6_c');
                     myField.hide();
 
-                    console.log("field being rendered as: " + myField.tplName);
+                if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL== logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF== logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA== logueado) ||
+                    (fleetprod=="Prospecto" && fleetsub=="Contactado" && userprod.includes('6') && asesorFL== logueado)) {
+                    myField.show();
+                }else {
+                    myField.hide();
+                }
+
                 });
             }
-        }
 
-
-        if ((leasingprod=="Lead" && userprod.includes('1') && asesorL== logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF== logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA== logueado) ||
-            (fleetprod=="Lead" && userprod.includes('6') && asesorFL== logueado)) {
-        }else{
             if (myField1) {
                 myField1.listenTo(myField1, "render", function () {
                     myField1.hide();
-
-                    console.log("field being rendered as: " + myField1.tplName);
+                    var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
+                    var factprod= Oproductos.productos.tct_tipo_f_txf_c;
+                    var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
+                    var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
+                    var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
+                    var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
+                    var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
+                    var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
+                    var userprod= App.user.attributes.productos_c;
+                    var logueado= App.user.id;
+                    var asesorL=this.model.get('user_id_c');
+                    var asesorF=this.model.get('user_id1_c');
+                    var asesorCA=this.model.get('user_id2_c');
+                    var asesorFL=this.model.get('user_id6_c');
+                    //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
+                    if ((leasingprod=="Lead" && userprod.includes('1') && asesorL== logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF== logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA== logueado) ||
+                        (fleetprod=="Lead" && userprod.includes('6') && asesorFL== logueado)) {
+                        myField1.show();
+                    }else {
+                        myField1.hide();
+                    }
                 });
             }
-        }
-        //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-        if((leasingprod=="Persona" && userprod.includes('1') && asesorL== logueado) || (factprod=="Persona" && userprod.includes("4") && asesorF== logueado) || (caprod=="Persona" && userprod.includes("3") && asesorCA== logueado) ||
-            (fleetprod=="Persona" && userprod.includes('6') && asesorFL== logueado)){
-            myField1.listenTo(myField1, "render", function () {
-                myField1.hide();
-            });
-        }
-        else {
-            if (myField2) {
-                myField2.listenTo(myField2, "render", function () {
-                    myField2.hide();
-                });
-            }
-        }
+             if (myField2) {
+                    myField2.listenTo(myField2, "render", function () {
+                        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
+                        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
+                        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
+                        var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
+                        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
+                        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
+                        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
+                        var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
+                        var userprod= App.user.attributes.productos_c;
+                        var logueado= App.user.id;
+                        var asesorL=this.model.get('user_id_c');
+                        var asesorF=this.model.get('user_id1_c');
+                        var asesorCA=this.model.get('user_id2_c');
+                        var asesorFL=this.model.get('user_id6_c');
+                        myField2.hide();
 
-        if((leasingprod=="Proveedor" && userprod.includes('1') && asesorL== logueado) || (factprod=="Proveedor" && userprod.includes("4") && asesorF== logueado) || (caprod=="Proveedor" && userprod.includes("3") && asesorCA== logueado) ||
-            (fleetprod=="Proveedor" && userprod.includes('6') && asesorFL== logueado)){
-             myField2.listenTo(myField2, "render", function () {
-                myField2.show();
-            });
-             myField1.listenTo(myField1, "render", function () {
-                myField1.hide();
-            });
-        }
+                        if(((leasingprod=="Proveedor" ||leasingprod=="Persona")&& userprod.includes('1') && asesorL== logueado) || ((factprod=="Proveedor" || factprod=="Persona")&& userprod.includes("4") && asesorF== logueado) || ((caprod=="Proveedor" || caprod=="Persona") && userprod.includes("3") && asesorCA== logueado) ||
+                            ((fleetprod=="Proveedor" || fleetprod=="Persona") && userprod.includes('6') && asesorFL== logueado)) {
+                            myField2.show();
+                        }else{
+                            myField2.hide();
+                        }
+
+                    });
+             }
     },
 
     hideButton_Conversion_change: function () {
@@ -4293,7 +4309,7 @@
             app.api.call('read', url, {},{
                 success: _.bind(function (data) {
                     Oproductos.productos=data;
-                    contexto_cuenta.hideButton_Conversion();
+                    //contexto_cuenta.hideButton_Conversion();
                     //_.extend(this, v360.ResumenCliente);
                     Oproductos.render();
                 }, contexto_cuenta)
