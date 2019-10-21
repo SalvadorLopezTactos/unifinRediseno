@@ -998,7 +998,6 @@ SQL;
                 $etisubtipo = $subtipo["Integracion de Expediente"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
                 switch ($producto) {
                     case '1':
-                        $GLOBALS['log']->fatal('Setea Prospecto Integracion de Exp 1');
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
                             $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_l_txf_c = "Integracion de Expediente";
@@ -1006,7 +1005,6 @@ SQL;
                         }
                         break;
                     case '3':
-                        $GLOBALS['log']->fatal('Setea Prospecto Integracion de Exp 3');
                         if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto") {
                             $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_ca_txf_c = "Integracion de Expediente";
@@ -1014,14 +1012,12 @@ SQL;
                         }
                         break;
                     case '4':
-                        $GLOBALS['log']->fatal('Setea Prospecto Integracion de Exp 4');
                         if($bean_Resumen->tct_tipo_f_txf_c=="Prospecto") {
                             $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_f_txf_c = "Integracion de Expediente";
                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
                         }
                     case '6':
-                        $GLOBALS['log']->fatal('Setea Prospecto Integracion de Exp 6');
                         if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
                             $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_fl_txf_c = "Integracion de Expediente";
