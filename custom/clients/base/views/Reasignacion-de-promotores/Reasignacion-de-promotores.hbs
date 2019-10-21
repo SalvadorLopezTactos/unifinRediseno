@@ -64,10 +64,14 @@
                 <input id="filtroCliente" type="text" value="">
             </td>
             <td>
-                 <th>Persona / Proveedor</th>
+                 <th>Tipo de Cuenta</th>
             </td>
             <td>
-                <input id="persona" type="checkbox" value="True" checked>
+                <select id="tipo_de_cuenta" class="row-fluid select2 tipo_cuenta" multiple="multiple" style="width: 100%;" >
+                    {{#each tipo_cuenta}}
+                        <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                </select>
             </td>
             <td><input type="button" value="Buscar" id="btn_Cuentas" class="btn btn-primary" /></td>
         </tr>
