@@ -25,6 +25,7 @@
         this.seleccionados = [];
         this.persistNoSeleccionados=[];
         this.flagSeleccionados=0;
+        this.tipo_cuenta= App.lang.getAppListStrings('tipo_registro_list');
         this.model.on('change:users_accounts_1users_ida', this._setOffset, this);
 
         this.loadView = false;
@@ -51,6 +52,23 @@
             }, this)
         });
 
+    },
+
+    _render: function () {
+        this._super("_render");
+        var tipos_cuenta=[];
+         this.$('#tipo_de_cuenta').select2({
+             width: '100%',
+             closeOnSelect: false,
+             containerCssClass: 'select2-choices-pills-close'
+         });
+
+        for (var key in this.tipo_cuenta) {
+            if (this.tipo_cuenta.hasOwnProperty(key)) {
+                tipos_cuenta.push(key);
+            }
+        }
+        this.$("#tipo_de_cuenta").select2('val', tipos_cuenta);
     },
 
     _setOffset: function (){
