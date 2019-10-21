@@ -183,9 +183,10 @@
 
     buscarCuentas: function(){
         var assigneUsr = this.model.get('users_accounts_1users_ida');
-        if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && !$("#persona")[0].checked) {
+        var tipos_seleccionados=this.$(".tipo_cuenta").select2('val');
+        if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && (tipos_seleccionados.includes('Prospecto') || tipos_seleccionados.includes('Cliente') || tipos_seleccionados.includes('Lead'))) {
             var alertOptions = {
-                title: "Por favor, seleccione un Promotor",
+                title: "Por favor, seleccione un Asesor",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);
@@ -199,11 +200,23 @@
         var from_set_num = parseInt(from_set);
         var filtroCliente = $("#filtroCliente").val();
         var crossSeleccionados = $("#crossSeleccionados").val();
+        var filtroTipoCuenta=$("#tipo_de_cuenta").select2('val');
+
+        if(_.isEmpty($("#tipo_de_cuenta").select2('val'))){
+
+            var alertOptions = {
+                title: "Por favor, seleccionar al menos un Tipo de Cuenta",
+                level: "error"
+            };
+            app.alert.show('validation', alertOptions);
+            return;
+
+        }
 
         if(isNaN(from_set_num)){
             from_set_num = 0;
         }
-        assigneUsr += "?PRODUCTO=" + producto_seleccionado + "?" + from_set_num + "?" + filtroCliente;
+        assigneUsr += "?PRODUCTO=" + producto_seleccionado + "?" + from_set_num + "?" + filtroCliente+"&tipos_cuenta="+filtroTipoCuenta.toString();
 
         if(!_.isEmpty(assigneUsr) && !_.isUndefined(assigneUsr) && assigneUsr != "") {
             this.seleccionados = [];
@@ -245,7 +258,10 @@
                     }else{
                         this.full_cuentas=data.full_cuentas;
                     }
+                    //Se obtiene valor de Tipo de Cuenta, para que persista al aplicar render
+                    var valores=$("#tipo_de_cuenta").select2('val');
                     this.render();
+                    $("#tipo_de_cuenta").select2('val',valores);
 
                     if(this.flagSeleccionados==1){
                         $('#btn_STodo').attr('btnstate','On');

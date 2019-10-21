@@ -33,6 +33,17 @@ class ReasignaciondePromotoresBusqueda extends SugarApi
             $product = $product_offset[0];
             $offset = $product_offset[1];
             $filtroCliente = $product_offset[2];
+            $filtroTipoCuenta=$args['tipos_cuenta'];
+
+            $tipos_separados=explode(",",$filtroTipoCuenta);
+            $arr_aux=array();
+
+            for($i=0;$i<count($tipos_separados);$i++){
+                array_push($arr_aux,"'".$tipos_separados[$i]."'");
+            }
+
+            $tipos_query= join(',',$arr_aux);
+
 
              if($product == "LEASING"){
                  $user_field = "user_id_c"; //user_id_c = promotorleasing_c
@@ -52,10 +63,10 @@ SQL;
                 $total_rows .= " WHERE (tipo_registro_c = 'Persona' OR tipo_registro_c = 'Proveedor') AND deleted =0";
             }
 			else{
-				$total_rows .= " WHERE {$user_field} = '{$user_id}' AND deleted =0";
+				$total_rows .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
 			}
             if(!empty($filtroCliente)){
-                $total_rows .= " AND name LIKE '%{$filtroCliente}%' ";
+                $total_rows .= " AND tipo_registro_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
 
@@ -73,13 +84,11 @@ SQL;
                 $query .= " WHERE (tipo_registro_c = 'Persona' OR tipo_registro_c = 'Proveedor') AND deleted =0";
             }
 			else{
-				$query .= " WHERE {$user_field} = '{$user_id}' AND deleted =0";
+				$query .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
 			}
+
             if(!empty($filtroCliente)){
-                $query .= " AND name LIKE '%{$filtroCliente}%' ";
-            }
-            if(!empty($filtroCliente)){
-                $query .= " AND name LIKE '%{$filtroCliente}%' ";
+                $query .= " AND tipo_registro_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
             }
             $query .= " ORDER BY name ASC LIMIT 20 OFFSET {$offset}";
             $queryResult = $db->query($query);
