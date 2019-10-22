@@ -334,15 +334,14 @@ class ResumenClienteAPI extends SugarApi
                     }
                 }
 
-                // Control para fleet
-                if ($opps->tipo_producto_c == 6) {
-                    $linea_aprox_fleet +=$opps->monto_c;
-                    $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
+              }
+              // Control para fleet
+              if ($opps->tipo_producto_c == 6 && $opps->estatus_c !='K') {
+                  $linea_aprox_fleet +=$opps->monto_c;
+                  $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
 
-                    $arr_principal['fleet']['linea_aproximada']=$linea_aprox_fleet;
-                    $arr_principal['fleet']['numero_vehiculos']=$numero_vehiculos_fleet;
-
-                }
+                  $arr_principal['fleet']['linea_aproximada']=$linea_aprox_fleet;
+                  $arr_principal['fleet']['numero_vehiculos']=$numero_vehiculos_fleet;
 
               }
             }
