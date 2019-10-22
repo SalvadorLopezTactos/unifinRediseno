@@ -1005,7 +1005,7 @@ SQL;
                         }
                         break;
                     case '3':
-                        if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto") {
+                        if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto" || $bean_Resumen->tct_tipo_ca_txf_c=="Lead") {
                             $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
                             $bean_Resumen->tct_subtipo_ca_txf_c = "Integracion de Expediente";
                             $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');

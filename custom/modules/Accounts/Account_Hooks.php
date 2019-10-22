@@ -954,7 +954,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
 
         if ($bean_Resumen= null || empty($bean_Resumen)){
-            global $app_list_strings; //Obtención de listas de valores
+            global $app_list_strings, $current_user; //Obtención de listas de valores
             $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
             $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
             $etitipo= $tipo[$bean->tipo_registro_c];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
@@ -965,6 +965,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->new_with_id = true;
             $bean_Resumen->name = $bean->name;
             $bean_Resumen->id = $idCuenta;
+
             //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
             //LEASING
             $bean_Resumen->tct_tipo_l_txf_c= $bean->tipo_registro_c;
@@ -982,6 +983,23 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
             $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
             $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+
+            //Evalua tipo de cuenta
+            if ($bean->tipo_registro_c == 'Prospecto' && $bean->subtipo_cuenta_c == 'Integracion de Expediente' ) {
+                //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
+                //LEASING
+                $bean_Resumen->tct_tipo_l_txf_c= 'Lead';
+                $bean_Resumen->tct_subtipo_l_txf_c= 'En Calificacion';
+                $bean_Resumen->tct_tipo_cuenta_l_c= 'LEAD EN CALIFICACIÓN';
+                //FACTORAJE
+                $bean_Resumen->tct_tipo_f_txf_c= 'Lead';
+                $bean_Resumen->tct_subtipo_f_txf_c='En Calificacion';
+                $bean_Resumen->tct_tipo_cuenta_f_c= 'LEAD EN CALIFICACIÓN';
+                //FLEET
+                $bean_Resumen->tct_tipo_fl_txf_c= 'Lead';
+                $bean_Resumen->tct_subtipo_fl_txf_c='En Calificacion';
+                $bean_Resumen->tct_tipo_cuenta_fl_c= 'LEAD EN CALIFICACIÓN';
+            }
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
         }
