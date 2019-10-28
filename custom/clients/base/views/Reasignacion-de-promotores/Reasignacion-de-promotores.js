@@ -58,7 +58,7 @@
         this._super("_render");
         var tipos_cuenta=[];
          this.$('#tipo_de_cuenta').select2({
-             width: '100%',
+             width:'250px',
              closeOnSelect: false,
              containerCssClass: 'select2-choices-pills-close'
          });
@@ -183,6 +183,11 @@
 
     buscarCuentas: function(){
         var assigneUsr = this.model.get('users_accounts_1users_ida');
+        //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
+        //dentro del campo Asesor Actual con formato select2
+        if(assigneUsr==""){
+            assigneUsr=undefined;
+        }
         var tipos_seleccionados=this.$(".tipo_cuenta").select2('val');
         if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && (tipos_seleccionados.includes('Prospecto') || tipos_seleccionados.includes('Cliente') || tipos_seleccionados.includes('Lead'))) {
             var alertOptions = {
