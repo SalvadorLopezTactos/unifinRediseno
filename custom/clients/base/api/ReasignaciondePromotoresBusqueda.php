@@ -33,6 +33,8 @@ class ReasignaciondePromotoresBusqueda extends SugarApi
             $product = $product_offset[0];
             $offset = $product_offset[1];
             $filtroCliente = $product_offset[2];
+            //Omitiendo espacios en blanco
+            $filtroCliente=trim($filtroCliente);
             $filtroTipoCuenta=$args['tipos_cuenta'];
 
             $tipos_separados=explode(",",$filtroTipoCuenta);
