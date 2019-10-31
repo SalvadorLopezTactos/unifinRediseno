@@ -227,9 +227,8 @@ class ResumenClienteAPI extends SugarApi
                 * Operación = LÍNEA DE CRÉDITO || tipo_operacion_c = 2
                 * Tipo de Solicitud = Línea Nueva || tipo_de_operacion_c = LINEA_NUEVA
               */
-              if($opps->tipo_operacion_c == 2 && $opps->tipo_de_operacion_c == "LINEA_NUEVA"){
-
-                //Agrega Operaciones asociadas
+              if($opps->tipo_operacion_c == 2 && $opps->tipo_de_operacion_c == "LINEA_NUEVA" && $opps->tct_opp_estatus_c== 1){
+                  //Agrega Operaciones asociadas
                 $operaciones_ids .= ",'$opps->id'";
                 //Control para leasing
                 if ($opps->tipo_producto_c == 1) {
