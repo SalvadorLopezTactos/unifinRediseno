@@ -381,16 +381,18 @@
                     level: 'process',
                     title: 'Cargando, por favor espere.',
                 });
-                var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
+                  var clean_name='';
+                  clean_name = $(".newCampo1P").val() + $(".newCampo2P").val() + $(".newCampo3P").val();
+                  clean_name= clean_name.replace(/\s+/gi,'');
+                  clean_name=clean_name.toUpperCase();
+
+                  var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                   fields: fields.join(','),
                   max_num: 5,
                   "filter": [
                     {
-                      "primernombre_c": valor1,
-                      "apellidopaterno_c": valor2,
-                      "apellidomaterno_c": valor3,
-                      "tipo_registro_c": "Persona",
+                      "clean_name": clean_name
                     }
                   ]
                   }), null, {
