@@ -65,7 +65,14 @@
         'click #btn-GuardarCanMasivo': 'cancelarGuardarBacklogMasivo',
 
         //Eventos para filtros
-        'change .filtros': 'updateFilters'
+        'change .filtros': 'updateFilters',
+
+        //Evento change para mostrar meses correctos
+        'change .anio_switch_popup': 'setOptionsMonth',
+        'change #anio_cancelar': 'setOptionsMonthCancelar',
+
+        //Evento change para mostrar meses correctos (Mover masivo)
+        'change .anio_masivo_switch_popup': 'setOptionsMonth',
 
     },
 
@@ -1536,6 +1543,99 @@
          arr_return['mes']=opciones_mes;
 
          return arr_return;
+
+     },
+
+     /*
+     * Establece las opciones en los campos de meses (el actual y 2 siguientes),
+     en caso de que en los siguientes 2 meses sea un año nuevo, se muestran solo los
+     meses correspondientes a ese año
+     */
+     setOptionsMonth:function(evt){
+
+        var anio_popup=$(evt.currentTarget).val();
+        var currentYear = new Date().getFullYear();
+
+        var currentMonth = (new Date).getMonth()+1;
+         //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        
+        if (limitMonth > 12) {
+             nextMonth = limitMonth - 12;
+        }
+
+        var opciones_mes = app.lang.getAppListStrings('mes_list');
+        var opciones='';
+        if(anio_popup > currentYear){
+
+            //Mostrar solo los meses hasta nextMonth
+            $(evt.currentTarget).parent().parent().next().find('select').empty();
+            for(var i=1;i<=nextMonth;i++){
+
+                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+            }
+
+        }else{
+            //Mostrar los meses hasta limitMonth
+            $(evt.currentTarget).parent().parent().next().find('select').empty();
+            if(currentMonth==12){
+
+                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';  
+
+            }else{
+                for(var i=currentMonth;i<limitMonth;i++){
+
+                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                }
+            }
+        }
+
+       $(evt.currentTarget).parent().parent().next().find('select').append(opciones);
+
+     },
+
+     setOptionsMonthCancelar:function(evt){
+
+        var anio_popup=$(evt.currentTarget).val();
+        var currentYear = new Date().getFullYear();
+
+        var currentMonth = (new Date).getMonth()+1;
+         //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        
+        if (limitMonth > 12) {
+             nextMonth = limitMonth - 12;
+        }
+
+        var opciones_mes = app.lang.getAppListStrings('mes_list');
+        var opciones='';
+        if(anio_popup > currentYear){
+
+            //Mostrar solo los meses hasta nextMonth
+            $('select.mes_cancelar').empty();
+            for(var i=1;i<=nextMonth;i++){
+
+                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+            }
+
+        }else{
+            //Mostrar los meses hasta limitMonth
+            $('select.mes_cancelar').empty();
+            if(currentMonth==12){
+
+                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';  
+
+            }else{
+                for(var i=currentMonth;i<limitMonth;i++){
+
+                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                }
+            }
+        }
+
+        $('select.mes_cancelar').append(opciones);
 
      },
 
