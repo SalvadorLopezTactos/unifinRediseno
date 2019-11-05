@@ -71,6 +71,9 @@
         'change .anio_switch_popup': 'setOptionsMonth',
         'change #anio_cancelar': 'setOptionsMonthCancelar',
 
+        //Evento change para mostrar meses correctos (Mover masivo)
+        'change .anio_masivo_switch_popup': 'setOptionsMonth',
+
     },
 
     meses_list_html : null,
@@ -1543,6 +1546,11 @@
 
      },
 
+     /*
+     * Establece las opciones en los campos de meses (el actual y 2 siguientes),
+     en caso de que en los siguientes 2 meses sea un año nuevo, se muestran solo los
+     meses correspondientes a ese año
+     */
      setOptionsMonth:function(evt){
 
         var anio_popup=$(evt.currentTarget).val();
@@ -1562,7 +1570,7 @@
         if(anio_popup > currentYear){
 
             //Mostrar solo los meses hasta nextMonth
-            $('select.mes_switch_popup').empty();
+            $(evt.currentTarget).parent().parent().next().find('select').empty();
             for(var i=1;i<=nextMonth;i++){
 
                 opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
@@ -1570,7 +1578,7 @@
 
         }else{
             //Mostrar los meses hasta limitMonth
-            $('select.mes_switch_popup').empty();
+            $(evt.currentTarget).parent().parent().next().find('select').empty();
             if(currentMonth==12){
 
                 opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';  
@@ -1583,7 +1591,7 @@
             }
         }
 
-        $('select.mes_switch_popup').append(opciones);
+       $(evt.currentTarget).parent().parent().next().find('select').append(opciones);
 
      },
 
