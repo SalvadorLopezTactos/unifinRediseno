@@ -62,7 +62,7 @@ SELECT id, name, tipodepersona_c, tipo_registro_c, idcliente_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if($user_id == "undefined"){
-                $total_rows .= " WHERE (tipo_registro_c = 'Persona' OR tipo_registro_c = 'Proveedor') AND deleted =0";
+                $total_rows .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
             }
 			else{
 				$total_rows .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
@@ -83,7 +83,7 @@ SELECT id, name, tipodepersona_c, tipo_registro_c, rfc_c, idcliente_c FROM accou
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if($user_id == "undefined"){
-                $query .= " WHERE (tipo_registro_c = 'Persona' OR tipo_registro_c = 'Proveedor') AND deleted =0";
+                $query .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
             }
 			else{
 				$query .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
