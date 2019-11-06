@@ -2758,53 +2758,53 @@
     },
     nodigitos: function (fields, errors, callback) {
         if($('.campo1pa').val() != "" || $('.campo2pa').val() != "" || $('.campo3pa').val() != "" || $('.campo4pa').val() != "") {
-            if ($('.campo1pa').val() != "") {
+            if ($('.campo1pa').val() !== "") {
                 var expreg = /^[0-9]{1,10}$/;
                 var num1 = $('.campo1pa').val();
                 if (!expreg.test(num1)) {
-                    app.alert.show('error-numero-potencial', {
+                    app.alert.show('error-numero-potencial1', {
                         level: 'error',
                         autoClose: false,
-                        messages: 'El campo Número de Autos Utilitarios no permite ingresar números negativos.'
+                        messages: "El campo <b>Número de Autos Utilitarios</b> no permite ingresar números negativos."
                     });
                     errors['campo1apPotencial'] = errors['campo1apPotencial'] || {};
                     errors['campo1apPotencial'].required = true;
                 }
             }
-            if ($('.campo2pa').val() != "") {
+            if ($('.campo2pa').val() !== "") {
                 var expreg = /^[0-9]{1,10}$/;
                 var num2 = $('.campo2pa').val();
                 if (!expreg.test(num2)) {
-                    app.alert.show('error-numero-potencial', {
+                    app.alert.show('error-numero-potencial2', {
                         level: 'error',
                         autoClose: false,
-                        messages: 'El campo Número de Autos Ejecutivos no permite ingresar números negativos.'
+                        messages: "El campo <b>Número de Autos Ejecutivos</b> no permite ingresar números negativos."
                     });
                     errors['campo2apPotencial'] = errors['campo2apPotencial'] || {};
                     errors['campo2apPotencial'].required = true;
                 }
             }
-            if ($('.campo3pa').val() != "") {
+            if ($('.campo3pa').val() !== "") {
                 var expreg = /^[0-9]{1,10}$/;
                 var num3 = $('.campo3pa').val();
                 if (!expreg.test(num3)) {
-                    app.alert.show('error-numero-potencial', {
+                    app.alert.show('error-numero-potencial3', {
                         level: 'error',
                         autoClose: false,
-                        messages: 'El campo Número de Motos no permite ingresar números negativos.'
+                        messages: "El campo <b>Número de Motos</b> no permite ingresar números negativos."
                     });
                     errors['campo3apPotencial'] = errors['campo3apPotencial'] || {};
                     errors['campo3apPotencial'].required = true;
                 }
             }
-            if ($('.campo4pa').val() != "") {
+            if ($('.campo4pa').val() !== "") {
                 var expreg = /^[0-9]{1,10}$/;
                 var num4 = $('.campo4pa').val();
                 if (!expreg.test(num4)) {
-                    app.alert.show('error-numero-potencial', {
+                    app.alert.show('error-numero-potencial4', {
                         level: 'error',
                         autoClose: false,
-                        messages: 'El campo Número de Camiones no permite ingresar números negativos.'
+                        messages: "El campo <b>Número de Camiones</b> no permite ingresar números negativos."
                     });
                     errors['campo4apPotencial'] = errors['campo4apPotencial'] || {};
                     errors['campo4apPotencial'].required = true;
