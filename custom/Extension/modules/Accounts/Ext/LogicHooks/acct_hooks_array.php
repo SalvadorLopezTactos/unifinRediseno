@@ -170,3 +170,11 @@ $hook_array['after_save'][] = Array(
     'Account_Hooks',
     'creaResumen'
 );
+
+$hook_array['after_save'][] = Array(
+    11,
+    'Guarda Valores de los campos Autos en la sección de Potencial de la Cuenta',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'guardapotencial'
+);

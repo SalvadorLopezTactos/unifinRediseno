@@ -304,3 +304,4 @@ $mod_strings['LBL_PROMOTORFLEET_USER_ID'] = 'Asesor Fleet (relacionado Usuario I
 $mod_strings['LBL_PROMOTORFLEET'] = 'Asesor Fleet';
 $mod_strings['LBL_TCT_HOMONIMO_CHK'] = 'Cuenta Homónima';
 $mod_strings['LBL_CUENTA_PRODUCTOS'] = 'Tipo de Cuenta por Producto';
+$mod_strings['LBL_POTENCIAL_AUTOS'] = 'Potencial Autos';

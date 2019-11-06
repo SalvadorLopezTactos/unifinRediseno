@@ -49,3 +49,7 @@ $mod_strings['LBL_TCT_TIPO_CUENTA_CA_C'] = 'Tipo de Cuenta CA';
 $mod_strings['LBL_TCT_TIPO_FL_TXF_C'] = 'Tipo Producto Fleet';
 $mod_strings['LBL_TCT_SUBTIPO_FL_TXF_C'] = 'Subtipo Producto Fleet';
 $mod_strings['LBL_TCT_TIPO_CUENTA_FL_C'] = 'Tipo de Cuenta Fleet';
+$mod_strings['LBL_TCT_NO_AUTOS_U_INT_C'] = 'Número de Autos Utilitarios';
+$mod_strings['LBL_TCT_NO_AUTOS_E_INT_C'] = 'Número de Autos Ejecutivos';
+$mod_strings['LBL_TCT_NO_MOTOS_INT_C'] = 'Número de Motos';
+$mod_strings['LBL_TCT_NO_CAMIONES_INT_C'] = 'Número de Camiones';

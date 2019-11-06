@@ -291,4 +291,8 @@ $searchFields['Accounts'] = array (
   array (
     'query_type' => 'default',
   ),
+  'potencial_autos' => 
+  array (
+    'query_type' => 'default',
+  ),
 );

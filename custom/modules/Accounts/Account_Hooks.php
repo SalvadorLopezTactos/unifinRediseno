@@ -953,7 +953,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
 
-        if ($bean_Resumen= null || empty($bean_Resumen)){
+        if ($bean_Resumen== null || empty($bean_Resumen)){
             global $app_list_strings, $current_user; //Obtención de listas de valores
             $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
             $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
@@ -1036,5 +1036,30 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
+    public function guardapotencial($bean=null, $event= null, $args= null){
+
+        global $db;
+        $idCuenta = $bean->id;
+        //$GLOBALS['log']->fatal('Entra a guardar autos Potencial en Resumen');
+        $PotencialAutos = json_decode($bean->potencial_autos);
+        //Recupera el bean de tct02_resumen
+        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
+        //$GLOBALS['log']->fatal(print_r($PotencialAutos,true));
+        //$GLOBALS['log']->fatal(print_r($bean->potencial_autos,true));
+
+        if (!empty($bean_Resumen) && !empty($PotencialAutos)){
+            //$GLOBALS['log']->fatal('Entra Resumen OK ');
+            //$GLOBALS['log']->fatal($PotencialAutos->autos->tct_no_autos_u_int_c);
+            //Setea los valores en los campos de tct02_resumen
+            $bean_Resumen->tct_no_autos_u_int_c = $PotencialAutos->autos->tct_no_autos_u_int_c;
+            $bean_Resumen->tct_no_autos_e_int_c =$PotencialAutos->autos->tct_no_autos_e_int_c;
+            $bean_Resumen->tct_no_motos_int_c =$PotencialAutos->autos->tct_no_motos_int_c;
+            $bean_Resumen->tct_no_camiones_int_c =$PotencialAutos->autos->tct_no_camiones_int_c;
+
+            //Guardar registro
+            $bean_Resumen->save();
+        }
+
+    }
 
 }

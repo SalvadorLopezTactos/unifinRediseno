@@ -1,5 +1,5 @@
 <?php
-// created: 2018-05-24 13:49:01
+// created: 2019-11-04 17:33:51
 $searchFields['tct02_Resumen'] = array (
   'name' => 
   array (
