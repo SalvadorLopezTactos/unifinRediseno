@@ -4672,7 +4672,6 @@
             Pautos.prev_autos=app.utils.deepCopy(Pautos.autos);
             Pautos.render();
         }
-        callback(null,fields,errors);
         }
         callback(null,fields,errors);
     },
