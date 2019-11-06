@@ -751,6 +751,13 @@ array (
                 'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
                 'span' => 12,
               ),
+              13 => 
+              array (
+                'name' => 'potencial_autos',
+                'studio' => 'visible',
+                'label' => 'LBL_POTENCIAL_AUTOS',
+                'span' => 12,
+              ),
             ),
           ),
           7 => 
@@ -807,8 +814,8 @@ array (
                 'label' => 'LBL_PROMOTORFLEET',
                 'initial_filter' => 'filterPromotorTemplate',
                 'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
-                'filter_populate' =>
-                 array (
+                'filter_populate' => 
+                array (
                   'tipodeproducto_c' => '6',
                 ),
               ),

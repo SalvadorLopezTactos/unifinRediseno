@@ -53,6 +53,8 @@
         * Integración de Expediente
         * Adrian Arauz 4/10/2018
         * */
+        this.model.addValidationTask('valida_potencial_campos_autos',_.bind(this.nodigitos, this));
+
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
@@ -226,6 +228,7 @@
         this.get_v360();
         this.get_Oproductos();
         this.get_pld();
+        this.get_resumen();
         //this.get_noviable();
 
 
@@ -255,6 +258,8 @@
         this.model.addValidationTask('proveedorDeRecursos',_.bind(this.proveedorRecursos, this));
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR',_.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
+        this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
+
     },
 
     saveProdPLD:function (fields, errors, callback) {
@@ -709,7 +714,10 @@
         this.model.set('accounts_tct_pld_1', accounts_tct_pld_1);
         this.ProductosPLD = accounts_tct_pld_1;
         pld.render();
-
+        //Potencial Autos
+        Pautos.autos=app.utils.deepCopy(Pautos.prev_autos);
+        this.model.set('potencial_autos', Pautos);
+        Pautos.render();
         // this.model._previousAttributes.account_telefonos = account_telefonos;
         // this.model._previousAttributes.account_direcciones = account_direcciones;
 
@@ -883,6 +891,8 @@
         //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+        //Oculta nombre de campo Potencial_Autos
+        $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
@@ -4315,8 +4325,29 @@
                 }, contexto_cuenta)
             });
         }
+    },
 
-
+    get_resumen: function(){
+        //Extiende This
+        this.autos = [];
+        this.prev_autos=[];
+        //Recupera id de cliente
+        var id = this.model.id;
+        //Forma Petición de datos
+        if (id!= '' && id != undefined && id!= null) {
+            //Ejecuta petición ResumenCliente
+            var campos= ["tct_no_autos_u_int_c","tct_no_autos_e_int_c","tct_no_motos_int_c","tct_no_camiones_int_c"];
+            var url = app.api.buildURL('tct02_Resumen/'+id, null, null, {fields:campos.join(',')});
+            app.api.call('read', url, {},{
+                success: _.bind(function (data) {
+                    Pautos.autos=data;
+                    Pautos.prev_autos=app.utils.deepCopy(Pautos.autos);
+                    //contexto_cuenta.hideButton_Conversion();
+                    //_.extend(this, v360.ResumenCliente);
+                    Pautos.render();
+                }, contexto_cuenta)
+            });
+        }
     },
 
 
@@ -4565,5 +4596,84 @@
         } else {
             $('div[data-name=tct_homonimo_chk_c]').hide();
         }
+    },
+    //Valida campos de Autos en Potencial
+    nodigitos: function (fields, errors, callback) {
+        if($('.campo1pa').val() != "" || $('.campo2pa').val() != "" || $('.campo3pa').val() != "" || $('.campo4pa').val() != "") {
+            if ($('.campo1pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num1 = $('.campo1pa').val();
+                if (!expreg.test(num1)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'El campo Número de Autos Utilitarios no permite ingresar números negativos.'
+                    });
+                    errors['campo1apPotencial'] = errors['campo1apPotencial'] || {};
+                    errors['campo1apPotencial'].required = true;
+                }
+            }
+            if ($('.campo2pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num2 = $('.campo2pa').val();
+                if (!expreg.test(num2)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'El campo Número de Autos Ejecutivos no permite ingresar números negativos.'
+                    });
+                    errors['campo2apPotencial'] = errors['campo2apPotencial'] || {};
+                    errors['campo2apPotencial'].required = true;
+                }
+            }
+            if ($('.campo3pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num3 = $('.campo3pa').val();
+                if (!expreg.test(num3)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'El campo Número de Motos no permite ingresar números negativos.'
+                    });
+                    errors['campo3apPotencial'] = errors['campo3apPotencial'] || {};
+                    errors['campo3apPotencial'].required = true;
+                }
+            }
+            if ($('.campo4pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num4 = $('.campo4pa').val();
+                if (!expreg.test(num4)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: 'El campo Número de Camiones no permite ingresar números negativos.'
+                    });
+                    errors['campo4apPotencial'] = errors['campo4apPotencial'] || {};
+                    errors['campo4apPotencial'].required = true;
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    savepotauto: function (fields, errors, callback){
+        if (Pautos.action=="edit"){
+            var PotencialAutos = {};
+            PotencialAutos.autos= {};
+            PotencialAutos.autos.tct_no_autos_u_int_c = this.$('.campo1pa').val();
+            PotencialAutos.autos.tct_no_autos_e_int_c = this.$('.campo2pa').val();
+            PotencialAutos.autos.tct_no_motos_int_c = this.$('.campo3pa').val();
+            PotencialAutos.autos.tct_no_camiones_int_c = this.$('.campo4pa').val();
+
+        if ($.isEmptyObject(errors))  {
+            this.model.set('potencial_autos', JSON.stringify(PotencialAutos));
+            Pautos.autos = PotencialAutos.autos;
+            //Guarda una copia previa en prev_autos
+            Pautos.prev_autos=app.utils.deepCopy(Pautos.autos);
+            Pautos.render();
+        }
+        callback(null,fields,errors);
+        }
+        callback(null,fields,errors);
     },
 })

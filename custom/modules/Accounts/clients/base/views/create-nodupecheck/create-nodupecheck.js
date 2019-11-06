@@ -114,9 +114,11 @@
          * */
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         /* END */
+        this.model.addValidationTask('valida_potencial_campos_autos',_.bind(this.nodigitos, this));
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
+        this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 
         this.enableDuplicateCheck = true;
 
@@ -323,6 +325,8 @@
         $('[data-name=tct_pais_expide_rfc_c]').hide();
         //Oculta panel del campo Tipo de Cuenta por Producto
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL17']").hide();
+        //Oculta nombre de campo Potencial_Autos
+        $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
 
         this.ocultaRFC();
 
@@ -1757,4 +1761,77 @@
         callback(null, fields, errors);
     },
 
+    nodigitos: function (fields, errors, callback) {
+        if($('.campo1pa').val() != "" || $('.campo2pa').val() != "" || $('.campo3pa').val() != "" || $('.campo4pa').val() != "") {
+            if ($('.campo1pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num1 = $('.campo1pa').val();
+                if (!expreg.test(num1)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El campo Número de Autos Utilitarios no permite ingresar números negativos.'
+                    });
+                    errors['campo1apPotencial'] = errors['campo1apPotencial'] || {};
+                    errors['campo1apPotencial'].required = true;
+                }
+            }
+            if ($('.campo2pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num2 = $('.campo2pa').val();
+                if (!expreg.test(num2)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El campo Número de Autos Ejecutivos no permite ingresar números negativos.'
+                    });
+                    errors['campo2apPotencial'] = errors['campo2apPotencial'] || {};
+                    errors['campo2apPotencial'].required = true;
+                }
+            }
+            if ($('.campo3pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num3 = $('.campo3pa').val();
+                if (!expreg.test(num3)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El campo Número de Motos no permite ingresar números negativos.'
+                    });
+                    errors['campo3apPotencial'] = errors['campo3apPotencial'] || {};
+                    errors['campo3apPotencial'].required = true;
+                }
+            }
+            if ($('.campo4pa').val() != "") {
+                var expreg = /^[0-9]{1,10}$/;
+                var num4 = $('.campo4pa').val();
+                if (!expreg.test(num4)) {
+                    app.alert.show('error-numero-potencial', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El campo Número de Camiones no permite ingresar números negativos.'
+                    });
+                    errors['campo4apPotencial'] = errors['campo4apPotencial'] || {};
+                    errors['campo4apPotencial'].required = true;
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    savepotauto: function (fields, errors, callback){
+        var PotencialAutos = {};
+        PotencialAutos.autos= {};
+        PotencialAutos.autos.tct_no_autos_u_int_c = this.$('.campo1pa').val();
+        PotencialAutos.autos.tct_no_autos_e_int_c = this.$('.campo2pa').val();
+        PotencialAutos.autos.tct_no_motos_int_c = this.$('.campo3pa').val();
+        PotencialAutos.autos.tct_no_camiones_int_c = this.$('.campo4pa').val();
+
+        if ($.isEmptyObject(errors))  {
+            this.model.set('potencial_autos', JSON.stringify(PotencialAutos));
+            this.Pautos = PotencialAutos;
+            Pautos.render();
+        }
+        callback(null,fields,errors);
+    },
 })
