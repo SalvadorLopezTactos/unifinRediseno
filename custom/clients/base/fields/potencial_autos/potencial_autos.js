@@ -25,10 +25,10 @@
             var expreg = /^[0-9]{1,10}$/;
             var num1= $('.campo1pa').val();
             if (!expreg.test(num1)) {
-                app.alert.show('error-numero-potencial', {
+                app.alert.show('error-numero-potencial1', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El campo Número de Autos Utilitarios no permite ingresar números negativos.'
+                    messages: "El campo <b>Número de Autos Utilitarios</b> no permite ingresar números negativos."
                 });
             }
         }
@@ -36,10 +36,10 @@
             var expreg = /^[0-9]{1,10}$/;
             var num2= $('.campo2pa').val();
             if (!expreg.test(num2)) {
-                app.alert.show('error-numero-potencial', {
+                app.alert.show('error-numero-potencial2', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El campo Número de Autos Ejecutivos no permite ingresar números negativos.'
+                    messages: "El campo <b>Número de Autos Ejecutivos</b> no permite ingresar números negativos."
                 });
             }
         }
@@ -47,10 +47,10 @@
             var expreg = /^[0-9]{1,10}$/;
             var num3= $('.campo3pa').val();
             if (!expreg.test(num3)) {
-                app.alert.show('error-numero-potencial', {
+                app.alert.show('error-numero-potencial3', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El campo Número de Motos no permite ingresar números negativos.'
+                    messages: "El campo <b>Número de Motos</b> no permite ingresar números negativos."
                 });
             }
         }
@@ -58,10 +58,10 @@
             var expreg = /^[0-9]{1,10}$/;
             var num4= $('.campo4pa').val();
             if (!expreg.test(num4)) {
-                app.alert.show('error-numero-potencial', {
+                app.alert.show('error-numero-potencial4', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El campo Número de Camiones no permite ingresar números negativos.'
+                    messages: "El campo <b>Número de Camiones</b> no permite ingresar números negativos."
                 });
             }
         }
