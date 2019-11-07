@@ -272,7 +272,11 @@ array (
             'name' => 'tct_propietario_real_chk_c',
             'label' => 'LBL_TCT_PROPIETARIO_REAL_CHK',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'tct_vetar_usuarios_chk_c',
+            'label' => 'LBL_TCT_VETAR_USUARIOS_CHK_C',
+          ),
         ),
         4 => 
         array (
