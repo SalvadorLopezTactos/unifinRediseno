@@ -2801,38 +2801,43 @@
             });
         });
         clean_name_split_full = App.utils.deepCopy(clean_name_split);
-
-        //Elimina tipos de sociedad: Ej. SA, de , CV...
-        var totalVacio = 0;
-        _.each(clean_name_split, function (value, key) {
-            _.each(list_check, function (index, nomenclatura) {
-                var upper_value = value.toUpperCase();
-                if (upper_value == nomenclatura) {
-                    var clean_value = upper_value.replace(nomenclatura, "");
-                    clean_name_split[key] = clean_value;
+        if (this.model.get('tipodepersona_c')=="Persona Moral") {
+            //Elimina tipos de sociedad: Ej. SA, de , CV...
+            var totalVacio = 0;
+            _.each(clean_name_split, function (value, key) {
+                _.each(list_check, function (index, nomenclatura) {
+                    var upper_value = value.toUpperCase();
+                    if (upper_value == nomenclatura) {
+                        var clean_value = upper_value.replace(nomenclatura, "");
+                        clean_name_split[key] = clean_value;
+                    }
+                });
+            });
+            //Genera clean_name con arreglo limpio
+            var clean_name = "";
+            _.each(clean_name_split, function (value, key) {
+                clean_name += value;
+                //Cuenta elementos vacíos
+                if (value == "") {
+                    totalVacio++;
                 }
             });
-        });
-        //Genera clean_name con arreglo limpio
-        var clean_name = "";
-        _.each(clean_name_split, function (value, key) {
-            clean_name += value;
-            //Cuenta elementos vacíos
-            if (value == "") {
-                totalVacio ++;
+
+            //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
+            if ((clean_name_split.length - totalVacio) <= 1) {
+                clean_name = "";
+                _.each(clean_name_split_full, function (value, key) {
+                    clean_name += value;
+                });
             }
-        });
 
-        //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
-        if( (clean_name_split.length - totalVacio) <= 1){
-            clean_name = "";
-            _.each(clean_name_split_full, function (value, key) {
-                clean_name += value;
-            });
+            clean_name = clean_name.toUpperCase();
+            this.model.set("clean_name", clean_name);
+        }else{
+            original_name = original_name.replace(/\s+/gi,'');
+            original_name= original_name.toUpperCase();
+            this.model.set("clean_name", original_name);
         }
-
-        clean_name = clean_name.toUpperCase();
-        this.model.set("clean_name", clean_name);
 
     },
 
@@ -4604,10 +4609,11 @@
                 var expreg = /^[0-9]{1,10}$/;
                 var num1 = $('.campo1pa').val();
                 if (!expreg.test(num1)) {
+                    $('.campo1pa').css('border-color', 'red');
                     app.alert.show('error-numero-potencial1', {
                         level: 'error',
                         autoClose: false,
-                        messages: "El campo <b>Número de Autos Utilitarios</b> no permite ingresar números negativos."
+                        messages: "El campo <b>Número de Autos Utilitarios</b> no acepta caracteres especiales."
                     });
                     errors['campo1apPotencial'] = errors['campo1apPotencial'] || {};
                     errors['campo1apPotencial'].required = true;
@@ -4617,10 +4623,11 @@
                 var expreg = /^[0-9]{1,10}$/;
                 var num2 = $('.campo2pa').val();
                 if (!expreg.test(num2)) {
+                    $('.campo2pa').css('border-color', 'red');
                     app.alert.show('error-numero-potencial2', {
                         level: 'error',
                         autoClose: false,
-                        messages: "El campo <b>Número de Autos Ejecutivos</b> no permite ingresar números negativos."
+                        messages: "El campo <b>Número de Autos Ejecutivos</b> no acepta caracteres especiales."
                     });
                     errors['campo2apPotencial'] = errors['campo2apPotencial'] || {};
                     errors['campo2apPotencial'].required = true;
@@ -4630,10 +4637,11 @@
                 var expreg = /^[0-9]{1,10}$/;
                 var num3 = $('.campo3pa').val();
                 if (!expreg.test(num3)) {
+                    $('.campo3pa').css('border-color', 'red');
                     app.alert.show('error-numero-potencial3', {
                         level: 'error',
                         autoClose: false,
-                        messages: "El campo <b>Número de Motos</b> no permite ingresar números negativos."
+                        messages: "El campo <b>Número de Motos</b> no acepta caracteres especiales."
                     });
                     errors['campo3apPotencial'] = errors['campo3apPotencial'] || {};
                     errors['campo3apPotencial'].required = true;
@@ -4643,10 +4651,11 @@
                 var expreg = /^[0-9]{1,10}$/;
                 var num4 = $('.campo4pa').val();
                 if (!expreg.test(num4)) {
+                    $('.campo4pa').css('border-color', 'red');
                     app.alert.show('error-numero-potencial4', {
                         level: 'error',
                         autoClose: false,
-                        messages: "El campo <b>Número de Camiones</b> no permite ingresar números negativos."
+                        messages: "El campo <b>Número de Camiones</b> no acepta caracteres especiales."
                     });
                     errors['campo4apPotencial'] = errors['campo4apPotencial'] || {};
                     errors['campo4apPotencial'].required = true;
