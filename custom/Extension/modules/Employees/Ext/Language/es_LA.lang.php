@@ -28,3 +28,4 @@ $mod_strings['LBL_VETADOS_CHK'] = 'Vetado';
 $mod_strings['LBL_FIRST_NAME'] = 'Nombre';
 $mod_strings['LBL_TCT_ALTA_CREDITO_SIMPLE_CHK'] = 'Alta Cliente Crédito Simple';
 $mod_strings['LBL_TCT_VETAR_USUARIOS_CHK_C'] = 'Vetar Usuarios';
+$mod_strings['LBL_TCT_NO_CONTACTAR_CHK'] = 'No contactar';

@@ -1,7 +1,7 @@
 <?php
 $viewdefs['Users'] = 
 array (
-  'DetailView' => 
+  'EditView' => 
   array (
     'templateMeta' => 
     array (
@@ -21,8 +21,15 @@ array (
       ),
       'form' => 
       array (
-        'headerTpl' => 'modules/Users/tpls/DetailViewHeader.tpl',
-        'footerTpl' => 'modules/Users/tpls/DetailViewFooter.tpl',
+        'headerTpl' => 'modules/Users/tpls/EditViewHeader.tpl',
+        'footerTpl' => 'modules/Users/tpls/EditViewFooter.tpl',
+      ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Users/js/customValidation.js',
+        ),
       ),
       'useTabs' => false,
       'tabDefs' => 
@@ -32,17 +39,22 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_DETAILVIEW_PANEL2' => 
+        'LBL_EDITVIEW_PANEL3' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_DETAILVIEW_PANEL3' => 
+        'LBL_EDITVIEW_PANEL4' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_DETAILVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -55,33 +67,56 @@ array (
       array (
         0 => 
         array (
-          0 => 'full_name',
-          1 => 'picture',
+          0 => 'picture',
         ),
         1 => 
         array (
-          0 => 'user_name',
-          1 => 'status',
+          0 => 
+          array (
+            'name' => 'user_name',
+            'displayParams' => 
+            array (
+              'required' => true,
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'status',
+            'displayParams' => 
+            array (
+              'required' => true,
+            ),
+          ),
         ),
         2 => 
+        array (
+          0 => 'first_name',
+          1 => 'last_name',
+        ),
+        3 => 
         array (
           0 => 
           array (
             'name' => 'iniciales_c',
             'label' => 'LBL_INICIALES',
           ),
+          1 => 
+          array (
+            'name' => 'nombre_completo_c',
+            'label' => 'LBL_NOMBRE_COMPLETO_C',
+          ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 'description',
           1 => 
           array (
             'name' => 'UserType',
-            'customCode' => '{$USER_TYPE_READONLY}',
+            'customCode' => '{if $IS_ADMIN && !$IDM_MODE_ENABLED}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
       ),
-      'lbl_detailview_panel2' => 
+      'lbl_editview_panel3' => 
       array (
         0 => 
         array (
@@ -93,7 +128,7 @@ array (
           1 => 'phone_mobile',
         ),
       ),
-      'lbl_detailview_panel3' => 
+      'lbl_editview_panel4' => 
       array (
         0 => 
         array (
@@ -162,7 +197,34 @@ array (
           ),
         ),
       ),
-      'lbl_detailview_panel1' => 
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contraseniaactual_c',
+            'label' => 'LBL_CONTRASENIAACTUAL_C',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'nuevacontrasenia_c',
+            'label' => 'LBL_NUEVACONTRASENIA_C',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'confirmarnuevacontrasenia_c',
+            'label' => 'LBL_CONFIRMARNUEVACONTRASENIA_C',
+          ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
       array (
         0 => 
         array (
