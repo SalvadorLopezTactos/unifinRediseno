@@ -1,7 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: salvadorlopez
+ * Created by Salvador Lopez salvador.lopez@tactos.com.mx
  * Date: 08/11/19
- * Time: 09:30
  */
+$viewdefs['Accounts']['base']['menu']['header'][] = array(
+    'route'=>'#Accounts/layout/Cuentas-no-contactar',
+    'label' =>'LNK_CUENTAS_NO_CONTACTAR',
+    'acl_module'=>'Accounts',
+    'icon' => 'user-times',
+);
