@@ -261,13 +261,18 @@ SQL;
                   $result_bl_cuentas = $db->query($bl_cuenta);
 
                   if($result_bl_cuentas->num_rows>0 && $result_bl_cuentas != null){
-
+                      //Recupera nuevo usuario asignado
+                      $User = new User();
+                      $User->retrieve($reAsignado);
                       while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
                           $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
                           if($bl != null){
+                              //Actualiza valores
                               $bl->assigned_user_id=$reAsignado;
                               $bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
+                              $bl->equipo = $User->equipo_c;
+                              $bl->region = $User->region_c;
                               $bl->save();
                           }
                       }
