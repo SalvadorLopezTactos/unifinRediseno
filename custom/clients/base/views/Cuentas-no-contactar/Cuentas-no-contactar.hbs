@@ -71,9 +71,10 @@
         </div>
         <br>
 
-    <div class="cuentasContainer">
-    <table class="cuentas" align="center" border="1">
+
     {{#if cuentas}}
+        <div class="cuentasContainer">
+            <table class="cuentas" align="center" border="1">
             <tr>
                 <th width="10%">NO CONTACTAR</th>
                 <th width="10%">TIPO</th>
@@ -145,8 +146,9 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    {{/if}}
         <br>
-
         <!-- Subir CSV -->
         <div style="width:100%; margin:0 auto;" align="center">
             <div style="border: 1px solid;border-color:#22608c;border-radius: 5px;width: 90%;">
@@ -173,8 +175,5 @@
                 </table>
             </div>
         </div>
-    {{/if}}
-        </div>
-
     </div>
 {{/if}}
