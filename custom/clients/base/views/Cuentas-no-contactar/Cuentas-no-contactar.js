@@ -79,19 +79,21 @@
         if(isNaN(from_set_num)){
             from_set_num = 0;
         }
-        assigneUsr += "?PRODUCTO=" + producto_seleccionado + "?" + from_set_num + "?" + filtroCliente+"&tipos_cuenta="+filtroTipoCuenta.toString();
+        assigneUsr += "?from=" + from_set_num + "&cliente=" + filtroCliente+"&tipos_cuenta="+filtroTipoCuenta.toString();
+        //"c57e811e-b81a-cde4-d6b4-5626c9961772?PRODUCTO=LEASING?0?&tipos_cuenta=Lead,Prospecto,Cliente,Persona,Proveedor"
 
         if(!_.isEmpty(assigneUsr) && !_.isUndefined(assigneUsr) && assigneUsr != "") {
             this.seleccionados = [];
             $('#successful').hide();
             $('#processing').show();
-            app.api.call("read", app.api.buildURL("ReasignaciondePromotoresBusqueda/" + assigneUsr, null, null, {}), null, {
+            app.api.call("read", app.api.buildURL("CuentasNoContactar/" + assigneUsr, null, null, {}), null, {
                 success: _.bind(function (data) {
                     console.log(typeof data);
                     console.log(data);
                     if (data.total <= 0) {
+                        var nombre_usuario=$('input[name="users_accounts_1_name"]').parent().find('div.ellipsis_inline').attr('title');
                         var alertOptions = {
-                            title: "No se encontraron clientes para el usuario seleccionado del producto: " + producto_seleccionado,
+                            title: "No se encontraron Cuentas de los tipos seleccionados para el usuario <b>"+nombre_usuario+"</b>",
                             level: "error"
                         };
                         app.alert.show('validation', alertOptions);
@@ -103,51 +105,11 @@
 
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
-                    //Controlar los checks deseleccionados para que persistan al volver a obtener valores de la petición al api
-                    if(this.persistNoSeleccionados!=undefined && this.persistNoSeleccionados.length>0){
 
-                        var tempArray=data.full_cuentas;
-                        for(var i=0;i<this.persistNoSeleccionados.length;i++){
-                            if(tempArray.includes(this.persistNoSeleccionados[i])){
-                                var index = tempArray.indexOf(this.persistNoSeleccionados[i]);
-                                if (index > -1) {
-                                    tempArray.splice(index, 1);
-                                }
-                            }
-                        }
-
-                        this.full_cuentas=tempArray;
-
-                    }else{
-                        this.full_cuentas=data.full_cuentas;
-                    }
                     //Se obtiene valor de Tipo de Cuenta, para que persista al aplicar render
                     var valores=$("#tipo_de_cuenta").select2('val');
                     this.render();
                     $("#tipo_de_cuenta").select2('val',valores);
-
-                    if(this.flagSeleccionados==1){
-                        $('#btn_STodo').attr('btnstate','On');
-                        var context=this;
-                        $('.selected').each(function (index, value) {
-                            //Validación para persistir valores de los checks en caso de que se haya "Seleccionado Todo"
-                            //y se hayan deseleccionado registros individualmente
-                            if(context.persistNoSeleccionados!=undefined && context.persistNoSeleccionados.length>0){
-
-                                if(context.persistNoSeleccionados.includes($(this).attr('value'))){
-                                    $(value).prop("checked", false)
-                                }else{
-                                    $(value).prop("checked", true);
-                                }
-                            }else{
-
-                                $(value).prop("checked", true);
-
-                            }
-                        });
-
-                    }
-                    $("#Productos").val(producto_seleccionado);
 
                     if(to_set > this.total){
                         to_set = this.total;
@@ -171,31 +133,6 @@
                     $("#offset_value").attr("to_set", to_set);
                     $("#filtroCliente").val(filtroCliente);
 
-                    if(!_.isEmpty(crossSeleccionados)) {
-                        context=this;
-                        this.seleccionados = JSON.parse(crossSeleccionados);
-                        //Validar que los nuevos checks seleccionados no existen en crossSeleccionados
-                        $('.selected').each(function (index, value) {
-                            if( $(value).attr("checked")=="checked" && context.flagSeleccionados==1 || $(value).attr("checked")==true && context.flagSeleccionados==1){
-                                if(!context.seleccionados.includes(value.value) && value.value!=0){
-                                    context.seleccionados.push(value.value)
-                                }
-
-                            }
-                        });
-                        $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
-
-                        $(this.seleccionados).each(function (index, selected) {
-                            $('.selected').each(function (index, value) {
-
-                                if(selected == value.value){
-                                    $(value).prop("checked", true);
-                                }
-
-                            });
-
-                        });
-                    }
                 }, this)
             });
         }else{

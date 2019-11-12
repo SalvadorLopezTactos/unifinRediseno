@@ -15,7 +15,6 @@
         .cuentasContainer {
             margin-top: 2%;
             overflow-y:auto;
-            height: 400px;
         }
 
         #containerHeader {
@@ -32,12 +31,12 @@
         }
     </style>
 
-    <div class="container" >
+    <div class="container tcenter" >
         <h1 id="containerHeader" align="left">Cuentas No contactar</h1>
 
         <table align="left"  width=100%>
             <tr>
-                <th>Asesor Actual: </th>
+                <th>Asesor: </th>
 
                 <td colspan="2">
                     {{#each meta.panels}}
@@ -78,7 +77,8 @@
             <tr>
                 <th width="10%">NO CONTACTAR</th>
                 <th width="10%">TIPO</th>
-                <th width="80%">NOMBRE</th>
+                <th width="70%">NOMBRE</th>
+                <th width="10%">ID</th>
             </tr>
         {{#each cuentas}}
                 <tr class='single'>
@@ -106,10 +106,18 @@
                           </div>
                     </span>
                     </td>
+
+                    <td>
+                    <span sfuuid='880' class='list'>
+                        <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{idcliente_c}}</span>
+                        </div>
+                    </span>
+                    </td>
                 </tr>
         {{/each}}
             <tr>
-                <td colspan="4"></td>
+                <td colspan="3"></td>
                 <td>
                     <div class="btn-group">
                         <a class="btn fa fa-caret-left" id="previous_offset"></a>
@@ -120,6 +128,52 @@
             </tr>
 
         </table>
+        <br>
+        <table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
+            <tbody>
+            <tr>
+                <th width="10%"></th>
+                <th width="10%"></th>
+                <th width="70%"></th>
+                <th width="10%"></th>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    <input type="button" value="Guardar cambios" id="btn_no_contactar" class="btn btn-success">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <!-- Subir CSV -->
+        <div style="width:100%; margin:0 auto;" align="center">
+            <div style="border: 1px solid;border-color:#22608c;border-radius: 5px;width: 90%;">
+                <p style="text-align:left;padding:10px">Actualización Masiva</p>
+
+
+                <table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
+                    <tbody>
+                    <tr>
+                        <th width="10%"></th>
+                        <th width="10%"></th>
+                        <th width="70%"></th>
+                        <th width="10%"></th>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input type="file" name="pdfNoticias" style="margin:8px" accept=".pdf" class="adjunto">
+                        </td>
+                        <td>
+                            <input type="button" value="Subir cambios" id="btn_no_contactar" class="btn btn-success" align="right">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{/if}}
         </div>
 
     </div>
