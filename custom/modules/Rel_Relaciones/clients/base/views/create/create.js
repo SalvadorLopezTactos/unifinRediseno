@@ -27,6 +27,7 @@
 
         //CVV INICIO
 		//this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
+        this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
 		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
 		this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
 		this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
@@ -157,6 +158,45 @@
           });
       }
 	},
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('rel_relaciones_accounts_1accounts_ida')!='' && this.model.get('rel_relaciones_accounts_1accounts_ida') !=undefined) {
+            var account = app.data.createBean('Accounts', {id:this.model.get('rel_relaciones_accounts_1accounts_ida')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta relaci\u00F3n.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Cerrar vista de creación de solicitud
+                        if (app.drawer.count()) {
+                            app.drawer.close(this.context);
+                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
+                            var alertas=app.alert.getAll();
+                            for (var property in alertas) {
+                                if(property != 'cuentas_no_contactar'){
+                                    app.alert.dismiss(property);
+                                }
+                            }
+                        } else {
+                            app.router.navigate(this.module, {trigger: true});
+                        }
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+
+    },
 
 	_doValidateContactFields: function (fields, errors, callback) {
     	var sRelaciones = new String(this.model.get('relaciones_activas'));
