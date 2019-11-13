@@ -18,6 +18,14 @@ class CuentasNoContactar extends SugarApi
                 'method' => 'getCuentasNoContactar',
                 'shortHelp' => 'Obtener cuentas para establecer: No Contactar',
             ),
+            'updateCuentasNoContactar' => array(
+                'reqType' => 'POST',
+                'path' => array('ActualizarCuentasNoContactar'),
+                'pathVars' => array(''),
+                'method' => 'updateCuentasNoContactar',
+                'shortHelp' => 'Establece Cuentas como No Contactar y se le asigna el asesor 9.- Moroso junto con Solicitudes y Backlog',
+            ),
+
         );
     }
 
@@ -95,5 +103,74 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
             global $current_user;
             $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> :  Error ".$e->getMessage());
         }
+    }
+
+    public function updateCuentasNoContactar($api, $args){
+
+        global $db;
+
+        //Obtener los ids de las Cuentas a actualizar
+        $cuentas = $args['data']['cuentas'];
+        //Obtener id de usuario 9 - Moroso
+        $id_user_assing='405cc6b7-fc4a-7cae-552f-5628f61fd849';
+
+        for($i=0;$i<count($cuentas);$i++){
+
+            $account = BeanFactory::retrieveBean('Accounts', $cuentas[$i]);
+            //Leasing
+            $account->user_id_c = $id_user_assing;
+            //Crédito Automotriz
+            $account->user_id2_c = $id_user_assing;
+            //Factoraje
+            $account->user_id1_c = $id_user_assing;
+            //Fleet
+            $account->user_id6_c = $id_user_assing;
+
+            $account->save();
+
+            /*Actualizar solicitudes*/
+            $query = <<<SQL
+UPDATE opportunities
+INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
+INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
+SET opportunities.assigned_user_id = '{$id_user_assing}'
+WHERE accounts.id = '{$cuentas[$i]}'
+SQL;
+            $queryResult = $db->query($query);
+
+
+            /*Actualizar backlogs*/
+
+            //Meses siguientes
+            $condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
+            //Mes actual y siguientes
+            //$condicion=" AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
+            $bl_cuenta="SELECT b.id, b.mes,b.description
+  FROM
+      lev_backlog b
+  WHERE
+      b.account_id_c = '{$cuentas[$i]}'".$condicion."
+          AND deleted = 0;";
+
+            $result_bl_cuentas = $db->query($bl_cuenta);
+
+            if($result_bl_cuentas->num_rows>0 && $result_bl_cuentas != null){
+
+                while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
+
+                    $bl=BeanFactory::retrieveBean("lev_Backlog", $row['id']);
+                    if($bl != null){
+                        $bl->assigned_user_id=$cuentas[$i];
+                        //$bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
+                        $bl->save();
+                    }
+                }
+
+            }
+        }
+
+        return true;
+
     }
 }

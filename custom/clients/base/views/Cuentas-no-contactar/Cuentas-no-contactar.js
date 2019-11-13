@@ -4,6 +4,10 @@
 ({
     events: {
         'click #btn_Cuentas': 'buscarCuentasNoContactar',
+        'click #next_offset': 'nextOffset',
+        'click #previous_offset': 'previousOffset',
+        'change .selected': 'selectedCheckbox',
+        'click #btn_no_contactar':'btnNoContactar'
     },
 
     initialize: function(options){
@@ -142,6 +146,97 @@
             };
             app.alert.show('validation', alertOptions);
         }
+    },
+
+    nextOffset: function(){
+        var current_set = $("#offset_value").html();
+        var from_set = $("#offset_value").attr("from_set");
+        var next_from_set = parseInt(from_set) + 20;
+        var to_set = $("#offset_value").attr("to_set");
+        var next_to_set = parseInt(to_set) + 20;
+
+        if(next_to_set > this.total){
+            next_to_set = this.total;
+
+            if(from_set > 0){
+                next_from_set = from_set;
+            }else{
+                next_from_set = next_from_set;
+            }
+        }
+
+        $("#offset_value").html(current_set);
+        $("#offset_value").attr("from_set", next_from_set);
+        $("#offset_value").attr("to_set", next_to_set);
+        this.buscarCuentasNoContactar();
+    },
+
+    previousOffset: function(){
+        var current_set = $("#offset_value").html();
+        var from_set = $("#offset_value").attr("from_set");
+        var next_from_set = parseInt(from_set) - 20;
+        var to_set = $("#offset_value").attr("to_set");
+        var next_to_set = parseInt(to_set) - 20;
+
+        if(next_from_set < 0){
+            next_from_set = 0;
+            next_to_set = 20;
+        }
+
+        $("#offset_value").html(current_set);
+        $("#offset_value").attr("from_set", next_from_set);
+        $("#offset_value").attr("to_set", next_to_set);
+        this.buscarCuentasNoContactar();
+    },
+
+    selectedCheckbox:function (e) {
+
+        if($('input:checked').length>0){
+            $('#btn_no_contactar').eq(0).removeClass('disabled')
+            $('#btn_no_contactar').attr('style','');
+
+        }else{
+            $('#btn_no_contactar').eq(0).addClass('disabled')
+            $('#btn_no_contactar').attr('style','pointer-events:none');
+        }
+
+    },
+
+    btnNoContactar:function(){
+        
+        //Obtener los ids a actualizar
+        var ids_cuentas=[];
+
+        var checks=$('input:checked').length;
+
+        for (var i=0;i<checks;i++){
+            ids_cuentas.push($('input:checked')[i].value);
+        }
+
+        var Params = {
+            'cuentas':ids_cuentas
+        };
+
+        var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
+
+        app.api.call("create", urlNoContactar, {data: Params}, {
+            success: _.bind(function (data) {
+                console.log(typeof data);
+                if(data==true){
+                    $('#processing').hide();
+
+                }else{
+                    $('#processing').hide();
+                    var alertOptions = {
+                        title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
+                        level: "error"
+                    };
+                    app.alert.show('validation', alertOptions);
+                }
+            }, this)
+        });
+
     }
+
 
 })
