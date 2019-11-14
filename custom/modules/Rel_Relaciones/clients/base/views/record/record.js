@@ -62,11 +62,41 @@ extendsFrom: 'RecordView',
 
 	_render: function() {
 		this._super("_render");
+		this.blockRecordNoContactar();
 		this.previas = new String(this.model.get('relaciones_activas'));
 		console.log(this.previas);
 		this.doRelationFields();
 
 	},
+
+    blockRecordNoContactar:function () {
+
+        var id_cuenta=this.model.get('rel_relaciones_accounts_1accounts_ida');
+
+        if(id_cuenta!='' && id_cuenta != undefined ){
+
+            var account = app.data.createBean('Accounts', {id:this.model.get('rel_relaciones_accounts_1accounts_ida')});
+            account.fetch({
+                success: _.bind(function (model) {
+
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta relaci\u00F3n.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Bloquear el registro completo y mostrar alerta
+                        $('.record').attr('style','pointer-events:none')
+                    }
+                }, this)
+            });
+
+        }
+
+    },
 
     validajuridico: function (){
         if(!this.model.get('relaciones_activas').includes('Propietario Real')){

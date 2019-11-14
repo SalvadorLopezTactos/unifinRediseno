@@ -366,6 +366,8 @@
     Deshabilita campo status dependiendo de diferentes criterios
      */
     disablestatus:function () {
+
+        this.blockRecordNoContactar();
         //Recupera valores originales antes de edición
         this.estadoOriginal = this.model.get('status');
         this.parentIdOriginal = this.model.get('parent_id');
@@ -376,6 +378,35 @@
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
         }
+    },
+
+    blockRecordNoContactar:function () {
+
+        var id_cuenta=this.model.get('parent_id');
+
+        if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
+
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta reuni\u00F3n.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Bloquear el registro completo y mostrar alerta
+                        $('.record.tab-layout').attr('style','pointer-events:none')
+                    }
+                }, this)
+            });
+
+        }
+
     },
 
     /*@Jesus Carrillo

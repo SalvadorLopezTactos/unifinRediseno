@@ -153,6 +153,7 @@
       //Victor M.L 30-08-2018
       //Agrega validación para restringir edición de Gestión Comercial
       this.noEdita();
+      this.blockRecordNoContactar();
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -667,6 +668,35 @@
           });
       }
   },
+
+    blockRecordNoContactar:function () {
+
+      var id_cuenta=this.model.get('account_id');
+
+      if(id_cuenta!='' && id_cuenta != undefined){
+
+          var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+          account.fetch({
+              success: _.bind(function (model) {
+
+                  if(model.get('tct_no_contactar_chk_c')==true){
+
+                      app.alert.show("cuentas_no_contactar", {
+                          level: "error",
+                          title: "Cuenta No Contactable<br>",
+                          messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta solicitud.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                          autoClose: false
+                      });
+
+                      //Bloquear el registro completo y mostrar alerta
+                      $('.record.tab-layout').attr('style','pointer-events:none')
+                  }
+              }, this)
+          });
+
+      }
+
+    },
 
 	expedienteCredito: function (){
 		if(this.model.get('id_process_c')== '-1'){

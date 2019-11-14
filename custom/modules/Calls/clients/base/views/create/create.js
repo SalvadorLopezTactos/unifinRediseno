@@ -9,6 +9,7 @@
         // this.on('render',this.disabledates,this);
         this.on('render', this.noestatusedit, this);
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
+        this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
@@ -93,6 +94,45 @@
                 this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
             }
         }
+    },
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta llamada.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Cerrar vista de creación de solicitud
+                        if (app.drawer.count()) {
+                            app.drawer.close(this.context);
+                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
+                            var alertas=app.alert.getAll();
+                            for (var property in alertas) {
+                                if(property != 'cuentas_no_contactar'){
+                                    app.alert.dismiss(property);
+                                }
+                            }
+                        } else {
+                            app.router.navigate(this.module, {trigger: true});
+                        }
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+
     },
 
     ocultaConferencia: function ()

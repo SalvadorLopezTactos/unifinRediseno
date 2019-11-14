@@ -101,6 +101,8 @@
      * */
     setNoEditAllFields: function () {
 
+        this.blockRecordNoContactar();
+
         //Ocultando banderas
         $('.record-cell[data-name="tct_carga_masiva_chk_c"]').addClass('hide');
         $('.record-cell[data-name="tct_bloqueo_txf_c"]').addClass('hide');
@@ -121,6 +123,35 @@
 
             //Se oculta botón de edición
             $('[name="edit_button"]').hide();
+        }
+
+    },
+
+    blockRecordNoContactar:function () {
+
+        var id_cuenta=this.model.get('account_id_c');
+
+        if(id_cuenta!='' && id_cuenta != undefined){
+
+            var account = app.data.createBean('Accounts', {id:this.model.get('account_id_c')});
+            account.fetch({
+                success: _.bind(function (model) {
+
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a este Backlog.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Bloquear el registro completo y mostrar alerta
+                        $('.record').attr('style','pointer-events:none');
+                    }
+                }, this)
+            });
+
         }
 
     },

@@ -24,6 +24,7 @@
         this.model.on("change:monto_comprometido", _.bind(this.asignaMontoFinal, this));
         //this.model.on("change:renta_inicial_comprometida", _.bind(this.asignaRIFinal, this));
 
+        this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         this.model.addValidationTask('check_tipo_cliente', _.bind(this._ValidateTipo, this));
 
@@ -562,6 +563,45 @@
 
         }else{
             this.model.set("tipo_de_operacion", "Original");
+        }
+
+    },
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('account_id_c')!= "" && this.model.get('account_id_c')!= undefined) {
+            var account = app.data.createBean('Accounts', {id:this.model.get('account_id_c')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a este Backlog.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Cerrar vista de creación de solicitud
+                        if (app.drawer.count()) {
+                            app.drawer.close(this.context);
+                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
+                            var alertas=app.alert.getAll();
+                            for (var property in alertas) {
+                                if(property != 'cuentas_no_contactar'){
+                                    app.alert.dismiss(property);
+                                }
+                            }
+                        } else {
+                            app.router.navigate(this.module, {trigger: true});
+                        }
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
         }
 
     },
