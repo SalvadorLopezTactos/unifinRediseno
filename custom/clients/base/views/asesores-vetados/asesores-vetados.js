@@ -18,7 +18,7 @@
         this._super("initialize", [options]);
         vetados = this;
         this.loadView = false;
-        if(app.user.attributes.tct_vetar_usuarios_chk_c == "1" || app.user.attributes.is_manager == true){
+        if(app.user.attributes.tct_vetar_usuarios_chk_c == 1 || app.user.attributes.type == "admin"){
             this.cargalistas();
             //this.generalistas();
             vetados.filtros = {
