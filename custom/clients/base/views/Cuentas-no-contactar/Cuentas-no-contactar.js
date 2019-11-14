@@ -7,7 +7,8 @@
         'click #next_offset': 'nextOffset',
         'click #previous_offset': 'previousOffset',
         'change .selected': 'selectedCheckbox',
-        'click #btn_no_contactar':'btnNoContactar'
+        'click #btn_no_contactar':'btnNoContactar',
+        'click #btn_read_csv':'procesarCSV'
     },
 
     initialize: function(options){
@@ -218,24 +219,98 @@
         };
 
         var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
-
+        $('#successful').hide();
+        $('#processing').show();
         app.api.call("create", urlNoContactar, {data: Params}, {
             success: _.bind(function (data) {
-                console.log(typeof data);
-                if(data==true){
-                    $('#processing').hide();
-
-                }else{
-                    $('#processing').hide();
-                    var alertOptions = {
-                        title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
-                        level: "error"
-                    };
-                    app.alert.show('validation', alertOptions);
-                }
+                 $('#processing').hide();
+                 this.render();
+                 $('.cuentasContainer').hide();
+                 $('#successful').show();
             }, this)
         });
 
+    },
+
+    procesarCSV:function () {
+
+        //Validar que se haya seleccionado un archivo
+        var fileInput = document.getElementById('csv_no_contactar');
+        var archivo=fileInput.value;
+        //var files = document.getElementsByName('csv_no_contactar').files;
+
+        if(archivo=="" || archivo==undefined){
+
+            app.alert.show('errorAlert', {
+                level: 'error',
+                messages: 'Favor de elegir un archivo',
+                autoClose: true
+            });
+
+        }else{
+
+            var file = fileInput.files[0];
+            var textType = /text.*/;
+
+            self=this;
+
+            if (file.type.match(textType)) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var content = reader.result;
+                    var arr_ids=content.split('\n');
+                    //Obtener los ids a actualizar
+
+                    var Params = {
+                        'cuentas':arr_ids
+                    };
+
+                    var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
+                    $('#successful').hide();
+                    $('#processing').show();
+                    app.api.call("create", urlNoContactar, {data: Params}, {
+                        success: _.bind(function (data) {
+                            $('#processing').hide();
+                            self.render();
+                            $('.cuentasContainer').hide();
+                            $('#successful').show();
+
+                            //Mostrar resumen
+                            var countAct=data.actualizados.length;
+                            var countNoAct=data.no_actualizados.length;
+                            var msjact='Cuentas actualizadas <b>'+countAct+'</b>: <br>';
+                            var msjnoact='Cuentas NO actualizadas <b>'+countNoAct+'</b>: <br>';
+                            if(countAct>0){
+
+                                for(var i=0;i<countAct;i++){
+                                    msjact+=data.actualizados[i]+'<br>';
+                                }
+
+                            }
+
+                            if(countNoAct>0){
+
+                                for(var i=0;i<countNoAct;i++){
+                                    msjnoact+=data.no_actualizados[i]+'<br>';
+                                }
+
+                            }
+
+                            app.alert.show('succes_actualizacion_no_contactar', {
+                                level: 'success',
+                                messages: '<br>'+msjact+'<br>'+msjnoact,
+                                autoClose: false
+                            });
+
+
+                        }, this)
+                    });
+                }
+                reader.readAsText(file);
+            }
+
+        }
     }
 
 
