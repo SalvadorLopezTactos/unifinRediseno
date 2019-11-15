@@ -183,6 +183,7 @@
          */
         //Carga de funcion quitar años lista para ventas anuales
         this.model.on('sync', this.quitaanos, this);
+        this.model.on('sync', this.blockRecordNoContactar, this);
         //this.model.on('sync', this._render, this);
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
@@ -884,6 +885,9 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super("_render");
+
+        //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="tct_no_contactar_chk_c"]').hide();
 
         //campo Pais que expide el RFC nace oculto.
         $('[data-name=tct_pais_expide_rfc_c]').hide();
@@ -4066,6 +4070,24 @@
         });
         lista[anoselect]=anoselect;
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
+    },
+
+    blockRecordNoContactar:function () {
+
+        if(this.model.get('tct_no_contactar_chk_c')==true){
+
+            //Bloquear el registro completo y mostrar alerta
+            $('.record.tab-layout').attr('style','pointer-events:none');
+
+            app.alert.show("cuentas_no_contactar", {
+                level: "error",
+                title: "Cuenta No Contactable<br>",
+                messages: "Unifin ha decidido NO trabajar con esta cuenta.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                autoClose: false
+            });
+
+        }
+
     },
     get_phones:function(){
         //Extiende This

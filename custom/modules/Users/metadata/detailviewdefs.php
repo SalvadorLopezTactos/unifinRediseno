@@ -223,7 +223,11 @@ array (
             'name' => 'tct_alta_credito_simple_chk_c',
             'label' => 'LBL_TCT_ALTA_CREDITO_SIMPLE_CHK',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'tct_no_contactar_chk_c',
+            'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
+          ),
         ),
       ),
     ),

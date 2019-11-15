@@ -644,6 +644,31 @@
                         autoClose: false
                     });
                 }
+
+                if(model.get('tct_no_contactar_chk_c')==true){
+
+                    app.alert.show("cuentas_no_contactar", {
+                        level: "error",
+                        title: "Cuenta No Contactable<br>",
+                        messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta solicitud.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                        autoClose: false
+                    });
+
+                    //Cerrar vista de creación de solicitud
+                    if (app.drawer.count()) {
+                        app.drawer.close(this.context);
+                        //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
+                        var alertas=app.alert.getAll();
+                        for (var property in alertas) {
+                            if(property != 'cuentas_no_contactar'){
+                                app.alert.dismiss(property);
+                            }
+                        }
+                    } else {
+                        app.router.navigate(this.module, {trigger: true});
+                    }
+
+                }
                 callback(null, fields, errors);
             }, this)
         });
