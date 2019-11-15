@@ -61,7 +61,7 @@
                 app.alert.show('error-numero-potencial4', {
                     level: 'error',
                     autoClose: true,
-                    messages: "El campo <b>Número de Camiones</b> no permite ingresar números negativos."
+                    messages: "El campo <b>Número de Camiones</b> no acepta caracteres especiales."
                 });
             }
         }
