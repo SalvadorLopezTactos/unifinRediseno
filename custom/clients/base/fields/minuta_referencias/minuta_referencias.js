@@ -203,6 +203,8 @@
             "amaterno": valor3,
             "telefono": valor5,
             "correo": valor4,
+            "clean_name":"",
+            "clean_name_moral":"",
             "id_cuenta": this.model.get('account_id_c')
         };
 
@@ -372,61 +374,160 @@
 
             $('.addReferencia').bind('click', false);
 
-            // Valida si existen duplicados
-            var nombrecompleto='';
-            if(tipo != 'Persona Moral'){
-                
-                nombrecompleto = $(".newCampo1R").val() + $(".newCampo2R").val() + $(".newCampo3R").val();
-                nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
-            }else{
-                nombrecompleto = $('.newRazonSocial').val();
-                nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
-            }
-            
-            var campos = ["primernombre_c", "apellidopaterno_c","apellidomaterno_c","razonsocial_c","nombre_comercial_c"];
-            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-                campos: campos.join(','),
-                max_num: 4,
-                "filter": [
-                    {
-                        "clean_name": nombrecompleto,
-                    }
-                ]
-            }), null, {
-                success: _.bind(function (cuenta) {
-                    if (cuenta.records.length > 0) {
-                        $(".newRazonSocial").val("");
-                        $(".newCampo1R").val("");
-                        $(".newCampo2R").val("");
-                        $(".newCampo3R").val("");
-                        $(".newCampo4R").val("");
-                        $(".newCampo5R").val("");
-                        app.alert.show("ReferenciaDuplicada", {
-                            level: "error",
-                            title: "No se puede agregar la referencia. <br> Esta persona ya ha sido registrada.",
-                            autoClose: true
-                        });
-                    }
-                    else {
-                        if(registro.regimen_fiscal=='Persona Moral'){
-                            registro.moral="Moral";
+            // Conforma el Clean Name en Persona Fisica
+            var original_name = $(".newCampo1R").val() + $(".newCampo2R").val() + $(".newCampo3R").val();
+            var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+            var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+            original_name = original_name.replace(/\s+/gi, '');
+            original_name = original_name.toUpperCase();
+            registro.clean_name = original_name;
+
+             if(tipo == 'Persona Moral') {
+                //Conforma el clean name para persona Moral
+                var clean_name="";
+                clean_name = $('.newRazonSocial').val();
+                clean_name = clean_name.toUpperCase();
+                var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+                var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+                //Define arreglos para guardar nombre de cuenta
+                var clean_name_split = [];
+                var clean_name_split_full = [];
+                clean_name_split = clean_name.split(" ");
+                //Elimina simbolos: Ej. . , -
+                _.each(clean_name_split, function (value, key) {
+                    _.each(simbolos, function (simbolo, index) {
+                        var clean_value = value.split(simbolo).join('');
+                        if (clean_value != value) {
+                            clean_name_split[key] = clean_value;
                         }
-                        var indexInsert=selfRef.mReferencias.referencias.push(registro)-1;
-                        selfRef.render();
-                        //Instrucción para establecer el valor de regimen fiscal en referencia existente
-                        //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).select2('val',registro.regimen_fiscal);
-                        //Se lanza evento change para mostrat/oculta campo de Razón Social
-                        //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).trigger('change');
-
-                        selfRef.$('select.existingRefRegimenFiscal').each(function(){
-                            $(this).trigger('change');
-                        });
-
+                    });
+                });
+                clean_name_split_full = App.utils.deepCopy(clean_name_split);
+                //Elimina tipos de sociedad: Ej. SA, de , CV...
+                var totalVacio = 0;
+                _.each(clean_name_split, function (value, key) {
+                    _.each(list_check, function (index, nomenclatura) {
+                        var upper_value = value.toUpperCase();
+                        if (upper_value == nomenclatura) {
+                            var clean_value = upper_value.replace(nomenclatura, "");
+                            clean_name_split[key] = clean_value;
+                        }
+                    });
+                });
+                //Genera clean_name con arreglo limpio
+                var clean_name = "";
+                _.each(clean_name_split, function (value, key) {
+                    clean_name += value;
+                    //Cuenta elementos vacíos
+                    if (value == "") {
+                        totalVacio++;
                     }
-                    $('.addReferencia').unbind('click', false);
-                    App.alert.dismiss('loadingRender');
-                }, this)
-            });
+                });
+
+                //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
+                if ((clean_name_split.length - totalVacio) <= 1) {
+                    clean_name = "";
+                    _.each(clean_name_split_full, function (value, key) {
+                        clean_name += value;
+                    });
+                }
+                    clean_name = clean_name.toUpperCase();
+                    registro.clean_name_moral= clean_name;
+                }
+                if (tipo=="Persona Moral"){
+                    //Realiza Api call para buscar duplicados en las cuentas con clean_name_moral
+                    var campos = ["primernombre_c", "apellidopaterno_c","apellidomaterno_c","razonsocial_c","nombre_comercial_c"];
+                    app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                        campos: campos.join(','),
+                        max_num: 4,
+                        "filter": [
+                            {
+                                "clean_name": registro.clean_name_moral
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (cuenta) {
+                            if (cuenta.records.length > 0) {
+                                $(".newRazonSocial").val("");
+                                $(".newCampo1R").val("");
+                                $(".newCampo2R").val("");
+                                $(".newCampo3R").val("");
+                                $(".newCampo4R").val("");
+                                $(".newCampo5R").val("");
+                                app.alert.show("ReferenciaDuplicada", {
+                                    level: "error",
+                                    title: "No se puede agregar la referencia. <br> Esta persona moral ya ha sido registrada.",
+                                    autoClose: true
+                                });
+                            }
+                            else {
+                                if(registro.regimen_fiscal=='Persona Moral'){
+                                    registro.moral="Moral";
+                                }
+                                var indexInsert=selfRef.mReferencias.referencias.push(registro)-1;
+                                selfRef.render();
+                                //Instrucción para establecer el valor de regimen fiscal en referencia existente
+                                //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).select2('val',registro.regimen_fiscal);
+                                //Se lanza evento change para mostrat/oculta campo de Razón Social
+                                //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).trigger('change');
+
+                                selfRef.$('select.existingRefRegimenFiscal').each(function(){
+                                    $(this).trigger('change');
+                                });
+
+                            }
+                            $('.addReferencia').unbind('click', false);
+                            App.alert.dismiss('loadingRender');
+                        }, this)
+                    });
+
+                }else {
+                    //Realiza Api call para buscar duplicados en las cuentas con clean_name_fisica
+                    var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c", "razonsocial_c", "nombre_comercial_c"];
+                    app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                        campos: campos.join(','),
+                        max_num: 4,
+                        "filter": [
+                            {
+                                "clean_name": registro.clean_name
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (cuenta) {
+                            if (cuenta.records.length > 0) {
+                                $(".newRazonSocial").val("");
+                                $(".newCampo1R").val("");
+                                $(".newCampo2R").val("");
+                                $(".newCampo3R").val("");
+                                $(".newCampo4R").val("");
+                                $(".newCampo5R").val("");
+                                app.alert.show("ReferenciaDuplicada", {
+                                    level: "error",
+                                    title: "No se puede agregar la referencia. <br> Esta persona ya ha sido registrada.",
+                                    autoClose: true
+                                });
+                            }
+                            else {
+                                if (registro.regimen_fiscal == 'Persona Moral') {
+                                    registro.moral = "Moral";
+                                }
+                                var indexInsert = selfRef.mReferencias.referencias.push(registro) - 1;
+                                selfRef.render();
+                                //Instrucción para establecer el valor de regimen fiscal en referencia existente
+                                //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).select2('val',registro.regimen_fiscal);
+                                //Se lanza evento change para mostrat/oculta campo de Razón Social
+                                //selfRef.$('select.existingRefRegimenFiscal').eq(indexInsert).trigger('change');
+
+                                selfRef.$('select.existingRefRegimenFiscal').each(function () {
+                                    $(this).trigger('change');
+                                });
+
+                            }
+                            $('.addReferencia').unbind('click', false);
+                            App.alert.dismiss('loadingRender');
+                        }, this)
+                    });
+                }
             }
         }
       }
