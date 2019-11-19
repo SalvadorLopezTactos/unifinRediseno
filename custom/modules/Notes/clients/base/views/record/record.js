@@ -14,6 +14,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
+
+        this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
     },
 
     _render: function () {
@@ -24,11 +26,41 @@
         Funcion que pinta de color los paneles relacionados
     */
     fulminantcolor: function () {
+        this.blockRecordNoContactar();
         $( '#space' ).remove();
         $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
         $('.control-group').css("background-color", "#e5e5e5");
         $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
+    },
+
+    blockRecordNoContactar:function () {
+
+        var id_cuenta=this.model.get('parent_id');
+
+        if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
+
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta llamada.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        //Bloquear el registro completo y mostrar alerta
+                        $('.record').attr('style','pointer-events:none')
+                    }
+                }, this)
+            });
+
+        }
+
     },
     
     showMinutarel:function(){
@@ -102,6 +134,34 @@
         else {
         this.$('[data-name="parent_name"]').attr('style', '');
         }
+    },
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta nota.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        errors['parent_name'] = errors['parent_name'] || {};
+                        errors['parent_name'].required = true;
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+
     },
 
     /* @Salvador Lopez Y Adrian Arauz

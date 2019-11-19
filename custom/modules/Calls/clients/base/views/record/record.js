@@ -16,6 +16,7 @@
             //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
             this.model.on('sync',this.enableparentname,this);
             this.model.on('sync', this.cambioFecha, this);
+            this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
             this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
@@ -284,6 +285,34 @@
      			self.noEditFields.push('tct_conferencia_chk_c');
           $('.record-edit-link-wrapper[data-name=tct_conferencia_chk_c]').remove();
       	}
+    },
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta llamada.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        errors['parent_name'] = errors['parent_name'] || {};
+                        errors['parent_name'].required = true;
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+
     },
 
     /* @F. Javier G. Solar

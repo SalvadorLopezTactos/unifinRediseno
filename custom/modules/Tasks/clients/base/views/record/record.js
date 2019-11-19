@@ -10,6 +10,7 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
+        this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 
         /*@Jesus Carrillo
@@ -140,6 +141,34 @@
         var temp4=temp3.split('T');
         this.temp_duedate = temp4[0];
         _.extend(this,this.temp_duedate);
+    },
+
+    valida_cuenta_no_contactar:function (fields, errors, callback) {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_no_contactar_chk_c')==true){
+
+                        app.alert.show("cuentas_no_contactar", {
+                            level: "error",
+                            title: "Cuenta No Contactable<br>",
+                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta tarea.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            autoClose: false
+                        });
+
+                        errors['parent_name'] = errors['parent_name'] || {};
+                        errors['parent_name'].required = true;
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
+
     },
 
     checkdate: function (fields, errors, callback) {
