@@ -28,7 +28,7 @@
                 app.alert.show('error-numero-potencial1', {
                     level: 'error',
                     autoClose: true,
-                    messages: "El campo <b>Número de Autos Utilitarios</b> no permite ingresar números negativos."
+                    messages: "El campo <b>Número de Autos Utilitarios</b> no acepta caracteres especiales."
                 });
             }
         }
@@ -39,7 +39,7 @@
                 app.alert.show('error-numero-potencial2', {
                     level: 'error',
                     autoClose: true,
-                    messages: "El campo <b>Número de Autos Ejecutivos</b> no permite ingresar números negativos."
+                    messages: "El campo <b>Número de Autos Ejecutivos</b> no acepta caracteres especiales."
                 });
             }
         }
@@ -50,7 +50,7 @@
                 app.alert.show('error-numero-potencial3', {
                     level: 'error',
                     autoClose: true,
-                    messages: "El campo <b>Número de Motos</b> no permite ingresar números negativos."
+                    messages: "El campo <b>Número de Motos</b> no acepta caracteres especiales."
                 });
             }
         }
@@ -61,7 +61,7 @@
                 app.alert.show('error-numero-potencial4', {
                     level: 'error',
                     autoClose: true,
-                    messages: "El campo <b>Número de Camiones</b> no permite ingresar números negativos."
+                    messages: "El campo <b>Número de Camiones</b> no acepta caracteres especiales."
                 });
             }
         }

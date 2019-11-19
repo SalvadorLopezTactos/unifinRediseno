@@ -254,6 +254,7 @@
                 "tipo_contacto": valor6,
                 "asistencia": 1,
                 "activo" : "1",
+                "clean_name":"",
                 "tel_previo":valor3
             };
 
@@ -381,10 +382,60 @@
                     level: 'process',
                     title: 'Cargando, por favor espere.',
                 });
-                  var clean_name='';
-                  clean_name = $(".newCampo1P").val() + $(".newCampo2P").val() + $(".newCampo3P").val();
-                  clean_name= clean_name.replace(/\s+/gi,'');
-                  clean_name=clean_name.toUpperCase();
+                  var original_name = $(".newCampo1P").val() + $(".newCampo2P").val() + $(".newCampo3P").val();
+                  var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+                  var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+                  //Define arreglos para guardar nombre de cuenta
+                  var clean_name_split = [];
+                  var clean_name_split_full = [];
+                  clean_name_split = original_name.split(" ");
+                  //Elimina simbolos: Ej. . , -
+                  _.each(clean_name_split, function (value, key) {
+                      _.each(simbolos, function (simbolo, index) {
+                          var clean_value = value.split(simbolo).join('');
+                          if (clean_value != value) {
+                              clean_name_split[key] = clean_value;
+                          }
+                      });
+                  });
+                  clean_name_split_full = App.utils.deepCopy(clean_name_split);
+
+                  if (this.model.get('tipodepersona_c')=="Persona Moral") {
+                      //Elimina tipos de sociedad: Ej. SA, de , CV...
+                      var totalVacio = 0;
+                      _.each(clean_name_split, function (value, key) {
+                          _.each(list_check, function (index, nomenclatura) {
+                              var upper_value = value.toUpperCase();
+                              if (upper_value == nomenclatura) {
+                                  var clean_value = upper_value.replace(nomenclatura, "");
+                                  clean_name_split[key] = clean_value;
+                              }
+                          });
+                      });
+                      //Genera clean_name con arreglo limpio
+                      var clean_name = "";
+                      _.each(clean_name_split, function (value, key) {
+                          clean_name += value;
+                          //Cuenta elementos vacíos
+                          if (value == "") {
+                              totalVacio++;
+                          }
+                      });
+
+                      //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
+                      if ((clean_name_split.length - totalVacio) <= 1) {
+                          clean_name = "";
+                          _.each(clean_name_split_full, function (value, key) {
+                              clean_name += value;
+                          });
+                      }
+                      clean_name = clean_name.toUpperCase();
+                      item.clean_name= clean_name;
+                  }else{
+                      original_name = original_name.replace(/\s+/gi,'');
+                      original_name= original_name.toUpperCase();
+                      item.clean_name= original_name;
+                  }
 
                   var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -392,7 +443,7 @@
                   max_num: 5,
                   "filter": [
                     {
-                      "clean_name": clean_name
+                      "clean_name": item.clean_name
                     }
                   ]
                   }), null, {

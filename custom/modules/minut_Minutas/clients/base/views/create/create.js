@@ -379,18 +379,66 @@
         });
 
         for (var i = 0; i < objReferencias.length; i++) {
-            var iteradas='';
+            var clean_name_moral='';
             if(objReferencias[i].regimen_fiscal=='Persona Moral'){
-                iteradas=objReferencias[i].razon_social.trim();
-            }else{
-                iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+                clean_name_moral=objReferencias[i].razon_social.trim();
+                var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+                var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+                //Define arreglos para guardar nombre de cuenta
+                var clean_name_split = [];
+                var clean_name_split_full = [];
+                clean_name_split = clean_name_moral.split(" ");
+                //Elimina simbolos: Ej. . , -
+                _.each(clean_name_split, function (value, key) {
+                    _.each(simbolos, function (simbolo, index) {
+                        var clean_value = value.split(simbolo).join('');
+                        if (clean_value != value) {
+                            clean_name_split[key] = clean_value;
+                        }
+                    });
+                });
+                clean_name_split_full = App.utils.deepCopy(clean_name_split);
+                //Elimina tipos de sociedad: Ej. SA, de , CV...
+                var totalVacio = 0;
+                _.each(clean_name_split, function (value, key) {
+                    _.each(list_check, function (index, nomenclatura) {
+                        var upper_value = value.toUpperCase();
+                        if (upper_value == nomenclatura) {
+                            var clean_value = upper_value.replace(nomenclatura, "");
+                            clean_name_split[key] = clean_value;
+                        }
+                    });
+                });
+                //Genera clean_name con arreglo limpio
+                var clean_name = "";
+                _.each(clean_name_split, function (value, key) {
+                    clean_name += value;
+                    //Cuenta elementos vacíos
+                    if (value == "") {
+                        totalVacio++;
+                    }
+                });
+
+                //Valida que exista más de un elemento, caso contrario se establece para clean_name valores con tipo de sociedad
+                if ((clean_name_split.length - totalVacio) <= 1) {
+                    clean_name = "";
+                    _.each(clean_name_split_full, function (value, key) {
+                        clean_name += value;
+                    });
+                }
+                clean_name = clean_name.toUpperCase();
+                objReferencias[i].clean_name_moral= clean_name;
             }
+            var iteradas='';
+            iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+
             if(objReferencias[i].nombres.trim()=="" || objReferencias[i].apaterno.trim()==""){
                 banderaRef++;
             }
 
             iteradas = iteradas.replace(/\s+/gi,'');
             iteradas = iteradas.toUpperCase();
+            objReferencias[i].clean_name= iteradas;
             if (iteradas=="" || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
                 banderaRef++;
             }

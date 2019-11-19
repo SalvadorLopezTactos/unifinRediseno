@@ -1062,4 +1062,89 @@ where rfc_c = '{$bean->rfc_c}' and
 
     }
 
+    public function quitaespacios($bean=null, $event= null, $args= null){
+
+        global $db;
+        global $app_list_strings, $current_user; //Obtención de listas de valores
+        $idCuenta = $bean->id;
+        //$GLOBALS['log']->fatal('Limpia espacios');
+        //Se crean variables que limpien los excesos de espacios en los campos establecidos.
+        $limpianame= preg_replace('/\s\s+/', ' ', $bean->name);
+        $limpianombre= preg_replace('/\s\s+/', ' ', $bean->primernombre_c);
+        $limpiaapaterno= preg_replace('/\s\s+/', ' ', $bean->apellidopaterno_c);
+        $limpiamaterno= preg_replace('/\s\s+/', ' ', $bean->apellidomaterno_c);
+        $limpiarazon= preg_replace('/\s\s+/', ' ', $bean->razonsocial_c);
+        $limpianomcomercial= preg_replace('/\s\s+/', ' ', $bean->nombre_comercial_c);
+
+        //Actualiza valores limpios a los campos de la Cuenta
+        $bean->name= $limpianame;
+        $bean->primernombre_c= $limpianombre;
+        $bean->apellidopaterno_c= $limpiaapaterno;
+        $bean->apellidomaterno_c=$limpiamaterno;
+        $bean->razonsocial_c=$limpiarazon;
+        $bean->nombre_comercial_c=$limpianomcomercial;
+        if ($bean->tipo_registro_c=="Persona Moral"){
+            $bean->name=$bean->razonsocial_c;
+        }
+
+        //Crea Clean_name (exclusivo para aplicativos externos a CRM)
+        if ($bean->clean_name=="" || $bean->clean_name==null){
+            $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
+            $acronimos= $app_list_strings['validacion_duplicados_list'];
+
+            if ($bean->tipo_registro_c!="Persona Moral"){
+                //$GLOBALS['log']->fatal(print_r($tipo,true));
+                //Cambia a mayúsculas y quita espacios a cada campo
+                //Concatena los tres campos para formar el clean_name
+                $nombre= $bean->name;
+                $nombre= mb_strtoupper($nombre, "UTF-8");
+                $separa= explode( " ",$nombre);
+                //$GLOBALS['log']->fatal(print_r($separa,true));
+                $longitud=count($separa);
+                //Itera el arreglo separado
+                for ($i = 0; $i < $longitud; $i++) {
+                    foreach ($tipo as $t=>$key){
+                        $separa[$i]=str_replace($key,"", $separa[$i]);
+                    }
+                }
+                $une= implode($separa);
+                $bean->clean_name= $une;
+                //$GLOBALS['log']->fatal($bean->clean_name);
+
+            }else{
+                //$GLOBALS['log']->fatal($bean->razonsocial_c);
+                $nombre=$bean->name;
+                $nombre= mb_strtoupper($nombre, "UTF-8");
+                $separa= explode( " ",$nombre);
+                $separa_limpio=$separa;
+                $GLOBALS['log']->fatal(print_r($separa,true));
+                $longitud=count($separa);
+                $eliminados=0;
+                //Itera el arreglo separado
+                for ($i = 0; $i < $longitud; $i++) {
+                    foreach ($tipo as $t=>$key){
+                        $separa[$i]=str_replace($key,"", $separa[$i]);
+                        $separa_limpio[$i]=str_replace($key,"", $separa_limpio[$i]);
+                    }
+                    foreach ($acronimos as $a=>$key){
+                        if($separa[$i]==$a){
+                            $separa[$i]="";
+                            $eliminados++;
+                        }
+                        //$GLOBALS['log']->fatal($a);
+                        $GLOBALS['log']->fatal(print_r($separa,true));
+
+
+                    }
+                }
+                //Condicion para eliminar los acronimos
+                if(($longitud-$eliminados)<=1){
+                    $separa=$separa_limpio;
+                }
+                //Convierte el array a string nuevamente
+                $une= implode($separa);
+                $bean->clean_name= $une;
+            }
+        }
+    }
 }

@@ -178,3 +178,11 @@ $hook_array['after_save'][] = Array(
     'Account_Hooks',
     'guardapotencial'
 );
+
+$hook_array['before_save'][] = Array(
+    13,
+    'Se eliminan los espacios superiores a uno en los campos principales de la Cuenta',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'quitaespacios'
+);
