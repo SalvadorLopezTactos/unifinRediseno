@@ -7,5 +7,5 @@ $viewdefs['Accounts']['base']['menu']['header'][] = array(
     'route'=>'#Accounts/layout/Cuentas-no-contactar',
     'label' =>'LNK_CUENTAS_NO_CONTACTAR',
     'acl_module'=>'Accounts',
-    'icon' => 'user-times',
+    'icon' => 'fa-lock',
 );
