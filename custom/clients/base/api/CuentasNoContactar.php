@@ -122,7 +122,8 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
 
         for ($i = 0; $i < count($cuentas); $i++) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $cuentas[$i]);
+            //$account = BeanFactory::retrieveBean('Accounts', $cuentas[$i]);
+            $account = BeanFactory::retrieveBean('Accounts', $cuentas[$i], array('disable_row_level_security' => true));
             if ($account != null) {
 
                 if($account->fetched_row['tct_no_contactar_chk_c']==1){
