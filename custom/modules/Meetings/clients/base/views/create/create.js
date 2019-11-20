@@ -98,6 +98,11 @@
                             autoClose: false
                         });
 
+                        //Se habilita esta porción para evitar el guardado de registro, pues si se tiene el arreglo errors lleno, se impide el guardado
+                        app.error.errorName2Keys['custom_message1'] = '';
+                        errors['cliente'] = errors['cliente'] || {};
+                        errors['cliente'].custom_message1 = true;
+
                         //Cerrar vista de creación de solicitud
                         if (app.drawer.count()) {
                             app.drawer.close(this.context);
