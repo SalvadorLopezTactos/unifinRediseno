@@ -44,6 +44,10 @@
                             autoClose: false
                         });
 
+                        app.error.errorName2Keys['custom_message1'] = '';
+                        errors['cliente'] = errors['cliente'] || {};
+                        errors['cliente'].custom_message1 = true;
+
                         //Cerrar vista de creación de solicitud
                         if (app.drawer.count()) {
                             app.drawer.close(this.context);
