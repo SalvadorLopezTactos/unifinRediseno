@@ -1560,7 +1560,7 @@
          //Valida número de mes actual
         var limitMonth = currentMonth + 2;
         var nextMonth = 0;
-        
+
         if (limitMonth > 12) {
              nextMonth = limitMonth - 12;
         }
@@ -1573,7 +1573,7 @@
             $(evt.currentTarget).parent().parent().next().find('select').empty();
             for(var i=1;i<=nextMonth;i++){
 
-                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';
             }
 
         }else{
@@ -1581,12 +1581,12 @@
             $(evt.currentTarget).parent().parent().next().find('select').empty();
             if(currentMonth==12){
 
-                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';  
+                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';
 
             }else{
                 for(var i=currentMonth;i<limitMonth;i++){
 
-                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';
                 }
             }
         }
@@ -1604,7 +1604,7 @@
          //Valida número de mes actual
         var limitMonth = currentMonth + 2;
         var nextMonth = 0;
-        
+
         if (limitMonth > 12) {
              nextMonth = limitMonth - 12;
         }
@@ -1617,7 +1617,7 @@
             $('select.mes_cancelar').empty();
             for(var i=1;i<=nextMonth;i++){
 
-                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';
             }
 
         }else{
@@ -1625,12 +1625,12 @@
             $('select.mes_cancelar').empty();
             if(currentMonth==12){
 
-                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';  
+                opciones+='<option value="'+currentMonth+'">'+opciones_mes[currentMonth]+'</option>';
 
             }else{
                 for(var i=currentMonth;i<limitMonth;i++){
 
-                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';    
+                    opciones+='<option value="'+i+'">'+opciones_mes[i]+'</option>';
                 }
             }
         }
@@ -2126,7 +2126,7 @@
 
         }else{
 
-            if (backlogAnio <= currentYear) {
+            if (backlogAnio <= currentYearTwoDigits) {
                 if (backlogMes <= BacklogCorriente) {
                     //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
                     if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
@@ -2494,7 +2494,7 @@
 
                 }else{
 
-                    if(backlogAnio <= currentYear) {
+                    if(backlogAnio <= currentYearTwoDigits) {
                         if (backlogMes <= BacklogCorriente){
                             //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
                             if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
