@@ -9,5 +9,5 @@ $viewdefs['Accounts']['base']['menu']['header'][] = array(
     'route'=>'#Accounts/layout/Reasignacion-de-promotores',
     'label' =>'LNK_REASIGNACION_DE_PROMOTORES',
     'acl_module'=>'Accounts',
-    'icon' => 'icon-user',
+    'icon' => 'fa-users',
 );
