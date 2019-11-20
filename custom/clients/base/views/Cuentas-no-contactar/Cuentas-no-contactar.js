@@ -11,6 +11,8 @@
         'click #btn_read_csv':'procesarCSV'
     },
 
+    ids_cuentas:[],
+
     initialize: function(options){
         this._super("initialize", [options]);
 
@@ -24,6 +26,8 @@
             var route = app.router.buildRoute(this.module, null, '');
             app.router.navigate(route, {trigger: true});
         }
+
+        this.ids_cuentas=[];
 
     },
 
@@ -46,6 +50,8 @@
     },
 
     buscarCuentasNoContactar:function () {
+        //Inicializar arreglo de cuentas cada que se busca por un filtro, para evitar actualizar cuentas que anteriormente se seleccionaron
+        this.ids_cuentas=[];
 
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
@@ -107,6 +113,17 @@
                     }
                     $('#processing').hide();
                     this.cuentas = typeof data=="string"?null:data.cuentas;
+
+                    /*Bloque de código únicamente utilizado para mostrar correctamente el valor de los checkbox en archivo hbs, basado directamente en la consulta a la bd*/
+                    if(this.cuentas.length>0){
+                        for(var i=0;i<this.cuentas.length;i++){
+
+                            if(this.cuentas[i].tct_no_contactar_chk_c==0){
+                                this.cuentas[i].tct_no_contactar_chk_c=null;
+                            }
+
+                        }
+                    }
 
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
@@ -191,8 +208,21 @@
     },
 
     selectedCheckbox:function (e) {
+        var id_cuenta=$(e.currentTarget).val();
 
-        if($('input:checked').length>0){
+        var indexFind=this.ids_cuentas.indexOf(id_cuenta);
+        //Antes de agregar al arreglo, comprobar que existe, en caso positivo, se elimina
+        if(this.ids_cuentas.length > 0 && indexFind != -1){
+
+            this.ids_cuentas.splice(indexFind,1);
+
+        }else{
+
+            this.ids_cuentas.push($(e.currentTarget).val());
+
+        }
+        
+        if(this.ids_cuentas.length>0){
             $('#btn_no_contactar').eq(0).removeClass('disabled')
             $('#btn_no_contactar').attr('style','');
 
@@ -204,18 +234,9 @@
     },
 
     btnNoContactar:function(){
-        
-        //Obtener los ids a actualizar
-        var ids_cuentas=[];
-
-        var checks=$('input:checked').length;
-
-        for (var i=0;i<checks;i++){
-            ids_cuentas.push($('input:checked')[i].value);
-        }
 
         var Params = {
-            'cuentas':ids_cuentas
+            'cuentas':this.ids_cuentas
         };
 
         var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
