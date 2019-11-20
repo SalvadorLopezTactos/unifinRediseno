@@ -275,7 +275,7 @@
 
             self=this;
 
-            if (file.type.match(textType)) {
+            //if (file.type.match(textType)) {
                 var reader = new FileReader();
 
                 reader.onload = function(e) {
@@ -329,7 +329,7 @@
                     });
                 }
                 reader.readAsText(file);
-            }
+            //}
 
         }
     }
