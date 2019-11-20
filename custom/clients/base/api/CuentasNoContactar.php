@@ -125,8 +125,12 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
             $account = BeanFactory::retrieveBean('Accounts', $cuentas[$i]);
             if ($account != null) {
 
-                //Campo "No Contactar"
-                $account->tct_no_contactar_chk_c = 1;
+                if($account->fetched_row['tct_no_contactar_chk_c']==1){
+                    $account->tct_no_contactar_chk_c = 0;
+                }else{
+                    $account->tct_no_contactar_chk_c = 1;
+                }
+
                 //Leasing
                 $account->user_id_c = $id_user_assing;
                 //Crédito Automotriz
@@ -197,7 +201,6 @@ SQL;
                 } else {
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  La persona a reasignar no cuenta con IdCliente: " . print_r($idCliente, 1));
                 }
-
             }else{
 
                 array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);

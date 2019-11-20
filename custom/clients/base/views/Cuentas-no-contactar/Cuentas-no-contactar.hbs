@@ -86,7 +86,7 @@
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
-                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected" value="{{id}}" class="selected" /></span>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected" value="{{id}}" class="selected" {{#if tct_no_contactar_chk_c}}checked{{/if}}/></span>
                           </div>
                     </span>
                     </td>
@@ -103,7 +103,7 @@
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
-                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{name}}</span>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><a href="#Accounts/{{id}}" target="_blank">{{name}}</a></span>
                           </div>
                     </span>
                     </td>
