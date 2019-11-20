@@ -678,7 +678,6 @@
           var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
           account.fetch({
               success: _.bind(function (model) {
-
                   if(model.get('tct_no_contactar_chk_c')==true){
 
                       app.alert.show("cuentas_no_contactar", {
@@ -689,7 +688,7 @@
                       });
 
                       //Bloquear el registro completo y mostrar alerta
-                      $('.record.tab-layout').attr('style','pointer-events:none')
+                      $('.record.tab-layout').attr('style','pointer-events:none');
                   }
               }, this)
           });

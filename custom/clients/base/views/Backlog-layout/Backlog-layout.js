@@ -2250,6 +2250,20 @@
             $('.mes_cancelar').css('border-color', 'red');
             return;
         }
+        //Valida que el mes a mover no sea igual al actual, de ser asi arroja alerta.
+        if($('#motivoCancelarC').val()=='Mes posterior' && $('#mes_cancelar').val()!="") {
+            var mes= $('#mes_cancelar').val();
+            var f = new Date();
+            var mesok = f.getMonth() + 1;
+            if (mes == mesok) {
+                app.alert.show('mes_actual', {
+                    level: 'error',
+                    messages: 'No se puede cancelar el backlog al mes actual.',
+                    autoClose: false
+                });
+                return;
+            }
+        }
 
         if(self.progresoBL == 'SI'){
            if (self.rolAutorizacion == 'DGA'){
@@ -2686,7 +2700,20 @@
                     return;
         }
 
-
+        //Valida que el mes a mover no sea igual al actual, de ser asi arroja alerta.
+        if(MotivoCancelacion=='Mes posterior' && $('select#mes_cancelar')[1].value!="") {
+            var mes= $('select#mes_cancelar')[1].value;
+            var f = new Date();
+            var mesok = f.getMonth() + 1;
+            if (mes == mesok) {
+                app.alert.show('mes_actual', {
+                    level: 'error',
+                    messages: 'No se pueden cancelar los backlog del mes actual.',
+                    autoClose: false
+                });
+                return;
+            }
+        }
 
         //CVV - Se agrega el motivo de cancelación a los comentarios
         var currentYear = (new Date).getFullYear();
