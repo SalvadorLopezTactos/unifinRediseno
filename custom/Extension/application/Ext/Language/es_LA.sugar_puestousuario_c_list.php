@@ -1,5 +1,5 @@
 <?php
- // created: 2019-08-16 12:35:17
+ // created: 2019-11-20 18:14:24
 
 $app_list_strings['puestousuario_c_list']=array (
   '' => '',
@@ -49,5 +49,10 @@ $app_list_strings['puestousuario_c_list']=array (
   44 => 'ESTRATEGIA LEASING',
   45 => 'ASISTENTE DIRECCION',
   46 => 'PRODUCTOS ESPECIALES',
-  47 => 'ANALISIS ECONOMICO FINANCIERO',
+  47 => 'SUBDIRECTOR COMPRAS',
+  48 => 'DIRECTOR FINANCIAMIENTO ESTRUCTURADO',
+  49 => 'GERENTE FINANCIAMIENTO ESTRUCTURADO',
+  50 => 'ESPECIALISTA FINANCIAMIENTO ESTRUCTURADO',
+  51 => 'ANÁLISIS ECONÓMICO',
+  52 => 'CLOSER',
 );
