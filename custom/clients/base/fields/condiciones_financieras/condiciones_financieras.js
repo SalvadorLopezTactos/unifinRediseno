@@ -1,10 +1,11 @@
-
-/**
- * Created by Levementum on 3/8/2016.
- * User: jgarcia@levementum.com
- */
-
 ({
+    /**
+     * Modified by Adrian Arauz 21/11/2019
+     */
+    //Declaración de Listas de valores
+    activo_list: null,
+    plazo_list: null,
+
     events: {
         'click  .addCondicionFinanciera': 'addNewCondicionFinanciera',
         'click  .removeCondicionFinanciera': 'removeCondicionFinanciera',
@@ -21,103 +22,21 @@
 
     initialize: function (options) {
 
-        window.contador=0;
+        //window.contador=0;
         options = options || {};
         options.def = options.def || {};
+        cont_cf = this;
         this._super('initialize', [options]);
-        self = this;
-
-        var activo_list = app.lang.getAppListStrings('idactivo_list');
-        var activo_keys = app.lang.getAppListKeys('idactivo_list');
-        var activo_list_html = '<option value=""></option>';
-        for (activo_keys in activo_list) {
-            activo_list_html += '<option value="' + activo_keys + '">' + activo_list[activo_keys] + '</option>'
-
-        }
-        this.activo_list_html = activo_list_html;
-
-        var plazo_list = app.lang.getAppListStrings('plazo_0');
-        var plazo_keys = app.lang.getAppListKeys('plazo_0');
-        var plazo_list_html = '<option value=""></option>';
-        for (plazo_keys in plazo_list) {
-            plazo_list_html += '<option value="' + plazo_keys + '">' + plazo_list[plazo_keys] + '</option>'
-
-        }
-        this.plazo_list_html = plazo_list_html;
+        this.listascf();
 
 
-        var api_params = {
-            'max_num': 99,
-            //'order_by': 'date_entered:desc',
-            //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
-            'order_by': 'idactivo:ASC,plazo:ASC',
-            'filter': [
-                {
-                    'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
-                    'incremento_ratificacion': 0
-                }
-            ]
-        };
-        var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
-            null, null, api_params);
-
-        try
-        {
-            app.api.call('READ', pull_condicionFinanciera_url, {}, {
-                success: function (data) {
-                            
-                    var activo_list = app.lang.getAppListStrings('idactivo_list');
-                    var plazo_list = app.lang.getAppListStrings('plazo_0');
-                    for (var i = 0; i < data.records.length; i++) {
-                        //self.value[i] = data.records[i].idactivo;
-                        //add label for tpl use
-                        data.records[i].activo_label = activo_list[data.records[i].idactivo];
-                        data.records[i].plazo_label = plazo_list[data.records[i].plazo];
-                        if (data.records[i].deposito_en_garantia == true) {
-                            data.records[i].detail_deposito_en_garantia_checked = "checked";
-                        }
-                        if (data.records[i].activo_nuevo == true) {
-                            data.records[i].detail_activo_nuevo_checked = "checked";
-                        }
-                        if (data.records[i].uso_particular == true) {
-                            data.records[i].detail_uso_particular_checked = "checked";
-                        }
-                        if (data.records[i].uso_empresarial == true) {
-                            data.records[i].detail_uso_empresarial_checked = "checked";
-                        }
-                    }
-
-                    //set model so tpl detail tpl can read data
-                    self.model.set('condiciones_financieras', data.records);
-                    self.model._previousAttributes.condiciones_financieras = data.records;
-                    self.model._syncedAttributes.condiciones_financieras = data.records;
-                    
-                    _.extend(self, data);
-                    self.render();
-                }
-            });
-        }
-        catch(err)
-        {
-            console.log(err);
-        }
-
-        //Obtener las condiciones iniciales
-        var api_params_cond_iniciales = {
-            'max_num': 500,
-        };
-        var pull_condiciones_iniciales_url = app.api.buildURL('UNI_condiciones_iniciales',
-            null, null, api_params_cond_iniciales);
-
-        app.api.call('READ', pull_condiciones_iniciales_url, {}, {
-            success: function (data) {
-                self.condiciones_iniciales = {};
-                if (!_.isEmpty(data.records)) {
-                    self.condiciones_iniciales = data.records;
-                }
-            }
-        });
     },
+
+    listascf: function () {
+    this.activo_list = app.lang.getAppListStrings('idactivo_list');
+    this.plazo_list = app.lang.getAppListStrings('plazo_0');
+    },
+
 
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
@@ -134,21 +53,11 @@
     },
 
     _render: function () {
-      if (window.contador === 0)
-      {
-          var CondicionFinancieraHtml = '';
-          this._super("_render");
-          if (this.tplName === 'edit') {
-              //get realted records
-              _.each(this.model.get('condiciones_financieras'), function (condicion_financiera) {
-                  CondicionFinancieraHtml += this._buildCondicionFinancieraFieldHtml(condicion_financiera);
-              }, this);
-              this.$el.prepend(CondicionFinancieraHtml);
-          }
-      }
+        this._super("_render");
+
     },
 
-    _buildCondicionFinancieraFieldHtml: function (condicion_financiera) {
+    /*_buildCondicionFinancieraFieldHtml: function (condicion_financiera) {
         var editCondicionFinancieraFieldTemplate = app.template.getField('condiciones_financieras', 'edit-condiciones-financieras'),
             CondicionFinanciera = this.model.get('condiciones_financieras'),
             index = _.indexOf(CondicionFinanciera, condicion_financiera);
@@ -219,11 +128,12 @@
             uso_empresarial_checked: uso_empresarial_checked,
             activo_nuevo_checked: activo_nuevo_checked,
         });
-    },
+    },*/
 
-    addNewCondicionFinanciera: function (evt) {
-        window.contador=1;
-        if (!evt) return;
+    addNewCondicionFinanciera: function (options) {
+        if (this.oTelefonos == undefined) {
+            this.oTelefonos = contexto_cuenta.oTelefonos;
+        }
 
         var idplazo = this.$(evt.currentTarget).val() || this.$('.newPlazo').val(),
             currentValue,
@@ -285,7 +195,7 @@
         }
     },
 
-    _addNewCondicionFinancieraToModel: function (idactivo) {
+   /* _addNewCondicionFinancieraToModel: function (idactivo) {
         var existingCondicionFinanciera = app.utils.deepCopy(this.model.get('condiciones_financieras'));
         existingCondicionFinanciera.push({
             idactivo: idactivo,
@@ -457,7 +367,7 @@
         if (!evt) return;
         //Obten el campo que acaba de cambiar
         var $input = this.$(evt.currentTarget);
-        _.each(self.condiciones_iniciales, function (condicion_inicial) {
+        _.each(cont_cf.condiciones_iniciales, function (condicion_inicial) {
             if ($input.val() == condicion_inicial.activo) { //Detecta si el activo seleccionado coincide con la lista que se esta ciclando
                 if($('#' + condicion_inicial.campo_destino_minimo).attr('type') == 'checkbox'){ //Checa si es un checkbox, ya que estos se manejan diferente
                     if(!_.isEmpty(condicion_inicial.rango_minimo)){
@@ -477,7 +387,7 @@
         if (!evt) return;
         //Obten el campo que acaba de cambiar
         var $input = this.$(evt.currentTarget);
-        _.each(self.condiciones_iniciales, function (condicion_inicial) {
+        _.each(cont_cf.condiciones_iniciales, function (condicion_inicial) {
             if ($input.val() == condicion_inicial.plazo && $('.newActivo').val() == condicion_inicial.activo) { //Detecta si el activo seleccionado coincide con la lista que se esta ciclando
                 if($('#' + condicion_inicial.campo_destino_minimo).attr('type') == 'checkbox'){ //Checa si es un checkbox, ya que estos se manejan diferente
                     if(!_.isEmpty(condicion_inicial.rango_minimo)){
@@ -538,5 +448,5 @@
             $(evt.currentTarget).val(valor_minimo);
             $(evt.currentTarget).focus();
         }
-    }
+    }*/
 })

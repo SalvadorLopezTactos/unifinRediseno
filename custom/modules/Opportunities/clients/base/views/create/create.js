@@ -190,6 +190,7 @@
 
         this.getCurrentYearMonth("loading");
         this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
+
     },
 
     _render: function() {
@@ -1573,4 +1574,5 @@
         }
         callback(null, fields, errors);
     },
+
 })

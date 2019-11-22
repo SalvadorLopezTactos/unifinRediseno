@@ -4,23 +4,23 @@
 	initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
-    this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
-    this.events['keydown input[name=monto_c]'] = 'checkmoney';
-    this.events['keydown input[name=amount]'] = 'checkmoney';
-    this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
-    this.events['keydown input[name=ca_importe_enganche_c]'] = 'checkmoney';
-    this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
-    this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
-    this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
-    this.events['keydown input[name=f_aforo_c]'] = 'limitanumero';
-    this.events['keydown input[name=tasa_fija_moratorio_c]'] = 'limitanumero';
-    this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
-    this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
-    this.events['click a[name=cancel_button]'] = 'cancelClicked';
-    this.events['click a[name=monto_c]'] = 'formatcoin';
-    this.events['click a[name=amount]'] = 'formatcoin';
-    this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
-    this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
+        this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
+        this.events['keydown input[name=monto_c]'] = 'checkmoney';
+        this.events['keydown input[name=amount]'] = 'checkmoney';
+        this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
+        this.events['keydown input[name=ca_importe_enganche_c]'] = 'checkmoney';
+        this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
+        this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
+        this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
+        this.events['keydown input[name=f_aforo_c]'] = 'limitanumero';
+        this.events['keydown input[name=tasa_fija_moratorio_c]'] = 'limitanumero';
+        this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
+        this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
+        this.events['click a[name=cancel_button]'] = 'cancelClicked';
+        this.events['click a[name=monto_c]'] = 'formatcoin';
+        this.events['click a[name=amount]'] = 'formatcoin';
+        this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
+        this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
 		/*
 		 * @author Carlos Zaragoza Ortiz
 		 * @version 1
@@ -77,10 +77,14 @@
 
 		this.getCurrentYearMonth();
 
-    /*@Jesus Carrillo
-        Funcion que pinta de color los paneles relacionados
-    */
-    this.model.on('sync', this.fulminantcolor, this);
+        /*@Jesus Carrillo
+            Funcion que pinta de color los paneles relacionados
+        */
+        this.model.on('sync', this.fulminantcolor, this);
+
+        //Recupera datos para custom fields
+        this.getcf();
+
 	},
 
   fulminantcolor: function () {
@@ -1832,6 +1836,78 @@ console.log(name);
             });
         }
         callback(null, fields, errors);
+    },
+
+    getcf: function (){
+        var api_params = {
+            'max_num': 99,
+            //'order_by': 'date_entered:desc',
+            //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
+            'order_by': 'idactivo:ASC,plazo:ASC',
+            'filter': [
+                {
+                    'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
+                    'incremento_ratificacion': 0
+                }
+            ]
+        };
+        var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
+            null, null, api_params);
+
+        try
+        {
+            app.api.call('READ', pull_condicionFinanciera_url, {}, {
+                success: function (data) {
+
+                    var activo_list = app.lang.getAppListStrings('idactivo_list');
+                    var plazo_list = app.lang.getAppListStrings('plazo_0');
+                    for (var i = 0; i < data.records.length; i++) {
+                        //cont_cf.value[i] = data.records[i].idactivo;
+                        //add label for tpl use
+                        data.records[i].activo_label = activo_list[data.records[i].idactivo];
+                        data.records[i].plazo_label = plazo_list[data.records[i].plazo];
+                        if (data.records[i].deposito_en_garantia == true) {
+                            data.records[i].detail_deposito_en_garantia_checked = "checked";
+                        }
+                        if (data.records[i].activo_nuevo == true) {
+                            data.records[i].detail_activo_nuevo_checked = "checked";
+                        }
+                        if (data.records[i].uso_particular == true) {
+                            data.records[i].detail_uso_particular_checked = "checked";
+                        }
+                        if (data.records[i].uso_empresarial == true) {
+                            data.records[i].detail_uso_empresarial_checked = "checked";
+                        }
+                    }
+
+                    //set model so tpl detail tpl can read data
+                    cont_cf.model.set('condiciones_financieras', data.records);
+                    cont_cf.model._previousAttributes.condiciones_financieras = data.records;
+                    cont_cf.model._syncedAttributes.condiciones_financieras = data.records;
+
+                    _.extend(cont_cf, data);
+                    cont_cf.render();
+                }
+            });
+        }
+        catch(err) {
+            console.log(err);
+        }
+        //Obtener las condiciones iniciales
+        var api_params_cond_iniciales = {
+            'max_num': 500,
+        };
+        var pull_condiciones_iniciales_url = app.api.buildURL('UNI_condiciones_iniciales',
+            null, null, api_params_cond_iniciales);
+
+        app.api.call('READ', pull_condiciones_iniciales_url, {}, {
+            success: function (data) {
+                cont_cf.condiciones_iniciales = {};
+                if (!_.isEmpty(data.records)) {
+                    cont_cf.condiciones_iniciales = data.records;
+                }
+            }
+        });
     },
 
 })
