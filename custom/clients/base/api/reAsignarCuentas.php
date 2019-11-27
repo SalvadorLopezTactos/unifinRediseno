@@ -123,11 +123,26 @@ SQL;
                 }
 
 				//Actualiza Oportunidades
-				if($product == 'LEASING') $producto = 1;
-				if($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
-				if($product == 'FACTORAJE') $producto = 4;
-                if($product == 'FLEET') $producto = 6;
-                $query = <<<SQL
+				if($product == 'LEASING'){
+                    //Se agrega condición para actualizar también líneas para Crédito SOS
+                    $producto = 1;
+                    $query = <<<SQL
+UPDATE opportunities
+INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
+INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
+SET opportunities.assigned_user_id = '{$reAsignado}'
+WHERE accounts.id = '{$value}' AND cs.tipo_producto_c IN ('{$producto}','7')
+SQL;
+                    $queryResult = $db->query($query);
+
+                }else{
+
+                    if($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
+                    if($product == 'FACTORAJE') $producto = 4;
+                    if($product == 'FLEET') $producto = 6;
+
+                    $query = <<<SQL
 UPDATE opportunities
 INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
 INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
@@ -135,7 +150,10 @@ INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
 SET opportunities.assigned_user_id = '{$reAsignado}'
 WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$producto}'
 SQL;
-                $queryResult = $db->query($query);
+                    $queryResult = $db->query($query);
+
+                }
+
 
                 $queryUpdateTeams = "UPDATE opportunities
                   INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0

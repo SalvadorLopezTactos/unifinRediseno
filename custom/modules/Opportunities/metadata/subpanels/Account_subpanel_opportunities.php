@@ -1,5 +1,5 @@
 <?php
-// created: 2018-09-14 17:24:21
+// created: 2019-11-26 15:16:55
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -8,6 +8,13 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'width' => 10,
     'default' => true,
+  ),
+  'tipo_producto_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_TIPO_PRODUCTO',
+    'width' => 10,
   ),
   'tct_estapa_subetapa_txf_c' => 
   array (
