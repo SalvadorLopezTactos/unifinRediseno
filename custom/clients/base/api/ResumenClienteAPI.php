@@ -137,9 +137,17 @@ class ResumenClienteAPI extends SugarApi
             "nivel_satisfaccion" => "Sin Clasificar",
             "promotor" => "",
             "color" => "");
+        //Fleet
         $arr_principal['fleet'] = array("linea_aproximada" => "",
             "tipo_cuenta"=>"",
             "numero_vehiculos" => "",
+            "promotor" => "",
+            "color" => "");
+        //Crédito SOS
+        $arr_principal['credito_sos'] = array("linea_autorizada" => "",
+            "fecha_vencimiento"=>"",
+            "linea_disponible" => "",
+            "fecha_pago" => "",
             "promotor" => "",
             "color" => "");
         //Historial de contactos
@@ -180,6 +188,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
+            $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -203,11 +212,13 @@ class ResumenClienteAPI extends SugarApi
             $linea_aut_leasing = 0;
             $linea_aut_factoring = 0;
             $linea_aut_credito_aut = 0;
+            $linea_aut_sos = 0;
 
             //Línea disponible
             $linea_disp_leasing = 0;
             $linea_disp_factoring = 0;
             $linea_disp_credito_aut = 0;
+            $linea_disp_sos = 0;
 
             //Linea aproximada fleet
             $linea_aprox_fleet=0;
@@ -218,131 +229,163 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_factoring ='';//date("Y-m-d");
             //$vencimiento_cauto = date("Y-m-d");
             $vencimiento_cauto = "";
+            $vencimiento_sos = "";
+
+            $vencimiento_sos='';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
 
-              /**
-                *Filtro para operaciones
-                * Operación = LÍNEA DE CRÉDITO || tipo_operacion_c = 2
-                * Tipo de Solicitud = Línea Nueva || tipo_de_operacion_c = LINEA_NUEVA
-              */
-              if($opps->tipo_operacion_c == 2 && $opps->tipo_de_operacion_c == "LINEA_NUEVA" && $opps->tct_opp_estatus_c== 1){
-                  //Agrega Operaciones asociadas
-                $operaciones_ids .= ",'$opps->id'";
-                //Control para leasing
-                if ($opps->tipo_producto_c == 1) {
-                    $linea_aut_leasing += $opps->monto_c;
-                    $linea_disp_leasing += $opps->amount;
-                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
-                    /*********************************/
+                /**
+                 *Filtro para operaciones
+                 * Operación = LÍNEA DE CRÉDITO || tipo_operacion_c = 2
+                 * Tipo de Solicitud = Línea Nueva || tipo_de_operacion_c = LINEA_NUEVA
+                 */
+                if ($opps->tipo_operacion_c == 2 && $opps->tipo_de_operacion_c == "LINEA_NUEVA" && $opps->tct_opp_estatus_c == 1) {
 
-                    if(!empty($opps->vigencialinea_c)){
-                        //Establece fecha de vencimiento
-                        $dateVL = $opps->vigencialinea_c;
-                        $GLOBALS['log']->fatal('Validación $dateVL');
-                        $GLOBALS['log']->fatal($dateVL);
-                        $timedateVL = Date($dateVL);
+                    //Agrega Operaciones asociadas
+                    $operaciones_ids .= ",'$opps->id'";
+                    //Control para leasing
+                    if ($opps->tipo_producto_c == 1) {
+                        $linea_aut_leasing += $opps->monto_c;
+                        $linea_disp_leasing += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
 
-                        //Compara fechas
-                        if ($dateVL > $vencimiento_leasing || empty($vencimiento_leasing) ) {
-                          $vencimiento_leasing = $dateVL;
+                        if (!empty($opps->vigencialinea_c)) {
+                            //Establece fecha de vencimiento
+                            $dateVL = $opps->vigencialinea_c;
+                            $GLOBALS['log']->fatal('Validación $dateVL');
+                            $GLOBALS['log']->fatal($dateVL);
+                            $timedateVL = Date($dateVL);
+
+                            //Compara fechas
+                            if ($dateVL > $vencimiento_leasing || empty($vencimiento_leasing)) {
+                                $vencimiento_leasing = $dateVL;
+                            }
+
+                            //Agrega valores en arreglo de resultados
+                            $arr_principal['leasing']['linea_autorizada'] = $linea_aut_leasing;
+                            $arr_principal['leasing']['fecha_vencimiento'] = $vencimiento_leasing;
+                            $arr_principal['leasing']['linea_disponible'] = $linea_disp_leasing;
+                            $arr_principal['leasing']['potencial'] = "";
+                            $arr_principal['leasing']['fecha_pago'] = "";
+                            //$arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
+
+                            //Logs
+                            /*
+                            $GLOBALS['log']->fatal($dateVL);
+                            $GLOBALS['log']->fatal($vencimiento_leasing);
+                            */
+                        }
+                    }
+
+                    //Control para factoring
+                    if ($opps->tipo_producto_c == 4) {
+                        $linea_aut_factoring += $opps->monto_c;
+                        $linea_disp_factoring += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+
+                        if (!empty($opps->vigencialinea_c)) {
+                            //Establece fecha de vencimiento
+                            $dateVF = $opps->vigencialinea_c;
+                            //$timedateVL = Date($dateVL);
+
+                            //Compara fechas
+                            if ($dateVF > $vencimiento_factoring || empty($vencimiento_factoring)) {
+                                $vencimiento_factoring = $dateVF;
+                            }
+
+                            //Agrega valores en arreglo de resultados
+                            $arr_principal['factoring']['linea_autorizada'] = $linea_aut_factoring;
+                            $arr_principal['factoring']['fecha_vencimiento'] = $vencimiento_factoring;
+                            $arr_principal['factoring']['linea_disponible'] = $linea_disp_factoring;
+                            $arr_principal['factoring']['fecha_pago'] = "";
+                            //$arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
+
+                            //Logs
+                            /*
+                            $GLOBALS['log']->fatal($dateVF);
+                            $GLOBALS['log']->fatal($vencimiento_factoring);
+                            */
+                        }
+                    }
+
+                    //Control para crédito auto
+                    $fecha_val = date("Y-m-d");
+                    if ($opps->tipo_producto_c == 3 && $opps->vigencialinea_c >= $fecha_val) {
+                        $linea_aut_credito_aut += $opps->monto_c;
+                        $linea_disp_credito_aut += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+
+                        if (!empty($opps->vigencialinea_c)) {
+                            //Establece fecha de vencimiento
+                            $dateVC = $opps->vigencialinea_c;
+                            //$timedateVL = Date($dateVL);
+                            if ($vencimiento_cauto == "") {
+                                $vencimiento_cauto = $opps->vigencialinea_c;
+                            }
+
+                            //Compara fechas
+                            if ($dateVC < $vencimiento_cauto || empty($vencimiento_cauto)) {
+                                $vencimiento_cauto = $dateVC;
+                            }
+
+                            //Agrega valores en arreglo de resultados
+                            $arr_principal['credito_auto']['linea_autorizada'] = $linea_aut_credito_aut;
+                            $arr_principal['credito_auto']['fecha_vencimiento'] = $vencimiento_cauto;
+                            $arr_principal['credito_auto']['linea_disponible'] = $linea_disp_credito_aut;
+                            $arr_principal['credito_auto']['fecha_pago'] = "";
+                            //$arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
+
+                            //Logs
+                            /*
+                            $GLOBALS['log']->fatal($dateVF);
+                            $GLOBALS['log']->fatal($vencimiento_factoring);
+                            */
+                        }
+                    }
+
+                    // Control para crédito sos
+                    if ($opps->tipo_producto_c == 7) {
+                        $linea_aut_sos += $opps->monto_c;
+                        $linea_disp_sos += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+
+                        if (!empty($opps->vigencialinea_c)) {
+                            //Establece fecha de vencimiento
+                            $dateVL = $opps->vigencialinea_c;
+                            $timedateVL = Date($dateVL);
+
+                            //Compara fechas
+                            if ($dateVL > $vencimiento_sos || empty($vencimiento_sos)) {
+                                $vencimiento_sos = $dateVL;
+                            }
+
+                            //Agrega valores en arreglo de resultados
+                            $arr_principal['credito_sos']['linea_autorizada'] = $linea_aut_sos;
+                            $arr_principal['credito_sos']['fecha_vencimiento'] = $vencimiento_sos;
+                            $arr_principal['credito_sos']['linea_disponible'] = $linea_disp_sos;
+                            $arr_principal['credito_sos']['fecha_pago'] = "";
+
                         }
 
-                        //Agrega valores en arreglo de resultados
-                        $arr_principal['leasing']['linea_autorizada']=$linea_aut_leasing;
-                        $arr_principal['leasing']['fecha_vencimiento']=$vencimiento_leasing;
-                        $arr_principal['leasing']['linea_disponible']=$linea_disp_leasing;
-                        $arr_principal['leasing']['potencial']="";
-                        $arr_principal['leasing']['fecha_pago']="";
-                        //$arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
-
-                        //Logs
-                        /*
-                        $GLOBALS['log']->fatal($dateVL);
-                        $GLOBALS['log']->fatal($vencimiento_leasing);
-                        */
                     }
+
+                }
+                // Control para fleet
+                if ($opps->tipo_producto_c == 6 && $opps->estatus_c != 'K') {
+                    $linea_aprox_fleet += $opps->monto_c;
+                    $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
+
+                    $arr_principal['fleet']['linea_aproximada'] = $linea_aprox_fleet;
+                    $arr_principal['fleet']['numero_vehiculos'] = $numero_vehiculos_fleet;
+
                 }
 
-                //Control para factoring
-                if ($opps->tipo_producto_c == 4) {
-                    $linea_aut_factoring += $opps->monto_c;
-                    $linea_disp_factoring += $opps->amount;
-                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
-                    /*********************************/
-
-                    if(!empty($opps->vigencialinea_c)){
-                        //Establece fecha de vencimiento
-                        $dateVF = $opps->vigencialinea_c;
-                        //$timedateVL = Date($dateVL);
-
-                        //Compara fechas
-                        if ($dateVF > $vencimiento_factoring || empty($vencimiento_factoring) ) {
-                          $vencimiento_factoring = $dateVF;
-                        }
-
-                        //Agrega valores en arreglo de resultados
-                        $arr_principal['factoring']['linea_autorizada']=$linea_aut_factoring;
-                        $arr_principal['factoring']['fecha_vencimiento']=$vencimiento_factoring;
-                        $arr_principal['factoring']['linea_disponible']=$linea_disp_factoring;
-                        $arr_principal['factoring']['fecha_pago']="";
-                        //$arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
-
-                        //Logs
-                        /*
-                        $GLOBALS['log']->fatal($dateVF);
-                        $GLOBALS['log']->fatal($vencimiento_factoring);
-                        */
-                    }
-                }
-
-                //Control para crédito auto
-                    $fecha_val=date("Y-m-d");
-                if ($opps->tipo_producto_c == 3 && $opps->vigencialinea_c>= $fecha_val ) {
-                    $linea_aut_credito_aut += $opps->monto_c;
-                    $linea_disp_credito_aut += $opps->amount;
-                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
-                    /*********************************/
-
-                    if(!empty($opps->vigencialinea_c)){
-                        //Establece fecha de vencimiento
-                        $dateVC = $opps->vigencialinea_c;
-                        //$timedateVL = Date($dateVL);
-                        if($vencimiento_cauto==""){
-                            $vencimiento_cauto= $opps->vigencialinea_c;
-                        }
-
-                        //Compara fechas
-                        if ($dateVC < $vencimiento_cauto || empty($vencimiento_cauto) ) {
-                          $vencimiento_cauto = $dateVC;
-                        }
-
-                        //Agrega valores en arreglo de resultados
-                        $arr_principal['credito_auto']['linea_autorizada']=$linea_aut_credito_aut;
-                        $arr_principal['credito_auto']['fecha_vencimiento']=$vencimiento_cauto;
-                        $arr_principal['credito_auto']['linea_disponible']=$linea_disp_credito_aut;
-                        $arr_principal['credito_auto']['fecha_pago']="";
-                        //$arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
-
-                        //Logs
-                        /*
-                        $GLOBALS['log']->fatal($dateVF);
-                        $GLOBALS['log']->fatal($vencimiento_factoring);
-                        */
-                    }
-                }
-
-              }
-              // Control para fleet
-              if ($opps->tipo_producto_c == 6 && $opps->estatus_c !='K') {
-                  $linea_aprox_fleet +=$opps->monto_c;
-                  $numero_vehiculos_fleet += $opps->tct_numero_vehiculos_c;
-
-                  $arr_principal['fleet']['linea_aproximada']=$linea_aprox_fleet;
-                  $arr_principal['fleet']['numero_vehiculos']=$numero_vehiculos_fleet;
-
-              }
             }
         }
 
@@ -604,6 +647,9 @@ class ResumenClienteAPI extends SugarApi
 
                 //Recupera Fleet
                 $arr_principal['fleet']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_fl_c;
+
+                //Recupera Crédito SOS
+                $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
             }
         }
 
