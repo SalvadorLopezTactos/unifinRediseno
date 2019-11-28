@@ -182,7 +182,7 @@
         global $db, $current_user;
 
         //$GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || $bean->tipo_producto_c =='3' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO'){//@jesus
+        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || $bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO'){//@jesus
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
@@ -239,6 +239,11 @@ SQL;
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
+                //Preguntar sobre el tipo de producto Leasing para la creacion de SOS
+                if ($bean->tipo_producto_c==1 /*&& !empty($bean->id_process_c)*/){
+                //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
+                    OpportunityLogic::solicitudSOS($bean);
+                }
                 if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c != 4) {
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
                     $callApi->actualizaSolicitudCredito($bean);
@@ -1139,5 +1144,31 @@ SQL;
                 //GUARDA REGISTRO DE RESUMEN -
                 $bean_Resumen->save();
             }
+        }
+
+        public function solicitudSOS ($oportunidadL){
+            //Genera nuevo registro a nivel db
+            $GLOBALS['log']->fatal("Crea Solicitud de SOS");
+            $oportunidadSOS = BeanFactory::newBean('Opportunities');
+            $oportunidadSOS->account_id= $oportunidadL->account_id;
+            $oportunidadSOS->tct_etapa_ddw_c="P";
+            $oportunidadSOS->estatus_c="PE";
+            $oportunidadSOS->tipo_producto_c=7;
+            $oportunidadSOS->monto_c=0;
+            $oportunidadSOS->amount=0;
+            $oportunidadSOS->assigned_user_id=$oportunidadL->assigned_user_id;
+            $oportunidadSOS->tipo_operacion_c="1";
+            $oportunidadSOS->tipo_de_opracion_c="LINEA_NUEVA";
+            $oportunidadSOS->ca_pago_mensual_c=0;
+            $oportunidadSOS->opportunities_opportunities_2opportunities_ida=$oportunidadL->id;
+            //Guarda el registro.
+            $oportunidadSOS->save();
+            $GLOBALS['log']->fatal($oportunidadSOS->id);
+            //$GLOBALS['log']->fatal("Sale de la creación solicitud de SOS");
+
+
+
+
+
         }
     }
