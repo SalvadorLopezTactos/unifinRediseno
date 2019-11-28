@@ -417,7 +417,7 @@
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
         if(this.model.get('tipo_producto_c')=='6' || this.model.get('tipo_producto_c')=='7' ){
 
-          this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+          //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
           //Se oculta Monto a Operar
           this.$('[data-name="amount"]').hide();
           //Pago mensual

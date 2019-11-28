@@ -1146,29 +1146,40 @@ SQL;
             }
         }
 
-        public function solicitudSOS ($oportunidadL){
-            //Genera nuevo registro a nivel db
-            $GLOBALS['log']->fatal("Crea Solicitud de SOS");
-            $oportunidadSOS = BeanFactory::newBean('Opportunities');
-            $oportunidadSOS->account_id= $oportunidadL->account_id;
-            $oportunidadSOS->tct_etapa_ddw_c="P";
-            $oportunidadSOS->estatus_c="PE";
-            $oportunidadSOS->tipo_producto_c=7;
-            $oportunidadSOS->monto_c=0;
-            $oportunidadSOS->amount=0;
-            $oportunidadSOS->assigned_user_id=$oportunidadL->assigned_user_id;
-            $oportunidadSOS->tipo_operacion_c="1";
-            $oportunidadSOS->tipo_de_opracion_c="LINEA_NUEVA";
-            $oportunidadSOS->ca_pago_mensual_c=0;
-            $oportunidadSOS->opportunities_opportunities_2opportunities_ida=$oportunidadL->id;
-            //Guarda el registro.
-            $oportunidadSOS->save();
-            $GLOBALS['log']->fatal($oportunidadSOS->id);
-            //$GLOBALS['log']->fatal("Sale de la creación solicitud de SOS");
+        public function solicitudSOS ($oportunidadL)
+        {
+            global $db;
+            //Pregunta si existe una solicitud de SOS antes de iniciar el proceso.
+            $query = "select count(*) from accounts_opportunities
+                    inner join opportunities_cstm on accounts_opportunities.opportunity_id= opportunities_cstm.id_c
+                    WHERE accounts_opportunities.account_id='{$oportunidadL->id}'
+                    and opportunities_cstm.tipo_producto_c=7
+                    and opportunities_cstm.estatus_c!='K'";
 
+            $queryResult = $db->getOne($query);
+            $GLOBALS['log']->fatal($queryResult);
 
+            if ($queryResult == 0) {
 
+                //Genera nuevo registro a nivel db
+                $GLOBALS['log']->fatal("Crea Solicitud de SOS");
+                $oportunidadSOS = BeanFactory::newBean('Opportunities');
+                $oportunidadSOS->account_id = $oportunidadL->account_id;
+                $oportunidadSOS->tct_etapa_ddw_c = "P";
+                $oportunidadSOS->estatus_c = "PE";
+                $oportunidadSOS->tipo_producto_c = 7;
+                $oportunidadSOS->monto_c = 0;
+                $oportunidadSOS->amount = 0;
+                $oportunidadSOS->assigned_user_id = $oportunidadL->assigned_user_id;
+                $oportunidadSOS->tipo_operacion_c = "1";
+                $oportunidadSOS->tipo_de_opracion_c = "LINEA_NUEVA";
+                $oportunidadSOS->ca_pago_mensual_c = 0;
+                $oportunidadSOS->opportunities_opportunities_2opportunities_ida = $oportunidadL->id;
+                //Guarda el registro.
+                $oportunidadSOS->save();
+                $GLOBALS['log']->fatal($oportunidadSOS->id);
+                //$GLOBALS['log']->fatal("Sale de la creación solicitud de SOS");
 
-
+            }
         }
     }
