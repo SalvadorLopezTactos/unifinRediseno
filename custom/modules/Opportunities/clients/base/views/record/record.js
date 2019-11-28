@@ -415,7 +415,7 @@
         }
 
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
-        if(this.model.get('tipo_producto_c')=='6'){
+        if(this.model.get('tipo_producto_c')=='6' || this.model.get('tipo_producto_c')=='7' ){
 
           this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
           //Se oculta Monto a Operar
@@ -424,6 +424,13 @@
           this.$('[data-name="ca_pago_mensual_c"]').hide();
           //% Renta inicial
           this.$('[data-name="porciento_ri_c"]').hide();
+
+        }
+        //Valida la solicitud que sea de tipo SOS y oculta campos
+        if (this.model.get('tipo_producto_c')=='7'){
+            this.$('div[data-name=condiciones_financieras]').hide();
+            this.$('div[data-name=f_comentarios_generales_c]').hide();
+
 
         }
 
@@ -805,17 +812,17 @@
 
 	_ValidateAmount: function (fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (parseFloat(this.model.get('monto_c')) <= 0) {
+            if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c')!="7") {
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
             }
 
-            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1') {
+            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c')!="7") {
                 errors['amount'] = errors['amount'] || {};
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c')!="6") {
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c')!="6" && this.model.get('tipo_producto_c')!="7") {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
             }
@@ -1062,7 +1069,7 @@ console.log(name);
 
 	condicionesFinancierasCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7) {
                 if (_.isEmpty(this.model.get('condiciones_financieras'))) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
@@ -1081,7 +1088,7 @@ console.log(name);
 
 	condicionesFinancierasIncrementoCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
+            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
                 if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
