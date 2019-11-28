@@ -1152,7 +1152,7 @@ SQL;
             //Pregunta si existe una solicitud de SOS antes de iniciar el proceso.
             $query = "select count(*) from accounts_opportunities
                     inner join opportunities_cstm on accounts_opportunities.opportunity_id= opportunities_cstm.id_c
-                    WHERE accounts_opportunities.account_id='365d73de-9dd7-11e9-aaac-a0481cdf89eb'
+                    WHERE accounts_opportunities.account_id='{$oportunidadL->id}'
                     and opportunities_cstm.tipo_producto_c=7
                     and opportunities_cstm.estatus_c!='K'";
 
