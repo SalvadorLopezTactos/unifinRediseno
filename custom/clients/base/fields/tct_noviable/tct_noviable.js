@@ -383,7 +383,7 @@
             },
 
             SaveLeadsnoViable: function (fields, errors, callback) {
-                if (this.model.get('tipo_registro_c')=="Lead" && this.model.get('id')!= "" && this.model.get('id')!= undefined){
+                if ((Oproductos.productos.tct_tipo_l_txf_c == 'Lead' || Oproductos.productos.tct_tipo_f_txf_c == 'Lead' || Oproductos.productos.tct_tipo_ca_txf_c == 'Lead') && this.model.get('id')!= "" && this.model.get('id')!= undefined){
                     //Mapea los campos del modulo No viable con producto LEASING en el objeto lnv.leadNoViable
                     if($('.campo1chk')[0].checked== true && typeof $('.campo4nvl').select2('val')=="string"){
                         lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
