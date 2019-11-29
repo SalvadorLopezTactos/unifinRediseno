@@ -383,47 +383,49 @@
             },
 
             SaveLeadsnoViable: function (fields, errors, callback) {
-                if ((Oproductos.productos.tct_tipo_l_txf_c == 'Lead' || Oproductos.productos.tct_tipo_f_txf_c == 'Lead' || Oproductos.productos.tct_tipo_ca_txf_c == 'Lead') && this.model.get('id')!= "" && this.model.get('id')!= undefined){
-                    //Mapea los campos del modulo No viable con producto LEASING en el objeto lnv.leadNoViable
-                    if($('.campo1chk')[0].checked== true && typeof $('.campo4nvl').select2('val')=="string"){
-                        lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
-                        lnv.leadNoViable.razonleasing = $('.campo4nvl').select2('val');
-                        lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
-                        lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
-                        lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
-                        lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
-                        lnv.leadNoViable.razoncfl = $('.campo19nvl').select2('val');
-                        lnv.leadNoViable.queprodl= $('.campo22nvl').val().trim();
-                        lnv.leadNoViable.razonnil = $('.campo25nvl').select2('val');
-                    }
-                    //Mapea los campos del modulo No viable con producto FACTORAJE en el objeto lnv.leadNoViable
-                    if ( $('.campo2chk')[0].checked== true && typeof $('.campo5nvf').select2('val')=="string"){
-                        lnv.leadNoViable.campo2chk = $('.campo2chk')[0].checked;
-                        lnv.leadNoViable.razonfactoraje = $('.campo5nvf').select2('val');
-                        lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
-                        lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
-                        lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
-                        lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
-                        lnv.leadNoViable.razoncff = $('.campo20nvf').select2('val');
-                        lnv.leadNoViable.queprodf = $('.campo23nvf').val().trim();
-                        lnv.leadNoViable.razonnif= $('.campo26nvf').select2('val');
-                    }
-                    //Mapea los campos del modulo No viable con producto CREDITO AUTOMOTRIZ en el objeto lnv.leadNoViable
-                    if($('.campo3chk')[0].checked== true && typeof $('.campo6nvca').select2('val')=="string"){
-                        lnv.leadNoViable.campo3chk = $('.campo3chk')[0].checked;
-                        lnv.leadNoViable.razonca = $('.campo6nvca').select2('val');
-                        lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
-                        lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
-                        lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
-                        lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
-                        lnv.leadNoViable.razoncfca = $('.campo21nvca').select2('val');
-                        lnv.leadNoViable.queprodca= $('.campo24nvca').val().trim();
-                        lnv.leadNoViable.razonnica= $('.campo27nvca').select2('val');
-                    }
-                    //Establece el objeto lnv.leadNoViable para guardar
-                    if ($('.campo1chk')[0].checked== true || $('.campo2chk')[0].checked== true || $('.campo3chk')[0].checked== true) {
-                        this.model.set('tct_noviable',  lnv.leadNoViable);
-                    }
+                if (Oproductos.productos != undefined) {
+                  if ((Oproductos.productos.tct_tipo_l_txf_c == 'Lead' || Oproductos.productos.tct_tipo_f_txf_c == 'Lead' || Oproductos.productos.tct_tipo_ca_txf_c == 'Lead') && this.model.get('id')!= "" && this.model.get('id')!= undefined){
+                      //Mapea los campos del modulo No viable con producto LEASING en el objeto lnv.leadNoViable
+                      if($('.campo1chk')[0].checked== true && typeof $('.campo4nvl').select2('val')=="string"){
+                          lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
+                          lnv.leadNoViable.razonleasing = $('.campo4nvl').select2('val');
+                          lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
+                          lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
+                          lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
+                          lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
+                          lnv.leadNoViable.razoncfl = $('.campo19nvl').select2('val');
+                          lnv.leadNoViable.queprodl= $('.campo22nvl').val().trim();
+                          lnv.leadNoViable.razonnil = $('.campo25nvl').select2('val');
+                      }
+                      //Mapea los campos del modulo No viable con producto FACTORAJE en el objeto lnv.leadNoViable
+                      if ( $('.campo2chk')[0].checked== true && typeof $('.campo5nvf').select2('val')=="string"){
+                          lnv.leadNoViable.campo2chk = $('.campo2chk')[0].checked;
+                          lnv.leadNoViable.razonfactoraje = $('.campo5nvf').select2('val');
+                          lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
+                          lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
+                          lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
+                          lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
+                          lnv.leadNoViable.razoncff = $('.campo20nvf').select2('val');
+                          lnv.leadNoViable.queprodf = $('.campo23nvf').val().trim();
+                          lnv.leadNoViable.razonnif= $('.campo26nvf').select2('val');
+                      }
+                      //Mapea los campos del modulo No viable con producto CREDITO AUTOMOTRIZ en el objeto lnv.leadNoViable
+                      if($('.campo3chk')[0].checked== true && typeof $('.campo6nvca').select2('val')=="string"){
+                          lnv.leadNoViable.campo3chk = $('.campo3chk')[0].checked;
+                          lnv.leadNoViable.razonca = $('.campo6nvca').select2('val');
+                          lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
+                          lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
+                          lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
+                          lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
+                          lnv.leadNoViable.razoncfca = $('.campo21nvca').select2('val');
+                          lnv.leadNoViable.queprodca= $('.campo24nvca').val().trim();
+                          lnv.leadNoViable.razonnica= $('.campo27nvca').select2('val');
+                      }
+                      //Establece el objeto lnv.leadNoViable para guardar
+                      if ($('.campo1chk')[0].checked== true || $('.campo2chk')[0].checked== true || $('.campo3chk')[0].checked== true) {
+                          this.model.set('tct_noviable',  lnv.leadNoViable);
+                      }
+                  }
                 }
                 callback(null, fields, errors);
             },
