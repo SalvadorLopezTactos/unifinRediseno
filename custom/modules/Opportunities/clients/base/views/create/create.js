@@ -1135,6 +1135,9 @@
                            case "6":
                                tipo=data.tct_tipo_fl_txf_c;
                                break;
+                           case "7":
+                               tipo=data.tct_tipo_l_txf_c;
+                               break;
                        }
                        if(tipo != "Prospecto" && tipo!= "Cliente"){
                                app.alert.show("Cliente no v\u00E1lido", {
