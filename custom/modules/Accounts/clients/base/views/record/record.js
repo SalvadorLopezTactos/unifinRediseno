@@ -3914,10 +3914,11 @@
             },
             //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
             muestracheks: function (){
-              //if (this.model.get('tipo_registro_c') != "Lead"){
+              if (Oproductos.productos != "undefined") {
                 if(Oproductos.productos.tct_tipo_ca_txf_c!='Lead' && Oproductos.productos.tct_tipo_f_txf_c!='Lead' && Oproductos.productos.tct_tipo_l_txf_c!='Lead'){
                   $('[data-name=tct_noviable]').hide();
                 }
+              }
             },
 
             ocultaRFC: function () {
