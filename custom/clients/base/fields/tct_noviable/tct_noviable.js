@@ -371,13 +371,13 @@
             //Funcion para habilitar la funcionalidad de los checks de cada producto dependiendo del producto que tenga el usuario logueado.
             nvproductos: function (){
                 var productos = App.user.attributes.productos_c;
-                if (productos.includes("1")) {
+                if (productos.includes("1") && lnv.action=="edit") {
                     $('[data-field="campo1chk"]').attr('style', 'pointer-events:block;');
                 }
-                if (productos.includes("4")) {
+                if (productos.includes("4") && lnv.action=="edit") {
                     $('[data-field="campo2chk"]').attr('style', 'pointer-events:block;');
                 }
-                if (productos.includes("3")) {
+                if (productos.includes("3") && lnv.action=="edit") {
                     $('[data-field="campo3chk"]').attr('style', 'pointer-events:block;');
                 }
             },
