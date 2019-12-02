@@ -431,7 +431,27 @@
             },
             //Validación para dejar sin editar los campos de producto después de haberlos editado por primera y única vez.
            noeditables: function (){
-              if ($('.campo1chk')[0].checked){
+              // Declara variables para permitir edición
+              var editaL = true;
+              var editaF = true;
+              var editaCA = true;
+              // Valida tipo de cuenta por producto
+              if (Oproductos.productos != undefined) {
+                  //Valida Leasing
+                  if (Oproductos.productos.tct_tipo_l_txf_c != 'Lead') {
+                      editaL = false;
+                  }
+                  //Valida Factoraje
+                  if (Oproductos.productos.tct_tipo_f_txf_c != 'Lead') {
+                      editaF = false;
+                  }
+                  //Valida CA
+                  if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead') {
+                      editaCA = false;
+                  }
+              }
+              // Evalua condiciones para bloquear edición
+              if ($('.campo1chk')[0].checked || !editaL){
                   //Campos sin editar Leasing
                   $('.campo1chk').prop("disabled", true);
                   $('.campo4nvl').prop("disabled", true);
@@ -443,7 +463,7 @@
                   $('.campo22nvl').prop("disabled",true);
                   $('.campo25nvl').prop("disabled", true);
               }
-               if($('.campo2chk')[0].checked){
+               if($('.campo2chk')[0].checked || !editaF){
                    //Campos sin editar Factoraje
                    $('.campo2chk').prop("disabled", true);
                    $('.campo5nvf').prop("disabled", true);
@@ -455,7 +475,7 @@
                    $('.campo23nvf').prop("disabled", true);
                    $('.campo26nvf').prop("disabled", true);
                }
-               if ($('.campo3chk')[0].checked){
+               if ($('.campo3chk')[0].checked || !editaCA){
                    //Campos sin editar Credito Automotriz
                    $('.campo3chk').prop("disabled", true);
                    $('.campo6nvca').prop("disabled", true);
