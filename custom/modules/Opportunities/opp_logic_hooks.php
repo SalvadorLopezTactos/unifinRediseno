@@ -239,8 +239,10 @@ SQL;
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
-                //Preguntar sobre el tipo de producto Leasing para la creacion de SOS
-                if ($bean->tipo_producto_c==1 /*&& !empty($bean->id_process_c)*/){
+                /*Preguntar sobre el tipo de producto Leasing para la creacion de SOS
+                  Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
+                */
+              if ($bean->tipo_producto_c==1 && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)){
                 //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
                     OpportunityLogic::solicitudSOS($bean);
                 }
@@ -1182,4 +1184,52 @@ SQL;
 
             }
         }
+
+        public function cancelaSOS($bean, $event, $arguments)
+        {
+            //Función que cancela línea SOS a partir de una línea de Leasing
+            //Valida que Solicitud Leasing se cancela
+            if ($bean->tipo_producto_c==1 && !empty($bean->opportunities_opportunities_2opportunities_ida) && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+                //Recupera solicitud SOS asociada
+                $GLOBALS['log']->fatal("cancelaSOS : Inicia proceso para cancelar SOS asociada a Leasing");
+                $beanSOS = BeanFactory::retrieveBean("Opportunities", $bean->opportunities_opportunities_2opportunities_ida);
+
+                //Actualiza Oportunidad Perdida con datos de Solicitud Leasing
+                $beanSOS->tct_oportunidad_perdida_chk_c = $bean->tct_oportunidad_perdida_chk_c;
+                $beanSOS->tct_razon_op_perdida_ddw_c = $bean->tct_razon_op_perdida_ddw_c;
+                $beanSOS->tct_competencia_quien_txf_c = $bean->tct_competencia_quien_txf_c;
+                $beanSOS->tct_competencia_porque_txf_c = $bean->tct_competencia_porque_txf_c;
+                $beanSOS->tct_sin_prod_financiero_ddw_c = $bean->tct_sin_prod_financiero_ddw_c;
+
+                //Actualiza subetapa a cancelada
+                $beanSOS->estatus_c='K';
+
+                //Guarda cambios en SOS
+                $beanSOS->save();
+            }
+
+            //Valida existencia de Id Process en Solicitud SOS para cancelar en BPM
+            if ($bean->tipo_producto_c==7 && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+                //Valida id Proceso
+                if (!empty($bean->id_process_c)) {
+                    //Ejecuta proceso para cancelar en BPM
+                    $GLOBALS['log']->fatal("cancelaSOS : Inicia proceso para cancelar SOS en BPM");
+                    //Instancia cancelaOperacionBPM
+                    require_once 'custom/modules/Opportunities/clients/base/api/cancelaOperacionBPM.php';
+                    $cancelaSOS = new cancelaOperacionBPM();
+
+                    //Define argumentos para cancelar
+                    global $current_user;
+                    $args = [];
+                    $args['data'] = [];
+                    $args['data']['idSolicitud'] = $bean->idsolicitud_c;
+                    $args['data']['usuarioAutenticado'] = $current_user->user_name;
+
+                    //Solicita cancelación
+                    $cancelaOPP = $cancelaSOS->cancelaOperacion(null, $args);
+
+                }
+            }
+        }
+
     }
