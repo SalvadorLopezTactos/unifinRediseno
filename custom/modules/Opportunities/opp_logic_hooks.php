@@ -242,7 +242,7 @@ SQL;
                 /*Preguntar sobre el tipo de producto Leasing para la creacion de SOS
                   Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
                 */
-              if ($bean->tipo_producto_c==1 && $bean->monto_c >= 7500000 /*&& !empty($bean->id_process_c)*/){
+              if ($bean->tipo_producto_c==1 && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)){
                 //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
                     OpportunityLogic::solicitudSOS($bean);
                 }
