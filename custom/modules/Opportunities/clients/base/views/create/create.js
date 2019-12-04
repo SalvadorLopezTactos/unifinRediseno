@@ -21,13 +21,20 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
-
+        /*
+        Contexto campos custom
+        */
+        //Condificiones financieras
+        this.oFinanciera = [];
+        this.oFinanciera.condicion = [];
+        this.prev_oFinanciera=[];
+        this.prev_oFinanciera.prev_condicion=[];
         /*
           Author: Adrian Arauz 2018-08-28
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-		    this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
+        this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));

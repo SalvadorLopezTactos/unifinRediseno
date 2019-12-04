@@ -131,68 +131,71 @@
     },*/
 
     addNewCondicionFinanciera: function (options) {
-        if (this.oTelefonos == undefined) {
-            this.oTelefonos = contexto_cuenta.oTelefonos;
+        if (this.oFinanciera == undefined) {
+            this.oFinanciera = self.oFinanciera;
         }
+        if (this.$('.newActivo').select2('val') !="" && this.$('.newActivo').select2('val')!=null) {
+            //Valida Requerido
+            if (this.$('.newPlazo').select2('val') === '') {
+                this.$('.newPlazo').find('.select2-choice').css('border-color', 'red');
+                app.alert.show("Plazo requerido", {
+                    level: "error",
+                    title: "El campo Plazo es requerido.",
+                    autoClose: false
+                });
+            }else {
 
-        var idplazo = this.$(evt.currentTarget).val() || this.$('.newPlazo').val(),
-            currentValue,
-            CondicionFinancieraFieldHtml,
-            $CondicionFinanciera;
-        if (idplazo === '')
-        {
-              $('.newPlazo').css('border-color', 'red');
-              app.alert.show("Plazo requerido", {
-                  level: "error",
-                  title: "El campo Plazo es requerido.",
-                  autoClose: false
-              });
-        }       
-        var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
-            currentValue,
-            CondicionFinancieraFieldHtml,
-            $CondicionFinanciera;
-        if ((idactivo !== '') && (this._addNewCondicionFinancieraToModel(idactivo))) {
-            currentValue = this.model.get(this.name);
-            CondicionFinancieraFieldHtml = this._buildCondicionFinancieraFieldHtml({
-                idactivo: idactivo,
-                plazo: $('.newPlazo').val(),
-                tasa_minima: $('.newTasaMinima').val(),
-                tasa_maxima: $('.newTasaMaxima').val(),
-                vrc_minimo: $('.newVRCMinimo').val(),
-                vrc_maximo: $('.newVRCMaximo').val(),
-                vri_minimo: $('.newVRIMinimo').val(),
-                vri_maximo: $('.newVRIMaximo').val(),
-                comision_minima: $('.newComisionMinima').val(),
-                comision_maxima: $('.newComisionMaxima').val(),
-                renta_inicial_minima: $('.newRentaInicialMinima').val(),
-                renta_inicial_maxima: $('.newRentaInicialMaxima').val(),
-                deposito_en_garantia: $('.newDeposito').prop("checked"),
-                uso_particular: $('.newUsoParticular').prop("checked"),
-                uso_empresarial: $('.newUsoEmpresarial').prop("checked"),
-                activo_nuevo: $('.newActivoNuevo').prop("checked"),
+                //Obtiene Valores de los campos
+                var idActivo = this.$('.newActivo').select2('val');
+                var idplazo = this.$('.newPlazo').select2('val');
+                var tasa_minima = $('.newTasaMinima').val();
+                var tasa_maxima = $('.newTasaMaxima').val();
+                var vrc_minimo = $('.newVRCMinimo').val();
+                var vrc_maximo = $('.newVRCMaximo').val();
+                var vri_minimo = $('.newVRIMinimo').val();
+                var vri_maximo = $('.newVRIMaximo').val();
+                var comision_minima = $('.newComisionMinima').val();
+                var comision_maxima = $('.newComisionMaxima').val();
+                var renta_inicial_minima = $('.newRentaInicialMinima').val();
+                var renta_inicial_maxima = $('.newRentaInicialMaxima').val();
+                var deposito_en_garantia = $('.newDeposito').prop("checked");
+                var uso_particular = $('.newUsoParticular').prop("checked");
+                var uso_empresarial = $('.newUsoEmpresarial').prop("checked");
+                var activo_nuevo = $('.newActivoNuevo').prop("checked");
+
+                //Crea objeto condiciones financieras
+                var condfin = {
+                    "idactivo": idActivo,
+                    "plazo": idplazo,
+                    "tasa_minima": tasa_minima,
+                    "tasa_maxima": tasa_maxima,
+                    "vrc_minimo": vrc_minimo,
+                    "vrc_maximo": vrc_maximo,
+                    "vri_minimo": vri_minimo,
+                    "vri_maximo": vri_maximo,
+                    "comision_minima": comision_minima,
+                    "comision_maxima": comision_maxima,
+                    "renta_inicial_minima": renta_inicial_minima,
+                    "renta_inicial_maxima": renta_inicial_maxima,
+                    "deposito_en_garantia": deposito_en_garantia,
+                    "uso_particular": uso_particular,
+                    "uso_empresarial": uso_empresarial,
+                    "activo_nuevo": activo_nuevo
+                };
+
+                //Setea valores al objeto
+                this.oFinanciera.condicion.push(condfin);
+                this.render();
+            }
+        }else{
+            $('.newActivo').find('.select2-choice').css('border-color', 'red');
+            app.alert.show("Activo requerido", {
+                level: "error",
+                title: "El campo Activo es requerido.",
+                autoClose: false
             });
-
-            // append the new field before the new direccion input
-            $CondicionFinanciera = this._getNewCondicionFinancieraField()
-                .closest('.condiciones_financieras')
-                .before(CondicionFinancieraFieldHtml);
-
-            // add tooltips
-            //this.addPluginTooltips($CondicionFinanciera.prev());
-            this._clearNewCondicionFinancieraField();
-            $('.newActivo').css('border-color', '');
-            $('.newPlazo').css('border-color', '');
         }
-        else
-        {
-              $('.newActivo').css('border-color', 'red');
-              app.alert.show("Activo requerido", {
-                  level: "error",
-                  title: "El campo Activo es requerido.",
-                  autoClose: false
-              });
-        }
+
     },
 
    /* _addNewCondicionFinancieraToModel: function (idactivo) {
