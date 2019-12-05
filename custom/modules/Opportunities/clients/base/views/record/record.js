@@ -1132,14 +1132,20 @@ console.log(name);
                 }
                 else {
                     if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
+                        if(this.model.get('tct_etapa_ddw_c')=="SI"){
+                            this.model.set('estatus_c', 'K');
 
-                        app.alert.show("EstatusCancelcacion", {
+                        app.alert.show("CancelcacSol", {
                             level: "process",
                             title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
-                            autoClose: false
+                            autoClose: true
                         });
-
-
+                        }else{
+                            app.alert.show("EstatusCancelcacion", {
+                                level: "process",
+                                title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
+                                autoClose: false
+                            });
                         // @author Carlos Zaragoza
                         // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
                         console.log(typeof this.model.get("id_process_c"));
@@ -1233,8 +1239,8 @@ console.log(name);
                                 });
                                 callback(null, fields, errors);
                             }
+                          }
                         }
-
                     }// fin if
                     else {
                         errors['tct_razon_op_perdida_ddw_c']='Campo requerido para cancelar';
