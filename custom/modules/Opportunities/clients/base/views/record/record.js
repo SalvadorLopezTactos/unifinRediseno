@@ -1134,7 +1134,6 @@ console.log(name);
                     if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
                         if(this.model.get('tct_etapa_ddw_c')=="SI"){
                             this.model.set('estatus_c', 'K');
-                            this.model.save();
 
                         app.alert.show("CancelcacSol", {
                             level: "process",
