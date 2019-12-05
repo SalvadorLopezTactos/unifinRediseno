@@ -4,6 +4,7 @@
 	initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
+
     this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
     this.events['keydown input[name=monto_c]'] = 'checkmoney';
     this.events['keydown input[name=amount]'] = 'checkmoney';
@@ -77,10 +78,15 @@
 
 		this.getCurrentYearMonth();
 
+
     /*@Jesus Carrillo
         Funcion que pinta de color los paneles relacionados
     */
     this.model.on('sync', this.fulminantcolor, this);
+    //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
+        this.model.on('sync', this.mensajessos, this);
+
+
 	},
 
   fulminantcolor: function () {
@@ -90,6 +96,48 @@
       $('.a11y-wrapper').css("background-color", "#e5e5e5");
       //$('.a11y-wrapper').css("background-color", "#c6d9ff");
   },
+    mensajessos: function (){
+            //Funcion que valida los campos de operacion curso y operacion activa (campos que modificara UNICS)
+      if (this.model.get('tipo_producto_c')==7 && this.model.get('tipo_de_operacion_c')=='RATIFICACION_INCREMENTO') {
+          if (this.model.get('operacion_curso_chk_c') == true) {
+              app.alert.show('Mensaje1_SOS', {
+                  level: 'info',
+                  autoClose: false,
+                  messages: 'El cliente actualmente tiene una operación activa. Es necesario hacer CleanUp y dejar pasar 28 días.'
+              });
+          }else{
+              //Se obtiene la fecha actual
+              var hoy = new Date();
+              var dd = hoy.getDate();
+              if (dd < 10) {
+                  dd = "0" + dd;
+              }
+              var mm = hoy.getMonth() + 1;
+              var yyyy = hoy.getFullYear();
+              var fecha_actual = yyyy + '-' + mm + '-' + dd;
+              var operacion = this.model.get('ult_operacion_activa_c');
+              var fecha1 = moment(fecha_actual);
+              var fecha2 = moment(operacion);
+              var diferencia = fecha1.diff(fecha2, 'days');
+
+              if (this.model.get('operacion_curso_chk_c') == false && diferencia < 28) {
+                  app.alert.show('Mensaje2_SOS', {
+                      level: 'info',
+                      autoClose: false,
+                      messages: 'Es necesario esperar ' + (28-diferencia) + ' días para poder disponer nuevamente.'
+                  });
+              }
+              if (this.model.get('operacion_curso_chk_c') == false && diferencia == 28) {
+                  app.alert.show('Mensaje3_SOS', {
+                      level: 'info',
+                      autoClose: false,
+                      messages: 'Es necesario esperar a mañana para poder disponer nuevamente.'
+                  });
+              }
+          }
+      }
+    },
+
 
     cancelClicked: function () {
        this._super('cancelClicked');
@@ -154,6 +202,9 @@
       //Agrega validación para restringir edición de Gestión Comercial
       this.noEdita();
       this.blockRecordNoContactar();
+        //Oculta campos nuevos para Credito SOS
+        $('[data-name=ult_operacion_activa_c]').hide();
+        $('[data-name=operacion_curso_chk_c]').hide();
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición

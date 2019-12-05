@@ -171,3 +171,5 @@ $mod_strings['LBL_OPPS_CONFIG_SALES_STAGE_1b'] = 'la Etapa de Venta de la Solici
 $mod_strings['LBL_OPPS_CONFIG_SALES_STAGE_2b'] = 'la Etapa de Venta de la Solicitud y Línea se encuentra en &quot;Cerrada/Perdida&quot;.';
 $mod_strings['LBL_TCT_NUMERO_VEHICULOS'] = 'Número de vehículos';
 $mod_strings['LBL_TCT_OPP_ESTATUS_C'] = 'Estatus';
+$mod_strings['LBL_OPERACION_CURSO_CHK'] = 'Operación en Curso';
+$mod_strings['LBL_ULT_OPERACION_ACTIVA'] = 'ult operacion activa';
