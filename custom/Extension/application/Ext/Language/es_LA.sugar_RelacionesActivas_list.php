@@ -1,6 +1,4 @@
 <?php
- // created: 2019-06-26 13:09:28
-
 $app_list_strings['RelacionesActivas_list']=array (
   '0' => '',
   '1' => 'Aval',

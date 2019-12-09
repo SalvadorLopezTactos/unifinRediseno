@@ -1,5 +1,4 @@
 <?php
- // created: 2018-10-31 11:53:17
 
 $app_list_strings['TipoContacto_list']=array (
   '0' => '',
