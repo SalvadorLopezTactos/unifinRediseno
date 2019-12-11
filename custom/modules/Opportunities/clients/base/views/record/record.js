@@ -481,8 +481,8 @@
         if (this.model.get('tipo_producto_c')=='7'){
             this.$('div[data-name=condiciones_financieras]').hide();
             this.$('div[data-name=f_comentarios_generales_c]').hide();
-
-
+            this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
+            this.$("[data-name='monto_ratificacion_increment_c']").attr('style','pointer-events:none');
         }
 
 	  },
