@@ -20,7 +20,8 @@
         });
 
         //Carga datos
-        this.loadData();
+        this.model.on('sync', this.loadData, this);
+        //this.loadData();
     },
 
 
