@@ -21,7 +21,9 @@
 
         //Carga datos
         this.model.on('sync', this.loadData, this);
-        //this.loadData();
+        if (this.model.get('id') == undefined || this.model.get('id') == ""){
+            this.loadData();
+        }
     },
 
 
