@@ -9,16 +9,29 @@
     events: {
         'click  .addCondicionFinanciera': 'addNewCondicionFinanciera',
         'click  .removeCondicionFinanciera': 'removeCondicionFinanciera',
-        'change .porcentaje': 'checarPorcentajeRango',
-        'change .existingActivo': 'updateExistingCondicionFinanciera',
-        'change .newActivo': '_inicializaCondicionesFinancieras',
-        'change .existingPlazo': 'updateExistingCondicionFinanciera',
-        'change .porcentaje': 'updateExistingCondicionFinanciera',
-        'change .checkboxUpdate': 'updateExistingCondicionFinanciera',
-        'change .newPlazo': '_inicializaCondicionesFinancieras_Plazo',
-    },
+        'change .newActivo': 'ActualizaActivoFinanciera',
+        'change .newPlazo': 'ActualizaPlazoFinanciera',
+        //Eventos para campos de tipo Select2
+        'change .existingActivo': 'updateActivo',
+        'change .existingPlazo': 'updatePlazo',
+        //Eventos para campos tipo input
+        'change .existingTasaMinima': 'updatevalores',
+        'change .existingTasaMaxima': 'updatevalores',
+        'change .existingVRCMinimo': 'updatevalores',
+        'change .existingVRCMaximo': 'updatevalores',
+        'change .existingVRIMinimo': 'updatevalores',
+        'change .existingVRIMaximo': 'updatevalores',
+        'change .existingComisionMinima': 'updatevalores',
+        'change .existingComisionMaxima': 'updatevalores',
+        'change .existingRentaInicialMinima': 'updatevalores',
+        'change .existingRentaInicialMaxima': 'updatevalores',
+        //Eventos para campos tipo checkbox
+        'change .existingDeposito': 'updatechecks',
+        'change .existingUsoParticular': 'updatechecks',
+        'change .existingUsoEmpresarial': 'updatechecks',
+        'change .existingActivoNuevo': 'updatechecks',
 
-    plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
+    },
 
     initialize: function (options) {
 
@@ -36,7 +49,6 @@
     this.activo_list = app.lang.getAppListStrings('idactivo_list');
     this.plazo_list = app.lang.getAppListStrings('plazo_0');
     },
-
 
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
@@ -57,85 +69,98 @@
 
     },
 
-    /*_buildCondicionFinancieraFieldHtml: function (condicion_financiera) {
-        var editCondicionFinancieraFieldTemplate = app.template.getField('condiciones_financieras', 'edit-condiciones-financieras'),
-            CondicionFinanciera = this.model.get('condiciones_financieras'),
-            index = _.indexOf(CondicionFinanciera, condicion_financiera);
-        var activo_list = app.lang.getAppListStrings('idactivo_list');
-        var activo_list_html = '';
+    //Evento que actualiza los campos de la condicion con base en el activo seleccionado (condiciones existentes)
+    updateActivo: function(evt) {
+        var inputs = this.$('[data-field="Activo"].existingActivo'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        var tipo = input.val();
+        //Pregunta que el nuevo activo sea diferente al del modelo para establecer
+        // todos los valores acorde al plazo 1_12 del activo nuevo.
 
-        for (activo_tipo_key in activo_list) {
-            if (activo_tipo_key == condicion_financiera.idactivo) {
-                activo_list_html += '<option value="' + activo_tipo_key + '" selected="true">' + activo_list[activo_tipo_key] + '</option>';
-
-            }
-            else {
-                activo_list_html += '<option value="' + activo_tipo_key + '">' + activo_list[activo_tipo_key] + '</option>';
-
-            }
+        if(cont_cf.oFinanciera.condicion[index].idactivo !=tipo){
+            cont_cf.oFinanciera.condicion[index].idactivo=tipo;
+            cont_cf.oFinanciera.condicion[index].plazo="1_12";
+            cont_cf.oFinanciera.condicion[index].tasa_minima=cont_cf.activos[tipo]["1_12"].tasa_minima;
+            cont_cf.oFinanciera.condicion[index].tasa_maxima=cont_cf.activos[tipo]["1_12"].tasa_maxima;
+            cont_cf.oFinanciera.condicion[index].vrc_minimo=cont_cf.activos[tipo]["1_12"].vrc_minimo;
+            cont_cf.oFinanciera.condicion[index].vrc_maximo=cont_cf.activos[tipo]["1_12"].vrc_maximo;
+            cont_cf.oFinanciera.condicion[index].vri_minimo=cont_cf.activos[tipo]["1_12"].vri_minimo;
+            cont_cf.oFinanciera.condicion[index].vri_maximo=cont_cf.activos[tipo]["1_12"].vri_maximo;
+            cont_cf.oFinanciera.condicion[index].comision_minima=cont_cf.activos[tipo]["1_12"].comision_minima;
+            cont_cf.oFinanciera.condicion[index].comision_maxima=cont_cf.activos[tipo]["1_12"].comision_maxima;
+            cont_cf.oFinanciera.condicion[index].renta_inicial_minima=cont_cf.activos[tipo]["1_12"].renta_inicial_minima;
+            cont_cf.oFinanciera.condicion[index].renta_inicial_maxima=cont_cf.activos[tipo]["1_12"].renta_inicial_maxima;
+            cont_cf.oFinanciera.condicion[index].deposito_en_garantia=cont_cf.activos[tipo]["1_12"].deposito_en_garantia;
+            cont_cf.oFinanciera.condicion[index].uso_particular=cont_cf.activos[tipo]["1_12"].uso_particular;
+            cont_cf.oFinanciera.condicion[index].uso_empresarial=cont_cf.activos[tipo]["1_12"].uso_empresarial;
+            cont_cf.oFinanciera.condicion[index].activo_nuevo=cont_cf.activos[tipo]["1_12"].activo_nuevo;
+            cont_cf.render();
         }
-
-        var plazo_list = app.lang.getAppListStrings('plazo_0');
-        var plazo_list_html = '';
-
-        for (plazo_tipo_key in plazo_list) {
-            if (plazo_tipo_key == condicion_financiera.plazo) {
-                plazo_list_html += '<option value="' + plazo_tipo_key + '" selected="true">' + plazo_list[plazo_tipo_key] + '</option>';
-
-            }
-            else {
-                plazo_list_html += '<option value="' + plazo_tipo_key + '">' + plazo_list[plazo_tipo_key] + '</option>';
-
-            }
+    },
+    //Evento que actualiza los campos de la condicion con base en el plazo seleccionado (condiciones existentes)
+    updatePlazo: function(evt) {
+        var inputs = this.$('[data-field="Plazo"].existingPlazo'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        var plazo = input.val();
+        var activoselect = cont_cf.oFinanciera.condicion[index].idactivo;
+        //Pregunta si el plazo es diferente al actual del modelo, sino actualiza dicho modelo
+        // con base en el objeto cont_cf que contiene combinaciones de plazos y campos.
+        if( cont_cf.oFinanciera.condicion[index].plazo!= plazo) {
+            cont_cf.oFinanciera.condicion[index].plazo= plazo;
+            cont_cf.oFinanciera.condicion[index].tasa_minima = cont_cf.activos[activoselect][plazo].tasa_minima;
+            cont_cf.oFinanciera.condicion[index].tasa_maxima = cont_cf.activos[activoselect][plazo].tasa_maxima;
+            cont_cf.oFinanciera.condicion[index].vrc_minimo = cont_cf.activos[activoselect][plazo].vrc_minimo;
+            cont_cf.oFinanciera.condicion[index].vrc_maximo = cont_cf.activos[activoselect][plazo].vrc_maximo;
+            cont_cf.oFinanciera.condicion[index].vri_minimo = cont_cf.activos[activoselect][plazo].vri_minimo;
+            cont_cf.oFinanciera.condicion[index].vri_maximo = cont_cf.activos[activoselect][plazo].vri_maximo;
+            cont_cf.oFinanciera.condicion[index].comision_minima = cont_cf.activos[activoselect][plazo].comision_minima;
+            cont_cf.oFinanciera.condicion[index].comision_maxima = cont_cf.activos[activoselect][plazo].comision_maxima;
+            cont_cf.oFinanciera.condicion[index].renta_inicial_minima = cont_cf.activos[activoselect][plazo].renta_inicial_minima;
+            cont_cf.oFinanciera.condicion[index].renta_inicial_maxima = cont_cf.activos[activoselect][plazo].renta_inicial_maxima;
+            cont_cf.oFinanciera.condicion[index].deposito_en_garantia = cont_cf.activos[activoselect][plazo].deposito_en_garantia;
+            cont_cf.oFinanciera.condicion[index].uso_particular = cont_cf.activos[activoselect][plazo].uso_particular;
+            cont_cf.oFinanciera.condicion[index].uso_empresarial = cont_cf.activos[activoselect][plazo].uso_empresarial;
+            cont_cf.oFinanciera.condicion[index].activo_nuevo = cont_cf.activos[activoselect][plazo].activo_nuevo;
+            cont_cf.render();
         }
+    },
 
-        if (condicion_financiera.deposito_en_garantia == true) {
-            var deposito_en_garantia_checked = "checked";
-        }
+    updatechecks: function(evt){
+        //Recupera valor del check modificado, obtiene nombre y concatena el name para obtener su posicion en el arreglo.
+        var input = this.$(evt.currentTarget);
+        var nombre= input[0].dataset.name;
+        var inputs= this.$("[data-name='"+nombre+"']");
+        var index = inputs.index(input);
+        var valor= input.prop('checked');
+        //Actualiza modelo con el valor de los checks modificados
+        this.oFinanciera.condicion[index][nombre]=valor;
 
-        if (condicion_financiera.uso_particular == true) {
-            var uso_particular_checked = "checked";
-        }
+    },
 
-        if (condicion_financiera.uso_empresarial == true) {
-            var uso_empresarial_checked = "checked";
-        }
+    updatevalores: function(evt){
+        //Recupera valor del campo modificado, obtiene nombre y concatena el name para obtener su posicion en el arreglo.
+        var input = this.$(evt.currentTarget);
+        var nombre= input[0].dataset.name;
+        var inputs= this.$("[data-name='"+nombre+"']");
+        var index = inputs.index(input);
+        var numero= input.val();
+        //Actualiza modelo con el valor de los campos modificados
+        this.oFinanciera.condicion[index][nombre]=numero;
 
-        if (condicion_financiera.activo_nuevo == true) {
-            var activo_nuevo_checked = "checked";
-        }
-        return editCondicionFinancieraFieldTemplate({
-            max_length: this.def.len,
-            index: index === -1 ? condicion_financiera.length - 1 : index,
-            idactivo: activo_list_html,
-            plazo: plazo_list_html,
-            tasa_minima: condicion_financiera.tasa_minima,
-            tasa_maxima: condicion_financiera.tasa_maxima,
-            vrc_minimo: condicion_financiera.vrc_minimo,
-            vrc_maximo: condicion_financiera.vrc_maximo,
-            vri_minimo: condicion_financiera.vri_minimo,
-            vri_maximo: condicion_financiera.vri_maximo,
-            comision_minima: condicion_financiera.comision_minima,
-            comision_maxima: condicion_financiera.comision_maxima,
-            renta_inicial_minima: condicion_financiera.renta_inicial_minima,
-            renta_inicial_maxima: condicion_financiera.renta_inicial_maxima,
-            deposito_en_garantia: condicion_financiera.deposito_en_garantia,
-            uso_particular: condicion_financiera.uso_particular,
-            uso_empresarial: condicion_financiera.uso_empresarial,
-            activo_nuevo: condicion_financiera.activo_nuevo,
-            deposito_en_garantia_checked: deposito_en_garantia_checked,
-            uso_particular_checked: uso_particular_checked,
-            uso_empresarial_checked: uso_empresarial_checked,
-            activo_nuevo_checked: activo_nuevo_checked,
-        });
-    },*/
+    },
 
     addNewCondicionFinanciera: function (options) {
         if (this.oFinanciera == undefined) {
-            this.oFinanciera = self.oFinanciera;
+            //Crea el objeto
+            this.oFinanciera = [];
+            this.oFinanciera.condicion = [];
+            this.prev_oFinanciera=[];
+            this.prev_oFinanciera.prev_condicion=[];
         }
         if (this.$('.newActivo').select2('val') !="" && this.$('.newActivo').select2('val')!=null) {
-            //Valida Requerido
+            //Valida Plazo Requerido
             if (this.$('.newPlazo').select2('val') === '') {
                 this.$('.newPlazo').find('.select2-choice').css('border-color', 'red');
                 app.alert.show("Plazo requerido", {
@@ -163,8 +188,12 @@
                 var uso_empresarial = $('.newUsoEmpresarial').prop("checked");
                 var activo_nuevo = $('.newActivoNuevo').prop("checked");
 
+
+
+
                 //Crea objeto condiciones financieras
                 var condfin = {
+                    "id":"",
                     "idactivo": idActivo,
                     "plazo": idplazo,
                     "tasa_minima": tasa_minima,
@@ -185,6 +214,7 @@
 
                 //Setea valores al objeto
                 this.oFinanciera.condicion.push(condfin);
+                this.model.set('condiciones_financieras', this.oFinanciera.condicion);
                 this.render();
             }
         }else{
@@ -197,259 +227,65 @@
         }
 
     },
-
-   /* _addNewCondicionFinancieraToModel: function (idactivo) {
-        var existingCondicionFinanciera = app.utils.deepCopy(this.model.get('condiciones_financieras'));
-        existingCondicionFinanciera.push({
-            idactivo: idactivo,
-            activo: $('.newActivo').val(),
-            plazo: $('.newPlazo').val(),
-            tasa_minima: $('.newTasaMinima').val(),
-            tasa_maxima: $('.newTasaMaxima').val(),
-            vrc_minimo: $('.newVRCMinimo').val(),
-            vrc_maximo: $('.newVRCMaximo').val(),
-            vri_minimo: $('.newVRIMinimo').val(),
-            vri_maximo: $('.newVRIMaximo').val(),
-            comision_minima: $('.newComisionMinima').val(),
-            comision_maxima: $('.newComisionMaxima').val(),
-            renta_inicial_minima: $('.newRentaInicialMinima').val(),
-            renta_inicial_maxima: $('.newRentaInicialMaxima').val(),
-            deposito_en_garantia: $('.newDeposito').prop("checked"),
-            uso_particular: $('.newUsoParticular').prop("checked"),
-            uso_empresarial: $('.newUsoEmpresarial').prop("checked"),
-            activo_nuevo: $('.newActivoNuevo').prop("checked"),
-        });
-        console.log("existingCondicionFinanciera");
-        console.log(existingCondicionFinanciera);
-        this.model.set(this.name, existingCondicionFinanciera);
-        success = true;
-
-        return success;
+    //Evento que remueve la condicion del objeto
+    removeCondicionFinanciera: function (evt){
+        var input = this.$(evt.currentTarget);
+        var nombre= input[0].dataset.name;
+        var inputs= this.$("[data-name='"+nombre+"']");
+        var index = inputs.index(input);
+        //Elimina el objeto de la lista
+        this.oFinanciera.condicion.splice([index],1);
+        this.render();
     },
 
-    removeCondicionFinanciera: function (evt) {
-        if (!evt) return;
+    //Evento que actualiza los campos de la condicion con base en el activo seleccionado
+    ActualizaActivoFinanciera: function (evt){
+        var inputs = this.$('.newActivo'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        var tipo = input.val();
 
-        var $deleteButtons = this.$('.removeCondicionFinanciera'),
-            $deleteButton = this.$(evt.currentTarget),
-            index = $deleteButtons.index($deleteButton),
-            primaryRemoved,
-            $removeThisField;
-
-        primaryRemoved = this._removeCondicionFinancieraInModel(index);
-
-        $removeThisField = $deleteButton.closest('.condiciones_financieras');
-        //this.removePluginTooltips($removeThisField); // remove tooltips
-        $removeThisField.remove();
-
-        if (primaryRemoved) {
-            // If primary has been removed, the first email address is the primary address.
-            //this.$('[data-emailproperty=principal]')
-            //    .first()
-            //    .addClass('active');
-        }
-
-        // if this field is required, and there is nothing in the model, then we should decorate it as required
-        if (this.def.required && _.isEmpty(this.model.get(this.name))) {
-            this.decorateRequired();
-        }
+        cont_cf.$('.newActivo').select2('val', tipo);
+        cont_cf.$('.newPlazo').select2("val", "1_12");
+        cont_cf.$('.newTasaMinima').val(cont_cf.activos[tipo]["1_12"].tasa_minima);
+        $('.newTasaMaxima').val(cont_cf.activos[tipo]["1_12"].tasa_maxima);
+        $('.newVRCMinimo').val(cont_cf.activos[tipo]["1_12"].vrc_minimo);
+        $('.newVRCMaximo').val(cont_cf.activos[tipo]["1_12"].vrc_maximo);
+        $('.newVRIMinimo').val(cont_cf.activos[tipo]["1_12"].vri_minimo);
+        $('.newVRIMaximo').val(cont_cf.activos[tipo]["1_12"].vri_maximo);
+        $('.newComisionMinima').val(cont_cf.activos[tipo]["1_12"].comision_minima);
+        $('.newComisionMaxima').val(cont_cf.activos[tipo]["1_12"].comision_maxima);
+        $('.newRentaInicialMinima').val(cont_cf.activos[tipo]["1_12"].renta_inicial_minima);
+        $('.newRentaInicialMaxima').val(cont_cf.activos[tipo]["1_12"].renta_inicial_maxima);
+        $('.newDeposito').prop('checked',cont_cf.activos[tipo]["1_12"].deposito_en_garantia);
+        $('.newUsoParticular').prop('checked',cont_cf.activos[tipo]["1_12"].uso_particular);
+        $('.newUsoEmpresarial').prop('checked',cont_cf.activos[tipo]["1_12"].uso_empresarial);
+        $('.newActivoNuevo').prop('checked',cont_cf.activos[tipo]["1_12"].activo_nuevo);
     },
+    //Evento que actualiza los campos de la condicion con base en el Plazo seleccionado
+    ActualizaPlazoFinanciera: function (evt){
+        var inputs = this.$('.newPlazo'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        var plazo = input.val();
+        var activoselect = cont_cf.$('.newActivo')[1].value;
 
-    _removeCondicionFinancieraInModel: function (index) {
-        var existingCondicionesFinancieras = app.utils.deepCopy(this.model.get(this.name)),
-            primaryCondicionFinanciera = !!existingCondicionesFinancieras[index][this.name];
 
-        //Reject this index from existing condicion financiera
-        existingCondicionesFinancieras = _.reject(existingCondicionesFinancieras, function (condicionFinancieraInfo, i) {
-            return i == index;
-        });
+        cont_cf.$('.newPlazo').select2("val", plazo);
+        cont_cf.$('.newTasaMinima').val(cont_cf.activos[activoselect][plazo].tasa_minima);
+        $('.newTasaMaxima').val(cont_cf.activos[activoselect][plazo].tasa_maxima);
+        $('.newVRCMinimo').val(cont_cf.activos[activoselect][plazo].vrc_minimo);
+        $('.newVRCMaximo').val(cont_cf.activos[activoselect][plazo].vrc_maximo);
+        $('.newVRIMinimo').val(cont_cf.activos[activoselect][plazo].vri_minimo);
+        $('.newVRIMaximo').val(cont_cf.activos[activoselect][plazo].vri_maximo);
+        $('.newComisionMinima').val(cont_cf.activos[activoselect][plazo].comision_minima);
+        $('.newComisionMaxima').val(cont_cf.activos[activoselect][plazo].comision_maxima);
+        $('.newRentaInicialMinima').val(cont_cf.activos[activoselect][plazo].renta_inicial_minima);
+        $('.newRentaInicialMaxima').val(cont_cf.activos[activoselect][plazo].renta_inicial_maxima);
+        $('.newDeposito').prop('checked',cont_cf.activos[activoselect][plazo].deposito_en_garantia);
+        $('.newUsoParticular').prop('checked',cont_cf.activos[activoselect][plazo].uso_particular);
+        $('.newUsoEmpresarial').prop('checked',cont_cf.activos[activoselect][plazo].uso_empresarial);
+        $('.newActivoNuevo').prop('checked',cont_cf.activos[activoselect][plazo].activo_nuevo);
 
-        // If a removed address was the primary email, we still need at least one address to be set as the primary email
-        if (primaryCondicionFinanciera) {
-            //Let's pick the first one
-            var address = _.first(existingCondicionesFinancieras);
-            if (address) {
-                address.principal = true;
-            }
-        }
-
-        this.model.set(this.name, existingCondicionesFinancieras);
-        return primaryCondicionFinanciera;
     },
-
-    _clearNewCondicionFinancieraField: function () {
-        this._getNewCondicionFinancieraField().val('');
-        $('.newActivo').val('');
-        $('.newPlazo').val('');
-        $('.newTasaMinima').val('');
-        $('.newTasaMaxima').val('');
-        $('.newVRCMinimo').val('');
-        $('.newVRCMaximo').val('');
-        $('.newVRIMinimo').val('');
-        $('.newVRIMaximo').val('');
-        $('.newComisionMinima').val('');
-        $('.newComisionMaxima').val('');
-        $('.newRentaInicialMinima').val('');
-        $('.newRentaInicialMaxima').val('');
-        $('.newDeposito').prop("checked", false);
-        $('.newUsoParticular').prop("checked", false);
-        $('.newUsoEmpresarial').prop("checked", false);
-        $('.newActivoNuevo').prop("checked", false);
-    },
-
-    updateExistingCondicionFinanciera: function (evt) {
-        if (!evt) return;
-        //get field that changed
-        var $input = this.$(evt.currentTarget);
-        //get field type
-        var class_name = $input[0].className,
-            field_name = $($input).attr('data-field');
-
-        //split the class name in case the field has more than 1 class
-        var class_name_split = [];
-        class_name_split.push($.trim(class_name).split(" "));
-
-        var $inputs = this.$('.' + class_name_split[0]),
-            index = $inputs.index($input),
-            newCFinanciera = $input.val(),
-            primaryRemoved;
-
-        if (class_name_split[0][1] == "checkboxUpdate") {
-            newCFinanciera = $input.prop("checked");
-        }
-
-        newCFinanciera = $.trim(newCFinanciera);
-        if (newCFinanciera === '') {
-            // remove email if email is empty
-            primaryRemoved = this._removeCondicionFinancieraInModel(index);
-
-            $input
-                .closest('.condiciones_financieras')
-                .remove();
-
-            if (primaryRemoved) {
-                // on list views we need to set the current value on the input
-                if (this.view && this.view.action === 'list') {
-                    var addresses = this.model.get(this.name) || [];
-                    var primaryAddress = _.filter(addresses, function (address) {
-                        if (address.principal) {
-                            return true;
-                        }
-                    });
-                    if (primaryAddress[0] && primaryAddress[0].email_address) {
-                        app.alert.show('list_delete_email_info', {
-                            level: 'info',
-                            autoClose: true,
-                            messages: app.lang.get('LBL_LIST_REMOVE_EMAIL_INFO')
-                        });
-                        $input.val(primaryAddress[0].email_address);
-                    }
-                }
-                this.$('[data-emailproperty=principal]')
-                    .first()
-                    .addClass('active');
-            }
-        }
-        else {
-            this._updateExistingCondicionFinancieraInModel(index, newCFinanciera, field_name);
-        }
-    },
-
-    _updateExistingCondicionFinancieraInModel: function (index, newCFinanciera, field_name) {
-        var existingCFinanciera = app.utils.deepCopy(this.model.get('condiciones_financieras'));
-        //Simply update the email address
-        existingCFinanciera[index][field_name] = newCFinanciera;
-        this.model.set(this.name, existingCFinanciera);
-    },
-
-    _getNewCondicionFinancieraField: function () {
-        return this.$('.newActivo');
-    },
-
-    _inicializaCondicionesFinancieras: function (evt) {
-        if (!evt) return;
-        //Obten el campo que acaba de cambiar
-        var $input = this.$(evt.currentTarget);
-        _.each(cont_cf.condiciones_iniciales, function (condicion_inicial) {
-            if ($input.val() == condicion_inicial.activo) { //Detecta si el activo seleccionado coincide con la lista que se esta ciclando
-                if($('#' + condicion_inicial.campo_destino_minimo).attr('type') == 'checkbox'){ //Checa si es un checkbox, ya que estos se manejan diferente
-                    if(!_.isEmpty(condicion_inicial.rango_minimo)){
-                        $('#' + condicion_inicial.campo_destino_minimo).prop('checked', true);
-                    }else{
-                        $('#' + condicion_inicial.campo_destino_minimo).prop('checked', false);
-                    }
-                }else{ //procesa como un campo normal solo asignando los valores
-                    $('#' + condicion_inicial.campo_destino_minimo).val(condicion_inicial.rango_minimo);
-                    $('#' + condicion_inicial.campo_destino_maximo).val(condicion_inicial.rango_maximo);
-                }
-            }
-        }, this);
-    },
-
-    _inicializaCondicionesFinancieras_Plazo: function (evt) {
-        if (!evt) return;
-        //Obten el campo que acaba de cambiar
-        var $input = this.$(evt.currentTarget);
-        _.each(cont_cf.condiciones_iniciales, function (condicion_inicial) {
-            if ($input.val() == condicion_inicial.plazo && $('.newActivo').val() == condicion_inicial.activo) { //Detecta si el activo seleccionado coincide con la lista que se esta ciclando
-                if($('#' + condicion_inicial.campo_destino_minimo).attr('type') == 'checkbox'){ //Checa si es un checkbox, ya que estos se manejan diferente
-                    if(!_.isEmpty(condicion_inicial.rango_minimo)){
-                        $('#' + condicion_inicial.campo_destino_minimo).prop('checked', true);
-                    }else{
-                        $('#' + condicion_inicial.campo_destino_minimo).prop('checked', false);
-                    }
-                }else{ //procesa como un campo normal solo asignando los valores
-                    $('#' + condicion_inicial.campo_destino_minimo).val(condicion_inicial.rango_minimo);
-                    $('#' + condicion_inicial.campo_destino_maximo).val(condicion_inicial.rango_maximo);
-                }
-            }
-        }, this);
-    },
-
-    // FUNCIONES DE UTILERIA //
-    checarPorcentajeRango: function (evt) {
-        var valor_campo = $(evt.currentTarget).val();
-        var valor_maximo = $('.' + $(evt.currentTarget).attr('data-max')).val();
-        var valor_minimo = $('.' + $(evt.currentTarget).attr('data-min')).val();
-
-        if (parseInt(valor_campo) > 99.99) {
-            app.alert.show('', {
-                level: 'error',
-                autoClose: true,
-                messages: app.lang.get('LBL_PORCENTAGE_MAYOR_RANGO', 'lev_CondicionesFinancieras')
-            });
-            $(evt.currentTarget).val('99.99');
-            $(evt.currentTarget).focus();
-        }
-
-        if (parseInt(valor_campo) < 1) {
-            app.alert.show('', {
-                level: 'error',
-                autoClose: true,
-                messages: app.lang.get('LBL_PORCENTAGE_MENOR_RANGO', 'lev_CondicionesFinancieras')
-            });
-            $(evt.currentTarget).val('1');
-            $(evt.currentTarget).focus();
-        }
-
-        if(parseInt(valor_campo) >  valor_maximo && !_.isEmpty(valor_maximo)){
-            app.alert.show('', {
-                level: 'error',
-                autoClose: true,
-                messages: app.lang.get('LBL_PORCENTAGE_MAYOR_A_MAXIMO', 'lev_CondicionesFinancieras') + " : " + valor_maximo
-            });
-            $(evt.currentTarget).val(valor_maximo);
-            $(evt.currentTarget).focus();
-        }
-
-        if(parseInt(valor_campo) < valor_minimo && !_.isEmpty(valor_minimo)){
-            app.alert.show('', {
-                level: 'error',
-                autoClose: true,
-                messages: app.lang.get('LBL_PORCENTAGE_MENOR_MINIMO', 'lev_CondicionesFinancieras') + " : " + valor_minimo
-            });
-            $(evt.currentTarget).val(valor_minimo);
-            $(evt.currentTarget).focus();
-        }
-    }*/
 })

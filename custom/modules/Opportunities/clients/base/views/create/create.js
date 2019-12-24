@@ -21,14 +21,7 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
-        /*
-        Contexto campos custom
-        */
-        //Condificiones financieras
-        this.oFinanciera = [];
-        this.oFinanciera.condicion = [];
-        this.prev_oFinanciera=[];
-        this.prev_oFinanciera.prev_condicion=[];
+
         /*
           Author: Adrian Arauz 2018-08-28
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"

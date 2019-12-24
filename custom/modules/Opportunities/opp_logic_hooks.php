@@ -699,7 +699,14 @@ SQL;
 
         public function condiciones_financieras($bean = null, $event = null, $args = null){
             $current_id_list = array();
+            $GLOBALS['log']->fatal(print_r($bean->condiciones_financieras, true));
 
+            //retrieve all related records
+            $bean->load_relationship('lev_condicionesfinancieras_opportunities');
+            $GLOBALS['log']->fatal("Recupera relacion entre cond financiera y la oportunidad V1.");
+            foreach ($bean->lev_condicionesfinancieras_opportunities->getBeans() as $c_financiera) {
+                    $GLOBALS['log']->fatal($c_financiera->id);
+            }
             if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
                 if (!empty($bean->condiciones_financieras)){
                     //add update current records
@@ -708,8 +715,9 @@ SQL;
                     // $GLOBALS['log']->fatal($bean->condiciones_financieras);
 
                     foreach ($bean->condiciones_financieras as $c_financiera) {
-
+                        $GLOBALS['log']->fatal("ID CONDICION FINANCIERA");
                         $condicion = BeanFactory::getBean('lev_CondicionesFinancieras', $c_financiera['id']);
+                        $GLOBALS['log']->fatal($c_financiera['id']);
 
                         $plazos = explode("_", $c_financiera['plazo']);
 
@@ -720,7 +728,6 @@ SQL;
                         $condicion->consecutivo = $activo_previo[$c_financiera['idactivo']];
 
                         //CVV Copia el id en caso de tener para no marcar todos los registros como deleted
-                        $condicion->id = $c_financiera['id'];
                         $condicion->idactivo = $c_financiera['idactivo'];
                         $condicion->plazo = $c_financiera['plazo'];
                         $condicion->plazo_minimo = $plazos[0];
@@ -744,6 +751,7 @@ SQL;
                         $condicion->team_id = $bean->team_id;
                         $condicion->team_set_id = $bean->team_set_id;
                         $condicion->incremento_ratificacion = 0;
+                        $c_financiera['id']=$condicion->id;
 
                         $GLOBALS['log']->fatal('Imprime idactivo petición: '. $c_financiera['idactivo']);
                         $GLOBALS['log']->fatal('Imprime idactivo bean: '.$condicion->idactivo);
@@ -758,11 +766,12 @@ SQL;
 
                     //retrieve all related records
                     $bean->load_relationship('lev_condicionesfinancieras_opportunities');
+                    $GLOBALS['log']->fatal("Recupera relacion entre cond financiera y la oportunidad.");
                     foreach ($bean->lev_condicionesfinancieras_opportunities->getBeans() as $c_financiera) {
                         if (!in_array($c_financiera->id, $current_id_list)) {
-                            // $GLOBALS['log']->fatal('--->TCT -  Elimina relación');
-                            // $GLOBALS['log']->fatal($c_financiera->id);
-                            $c_financiera->mark_deleted($c_financiera->id);
+                             $GLOBALS['log']->fatal('--->TCT -  Elimina relación');
+                             $GLOBALS['log']->fatal($c_financiera->id);
+                             $c_financiera->mark_deleted($c_financiera->id);
                         }
                     }
                 }
