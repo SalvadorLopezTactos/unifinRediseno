@@ -3914,9 +3914,11 @@
             },
             //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
             muestracheks: function (){
-              if (this.model.get('tipo_registro_c') != "Lead"){
+              if (Oproductos.productos != undefined) {
+                if(Oproductos.productos.tct_tipo_ca_txf_c!='Lead' && Oproductos.productos.tct_tipo_f_txf_c!='Lead' && Oproductos.productos.tct_tipo_l_txf_c!='Lead'){
                   $('[data-name=tct_noviable]').hide();
-            }
+                }
+              }
             },
 
             ocultaRFC: function () {
@@ -4082,7 +4084,7 @@
             app.alert.show("cuentas_no_contactar", {
                 level: "error",
                 title: "Cuenta No Contactable<br>",
-                messages: "Unifin ha decidido NO trabajar con esta cuenta.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
                 autoClose: false
             });
 

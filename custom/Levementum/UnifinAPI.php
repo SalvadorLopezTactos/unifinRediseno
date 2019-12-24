@@ -1520,6 +1520,7 @@ SQL;
                 }
 
             $opportunidad['riesgo'] = $opportunidad['riesgo']=="Bajo" ? "MN" : "MY";
+
             if (trim($opportunidad['tipo_persona']) == "Persona Fisica"){
                 $opportunidad['tipo_persona'] = "PF";
             }
@@ -1560,6 +1561,9 @@ SQL;
                         break;
                     case 5:
                         $opportunidad['tipo_producto_c'] = "LINEA CREDITO SIMPLE";
+                        break;
+                    case 7:
+                        $opportunidad['tipo_producto_c'] = "SOS";
                         break;
                 }
 
@@ -1607,7 +1611,19 @@ SQL;
                     "comision"=> $opportunidad['porcentaje_ca_c'],
                     "pagoInicialCotizacion"=> 0,
                     "pagoMensual" => 0+$opportunidad['ca_pago_mensual_c']
+
                 );
+                //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
+                if ($opportunidad['tipo_producto_c']=="SOS"){
+                    //Setea valores constantes para la invocación de IniciaProceso
+                    //$GLOBALS['log']->fatal("Setea valores de la solicitud SOS");
+                    $fields['riesgoPersona'] = "MY";
+                    $fields['tasa']= 0;
+                    $fields['vrc']= 0;
+                    $fields['vri']= 0;
+                    $fields['rentaInicial']= 1;
+                    $fields['comision']=0;
+                }
 
                 //CVV - 29/03/2016 -  Se agregan los items que aplican para Leasing y CA
                 if($opportunidad['tipo_producto_c']=="LEASING" || $opportunidad['tipo_producto_c']=="CREDITO AUTOMOTRIZ") {
