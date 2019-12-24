@@ -137,6 +137,11 @@ array (
             'name' => 'puestousuario_c',
             'label' => 'LBL_PUESTOUSUARIO',
           ),
+          1 => 
+          array (
+            'name' => 'subpuesto_c',
+            'label' => 'LBL_SUBPUESTO',
+          ),
         ),
       ),
       'lbl_detailview_panel1' => 

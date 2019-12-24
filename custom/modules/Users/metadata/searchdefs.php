@@ -50,7 +50,7 @@ array (
         'type' => 'enum',
         'default' => true,
         'label' => 'LBL_PUESTOUSUARIO',
-        'width' => 10,
+        'width' => '10',
         'name' => 'puestousuario_c',
       ),
       'title' => 
