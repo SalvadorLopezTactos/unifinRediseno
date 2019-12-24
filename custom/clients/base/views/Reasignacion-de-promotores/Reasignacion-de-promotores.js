@@ -6,7 +6,7 @@
  */
 ({
 
-    className: 'Reasignacion-de-promotores tcenter',
+    className: 'Reasignacion-de-promotores',
 
     events: {
         'click #btn_Cuentas': 'buscarCuentas',
@@ -58,7 +58,7 @@
         this._super("_render");
         var tipos_cuenta=[];
          this.$('#tipo_de_cuenta').select2({
-             width:'250px',
+             width:'400px',
              closeOnSelect: false,
              containerCssClass: 'select2-choices-pills-close'
          });
