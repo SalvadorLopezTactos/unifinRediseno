@@ -626,7 +626,7 @@
 
 			this.context.on('button:expediente_button:click', this.expedienteClicked, this);
 			this.context.on('button:ratificado_button:click', this.ratificadoClicked, this);
-			this.context.on('button:edit_button:click', this.checkForRatificado, this);
+            this.context.on('button:edit_button:click', this.checkForRatificado, this);
       this.context.on('button:edit_button:click', this._HideSaveButton, this);
 			//this.model.on('change:monto_c', this._ValidateAmount, this);
 			//this.events['blur input[name=monto_c]'] = '_ValidateAmount';
@@ -1116,7 +1116,7 @@ console.log(name);
 	condicionesFinancierasIncrementoCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
             if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
-                if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
+                if (contRI.oFinancieraRI.ratificacion.length==0) {
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
@@ -1126,6 +1126,9 @@ console.log(name);
                         title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
                         autoClose: false
                     });
+                }else if (contRI.oFinancieraRI.ratificacion.length>=1){
+                    contRI.model.set('condiciones_financieras_incremento_ratificacion',contRI.oFinancieraRI.ratificacion);
+
                 }
             }
         }
@@ -2065,6 +2068,12 @@ console.log(name);
         this.model.set('condiciones_financieras', condiciones_financieras);
         this.oFinanciera.condicion = condiciones_financieras;
         cont_cf.render();
+
+        //Condiciones_financieras Ratificacion e Incremento
+        var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
+        this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
+        this.oFinancieraRI.ratificacion = condiciones_financierasRI;
+        contRI.render();
     },
 
     getcfRI: function () {
