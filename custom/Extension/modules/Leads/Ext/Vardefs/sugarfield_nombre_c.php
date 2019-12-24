@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-19 18:30:22
+ // created: 2019-12-23 14:56:04
 $dictionary['Lead']['fields']['nombre_c']['labelValue']='Nombre';
 $dictionary['Lead']['fields']['nombre_c']['full_text_search']=array (
   'enabled' => '0',
@@ -7,6 +7,9 @@ $dictionary['Lead']['fields']['nombre_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Lead']['fields']['nombre_c']['enforced']='';
-$dictionary['Lead']['fields']['nombre_c']['dependency']='';
+$dictionary['Lead']['fields']['nombre_c']['dependency']='or(
+equal($regimen_fiscal_c,"Persona Fisica"),
+equal($regimen_fiscal_c,"Persona Fisica con Actividad Empresarial")
+)';
 
  ?>
