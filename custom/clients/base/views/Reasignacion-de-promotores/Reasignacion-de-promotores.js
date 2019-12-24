@@ -427,13 +427,16 @@
                     'producto_seleccionado': producto_seleccionado,
                     'promoActual': promoActual,
                 };
-                $('#processing').show();
+                app.alert.show('reasignando', {
+                    level: 'process',
+                    title: 'Cargando...'
+                });
                 var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
                 app.api.call("create", dnbProfileUrl, {data: Params}, {
                     success: _.bind(function (data) {
                         console.log(typeof data);
                         if(data==true){
-                            $('#processing').hide();
+                            app.alert.dismiss('reasignando');
                             this.cuentas = [];
                             this.seleccionados = [];
                             this.render();
@@ -443,7 +446,7 @@
                             this.model.set("asignar_a_promotor_id","");
                             this.model.set("asignar_a_promotor","");
                         }else{
-                            $('#processing').hide();
+                            app.alert.dismiss('reasignando');
                             var alertOptions = {
                                 title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
                                 level: "error"
