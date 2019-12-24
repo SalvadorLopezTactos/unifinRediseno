@@ -20,7 +20,10 @@
         });
 
         //Carga datos
-        this.loadData();
+        this.model.on('sync', this.loadData, this);
+        if (this.model.get('id') == undefined || this.model.get('id') == ""){
+            this.loadData();
+        }
     },
 
 

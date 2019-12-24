@@ -86,3 +86,11 @@ $hook_array['before_save'][] = Array(
     'OpportunityLogic', // name of the class
     'actualizatipoprod'
 );
+
+$hook_array['before_save'][] = Array(
+    12,
+    'Cancela Crédito SOS cuando Línea Leasing es cancelada',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'cancelaSOS'
+);

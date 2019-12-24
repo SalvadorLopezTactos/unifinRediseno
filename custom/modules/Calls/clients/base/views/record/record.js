@@ -298,7 +298,7 @@
                         app.alert.show("cuentas_no_contactar", {
                             level: "error",
                             title: "Cuenta No Contactable<br>",
-                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta llamada.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                            messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
                             autoClose: false
                         });
 

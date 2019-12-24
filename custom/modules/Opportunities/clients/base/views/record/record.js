@@ -5,7 +5,7 @@
 		self = this;
         solicitud_cf= this;
         cont_RI=this;
-		this._super("initialize", [options]);
+		    this._super("initialize", [options]);
         this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
         this.events['keydown input[name=monto_c]'] = 'checkmoney';
         this.events['keydown input[name=amount]'] = 'checkmoney';
@@ -33,6 +33,7 @@
         this.prev_oFinanciera=[];
         this.prev_oFinanciera.prev_condicion=[];
         /*
+
 		 * @author Carlos Zaragoza Ortiz
 		 * @version 1
 		 * En operaciones de solicitud de crédito quitar opción de pipeline en lista de Forecast
@@ -87,7 +88,7 @@
 
         this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
-		this.getCurrentYearMonth();
+    		this.getCurrentYearMonth();
 
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
@@ -96,6 +97,9 @@
 
         //Recupera datos para custom fields
         this.getcf();
+
+    //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
+        this.model.on('sync', this.mensajessos, this);
 	},
 
   fulminantcolor: function () {
@@ -105,6 +109,48 @@
       $('.a11y-wrapper').css("background-color", "#e5e5e5");
       //$('.a11y-wrapper').css("background-color", "#c6d9ff");
   },
+    mensajessos: function (){
+            //Funcion que valida los campos de operacion curso y operacion activa (campos que modificara UNICS)
+      if (this.model.get('tipo_producto_c')==7 && this.model.get('tipo_de_operacion_c')=='RATIFICACION_INCREMENTO') {
+          if (this.model.get('operacion_curso_chk_c') == true) {
+              app.alert.show('Mensaje1_SOS', {
+                  level: 'info',
+                  autoClose: false,
+                  messages: 'El cliente actualmente tiene una operación activa. Es necesario hacer CleanUp y dejar pasar 28 días.'
+              });
+          }else{
+              //Se obtiene la fecha actual
+              var hoy = new Date();
+              var dd = hoy.getDate();
+              if (dd < 10) {
+                  dd = "0" + dd;
+              }
+              var mm = hoy.getMonth() + 1;
+              var yyyy = hoy.getFullYear();
+              var fecha_actual = yyyy + '-' + mm + '-' + dd;
+              var operacion = this.model.get('ult_operacion_activa_c');
+              var fecha1 = moment(fecha_actual);
+              var fecha2 = moment(operacion);
+              var diferencia = fecha1.diff(fecha2, 'days');
+
+              if (this.model.get('operacion_curso_chk_c') == false && diferencia < 28) {
+                  app.alert.show('Mensaje2_SOS', {
+                      level: 'info',
+                      autoClose: false,
+                      messages: 'Es necesario esperar ' + (28-diferencia) + ' días para poder disponer nuevamente.'
+                  });
+              }
+              if (this.model.get('operacion_curso_chk_c') == false && diferencia == 28) {
+                  app.alert.show('Mensaje3_SOS', {
+                      level: 'info',
+                      autoClose: false,
+                      messages: 'Es necesario esperar a mañana para poder disponer nuevamente.'
+                  });
+              }
+          }
+      }
+    },
+
 
     cancelClicked: function () {
        this._super('cancelClicked');
@@ -186,6 +232,9 @@
       //Agrega validación para restringir edición de Gestión Comercial
       this.noEdita();
       this.blockRecordNoContactar();
+        //Oculta campos nuevos para Credito SOS
+        $('[data-name=ult_operacion_activa_c]').hide();
+        $('[data-name=operacion_curso_chk_c]').hide();
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -447,9 +496,9 @@
         }
 
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
-        if(this.model.get('tipo_producto_c')=='6'){
+        if(this.model.get('tipo_producto_c')=='6' || this.model.get('tipo_producto_c')=='7' ){
 
-          this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+          //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
           //Se oculta Monto a Operar
           this.$('[data-name="amount"]').hide();
           //Pago mensual
@@ -457,6 +506,13 @@
           //% Renta inicial
           this.$('[data-name="porciento_ri_c"]').hide();
 
+        }
+        //Valida la solicitud que sea de tipo SOS y oculta campos
+        if (this.model.get('tipo_producto_c')=='7'){
+            this.$('div[data-name=condiciones_financieras]').hide();
+            this.$('div[data-name=f_comentarios_generales_c]').hide();
+            this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
+            this.$("[data-name='monto_ratificacion_increment_c']").attr('style','pointer-events:none');
         }
 
 	  },
@@ -715,7 +771,7 @@
                       app.alert.show("cuentas_no_contactar", {
                           level: "error",
                           title: "Cuenta No Contactable<br>",
-                          messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta solicitud.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+                          messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
                           autoClose: false
                       });
 
@@ -837,17 +893,17 @@
 
 	_ValidateAmount: function (fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (parseFloat(this.model.get('monto_c')) <= 0) {
+            if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c')!="7") {
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
             }
 
-            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1') {
+            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c')!="7") {
                 errors['amount'] = errors['amount'] || {};
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c')!="6") {
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c')!="6" && this.model.get('tipo_producto_c')!="7") {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
             }
@@ -1094,8 +1150,8 @@ console.log(name);
 
 	condicionesFinancierasCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6) {
-                if (solicitud_cf.oFinanciera.condicion.length==0) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7) {
+               if (solicitud_cf.oFinanciera.condicion.length==0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
 
@@ -1115,7 +1171,7 @@ console.log(name);
 
 	condicionesFinancierasIncrementoCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
+            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
                 if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
@@ -1159,14 +1215,20 @@ console.log(name);
                 }
                 else {
                     if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
+                        if(this.model.get('tct_etapa_ddw_c')=="SI"){
+                            this.model.set('estatus_c', 'K');
 
-                        app.alert.show("EstatusCancelcacion", {
+                        app.alert.show("CancelcacSol", {
                             level: "process",
                             title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
-                            autoClose: false
+                            autoClose: true
                         });
-
-
+                        }else{
+                            app.alert.show("EstatusCancelcacion", {
+                                level: "process",
+                                title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
+                                autoClose: false
+                            });
                         // @author Carlos Zaragoza
                         // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
                         console.log(typeof this.model.get("id_process_c"));
@@ -1260,8 +1322,8 @@ console.log(name);
                                 });
                                 callback(null, fields, errors);
                             }
+                          }
                         }
-
                     }// fin if
                     else {
                         errors['tct_razon_op_perdida_ddw_c']='Campo requerido para cancelar';

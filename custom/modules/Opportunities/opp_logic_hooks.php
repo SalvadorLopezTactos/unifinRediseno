@@ -182,7 +182,7 @@
         global $db, $current_user;
 
         //$GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6'){//@jesus
+        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || $bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO'){//@jesus
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
@@ -239,6 +239,13 @@ SQL;
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
+                /*Preguntar sobre el tipo de producto Leasing para la creacion de SOS
+                  Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
+                */
+              if ($bean->tipo_producto_c==1 && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)){
+                //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
+                    OpportunityLogic::solicitudSOS($bean);
+                }
                 if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c != 4) {
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
                     $callApi->actualizaSolicitudCredito($bean);
@@ -1149,4 +1156,89 @@ SQL;
                 $bean_Resumen->save();
             }
         }
+
+        public function solicitudSOS ($oportunidadL)
+        {
+            global $db;
+            //Pregunta si existe una solicitud de SOS antes de iniciar el proceso.
+            $query = "select count(*) from accounts_opportunities
+                    inner join opportunities_cstm on accounts_opportunities.opportunity_id= opportunities_cstm.id_c
+                    WHERE accounts_opportunities.account_id='{$oportunidadL->account_id}'
+                    and opportunities_cstm.tipo_producto_c=7
+                    and opportunities_cstm.estatus_c!='K'";
+
+            $queryResult = $db->getOne($query);
+            $GLOBALS['log']->fatal($queryResult);
+
+            if ($queryResult == 0) {
+
+                //Genera nuevo registro a nivel db
+                $GLOBALS['log']->fatal("Crea Solicitud de SOS");
+                $oportunidadSOS = BeanFactory::newBean('Opportunities');
+                $oportunidadSOS->account_id = $oportunidadL->account_id;
+                $oportunidadSOS->tct_etapa_ddw_c = "P";
+                $oportunidadSOS->estatus_c = "PE";
+                $oportunidadSOS->tipo_producto_c = 7;
+                $oportunidadSOS->monto_c = 0;
+                $oportunidadSOS->amount = 0;
+                $oportunidadSOS->assigned_user_id = $oportunidadL->assigned_user_id;
+                $oportunidadSOS->tipo_operacion_c = "1";
+                $oportunidadSOS->tipo_de_opracion_c = "LINEA_NUEVA";
+                $oportunidadSOS->ca_pago_mensual_c = 0;
+                $oportunidadSOS->opportunities_opportunities_2opportunities_ida = $oportunidadL->id;
+                //Guarda el registro.
+                $oportunidadSOS->save();
+                $GLOBALS['log']->fatal($oportunidadSOS->id);
+                //$GLOBALS['log']->fatal("Sale de la creación solicitud de SOS");
+
+            }
+        }
+
+        public function cancelaSOS($bean, $event, $arguments)
+        {
+            //Función que cancela línea SOS a partir de una línea de Leasing
+            //Valida que Solicitud Leasing se cancela
+            if ($bean->tipo_producto_c==1 && !empty($bean->opportunities_opportunities_2opportunities_ida) && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+                //Recupera solicitud SOS asociada
+                $GLOBALS['log']->fatal("cancelaSOS : Inicia proceso para cancelar SOS asociada a Leasing");
+                $beanSOS = BeanFactory::retrieveBean("Opportunities", $bean->opportunities_opportunities_2opportunities_ida);
+
+                //Actualiza Oportunidad Perdida con datos de Solicitud Leasing
+                $beanSOS->tct_oportunidad_perdida_chk_c = $bean->tct_oportunidad_perdida_chk_c;
+                $beanSOS->tct_razon_op_perdida_ddw_c = $bean->tct_razon_op_perdida_ddw_c;
+                $beanSOS->tct_competencia_quien_txf_c = $bean->tct_competencia_quien_txf_c;
+                $beanSOS->tct_competencia_porque_txf_c = $bean->tct_competencia_porque_txf_c;
+                $beanSOS->tct_sin_prod_financiero_ddw_c = $bean->tct_sin_prod_financiero_ddw_c;
+
+                //Actualiza subetapa a cancelada
+                $beanSOS->estatus_c='K';
+
+                //Guarda cambios en SOS
+                $beanSOS->save();
+            }
+
+            //Valida existencia de Id Process en Solicitud SOS para cancelar en BPM
+            if ($bean->tipo_producto_c==7 && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+                //Valida id Proceso
+                if (!empty($bean->id_process_c)) {
+                    //Ejecuta proceso para cancelar en BPM
+                    $GLOBALS['log']->fatal("cancelaSOS : Inicia proceso para cancelar SOS en BPM");
+                    //Instancia cancelaOperacionBPM
+                    require_once 'custom/modules/Opportunities/clients/base/api/cancelaOperacionBPM.php';
+                    $cancelaSOS = new cancelaOperacionBPM();
+
+                    //Define argumentos para cancelar
+                    global $current_user;
+                    $args = [];
+                    $args['data'] = [];
+                    $args['data']['idSolicitud'] = $bean->idsolicitud_c;
+                    $args['data']['usuarioAutenticado'] = $current_user->user_name;
+
+                    //Solicita cancelación
+                    $cancelaOPP = $cancelaSOS->cancelaOperacion(null, $args);
+
+                }
+            }
+        }
+
     }

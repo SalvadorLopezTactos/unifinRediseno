@@ -1147,4 +1147,31 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
+
+    public function asignaSinGestor($bean=null, $event= null, $args= null){
+
+        $idSinGestor='569246c7-da62-4664-ef2a-5628f649537e';
+
+        //Promotor Leasing
+        if (($bean->user_id_c==null|| $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
+            $bean->user_id_c = $idSinGestor;
+        }
+
+        //Promotor Factoraje
+        if (($bean->user_id1_c==null|| $bean->user_id1_c =="") && empty($bean->promotorfactoraje_c)) {
+            $bean->user_id1_c = $idSinGestor;
+        }
+
+        //Promotor CA
+        if (($bean->user_id2_c==null|| $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
+            $bean->user_id2_c = $idSinGestor;
+        }
+
+        //Promotor Fleet
+        if (($bean->user_id6_c==null|| $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
+            $bean->user_id6_c = $idSinGestor;
+        }
+
+    }
+
 }
