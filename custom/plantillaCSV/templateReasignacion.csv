@@ -1,1 +1,3 @@
-idCuenta,Producto,AsesorActual,AsesorReasignado
+idCuenta,IDAsesorReasignado,IDAsesorActual,Producto
+0a4a5764-fc5a-4db4-ad1e-a4b7935c679e,c57e811e-b81a-cde4-d6b4-5626c9961772,300c54cc-4fcd-11e8-8bcb-00155d967407,LEASING
+0b13ca45-75ec-46b5-9ebd-deb68eb84f38,c57e811e-b81a-cde4-d6b4-5626c9961772,300c54cc-4fcd-11e8-8bcb-00155d967407,LEASING
