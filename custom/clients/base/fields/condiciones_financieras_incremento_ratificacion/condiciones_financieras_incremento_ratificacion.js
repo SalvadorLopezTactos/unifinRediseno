@@ -289,9 +289,8 @@
 
     },
 
-    // FUNCIONES DE UTILERIA //
+    //Función que vaida el tamaño de los campos de %//
     checarPorcentajeRango: function(evt){
-
         var valor_campo = $(evt.currentTarget).val();
         var valor_maximo = $('.' +$(evt.currentTarget).attr('data-max')).val();
         var valor_minimo = $('.' +$(evt.currentTarget).attr('data-min')).val();
