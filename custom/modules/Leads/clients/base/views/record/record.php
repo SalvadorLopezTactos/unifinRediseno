@@ -135,7 +135,7 @@ array (
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
+            'newTab' => true,
             'panelDefault' => 'expanded',
             'fields' => 
             array (
@@ -308,10 +308,41 @@ array (
               ),
             ),
           ),
+          2 => 
+          array (
+            'newTab' => true,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'nombre_de_cargar_c',
+                'label' => 'LBL_NOMBRE_DE_CARGAR',
+              ),
+              1 => 
+              array (
+                'name' => 'resultado_de_carga_c',
+                'label' => 'LBL_RESULTADO_DE_CARGA',
+              ),
+              2 => 
+              array (
+                'name' => 'clean_name_c',
+                'label' => 'LBL_CLEAN_NAME',
+              ),
+              3 => 
+              array (
+              ),
+            ),
+          ),
         ),
         'templateMeta' => 
         array (
-          'useTabs' => false,
+          'useTabs' => true,
         ),
       ),
     ),
