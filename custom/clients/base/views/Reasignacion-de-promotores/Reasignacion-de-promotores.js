@@ -6,7 +6,7 @@
  */
 ({
 
-    className: 'Reasignacion-de-promotores tcenter',
+    className: 'Reasignacion-de-promotores',
 
     events: {
         'click #btn_Cuentas': 'buscarCuentas',
@@ -16,6 +16,7 @@
         'click #next_offset': 'nextOffset',
         'click #previous_offset': 'previousOffset',
         'change #filtroCliente': '_setOffset',
+        'click .btnSubir': 'leerCSVReasignar',
     },
 
     initialize: function(options){
@@ -58,7 +59,7 @@
         this._super("_render");
         var tipos_cuenta=[];
          this.$('#tipo_de_cuenta').select2({
-             width:'250px',
+             width:'400px',
              closeOnSelect: false,
              containerCssClass: 'select2-choices-pills-close'
          });
@@ -74,6 +75,87 @@
     _setOffset: function (){
         $("#offset_value").attr("from_set", 0);
         $("#crossSeleccionados").val("");
+    },
+
+    leerCSVReasignar:function () {
+
+        //Validar que se haya seleccionado un archivo
+        var fileInput = document.getElementById('csvReasignar');
+        var archivo=fileInput.value;
+
+        if(archivo=="" || archivo==undefined){
+
+            app.alert.show('errorAlert', {
+                level: 'error',
+                messages: 'Favor de elegir un archivo',
+                autoClose: true
+            });
+
+        }else{
+
+            var file = fileInput.files[0];
+            var textType = /text.*/;
+
+            self=this;
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var content = reader.result;
+                var registros=content.split('\n');
+
+                for(var i=1;i<registros.length;i++){
+                    //No se lee el primer renglón ya que son los titulos de las columnas
+                    var row=registros[i].split(',');
+                    if(row != ""){
+                        var idCuenta=row[0];
+                        var idAsesorReasignado=row[1];
+                        var idAsesorActual=row[2];
+                        var producto=row[3];
+                        var cuentas=[];
+                        cuentas.push(idCuenta);
+
+                        var parametros = {
+                            'optBl':"actualSiguientes",
+                            'seleccionados': cuentas,
+                            'reAssignado': idAsesorReasignado,
+                            'producto_seleccionado': producto,
+                            'promoActual': idAsesorActual,
+                        };
+
+                        var urlReasignacion = app.api.buildURL("reAsignarCuentas", '', {}, {});
+                        app.alert.show('reasignandoCSV', {
+                            level: 'process',
+                            title: 'Cargando...'
+                        });
+                        $('.btnSubir').addClass('disabled');
+                        $('.btnSubir').attr('style','pointer-events:none;margin:10px');
+
+                        app.api.call("create", urlReasignacion, {data: parametros}, {
+                            success: _.bind(function (data) {
+                                if(data==true){
+                                    app.alert.dismiss('reasignandoCSV');
+                                    $('.btnSubir').removeClass('disabled');
+                                    $('.btnSubir').attr('style','margin:10px');
+                                    self.render();
+                                    $('#successful').show();
+                                }else{
+                                    app.alert.dismiss('reasignandoCSV');
+                                    var alertOptions = {
+                                        title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
+                                        level: "error"
+                                    };
+                                    app.alert.show('validation', alertOptions);
+                                }
+                            }, this)
+                        });
+                    }
+
+                }
+            }
+            reader.readAsText(file);
+        }
+
     },
 
     seleccionarTodo: function(e){
@@ -427,13 +509,16 @@
                     'producto_seleccionado': producto_seleccionado,
                     'promoActual': promoActual,
                 };
-                $('#processing').show();
+                app.alert.show('reasignando', {
+                    level: 'process',
+                    title: 'Cargando...'
+                });
                 var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
                 app.api.call("create", dnbProfileUrl, {data: Params}, {
                     success: _.bind(function (data) {
                         console.log(typeof data);
                         if(data==true){
-                            $('#processing').hide();
+                            app.alert.dismiss('reasignando');
                             this.cuentas = [];
                             this.seleccionados = [];
                             this.render();
@@ -443,7 +528,7 @@
                             this.model.set("asignar_a_promotor_id","");
                             this.model.set("asignar_a_promotor","");
                         }else{
-                            $('#processing').hide();
+                            app.alert.dismiss('reasignando');
                             var alertOptions = {
                                 title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
                                 level: "error"
