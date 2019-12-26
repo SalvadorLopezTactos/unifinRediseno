@@ -11,6 +11,7 @@
         'click  .remove_incremento_CondicionFinanciera': 'removeCondicionFinanciera',
         'change .new_incremento_Activo': 'ActualizaActivoFinanciera',
         'change .new_incremento_Plazo': 'ActualizaPlazoFinanciera',
+        'change .porcentaje': 'checarPorcentajeRango',
         //Eventos para campos de tipo Select2
         'change .existing_incremento_Activo': 'updateActivo',
         'change .existing_incremento_Plazo': 'updatePlazo',
@@ -146,7 +147,7 @@
         var index = inputs.index(input);
         var numero= input.val();
         //Actualiza modelo con el valor de los campos modificados
-        this.oFinancieraRI.ratificacion[index][nombre]=numero;
+        contRI.oFinancieraRI.ratificacion[index][nombre]=numero;
 
     },
 
@@ -233,8 +234,8 @@
         var inputs= this.$("[data-name='"+nombre+"']");
         var index = inputs.index(input);
         //Elimina el objeto de la lista
-        this.oFinancieraRI.ratificacion.splice([index],1);
-        this.render();
+        contRI.oFinancieraRI.ratificacion.splice([index],1);
+        contRI.render();
     },
 
     //Evento que actualiza los campos de la condicion con base en el activo seleccionado
@@ -289,8 +290,8 @@
     },
 
     // FUNCIONES DE UTILERIA //
-    /*
     checarPorcentajeRango: function(evt){
+
         var valor_campo = $(evt.currentTarget).val();
         var valor_maximo = $('.' +$(evt.currentTarget).attr('data-max')).val();
         var valor_minimo = $('.' +$(evt.currentTarget).attr('data-min')).val();
@@ -334,8 +335,10 @@
             $(evt.currentTarget).val(valor_minimo);
             $(evt.currentTarget).focus();
         }
-
-
-    }
-    */
+        var input = this.$(evt.currentTarget);
+        var nombre= input[0].dataset.name;
+        var inputs= this.$("[data-name='"+nombre+"']");
+        var index = inputs.index(input);
+        contRI.oFinancieraRI.ratificacion[index][nombre]=input[index].value;
+    },
 })
