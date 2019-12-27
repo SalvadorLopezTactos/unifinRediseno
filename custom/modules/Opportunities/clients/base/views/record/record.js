@@ -74,7 +74,7 @@
             Ajuste para actualizar valores en vista
         */
         this.model.on('sync', this.ocultynoedit, this);
-        this.model.on('sync', this.disable_panels_team, this);
+        //this.model.on('sync', this.disable_panels_team, this);
         this.model.on('sync', this.getcfRI, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
