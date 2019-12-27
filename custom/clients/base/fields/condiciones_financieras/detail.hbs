@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-striped table-condensed">
     <tr>
         <th>Activo</th>
         <th>Plazo</th>
@@ -17,10 +17,10 @@
         <th>Empresarial</th>
         <th>Activo Nuevo</th>
     </tr>
-    {{#each value}}
+    {{#each oFinanciera.condicion}}
         <tr>
-            <td>{{activo_label}}</td>
-            <td>{{plazo_label}}</td>
+            <td>{{getUnifinListValue 'idactivo_list' idactivo}}</td>
+            <td>{{plazo}}</td>
             <td>{{tasa_minima}}</td>
             <td>{{tasa_maxima}}</td>
             <td>{{vrc_minimo}}</td>
@@ -28,21 +28,21 @@
             <td>{{vri_minimo}}</td>
             <td>{{vri_maximo}}</td>
             <!--<td>{{deposito_en_garantia}}</td>-->
-			<td>
-                <input type="checkbox" value="{{deposito_en_garantia}}" {{detail_deposito_en_garantia_checked}} disabled />
+			<td style="text-align:center">
+                <input type="checkbox"  {{#if deposito_en_garantia}}checked{{/if}} disabled/>
             </td>
             <td>{{comision_minima}}</td>
             <td>{{comision_maxima}}</td>
             <td>{{renta_inicial_minima}}</td>
             <td>{{renta_inicial_maxima}}</td>
-            <td>
-                <input type="checkbox" value="{{uso_particular}}" {{detail_uso_particular_checked}} disabled />
+            <td style="text-align:center">
+                <input type="checkbox" {{#if uso_particular}}checked{{/if}} disabled/>
             </td>
-            <td>
-                <input type="checkbox" value="{{uso_empresarial}}" {{detail_uso_empresarial_checked}} disabled />
+            <td style="text-align:center">
+                <input type="checkbox" {{#if uso_empresarial}}checked{{/if}} disabled/>
             </td>
-            <td>
-                <input type="checkbox" value="{{activo_nuevo}}" {{detail_activo_nuevo_checked}} disabled />
+            <td style="text-align:center">
+                <input type="checkbox" {{#if activo_nuevo}}checked{{/if}} disabled/>
             </td>
         </tr>
     {{/each}}

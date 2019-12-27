@@ -3,26 +3,37 @@
 
 	initialize: function (options) {
 		self = this;
-		this._super("initialize", [options]);
+        solicitud_cf= this;
+        cont_RI=this;
+		    this._super("initialize", [options]);
+        this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
+        this.events['keydown input[name=monto_c]'] = 'checkmoney';
+        this.events['keydown input[name=amount]'] = 'checkmoney';
+        this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
+        this.events['keydown input[name=ca_importe_enganche_c]'] = 'checkmoney';
+        this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
+        this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
+        this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
+        this.events['keydown input[name=f_aforo_c]'] = 'limitanumero';
+        this.events['keydown input[name=tasa_fija_moratorio_c]'] = 'limitanumero';
+        this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
+        this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
+        this.events['click a[name=cancel_button]'] = 'cancelClicked';
+        this.events['click a[name=monto_c]'] = 'formatcoin';
+        this.events['click a[name=amount]'] = 'formatcoin';
+        this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
+        this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
 
-    this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
-    this.events['keydown input[name=monto_c]'] = 'checkmoney';
-    this.events['keydown input[name=amount]'] = 'checkmoney';
-    this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
-    this.events['keydown input[name=ca_importe_enganche_c]'] = 'checkmoney';
-    this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
-    this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
-    this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
-    this.events['keydown input[name=f_aforo_c]'] = 'limitanumero';
-    this.events['keydown input[name=tasa_fija_moratorio_c]'] = 'limitanumero';
-    this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
-    this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
-    this.events['click a[name=cancel_button]'] = 'cancelClicked';
-    this.events['click a[name=monto_c]'] = 'formatcoin';
-    this.events['click a[name=amount]'] = 'formatcoin';
-    this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
-    this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
-		/*
+        /*
+        Contexto campos custom
+        */
+        //Condificiones financieras
+        this.oFinanciera = [];
+        this.oFinanciera.condicion = [];
+        this.prev_oFinanciera=[];
+        this.prev_oFinanciera.prev_condicion=[];
+        /*
+
 		 * @author Carlos Zaragoza Ortiz
 		 * @version 1
 		 * En operaciones de solicitud de crédito quitar opción de pipeline en lista de Forecast
@@ -62,8 +73,9 @@
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
         */
-        this.model.on('sync', this._render, this);
+        this.model.on('sync', this.ocultynoedit, this);
         this.model.on('sync', this.disable_panels_team, this);
+        this.model.on('sync', this.getcfRI, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
@@ -76,17 +88,18 @@
 
         this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
-		this.getCurrentYearMonth();
+    		this.getCurrentYearMonth();
 
+        /*@Jesus Carrillo
+            Funcion que pinta de color los paneles relacionados
+        */
+        this.model.on('sync', this.fulminantcolor, this);
 
-    /*@Jesus Carrillo
-        Funcion que pinta de color los paneles relacionados
-    */
-    this.model.on('sync', this.fulminantcolor, this);
+        //Recupera datos para custom fields
+        this.getcf();
+
     //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
-
-
 	},
 
   fulminantcolor: function () {
@@ -160,16 +173,26 @@
       }
     },
 
-    _renderHtml : function()
-    {
-      this._super('_renderHtml');
+    ocultynoedit : function() {
 
-      if(this.model.get('id_process_c') !== "")
-      {
+      if(this.model.get('id_process_c') !== "" && this.model.get('id_process_c')!= undefined) {
         var self = this;
         self.noEditFields.push('condiciones_financieras');
       }
-
+      if(this.model.get('ratificacion_incremento_c')== true) {
+          this.$('[data-name="ratificacion_incremento_c"]').attr('style','pointer-events:none');
+          this.$('[data-name="condiciones_financieras_incremento_ratificacion"]').attr('style','pointer-events:none');
+          this.$('[data-name="ri_usuario_bo_c"]').attr('style','pointer-events:none');
+          this.$('[data-name="ri_anio_c"]').attr('style','pointer-events:none');
+          this.$('[data-name="ri_mes_c"]').attr('style','pointer-events:none');
+          this.$('[data-name="monto_ratificacion_increment_c"]').attr('style','pointer-events:none');
+          this.noEditFields.push('ratificacion_incremento_c');
+          this.noEditFields.push('condiciones_financieras_incremento_ratificacion');
+          this.noEditFields.push('ri_usuario_bo_c');
+          this.noEditFields.push('ri_anio_c');
+          this.noEditFields.push('ri_mes_c');
+          this.noEditFields.push('monto_ratificacion_increment_c');
+      }
       if(this.model.get('tct_etapa_ddw_c')!=='SI'){
       	this.noEditFields.push('usuario_bo_c');
       }
@@ -194,6 +217,13 @@
         });
         //Establece valores para año
         this.model.fields['ri_anio_c'].options = opciones_year;
+
+        if(this.model.get('ratificacion_incremento_c')!= true){
+            this.$('div[data-name=ri_usuario_bo_c]').hide();
+        }else{
+            this.$('div[data-name=ri_usuario_bo_c]').show();
+
+        }
     },
 
     _render: function() {
@@ -652,7 +682,7 @@
 
 			this.context.on('button:expediente_button:click', this.expedienteClicked, this);
 			this.context.on('button:ratificado_button:click', this.ratificadoClicked, this);
-			this.context.on('button:edit_button:click', this.checkForRatificado, this);
+            this.context.on('button:edit_button:click', this.checkForRatificado, this);
       this.context.on('button:edit_button:click', this._HideSaveButton, this);
 			//this.model.on('change:monto_c', this._ValidateAmount, this);
 			//this.events['blur input[name=monto_c]'] = '_ValidateAmount';
@@ -845,7 +875,7 @@
 							autoClose: true
 						});
 						this.cancelClicked();
-            this.render();
+            //this.render();
 					}
 				}
 			}, this)
@@ -1121,7 +1151,7 @@ console.log(name);
 	condicionesFinancierasCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
             if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7) {
-                if (_.isEmpty(this.model.get('condiciones_financieras'))) {
+               if (solicitud_cf.oFinanciera.condicion.length==0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
 
@@ -1131,6 +1161,8 @@ console.log(name);
                         title: "Al menos una Condicion Financiera es requerida.",
                         autoClose: false
                     });
+                }else if (solicitud_cf.oFinanciera.condicion.length>=1){
+                    solicitud_cf.model.set('condiciones_financieras',solicitud_cf.oFinanciera.condicion);
                 }
             }
         }
@@ -1140,7 +1172,7 @@ console.log(name);
 	condicionesFinancierasIncrementoCheck: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
             if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
-                if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
+                if (contRI.oFinancieraRI.ratificacion.length==0) {
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
@@ -1150,6 +1182,9 @@ console.log(name);
                         title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
                         autoClose: false
                     });
+                }else if (contRI.oFinancieraRI.ratificacion.length>=1){
+                    contRI.model.set('condiciones_financieras_incremento_ratificacion',contRI.oFinancieraRI.ratificacion);
+
                 }
             }
         }
@@ -1896,6 +1931,323 @@ console.log(name);
             });
         }
         callback(null, fields, errors);
+    },
+
+    getcf: function (){
+        //Extiende This
+        //Condificiones financieras
+        this.oFinanciera = [];
+        this.oFinanciera.condicion = [];
+        this.prev_oFinanciera=[];
+        this.prev_oFinanciera.prev_condicion=[];
+        var api_params = {
+            'max_num': 99,
+            //'order_by': 'date_entered:desc',
+            //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
+            'order_by': 'idactivo:ASC,plazo:ASC',
+            'filter': [
+                {
+                    'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
+                    'incremento_ratificacion': 0
+                }
+            ]
+        };
+        var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
+            null, null, api_params);
+
+        try
+        {
+            app.api.call('READ', pull_condicionFinanciera_url, {}, {
+                success: function (data) {
+                    for (var i = 0; i < data.records.length; i++) {
+                        //Setea valores al objeto para su visualización en el edit.hbs
+                        var valor1 = data.records[i].id;
+                        var idActivo = data.records[i].idactivo;
+                        var idplazo = data.records[i].plazo;
+                        var tasa_minima = data.records[i].tasa_minima;
+                        var tasa_maxima = data.records[i].tasa_maxima;
+                        var vrc_minimo = data.records[i].tasa_maxima;
+                        var vrc_maximo = data.records[i].vrc_minimo;
+                        var vri_minimo = data.records[i].vrc_maximo;
+                        var vri_maximo = data.records[i].vri_minimo;
+                        var comision_minima = data.records[i].vri_maximo;
+                        var comision_maxima = data.records[i].comision_minima;
+                        var renta_inicial_minima = data.records[i].renta_inicial_minima;
+                        var renta_inicial_maxima = data.records[i].renta_inicial_maxima;
+                        var deposito_en_garantia = data.records[i].deposito_en_garantia;
+                        var uso_particular = data.records[i].uso_particular;
+                        var uso_empresarial = data.records[i].uso_empresarial;
+                        var activo_nuevo = data.records[i].activo_nuevo;
+
+                        //Crea obj
+                        var condfin = {
+                            "id":valor1,
+                            "idactivo": idActivo,
+                            "plazo": idplazo,
+                            "tasa_minima": tasa_minima,
+                            "tasa_maxima": tasa_maxima,
+                            "vrc_minimo": vrc_minimo,
+                            "vrc_maximo": vrc_maximo,
+                            "vri_minimo": vri_minimo,
+                            "vri_maximo": vri_maximo,
+                            "comision_minima": comision_minima,
+                            "comision_maxima": comision_maxima,
+                            "renta_inicial_minima": renta_inicial_minima,
+                            "renta_inicial_maxima": renta_inicial_maxima,
+                            "deposito_en_garantia": deposito_en_garantia,
+                            "uso_particular": uso_particular,
+                            "uso_empresarial": uso_empresarial,
+                            "activo_nuevo": activo_nuevo
+                        };
+                        var prev_condfin = {
+                            "id":valor1,
+                            "idactivo": idActivo,
+                            "plazo": idplazo,
+                            "tasa_minima": tasa_minima,
+                            "tasa_maxima": tasa_maxima,
+                            "vrc_minimo": vrc_minimo,
+                            "vrc_maximo": vrc_maximo,
+                            "vri_minimo": vri_minimo,
+                            "vri_maximo": vri_maximo,
+                            "comision_minima": comision_minima,
+                            "comision_maxima": comision_maxima,
+                            "renta_inicial_minima": renta_inicial_minima,
+                            "renta_inicial_maxima": renta_inicial_maxima,
+                            "deposito_en_garantia": deposito_en_garantia,
+                            "uso_particular": uso_particular,
+                            "uso_empresarial": uso_empresarial,
+                            "activo_nuevo": activo_nuevo
+                        };
+                        //Genera objeto con valores previos para control de cancelar
+                        solicitud_cf.oFinanciera.condicion.push(condfin);
+                        solicitud_cf.prev_oFinanciera.prev_condicion.push(prev_condfin);
+                    }
+
+                    //set model so tpl detail tpl can read data
+                    //solicitud_cf.model.set('condiciones_financieras', data.records);
+
+                    cont_cf.oFinanciera = solicitud_cf.oFinanciera;
+                    cont_cf.render();
+                }
+            });
+        }
+        catch(err) {
+            console.log(err);
+        }
+        //Obtener las condiciones iniciales
+       var api_params_cond_iniciales = {
+            'max_num': 500,
+        };
+        var pull_condiciones_iniciales_url = app.api.buildURL('UNI_condiciones_iniciales',
+            null, null, api_params_cond_iniciales);
+
+        app.api.call('READ', pull_condiciones_iniciales_url, {}, {
+            success: function (data) {
+                cont_cf.condiciones_iniciales = {};
+                if (!_.isEmpty(data.records)) {
+                    cont_cf.condiciones_iniciales = data.records;
+                    var activos= App.lang.getAppListStrings('idactivo_list');
+                    var plazos= App.lang.getAppListStrings('plazo_0');
+                    //Se crea contexto vacío
+                    cont_cf.activos=[];
+
+//Se crea array que contendrá los valores de los campos de la CF
+                    var condicionFinanciera = {
+                        "tasa_minima": "",
+                        "tasa_maxima": "",
+                        "vrc_minimo": "",
+                        "vrc_maximo": "",
+                        "vri_minimo": "",
+                        "vri_maximo": "",
+                        "comision_minima": "",
+                        "comision_maxima": "",
+                        "renta_inicial_minima": "",
+                        "renta_inicial_maxima": "",
+                        "deposito_en_garantia": "",
+                        "uso_particular": "",
+                        "uso_empresarial": "",
+                        "activo_nuevo": ""
+                    };
+
+//Se iteran las listas para generar los arrays y se guardan en el contexto creado cont_cf.activos
+                    for (var i = 0; i < data.records.length; i++) {
+                        cont_cf.activos[data.records[i].activo]=[];
+                        for (index in plazos){
+                            cont_cf.activos[data.records[i].activo][index]=[];
+                            cont_cf.activos[data.records[i].activo][index]=app.utils.deepCopy(condicionFinanciera);
+                        }
+                    }
+                    for (id in activos){
+                        cont_cf.activos[id]=[];
+                        for (index in plazos){
+                            cont_cf.activos[id][index]=[];
+                            cont_cf.activos[id][index]=app.utils.deepCopy(condicionFinanciera);
+                        }
+                    }
+
+//Se llena la estructura con los datos del data.records
+                    for (var i = 0; i < data.records.length; i++) {
+                        //Tasa minima
+                        if(data.records[i].campo_destino_minimo == 'new_tasa_minima'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].tasa_minima = data.records[i].rango_minimo;
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].tasa_maxima = data.records[i].rango_maximo;
+                        }
+                        //VRC
+                        if(data.records[i].campo_destino_minimo == 'new_vrc_minimo'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].vrc_minimo = data.records[i].rango_minimo;
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].vrc_maximo = data.records[i].rango_maximo;
+                        }
+                        //VRI
+                        if(data.records[i].campo_destino_minimo == 'new_vri_minimo'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].vri_minimo = data.records[i].rango_minimo;
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].vri_maximo = data.records[i].rango_maximo;
+                        }
+                        //Comision
+                        if(data.records[i].campo_destino_minimo == 'new_comision_minima'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].comision_minima = data.records[i].rango_minimo;
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].comision_maxima = data.records[i].rango_maximo;
+                        }
+                        //Pago Único
+                        if(data.records[i].campo_destino_minimo == 'new_renta_inicial_minima'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].renta_inicial_minima = data.records[i].rango_minimo;
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].renta_inicial_maxima = data.records[i].rango_maximo;
+                        }
+                        //Deposito en Garantia
+                        if(data.records[i].campo_destino_minimo == 'new_deposito_en_garantia'){
+                            cont_cf.activos[data.records[i].activo][data.records[i].plazo].deposito_en_garantia = data.records[i].rango_minimo;
+                        }
+                    }
+                    cont_cf.render();
+                }
+            }
+        });
+    },
+
+    handleCancel: function () {
+        this._super("handleCancel");
+        //Condiciones_financieras
+        var condiciones_financieras = app.utils.deepCopy(this.prev_oFinanciera.prev_condicion);
+        this.model.set('condiciones_financieras', condiciones_financieras);
+        this.oFinanciera.condicion = condiciones_financieras;
+        cont_cf.render();
+
+        //Condiciones_financieras Ratificacion e Incremento
+        var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
+        this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
+        this.oFinancieraRI.ratificacion = condiciones_financierasRI;
+        contRI.render();
+    },
+
+    getcfRI: function () {
+
+        //Condificiones financieras RI
+        this.oFinancieraRI = [];
+        this.oFinancieraRI.ratificacion = [];
+        this.prev_oFinancieraRI = [];
+        this.prev_oFinancieraRI.prev_ratificacion = [];
+
+        if (cont_RI.model.get('ratificacion_incremento_c')== true) {
+
+
+        var api_params = {
+            'max_num': 99,
+
+            //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
+            //Cambio de orden
+            'order_by': 'idactivo:ASC,plazo:ASC',
+            'filter': [
+                {
+                    'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
+                    'incremento_ratificacion': 1
+                }
+            ]
+        };
+
+        var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
+            null, null, api_params);
+
+        try {
+            app.api.call('READ', pull_condicionFinanciera_url, {}, {
+                success: function (data) {
+
+                    var activo_list = app.lang.getAppListStrings('idactivo_list');
+                    for (var i = 0; i < data.records.length; i++) {
+                        //Setea valores al objeto para su visualización en el edit.hbs
+                        var valor1 = data.records[i].id;
+                        var idActivo = data.records[i].idactivo;
+                        var idplazo = data.records[i].plazo;
+                        var tasa_minima = data.records[i].tasa_minima;
+                        var tasa_maxima = data.records[i].tasa_maxima;
+                        var vrc_minimo = data.records[i].tasa_maxima;
+                        var vrc_maximo = data.records[i].vrc_minimo;
+                        var vri_minimo = data.records[i].vrc_maximo;
+                        var vri_maximo = data.records[i].vri_minimo;
+                        var comision_minima = data.records[i].vri_maximo;
+                        var comision_maxima = data.records[i].comision_minima;
+                        var renta_inicial_minima = data.records[i].renta_inicial_minima;
+                        var renta_inicial_maxima = data.records[i].renta_inicial_maxima;
+                        var deposito_en_garantia = data.records[i].deposito_en_garantia;
+                        var uso_particular = data.records[i].uso_particular;
+                        var uso_empresarial = data.records[i].uso_empresarial;
+                        var activo_nuevo = data.records[i].activo_nuevo;
+
+                        //Crea obj
+                        var condfinRI = {
+                            "id": valor1,
+                            "idactivo": idActivo,
+                            "plazo": idplazo,
+                            "tasa_minima": tasa_minima,
+                            "tasa_maxima": tasa_maxima,
+                            "vrc_minimo": vrc_minimo,
+                            "vrc_maximo": vrc_maximo,
+                            "vri_minimo": vri_minimo,
+                            "vri_maximo": vri_maximo,
+                            "comision_minima": comision_minima,
+                            "comision_maxima": comision_maxima,
+                            "renta_inicial_minima": renta_inicial_minima,
+                            "renta_inicial_maxima": renta_inicial_maxima,
+                            "deposito_en_garantia": deposito_en_garantia,
+                            "uso_particular": uso_particular,
+                            "uso_empresarial": uso_empresarial,
+                            "activo_nuevo": activo_nuevo
+                        };
+                        var prev_condfinRI = {
+                            "id": valor1,
+                            "idactivo": idActivo,
+                            "plazo": idplazo,
+                            "tasa_minima": tasa_minima,
+                            "tasa_maxima": tasa_maxima,
+                            "vrc_minimo": vrc_minimo,
+                            "vrc_maximo": vrc_maximo,
+                            "vri_minimo": vri_minimo,
+                            "vri_maximo": vri_maximo,
+                            "comision_minima": comision_minima,
+                            "comision_maxima": comision_maxima,
+                            "renta_inicial_minima": renta_inicial_minima,
+                            "renta_inicial_maxima": renta_inicial_maxima,
+                            "deposito_en_garantia": deposito_en_garantia,
+                            "uso_particular": uso_particular,
+                            "uso_empresarial": uso_empresarial,
+                            "activo_nuevo": activo_nuevo
+                        };
+                        //Genera objeto con valores previos para control de cancelar
+                        cont_RI.oFinancieraRI.ratificacion.push(condfinRI);
+                        cont_RI.prev_oFinancieraRI.prev_ratificacion.push(prev_condfinRI);
+                    }
+                    contRI.oFinancieraRI = cont_RI.oFinancieraRI;
+                    contRI.render();
+                }
+            });
+        }
+        catch (err) {
+            console.log(err);
+            // self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
+            // self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+            // self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+            // self._render();
+        }
+
+        }
     },
 
 })

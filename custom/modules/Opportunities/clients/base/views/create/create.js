@@ -27,7 +27,7 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-		    this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
+        this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
@@ -126,16 +126,14 @@
          * Crear estatus "Oportunidad de prospecto" y validar en la creación de la oportunidad si el estatus con el que debe nacer es "Oportunidad de prospecto" o "Integración de expediente" (\custom\modules\Opportunities\clients\base\views\create-actions\create-actions.js)
          * */
         this.verificaOperacionProspecto();
-
         //this.getCurrentYearMonth("loading");
         //this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
         //Evento para el campo monto cuando la solicitud es Credito SOS
         this.model.on("change:tipo_producto_c", _.bind(this.bloqueamonto, this));
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
-
-
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
+
     },
 
     _render: function() {
@@ -1522,7 +1520,7 @@
         }
         callback(null, fields, errors);
     },
-
+  
     set_lista_productos: function (){
         var id_account= this.model.get('account_id');
         var SLL= 0;
