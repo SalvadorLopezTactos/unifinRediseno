@@ -1,6 +1,6 @@
 <?php
- // created: 2019-12-23 14:56:04
-$dictionary['Lead']['fields']['nombre_c']['labelValue']='Nombre';
+ // created: 2019-12-27 09:20:08
+$dictionary['Lead']['fields']['nombre_c']['labelValue']='Nombre(s)';
 $dictionary['Lead']['fields']['nombre_c']['full_text_search']=array (
   'enabled' => '0',
   'boost' => '1',
