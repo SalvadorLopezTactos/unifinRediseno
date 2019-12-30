@@ -59,6 +59,13 @@ array (
               ),
               5 => 
               array (
+                'name' => 'subpuesto_c',
+                'label' => 'LBL_SUBPUESTO',
+                'enabled' => true,
+                'default' => true,
+              ),
+              6 => 
+              array (
                 'name' => 'reports_to_name',
                 'label' => 'LBL_LIST_REPORTS_TO_NAME',
                 'enabled' => true,
@@ -66,7 +73,7 @@ array (
                 'sortable' => true,
                 'width' => '15',
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_EMAIL',
@@ -75,7 +82,7 @@ array (
                 'sortable' => true,
                 'width' => '15',
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -84,7 +91,7 @@ array (
                 'sortable' => true,
                 'width' => '10',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'ext_c',
                 'label' => 'LBL_EXT',
@@ -92,7 +99,7 @@ array (
                 'default' => true,
                 'width' => '10',
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'date_entered',
                 'label' => 'LBL_DATE_ENTERED',
