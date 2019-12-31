@@ -7,5 +7,6 @@ $dictionary['Lead']['fields']['camara_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Lead']['fields']['camara_c']['enforced']='';
+$dictionary['Lead']['fields']['camara_c']['dependency']='equal($detalle_origen_c,"Afiliaciones")';
 
  ?>
