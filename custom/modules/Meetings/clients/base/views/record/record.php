@@ -401,10 +401,14 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_RESULTADO_CONFIRMADO_POR',
                 'initial_filter' => 'filterAgentesTelefonicosTemplate',
-                  'initial_filter_label' => 'Agentes Telefónicos',
-                  'filter_populate' => array(
-                      'puestousuario_c' => array('27')
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'puestousuario_c' => 
+                  array (
+                    0 => '27',
                   ),
+                ),
               ),
               2 => 
               array (
@@ -414,6 +418,18 @@ array (
               ),
               3 => 
               array (
+                'name' => 'validado_por_c',
+                'studio' => 'visible',
+                'label' => 'LBL_VALIDADO_POR',
+                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'puestousuario_c' => 
+                  array (
+                    0 => '27',
+                  ),
+                ),
               ),
               4 => 
               array (

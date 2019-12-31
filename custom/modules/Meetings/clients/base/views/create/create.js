@@ -16,7 +16,7 @@
         //this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
-
+        this.on('render', this.disableConfirmado, this);
         this.on('render', this.disablestatus, this);
     },
 
@@ -189,6 +189,16 @@
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
+        }
+    },
+
+    /*@Eduardo Carrasco Beltrán
+    Deshabilita campo Validado Por*/
+    disableConfirmado:function () {
+        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Planned" || this.model.get('validado_por_c')) {
+            $('[data-name="validado_por_c"]').attr('style','pointer-events:none');
+            $('span[data-name=validado_por_c]').css("pointer-events", "none");
+            this.noEditFields.push('validado_por_c');
         }
     },
 
