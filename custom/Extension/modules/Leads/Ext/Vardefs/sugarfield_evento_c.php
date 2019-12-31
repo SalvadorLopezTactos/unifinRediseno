@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-26 22:17:44
+ // created: 2019-12-31 16:04:09
 $dictionary['Lead']['fields']['evento_c']['labelValue']='¿Qué Evento?';
 $dictionary['Lead']['fields']['evento_c']['full_text_search']=array (
   'enabled' => '0',
@@ -7,6 +7,5 @@ $dictionary['Lead']['fields']['evento_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Lead']['fields']['evento_c']['enforced']='';
-$dictionary['Lead']['fields']['evento_c']['dependency']='equal($detalle_origen_c,"Acciones Estrategicas")';
 
  ?>
