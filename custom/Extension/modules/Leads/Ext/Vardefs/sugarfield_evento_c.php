@@ -7,5 +7,6 @@ $dictionary['Lead']['fields']['evento_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Lead']['fields']['evento_c']['enforced']='';
+$dictionary['Lead']['fields']['evento_c']['dependency']='equal($detalle_origen_c,"Acciones Estrategicas")';
 
  ?>
