@@ -16,11 +16,17 @@
             //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
             this.model.on('sync',this.enableparentname,this);
             this.model.on('sync', this.cambioFecha, this);
-            this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
+          
+			this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
-            this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
+           
+			/*****************************************/
+			this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
+			/*********************************************/
 
+		   this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
+			
             /*@Jesus Carrillo
                 Funcion que pinta de color los paneles relacionados
             */
@@ -31,9 +37,13 @@
 
             this.model.on('sync', this.disablestatus1, this);
             this.model.on('sync', this.disableFieldsTime,this);
-            this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
+            
+			this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
             this.events['click a[name=edit_button]'] = 'fechascallsymeet';
+			
             this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+			
+			
     },
 
     _render: function (options) {
@@ -484,4 +494,98 @@
         }
         callback(null, fields, errors);
     },
+	
+	valida_requeridos_Leads:function (fields, errors, callback) {
+		var requerido = 0;
+		var texto="";		
+        if (this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
+            var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+					// 
+                    //if(model.get('tct_no_contactar_chk_c')==true){
+					if( model.get('subtipo_registro_c') == "1" ){
+						if (model.get('macrosector_c')=='') {
+							errors['macrosector_c'] = errors['macrosector_c'] || {};
+							errors['macrosector_c'].required = true;
+							texto += "<b>Macro Sector es requerido</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('ventas_anuales_c') == 0.00) {
+							errors['ventas_anuales_c'] = errors['ventas_anuales_c'] || {};
+							errors['ventas_anuales_c'].required = true;
+							texto += "<b>Ventas Anuales es requerido</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('potencial_lead_c')== 0.00) {
+							errors['potencial_lead_c'] = errors['potencial_lead_c'] || {};
+							errors['potencial_lead_c'].required = true;
+							texto += "<b>Potencial de Lead es requerido</b> <br>";
+							requerido++;
+						}
+						
+						
+						if (model.get('zona_geografica_c')=='') {
+							errors['zona_geografica_c'] = errors['zona_geografica_c'] || {};
+							errors['zona_geografica_c'].required = true;
+							texto += "<b>Zona Geográfica es requerida</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('phone_home')=='') {
+							errors['phone_home'] = errors['phone_home'] || {};
+							errors['phone_home'].required = true;
+							texto += "<b>Teléfono es requerido</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('email') == null || model.get('email') =="") {
+							errors['email'] = errors['email'] || {};
+							errors['email'].required = true;
+							texto += "<b>Email es requerido</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('puesto_c')=='') {
+							errors['puesto_c'] = errors['puesto_c'] || {};
+							errors['puesto_c'].required = true;
+							texto += "<b>Puesto es requerido</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('assigned_user_id')=='' ) { 
+							errors['assigned_user_id'] = errors['assigned_user_id'] || {};
+							errors['assigned_user_id'].required = true;
+							texto += "<b>No se tiene un promotor asignado</b> <br>";
+							requerido++;
+						}
+						
+						/*if (model.get('leads_leads_1_name')=='') {
+							errors['leads_leads_1_name'] = errors['leads_leads_1_name'] || {};
+							errors['leads_leads_1_name'].required = true;
+							texto += "<b>No se tiene contacto asociado</b> <br>";
+							requerido++;
+						}*/
+						
+						if (requerido > 0){
+							app.alert.show("Campos Requeridos en Leads", {
+							level: "error",
+							messages: 'Hace falta completar la siguiente información en el Lead <br> '+texto,
+							autoClose: false
+							});
+							callback(null, fields, errors);
+						}else{
+							callback(null, fields, errors);
+						}
+					}
+				}, this)
+            });
+		}
+		//this._super('_render'); 
+		//callback(null, fields, errors);
+		
+	},
+	
 })
