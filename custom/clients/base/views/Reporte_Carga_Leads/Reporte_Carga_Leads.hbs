@@ -1,0 +1,70 @@
+{{#if this.loadView}}
+    <style>
+        .container {
+            overflow-y:auto;
+            display:block;
+            width: 100%;
+        }
+
+        .cuentas {
+            display:table;
+            width: 90%;
+        }
+
+        .cuentasContainer {
+            margin-top: 2%;
+            overflow-y:auto;
+            height: 400 px;
+        }
+
+        #containerHeader {
+            font-size: 18px;
+            margin-top: 2%;
+            margin-left: 1%;
+            line-height: 10px;
+        }
+
+        #successful {
+            margin-top: 10%;
+            font-size: 25px;
+            color: #33800d;
+        }
+    </style>
+
+    <div class="container">
+        <h1 id="containerHeader" align="left">Reporte Carga de Leads </h1>
+        <hr margin: 5px>
+        <table align="left" width=100%>
+            <tr>
+                <td>
+                <th>Nombre de la Carga:</th>
+                </td>
+                <td colspan="2" style="padding-top: 1%;">
+                    <select id="CargaLeads" style="width: 100%;">
+                        {{{carga_list}}}
+                    </select>
+                </td>
+                <td/>
+
+            </tr>
+
+        </table>
+        <br>
+        <div class="cuentasContainer">
+        <table class="cuentas" align="center" border="1">
+            {{#if cuentas}}
+                <tr>
+                    <th width="10%">TIPO</th>
+                    <th width="60%">NOMBRE</th>
+                    <th width="10%">ID</th>
+                    <th width="10%">RFC</th>
+                </tr>
+            </table>
+            {{/if}}
+        </div>
+
+    </div>
+
+
+
+{{/if}}
