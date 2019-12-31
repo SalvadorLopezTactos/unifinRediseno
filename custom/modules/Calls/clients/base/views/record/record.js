@@ -579,13 +579,16 @@
 						}else{
 							callback(null, fields, errors);
 						}
+					}else{
+						callback(null, fields, errors);
 					}
 				}, this)
             });
+		}else{
+			callback(null, fields, errors);
 		}
 		//this._super('_render'); 
 		//callback(null, fields, errors);
-		
 	},
 	
 })
