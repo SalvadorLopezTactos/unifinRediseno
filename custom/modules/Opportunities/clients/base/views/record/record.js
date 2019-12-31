@@ -76,6 +76,7 @@
         this.model.on('sync', this.ocultynoedit, this);
         //this.model.on('sync', this.disable_panels_team, this);
         this.model.on('sync', this.getcfRI, this);
+        this.model.on('sync', this.validaetiquetas, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
@@ -455,66 +456,6 @@
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             }
         },this));
-
-        //Actualiza las etiquetas de acuerdo al tipo de operacion Solicitud/Cotizacion
-        //Si la operacion es Cotización o Contrato cambiar etiqueta de "Monto de línea" a "Monto colocación"
-        if (this.model.get('tipo_operacion_c') == '3' || this.model.get('tipo_operacion_c') == '4'){
-            this.$("div.record-label[data-name='monto_c']").text("Monto colocaci\u00F3n");
-            this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de operaci\u00F3n");
-        }else{
-            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
-            this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de solicitud");
-        }
-  		if (this.model.get('tipo_operacion_c') == '2'){
-  			this.$("div.record-label[data-name='amount']").text("Monto Disponible");
-  		}
-
-        if (this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO'){
-            this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
-        }
-        if(this.model.get('tipo_producto_c')=='1'){
-            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
-            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Único");
-        }else{
-            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Enganche");
-
-        }
-        if(this.model.get('tipo_producto_c')=='4'){
-            this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00EDas");
-        }else{
-            this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n por apertura Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='plazo_c']").text("Plazo en meses");
-
-        }
-        if(this.model.get('tipo_producto_c')=='3'){
-            this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Enganche Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje de Enganche");
-        }else{
-            this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
-        }
-
-        //Se agrega condición para ocultar campo que no pertenecen a Fleet
-        if(this.model.get('tipo_producto_c')=='6' || this.model.get('tipo_producto_c')=='7' ){
-
-          //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
-          //Se oculta Monto a Operar
-          this.$('[data-name="amount"]').hide();
-          //Pago mensual
-          this.$('[data-name="ca_pago_mensual_c"]').hide();
-          //% Renta inicial
-          this.$('[data-name="porciento_ri_c"]').hide();
-
-        }
-        //Valida la solicitud que sea de tipo SOS y oculta campos
-        if (this.model.get('tipo_producto_c')=='7'){
-            this.$('div[data-name=condiciones_financieras]').hide();
-            this.$('div[data-name=f_comentarios_generales_c]').hide();
-            this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
-            this.$("[data-name='monto_ratificacion_increment_c']").attr('style','pointer-events:none');
-        }
-
 	  },
 
     validacionCuentaSubcuentaCheck:function (fields, errors, callback) {
@@ -1158,7 +1099,7 @@ console.log(name);
                     $('.condiciones_financieras').css('border-color', 'red');
                     app.alert.show("CondicionFinanciera requerida", {
                         level: "error",
-                        title: "Al menos una Condicion Financiera es requerida.",
+                        title: "Al menos una Condición Financiera es requerida.",
                         autoClose: false
                     });
                 }else if (solicitud_cf.oFinanciera.condicion.length>=1){
@@ -1179,7 +1120,7 @@ console.log(name);
                     $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
                     app.alert.show("CondicionFinanciera requerida", {
                         level: "error",
-                        title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
+                        title: "Al menos una Condición Financiera de Incremento/Ratificacion es requerida.",
                         autoClose: false
                     });
                 }else if (contRI.oFinancieraRI.ratificacion.length>=1){
@@ -2247,6 +2188,67 @@ console.log(name);
             // self._render();
         }
 
+        }
+    },
+
+    validaetiquetas: function (){
+        //Actualiza las etiquetas de acuerdo al tipo de operacion Solicitud/Cotizacion
+        //Si la operacion es Cotización o Contrato cambiar etiqueta de "Monto de línea" a "Monto colocación"
+        if (this.model.get('tipo_operacion_c') == '3' || this.model.get('tipo_operacion_c') == '4'){
+            this.$("div.record-label[data-name='monto_c']").text("Monto colocaci\u00F3n");
+            this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de operaci\u00F3n");
+        }else{
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
+            this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de solicitud");
+        }
+        if (this.model.get('tipo_operacion_c') == '2'){
+            this.$("div.record-label[data-name='amount']").text("Monto Disponible");
+        }
+
+        if (this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO'){
+            this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
+        }
+        if(this.model.get('tipo_producto_c')=='1'){
+            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
+            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Único");
+        }else{
+            this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Enganche");
+
+        }
+        if(this.model.get('tipo_producto_c')=='4'){
+            this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n Incremento/Ratificaci\u00F3n");
+            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00EDas");
+        }else{
+            this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n por apertura Incremento/Ratificaci\u00F3n");
+            this.$("div.record-label[data-name='plazo_c']").text("Plazo en meses");
+
+        }
+        if(this.model.get('tipo_producto_c')=='3'){
+            this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Enganche Incremento/Ratificaci\u00F3n");
+            this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje de Enganche");
+        }else{
+            this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
+            this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
+        }
+
+        //Se agrega condición para ocultar campo que no pertenecen a Fleet
+        if(this.model.get('tipo_producto_c')=='6' || this.model.get('tipo_producto_c')=='7' ){
+
+            //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
+            //Se oculta Monto a Operar
+            this.$('[data-name="amount"]').hide();
+            //Pago mensual
+            this.$('[data-name="ca_pago_mensual_c"]').hide();
+            //% Renta inicial
+            this.$('[data-name="porciento_ri_c"]').hide();
+
+        }
+        //Valida la solicitud que sea de tipo SOS y oculta campos
+        if (this.model.get('tipo_producto_c')=='7'){
+            this.$('div[data-name=condiciones_financieras]').hide();
+            this.$('div[data-name=f_comentarios_generales_c]').hide();
+            this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
+            this.$("[data-name='monto_ratificacion_increment_c']").attr('style','pointer-events:none');
         }
     },
 
