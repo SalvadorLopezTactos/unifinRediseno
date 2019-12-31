@@ -26,12 +26,6 @@ array (
               array (
                 'name' => 'name',
                 'type' => 'fullname',
-                'fields' => 
-                array (
-                  0 => 'salutation',
-                  1 => 'first_name',
-                  2 => 'last_name',
-                ),
                 'link' => true,
                 'label' => 'LBL_LIST_NAME',
                 'enabled' => true,

@@ -5,7 +5,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));        
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -16,8 +16,7 @@
          * *********************************************SUB-TIPO CONTACTADO*******************************************
          ****************************************************************************************************************/
 
-        if (this.model.get('subtipo_registro_c') == '2')
-        {
+        if (this.model.get('subtipo_registro_c') == '2') {
             if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_MACROSECTOR_C", "Leads") + '</b><br>';
@@ -63,14 +62,14 @@
             if (this.model.get('assigned_user_name') == '' || this.model.get('assigned_user_name') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + 'Asignado a' + '</b><br>';
-                
+
                 errors['assigned_user_name'] = errors['assigned_user_name'] || {};
                 errors['assigned_user_name'].required = true;
             }
             if (this.model.get('leads_leads_1_name') == '' || this.model.get('leads_leads_1_name') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + 'Contacto Asociado' + '</b><br>';
-                
+
                 errors['leads_leads_1_name'] = errors['leads_leads_1_name'] || {};
                 errors['leads_leads_1_name'].required = true;
             }
@@ -87,15 +86,14 @@
          * *********************************************SUB-TIPO CANCELADO*******************************************
          ****************************************************************************************************************/
 
-        if (this.model.get('subtipo_registro_c') == '3')
-        {
+        if (this.model.get('subtipo_registro_c') == '3') {
             if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
                 errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
                 errors['motivo_cancelacion_c'].required = true;
             }
-            
+
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -106,10 +104,9 @@
         }
 
         callback(null, fields, errors);
-    },
+    },   
 
     _render: function (options) {
         this._super("_render");
-
-    }
+    },
 })
