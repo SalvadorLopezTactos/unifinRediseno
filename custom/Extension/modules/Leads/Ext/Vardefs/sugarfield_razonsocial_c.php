@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-20 15:17:26
+ // created: 2020-01-02 00:16:23
 $dictionary['Lead']['fields']['razonsocial_c']['labelValue']='Razón Social';
 $dictionary['Lead']['fields']['razonsocial_c']['full_text_search']=array (
   'enabled' => true,

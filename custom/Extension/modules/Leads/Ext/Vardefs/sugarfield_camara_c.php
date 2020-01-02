@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-31 18:13:02
+ // created: 2020-01-02 00:23:43
 $dictionary['Lead']['fields']['camara_c']['labelValue']='¿De qué Cámara Proviene?';
 $dictionary['Lead']['fields']['camara_c']['full_text_search']=array (
   'enabled' => '0',

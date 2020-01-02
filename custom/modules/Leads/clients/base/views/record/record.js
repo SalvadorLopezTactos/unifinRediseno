@@ -5,7 +5,9 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));        
+        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));  
+        this.model.on('sync', this._readonlyFields, this);      
+        this._readonlyFields();
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -105,6 +107,28 @@
 
         callback(null, fields, errors);
     },   
+
+    _readonlyFields: function () {
+        var self = this;
+        var subTipo = this.model.get('subtipo_registro_c');
+
+        if (subTipo == '3') {
+            
+            var editButton = self.getField('edit_button');
+            editButton.setDisabled(true);
+            
+           
+            _.each(this.model.fields, function (field) {
+                
+                if (!_.isEqual(field.name, 'subtipo_registro_c') && !_.isEqual(field.name, 'motivo_cancelacion_c') && !_.isEqual(field.name, 'submotivo_cancelacion_c')) {
+                    
+                    self.noEditFields.push(field.name);
+                    self.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+                    self.$('[data-name='+field.name+']').attr('style', 'pointer-events:none;');
+                }
+            }); 
+        }
+    },
 
     _render: function (options) {
         this._super("_render");
