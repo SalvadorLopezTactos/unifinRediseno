@@ -508,21 +508,21 @@
 						if (model.get('macrosector_c')=='') {
 							errors['macrosector_c'] = errors['macrosector_c'] || {};
 							errors['macrosector_c'].required = true;
-							texto += "<b>Macro Sector es requerido</b> <br>";
+							texto += "<b>Macro Sector</b> <br>";
 							requerido++;
 						}
 						
 						if (model.get('ventas_anuales_c') == 0.00) {
 							errors['ventas_anuales_c'] = errors['ventas_anuales_c'] || {};
 							errors['ventas_anuales_c'].required = true;
-							texto += "<b>Ventas Anuales es requerido</b> <br>";
+							texto += "<b>Ventas Anuales</b> <br>";
 							requerido++;
 						}
 						
 						if (model.get('potencial_lead_c')== 0.00) {
 							errors['potencial_lead_c'] = errors['potencial_lead_c'] || {};
 							errors['potencial_lead_c'].required = true;
-							texto += "<b>Potencial de Lead es requerido</b> <br>";
+							texto += "<b>Potencial de Lead</b> <br>";
 							requerido++;
 						}
 						
@@ -530,35 +530,40 @@
 						if (model.get('zona_geografica_c')=='') {
 							errors['zona_geografica_c'] = errors['zona_geografica_c'] || {};
 							errors['zona_geografica_c'].required = true;
-							texto += "<b>Zona Geográfica es requerida</b> <br>";
+							texto += "<b>Zona Geográfica</b> <br>";
 							requerido++;
 						}
 						
-						if (model.get('phone_home')=='') {
+						if (model.get('phone_home')=='' && model.get('phone_mobile')=='' && model.get('phone_work')=='') {
 							errors['phone_home'] = errors['phone_home'] || {};
 							errors['phone_home'].required = true;
-							texto += "<b>Teléfono es requerido</b> <br>";
+							errors['phone_mobile'] = errors['phone_mobile'] || {};
+							errors['phone_mobile'].required = true;
+							errors['phone_work'] = errors['phone_work'] || {};
+							errors['phone_work'].required = true;
+							
+							texto += "<b>Teléfono</b> <br>";
 							requerido++;
 						}
 						
 						if (model.get('email') == null || model.get('email') =="") {
 							errors['email'] = errors['email'] || {};
 							errors['email'].required = true;
-							texto += "<b>Email es requerido</b> <br>";
+							texto += "<b>Email</b> <br>";
 							requerido++;
 						}
 						
 						if (model.get('puesto_c')=='') {
 							errors['puesto_c'] = errors['puesto_c'] || {};
 							errors['puesto_c'].required = true;
-							texto += "<b>Puesto es requerido</b> <br>";
+							texto += "<b>Puesto</b> <br>";
 							requerido++;
 						}
 						
 						if (model.get('assigned_user_id')=='' ) { 
 							errors['assigned_user_id'] = errors['assigned_user_id'] || {};
 							errors['assigned_user_id'].required = true;
-							texto += "<b>No se tiene un promotor asignado</b> <br>";
+							texto += "<b>Promotor asignado</b> <br>";
 							requerido++;
 						}
 						
@@ -572,7 +577,7 @@
 						if (requerido > 0){
 							app.alert.show("Campos Requeridos en Leads", {
 							level: "error",
-							messages: 'Hace falta completar la siguiente información en el Lead <br> '+texto,
+							messages: 'Hace falta completar la siguiente información en el <b>Lead</b> <br> '+texto,
 							autoClose: false
 							});
 							callback(null, fields, errors);
