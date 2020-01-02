@@ -239,11 +239,11 @@
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
-        if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
+        /*if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
             //no hace nada y muestra el panel
         }else{
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
-        }
+        }*/
 
     //AF: 22/06/2018
     //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
@@ -260,11 +260,11 @@
       	}
       });
 
-      if(this.model.get('tipo_operacion_c')=='2'){
+      /*if(this.model.get('tipo_operacion_c')=='2'){
           this.$('div[data-name=plazo_ratificado_incremento_c]').show();
       }else{
           this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
-      }
+      }*/
       // CVV - 28/03/2016 - Se ocultan algunos campos que fueron reemplazados por el control de condiciones financieras
 		  this.model.on("change:ratificacion_incremento_c", _.bind(function(){
   			//this.checkForRatificado();
@@ -402,11 +402,11 @@
   			}
 
   		},this));  */
-  		if(this.model.get('tipo_operacion_c')!='3'){
+  		/*if(this.model.get('tipo_operacion_c')!='3'){
   			//* Quitamos los campos Vendedor y Comisión
   			this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
   			this.$('div[data-name=comision_c]').hide();
-  		}
+  		}*/
   		//CVV - 28/03/2016 - Se ocultan los campos de activo para reemplazarlos por control de condiciones financieras
 
   		/*if(this.model.get('tipo_producto_c') != '4'){
@@ -423,7 +423,7 @@
   			this.$('div[data-name=sub_activo_3_c]').hide();
   		}*/
 
-        console.log(this.model.get('ratificacion_incremento_c'));
+        /*console.log(this.model.get('ratificacion_incremento_c'));
         if(this.model.get('ratificacion_incremento_c')==false){
             //Oculta campos para condiciones financieras
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
@@ -432,7 +432,7 @@
             //Prende los campos
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
-        }
+        }*/
         //llamamos a las condiciones financieras por default para ratificación.
        // this.obtieneCondicionesFinancieras();
         this.model.on("change:plazo_ratificado_incremento_c", _.bind(function(){
@@ -2249,6 +2249,36 @@ console.log(name);
             this.$('div[data-name=f_comentarios_generales_c]').hide();
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
             this.$("[data-name='monto_ratificacion_increment_c']").attr('style','pointer-events:none');
+        }
+
+        //Se habilitan acciones existentes en render
+        //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
+        if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
+            //no hace nada y muestra el panel
+        }else{
+            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
+        }
+
+        if(this.model.get('tipo_operacion_c')=='2'){
+            this.$('div[data-name=plazo_ratificado_incremento_c]').show();
+        }else{
+            this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
+        }
+
+        if(this.model.get('tipo_operacion_c')!='3'){
+          //* Quitamos los campos Vendedor y Comisión
+          this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
+          this.$('div[data-name=comision_c]').hide();
+        }
+
+        if(this.model.get('ratificacion_incremento_c')==false){
+            //Oculta campos para condiciones financieras
+            this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
+            this.$('div[data-name=ri_usuario_bo_c]').hide();
+        }else{
+            //Prende los campos
+            this.$('div[data-name=plazo_ratificado_incremento_c]').show();
+            this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
 
