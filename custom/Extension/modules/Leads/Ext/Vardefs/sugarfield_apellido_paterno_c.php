@@ -1,5 +1,5 @@
 <?php
- // created: 2019-12-31 15:56:00
+ // created: 2020-01-02 00:06:59
 $dictionary['Lead']['fields']['apellido_paterno_c']['labelValue']='Apellido Paterno';
 $dictionary['Lead']['fields']['apellido_paterno_c']['full_text_search']=array (
   'enabled' => '0',
@@ -11,4 +11,5 @@ $dictionary['Lead']['fields']['apellido_paterno_c']['dependency']='or(
 equal($regimen_fiscal_c,"Persona Fisica"),
 equal($regimen_fiscal_c,"Persona Fisica con Actividad Empresarial")
 )';
+
  ?>
