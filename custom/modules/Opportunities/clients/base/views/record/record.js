@@ -87,7 +87,7 @@
         //this.model.set('contacto_relacionado_c', "test");
         //this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
 
-        this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
+        this.model.on('sync', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
     		this.getCurrentYearMonth();
 
@@ -1301,10 +1301,13 @@ console.log(name);
             messages: texto,
         });
     },
-
+    //Funcion que evita el guardado de la oportunidad si esta tiene status Cancelada y el chk = TRUE
     _HideSaveButton: function () {
           if (this.model.get('tct_oportunidad_perdida_chk_c') && this.model.get('estatus_c')=='K')
           {
+             this.$(".record-edit-link-wrapper").attr('style','pointer-events:none');
+             var editButton = self.getField('edit_button');
+             editButton.setDisabled(true);
              $('[name="save_button"]').eq(0).hide();
           }
           //else {$('[name="save_button"]').eq(0).show();}
