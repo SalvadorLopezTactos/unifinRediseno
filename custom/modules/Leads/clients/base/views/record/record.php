@@ -111,19 +111,6 @@ array (
                 'name' => 'name',
                 'type' => 'fullname',
                 'label' => 'LBL_NAME',
-                'dismiss_label' => true,
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'salutation',
-                    'type' => 'enum',
-                    'enum_width' => 'auto',
-                    'searchBarThreshold' => 7,
-                  ),
-                  1 => 'first_name',
-                  2 => 'last_name',
-                ),
               ),
             ),
           ),
