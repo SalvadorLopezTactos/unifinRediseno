@@ -1,68 +1,84 @@
 {{#if this.loadView}}
     <style>
-        .container {
-            overflow-y:auto;
-            display:block;
-            width: 100%;
+
+        .headeR {
+            justify-content: stretch;
+            align-content: center;
+            color: #e2efe2;
+            background-color: #22608c;
+            border-color: #22608c;
+            border-radius: 10px;
+            padding: 5px;
         }
 
-        .cuentas {
-            display:table;
-            width: 90%;
+        wrapper {
+            display: grid;
+            max-width: 800px;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            border-top: 1px solid black;
+            border-left: 1px solid black;
         }
 
-        .cuentasContainer {
-            margin-top: 2%;
-            overflow-y:auto;
-            height: 400 px;
+        .wrapper > div {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
         }
 
-        #containerHeader {
-            font-size: 18px;
-            margin-top: 2%;
-            margin-left: 1%;
-            line-height: 10px;
-        }
-
-        #successful {
-            margin-top: 10%;
-            font-size: 25px;
-            color: #33800d;
-        }
     </style>
 
-    <div class="container">
-        <h1 id="containerHeader" align="left">Reporte Carga de Leads </h1>
-        <hr margin: 5px>
-        <table align="left" width=100%>
-            <tr>
-                <td>
-                <th>Nombre de la Carga:</th>
-                </td>
-                <td colspan="2" style="padding-top: 1%;">
-                    <select id="CargaLeads" style="width: 100%;">
-                        {{{carga_list}}}
-                    </select>
-                </td>
-                <td/>
 
-            </tr>
-
-        </table>
-        <br>
-        <div class="cuentasContainer">
-        <table class="cuentas" align="center" border="1">
-            {{#if cuentas}}
-                <tr>
-                    <th width="10%">TIPO</th>
-                    <th width="60%">NOMBRE</th>
-                    <th width="10%">ID</th>
-                    <th width="10%">RFC</th>
-                </tr>
-            </table>
-            {{/if}}
+    <div class="container-fluid" style="padding: 5px 5px; margin: 10px;">
+        <!--TITLE -->
+        <div class="row-fluid headeR">
+            <div class="span6">
+                <h1 id="containerHeader" align="left">Detalle de Carga (Leads) </h1>
+            </div>
+        </div>
+        <!--SELECT -->
+        <div class="row-fluid" style="padding-top: 15px;padding-left: 5px">
+            <div class="span8">
+                <div class="span4">
+                <b>Nombre de la Carga:</b></div>
+            <div class="span8"><select id="CargaLeads" style="width: 100%;">
+                {{{carga_list}}}
+            </select>
+            </div>
         </div>
 
+
+    </div>
+
+    {{#if leads}}
+        <!--HEADER TABLE -->
+        <div class="container" >
+            <div class="row-fluid " style="background-color: #6b7379; color: #ffffff;">
+                <div class="span3">NOMBRE</div>
+                <div class="span3">TIPO</div>
+                <div class="span3">SUBTIPO</div>
+                <div class="span3">RESULTADO DE CARGA</div>
+            </div>
+
+            <!--BODY TABLE -->
+
+            {{#each leads}}
+                <div class="row-fluid">
+
+                    <div class="span3" style="border: #8cff4d">{{nombre_c}}</div>
+                    <div class="span3">{{tipo_registro_c}}</div>
+                    <div class="span3">{{subtipo_registro_c}}</div>
+                    <div class="span3">{{nombre_de_cargar_c}}</div>
+                </div>
+            {{/each}}
+        </div>
+
+
+    {{/if}}
+
+    </div>
+    <div class="span2">
+        <input type="button" value="Exportar Duplicados" id="btn_Duplicados" class="btn btn-primary" btnState="Off" />
     </div>
 
 
