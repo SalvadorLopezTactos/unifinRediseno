@@ -72,24 +72,6 @@ $dependencies['Leads']['zona_geografica_c'] = array(
     ),
 );
 
-/*******************TELEFONO*****************/
-$dependencies['Leads']['phone_mobile'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('subtipo_registro_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired', //Action type
-            'params' => array(
-                'target' => 'phone_mobile',
-                'label'  => 'phone_mobile_label', 
-                'value'  => 'equal($subtipo_registro_c, "2")',  //SUB-TIPO LEAD ES CONTACTADO
-            ),
-        ),
-    ),
-);
-
 /*******************EMAIL*****************/
 $dependencies['Leads']['email'] = array(
     'hooks' => array("all"),
@@ -138,24 +120,6 @@ $dependencies['Leads']['assigned_user_name'] = array(
             'params' => array(
                 'target' => 'assigned_user_name',
                 'label'  => 'assigned_user_name_label', 
-                'value'  => 'equal($subtipo_registro_c, "2")',  //SUB-TIPO LEAD ES CONTACTADO
-            ),
-        ),
-    ),
-);
-
-/*******************LEAD CONTACTO ASOCIADO*****************/
-$dependencies['Leads']['leads_leads_1_name'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('subtipo_registro_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired', //Action type
-            'params' => array(
-                'target' => 'leads_leads_1_name',
-                'label'  => 'leads_leads_1_name_label', 
                 'value'  => 'equal($subtipo_registro_c, "2")',  //SUB-TIPO LEAD ES CONTACTADO
             ),
         ),

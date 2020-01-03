@@ -108,8 +108,7 @@ array (
               ),
               4 => 
               array (
-                'name' => 'name',
-                'type' => 'fullname',
+                'name' => 'name_c',                
                 'label' => 'LBL_NAME',
               ),
             ),
@@ -130,11 +129,13 @@ array (
               array (
                 'name' => 'tipo_registro_c',
                 'label' => 'LBL_TIPO_REGISTRO',
+                'readonly' => true,
               ),
               1 => 
               array (
                 'name' => 'subtipo_registro_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO',
+                'readonly' => true,
               ),
               2 => 
               array (
