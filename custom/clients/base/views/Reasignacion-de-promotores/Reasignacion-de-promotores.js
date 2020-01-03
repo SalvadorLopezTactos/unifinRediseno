@@ -102,56 +102,108 @@
 
             reader.onload = function(e) {
                 var content = reader.result;
-                var registros=content.split('\n');
+                var seguir=true;
+                if(content ==""){
+                    app.alert.show('csvVacio', {
+                        level: 'error',
+                        messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                        autoClose: true
+                    });
+                    seguir=false;
+                }
+                if(seguir){
 
-                for(var i=1;i<registros.length;i++){
-                    //No se lee el primer renglón ya que son los titulos de las columnas
-                    var row=registros[i].split(',');
-                    if(row != ""){
-                        var idCuenta=row[0];
-                        var idAsesorReasignado=row[1];
-                        var idAsesorActual=row[2];
-                        var producto=row[3];
-                        var cuentas=[];
-                        cuentas.push(idCuenta);
+                    var registros=content.split('\n');
 
-                        var parametros = {
-                            'optBl':"actualSiguientes",
-                            'seleccionados': cuentas,
-                            'reAssignado': idAsesorReasignado,
-                            'producto_seleccionado': producto,
-                            'promoActual': idAsesorActual,
-                        };
+                    this.cuentas_a_procesar=0;
+                    for(var i=1;i<registros.length;i++){
+                        //No se lee el primer renglón ya que son los titulos de las columnas
+                        var row=registros[i].split(',');
 
-                        var urlReasignacion = app.api.buildURL("reAsignarCuentas", '', {}, {});
-                        app.alert.show('reasignandoCSV', {
-                            level: 'process',
-                            title: 'Cargando...'
-                        });
-                        $('.btnSubir').addClass('disabled');
-                        $('.btnSubir').attr('style','pointer-events:none;margin:10px');
+                        if(row != ""){
+                            this.cuentas_a_procesar++;
+                            var idCuenta=row[0];
+                            var idAsesorReasignado=row[1];
+                            var idAsesorActual=row[2];
+                            var producto=row[3];
+                            var cuentas=[];
+                            cuentas.push(idCuenta);
 
-                        app.api.call("create", urlReasignacion, {data: parametros}, {
-                            success: _.bind(function (data) {
-                                if(data==true){
-                                    app.alert.dismiss('reasignandoCSV');
-                                    $('.btnSubir').removeClass('disabled');
-                                    $('.btnSubir').attr('style','margin:10px');
-                                    self.render();
-                                    $('#successful').show();
-                                }else{
-                                    app.alert.dismiss('reasignandoCSV');
-                                    var alertOptions = {
-                                        title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
-                                        level: "error"
-                                    };
-                                    app.alert.show('validation', alertOptions);
-                                }
-                            }, this)
-                        });
+                            var parametros = {
+                                'optBl':"actualSiguientes",
+                                'seleccionados': cuentas,
+                                'reAssignado': idAsesorReasignado,
+                                'producto_seleccionado': producto,
+                                'promoActual': idAsesorActual,
+                            };
+
+                            var urlReasignacion = app.api.buildURL("reAsignarCuentas", '', {}, {});
+                            app.alert.show('reasignandoCSV', {
+                                level: 'process',
+                                title: 'Cargando...'
+                            });
+                            $('.btnSubir').addClass('disabled');
+                            $('.btnSubir').attr('style','pointer-events:none;margin:10px');
+
+                            this.index_control=0;
+                            this.cuentas_persistentes_actualizadas=[];
+                            this.cuentas_persistentes_no_actualizadas=[];
+                            contextoCSV=this;
+
+                            app.api.call("create", urlReasignacion, {data: parametros}, {
+                                success: _.bind(function (data) {
+                                    if(data){
+                                        contextoCSV.index_control++
+
+                                        contextoCSV.cuentas_persistentes_actualizadas.push(data.actualizados);
+                                        contextoCSV.cuentas_persistentes_no_actualizadas.push(data.no_actualizados);
+                                        if(contextoCSV.index_control==contextoCSV.cuentas_a_procesar){
+                                            app.alert.dismiss('reasignandoCSV');
+                                            $('.btnSubir').removeClass('disabled');
+                                            $('.btnSubir').attr('style','margin:10px');
+                                            self.render();
+                                            var mensaje_act='';
+                                            var mensaje_no_act='';
+                                            var actualizados=data.actualizados;
+                                            var no_actualizados=data.no_actualizados;
+                                            for(var i=0;i<contextoCSV.cuentas_persistentes_actualizadas.length;i++){
+                                                if(contextoCSV.cuentas_persistentes_actualizadas[i][0]!=undefined){
+                                                    mensaje_act+='<b>'+contextoCSV.cuentas_persistentes_actualizadas[i][0]+'</b><br>';
+                                                }
+                                            }
+
+                                            for(var j=0;j<contextoCSV.cuentas_persistentes_no_actualizadas.length;j++){
+                                                if(contextoCSV.cuentas_persistentes_no_actualizadas[j][0] !=undefined){
+                                                    mensaje_no_act+='<b>'+contextoCSV.cuentas_persistentes_no_actualizadas[j][0]+'</b><br>';
+                                                }
+                                            }
+
+                                            app.alert.show('success_csv', {
+                                                level: 'success',
+                                                messages: 'Las siguientes cuentas han sido actualizadas:<br>'+mensaje_act+'<br>Las siguientes cuentas NO han sido actualizadas:<br>'+mensaje_no_act,
+                                                autoClose: false
+                                            });
+
+                                            $('#successful').show();
+
+                                        }
+
+                                    }else{
+                                        app.alert.dismiss('reasignandoCSV');
+                                        var alertOptions = {
+                                            title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
+                                            level: "error"
+                                        };
+                                        app.alert.show('validation', alertOptions);
+                                    }
+                                }, this)
+                            });
+                        }
+
                     }
 
                 }
+
             }
             reader.readAsText(file);
         }
@@ -517,7 +569,7 @@
                 app.api.call("create", dnbProfileUrl, {data: Params}, {
                     success: _.bind(function (data) {
                         console.log(typeof data);
-                        if(data==true){
+                        if(data){
                             app.alert.dismiss('reasignando');
                             this.cuentas = [];
                             this.seleccionados = [];
@@ -539,7 +591,7 @@
                 });
             }else{
                 var alertOptions = {
-                    title: "No hay clientes seleccionadas para reasignar",
+                    title: "No hay clientes seleccionados para reasignar",
                     level: "error"
                 };
                 app.alert.show('validation', alertOptions);
