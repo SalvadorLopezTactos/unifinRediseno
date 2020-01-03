@@ -1,6 +1,6 @@
 <?php
- // created: 2019-12-26 18:44:38
-$dictionary['Task']['fields']['ayuda_asesor_cp_c']['labelValue']='Solicita Ayuda de Asesor';
+ // created: 2020-01-02 13:02:44
+$dictionary['Task']['fields']['ayuda_asesor_cp_c']['labelValue']='Ayuda Centro de Prospección';
 $dictionary['Task']['fields']['ayuda_asesor_cp_c']['enforced']='';
 $dictionary['Task']['fields']['ayuda_asesor_cp_c']['dependency']='';
 

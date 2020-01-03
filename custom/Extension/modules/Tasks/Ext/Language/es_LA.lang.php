@@ -1,3 +1,3 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
-$mod_strings['LBL_AYUDA_ASESOR_CP'] = 'Solicita Ayuda de Asesor';
+$mod_strings['LBL_AYUDA_ASESOR_CP'] = 'Ayuda Centro de Prospección';
