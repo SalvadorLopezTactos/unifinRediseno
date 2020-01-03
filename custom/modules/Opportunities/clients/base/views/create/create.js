@@ -27,7 +27,7 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-		    this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
+        this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
@@ -90,21 +90,8 @@
         });
         this.model.fields['tipo_operacion_c'].options = new_opctions;
 
-        /*
-         * @author Carlos Zaragoza Ortiz
-         * @version 1
-         * Quitar de la lista el elemento de crédito automotriz.
-         * */
-        var opciones_producto = app.lang.getAppListStrings('tipo_producto_list');
-        Object.keys(opciones_producto).forEach(function(key){
-            if( key == 2 || key == 5 || key == 3){
-                delete opciones_producto[key];
-            }
-        });
-        this.model.fields['tipo_producto_c'].options = opciones_producto;
 
-        /*
-        * @author Carlos Zaragoza Ortiz
+       /* @author Carlos Zaragoza Ortiz
         * @version 1
         * En operaciones de solicitud de crédito quitar opción de pipeline en lista de Forecast
         * */
@@ -133,63 +120,20 @@
 
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
-        var usuario = app.data.createBean('Users',{id:app.user.get('id')});
-        usuario.fetch({
-            success: _.bind(function(modelo) {
-                //console.log("Encontro al usuario");
-                //console.log("Producto");
-                //console.log(modelo.get('tipodeproducto_c'));
-                this.productos = modelo.get('productos_c');
-                this.productoUsuario = modelo.get('tipodeproducto_c');
-                this.multiProducto = modelo.get('multiproducto_c');
-
-
-                var op = app.lang.getAppListStrings('tipo_producto_list');
-                var op2 = {};
-
-                for (id in this.productos) {
-                    if (id != 'unique')
-                    {
-                        op2[this.productos[id]] = op[this.productos[id]];
-                    }
-                }
-                var lista = this.getField('tipo_producto_c');
-                lista.items = op2;
-                lista.render();
-
-                if(this.productos[0] == "4"){
-                    this.model.set('tipo_producto_c','4');
-                    //console.log("FACTORAJE");
-                }else if(this.productos[0] == "1"){
-                    this.model.set('tipo_producto_c','1');
-                    //console.log("LEASING");
-                }else if(this.productos[0] == "3"){
-                    this.model.set('tipo_producto_c','3');
-                    //console.log("AUTMOTRIZ");
-                }else if(this.productos[0] == "2"){
-                    this.model.set('tipo_producto_c','3');
-                    //console.log("3");
-                }
-                else if(this.productos[0] == "5"){
-                    this.model.set('tipo_producto_c','5');
-                    //console.log("5");
-                }
-                else if(this.productos[0] == "6"){
-                    this.model.set('tipo_producto_c','6');
-                    //console.log("5");
-                }
-
-            },this)
-        });
         /*
          * @author Carlos Zaragoza Ortiz
          * @version 1
          * Crear estatus "Oportunidad de prospecto" y validar en la creación de la oportunidad si el estatus con el que debe nacer es "Oportunidad de prospecto" o "Integración de expediente" (\custom\modules\Opportunities\clients\base\views\create-actions\create-actions.js)
          * */
         this.verificaOperacionProspecto();
+        //this.getCurrentYearMonth("loading");
+        //this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
+        //Evento para el campo monto cuando la solicitud es Credito SOS
+        this.model.on("change:tipo_producto_c", _.bind(this.bloqueamonto, this));
+        this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
+        //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
+        this.set_lista_productos();
 
-        this.getCurrentYearMonth("loading");
-        this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
     },
 
     _render: function() {
@@ -459,7 +403,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback){
-        if (parseFloat(this.model.get('monto_c')) <= 0 )
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c')!=7 )
         {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
@@ -1189,6 +1133,9 @@
                            case "6":
                                tipo=data.tct_tipo_fl_txf_c;
                                break;
+                           case "7":
+                               tipo=data.tct_tipo_l_txf_c;
+                               break;
                        }
                        if(tipo != "Prospecto" && tipo!= "Cliente"){
                                app.alert.show("Cliente no v\u00E1lido", {
@@ -1573,4 +1520,110 @@
         }
         callback(null, fields, errors);
     },
+  
+    set_lista_productos: function (){
+        var id_account= this.model.get('account_id');
+        var SLL= 0;
+        var SSOS=0;
+        //Eliminar elemento de la lista de productos
+        var op = app.lang.getAppListStrings('tipo_producto_list');
+        var op2 = {};
+        var productos= App.user.attributes.productos_c;
+        var specialChars = "!$^,.";
+
+        //Establece el valor por default del user logueado
+        for (var i = 0; i < specialChars.length; i++) {
+            productos= productos.replace(new RegExp("\\" + specialChars[i], 'gi'), '');
+        }
+
+        //Itera la lista de productos para dejar solo los del usuario logueado
+        for (id in productos) {
+            if (id != 'unique') {
+                op2[productos[id]] = op[productos[id]];
+            }
+        }
+        if(op2[0] == "4"){
+            this.model.set('tipo_producto_c','4');
+            //console.log("FACTORAJE");
+        }else if(op2[0] == "1"){
+            this.model.set('tipo_producto_c','1');
+            this.model.set('tipo_producto_c','7')
+            //console.log("LEASING");
+        }else if(op2[0] == "3"){
+            this.model.set('tipo_producto_c','3');
+            //console.log("AUTMOTRIZ");
+        }else if(op2[0] == "2"){
+            this.model.set('tipo_producto_c','3');
+            //console.log("3");
+        }
+        else if(op2[0] == "5"){
+            this.model.set('tipo_producto_c','5');
+            //console.log("5");
+        }
+        else if(op2[0] == "6"){
+            this.model.set('tipo_producto_c','6');
+            //console.log("5");
+        }
+        //Eliminar los productos CS, CA y Linea de Credito de la Lista
+        Object.keys(op2).forEach(function(key){
+            if( key == 2 || key == 5 || key == 3){
+                delete op2[key];
+            }
+        });
+        this.model.fields['tipo_producto_c'].options = op2;
+
+        if (this.model.get('account_id')!="" && this.model.get('account_id')!=undefined) {
+            //Realiza llamada para recuperar oportunidades de la cuenta, estas son solicitudes de Leasing con Linea y solicitudes SOS (Si las tiene)
+            app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
+                success: function (solicitudes) {
+                    op2[7]="CREDITO SOS";
+                    for (var i = 0; i < solicitudes.records.length; i++) {
+                        if (solicitudes.records[i].tipo_producto_c == 1 && solicitudes.records[i].tipo_operacion_c == 2 && solicitudes.records[i].monto_c >= 7500000 && solicitudes.records[i].estatus_c!="K") {
+                            SLL++;
+                        }
+                        if (solicitudes.records[i].tipo_producto_c == 7 && solicitudes.records[i].estatus_c!="K") {
+                            SSOS++;
+                        }
+                    }
+                    ;
+                    if ((SLL >= 1 && SSOS >= 1) || SLL == 0 || !App.user.attributes.productos_c.includes("1")) {
+
+                        //Quita valor Credito SOS
+                        Object.keys(op2).forEach(function (key) {
+                            if (key == 7) {
+                                delete op2[key];
+                            }
+                        });
+                    }
+                    //Setea finalmente el valor de op2 en la lista para su visualización.
+                    self.model.fields['tipo_producto_c'].options = op2;
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
+    },
+
+    bloqueamonto: function (){
+      if (this.model.get('tipo_producto_c')==7){
+          $('[name="monto_c"]').prop("disabled",true);
+          this.model.set('monto_c', 0);
+          this.model.set('tct_etapa_ddw_c', "P");
+          this.model.set('estatus_c', "PE" );
+      }else{
+          $('[name="monto_c"]').prop("disabled", false);
+          this.model.set('tct_etapa_ddw_c', "SI");
+          this.model.set('estatus_c', "" );
+      }
+
+    },
+    //Evento para ejecutar la
+    cuenta_asociada: function (){
+        if (this.model.get('account_id')!="" && this.model.get('account_id')!=undefined) {
+            this.set_lista_productos();
+            this.render();
+        }
+    },
+
 })
