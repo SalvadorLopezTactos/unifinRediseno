@@ -87,7 +87,7 @@
         //this.model.set('contacto_relacionado_c', "test");
         //this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
 
-        this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
+        this.model.on('sync', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
     		this.getCurrentYearMonth();
 
