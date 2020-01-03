@@ -1301,10 +1301,11 @@ console.log(name);
             messages: texto,
         });
     },
-
+    //Funcion que evita el guardado de la oportunidad si esta tiene status Cancelada y el chk = TRUE
     _HideSaveButton: function () {
           if (this.model.get('tct_oportunidad_perdida_chk_c') && this.model.get('estatus_c')=='K')
           {
+             this.$("[data-name='tct_oportunidad_perdida_chk_c']").attr('style','pointer-events:none');
              $('[name="save_button"]').eq(0).hide();
           }
           //else {$('[name="save_button"]').eq(0).show();}
