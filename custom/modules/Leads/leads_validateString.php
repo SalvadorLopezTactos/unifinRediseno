@@ -131,13 +131,14 @@ class leads_validateString
 
         $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
         $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
-        if (empty($bean->id)) {
             //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
             $sql = new SugarQuery();
             $sql->select(array('id', 'clean_name'));
             $sql->from(BeanFactory::newBean('Accounts'));
             $sql->where()->equals('clean_name', $bean->clean_name_c);
-            $result = $sql->execute();
+            $sql->where()->notEquals('id', $bean->id);
+
+        $result = $sql->execute();
             $count = count($result);
 
             $duplicateproductMessageLeads = 'El Lead que intentas crear ya existe.';
@@ -145,6 +146,7 @@ class leads_validateString
             $sqlLead->select(array('id', 'clean_name_c'));
             $sqlLead->from(BeanFactory::newBean('Leads'));
             $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
+            $sqlLead->where()->notEquals('id', $bean->id);
             $resultLead = $sqlLead->execute();
             $countLead = count($resultLead);
 
@@ -164,7 +166,7 @@ class leads_validateString
             } else {
                 $bean->resultado_de_carga_c = 'Registro Exitoso';
             }
-        }
+
 
         $GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
     }
