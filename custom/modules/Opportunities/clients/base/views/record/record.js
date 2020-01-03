@@ -1305,7 +1305,9 @@ console.log(name);
     _HideSaveButton: function () {
           if (this.model.get('tct_oportunidad_perdida_chk_c') && this.model.get('estatus_c')=='K')
           {
-             this.$("[data-name='tct_oportunidad_perdida_chk_c']").attr('style','pointer-events:none');
+             this.$(".record-edit-link-wrapper").attr('style','pointer-events:none');
+             var editButton = self.getField('edit_button');
+             editButton.setDisabled(true);
              $('[name="save_button"]').eq(0).hide();
           }
           //else {$('[name="save_button"]').eq(0).show();}
