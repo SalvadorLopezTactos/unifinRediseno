@@ -7,7 +7,7 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
-        this._readonlyFields();        
+        this._readonlyFields();
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -108,23 +108,28 @@
         /*****************************************************************************************************************
          * ****************************************VALIDACION DE TELEFONOS************************************************
          ****************************************************************************************************************/
-        if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
+        /****************SUBTIPO LEAD - CONTACTADO************************** */
+         if (this.model.get('subtipo_registro_c') == '2') {
 
-            app.alert.show('message-phone', {
-                level: 'error',
-                messages: 'Agregar un número telefónico para guardar un <b>Lead: </b><br>'+'<b>'+'Móvil'+'</b>'+' o'+'<br>'+'<b>'+'Teléfono de Casa'+'</b>'+' o'+'<br>'+'<b>'+'Teléfono de Oficina'+'</b>'+' o'+'<br>',
-                autoClose: false
-            });
+            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
 
-            errors['phone_mobile'] = errors['phone_mobile'] || {};
-            errors['phone_mobile'].required = true;
-            errors['phone_home'] = errors['phone_home'] || {};
-            errors['phone_home'].required = true;
-            errors['phone_work'] = errors['phone_work'] || {};
-            errors['phone_work'].required = true;
-        } 
+                app.alert.show('message-phone', {
+                    level: 'error',
+                    messages: 'Agregar un número telefónico para guardar un <b>Lead: </b><br>' + '<b>' + 'Móvil' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Casa' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Oficina' + '</b>' + ' o' + '<br>',
+                    autoClose: false
+                });
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+        }
+
 
         callback(null, fields, errors);
     },
