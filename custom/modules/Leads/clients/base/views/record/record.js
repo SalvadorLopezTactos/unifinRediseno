@@ -61,7 +61,7 @@
 
                 errors['assigned_user_name'] = errors['assigned_user_name'] || {};
                 errors['assigned_user_name'].required = true;
-            }            
+            }
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -95,23 +95,27 @@
         /*****************************************************************************************************************
          * ****************************************VALIDACION DE TELEFONOS************************************************
          ****************************************************************************************************************/
-        if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
+        /****************SUBTIPO LEAD - CONTACTADO************************** */
+        if (this.model.get('subtipo_registro_c') == '2') {
+            
+            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
 
-            app.alert.show('message-phone', {
-                level: 'error',
-                messages: 'Agregar un número telefónico para guardar un <b>Lead: </b><br>'+'<b>'+'Móvil'+'</b>'+' o'+'<br>'+'<b>'+'Teléfono de Casa'+'</b>'+' o'+'<br>'+'<b>'+'Teléfono de Oficina'+'</b>'+' o'+'<br>',
-                autoClose: false
-            });
+                app.alert.show('message-phone', {
+                    level: 'error',
+                    messages: 'Agregar un número telefónico para guardar un <b>Lead: </b><br>' + '<b>' + 'Móvil' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Casa' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Oficina' + '</b>' + ' o' + '<br>',
+                    autoClose: false
+                });
 
-            errors['phone_mobile'] = errors['phone_mobile'] || {};
-            errors['phone_mobile'].required = true;
-            errors['phone_home'] = errors['phone_home'] || {};
-            errors['phone_home'].required = true;
-            errors['phone_work'] = errors['phone_work'] || {};
-            errors['phone_work'].required = true;
-        } 
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+        }
 
         callback(null, fields, errors);
     },
