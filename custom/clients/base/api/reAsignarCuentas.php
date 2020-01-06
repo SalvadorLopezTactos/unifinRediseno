@@ -33,6 +33,8 @@ class reAsignarCuentas extends SugarApi
             $no_actualizados=array();
             $reAsignado = $args['data']['reAssignado'];
             $product = $args['data']['producto_seleccionado'];
+            //Eliminando saltos de línea
+            $product= str_replace("\r", "", $product);
             $promoActual = $args['data']['promoActual'];
             $optRadio=$args['data']['optBl'];
             if ($product == "LEASING") {
