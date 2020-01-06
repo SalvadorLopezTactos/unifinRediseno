@@ -37,6 +37,7 @@ class reAsignarCuentas extends SugarApi
             $product= str_replace("\r", "", $product);
             $promoActual = $args['data']['promoActual'];
             $optRadio=$args['data']['optBl'];
+            $nombreArchivo=$args['data']['nombreArchivo'];
             if ($product == "LEASING") {
                 $user_field = "user_id_c"; //user_id_c = promotorleasing_c
             } else if ($product == "FACTORAJE") {
@@ -216,6 +217,20 @@ SQL;
             }
             $main_array['actualizados']=$actualizados;
             $main_array['no_actualizados']=$no_actualizados;
+            if(count($no_actualizados)>0 && $nombreArchivo !=null && !empty($nombreArchivo)){
+
+                $fichero = 'custom/errores_reasignacion/'.$nombreArchivo.'.txt';
+                $texto_archivo='';
+                for ($i=0;$i<count($no_actualizados);$i++){
+                    $texto_archivo.=$no_actualizados[$i]."\n";
+                }
+                // Escribir los contenidos en el fichero,
+                //// usando la bandera FILE_APPEND para añadir el contenido al final del fichero
+                /// // y la bandera LOCK_EX para evitar que cualquiera escriba en el fichero al mismo tiempo
+                file_put_contents($fichero, $texto_archivo, FILE_APPEND | LOCK_EX);
+
+            }
+
             return $main_array;
 
     }

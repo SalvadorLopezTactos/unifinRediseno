@@ -117,6 +117,7 @@
                     var flag=self.vaidateEmptyContent(registros);
                     if(!flag){
                         this.cuentas_a_procesar = 0;
+                        this.tiempo_nombre_archivo='errores_reasignacion_'+Date.now();
                         for (var i = 1; i < registros.length; i++) {
                             //No se lee el primer renglón ya que son los titulos de las columnas
                             var row = registros[i].split(',');
@@ -136,6 +137,7 @@
                                     'reAssignado': idAsesorReasignado,
                                     'producto_seleccionado': producto,
                                     'promoActual': idAsesorActual,
+                                    'nombreArchivo':this.tiempo_nombre_archivo
                                 };
 
                                 var urlReasignacion = app.api.buildURL("reAsignarCuentas", '', {}, {});
@@ -159,6 +161,8 @@
                                             contextoCSV.cuentas_persistentes_actualizadas.push(data.actualizados);
                                             contextoCSV.cuentas_persistentes_no_actualizadas.push(data.no_actualizados);
                                             if (contextoCSV.index_control == contextoCSV.cuentas_a_procesar) {
+                                                var arr_actualizados=[];
+                                                var arr_no_actualizados=[];
                                                 app.alert.dismiss('reasignandoCSV');
                                                 $('.btnSubir').removeClass('disabled');
                                                 $('.btnSubir').attr('style', 'margin:10px');
@@ -170,18 +174,33 @@
                                                 for (var i = 0; i < contextoCSV.cuentas_persistentes_actualizadas.length; i++) {
                                                     if (contextoCSV.cuentas_persistentes_actualizadas[i][0] != undefined) {
                                                         mensaje_act += '<b>' + contextoCSV.cuentas_persistentes_actualizadas[i][0] + '</b><br>';
+                                                        arr_actualizados.push(contextoCSV.cuentas_persistentes_actualizadas[i][0]);
                                                     }
                                                 }
 
                                                 for (var j = 0; j < contextoCSV.cuentas_persistentes_no_actualizadas.length; j++) {
                                                     if (contextoCSV.cuentas_persistentes_no_actualizadas[j][0] != undefined) {
                                                         mensaje_no_act += '<b>' + contextoCSV.cuentas_persistentes_no_actualizadas[j][0] + '</b><br>';
+                                                        arr_no_actualizados.push(contextoCSV.cuentas_persistentes_no_actualizadas[j][0]);
                                                     }
+                                                }
+
+                                                var mensaje_success='';
+                                                if(arr_actualizados.length>0){
+                                                    mensaje_success='<br>N\u00FAmero de Cuentas <b>Actualizadas</b>: '+arr_actualizados.length+'<br>'
+                                                }
+
+                                                //Obteniendo el serverURL
+                                                //this.serverURL=app.api.serverUrl.split('/rest/v11_1')[0];
+                                                if(arr_no_actualizados.length>0){
+                                                mensaje_success+='N\u00FAmero de Cuentas <b>No Actualizadas</b>: '+arr_no_actualizados.length+'<br><a id="downloadErrors" href="custom/errores_reasignacion/'+contextoCSV.tiempo_nombre_archivo+'.txt" download="'+contextoCSV.tiempo_nombre_archivo+'.txt">Descargar Erróneos</a>';
+
                                                 }
 
                                                 app.alert.show('success_csv', {
                                                     level: 'success',
-                                                    messages: 'Las siguientes cuentas han sido actualizadas:<br>' + mensaje_act + '<br>Las siguientes cuentas NO han sido actualizadas:<br>' + mensaje_no_act,
+                                                    //messages: 'Las siguientes cuentas han sido actualizadas:<br>' + mensaje_act + '<br>Las siguientes cuentas NO han sido actualizadas:<br>' + mensaje_no_act,
+                                                    messages: mensaje_success,
                                                     autoClose: false
                                                 });
 
