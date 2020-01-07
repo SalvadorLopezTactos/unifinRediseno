@@ -1,86 +1,146 @@
 {{#if this.loadView}}
+
     <style>
-
-        .headeR {
-            justify-content: stretch;
-            align-content: center;
-            color: #e2efe2;
-            background-color: #22608c;
-            border-color: #22608c;
-            border-radius: 10px;
-            padding: 5px;
+        .container {
+            overflow-y: auto;
+            display: block;
+            width: 100%;
         }
 
-        wrapper {
-            display: grid;
-            max-width: 800px;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            border-top: 1px solid black;
-            border-left: 1px solid black;
+        .leadsContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 300px;
         }
 
-        .wrapper > div {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid black;
-            border-right: 1px solid black;
+        /*Loading page*/
+        .jm-loadingpage {
+            /*position: fixed; */
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 999999999;
+            background: url('http://localhost/unifinRediseno/custom/include/images/loading-13.gif') 50% 50% no-repeat;
+            opacity: .8;
+            background-size: 20%;
         }
 
+        /*Loading page*/
+        .leads {
+            display: table;
+            width: 90%;
+        }
     </style>
 
 
-    <div class="container-fluid" style="padding: 5px 5px; margin: 10px;">
-        <!--TITLE -->
-        <div class="row-fluid headeR">
-            <div class="span6">
-                <h1 id="containerHeader" align="left">Detalle de Carga (Leads) </h1>
-            </div>
-        </div>
-        <!--SELECT -->
-        <div class="row-fluid" style="padding-top: 15px;padding-left: 5px">
-            <div class="span8">
-                <div class="span4">
-                <b>Nombre de la Carga:</b></div>
-            <div class="span8"><select id="CargaLeads" style="width: 100%;">
-                {{{carga_list}}}
-            </select>
+    <div class="container">
+        <!--   <h1 id="containerHeader" align="left">Reporte de Importaciones de Leads </h1> -->
+        <hr style="margin: 5px">
+
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 95%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+                        &nbsp; Reporte de Importaciones de Leads
+                    </p>
+                </h1>
             </div>
         </div>
 
+        <div class="record row-fluid panel_body">
+            <div class="span6 record-cell">
+                <div class="record-label">Nombre de la Carga</div>
+                <span>
+                <span>
+                    <select id="CargaLeads" style="width: 70%;">{{{carga_list}}} </select>
+                </span>
+               </span>
 
-    </div>
-
-    {{#if leads}}
-        <!--HEADER TABLE -->
-        <div class="container" >
-            <div class="row-fluid " style="background-color: #6b7379; color: #ffffff;">
-                <div class="span3">NOMBRE</div>
-                <div class="span3">TIPO</div>
-                <div class="span3">SUBTIPO</div>
-                <div class="span3">RESULTADO DE CARGA</div>
             </div>
+            <div class="span3 record-cell">
 
-            <!--BODY TABLE -->
+            </div>
+            <div class="span3 record-cell">
+                {{#if leads}}
+                    <input type="button" value="Exportar Duplicados" id="btn_Duplicados" class="btn btn-primary"
+                           btnState="Off"/>
+                {{/if}}
+            </div>
+        </div> <!--Fin de panel_body -->
 
-            {{#each leads}}
-                <div class="row-fluid">
+        <!-- Tabla Leads -->
+        <div class="leadsContainer ">
+            <div class="jm-loadingpage" style="display: none"></div>
+            {{#if leads}}
+                <table class="leads tcenter" align="center" border="1">
+                    <tr>
+                        <th width="20%">NOMBRE</th>
+                        <th width="20%">TIPO</th>
+                        <th width="20%">SUBTIPO</th>
+                        <th width="20%">NOMBRE DE CARGA</th>
+                        <th width="20%">RESULTADO DE CARGA</th>
+                    </tr>
+                    {{#each leads}}
+                        <tr class='single'>
 
-                    <div class="span3" style="border: #8cff4d">{{nombre_c}}</div>
-                    <div class="span3">{{tipo_registro_c}}</div>
-                    <div class="span3">{{subtipo_registro_c}}</div>
-                    <div class="span3">{{nombre_de_cargar_c}}</div>
-                </div>
-            {{/each}}
-        </div>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_registro_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{subtipo_registro_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_de_cargar_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{resultado_de_carga_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    <tr>
+                        <td colspan="4"></td>
+                        <td>
+                            <div class="btn-group  btn-pagination" >
+                                <a class="btn fa fa-caret-left" id="previous_offset"></a>
+                                <a class="btn disabled" id="offset_value" from_set="" to_set=""
+                                   total="{{../this.total}}"></a>
+                                <a class="btn fa fa-caret-right" id="next_offset"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
 
-    {{/if}}
 
-    </div>
-    <div class="span2">
-        <input type="button" value="Exportar Duplicados" id="btn_Duplicados" class="btn btn-primary" btnState="Off" />
-    </div>
+            {{/if}}
 
+
+        </div> <!-- Fin containerLeads -->
+    </div> <!--Fin Container -->
 
 
 {{/if}}
