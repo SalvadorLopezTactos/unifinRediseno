@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-02 00:03:41
+ // created: 2020-01-06 19:03:06
 $dictionary['Lead']['fields']['apellido_materno_c']['labelValue']='Apellido Materno';
 $dictionary['Lead']['fields']['apellido_materno_c']['full_text_search']=array (
   'enabled' => '0',

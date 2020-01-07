@@ -1,5 +1,23 @@
 <?php
 
+/*******************APELLIDO MATERNO*****************/
+$dependencies['Leads']['apellido_materno_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('subtipo_registro_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired', //Action type
+            'params' => array(
+                'target' => 'apellido_materno_c',
+                'label'  => 'apellido_materno_c_label', 
+                'value'  => 'and(or(equal($subtipo_registro_c, "2"),equal($subtipo_registro_c, "3"),equal($subtipo_registro_c, "4")),not(equal($regimen_fiscal_c,"Persona Moral")))',  //SUB-TIPO LEAD ES CONTACTADO, CANCELADO, CONVERTIDO Y QUE NO SEA PERSONA MORAL
+            ),
+        ),
+    ),
+);
+
 /*******************MACROSECTOR*****************/
 $dependencies['Leads']['macrosector_c'] = array(
     'hooks' => array("all"),
@@ -102,7 +120,7 @@ $dependencies['Leads']['puesto_c'] = array(
             'params' => array(
                 'target' => 'puesto_c',
                 'label'  => 'puesto_c_label', 
-                'value'  => 'equal($subtipo_registro_c, "2")',  //SUB-TIPO LEAD ES CONTACTADO
+                'value'  => 'and(equal($subtipo_registro_c, "2"),not(equal($regimen_fiscal_c, "Persona Moral")))',  //SUB-TIPO LEAD ES CONTACTADO
             ),
         ),
     ),

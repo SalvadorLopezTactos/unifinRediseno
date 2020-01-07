@@ -8,6 +8,7 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this._readonlyFields();
+        this.model.on('sync', this.handleDuplicateFound, this);
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -55,7 +56,9 @@
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
             }
-            if (this.model.get('puesto_c') == '' || this.model.get('puesto_c') == null) {
+            if ((this.model.get('puesto_c') == '' || this.model.get('puesto_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_PUESTO_C", "Leads") + '</b><br>';
                 errors['puesto_c'] = errors['puesto_c'] || {};
@@ -68,13 +71,30 @@
                 errors['assigned_user_name'] = errors['assigned_user_name'] || {};
                 errors['assigned_user_name'].required = true;
             }
-            if (this.model.get('leads_leads_1_name') == '' || this.model.get('leads_leads_1_name') == null) {
-                requerido = requerido + 1;
-                campos = campos + '<b>' + 'Contacto Asociado' + '</b><br>';
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
 
-                errors['leads_leads_1_name'] = errors['leads_leads_1_name'] || {};
-                errors['leads_leads_1_name'].required = true;
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
             }
+            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + 'Al menos un teléfono' + '</b><br>';
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -89,13 +109,15 @@
          ****************************************************************************************************************/
 
         if (this.model.get('subtipo_registro_c') == '3') {
-            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
-                requerido = requerido + 1;
-                campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
-                errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
-                errors['motivo_cancelacion_c'].required = true;
-            }
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
 
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -106,57 +128,52 @@
         }
 
         /*****************************************************************************************************************
-         * ****************************************VALIDACION DE TELEFONOS************************************************
+         * *********************************************CHECK CANCELAR LEAD*******************************************
          ****************************************************************************************************************/
-        /****************SUBTIPO LEAD - CONTACTADO************************** */
-         if (this.model.get('subtipo_registro_c') == '2') {
 
-            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
-
-                app.alert.show('message-phone', {
-                    level: 'error',
-                    messages: 'Agregar un número telefónico para guardar un <b>Lead: </b><br>' + '<b>' + 'Móvil' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Casa' + '</b>' + ' o' + '<br>' + '<b>' + 'Teléfono de Oficina' + '</b>' + ' o' + '<br>',
+        if (this.model.get('lead_cancelado_c') == '1') {
+            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
+                errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
+                errors['motivo_cancelacion_c'].required = true;
+            }
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
                     autoClose: false
                 });
-
-                errors['phone_mobile'] = errors['phone_mobile'] || {};
-                errors['phone_mobile'].required = true;
-                errors['phone_home'] = errors['phone_home'] || {};
-                errors['phone_home'].required = true;
-                errors['phone_work'] = errors['phone_work'] || {};
-                errors['phone_work'].required = true;
             }
         }
-
 
         callback(null, fields, errors);
     },
 
     _readonlyFields: function () {
         var self = this;
-        var subTipo = this.model.get('subtipo_registro_c');
 
-        if (subTipo == '3') {
+        if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
 
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
 
             _.each(this.model.fields, function (field) {
 
-                if (!_.isEqual(field.name, 'motivo_cancelacion_c') && !_.isEqual(field.name, 'submotivo_cancelacion_c')) {
+                self.noEditFields.push(field.name);
+                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
 
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
-                }
             });
         }
     },
 
+    handleDuplicateFound: function () {
+        /****OCULTA EL BOTON DE IGNORAR DUPLICADO Y GUARDAR*****/
+        this.dupecheckList.show();
+    },
+
     _render: function (options) {
         this._super("_render");
-
     }
 })

@@ -108,7 +108,7 @@ array (
               ),
               4 => 
               array (
-                'name' => 'name_c',                
+                'name' => 'name_c',
                 'label' => 'LBL_NAME',
               ),
             ),
@@ -277,19 +277,27 @@ array (
               29 => 'phone_work',
               30 => 
               array (
+                'name' => 'lead_cancelado_c',
+                'label' => 'LBL_LEAD_CANCELADO_C',
+              ),
+              31 => 
+              array (
+              ),
+              32 => 
+              array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              31 => 
+              33 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
               ),
-              32 => 
+              34 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
