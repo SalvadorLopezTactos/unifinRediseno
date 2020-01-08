@@ -1,16 +1,22 @@
 {{#if this.loadView}}
 
-    <style>
+    <style xmlns="http://www.w3.org/1999/html">
         .container {
             overflow-y: auto;
-            display: block;
+            display: table;
             width: 100%;
+
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .leadsContainer {
             margin-top: 1%;
             overflow-y: auto;
-            height: 300px;
+            height: 100%;
         }
 
         /*Loading page*/
@@ -30,6 +36,12 @@
         .leads {
             display: table;
             width: 90%;
+        }
+        .single:hover {
+            background-color: #f7f8f9;
+           /* background-color: #e4e9ed; */
+            font-size:22px;
+            font-weight: bold;
         }
     </style>
 
@@ -61,33 +73,51 @@
             <div class="span3 record-cell">
 
             </div>
-            <div class="span3 record-cell">
-                {{#if leads}}
-                    <input type="button" value="Exportar Duplicados" id="btn_Duplicados" class="btn btn-primary"
-                           btnState="Off"/>
+            <in class="span3 record-cell">
+                {{#if leads_temp}}
+                    <button class="btn btn-primary" type="submit"  id="btn_Duplicados" ><i class=" fa fa-download"style="padding-right: 2px"/> Exportar Duplicados</button>
+
                 {{/if}}
             </div>
         </div> <!--Fin de panel_body -->
 
         <!-- Tabla Leads -->
         <div class="leadsContainer ">
-            <div class="jm-loadingpage" style="display: none"></div>
-            {{#if leads}}
+            {{#if leads_temp}}
                 <table class="leads tcenter" align="center" border="1">
-                    <tr>
+                    <tr style="background-color: #e4e9ed">
                         <th width="20%">NOMBRE</th>
-                        <th width="20%">TIPO</th>
-                        <th width="20%">SUBTIPO</th>
+                        <th width="10%">RÉGIMEN FISCAL</th>
+                        <th width="15%">TIPO</th>
+                        <th width="15%">SUBTIPO</th>
                         <th width="20%">NOMBRE DE CARGA</th>
                         <th width="20%">RESULTADO DE CARGA</th>
                     </tr>
-                    {{#each leads}}
+                    {{#each leads_temp}}
                         <tr class='single'>
+                            {{#if isFisica}}
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_c}} {{apellido_paterno_c}} {{apellido_materno_c}}</span>
+                          </div>
+                    </span>
+                                </td>
+                            {{else}}
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_empresa_c}}</span>
+                          </div>
+                    </span>
+                                </td>
+
+                            {{/if}}
 
                             <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
-                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_c}}</span>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{regimen_fiscal_c}}</span>
                           </div>
                     </span>
                             </td>
@@ -122,12 +152,12 @@
                         </tr>
                     {{/each}}
                     <tr>
-                        <td colspan="4"></td>
+                        <td colspan="5"></td>
                         <td>
                             <div class="btn-group  btn-pagination" >
                                 <a class="btn fa fa-caret-left" id="previous_offset"></a>
                                 <a class="btn disabled" id="offset_value" from_set="" to_set=""
-                                   total="{{../this.total}}"></a>
+                                   total="{{../total_page}}"></a>
                                 <a class="btn fa fa-caret-right" id="next_offset"></a>
                             </div>
                         </td>
@@ -135,7 +165,10 @@
                 </table>
 
 
-
+            {{else}}
+                <div class="block-footer">
+                        {{str "LBL_NO_DATA_AVAILABLE"}}
+                </div>
             {{/if}}
 
 

@@ -44,21 +44,12 @@ class GetNameLoadLeads extends SugarApi
 INNER JOIN  leads l
 ON lc.id_c=l.id
 WHERE l.deleted=0";
-
         $result = $db->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
             $temp = $row['nombre_de_cargar_c'];
-
             array_push($records_in, $row['nombre_de_cargar_c']);
-
-
         }
-        $GLOBALS['log']->fatal(print_r($records_in,true));
-
         return $records_in;
     }
-
-
 }

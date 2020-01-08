@@ -10,5 +10,5 @@ $viewdefs['Leads']['base']['menu']['header'][] = array(
     'route'=>'#Leads/layout/Reporte_Carga_Leads',
     'label' =>'LNK_LEADS_IMPORT_REPORT',
     'acl_module'=>'Leads',
-    'icon' => 'fa-upload',
+    'icon' => 'fa-table',
 );
