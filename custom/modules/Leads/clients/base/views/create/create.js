@@ -8,7 +8,6 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this._readonlyFields();
-        this.model.on('sync', this.handleDuplicateFound, this);
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -168,9 +167,23 @@
         }
     },
 
-    handleDuplicateFound: function () {
-        /****OCULTA EL BOTON DE IGNORAR DUPLICADO Y GUARDAR*****/
-        this.dupecheckList.show();
+    setButtonStates: function (state) {
+        this._super("setButtonStates", [state]);
+        var $saveButtonEl = this.buttons[this.saveButtonName];
+        if ($saveButtonEl) {
+            switch (state) {
+                case this.STATE.CREATE:
+                case this.STATE.SELECT:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_SAVE_BUTTON_LABEL', this.module));
+                    break;
+                case this.STATE.DUPLICATE:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
+                    //OCULTANDO BOTON DE IGNORAR DUPLICADO CON JQUERY
+                    $('[name="duplicate_button"]').hide();
+                    $('[data-event="list:dupecheck-list-select-edit:fire"]').addClass("hidden");
+                    break;
+            }
+        }
     },
 
     _render: function (options) {
