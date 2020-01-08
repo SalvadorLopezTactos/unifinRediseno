@@ -83,28 +83,49 @@ $popupMeta = array (
     'default' => true,
     'name' => 'name_c',
   ),
-  'STATUS' => 
+  'TIPO_REGISTRO_C' => 
   array (
-    'width' => 10,
-    'label' => 'LBL_LIST_STATUS',
+    'type' => 'enum',
     'default' => true,
-    'name' => 'status',
+    'label' => 'LBL_TIPO_REGISTRO',
+    'width' => 10,
+    'name' => 'tipo_registro_c',
   ),
-  'ACCOUNT_NAME' => 
+  'SUBTIPO_REGISTRO_C' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_ACCOUNT_NAME',
-    'width' => 10,
+    'type' => 'enum',
     'default' => true,
-    'name' => 'account_name',
+    'label' => 'LBL_SUBTIPO_REGISTRO',
+    'width' => 10,
+    'name' => 'subtipo_registro_c',
   ),
-  'PHONE_WORK' => 
+  'REGIMEN_FISCAL_C' => 
   array (
-    'type' => 'phone',
-    'label' => 'LBL_OFFICE_PHONE',
+    'type' => 'enum',
+    'default' => true,
+    'label' => 'LBL_REGIMEN_FISCAL',
+    'width' => 10,
+    'name' => 'regimen_fiscal_c',
+  ),
+  'ASSIGNED_USER_NAME' => 
+  array (
+    'width' => 10,
+    'label' => 'LBL_LIST_ASSIGNED_USER',
+    'default' => true,
+    'name' => 'assigned_user_name',
+  ),
+  'DATE_ENTERED' => 
+  array (
+    'type' => 'datetime',
+    'studio' => 
+    array (
+      'portaleditview' => false,
+    ),
+    'readonly' => true,
+    'label' => 'LBL_DATE_ENTERED',
     'width' => 10,
     'default' => true,
-    'name' => 'phone_work',
+    'name' => 'date_entered',
   ),
 ),
 );
