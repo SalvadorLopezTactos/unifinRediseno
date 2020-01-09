@@ -44,7 +44,9 @@
 
     },
 
-    _geLeads: function () {
+    _geLeads: function (aux) {
+
+        console.log(aux);
 
         self = this;
         var opcion = $("#CargaLeads").val();
@@ -52,10 +54,19 @@
         if (opcion != "") {
             app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
-            var from_set = $("#offset_value").attr("from_set");
-            var to_set = $("#offset_value").attr("to_set");
-            var current_set = $("#offset_value").html();
-            var from_set_num = parseInt(from_set);
+
+            if (aux != "ok") {
+                var from_set = 0;
+                var to_set = 20;
+                var current_set = $("#offset_value").html();
+                var from_set_num = parseInt(from_set);
+            }
+            else {
+                var from_set = $("#offset_value").attr("from_set");
+                var to_set = $("#offset_value").attr("to_set");
+                var current_set = $("#offset_value").html();
+                var from_set_num = parseInt(from_set);
+            }
 
             if (isNaN(from_set_num)) {
                 from_set_num = 0;
@@ -68,7 +79,6 @@
 
             app.api.call("read", app.api.buildURL("GetLeadsAll", null, null, filter_arguments), null, {
                 success: _.bind(function (data) {
-                    //console.log(data);
 
                     for (var i = 0; i < data.Leads.length; i++) {
                         if (data.Leads[i].regimen_fiscal_c == 'Persona Fisica') {
@@ -80,7 +90,7 @@
 
                         data.Leads[i].tipo_registro_c = app.lang.getAppListStrings("tipo_registro_c_list")[data.Leads[i].tipo_registro_c];
                         data.Leads[i].subtipo_registro_c = app.lang.getAppListStrings("subtipo_registro_c_list")[data.Leads[i].subtipo_registro_c]
-                        
+
                     }
                     ;
                     self.leads_temp = data.Leads;
@@ -152,7 +162,7 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this._geLeads();
+        this._geLeads("ok");
     },
 
     _previousOffset: function () {
@@ -170,7 +180,7 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this._geLeads();
+        this._geLeads("ok");
     },
 
     _exportReport: function () {
