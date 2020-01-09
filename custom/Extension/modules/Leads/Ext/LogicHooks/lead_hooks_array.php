@@ -12,3 +12,11 @@ $hook_array['after_save'][] = Array(
     'Lead_Hooks',
     'crearProspecto'
 );
+
+$hook_array['after_save'][] = Array(
+    4,
+    'hookleadcancelado',
+    'custom/modules/Leads/lead_cancelado_class.php',
+    'checkCancelado',
+    'subTipoCancelado'
+);

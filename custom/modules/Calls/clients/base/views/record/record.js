@@ -504,7 +504,35 @@
                 success: _.bind(function (model) {
 					// 
                     //if(model.get('tct_no_contactar_chk_c')==true){
+					//regimen_fiscal_c	
+					//Persona Fisica,Persona Fisica con Actividad Empresarial,Persona Moral
 					if( model.get('subtipo_registro_c') == "1" ){
+						
+						if (model.get('nombre_empresa_c')=='' && model.get('regimen_fiscal_c')=='Persona Moral') {
+							errors['nombre_empresa_c'] = errors['nombre_empresa_c'] || {};
+							errors['nombre_empresa_c'].required = true;
+							texto += "<b>Nombre de la Empresa</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('nombre_c')=='' && model.get('apellido_paterno_c')=='' &&
+							   model.get('regimen_fiscal_c')!='Persona Moral') {
+							errors['nombre_c'] = errors['nombre_c'] || {};
+							errors['nombre_c'].required = true;
+							texto += "<b>Nombre</b> <br>";
+							errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+							errors['apellido_paterno_c'].required = true;
+							texto += "<b>Apellido Paterno</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('origen_c')=='' ) {
+							errors['origen_c'] = errors['origen_c'] || {};
+							errors['origen_c'].required = true;
+							texto += "<b>Origen</b> <br>";
+							requerido++;
+						}
+						
 						if (model.get('macrosector_c')=='') {
 							errors['macrosector_c'] = errors['macrosector_c'] || {};
 							errors['macrosector_c'].required = true;
@@ -542,7 +570,7 @@
 							errors['phone_work'] = errors['phone_work'] || {};
 							errors['phone_work'].required = true;
 							
-							texto += "<b>Teléfono</b> <br>";
+							texto += "<b>Necesita agregar al menos un teléfono</b> <br>";
 							requerido++;
 						}
 						
@@ -553,7 +581,7 @@
 							requerido++;
 						}
 						
-						if (model.get('puesto_c')=='') {
+						if (model.get('puesto_c')=='' && model.get('regimen_fiscal_c')!='Persona Moral') {
 							errors['puesto_c'] = errors['puesto_c'] || {};
 							errors['puesto_c'].required = true;
 							texto += "<b>Puesto</b> <br>";

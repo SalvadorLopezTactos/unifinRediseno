@@ -38,3 +38,6 @@ $mod_strings['LBL_NOMBRE_DE_CARGAR'] = 'Nombre de la Cargar';
 $mod_strings['LBL_CLEAN_NAME'] = 'Nombre único';
 $mod_strings['LBL_RESULTADO_DE_CARGA'] = 'Resultado de la Carga';
 $mod_strings['LBL_FIRST_NAME'] = 'Nombre Lead';
+$mod_strings['LBL_NAME'] = 'Nombre';
+$mod_strings['LBL_CURRENCY'] = 'LBL_CURRENCY';
+$mod_strings['LBL_LEAD_CANCELADO_C'] = 'Cancelar Lead';

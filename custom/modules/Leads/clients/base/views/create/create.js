@@ -6,7 +6,7 @@
         self = this;
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
-        this.model.on('sync', this._readonlyFields, this);      
+        this.model.on('sync', this._readonlyFields, this);
         this._readonlyFields();
     },
 
@@ -18,8 +18,7 @@
          * *********************************************SUB-TIPO CONTACTADO*******************************************
          ****************************************************************************************************************/
 
-        if (this.model.get('subtipo_registro_c') == '2')
-        {
+        if (this.model.get('subtipo_registro_c') == '2') {
             if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_MACROSECTOR_C", "Leads") + '</b><br>';
@@ -56,7 +55,9 @@
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
             }
-            if (this.model.get('puesto_c') == '' || this.model.get('puesto_c') == null) {
+            if ((this.model.get('puesto_c') == '' || this.model.get('puesto_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_PUESTO_C", "Leads") + '</b><br>';
                 errors['puesto_c'] = errors['puesto_c'] || {};
@@ -65,17 +66,34 @@
             if (this.model.get('assigned_user_name') == '' || this.model.get('assigned_user_name') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + 'Asignado a' + '</b><br>';
-                
+
                 errors['assigned_user_name'] = errors['assigned_user_name'] || {};
                 errors['assigned_user_name'].required = true;
             }
-            if (this.model.get('leads_leads_1_name') == '' || this.model.get('leads_leads_1_name') == null) {
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
                 requerido = requerido + 1;
-                campos = campos + '<b>' + 'Contacto Asociado' + '</b><br>';
-                
-                errors['leads_leads_1_name'] = errors['leads_leads_1_name'] || {};
-                errors['leads_leads_1_name'].required = true;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
             }
+            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + 'Al menos un teléfono' + '</b><br>';
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -89,15 +107,36 @@
          * *********************************************SUB-TIPO CANCELADO*******************************************
          ****************************************************************************************************************/
 
-        if (this.model.get('subtipo_registro_c') == '3')
-        {
+        if (this.model.get('subtipo_registro_c') == '3') {
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
+
+        /*****************************************************************************************************************
+         * *********************************************CHECK CANCELAR LEAD*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('lead_cancelado_c') == '1') {
             if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
                 errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
                 errors['motivo_cancelacion_c'].required = true;
             }
-            
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -112,27 +151,42 @@
 
     _readonlyFields: function () {
         var self = this;
-        var subTipo = this.model.get('subtipo_registro_c');
 
-        if (subTipo == '3') {
-            
+        if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
+
             var editButton = self.getField('edit_button');
-            editButton.setDisabled(true);            
-           
+            editButton.setDisabled(true);
+
             _.each(this.model.fields, function (field) {
-                
-                if (!_.isEqual(field.name, 'subtipo_registro_c') && !_.isEqual(field.name, 'motivo_cancelacion_c') && !_.isEqual(field.name, 'submotivo_cancelacion_c')) {
-                    
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name='+field.name+']').attr('style', 'pointer-events:none;');
-                }                
-            }); 
+
+                self.noEditFields.push(field.name);
+                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+
+            });
+        }
+    },
+
+    setButtonStates: function (state) {
+        this._super("setButtonStates", [state]);
+        var $saveButtonEl = this.buttons[this.saveButtonName];
+        if ($saveButtonEl) {
+            switch (state) {
+                case this.STATE.CREATE:
+                case this.STATE.SELECT:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_SAVE_BUTTON_LABEL', this.module));
+                    break;
+                case this.STATE.DUPLICATE:
+                    $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE', this.module)).hide();
+                    //OCULTANDO BOTON DE IGNORAR DUPLICADO CON JQUERY
+                    $('[name="duplicate_button"]').hide();
+                    $('[data-event="list:dupecheck-list-select-edit:fire"]').addClass("hidden");
+                    break;
+            }
         }
     },
 
     _render: function (options) {
         this._super("_render");
-
     }
 })

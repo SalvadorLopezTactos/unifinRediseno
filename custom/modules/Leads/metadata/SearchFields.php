@@ -1,5 +1,5 @@
 <?php
-// created: 2019-12-19 15:30:24
+// created: 2020-01-06 15:47:00
 $searchFields['Leads'] = array (
   'first_name' => 
   array (
@@ -196,6 +196,24 @@ $searchFields['Leads'] = array (
     'is_date_field' => true,
   ),
   'end_range_date_modified' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_dp_consent_last_updated' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_dp_consent_last_updated' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_dp_consent_last_updated' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
