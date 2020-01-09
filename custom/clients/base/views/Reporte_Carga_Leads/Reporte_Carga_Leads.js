@@ -68,19 +68,22 @@
 
             app.api.call("read", app.api.buildURL("GetLeadsAll", null, null, filter_arguments), null, {
                 success: _.bind(function (data) {
-                    console.log(data);
+                    //console.log(data);
 
-                    for(var i=0;i<data.Leads.length; i++) {
-                        if(data.Leads[i].regimen_fiscal_c=='Persona Fisica')
-                        {
-                            data.Leads[i].isFisica=true;
+                    for (var i = 0; i < data.Leads.length; i++) {
+                        if (data.Leads[i].regimen_fiscal_c == 'Persona Fisica') {
+                            data.Leads[i].isFisica = true;
                         }
-                        else
-                        {
-                            data.Leads[i].isFisica=false;
+                        else {
+                            data.Leads[i].isFisica = false;
                         }
-                    };
-                        self.leads_temp = data.Leads;
+
+                        data.Leads[i].tipo_registro_c = app.lang.getAppListStrings("tipo_registro_c_list")[data.Leads[i].tipo_registro_c];
+                        data.Leads[i].subtipo_registro_c = app.lang.getAppListStrings("subtipo_registro_c_list")[data.Leads[i].subtipo_registro_c]
+                        
+                    }
+                    ;
+                    self.leads_temp = data.Leads;
 
 
                     self.total_page = data.total_leads;
