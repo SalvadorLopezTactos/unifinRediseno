@@ -1,0 +1,157 @@
+{{#if this.loadView}}
+    <style>
+        .container {
+            overflow-y: auto;
+            display: block;
+            width: 100%;
+        }
+        .cuentas {
+            display: table;
+            width: 90%;
+        }
+        .cuentasContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 300px;
+        }
+        #containerHeader {
+            font-size: 18px;
+            margin-top: 2%;
+            margin-left: 1%;
+            line-height: 10px;
+        }
+        #successful {
+            margin-top: 10%;
+            font-size: 25px;
+            color: #33800d;
+        }
+    </style>
+	<script>
+		var $select2 = this.$('.cuentasContainer').find('select.select2');
+		$select2.select2();
+	</script>	
+	<div><p></p></div>
+    <div class="container">
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 95%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+						Gestión de Agentes Telefónicos
+                    </p>
+                </h1>
+            </div>
+        </div>
+        <div class="record row-fluid panel_body">
+            <div class="span2 record-cell">
+                <div class="record-label">Equipo</div>
+                <span>
+                    <span>
+                    <select id="Equipos">
+                        {{#each lista_equipo}}
+                            <option value="{{@key}}" {{ifSelected @key ../filtros.Equipo}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+					<p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span3 record-cell">
+                <div class="record-label">Informa a</div>
+                <span>
+                    <span>
+                        {{#each meta.panels}}
+                            {{#each fields}}
+                                {{field ../../this}}
+                            {{/each}}
+                        {{/each}}
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span3 record-cell">
+                <div class="record-label">Nombre</div>
+                <span>
+                    <span>
+                        <input id="AgenteN" type="text" value="{{filtros.Nombre}}">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span3 record-cell">
+                <div class="record-label">Apellido</div>
+                <span>
+                    <span>
+						<input id="AgenteA" type="text" value="{{filtros.Apellidos}}">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span1 record-cell" style="margin-left:0px;">
+                <div class="record-label">&nbsp;</div>
+                <span>
+                    <span>
+                        <button class="btn btn-primary" id="btn_Buscar" type="button">Buscar<img
+                                        id='processing' style="display: none;" width="15" height="5"
+                                        src="custom/Levementum/images/icon_processing.gif"></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+		{{#if listausuarios}}
+			<div class="row-fluid">
+				<table class="table">
+					<tr>
+						<td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">USUARIO</label>
+						</td>
+						<td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">INFORMA A</label>
+						</td>
+						<td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">EQUIPO</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="cuentasContainer row-fluid">
+			  <table class="table table-striped tablavet">
+				{{#each listausuarios}}
+					<tr>
+						<td class="span4">	
+							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_completo_c}}</span>
+						</td>
+						<td class="span4">
+							<select class="usuarios select2 updateusr" style="width: 100%;" data-field="user_id">
+								{{#each ../usuarios_list}}
+									<option value="{{@key}}" {{ifSelected @key ../reports_to_id}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+						<td class="span4">
+							<select class="equipos select2 updateeqp" style="width: 100%;" data-field="equipo_id">
+								{{#each ../lista_equipo}}
+									<option value="{{@key}}" {{ifSelected @key ../equipo_c}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+					</tr>
+				{{/each}}
+			  </table>
+			</div>
+			<div><p></p></div>
+            <table>
+				<br>
+				<tr>
+					<th>Total de registros encontrados: {{filtros.Total}}</th>
+                    <td align="center"><input type="button" value="Guardar cambios" id="btn_guardar" class="btn btn-success" /></td>
+					<td></td>
+                </tr>
+			</table>
+		{{else}}
+			<div class="row-fluid" style="color:gray;">
+				<div class="span12"><center>No se han encontrado registros</center></div>
+			</div>
+		{{/if}}
+		<textarea style="display: none" id="crossSeleccionados" value=""></textarea>
+    </div>
+{{/if}}
