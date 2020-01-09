@@ -15,9 +15,17 @@ $hook_array['after_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    13,
+    14,
     'Valida y agrega team_sets con equipo privado y equipo principal unics',
     'custom/modules/Users/DefaultTeam.php',
     'DefaultTeam',
     'create_team_sets'
+);
+
+$hook_array['after_save'][] = Array(
+    13,
+    'Actualiza el valor del default team del usuario creado para no asignarlo al grupo global',
+    'custom/modules/Users/DefaultTeam.php',
+    'DefaultTeam',
+    'user_default_team'
 );

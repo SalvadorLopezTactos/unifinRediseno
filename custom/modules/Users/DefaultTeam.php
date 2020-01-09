@@ -239,4 +239,32 @@ SQL;
         //$GLOBALS['log']->fatal('TCT - Fin LH creación de team_set');
     }
 
+    /* Función para eliminar por defecto el grupo global del usuario y asignarle solamente el grupo privado. */
+    public function user_default_team ($bean = null, $event = null, $args = null){
+        global $db, $current_user;
+
+        require_once('modules/Teams/TeamSetManager.php');
+        $sugarFieldTeamSet = new SugarFieldTeamset('Teamset');
+        $teams = $sugarFieldTeamSet->getTeamsFromRequest('team_name');
+        $team_ids = array_keys($teams);
+        $team_id = SugarFieldTeamset::getPrimaryTeamIdFromRequest('team_name', $bean->default_team);
+        $teamSet = BeanFactory::newBean('TeamSets');
+        $team_set_id = $teamSet->addTeams($team_ids);
+        //$GLOBALS['log']->fatal('ID TEAM SET ='.$team_set_id );
+        $teamSetSelectedId = null;
+
+
+        if (!empty($bean->id && $bean->team_set_id==1)){
+            /*Valida que exista el id del usuario asi como que el team_set_id sea 1 (el del grupo Global) para actualizarlo.*/
+            $GLOBALS['log']-> fatal ("Entra update para asignar el id al grupo privado del USER creado");
+            $query = "UPDATE users INNER JOIN teams ON users.id = teams.associated_user_id 
+       SET users.default_team = teams.id, users.team_set_id= teams.id
+    where users.id='{$bean->id}'";
+            $queryResult = $db->query($query);
+            while ($row = $db->fetchByAssoc($queryResult)) {
+            }
+            //$GLOBALS['log']->fatal('ID en Default_team y team_set_id ='.$bean->id );
+
+        }
+    }
 }
