@@ -25,6 +25,7 @@
         this.on('render', this.noEditStatus,this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
+        this.model.on('sync', this.disableConfirmado, this);
         this.model.on('sync', this.disableFieldsTime,this);
         this.model.on('sync', this.validaprospeccion,this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
@@ -174,7 +175,6 @@
 
     editClicked: function() {
         this._super("editClicked");
-
         if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
             this.setButtonStates(this.STATE.VIEW);
             this.action = 'detail';
@@ -362,7 +362,6 @@
         }
     },
 
-
     /*@Jesus Carrillo
     Deshabilita campo status dependiendo de diferentes criterios
      */
@@ -381,6 +380,21 @@
         }
     },
 
+    /*@Eduardo Carrasco Beltrán
+    Deshabilita campos Resutado Confirmado... y Validado Por*/
+    disableConfirmado:function () {
+        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Held" || this.model.get('resultado_confirmado_por_c')) {
+            $('span[data-name=resultado_confirmado_c]').css("pointer-events", "none");
+            $('span[data-name=resultado_confirmado_por_c]').css("pointer-events", "none");
+            this.noEditFields.push('resultado_confirmado_c');
+            this.noEditFields.push('resultado_confirmado_por_c');
+        }
+        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Planned" || this.model.get('validado_por_c')) {
+            $('span[data-name=validado_por_c]').css("pointer-events", "none");
+            this.noEditFields.push('validado_por_c');
+        }
+    },
+    
     blockRecordNoContactar:function () {
 
         var id_cuenta=this.model.get('parent_id');

@@ -400,7 +400,7 @@ class Meetings_Hooks
                 //Envía encuesta
                 Meetings_Hooks::sendEmailSurvey($bean);
               //Criterio 3b
-            } elseif ($bean->fetched_row['status'] == 'Planned' && $bean->status !=  'Planned' && ($bean->resultado_c == '1' || $bean->resultado_c == '22') ) {
+            } elseif ($bean->fetched_row['status'] == 'Planned' && $bean->status !=  'Planned' && ($bean->resultado_c == '22' || $bean->resultado_c == '24' || $bean->resultado_c == '25') ) {
                 //Envía encuesta
                 Meetings_Hooks::sendEmailSurvey($bean);
               }

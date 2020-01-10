@@ -144,6 +144,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'subpuesto_c',
+            'label' => 'LBL_SUBPUESTO',
+          ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
             'name' => 'region_c',
             'label' => 'LBL_REGION',
           ),
@@ -153,7 +162,7 @@ array (
             'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -168,7 +177,7 @@ array (
             'label' => 'LBL_EQUIPOS_C',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -183,7 +192,7 @@ array (
             'label' => 'LBL_PRODUCTOS',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
