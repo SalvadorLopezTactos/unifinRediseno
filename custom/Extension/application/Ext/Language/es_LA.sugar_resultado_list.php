@@ -1,9 +1,8 @@
 <?php
- // created: 2019-06-19 13:02:46
+ // created: 2019-12-23 11:48:07
 
 $app_list_strings['resultado_list']=array (
   '' => '',
-  1 => 'El cliente no estuvo presente, cita cancelada',
   2 => 'No está interesado',
   3 => 'Está interesado, pero no en este momento',
   4 => 'Está Interesado. Se procede a generar expediente',
@@ -25,4 +24,6 @@ $app_list_strings['resultado_list']=array (
   21 => 'No Interesado. Cita Forzada',
   22 => 'No se pudo contactar al Prospecto para confirmar cita',
   23 => 'Está interesado, solicita cotización para proceder',
+  24 => 'Cancelada por el prospecto, se reagendo',
+  25 => 'Cancelada por el prospecto, no le interesa',
 );

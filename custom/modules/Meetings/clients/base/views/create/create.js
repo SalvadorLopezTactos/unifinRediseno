@@ -33,6 +33,10 @@
         if(this.model.get('status')=='Planned'){
             this.$('div[data-name=resultado_c]').hide();
         }
+        //Oculta campos Validado Por y Resultado Confirmado ...
+        $('[data-name="validado_por_c"]').hide();
+        $('[data-name="resultado_confirmado_c"]').hide();
+        $('[data-name="resultado_confirmado_por_c"]').hide();
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },

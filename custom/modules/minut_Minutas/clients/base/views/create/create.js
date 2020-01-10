@@ -87,7 +87,7 @@
             }
         }
         // Valida Asistencias
-        if (this.model.get('resultado_c') != '1') {
+        if (this.model.get('resultado_c') != '24' || this.model.get('resultado_c') != '25') {
             if (banderaAsistencia < 1) {
                 app.alert.show("Asistencia", {
                     level: "error",
@@ -306,7 +306,7 @@
     * Validacón para evitar guardar una minuta si no se ha contestado Encuesta
     */
     validaEncuesta:function(fields, errors, callback){
-        if (this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22") {
+        if (this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25") {
             var id_meeting=this.model.get('minut_minutas_meetingsmeetings_idb');
 
             if(id_meeting!= undefined){
@@ -671,8 +671,8 @@
             return;
         }
 
-        //Valida resultado diferente a: "El cliente no estuvo presente, cita cancelada".
-        if (this.model.get('resultado_c') == "1") {
+        //Valida resultado diferente a: "Cancelada por el prospecto ...".
+        if (this.model.get('resultado_c') == "24" || this.model.get('resultado_c') == "25") {
             App.alert.show("survey_no_result", {
                 level: "info",
                 messages: "No se puede contestar encuesta para resultado <b>El cliente no estuvo presente,Cita cancelada</b>",
@@ -741,7 +741,7 @@
 
     changeColorSurveyButton:function (evt) {
 
-        if(this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22"){
+        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25"){
 
             $('[name="survey_minuta"]').addClass('btn-success');
 
@@ -756,7 +756,7 @@
     * */
     enableButtons: function () {
         this._super("enableButtons");
-        if(this.flagPuesto && this.model.get('resultado_c') != "1" && this.model.get('resultado_c') != "22"){
+        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25"){
             $('[name="survey_minuta"]').addClass('btn-success');
         }else{
             $('[name="survey_minuta"]').removeClass('btn-success');
