@@ -1,13 +1,22 @@
 ({
 
     extendsFrom: 'RecordView',
+    events:
+        {
+
+        },
 
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
+        this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
+
         this._readonlyFields();
+
+
+
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -164,4 +173,24 @@
     _render: function (options) {
         this._super("_render");
     },
+
+    convert_Lead_to_Accounts: function () {
+
+        var filter_arguments={
+            "id":this.model.get('id')
+        };
+       // alert(this.model.get('id'))
+        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+
+        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+            success: _.bind(function (data) {
+
+                console.log(data.idcuenta);
+
+                app.alert.dismiss('upload');
+
+            }, this)
+        });
+
+    }
 })

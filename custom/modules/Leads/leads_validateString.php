@@ -56,7 +56,7 @@ class leads_validateString
             $bean->name = $bean->nombre_empresa_c;
         }
         //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-        if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
+       // if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
 
             $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
             $acronimos = $app_list_strings['validacion_duplicados_list'];
@@ -121,7 +121,7 @@ class leads_validateString
                 $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
 
             }
-        }
+        //}
     }
 
 
@@ -141,7 +141,7 @@ class leads_validateString
         $result = $sql->execute();
             $count = count($result);
 
-            $duplicateproductMessageLeads = 'El Lead que intentas crear ya existe.';
+            $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
             $sqlLead = new SugarQuery();
             $sqlLead->select(array('id', 'clean_name_c'));
             $sqlLead->from(BeanFactory::newBean('Leads'));
