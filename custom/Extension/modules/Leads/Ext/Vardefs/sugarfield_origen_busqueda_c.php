@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-02 00:33:34
+ // created: 2020-01-13 21:24:56
 $dictionary['Lead']['fields']['origen_busqueda_c']['labelValue']='Base';
 $dictionary['Lead']['fields']['origen_busqueda_c']['full_text_search']=array (
   'enabled' => '0',

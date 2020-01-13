@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-02 00:26:45
+ // created: 2020-01-13 19:29:54
 $dictionary['Lead']['fields']['evento_c']['labelValue']='¿Qué Evento?';
 $dictionary['Lead']['fields']['evento_c']['full_text_search']=array (
   'enabled' => '0',

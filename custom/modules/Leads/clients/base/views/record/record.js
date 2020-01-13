@@ -8,11 +8,46 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this._readonlyFields();
+        
     },
 
     valida_requeridos: function (fields, errors, callback) {
         var campos = "";
         var requerido = 0;
+
+        /*****************************************************************************************************************
+         * *********************************************SUB-TIPO SIN CONTACTAR*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('subtipo_registro_c') == '1') {
+
+            if (this.model.get('nombre_c') == '' || this.model.get('nombre_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+            if (this.model.get('apellido_paterno_c') == '' || this.model.get('apellido_paterno_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
+            if (this.model.get('origen_c') == '' || this.model.get('origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
+                errors['origen_c'] = errors['origen_c'] || {};
+                errors['origen_c'].required = true;
+            }
+
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
 
         /*****************************************************************************************************************
          * *********************************************SUB-TIPO CONTACTADO*******************************************

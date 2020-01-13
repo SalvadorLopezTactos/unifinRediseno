@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-02 00:30:19
+ // created: 2020-01-13 19:18:03
 $dictionary['Lead']['fields']['origen_ag_tel_c']['labelValue']='Agente Teléfonico';
 $dictionary['Lead']['fields']['origen_ag_tel_c']['dependency']='or(
 equal($detalle_origen_c,"Centro de Prospeccion"),
