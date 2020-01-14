@@ -1,6 +1,7 @@
 <?php
- // created: 2019-12-31 17:15:02
+ // created: 2020-01-13 21:48:02
 $dictionary['Lead']['fields']['punto_contacto_c']['labelValue']='Punto de Contacto';
+$dictionary['Lead']['fields']['punto_contacto_c']['dependency']='';
 $dictionary['Lead']['fields']['punto_contacto_c']['visibility_grid']=array (
   'trigger' => 'medio_digital_c',
   'values' => 
@@ -102,4 +103,5 @@ $dictionary['Lead']['fields']['punto_contacto_c']['visibility_grid']=array (
     ),
   ),
 );
+
  ?>
