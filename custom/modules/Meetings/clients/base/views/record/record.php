@@ -392,14 +392,46 @@ array (
             array (
               0 => 
               array (
+                'name' => 'resultado_confirmado_c',
+                'label' => 'LBL_RESULTADO_CONFIRMADO',
+              ),
+              1 => 
+              array (
+                'name' => 'resultado_confirmado_por_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RESULTADO_CONFIRMADO_POR',
+                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'puestousuario_c' => 
+                  array (
+                    0 => '27',
+                  ),
+                ),
+              ),
+              2 => 
+              array (
                 'name' => 'minut_minutas_meetings_name',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
                 'readonly' => true,
               ),
-              1 => 
+              3 => 
               array (
+                'name' => 'validado_por_c',
+                'studio' => 'visible',
+                'label' => 'LBL_VALIDADO_POR',
+                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'puestousuario_c' => 
+                  array (
+                    0 => '27',
+                  ),
+                ),
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -423,7 +455,7 @@ array (
                   ),
                 ),
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,

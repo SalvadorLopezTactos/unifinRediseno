@@ -166,6 +166,7 @@ $(window).load(function(){
     $('#equipo_c').attr('disabled','disabled');
     $('#tipodeproducto_c').attr('disabled','disabled');
     $('#puestousuario_c').attr('disabled','disabled');
+    $('#subpuesto_c').attr('disabled','disabled');
     $('#tct_team_address_txf_c').attr('disabled','disabled');
     //$('#productos_c').attr('disabled','disabled');
     $('#productos_c').attr('style','pointer-events:none');//Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
@@ -198,6 +199,7 @@ $(window).load(function(){
       $('#equipo_c').attr('disabled','disabled');
       $('#tipodeproducto_c').attr('disabled','disabled');
       $('#puestousuario_c').attr('disabled','disabled');
+      $('#subpuesto_c').attr('disabled','disabled');
       $('#tct_team_address_txf_c').attr('disabled','disabled');
       //$('#productos_c').attr('disabled','disabled');
       $('#productos_c').attr('style','pointer-events:none'); //Se añade estilo , ya que al agregar el atributo disabled para campos multiselect, el valor se pierde
