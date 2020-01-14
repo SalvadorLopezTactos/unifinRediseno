@@ -1,3 +1,3 @@
 <?php
     
-	$app_strings['LNK_PASA_A_PROSPECTO'] = 'Pasar a prospecto'; 
+	$app_strings['LBL_CONVERT_LEADS_BUTTON_LABEL'] = 'Convertir Lead';

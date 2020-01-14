@@ -9,10 +9,10 @@
  */
 
 	
-	 $viewdefs['Leads']['base']['menu']['header'][] = array(
+	/* $viewdefs['Leads']['base']['menu']['header'][] = array(
             'route'=>'#bwc/index.php?entryPoint=oficialCumplimientoLista',
             'label' =>'LNK_PASA_A_PROSPECTO',
             'acl_module'=>'Leads',
             'icon' => 'icon-user',
     );
-	
+	*/
