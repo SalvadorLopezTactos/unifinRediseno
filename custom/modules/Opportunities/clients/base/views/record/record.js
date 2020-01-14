@@ -75,7 +75,7 @@
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
         */
-        //DESCOMENTARthis.model.on('sync', this.ocultynoedit, this);
+        this.model.on('sync', this.ocultynoedit, this);
         //this.model.on('sync', this.disable_panels_team, this);
         this.model.on('sync', this.getcfRI, this);
         this.model.on('sync', this.validaetiquetas, this);
@@ -625,7 +625,7 @@
 
 			this.context.on('button:expediente_button:click', this.expedienteClicked, this);
 			this.context.on('button:ratificado_button:click', this.ratificadoClicked, this);
-            //DESCOMENTARthis.context.on('button:edit_button:click', this.checkForRatificado, this);
+            this.context.on('button:edit_button:click', this.checkForRatificado, this);
       this.context.on('button:edit_button:click', this._HideSaveButton, this);
 			//this.model.on('change:monto_c', this._ValidateAmount, this);
 			//this.events['blur input[name=monto_c]'] = '_ValidateAmount';
