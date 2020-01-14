@@ -16,8 +16,10 @@ class callLead_class
 			if ($parentType == 'Leads') {
 				$beanLead = BeanFactory::getBean('Leads', $parent_id);
 				//$GLOBALS['log']->fatal('Id_lead',$beanLead->id);
-				$beanLead->subtipo_registro_c = 'Contactado';
-				$beanLead->save();
+				if($beanLead->subtipo_registro_c == '1'){
+					$beanLead->subtipo_registro_c = '2';
+					$beanLead->save();
+				}
 			}
 			
 		}
