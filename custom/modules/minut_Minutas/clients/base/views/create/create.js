@@ -672,10 +672,19 @@
         }
 
         //Valida resultado diferente a: "Cancelada por el prospecto ...".
-        if (this.model.get('resultado_c') == "24" || this.model.get('resultado_c') == "25") {
+        if (this.model.get('resultado_c') == "24") {
             App.alert.show("survey_no_result", {
                 level: "info",
-                messages: "No se puede contestar encuesta para resultado <b>Cancelada por el prospecto...</b>",
+                messages: "No se puede contestar encuesta para resultado <b>Cancelada por el prospecto, se reagendo</b>",
+                autoClose: true,
+            });
+            return;
+        }
+
+        if (this.model.get('resultado_c') == "25") {
+            App.alert.show("survey_no_result", {
+                level: "info",
+                messages: "No se puede contestar encuesta para resultado <b>Cancelada por el prospecto, no le interesa</b>",
                 autoClose: true,
             });
             return;
