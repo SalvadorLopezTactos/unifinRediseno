@@ -40,6 +40,7 @@ class check_duplicateAccounts extends SugarApi
         $msjExiste = "El Lead que intentas convertir ya está registrada como Cuenta";
         $hayReunionPlaneada = false;
         $responseLEads = array();
+        $finish = array();
         /**
          * Validamos que el Lead no exista en Cuentas
          */
@@ -69,24 +70,34 @@ class check_duplicateAccounts extends SugarApi
                         $resultadoRelaciones = $this->getContactAssoc($bean, $bean_account);
 
                         // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
-                       // $bean->tipo_registro_c = "";
+                        // $bean->tipo_registro_c = "";
                         $bean->subtipo_registro_c = 4;
                         $bean->save();
+                        $finish = array("idCuenta" => $bean_account->id,"mensaje" => "Conversion Completa");
+
                     }
+                    // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
+
 
                 } else {
-                    throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Palnificada");
                     $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
+                    // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
+                    $finish = array("idCuenta" => "", "mensaje" => "El proceso no puede continuar Falta al menos una Reunion Planificada");
+
                 }
 
             } elseif ($count > 0) {
                 // $Accountsexists = true;
                 $GLOBALS['log']->fatal("Cuenta encontrada ");
-                throw new SugarApiExceptionInvalidParameter($msjExiste);
+                // throw new SugarApiExceptionInvalidParameter($msjExiste);
+                $finish = array("idCuenta" => "", "mensaje" => $msjExiste);
+
+
             }
-            return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
 
         }
+        return $finish;
+
     }
 
     public function createAccount($bean_Leads, $idMeetings)
@@ -102,7 +113,7 @@ class check_duplicateAccounts extends SugarApi
         $bean_account->tct_origen_busqueda_txf_c = $bean_Leads->origen_busqueda_c;
         $bean_account->camara_c = $bean_Leads->camara_c;
         $bean_account->tct_que_promotor_rel_c = $bean_Leads->origen_ag_tel_c;
-        $bean_account->nombre_comercial_c = $bean_Leads->nombre_empresa;
+        $bean_account->nombre_comercial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;
         $bean_account->apellidomaterno_c = $bean_Leads->apellido_materno_c;
         $bean_account->apellidopaterno_c = $bean_Leads->apellido_paterno_c;
@@ -152,7 +163,7 @@ class check_duplicateAccounts extends SugarApi
 
     public function getMeetingsUser($beanL)
     {
-        $procede = array("status" => "", "data" => array("LEASING" => "", 'CREDITO AUTOMOTRIZ' => "", "FACTORAJE" => "", "FLEET" => ""));
+        $procede = array("status" => "stop", "data" => array("LEASING" => "", 'CREDITO AUTOMOTRIZ' => "", "FACTORAJE" => "", "FLEET" => ""));
         if ($beanL->load_relationship('meetings')) {
             $relatedBeans = $beanL->meetings->getBeans();
 
@@ -195,7 +206,8 @@ class check_duplicateAccounts extends SugarApi
                 }
             } else {
                 $procede['status'] = "stop";
-                $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  ");
+                $procede['data'] = array();
+                $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  " . print_r($procede, true));
 
             }
         }

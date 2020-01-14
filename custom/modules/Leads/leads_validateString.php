@@ -56,71 +56,71 @@ class leads_validateString
             $bean->name = $bean->nombre_empresa_c;
         }
         //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-       // if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
+        // if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
 
-            $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-            $acronimos = $app_list_strings['validacion_duplicados_list'];
+        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
+        $acronimos = $app_list_strings['validacion_duplicados_list'];
 
-            $GLOBALS['log']->fatal('full name ' . $bean->full_name);
+        $GLOBALS['log']->fatal('full name ' . $bean->full_name);
 
-            if ($bean->regimen_fiscal_c != "Persona Moral") {
-                $full_name = $bean->nombre_c . " " . $bean->apellido_paterno_c . " " . $bean->apellido_materno_c;
-                //$GLOBALS['log']->fatal(print_r($tipo,true));
-                //Cambia a mayúsculas y quita espacios a cada campo
-                //Concatena los tres campos para formar el clean_name
-                $nombre = $full_name;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                //$GLOBALS['log']->fatal(print_r($separa,true));
-                $longitud = count($separa);
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                    }
+        if ($bean->regimen_fiscal_c != "Persona Moral") {
+            $full_name = $bean->nombre_c . " " . $bean->apellido_paterno_c . " " . $bean->apellido_materno_c;
+            //$GLOBALS['log']->fatal(print_r($tipo,true));
+            //Cambia a mayúsculas y quita espacios a cada campo
+            //Concatena los tres campos para formar el clean_name
+            $nombre = $full_name;
+            $nombre = mb_strtoupper($nombre, "UTF-8");
+            $separa = explode(" ", $nombre);
+            //$GLOBALS['log']->fatal(print_r($separa,true));
+            $longitud = count($separa);
+            //Itera el arreglo separado
+            for ($i = 0; $i < $longitud; $i++) {
+                foreach ($tipo as $t => $key) {
+                    $separa[$i] = str_replace($key, "", $separa[$i]);
                 }
-                $une = implode($separa);
-                $bean->clean_name_c = $une;
-
-                $GLOBALS['log']->fatal("para fisica " . $bean->clean_name_c);
-
-            } else {
-                //$GLOBALS['log']->fatal($bean->razonsocial_c);
-                $nombre = $bean->nombre_empresa_c;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                $separa_limpio = $separa;
-                $GLOBALS['log']->fatal(print_r($separa, true));
-                $longitud = count($separa);
-                $eliminados = 0;
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                        $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                    }
-                    foreach ($acronimos as $a => $key) {
-                        if ($separa[$i] == $a) {
-                            $separa[$i] = "";
-                            $eliminados++;
-                        }
-                        //$GLOBALS['log']->fatal($a);
-                        $GLOBALS['log']->fatal(print_r($separa, true));
-
-
-                    }
-                }
-                //Condicion para eliminar los acronimos
-                if (($longitud - $eliminados) <= 1) {
-                    $separa = $separa_limpio;
-                }
-                //Convierte el array a string nuevamente
-                $une = implode($separa);
-                $bean->clean_name_c = $une;
-
-                $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
-
             }
+            $une = implode($separa);
+            $bean->clean_name_c = $une;
+
+            $GLOBALS['log']->fatal("para fisica " . $bean->clean_name_c);
+
+        } else {
+            //$GLOBALS['log']->fatal($bean->razonsocial_c);
+            $nombre = $bean->nombre_empresa_c;
+            $nombre = mb_strtoupper($nombre, "UTF-8");
+            $separa = explode(" ", $nombre);
+            $separa_limpio = $separa;
+            $GLOBALS['log']->fatal(print_r($separa, true));
+            $longitud = count($separa);
+            $eliminados = 0;
+            //Itera el arreglo separado
+            for ($i = 0; $i < $longitud; $i++) {
+                foreach ($tipo as $t => $key) {
+                    $separa[$i] = str_replace($key, "", $separa[$i]);
+                    $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
+                }
+                foreach ($acronimos as $a => $key) {
+                    if ($separa[$i] == $a) {
+                        $separa[$i] = "";
+                        $eliminados++;
+                    }
+                    //$GLOBALS['log']->fatal($a);
+                    $GLOBALS['log']->fatal(print_r($separa, true));
+
+
+                }
+            }
+            //Condicion para eliminar los acronimos
+            if (($longitud - $eliminados) <= 1) {
+                $separa = $separa_limpio;
+            }
+            //Convierte el array a string nuevamente
+            $une = implode($separa);
+            $bean->clean_name_c = $une;
+
+            $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+
+        }
         //}
     }
 
@@ -128,9 +128,10 @@ class leads_validateString
     public function ExistenciaEnCuentas($bean = null, $event = null, $args = null)
     {
 
-
-        $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-        $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+// omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
+        if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
+            $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+            $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
             //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
             $sql = new SugarQuery();
             $sql->select(array('id', 'clean_name'));
@@ -138,7 +139,7 @@ class leads_validateString
             $sql->where()->equals('clean_name', $bean->clean_name_c);
             $sql->where()->notEquals('id', $bean->id);
 
-        $result = $sql->execute();
+            $result = $sql->execute();
             $count = count($result);
 
             $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
@@ -167,8 +168,12 @@ class leads_validateString
                 $bean->resultado_de_carga_c = 'Registro Exitoso';
             }
 
+        } else {
+            $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
 
+        }
         $GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
     }
 
 }
+
