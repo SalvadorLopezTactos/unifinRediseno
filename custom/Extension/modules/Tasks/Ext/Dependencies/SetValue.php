@@ -12,7 +12,7 @@ $dependencies['Tasks']['ayuda_asesor_cp_c']= array
 		'params'=> array(
 			'target'=>'name',
 			'label'=>'LBL_SUBJECT',
-			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),concat("AYUDA CP - ",related($leads,"name")), "")',
+			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),concat("AYUDA CP - ",related($leads,"name"),related($accounts,"name")), "")',
 		),
 	),
 	

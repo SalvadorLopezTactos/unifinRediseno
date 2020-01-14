@@ -7,8 +7,10 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
+        this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
+
         this._readonlyFields();
-        
+
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -208,4 +210,50 @@
     _render: function (options) {
         this._super("_render");
     },
+
+    convert_Lead_to_Accounts: function () {
+self=this;
+        var filter_arguments={
+            "id":this.model.get('id')
+        };
+       // alert(this.model.get('id'))
+        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+
+        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+            success: _.bind(function (data) {
+
+                console.log(data);
+                app.alert.dismiss('upload');
+
+                if(data.idCuenta==="")
+                {
+                    app.alert.show("Conversión", {
+                        level: "error",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+                {
+                    app.alert.show("Conversión", {
+                        level: "success",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+
+
+
+            }, this),
+            failure: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this),
+            error: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this)
+        });
+        this._render();
+
+    }
 })
