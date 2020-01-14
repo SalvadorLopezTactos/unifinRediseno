@@ -1,10 +1,6 @@
 ({
 
     extendsFrom: 'RecordView',
-    events:
-        {
-
-        },
 
     initialize: function (options) {
         self = this;
@@ -229,7 +225,7 @@ self=this;
                 console.log(data);
                 app.alert.dismiss('upload');
 
-                if(data.idCuenta=="")
+                if(data.idCuenta==="")
                 {
                     app.alert.show("Conversión", {
                         level: "error",
@@ -243,7 +239,6 @@ self=this;
                         messages: data.mensaje,
                         autoClose: false
                     });
-                    self.render();
                 }
 
 
@@ -258,6 +253,7 @@ self=this;
 
             }, this)
         });
+        this._render();
 
     }
 })

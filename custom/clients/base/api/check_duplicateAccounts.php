@@ -96,6 +96,11 @@ class check_duplicateAccounts extends SugarApi
             }
 
         }
+        else
+        {
+            $finish = array("idCuenta" => "", "mensaje" => "El Lead ya se ha sido convertido.");
+
+        }
         return $finish;
 
     }
@@ -114,6 +119,7 @@ class check_duplicateAccounts extends SugarApi
         $bean_account->camara_c = $bean_Leads->camara_c;
         $bean_account->tct_que_promotor_rel_c = $bean_Leads->origen_ag_tel_c;
         $bean_account->nombre_comercial_c = $bean_Leads->nombre_empresa_c;
+        $bean_account->razonsocial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;
         $bean_account->apellidomaterno_c = $bean_Leads->apellido_materno_c;
         $bean_account->apellidopaterno_c = $bean_Leads->apellido_paterno_c;
