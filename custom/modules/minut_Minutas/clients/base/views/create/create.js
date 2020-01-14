@@ -675,7 +675,7 @@
         if (this.model.get('resultado_c') == "24" || this.model.get('resultado_c') == "25") {
             App.alert.show("survey_no_result", {
                 level: "info",
-                messages: "No se puede contestar encuesta para resultado <b>El cliente no estuvo presente,Cita cancelada</b>",
+                messages: "No se puede contestar encuesta para resultado <b>Cancelada por el prospecto...</b>",
                 autoClose: true,
             });
             return;
@@ -741,7 +741,7 @@
 
     changeColorSurveyButton:function (evt) {
 
-        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25"){
+        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
 
             $('[name="survey_minuta"]').addClass('btn-success');
 
@@ -756,7 +756,7 @@
     * */
     enableButtons: function () {
         this._super("enableButtons");
-        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25"){
+        if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
             $('[name="survey_minuta"]').addClass('btn-success');
         }else{
             $('[name="survey_minuta"]').removeClass('btn-success');
