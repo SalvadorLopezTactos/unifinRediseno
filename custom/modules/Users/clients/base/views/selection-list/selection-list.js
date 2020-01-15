@@ -1,15 +1,11 @@
 ({
     extendsFrom: 'SelectionListView',
 
-
     initialize: function(options) {
-
         this._super('initialize', [options]);
         console.log('DESDE CUSTOM SELECTION-LIST_USERS');
-
         //para validación
         //options.context.parent.get('module');
-
     },
 
     _render: function (options) {
@@ -22,7 +18,8 @@
             $('.select2-choices').attr('style','pointer-events:none');
             $('[data-filter="operator"]').attr('style','pointer-events:none');
             $('[data-filter="field"]').attr('style','pointer-events:none');
-
+            $(".select2").hide();
+            $(".filter-definition-container").hide();
         }
 
         //Obteniendo el modulo padre para generar validación
@@ -32,8 +29,11 @@
         //Bloqueando el operador $('[data-filter="operator"]').attr('style','pointer-events:none');
         //Bloqueando el campo $('[data-filter="field"]').attr('style','pointer-events:none');
         //Ocultando el icono para evitar eliminar el filtro
-
     },
 
-
+   _dispose: function() {
+        this._super('_dispose');
+        $(".select2").show();
+        $("filter-definition-container").show();
+   },
 })

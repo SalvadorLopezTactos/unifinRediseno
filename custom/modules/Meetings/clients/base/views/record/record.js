@@ -383,10 +383,12 @@
     /*@Eduardo Carrasco Beltrán
     Deshabilita campos Resutado Confirmado... y Validado Por*/
     disableConfirmado:function () {
-        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Held" || this.model.get('resultado_confirmado_por_c')) {
+        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Held" || this.model.get('resultado_confirmado_c')) {
             $('span[data-name=resultado_confirmado_c]').css("pointer-events", "none");
-            $('span[data-name=resultado_confirmado_por_c]').css("pointer-events", "none");
             this.noEditFields.push('resultado_confirmado_c');
+        }
+        if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Held" || this.model.get('resultado_confirmado_por_c')) {
+            $('span[data-name=resultado_confirmado_por_c]').css("pointer-events", "none");
             this.noEditFields.push('resultado_confirmado_por_c');
         }
         if (app.user.attributes.subpuesto_c != 1 && app.user.attributes.subpuesto_c != 2 || this.model.get('status') != "Planned" || this.model.get('validado_por_c')) {
