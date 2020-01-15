@@ -72,8 +72,9 @@ class check_duplicateAccounts extends SugarApi
                         // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
                         // $bean->tipo_registro_c = "";
                         $bean->subtipo_registro_c = 4;
+                        $bean->account_id = $bean_account->id;
                         $bean->save();
-                        $finish = array("idCuenta" => $bean_account->id,"mensaje" => "Conversion Completa");
+                        $finish = array("idCuenta" => $bean_account->id, "mensaje" => "Conversion Completa");
 
                     }
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
@@ -95,9 +96,7 @@ class check_duplicateAccounts extends SugarApi
 
             }
 
-        }
-        else
-        {
+        } else {
             $finish = array("idCuenta" => "", "mensaje" => "El Lead ya se ha sido convertido.");
 
         }
@@ -187,23 +186,26 @@ class check_duplicateAccounts extends SugarApi
                         $sqlUser->select(array('id', 'puestousuario_c', 'productos_c'));
                         $sqlUser->from(BeanFactory::newBean('Users'));
                         $sqlUser->where()->equals('id', $meeting->assigned_user_id);
+                        //$sqlUser->where()->notEquals('puestousuario_c', "");
                         $sqlResult = $sqlUser->execute();
 
                         $productos = $sqlResult[0]['productos_c'];
+                        $puesto = $sqlResult[0]['puestousuario_c'];
 
-                        if (strpos($productos, '1') !== false) {
+                        // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
+                        if (strpos($productos, '1') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['LEASING'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '3') !== false) {
+                        if (strpos($productos, '3') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '4') !== false) {
+                        if (strpos($productos, '4') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '6') !== false) {
+                        if (strpos($productos, '6') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
                         }
