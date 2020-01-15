@@ -114,8 +114,9 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
         $cuentas = $args['data']['cuentas'];
         $cuentas_resumen['actualizados']=array();
         $cuentas_resumen['no_actualizados']=array();
-        //Obtener id de usuario 9 - Moroso
-        $id_user_assing = '405cc6b7-fc4a-7cae-552f-5628f61fd849';
+        //Obtener id de usuario 9 - Bloqueado
+        $id_user_assing = '36af9462-37e6-11ea-baed-a44e314beb18';
+
 
         $IntValue = new DropdownValuesHelper();
         $callApi = new UnifinAPI();
