@@ -186,6 +186,7 @@ $(window).load(function(){
        $('#last_name').attr('disabled','disabled');
        $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
        $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
+       $('#id_active_directory_c').attr('disabled','disabled');
     }
    }catch(error){
       console.log(error.message);
@@ -219,7 +220,7 @@ $(window).load(function(){
         $('#last_name').attr('disabled','disabled');
         $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
         $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
-
+        $('#id_active_directory_c').attr('disabled','disabled');
     }
    }
    catch(error){
