@@ -69,6 +69,8 @@
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld',_.bind(this.valida_pld, this));
         this.model.addValidationTask('valida_no_vehiculos',_.bind(this._Validavehiculo, this));
+        this.model.addValidationTask('valida_formato_campos_Cond_Financiera',_.bind(this.ConficionFinancieraFormat, this));
+        this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI',_.bind(this.ConficionFinancieraRIFormat, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -2284,5 +2286,111 @@ console.log(name);
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
+
+    ConficionFinancieraFormat: function(fields, errors, callback){
+
+        if (solicitud_cf.oFinanciera.condicion.length>0) {
+            //Valida formato de los campos del objeto oFinanciera.condicion. Deben cumplir con la expreg
+            var formato = 0;
+            for (var i = 0; i < solicitud_cf.oFinanciera.condicion.length; i++) {
+                var exp = /(^100([.]0{1,2})?)$|(^\d{1,2}([.]\d{1,2})?)$|(^([.]\d{1,2})?)$/;
+
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].tasa_minima)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].tasa_maxima)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].vrc_minimo)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].vrc_maximo)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].vri_minimo)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].vri_maximo)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].comision_minima)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].comision_maxima)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].renta_inicial_minima)) {
+                    formato++;
+                }
+                if (!exp.test(solicitud_cf.oFinanciera.condicion[i].renta_inicial_maxima)) {
+                    formato++;
+                }
+                if (formato>0){
+                    app.alert.show("CondicionFinanciera_formato", {
+                        level: "error",
+                        title: "Alguno de los campos de la Condición Financiera no cumple con el formato.<br>Sólo números son permitidos.",
+                        autoClose: false
+                    });
+                    errors['formato_CF'] = errors['formato_CF'] || {};
+                    errors['formato_CF'].required = true;
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    ConficionFinancieraRIFormat: function(fields, errors, callback){
+
+        if (contRI.oFinancieraRI.ratificacion.length>0) {
+            //Valida formato de los campos del objeto oFinancieraRI.ratificacion. Deben cumplir con la expreg
+            var formato = 0;
+            for (var i = 0; i < contRI.oFinancieraRI.ratificacion.length; i++) {
+                var exp = /(^100([.]0{1,2})?)$|(^\d{1,2}([.]\d{1,2})?)$|(^([.]\d{1,2})?)$/;
+
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].tasa_minima)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].tasa_maxima)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].vrc_minimo)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].vrc_maximo)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].vri_minimo)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].vri_maximo)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].comision_minima)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].comision_maxima)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].renta_inicial_minima)) {
+                    formato++;
+                }
+                if (!exp.test(contRI.oFinancieraRI.ratificacion[i].renta_inicial_maxima)) {
+                    formato++;
+                }
+                if (formato>0){
+                    app.alert.show("CondicionFinanciera_formato", {
+                        level: "error",
+                        title: "Alguno de los campos de la Ratificación e Incremento no cumple con el formato.<br>Sólo números son permitidos.",
+                        autoClose: false
+                    });
+                    errors['formato_RI'] = errors['formato_RI'] || {};
+                    errors['formato_RI'].required = true;
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+
 
 })
