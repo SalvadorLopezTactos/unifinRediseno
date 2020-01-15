@@ -1,10 +1,6 @@
 ({
 
     extendsFrom: 'RecordView',
-    events:
-        {
-
-        },
 
     initialize: function (options) {
         self = this;
@@ -216,7 +212,7 @@
     },
 
     convert_Lead_to_Accounts: function () {
-
+self=this;
         var filter_arguments={
             "id":this.model.get('id')
         };
@@ -226,12 +222,38 @@
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
 
-                console.log(data.idcuenta);
+                console.log(data);
+                app.alert.dismiss('upload');
 
+                if(data.idCuenta==="")
+                {
+                    app.alert.show("Conversión", {
+                        level: "error",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+                {
+                    app.alert.show("Conversión", {
+                        level: "success",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+
+
+
+            }, this),
+            failure: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this),
+            error: _.bind(function (data) {
                 app.alert.dismiss('upload');
 
             }, this)
         });
+        this._render();
 
     }
 })

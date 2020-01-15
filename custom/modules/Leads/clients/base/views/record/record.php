@@ -59,15 +59,14 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-                3 =>
-            array (
-
+              3 => 
+              array (
                 'name' => 'convert_Leads_button',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
                 'acl_action' => 'edit',
                 'event' => 'button:convert_Lead_to_Accounts:click',
-                ),
+              ),
             ),
           ),
           3 => 
@@ -75,8 +74,6 @@ array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
           ),
-
-
         ),
         'panels' => 
         array (

@@ -15,5 +15,4 @@ $dictionary['Lead']['fields']['last_name']['required']=false;
 $dictionary['Lead']['fields']['last_name']['importable']='false';
 $dictionary['Lead']['fields']['last_name']['formula']='$name_c';
 $dictionary['Lead']['fields']['last_name']['enforced']=true;
-
  ?>
