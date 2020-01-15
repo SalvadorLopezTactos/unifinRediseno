@@ -212,11 +212,11 @@
     },
 
     convert_Lead_to_Accounts: function () {
-self=this;
-        var filter_arguments={
-            "id":this.model.get('id')
+        self = this;
+        var filter_arguments = {
+            "id": this.model.get('id')
         };
-       // alert(this.model.get('id'))
+        // alert(this.model.get('id'))
         app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
@@ -225,8 +225,7 @@ self=this;
                 console.log(data);
                 app.alert.dismiss('upload');
 
-                if(data.idCuenta==="")
-                {
+                if (data.idCuenta === "") {
                     app.alert.show("Conversión", {
                         level: "error",
                         messages: data.mensaje,
@@ -240,8 +239,18 @@ self=this;
                         autoClose: false
                     });
                 }
+                app.controller.context.reloadData({});
+                //SUGAR.App.controller.context.reloadData({})
+                /* Para refrescar solo un campo
 
+                 model.fetch({
 
+                  view: undefined,
+
+                  fields: ['industry']
+
+                });
+                 */
 
             }, this),
             failure: _.bind(function (data) {
@@ -253,7 +262,7 @@ self=this;
 
             }, this)
         });
-        this._render();
+
 
     }
 })
