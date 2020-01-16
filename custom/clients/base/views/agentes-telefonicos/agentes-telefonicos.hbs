@@ -42,11 +42,11 @@
             </div>
         </div>
         <div class="record row-fluid panel_body">
-            <div class="span2 record-cell">
+            <div class="span3 record-cell">
                 <div class="record-label">Equipo</div>
                 <span>
                     <span>
-                    <select id="Equipos">
+                    <select class="span11" id="Equipos">
                         {{#each lista_equipo}}
                             <option value="{{@key}}" {{ifSelected @key ../filtros.Equipo}}>{{this}}</option>
                         {{/each}}
@@ -68,7 +68,15 @@
                     </span>
                 </span>
             </div>
-            <div class="span3 record-cell">
+            <div class="span1 record-cell">
+                <div></div>
+                <span>
+                    <span>
+						<h1>Usuario</h1>
+                    </span>
+                </span>
+            </div>
+            <div class="span2 record-cell">
                 <div class="record-label">Nombre</div>
                 <span>
                     <span>
@@ -77,7 +85,7 @@
                     </span>
                 </span>
             </div>
-            <div class="span3 record-cell">
+            <div class="span2 record-cell">
                 <div class="record-label">Apellido</div>
                 <span>
                     <span>

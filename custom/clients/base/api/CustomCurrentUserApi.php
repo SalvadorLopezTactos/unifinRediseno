@@ -43,8 +43,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['tct_alta_credito_simple_chk_c'] = $current_user->tct_alta_credito_simple_chk_c;
         $userArray['current_user']['tct_vetar_usuarios_chk_c'] = $current_user->tct_vetar_usuarios_chk_c;
         $userArray['current_user']['tct_no_contactar_chk_c'] = $current_user->tct_no_contactar_chk_c;
+        $userArray['current_user']['agente_telefonico_c'] = $current_user->agente_telefonico_c;
 
         return $userArray;
     }
-
 }

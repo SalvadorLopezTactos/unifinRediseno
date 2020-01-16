@@ -30,3 +30,4 @@ $mod_strings['LBL_TCT_ALTA_CREDITO_SIMPLE_CHK'] = 'Alta Cliente Crédito Simple'
 $mod_strings['LBL_TCT_VETAR_USUARIOS_CHK_C'] = 'Vetar Usuarios';
 $mod_strings['LBL_TCT_NO_CONTACTAR_CHK'] = 'No contactar';
 $mod_strings['LBL_SUBPUESTO'] = 'Subpuesto Usuario';
+$mod_strings['LBL_AGENTE_TELEFONICO'] = 'Gestión Agente telefonico';

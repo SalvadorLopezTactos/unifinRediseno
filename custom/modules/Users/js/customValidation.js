@@ -182,16 +182,17 @@ $(window).load(function(){
     $('#aut_caratulariesgo_c').attr('disabled','disabled');
     $('#tct_id_unics_txf_c').attr('disabled','disabled');
     $('#tct_id_uni2_txf_c').attr('disabled','disabled');
-       $('#first_name').attr('disabled','disabled');
-       $('#last_name').attr('disabled','disabled');
-       $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
-       $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
-    }
-   }catch(error){
-      console.log(error.message);
+    $('#first_name').attr('disabled','disabled');
+    $('#last_name').attr('disabled','disabled');
+    $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
+    $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
+    $('#agente_telefonico_c').attr('disabled','disabled');
    }
+  }catch(error){
+      console.log(error.message);
+  }
 
-   try{
+  try{
     if (this.App.user.attributes.type != 'admin') {
       //Deshabilita campos
       //$('#equipos_c').attr('disabled','disabled');
@@ -215,14 +216,14 @@ $(window).load(function(){
       $('#aut_caratulariesgo_c').attr('disabled','disabled');
       $('#tct_id_unics_txf_c').attr('disabled','disabled');
       $('#tct_id_uni2_txf_c').attr('disabled','disabled');
-        $('#first_name').attr('disabled','disabled');
-        $('#last_name').attr('disabled','disabled');
-        $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
-        $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
-
+      $('#first_name').attr('disabled','disabled');
+      $('#last_name').attr('disabled','disabled');
+      $('#tct_alta_credito_simple_chk_c').attr('disabled','disabled');
+      $('#tct_vetar_usuarios_chk_c').attr('disabled','disabled');
+      $('#agente_telefonico_c').attr('disabled','disabled');
     }
-   }
-   catch(error){
+  }
+  catch(error){
       console.log(error.message);
-   }
+  }
 });

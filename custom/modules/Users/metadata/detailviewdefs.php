@@ -238,6 +238,15 @@ array (
             'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
           ),
         ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'agente_telefonico_c',
+            'label' => 'LBL_AGENTE_TELEFONICO',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
