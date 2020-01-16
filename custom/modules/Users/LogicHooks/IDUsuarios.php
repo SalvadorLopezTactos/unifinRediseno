@@ -71,7 +71,7 @@ class UsuarioID
             try {
                 if ($tipoID == 3) {
                     $GLOBALS['log']->fatal($valoractive);
-                    if (preg_match("/^(\{)?[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}(?(1)\})$/",$valoractive)) {
+                    if (preg_match("/^(\{)?[a-fA-F\d]{8}(-[a-fA-F\d]{4}){4}[a-fA-F\d]{8}(?(1)\})$/",$valoractive)) {
                         $query = "select * from users_cstm where id_active_directory_c='{$valoractive}' and id_c!='{$usuario}';";
                         $idactive = $db->query($query);
                         while ($row = $GLOBALS['db']->fetchByAssoc($idactive)) {
