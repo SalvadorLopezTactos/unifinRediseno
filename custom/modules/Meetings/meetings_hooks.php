@@ -26,8 +26,11 @@ class Meetings_Hooks
     * 3.- Tiene cuenta asociada
     * 4.- No es reunión de repetición
     */
+	/*********************
+	Se agrega la validación para accounts y leads
+	***********************************/
     //&& empty($bean->repeat_parent_id)
-    if ($args['relationship'] == 'meetings_users' && $bean->assigned_user_id != $args['related_id'] && $bean->parent_type == 'Accounts' && !empty($bean->parent_id) )
+    if ($args['relationship'] == 'meetings_users' && $bean->assigned_user_id != $args['related_id'] && !empty($bean->parent_id) && ($bean->parent_type == 'Accounts' || $bean->parent_type == 'Leads') )
     {
       $GLOBALS['log']->fatal('TCT - RelationAdd - :' .$args['related_module']);
       //Genera petición para crear reunión
@@ -51,7 +54,7 @@ class Meetings_Hooks
     }
 
     //Genera reuniones para usuarios cuando la cuenta se agrega
-    if($args['relationship'] == 'account_meetings' && $args['module'] == 'Meetings' && $args['related_module'] == 'Accounts' && empty($bean->parent_meeting_c))
+    if($args['relationship'] == 'account_meetings' && $args['module'] == 'Meetings' && empty($bean->parent_meeting_c) && ($args['related_module'] == 'Accounts' || $args['related_module'] == 'Leads') )
     {
       //consulta usuarios asociados a reunión
       global $db;
