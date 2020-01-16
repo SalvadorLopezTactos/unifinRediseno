@@ -8,9 +8,33 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
-
+        this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
+        this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
+    },
 
+    _hideBtnConvert: function () {
+
+        var btnConvert = this.getField("convert_Leads_button");
+
+        if (btnConvert) {
+            btnConvert.listenTo(btnConvert, "render", function () {
+
+                if (this.model.get('subtipo_registro_c') == '2') {
+                    btnConvert.show();
+                } else {
+                    btnConvert.hide();
+                }
+            });
+        }
+    },
+
+    _subMotivoCancelacion: function () {
+
+        if (!this.model.get('lead_cancelado_c') && this.model.get('motivo_cancelacion_c') != '') {
+
+            this.$('[data-name="submotivo_cancelacion_c"]').hide();
+        }
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -50,7 +74,6 @@
                 errors['origen_c'] = errors['origen_c'] || {};
                 errors['origen_c'].required = true;
             }
-
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -65,6 +88,12 @@
          ****************************************************************************************************************/
 
         if (this.model.get('subtipo_registro_c') == '2') {
+            if (this.model.get('origen_c') == '' || this.model.get('macrosector_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
+                errors['origen_c'] = errors['origen_c'] || {};
+                errors['origen_c'].required = true;
+            }
             if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
                 requerido = requerido + 1;
                 campos = campos + '<b>' + app.lang.get("LBL_MACROSECTOR_C", "Leads") + '</b><br>';
@@ -110,6 +139,31 @@
                 errors['assigned_user_name'] = errors['assigned_user_name'] || {};
                 errors['assigned_user_name'].required = true;
             }
+            if ((this.model.get('nombre_empresa_c') == '' || this.model.get('nombre_empresa_c') == null) &&
+                this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE_EMPRESA", "Leads") + '</b><br>';
+                errors['nombre_empresa_c'] = errors['nombre_empresa_c'] || {};
+                errors['nombre_empresa_c'].required = true;
+            }
+            if ((this.model.get('nombre_c') == '' || this.model.get('nombre_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+            if ((this.model.get('apellido_paterno_c') == '' || this.model.get('apellido_paterno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
             if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
                 this.model.get('regimen_fiscal_c') != 'Persona Moral') {
 
@@ -124,7 +178,7 @@
                 (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
 
                 requerido = requerido + 1;
-                campos = campos + '<b>' + 'Al menos un teléfono' + '</b><br>';
+                campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
 
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -212,12 +266,12 @@
     },
 
     convert_Lead_to_Accounts: function () {
-self=this;
-        var filter_arguments={
-            "id":this.model.get('id')
+        self = this;
+        var filter_arguments = {
+            "id": this.model.get('id')
         };
-       // alert(this.model.get('id'))
-        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+        // alert(this.model.get('id'))
+        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
 
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
@@ -225,8 +279,7 @@ self=this;
                 console.log(data);
                 app.alert.dismiss('upload');
 
-                if(data.idCuenta==="")
-                {
+                if (data.idCuenta === "") {
                     app.alert.show("Conversión", {
                         level: "error",
                         messages: data.mensaje,

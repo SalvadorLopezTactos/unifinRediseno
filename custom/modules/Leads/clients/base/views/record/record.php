@@ -64,7 +64,7 @@ array (
                 'name' => 'convert_Leads_button',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
-                'acl_action' => 'edit',
+                'acl_action' => 'view',
                 'event' => 'button:convert_Lead_to_Accounts:click',
               ),
             ),
