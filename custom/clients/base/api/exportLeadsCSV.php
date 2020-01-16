@@ -113,11 +113,12 @@ class exportLeadsCSV extends SugarApi
 
             if ($bander == 0) {
                 foreach ($row as $key => $valor) {
-                    array_push($label, translate($GLOBALS['dictionary']['Lead']['fields'][$key]['vname'], "Leads"));
+                    $str_label=translate($GLOBALS['dictionary']['Lead']['fields'][$key]['vname'], "Leads");
+                    $str_label=trim($str_label,":");
+                    array_push($label, $str_label);
                 }
-
                 $bander++;
-                $str_header = str_replace(":", "", implode(",", $label));
+                $str_header = implode(",", $label);
                 $str_header .= "\n";
 
                 if ($fp) {

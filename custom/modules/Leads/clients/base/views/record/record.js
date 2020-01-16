@@ -271,7 +271,8 @@
             "id": this.model.get('id')
         };
         // alert(this.model.get('id'))
-        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
+
+        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
@@ -293,8 +294,18 @@
                         autoClose: false
                     });
                 }
+                app.controller.context.reloadData({});
+                //SUGAR.App.controller.context.reloadData({})
+                /* Para refrescar solo un campo
 
+                 model.fetch({
 
+                  view: undefined,
+
+                  fields: ['industry']
+
+                });
+                 */
 
             }, this),
             failure: _.bind(function (data) {
@@ -306,7 +317,7 @@
 
             }, this)
         });
-        this._render();
+
 
     }
 })

@@ -41,6 +41,8 @@ class check_duplicateAccounts extends SugarApi
         $hayReunionPlaneada = false;
         $responseLEads = array();
         $finish = array();
+        global $sugar_config;
+        $url = $sugar_config['site_url'];
         /**
          * Validamos que el Lead no exista en Cuentas
          */
@@ -72,8 +74,16 @@ class check_duplicateAccounts extends SugarApi
                         // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
                         // $bean->tipo_registro_c = "";
                         $bean->subtipo_registro_c = 4;
+                        $bean->account_id = $bean_account->id;
+                        $bean->account_name = $bean_account->name;
                         $bean->save();
-                        $finish = array("idCuenta" => $bean_account->id,"mensaje" => "Conversion Completa");
+                        $msj_succes = <<<SITE
+                        Conversion Completa <br>
+<b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
+SITE;
+
+
+                        $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
 
                     }
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
@@ -95,9 +105,7 @@ class check_duplicateAccounts extends SugarApi
 
             }
 
-        }
-        else
-        {
+        } else {
             $finish = array("idCuenta" => "", "mensaje" => "El Lead ya se ha sido convertido.");
 
         }
@@ -109,8 +117,18 @@ class check_duplicateAccounts extends SugarApi
     {
         $bean_account = BeanFactory::newBean('Accounts');
 
+        $bean_account->subtipo_cuenta_c = "En Calificacion";
+        $bean_account->tipo_registro_c="Lead";
         $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
         $bean_account->origendelprospecto_c = $bean_Leads->origen_c;
+        if ($bean_Leads->origen_c == 1) {
+            $bean_account->origendelprospecto_c = "Marketing";
+
+        } elseif ($bean_Leads->origen_c==2) {
+            $bean_account->origendelprospecto_c = "Inteligencia de Negocio";
+
+        }
+
         $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
         $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
         $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
@@ -187,23 +205,26 @@ class check_duplicateAccounts extends SugarApi
                         $sqlUser->select(array('id', 'puestousuario_c', 'productos_c'));
                         $sqlUser->from(BeanFactory::newBean('Users'));
                         $sqlUser->where()->equals('id', $meeting->assigned_user_id);
+                        //$sqlUser->where()->notEquals('puestousuario_c', "");
                         $sqlResult = $sqlUser->execute();
 
                         $productos = $sqlResult[0]['productos_c'];
+                        $puesto = $sqlResult[0]['puestousuario_c'];
 
-                        if (strpos($productos, '1') !== false) {
+                        // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
+                        if (strpos($productos, '1') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['LEASING'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '3') !== false) {
+                        if (strpos($productos, '3') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '4') !== false) {
+                        if (strpos($productos, '4') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '6') !== false) {
+                        if (strpos($productos, '6') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
                         }
@@ -283,6 +304,7 @@ class check_duplicateAccounts extends SugarApi
     {
         $bean_relacionTel = BeanFactory::newBean('Tel_Telefonos');
         $bean_relacionTel->accounts_tel_telefonos_1accounts_ida = $idCuenta;
+        $bean_relacionTel->name = $phone;
         $bean_relacionTel->telefono = $phone;
         $bean_relacionTel->tipotelefono = $tipoTel;
 
