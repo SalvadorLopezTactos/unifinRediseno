@@ -41,6 +41,8 @@ class check_duplicateAccounts extends SugarApi
         $hayReunionPlaneada = false;
         $responseLEads = array();
         $finish = array();
+        global $sugar_config;
+        $url = $sugar_config['site_url'];
         /**
          * Validamos que el Lead no exista en Cuentas
          */
@@ -73,8 +75,15 @@ class check_duplicateAccounts extends SugarApi
                         // $bean->tipo_registro_c = "";
                         $bean->subtipo_registro_c = 4;
                         $bean->account_id = $bean_account->id;
+                        $bean->account_name = $bean_account->name;
                         $bean->save();
-                        $finish = array("idCuenta" => $bean_account->id, "mensaje" => "Conversion Completa");
+                        $msj_succes = <<<SITE
+                        Conversion Completa <br>
+<b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
+SITE;
+
+
+                        $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
 
                     }
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
@@ -108,8 +117,18 @@ class check_duplicateAccounts extends SugarApi
     {
         $bean_account = BeanFactory::newBean('Accounts');
 
+        $bean_account->subtipo_cuenta_c = "En Calificacion";
+        $bean_account->tipo_registro_c="Lead";
         $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
         $bean_account->origendelprospecto_c = $bean_Leads->origen_c;
+        if ($bean_Leads->origen_c == 1) {
+            $bean_account->origendelprospecto_c = "Marketing";
+
+        } elseif ($bean_Leads->origen_c==2) {
+            $bean_account->origendelprospecto_c = "Inteligencia de Negocio";
+
+        }
+
         $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
         $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
         $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
@@ -285,6 +304,7 @@ class check_duplicateAccounts extends SugarApi
     {
         $bean_relacionTel = BeanFactory::newBean('Tel_Telefonos');
         $bean_relacionTel->accounts_tel_telefonos_1accounts_ida = $idCuenta;
+        $bean_relacionTel->name = $phone;
         $bean_relacionTel->telefono = $phone;
         $bean_relacionTel->tipotelefono = $tipoTel;
 

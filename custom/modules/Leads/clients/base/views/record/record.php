@@ -64,8 +64,9 @@ array (
                 'name' => 'convert_Leads_button',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
-                'acl_action' => 'edit',
+                'acl_action' => 'view',
                 'event' => 'button:convert_Lead_to_Accounts:click',
+                'class' => 'btn_convertLeads',
               ),
             ),
           ),
@@ -303,9 +304,16 @@ array (
               ),
               34 => 
               array (
-                'name' => 'assigned_user_name',
+                'name' => 'account_name',
               ),
               35 => 
+              array (
+              ),
+              36 => 
+              array (
+                'name' => 'assigned_user_name',
+              ),
+              37 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
