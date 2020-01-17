@@ -299,9 +299,11 @@ $viewdefs['Leads'] =
                   'name' => 'submotivo_cancelacion_c',
                   'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
                 ),
-                34 =>
-                array(
-                  'name' => 'account_name',
+                34 => 
+                array (
+                  'name' => 'account_to_lead',
+                  'label' => 'LBL_ACCOUNT',
+                    'readonly' => true,
                 ),
                 35 =>
                 array(),
