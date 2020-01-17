@@ -75,3 +75,4 @@ $mod_strings['LNK_LEAD_LIST'] = 'Ver leads';
 $mod_strings['LNK_LEAD_REPORTS'] = 'Ver informes de leads';
 $mod_strings['LNK_NEW_LEAD'] = 'Nuevo lead';
 $mod_strings['NTC_REMOVE_CONFIRMATION'] = '¿Está seguro de que desea quitar este lead del caso?';
+$mod_strings['LBL_ID'] = 'ID Sugar';
