@@ -94,7 +94,7 @@ class exportLeadsCSV extends SugarApi
         $fecha = date("Y - m - d H:i:s");
         $nameLoad = $args['name_load'];
 
-        $query = "SELECT * FROM leads l INNER JOIN leads_cstm lc  ON lc.id_c=l.id WHERE  lc.nombre_de_cargar_c='$nameLoad' AND deleted=1";
+        $query = "SELECT l.id,lc.nombre_c,lc.apellido_materno_c,lc.apellido_paterno_c FROM leads l INNER JOIN leads_cstm lc  ON lc.id_c=l.id WHERE  lc.nombre_de_cargar_c='$nameLoad' AND deleted=1";
         $resultLeads = $db->query($query);
 
         /**

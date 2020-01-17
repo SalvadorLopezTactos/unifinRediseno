@@ -279,6 +279,7 @@
 
                 console.log(data);
                 app.alert.dismiss('upload');
+                app.controller.context.reloadData({});
 
                 if (data.idCuenta === "") {
                     app.alert.show("Conversión", {
@@ -294,7 +295,8 @@
                         autoClose: false
                     });
                 }
-                app.controller.context.reloadData({});
+                this._hideBtnConvert();
+                //app.controller.context.reloadData({});
                 //SUGAR.App.controller.context.reloadData({})
                 /* Para refrescar solo un campo
 
