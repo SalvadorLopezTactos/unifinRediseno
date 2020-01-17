@@ -31,9 +31,9 @@
 
     _subMotivoCancelacion: function () {
 
-        if (!this.model.get('lead_cancelado_c') && this.model.get('motivo_cancelacion_c') != '') {
-
-            this.$('[data-name="submotivo_cancelacion_c"]').hide();
+        if (!this.model.get('lead_cancelado_c')) {
+            
+            this.model.set('motivo_cancelacion_c', '');
         }
     },
 

@@ -349,15 +349,25 @@ class Meetings_Hooks
           $reunionInvitado->{$field} = $bean->{$field};
         }
       }
-      //Agrega valores y guarda reunión
-      $reunionInvitado->parent_meeting_c = $bean->id;
-      $reunionInvitado->created_by = $current_user->id;
+	 
+	 //Agrega valores y guarda reunión
+	  $reunionInvitado->parent_meeting_c = $bean->id;
+	  $reunionInvitado->created_by = $current_user->id;
       $reunionInvitado->modified_user_id = $current_user->id;
       $reunionInvitado->assigned_user_id = $idUsuario;
       $reunionInvitado->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       $reunionInvitado->reunion_objetivos = $bean->reunion_objetivos;
       $reunionInvitado->status = 'Planned';
       $reunionInvitado->save();
+	  
+	  /******************
+	  En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
+	  ****************/
+		if ($reunionInvitado->parent_type == 'Leads'){
+			$reunionInvitado->load_relationship('leads');
+			$reunionInvitado->leads->add($reunionInvitado->parent_id);
+		}
+	
       //Agrega objetivos
       if($bean->load_relationship('meetings_minut_objetivos_1')) {
         $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
@@ -372,7 +382,7 @@ class Meetings_Hooks
         }
       }
     }
-
+	
     //Elimina usuario de reunión original
     $update = "update meetings_users SET deleted = 1
                 where meeting_id = '{$bean->id}'
