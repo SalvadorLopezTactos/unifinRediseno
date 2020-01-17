@@ -75,7 +75,7 @@ class exportLeadsCSV extends SugarApi
          * Toatal de registros por indice
          */
         $query = "SELECT * FROM leads l INNER JOIN leads_cstm lc  ON lc.id_c=l.id WHERE  lc.nombre_de_cargar_c='$nameLoad'";
-        $query .= " ORDER BY clean_name_c ASC LIMIT 20 OFFSET {$offset}";
+        $query .= " ORDER BY resultado_de_carga_c ASC LIMIT 20 OFFSET {$offset}";
         $resultLeads = $db->query($query);
 
         $response['total_leads'] = $resultLeads->num_rows;
@@ -94,14 +94,22 @@ class exportLeadsCSV extends SugarApi
         $fecha = date("Y - m - d H:i:s");
         $nameLoad = $args['name_load'];
 
-        $query = "SELECT l.id,lc.nombre_c,lc.apellido_materno_c,lc.apellido_paterno_c FROM leads l INNER JOIN leads_cstm lc  ON lc.id_c=l.id WHERE  lc.nombre_de_cargar_c='$nameLoad' AND deleted=1";
+        $query = "SELECT nombre_c,apellido_paterno_c,apellido_materno_c,nombre_empresa_c,regimen_fiscal_c,tipo_registro_c,
+  subtipo_registro_c,e.email_address email,l.phone_mobile,l.phone_work,l.phone_home,origen_c,macrosector_c,potencial_lead_c,ventas_anuales_c,
+  zona_geografica_c,puesto_c, nombre_de_cargar_c,assigned_user_id,
+  concat(u.first_name , ' ' , u.last_name) assigned_user_name
+FROM leads l
+  INNER JOIN leads_cstm lc ON lc.id_c=l.id
+  inner join email_addr_bean_rel eb on eb.bean_id=l.id
+  inner join email_addresses e on e.id=eb.email_address_id
+  inner join users u on u.id = l.assigned_user_id WHERE  lc.nombre_de_cargar_c='$nameLoad' AND l.deleted=1";
         $resultLeads = $db->query($query);
 
         /**
          * Creamos encabezados y Cuerpo de Leads
          */
         $backlog_doc_id = uniqid('', false);
-        $leads_doc_name = "ErroresLeads" . $fecha . " .csv";
+        $leads_doc_name = "ErroresLeads" . $fecha.".csv";
         $csvfile = $sugar_config['upload_dir'] . $leads_doc_name;
 
         $bander = 0;
@@ -112,17 +120,19 @@ class exportLeadsCSV extends SugarApi
             $str_row = array();
 
             if ($bander == 0) {
-                foreach ($row as $key => $valor) {
-                    $str_label=translate($GLOBALS['dictionary']['Lead']['fields'][$key]['vname'], "Leads");
-                    $str_label=trim($str_label,":");
+             /*   foreach ($row as $key => $valor) {
+                    $str_label = translate($GLOBALS['dictionary']['Lead']['fields'][$key]['vname'], "Leads");
+                    $str_label = trim($str_label, ":");
                     array_push($label, $str_label);
-                }
+                }*/
+
+                $csvHeader="Nombre(s),Apellido Paterno,Apellido Materno,Nombre Empresa,Régimen Fiscal,Tipo de Lead,Subtipo de Lead,Correo Electrónico,Móvil,Teléfono de Oficina,Teléfono de casa,Origen,Macro Sector,Potencial de Lead,Ventas Anuales,Zona geográfica,Puesto,Nombre de la Cargar,ID de Usuario asignado, Nombre de Usuario Asignado";
                 $bander++;
-                $str_header = implode(",", $label);
-                $str_header .= "\n";
+                //$str_header = implode(",", $label);
+                $csvHeader .= "\n";
 
                 if ($fp) {
-                    fwrite($fp, $str_header);
+                    fwrite($fp, $csvHeader);
                 }
             }
 
