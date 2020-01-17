@@ -60,6 +60,36 @@ class UsuarioID
                 $errores= $errores . $e->getMessage();
             }
         }
+        if (!empty($bean->id_active_directory_c)) {
+
+            global $current_user, $db;
+            $tipoID = 3;
+            $valoractive = $bean->id_active_directory_c;
+            $usuario = $bean->id;
+            $contador3 = 0;
+
+            try {
+                if ($tipoID == 3) {
+                    $GLOBALS['log']->fatal($valoractive);
+                    if (preg_match("/^(\{)?[a-fA-F\d]{8}(-[a-fA-F\d]{4}){4}[a-fA-F\d]{8}(?(1)\})$/",$valoractive)) {
+                        $query = "select * from users_cstm where id_active_directory_c='{$valoractive}' and id_c!='{$usuario}';";
+                        $idactive = $db->query($query);
+                        while ($row = $GLOBALS['db']->fetchByAssoc($idactive)) {
+                            $contador3++;
+                        }
+                        if ($contador3 > 0) {
+                            $errores = $errores . "El ID <b>" . $valoractive . "</b> de Active Directory ya existe. Número de conincidencias: " . "<b>" . $contador3 . "</b>";
+                        }
+                    }else {
+                        $errores = $errores . "El ID Active Directory no cumple con el formato, intente de nuevo.";
+                    }
+
+                }
+            } catch (Exception $e) {
+                $errores= $errores . $e->getMessage();
+            }
+        }
+
         if ($errores!=""){
             sugar_die($errores);
         }
