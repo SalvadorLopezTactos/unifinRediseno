@@ -205,6 +205,15 @@ array (
             'label' => 'LBL_TCT_ID_UNICS_TXF',
           ),
         ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'id_active_directory_c',
+            'label' => 'LBL_ID_ACTIVE_DIRECTORY_C',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (

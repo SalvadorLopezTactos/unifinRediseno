@@ -146,8 +146,20 @@
         var inputs= this.$("[data-name='"+nombre+"']");
         var index = inputs.index(input);
         var numero= input.val();
-        //Actualiza modelo con el valor de los campos modificados
-        contRI.oFinancieraRI.ratificacion[index][nombre]=numero;
+        var exp= /(^100([.]0{1,2})?)$|(^\d{1,2}([.]\d{1,2})?)$|(^([.]\d{1,2})?)$/;
+        if (!exp.test(numero)) {
+            input.val("");
+            input.css('border-color', 'red');
+            app.alert.show('error_formatonum_CFRI', {
+                level: 'error',
+                autoClose: false,
+                messages: 'Sólo números son permitidos.'
+            });
+        }else {
+            input.css('border-color', '');
+            //Actualiza modelo con el valor de los campos modificados
+            contRI.oFinancieraRI.ratificacion[index][nombre] = numero;
+        }
 
     },
 
@@ -188,34 +200,92 @@
                 var uso_empresarial = $('.new_incremento_UsoEmpresarial').prop("checked");
                 var activo_nuevo = $('.new_incremento_ActivoNuevo').prop("checked");
 
+                //Valida formato de los campos, deben cumplir con la expreg
+                var formato = 0;
+                var exp = /(^100([.]0{1,2})?)$|(^\d{1,2}([.]\d{1,2})?)$|(^([.]\d{1,2})?)$/;
+                if (!exp.test(tasa_minima)) {
+                    formato++;
+                    this.$('.new_incremento_TasaMinima').val("");
+                    this.$('.new_incremento_TasaMinima').css('border-color', 'red');
+                }
+                if (!exp.test(tasa_maxima)) {
+                    formato++;
+                    this.$('.new_incremento_TasaMaxima').val("");
+                    this.$('.new_incremento_TasaMaxima').css('border-color', 'red');
+                }
+                if (!exp.test(vrc_minimo)) {
+                    formato++;
+                    $('.new_incremento_VRCMinimo').val("");
+                    $('.new_incremento_VRCMinimo').css('border-color', 'red');
+                }
+                if (!exp.test(vrc_maximo)) {
+                    formato++;
+                    $('.new_incremento_VRCMaximo').val("");
+                    $('.new_incremento_VRCMaximo').css('border-color', 'red');
+                }
+                if (!exp.test(vri_minimo)) {
+                    formato++;
+                    $('.new_incremento_VRIMinimo').val("");
+                    $('.new_incremento_VRIMinimo').css('border-color', 'red');
+                }
+                if (!exp.test(vri_maximo)) {
+                    formato++;
+                    $('.new_incremento_VRIMaximo').val("");
+                    $('.new_incremento_VRIMaximo').css('border-color', 'red');
+                }
+                if (!exp.test(comision_minima)) {
+                    formato++;
+                    $('.new_incremento_ComisionMinima').val("");
+                    $('.new_incremento_ComisionMinima').css('border-color', 'red');
+                }
+                if (!exp.test(comision_maxima)) {
+                    formato++;
+                    $('.new_incremento_ComisionMaxima').val("");
+                    $('.new_incremento_ComisionMaxima').css('border-color', 'red');
+                }
+                if (!exp.test(renta_inicial_minima)) {
+                    formato++;
+                    $('.new_incremento_RentaInicialMinima').val("");
+                    $('.new_incremento_RentaInicialMinima').css('border-color', 'red');
+                }
+                if (!exp.test(renta_inicial_maxima)) {
+                    formato++;
+                    $('.new_incremento_RentaInicialMaxima').val("");
+                    $('.new_incremento_RentaInicialMaxima').css('border-color', 'red');
+                }
+                if (formato > 0) {
+                    app.alert.show('Campos_sin_formato_adecuado_RI', {
+                        level: 'error',
+                        autoClose: false,
+                        messages: "Alguno de los campos a agregar no cumple con el formato.<br>Sólo números son permitidos."
+                    });
+                } else {
+                    //Crea objeto condiciones financieras RI
+                    var condfinRI = {
+                        "id": "",
+                        "idactivo": idActivo,
+                        "plazo": idplazo,
+                        "tasa_minima": tasa_minima,
+                        "tasa_maxima": tasa_maxima,
+                        "vrc_minimo": vrc_minimo,
+                        "vrc_maximo": vrc_maximo,
+                        "vri_minimo": vri_minimo,
+                        "vri_maximo": vri_maximo,
+                        "comision_minima": comision_minima,
+                        "comision_maxima": comision_maxima,
+                        "renta_inicial_minima": renta_inicial_minima,
+                        "renta_inicial_maxima": renta_inicial_maxima,
+                        "deposito_en_garantia": deposito_en_garantia,
+                        "uso_particular": uso_particular,
+                        "uso_empresarial": uso_empresarial,
+                        "activo_nuevo": activo_nuevo
+                    };
 
-
-
-                //Crea objeto condiciones financieras
-                var condfinRI = {
-                    "id":"",
-                    "idactivo": idActivo,
-                    "plazo": idplazo,
-                    "tasa_minima": tasa_minima,
-                    "tasa_maxima": tasa_maxima,
-                    "vrc_minimo": vrc_minimo,
-                    "vrc_maximo": vrc_maximo,
-                    "vri_minimo": vri_minimo,
-                    "vri_maximo": vri_maximo,
-                    "comision_minima": comision_minima,
-                    "comision_maxima": comision_maxima,
-                    "renta_inicial_minima": renta_inicial_minima,
-                    "renta_inicial_maxima": renta_inicial_maxima,
-                    "deposito_en_garantia": deposito_en_garantia,
-                    "uso_particular": uso_particular,
-                    "uso_empresarial": uso_empresarial,
-                    "activo_nuevo": activo_nuevo
-                };
-
-                //Setea valores al objeto
-                this.oFinancieraRI.ratificacion.push(condfinRI);
-                this.model.set('condiciones_financieras_incremento_ratificacion', this.oFinancieraRI.ratificacion);
-                this.render();
+                    //Setea valores al objeto
+                    this.oFinancieraRI.ratificacion.push(condfinRI);
+                    this.model.set('condiciones_financieras_incremento_ratificacion', this.oFinancieraRI.ratificacion);
+                    this.render();
+                }
             }
         }else{
             $('.new_incremento_Activo').find('.select2-choice').css('border-color', 'red');
