@@ -304,7 +304,9 @@ array (
               ),
               34 => 
               array (
-                'name' => 'account_name',
+                'name' => 'account_to_lead',
+                'label' => 'LBL_ACCOUNT',
+                  'readonly' => true,
               ),
               35 => 
               array (

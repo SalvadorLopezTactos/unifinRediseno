@@ -295,7 +295,13 @@
                         autoClose: false
                     });
                 }
-                this._hideBtnConvert();
+                var btnConvert = this.getField("convert_Leads_button")
+
+                if (this.model.get('subtipo_registro_c') == '2') {
+                    btnConvert.show();
+                } else {
+                    btnConvert.hide();
+                }
                 //app.controller.context.reloadData({});
                 //SUGAR.App.controller.context.reloadData({})
                 /* Para refrescar solo un campo
