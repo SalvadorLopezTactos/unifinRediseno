@@ -125,12 +125,12 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
 
             $account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
             if ($account->id != null) {
-
-                if($account->fetched_row['tct_no_contactar_chk_c']==1){
+                //Condicion para cambiar el chk no contactar
+                /*if($account->fetched_row['tct_no_contactar_chk_c']==1){
                     $account->tct_no_contactar_chk_c = 0;
-                }else{
+                }else{*/
                     $account->tct_no_contactar_chk_c = 1;
-                }
+                
 
                 //Leasing
                 $account->user_id_c = $id_user_assing;
