@@ -815,7 +815,7 @@
     },
     campoproducto: function () {
         var productuser= App.user.attributes.puestousuario_c;
-        if (productuser!='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id)){
+        if (productuser=='27' || (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id))){
             $('[data-name="producto_c"]').hide();
         }
     },
