@@ -249,3 +249,18 @@ $dependencies['Meetings']['tct_conferencia_chk_c'] = array(
         ),
     ),
 );
+$dependencies['Meetings']['producto_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('status','id','producto_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'producto_c',
+                'value' => 'not(equal($status,"Planned"))',
+            ),
+        ),
+    ),
+);
