@@ -67,6 +67,7 @@
         if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
         }
+
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
         this.enableparentname();
@@ -75,6 +76,10 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
             reunion.hidecheck();
         });
+        //Oculta campo Producto
+        $('[data-name="producto_c"]').hide();
+        //Función para ocultar o mostrar el campo Producto
+        this.campoproducto();
     },
 
     /**
@@ -808,6 +813,12 @@
             });
         }else {
             callback(null, fields, errors);
+        }
+    },
+    campoproducto: function () {
+        var productuser= App.user.attributes.puestousuario_c;
+        if (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id)){
+            $('[data-name="producto_c"]').show();
         }
     },
 
