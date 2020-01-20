@@ -16,6 +16,7 @@
         //this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
+        this.model.addValidationTask('Valida_producto_usuario',_.bind(this.productoReunion, this));
 
         this.on('render', this.disablestatus, this);
     },
@@ -26,6 +27,8 @@
 
         //Ocultar panel con campos de control de check in
         $('[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
+        //Oculta campo Producto
+        $('[data-name="producto_c"]').hide();
 
         /*Oculta el campo de resultado de la llamada cuando la está se encuentra en planificada
          *Victor Martinez López 23-08-2018
@@ -39,6 +42,9 @@
         $('[data-name="resultado_confirmado_por_c"]').hide();
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
+
+        //Función para ocultar o mostrar el campo Producto
+        this.campoproducto();
     },
 
     /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/
@@ -317,4 +323,29 @@
             callback(null, fields, errors);
         }
     },
-})
+
+    campoproducto: function () {
+        var productuser= App.user.attributes.puestousuario_c;
+        if (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id)){
+            $('[data-name="producto_c"]').show();
+        }
+    },
+
+    productoReunion:function (fields, errors, callback) {
+        var productuser= App.user.attributes.puestousuario_c;
+        if (productuser=='27' && (this.model.get('producto_c')=="" || this.model.get('producto_c')==undefined)){
+            app.alert.show("Error_campo_prodcuto_ok", {
+                level: "error",
+                title: "Hace falta seleccionar el producto de la Reunión.",
+                autoClose: false
+            });
+            errors['producto_c'] = errors['producto_c'] || {};
+            errors['producto_c'].required = true;
+        }
+        callback(null, fields, errors);
+
+    },
+
+
+
+    })

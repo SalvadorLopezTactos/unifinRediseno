@@ -479,4 +479,13 @@ class Meetings_Hooks
       }
   }
 
+  function guardaproductos ($bean, $event, $args){
+      //Función para guardar el tipo de producto Principal de los invitados a la Reunión
+      $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+      if ($beanUser->puestousuario_c!='27'){
+          $bean->producto_c = $beanUser->tipodeproducto_c;
+      }
+
+  }
+
 }

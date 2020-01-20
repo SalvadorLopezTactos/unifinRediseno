@@ -1,7 +1,8 @@
 <?php
- // created: 2020-01-16 16:27:49
+ // created: 2020-01-20 10:59:07
 
 $app_list_strings['tipo_producto_list']=array (
+  '' => '',
   1 => 'LEASING',
   2 => 'CREDITO SIMPLE',
   3 => 'CREDITO AUTOMOTRIZ',
