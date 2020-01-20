@@ -46,7 +46,7 @@
         var AgenteN = $('#AgenteN').val().trim();
         var AgenteA = $('#AgenteA').val().trim();
         var equipoA = $("#Equipos").val();
-        if(AgenteN!="" || AgenteA !="" || equipoA!="0" || Informa!=undefined || Informa!=null || Informa!="") {
+        if(AgenteN!="" || AgenteA !="" || equipoA!="0" || (Informa!=undefined && Informa!=null && Informa!="")) {
           agentes.filtros = {
               "Nombre": AgenteN,
               "Apellidos": AgenteA,
@@ -100,6 +100,7 @@
                 $('#processing').hide();
                 agentes.render();
                 $('#btn_guardar').attr('style', 'pointer-events:none;');
+                $(".notFound").removeClass("hide");
              }, this)
           });
         }else{
