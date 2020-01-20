@@ -814,10 +814,9 @@
         }
     },
     campoproducto: function () {
-        $('[data-name="producto_c"]').hide();
         var productuser= App.user.attributes.puestousuario_c;
-        if (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id)){
-            $('[data-name="producto_c"]').show();
+        if (productuser!='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id)){
+            $('[data-name="producto_c"]').hide();
         }
     },
 

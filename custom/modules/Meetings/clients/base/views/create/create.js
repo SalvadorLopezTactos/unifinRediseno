@@ -27,8 +27,6 @@
 
         //Ocultar panel con campos de control de check in
         $('[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
-        //Oculta campo Producto
-        $('[data-name="producto_c"]').hide();
 
         /*Oculta el campo de resultado de la llamada cuando la está se encuentra en planificada
          *Victor Martinez López 23-08-2018
@@ -325,10 +323,9 @@
     },
 
     campoproducto: function () {
-        $('[data-name="producto_c"]').hide();
         var productuser= App.user.attributes.puestousuario_c;
-        if (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id)){
-            $('[data-name="producto_c"]').show();
+        if (productuser!='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id)){
+            $('[data-name="producto_c"]').hide();
         }
     },
 
