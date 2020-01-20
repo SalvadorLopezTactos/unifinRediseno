@@ -49,6 +49,8 @@
         /*
           * Victor Martinez Lopez 24-08-2018
         */
+        //Función para ocultar o mostrar el campo Producto
+        this.model.on('sync', this.campoproducto, this);
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
@@ -76,10 +78,6 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
             reunion.hidecheck();
         });
-        //Oculta campo Producto
-        $('[data-name="producto_c"]').hide();
-        //Función para ocultar o mostrar el campo Producto
-        this.campoproducto();
     },
 
     /**
@@ -816,6 +814,7 @@
         }
     },
     campoproducto: function () {
+        $('[data-name="producto_c"]').hide();
         var productuser= App.user.attributes.puestousuario_c;
         if (productuser=='27' && (this.model.get('assigned_user_id')==App.user.attributes.id)){
             $('[data-name="producto_c"]').show();
