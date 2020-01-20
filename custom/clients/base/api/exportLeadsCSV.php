@@ -109,32 +109,20 @@ FROM leads l
          * Creamos encabezados y Cuerpo de Leads
          */
         $backlog_doc_id = uniqid('', false);
-        $leads_doc_name = "ErroresLeads" . $fecha.".csv";
+        $leads_doc_name = "ErroresLeads" . $fecha . ".csv";
         $csvfile = $sugar_config['upload_dir'] . $leads_doc_name;
 
-        $bander = 0;
-        $label = array();
         $fp = fopen($csvfile, 'w');
+
+        $csvHeader = "Nombre(s),Apellido Paterno,Apellido Materno,Nombre Empresa,Régimen Fiscal,Tipo de Lead,Subtipo de Lead,Correo Electrónico,Móvil,Teléfono de Oficina,Teléfono de casa,Origen,Macro Sector,Potencial de Lead,Ventas Anuales,Zona geográfica,Puesto,Nombre de la Cargar,ID de Usuario asignado,Nombre de Usuario Asignado";
+        $csvHeader .= "\n";
+
+        if ($fp) {
+            fwrite($fp, $csvHeader);
+        }
 
         while ($row = $db->fetchByAssoc($resultLeads)) {
             $str_row = array();
-
-            if ($bander == 0) {
-             /*   foreach ($row as $key => $valor) {
-                    $str_label = translate($GLOBALS['dictionary']['Lead']['fields'][$key]['vname'], "Leads");
-                    $str_label = trim($str_label, ":");
-                    array_push($label, $str_label);
-                }*/
-
-                $csvHeader="Nombre(s),Apellido Paterno,Apellido Materno,Nombre Empresa,Régimen Fiscal,Tipo de Lead,Subtipo de Lead,Correo Electrónico,Móvil,Teléfono de Oficina,Teléfono de casa,Origen,Macro Sector,Potencial de Lead,Ventas Anuales,Zona geográfica,Puesto,Nombre de la Cargar,ID de Usuario asignado, Nombre de Usuario Asignado";
-                $bander++;
-                //$str_header = implode(",", $label);
-                $csvHeader .= "\n";
-
-                if ($fp) {
-                    fwrite($fp, $csvHeader);
-                }
-            }
 
             foreach ($row as $keys => $valores) {
                 array_push($str_row, $valores);
@@ -151,49 +139,5 @@ FROM leads l
         return $leads_doc_name;
     }
 
-
-    /**  este codigo es funcional solo para leads que tengan deleted en cero ya que no
-     * puede recuperar eliminados*/
-
-    /* function expoort_Leads_CSV_v1($api, $args)
-     {
-
-         global $sugar_config;
-         $fecha = date("Y - m - d H:i:s");
-
-         $callApi = new RecordListApi();
-         $resList = $callApi->recordListCreate($api, $args);
-
-         if ($resList['id']) {
-             $requestExport = Array
-             (
-                 "module" => "Leads",
-                 "record_list_id" => $resList['id']
-             );
-
-             $exportApi = new ExportApi();
-             $resExport = $exportApi->export($api, $requestExport);
-             $GLOBALS['log']->fatal("Respuesta Exportacion " . $resExport);
-             $GLOBALS['log']->fatal("Respuesta Exportacion " . count($resExport));
-
-             if (!empty($resExport)) {
-                 $backlog_doc_id = uniqid('', false);
-                 $leads_doc_name = "ErroresLeads" . $fecha . " . csv";
-                 $csvfile = $sugar_config['upload_dir'] . $leads_doc_name;
-
-                 $fp = fopen($csvfile, 'w');
-                 fwrite($fp, $resExport);
-                 //fputcsv($fp, $resExport); # $line is an array of string values here
-                 fclose($fp);
-
-                 //return $leads_doc_name;
-             }
-
-
-         }
-
-         return $leads_doc_name;
-     }*/
-    // apellido_materno_c valor  LBL_APPELIDO_MATERNO_C Apellido Materno
 
 }
