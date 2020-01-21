@@ -18,9 +18,9 @@
 
         if (this.model.get('phone_mobile') != "" || this.model.get('phone_home') != "" || this.model.get('phone_work') != "") {
 
-            var phoneMobile = this.validaTmanoRepetido(this.model.get('phone_mobile'));
-            var phoneHome = this.validaTmanoRepetido(this.model.get('phone_home'));
-            var phoneWork = this.validaTmanoRepetido(this.model.get('phone_work'));
+            var phoneMobile = this.model.get('phone_mobile') != "" ? this.validaTmanoRepetido(this.model.get('phone_mobile')) : false;
+            var phoneHome = this.model.get('phone_home') != "" ? this.validaTmanoRepetido(this.model.get('phone_home')) : false;
+            var phoneWork = this.model.get('phone_work') != "" ? this.validaTmanoRepetido(this.model.get('phone_work')) : false;
 
             /***********************Valida Longitud y Carácteres repetidos********************/
             if (phoneMobile) {
@@ -57,7 +57,7 @@
             /************************* Valida duplciados ******************************/
 
             duplicado = 0;
-            if (this.model.get('phone_mobile') == this.model.get('phone_home')) {
+            if (this.model.get('phone_mobile') == this.model.get('phone_home') && this.model.get('phone_mobile') != "" && this.model.get('phone_home') != "") {
                 duplicado = duplicado + 1;
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -65,7 +65,7 @@
                 errors['phone_home'].required = true;
 
             }
-            if (this.model.get('phone_mobile') == this.model.get('phone_work')) {
+            if (this.model.get('phone_mobile') == this.model.get('phone_work') && this.model.get('phone_mobile') != "" && this.model.get('phone_work') != "") {
                 duplicado = duplicado + 1;
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -73,7 +73,7 @@
                 errors['phone_work'].required = true;
 
             }
-            if (this.model.get('phone_home') == this.model.get('phone_work')) {
+            if (this.model.get('phone_home') == this.model.get('phone_work') && this.model.get('phone_home') != "" && this.model.get('phone_work') != "") {
                 duplicado = duplicado + 1;
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
@@ -96,20 +96,22 @@
     validaTmanoRepetido(telefono) {
         requerido = false;
 
-        if (telefono.length >= 8) {
+        if (telefono != "" && telefono != undefined) {
+            if (telefono.length >= 8) {
 
-            if (telefono.length > 1) {
-                var repetido = true;
-                for (var itelefono = 0; itelefono < telefono.length; itelefono++) {
-                    repetido = (telefono[0] != telefono[itelefono]) ? false : repetido;
-                }
-                if (repetido) {
-                    requerido = true;
+                if (telefono.length > 1) {
+                    var repetido = true;
+                    for (var itelefono = 0; itelefono < telefono.length; itelefono++) {
+                        repetido = (telefono[0] != telefono[itelefono]) ? false : repetido;
+                    }
+                    if (repetido) {
+                        requerido = true;
+                    }
                 }
             }
-        }
-        else {
-            requerido = true;
+            else {
+                requerido = true;
+            }
         }
 
         return requerido;
