@@ -47,24 +47,24 @@ class check_duplicateAccounts extends SugarApi
          * Validamos que el Lead no exista en Cuentas
          */
         $bean = BeanFactory::retrieveBean('Leads', $id_Lead, array('disable_row_level_security' => true));
-        $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
+       // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
 
 
         $result = $this->existLeadAccount($bean);
         $count = count($result);
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
-                $GLOBALS['log']->fatal("No existe Busco almenos una reunion en planificada");
+              //  $GLOBALS['log']->fatal("No existe Busco almenos una reunion en planificada");
 
                 $responsMeeting = $this->getMeetingsUser($bean);
 
                 if ($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) {
                     /** Creamos la Cuenta */
-                    $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
+                   // $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
 
                     $bean_account = $this->createAccount($bean, $responsMeeting);
 
-                    $GLOBALS['log']->fatal("Cuenta Creada--- " . $bean_account->id);
+                   // $GLOBALS['log']->fatal("Cuenta Creada--- " . $bean_account->id);
 
                     //$this->getContactAssoc($bean, $bean_account);
 
@@ -90,7 +90,7 @@ SITE;
 
 
                 } else {
-                    $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
+                  //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
                     // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
                     $finish = array("idCuenta" => "", "mensaje" => "El proceso no puede continuar Falta al menos una Reunion Planificada");
 
@@ -98,7 +98,7 @@ SITE;
 
             } elseif ($count > 0) {
                 // $Accountsexists = true;
-                $GLOBALS['log']->fatal("Cuenta encontrada ");
+               // $GLOBALS['log']->fatal("Cuenta encontrada ");
                 // throw new SugarApiExceptionInvalidParameter($msjExiste);
                 $finish = array("idCuenta" => "", "mensaje" => $msjExiste);
 
@@ -234,7 +234,7 @@ SITE;
             } else {
                 $procede['status'] = "stop";
                 $procede['data'] = array();
-                $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  " . print_r($procede, true));
+               // $GLOBALS['log']->fatal("No tiene Reuniones no puede continuar aqui rompe  " . print_r($procede, true));
 
             }
         }
@@ -252,20 +252,16 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $lead) {
 
-                    $GLOBALS['log']->fatal("Leads " . $lead->nombre_c);
-                    $GLOBALS['log']->fatal("Leads " . $lead->clean_name_c);
-
-
                     $result = $this->existLeadAccount($lead);
                     $count = count($result);
 
                     if ($count > 0) {
-                        $GLOBALS['log']->fatal("Si existe recupero el id  " . $result[0]['id'] . " y creamos la relacion");
+                       // $GLOBALS['log']->fatal("Si existe recupero el id  " . $result[0]['id'] . " y creamos la relacion");
 
                         $this->create_relationship($bean_account, $result[0]['id']);
                         array_push($resultado['data'], $result[0]['id']);
                     } else {
-                        $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
+                       // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
                         $cuenta = $this->createAccount($lead, null);
                         if (!empty($cuenta->id)) {
                             $this->create_relationship($bean_account, $cuenta->id);
@@ -280,7 +276,7 @@ SITE;
                 $resultado['data'] = null;
             }
         }
-        $GLOBALS['log']->fatal("Resultado de Relaciones " . print_r($resultado, true));
+        // $GLOBALS['log']->fatal("Resultado de Relaciones " . print_r($resultado, true));
 
         return $resultado;
     }
@@ -288,7 +284,7 @@ SITE;
     public function create_relationship($id_parent, $idAccount)
     {
         // rel_relaciones_accounts_1
-        $GLOBALS['log']->fatal("id Padre " . $id_parent->id . "  id hijo " . $idAccount);
+       // $GLOBALS['log']->fatal("id Padre " . $id_parent->id . "  id hijo " . $idAccount);
 
         $bean_relacion = BeanFactory::newBean('Rel_Relaciones');
         $bean_relacion->rel_relaciones_accounts_1accounts_ida = $id_parent->id; // Cuenta padre
