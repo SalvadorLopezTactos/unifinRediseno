@@ -1,5 +1,14 @@
 <?php
-// created: 2020-01-06 15:47:00
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $searchFields['Leads'] = array (
   'first_name' => 
   array (
@@ -218,5 +227,17 @@ $searchFields['Leads'] = array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
+  ),
+  'phone_mobile' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'phone_home' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'phone_work' => 
+  array (
+    'query_type' => 'default',
   ),
 );
