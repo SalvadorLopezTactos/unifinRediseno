@@ -1,0 +1,464 @@
+({
+
+    extendsFrom: 'RecordView',
+
+    initialize: function (options) {
+        self = this;
+        this._super("initialize", [options]);
+        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
+        this.model.on('sync', this._readonlyFields, this);
+        this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
+        this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
+        this.model.on('sync', this._hideBtnConvert, this);
+        this._readonlyFields();
+        this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
+        this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
+    },
+
+
+    validaLongDupTel: function (fields, errors, callback) {
+
+        if (this.model.get('phone_mobile') != "" || this.model.get('phone_home') != "" || this.model.get('phone_work') != "") {
+
+            var phoneMobile = this.validaTmanoRepetido(this.model.get('phone_mobile'));
+            var phoneHome = this.validaTmanoRepetido(this.model.get('phone_home'));
+            var phoneWork = this.validaTmanoRepetido(this.model.get('phone_work'));
+
+            /***********************Valida Longitud y Carácteres repetidos********************/
+            if (phoneMobile) {
+                app.alert.show("Mobile-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+            }
+            if (phoneHome) {
+                app.alert.show("Home-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+            }
+            if (phoneWork) {
+                app.alert.show("Work-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
+            /************************* Valida duplciados ******************************/
+
+            duplicado = 0;
+            if (this.model.get('phone_mobile') == this.model.get('phone_home')) {
+                duplicado = duplicado + 1;
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+
+            }
+            if (this.model.get('phone_mobile') == this.model.get('phone_work')) {
+                duplicado = duplicado + 1;
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+
+            }
+            if (this.model.get('phone_home') == this.model.get('phone_work')) {
+                duplicado = duplicado + 1;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+
+            }
+
+            if (duplicado > 0) {
+                app.alert.show("Tel-Duplicado", {
+                    level: "error",
+                    title: "No se puede agregar el número: Ya ha sido registrado.",
+                    autoClose: false
+                });
+            }
+            callback(null, fields, errors);
+        }
+    },
+
+    validaTmanoRepetido(telefono) {
+        requerido = false;
+
+        if (telefono.length >= 8) {
+
+            if (telefono.length > 1) {
+                var repetido = true;
+                for (var itelefono = 0; itelefono < telefono.length; itelefono++) {
+                    repetido = (telefono[0] != telefono[itelefono]) ? false : repetido;
+                }
+                if (repetido) {
+                    requerido = true;
+                }
+            }
+        }
+        else {
+            requerido = true;
+        }
+
+        return requerido;
+    },
+
+    validaSoloNumerosTel: function (evt) {
+        if ($.inArray(evt.keyCode, [110, 188, 45, 33, 36, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        } else {
+            return true;
+        }
+    },
+
+    _hideBtnConvert: function () {
+
+        var btnConvert = this.getField("convert_Leads_button");
+
+        if (btnConvert) {
+            btnConvert.listenTo(btnConvert, "render", function () {
+
+                if (this.model.get('subtipo_registro_c') == '2') {
+                    btnConvert.show();
+                } else {
+                    btnConvert.hide();
+                }
+            });
+        }
+    },
+
+    _subMotivoCancelacion: function () {
+
+        if (!this.model.get('lead_cancelado_c')) {
+
+            this.model.set('motivo_cancelacion_c', '');
+        }
+    },
+
+    valida_requeridos: function (fields, errors, callback) {
+        var campos = "";
+        var requerido = 0;
+
+        /*****************************************************************************************************************
+         * *********************************************SUB-TIPO SIN CONTACTAR*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('subtipo_registro_c') == '1') {
+
+            if ((this.model.get('nombre_c') == '' || this.model.get('nombre_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+            if ((this.model.get('apellido_paterno_c') == '' || this.model.get('apellido_paterno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
+            if ((this.model.get('nombre_empresa_c') == '' || this.model.get('nombre_empresa_c') == null) &&
+                this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE_EMPRESA", "Leads") + '</b><br>';
+                errors['nombre_empresa_c'] = errors['nombre_empresa_c'] || {};
+                errors['nombre_empresa_c'].required = true;
+            }
+            if (this.model.get('origen_c') == '' || this.model.get('origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
+                errors['origen_c'] = errors['origen_c'] || {};
+                errors['origen_c'].required = true;
+            }
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
+
+        /*****************************************************************************************************************
+         * *********************************************SUB-TIPO CONTACTADO*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('subtipo_registro_c') == '2') {
+            if (this.model.get('origen_c') == '' || this.model.get('macrosector_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
+                errors['origen_c'] = errors['origen_c'] || {};
+                errors['origen_c'].required = true;
+            }
+            if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_MACROSECTOR_C", "Leads") + '</b><br>';
+                errors['macrosector_c'] = errors['macrosector_c'] || {};
+                errors['macrosector_c'].required = true;
+            }
+            if (this.model.get('ventas_anuales_c') == '' || this.model.get('ventas_anuales_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_VENTAS_ANUALES_C", "Leads") + '</b><br>';
+                errors['ventas_anuales_c'] = errors['ventas_anuales_c'] || {};
+                errors['ventas_anuales_c'].required = true;
+            }
+            if (this.model.get('potencial_lead_c') == '' || this.model.get('potencial_lead_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_POTENCIAL_LEAD", "Leads") + '</b><br>';
+                errors['potencial_lead_c'] = errors['potencial_lead_c'] || {};
+                errors['potencial_lead_c'].required = true;
+            }
+            if (this.model.get('zona_geografica_c') == '' || this.model.get('zona_geografica_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_ZONA_GEOGRAFICA_C", "Leads") + '</b><br>';
+                errors['zona_geografica_c'] = errors['zona_geografica_c'] || {};
+                errors['zona_geografica_c'].required = true;
+            }
+            if (this.model.get('email') == '' || this.model.get('email') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_EMAIL_ADDRESS", "Leads") + '</b><br>';
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+            if ((this.model.get('puesto_c') == '' || this.model.get('puesto_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_PUESTO_C", "Leads") + '</b><br>';
+                errors['puesto_c'] = errors['puesto_c'] || {};
+                errors['puesto_c'].required = true;
+            }
+            if (this.model.get('assigned_user_name') == '' || this.model.get('assigned_user_name') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + 'Asignado a' + '</b><br>';
+
+                errors['assigned_user_name'] = errors['assigned_user_name'] || {};
+                errors['assigned_user_name'].required = true;
+            }
+            if ((this.model.get('nombre_empresa_c') == '' || this.model.get('nombre_empresa_c') == null) &&
+                this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE_EMPRESA", "Leads") + '</b><br>';
+                errors['nombre_empresa_c'] = errors['nombre_empresa_c'] || {};
+                errors['nombre_empresa_c'].required = true;
+            }
+            if ((this.model.get('nombre_c') == '' || this.model.get('nombre_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+            if ((this.model.get('apellido_paterno_c') == '' || this.model.get('apellido_paterno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
+            if ((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
+
+        /*****************************************************************************************************************
+         * *********************************************SUB-TIPO CANCELADO*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('subtipo_registro_c') == '3') {
+            if ((this.model.get('apellido_materno_c') == '' || this.model.get('apellido_materno_c') == null) &&
+                this.model.get('regimen_fiscal_c') != 'Persona Moral') {
+
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
+
+        /*****************************************************************************************************************
+         * *********************************************CHECK CANCELAR LEAD*******************************************
+         ****************************************************************************************************************/
+
+        if (this.model.get('lead_cancelado_c') == '1') {
+            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
+                errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
+                errors['motivo_cancelacion_c'].required = true;
+            }
+            if (requerido > 0) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                    autoClose: false
+                });
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
+    _readonlyFields: function () {
+        var self = this;
+        /***************************READONLY PARA SUBTIPO DE LEAD CANCELADO**************************/
+        if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
+
+            var editButton = self.getField('edit_button');
+            editButton.setDisabled(true);
+
+            _.each(this.model.fields, function (field) {
+
+                self.noEditFields.push(field.name);
+                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+            });
+        }
+        /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
+        if (this.model.get('subtipo_registro_c') == '4') {
+
+            var editButton = self.getField('edit_button');
+            editButton.setDisabled(true);
+
+            _.each(this.model.fields, function (field) {
+
+                self.noEditFields.push(field.name);
+                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+
+            });
+        }
+    },
+
+    _render: function (options) {
+        this._super("_render");
+    },
+
+    convert_Lead_to_Accounts: function () {
+        self = this;
+        var filter_arguments = {
+            "id": this.model.get('id')
+        };
+        // alert(this.model.get('id'))
+
+        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
+
+        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+            success: _.bind(function (data) {
+
+                console.log(data);
+                app.alert.dismiss('upload');
+                app.controller.context.reloadData({});
+
+                if (data.idCuenta === "") {
+                    app.alert.show("Conversión", {
+                        level: "error",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+                {
+                    app.alert.show("Conversión", {
+                        level: "success",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                }
+                var btnConvert = this.getField("convert_Leads_button")
+
+                if (this.model.get('subtipo_registro_c') == '2') {
+                    btnConvert.show();
+                } else {
+                    btnConvert.hide();
+                }
+                //app.controller.context.reloadData({});
+                //SUGAR.App.controller.context.reloadData({})
+                /* Para refrescar solo un campo
+    
+                 model.fetch({
+    
+                  view: undefined,
+    
+                  fields: ['industry']
+    
+                });
+                 */
+
+            }, this),
+            failure: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this),
+            error: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this)
+        });
+
+
+    }
+})

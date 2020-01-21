@@ -15,7 +15,7 @@ $mod_strings['LBL_TCT_CALIFICACION_CONFERENCIA'] = 'Calificación de Conferencia
 $mod_strings['LBL_TCT_CONFERENCIA_FECHA_DAT'] = 'Fecha y Hora';
 $mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Has agendado la {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> para {{formatDate date_start}}';
 $mod_strings['LBL_TCT_CALL_ISSABEL_C'] = 'Pending Sync with Issabel';
-$mod_strings['LBL_CREATE_LEAD'] = 'Nuevo Pre-prospecto';
+$mod_strings['LBL_CREATE_LEAD'] = 'Nuevo Lead';
 $mod_strings['LNK_NEW_OPPORTUNITY'] = 'Nueva Solicitud y Línea';
 $mod_strings['LBL_TCT_CALL_FROM_ISSABEL_C'] = 'Llamada realizada desde issabel';
 $mod_strings['LBL_CALL_MEETING'] = 'Reunión / Llamada';
