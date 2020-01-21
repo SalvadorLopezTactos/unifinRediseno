@@ -8,6 +8,125 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this._readonlyFields();
+        this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
+        this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
+    },
+
+    validaLongDupTel: function (fields, errors, callback) {
+
+        if (this.model.get('phone_mobile') != "" || this.model.get('phone_home') != "" || this.model.get('phone_work') != "") {
+
+            var phoneMobile = this.validaTmanoRepetido(this.model.get('phone_mobile'));
+            var phoneHome = this.validaTmanoRepetido(this.model.get('phone_home'));
+            var phoneWork = this.validaTmanoRepetido(this.model.get('phone_work'));
+
+            /***********************Valida Longitud y Carácteres repetidos********************/
+            if (phoneMobile) {
+                app.alert.show("Mobile-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+            }
+            if (phoneHome) {
+                app.alert.show("Home-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+            }
+            if (phoneWork) {
+                app.alert.show("Work-invalido", {
+                    level: "error",
+                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
+                    autoClose: false
+                });
+
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
+            /************************* Valida duplciados ******************************/
+
+            duplicado = 0;
+            if (this.model.get('phone_mobile') == this.model.get('phone_home')) {
+                duplicado = duplicado + 1;
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+
+            }
+            if (this.model.get('phone_mobile') == this.model.get('phone_work')) {
+                duplicado = duplicado + 1;
+                errors['phone_mobile'] = errors['phone_mobile'] || {};
+                errors['phone_mobile'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+
+            }
+            if (this.model.get('phone_home') == this.model.get('phone_work')) {
+                duplicado = duplicado + 1;
+                errors['phone_home'] = errors['phone_home'] || {};
+                errors['phone_home'].required = true;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+
+            }
+
+            if (duplicado > 0) {
+                app.alert.show("Tel-Duplicado", {
+                    level: "error",
+                    title: "No se puede agregar el número: Ya ha sido registrado.",
+                    autoClose: false
+                });
+            }
+            callback(null, fields, errors);
+        }
+    },
+
+    validaTmanoRepetido(telefono) {
+        requerido = false;
+
+        if (telefono.length >= 8) {
+
+            if (telefono.length > 1) {
+                var repetido = true;
+                for (var itelefono = 0; itelefono < telefono.length; itelefono++) {
+                    repetido = (telefono[0] != telefono[itelefono]) ? false : repetido;
+                }
+                if (repetido) {
+                    requerido = true;
+                }
+            }
+        }
+        else {
+            requerido = true;
+        }
+
+        return requerido;
+    },
+
+    validaSoloNumerosTel: function (evt) {
+        if ($.inArray(evt.keyCode, [110, 188, 45, 33, 36, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        } else {
+            return true;
+        }
     },
 
     valida_requeridos: function (fields, errors, callback) {
