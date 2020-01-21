@@ -36,7 +36,7 @@
 
         var tipos_cuenta=[];
         this.$('#tipo_de_cuenta').select2({
-            width:'250px',
+            width:'350px',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
