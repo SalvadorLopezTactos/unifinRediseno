@@ -429,13 +429,14 @@ array (
                 'name' => 'validado_por_c',
                 'studio' => 'visible',
                 'label' => 'LBL_VALIDADO_POR',
-                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter' => 'filterSubpuestoTemplate',
                 'initial_filter_label' => 'Agentes Telefónicos',
                 'filter_populate' => 
                 array (
-                  'puestousuario_c' => 
+                  'subpuesto_c' => 
                   array (
-                    0 => '27',
+                    0 => '1',
+                    1 => '2',
                   ),
                 ),
               ),

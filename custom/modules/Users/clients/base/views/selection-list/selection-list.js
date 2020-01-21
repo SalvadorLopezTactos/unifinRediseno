@@ -11,7 +11,7 @@
     _render: function (options) {
         this._super("_render");
 
-        if(this.context.parent.get('module')=='Meetings' && $('input[value="filterAgentesTelefonicosTemplate"]').val()=='filterAgentesTelefonicosTemplate'){
+        if(this.context.parent.get('module')=='Meetings' && ($('input[value="filterAgentesTelefonicosTemplate"]').val()=='filterAgentesTelefonicosTemplate' || $('input[value="filterSubpuestoTemplate"]').val()=='filterSubpuestoTemplate')){
             //Ocultando ícono que elimina filtro
             $('.choice-filter-close').hide();
             $('.choice-filter-label').parent('.choice-filter-clickable').attr('style','pointer-events:none');

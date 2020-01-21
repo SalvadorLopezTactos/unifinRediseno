@@ -53,6 +53,14 @@ array (
         'width' => '10',
         'name' => 'puestousuario_c',
       ),
+      'subpuesto_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'label' => 'LBL_SUBPUESTO',
+        'width' => 10,
+        'name' => 'subpuesto_c',
+      ),
       'title' => 
       array (
         'name' => 'title',
