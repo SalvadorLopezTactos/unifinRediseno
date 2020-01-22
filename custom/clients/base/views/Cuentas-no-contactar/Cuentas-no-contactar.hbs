@@ -1,5 +1,4 @@
 {{#if this.loadView}}
-
     <style>
         .container {
             overflow-y:auto;
@@ -32,27 +31,33 @@
     </style>
 
     <div class="container tcenter" >
-        <h1 id="containerHeader" align="left">Cuentas No contactar</h1>
-
+        <h1 id="containerHeader" align="left"> Cuentas No Contactar</h1>
+		<br>
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 97%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+                        &nbsp; Buscar por filtros
+                    </p>
+                </h1>
+            </div>
+        </div>
         <table align="left"  width=100%>
             <tr>
                 <th>Asesor: </th>
-
-                <td colspan="2">
+                <td class="span3">
                     {{#each meta.panels}}
                         {{#each fields}}
                             {{field ../../this}}
                         {{/each}}
                     {{/each}}
                 </td>
-
                 <th> Nombre Cuenta: </th>
-
-                <td colspan="2">
+                <td class="span2">
                     <input id="filtroCliente" type="text" value="" style="width: 100%">
                 </td>
-                <th>Tipo de Cuenta</th>
-                <td colspan="2">
+                <th>Tipo de Cuenta: </th>
+                <td class="span2">
                     <select id="tipo_de_cuenta" class="row-fluid select2 tipo_cuenta" multiple="multiple" style="width: 100%" size="3" >
                         {{#each tipo_cuenta}}
                             <option value="{{@key}}">{{this}}</option>
@@ -62,7 +67,7 @@
                 <td><input type="button" value="Buscar" id="btn_Cuentas" class="btn btn-primary" /></td>
             </tr>
             <tr>
-                <td colspan="12"><span id='processing' style="display: none"><img width='30' height='5' src='custom/Levementum/images/icon_processing.gif'></span></td>
+                <td class="span2"><span id='processing' style="display: none"><img width='30' height='5' src='custom/Levementum/images/icon_processing.gif'></span></td>
             </tr>
         </table>
         <br>
@@ -70,7 +75,6 @@
             <p>Las cuentas se han actualizado</p>
         </div>
         <br>
-
 
     {{#if cuentas}}
         <div class="cuentasContainer">
@@ -90,7 +94,6 @@
                           </div>
                     </span>
                     </td>
-
                     <td>
                     <span sfuuid='880' class='list'>
                         <div class='ellipsis_inline' data-placement='bottom'>
@@ -98,8 +101,6 @@
                         </div>
                     </span>
                     </td>
-
-
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
@@ -107,7 +108,6 @@
                           </div>
                     </span>
                     </td>
-
                     <td>
                     <span sfuuid='880' class='list'>
                         <div class='ellipsis_inline' data-placement='bottom'>
@@ -127,7 +127,6 @@
                     </div>
                 </td>
             </tr>
-
         </table>
         <br>
         <table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
@@ -148,13 +147,20 @@
         </table>
     </div>
     {{/if}}
+	    <!-- Subir CSV -->
         <br>
-        <!-- Subir CSV -->
+        <br>
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 97%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+                        &nbsp; Actualización masiva (csv)
+                    </p>
+                </h1>
+            </div>
+        </div>
         <div style="width:100%; margin:0 auto;" align="center">
-            <div style="border: 1px solid;border-color:#22608c;border-radius: 5px;width: 90%;">
-                <p style="text-align:left;padding:10px">Actualización Masiva</p>
-
-
+            <div style="border: 0px solid;border-color:#22608c;border-radius: 5px;width: 90%;">
                 <table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
                     <tbody>
                     <tr>
