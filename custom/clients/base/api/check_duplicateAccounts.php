@@ -279,13 +279,13 @@ SITE;
                         if (!empty($cuenta->id)) {
                             $this->create_relationship($bean_account, $cuenta->id);
                             array_push($resultado['data'], $cuenta->id);
-
+                            $lead->account_id = $cuenta->id;
+                            $lead->account_name = $cuenta->name;
                         }
                     }
 
                     $lead->subtipo_registro_c = 4;
-                    $lead->account_id = $bean_account->id;
-                    $lead->account_name = $bean_account->name;
+
                     $lead->save();
 
                 }
