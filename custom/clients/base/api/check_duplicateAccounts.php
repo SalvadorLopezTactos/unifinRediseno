@@ -149,10 +149,10 @@ SITE;
         $bean_account->email = $bean_Leads->email;
         // Asesores
         if ($idMeetings != null) {
-            $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "ca179abe-2e50-11ea-9783-9829a662ce81" : $idMeetings['data']['LEASING'];
-            $bean_account->user_id1_c = empty($idMeetings['data']['FACTORAJE']) ? "ca179abe-2e50-11ea-9783-9829a662ce81" : $idMeetings['data']['FACTORAJE'];
-            $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "ca179abe-2e50-11ea-9783-9829a662ce81" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
-            $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "ca179abe-2e50-11ea-9783-9829a662ce81" : $idMeetings['data']['FLEET'];
+            $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
+            $bean_account->user_id1_c = empty($idMeetings['data']['FACTORAJE']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FACTORAJE'];
+            $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
+            $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
         }
 
 
