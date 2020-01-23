@@ -92,7 +92,7 @@ SITE;
                 } else {
                     //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
                     // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
-                    $finish = array("idCuenta" => "", "mensaje" => "El proceso no puede continuar Falta al menos una Reunion Planificada");
+                    $finish = array("idCuenta" => "", "mensaje" => "El proceso no puede continuar. Falta al menos una Reunión Planificada");
 
                 }
 
@@ -106,7 +106,7 @@ SITE;
             }
 
         } else {
-            $finish = array("idCuenta" => "", "mensaje" => "El Lead ya se ha sido convertido.");
+            $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
 
         }
         return $finish;

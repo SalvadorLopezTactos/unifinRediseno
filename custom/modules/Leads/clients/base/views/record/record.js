@@ -15,8 +15,82 @@
         this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
+        this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
+        this.model.addValidationTask('change:email', _.bind(this.expmail, this));
     },
 
+    expmail: function (fields, errors, callback) {
+        if (this.model.get('email') != null && this.model.get('email') != "") {
+
+            var input = (this.model.get('email'));
+            var expresion = /^\S+@\S+\.\S+[$%&|<>#]?$/;
+            var cumple = true;
+
+            for (i = 0; i < input.length; i++) {
+
+                if (expresion.test(input[i].email_address) == false) {
+                    cumple = false;
+
+                }
+            }
+
+            if (cumple == false) {
+                app.alert.show('Error al validar email', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: '<b>Formato de Email Incorrecto.</b>'
+                })
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
+    checkTextOnly: function (fields, errors, callback) {
+        app.alert.dismiss('Error_validacion_Campos');
+        var camponame = "";
+        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+
+        if (this.model.get('nombre_c') != "" && this.model.get('nombre_c') != undefined) {
+            var nombre = this.model.get('nombre_c');
+            var comprueba = expresion.test(nombre);
+            if (comprueba != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+        }
+        if (this.model.get('apellido_paterno_c') != "" && this.model.get('apellido_paterno_c') != undefined) {
+            var apaterno = this.model.get('apellido_paterno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            var validaap = expresion.test(apaterno);
+            if (validaap != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
+        }
+        if (this.model.get('apellido_materno_c') != "" && this.model.get('apellido_materno_c') != undefined) {
+            var amaterno = this.model.get('apellido_materno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            var validaam = expresion.test(amaterno);
+            if (validaam != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
+        }
+        if (camponame) {
+            app.alert.show("Error_validacion_Campos", {
+                level: "error",
+                messages: 'Los siguientes campos no permiten Caracteres Especiales y Números:<br>' + camponame,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 
     validaLongDupTel: function (fields, errors, callback) {
 
