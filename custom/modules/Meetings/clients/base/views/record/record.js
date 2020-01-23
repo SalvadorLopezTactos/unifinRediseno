@@ -78,6 +78,8 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
             reunion.hidecheck();
         });
+        //Desabilita edición del campo Producto
+        $('div[data-name=productos_c]').css("pointer-events", "none");
     },
 
     /**
@@ -818,7 +820,7 @@
     campoproducto: function () {
         var productuser= App.user.attributes.puestousuario_c;
         if (productuser!='27' || (productuser=='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id))){
-            $('[data-name="producto_c"]').hide();
+            $('[data-name="productos_c"]').hide();
         }
     },
 
