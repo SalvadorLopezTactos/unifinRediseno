@@ -166,7 +166,7 @@ $mod_strings = array (
     'LBL_PRIMARY_ADDRESS_STREET_3'=>'Calle de dirección principal 3',
     'LBL_PRIMARY_ADDRESS_STREET' => 'Calle de dirección principal',
     'LBL_PRIMARY_ADDRESS' => 'Dirección principal:',
-    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxit {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
+    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_REFERED_BY' => 'Referido por:',
     'LBL_REPORTS_TO_ID'=>'Informa a ID',
     'LBL_REPORTS_TO' => 'Informa a:',

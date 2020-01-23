@@ -190,6 +190,12 @@
                 errors['origen_c'] = errors['origen_c'] || {};
                 errors['origen_c'].required = true;
             }
+            if (this.model.get('detalle_origen_c') == '' || this.model.get('detalle_origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_DETALLE_ORIGEN", "Leads") + '</b><br>';
+                errors['detalle_origen_c'] = errors['detalle_origen_c'] || {};
+                errors['detalle_origen_c'].required = true;
+            }
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
                     level: "error",
@@ -209,6 +215,12 @@
                 campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
                 errors['origen_c'] = errors['origen_c'] || {};
                 errors['origen_c'].required = true;
+            }
+            if (this.model.get('detalle_origen_c') == '' || this.model.get('detalle_origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_DETALLE_ORIGEN", "Leads") + '</b><br>';
+                errors['detalle_origen_c'] = errors['detalle_origen_c'] || {};
+                errors['detalle_origen_c'].required = true;
             }
             if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
                 requerido = requerido + 1;
