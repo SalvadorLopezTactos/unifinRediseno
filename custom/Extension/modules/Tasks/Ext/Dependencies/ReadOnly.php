@@ -1,12 +1,4 @@
 <?php
-global $current_user;
-$puesto_user=$current_user->puestousuario_c;
-if($puesto_user=='27'||$puesto_user=='31' ){
-	$enabled_puesto = 'false';
-}else{
-	$enabled_puesto = 'true';
-}
-
 //$GLOBALS['log']->fatal('puesto',$puesto_user);
 $dependencies['Tasks']['readonly_fields'] = array
 (
@@ -43,14 +35,6 @@ $dependencies['Tasks']['readonly_fields'] = array
 			),
 		),
 		
-		array(
-			'name' => 'SetVisibility',
-			'params' => array
-			(
-				'target' => 'ayuda_asesor_cp_c',
-				'value' => $enabled_puesto,
-			),
-		),
 	),
 );
 
