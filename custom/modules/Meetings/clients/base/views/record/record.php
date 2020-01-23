@@ -392,8 +392,8 @@ array (
             array (
               0 => 
               array (
-                'name' => 'producto_c',
-                'label' => 'LBL_PRODUCTO_C',
+                'name' => 'productos_c',
+                'label' => 'LBL_PRODUCTOS_C',
               ),
               1 => 
               array (

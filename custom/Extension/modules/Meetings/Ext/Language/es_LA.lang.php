@@ -41,3 +41,4 @@ $mod_strings['LBL_RESULTADO_CONFIRMADO'] = 'Resultado Confirmado';
 $mod_strings['LBL_RESULTADO_CONFIRMADO_POR'] = 'Resultado Confirmado por';
 $mod_strings['LBL_VALIDADO_POR'] = 'Validado por';
 $mod_strings['LBL_PRODUCTO_C'] = 'Producto';
+$mod_strings['LBL_PRODUCTOS_C'] = 'Producto';

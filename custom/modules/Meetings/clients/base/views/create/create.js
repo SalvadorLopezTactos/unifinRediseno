@@ -325,20 +325,32 @@
     campoproducto: function () {
         var productuser= App.user.attributes.puestousuario_c;
         if (productuser!='27' || (productuser=='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id))){
-            $('[data-name="producto_c"]').hide();
+            $('[data-name="productos_c"]').hide();
         }
     },
 
     productoReunion:function (fields, errors, callback) {
         var productuser= App.user.attributes.puestousuario_c;
-        if (productuser=='27' && (this.model.get('producto_c')=="" || this.model.get('producto_c')==undefined)){
-            app.alert.show("Error_campo_prodcuto_ok", {
-                level: "error",
-                title: "Hace falta seleccionar el producto de la Reunión.",
-                autoClose: false
-            });
-            errors['producto_c'] = errors['producto_c'] || {};
-            errors['producto_c'].required = true;
+        var asignado = this.model.get('assigned_user_id');
+        var id= App.user.attributes.id;
+        var usuarios=0;
+        for(var i=0;i<this.model.attributes.invitees.models.length;i++) {
+            if (this.model.attributes.invitees.models[i].module == "Users") {
+                usuarios++;
+            }
+        }
+        if (usuarios==1) {
+            if (productuser == '27' && asignado == id && (this.model.get('productos_c') == "" || this.model.get('productos_c') == undefined)) {
+                app.alert.show("Error_campo_prodcuto_ok", {
+                    level: "error",
+                    title: "Hace falta seleccionar el producto de la Reunión.",
+                    autoClose: false
+                });
+                errors['productos_c'] = errors['productos_c'] || {};
+                errors['productos_c'].required = true;
+            }
+        }else{
+            this.model.set("productos_c","");
         }
         callback(null, fields, errors);
 
