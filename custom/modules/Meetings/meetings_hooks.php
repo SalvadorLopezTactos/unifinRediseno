@@ -376,6 +376,25 @@ class Meetings_Hooks
                 and user_id = '{$idUsuario}'
     ";
     $updateResult = $db->query($update);
+
+      $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+      if ($beanUser->tipodeproducto_c!='27') {
+          //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
+          $actualizaproductos = "update meetings_cstm inner join
+                (select parent_meeting_c id, group_concat( distinct productos_c) productos
+                from meetings_cstm
+                where producto_c is not null
+                and parent_meeting_c =''
+                group by parent_meeting_c
+                ) parentM on parentM.id = meetings_cstm.id_c
+                inner join meetings on meetings.id = meetings_cstm.id_c
+                inner join users_cstm on users_cstm.id_c = meetings.assigned_user_id
+                set meetings_cstm.productos_c = parentM.productos
+                where parentM.productos !=''
+                and users_cstm.puestousuario_c='27';";
+          $updateResult = $db->query($actualizaproductos);
+          //$GLOBALS['log']->fatal($actualizaproductos);
+      }
   }
 
   /*
@@ -484,7 +503,6 @@ class Meetings_Hooks
         $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
         if ($beanUser->puestousuario_c!='27'){
 
-            //$saveproductos=explode(",", '^'.$beanUser->tipodeproducto_c.'^');
             $bean->productos_c = '^'.$beanUser->tipodeproducto_c.'^';
             if ($bean->parent_meeting_c) {
                 $beanparentmeeting = BeanFactory:: getBean('Meetings', $bean->parent_meeting_c);
@@ -492,7 +510,7 @@ class Meetings_Hooks
                 if ($beanUserPadre->puestousuario_c!='27'){
                     $saveproductos=array();
                     $valorinicial=$beanparentmeeting->productos_c;
-                    $GLOBALS['log']->fatal($valorinicial);
+                    //$GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
                     if ($valorinicial==""){
                         $beanparentmeeting->productos_c =$bean->productos_c;
                         $valorinicial=$beanparentmeeting->productos_c;
@@ -502,27 +520,15 @@ class Meetings_Hooks
                     $saveproductos=explode(",", $beanparentmeeting->productos_c);
                     $valoresunicos=array_unique($saveproductos);
                     $valorupdate=implode(",",$valoresunicos);
-                    $GLOBALS['log']->fatal($valorupdate);
-                    $GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
+                    //$GLOBALS['log']->fatal("Valor update: '.$valorupdate.'");
+                    //$GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
 
                     $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
-
-                    if ($valorinicial!=$valorupdate){
-                        global $db;
-                        //Actualiza el valor al campo productos_c de la reunion Padre.
-                        $GLOBALS['log']->fatal("Actualiza el valor de valor update al campo Productos_C");
-                        $GLOBALS['log']->fatal($valorupdate);$GLOBALS['log']->fatal($valorupdate);
-                        $actualizaproductos="UPDATE meetings_cstm set productos_c='{$valorupdate}'
-                          where id_c='{$beanparentmeeting->id}';";
-                        $updateResult=$db->query($actualizaproductos);
-
-                    }
-
                 }
 
             }
         }
 
     }
-    
+
 }
