@@ -307,3 +307,4 @@ $mod_strings['LBL_CUENTA_PRODUCTOS'] = 'Tipo de Cuenta por Producto';
 $mod_strings['LBL_POTENCIAL_AUTOS'] = 'Potencial Autos';
 $mod_strings['LBL_TCT_NO_CONTACTAR_CHK'] = 'No contactar';
 $mod_strings['LNK_CUENTAS_NO_CONTACTAR'] = 'Cuentas No contactar';
+$mod_strings['LBL_ID_UNICLICK'] = 'Id Cliente Uniclick';
