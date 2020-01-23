@@ -1184,7 +1184,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $queryResult = $db->getOne($query);
         if ($queryResult > 0) {
             require_once 'include/api/SugarApiException.php';
-            throw new SugarApiExceptionError("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
+            throw new SugarApiExceptionEditConflict("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
         }
       }
     }
