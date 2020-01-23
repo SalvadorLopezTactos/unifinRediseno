@@ -3,14 +3,19 @@
 
     initialize: function(options) {
         this._super('initialize', [options]);
-        console.log('DESDE CUSTOM SELECTION-LIST_USERS');
+        $(document).on('keyup', _.bind(this.keyupfun, this));
         //para validación
         //options.context.parent.get('module');
     },
 
+    keyupfun: function(evt) {
+      if(evt.keyCode == 27 && $('input[value="filterSubpuestoTemplate"]').val()=='filterSubpuestoTemplate'){
+        app.drawer.close();
+      }
+    },
+        
     _render: function (options) {
         this._super("_render");
-
         if(this.context.parent.get('module')=='Meetings' && ($('input[value="filterAgentesTelefonicosTemplate"]').val()=='filterAgentesTelefonicosTemplate' || $('input[value="filterSubpuestoTemplate"]').val()=='filterSubpuestoTemplate')){
             //Ocultando ícono que elimina filtro
             $('.choice-filter-close').hide();
