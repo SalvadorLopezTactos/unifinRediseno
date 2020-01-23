@@ -379,7 +379,7 @@ class Meetings_Hooks
 
       $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
       if ($beanUser->tipodeproducto_c!='27') {
-          $GLOBALS['log']->fatal("Actualiza valor campo Producto--");
+          //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
           $actualizaproductos = "update meetings_cstm inner join
                 (select parent_meeting_c id, group_concat( distinct productos_c) productos
                 from meetings_cstm
@@ -393,7 +393,7 @@ class Meetings_Hooks
                 where parentM.productos !=''
                 and users_cstm.puestousuario_c='27';";
           $updateResult = $db->query($actualizaproductos);
-          $GLOBALS['log']->fatal($actualizaproductos);
+          //$GLOBALS['log']->fatal($actualizaproductos);
       }
   }
 
@@ -510,7 +510,7 @@ class Meetings_Hooks
                 if ($beanUserPadre->puestousuario_c!='27'){
                     $saveproductos=array();
                     $valorinicial=$beanparentmeeting->productos_c;
-                    $GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
+                    //$GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
                     if ($valorinicial==""){
                         $beanparentmeeting->productos_c =$bean->productos_c;
                         $valorinicial=$beanparentmeeting->productos_c;
@@ -520,8 +520,8 @@ class Meetings_Hooks
                     $saveproductos=explode(",", $beanparentmeeting->productos_c);
                     $valoresunicos=array_unique($saveproductos);
                     $valorupdate=implode(",",$valoresunicos);
-                    $GLOBALS['log']->fatal("Valor update: '.$valorupdate.'");
-                    $GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
+                    //$GLOBALS['log']->fatal("Valor update: '.$valorupdate.'");
+                    //$GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
 
                     $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
                 }
