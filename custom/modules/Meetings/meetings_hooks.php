@@ -380,18 +380,19 @@ class Meetings_Hooks
       $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
       if ($beanUser->tipodeproducto_c!='27') {
           //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
-          $actualizaproductos = "update meetings_cstm inner join
-                (select parent_meeting_c id, group_concat( distinct productos_c) productos
-                from meetings_cstm
-                where producto_c is not null
-                and parent_meeting_c =''
-                group by parent_meeting_c
-                ) parentM on parentM.id = meetings_cstm.id_c
-                inner join meetings on meetings.id = meetings_cstm.id_c
-                inner join users_cstm on users_cstm.id_c = meetings.assigned_user_id
-                set meetings_cstm.productos_c = parentM.productos
-                where parentM.productos !=''
-                and users_cstm.puestousuario_c='27';";
+          $actualizaproductos = "update meetings_cstm
+                        inner join
+                        (select
+                        parent_meeting_c id,
+                          group_concat( distinct productos_c) productos
+                        from meetings_cstm
+                        where productos_c is not null
+                        and parent_meeting_c='{$bean->id}'
+                        group by parent_meeting_c
+                        ) parentM on parentM.id = meetings_cstm.id_c
+                        set meetings_cstm.productos_c = parentM.productos
+                        where parentM.productos !=''
+                        ;";
           $updateResult = $db->query($actualizaproductos);
           //$GLOBALS['log']->fatal($actualizaproductos);
       }
