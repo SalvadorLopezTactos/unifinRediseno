@@ -222,9 +222,12 @@ SITE;
 
     public function existLeadAccount($bean_lead)
     {
+        $accounts_bean=BeanFactory::getBean('Accounts');
+        $accounts_bean->disable_row_level_security = true;
+
         $sql = new SugarQuery();
         $sql->select(array('id', 'clean_name'));
-        $sql->from(BeanFactory::newBean('Accounts'));
+        $sql->from($accounts_bean);
         $sql->where()->equals('clean_name', $bean_lead->clean_name_c);
         $sql->where()->notEquals('id', $bean_lead->id);
 
