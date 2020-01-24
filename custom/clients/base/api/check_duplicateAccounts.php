@@ -58,6 +58,8 @@ class check_duplicateAccounts extends SugarApi
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
+                 $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting,true));
+
 
                 if ($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) {
                     /** Creamos la Cuenta */
@@ -93,7 +95,10 @@ SITE;
                 } else {
                     //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
                     // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
-                    $finish = array("idCuenta" => "", "mensaje" => "El proceso no puede continuar. Falta al menos una Reunión Planificada");
+                    $msj_reunion = <<<SITE
+                        El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
+SITE;
+                    $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 
                 }
 
@@ -217,9 +222,12 @@ SITE;
 
     public function existLeadAccount($bean_lead)
     {
+        $accounts_bean=BeanFactory::getBean('Accounts');
+        $accounts_bean->disable_row_level_security = true;
+
         $sql = new SugarQuery();
         $sql->select(array('id', 'clean_name'));
-        $sql->from(BeanFactory::newBean('Accounts'));
+        $sql->from($accounts_bean);
         $sql->where()->equals('clean_name', $bean_lead->clean_name_c);
         $sql->where()->notEquals('id', $bean_lead->id);
 
@@ -229,7 +237,7 @@ SITE;
 
     public function getMeetingsUser($beanL)
     {
-        $procede = array("status" => "stop", "data" => array("LEASING" => "", 'CREDITO AUTOMOTRIZ' => "", "FACTORAJE" => "", "FLEET" => ""));
+        $procede = array("status" => "stop", "data" => array());
         if ($beanL->load_relationship('meetings')) {
             $relatedBeans = $beanL->meetings->getBeans();
 
