@@ -2288,8 +2288,8 @@ console.log(name);
     },
 
     ConficionFinancieraFormat: function(fields, errors, callback){
-        if (solicitud_cf.oFinanciera != undefined) {
-            if (solicitud_cf.oFinanciera.condicion.length > 0) {
+        if (solicitud_cf.oFinanciera !=undefined) {
+            if (solicitud_cf.oFinanciera.condicion.length>0) {
                 //Valida formato de los campos del objeto oFinanciera.condicion. Deben cumplir con la expreg
                 var formato = 0;
                 for (var i = 0; i < solicitud_cf.oFinanciera.condicion.length; i++) {
@@ -2341,8 +2341,8 @@ console.log(name);
     },
 
     ConficionFinancieraRIFormat: function(fields, errors, callback) {
-        if (contRI.oFinancieraRI != undefined) {
-            if (contRI.oFinancieraRI.ratificacion.length > 0) {
+        if (contRI.oFinancieraRI!=undefined){
+            if (contRI.oFinancieraRI.ratificacion.length>0) {
                 //Valida formato de los campos del objeto oFinancieraRI.ratificacion. Deben cumplir con la expreg
                 var formato = 0;
                 for (var i = 0; i < contRI.oFinancieraRI.ratificacion.length; i++) {
