@@ -150,7 +150,7 @@
         if (!exp.test(numero)) {
             input.val("");
             input.css('border-color', 'red');
-            app.alert.show('error_formatonum_CF', {
+            app.alert.show('error_formatonumero_CF', {
                 level: 'error',
                 autoClose: false,
                 messages: 'Sólo números son permitidos.'
@@ -254,7 +254,7 @@
                     $('.newRentaInicialMaxima').css('border-color', 'red');
                 }
                 if (formato > 0) {
-                    app.alert.show('Campos_sin_formato_adecuado', {
+                    app.alert.show('Campos_sin_formato_adecuado_CF', {
                         level: 'error',
                         autoClose: false,
                         messages: "Alguno de los campos a agregar no cumple con el formato.<br>Sólo números son permitidos."
