@@ -52,9 +52,10 @@ class check_duplicateAccounts extends SugarApi
 
         $result = $this->existLeadAccount($bean);
         $count = count($result);
+        $GLOBALS['log']->fatal("existencia" . print_r($result, true));
+
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
-                //  $GLOBALS['log']->fatal("No existe Busco almenos una reunion en planificada");
 
                 $responsMeeting = $this->getMeetingsUser($bean);
 
@@ -62,7 +63,7 @@ class check_duplicateAccounts extends SugarApi
                     /** Creamos la Cuenta */
                     // $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
 
-                    $bean_account = $this->createAccount($bean, $responsMeeting,false);
+                    $bean_account = $this->createAccount($bean, $responsMeeting, false);
 
                     // $GLOBALS['log']->fatal("Cuenta Creada--- " . $bean_account->id);
 
@@ -97,16 +98,46 @@ SITE;
                 }
 
             } elseif ($count > 0) {
-                // $Accountsexists = true;
-                // $GLOBALS['log']->fatal("Cuenta encontrada ");
-                // throw new SugarApiExceptionInvalidParameter($msjExiste);
-                $finish = array("idCuenta" => "", "mensaje" => $msjExiste);
+
+                /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
+                $id_account = $result[0]['id'];
+                $responsMeeting = $this->getMeetingsUser($bean);
+                $GLOBALS['log']->fatal("usuarios en Lead  " . print_r($responsMeeting, true));
+
+                if($responsMeeting['status']=='continue')
+                {
+                    $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
+
+
+                    $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
+                        || $beanAccountExist->user_id_c == "")&& $responsMeeting['data']['LEASING']!="") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
+
+                    $beanAccountExist->user_id1_c = (($beanAccountExist->user_id1_c == "569246c7-da62-4664-ef2a-5628f649537e"
+                        || $beanAccountExist->user_id1_c == "")&&$responsMeeting['data']['FACTORAJE']!="" )? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
+
+                    $beanAccountExist->user_id2_c = (($beanAccountExist->user_id2_c == "569246c7-da62-4664-ef2a-5628f649537e"
+                        || $beanAccountExist->user_id2_c == "")&&$responsMeeting['data']['CREDITO AUTOMOTRIZ']!="") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
+
+                    $beanAccountExist->user_id6_c = (($beanAccountExist->user_id6_c == "569246c7-da62-4664-ef2a-5628f649537e"
+                        || $beanAccountExist->user_id6_c == "")&&$responsMeeting['data']['FLEET']!="") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
+                    $beanAccountExist->save();
+
+                }
+
+                $bean-> subtipo_registro_c = "4";
+                $bean->save();
+                $msj_succes_duplic = <<<SITE
+                        Los Asesores han sido actualizados en la cuenta <br>
+<b></b><a href="$url/#Accounts/$beanAccountExist->id">$beanAccountExist->name</a></b>
+SITE;
+                $finish = array("idCuenta" => $beanAccountExist->id, "mensaje" => $msj_succes_duplic);
 
 
             }
 
         } else {
             $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
+
 
         }
         return $finish;
@@ -119,10 +150,10 @@ SITE;
         if ($rel) {
             $bean_account->subtipo_cuenta_c = "";
             $bean_account->tipo_registro_c = "Persona";
-            $bean_account->user_id_c =  "569246c7-da62-4664-ef2a-5628f649537e" ;
-            $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e" ;
-            $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e" ;
-            $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e" ;
+            $bean_account->user_id_c = "569246c7-da62-4664-ef2a-5628f649537e";
+            $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
+            $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
+            $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
 
         } else {
             $bean_account->subtipo_cuenta_c = "En Calificacion";
@@ -275,7 +306,7 @@ SITE;
 
                     } else {
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
-                        $cuenta = $this->createAccount($lead, null,true);
+                        $cuenta = $this->createAccount($lead, null, true);
                         if (!empty($cuenta->id)) {
                             $this->create_relationship($bean_account, $cuenta->id);
                             array_push($resultado['data'], $cuenta->id);
