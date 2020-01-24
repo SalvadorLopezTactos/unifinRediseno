@@ -202,10 +202,14 @@
     /* @Salvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
     */
-    /*
+    
     disableparentsfields:function () {
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-        $('.record-cell[data-type="relate"]').removeAttr("style");
+        //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
+        //$('.record-cell[data-type="relate"]').removeAttr("style");
+		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
+			//Oculta Check ayuda
+			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+        }
     },
-     */
+     
 })
