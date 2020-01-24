@@ -150,7 +150,7 @@
         if (!exp.test(numero)) {
             input.val("");
             input.css('border-color', 'red');
-            app.alert.show('error_formatonum_CFRI', {
+            app.alert.show('error_formatonumero_CFRI', {
                 level: 'error',
                 autoClose: false,
                 messages: 'Sólo números son permitidos.'
@@ -254,7 +254,7 @@
                     $('.new_incremento_RentaInicialMaxima').css('border-color', 'red');
                 }
                 if (formato > 0) {
-                    app.alert.show('Campos_sin_formato_adecuado_RI', {
+                    app.alert.show('Campos_sin_formato adecuado_RI', {
                         level: 'error',
                         autoClose: false,
                         messages: "Alguno de los campos a agregar no cumple con el formato.<br>Sólo números son permitidos."
