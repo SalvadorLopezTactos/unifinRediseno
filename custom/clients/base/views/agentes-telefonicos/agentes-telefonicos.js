@@ -137,9 +137,13 @@
                 title: "Actualizando usuario(s), por favor espere.",
                 autoClose: false
             });
-            var idagente = agentes.listausuarios[i].id;
-            var valUrl = app.api.buildURL("Users/" + idagente);
-            app.api.call("update", valUrl, {'reports_to_id':agentes.listausuarios[i].reports_to_id, 'equipo_c':agentes.listausuarios[i].equipo_c}, {
+            var at_options = {
+              user_id: agentes.listausuarios[i].id,
+              reports_to_id: agentes.listausuarios[i].reports_to_id,
+              equipo_c: agentes.listausuarios[i].equipo_c,
+            };
+            var Url = app.api.buildURL("AgentesTelefonicos", '', {}, {});
+            app.api.call("create", Url, {data: at_options}, {
               success: _.bind(function (data) {
                 app.alert.dismiss('alerta_update');
                 app.alert.show("Confirmacion_agentes", {

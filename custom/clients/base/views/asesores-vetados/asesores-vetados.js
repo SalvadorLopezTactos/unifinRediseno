@@ -180,9 +180,12 @@
             var actual = 0;
             for (var i = 0; i < vetados.listausuarios.length; i++) {
                 if (vetados.listausuarios[i].vetados_chk_c != vetados.listausuarios_previo[i].vetados_chk_c) {
-                    var idvetado = vetados.listausuarios[i].id;
-                    var valUrl = app.api.buildURL("Users/" + idvetado);
-                    app.api.call("update", valUrl, {'vetados_chk_c': vetados.listausuarios[i].vetados_chk_c}, {
+                    var av_options = {
+                      user_id: vetados.listausuarios[i].id,
+                      vetados_chk_c: vetados.listausuarios[i].vetados_chk_c,
+                    };
+                    var Url = app.api.buildURL("AsesoresVetados", '', {}, {});
+                    app.api.call("create", Url, {data: av_options}, {
                         success: _.bind(function (data) {
                             actual++;
                             if (actual == totalvetados) {
