@@ -7,57 +7,127 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
+        this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
         this._readonlyFields();
         this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
+        this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
+        this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+    },
+
+    expmail: function (fields, errors, callback) {
+        if (this.model.get('email') != null && this.model.get('email') != "") {
+
+            var input = (this.model.get('email'));
+            var expresion = /^\S+@\S+\.\S+[$%&|<>#]?$/;
+            var cumple = true;
+
+            for (i = 0; i < input.length; i++) {
+
+                if (expresion.test(input[i].email_address) == false) {
+                    cumple = false;
+
+                }
+            }
+
+            if (cumple == false) {
+                app.alert.show('Error al validar email', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: '<b>Formato de Email Incorrecto.</b>'
+                })
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
+    checkTextOnly: function (fields, errors, callback) {
+        app.alert.dismiss('Error_validacion_Campos');
+        var camponame = "";
+        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+
+        if (this.model.get('nombre_c') != "" && this.model.get('nombre_c') != undefined) {
+            var nombre = this.model.get('nombre_c');
+            var comprueba = expresion.test(nombre);
+            if (comprueba != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+                errors['nombre_c'] = errors['nombre_c'] || {};
+                errors['nombre_c'].required = true;
+            }
+        }
+        if (this.model.get('apellido_paterno_c') != "" && this.model.get('apellido_paterno_c') != undefined) {
+            var apaterno = this.model.get('apellido_paterno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            var validaap = expresion.test(apaterno);
+            if (validaap != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
+                errors['apellido_paterno_c'].required = true;
+            }
+        }
+        if (this.model.get('apellido_materno_c') != "" && this.model.get('apellido_materno_c') != undefined) {
+            var amaterno = this.model.get('apellido_materno_c');
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            var validaam = expresion.test(amaterno);
+            if (validaam != true) {
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+                errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
+                errors['apellido_materno_c'].required = true;
+            }
+        }
+        if (camponame) {
+            app.alert.show("Error_validacion_Campos", {
+                level: "error",
+                messages: 'Los siguientes campos no permiten Caracteres Especiales y Números:<br>' + camponame,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 
     validaLongDupTel: function (fields, errors, callback) {
 
-        if (this.model.get('phone_mobile') != "" || this.model.get('phone_home') != "" || this.model.get('phone_work') != "") {
+        if ((this.model.get('phone_mobile') != "" && this.model.get('phone_mobile') != undefined) || (this.model.get('phone_home') != "" && this.model.get('phone_home') != undefined) || (this.model.get('phone_work') != "" && this.model.get('phone_work') != undefined)) {
 
             var phoneMobile = this.model.get('phone_mobile') != "" ? this.validaTmanoRepetido(this.model.get('phone_mobile')) : false;
             var phoneHome = this.model.get('phone_home') != "" ? this.validaTmanoRepetido(this.model.get('phone_home')) : false;
             var phoneWork = this.model.get('phone_work') != "" ? this.validaTmanoRepetido(this.model.get('phone_work')) : false;
 
             /***********************Valida Longitud y Carácteres repetidos********************/
+            num_errors = 0;
             if (phoneMobile) {
-                app.alert.show("Mobile-invalido", {
-                    level: "error",
-                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
-                    autoClose: false
-                });
-
+                num_errors = num_errors + 1;
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
             }
             if (phoneHome) {
-                app.alert.show("Home-invalido", {
-                    level: "error",
-                    title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
-                    autoClose: false
-                });
-
+                num_errors = num_errors + 1;
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
             }
             if (phoneWork) {
-                app.alert.show("Work-invalido", {
+                num_errors = num_errors + 1;
+                errors['phone_work'] = errors['phone_work'] || {};
+                errors['phone_work'].required = true;
+            }
+
+            if (num_errors > 0) {
+                app.alert.show("Num-invalido", {
                     level: "error",
                     title: "El teléfono debe contener entre 8-13 números / Contiene carácteres repetidos",
                     autoClose: false
                 });
-
-                errors['phone_work'] = errors['phone_work'] || {};
-                errors['phone_work'].required = true;
             }
 
             /************************* Valida duplciados ******************************/
 
             duplicado = 0;
-            if (this.model.get('phone_mobile') == this.model.get('phone_home') && this.model.get('phone_mobile') != "" && this.model.get('phone_home') != "") {
+            if (this.model.get('phone_mobile') == this.model.get('phone_home') && this.model.get('phone_mobile') != undefined && this.model.get('phone_home') != undefined) {
                 duplicado = duplicado + 1;
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -65,7 +135,7 @@
                 errors['phone_home'].required = true;
 
             }
-            if (this.model.get('phone_mobile') == this.model.get('phone_work') && this.model.get('phone_mobile') != "" && this.model.get('phone_work') != "") {
+            if (this.model.get('phone_mobile') == this.model.get('phone_work') && this.model.get('phone_mobile') != undefined && this.model.get('phone_work') != undefined) {
                 duplicado = duplicado + 1;
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -73,7 +143,7 @@
                 errors['phone_work'].required = true;
 
             }
-            if (this.model.get('phone_home') == this.model.get('phone_work') && this.model.get('phone_home') != "" && this.model.get('phone_work') != "") {
+            if (this.model.get('phone_home') == this.model.get('phone_work') && this.model.get('phone_home') != undefined && this.model.get('phone_work') != undefined) {
                 duplicado = duplicado + 1;
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
@@ -89,11 +159,11 @@
                     autoClose: false
                 });
             }
-            callback(null, fields, errors);
         }
+        callback(null, fields, errors);
     },
 
-    validaTmanoRepetido(telefono) {
+    validaTmanoRepetido: function (telefono) {
         requerido = false;
 
         if (telefono != "" && telefono != undefined) {
@@ -128,6 +198,14 @@
 
         } else {
             return true;
+        }
+    },
+
+    _subMotivoCancelacion: function () {
+
+        if (!this.model.get('lead_cancelado_c')) {
+
+            this.model.set('motivo_cancelacion_c', '');
         }
     },
 
@@ -168,6 +246,12 @@
                 errors['origen_c'] = errors['origen_c'] || {};
                 errors['origen_c'].required = true;
             }
+            if (this.model.get('detalle_origen_c') == '' || this.model.get('detalle_origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_DETALLE_ORIGEN", "Leads") + '</b><br>';
+                errors['detalle_origen_c'] = errors['detalle_origen_c'] || {};
+                errors['detalle_origen_c'].required = true;
+            }
 
             if (requerido > 0) {
                 app.alert.show("Campos Requeridos", {
@@ -188,6 +272,12 @@
                 campos = campos + '<b>' + app.lang.get("LBL_ORIGEN", "Leads") + '</b><br>';
                 errors['origen_c'] = errors['origen_c'] || {};
                 errors['origen_c'].required = true;
+            }
+            if (this.model.get('detalle_origen_c') == '' || this.model.get('detalle_origen_c') == null) {
+                requerido = requerido + 1;
+                campos = campos + '<b>' + app.lang.get("LBL_DETALLE_ORIGEN", "Leads") + '</b><br>';
+                errors['detalle_origen_c'] = errors['detalle_origen_c'] || {};
+                errors['detalle_origen_c'].required = true;
             }
             if (this.model.get('macrosector_c') == '' || this.model.get('macrosector_c') == null) {
                 requerido = requerido + 1;
@@ -212,12 +302,6 @@
                 campos = campos + '<b>' + app.lang.get("LBL_ZONA_GEOGRAFICA_C", "Leads") + '</b><br>';
                 errors['zona_geografica_c'] = errors['zona_geografica_c'] || {};
                 errors['zona_geografica_c'].required = true;
-            }
-            if (this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) {
-                requerido = requerido + 1;
-                campos = campos + '<b>' + app.lang.get("LBL_MOBILE_PHONE", "Leads") + '</b><br>';
-                errors['phone_mobile'] = errors['phone_mobile'] || {};
-                errors['phone_mobile'].required = true;
             }
             if (this.model.get('email') == '' || this.model.get('email') == null) {
                 requerido = requerido + 1;
@@ -279,7 +363,7 @@
                 (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) {
 
                 requerido = requerido + 1;
-                campos = campos + '<b>' + 'Al menos un teléfono' + '</b><br>';
+                campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
 
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
@@ -346,8 +430,21 @@
 
     _readonlyFields: function () {
         var self = this;
-
+        /***************************READONLY PARA SUBTIPO DE LEAD CANCELADO**************************/
         if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
+
+            var editButton = self.getField('edit_button');
+            editButton.setDisabled(true);
+
+            _.each(this.model.fields, function (field) {
+
+                self.noEditFields.push(field.name);
+                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+            });
+        }
+        /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
+        if (this.model.get('subtipo_registro_c') == '4') {
 
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
