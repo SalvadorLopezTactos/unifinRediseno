@@ -135,7 +135,7 @@ class leads_validateString
             //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
             $sql = new SugarQuery();
             $sql->select(array('id', 'clean_name'));
-            $sql->from(BeanFactory::newBean('Accounts'));
+            $sql->from(BeanFactory::newBean('Accounts'),array('team_security' => false));
             $sql->where()->equals('clean_name', $bean->clean_name_c);
             $sql->where()->notEquals('id', $bean->id);
 
@@ -145,7 +145,7 @@ class leads_validateString
             $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
             $sqlLead = new SugarQuery();
             $sqlLead->select(array('id', 'clean_name_c'));
-            $sqlLead->from(BeanFactory::newBean('Leads'));
+            $sqlLead->from(BeanFactory::newBean('Leads'),array('team_security' => false));
             $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
             $sqlLead->where()->notEquals('id', $bean->id);
             $resultLead = $sqlLead->execute();
