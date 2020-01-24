@@ -605,7 +605,7 @@
 						if (requerido > 0){
 							app.alert.show("Campos Requeridos en Leads", {
 							level: "error",
-							messages: 'Hace falta completar la siguiente información en el <b>Lead</b> <br> '+texto,
+							messages: 'Hace falta completar la siguiente información en el <b>Lead</b>: <br> '+texto,
 							autoClose: false
 							});
 							callback(null, fields, errors);
