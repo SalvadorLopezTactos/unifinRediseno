@@ -94,8 +94,7 @@ class exportLeadsCSV extends SugarApi
         $fecha = date("Y - m - d H:i:s");
         $nameLoad = $args['name_load'];
 
-        $query = "SELECT nombre_c,apellido_paterno_c,apellido_materno_c,nombre_empresa_c,regimen_fiscal_c,tipo_registro_c,
-  subtipo_registro_c,e.email_address email,l.phone_mobile,l.phone_work,l.phone_home,origen_c,macrosector_c,potencial_lead_c,ventas_anuales_c,
+        $query = "SELECT nombre_c,apellido_paterno_c,apellido_materno_c,nombre_empresa_c,regimen_fiscal_c,e.email_address email,l.phone_mobile,l.phone_work,l.phone_home,origen_c,macrosector_c,potencial_lead_c,ventas_anuales_c,
   zona_geografica_c,puesto_c, nombre_de_cargar_c,assigned_user_id,
   concat(u.first_name , ' ' , u.last_name) assigned_user_name
 FROM leads l
@@ -114,7 +113,7 @@ FROM leads l
 
         $fp = fopen($csvfile, 'w');
 
-        $csvHeader = "Nombre(s),Apellido Paterno,Apellido Materno,Nombre Empresa,Régimen Fiscal,Tipo de Lead,Subtipo de Lead,Correo Electrónico,Móvil,Teléfono de Oficina,Teléfono de casa,Origen,Macro Sector,Potencial de Lead,Ventas Anuales,Zona geográfica,Puesto,Nombre de la Cargar,ID de Usuario asignado,Nombre de Usuario Asignado";
+        $csvHeader = "Nombre(s),Apellido Paterno,Apellido Materno,Nombre Empresa,Régimen Fiscal,Correo Electrónico,Móvil,Teléfono de Oficina,Teléfono de casa,Origen,Macro Sector,Potencial de Lead,Ventas Anuales,Zona geográfica,Puesto,Nombre de la Cargar,ID de Usuario asignado,Nombre de Usuario Asignado";
         $csvHeader .= "\n";
 
         if ($fp) {
