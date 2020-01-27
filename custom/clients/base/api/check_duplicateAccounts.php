@@ -194,6 +194,8 @@ SITE;
         $bean_account->zonageografica_c = $bean_Leads->zona_geografica_c;
         $bean_account->puesto_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
+        $bean_account->clean_name = $bean_Leads->clean_name_c;
+
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
@@ -201,7 +203,6 @@ SITE;
             $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
             $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
         }
-
 
         $bean_account->save();
         // creamos las relaciones en telefono
