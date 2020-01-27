@@ -349,7 +349,7 @@ SITE;
         $bean_relacion->rel_relaciones_accounts_1_name = $id_parent->name;
         $bean_relacion->relaciones_activas = "^Contacto^";
         $bean_relacion->account_id1_c = $idAccount; // cuenta hijo
-        $bean_relacion->tipodecontacto = "PROMOCION";
+        $bean_relacion->tipodecontacto = "Promocion";
         $bean_relacion->save();
 
     }
