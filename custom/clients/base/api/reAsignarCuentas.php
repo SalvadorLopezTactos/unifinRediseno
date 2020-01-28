@@ -46,6 +46,8 @@ class reAsignarCuentas extends SugarApi
                 $user_field = "user_id2_c"; //user_id2_c = promotorcredit_c
             } else if ($product == "FLEET") {
                 $user_field = "user_id6_c";
+            } else if ($product == "UNICLICK") {
+                $user_field = "user_id7_c";
             }
 
 
@@ -74,8 +76,9 @@ class reAsignarCuentas extends SugarApi
                         case 'FLEET':
                             $account->user_id6_c = $reAsignado;
                             break;
-                        default:
-                            $account->user_id_c = $reAsignado;
+                        case 'UNICLICK':
+                            $account->user_id7_c = $reAsignado;
+                            break;
                     }
 
                     $account->save();
@@ -131,6 +134,7 @@ class reAsignarCuentas extends SugarApi
                     if($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
                     if($product == 'FACTORAJE') $producto = 4;
                     if($product == 'FLEET') $producto = 6;
+                    if($product == 'UNICLICK') $producto = 8;
                     $query = <<<SQL
 UPDATE opportunities
 INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
@@ -199,7 +203,7 @@ SQL;
 select CASE WHEN idcliente_c > 0 THEN idcliente_c ELSE 0 END idCliente from accounts_cstm where id_c = '{$value}'
 SQL;
                     $idCliente = $db->getone($query);
-
+                    //Peticiones para actualizar uni2
                     if (intval($idCliente) > 0){
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  Se sincronizaran promtores con UNICS " );
                         if ($product == "LEASING") {
