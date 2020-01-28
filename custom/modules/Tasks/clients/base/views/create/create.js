@@ -27,6 +27,13 @@
                 this.$('[data-name="parent_name"]').attr('style','pointer-events:none;')
             }
         }
+		
+		
+		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
+			//Oculta Check ayuda
+			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+        }
+        
     },
 
     valida_cuenta_no_contactar:function (fields, errors, callback) {

@@ -451,11 +451,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'estatus_persona_c',
-                'label' => 'LBL_ESTATUS_PERSONA',
+                'name' => 'id_uniclick_c',
+                'label' => 'LBL_ID_UNICLICK',
               ),
               1 => 
               array (
+                'name' => 'estatus_persona_c',
+                'label' => 'LBL_ESTATUS_PERSONA',
               ),
               2 => 
               array (

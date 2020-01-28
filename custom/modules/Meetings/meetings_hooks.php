@@ -26,8 +26,11 @@ class Meetings_Hooks
     * 3.- Tiene cuenta asociada
     * 4.- No es reunión de repetición
     */
+	/*********************
+	Se agrega la validación para accounts y leads
+	***********************************/
     //&& empty($bean->repeat_parent_id)
-    if ($args['relationship'] == 'meetings_users' && $bean->assigned_user_id != $args['related_id'] && $bean->parent_type == 'Accounts' && !empty($bean->parent_id) )
+    if ($args['relationship'] == 'meetings_users' && $bean->assigned_user_id != $args['related_id'] && !empty($bean->parent_id) && ($bean->parent_type == 'Accounts' || $bean->parent_type == 'Leads') )
     {
       $GLOBALS['log']->fatal('TCT - RelationAdd - :' .$args['related_module']);
       //Genera petición para crear reunión
@@ -51,7 +54,7 @@ class Meetings_Hooks
     }
 
     //Genera reuniones para usuarios cuando la cuenta se agrega
-    if($args['relationship'] == 'account_meetings' && $args['module'] == 'Meetings' && $args['related_module'] == 'Accounts' && empty($bean->parent_meeting_c))
+    if($args['relationship'] == 'account_meetings' && $args['module'] == 'Meetings' && empty($bean->parent_meeting_c) && ($args['related_module'] == 'Accounts' || $args['related_module'] == 'Leads') )
     {
       //consulta usuarios asociados a reunión
       global $db;
@@ -346,15 +349,25 @@ class Meetings_Hooks
           $reunionInvitado->{$field} = $bean->{$field};
         }
       }
-      //Agrega valores y guarda reunión
-      $reunionInvitado->parent_meeting_c = $bean->id;
-      $reunionInvitado->created_by = $current_user->id;
+	 
+	 //Agrega valores y guarda reunión
+	  $reunionInvitado->parent_meeting_c = $bean->id;
+	  $reunionInvitado->created_by = $current_user->id;
       $reunionInvitado->modified_user_id = $current_user->id;
       $reunionInvitado->assigned_user_id = $idUsuario;
       $reunionInvitado->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       $reunionInvitado->reunion_objetivos = $bean->reunion_objetivos;
       $reunionInvitado->status = 'Planned';
       $reunionInvitado->save();
+	  
+	  /******************
+	  En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
+	  ****************/
+		if ($reunionInvitado->parent_type == 'Leads'){
+			$reunionInvitado->load_relationship('leads');
+			$reunionInvitado->leads->add($reunionInvitado->parent_id);
+		}
+	
       //Agrega objetivos
       if($bean->load_relationship('meetings_minut_objetivos_1')) {
         $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
@@ -369,7 +382,7 @@ class Meetings_Hooks
         }
       }
     }
-
+	
     //Elimina usuario de reunión original
     $update = "update meetings_users SET deleted = 1
                 where meeting_id = '{$bean->id}'

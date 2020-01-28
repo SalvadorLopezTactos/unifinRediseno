@@ -1186,5 +1186,20 @@ where rfc_c = '{$bean->rfc_c}' and
         }
 
     }
+    public function idUniclick($bean=null, $event= null, $args= null){
+      //Valida que no exista id uniclick duplicado
+      global $db;
+      if(!empty($bean->id_uniclick_c) && $bean->id!=""){
+        //Consulta id_uniclick_c
+        $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
+            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}'";
+        //Ejecuta consulta
+        $queryResult = $db->query($query);
+        while ($row = $db->fetchByAssoc($queryResult)) {
+          require_once 'include/api/SugarApiException.php';
+          throw new SugarApiExceptionInvalidParameter("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
+        }
+      }
+    }
 
 }

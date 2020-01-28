@@ -1,0 +1,179 @@
+{{#if this.loadView}}
+
+    <style xmlns="http://www.w3.org/1999/html">
+        .container {
+            overflow-y: auto;
+            display: table;
+            width: 100%;
+
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        .leadsContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        /*Loading page*/
+        .jm-loadingpage {
+            /*position: fixed; */
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 999999999;
+            background: url('http://localhost/unifinRediseno/custom/include/images/loading-13.gif') 50% 50% no-repeat;
+            opacity: .8;
+            background-size: 20%;
+        }
+
+        /*Loading page*/
+        .leads {
+            display: table;
+            width: 90%;
+        }
+        .single:hover {
+            background-color: #f7f8f9;
+           /* background-color: #e4e9ed; */
+            font-size:22px;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <div class="container">
+        <!--   <h1 id="containerHeader" align="left">Reporte de Importaciones de Leads </h1> -->
+        <hr style="margin: 5px">
+
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 95%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+                        &nbsp; Reporte de Importaciones de Leads
+                    </p>
+                </h1>
+            </div>
+        </div>
+
+        <div class="record row-fluid panel_body">
+            <div class="span6 record-cell">
+                <div class="record-label">Nombre de la Carga</div>
+                <span>
+                <span>
+                    <select id="CargaLeads" style="width: 70%;">{{{carga_list}}} </select>
+                </span>
+               </span>
+
+            </div>
+            <div class="span3 record-cell">
+
+            </div>
+            <in class="span3 record-cell">
+                {{#if leads_temp}}
+                    <button class="btn btn-primary" type="submit"  id="btn_Duplicados" ><i class=" fa fa-download"style="padding-right: 2px"/> Exportar Duplicados</button>
+
+                {{/if}}
+            </div>
+        </div> <!--Fin de panel_body -->
+
+        <!-- Tabla Leads -->
+        <div class="leadsContainer ">
+            {{#if leads_temp}}
+                <table class="leads tcenter" align="center" border="1">
+                    <tr style="background-color: #e4e9ed">
+                        <th width="20%">NOMBRE</th>
+                        <th width="10%">RÉGIMEN FISCAL</th>
+                        <th width="15%">TIPO</th>
+                        <th width="15%">SUBTIPO</th>
+                        <th width="20%">NOMBRE DE CARGA</th>
+                        <th width="20%">RESULTADO DE CARGA</th>
+                    </tr>
+                    {{#each leads_temp}}
+                        <tr class='single'>
+                            {{#if isFisica}}
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_c}} {{apellido_paterno_c}} {{apellido_materno_c}}</span>
+                          </div>
+                    </span>
+                                </td>
+                            {{else}}
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_empresa_c}}</span>
+                          </div>
+                    </span>
+                                </td>
+
+                            {{/if}}
+
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{regimen_fiscal_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_registro_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{subtipo_registro_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_de_cargar_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{resultado_de_carga_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    <tr>
+                        <td colspan="5"></td>
+                        <td>
+                            <div class="btn-group  btn-pagination" >
+                                <a class="btn fa fa-caret-left" id="previous_offset"></a>
+                                <a class="btn disabled" id="offset_value" from_set="" to_set=""
+                                   total="{{../total_page}}"></a>
+                                <a class="btn fa fa-caret-right" id="next_offset"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            {{else}}
+                <div class="block-footer">
+                        {{str "LBL_NO_DATA_AVAILABLE"}}
+                </div>
+            {{/if}}
+
+
+        </div> <!-- Fin containerLeads -->
+    </div> <!--Fin Container -->
+
+
+{{/if}}
