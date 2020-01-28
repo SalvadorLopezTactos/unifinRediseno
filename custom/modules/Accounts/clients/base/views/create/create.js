@@ -278,10 +278,9 @@
 
             this.model.set("tipo_registro_c", 'Proveedor');
         }
-        if (App.user.attributes.tct_alta_credito_simple_chk_c) {
-            //Valida que el check este marcado, de ser así setea el tipo de cuenta con CS
+        if (App.user.attributes.tct_alta_clientes_chk_c) {
+
             this.model.set("tipo_registro_c", 'Cliente');
-            this.model.set("subtipo_cuenta_c", 'Credito Simple');
         }
 
 

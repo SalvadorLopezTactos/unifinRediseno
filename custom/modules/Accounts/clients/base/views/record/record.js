@@ -1222,10 +1222,6 @@
                 var userprod= App.user.attributes.productos_c;
                 var logueado= App.user.id;
                 var uniclickval= Oproductos.productos.tct_tipo_uc_txf_c;
-                var asesorL=this.model.get('user_id_c');
-                var asesorF=this.model.get('user_id1_c');
-                var asesorCA=this.model.get('user_id2_c');
-                var asesorFL=this.model.get('user_id6_c');
                 var asesorUC=this.model.get('user_id7_c');
                 myField3.hide();
                 if ((uniclickval!="Cliente" && userprod.includes('8') && asesorUC==logueado && conversioncUC== 1)) {
