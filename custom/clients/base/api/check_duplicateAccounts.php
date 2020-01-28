@@ -81,7 +81,7 @@ class check_duplicateAccounts extends SugarApi
                         $bean->account_name = $bean_account->name;
                         $bean->save();
                         $msj_succes = <<<SITE
-                        Conversion Completa <br>
+                        Conversión Completa <br>
 <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
 SITE;
 
