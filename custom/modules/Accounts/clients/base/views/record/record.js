@@ -1133,6 +1133,7 @@
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
+        var myField3 = this.getField("clienteuniclick");
 
             if (myField) {
                 myField.listenTo(myField, "render", function () {
@@ -1215,6 +1216,26 @@
 
                     });
              }
+        if (myField3) {
+            myField3.listenTo(myField3, "render", function () {
+                var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
+                var userprod= App.user.attributes.productos_c;
+                var logueado= App.user.id;
+                var uniclickval= Oproductos.productos.tct_tipo_uc_txf_c;
+                var asesorL=this.model.get('user_id_c');
+                var asesorF=this.model.get('user_id1_c');
+                var asesorCA=this.model.get('user_id2_c');
+                var asesorFL=this.model.get('user_id6_c');
+                var asesorUC=this.model.get('user_id7_c');
+                myField3.hide();
+                if ((uniclickval!="Cliente" && userprod.includes('8') && asesorUC==logueado && conversioncUC== 1)) {
+                    myField3.show();
+                }else{
+                    myField3.hide();
+                }
+
+            });
+        }
     },
 
     hideButton_Conversion_change: function () {
@@ -1228,16 +1249,20 @@
         var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
         var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
         var subtipofleet= Oproductos.productos.tct_subtipo_fl_txf_c;
+        var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
+        var uniclickval= Oproductos.productos.tct_tipo_uc_txf_c;
 
         var logueado= App.user.id;
         var asesorL=this.model.get('user_id_c');
         var asesorF=this.model.get('user_id1_c');
         var asesorCA=this.model.get('user_id2_c');
         var asesorFL=this.model.get('user_id6_c');
+        var asesorUC=this.model.get('user_id7_c');
         //oculta botones
         $('[name="regresalead"]').hide();
         $('[name="prospectocontactado"]').hide();
         $('[name="conviertelead"]').hide();
+        $('[name="clienteuniclick"]').hide();
 
         //Evaluación para mostrar botones
         /*
@@ -1250,6 +1275,7 @@
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').hide();
+            $('[name="conviertelead"]').hide();
         }
 
         //Evaluación para mostrar botones
@@ -1260,6 +1286,7 @@
         if ((leasingprod=="Lead" && userprod.includes('1') && asesorL==logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF==logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA==logueado) || (tipofleet=="Lead" && userprod.includes('6') && asesorFL==logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
+            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1272,10 +1299,21 @@
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
+            $('[name="conviertelead"]').hide();
+        }
+
+        //Evaluación para mostrar botones
+        /*
+        * Convertir Cliente Uniclick
+        * tipo_registro_c = Lead
+        */
+        if ((uniclickval!="Cliente" && userprod.includes('8') && asesorUC==logueado && conversioncUC== 1)) {
+            $('[name="regresalead"]').hide();
+            $('[name="clienteuniclick"]').show();
+            $('[name="conviertelead"]').hide();
+            $('[name="prospectocontactado"]').hide();
         }
     },
-
-
 
     /* @author F. Javier Garcia S. 10/07/2018
                 Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
@@ -1637,6 +1675,7 @@
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
+        this.context.on('button:conversion_cliente_uniclick:click', this.clienteuniclickClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
        // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
@@ -2258,6 +2297,13 @@
                         this.model.set('promotorfleet_c', '9 - Sin Gestor');
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
+                    if (contains.call(modelo.get('productos_c'), "8")  && this.model.get('user_id_c')=="") {
+                        this.model.set('promotoruniclick_c', modelo.get('name'));
+                        this.model.set('user_id7_c', modelo.get('id'));
+                    } else if(this.model.get('user_id_c')==""){
+                        this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                        this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    }
                     if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
@@ -2267,6 +2313,8 @@
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotorfleet_c', '9 - Sin Gestor');
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                        this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                        this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
                     if (this.model.get("tipo_registro_c")=="Persona" || this.model.get('tipo_registro_c')=="Proveedor") {
@@ -4707,5 +4755,130 @@
         }
         }
         callback(null,fields,errors);
+    },
+    clienteuniclickClicked:function(){
+            App.alert.show('convierte_Cliente_uniclick', {
+                level: 'process',
+                title: 'Convirtiendo cuenta, por favor espere',
+            });
+                var necesarios = "";
+
+            if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+                necesarios = necesarios + '<b>Origen<br></b>';
+            }
+            if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+                necesarios = necesarios + '<b>RFC<br></b>';
+            }
+            if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
+                necesarios = necesarios + '<b>Macro Sector<br></b>';
+            }
+            if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == null) {
+                necesarios = necesarios + '<b>Sector Económico<br></b>';
+            }
+            if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
+                necesarios = necesarios + '<b>Ventas Anuales<br></b>';
+            }
+            if (this.model.get('activo_fijo_c') == "" || this.model.get('activo_fijo_c') == null) {
+                necesarios = necesarios + '<b>Activo Fijo<br></b>';
+            }
+            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
+                necesarios = necesarios + '<b>Al menos un correo electr\u00F3nico o un tel\u00E9fono<br></b>';
+            }
+            if (_.isEmpty(this.oDirecciones.direccion)) {
+                necesarios = necesarios + '<b>Dirección<br></b>';
+            }
+            if (this.model.get('tipodepersona_c')!="Persona Moral") {
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b>Primer Nombre</b><br>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Materno</b><br>';
+                }
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+                }
+                if (this.model.get('ifepasaporte_c') == "" || this.model.get('ifepasaporte_c') == null) {
+                    necesarios = necesarios + '<b>IFE/PasaporteFC<br></b>';
+                }
+                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                    necesarios = necesarios + '<b>Curp<br></b>';
+                }
+                if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) {
+                    necesarios = necesarios + '<b>Estado Civil<br></b>';
+                }
+                if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
+                    necesarios = necesarios + '<b>Profesión<br></b>';
+                }
+            }else {
+                if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                    necesarios = necesarios + '<b>Razón Social<br></b>';
+                }
+                if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                    necesarios = necesarios + '<b>Nombre Comercial<br></b>';
+                }
+                if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                    necesarios = necesarios + '<b>Fecha Constitutiva<br></b>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Pa\u00EDs de Constitución</b><br>';
+                }
+            }
+            if (necesarios != "") {
+                app.alert.dismiss('convierte_Cliente_uniclick');
+                app.alert.show("Campos Faltantes", {
+                    level: "error",
+                    title: "Faltan los siguientes campos para poder convertir la cuenta a Cliente: <br><br>" + necesarios,
+                    autoClose: false
+                });
+                return;
+            }else {
+                if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente") {
+                    var productousuario = App.user.attributes.productos_c;
+                    var api_params = {};
+
+                    if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente" && productousuario.includes('8')) {
+                        if (App.user.id == this.model.get('user_id7_c')) {
+                            api_params["tct_tipo_uc_txf_c"] = "Cliente";
+                            api_params["tct_subtipo_uc_txf_c"] = "Con Linea Vigente";
+                            api_params["tct_tipo_cuenta_uc_c"] = "CLIENTE CON LÍNEA VIGENTE";
+                        }
+                    }
+                }
+                if (api_params != undefined) {
+                    self=this;
+                    var idC = this.model.get('id');
+                    var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                    app.api.call('update', url, api_params, {
+                        success: _.bind(function (data) {
+                            //this._render();
+                            app.alert.dismiss('convierte_Cliente_uniclick');
+                            Oproductos.productos = data;
+                            if (self.model.get('tipo_registro_c') != "Cliente") {
+                                self.model.set("tipo_registro_c", "Cliente");
+                                self.model.set("subtipo_cuenta_c", "Con Linea Vigente");
+                                self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+                                self.model.save();
+                                v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
+                                v360.render();
+                            }
+                            app.alert.show('errorAlert', {
+                                level: 'success',
+                                messages: "Se ha realizado la conversión correctamente.",
+                                autoClose: true
+                            });
+                            Oproductos.render();
+                        }),
+                    })
+                }
+            }
     },
 })

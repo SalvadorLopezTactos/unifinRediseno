@@ -278,10 +278,6 @@
 
             this.model.set("tipo_registro_c", 'Proveedor');
         }
-        if (App.user.attributes.tct_alta_clientes_chk_c) {
-
-            this.model.set("tipo_registro_c", 'Cliente');
-        }
         if (App.user.attributes.tct_alta_credito_simple_chk_c) {
             //Valida que el check este marcado, de ser así setea el tipo de cuenta con CS
             this.model.set("tipo_registro_c", 'Cliente');
@@ -528,7 +524,6 @@
                 }
             });
         }else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
-
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Proveedor") {
                     delete new_options[key];
@@ -547,14 +542,14 @@
             new_options["Persona"]="Persona";
         }
         //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
-        if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
-            /* Object.keys(new_options).forEach(function (key) {
+        /*if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
+             Object.keys(new_options).forEach(function (key) {
                  if (key != "Cliente") {
                      delete new_options[key];
                  }
-             });*/
+             });
             new_options["Cliente"]="Cliente";
-        }
+        }*/
 
         this.model.fields['tipo_registro_c'].options = new_options;
 
@@ -2800,6 +2795,13 @@
                 } else {
                     this.model.set('promotorfleet_c', '9 - Sin Gestor');
                     this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (userprod.includes('8')) {
+                    this.model.set('promotoruniclick_c', nombrecompleto);
+                    this.model.set('user_id7_c', idusrlog);
+                } else {
+                    this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                    this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
     },
 })

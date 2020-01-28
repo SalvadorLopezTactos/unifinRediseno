@@ -1033,6 +1033,14 @@ where rfc_c = '{$bean->rfc_c}' and
           if ((empty($bean->user_id2_c) || $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
               $bean->user_id2_c = $idSinGestor;
           }
+          //Valida promotor Fleet
+          if ((empty($bean->user_id6_c) || $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
+              $bean->user_id6_c = $idSinGestor;
+          }
+          //Valida promotor Uniclick
+          if ((empty($bean->user_id7_c) || $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
+             $bean->user_id7_c = $idSinGestor;
+          }
         }
     }
 
@@ -1170,6 +1178,11 @@ where rfc_c = '{$bean->rfc_c}' and
         //Promotor Fleet
         if (($bean->user_id6_c==null|| $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
             $bean->user_id6_c = $idSinGestor;
+        }
+
+        //Promotor Uniclick
+        if (($bean->user_id7_c==null|| $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
+            $bean->user_id7_c = $idSinGestor;
         }
 
     }
