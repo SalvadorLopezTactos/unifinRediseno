@@ -12,7 +12,7 @@ class leads_validateString
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-        $GLOBALS['log']->fatal('CONVIERTO A MAYUSCULAS');
+        //$GLOBALS['log']->fatal('CONVIERTO A MAYUSCULAS');
 
         if ($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
@@ -31,7 +31,7 @@ class leads_validateString
 
     public function quitaespacios($bean = null, $event = null, $args = null)
     {
-        $GLOBALS['log']->fatal('QUITO ESPACIOS Y REEMPLAZO POR NUEVOS VALORES');
+       // $GLOBALS['log']->fatal('QUITO ESPACIOS Y REEMPLAZO POR NUEVOS VALORES');
 
         global $db;
         global $app_list_strings, $current_user; //Obtención de listas de valores
@@ -61,7 +61,7 @@ class leads_validateString
         $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
         $acronimos = $app_list_strings['validacion_duplicados_list'];
 
-        $GLOBALS['log']->fatal('full name ' . $bean->full_name);
+      //  $GLOBALS['log']->fatal('full name ' . $bean->full_name);
 
         if ($bean->regimen_fiscal_c != "Persona Moral") {
             $full_name = $bean->nombre_c . " " . $bean->apellido_paterno_c . " " . $bean->apellido_materno_c;
@@ -82,7 +82,7 @@ class leads_validateString
             $une = implode($separa);
             $bean->clean_name_c = $une;
 
-            $GLOBALS['log']->fatal("para fisica " . $bean->clean_name_c);
+        //    $GLOBALS['log']->fatal("para fisica " . $bean->clean_name_c);
 
         } else {
             //$GLOBALS['log']->fatal($bean->razonsocial_c);
@@ -90,7 +90,7 @@ class leads_validateString
             $nombre = mb_strtoupper($nombre, "UTF-8");
             $separa = explode(" ", $nombre);
             $separa_limpio = $separa;
-            $GLOBALS['log']->fatal(print_r($separa, true));
+           // $GLOBALS['log']->fatal(print_r($separa, true));
             $longitud = count($separa);
             $eliminados = 0;
             //Itera el arreglo separado
@@ -105,7 +105,7 @@ class leads_validateString
                         $eliminados++;
                     }
                     //$GLOBALS['log']->fatal($a);
-                    $GLOBALS['log']->fatal(print_r($separa, true));
+                 //   $GLOBALS['log']->fatal(print_r($separa, true));
 
 
                 }
@@ -118,7 +118,7 @@ class leads_validateString
             $une = implode($separa);
             $bean->clean_name_c = $une;
 
-            $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+          //  $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
 
         }
         //}
@@ -130,8 +130,8 @@ class leads_validateString
 
 // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
         if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
-            $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-            $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+          //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+           // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
             //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
             $sql = new SugarQuery();
             $sql->select(array('id', 'clean_name'));
@@ -167,12 +167,17 @@ class leads_validateString
             } else {
                 $bean->resultado_de_carga_c = 'Registro Exitoso';
             }
+            $fechaCarga=date("Ymd");
+            //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
+
+            $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c=="" && $_REQUEST['module'] == 'Import')?"CARGA_".$fechaCarga:$bean->nombre_de_cargar_c;
+
 
         } else {
-            $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
+          //  $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
 
         }
-        $GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
+        //$GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
     }
 
 }
