@@ -8302,3 +8302,4 @@ $app_strings['LBL_QUOTE_TO_OPPORTUNITY_TITLE']='Create Solicitud y Líneaes from
 $app_strings['NTC_UNLINK_SUCCESS']='Desvinculó el registro de {0}.';
 $app_strings['LBL_RECORD_SAVED_SUCCESS'] ='Ha creado con éxito el registro de {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.';
 $app_strings['ERR_GENERIC_SERVER_ERROR'] = 'Favor de verificar los errores.';
+$app_strings['LBL_DUPLICATES_FOUND'] = '{{duplicateCount}} duplicados encontrados.';
