@@ -318,11 +318,6 @@ array (
               array (
                 'name' => 'assigned_user_name',
               ),
-              37 => 
-              array (
-                'name' => 'leads_leads_1_name',
-                'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
-              ),
             ),
           ),
         ),
