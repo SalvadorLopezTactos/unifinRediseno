@@ -983,6 +983,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
             $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
             $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            //UNICLICK
+            $bean_Resumen->tct_tipo_uc_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_uc_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_uc_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
 
             //Evalua tipo de cuenta
             if ($bean->tipo_registro_c == 'Prospecto' && $bean->subtipo_cuenta_c == 'Integracion de Expediente' ) {
@@ -999,6 +1003,10 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_Resumen->tct_tipo_fl_txf_c= 'Lead';
                 $bean_Resumen->tct_subtipo_fl_txf_c='En Calificacion';
                 $bean_Resumen->tct_tipo_cuenta_fl_c= 'LEAD EN CALIFICACIÓN';
+                //UNICLICK
+                $bean_Resumen->tct_tipo_uc_txf_c= 'Lead';
+                $bean_Resumen->tct_subtipo_uc_txf_c='En Calificacion';
+                $bean_Resumen->tct_tipo_cuenta_uc_c= 'LEAD EN CALIFICACIÓN';
             }
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
