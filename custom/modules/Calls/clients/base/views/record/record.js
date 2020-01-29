@@ -562,18 +562,6 @@
 							requerido++;
 						}
 						
-						if (model.get('phone_home')=='' && model.get('phone_mobile')=='' && model.get('phone_work')=='') {
-							errors['phone_home'] = errors['phone_home'] || {};
-							errors['phone_home'].required = true;
-							errors['phone_mobile'] = errors['phone_mobile'] || {};
-							errors['phone_mobile'].required = true;
-							errors['phone_work'] = errors['phone_work'] || {};
-							errors['phone_work'].required = true;
-							
-							texto += "<b>Necesita agregar al menos un teléfono</b> <br>";
-							requerido++;
-						}
-						
 						if (model.get('email') == null || model.get('email') =="") {
 							errors['email'] = errors['email'] || {};
 							errors['email'].required = true;
@@ -592,6 +580,18 @@
 							errors['assigned_user_id'] = errors['assigned_user_id'] || {};
 							errors['assigned_user_id'].required = true;
 							texto += "<b>Promotor asignado</b> <br>";
+							requerido++;
+						}
+						
+						if (model.get('phone_home')=='' && model.get('phone_mobile')=='' && model.get('phone_work')=='') {
+							errors['phone_home'] = errors['phone_home'] || {};
+							errors['phone_home'].required = true;
+							errors['phone_mobile'] = errors['phone_mobile'] || {};
+							errors['phone_mobile'].required = true;
+							errors['phone_work'] = errors['phone_work'] || {};
+							errors['phone_work'].required = true;
+							
+							texto += "<b>Necesita agregar al menos un teléfono</b> <br>";
 							requerido++;
 						}
 						
