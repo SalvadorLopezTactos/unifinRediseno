@@ -12,7 +12,7 @@ $dependencies['Leads']['apellido_materno_c'] = array(
             'params' => array(
                 'target' => 'apellido_materno_c',
                 'label'  => 'apellido_materno_c_label', 
-                'value'  => 'and(or(equal($subtipo_registro_c, "2"),equal($subtipo_registro_c, "3"),equal($subtipo_registro_c, "4")),not(equal($regimen_fiscal_c,"Persona Moral")))',  //SUB-TIPO LEAD ES CONTACTADO, CANCELADO, CONVERTIDO Y QUE NO SEA PERSONA MORAL
+                'value'  => 'and(or(equal($subtipo_registro_c, "2"),equal($subtipo_registro_c, "4")),not(equal($regimen_fiscal_c,"Persona Moral")))',  //SUB-TIPO LEAD ES CONTACTADO, CONVERTIDO Y QUE NO SEA PERSONA MORAL
             ),
         ),
     ),
