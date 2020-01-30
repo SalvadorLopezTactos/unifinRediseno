@@ -144,6 +144,24 @@ $dependencies['Leads']['assigned_user_name'] = array(
     ),
 );
 
+/*******************PROMOTOR-¿QUE ASESOR?*****************/
+$dependencies['Leads']['promotor_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('subtipo_registro_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired', //Action type
+            'params' => array(
+                'target' => 'promotor_c',
+                'label'  => 'promotor_c_label', 
+                'value'  => 'or(equal($subtipo_registro_c, "1"),equal($subtipo_registro_c, "2"))',  //SUB-TIPO LEAD ES SIN CONTACTAR Y CONTACTADO
+            ),
+        ),
+    ),
+);
+
 /*******************MOTIVO DE CANCELACION*****************/
 $dependencies['Leads']['motivo_cancelacion_c'] = array(
     'hooks' => array("all"),
