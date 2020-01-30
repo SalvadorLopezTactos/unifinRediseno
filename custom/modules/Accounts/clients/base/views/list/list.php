@@ -80,12 +80,22 @@ array (
               ),
               7 => 
               array (
+                'name' => 'promotoruniclick_c',
+                'label' => 'LBL_PROMOTORUNICLICK_C',
+                'enabled' => true,
+                'id' => 'USER_ID7_C',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              8 => 
+              array (
                 'name' => 'subtipo_cuenta_c',
                 'label' => 'LBL_SUBTIPO_CUENTA',
                 'enabled' => true,
                 'default' => false,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'tipo_registro_c',
                 'label' => 'LBL_TIPO_REGISTRO',
