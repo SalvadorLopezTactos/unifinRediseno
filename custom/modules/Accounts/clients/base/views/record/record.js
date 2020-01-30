@@ -4804,7 +4804,7 @@
                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                 }
                 if (this.model.get('ifepasaporte_c') == "" || this.model.get('ifepasaporte_c') == null) {
-                    necesarios = necesarios + '<b>IFE/PasaporteFC<br></b>';
+                    necesarios = necesarios + '<b>IFE/Pasaporte<br></b>';
                 }
                 if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
                     necesarios = necesarios + '<b>Curp<br></b>';
