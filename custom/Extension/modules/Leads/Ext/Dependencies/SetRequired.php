@@ -148,7 +148,7 @@ $dependencies['Leads']['assigned_user_name'] = array(
 $dependencies['Leads']['promotor_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('subtipo_registro_c'),
+    'triggerFields' => array('origen_c','detalle_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -156,7 +156,7 @@ $dependencies['Leads']['promotor_c'] = array(
             'params' => array(
                 'target' => 'promotor_c',
                 'label'  => 'promotor_c_label', 
-                'value'  => 'or(equal($subtipo_registro_c, "1"),equal($subtipo_registro_c, "2"))',  //SUB-TIPO LEAD ES SIN CONTACTAR Y CONTACTADO
+                'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "Cartera Promotores"))',  //SUB-TIPO LEAD ES SIN CONTACTAR Y CONTACTADO
             ),
         ),
     ),
