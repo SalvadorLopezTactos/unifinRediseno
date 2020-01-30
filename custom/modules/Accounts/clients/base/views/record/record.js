@@ -857,6 +857,7 @@
             self.noEditFields.push('promotorfactoraje_c');
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
+            self.noEditFields.push('promotoruniclick_c');
         }
 
         var origen = this.model.get('origendelprospecto_c');
