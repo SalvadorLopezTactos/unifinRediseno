@@ -20,7 +20,8 @@ class Call_reunion_llamada{
 	            $bean_reunion->duration_hours=$objRellam['duracion_hora'];
 	            $bean_reunion->duration_minutes=$objRellam['duracion_minuto'];
 	            $bean_reunion->parent_id=$objRellam['account_id_c'];
-	            $bean_reunion->parent_type='Accounts';
+	            //$bean_reunion->parent_type='Accounts';
+				$bean_reunion->parent_type=$bean->parent_type;
 	            $bean_reunion->assigned_user_id=$objRellam['assigned_user_id'];
 	            $bean_reunion->objetivo_c=$objRellam['objetivoG'];
 	            $bean_reunion->reunion_objetivos=$objRellam['objetivoE'];
@@ -48,7 +49,8 @@ class Call_reunion_llamada{
 	            $bean_llamada->duration_hours=$objRellam['duracion_hora'];
 	            $bean_llamada->duration_minutes=$objRellam['duracion_minuto'];
 	            $bean_llamada->parent_id=$objRellam['account_id_c'];
-	            $bean_llamada->parent_type='Accounts';
+	            //$bean_llamada->parent_type='Accounts';
+				$bean_llamada->parent_type=$bean->parent_type;
 	            $bean_llamada->assigned_user_id=$objRellam['assigned_user_id'];
 	            $bean_llamada->status='Planned';
 	            $bean_llamada->tct_parent_call_id_txf_c=$bean->id;
