@@ -81,7 +81,7 @@
                 success: _.bind(function (data) {
 
                     for (var i = 0; i < data.Leads.length; i++) {
-                        if (data.Leads[i].regimen_fiscal_c == 'Persona Fisica') {
+                        if (data.Leads[i].regimen_fiscal_c != 'Persona Moral') {
                             data.Leads[i].isFisica = true;
                         }
                         else {
@@ -92,7 +92,7 @@
                         data.Leads[i].subtipo_registro_c = app.lang.getAppListStrings("subtipo_registro_c_list")[data.Leads[i].subtipo_registro_c]
 
                     }
-                    ;
+
                     self.leads_temp = data.Leads;
 
 
