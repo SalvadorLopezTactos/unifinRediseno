@@ -14,6 +14,9 @@
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
@@ -29,9 +32,6 @@
         $('[data-subpanel-link="campaigns"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="archived_emails"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="leads_leads_1"]').find(".subpanel-controls").hide();
-
-
-
     },
 
     expmail: function (fields, errors, callback) {
