@@ -177,6 +177,9 @@ SITE;
         }
 
         $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
+        $bean_account->user_id3_c = $bean_Leads->user_id1_c; // Agente telefonico
+        $bean_account->user_id4_c = $bean_Leads->user_id_c; // ¿Que Asesor?
+
         $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
         $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
         $bean_account->evento_c = $bean_Leads->evento_c;
