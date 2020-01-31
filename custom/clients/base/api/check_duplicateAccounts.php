@@ -205,6 +205,8 @@ SITE;
             $bean_account->user_id1_c = empty($idMeetings['data']['FACTORAJE']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FACTORAJE'];
             $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
             $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
+            $bean_account->user_id7_c = empty($idMeetings['data']['UNICLICK']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['UNICLICK'];
+
         }
 
         $bean_account->save();
@@ -281,6 +283,10 @@ SITE;
                         if (strpos($productos, '6') !== false && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
+                        }
+                        if (strpos($productos, '8') !== false && ($puesto != "27" && $puesto != "31")) {
+
+                            $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
                         }
 
                     }
