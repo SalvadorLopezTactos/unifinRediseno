@@ -620,6 +620,23 @@
             ),
         );
 
+        $dependencies['Accounts']['promotoruniclick_c_readonly'] = array(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('idcliente_c','promotorcredit_c'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'promotoruniclick_c',
+                        'label' => 'LBL_promotoruniclick_c',
+                        'value' => 'not(equal($idcliente_c,""))',
+                    ),
+                ),
+            ),
+        );
+
 
         $dependencies['Accounts']['referencia_bancaria_c_readonly'] = array(
             'hooks' => array("all"),

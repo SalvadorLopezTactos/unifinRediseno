@@ -70,6 +70,8 @@ class GetUsersTeams extends SugarApi
             $usrFactoraje = $beanModule->user_id1_c;
             $usrCredito = $beanModule->user_id2_c;
             $usrFleet = $beanModule->user_id6_c;
+            $usrUniclick = $beanModule->user_id7_c;
+
             array_push($arrayTeamUsrs,$usrLeasing,$usrFactoraje,$usrCredito,$usrFleet);
 
         } else {
@@ -78,7 +80,7 @@ class GetUsersTeams extends SugarApi
             array_push($arrayTeamUsrs, $usrAsignadoA);
         }
 
-        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog == $usrFleet || $usuarioLog == $usrAsignadoA) {
+        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog == $usrFleet || $usuarioLog == $usrAsignadoA || $usuarioLog==$usrUniclick) {
             $flag = true;
         }
 
