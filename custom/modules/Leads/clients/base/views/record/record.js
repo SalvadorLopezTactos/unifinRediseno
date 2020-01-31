@@ -20,6 +20,20 @@
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
     },
 
+
+    _disableActionsSubpanel:function() {
+        $('[data-subpanel-link="calls"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="meetings"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="tasks"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="notes"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="campaigns"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="archived_emails"]').find(".subpanel-controls").hide();
+        $('[data-subpanel-link="leads_leads_1"]').find(".subpanel-controls").hide();
+
+
+
+    },
+
     expmail: function (fields, errors, callback) {
         if (this.model.get('email') != null && this.model.get('email') != "") {
 
@@ -345,6 +359,8 @@
                 self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
 
             });
+
+            this._disableActionsSubpanel();
         }
     },
 
@@ -496,6 +512,8 @@
                         messages: data.mensaje,
                         autoClose: false
                     });
+                    this._disableActionsSubpanel();
+
                 }
                 var btnConvert = this.getField("convert_Leads_button")
 
