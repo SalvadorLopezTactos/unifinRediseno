@@ -156,7 +156,7 @@ $dependencies['Leads']['promotor_c'] = array(
             'params' => array(
                 'target' => 'promotor_c',
                 'label'  => 'promotor_c_label', 
-                'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "Cartera Promotores"))',  //SUB-TIPO LEAD ES SIN CONTACTAR Y CONTACTADO
+                'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "Cartera Promotores"))',
             ),
         ),
     ),

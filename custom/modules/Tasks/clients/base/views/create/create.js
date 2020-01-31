@@ -8,6 +8,9 @@
 
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
+		
+		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
+		
     },
 
     _render: function () {
@@ -119,6 +122,29 @@
             }
         }
         callback(null,fields,errors);
+    },
+	
+	_ValoresPredetAsesor: function () {
+		var parent_nombre="";
+		var fechaini = "";
+		var tomorrow = new Date();
+        if(this.model.get('ayuda_asesor_cp_c') == '1') {
+			if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads") && this.model.get('parent_id') != ""){
+		
+				var module = this.model.get('parent_type');
+				var reg_parent = app.data.createBean(module, {id:this.model.get('parent_id')});
+				reg_parent.fetch({
+					success: _.bind(function (model) {
+						//parent_nombre = model.get('name');
+						this.model.set('name', "AYUDA CP - "+model.get('name'));
+					}, this)
+				});
+				
+			}
+        }else{
+            this.model.set('name', '');
+			this.model.set('date_due', '');
+        }
     },
 
 })
