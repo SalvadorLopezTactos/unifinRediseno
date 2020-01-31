@@ -10,18 +10,9 @@ $dependencies['Tasks']['ayuda_asesor_cp_c']= array
 	array(
 		'name'=>'SetValue',
 		'params'=> array(
-			'target'=>'name',
-			'label'=>'LBL_SUBJECT',
-			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),concat("AYUDA CP - ",related($leads,"name"),related($accounts,"name")), $name)',
-		),
-	),
-	
-	array(
-		'name'=>'SetValue',
-		'params'=> array(
 			'target'=>'date_start',
 			'label'=>'LBL_START_DATE',
-			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),today(), $date_start)',
+			'value'=>'ifElse(equal($date_start,""),now(), $date_start)',
 		),
 	),
 	
@@ -30,7 +21,7 @@ $dependencies['Tasks']['ayuda_asesor_cp_c']= array
 		'params'=> array(
 			'target'=>'date_due',
 			'label'=>'LBL_DUE_DATE',
-			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),addDays(today(), 14), $date_due)',
+			'value'=>'ifElse(equal($ayuda_asesor_cp_c,"1"),ifElse(equal($date_due,""),addDays(now(), 14), $date_due), ifElse(not(equal($date_due,"")),$date_due,""))',
 		),
 	),
 	
