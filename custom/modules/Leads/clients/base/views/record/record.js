@@ -23,6 +23,29 @@
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
     },
 
+    bindDataChange: function () {
+        this._super("bindDataChange");
+        //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
+        this.model.on("change:regimen_fiscal_c", _.bind(function () {
+
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Fisica') {
+                if (this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+                    this.model.set('regimen_fiscal_c', 'Persona Fisica');
+                }
+            }
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Fisica con Actividad Empresarial') {
+                if (this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+                    this.model.set('regimen_fiscal_c', 'Persona Fisica con Actividad Empresarial');
+                }
+            }
+            //Si es Persona Moral, ya no se podra cambiar a Persona Fisica
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Moral') {
+                if (this.model.get('regimen_fiscal_c') == 'Persona Fisica' || this.model.get('regimen_fiscal_c') == 'Persona Fisica con Actividad Empresarial') {
+                    this.model.set('regimen_fiscal_c', 'Persona Moral');
+                }
+            }
+        }, this));
+    },
 
     _disableActionsSubpanel: function () {
         $('[data-subpanel-link="calls"]').find(".subpanel-controls").hide();
