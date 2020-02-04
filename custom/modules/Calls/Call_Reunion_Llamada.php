@@ -28,7 +28,15 @@ class Call_reunion_llamada{
 	            $bean_reunion->status='Planned';
 	            $bean_reunion->tct_parent_call_id_txf_c=$bean->id;
 	            $bean_reunion->save();
-
+				
+				/******************
+				En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
+				****************/
+				
+				if ($bean->parent_type == 'Leads'){
+					$bean_reunion->load_relationship('leads');
+					$bean_reunion->leads->add($bean->parent_id);
+				}
 			}
 
 			if($objRellam['tipo_registro']=="llamada"){
@@ -56,6 +64,13 @@ class Call_reunion_llamada{
 	            $bean_llamada->tct_parent_call_id_txf_c=$bean->id;
 	            $bean_llamada->save();
 
+				/******************
+				En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
+				****************/
+				if ($bean->parent_type == 'Leads'){
+					$bean_llamada->load_relationship('leads');
+					$bean_llamada->leads->add($bean->parent_id);
+				}
 
 			}
 
