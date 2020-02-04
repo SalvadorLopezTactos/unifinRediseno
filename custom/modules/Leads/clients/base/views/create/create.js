@@ -12,16 +12,79 @@
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
+        this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
-        this.on('render',this._hidechkLeadCancelado,this);        
+        this.on('render', this._hidechkLeadCancelado, this);
+        this.model.on('change:name_c', this.cleanName, this);
+    },
+
+    cleanName: function () {
+        //Recupera variables
+        var original_name = this.model.get("name_c");
+        // console.log("CleanName "+original_name);
+        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
+        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
+        //Define arreglos para guardar nombre de lead
+        var clean_name_split = [];
+        var clean_name_split_full = [];
+        clean_name_split = original_name.split(" ");
+        //Elimina simbolos: Ej. . , -
+        _.each(clean_name_split, function (value, key) {
+            _.each(simbolos, function (simbolo, index) {
+                var clean_value = value.split(simbolo).join('');
+                if (clean_value != value) {
+                    clean_name_split[key] = clean_value;
+                }
+            });
+        });
+        clean_name_split_full = App.utils.deepCopy(clean_name_split);
+
+        if (this.model.get('regimen_fiscal_c') == "Persona Moral") {
+            //Elimina tipos de sociedad: Ej. SA, de , CV...
+            var totalVacio = 0;
+            _.each(clean_name_split, function (value, key) {
+                _.each(list_check, function (index, nomenclatura) {
+                    var upper_value = value.toUpperCase();
+                    if (upper_value == nomenclatura) {
+                        var clean_value = upper_value.replace(nomenclatura, "");
+                        clean_name_split[key] = clean_value;
+                    }
+                });
+            });
+            //Genera clean_name con arreglo limpio
+            var clean_name = "";
+            _.each(clean_name_split, function (value, key) {
+                clean_name += value;
+                //Cuenta elementos vacíos
+                if (value == "") {
+                    totalVacio++;
+                }
+            });
+
+            //Valida que exista más de un elemento, caso contrario establece para clean_name_c valores con tipo de sociedad
+            if ((clean_name_split.length - totalVacio) <= 1) {
+                clean_name = "";
+                _.each(clean_name_split_full, function (value, key) {
+                    clean_name += value;
+                });
+            }
+            clean_name = clean_name.toUpperCase();
+            this.model.set("clean_name_c", clean_name);
+        } else {
+            original_name = original_name.replace(/\s+/gi, '');
+            original_name = original_name.toUpperCase();
+            this.model.set("clean_name_c", original_name);
+        }
     },
 
     _hidechkLeadCancelado: function () {
         /****Oculta check Lead Cancelado solo al crear Lead****/
-        this.$('[data-name=lead_cancelado_c]').hide(); 
+        this.$('[data-name=lead_cancelado_c]').hide();
     },
 
     expmail: function (fields, errors, callback) {
@@ -195,9 +258,9 @@
     },
 
     validaSoloNumerosTel: function (evt) {
-        
-        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)){
-        
+
+        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)) {
+
             app.alert.show('Caracter_Invalido', {
                 level: 'error',
                 autoClose: true,
@@ -241,10 +304,10 @@
                 }
                 break;
 
-            default:                
+            default:
                 break;
         }
-        
+
         if (campos_req.length > 0) {
 
             for (i = 0; i < campos_req.length; i++) {
@@ -288,7 +351,7 @@
         /*****CHECK LEAD CANCELAR*********/
         if (this.model.get('lead_cancelado_c') == '1') {
             if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
-                
+
                 campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
                 errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
                 errors['motivo_cancelacion_c'].required = true;

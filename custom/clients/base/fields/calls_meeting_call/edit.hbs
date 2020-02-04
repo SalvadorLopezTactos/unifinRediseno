@@ -45,7 +45,12 @@ fecha: 21/06/2019
 		<!-- Línea 3 Relacionado-Asignada a -->
 		<div class="row-fluid" style="display: flex;flex-direction: row;align-items: flex-start;">
 			<div class="span6">
-				<div class="record-label">Cuenta</div>
+			{{#if label_parent_type}}
+				<div class="record-label">Leads</div>
+			{{else}}
+				<div class="record-label">Cuentas</div>
+			{{/if}}	
+				
 				<span class=" row-fluid nombreCuenta newItem">
                      <a href="#Accounts/{{{nuevoRegistro.account_id_c}}}"
                         class="campo3rel-ap PR-link"
