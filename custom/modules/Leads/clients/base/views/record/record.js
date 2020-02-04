@@ -24,7 +24,7 @@
     },
 
 
-    _disableActionsSubpanel:function() {
+    _disableActionsSubpanel: function () {
         $('[data-subpanel-link="calls"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="meetings"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="tasks"]').find(".subpanel-controls").hide();
@@ -205,9 +205,9 @@
     },
 
     validaSoloNumerosTel: function (evt) {
-        
-        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)){
-        
+
+        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)) {
+
             app.alert.show('Caracter_Invalido', {
                 level: 'error',
                 autoClose: true,
@@ -267,10 +267,10 @@
                 }
                 break;
 
-            default:                
+            default:
                 break;
         }
-        
+
         if (campos_req.length > 0) {
 
             for (i = 0; i < campos_req.length; i++) {
@@ -295,8 +295,8 @@
         }, this);
 
         if (((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
+                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
             this.model.get('subtipo_registro_c') == '2') {
 
             campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
@@ -314,7 +314,7 @@
         /*****CHECK LEAD CANCELAR*********/
         if (this.model.get('lead_cancelado_c') == '1') {
             if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
-                
+
                 campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
                 errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
                 errors['motivo_cancelacion_c'].required = true;
@@ -490,7 +490,7 @@
         };
         // alert(this.model.get('id'))
 
-        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
+        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
@@ -505,8 +505,7 @@
                         messages: data.mensaje,
                         autoClose: false
                     });
-                }
-                {
+                } else {
                     app.alert.show("Conversión", {
                         level: "success",
                         messages: data.mensaje,
