@@ -42,7 +42,7 @@ class GetNameLoadLeads extends SugarApi
 
         $query = "SELECT DISTINCT nombre_de_cargar_c FROM leads_cstm lc
 INNER JOIN  leads l
-ON lc.id_c=l.id";
+ON lc.id_c=l.id WHERE nombre_de_cargar_c IS NOT NULL ORDER BY date_entered DESC ";
         $result = $db->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
