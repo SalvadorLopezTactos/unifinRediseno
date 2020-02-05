@@ -259,7 +259,7 @@
 
     validaSoloNumerosTel: function (evt) {
 
-        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)) {
+        if (evt.which != 8 && evt.which != 9 && evt.which != 0 && (evt.which < 48 || evt.which > 57)) {
 
             app.alert.show('Caracter_Invalido', {
                 level: 'error',
