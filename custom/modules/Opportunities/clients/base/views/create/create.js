@@ -19,8 +19,12 @@
     productos: null,
     initialize: function (options) {
         self = this;
+        window.bandera = 0;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
+      	$(document).ready(function() {
+      		window.bandera = 1;
+      	});
 
         /*
           Author: Adrian Arauz 2018-08-28
@@ -1571,7 +1575,6 @@
             }
         });
         this.model.fields['tipo_producto_c'].options = op2;
-
         if (this.model.get('account_id')!="" && this.model.get('account_id')!=undefined) {
             //Realiza llamada para recuperar oportunidades de la cuenta, estas son solicitudes de Leasing con Linea y solicitudes SOS (Si las tiene)
             app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
@@ -1620,10 +1623,9 @@
     },
     //Evento para ejecutar la
     cuenta_asociada: function (){
-        if (this.model.get('account_id')!="" && this.model.get('account_id')!=undefined) {
-            this.set_lista_productos();
-            this.render();
-        }
+      if(this.model.get('account_id')!="" && this.model.get('account_id')!=undefined && window.bandera == 1) {
+        this.set_lista_productos();
+        this.render();
+      }
     },
-
 })
