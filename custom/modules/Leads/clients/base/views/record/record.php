@@ -89,6 +89,7 @@ array (
                 'name' => 'picture',
                 'type' => 'avatar',
                 'size' => 'large',
+                'readonly' => true,
                 'dismiss_label' => true,
               ),
               1 => 
