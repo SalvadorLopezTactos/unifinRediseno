@@ -17,6 +17,7 @@
     total_page: null,
     listaID: null,
     csv: null,
+    existDupli: null,
 
 
     initialize: function (options) {
@@ -92,7 +93,7 @@
                         data.Leads[i].subtipo_registro_c = app.lang.getAppListStrings("subtipo_registro_c_list")[data.Leads[i].subtipo_registro_c]
 
                     }
-
+                    self.existDupli = data.Leads_dupli;
                     self.leads_temp = data.Leads;
 
 
