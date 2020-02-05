@@ -102,10 +102,8 @@ class exportLeadsCSV extends SugarApi
         $fecha = date("Y - m - d H:i:s");
         $nameLoad = $args['name_load'];
 
-        $query = "SELECT nombre_c,apellido_paterno_c,apellido_materno_c,nombre_empresa_c,regimen_fiscal_c,tipo_registro_c,
-  subtipo_registro_c,l.phone_mobile,l.phone_work,l.phone_home,origen_c,macrosector_c,potencial_lead_c,ventas_anuales_c,
+        $query = "SELECT nombre_c,apellido_paterno_c,apellido_materno_c,nombre_empresa_c,regimen_fiscal_c,e.email_address email,l.phone_mobile,l.phone_work,l.phone_home,origen_c,macrosector_c,potencial_lead_c,ventas_anuales_c,
   zona_geografica_c,puesto_c, nombre_de_cargar_c,assigned_user_id,
-  e.email_address email,
   concat(u.first_name , ' ' , u.last_name) assigned_user_name
 FROM leads l
   INNER JOIN leads_cstm lc ON lc.id_c=l.id
