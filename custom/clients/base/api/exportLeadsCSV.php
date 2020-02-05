@@ -64,6 +64,14 @@ class exportLeadsCSV extends SugarApi
         $nameLoad = $args['nombre_de_cargar_c'];
         $offset = $args['offset'];
 
+        /** Validamos si existen registros duplicados para mostrar boton de exportar */
+        $queryDupli = "SELECT * FROM leads l INNER JOIN leads_cstm lc  ON lc.id_c=l.id WHERE  lc.nombre_de_cargar_c='$nameLoad' and deleted=1 ";
+        $dupliLeads = $db->query($queryDupli);
+        $response['Leads_dupli'] = $dupliLeads->num_rows>0?true:false;
+
+        $GLOBALS['log']->fatal("duplicados " .$response['Leads_dupli']);
+
+
         /**
          * Registro de Leads totales
          */
