@@ -17,7 +17,7 @@ class leads_validateString
         if ($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
 
-                if ($bean->field_defs[$field]['name'] != 'resultado_de_carga_c') {
+                if ($bean->field_defs[$field]['name'] != 'nombre_de_cargar_c') {
 
                     if ($bean->field_defs[$field]['type'] == 'varchar') {
                         $value = mb_strtoupper($value, "UTF-8");
