@@ -24,6 +24,10 @@ class leads_validateString
                     $value = mb_strtoupper($value, "UTF-8");
                     $bean->$field = $value;
                 }
+                if ($bean->field_defs[$field]['name'] == 'resultado_de_carga_c') {
+                    $value = ucwords($value);
+                    $bean->$field = $value;
+                }
             }
         }
     }
