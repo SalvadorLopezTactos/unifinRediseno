@@ -58,7 +58,7 @@ class check_duplicateAccounts extends SugarApi
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                 $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting,true));
+                $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting, true));
 
 
                 if ($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) {
@@ -80,6 +80,9 @@ class check_duplicateAccounts extends SugarApi
                         $bean->account_id = $bean_account->id;
                         $bean->account_name = $bean_account->name;
                         $bean->save();
+                        // Re-asignamos las reuniones realizadas y planificadas de Leads a Cuentas
+                        $this->re_asign_meetings($bean, $bean_account->id);
+
                         $msj_succes = <<<SITE
                         Conversión Completa <br>
 <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
@@ -109,27 +112,26 @@ SITE;
                 $responsMeeting = $this->getMeetingsUser($bean);
                 $GLOBALS['log']->fatal("usuarios en Lead  " . print_r($responsMeeting, true));
 
-                if($responsMeeting['status']=='continue')
-                {
+                if ($responsMeeting['status'] == 'continue') {
                     $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
 
 
                     $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id_c == "")&& $responsMeeting['data']['LEASING']!="") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
+                            || $beanAccountExist->user_id_c == "") && $responsMeeting['data']['LEASING'] != "") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
 
                     $beanAccountExist->user_id1_c = (($beanAccountExist->user_id1_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id1_c == "")&&$responsMeeting['data']['FACTORAJE']!="" )? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
+                            || $beanAccountExist->user_id1_c == "") && $responsMeeting['data']['FACTORAJE'] != "") ? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
 
                     $beanAccountExist->user_id2_c = (($beanAccountExist->user_id2_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id2_c == "")&&$responsMeeting['data']['CREDITO AUTOMOTRIZ']!="") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
+                            || $beanAccountExist->user_id2_c == "") && $responsMeeting['data']['CREDITO AUTOMOTRIZ'] != "") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
 
                     $beanAccountExist->user_id6_c = (($beanAccountExist->user_id6_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id6_c == "")&&$responsMeeting['data']['FLEET']!="") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
+                            || $beanAccountExist->user_id6_c == "") && $responsMeeting['data']['FLEET'] != "") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
                     $beanAccountExist->save();
 
                 }
 
-                $bean-> subtipo_registro_c = "4";
+                $bean->subtipo_registro_c = "4";
                 $bean->save();
                 $msj_succes_duplic = <<<SITE
                         Los Asesores han sido actualizados en la cuenta <br>
@@ -228,7 +230,7 @@ SITE;
 
     public function existLeadAccount($bean_lead)
     {
-        $accounts_bean=BeanFactory::getBean('Accounts');
+        $accounts_bean = BeanFactory::getBean('Accounts');
         $accounts_bean->disable_row_level_security = true;
 
         $sql = new SugarQuery();
@@ -258,33 +260,33 @@ SITE;
                         }
 
                         $sqlUser = new SugarQuery();
-                        $sqlUser->select(array('id', 'puestousuario_c', 'productos_c'));
+                        $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
                         $sqlUser->from(BeanFactory::newBean('Users'));
                         $sqlUser->where()->equals('id', $meeting->assigned_user_id);
                         //$sqlUser->where()->notEquals('puestousuario_c', "");
                         $sqlResult = $sqlUser->execute();
 
-                        $productos = $sqlResult[0]['productos_c'];
+                        $productos = $sqlResult[0]['tipodeproducto_c'];
                         $puesto = $sqlResult[0]['puestousuario_c'];
 
                         // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
-                        if (strpos($productos, '1') !== false && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos== '1'  && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['LEASING'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '3') !== false && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos== '3' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '4') !== false && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos=='4' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '6') !== false && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos== '6' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
                         }
-                        if (strpos($productos, '8') !== false && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos== '8' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
                         }
@@ -378,4 +380,24 @@ SITE;
         $bean_relacionTel->save();
 
     }
+
+
+    public function re_asign_meetings($bean_LEad, $idCuenTa)
+    {
+        if ($bean_LEad->load_relationship('meetings')) {
+            $relatedBeans = $bean_LEad->meetings->getBeans();
+
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $meeting) {
+                    if ($meeting->status != "Not Held") {
+                        $meeting->parent_type="Accounts";
+                        $meeting->parent_id=$idCuenTa;
+                        $meeting->save();
+
+                    }
+                }
+            }
+        }
+    }
+
 }
