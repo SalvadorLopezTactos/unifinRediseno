@@ -5,7 +5,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
@@ -264,11 +264,38 @@
         }
     },
 
-    valida_requeridos: function (fields, errors, callback) {
+
+    valida_requeridos_min:function (fields, errors, callback)  {
+        var campos = "";
+
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Leads") + '</b><br>';
+                    }
+                }
+            }, this);
+        }, this);
+
+        if (campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+
+    },
+
+    valida_requeridos: function () {
         var campos = "";
         var subTipoLead = this.model.get('subtipo_registro_c');
         var tipoPersona = this.model.get('regimen_fiscal_c');
         var campos_req = ['origen_c'];
+        var response=false;
+        var errors={};
 
         switch (subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
@@ -288,6 +315,9 @@
                 else {
                     campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
                 }
+
+                campos_req.push('puesto_c', 'macrosector_c','ventas_anuales_c','zona_geografica_c','email');
+
                 break;
 
             default:
@@ -300,7 +330,17 @@
 
                 var temp_req = campos_req[i];
 
-                if (this.model.get(temp_req) == '' || this.model.get(temp_req) == null) {
+                if(temp_req=='ventas_anuales_c')
+                {
+                    if(this.model.get('ventas_anuales_c')==0)
+                    {
+                        errors[temp_req] = errors[temp_req] || {};
+                        errors[temp_req].required = true;
+
+                    }
+                }
+
+                else if (this.model.get(temp_req) == '' || this.model.get(temp_req) == null) {
                     errors[temp_req] = errors[temp_req] || {};
                     errors[temp_req].required = true;
                 }
@@ -318,8 +358,8 @@
         }, this);
 
         if (((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
+            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
             this.model.get('subtipo_registro_c') == '2') {
 
             campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
@@ -351,7 +391,14 @@
             });
         }
 
-        callback(null, fields, errors);
+        console.log("campos requeridos "  +campos);
+
+        if(campos=="")
+        {
+            response= true;
+        }
+
+return response;
     },
 
     _readonlyFields: function () {
@@ -512,62 +559,63 @@
             "id": this.model.get('id')
         };
         // alert(this.model.get('id'))
+        if (this.valida_requeridos()) {
 
-        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+            app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
-        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
-            success: _.bind(function (data) {
+            app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+                success: _.bind(function (data) {
 
-                console.log(data);
-                app.alert.dismiss('upload');
-                app.controller.context.reloadData({});
+                    console.log(data);
+                    app.alert.dismiss('upload');
+                    app.controller.context.reloadData({});
 
-                if (data.idCuenta === "") {
-                    app.alert.show("Conversión", {
-                        level: "error",
-                        messages: data.mensaje,
-                        autoClose: false
+                    if (data.idCuenta === "") {
+                        app.alert.show("Conversión", {
+                            level: "error",
+                            messages: data.mensaje,
+                            autoClose: false
+                        });
+                    } else {
+                        app.alert.show("Conversión", {
+                            level: "success",
+                            messages: data.mensaje,
+                            autoClose: false
+                        });
+                        this._disableActionsSubpanel();
+
+                    }
+                    var btnConvert = this.getField("convert_Leads_button")
+
+                    if (this.model.get('subtipo_registro_c') == '2') {
+                        btnConvert.show();
+                    } else {
+                        btnConvert.hide();
+                    }
+                    //app.controller.context.reloadData({});
+                    //SUGAR.App.controller.context.reloadData({})
+                    /* Para refrescar solo un campo
+
+                     model.fetch({
+
+                      view: undefined,
+
+                      fields: ['industry']
+
                     });
-                } else {
-                    app.alert.show("Conversión", {
-                        level: "success",
-                        messages: data.mensaje,
-                        autoClose: false
-                    });
-                    this._disableActionsSubpanel();
+                     */
 
-                }
-                var btnConvert = this.getField("convert_Leads_button")
+                }, this),
+                failure: _.bind(function (data) {
+                    app.alert.dismiss('upload');
 
-                if (this.model.get('subtipo_registro_c') == '2') {
-                    btnConvert.show();
-                } else {
-                    btnConvert.hide();
-                }
-                //app.controller.context.reloadData({});
-                //SUGAR.App.controller.context.reloadData({})
-                /* Para refrescar solo un campo
-    
-                 model.fetch({
-    
-                  view: undefined,
-    
-                  fields: ['industry']
-    
-                });
-                 */
+                }, this),
+                error: _.bind(function (data) {
+                    app.alert.dismiss('upload');
 
-            }, this),
-            failure: _.bind(function (data) {
-                app.alert.dismiss('upload');
+                }, this)
+            });
 
-            }, this),
-            error: _.bind(function (data) {
-                app.alert.dismiss('upload');
-
-            }, this)
-        });
-
-
+        }
     }
 })
