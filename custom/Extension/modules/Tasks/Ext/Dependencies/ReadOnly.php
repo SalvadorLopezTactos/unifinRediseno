@@ -39,7 +39,7 @@ $dependencies['Tasks']['setoptions_status_ayuda_c'] = array(
        'params' => array(
          'target' => 'status',
          'keys' => 'ifElse(equal($ayuda_asesor_cp_c,"1"),getDropdownKeySet("task_status_cp_list"),getDropdownKeySet("task_status_dom"))',
-         'labels' => 'ifElse(equal($ayuda_asesor_cp_c,"1"),getDropdownKeySet("task_status_cp_list"),getDropdownValueSet("task_status_dom"))',
+         'labels' => 'ifElse(equal($ayuda_asesor_cp_c,"1"),getDropdownValueSet("task_status_cp_list"),getDropdownValueSet("task_status_dom"))',
        ),
      ),
    ),
