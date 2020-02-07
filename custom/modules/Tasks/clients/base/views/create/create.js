@@ -8,6 +8,7 @@
 
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
+		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
 		
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		
@@ -145,6 +146,37 @@
             this.model.set('name', '');
 			this.model.set('date_due', '');
         }
+    },
+	
+	/*
+	Erick de Jesus valida usuario asesor telefonico asignado cuando el check de ayuda esta activo 
+	*/
+	valida_asignado:function (fields, errors, callback) {        
+		if (this.model.get('ayuda_asesor_cp_c') == '1'){
+			
+			var user = app.data.createBean('Users', {id:this.model.get('assigned_user_id')});
+            user.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('puestousuario_c')!= '27'){
+
+                        app.alert.show("El usuario asignado debe ser Agente Telefónico", {
+                            level: "error",
+                            title: "Usuario asignado",
+                            messages: "El usuario asignado debe ser Agente Telefónico",
+                            autoClose: false
+                        });
+
+                        errors['assigned_user_id'] = errors['assigned_user_id'] || {};
+						errors['assigned_user_id'].required = true;
+
+                    }
+					callback(null, fields, errors);
+					
+                }, this)
+            });
+        }else{
+			callback(null, fields, errors);
+		}        
     },
 
 })

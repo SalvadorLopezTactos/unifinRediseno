@@ -28,18 +28,18 @@
         //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
         this.model.on("change:regimen_fiscal_c", _.bind(function () {
 
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica') {
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Fisica') {
                 if (this.model.get('regimen_fiscal_c') == 'Persona Moral') {
                     this.model.set('regimen_fiscal_c', 'Persona Fisica');
                 }
             }
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica con Actividad Empresarial') {
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Fisica con Actividad Empresarial') {
                 if (this.model.get('regimen_fiscal_c') == 'Persona Moral') {
                     this.model.set('regimen_fiscal_c', 'Persona Fisica con Actividad Empresarial');
                 }
             }
             //Si es Persona Moral, ya no se podra cambiar a Persona Fisica
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Moral') {
+            if (this.model._previousAttributes.regimen_fiscal_c == 'Persona Moral') {
                 if (this.model.get('regimen_fiscal_c') == 'Persona Fisica' || this.model.get('regimen_fiscal_c') == 'Persona Fisica con Actividad Empresarial') {
                     this.model.set('regimen_fiscal_c', 'Persona Moral');
                 }
@@ -229,7 +229,7 @@
 
     validaSoloNumerosTel: function (evt) {
 
-        if (evt.which != 8 && evt.which != 0 && (evt.which < 48 || evt.which > 57)) {
+        if (evt.which != 8 && evt.which != 9 && evt.which != 0 && (evt.which < 48 || evt.which > 57) && (evt.which < 96 || evt.which > 105)) {
 
             app.alert.show('Caracter_Invalido', {
                 level: 'error',
@@ -358,8 +358,8 @@
         }, this);
 
         if (((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
+            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
             this.model.get('subtipo_registro_c') == '2') {
 
             campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';

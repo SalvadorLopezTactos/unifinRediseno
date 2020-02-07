@@ -737,7 +737,7 @@
             selfRella.nuevoRegistro.tipo_registro = "reunion";
 
 			if(this.model.attributes.parent_type == "Leads"){
-				this.label_parent_type=true;
+				this.label_parent_type = true;
 			}
 			
             //Condición para establecer campos relacionados al intentar editar campo custom
@@ -775,7 +775,7 @@
             selfRella.nuevoRegistro.tipo_registro="llamada";
 			
 			if(this.model.attributes.parent_type == "Leads"){
-				this.label_parent_type=true;
+				this.label_parent_type = true;
 			}
 			
             //Condición para establecer campos relacionados al intentar editar campo custom
