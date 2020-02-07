@@ -386,7 +386,7 @@
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                messages: "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" + campos,
                 autoClose: false
             });
         }
