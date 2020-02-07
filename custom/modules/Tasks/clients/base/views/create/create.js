@@ -11,6 +11,7 @@
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
 		
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
+		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
 		
     },
 
@@ -125,14 +126,23 @@
         callback(null,fields,errors);
     },
 	
+	/*
+	Erick de Jesus check ayuda CP 
+	*/
 	_ValoresPredetAsesor: function () {
 		var parent_nombre="";
 		var fechaini = "";
 		var tomorrow = new Date();
-        if(this.model.get('ayuda_asesor_cp_c') == '1') {
-			if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads") && this.model.get('parent_id') != ""){
+		var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
 		
-				var module = this.model.get('parent_type');
+        if(this.model.get('ayuda_asesor_cp_c') == '1') {
+			
+			var module = this.model.get('parent_type');
+			var parent_id = this.model.get('parent_id');
+				
+			if((module == "Accounts" || module == "Leads") && (parent_id != "" && parent_id != null && parent_id != 'undefined')){
+			
+				this.model.set('name', "AYUDA CP");
 				var reg_parent = app.data.createBean(module, {id:this.model.get('parent_id')});
 				reg_parent.fetch({
 					success: _.bind(function (model) {
@@ -141,6 +151,8 @@
 					}, this)
 				});
 				
+			}else{
+				this.model.set('name', "AYUDA CP");
 			}
         }else{
             this.model.set('name', '');
@@ -171,12 +183,10 @@
 
                     }
 					callback(null, fields, errors);
-					
                 }, this)
             });
         }else{
 			callback(null, fields, errors);
 		}        
     },
-
 })
