@@ -22,7 +22,7 @@
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
            
 			/*****************************************/
-			this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
+			//this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
 			/*********************************************/
 
 		   this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
