@@ -648,8 +648,10 @@
                 var usuario = app.data.createBean('Users',{id:promotor});
                 usuario.fetch({
                     success: _.bind(function(data) {
-                        this.model.set("assigned_user_id", data.get('id'));
-                        this.model.set("assigned_user_name", data.get('name'));
+                        if(data.get('id')!= undefined){
+                          this.model.set("assigned_user_id", data.get('id'));
+                          this.model.set("assigned_user_name", data.get('name'));
+                        }
                     },this)
                 });
 
@@ -1524,7 +1526,7 @@
         }
         callback(null, fields, errors);
     },
-  
+
     set_lista_productos: function (){
         var id_account= this.model.get('account_id');
         var SLL= 0;
