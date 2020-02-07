@@ -10,6 +10,11 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
+		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
+		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
+		
+
+		
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
@@ -214,6 +219,40 @@
     },
 	
 	/*
+	Erick de Jesus check ayuda CP 
+	*/
+	_ValoresPredetAsesor: function () {
+		var parent_nombre="";
+		var fechaini = "";
+		var tomorrow = new Date();
+		var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
+		
+        if(this.model.get('ayuda_asesor_cp_c') == '1') {
+			
+			var module = this.model.get('parent_type');
+			var parent_id = this.model.get('parent_id');
+				
+			if((module == "Accounts" || module == "Leads") && (parent_id != "" && parent_id != null && parent_id != 'undefined')){
+			
+				this.model.set('name', "AYUDA CP");
+				var reg_parent = app.data.createBean(module, {id:this.model.get('parent_id')});
+				reg_parent.fetch({
+					success: _.bind(function (model) {
+						//parent_nombre = model.get('name');
+						this.model.set('name', "AYUDA CP - "+model.get('name'));
+					}, this)
+				});
+				
+			}else{
+				this.model.set('name', "AYUDA CP");
+			}
+        }else{
+            this.model.set('name', '');
+			this.model.set('date_due', '');
+        }
+    },
+	
+	/*
 	Erick de Jesus valida usuario asesor telefonico asignado cuando el check de ayuda esta activo 
 	*/
 	valida_asignado:function (fields, errors, callback) {        
@@ -240,6 +279,5 @@
         }else{
 			callback(null, fields, errors);
 		}       
-    },
-     
+    },     
 })
