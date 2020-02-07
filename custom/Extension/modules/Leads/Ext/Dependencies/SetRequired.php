@@ -1,5 +1,24 @@
 <?php
 
+$dependencies['Leads']['setoptions_regimen_fiscal'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('regimen_fiscal_c','id'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetOptions',
+            'params' => array(
+                'target' => 'regimen_fiscal_c',
+                'keys' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"Persona Moral"),createList("Persona Moral"),createList("Persona Fisica","Persona Fisica con Actividad Empresarial")),getDropdownKeySet("tipo"))',
+                'labels' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"Persona Moral"),createList("Persona Moral"),createList("Persona Fisica","Persona Fisica con Actividad Empresarial")),getDropdownValueSet("tipo"))',
+            ),
+        ),
+    ),
+);
+
+// 'ifElse(equal($ayuda_asesor_cp_c,"1"),createList("Exitoso","No exitoso","En proceso"),getDropdownValueSet("task_status_dom"))'
+
 /*******************AGENTE ASIGNADO*****************/
 $dependencies['Leads']['assigned_user_name'] = array(
     'hooks' => array("all"),
