@@ -318,8 +318,8 @@
         }, this);
 
         if (((this.model.get('phone_mobile') == '' || this.model.get('phone_mobile') == null) &&
-                (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
-                (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
+            (this.model.get('phone_home') == '' || this.model.get('phone_home') == null) &&
+            (this.model.get('phone_work') == '' || this.model.get('phone_work') == null)) &&
             this.model.get('subtipo_registro_c') == '2') {
 
             campos = campos + '<b>' + 'Al menos un Teléfono' + '</b><br>';
@@ -513,7 +513,7 @@
         };
         // alert(this.model.get('id'))
 
-        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
 
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
