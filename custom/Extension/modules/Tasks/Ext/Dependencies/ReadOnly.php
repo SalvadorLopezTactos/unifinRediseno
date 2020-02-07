@@ -25,16 +25,6 @@ $dependencies['Tasks']['readonly_fields'] = array
 				'value'=>'equal($ayuda_asesor_cp_c,"1")',
 			),
 		),
-		
-		array(
-			'name' => 'ReadOnly',
-			'params' => array
-			(
-				'target' => 'date_due',
-				'value'=>'equal($ayuda_asesor_cp_c,"1")',
-			),
-		),
-		
 	),
 );
 
