@@ -313,7 +313,7 @@
                     campos_req.push('nombre_empresa_c');
                 }
                 else {
-                    campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c','puesto_c');
+                    campos_req.push('nombre_c', 'apellido_paterno_c', 'puesto_c');
                 }
 
                 campos_req.push('macrosector_c','ventas_anuales_c','zona_geografica_c','email');
