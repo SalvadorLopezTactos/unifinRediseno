@@ -1,5 +1,5 @@
 <?php
-// created: 2019-07-17 10:32:54
+// created: 2020-02-07 12:25:05
 $viewdefs['Tasks']['base']['view']['subpanel-for-accounts-tasks'] = array (
   'panels' => 
   array (
@@ -26,22 +26,13 @@ $viewdefs['Tasks']['base']['view']['subpanel-for-accounts-tasks'] = array (
         ),
         2 => 
         array (
-          'target_record_key' => 'contact_id',
-          'target_module' => 'Contacts',
-          'label' => 'LBL_LIST_CONTACT',
-          'enabled' => true,
-          'default' => true,
-          'name' => 'contact_name',
-        ),
-        3 => 
-        array (
           'name' => 'date_start',
           'label' => 'LBL_LIST_START_DATE',
           'css_class' => 'overflow-visible',
           'enabled' => true,
           'default' => true,
         ),
-        4 => 
+        3 => 
         array (
           'name' => 'date_due',
           'label' => 'LBL_LIST_DUE_DATE',
@@ -52,7 +43,7 @@ $viewdefs['Tasks']['base']['view']['subpanel-for-accounts-tasks'] = array (
           'enabled' => true,
           'default' => true,
         ),
-        5 => 
+        4 => 
         array (
           'name' => 'assigned_user_name',
           'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
