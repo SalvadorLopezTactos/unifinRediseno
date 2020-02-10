@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:11:04
+ // created: 2020-01-16 11:19:43
 
 $app_list_strings['nacionalidad_c_list']=array (
   0 => '',
@@ -232,4 +232,5 @@ $app_list_strings['nacionalidad_c_list']=array (
   229 => 'Oscense',
   230 => 'Grancanario',
   231 => 'Singapurense',
+  232 => 'Corea',
 );

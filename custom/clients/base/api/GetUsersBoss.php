@@ -148,7 +148,7 @@ class GetUsersBoss extends SugarApi
             //Recupera equipos de promotores
             $queryP = "select group_concat(replace(concat( equipos_c, ',', equipo_c),'^',''),'') as equipos
                       from users_cstm
-                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}'),'{$usrFleet}'";
+                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}','{$usrFleet}')";
             $resultP = $GLOBALS['db']->query($queryP);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultP)){
                 if($row['equipos'] !='' && $row['equipos']!= null) {

@@ -1,8 +1,27 @@
 <?php
- // created: 2019-04-15 17:19:11
-$dictionary['Account']['fields']['regimenpatrimonial_c']['labelValue'] = 'Régimen Patrimonial';
-$dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']['trigger'] = 'estadocivil_c';
-$dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']['values']['Casado'][0] = '1';
-$dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']['values']['Casado'][1] = '2';
-$dictionary['Account']['fields']['regimenpatrimonial_c']['full_text_search']['boost'] = 1;
+ // created: 2020-01-10 08:50:15
+$dictionary['Account']['fields']['regimenpatrimonial_c']['labelValue']='Régimen Patrimonial';
+$dictionary['Account']['fields']['regimenpatrimonial_c']['dependency']='';
+$dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']=array (
+  'trigger' => 'estadocivil_c',
+  'values' => 
+  array (
+    'Casado' => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+    ),
+    '' => 
+    array (
+    ),
+    'Soltero' => 
+    array (
+    ),
+    'Union Libre' => 
+    array (
+    ),
+  ),
+);
 
+ ?>
