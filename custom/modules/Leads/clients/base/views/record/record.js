@@ -241,7 +241,7 @@
     },
 
 
-    valida_requeridos_min:function (fields, errors, callback)  {
+    valida_requeridos_min: function (fields, errors, callback) {
         var campos = "";
 
         _.each(errors, function (value, key) {
@@ -280,8 +280,8 @@
         var subTipoLead = this.model.get('subtipo_registro_c');
         var tipoPersona = this.model.get('regimen_fiscal_c');
         var campos_req = ['origen_c'];
-        var response=false;
-        var errors={};
+        var response = false;
+        var errors = {};
 
         switch (subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
@@ -302,7 +302,7 @@
                     campos_req.push('nombre_c', 'apellido_paterno_c', 'puesto_c');
                 }
 
-                campos_req.push('macrosector_c','ventas_anuales_c','zona_geografica_c','email');
+                campos_req.push('macrosector_c', 'ventas_anuales_c', 'zona_geografica_c', 'email');
 
                 break;
 
@@ -316,10 +316,8 @@
 
                 var temp_req = campos_req[i];
 
-                if(temp_req=='ventas_anuales_c')
-                {
-                    if(this.model.get('ventas_anuales_c')==0)
-                    {
+                if (temp_req == 'ventas_anuales_c') {
+                    if (this.model.get('ventas_anuales_c') == 0) {
                         errors[temp_req] = errors[temp_req] || {};
                         errors[temp_req].required = true;
 
@@ -360,7 +358,7 @@
             errors['phone_work'] = errors['phone_work'] || {};
             errors['phone_work'].required = true;
         }
-        
+
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
@@ -371,12 +369,11 @@
 
         // console.log("campos requeridos "  +campos);
 
-        if(campos=="")
-        {
-            response= true;
+        if (campos == "") {
+            response = true;
         }
 
-return response;
+        return response;
     },
 
     _readonlyFields: function () {
@@ -389,9 +386,11 @@ return response;
 
             _.each(this.model.fields, function (field) {
 
-                self.noEditFields.push(field.name);
-                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
+                    self.noEditFields.push(field.name);
+                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                }
             });
         }
         /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
@@ -402,10 +401,11 @@ return response;
 
             _.each(this.model.fields, function (field) {
 
-                self.noEditFields.push(field.name);
-                self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
-
+                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
+                    self.noEditFields.push(field.name);
+                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                }
             });
 
             this._disableActionsSubpanel();
@@ -539,7 +539,7 @@ return response;
         // alert(this.model.get('id'))
         if (this.valida_requeridos()) {
 
-            app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+            app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
 
             app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
                 success: _.bind(function (data) {
