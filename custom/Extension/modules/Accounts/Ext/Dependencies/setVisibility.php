@@ -53,3 +53,19 @@ $dependencies['Accounts']['tct_status_atencion_ddw_c'] = array(
         ),
     ),
 );
+
+$dependencies['Accounts']['tct_pais_expide_rfc_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('deudor_factor_c','tct_pais_expide_rfc_c','tipo_relacion_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'tct_pais_expide_rfc_c',
+                'value' => 'or(equal($deudor_factor_c,"1"),equal($tipo_relacion_c,"Proveedor de Recursos L"),equal($tipo_relacion_c,"Proveedor de Recursos F"),equal($tipo_relacion_c,"Proveedor de Recursos CA"),equal($tipo_relacion_c,"Proveedor de Recursos CS"))',
+            ),
+        ),
+    ),
+);

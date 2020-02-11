@@ -310,3 +310,6 @@ $mod_strings['LNK_CUENTAS_NO_CONTACTAR'] = 'Cuentas No contactar';
 $mod_strings['LBL_PROMOTORUNICLICK_C'] = 'Asesor Uniclick';
 $mod_strings['LBL_PROMOTORUNICLICK_C_USER_ID'] = 'Asesor Uniclick (relacionado Usuario ID)';
 $mod_strings['LBL_ID_UNICLICK'] = 'Id Cliente Uniclick';
+$mod_strings['LBL_APODERADO_NOMBRE_C'] = 'Nombre (Apoderado legal)';
+$mod_strings['LBL_APODERADO_APATERNO_C'] = 'Apellido paterno (Apoderado legal)';
+$mod_strings['LBL_APODERADO_AMATERNO_C'] = 'Apellido materno (Apoderado legal)';

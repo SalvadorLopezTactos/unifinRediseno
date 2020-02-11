@@ -138,7 +138,7 @@
         $('[data-name="tct_noviable"]').hide();
 
         //campo Pais que expide el RFC nace oculto.
-        $('[data-name=tct_pais_expide_rfc_c]').hide();
+        // $('[data-name=tct_pais_expide_rfc_c]').hide();
         //Oculta panel del campo Tipo de Cuenta por Producto
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL17']").hide();
         //Oculta nombre de campo Potencial_Autos
@@ -343,7 +343,7 @@
         this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
 
         //campo Pais que expide el RFC nace oculto.
-        $('[data-name=tct_pais_expide_rfc_c]').hide();
+        // $('[data-name=tct_pais_expide_rfc_c]').hide();
         /*
          AF: 11/01/18
          Merge create-create-actions.js
