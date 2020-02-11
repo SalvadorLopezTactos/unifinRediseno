@@ -40,5 +40,6 @@
         this._super('_dispose');
         $(".select2").show();
         $("filter-definition-container").show();
+        $('[name="parent_type"]').hide();
    },
 })
