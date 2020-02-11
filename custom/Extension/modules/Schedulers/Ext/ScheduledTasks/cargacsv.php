@@ -54,7 +54,7 @@ function cargacsv()
       $nombres = substr($nombre, 14, -4);
       $url = $GLOBALS['sugar_config']['site_url'];
       $archivo = 'custom/errores_reasignacion/'.$nombres.'_'.$fecha.'.txt';
-      $fichero = $url.'custom/errores_reasignacion/'.$nombres.'_'.$fecha.'.txt';
+      $fichero = $url.'/custom/errores_reasignacion/'.$nombres.'_'.$fecha.'.txt';
       $texto_archivo="ACTUALIZADOS:\n";
       for ($i=0;$i<count($actualizados);$i++){
         $texto_archivo.=$actualizados[$i]."\n";
