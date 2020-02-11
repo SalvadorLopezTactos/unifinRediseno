@@ -392,14 +392,56 @@ array (
             array (
               0 => 
               array (
-                'name' => 'minut_minutas_meetings_name',
-                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
-                'readonly' => true,
+                'name' => 'productos_c',
+                'label' => 'LBL_PRODUCTOS_C',
               ),
               1 => 
               array (
               ),
               2 => 
+              array (
+                'name' => 'resultado_confirmado_c',
+                'label' => 'LBL_RESULTADO_CONFIRMADO',
+              ),
+              3 => 
+              array (
+                'name' => 'resultado_confirmado_por_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RESULTADO_CONFIRMADO_POR',
+                'initial_filter' => 'filterSubpuestoTemplate',
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'subpuesto_c' => 
+                  array (
+                    0 => '1',
+                    1 => '2',
+                  ),
+                ),
+              ),
+              4 => 
+              array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+                'readonly' => true,
+              ),
+              5 => 
+              array (
+                'name' => 'validado_por_c',
+                'studio' => 'visible',
+                'label' => 'LBL_VALIDADO_POR',
+                'initial_filter' => 'filterSubpuestoTemplate',
+                'initial_filter_label' => 'Agentes Telefónicos',
+                'filter_populate' => 
+                array (
+                  'subpuesto_c' => 
+                  array (
+                    0 => '1',
+                    1 => '2',
+                  ),
+                ),
+              ),
+              6 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -423,7 +465,7 @@ array (
                   ),
                 ),
               ),
-              3 => 
+              7 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,

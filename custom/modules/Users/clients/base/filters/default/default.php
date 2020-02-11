@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-11 19:37:09
+// created: 2020-01-20 18:10:13
 $viewdefs['Users']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -32,9 +32,17 @@ $viewdefs['Users']['base']['filter']['default'] = array (
     array (
       'type' => 'enum',
       'default' => true,
-      'width' => 10,
+      'width' => '10',
       'name' => 'puestousuario_c',
       'vname' => 'LBL_PUESTOUSUARIO',
+    ),
+    'subpuesto_c' => 
+    array (
+      'type' => 'enum',
+      'default' => true,
+      'width' => 10,
+      'name' => 'subpuesto_c',
+      'vname' => 'LBL_SUBPUESTO',
     ),
     'title' => 
     array (

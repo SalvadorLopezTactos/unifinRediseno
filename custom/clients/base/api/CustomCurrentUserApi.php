@@ -29,6 +29,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['iniciales_c'] = $current_user->iniciales_c;
         $userArray['current_user']['producto_c'] = $current_user->producto_c;
         $userArray['current_user']['puesto_c'] = $current_user->puesto_c;
+        $userArray['current_user']['subpuesto_c'] = $current_user->subpuesto_c;
         $userArray['current_user']['puestousuario_c'] = $current_user->puestousuario_c;
         $userArray['current_user']['region_c'] = $current_user->region_c;
         $userArray['current_user']['tipodeproducto_c'] = $current_user->tipodeproducto_c;
@@ -42,8 +43,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['tct_alta_credito_simple_chk_c'] = $current_user->tct_alta_credito_simple_chk_c;
         $userArray['current_user']['tct_vetar_usuarios_chk_c'] = $current_user->tct_vetar_usuarios_chk_c;
         $userArray['current_user']['tct_no_contactar_chk_c'] = $current_user->tct_no_contactar_chk_c;
+        $userArray['current_user']['agente_telefonico_c'] = $current_user->agente_telefonico_c;
 
         return $userArray;
     }
-
 }

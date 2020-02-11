@@ -282,11 +282,6 @@
 
             this.model.set("tipo_registro_c", 'Cliente');
         }
-        if (App.user.attributes.tct_alta_credito_simple_chk_c) {
-            //Valida que el check este marcado, de ser así setea el tipo de cuenta con CS
-            this.model.set("tipo_registro_c", 'Cliente');
-            this.model.set("subtipo_cuenta_c", 'Credito Simple');
-        }
 
 
         //VM 14/09/2018
@@ -457,6 +452,8 @@
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
         //Funcion para validar que no hayan direcciones repetidas al momento de darle en el check
+        this.promotores_default();
+
 
         /* hay que traer el campo del usaurio
          * PROMOTORES POR DEFAULT
@@ -477,81 +474,6 @@
          a04540fc-e608-56a7-ad47-562a6078519d
          */
 
-
-        var usuario = app.data.createBean('Users', {id: this.model.get('assigned_user_id')});
-        usuario.fetch({
-            success: _.bind(function (modelo) {
-                var contains = function (needle) {
-                    // Per spec, the way to identify NaN is that it is not equal to itself
-                    var findNaN = needle !== needle;
-                    var indexOf;
-
-                    if (!findNaN && typeof Array.prototype.indexOf === 'function') {
-                        indexOf = Array.prototype.indexOf;
-                    } else {
-                        indexOf = function (needle) {
-                            var i = -1, index = -1;
-
-                            for (i = 0; i < this.length; i++) {
-                                var item = this[i];
-
-                                if ((findNaN && item !== item) || item === needle) {
-                                    index = i;
-                                    break;
-                                }
-                            }
-
-                            return index;
-                        };
-                    }
-
-                    return indexOf.call(this, needle) > -1;
-                };
-                /** Modificaci�n a Multiproducto para promotores por default
-                 * Carlos Zaragoza
-                 * Enero 25, 2016 10:15 AM
-                 * */
-                if (contains.call(modelo.get('productos_c'), "1")) {
-                    this.model.set('promotorleasing_c', modelo.get('name'));
-                    this.model.set('user_id_c', modelo.get('id'));
-                } else {
-                    this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                    this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                }
-                if (contains.call(modelo.get('productos_c'), "4")) {
-                    this.model.set('promotorfactoraje_c', modelo.get('name'));
-                    this.model.set('user_id1_c', modelo.get('id'));
-                } else {
-                    this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
-                    this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                }
-                if (contains.call(modelo.get('productos_c'), "3")) {
-                    this.model.set('promotorcredit_c', modelo.get('name'));
-                    this.model.set('user_id2_c', modelo.get('id'));
-                } else {
-                    this.model.set('promotorcredit_c', '9 - Sin Gestor');
-                    this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                }
-                if (contains.call(modelo.get('productos_c'), "6")) {
-                    this.model.set('promotorfleet_c', modelo.get('name'));
-                    this.model.set('user_id6_c', modelo.get('id'));
-                } else {
-                    this.model.set('promotorfleet_c', '9 - Sin Gestor');
-                    this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                }
-                if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
-                    this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                    this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                    this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
-                    this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                    this.model.set('promotorcredit_c', '9 - Sin Gestor');
-                    this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                    this.model.set('promotorfleet_c', '9 - Sin Gestor');
-                    this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
-
-                }
-            }, this)
-        });
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
         var new_options = app.lang.getAppListStrings('tipo_registro_list');
@@ -601,7 +523,6 @@
                 }
             });
         }else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
-
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Proveedor") {
                     delete new_options[key];
@@ -620,14 +541,14 @@
             new_options["Persona"]="Persona";
         }
         //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
-        if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
-            /* Object.keys(new_options).forEach(function (key) {
+        /*if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
+             Object.keys(new_options).forEach(function (key) {
                  if (key != "Cliente") {
                      delete new_options[key];
                  }
-             });*/
+             });
             new_options["Cliente"]="Cliente";
-        }
+        }*/
 
         this.model.fields['tipo_registro_c'].options = new_options;
 
@@ -2837,5 +2758,49 @@
             Pautos.render();
         }
         callback(null,fields,errors);
+    },
+
+    /*Función para asignar los promotes por default a la cuenta, con base en los productos del usuario logueado.*/
+    promotores_default: function (){
+        
+        var userprod= App.user.attributes.productos_c;
+        var nombrecompleto= App.user.attributes.full_name;
+        var idusrlog= App.user.attributes.id;
+
+                if (userprod.includes('1')) {
+                    this.model.set('promotorleasing_c', nombrecompleto);
+                    this.model.set('user_id_c', idusrlog);
+                } else {
+                    this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                    this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (userprod.includes('4')) {
+                    this.model.set('promotorfactoraje_c', nombrecompleto);
+                    this.model.set('user_id1_c', idusrlog);
+                } else {
+                    this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
+                    this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (userprod.includes('3')) {
+                    this.model.set('promotorcredit_c', nombrecompleto);
+                    this.model.set('user_id2_c', idusrlog);
+                } else {
+                    this.model.set('promotorcredit_c', '9 - Sin Gestor');
+                    this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (userprod.includes('6')) {
+                    this.model.set('promotorfleet_c', nombrecompleto);
+                    this.model.set('user_id6_c', idusrlog);
+                } else {
+                    this.model.set('promotorfleet_c', '9 - Sin Gestor');
+                    this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
+                if (userprod.includes('8')) {
+                    this.model.set('promotoruniclick_c', nombrecompleto);
+                    this.model.set('user_id7_c', idusrlog);
+                } else {
+                    this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                    this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                }
     },
 })

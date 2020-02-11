@@ -1,7 +1,8 @@
 <?php
- // created: 2018-01-10 14:13:02
+ // created: 2019-11-22 09:01:17
 
 $app_list_strings['idactivo_list']=array (
+  '' => '',
   '000100030001' => 'AUTOS',
   '0001' => 'EQUIPO DE TRANSPORTE',
   '000100030002' => 'CAMIONES',

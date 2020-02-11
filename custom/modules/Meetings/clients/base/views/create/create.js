@@ -16,6 +16,7 @@
         //this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
+        this.model.addValidationTask('Valida_producto_usuario',_.bind(this.productoReunion, this));
 
         this.on('render', this.disablestatus, this);
     },
@@ -33,8 +34,15 @@
         if(this.model.get('status')=='Planned'){
             this.$('div[data-name=resultado_c]').hide();
         }
+        //Oculta campos Validado Por y Resultado Confirmado ...
+        $('[data-name="validado_por_c"]').hide();
+        $('[data-name="resultado_confirmado_c"]').hide();
+        $('[data-name="resultado_confirmado_por_c"]').hide();
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
+
+        //Función para ocultar o mostrar el campo Producto
+        this.campoproducto();
     },
 
     /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/
@@ -313,4 +321,41 @@
             callback(null, fields, errors);
         }
     },
-})
+
+    campoproducto: function () {
+        var productuser= App.user.attributes.puestousuario_c;
+        if (productuser!='27' || (productuser=='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id))){
+            $('[data-name="productos_c"]').hide();
+        }
+    },
+
+    productoReunion:function (fields, errors, callback) {
+        var productuser= App.user.attributes.puestousuario_c;
+        var asignado = this.model.get('assigned_user_id');
+        var id= App.user.attributes.id;
+        var usuarios=0;
+        for(var i=0;i<this.model.attributes.invitees.models.length;i++) {
+            if (this.model.attributes.invitees.models[i].module == "Users") {
+                usuarios++;
+            }
+        }
+        if (usuarios==1) {
+            if (productuser == '27' && asignado == id && (this.model.get('productos_c') == "" || this.model.get('productos_c') == undefined)) {
+                app.alert.show("Error_campo_prodcuto_ok", {
+                    level: "error",
+                    title: "Hace falta seleccionar el producto de la Reunión.",
+                    autoClose: false
+                });
+                errors['productos_c'] = errors['productos_c'] || {};
+                errors['productos_c'].required = true;
+            }
+        }else{
+            this.model.set("productos_c","");
+        }
+        callback(null, fields, errors);
+
+    },
+
+
+
+    })

@@ -6,7 +6,7 @@
  */
 ({
 
-    className: 'Reasignacion-de-promotores tcenter',
+    className: 'Reasignacion-de-promotores',
 
     events: {
         'click #btn_Cuentas': 'buscarCuentas',
@@ -16,6 +16,7 @@
         'click #next_offset': 'nextOffset',
         'click #previous_offset': 'previousOffset',
         'change #filtroCliente': '_setOffset',
+        'click .btnSubir': 'leerCSVReasignar',
     },
 
     initialize: function(options){
@@ -58,7 +59,7 @@
         this._super("_render");
         var tipos_cuenta=[];
          this.$('#tipo_de_cuenta').select2({
-             width:'250px',
+             width:'400px',
              closeOnSelect: false,
              containerCssClass: 'select2-choices-pills-close'
          });
@@ -74,6 +75,98 @@
     _setOffset: function (){
         $("#offset_value").attr("from_set", 0);
         $("#crossSeleccionados").val("");
+    },
+
+    leerCSVReasignar:function () {
+        var fileInput = document.getElementById('csvReasignar');
+        var archivo = fileInput.value;
+        if(archivo=="" || archivo==undefined){
+            app.alert.show('errorAlert', {
+                level: 'error',
+                messages: 'Favor de elegir un archivo',
+                autoClose: true
+            });
+        }else{
+            app.alert.show('reasignandoCSV', {
+              level: 'process',
+              title: 'Cargando...'
+            });
+            $('.btnSubir').addClass('disabled');
+            $('.btnSubir').attr('style', 'pointer-events:none;margin:10px');
+            var file = fileInput.files[0];
+            var nombre = file.name;
+            var textType = /text.*/;
+            self=this;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var content = reader.result;
+                var archivocsv = {
+                    "documento":content,
+                    "archivo":nombre,
+                    "tipo":'reasignar'
+                };
+                var seguir=true;
+                if(content.trim() ==""){
+                    app.alert.show('csvVacio', {
+                        level: 'error',
+                        messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                        autoClose: false
+                    });
+                    seguir=false;
+                }
+                if(seguir){
+                    var registros=content.split('\n');
+                    var flag=self.vaidateEmptyContent(registros);
+                    if(!flag){
+                      var Url = app.api.buildURL("guardaCSV", '', {}, {});
+                      app.api.call("create", Url, {data: archivocsv}, {
+                          success: _.bind(function (data) {
+                            app.alert.dismiss('reasignandoCSV');
+                            $('.btnSubir').removeClass('disabled');
+                            $('.btnSubir').attr('style', 'margin:10px');
+                            app.alert.show('csvOK', {
+                                level: 'success',
+                                messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
+                                autoClose: false
+                            });
+                            self.render();
+                          },this),
+                          error: function (e) {
+                            throw e;
+                          }
+                      });
+                    }else{
+                      app.alert.show('csvVacio', {
+                          level: 'error',
+                          messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                          autoClose: false
+                      });
+                    }
+                }
+            }
+            reader.readAsText(file);
+        }
+    },
+
+    vaidateEmptyContent:function (registros) {
+
+        var counter=0;
+
+        var flag=false;
+        var numero_elementos=registros.length;
+        if(numero_elementos!=undefined && numero_elementos>0){
+            //Empieza desde el indice 1, pues se asume que el primer renglón es el de las cabeceras
+            for(var i=1;i<numero_elementos;i++){
+                if(registros[i].trim()==""){
+                    counter++;
+                }
+            }
+            if(counter==numero_elementos-1){
+                flag=true;
+            }
+        }
+
+        return flag;
     },
 
     seleccionarTodo: function(e){
@@ -427,13 +520,16 @@
                     'producto_seleccionado': producto_seleccionado,
                     'promoActual': promoActual,
                 };
-                $('#processing').show();
+                app.alert.show('reasignando', {
+                    level: 'process',
+                    title: 'Cargando...'
+                });
                 var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
                 app.api.call("create", dnbProfileUrl, {data: Params}, {
                     success: _.bind(function (data) {
                         console.log(typeof data);
-                        if(data==true){
-                            $('#processing').hide();
+                        if(data){
+                            app.alert.dismiss('reasignando');
                             this.cuentas = [];
                             this.seleccionados = [];
                             this.render();
@@ -443,7 +539,7 @@
                             this.model.set("asignar_a_promotor_id","");
                             this.model.set("asignar_a_promotor","");
                         }else{
-                            $('#processing').hide();
+                            app.alert.dismiss('reasignando');
                             var alertOptions = {
                                 title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
                                 level: "error"
@@ -454,7 +550,7 @@
                 });
             }else{
                 var alertOptions = {
-                    title: "No hay clientes seleccionadas para reasignar",
+                    title: "No hay clientes seleccionados para reasignar",
                     level: "error"
                 };
                 app.alert.show('validation', alertOptions);

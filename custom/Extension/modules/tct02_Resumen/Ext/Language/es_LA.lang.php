@@ -53,3 +53,7 @@ $mod_strings['LBL_TCT_NO_AUTOS_U_INT_C'] = 'Número de Autos Utilitarios';
 $mod_strings['LBL_TCT_NO_AUTOS_E_INT_C'] = 'Número de Autos Ejecutivos';
 $mod_strings['LBL_TCT_NO_MOTOS_INT_C'] = 'Número de Motos';
 $mod_strings['LBL_TCT_NO_CAMIONES_INT_C'] = 'Número de Camiones';
+$mod_strings['LBL_SOS_FECHA_PAGO'] = 'Crédito SOS Fecha pago';
+$mod_strings['LBL_TCT_TIPO_UC_TXF'] = 'Tipo Producto Uniclick';
+$mod_strings['LBL_TCT_SUBTIPO_UC_TXF'] = 'Subtipo Producto Uniclick';
+$mod_strings['LBL_TCT_TIPO_CUENTA_UC'] = 'Tipo de Cuenta Uniclick';

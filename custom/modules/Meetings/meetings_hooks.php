@@ -389,6 +389,26 @@ class Meetings_Hooks
                 and user_id = '{$idUsuario}'
     ";
     $updateResult = $db->query($update);
+
+      $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+      if ($beanUser->tipodeproducto_c!='27') {
+          //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
+          $actualizaproductos = "update meetings_cstm
+                        inner join
+                        (select
+                        parent_meeting_c id,
+                          group_concat( distinct productos_c) productos
+                        from meetings_cstm
+                        where productos_c is not null
+                        and parent_meeting_c='{$bean->id}'
+                        group by parent_meeting_c
+                        ) parentM on parentM.id = meetings_cstm.id_c
+                        set meetings_cstm.productos_c = parentM.productos
+                        where parentM.productos !=''
+                        ;";
+          $updateResult = $db->query($actualizaproductos);
+          //$GLOBALS['log']->fatal($actualizaproductos);
+      }
   }
 
   /*
@@ -413,7 +433,7 @@ class Meetings_Hooks
                 //Envía encuesta
                 Meetings_Hooks::sendEmailSurvey($bean);
               //Criterio 3b
-            } elseif ($bean->fetched_row['status'] == 'Planned' && $bean->status !=  'Planned' && ($bean->resultado_c == '1' || $bean->resultado_c == '22') ) {
+            } elseif ($bean->fetched_row['status'] == 'Planned' && $bean->status !=  'Planned' && ($bean->resultado_c == '22' || $bean->resultado_c == '24' || $bean->resultado_c == '25') ) {
                 //Envía encuesta
                 Meetings_Hooks::sendEmailSurvey($bean);
               }
@@ -491,5 +511,38 @@ class Meetings_Hooks
           }
       }
   }
+
+    function guardaproductos ($bean, $event, $args){
+        //Función para guardar el tipo de producto Principal de los invitados a la Reunión (padre)
+        $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+        if ($beanUser->puestousuario_c!='27'){
+
+            $bean->productos_c = '^'.$beanUser->tipodeproducto_c.'^';
+            if ($bean->parent_meeting_c) {
+                $beanparentmeeting = BeanFactory:: getBean('Meetings', $bean->parent_meeting_c);
+                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
+                if ($beanUserPadre->puestousuario_c!='27'){
+                    $saveproductos=array();
+                    $valorinicial=$beanparentmeeting->productos_c;
+                    //$GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
+                    if ($valorinicial==""){
+                        $beanparentmeeting->productos_c =$bean->productos_c;
+                        $valorinicial=$beanparentmeeting->productos_c;
+                    }else{
+                        $beanparentmeeting->productos_c = $beanparentmeeting->productos_c .','. $bean->productos_c;
+                    }
+                    $saveproductos=explode(",", $beanparentmeeting->productos_c);
+                    $valoresunicos=array_unique($saveproductos);
+                    $valorupdate=implode(",",$valoresunicos);
+                    //$GLOBALS['log']->fatal("Valor update: '.$valorupdate.'");
+                    //$GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
+
+                    $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
+                }
+
+            }
+        }
+
+    }
 
 }

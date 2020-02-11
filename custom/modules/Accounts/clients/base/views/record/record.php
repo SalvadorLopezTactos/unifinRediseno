@@ -134,7 +134,16 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              13 => 
+              13 =>
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:conversion_cliente_uniclick:click',
+                'name' => 'clienteuniclick',
+                'label' => 'Conversión Cliente Uniclick',
+                'acl_action' => 'view',
+                'class' => 'jcmx1',
+              ),
+              14 =>
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -142,7 +151,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              14 => 
+              15 =>
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -442,11 +451,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'estatus_persona_c',
-                'label' => 'LBL_ESTATUS_PERSONA',
+                'name' => 'id_uniclick_c',
+                'label' => 'LBL_ID_UNICLICK',
               ),
               1 => 
               array (
+                'name' => 'estatus_persona_c',
+                'label' => 'LBL_ESTATUS_PERSONA',
               ),
               2 => 
               array (
@@ -826,6 +837,15 @@ array (
                 array (
                   'tipodeproducto_c' => '6',
                 ),
+              ),
+              4 => 
+              array (
+                'name' => 'promotoruniclick_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORUNICLICK_C',
+              ),
+              5 => 
+              array (
               ),
             ),
           ),

@@ -1,167 +1,245 @@
-<style>
-   .columnas{
-       padding: 1%;
-   }
+<!--Restructura Adrian Arauz
+-->
+<script>
+    var $condiciones = this.$('[data-name=condiciones_financieras]').find('select.select2');
+    $condiciones.select2();
+</script>
+<!-- Condicion Financiera Existente -->
+<table id="condicionesExist" style="width:100%">
+<div cellspacing="1" cellpadding="5">
+{{#each oFinanciera.condicion}}
+    <div class="CFexistente" style="border-bottom: 1px solid;   border-color:#cfcfcf;">
+        <br>
+        <!-- Fila 1 -->
+    <div class="row-fluid Fila1-CF">
 
-    .primeraCol{
-        padding-left: 10%;
-    }
-</style>
+                <div class="span3" >
+                    <label class="record-label"> Activo</label>
+                    <select class="row-fluid select2 existingActivo" data-field="Activo" placeholder="Activo">
+                        {{#each ../activo_list}}
+                         <option value="{{@key}}" {{ifSelected @key ../idactivo}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
 
-<div class="control-group condiciones_financieras">
-    <table class="dashlet condiciones_financierasdashlet" style="border: solid lightblue;" cellspacing="1" cellpadding="5" width="100%">
-        <tr>
-            <td >
-                <div class="record-label primeraCol">
-                    Activo
+                <div class="span3" >
+                    <label class="record-label">Plazo</label>
+                    <select class="row-fluid select2 existingPlazo" data-field="Plazo" placeholder="Plazo">
+                        {{#each ../plazo_list}}
+                         <option value="{{@key}}" {{ifSelected @key ../plazo}}>{{this}}</option>
+                        {{/each}}
+                    </select>
                 </div>
-            </td>
-            <td class="columnas">
-                <select class="newActivo" data-field="Activo" placeholder="Activo" style="font-size: 15px;font-weight: 500;">
-                    {{{activo_list_html}}}
-                </select>
-            </td>
-            <td >
-                <div class="record-label">
-                    Plazo
-                </div>
-            </td>
-            <td class="columnas">
-                <select class="newPlazo" data-field="Plazo" placeholder="Plazo" style="font-size: 15px;font-weight: 500;" id="new_plazo">
-                    {{{plazo_list_html}}}
-                </select>
-            </td>
-            <td >
-                <div class="record-label">
-                    Tasa Minima
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newTasaMinima porcentaje" value="{{tasa_minima}}" data-max="newTasaMaxima" id="new_tasa_minima"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Tasa Maxima
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newTasaMaxima porcentaje" value="{{tasa_maxima}}" data-min="newTasaMinima" id="new_tasa_maxima"/>
-            </td>
-            <td></td>
-        </tr>
 
-        <tr>
-            <td >
-                <div class="record-label primeraCol">
-                    VRC Minimo
+                <div class="span3" >
+                    <label class="record-label">Tasa Mínima</label>
+                    <input type="text" class="existingTasaMinima porcentaje" value="{{tasa_minima}}" data-name="tasa_minima"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newVRCMinimo porcentaje" value="{{vrc_minimo}}" data-max="newVRCMaximo" id="new_vrc_minimo"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    VRC Maximo
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newVRCMaximo porcentaje" value="{{vrc_maximo}}" data-min="newVRCMinimo" id="new_vrc_maximo"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    VRI Minimo
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newVRIMinimo porcentaje" value="{{vri_minimo}}" data-max="newVRIMaximo" id="new_vri_minimo"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    VRI Maximo
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newVRIMaximo porcentaje" value="{{vri_maximo}}" data-min="newVRIMinimo" id="new_vri_maximo"/>
-            </td>
-            <td></td>
-        </tr>
 
-        <tr>
-            <td >
-                <div class="record-label primeraCol">
-                    Comision Minima
+                <div class="span3" >
+                    <label class="record-label">Tasa Máxima</label>
+                    <input type="text" class="existingTasaMaxima porcentaje" value="{{tasa_maxima}}" data-name="tasa_maxima"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newComisionMinima porcentaje" value="{{comision_minima}}" data-max="newComisionMaxima" id="new_comision_minima"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Comision Maxima
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newComisionMaxima porcentaje" value="{{comision_maxima}}" data-min="newComisionMinima" id="new_comision_maxima"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Pago Único Mínimo
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newRentaInicialMinima porcentaje" value="{{renta_inicial_minima}}" data-max="newRentaInicialMaxima" id="new_renta_inicial_minima"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Pago Único Máximo
-                </div>
-            </td>
-            <td class="columnas">
-                <input type="text" class="newRentaInicialMaxima porcentaje" value="{{renta_inicial_maxima}}" data-min="newRentaInicialMinima" id="new_renta_inicial_maxima"/>
-            </td>
-            <td></td>
-        </tr>
+    </div>
+    &nbsp
+    <!-- Fila 2 -->
+    <div class="row-fluid Fila2-CF">
 
-        <tr>
-            <td >
-                <div class="record-label primeraCol">
-                    Deposito en Garantia
+                <div class="span3" >
+                    <label class="record-label">VRC Minimo</label>
+                    <input type="text" class="existingVRCMinimo porcentaje" value="{{vrc_minimo}}" data-name="vrc_minimo"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="checkbox" class="newDeposito" value="{{deposito_en_garantia}}" id="new_deposito_en_garantia"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Uso Particular
+
+                <div class="span3" >
+                    <label class="record-label">VRC Máximo</label>
+                    <input type="text" class="existingVRCMaximo porcentaje" value="{{vrc_maximo}}" data-name="vrc_maximo"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="checkbox" class="newUsoParticular" value="{{uso_particular}}"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Uso Empresarial
+
+                <div class="span3" >
+                    <label class="record-label">VRI Mínimo</label>
+                    <input type="text" class="existingVRIMinimo porcentaje" value="{{vri_minimo}}" data-name="vri_minimo"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="checkbox" class="newUsoEmpresarial" value="{{uso_empresarial}}"/>
-            </td>
-            <td >
-                <div class="record-label">
-                    Activo Nuevo?
+
+                <div class="span3" >
+                    <label class="record-label">VRI Máximo</label>
+                    <input type="text" class="existingVRIMaximo porcentaje" value="{{vri_maximo}}" data-name="vri_maximo"/>
                 </div>
-            </td>
-            <td class="columnas">
-                <input type="checkbox" class="newActivoNuevo" value="{{activo_nuevo}}"/>
-            </td>
-            <td width="10%">
-                <div class="btn-toolbar prevent-mousedown">
+    </div>
+    &nbsp
+    <!-- Fila 3 -->
+    <div class="row-fluid Fila3-CF">
+
+                <div class="span3" >
+                    <label class="record-label">Comisión Mínima</label>
+                    <input type="text" class="existingComisionMinima porcentaje" value="{{comision_minima}}" data-name="comision_minima"/>
+                </div>
+
+                <div class="span3" >
+                    <label class="record-label">Comisión Máxima</label>
+                    <input type="text" class="existingComisionMaxima porcentaje" value="{{comision_maxima}}" data-name="comision_maxima"/>
+                </div>
+
+                <div class="span3" >
+                    <label class="record-label">Pago Único Mínimo</label>
+                    <input type="text" class="existingRentaInicialMinima porcentaje" value="{{renta_inicial_minima}}" data-name="renta_inicial_minima"/>
+                </div>
+
+                <div class="span3" >
+                    <label class="record-label">Pago Único Máximo</label>
+                    <input type="text" class="existingRentaInicialMaxima porcentaje" value="{{renta_inicial_maxima}}" data-name="renta_inicial_maxima"/>
+                </div>
+    </div>
+    &nbsp
+    <!-- Fila 4 -->
+    <div class="row-fluid Fila4-CF">
+
+                <div class="span3">
+                    <label class="record-label">Depósito en Garantía</label>
+                    <input type="checkbox" class="existingDeposito deposito_en_garantia" data-name="deposito_en_garantia" {{#if deposito_en_garantia}}checked{{/if}}/>
+                </div>
+
+                <div class="span3">
+                    <label class="record-label">Uso Particular</label>
+                    <input type="checkbox" class="existingUsoParticular uso_particular" data-name="uso_particular" {{#if uso_particular}}checked{{/if}}/>
+                </div>
+
+                <div class="span3">
+                    <label class="record-label">Uso Empresarial</label>
+                    <input type="checkbox" class="existingUsoEmpresarial uso_empresarial" data-name="uso_empresarial" {{#if uso_empresarial}}checked{{/if}}/>
+                </div>
+
+                <div class="span2">
+                    <label class="record-label">¿Activo Nuevo?</label>
+                    <input type="checkbox" class="existingActivoNuevo activo_nuevo" data-name="activo_nuevo" {{#if activo_nuevo}}checked{{/if}}/>
+                </div>
+
+                <div class="btn-toolbar prevent-mousedown" >
                     <div class="btn-group">
-                        <a href="javascript:void(0)" class="btn addCondicionFinanciera" rel="tooltip" title="Add Condicion Financiera"><i class="fa fa-check"></i></a>
+                        &nbsp
+                        <a href="javascript:void(0)" class="btn removeCondicionFinanciera" data-name="remove_condicion" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
                     </div>
                 </div>
-            </td>
-        </tr>
-    </table>
+    </div>
+    </div>
+    <br>
+{{/each}}
 </div>
+</table>
+
+
+
+<!-- Condicion Financiera NUEVA -->
+<table id="CondicionesNueva" style="width:100%">
+<div style="border: solid lightblue" cellspacing="1" cellpadding="5">
+    <!-- Fila 1 -->
+    <div class="row-fluid Fila1-CF">
+
+        <div class="span3" >
+            <label class="record-label"> Activo</label>
+            <select class="row-fluid select2 newActivo" data-field="Activo" placeholder="Activo" style="font-size: 15px;font-weight: 500;">
+                {{#each activo_list}}
+                    <option value="{{@key}}" {{ifSelected @key ../activo_list}}>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Plazo</label>
+            <select class="row-fluid select2 newPlazo" data-field="Plazo" placeholder="Plazo" style="font-size: 15px;font-weight: 500;">
+                {{#each plazo_list}}
+                    <option value="{{@key}}" {{ifSelected @key ../plazo_list}}>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Tasa Mínima</label>
+            <input type="text" class="newTasaMinima porcentaje" value="{{tasa_minima}}" data-max="newTasaMaxima"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Tasa Máxima</label>
+            <input type="text" class="newTasaMaxima porcentaje" value="{{tasa_maxima}}" data-min="newTasaMinima"/>
+        </div>
+    </div>
+    &nbsp
+    <!-- Fila 2 -->
+    <div class="row-fluid Fila2-CF">
+
+        <div class="span3" >
+            <label class="record-label">VRC Minimo</label>
+            <input type="text" class="newVRCMinimo porcentaje" value="{{vrc_minimo}}" data-max="newVRCMaximo"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">VRC Máximo</label>
+            <input type="text" class="newVRCMaximo porcentaje" value="{{vrc_maximo}}" data-min="newVRCMinimo"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">VRI Mínimo</label>
+            <input type="text" class="newVRIMinimo porcentaje" value="{{vri_minimo}}" data-max="newVRIMaximo"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">VRI Máximo</label>
+            <input type="text" class="newVRIMaximo porcentaje" value="{{vri_maximo}}" data-min="newVRIMinimo"/>
+        </div>
+    </div>
+    &nbsp
+    <!-- Fila 3 -->
+    <div class="row-fluid Fila3-CF">
+
+        <div class="span3" >
+            <label class="record-label">Comisión Mínima</label>
+            <input type="text" class="newComisionMinima porcentaje" value="{{comision_minima}}" data-max="newComisionMaxima"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Comisión Máxima</label>
+            <input type="text" class="newComisionMaxima porcentaje" value="{{comision_maxima}}" data-min="newComisionMinima"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Pago Único Mínimo</label>
+            <input type="text" class="newRentaInicialMinima porcentaje" value="{{renta_inicial_minima}}" data-max="newRentaInicialMaxima"/>
+        </div>
+
+        <div class="span3" >
+            <label class="record-label">Pago Único Máximo</label>
+            <input type="text" class="newRentaInicialMaxima porcentaje" value="{{renta_inicial_maxima}}" data-min="newRentaInicialMinima"/>
+        </div>
+    </div>
+    &nbsp
+    <!-- Fila 4 -->
+    <div class="row-fluid Fila4-CF">
+
+        <div class="span3">
+            <label class="record-label">Depósito en Garantía</label>
+            <input type="checkbox" class="newDeposito" value="{{deposito_en_garantia}}"/>
+        </div>
+
+        <div class="span3">
+            <label class="record-label">Uso Particular</label>
+            <input type="checkbox" class="newUsoParticular" value="{{uso_particular}}"/>
+        </div>
+
+        <div class="span3">
+            <label class="record-label">Uso Empresarial</label>
+            <input type="checkbox" class="newUsoEmpresarial" value="{{uso_empresarial}}"/>
+        </div>
+
+        <div class="span2">
+            <label class="record-label">¿Activo Nuevo?</label>
+            <input type="checkbox" class="newActivoNuevo" value="{{activo_nuevo}}"/>
+        </div>
+
+        <div class="btn-toolbar prevent-mousedown" >
+            <div class="btn-group">
+                &nbsp
+                <a href="javascript:void(0)" class="btn addCondicionFinanciera" rel="tooltip" title="Add Condicion Financiera"><i class="fa fa-check"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+</table>

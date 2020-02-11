@@ -86,6 +86,7 @@ class GetUsersBoss extends SugarApi
         $usrFactoraje = $beanAccounts->user_id1_c;
         $usrCredito = $beanAccounts->user_id2_c;
         $usrFleet = $beanAccounts->user_id6_c;
+        $usrUniclick = $beanAccounts->user_id7_c;
         $usuarioLog = $current_user->id;
         $queryR = "Select R.id, R.name
 		 from acl_roles R
@@ -98,7 +99,7 @@ class GetUsersBoss extends SugarApi
          * Modificación para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
         **/
 
-        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog==$usrFleet) {
+        if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito || $usuarioLog==$usrFleet || $usuarioLog==$usrUniclick) {
             $flag = true;
         }
 
@@ -147,7 +148,7 @@ class GetUsersBoss extends SugarApi
             //Recupera equipos de promotores
             $queryP = "select group_concat(replace(concat( equipos_c, ',', equipo_c),'^',''),'') as equipos
                       from users_cstm
-                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}'),'{$usrFleet}'";
+                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}','{$usrFleet}')";
             $resultP = $GLOBALS['db']->query($queryP);
             while ($row = $GLOBALS['db']->fetchByAssoc($resultP)){
                 if($row['equipos'] !='' && $row['equipos']!= null) {

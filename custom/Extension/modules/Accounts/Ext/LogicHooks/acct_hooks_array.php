@@ -186,3 +186,18 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'quitaespacios'
 );
+
+$hook_array['before_save'][] = Array(
+    14,
+    'Se establece por default el asesor 9 - Sin Gestor en los campos de asesores que no contengan valor',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'asignaSinGestor'
+);
+$hook_array['before_save'][] = Array(
+    14,
+    'Valida Id Cliente Uniclick',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'idUniclick'
+);

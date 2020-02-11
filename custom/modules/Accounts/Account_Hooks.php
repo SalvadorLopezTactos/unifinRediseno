@@ -983,6 +983,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
             $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
             $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            //UNICLICK
+            $bean_Resumen->tct_tipo_uc_txf_c= $bean->tipo_registro_c;
+            $bean_Resumen->tct_subtipo_uc_txf_c=$bean->subtipo_cuenta_c;
+            $bean_Resumen->tct_tipo_cuenta_uc_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
 
             //Evalua tipo de cuenta
             if ($bean->tipo_registro_c == 'Prospecto' && $bean->subtipo_cuenta_c == 'Integracion de Expediente' ) {
@@ -999,6 +1003,10 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_Resumen->tct_tipo_fl_txf_c= 'Lead';
                 $bean_Resumen->tct_subtipo_fl_txf_c='En Calificacion';
                 $bean_Resumen->tct_tipo_cuenta_fl_c= 'LEAD EN CALIFICACIÓN';
+                //UNICLICK
+                $bean_Resumen->tct_tipo_uc_txf_c= 'Lead';
+                $bean_Resumen->tct_subtipo_uc_txf_c='En Calificacion';
+                $bean_Resumen->tct_tipo_cuenta_uc_c= 'LEAD EN CALIFICACIÓN';
             }
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
@@ -1032,6 +1040,14 @@ where rfc_c = '{$bean->rfc_c}' and
           //Valida promotor CA
           if ((empty($bean->user_id2_c) || $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
               $bean->user_id2_c = $idSinGestor;
+          }
+          //Valida promotor Fleet
+          if ((empty($bean->user_id6_c) || $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
+              $bean->user_id6_c = $idSinGestor;
+          }
+          //Valida promotor Uniclick
+          if ((empty($bean->user_id7_c) || $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
+             $bean->user_id7_c = $idSinGestor;
           }
         }
     }
@@ -1147,4 +1163,51 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
+
+    public function asignaSinGestor($bean=null, $event= null, $args= null){
+
+        $idSinGestor='569246c7-da62-4664-ef2a-5628f649537e';
+
+        //Promotor Leasing
+        if (($bean->user_id_c==null|| $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
+            $bean->user_id_c = $idSinGestor;
+        }
+
+        //Promotor Factoraje
+        if (($bean->user_id1_c==null|| $bean->user_id1_c =="") && empty($bean->promotorfactoraje_c)) {
+            $bean->user_id1_c = $idSinGestor;
+        }
+
+        //Promotor CA
+        if (($bean->user_id2_c==null|| $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
+            $bean->user_id2_c = $idSinGestor;
+        }
+
+        //Promotor Fleet
+        if (($bean->user_id6_c==null|| $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
+            $bean->user_id6_c = $idSinGestor;
+        }
+
+        //Promotor Uniclick
+        if (($bean->user_id7_c==null|| $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
+            $bean->user_id7_c = $idSinGestor;
+        }
+
+    }
+    public function idUniclick($bean=null, $event= null, $args= null){
+      //Valida que no exista id uniclick duplicado
+      global $db;
+      if(!empty($bean->id_uniclick_c) && $bean->id!=""){
+        //Consulta id_uniclick_c
+        $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
+            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}'";
+        //Ejecuta consulta
+        $queryResult = $db->query($query);
+        while ($row = $db->fetchByAssoc($queryResult)) {
+          require_once 'include/api/SugarApiException.php';
+          throw new SugarApiExceptionInvalidParameter("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
+        }
+      }
+    }
+
 }

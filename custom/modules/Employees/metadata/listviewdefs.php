@@ -1,6 +1,6 @@
 <?php
-// created: 2019-06-04 19:10:00
-$listViewDefs['Employees'] = array (
+$listViewDefs['Employees'] = 
+array (
   'name' => 
   array (
     'width' => '20',
@@ -41,6 +41,13 @@ $listViewDefs['Employees'] = array (
     'default' => true,
     'label' => 'LBL_PUESTOUSUARIO',
     'width' => '10',
+  ),
+  'subpuesto_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'label' => 'LBL_SUBPUESTO',
+    'width' => 10,
   ),
   'reports_to_name' => 
   array (

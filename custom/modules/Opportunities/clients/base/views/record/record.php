@@ -612,6 +612,16 @@ array (
                 'label' => 'LBL_F_COMENTARIOS_GENERALES',
                 'span' => 12,
               ),
+              73 => 
+              array (
+                'name' => 'ult_operacion_activa_c',
+                'label' => 'LBL_ULT_OPERACION_ACTIVA',
+              ),
+              74 => 
+              array (
+                'name' => 'operacion_curso_chk_c',
+                'label' => 'LBL_OPERACION_CURSO_CHK',
+              ),
             ),
           ),
           2 => 
