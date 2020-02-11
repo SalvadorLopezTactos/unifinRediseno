@@ -134,7 +134,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              13 =>
+              13 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:conversion_cliente_uniclick:click',
@@ -143,7 +143,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              14 =>
+              14 => 
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -151,7 +151,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              15 =>
+              15 => 
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -659,6 +659,24 @@ array (
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
+              ),
+              42 => 
+              array (
+                'name' => 'apoderado_nombre_c',
+                'label' => 'LBL_APODERADO_NOMBRE_C',
+              ),
+              43 => 
+              array (
+              ),
+              44 => 
+              array (
+                'name' => 'apoderado_apaterno_c',
+                'label' => 'LBL_APODERADO_APATERNO_C',
+              ),
+              45 => 
+              array (
+                'name' => 'apoderado_amaterno_c',
+                'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
             ),
           ),
