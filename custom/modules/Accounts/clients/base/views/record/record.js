@@ -152,8 +152,7 @@
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
 
-
-        /* LEV INICIO */
+		 /* LEV INICIO */
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
 
         /*
@@ -874,6 +873,14 @@
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
         }
+		
+		
+		if (App.user.attributes.deudor_factoraje_c != true) {
+			//Readonly check factoraje
+			//this.$("input[name='deudor_factor_c']").prop("readonly", true);
+			self.noEditFields.push('deudor_factor_c');
+        }
+
 
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
@@ -966,7 +973,6 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
         });
-
     },
 
     editClicked: function () {
@@ -4918,4 +4924,5 @@
             }
         }
     },
+	
 })
