@@ -877,7 +877,6 @@
 		
 		if (App.user.attributes.deudor_factoraje_c != true) {
 			//Readonly check factoraje
-			//this.$("input[name='deudor_factor_c']").prop("readonly", true);
 			self.noEditFields.push('deudor_factor_c');
         }
 

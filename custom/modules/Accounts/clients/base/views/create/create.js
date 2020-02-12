@@ -569,6 +569,10 @@
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
+		
+		/*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
+		this.model.on('change:tipo_registro_c',this.check_factoraje, this);
+
 
     },
 
@@ -2850,5 +2854,13 @@
                     this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
     },
+	
+	check_factoraje: function () {
+		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_c') == 'Persona') {
+			this.model.set('deudor_factor_c', true);
+        }else{
+			this.model.set('deudor_factor_c', false);
+		}
+	},
 	
 })
