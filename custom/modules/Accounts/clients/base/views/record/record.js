@@ -262,7 +262,7 @@
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
-        
+
     },
 
     saveProdPLD: function (fields, errors, callback) {
@@ -3241,21 +3241,17 @@
 
     validacedente: function (fields, errors, callback) {
 
-        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true) {
-
+        if (this.model.get('cedente_factor_c') == true) {
 
             var value = this.oDirecciones.direccion;
             var totalindicadores = "";
 
             if (value != undefined) {
-
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
                     var valorecupera = this._getIndicador(value[i].indicador);
                     totalindicadores = totalindicadores + "," + valorecupera;
-
                 }
-
             }
 
             var arregloindicadores = [];
@@ -3264,7 +3260,6 @@
 
             } else {
                 arregloindicadores = totalindicadores.split(",");
-
             }
 
             var direccionesfaltantes = "";
@@ -3288,11 +3283,9 @@
                 })
                 errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
                 errors['account_direcciones_c'].required = true;
-
             }
             else {
                 $('.select2-choices').css('border-color', '');
-
             }
             //Validar campos adionales
             if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c') == 'Prospecto') {
@@ -3341,10 +3334,66 @@
                         errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                         errors['tct_macro_sector_ddw_c'].required = true;
                     }
-
                 }
-
             }
+        }
+
+
+        if (this.model.get('deudor_factor_c') == true) {
+
+            /**********Campos requeridos para check Deudor Factor*******/
+            var value = this.oDirecciones.direccion;
+            var totalindicadores = "";
+
+            if (value != undefined) {
+                for (i = 0; i < value.length; i++) {
+                    var valorecupera = this._getIndicador(value[i].indicador);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+                }
+            }
+
+            var arregloindicadores = [];
+            if (value == "" || value == null) {
+                arregloindicadores = [0];
+
+            } else {
+                arregloindicadores = totalindicadores.split(",");
+            }
+
+            var direccionesfaltantes = "";
+            if (arregloindicadores.indexOf("2") == -1) {
+                direccionesfaltantes = direccionesfaltantes + 'Domicilio Fiscal<br>';
+            }
+            if (direccionesfaltantes != "") {
+                $('.select2-choices').css('border-color', 'red');
+                app.alert.show('Error al validar Direcciones', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                })
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
+            }
+            else {
+                $('.select2-choices').css('border-color', '');
+            }
+            if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                errors['razonsocial_c'].required = true;
+            }
+            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                errors['actividadeconomica_c'].required = true;
+            }
+            if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+                errors['rfc_c'] = errors['rfc_c'] || {};
+                errors['rfc_c'].required = true;
+            }
+            if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null) {
+                errors['tct_pais_expide_rfc_c'] = errors['tct_pais_expide_rfc_c'] || {};
+                errors['tct_pais_expide_rfc_c'].required = true;
+            }
+
         }
 
         callback(null, fields, errors);
