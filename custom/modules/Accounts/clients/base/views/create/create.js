@@ -60,7 +60,6 @@
                 $(evt.handleObj.selector).selectRange(enteros);
             }
         }
-
     },
 
     checkmoneyint: function (evt) {
@@ -282,12 +281,16 @@
 
             this.model.set("tipo_registro_c", 'Cliente');
         }
-
-
+		
         //VM 14/09/2018
         this.checkProveedor();
 
         this.mostrarpaneldirec();
+		
+		if (App.user.attributes.deudor_factoraje_c != true) {
+			//Readonly check factoraje
+			this.$('[data-name="deudor_factor_c"]').attr('style', 'pointer-events:none;');
+        }
 
     },
 
@@ -537,7 +540,7 @@
                 }
             });
         }
-        if (App.user.attributes.tct_alta_cd_chk_c == true){
+        if (App.user.attributes.tct_alta_cd_chk_c == true || App.user.attributes.deudor_factoraje_c == true){
             new_options["Persona"]="Persona";
         }
         //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
@@ -2803,4 +2806,5 @@
                     this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
     },
+	
 })

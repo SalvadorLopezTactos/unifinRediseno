@@ -316,7 +316,11 @@ array (
             'name' => 'agente_telefonico_c',
             'label' => 'LBL_AGENTE_TELEFONICO',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'deudor_factoraje_c',
+            'label' => 'LBL_DEUDOR_FACTORAJE',
+          ),
         ),
       ),
     ),
