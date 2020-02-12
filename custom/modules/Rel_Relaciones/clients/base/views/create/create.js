@@ -1079,7 +1079,7 @@
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') && this.model.get("relacion_c").trim()!= "") {
+        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
 
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
@@ -1308,7 +1308,7 @@
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') && this.model.get("relacion_c").trim()!= "") {
+        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
 
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
