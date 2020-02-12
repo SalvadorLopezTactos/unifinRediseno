@@ -28,12 +28,21 @@ class NoticiasCuentas extends SugarApi
                 'method' => 'recuperaNoticiaMethod',
                 'shortHelp' => 'Recupera noticia general para vista 360 en cuentas',
             ),
-           'POST_Noticias_PDF' => array(
+
+            'POST_Noticias_PDF' => array(
                 'reqType' => 'POST',
                 'path' => array('guardaNoticiaPDF'),
                 'pathVars' => array(''),
                 'method' => 'guardaNoticiaPDFMethod',
                 'shortHelp' => 'Guarda archvio pdf para vista 360 en cuentas',
+            ),
+
+            'POST_Guarda_CSV' => array(
+                'reqType' => 'POST',
+                'path' => array('guardaCSV'),
+                'pathVars' => array(''),
+                'method' => 'guardaCSVMethod',
+                'shortHelp' => 'Guarda archvio csv para reasignación de asesores',
             ),
         );
     }
@@ -78,7 +87,6 @@ class NoticiasCuentas extends SugarApi
         return $resultado;
     }
 
-
     public function recuperaNoticiaMethod ($api, $args){
         //Recupera variables
         $filename = 'custom/pdf/noticiaGeneral.txt';
@@ -97,10 +105,8 @@ class NoticiasCuentas extends SugarApi
         return $resultado;
     }
 
-
     public function guardaNoticiaPDFMethod ($api, $args)
     {
-
         global $db, $current_user, $app_list_strings;
         //Definir argumento (obtenido del js del archivo
         $archivopdf = $args['data']['documento'];
@@ -114,5 +120,30 @@ class NoticiasCuentas extends SugarApi
         $decodeFile = base64_decode($archivopdf);
         // Copiar el contenido de la data al pdf
         file_put_contents($rute, $decodeFile);
+    }
+
+    public function guardaCSVMethod ($api, $args)
+    {
+        global $current_user;
+        $fecha = date("YmdHis");
+        $archivocsv = $args['data']['documento'];
+        $name = $fecha.$args['data']['archivo'];
+        $tipo = $args['data']['tipo'];
+        $rute = "upload/" . $name;
+        file_put_contents($rute, $archivocsv);
+        $document = BeanFactory::newBean('Documents');
+        $document->document_name = $name;
+        $document->template_type = $tipo;
+        $document->status_id = 'Pending';
+        $document->assigned_user_id = $current_user->id;
+        $document->save();
+        $docRevision = new DocumentRevision();
+        $docRevision->revision = 1;
+        $docRevision->document_id = $document->id;
+        $docRevision->filename = $document->document_name;
+        $docRevision->file_ext = 'csv';
+        $docRevision->assigned_user_id = $current_user->id;
+        $docRevision->save();
+        ob_end_clean();
     }
 }
