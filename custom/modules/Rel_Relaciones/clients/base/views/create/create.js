@@ -36,6 +36,7 @@
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
         this.model.addValidationTask('validarequeridosPropReal',_.bind(this.validaPropietarioReal, this));
         this.model.addValidationTask('validarequeridosProvRec',_.bind(this.validaProveedorRecursos, this));
+        this.model.addValidationTask('validarequeridosRelActivas',_.bind(this.validaRelacionesValidation, this));
 
 
 		this.model.on('change:relacion_c', this.checarValidaciones, this);
@@ -45,6 +46,7 @@
 		this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
 		this.model.on('change:relaciones_activas',this.changejuridico, this);
 		this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
+        this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
 
 		//Perform check of parent data once parent record finishes loading
 		/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
@@ -955,6 +957,7 @@
                                 }, this)
                             });
 
+
                         }
                     }, this)
                 });
@@ -1068,5 +1071,468 @@
             });
         }
     },
+    //Funcion para validar campos requeridos de relacion tipo Aval, Accionista y Representante
+    validaRelacionesChange: function (){
+        var requests=[];
+        var request={};
+        var Cuenta= this.model.get('account_id1_c');
+        request.url="";
+        request.method="GET";
+
+        if (this.model.get('relaciones_activas').includes('Aval') && this.model.get("relacion_c").trim()!= "") {
+
+            var requestA = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta);
+            requestA.url = url.substring(4);
+            requests.push(requestA);
+            var requestB = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_dire_direccion_1");
+            requestB.url = url.substring(4);
+            requests.push(requestB);
+            var requestC = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tel_telefonos_1")
+            requestC.url = url.substring(4);
+            requests.push(requestC);
+            var faltantes=[];
+            var relacionesActivas=[];
+
+
+            app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
+                success: _.bind(function (data) {
+                    //Variables para controlar las direcciones y telefonos
+                    var direP=0;
+                    var direF=0;
+                    var telCyC=0;
+                    var telO=0;
+
+                    //Itera direcciones
+                    for (var d = 0; d < data[1].contents.records.length; d++) {
+                        //Itera direccion Particular
+                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1')) {
+                            direP++;
+                        }
+                        //Valida direccion Fiscal
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2')) {
+                            direF++;
+                        }
+                    }
+                    //Itera telefonos
+                    for (var t = 0; t < data[2].contents.records.length; t++) {
+                        //Itera telefono casa y celular
+                        if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
+                            telCyC++;
+                        }
+                        //Itera para telefono de trabajo y celular trabajo
+                        if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
+                            telO++;
+                        }
+                    }
+                    if (data) {
+                        if (this.model.get('relaciones_activas').includes('Aval')){
+                            relacionesActivas.push("Aval");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.apellidomaterno_c == "") {
+                                    faltantes.push('Apellido Materno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+                            } else {
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.sectoreconomico_c == "") {
+                                    faltantes.push('Sector Económico');
+                                }
+                                if (data[0].contents.actividadeconomica_c == "") {
+                                    faltantes.push('Actividad Económica');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por la direccion
+                            if (direP == 0) {
+                                faltantes.push('Dirección Particular');
+                            }
+                            //Pregunta por el telefono
+                            if (telCyC== 0) {
+                                faltantes.push('Teléfono Casa o Celular');
+                            }
+                        }
+                        if (this.model.get('relaciones_activas').includes('Accionista')) {
+                            relacionesActivas.push("Accionista");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+
+                            }else{
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por el telefono
+                            if (telO== 0) {
+                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                            }
+                            //Pregunta por la direccion fiscal
+                            if (direF == 0) {
+                                faltantes.push('Dirección Fiscal');
+                            }
+                            if (self.model.get('porcentaje_participacion_c')=="" || self.model.get('porcentaje_participacion_c')==undefined){
+                                faltantes.push('Porcentaje de Participación');
+                            }
+
+                        }
+                        if (this.model.get('relaciones_activas').includes('Representante')) {
+                            relacionesActivas.push("Representante");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+                            }else{
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por el telefono
+                            if (telO== 0) {
+                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                            }
+                            //Pregunta por la direccion fiscal
+                            if (direF == 0) {
+                                faltantes.push('Dirección Fiscal');
+                            }
+                        }
+                    }
+                    faltantes=faltantes.unique();
+                    if (faltantes!= "") {
+                        var lista="";
+                        faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
+                        app.alert.show("Campos_faltantes_en_cuenta", {
+                            level: "error",
+                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
+                            autoClose: false
+                        });
+
+                    }
+
+                }, this)
+            });
+        }
+    },
+
+    validaRelacionesValidation: function (fields, errors, callback){
+        var requests=[];
+        var request={};
+        var Cuenta= this.model.get('account_id1_c');
+        request.url="";
+        request.method="GET";
+
+        if (this.model.get('relaciones_activas').includes('Aval') && this.model.get("relacion_c").trim()!= "") {
+
+            var requestA = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta);
+            requestA.url = url.substring(4);
+            requests.push(requestA);
+            var requestB = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_dire_direccion_1");
+            requestB.url = url.substring(4);
+            requests.push(requestB);
+            var requestC = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tel_telefonos_1")
+            requestC.url = url.substring(4);
+            requests.push(requestC);
+            var faltantes=[];
+            var relacionesActivas=[];
+
+
+            app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
+                success: _.bind(function (data) {
+                    //Variables para controlar las direcciones y telefonos
+                    var direP=0;
+                    var direF=0;
+                    var telCyC=0;
+                    var telO=0;
+
+                    //Itera direcciones
+                    for (var d = 0; d < data[1].contents.records.length; d++) {
+                        //Itera direccion Particular
+                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1')) {
+                            direP++;
+                        }
+                        //Valida direccion Fiscal
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2')) {
+                            direF++;
+                        }
+                    }
+                    //Itera telefonos
+                    for (var t = 0; t < data[2].contents.records.length; t++) {
+                        //Itera telefono casa y celular
+                        if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
+                            telCyC++;
+                        }
+                        //Itera para telefono de trabajo y celular trabajo
+                        if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
+                            telO++;
+                        }
+                    }
+                    if (data) {
+                        if (this.model.get('relaciones_activas').includes('Aval')){
+                            relacionesActivas.push("Aval");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.apellidomaterno_c == "") {
+                                    faltantes.push('Apellido Materno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+                            } else {
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.sectoreconomico_c == "") {
+                                    faltantes.push('Sector Económico');
+                                }
+                                if (data[0].contents.actividadeconomica_c == "") {
+                                    faltantes.push('Actividad Económica');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por la direccion
+                            if (direP == 0) {
+                                faltantes.push('Dirección Particular');
+                            }
+                            //Pregunta por el telefono
+                            if (telCyC== 0) {
+                                faltantes.push('Teléfono Casa o Celular');
+                            }
+                        }
+                        if (this.model.get('relaciones_activas').includes('Accionista')) {
+                            relacionesActivas.push("Accionista");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+
+                            }else{
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por el telefono
+                            if (telO== 0) {
+                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                            }
+                            //Pregunta por la direccion fiscal
+                            if (direF == 0) {
+                                faltantes.push('Dirección Fiscal');
+                            }
+                            if (self.model.get('porcentaje_participacion_c')=="" || self.model.get('porcentaje_participacion_c')==undefined){
+                                faltantes.push('Porcentaje de Participación');
+                            }
+
+                        }
+                        if (this.model.get('relaciones_activas').includes('Representante')) {
+                            relacionesActivas.push("Representante");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.paisdenacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                if (data[0].contents.curp_c == "") {
+                                    faltantes.push('CURP');
+                                }
+                            }else{
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                            }
+                            //Pregunta por el telefono
+                            if (telO== 0) {
+                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                            }
+                            //Pregunta por la direccion fiscal
+                            if (direF == 0) {
+                                faltantes.push('Dirección Fiscal');
+                            }
+                        }
+                    }
+                    faltantes=faltantes.unique();
+                    if (faltantes!= "") {
+                        var lista="";
+                        faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
+                        app.alert.show("Campos_faltantes_en_cuenta", {
+                            level: "error",
+                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
+                            autoClose: false
+                        });
+                        errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
+                        errors['validacionRelacionesActivas'].required = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else{
+            callback(null, fields, errors);
+        }
+
+    },
+
 
 })
