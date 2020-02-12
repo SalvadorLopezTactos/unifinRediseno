@@ -322,9 +322,9 @@
                                             });
 
                                            // console.log("Repetidos  "+ self.RequeridosFaltantes);
-                                           // console.log("sin repetir  "+ self.RequeridosFaltantes.unique());
+                                           // console.log("sin repetir  "+ self.RequeridosFaltantes.filter((item, i, ar) => ar.indexOf(item) == i););
                                             if (self.RequeridosFaltantes.length>0){
-                                                self.RequeridosFaltantes=self.RequeridosFaltantes.unique();
+                                                self.RequeridosFaltantes=self.RequeridosFaltantes.filter((item, i, ar) => ar.indexOf(item) == i);;
                                             }
 
 										console.log("lista "+self.RequeridosFaltantes);
@@ -1286,7 +1286,7 @@
                     }
 
                     if (faltantes.length >  0) {
-                        faltantes=faltantes.unique();
+                        faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {
@@ -1515,7 +1515,7 @@
                         }
                     }
                     if (faltantes.length >  0) {
-                        faltantes=faltantes.unique();
+                        faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {
