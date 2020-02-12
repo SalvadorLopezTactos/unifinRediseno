@@ -1095,7 +1095,7 @@
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-
+            var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1284,8 +1284,9 @@
                             }
                         }
                     }
-                    faltantes=faltantes.unique();
-                    if (faltantes!= "") {
+
+                    if (faltantes.length >  0) {
+                        faltantes=faltantes.unique();
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {
@@ -1324,7 +1325,7 @@
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-
+            var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1513,8 +1514,8 @@
                             }
                         }
                     }
-                    faltantes=faltantes.unique();
-                    if (faltantes!= "") {
+                    if (faltantes.length >  0) {
+                        faltantes=faltantes.unique();
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {

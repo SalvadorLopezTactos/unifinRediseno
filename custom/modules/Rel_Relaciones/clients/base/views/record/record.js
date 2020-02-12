@@ -106,7 +106,7 @@ extendsFrom: 'RecordView',
             $('[data-name=tct_validado_juridico_chk_c]').hide();
         }
     },
-	
+
 	_doValidateContactFields: function (fields, errors, callback) {
 		var sRelaciones = new String(this.model.get('relaciones_activas'));
 		if (sRelaciones.search("Contacto") >= 0) {
@@ -131,7 +131,7 @@ extendsFrom: 'RecordView',
                 	console.log(arrRelaciones);
                 	for (rel in arrRelaciones){
                 		console.log("Item:" + arrRelaciones[rel]);
-						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario' 
+						if (arrRelaciones[rel] == 'Contacto' || arrRelaciones[rel] == 'Conyuge' || arrRelaciones[rel] == 'Depositario'
 						|| arrRelaciones[rel] == 'Directivo' || arrRelaciones[rel] == 'Referencia Personal'){
 							app.alert.show("Tipo de relación no permitida", {
 								level: "error",
@@ -148,9 +148,9 @@ extendsFrom: 'RecordView',
                 }
                 callback(null, fields, errors);
             }, this)
-        });	
+        });
 	},
-	
+
 	doRelationFields: function(){
 		var sRelaciones = new String(this.model.get('relaciones_activas'));
 		var arrRelaciones = sRelaciones.split(",");
@@ -244,7 +244,7 @@ extendsFrom: 'RecordView',
 					if(data.length>=1){
 						mensaje = data.length==1?'La relaci\u00F3n '+data.toString()+
                         ' ya existe, favor de verificar':'Las relaciones '+ data.join(", ") + ' ya existen, por favor verificar';
-						
+
 						errors['relaciones_activas'] = mensaje; //errors['relaciones_activas'] || {};
 						errors['relaciones_activas'].required = true;
 
@@ -986,7 +986,7 @@ extendsFrom: 'RecordView',
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-
+						var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1175,8 +1175,8 @@ extendsFrom: 'RecordView',
                             }
                         }
                     }
-                    faltantes=faltantes.unique();
-                    if (faltantes!= "") {
+										if (faltantes.length >  0) {
+                        faltantes=faltantes.unique();
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {
@@ -1215,7 +1215,7 @@ extendsFrom: 'RecordView',
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-
+						var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1404,8 +1404,8 @@ extendsFrom: 'RecordView',
                             }
                         }
                     }
-                    faltantes=faltantes.unique();
-                    if (faltantes!= "") {
+										if (faltantes.length >  0) {
+                        faltantes=faltantes.unique();
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
                         app.alert.show("Campos_faltantes_en_cuenta", {
