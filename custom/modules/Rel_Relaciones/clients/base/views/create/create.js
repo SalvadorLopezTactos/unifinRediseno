@@ -46,7 +46,8 @@
 		this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
 		this.model.on('change:relaciones_activas',this.changejuridico, this);
 		this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
-        this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
+    this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
+    this.model.on('change:relacion_c',this.validaRelacionesChange, this);
 
 		//Perform check of parent data once parent record finishes loading
 		/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
@@ -1079,8 +1080,7 @@
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
-
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -1309,8 +1309,7 @@
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
-
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
