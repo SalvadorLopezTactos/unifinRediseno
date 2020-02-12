@@ -29,6 +29,7 @@ extendsFrom: 'RecordView',
         this.model.on('change:relaciones_activas',this.changejuridico, this);
         this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
         this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
+				this.model.on('change:relacion_c',this.validaRelacionesChange, this);
 
         var valParams = {
             'modulo': 'Accounts',
@@ -970,8 +971,7 @@ extendsFrom: 'RecordView',
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
-
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -1199,8 +1199,7 @@ extendsFrom: 'RecordView',
         request.url="";
         request.method="GET";
 
-        if (this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') && this.model.get("relacion_c").trim()!= "") {
-
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
