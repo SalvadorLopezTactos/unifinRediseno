@@ -963,7 +963,7 @@ extendsFrom: 'RecordView',
             });
         }
     },
-    //Funcion para validar campos requeridos de relacion tipo Aval, Accionista y Representante
+		//Funcion para validar campos requeridos de relacion tipo Aval, Accionista y Representante
     validaRelacionesChange: function (){
         var requests=[];
         var request={};
@@ -986,7 +986,7 @@ extendsFrom: 'RecordView',
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-						var self = this;
+            var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1020,6 +1020,7 @@ extendsFrom: 'RecordView',
                     }
                     if (data) {
                         if (this.model.get('relaciones_activas').includes('Aval')){
+                            //Valida Relación: Aval
                             relacionesActivas.push("Aval");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1034,8 +1035,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1045,6 +1049,18 @@ extendsFrom: 'RecordView',
                                 }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.sectoreconomico_c == "") {
+                                      faltantes.push('Sector Económico');
+                                  }
+                                  if (data[0].contents.subsectoreconomico_c == "") {
+                                      faltantes.push('Sub Sector Económico');
+                                  }
+                                  if (data[0].contents.actividadeconomica_c == "") {
+                                      faltantes.push('Actividad Económica');
+                                  }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1071,6 +1087,9 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por la direccion
                             if (direP == 0) {
@@ -1081,6 +1100,7 @@ extendsFrom: 'RecordView',
                                 faltantes.push('Teléfono Casa o Celular');
                             }
                         }
+                        //valida relación: Accionista
                         if (this.model.get('relaciones_activas').includes('Accionista')) {
                             relacionesActivas.push("Accionista");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
@@ -1093,8 +1113,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1102,7 +1125,6 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
-
                             }else{
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
@@ -1116,10 +1138,13 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por el telefono
                             if (telO== 0) {
-                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                                faltantes.push('Teléfono de Trabajo o Celular Trabajo');
                             }
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
@@ -1131,6 +1156,7 @@ extendsFrom: 'RecordView',
 
                         }
                         if (this.model.get('relaciones_activas').includes('Representante')) {
+                            //Valida relación: Representate
                             relacionesActivas.push("Representante");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1142,8 +1168,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1164,10 +1193,13 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por el telefono
                             if (telO== 0) {
-                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                                faltantes.push('Teléfono de Trabajo o Celular Trabajo');
                             }
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
@@ -1175,7 +1207,8 @@ extendsFrom: 'RecordView',
                             }
                         }
                     }
-										if (faltantes.length >  0) {
+
+                    if (faltantes.length >  0) {
                         faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
@@ -1214,7 +1247,7 @@ extendsFrom: 'RecordView',
             requests.push(requestC);
             var faltantes=[];
             var relacionesActivas=[];
-						var self = this;
+            var self = this;
 
             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                 success: _.bind(function (data) {
@@ -1248,6 +1281,7 @@ extendsFrom: 'RecordView',
                     }
                     if (data) {
                         if (this.model.get('relaciones_activas').includes('Aval')){
+                            //Valida Relación: Aval
                             relacionesActivas.push("Aval");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1262,8 +1296,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1273,6 +1310,18 @@ extendsFrom: 'RecordView',
                                 }
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.sectoreconomico_c == "") {
+                                      faltantes.push('Sector Económico');
+                                  }
+                                  if (data[0].contents.subsectoreconomico_c == "") {
+                                      faltantes.push('Sub Sector Económico');
+                                  }
+                                  if (data[0].contents.actividadeconomica_c == "") {
+                                      faltantes.push('Actividad Económica');
+                                  }
                                 }
                             } else {
                                 if (data[0].contents.razonsocial_c == "") {
@@ -1299,6 +1348,9 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por la direccion
                             if (direP == 0) {
@@ -1309,6 +1361,7 @@ extendsFrom: 'RecordView',
                                 faltantes.push('Teléfono Casa o Celular');
                             }
                         }
+                        //valida relación: Accionista
                         if (this.model.get('relaciones_activas').includes('Accionista')) {
                             relacionesActivas.push("Accionista");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
@@ -1321,8 +1374,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1330,7 +1386,6 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
-
                             }else{
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
@@ -1344,10 +1399,13 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por el telefono
                             if (telO== 0) {
-                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                                faltantes.push('Teléfono de Trabajo o Celular Trabajo');
                             }
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
@@ -1359,6 +1417,7 @@ extendsFrom: 'RecordView',
 
                         }
                         if (this.model.get('relaciones_activas').includes('Representante')) {
+                            //Valida relación: Representate
                             relacionesActivas.push("Representante");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1370,8 +1429,11 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
-                                if (data[0].contents.paisdenacimiento_c == "") {
+                                if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1392,10 +1454,13 @@ extendsFrom: 'RecordView',
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
                             }
                             //Pregunta por el telefono
                             if (telO== 0) {
-                                faltantes.push('Teléfono de Oficina o Celular Oficina');
+                                faltantes.push('Teléfono de Trabajo o Celular Trabajo');
                             }
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
@@ -1403,7 +1468,7 @@ extendsFrom: 'RecordView',
                             }
                         }
                     }
-										if (faltantes.length >  0) {
+                    if (faltantes.length >  0) {
                         faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
                         var lista="";
                         faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
