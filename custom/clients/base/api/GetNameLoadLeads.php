@@ -23,7 +23,7 @@ class GetNameLoadLeads extends SugarApi
                 //endpoint variables
                 'pathVars' => array('module'),
                 //method to call
-                'method' => 'GetNameLoad_Leads',
+                'method' => 'GetNameLoad_Leads_method',
                 //short help string to be displayed in the help documentation
                 'shortHelp' => 'Método GET para obtener el nombre de las cargas realizadas',
                 //long help to be displayed in the help documentation
@@ -35,7 +35,7 @@ class GetNameLoadLeads extends SugarApi
     }
 
 
-    public function GetNameLoad_Leads($api, $args)
+    public function GetNameLoad_Leads_method($api, $args)
     {
         global $db;
         $records_in = array();
