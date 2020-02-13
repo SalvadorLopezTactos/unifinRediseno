@@ -3382,7 +3382,7 @@
             else {
                 $('.select2-choices').css('border-color', '');
             }
-            if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+            if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
                 errors['razonsocial_c'].required = true;
             }
