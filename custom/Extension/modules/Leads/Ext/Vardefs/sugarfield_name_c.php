@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-06 15:41:17
+ // created: 2020-02-13 23:25:25
 $dictionary['Lead']['fields']['name_c']['duplicate_merge_dom_value']=0;
 $dictionary['Lead']['fields']['name_c']['labelValue']='Nombre';
 $dictionary['Lead']['fields']['name_c']['full_text_search']=array (
