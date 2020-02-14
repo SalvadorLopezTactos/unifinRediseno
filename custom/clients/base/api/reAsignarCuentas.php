@@ -57,7 +57,7 @@ class reAsignarCuentas extends SugarApi
 
                 $account = BeanFactory::retrieveBean('Accounts', $value);
 
-                if($account==null){
+                if($account==null || $user_field==null){
 
                     array_push($no_actualizados,$value);
 
