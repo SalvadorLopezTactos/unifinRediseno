@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-01 23:56:55
+ // created: 2020-02-13 22:37:38
 $dictionary['Lead']['fields']['nombre_c']['labelValue']='Nombre(s)';
 $dictionary['Lead']['fields']['nombre_c']['full_text_search']=array (
   'enabled' => '0',

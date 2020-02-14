@@ -173,6 +173,8 @@ $(window).load(function(){
     $('#btn_clr_reports_to_name').attr('disabled','disabled');
     $('#btn_reports_to_name').attr('disabled','disabled');
     $('#reports_to_name').attr('disabled','disabled');
+	
+	$('#deudor_factoraje_c').attr('disabled','disabled');
 
     $('#tct_altaproveedor_chk_c').attr('disabled','disabled');
     $('#tct_alta_cd_chk_c').attr('disabled','disabled');
@@ -208,6 +210,8 @@ $(window).load(function(){
       $('#btn_clr_reports_to_name').attr('disabled','disabled');
       $('#btn_reports_to_name').attr('disabled','disabled');
       $('#reports_to_name').attr('disabled','disabled');
+	  
+	  $('#deudor_factoraje_c').attr('disabled','disabled');
 
       $('#tct_altaproveedor_chk_c').attr('disabled','disabled');
       $('#tct_alta_cd_chk_c').attr('disabled','disabled');
