@@ -204,7 +204,7 @@ SQL;
                 }
             }else{
 
-                array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
+                if($cuentas[$i]) array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
 
             }
 
