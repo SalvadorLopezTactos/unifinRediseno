@@ -99,7 +99,7 @@ class SugarFieldEmail extends SugarFieldBase
 
             $email = array_merge($mergeAddr, $email);
             if (!SugarEmailAddress::isValidEmail($email['email_address'])) {
-                throw new SugarApiExceptionInvalidParameter("{$email['email_address']} es un correo electrónico no válido.");
+                throw new SugarApiExceptionInvalidParameter("{$email['email_address']} is an invalid email address.");
             }
             $bean->emailAddress->addAddress($email['email_address'],
                                             $email['primary_address'],
