@@ -107,6 +107,9 @@
                 };
                 var seguir=true;
                 if(content.trim() ==""){
+                    $('.btnSubir').removeClass('disabled');
+                    $('.btnSubir').attr('style', 'margin:10px');
+                    app.alert.dismiss('reasignandoCSV');                    
                     app.alert.show('csvVacio', {
                         level: 'error',
                         messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
@@ -121,9 +124,9 @@
                       var Url = app.api.buildURL("guardaCSV", '', {}, {});
                       app.api.call("create", Url, {data: archivocsv}, {
                           success: _.bind(function (data) {
-                            app.alert.dismiss('reasignandoCSV');
                             $('.btnSubir').removeClass('disabled');
                             $('.btnSubir').attr('style', 'margin:10px');
+                            app.alert.dismiss('reasignandoCSV');
                             app.alert.show('csvOK', {
                                 level: 'success',
                                 messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
@@ -136,6 +139,9 @@
                           }
                       });
                     }else{
+                      $('.btnSubir').removeClass('disabled');
+                      $('.btnSubir').attr('style', 'margin:10px');
+                      app.alert.dismiss('reasignandoCSV');
                       app.alert.show('csvVacio', {
                           level: 'error',
                           messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
