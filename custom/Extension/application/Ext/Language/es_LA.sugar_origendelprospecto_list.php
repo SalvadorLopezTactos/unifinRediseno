@@ -1,5 +1,5 @@
 <?php
- // created: 2019-01-18 11:11:23
+ // created: 2020-02-06 13:15:57
 
 $app_list_strings['origendelprospecto_list']=array (
   '' => '',
@@ -7,8 +7,10 @@ $app_list_strings['origendelprospecto_list']=array (
   'Referido Cliente' => 'Referenciado Cliente',
   'Referido Proveedor' => 'Referenciado Proveedor',
   'Referenciador' => 'Referenciado Socio Comercial',
-  'Referido Director' => 'Referenciado Director',
+  'Referido Director' => 'Referenciado Unifin',
   'Referenciado Vendor' => 'Referenciado Vendor',
   'Marketing' => 'Marketing',
   'Inteligencia de Negocio' => 'Inteligencia de Negocio',
+  'Portal Uniclick' => 'Portal Uniclick',
+  'Whatsapp' => 'Whatsapp',
 );

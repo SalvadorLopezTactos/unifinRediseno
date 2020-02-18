@@ -1,6 +1,7 @@
 <?php
- // created: 2019-04-15 17:19:11
-$dictionary['Lead']['fields']['prospectocreado_c']['labelValue'] = 'prospectocreado';
-$dictionary['Lead']['fields']['prospectocreado_c']['enforced'] = '';
-$dictionary['Lead']['fields']['prospectocreado_c']['dependency'] = '';
+ // created: 2019-12-20 15:14:19
+$dictionary['Lead']['fields']['prospectocreado_c']['labelValue']='Prospecto Creado';
+$dictionary['Lead']['fields']['prospectocreado_c']['enforced']='';
+$dictionary['Lead']['fields']['prospectocreado_c']['dependency']='';
 
+ ?>

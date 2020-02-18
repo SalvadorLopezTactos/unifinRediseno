@@ -59,3 +59,11 @@ $hook_array['before_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'surveyNotHeld' // name of the function
 );
+
+$hook_array['before_save'][] = Array(
+    4,
+    'Guarda valores del producto del usuario e invitados de la reunión',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'guardaproductos' // name of the function
+);

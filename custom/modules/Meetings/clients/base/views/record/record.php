@@ -392,10 +392,18 @@ array (
             array (
               0 => 
               array (
+                'name' => 'productos_c',
+                'label' => 'LBL_PRODUCTOS_C',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'resultado_confirmado_c',
                 'label' => 'LBL_RESULTADO_CONFIRMADO',
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'resultado_confirmado_por_c',
                 'studio' => 'visible',
@@ -411,13 +419,13 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'minut_minutas_meetings_name',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
                 'readonly' => true,
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'validado_por_c',
                 'studio' => 'visible',
@@ -433,7 +441,7 @@ array (
                   ),
                 ),
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -457,7 +465,7 @@ array (
                   ),
                 ),
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,

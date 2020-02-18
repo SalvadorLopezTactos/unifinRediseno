@@ -1912,12 +1912,12 @@ console.log(name);
                         var idplazo = data.records[i].plazo;
                         var tasa_minima = data.records[i].tasa_minima;
                         var tasa_maxima = data.records[i].tasa_maxima;
-                        var vrc_minimo = data.records[i].tasa_maxima;
-                        var vrc_maximo = data.records[i].vrc_minimo;
-                        var vri_minimo = data.records[i].vrc_maximo;
-                        var vri_maximo = data.records[i].vri_minimo;
-                        var comision_minima = data.records[i].vri_maximo;
-                        var comision_maxima = data.records[i].comision_minima;
+                        var vrc_minimo = data.records[i].vrc_minimo;
+                        var vrc_maximo = data.records[i].vrc_maximo;
+                        var vri_minimo = data.records[i].vri_minimo;
+                        var vri_maximo = data.records[i].vri_maximo;
+                        var comision_minima = data.records[i].comision_minima;
+                        var comision_maxima = data.records[i].comision_maxima;
                         var renta_inicial_minima = data.records[i].renta_inicial_minima;
                         var renta_inicial_maxima = data.records[i].renta_inicial_maxima;
                         var deposito_en_garantia = data.records[i].deposito_en_garantia;
@@ -2124,12 +2124,12 @@ console.log(name);
                         var idplazo = data.records[i].plazo;
                         var tasa_minima = data.records[i].tasa_minima;
                         var tasa_maxima = data.records[i].tasa_maxima;
-                        var vrc_minimo = data.records[i].tasa_maxima;
-                        var vrc_maximo = data.records[i].vrc_minimo;
-                        var vri_minimo = data.records[i].vrc_maximo;
-                        var vri_maximo = data.records[i].vri_minimo;
-                        var comision_minima = data.records[i].vri_maximo;
-                        var comision_maxima = data.records[i].comision_minima;
+                        var vrc_minimo = data.records[i].vrc_minimo;
+                        var vrc_maximo = data.records[i].vrc_maximo;
+                        var vri_minimo = data.records[i].vri_minimo;
+                        var vri_maximo = data.records[i].vri_maximo;
+                        var comision_minima = data.records[i].comision_minima;
+                        var comision_maxima = data.records[i].comision_maxima;
                         var renta_inicial_minima = data.records[i].renta_inicial_minima;
                         var renta_inicial_maxima = data.records[i].renta_inicial_maxima;
                         var deposito_en_garantia = data.records[i].deposito_en_garantia;
@@ -2288,8 +2288,8 @@ console.log(name);
     },
 
     ConficionFinancieraFormat: function(fields, errors, callback){
-        if (solicitud_cf.oFinanciera != undefined) {
-            if (solicitud_cf.oFinanciera.condicion.length > 0) {
+        if (solicitud_cf.oFinanciera !=undefined) {
+            if (solicitud_cf.oFinanciera.condicion.length>0) {
                 //Valida formato de los campos del objeto oFinanciera.condicion. Deben cumplir con la expreg
                 var formato = 0;
                 for (var i = 0; i < solicitud_cf.oFinanciera.condicion.length; i++) {
@@ -2341,8 +2341,8 @@ console.log(name);
     },
 
     ConficionFinancieraRIFormat: function(fields, errors, callback) {
-        if (contRI.oFinancieraRI != undefined) {
-            if (contRI.oFinancieraRI.ratificacion.length > 0) {
+        if (contRI.oFinancieraRI!=undefined){
+            if (contRI.oFinancieraRI.ratificacion.length>0) {
                 //Valida formato de los campos del objeto oFinancieraRI.ratificacion. Deben cumplir con la expreg
                 var formato = 0;
                 for (var i = 0; i < contRI.oFinancieraRI.ratificacion.length; i++) {

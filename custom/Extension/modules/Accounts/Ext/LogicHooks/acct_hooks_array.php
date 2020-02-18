@@ -194,3 +194,10 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'asignaSinGestor'
 );
+$hook_array['before_save'][] = Array(
+    14,
+    'Valida Id Cliente Uniclick',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'idUniclick'
+);

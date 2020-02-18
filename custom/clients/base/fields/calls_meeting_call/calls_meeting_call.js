@@ -5,6 +5,7 @@
 
 ({
     nuevoRegistro:{},
+	label_parent_type:false,
     reunLlam:null,
     edicion: true,
     events:{
@@ -735,6 +736,10 @@
             $("#Objetivos").show();
             selfRella.nuevoRegistro.tipo_registro = "reunion";
 
+			if(this.model.attributes.parent_type == "Leads"){
+				this.label_parent_type = true;
+			}
+			
             //Condición para establecer campos relacionados al intentar editar campo custom
             if(this.reunLlam !=null){
                 if(this.reunLlam.records.length>0){
@@ -761,16 +766,18 @@
                 }
 
             }
-        }
-
-        else if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
+        }else if(this.model.get('tct_resultado_llamada_ddw_c')=="Nueva_llamada"){
 
             $('.record-cell[data-type="calls_meeting_call"]').show();
             //oculta etiqueta de campo
             $('.record-label[data-name="calls_meeting_call"]').addClass('hide');
             $("#Objetivos").hide();
             selfRella.nuevoRegistro.tipo_registro="llamada";
-
+			
+			if(this.model.attributes.parent_type == "Leads"){
+				this.label_parent_type = true;
+			}
+			
             //Condición para establecer campos relacionados al intentar editar campo custom
             if(this.reunLlam !=null){
                 if(this.reunLlam.records.length>0){

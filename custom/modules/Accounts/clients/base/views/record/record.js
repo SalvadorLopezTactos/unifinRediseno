@@ -7,7 +7,7 @@
      *
      * @override
     */
-    oculta : 0,
+    oculta: 0,
 
     initialize: function (options) {
         self = this;
@@ -20,7 +20,7 @@
 
         this.totalllamadas = 0;
         this.totalreuniones = 0;
-        this.flagheld=0;
+        this.flagheld = 0;
 
         //Funcion que quita los años futuros y menores a -5 del año actual
         this.quitaanos();
@@ -53,18 +53,18 @@
         * Integración de Expediente
         * Adrian Arauz 4/10/2018
         * */
-        this.model.addValidationTask('valida_potencial_campos_autos',_.bind(this.nodigitos, this));
+        this.model.addValidationTask('valida_potencial_campos_autos', _.bind(this.nodigitos, this));
 
-        this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+        this.model.addValidationTask('valida_potencial', _.bind(this.validapotencial, this));
 
-        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
         * Adrian Arauz 23/01/2019
         * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
-        this.model.addValidationTask('camposnumericosPLDFF',_.bind(this.validacantidades, this));
+        this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -91,7 +91,7 @@
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
                         if (data.UNI2_CTE_029_VerificaClienteTieneContratoResult._tieneContratos == true) {
-                            if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
+                            if (App.user.id != self.model.get('user_id_c') && App.user.id != self.model.get('user_id1_c') && App.user.id != self.model.get('user_id2_c')) {
                                 app.alert.show("Validar Contratos", {
                                     level: "error",
                                     title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC a Cliente con contratos existentes.",
@@ -107,9 +107,9 @@
         }, this));
 
         //Validacion para el formato de los campos nombre y apellidos.
-        this.model.addValidationTask('validaformato3campos',_.bind(this.validaformato,this));
-        this.model.addValidationTask('validacamposcurppass',_.bind(this.validapasscurp,this));
-        this.model.addValidationTask('porcentajeIVA',_.bind(this.validaiva, this));
+        this.model.addValidationTask('validaformato3campos', _.bind(this.validaformato, this));
+        this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
+        this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
 
         /*
          Salvador Lopez
@@ -133,7 +133,7 @@
         /*
         AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
       */
-        this.model.on('change:tct_pais_expide_rfc_c',this.ocultaRFC, this);
+        this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
 
         /*
          Salvador Lopez
@@ -142,18 +142,17 @@
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
 
-        this.model.on('change:primernombre_c',this.checkTextOnly, this);
-        this.model.on('change:apellidomaterno_c',this.checkTextOnly,this);
-        this.model.on('change:apellidopaterno_c',this.checkTextOnly,this);
+        this.model.on('change:primernombre_c', this.checkTextOnly, this);
+        this.model.on('change:apellidomaterno_c', this.checkTextOnly, this);
+        this.model.on('change:apellidopaterno_c', this.checkTextOnly, this);
         this.events['keydown input[name=rfc_c]'] = 'checkTextAndNumRFC';
-        this.model.on('change:ifepasaporte_c',this.checkTextAndNum,this);
-        this.model.on('change:curp_c',this.checkTextAndNum,this);
+        this.model.on('change:ifepasaporte_c', this.checkTextAndNum, this);
+        this.model.on('change:curp_c', this.checkTextAndNum, this);
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
 
-
-        /* LEV INICIO */
+		 /* LEV INICIO */
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
 
         /*
@@ -219,7 +218,7 @@
         this.model.on('sync', this.hideButton_Conversion, this);
 
         //Validacion para mostrar chk para cuentas homonimas
-        this.model.on('sync',this.homonimo, this);
+        this.model.on('sync', this.homonimo, this);
 
 
         //this.model.on('sync', this.get_phones, this);
@@ -234,8 +233,10 @@
 
 
         //Funcion para eliminar duplicados de arrays
-        Array.prototype.unique=function(a){
-            return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+        Array.prototype.unique = function (a) {
+            return function () { return this.filter(a) }
+        }(function (a, b, c) {
+            return c.indexOf(a, b + 1) < 0
         });
 
         // validación de los campos con formato númerico
@@ -253,22 +254,22 @@
 
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
-        this.model.addValidationTask('LeasingNV',_.bind(this.requeridosleasingnv, this));
-        this.model.addValidationTask('FactorajeNV',_.bind(this.requeridosfacnv, this));
-        this.model.addValidationTask('CreditAutoNV',_.bind(this.requeridoscanv, this));
-        this.model.addValidationTask('proveedorDeRecursos',_.bind(this.proveedorRecursos, this));
-        this.model.addValidationTask('valida_direcciones_de_relaciones_PR',_.bind(this.direccionesparticularPR, this));
+        this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
+        this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
+        this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
+        this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
+        this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 
     },
 
-    saveProdPLD:function (fields, errors, callback) {
+    saveProdPLD: function (fields, errors, callback) {
 
-        if(this.model.get('tipo_registro_c')!='') {
+        if (this.model.get('tipo_registro_c') != '') {
             // Actualizar modelo de this.ProductosPLD
             // this.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
-            if(this.ProductosPLD != null && typeof(this.$('.campo4ddw-cs').select2('val')) == "string")  {
+            if (this.ProductosPLD != null && typeof (this.$('.campo4ddw-cs').select2('val')) == "string") {
 
                 // this.ProductosPLD.arrendamientoPuro.campo1 = this.$('.campo1txt-ap').val();
                 this.ProductosPLD.arrendamientoPuro.campo2 = this.$('.campo2ddw-ap').select2('val');
@@ -327,34 +328,33 @@
             }
 
             //Valida cambios
-            if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") )) {
-                  //var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
-                  //var obj_pld_new=JSON.stringify(this.ProductosPLD);
-                  app.api.call('create', app.api.buildURL('SavePLD'), this.ProductosPLD, {
-                      success: function (data) {
-                          if(data!="")
-                          {
-                              console.log("Actualiza pld");
-                          }
-                          contexto_cuenta.ProductosPLD = pld.formatDetailPLD(contexto_cuenta.ProductosPLD);
-                          pld.ProductosPLD = contexto_cuenta.ProductosPLD;
-                          contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
-                          pld.render();
-                          callback(null,fields,errors);
-                      },
-                      error: function (e) {
-                          //throw e;
-                          pld.render();
-                          callback(null,fields,errors);
-                      }
-                  });
-            }else {
+            if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof ($('.campo4ddw-cs').select2('val')) == "string"))) {
+                //var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
+                //var obj_pld_new=JSON.stringify(this.ProductosPLD);
+                app.api.call('create', app.api.buildURL('SavePLD'), this.ProductosPLD, {
+                    success: function (data) {
+                        if (data != "") {
+                            console.log("Actualiza pld");
+                        }
+                        contexto_cuenta.ProductosPLD = pld.formatDetailPLD(contexto_cuenta.ProductosPLD);
+                        pld.ProductosPLD = contexto_cuenta.ProductosPLD;
+                        contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
+                        pld.render();
+                        callback(null, fields, errors);
+                    },
+                    error: function (e) {
+                        //throw e;
+                        pld.render();
+                        callback(null, fields, errors);
+                    }
+                });
+            } else {
                 // contexto_cuenta.ProductosPLD = pld.formatDetailPLD(contexto_cuenta.ProductosPLD);
                 // pld.ProductosPLD = contexto_cuenta.ProductosPLD;
                 // pld.render();
-                callback(null,fields,errors);
+                callback(null, fields, errors);
             }
-        }else {
+        } else {
             // contexto_cuenta.ProductosPLD = pld.formatDetailPLD(contexto_cuenta.ProductosPLD);
             // pld.ProductosPLD = contexto_cuenta.ProductosPLD;
             // pld.render();
@@ -374,7 +374,7 @@
         var objDirecciones = $('.control-group.direccion')
         var concatDirecciones = [];
         var strDireccionTemp = "";
-        for (var i = 0; i < objDirecciones.length-1; i++) {
+        for (var i = 0; i < objDirecciones.length - 1; i++) {
             strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
                 objDirecciones.eq(i).find('.numExtExisting').val() +
                 objDirecciones.eq(i).find('.numIntExisting').val() +
@@ -400,28 +400,27 @@
 
         }
 
-        if(existe)
-        {
+        if (existe) {
             app.alert.show('Direcci\u00F3n', {
                 level: 'error',
                 autoClose: false,
                 messages: 'Existe una o mas direcciones repetidas'
             });
-            var messages1= 'Existe una o mas direcciones repetidas';
+            var messages1 = 'Existe una o mas direcciones repetidas';
             errors['xd'] = errors['xd'] || {};
-           // errors['xd'].messages1 = true;
+            // errors['xd'].messages1 = true;
             errors['xd'].required = true;
         }
 
         callback(null, fields, errors);
     },
 
-    checkInVentas:function (evt) {
-        var enteros=this.checkmoneyint(evt);
-        var decimales=this.checkmoneydec(evt);
-        $.fn.selectRange = function(start, end) {
-            if(!end) end = start;
-            return this.each(function() {
+    checkInVentas: function (evt) {
+        var enteros = this.checkmoneyint(evt);
+        var decimales = this.checkmoneydec(evt);
+        $.fn.selectRange = function (start, end) {
+            if (!end) end = start;
+            return this.each(function () {
                 if (this.setSelectionRange) {
                     this.focus();
                     this.setSelectionRange(start, end);
@@ -436,12 +435,12 @@
         };//funcion para posicionar cursor
 
         (function ($, undefined) {
-            $.fn.getCursorPosition = function() {
+            $.fn.getCursorPosition = function () {
                 var el = $(this).get(0);
                 var pos = [];
-                if('selectionStart' in el) {
-                    pos = [el.selectionStart,el.selectionEnd];
-                } else if('selection' in document) {
+                if ('selectionStart' in el) {
+                    pos = [el.selectionStart, el.selectionEnd];
+                } else if ('selection' in document) {
                     el.focus();
                     var Sel = document.selection.createRange();
                     var SelLength = document.selection.createRange().text.length;
@@ -451,14 +450,14 @@
                 return pos;
             }
         })(jQuery); //funcion para obtener cursor
-        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+        var cursor = $(evt.handleObj.selector).getCursorPosition();//setear cursor
 
 
         if (enteros == "false" && decimales == "false") {
-            if(cursor[0]==cursor[1]) {
+            if (cursor[0] == cursor[1]) {
                 return false;
             }
-        }else if (typeof enteros == "number" && decimales == "false") {
+        } else if (typeof enteros == "number" && decimales == "false") {
             if (cursor[0] < enteros) {
                 $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
             } else {
@@ -472,14 +471,14 @@
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
         var digitos = $input.val().split('.');
-        if($input.val().includes('.')) {
+        if ($input.val().includes('.')) {
             var justnum = /[\d]+/;
-        }else{
+        } else {
             var justnum = /[\d.]+/;
         }
         var justint = /^[\d]{0,14}$/;
 
-        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+        if ((justnum.test(evt.key)) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
             app.alert.show('error_dinero', {
                 level: 'error',
                 autoClose: true,
@@ -488,11 +487,11 @@
             return "false";
         }
 
-        if(typeof digitos[0]!="undefined") {
+        if (typeof digitos[0] != "undefined") {
             if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
                 //console.log('no se cumplen enteros')
-                if(!$input.val().includes('.')) {
-                    $input.val($input.val()+'.')
+                if (!$input.val().includes('.')) {
+                    $input.val($input.val() + '.')
                 }
                 return "false";
 
@@ -506,14 +505,14 @@
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
         var digitos = $input.val().split('.');
-        if($input.val().includes('.')) {
+        if ($input.val().includes('.')) {
             var justnum = /[\d]+/;
-        }else{
+        } else {
             var justnum = /[\d.]+/;
         }
         var justdec = /^[\d]{0,1}$/;
 
-        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+        if ((justnum.test(evt.key)) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
             app.alert.show('error_dinero', {
                 level: 'error',
                 autoClose: true,
@@ -521,7 +520,7 @@
             });
             return "false";
         }
-        if(typeof digitos[1]!="undefined") {
+        if (typeof digitos[1] != "undefined") {
             if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
                 //console.log('no se cumplen dec')
                 return "false";
@@ -544,8 +543,8 @@
     /*Victor Martinez Lopez 12-09-2018
     *La casilla proveedor se debe mantener activa al crear un proveedor
     * */
-    checkProveedor:function(){
-        if(this.model.get('tipo_registro_c')=='Proveedor'){
+    checkProveedor: function () {
+        if (this.model.get('tipo_registro_c') == 'Proveedor') {
             this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
         }
     },
@@ -682,13 +681,13 @@
         var delids = window.ids;
         for (i = 0; i < delids.length; i++) {
             var idtel = delids[i];
-            app.api.call('delete', app.api.buildURL('Tel_Telefonos/'+idtel), null, {
+            app.api.call('delete', app.api.buildURL('Tel_Telefonos/' + idtel), null, {
                 success: _.bind(function (data) {
                     console.log('Esto es lo que devuelve la funcion borratel:');
                     console.log(data);
-                    console.log(app.api.buildURL('Tel_Telefonos/'+idtel));
-                },this),
-                error: _.bind(function(error) {
+                    console.log(app.api.buildURL('Tel_Telefonos/' + idtel));
+                }, this),
+                error: _.bind(function (error) {
                     console.log("Este fue el error:", error)
                 }, this),
             });
@@ -700,13 +699,13 @@
         //Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         this.model.set('account_telefonos', account_telefonos);
-        this.oTelefonos.telefono=account_telefonos;
+        this.oTelefonos.telefono = account_telefonos;
         cont_tel.render();
 
         //Direcciones
         var account_direcciones = app.utils.deepCopy(this.prev_oDirecciones.prev_direccion);
         this.model.set('account_direcciones', account_direcciones);
-        this.oDirecciones.direccion=account_direcciones;
+        this.oDirecciones.direccion = account_direcciones;
         cont_dir.nuevaDireccion = cont_dir.limpiaNuevaDireccion();
         cont_dir.render();
 
@@ -716,16 +715,16 @@
         this.ProductosPLD = accounts_tct_pld_1;
         pld.render();
         //Potencial Autos
-        Pautos.autos=app.utils.deepCopy(Pautos.prev_autos);
+        Pautos.autos = app.utils.deepCopy(Pautos.prev_autos);
         this.model.set('potencial_autos', Pautos);
         Pautos.render();
         // this.model._previousAttributes.account_telefonos = account_telefonos;
         // this.model._previousAttributes.account_direcciones = account_direcciones;
 
-        this.$('[data-name="promotorleasing_c"]').attr('style','');
-        this.$('[data-name="promotorfactoraje_c"]').attr('style','');
-        this.$('[data-name="promotorcredit_c"]').attr('style','');
-        this.$('[data-name="promotorfleet_c"]').attr('style','');
+        this.$('[data-name="promotorleasing_c"]').attr('style', '');
+        this.$('[data-name="promotorfactoraje_c"]').attr('style', '');
+        this.$('[data-name="promotorcredit_c"]').attr('style', '');
+        this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
     },
 
@@ -857,6 +856,7 @@
             self.noEditFields.push('promotorfactoraje_c');
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
+            self.noEditFields.push('promotoruniclick_c');
         }
 
         var origen = this.model.get('origendelprospecto_c');
@@ -873,6 +873,13 @@
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
         }
+		
+		
+		if (App.user.attributes.deudor_factoraje_c != true) {
+			//Readonly check factoraje
+			self.noEditFields.push('deudor_factor_c');
+        }
+
 
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
@@ -890,8 +897,8 @@
         $('[data-name="tct_no_contactar_chk_c"]').hide();
 
         //campo Pais que expide el RFC nace oculto.
-        $('[data-name=tct_pais_expide_rfc_c]').hide();
-       // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+        // $('[data-name=tct_pais_expide_rfc_c]').hide();
+        // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
@@ -949,51 +956,48 @@
             });
         }
 
-    		//Oculta correo, telefonos y direcciones
-    		if(this.oculta === 1)
-    		{
-    			$('div[data-name=account_telefonos]').hide();
-    			$('div[data-name=email]').hide();
-    			$('div[data-name=account_direcciones]').hide();
-    		}
-    		else
-    		{
-    			$('div[data-name=account_telefonos]').show();
-    			$('div[data-name=email]').show();
-    			$('div[data-name=account_direcciones]').show();
-    		}
+        //Oculta correo, telefonos y direcciones
+        if (this.oculta === 1) {
+            $('div[data-name=account_telefonos]').hide();
+            $('div[data-name=email]').hide();
+            $('div[data-name=account_direcciones]').hide();
+        }
+        else {
+            $('div[data-name=account_telefonos]').show();
+            $('div[data-name=email]').show();
+            $('div[data-name=account_direcciones]').show();
+        }
 
         //Evento para validar acciones
-        $('a.btn.dropdown-toggle.btn-primary').on('click', function(e){
+        $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
         });
-
     },
 
-    editClicked: function() {
+    editClicked: function () {
         this._super("editClicked");
 
-        this.$('[data-name="promotorleasing_c"]').attr('style','pointer-events:none');
-        this.$('[data-name="promotorfactoraje_c"]').attr('style','pointer-events:none');
-        this.$('[data-name="promotorcredit_c"]').attr('style','pointer-events:none');
-        this.$('[data-name="promotorfleet_c"]').attr('style','pointer-events:none');
+        this.$('[data-name="promotorleasing_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="promotorfactoraje_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
     },
 
-    hideconfiinfo:function () {
+    hideconfiinfo: function () {
         $('div[data-name=account_telefonos]').hide();
         $('div[data-name=email]').hide();
         $('div[data-name=account_direcciones]').hide();
-		//self=this;
-        if(this.model.get('id')!="") {
+        //self=this;
+        if (this.model.get('id') != "") {
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
-                    if(data==false){
-						this.oculta = 1;
+                    if (data == false) {
+                        this.oculta = 1;
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
                         $('div[data-name=account_direcciones]').hide();
-                    }else{
-						this.oculta = 0;
+                    } else {
+                        this.oculta = 0;
                         $('div[data-name=account_telefonos]').show();
                         $('div[data-name=email]').show();
                         $('div[data-name=account_direcciones]').show();
@@ -1006,25 +1010,25 @@
         console.log("valor fuera " + this.model.get('id'));
     },
 
-    disable_panels_rol:function () {
-        if(this.model.get('id')!="") {
+    disable_panels_rol: function () {
+        if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
-            var coincide_rol=0;
-            for(var i=0; i<roles_logged.length; i++) {
+            var coincide_rol = 0;
+            for (var i = 0; i < roles_logged.length; i++) {
                 for (var rol_limit in roles_limit) {
                     if (roles_logged[i] == roles_limit[rol_limit]) {
                         coincide_rol++;
                     }
                 }
             }
-            if(coincide_rol!=0) {
+            if (coincide_rol != 0) {
                 app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                     success: _.bind(function (data) {
                         console.log(data);
                         if (data == false) {
 
-                            if(this.model.get('tipo_registro_c')!="Persona"){
+                            if (this.model.get('tipo_registro_c') != "Persona") {
 
                                 $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
@@ -1046,25 +1050,25 @@
         }
     },
 
-    disable_panels_team:function () {
-        if(this.model.get('id')!="") {
+    disable_panels_team: function () {
+        if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
-            var coincide_rol=0;
-            for(var i=0; i<roles_logged.length; i++) {
+            var coincide_rol = 0;
+            for (var i = 0; i < roles_logged.length; i++) {
                 for (var rol_limit in roles_limit) {
                     if (roles_logged[i] == roles_limit[rol_limit]) {
                         coincide_rol++;
                     }
                 }
             }
-            if(coincide_rol!=0) {
+            if (coincide_rol != 0) {
                 app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
                     success: _.bind(function (data) {
                         console.log(data);
                         if (data == false) {
 
-                            if(this.model.get('tipo_registro_c')!="Persona"){
+                            if (this.model.get('tipo_registro_c') != "Persona") {
 
                                 $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
@@ -1077,7 +1081,7 @@
                                     return false;
                                 });
                             }
-                        }else {
+                        } else {
                             /*$('.noEdit.fieldset.actions.detail.btn-group').hide();
                             $('i').removeClass('fa-pencil');
 
@@ -1133,111 +1137,132 @@
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
+        var myField3 = this.getField("clienteuniclick");
 
-            if (myField) {
-                myField.listenTo(myField, "render", function () {
-                    var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
-                    var factprod= Oproductos.productos.tct_tipo_f_txf_c;
-                    var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-                    var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
-                    var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
-                    var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
-                    var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
-                    var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
-                    var userprod= App.user.attributes.productos_c;
-                    var logueado= App.user.id;
-                    var asesorL=this.model.get('user_id_c');
-                    var asesorF=this.model.get('user_id1_c');
-                    var asesorCA=this.model.get('user_id2_c');
-                    var asesorFL=this.model.get('user_id6_c');
-                    myField.hide();
+        if (myField) {
+            myField.listenTo(myField, "render", function () {
+                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
+                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
+                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
+                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
+                var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
+                var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
+                var fleetsub = Oproductos.productos.tct_subtipo_fl_txf_c;
+                var userprod = App.user.attributes.productos_c;
+                var logueado = App.user.id;
+                var asesorL = this.model.get('user_id_c');
+                var asesorF = this.model.get('user_id1_c');
+                var asesorCA = this.model.get('user_id2_c');
+                var asesorFL = this.model.get('user_id6_c');
+                myField.hide();
 
-                if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL== logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF== logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA== logueado) ||
-                    (fleetprod=="Prospecto" && fleetsub=="Contactado" && userprod.includes('6') && asesorFL== logueado)) {
+                if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "Prospecto" && fleetsub == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
                     myField.show();
-                }else {
+                } else {
                     myField.hide();
                 }
 
-                });
-            }
+            });
+        }
 
-            if (myField1) {
-                myField1.listenTo(myField1, "render", function () {
+        if (myField1) {
+            myField1.listenTo(myField1, "render", function () {
+                myField1.hide();
+                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
+                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
+                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
+                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
+                var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
+                var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
+                var fleetsub = Oproductos.productos.tct_subtipo_fl_txf_c;
+                var userprod = App.user.attributes.productos_c;
+                var logueado = App.user.id;
+                var asesorL = this.model.get('user_id_c');
+                var asesorF = this.model.get('user_id1_c');
+                var asesorCA = this.model.get('user_id2_c');
+                var asesorFL = this.model.get('user_id6_c');
+                //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
+                if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
+                    myField1.show();
+                } else {
                     myField1.hide();
-                    var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
-                    var factprod= Oproductos.productos.tct_tipo_f_txf_c;
-                    var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-                    var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
-                    var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
-                    var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
-                    var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
-                    var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
-                    var userprod= App.user.attributes.productos_c;
-                    var logueado= App.user.id;
-                    var asesorL=this.model.get('user_id_c');
-                    var asesorF=this.model.get('user_id1_c');
-                    var asesorCA=this.model.get('user_id2_c');
-                    var asesorFL=this.model.get('user_id6_c');
-                    //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-                    if ((leasingprod=="Lead" && userprod.includes('1') && asesorL== logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF== logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA== logueado) ||
-                        (fleetprod=="Lead" && userprod.includes('6') && asesorFL== logueado)) {
-                        myField1.show();
-                    }else {
-                        myField1.hide();
-                    }
-                });
-            }
-             if (myField2) {
-                    myField2.listenTo(myField2, "render", function () {
-                        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
-                        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
-                        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-                        var fleetprod= Oproductos.productos.tct_tipo_fl_txf_c;
-                        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
-                        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
-                        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
-                        var fleetsub= Oproductos.productos.tct_subtipo_fl_txf_c;
-                        var userprod= App.user.attributes.productos_c;
-                        var logueado= App.user.id;
-                        var asesorL=this.model.get('user_id_c');
-                        var asesorF=this.model.get('user_id1_c');
-                        var asesorCA=this.model.get('user_id2_c');
-                        var asesorFL=this.model.get('user_id6_c');
-                        myField2.hide();
+                }
+            });
+        }
+        if (myField2) {
+            myField2.listenTo(myField2, "render", function () {
+                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
+                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
+                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
+                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
+                var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
+                var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
+                var fleetsub = Oproductos.productos.tct_subtipo_fl_txf_c;
+                var userprod = App.user.attributes.productos_c;
+                var logueado = App.user.id;
+                var asesorL = this.model.get('user_id_c');
+                var asesorF = this.model.get('user_id1_c');
+                var asesorCA = this.model.get('user_id2_c');
+                var asesorFL = this.model.get('user_id6_c');
+                myField2.hide();
 
-                        if(((leasingprod=="Proveedor" ||leasingprod=="Persona")&& userprod.includes('1') && asesorL== logueado) || ((factprod=="Proveedor" || factprod=="Persona")&& userprod.includes("4") && asesorF== logueado) || ((caprod=="Proveedor" || caprod=="Persona") && userprod.includes("3") && asesorCA== logueado) ||
-                            ((fleetprod=="Proveedor" || fleetprod=="Persona") && userprod.includes('6') && asesorFL== logueado)) {
-                            myField2.show();
-                        }else{
-                            myField2.hide();
-                        }
+                if (((leasingprod == "Proveedor" || leasingprod == "Persona") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Proveedor" || factprod == "Persona") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Proveedor" || caprod == "Persona") && userprod.includes("3") && asesorCA == logueado) ||
+                    ((fleetprod == "Proveedor" || fleetprod == "Persona") && userprod.includes('6') && asesorFL == logueado)) {
+                    myField2.show();
+                } else {
+                    myField2.hide();
+                }
 
-                    });
-             }
+            });
+        }
+        if (myField3) {
+            myField3.listenTo(myField3, "render", function () {
+                var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
+                var userprod = App.user.attributes.productos_c;
+                var logueado = App.user.id;
+                var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
+                var asesorUC = this.model.get('user_id7_c');
+                myField3.hide();
+                if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+                    myField3.show();
+                } else {
+                    myField3.hide();
+                }
+
+            });
+        }
     },
 
     hideButton_Conversion_change: function () {
 
-        var leasingprod= Oproductos.productos.tct_tipo_l_txf_c;
-        var factprod= Oproductos.productos.tct_tipo_f_txf_c;
-        var caprod= Oproductos.productos.tct_tipo_ca_txf_c;
-        var tipofleet= Oproductos.productos.tct_tipo_fl_txf_c;
-        var userprod= App.user.attributes.productos_c;
-        var leasingsub= Oproductos.productos.tct_subtipo_l_txf_c;
-        var factsub= Oproductos.productos.tct_subtipo_f_txf_c;
-        var casub= Oproductos.productos.tct_subtipo_ca_txf_c;
-        var subtipofleet= Oproductos.productos.tct_subtipo_fl_txf_c;
+        var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
+        var factprod = Oproductos.productos.tct_tipo_f_txf_c;
+        var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
+        var tipofleet = Oproductos.productos.tct_tipo_fl_txf_c;
+        var userprod = App.user.attributes.productos_c;
+        var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
+        var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
+        var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
+        var subtipofleet = Oproductos.productos.tct_subtipo_fl_txf_c;
+        var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
+        var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
 
-        var logueado= App.user.id;
-        var asesorL=this.model.get('user_id_c');
-        var asesorF=this.model.get('user_id1_c');
-        var asesorCA=this.model.get('user_id2_c');
-        var asesorFL=this.model.get('user_id6_c');
+        var logueado = App.user.id;
+        var asesorL = this.model.get('user_id_c');
+        var asesorF = this.model.get('user_id1_c');
+        var asesorCA = this.model.get('user_id2_c');
+        var asesorFL = this.model.get('user_id6_c');
+        var asesorUC = this.model.get('user_id7_c');
         //oculta botones
         $('[name="regresalead"]').hide();
         $('[name="prospectocontactado"]').hide();
         $('[name="conviertelead"]').hide();
+        $('[name="clienteuniclick"]').hide();
 
         //Evaluación para mostrar botones
         /*
@@ -1245,10 +1270,11 @@
           * tipo_registro_c = Prospecto
           * && subtipo_cuenta_c = Contactado
         */
-        if ((leasingprod=="Prospecto" && leasingsub=="Contactado" && userprod.includes('1') && asesorL==logueado) || (factprod=="Prospecto" && factsub=="Contactado" && userprod.includes("4") && asesorF==logueado) || (caprod=="Prospecto" && casub=="Contactado" && userprod.includes("3") && asesorCA==logueado) ||
-            (tipofleet=="Prospecto" && subtipofleet=="Contactado" && userprod.includes('6') && asesorFL==logueado)) {
+        if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
+            (tipofleet == "Prospecto" && subtipofleet == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
+            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1257,9 +1283,10 @@
         * Prospecto contactado:
         * tipo_registro_c = Lead
         */
-        if ((leasingprod=="Lead" && userprod.includes('1') && asesorL==logueado) || (factprod=="Lead" && userprod.includes("4") && asesorF==logueado) || (caprod=="Lead" && userprod.includes("3") && asesorCA==logueado) || (tipofleet=="Lead" && userprod.includes('6') && asesorFL==logueado)) {
+        if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
+            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1268,14 +1295,25 @@
         * tipo_registro_c = Persona
         * OR tipo_registro_c = Proveedor
         */
-        if (((leasingprod=="Persona" || leasingprod=="Proveedor" ) && userprod.includes('1') && asesorL==logueado) || ((factprod=="Persona" || factprod=="Proveedor") && userprod.includes("4") && asesorF==logueado) || ((caprod=="Persona" || caprod=="Proveedor") && userprod.includes("3") && asesorCA==logueado) || ((tipofleet=="Persona" || tipofleet=="Proveedor") && userprod.includes('6') && asesorFL==logueado)) {
+        if (((leasingprod == "Persona" || leasingprod == "Proveedor") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Persona" || factprod == "Proveedor") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Persona" || caprod == "Proveedor") && userprod.includes("3") && asesorCA == logueado) || ((tipofleet == "Persona" || tipofleet == "Proveedor") && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
+            $('[name="conviertelead"]').hide();
+        }
+
+        //Evaluación para mostrar botones
+        /*
+        * Convertir Cliente Uniclick
+        * tipo_registro_c = Lead
+        */
+        if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+            $('[name="regresalead"]').hide();
+            $('[name="clienteuniclick"]').show();
+            $('[name="conviertelead"]').hide();
+            $('[name="prospectocontactado"]').hide();
         }
     },
-
-
 
     /* @author F. Javier Garcia S. 10/07/2018
                 Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
@@ -1324,35 +1362,35 @@
     //Evento no acepta numeros, solo letras (a-z).
     checkTextOnly: function () {
         app.alert.dismiss('Error_validacion_Campos');
-        var camponame= "";
+        var camponame = "";
         var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-        if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!=undefined){
-            var nombre=this.model.get('primernombre_c');
+        if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
+            var nombre = this.model.get('primernombre_c');
             var comprueba = expresion.test(nombre);
-            if(comprueba!= true){
-                camponame= camponame + '<b>-Primer Nombre<br></b>'; ;
+            if (comprueba != true) {
+                camponame = camponame + '<b>-Primer Nombre<br></b>';;
             }
         }
-        if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
-            var apaterno=this.model.get('apellidopaterno_c');
+        if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
+            var apaterno = this.model.get('apellidopaterno_c');
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaap = expresion.test(apaterno);
-            if(validaap!= true){
-                camponame= camponame + '<b>-Apellido Paterno<br></b>'; ;
+            if (validaap != true) {
+                camponame = camponame + '<b>-Apellido Paterno<br></b>';;
             }
         }
-        if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
-            var amaterno=this.model.get('apellidomaterno_c');
+        if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
+            var amaterno = this.model.get('apellidomaterno_c');
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaam = expresion.test(amaterno);
-            if(validaam!= true){
-                camponame= camponame + '<b>-Apellido Materno<br></b>'; ;
+            if (validaam != true) {
+                camponame = camponame + '<b>-Apellido Materno<br></b>';;
             }
         }
-        if (camponame){
+        if (camponame) {
             app.alert.show("Error_validacion_Campos", {
                 level: "error",
-                messages: 'Los siguientes campos no permiten caracteres especiales:<br>'+ camponame,
+                messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + camponame,
                 autoClose: false
             });
         }
@@ -1361,27 +1399,27 @@
     checkTextAndNum: function () {
         //Modificacion a validacion del campo, debe cumplir un formato.
         app.alert.dismiss('Error_validacion_Passport');
-        var campoPass= "";
+        var campoPass = "";
         var expresion = new RegExp(/^[0-9a-zA-Z]+$/g);
-        if (this.model.get('ifepasaporte_c')!="" && this.model.get('ifepasaporte_c')!=undefined){
-            var nombre=this.model.get('ifepasaporte_c');
+        if (this.model.get('ifepasaporte_c') != "" && this.model.get('ifepasaporte_c') != undefined) {
+            var nombre = this.model.get('ifepasaporte_c');
             var comprueba = expresion.test(nombre);
-            if(comprueba!= true){
-                campoPass= campoPass + '<b>-IFE/Pasaporte<br></b>';
+            if (comprueba != true) {
+                campoPass = campoPass + '<b>-IFE/Pasaporte<br></b>';
             }
         }
-        if (this.model.get('curp_c')!="" && this.model.get('curp_c')!=undefined){
+        if (this.model.get('curp_c') != "" && this.model.get('curp_c') != undefined) {
             var expresionC = new RegExp(/^[0-9a-zA-Z]+$/g);
-            var curp=this.model.get('curp_c');
+            var curp = this.model.get('curp_c');
             var comprueba = expresionC.test(curp);
-            if(comprueba!= true){
-                campoPass= campoPass + '<b>-CURP<br></b>';
+            if (comprueba != true) {
+                campoPass = campoPass + '<b>-CURP<br></b>';
             }
         }
-        if (campoPass){
+        if (campoPass) {
             app.alert.show("Error_validacion_Passport", {
                 level: "error",
-                messages: 'Los siguientes campos no permiten el ingreso de caracteres especiales:<br>'+ campoPass,
+                messages: 'Los siguientes campos no permiten el ingreso de caracteres especiales:<br>' + campoPass,
                 autoClose: false
             });
         }
@@ -1415,7 +1453,7 @@
                 };
                 var dnbProfileUrl = app.api.buildURL("Accounts/GenerarCURP", '', {}, {});
                 if (this.model.get('pais_nacimiento_c') == 2) {
-                    app.api.call("create", dnbProfileUrl, {curpdata: firmoParams}, {
+                    app.api.call("create", dnbProfileUrl, { curpdata: firmoParams }, {
                         success: _.bind(function (data) {
                             if (data['UNI2_UTL_002_CreaCurpPersonaResult']['resultado']) {
                                 this.model.set('curp_c', data['UNI2_UTL_002_CreaCurpPersonaResult']['curp']);
@@ -1465,66 +1503,65 @@
     },
 
     _doGenera_RFC_CURP: function () {
-          if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
-              && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
-              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                  this.model.set('rfc_c', 'XXXX010101XXX');
-              } else {
-                  this.model.set('rfc_c', 'XXX010101XXX');
-              }
-          } else {
-              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                  if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null && this.model.get('primernombre_c') != ''
-                      && this.model.get('apellidopaterno_c') != null  && this.model.get('apellidopaterno_c') != '' && this.model.get('apellidomaterno_c') != null && this.model.get('apellidomaterno_c') != '') {
-                      this._doValidateWSRFC();
-                  } else {
-                      var faltantes = "";
-                      console.log('Valida campos para RFC');
-                      if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
-                          faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
-                      }
-                      if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
-                          faltantes = faltantes + '<b>Primer Nombre<br></b>';
-                      }
-                      if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                          faltantes = faltantes + '<b>Apellido Paterno<br></b>';
-                      }
-                      if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
-                          faltantes = faltantes + '<b>Apellido Materno<br></b>';
-                      }
+        if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
+            && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
+            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                this.model.set('rfc_c', 'XXXX010101XXX');
+            } else {
+                this.model.set('rfc_c', 'XXX010101XXX');
+            }
+        } else {
+            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null && this.model.get('primernombre_c') != ''
+                    && this.model.get('apellidopaterno_c') != null && this.model.get('apellidopaterno_c') != '' && this.model.get('apellidomaterno_c') != null && this.model.get('apellidomaterno_c') != '') {
+                    this._doValidateWSRFC();
+                } else {
+                    var faltantes = "";
+                    console.log('Valida campos para RFC');
+                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                        faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                    }
+                    if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                        faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                    }
+                    if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                    }
+                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                    }
 
-                      else (faltantes != "")
-                      app.alert.show("Generar RFC", {
-                          level: "error",
-                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
-                          autoClose: true
-                      });
-                  }
-              }
-              else
-              {
-                  if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
-                      this._doValidateWSRFC();
-                  } else {
-                      var falta = "";
-                      console.log('Entra P Moral RFC');
-                      if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
-                          falta = falta + '<b>Fecha Constitutiva<br></b>';
-                      }
-                      /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
-                          falta = falta + '<b>Nombre Comercial<br></b>';
-                      }*/
-                      if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
-                          falta = falta + '<b>Raz\u00F3n Social<br></b>';
-                      }
-                      app.alert.show("Generar RFC", {
-                          level: "error",
-                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
-                          autoClose: true
-                      });
-                  }
-              }
-          }
+                    else (faltantes != "")
+                    app.alert.show("Generar RFC", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                        autoClose: true
+                    });
+                }
+            }
+            else {
+                if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c') != "") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') != "")) {
+                    this._doValidateWSRFC();
+                } else {
+                    var falta = "";
+                    console.log('Entra P Moral RFC');
+                    if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                        falta = falta + '<b>Fecha Constitutiva<br></b>';
+                    }
+                    /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                        falta = falta + '<b>Nombre Comercial<br></b>';
+                    }*/
+                    if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                        falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                    }
+                    app.alert.show("Generar RFC", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
+                        autoClose: true
+                    });
+                }
+            }
+        }
     },
 
     ValidaFormatoCURP: function (fields, errors, callback) {
@@ -1567,7 +1604,7 @@
         //Valida CP
         console.log('Validación CP');
         var direcciones = this.model.get('account_direcciones_n');
-        if(direcciones != undefined){
+        if (direcciones != undefined) {
             for (i = 0; i < direcciones.length; i++) {
                 if (direcciones[i].codigo_postal == '' || direcciones[i].codigo_postal == null) {
                     errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
@@ -1586,8 +1623,8 @@
     },
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
-            || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
+        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
+            || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c') == true) {
 
             if (_.isEmpty(this.oDirecciones.direccion)) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
@@ -1637,8 +1674,9 @@
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
+        this.context.on('button:conversion_cliente_uniclick:click', this.clienteuniclickClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-       // this.context.on('button:save_button:click', this.borraTel, this);
+        // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
     },
@@ -1654,16 +1692,16 @@
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere.',
         });
-        var totalProspecto= 0;
-        var totalProspectoG=0;
-        var productousuario= App.user.attributes.productos_c;
-        var api_params={};
+        var totalProspecto = 0;
+        var totalProspectoG = 0;
+        var productousuario = App.user.attributes.productos_c;
+        var api_params = {};
 
         //Validacion para actualizar el producto del usuario logueado asi como el tipo de registro de la cuenta
         //Leasing
-        if(Oproductos.productos.tct_tipo_l_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_l_txf_c=="Contactado"){
+        if (Oproductos.productos.tct_tipo_l_txf_c == "Prospecto" && Oproductos.productos.tct_subtipo_l_txf_c == "Contactado") {
             totalProspectoG++;
-            if(productousuario.includes('1') && App.user.id==this.model.get('user_id_c') ) {
+            if (productousuario.includes('1') && App.user.id == this.model.get('user_id_c')) {
                 api_params["tct_tipo_l_txf_c"] = "Lead";
                 api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                 api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
@@ -1671,9 +1709,9 @@
             }
         }
         //Factoraje
-        if(Oproductos.productos.tct_tipo_f_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_f_txf_c=="Contactado"){
+        if (Oproductos.productos.tct_tipo_f_txf_c == "Prospecto" && Oproductos.productos.tct_subtipo_f_txf_c == "Contactado") {
             totalProspectoG++;
-            if(productousuario.includes('4') && App.user.id==this.model.get('user_id1_c')) {
+            if (productousuario.includes('4') && App.user.id == this.model.get('user_id1_c')) {
                 totalProspecto++;
                 api_params["tct_tipo_f_txf_c"] = "Lead";
                 api_params["tct_subtipo_f_txf_c"] = "En Calificación";
@@ -1682,9 +1720,9 @@
 
         }
         //CA
-        if(Oproductos.productos.tct_tipo_ca_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_ca_txf_c=="Contactado"){
+        if (Oproductos.productos.tct_tipo_ca_txf_c == "Prospecto" && Oproductos.productos.tct_subtipo_ca_txf_c == "Contactado") {
             totalProspectoG++;
-            if(productousuario.includes('3') && App.user.id==this.model.get('user_id2_c')) {
+            if (productousuario.includes('3') && App.user.id == this.model.get('user_id2_c')) {
                 totalProspecto++;
                 api_params["tct_tipo_ca_txf_c"] = "Lead";
                 api_params["tct_subtipo_ca_txf_c"] = "En Calificacion";
@@ -1692,16 +1730,16 @@
             }
         }
         //Fleet
-        if(Oproductos.productos.tct_tipo_fl_txf_c=="Prospecto" && Oproductos.productos.tct_subtipo_fl_txf_c=="Contactado"){
+        if (Oproductos.productos.tct_tipo_fl_txf_c == "Prospecto" && Oproductos.productos.tct_subtipo_fl_txf_c == "Contactado") {
             totalProspectoG++;
-            if(productousuario.includes('6')&& App.user.id==this.model.get('user_id6_c')) {
+            if (productousuario.includes('6') && App.user.id == this.model.get('user_id6_c')) {
                 totalProspecto++;
                 api_params["tct_tipo_fl_txf_c"] = "Lead";
                 api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                 api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
             }
         }
-        if (this.model.get("tipo_registro_c")=="Prospecto" && this.model.get("subtipo_cuenta_c")=="Contactado" && totalProspecto==totalProspectoG) {
+        if (this.model.get("tipo_registro_c") == "Prospecto" && this.model.get("subtipo_cuenta_c") == "Contactado" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
             v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
             this.model.set("tipo_registro_c", "Lead");
@@ -1711,7 +1749,7 @@
             //this.model.set("show_panel_c",0);
             this.model.save();
         }
-        if (api_params!=undefined) {
+        if (api_params != undefined) {
 
             var idC = this.model.get('id');
             var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
@@ -1719,19 +1757,19 @@
                 success: _.bind(function (data) {
                     //this._render();
                     app.alert.dismiss('RegresaAlead');
-                    Oproductos.productos=data;
+                    Oproductos.productos = data;
                     app.alert.show('alert_change_success', {
                         level: 'success',
                         messages: 'Cambio realizado',
                     });
                     //Actualiza modelo vista v360
-                    v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
-                    v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
-                    v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
-                    v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
+                    v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                    v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                    v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                    v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                     Oproductos.render();
                     v360.render();
-                },)
+                })
             });
         }
     },
@@ -1766,44 +1804,44 @@
      */
 
     //CAMBIOS EFECTUADOS
-    getllamadas:function (callback) {
+    getllamadas: function (callback) {
         var cday = new Date();
-        var llamadas=0;
-        self=this;
-        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id')+"/link/calls", null, null, {}), null, {
+        var llamadas = 0;
+        self = this;
+        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id') + "/link/calls", null, null, {}), null, {
             success: _.bind(function (data) {
-                this.datallamadas=data;
-                if(data.records.length>0) {
+                this.datallamadas = data;
+                if (data.records.length > 0) {
                     for (var i = 0; i < data.records.length; i++) {
                         var tempdate = Date.parse(data.records[i].date_start);
                         if (tempdate < cday) {
-                            if(data.records[i].status=='Held'){ //Conversión de LEAD a Prospecto contactado, solo cuando esten como realizadas
+                            if (data.records[i].status == 'Held') { //Conversión de LEAD a Prospecto contactado, solo cuando esten como realizadas
                                 llamadas++;
                             }
                         }
                     }
                 }
                 self.flagheld++;
-                callback(llamadas,null,self);
+                callback(llamadas, null, self);
                 //This.totalllamadas=llamadas;
                 //return llamadas;
-            },this)
+            }, this)
         });
     },
     /* @Jesus Carrillo
         Metodo para verificar  las reuniones de la cuenta
      */
-    getreuniones:function (callBackResult) {
+    getreuniones: function (callBackResult) {
         var cday = new Date();
-        var reuniones=0;
-        self=this;
-        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id')+"/link/meetings", null, null, {}), null, {
+        var reuniones = 0;
+        self = this;
+        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id') + "/link/meetings", null, null, {}), null, {
             success: _.bind(function (data) {
-                if(data.records.length>0) {
+                if (data.records.length > 0) {
                     for (var i = 0; i < data.records.length; i++) {
                         var tempdate = Date.parse(data.records[i].date_start);
                         if (tempdate < cday) {
-                            if(data.records[i].status=='Held'){ //Conversión de LEAD a Prospecto Contactado, solo cuando esten como realizadas
+                            if (data.records[i].status == 'Held') { //Conversión de LEAD a Prospecto Contactado, solo cuando esten como realizadas
                                 reuniones++;
                             }
                         }
@@ -1812,14 +1850,14 @@
                 //this.totalreuniones=reuniones;
                 //return reuniones;
                 self.flagheld++;
-                callBackResult(null,reuniones,self);
-            },this)
+                callBackResult(null, reuniones, self);
+            }, this)
         });
     },
     /* @Jesus Carrillo
         Metodo para validar campos de telefonos y direcciones
      */
-    validar_fields:function(valContacto, validar_fields) {
+    validar_fields: function (valContacto, validar_fields) {
         App.alert.show('loadingConvertir', {
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere',
@@ -1857,17 +1895,16 @@
             estado.push(datos_dirreciones[i].estado);
             colonia.push(datos_dirreciones[i].colonia);
         }
-        var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
-        var allfields2=[];
+        var allfields = [tipolabel, pais, estatus, tipolabel2, cp, municipio, calle, indicador, ciudad, numext, numint, estado, colonia];
+        var allfields2 = [];
         console.log(allfields);
-        var indica_direc_admin=0;
-        for(var i=0;i<allfields.length;i++){
-            var betext=0;
-            for(var j=0;j<allfields[i].length;j++)
-            {
-                if(allfields[i][j]!=null || allfields[i][j]!="") {
+        var indica_direc_admin = 0;
+        for (var i = 0; i < allfields.length; i++) {
+            var betext = 0;
+            for (var j = 0; j < allfields[i].length; j++) {
+                if (allfields[i][j] != null || allfields[i][j] != "") {
                     betext++;
-                    if(i==7) {//si estas apuntando al campo indicador
+                    if (i == 7) {//si estas apuntando al campo indicador
                         if (allfields[i][j] == '16' || allfields[i][j] == '17' || allfields[i][j] == '18' || allfields[i][j] == '19' || allfields[i][j] == '20' || allfields[i][j] == '21'
                             || allfields[i][j] == '22' || allfields[i][j] == '23' || allfields[i][j] == '24' || allfields[i][j] == '25' || allfields[i][j] == '26' || allfields[i][j] == '27'
                             || allfields[i][j] == '28' || allfields[i][j] == '29' || allfields[i][j] == '30' || allfields[i][j] == '31') {
@@ -1876,18 +1913,18 @@
                     }
                 }
             }
-            if(betext==0){
+            if (betext == 0) {
                 allfields2.push(false);
-            }else{
+            } else {
                 allfields2.push(true);
             }
         }
         console.log(allfields2);
-        var fieldstelefono=allfields2.slice(0,2);
-        var fieldsdirec=allfields2.slice(3);
+        var fieldstelefono = allfields2.slice(0, 2);
+        var fieldsdirec = allfields2.slice(3);
         var valMedios = 0;
 
-        if(fieldstelefono.includes(false)==true){
+        if (fieldstelefono.includes(false) == true) {
             App.alert.dismiss('loadingConvertir');
             app.alert.show('alert_fields_empty1', {
                 level: 'error',
@@ -1913,7 +1950,7 @@
                 valMedios = 1;
             } */
 
-        if(valMedios==0 && valContacto==0 && validar_fields==0) {
+        if (valMedios == 0 && valContacto == 0 && validar_fields == 0) {
             if (this.model.get('tipo_registro_c') == "Lead") {
                 this.model.set('tipo_registro_c', 'Prospecto');
                 this.model.set('subtipo_registro_c', 'Contactado');
@@ -1921,45 +1958,45 @@
                 //this.model.set("show_panel_c",1);
                 this.model.save();
             }
-            var productousuario= App.user.attributes.productos_c;
-            var api_params={};
+            var productousuario = App.user.attributes.productos_c;
+            var api_params = {};
 
-            if (productousuario.includes('1') && Oproductos.productos.tct_tipo_l_txf_c=="Lead"){
-                if(App.user.id==this.model.get('user_id_c')) {
+            if (productousuario.includes('1') && Oproductos.productos.tct_tipo_l_txf_c == "Lead") {
+                if (App.user.id == this.model.get('user_id_c')) {
                     api_params["tct_tipo_l_txf_c"] = "Prospecto";
                     api_params["tct_subtipo_l_txf_c"] = "Contactado";
                     api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (productousuario.includes('3') && Oproductos.productos.tct_tipo_ca_txf_c=="Lead"){
-                if(App.user.id==this.model.get('user_id2_c')) {
+            if (productousuario.includes('3') && Oproductos.productos.tct_tipo_ca_txf_c == "Lead") {
+                if (App.user.id == this.model.get('user_id2_c')) {
                     api_params["tct_tipo_ca_txf_c"] = "Prospecto";
                     api_params["tct_subtipo_ca_txf_c"] = "Contactado";
                     api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (productousuario.includes('4') && Oproductos.productos.tct_tipo_f_txf_c=="Lead"){
-                if(App.user.id==this.model.get('user_id1_c')) {
+            if (productousuario.includes('4') && Oproductos.productos.tct_tipo_f_txf_c == "Lead") {
+                if (App.user.id == this.model.get('user_id1_c')) {
                     api_params["tct_tipo_f_txf_c"] = "Prospecto";
                     api_params["tct_subtipo_f_txf_c"] = "Contactado";
                     api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (productousuario.includes('6') && Oproductos.productos.tct_tipo_fl_txf_c=="Lead"){
-                if(App.user.id==this.model.get('user_id6_c')) {
+            if (productousuario.includes('6') && Oproductos.productos.tct_tipo_fl_txf_c == "Lead") {
+                if (App.user.id == this.model.get('user_id6_c')) {
                     api_params["tct_tipo_fl_txf_c"] = "Prospecto";
                     api_params["tct_subtipo_fl_txf_c"] = "Contactado";
                     api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO CONTACTADO";
                 }
             }
-            if (api_params!=undefined) {
+            if (api_params != undefined) {
 
                 var idC = this.model.get('id');
                 var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
                 app.api.call('update', url, api_params, {
                     success: _.bind(function (data) {
                         //this._render();
-                        Oproductos.productos=data;
+                        Oproductos.productos = data;
                         app.alert.dismiss('loadingConvertir');
                         app.alert.show('alert_change_success', {
                             level: 'success',
@@ -1967,13 +2004,13 @@
                         });
                         //Actualiza modelo vista v360
                         v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
-                        v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
+                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
                         v360.render();
-                    },)
+                    })
                 });
             }
         }
@@ -1983,16 +2020,16 @@
        *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
        * 22-08-2018 Victor Martínez
         */
-    prospectocontactadoClicked:function(){
+    prospectocontactadoClicked: function () {
         App.alert.show('convierteLead_a_Prospecto', {
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere',
         });
         if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked) &&
-            (this.model.get('user_id_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")){
+            (this.model.get('user_id_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")) {
             app.alert.dismiss('convierteLead_a_Prospecto');
             app.alert.show("Cumple 3 checks", {
-            level: "error",
+                level: "error",
                 title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable en los tres productos.',
                 autoClose: false
             });
@@ -2004,34 +2041,34 @@
 
         }*/
 
-        self=this;
-        self.flagheld=0;
-        if(this.model.get('id')!="") { //en lugar de self es this
+        self = this;
+        self.flagheld = 0;
+        if (this.model.get('id') != "") { //en lugar de self es this
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
-                    var  usuario=App.user.attributes.puestousuario_c;
+                    var usuario = App.user.attributes.puestousuario_c;
                     console.log(data);
-                    if(data==false){
+                    if (data == false) {
 
 
-                        if (usuario=="5"||
-                            usuario=="11"||
-                            usuario=="16"||
+                        if (usuario == "5" ||
+                            usuario == "11" ||
+                            usuario == "16" ||
                             //Gerentes
-                            usuario=="15"||
-                            usuario=="4"||
-                            usuario=="10"||
+                            usuario == "15" ||
+                            usuario == "4" ||
+                            usuario == "10" ||
                             //subdirectores
-                            usuario=="3"||
-                            usuario=="9"||
-                            usuario=="28"||
+                            usuario == "3" ||
+                            usuario == "9" ||
+                            usuario == "28" ||
                             //Directores
-                            usuario=="1"||
-                            usuario=="2"||
-                            usuario=="8"||
-                            usuario=="14"||
-                            usuario=="21"
-                            || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
+                            usuario == "1" ||
+                            usuario == "2" ||
+                            usuario == "8" ||
+                            usuario == "14" ||
+                            usuario == "21"
+                            || usuario == "18" //Ajuste para poder trabajar con la cuenta de Wendy
                         ) {
 
                             //Valida llamadas y reuniones
@@ -2046,36 +2083,35 @@
                             self.getreuniones(this.resultCallback);
 
                         }
-                            else
-                            {
-                                app.alert.dismiss('convierteLead_a_Prospecto');
-                                app.alert.show("No acceso", {
-                                    level: "error",
-                                    title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
-                                    autoClose: true
-                                });
-                            }
-
-                            /*
-
-                             if(this.totalllamadas==0 && self.totalreuniones==0){
-                                 app.alert.show('alert_calls', {
-                                     level: 'error',
-                                     messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
-                                 });
-                                 valRelacionados = 1;
-                             }
-
-                             //Valida datos de cuenta
-                             var valContacto = self.validaContactado();
-                             self.validar_fields(valContacto, valRelacionados);
-                             */
-
+                        else {
+                            app.alert.dismiss('convierteLead_a_Prospecto');
+                            app.alert.show("No acceso", {
+                                level: "error",
+                                title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
+                                autoClose: true
+                            });
                         }
-                        else if(data==true){
 
-                            //Valida llamadas y reuniones
-                            var valRelacionados = 0;
+                        /*
+
+                         if(this.totalllamadas==0 && self.totalreuniones==0){
+                             app.alert.show('alert_calls', {
+                                 level: 'error',
+                                 messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
+                             });
+                             valRelacionados = 1;
+                         }
+
+                         //Valida datos de cuenta
+                         var valContacto = self.validaContactado();
+                         self.validar_fields(valContacto, valRelacionados);
+                         */
+
+                    }
+                    else if (data == true) {
+
+                        //Valida llamadas y reuniones
+                        var valRelacionados = 0;
                         //self.getllamadas();
                         //self.getreuniones();
                         app.alert.dismiss('convierteLead_a_Prospecto');
@@ -2086,7 +2122,7 @@
                         self.getreuniones(this.resultCallback);
 
 
-                        }
+                    }
 
 
                 }, self)
@@ -2097,8 +2133,8 @@
         console.log("valor fuera " + this.model.get('id'));
     },
 
-    resultCallback:function(resultLlamadas,resultReuniones,context) {
-        self=context;
+    resultCallback: function (resultLlamadas, resultReuniones, context) {
+        self = context;
         var valRelacionados = 0;
         if (resultLlamadas != null) {
             self.totalllamadas = resultLlamadas;
@@ -2110,7 +2146,7 @@
         }
 
         // if (self.totalllamadas != undefined && self.totalreuniones != undefined) {
-        if (self.flagheld>=2) {
+        if (self.flagheld >= 2) {
             if (self.totalllamadas == 0 && self.totalreuniones == 0) {
                 app.alert.dismiss('loadingConvertir');
                 app.alert.show('alert_calls', {
@@ -2133,38 +2169,38 @@
 
     //Validación para que los campos contengan informacion para poder convertir de LEAD a Prospecto/Contactado. Adrian Arauz 15/08/2018
     validaContactado: function () {
-        var campos= "";
+        var campos = "";
 
-        if (this.model.get('origendelprospecto_c') =="" || this.model.get('origendelprospecto_c')==null){
-            campos= campos + '<b>Origen, </b>';
+        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+            campos = campos + '<b>Origen, </b>';
         }
 
-        if (this.model.get('name') =="" || this.model.get('name')==null){
-            campos= campos + '<b>Nombre, </b>';
+        if (this.model.get('name') == "" || this.model.get('name') == null) {
+            campos = campos + '<b>Nombre, </b>';
         }
 
-        if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
-            campos= campos + '<b>Apellido Paterno, </b>';
+        if ((this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
+            campos = campos + '<b>Apellido Paterno, </b>';
         }
 
-        if (this.model.get('email') =="" || this.model.get('email')==null){
-            campos= campos + '<b>E Mail, </b>';
+        if (this.model.get('email') == "" || this.model.get('email') == null) {
+            campos = campos + '<b>E Mail, </b>';
         }
 
-        if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
-            campos= campos + '<b>Nombre Comercial. </b> ';
+        if ((this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) && this.model.get('tipodepersona_c') == 'Persona Moral') {
+            campos = campos + '<b>Nombre Comercial. </b> ';
         }
 
-        if(campos!=""){
+        if (campos != "") {
             app.alert.dismiss('loadingConvertir');
-            console.log ('Validacion Campos OK');
+            console.log('Validacion Campos OK');
             app.alert.show('alert_calls2', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: <br>' +campos ,
+                messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: <br>' + campos,
             });
 
             return 1;
-        }else {
+        } else {
             return 0;
         }
     },
@@ -2175,20 +2211,20 @@
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere',
         });
-        var reqs= "";
-        if (this.model.get('name') =="" || this.model.get('name')==null){
-            reqs= reqs + '<b>Nombre<br></b>';
+        var reqs = "";
+        if (this.model.get('name') == "" || this.model.get('name') == null) {
+            reqs = reqs + '<b>Nombre<br></b>';
         }
-        if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
-            reqs= reqs + '<b>Apellido Paterno<br></b>';
+        if ((this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
+            reqs = reqs + '<b>Apellido Paterno<br></b>';
         }
-        if (this.model.get('email') =="" || this.model.get('email')==null){
-            reqs= reqs + '<b>Email<br></b>';
+        if (this.model.get('email') == "" || this.model.get('email') == null) {
+            reqs = reqs + '<b>Email<br></b>';
         }
-        if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
-            reqs= reqs + '<b>Nombre Comercial<br></b>';
+        if ((this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) && this.model.get('tipodepersona_c') == 'Persona Moral') {
+            reqs = reqs + '<b>Nombre Comercial<br></b>';
         }
-        if(reqs!="") {
+        if (reqs != "") {
             app.alert.dismiss('conviertePaL');
             console.log('Validacion Campos LEAD');
             app.alert.show('alert_calls4', {
@@ -2197,7 +2233,7 @@
             });
         }
         else {
-            var usuario = app.data.createBean('Users', {id: app.user.id});
+            var usuario = app.data.createBean('Users', { id: app.user.id });
             usuario.fetch({
                 success: _.bind(function (modelo) {
                     var contains = function (needle) {
@@ -2230,33 +2266,40 @@
                      * Carlos Zaragoza
                      * Enero 25, 2016 10:15 AM
                      * */
-                    if (contains.call(modelo.get('productos_c'), "1") && this.model.get('user_id_c')=="") {
+                    if (contains.call(modelo.get('productos_c'), "1") && this.model.get('user_id_c') == "") {
                         this.model.set('promotorleasing_c', modelo.get('name'));
                         this.model.set('user_id_c', modelo.get('id'));
-                    } else if(this.model.get('user_id_c')=="") {
+                    } else if (this.model.get('user_id_c') == "") {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "4") && this.model.get('user_id_c')=="") {
+                    if (contains.call(modelo.get('productos_c'), "4") && this.model.get('user_id_c') == "") {
                         this.model.set('promotorfactoraje_c', modelo.get('name'));
                         this.model.set('user_id1_c', modelo.get('id'));
-                    } else if (this.model.get('user_id_c')==""){
+                    } else if (this.model.get('user_id_c') == "") {
                         this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
                         this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "3") && this.model.get('user_id_c')=="") {
+                    if (contains.call(modelo.get('productos_c'), "3") && this.model.get('user_id_c') == "") {
                         this.model.set('promotorcredit_c', modelo.get('name'));
                         this.model.set('user_id2_c', modelo.get('id'));
-                    } else if( this.model.get('user_id_c')=="") {
+                    } else if (this.model.get('user_id_c') == "") {
                         this.model.set('promotorcredit_c', '9 - Sin Gestor');
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
-                    if (contains.call(modelo.get('productos_c'), "6")  && this.model.get('user_id_c')=="") {
+                    if (contains.call(modelo.get('productos_c'), "6") && this.model.get('user_id_c') == "") {
                         this.model.set('promotorfleet_c', modelo.get('name'));
                         this.model.set('user_id6_c', modelo.get('id'));
-                    } else if(this.model.get('user_id_c')==""){
+                    } else if (this.model.get('user_id_c') == "") {
                         this.model.set('promotorfleet_c', '9 - Sin Gestor');
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    }
+                    if (contains.call(modelo.get('productos_c'), "8") && this.model.get('user_id_c') == "") {
+                        this.model.set('promotoruniclick_c', modelo.get('name'));
+                        this.model.set('user_id7_c', modelo.get('id'));
+                    } else if (this.model.get('user_id_c') == "") {
+                        this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                        this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
                     if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
@@ -2267,9 +2310,11 @@
                         this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotorfleet_c', '9 - Sin Gestor');
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                        this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                        this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
-                    if (this.model.get("tipo_registro_c")=="Persona" || this.model.get('tipo_registro_c')=="Proveedor") {
+                    if (this.model.get("tipo_registro_c") == "Persona" || this.model.get('tipo_registro_c') == "Proveedor") {
                         v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
                         this.model.set("tipo_registro_c", "Lead");
                         this.model.set("subtipo_cuenta_list", "En Calificacion");
@@ -2278,39 +2323,39 @@
                     }
                 }, this)
             });
-            var productousuario= App.user.attributes.productos_c;
-            var api_params={};
+            var productousuario = App.user.attributes.productos_c;
+            var api_params = {};
 
-            if ((Oproductos.productos.tct_tipo_l_txf_c=="Persona" || Oproductos.productos.tct_tipo_l_txf_c=="Proveedor") && productousuario.includes('1')){
-                if(App.user.id==this.model.get('user_id_c')) {
+            if ((Oproductos.productos.tct_tipo_l_txf_c == "Persona" || Oproductos.productos.tct_tipo_l_txf_c == "Proveedor") && productousuario.includes('1')) {
+                if (App.user.id == this.model.get('user_id_c')) {
                     api_params["tct_tipo_l_txf_c"] = "Lead";
                     api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                     api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
                 }
 
             }
-            if ((Oproductos.productos.tct_tipo_ca_txf_c=="Persona" ||  Oproductos.productos.tct_tipo_ca_txf_c=="Proveedor") && productousuario.includes('3')){
-                if(App.user.id==this.model.get('user_id2_c')) {
+            if ((Oproductos.productos.tct_tipo_ca_txf_c == "Persona" || Oproductos.productos.tct_tipo_ca_txf_c == "Proveedor") && productousuario.includes('3')) {
+                if (App.user.id == this.model.get('user_id2_c')) {
                     api_params["tct_tipo_ca_txf_c"] = "Lead";
                     api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if ((Oproductos.productos.tct_tipo_f_txf_c=="Persona" || Oproductos.productos.tct_tipo_f_txf_c=="Proveedor") && productousuario.includes('4')){
-                if(App.user.id==this.model.get('user_id1_c')) {
+            if ((Oproductos.productos.tct_tipo_f_txf_c == "Persona" || Oproductos.productos.tct_tipo_f_txf_c == "Proveedor") && productousuario.includes('4')) {
+                if (App.user.id == this.model.get('user_id1_c')) {
                     api_params["tct_tipo_f_txf_c"] = "Lead";
                     api_params["tct_subtipo_f_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if ((Oproductos.productos.tct_tipo_fl_txf_c=="Persona" || Oproductos.productos.tct_tipo_fl_txf_c=="Proveedor") && productousuario.includes('6')){
-                if(App.user.id==this.model.get('user_id6_c')) {
+            if ((Oproductos.productos.tct_tipo_fl_txf_c == "Persona" || Oproductos.productos.tct_tipo_fl_txf_c == "Proveedor") && productousuario.includes('6')) {
+                if (App.user.id == this.model.get('user_id6_c')) {
                     api_params["tct_tipo_fl_txf_c"] = "Lead";
                     api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if (api_params!=undefined) {
+            if (api_params != undefined) {
 
                 var idC = this.model.get('id');
                 var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
@@ -2318,23 +2363,23 @@
                     success: _.bind(function (data) {
                         //this._render();
                         app.alert.dismiss('conviertePaL');
-                        Oproductos.productos=data;
+                        Oproductos.productos = data;
                         app.alert.show('alert_change_success', {
                             level: 'success',
                             messages: 'Cambio realizado',
                         });
                         //Actualiza modelo vista v360
-                        v360.ResumenCliente.leasing.tipo_cuenta=data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta=data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta=data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta=data.tct_tipo_cuenta_fl_c;
+                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
                         v360.render();
                         //Deja activa la pestaña de la vista360
                         $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
                         $("#recordTab>li.tab").removeClass('active');
                         $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
-                    },)
+                    })
                 });
             }
 
@@ -2347,7 +2392,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono) ) {
+            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
                 app.alert.show("Correo requerido", {
                     level: "error",
                     title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
@@ -2365,7 +2410,7 @@
 
     DuplicateCheck: function (fields, errors, callback) {
         //Valida homonimo
-        if (this.model.get('tct_homonimo_chk_c')!= true) {
+        if (this.model.get('tct_homonimo_chk_c') != true) {
             var clean_name = this.model.get('clean_name');
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                 fields: "clean_name",
@@ -2378,44 +2423,44 @@
                         }
                     }
                 ]
-                }), null, {
+            }), null, {
                 success: _.bind(function (data) {
-                      if (data.records.length > 0) {
-                          var usuarios= App.lang.getAppListStrings('usuarios_homonimo_name_list');
-                          var etiquetas= "";
-                          Object.keys(usuarios).forEach(function(key){
-                              if(key != ''){
-                                  etiquetas+=usuarios[key]+'<br>';
-                              }
-                          });
-                            app.alert.show("DuplicateCheck", {
-                                level: "error",
-                                messages: "Ya existe una persona registrada con el mismo nombre. Favor de comunicarse con alguno de los siguientes usuarios:<br><b>"+etiquetas+"</b>",
-                                autoClose: false
-                            });
-
-                            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                                errors['primernombre_c'] = errors['primernombre_c'] || {};
-                                errors['primernombre_c'].required = true;
-                                errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                                errors['apellidopaterno_c'].required = true;
-                                errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                                errors['apellidomaterno_c'].required = true;
-                            } else {
-                                errors['razonsocial_c'] = errors['razonsocial_c'] || {};
-                                errors['razonsocial_c'].required = true;
+                    if (data.records.length > 0) {
+                        var usuarios = App.lang.getAppListStrings('usuarios_homonimo_name_list');
+                        var etiquetas = "";
+                        Object.keys(usuarios).forEach(function (key) {
+                            if (key != '') {
+                                etiquetas += usuarios[key] + '<br>';
                             }
+                        });
+                        app.alert.show("DuplicateCheck", {
+                            level: "error",
+                            messages: "Ya existe una persona registrada con el mismo nombre. Favor de comunicarse con alguno de los siguientes usuarios:<br><b>" + etiquetas + "</b>",
+                            autoClose: false
+                        });
 
-                            }
+                        if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                            errors['primernombre_c'] = errors['primernombre_c'] || {};
+                            errors['primernombre_c'].required = true;
+                            errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                            errors['apellidopaterno_c'].required = true;
+                            errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                            errors['apellidomaterno_c'].required = true;
+                        } else {
+                            errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                            errors['razonsocial_c'].required = true;
+                        }
+
+                    }
                     callback(null, fields, errors);
                 }, this)
-                });
-        }else {
+            });
+        } else {
             callback(null, fields, errors);
         }
     },
 
-    RFC_DuplicateCheck: function(fields, errors, callback){
+    RFC_DuplicateCheck: function (fields, errors, callback) {
         var RFC = this.model.get('rfc_c');
         if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && RFC != 'XXX010101000')) {
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -2432,19 +2477,19 @@
             }), null, {
                 success: _.bind(function (data) {
                     if (data.records.length > 0) {
-                         app.alert.show("DuplicateCheck", {
-                         level: "error",
-                         title: "Ya existe una persona registrada con el mismo RFC.",
-                         autoClose: false
-                         });
+                        app.alert.show("DuplicateCheck", {
+                            level: "error",
+                            title: "Ya existe una persona registrada con el mismo RFC.",
+                            autoClose: false
+                        });
 
-                         errors['rfc_c'] = errors['rfc_c'] || {};
-                         errors['rfc_c'].required = true;
+                        errors['rfc_c'] = errors['rfc_c'] || {};
+                        errors['rfc_c'].required = true;
                     }
                     callback(null, fields, errors);
                 }, this)
             });
-        }else {
+        } else {
             callback(null, fields, errors);
         }
     },
@@ -2452,14 +2497,14 @@
     //revisa que no exista un nombre o RFC duplicado
     _doValidateRFC: function (fields, errors, callback) {
         var RFC = this.model.get('rfc_c');
-        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && this.model.get('tct_pais_expide_rfc_c')=="2")) {
+        if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX' && this.model.get('tct_pais_expide_rfc_c') == "2")) {
             /*Método que tiene la función de validar el rfc*/
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg =  /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+                expReg = /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
             } else {
-                expReg =  /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+                expReg = /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
@@ -2521,7 +2566,7 @@
         };
 
         var dnbProfileUrl = app.api.buildURL("Accounts/ValidarRFC", '', {}, {});
-        app.api.call("create", dnbProfileUrl, {rfcdata: firmoParams}, {
+        app.api.call("create", dnbProfileUrl, { rfcdata: firmoParams }, {
             success: _.bind(function (data) {
                 if (data != null) {
                     var rfc = this.model.get('rfc_c');
@@ -2600,10 +2645,10 @@
 
     doValidateDateCons: function (fields, errors, callback) {
         /* if  date not empty, then check with today date and return error */
-        if (!_.isEmpty(this.model.get('fechaconstitutiva_c'))&& this.model.get('tipodepersona_c')=='Persona Moral') {
+        if (!_.isEmpty(this.model.get('fechaconstitutiva_c')) && this.model.get('tipodepersona_c') == 'Persona Moral') {
 
             var feccons_date = this.model.get('fechaconstitutiva_c');
-            var today_date = new Date().toISOString().slice(0,10);
+            var today_date = new Date().toISOString().slice(0, 10);
 
             if (feccons_date > today_date) {
                 app.alert.show("fechaDeConsValidate", {
@@ -2622,10 +2667,10 @@
 
     doValidateDateNac: function (fields, errors, callback) {
         /* if  date not empty, then check with today date and return error */
-        if (!_.isEmpty(this.model.get('fechadenacimiento_c'))&& this.model.get('tipodepersona_c')!='Persona Moral') {
+        if (!_.isEmpty(this.model.get('fechadenacimiento_c')) && this.model.get('tipodepersona_c') != 'Persona Moral') {
 
             var fecnac_date = this.model.get('fechadenacimiento_c');
-            var today_date = new Date().toISOString().slice(0,10);
+            var today_date = new Date().toISOString().slice(0, 10);
 
             if (fecnac_date >= today_date) {
                 app.alert.show("fechaDeNacimientoValidate", {
@@ -2696,7 +2741,7 @@
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
-            if(this.model.get('tct_macro_sector_ddw_c')==''|| this.model.get('tct_macro_sector_ddw_c')==null){
+            if (this.model.get('tct_macro_sector_ddw_c') == '' || this.model.get('tct_macro_sector_ddw_c') == null) {
                 /*app.alert.show("Macro sector requerido", {
                     level: "error",
                     title: "El campo macro sector es requerido",
@@ -2705,7 +2750,7 @@
                 errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                 errors['tct_macro_sector_ddw_c'].required = true;
             }
-            if(this.model.get('rfc_c')==''|| this.model.get('rfc_c')==null){
+            if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
                     level: "error",
                     title: "El campo RFC es requerido",
@@ -2714,26 +2759,26 @@
                 errors['rfc_c'] = errors['rfc_c'] || {};
                 errors['rfc_c'].required = true;
             }
-            if(this.model.get('tipodepersona_c')!='Persona Moral'){
+            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
                 /*app.alert.show("Fecha de nacimiento requerida", {
                     level: "error",
                     title: "El campo fecha de nacimiento es requerido",
                     autoClose: false
                 });*/
-                if(this.model.get('fechadenacimiento_c')==''|| this.model.get('fechadenacimiento_c')==null){
-                  errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
-                  errors['fechadenacimiento_c'].required = true;
+                if (this.model.get('fechadenacimiento_c') == '' || this.model.get('fechadenacimiento_c') == null) {
+                    errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
+                    errors['fechadenacimiento_c'].required = true;
                 }
                 /*app.alert.show("Pais de nacimiento requerido", {
                     level: "error",
                     title: "El campo pa\u00EDs de nacimiento es requerido",
                     autoClose: false
                 });*/
-                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
-                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
-                  errors['pais_nacimiento_c'].required = true;
+                if (this.model.get('pais_nacimiento_c') == '' || this.model.get('pais_nacimiento_c') == null) {
+                    errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                    errors['pais_nacimiento_c'].required = true;
                 }
-                if(this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
                     errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
                     errors['estado_nacimiento_c'].required = true;
                 }
@@ -2742,9 +2787,9 @@
                     //title: "El campo estado civil es requerido",
                     autoClose: false
                 });*/
-                if(this.model.get('estadocivil_c')==''|| this.model.get('estadocivil_c')==null){
-                  errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-                  errors['estadocivil_c'].required = true;
+                if (this.model.get('estadocivil_c') == '' || this.model.get('estadocivil_c') == null) {
+                    errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                    errors['estadocivil_c'].required = true;
                 }
 
                 /*app.alert.show("Profesion requerido", {
@@ -2752,26 +2797,26 @@
                     title: "El campo profesi\u00F3n es requerido",
                     autoClose: false
                 });*/
-                if(this.model.get('profesion_c')==''|| this.model.get('profesion_c')==null){
-                  errors['profesion_c'] = errors['profesion_c'] || {};
-                  errors['profesion_c'].required = true;
+                if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
+                    errors['profesion_c'] = errors['profesion_c'] || {};
+                    errors['profesion_c'].required = true;
                 }
             }
-            else{
+            else {
                 /*app.alert.show("Pais de constitucion", {
                     level: "error",
                     title: "El campo pa\u00EDs de constituci\u00F3n es requerido",
                     autoClose: false
                 });*/
-                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
-                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
-                  errors['pais_nacimiento_c'].required = true;
+                if (this.model.get('pais_nacimiento_c') == '' || this.model.get('pais_nacimiento_c') == null) {
+                    errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                    errors['pais_nacimiento_c'].required = true;
                 }
-                if(this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
                     errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
                     errors['estado_nacimiento_c'].required = true;
                 }
-                if(this.model.get('fechaconstitutiva_c')==''|| this.model.get('fechaconstitutiva_c')==null){
+                if (this.model.get('fechaconstitutiva_c') == '' || this.model.get('fechaconstitutiva_c') == null) {
                     errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
                     errors['fechaconstitutiva_c'].required = true;
                 }
@@ -2805,7 +2850,7 @@
             });
         });
         clean_name_split_full = App.utils.deepCopy(clean_name_split);
-        if (this.model.get('tipodepersona_c')=="Persona Moral") {
+        if (this.model.get('tipodepersona_c') == "Persona Moral") {
             //Elimina tipos de sociedad: Ej. SA, de , CV...
             var totalVacio = 0;
             _.each(clean_name_split, function (value, key) {
@@ -2837,9 +2882,9 @@
 
             clean_name = clean_name.toUpperCase();
             this.model.set("clean_name", clean_name);
-        }else{
-            original_name = original_name.replace(/\s+/gi,'');
-            original_name= original_name.toUpperCase();
+        } else {
+            original_name = original_name.replace(/\s+/gi, '');
+            original_name = original_name.toUpperCase();
             this.model.set("clean_name", original_name);
         }
 
@@ -2913,7 +2958,7 @@
 
     macrosector: function (fields, errors, callback) {
         if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor'
-            || this.model.get('esproveedor_c')==true || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
+            || this.model.get('esproveedor_c') == true || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
             errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
             errors['tct_macro_sector_ddw_c'].required = true;
         }
@@ -2921,7 +2966,7 @@
     },
 
     sectoreconomico: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c')==true)) {
+        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true)) {
             errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
             errors['sectoreconomico_c'].required = true;
         }
@@ -2930,47 +2975,47 @@
 
     validadirecc: function (fields, errors, callback) {
         //Campos requeridos
-        var cont=0;
+        var cont = 0;
         var direccion = this.oDirecciones.direccion;
         for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
             //Tipo
-            if(direccion[iDireccion].tipodedireccion == ""){
+            if (direccion[iDireccion].tipodedireccion == "") {
                 cont++;
                 this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
-            }else{
+            } else {
                 this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
             }
             //Indicador
-            if(direccion[iDireccion].indicador == ""){
+            if (direccion[iDireccion].indicador == "") {
                 cont++;
                 this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
-            }else{
+            } else {
                 this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
             }
             //Código Postal
-            if(direccion[iDireccion].valCodigoPostal == ""){
+            if (direccion[iDireccion].valCodigoPostal == "") {
                 cont++;
                 this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', 'red');
-            }else{
+            } else {
                 this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', '');
             }
             //Calle
-            if(direccion[iDireccion].calle.trim() == ""){
+            if (direccion[iDireccion].calle.trim() == "") {
                 cont++;
                 this.$('.calleExisting').eq(iDireccion).css('border-color', 'red');
-            }else{
+            } else {
                 this.$('.calleExisting').eq(iDireccion).css('border-color', '');
             }
             //Número Exterior
-            if(direccion[iDireccion].numext.trim() == ""){
+            if (direccion[iDireccion].numext.trim() == "") {
                 cont++;
                 this.$('.numExtExisting').eq(iDireccion).css('border-color', 'red');
-            }else{
+            } else {
                 this.$('.numExtExisting').eq(iDireccion).css('border-color', '');
             }
         }
         //Muestra error en direcciones existentes
-        if(cont>0){
+        if (cont > 0) {
             app.alert.show("empty_fields_dire", {
                 level: "error",
                 messages: "Favor de llenar los campos se\u00F1alados en <b> Direcciones </b> .",
@@ -2982,12 +3027,12 @@
         }
 
         //Valida direcciones duplicadas
-        if(direccion.length>0){
+        if (direccion.length > 0) {
             var coincidencia = 0;
-            var indices=[];
+            var indices = [];
             for (var i = 0; i < direccion.length; i++) {
                 for (var j = 0; j < direccion.length; j++) {
-                    if (i!=j && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal) {
+                    if (i != j && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -2996,21 +3041,21 @@
             }
             //indices=indices.unique();
             if (coincidencia > 0) {
-                    app.alert.show('error_direccion_duplicada', {
-                        level: 'error',
-                        autoClose: false,
-                        messages: 'Existen direcciones iguales,favor de corregir.'
-                    });
-                    //$($input).focus();
-                    if(indices.length>0) {
-                        for (var i = 0; i < indices.length; i++) {
-                            $('.calleExisting').eq(indices[i]).css('border-color', 'red');
-                            $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
-                            $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
-                        }
+                app.alert.show('error_direccion_duplicada', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Existen direcciones iguales,favor de corregir.'
+                });
+                //$($input).focus();
+                if (indices.length > 0) {
+                    for (var i = 0; i < indices.length; i++) {
+                        $('.calleExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
                     }
-                    errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
-                    errors['dire_direccion_duplicada'].required = true;
+                }
+                errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
+                errors['dire_direccion_duplicada'].required = true;
             }
         }
 
@@ -3020,27 +3065,27 @@
     validatelefonos: function (fields, errors, callback) {
         var msjError = "";
         var msjErrorT = "";
-        var telefono=this.oTelefonos.telefono;
-        for (iTelefono=0; iTelefono < telefono.length; iTelefono++) {
+        var telefono = this.oTelefonos.telefono;
+        for (iTelefono = 0; iTelefono < telefono.length; iTelefono++) {
             //Valida valor
             valor4 = telefono[iTelefono].telefono.trim();
-            if(valor4 == ""){
+            if (valor4 == "") {
                 msjError += '<br>-Teléfono vacío';
-            }else{
+            } else {
                 //Valida númerico
                 var valNumerico = /^\d+$/;
                 if (!valNumerico.test(valor4)) {
                     msjError += '<br>-Solo números son permitidos';
                 }
                 //Valida longitud
-                if (valor4.length<8) {
+                if (valor4.length < 8) {
                     msjError += '<br>-Debe contener 8 o más dígitos';
                 }
                 //Valida números repetidos
-                if(valor4.length > 1){
+                if (valor4.length > 1) {
                     var repetido = true;
                     for (var iValor4 = 0; iValor4 < valor4.length; iValor4++) {
-                      repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
+                        repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
                     }
                     if (repetido) {
                         msjError += '<br>-Caracter repetido';
@@ -3048,18 +3093,18 @@
                 }
             }
             // Agerga teléfono a mensaje de error
-            if(msjError != ""){
-                msjErrorT += '<br><b>'+ valor4+'</b> :'+msjError+'<br>';
+            if (msjError != "") {
+                msjErrorT += '<br><b>' + valor4 + '</b> :' + msjError + '<br>';
                 $('.Telefonot').eq(iTelefono).css('border-color', 'red');
             }
             msjError = "";
         }
         //Muestra errores
-        if(msjErrorT!= ""){
+        if (msjErrorT != "") {
             app.alert.show('phone_save_error', {
                 level: 'error',
                 autoClose: false,
-                messages: 'Formato de teléfono(s) incorrecto:'+ msjErrorT
+                messages: 'Formato de teléfono(s) incorrecto:' + msjErrorT
             });
             //Agrega errores
             errors['Tel_Telefonos_numero'] = errors['Tel_Telefonos_numero'] || {};
@@ -3067,12 +3112,12 @@
         }
 
         //Valida duplicados
-        if(telefono.length>0){
+        if (telefono.length > 0) {
             var coincidencia = 0;
-            var indices=[];
+            var indices = [];
             for (var i = 0; i < telefono.length; i++) {
                 for (var j = 0; j < telefono.length; j++) {
-                    if (telefono[j].telefono == telefono[i].telefono && i!=j) {
+                    if (telefono[j].telefono == telefono[i].telefono && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -3081,37 +3126,37 @@
             }
             //indices=indices.unique();
             if (coincidencia > 0) {
-                    app.alert.show('error_sametelefono3', {
-                        level: 'error',
-                        autoClose: false,
-                        messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
-                    });
-                    //$($input).focus();
-                    if(indices.length>0) {
-                        for (var i = 0; i < indices.length; i++) {
-                            $('.Telefonot').eq(indices[i]).css('border-color', 'red');
-                        }
+                app.alert.show('error_sametelefono3', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
+                });
+                //$($input).focus();
+                if (indices.length > 0) {
+                    for (var i = 0; i < indices.length; i++) {
+                        $('.Telefonot').eq(indices[i]).css('border-color', 'red');
                     }
-                    errors['Tel_Telefonos_duplicado'] = errors['Tel_Telefonos_duplicado'] || {};
-                    errors['Tel_Telefonos_duplicado'].required = true;
+                }
+                errors['Tel_Telefonos_duplicado'] = errors['Tel_Telefonos_duplicado'] || {};
+                errors['Tel_Telefonos_duplicado'].required = true;
             }
         }
         callback(null, fields, errors);
     },
 
 
-    valida_backoffice: function() {
+    valida_backoffice: function () {
         var roles_limit = app.lang.getAppListStrings('roles_limit_list');
         var roles_logged = app.user.attributes.roles;
-        var coincide_rol=0;
-        for(var i=0; i<roles_logged.length; i++) {
+        var coincide_rol = 0;
+        for (var i = 0; i < roles_logged.length; i++) {
             for (var rol_limit in roles_limit) {
                 if (roles_logged[i] == roles_limit[rol_limit]) {
                     coincide_rol++;
                 }
             }
         }
-        if(coincide_rol!=0) {
+        if (coincide_rol != 0) {
             app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
                 success: _.bind(function (pertenece_a_equipo) {
                     if (pertenece_a_equipo == false) {
@@ -3122,25 +3167,25 @@
                             autoClose: false,
                             return: false,
                         });
-                        app.router.navigate('#Accounts', {trigger: true});
+                        app.router.navigate('#Accounts', { trigger: true });
                     }
                 }, this),
             });
         }
     },
 
-    valida_centro_prospec: function() {
+    valida_centro_prospec: function () {
         var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
         var roles_logged = app.user.attributes.roles;
-        var coincide_rol=0;
-        for(var i=0; i<roles_logged.length; i++) {
+        var coincide_rol = 0;
+        for (var i = 0; i < roles_logged.length; i++) {
             for (var rol_limit in roles_limit) {
                 if (roles_logged[i] == roles_limit[rol_limit]) {
-                    coincide_rol ++;
+                    coincide_rol++;
                 }
             }
         }
-        if(coincide_rol!=0) {
+        if (coincide_rol != 0) {
             if (this.model.get('tipo_registro_c') != "Lead") {
                 app.alert.show("No Rol2", {
                     level: "error",
@@ -3148,8 +3193,8 @@
                     autoClose: false,
                     return: false,
                 });
-                app.router.navigate('#Accounts', {trigger: true});
-            }else {
+                app.router.navigate('#Accounts', { trigger: true });
+            } else {
                 app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                     success: _.bind(function (es_promotor) {
                         if (es_promotor == false) {
@@ -3160,7 +3205,7 @@
                                 autoClose: false,
                                 return: false,
                             });
-                            app.router.navigate('#Accounts', {trigger: true});
+                            app.router.navigate('#Accounts', { trigger: true });
                         }
                     }, this),
                 });
@@ -3169,16 +3214,16 @@
     },
 
     //Funcion que valida el contenido ingresado en el campo del Email
-    expmail: function (fields, errors, callback){
-        if (this.model.get('email') != null && this.model.get('email') !="") {
+    expmail: function (fields, errors, callback) {
+        if (this.model.get('email') != null && this.model.get('email') != "") {
 
             var input = (this.model.get('email'));
             var expresion = /^\S+@\S+\.\S+[$%&|<>#]?$/;
             var cumple = true;
 
-            for (i=0; i< input.length; i++) {
+            for (i = 0; i < input.length; i++) {
 
-                if (expresion.test(input[i].email_address)== false) {
+                if (expresion.test(input[i].email_address) == false) {
                     cumple = false;
 
                 }
@@ -3199,47 +3244,42 @@
     },
 
 
-    validacedente: function (fields, errors, callback){
+    validacedente: function (fields, errors, callback) {
 
-        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
-
+        if (this.model.get('cedente_factor_c') == true) {
 
             var value = this.oDirecciones.direccion;
             var totalindicadores = "";
 
-            if(value != undefined){
-
-                for (i=0; i < value.length; i++) {
+            if (value != undefined) {
+                for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
                     var valorecupera = this._getIndicador(value[i].indicador);
                     totalindicadores = totalindicadores + "," + valorecupera;
-
                 }
-
             }
 
             var arregloindicadores = [];
-            if(value== "" || value == null){
+            if (value == "" || value == null) {
                 arregloindicadores = [0];
 
-            }else{
-                arregloindicadores =  totalindicadores.split (",");
-
+            } else {
+                arregloindicadores = totalindicadores.split(",");
             }
 
             var direccionesfaltantes = "";
 
-            if (arregloindicadores.indexOf("1") == -1){
+            if (arregloindicadores.indexOf("1") == -1) {
                 direccionesfaltantes = direccionesfaltantes + 'Correspondencia<br>';
             }
-            if (arregloindicadores.indexOf("2") == -1){
+            if (arregloindicadores.indexOf("2") == -1) {
                 direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
-            if (arregloindicadores.indexOf("4") == -1){
+            if (arregloindicadores.indexOf("4") == -1) {
                 direccionesfaltantes = direccionesfaltantes + 'Entrega de Bienes<br>';
             }
 
-            if ( direccionesfaltantes != "") {
+            if (direccionesfaltantes != "") {
                 $('.select2-choices').css('border-color', 'red');
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
@@ -3248,14 +3288,12 @@
                 })
                 errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
                 errors['account_direcciones_c'].required = true;
-
             }
             else {
                 $('.select2-choices').css('border-color', '');
-
             }
             //Validar campos adionales
-            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c')=='Prospecto') {
+            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c') == 'Prospecto') {
 
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                     errors['rfc_c'] = errors['rfc_c'] || {};
@@ -3301,17 +3339,73 @@
                         errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                         errors['tct_macro_sector_ddw_c'].required = true;
                     }
-
                 }
-
             }
+        }
+
+
+        if (this.model.get('deudor_factor_c') == true) {
+
+            /**********Campos requeridos para check Deudor Factor*******/
+            var value = this.oDirecciones.direccion;
+            var totalindicadores = "";
+
+            if (value != undefined) {
+                for (i = 0; i < value.length; i++) {
+                    var valorecupera = this._getIndicador(value[i].indicador);
+                    totalindicadores = totalindicadores + "," + valorecupera;
+                }
+            }
+
+            var arregloindicadores = [];
+            if (value == "" || value == null) {
+                arregloindicadores = [0];
+
+            } else {
+                arregloindicadores = totalindicadores.split(",");
+            }
+
+            var direccionesfaltantes = "";
+            if (arregloindicadores.indexOf("2") == -1) {
+                direccionesfaltantes = direccionesfaltantes + 'Domicilio Fiscal<br>';
+            }
+            if (direccionesfaltantes != "") {
+                $('.select2-choices').css('border-color', 'red');
+                app.alert.show('Error al validar Direcciones', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                })
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
+            }
+            else {
+                $('.select2-choices').css('border-color', '');
+            }
+            if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
+                errors['razonsocial_c'] = errors['razonsocial_c'] || {};
+                errors['razonsocial_c'].required = true;
+            }
+            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                errors['actividadeconomica_c'].required = true;
+            }
+            if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+                errors['rfc_c'] = errors['rfc_c'] || {};
+                errors['rfc_c'].required = true;
+            }
+            if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null) {
+                errors['tct_pais_expide_rfc_c'] = errors['tct_pais_expide_rfc_c'] || {};
+                errors['tct_pais_expide_rfc_c'].required = true;
+            }
+
         }
 
         callback(null, fields, errors);
 
     },
 
-    _getIndicador: function(idSelected, valuesSelected) {
+    _getIndicador: function (idSelected, valuesSelected) {
 
         //variable con resultado
         var result = null;
@@ -3323,7 +3417,7 @@
         var object = [];
         var values = [];
 
-        for(var key in dir_indicador_map_list) {
+        for (var key in dir_indicador_map_list) {
             var element = {};
             element.id = key;
             values = dir_indicador_map_list[key].split(",");
@@ -3332,8 +3426,8 @@
         }
 
         //Recupera arreglo de valores por id
-        if(idSelected){
-            for(var i=0; i<object.length; i++) {
+        if (idSelected) {
+            for (var i = 0; i < object.length; i++) {
                 if ((object[i].id) == idSelected) {
                     result = object[i].values;
                 }
@@ -3342,20 +3436,20 @@
         }
 
         //Recupera id por valores
-        if(valuesSelected){
+        if (valuesSelected) {
             result = [];
-            for(var i=0; i<object.length; i++) {
+            for (var i = 0; i < object.length; i++) {
                 if (object[i].values.length == valuesSelected.length) {
                     //Ordena arreglos y compara
                     valuesSelected.sort();
                     object[i].values.sort();
                     var tempVal = true;
-                    for(var j=0; j<valuesSelected.length; j++) {
-                        if(valuesSelected[j] != object[i].values[j]){
+                    for (var j = 0; j < valuesSelected.length; j++) {
+                        if (valuesSelected[j] != object[i].values[j]) {
                             tempVal = false;
                         }
                     }
-                    if( tempVal == true){
+                    if (tempVal == true) {
                         result[0] = object[i].id;
                     }
 
@@ -3368,10 +3462,10 @@
         return result;
     },
 
-    validapotencial: function(fields, errors, callback) {
+    validapotencial: function (fields, errors, callback) {
 
-        if ((this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente') || this.model.get('tipo_registro_c') == 'Cliente'  ) {
-            if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
+        if ((this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente') || this.model.get('tipo_registro_c') == 'Cliente') {
+            if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0)) {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
                 app.alert.show('Error_ventas_anuales', {
@@ -3380,11 +3474,11 @@
                     messages: 'El campo <b>ventas anuales</b> debe tener un valor mayor a 0.'
                 });
             }
-            if (this.model.get('tct_ano_ventas_ddw_c')== undefined || this.model.get('tct_ano_ventas_ddw_c')==""){
+            if (this.model.get('tct_ano_ventas_ddw_c') == undefined || this.model.get('tct_ano_ventas_ddw_c') == "") {
                 errors['tct_ano_ventas_ddw_c'] = "Se debe seleccionar el año de ventas";
                 errors['tct_ano_ventas_ddw_c'].required = true;
             }
-            if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
+            if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0)) {
                 errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['activo_fijo_c'].required = true;
                 app.alert.show('Error_activof', {
@@ -3397,37 +3491,33 @@
         callback(null, fields, errors);
     },
 
-    valida_requeridos: function(fields, errors, callback) {
+    valida_requeridos: function (fields, errors, callback) {
         var campos = "";
-        _.each(errors, function(value, key) {
-            _.each(this.model.fields, function(field) {
-                if(_.isEqual(field.name,key)) {
-                    if(field.vname) {
-                        if(field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral')
-                        {
-                          campos = campos + '<b>País de constitución</b><br>';
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
+                        if (field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral') {
+                            campos = campos + '<b>País de constitución</b><br>';
                         }
-                        else
-                        {
-                          if(field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral')
-                          {
-                            campos = campos + '<b>Estado de constitución</b><br>';
-                          }
-                          else
-                          {
-                            campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
-                          }
+                        else {
+                            if (field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral') {
+                                campos = campos + '<b>Estado de constitución</b><br>';
+                            }
+                            else {
+                                campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                            }
                         }
                     }
-          		  }
-       	    }, this);
+                }
+            }, this);
         }, this);
         //Remueve campos custom: Teléfonos, Direcciones, Correo
-        campos = campos.replace("<b>Telefonos</b><br>","");
-        campos = campos.replace("<b>Direcciones</b><br>","");
-        campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>","");
+        campos = campos.replace("<b>Telefonos</b><br>", "");
+        campos = campos.replace("<b>Direcciones</b><br>", "");
+        campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>", "");
 
-        if(campos) {
+        if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
@@ -3437,196 +3527,196 @@
         callback(null, fields, errors);
     },
 
-    validaRequeridosPLD: function (fields, errors, callback){
+    validaRequeridosPLD: function (fields, errors, callback) {
         var faltantesAP = "";
         var faltantesFF = "";
         var faltantesCA = "";
-        var faltantesCS= "";
+        var faltantesCS = "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_c');
         var subtipoCuenta = this.model.get('subtipo_cuenta_c');
         if (tipoCuenta != '') {
-          //Valida campos para AP
-          if (App.user.attributes.tipodeproducto_c == '1') {
-              //Pregunta: campo2ddw-ap
-             /* if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                  $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo3rel-ap
-              if($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2'){
-                  $('.campo3rel-ap').find('.select2-choice').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo3rel-ap')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo3rel-ap').find('.select2-choice').css('border-color','');
-              }
-              //Pregunta: campo4ddw-ap
-              /*if($('.campo4ddw-ap').select2('val') == ''){
-                  $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo5rel-ap
-              /*if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
-                  $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo5rel-ap').find('.select2-choice').css('border-color','');
-              }*/
-              /*//Pregunta: campo7ddw-ap
-              if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                  $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-              }
-              if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                  $('.campo8txt-ap').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo8txt-ap').find('.select2-choice').css('border-color','');
-              }
-              if ($('.campo10txt-ap').val() == '' && $('.campo9ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                  $('.campo10txt-ap').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo10txt-ap').find('.select2-choice').css('border-color','');
-              }*/
-              /* //Pregunta: campo9ddw-ap
-               if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                   $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
-                   faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            //Valida campos para AP
+            if (App.user.attributes.tipodeproducto_c == '1') {
+                //Pregunta: campo2ddw-ap
+                /* if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                     $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
+                     faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                     $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
+                 }*/
+                //Pregunta: campo3rel-ap
+                if ($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val') == '2') {
+                    $('.campo3rel-ap').find('.select2-choice').css('border-color', 'red');
+                    faltantesAP = faltantesAP + '<b>- ' + $('.campo3rel-ap')[1].getAttribute('data-name') + '<br></b>';
+                } else {
+                    $('.campo3rel-ap').find('.select2-choice').css('border-color', '');
+                }
+                //Pregunta: campo4ddw-ap
+                /*if($('.campo4ddw-ap').select2('val') == ''){
+                    $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
+                    faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
+                }*/
+                //Pregunta: campo5rel-ap
+                /*if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
+                    $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
+                    faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo5rel-ap').find('.select2-choice').css('border-color','');
+                }*/
+                /*//Pregunta: campo7ddw-ap
+                if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                    $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
+                    faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                }
+                if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                    $('.campo8txt-ap').css('border-color','red');
+                    faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo8txt-ap').find('.select2-choice').css('border-color','');
+                }
+                if ($('.campo10txt-ap').val() == '' && $('.campo9ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                    $('.campo10txt-ap').css('border-color','red');
+                    faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo10txt-ap').find('.select2-choice').css('border-color','');
+                }*/
+                /* //Pregunta: campo9ddw-ap
+                 if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                     $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
+                     faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                     $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo6ddw-ap
+                 if($('.campo6ddw-ap').select2('val') == ''){
+                     $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
+                     faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                     $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
+                 }*/
+                //Pregunta: campo17txt-ap
+                if ($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked) {
+                    $('.campo17txt-ap').css('border-color', 'red');
+                    faltantesAP = faltantesAP + '<b>- ' + $('.campo17txt-ap')[0].getAttribute('data-name') + '<br></b>';
+                } else {
+                    $('.campo17txt-ap').css('border-color', '');
+                }
+                //Pregunta: campo26txt-ap
+
+                /*if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
+ 
+                   $('.campo26txt-ap').css('border-color','red');
+                   faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
                }else{
-                   $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
-               }
-               //Pregunta: campo6ddw-ap
-               if($('.campo6ddw-ap').select2('val') == ''){
-                   $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
-                   faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-               }else{
-                   $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
+                   $('.campo26txt-ap').css('border-color','');
                }*/
-              //Pregunta: campo17txt-ap
-              if($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked){
-                  $('.campo17txt-ap').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo17txt-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo17txt-ap').css('border-color','');
-              }
-              //Pregunta: campo26txt-ap
-
-               /*if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
-
-                  $('.campo26txt-ap').css('border-color','red');
-                  faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo26txt-ap').css('border-color','');
-              }*/
-          }
-          //Valida campos para FF
-          if (App.user.attributes.tipodeproducto_c == '4') {
-              //Pregunta: campo2ddw-ff
-              /*if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                  $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo3rel-ff
-              if($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2'){
-                  $('.campo3rel-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('.campo3rel-ff')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo3rel-ff').find('.select2-choice').css('border-color','');
-              }
-              //Pregunta: campo4ddw-ff
-             /* if($('.campo4ddw-ff').select2('val') == ''){
-                  $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo5rel-ff
-              /*if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
-                  $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo5rel-ff').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo21ddw-ff
-            /*  if($('.campo21ddw-ff').select2('val') == ''){
-                  $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
-              }
-              //Pregunta: campo24ddw-ff
-              if($('.campo24ddw-ff').select2('val') == ''){
-                  $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
-              }
-              //Pregunta: campo6ddw-ff
-              if($('.campo6ddw-ff').select2('val') == ''){
-                  $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo17txt-ff
-              if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked && $('.campo2ddw-ff').select2('val')=='2' ){
-                  $('.campo17txt-ff').css('border-color','red');
-                  faltantesFF = faltantesFF + '<b>- '+$('.campo17txt-ff')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo17txt-ff').css('border-color','');
-              }
-          }
-          //Valida campos para CA
-          if (App.user.attributes.tipodeproducto_c == '3') {
-              //Pregunta: campo2ddw-ca
-              /*if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                  $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
-                  faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo3rel-ca
-              if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2' ){
-                  $('.campo3rel-ca').find('.select2-choice').css('border-color','red');
-                  faltantesCA = faltantesCA + '<b>- '+$('.campo3rel-ca')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo3rel-ca').find('.select2-choice').css('border-color','');
-              }
-              //Pregunta: campo4ddw-ca
-              /*if($('.campo4ddw-ca').select2('val') == ''){
-                  $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
-                  faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo5rel-ca
-             /* if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
-                  $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
-                  faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo5rel-ca').find('.select2-choice').css('border-color','');
-              }*/
-              //Pregunta: campo6ddw-ca
-            /*  if($('.campo6ddw-ca').select2('val') == ''){
-                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
-                  faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-              }else{
-                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
-              }*/
-          }
-            if($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
+            }
+            //Valida campos para FF
+            if (App.user.attributes.tipodeproducto_c == '4') {
+                //Pregunta: campo2ddw-ff
+                /*if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                    $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
+                    faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
+                }*/
+                //Pregunta: campo3rel-ff
+                if ($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val') == '2') {
+                    $('.campo3rel-ff').find('.select2-choice').css('border-color', 'red');
+                    faltantesFF = faltantesFF + '<b>- ' + $('.campo3rel-ff')[1].getAttribute('data-name') + '<br></b>';
+                } else {
+                    $('.campo3rel-ff').find('.select2-choice').css('border-color', '');
+                }
+                //Pregunta: campo4ddw-ff
+                /* if($('.campo4ddw-ff').select2('val') == ''){
+                     $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
+                     faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                     $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
+                 }*/
+                //Pregunta: campo5rel-ff
+                /*if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
+                    $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
+                    faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo5rel-ff').find('.select2-choice').css('border-color','');
+                }*/
+                //Pregunta: campo21ddw-ff
+                /*  if($('.campo21ddw-ff').select2('val') == ''){
+                      $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
+                      faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                  }else{
+                      $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
+                  }
+                  //Pregunta: campo24ddw-ff
+                  if($('.campo24ddw-ff').select2('val') == ''){
+                      $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
+                      faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                  }else{
+                      $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
+                  }
+                  //Pregunta: campo6ddw-ff
+                  if($('.campo6ddw-ff').select2('val') == ''){
+                      $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
+                      faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                  }else{
+                      $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
+                  }*/
+                //Pregunta: campo17txt-ff
+                if ($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked && $('.campo2ddw-ff').select2('val') == '2') {
+                    $('.campo17txt-ff').css('border-color', 'red');
+                    faltantesFF = faltantesFF + '<b>- ' + $('.campo17txt-ff')[0].getAttribute('data-name') + '<br></b>';
+                } else {
+                    $('.campo17txt-ff').css('border-color', '');
+                }
+            }
+            //Valida campos para CA
+            if (App.user.attributes.tipodeproducto_c == '3') {
+                //Pregunta: campo2ddw-ca
+                /*if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                    $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
+                    faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
+                }*/
+                //Pregunta: campo3rel-ca
+                if ($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val') == '2') {
+                    $('.campo3rel-ca').find('.select2-choice').css('border-color', 'red');
+                    faltantesCA = faltantesCA + '<b>- ' + $('.campo3rel-ca')[1].getAttribute('data-name') + '<br></b>';
+                } else {
+                    $('.campo3rel-ca').find('.select2-choice').css('border-color', '');
+                }
+                //Pregunta: campo4ddw-ca
+                /*if($('.campo4ddw-ca').select2('val') == ''){
+                    $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
+                    faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                }else{
+                    $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
+                }*/
+                //Pregunta: campo5rel-ca
+                /* if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
+                     $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
+                     faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
+                 }else{
+                     $('.campo5rel-ca').find('.select2-choice').css('border-color','');
+                 }*/
+                //Pregunta: campo6ddw-ca
+                /*  if($('.campo6ddw-ca').select2('val') == ''){
+                      $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
+                      faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                  }else{
+                      $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
+                  }*/
+            }
+            if ($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
                 $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
                 faltantesCS = faltantesCS + '<b>- ' + $('.campo2ddw-cs')[1].getAttribute('data-name') + '<br></b>';
             }
-            if (faltantesCS !="") {
+            if (faltantesCS != "") {
                 errors['error_CS'] = errors['error_CS'] || {};
                 errors['error_CS'].required = true;
                 app.alert.show("Faltante preguntas de Credito Simple", {
@@ -3635,60 +3725,60 @@
                 });
 
             }
-          //Genera alertas
-          if(faltantesAP != ""){
-              errors['PreguntasAP'] = "";
-              errors['PreguntasAP'].required = true;
-              app.alert.show("faltantesAP", {
-                  level: "error",
-                  title: "PLD Arrendamiento puro - Faltan las siguientes preguntas por contestar: <br>" + faltantesAP
-              });
-          }
+            //Genera alertas
+            if (faltantesAP != "") {
+                errors['PreguntasAP'] = "";
+                errors['PreguntasAP'].required = true;
+                app.alert.show("faltantesAP", {
+                    level: "error",
+                    title: "PLD Arrendamiento puro - Faltan las siguientes preguntas por contestar: <br>" + faltantesAP
+                });
+            }
 
-          if(faltantesFF != ""){
-              errors['PreguntasFF'] = "";
-              errors['PreguntasFF'].required = true;
-              app.alert.show("faltantesFF", {
-                  level: "error",
-                  title: "PLD Factoraje financiero - Faltan las siguientes preguntas por contestar: <br>" + faltantesFF
-              });
-          }
+            if (faltantesFF != "") {
+                errors['PreguntasFF'] = "";
+                errors['PreguntasFF'].required = true;
+                app.alert.show("faltantesFF", {
+                    level: "error",
+                    title: "PLD Factoraje financiero - Faltan las siguientes preguntas por contestar: <br>" + faltantesFF
+                });
+            }
 
-          if(faltantesCA != ""){
-              errors['PreguntasCA'] = "";
-              errors['PreguntasCA'].required = true;
-              app.alert.show("faltantesCA", {
-                  level: "error",
-                  title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
-              });
-          }
+            if (faltantesCA != "") {
+                errors['PreguntasCA'] = "";
+                errors['PreguntasCA'].required = true;
+                app.alert.show("faltantesCA", {
+                    level: "error",
+                    title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
+                });
+            }
         }
         callback(null, fields, errors);
     },
 
-    checkaccdatestatements:function(fields, errors, callback){
-        if(this.model.get('tct_dates_acc_statements_c')!=""){
+    checkaccdatestatements: function (fields, errors, callback) {
+        if (this.model.get('tct_dates_acc_statements_c') != "") {
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth()+1; //January is 0!
+            var mm = today.getMonth() + 1; //January is 0!
             var yyyy = today.getFullYear();
-            if(dd<10) {
-                dd = '0'+dd
+            if (dd < 10) {
+                dd = '0' + dd
             }
-            if(mm<10) {
-                mm = '0'+mm
+            if (mm < 10) {
+                mm = '0' + mm
             }
-            today = yyyy+'-'+mm+'-'+dd;
+            today = yyyy + '-' + mm + '-' + dd;
 
             this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
-            var c=0;
+            var c = 0;
             for (let elem in this.obj_dates) {
-                if(this.obj_dates[elem].trim()==""){
-                    $('#'+elem).css('border-color', 'red');
+                if (this.obj_dates[elem].trim() == "") {
+                    $('#' + elem).css('border-color', 'red');
                     c++;
                 }
             }
-            if(c>0){
+            if (c > 0) {
                 app.alert.show("empty_date", {
                     level: "error",
                     title: "Existen fechas de los estados de cuenta <b>vac\u00EDas</b>, favor de verificar",
@@ -3699,17 +3789,17 @@
                 errors['empty_date'].required = true;
             }
         }
-        callback(null,fields,errors);
+        callback(null, fields, errors);
     },
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;
-        if(!this.validanumeros(evt)){
+        if (!this.validanumeros(evt)) {
             return false;
         }
     },
-    validanumeros:function(evt){
-        if($.inArray(evt.keyCode,[110,188,45,33,36,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+    validanumeros: function (evt) {
+        if ($.inArray(evt.keyCode, [110, 188, 45, 33, 36, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
             app.alert.show("Caracter Invalido", {
                 level: "error",
                 title: "Solo n\u00FAmeros son permitidos en este campo.",
@@ -3717,13 +3807,13 @@
             });
             return false;
 
-        }else{
+        } else {
             return true;
         }
     },
 
-    validacantidades: function (fields, errors, callback){
-        if ($('.campo23dec-ff').val() != "" && $('.campo23dec-ff').val() != undefined &&  $('.campo23dec-ff').val() <= 0 ) {
+    validacantidades: function (fields, errors, callback) {
+        if ($('.campo23dec-ff').val() != "" && $('.campo23dec-ff').val() != undefined && $('.campo23dec-ff').val() <= 0) {
             $('.campo23dec-ff').css('border-color', 'red');
             app.alert.show("Valor Invalido", {
                 level: "error",
@@ -3733,7 +3823,7 @@
             errors['campo23dec-ff'] = "El campo Número de pagos no debe tener un valor menor a 0.";
             errors['campo23dec-ff'].required = true;
         }
-        if ($('.campo22int-ff').val() != "" && $('.campo22int-ff').val() != undefined &&  $('.campo22int-ff').val() <= 0 ) {
+        if ($('.campo22int-ff').val() != "" && $('.campo22int-ff').val() != undefined && $('.campo22int-ff').val() <= 0) {
             $('.campo22int-ff').css('border-color', 'red');
             app.alert.show("Valor Invalido2", {
                 level: "error",
@@ -3744,300 +3834,300 @@
             errors['campo22int-ff'].required = true;
         }
 
-        callback(null,fields,errors);
+        callback(null, fields, errors);
     },
 
-            requeridosleasingnv: function (fields, errors, callback){
-                var faltantesleasnv= 0;
-                if ($('.campo1chk')[0].checked && $('.campo4nvl').select2('val') == ""){
-                    $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Fuera de Perfil" && $('.campo7nvl').select2('val') == ""){
-                    $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Condiciones Financieras" && $('.campo19nvl').select2('val') == ""){
-                    $('.campo19nvl').find('.select2-choice').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "No se encuentra interesado" && $('.campo25nvl').select2('val') == ""){
-                    $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == ""){
-                    $('.campo10nvl').css('border-color', 'red');
-                    $('.campo13nvl').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != ""){
-                    $('.campo10nvl').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == ""){
-                    $('.campo13nvl').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "No tenemos el producto que requiere" && $('.campo16nvl').select2('val')==""){
-                    $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text()=="No tenemos el producto que requiere" ||$('.campo4nvl')[0].innerText.trim()== "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text()=="Otro" ||$('.campo16nvl')[0].innerText.trim()== "Otro") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
-                  $('.campo22nvl').css('border-color', 'red');
-                    faltantesleasnv +=1;
-                }
-                if (faltantesleasnv>0){
-                    app.alert.show("Faltantes no viable Leasing", {
-                        level: "error",
-                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Leasing.',
-                        autoClose: false
-                    });
-                    errors['error_leasing'] = errors['error_leasing'] || {};
-                    errors['error_leasing'].required = true;
-                }if (faltantesleasnv==0 && $('.campo1chk')[0].checked ==true && lnv.leadNoViable.PromotorLeasing==""){
-                    this.model.set('promotorleasing_c', '9 - No Viable');
-                    this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-                    lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
-                }
-                callback(null, fields, errors);
+    requeridosleasingnv: function (fields, errors, callback) {
+        var faltantesleasnv = 0;
+        if ($('.campo1chk')[0].checked && $('.campo4nvl').select2('val') == "") {
+            $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Fuera de Perfil" && $('.campo7nvl').select2('val') == "") {
+            $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Condiciones Financieras" && $('.campo19nvl').select2('val') == "") {
+            $('.campo19nvl').find('.select2-choice').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "No se encuentra interesado" && $('.campo25nvl').select2('val') == "") {
+            $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
+            $('.campo10nvl').css('border-color', 'red');
+            $('.campo13nvl').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != "") {
+            $('.campo10nvl').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == "") {
+            $('.campo13nvl').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "No tenemos el producto que requiere" && $('.campo16nvl').select2('val') == "") {
+            $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text() == "No tenemos el producto que requiere" || $('.campo4nvl')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text() == "Otro" || $('.campo16nvl')[0].innerText.trim() == "Otro") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
+            $('.campo22nvl').css('border-color', 'red');
+            faltantesleasnv += 1;
+        }
+        if (faltantesleasnv > 0) {
+            app.alert.show("Faltantes no viable Leasing", {
+                level: "error",
+                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Leasing.',
+                autoClose: false
+            });
+            errors['error_leasing'] = errors['error_leasing'] || {};
+            errors['error_leasing'].required = true;
+        } if (faltantesleasnv == 0 && $('.campo1chk')[0].checked == true && lnv.leadNoViable.PromotorLeasing == "") {
+            this.model.set('promotorleasing_c', '9 - No Viable');
+            this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+            lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
+        }
+        callback(null, fields, errors);
 
-            },
-            requeridosfacnv: function (fields, errors, callback){
-                var faltantesfactnv= 0;
-                if (($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "")){
-                    $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Fuera de Perfil" && $('.campo8nvf').select2('val') == ""){
-                    $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Condiciones Financieras" && $('.campo20nvf').select2('val') == ""){
-                    $('.campo20nvf').find('.select2-choice').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "No se encuentra interesado" && $('.campo26nvf').select2('val') == ""){
-                    $('.campo26nvf').find('.select2-choice').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == ""){
-                    $('.campo11nvf').css('border-color', 'red');
-                    $('.campo14nvf').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != ""){
-                    $('.campo11nvf').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == ""){
-                    $('.campo14nvf').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "No tenemos el producto que requiere" && $('.campo17nvf').select2('val')==""){
-                    $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
-                    faltantesfactnv +=1;
-                }
-                if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo5nvf')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text()=="Otro" ||$('.campo17nvf')[0].innerText.trim()== "Otro") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
-                    $('.campo23nvf').css('border-color', 'red');
-                    faltantesfactnv += 1;
-                }
-                if (faltantesfactnv>0){
-                    app.alert.show("Faltantes no viable Factoraje", {
-                        level: "error",
-                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Factoraje.',
-                        autoClose: false
-                    });
-                    errors['error_factoraje'] = errors['error_factoraje'] || {};
-                    errors['error_factoraje'].required = true;
-                }else if (faltantesfactnv==0 && $('.campo2chk')[0].checked == true && lnv.leadNoViable.PromotorFactoraje==""){
-                    this.model.set('promotorfactoraje_c', '9 - No Viable');
-                    this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-                    lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
-                }
-                callback(null, fields, errors);
-            },
+    },
+    requeridosfacnv: function (fields, errors, callback) {
+        var faltantesfactnv = 0;
+        if (($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "")) {
+            $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Fuera de Perfil" && $('.campo8nvf').select2('val') == "") {
+            $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Condiciones Financieras" && $('.campo20nvf').select2('val') == "") {
+            $('.campo20nvf').find('.select2-choice').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "No se encuentra interesado" && $('.campo26nvf').select2('val') == "") {
+            $('.campo26nvf').find('.select2-choice').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == "") {
+            $('.campo11nvf').css('border-color', 'red');
+            $('.campo14nvf').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != "") {
+            $('.campo11nvf').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == "") {
+            $('.campo14nvf').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "No tenemos el producto que requiere" && $('.campo17nvf').select2('val') == "") {
+            $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text() == "No tenemos el producto que requiere" || $('.campo5nvf')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text() == "Otro" || $('.campo17nvf')[0].innerText.trim() == "Otro") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
+            $('.campo23nvf').css('border-color', 'red');
+            faltantesfactnv += 1;
+        }
+        if (faltantesfactnv > 0) {
+            app.alert.show("Faltantes no viable Factoraje", {
+                level: "error",
+                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Factoraje.',
+                autoClose: false
+            });
+            errors['error_factoraje'] = errors['error_factoraje'] || {};
+            errors['error_factoraje'].required = true;
+        } else if (faltantesfactnv == 0 && $('.campo2chk')[0].checked == true && lnv.leadNoViable.PromotorFactoraje == "") {
+            this.model.set('promotorfactoraje_c', '9 - No Viable');
+            this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+            lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
+        }
+        callback(null, fields, errors);
+    },
 
-            requeridoscanv: function (fields, errors, callback){
-                var faltantescanv= 0;
-                if (($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "")){
-                    $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Fuera de Perfil" && $('.campo9nvca').select2('val') == ""){
-                    $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Condiciones Financieras" && $('.campo21nvca').select2('val') == ""){
-                    $('.campo21nvca').find('.select2-choice').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "No se encuentra interesado" && $('.campo27nvca').select2('val') == ""){
-                    $('.campo27nvca').find('.select2-choice').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == ""){
-                    $('.campo12nvca').css('border-color', 'red');
-                    $('.campo15nvca').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != ""){
-                    $('.campo12nvca').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == ""){
-                    $('.campo15nvca').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "No tenemos el producto que requiere" && $('.campo18nvca').select2('val')==""){
-                    $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" ||  $('.campo6nvca option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo6nvca')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text()=="Otro" ||$('.campo18nvca')[0].innerText.trim()== "Otro") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
-                    $('.campo24nvca').css('border-color', 'red');
-                    faltantescanv +=1;
-                }
-                if (faltantescanv>0){
-                    app.alert.show("Faltantes no viable Crédito Automotriz", {
-                        level: "error",
-                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Credito Automotriz.',
-                        autoClose: false
-                    });
-                    errors['error_ca'] = errors['error_ca'] || {};
-                    errors['error_ca'].required = true;
-                }else if (faltantescanv==0 && $('.campo3chk')[0].checked ==true && lnv.leadNoViable.PromotorCreditA==""){
-                    this.model.set('promotorcredit_c', '9 - No Viable');
-                    this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-                    lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
-                }
-                callback(null, fields, errors);
+    requeridoscanv: function (fields, errors, callback) {
+        var faltantescanv = 0;
+        if (($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "")) {
+            $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Fuera de Perfil" && $('.campo9nvca').select2('val') == "") {
+            $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Condiciones Financieras" && $('.campo21nvca').select2('val') == "") {
+            $('.campo21nvca').find('.select2-choice').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "No se encuentra interesado" && $('.campo27nvca').select2('val') == "") {
+            $('.campo27nvca').find('.select2-choice').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == "") {
+            $('.campo12nvca').css('border-color', 'red');
+            $('.campo15nvca').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != "") {
+            $('.campo12nvca').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == "") {
+            $('.campo15nvca').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "No tenemos el producto que requiere" && $('.campo18nvca').select2('val') == "") {
+            $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" || $('.campo6nvca option:selected').text() == "No tenemos el producto que requiere" || $('.campo6nvca')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text() == "Otro" || $('.campo18nvca')[0].innerText.trim() == "Otro") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
+            $('.campo24nvca').css('border-color', 'red');
+            faltantescanv += 1;
+        }
+        if (faltantescanv > 0) {
+            app.alert.show("Faltantes no viable Crédito Automotriz", {
+                level: "error",
+                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Credito Automotriz.',
+                autoClose: false
+            });
+            errors['error_ca'] = errors['error_ca'] || {};
+            errors['error_ca'].required = true;
+        } else if (faltantescanv == 0 && $('.campo3chk')[0].checked == true && lnv.leadNoViable.PromotorCreditA == "") {
+            this.model.set('promotorcredit_c', '9 - No Viable');
+            this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+            lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
+        }
+        callback(null, fields, errors);
 
-            },
-            //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
-            muestracheks: function (){
-              if (Oproductos.productos != undefined) {
-                if(Oproductos.productos.tct_tipo_ca_txf_c!='Lead' && Oproductos.productos.tct_tipo_f_txf_c!='Lead' && Oproductos.productos.tct_tipo_l_txf_c!='Lead'){
-                  $('[data-name=tct_noviable]').hide();
-                }
-              }
-            },
+    },
+    //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
+    muestracheks: function () {
+        if (Oproductos.productos != undefined) {
+            if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead' && Oproductos.productos.tct_tipo_f_txf_c != 'Lead' && Oproductos.productos.tct_tipo_l_txf_c != 'Lead') {
+                $('[data-name=tct_noviable]').hide();
+            }
+        }
+    },
 
-            ocultaRFC: function () {
-                if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos')) {
-                    $('[data-name=tct_pais_expide_rfc_c]').show();
-                }
-                if (this.model.get('tct_pais_expide_rfc_c')!="2" ){
-                    this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
-                }else{
-                    this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
-                }
+    ocultaRFC: function () {
+        // if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos')) {
+        //     $('[data-name=tct_pais_expide_rfc_c]').show();
+        // }
+        if (this.model.get('tct_pais_expide_rfc_c') != "2") {
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:none;');
+        } else {
+            this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
+        }
 
-            },
-            proveedorRecursos: function (fields, errors, callback){
-                if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" ||  $('.campo4ddw-ff').select2('val') == "2" ||  $('.campo4ddw-cs').select2('val') == "2") {
+    },
+    proveedorRecursos: function (fields, errors, callback) {
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2") {
 
-                    var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
-                    app.api.call('GET', apicall, {}, {
-                        success: _.bind(function (data) {
+            var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
+            app.api.call('GET', apicall, {}, {
+                success: _.bind(function (data) {
 
-                            var relacionl = 0;
-                            var relacionca = 0;
-                            var relacionff = 0;
-                            var relacioncs = 0;
-                            var productos ="";
-                            if (data.records.length > 0) {
-                                for (var l = 0; l < data.records.length; l++) {
-                                    //Producto Arrendamiento Puro
-                                    if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
+                    var relacionl = 0;
+                    var relacionca = 0;
+                    var relacionff = 0;
+                    var relacioncs = 0;
+                    var productos = "";
+                    if (data.records.length > 0) {
+                        for (var l = 0; l < data.records.length; l++) {
+                            //Producto Arrendamiento Puro
+                            if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
 
-                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
-                                            relacionl++;
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
+                                    relacionl++;
 
-                                        }
-                                    }
-                                    //Producto Credito Automotriz
-                                    if (App.user.attributes.productos_c.includes(3) && $('.campo4ddw-ca').select2('val') == "2") {
-
-                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')) {
-                                            relacionca++;
-                                        }
-                                    }
-                                    //Producto Factoraje Financiero
-                                    if (App.user.attributes.productos_c.includes(4) && $('.campo4ddw-ff').select2('val') == "2") {
-
-                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')) {
-                                            relacionff++;
-                                        }
-                                    }
-                                    //Producto Credito Simple
-                                    if ($('.campo4ddw-cs').select2('val') == "2") {
-
-                                        if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
-                                            relacioncs++;
-                                        }
-                                    }
                                 }
                             }
+                            //Producto Credito Automotriz
+                            if (App.user.attributes.productos_c.includes(3) && $('.campo4ddw-ca').select2('val') == "2") {
 
-                            //Validacion Arrendamiento Puro
-                            if (relacionl == 0 && $('.campo4ddw-ap').select2('val') == "2") {
-                                $('.campo4ddw-ap').find('.select2-choice').css('border-color', 'red');
-                                productos= productos + '<b>Arrendamiento Puro</b><br>';
-                                errors['error_leasingPR'] = errors['error_leasingPR'] || {};
-                                errors['error_leasingPR'].required = true;
-                            } else {
-                                $('.campo4ddw-ap').find('.select2-choice').css('border-color', '');
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')) {
+                                    relacionca++;
+                                }
                             }
-                            //Validacion Credito Automotriz
-                            if (relacionca == 0 && $('.campo4ddw-ca').select2('val') == "2") {
-                                $('.campo4ddw-ca').find('.select2-choice').css('border-color', 'red');
-                                productos= productos + '<b>Crédito Automotriz</b><br>';
-                                errors['error_CAPR'] = errors['error_CAPR'] || {};
-                                errors['error_CAPR'].required = true;
-                            } else {
-                                $('.campo4ddw-ca').find('.select2-choice').css('border-color', '');
-                            }
-                            //Validacion Factoraje Financiero
-                            if (relacionff == 0 && $('.campo4ddw-ff').select2('val') == "2") {
-                                $('.campo4ddw-ff').find('.select2-choice').css('border-color', 'red');
-                                productos= productos + '<b>Factoraje Financiero</b><br>';
-                                errors['error_FPR'] = errors['error_FPR'] || {};
-                                errors['error_FPR'].required = true;
-                            } else {
-                                $('.campo4ddw-ff').find('.select2-choice').css('border-color', '');
-                            }
+                            //Producto Factoraje Financiero
+                            if (App.user.attributes.productos_c.includes(4) && $('.campo4ddw-ff').select2('val') == "2") {
 
-                            //Validacion Credito Simple
-                            if (relacioncs == 0 && $('.campo4ddw-cs').select2('val') == "2") {
-                                $('.campo4ddw-cs').find('.select2-choice').css('border-color', 'red');
-                                productos= productos + '<b>Crédito Simple</b><br>';
-                                errors['error_FPR'] = errors['error_FPR'] || {};
-                                errors['error_FPR'].required = true;
-                            } else {
-                                $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')) {
+                                    relacionff++;
+                                }
                             }
-                            if (productos!= "") {
-                                app.alert.show("Faltante Relacion Proveedor de Recursos", {
-                                    level: "error",
-                                    messages: 'Hace falta completar la siguiente información en la <b>Cuenta:</b><br> (Se debe agregar una relación de tipo <b>Proveedor de Recursos</b> para el/los producto(s):<br>' + productos,
-                                    autoClose: false
-                                });
+                            //Producto Credito Simple
+                            if ($('.campo4ddw-cs').select2('val') == "2") {
+
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
+                                    relacioncs++;
+                                }
                             }
-                            callback(null, fields, errors);
-                        }, this)
-                    });
-                }else{
+                        }
+                    }
+
+                    //Validacion Arrendamiento Puro
+                    if (relacionl == 0 && $('.campo4ddw-ap').select2('val') == "2") {
+                        $('.campo4ddw-ap').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Arrendamiento Puro</b><br>';
+                        errors['error_leasingPR'] = errors['error_leasingPR'] || {};
+                        errors['error_leasingPR'].required = true;
+                    } else {
+                        $('.campo4ddw-ap').find('.select2-choice').css('border-color', '');
+                    }
+                    //Validacion Credito Automotriz
+                    if (relacionca == 0 && $('.campo4ddw-ca').select2('val') == "2") {
+                        $('.campo4ddw-ca').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Crédito Automotriz</b><br>';
+                        errors['error_CAPR'] = errors['error_CAPR'] || {};
+                        errors['error_CAPR'].required = true;
+                    } else {
+                        $('.campo4ddw-ca').find('.select2-choice').css('border-color', '');
+                    }
+                    //Validacion Factoraje Financiero
+                    if (relacionff == 0 && $('.campo4ddw-ff').select2('val') == "2") {
+                        $('.campo4ddw-ff').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Factoraje Financiero</b><br>';
+                        errors['error_FPR'] = errors['error_FPR'] || {};
+                        errors['error_FPR'].required = true;
+                    } else {
+                        $('.campo4ddw-ff').find('.select2-choice').css('border-color', '');
+                    }
+
+                    //Validacion Credito Simple
+                    if (relacioncs == 0 && $('.campo4ddw-cs').select2('val') == "2") {
+                        $('.campo4ddw-cs').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Crédito Simple</b><br>';
+                        errors['error_FPR'] = errors['error_FPR'] || {};
+                        errors['error_FPR'].required = true;
+                    } else {
+                        $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
+                    }
+                    if (productos != "") {
+                        app.alert.show("Faltante Relacion Proveedor de Recursos", {
+                            level: "error",
+                            messages: 'Hace falta completar la siguiente información en la <b>Cuenta:</b><br> (Se debe agregar una relación de tipo <b>Proveedor de Recursos</b> para el/los producto(s):<br>' + productos,
+                            autoClose: false
+                        });
+                    }
                     callback(null, fields, errors);
-                }
+                }, this)
+            });
+        } else {
+            callback(null, fields, errors);
+        }
 
-            },
+    },
 
-    direccionesparticularPR: function (fields, errors, callback){
+    direccionesparticularPR: function (fields, errors, callback) {
         //Valida direcciones en relaciones
-        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" && this.model.get('tipodepersona_c')!= 'Persona Moral') {
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" && this.model.get('tipodepersona_c') != 'Persona Moral') {
             var apicalldir = app.api.buildURL('DireCuenta/' + this.model.get("id"), null);
             app.api.call('GET', apicalldir, {}, {
                 success: _.bind(function (data) {
-                    if (data!=""){
+                    if (data != "") {
                         app.alert.show("Falta direccion Particular en cuenta", {
                             level: "error",
                             messages: 'Hace falta agregar una dirección para la(s) siguientes <b>Cuentas</b><br> (En una relación de tipo <b>Proveedor de Recursos</b>):<br>' + data + '<br><br><b>Nota:</b> Se require dirección <b>Particular</b> para persona Física y FCAE. En caso de persona moral al menos un tipo de dirección.',
@@ -4049,37 +4139,37 @@
                     callback(null, fields, errors);
                 }, this)
             });
-        }else{
+        } else {
             callback(null, fields, errors);
         }
 
     },
 
-    quitaanos: function(){
+    quitaanos: function () {
         var anoactual = ((new Date).getFullYear());
-        var anoactual5= anoactual-5
-        var anoselect= this.model.get('tct_ano_ventas_ddw_c');
-        var lista= App.lang.getAppListStrings('ano_ventas_ddw_list');
-        Object.keys(lista).forEach(function(key){
+        var anoactual5 = anoactual - 5
+        var anoselect = this.model.get('tct_ano_ventas_ddw_c');
+        var lista = App.lang.getAppListStrings('ano_ventas_ddw_list');
+        Object.keys(lista).forEach(function (key) {
             //Quita años previos
-            if(key < anoactual5){
+            if (key < anoactual5) {
                 delete lista[key];
             }
             //Quita años futuros al actual
-            if(key > anoactual){
+            if (key > anoactual) {
                 delete lista[key];
             }
         });
-        lista[anoselect]=anoselect;
+        lista[anoselect] = anoselect;
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
 
-    blockRecordNoContactar:function () {
+    blockRecordNoContactar: function () {
 
-        if(this.model.get('tct_no_contactar_chk_c')==true){
+        if (this.model.get('tct_no_contactar_chk_c') == true) {
 
             //Bloquear el registro completo y mostrar alerta
-            $('.record.tab-layout').attr('style','pointer-events:none');
+            $('.record.tab-layout').attr('style', 'pointer-events:none');
 
             app.alert.show("cuentas_no_contactar", {
                 level: "error",
@@ -4091,17 +4181,17 @@
         }
 
     },
-    get_phones:function(){
+    get_phones: function () {
         //Extiende This
         this.oTelefonos = [];
         this.oTelefonos.telefono = [];
-        this.prev_oTelefonos=[];
-        this.prev_oTelefonos.prev_telefono=[];
+        this.prev_oTelefonos = [];
+        this.prev_oTelefonos.prev_telefono = [];
         //contexto_cuenta = this;
-        this.model.set('account_telefonos',this.oTelefonos.telefono);
+        this.model.set('account_telefonos', this.oTelefonos.telefono);
         //Recupera información
         idCuenta = this.model.get('id');
-        app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_tel_telefonos_1'), null, {
+        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_tel_telefonos_1'), null, {
             success: function (data) {
                 for (var i = 0; i < data.records.length; i++) {
                     //Asignando valores de los campos
@@ -4110,11 +4200,11 @@
                     var valor3 = data.records[i].estatus;
                     var valor4 = data.records[i].telefono;
                     var valor5 = data.records[i].extension;
-                    var valor6 = (data.records[i].principal==true) ? 1 : 0;
+                    var valor6 = (data.records[i].principal == true) ? 1 : 0;
                     var idtel = data.records[i].id;
 
                     var telefono = {
-                        "name":valor4,
+                        "name": valor4,
                         "tipotelefono": valor1,
                         "pais": valor2,
                         "estatus": valor3,
@@ -4122,11 +4212,11 @@
                         "telefono": valor4,
                         "principal": valor6,
                         "id_cuenta": idCuenta,
-                        "id":idtel
+                        "id": idtel
                     };
 
                     var prev_telefono = {
-                        "name":valor4,
+                        "name": valor4,
                         "tipotelefono": valor1,
                         "pais": valor2,
                         "estatus": valor3,
@@ -4134,7 +4224,7 @@
                         "telefono": valor4,
                         "principal": valor6,
                         "id_cuenta": idCuenta,
-                        "id":idtel
+                        "id": idtel
                     };
                     contexto_cuenta.oTelefonos.telefono.push(telefono);
                     contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
@@ -4151,12 +4241,12 @@
         });
     },
 
-    get_addresses:function(){
+    get_addresses: function () {
         //Extiende This
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
-        this.prev_oDirecciones=[];
-        this.prev_oDirecciones.prev_direccion=[];
+        this.prev_oDirecciones = [];
+        this.prev_oDirecciones.prev_direccion = [];
 
         //Define variables
         var listMapTipo = App.lang.getAppListStrings('tipo_dir_map_list');
@@ -4167,15 +4257,15 @@
 
         //Recupera información
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
-            app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_dire_direccion_1'), null, {
+            app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
                 success: function (data) {
                     //Itera y agrega direcciones
                     for (var i = 0; i < data.records.length; i++) {
                         //Asignando valores de los campos
                         var tipo = data.records[i].tipodedireccion.toString();
-                        var tipoSeleccionados = '^'+listMapIndicador[tipo].replace(/,/gi, "^,^")+'^';
+                        var tipoSeleccionados = '^' + listMapIndicador[tipo].replace(/,/gi, "^,^") + '^';
                         var indicador = data.records[i].indicador;
-                        var indicadorSeleccionados = '^'+listMapIndicador[indicador].replace(/,/gi, "^,^")+'^';
+                        var indicadorSeleccionados = '^' + listMapIndicador[indicador].replace(/,/gi, "^,^") + '^';
                         var valCodigoPostal = data.records[i].dire_direccion_dire_codigopostal_name;
                         var idCodigoPostal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
                         var valPais = data.records[i].dire_direccion_dire_pais_name;
@@ -4191,50 +4281,50 @@
                         var calle = data.records[i].calle;
                         var numExt = data.records[i].numext;
                         var numInt = data.records[i].numint;
-                        var principal = (data.records[i].principal==true) ? 1 : 0;
-                        var inactivo = (data.records[i].inactivo==true) ? 1 : 0;
+                        var principal = (data.records[i].principal == true) ? 1 : 0;
+                        var inactivo = (data.records[i].inactivo == true) ? 1 : 0;
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
 
                         //Parsea a objeto direccion
                         var direccion = {
-                            "tipodedireccion":tipo,
-                            "listTipo":listTipo,
-                            "tipoSeleccionados":tipoSeleccionados,
-                            "indicador":indicador,
+                            "tipodedireccion": tipo,
+                            "listTipo": listTipo,
+                            "tipoSeleccionados": tipoSeleccionados,
+                            "indicador": indicador,
                             "listIndicador": listIndicador,
-                            "indicadorSeleccionados":indicadorSeleccionados,
-                            "valCodigoPostal":valCodigoPostal,
-                            "postal":idCodigoPostal,
-                            "valPais":valPais,
-                            "pais":idPais,
-                            "listPais":{},
-                            "listPaisFull":{},
-                            "valEstado":valEstado,
-                            "estado":idEstado,
-                            "listEstado":{},
-                            "listEstadoFull":{},
-                            "valMunicipio":valMunicipio,
-                            "municipio":idMunicipio,
-                            "listMunicipio":{},
-                            "listMunicipioFull":{},
-                            "valCiudad":valCiudad,
-                            "ciudad":idCiudad,
-                            "listCiudad":{},
-                            "listCiudadFull":{},
-                            "valColonia":valColonia,
-                            "colonia":idColonia,
-                            "listColonia":{},
-                            "listColoniaFull":{},
-                            "calle":calle,
-                            "numext":numExt,
-                            "numint":numInt,
-                            "principal":principal,
-                            "inactivo":inactivo,
-                            "secuencia":secuencia,
-                            "id":idDireccion,
-                            "direccionCompleta":direccionCompleta
+                            "indicadorSeleccionados": indicadorSeleccionados,
+                            "valCodigoPostal": valCodigoPostal,
+                            "postal": idCodigoPostal,
+                            "valPais": valPais,
+                            "pais": idPais,
+                            "listPais": {},
+                            "listPaisFull": {},
+                            "valEstado": valEstado,
+                            "estado": idEstado,
+                            "listEstado": {},
+                            "listEstadoFull": {},
+                            "valMunicipio": valMunicipio,
+                            "municipio": idMunicipio,
+                            "listMunicipio": {},
+                            "listMunicipioFull": {},
+                            "valCiudad": valCiudad,
+                            "ciudad": idCiudad,
+                            "listCiudad": {},
+                            "listCiudadFull": {},
+                            "valColonia": valColonia,
+                            "colonia": idColonia,
+                            "listColonia": {},
+                            "listColoniaFull": {},
+                            "calle": calle,
+                            "numext": numExt,
+                            "numint": numInt,
+                            "principal": principal,
+                            "inactivo": inactivo,
+                            "secuencia": secuencia,
+                            "id": idDireccion,
+                            "direccionCompleta": direccionCompleta
                         };
 
                         //Agregar dirección
@@ -4310,7 +4400,7 @@
         }
     },
 
-    get_v360: function(){
+    get_v360: function () {
         //Extiende This
         this.ResumenCliente = [];
         //contexto_cuenta = this;
@@ -4319,21 +4409,21 @@
         var id = this.model.id;
 
         //Forma Petición de datos
-        if (id!= '' && id != undefined && id!= null) {
+        if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
-            var url = app.api.buildURL('ResumenCliente/'+id, null, null);
-            app.api.call('GET', url, {},{
-              success: _.bind(function (data) {
-                  v360.ResumenCliente = data;
-                  //Oproductos=data;
-                  //_.extend(this, v360.ResumenCliente);
-                  v360.render();
-              }, contexto_cuenta)
+            var url = app.api.buildURL('ResumenCliente/' + id, null, null);
+            app.api.call('GET', url, {}, {
+                success: _.bind(function (data) {
+                    v360.ResumenCliente = data;
+                    //Oproductos=data;
+                    //_.extend(this, v360.ResumenCliente);
+                    v360.render();
+                }, contexto_cuenta)
             });
         }
     },
 
-    get_Oproductos: function(){
+    get_Oproductos: function () {
         //Extiende This
         this.productos = [];
         //contexto_cuenta = this;
@@ -4342,12 +4432,12 @@
         var id = this.model.id;
 
         //Forma Petición de datos
-        if (id!= '' && id != undefined && id!= null) {
+        if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
-            var url = app.api.buildURL('tct02_Resumen/'+id, null, null);
-            app.api.call('read', url, {},{
+            var url = app.api.buildURL('tct02_Resumen/' + id, null, null);
+            app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
-                    Oproductos.productos=data;
+                    Oproductos.productos = data;
                     //contexto_cuenta.hideButton_Conversion();
                     //_.extend(this, v360.ResumenCliente);
                     Oproductos.render();
@@ -4356,21 +4446,21 @@
         }
     },
 
-    get_resumen: function(){
+    get_resumen: function () {
         //Extiende This
         this.autos = [];
-        this.prev_autos=[];
+        this.prev_autos = [];
         //Recupera id de cliente
         var id = this.model.id;
         //Forma Petición de datos
-        if (id!= '' && id != undefined && id!= null) {
+        if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
-            var campos= ["tct_no_autos_u_int_c","tct_no_autos_e_int_c","tct_no_motos_int_c","tct_no_camiones_int_c"];
-            var url = app.api.buildURL('tct02_Resumen/'+id, null, null, {fields:campos.join(',')});
-            app.api.call('read', url, {},{
+            var campos = ["tct_no_autos_u_int_c", "tct_no_autos_e_int_c", "tct_no_motos_int_c", "tct_no_camiones_int_c"];
+            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, { fields: campos.join(',') });
+            app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
-                    Pautos.autos=data;
-                    Pautos.prev_autos=app.utils.deepCopy(Pautos.autos);
+                    Pautos.autos = data;
+                    Pautos.prev_autos = app.utils.deepCopy(Pautos.autos);
                     //contexto_cuenta.hideButton_Conversion();
                     //_.extend(this, v360.ResumenCliente);
                     Pautos.render();
@@ -4380,10 +4470,10 @@
     },
 
 
-    get_pld: function(){
+    get_pld: function () {
         //Extiende This
         this.ProductosPLD = [];
-        this.prev_ProductosPLD=[];
+        this.prev_ProductosPLD = [];
         //Recupera id Cuenta
         var idCuenta = this.model.get('id');
         //Recupera información de PLD
@@ -4420,32 +4510,32 @@
         }
     },
 
-    setCustomFields:function (fields, errors, callback){
+    setCustomFields: function (fields, errors, callback) {
         if ($.isEmptyObject(errors)) {
             //Teléfonos
             this.prev_oTelefonos.prev_telefono = app.utils.deepCopy(this.oTelefonos.telefono);
-            this.model.set('account_telefonos',this.oTelefonos.telefono);
+            this.model.set('account_telefonos', this.oTelefonos.telefono);
 
             //Direcciones
             this.prev_oDirecciones.prev_direccion = app.utils.deepCopy(this.oDirecciones.direccion);
-            this.model.set('account_direcciones',this.oDirecciones.direccion);
+            this.model.set('account_direcciones', this.oDirecciones.direccion);
         }
         //Callback a validation task
         callback(null, fields, errors);
     },
 
     //Sobre escribe función para recuperar info de registros relacionados
-    _saveModel: function() {
+    _saveModel: function () {
         var options,
-            successCallback = _.bind(function() {
+            successCallback = _.bind(function () {
                 // Loop through the visible subpanels and have them sync. This is to update any related
                 // fields to the record that may have been changed on the server on save.
-                _.each(this.context.children, function(child) {
+                _.each(this.context.children, function (child) {
                     if (child.get('isSubpanel') && !child.get('hidden')) {
                         if (child.get('collapsed')) {
-                            child.resetLoadFlag({recursive: false});
+                            child.resetLoadFlag({ recursive: false });
                         } else {
-                            child.reloadData({recursive: false});
+                            child.reloadData({ recursive: false });
                         }
                     }
                 });
@@ -4468,11 +4558,11 @@
         options = {
             showAlerts: true,
             success: successCallback,
-            error: _.bind(function(model, error) {
+            error: _.bind(function (model, error) {
                 if (error.status === 412 && !error.request.metadataRetry) {
                     this.handleMetadataSyncError(error);
                 } else if (error.status === 409) {
-                    app.utils.resolve409Conflict(error, this.model, _.bind(function(model, isDatabaseData) {
+                    app.utils.resolve409Conflict(error, this.model, _.bind(function (model, isDatabaseData) {
                         if (model) {
                             if (isDatabaseData) {
                                 successCallback();
@@ -4509,39 +4599,39 @@
 
     validaformato: function (fields, errors, callback) {
         //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
-        var errorescampos="";
-        if (this.model.get('primernombre_c')!="" || this.model.get('apellidopaterno_c')!="" || this.model.get('apellidomaterno_c')!="") {
+        var errorescampos = "";
+        if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-            if (this.model.get('primernombre_c')!="" && this.model.get('primernombre_c')!= undefined){
-                var nombre=this.model.get('primernombre_c');
+            if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
+                var nombre = this.model.get('primernombre_c');
                 var res = expresion.test(nombre);
-                if(res!= true){
-                    errorescampos= errorescampos + '<b>-Primer Nombre<br></b>'; ;
+                if (res != true) {
+                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
                     errors['primernombre_c'] = errors['primernombre_c'] || {};
                     errors['primernombre_c'].required = true;
                 }
             }
-            if (this.model.get('apellidopaterno_c')!="" && this.model.get('apellidopaterno_c')!= undefined){
-                var apaterno=this.model.get('apellidopaterno_c');
+            if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
+                var apaterno = this.model.get('apellidopaterno_c');
                 var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(apaterno);
-                if(res!= true){
-                    errorescampos= errorescampos + '<b>-Apellido Paterno<br></b>'; ;
+                if (res != true) {
+                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
                     errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
                     errors['apellidopaterno_c'].required = true;
                 }
             }
-            if (this.model.get('apellidomaterno_c')!="" && this.model.get('apellidomaterno_c')!= undefined){
-                var amaterno=this.model.get('apellidomaterno_c');
+            if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
+                var amaterno = this.model.get('apellidomaterno_c');
                 var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(amaterno);
-                if(res!= true){
-                    errorescampos= errorescampos + '<b>-Apellido Materno<br></b>'; ;
+                if (res != true) {
+                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
                     errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
                     errors['apellidomaterno_c'].required = true;
                 }
             }
-            if (errorescampos){
+            if (errorescampos) {
                 app.alert.show("Error_validacion_Campos", {
                     level: "error",
                     messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
@@ -4551,8 +4641,8 @@
         }
         callback(null, fields, errors);
     },
-    validapasscurp: function (fields, errors, callback){
-        if (this.model.get('ifepasaporte_c')!="" || this.model.get('curp_c')!="") {
+    validapasscurp: function (fields, errors, callback) {
+        if (this.model.get('ifepasaporte_c') != "" || this.model.get('curp_c') != "") {
             var campoPass = "";
             var expresion = new RegExp(/^[0-9a-zA-Z]+$/g);
             if (this.model.get('ifepasaporte_c') != "" && this.model.get('ifepasaporte_c') != undefined) {
@@ -4584,8 +4674,8 @@
         }
         callback(null, fields, errors);
     },
-    validaiva:function (fields, errors, callback){
-        if (this.model.get('tipo_registro_c')=="Proveedor" || this.model.get('esproveedor_c')== true) {
+    validaiva: function (fields, errors, callback) {
+        if (this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('esproveedor_c') == true) {
             if (this.model.get('iva_c') !== "" && this.model.get('iva_c') != undefined && (Number(this.model.get('iva_c')) <= 0 || Number(this.model.get('iva_c')) > 100.00)) {
                 if (parseFloat(this.model.get('iva_c')) <= 0.0000) {
                     errors['iva_c'] = errors['iva_c'] || {};
@@ -4615,20 +4705,20 @@
         callback(null, fields, errors);
     },
 
-    homonimo: function (){
-        var listahom= App.lang.getAppListStrings('usuarios_permiso_homonimos_list');
+    homonimo: function () {
+        var listahom = App.lang.getAppListStrings('usuarios_permiso_homonimos_list');
         var usr1 = listahom[1];
         var usr2 = listahom[2]
         var userlogueado = App.user.attributes.id;
-        if (usr1 == userlogueado || usr2== userlogueado) {
-             $('div[data-name=tct_homonimo_chk_c]').show();
+        if (usr1 == userlogueado || usr2 == userlogueado) {
+            $('div[data-name=tct_homonimo_chk_c]').show();
         } else {
             $('div[data-name=tct_homonimo_chk_c]').hide();
         }
     },
     //Valida campos de Autos en Potencial
     nodigitos: function (fields, errors, callback) {
-        if($('.campo1pa').val() != "" || $('.campo2pa').val() != "" || $('.campo3pa').val() != "" || $('.campo4pa').val() != "") {
+        if ($('.campo1pa').val() != "" || $('.campo2pa').val() != "" || $('.campo3pa').val() != "" || $('.campo4pa').val() != "") {
             if ($('.campo1pa').val() !== "") {
                 var expreg = /^[0-9]{1,10}$/;
                 var num1 = $('.campo1pa').val();
@@ -4689,23 +4779,149 @@
         callback(null, fields, errors);
     },
 
-    savepotauto: function (fields, errors, callback){
-        if (Pautos.action=="edit"){
+    savepotauto: function (fields, errors, callback) {
+        if (Pautos.action == "edit") {
             var PotencialAutos = {};
-            PotencialAutos.autos= {};
+            PotencialAutos.autos = {};
             PotencialAutos.autos.tct_no_autos_u_int_c = this.$('.campo1pa').val();
             PotencialAutos.autos.tct_no_autos_e_int_c = this.$('.campo2pa').val();
             PotencialAutos.autos.tct_no_motos_int_c = this.$('.campo3pa').val();
             PotencialAutos.autos.tct_no_camiones_int_c = this.$('.campo4pa').val();
 
-        if ($.isEmptyObject(errors))  {
-            this.model.set('potencial_autos', JSON.stringify(PotencialAutos));
-            Pautos.autos = PotencialAutos.autos;
-            //Guarda una copia previa en prev_autos
-            Pautos.prev_autos=app.utils.deepCopy(Pautos.autos);
-            Pautos.render();
+            if ($.isEmptyObject(errors)) {
+                this.model.set('potencial_autos', JSON.stringify(PotencialAutos));
+                Pautos.autos = PotencialAutos.autos;
+                //Guarda una copia previa en prev_autos
+                Pautos.prev_autos = app.utils.deepCopy(Pautos.autos);
+                Pautos.render();
+            }
         }
-        }
-        callback(null,fields,errors);
+        callback(null, fields, errors);
     },
+    clienteuniclickClicked: function () {
+        App.alert.show('convierte_Cliente_uniclick', {
+            level: 'process',
+            title: 'Convirtiendo cuenta, por favor espere',
+        });
+        var necesarios = "";
+
+        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+            necesarios = necesarios + '<b>Origen<br></b>';
+        }
+        if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+            necesarios = necesarios + '<b>RFC<br></b>';
+        }
+        if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
+            necesarios = necesarios + '<b>Macro Sector<br></b>';
+        }
+        if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == null) {
+            necesarios = necesarios + '<b>Sector Económico<br></b>';
+        }
+        if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
+            necesarios = necesarios + '<b>Ventas Anuales<br></b>';
+        }
+        if (this.model.get('activo_fijo_c') == "" || this.model.get('activo_fijo_c') == null) {
+            necesarios = necesarios + '<b>Activo Fijo<br></b>';
+        }
+        if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
+            necesarios = necesarios + '<b>Al menos un correo electr\u00F3nico o un tel\u00E9fono<br></b>';
+        }
+        if (_.isEmpty(this.oDirecciones.direccion)) {
+            necesarios = necesarios + '<b>Dirección<br></b>';
+        }
+        if (this.model.get('tipodepersona_c') != "Persona Moral") {
+            if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                necesarios = necesarios + '<b>Primer Nombre</b><br>';
+            }
+            if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+            }
+            if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                necesarios = necesarios + '<b>Apellido Materno</b><br>';
+            }
+            if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+            }
+            if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+            }
+            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+            }
+            if (this.model.get('ifepasaporte_c') == "" || this.model.get('ifepasaporte_c') == null) {
+                necesarios = necesarios + '<b>IFE/Pasaporte<br></b>';
+            }
+            if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                necesarios = necesarios + '<b>Curp<br></b>';
+            }
+            if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) {
+                necesarios = necesarios + '<b>Estado Civil<br></b>';
+            }
+            if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
+                necesarios = necesarios + '<b>Profesión<br></b>';
+            }
+        } else {
+            if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                necesarios = necesarios + '<b>Razón Social<br></b>';
+            }
+            if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                necesarios = necesarios + '<b>Nombre Comercial<br></b>';
+            }
+            if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                necesarios = necesarios + '<b>Fecha Constitutiva<br></b>';
+            }
+            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                necesarios = necesarios + '<b>Pa\u00EDs de Constitución</b><br>';
+            }
+        }
+        if (necesarios != "") {
+            app.alert.dismiss('convierte_Cliente_uniclick');
+            app.alert.show("Campos Faltantes", {
+                level: "error",
+                title: "Faltan los siguientes campos para poder convertir la cuenta a Cliente: <br><br>" + necesarios,
+                autoClose: false
+            });
+            return;
+        } else {
+            if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente") {
+                var productousuario = App.user.attributes.productos_c;
+                var api_params = {};
+
+                if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente" && productousuario.includes('8')) {
+                    if (App.user.id == this.model.get('user_id7_c')) {
+                        api_params["tct_tipo_uc_txf_c"] = "Cliente";
+                        api_params["tct_subtipo_uc_txf_c"] = "Con Linea Vigente";
+                        api_params["tct_tipo_cuenta_uc_c"] = "CLIENTE CON LÍNEA VIGENTE";
+                    }
+                }
+            }
+            if (api_params != undefined) {
+                self = this;
+                var idC = this.model.get('id');
+                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                app.api.call('update', url, api_params, {
+                    success: _.bind(function (data) {
+                        //this._render();
+                        app.alert.dismiss('convierte_Cliente_uniclick');
+                        Oproductos.productos = data;
+                        if (self.model.get('tipo_registro_c') != "Cliente") {
+                            self.model.set("tipo_registro_c", "Cliente");
+                            self.model.set("subtipo_cuenta_c", "Con Linea Vigente");
+                            self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+                            self.model.save();
+                            v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
+                            v360.render();
+                        }
+                        app.alert.show('errorAlert', {
+                            level: 'success',
+                            messages: "Se ha realizado la conversión correctamente.",
+                            autoClose: true
+                        });
+                        Oproductos.render();
+                    }),
+                })
+            }
+        }
+    },
+	
 })

@@ -1,5 +1,5 @@
 <?php
-// created: 2019-07-17 10:32:53
+// created: 2020-02-07 12:25:03
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -12,16 +12,6 @@ $subpanel_layout['list_fields'] = array (
   array (
     'widget_class' => 'SubPanelActivitiesStatusField',
     'vname' => 'LBL_LIST_STATUS',
-    'width' => 10,
-    'default' => true,
-  ),
-  'contact_name' => 
-  array (
-    'widget_class' => 'SubPanelDetailViewLink',
-    'target_record_key' => 'contact_id',
-    'target_module' => 'Contacts',
-    'module' => 'Contacts',
-    'vname' => 'LBL_LIST_CONTACT',
     'width' => 10,
     'default' => true,
   ),

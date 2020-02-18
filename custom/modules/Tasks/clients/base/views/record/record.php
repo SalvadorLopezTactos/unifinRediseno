@@ -177,12 +177,20 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 'date_start',
-              1 => 'priority',
-              2 => 'date_due',
-              3 => 'status',
-              4 => 'assigned_user_name',
-              5 => 'parent_name',
+              0 => 
+              array (
+                'name' => 'ayuda_asesor_cp_c',
+                'label' => 'LBL_AYUDA_ASESOR_CP',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 'date_start',
+              3 => 'priority',
+              4 => 'date_due',
+              5 => 'status',
+              6 => 'assigned_user_name',
+              7 => 'parent_name',
             ),
           ),
           2 => 

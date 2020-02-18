@@ -59,6 +59,15 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
+              3 => 
+              array (
+                'name' => 'convert_Leads_button',
+                'type' => 'rowaction',
+                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
+                'acl_action' => 'view',
+                'event' => 'button:convert_Lead_to_Accounts:click',
+                'class' => 'btn_convertLeads',
+              ),
             ),
           ),
           3 => 
@@ -80,6 +89,7 @@ array (
                 'name' => 'picture',
                 'type' => 'avatar',
                 'size' => 'large',
+                'readonly' => true,
                 'dismiss_label' => true,
               ),
               1 => 
@@ -109,21 +119,10 @@ array (
               4 => 
               array (
                 'name' => 'name',
-                'type' => 'fullname',
+                'readonly' => true,
                 'label' => 'LBL_NAME',
+                'showOn' => 'view',
                 'dismiss_label' => true,
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'salutation',
-                    'type' => 'enum',
-                    'enum_width' => 'auto',
-                    'searchBarThreshold' => 7,
-                  ),
-                  1 => 'first_name',
-                  2 => 'last_name',
-                ),
               ),
             ),
           ),
@@ -135,78 +134,197 @@ array (
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
+            'newTab' => true,
             'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
               array (
-                'name' => 'status',
+                'name' => 'tipo_registro_c',
+                'label' => 'LBL_TIPO_REGISTRO',
+                'readonly' => true,
               ),
               1 => 
+              array (
+                'name' => 'subtipo_registro_c',
+                'label' => 'LBL_SUBTIPO_REGISTRO',
+                'readonly' => true,
+              ),
+              2 => 
               array (
                 'name' => 'regimen_fiscal_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMEN_FISCAL',
               ),
-              2 => 
-              array (
-                'name' => 'primernombre_c',
-                'label' => 'LBL_PRIMERNOMBRE',
-              ),
               3 => 
               array (
-                'name' => 'segundonombre_c',
-                'label' => 'LBL_SEGUNDONOMBRE',
+                'name' => 'nombre_empresa_c',
+                'label' => 'LBL_NOMBRE_EMPRESA',
               ),
               4 => 
               array (
-                'name' => 'apellidopaterno_c',
-                'label' => 'LBL_APELLIDOPATERNO',
+                'name' => 'nombre_c',
+                'label' => 'LBL_NOMBRE',
               ),
               5 => 
               array (
-                'name' => 'apellidomaterno_c',
-                'label' => 'LBL_APELLIDOMATERNO',
+                'name' => 'apellido_paterno_c',
+                'label' => 'LBL_APELLIDO_PATERNO_C',
               ),
               6 => 
               array (
-                'name' => 'razonsocial_c',
-                'label' => 'LBL_RAZONSOCIAL',
+                'name' => 'apellido_materno_c',
+                'label' => 'LBL_APELLIDO_MATERNO_C',
               ),
               7 => 
               array (
+                'name' => 'puesto_c',
+                'label' => 'LBL_PUESTO_C',
               ),
               8 => 
               array (
-                'name' => 'email',
-                'span' => 12,
+                'name' => 'origen_c',
+                'label' => 'LBL_ORIGEN',
               ),
               9 => 
+              array (
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN',
+              ),
+              10 => 
+              array (
+                'name' => 'origen_busqueda_c',
+                'label' => 'LBL_ORIGEN_BUSQUEDA_C',
+              ),
+              11 => 
+              array (
+              ),
+              12 => 
+              array (
+                'name' => 'medio_digital_c',
+                'label' => 'LBL_MEDIO_DIGITAL',
+              ),
+              13 => 
+              array (
+                'name' => 'punto_contacto_c',
+                'label' => 'LBL_PUNTO_CONTACTO',
+              ),
+              14 => 
+              array (
+                'name' => 'evento_c',
+                'label' => 'LBL_EVENTO_C',
+              ),
+              15 => 
+              array (
+              ),
+              16 => 
+              array (
+                'name' => 'camara_c',
+                'label' => 'LBL_CAMARA_C',
+              ),
+              17 => 
+              array (
+              ),
+              18 => 
+              array (
+                'name' => 'origen_ag_tel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ORIGEN_AG_TEL_C',
+              ),
+              19 => 
+              array (
+                'name' => 'promotor_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTOR_C',
+              ),
+              20 => 
+              array (
+                'name' => 'macrosector_c',
+                'label' => 'LBL_MACROSECTOR_C',
+              ),
+              21 => 
+              array (
+              ),
+              22 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'ventas_anuales_c',
+                'label' => 'LBL_VENTAS_ANUALES_C',
+              ),
+              23 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'potencial_lead_c',
+                'label' => 'LBL_POTENCIAL_LEAD',
+              ),
+              24 => 
+              array (
+                'name' => 'zona_geografica_c',
+                'label' => 'LBL_ZONA_GEOGRAFICA_C',
+              ),
+              25 => 
+              array (
+              ),
+              26 => 
+              array (
+                'name' => 'email',
+              ),
+              27 => 
+              array (
+                'name' => 'phone_mobile',
+              ),
+              28 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
                 'label' => 'LBL_HOME_PHONE',
               ),
-              10 => 'phone_work',
-              11 => 
+              29 => 'phone_work',
+              30 => 
               array (
-                'name' => 'phone_mobile',
+                'name' => 'lead_cancelado_c',
+                'label' => 'LBL_LEAD_CANCELADO_C',
               ),
-              12 => 
+              31 => 
               array (
               ),
-              13 => 
+              32 => 
               array (
-                'name' => 'tag',
-                'span' => 12,
+                'name' => 'motivo_cancelacion_c',
+                'label' => 'LBL_MOTIVO_CANCELACION_C',
+              ),
+              33 => 
+              array (
+                'name' => 'submotivo_cancelacion_c',
+                'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
+              ),
+              34 => 
+              array (
+                'name' => 'account_to_lead',
+                'label' => 'LBL_ACCOUNT',
+                'readonly' => true,
+              ),
+              35 => 
+              array (
+              ),
+              36 => 
+              array (
+                'name' => 'assigned_user_name',
               ),
             ),
           ),
         ),
         'templateMeta' => 
         array (
-          'useTabs' => false,
+          'useTabs' => true,
         ),
       ),
     ),
