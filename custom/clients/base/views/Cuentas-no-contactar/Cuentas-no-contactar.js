@@ -285,23 +285,35 @@
                 "archivo":nombre,
                 "tipo":'nocontactar'
               };
-              var Url = app.api.buildURL("guardaCSV", '', {}, {});
-              app.api.call("create", Url, {data: Params}, {
-                success: _.bind(function (data) {
-                  app.alert.dismiss('reasignandoCSV');
-                  $('.btn_read_csv').removeClass('disabled');
-                  $('.btn_read_csv').attr('style', 'margin:10px');
-                  app.alert.show('csvOK', {
-                    level: 'success',
-                    messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
-                    autoClose: false
-                  });
-                  self.render();
-                },this),
-                error: function (e) {
-                  throw e;
-                }
-              });
+              if(content.trim() == ""){
+                $('.btn_read_csv').removeClass('disabled');
+                $('.btn_read_csv').attr('style', 'margin:10px');
+                app.alert.dismiss('reasignandoCSV');                    
+                app.alert.show('csvVacio', {
+                  level: 'error',
+                  messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                  autoClose: false
+                });
+              }
+              else{
+                var Url = app.api.buildURL("guardaCSV", '', {}, {});
+                app.api.call("create", Url, {data: Params}, {
+                  success: _.bind(function (data) {
+                    app.alert.dismiss('reasignandoCSV');
+                    $('.btn_read_csv').removeClass('disabled');
+                    $('.btn_read_csv').attr('style', 'margin:10px');
+                    app.alert.show('csvOK', {
+                      level: 'success',
+                      messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
+                      autoClose: false
+                    });
+                    self.render();
+                  },this),
+                  error: function (e) {
+                    throw e;
+                  }
+                });
+              }
             }
             reader.readAsText(file);
         }
