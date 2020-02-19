@@ -19,6 +19,9 @@ function nocontactar()
 			require_once 'include/utils/sugar_file_utils.php';
       require_once 'modules/Administration/Administration.php';
       require_once 'custom/clients/base/api/CuentasNoContactar.php';
+			$beanDoc = BeanFactory::retrieveBean('Documents', $result[$current]['id']);
+			$beanDoc->status_id = 'Active';
+			$beanDoc->save();
 			$nombre = $result[$current]['document_name'];
 			$file = 'upload/'.$nombre;
 			$contenido = sugar_file_get_contents($file);
@@ -43,14 +46,11 @@ function nocontactar()
         $texto_archivo.=$respuesta[no_actualizados][$i]."\n";
       }      
       file_put_contents($archivo, $texto_archivo, FILE_APPEND | LOCK_EX);
-			$beanDoc = BeanFactory::retrieveBean('Documents', $result[$current]['id']);
-			$beanDoc->status_id = 'Active';
-			$beanDoc->save();
 			$usuario = BeanFactory::retrieveBean('Users', $result[$current]['assigned_user_id']);
 			$correo = $usuario->email1;
       $user = $usuario->nombre_completo_c;
       $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$user.'</b>
-      <br><br>A continuación se muestra el resultado de la actualización masiva de cuentas no contactar del archivo cargado '.$nombre.':
+      <br><br>A continuación se muestra el resultado de la actualización masiva de cuentas no contactar del archivo cargado '.$nombres.'.csv:
       <br><br>Actualizados: '.count($respuesta[actualizados]).'
       <br>No actualizados: '.count($respuesta[no_actualizados]).'
       <br>Total: '.$total.'

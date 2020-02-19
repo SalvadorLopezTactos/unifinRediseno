@@ -19,6 +19,9 @@ function cargacsv()
 			require_once 'include/utils/sugar_file_utils.php';
       require_once 'modules/Administration/Administration.php';
       require_once 'custom/clients/base/api/reAsignarCuentas.php';
+			$beanDoc = BeanFactory::retrieveBean('Documents', $result[$current]['id']);
+			$beanDoc->status_id = 'Active';
+			$beanDoc->save();
       $total = 0;
       $actualizados = [];
       $no_actualizados = [];
@@ -64,14 +67,11 @@ function cargacsv()
         $texto_archivo.=$no_actualizados[$i]."\n";
       }      
       file_put_contents($archivo, $texto_archivo, FILE_APPEND | LOCK_EX);
-			$beanDoc = BeanFactory::retrieveBean('Documents', $result[$current]['id']);
-			$beanDoc->status_id = 'Active';
-			$beanDoc->save();
 			$usuario = BeanFactory::retrieveBean('Users', $result[$current]['assigned_user_id']);
 			$correo = $usuario->email1;
       $user = $usuario->nombre_completo_c;
       $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$user.'</b>
-      <br><br>A continuación se muestra el resultado de la reasignación masiva de asesores del archivo cargado '.$nombre.':
+      <br><br>A continuación se muestra el resultado de la reasignación masiva de asesores del archivo cargado '.$nombres.'.csv:
       <br><br>Actualizados: '.count($actualizados).'
       <br>No actualizados: '.count($no_actualizados).'
       <br>Total: '.$total.'
