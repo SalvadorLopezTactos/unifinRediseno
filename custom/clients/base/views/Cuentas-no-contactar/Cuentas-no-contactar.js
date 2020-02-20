@@ -225,20 +225,18 @@
         if(this.ids_cuentas.length>0){
             $('#btn_no_contactar').eq(0).removeClass('disabled')
             $('#btn_no_contactar').attr('style','');
-
         }else{
             $('#btn_no_contactar').eq(0).addClass('disabled')
             $('#btn_no_contactar').attr('style','pointer-events:none');
         }
-
     },
 
     btnNoContactar:function(){
-
+        $('#btn_no_contactar').eq(0).addClass('disabled')
+        $('#btn_no_contactar').attr('style','pointer-events:none');
         var Params = {
             'cuentas':this.ids_cuentas
         };
-
         var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
         $('#successful').hide();
         $('#processing').show();
@@ -248,9 +246,10 @@
                  this.render();
                  $('.cuentasContainer').hide();
                  $('#successful').show();
+                 $('#btn_no_contactar').eq(0).removeClass('disabled')
+                 $('#btn_no_contactar').attr('style','');                 
             }, this)
         });
-
     },
 
     procesarCSV:function () {
