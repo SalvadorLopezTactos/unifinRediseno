@@ -225,20 +225,18 @@
         if(this.ids_cuentas.length>0){
             $('#btn_no_contactar').eq(0).removeClass('disabled')
             $('#btn_no_contactar').attr('style','');
-
         }else{
             $('#btn_no_contactar').eq(0).addClass('disabled')
             $('#btn_no_contactar').attr('style','pointer-events:none');
         }
-
     },
 
     btnNoContactar:function(){
-
+        $('#btn_no_contactar').eq(0).addClass('disabled')
+        $('#btn_no_contactar').attr('style','pointer-events:none');
         var Params = {
             'cuentas':this.ids_cuentas
         };
-
         var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
         $('#successful').hide();
         $('#processing').show();
@@ -248,9 +246,10 @@
                  this.render();
                  $('.cuentasContainer').hide();
                  $('#successful').show();
+                 $('#btn_no_contactar').eq(0).removeClass('disabled')
+                 $('#btn_no_contactar').attr('style','');                 
             }, this)
         });
-
     },
 
     procesarCSV:function () {
@@ -274,48 +273,63 @@
             $('.btn_read_csv').attr('style', 'pointer-events:none;margin:10px');        
             var file = fileInput.files[0];
             var nombre = file.name;
-            var textType = /text.*/;
-            self=this;
-            var reader = new FileReader();
-            reader.onload = function(e) {
-              var content = reader.result;
-              var arr_ids=content.split('\n');
-              var Params = {
-                "documento":content,
-                "archivo":nombre,
-                "tipo":'nocontactar'
-              };
-              if(content.trim() == ""){
+            var ext = nombre.toUpperCase();
+            if(ext.substr(-3) != "CSV")
+            {
                 $('.btn_read_csv').removeClass('disabled');
                 $('.btn_read_csv').attr('style', 'margin:10px');
                 app.alert.dismiss('reasignandoCSV');                    
-                app.alert.show('csvVacio', {
+                app.alert.show('nocsv', {
                   level: 'error',
-                  messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                  messages: 'La extensión del archivo no es correcta. Favor de elegir un archivo .csv',
                   autoClose: false
                 });
-              }
-              else{
-                var Url = app.api.buildURL("guardaCSV", '', {}, {});
-                app.api.call("create", Url, {data: Params}, {
-                  success: _.bind(function (data) {
-                    app.alert.dismiss('reasignandoCSV');
-                    $('.btn_read_csv').removeClass('disabled');
-                    $('.btn_read_csv').attr('style', 'margin:10px');
-                    app.alert.show('csvOK', {
-                      level: 'success',
-                      messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
-                      autoClose: false
-                    });
-                    self.render();
-                  },this),
-                  error: function (e) {
-                    throw e;
-                  }
-                });
-              }
             }
-            reader.readAsText(file);
+            else
+            {
+              var textType = /text.*/;
+              self=this;
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                var content = reader.result;
+                var arr_ids=content.split('\n');
+                var Params = {
+                  "documento":content,
+                  "archivo":nombre,
+                  "tipo":'nocontactar'
+                };
+                if(content.trim() == ""){
+                  $('.btn_read_csv').removeClass('disabled');
+                  $('.btn_read_csv').attr('style', 'margin:10px');
+                  app.alert.dismiss('reasignandoCSV');                    
+                  app.alert.show('csvVacio', {
+                    level: 'error',
+                    messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                    autoClose: false
+                  });
+                }
+                else{
+                  var Url = app.api.buildURL("guardaCSV", '', {}, {});
+                  app.api.call("create", Url, {data: Params}, {
+                    success: _.bind(function (data) {
+                      app.alert.dismiss('reasignandoCSV');
+                      $('.btn_read_csv').removeClass('disabled');
+                      $('.btn_read_csv').attr('style', 'margin:10px');
+                      app.alert.show('csvOK', {
+                        level: 'success',
+                        messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
+                        autoClose: false
+                      });
+                      self.render();
+                    },this),
+                    error: function (e) {
+                      throw e;
+                    }
+                  });
+                }
+              }
+              reader.readAsText(file);
+            }
         }
     }
 })
