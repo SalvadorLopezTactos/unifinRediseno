@@ -225,20 +225,18 @@
         if(this.ids_cuentas.length>0){
             $('#btn_no_contactar').eq(0).removeClass('disabled')
             $('#btn_no_contactar').attr('style','');
-
         }else{
             $('#btn_no_contactar').eq(0).addClass('disabled')
             $('#btn_no_contactar').attr('style','pointer-events:none');
         }
-
     },
 
     btnNoContactar:function(){
-
+        $('#btn_no_contactar').eq(0).addClass('disabled')
+        $('#btn_no_contactar').attr('style','pointer-events:none');
         var Params = {
             'cuentas':this.ids_cuentas
         };
-
         var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
         $('#successful').hide();
         $('#processing').show();
@@ -248,91 +246,90 @@
                  this.render();
                  $('.cuentasContainer').hide();
                  $('#successful').show();
+                 $('#btn_no_contactar').eq(0).removeClass('disabled')
+                 $('#btn_no_contactar').attr('style','');                 
             }, this)
         });
-
     },
 
     procesarCSV:function () {
-
         //Validar que se haya seleccionado un archivo
         var fileInput = document.getElementById('csv_no_contactar');
         var archivo=fileInput.value;
-        //var files = document.getElementsByName('csv_no_contactar').files;
-
         if(archivo=="" || archivo==undefined){
-
             app.alert.show('errorAlert', {
                 level: 'error',
                 messages: 'Favor de elegir un archivo',
                 autoClose: true
             });
-
         }else{
-
+            $('#successful').hide();
+            $('#processing').show();
+            app.alert.show('reasignandoCSV', {
+              level: 'process',
+              title: 'Cargando...'
+            });
+            $('.btn_read_csv').addClass('disabled');
+            $('.btn_read_csv').attr('style', 'pointer-events:none;margin:10px');        
             var file = fileInput.files[0];
-            var textType = /text.*/;
-
-            self=this;
-
-            //if (file.type.match(textType)) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    var content = reader.result;
-                    var arr_ids=content.split('\n');
-                    //Obtener los ids a actualizar
-
-                    var Params = {
-                        'cuentas':arr_ids
-                    };
-
-                    var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
-                    $('#successful').hide();
-                    $('#processing').show();
-                    app.api.call("create", urlNoContactar, {data: Params}, {
-                        success: _.bind(function (data) {
-                            $('#processing').hide();
-                            self.render();
-                            $('.cuentasContainer').hide();
-                            $('#successful').show();
-
-                            //Mostrar resumen
-                            var countAct=data.actualizados.length;
-                            var countNoAct=data.no_actualizados.length;
-                            var msjact='Cuentas actualizadas <b>'+countAct+'</b>: <br>';
-                            var msjnoact='Cuentas NO actualizadas <b>'+countNoAct+'</b>: <br>';
-                            if(countAct>0){
-
-                                for(var i=0;i<countAct;i++){
-                                    msjact+=data.actualizados[i]+'<br>';
-                                }
-
-                            }
-
-                            if(countNoAct>0){
-
-                                for(var i=0;i<countNoAct;i++){
-                                    msjnoact+=data.no_actualizados[i]+'<br>';
-                                }
-
-                            }
-
-                            app.alert.show('succes_actualizacion_no_contactar', {
-                                level: 'success',
-                                messages: '<br>'+msjact+'<br>'+msjnoact,
-                                autoClose: false
-                            });
-
-
-                        }, this)
-                    });
+            var nombre = file.name;
+            var ext = nombre.toUpperCase();
+            if(ext.substr(-3) != "CSV")
+            {
+                $('.btn_read_csv').removeClass('disabled');
+                $('.btn_read_csv').attr('style', 'margin:10px');
+                app.alert.dismiss('reasignandoCSV');                    
+                app.alert.show('nocsv', {
+                  level: 'error',
+                  messages: 'La extensión del archivo no es correcta. Favor de elegir un archivo .csv',
+                  autoClose: false
+                });
+            }
+            else
+            {
+              var textType = /text.*/;
+              self=this;
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                var content = reader.result;
+                var arr_ids=content.split('\n');
+                var Params = {
+                  "documento":content,
+                  "archivo":nombre,
+                  "tipo":'nocontactar'
+                };
+                if(content.trim() == ""){
+                  $('.btn_read_csv').removeClass('disabled');
+                  $('.btn_read_csv').attr('style', 'margin:10px');
+                  app.alert.dismiss('reasignandoCSV');                    
+                  app.alert.show('csvVacio', {
+                    level: 'error',
+                    messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
+                    autoClose: false
+                  });
                 }
-                reader.readAsText(file);
-            //}
-
+                else{
+                  var Url = app.api.buildURL("guardaCSV", '', {}, {});
+                  app.api.call("create", Url, {data: Params}, {
+                    success: _.bind(function (data) {
+                      app.alert.dismiss('reasignandoCSV');
+                      $('.btn_read_csv').removeClass('disabled');
+                      $('.btn_read_csv').attr('style', 'margin:10px');
+                      app.alert.show('csvOK', {
+                        level: 'success',
+                        messages: 'Archivo cargado con éxito. Le llegará un correo con el resultado de la actualización',
+                        autoClose: false
+                      });
+                      self.render();
+                    },this),
+                    error: function (e) {
+                      throw e;
+                    }
+                  });
+                }
+              }
+              reader.readAsText(file);
+            }
         }
     }
-
-
 })

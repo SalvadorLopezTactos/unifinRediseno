@@ -140,6 +140,8 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
                 $account->user_id1_c = $id_user_assing;
                 //Fleet
                 $account->user_id6_c = $id_user_assing;
+                //Uniclick
+                $account->user_id7_c = $id_user_assing;
 
                 $account->save();
 
@@ -204,7 +206,7 @@ SQL;
                 }
             }else{
 
-                array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
+                if($cuentas[$i]) array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
 
             }
 
