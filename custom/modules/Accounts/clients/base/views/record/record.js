@@ -91,7 +91,7 @@
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
                         if (data.UNI2_CTE_029_VerificaClienteTieneContratoResult._tieneContratos == true) {
-                            if (App.user.id != self.model.get('user_id_c') && App.user.id != self.model.get('user_id1_c') && App.user.id != self.model.get('user_id2_c')) {
+                            if (App.user.id != self.model.get('user_id_c') && App.user.id != self.model.get('user_id1_c') && App.user.id != self.model.get('user_id2_c') && App.user.id != self.model.get('user_id6_c') && App.user.id != self.model.get('user_id7_c')) {
                                 app.alert.show("Validar Contratos", {
                                     level: "error",
                                     title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC a Cliente con contratos existentes.",
