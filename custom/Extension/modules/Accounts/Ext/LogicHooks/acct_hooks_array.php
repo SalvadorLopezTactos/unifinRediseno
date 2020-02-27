@@ -201,3 +201,11 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'idUniclick'
 );
+
+$hook_array['after_save'][] = Array(
+    12,
+    'Guarda valores de la cuenta y crea registro en ANLZT_analizate',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'RegistroAnalizate'
+);

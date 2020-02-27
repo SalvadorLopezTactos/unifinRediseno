@@ -572,8 +572,8 @@
 		
 		/*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
 		this.model.on('change:tipo_registro_c',this.check_factoraje, this);
-
-
+        //Ocultar panel Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
     },
 
     /** BEGIN CUSTOMIZATION:

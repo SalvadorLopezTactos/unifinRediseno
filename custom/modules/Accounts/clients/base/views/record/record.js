@@ -229,6 +229,7 @@
         this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
+        this.get_analizate();
         //this.get_noviable();
 
 
@@ -904,6 +905,8 @@
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
+        //Oculta etiqueta de Analizate
+        this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
@@ -4921,6 +4924,25 @@
                     }),
                 })
             }
+        }
+    },
+
+    get_analizate: function () {
+        //Extiende This
+        this.Financiera = [];
+        //this.Credit = [];
+        var id = this.model.id;
+        //Forma Petición de datos
+        if (id != '' && id != undefined && id != null) {
+            //Ejecuta petición ResumenCliente
+
+            var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null,);
+            app.api.call('read', url, {}, {
+                success: _.bind(function (data) {
+                    cont_nlzt.Financiera = data;
+                    cont_nlzt.render();
+                }, contexto_cuenta)
+            });
         }
     },
 	

@@ -1,0 +1,93 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Adrian Arauz>
+ * Date: 20/02/2020
+ */
+
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+class Analizate extends SugarApi
+{
+    public function registerApiRest()
+    {
+        return array(
+            'ObtieneFinanciera' => array(
+                'reqType' => 'GET',
+                'path' => array('ObtieneFinanciera', '?'),
+                'pathVars' => array('', 'id'),
+                'method' => 'ObtieneFinanciera',
+                'shortHelp' => 'Obtener registros de la tabla anlzt_analizate para su presentación en Custom Field Analizate',
+            ),
+            'ObtieneCredit' => array(
+                'reqType' => 'GET',
+                'path' => array('ObtieneCredit','?'),
+                'pathVars' => array('','id'),
+                'method' => 'ObtieneCredit',
+                'shortHelp' => 'Obtener registros de la tabla anlzt_analizate para su presentación en Custom Field Analizate',
+            ),
+
+        );
+    }
+
+    public function ObtieneFinanciera($api, $args){
+
+        $data=array();
+        $data['estado']="";
+        $data['fecha']="";
+        $data['documento']="";
+        $data['fecha_documento']="";
+        $data['url_documento']="";
+        $data['url_portal']="";
+        $idCuenta = $args['id'];
+        //Cargar toda la informacion del bean, en este caso de la cuenta
+        $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
+        //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
+        $beanCuenta->load_relationship('anlzt_analizate_accounts');
+        //Trae todos los registros asociados entre el link de la account y Analizate
+        $relatedBeans = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+        //Se iteran las n tandas de registros
+        foreach ($relatedBeans as $estados) {
+
+            if ($estados->empresa==1){
+                if ($estados->tipo==1){
+                    //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
+                    //Para así obtener el registro más reciente y asignarle los valores de fecha y estado
+                    if ($data['fecha']==""){
+                        $data['fecha']=$estados->fecha_actualizacion;
+                        $data['estado']=$estados->estado;
+                        $data['url_portal']=$estados->url_portal;
+                    }
+                    if($estados->fecha_actualizacion>$data['fecha']){
+                        $data['fecha']=$estados->fecha_actualizacion;
+                        $data['estado']=$estados->estado;
+                        $data['url_portal']=$estados->url_portal;
+                    }
+
+                }else{
+                    //Recuperar registro mas reciente (Url del documento)
+                    if ($data['fecha_documento']==""){
+                        $data['documento']=$estados->documento;
+                        $data['fecha_documento']=$estados->fecha_actualizacion;
+                        $data['url_documento']=$estados->url_documento;
+                    }
+                    if($estados->fecha_actualizacion>$data['fecha_documento']){
+                        $data['fecha_documento']=$estados->fecha_actualizacion;
+                        $data['documento']=$estados->documento;
+                        $data['url_documento']=$estados->url_documento;
+                    }
+                }
+            }
+        }
+        if ($data['fecha']!="") {
+            //Variable para convertir la hora
+            $fecha1 = new DateTime($data['fecha'], new DateTimeZone ('UTC'));
+            $fecha1->setTimezone(new DateTimeZone('CST'));
+            $data['fecha'] = $fecha1->format('Y-m-d H:i:s');
+        }
+
+        //Termina iteracion
+        return $data;
+
+    }
+}

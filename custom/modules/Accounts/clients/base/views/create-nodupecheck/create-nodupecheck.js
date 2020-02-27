@@ -297,6 +297,8 @@
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
+        //Ocultar panel Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
     },
 
     _render: function () {
