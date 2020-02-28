@@ -2,8 +2,8 @@
     extendsFrom: 'CreateView',
     previas: null,
     initialize: function (options)
-	{
-		relContext = this;
+	  {
+		    relContext = this;
         accountContext = null; //._previousAttributes.model._previousAttributes;
 
         /*
@@ -16,7 +16,6 @@
          */
         this._super('initialize', [options]);
 
-
          /*
         	AF. 13/02/2018
         	Set account_id: Establece id para campo
@@ -26,52 +25,51 @@
         this.model.addValidationTask('set_Account_Related', _.bind(this._setAccount, this));
 
         //CVV INICIO
-		//this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
+		    //this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
-		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
-		this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
-		this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
-		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
-		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
+    		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
+    		//this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
+    		this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
+    		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
+    		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
         this.model.addValidationTask('validarequeridosPropReal',_.bind(this.validaPropietarioReal, this));
         this.model.addValidationTask('validarequeridosProvRec',_.bind(this.validaProveedorRecursos, this));
         this.model.addValidationTask('validarequeridosRelActivas',_.bind(this.validaRelacionesValidation, this));
 
-
-		this.model.on('change:relacion_c', this.checarValidaciones, this);
-		this.model.on('change:relaciones_activas', this.checarValidaciones, this);
-		this.model.on('change:relaciones_activas', this.doRelationFields, this);
-		this.model.on('change:relaciones_activas',this.chkjuridico, this);
-		this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
-		this.model.on('change:relaciones_activas',this.changejuridico, this);
-		this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
-    this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
-    this.model.on('change:relacion_c',this.validaRelacionesChange, this);
-
-		//Perform check of parent data once parent record finishes loading
-		/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
-
-		/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 8/27/2015 Description: When a new relationship is created, the same person is pre-selected in the “Relacion” field.
-		 * Modify the out of the box behavior to start with a blank “Relacion”*/
-		this.model.set("relacion_c", "   ");
-		/* END CUSTOMIZATION */
-
-
-		var valParams = {
-			'modulo': 'Accounts',
-		};
-		var valUrl = app.api.buildURL("customValidations", '', {}, {});
-		app.api.call("create", valUrl, {data: valParams}, { //Call and Collect the Dependencies
-			success: _.bind(function (data) {
-				if (data != null) {
-					self.validaciones = data;
-					console.log(self.validaciones);
-				}
-			}, this)
-		});
-        this.previas = new String(this.model.get('relaciones_activas'));
-	},
+    		//this.model.on('change:relacion_c', this.checarValidaciones, this);
+    		//this.model.on('change:relaciones_activas',this.checarValidaciones, this);
+    		this.model.on('change:relaciones_activas',this.doRelationFields, this);
+    		this.model.on('change:relaciones_activas',this.chkjuridico, this);
+    		//this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
+    		this.model.on('change:relaciones_activas',this.changejuridico, this);
+    		//this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
+        //this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
+        //this.model.on('change:relacion_c', this.validaRelacionesChange, this);
+    
+    		//Perform check of parent data once parent record finishes loading
+    		/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
+    
+    		/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 8/27/2015 Description: When a new relationship is created, the same person is pre-selected in the “Relacion” field.
+    		 * Modify the out of the box behavior to start with a blank “Relacion”*/
+    		this.model.set("relacion_c", "   ");
+    		/* END CUSTOMIZATION */
+    
+    
+    		var valParams = {
+    			'modulo': 'Accounts',
+    		};
+    		var valUrl = app.api.buildURL("customValidations", '', {}, {});
+    		app.api.call("create", valUrl, {data: valParams}, { //Call and Collect the Dependencies
+    			success: _.bind(function (data) {
+    				if (data != null) {
+    					self.validaciones = data;
+    					console.log(self.validaciones);
+    				}
+    			}, this)
+    		});
+            this.previas = new String(this.model.get('relaciones_activas'));
+	  },
 
     saveAndClose: function (){
         if (accountContext==null) {
@@ -1341,7 +1339,7 @@
         request.url="";
         request.method="GET";
 
-        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -1389,8 +1387,8 @@
                         }
                     }
                     if (data) {
+                        //Valida Relación: Aval
                         if (this.model.get('relaciones_activas').includes('Aval')){
-                            //Valida Relación: Aval
                             relacionesActivas.push("Aval");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1470,6 +1468,80 @@
                                 faltantes.push('Teléfono Casa o Celular');
                             }
                         }
+                        //valida relación: Conyuge
+                        if (this.model.get('relaciones_activas').includes('Conyuge')) {
+                            relacionesActivas.push("Conyuge");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                console.log(data);
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.regimenpatrimonial_c == "") {
+                                    faltantes.push('Régimen Patrimonial');
+                                }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
+                            }
+                        }
+                        //Valida Relación: Fiador
+                        if (this.model.get('relaciones_activas').includes('Fiador')){
+                            relacionesActivas.push("Fiador");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.subsectoreconomico_c == "") {
+                                      faltantes.push('Sub Sector Económico');
+                                  }
+                                  if (data[0].contents.actividadeconomica_c == "") {
+                                      faltantes.push('Actividad Económica');
+                                  }
+                                }
+                            } else {
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
+                            }
+                        }
                         //valida relación: Accionista
                         if (this.model.get('relaciones_activas').includes('Accionista')) {
                             relacionesActivas.push("Accionista");
@@ -1525,8 +1597,8 @@
                             }
 
                         }
+                        //Valida relación: Representate
                         if (this.model.get('relaciones_activas').includes('Representante')) {
-                            //Valida relación: Representate
                             relacionesActivas.push("Representante");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -1576,6 +1648,70 @@
                                 faltantes.push('Dirección Fiscal');
                             }
                         }
+                        //Valida Relación: Coacreditado, Depositario, 'Obligado solidario y Firmantes VR
+                        if (this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')){
+                            if (this.model.get('relaciones_activas').includes('Coacreditado')) relacionesActivas.push("Coacreditado");
+                            if (this.model.get('relaciones_activas').includes('Depositario')) relacionesActivas.push("Depositario");
+                            if (this.model.get('relaciones_activas').includes('Obligado solidario')) relacionesActivas.push("Obligado solidario");
+                            if (this.model.get('relaciones_activas').includes('Firmantes VR')) relacionesActivas.push("Firmantes VR");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.fechadenacimiento_c == "") {
+                                    faltantes.push('Fecha de Nacimiento');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Nacimiento');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Nacimiento');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.profesion_c == "") {
+                                    faltantes.push('Profesión');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.sectoreconomico_c == "") {
+                                      faltantes.push('Sector Económico');
+                                  }
+                                  if (data[0].contents.subsectoreconomico_c == "") {
+                                      faltantes.push('Sub Sector Económico');
+                                  }
+                                  if (data[0].contents.actividadeconomica_c == "") {
+                                      faltantes.push('Actividad Económica');
+                                  }
+                                }
+                            } else {
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                                if (data[0].contents.fechaconstitutiva_c == "") {
+                                    faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.sectoreconomico_c == "") {
+                                    faltantes.push('Sector Económico');
+                                }
+                                if (data[0].contents.subsectoreconomico_c == "") {
+                                    faltantes.push('Sub Sector Económico');
+                                }
+                                if (data[0].contents.pais_nacimiento_c == "") {
+                                    faltantes.push('País de Constitución');
+                                }
+                                if (data[0].contents.estado_nacimiento_c == "") {
+                                    faltantes.push('Estado de Constitución');
+                                }
+                            }
+                        }
                     }
                     if (faltantes.length >  0) {
                         faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
@@ -1595,8 +1731,5 @@
         }else{
             callback(null, fields, errors);
         }
-
     },
-
-
 })
