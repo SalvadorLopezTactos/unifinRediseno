@@ -76,4 +76,5 @@ $mod_strings['LNK_LEAD_REPORTS'] = 'Ver informes de leads';
 $mod_strings['LNK_NEW_LEAD'] = 'Nuevo lead';
 $mod_strings['NTC_REMOVE_CONFIRMATION'] = '¿Está seguro de que desea quitar este lead del caso?';
 $mod_strings['LBL_ID'] = 'ID Sugar';
-$mod_strings['LBL_RECORD_SAVED_SUCCESS'] ='Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.';
+$mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.';
+$mod_strings['LBL_DETALLE_PLATAFORMA_C'] = 'GCLID';
