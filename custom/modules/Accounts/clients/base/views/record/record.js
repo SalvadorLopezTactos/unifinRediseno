@@ -3376,6 +3376,7 @@
                     autoClose: false,
                     messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
                 })
+                /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
             }
             else {
