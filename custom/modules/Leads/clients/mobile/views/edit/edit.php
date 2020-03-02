@@ -36,12 +36,14 @@ array (
               0 => 
               array (
                 'name' => 'tipo_registro_c',
-                'label' => 'LBL_TIPO_REGISTRO',
+                'label' => 'LBL_TIPO_REGISTRO', 
+                'readonly' => true,
               ),
               1 => 
               array (
                 'name' => 'subtipo_registro_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO',
+                'readonly' => true,
               ),
               2 => 
               array (
