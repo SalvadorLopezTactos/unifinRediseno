@@ -892,7 +892,7 @@
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
                                         }
                                         if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                            RequeridosProvRec = RequeridosProvRec + '<b><br>Almenos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                                            RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
                                         }
                                         if (data.tipo_registro_c!= 'Persona') {
                                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
@@ -924,7 +924,13 @@
                                         if (data.razonsocial_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
                                         }
-                                        if (data.nacionalidad_c == "") {
+                                        if (data.nombre_comercial_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Nombre Comercial<br></b>';
+                                        }
+                                        if (data.fechaconstitutiva_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Fecha Constitutiva<br></b>';
+                                        }
+                                        if (data.nacionalidad_c == "0") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                         }
                                         if (data.rfc_c == "") {
@@ -1007,7 +1013,7 @@
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
                                     }
                                     if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
+                                        RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
                                     }
                                     if (data.tipo_registro_c!= 'Persona') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
@@ -1339,7 +1345,7 @@
         request.url="";
         request.method="GET";
 
-        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+        if ((this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Contacto') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -1400,6 +1406,9 @@
                                 if (data[0].contents.apellidomaterno_c == "") {
                                     faltantes.push('Apellido Materno');
                                 }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
@@ -1434,6 +1443,9 @@
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
                                 }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
+                                }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
@@ -1445,9 +1457,6 @@
                                 }
                                 if (data[0].contents.actividadeconomica_c == "") {
                                     faltantes.push('Actividad Económica');
-                                }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
                                 }
                                 if (data[0].contents.subsectoreconomico_c == "") {
                                     faltantes.push('Sub Sector Económico');
@@ -1472,7 +1481,6 @@
                         if (this.model.get('relaciones_activas').includes('Conyuge')) {
                             relacionesActivas.push("Conyuge");
                             if (data[0].contents.tipodepersona_c != "Persona Moral") {
-                                console.log(data);
                                 if (data[0].contents.primernombre_c == "") {
                                     faltantes.push('Nombre');
                                 }
@@ -1485,6 +1493,36 @@
                                 if (data[0].contents.estadocivil_c == "") {
                                     faltantes.push('Estado Civil');
                                 }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
+                                }                                 
+                            }
+                        }
+                        //valida relación: Contacto
+                        if (this.model.get('relaciones_activas').includes('Contacto')) {
+                            relacionesActivas.push("Contacto");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
+                                if (data[0].contents.tipodecontacto == "") {
+                                    faltantes.push('Tipo de Contacto');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
+                                }                                 
                             }
                         }
                         //Valida Relación: Fiador
@@ -1496,6 +1534,9 @@
                                 }
                                 if (data[0].contents.apellidopaterno_c == "") {
                                     faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
                                 }
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
@@ -1514,6 +1555,9 @@
                                 }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
                                   if (data[0].contents.subsectoreconomico_c == "") {
                                       faltantes.push('Sub Sector Económico');
                                   }
@@ -1525,11 +1569,17 @@
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
                                 }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
+                                }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.actividadeconomica_c == "") {
+                                    faltantes.push('Actividad Económica');
                                 }
                                 if (data[0].contents.subsectoreconomico_c == "") {
                                     faltantes.push('Sub Sector Económico');
@@ -1552,6 +1602,9 @@
                                 if (data[0].contents.apellidopaterno_c == "") {
                                     faltantes.push('Apellido Paterno');
                                 }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
@@ -1567,9 +1620,18 @@
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
+                                }
                             }else{
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1607,6 +1669,9 @@
                                 if (data[0].contents.apellidopaterno_c == "") {
                                     faltantes.push('Apellido Paterno');
                                 }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
@@ -1625,9 +1690,18 @@
                                 if (data[0].contents.curp_c == "") {
                                     faltantes.push('CURP');
                                 }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
+                                }
                             }else{
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
                                 }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
@@ -1661,6 +1735,9 @@
                                 if (data[0].contents.apellidopaterno_c == "") {
                                     faltantes.push('Apellido Paterno');
                                 }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
                                 if (data[0].contents.fechadenacimiento_c == "") {
                                     faltantes.push('Fecha de Nacimiento');
                                 }
@@ -1678,6 +1755,9 @@
                                 }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
                                   if (data[0].contents.sectoreconomico_c == "") {
                                       faltantes.push('Sector Económico');
                                   }
@@ -1692,11 +1772,17 @@
                                 if (data[0].contents.razonsocial_c == "") {
                                     faltantes.push('Razón Social');
                                 }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
+                                }
                                 if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
+                                }
+                                if (data[0].contents.actividadeconomica_c == "") {
+                                    faltantes.push('Actividad Económica');
                                 }
                                 if (data[0].contents.sectoreconomico_c == "") {
                                     faltantes.push('Sector Económico');
@@ -1710,6 +1796,38 @@
                                 if (data[0].contents.estado_nacimiento_c == "") {
                                     faltantes.push('Estado de Constitución');
                                 }
+                            }
+                        }
+                        //valida relación: Directivo, Referencia
+                        if (this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia')) {
+                            if (this.model.get('relaciones_activas').includes('Directivo')) relacionesActivas.push("Directivo");
+                            if (this.model.get('relaciones_activas').includes('Referencia')) relacionesActivas.push("Referencia");
+                            if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+                                    faltantes.push('Nombre');
+                                }
+                                if (data[0].contents.apellidopaterno_c == "") {
+                                    faltantes.push('Apellido Paterno');
+                                }
+                                if (data[0].contents.estadocivil_c == "") {
+                                    faltantes.push('Estado Civil');
+                                }
+                                //Validación PFAE
+                                if (data[0].contents.tipodepersona_c != "Persona Fisica") {
+                                  if (data[0].contents.nombre_comercial_c == "") {
+                                      faltantes.push('Nombre Comercial');
+                                  }
+                                }
+                            }
+                            else {
+                              if (this.model.get('relaciones_activas').includes('Referencia')) {
+                                if (data[0].contents.razonsocial_c == "") {
+                                    faltantes.push('Razón Social');
+                                }
+                                if (data[0].contents.nombre_comercial_c == "") {
+                                    faltantes.push('Nombre Comercial');
+                                }
+                              }
                             }
                         }
                     }
