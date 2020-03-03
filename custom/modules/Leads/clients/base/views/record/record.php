@@ -290,34 +290,46 @@ array (
               29 => 'phone_work',
               30 => 
               array (
-                'name' => 'lead_cancelado_c',
-                'label' => 'LBL_LEAD_CANCELADO_C',
+                'name' => 'detalle_plataforma_c',
+                'studio' => 'visible',
+                'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
               31 => 
               array (
               ),
               32 => 
               array (
+                'name' => 'lead_cancelado_c',
+                'label' => 'LBL_LEAD_CANCELADO_C',
+              ),
+              33 => 
+              array (
+              ),
+              34 => 
+              array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
               ),
-              34 => 
+              36 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              35 => 
+              37 => 
               array (
               ),
-              36 => 
+              38 => 
               array (
                 'name' => 'assigned_user_name',
+              ),
+              39 => 
+              array (
               ),
             ),
           ),

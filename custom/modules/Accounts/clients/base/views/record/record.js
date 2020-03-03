@@ -3367,20 +3367,20 @@
 
             var direccionesfaltantes = "";
             if (arregloindicadores.indexOf("2") == -1) {
-                direccionesfaltantes = direccionesfaltantes + 'Domicilio Fiscal<br>';
+                direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
             if (direccionesfaltantes != "") {
-                $('.select2-choices').css('border-color', 'red');
+                
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
                     messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
                 })
-                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
-                errors['account_direcciones_c'].required = true;
+                /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
+                this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
             }
             else {
-                $('.select2-choices').css('border-color', '');
+                this.$('#s2id_multiIndicador .select2-choices').css('border-color', '');
             }
             if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
