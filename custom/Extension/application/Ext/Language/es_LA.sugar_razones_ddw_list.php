@@ -3,12 +3,13 @@
 
 $app_list_strings['razones_ddw_list']=array (
   '' => '',
-  'Fuera de Perfil' => 'Fuera de Perfil',
-  'Condiciones Financieras' => 'Condiciones Financieras',
-  'Competencia' => 'Ya está con la competencia',
-  'No tenemos el producto que requiere' => 'No tenemos el producto que requiere',
-  'Activos no financiables' => 'Activos no financiables',
-  'Unifin solicita demasiada documentacion' => 'Unifin solicita demasiada documentación',
-  'No se encuentra interesado' => 'No se encuentra interesado',
-  'Datos incorrectos Duplicidad' => 'Datos incorrectos / Duplicidad',
+  '0' => '',
+  '1' => 'Fuera de Perfil',
+  '2' => 'Condiciones Financieras',
+  '3' => 'Ya está con la competencia',
+  '4' => 'No tenemos el producto que requiere',
+  '5' => 'Activos no financiables',
+  '6' => 'Unifin solicita demasiada documentación',
+  '7' => 'No se encuentra interesado',
+  '8' => 'Datos incorrectos / Duplicidad',
 );
