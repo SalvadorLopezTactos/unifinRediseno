@@ -3,8 +3,9 @@
 
 $app_list_strings['razones_cf_list']=array (
   '' => '',
-  'Tasa' => 'Tasa',
-  'Renta Inicial' => 'Renta Inicial',
-  'Rentas en deposito' => 'Rentas en depósito',
-  'Residuales' => 'Residuales',
+  '0' => '',
+  '1' => 'Tasa',
+  '2' => 'Renta Inicial',
+  '3' => 'Rentas en depósito',
+  '4' => 'Residuales',
 );
