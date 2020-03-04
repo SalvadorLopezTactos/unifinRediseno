@@ -3,6 +3,7 @@
 
 $app_list_strings['tct_razon_ni_l_ddw_c_list']=array (
   '' => '',
-  'Pidio no ser contactado' => 'Pidió no ser contactado',
-  'No contesta' => 'No contesta',
+  '0' => '',
+  '1' => 'Pidió no ser contactado',
+  '2' => 'No contesta',
 );

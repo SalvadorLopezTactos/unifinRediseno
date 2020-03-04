@@ -3,13 +3,14 @@
 
 $app_list_strings['fuera_de_perfil_ddw_list']=array (
   '' => '',
-  'Por Ventas' => 'Por Ventas',
-  'No maneja activo fijo' => 'No maneja activo fijo',
-  'No tiene tiempo operando' => 'No tiene dos años operando',
-  'Broker Vendor' => 'Broker / Vendor',
-  'Giro no acreditable' => 'Giro no acreditable',
-  'Ya esta sobre apalancado' => 'Ya está sobre apalancado',
-  'Quiebra Tecnica' => 'Quiebra Técnica',
-  'Perdidas' => 'Pérdidas',
-  'Mal buro de credito' => 'Mal buro de crédito',
+  '0' => '',
+  '1' => 'Por Ventas',
+  '2' => 'No maneja activo fijo',
+  '3' => 'No tiene dos años operando',
+  '4' => 'Broker / Vendor',
+  '5' => 'Giro no acreditable',
+  '6' => 'Ya está sobre apalancado',
+  '7' => 'Quiebra Técnica',
+  '8' => 'Pérdidas',
+  '9' => 'Mal buro de crédito',
 );
