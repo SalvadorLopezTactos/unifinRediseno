@@ -248,7 +248,7 @@
                     $('.campo7').hide();
                     $('.campo7nvl').select2('val',"");
                 }
-                if (($('.campo4nvl').select2('val') == "Competencia" || $('.campo4nvl option:selected').text()=="Competencia" || $('.campo4nvl')[0].innerText.trim()== "Competencia" || $('.campo4nvl option:selected').text()=="Ya está con la competencia") && $('.campo1chk')[0].checked) {
+                if (($('.campo4nvl').select2('val') == "Ya está con la competencia" || $('.campo4nvl option:selected').text()=="Ya está con la competencia" || $('.campo4nvl')[0].innerText.trim()== "Ya está con la competencia" || $('.campo4nvl option:selected').text()=="Ya está con la competencia") && $('.campo1chk')[0].checked) {
                     $('.campo10').show();
                     $('.campo13').show();
                 } else {
@@ -289,7 +289,7 @@
                     $('.campo8').hide();
                     $('.campo8nvf').select2('val',"");
                 }
-                if (($('.campo5nvf').select2('val') == "Competencia" || $('.campo5nvf option:selected').text()=="Competencia" || $('.campo5nvf')[0].innerText.trim()== "Competencia" || $('.campo5nvf option:selected').text()=="Ya está con la competencia") && $('.campo2chk')[0].checked) {
+                if (($('.campo5nvf').select2('val') == "Ya está con la competencia" || $('.campo5nvf option:selected').text()=="Ya está con la competencia" || $('.campo5nvf')[0].innerText.trim()== "Ya está con la competencia" || $('.campo5nvf option:selected').text()=="Ya está con la competencia") && $('.campo2chk')[0].checked) {
                     $('.campo11').show();
                     $('.campo14').show();
                 } else {
@@ -331,7 +331,7 @@
                     $('.campo9').hide();
                     $('.campo9nvca').select2('val',"");
                 }
-                if (($('.campo6nvca').select2('val') == "Competencia" ||  $('.campo6nvca option:selected').text()=="Competencia" || $('.campo6nvca')[0].innerText.trim()== "Competencia" || $('.campo6nvca option:selected').text()=="Ya está con la competencia") && $('.campo3chk')[0].checked) {
+                if (($('.campo6nvca').select2('val') == "Ya está con la competencia" ||  $('.campo6nvca option:selected').text()=="Ya está con la competencia" || $('.campo6nvca')[0].innerText.trim()== "Ya está con la competencia" || $('.campo6nvca option:selected').text()=="Ya está con la competencia") && $('.campo3chk')[0].checked) {
                     $('.campo12').show();
                     $('.campo15').show();
                 } else {
