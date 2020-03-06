@@ -113,6 +113,12 @@
                     });
                 }
             });
+        }else{
+            app.alert.show('Cuenta_no_Proveedor', {
+                level: 'error',
+                messages: 'No se puede realizar esta acción debido a que la cuenta no es de tipo Proveedor.',
+                autoClose: false
+            });
         }
     },
 
