@@ -319,6 +319,18 @@ array (
               array (
                 'name' => 'assigned_user_name',
               ),
+              37 => 
+              array (
+              ),
+              38 => 
+              array (
+                'name' => 'detalle_plataforma_c',
+                'studio' => 'visible',
+                'label' => 'LBL_DETALLE_PLATAFORMA',
+              ),
+              39 => 
+              array (
+              ),
             ),
           ),
         ),

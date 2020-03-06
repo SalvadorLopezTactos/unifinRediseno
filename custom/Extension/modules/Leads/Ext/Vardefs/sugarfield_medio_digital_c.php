@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-13 19:11:50
+ // created: 2020-03-06 13:53:58
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -27,6 +27,16 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       7 => 'Prensa Online',
       8 => 'TV Online',
       9 => 'Revistas Online',
+      10 => '15',
+      11 => '16',
+      12 => '17',
+      13 => '18',
+      14 => '19',
+      15 => '20',
+      16 => '21',
+      17 => '22',
+      18 => '23',
+      19 => '24',
     ),
     'Campanas' => 
     array (
