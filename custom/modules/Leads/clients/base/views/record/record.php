@@ -330,6 +330,9 @@ array (
               ),
               39 => 
               array (
+                'name' => 'detalle_plataforma_c',
+                'studio' => 'visible',
+                'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
             ),
           ),
