@@ -78,8 +78,7 @@
             //Se declaran variables para armar la url
             var rfc = this.model.get('rfc_c');
             var id = this.model.get('id');
-            var url_financiera = App.lang.getAppListStrings('analizate_url_list')[1];
-            var link = url_financiera + '&UUID=' + id + '&RFC_CIEC=' + rfc;
+            var link = '&UUID=' + id + '&RFC_CIEC=' + rfc;
 
             //enviar elementos de la cuenta
             var api_params = {
