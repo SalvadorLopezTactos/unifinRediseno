@@ -11,7 +11,10 @@ require_once 'include/utils/file_utils.php';
 class analizate_hooks  {
     public function EnvioMail($bean = null, $event = null, $args = null) {
         if ($bean->estado==1) {
-            $GLOBALS['log']->fatal('Entra LH de Analizate');
+            global $app_list_strings;
+            //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
+            $urlFinanciera = $app_list_strings['analizate_url_list'][$bean->empresa];
+            //$GLOBALS['log']->fatal('Entra LH de Analizate');
             //file_put_contents($archivo, $texto_archivo, FILE_APPEND | LOCK_EX);
             $cuenta = BeanFactory::retrieveBean('Accounts', $bean->anlzt_analizate_accountsaccounts_ida);
             $correo = $cuenta->email1;
@@ -19,13 +22,12 @@ class analizate_hooks  {
             $rfc = $cuenta->rfc_c;
             $idCuenta = $cuenta->id;
 
-            $url = $bean->url_portal;
-            $GLOBALS['log']->fatal('Envio de correo a' . $full_name . '');
-            $GLOBALS['log']->fatal('>>>>' . $url . '<<<<');
+            //$GLOBALS['log']->fatal('Envio de correo a' . $full_name . '');
+            //$GLOBALS['log']->fatal('>>>>' . $url . '<<<<');
 
             $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $full_name . '</b>
       <br><br>Agradecemos de antemano su interés por colaborar con UNIFIN, para ello y como parte de nuestro proceso, le pedimos se complemente la información solicitada en el siguiente link.
-      <br><br><a id="downloadErrors" href="'. $url.'">Da Click Aquí</a>
+      <br><br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. $idCuenta. '&RFC_CIEC=' .$rfc.'">Da Click Aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p> 
             

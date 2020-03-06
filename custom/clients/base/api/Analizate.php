@@ -38,7 +38,7 @@ class Analizate extends SugarApi
     }
 
     public function ObtieneFinanciera($api, $args){
-        global $app_list_strings;
+
         $data=array();
         $data['estado']="";
         $data['fecha']="";
@@ -47,8 +47,7 @@ class Analizate extends SugarApi
         $data['url_documento']="";
         $data['url_portal']="";
         $idCuenta = $args['id'];
-        //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
-        $urlFinanciera = $app_list_strings['analizate_url_list'][1];
+
         //Cargar toda la informacion del bean, en este caso de la cuenta
         $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
         //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
@@ -65,12 +64,12 @@ class Analizate extends SugarApi
                     if ($data['fecha']==""){
                         $data['fecha']=$estados->fecha_actualizacion;
                         $data['estado']=$estados->estado;
-                        $data['url_portal']=$urlFinanciera.'&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
+                        $data['url_portal']='&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
                     }
                     if($estados->fecha_actualizacion>$data['fecha']){
                         $data['fecha']=$estados->fecha_actualizacion;
                         $data['estado']=$estados->estado;
-                        $data['url_portal']=$urlFinanciera.'&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
+                        $data['url_portal']='&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
                     }
 
                 }else{

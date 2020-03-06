@@ -1211,13 +1211,10 @@ where rfc_c = '{$bean->rfc_c}' and
     }
 
     public function RegistroAnalizate($bean=null, $event= null, $args= null){
-        global $app_list_strings;
-        //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
-        $urlFinanciera = $app_list_strings['analizate_url_list'][1];
         //Funcion para crear registro en la tabla ANLZT_analizate y relacion con la cuenta tipo Proveedor Creada
-        $GLOBALS['log']->fatal("Entra logic hook para crear registro Analizate");
-        $GLOBALS['log']->fatal($args['isUpdate']);
-        $url_portalFinanciera= $urlFinanciera.'&UUID='.$bean->id.'&RFC_CIEC='.$bean->rfc;
+        //$GLOBALS['log']->fatal("Entra logic hook para crear registro Analizate");
+        //$GLOBALS['log']->fatal($args['isUpdate']);
+        $url_portalFinanciera= '&UUID='.$bean->id.'&RFC_CIEC='.$bean->rfc_c;
 
         if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_c=="Proveedor" ||$bean->esproveedor_c==1)){
             //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
