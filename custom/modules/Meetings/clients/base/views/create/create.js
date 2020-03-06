@@ -349,13 +349,9 @@
                 errors['productos_c'] = errors['productos_c'] || {};
                 errors['productos_c'].required = true;
             }
-        }else{
+        }/*else{
             this.model.set("productos_c","");
-        }
+        }*/
         callback(null, fields, errors);
-
     },
-
-
-
-    })
+})
