@@ -91,7 +91,7 @@
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
                         if (data.UNI2_CTE_029_VerificaClienteTieneContratoResult._tieneContratos == true) {
-                            if (App.user.id != self.model.get('user_id_c') && App.user.id != self.model.get('user_id1_c') && App.user.id != self.model.get('user_id2_c')) {
+                            if (App.user.id != self.model.get('user_id_c') && App.user.id != self.model.get('user_id1_c') && App.user.id != self.model.get('user_id2_c') && App.user.id != self.model.get('user_id6_c') && App.user.id != self.model.get('user_id7_c')) {
                                 app.alert.show("Validar Contratos", {
                                     level: "error",
                                     title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC a Cliente con contratos existentes.",
@@ -229,6 +229,7 @@
         this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
+        this.get_analizate();
         //this.get_noviable();
 
 
@@ -904,6 +905,8 @@
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
+        //Oculta etiqueta de Analizate
+        this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
@@ -3367,20 +3370,20 @@
 
             var direccionesfaltantes = "";
             if (arregloindicadores.indexOf("2") == -1) {
-                direccionesfaltantes = direccionesfaltantes + 'Domicilio Fiscal<br>';
+                direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
             if (direccionesfaltantes != "") {
-                $('.select2-choices').css('border-color', 'red');
+                
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
                     messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
                 })
-                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
-                errors['account_direcciones_c'].required = true;
+                /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
+                this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
             }
             else {
-                $('.select2-choices').css('border-color', '');
+                this.$('#s2id_multiIndicador .select2-choices').css('border-color', '');
             }
             if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
@@ -3843,36 +3846,36 @@
             $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Fuera de Perfil" && $('.campo7nvl').select2('val') == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "1" && $('.campo7nvl').select2('val') == "") {
             $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Condiciones Financieras" && $('.campo19nvl').select2('val') == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "2" && $('.campo19nvl').select2('val') == "") {
             $('.campo19nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "No se encuentra interesado" && $('.campo25nvl').select2('val') == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "7" && $('.campo25nvl').select2('val') == "") {
             $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
             $('.campo10nvl').css('border-color', 'red');
             $('.campo13nvl').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != "") {
             $('.campo10nvl').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == "") {
             $('.campo13nvl').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "No tenemos el producto que requiere" && $('.campo16nvl').select2('val') == "") {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "4" && $('.campo16nvl').select2('val') == "") {
             $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text() == "No tenemos el producto que requiere" || $('.campo4nvl')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text() == "Otro" || $('.campo16nvl')[0].innerText.trim() == "Otro") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
+        if (($('.campo4nvl').select2('val') == "4" || $('.campo4nvl option:selected').text() == "4" || $('.campo4nvl')[0].innerText.trim() == "4") && ($('.campo16nvl').select2('val') == "4" || $('.campo16nvl option:selected').text() == "4" || $('.campo16nvl')[0].innerText.trim() == "4") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
             $('.campo22nvl').css('border-color', 'red');
             faltantesleasnv += 1;
         }
@@ -3898,36 +3901,36 @@
             $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Fuera de Perfil" && $('.campo8nvf').select2('val') == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "1" && $('.campo8nvf').select2('val') == "") {
             $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Condiciones Financieras" && $('.campo20nvf').select2('val') == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "2" && $('.campo20nvf').select2('val') == "") {
             $('.campo20nvf').find('.select2-choice').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "No se encuentra interesado" && $('.campo26nvf').select2('val') == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "7" && $('.campo26nvf').select2('val') == "") {
             $('.campo26nvf').find('.select2-choice').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == "") {
             $('.campo11nvf').css('border-color', 'red');
             $('.campo14nvf').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != "") {
             $('.campo11nvf').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == "") {
             $('.campo14nvf').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "No tenemos el producto que requiere" && $('.campo17nvf').select2('val') == "") {
+        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "4" && $('.campo17nvf').select2('val') == "") {
             $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
             faltantesfactnv += 1;
         }
-        if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text() == "No tenemos el producto que requiere" || $('.campo5nvf')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text() == "Otro" || $('.campo17nvf')[0].innerText.trim() == "Otro") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
+        if (($('.campo5nvf').select2('val') == "4" || $('.campo5nvf option:selected').text() == "4" || $('.campo5nvf')[0].innerText.trim() == "4") && ($('.campo17nvf').select2('val') == "4" || $('.campo17nvf option:selected').text() == "4" || $('.campo17nvf')[0].innerText.trim() == "4") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
             $('.campo23nvf').css('border-color', 'red');
             faltantesfactnv += 1;
         }
@@ -3953,36 +3956,36 @@
             $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Fuera de Perfil" && $('.campo9nvca').select2('val') == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "1" && $('.campo9nvca').select2('val') == "") {
             $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Condiciones Financieras" && $('.campo21nvca').select2('val') == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "2" && $('.campo21nvca').select2('val') == "") {
             $('.campo21nvca').find('.select2-choice').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "No se encuentra interesado" && $('.campo27nvca').select2('val') == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "7" && $('.campo27nvca').select2('val') == "") {
             $('.campo27nvca').find('.select2-choice').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == "") {
             $('.campo12nvca').css('border-color', 'red');
             $('.campo15nvca').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != "") {
             $('.campo12nvca').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == "") {
             $('.campo15nvca').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "No tenemos el producto que requiere" && $('.campo18nvca').select2('val') == "") {
+        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "4" && $('.campo18nvca').select2('val') == "") {
             $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
             faltantescanv += 1;
         }
-        if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" || $('.campo6nvca option:selected').text() == "No tenemos el producto que requiere" || $('.campo6nvca')[0].innerText.trim() == "No tenemos el producto que requiere") && ($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text() == "Otro" || $('.campo18nvca')[0].innerText.trim() == "Otro") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
+        if (($('.campo6nvca').select2('val') == "4" || $('.campo6nvca option:selected').text() == "4" || $('.campo6nvca')[0].innerText.trim() == "4") && ($('.campo18nvca').select2('val') == "4" || $('.campo18nvca option:selected').text() == "4" || $('.campo18nvca')[0].innerText.trim() == "4") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
             $('.campo24nvca').css('border-color', 'red');
             faltantescanv += 1;
         }
@@ -4921,6 +4924,25 @@
                     }),
                 })
             }
+        }
+    },
+
+    get_analizate: function () {
+        //Extiende This
+        this.Financiera = [];
+        //this.Credit = [];
+        var id = this.model.id;
+        //Forma Petición de datos
+        if (id != '' && id != undefined && id != null) {
+            //Ejecuta petición ResumenCliente
+
+            var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null,);
+            app.api.call('read', url, {}, {
+                success: _.bind(function (data) {
+                    cont_nlzt.Financiera = data;
+                    cont_nlzt.render();
+                }, contexto_cuenta)
+            });
         }
     },
 	

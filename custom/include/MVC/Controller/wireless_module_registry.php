@@ -1,7 +1,10 @@
 <?php
-// created: 2018-11-13 08:57:56
+// created: 2020-02-19 11:09:49
 $wireless_module_registry = array (
   'Accounts' => 
+  array (
+  ),
+  'Leads' => 
   array (
   ),
   'Opportunities' => 

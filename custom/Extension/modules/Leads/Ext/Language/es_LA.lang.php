@@ -78,3 +78,4 @@ $mod_strings['NTC_REMOVE_CONFIRMATION'] = '¿Está seguro de que desea quitar es
 $mod_strings['LBL_ID'] = 'ID Sugar';
 $mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.';
 $mod_strings['LBL_DETALLE_PLATAFORMA'] = 'Detalle Plataforma';
+$mod_strings['LBL_DETALLE_PLATAFORMA_C'] = 'GCLID';

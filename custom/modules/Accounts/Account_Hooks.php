@@ -1210,4 +1210,26 @@ where rfc_c = '{$bean->rfc_c}' and
       }
     }
 
+    public function RegistroAnalizate($bean=null, $event= null, $args= null){
+        //Funcion para crear registro en la tabla ANLZT_analizate y relacion con la cuenta tipo Proveedor Creada
+        //$GLOBALS['log']->fatal("Entra logic hook para crear registro Analizate");
+        //$GLOBALS['log']->fatal($args['isUpdate']);
+        $url_portalFinanciera= '&UUID='.$bean->id.'&RFC_CIEC='.$bean->rfc_c;
+
+        if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_c=="Proveedor" ||$bean->esproveedor_c==1)){
+            //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
+            $relacion = BeanFactory::newBean('ANLZT_analizate');
+            $relacion->anlzt_analizate_accountsaccounts_ida=$bean->id;
+            $relacion->empresa=1;
+            $relacion->estado=1;
+            $relacion->tipo=1;
+            $relacion->fecha_actualizacion=$bean->date_entered;
+            $relacion->url_portal=$url_portalFinanciera;
+            $relacion->assigned_user_id=$bean->user_id_c;
+            $relacion->load_relationship('anlzt_analizate_accounts');
+            $relacion->anlzt_analizate_accounts->add($bean->id);
+            $relacion->save();
+        }
+    }
+
 }
