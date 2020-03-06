@@ -53,7 +53,7 @@
         "onelogin/php-saml" : "2.10.5",
         "aws/aws-sdk-php": "2.7.7",
         "etechnika/idna-convert" : "1.0.*",
-        "phpmailer/phpmailer" : "v5.2.22",
+        "phpmailer/phpmailer" : "v5.2.27",
         "ircmaxell/password-compat": "v1.0.4",
         "symfony/security-core": "v2.7.1",
         "symfony/security-csrf": "v2.7.1",
