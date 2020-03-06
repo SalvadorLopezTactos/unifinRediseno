@@ -106,7 +106,7 @@ class Analizate extends SugarApi
         $GLOBALS['log']->fatal("Entra Endpoint ObtieneDocumento");
         $GLOBALS['log']->fatal("Enlace: ". $Enlace);
         $Enlace = base64_decode($Enlace);
-        $GLOBALS['log']->fatal("Enlace: ". $Enlace);
+        //$GLOBALS['log']->fatal("Enlace: ". $Enlace);
 
         $ch = curl_init();
 
@@ -116,7 +116,7 @@ class Analizate extends SugarApi
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);
-        $GLOBALS['log']->fatal("Resultado: ". $result);
+        //$GLOBALS['log']->fatal("Resultado: ". $result);
         return $result;
 
     }
