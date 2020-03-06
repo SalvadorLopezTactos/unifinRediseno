@@ -103,8 +103,8 @@ class Analizate extends SugarApi
     public function  ObtieneDocumento($api, $args){
 
         $Enlace = $args['url_documento'];
-        $GLOBALS['log']->fatal("Entra Endpoint ObtieneDocumento");
-        $GLOBALS['log']->fatal("Enlace: ". $Enlace);
+        //$GLOBALS['log']->fatal("Entra Endpoint ObtieneDocumento");
+        //$GLOBALS['log']->fatal("Enlace: ". $Enlace);
         $Enlace = base64_decode($Enlace);
         //$GLOBALS['log']->fatal("Enlace: ". $Enlace);
 
