@@ -164,7 +164,8 @@
          */
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
 
-
+        //Oculta campo Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -572,8 +573,8 @@
 		
 		/*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
 		this.model.on('change:tipo_registro_c',this.check_factoraje, this);
-
-
+        //Ocultar panel Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
     },
 
     /** BEGIN CUSTOMIZATION:
