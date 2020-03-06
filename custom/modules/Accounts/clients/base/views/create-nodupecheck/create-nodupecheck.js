@@ -389,6 +389,8 @@
         Se oculta panel NPS,al crear cuenta desde el modulo Rel_Relacion".
          */
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+        //Oculta campo Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {

@@ -164,7 +164,8 @@
          */
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
 
-
+        //Oculta campo Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
         /*
          AF: 11/01/18
          Merge create-create-actions.js
