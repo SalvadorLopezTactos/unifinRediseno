@@ -298,7 +298,6 @@ class Meetings_Hooks
                  and deleted=0
     ";
     $queryResult = $db->getOne($query);
-
     //Valida que el usuario no sea del centro de prospección
     //Agente telefónico-27, Ejecutivo estrategia comercial-19
     $flag=false;
@@ -306,15 +305,16 @@ class Meetings_Hooks
     $puesto = $beanUser->puestousuario_c;
     $lista = $app_list_strings['prospeccion_c_list'];
     $listatext=array();
-
     foreach ($lista as $key => $newList){
       $listatext[]=$key;
       if($key == $puesto){
         $flag=true;
       }
     }
+    if($puesto == 27 && strstr($bean->productos_c,'8')) $flag=false;
+    $GLOBALS['log']->fatal("Bandera:".$flag);
     //Evaluación de resultado para crear reunión
-    if ($queryResult==0 && $flag==false) {
+    if($queryResult==0 && !$flag) {
       $GLOBALS['log']->fatal('TCT - RelationAdd - Agrega nueva reunión para usuario: ' . $idUsuario);
       //Genera copia de reunión
       $reunionInvitado = BeanFactory::newBean('Meetings');
@@ -350,9 +350,9 @@ class Meetings_Hooks
         }
       }
 	 
-	 //Agrega valores y guarda reunión
-	  $reunionInvitado->parent_meeting_c = $bean->id;
-	  $reunionInvitado->created_by = $current_user->id;
+      //Agrega valores y guarda reunión
+	    $reunionInvitado->parent_meeting_c = $bean->id;
+	    $reunionInvitado->created_by = $current_user->id;
       $reunionInvitado->modified_user_id = $current_user->id;
       $reunionInvitado->assigned_user_id = $idUsuario;
       $reunionInvitado->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
@@ -360,13 +360,13 @@ class Meetings_Hooks
       $reunionInvitado->status = 'Planned';
       $reunionInvitado->save();
 	  
-	  /******************
-	  En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
-	  ****************/
-		if ($reunionInvitado->parent_type == 'Leads'){
-			$reunionInvitado->load_relationship('leads');
-			$reunionInvitado->leads->add($reunionInvitado->parent_id);
-		}
+  	  /******************
+  	  En caso de Lead se agrego la relación adicional por el tipo de relación mucho a muchos
+  	  ****************/
+  		if ($reunionInvitado->parent_type == 'Leads'){
+  			$reunionInvitado->load_relationship('leads');
+  			$reunionInvitado->leads->add($reunionInvitado->parent_id);
+  		}
 	
       //Agrega objetivos
       if($bean->load_relationship('meetings_minut_objetivos_1')) {
