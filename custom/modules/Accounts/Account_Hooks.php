@@ -1211,10 +1211,14 @@ where rfc_c = '{$bean->rfc_c}' and
     }
 
     public function RegistroAnalizate($bean=null, $event= null, $args= null){
+        global $app_list_strings;
+        //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
+        $urlFinanciera = $app_list_strings['analizate_url_list'][1];
         //Funcion para crear registro en la tabla ANLZT_analizate y relacion con la cuenta tipo Proveedor Creada
         $GLOBALS['log']->fatal("Entra logic hook para crear registro Analizate");
         $GLOBALS['log']->fatal($args['isUpdate']);
-        $url_portal= "https://www.google.com.mx/";
+        $url_portalFinanciera= $urlFinanciera.'&UUID='.$bean->id.'&RFC_CIEC='.$bean->rfc;
+
         if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_c=="Proveedor" ||$bean->esproveedor_c==1)){
             //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
             $relacion = BeanFactory::newBean('ANLZT_analizate');
@@ -1223,7 +1227,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $relacion->estado=1;
             $relacion->tipo=1;
             $relacion->fecha_actualizacion=$bean->date_entered;
-            $relacion->url_portal=$url_portal;
+            $relacion->url_portal=$url_portalFinanciera;
             $relacion->assigned_user_id=$bean->user_id_c;
             $relacion->load_relationship('anlzt_analizate_accounts');
             $relacion->anlzt_analizate_accounts->add($bean->id);

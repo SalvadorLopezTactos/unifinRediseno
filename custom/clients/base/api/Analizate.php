@@ -19,6 +19,13 @@ class Analizate extends SugarApi
                 'method' => 'ObtieneFinanciera',
                 'shortHelp' => 'Obtener registros de la tabla anlzt_analizate para su presentación en Custom Field Analizate',
             ),
+            'ObtieneURL' => array(
+                'reqType' => 'GET',
+                'path' => array('ObtieneDocumento', '?'),
+                'pathVars' => array('', 'url_documento'),
+                'method' => 'ObtieneDocumento',
+                'shortHelp' => 'Obtiene la data del documento desde Alfresco para su conversion y descarga',
+            ),
             'ObtieneCredit' => array(
                 'reqType' => 'GET',
                 'path' => array('ObtieneCredit','?'),
@@ -31,7 +38,7 @@ class Analizate extends SugarApi
     }
 
     public function ObtieneFinanciera($api, $args){
-
+        global $app_list_strings;
         $data=array();
         $data['estado']="";
         $data['fecha']="";
@@ -40,6 +47,8 @@ class Analizate extends SugarApi
         $data['url_documento']="";
         $data['url_portal']="";
         $idCuenta = $args['id'];
+        //Valor de la lista en posicion 1 corresponde a Financiera, 2 a Credit
+        $urlFinanciera = $app_list_strings['analizate_url_list'][1];
         //Cargar toda la informacion del bean, en este caso de la cuenta
         $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
         //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
@@ -56,12 +65,12 @@ class Analizate extends SugarApi
                     if ($data['fecha']==""){
                         $data['fecha']=$estados->fecha_actualizacion;
                         $data['estado']=$estados->estado;
-                        $data['url_portal']=$estados->url_portal;
+                        $data['url_portal']=$urlFinanciera.'&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
                     }
                     if($estados->fecha_actualizacion>$data['fecha']){
                         $data['fecha']=$estados->fecha_actualizacion;
                         $data['estado']=$estados->estado;
-                        $data['url_portal']=$estados->url_portal;
+                        $data['url_portal']=$urlFinanciera.'&UUID='.$beanCuenta->id.'&RFC_CIEC='.$beanCuenta->rfc;
                     }
 
                 }else{
@@ -88,6 +97,27 @@ class Analizate extends SugarApi
 
         //Termina iteracion
         return $data;
+
+    }
+
+    public function  ObtieneDocumento($api, $args){
+
+        $Enlace = $args['url_documento'];
+        $GLOBALS['log']->fatal("Entra Endpoint ObtieneDocumento");
+        $GLOBALS['log']->fatal("Enlace: ". $Enlace);
+        $Enlace = base64_decode($Enlace);
+        $GLOBALS['log']->fatal("Enlace: ". $Enlace);
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $Enlace);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+        $GLOBALS['log']->fatal("Resultado: ". $result);
+        return $result;
 
     }
 }
