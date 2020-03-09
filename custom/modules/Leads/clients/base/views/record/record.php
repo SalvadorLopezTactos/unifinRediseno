@@ -327,12 +327,7 @@ array (
               38 => 
               array (
                 'name' => 'assigned_user_name',
-              ),
-              39 => 
-              array (
-                'name' => 'detalle_plataforma_c',
-                'studio' => 'visible',
-                'label' => 'LBL_DETALLE_PLATAFORMA_C',
+                'span' => 12,
               ),
             ),
           ),
