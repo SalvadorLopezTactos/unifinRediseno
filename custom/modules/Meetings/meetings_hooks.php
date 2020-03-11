@@ -391,7 +391,7 @@ class Meetings_Hooks
     $updateResult = $db->query($update);
 
       $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
-      if ($beanUser->tipodeproducto_c!='27') {
+      if ($beanUser->puestousuario_c!='27') {
           //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
           $actualizaproductos = "update meetings_cstm
                         inner join
