@@ -30,7 +30,9 @@ class altaLeadServices extends SugarApi
     {
         $response_Services = ["lead" => array(), "asociados" => array()];
 // Valida que regimen fiscal no este vacio
-        if (!empty($args['lead']['regimen_fiscal_c'])) {
+        $os = array("1", "2", "3");
+
+        if (!empty($args['lead']['regimen_fiscal_c']) && (in_array($args['lead']['regimen_fiscal_c'], $os,true))) {
             /** Agregamos atributos a cada lead y asociado */
             $obj_leads = $this->agrega_atributos($args);
 
@@ -138,7 +140,7 @@ class altaLeadServices extends SugarApi
                 $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
-               $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
                 $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
@@ -296,7 +298,7 @@ class altaLeadServices extends SugarApi
                 $bean_Lead->detalle_origen_c = "Cartera Promotores";
                 break;
             case 11:
-                $bean_Lead->detalle_origen_c = "Recomendación";
+                $bean_Lead->detalle_origen_c = "Recomendacion";
                 break;
             default:
                 $bean_Lead->detalle_origen_c = $dataOrigen['detalle_origen_c'];
@@ -354,10 +356,10 @@ class altaLeadServices extends SugarApi
         }
 
         $punto_contacto = $dataOrigen['punto_contacto_c'];
-        switch ($punto_contacto){
+        switch ($punto_contacto) {
 
             case 1:
-                $bean_Lead->punto_contacto_c ="Portal";
+                $bean_Lead->punto_contacto_c = "Portal";
 
                 break;
             case 2:
