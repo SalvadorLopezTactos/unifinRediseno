@@ -195,17 +195,24 @@ $hook_array['before_save'][] = Array(
     'asignaSinGestor'
 );
 $hook_array['before_save'][] = Array(
-    14,
+    15,
     'Valida Id Cliente Uniclick',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
     'idUniclick'
 );
+$hook_array['before_save'][] = Array(
+    16,
+    'Edita - Guarda valores de la cuenta y crea registro en ANLZT_analizate',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'EditaAnalizate'
+);
 
 $hook_array['after_save'][] = Array(
     12,
-    'Guarda valores de la cuenta y crea registro en ANLZT_analizate',
+    'Nuevo - Guarda valores de la cuenta y crea registro en ANLZT_analizate',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
-    'RegistroAnalizate'
+    'NuevoAnalizate'
 );

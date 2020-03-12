@@ -30,8 +30,14 @@ class altaLeadServices extends SugarApi
     {
         $response_Services = ["lead" => array(), "asociados" => array()];
 // Valida que regimen fiscal no este vacio
-        if (!empty($args['lead']['regimen_fiscal_c'])) {
+        $os = array("1", "2", "3");
+
+# OB003 Ajuste, tipo regimen fiscal valido
+        if (!empty($args['lead']['regimen_fiscal_c']) && (in_array($args['lead']['regimen_fiscal_c'], $os, true))) {
+
+
             /** Agregamos atributos a cada lead y asociado */
+
             $obj_leads = $this->agrega_atributos($args);
 
 
@@ -45,6 +51,7 @@ class altaLeadServices extends SugarApi
             } else {
 
                 if (count($args['asociados']) > 0) {
+
                     $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
 
                     /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
@@ -53,17 +60,33 @@ class altaLeadServices extends SugarApi
                         $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
                     }
 
-                    $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
+                    /** Validamos que ambos leads esten cone estatus 200  */ # pendiente de validación OB001
 
-                    if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
+                    //$GLOBALS['log']->fatal(print_r($obj_leads, true));
 
-                        for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
-                            $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
+                    if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
+                            && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success') {
+
+                        /** Proceso de Guardado */
+
+                        $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
+
+                        if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
+
+                            for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
+                                $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
+                            }
                         }
-                    }
-                    // Actualizamos el campo asignado a de cada registro nuevo
+                        // Actualizamos el campo asignado a de cada registro nuevo
 
-                    $this->get_asignado($response_Services, "3");
+                        $this->get_asignado($response_Services, "3");
+                    } else {
+                        $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "");
+                        $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "");
+
+                    }
+
+
                 } else {
                     $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "");
                 }
@@ -138,7 +161,7 @@ class altaLeadServices extends SugarApi
                 $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
-               $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
                 $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
@@ -261,9 +284,9 @@ class altaLeadServices extends SugarApi
         $bean_Lead->nombre_empresa_c = $dataOrigen['nombre_empresa_c'];
         $bean_Lead->apellido_paterno_c = $dataOrigen['apellido_paterno_c'];
         $bean_Lead->apellido_materno_c = $dataOrigen['apellido_materno_c'];
-        $bean_Lead->origen_c = $dataOrigen['origen_c'];
+        $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
 
-        $detalle_origen = $dataOrigen['detalle_origen_c'];
+        $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
         switch ($detalle_origen) {
             case 1:
                 $bean_Lead->detalle_origen_c = "Base de datos";
@@ -296,7 +319,7 @@ class altaLeadServices extends SugarApi
                 $bean_Lead->detalle_origen_c = "Cartera Promotores";
                 break;
             case 11:
-                $bean_Lead->detalle_origen_c = "Recomendación";
+                $bean_Lead->detalle_origen_c = "Recomendacion";
                 break;
             default:
                 $bean_Lead->detalle_origen_c = $dataOrigen['detalle_origen_c'];
@@ -354,10 +377,10 @@ class altaLeadServices extends SugarApi
         }
 
         $punto_contacto = $dataOrigen['punto_contacto_c'];
-        switch ($punto_contacto){
+        switch ($punto_contacto) {
 
             case 1:
-                $bean_Lead->punto_contacto_c ="Portal";
+                $bean_Lead->punto_contacto_c = "Portal";
 
                 break;
             case 2:

@@ -312,7 +312,6 @@ class Meetings_Hooks
       }
     }
     if($puesto == 27 && strstr($bean->productos_c,'8')) $flag=false;
-    $GLOBALS['log']->fatal("Bandera:".$flag);
     //Evaluación de resultado para crear reunión
     if($queryResult==0 && !$flag) {
       $GLOBALS['log']->fatal('TCT - RelationAdd - Agrega nueva reunión para usuario: ' . $idUsuario);
@@ -338,7 +337,8 @@ class Meetings_Hooks
         'check_out_longitude_c',
         'check_out_time_c',
         'check_in_platform_c',
-        'check_out_platform_c'
+        'check_out_platform_c',
+        'productos_c'
       );
       //Iteración de campos por copiar
       foreach($bean->field_defs as $def)
@@ -390,10 +390,10 @@ class Meetings_Hooks
     ";
     $updateResult = $db->query($update);
 
-      $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
-      if ($beanUser->puestousuario_c!='27') {
-          //$GLOBALS['log']->fatal("Actualiza valor campo Producto--");
-          $actualizaproductos = "update meetings_cstm
+/*    $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+    if ($beanUser->puestousuario_c!='27') {
+    $GLOBALS['log']->fatal("Actualiza valor campo Producto--");
+    $actualizaproductos = "update meetings_cstm
                         inner join
                         (select
                         parent_meeting_c id,
@@ -406,9 +406,9 @@ class Meetings_Hooks
                         set meetings_cstm.productos_c = parentM.productos
                         where parentM.productos !=''
                         ;";
-          $updateResult = $db->query($actualizaproductos);
-          //$GLOBALS['log']->fatal($actualizaproductos);
-      }
+    $updateResult = $db->query($actualizaproductos);
+    $GLOBALS['log']->fatal("actualizaproductos".$actualizaproductos);
+    }*/
   }
 
   /*
@@ -512,37 +512,37 @@ class Meetings_Hooks
       }
   }
 
-    function guardaproductos ($bean, $event, $args){
+  function guardaproductos ($bean, $event, $args){
         //Función para guardar el tipo de producto Principal de los invitados a la Reunión (padre)
+        global $db;
         $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
-        if ($beanUser->puestousuario_c!='27'){
-
-            $bean->productos_c = '^'.$beanUser->tipodeproducto_c.'^';
+        $bean->productos_c = '^'.$beanUser->tipodeproducto_c.'^';
+//      if ($beanUser->puestousuario_c!='27'){
+//        if(!strstr($bean->productos_c,$beanUser->tipodeproducto_c)) $bean->productos_c = $bean->productos_c.',^'.$beanUser->tipodeproducto_c.'^';
             if ($bean->parent_meeting_c) {
-                $beanparentmeeting = BeanFactory:: getBean('Meetings', $bean->parent_meeting_c);
-                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
-                if ($beanUserPadre->puestousuario_c!='27'){
+                $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c);
+//                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
+//                if ($beanUserPadre->puestousuario_c!='27'){
+                    $Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";
+                    $Result=$db->query($Update);
                     $saveproductos=array();
                     $valorinicial=$beanparentmeeting->productos_c;
                     //$GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
                     if ($valorinicial==""){
-                        $beanparentmeeting->productos_c =$bean->productos_c;
+                        $beanparentmeeting->productos_c=$bean->productos_c;
                         $valorinicial=$beanparentmeeting->productos_c;
                     }else{
-                        $beanparentmeeting->productos_c = $beanparentmeeting->productos_c .','. $bean->productos_c;
+                        $beanparentmeeting->productos_c = $beanparentmeeting->productos_c .','.$bean->productos_c;
                     }
                     $saveproductos=explode(",", $beanparentmeeting->productos_c);
                     $valoresunicos=array_unique($saveproductos);
                     $valorupdate=implode(",",$valoresunicos);
-                    //$GLOBALS['log']->fatal("Valor update: '.$valorupdate.'");
-                    //$GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
-
+//                    $GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
                     $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
-                }
-
+                    $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$beanparentmeeting->id}'";
+                    $Result=$db->query($Update);
+//                }
             }
-        }
-
-    }
-
+//      }
+  }
 }
