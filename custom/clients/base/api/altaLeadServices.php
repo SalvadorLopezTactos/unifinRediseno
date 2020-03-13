@@ -408,7 +408,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->macrosector_c = $dataOrigen['macrosector_c'];
         $bean_Lead->ventas_anuales_c = $dataOrigen['ventas_anuales_c'];
         $bean_Lead->zona_geografica_c = $dataOrigen['zona_geografica_c'];
-        $bean_Lead->email = $dataOrigen['email'];
+        $bean_Lead->email1 = $dataOrigen['email'];
         $bean_Lead->phone_mobile = $dataOrigen['phone_mobile'];
         $bean_Lead->phone_home = $dataOrigen['phone_home'];
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
