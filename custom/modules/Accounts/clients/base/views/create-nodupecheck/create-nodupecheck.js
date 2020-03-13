@@ -297,6 +297,8 @@
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
+        //Ocultar panel Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
     },
 
     _render: function () {
@@ -387,6 +389,8 @@
         Se oculta panel NPS,al crear cuenta desde el modulo Rel_Relacion".
          */
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+        //Oculta campo Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {

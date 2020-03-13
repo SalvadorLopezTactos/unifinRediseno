@@ -132,55 +132,61 @@ class leads_validateString
     public function ExistenciaEnCuentas($bean = null, $event = null, $args = null)
     {
 
-// omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
-        if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
-            //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-            // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
-            //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
-            $sql = new SugarQuery();
-            $sql->select(array('id', 'clean_name'));
-            $sql->from(BeanFactory::newBean('Accounts'), array('team_security' => false));
-            $sql->where()->equals('clean_name', $bean->clean_name_c);
-            $sql->where()->notEquals('id', $bean->id);
+        $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO " . $GLOBALS['service']->platform);
 
-            $result = $sql->execute();
-            $count = count($result);
+        if ($GLOBALS['service']->platform != "api" && $GLOBALS['service']->platform != "unifinAPI") {
+            // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
+            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
+                //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+                // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+                //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
+                $sql = new SugarQuery();
+                $sql->select(array('id', 'clean_name'));
+                $sql->from(BeanFactory::newBean('Accounts'), array('team_security' => false));
+                $sql->where()->equals('clean_name', $bean->clean_name_c);
+                $sql->where()->notEquals('id', $bean->id);
 
-            $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
-            $sqlLead = new SugarQuery();
-            $sqlLead->select(array('id', 'clean_name_c'));
-            $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
-            $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
-            $sqlLead->where()->notEquals('id', $bean->id);
-            $resultLead = $sqlLead->execute();
-            $countLead = count($resultLead);
+                $result = $sql->execute();
+                $count = count($result);
 
-            $GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
+                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
+                $sqlLead = new SugarQuery();
+                $sqlLead->select(array('id', 'clean_name_c'));
+                $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
+                $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
+                $sqlLead->where()->notEquals('id', $bean->id);
+                $resultLead = $sqlLead->execute();
+                $countLead = count($resultLead);
+
+                $GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
 
 
-            if ($count > 0 || $countLead > 0) {
+                if ($count > 0 || $countLead > 0) {
 
-                if ($_REQUEST['module'] != 'Import') {
-                    throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
+                    if ($_REQUEST['module'] != 'Import') {
+                        throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
+                    }
+                    {
+                        $bean->deleted = 1;
+                        $bean->resultado_de_carga_c = 'Registro Duplicado';
+                    }
+
+                } else {
+                    $bean->resultado_de_carga_c = 'Registro Exitoso';
                 }
-                {
-                    $bean->deleted = 1;
-                    $bean->resultado_de_carga_c = 'Registro Duplicado';
-                }
+                $fechaCarga = date("Ymd");
+                //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
+
+                $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $_REQUEST['module'] == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
+
 
             } else {
-                $bean->resultado_de_carga_c = 'Registro Exitoso';
+                //  $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
+
             }
-            $fechaCarga = date("Ymd");
-            //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
-
-            $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $_REQUEST['module'] == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
-
-
-        } else {
-            //  $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
-
         }
+
+
         //$GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
     }
 
