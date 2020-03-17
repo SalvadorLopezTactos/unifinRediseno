@@ -5,7 +5,7 @@
  */
 $viewdefs['Home']['base']['menu']['header'][] = array(
     'route'=>'#bwc/index.php?entryPoint=operacionesCRM',
-    'label' =>'Operaciones CRM',
+    'label' =>'Gestión de firmas',
     'acl_module'=>'Home',
     'icon' => 'fa-table',
 );

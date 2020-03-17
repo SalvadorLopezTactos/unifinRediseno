@@ -8,11 +8,14 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once("custom/Levementum/UnifinAPI.php");
-
-$objectGuid="2cd81b4b-28a5-4178-9752-b154abdb2642";
-
-//$host="https://unifin-dev.outsystemsenterprise.com//Database/rest/Security/CreateToken";
-$host="https://unifin-dev.outsystemsenterprise.com//Database/rest/Security/CreateToken?ObjectGuid=2cd81b4b-28a5-4178-9752-b154abdb2642";
+global $current_user;
+global $sugar_config;
+//$objectGuid="2cd81b4b-28a5-4178-9752-b154abdb2642";
+//Obteniendo id desde el uuario actual
+$url=$sugar_config['outsystems_url'];
+$objectGuid=$current_user->id_active_directory_c;
+//$host="https://unifin-dev.outsystemsenterprise.com//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
+$host=$url."//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
 
 $resultado=callPostAPI("POST",$host,"");
 $token=$resultado['Token'];
@@ -20,7 +23,7 @@ echo '<!DOCTYPE html>
 <html>
 <body>
 
-<iframe src="https://unifin-dev.outsystemsenterprise.com/OperacionesCRM/?token='.$token.'" style="width:100%;height: 100%;position: absolute;"></iframe>
+<iframe src="'.$url.'/OperacionesCRM/?token='.$token.'" style="width:100%;height: 100%;position: absolute;"></iframe>
 
 </body>
 </html>';
