@@ -1249,5 +1249,58 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->anlzt_analizate_accounts->add($bean->id);
         $relacion->save();
     }
+	
+	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
+        //Se ejecuta para creación productos para nuevos registros(cuentas):
+        /* Dev: Erick de JEsus
+        * Tipo de cuenta = Todas
+        */
+		global $current_user;
+		$beanprod = null;
+        //$GLOBALS['log']->fatal($event);
+		//$GLOBALS['log']->fatal($args);
+		$module = 'uni_Productos';
+		$key_productos = array('1','4','3','6','8');
+		$name_productos = array('-LEASING','-FACTORAJE','-CREDITO AUTOMOTRIZ','-FLEET','-UNICLICK');
+		$count = count($name_productos);
+		$current_prod = null;
+        if (!$args['isUpdate']){
+			
+			for ($i = 0; $i < $count; $i++) {
+				//$current_prod = explode("," , str_replace("^", "", $current_user->productos_c));
+				//$GLOBALS['log']->fatal($current_prod);
+
+				$beanprod = BeanFactory::newBean($module);
+				$beanprod->name = $bean->name.$name_productos[$i];
+				$beanprod->tipo_producto = $key_productos[$i];
+				
+				switch ($key_productos[$i]) {
+					case '1':
+						$beanprod->assigned_user_id = $bean->user_id_c;
+						break;
+					case '4':
+						$beanprod->assigned_user_id = $bean->user_id1_c;
+						break;
+					case '3':
+						$beanprod->assigned_user_id = $bean->user_id2_c;
+						break;
+					case '6':
+						$beanprod->assigned_user_id = $bean->user_id6_c;
+						break;
+					case '8':
+						$beanprod->assigned_user_id = $bean->user_id7_c;
+						break;
+				}
+				
+				$beanprod->save();
+				
+				$bean->load_relationship('accounts_uni_productos_1');
+				$bean->accounts_uni_productos_1->add($beanprod->id);
+				
+				$beanprod = null;
+			}
+        }
+    }
+
 
 }

@@ -216,3 +216,11 @@ $hook_array['after_save'][] = Array(
     'Account_Hooks',
     'NuevoAnalizate'
 );
+
+$hook_array['after_save'][] = Array(
+    14,
+    'Nuevo - Crea productos a una nueva cuenta',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'NuevaCuentaProductos'
+);
