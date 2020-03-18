@@ -102,6 +102,7 @@ class ResumenClienteAPI extends SugarApi
             "color" => $Azul);
         //Leasing
         $arr_principal['leasing'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
             "fecha_vencimiento" => "",//más proxima
             "fecha_completa_vencimiento" => "",
@@ -115,6 +116,7 @@ class ResumenClienteAPI extends SugarApi
             "color" => "");
         //Factoraje
         $arr_principal['factoring'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
             "fecha_vencimiento" => "",
             "fecha_completa_vencimiento" => "",
@@ -127,6 +129,7 @@ class ResumenClienteAPI extends SugarApi
             "color" => "");
         //Crédito automotriz
         $arr_principal['credito_auto'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
             "fecha_vencimiento" => "",
             "fecha_completa_vencimiento" => "",
@@ -139,12 +142,14 @@ class ResumenClienteAPI extends SugarApi
             "color" => "");
         //Fleet
         $arr_principal['fleet'] = array("linea_aproximada" => "",
+            "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
             "numero_vehiculos" => "",
             "promotor" => "",
             "color" => "");
         //Crédito SOS
         $arr_principal['credito_sos'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "fecha_pago" => "",
@@ -654,6 +659,51 @@ class ResumenClienteAPI extends SugarApi
         }
 
         ############################
+        ## Recupera y procesa información de Productos
+        ############################
+        if ($beanPersona->load_relationship('accounts_uni_productos_1')) {
+            //Recupera Productos
+            $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
+            
+            foreach ($relateProduct as $product) { 
+                
+                $tipoProducto = $product->tipo_producto;
+                $statusProducto = $product->estatus_atencion;
+
+                switch ($tipoProducto) {
+
+                    case '1': //Leasing
+                        if ($statusProducto != '0'){
+                            $arr_principal['leasing']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
+                        }                        
+                        break;
+                    case '3': //Credito-Automotriz
+                        if ($statusProducto != '0'){
+                            $arr_principal['credito_auto']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
+                        }
+                        break;
+                    case '4': //Factoraje
+                        if ($statusProducto != '0'){
+                            $arr_principal['factoring']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
+                        }
+                        break;
+                    case '6': //Fleet
+                        if ($statusProducto != '0'){
+                            $arr_principal['fleet']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
+                        }
+                        break;
+                    case '7': //Credito SOS
+                        if ($statusProducto != '0'){
+                            $arr_principal['credito_sos']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
+                        }
+                        break;    
+                    default:                        
+                        break;
+                }
+            }
+        }
+
+        ############################
         ## Recupera alertas
         ############################
         //Forma petición
@@ -887,5 +937,3 @@ class ResumenClienteAPI extends SugarApi
     }
 
 }
-
-?>
