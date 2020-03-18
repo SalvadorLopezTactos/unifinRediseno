@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-02 12:08:55
+ // created: 2020-03-06 13:50:49
 
 $app_list_strings['medio_digital_list']=array (
   '' => '',
@@ -17,4 +17,14 @@ $app_list_strings['medio_digital_list']=array (
   'Prensa' => 'Prensa',
   'Revistas' => 'Revistas',
   'Espectaculares' => 'Espectaculares',
+  15 => 'Google Adwords',
+  16 => 'Landing Pages',
+  17 => 'Youtube',
+  18 => 'DuckDuckGo',
+  19 => 'Bing',
+  20 => 'Yahoo',
+  21 => 'Google Display',
+  22 => 'Instagram',
+  23 => 'Blog',
+  24 => 'Facebook Ads',
 );

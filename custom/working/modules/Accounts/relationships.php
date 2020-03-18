@@ -718,7 +718,6 @@ $relationships = array (
       array (
         'name' => 'id',
         'type' => 'id',
-        'len' => 36,
       ),
       'date_modified' => 
       array (
@@ -737,13 +736,11 @@ $relationships = array (
       array (
         'name' => 'document_id',
         'type' => 'id',
-        'len' => 36,
       ),
       'account_id' => 
       array (
         'name' => 'account_id',
         'type' => 'id',
-        'len' => 36,
       ),
     ),
     'indices' => 
@@ -791,11 +788,536 @@ $relationships = array (
     'readonly' => true,
     'relationship_name' => 'documents_accounts',
     'rhs_subpanel' => 'default',
-    'lhs_subpanel' => 'default',
+    'lhs_subpanel' => 'ForAccountsDocuments',
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
     'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'accounts_dire_direccion_1' => 
+  array (
+    'name' => 'accounts_dire_direccion_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_dire_direccion_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'dire_Direccion',
+        'rhs_table' => 'dire_direccion',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_dire_direccion_1_c',
+        'join_key_lhs' => 'accounts_dire_direccion_1accounts_ida',
+        'join_key_rhs' => 'accounts_dire_direccion_1dire_direccion_idb',
+      ),
+    ),
+    'table' => 'accounts_dire_direccion_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'accounts_dire_direccion_1accounts_ida' => 
+      array (
+        'name' => 'accounts_dire_direccion_1accounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'accounts_dire_direccion_1dire_direccion_idb' => 
+      array (
+        'name' => 'accounts_dire_direccion_1dire_direccion_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'accounts_dire_direccion_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'accounts_dire_direccion_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_dire_direccion_1accounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'accounts_dire_direccion_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_dire_direccion_1dire_direccion_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'dire_Direccion',
+    'rhs_table' => 'dire_direccion',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_dire_direccion_1_c',
+    'join_key_lhs' => 'accounts_dire_direccion_1accounts_ida',
+    'join_key_rhs' => 'accounts_dire_direccion_1dire_direccion_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_dire_direccion_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'accounts_opportunities_1' => 
+  array (
+    'name' => 'accounts_opportunities_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_opportunities_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Opportunities',
+        'rhs_table' => 'opportunities',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_opportunities_1_c',
+        'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
+        'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+      ),
+    ),
+    'table' => 'accounts_opportunities_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'accounts_opportunities_1accounts_ida' => 
+      array (
+        'name' => 'accounts_opportunities_1accounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'accounts_opportunities_1opportunities_idb' => 
+      array (
+        'name' => 'accounts_opportunities_1opportunities_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'accounts_opportunities_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'accounts_opportunities_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_opportunities_1accounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'accounts_opportunities_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_opportunities_1opportunities_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Opportunities',
+    'rhs_table' => 'opportunities',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_opportunities_1_c',
+    'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
+    'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_opportunities_1',
+    'rhs_subpanel' => 'ForAccountsOpportunities',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'accounts_tel_telefonos_1' => 
+  array (
+    'name' => 'accounts_tel_telefonos_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_tel_telefonos_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Tel_Telefonos',
+        'rhs_table' => 'tel_telefonos',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_tel_telefonos_1_c',
+        'join_key_lhs' => 'accounts_tel_telefonos_1accounts_ida',
+        'join_key_rhs' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+      ),
+    ),
+    'table' => 'accounts_tel_telefonos_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'accounts_tel_telefonos_1accounts_ida' => 
+      array (
+        'name' => 'accounts_tel_telefonos_1accounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'accounts_tel_telefonos_1tel_telefonos_idb' => 
+      array (
+        'name' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'accounts_tel_telefonos_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'accounts_tel_telefonos_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_tel_telefonos_1accounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'accounts_tel_telefonos_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_tel_telefonos_1tel_telefonos_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Tel_Telefonos',
+    'rhs_table' => 'tel_telefonos',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_tel_telefonos_1_c',
+    'join_key_lhs' => 'accounts_tel_telefonos_1accounts_ida',
+    'join_key_rhs' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_tel_telefonos_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'ag_agencias_accounts' => 
+  array (
+    'name' => 'ag_agencias_accounts',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'ag_agencias_accounts' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'AG_Agencias',
+        'rhs_table' => 'ag_agencias',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'ag_agencias_accounts_c',
+        'join_key_lhs' => 'ag_agencias_accountsaccounts_ida',
+        'join_key_rhs' => 'ag_agencias_accountsag_agencias_idb',
+      ),
+    ),
+    'table' => 'ag_agencias_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'ag_agencias_accountsaccounts_ida' => 
+      array (
+        'name' => 'ag_agencias_accountsaccounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'ag_agencias_accountsag_agencias_idb' => 
+      array (
+        'name' => 'ag_agencias_accountsag_agencias_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'ag_agencias_accountsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'ag_agencias_accounts_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'ag_agencias_accountsaccounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'ag_agencias_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'ag_agencias_accountsag_agencias_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'AG_Agencias',
+    'rhs_table' => 'ag_agencias',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'ag_agencias_accounts_c',
+    'join_key_lhs' => 'ag_agencias_accountsaccounts_ida',
+    'join_key_rhs' => 'ag_agencias_accountsag_agencias_idb',
+    'readonly' => true,
+    'relationship_name' => 'ag_agencias_accounts',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'emp_empleo_accounts' => 
+  array (
+    'name' => 'emp_empleo_accounts',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'emp_empleo_accounts' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'emp_empleo',
+        'rhs_table' => 'emp_empleo',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'emp_empleo_accounts_c',
+        'join_key_lhs' => 'emp_empleo_accountsaccounts_ida',
+        'join_key_rhs' => 'emp_empleo_accountsemp_empleo_idb',
+      ),
+    ),
+    'table' => 'emp_empleo_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'emp_empleo_accountsaccounts_ida' => 
+      array (
+        'name' => 'emp_empleo_accountsaccounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'emp_empleo_accountsemp_empleo_idb' => 
+      array (
+        'name' => 'emp_empleo_accountsemp_empleo_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'emp_empleo_accountsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'emp_empleo_accounts_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'emp_empleo_accountsaccounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'emp_empleo_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'emp_empleo_accountsemp_empleo_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'emp_empleo',
+    'rhs_table' => 'emp_empleo',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'emp_empleo_accounts_c',
+    'join_key_lhs' => 'emp_empleo_accountsaccounts_ida',
+    'join_key_rhs' => 'emp_empleo_accountsemp_empleo_idb',
+    'readonly' => true,
+    'relationship_name' => 'emp_empleo_accounts',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
     'from_studio' => false,
   ),
   'refba_referencia_bancaria_accounts' => 
@@ -897,6 +1419,313 @@ $relationships = array (
     'relationship_name' => 'refba_referencia_bancaria_accounts',
     'rhs_subpanel' => 'ForAccountsRefba_referencia_bancaria_accounts',
     'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'rel_relaciones_accounts' => 
+  array (
+    'name' => 'rel_relaciones_accounts',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'rel_relaciones_accounts' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Rel_Relaciones',
+        'rhs_table' => 'rel_relaciones',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'rel_relaciones_accounts_c',
+        'join_key_lhs' => 'rel_relaciones_accountsaccounts_ida',
+        'join_key_rhs' => 'rel_relaciones_accountsrel_relaciones_idb',
+      ),
+    ),
+    'table' => 'rel_relaciones_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'rel_relaciones_accountsaccounts_ida' => 
+      array (
+        'name' => 'rel_relaciones_accountsaccounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'rel_relaciones_accountsrel_relaciones_idb' => 
+      array (
+        'name' => 'rel_relaciones_accountsrel_relaciones_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'rel_relaciones_accountsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'rel_relaciones_accounts_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'rel_relaciones_accountsaccounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'rel_relaciones_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'rel_relaciones_accountsrel_relaciones_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Rel_Relaciones',
+    'rhs_table' => 'rel_relaciones',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'rel_relaciones_accounts_c',
+    'join_key_lhs' => 'rel_relaciones_accountsaccounts_ida',
+    'join_key_rhs' => 'rel_relaciones_accountsrel_relaciones_idb',
+    'readonly' => true,
+    'relationship_name' => 'rel_relaciones_accounts',
+    'rhs_subpanel' => 'ForAccountsRel_relaciones_accounts_1',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'rel_relaciones_accounts_1' => 
+  array (
+    'name' => 'rel_relaciones_accounts_1',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'rel_relaciones_accounts_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Rel_Relaciones',
+        'rhs_table' => 'rel_relaciones',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'rel_relaciones_accounts_1_c',
+        'join_key_lhs' => 'rel_relaciones_accounts_1accounts_ida',
+        'join_key_rhs' => 'rel_relaciones_accounts_1rel_relaciones_idb',
+      ),
+    ),
+    'table' => 'rel_relaciones_accounts_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'rel_relaciones_accounts_1accounts_ida' => 
+      array (
+        'name' => 'rel_relaciones_accounts_1accounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'rel_relaciones_accounts_1rel_relaciones_idb' => 
+      array (
+        'name' => 'rel_relaciones_accounts_1rel_relaciones_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'rel_relaciones_accounts_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'rel_relaciones_accounts_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'rel_relaciones_accounts_1accounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'rel_relaciones_accounts_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'rel_relaciones_accounts_1rel_relaciones_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Rel_Relaciones',
+    'rhs_table' => 'rel_relaciones',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'rel_relaciones_accounts_1_c',
+    'join_key_lhs' => 'rel_relaciones_accounts_1accounts_ida',
+    'join_key_rhs' => 'rel_relaciones_accounts_1rel_relaciones_idb',
+    'readonly' => true,
+    'relationship_name' => 'rel_relaciones_accounts_1',
+    'rhs_subpanel' => 'ForAccountsRel_relaciones_accounts_1',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'tct1_p_fideicomiso_accounts' => 
+  array (
+    'name' => 'tct1_p_fideicomiso_accounts',
+    'true_relationship_type' => 'many-to-many',
+    'relationships' => 
+    array (
+      'tct1_p_fideicomiso_accounts' => 
+      array (
+        'lhs_module' => 'TCT1_P_Fideicomiso',
+        'lhs_table' => 'tct1_p_fideicomiso',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Accounts',
+        'rhs_table' => 'accounts',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'tct1_p_fideicomiso_accounts_c',
+        'join_key_lhs' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
+        'join_key_rhs' => 'tct1_p_fideicomiso_accountsaccounts_idb',
+      ),
+    ),
+    'table' => 'tct1_p_fideicomiso_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida' => 
+      array (
+        'name' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'tct1_p_fideicomiso_accountsaccounts_idb' => 
+      array (
+        'name' => 'tct1_p_fideicomiso_accountsaccounts_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'tct1_p_fideicomiso_accountsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'tct1_p_fideicomiso_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
+          1 => 'tct1_p_fideicomiso_accountsaccounts_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'TCT1_P_Fideicomiso',
+    'lhs_table' => 'tct1_p_fideicomiso',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Accounts',
+    'rhs_table' => 'accounts',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'tct1_p_fideicomiso_accounts_c',
+    'join_key_lhs' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
+    'join_key_rhs' => 'tct1_p_fideicomiso_accountsaccounts_idb',
+    'readonly' => true,
+    'relationship_name' => 'tct1_p_fideicomiso_accounts',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => 'default',
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
@@ -1006,111 +1835,6 @@ $relationships = array (
     'join_key_rhs' => 'tct2_notificaciones_accountstct2_notificaciones_idb',
     'readonly' => true,
     'relationship_name' => 'tct2_notificaciones_accounts',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'emp_empleo_accounts' => 
-  array (
-    'name' => 'emp_empleo_accounts',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'emp_empleo_accounts' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'emp_empleo',
-        'rhs_table' => 'emp_empleo',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'emp_empleo_accounts_c',
-        'join_key_lhs' => 'emp_empleo_accountsaccounts_ida',
-        'join_key_rhs' => 'emp_empleo_accountsemp_empleo_idb',
-      ),
-    ),
-    'table' => 'emp_empleo_accounts_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'emp_empleo_accountsaccounts_ida' => 
-      array (
-        'name' => 'emp_empleo_accountsaccounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'emp_empleo_accountsemp_empleo_idb' => 
-      array (
-        'name' => 'emp_empleo_accountsemp_empleo_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'emp_empleo_accountsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'emp_empleo_accounts_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'emp_empleo_accountsaccounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'emp_empleo_accounts_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'emp_empleo_accountsemp_empleo_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'emp_empleo',
-    'rhs_table' => 'emp_empleo',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'emp_empleo_accounts_c',
-    'join_key_lhs' => 'emp_empleo_accountsaccounts_ida',
-    'join_key_rhs' => 'emp_empleo_accountsemp_empleo_idb',
-    'readonly' => true,
-    'relationship_name' => 'emp_empleo_accounts',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
     'is_custom' => true,
@@ -1230,140 +1954,34 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
-  'rel_relaciones_accounts_1' => 
+  'accounts_tct3_noviable_1' => 
   array (
-    'name' => 'rel_relaciones_accounts_1',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'rel_relaciones_accounts_1' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Rel_Relaciones',
-        'rhs_table' => 'rel_relaciones',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'rel_relaciones_accounts_1_c',
-        'join_key_lhs' => 'rel_relaciones_accounts_1accounts_ida',
-        'join_key_rhs' => 'rel_relaciones_accounts_1rel_relaciones_idb',
-      ),
-    ),
-    'table' => 'rel_relaciones_accounts_1_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'rel_relaciones_accounts_1accounts_ida' => 
-      array (
-        'name' => 'rel_relaciones_accounts_1accounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'rel_relaciones_accounts_1rel_relaciones_idb' => 
-      array (
-        'name' => 'rel_relaciones_accounts_1rel_relaciones_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'rel_relaciones_accounts_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'rel_relaciones_accounts_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'rel_relaciones_accounts_1accounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'rel_relaciones_accounts_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'rel_relaciones_accounts_1rel_relaciones_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Rel_Relaciones',
-    'rhs_table' => 'rel_relaciones',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'rel_relaciones_accounts_1_c',
-    'join_key_lhs' => 'rel_relaciones_accounts_1accounts_ida',
-    'join_key_rhs' => 'rel_relaciones_accounts_1rel_relaciones_idb',
-    'readonly' => true,
-    'relationship_name' => 'rel_relaciones_accounts_1',
-    'rhs_subpanel' => 'ForAccountsRel_relaciones_accounts_1',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'accounts_opportunities_1' => 
-  array (
-    'name' => 'accounts_opportunities_1',
-    'true_relationship_type' => 'one-to-many',
+    'name' => 'accounts_tct3_noviable_1',
+    'true_relationship_type' => 'one-to-one',
     'from_studio' => true,
     'relationships' => 
     array (
-      'accounts_opportunities_1' => 
+      'accounts_tct3_noviable_1' => 
       array (
         'lhs_module' => 'Accounts',
         'lhs_table' => 'accounts',
         'lhs_key' => 'id',
-        'rhs_module' => 'Opportunities',
-        'rhs_table' => 'opportunities',
+        'rhs_module' => 'tct3_noviable',
+        'rhs_table' => 'tct3_noviable',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_opportunities_1_c',
-        'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
-        'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+        'join_table' => 'accounts_tct3_noviable_1_c',
+        'join_key_lhs' => 'accounts_tct3_noviable_1accounts_ida',
+        'join_key_rhs' => 'accounts_tct3_noviable_1tct3_noviable_idb',
       ),
     ),
-    'table' => 'accounts_opportunities_1_c',
+    'table' => 'accounts_tct3_noviable_1_c',
     'fields' => 
     array (
       'id' => 
       array (
         'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
+        'type' => 'id',
       ),
       'date_modified' => 
       array (
@@ -1374,28 +1992,24 @@ $relationships = array (
       array (
         'name' => 'deleted',
         'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
+        'default' => 0,
       ),
-      'accounts_opportunities_1accounts_ida' => 
+      'accounts_tct3_noviable_1accounts_ida' => 
       array (
-        'name' => 'accounts_opportunities_1accounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
+        'name' => 'accounts_tct3_noviable_1accounts_ida',
+        'type' => 'id',
       ),
-      'accounts_opportunities_1opportunities_idb' => 
+      'accounts_tct3_noviable_1tct3_noviable_idb' => 
       array (
-        'name' => 'accounts_opportunities_1opportunities_idb',
-        'type' => 'varchar',
-        'len' => 36,
+        'name' => 'accounts_tct3_noviable_1tct3_noviable_idb',
+        'type' => 'id',
       ),
     ),
     'indices' => 
     array (
       0 => 
       array (
-        'name' => 'accounts_opportunities_1spk',
+        'name' => 'idx_accounts_tct3_noviable_1_pk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -1404,453 +2018,43 @@ $relationships = array (
       ),
       1 => 
       array (
-        'name' => 'accounts_opportunities_1_ida1',
+        'name' => 'idx_accounts_tct3_noviable_1_ida1_deleted',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'accounts_opportunities_1accounts_ida',
+          0 => 'accounts_tct3_noviable_1accounts_ida',
+          1 => 'deleted',
         ),
       ),
       2 => 
       array (
-        'name' => 'accounts_opportunities_1_alt',
-        'type' => 'alternate_key',
+        'name' => 'idx_accounts_tct3_noviable_1_idb2_deleted',
+        'type' => 'index',
         'fields' => 
         array (
-          0 => 'accounts_opportunities_1opportunities_idb',
+          0 => 'accounts_tct3_noviable_1tct3_noviable_idb',
+          1 => 'deleted',
         ),
       ),
     ),
     'lhs_module' => 'Accounts',
     'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'Opportunities',
-    'rhs_table' => 'opportunities',
+    'rhs_module' => 'tct3_noviable',
+    'rhs_table' => 'tct3_noviable',
     'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_opportunities_1_c',
-    'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
-    'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+    'relationship_type' => 'one-to-one',
+    'join_table' => 'accounts_tct3_noviable_1_c',
+    'join_key_lhs' => 'accounts_tct3_noviable_1accounts_ida',
+    'join_key_rhs' => 'accounts_tct3_noviable_1tct3_noviable_idb',
     'readonly' => true,
-    'relationship_name' => 'accounts_opportunities_1',
-    'rhs_subpanel' => 'ForAccountsOpportunities',
+    'relationship_name' => 'accounts_tct3_noviable_1',
+    'rhs_subpanel' => NULL,
     'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-  ),
-  'rel_relaciones_accounts' => 
-  array (
-    'name' => 'rel_relaciones_accounts',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'rel_relaciones_accounts' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Rel_Relaciones',
-        'rhs_table' => 'rel_relaciones',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'rel_relaciones_accounts_c',
-        'join_key_lhs' => 'rel_relaciones_accountsaccounts_ida',
-        'join_key_rhs' => 'rel_relaciones_accountsrel_relaciones_idb',
-      ),
-    ),
-    'table' => 'rel_relaciones_accounts_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'rel_relaciones_accountsaccounts_ida' => 
-      array (
-        'name' => 'rel_relaciones_accountsaccounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'rel_relaciones_accountsrel_relaciones_idb' => 
-      array (
-        'name' => 'rel_relaciones_accountsrel_relaciones_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'rel_relaciones_accountsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'rel_relaciones_accounts_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'rel_relaciones_accountsaccounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'rel_relaciones_accounts_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'rel_relaciones_accountsrel_relaciones_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Rel_Relaciones',
-    'rhs_table' => 'rel_relaciones',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'rel_relaciones_accounts_c',
-    'join_key_lhs' => 'rel_relaciones_accountsaccounts_ida',
-    'join_key_rhs' => 'rel_relaciones_accountsrel_relaciones_idb',
-    'readonly' => true,
-    'relationship_name' => 'rel_relaciones_accounts',
-    'rhs_subpanel' => 'ForAccountsRel_relaciones_accounts_1',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'accounts_dire_direccion_1' => 
-  array (
-    'name' => 'accounts_dire_direccion_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'accounts_dire_direccion_1' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'dire_Direccion',
-        'rhs_table' => 'dire_direccion',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_dire_direccion_1_c',
-        'join_key_lhs' => 'accounts_dire_direccion_1accounts_ida',
-        'join_key_rhs' => 'accounts_dire_direccion_1dire_direccion_idb',
-      ),
-    ),
-    'table' => 'accounts_dire_direccion_1_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'accounts_dire_direccion_1accounts_ida' => 
-      array (
-        'name' => 'accounts_dire_direccion_1accounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'accounts_dire_direccion_1dire_direccion_idb' => 
-      array (
-        'name' => 'accounts_dire_direccion_1dire_direccion_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'accounts_dire_direccion_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'accounts_dire_direccion_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_dire_direccion_1accounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'accounts_dire_direccion_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'accounts_dire_direccion_1dire_direccion_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'dire_Direccion',
-    'rhs_table' => 'dire_direccion',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_dire_direccion_1_c',
-    'join_key_lhs' => 'accounts_dire_direccion_1accounts_ida',
-    'join_key_rhs' => 'accounts_dire_direccion_1dire_direccion_idb',
-    'readonly' => true,
-    'relationship_name' => 'accounts_dire_direccion_1',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-  ),
-  'tct1_p_fideicomiso_accounts' => 
-  array (
-    'name' => 'tct1_p_fideicomiso_accounts',
-    'true_relationship_type' => 'many-to-many',
-    'relationships' => 
-    array (
-      'tct1_p_fideicomiso_accounts' => 
-      array (
-        'lhs_module' => 'TCT1_P_Fideicomiso',
-        'lhs_table' => 'tct1_p_fideicomiso',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Accounts',
-        'rhs_table' => 'accounts',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'tct1_p_fideicomiso_accounts_c',
-        'join_key_lhs' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
-        'join_key_rhs' => 'tct1_p_fideicomiso_accountsaccounts_idb',
-      ),
-    ),
-    'table' => 'tct1_p_fideicomiso_accounts_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida' => 
-      array (
-        'name' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'tct1_p_fideicomiso_accountsaccounts_idb' => 
-      array (
-        'name' => 'tct1_p_fideicomiso_accountsaccounts_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'tct1_p_fideicomiso_accountsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'tct1_p_fideicomiso_accounts_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
-          1 => 'tct1_p_fideicomiso_accountsaccounts_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'TCT1_P_Fideicomiso',
-    'lhs_table' => 'tct1_p_fideicomiso',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Accounts',
-    'rhs_table' => 'accounts',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'tct1_p_fideicomiso_accounts_c',
-    'join_key_lhs' => 'tct1_p_fideicomiso_accountstct1_p_fideicomiso_ida',
-    'join_key_rhs' => 'tct1_p_fideicomiso_accountsaccounts_idb',
-    'readonly' => true,
-    'relationship_name' => 'tct1_p_fideicomiso_accounts',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => 'default',
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'ag_agencias_accounts' => 
-  array (
-    'name' => 'ag_agencias_accounts',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'ag_agencias_accounts' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'AG_Agencias',
-        'rhs_table' => 'ag_agencias',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'ag_agencias_accounts_c',
-        'join_key_lhs' => 'ag_agencias_accountsaccounts_ida',
-        'join_key_rhs' => 'ag_agencias_accountsag_agencias_idb',
-      ),
-    ),
-    'table' => 'ag_agencias_accounts_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'ag_agencias_accountsaccounts_ida' => 
-      array (
-        'name' => 'ag_agencias_accountsaccounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'ag_agencias_accountsag_agencias_idb' => 
-      array (
-        'name' => 'ag_agencias_accountsag_agencias_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'ag_agencias_accountsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'ag_agencias_accounts_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'ag_agencias_accountsaccounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'ag_agencias_accounts_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'ag_agencias_accountsag_agencias_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'AG_Agencias',
-    'rhs_table' => 'ag_agencias',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'ag_agencias_accounts_c',
-    'join_key_lhs' => 'ag_agencias_accountsaccounts_ida',
-    'join_key_rhs' => 'ag_agencias_accountsag_agencias_idb',
-    'readonly' => true,
-    'relationship_name' => 'ag_agencias_accounts',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
   ),
   'accounts_tct_pld_1' => 
   array (
@@ -1963,28 +2167,27 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
-  'accounts_tel_telefonos_1' => 
+  'bc_survey_accounts' => 
   array (
-    'name' => 'accounts_tel_telefonos_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
+    'name' => 'bc_survey_accounts',
+    'true_relationship_type' => 'many-to-many',
     'relationships' => 
     array (
-      'accounts_tel_telefonos_1' => 
+      'bc_survey_accounts' => 
       array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
+        'lhs_module' => 'bc_survey',
+        'lhs_table' => 'bc_survey',
         'lhs_key' => 'id',
-        'rhs_module' => 'Tel_Telefonos',
-        'rhs_table' => 'tel_telefonos',
+        'rhs_module' => 'Accounts',
+        'rhs_table' => 'accounts',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_tel_telefonos_1_c',
-        'join_key_lhs' => 'accounts_tel_telefonos_1accounts_ida',
-        'join_key_rhs' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+        'join_table' => 'bc_survey_accounts_c',
+        'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
+        'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
       ),
     ),
-    'table' => 'accounts_tel_telefonos_1_c',
+    'table' => 'bc_survey_accounts_c',
     'fields' => 
     array (
       'id' => 
@@ -2006,15 +2209,15 @@ $relationships = array (
         'default' => '0',
         'required' => true,
       ),
-      'accounts_tel_telefonos_1accounts_ida' => 
+      'bc_survey_accountsbc_survey_ida' => 
       array (
-        'name' => 'accounts_tel_telefonos_1accounts_ida',
+        'name' => 'bc_survey_accountsbc_survey_ida',
         'type' => 'varchar',
         'len' => 36,
       ),
-      'accounts_tel_telefonos_1tel_telefonos_idb' => 
+      'bc_survey_accountsaccounts_idb' => 
       array (
-        'name' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+        'name' => 'bc_survey_accountsaccounts_idb',
         'type' => 'varchar',
         'len' => 36,
       ),
@@ -2023,7 +2226,7 @@ $relationships = array (
     array (
       0 => 
       array (
-        'name' => 'accounts_tel_telefonos_1spk',
+        'name' => 'bc_survey_accountsspk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -2032,41 +2235,145 @@ $relationships = array (
       ),
       1 => 
       array (
-        'name' => 'accounts_tel_telefonos_1_ida1',
+        'name' => 'bc_survey_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'bc_survey_accountsbc_survey_ida',
+          1 => 'bc_survey_accountsaccounts_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'bc_survey',
+    'lhs_table' => 'bc_survey',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Accounts',
+    'rhs_table' => 'accounts',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'bc_survey_accounts_c',
+    'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
+    'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_accounts',
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'anlzt_analizate_accounts' => 
+  array (
+    'name' => 'anlzt_analizate_accounts',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'anlzt_analizate_accounts' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'ANLZT_analizate',
+        'rhs_table' => 'anlzt_analizate',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'anlzt_analizate_accounts_c',
+        'join_key_lhs' => 'anlzt_analizate_accountsaccounts_ida',
+        'join_key_rhs' => 'anlzt_analizate_accountsanlzt_analizate_idb',
+      ),
+    ),
+    'table' => 'anlzt_analizate_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'anlzt_analizate_accountsaccounts_ida' => 
+      array (
+        'name' => 'anlzt_analizate_accountsaccounts_ida',
+        'type' => 'id',
+      ),
+      'anlzt_analizate_accountsanlzt_analizate_idb' => 
+      array (
+        'name' => 'anlzt_analizate_accountsanlzt_analizate_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_anlzt_analizate_accounts_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_anlzt_analizate_accounts_ida1_deleted',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'accounts_tel_telefonos_1accounts_ida',
+          0 => 'anlzt_analizate_accountsaccounts_ida',
+          1 => 'deleted',
         ),
       ),
       2 => 
       array (
-        'name' => 'accounts_tel_telefonos_1_alt',
+        'name' => 'idx_anlzt_analizate_accounts_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'anlzt_analizate_accountsanlzt_analizate_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'anlzt_analizate_accounts_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'accounts_tel_telefonos_1tel_telefonos_idb',
+          0 => 'anlzt_analizate_accountsanlzt_analizate_idb',
         ),
       ),
     ),
     'lhs_module' => 'Accounts',
     'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'Tel_Telefonos',
-    'rhs_table' => 'tel_telefonos',
+    'rhs_module' => 'ANLZT_analizate',
+    'rhs_table' => 'anlzt_analizate',
     'rhs_key' => 'id',
     'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_tel_telefonos_1_c',
-    'join_key_lhs' => 'accounts_tel_telefonos_1accounts_ida',
-    'join_key_rhs' => 'accounts_tel_telefonos_1tel_telefonos_idb',
+    'join_table' => 'anlzt_analizate_accounts_c',
+    'join_key_lhs' => 'anlzt_analizate_accountsaccounts_ida',
+    'join_key_rhs' => 'anlzt_analizate_accountsanlzt_analizate_idb',
     'readonly' => true,
-    'relationship_name' => 'accounts_tel_telefonos_1',
+    'relationship_name' => 'anlzt_analizate_accounts',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
+    'from_studio' => false,
   ),
   'campaign_accounts' => 
   array (
@@ -2150,14 +2457,12 @@ $relationships = array (
       array (
         'name' => 'id',
         'type' => 'id',
-        'len' => 36,
         'required' => true,
       ),
       'activity_id' => 
       array (
         'name' => 'activity_id',
         'type' => 'id',
-        'len' => 36,
         'required' => true,
       ),
       'parent_type' => 
@@ -2170,7 +2475,6 @@ $relationships = array (
       array (
         'name' => 'parent_id',
         'type' => 'id',
-        'len' => 36,
       ),
       'fields' => 
       array (
@@ -2214,8 +2518,8 @@ $relationships = array (
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'relationship_name' => 'member_accounts',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => 'default',
+    'rhs_subpanel' => 'ForAccountsMembers',
+    'lhs_subpanel' => 'ForAccountsMembers',
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
@@ -2256,7 +2560,7 @@ $relationships = array (
     'relationship_role_column_value' => 'Accounts',
     'readonly' => true,
     'relationship_name' => 'account_tasks',
-    'rhs_subpanel' => 'default',
+    'rhs_subpanel' => 'ForAccountsTasks',
     'lhs_subpanel' => NULL,
     'deleted' => false,
     'relationship_only' => false,
@@ -2422,6 +2726,50 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
+  'bc_survey_submission_accounts' => 
+  array (
+    'name' => 'bc_survey_submission_accounts',
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'bc_survey_submission',
+    'rhs_table' => 'bc_survey_submission',
+    'rhs_key' => 'parent_id',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'parent_type',
+    'relationship_role_column_value' => 'Accounts',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_submission_accounts',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'bc_survey_submission_accounts_target' => 
+  array (
+    'name' => 'bc_survey_submission_accounts_target',
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'bc_survey_submission',
+    'rhs_table' => 'bc_survey_submission',
+    'rhs_key' => 'target_parent_id',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => 'target_parent_type',
+    'relationship_role_column_value' => 'Accounts',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_submission_accounts_target',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
   'revenuelineitems_accounts' => 
   array (
     'name' => 'revenuelineitems_accounts',
@@ -2482,17 +2830,242 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'accounts_tct3_noviable_1' => 
+  'accounts_uni_productos_1' => 
   array (
+    'name' => 'accounts_uni_productos_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_uni_productos_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'uni_Productos',
+        'rhs_table' => 'uni_productos',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_uni_productos_1_c',
+        'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+        'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
+      ),
+    ),
+    'table' => 'accounts_uni_productos_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'accounts_uni_productos_1accounts_ida' => 
+      array (
+        'name' => 'accounts_uni_productos_1accounts_ida',
+        'type' => 'id',
+      ),
+      'accounts_uni_productos_1uni_productos_idb' => 
+      array (
+        'name' => 'accounts_uni_productos_1uni_productos_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1uni_productos_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_uni_productos_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1uni_productos_idb',
+        ),
+      ),
+    ),
     'lhs_module' => 'Accounts',
-    'rhs_module' => 'tct3_noviable',
-    'relationship_type' => 'one-to-one',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'uni_Productos',
+    'rhs_table' => 'uni_productos',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_uni_productos_1_c',
+    'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+    'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_uni_productos_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'accounts_uni_productos_2' => 
+  array (
+    'name' => 'accounts_uni_productos_2',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_uni_productos_2' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'uni_Productos',
+        'rhs_table' => 'uni_productos',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_uni_productos_2_c',
+        'join_key_lhs' => 'accounts_uni_productos_2accounts_ida',
+        'join_key_rhs' => 'accounts_uni_productos_2uni_productos_idb',
+      ),
+    ),
+    'table' => 'accounts_uni_productos_2_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'accounts_uni_productos_2accounts_ida' => 
+      array (
+        'name' => 'accounts_uni_productos_2accounts_ida',
+        'type' => 'id',
+      ),
+      'accounts_uni_productos_2uni_productos_idb' => 
+      array (
+        'name' => 'accounts_uni_productos_2uni_productos_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_2_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_2_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_2accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_2_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_2uni_productos_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_uni_productos_2_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_2uni_productos_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'uni_Productos',
+    'rhs_table' => 'uni_productos',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_uni_productos_2_c',
+    'join_key_lhs' => 'accounts_uni_productos_2accounts_ida',
+    'join_key_rhs' => 'accounts_uni_productos_2uni_productos_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_uni_productos_2',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'accounts_uni_productos_3' => 
+  array (
+    'rhs_label' => 'Productos',
+    'lhs_label' => 'Cuentas',
+    'rhs_subpanel' => 'default',
+    'lhs_module' => 'Accounts',
+    'rhs_module' => 'uni_Productos',
+    'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'accounts_tct3_noviable_1',
+    'relationship_name' => 'accounts_uni_productos_3',
   ),
 );

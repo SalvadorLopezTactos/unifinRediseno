@@ -973,6 +973,26 @@ array (
           ),
           11 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL18',
+            'label' => 'LBL_RECORDVIEW_PANEL18',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'accounts_analizate',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNTS_ANALIZATE',
+                'span' => 12,
+              ),
+            ),
+          ),
+          12 => 
+          array (
             'newTab' => true,
             'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
@@ -1034,7 +1054,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1077,7 +1097,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1130,7 +1150,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1191,7 +1211,7 @@ array (
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1242,7 +1262,7 @@ array (
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',

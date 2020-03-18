@@ -60,7 +60,7 @@ $hook_array['before_save'][] = Array(
     'surveyNotHeld' // name of the function
 );
 
-$hook_array['before_save'][] = Array(
+$hook_array['after_save'][] = Array(
     4,
     'Guarda valores del producto del usuario e invitados de la reunión',
     'custom/modules/Meetings/meetings_hooks.php',

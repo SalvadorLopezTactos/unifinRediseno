@@ -297,6 +297,8 @@
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
+        //Ocultar panel Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
     },
 
     _render: function () {
@@ -387,6 +389,8 @@
         Se oculta panel NPS,al crear cuenta desde el modulo Rel_Relacion".
          */
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+        //Oculta campo Analizate
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {
@@ -627,8 +631,7 @@
                 relaciones = relaciones.replace(/,/g, "");
                 relaciones = relaciones.replace(/ /g, "");
 
-                if (relaciones != "") {
-
+//                if (relaciones != "") {
                     if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
                         app.alert.show("Correo requerido", {
                             level: "error",
@@ -640,7 +643,7 @@
                         errors['account_telefonos'] = errors['account_telefonos'] || {};
                         errors['account_telefonos'].required = true;
                     }
-                }
+//                }
             }
         }
         callback(null, fields, errors);
@@ -1127,12 +1130,12 @@
             relaciones = relaciones.replace(/,/g, "");
             relaciones = relaciones.replace(/ /g, "");
 
-            if (relaciones != "") {
+//            if (relaciones != "") {
                 if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                     errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                     errors['estadocivil_c'].required = true;
                 }
-            }
+//            }
         }
         callback(null, fields, errors);
 

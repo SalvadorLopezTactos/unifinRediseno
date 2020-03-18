@@ -1,0 +1,90 @@
+<!-- Estilos modal -->
+<style>
+    .modal-header {
+        padding: .5px 0px;
+        background-color: #21618C;
+        color: white;
+    }
+    .modal-body {
+        padding: .5px 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+</style>
+
+<div class="row-fluid">
+    <!-- Bloque 1: General -->
+    <div class="span6">
+        <div style="background-color: #f9f9f9">
+            <div>
+                <!-- Encabezado -->
+                <div class="accordion-heading" style="background-color: #21618C">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion0" href="#collapseFive">
+                        <font color=#ffffff>
+                            <center><strong>Empresa Financiera</strong></center>
+                        </font>
+                    </a>
+                </div>
+                <!-- Contenido -->
+                <div id="collapseFive" class="accordion-body in collapse" style="background-color: #ffffff">
+                    <!-- Línea 1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Estatus Actual</strong> </div>
+                        <div class="span6">{{getUnifinListValue 'anlzt_estado_list' Financiera.estado}}</div>
+                    </div>
+                    <!-- Línea 2 -->
+                    <div class="row-fluid"  style="background-color: #ffffff">
+                        <div class="span6"><strong>Fecha Estatus</strong></div>
+                        <div class="span6">{{Financiera.fecha}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bloque 2: Alertas -->
+    <div class="span6">
+        <div style="background-color: #f9f9f9">
+            <div>
+                <!-- Encabezado -->
+                <div class="accordion-heading" style="background-color: #21618C">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion0" href="#collapseFive">
+                        <font color=#ffffff>
+                            <center><strong>Empresa Credit</strong></center>
+                        </font>
+                    </a>
+                </div>
+                <!-- Contenido -->
+                <div id="collapseFive" class="accordion-body in collapse" style="background-color: #ffffff">
+                    <!-- Línea 1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong></strong> </div>
+                        <div class="span6"></div>
+                    </div>
+                    <!-- Línea 2 -->
+                    <div class="row-fluid"  style="background-color: #ffffff">
+                        <div class="span6"><strong></strong></div>
+                        <div class="span6"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row-fluid">
+    <div class="span6" align="left">
+        <div class="span6 " align="left">
+            <a class="btn btn-primary  btn-Reenviar" id="btn-Guardar type=" submit"="">Reenviar Correo
+            <i class="fa fa-envelope" style="color:white"></i></a>
+    </div>
+    <div class="span6" align="left">
+        <a class="btn btn-success  btn-Descargar" id="btn-Descargar">Descargar Archivo
+        <i class="fa fa-download" style="color:white"></i></a>
+    </div>
+
+
+    </div>
+</div>
