@@ -60,7 +60,7 @@ class altaLeadServices extends SugarApi
                         $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
                     }
 
-                    /** Validamos que ambos leads esten cone estatus 200  */ # pendiente de validación OB001
+                    /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
 
                     //$GLOBALS['log']->fatal(print_r($obj_leads, true));
 
@@ -82,7 +82,16 @@ class altaLeadServices extends SugarApi
                         $this->get_asignado($response_Services, "3");
                     } else {
                         $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "");
+
                         $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "");
+
+                        if($obj_leads['asociados'][0]['formato_texto'] != 'success'
+                            || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success')
+                        {
+                            $response_Services ["asociados"][0] = $this->estatus(424, 'Formato de información no válido', '', "");
+
+                        }
+
 
                     }
 
