@@ -670,33 +670,30 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
 
+                if ($statusProducto == '' || $statusProducto == null){
+                    $statusProducto = '0'; //0 = vacio
+                }
+
                 switch ($tipoProducto) {
 
                     case '1': //Leasing
-                        if ($statusProducto != '0'){
-                            $arr_principal['leasing']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
-                        }                        
+                        $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         break;
                     case '3': //Credito-Automotriz
-                        if ($statusProducto != '0'){
-                            $arr_principal['credito_auto']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
-                        }
+                        $arr_principal['credito_auto']['estatus_atencion'] = $statusProducto;
                         break;
                     case '4': //Factoraje
-                        if ($statusProducto != '0'){
-                            $arr_principal['factoring']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
-                        }
+                        $arr_principal['factoring']['estatus_atencion'] = $statusProducto;
                         break;
                     case '6': //Fleet
-                        if ($statusProducto != '0'){
-                            $arr_principal['fleet']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
-                        }
+                        $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
                         break;
                     case '7': //Credito SOS
-                        if ($statusProducto != '0'){
-                            $arr_principal['credito_sos']['estatus_atencion'] = $app_list_strings['product_status_atencion_list'][$statusProducto];
-                        }
-                        break;    
+                        $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
+                        break;
+                    case '8': //Uniclick
+                        $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
+                        break;     
                     default:                        
                         break;
                 }
