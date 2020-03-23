@@ -15,7 +15,7 @@ class AuditTable
 
         //Valida cambio de puesto
         if($args['isUpdate']){
-
+            //Valida cambio en el campo puestousuario
             if($bean->fetched_row['puestousuario_c'] != $bean->puestousuario_c){
 
                 $id_u_audit=create_guid();
@@ -24,6 +24,18 @@ class AuditTable
                 $actual=$bean->puestousuario_c;
                 $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
                   VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'puestousuario_c', '{$tipo}', '{$anterior}', '{$actual}', '{$app_list_strings["puestousuario_c_list"][$anterior]}', '{$app_list_strings["puestousuario_c_list"][$actual]}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+            //Valida cambio en el campo informs_to_id
+            if($bean->fetched_row['reports_to_id'] != $bean->reports_to_id){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'reports_to_id');
+                $anterior=$bean->fetched_row["reports_to_id"];
+                $actual=$bean->reports_to_id;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$app_list_strings["puestousuario_c_list"][$anterior]}', '{$app_list_strings["puestousuario_c_list"][$actual]}', '1', '{$date}')";
                 $GLOBALS['db']->query($sqlInsert);
 
             }
