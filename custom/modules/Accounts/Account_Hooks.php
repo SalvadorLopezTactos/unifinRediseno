@@ -788,7 +788,7 @@ SQL;
                         $contactoRel->tipo_registro_c = "Persona";
                         $contactoRel->tipo_relacion_c = "^Contacto^";
                         $contactoRel->assigned_user_id = $bean->assigned_user_id;
-                        $contactoRel->team_set_id = $bean>team_set_id;
+                        $contactoRel->team_set_id = $bean->team_set_id;
                         $contactoRel->team_id = $bean->team_id;
                         $contactoRel->promotorcredit_c = $bean->promotorcredit_c;
                         $contactoRel->promotorfactoraje_c = $bean->promotorfactoraje_c;
@@ -1263,7 +1263,8 @@ where rfc_c = '{$bean->rfc_c}' and
 		$key_productos = array('1','4','3','6','8');
 		$name_productos = array('-LEASING','-FACTORAJE','-CREDITO AUTOMOTRIZ','-FLEET','-UNICLICK');
 		$count = count($name_productos);
-		$current_prod = null;
+        $current_prod = null;
+        $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
         if (!$args['isUpdate']){
 			
 			for ($i = 0; $i < $count; $i++) {
@@ -1275,20 +1276,25 @@ where rfc_c = '{$bean->rfc_c}' and
 				$beanprod->tipo_producto = $key_productos[$i];
 				
 				switch ($key_productos[$i]) {
-					case '1':
-						$beanprod->assigned_user_id = $bean->user_id_c;
+					case '1': //Leasing
+                        $beanprod->assigned_user_id = $bean->user_id_c;
+                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
-					case '4':
-						$beanprod->assigned_user_id = $bean->user_id1_c;
+					case '4': //Factoraje
+                        $beanprod->assigned_user_id = $bean->user_id1_c;
+                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
-					case '3':
-						$beanprod->assigned_user_id = $bean->user_id2_c;
+					case '3': //Credito-Automotriz
+                        $beanprod->assigned_user_id = $bean->user_id2_c;
+                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
-					case '6':
-						$beanprod->assigned_user_id = $bean->user_id6_c;
+					case '6': //Fleet
+                        $beanprod->assigned_user_id = $bean->user_id6_c;
+                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
-					case '8':
-						$beanprod->assigned_user_id = $bean->user_id7_c;
+					case '8': //Uniclick
+                        $beanprod->assigned_user_id = $bean->user_id7_c;
+                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
 				}
 				
