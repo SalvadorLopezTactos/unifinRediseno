@@ -1,0 +1,73 @@
+<style>
+
+    .modal-header_cstm h3 {
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    .modal-header_cstm {
+        background: #1e588e;
+        color: #FFF;
+        padding: 2px;
+    }
+
+    .modal-body_cstm {
+        padding: 5px 0px 58px 12px;
+    }
+
+    .fa-book {
+        color: #FFF;
+    }
+
+    .modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        left: 40%;
+        overflow: auto;
+        background: rgb(255, 255, 255);
+        background: rgba(189, 189, 189, 0.92) ;
+        /**background: rgba(76, 175, 80, 0.3)**/
+        width: 700px;
+    }
+
+    .modal-backdrop {
+        /* bug fix - no overlay */
+        display: flex;
+    }
+
+    .form-horizontal {
+        display: inline-block;
+    }
+
+    .select_cstm
+    {
+        margin: 1px 0px 5px 3px!important;
+    }
+
+</style>
+
+<div class=" modal modal_cstm " id="getAccountModal">
+    <div class="modal-header_cstm">
+        <h3> <b><i class="fa fa-book" style="padding: 3px; "></i>{{str "Quiero esta Cuenta" module}}</b></h3>
+    </div>
+    <div class="modal-body_cstm">
+        <div style="display: inline-flex;padding: 5px; ">
+            <label for="" style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;"> Productos disponibles</label>
+
+            <select name="" id="productos" class="select2 select_cstm" style="padding: 0px 7px;">
+                {{{prod_list}}}
+            </select>
+        </div>
+
+        <div class="mensaje">
+            <p>{{respuesta_msj}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary  btn-Cancelar" id="btn-cancela">Cancelar</button>
+        <button class="btn btn-primary  btn-Guardar" id="btn-asigna">Solicitar</button>
+
+    </div>
+</div>
