@@ -63,9 +63,58 @@ class reAsignarCuentas extends SugarApi
 
                 }else{
 
+                    /****************************Re-Asigna Fecha y Re-Asigna Asesor en UNI_PRODUCTOS*****************/
+                    if ($account->load_relationship('accounts_uni_productos_1')){
+                        $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id,array('disable_row_level_security' => true));
+
+                        $fechaReAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
+                        
+                        foreach ($uniProducto as $asignaFecha) {
+                            
+                            switch ($product) {
+                                case 'LEASING':                                    
+                                    if ($asignaFecha->tipo_producto == '1') {  //Leasing
+                                        // $GLOBALS['log']->fatal("Leasing UniProductos - Reasignado");
+                                        $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                        $asignaFecha->assigned_user_id = $reAsignado;
+                                    }                                                                
+                                    break;
+                                case 'CREDITO AUTOMOTRIZ':                                    
+                                    if ($asignaFecha->tipo_producto == '3') { //Credito-Automotriz
+                                        // $GLOBALS['log']->fatal("Credito UniProductos - Reasignado");
+                                        $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                        $asignaFecha->assigned_user_id = $reAsignado;
+                                    }
+                                    break;
+                                case 'FACTORAJE':                                    
+                                    if ($asignaFecha->tipo_producto == '4') { //Factoraje
+                                        // $GLOBALS['log']->fatal("Factoraje UniProductos - Reasignado");
+                                        $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                        $asignaFecha->assigned_user_id = $reAsignado;
+                                    }
+                                    break;
+                                case 'FLEET':                                    
+                                    if ($asignaFecha->tipo_producto == '6') { //Fleet
+                                        // $GLOBALS['log']->fatal("Fleet UniProductos - Reasignado");
+                                        $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                        $asignaFecha->assigned_user_id = $reAsignado;
+                                    }
+                                    break;
+                                case 'UNICLICK':                                    
+                                    if ($asignaFecha->tipo_producto == '8') { //Uniclick
+                                        // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
+                                        $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                        $asignaFecha->assigned_user_id = $reAsignado;
+                                    }
+                                    break;
+                            }
+                            $asignaFecha->save();
+                        }
+                    }
+                    
                     switch ($product) {
                         case 'LEASING':
-                            $account->user_id_c = $reAsignado;
+                            $account->user_id_c = $reAsignado;                            
                             break;
                         case 'CREDITO AUTOMOTRIZ':
                             $account->user_id2_c = $reAsignado;
@@ -81,7 +130,7 @@ class reAsignarCuentas extends SugarApi
                             break;
                     }
 
-                    $account->save();
+                    $account->save();                   
 
                     array_push($actualizados,$account->id);
 

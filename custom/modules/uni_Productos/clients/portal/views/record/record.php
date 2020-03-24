@@ -1,8 +1,7 @@
 <?php
-$module_name = 'uni_Productos';
-$viewdefs[$module_name] = 
+$viewdefs['uni_Productos'] = 
 array (
-  'base' => 
+  'portal' => 
   array (
     'view' => 
     array (
@@ -164,148 +163,14 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => true,
-            'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
-              array (
-                'name' => 'no_viable',
-                'label' => 'LBL_NO_VIABLE',
-              ),
-              1 => 
-              array (
-              ),
+              0 => 'assigned_user_name',
+              1 => 'team_name',
               2 => 
               array (
-                'name' => 'tipo_producto',
-                'label' => 'LBL_TIPO_PRODUCTO',
-              ),
-              3 => 
-              array (
-                'name' => 'no_viable_razon',
-                'label' => 'LBL_NO_VIABLE_RAZON',
-              ),
-              4 => 
-              array (
-                'name' => 'no_viable_razon_fp',
-                'label' => 'LBL_NO_VIABLE_RAZON_FP',
-              ),
-              5 => 
-              array (
-                'name' => 'no_viable_razon_ni',
-                'label' => 'LBL_NO_VIABLE_RAZON_NI',
-              ),
-              6 => 
-              array (
-                'name' => 'no_viable_producto',
-                'label' => 'LBL_NO_VIABLE_PRODUCTO',
-              ),
-              7 => 
-              array (
-              ),
-              8 => 
-              array (
-                'name' => 'no_viable_quien',
-                'label' => 'LBL_NO_VIABLE_QUIEN',
-              ),
-              9 => 
-              array (
-                'name' => 'no_viable_porque',
-                'label' => 'LBL_NO_VIABLE_PORQUE',
-              ),
-              10 => 
-              array (
-                'name' => 'tipo_cuenta',
-                'label' => 'LBL_TIPO_CUENTA',
-              ),
-              11 => 
-              array (
-                'name' => 'subtipo_cuenta',
-                'label' => 'LBL_SUBTIPO_CUENTA',
-              ),
-              12 => 
-              array (
-                'name' => 'tipo_subtipo_cuenta',
-                'label' => 'LBL_TIPO_SUBTIPO_CUENTA',
-              ),
-              13 => 
-              array (
-              ),
-              14 => 
-              array (
-                'name' => 'anexos_activos',
-                'label' => 'LBL_ANEXOS_ACTIVOS',
-              ),
-              15 => 
-              array (
-                'name' => 'anexos_historicos',
-                'label' => 'LBL_ANEXOS_HISTORICOS',
-              ),
-              16 => 
-              array (
-                'name' => 'no_viable_razon_cf',
-                'label' => 'LBL_NO_VIABLE_RAZON_CF',
-              ),
-              17 => 
-              array (
-                'name' => 'estatus_atencion',
-                'label' => 'LBL_ESTATUS_ATENCION',
-              ),
-              18 => 
-              array (
-                'name' => 'fecha_pago',
-                'label' => 'LBL_FECHA_PAGO',
-              ),
-              19 => 
-              array (
-                'name' => 'fecha_termino',
-                'label' => 'LBL_FECHA_TERMINO',
-              ),
-              20 => 
-              array (
-                'name' => 'fecha_impago',
-                'label' => 'LBL_FECHA_IMPAGO',
-              ),
-              21 => 
-              array (
-                'name' => 'fecha_liberacion',
-                'label' => 'LBL_FECHA_LIBERACION',
-              ),
-              22 => 
-              array (
-                'name' => 'monto_impago',
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'label' => 'LBL_MONTO_IMPAGO',
-              ),
-              23 => 
-              array (
-                'name' => 'nps_calificacion',
-                'label' => 'LBL_NPS_CALIFICACION',
-              ),
-              24 => 
-              array (
-                'name' => 'nps_comentario',
-                'studio' => 'visible',
-                'label' => 'LBL_NPS_COMENTARIO',
-              ),
-              25 => 
-              array (
-                'name' => 'nps_fecha',
-                'label' => 'LBL_NPS_FECHA',
-              ),
-              26 => 
-              array (
-                'name' => 'accounts_uni_productos_1_name',
-              ),
-              27 => 
-              array (
-                'name' => 'fecha_asignacion_c',
-                'label' => 'LBL_FECHA_ASIGNACION_C',
+                'name' => 'tag',
+                'span' => 12,
               ),
             ),
           ),
@@ -317,13 +182,14 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => true,
-            'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 'assigned_user_name',
-              1 => 'team_name',
-              2 => 
+              0 => 
+              array (
+                'name' => 'description',
+                'span' => 12,
+              ),
+              1 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -347,7 +213,7 @@ array (
                   ),
                 ),
               ),
-              3 => 
+              2 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -373,10 +239,6 @@ array (
               ),
             ),
           ),
-        ),
-        'templateMeta' => 
-        array (
-          'useTabs' => true,
         ),
       ),
     ),
