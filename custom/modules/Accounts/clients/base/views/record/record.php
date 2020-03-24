@@ -159,6 +159,22 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
+              16 =>
+              array (
+                'name' => 'get_account_asesor',
+                'type' => 'rowaction',
+                'label' => 'Quiero esta Cuenta',
+                //'acl_action' => 'send_poll',
+                'event' => 'button:get_account_asesor:click',
+              ),
+              17 =>
+              array (
+                 'name' => 'send_account_asesor',
+                 'type' => 'rowaction',
+                 'label' => 'Enviar Cuenta a',
+                 //'acl_action' => 'send_poll',
+                 'event' => 'button:send_account_asesor:click',
+              ),
             ),
           ),
           3 => 

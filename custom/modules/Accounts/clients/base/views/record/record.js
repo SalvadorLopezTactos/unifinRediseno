@@ -6,7 +6,7 @@
      * @brief Override for handleCancel to ensure the account_telefonos attribute is properly reverted
      *
      * @override
-    */
+     */
     oculta: 0,
 
     initialize: function (options) {
@@ -50,9 +50,9 @@
         //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
         this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
-        * Integración de Expediente
-        * Adrian Arauz 4/10/2018
-        * */
+         * Integración de Expediente
+         * Adrian Arauz 4/10/2018
+         * */
         this.model.addValidationTask('valida_potencial_campos_autos', _.bind(this.nodigitos, this));
 
         this.model.addValidationTask('valida_potencial', _.bind(this.validapotencial, this));
@@ -60,33 +60,33 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
-        * Adrian Arauz 23/01/2019
-        * */
+         * Adrian Arauz 23/01/2019
+         * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
         this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
         /* F. Javier G. Solar
-           OBS299 Validar que las Direcciones no se repitan 21/11/2018
-        */
+         OBS299 Validar que las Direcciones no se repitan 21/11/2018
+         */
 
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
 
         /*
          Eduardo Carrasco
          revisa que la persona no tenga contratos existentes despues de cambiar el RFC. Si hay contratos existentes, no se podra cambiar el RFC
-        */
+         */
         this.model.on("change:rfc_c", _.bind(function () {
             var rfc = this.getField('rfc_c');
             /*if (rfc.action === "edit") {
-              if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
-                  App.alert.show("validar_rfc", {
-                      level: "error",
-                      title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC.",
-                      autoClose: false
-                  });
-              }
-            }*/
+             if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
+             App.alert.show("validar_rfc", {
+             level: "error",
+             title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC.",
+             autoClose: false
+             });
+             }
+             }*/
             if (!_.isEmpty(this.model.get('idcliente_c')) && rfc.action === "edit") {
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
@@ -131,8 +131,8 @@
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
 
         /*
-        AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
-      */
+         AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
+         */
         this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
 
         /*
@@ -152,7 +152,7 @@
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
 
-		 /* LEV INICIO */
+        /* LEV INICIO */
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
 
         /*
@@ -195,7 +195,7 @@
         /*
          @author Salvador Lopez
          Se llaman a la funciones para mostrar u ocultar paneles de Fideicomiso y Peps
-        * */
+         * */
         this.model.on('sync', this._hideFideicomiso, this);
         this.model.on('sync', this._hidePeps, this);
         // @author Salvador Lopez
@@ -204,15 +204,15 @@
         this.model.on('sync', this._ActualizaEtiquetas, this);
         this.model.on('sync', this.muestracheks, this);
         /*Victor Martinez Lopez
-        * Deshabilita el campo es proveedor 13-09-2018
-        * */
+         * Deshabilita el campo es proveedor 13-09-2018
+         * */
         this.model.on('sync', this.checkProveedor, this);
         //Display or Hide Vista360
         this.model.on('sync', this._hideVista360, this);
         //Solo Lectura campos Origen
         this.model.on('sync', this.readOnlyOrigen, this);
         /* @author F. Javier Garcia S. 10/07/2018
-            Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
+         Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
          */
         this.model.on('sync', this._hideNPS, this);
         this.model.on('sync', this.hideButton_Conversion, this);
@@ -235,7 +235,9 @@
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique = function (a) {
-            return function () { return this.filter(a) }
+            return function () {
+                return this.filter(a)
+            }
         }(function (a, b, c) {
             return c.indexOf(a, b + 1) < 0
         });
@@ -253,7 +255,6 @@
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
 
 
-
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
@@ -262,7 +263,92 @@
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
+        /** Logica para Asignación modal **/
+        this.model.on('sync', this.hideButtonsModal_Account, this);
+        this.context.on('button:get_account_asesor:click', this.get_Account, this);
+        this.context.on('button:send_account_asesor:click', this.set_Account, this);
 
+    },
+
+    /** Asignacion modal */
+    hideButtonsModal_Account: function () {
+        var Boton1 = this.getField("get_account_asesor");
+        var Boton2 = this.getField("send_accounts_asesor");
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+        var userpuesto = app.user.attributes.puestousuario_c;
+        var puestosBtn1 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
+        var puestosBtn2 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+
+        if (Boton1) {
+            Boton1.listenTo(Boton1, "render", function () {
+                console.log(userpuesto);
+                if (puestosBtn1.includes(userpuesto)) {
+                    Boton1.show();
+                } else {
+                    Boton1.hide();
+                }
+            });
+        }
+
+        if (Boton2) {
+            Boton2.listenTo(Boton2, "render", function () {
+                if (puestosBtn2.includes(userpuesto)) {
+                    Boton2.show();
+                } else {
+                    Boton2.hide();
+                }
+            });
+        }
+    },
+
+    get_Account: function () {
+
+        if (Modernizr.touch) {
+            app.$contentEl.addClass('content-overflow-visible');
+        }
+        /**check whether the view already exists in the layout.
+         * If not we will create a new view and will add to the components list of the record layout
+         * */
+        var quickCreateView = this.layout.getComponent('getAccountModal');
+        if (!quickCreateView) {
+            /** Create a new view object */
+            quickCreateView = app.view.createView({
+                context: this.context,
+                name: 'getAccountModal',
+                layout: this.layout,
+                module: 'Accounts'
+            });
+            /** add the new view to the components list of the record layout*/
+            this.layout._components.push(quickCreateView);
+            this.layout.$el.append(quickCreateView.$el);
+        }
+        /**triggers an event to show the pop up quick create view*/
+        this.layout.trigger("app:view:getAccountModal");
+    },
+
+    set_Account: function () {
+        if (Modernizr.touch) {
+            app.$contentEl.addClass('content-overflow-visible');
+        }
+        /**check whether the view already exists in the layout.
+         * If not we will create a new view and will add to the components list of the record layout
+         * */
+        var quickCreateView = this.layout.getComponent('setAccountModal');
+        if (!quickCreateView) {
+
+            /** Create a new view object */
+            quickCreateView = app.view.createView({
+                context: this.context,
+                name: 'setAccountModal',
+                layout: this.layout,
+                module: 'Accounts'
+            });
+            /** add the new view to the components list of the record layout*/
+            this.layout._components.push(quickCreateView);
+            this.layout.$el.append(quickCreateView.$el);
+        }
+        /**triggers an event to show the pop up quick create view*/
+        this.layout.trigger("app:view:setAccountModal");
     },
 
     saveProdPLD: function (fields, errors, callback) {
@@ -364,12 +450,12 @@
     },
 
     /* F. Javier G. Solar
-          OBS299 Validar que las Direcciones no se repitan 21/11/2018
-       */
+     OBS299 Validar que las Direcciones no se repitan 21/11/2018
+     */
     _direccionDuplicada: function (fields, errors, callback) {
 
         /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
-        OBETENER LAS DESCRIPCIONES DE LOS COMBOS*/
+         OBETENER LAS DESCRIPCIONES DE LOS COMBOS*/
 
         //var objDirecciones = $('.control-group.direccion')
         var objDirecciones = $('.control-group.direccion')
@@ -532,7 +618,6 @@
     },
 
 
-
     fulminantcolor: function () {
         $('#space').remove();
         $('.search-filter').find('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
@@ -542,8 +627,8 @@
     },
 
     /*Victor Martinez Lopez 12-09-2018
-    *La casilla proveedor se debe mantener activa al crear un proveedor
-    * */
+     *La casilla proveedor se debe mantener activa al crear un proveedor
+     * */
     checkProveedor: function () {
         if (this.model.get('tipo_registro_c') == 'Proveedor') {
             this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
@@ -635,10 +720,10 @@
         var origen = this.model.get('origendelprospecto_c');
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         /*
-          -- Bloquea campos si;
-          1.- Origen es Marketing o Inteligencia de negocio
-          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
-        */
+         -- Bloquea campos si;
+         1.- Origen es Marketing o Inteligencia de negocio
+         2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
+         */
         if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origendelprospecto_c');
@@ -828,7 +913,7 @@
      * Función para habilitar campos a solo lectura evaluando condiciones específicas
      */
     _renderHtml: function ()
-    //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
+        //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
 
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
@@ -840,9 +925,9 @@
         }
 
         /*
-          @author Victo Martinez - 01/08/2018
-          Deshabilita campos: Tipo de cuenta y subtipo de cuenta
-        */
+         @author Victo Martinez - 01/08/2018
+         Deshabilita campos: Tipo de cuenta y subtipo de cuenta
+         */
         this.noEditFields.push('subtipo_cuenta_c');
         this.noEditFields.push('tipo_registro_c');
 
@@ -874,11 +959,11 @@
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
         }
-		
-		
-		if (App.user.attributes.deudor_factoraje_c != true) {
-			//Readonly check factoraje
-			self.noEditFields.push('deudor_factor_c');
+
+
+        if (App.user.attributes.deudor_factoraje_c != true) {
+            //Readonly check factoraje
+            self.noEditFields.push('deudor_factor_c');
         }
 
 
@@ -1086,37 +1171,37 @@
                             }
                         } else {
                             /*$('.noEdit.fieldset.actions.detail.btn-group').hide();
-                            $('i').removeClass('fa-pencil');
+                             $('i').removeClass('fa-pencil');
 
-                            var panels_hide = app.lang.getAppListStrings('panels_hide_list');
-                            var fields_hide = app.lang.getAppListStrings('fields_hide_list');
+                             var panels_hide = app.lang.getAppListStrings('panels_hide_list');
+                             var fields_hide = app.lang.getAppListStrings('fields_hide_list');
 
-                            for (var panel in panels_hide) {
-                                if(panel=='LBL_RECORDVIEW_PANEL9' || panel=='LBL_RECORDVIEW_PANEL13'){
-                                    $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        e.stopImmediatePropagation();
-                                        return false;
-                                    });
-                                }else {
-                                    $('.row-fluid.panel_body.' + panel).click(function (e) {
-                                        e.stopPropagation();
-                                        e.preventDefault();
-                                        e.stopImmediatePropagation();
-                                        return false;
-                                    });
-                                }
-                            }
+                             for (var panel in panels_hide) {
+                             if(panel=='LBL_RECORDVIEW_PANEL9' || panel=='LBL_RECORDVIEW_PANEL13'){
+                             $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
+                             e.stopPropagation();
+                             e.preventDefault();
+                             e.stopImmediatePropagation();
+                             return false;
+                             });
+                             }else {
+                             $('.row-fluid.panel_body.' + panel).click(function (e) {
+                             e.stopPropagation();
+                             e.preventDefault();
+                             e.stopImmediatePropagation();
+                             return false;
+                             });
+                             }
+                             }
 
-                            for (var field in fields_hide) {
-                                $('div[data-name='+field+']').click(function (e) {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    e.stopImmediatePropagation();
-                                    return false;
-                                });
-                            }*/
+                             for (var field in fields_hide) {
+                             $('div[data-name='+field+']').click(function (e) {
+                             e.stopPropagation();
+                             e.preventDefault();
+                             e.stopImmediatePropagation();
+                             return false;
+                             });
+                             }*/
 
                         }
                         return data;
@@ -1128,14 +1213,12 @@
     },
 
 
-
-
     /*
-      * @author F. Javier G. Solar
-      * 18/07/2018
-      * Se debe ocultar los botones de Regresa a Lead y Prospecto contactado si cumple
-      * con las condiciones de visibilidad .
-      * */
+     * @author F. Javier G. Solar
+     * 18/07/2018
+     * Se debe ocultar los botones de Regresa a Lead y Prospecto contactado si cumple
+     * con las condiciones de visibilidad .
+     * */
     hideButton_Conversion: function () {
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
@@ -1269,10 +1352,10 @@
 
         //Evaluación para mostrar botones
         /*
-          * Regresar a lead:
-          * tipo_registro_c = Prospecto
-          * && subtipo_cuenta_c = Contactado
-        */
+         * Regresar a lead:
+         * tipo_registro_c = Prospecto
+         * && subtipo_cuenta_c = Contactado
+         */
         if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
             (tipofleet == "Prospecto" && subtipofleet == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').show();
@@ -1283,9 +1366,9 @@
 
         //Evaluación para mostrar botones
         /*
-        * Prospecto contactado:
-        * tipo_registro_c = Lead
-        */
+         * Prospecto contactado:
+         * tipo_registro_c = Lead
+         */
         if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
@@ -1294,10 +1377,10 @@
         }
 
         /*
-        * Conviert a Lead:
-        * tipo_registro_c = Persona
-        * OR tipo_registro_c = Proveedor
-        */
+         * Conviert a Lead:
+         * tipo_registro_c = Persona
+         * OR tipo_registro_c = Proveedor
+         */
         if (((leasingprod == "Persona" || leasingprod == "Proveedor") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Persona" || factprod == "Proveedor") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Persona" || caprod == "Proveedor") && userprod.includes("3") && asesorCA == logueado) || ((tipofleet == "Persona" || tipofleet == "Proveedor") && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
@@ -1307,9 +1390,9 @@
 
         //Evaluación para mostrar botones
         /*
-        * Convertir Cliente Uniclick
-        * tipo_registro_c = Lead
-        */
+         * Convertir Cliente Uniclick
+         * tipo_registro_c = Lead
+         */
         if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
             $('[name="regresalead"]').hide();
             $('[name="clienteuniclick"]').show();
@@ -1319,8 +1402,8 @@
     },
 
     /* @author F. Javier Garcia S. 10/07/2018
-                Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
-             */
+     Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
+     */
     _hideNPS: function () {
         if (this.model.get('tipo_registro_c') != "Cliente") {
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
@@ -1371,7 +1454,8 @@
             var nombre = this.model.get('primernombre_c');
             var comprueba = expresion.test(nombre);
             if (comprueba != true) {
-                camponame = camponame + '<b>-Primer Nombre<br></b>';;
+                camponame = camponame + '<b>-Primer Nombre<br></b>';
+                ;
             }
         }
         if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
@@ -1379,7 +1463,8 @@
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaap = expresion.test(apaterno);
             if (validaap != true) {
-                camponame = camponame + '<b>-Apellido Paterno<br></b>';;
+                camponame = camponame + '<b>-Apellido Paterno<br></b>';
+                ;
             }
         }
         if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
@@ -1387,7 +1472,8 @@
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaam = expresion.test(amaterno);
             if (validaam != true) {
-                camponame = camponame + '<b>-Apellido Materno<br></b>';;
+                camponame = camponame + '<b>-Apellido Materno<br></b>';
+                ;
             }
         }
         if (camponame) {
@@ -1456,7 +1542,7 @@
                 };
                 var dnbProfileUrl = app.api.buildURL("Accounts/GenerarCURP", '', {}, {});
                 if (this.model.get('pais_nacimiento_c') == 2) {
-                    app.api.call("create", dnbProfileUrl, { curpdata: firmoParams }, {
+                    app.api.call("create", dnbProfileUrl, {curpdata: firmoParams}, {
                         success: _.bind(function (data) {
                             if (data['UNI2_UTL_002_CreaCurpPersonaResult']['resultado']) {
                                 this.model.set('curp_c', data['UNI2_UTL_002_CreaCurpPersonaResult']['curp']);
@@ -1552,8 +1638,8 @@
                         falta = falta + '<b>Fecha Constitutiva<br></b>';
                     }
                     /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
-                        falta = falta + '<b>Nombre Comercial<br></b>';
-                    }*/
+                     falta = falta + '<b>Nombre Comercial<br></b>';
+                     }*/
                     if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                         falta = falta + '<b>Raz\u00F3n Social<br></b>';
                     }
@@ -1685,10 +1771,10 @@
     },
 
     /*
-    * @author F. Javier G. Solar
-    * 18/07/2018
-    * El botón tendrá como finalidad cambiar el Tipo y Subtipo de Cuenta.
-    * */
+     * @author F. Javier G. Solar
+     * 18/07/2018
+     * El botón tendrá como finalidad cambiar el Tipo y Subtipo de Cuenta.
+     * */
 
     regresa_leadClicked: function () {
         App.alert.show('RegresaAlead', {
@@ -1803,7 +1889,7 @@
     },
 
     /* @Jesus Carrillo
-        Metodo para verificar  las llamadas de la cuenta
+     Metodo para verificar  las llamadas de la cuenta
      */
 
     //CAMBIOS EFECTUADOS
@@ -1832,7 +1918,7 @@
         });
     },
     /* @Jesus Carrillo
-        Metodo para verificar  las reuniones de la cuenta
+     Metodo para verificar  las reuniones de la cuenta
      */
     getreuniones: function (callBackResult) {
         var cday = new Date();
@@ -1858,7 +1944,7 @@
         });
     },
     /* @Jesus Carrillo
-        Metodo para validar campos de telefonos y direcciones
+     Metodo para validar campos de telefonos y direcciones
      */
     validar_fields: function (valContacto, validar_fields) {
         App.alert.show('loadingConvertir', {
@@ -1936,22 +2022,22 @@
             valMedios = 1;
         }
         /*
-        if(fieldsdirec.includes(false)==true){
-            app.alert.show('alert_fields_empty2', {
-                level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b>',
-            });
-            valMedios = 1;
-        }
-        */
+         if(fieldsdirec.includes(false)==true){
+         app.alert.show('alert_fields_empty2', {
+         level: 'error',
+         messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b>',
+         });
+         valMedios = 1;
+         }
+         */
 
         /*    if(indica_direc_admin==0){
-                app.alert.show('alert_fields_empty3', {
-                    level: 'error',
-                    messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
-                });
-                valMedios = 1;
-            } */
+         app.alert.show('alert_fields_empty3', {
+         level: 'error',
+         messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
+         });
+         valMedios = 1;
+         } */
 
         if (valMedios == 0 && valContacto == 0 && validar_fields == 0) {
             if (this.model.get('tipo_registro_c') == "Lead") {
@@ -2019,10 +2105,10 @@
         }
     },
     /* @Jesus Carrillo
-        Metodo que convierte a prospecto contactado
-       *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
-       * 22-08-2018 Victor Martínez
-        */
+     Metodo que convierte a prospecto contactado
+     *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
+     * 22-08-2018 Victor Martínez
+     */
     prospectocontactadoClicked: function () {
         App.alert.show('convierteLead_a_Prospecto', {
             level: 'process',
@@ -2039,10 +2125,10 @@
             return;
         }
         /*var validacion =  this.validaContactado();
-        if(validacion == 1){
-            return;
+         if(validacion == 1){
+         return;
 
-        }*/
+         }*/
 
         self = this;
         self.flagheld = 0;
@@ -2098,11 +2184,11 @@
                         /*
 
                          if(this.totalllamadas==0 && self.totalreuniones==0){
-                             app.alert.show('alert_calls', {
-                                 level: 'error',
-                                 messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
-                             });
-                             valRelacionados = 1;
+                         app.alert.show('alert_calls', {
+                         level: 'error',
+                         messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
+                         });
+                         valRelacionados = 1;
                          }
 
                          //Valida datos de cuenta
@@ -2236,7 +2322,7 @@
             });
         }
         else {
-            var usuario = app.data.createBean('Users', { id: app.user.id });
+            var usuario = app.data.createBean('Users', {id: app.user.id});
             usuario.fetch({
                 success: _.bind(function (modelo) {
                     var contains = function (needle) {
@@ -2569,7 +2655,7 @@
         };
 
         var dnbProfileUrl = app.api.buildURL("Accounts/ValidarRFC", '', {}, {});
-        app.api.call("create", dnbProfileUrl, { rfcdata: firmoParams }, {
+        app.api.call("create", dnbProfileUrl, {rfcdata: firmoParams}, {
             success: _.bind(function (data) {
                 if (data != null) {
                     var rfc = this.model.get('rfc_c');
@@ -2737,46 +2823,46 @@
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
                 /*app.alert.show("Proveedor Requerido", {
-                    level: "error",
-                    title: "Debe seleccionar un un tipo de proveedor al menos",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "Debe seleccionar un un tipo de proveedor al menos",
+                 autoClose: false
+                 });*/
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
             if (this.model.get('tct_macro_sector_ddw_c') == '' || this.model.get('tct_macro_sector_ddw_c') == null) {
                 /*app.alert.show("Macro sector requerido", {
-                    level: "error",
-                    title: "El campo macro sector es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo macro sector es requerido",
+                 autoClose: false
+                 });*/
                 errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                 errors['tct_macro_sector_ddw_c'].required = true;
             }
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
-                    level: "error",
-                    title: "El campo RFC es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo RFC es requerido",
+                 autoClose: false
+                 });*/
                 errors['rfc_c'] = errors['rfc_c'] || {};
                 errors['rfc_c'].required = true;
             }
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
                 /*app.alert.show("Fecha de nacimiento requerida", {
-                    level: "error",
-                    title: "El campo fecha de nacimiento es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo fecha de nacimiento es requerido",
+                 autoClose: false
+                 });*/
                 if (this.model.get('fechadenacimiento_c') == '' || this.model.get('fechadenacimiento_c') == null) {
                     errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
                     errors['fechadenacimiento_c'].required = true;
                 }
                 /*app.alert.show("Pais de nacimiento requerido", {
-                    level: "error",
-                    title: "El campo pa\u00EDs de nacimiento es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo pa\u00EDs de nacimiento es requerido",
+                 autoClose: false
+                 });*/
                 if (this.model.get('pais_nacimiento_c') == '' || this.model.get('pais_nacimiento_c') == null) {
                     errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
                     errors['pais_nacimiento_c'].required = true;
@@ -2786,20 +2872,20 @@
                     errors['estado_nacimiento_c'].required = true;
                 }
                 /*app.alert.show("Estado civil requerido", {
-                    level: "error",
-                    //title: "El campo estado civil es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 //title: "El campo estado civil es requerido",
+                 autoClose: false
+                 });*/
                 if (this.model.get('estadocivil_c') == '' || this.model.get('estadocivil_c') == null) {
                     errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                     errors['estadocivil_c'].required = true;
                 }
 
                 /*app.alert.show("Profesion requerido", {
-                    level: "error",
-                    title: "El campo profesi\u00F3n es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo profesi\u00F3n es requerido",
+                 autoClose: false
+                 });*/
                 if (this.model.get('profesion_c') == '' || this.model.get('profesion_c') == null) {
                     errors['profesion_c'] = errors['profesion_c'] || {};
                     errors['profesion_c'].required = true;
@@ -2807,10 +2893,10 @@
             }
             else {
                 /*app.alert.show("Pais de constitucion", {
-                    level: "error",
-                    title: "El campo pa\u00EDs de constituci\u00F3n es requerido",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "El campo pa\u00EDs de constituci\u00F3n es requerido",
+                 autoClose: false
+                 });*/
                 if (this.model.get('pais_nacimiento_c') == '' || this.model.get('pais_nacimiento_c') == null) {
                     errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
                     errors['pais_nacimiento_c'].required = true;
@@ -2948,10 +3034,10 @@
             var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
             if (metodoProspeccion.length == 0 || this.model.get('metodo_prospeccion_c') == null) {
                 /*app.alert.show("Metodo de Prospeccion Requerido", {
-                    level: "error",
-                    title: "Debe indicar el metodo de prospecci\u00F3n",
-                    autoClose: false
-                });*/
+                 level: "error",
+                 title: "Debe indicar el metodo de prospecci\u00F3n",
+                 autoClose: false
+                 });*/
                 errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
                 errors['metodo_prospeccion_c'].required = true;
             }
@@ -3170,7 +3256,7 @@
                             autoClose: false,
                             return: false,
                         });
-                        app.router.navigate('#Accounts', { trigger: true });
+                        app.router.navigate('#Accounts', {trigger: true});
                     }
                 }, this),
             });
@@ -3196,7 +3282,7 @@
                     autoClose: false,
                     return: false,
                 });
-                app.router.navigate('#Accounts', { trigger: true });
+                app.router.navigate('#Accounts', {trigger: true});
             } else {
                 app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                     success: _.bind(function (es_promotor) {
@@ -3208,7 +3294,7 @@
                                 autoClose: false,
                                 return: false,
                             });
-                            app.router.navigate('#Accounts', { trigger: true });
+                            app.router.navigate('#Accounts', {trigger: true});
                         }
                     }, this),
                 });
@@ -3373,7 +3459,7 @@
                 direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
             if (direccionesfaltantes != "") {
-                
+
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
@@ -3544,10 +3630,10 @@
             if (App.user.attributes.tipodeproducto_c == '1') {
                 //Pregunta: campo2ddw-ap
                 /* if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                     $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
-                     faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
                  }else{
-                     $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
+                 $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
                  }*/
                 //Pregunta: campo3rel-ap
                 if ($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val') == '2') {
@@ -3558,48 +3644,48 @@
                 }
                 //Pregunta: campo4ddw-ap
                 /*if($('.campo4ddw-ap').select2('val') == ''){
-                    $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
-                    faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo5rel-ap
                 /*if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
-                    $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
-                    faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo5rel-ap').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo5rel-ap').find('.select2-choice').css('border-color','');
+                 }*/
                 /*//Pregunta: campo7ddw-ap
-                if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                    $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
-                    faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                }
-                if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                    $('.campo8txt-ap').css('border-color','red');
-                    faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo8txt-ap').find('.select2-choice').css('border-color','');
-                }
-                if ($('.campo10txt-ap').val() == '' && $('.campo9ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                    $('.campo10txt-ap').css('border-color','red');
-                    faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo10txt-ap').find('.select2-choice').css('border-color','');
-                }*/
+                 if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                 $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }
+                 if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                 $('.campo8txt-ap').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo8txt-ap').find('.select2-choice').css('border-color','');
+                 }
+                 if ($('.campo10txt-ap').val() == '' && $('.campo9ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                 $('.campo10txt-ap').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo10txt-ap').find('.select2-choice').css('border-color','');
+                 }*/
                 /* //Pregunta: campo9ddw-ap
                  if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                     $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
-                     faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
                  }else{
-                     $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
+                 $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
                  }
                  //Pregunta: campo6ddw-ap
                  if($('.campo6ddw-ap').select2('val') == ''){
-                     $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
-                     faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+                 $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
                  }else{
-                     $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
+                 $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
                  }*/
                 //Pregunta: campo17txt-ap
                 if ($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked) {
@@ -3611,22 +3697,22 @@
                 //Pregunta: campo26txt-ap
 
                 /*if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
- 
-                   $('.campo26txt-ap').css('border-color','red');
-                   faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
-               }else{
-                   $('.campo26txt-ap').css('border-color','');
-               }*/
+
+                 $('.campo26txt-ap').css('border-color','red');
+                 faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo26txt-ap').css('border-color','');
+                 }*/
             }
             //Valida campos para FF
             if (App.user.attributes.tipodeproducto_c == '4') {
                 //Pregunta: campo2ddw-ff
                 /*if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                    $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
-                    faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo3rel-ff
                 if ($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val') == '2') {
                     $('.campo3rel-ff').find('.select2-choice').css('border-color', 'red');
@@ -3636,39 +3722,39 @@
                 }
                 //Pregunta: campo4ddw-ff
                 /* if($('.campo4ddw-ff').select2('val') == ''){
-                     $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
-                     faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
                  }else{
-                     $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
+                 $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
                  }*/
                 //Pregunta: campo5rel-ff
                 /*if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
-                    $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
-                    faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo5rel-ff').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo5rel-ff').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo21ddw-ff
                 /*  if($('.campo21ddw-ff').select2('val') == ''){
-                      $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
-                      faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                  }else{
-                      $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
-                  }
-                  //Pregunta: campo24ddw-ff
-                  if($('.campo24ddw-ff').select2('val') == ''){
-                      $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
-                      faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                  }else{
-                      $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
-                  }
-                  //Pregunta: campo6ddw-ff
-                  if($('.campo6ddw-ff').select2('val') == ''){
-                      $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
-                      faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                  }else{
-                      $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
-                  }*/
+                 $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo24ddw-ff
+                 if($('.campo24ddw-ff').select2('val') == ''){
+                 $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo6ddw-ff
+                 if($('.campo6ddw-ff').select2('val') == ''){
+                 $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
+                 faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo17txt-ff
                 if ($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked && $('.campo2ddw-ff').select2('val') == '2') {
                     $('.campo17txt-ff').css('border-color', 'red');
@@ -3681,11 +3767,11 @@
             if (App.user.attributes.tipodeproducto_c == '3') {
                 //Pregunta: campo2ddw-ca
                 /*if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                    $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
-                    faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
+                 faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo3rel-ca
                 if ($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val') == '2') {
                     $('.campo3rel-ca').find('.select2-choice').css('border-color', 'red');
@@ -3695,25 +3781,25 @@
                 }
                 //Pregunta: campo4ddw-ca
                 /*if($('.campo4ddw-ca').select2('val') == ''){
-                    $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
-                    faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                }else{
-                    $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
-                }*/
+                 $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
+                 faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
+                 }*/
                 //Pregunta: campo5rel-ca
                 /* if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
-                     $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
-                     faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
+                 $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
+                 faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
                  }else{
-                     $('.campo5rel-ca').find('.select2-choice').css('border-color','');
+                 $('.campo5rel-ca').find('.select2-choice').css('border-color','');
                  }*/
                 //Pregunta: campo6ddw-ca
                 /*  if($('.campo6ddw-ca').select2('val') == ''){
-                      $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
-                      faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                  }else{
-                      $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
-                  }*/
+                 $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
+                 faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
+                 }*/
             }
             if ($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
                 $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
@@ -3775,7 +3861,7 @@
 
             this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
             var c = 0;
-            for (let elem in this.obj_dates) {
+            for (var elem in this.obj_dates) { // revisar con Axel antes subir venia let cambie por var
                 if (this.obj_dates[elem].trim() == "") {
                     $('#' + elem).css('border-color', 'red');
                     c++;
@@ -3858,7 +3944,7 @@
             $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
             faltantesleasnv += 1;
         }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == ""  && $('.campo13nvl').val().trim() == "" ) {
+        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
             $('.campo10nvl').css('border-color', 'red');
             $('.campo13nvl').css('border-color', 'red');
             faltantesleasnv += 1;
@@ -3887,7 +3973,8 @@
             });
             errors['error_leasing'] = errors['error_leasing'] || {};
             errors['error_leasing'].required = true;
-        } if (faltantesleasnv == 0 && $('.campo1chk')[0].checked == true && lnv.leadNoViable.PromotorLeasing == "") {
+        }
+        if (faltantesleasnv == 0 && $('.campo1chk')[0].checked == true && lnv.leadNoViable.PromotorLeasing == "") {
             this.model.set('promotorleasing_c', '9 - No Viable');
             this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
             lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
@@ -4459,7 +4546,7 @@
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
             var campos = ["tct_no_autos_u_int_c", "tct_no_autos_e_int_c", "tct_no_motos_int_c", "tct_no_camiones_int_c"];
-            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, { fields: campos.join(',') });
+            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, {fields: campos.join(',')});
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
                     Pautos.autos = data;
@@ -4536,9 +4623,9 @@
                 _.each(this.context.children, function (child) {
                     if (child.get('isSubpanel') && !child.get('hidden')) {
                         if (child.get('collapsed')) {
-                            child.resetLoadFlag({ recursive: false });
+                            child.resetLoadFlag({recursive: false});
                         } else {
-                            child.reloadData({ recursive: false });
+                            child.reloadData({recursive: false});
                         }
                     }
                 });
@@ -4609,7 +4696,8 @@
                 var nombre = this.model.get('primernombre_c');
                 var res = expresion.test(nombre);
                 if (res != true) {
-                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';
+                    ;
                     errors['primernombre_c'] = errors['primernombre_c'] || {};
                     errors['primernombre_c'].required = true;
                 }
@@ -4619,7 +4707,8 @@
                 var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(apaterno);
                 if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';
+                    ;
                     errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
                     errors['apellidopaterno_c'].required = true;
                 }
@@ -4629,7 +4718,8 @@
                 var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
                 var res = expresion.test(amaterno);
                 if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';
+                    ;
                     errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
                     errors['apellidomaterno_c'].required = true;
                 }
@@ -4945,5 +5035,5 @@
             });
         }
     },
-	
+
 })
