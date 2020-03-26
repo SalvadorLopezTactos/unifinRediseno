@@ -17,7 +17,6 @@ class AgentesTelefonicos extends SugarApi
     public function AgentesTelefonicos1($api, $args)
     {
         global $db;
-        global $app_list_strings;
         global $current_user;
         $user_id = $args['data']['user_id'];
         $reports_to_id = $args['data']['reports_to_id'];
@@ -39,7 +38,7 @@ class AgentesTelefonicos extends SugarApi
             $GLOBALS['db']->query($sqlInsert);
 
         }
-
+        //Actualiza el registro en users y users_cstm
         $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}' where a.id = b.id_c and a.id = '{$user_id}'";
         $result = $db->query($query);
 		    return $result;
