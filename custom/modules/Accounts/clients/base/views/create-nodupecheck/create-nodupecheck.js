@@ -391,6 +391,8 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
         //Oculta campo Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
+        //Oculta panel de uni_productos
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {

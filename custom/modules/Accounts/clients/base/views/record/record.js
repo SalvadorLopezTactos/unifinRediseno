@@ -231,6 +231,7 @@
         this.get_resumen();
         this.get_analizate();
         //this.get_noviable();
+        this.get_uni_productos();
 
 
         //Funcion para eliminar duplicados de arrays
@@ -992,6 +993,8 @@
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
         //Oculta etiqueta de Analizate
         this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
+        //Oculta etiqueta de uni_productos
+        this.$("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;');
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
@@ -5035,5 +5038,25 @@
             });
         }
     },
+
+    get_uni_productos: function () {
+        //Extiende This
+        this.Productos = [];
+
+        //Recupera información
+        var idCuenta = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_uni_productos_1'), null, {
+            success: function (data) {
+
+                cont_uni_p.Productos = data;
+                cont_uni_p.render();
+
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+    },
+
 
 })
