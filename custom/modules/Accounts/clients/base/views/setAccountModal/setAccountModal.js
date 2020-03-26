@@ -27,7 +27,7 @@
                 this.prod_list = list_html;
                 this.context_Account = options;
                 console.log(this.context_Account);
-                f(list_html!='<option value="" >  </option>') {
+                if(list_html!='<option value="" >  </option>') {
 
                 this.render();
                 this.$('.modal').modal({
