@@ -1102,6 +1102,8 @@
     },
 
     disable_panels_rol: function () {
+
+        self_this=this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1121,7 +1123,8 @@
 
                             if (this.model.get('tipo_registro_c') != "Persona") {
 
-                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                //$('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                self_this.$('[data-event="button:edit_button:click"]').hide();
 
                                 $('i').removeClass('fa-pencil');
 
@@ -1142,6 +1145,7 @@
     },
 
     disable_panels_team: function () {
+        self1=this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1161,7 +1165,9 @@
 
                             if (this.model.get('tipo_registro_c') != "Persona") {
 
-                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                //$('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                                                self1.$('[data-event="button:edit_button:click"]').hide();
+
 
                                 $('i').removeClass('fa-pencil');
 
@@ -1717,7 +1723,16 @@
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
             || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c') == true) {
-
+            if(_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_c') == "Prospecto") {
+                $('#tabletelefonos').css('border', '2px solid red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
+                app.alert.show("Telefono requeridp", {
+                    level: "error",
+                    title: "Al menos un tel\u00E9fono es requerido.",
+                    autoClose: false
+                });
+            }
             if (_.isEmpty(this.oDirecciones.direccion)) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
