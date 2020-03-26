@@ -1714,7 +1714,16 @@
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
             || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c') == true) {
-
+            if(_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_c') == "Prospecto") {
+                $('#tabletelefonos').css('border', '2px solid red');
+                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                errors['account_telefonos1'].required = true;
+                app.alert.show("Telefono requeridp", {
+                    level: "error",
+                    title: "Al menos un tel\u00E9fono es requerido.",
+                    autoClose: false
+                });
+            }
             if (_.isEmpty(this.oDirecciones.direccion)) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;

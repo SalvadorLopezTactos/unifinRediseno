@@ -67,3 +67,11 @@ $hook_array['after_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'guardaproductos' // name of the function
 );
+
+$hook_array['after_save'][] = Array(
+    3,
+    'cambiar estatus Cuenta',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks',
+    'ProspectoContactado'
+);

@@ -107,7 +107,7 @@ array (
                 'label' => 'Generar Disposicion',
                 'acl_action' => 'view',
               ),
-              10 => 
+/*              10 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:prospecto_contactado:click',
@@ -124,7 +124,7 @@ array (
                 'label' => 'LBL_REGRESA_A_LEAD_C',
                 'acl_action' => 'view',
                 'css_class' => 'btn-regresa-alead',
-              ),
+              ),*/
               12 => 
               array (
                 'type' => 'rowaction',
