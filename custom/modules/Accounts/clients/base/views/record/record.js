@@ -1099,6 +1099,8 @@
     },
 
     disable_panels_rol: function () {
+
+        self_this=this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1118,7 +1120,8 @@
 
                             if (this.model.get('tipo_registro_c') != "Persona") {
 
-                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                //$('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                self_this.$('[data-event="button:edit_button:click"]').hide();
 
                                 $('i').removeClass('fa-pencil');
 
@@ -1139,6 +1142,7 @@
     },
 
     disable_panels_team: function () {
+        self1=this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1158,7 +1162,9 @@
 
                             if (this.model.get('tipo_registro_c') != "Persona") {
 
-                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                //$('.noEdit.fieldset.actions.detail.btn-group').hide();
+                                                                self1.$('[data-event="button:edit_button:click"]').hide();
+
 
                                 $('i').removeClass('fa-pencil');
 
