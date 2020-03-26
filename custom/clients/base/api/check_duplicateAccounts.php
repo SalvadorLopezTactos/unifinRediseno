@@ -286,7 +286,7 @@ SITE;
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
                         }
-                        if ($productos== '8' && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos== '8') {
 
                             $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
                         }
