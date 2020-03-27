@@ -1,0 +1,72 @@
+<?php
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+$mod_strings = array (
+  'LBL_TEAM' => 'Equipos',
+  'LBL_TEAMS' => 'Equipos',
+  'LBL_TEAM_ID' => 'Id de Equipo',
+  'LBL_ASSIGNED_TO_ID' => 'Id de Usuario Asignado',
+  'LBL_ASSIGNED_TO_NAME' => 'Usuario',
+  'LBL_TAGS_LINK' => 'Etiquetas',
+  'LBL_TAGS' => 'Etiquetas',
+  'LBL_ID' => 'ID',
+  'LBL_DATE_ENTERED' => 'Fecha de Creación',
+  'LBL_DATE_MODIFIED' => 'Última Modificación',
+  'LBL_MODIFIED' => 'Modificado Por',
+  'LBL_MODIFIED_ID' => 'Modificado Por Id',
+  'LBL_MODIFIED_NAME' => 'Modificado por Nombre',
+  'LBL_CREATED' => 'Creado Por',
+  'LBL_CREATED_ID' => 'Creado Por Id',
+  'LBL_DOC_OWNER' => 'Propietario del documento',
+  'LBL_USER_FAVORITES' => 'Usuarios que Prefieren',
+  'LBL_DESCRIPTION' => 'Mensajes',
+  'LBL_DELETED' => 'Eliminado',
+  'LBL_NAME' => 'Nombre',
+  'LBL_CREATED_USER' => 'Creado Por Usuario',
+  'LBL_MODIFIED_USER' => 'Modificado Por Usuario',
+  'LBL_LIST_NAME' => 'Nombre',
+  'LBL_EDIT_BUTTON' => 'Editar',
+  'LBL_REMOVE' => 'Quitar',
+  'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modificado por Nombre',
+  'LBL_COMMENTLOG' => 'Comment Log',
+  'LBL_LIST_FORM_TITLE' => 'Conversaciones en Chattigo Lista',
+  'LBL_MODULE_NAME' => 'Conversaciones en Chattigo',
+  'LBL_MODULE_TITLE' => 'Conversaciones en Chattigo',
+  'LBL_MODULE_NAME_SINGULAR' => 'Chattigo',
+  'LBL_HOMEPAGE_TITLE' => 'Mi Conversaciones en Chattigo',
+  'LNK_NEW_RECORD' => 'Crear Chattigo',
+  'LNK_LIST' => 'Vista Conversaciones en Chattigo',
+  'LNK_IMPORT_C5515_UNI_CHATTIGO' => 'Importar Conversaciones en Chattigo',
+  'LBL_SEARCH_FORM_TITLE' => 'Buscar Chattigo',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'Ver Historial',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Actividades',
+  'LBL_C5515_UNI_CHATTIGO_SUBPANEL_TITLE' => 'Conversaciones en Chattigo',
+  'LBL_NEW_FORM_TITLE' => 'Nuevo Chattigo',
+  'LNK_IMPORT_VCARD' => 'Importar Chattigo vCard',
+  'LBL_IMPORT' => 'Importar Conversaciones en Chattigo',
+  'LBL_IMPORT_VCARDTEXT' => 'Automatically create a new Chattigo record by importing a vCard from your file system.',
+  'LBL_ID_CHATTIGO' => 'Id chattigo',
+  'LBL_INICIO_CONVERSACION' => 'Inicio Conversación',
+  'LBL_FIN_CONVERSACION' => 'Fin Conversación',
+  'LBL_TZ_OFFSET' => 'Tz Offset',
+  'LBL_ID_FROM' => 'id from',
+  'LBL_TIPO_COMUNICACION' => 'Tipo Comunicacion',
+  'LBL_DID' => 'did',
+  'LBL_ID_DESTINO' => 'id destino',
+  'LBL_MSISDN' => 'msisdn',
+  'LBL_TYPIFICACTION_DESCRIPTION' => 'Descripción de Tipificación',
+  'LBL_AGENTNAME' => 'Nombre del Agente',
+  'LBL_USERNAME' => 'Usuario Agente',
+  'LBL_CAMPAIGN_ID_CHATTIGO' => 'Campaign Id Chattigo',
+  'LBL_CAMPAIGN_NAME_CHATTIGO' => 'Nombre Campaña Chattigo',
+  'LBL_STATE_CHATTIGO' => 'Estado chattigo',
+  'LBL_VIA_COMUNICACION' => 'Via comunicación',
+);
