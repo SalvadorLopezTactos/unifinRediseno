@@ -1312,6 +1312,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
         $gclid='';//este campo se obtiene del lead relacionado campo gclid
         $conversion_name='Conv CRM';
+        $tipo_producto_solicitud='';
 
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea"
@@ -1337,7 +1338,7 @@ where rfc_c = '{$bean->rfc_c}' and
             }
 
             //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
-            if($gclid != ''){
+            if($gclid != '' && $gclid !=null){
 
                 //Monto de línea= Campo Opps= monto_c
                 $conversion_value='0';
@@ -1350,30 +1351,34 @@ where rfc_c = '{$bean->rfc_c}' and
                     if (!empty($opps_relacionadas)) {
                         foreach ($opps_relacionadas as $opp) {
                             $conversion_value=$opp->monto_c;
+                            $tipo_producto_solicitud=$opp->tipo_producto_c;
                         }
-
 
                     }
 
                 }
 
-                //Estableciendo la hora en formato "24/03/2020 19:00:00"
-                date_default_timezone_set('America/Mexico_City');
-                $conversion_time=date ('d/m/Y H:i:s');
+                //Se escribe en csv cuando la solicitud es diferente al tipo de producto Uniclick
+                if($tipo_producto_solicitud !='' && $tipo_producto_solicitud!='8'){
 
-                //Limpiando el monto, ya que en el csv espera solo cantidades enteras, sin decimales
-                $conv_entero=explode('.',$conversion_value);
+                    //Estableciendo la hora en formato "24/03/2020 19:00:00"
+                    date_default_timezone_set('America/Mexico_City');
+                    $conversion_time=date ('d/m/Y H:i:s');
 
-                $ruta_archivo="custom/plantillaCSV/clientes_lv.csv";
+                    //Limpiando el monto, ya que en el csv espera solo cantidades enteras, sin decimales
+                    $conv_entero=explode('.',$conversion_value);
 
-                if (file_exists($ruta_archivo)) {
-                    $file = fopen($ruta_archivo,"a");
+                    $ruta_archivo="custom/plantillaCSV/clientes_lv.csv";
 
-                    fwrite($file, $gclid.','.$conversion_name.','.$conversion_time.','.$conv_entero[0].','.PHP_EOL);
+                    if (file_exists($ruta_archivo)) {
+                        $file = fopen($ruta_archivo,"a");
 
-                    fclose($file);
+                        fwrite($file, $gclid.','.$conversion_name.','.$conversion_time.','.$conv_entero[0].','.PHP_EOL);
+
+                        fclose($file);
+                    }
+
                 }
-
 
             }
 
