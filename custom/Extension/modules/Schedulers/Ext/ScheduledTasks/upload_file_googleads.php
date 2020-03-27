@@ -28,6 +28,10 @@ function upload_file_googleads(){
     date_default_timezone_set('America/Mexico_City');
     $fecha= date('Y').date('m').date('d');
 
+    //Path en donde se guardará el archivo por sftp
+    $path_unifin=$sugar_config['path_unifin'];
+    $path_historicos=$sugar_config['path_historicos'];
+
 
     if (file_exists($file)) {
         $sftp = new Net_SFTP($host, $port);
@@ -35,13 +39,13 @@ function upload_file_googleads(){
         if ( $sftp->login($username, $password) ) {
 
             $success = $sftp->put(
-                '/ftp/desarrollo/conversiones_unifin.csv',
+                $path_unifin.'/conversiones_unifin.csv',
                 $file,
                 NET_SFTP_LOCAL_FILE
             );
 
             $success = $sftp->put(
-                '/ftp/desarrollo/conversiones_unifin_'.$fecha.'.csv',
+                $path_historicos.'/conversiones_unifin_'.$fecha.'.csv',
                 $file,
                 NET_SFTP_LOCAL_FILE
             );
