@@ -91,6 +91,7 @@
                 })
 
                 var list_html = '<option value="" >  </option>';
+
                 _.each(productos, function (value, key) {
                     if (temp_array.includes(key)) {
                         list_html += '<option value="' + key + '">' + productos[key] + '</option>';
@@ -99,21 +100,35 @@
 
                 this.prod_list = list_html;
                 this.context_Account = options;
-                this.render();
-                this.$('.modal').modal({
-                    backdrop: '',
-                    keyboard:true,
-                    focus:true
-                });
-                this.$('.modal').modal('show');
-                $('.datepicker').css('z-index', '2000px');
-                app.$contentEl.attr('aria-hidden', true);
-                $('.modal-backdrop').insertAfter($('.modal'));
+
+                if(list_html!='<option value="" >  </option>') {
+                    this.render();
+                    this.$('.modal').modal({
+                        backdrop: '',
+                        keyboard:true,
+                        focus:true
+                    });
+                    this.$('.modal').modal('show');
+                    $('.datepicker').css('z-index', '2000px');
+                    app.$contentEl.attr('aria-hidden', true);
+                    $('.modal-backdrop').insertAfter($('.modal'));
+
+                } else {
+                    //alert
+                    app.alert.show("Sin privilegios", {
+            level: "error",
+            title: "No cuentas con los privilegios para operar esta Cuenta.",
+            autoClose: false
+        });
+                }
+
+
 
                 /**If any validation error occurs, system will throw error and we need to enable the buttons back*/
                 this.context.get('model').on('error:validation', function () {
                     this.disableButtons(false);
                 }, this);
+
             }, this);
         }
         this.bindDataChange();
@@ -260,12 +275,8 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-        var id_user_black = ['28f5b8b8-ab06-6bfd-dc85-5628f6e9f411',
-            '36af9462-37e6-11ea-baed-a44e314beb18',
-            '405cc6b7-fc4a-7cae-552f-5628f61fd849',
-            '42ee17c4-f67a-11e9-9711-00155d96730d',
-            '569246c7-da62-4664-ef2a-5628f649537e',
-            'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'];
+        var id_user_black = ['36af9462-37e6-11ea-baed-a44e314beb18',
+            '405cc6b7-fc4a-7cae-552f-5628f61fd849']; // dejar solo las dos opciones de moroso y bloqueado
 
         if (id_user_black.includes(id_producto)) {
             bandera = true;

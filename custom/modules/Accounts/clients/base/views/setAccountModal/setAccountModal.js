@@ -27,6 +27,8 @@
                 this.prod_list = list_html;
                 this.context_Account = options;
                 console.log(this.context_Account);
+                if(list_html!='<option value="" >  </option>') {
+
                 this.render();
                 this.$('.modal').modal({
                     backdrop: ''
@@ -35,7 +37,14 @@
                 $('.datepicker').css('z-index', '2000px');
                 app.$contentEl.attr('aria-hidden', true);
                 $('.modal-backdrop').insertAfter($('.modal'));
-
+}else {
+                    //alert
+                    app.alert.show("Sin privilegios", {
+            level: "error",
+            title: "No cuentas con los privilegios para operar esta Cuenta.",
+            autoClose: false
+        });
+                }
                 /**If any validation error occurs, system will throw error and we need to enable the buttons back*/
                 this.context.get('model').on('error:validation', function () {
                     this.disableButtons(false);
@@ -225,7 +234,7 @@
                                 } else {
                                     console.log("no es porpietario y validamos estatus");
 
-                                    if (productos_tem['estusAtencion'] == "2") {
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
                                         console.log("esta desatendido");
 
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'LEASING', prod_select, leasing_id, data.full_name);
@@ -245,7 +254,7 @@
                                 } else {
                                     console.log("no es porpietario y validamos estatus");
 
-                                    if (productos_tem['estusAtencion'] == "2") {
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
                                         console.log("esta desatendido");
 
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'CREDITO AUTOMOTRIZ', prod_select, credito_id, data.full_name);
@@ -266,7 +275,7 @@
                                 } else {
                                     console.log("no es porpietario y validamos estatus");
 
-                                    if (productos_tem['estusAtencion'] == "2") {
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
                                         console.log("esta desatendido");
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'FACTORAJE', prod_select, factoraje_id, data.full_name);
                                     }
@@ -286,7 +295,7 @@
                                 } else {
                                     console.log("no es porpietario y validamos estatus");
 
-                                    if (productos_tem['estusAtencion'] == "2") {
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
                                         console.log("esta desatendido");
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'FLEET', prod_select, fleet_id, data.full_name);
                                     }
@@ -305,7 +314,7 @@
                                 } else {
                                     console.log("no es porpietario y validamos estatus");
 
-                                    if (productos_tem['estusAtencion'] == "2") {
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
                                         console.log("esta desatendido");
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'UNICLICK', prod_select, uniclick_id, data.full_name);
                                     }
