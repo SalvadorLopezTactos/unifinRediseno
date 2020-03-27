@@ -314,3 +314,4 @@ $mod_strings['LBL_APODERADO_NOMBRE_C'] = 'Nombre (Apoderado legal)';
 $mod_strings['LBL_APODERADO_APATERNO_C'] = 'Apellido paterno (Apoderado legal)';
 $mod_strings['LBL_APODERADO_AMATERNO_C'] = 'Apellido materno (Apoderado legal)';
 $mod_strings['LBL_RECORDVIEW_PANEL18'] = 'Analízate';
+$mod_strings['LBL_CUENTA_ESPECIAL'] = 'Cuenta especial';

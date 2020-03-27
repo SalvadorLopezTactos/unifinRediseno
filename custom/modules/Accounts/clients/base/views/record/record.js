@@ -1060,6 +1060,10 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
         });
+        
+        if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
+          $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
+        }        
     },
 
     editClicked: function () {

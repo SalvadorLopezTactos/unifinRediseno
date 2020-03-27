@@ -322,6 +322,15 @@ array (
             'label' => 'LBL_DEUDOR_FACTORAJE',
           ),
         ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'cuenta_especial_c',
+            'label' => 'LBL_CUENTA_ESPECIAL',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
