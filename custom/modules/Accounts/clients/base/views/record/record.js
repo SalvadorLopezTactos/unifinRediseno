@@ -5069,11 +5069,11 @@
 
         //Recupera información
         var idCuenta = this.model.get('id');
-        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_uni_productos_1'), null, {
+        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
             success: function (data) {
 
-                Productos = data.records;
-
+                Productos = data;
+                
                 _.each(Productos, function (value, key) {
 
                     var tipoProducto = Productos[key].tipo_producto;

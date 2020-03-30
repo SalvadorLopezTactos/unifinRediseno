@@ -1,0 +1,40 @@
+<?php
+
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+require_once("custom/Levementum/UnifinAPI.php");
+
+class GetProductosCuentas extends SugarApi
+{
+    public function registerApiRest()
+    {
+        return array(
+            'GETActivoAPI' => array(
+                'reqType' => 'GET',
+                'noLoginRequired' => false,
+                'path' => array('GetProductosCuentas', '?'),
+                'pathVars' => array('module', 'id'),
+                'method' => 'getcstmProductos',
+                'shortHelp' => 'Obtiene todos los productos relacionados a la cuenta',
+            ),
+        );
+    }
+    public function getcstmProductos($api, $args)
+    {
+
+        $id = $args['id'];
+        $records_in = [];
+
+        $query = "SELECT a.*, up.*, upc.*, concat(u.first_name,' ',u.last_name) as full_name FROM accounts a
+        inner join accounts_uni_productos_1_c ap on a.id = ap.accounts_uni_productos_1accounts_ida
+        inner join uni_productos up on up.id = ap.accounts_uni_productos_1uni_productos_idb
+        inner join uni_productos_cstm upc on upc.id_c = up.id
+        inner join users u on u.id = up.assigned_user_id
+        where a.id = '{$id}'";
+        $result = $GLOBALS['db']->query($query);
+
+        while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+            $records_in[] = $row;
+        }
+        return $records_in;
+    }
+}
