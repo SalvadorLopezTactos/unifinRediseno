@@ -448,6 +448,7 @@
                             cont_uni_p.ResumenProductos.leasing.dias=0;
                             cont_uni_p.ResumenProductos.leasing.full_name=full_name;
                             cont_uni_p.ResumenProductos.leasing.assigned_user_id=id_user_new;
+                            cont_uni_p.ResumenProductos.leasing.estatus_atencion=1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -460,6 +461,7 @@
                             cont_uni_p.ResumenProductos.credito_auto.dias=0;
                             cont_uni_p.ResumenProductos.credito_auto.full_name=full_name;
                             cont_uni_p.ResumenProductos.credito_auto.assigned_user_id=id_user_new;
+                            cont_uni_p.ResumenProductos.credito_auto.estatus_atencion=1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -473,6 +475,7 @@
                             cont_uni_p.ResumenProductos.factoring.dias=0;
                             cont_uni_p.ResumenProductos.factoring.full_name=full_name;
                             cont_uni_p.ResumenProductos.factoring.assigned_user_id=id_user_new;
+                            cont_uni_p.ResumenProductos.factoring.estatus_atencion=1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -486,6 +489,7 @@
                             cont_uni_p.ResumenProductos.fleet.dias=0;
                             cont_uni_p.ResumenProductos.fleet.full_name=full_name;
                             cont_uni_p.ResumenProductos.fleet.assigned_user_id=id_user_new;
+                            cont_uni_p.ResumenProductos.fleet.estatus_atencion=1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -499,6 +503,7 @@
                             cont_uni_p.ResumenProductos.uniclick.dias=0;
                             cont_uni_p.ResumenProductos.uniclick.full_name=full_name;
                             cont_uni_p.ResumenProductos.uniclick.assigned_user_id=id_user_new;
+                            cont_uni_p.ResumenProductos.uniclick.estatus_atencion=1;
                             cont_uni_p.render();
                             v360.render();
                             break;
