@@ -276,9 +276,9 @@
         var Boton1 = this.getField("get_account_asesor");
         var Boton2 = this.getField("send_accounts_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
-        var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
-        var puestosBtn2 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+        var userpuesto = app.user.attributes.puest27ousuario_c;
+        var puestosBtn1 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
+        var puestosBtn2 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
@@ -5116,7 +5116,7 @@
                     }
                 });
 
-                cont_uni_p|['ResumenProductos']=ResumenProductos;
+                cont_uni_p['ResumenProductos']=ResumenProductos;
                 cont_uni_p.render();
             },
             error: function (e) {

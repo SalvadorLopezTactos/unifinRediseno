@@ -68,7 +68,34 @@
             list_html = '<option value="" >  </option>';
             _.each(productos, function (value, key) {
                 if (product_dispo.includes(key)) {
-                    list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+
+                    switch (key){
+                        case "1":
+                            if (cont_uni_p.ResumenProductos.leasing.dias > 30) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                            }
+                            break;
+                        case "3":
+                            if (cont_uni_p.ResumenProductos.credito_auto.dias > 30) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                            }                            break;
+                        case "4":
+                            if (cont_uni_p.ResumenProductos.factoring.dias > 30) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                            }                            break;
+                        case "6":
+                            if (cont_uni_p.ResumenProductos.fleet.dias > 30) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                            }                            break;
+                        case "8":
+                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                            }                            break;
+
+                    }
+
+
+
                 }
             });
         } else {
@@ -417,6 +444,11 @@
                             self.model.set('promotorleasing_c', full_name);// nombre
                             v360.ResumenCliente.leasing.promotor = full_name;
                             v360.ResumenCliente.leasing.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.leasing.dias=0;
+                            cont_uni_p.ResumenProductos.leasing.full_name=full_name;
+                            cont_uni_p.ResumenProductos.leasing.assigned_user_id=id_user_new;
+                            cont_uni_p.render();
                             v360.render();
                             break;
                         case '3': //Credito-Automotriz
@@ -424,6 +456,11 @@
                             self.model.set('promotorcredit_c', full_name);// nombre
                             v360.ResumenCliente.credito_auto.promotor = full_name;
                             v360.ResumenCliente.credito_auto.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.credito_auto.dias=0;
+                            cont_uni_p.ResumenProductos.credito_auto.full_name=full_name;
+                            cont_uni_p.ResumenProductos.credito_auto.assigned_user_id=id_user_new;
+                            cont_uni_p.render();
                             v360.render();
                             break;
 
@@ -432,6 +469,11 @@
                             self.model.set('promotorfactoraje_c', full_name);// nombre
                             v360.ResumenCliente.factoring.promotor = full_name;
                             v360.ResumenCliente.factoring.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.factoring.dias=0;
+                            cont_uni_p.ResumenProductos.factoring.full_name=full_name;
+                            cont_uni_p.ResumenProductos.factoring.assigned_user_id=id_user_new;
+                            cont_uni_p.render();
                             v360.render();
                             break;
 
@@ -440,6 +482,11 @@
                             self.model.set('promotorfleet_c', full_name);// nombre
                             v360.ResumenCliente.fleet.promotor = full_name;
                             v360.ResumenCliente.fleet.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.fleet.dias=0;
+                            cont_uni_p.ResumenProductos.fleet.full_name=full_name;
+                            cont_uni_p.ResumenProductos.fleet.assigned_user_id=id_user_new;
+                            cont_uni_p.render();
                             v360.render();
                             break;
 
@@ -448,6 +495,11 @@
                             self.model.set('promotoruniclick_c', full_name);// nombre
                             v360.ResumenCliente.uniclick.promotor = full_name;
                             v360.ResumenCliente.uniclick.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.uniclick.dias=0;
+                            cont_uni_p.ResumenProductos.uniclick.full_name=full_name;
+                            cont_uni_p.ResumenProductos.uniclick.assigned_user_id=id_user_new;
+                            cont_uni_p.render();
                             v360.render();
                             break;
                     }
