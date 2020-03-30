@@ -392,9 +392,13 @@
         //Oculta campo Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
         
+        //Oculta panel de uni_productos
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
+        
+        //Deshabilita campo cuenta especial
         if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
           $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
-        }        
+        }  
     },
 
     _ActualizaEtiquetas: function () {

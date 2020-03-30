@@ -231,6 +231,7 @@
         this.get_resumen();
         this.get_analizate();
         //this.get_noviable();
+        this.get_uni_productos();
 
 
         //Funcion para eliminar duplicados de arrays
@@ -913,7 +914,7 @@
      * Función para habilitar campos a solo lectura evaluando condiciones específicas
      */
     _renderHtml: function ()
-        //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
+    //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
 
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
@@ -992,6 +993,8 @@
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
         //Oculta etiqueta de Analizate
         this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
+        //Oculta etiqueta de uni_productos
+        this.$("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;');
 
         //Se oculta check de cuenta homonima
         $('div[data-name=tct_homonimo_chk_c]').hide();
@@ -1104,7 +1107,7 @@
 
     disable_panels_rol: function () {
 
-        self_this=this;
+        self_this = this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1146,7 +1149,7 @@
     },
 
     disable_panels_team: function () {
-        self1=this;
+        self1 = this;
         if (this.model.get('id') != "") {
             var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
             var roles_logged = app.user.attributes.roles;
@@ -1167,7 +1170,7 @@
                             if (this.model.get('tipo_registro_c') != "Persona") {
 
                                 //$('.noEdit.fieldset.actions.detail.btn-group').hide();
-                                                                self1.$('[data-event="button:edit_button:click"]').hide();
+                                self1.$('[data-event="button:edit_button:click"]').hide();
 
 
                                 $('i').removeClass('fa-pencil');
@@ -1552,7 +1555,7 @@
                 };
                 var dnbProfileUrl = app.api.buildURL("Accounts/GenerarCURP", '', {}, {});
                 if (this.model.get('pais_nacimiento_c') == 2) {
-                    app.api.call("create", dnbProfileUrl, {curpdata: firmoParams}, {
+                    app.api.call("create", dnbProfileUrl, { curpdata: firmoParams }, {
                         success: _.bind(function (data) {
                             if (data['UNI2_UTL_002_CreaCurpPersonaResult']['resultado']) {
                                 this.model.set('curp_c', data['UNI2_UTL_002_CreaCurpPersonaResult']['curp']);
@@ -1724,7 +1727,7 @@
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
             || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c') == true) {
-            if(_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_c') == "Prospecto") {
+            if (_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_c') == "Prospecto") {
                 $('#tabletelefonos').css('border', '2px solid red');
                 errors['account_telefonos1'] = errors['account_telefonos1'] || {};
                 errors['account_telefonos1'].required = true;
@@ -2341,7 +2344,7 @@
             });
         }
         else {
-            var usuario = app.data.createBean('Users', {id: app.user.id});
+            var usuario = app.data.createBean('Users', { id: app.user.id });
             usuario.fetch({
                 success: _.bind(function (modelo) {
                     var contains = function (needle) {
@@ -2674,7 +2677,7 @@
         };
 
         var dnbProfileUrl = app.api.buildURL("Accounts/ValidarRFC", '', {}, {});
-        app.api.call("create", dnbProfileUrl, {rfcdata: firmoParams}, {
+        app.api.call("create", dnbProfileUrl, { rfcdata: firmoParams }, {
             success: _.bind(function (data) {
                 if (data != null) {
                     var rfc = this.model.get('rfc_c');
@@ -3275,7 +3278,7 @@
                             autoClose: false,
                             return: false,
                         });
-                        app.router.navigate('#Accounts', {trigger: true});
+                        app.router.navigate('#Accounts', { trigger: true });
                     }
                 }, this),
             });
@@ -3301,7 +3304,7 @@
                     autoClose: false,
                     return: false,
                 });
-                app.router.navigate('#Accounts', {trigger: true});
+                app.router.navigate('#Accounts', { trigger: true });
             } else {
                 app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                     success: _.bind(function (es_promotor) {
@@ -3313,7 +3316,7 @@
                                 autoClose: false,
                                 return: false,
                             });
-                            app.router.navigate('#Accounts', {trigger: true});
+                            app.router.navigate('#Accounts', { trigger: true });
                         }
                     }, this),
                 });
@@ -4565,7 +4568,7 @@
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
             var campos = ["tct_no_autos_u_int_c", "tct_no_autos_e_int_c", "tct_no_motos_int_c", "tct_no_camiones_int_c"];
-            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, {fields: campos.join(',')});
+            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, { fields: campos.join(',') });
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
                     Pautos.autos = data;
@@ -4642,9 +4645,9 @@
                 _.each(this.context.children, function (child) {
                     if (child.get('isSubpanel') && !child.get('hidden')) {
                         if (child.get('collapsed')) {
-                            child.resetLoadFlag({recursive: false});
+                            child.resetLoadFlag({ recursive: false });
                         } else {
-                            child.reloadData({recursive: false});
+                            child.reloadData({ recursive: false });
                         }
                     }
                 });
@@ -5045,7 +5048,7 @@
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
 
-            var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null,);
+            var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null);
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
                     cont_nlzt.Financiera = data;
@@ -5055,4 +5058,68 @@
         }
     },
 
+    get_uni_productos: function () {
+        //Extiende This
+        cont_uni_p = this;
+        Productos = [];
+        //Facha Actual 
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) { dd = '0' + dd }
+        if (mm < 10) { mm = '0' + mm }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        //Recupera información
+        var idCuenta = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
+            success: function (data) {
+
+                Productos = data;
+                
+                _.each(Productos, function (value, key) {
+
+                    var tipoProducto = Productos[key].tipo_producto;
+                    var fechaAsignacion = Productos[key].fecha_asignacion_c;
+                    var fecha1 = moment(today);
+                    var fecha2 = moment(fechaAsignacion);
+
+                    switch (tipoProducto) {
+                        case "1": //Leasing
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            cont_uni_p['leasing'] = Productos[key];
+                            break;
+                        case "3": //Credito-auto
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            cont_uni_p['credito_auto'] = Productos[key];
+                            break;
+                        case "4": //Factoraje
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            cont_uni_p['factoring'] = Productos[key];
+                            break;
+                        case "6": //Fleet
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            cont_uni_p['fleet'] = Productos[key];
+                            break;
+                        case "8": //Uniclick
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            cont_uni_p['uniclick'] = Productos[key];
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                cont_uni_p.render();
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+    },
 })
