@@ -107,24 +107,6 @@ array (
                 'label' => 'Generar Disposicion',
                 'acl_action' => 'view',
               ),
-/*              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:prospecto_contactado:click',
-                'name' => 'prospectocontactado',
-                'label' => 'LBL_PROSPECTO_CONTACTADO_C',
-                'acl_action' => 'view',
-                'class' => 'jcmx1',
-              ),
-              11 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:regresa_lead:click',
-                'name' => 'regresalead',
-                'label' => 'LBL_REGRESA_A_LEAD_C',
-                'acl_action' => 'view',
-                'css_class' => 'btn-regresa-alead',
-              ),*/
               12 => 
               array (
                 'type' => 'rowaction',
@@ -691,6 +673,14 @@ array (
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
+              ),
+              46 => 
+              array (
+                'name' => 'cuenta_especial_c',
+                'label' => 'LBL_CUENTA_ESPECIAL',
+              ),
+              47 => 
+              array (
               ),
             ),
           ),

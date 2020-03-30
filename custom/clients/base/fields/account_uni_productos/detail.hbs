@@ -1,53 +1,71 @@
-<table id="tableUni_productos" width="100%">
+<style>
+    .mpad {
+        padding-top: 5px;
+    }
+    .sborder {
+        border: 0 !important;
+    }
+</style>
+
+<table id="tableUni_productos" width="100%" class="table">
     <tr>
-        <td width="33%">
+        <td width="33%" class="sborder">
             <div class="campoLeasing">
-                <font size="3">Leasing</font>
-                <br>
-                <label class="record-label">Asignado</label>
-                <br>
-                <label class="record-label campo1" value="{{leadNoViable.quienl}}"> días)</label>
+                <div><strong>Leasing</strong></div>
+                <div>
+                    <div class="mpad">{{getUnifinListValue 'product_status_atencion_list' leasing.estatus_atencion}}</div>
+                    <div class="mpad">{{leasing.dias}} días
+                        <a href="#Employees/{{leasing.assigned_user_id}}">{{leasing.full_name}}</a>
+                    </div>
+                </div>
             </div>
         </td>
-        <td width="33%">
+        <td width="33%" class="sborder">
             <div class="campoFactoraje">
-                <font size="3">Factoraje</font>
-                <br>
-                <label class="record-label">Asignado</label>
-                <br>
-                <label class="record-label campo2" value="{{leadNoViable.quienl}}"> días)</label>
+                <div><strong>Factoraje</strong></div>
+                <div>
+                    <div class="mpad">{{getUnifinListValue 'product_status_atencion_list' factoring.estatus_atencion}}</div>
+                    <div class="mpad">{{factoring.dias}} días
+                        <a href="#Employees/{{factoring.assigned_user_id}}">{{factoring.full_name}}</a>
+                    </div>
+                </div>
             </div>
         </td>
-        <td width="33%">
+        <td width="33%" class="sborder">
             <div class="campoCA">
-                <font size="3">Crédito Automotriz</font>
-                <br>
-                <label class="record-label">Asignado</label>
-                <br>
-                <label class="record-label campo3" value="{{leadNoViable.quienl}}"> días)</label>
+                <div><strong>Crédito Automotriz</strong></div>
+                <div>
+                    <div class="mpad">{{getUnifinListValue 'product_status_atencion_list' credito_auto.estatus_atencion}}</div>
+                    <div class="mpad">{{credito_auto.dias}} días
+                        <a href="#Employees/{{credito_auto.assigned_user_id}}">{{credito_auto.full_name}}</a>
+                    </div>
+                </div>
             </div>
         </td>
     </tr>
     <tr><label class="record-label">&nbsp;</label></tr>
     <tr>
-        <td width="33%">
+        <td width="33%" class="sborder">
             <div class="campoFleet">
-                <font size="3">Fleet</font>
-                <br>
-                <label class="record-label">Asignado</label>
-                <br>
-                <label class="record-label campo4" value="{{leadNoViable.quienl}}"> días)</label>
+                <div><strong>Fleet</strong></div>
+                <div>
+                    <div class="mpad">{{getUnifinListValue 'product_status_atencion_list' fleet.estatus_atencion}}</div>
+                    <div class="mpad">{{fleet.dias}} días
+                        <a href="#Employees/{{fleet.assigned_user_id}}">{{fleet.full_name}}</a>
+                    </div>
+                </div>
             </div>
         </td>
-        <td width="33%">
+        <td width="33%" class="sborder">
             <div class="campoUniclick">
-                <font size="3">Uniclick</font>
-                <br>
-                <label class="record-label">Asignado</label>
-                <br>
-                <label class="record-label campo5" value="{{leadNoViable.quienl}}"> días)</label>
+                <div><strong>Uniclick</strong></div>
+                <div>
+                    <div class="mpad">{{getUnifinListValue 'product_status_atencion_list' uniclick.estatus_atencion}}</div>
+                    <div class="mpad">{{uniclick.dias}} días
+                        <a href="#Employees/{{uniclick.assigned_user_id}}">{{uniclick.full_name}}</a>
+                    </div>
+                </div>
             </div>
         </td>
-
     </tr>
 </table>

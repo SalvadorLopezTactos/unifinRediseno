@@ -2375,25 +2375,116 @@ $relationships = array (
     'for_activities' => false,
     'from_studio' => false,
   ),
-  'campaign_accounts' => 
+  'accounts_uni_productos_1' => 
   array (
-    'name' => 'campaign_accounts',
-    'lhs_module' => 'Campaigns',
-    'lhs_table' => 'campaigns',
+    'name' => 'accounts_uni_productos_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_uni_productos_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'uni_Productos',
+        'rhs_table' => 'uni_productos',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_uni_productos_1_c',
+        'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+        'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
+      ),
+    ),
+    'table' => 'accounts_uni_productos_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'accounts_uni_productos_1accounts_ida' => 
+      array (
+        'name' => 'accounts_uni_productos_1accounts_ida',
+        'type' => 'id',
+      ),
+      'accounts_uni_productos_1uni_productos_idb' => 
+      array (
+        'name' => 'accounts_uni_productos_1uni_productos_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1uni_productos_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_uni_productos_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1uni_productos_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'Accounts',
-    'rhs_table' => 'accounts',
-    'rhs_key' => 'campaign_id',
+    'rhs_module' => 'uni_Productos',
+    'rhs_table' => 'uni_productos',
+    'rhs_key' => 'id',
     'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_uni_productos_1_c',
+    'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+    'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
     'readonly' => true,
-    'relationship_name' => 'campaign_accounts',
+    'relationship_name' => 'accounts_uni_productos_1',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
+    'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-    'is_custom' => false,
-    'from_studio' => false,
   ),
   'accounts_modified_user' => 
   array (
@@ -2770,19 +2861,19 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'revenuelineitems_accounts' => 
+  'campaign_accounts' => 
   array (
-    'name' => 'revenuelineitems_accounts',
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
+    'name' => 'campaign_accounts',
+    'lhs_module' => 'Campaigns',
+    'lhs_table' => 'campaigns',
     'lhs_key' => 'id',
-    'rhs_module' => 'RevenueLineItems',
-    'rhs_table' => 'revenue_line_items',
-    'rhs_key' => 'account_id',
+    'rhs_module' => 'Accounts',
+    'rhs_table' => 'accounts',
+    'rhs_key' => 'campaign_id',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
-    'relationship_name' => 'revenuelineitems_accounts',
-    'rhs_subpanel' => 'ForAccounts',
+    'relationship_name' => 'campaign_accounts',
+    'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
     'deleted' => false,
     'relationship_only' => false,
@@ -2830,235 +2921,33 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'accounts_uni_productos_1' => 
+  'revenuelineitems_accounts' => 
   array (
-    'name' => 'accounts_uni_productos_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'accounts_uni_productos_1' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'uni_Productos',
-        'rhs_table' => 'uni_productos',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_uni_productos_1_c',
-        'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
-        'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
-      ),
-    ),
-    'table' => 'accounts_uni_productos_1_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'id',
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'default' => 0,
-      ),
-      'accounts_uni_productos_1accounts_ida' => 
-      array (
-        'name' => 'accounts_uni_productos_1accounts_ida',
-        'type' => 'id',
-      ),
-      'accounts_uni_productos_1uni_productos_idb' => 
-      array (
-        'name' => 'accounts_uni_productos_1uni_productos_idb',
-        'type' => 'id',
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_1_pk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_1_ida1_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_1accounts_ida',
-          1 => 'deleted',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_1_idb2_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_1uni_productos_idb',
-          1 => 'deleted',
-        ),
-      ),
-      3 => 
-      array (
-        'name' => 'accounts_uni_productos_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_1uni_productos_idb',
-        ),
-      ),
-    ),
+    'name' => 'revenuelineitems_accounts',
     'lhs_module' => 'Accounts',
     'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'uni_Productos',
-    'rhs_table' => 'uni_productos',
-    'rhs_key' => 'id',
+    'rhs_module' => 'RevenueLineItems',
+    'rhs_table' => 'revenue_line_items',
+    'rhs_key' => 'account_id',
     'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_uni_productos_1_c',
-    'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
-    'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
     'readonly' => true,
-    'relationship_name' => 'accounts_uni_productos_1',
-    'rhs_subpanel' => 'default',
+    'relationship_name' => 'revenuelineitems_accounts',
+    'rhs_subpanel' => 'ForAccounts',
     'lhs_subpanel' => NULL,
-    'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
   ),
-  'accounts_uni_productos_2' => 
+  'accounts_c5515_uni_chattigo_1' => 
   array (
-    'name' => 'accounts_uni_productos_2',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'accounts_uni_productos_2' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'uni_Productos',
-        'rhs_table' => 'uni_productos',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_uni_productos_2_c',
-        'join_key_lhs' => 'accounts_uni_productos_2accounts_ida',
-        'join_key_rhs' => 'accounts_uni_productos_2uni_productos_idb',
-      ),
-    ),
-    'table' => 'accounts_uni_productos_2_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'id',
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'default' => 0,
-      ),
-      'accounts_uni_productos_2accounts_ida' => 
-      array (
-        'name' => 'accounts_uni_productos_2accounts_ida',
-        'type' => 'id',
-      ),
-      'accounts_uni_productos_2uni_productos_idb' => 
-      array (
-        'name' => 'accounts_uni_productos_2uni_productos_idb',
-        'type' => 'id',
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_2_pk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_2_ida1_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_2accounts_ida',
-          1 => 'deleted',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'idx_accounts_uni_productos_2_idb2_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_2uni_productos_idb',
-          1 => 'deleted',
-        ),
-      ),
-      3 => 
-      array (
-        'name' => 'accounts_uni_productos_2_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'accounts_uni_productos_2uni_productos_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'uni_Productos',
-    'rhs_table' => 'uni_productos',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_uni_productos_2_c',
-    'join_key_lhs' => 'accounts_uni_productos_2accounts_ida',
-    'join_key_rhs' => 'accounts_uni_productos_2uni_productos_idb',
-    'readonly' => true,
-    'relationship_name' => 'accounts_uni_productos_2',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-  ),
-  'accounts_uni_productos_3' => 
-  array (
-    'rhs_label' => 'Productos',
+    'rhs_label' => 'Conversaciones en Chattigo',
     'lhs_label' => 'Cuentas',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'Accounts',
-    'rhs_module' => 'uni_Productos',
+    'rhs_module' => 'C5515_uni_chattigo',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -3066,6 +2955,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'accounts_uni_productos_3',
+    'relationship_name' => 'accounts_c5515_uni_chattigo_1',
   ),
 );

@@ -291,11 +291,14 @@
 
         this.mostrarpaneldirec();
 		
-		if (App.user.attributes.deudor_factoraje_c != true) {
-			//Readonly check factoraje
-			this.$('[data-name="deudor_factor_c"]').attr('style', 'pointer-events:none;');
+		    if (App.user.attributes.deudor_factoraje_c != true) {
+		    //Readonly check factoraje
+			    this.$('[data-name="deudor_factor_c"]').attr('style', 'pointer-events:none;');
         }
 
+        if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
+          $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
+        }
     },
 
     initialize: function (options) {
