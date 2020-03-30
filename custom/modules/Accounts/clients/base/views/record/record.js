@@ -5116,7 +5116,7 @@
                     }
                 });
 
-                cont_uni_p|['ResumenProductos']=ResumenProductos;
+                cont_uni_p['ResumenProductos']=ResumenProductos;
                 cont_uni_p.render();
             },
             error: function (e) {
