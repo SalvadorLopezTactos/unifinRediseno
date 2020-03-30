@@ -25,6 +25,7 @@
                 var context360 = v360.ResumenCliente; // contiene la información vista 360
                 var id_user = app.user.id; //id de usuario firmado
 
+                console.log(cont_uni_p.ResumenProductos.leasing.dias);
                 var temp_array = [];
                 _.each(userprod, function (value, key) {
                     console.log("valor" + value + " llave " + key);
@@ -34,9 +35,11 @@
                             var leasig_status = context360.leasing.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
                             if (!self_modal.validate_no_nueve(leasing_id)) {
-                                var result = self_modal.validate_product(leasing_id, leasig_status, id_user);
-                                if (result['status']) {
-                                    temp_array.push(value);
+                                if (cont_uni_p.ResumenProductos.leasing.dias > 30) {
+                                    var result = self_modal.validate_product(leasing_id, leasig_status, id_user);
+                                    if (result['status']) {
+                                        temp_array.push(value);
+                                    }
                                 }
                             }
                             break;
@@ -45,9 +48,11 @@
                             var leasig_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
                             if (!self_modal.validate_no_nueve(credito_id)) {
-                                var result = self_modal.validate_product(credito_id, leasig_status, id_user);
-                                if (result['status']) {
-                                    temp_array.push(value);
+                                if (cont_uni_p.ResumenProductos.credito_auto.dias > 30) {
+                                    var result = self_modal.validate_product(credito_id, leasig_status, id_user);
+                                    if (result['status']) {
+                                        temp_array.push(value);
+                                    }
                                 }
                             }
                             break;
@@ -57,9 +62,11 @@
                             var leasig_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
                             if (!self_modal.validate_no_nueve(factoraje_id)) {
-                                var result = self_modal.validate_product(factoraje_id, leasig_status, id_user);
-                                if (result['status']) {
-                                    temp_array.push(value);
+                                if (cont_uni_p.ResumenProductos.factoring.dias > 30) {
+                                    var result = self_modal.validate_product(factoraje_id, leasig_status, id_user);
+                                    if (result['status']) {
+                                        temp_array.push(value);
+                                    }
                                 }
                             }
                             break;
@@ -69,9 +76,11 @@
                             var leasig_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
                             if (!self_modal.validate_no_nueve(fleet_id)) {
-                                var result = self_modal.validate_product(fleet_id, leasig_status, id_user);
-                                if (result['status']) {
-                                    temp_array.push(value);
+                                if (cont_uni_p.ResumenProductos.fleet.dias > 30) {
+                                    var result = self_modal.validate_product(fleet_id, leasig_status, id_user);
+                                    if (result['status']) {
+                                        temp_array.push(value);
+                                    }
                                 }
                             }
                             break;
@@ -81,9 +90,11 @@
                             var leasig_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
                             if (!self_modal.validate_no_nueve(uniclick_id)) {
-                                var result = self_modal.validate_product(uniclick_id, leasig_status, id_user);
-                                if (result['status']) {
-                                    temp_array.push(value);
+                                if (cont_uni_p.ResumenProductos.uniclick.dias > 30) {
+                                    var result = self_modal.validate_product(uniclick_id, leasig_status, id_user);
+                                    if (result['status']) {
+                                        temp_array.push(value);
+                                    }
                                 }
                             }
                             break;
@@ -101,12 +112,12 @@
                 this.prod_list = list_html;
                 this.context_Account = options;
 
-                if(list_html!='<option value="" >  </option>') {
+                if (list_html != '<option value="" >  </option>') {
                     this.render();
                     this.$('.modal').modal({
                         backdrop: '',
-                        keyboard:true,
-                        focus:true
+                        keyboard: true,
+                        focus: true
                     });
                     this.$('.modal').modal('show');
                     $('.datepicker').css('z-index', '2000px');
@@ -116,12 +127,11 @@
                 } else {
                     //alert
                     app.alert.show("Sin privilegios", {
-            level: "error",
-            title: "No cuentas con los privilegios para operar esta Cuenta.",
-            autoClose: false
-        });
+                        level: "error",
+                        title: "No cuentas con los privilegios para operar esta Cuenta.",
+                        autoClose: false
+                    });
                 }
-
 
 
                 /**If any validation error occurs, system will throw error and we need to enable the buttons back*/
@@ -137,11 +147,11 @@
 
     /* /!**Overriding the base cancelButton method*!/
      cancelButton: function () {
-         this._super('cancelButton');
-         app.$contentEl.removeAttr('s-hidden');
-         this._disposeView();
+     this._super('cancelButton');
+     app.$contentEl.removeAttr('s-hidden');
+     this._disposeView();
      },
- */
+     */
 
     assignedAccount: function () {
 
@@ -222,7 +232,7 @@
                             this.respuesta_msj = result['mensaje'];
                         }
                     } else {
-                       // console.log("Esta cuenta no puede ser asignada.");
+                        // console.log("Esta cuenta no puede ser asignada.");
                     }
                     break;
 
@@ -240,7 +250,7 @@
                             this.respuesta_msj = result['mensaje'];
                         }
                     } else {
-                       // console.log("Esta cuenta no puede ser asignada.");
+                        // console.log("Esta cuenta no puede ser asignada.");
                     }
                     break;
 
@@ -315,14 +325,27 @@
                             self.model.set('promotorleasing_c', app.user.attributes.full_name);// nombre
                             v360.ResumenCliente.leasing.promotor = app.user.attributes.full_name;
                             v360.ResumenCliente.leasing.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.leasing.dias=0;
+                            cont_uni_p.ResumenProductos.leasing.full_name=app.user.attributes.full_name;
+                            cont_uni_p.ResumenProductos.leasing.assigned_user_id=app.user.id;
+
+                            cont_uni_p.render();
                             v360.render();
-                            break;
+                                break;
                         case '3': //Credito-Automotriz
                             self.model.set('user_id2_c', app.user.user_id2_c); // id del nuevo asesor
                             self.model.set('promotorcredit_c', app.user.attributes.full_name);// nombre
                             v360.ResumenCliente.credito_auto.promotor = app.user.attributes.full_name;
                             v360.ResumenCliente.credito_auto.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.credito_auto.dias=0;
+                            cont_uni_p.ResumenProductos.credito_auto.full_name=app.user.attributes.full_name;
+                            cont_uni_p.ResumenProductos.credito_auto.assigned_user_id=app.user.id;
+
+                            cont_uni_p.render();
                             v360.render();
+
                             break;
 
                         case '4': // FACTORAJE
@@ -330,7 +353,14 @@
                             self.model.set('promotorfactoraje_c', app.user.attributes.full_name);// nombre
                             v360.ResumenCliente.factoring.promotor = app.user.attributes.full_name;
                             v360.ResumenCliente.factoring.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.factoring.dias=0;
+                            cont_uni_p.ResumenProductos.factoring.full_name=app.user.attributes.full_name;
+                            cont_uni_p.ResumenProductos.factoring.assigned_user_id=app.user.id;
+
+                            cont_uni_p.render();
                             v360.render();
+
                             break;
 
                         case '6': // FLEET
@@ -338,7 +368,14 @@
                             self.model.set('promotorfleet_c', app.user.attributes.full_name);// nombre
                             v360.ResumenCliente.fleet.promotor = app.user.attributes.full_name;
                             v360.ResumenCliente.fleet.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.fleet.dias=0;
+                            cont_uni_p.ResumenProductos.fleet.full_name=app.user.attributes.full_name;
+                            cont_uni_p.ResumenProductos.fleet.assigned_user_id=app.user.id;
+
+                            cont_uni_p.render();
                             v360.render();
+
                             break;
 
                         case '8': // UNICLICK
@@ -346,7 +383,14 @@
                             self.model.set('promotoruniclick_c', app.user.attributes.full_name);// nombre
                             v360.ResumenCliente.uniclick.promotor = app.user.attributes.full_name;
                             v360.ResumenCliente.uniclick.estatus_atencion = 1;
+
+                            cont_uni_p.ResumenProductos.uniclick.dias=0;
+                            cont_uni_p.ResumenProductos.uniclick.full_name=app.user.attributes.full_name;
+                            cont_uni_p.ResumenProductos.uniclick.assigned_user_id=app.user.id;
+
+                            cont_uni_p.render();
                             v360.render();
+
                             break;
                     }
                 }
