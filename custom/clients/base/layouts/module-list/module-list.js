@@ -7,7 +7,8 @@
 		var moduleList = app.metadata.getModuleNames({filter: 'display_tab', access: 'read'});
 		
 		moduleList.push('Cotizador');
-        moduleList.push('Expediente');
+        //moduleList.push('Expediente');
+        moduleList.splice(8, 0, 'Expediente');
         moduleList.push('CotizadorProspectos');
         moduleList.push('BuscaDisposicion');
 

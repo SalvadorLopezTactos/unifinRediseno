@@ -11,7 +11,6 @@ function upload_file_googleads(){
 
     $GLOBALS['log']->fatal('------------------------');//------------------------------------
     $GLOBALS['log']->fatal('DISPARA JOB PARA SUBIR CSV:');//------------------------------------
-    $GLOBALS['log']->fatal(get_include_path());//------------------------------------
     set_include_path(get_include_path() . PATH_SEPARATOR . 'custom/aux_libraries/phpseclib1.0.18');
     require_once('Net/SFTP.php');
 
@@ -26,7 +25,7 @@ function upload_file_googleads(){
     $password = $sugar_config['host_pwd'];
     $file = "custom/plantillaCSV/clientes_lv.csv";
     date_default_timezone_set('America/Mexico_City');
-    $fecha= date('Y').date('m').date('d');
+    $fecha= date('Y').date('m').date('d').date('h').date('m').date('s');
 
     //Path en donde se guardará el archivo por sftp
     $path_unifin=$sugar_config['path_unifin'];
@@ -37,7 +36,7 @@ function upload_file_googleads(){
         $sftp = new Net_SFTP($host, $port);
 
         if ( $sftp->login($username, $password) ) {
-
+            $GLOBALS['log']->fatal('------------CONEXIÓN SFTP EXITOSA------------');
             $success = $sftp->put(
                 $path_unifin.'/conversiones_unifin.csv',
                 $file,
@@ -52,7 +51,7 @@ function upload_file_googleads(){
 
             //Limpiando el archivo plantilla y dejando únicamente las cabeceras
             $file = fopen("custom/plantillaCSV/clientes_lv.csv","w");
-            fwrite($file, 'TimeZone=America/Mexico_City,,,,'.PHP_EOL);
+            fwrite($file, 'Parameters:TimeZone=America/Mexico_City,,,,'.PHP_EOL);
             fwrite($file, 'Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency'.PHP_EOL);
             fclose($file);
 

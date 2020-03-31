@@ -1249,7 +1249,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->anlzt_analizate_accounts->add($bean->id);
         $relacion->save();
     }
-	
+
 	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
         //Se ejecuta para creación productos para nuevos registros(cuentas):
         /* Dev: Erick de JEsus
@@ -1266,7 +1266,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $current_prod = null;
         $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
         if (!$args['isUpdate']){
-			
+
 			for ($i = 0; $i < $count; $i++) {
 				//$current_prod = explode("," , str_replace("^", "", $current_user->productos_c));
 				//$GLOBALS['log']->fatal($current_prod);
@@ -1274,7 +1274,7 @@ where rfc_c = '{$bean->rfc_c}' and
 				$beanprod = BeanFactory::newBean($module);
 				$beanprod->name = $bean->name.$name_productos[$i];
 				$beanprod->tipo_producto = $key_productos[$i];
-				
+
 				switch ($key_productos[$i]) {
 					case '1': //Leasing
                         $beanprod->assigned_user_id = $bean->user_id_c;
@@ -1297,40 +1297,35 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
 						break;
 				}
-				
+
 				$beanprod->save();
-				
+
 				$bean->load_relationship('accounts_uni_productos_1');
 				$bean->accounts_uni_productos_1->add($beanprod->id);
-				
+
 				$beanprod = null;
 			}
         }
     }
 
     public function set_csv_linea_vigente($bean=null, $event= null, $args= null){
-
-        $gclid='';//este campo se obtiene del lead relacionado campo gclid
-        $conversion_name='Conv CRM';
-        $tipo_producto_solicitud='';
-
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea"
-	    if($bean->subtipo_cuenta_c=='Con Linea Vigente' &&
-            $bean->tipo_registro_c=='Cliente'){
-
+  	    if($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' ){
+            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPADA DESDE PROCCESS AUTHOR------------');
+            $gclid='';//este campo se obtiene del lead relacionado campo gclid
+            $conversion_name='Conv CRM';
+            $tipo_producto_solicitud='';
             //Obteniendo gclid de lead relacionado
             if ($bean->load_relationship('leads')) {
-                $params=array('limit' => 1, 'orderby' => 'date_modified DESC');
+                $params=array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                 //Fetch related beans
-                $leads = $bean->leads->getBeans($params);
+                $leads = $bean->leads->getBeans($bean->id,$params);
                 //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
                 if (!empty($leads)) {
                     foreach ($leads as $lead) {
                         if($lead->detalle_plataforma_c != "" && $lead->detalle_plataforma_c != null){
-
                             $gclid=$lead->detalle_plataforma_c;
-
                         }
                     }
                 }
@@ -1339,14 +1334,15 @@ where rfc_c = '{$bean->rfc_c}' and
 
             //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
             if($gclid != '' && $gclid !=null){
+                $GLOBALS['log']->fatal('------------LEAD SI CUENTA CON GCLID------------');
 
                 //Monto de línea= Campo Opps= monto_c
                 $conversion_value='0';
 
                 if ($bean->load_relationship('opportunities')) {
-                    $parametros=array('limit' => 1, 'orderby' => 'date_modified DESC');
+                    $parametros=array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                     //Fetch related beans
-                    $opps_relacionadas = $bean->opportunities->getBeans($parametros);
+                    $opps_relacionadas = $bean->opportunities->getBeans($bean->id, $parametros);
                     //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
                     if (!empty($opps_relacionadas)) {
                         foreach ($opps_relacionadas as $opp) {
@@ -1360,6 +1356,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
                 //Se escribe en csv cuando la solicitud es diferente al tipo de producto Uniclick
                 if($tipo_producto_solicitud !='' && $tipo_producto_solicitud!='8'){
+                    $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
 
                     //Estableciendo la hora en formato "24/03/2020 19:00:00"
                     date_default_timezone_set('America/Mexico_City');
