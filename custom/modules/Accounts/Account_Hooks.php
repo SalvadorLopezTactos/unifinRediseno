@@ -1312,6 +1312,7 @@ where rfc_c = '{$bean->rfc_c}' and
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea"
   	    if($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' ){
+            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPADA DESDE PROCCESS AUTHOR------------');
             $gclid='';//este campo se obtiene del lead relacionado campo gclid
             $conversion_name='Conv CRM';
             $tipo_producto_solicitud='';
@@ -1333,6 +1334,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
             //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
             if($gclid != '' && $gclid !=null){
+                $GLOBALS['log']->fatal('------------LEAD SI CUENTA CON GCLID------------');
 
                 //Monto de línea= Campo Opps= monto_c
                 $conversion_value='0';
@@ -1354,6 +1356,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
                 //Se escribe en csv cuando la solicitud es diferente al tipo de producto Uniclick
                 if($tipo_producto_solicitud !='' && $tipo_producto_solicitud!='8'){
+                    $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
 
                     //Estableciendo la hora en formato "24/03/2020 19:00:00"
                     date_default_timezone_set('America/Mexico_City');
