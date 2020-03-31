@@ -277,8 +277,8 @@
         var Boton2 = this.getField("send_accounts_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
-        var puestosBtn2 = ['18', '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+        var puestosBtn1 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
+        var puestosBtn2 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
@@ -5077,7 +5077,7 @@
             success: function (data) {
 
                 Productos = data;
-                
+                ResumenProductos=[];
                 _.each(Productos, function (value, key) {
 
                     var tipoProducto = Productos[key].tipo_producto;
@@ -5089,32 +5089,34 @@
                         case "1": //Leasing
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
-                            cont_uni_p['leasing'] = Productos[key];
+                            ResumenProductos['leasing'] = Productos[key];
                             break;
                         case "3": //Credito-auto
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
-                            cont_uni_p['credito_auto'] = Productos[key];
+                            ResumenProductos['credito_auto'] = Productos[key];
                             break;
                         case "4": //Factoraje
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
-                            cont_uni_p['factoring'] = Productos[key];
+                            ResumenProductos['factoring'] = Productos[key];
                             break;
                         case "6": //Fleet
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
-                            cont_uni_p['fleet'] = Productos[key];
+                            ResumenProductos['fleet'] = Productos[key];
                             break;
                         case "8": //Uniclick
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
-                            cont_uni_p['uniclick'] = Productos[key];
+                            ResumenProductos['uniclick'] = Productos[key];
                             break;
                         default:
                             break;
                     }
                 });
+
+                cont_uni_p['ResumenProductos']=ResumenProductos;
                 cont_uni_p.render();
             },
             error: function (e) {
@@ -5123,3 +5125,5 @@
         });
     },
 })
+
+

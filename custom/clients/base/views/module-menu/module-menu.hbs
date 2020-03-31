@@ -31,8 +31,6 @@
     {{#eq module "Cotizador"}} {{str 'Cotizador UNI2'}} {{/eq}}
     {{#eq module "CotizadorProspectos"}} {{str 'Cotizador IPAD'}} {{/eq}}
     {{#eq module "Expediente"}} {{str 'Expediente'}} {{/eq}}
-
-    </a>
 {{else}}
 
     {{#notEq module "Expediente"}}
@@ -57,7 +55,18 @@
     {{/eq}}
 
     {{#eq module "Expediente"}}
-            <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
+            <!--<a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>-->
+            <a class="btn btn-invisible btn-link module-name">Expedientes</a>
+            <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-menu scroll">
+                <ul role="menu">
+
+                    <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ExpedienteMod" track="click:{{module}}"><i class="fa fa-clipboard"></i>Expediente Unifin</a></li>
+
+
+                    <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=expedienteCreditoSimple" track="click:{{module}}"><i class="fa fa-clipboard"></i>Expediente Crédito Simple</a></li>
+                </ul>
+            </div>
     {{/eq}}
 
     {{#if actions}}
