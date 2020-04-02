@@ -75,35 +75,35 @@ class reAsignarCuentas extends SugarApi
                     foreach ($uniProducto as $asignaFecha) {
 
                         switch ($product) {
-                            case 'LEASING':                                    
+                            case 'LEASING':
                                 if ($asignaFecha->tipo_producto == '1') {  //Leasing
                                     // $GLOBALS['log']->fatal("Leasing UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
-                                }                                                                
+                                }
                                 break;
-                            case 'CREDITO AUTOMOTRIZ':                                    
+                            case 'CREDITO AUTOMOTRIZ':
                                 if ($asignaFecha->tipo_producto == '3') { //Credito-Automotriz
                                     // $GLOBALS['log']->fatal("Credito UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
                                 }
                                 break;
-                            case 'FACTORAJE':                                    
+                            case 'FACTORAJE':
                                 if ($asignaFecha->tipo_producto == '4') { //Factoraje
                                     // $GLOBALS['log']->fatal("Factoraje UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
                                 }
                                 break;
-                            case 'FLEET':                                    
+                            case 'FLEET':
                                 if ($asignaFecha->tipo_producto == '6') { //Fleet
                                     // $GLOBALS['log']->fatal("Fleet UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
                                 }
                                 break;
-                            case 'UNICLICK':                                    
+                            case 'UNICLICK':
                                 if ($asignaFecha->tipo_producto == '8') { //Uniclick
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
@@ -117,7 +117,7 @@ class reAsignarCuentas extends SugarApi
 
                 switch ($product) {
                     case 'LEASING':
-                        $account->user_id_c = $reAsignado;                            
+                        $account->user_id_c = $reAsignado;
                         break;
                     case 'CREDITO AUTOMOTRIZ':
                         $account->user_id2_c = $reAsignado;
@@ -133,7 +133,7 @@ class reAsignarCuentas extends SugarApi
                         break;
                 }
 
-                $account->save();                   
+                $account->save();
 
                 if ($statusProducto == "1") {
                     if ($account->load_relationship('accounts_uni_productos_1')) {
@@ -226,11 +226,7 @@ SQL;
                     $hoy = date("d");
                     $condicion = '';
                     if ($optRadio == 'siguientes') {
-
                         $condicion = " AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
-
-                    } elseif ($optRadio == 'actualMes') {
-                        $condicion = " AND ((b.anio = year(NOW()) and b.mes = month(NOW())) OR b.anio > year(NOW()))";
                     } else {
                         $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
                     }
