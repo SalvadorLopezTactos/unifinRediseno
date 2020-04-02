@@ -189,8 +189,10 @@ class Meetings_Hooks
    * */
   function modificaReunion ($bean= null, $event=null, $args=null)
   {
+      global $current_user;
+      $producto_usuario=$current_user->tipodeproducto_c;
     //Agrega funcionalidad para actualizar estado = Planned
-    if ($GLOBALS['service']->platform!= 'base' && $bean->parent_type=='Accounts' && !empty($bean->parent_id) && empty($bean->minut_minutas_meetingsminut_minutas_ida) && $bean->status=='Held')
+    if ($GLOBALS['service']->platform!= 'base' && $bean->parent_type=='Accounts' && !empty($bean->parent_id) && empty($bean->minut_minutas_meetingsminut_minutas_ida) && $bean->status=='Held' && $producto_usuario!='8')
     {
       global $db, $current_user;
       $GLOBALS['log']->fatal("TCT - Cumple condición y actualiza: Planned ");
