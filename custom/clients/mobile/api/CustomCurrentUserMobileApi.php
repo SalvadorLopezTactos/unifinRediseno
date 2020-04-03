@@ -37,6 +37,7 @@ class CustomCurrentUserMobileApi extends CurrentUserMobileApi
         $userArray['current_user']['tct_altaproveedor_chk_c'] = $current_user->tct_altaproveedor_chk_c;
         $userArray['current_user']['tct_alta_clientes_chk_c'] = $current_user->tct_alta_clientes_chk_c;
         $userArray['current_user']['tct_alta_cd_chk_c'] = $current_user->tct_alta_cd_chk_c;
+        $userArray['current_user']['deudor_factoraje_c'] = $current_user->deudor_factoraje_c;
 
         return $userArray;
     }
