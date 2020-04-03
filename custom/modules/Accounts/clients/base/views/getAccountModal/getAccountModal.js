@@ -128,7 +128,7 @@
                     //alert
                     app.alert.show("Sin privilegios", {
                         level: "error",
-                        title: "No cuentas con los privilegios para operar esta Cuenta.",
+                        title: "La cuenta no puede ser asignada a su nombre dado que hay actividad vigente del propietario actual, y si desea dicha cuenta, debe validarlo  el área correspondiente.",
                         autoClose: false
                     });
                 }
