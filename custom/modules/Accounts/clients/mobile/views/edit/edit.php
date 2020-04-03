@@ -391,8 +391,15 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORCREDIT',
               ),
-              67 => 'phone_office',
-              68 => 
+              67 =>
+              array (
+                  'name' => 'no_viable',
+                  'type' => 'no_viable',
+                  'studio' => 'visible',
+                  'label' => 'Lead No viable',
+              ),
+              68 => 'phone_office',
+              69 =>
               array (
                 'span' => 12,
               ),
