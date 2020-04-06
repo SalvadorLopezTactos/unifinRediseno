@@ -564,7 +564,7 @@
         var modal = $('#setAccountModal');
         if (modal) {
             modal.hide();
-            modal.remove()
+            modal.remove();
         }
         $('.modal').modal('hide');
         $('.modal').remove();
