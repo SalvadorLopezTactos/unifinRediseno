@@ -20,30 +20,46 @@
         if (this.layout) {
             this.layout.on('app:view:setAccountModal', function () {
 
-                $('[name="users_accounts_1_name"]').select2('val',"") ;
+                $('#e6').select2('val', "");
                 var newContext = options.context.get('model');
                 var list_html = this.create_list_options(newContext);
 
                 this.prod_list = list_html;
                 this.context_Account = options;
                 console.log(this.context_Account);
-                if(list_html!='<option value="" >  </option>') {
+                if (list_html != '<option value="" >  </option>') {
 
-                this.render();
-                this.$('.modal').modal({
-                    backdrop: ''
-                });
-                this.$('.modal').modal('show');
-                $('.datepicker').css('z-index', '2000px');
-                app.$contentEl.attr('aria-hidden', true);
-                $('.modal-backdrop').insertAfter($('.modal'));
-}else {
+                    app.alert.show('reasignando', {
+                        level: 'process',
+                        title: 'Cargando...'
+                    });
+
+                    app.api.call("GET", app.api.buildURL("Users/?fields=id,full_name,equipo_c&max_num=-1", null, null, {}), null, {
+                        success: _.bind(function (data) {
+                            app.alert.dismiss('reasignando');
+
+                            self_modal.list_filter_usr = data.records;
+
+                            self_modal.render();
+                            self_modal.$('.modal').modal({
+                                backdrop: ''
+                            });
+                            self_modal.$('.modal').modal('show');
+                            $('.datepicker').css('z-index', '2000px');
+                            app.$contentEl.attr('aria-hidden', true);
+                            $('.modal-backdrop').insertAfter($('.modal'));
+
+                        }, this)
+                    });
+
+
+                } else {
                     //alert
                     app.alert.show("Sin privilegios", {
-            level: "error",
-            title: "La cuenta no puede ser asignada a su nombre dado que hay actividad vigente del propietario actual, y si desea dicha cuenta, debe validarlo  el área correspondiente.",
-            autoClose: false
-        });
+                        level: "error",
+                        title: "La cuenta no puede ser asignada a su nombre dado que hay actividad vigente del propietario actual, y si desea dicha cuenta, debe validarlo  el área correspondiente.",
+                        autoClose: false
+                    });
                 }
                 /**If any validation error occurs, system will throw error and we need to enable the buttons back*/
                 this.context.get('model').on('error:validation', function () {
@@ -52,9 +68,27 @@
             }, this);
         }
         this.bindDataChange();
+
+
+
+
     },
 
+    // forms range
+    _renderHtml: function () {
+        this._super('_renderHtml');
+        self_render=this;
+        $("#e6").select2({
+            placeholder: "Selecciona un Asesor",
+            minimumInputLength: 1,
 
+            data:{ results: self_render.list_filter_usr, text: 'full_name' },
+
+
+            formatResult: function(m) { return m.full_name; },
+            formatSelection: function(m) { return m.full_name; }
+        });
+    },
     create_list_options: function (objContext) {
         var temp_prod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userprod = temp_prod.split(",");
@@ -69,7 +103,7 @@
             _.each(productos, function (value, key) {
                 if (product_dispo.includes(key)) {
 
-                    switch (key){
+                    switch (key) {
                         case "1":
                             if (cont_uni_p.ResumenProductos.leasing.dias > 30) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
@@ -78,22 +112,25 @@
                         case "3":
                             if (cont_uni_p.ResumenProductos.credito_auto.dias > 30) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }                            break;
+                            }
+                            break;
                         case "4":
                             if (cont_uni_p.ResumenProductos.factoring.dias > 30) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }                            break;
+                            }
+                            break;
                         case "6":
                             if (cont_uni_p.ResumenProductos.fleet.dias > 30) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }                            break;
+                            }
+                            break;
                         case "8":
                             if (cont_uni_p.ResumenProductos.uniclick.dias > 30) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }                            break;
+                            }
+                            break;
 
                     }
-
 
 
                 }
@@ -176,12 +213,13 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-        var id_user_black = ['28f5b8b8-ab06-6bfd-dc85-5628f6e9f411',
-            '36af9462-37e6-11ea-baed-a44e314beb18',
-            '405cc6b7-fc4a-7cae-552f-5628f61fd849',
-            '42ee17c4-f67a-11e9-9711-00155d96730d',
-            '569246c7-da62-4664-ef2a-5628f649537e',
-            'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'];
+        var id_user_black = ['405cc6b7-fc4a-7cae-552f-5628f61fd849', // moroso
+            '36af9462-37e6-11ea-baed-a44e314beb18', // bloqueado
+            '569246c7-da62-4664-ef2a-5628f649537e', // sin gestor
+            '28f5b8b8-ab06-6bfd-dc85-5628f6e9f411', // Perdido
+            '42ee17c4-f67a-11e9-9711-00155d96730d', // express
+            'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
+        ];
 
         if (id_user_black.includes(id_producto)) {
             bandera = true;
@@ -230,7 +268,7 @@
         var modalAccount = this.context_Account; // contiene información de la cuenta
 
         var prod_select = $('#productos').val(); // producto seleccionada
-        var user_select = this.$('[name="users_accounts_1_name"]').val(); // usuario seleccionada
+        var user_select = $('#e6').select2('val') ;// usuario seleccionada
         var cuenta_id = modalAccount.context.get('model').attributes.id;
         console.log(user_select);
 
@@ -445,10 +483,10 @@
                             v360.ResumenCliente.leasing.promotor = full_name;
                             v360.ResumenCliente.leasing.estatus_atencion = 1;
 
-                            cont_uni_p.ResumenProductos.leasing.dias=0;
-                            cont_uni_p.ResumenProductos.leasing.full_name=full_name;
-                            cont_uni_p.ResumenProductos.leasing.assigned_user_id=id_user_new;
-                            cont_uni_p.ResumenProductos.leasing.estatus_atencion=1;
+                            cont_uni_p.ResumenProductos.leasing.dias = 0;
+                            cont_uni_p.ResumenProductos.leasing.full_name = full_name;
+                            cont_uni_p.ResumenProductos.leasing.assigned_user_id = id_user_new;
+                            cont_uni_p.ResumenProductos.leasing.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -458,10 +496,10 @@
                             v360.ResumenCliente.credito_auto.promotor = full_name;
                             v360.ResumenCliente.credito_auto.estatus_atencion = 1;
 
-                            cont_uni_p.ResumenProductos.credito_auto.dias=0;
-                            cont_uni_p.ResumenProductos.credito_auto.full_name=full_name;
-                            cont_uni_p.ResumenProductos.credito_auto.assigned_user_id=id_user_new;
-                            cont_uni_p.ResumenProductos.credito_auto.estatus_atencion=1;
+                            cont_uni_p.ResumenProductos.credito_auto.dias = 0;
+                            cont_uni_p.ResumenProductos.credito_auto.full_name = full_name;
+                            cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = id_user_new;
+                            cont_uni_p.ResumenProductos.credito_auto.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -472,10 +510,10 @@
                             v360.ResumenCliente.factoring.promotor = full_name;
                             v360.ResumenCliente.factoring.estatus_atencion = 1;
 
-                            cont_uni_p.ResumenProductos.factoring.dias=0;
-                            cont_uni_p.ResumenProductos.factoring.full_name=full_name;
-                            cont_uni_p.ResumenProductos.factoring.assigned_user_id=id_user_new;
-                            cont_uni_p.ResumenProductos.factoring.estatus_atencion=1;
+                            cont_uni_p.ResumenProductos.factoring.dias = 0;
+                            cont_uni_p.ResumenProductos.factoring.full_name = full_name;
+                            cont_uni_p.ResumenProductos.factoring.assigned_user_id = id_user_new;
+                            cont_uni_p.ResumenProductos.factoring.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -486,10 +524,10 @@
                             v360.ResumenCliente.fleet.promotor = full_name;
                             v360.ResumenCliente.fleet.estatus_atencion = 1;
 
-                            cont_uni_p.ResumenProductos.fleet.dias=0;
-                            cont_uni_p.ResumenProductos.fleet.full_name=full_name;
-                            cont_uni_p.ResumenProductos.fleet.assigned_user_id=id_user_new;
-                            cont_uni_p.ResumenProductos.fleet.estatus_atencion=1;
+                            cont_uni_p.ResumenProductos.fleet.dias = 0;
+                            cont_uni_p.ResumenProductos.fleet.full_name = full_name;
+                            cont_uni_p.ResumenProductos.fleet.assigned_user_id = id_user_new;
+                            cont_uni_p.ResumenProductos.fleet.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -500,10 +538,10 @@
                             v360.ResumenCliente.uniclick.promotor = full_name;
                             v360.ResumenCliente.uniclick.estatus_atencion = 1;
 
-                            cont_uni_p.ResumenProductos.uniclick.dias=0;
-                            cont_uni_p.ResumenProductos.uniclick.full_name=full_name;
-                            cont_uni_p.ResumenProductos.uniclick.assigned_user_id=id_user_new;
-                            cont_uni_p.ResumenProductos.uniclick.estatus_atencion=1;
+                            cont_uni_p.ResumenProductos.uniclick.dias = 0;
+                            cont_uni_p.ResumenProductos.uniclick.full_name = full_name;
+                            cont_uni_p.ResumenProductos.uniclick.assigned_user_id = id_user_new;
+                            cont_uni_p.ResumenProductos.uniclick.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;

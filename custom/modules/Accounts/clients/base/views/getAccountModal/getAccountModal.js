@@ -116,8 +116,8 @@
                     this.render();
                     this.$('.modal').modal({
                         backdrop: '',
-                        keyboard: true,
-                        focus: true
+                       // keyboard: true,
+                       // focus: true
                     });
                     this.$('.modal').modal('show');
                     $('.datepicker').css('z-index', '2000px');
