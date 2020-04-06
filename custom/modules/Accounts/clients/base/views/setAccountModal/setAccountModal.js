@@ -29,14 +29,14 @@
                 console.log(this.context_Account);
                 if (list_html != '<option value="" >  </option>') {
 
-                    app.alert.show('reasignando', {
+                    app.alert.show('reasignando_modal_dos', {
                         level: 'process',
                         title: 'Cargando...'
                     });
 
                     app.api.call("GET", app.api.buildURL("Users/?fields=id,full_name,equipo_c&max_num=-1", null, null, {}), null, {
                         success: _.bind(function (data) {
-                            app.alert.dismiss('reasignando');
+                            app.alert.dismiss('reasignando_modal_dos');
 
                             self_modal.list_filter_usr = data.records;
 
@@ -464,7 +464,7 @@
             'promoActual': id_user_old, // cuenta user_id_c antes de asignar
             'status_producto': "1",
         };
-        app.alert.show('reasignando', {
+        app.alert.show('reasignando_modal_dos_call', {
             level: 'process',
             title: 'Cargando...'
         });
@@ -472,9 +472,8 @@
         app.api.call("create", dnbProfileUrl, {data: Params}, {
             success: _.bind(function (data) {
                 console.log(typeof data);
+                app.alert.dismiss('reasignando_modal_dos_call');
                 if (data) {
-                    app.alert.dismiss('reasignando');
-//                    this.render();
                     modal.closeModal();
                     switch (id_producto) {
                         case "1": // LEASING
@@ -565,8 +564,10 @@
         var modal = $('#setAccountModal');
         if (modal) {
             modal.hide();
+            modal.remove()
         }
         $('.modal').modal('hide');
+        $('.modal').remove();
         $('.modal-backdrop').remove();
 
     },
