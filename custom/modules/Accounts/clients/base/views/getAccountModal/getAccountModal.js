@@ -126,7 +126,7 @@
 
                 } else {
                     //alert
-                    app.alert.show("Sin privilegios", {
+                    app.alert.show("sin_privilegios_modal_uno", {
                         level: "error",
                         title: "La cuenta no puede ser asignada a su nombre dado que hay actividad vigente del propietario actual, y si desea dicha cuenta, debe validarlo  el área correspondiente.",
                         autoClose: false
@@ -305,7 +305,7 @@
             'promoActual': id_user_old, // cuenta user_id_c antes de asignar
             'status_producto': "1",
         };
-        app.alert.show('reasignando', {
+        app.alert.show('reasignando_modal_uno', {
             level: 'process',
             title: 'Cargando...'
         });
@@ -313,9 +313,8 @@
         app.api.call("create", dnbProfileUrl, {data: Params}, {
             success: _.bind(function (data) {
                 //console.log(typeof data);
+                app.alert.dismiss('reasignando_modal_uno');
                 if (data) {
-                    app.alert.dismiss('reasignando');
-//                    this.render();
                     modal.closeModal();
                     //SUGAR.App.controller.context.reloadData({});
 
@@ -408,8 +407,10 @@
         var modal = $('#getAccountModal');
         if (modal) {
             modal.hide();
+            modal.remove();
         }
         $('.modal').modal('hide');
+        $('.modal').remove();
         $('.modal-backdrop').remove();
 
     },
