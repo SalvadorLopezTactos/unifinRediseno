@@ -206,73 +206,81 @@ array (
               ),
               8 => 
               array (
+                'name' => 'no_viable_otro_c',
+                'label' => 'LBL_NO_VIABLE_OTRO',
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
                 'name' => 'no_viable_quien',
                 'label' => 'LBL_NO_VIABLE_QUIEN',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'no_viable_porque',
                 'label' => 'LBL_NO_VIABLE_PORQUE',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'tipo_cuenta',
                 'label' => 'LBL_TIPO_CUENTA',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'subtipo_cuenta',
                 'label' => 'LBL_SUBTIPO_CUENTA',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'tipo_subtipo_cuenta',
                 'label' => 'LBL_TIPO_SUBTIPO_CUENTA',
               ),
-              13 => 
+              15 => 
               array (
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'anexos_activos',
                 'label' => 'LBL_ANEXOS_ACTIVOS',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'anexos_historicos',
                 'label' => 'LBL_ANEXOS_HISTORICOS',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'no_viable_razon_cf',
                 'label' => 'LBL_NO_VIABLE_RAZON_CF',
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'estatus_atencion',
                 'label' => 'LBL_ESTATUS_ATENCION',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'fecha_pago',
                 'label' => 'LBL_FECHA_PAGO',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'fecha_termino',
                 'label' => 'LBL_FECHA_TERMINO',
               ),
-              20 => 
+              22 => 
               array (
                 'name' => 'fecha_impago',
                 'label' => 'LBL_FECHA_IMPAGO',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'fecha_liberacion',
                 'label' => 'LBL_FECHA_LIBERACION',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'monto_impago',
                 'related_fields' => 
@@ -282,27 +290,27 @@ array (
                 ),
                 'label' => 'LBL_MONTO_IMPAGO',
               ),
-              23 => 
+              25 => 
               array (
                 'name' => 'nps_calificacion',
                 'label' => 'LBL_NPS_CALIFICACION',
               ),
-              24 => 
+              26 => 
               array (
                 'name' => 'nps_comentario',
                 'studio' => 'visible',
                 'label' => 'LBL_NPS_COMENTARIO',
               ),
-              25 => 
+              27 => 
               array (
                 'name' => 'nps_fecha',
                 'label' => 'LBL_NPS_FECHA',
               ),
-              26 => 
+              28 => 
               array (
                 'name' => 'accounts_uni_productos_1_name',
               ),
-              27 => 
+              29 => 
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
