@@ -45,7 +45,7 @@
 				
 				chat.sort(function(a, b) {
 					var dateA = new Date(a.createdAt), dateB = new Date(b.createdAt);
-					return dateB - dateA;
+					return dateA - dateB;
 				});
 				
 				console.log(chat[1].content);
