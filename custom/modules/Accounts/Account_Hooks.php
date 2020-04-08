@@ -1311,8 +1311,8 @@ where rfc_c = '{$bean->rfc_c}' and
     public function set_csv_linea_vigente($bean=null, $event= null, $args= null){
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea"
-  	    if($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' ){
-            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPADA DESDE PROCCESS AUTHOR------------');
+  	    if(($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' && !$bean->conversion_gclid_c) || ($bean->subtipo_cuenta_c=='Integracion de Expediente' && $bean->tipo_registro_c=='Prospecto' && $bean->fetched_row['subtipo_cuenta_c']!='Integracion de Expediente' && !$bean->conversion_gclid_c)){
+            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPARA DESDE PROCCESS AUTHOR------------');
             $gclid='';//este campo se obtiene del lead relacionado campo gclid
             $conversion_name='Conv CRM';
             $tipo_producto_solicitud='';
@@ -1329,16 +1329,13 @@ where rfc_c = '{$bean->rfc_c}' and
                         }
                     }
                 }
-
             }
 
             //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
             if($gclid != '' && $gclid !=null){
                 $GLOBALS['log']->fatal('------------LEAD SI CUENTA CON GCLID------------');
-
                 //Monto de línea= Campo Opps= monto_c
                 $conversion_value='0';
-
                 if ($bean->load_relationship('opportunities')) {
                     $parametros=array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                     //Fetch related beans
@@ -1349,38 +1346,27 @@ where rfc_c = '{$bean->rfc_c}' and
                             $conversion_value=$opp->monto_c;
                             $tipo_producto_solicitud=$opp->tipo_producto_c;
                         }
-
                     }
-
                 }
 
-                //Se escribe en csv cuando la solicitud es diferente al tipo de producto Uniclick
-                if($tipo_producto_solicitud !='' && $tipo_producto_solicitud!='8'){
+                //Se escribe en csv cuando trae tipo de producto
+                if($tipo_producto_solicitud !=''){
                     $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
-
                     //Estableciendo la hora en formato "24/03/2020 19:00:00"
                     date_default_timezone_set('America/Mexico_City');
                     $conversion_time=date ('d/m/Y H:i:s');
-
                     //Limpiando el monto, ya que en el csv espera solo cantidades enteras, sin decimales
                     $conv_entero=explode('.',$conversion_value);
-
                     $ruta_archivo="custom/plantillaCSV/clientes_lv.csv";
-
                     if (file_exists($ruta_archivo)) {
                         $file = fopen($ruta_archivo,"a");
-
                         fwrite($file, $gclid.','.$conversion_name.','.$conversion_time.','.$conv_entero[0].','.PHP_EOL);
-
                         fclose($file);
                     }
-
+                    //Actualiza Cuenta a conversión GCLID
+                    $bean->conversion_gclid_c = 1;
                 }
-
             }
-
         }
-
     }
-
 }

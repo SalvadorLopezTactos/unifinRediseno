@@ -46,36 +46,41 @@
     }
 
 </style>
+<script>
+    $('#states3').select2({
+        minimumResultsForSearch: 5,
+        allowClear: true
+    });
+    $('#states2').select2({
+        minimumResultsForSearch: 5,
+        allowClear: true
+    });
+    var $select = $('select.select2');
+    $select.select2();
+
+</script>
 
 <div class=" modal modal_cstm " id="setAccountModal" tabindex="-1">
     <div class="modal-header_cstm">
         <h3><b><i class="fa fa-book" style="padding: 3px; "></i>{{str "Enviar Cuenta a" module}}</b></h3>
     </div>
     <div class="modal-body_cstm">
-        <div style="display: inline-block;padding: 5px; ">
+
+        <div style="display: inline-block;padding: 5px;  ">
             <label for="" style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;"> Productos
                 disponibles</label>
 
-            <select name="" id="productos" class="select2 select_cstm" style="padding: 0px 7px;">
+            <select name="" id="productos" class="select2 select_cstm" style="padding: 0px 7px; width: 260px;">
                 {{{prod_list}}}
             </select>
         </div>
 
-        <div style="display: inline-block;padding: 5px;  width: 250px;">
-            <label for="" style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;"> Asesores</label>
-                    <span>
-                        {{#each meta.panels}}
-                            {{#each fields}}
-                                {{field ../../this}}
-                            {{/each}}
-                        {{/each}}
-                        <p class="help-block"></p>
-                    </span>
+        <div class=" padded" style="display: inline-block;padding: 5px; ">
+            <label style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;">Asesores</label>
+            <input type="hidden" class="bigdrop" id="e6" style="width:260px"/></p>
         </div>
 
-        <div class="mensaje">
-            <p>{{respuesta_msj}}</p>
-        </div>
+
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary  btn-Cancelar" id="btn-cancela">Cancelar</button>
