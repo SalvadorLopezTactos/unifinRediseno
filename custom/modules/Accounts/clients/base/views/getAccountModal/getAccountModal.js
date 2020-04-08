@@ -15,7 +15,7 @@
     context_Account: null,
     respuesta_msj: "",
     initialize: function (options) {
-        self_modal = this;
+        self_modal_get = this;
         app.view.View.prototype.initialize.call(this, options);
         if (this.layout) {
             this.layout.on('app:view:getAccountModal', function () {
@@ -26,7 +26,7 @@
                 var id_user = app.user.id; //id de usuario firmado
 
                 console.log(cont_uni_p.ResumenProductos.leasing.dias);
-                var temp_array = [];
+                var temp_array_get = [];
                 _.each(userprod, function (value, key) {
                     console.log("valor" + value + " llave " + key);
                     switch (value) {
@@ -34,11 +34,11 @@
                             var leasing_id = options.context.get('model').attributes.user_id_c; // id user producto cuenta
                             var leasig_status = context360.leasing.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
-                            if (!self_modal.validate_no_nueve(leasing_id)) {
+                            if (!self_modal_get.validate_no_nueve(leasing_id)) {
                                 if (cont_uni_p.ResumenProductos.leasing.dias > 30) {
-                                    var result = self_modal.validate_product(leasing_id, leasig_status, id_user);
+                                    var result = self_modal_get.validate_product(leasing_id, leasig_status, id_user);
                                     if (result['status']) {
-                                        temp_array.push(value);
+                                        temp_array_get.push(value);
                                     }
                                 }
                             }
@@ -47,11 +47,11 @@
                             var credito_id = options.context.get('model').attributes.user_id2_c; // id user producto cuenta
                             var leasig_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
-                            if (!self_modal.validate_no_nueve(credito_id)) {
+                            if (!self_modal_get.validate_no_nueve(credito_id)) {
                                 if (cont_uni_p.ResumenProductos.credito_auto.dias > 30) {
-                                    var result = self_modal.validate_product(credito_id, leasig_status, id_user);
+                                    var result = self_modal_get.validate_product(credito_id, leasig_status, id_user);
                                     if (result['status']) {
-                                        temp_array.push(value);
+                                        temp_array_get.push(value);
                                     }
                                 }
                             }
@@ -61,11 +61,11 @@
                             var factoraje_id = options.context.get('model').attributes.user_id1_c; // id user producto cuenta
                             var leasig_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
-                            if (!self_modal.validate_no_nueve(factoraje_id)) {
+                            if (!self_modal_get.validate_no_nueve(factoraje_id)) {
                                 if (cont_uni_p.ResumenProductos.factoring.dias > 30) {
-                                    var result = self_modal.validate_product(factoraje_id, leasig_status, id_user);
+                                    var result = self_modal_get.validate_product(factoraje_id, leasig_status, id_user);
                                     if (result['status']) {
-                                        temp_array.push(value);
+                                        temp_array_get.push(value);
                                     }
                                 }
                             }
@@ -75,11 +75,11 @@
                             var fleet_id = options.context.get('model').attributes.user_id6_c; // id user producto cuenta
                             var leasig_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
-                            if (!self_modal.validate_no_nueve(fleet_id)) {
+                            if (!self_modal_get.validate_no_nueve(fleet_id)) {
                                 if (cont_uni_p.ResumenProductos.fleet.dias > 30) {
-                                    var result = self_modal.validate_product(fleet_id, leasig_status, id_user);
+                                    var result = self_modal_get.validate_product(fleet_id, leasig_status, id_user);
                                     if (result['status']) {
-                                        temp_array.push(value);
+                                        temp_array_get.push(value);
                                     }
                                 }
                             }
@@ -89,11 +89,11 @@
                             var uniclick_id = options.context.get('model').attributes.user_id7_c; // id user producto cuenta
                             var leasig_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
 
-                            if (!self_modal.validate_no_nueve(uniclick_id)) {
+                            if (!self_modal_get.validate_no_nueve(uniclick_id)) {
                                 if (cont_uni_p.ResumenProductos.uniclick.dias > 30) {
-                                    var result = self_modal.validate_product(uniclick_id, leasig_status, id_user);
+                                    var result = self_modal_get.validate_product(uniclick_id, leasig_status, id_user);
                                     if (result['status']) {
-                                        temp_array.push(value);
+                                        temp_array_get.push(value);
                                     }
                                 }
                             }
@@ -104,7 +104,7 @@
                 var list_html = '<option value="" >  </option>';
 
                 _.each(productos, function (value, key) {
-                    if (temp_array.includes(key)) {
+                    if (temp_array_get.includes(key)) {
                         list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                     }
                 });
