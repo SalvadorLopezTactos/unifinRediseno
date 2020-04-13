@@ -140,13 +140,13 @@ class reAsignarCuentas extends SugarApi
                         //Recupera Productos
                         $relateProduct = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
 
-                        foreach ($relateProduct as $product) {
+                        foreach ($relateProduct as $productos_uni) {
                             // $GLOBALS['log']->fatal("nuevos valores ".print_r($product,true));
-                            if ($product->tipo_producto == $idProducto) {
-                                $GLOBALS['log']->fatal("encontrado " . $product->id);
-                                $bean_producto = BeanFactory::retrieveBean('uni_Productos', $product->id);
-                                $bean_producto->estatus_atencion = 1;
-                                $bean_producto->save();
+                            if ($productos_uni->tipo_producto == $idProducto) {
+                                $GLOBALS['log']->fatal("encontrado " . $productos_uni->id);
+                                $bean_producto_uni = BeanFactory::retrieveBean('uni_Productos', $productos_uni->id);
+                                $bean_producto_uni->estatus_atencion = 1;
+                                $bean_producto_uni->save();
                             }
                         }
                     }
