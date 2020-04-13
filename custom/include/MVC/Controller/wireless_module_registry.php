@@ -1,5 +1,5 @@
 <?php
-// created: 2020-02-19 11:09:49
+// created: 2020-04-07 17:48:31
 $wireless_module_registry = array (
   'Accounts' => 
   array (
@@ -48,6 +48,9 @@ $wireless_module_registry = array (
   array (
   ),
   'dire_Ciudad' => 
+  array (
+  ),
+  'uni_Productos' => 
   array (
   ),
   'Documents' => 
