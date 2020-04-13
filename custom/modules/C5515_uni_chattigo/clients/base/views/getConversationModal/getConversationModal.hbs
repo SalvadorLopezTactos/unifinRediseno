@@ -1,0 +1,172 @@
+<style>
+    .modal-header_cstm h3 {
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    .modal-header_cstm {
+		background: #1e588e;
+        color: #FFF;
+        padding: 2px;
+    }
+	
+    .modal-body_cstm {
+        padding: 5px 0px 58px 12px;;
+    }
+	
+	.modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        left: 40%;
+        overflow: auto;
+        background: rgb(255, 255, 255);
+        background: rgba(189, 189, 189, 0.92);
+        /**background: rgba(76, 175, 80, 0.3)**/
+        width: 500px;
+		height: 500px;
+    }
+
+	
+	/* M E S S A G E S */
+
+	.chat {
+		list-style: none;
+		background: none;
+		margin: 0;
+		padding: 0 0 50px 0;
+		margin-top: 60px;
+		margin-bottom: 10px;
+	}
+	.chat li {
+		padding: 0.5rem;
+		overflow: hidden;
+		display: flex;
+	}
+	
+	.chat .day {
+		position: relative;
+		display: block;
+		text-align: center;
+		color: #c0c0c0;
+		height: 20px;
+		text-shadow: 7px 0px 0px #e5e5e5, 6px 0px 0px #e5e5e5, 5px 0px 0px #e5e5e5, 4px 0px 0px #e5e5e5, 3px 0px 0px #e5e5e5, 2px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 0px 0px 0px #e5e5e5, -1px 0px 0px #e5e5e5, -2px 0px 0px #e5e5e5, -3px 0px 0px #e5e5e5, -4px 0px 0px #e5e5e5, -5px 0px 0px #e5e5e5, -6px 0px 0px #e5e5e5, -7px 0px 0px #e5e5e5;
+		box-shadow: inset 20px 0px 0px #e5e5e5, inset -20px 0px 0px #e5e5e5, inset 0px -2px 0px #d7d7d7;
+		line-height: 38px;
+		margin-top: 5px;
+		margin-bottom: 20px;
+		cursor: default;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+	
+	.other .msg {
+		order: 1;
+		box-shadow: -1px 2px 0px #D4D4D4;
+	}
+	.other:before {
+		content: "";
+		position: relative;
+		top: 0px;
+		right: 0px;
+		left: 40px;
+		width: 0px;
+		height: 0px;
+		border: 5px solid #fff;
+		border-left-color: transparent;
+		border-bottom-color: transparent;
+	}
+	
+	.self {
+		justify-content: flex-end;
+		align-items: flex-end;
+	}
+	.self .msg {
+		order: 1;
+		box-shadow: 1px 2px 0px #D4D4D4;
+		background-color : #b3ffe0;
+	}
+	.msg {
+		background: white;
+		min-width: 50px;
+		padding: 10px;
+		box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
+	}
+	.msg p {
+		font-size: 0.8rem;
+		margin: 0 0 0.2rem 0;
+		color: black;
+	}
+	.msg img {
+		position: relative;
+		display: block;
+		width: 450px;
+		box-shadow: 0px 0px 3px #eee;
+		transition: all .4s cubic-bezier(0.565, -0.260, 0.255, 1.410);
+		cursor: default;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+	
+	.msg time {
+		font-size: 0.7rem;
+		color: #777;
+		margin-top: 3px;
+		float: right;
+		cursor: default;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+	.msg time:before{
+		content:"\f017";
+		color: #ddd;
+		font-family: FontAwesome;
+		display: inline-block;
+		margin-right: 4px;
+	}
+
+	
+</style>
+
+<div class="modal hide getConversationModal" tabindex="-1" role="dialog">
+    <div class="modal-header_cstm">
+        <h3> <b><i class="fa fa-book" style="padding: 3px; "></i>
+			"Chattigo - "{{nombre}}
+		</b></h3>
+    </div>
+    <div class="modal-body_cstm" role="document">
+        <div style="display: inline-flex;padding: 5px; ">
+			<ol class="chat">
+			{{#each objconver}}
+				{{#if this.type}}
+					<li class="other">
+					<div class="msg">
+					<p >{{this.content}}</p>
+					<time>{{this.horamsg}}</time>
+					</div>
+					</li>
+				{{else}}
+					<li class="self">
+					<div class="msg">
+					<p >{{this.content}}</p>
+					<time>{{this.horamsg}}</time>
+					</div>
+					</li>
+				{{/if}}				
+            {{/each}}
+			</ol>
+			<br>			
+		</div>
+    </div>
+    
+    <div class="modal-footer_cstm">
+        <button class="btn btn-primary  btn-Cancelar" id="btn-cancela">Cerrar</button>
+    </div>
+</div>

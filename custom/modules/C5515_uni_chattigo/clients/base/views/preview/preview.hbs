@@ -1,0 +1,74 @@
+<style>
+  .container {
+    border: 2px solid #dedede;
+    background-color: #b3ffe0;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .darker {
+    border-color: #ccc;
+    background-color: #ffffff;
+  }
+
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  .container span.img {
+    float: left;
+    max-width: 60px;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  .container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+
+  .time-left {
+    float: left;
+    color: #999;
+  }
+</style>
+
+<div class="span11">
+    <br><br><br>
+    <b>{{options.context.attributes.model.attributes.name}}</b><br>
+    {{#each model.attributes.chat}}
+      {{#if type}}
+          <div class="container span12 darker">
+          <img src="{{url}}" alt="Avatar" {{#if type}}class="right"{{/if}}>
+      {{else}}
+          <div class="container span12">
+          <span class="label label-module label-module-lg label-Notes img" rel="tooltip" title="" data-placement="right" data-original-title="Cuenta">
+            Cu
+          </span>
+      {{/if}}
+        {{#if attachment.url}}
+            <a href="{{content}}" target="_blank">Archivo adjunto</a>
+        {{else}}
+          <p>{{content}}</p>
+        {{/if}}
+        <span class="time-right">{{createdAt}}</span>
+      </div>
+    {{/each}}
+</div>

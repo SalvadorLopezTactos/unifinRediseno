@@ -266,21 +266,16 @@ AF - 18-01-18
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Cobranza</strong> </div>
-            <div class="span6">{{ResumenCliente.general_cliente.cobranza}}</div>
-          </div>
-          <!-- Línea 4 -->
-          <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Sector económico</strong> </div>
             <div class="span6">{{ResumenCliente.general_cliente.sector_economico}}</div>
           </div>
-          <!-- Línea 5 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
+          <!-- Línea 4 -->
+          <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Grupo Empresarial</strong> </div>
             <div class="span6">{{ResumenCliente.general_cliente.grupo_empresarial}}</div>
           </div>
-          <!-- Línea 6 -->
-          <!-- <div class="row-fluid" style="background-color: #ffffff">
+          <!-- Línea 5 -->
+          <!-- <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
             <div class="span6">{{ResumenCliente.general_cliente.nivel_satisfaccion}}</div>
           </div> -->
@@ -355,25 +350,20 @@ AF - 18-01-18
             <div class="span6">{{ResumenCliente.historial_contactos.ultima_llamada}}</div>
           </div>
           <!-- Línea 3 -->
-          <div class="row-fluid"  style="background-color: #f9f9f9">
-            <div class="span6"><strong>Estatus de Atención</strong></div>
-            <div class="span6">{{getUnifinListValue 'tct_status_atencion_ddw_list' ResumenCliente.historial_contactos.estatus_atencion}}</div>
-          </div>
-          <!-- Línea 4 -->
           <div class="row-fluid">
             <center>
               <font color=#ffffff>
-                <!-- Línea 4.1 -->
+                <!-- Línea 3.1 -->
                 <div class="span4" style="background-color: #555555">
                   <strong>{{ResumenCliente.historial_contactos.citas}}</strong></br>
                   Citas
                 </div>
-                <!-- Línea 4.2 -->
+                <!-- Línea 3.2 -->
                 <div class="span4" style="background-color: #555555">
                   <strong>{{ResumenCliente.historial_contactos.llamadas}}</strong><br/>
                   llamadas
                 </div>
-                <!-- Línea 4.3 -->
+                <!-- Línea 3.3 -->
                 <div class="span4" style="background-color: #555555">
                   <strong>{{ResumenCliente.historial_contactos.emails}}</strong><br/>
                   Emails
@@ -443,13 +433,18 @@ AF - 18-01-18
             <div class="span6"><strong>Fecha de pago</strong> </div>
             <div class="span6">{{ResumenCliente.leasing.fecha_pago}}</div>
           </div>
-          <!-- Línea 7 -->
+          <!-- Cobranza -->
           <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Cobranza</strong> </div>
+            <div class="span6">{{ResumenCliente.leasing.cobranza}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
             <div class="span6">{{ResumenCliente.leasing.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 8 -->
-          <div class="row-fluid" style="background-color: #ffffff">
+          <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Asesor</strong> </div>
             <div class="span6">{{ResumenCliente.leasing.promotor}}</div>
           </div>
@@ -535,13 +530,18 @@ AF - 18-01-18
             <div class="span6"><strong>Fecha de pago</strong> </div>
             <div class="span6">{{ResumenCliente.factoring.fecha_pago}}</div>
           </div>
-          <!-- Línea 7 -->
+          <!-- Cobranza -->
           <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Cobranza</strong> </div>
+            <div class="span6">{{ResumenCliente.factoring.cobranza}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
             <div class="span6">{{ResumenCliente.factoring.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 8 -->
-          <div class="row-fluid" style="background-color: #ffffff">
+          <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Asesor</strong> </div>
             <div class="span6">{{ResumenCliente.factoring.promotor}}</div>
           </div>
@@ -627,13 +627,18 @@ AF - 18-01-18
             <div class="span6"><strong>Fecha de pago</strong> </div>
             <div class="span6">{{ResumenCliente.credito_auto.fecha_pago}}</div>
           </div>
-          <!-- Línea 7 -->
+          <!-- Cobranza -->
           <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Cobranza</strong> </div>
+            <div class="span6">{{ResumenCliente.credito_auto.cobranza}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
             <div class="span6">{{ResumenCliente.credito_auto.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 8 -->
-          <div class="row-fluid" style="background-color: #ffffff">
+          <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Asesor</strong> </div>
             <div class="span6">{{ResumenCliente.credito_auto.promotor}}</div>
           </div>
@@ -709,6 +714,11 @@ AF - 18-01-18
                         <div class="span6"><strong>Número de vehículos</strong></div>
                         <div class="span6">{{ResumenCliente.fleet.numero_vehiculos}}</div>
                     </div>
+					<!-- Cobranza -->
+					<div class="row-fluid" style="background-color: #f9f9f9">
+						<div class="span6"><strong>Cobranza</strong> </div>
+						<div class="span6">{{ResumenCliente.fleet.cobranza}}</div>
+					</div>					
                     <!-- Línea 5 -->
                     <div class="row-fluid"  style="background-color: #ffffff">
                         <div class="span6"><strong>Asesor</strong></div>
@@ -755,16 +765,20 @@ AF - 18-01-18
                         <div class="span6">$ {{customFormatNumber ResumenCliente.credito_sos.linea_disponible}}</div>
                     </div>
                     <!-- Línea 5 -->
-                    <div class="row-fluid"  style="background-color: #ffffff">
+                    <div class="row-fluid"  style="background-color: #f9f9f9">
                         <div class="span6"><strong>Fecha de pago</strong></div>
                         <div class="span6">{{ResumenCliente.credito_sos.fecha_pago}}</div>
                     </div>
+					<!-- Cobranza -->
+					<div class="row-fluid" style="background-color: #ffffff">
+						<div class="span6"><strong>Cobranza</strong> </div>
+						<div class="span6">{{ResumenCliente.leasing.cobranza}}</div>
+					</div>					
                     <!-- Línea 6 -->
-                    <div class="row-fluid"  style="background-color: #ffffff">
+                    <div class="row-fluid"  style="background-color: #f9f9f9">
                         <div class="span6"><strong>Asesor</strong></div>
                         <div class="span6">{{ResumenCliente.credito_sos.promotor}}</div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -423,7 +423,13 @@ class altaLeadServices extends SugarApi
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
         $bean_Lead->detalle_plataforma_c = $dataOrigen['detalle_plataforma'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
-
+        $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
+        $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
+        $bean_Lead->facebook_pixel_c = $dataOrigen['facebook_pixel_c'];
+        $bean_Lead->ga_client_id_c = $dataOrigen['ga_client_id_c'];
+        $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
+        $bean_Lead->campana_c = $dataOrigen['campana_c'];
+        $bean_Lead->compania_c = $dataOrigen['compania_c'];
 
         # falta obtener el asignado a
 

@@ -669,6 +669,7 @@ class ResumenClienteAPI extends SugarApi
                 
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
+                $cobranza = $product->cobranza_c;
 
                 if ($statusProducto == '' || $statusProducto == null){
                     $statusProducto = '0'; //0 = vacio
@@ -678,21 +679,27 @@ class ResumenClienteAPI extends SugarApi
 
                     case '1': //Leasing
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['leasing']['cobranza'] = $cobranza;
                         break;
                     case '3': //Credito-Automotriz
                         $arr_principal['credito_auto']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['credito_auto']['cobranza'] = $cobranza;
                         break;
                     case '4': //Factoraje
                         $arr_principal['factoring']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['factoring']['cobranza'] = $cobranza;
                         break;
                     case '6': //Fleet
                         $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['fleet']['cobranza'] = $cobranza;
                         break;
                     case '7': //Credito SOS
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['leasing']['cobranza'] = $cobranza;
                         break;
                     case '8': //Uniclick
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['uniclick']['cobranza'] = $cobranza;
                         break;     
                     default:                        
                         break;
