@@ -12,18 +12,18 @@ class LeadNV_hook
     {
         //
         $leadNoViale = $bean->tct_noviable;
-        $GLOBALS['log']->fatal("Entra a Guardar info de Lead no Viable");
+        // $GLOBALS['log']->fatal("Entra a Guardar info de Lead no Viable");
         if (!empty($leadNoViale)) {
 
             if ($leadNoViale['id']) {
-                $GLOBALS['log']->fatal("Pregunta si hay un id");
+                // $GLOBALS['log']->fatal("Pregunta si hay un id");
                 $beanNV = BeanFactory::retrieveBean('tct3_noviable', $leadNoViale['id']);
             } else {
-                $GLOBALS['log']->fatal("No hay id, crea un nuevo bean");
+                // $GLOBALS['log']->fatal("No hay id, crea un nuevo bean");
                 $beanNV = BeanFactory::newBean('tct3_noviable');
             }
-            $GLOBALS['log']->fatal("Almacena datos");
-            $GLOBALS['log']->fatal($leadNoViale);
+            // $GLOBALS['log']->fatal("Almacena datos");
+            // $GLOBALS['log']->fatal($leadNoViale);
             $beanNV->no_viable_leasing_chk_c = $leadNoViale['campo1chk'];
             $beanNV->no_viable_factoraje_chk_c = $leadNoViale['campo2chk'];
             $beanNV->no_viable_ca_chk_c = $leadNoViale['campo3chk'];
@@ -56,7 +56,7 @@ class LeadNV_hook
             $beanNV->user_id2_c= $leadNoViale['PromotorCreditA'];
             $beanNV->name = $bean->name;
             $beanNV->save();
-            $GLOBALS['log']->fatal("Termina de guardar datos de Lead no Viable");
+            // $GLOBALS['log']->fatal("Termina de guardar datos de Lead no Viable");
             $bean->accounts_tct3_noviable_1->add($beanNV->id);
         }
     }
