@@ -7,10 +7,10 @@
  */
 
 
-$hook_array['after_save'][] = Array(
-    14,
-    'Guarda datos en el modulo tct3_noviable',
-    'custom/modules/Accounts/lh_noviables.php',
-    'LeadNV_hook',
-    'saveleadnv'
-);
+// $hook_array['after_save'][] = Array(
+//     14,
+//     'Guarda datos en el modulo tct3_noviable',
+//     'custom/modules/Accounts/lh_noviables.php',
+//     'LeadNV_hook',
+//     'saveleadnv'
+// );

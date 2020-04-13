@@ -23,4 +23,22 @@ $dependencies['Accounts']['esproveedor_check']= array
         ),
     ),
 );
+
+$dependencies['Accounts']['no_website_c']= array
+(
+    'hooks'=> array("all"),
+    'trigger'=>'true',
+    'triggerFields'=> array('no_website_c'),
+    'onload'=> true,
+    'actions'=> array(
+        array(
+            'name'=>'SetValue',
+            'params'=> array(
+                'target'=>'website',
+                'label'=>'LBL_WEBSITE',
+                'value'=>'ifElse($no_website_c,"",$website)'
+            ),
+        ),
+    ),
+);
 ?>

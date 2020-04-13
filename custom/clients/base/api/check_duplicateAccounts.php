@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: tactos
  * Date: 9/01/20
  * Time: 05:03 PM
  */
-
 class check_duplicateAccounts extends SugarApi
 {
 
@@ -60,8 +60,9 @@ class check_duplicateAccounts extends SugarApi
                 $responsMeeting = $this->getMeetingsUser($bean);
                 $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting, true));
 
+                $requeridos= $this->validaRequeridos($bean);
 
-                if ($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) {
+                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos=="") {
                     /** Creamos la Cuenta */
                     // $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
 
@@ -96,11 +97,21 @@ SITE;
 
 
                 } else {
+
+                    if($requeridos!="")
+                    {
+                        $msj_reunion= "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
+                    }
+
                     //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
                     // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
-                    $msj_reunion = <<<SITE
+                    if($responsMeeting['status'] == "stop")
+                    {
+                        $msj_reunion .= <<<SITE
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
 SITE;
+                    }
+                    
                     $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 
                 }
@@ -270,23 +281,23 @@ SITE;
                         $puesto = $sqlResult[0]['puestousuario_c'];
 
                         // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
-                        if ($productos== '1'  && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['LEASING'] = $meeting->assigned_user_id;
                         }
-                        if ($productos== '3' && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos == '3' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
                         }
-                        if ($productos=='4' && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos == '4' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
                         }
-                        if ($productos== '6' && ($puesto != "27" && $puesto != "31")) {
+                        if ($productos == '6' && ($puesto != "27" && $puesto != "31")) {
 
                             $procede['data']['FLEET'] = $meeting->assigned_user_id;
                         }
-                        if ($productos== '8') {
+                        if ($productos == '8') {
 
                             $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
                         }
@@ -302,6 +313,67 @@ SITE;
         }
 
         return $procede;
+    }
+
+    public function validaRequeridos($beanLEad)
+    {
+        $campos = "";
+        $subTipoLead = $beanLEad->subtipo_registro_c;
+        $tipoPersona = $beanLEad->regimen_fiscal_c;
+        $campos_req = ['origen_c'];
+        $response = false;
+        $errors = [];
+
+        switch ($subTipoLead) {
+            /*******SUB-TIPO SIN CONTACTAR*****/
+            case '1':
+                if ($tipoPersona == 'Persona Moral') {
+                    array_push($campos_req, 'nombre_empresa_c');
+                } else {
+                    array_push($campos_req, 'nombre_c', 'apellido_paterno_c');
+                }
+                break;
+            /********SUB-TIPO CONTACTADO*******/
+            case '2':
+                if ($tipoPersona == 'Persona Moral') {
+                    array_push($campos_req, 'nombre_empresa_c');
+                } else {
+                    array_push($campos_req, 'nombre_c', 'apellido_paterno_c', 'puesto_c');
+                }
+
+                array_push($campos_req, 'macrosector_c', 'ventas_anuales_c', 'zona_geografica_c', 'email');
+
+                break;
+        }
+
+        /** Validamos que el valor no sea vacio, null o undefine */
+        $flag_req = [];
+        foreach ($campos_req as $req) {
+            if (empty($beanLEad->$req) && isset($beanLEad->$req)) {
+                array_push($flag_req, $req);
+            }
+        }
+        $GLOBALS['log']->fatal("Si exist " . print_r($flag_req, true));
+        $label = [];
+        foreach ($flag_req as $key => $valor) {
+
+            $str_label = translate($GLOBALS['dictionary']['Lead']['fields'][$valor]['vname'], "Leads");
+            $str_label = trim($str_label, ":");
+            $campos = $campos . '<b>' . $str_label . '</b><br>';
+
+            array_push($label, $str_label);
+        }
+
+        $GLOBALS['log']->fatal("Si Labels " . print_r($label, true));
+
+        if ($beanLEad->phone_mobile == '' && $beanLEad->phone_home == '' &&
+            $beanLEad->phone_work == '' && $beanLEad->subtipo_registro_c == '2')
+        {
+            $campos = $campos . '<b>' . 'Al menos un Teléfono' . '</b><br>';
+        }
+        $GLOBALS['log']->fatal("Si Labels  en vista " . $campos);
+        return $campos;
+
     }
 
     public function getContactAssoc($beanLead, $bean_account)
@@ -390,8 +462,8 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $meeting) {
                     if ($meeting->status != "Not Held") {
-                        $meeting->parent_type="Accounts";
-                        $meeting->parent_id=$idCuenTa;
+                        $meeting->parent_type = "Accounts";
+                        $meeting->parent_id = $idCuenTa;
                         $meeting->save();
 
                     }

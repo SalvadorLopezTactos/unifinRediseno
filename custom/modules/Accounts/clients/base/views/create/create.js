@@ -134,7 +134,7 @@
         $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
 
        //Oculta campo Lead no viable en la creacion de cuentas
-        $('[data-name="tct_noviable"]').hide();
+        // $('[data-name="tct_noviable"]').hide();
 
         //campo Pais que expide el RFC nace oculto.
         // $('[data-name=tct_pais_expide_rfc_c]').hide();
@@ -2866,6 +2866,6 @@
         }else{
 			this.model.set('deudor_factor_c', false);
 		}
-	},
-	
+    },
+
 })

@@ -112,6 +112,18 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
+			  10 => 
+              array (
+                'type' => 'divider',
+              ),
+              11 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:conversation_modal:click',
+                'name' => 'conversation_modal',
+                'label' => 'LBL_CONVERSATION_BUTTON_LABEL',
+                'acl_action' => 'view',
+              ),
             ),
           ),
           3 => 
@@ -164,19 +176,99 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 'assigned_user_name',
-              1 => 'team_name',
+              0 => 
+              array (
+                'name' => 'accounts_c5515_uni_chattigo_1_name',
+              ),
+              1 => 
+              array (
+              ),
               2 => 
               array (
-                'name' => 'tag',
-                'span' => 6,
+                'name' => 'state_chattigo',
+                'label' => 'LBL_STATE_CHATTIGO',
               ),
               3 => 
               array (
-                'name' => 'accounts_c5515_uni_chattigo_1_name',
-                'span' => 6,
+                'name' => 'id_chattigo',
+                'label' => 'LBL_ID_CHATTIGO',
+              ),
+              4 => 
+              array (
+                'name' => 'inicio_conversacion',
+                'label' => 'LBL_INICIO_CONVERSACION',
+              ),
+              5 => 
+              array (
+                'name' => 'fin_conversacion',
+                'label' => 'LBL_FIN_CONVERSACION',
+              ),
+              6 => 
+              array (
+                'name' => 'tipo_comunicacion',
+                'label' => 'LBL_TIPO_COMUNICACION',
+              ),
+              7 => 
+              array (
+              ),
+              8 => 
+              array (
+                'name' => 'typificaction_description',
+                'label' => 'LBL_TYPIFICACTION_DESCRIPTION',
+              ),
+              9 => 
+              array (
+                'name' => 'via_comunicacion',
+                'label' => 'LBL_VIA_COMUNICACION',
+              ),
+              10 => 
+              array (
+                'name' => 'id_destino',
+                'label' => 'LBL_ID_DESTINO',
+              ),
+              11 => 
+              array (
+                'name' => 'msisdn',
+                'label' => 'LBL_MSISDN',
+              ),
+              12 => 
+              array (
+                'name' => 'id_from',
+                'label' => 'LBL_ID_FROM',
+              ),
+              13 => 
+              array (
+                'name' => 'did',
+                'label' => 'LBL_DID',
+              ),
+              14 => 
+              array (
+                'name' => 'username',
+                'label' => 'LBL_USERNAME',
+              ),
+              15 => 
+              array (
+                'name' => 'agentname',
+                'label' => 'LBL_AGENTNAME',
+              ),
+              16 => 
+              array (
+                'name' => 'campaign_id_chattigo',
+                'label' => 'LBL_CAMPAIGN_ID_CHATTIGO',
+              ),
+              17 => 
+              array (
+                'name' => 'campaign_name_chattigo',
+                'label' => 'LBL_CAMPAIGN_NAME_CHATTIGO',
+              ),
+              18 => 
+              array (
+                'name' => 'description',
+                'span' => 12,
               ),
             ),
           ),
@@ -188,14 +280,18 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
+              0 => 'assigned_user_name',
+              1 => 'team_name',
+              2 => 
               array (
-                'name' => 'description',
+                'name' => 'tag',
                 'span' => 12,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -219,7 +315,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -245,6 +341,10 @@ array (
               ),
             ),
           ),
+        ),
+        'templateMeta' => 
+        array (
+          'useTabs' => false,
         ),
       ),
     ),

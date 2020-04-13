@@ -48,5 +48,54 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'or(and(equal($lead_cancelado_c,"1"),equal($subtipo_registro_c,"3")),equal($subtipo_registro_c,"4"))',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'id_landing_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'lead_source_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'facebook_pixel_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'ga_client_id_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'keyword_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'campana_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'compania_c',
+                'value' => 'true',
+            ),
+        ),
     ),
 );

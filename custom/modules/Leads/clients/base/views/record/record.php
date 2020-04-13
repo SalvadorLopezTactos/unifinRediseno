@@ -331,6 +331,57 @@ array (
               ),
             ),
           ),
+          2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'id_landing_c',
+                'label' => 'LBL_ID_LANDING',
+              ),
+              1 => 
+              array (
+                'name' => 'lead_source_c',
+                'label' => 'LBL_LEAD_SOURCE_C',
+              ),
+              2 => 
+              array (
+                'name' => 'facebook_pixel_c',
+                'label' => 'LBL_FACEBOOK_PIXEL',
+              ),
+              3 => 
+              array (
+                'name' => 'ga_client_id_c',
+                'label' => 'LBL_GA_CLIENT_ID',
+              ),
+              4 => 
+              array (
+                'name' => 'keyword_c',
+                'label' => 'LBL_KEYWORD',
+              ),
+              5 => 
+              array (
+                'name' => 'campana_c',
+                'label' => 'LBL_CAMPANA',
+              ),
+              6 => 
+              array (
+                'name' => 'compania_c',
+                'label' => 'LBL_COMPANIA',
+              ),
+              7 => 
+              array (
+              ),
+            ),
+          ),
         ),
         'templateMeta' => 
         array (
