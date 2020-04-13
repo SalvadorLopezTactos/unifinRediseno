@@ -359,13 +359,13 @@
             errors['phone_work'].required = true;
         }
 
-        if (campos) {
+        /*if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" + campos,
                 autoClose: false
             });
-        }
+        }*/
 
         // console.log("campos requeridos "  +campos);
 
@@ -537,7 +537,7 @@
             "id": this.model.get('id')
         };
         // alert(this.model.get('id'))
-        if (this.valida_requeridos()) {
+        this.valida_requeridos();
 
             app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
 
@@ -594,6 +594,5 @@
                 }, this)
             });
 
-        }
     }
 })

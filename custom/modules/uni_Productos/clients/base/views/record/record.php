@@ -203,6 +203,8 @@ array (
               ),
               7 => 
               array (
+                'name' => 'no_viable_otro_c',
+                'label' => 'LBL_NO_VIABLE_OTRO',
               ),
               8 => 
               array (

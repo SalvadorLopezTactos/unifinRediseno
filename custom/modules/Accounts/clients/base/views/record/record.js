@@ -257,9 +257,9 @@
 
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
-        this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
-        this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
-        this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
+        // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
+        // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
+        // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
@@ -269,6 +269,12 @@
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
 
+        /***************Validacion de Campos No viables en los Productos********************/
+        this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
+        this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
+        this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
+        this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
+        this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));        
     },
 
     /** Asignacion modal */
@@ -277,8 +283,8 @@
         var Boton2 = this.getField("send_accounts_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
-        var puestosBtn2 = [ '3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+        var puestosBtn1 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
+        var puestosBtn2 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
@@ -1063,10 +1069,10 @@
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
         });
-        
-        if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
-          $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
-        }        
+
+        if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
+            $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
+        }
     },
 
     editClicked: function () {
@@ -2136,7 +2142,7 @@
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere',
         });
-        if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked) &&
+        if ((this.model.get('tipo_registro_c') == "Lead" && $('.chk_l_nv')[0].checked && $('.chk_f_nv')[0].checked && $('.chk_ca_nv')[0].checked) &&
             (this.model.get('user_id_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")) {
             app.alert.dismiss('convierteLead_a_Prospecto');
             app.alert.show("Cumple 3 checks", {
@@ -3948,180 +3954,180 @@
         callback(null, fields, errors);
     },
 
-    requeridosleasingnv: function (fields, errors, callback) {
-        var faltantesleasnv = 0;
-        if ($('.campo1chk')[0].checked && ($('.campo4nvl').select2('val') == "" || $('.campo4nvl').select2('val') == "0")) {
-            $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "1" && ($('.campo7nvl').select2('val') == "" || $('.campo7nvl').select2('val') == "0")) {
-            $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "2" && ($('.campo19nvl').select2('val') == "" || $('.campo19nvl').select2('val') == "0")) {
-            $('.campo19nvl').find('.select2-choice').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "7" && ($('.campo25nvl').select2('val') == "" || $('.campo25nvl').select2('val') == "0")) {
-            $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
-            $('.campo10nvl').css('border-color', 'red');
-            $('.campo13nvl').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != "") {
-            $('.campo10nvl').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == "") {
-            $('.campo13nvl').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "4" && ($('.campo16nvl').select2('val') == "" || $('.campo16nvl').select2('val') == "0")) {
-            $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if (($('.campo4nvl').select2('val') == "4" || $('.campo4nvl option:selected').text() == "4" || $('.campo4nvl')[0].innerText.trim() == "4") && ($('.campo16nvl').select2('val') == "4" || $('.campo16nvl option:selected').text() == "4" || $('.campo16nvl')[0].innerText.trim() == "4") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
-            $('.campo22nvl').css('border-color', 'red');
-            faltantesleasnv += 1;
-        }
-        if (faltantesleasnv > 0) {
-            app.alert.show("Faltantes no viable Leasing", {
-                level: "error",
-                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Leasing.',
-                autoClose: false
-            });
-            errors['error_leasing'] = errors['error_leasing'] || {};
-            errors['error_leasing'].required = true;
-        }
-        if (faltantesleasnv == 0 && $('.campo1chk')[0].checked == true && lnv.leadNoViable.PromotorLeasing == "") {
-            this.model.set('promotorleasing_c', '9 - No Viable');
-            this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-            lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
-        }
-        callback(null, fields, errors);
+    /*******************************REQUERIDOS NO VIABLE************************** */
+    // requeridosleasingnv: function (fields, errors, callback) {
+    //     var faltantesleasnv = 0;
+    //     if ($('.campo1chk')[0].checked && ($('.campo4nvl').select2('val') == "" || $('.campo4nvl').select2('val') == "0")) {
+    //         $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "1" && ($('.campo7nvl').select2('val') == "" || $('.campo7nvl').select2('val') == "0")) {
+    //         $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "2" && ($('.campo19nvl').select2('val') == "" || $('.campo19nvl').select2('val') == "0")) {
+    //         $('.campo19nvl').find('.select2-choice').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "7" && ($('.campo25nvl').select2('val') == "" || $('.campo25nvl').select2('val') == "0")) {
+    //         $('.campo25nvl').find('.select2-choice').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == "") {
+    //         $('.campo10nvl').css('border-color', 'red');
+    //         $('.campo13nvl').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != "") {
+    //         $('.campo10nvl').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "3" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == "") {
+    //         $('.campo13nvl').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if ($('.campo1chk')[0].checked == true && $('.campo4nvl').select2('val') == "4" && ($('.campo16nvl').select2('val') == "" || $('.campo16nvl').select2('val') == "0")) {
+    //         $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if (($('.campo4nvl').select2('val') == "4" || $('.campo4nvl option:selected').text() == "4" || $('.campo4nvl')[0].innerText.trim() == "4") && ($('.campo16nvl').select2('val') == "4" || $('.campo16nvl option:selected').text() == "4" || $('.campo16nvl')[0].innerText.trim() == "4") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
+    //         $('.campo22nvl').css('border-color', 'red');
+    //         faltantesleasnv += 1;
+    //     }
+    //     if (faltantesleasnv > 0) {
+    //         app.alert.show("Faltantes no viable Leasing", {
+    //             level: "error",
+    //             title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Leasing.',
+    //             autoClose: false
+    //         });
+    //         errors['error_leasing'] = errors['error_leasing'] || {};
+    //         errors['error_leasing'].required = true;
+    //     }
+    //     if (faltantesleasnv == 0 && $('.campo1chk')[0].checked == true && lnv.leadNoViable.PromotorLeasing == "") {
+    //         this.model.set('promotorleasing_c', '9 - No Viable');
+    //         this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+    //         lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
+    //     }
+    //     callback(null, fields, errors);
 
-    },
-    requeridosfacnv: function (fields, errors, callback) {
-        var faltantesfactnv = 0;
-        if ($('.campo2chk')[0].checked == true && ($('.campo5nvf').select2('val') == "" || $('.campo5nvf').select2('val') == "0")) {
-            $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "1" && ($('.campo8nvf').select2('val') == "" || $('.campo8nvf').select2('val') == "0")) {
-            $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "2" && ($('.campo20nvf').select2('val') == "" || $('.campo20nvf').select2('val') == "0")) {
-            $('.campo20nvf').find('.select2-choice').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "7" && ($('.campo26nvf').select2('val') == "" || $('.campo26nvf').select2('val') == "0")) {
-            $('.campo26nvf').find('.select2-choice').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == "") {
-            $('.campo11nvf').css('border-color', 'red');
-            $('.campo14nvf').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != "") {
-            $('.campo11nvf').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == "") {
-            $('.campo14nvf').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "4" && ($('.campo17nvf').select2('val') == "" || $('.campo17nvf').select2('val') == "0")) {
-            $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if (($('.campo5nvf').select2('val') == "4" || $('.campo5nvf option:selected').text() == "4" || $('.campo5nvf')[0].innerText.trim() == "4") && ($('.campo17nvf').select2('val') == "4" || $('.campo17nvf option:selected').text() == "4" || $('.campo17nvf')[0].innerText.trim() == "4") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
-            $('.campo23nvf').css('border-color', 'red');
-            faltantesfactnv += 1;
-        }
-        if (faltantesfactnv > 0) {
-            app.alert.show("Faltantes no viable Factoraje", {
-                level: "error",
-                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Factoraje.',
-                autoClose: false
-            });
-            errors['error_factoraje'] = errors['error_factoraje'] || {};
-            errors['error_factoraje'].required = true;
-        } else if (faltantesfactnv == 0 && $('.campo2chk')[0].checked == true && lnv.leadNoViable.PromotorFactoraje == "") {
-            this.model.set('promotorfactoraje_c', '9 - No Viable');
-            this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-            lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
-        }
-        callback(null, fields, errors);
-    },
+    // },
+    // requeridosfacnv: function (fields, errors, callback) {
+    //     var faltantesfactnv = 0;
+    //     if ($('.campo2chk')[0].checked == true && ($('.campo5nvf').select2('val') == "" || $('.campo5nvf').select2('val') == "0")) {
+    //         $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "1" && ($('.campo8nvf').select2('val') == "" || $('.campo8nvf').select2('val') == "0")) {
+    //         $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "2" && ($('.campo20nvf').select2('val') == "" || $('.campo20nvf').select2('val') == "0")) {
+    //         $('.campo20nvf').find('.select2-choice').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "7" && ($('.campo26nvf').select2('val') == "" || $('.campo26nvf').select2('val') == "0")) {
+    //         $('.campo26nvf').find('.select2-choice').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == "") {
+    //         $('.campo11nvf').css('border-color', 'red');
+    //         $('.campo14nvf').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != "") {
+    //         $('.campo11nvf').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "3" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == "") {
+    //         $('.campo14nvf').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if ($('.campo2chk')[0].checked == true && $('.campo5nvf').select2('val') == "4" && ($('.campo17nvf').select2('val') == "" || $('.campo17nvf').select2('val') == "0")) {
+    //         $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if (($('.campo5nvf').select2('val') == "4" || $('.campo5nvf option:selected').text() == "4" || $('.campo5nvf')[0].innerText.trim() == "4") && ($('.campo17nvf').select2('val') == "4" || $('.campo17nvf option:selected').text() == "4" || $('.campo17nvf')[0].innerText.trim() == "4") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
+    //         $('.campo23nvf').css('border-color', 'red');
+    //         faltantesfactnv += 1;
+    //     }
+    //     if (faltantesfactnv > 0) {
+    //         app.alert.show("Faltantes no viable Factoraje", {
+    //             level: "error",
+    //             title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Factoraje.',
+    //             autoClose: false
+    //         });
+    //         errors['error_factoraje'] = errors['error_factoraje'] || {};
+    //         errors['error_factoraje'].required = true;
+    //     } else if (faltantesfactnv == 0 && $('.campo2chk')[0].checked == true && lnv.leadNoViable.PromotorFactoraje == "") {
+    //         this.model.set('promotorfactoraje_c', '9 - No Viable');
+    //         this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+    //         lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
+    //     }
+    //     callback(null, fields, errors);
+    // },
+    // requeridoscanv: function (fields, errors, callback) {
+    //     var faltantescanv = 0;
+    //     if ($('.campo3chk')[0].checked == true && ($('.campo6nvca').select2('val') == "" || $('.campo6nvca').select2('val') == "0")) {
+    //         $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "1" && ($('.campo9nvca').select2('val') == "" || $('.campo9nvca').select2('val') == "0")) {
+    //         $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "2" && ($('.campo21nvca').select2('val') == "" || $('.campo21nvca').select2('val') == "0")) {
+    //         $('.campo21nvca').find('.select2-choice').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "7" && ($('.campo27nvca').select2('val') == "" || $('.campo27nvca').select2('val') == "0")) {
+    //         $('.campo27nvca').find('.select2-choice').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == "") {
+    //         $('.campo12nvca').css('border-color', 'red');
+    //         $('.campo15nvca').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != "") {
+    //         $('.campo12nvca').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == "") {
+    //         $('.campo15nvca').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "4" && ($('.campo18nvca').select2('val') == "" || $('.campo18nvca').select2('val') == "0")) {
+    //         $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if (($('.campo6nvca').select2('val') == "4" || $('.campo6nvca option:selected').text() == "4" || $('.campo6nvca')[0].innerText.trim() == "4") && ($('.campo18nvca').select2('val') == "4" || $('.campo18nvca option:selected').text() == "4" || $('.campo18nvca')[0].innerText.trim() == "4") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
+    //         $('.campo24nvca').css('border-color', 'red');
+    //         faltantescanv += 1;
+    //     }
+    //     if (faltantescanv > 0) {
+    //         app.alert.show("Faltantes no viable Crédito Automotriz", {
+    //             level: "error",
+    //             title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Credito Automotriz.',
+    //             autoClose: false
+    //         });
+    //         errors['error_ca'] = errors['error_ca'] || {};
+    //         errors['error_ca'].required = true;
+    //     } else if (faltantescanv == 0 && $('.campo3chk')[0].checked == true && lnv.leadNoViable.PromotorCreditA == "") {
+    //         this.model.set('promotorcredit_c', '9 - No Viable');
+    //         this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+    //         lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
+    //     }
+    //     callback(null, fields, errors);
 
-    requeridoscanv: function (fields, errors, callback) {
-        var faltantescanv = 0;
-        if ($('.campo3chk')[0].checked == true && ($('.campo6nvca').select2('val') == "" || $('.campo6nvca').select2('val') == "0")) {
-            $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "1" && ($('.campo9nvca').select2('val') == "" || $('.campo9nvca').select2('val') == "0")) {
-            $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "2" && ($('.campo21nvca').select2('val') == "" || $('.campo21nvca').select2('val') == "0")) {
-            $('.campo21nvca').find('.select2-choice').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "7" && ($('.campo27nvca').select2('val') == "" || $('.campo27nvca').select2('val') == "0")) {
-            $('.campo27nvca').find('.select2-choice').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == "") {
-            $('.campo12nvca').css('border-color', 'red');
-            $('.campo15nvca').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != "") {
-            $('.campo12nvca').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "3" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == "") {
-            $('.campo15nvca').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if ($('.campo3chk')[0].checked == true && $('.campo6nvca').select2('val') == "4" && ($('.campo18nvca').select2('val') == "" || $('.campo18nvca').select2('val') == "0")) {
-            $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if (($('.campo6nvca').select2('val') == "4" || $('.campo6nvca option:selected').text() == "4" || $('.campo6nvca')[0].innerText.trim() == "4") && ($('.campo18nvca').select2('val') == "4" || $('.campo18nvca option:selected').text() == "4" || $('.campo18nvca')[0].innerText.trim() == "4") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
-            $('.campo24nvca').css('border-color', 'red');
-            faltantescanv += 1;
-        }
-        if (faltantescanv > 0) {
-            app.alert.show("Faltantes no viable Crédito Automotriz", {
-                level: "error",
-                title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Credito Automotriz.',
-                autoClose: false
-            });
-            errors['error_ca'] = errors['error_ca'] || {};
-            errors['error_ca'].required = true;
-        } else if (faltantescanv == 0 && $('.campo3chk')[0].checked == true && lnv.leadNoViable.PromotorCreditA == "") {
-            this.model.set('promotorcredit_c', '9 - No Viable');
-            this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
-            lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
-        }
-        callback(null, fields, errors);
-
-    },
+    // },
     //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
-    muestracheks: function () {
-        if (Oproductos.productos != undefined) {
-            if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead' && Oproductos.productos.tct_tipo_f_txf_c != 'Lead' && Oproductos.productos.tct_tipo_l_txf_c != 'Lead') {
-                $('[data-name=tct_noviable]').hide();
-            }
-        }
-    },
+    // muestracheks: function () {
+    //     if (Oproductos.productos != undefined) {
+    //         if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead' && Oproductos.productos.tct_tipo_f_txf_c != 'Lead' && Oproductos.productos.tct_tipo_l_txf_c != 'Lead') {
+    //             $('[data-name=tct_noviable]').hide();
+    //         }
+    //     }
+    // },
 
     ocultaRFC: function () {
         // if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos')) {
@@ -5077,13 +5083,15 @@
             success: function (data) {
 
                 Productos = data;
-                ResumenProductos=[];
+                ResumenProductos = [];
                 _.each(Productos, function (value, key) {
 
                     var tipoProducto = Productos[key].tipo_producto;
                     var fechaAsignacion = Productos[key].fecha_asignacion_c;
                     var fecha1 = moment(today);
                     var fecha2 = moment(fechaAsignacion);
+                    Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
+                    Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
 
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5116,13 +5124,306 @@
                     }
                 });
 
-                cont_uni_p['ResumenProductos']=ResumenProductos;
+                cont_uni_p['ResumenProductos'] = ResumenProductos;
                 cont_uni_p.render();
             },
             error: function (e) {
                 throw e;
             }
         });
+    },
+
+    /*************************************************REQUERIDOS NO VIABLE POR UNI PRODUCTOS******************************************/
+
+    /***********************************VALIDACION NO VIABLE PRODUCTO LEASING*********************************/
+    requeridosLeasingUP: function (fields, errors, callback) {
+        var faltantesleasup = 0;
+        if ($('.chk_l_nv')[0] != undefined) {
+            if ($('.chk_l_nv')[0].checked && ($('.list_l_nv_razon').select2('val') == "" || $('.list_l_nv_razon').select2('val') == "0")) {
+                $('.list_l_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "1" && ($('.list_l_nv_razon_fp').select2('val') == "" || $('.list_l_nv_razon_fp').select2('val') == "0")) {
+                $('.list_l_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "2" && ($('.list_l_nv_razon_cf').select2('val') == "" || $('.list_l_nv_razon_cf').select2('val') == "0")) {
+                $('.list_l_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "7" && ($('.list_l_nv_razon_ni').select2('val') == "" || $('.list_l_nv_razon_ni').select2('val') == "0")) {
+                $('.list_l_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "3" && $('.txt_l_nv_quien').val().trim() == "" && $('.txt_l_nv_porque').val().trim() == "") {
+                $('.txt_l_nv_quien').css('border-color', 'red');  //TXT ¿Quién?
+                $('.txt_l_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "3" && $('.txt_l_nv_quien').val().trim() == "" && $('.txt_l_nv_porque').val().trim() != "") {
+                $('.txt_l_nv_quien').css('border-color', 'red'); //TXT ¿Quién?
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "3" && $('.txt_l_nv_quien').val().trim() != "" && $('.txt_l_nv_porque').val().trim() == "") {
+                $('.txt_l_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesleasup += 1;
+            }
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "4" && ($('.list_l_nv_producto').select2('val') == "" || $('.list_l_nv_producto').select2('val') == "0")) {
+                $('.list_l_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
+                faltantesleasup += 1;
+            }
+            if (($('.list_l_nv_razon').select2('val') == "4" || $('.list_l_nv_razon option:selected').text() == "4" || $('.list_l_nv_razon')[0].innerText.trim() == "4") && ($('.list_l_nv_producto').select2('val') == "4" || $('.list_l_nv_producto option:selected').text() == "4" || $('.list_l_nv_producto')[0].innerText.trim() == "4") && $('.chk_l_nv')[0].checked && $('.txt_l_nv_otro').val().trim() == "") {
+                $('.txt_l_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
+                faltantesleasup += 1;
+            }
+            if (faltantesleasup > 0) {
+                app.alert.show("Faltantes no viable Leasing", {
+                    level: "error",
+                    title: 'Hace falta seleccionar alguna de las razones del catálogo <b>No Viable Leasing.',
+                    autoClose: false
+                });
+                errors['error_leasingUP'] = errors['error_leasingUP'] || {};
+                errors['error_leasingUP'].required = true;
+            }
+            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true) {
+                this.model.set('promotorleasing_c', '9 - No Viable');
+                this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                cont_uni_p.ResumenProductos.leasing.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
+    },
+    /***********************************VALIDACION NO VIABLE PRODUCTO FACTORAJE*******************************/
+    requeridosFactorajeUP: function (fields, errors, callback) {
+        var faltantesFactorajeUP = 0;
+        if ($('.chk_f_nv')[0] != undefined) {
+            if ($('.chk_f_nv')[0].checked && ($('.list_f_nv_razon').select2('val') == "" || $('.list_f_nv_razon').select2('val') == "0")) {
+                $('.list_f_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "1" && ($('.list_f_nv_razon_fp').select2('val') == "" || $('.list_f_nv_razon_fp').select2('val') == "0")) {
+                $('.list_f_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "2" && ($('.list_f_nv_razon_cf').select2('val') == "" || $('.list_f_nv_razon_cf').select2('val') == "0")) {
+                $('.list_f_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "7" && ($('.list_f_nv_razon_ni').select2('val') == "" || $('.list_f_nv_razon_ni').select2('val') == "0")) {
+                $('.list_f_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "3" && $('.txt_f_nv_quien').val().trim() == "" && $('.txt_f_nv_porque').val().trim() == "") {
+                $('.txt_f_nv_quien').css('border-color', 'red');  //TXT ¿Quién?
+                $('.txt_f_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "3" && $('.txt_f_nv_quien').val().trim() == "" && $('.txt_f_nv_porque').val().trim() != "") {
+                $('.txt_f_nv_quien').css('border-color', 'red'); //TXT ¿Quién?
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "3" && $('.txt_f_nv_quien').val().trim() != "" && $('.txt_f_nv_porque').val().trim() == "") {
+                $('.txt_f_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesFactorajeUP += 1;
+            }
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "4" && ($('.list_f_nv_producto').select2('val') == "" || $('.list_f_nv_producto').select2('val') == "0")) {
+                $('.list_f_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
+                faltantesFactorajeUP += 1;
+            }
+            if (($('.list_f_nv_razon').select2('val') == "4" || $('.list_f_nv_razon option:selected').text() == "4" || $('.list_f_nv_razon')[0].innerText.trim() == "4") && ($('.list_f_nv_producto').select2('val') == "4" || $('.list_f_nv_producto option:selected').text() == "4" || $('.list_f_nv_producto')[0].innerText.trim() == "4") && $('.chk_f_nv')[0].checked && $('.txt_f_nv_otro').val().trim() == "") {
+                $('.txt_f_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
+                faltantesFactorajeUP += 1;
+            }
+            if (faltantesFactorajeUP > 0) {
+                app.alert.show("Faltantes no viable Factoraje", {
+                    level: "error",
+                    title: 'Hace falta seleccionar alguna de las razones del catálogo <b>No Viable Factoraje.',
+                    autoClose: false
+                });
+                errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
+                errors['error_FactorajeUP'].required = true;
+            }
+            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true) {
+                this.model.set('promotorfactoraje_c', '9 - No Viable');
+                this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                cont_uni_p.ResumenProductos.factoring.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
+    },
+    /***********************************VALIDACION NO VIABLE PRODUCTO CREDITO - AUTOMOTRIZ********************/
+    requeridosCAUP: function (fields, errors, callback) {
+        var faltantesCAUP = 0;
+        if ($('.chk_ca_nv')[0] != undefined) {
+            if ($('.chk_ca_nv')[0].checked && ($('.list_ca_nv_razon').select2('val') == "" || $('.list_ca_nv_razon').select2('val') == "0")) {
+                $('.list_ca_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "1" && ($('.list_ca_nv_razon_fp').select2('val') == "" || $('.list_ca_nv_razon_fp').select2('val') == "0")) {
+                $('.list_ca_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "2" && ($('.list_ca_nv_razon_cf').select2('val') == "" || $('.list_ca_nv_razon_cf').select2('val') == "0")) {
+                $('.list_ca_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "7" && ($('.list_ca_nv_razon_ni').select2('val') == "" || $('.list_ca_nv_razon_ni').select2('val') == "0")) {
+                $('.list_ca_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "3" && $('.txt_ca_nv_quien').val().trim() == "" && $('.txt_ca_nv_porque').val().trim() == "") {
+                $('.txt_ca_nv_quien').css('border-color', 'red');  //TXT ¿Quién?
+                $('.txt_ca_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "3" && $('.txt_ca_nv_quien').val().trim() == "" && $('.txt_ca_nv_porque').val().trim() != "") {
+                $('.txt_ca_nv_quien').css('border-color', 'red'); //TXT ¿Quién?
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "3" && $('.txt_ca_nv_quien').val().trim() != "" && $('.txt_ca_nv_porque').val().trim() == "") {
+                $('.txt_ca_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesCAUP += 1;
+            }
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "4" && ($('.list_ca_nv_producto').select2('val') == "" || $('.list_ca_nv_producto').select2('val') == "0")) {
+                $('.list_ca_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
+                faltantesCAUP += 1;
+            }
+            if (($('.list_ca_nv_razon').select2('val') == "4" || $('.list_ca_nv_razon option:selected').text() == "4" || $('.list_ca_nv_razon')[0].innerText.trim() == "4") && ($('.list_ca_nv_producto').select2('val') == "4" || $('.list_ca_nv_producto option:selected').text() == "4" || $('.list_ca_nv_producto')[0].innerText.trim() == "4") && $('.chk_ca_nv')[0].checked && $('.txt_ca_nv_otro').val().trim() == "") {
+                $('.txt_ca_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
+                faltantesCAUP += 1;
+            }
+            if (faltantesCAUP > 0) {
+                app.alert.show("Faltantes no viable Credito Auto", {
+                    level: "error",
+                    title: 'Hace falta seleccionar alguna de las razones del catálogo <b>No Viable Crédito Automotriz.',
+                    autoClose: false
+                });
+                errors['error_CAUP'] = errors['error_CAUP'] || {};
+                errors['error_CAUP'].required = true;
+            }
+            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true) {
+                this.model.set('promotorcredit_c', '9 - No Viable');
+                this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
+    },
+    /***********************************VALIDACION NO VIABLE PRODUCTO FLEET***********************************/
+    requeridosFleetUP: function (fields, errors, callback) {
+        var faltantesFleetUP = 0;
+        if ($('.chk_fl_nv')[0] != undefined) {
+            if ($('.chk_fl_nv')[0].checked && ($('.list_fl_nv_razon').select2('val') == "" || $('.list_fl_nv_razon').select2('val') == "0")) {
+                $('.list_fl_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "1" && ($('.list_fl_nv_razon_fp').select2('val') == "" || $('.list_fl_nv_razon_fp').select2('val') == "0")) {
+                $('.list_fl_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "2" && ($('.list_fl_nv_razon_cf').select2('val') == "" || $('.list_fl_nv_razon_cf').select2('val') == "0")) {
+                $('.list_fl_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "7" && ($('.list_fl_nv_razon_ni').select2('val') == "" || $('.list_fl_nv_razon_ni').select2('val') == "0")) {
+                $('.list_fl_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "3" && $('.txt_fl_nv_quien').val().trim() == "" && $('.txt_fl_nv_porque').val().trim() == "") {
+                $('.txt_fl_nv_quien').css('border-color', 'red');  //TXT ¿Quién?
+                $('.txt_fl_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "3" && $('.txt_fl_nv_quien').val().trim() == "" && $('.txt_fl_nv_porque').val().trim() != "") {
+                $('.txt_fl_nv_quien').css('border-color', 'red'); //TXT ¿Quién?
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "3" && $('.txt_fl_nv_quien').val().trim() != "" && $('.txt_fl_nv_porque').val().trim() == "") {
+                $('.txt_fl_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesFleetUP += 1;
+            }
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "4" && ($('.list_fl_nv_producto').select2('val') == "" || $('.list_fl_nv_producto').select2('val') == "0")) {
+                $('.list_fl_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
+                faltantesFleetUP += 1;
+            }
+            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") && ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") && $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
+                $('.txt_fl_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
+                faltantesFleetUP += 1;
+            }
+            if (faltantesFleetUP > 0) {
+                app.alert.show("Faltantes no viable Fleet", {
+                    level: "error",
+                    title: 'Hace falta seleccionar alguna de las razones del catálogo <b>No Viable Fleet.',
+                    autoClose: false
+                });
+                errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
+                errors['error_FLeetUP'].required = true;
+            }
+            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true) {
+                this.model.set('promotorfleet_c', '9 - No Viable');
+                this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
+    },
+    /***********************************VALIDACION NO VIABLE PRODUCTO UNICLICK********************************/
+    requeridosUniclickUP: function (fields, errors, callback) {
+        var faltantesUniclickUP = 0;
+        if ($('.chk_u_nv')[0] != undefined) {
+            if ($('.chk_u_nv')[0].checked && ($('.list_u_nv_razon').select2('val') == "" || $('.list_u_nv_razon').select2('val') == "0")) {
+                $('.list_u_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "1" && ($('.list_u_nv_razon_fp').select2('val') == "" || $('.list_u_nv_razon_fp').select2('val') == "0")) {
+                $('.list_u_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "2" && ($('.list_u_nv_razon_cf').select2('val') == "" || $('.list_u_nv_razon_cf').select2('val') == "0")) {
+                $('.list_u_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "7" && ($('.list_u_nv_razon_ni').select2('val') == "" || $('.list_u_nv_razon_ni').select2('val') == "0")) {
+                $('.list_u_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "3" && $('.txt_u_nv_quien').val().trim() == "" && $('.txt_u_nv_porque').val().trim() == "") {
+                $('.txt_u_nv_quien').css('border-color', 'red');  //TXT ¿Quién?
+                $('.txt_u_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "3" && $('.txt_u_nv_quien').val().trim() == "" && $('.txt_u_nv_porque').val().trim() != "") {
+                $('.txt_u_nv_quien').css('border-color', 'red'); //TXT ¿Quién?
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "3" && $('.txt_u_nv_quien').val().trim() != "" && $('.txt_u_nv_porque').val().trim() == "") {
+                $('.txt_u_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
+                faltantesUniclickUP += 1;
+            }
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "4" && ($('.list_u_nv_producto').select2('val') == "" || $('.list_u_nv_producto').select2('val') == "0")) {
+                $('.list_u_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
+                faltantesUniclickUP += 1;
+            }
+            if (($('.list_u_nv_razon').select2('val') == "4" || $('.list_u_nv_razon option:selected').text() == "4" || $('.list_u_nv_razon')[0].innerText.trim() == "4") && ($('.list_u_nv_producto').select2('val') == "4" || $('.list_u_nv_producto option:selected').text() == "4" || $('.list_u_nv_producto')[0].innerText.trim() == "4") && $('.chk_u_nv')[0].checked && $('.txt_u_nv_otro').val().trim() == "") {
+                $('.txt_u_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
+                faltantesUniclickUP += 1;
+            }
+            if (faltantesUniclickUP > 0) {
+                app.alert.show("Faltantes no viable Uniclick", {
+                    level: "error",
+                    title: 'Hace falta seleccionar alguna de las razones del catálogo <b>No Viable Uniclick.',
+                    autoClose: false
+                });
+                errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+                errors['error_UniclickUP'].required = true;
+            }
+            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true) {
+                this.model.set('promotoruniclick_c', '9 - Sin Gestor');
+                this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
     },
 })
 
