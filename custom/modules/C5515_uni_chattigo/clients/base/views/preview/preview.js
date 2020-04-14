@@ -12,14 +12,16 @@
               var chat = JSON.parse(entry.attributes.description);
             }
             catch(err) {
-              var chat = [];
+              var chat = '';
             }
-            for(var i = chat.length-1; i--;){
-            	 if (chat[i].type !== "OUTBOUND" && chat[i].type !== "INBOUND") chat.splice(i, 1);
-               chat[i].type = (chat[i].type === "OUTBOUND") ? 1: 0;
-               chat[i].url = (chat[i].type === "OUTBOUND") ? 'styleguide/assets/img/logo.svg': 'styleguide/assets/img/logo.svg';
+            if (chat!='') {
+              for(var i = chat.length-1; i--;){
+                 if (chat[i].type !== "OUTBOUND" && chat[i].type !== "INBOUND") chat.splice(i, 1);
+                 chat[i].type = (chat[i].type === "OUTBOUND") ? 1: 0;
+                 chat[i].url = (chat[i].type === "OUTBOUND") ? 'styleguide/assets/img/logo.svg': 'styleguide/assets/img/logo.svg';
+              }
+              entry.attributes.chat = chat;
             }
-            entry.attributes.chat = chat;
         });
         pre.render();
     },
