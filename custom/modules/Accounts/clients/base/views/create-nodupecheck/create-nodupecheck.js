@@ -1879,7 +1879,7 @@
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-
+				callback(null, fields, errors);
             }else{
 				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
 					success: _.bind(function (data) {
@@ -1888,7 +1888,7 @@
 							app.alert.show("error-website", {
 								level: "error",
 								autoClose: false,
-								messages: "La <b>Página Web</b> no existe."
+								messages: "El dominio ingresado en <b>Página Web</b> no existe."
 							});
 							errors['website'] = errors['website'] || {};
 							errors['website'].required = true;
@@ -1898,7 +1898,7 @@
 							app.alert.show("error-website", {
 								level: "error",
 								autoClose: false,
-								messages: "La <b>Página Web</b> no existe o no esta activa."
+								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
 							});
 							errors['website'] = errors['website'] || {};
 							errors['website'].required = true;
@@ -1908,7 +1908,8 @@
 					}, this),
 				});
 			}
-        }
-        callback(null, fields, errors);
+        }else{
+			callback(null, fields, errors);
+		}
     },
 })
