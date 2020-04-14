@@ -391,10 +391,42 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORCREDIT',
               ),
-              67 => 'phone_office',
+              67 => 
+              array (
+                'name' => 'promotorfleet_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORFLEET',
+              ),
               68 => 
               array (
-                'span' => 12,
+                'name' => 'promotoruniclick_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORUNICLICK_C',
+              ),
+              69 => 
+              array (
+                'name' => 'no_viable',
+                'type' => 'no_viable',
+                'studio' => 'visible',
+                'label' => 'Lead No viable',
+              ),
+              70 => 'phone_office',
+              71 => 
+              array (
+                'name' => 'clean_name',
+                'studio' => 'visible',
+                'label' => 'LBL_CLEAN_NAME',
+                'css_class' => 'hide',
+              ),
+              72 => 
+              array (
+                'name' => 'account_uni_productos',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
+                'css_class' => 'hide',
+              ),
+              73 => 
+              array (
               ),
             ),
           ),

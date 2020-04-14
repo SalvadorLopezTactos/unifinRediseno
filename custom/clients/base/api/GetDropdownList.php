@@ -55,14 +55,36 @@ class GetDropdownList extends SugarApi
         global $app_list_strings;
         $list_name=$args['list_name'];
 
+        $findme   = ',';
+        $pos = strpos($list_name, $findme);
+        /*
+         * Se agrega esta sección para obtener múltiples valores de listas en una sola petición
+         * y de esta manera evitar hacer un llamado por cada nombre de lista disponible en SugarCRM
+         * (Se aplica ya que desde la aplicación móvil no se están obteniendo los valores desde JS con la sentencia app.lang.getAppListStrings('nombre_lista'))
+         * */
+        if($pos!=false){
 
-        if (isset($app_list_strings[$list_name]))
-        {
-            $list_values = $app_list_strings[$list_name];
+            $listas=explode(",", $list_name);
+            foreach ($listas as $lalista){
+                if (isset($app_list_strings[$lalista]))
+                {
+                    $list_values[''.$lalista.'']= $app_list_strings[$lalista];
+                }else{
+                    $list_values[''.$lalista.'']="La lista {$lalista} no existe";
+                }
+
+            }
+
         }else{
-            $list_values[]="La lista {$list_name} no existe";
-        }
 
+            if (isset($app_list_strings[$list_name]))
+            {
+                $list_values = $app_list_strings[$list_name];
+            }else{
+                $list_values[]="La lista {$list_name} no existe";
+            }
+
+        }
         return $list_values;
 
     }
