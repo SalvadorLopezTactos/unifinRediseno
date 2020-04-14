@@ -134,7 +134,7 @@
         $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
 
        //Oculta campo Lead no viable en la creacion de cuentas
-        $('[data-name="tct_noviable"]').hide();
+        // $('[data-name="tct_noviable"]').hide();
 
         //campo Pais que expide el RFC nace oculto.
         // $('[data-name=tct_pais_expide_rfc_c]').hide();
@@ -581,6 +581,9 @@
 		this.model.on('change:tipo_registro_c',this.check_factoraje, this);
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -2866,6 +2869,28 @@
         }else{
 			this.model.set('deudor_factor_c', false);
 		}
-	},
-	
+    },
+
+    /*************Valida campo de Página Web*****************/
+    validaPagWeb: function (fields, errors, callback) {
+
+        var webSite = this.model.get('website');
+
+        if (webSite != "" && webSite != undefined) {
+            var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
+
+            if (!expreg.test(webSite)) {
+
+                app.alert.show('error-web-site', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: "El formato de <b>Página Web</b> no es valido."
+                });
+                errors['website'] = errors['website'] || {};
+                errors['website'].required = true;
+            }
+        }
+        callback(null, fields, errors);
+    },
+
 })
