@@ -16,7 +16,7 @@ class mambuAccounts extends SugarApi
             'retrieve' => array(
                 //request type
                 'reqType' => 'GET',
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 //endpoint path
                 'path' => array('deltaAccounts'),
                 //endpoint variables
