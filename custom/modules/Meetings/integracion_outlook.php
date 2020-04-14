@@ -292,7 +292,7 @@ class Integration_Mobile
                 $GLOBALS['log']->fatal('Ejecuta patch en evento Outlook');
                 //Cierra curl y regresa resultado
                 curl_close($ch);
-                $GLOBALS['log']->fatal($update_event_ok);
+                //$GLOBALS['log']->fatal($update_event_ok);
                 return json_decode($update_event_ok, true);
     }
 
