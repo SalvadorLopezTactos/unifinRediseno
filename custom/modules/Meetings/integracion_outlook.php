@@ -41,15 +41,12 @@ class Integration_Mobile
                     $one_drive_settings = Integration_Mobile::get_token($one_drive_settings);
                 }
             }
-            $GLOBALS['log']->fatal('1.-Generó nuevo token: '.$one_drive_settings['token']);
             //Petición para obtener el id del usuario
             if (!empty($one_drive_settings['token'])) {
-                $GLOBALS['log']->fatal('1.-Entra a peticion para primer api graph (tiene token)');
-                //Genera petición
+                 //Genera petición para obtener el id del usuario en outlook
                 $id_user_graph = Integration_Mobile::user_graph($one_drive_settings,$bean);
-
-                $GLOBALS['log']->fatal('1.-Respuesta api obtener id usuario, el id Outlook usuario es : '.$id_user_graph['id']);
                 $id_outlook=$id_user_graph['id'];
+                $GLOBALS['log']->fatal('El id Outlook del usuario es: '.$id_outlook);
             }
             if (!empty($id_outlook)){
                 if ($bean->outlook_id=="") {
@@ -57,7 +54,6 @@ class Integration_Mobile
                     $create_event_graph = Integration_Mobile::create_event($one_drive_settings, $id_outlook, $bean);
                     if (!empty($create_event_graph['id'])){
                         //Guarda el id de la reunion en el campo outlook_id de meetings
-                        $GLOBALS['log']->fatal('Imprime el id de la reunion en outlook: ' . $create_event_graph['id']);
                         $GLOBALS['log']->fatal('Realiza update para guardar id de outlook en meetings');
                         $Update = "update meetings set outlook_id = '{$create_event_graph['id']}' where id = '{$bean->id}'";
                         $Result = $db->query($Update);
@@ -109,13 +105,11 @@ class Integration_Mobile
         }
         //Regresa configuración
         return $one_drive_settings;
-        $GLOBALS['log']->fatal('Regresa config onedrive_settings'.$one_drive_settings);
     }
 
     function get_token($one_drive_settings)
     {
         //Arma petición para token
-        $GLOBALS['log']->fatal('1-1.Peticion para generar Token');
         global $db,$current_user;
         $uri = 'https://login.microsoftonline.com/'.$one_drive_settings['tenant_id'].'/oauth2/v2.0/token';
         $data = 'grant_type=client_credentials&client_id='.$one_drive_settings['client_id'].'&client_secret='.$one_drive_settings['client_secret'].'&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default';
@@ -156,22 +150,19 @@ class Integration_Mobile
         }
         //Regresa token
         return $one_drive_settings;
-        $GLOBALS['log']->fatal('1-1.Sale peticion para generar Token'.$one_drive_settings['token']);
-
     }
 
     function user_graph($one_drive_settings, $beanReunion)
     {
         //Arma petición para obtener el ID del usuario que está creando la reunión
-        $GLOBALS['log']->fatal('1-2.Entra funcion user_graph');
         //Variable para obtener el correo del usuario
         $beanUser = BeanFactory::getBean('Users', $beanReunion->assigned_user_id);
         $id_user= $beanUser->email1;
         //Variable para guardar el token
         $usr_token= $one_drive_settings['token'];
         $uri = 'https://graph.microsoft.com/v1.0/users/'.$id_user;
-        $GLOBALS['log']->fatal($uri);
-        $GLOBALS['log']->fatal('Integracion CRM-Outlook: Peticion para id user');
+        //$GLOBALS['log']->fatal($uri);
+        //$GLOBALS['log']->fatal('Integracion CRM-Outlook: Peticion para id user');
         //Inicializa curl
         $ch = curl_init();
         //Set variables
@@ -183,22 +174,21 @@ class Integration_Mobile
         $result = curl_exec ($ch);
         //Cierra curl y regresa resultado
         curl_close ($ch);
-        $GLOBALS['log']->fatal($result);
-        $GLOBALS['log']->fatal('1-2.Sale funcion user_graph');
+        //$GLOBALS['log']->fatal($result);
+        //$GLOBALS['log']->fatal('1-2.Sale funcion user_graph');
         return json_decode($result, true);
 
     }
 
     function create_event($one_drive_settings, $id_outlook,$beanReunion)
     {
-        $GLOBALS['log']->fatal('Valida que se tenga el id de la reunion para crear evento, el id es: '.$beanReunion->id);
+        $GLOBALS['log']->fatal('ID reunion para crear evento: '.$beanReunion->id);
         if (!empty($beanReunion->id)) {
 
             //Arma petición para crear evento
             $uri = 'https://graph.microsoft.com/v1.0/users/' . $id_outlook . '/events';
-            $GLOBALS['log']->fatal('2.-Se crea URL para crear Evento: ' . $uri);
-
-            $GLOBALS['log']->fatal('2.-Inicia CURL');
+            //$GLOBALS['log']->fatal('2.-Se crea URL para crear Evento: ' . $uri);
+            //$GLOBALS['log']->fatal('2.-Inicia CURL');
             //Inicializa curl
             $ch = curl_init();
 
@@ -231,7 +221,7 @@ class Integration_Mobile
             );
 
             $payload = json_encode($info_meeting);
-            $GLOBALS['log']->fatal('Imprime Paylod: '.$payload);
+            //$GLOBALS['log']->fatal('Imprime Paylod: '.$payload);
             //Set variables
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_URL, $uri);
@@ -251,18 +241,16 @@ class Integration_Mobile
     function update_event($beanReunion, $id_outlook,$one_drive_settings){
         //Se ejecuta para edición de registros existentes:
         global $db;
-
                 $idevent=$beanReunion->outlook_id;
                 //Arma petición para actualizar evento
                 $uri = 'https://graph.microsoft.com/v1.0/users/' . $id_outlook . '/events/'.$idevent;
-
                 //Inicializa curl
                 $ch = curl_init();
-        $GLOBALS['log']->fatal('2.-Inicia CURL UPDATE');
-        $GLOBALS['log']->fatal('URL paraUPDATE: '.$uri);
+                //$GLOBALS['log']->fatal('2.-Inicia CURL UPDATE');
+                $GLOBALS['log']->fatal('URL paraUPDATE: '.$uri);
 
 
-        //Condicion para calcular el recordatorio a la reunion
+                //Condicion para calcular el recordatorio a la reunion
                 if($beanReunion->reminder_time==-1){
                     $beanReunion->reminder_time=-1;
                 }else{
@@ -291,7 +279,7 @@ class Integration_Mobile
                 );
 
                 $payload = json_encode($info_meeting);
-                $GLOBALS['log']->fatal('Imprime Paylod: '.$payload);
+                //$GLOBALS['log']->fatal('Imprime Paylod UPDATE: '.$payload);
                 //Set variables
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
                 curl_setopt($ch, CURLOPT_URL, $uri);
