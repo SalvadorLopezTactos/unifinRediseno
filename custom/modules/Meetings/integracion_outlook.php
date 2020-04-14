@@ -18,7 +18,7 @@ class Integration_Mobile
         global $db;
 
         $plataforma=$GLOBALS['service']->platform;
-        $GLOBALS['log']->fatal('Plataforma: '.$plataforma);
+        $GLOBALS['log']->fatal('Inicia proceso Outlook');
         $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
 
         $id_outlook="";
@@ -30,6 +30,7 @@ class Integration_Mobile
             if (empty($one_drive_settings['token']) || empty($one_drive_settings['expire_in'])) {
                 //Genera nuevo Token
                 $one_drive_settings = Integration_Mobile::get_token($one_drive_settings);
+                $GLOBALS['log']->fatal('Obtuvo token :' .$one_drive_settings['token']);
             }elseif(!empty($one_drive_settings['expire_in'])){
                 //Evalua fecha de vigencia
                 $date_db = $one_drive_settings['expire_in'];
@@ -62,7 +63,7 @@ class Integration_Mobile
                 }else{
                     //Actualiza evento a traves de tener un id outlook en meetings (outlook_id)
                     Integration_Mobile::update_event($bean, $id_outlook,$one_drive_settings);
-                    $GLOBALS['log']->fatal('Realiza update en el evento');
+                    $GLOBALS['log']->fatal('Realiza actualización del evento');
                 }
             }
             //Termina proceso de integración oneDrive
@@ -113,8 +114,8 @@ class Integration_Mobile
         global $db,$current_user;
         $uri = 'https://login.microsoftonline.com/'.$one_drive_settings['tenant_id'].'/oauth2/v2.0/token';
         $data = 'grant_type=client_credentials&client_id='.$one_drive_settings['client_id'].'&client_secret='.$one_drive_settings['client_secret'].'&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default';
-        $GLOBALS['log']->fatal($uri);
-        $GLOBALS['log']->fatal($data);
+        //$GLOBALS['log']->fatal($uri);
+        //$GLOBALS['log']->fatal($data);
         try{
             //Inicializa curl
             $ch = curl_init();
@@ -161,7 +162,7 @@ class Integration_Mobile
         //Variable para guardar el token
         $usr_token= $one_drive_settings['token'];
         $uri = 'https://graph.microsoft.com/v1.0/users/'.$id_user;
-        //$GLOBALS['log']->fatal($uri);
+        $GLOBALS['log']->fatal($uri);
         //$GLOBALS['log']->fatal('Integracion CRM-Outlook: Peticion para id user');
         //Inicializa curl
         $ch = curl_init();
@@ -233,7 +234,7 @@ class Integration_Mobile
             $create_event_ok = curl_exec($ch);
             //Cierra curl y regresa resultado
             curl_close($ch);
-            $GLOBALS['log']->fatal($create_event_ok);
+            //$GLOBALS['log']->fatal($create_event_ok);
             return json_decode($create_event_ok, true);
         }
     }
