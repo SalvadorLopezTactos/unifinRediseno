@@ -56,7 +56,11 @@
         this.model.addValidationTask('valida_potencial_campos_autos', _.bind(this.nodigitos, this));
 
         this.model.addValidationTask('valida_potencial', _.bind(this.validapotencial, this));
-
+		
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
+		
+		
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
@@ -276,8 +280,6 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
 
-        /***************Valida Campo de Página Web ****************************/
-        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** Asignacion modal */

@@ -410,6 +410,11 @@
 
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+		
+
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
+		
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
@@ -582,8 +587,6 @@
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
 
-        /***************Valida Campo de Página Web ****************************/
-        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** BEGIN CUSTOMIZATION:
