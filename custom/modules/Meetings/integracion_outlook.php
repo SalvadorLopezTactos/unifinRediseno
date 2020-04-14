@@ -18,12 +18,11 @@ class Integration_Mobile
         global $db;
 
         $plataforma=$GLOBALS['service']->platform;
-        $GLOBALS['log']->fatal('Inicia proceso Outlook');
         $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
-
         $id_outlook="";
             //Valida que la plataforma sea movil y que el usuario tenga el producto Uniclick.
         if (($plataforma=='mobile' && $beanUser->tipodeproducto_c=='8')||($beanUser->tipodeproducto_c=='8' && $bean->outlook_id!="")) {
+            $GLOBALS['log']->fatal('Inicia proceso Outlook');
             //Recupera información sobre configuración de Outlook
             $one_drive_settings = Integration_Mobile::get_one_drive_config();
             //Pregunta sobre Token existente
@@ -248,7 +247,7 @@ class Integration_Mobile
                 //Inicializa curl
                 $ch = curl_init();
                 //$GLOBALS['log']->fatal('2.-Inicia CURL UPDATE');
-                $GLOBALS['log']->fatal('URL paraUPDATE: '.$uri);
+                $GLOBALS['log']->fatal('URL para UPDATE: '.$uri);
 
 
                 //Condicion para calcular el recordatorio a la reunion
