@@ -671,23 +671,23 @@
         // Valida tipo de cuenta por producto
         if (Oproductos.productos != undefined) {
             //Valida Leasing
-            if (Oproductos.productos.tct_tipo_l_txf_c != 'Lead') {
+            if (Oproductos.productos.tct_tipo_l_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_l_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_l_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
                 editaL = false;
             }
             //Valida Factoraje
-            if (Oproductos.productos.tct_tipo_f_txf_c != 'Lead') {
+            if (Oproductos.productos.tct_tipo_f_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_f_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_f_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
                 editaF = false;
             }
             //Valida CA
-            if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead') {
+            if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_ca_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_ca_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
                 editaCA = false;
             }
             //Valida FLEET
-            if (Oproductos.productos.tct_tipo_fl_txf_c != 'Lead') {
+            if (Oproductos.productos.tct_tipo_fl_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_fl_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_fl_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
                 editaFL = false;
             }
             //Valida UNICLICK
-            if (Oproductos.productos.tct_tipo_uc_txf_c != 'Lead') {
+            if (Oproductos.productos.tct_tipo_uc_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_uc_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_uc_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
                 editaU = false;
             }
         }
