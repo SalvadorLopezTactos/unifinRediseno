@@ -274,7 +274,10 @@
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
-        this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));        
+        this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
+
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** Asignacion modal */
@@ -5421,6 +5424,28 @@
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    /*************Valida campo de Página Web*****************/
+    validaPagWeb: function (fields, errors, callback) {
+
+        var webSite = this.model.get('website');
+
+        if (webSite != "") {
+            var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
+
+            if (!expreg.test(webSite)) {
+
+                app.alert.show('error-web-site', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: "El formato de <b>Página Web</b> no es valido."
+                });
+                errors['website'] = errors['website'] || {};
+                errors['website'].required = true;
             }
         }
         callback(null, fields, errors);
