@@ -2,7 +2,6 @@
  // created: 2019-06-06 10:26:52
 
 $app_list_strings['razones_ddw_list']=array (
-  '' => '',
   '0' => '',
   '1' => 'Fuera de Perfil',
   '2' => 'Condiciones Financieras',
