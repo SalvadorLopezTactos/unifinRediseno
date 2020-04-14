@@ -8,7 +8,12 @@
     	  pre.options.context.attributes.model.attributes.chat=[];
         pre.options.context.attributes.model.collection.models.forEach(function(entry) {
             //Itera interacciones por conversación
-            var chat = JSON.parse(entry.attributes.description);
+            try {
+              var chat = JSON.parse(entry.attributes.description);
+            }
+            catch(err) {
+              var chat = [];
+            }
             for(var i = chat.length-1; i--;){
             	 if (chat[i].type !== "OUTBOUND" && chat[i].type !== "INBOUND") chat.splice(i, 1);
                chat[i].type = (chat[i].type === "OUTBOUND") ? 1: 0;
