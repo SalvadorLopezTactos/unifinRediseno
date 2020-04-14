@@ -16,20 +16,19 @@ class Integration_Mobile
     function envia_graph($bean=null, $event=null, $args=null)
     {
         global $db;
-
-        $plataforma=$GLOBALS['service']->platform;
         $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
+        $plataforma=$GLOBALS['service']->platform;
         $id_outlook="";
-            //Valida que la plataforma sea movil y que el usuario tenga el producto Uniclick.
+        //Valida que la plataforma sea movil y que el usuario tenga el producto Uniclick.
         if (($plataforma=='mobile' && $beanUser->tipodeproducto_c=='8')||($beanUser->tipodeproducto_c=='8' && $bean->outlook_id!="")) {
-            $GLOBALS['log']->fatal('Inicia proceso Outlook');
+            $GLOBALS['log']->fatal('Inicia proceso Outlook - Reunión: '. $bean->id);
             //Recupera información sobre configuración de Outlook
             $one_drive_settings = Integration_Mobile::get_one_drive_config();
             //Pregunta sobre Token existente
             if (empty($one_drive_settings['token']) || empty($one_drive_settings['expire_in'])) {
                 //Genera nuevo Token
                 $one_drive_settings = Integration_Mobile::get_token($one_drive_settings);
-                $GLOBALS['log']->fatal('Obtuvo token :' .$one_drive_settings['token']);
+                //$GLOBALS['log']->fatal('Obtuvo token :' .$one_drive_settings['token']);
             }elseif(!empty($one_drive_settings['expire_in'])){
                 //Evalua fecha de vigencia
                 $date_db = $one_drive_settings['expire_in'];
@@ -46,24 +45,33 @@ class Integration_Mobile
                  //Genera petición para obtener el id del usuario en outlook
                 $id_user_graph = Integration_Mobile::user_graph($one_drive_settings,$bean);
                 $id_outlook=$id_user_graph['id'];
-                $GLOBALS['log']->fatal('El id Outlook del usuario es: '.$id_outlook);
             }
             if (!empty($id_outlook)){
+                $GLOBALS['log']->fatal('Id de usuario recuperado satisfactoriamente: '.$id_outlook);
                 if ($bean->outlook_id=="") {
                     //Crea evento (invoca funcion create_event)
                     $create_event_graph = Integration_Mobile::create_event($one_drive_settings, $id_outlook, $bean);
                     if (!empty($create_event_graph['id'])){
                         //Guarda el id de la reunion en el campo outlook_id de meetings
-                        $GLOBALS['log']->fatal('Realiza update para guardar id de outlook en meetings');
+                        //$GLOBALS['log']->fatal('Realiza update para guardar id de outlook en meetings');
                         $Update = "update meetings set outlook_id = '{$create_event_graph['id']}' where id = '{$bean->id}'";
                         $Result = $db->query($Update);
-                        $GLOBALS['log']->fatal('Evento Creado satisfactoriamente');
+                        $GLOBALS['log']->fatal('Evento Creado satisfactoriamente: '.$create_event_graph['id']);
+                    } elseif (!empty($create_event_graph['error']['message'])){
+                        $GLOBALS['log']->fatal('Error al crear evento: '.$create_event_graph['error']['message']);
                     }
                 }else{
                     //Actualiza evento a traves de tener un id outlook en meetings (outlook_id)
-                    Integration_Mobile::update_event($bean, $id_outlook,$one_drive_settings);
+                    $update_event_graph = Integration_Mobile::update_event($bean, $id_outlook,$one_drive_settings);
                     $GLOBALS['log']->fatal('Realiza actualización del evento');
+                    if (!empty($update_event_graph['id'])){
+                        $GLOBALS['log']->fatal('Evento Actualizado satisfactoriamente: '.$update_event_graph['id']);
+                    } elseif (!empty($update_event_graph['error']['message'])){
+                        $GLOBALS['log']->fatal('Error al actualizar evento: '.$update_event_graph['error']['message']);
+                    }
                 }
+            }elseif (!empty($id_user_graph['error']['message'])){
+              $GLOBALS['log']->fatal('Error al recuperar id Outlook de usuario: '. $id_user_graph['error']['message']);
             }
             //Termina proceso de integración oneDrive
             $GLOBALS['log']->fatal('Termina proceso de integración Outlook');
@@ -161,7 +169,8 @@ class Integration_Mobile
         //Variable para guardar el token
         $usr_token= $one_drive_settings['token'];
         $uri = 'https://graph.microsoft.com/v1.0/users/'.$id_user;
-        $GLOBALS['log']->fatal($uri);
+        //$GLOBALS['log']->fatal($uri);
+        $GLOBALS['log']->fatal('Solicita id usuario: '. $uri);
         //$GLOBALS['log']->fatal('Integracion CRM-Outlook: Peticion para id user');
         //Inicializa curl
         $ch = curl_init();
@@ -182,7 +191,7 @@ class Integration_Mobile
 
     function create_event($one_drive_settings, $id_outlook,$beanReunion)
     {
-        $GLOBALS['log']->fatal('ID reunion para crear evento: '.$beanReunion->id);
+        //$GLOBALS['log']->fatal('ID reunion para crear evento: '.$beanReunion->id);
         if (!empty($beanReunion->id)) {
 
             //Arma petición para crear evento
@@ -221,7 +230,7 @@ class Integration_Mobile
             );
 
             $payload = json_encode($info_meeting);
-            //$GLOBALS['log']->fatal('Imprime Paylod: '.$payload);
+            $GLOBALS['log']->fatal('Petición para crear evento: '.$payload);
             //Set variables
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_URL, $uri);
@@ -241,59 +250,58 @@ class Integration_Mobile
     function update_event($beanReunion, $id_outlook,$one_drive_settings){
         //Se ejecuta para edición de registros existentes:
         global $db;
-                $idevent=$beanReunion->outlook_id;
-                //Arma petición para actualizar evento
-                $uri = 'https://graph.microsoft.com/v1.0/users/' . $id_outlook . '/events/'.$idevent;
-                //Inicializa curl
-                $ch = curl_init();
-                //$GLOBALS['log']->fatal('2.-Inicia CURL UPDATE');
-                $GLOBALS['log']->fatal('URL para UPDATE: '.$uri);
+        $idevent=$beanReunion->outlook_id;
+        //Arma petición para actualizar evento
+        $uri = 'https://graph.microsoft.com/v1.0/users/' . $id_outlook . '/events/'.$idevent;
+        //Inicializa curl
+        $ch = curl_init();
+        //$GLOBALS['log']->fatal('2.-Inicia CURL UPDATE');
+        //$GLOBALS['log']->fatal('URL para UPDATE: '.$uri);
 
+        //Condicion para calcular el recordatorio a la reunion
+        if($beanReunion->reminder_time==-1){
+            $beanReunion->reminder_time=-1;
+        }else{
+            $beanReunion->reminder_time= $beanReunion->reminder_time/ 60;
+        }
 
-                //Condicion para calcular el recordatorio a la reunion
-                if($beanReunion->reminder_time==-1){
-                    $beanReunion->reminder_time=-1;
-                }else{
-                    $beanReunion->reminder_time= $beanReunion->reminder_time/ 60;
-                }
+        //Array con los valores de la reunion para el evento
+        $info_meeting = array(
+            'subject' => $beanReunion->name,
+            'reminderMinutesBeforeStart' => $beanReunion->reminder_time,
+            'body' => array(
+                'contentType' => 'HTML',
+                'content' => $beanReunion->description
+            ),
+            'start' => array(
+                'dateTime' => $beanReunion->date_start,
+                'timeZone' => 'America/Mexico_City'
+            ),
+            'end' => array(
+                'dateTime' => $beanReunion->date_end,
+                'timeZone' => 'America/Mexico_City'
+            ),
+            'location' => array(
+                'displayName' => $beanReunion->location
+            ),
+        );
 
-                //Array con los valores de la reunion para el evento
-                $info_meeting = array(
-                    'subject' => $beanReunion->name,
-                    'reminderMinutesBeforeStart' => $beanReunion->reminder_time,
-                    'body' => array(
-                        'contentType' => 'HTML',
-                        'content' => $beanReunion->description
-                    ),
-                    'start' => array(
-                        'dateTime' => $beanReunion->date_start,
-                        'timeZone' => 'America/Mexico_City'
-                    ),
-                    'end' => array(
-                        'dateTime' => $beanReunion->date_end,
-                        'timeZone' => 'America/Mexico_City'
-                    ),
-                    'location' => array(
-                        'displayName' => $beanReunion->location
-                    ),
-                );
-
-                $payload = json_encode($info_meeting);
-                //$GLOBALS['log']->fatal('Imprime Paylod UPDATE: '.$payload);
-                //Set variables
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
-                curl_setopt($ch, CURLOPT_URL, $uri);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $one_drive_settings['token'], 'Content-Type:application/json'));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                //Ejecuta solicitud
-                $update_event_ok = curl_exec($ch);
-                $GLOBALS['log']->fatal('Ejecuta patch en evento Outlook');
-                //Cierra curl y regresa resultado
-                curl_close($ch);
-                //$GLOBALS['log']->fatal($update_event_ok);
-                return json_decode($update_event_ok, true);
+        $payload = json_encode($info_meeting);
+        $GLOBALS['log']->fatal('Petición para actualizar evento: '.$payload);
+        //Set variables
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
+        curl_setopt($ch, CURLOPT_URL, $uri);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $one_drive_settings['token'], 'Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //Ejecuta solicitud
+        $update_event_ok = curl_exec($ch);
+        //$GLOBALS['log']->fatal('Ejecuta patch en evento Outlook');
+        //Cierra curl y regresa resultado
+        curl_close($ch);
+        //$GLOBALS['log']->fatal($update_event_ok);
+        return json_decode($update_event_ok, true);
     }
 
 }
