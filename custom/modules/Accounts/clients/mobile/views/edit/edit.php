@@ -413,6 +413,20 @@ array (
               70 => 'phone_office',
               71 => 
               array (
+                'name' => 'clean_name',
+                'studio' => 'visible',
+                'label' => 'LBL_CLEAN_NAME',
+                'css_class' => 'hide',
+              ),
+              72 => 
+              array (
+                'name' => 'account_uni_productos',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
+                'css_class' => 'hide',
+              ),
+              73 => 
+              array (
               ),
             ),
           ),
