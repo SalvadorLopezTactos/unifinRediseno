@@ -30,37 +30,28 @@ class validacion_sitio_web extends SugarApi
             ),
         );
     }
-//http://localhost/unifinRediseno/rest/v11_4/validacion_sitio_web
+    //http://localhost/unifinRediseno/rest/v11_4/validacion_sitio_web
     /**
      * Method to be used for my MyEndpoint/GetExample endpoint
      */
     public function ping_web($api, $args)
     {
-		$website = $args['website'];
-		$validateweb = '1';
-		$os = PHP_OS;
-		//PING 1.1.1.1
-		//$os = 'LINUX';
-		$website = str_replace ('http://','',$website);
-		$website = str_replace ('https://','',$website);
-		
-		if (strpos($os , "WIN") === false){
-			$website = $website.'/';
-		}
-		//$website = $website.'/';
-		//$GLOBALS['log']->fatal('website',$website);
-		//if(filter_var(gethostbyname($website), FILTER_VALIDATE_IP))
-		$output = shell_exec("ping -w 7500 $website");
-		//$GLOBALS['log']->fatal('output',$output);
-		if (strpos($output, "ping no pudo encontrar el host")){
-			$validateweb = '02';
-		}else if(strpos($output, "recibidos = 0")){
-			$validateweb = '01';
-		} else {
-			$validateweb = '00';
-		}
-		
-        return $validateweb;
+        //Recupera página web
+		    $url = $args['website'];
+        //Genera petición a dominio
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $data = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        //Interpreta resultado
+        if($httpcode>=200 && $httpcode<300){
+            return '00';
+        } else {
+            return '02';
+        }
     }
 
 }
