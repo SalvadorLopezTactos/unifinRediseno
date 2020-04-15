@@ -38,10 +38,16 @@ class validacion_sitio_web extends SugarApi
     {
 		$website = $args['website'];
 		$validateweb = '1';
+		$os = PHP_OS;
 		//PING 1.1.1.1
 		//
 		$website = str_replace ('http://','',$website);
 		$website = str_replace ('https://','',$website);
+		
+		if (strpos($os , "WIN") != false){
+			$website = $website.'/';
+		}
+		
 		//$GLOBALS['log']->fatal('website',$website);
 		//if(filter_var(gethostbyname($website), FILTER_VALIDATE_IP))
 		$output = shell_exec("ping -w 7500 $website");
