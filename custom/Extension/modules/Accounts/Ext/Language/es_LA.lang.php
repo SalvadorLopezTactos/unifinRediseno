@@ -319,3 +319,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL19'] = 'Productos';
 $mod_strings['LBL_RECORDVIEW_PANEL20'] = 'Nuevo Panel 20';
 $mod_strings['LBL_CONVERSION_GCLID'] = 'Conversión GCLID';
 $mod_strings['LBL_NO_WEBSITE'] = 'No tiene página web';
+$mod_strings['LBL_NIVEL_DIGITALIZACION_C'] = 'Nivel de Digitalización';
