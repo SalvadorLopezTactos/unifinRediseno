@@ -3,6 +3,7 @@
 
 $app_list_strings['nivel_digitalizacion_list']=array (
   '' => '',
+  4 => 'Nulo',
   1 => 'Bajo',
   2 => 'Medio',
   3 => 'Alto',
