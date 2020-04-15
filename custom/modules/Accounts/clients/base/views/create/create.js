@@ -410,6 +410,11 @@
 
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+		
+
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
+		
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
@@ -582,8 +587,6 @@
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
 
-        /***************Valida Campo de Página Web ****************************/
-        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -2881,16 +2884,45 @@
 
             if (!expreg.test(webSite)) {
 
-                app.alert.show('error-web-site', {
+                app.alert.show('error-website', {
                     level: 'error',
                     autoClose: false,
                     messages: "El formato de <b>Página Web</b> no es valido."
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-            }
-        }
-        callback(null, fields, errors);
+				callback(null, fields, errors);
+            }else{
+				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
+					success: _.bind(function (data) {
+						//console.log(data);
+						if (data == "02") {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						if (data == "01" ) {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						callback(null, fields, errors);
+					}, this),
+				});
+			}
+        }else{
+			callback(null, fields, errors);
+		}
     },
 
 })
