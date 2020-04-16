@@ -267,7 +267,11 @@ array (
             'name' => 'cuenta_especial_c',
             'label' => 'LBL_CUENTA_ESPECIAL',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'depurar_leads_c',
+            'label' => 'LBL_DEPURAR_LEADS',
+          ),
         ),
       ),
     ),

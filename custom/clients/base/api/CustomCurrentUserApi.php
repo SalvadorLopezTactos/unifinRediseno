@@ -47,6 +47,7 @@ class CustomCurrentUserApi extends CurrentUserApi
 		    $userArray['current_user']['deudor_factoraje_c'] = $current_user->deudor_factoraje_c;
 		    $userArray['current_user']['id_active_directory_c'] = $current_user->id_active_directory_c;
         $userArray['current_user']['cuenta_especial_c'] = $current_user->cuenta_especial_c;
+        $userArray['current_user']['depurar_leads_c'] = $current_user->depurar_leads_c;
         return $userArray;
     }
 }
