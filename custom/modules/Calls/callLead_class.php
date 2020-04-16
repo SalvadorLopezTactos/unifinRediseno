@@ -8,7 +8,7 @@ class callLead_class
     {
 		  if($bean->status == "Held"){
   			$parent_id = $bean->parent_id;  //ID DE LA CUENTA
-  			$parentType = $bean->parent_type;  //Modulo  		
+  			$parentType = $bean->parent_type;  //Modulo
   			if ($parentType == 'Leads') {
   				$beanLead = BeanFactory::getBean('Leads', $parent_id);
   				//$GLOBALS['log']->fatal('Id_lead',$beanLead->id);
@@ -27,31 +27,31 @@ class callLead_class
 				if($beanAccount->user_id_c == $bean->assigned_user_id || $beanAccount->user_id1_c == $bean->assigned_user_id || $beanAccount->user_id2_c == $bean->assigned_user_id || $beanAccount->user_id6_c == $bean->assigned_user_id || $beanAccount->user_id7_c == $bean->assigned_user_id){
           $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
           $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->parent_id);
-          if(($beanUser->tipodeproducto_c == 1 || $beanUser->tipodeproducto_c == 7) && $beanAccount->tipo_registro_c == 'Lead'){
+          if($beanAccount->user_id_c == $bean->assigned_user_id && $beanResumen->tct_tipo_l_txf_c == 'Lead'){
             $beanResumen->tct_tipo_l_txf_c = "Prospecto";
             $beanResumen->tct_subtipo_l_txf_c = "Contactado";
+            $beanResumen->tct_tipo_cuenta_l_c = "PROSPECTO CONTACTADO";
           }
-          if($beanUser->tipodeproducto_c == 3 && $beanAccount->tipo_registro_c == 'Lead'){
+          if($beanAccount->user_id2_c == $bean->assigned_user_id && $beanResumen->tct_tipo_ca_txf_c == 'Lead'){
             $beanResumen->tct_tipo_ca_txf_c = "Prospecto";
             $beanResumen->tct_subtipo_ca_txf_c = "Contactado";
+            $beanResumen->tct_tipo_cuenta_ca_c = "PROSPECTO CONTACTADO";
           }
-          if($beanUser->tipodeproducto_c == 4 && $beanAccount->tipo_registro_c == 'Lead'){
+          if($beanAccount->user_id1_c == $bean->assigned_user_id && $beanResumen->tct_tipo_f_txf_c == 'Lead'){
             $beanResumen->tct_tipo_f_txf_c = "Prospecto";
             $beanResumen->tct_subtipo_f_txf_c = "Contactado";
+            $beanResumen->tct_tipo_cuenta_f_c = "PROSPECTO CONTACTADO";
           }
-          if($beanUser->tipodeproducto_c == 6 && $beanAccount->tipo_registro_c == 'Lead'){
+          if($beanAccount->user_id6_c == $bean->assigned_user_id && $beanResumen->tct_tipo_fl_txf_c == 'Lead'){
             $beanResumen->tct_tipo_fl_txf_c = "Prospecto";
             $beanResumen->tct_subtipo_fl_txf_c = "Contactado";
+            $beanResumen->tct_tipo_cuenta_fl_c = "PROSPECTO CONTACTADO";
           }
-          if($beanUser->tipodeproducto_c == 8 && $beanAccount->tipo_registro_c == 'Lead'){
+          if($beanAccount->user_id7_c == $bean->assigned_user_id && $beanResumen->tct_tipo_uc_txf_c == 'Lead'){
             $beanResumen->tct_tipo_uc_txf_c = "Prospecto";
             $beanResumen->tct_subtipo_uc_txf_c = "Contactado";
+            $beanResumen->tct_tipo_cuenta_uc_c = "PROSPECTO CONTACTADO";
           }
-          if(($beanAccount->user_id_c == $bean->assigned_user_id || $beanAccount->user_id7_c == $bean->assigned_user_id) && $beanResumen->tct_tipo_cuenta_l_c == 'LEAD EN CALIFICACIÓN') $beanResumen->tct_tipo_cuenta_l_c = "PROSPECTO CONTACTADO";
-          if($beanAccount->user_id2_c == $bean->assigned_user_id && $beanResumen->tct_tipo_cuenta_ca_c == 'LEAD EN CALIFICACIÓN') $beanResumen->tct_tipo_cuenta_ca_c = "PROSPECTO CONTACTADO";
-          if($beanAccount->user_id1_c == $bean->assigned_user_id && $beanResumen->tct_tipo_cuenta_f_c == 'LEAD EN CALIFICACIÓN') $beanResumen->tct_tipo_cuenta_f_c = "PROSPECTO CONTACTADO";
-          if($beanAccount->user_id6_c == $bean->assigned_user_id && $beanResumen->tct_tipo_cuenta_fl_c == 'LEAD EN CALIFICACIÓN') $beanResumen->tct_tipo_cuenta_fl_c = "PROSPECTO CONTACTADO";
-          if($beanAccount->user_id7_c == $bean->assigned_user_id && $beanResumen->tct_tipo_cuenta_uc_c == 'LEAD EN CALIFICACIÓN') $beanResumen->tct_tipo_cuenta_uc_c = "PROSPECTO CONTACTADO";
           $beanResumen->save();
           if($beanAccount->tipo_registro_c == 'Lead'){
   					$beanAccount->tipo_registro_c = 'Prospecto';

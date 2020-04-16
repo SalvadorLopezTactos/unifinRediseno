@@ -75,3 +75,11 @@ $hook_array['after_save'][] = Array(
     'Meetings_Hooks',
     'ProspectoContactado'
 );
+
+$hook_array['after_save'][] = Array(
+    5,
+    'Crea y actualiza reuniones en el calendario Outlook desde CRM mobile',
+    'custom/modules/Meetings/integracion_outlook.php',
+    'Integration_Mobile',
+    'envia_graph'
+);

@@ -56,7 +56,11 @@
         this.model.addValidationTask('valida_potencial_campos_autos', _.bind(this.nodigitos, this));
 
         this.model.addValidationTask('valida_potencial', _.bind(this.validapotencial, this));
-
+		
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
+		
+		
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
@@ -274,7 +278,8 @@
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
-        this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));        
+        this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
+
     },
 
     /** Asignacion modal */
@@ -5424,6 +5429,57 @@
             }
         }
         callback(null, fields, errors);
+    },
+
+    /*************Valida campo de Página Web*****************/
+    validaPagWeb: function (fields, errors, callback) {
+
+        var webSite = this.model.get('website');
+
+        if (webSite != "") {
+            var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
+
+            if (!expreg.test(webSite)) {
+
+                app.alert.show('error-website', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: "El formato de <b>Página Web</b> no es valido."
+                });
+                errors['website'] = errors['website'] || {};
+                errors['website'].required = true;
+				callback(null, fields, errors);
+            }else{
+				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
+					success: _.bind(function (data) {
+						//console.log(data);
+						if (data == "02") {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						if (data == "01" ) {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						callback(null, fields, errors);
+					}, this),
+				});
+			}
+        }else{
+			callback(null, fields, errors);
+		}
     },
 })
 

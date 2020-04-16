@@ -229,6 +229,8 @@ array (
               ),
               2 => 
               array (
+                'name' => 'nivel_digitalizacion_c',
+                'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
               3 => 
               array (

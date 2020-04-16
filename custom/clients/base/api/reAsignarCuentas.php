@@ -135,23 +135,6 @@ class reAsignarCuentas extends SugarApi
 
                 $account->save();
 
-                if ($statusProducto == "1") {
-                    if ($account->load_relationship('accounts_uni_productos_1')) {
-                        //Recupera Productos
-                        $relateProduct = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
-
-                        foreach ($relateProduct as $productos_uni) {
-                            // $GLOBALS['log']->fatal("nuevos valores ".print_r($product,true));
-                            if ($productos_uni->tipo_producto == $idProducto) {
-                                $GLOBALS['log']->fatal("encontrado " . $productos_uni->id);
-                                $bean_producto_uni = BeanFactory::retrieveBean('uni_Productos', $productos_uni->id);
-                                $bean_producto_uni->estatus_atencion = 1;
-                                $bean_producto_uni->save();
-                            }
-                        }
-                    }
-                }
-
                 array_push($actualizados, $account->id);
 
                 // Funcionalidad para notificar al promotor reasigando

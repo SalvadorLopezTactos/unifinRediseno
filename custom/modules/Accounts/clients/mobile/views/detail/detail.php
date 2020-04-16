@@ -436,7 +436,19 @@ array (
                   'tipodeproducto_c' => '3',
                 ),
               ),
-              68 => 'phone_office',
+              68 => 
+              array (
+                'name' => 'promotorfleet_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORFLEET',
+              ),
+              69 => 
+              array (
+                'name' => 'promotoruniclick_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORUNICLICK_C',
+              ),
+              70 => 'phone_office',
             ),
           ),
         ),

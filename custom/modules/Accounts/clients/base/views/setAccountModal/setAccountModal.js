@@ -499,12 +499,9 @@
                             self.model.set('user_id_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorleasing_c', full_name);// nombre
                             v360.ResumenCliente.leasing.promotor = full_name;
-                            v360.ResumenCliente.leasing.estatus_atencion = 1;
-
                             cont_uni_p.ResumenProductos.leasing.dias = 0;
                             cont_uni_p.ResumenProductos.leasing.full_name = full_name;
                             cont_uni_p.ResumenProductos.leasing.assigned_user_id = id_user_new;
-                            cont_uni_p.ResumenProductos.leasing.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -512,12 +509,9 @@
                             self.model.set('user_id2_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorcredit_c', full_name);// nombre
                             v360.ResumenCliente.credito_auto.promotor = full_name;
-                            v360.ResumenCliente.credito_auto.estatus_atencion = 1;
-
                             cont_uni_p.ResumenProductos.credito_auto.dias = 0;
                             cont_uni_p.ResumenProductos.credito_auto.full_name = full_name;
                             cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = id_user_new;
-                            cont_uni_p.ResumenProductos.credito_auto.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -526,12 +520,9 @@
                             self.model.set('user_id1_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorfactoraje_c', full_name);// nombre
                             v360.ResumenCliente.factoring.promotor = full_name;
-                            v360.ResumenCliente.factoring.estatus_atencion = 1;
-
                             cont_uni_p.ResumenProductos.factoring.dias = 0;
                             cont_uni_p.ResumenProductos.factoring.full_name = full_name;
                             cont_uni_p.ResumenProductos.factoring.assigned_user_id = id_user_new;
-                            cont_uni_p.ResumenProductos.factoring.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -540,12 +531,9 @@
                             self.model.set('user_id6_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorfleet_c', full_name);// nombre
                             v360.ResumenCliente.fleet.promotor = full_name;
-                            v360.ResumenCliente.fleet.estatus_atencion = 1;
-
                             cont_uni_p.ResumenProductos.fleet.dias = 0;
                             cont_uni_p.ResumenProductos.fleet.full_name = full_name;
                             cont_uni_p.ResumenProductos.fleet.assigned_user_id = id_user_new;
-                            cont_uni_p.ResumenProductos.fleet.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
@@ -554,12 +542,9 @@
                             self.model.set('user_id7_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotoruniclick_c', full_name);// nombre
                             v360.ResumenCliente.uniclick.promotor = full_name;
-                            v360.ResumenCliente.uniclick.estatus_atencion = 1;
-
                             cont_uni_p.ResumenProductos.uniclick.dias = 0;
                             cont_uni_p.ResumenProductos.uniclick.full_name = full_name;
                             cont_uni_p.ResumenProductos.uniclick.assigned_user_id = id_user_new;
-                            cont_uni_p.ResumenProductos.uniclick.estatus_atencion = 1;
                             cont_uni_p.render();
                             v360.render();
                             break;
