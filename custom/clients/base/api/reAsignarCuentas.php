@@ -176,6 +176,9 @@ class reAsignarCuentas extends SugarApi
                     $result = $db->query($query);
                 }
 
+                //Restablece usuario por asignar
+                $reAsignado = $args['data']['reAssignado'];
+
                 //Actualiza Oportunidades
                 if ($product == 'LEASING') $producto = 1;
                 if ($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
@@ -229,7 +232,7 @@ SQL;
                         $User->retrieve($reAsignado);
                         while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id']);
+                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'],array('disable_row_level_security' => true));
                             if ($bl != null) {
                                 //Actualiza valores
                                 $bl->assigned_user_id = $reAsignado;
