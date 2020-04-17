@@ -300,11 +300,10 @@
         }
 
         this.model.fields['tipo_registro_c'].options = new_options;
-
         this.model.on('change:name', this.cleanName, this);
+        this.model.on('change:no_website_c',this.rowebsite, this);
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
-
     },
 
     _render: function () {
@@ -1864,9 +1863,7 @@
 
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
-
         var webSite = this.model.get('website');
-
         if (webSite != "") {
             var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
 
@@ -1879,37 +1876,64 @@
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-				callback(null, fields, errors);
+				        callback(null, fields, errors);
             }else{
-				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
-					success: _.bind(function (data) {
-						//console.log(data);
-						if (data == "02") {
-							app.alert.show("error-website", {
-								level: "error",
-								autoClose: false,
-								messages: "El dominio ingresado en <b>Página Web</b> no existe."
-							});
-							errors['website'] = errors['website'] || {};
-							errors['website'].required = true;
-							//callback(null, fields, errors);
-						}
-						if (data == "01" ) {
-							app.alert.show("error-website", {
-								level: "error",
-								autoClose: false,
-								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
-							});
-							errors['website'] = errors['website'] || {};
-							errors['website'].required = true;
-							//callback(null, fields, errors);
-						}
-						callback(null, fields, errors);
-					}, this),
-				});
-			}
+        				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
+        					success: _.bind(function (data) {
+        						//console.log(data);
+        						if (data == "02") {
+        							app.alert.show("error-website", {
+        								level: "error",
+        								autoClose: false,
+        								messages: "El dominio ingresado en <b>Página Web</b> no existe."
+        							});
+        							errors['website'] = errors['website'] || {};
+        							errors['website'].required = true;
+        							//callback(null, fields, errors);
+        						}
+        						if (data == "01" ) {
+        							app.alert.show("error-website", {
+        								level: "error",
+        								autoClose: false,
+        								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+        							});
+        							errors['website'] = errors['website'] || {};
+        							errors['website'].required = true;
+        							//callback(null, fields, errors);
+        						}
+        						callback(null, fields, errors);
+        					}, this),
+                });
+			      }
         }else{
-			callback(null, fields, errors);
-		}
+			      callback(null, fields, errors);
+		    }
+    },
+
+    rowebsite: function () {
+      if(this.model.get('no_website_c')) {
+        if(this.model.get('website')){
+          app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website='+this.model.get('website')),null, {
+  				  success: _.bind(function (data) {
+  				    if(data == "00") {
+  						  app.alert.show("error-website", {
+  							  level: "error",
+  								autoClose: false,
+  								messages: "La Página Web es correcta, no se puede borrar."
+  							});
+                self.model.set('no_website_c',0); 
+  						}
+              else {
+                self.model.set('website','');
+                self.noEditFields.push('website');
+  						}
+  					}, self),
+  				});
+        }
+        $('[data-name="website"]').attr('style','pointer-events:none');
+      }
+      else {
+        $('[data-name="website"]').attr('style','pointer-events:auto');
+      }
     },
 })
