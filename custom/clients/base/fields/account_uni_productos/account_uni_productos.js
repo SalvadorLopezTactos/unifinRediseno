@@ -591,7 +591,7 @@
                 guardaU = true;
             }
             //Evalua guardado de No viable
-            if ((guardaL || guardaF || guardaCA || guardaFL || guardaI) && this.model.get('id') != "" && this.model.get('id') != undefined && Object.entries(errors).length == 0) {
+            if ((guardaL || guardaF || guardaCA || guardaFL || guardaU) && this.model.get('id') != "" && this.model.get('id') != undefined && Object.entries(errors).length == 0) {
                 //Mapea los campos del modulo UNI PRODUCTOS con producto LEASING en el objeto cont_uni_p.leadNoViable
                 if ($('.chk_l_nv')[0] != undefined) {
                     if ($('.chk_l_nv')[0].checked == true && typeof $('.list_l_nv_razon').select2('val') == "string") {
