@@ -85,6 +85,7 @@ class GetDropdownList extends SugarApi
             }
 
         }
+        $list_values[""]= ($list_values[""]!="")?$list_values[""]:"";
         return $list_values;
 
     }
