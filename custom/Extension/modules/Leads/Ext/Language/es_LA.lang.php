@@ -86,3 +86,5 @@ $mod_strings['LBL_GA_CLIENT_ID'] = 'GA Client Id';
 $mod_strings['LBL_KEYWORD'] = 'Keyword';
 $mod_strings['LBL_CAMPANA'] = 'Campaña';
 $mod_strings['LBL_COMPANIA'] = 'Compañía';
+$mod_strings['LBL_PB_ID'] = 'PB ID';
+$mod_strings['LBL_DUNS_ID'] = 'DUNS ID';
