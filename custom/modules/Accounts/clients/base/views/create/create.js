@@ -587,6 +587,7 @@
         this.model.on('change:no_website_c',this.rowebsite, this);    
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+
     },
 
     /** BEGIN CUSTOMIZATION:
