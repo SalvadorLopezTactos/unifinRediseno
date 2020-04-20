@@ -179,6 +179,7 @@
         /* LEV FIN */
 
         this.model.on('change:name', this.cleanName, this);
+        this.model.on('change:no_website_c',this.rowebsite, this);
 
         /*
          AF. 12-02-2018
@@ -927,7 +928,6 @@
     _renderHtml: function ()
     //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
-
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
         if (this.model.get('id') === id['accid'] && app.user.get('type') !== 'admin') {
             var self = this;
@@ -972,12 +972,14 @@
             self.noEditFields.push('tct_que_promotor_rel_c');
         }
 
-
         if (App.user.attributes.deudor_factoraje_c != true) {
             //Readonly check factoraje
             self.noEditFields.push('deudor_factor_c');
         }
-
+  
+        if (this.model.get('no_website_c')) {
+            self.noEditFields.push('website');
+        }
 
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
@@ -5430,12 +5432,9 @@
         }
         callback(null, fields, errors);
     },
-
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
-
         var webSite = this.model.get('website');
-
         if (webSite != "") {
             var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
 
@@ -5448,39 +5447,64 @@
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-				callback(null, fields, errors);
+        				callback(null, fields, errors);
             }else{
-				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
-					success: _.bind(function (data) {
-						//console.log(data);
-						if (data == "02") {
-							app.alert.show("error-website", {
-								level: "error",
-								autoClose: false,
-								messages: "El dominio ingresado en <b>Página Web</b> no existe."
-							});
-							errors['website'] = errors['website'] || {};
-							errors['website'].required = true;
-							//callback(null, fields, errors);
-						}
-						if (data == "01" ) {
-							app.alert.show("error-website", {
-								level: "error",
-								autoClose: false,
-								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
-							});
-							errors['website'] = errors['website'] || {};
-							errors['website'].required = true;
-							//callback(null, fields, errors);
-						}
-						callback(null, fields, errors);
-					}, this),
-				});
-			}
+        				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
+        					success: _.bind(function (data) {
+        						//console.log(data);
+        						if (data == "02") {
+        							app.alert.show("error-website", {
+        								level: "error",
+        								autoClose: false,
+        								messages: "El dominio ingresado en <b>Página Web</b> no existe."
+        							});
+        							errors['website'] = errors['website'] || {};
+        							errors['website'].required = true;
+        							//callback(null, fields, errors);
+        						}
+        						if (data == "01" ) {
+        							app.alert.show("error-website", {
+        								level: "error",
+        								autoClose: false,
+        								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+        							});
+        							errors['website'] = errors['website'] || {};
+        							errors['website'].required = true;
+        							//callback(null, fields, errors);
+        						}
+        						callback(null, fields, errors);
+        					}, this),
+        				});
+            }
         }else{
-			callback(null, fields, errors);
-		}
+	      	  callback(null, fields, errors);
+        }
+    },
+
+    rowebsite: function () {
+      if(this.model.get('no_website_c')) {
+        if(this.model.get('website')){
+          app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website='+this.model.get('website')),null, {
+  				  success: _.bind(function (data) {
+  				    if(data == "00") {
+  						  app.alert.show("error-website", {
+  							  level: "error",
+  								autoClose: false,
+  								messages: "La Página Web es correcta, no se puede borrar."
+  							});
+                self.model.set('no_website_c',0); 
+  						}
+              else {
+                self.model.set('website','');
+                self.noEditFields.push('website');
+  						}
+  					}, self),
+  				});
+        }
+        $('[data-name="website"]').attr('style','pointer-events:none');
+      }
+      else {
+        $('[data-name="website"]').attr('style','pointer-events:auto');
+      }
     },
 })
-
-

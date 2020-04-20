@@ -606,12 +606,12 @@ array (
               27 => 
               array (
               ),
-              28 => 
+              28 => 'website',
+              29 => 
               array (
                 'name' => 'no_website_c',
                 'label' => 'LBL_NO_WEBSITE',
               ),
-              29 => 'website',
               30 => 
               array (
                 'name' => 'facebook',
