@@ -150,12 +150,23 @@ class leads_validateString
                 $count = count($result);
 
                 $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
+                // $sqlLead = new SugarQuery();
+                // $sqlLead->select(array('id', 'clean_name_c'));
+                // $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
+                // $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
+                // $sqlLead->where()->notEquals('id', $bean->id);
+                /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
                 $sqlLead = new SugarQuery();
-                $sqlLead->select(array('id', 'clean_name_c'));
+                $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
                 $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
-                $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
+                $sqlLead->where()
+                ->queryOr()
+                    ->equals('clean_name_c', $bean->clean_name_c)
+                    ->equals('pb_id_c', $bean->pb_id_c)
+                    ->equals('duns_id_c', $bean->duns_id_c);
                 $sqlLead->where()->notEquals('id', $bean->id);
                 $resultLead = $sqlLead->execute();
+                // $GLOBALS['log']->fatal("Result SugarQuery Lead " . print_r($resultLead));
                 $countLead = count($resultLead);
 
                 $GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
@@ -165,8 +176,8 @@ class leads_validateString
 
                     if ($_REQUEST['module'] != 'Import') {
                         throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
-                    }
-                    {
+
+                    } else {
                         $bean->deleted = 1;
                         $bean->resultado_de_carga_c = 'Registro Duplicado';
                     }
