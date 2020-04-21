@@ -135,23 +135,6 @@ class reAsignarCuentas extends SugarApi
 
                 $account->save();
 
-                if ($statusProducto == "1") {
-                    if ($account->load_relationship('accounts_uni_productos_1')) {
-                        //Recupera Productos
-                        $relateProduct = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
-
-                        foreach ($relateProduct as $productos_uni) {
-                            // $GLOBALS['log']->fatal("nuevos valores ".print_r($product,true));
-                            if ($productos_uni->tipo_producto == $idProducto) {
-                                $GLOBALS['log']->fatal("encontrado " . $productos_uni->id);
-                                $bean_producto_uni = BeanFactory::retrieveBean('uni_Productos', $productos_uni->id);
-                                $bean_producto_uni->estatus_atencion = 1;
-                                $bean_producto_uni->save();
-                            }
-                        }
-                    }
-                }
-
                 array_push($actualizados, $account->id);
 
                 // Funcionalidad para notificar al promotor reasigando
@@ -192,6 +175,9 @@ class reAsignarCuentas extends SugarApi
                     $query = "update tct2_notificaciones set created_by = '$promoActual' where id = '$notId'";
                     $result = $db->query($query);
                 }
+
+                //Restablece usuario por asignar
+                $reAsignado = $args['data']['reAssignado'];
 
                 //Actualiza Oportunidades
                 if ($product == 'LEASING') $producto = 1;
@@ -246,7 +232,7 @@ SQL;
                         $User->retrieve($reAsignado);
                         while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id']);
+                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'],array('disable_row_level_security' => true));
                             if ($bl != null) {
                                 //Actualiza valores
                                 $bl->assigned_user_id = $reAsignado;

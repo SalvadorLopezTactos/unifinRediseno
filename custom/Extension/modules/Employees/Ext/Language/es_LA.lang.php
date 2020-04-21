@@ -34,3 +34,4 @@ $mod_strings['LBL_AGENTE_TELEFONICO'] = 'Gestión Agente telefonico';
 $mod_strings['LBL_ID_ACTIVE_DIRECTORY_C'] = 'ID ACTIVE DIRECTORY';
 $mod_strings['LBL_DEUDOR_FACTORAJE'] = 'Alta Deudor Factoraje';
 $mod_strings['LBL_CUENTA_ESPECIAL'] = 'Marcar cuentas especiales';
+$mod_strings['LBL_DEPURAR_LEADS'] = 'Depurar Leads';

@@ -410,6 +410,11 @@
 
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+		
+
+        /***************Valida Campo de Página Web ****************************/
+        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
+		
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
@@ -577,13 +582,12 @@
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 		
-		/*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
-		this.model.on('change:tipo_registro_c',this.check_factoraje, this);
+		    /*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
+		    this.model.on('change:tipo_registro_c',this.check_factoraje, this);
+        this.model.on('change:no_website_c',this.rowebsite, this);    
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
 
-        /***************Valida Campo de Página Web ****************************/
-        this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -2863,17 +2867,16 @@
                 }
     },
 	
-	check_factoraje: function () {
-		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_c') == 'Persona') {
-			this.model.set('deudor_factor_c', true);
-        }else{
-			this.model.set('deudor_factor_c', false);
-		}
+	  check_factoraje: function () {
+  		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_c') == 'Persona') {
+  			this.model.set('deudor_factor_c', true);
+          }else{
+  			this.model.set('deudor_factor_c', false);
+  		}
     },
 
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
-
         var webSite = this.model.get('website');
 
         if (webSite != "" && webSite != undefined) {
@@ -2881,16 +2884,71 @@
 
             if (!expreg.test(webSite)) {
 
-                app.alert.show('error-web-site', {
+                app.alert.show('error-website', {
                     level: 'error',
                     autoClose: false,
                     messages: "El formato de <b>Página Web</b> no es valido."
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-            }
-        }
-        callback(null, fields, errors);
+				callback(null, fields, errors);
+            }else{
+				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
+					success: _.bind(function (data) {
+						//console.log(data);
+						if (data == "02") {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						if (data == "01" ) {
+							app.alert.show("error-website", {
+								level: "error",
+								autoClose: false,
+								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+							});
+							errors['website'] = errors['website'] || {};
+							errors['website'].required = true;
+							//callback(null, fields, errors);
+						}
+						callback(null, fields, errors);
+					}, this),
+				});
+			}
+        }else{
+			    callback(null, fields, errors);
+		  }
     },
 
+    rowebsite: function () {
+      if(this.model.get('no_website_c')) {
+        if(this.model.get('website')){
+          app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website='+this.model.get('website')),null, {
+  				  success: _.bind(function (data) {
+  				    if(data == "00") {
+  						  app.alert.show("error-website", {
+  							  level: "error",
+  								autoClose: false,
+  								messages: "La Página Web es correcta, no se puede borrar."
+  							});
+                self.model.set('no_website_c',0); 
+  						}
+              else {
+                self.model.set('website','');
+                self.noEditFields.push('website');
+  						}
+  					}, self),
+  				});
+        }
+        $('[data-name="website"]').attr('style','pointer-events:none');
+      }
+      else {
+        $('[data-name="website"]').attr('style','pointer-events:auto');
+      }
+    },
 })

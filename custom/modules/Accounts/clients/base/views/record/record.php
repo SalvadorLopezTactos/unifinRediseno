@@ -229,6 +229,8 @@ array (
               ),
               2 => 
               array (
+                'name' => 'nivel_digitalizacion_c',
+                'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
               3 => 
               array (
@@ -260,13 +262,6 @@ array (
               9 => 
               array (
               ),
-              // 10 => 
-              // array (
-              //   'name' => 'tct_noviable',
-              //   'studio' => 'visible',
-              //   'label' => 'tct_noviable',
-              //   'span' => 12,
-              // ),
               10 => 
               array (
                 'name' => 'tct_no_contactar_chk_c',
@@ -611,12 +606,12 @@ array (
               27 => 
               array (
               ),
-              28 => 
+              28 => 'website',
+              29 => 
               array (
                 'name' => 'no_website_c',
                 'label' => 'LBL_NO_WEBSITE',
               ),
-              29 => 'website',
               30 => 
               array (
                 'name' => 'facebook',

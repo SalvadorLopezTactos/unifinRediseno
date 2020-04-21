@@ -202,22 +202,3 @@ $dependencies['Accounts']['comenta_ca_c'] = array
             ),
             'notActions' => array(),
 );
-
-$dependencies['Accounts']['website'] = array
-(
-            'hooks' => array("edit"),
-            'trigger' => 'true',
-            'triggerFields' => array('no_website_c'),
-            'onload' => true,
-            'actions' => array(
-                array(
-                    'name' => 'ReadOnly',
-                    'params' => array(
-                        'target' => 'website',
-                        'label' => 'LBL_WEBSITE',
-                        'value' => '$no_website_c',
-                    ),
-                ),
-            ),
-            'notActions' => array(),
-);

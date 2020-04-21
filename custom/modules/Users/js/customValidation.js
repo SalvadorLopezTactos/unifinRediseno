@@ -189,6 +189,7 @@ $(window).load(function(){
     $('#agente_telefonico_c').attr('disabled','disabled');
     $('#id_active_directory_c').attr('disabled','disabled');
     $('#cuenta_especial_c').attr('disabled','disabled');
+    $('#depurar_leads_c').attr('disabled','disabled');
    }
   }catch(error){
       console.log(error.message);
@@ -225,6 +226,7 @@ $(window).load(function(){
       $('#agente_telefonico_c').attr('disabled','disabled');
       $('#id_active_directory_c').attr('disabled','disabled');
       $('#cuenta_especial_c').attr('disabled','disabled');
+      $('#depurar_leads_c').attr('disabled','disabled');
     }
   }
   catch(error){
