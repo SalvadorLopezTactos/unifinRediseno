@@ -2,11 +2,9 @@
     extendsFrom: 'RecordView',
 
     fechaInicioTemp: "",
-
     estadoOriginal: "",
     parentIdOriginal: "",
-
-
+    invitados: "",
 
     initialize: function (options) {
         self = this;
@@ -28,6 +26,7 @@
         this.model.on('sync', this.disableConfirmado, this);
         this.model.on('sync', this.disableFieldsTime,this);
         this.model.on('sync', this.validaprospeccion,this);
+        this.model.on('sync', this.invitees, this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         this.model.on("change:status",_.bind(this.hidecheck, this));
@@ -736,41 +735,37 @@
     },
 
     valida_usuarios_inactivos:function (fields, errors, callback) {
-
-        var inivitados=this.model.attributes.invitees.models;
-
         var ids_usuarios='';
-
         for(var i=0;i<this.model.attributes.invitees.models.length;i++){
-
-            ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
-
+            if(this.invitados.search(this.model.attributes.invitees.models[i].id)) {
+              ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+            }
         }
-
-        //Generar petición para validación
-        app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
-            success: _.bind(function(data) {
-                if(data.length>0){
-
-                    var nombres='';
-                    //Armando lista de usuarios
-                    for(var i=0;i<data.length;i++){
-
-                        nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
-                    }
-
-                    app.alert.show("Usuarios", {
-                        level: "error",
-                        messages: "No es posible generar una reunión con los siguientes usuarios inactivos:<br>"+nombres,
-                        autoClose: false
-                    });
-                    errors['usuariostatus'] = errors['usuariostatus'] || {};
-                    errors['usuariostatus'].required = true;
-                }
-                callback(null, fields, errors);
-            }, this)
-        });
-
+        if(ids_usuarios) {
+          //Generar petición para validación
+          app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
+              success: _.bind(function(data) {
+                  if(data.length>0){
+                      var nombres='';
+                      //Armando lista de usuarios
+                      for(var i=0;i<data.length;i++){
+                          nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                      }
+                      app.alert.show("Usuarios", {
+                          level: "error",
+                          messages: "No es posible generar una reunión con los siguientes usuarios inactivos:<br>"+nombres,
+                          autoClose: false
+                      });
+                      errors['usuariostatus'] = errors['usuariostatus'] || {};
+                      errors['usuariostatus'].required = true;
+                  }
+                  callback(null, fields, errors);
+              }, this)
+          });
+        }
+        else {
+          callback(null, fields, errors);
+        }
     },
 
     //Valida centro prospeccion, si esta vacio deja editar,de lo contrario, no.
@@ -786,37 +781,42 @@
 
     valida_usuarios_vetados:function (fields, errors, callback) {
         if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
-            var inivitados=this.model.attributes.invitees.models;
             var ids_usuarios='';
-
             for(var i=0;i<this.model.attributes.invitees.models.length;i++){
+              if(this.invitados.search(this.model.attributes.invitees.models[i].id)) {
                 ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+              }
             }
-
             //Generar petición para validación
-            app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios +'/vetado'), null, {
-                success: _.bind(function(data) {
-                    if(data.length>0){
-                        var nombres='';
-                        //Armando lista de usuarios
-                        for(var i=0;i<data.length;i++){
-                            nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
-                        }
-                        app.alert.show("Usuarios", {
-                            level: "error",
-                            messages: "No es posible generar una reunión con los siguientes usuarios vetados:<br>"+nombres,
-                            autoClose: false
-                        });
-                        errors['usuariostatus_vetado'] = errors['usuariostatus_vetado'] || {};
-                        errors['usuariostatus_vetado'].required = true;
-                    }
-                    callback(null, fields, errors);
-                }, this)
-            });
+            if(ids_usuarios) {
+              app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios +'/vetado'), null, {
+                  success: _.bind(function(data) {
+                      if(data.length>0){
+                          var nombres='';
+                          //Armando lista de usuarios
+                          for(var i=0;i<data.length;i++){
+                              nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                          }
+                          app.alert.show("Usuarios", {
+                              level: "error",
+                              messages: "No es posible generar una reunión con los siguientes usuarios vetados:<br>"+nombres,
+                              autoClose: false
+                          });
+                          errors['usuariostatus_vetado'] = errors['usuariostatus_vetado'] || {};
+                          errors['usuariostatus_vetado'].required = true;
+                      }
+                      callback(null, fields, errors);
+                  }, this)
+              });
+            }
+            else {
+              callback(null, fields, errors);
+            }
         }else {
             callback(null, fields, errors);
         }
     },
+    
     campoproducto: function () {
         var productuser= App.user.attributes.puestousuario_c;
         if (productuser!='27' || (productuser=='27' && (this.model.get('assigned_user_id')!=App.user.attributes.id))){
@@ -824,4 +824,9 @@
         }
     },
 
+    invitees:function(){
+        for(var i=0;i<this.model.attributes.invitees.models.length;i++){
+            this.invitados+=this.model.attributes.invitees.models[i].id + ',';
+        }
+    },
 })
