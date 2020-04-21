@@ -195,7 +195,7 @@ class leads_validateString
 							$beanaccount = BeanFactory::retrieveBean('Accounts',$Accountone['id']);	
 							$cliente = $beanaccount->name;
 							if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
-								$GLOBALS['log']->fatal('ENvío mail x producto');
+								//$GLOBALS['log']->fatal('ENvío mail x producto');
 								//Fetch related beans
 								$relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
 								foreach($relatedBeans as $rel){
@@ -205,7 +205,7 @@ class leads_validateString
 									$user1 = $usuario->nombre_completo_c;
 									
 									if($user_name !=  'SinGestor'){				
-										$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
+										//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
 										$mailHTML = str_replace ('user1',$user1,$mailHTML);
 										$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
 										
@@ -222,7 +222,7 @@ class leads_validateString
 								}
 							}
 						}else if($countLead > 0 && $count < 1){
-							$GLOBALS['log']->fatal('ENvío mail Lead');
+							//$GLOBALS['log']->fatal('ENvío mail Lead');
 							
 							$beanlead = BeanFactory::retrieveBean('Leads',$Leadone['id']);							
 							$cliente = $beanlead->name;
@@ -233,7 +233,7 @@ class leads_validateString
 							$mailHTML = str_replace ('user1',$user1,$mailHTML);
 							$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
 										
-							$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
+							//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
 							$mailer = MailerFactory::getSystemDefaultMailer();
 							$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
 							$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
