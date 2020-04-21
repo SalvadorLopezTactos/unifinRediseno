@@ -117,7 +117,10 @@ array (
               ),
               6 => 'description',
               7 => 'parent_name',
-              8 => 'assigned_user_name',
+              8 => array(
+                  'name'=>'assigned_user_name',
+                  'css_class'=>'assigned_user_meeting'
+                  ),
               9 => 
               array (
                 'name' => 'check_in_address_c',
