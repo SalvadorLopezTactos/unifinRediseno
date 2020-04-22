@@ -9,9 +9,6 @@ $viewdefs['C5515_uni_chattigo']['base']['view']['panel-top']['buttons'] = array(
         'type' => 'actiondropdown',
         'name' => 'panel_dropdown',
         'css_class' => 'pull-right',
-        'buttons' => array(
-            array(
-            ),
-        ),
+        
     ),
 );
