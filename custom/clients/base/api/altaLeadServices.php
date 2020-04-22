@@ -709,12 +709,12 @@ class altaLeadServices extends SugarApi
 						<br><br>Si tienes alguna duda contacta a:
 						<br><br>Equipo CRM
 						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
-		//$GLOBALS['log']->fatal('account:'.$idaccount.' lead:'. $idlead);
-		if($idaccount != null ){
+		$GLOBALS['log']->fatal('account:'.$idaccount.' lead:'. $idlead);
+		if($idaccount != null || $idaccount != ''){
 			$beanaccount = BeanFactory::retrieveBean('Accounts',$idaccount);	
 			$cliente = $beanaccount->name;
 			if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
-				//$GLOBALS['log']->fatal('ENvío mail x producto');
+				$GLOBALS['log']->fatal('ENvío mail x producto');
 				//Fetch related beans
 				$relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
 				foreach($relatedBeans as $rel){
@@ -724,7 +724,7 @@ class altaLeadServices extends SugarApi
 					$user1 = $usuario->nombre_completo_c;
 					
 					if($user_name !=  'SinGestor'){				
-						//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
+						$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
 						$mailHTML = str_replace ('user1',$user1,$mailHTML);
 						$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
 						
@@ -740,8 +740,8 @@ class altaLeadServices extends SugarApi
 					}									
 				}
 			}
-		}else if($idlead != null && $idaccount == null ){
-			//$GLOBALS['log']->fatal('ENvío mail Lead');
+		}else if($idlead != null && ( $idaccount == null || $idaccount == '' )){
+			$GLOBALS['log']->fatal('ENvío mail Lead');
 			
 			$beanlead = BeanFactory::retrieveBean('Leads',$idlead);							
 			$cliente = $beanlead->name;
@@ -752,7 +752,7 @@ class altaLeadServices extends SugarApi
 			$mailHTML = str_replace ('user1',$user1,$mailHTML);
 			$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
 						
-			//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
+			$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
 			$mailer = MailerFactory::getSystemDefaultMailer();
 			$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
 			$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
