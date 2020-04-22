@@ -139,6 +139,8 @@ class altaLeadServices extends SugarApi
         $lead_paso6 = $this->existsIn_Accounts($obj_leads, $clean_name);
         !empty($lead_paso6) ? $obj_leads['duplicados_en_cuentas'] = $lead_paso6 : $obj_leads['duplicados_en_cuentas'] = "";
 
+		$this->enviacorreo($lead_paso5,$lead_paso6);
+		
         return $obj_leads;
     }
 
@@ -692,6 +694,75 @@ class altaLeadServices extends SugarApi
         $array_status['modulo'] = $modulo;
 
         return $array_status;
+    }
+	
+	public function enviacorreo($idlead = null, $idaccount = null)
+    {
+        require_once 'include/SugarPHPMailer.php';
+		$correo = '';
+		$user1 = '';
+		$cliente = '';
+		
+		$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
+						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital. 
+						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
+						<br><br>Si tienes alguna duda contacta a:
+						<br><br>Equipo CRM
+						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
+		//$GLOBALS['log']->fatal('account:'.$idaccount.' lead:'. $idlead);
+		if($idaccount != null ){
+			$beanaccount = BeanFactory::retrieveBean('Accounts',$idaccount);	
+			$cliente = $beanaccount->name;
+			if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
+				//$GLOBALS['log']->fatal('ENvío mail x producto');
+				//Fetch related beans
+				$relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
+				foreach($relatedBeans as $rel){
+					$usuario = BeanFactory::retrieveBean('Users', $rel->assigned_user_id);
+					$user_name = $usuario->user_name;
+					$correo = $usuario->email1;
+					$user1 = $usuario->nombre_completo_c;
+					
+					if($user_name !=  'SinGestor'){				
+						//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
+						$mailHTML = str_replace ('user1',$user1,$mailHTML);
+						$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
+						
+						$mailer = MailerFactory::getSystemDefaultMailer();
+						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+						$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
+						$body = trim($mailHTML);
+						$mailer->setHtmlBody($body);
+						$mailer->clearRecipients();
+						$mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
+						$result = $mailer->send();
+						//$GLOBALS['log']->fatal($mailHTML);
+					}									
+				}
+			}
+		}else if($idlead != null && $idaccount == null ){
+			//$GLOBALS['log']->fatal('ENvío mail Lead');
+			
+			$beanlead = BeanFactory::retrieveBean('Leads',$idlead);							
+			$cliente = $beanlead->name;
+			$usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id);
+			$correo = $usuario->email1;
+			$user1 = $usuario->nombre_completo_c;
+			
+			$mailHTML = str_replace ('user1',$user1,$mailHTML);
+			$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
+						
+			//$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
+			$mailer = MailerFactory::getSystemDefaultMailer();
+			$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+			$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
+			$body = trim($mailHTML);
+			$mailer->setHtmlBody($body);
+			$mailer->clearRecipients();
+			$mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
+			$result = $mailer->send();
+			//$GLOBALS['log']->fatal($mailHTML);	
+		}
     }
 
 
