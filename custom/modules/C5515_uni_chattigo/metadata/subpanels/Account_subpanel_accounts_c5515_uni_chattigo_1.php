@@ -43,3 +43,8 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
   ),
 );
+
+$subpanel_layout['top_buttons'] = array (
+  
+ );
+
