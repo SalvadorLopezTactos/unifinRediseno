@@ -137,8 +137,18 @@ class leads_validateString
         if ($GLOBALS['service']->platform != "api" && $GLOBALS['service']->platform != "unifinAPI") {
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
             if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
-                //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-                // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+
+                $exprNumerica = "/^[0-9]*$/";
+                /**********************VALIDACION DE CAMPOS PB ID Y DUNS ID DEBEN SER NUMERICOS*********************/
+                if (!preg_match($exprNumerica, $bean->pb_id_c)) {
+
+                    $bean->pb_id_c = "";
+                }
+                if (!preg_match($exprNumerica, $bean->duns_id_c)) {
+
+                    $bean->duns_id_c = "";
+                }
+
                 //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
                 $sql = new SugarQuery();
                 $sql->select(array('id', 'clean_name'));
@@ -150,14 +160,9 @@ class leads_validateString
                 $count = count($result);
 				//Get the Name of the account
 				$Accountone = $result[0];
-				
-                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
-                // $sqlLead = new SugarQuery();
-                // $sqlLead->select(array('id', 'clean_name_c'));
-                // $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
-                // $sqlLead->where()->equals('clean_name_c', $bean->clean_name_c);
-                // $sqlLead->where()->notEquals('id', $bean->id);
+                
                 /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
+                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
                 $sqlLead = new SugarQuery();
                 $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
                 $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
