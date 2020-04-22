@@ -264,11 +264,10 @@ class leads_validateString
         // $sqlLead->where()->notEquals('id', $bean->id);
         $sqlLead->where()->equals('deleted', '0');
         $resultLead = $sqlLead->execute();
+        $countLead = count($resultLead);
 
-        $GLOBALS['log']->fatal('R-- ' . print_r($resultLead, true));
-        $GLOBALS['log']->fatal('R-- ' . $resultLead[0]['id']);
+        $idPadre = $countLead>0? $resultLead[0]['id']:"";
 
-        $idPadre = $resultLead[0]['id'];
         return $idPadre;
 
     }
