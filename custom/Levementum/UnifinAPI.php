@@ -2079,4 +2079,32 @@ SQL;
             }
 
         }
+
+        public function postMambu($host, $fields,$auth){
+
+            $url = $host;
+            $fields_string = json_encode($fields);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            //curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Accept: application/vnd.mambu.v2+json',
+                    'Authorization: Basic '.$auth)
+            );
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            $response = json_decode($result, true);
+
+            return $response;
+
+        }
 }

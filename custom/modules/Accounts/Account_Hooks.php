@@ -1369,4 +1369,98 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
+
+    public function set_account_mambu($bean=null, $event= null, $args= null){
+
+        //variables para consumo de servicio
+        $url="https://uniclick.sandbox.mambu.com/api/clients/";
+        $user='crm_api';
+        $pwd='YZx7js,wdR,X@{F"';
+        $auth_encode=base64_encode( $user.':'.$pwd );
+
+        //variables para payload
+        $id_crm=$bean->id;
+        $nombre='';
+        $apellido='';
+        //$id_cliente_corto=$bean->idcliente_c;
+        $id_cliente_corto='92597';
+
+        if($bean->tipodepersona_c!='Persona Moral'){
+            $nombre=$bean->primernombre_c;
+            $apellido=$bean->apellidopaterno_c .' '.$bean->apellidomaterno_c;
+        }else{
+            $nombre=$bean->razonsocial_c;
+            $apellido='PM';
+        }
+        //Obteniendo referencias bancarias
+        $array_referencias=array();
+        if ($bean->load_relationship('refba_referencia_bancaria_accounts')) {
+
+            $referencias=$bean->refba_referencia_bancaria_accounts->getBeans();
+
+            if (!empty($referencias)) {
+                foreach ($referencias as $ref) {
+                    $ref_bancaria= $ref->numerocuenta_c;
+                    $nombre_banco=$ref->institucion;
+                    $new_referencia=array(
+                        "Referencia_Bancaria"=>$ref_bancaria,
+                        "Nombre_del_Banco_Clientes"=>$nombre_banco
+                        );
+                    array_push($array_referencias,$new_referencia);
+                }
+            }
+        }
+        $body = array(
+            "firstName" => $nombre,
+            "lastName" => $apellido,
+            "_Referencias_Bancarias_Clientes"=>$array_referencias,
+            "_Referencia_Crm"=>array(
+                "Id_Crm"=> $id_crm,
+                "id_cliente_corto"=>$id_cliente_corto
+            )
+        );
+
+        $GLOBALS['log']->fatal(json_encode($body));
+
+        $callApi = new UnifinAPI();
+        $resultado = $callApi->postMambu($url,$body,$auth_encode);
+
+        $GLOBALS['log']->fatal('--------------MAMBU RESPONSE-----------------');
+        $GLOBALS['log']->fatal($resultado);
+
+        if(!empty($resultado['encodedKey'])){
+
+            $bean->encodedkey_mambu_c=$resultado['encodedKey'];
+
+        }
+
+        //Obtener solicitudes
+        if ($bean->load_relationship('opportunities')) {
+
+            //Fetch related beans
+            $solicitudes=$bean->opportunities->getBeans();
+
+            if (!empty($solicitudes)) {
+                foreach ($solicitudes as $sol) {
+                    //Aplicar save a solicitudes de uniclick ¿Serán todas las opps de uniclick o solo 1?
+                    //para obligar a que se lance lh y disparar consumo de mambú en solicitudes
+                    if($sol->tipo_producto_c=='8'){
+                        $sol->save();
+                    }
+
+                }
+            }
+        }
+
+
+        /*
+        if($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' && $bean->encodedkey_mambu_c ==""){
+
+        }*/
+
+
+
+    }
+
+
 }
