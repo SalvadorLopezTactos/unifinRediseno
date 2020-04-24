@@ -35,20 +35,18 @@ class altaLeadServices extends SugarApi
 # OB003 Ajuste, tipo regimen fiscal valido
         if (!empty($args['lead']['regimen_fiscal_c']) && (in_array($args['lead']['regimen_fiscal_c'], $os, true))) {
 
-
             /** Agregamos atributos a cada lead y asociado */
 
             $obj_leads = $this->agrega_atributos($args);
 
-
             if ($args['lead']['regimen_fiscal_c'] != '3') {
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
-
 // Actualizamos el campo asignado a de cada registro nuevo
                 $this->get_asignado($response_Services, "1");
 
             } else {
+                /** PErsona Moral */
 
                 if (count($args['asociados']) > 0) {
 
@@ -62,11 +60,10 @@ class altaLeadServices extends SugarApi
 
                     /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
 
-                    //$GLOBALS['log']->fatal(print_r($obj_leads, true));
 
                     if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
-                            && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success') {
-
+                        && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
+                    ) {
                         /** Proceso de Guardado */
 
                         $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
@@ -78,35 +75,43 @@ class altaLeadServices extends SugarApi
                             }
                         }
                         // Actualizamos el campo asignado a de cada registro nuevo
-
                         $this->get_asignado($response_Services, "3");
-                    } else {
-                        $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "");
+                    }
+                    else {
 
-                        $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "");
+                        $GLOBALS['log']->fatal(print_r($obj_leads, true));
 
-                        if($obj_leads['asociados'][0]['formato_texto'] != 'success'
-                            || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success')
-                        {
-                            $response_Services ["asociados"][0] = $this->estatus(424, 'Formato de información no válido', '', "");
+                        if($obj_leads['lead']['requeridos'])
+                        $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "Error en Asociado");
 
+                        $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "", $obj_leads['asociados'][0]['requeridos_error']);
+
+
+
+
+                        if ($obj_leads['asociados'][0]['requeridos'] != 'success' || $obj_leads['asociados'][0]['formato_texto'] != 'success'
+                            || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success'
+                        ) {
+                            $arrayErrores = array();
+                            $obj_leads['asociados'][0]['requeridos'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['requeridos_error']) : "";
+                            $obj_leads['asociados'][0]['formato_texto'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['formato_texto_error']) : "";
+                            $obj_leads['asociados'][0]['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
+                            $obj_leads['asociados'][0]['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
+
+                            $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
                         }
-
-
                     }
 
-
                 } else {
-                    $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "");
+                    $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "","");
                 }
 
             }
-
-
         } else {
-            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "");
-
+            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "","");
         }
+
+        $GLOBALS['log']->fatal(print_r($response_Services, true));
 
         return $response_Services;
     }
@@ -115,10 +120,12 @@ class altaLeadServices extends SugarApi
     {
         $lead_paso1 = $this->validaReq($obj_leads);
         count($lead_paso1) == 0 ? $obj_leads['requeridos'] = "success" : $obj_leads['requeridos'] = "fail";
+        count($lead_paso1) > 0 ? $obj_leads['requeridos_error'] = $lead_paso1 : array();
 
         //  if (count($lead_paso1) == 0) {
         $lead_paso2 = $this->validaTextCampos($obj_leads);
         count($lead_paso2) == 0 ? $obj_leads['formato_texto'] = "success" : $obj_leads['formato_texto'] = "fail";
+        count($lead_paso2) > 0 ? $obj_leads['formato_texto_error'] = $lead_paso2 : array();
 
 
         //if (count($lead_paso2) == 0) {
@@ -139,8 +146,8 @@ class altaLeadServices extends SugarApi
         $lead_paso6 = $this->existsIn_Accounts($obj_leads, $clean_name);
         !empty($lead_paso6) ? $obj_leads['duplicados_en_cuentas'] = $lead_paso6 : $obj_leads['duplicados_en_cuentas'] = "";
 
-		$this->enviacorreo($lead_paso5,$lead_paso6);
-		
+        $this->enviacorreo($lead_paso5, $lead_paso6);
+
         return $obj_leads;
     }
 
@@ -246,15 +253,20 @@ class altaLeadServices extends SugarApi
 
                             $this->crea_relacion($parent_id, $id_lead);
                         }
-                        $response = $this->estatus(200, 'Alta de Leads exitoso', $id_lead, "Leads");
-
+                        $response = $this->estatus(200, 'Alta de Leads exitoso', $id_lead, "Leads","");
 
                     } else {
-                        $response = $this->estatus(424, 'Formato de información no válido', '', "");
+                        $arrayErrores = array();
+                        $lead_asociado['formato_texto'] == 'fail' ? $arrayErrores=$lead_asociado['formato_texto_error'] : "";
+                        $lead_asociado['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
+                        $lead_asociado['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
+
+                        $response = $this->estatus(424, 'Formato de información no válido', '', "", $arrayErrores);
                     }
 
                 } else {
-                    $response = $this->estatus(422, 'Información incompleta', '', "");
+
+                    $response = $this->estatus(422, 'Información incompleta', '', "", $lead_asociado['requeridos_error']);
                 }
             } else {
 
@@ -263,11 +275,12 @@ class altaLeadServices extends SugarApi
 
                     $this->crea_relacion($parent_id, $lead_asociado['duplicados_en_leads']);
                 }
-                $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads");
+                $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads","");
             }
         } else {
             $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas");
         }
+
 
         return $response;
     }
@@ -442,13 +455,9 @@ class altaLeadServices extends SugarApi
 
     public function crea_relacion($id_parent, $id_children)
     {
-
-
         $oLead = BeanFactory::getBean('Leads', $id_parent, array('disable_row_level_security' => true));
         $oLead->load_relationship('leads_leads_1');
         $oLead->leads_leads_1->add($id_children);
-
-
     }
 
     public function agrega_atributos($obj_input)
@@ -685,84 +694,89 @@ class altaLeadServices extends SugarApi
         return $existe;
     }
 
-    public function estatus($codigo, $descripcion, $id, $modulo)
+    public function estatus($codigo, $descripcion, $id, $modulo, $errores)
     {
         $array_status = array();
         $array_status['status'] = $codigo;
         $array_status['descripcion'] = $descripcion;
         $array_status['id'] = $id;
         $array_status['modulo'] = $modulo;
+        $array_status['errores'] = $errores;
+
 
         return $array_status;
     }
-	
-	public function enviacorreo($idlead = null, $idaccount = null)
+
+    public function enviacorreo($idlead = null, $idaccount = null)
     {
         require_once 'include/SugarPHPMailer.php';
-		$correo = '';
-		$user1 = '';
-		$cliente = '';
-		
-		$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
+        $correo = '';
+        $user1 = '';
+        $cliente = '';
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
 						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital. 
 						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
 						<br><br>Si tienes alguna duda contacta a:
 						<br><br>Equipo CRM
 						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
-		$GLOBALS['log']->fatal('account:'.$idaccount.' lead:'. $idlead);
-		if($idaccount != null || $idaccount != ''){
-			$beanaccount = BeanFactory::retrieveBean('Accounts',$idaccount);	
-			$cliente = $beanaccount->name;
-			if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
-				$GLOBALS['log']->fatal('ENvío mail x producto');
-				//Fetch related beans
-				$relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
-				foreach($relatedBeans as $rel){
-					$usuario = BeanFactory::retrieveBean('Users', $rel->assigned_user_id);
-					$user_name = $usuario->user_name;
-					$correo = $usuario->email1;
-					$user1 = $usuario->nombre_completo_c;
-					
-					if($user_name !=  'SinGestor'){				
-						$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user1.' correo'.$correo);
-						$mailHTML = str_replace ('user1',$user1,$mailHTML);
-						$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
-						
-						$mailer = MailerFactory::getSystemDefaultMailer();
-						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-						$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
-						$body = trim($mailHTML);
-						$mailer->setHtmlBody($body);
-						$mailer->clearRecipients();
-						$mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
-						$result = $mailer->send();
-						//$GLOBALS['log']->fatal($mailHTML);
-					}									
-				}
-			}
-		}else if($idlead != null && ( $idaccount == null || $idaccount == '' )){
-			$GLOBALS['log']->fatal('ENvío mail Lead');
-			
-			$beanlead = BeanFactory::retrieveBean('Leads',$idlead);							
-			$cliente = $beanlead->name;
-			$usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id);
-			$correo = $usuario->email1;
-			$user1 = $usuario->nombre_completo_c;
-			
-			$mailHTML = str_replace ('user1',$user1,$mailHTML);
-			$mailHTML = str_replace ('cliente1',$cliente,$mailHTML);
-						
-			$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
-			$mailer = MailerFactory::getSystemDefaultMailer();
-			$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-			$mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto '.$cliente.'.');
-			$body = trim($mailHTML);
-			$mailer->setHtmlBody($body);
-			$mailer->clearRecipients();
-			$mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
-			$result = $mailer->send();
-			//$GLOBALS['log']->fatal($mailHTML);	
-		}
+
+        $GLOBALS['log']->fatal('account:' . $idaccount . ' lead:' . $idlead);
+
+        if ($idaccount != null || $idaccount != '') {
+            $beanaccount = BeanFactory::retrieveBean('Accounts', $idaccount);
+            $cliente = $beanaccount->name;
+            if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
+                $GLOBALS['log']->fatal('ENvío mail x producto');
+                //Fetch related beans
+                $relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
+                foreach ($relatedBeans as $rel) {
+                    $usuario = BeanFactory::retrieveBean('Users', $rel->assigned_user_id);
+                    $user_name = $usuario->user_name;
+                    $correo = $usuario->email1;
+                    $user1 = $usuario->nombre_completo_c;
+
+                    if ($user_name != 'SinGestor') {
+                        $GLOBALS['log']->fatal('cliente' . $cliente . ' usuario' . $user1 . ' correo' . $correo);
+                        $mailHTML = str_replace('user1', $user1, $mailHTML);
+                        $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
+
+                        $mailer = MailerFactory::getSystemDefaultMailer();
+                        $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                        $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
+                        $body = trim($mailHTML);
+                        $mailer->setHtmlBody($body);
+                        $mailer->clearRecipients();
+                        $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
+                        $result = $mailer->send();
+                        //$GLOBALS['log']->fatal($mailHTML);
+                    }
+                }
+            }
+        } else if ($idlead != null && ($idaccount == null || $idaccount == '')) {
+            $GLOBALS['log']->fatal('ENvío mail Lead');
+
+            $beanlead = BeanFactory::retrieveBean('Leads', $idlead,array('disable_row_level_security' => true));
+            $cliente = $beanlead->name;
+            $usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id,array('disable_row_level_security' => true));
+            $correo = $usuario->email1;
+            $user1 = $usuario->nombre_completo_c;
+
+            $mailHTML = str_replace('user1', $user1, $mailHTML);
+            $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
+
+            //$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
+
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
+            $body = trim($mailHTML);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
+            $result = $mailer->send();
+            $GLOBALS['log']->fatal($result);
+        }
     }
 
 
