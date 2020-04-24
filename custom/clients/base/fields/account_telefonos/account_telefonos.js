@@ -2,7 +2,8 @@
     tel_tipo_list: null,
     pais_list: null,
     estatus_list: null,
-    newWhatsapp: null,
+    newWhatsapp: 0,
+    newArray: [], 
 
     events: {
         'keydown .existingTelephono': 'keyDownNewExtension',
@@ -18,8 +19,8 @@
         'change .Estatust': 'updateEstatust',           //Estatus
         'change .Extensiont': 'updateExtensiont',       //Extensión
         'change .Telefonot': 'updateTelefonot',         //Teléfono
-        'change .Whatsappt': 'updateWhatsapp',          //WhatsApp
-        'change .newWhatsapp': 'updateNewWhatsapp',     //Nuevo WhatsApp
+        'click .Whatsappt': 'updateWhatsapp',           //WhatsApp
+        'click .newWhatsapp': 'updateNewWhatsapp',      //Nuevo WhatsApp
         'change .newTipotelefono': 'updateNewTipo',     //Nuevo Tipo
     },
 
@@ -61,6 +62,16 @@
               document.getElementsByClassName('whatsapp-tel')[i].style.visibility = 'hidden';
             }
           }
+        }
+        if(this.newArray.length > 0) {
+          this.$('.newTipotelefono').select2('val',this.newArray[0]);
+          this.$('.newPais').select2('val',this.newArray[1]);
+          this.$('.newEstatus').select2('val',this.newArray[2]);
+          this.$('.newTelefono').val(this.newArray[3]);
+          this.$('.newExtension').val(this.newArray[4]);
+          this.newWhatsapp = this.newArray[5];
+          $('#nuevo').show();
+          this.newArray = [];
         }
     },
 
@@ -435,12 +446,21 @@
           }else{
               this.oTelefonos.telefono[index].whatsapp_c = 1;
           }
+          this.render();
     },
 
     updateNewWhatsapp: function(evt) {
-        var inputs = this.$('.newWhatsapp'),
-            input = this.$(evt.currentTarget),
-            index = inputs.index(input);
-        this.newWhatsapp = (input[0].checked == true) ? 1 : 0;
+        if(this.newWhatsapp) {
+          this.newWhatsapp = 0;
+        }else{
+          this.newWhatsapp = 1;
+        }
+        this.newArray.push(this.$('.newTipotelefono').select2('val'));
+        this.newArray.push(this.$('.newPais').select2('val'));
+        this.newArray.push(this.$('.newEstatus').select2('val'));
+        this.newArray.push(this.$('.newTelefono').val());
+        this.newArray.push(this.$('.newExtension').val());
+        this.newArray.push(this.newWhatsapp);
+        this.render();
     },
 })
