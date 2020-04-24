@@ -47,6 +47,10 @@
               <label class="record-label">Extensión</label>
               <input type="text" class="Extensiont" placeholder="Extensión" value="{{extension}}" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
             </div>
+            <div class="whatsapp-tel span1" >
+              <label class="record-label">WhatsApp</label>
+              <input type="checkbox" class="Whatsappt" placeholder="WhatsApp" value="{{whatsapp_c}}" data-field="campo6-tel" data-name="WhatsApp" {{#if whatsapp_c}}checked{{/if}}/>
+            </div>
             <div class="btn-group" style="margin: 15px 37px">
               <a href="javascript:void(0)" class="btn principal">
                 {{#if principal}}
@@ -108,7 +112,11 @@
             <label class="record-label">Extensión</label>
             <input type="text" class="newExtension" placeholder="Extensión" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
           </div>
-          <div class="btn-toolbar prevent-mousedown span4">
+          <div class="newwhatsapp-tel span1" style="display:none" id="nuevo">
+            <label class="record-label">WhatsApp</label>
+            <input type="checkbox" class="newWhatsapp" placeholder="WhatsApp" data-field="campo6-tel" data-name="WhatsApp"/>
+          </div>
+          <div class="btn-toolbar prevent-mousedown span3">
             <div class="btn-group" style="margin: 6px 0px">
               <a href="javascript:void(0)" class="btn addTelefono" rel="tooltip" title="Añadir Teléfono"><i class="fa fa-check"></i></a>
             </div>

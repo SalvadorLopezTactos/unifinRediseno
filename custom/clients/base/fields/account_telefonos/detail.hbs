@@ -14,6 +14,7 @@
       <th>Extensión</th>
       <th>Estatus</th>
       <th>Llamar</th>
+	  <th>WhatsApp</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
         <td>{{extension}}</td>
         <td>{{getUnifinListValue 'tel_estatus_list' estatus}}</td>
         <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;"></button></td>
+		<td>{{#if whatsapp_c}}<i class="fa fa-check"></i>{{/if}}</td>
       </tr>
     {{/each}}
   </tbody>
