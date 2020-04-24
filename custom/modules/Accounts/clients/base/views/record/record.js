@@ -4306,6 +4306,7 @@
         }
 
     },
+    
     get_phones: function () {
         //Extiende This
         this.oTelefonos = [];
@@ -4326,8 +4327,8 @@
                     var valor4 = data.records[i].telefono;
                     var valor5 = data.records[i].extension;
                     var valor6 = (data.records[i].principal == true) ? 1 : 0;
+                    var valor7 = (data.records[i].whatsapp_c == true) ? 1 : 0;
                     var idtel = data.records[i].id;
-
                     var telefono = {
                         "name": valor4,
                         "tipotelefono": valor1,
@@ -4336,10 +4337,10 @@
                         "extension": valor5,
                         "telefono": valor4,
                         "principal": valor6,
+                        "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
                         "id": idtel
                     };
-
                     var prev_telefono = {
                         "name": valor4,
                         "tipotelefono": valor1,
@@ -4348,13 +4349,13 @@
                         "extension": valor5,
                         "telefono": valor4,
                         "principal": valor6,
+                        "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
                         "id": idtel
                     };
                     contexto_cuenta.oTelefonos.telefono.push(telefono);
                     contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
                 }
-
                 cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
                 cont_tel.render();
                 //Oculta campo Accounts_telefonosV2

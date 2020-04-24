@@ -1,12 +1,11 @@
 <?php
+
 /**
  * Created by Tactos.
  * User: JG
  * Date: 26/12/19
  * Time: 10:15 AM
  */
-
-
 class leads_validateString
 {
 
@@ -131,13 +130,18 @@ class leads_validateString
 
     public function ExistenciaEnCuentas($bean = null, $event = null, $args = null)
     {
+        $idPadre = "";
 
-        $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO " . $GLOBALS['service']->platform);
+        $servicio= isset($GLOBALS['service']->platform)?$GLOBALS['service']->platform:"base";
 
-        if ($GLOBALS['service']->platform != "api" && $GLOBALS['service']->platform != "unifinAPI") {
+        if ($servicio!= "api" && $servicio != "unifinAPI") {
+
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
             if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
 
+                $idPadre = $this->createCleanName($bean->leads_leads_1_name);
+                //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+                // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
                 $exprNumerica = "/^[0-9]*$/";
                 /**********************VALIDACION DE CAMPOS PB ID Y DUNS ID DEBEN SER NUMERICOS*********************/
                 if (!preg_match($exprNumerica, $bean->pb_id_c)) {
@@ -158,16 +162,13 @@ class leads_validateString
 
                 $result = $sql->execute();
                 $count = count($result);
-				//Get the Name of the account
-				$Accountone = $result[0];
-                
                 /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
                 $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
                 $sqlLead = new SugarQuery();
                 $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
                 $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
                 $sqlLead->where()
-                ->queryOr()
+                    ->queryOr()
                     ->equals('clean_name_c', $bean->clean_name_c)
                     ->equals('pb_id_c', $bean->pb_id_c)
                     ->equals('duns_id_c', $bean->duns_id_c);
@@ -175,40 +176,100 @@ class leads_validateString
                 $resultLead = $sqlLead->execute();
                 // $GLOBALS['log']->fatal("Result SugarQuery Lead " . print_r($resultLead));
                 $countLead = count($resultLead);
-				//Get the Name of the account
-				$Leadone = $resultLead[0];
-				
+                //Get the Name of the account
+               // $Leadone = $resultLead[0];
+
+                $idExistenteLead = $countLead>0? $resultLead[0]['id']:"";
+
                 $GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
 
+                if ($count > 0 || $countLead > 0) {
+                    if ($_REQUEST['module'] != 'Import') {
 
-                if ($count > 0 || $countLead > 0) {					
-					if ($_REQUEST['module'] != 'Import') {
-						
-						throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
-						
-                    }else{						
+                        throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
+
+                    } else {
                         $bean->deleted = 1;
-                        $bean->resultado_de_carga_c = 'Registro Duplicado';		
-						
+                        $bean->resultado_de_carga_c = 'Registro Duplicado';
+
+                        if ($countLead > 0 && $bean->leads_leads_1_name != "" && $idExistenteLead != "" && $idPadre != "") {
+                            // recuerpara el id del lead existente
+                            // actualizarlo y agregra el id padre
+                            // $bean->leads_leads_1leads_ida="id padre recuperado";
+                            // getbeand y  save
+                            $GLOBALS['log']->fatal('Registro duplicado en importacion ' . $idExistenteLead);
+
+                            $beanLeadExist = BeanFactory::retrieveBean('Leads', $idExistenteLead, array('disable_row_level_security' => true));
+                            $beanLeadExist->leads_leads_1leads_ida = $idPadre;
+                            $beanLeadExist->leads_leads_1_name = $bean->leads_leads_1_name;
+                            $beanLeadExist->save();
+                        }
                     }
 
                 } else {
                     $bean->resultado_de_carga_c = 'Registro Exitoso';
+                    $bean->leads_leads_1leads_ida = $idPadre != "" ? $idPadre : "";
+
                 }
                 $fechaCarga = date("Ymd");
                 //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
 
                 $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $_REQUEST['module'] == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
-
-
-            } else {
-                //  $GLOBALS['log']->fatal("Ya esta convertido o cancelado no hago nada ");
-
             }
         }
+    }
+    public function createCleanName($nameCuenta)
+    {
+        // $GLOBALS['log']->fatal('QUITO ESPACIOS Y REEMPLAZO POR NUEVOS VALORES');
+
+        global $db;
+        global $app_list_strings, $current_user; //Obtención de listas de valores
 
 
-        //$GLOBALS['log']->fatal("Termina validacion dUPLICADO ");
+        $limpianomcomercial = preg_replace('/\s\s+/', ' ', $nameCuenta);
+
+        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
+        $acronimos = $app_list_strings['validacion_duplicados_list'];
+
+        $nombre = mb_strtoupper($limpianomcomercial, "UTF-8");
+        $separa = explode(" ", $nombre);
+        $separa_limpio = $separa;
+        $longitud = count($separa);
+        $eliminados = 0;
+        //Itera el arreglo separado
+        for ($i = 0; $i < $longitud; $i++) {
+            foreach ($tipo as $t => $key) {
+                $separa[$i] = str_replace($key, "", $separa[$i]);
+                $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
+            }
+            foreach ($acronimos as $a => $key) {
+                if ($separa[$i] == $a) {
+                    $separa[$i] = "";
+                    $eliminados++;
+                }
+            }
+        }
+        //Condicion para eliminar los acronimos
+        if (($longitud - $eliminados) <= 1) {
+            $separa = $separa_limpio;
+        }
+        //Convierte el array a string nuevamente
+        $une = implode($separa);
+        $cleanName = $une;
+
+        $sqlLead = new SugarQuery();
+        $sqlLead->select(array('id', 'clean_name_c'));
+        $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
+        $sqlLead->where()->equals('clean_name_c', $cleanName);
+        // $sqlLead->where()->notEquals('id', $bean->id);
+        $sqlLead->where()->equals('deleted', '0');
+        $resultLead = $sqlLead->execute();
+        $countLead = count($resultLead);
+
+        $idPadre = $countLead>0? $resultLead[0]['id']:"";
+
+        return $idPadre;
+
     }
 
 }

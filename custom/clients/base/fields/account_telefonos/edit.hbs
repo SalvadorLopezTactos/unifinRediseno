@@ -47,6 +47,15 @@
               <label class="record-label">Extensión</label>
               <input type="text" class="Extensiont" placeholder="Extensión" value="{{extension}}" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
             </div>
+            <div class="whatsapp-tel span1" style="margin: 15px 37px" data-toggle="buttons-checkbox">
+                <a href="javascript:void(0)" class="Whatsappt" title="WhatsAppt">
+                {{#if whatsapp_c}}
+                    <img src="custom/Levementum/images/whatsapp_active.ico">
+                {{else}}
+                    <img src="custom/Levementum/images/whatsapp_inactive.ico">
+                {{/if}}
+                </a>
+            </div>
             <div class="btn-group" style="margin: 15px 37px">
               <a href="javascript:void(0)" class="btn principal">
                 {{#if principal}}
@@ -75,7 +84,7 @@
         <div class="row-fluid">
           <div class="span4 campo1-tel ">
             <label class="record-label">Tipo de Teléfono</label>
-            <select class="row-fluid select2  newTipotelefono" data-field="campo1tel">
+            <select class="row-fluid select2 newTipotelefono" data-field="campo1tel">
               {{#each tel_tipo_list}}
                 <option value="{{@key}}" {{ifSelected @key "1"}}>{{this}}</option>
               {{/each}}
@@ -108,7 +117,16 @@
             <label class="record-label">Extensión</label>
             <input type="text" class="newExtension" placeholder="Extensión" data-field="campo5-tel" data-name="Extensión" maxlength="6"/>
           </div>
-          <div class="btn-toolbar prevent-mousedown span4">
+          <div class="newwhatsapp-tel span1" style="margin:15px 37px; display:none" data-toggle="buttons-checkbox" id="nuevo">
+            <a href="javascript:void(0)" class="newWhatsapp" title="WhatsAppt">
+            {{#if newWhatsapp}}
+                <img src="custom/Levementum/images/whatsapp_active.ico">
+            {{else}}
+                <img src="custom/Levementum/images/whatsapp_inactive.ico">
+            {{/if}}
+            </a>
+          </div>
+          <div class="btn-toolbar prevent-mousedown span2">
             <div class="btn-group" style="margin: 6px 0px">
               <a href="javascript:void(0)" class="btn addTelefono" rel="tooltip" title="Añadir Teléfono"><i class="fa fa-check"></i></a>
             </div>

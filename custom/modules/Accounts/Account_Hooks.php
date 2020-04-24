@@ -193,7 +193,6 @@ SQL;
                 }else{
                     $telefono = BeanFactory::newBean('Tel_Telefonos');
                 }
-
                 $telefono->name = $a_telefono['telefono'] . ' ' . $a_telefono['extension'];
                 $telefono->secuencia = $a_telefono['secuencia'];
                 $telefono->telefono = $a_telefono['telefono'];
@@ -206,8 +205,8 @@ SQL;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
-                //add current records ids to list
-                //$GLOBALS['log']->fatal('>>>>llamada desde account_telefonos<<<<<<<');
+                $telefono->whatsapp_c = $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
+                $GLOBALS['log']->fatal('WhatsApp: '.$telefono->whatsapp_c);
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
