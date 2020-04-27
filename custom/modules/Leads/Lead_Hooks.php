@@ -1,4 +1,4 @@
-<?php
+s<?php
 /**
  * Created by PhpStorm.
  * User: Jorge
@@ -89,5 +89,12 @@ SQL;
             $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Error ".$e->getMessage());
         }
 
+    }
+
+    public function cambiaPuesto($bean=null, $event= null, $args= null){
+        //Cambia el puesto a Otro si viene vacio.
+        if($bean->puesto_c == ''){
+          $bean->puesto_c = 'Otro';
+        }
     }
 }

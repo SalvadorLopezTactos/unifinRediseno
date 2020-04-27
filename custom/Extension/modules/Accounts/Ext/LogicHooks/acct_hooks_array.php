@@ -55,7 +55,6 @@ $hook_array['after_save'][] = Array(
     'insertaPLDUNICS'
 );
 
-
 $hook_array['after_save'][] = Array(
     8,
     'Manage Related Accounts of type Contact',
@@ -126,6 +125,14 @@ $hook_array['before_save'][] = Array(
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
     'crearFolioCliente'
+);
+
+$hook_array['before_save'][] = Array(
+    8,
+    'Cambia puesto vacio por Otro',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'cambiaPuesto'
 );
 
 /* //Se deshabilita validación lista negra
