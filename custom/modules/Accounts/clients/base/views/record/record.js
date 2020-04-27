@@ -5437,8 +5437,8 @@
     validaPagWeb: function (fields, errors, callback) {
         var webSite = this.model.get('website');
         if (webSite != "") {
-            var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
 
+            var expreg=/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
             if (!expreg.test(webSite)) {
 
                 app.alert.show('error-website', {
