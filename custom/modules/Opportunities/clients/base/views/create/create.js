@@ -1385,17 +1385,22 @@
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
         var admin=0;
+        
         if (typeof this.model.get('account_id') != "undefined" && this.model.get('account_id')!= "" ) {
           app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
-                console.log('Info de Accounts:');
+                
                 console.log(data);
+
                 for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].indicador!=""){
+
+                    if(data.records[i].indicador!="" && data.records[i].inactivo == false){
+
                         var array_indicador=this._getIndicador(data.records[i].indicador);
+                        
                         for(var j=0;j<array_indicador.length;j++){
                             if(array_indicador[j]=='16'){
-                                admin++;
+                                admin++; 
                             }
                         }
                     }
@@ -1407,7 +1412,6 @@
                         });
                         errors['indicador_16'] = errors['indicador_16'] || {};
                         errors['indicador_16'].required = true;
-
                 }
                 callback(null, fields, errors);
             }, self),
