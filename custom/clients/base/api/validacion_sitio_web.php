@@ -47,7 +47,7 @@ class validacion_sitio_web extends SugarApi
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         //Interpreta resultado
-        if($httpcode>=200 && $httpcode<300){
+        if($httpcode>=200 && $httpcode<400){
             return '00';
         } else {
             return '02';
