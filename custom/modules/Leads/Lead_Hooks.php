@@ -1,4 +1,4 @@
-s<?php
+<?php
 /**
  * Created by PhpStorm.
  * User: Jorge
