@@ -695,7 +695,7 @@ class ResumenClienteAPI extends SugarApi
                         break;
                     case '7': //Credito SOS
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
-                        $arr_principal['leasing']['cobranza'] = $cobranza;
+                        $arr_principal['credito_sos']['cobranza'] = $cobranza;
                         break;
                     case '8': //Uniclick
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
