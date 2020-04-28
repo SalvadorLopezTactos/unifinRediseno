@@ -585,6 +585,15 @@
         } else {
             this.$('.newNumExt').css('border-color', '');
         }
+		
+		if (this.nuevaDireccion.inactivo == "0" ) {
+            errorMsg += '<br><b>Número Exterior</b>';
+            dirError = true;
+            dirErrorCounter++;
+            this.$('.newNumExt').css('border-color', 'red');
+        } else {
+            this.$('.newNumExt').css('border-color', '');
+        }
 
         if (dirError && dirErrorCounter>=1) {
             errorMsg = 'Hace falta completar la siguiente información en la <b>Direcci\u00F3n</b>:' + errorMsg;
@@ -613,10 +622,13 @@
             duplicado = (direccion[key].colonia == this.nuevaDireccion.colonia) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].calle.trim().toLowerCase() == this.nuevaDireccion.calle.trim().toLowerCase()) ? duplicado+1 : duplicado;
             duplicado = (direccion[key].numext.trim().toLowerCase() == this.nuevaDireccion.numext.trim().toLowerCase()) ? duplicado+1 : duplicado;
-            cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2')) ? cDireccionFiscal+1 : cDireccionFiscal;
-            cDireccionAdmin = (direccion[key].indicadorSeleccionados.includes('16')) ? cDireccionAdmin+1 : cDireccionAdmin;
+			duplicado = (direccion[key].inactivo == this.nuevaDireccion.inactivo && this.nuevaDireccion.inactivo == 0) ? duplicado+1 : duplicado;
+            //cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0) ? cDireccionFiscal+1 : cDireccionFiscal;
+            //cDireccionAdmin = (direccion[key].indicadorSeleccionados.includes('16') && direccion[key].inactivo == 0) ? cDireccionAdmin+1 : cDireccionAdmin;
+			if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){ cDireccionFiscal = cDireccionFiscal+1; }
+			if(direccion[key].indicadorSeleccionados.includes('16') && direccion[key].inactivo == 0){ cDireccionAdmin = cDireccionAdmin+1 ; }
             //Valida duplicado
-            if(duplicado == 8){
+            if(duplicado == 9){
                 cDuplicado++;
             }
         });
@@ -1078,15 +1090,15 @@
             var direccion = cont_dir.oDirecciones.direccion;
             for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
                 //Indicador: 1.- Correspondencia
-                if(direccion[iDireccion].indicadorSeleccionados.includes('1')){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('1') && direccion[iDireccion].inactivo == 0){
                     cDireccionCorrs++;
                 }
                 //Indicador: 2 = Fiscal
-                if(direccion[iDireccion].indicadorSeleccionados.includes('2')){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('2') && direccion[iDireccion].inactivo == 0){
                     cDireccionFiscal++;
                 }
                 //Indicador: 16 = Administración
-                if(direccion[iDireccion].indicadorSeleccionados.includes('16')){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('16') && direccion[iDireccion].inactivo == 0){
                     cDireccionAdmin++;
                 }
 

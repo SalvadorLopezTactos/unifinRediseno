@@ -475,17 +475,18 @@
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length - 1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
-                objDirecciones.eq(i).find('.numExtExisting').val() +
-                objDirecciones.eq(i).find('.numIntExisting').val() +
-                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
-                objDirecciones.eq(i).find('.postalInputTempExisting').val();
-
-            concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
-
+			if(objDirecciones.eq(i).find('select.inactivo option:selected') == 0){
+				strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+					objDirecciones.eq(i).find('.numExtExisting').val() +
+					objDirecciones.eq(i).find('.numIntExisting').val() +
+					objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+					objDirecciones.eq(i).find('.postalInputTempExisting').val();
+	
+				concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+			}
         }
 
         // validamos  el arreglo generado
@@ -1761,30 +1762,54 @@
                     autoClose: false
                 });
             } else {
-                //Valdación Nacional
-                if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                    var nacional = 0;
-                    console.log('Validacion Dir.Nacional');
-                    var direcciones = this.oDirecciones.direccion;
-                    for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
-                            nacional = 1;
-                        }
-                    }
-                    //Valida variable nacional
-                    if (nacional != 1) {
-                        console.log('Dir. Nacional requerida');
-                        errors[$(".addDireccion")] = errors['account_direcciones'] || {};
-                        errors[$(".addDireccion")].required = true;
-
-                        $('.direcciondashlet').css('border-color', 'red');
-                        app.alert.show("Direccion nacional requerida", {
-                            level: "error",
-                            title: "Al menos una direccion nacional es requerida.",
-                            autoClose: false
-                        });
+				//Dirección activa
+                var activa = 0;
+                console.log('Validacion dir.activa');
+                console.log(direcciones);
+                var direcciones = this.oDirecciones.direccion;
+                for (i = 0; i < direcciones.length; i++) {
+                    if (direcciones[i].inactivo == 0) {
+                        activa ++;
                     }
                 }
+                //Valida variable nacional
+                if (activa > 0 ) {
+					//Valdación Nacional
+					if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+						var nacional = 0;
+						console.log('Validacion Dir.Nacional');
+						var direcciones = this.oDirecciones.direccion;
+						for (i = 0; i < direcciones.length; i++) {
+							if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0 ) {
+								nacional = 1;
+							}
+						}
+						//Valida variable nacional
+						if (nacional != 1) {
+							console.log('Dir. Nacional requerida');
+							errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+							errors[$(".addDireccion")].required = true;
+	
+							$('.direcciondashlet').css('border-color', 'red');
+							app.alert.show("Direccion nacional requerida", {
+								level: "error",
+								title: "Al menos una direccion nacional es requerida.",
+								autoClose: false
+							});
+						}
+					}
+				}else {
+					console.log('Dir. activa requerida');
+                    errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+                    errors[$(".addDireccion")].required = true;
+
+                    $('.direcciondashlet').css('border-color', 'red');
+                    app.alert.show("Direccion nacional activa requerida", {
+                        level: "error",
+                        title: "Al menos una direcci\u00F3n nacional activa es requerida.",
+                        autoClose: false
+                    });
+				}
             }
         }
         callback(null, fields, errors);
@@ -3156,7 +3181,7 @@
             var indices = [];
             for (var i = 0; i < direccion.length; i++) {
                 for (var j = 0; j < direccion.length; j++) {
-                    if (i != j && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal) {
+                    if (i != j &&  direccion[i].inactivo == 0 && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo ) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -3378,8 +3403,10 @@
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
-                    var valorecupera = this._getIndicador(value[i].indicador);
-                    totalindicadores = totalindicadores + "," + valorecupera;
+					if( this._getIndicador(value[i].inactivo) == 0 ){
+						var valorecupera = this._getIndicador(value[i].indicador);
+						totalindicadores = totalindicadores + "," + valorecupera;
+					}
                 }
             }
 
@@ -3476,8 +3503,10 @@
 
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
-                    var valorecupera = this._getIndicador(value[i].indicador);
-                    totalindicadores = totalindicadores + "," + valorecupera;
+					if( this._getIndicador(value[i].inactivo) == 0){
+						var valorecupera = this._getIndicador(value[i].indicador);
+						totalindicadores = totalindicadores + "," + valorecupera;
+					}
                 }
             }
 
@@ -4957,7 +4986,20 @@
         }
         if (_.isEmpty(this.oDirecciones.direccion)) {
             necesarios = necesarios + '<b>Dirección<br></b>';
-        }
+        }else{
+			var direcciones = 0;
+			var tipodireccion= this.oDirecciones.direccion;
+            if (tipodireccion.length > 0) {
+                for(var i=0;i<tipodireccion.length;i++){
+                    if(tipodireccion[i].inactivo == 1 ){
+                        direcciones++;
+                    }
+                }
+            }
+			if(direcciones == tipodireccion.length){
+				necesarios = necesarios + '<b>Dirección<br></b>';
+			}
+		}
         if (this.model.get('tipodepersona_c') != "Persona Moral") {
             if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
                 necesarios = necesarios + '<b>Primer Nombre</b><br>';
