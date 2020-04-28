@@ -320,3 +320,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL20'] = 'Nuevo Panel 20';
 $mod_strings['LBL_CONVERSION_GCLID'] = 'Conversión GCLID';
 $mod_strings['LBL_NO_WEBSITE'] = 'No tiene página web';
 $mod_strings['LBL_NIVEL_DIGITALIZACION_C'] = 'Nivel de Digitalización';
+$mod_strings['LBL_ENCODEDKEY_MAMBU'] = 'Encoded Key Mambu';

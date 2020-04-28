@@ -94,3 +94,11 @@ $hook_array['before_save'][] = Array(
     'OpportunityLogic', // name of the class
     'cancelaSOS'
 );
+
+$hook_array['after_save'][] = Array(
+    10,
+    'Crea linea de credito para producto Uniclick solamente',
+    'custom/modules/Opportunities/opp_mambu.php',
+    'MambuLogic', // name of the class
+    'create_LC'
+);
