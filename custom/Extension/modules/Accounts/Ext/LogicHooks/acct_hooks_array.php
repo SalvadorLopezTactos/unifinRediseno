@@ -55,7 +55,6 @@ $hook_array['after_save'][] = Array(
     'insertaPLDUNICS'
 );
 
-
 $hook_array['after_save'][] = Array(
     8,
     'Manage Related Accounts of type Contact',
