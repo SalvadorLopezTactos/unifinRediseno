@@ -1372,5 +1372,6 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
-
 }
+
+
