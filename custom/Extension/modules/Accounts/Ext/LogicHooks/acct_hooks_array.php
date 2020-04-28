@@ -127,14 +127,6 @@ $hook_array['before_save'][] = Array(
     'crearFolioCliente'
 );
 
-$hook_array['before_save'][] = Array(
-    8,
-    'Cambia puesto vacio por Otro',
-    'custom/modules/Accounts/Account_Hooks.php',
-    'Account_Hooks',
-    'cambiaPuesto'
-);
-
 /* //Se deshabilita validación lista negra
 $hook_array['before_save'][] = Array(
     8,
