@@ -567,7 +567,15 @@ extendsFrom: 'RecordView',
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records <= 0) {
+
+                                            var flag_inactivo =0;
+                                            for(var i=0;i<data.records.length;i++){
+                                                if(data.records[i].inactivo==true){
+                                                    flag_inactivo++;
+                                                }   
+                                            }
+
+                                            if (data.records.length <= flag_inactivo) {
                                                 RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
                                             }
                                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
@@ -805,7 +813,15 @@ extendsFrom: 'RecordView',
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records <= 0) {
+
+                                            var flag_inactivo =0;
+                                            for(var i=0;i<data.records.length;i++){
+                                                if(data.records[i].inactivo==true){
+                                                    flag_inactivo++;
+                                                }   
+                                            }
+
+                                            if (data.records.length <= flag_inactivo) {
                                                 RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
                                             }
                                             if (RequeridosProvRec != "") {
@@ -839,7 +855,15 @@ extendsFrom: 'RecordView',
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records <= 0) {
+
+                                            var flag_inactivo =0;
+                                            for(var i=0;i<data.records.length;i++){
+                                                if(data.records[i].inactivo==true){
+                                                    flag_inactivo++;
+                                                }   
+                                            }
+
+                                            if (data.records.length <= flag_inactivo) {
                                                 RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                                             }
                                             if (RequeridosProvRec != "") {
@@ -1252,11 +1276,11 @@ extendsFrom: 'RecordView',
                     //Itera direcciones
                     for (var d = 0; d < data[1].contents.records.length; d++) {
                         //Itera direccion Particular
-                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1')) {
+                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
                             direP++;
                         }
                         //Valida direccion Fiscal
-                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2')) {
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2') && data[1].contents.records[d].inactivo == false) {
                             direF++;
                         }
                     }
