@@ -1653,11 +1653,15 @@ console.log(name);
             var correspondecia = 0;
             app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id') + '/link/accounts_dire_direccion_1'), null, {
                 success: _.bind(function (data) {
-                    console.log('Info de Accounts:');
+                    
                     console.log(data);
+
                     for (var i = 0; i < data.records.length; i++) {
-                        if (data.records[i].indicador != "") {
+
+                        if (data.records[i].indicador != "" && data.records[i].inactivo == false) {
+
                             var array_indicador = this._getIndicador(data.records[i].indicador);
+                            
                             for (var j = 0; j < array_indicador.length; j++) {
                                 if (array_indicador[j] == '1') {
                                     correspondecia++;

@@ -520,6 +520,31 @@
                     title: "Al menos una direccion es requerida.",
                     autoClose: false
                 });
+            } else {
+				//Dirección activa
+                var activa = 0;
+                console.log('Validacion dir.activa');
+                console.log(direcciones);
+                var direcciones = this.oDirecciones.direccion;
+                for (i = 0; i < direcciones.length; i++) {
+                    if (direcciones[i].inactivo == 0) {
+                        activa ++;
+                    }
+                }
+                //Valida variable nacional
+                if (activa == 0 ) {
+					//Valdaci�n Nacional
+					console.log('Dir.activa requerida');
+					errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+					errors[$(".addDireccion")].required = true;
+	
+					$('.direcciondashlet').css('border-color', 'red');
+					app.alert.show("Direccion activa requerida", {
+						level: "error",
+						title: "Al menos una direcci\u00F3n activa es requerida.",
+						autoClose: false
+					});					
+                }
             }
         }
         //Campos requeridos
@@ -580,7 +605,7 @@
             var indices=[];
             for (var i = 0; i < direccion.length; i++) {
                 for (var j = 0; j < direccion.length; j++) {
-                    if (i!=j && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal) {
+                    if (i!=j &&  direccion[i].inactivo == 0 && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -1531,7 +1556,7 @@
                 var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     for(var i=0;i<tipodireccion.length;i++){
-                        if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
+                        if(tipodireccion[i].inactivo == 0 && (tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7"))){
                             direcciones++;
                         }
                     }
