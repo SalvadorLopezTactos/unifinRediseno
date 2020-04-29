@@ -697,7 +697,7 @@ SQL;
     {
         if($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar') {
+                if ($bean->field_defs[$field]['type'] == 'varchar' && $field !='encodedkey_mambu_c') {
                     $value = mb_strtoupper($value, "UTF-8");
                     $bean->$field = $value;
                 }
