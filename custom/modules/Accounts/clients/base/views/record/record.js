@@ -280,6 +280,8 @@
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+
 
     },
 
@@ -5168,6 +5170,7 @@
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['uniclick'] = Productos[key];
+
                             break;
                         default:
                             break;
@@ -5549,5 +5552,32 @@
       else {
         $('[data-name="website"]').attr('style','pointer-events:auto');
       }
+    },
+
+    requeridosUniclickCanal:function (fields, errors, callback) {
+
+        var faltantesUniclickCanal = 0;
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+
+
+        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+            faltantesUniclickCanal += 1;
+        }
+        else {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+        }
+
+        if (faltantesUniclickCanal > 0) {
+            app.alert.show("Faltante canal Uniclick", {
+                level: "error",
+                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+                autoClose: false
+            });
+            errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+            errors['error_UniclickUP'].required = true;
+        }
+
+        callback(null, fields, errors);
     },
 })
