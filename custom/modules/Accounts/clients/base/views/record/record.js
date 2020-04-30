@@ -1793,10 +1793,12 @@
 							$('.direcciondashlet').css('border-color', 'red');
 							app.alert.show("Direccion nacional requerida", {
 								level: "error",
-								title: "Al menos una direccion nacional es requerida.",
+								title: "Al menos una direcci\u00F3n nacional es requerida.",
 								autoClose: false
 							});
 						}
+					}else{
+						callback(null, fields, errors);
 					}
 				}else {
 					console.log('Dir. activa requerida');
@@ -3193,7 +3195,7 @@
                 app.alert.show('error_direccion_duplicada', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen direcciones iguales,favor de corregir.'
+                    messages: 'Existen direcciones iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {
