@@ -907,7 +907,7 @@
                   app.alert.show('error_direccion_duplicada', {
                       level: 'error',
                       autoClose: false,
-                      messages: 'Existen direcciones iguales,favor de corregir.'
+                      messages: 'Existen direcciones iguales, favor de corregir.'
                   });
                   //$($input).focus();
                   if(indices.length>0) {
@@ -2002,7 +2002,7 @@
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                    messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');

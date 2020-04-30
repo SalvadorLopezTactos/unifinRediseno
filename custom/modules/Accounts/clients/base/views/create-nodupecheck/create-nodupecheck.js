@@ -517,7 +517,7 @@
                 $('.direcciondashlet').css('border-color', 'red');
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Al menos una direccion es requerida.",
+                    title: "Al menos una direcci\u00F3n es requerida.",
                     autoClose: false
                 });
             } else {
@@ -617,7 +617,7 @@
                     app.alert.show('error_direccion_duplicada', {
                         level: 'error',
                         autoClose: false,
-                        messages: 'Existen direcciones iguales,favor de corregir.'
+                        messages: 'Existen direcciones iguales, favor de corregir.'
                     });
                     //$($input).focus();
                     if(indices.length>0) {
