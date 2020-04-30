@@ -19,27 +19,30 @@
         this._super("initialize", [options]);
 
         /*
-          Contexto campos custom
-        */
+         Contexto campos custom
+         */
         //Teléfonos
         this.oTelefonos = [];
         this.oTelefonos.telefono = [];
-        this.prev_oTelefonos=[];
-        this.prev_oTelefonos.prev_telefono=[];
+        this.prev_oTelefonos = [];
+        this.prev_oTelefonos.prev_telefono = [];
 
         //Direcciones
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
-        this.prev_oDirecciones=[];
-        this.prev_oDirecciones.prev_direccion=[];
+        this.prev_oDirecciones = [];
+        this.prev_oDirecciones.prev_direccion = [];
 
         //v360
         this.ResumenCliente = [];
 
         //PLD
         this.ProductosPLD = [];
-        this.prev_ProductosPLD=[];
+        this.prev_ProductosPLD = [];
 
+        // UniProductos
+        this.Oproductos = [];
+        this.Oproductos.productos = [];
 
         this.enableDuplicateCheck = true;
 
@@ -304,6 +307,8 @@
         this.model.on('change:no_website_c',this.rowebsite, this);
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+
 
     },
 
@@ -399,7 +404,7 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
         
         //Oculta panel de uni_productos
-        this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
+        //this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
         
         //Deshabilita campo cuenta especial
         if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
@@ -1962,5 +1967,31 @@
       else {
         $('[data-name="website"]').attr('style','pointer-events:auto');
       }
+    },
+    requeridosUniclickCanal:function (fields, errors, callback) {
+
+        var faltantesUniclickCanal = 0;
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+
+
+        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+            faltantesUniclickCanal += 1;
+        }
+        else {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+        }
+
+        if (faltantesUniclickCanal > 0) {
+            app.alert.show("Faltante canal Uniclick", {
+                level: "error",
+                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+                autoClose: false
+            });
+            errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+            errors['error_UniclickUP'].required = true;
+        }
+
+        callback(null, fields, errors);
     },
 })

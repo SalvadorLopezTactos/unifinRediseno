@@ -398,6 +398,15 @@
                         </select>
                     </div>
                 {{/if}}
+                <div class="u_canal">
+                    <label class="record-label mpad">Canal</label>
+                    <select class="row-fluid select2 list_u_canal " data-field="list_u_canal">
+                        {{#each canales_ddw_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ResumenProductos.uniclick.canal_c}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
             </td>
         </tr>
     </table>
