@@ -280,6 +280,8 @@
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+
 
     },
 
@@ -1793,10 +1795,12 @@
 							$('.direcciondashlet').css('border-color', 'red');
 							app.alert.show("Direccion nacional requerida", {
 								level: "error",
-								title: "Al menos una direccion nacional es requerida.",
+								title: "Al menos una direcci\u00F3n nacional es requerida.",
 								autoClose: false
 							});
 						}
+					}else{
+						callback(null, fields, errors);
 					}
 				}else {
 					console.log('Dir. activa requerida');
@@ -3193,7 +3197,7 @@
                 app.alert.show('error_direccion_duplicada', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen direcciones iguales,favor de corregir.'
+                    messages: 'Existen direcciones iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {
@@ -3527,7 +3531,7 @@
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                    messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
@@ -5168,6 +5172,7 @@
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['uniclick'] = Productos[key];
+
                             break;
                         default:
                             break;
@@ -5549,5 +5554,32 @@
       else {
         $('[data-name="website"]').attr('style','pointer-events:auto');
       }
+    },
+
+    requeridosUniclickCanal:function (fields, errors, callback) {
+
+        var faltantesUniclickCanal = 0;
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+
+
+        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+            faltantesUniclickCanal += 1;
+        }
+        else {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+        }
+
+        if (faltantesUniclickCanal > 0) {
+            app.alert.show("Faltante canal Uniclick", {
+                level: "error",
+                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+                autoClose: false
+            });
+            errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+            errors['error_UniclickUP'].required = true;
+        }
+
+        callback(null, fields, errors);
     },
 })

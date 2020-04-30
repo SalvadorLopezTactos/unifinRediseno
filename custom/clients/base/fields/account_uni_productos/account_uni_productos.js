@@ -36,6 +36,7 @@
 
         this.tipoProducto = {
             'leasing': {
+                'producto':'1',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -49,6 +50,7 @@
                 'assigned_user_id': ''
             },
             'factoring': {
+                'producto':'4',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -62,6 +64,7 @@
                 'assigned_user_id': ''
             },
             'credito_auto': {
+                'producto':'3',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -75,6 +78,7 @@
                 'assigned_user_id': ''
             },
             'fleet': {
+                'producto':'6',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -88,6 +92,7 @@
                 'assigned_user_id': ''
             },
             'uniclick': {
+                'producto':'8',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -199,6 +204,8 @@
         } catch (err) {
             console.log(err.message);
         }
+        //$('.list_u_canal').select2('val',cont_uni_p.ResumenProductos.uniclick.canal_c ); //lista Canal uniclcick
+
         //Funcion para dar estilo select2 a las listas deplegables.
         var $select = $('select.select2');
         $select.select2();
@@ -675,10 +682,28 @@
                         this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
                     }
                 }
+                // Guarda campo Canala unilcik
+                console.log(this.tipoProducto);
+                this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+                this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
+
                 //Establece el objeto para guardar
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
+
+
         }
+
+        if(contexto_cuenta.createMode)
+        {
+            //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+            this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
+
+            //Establece el objeto para guardar
+            this.model.set('account_uni_productos', this.tipoProducto);
+
+        }
+
         callback(null, fields, errors);
     },
 
@@ -793,6 +818,8 @@
         cont_uni_p.no_producto_requiere_list = app.lang.getAppListStrings('no_producto_requiere_list');
         cont_uni_p.razones_cf_list = app.lang.getAppListStrings('razones_cf_list');
         cont_uni_p.tct_razon_ni_l_ddw_c_list = app.lang.getAppListStrings('tct_razon_ni_l_ddw_c_list');
+        cont_uni_p.canales_ddw_list = app.lang.getAppListStrings('canal_list');
+
     },
 
     //Funcion que acepta solo letras (a-z), puntos(.) y comas(,)
