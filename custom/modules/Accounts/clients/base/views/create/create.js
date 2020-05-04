@@ -168,7 +168,7 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
 
         //Oculta panel de uni_productos
-        this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
+       // this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -328,6 +328,9 @@
         this.prev_ProductosPLD=[];
         //Potencial Autos
         this.Pautos=[];
+        // UniProductos
+        this.Oproductos=[];
+        this.Oproductos.productos=[];
 
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
@@ -587,6 +590,8 @@
         this.model.on('change:no_website_c',this.rowebsite, this);    
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+
 
     },
 
@@ -907,7 +912,7 @@
                   app.alert.show('error_direccion_duplicada', {
                       level: 'error',
                       autoClose: false,
-                      messages: 'Existen direcciones iguales,favor de corregir.'
+                      messages: 'Existen direcciones iguales, favor de corregir.'
                   });
                   //$($input).focus();
                   if(indices.length>0) {
@@ -1878,7 +1883,7 @@
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
-					if( this._getIndicador(value[i].inactivo) == 0 ){
+					if( this._getIndicador(value[i].inactivo) != "1" ){
 						var valorecupera = this._getIndicador(value[i].indicador);
 						totalindicadores = totalindicadores + "," + valorecupera;
 					}
@@ -1978,7 +1983,7 @@
 
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
-					if( this._getIndicador(value[i].inactivo) == 0){
+					if( this._getIndicador(value[i].inactivo) != "1"){
 						var valorecupera = this._getIndicador(value[i].indicador);
 						totalindicadores = totalindicadores + "," + valorecupera;
 					}
@@ -2002,7 +2007,7 @@
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                    messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');
@@ -2985,4 +2990,30 @@
         $('[data-name="website"]').attr('style','pointer-events:auto');
       }
     },
+
+    requeridosUniclickCanal:function (fields, errors, callback) {
+
+        var faltantesUniclickCanal = 0;
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+
+
+        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+            faltantesUniclickCanal += 1;
+        }
+        else {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+        }
+        if (faltantesUniclickCanal > 0) {
+            app.alert.show("Faltante canal Uniclick", {
+                level: "error",
+                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+                autoClose: false
+            });
+            errors['error_UniclickCanal'] = errors['error_UniclickCanal'] || {};
+            errors['error_UniclickCanal'].required = true;
+        }
+
+        callback(null, fields, errors);
+    }
 })
