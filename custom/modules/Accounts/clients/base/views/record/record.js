@@ -3407,7 +3407,7 @@
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
-					if( this._getIndicador(value[i].inactivo) == 0 ){
+					if( this._getIndicador(value[i].inactivo) != "1"){
 						var valorecupera = this._getIndicador(value[i].indicador);
 						totalindicadores = totalindicadores + "," + valorecupera;
 					}
@@ -3507,7 +3507,7 @@
 
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
-					if( this._getIndicador(value[i].inactivo) == 0){
+					if( this._getIndicador(value[i].inactivo) != "1"){
 						var valorecupera = this._getIndicador(value[i].indicador);
 						totalindicadores = totalindicadores + "," + valorecupera;
 					}
