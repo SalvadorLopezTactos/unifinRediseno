@@ -3534,11 +3534,13 @@
                     messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
+				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
-            }
-            else {
+            }else {
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', '');
             }
+			
             if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
                 errors['razonsocial_c'].required = true;
