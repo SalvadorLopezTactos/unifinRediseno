@@ -2006,6 +2006,8 @@
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');
+				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
             
             } else {
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', '');
