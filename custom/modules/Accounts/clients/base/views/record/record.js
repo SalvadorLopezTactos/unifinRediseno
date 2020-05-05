@@ -1799,8 +1799,6 @@
 								autoClose: false
 							});
 						}
-					}else{
-						callback(null, fields, errors);
 					}
 				}else {
 					console.log('Dir. activa requerida');
