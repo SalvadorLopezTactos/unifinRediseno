@@ -140,45 +140,62 @@ class reAsignarCuentas extends SugarApi
                 // Funcionalidad para notificar al promotor reasigando
                 $User = new User();
                 $User->retrieve($reAsignado);
-                $status=$User->status;
-                if($status=='Active'){
-
-                    $para = $User->email1;
-                    if ($para != null) {
+                $para = $User->email1;
+                if ($para != null) {
+                    if($User->status!='Active'){
+                        $reAsignado='';
+                    }else{
                         if ($User->optout_c == 1) {
                             $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
-                        $jefeAsignado = '';
-                        $jefe = $User->reports_to_id;
-                        $User->retrieve($jefe);
+                    }
+
+                    $jefeAsignado = '';
+                    $jefe = $User->reports_to_id;
+                    $User->retrieve($jefe);
+                    //Establecer id a nuevo jefe solo si éste es Activo
+                    if($User->status=='Active'){
                         if ($User->optout_c != 1) {
                             $jefeAsignado = $User->email1;
                         }
-                        $User->retrieve($promoActual);
+                    }else{
+                        $jefeAsignado='';
+                    }
+
+                    $User->retrieve($promoActual);
+                    if($User->status=='Active'){
                         if ($User->optout_c == 1) {
                             $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
-                        $jefeActual = '';
-                        $jefe = $User->reports_to_id;
-                        $User->retrieve($jefe);
+                    }else{
+                        $promoActual='';
+                    }
+
+                    $jefeActual = '';
+                    $jefe = $User->reports_to_id;
+                    $User->retrieve($jefe);
+                    //Establecer id a jefe Actual solo si éste es Activo
+                    if($User->status=='Active'){
                         if ($User->optout_c != 1) {
                             $jefeActual = $User->email1;
                         }
-                        $notifica = BeanFactory::newBean('TCT2_Notificaciones');
-                        $notifica->name = $para . ' ' . date("Y-m-d H:i:s");
-                        $notifica->created_by = $promoActual;
-                        $notifica->assigned_user_id = $reAsignado;
-                        $notifica->tipo = 'Cambio Promotor';
-                        $notifica->tct2_notificaciones_accountsaccounts_ida = $value;
-                        $notifica->jefe_anterior_c = $jefeActual;
-                        $notifica->jefe_nuevo_c = $jefeAsignado;
-                        $notifica->save();
-                        $notId = $notifica->id;
-                        global $db;
-                        $query = "update tct2_notificaciones set created_by = '$promoActual' where id = '$notId'";
-                        $result = $db->query($query);
+                    }else{
+                        $jefeActual='';
                     }
 
+                    $notifica = BeanFactory::newBean('TCT2_Notificaciones');
+                    $notifica->name = $para . ' ' . date("Y-m-d H:i:s");
+                    $notifica->created_by = $promoActual;
+                    $notifica->assigned_user_id = $reAsignado;
+                    $notifica->tipo = 'Cambio Promotor';
+                    $notifica->tct2_notificaciones_accountsaccounts_ida = $value;
+                    $notifica->jefe_anterior_c = $jefeActual;
+                    $notifica->jefe_nuevo_c = $jefeAsignado;
+                    $notifica->save();
+                    $notId = $notifica->id;
+                    global $db;
+                    $query = "update tct2_notificaciones set created_by = '$promoActual' where id = '$notId'";
+                    $result = $db->query($query);
                 }
 
                 //Restablece usuario por asignar
