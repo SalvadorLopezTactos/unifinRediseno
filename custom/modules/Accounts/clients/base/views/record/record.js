@@ -5487,7 +5487,7 @@
         var webSite = this.model.get('website');
         if (webSite != "") {
 
-            var expreg=/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
             if (!expreg.test(webSite)) {
 
                 app.alert.show('error-website', {
