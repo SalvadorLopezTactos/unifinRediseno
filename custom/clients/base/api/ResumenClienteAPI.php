@@ -54,6 +54,7 @@ class ResumenClienteAPI extends SugarApi
         3 = CREDITO AUTOMOTRIZ
         4 = FACTORAJE
         5 = LINEA CREDITO SIMPLE
+		6 = UNICLICK
         */
 
         //Define colores:
@@ -155,6 +156,14 @@ class ResumenClienteAPI extends SugarApi
             "fecha_pago" => "",
             "promotor" => "",
             "color" => "");
+		 //Uniclick
+        $arr_principal['uniclick'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
+			"tipo_cuenta"=>"",
+            "fecha_vencimiento"=>"",
+            "linea_disponible" => "",
+            "promotor" => "",
+            "color" => "");
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -193,7 +202,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
-            $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+            $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -237,6 +246,8 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_sos = "";
 
             $vencimiento_sos='';
+			
+			$vencimiento_uniclick ='';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -390,7 +401,30 @@ class ResumenClienteAPI extends SugarApi
                     $arr_principal['fleet']['numero_vehiculos'] = $numero_vehiculos_fleet;
 
                 }
+				
+				// Uniclick
+                if ($opps->tipo_producto_c == 8 && $opps->estatus_c != 'K') {
+                    $linea_aprox_uniclick += $opps->monto_c;
+					$linea_disp_sos += $opps->amount;
+                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                    /*********************************/
 
+                    if (!empty($opps->vigencialinea_c)) {
+						//Establece fecha de vencimiento
+						$dateVL = $opps->vigencialinea_c;
+						$timedateVL = Date($dateVL);
+
+						//Compara fechas
+						if ($dateVL > $vencimiento_uniclick || empty($vencimiento_uniclick)) {
+							$vencimiento_uniclick = $dateVL;
+						}
+						
+						$arr_principal['uniclick']['linea_autorizada'] = $linea_aprox_uniclick;
+						$arr_principal['uniclick']['fecha_vencimiento'] = $vencimiento_uniclick;
+						$arr_principal['uniclick']['linea_disponible'] = $linea_disp_sos;
+					}
+                }
+				
             }
         }
 
@@ -655,6 +689,11 @@ class ResumenClienteAPI extends SugarApi
 
                 //Recupera Crédito SOS
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
+				
+				//Recupera Uniclick
+                $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
+                $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
+               
             }
         }
 
