@@ -463,11 +463,11 @@
         }), null, {
             success: _.bind(function (data) {
                 var promotor = data.user_id_c;
-                if(data.tipo_registro_c == "Prospecto"){
+                if(data.tipo_registro_cuenta_c == "2"){ // 2 - Prospecto
                     this.model.set("tipo","Prospecto");
                     this.model.set("etapa_preliminar","Prospecto");
                     this.model.set("etapa","Prospecto");
-                }else if(data.tipo_registro_c == "Cliente"){
+                }else if(data.tipo_registro_cuenta_c == "3"){ // 3 - Cliente
                     //console.log("Valida lineas de credito autorizadas para leasing");
                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c') + "/link/opportunities", null, null, {
                         fields: name,

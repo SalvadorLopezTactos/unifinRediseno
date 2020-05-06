@@ -108,8 +108,8 @@
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
              */
             //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-            if($beanCuenta->tipo_registro_c=='Prospecto' && $beanCuenta->subtipo_cuenta_c == 'Contactado'){
-                $beanCuenta->subtipo_cuenta_c='Interesado';
+            if($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2'){ // Prospecto - 2  // Contactado - 2
+                $beanCuenta->subtipo_registro_cuenta_c='8'; //Interesado - 8
                 $beanCuenta->save();
             }
         }
@@ -207,7 +207,7 @@
                     INNER JOIN
 						accounts ac ON ac.id = aop.account_id
 					INNER JOIN
-						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_c in ('Prospecto','Cliente')
+						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_cuenta_c in ('2','3')
 					LEFT JOIN
 						email_addr_bean_rel  ON email_addr_bean_rel.bean_id = acstm.id_c and email_addr_bean_rel.primary_address = 1
 					LEFT JOIN
@@ -660,9 +660,9 @@ SQL;
                                 $backlog->estatus_de_la_operacion = 'Activa';
 
                                 $backlog->tipo_de_operacion = $this->getcurrentYearMonth($bean->mes_c, $bean->anio_c);
-                                if ($account->tipo_registro_c == "Prospecto") {
+                                if ($account->tipo_registro_cuenta_c == "2") { // Prospecto - 2
                                     $backlog->tipo = 'Prospecto';
-                                } elseif ($account->tipo_registro_c == "Cliente") {
+                                } elseif ($account->tipo_registro_cuenta_c == "3") { // Cliente - 3
                                     $backlog->tipo = 'Cliente';
                                 }
 
@@ -955,8 +955,8 @@ SQL;
         public function actualizatipoprod($bean = null, $event = null, $args = null){
             global $db;
             global $app_list_strings; //Obtención de listas de valores
-            $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
-            $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
+            $tipo = $app_list_strings['tipo_registro_cuenta_list']; //obtencion lista tipo de registro
+            $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
 
             $cliente = $bean->account_id; //ID de la Cuenta
             $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
@@ -966,13 +966,13 @@ SQL;
             $etapa=$bean->tct_etapa_ddw_c;
             $subetapa= $bean->estatus_c;
             //Condiciones para actualizar los tipos de Prospecto
-            $GLOBALS['log']->fatal($bean->fetched_row[tct_etapa_ddw_c]);
+            $GLOBALS['log']->fatal($bean->fetched_row['tct_etapa_ddw_c']);
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado
             $GLOBALS['log']->fatal('Valida solicitud inicial');
-            if($etapa=="SI" && $bean->fetched_row[tct_etapa_ddw_c]!= $etapa){
+            if($etapa=="SI" && $bean->fetched_row['tct_etapa_ddw_c']!= $etapa){
                 $GLOBALS['log']->fatal('Declara Prospecto Interesado');
-                $etitipo = $tipo["Prospecto"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-                 $etisubtipo = $subtipo["Interesado"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
+                 $etisubtipo = $subtipo["8"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 8 - Interesado
                  switch ($producto) {
                      case '1':
                          if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1010,8 +1010,8 @@ SQL;
             //Actualiza en Integracion de Expediente y actualiza campos con valor Prospecto en Integracion de Expediente
             if($subetapa=="PE" && $bean->fetched_row[estatus_c]!= $subetapa){
                 $GLOBALS['log']->fatal('Entra a validar Prospecto Integracion de Exp');
-                $etitipo = $tipo["Prospecto"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-                $etisubtipo = $subtipo["Integracion de Expediente"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
+                $etisubtipo = $subtipo["9"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 9 - Integracion de Expediente
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1048,8 +1048,8 @@ SQL;
             }
             //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito
             if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row[estatus_c]!= $subetapa){
-                $etitipo = $tipo["Prospecto"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-                $etisubtipo = $subtipo["Credito"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
+                $etisubtipo = $subtipo["10"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 10 - En Crédito
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1086,8 +1086,8 @@ SQL;
             }
             //Actualiza en Rechazado y actualiza campos con valor Prospecto Rechazado
             if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row[estatus_c]!= $subetapa){
-                $etitipo = $tipo["Prospecto"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-                $etisubtipo = $subtipo["Rechazado"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
+                $etisubtipo = $subtipo["11"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 11 - Rechazado
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1124,8 +1124,8 @@ SQL;
             }
             //Actualiza cuando la solicitud es Autorizada (N)
             if (!empty($bean_Resumen && $bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c)) { //Etapa solicitud= N= Autorizada
-                $etitipo = $tipo["Cliente"];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-                $etisubtipo = $subtipo["Con Linea Vigente"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+                $etitipo = $tipo["3"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 3 - Cliente
+                $etisubtipo = $subtipo["19"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 19 - Con Linea Vigente
 
                 //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
                 //LEASING

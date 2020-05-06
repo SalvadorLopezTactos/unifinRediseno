@@ -4,7 +4,7 @@ class CG_Class
   function CG_Method($bean, $event, $arguments)
   {
     //Valida que personsa sea proveedor
-    if($bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Cliente' && $bean->esproveedor_c == true) ){
+    if($bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '3' && $bean->esproveedor_c == true) ){// 5 - Proveedor, 3 - Cliente
       //$GLOBALS['log']->fatal ('Proceso CG: Inicia - Edición Proveedor');
 
       //Recupera Id del CG

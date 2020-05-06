@@ -656,14 +656,14 @@
                 });
 
                 //Verificamos la lista a mostrar:
-                this.tipo = modelo.get('tipo_registro_c');
+                this.tipo = modelo.get('tipo_registro_cuenta_c');
                 //console.log("Registro: " + modelo.get('tipo_registro_c'));
-                if ( modelo.get('tipo_registro_c') != 'Cliente' ){
+                if ( modelo.get('tipo_registro_cuenta_c') != '3' ){ // 3 - Cliente
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
                     //this.model.set('estatus_c','OP');
                 }
-                if ( modelo.get('tipo_registro_c') == 'Cliente' ){
+                if ( modelo.get('tipo_registro_cuenta_c') == '3' ){ // 3 - Cliente
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
                     //this.model.set('estatus_c','P');
@@ -678,7 +678,7 @@
                 }else{
                     this.tipoDePersona = false;
                 }
-                if( modelo.get('tipo_registro_c') =='Prospecto'){
+                if( modelo.get('tipo_registro_cuenta_c') =='2'){ // 2 - Prospecto
                     this.prospecto = true;
                 }else{
                     this.prospecto = false;

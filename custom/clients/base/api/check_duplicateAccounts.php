@@ -166,16 +166,16 @@ SITE;
     {
         $bean_account = BeanFactory::newBean('Accounts');
         if ($rel) {
-            $bean_account->subtipo_cuenta_c = "";
-            $bean_account->tipo_registro_c = "Persona";
+            $bean_account->subtipo_registro_cuenta_c = "";
+            $bean_account->tipo_registro_cuenta_c = "4"; // Persona - 4
             $bean_account->user_id_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
 
         } else {
-            $bean_account->subtipo_cuenta_c = "En Calificacion";
-            $bean_account->tipo_registro_c = "Lead";
+            $bean_account->subtipo_registro_cuenta_c = "5"; // En Calificación - 5
+            $bean_account->tipo_registro_cuenta_c = "1"; //Lead - 1
         }
 
 
