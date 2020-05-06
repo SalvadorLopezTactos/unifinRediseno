@@ -125,7 +125,7 @@ class CG_Class
         $GLOBALS['log']->fatal ($totalRelaciones);
 
         //Valida Existencia de CG asociado
-        if($totalRelaciones < 1 && ($bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Cliente' && $bean->esproveedor_c == true)) ){
+        if($totalRelaciones < 1 && ($bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '3' && $bean->esproveedor_c == true)) ){ // 5 - Proveedor, 3 - Cliente
           //No tiene relaciones adicionales, detiene eliminación
           $eliminar = false;
           require_once 'include/api/SugarApiException.php';
