@@ -32,7 +32,7 @@ $dependencies['Accounts']['referenciador_c_Visibility'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'referenciador_c',
-                'value' => 'and(equal($origendelprospecto_c,"Referenciador"),or(equal($tipo_registro_c,"Cliente"),equal($tipo_registro_c,"Prospecto")))',
+                'value' => 'and(equal($origendelprospecto_c,"Referenciador"),or(equal($tipo_registro_c,"3"),equal($tipo_registro_c,"2")))',
             ),
         ),
     ),
@@ -48,7 +48,7 @@ $dependencies['Accounts']['tct_status_atencion_ddw_c'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_status_atencion_ddw_c',
-                'value' => 'or(equal($tipo_registro_c,"Cliente"),equal($tipo_registro_c,"Prospecto"),equal($tipo_registro_c,"Lead"))',
+                'value' => 'or(equal($tipo_registro_c,"3"),equal($tipo_registro_c,"2"),equal($tipo_registro_c,"1"))',
             ),
         ),
     ),
