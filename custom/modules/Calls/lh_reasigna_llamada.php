@@ -38,7 +38,7 @@ class reasigna_class
         $GLOBALS['log']->fatal('Proceso: Asocia llamada - IdPer: '. $beanPersona->id);
 
         //Si persona es tipo Persona recupera relación y registro padre
-        if ($beanPersona->tipo_registro_c == 'Persona') {
+        if ($beanPersona->tipo_registro_cuenta_c == '4') {
           $GLOBALS['log']->fatal('Proceso: Asocia llamada - relación Persona');
 
           //Recupera relaciones existentes
