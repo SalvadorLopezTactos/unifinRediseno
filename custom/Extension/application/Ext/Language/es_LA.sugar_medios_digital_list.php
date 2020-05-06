@@ -1,0 +1,30 @@
+<?php
+ // created: 2020-05-04 15:12:12
+
+$app_list_strings['medios_digital_list']=array (
+  '' => '',
+  1 => 'Facebook',
+  2 => 'Twitter',
+  3 => 'Instagram',
+  4 => 'Web',
+  5 => 'LinkedIn',
+  6 => 'Radio Online',
+  7 => 'Prensa Online',
+  8 => 'TV Online',
+  9 => 'Revistas Online',
+  10 => 'TV',
+  11 => 'Radio',
+  12 => 'Prensa',
+  13 => 'Revistas',
+  14 => 'Espectaculares',
+  15 => 'Google Adwords',
+  16 => 'Landing Pages',
+  17 => 'Youtube',
+  18 => 'DuckDuckGo',
+  19 => 'Bing',
+  20 => 'Yahoo',
+  21 => 'Google Display',
+  22 => 'Instagram Ads',
+  23 => 'Blog',
+  24 => 'Facebook Ads',
+);

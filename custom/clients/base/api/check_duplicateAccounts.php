@@ -53,12 +53,15 @@ class check_duplicateAccounts extends SugarApi
         $result = $this->existLeadAccount($bean);
         $count = count($result);
         $GLOBALS['log']->fatal("existencia" . print_r($result, true));
+        $GLOBALS['log']->fatal("Count consulta: " . $count);
 
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting, true));
+                $GLOBALS['log']->fatal("nombre del Leads " . print_r($responsMeeting, true));
+
+                $GLOBALS['log']->fatal("Requeridos " . $requeridos);
 
                 $requeridos= $this->validaRequeridos($bean);
 
@@ -178,8 +181,21 @@ SITE;
             $bean_account->tipo_registro_cuenta_c = "1"; //Lead - 1
         }
 
+        switch ($bean_Leads->regimen_fiscal_c) {
+            case 1:
+                $bean_account->tipodepersona_c = "Persona Fisica";
+                break;
+            case 2:
+                $bean_account->tipodepersona_c = "Persona Fisica con Actividad Empresarial";
+                break;
+            case 3:
+                $bean_account->tipodepersona_c = "Persona Moral";
+                break;
+            default:
+                $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
+                break;
+        }
 
-        $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
         $bean_account->origendelprospecto_c = $bean_Leads->origen_c;
         if ($bean_Leads->origen_c == 1) {
             $bean_account->origendelprospecto_c = "Marketing";
@@ -189,12 +205,119 @@ SITE;
 
         }
 
-        $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
+        //Switch para asignar los valores
+        switch ($bean_Leads->detalle_origen_c) {
+            case 1:
+                $bean_account->tct_detalle_origen_ddw_c = "Base de datos";
+                break;
+            case 2:
+                $bean_account->tct_detalle_origen_ddw_c = "Centro de Prospeccion";
+                break;
+            case 3:
+                $bean_account->tct_detalle_origen_ddw_c = "Digital";
+                break;
+            case 4:
+                $bean_account->tct_detalle_origen_ddw_c = "Campanas";
+                break;
+            case 5:
+                $bean_account->tct_detalle_origen_ddw_c = "Acciones Estrategicas";
+                break;
+            case 6:
+                $bean_account->tct_detalle_origen_ddw_c = "Afiliaciones";
+                break;
+            case 7:
+                $bean_account->tct_detalle_origen_ddw_c = "Llamdas Inbound";
+                break;
+            case 8:
+                $bean_account->tct_detalle_origen_ddw_c = "Parques Industriales";
+                break;
+            case 9:
+                $bean_account->tct_detalle_origen_ddw_c = "Offline";
+                break;
+            case 10:
+                $bean_account->tct_detalle_origen_ddw_c = "Cartera Promotores";
+                break;
+            case 11:
+                $bean_account->tct_detalle_origen_ddw_c = "Recomendacion";
+                break;
+            default:
+                $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
+                break;
+        }
+
         $bean_account->user_id3_c = $bean_Leads->user_id1_c; // Agente telefonico
         $bean_account->user_id4_c = $bean_Leads->user_id_c; // ¿Que Asesor?
 
-        $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
-        $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
+        switch ($bean_Leads->medio_digital_c) {
+            case 1:
+                $bean_account->medio_digital_c = "Facebook";
+                break;
+            case 2:
+                $bean_account->medio_digital_c = "Twitter";
+                break;
+            case 3:
+                $bean_account->medio_digital_c = "Instagram";
+                break;
+            case 4:
+                $bean_account->medio_digital_c = "Web";
+                break;
+            case 5:
+                $bean_account->medio_digital_c = "LinkedIn";
+                break;
+            case 6:
+                $bean_account->medio_digital_c = "Radio Online";
+                break;
+            case 7:
+                $bean_account->medio_digital_c = "Prensa Online";
+                break;
+            case 8:
+                $bean_account->medio_digital_c = "TV Online";
+                break;
+            case 9:
+                $bean_account->medio_digital_c = "Revistas Online";
+                break;
+            case 10:
+                $bean_account->medio_digital_c = "TV";
+                break;
+            case 11:
+                $bean_account->medio_digital_c = "Radio";
+                break;
+            case 12:
+                $bean_account->medio_digital_c = "Prensa";
+                break;
+            case 13:
+                $bean_account->medio_digital_c = "Revistas";
+                break;
+            case 14:
+                $bean_account->medio_digital_c = "Espectaculares";
+                break;
+
+            default:
+                $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
+                break;
+        }
+        switch ($bean_Leads->punto_contacto_c) {
+
+            case 1:
+                $bean_account->tct_punto_contacto_ddw_c = "Portal";
+
+                break;
+            case 2:
+                $bean_account->tct_punto_contacto_ddw_c = "Telefono";
+
+                break;
+            case 3:
+                $bean_account->tct_punto_contacto_ddw_c = "Chat";
+
+                break;
+            case 4:
+                $bean_account->tct_punto_contacto_ddw_c = "Publicacion";
+
+                break;
+            default:
+                $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
+                break;
+        }
         $bean_account->evento_c = $bean_Leads->evento_c;
         $bean_account->tct_origen_busqueda_txf_c = $bean_Leads->origen_busqueda_c;
         $bean_account->camara_c = $bean_Leads->camara_c;
@@ -327,7 +450,7 @@ SITE;
         switch ($subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
             case '1':
-                if ($tipoPersona == 'Persona Moral') {
+                if ($tipoPersona == '3') {
                     array_push($campos_req, 'nombre_empresa_c');
                 } else {
                     array_push($campos_req, 'nombre_c', 'apellido_paterno_c');
@@ -335,7 +458,7 @@ SITE;
                 break;
             /********SUB-TIPO CONTACTADO*******/
             case '2':
-                if ($tipoPersona == 'Persona Moral') {
+                if ($tipoPersona == '3') {
                     array_push($campos_req, 'nombre_empresa_c');
                 } else {
                     array_push($campos_req, 'nombre_c', 'apellido_paterno_c', 'puesto_c');
