@@ -55,9 +55,9 @@ class leads_validateString
         $bean->apellido_materno_c = $limpiamaterno;
         $bean->nombre_empresa_c = $limpiarazon;
 
-        if ($bean->tipo_registro_c == "Persona Moral") {
+        /*if ($bean->tipo_registro_c == "Persona Moral") {
             $bean->name = $bean->nombre_empresa_c;
-        }
+        }*/
         //Crea Clean_name (exclusivo para aplicativos externos a CRM)
         // if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
 
@@ -66,7 +66,7 @@ class leads_validateString
 
         //  $GLOBALS['log']->fatal('full name ' . $bean->full_name);
 
-        if ($bean->regimen_fiscal_c != "Persona Moral") {
+        if ($bean->regimen_fiscal_c != "3") {
             $full_name = $bean->nombre_c . " " . $bean->apellido_paterno_c . " " . $bean->apellido_materno_c;
             //$GLOBALS['log']->fatal(print_r($tipo,true));
             //Cambia a mayúsculas y quita espacios a cada campo

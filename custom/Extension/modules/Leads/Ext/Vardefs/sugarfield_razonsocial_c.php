@@ -7,6 +7,6 @@ $dictionary['Lead']['fields']['razonsocial_c']['full_text_search']=array (
   'searchable' => true,
 );
 $dictionary['Lead']['fields']['razonsocial_c']['enforced']='false';
-$dictionary['Lead']['fields']['razonsocial_c']['dependency']='and(equal($regimen_fiscal_c,"Persona Moral"))';
+$dictionary['Lead']['fields']['razonsocial_c']['dependency']='and(equal($regimen_fiscal_c,"3"))';
 
  ?>

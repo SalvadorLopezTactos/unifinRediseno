@@ -291,18 +291,19 @@ class altaLeadServices extends SugarApi
 
         $bean_Lead->resultado_de_carga_c = $dataOrigen['origen_medio'];
         $regimen = $dataOrigen['regimen_fiscal_c'];
-        switch ($regimen) {
+        /*switch ($regimen) {
             case 1:
-                $bean_Lead->regimen_fiscal_c = "Persona Fisica";
+                $bean_Lead->regimen_fiscal_c = $regimen;
                 break;
 
             case 2:
-                $bean_Lead->regimen_fiscal_c = "Persona Fisica con Actividad Empresarial";
+                $bean_Lead->regimen_fiscal_c = "2";
                 break;
             default:
-                $bean_Lead->regimen_fiscal_c = "Persona Moral";
+                $bean_Lead->regimen_fiscal_c = "3";
                 break;
-        }
+        }*/
+        $bean_Lead->regimen_fiscal_c = $regimen;
 
         $bean_Lead->nombre_c = $dataOrigen['nombre_c'];
         $bean_Lead->nombre_empresa_c = $dataOrigen['nombre_empresa_c'];
@@ -311,7 +312,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
 
         $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
-        switch ($detalle_origen) {
+        /*switch ($detalle_origen) {
             case 1:
                 $bean_Lead->detalle_origen_c = "Base de datos";
                 break;
@@ -348,10 +349,11 @@ class altaLeadServices extends SugarApi
             default:
                 $bean_Lead->detalle_origen_c = $dataOrigen['detalle_origen_c'];
                 break;
-        }
+        }*/
+        $bean_Lead->detalle_origen_c = $detalle_origen;
 
         $medio = $dataOrigen['medio_digital_c'];
-        switch ($medio) {
+        /*switch ($medio) {
             case 1:
                 $bean_Lead->medio_digital_c = "Facebook";
                 break;
@@ -398,10 +400,11 @@ class altaLeadServices extends SugarApi
             default:
                 $bean_Lead->medio_digital_c = $dataOrigen['medio_digital_c'];
                 break;
-        }
+        }*/
+        $bean_Lead->medio_digital_c = $medio;
 
         $punto_contacto = $dataOrigen['punto_contacto_c'];
-        switch ($punto_contacto) {
+        /*switch ($punto_contacto) {
 
             case 1:
                 $bean_Lead->punto_contacto_c = "Portal";
@@ -421,9 +424,9 @@ class altaLeadServices extends SugarApi
                 break;
             default:
                 $bean_Lead->punto_contacto_c = $dataOrigen['punto_contacto_c'];
-
                 break;
-        }
+        }*/
+        $bean_Lead->punto_contacto_c= $punto_contacto;
 
         $bean_Lead->origen_ag_tel_c = $dataOrigen['origen_ag_tel_c'];
         $bean_Lead->promotor_c = $dataOrigen['promotor_c'];

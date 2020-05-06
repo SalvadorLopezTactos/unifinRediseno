@@ -10,7 +10,7 @@ $dependencies['Leads']['readonly_fields'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'origen_ag_tel_c',
-                'value' => 'or(equal($detalle_origen_c,"Centro de Prospeccion"),equal($detalle_origen_c,"Parques Industriales"),equal($detalle_origen_c,"Afiliaciones"),equal($detalle_origen_c,"Acciones Estrategicas"),equal($detalle_origen_c,"Campanas"),equal($detalle_origen_c,"Digital"),equal($detalle_origen_c,"Offline"),equal($detalle_origen_c,"Bases de datos"),equal($detalle_origen_c,"Cartera Promotores"))',
+                'value' => 'or(equal($detalle_origen_c,"2"),equal($detalle_origen_c,"8"),equal($detalle_origen_c,"6"),equal($detalle_origen_c,"5"),equal($detalle_origen_c,"4"),equal($detalle_origen_c,"3"),equal($detalle_origen_c,"9"),equal($detalle_origen_c,"1"),equal($detalle_origen_c,"10"))',
             ),
         ),
         array(
@@ -24,7 +24,7 @@ $dependencies['Leads']['readonly_fields'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'promotor_c',
-                'value' => 'equal($detalle_origen_c,"Cartera Promotores")',
+                'value' => 'equal($detalle_origen_c,"10")',
             ),
         ),
         array(
