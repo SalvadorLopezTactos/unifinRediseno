@@ -7,6 +7,6 @@ $dictionary['Lead']['fields']['apellido_materno_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Lead']['fields']['apellido_materno_c']['enforced']='';
-$dictionary['Lead']['fields']['apellido_materno_c']['dependency']='or(equal($regimen_fiscal_c,"Persona Fisica"),equal($regimen_fiscal_c,"Persona Fisica con Actividad Empresarial"))';
+$dictionary['Lead']['fields']['apellido_materno_c']['dependency']='or(equal($regimen_fiscal_c,"1"),equal($regimen_fiscal_c,"2"))';
 
  ?>

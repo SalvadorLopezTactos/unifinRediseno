@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-13 18:24:57
+ // created: 2020-05-04 15:28:12
 $dictionary['Lead']['fields']['detalle_origen_c']['labelValue']='Detalle Origen';
 $dictionary['Lead']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Lead']['fields']['detalle_origen_c']['visibility_grid']=array (
@@ -9,17 +9,17 @@ $dictionary['Lead']['fields']['detalle_origen_c']['visibility_grid']=array (
     1 => 
     array (
       0 => '',
-      1 => 'Digital',
-      2 => 'Offline',
-      3 => 'Acciones Estrategicas',
-      4 => 'Recomendacion',
+      1 => '3',
+      2 => '9',
+      3 => '5',
+      4 => '11',
     ),
     2 => 
     array (
       0 => '',
-      1 => 'Bases de datos',
-      2 => 'Afiliaciones',
-      3 => 'Cartera Promotores',
+      1 => '1',
+      2 => '6',
+      3 => '10',
     ),
     '' => 
     array (

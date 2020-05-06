@@ -1799,8 +1799,6 @@
 								autoClose: false
 							});
 						}
-					}else{
-						callback(null, fields, errors);
 					}
 				}else {
 					console.log('Dir. activa requerida');
@@ -3534,11 +3532,13 @@
                     messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
+				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
-            }
-            else {
+            }else {
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', '');
             }
+			
             if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
                 errors['razonsocial_c'].required = true;
@@ -5485,7 +5485,7 @@
         var webSite = this.model.get('website');
         if (webSite != "") {
 
-            var expreg=/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
             if (!expreg.test(webSite)) {
 
                 app.alert.show('error-website', {

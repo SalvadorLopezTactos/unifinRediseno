@@ -1,6 +1,6 @@
 <?php
 
-$dependencies['Leads']['setoptions_regimen_fiscal'] = array(
+/*$dependencies['Leads']['setoptions_regimen_fiscal'] = array(
     'hooks' => array("edit"),
     'trigger' => 'true',
     'triggerFields' => array('regimen_fiscal_c','id'),
@@ -10,12 +10,12 @@ $dependencies['Leads']['setoptions_regimen_fiscal'] = array(
             'name' => 'SetOptions',
             'params' => array(
                 'target' => 'regimen_fiscal_c',
-                'keys' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"Persona Moral"),createList("Persona Moral"),createList("Persona Fisica","Persona Fisica con Actividad Empresarial")),getDropdownKeySet("tipo"))',
-                'labels' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"Persona Moral"),createList("Persona Moral"),createList("Persona Fisica","Persona Fisica con Actividad Empresarial")),getDropdownValueSet("tipo"))',
+                'keys' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"3"),createList("3"),createList("1","2")),getDropdownKeySet("regimen_fiscal_list"))',
+                'labels' => 'ifElse(not(equal($id,"")),ifElse(equal($regimen_fiscal_c,"3"),createList("3"),createList("1","2")),getDropdownValueSet("regimen_fiscal_list"))',
             ),
         ),
     ),
-);
+);*/
 
 // 'ifElse(equal($ayuda_asesor_cp_c,"1"),createList("Exitoso","No exitoso","En proceso"),getDropdownValueSet("task_status_dom"))'
 
@@ -49,7 +49,7 @@ $dependencies['Leads']['promotor_c'] = array(
             'params' => array(
                 'target' => 'promotor_c',
                 'label'  => 'promotor_c_label', 
-                'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "Cartera Promotores"))',
+                'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "10"))',
             ),
         ),
     ),

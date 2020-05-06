@@ -2011,6 +2011,8 @@
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');
+				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
             
             } else {
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', '');
@@ -2919,7 +2921,7 @@
 
         if (webSite != "" && webSite != undefined) {
            // var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
-            var expreg = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
 
             if (!expreg.test(webSite)) {
 
