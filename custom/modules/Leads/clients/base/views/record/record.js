@@ -286,7 +286,7 @@
         switch (subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
             case '1':
-                if (tipoPersona == 'Persona Moral') {
+                if (tipoPersona == '3') {
                     campos_req.push('nombre_empresa_c');
                 }
                 else {
@@ -295,7 +295,7 @@
                 break;
             /********SUB-TIPO CONTACTADO*******/
             case '2':
-                if (tipoPersona == 'Persona Moral') {
+                if (tipoPersona == '3') {
                     campos_req.push('nombre_empresa_c');
                 }
                 else {
@@ -594,5 +594,33 @@
                 }, this)
             });
 
-    }
+    },
+    bindDataChange: function () {
+        this._super("bindDataChange");
+        //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
+        this.model.on("change:regimen_fiscal_c", _.bind(function () {
+
+            if (this.model._previousAttributes.regimen_fiscal_c == '1') {
+                if (this.model.get('regimen_fiscal_c') == '3') {
+                    this.model.set('regimen_fiscal_c', '1');
+                }
+            }
+            if (this.model._previousAttributes.regimen_fiscal_c == '2') {
+                if (this.model.get('regimen_fiscal_c') == '3') {
+                    this.model.set('regimen_fiscal_c', '2');
+                }
+            }
+            //Si es Persona Moral, ya no se podra cambiar a Persona Fisica
+            if (this.model._previousAttributes.regimen_fiscal_c == '3') {
+                if (this.model.get('regimen_fiscal_c') == '1' || this.model.get('regimen_fiscal_c') == '2') {
+                    this.model.set('regimen_fiscal_c', '3');
+                }
+            }
+            if (this.model._previousAttributes.regimen_fiscal_c != '0' ) {
+                if (this.model.get('regimen_fiscal_c') == '0' || this.model.get('regimen_fiscal_c') == "") {
+                    this.model.set('regimen_fiscal_c', this.model._previousAttributes.regimen_fiscal_c);
+                }
+            }
+        }, this));
+    },
 })

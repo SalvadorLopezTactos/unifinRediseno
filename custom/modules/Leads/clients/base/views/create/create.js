@@ -26,7 +26,7 @@
 
     _cleanRegFiscal: function () {
 
-        if (this.model.get('regimen_fiscal_c') == 'Persona Moral') {
+        if (this.model.get('regimen_fiscal_c') == '3') {
             
             this.model.set('nombre_c', '');
             this.model.set('apellido_paterno_c', '');
@@ -58,7 +58,7 @@
         });
         clean_name_split_full = App.utils.deepCopy(clean_name_split);
 
-        if (this.model.get('regimen_fiscal_c') == "Persona Moral") {
+        if (this.model.get('regimen_fiscal_c') == "3") {
             //Elimina tipos de sociedad: Ej. SA, de , CV...
             var totalVacio = 0;
             _.each(clean_name_split, function (value, key) {
@@ -301,7 +301,7 @@
         switch (subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
             case '1':
-                if (tipoPersona == 'Persona Moral') {
+                if (tipoPersona == '3') {
                     campos_req.push('nombre_empresa_c');
                 }
                 else {
@@ -310,7 +310,7 @@
                 break;
             /********SUB-TIPO CONTACTADO*******/
             case '2':
-                if (tipoPersona == 'Persona Moral') {
+                if (tipoPersona == '3') {
                     campos_req.push('nombre_empresa_c');
                 }
                 else {
