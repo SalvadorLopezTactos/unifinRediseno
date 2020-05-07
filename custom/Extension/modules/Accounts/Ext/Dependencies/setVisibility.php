@@ -25,14 +25,14 @@ $dependencies['Accounts']['comision_referenciador_c_Visibility'] = array(
 $dependencies['Accounts']['referenciador_c_Visibility'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'referenciador_c',
-                'value' => 'and(equal($origendelprospecto_c,"Referenciador"),or(equal($tipo_registro_c,"3"),equal($tipo_registro_c,"2")))',
+                'value' => 'and(equal($origendelprospecto_c,"Referenciador"),or(equal($tipo_registro_cuenta_c,"3"),equal($tipo_registro_cuenta_c,"2")))',
             ),
         ),
     ),
@@ -41,14 +41,14 @@ $dependencies['Accounts']['referenciador_c_Visibility'] = array(
 $dependencies['Accounts']['tct_status_atencion_ddw_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_status_atencion_ddw_c',
-                'value' => 'or(equal($tipo_registro_c,"3"),equal($tipo_registro_c,"2"),equal($tipo_registro_c,"1"))',
+                'value' => 'or(equal($tipo_registro_cuenta_c,"3"),equal($tipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"1"))',
             ),
         ),
     ),

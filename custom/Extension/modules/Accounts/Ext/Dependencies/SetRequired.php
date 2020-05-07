@@ -2,7 +2,7 @@
     $dependencies['Accounts']['PrimerNombre_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','primernombre_c','tipo_registro_c'),
+            'triggerFields' => array('tipodepersona_c','primernombre_c','tipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -19,7 +19,7 @@
     $dependencies['Accounts']['ApellidoPaterno_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','apellidopaterno_c','tipo_registro_c','subtipo_cuenta_c'),
+            'triggerFields' => array('tipodepersona_c','apellidopaterno_c','tipo_registro_cuenta_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -36,7 +36,7 @@
     $dependencies['Accounts']['RazonSocial_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','razonsocial_c','subtipo_cuenta_c','tipo_registro_c'),
+            'triggerFields' => array('tipodepersona_c','razonsocial_c','subtipo_registro_cuenta_c','tipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -57,7 +57,7 @@
             'hooks' => array("all"),
             'trigger' => 'true',
             //'triggerFields' => array('tipo_registro_c','subtipo_cuenta_c','rfc_c'),
-              'triggerFields' => array('subtipo_cuenta_c','rfc_c','tipo_registro_c'),
+              'triggerFields' => array('subtipo_registro_cuenta_c','rfc_c','tipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -66,7 +66,7 @@
                                     'target' => 'rfc_c',
                                     'label' => 'rfc_c_label',
                                     //'value' => 'and(not(equal($tipo_registro_c,"Persona" )),not(equal($tipo_registro_c,"Prospecto")))',
-                                    'value' => 'or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Credito"),equal($tipo_registro_c,"5"))',
+                                    'value' => 'or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8"),equal($subtipo_registro_cuenta_c,"9"),equal($tipo_registro_cuenta_c,"5"))',
                             ),
                     ),
             ),
@@ -75,7 +75,7 @@
     $dependencies['Accounts']['Profesion_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','estatus_c','tipo_registro_c','profesion_c'),
+            'triggerFields' => array('tipodepersona_c','estatus_c','tipo_registro_cuenta_c','profesion_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -83,7 +83,7 @@
                             'params' => array(
                                     'target' => 'profesion_c',
                                     'label' => 'profesion_c_label',
-                                    'value' => 'not(or(equal($tipodepersona_c,"Persona Moral"),equal($estatus_c,"Interesado"),equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado")))',
+                                    'value' => 'not(or(equal($tipodepersona_c,"Persona Moral"),equal($estatus_c,"Interesado"),equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7")))',
                             ),
                     ),
             ),
@@ -100,7 +100,7 @@
                             'params' => array(
                                     'target' => 'iva_c',
                                     'label' => 'iva_c_label',
-                                    'value' => 'or(equal($tipo_registro_c,"5"), equal($esproveedor_c,true))',
+                                    'value' => 'or(equal($tipo_registro_cuenta_c,"5"), equal($esproveedor_c,true))',
                             ),
                     ),
             ),
@@ -127,7 +127,7 @@
     $dependencies['Accounts']['Genero_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','genero_c','subtipo_cuenta_c','tipo_registro_c'),
+            'triggerFields' => array('tipodepersona_c','genero_c','subtipo_registro_cuenta_c','tipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -136,7 +136,7 @@
                                     'target' => 'genero_c',
                                     'label' => 'genero_c_label',
                                     //'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")), or(equal($tipo_registro_c,"Cliente"),equal($tipo_registro_c,"Cliente"),equal($estatus_c,"Interesado"), and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Credito")))))',
-                                    'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                                    'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
 
                             ),
                     ),
@@ -146,7 +146,7 @@
     $dependencies['Accounts']['fechaNacimiento_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechadenacimiento_c','subtipo_cuenta_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_cuenta_c','fechadenacimiento_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -155,7 +155,7 @@
                                     'target' => 'fechadenacimiento_c',
                                     'label' => 'fechadenacimiento_c_label',
                                     //'value' => 'and(equal($tipodepersona_c,"Persona Moral"),and(not(equal($tipo_registro_c,"Persona")),or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))))',
-                                    'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                                    'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
                             ),
                     ),
             ),
@@ -164,7 +164,7 @@
 	$dependencies['Accounts']['fechaconstitutiva_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechaconstitutiva_c','subtipo_cuenta_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_cuenta_c','fechaconstitutiva_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -174,7 +174,7 @@
                                     'label' => 'fechaconstitutiva_c_label',
                                     //'value' => 'and(equal($tipodepersona_c,"Persona Moral"),or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Integracion de Expediente")))',
                                     //'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"Persona")))',
-                                    'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),equal($tipodepersona_c,"Persona Moral"))',
+                                    'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),equal($tipodepersona_c,"Persona Moral"))',
                             ),
                     ),
             ),
@@ -183,7 +183,7 @@
     $dependencies['Accounts']['Pais_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('pais_nacimiento_c','estatus_c','tipo_registro_c','subtipo_cuenta_c'),
+            'triggerFields' => array('pais_nacimiento_c','estatus_c','tipo_registro_cuenta_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -192,7 +192,7 @@
                                     'target' => 'pais_nacimiento_c',
                                     'label' => 'pais_nacimiento_c_label',
                                     //'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
-                                'value' => 'not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"4")))',
+                                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"4")))',
                             ),
                     ),
             ),
@@ -201,7 +201,7 @@
     $dependencies['Accounts']['EstadoNacimiento_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('pais_nacimiento_c','estado_nacimiento_c','tipodepersona_c', 'estatus_c','tipo_registro_c','subtipo_cuenta_c'),
+            'triggerFields' => array('pais_nacimiento_c','estado_nacimiento_c','tipodepersona_c', 'estatus_c','tipo_registro_cuenta_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -210,7 +210,7 @@
                                     'target' => 'estado_nacimiento_c',
                                     'label' => 'estado_nacimiento_c_label',
                                     //'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
-                                'value' => 'and(not(equal($pais_nacimiento_c,"")),not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"))))',
+                                'value' => 'and(not(equal($pais_nacimiento_c,"")),not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"))))',
                             ),
                     ),
             ),
@@ -219,7 +219,7 @@
     $dependencies['Accounts']['SectorEconomico_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c','sectoreconomico_c','subtipo_cuenta_c'),
+            'triggerFields' => array('tipo_registro_cuenta_c','sectoreconomico_c','subtipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -227,7 +227,7 @@
                             'params' => array(
                                     'target' => 'sectoreconomico_c',
                                     'label' => 'sectoreconomico_c_label',
-                                    'value' => 'or(and(not(equal($tipo_registro_c,"1")),not(equal($subtipo_cuenta_c,"Contactado"),equal($tipo_registro_c,"3"))))',
+                                    'value' => 'or(and(not(equal($tipo_registro_cuenta_c,"1")),not(equal("$subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"3"))))',
                             ),
                     ),
             ),
@@ -255,7 +255,7 @@
     $dependencies['Accounts']['origendelprospecto_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c','estatus_c','tipo_registro_c'),
+            'triggerFields' => array('origendelprospecto_c','estatus_c','tipo_registro_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -263,7 +263,7 @@
                             'params' => array(
                                     'target' => 'origendelprospecto_c',
                                     'label' => 'origendelprospecto_c_label',
-                                    'value' => 'or(equal($tipo_registro_c,"1"),equal($tipo_registro_c,"2"),equal($tipo_registro_c,"3"))',
+                                    'value' => 'or(equal($tipo_registro_cuenta_c,"1"),equal($tipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"3"))',
                             ),
                     ),
             ),
@@ -294,7 +294,7 @@
     $dependencies['Accounts']['ctpldidproveedorrecursosclie_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c', 'estatus_c','ctpldidproveedorrecursosclie_c'),
+            'triggerFields' => array('tipo_registro_cuenta_c', 'estatus_c','ctpldidproveedorrecursosclie_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -302,7 +302,7 @@
                             'params' => array(
                                     'target' => 'ctpldidproveedorrecursosclie_c',
                                     'label' => 'ctpldidproveedorrecursosclie_c_label',
-                                    'value' => 'or(and(not(equal($tipodepersona_c,"Persona Moral")),equal($tipo_registro_c,"Cliente")),and(not(equal($tipodepersona_c,"Persona Moral")),equal($estatus_c,"Interesado")))',
+                                    'value' => 'or(and(not(equal($tipodepersona_c,"Persona Moral")),equal($tipo_registro_cuenta_c,"3")),and(not(equal($tipodepersona_c,"Persona Moral")),equal($estatus_c,"Interesado")))',
                                     //'value' => 'or(equal($tipo_registro_c,"Cliente"), equal($estatus_c,"Interesado"))',
                             ),
                     ),
@@ -312,7 +312,7 @@
     $dependencies['Accounts']['ctpldidproveedorrecursosson_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c', 'estatus_c','ctpldidproveedorrecursosson_c'),
+            'triggerFields' => array('tipo_registro_cuenta_c', 'estatus_c','ctpldidproveedorrecursosson_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -320,7 +320,7 @@
                             'params' => array(
                                     'target' => 'ctpldidproveedorrecursosson_c',
                                     'label' => 'ctpldidproveedorrecursosson_c_label',
-                                    'value' => 'or(and(not(equal($tipodepersona_c,"Persona Moral")),equal($tipo_registro_c,"3")),and(not(equal($tipodepersona_c,"Persona Moral")),equal($estatus_c,"Interesado")))',
+                                    'value' => 'or(and(not(equal($tipodepersona_c,"Persona Moral")),equal($tipo_registro_cuenta_c,"3")),and(not(equal($tipodepersona_c,"Persona Moral")),equal($estatus_c,"Interesado")))',
                                     //'value' => 'or(equal($tipo_registro_c,"Cliente"), equal($estatus_c,"Interesado"))',
                             ),
                     ),
@@ -540,7 +540,7 @@
     $dependencies['Accounts']['idcliente_c_readonly'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c'),
+            'triggerFields' => array('idcliente_c','tipo_registro_cuenta_c','estatus_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -641,7 +641,7 @@
         $dependencies['Accounts']['referencia_bancaria_c_readonly'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c','referencia_bancaria_c'),
+            'triggerFields' => array('idcliente_c','tipo_registro_cuenta_c','estatus_c','referencia_bancaria_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -681,7 +681,7 @@ $dependencies['Accounts']['estatus_c_readonly'] = array(
 $dependencies['Accounts']['alta_proveedor_c_readonly'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c','alta_proveedor_c'),
+    'triggerFields' => array('idcliente_c','tipo_registro_cuenta_c','estatus_c','alta_proveedor_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -698,7 +698,7 @@ $dependencies['Accounts']['alta_proveedor_c_readonly'] = array(
 $dependencies['Accounts']['ApellidoMaterno_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipodepersona_c','tipo_registro_c','subtipo_cuenta_c','apellidomaterno_c'),
+    'triggerFields' => array('tipodepersona_c','tipo_registro_cuenta_c','subtipo_registro_cuenta_c','apellidomaterno_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -707,7 +707,7 @@ $dependencies['Accounts']['ApellidoMaterno_required'] = array(
                 'target' => 'apellidomaterno_c',
                 'label' => 'apellidomaterno_c_label',
                 //'value' => 'and(equal($tipodepersona_c,"Persona Fisica"), equal($tipo_registro_c,"Prospecto"), equal($subtipo_cuenta_c,"Interesado"))',
-                'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Interesado")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8"),equal($subtipo_registro_cuenta_c,"7")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
@@ -719,7 +719,7 @@ $dependencies['Accounts']['ApellidoMaterno_required'] = array(
 $dependencies['Accounts']['SectorEconomico_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','sectoreconomico_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','sectoreconomico_c','subtipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -727,7 +727,7 @@ $dependencies['Accounts']['SectorEconomico_required'] = array(
             'params' => array(
                 'target' => 'sectoreconomico_c',
                 'label' => 'sectoreconomico_c_label',
-                'value' => 'not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($tipo_registro_c,"5"),equal($tipo_registro_c,"4")))',
+                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
             ),
         ),
     ),
@@ -736,7 +736,7 @@ $dependencies['Accounts']['SectorEconomico_required'] = array(
 $dependencies['Accounts']['Ventas_anuales_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','ventas_anuales_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','ventas_anuales_c','subtipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -745,7 +745,7 @@ $dependencies['Accounts']['Ventas_anuales_required'] = array(
                 'target' => 'ventas_anuales_c',
                 'label' => 'ventas_anuales_c_label',
                 //'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
-                'value' => 'not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"5"),equal($tipo_registro_c,"4")))',
+                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
             ),
         ),
     ),
@@ -754,7 +754,7 @@ $dependencies['Accounts']['Ventas_anuales_required'] = array(
 $dependencies['Accounts']['activo_fijo_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','activo_fijo_c','subtipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -763,7 +763,7 @@ $dependencies['Accounts']['activo_fijo_required'] = array(
                 'target' => 'activo_fijo_c',
                 'label' => 'activo_fijo_c_label',
                 //'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
-                'value' => 'not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"5"),equal($tipo_registro_c,"4")))',
+                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
             ),
         ),
     ),
@@ -772,7 +772,7 @@ $dependencies['Accounts']['activo_fijo_required'] = array(
 $dependencies['Accounts']['Potencial_cuenta_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c','potencial_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','activo_fijo_c','subtipo_registro_cuenta_c','potencial_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -781,7 +781,7 @@ $dependencies['Accounts']['Potencial_cuenta_required'] = array(
                 'target' => 'potencial_cuenta_c',
                 'label' => 'potencial_cuenta_c_label',
                 //'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
-                'value' => 'not(or(equal($tipo_registro_c,"1"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"5"),equal($tipo_registro_c,"4")))',
+                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
             ),
         ),
     ),
@@ -790,7 +790,7 @@ $dependencies['Accounts']['Potencial_cuenta_required'] = array(
 $dependencies['Accounts']['Zona_Geografica_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','zonageografica_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','zonageografica_c','subtipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -799,7 +799,7 @@ $dependencies['Accounts']['Zona_Geografica_required'] = array(
                 'target' => 'zonageografica_c',
                 'label' => 'zonageografica_c_label',
                 //'value' => 'and(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
-                'value' => 'not(or(equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"Lead")))',
+                'value' => 'not(or(equal($subtipo_registro_cuenta_c,"2"),equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"Lead")))',
             ),
         ),
     ),
@@ -808,7 +808,7 @@ $dependencies['Accounts']['Zona_Geografica_required'] = array(
 $dependencies['Accounts']['Pasaporte_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','ifepasaporte_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','ifepasaporte_c','subtipo_registro_cuenta_c','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -817,7 +817,7 @@ $dependencies['Accounts']['Pasaporte_required'] = array(
                 'target' => 'ifepasaporte_c',
                 'label' => 'ifepasaporte_c_label',
                 //'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Credito")),equal($tipodepersona_c,"Persona Fisica"))',
-                'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
@@ -826,7 +826,7 @@ $dependencies['Accounts']['Pasaporte_required'] = array(
 $dependencies['Accounts']['Curp_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','curp_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','curp_c','subtipo_registro_cuenta_c','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -834,7 +834,7 @@ $dependencies['Accounts']['Curp_required'] = array(
             'params' => array(
                 'target' => 'curp_c',
                 'label' => 'curp_c_label',
-                'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
@@ -843,7 +843,7 @@ $dependencies['Accounts']['Curp_required'] = array(
 $dependencies['Accounts']['Estado_Civil_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','estadocivil_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','estadocivil_c','subtipo_registro_cuenta_c','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -851,7 +851,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
             'params' => array(
                 'target' => 'estadocivil_c',
                 'label' => 'estadocivil_c_label',
-                'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
@@ -860,7 +860,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
 $dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','regimenpatrimonial_c','subtipo_cuenta_c','tipodepersona_c','estadocivil_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','regimenpatrimonial_c','subtipo_registro_cuenta_c','tipodepersona_c','estadocivil_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -877,7 +877,7 @@ $dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
 $dependencies['Accounts']['Profesion_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','profesion_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','profesion_c','subtipo_registro_cuenta_c','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -885,7 +885,7 @@ $dependencies['Accounts']['Profesion_required'] = array(
             'params' => array(
                 'target' => 'profesion_c',
                 'label' => 'profesion_c_label',
-                'value' => 'and(or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Integracion de Expediente")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
+                'value' => 'and(or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"8")),or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial")))',
             ),
         ),
     ),
@@ -894,7 +894,7 @@ $dependencies['Accounts']['Profesion_required'] = array(
 $dependencies['Accounts']['Numero_Empleados_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','empleados_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','empleados_c','subtipo_registro_cuenta_c','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -902,7 +902,7 @@ $dependencies['Accounts']['Numero_Empleados_required'] = array(
             'params' => array(
                 'target' => 'empleados_c',
                 'label' => 'empleados_c_label',
-                'value' => 'or(equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"2"))',
+                'value' => 'or(equal($subtipo_registro_cuenta_c,"7"),equal($tipo_registro_cuenta_c,"2"))',
             ),
         ),
     ),
@@ -910,7 +910,7 @@ $dependencies['Accounts']['Numero_Empleados_required'] = array(
 $dependencies['Accounts']['MacroSector'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','tct_macro_sector_ddw_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_cuenta_c','tct_macro_sector_ddw_c','subtipo_registro_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -918,7 +918,7 @@ $dependencies['Accounts']['MacroSector'] = array(
             'params' => array(
                 'target' => 'tct_macro_sector_ddw_c',
                 'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
-                'value' => 'or(equal($tipo_registro_c,"3"),equal($subtipo_cuenta_c,"Interesado"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Credito"),equal($tipo_registro_c,"5"))',
+                'value' => 'or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"7"),equal($subtipo_registro_cuenta_c,"8"),equal($subtipo_registro_cuenta_c,"9"),equal($tipo_registro_cuenta_c,"5"))',
             ),
         ),
     ),
