@@ -437,7 +437,7 @@
                       item.clean_name= original_name;
                   }
 
-                  var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
+                  var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_cuenta_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                   fields: fields.join(','),
                   max_num: 5,
@@ -534,7 +534,7 @@
                 });
                 $('.addParticipantes').bind('click', false);
                 // Obtiene datos del participante seleccionado
-                var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
+                var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_cuenta_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                   fields: fields.join(','),
                   max_num: 5,

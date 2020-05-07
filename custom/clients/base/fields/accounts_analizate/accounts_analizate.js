@@ -61,7 +61,7 @@
     },
 
     ReenviaCorreo: function () {
-        if(this.model.get('tipo_registro_c')=="Proveedor" || this.model.get('esproveedor_c')==true) {
+        if(this.model.get('tipo_registro_cuenta_c')=="5" || this.model.get('esproveedor_c')==true) {
             if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
                 app.alert.show('No Envio', {
                     level: 'error',

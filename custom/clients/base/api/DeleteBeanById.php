@@ -60,7 +60,7 @@ class DeleteBeanById extends SugarApi
 
         //Obteniendo bean
         $beanModule = BeanFactory::retrieveBean($modulo, $id);
-        $beanModule->subtipo_cuenta_c="No Viable";
+        $beanModule->subtipo_registro_cuenta_c="6"; // No viable - 6
         $beanModule->mark_deleted($id);
         $beanModule->save();
 

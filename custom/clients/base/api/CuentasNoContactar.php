@@ -57,13 +57,13 @@ class CuentasNoContactar extends SugarApi
 
 
             $total_rows = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
-                $total_rows .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
+                $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
-                $total_rows .= " WHERE tipo_registro_c IN({$tipos_query})
+                $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
 AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
  AND deleted =0";
             }
@@ -78,13 +78,13 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
             }
 
             $query = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_c, rfc_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
-                $query .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
+                $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
-                $query .= " WHERE tipo_registro_c IN({$tipos_query})
+                $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
 AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
  AND deleted =0";
             }

@@ -582,9 +582,9 @@ class Meetings_Hooks
             $beanResumen->tct_tipo_cuenta_uc_c = "PROSPECTO CONTACTADO";
           }
           $beanResumen->save();
-          if($beanAccount->tipo_registro_c == 'Lead'){
-  					$beanAccount->tipo_registro_c = 'Prospecto';
-            $beanAccount->subtipo_cuenta_c = 'Contactado';
+          if($beanAccount->tipo_registro_cuenta_c == '1'){
+  					$beanAccount->tipo_registro_cuenta_c = '2';
+            $beanAccount->subtipo_registro_cuenta_c = '2';
             $beanAccount->tct_prospecto_contactado_chk_c = 1;
             $beanAccount->save();
           }
