@@ -163,7 +163,8 @@ class ResumenClienteAPI extends SugarApi
 		 //Uniclick
         $arr_principal['uniclick'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
-			"tipo_cuenta"=>"",
+            "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "promotor" => "",
@@ -696,7 +697,7 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
 				
 				//Recupera Uniclick
-                $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
+                // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
                
             }
@@ -752,6 +753,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_sos']['cobranza'] = $cobranza;
                         break;
                     case '8': //Uniclick
+                        $arr_principal['uniclick']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['uniclick']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
                         break;     
