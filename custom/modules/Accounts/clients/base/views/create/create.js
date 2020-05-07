@@ -2095,7 +2095,7 @@
 
     validapotencial: function(fields, errors, callback) {
 
-        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '9') || this.model.get('tipo_registro_cuenta_c') == '3'  ) {
+        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '8') || this.model.get('tipo_registro_cuenta_c') == '3'  ) {
             if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;

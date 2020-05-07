@@ -1116,7 +1116,7 @@
             }
 
             //Validación 2:
-            if (this.model.get("tipo_registro_cuenta_c") == "3" || this.model.get("subtipo_registro_cuenta_c") == "9" || this.model.get("subtipo_registro_cuenta_c") == "10") {
+            if (this.model.get("tipo_registro_cuenta_c") == "3" || this.model.get("subtipo_registro_cuenta_c") == "8" || this.model.get("subtipo_registro_cuenta_c") == "9") {
                 if (cDireccionFiscal == 0 || cDireccionCorrs == 0) {
                     app.alert.show('multiple_fiscal', {
                         level: 'error',

@@ -1892,7 +1892,7 @@
                 api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
             }
         }
-        if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "7" && totalProspecto == totalProspectoG) {
+        if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "2" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
             v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
             this.model.set("tipo_registro_cuenta_c", "1");
@@ -2106,7 +2106,7 @@
         if (valMedios == 0 && valContacto == 0 && validar_fields == 0) {
             if (this.model.get('tipo_registro_cuenta_c') == "1") {
                 this.model.set('tipo_registro_cuenta_c', '2');
-                this.model.set('subtipo_registro_c', '7');
+                this.model.set('subtipo_registro_cuenta_c', '2');
                 this.model.set('tct_prospecto_contactado_chk_c', true);
                 //this.model.set("show_panel_c",1);
                 this.model.save();
@@ -3111,7 +3111,7 @@
 
     macrosector: function (fields, errors, callback) {
         if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
-            || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9' || this.model.get('subtipo_registro_cuenta_c') == '10')) {
+            || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
             errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
             errors['tct_macro_sector_ddw_c'].required = true;
         }
@@ -3621,7 +3621,7 @@
 
     validapotencial: function (fields, errors, callback) {
 
-        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '9') || this.model.get('tipo_registro_cuenta_c') == '3') {
+        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '8') || this.model.get('tipo_registro_cuenta_c') == '3') {
             if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0)) {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
@@ -5081,7 +5081,7 @@
                         Oproductos.productos = data;
                         if (self.model.get('tipo_registro_cuenta_c') != "3") {
                             self.model.set("tipo_registro_cuenta_c", "3");
-                            self.model.set("subtipo_registro_cuenta_c", "19");
+                            self.model.set("subtipo_registro_cuenta_c", "18");
                             self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
                             self.model.save();
                             v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
