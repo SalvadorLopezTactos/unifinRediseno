@@ -109,7 +109,7 @@
              */
             //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
             if($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2'){ // Prospecto - 2  // Contactado - 2
-                $beanCuenta->subtipo_registro_cuenta_c='8'; //Interesado - 8
+                $beanCuenta->subtipo_registro_cuenta_c='7'; //Interesado - 7
                 $beanCuenta->save();
             }
         }
@@ -972,7 +972,7 @@ SQL;
             if($etapa=="SI" && $bean->fetched_row['tct_etapa_ddw_c']!= $etapa){
                 $GLOBALS['log']->fatal('Declara Prospecto Interesado');
                 $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                 $etisubtipo = $subtipo["8"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 8 - Interesado
+                 $etisubtipo = $subtipo["7"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 7 - Interesado
                  switch ($producto) {
                      case '1':
                          if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1011,7 +1011,7 @@ SQL;
             if($subetapa=="PE" && $bean->fetched_row[estatus_c]!= $subetapa){
                 $GLOBALS['log']->fatal('Entra a validar Prospecto Integracion de Exp');
                 $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["9"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 9 - Integracion de Expediente
+                $etisubtipo = $subtipo["8"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 8 - Integracion de Expediente
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1049,7 +1049,7 @@ SQL;
             //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito
             if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row[estatus_c]!= $subetapa){
                 $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["10"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 10 - En Crédito
+                $etisubtipo = $subtipo["9"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 9 - En Crédito
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1087,7 +1087,7 @@ SQL;
             //Actualiza en Rechazado y actualiza campos con valor Prospecto Rechazado
             if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row[estatus_c]!= $subetapa){
                 $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["11"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 11 - Rechazado
+                $etisubtipo = $subtipo["10"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 10 - Rechazado
                 switch ($producto) {
                     case '1':
                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
@@ -1125,7 +1125,7 @@ SQL;
             //Actualiza cuando la solicitud es Autorizada (N)
             if (!empty($bean_Resumen && $bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c)) { //Etapa solicitud= N= Autorizada
                 $etitipo = $tipo["3"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 3 - Cliente
-                $etisubtipo = $subtipo["19"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 19 - Con Linea Vigente
+                $etisubtipo = $subtipo["18"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 18 - Con Linea Vigente
 
                 //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
                 //LEASING
