@@ -936,7 +936,7 @@
     },
 
     cuentacliente: function (){
-        if(this.model.get('tipo_registro_c')=='Cliente'){
+        if(this.model.get('tipo_registro_c')=='3'){
             $('.campo25-ap').show();
         }else{
             $('.campo25-ap').hide();
