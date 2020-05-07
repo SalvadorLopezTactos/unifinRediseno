@@ -442,7 +442,8 @@ SQL;
     public function crearFolioCliente($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="8"))) {
+        //Tipo Cuenta: 3-Cliente, 4-Persona, 5-Proveedor **** SubTipo-Cuenta: 7-Interesado
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7"))) {
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(1,$bean);
@@ -616,8 +617,8 @@ SQL;
             *Conservar los campos que sean obligatorios de acuerdo a la opción
             *seleccionada
 
-             */ // Tipo Cuenta 2-Prospecto, subTipo Cuenta 8-Interesado
-            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="8")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
+             */ // Tipo Cuenta 2-Prospecto, subTipo Cuenta 7-Interesado
+            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
             {
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->insertarClienteCompleto($bean);
@@ -1286,8 +1287,8 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
                         $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
                         $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 9-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '9' ) {
+                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
+                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
                             $beanprod->tipo_cuenta = "1"; //1-Lead
                             $beanprod->subtipo_cuenta = "5"; //En calificacion
                             $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
@@ -1299,8 +1300,8 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
                         $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
                         $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 9-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '9' ) {
+                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
+                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
                             $beanprod->tipo_cuenta = "1"; //1-Lead
                             $beanprod->subtipo_cuenta = "5"; //En calificacion
                             $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
@@ -1319,8 +1320,8 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
                         $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
                         $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 9-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '9' ) {
+                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
+                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
                             $beanprod->tipo_cuenta = "1"; //1-Lead
                             $beanprod->subtipo_cuenta = "5"; //En calificacion
                             $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
@@ -1339,8 +1340,8 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
                         $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
                         $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 9-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '9' ) {
+                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
+                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
                             $beanprod->tipo_cuenta = "1"; //1-Lead
                             $beanprod->subtipo_cuenta = "5"; //En calificacion
                             $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
@@ -1360,8 +1361,8 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function set_csv_linea_vigente($bean=null, $event= null, $args= null){
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
-        //Esta función se dispara a través de Proccess Author "Cliente con Línea"
-  	    if(($bean->subtipo_registro_cuenta_c=='19' && $bean->tipo_registro_cuenta_c=='3' && $bean->fetched_row['subtipo_registro_cuenta_c']!='19' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c=='9' && $bean->tipo_registro_cuenta_c=='2' && $bean->fetched_row['subtipo_registro_cuenta_c']!='9' && !$bean->conversion_gclid_c)){
+        //Esta función se dispara a través de Proccess Author "Cliente con Línea" ****** Tipo-Cuenta: 2-Prospecto, 3-Cliente **** SubTipo-Cuenta: 18-Con linea vigente, 8-Integracion de expediente
+  	    if(($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && $bean->fetched_row['subtipo_registro_cuenta_c']!='18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c=='8' && $bean->tipo_registro_cuenta_c=='2' && $bean->fetched_row['subtipo_registro_cuenta_c']!='8' && !$bean->conversion_gclid_c)){
             $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPARA DESDE PROCCESS AUTHOR------------');
             $gclid='';//este campo se obtiene del lead relacionado campo gclid
             $conversion_name='Conv CRM';
