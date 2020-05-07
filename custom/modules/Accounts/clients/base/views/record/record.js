@@ -161,16 +161,16 @@
 
         /*
          self.model.on("change", function() {
-         if (self.model.get('tipo_registro_c') != null){
-         if(self.model.get('tipo_registro_c') != 'Persona') {
-         var new_options = app.lang.getAppListStrings('tipo_registro_list');
+         if (self.model.get('tipo_registro_cuenta_c') != null){
+         if(self.model.get('tipo_registro_cuenta_c') != 'Persona') {
+         var new_options = app.lang.getAppListStrings('tipo_registro_cuenta_list');
          Object.keys(new_options).forEach(function (key) {
          if (key == "Persona") {
          delete new_options[key];
          }
          });
 
-         self.model.fields['tipo_registro_c'].options = new_options;
+         self.model.fields['tipo_registro_cuenta_c'].options = new_options;
          }
 
          }
@@ -231,7 +231,7 @@
         this.get_phones();
         this.get_addresses();
         this.get_v360();
-        this.get_Oproductos();
+        //this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
         this.get_analizate();
@@ -368,7 +368,7 @@
 
     saveProdPLD: function (fields, errors, callback) {
 
-        if (this.model.get('tipo_registro_c') != '') {
+        if (this.model.get('tipo_registro_cuenta_c') != '') {
             // Actualizar modelo de this.ProductosPLD
             // this.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
             if (this.ProductosPLD != null && typeof (this.$('.campo4ddw-cs').select2('val')) == "string") {
@@ -646,7 +646,7 @@
      *La casilla proveedor se debe mantener activa al crear un proveedor
      * */
     checkProveedor: function () {
-        if (this.model.get('tipo_registro_c') == 'Proveedor') {
+        if (this.model.get('tipo_registro_cuenta_c') == '5') {
             this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
         }
     },
@@ -725,7 +725,7 @@
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL7']").show();
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").show();
             //Muestra Propietario Real
-            if (this.model.get('tipo_registro_c') == "Cliente") {
+            if (this.model.get('tipo_registro_cuenta_c') == "3") {
                 this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").show();
             }
         }
@@ -855,7 +855,7 @@
     },
 
     _doValidateTieneContactos: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') == "Persona Moral" && (/*this.model.get('tipo_registro_c') == "Cliente" || this.model.get('estatus_c') == "Interesado" || */this.model.get('tipo_registro_c') == "Prospecto")) {
+        if (this.model.get('tipodepersona_c') == "Persona Moral" && (/*this.model.get('tipo_registro_cuenta_c') == "Cliente" || this.model.get('estatus_c') == "Interesado" || */this.model.get('tipo_registro_cuenta_c') == "2")) {
             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id') + "/link/rel_relaciones_accounts_1", null, null, {
                 fields: name,
             }), null, {
@@ -943,8 +943,8 @@
          @author Victo Martinez - 01/08/2018
          Deshabilita campos: Tipo de cuenta y subtipo de cuenta
          */
-        this.noEditFields.push('subtipo_cuenta_c');
-        this.noEditFields.push('tipo_registro_c');
+        this.noEditFields.push('subtipo_registro_cuenta_c');
+        this.noEditFields.push('tipo_registro_cuenta_c');
 
         /*
          *
@@ -1141,7 +1141,7 @@
                         console.log(data);
                         if (data == false) {
 
-                            if (this.model.get('tipo_registro_c') != "Persona") {
+                            if (this.model.get('tipo_registro_cuenta_c') != "4") {
 
                                 //$('.noEdit.fieldset.actions.detail.btn-group').hide();
                                 self_this.$('[data-event="button:edit_button:click"]').hide();
@@ -1183,7 +1183,7 @@
                         console.log(data);
                         if (data == false) {
 
-                            if (this.model.get('tipo_registro_c') != "Persona") {
+                            if (this.model.get('tipo_registro_cuenta_c') != "4") {
 
                                 //$('.noEdit.fieldset.actions.detail.btn-group').hide();
                                 self1.$('[data-event="button:edit_button:click"]').hide();
@@ -1382,8 +1382,8 @@
         //Evaluación para mostrar botones
         /*
          * Regresar a lead:
-         * tipo_registro_c = Prospecto
-         * && subtipo_cuenta_c = Contactado
+         * tipo_registro_cuenta_c = Prospecto
+         * && subtipo_registro_cuenta_c = Contactado
          */
         if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
             (tipofleet == "Prospecto" && subtipofleet == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
@@ -1396,7 +1396,7 @@
         //Evaluación para mostrar botones
         /*
          * Prospecto contactado:
-         * tipo_registro_c = Lead
+         * tipo_registro_cuenta_c = Lead
          */
         if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
@@ -1407,8 +1407,8 @@
 
         /*
          * Conviert a Lead:
-         * tipo_registro_c = Persona
-         * OR tipo_registro_c = Proveedor
+         * tipo_registro_cuenta_c = Persona
+         * OR tipo_registro_cuenta_c = Proveedor
          */
         if (((leasingprod == "Persona" || leasingprod == "Proveedor") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Persona" || factprod == "Proveedor") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Persona" || caprod == "Proveedor") && userprod.includes("3") && asesorCA == logueado) || ((tipofleet == "Persona" || tipofleet == "Proveedor") && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
@@ -1420,7 +1420,7 @@
         //Evaluación para mostrar botones
         /*
          * Convertir Cliente Uniclick
-         * tipo_registro_c = Lead
+         * tipo_registro_cuenta_c = Lead
          */
         if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
             $('[name="regresalead"]').hide();
@@ -1434,7 +1434,7 @@
      Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
      */
     _hideNPS: function () {
-        if (this.model.get('tipo_registro_c') != "Cliente") {
+        if (this.model.get('tipo_registro_cuenta_c') != "3") {
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
         }
     },
@@ -1442,19 +1442,19 @@
 
     /*
      @author Salvador Lopez
-     Se omite la opción de "Persona" dentro del campo tipo_registro_c
+     Se omite la opción de "Persona" dentro del campo tipo_registro_cuenta_c
      * */
     deleteOptionPersona: function () {
-        if (this.model.get('tipo_registro_c') != null) {
-            if (this.model.get('tipo_registro_c') != 'Persona') {
-                var new_options = app.lang.getAppListStrings('tipo_registro_list');
+        if (this.model.get('tipo_registro_cuenta_c') != null) {
+            if (this.model.get('tipo_registro_cuenta_c') != '4') {
+                var new_options = app.lang.getAppListStrings('tipo_registro_cuenta_list');
                 Object.keys(new_options).forEach(function (key) {
-                    if (key == "Persona") {
+                    if (key == "4") {
                         delete new_options[key];
                     }
                 });
 
-                this.model.fields['tipo_registro_c'].options = new_options;
+                this.model.fields['tipo_registro_cuenta_c'].options = new_options;
             }
 
         }
@@ -1622,7 +1622,7 @@
 
     _doGenera_RFC_CURP: function () {
         if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
-            && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
+            && (this.model.get('tipo_registro_cuenta_c') != '2' || this.model.get('estatus_c') != 'Interesado')) {
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
                 this.model.set('rfc_c', 'XXXX010101XXX');
             } else {
@@ -1704,7 +1704,7 @@
     },
 
     /*_ShowDireccionesTipoRegistro: function(){
-     if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('estatus_c') == "Interesado")
+     if(this.model.get('tipo_registro_cuenta_c') == "Cliente" || this.model.get('estatus_c') == "Interesado")
      {
      this.$("div[data-name='account_direcciones']").show();
      }
@@ -1713,7 +1713,7 @@
      this.$("div[data-name='account_direcciones']").hide();
      }
      // Carlos Zaragoza: Se elimina el campo por defaiult de tipo de proveedor del registro pero sies proveedor, se selecciona bienes por default
-     if(this.model.get('tipo_registro_c') == 'Proveedor'){
+     if(this.model.get('tipo_registro_cuenta_c') == 'Proveedor'){
      this.model.set('tipo_proveedor_c', '1');
      }
      },*/
@@ -1741,9 +1741,9 @@
     },
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
-            || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c') == true) {
-            if (_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_c') == "Prospecto") {
+        if (this.model.get('tipo_registro_cuenta_c') == "3" || this.model.get('tipo_registro_cuenta_c') == "5"
+            || this.model.get('tipo_registro_cuenta_c') == "2" || this.model.get('esproveedor_c') == true) {
+            if (_.isEmpty(this.oTelefonos.telefono) && this.model.get('tipo_registro_cuenta_c') == "2") {
                 $('#tabletelefonos').css('border', '2px solid red');
                 errors['account_telefonos1'] = errors['account_telefonos1'] || {};
                 errors['account_telefonos1'].required = true;
@@ -1892,11 +1892,11 @@
                 api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
             }
         }
-        if (this.model.get("tipo_registro_c") == "Prospecto" && this.model.get("subtipo_cuenta_c") == "Contactado" && totalProspecto == totalProspectoG) {
+        if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "7" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
             v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-            this.model.set("tipo_registro_c", "Lead");
-            this.model.set("subtipo_cuenta_c", "En Calificacion");
+            this.model.set("tipo_registro_cuenta_c", "1");
+            this.model.set("subtipo_registro_cuenta_c", "5");
             this.model.set("tct_tipo_subtipo_txf_c", "LEAD EN CALIFICACIÓN");
             this.model.set("tct_prospecto_contactado_chk_c", false);
             //this.model.set("show_panel_c",0);
@@ -2104,9 +2104,9 @@
          } */
 
         if (valMedios == 0 && valContacto == 0 && validar_fields == 0) {
-            if (this.model.get('tipo_registro_c') == "Lead") {
-                this.model.set('tipo_registro_c', 'Prospecto');
-                this.model.set('subtipo_registro_c', 'Contactado');
+            if (this.model.get('tipo_registro_cuenta_c') == "1") {
+                this.model.set('tipo_registro_cuenta_c', '2');
+                this.model.set('subtipo_registro_c', '7');
                 this.model.set('tct_prospecto_contactado_chk_c', true);
                 //this.model.set("show_panel_c",1);
                 this.model.save();
@@ -2178,7 +2178,7 @@
             level: 'process',
             title: 'Convirtiendo cuenta, por favor espere',
         });
-        if ((this.model.get('tipo_registro_c') == "Lead" && $('.chk_l_nv')[0].checked && $('.chk_f_nv')[0].checked && $('.chk_ca_nv')[0].checked) &&
+        if ((this.model.get('tipo_registro_cuenta_c') == "1" && $('.chk_l_nv')[0].checked && $('.chk_f_nv')[0].checked && $('.chk_ca_nv')[0].checked) &&
             (this.model.get('user_id_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c') == "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")) {
             app.alert.dismiss('convierteLead_a_Prospecto');
             app.alert.show("Cumple 3 checks", {
@@ -2467,10 +2467,10 @@
                         this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
-                    if (this.model.get("tipo_registro_c") == "Persona" || this.model.get('tipo_registro_c') == "Proveedor") {
+                    if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
                         v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-                        this.model.set("tipo_registro_c", "Lead");
-                        this.model.set("subtipo_cuenta_list", "En Calificacion");
+                        this.model.set("tipo_registro_cuenta_c", "1");
+                        this.model.set("subtipo_registro_cuenta_list", "5");
                         this.model.set("show_panel_c", 1);
                         this.model.save();
                     }
@@ -2544,7 +2544,7 @@
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+        if (this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5') {
             if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
                 app.alert.show("Correo requerido", {
                     level: "error",
@@ -2841,10 +2841,10 @@
 
     /*
      validaExtranjerosRFC: function (){
-     if((this.model.get('pais_nacimiento_c')!=2) && (this.model.get('tipo_registro_c') != 'Prospecto' && this.model.get('tipo_registro_c') != 'Persona')){
+     if((this.model.get('pais_nacimiento_c')!=2) && (this.model.get('tipo_registro_cuenta_c') != 'Prospecto' && this.model.get('tipo_registro_cuenta_c') != 'Persona')){
      this.model.set('rfc_c','XXX010101XXX');
      }
-     if(this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('estatus_c') == 'Interesado' && this.model.get('pais_nacimiento_c')!=2){
+     if(this.model.get('tipo_registro_cuenta_c') == 'Prospecto' && this.model.get('estatus_c') == 'Interesado' && this.model.get('pais_nacimiento_c')!=2){
      this.model.set('rfc_c','XXX010101XXX');
      }
      },
@@ -2882,7 +2882,7 @@
     },
 
     validaProveedorRequerido: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true) { //duda
+        if (this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true) { //duda
             this.model.set("esproveedor_c", true);
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
@@ -3110,8 +3110,8 @@
     },
 
     macrosector: function (fields, errors, callback) {
-        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor'
-            || this.model.get('esproveedor_c') == true || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
+        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
+            || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9' || this.model.get('subtipo_registro_cuenta_c') == '10')) {
             errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
             errors['tct_macro_sector_ddw_c'].required = true;
         }
@@ -3119,7 +3119,7 @@
     },
 
     sectoreconomico: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true)) {
+        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
             errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
             errors['sectoreconomico_c'].required = true;
         }
@@ -3339,7 +3339,7 @@
             }
         }
         if (coincide_rol != 0) {
-            if (this.model.get('tipo_registro_c') != "Lead") {
+            if (this.model.get('tipo_registro_cuenta_c') != "1") {
                 app.alert.show("No Rol2", {
                     level: "error",
                     title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
@@ -3448,7 +3448,7 @@
                 $('.select2-choices').css('border-color', '');
             }
             //Validar campos adionales
-            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c') == 'Prospecto') {
+            if (this.model.get('tipo_registro_cuenta_c') == '4' || this.model.get('tipo_registro_cuenta_c') == '2') {
 
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                     errors['rfc_c'] = errors['rfc_c'] || {};
@@ -3621,7 +3621,7 @@
 
     validapotencial: function (fields, errors, callback) {
 
-        if ((this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente') || this.model.get('tipo_registro_c') == 'Cliente') {
+        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '9') || this.model.get('tipo_registro_cuenta_c') == '3') {
             if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0)) {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
@@ -3691,8 +3691,8 @@
         var faltantesCS = "";
 
         //Valida requeridos a partir de Prospecto Interesado
-        var tipoCuenta = this.model.get('tipo_registro_c');
-        var subtipoCuenta = this.model.get('subtipo_cuenta_c');
+        var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
+        var subtipoCuenta = this.model.get('subtipo_registro_cuenta_c');
         if (tipoCuenta != '') {
             //Valida campos para AP
             if (App.user.attributes.tipodeproducto_c == '1') {
@@ -4837,7 +4837,7 @@
         callback(null, fields, errors);
     },
     validaiva: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('esproveedor_c') == true) {
+        if (this.model.get('tipo_registro_cuenta_c') == "5" || this.model.get('esproveedor_c') == true) {
             if (this.model.get('iva_c') !== "" && this.model.get('iva_c') != undefined && (Number(this.model.get('iva_c')) <= 0 || Number(this.model.get('iva_c')) > 100.00)) {
                 if (parseFloat(this.model.get('iva_c')) <= 0.0000) {
                     errors['iva_c'] = errors['iva_c'] || {};
@@ -5079,9 +5079,9 @@
                         //this._render();
                         app.alert.dismiss('convierte_Cliente_uniclick');
                         Oproductos.productos = data;
-                        if (self.model.get('tipo_registro_c') != "Cliente") {
-                            self.model.set("tipo_registro_c", "Cliente");
-                            self.model.set("subtipo_cuenta_c", "Con Linea Vigente");
+                        if (self.model.get('tipo_registro_cuenta_c') != "3") {
+                            self.model.set("tipo_registro_cuenta_c", "3");
+                            self.model.set("subtipo_registro_cuenta_c", "19");
                             self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
                             self.model.save();
                             v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
@@ -5152,33 +5152,41 @@
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['leasing'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "3": //Credito-auto
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['credito_auto'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "4": //Factoraje
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['factoring'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "6": //Fleet
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['fleet'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "8": //Uniclick
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['uniclick'] = Productos[key];
-
+                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;
                     }
                 });
-
                 cont_uni_p['ResumenProductos'] = ResumenProductos;
                 cont_uni_p.render();
             },
