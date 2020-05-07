@@ -220,11 +220,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tipo_registro_c',
+                'name' => 'tipo_registro_cuenta_c',
+                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
               1 => 
               array (
-                'name' => 'subtipo_cuenta_c',
+                'name' => 'subtipo_registro_cuenta_c',
+                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
                 'readonly' => true,
               ),
               2 => 
