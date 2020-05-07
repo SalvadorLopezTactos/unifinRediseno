@@ -54,7 +54,7 @@ class callLead_class
           }
           $beanResumen->save();
           if($beanAccount->tipo_registro_cuenta_c == '1'){
-  					$beanAccount->tipo_registro_cuenta_c = '2';
+  					$beanAccount->tipo_registro_cuenta_c = '7';
             $beanAccount->subtipo_registro_cuenta_c = '2';
             $beanAccount->tct_prospecto_contactado_chk_c = 1;
             $beanAccount->save();
