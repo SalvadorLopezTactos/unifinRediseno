@@ -9,42 +9,42 @@ Adrián Arauz - 09-11-19
                 <div class="campo1L span6">
                     <label class="record-label" style="margin-left:0px">Tipo de Cuenta Leasing/Crédito SOS</label>
                     <label class="normal " type="text" style="margin-left:0px" data-name="leasing" />
-                    {{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_l_c}}
-                    {{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_l_txf_c}}
+                    {{#if productos.tct_tipo_cuenta_l_c}}{{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_l_c}}{{/if}}
+                    {{#if productos.tct_subtipo_l_txf_c}}{{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_l_txf_c}}{{/if}}
                 </div>
 
                 <div class="campo2f span6">
                     <label class="record-label" style="margin-left:0px">Tipo de Cuenta Factoraje</label>
                     <label class="normal " type="text" style="margin-left:0px" data-name="factoring" />
-                    {{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_f_c}}
-                    {{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_f_txf_c}}
+                    {{#if productos.tct_tipo_cuenta_f_c}}{{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_f_c}}{{/if}}
+                    {{#if productos.tct_subtipo_f_txf_c}}{{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_f_txf_c}}{{/if}}
                 </div>
             </div>
         <tr>
         </tr>
-        <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
-            <div class="campo3ca span6">
-                <label class="record-label" style="margin-left:0px">Tipo de Cuenta CA</label>
-                <label class="normal " type="text" style="margin-left:0px" data-name="CA" />
-                {{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_ca_c}}
-                {{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_ca_txf_c}}
+            <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
+                <div class="campo3ca span6">
+                    <label class="record-label" style="margin-left:0px">Tipo de Cuenta CA</label>
+                    <label class="normal " type="text" style="margin-left:0px" data-name="CA" />
+                    {{#if productos.tct_tipo_cuenta_ca_c}}{{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_ca_c}}{{/if}}
+                    {{#if productos.tct_subtipo_ca_txf_c}}{{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_ca_txf_c}}{{/if}}
+                </div>
+                <div class="campo3fleet span6">
+                    <label class="record-label" style="margin-left:0px">Tipo de Cuenta Fleet</label>
+                    <label class="normal " type="text" style="margin-left:0px" data-name="CA" />
+                    {{#if productos.tct_tipo_cuenta_fl_c}}{{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_fl_c}}{{/if}}
+                    {{#if productos.tct_subtipo_fl_txf_c}}{{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_fl_txf_c}}{{/if}}
+                </div>
             </div>
-            <div class="campo3fleet span6">
-                <label class="record-label" style="margin-left:0px">Tipo de Cuenta Fleet</label>
-                <label class="normal " type="text" style="margin-left:0px" data-name="CA" />
-                {{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_fl_c}}
-                {{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_fl_txf_c}}
-            </div>
-        </div>
         <tr>
         </tr>
-        <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
-            <div class="campo5cu span6">
-                <label class="record-label" style="margin-left:0px">Tipo de Cuenta Uniclick</label>
-                <label class="normal " type="text" style="margin-left:0px" data-name="UC" />
-                {{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_uc_c}}
-                {{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_uc_txf_c}}
+            <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
+                <div class="campo5cu span6">
+                    <label class="record-label" style="margin-left:0px">Tipo de Cuenta Uniclick</label>
+                    <label class="normal " type="text" style="margin-left:0px" data-name="UC" />
+                    {{#if productos.tct_tipo_cuenta_uc_c}}{{getUnifinListValue 'tipo_registro_cuenta_list' productos.tct_tipo_cuenta_uc_c}}{{/if}}
+                    {{#if productos.tct_subtipo_uc_txf_c}}{{getUnifinListValue 'subtipo_registro_cuenta_list' productos.tct_subtipo_uc_txf_c}}{{/if}}
+                </div>
             </div>
-        </div>
     </table>
 </div>
