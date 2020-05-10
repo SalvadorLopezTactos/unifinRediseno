@@ -551,44 +551,81 @@ class Meetings_Hooks
 
     function ProspectoContactado($bean, $event, $arguments)
     {
-		  if($bean->status == "Held" && $bean->parent_type == 'Accounts' && $bean->parent_id){
-  		  $beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id);
-				if($beanAccount->user_id_c == $bean->assigned_user_id || $beanAccount->user_id1_c == $bean->assigned_user_id || $beanAccount->user_id2_c == $bean->assigned_user_id || $beanAccount->user_id6_c == $bean->assigned_user_id || $beanAccount->user_id7_c == $bean->assigned_user_id){
-          $beanUser = BeanFactory::getBean('Users', $bean->assigned_user_id);
-          $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->parent_id);
-          if($beanAccount->user_id_c == $bean->assigned_user_id && $beanResumen->tct_tipo_l_txf_c == 'Lead'){
-            $beanResumen->tct_tipo_l_txf_c = "Prospecto";
-            $beanResumen->tct_subtipo_l_txf_c = "Contactado";
-            $beanResumen->tct_tipo_cuenta_l_c = "PROSPECTO CONTACTADO";
+        //Valuda cuenta Asociada y estado de reunión realizada
+        if($bean->status == "Held" && $bean->parent_type == 'Accounts' && $bean->parent_id){
+          //Recupera cuenta
+          $beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id);
+          //Comprueba usuario asignado corresponda a asesor de cuenta
+          if($beanAccount->user_id_c == $bean->assigned_user_id || $beanAccount->user_id1_c == $bean->assigned_user_id || $beanAccount->user_id2_c == $bean->assigned_user_id || $beanAccount->user_id6_c == $bean->assigned_user_id || $beanAccount->user_id7_c == $bean->assigned_user_id){
+            //Recupera producto y actualiza Tipo y subtipo: Prospecto Contactado
+            if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
+                //Recupera Productos
+                $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
+                foreach ($relateProducts as $product) {
+                    $tipoCuenta = $product->tipo_cuenta;
+                    $tipoProducto = $product->tipo_producto;
+                    switch ($tipoProducto) {
+                        case '1': //Leasing
+                            if($beanAccount->user_id_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        case '3': //Credito-Automotriz
+                            if($beanAccount->user_id2_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        case '4': //Factoraje
+                            if($beanAccount->user_id1_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        case '6': //Fleet
+                            if($beanAccount->user_id6_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        case '7': //Credito SOS
+                            if($beanAccount->user_id_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        case '8': //Uniclick
+                            if($beanAccount->user_id7_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                                $product->tipo_cuenta = '2';
+                                $product->subtipo_cuenta = '2';
+                                $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                                $product->save();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            //Actualiza Tipo y subtipo General: Prospecto Contactado
+            if($beanAccount->tipo_registro_cuenta_c == '1'){
+                $beanAccount->tipo_registro_cuenta_c = '2';
+                $beanAccount->subtipo_registro_cuenta_c = '2';
+                $beanAccount->tct_prospecto_contactado_chk_c = 1;
+                $beanAccount->save();
+            }
           }
-          if($beanAccount->user_id2_c == $bean->assigned_user_id && $beanResumen->tct_tipo_ca_txf_c == 'Lead'){
-            $beanResumen->tct_tipo_ca_txf_c = "Prospecto";
-            $beanResumen->tct_subtipo_ca_txf_c = "Contactado";
-            $beanResumen->tct_tipo_cuenta_ca_c = "PROSPECTO CONTACTADO";
-          }
-          if($beanAccount->user_id1_c == $bean->assigned_user_id && $beanResumen->tct_tipo_f_txf_c == 'Lead'){
-            $beanResumen->tct_tipo_f_txf_c = "Prospecto";
-            $beanResumen->tct_subtipo_f_txf_c = "Contactado";
-            $beanResumen->tct_tipo_cuenta_f_c = "PROSPECTO CONTACTADO";
-          }
-          if($beanAccount->user_id6_c == $bean->assigned_user_id && $beanResumen->tct_tipo_fl_txf_c == 'Lead'){
-            $beanResumen->tct_tipo_fl_txf_c = "Prospecto";
-            $beanResumen->tct_subtipo_fl_txf_c = "Contactado";
-            $beanResumen->tct_tipo_cuenta_fl_c = "PROSPECTO CONTACTADO";
-          }
-          if($beanAccount->user_id7_c == $bean->assigned_user_id && $beanResumen->tct_tipo_uc_txf_c == 'Lead'){
-            $beanResumen->tct_tipo_uc_txf_c = "Prospecto";
-            $beanResumen->tct_subtipo_uc_txf_c = "Contactado";
-            $beanResumen->tct_tipo_cuenta_uc_c = "PROSPECTO CONTACTADO";
-          }
-          $beanResumen->save();
-          if($beanAccount->tipo_registro_cuenta_c == '1'){
-  					$beanAccount->tipo_registro_cuenta_c = '2';
-            $beanAccount->subtipo_registro_cuenta_c = '2';
-            $beanAccount->tct_prospecto_contactado_chk_c = 1;
-            $beanAccount->save();
-          }
-  			}
-		  }
+        }
 	  }
 }
