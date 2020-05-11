@@ -114,7 +114,7 @@ SITE;
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
 SITE;
                     }
-                    
+
                     $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 
                 }
@@ -169,16 +169,16 @@ SITE;
     {
         $bean_account = BeanFactory::newBean('Accounts');
         if ($rel) {
-            $bean_account->subtipo_cuenta_c = "";
-            $bean_account->tipo_registro_c = "Persona";
+            $bean_account->subtipo_registro_cuenta_c = "";
+            $bean_account->tipo_registro_cuenta_c = "4"; // Persona - 4
             $bean_account->user_id_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
 
         } else {
-            $bean_account->subtipo_cuenta_c = "En Calificacion";
-            $bean_account->tipo_registro_c = "Lead";
+            $bean_account->subtipo_registro_cuenta_c = "5"; // En Calificación - 5
+            $bean_account->tipo_registro_cuenta_c = "1"; //Lead - 1
         }
 
         switch ($bean_Leads->regimen_fiscal_c) {
@@ -331,7 +331,58 @@ SITE;
         $bean_account->ventas_anuales_c = $bean_Leads->ventas_anuales_c;
         $bean_account->potencial_cuenta_c = $bean_Leads->potencial_lead_c;
         $bean_account->zonageografica_c = $bean_Leads->zona_geografica_c;
-        $bean_account->puesto_c = $bean_Leads->puesto_c;
+
+        switch ($bean_Leads->puesto_c) {
+
+            case 1:
+                $bean_account->puesto_c = "Duenio";
+
+                break;
+            case 2:
+                $bean_account->puesto_c = "Accionistas";
+
+                break;
+            case 3:
+                $bean_account->puesto_c = "Director General";
+
+                break;
+            case 4:
+                $bean_account->puesto_c = "Director Comercial";
+
+                break;
+            case 5:
+                $bean_account->puesto_c = "Director de Finanzas";
+
+                break;
+            case 6:
+                $bean_account->puesto_c = "Director de Operaciones";
+
+                break;
+            case 7:
+                $bean_account->puesto_c = "Director de Sistemas";
+
+                break;
+            case 8:
+                $bean_account->puesto_c = "Tesorero_Contralor";
+
+                break;
+            case 9:
+                $bean_account->puesto_c = "Gerente";
+
+                break;
+            case 10:
+                $bean_account->puesto_c = "Administrativo";
+
+                break;
+            case 11:
+                $bean_account->puesto_c = "Otro";
+
+                break;
+            default:
+                $bean_account->puesto_c = $bean_Leads->punto_contacto_c;
+                break;
+        }
+
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
 
