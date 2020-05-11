@@ -983,7 +983,7 @@ SQL;
                     $this->actualizaTipoCuenta('2','10',$cliente,$producto);
                 }
                 //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
-                if (!empty($bean_Resumen && $bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c)) { //Etapa solicitud= N= Autorizada
+                if ($bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c) { //Etapa solicitud= N= Autorizada
                     $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                     $this->actualizaTipoCuenta('3','18',$cliente,$producto);
                 }
