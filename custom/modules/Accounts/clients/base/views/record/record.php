@@ -116,15 +116,6 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              13 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:conversion_cliente_uniclick:click',
-                'name' => 'clienteuniclick',
-                'label' => 'Conversión Cliente Uniclick',
-                'acl_action' => 'view',
-                'class' => 'jcmx1',
-              ),
               14 => 
               array (
                 'name' => 'send_survey',
