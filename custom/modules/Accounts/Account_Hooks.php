@@ -1250,112 +1250,77 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->save();
     }
 
-	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
+  	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
         //Se ejecuta para creación productos para nuevos registros(cuentas):
         /* Dev: Erick de JEsus
         * Tipo de cuenta = Todas
         */
-        global $current_user;
-        global $app_list_strings;
-		$beanprod = null;
-       
-		$module = 'uni_Productos';
-        $key_productos = array('1','4','3','6','8','7');
-        $name_productos = array('-LEASING','-FACTORAJE','-CREDITO AUTOMOTRIZ','-FLEET','-UNICLICK','CRÉDITO SOS');
-		$count = count($name_productos);
-        $current_prod = null;
-        $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
-        
-        $tipo = $app_list_strings['tipo_registro_cuenta_list'];
-        $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
-        $etitipo= $tipo[$bean->tipo_registro_cuenta_c];
-        $etisubtipo= $subtipo[$bean->subtipo_registro_cuenta_c];
-
+        //Sólo se ejecuta en la creación
         if (!$args['isUpdate']){
+            //Declara variables para generación de registros
+            global $current_user;
+            global $app_list_strings;
+            $beanprod = null;
 
-			for ($i = 0; $i < $count; $i++) {
-				//$current_prod = explode("," , str_replace("^", "", $current_user->productos_c));
-				//$GLOBALS['log']->fatal($current_prod);
-				$beanprod = BeanFactory::newBean($module);
-				$beanprod->name = $bean->name.$name_productos[$i];
-				$beanprod->tipo_producto = $key_productos[$i];
+            $module = 'uni_Productos';
+            $key_productos = array('1','4','3','6','8','7');
+            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS');
+            $count = count($name_productos);
+            $current_prod = null;
+            $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
 
-				switch ($key_productos[$i]) {
-					case '1': //Leasing
+            $tipo = $app_list_strings['tipo_registro_cuenta_list'];
+            $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
+            $etitipo= $tipo[$bean->tipo_registro_cuenta_c];
+            $etisubtipo= $subtipo[$bean->subtipo_registro_cuenta_c];
+            for ($i = 0; $i < $count; $i++) {
+              	//$GLOBALS['log']->fatal($current_prod);
+              	$beanprod = BeanFactory::newBean($module);
+              	$beanprod->name = $bean->name.$name_productos[$i];
+              	$beanprod->tipo_producto = $key_productos[$i];
+                $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
+                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '1' : $bean->tipo_registro_cuenta_c;
+                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta=='1') ? '5' : $bean->subtipo_registro_cuenta_c;
+                $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+                //Caso especial: Alta portal CA
+                if ($beanprod->tipo_producto == '3' && $GLOBALS['service']->platform!= 'base' && $GLOBALS['service']->platform!= 'mobile') {
+                    $beanprod->tipo_cuenta = "2"; //2-Prospecto
+                    $beanprod->subtipo_cuenta = "8"; //Integración de expediente
+                    $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
+                    //Actualiza campo general
+                    global $db;
+                    $update = "update accounts_cstm set
+                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      where id_c = '{$bean->id}'";
+                    $updateExecute = $db->query($update);
+                }
+                //Asignación de usuario
+              	switch ($key_productos[$i]) {
+                    case '1': //Leasing
                         $beanprod->assigned_user_id = $bean->user_id_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-					case '4': //Factoraje
+                    break;
+                    case '4': //Factoraje
                         $beanprod->assigned_user_id = $bean->user_id1_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-					case '3': //Credito-Automotriz
+              			break;
+              		  case '3': //Credito-Automotriz
                         $beanprod->assigned_user_id = $bean->user_id2_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-						break;
-					case '6': //Fleet
+              			break;
+                    case '6': //Fleet
                         $beanprod->assigned_user_id = $bean->user_id6_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
+              			break;
                     case '7': //Credito-SOS
                         $beanprod->assigned_user_id = $bean->user_id_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        break;
-					case '8': //Uniclick
+                    break;
+                    case '8': //Uniclick
                         $beanprod->assigned_user_id = $bean->user_id7_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-				}
-
-				$beanprod->save();
-
-				$bean->load_relationship('accounts_uni_productos_1');
-				$bean->accounts_uni_productos_1->add($beanprod->id);
-
-				$beanprod = null;
-			}
+              			break;
+              	}
+                //Guarda registro y vincula a cuenta
+              	$beanprod->save();
+              	$bean->load_relationship('accounts_uni_productos_1');
+              	$bean->accounts_uni_productos_1->add($beanprod->id);
+              	$beanprod = null;
+  		      }
         }
     }
 
@@ -1421,5 +1386,3 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 }
-
-

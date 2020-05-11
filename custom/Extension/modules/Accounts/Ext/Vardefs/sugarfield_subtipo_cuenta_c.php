@@ -3,7 +3,7 @@
 $dictionary['Account']['fields']['subtipo_cuenta_c']['labelValue']='Subtipo de Cuenta';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['dependency']='';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['visibility_grid']=array (
-  'trigger' => '$tipo_registro_cuenta_c',
+  'trigger' => 'tipo_registro_c',
   'values' => 
   array (
     'Prospecto' => 

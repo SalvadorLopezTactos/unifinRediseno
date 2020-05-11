@@ -6,7 +6,6 @@ $dictionary['TCT2_Notificaciones']['fields']['persona_c']['full_text_search']['e
 $dictionary['TCT2_Notificaciones']['fields']['persona_c']['full_text_search']['searchable'] = true;
 $dictionary['TCT2_Notificaciones']['fields']['persona_c']['full_text_search']['boost'] = 1;
 $dictionary['TCT2_Notificaciones']['fields']['persona_c']['calculated'] = 'true';
-$dictionary['TCT2_Notificaciones']['fields']['persona_c']['formula'] = 'ifElse(equal(related($tct2_notificaciones_accounts,"tipo_registro_c"),"Cliente"),"Cliente","Prospecto")';
+$dictionary['TCT2_Notificaciones']['fields']['persona_c']['formula'] = 'ifElse(equal(related($tct2_notificaciones_accounts,"tipo_registro_cuenta_c"),"3"),"Cliente","Prospecto")';
 $dictionary['TCT2_Notificaciones']['fields']['persona_c']['enforced'] = 'true';
 $dictionary['TCT2_Notificaciones']['fields']['persona_c']['dependency'] = '';
-
