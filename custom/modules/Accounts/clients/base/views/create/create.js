@@ -285,12 +285,12 @@
 
             this.model.set("tipo_registro_cuenta_c", '3');
         }
-		
+
         //VM 14/09/2018
         this.checkProveedor();
 
         this.mostrarpaneldirec();
-		
+
 		    if (App.user.attributes.deudor_factoraje_c != true) {
 		    //Readonly check factoraje
 			    this.$('[data-name="deudor_factor_c"]').attr('style', 'pointer-events:none;');
@@ -413,11 +413,11 @@
 
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
-		
+
 
         /***************Valida Campo de Página Web ****************************/
         this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
-		
+
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
@@ -498,7 +498,7 @@
 
         if (App.user.attributes.tct_alta_cd_chk_c != 1) {
             Object.keys(new_options).forEach(function (key) {
-                if (key == "4") {
+                if (key == "4" || key=="" || key=="0") {
                     delete new_options[key];
                 }
             });
@@ -584,10 +584,10 @@
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
-		
+
 		    /*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
 		    this.model.on('change:tipo_registro_cuenta_c',this.check_factoraje, this);
-        this.model.on('change:no_website_c',this.rowebsite, this);    
+        this.model.on('change:no_website_c',this.rowebsite, this);
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
@@ -633,7 +633,7 @@
 					objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
 					objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
 					objDirecciones.eq(i).find('.postalInputTempExisting').val();
-	
+
 				concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 			}
         }
@@ -1244,7 +1244,7 @@
 							console.log('Dir. Nacional requerida');
 							errors[$(".addDireccion")] = errors['account_direcciones'] || {};
 							errors[$(".addDireccion")].required = true;
-	
+
 							$('.direcciondashlet').css('border-color', 'red');
 							app.alert.show("Direccion nacional requerida", {
 								level: "error",
@@ -2003,7 +2003,7 @@
                 direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
             if (direccionesfaltantes != "") {
-                
+
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
@@ -2013,7 +2013,7 @@
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');
 				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
                 errors['account_direcciones_c'].required = true;
-            
+
             } else {
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', '');
             }
@@ -2618,7 +2618,7 @@
 						}
 					}
 				}
-				
+
                 if (tipodireccion.length == 0 || direccionesm == tipodireccion.length){
                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
@@ -2865,7 +2865,7 @@
 
     /*Función para asignar los promotes por default a la cuenta, con base en los productos del usuario logueado.*/
     promotores_default: function (){
-        
+
         var userprod= App.user.attributes.productos_c;
         var nombrecompleto= App.user.attributes.full_name;
         var idusrlog= App.user.attributes.id;
@@ -2906,7 +2906,7 @@
                     this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
     },
-	
+
 	  check_factoraje: function () {
   		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_cuenta_c') == '4') {
   			this.model.set('deudor_factor_c', true);
@@ -2977,7 +2977,7 @@
   								autoClose: false,
   								messages: "La Página Web es correcta, no se puede borrar."
   							});
-                self.model.set('no_website_c',0); 
+                self.model.set('no_website_c',0);
   						}
               else {
                 self.model.set('website','');
