@@ -2009,12 +2009,12 @@ SQL;
                     }
                 }
 
-                $list = $app_list_strings['pais_nacimiento_c_list'];
+                $list = $app_list_strings['paises_list'];
                 if (isset($list)){
                     $paisConstitucion = $list[$account->pais_nacimiento_c];
                 }
 
-                $list = $app_list_strings['estado_nacimiento_list'];
+                $list = $app_list_strings['estados_list'];
                 if (isset($list)){
                     $estadoConstitucion = $list[$account->estado_nacimiento_c];
                 }
