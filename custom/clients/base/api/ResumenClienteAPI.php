@@ -169,6 +169,16 @@ class ResumenClienteAPI extends SugarApi
             "linea_disponible" => "",
             "promotor" => "",
             "color" => "");
+        //Unilease
+        $arr_principal['unilease'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
+            "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
+            "fecha_vencimiento"=>"",
+            "linea_disponible" => "",
+            "promotor" => "",
+            "color" => "");
+
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -209,6 +219,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
 			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
+            $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -254,6 +265,7 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_sos='';
 			
 			$vencimiento_uniclick ='';
+            $vencimiento_unilease ='';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -430,7 +442,30 @@ class ResumenClienteAPI extends SugarApi
 						$arr_principal['uniclick']['linea_disponible'] = $linea_disp_sos;
 					}
                 }
-				
+
+                // Unilease
+                if ($opps->tipo_producto_c == 9 && $opps->estatus_c != 'K') {
+                    $linea_aprox_unilease += $opps->monto_c;
+                    $linea_disp_sos += $opps->amount;
+                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                    /*********************************/
+
+                    if (!empty($opps->vigencialinea_c)) {
+                        //Establece fecha de vencimiento
+                        $dateVL = $opps->vigencialinea_c;
+                        $timedateVL = Date($dateVL);
+
+                        //Compara fechas
+                        if ($dateVL > $vencimiento_unilease || empty($vencimiento_unilease)) {
+                            $vencimiento_unilease = $dateVL;
+                        }
+
+                        $arr_principal['unilease']['linea_autorizada'] = $linea_aprox_unilease;
+                        $arr_principal['unilease']['fecha_vencimiento'] = $vencimiento_unilease;
+                        $arr_principal['unilease']['linea_disponible'] = $linea_disp_sos;
+                    }
+                }
+
             }
         }
 
@@ -699,6 +734,10 @@ class ResumenClienteAPI extends SugarApi
 				//Recupera Uniclick
                 // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
+
+                //Recupera Unilease
+                // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
+                $arr_principal['unilease']['fecha_pago']= $beanResumen->cauto_fecha_pago;
                
             }
         }
@@ -757,7 +796,13 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
-                        break;     
+                        break;
+                    case '9': //Uniclick
+                        $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
+                        $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['unilease']['cobranza'] = $cobranza;
+                        break;
                     default:                        
                         break;
                 }
