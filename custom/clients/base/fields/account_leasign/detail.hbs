@@ -221,23 +221,18 @@ AF - 18-01-18
       </div>
     </div>
   </div>
-</font>
-  </center>
-    </div>
-        </div>
-          </div>
-            </div>
-              </div>
-                </div>
-        <div>
-            <div class="span3" align="center">
-                <button class="btn btn-primary  btn-Descargar" id="btn-Descargar">Descargar Noticias</button>
-            </div>
-            <div class="span3"> </div>
-            <div class="span3"> </div>
-            <div class="span3" align="right">              <button class="btn btn-success  btn-Guardar" id="btn-Guardar type=" submit"="">Guardar</button>
-            </div>
-        </div>
+</div>
+<!--Fila 0.1-->
+<div class="row-fluid">
+  <div class="span3" align="center">
+    <button class="btn btn-primary  btn-Descargar" id="btn-Descargar">Descargar Noticias</button>
+  </div>
+  <div class="span3"> </div>
+  <div class="span3"> </div>
+  <div class="span3" align="right">
+    <button class="btn btn-success  btn-Guardar" id="btn-Guardar" type="submit">Guardar</button>
+  </div>
+</div>
 <!-- Fila 1 -->
 <div class="row-fluid">
   <!-- Bloque 1: General -->
@@ -376,13 +371,14 @@ AF - 18-01-18
     </div>
   </div>
 </div>
-<!-- Sección para diferenciar apartado de Productos -->
+<!-- Sección para diferenciar apartado de Productos Unifin-->
 <br>
-<div id="spaceProductos" style="background-color:#000042; height:30px;">
+<div id="spaceProductosUnifin" style="background-color:#000042; height:30px;" data-toggle="collapse" data-target=".productoUnifin">
     <font color="#ffffff">
-    <center><strong>Productos</strong></center>
+    <center><strong>Productos Unifin</strong></center>
     </font>
-</div><br>
+</div>
+<br>
 <!-- Fila 2 -->
 <div class="row-fluid">
   <!-- Bloque 4: Leasing- -->
@@ -410,75 +406,75 @@ AF - 18-01-18
                 <div class="span6">{{ResumenCliente.leasing.tipo_cuenta}}</div>
             </div>
             <!-- Línea 3 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea autorizada</strong> </div>
-            <div class="span6">$ {{customFormatNumber ResumenCliente.leasing.linea_autorizada}}</div>
-          </div>
-          <!-- Línea 4 -->
-          <div class="row-fluid"  style="background-color: #ffffff">
-            <div class="span6"><strong>Fecha de vencimiento</strong></div>
-            <div class="span6"> {{ResumenCliente.leasing.fecha_vencimiento}} </div>
-          </div>
-          <!-- Línea 5 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea disponible</strong> </div>
-            <div class="span6">
-              <font {{#if ResumenCliente.leasing.color}}color="{{ResumenCliente.leasing.color}}"{{/if}}>
-                $ {{customFormatNumber ResumenCliente.leasing.linea_disponible}}
-              </font>
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Línea autorizada</strong> </div>
+              <div class="span6">$ {{customFormatNumber ResumenCliente.leasing.linea_autorizada}}</div>
+            </div>
+            <!-- Línea 4 -->
+            <div class="row-fluid"  style="background-color: #ffffff">
+              <div class="span6"><strong>Fecha de vencimiento</strong></div>
+              <div class="span6"> {{ResumenCliente.leasing.fecha_vencimiento}} </div>
+            </div>
+            <!-- Línea 5 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Línea disponible</strong> </div>
+              <div class="span6">
+                <font {{#if ResumenCliente.leasing.color}}color="{{ResumenCliente.leasing.color}}"{{/if}}>
+                  $ {{customFormatNumber ResumenCliente.leasing.linea_disponible}}
+                </font>
+              </div>
+            </div>
+            <!-- Línea 6 -->
+            <div class="row-fluid" style="background-color: #ffffff">
+              <div class="span6"><strong>Fecha de pago</strong> </div>
+              <div class="span6">{{ResumenCliente.leasing.fecha_pago}}</div>
+            </div>
+            <!-- Cobranza -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Cobranza</strong> </div>
+              <div class="span6">{{ResumenCliente.leasing.cobranza}}</div>
+            </div>
+            <!-- Línea 7 -->
+            <div class="row-fluid" style="background-color: #ffffff">
+              <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+              <div class="span6">{{ResumenCliente.leasing.nivel_satisfaccion}}</div>
+            </div>
+            <!-- Línea 8 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Asesor</strong> </div>
+              <div class="span6">{{ResumenCliente.leasing.promotor}}</div>
+            </div>
+            <!-- Línea 9 -->
+            <div class="row-fluid">
+              <center>
+                <font color=#ffffff>
+                  <!-- Línea 9.1 -->
+                  <div id="openAnexos" class="span6 openModalAnexos pointer" style="background-color: #555555">
+                    <div class="row-fluid" style="background-color: #555">
+                      <div class="span7" style="text-align:right;" >
+                        <strong>{{ResumenCliente.leasing.anexos_activos}}</strong>
+                      </div>
+                      <div class="span5" style="text-align:right;">
+                        <i class="fa fa-eye" style="color:white"></i>
+                      </div>
+                    </div>
+                    Anexos
+                    <br>activos
+                  </div>
+                  <!-- Línea 9.2 -->
+                  <div class="span6" style="background-color: #555555">
+                    <div class="row-fluid" style="background-color: #555">
+                      <div class="span12" style="text-align:center;" >
+                        <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
+                      </div>
+                    </div>
+                    Anexos
+                    <br>historicos
+                  </div>
+                </font>
+              </center>
             </div>
           </div>
-          <!-- Línea 6 -->
-          <div class="row-fluid" style="background-color: #ffffff">
-            <div class="span6"><strong>Fecha de pago</strong> </div>
-            <div class="span6">{{ResumenCliente.leasing.fecha_pago}}</div>
-          </div>
-          <!-- Cobranza -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Cobranza</strong> </div>
-            <div class="span6">{{ResumenCliente.leasing.cobranza}}</div>
-          </div>
-          <!-- Línea 7 -->
-          <div class="row-fluid" style="background-color: #ffffff">
-            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{ResumenCliente.leasing.nivel_satisfaccion}}</div>
-          </div>
-          <!-- Línea 8 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Asesor</strong> </div>
-            <div class="span6">{{ResumenCliente.leasing.promotor}}</div>
-          </div>
-          <!-- Línea 9 -->
-          <div class="row-fluid">
-            <center>
-              <font color=#ffffff>
-                <!-- Línea 9.1 -->
-                <div id="openAnexos" class="span6 openModalAnexos pointer" style="background-color: #555555">
-                  <div class="row-fluid" style="background-color: #555">
-                    <div class="span7" style="text-align:right;" >
-                      <strong>{{ResumenCliente.leasing.anexos_activos}}</strong>
-                    </div>
-                    <div class="span5" style="text-align:right;">
-                      <i class="fa fa-eye" style="color:white"></i>
-                    </div>
-                  </div>
-                  Anexos
-                  <br>activos
-                </div>
-                <!-- Línea 9.2 -->
-                <div class="span6" style="background-color: #555555">
-                  <div class="row-fluid" style="background-color: #555">
-                    <div class="span12" style="text-align:center;" >
-                      <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
-                    </div>
-                  </div>
-                  Anexos
-                  <br>historicos
-                </div>
-              </font>
-            </center>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -496,86 +492,86 @@ AF - 18-01-18
         </div>
         <!-- Contenido -->
         <div id="collapseNine" class="accordion-body in collapse" style="background-color: #ffffff">
-            <!-- Línea 1 -->
+              <!-- Línea 1 -->
+              <div class="row-fluid" style="background-color: #f9f9f9">
+                  <div class="span6"><strong>Estatus de Atención</strong> </div>
+                  <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.factoring.estatus_atencion}}</div>
+              </div>
+              <!-- Línea 2 -->
+              <div class="row-fluid" style="background-color: #ffffff">
+                  <div class="span6"><strong>Tipo de Cuenta</strong> </div>
+                  <div class="span6">{{ResumenCliente.factoring.tipo_cuenta}}</div>
+              </div>
+              <!-- Línea 3 -->
             <div class="row-fluid" style="background-color: #f9f9f9">
-                <div class="span6"><strong>Estatus de Atención</strong> </div>
-                <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.factoring.estatus_atencion}}</div>
+              <div class="span6"><strong>Línea autorizada</strong> </div>
+              <div class="span6">$ {{customFormatNumber ResumenCliente.factoring.linea_autorizada}}</div>
             </div>
-            <!-- Línea 2 -->
+            <!-- Línea 4 -->
+            <div class="row-fluid"  style="background-color: #ffffff">
+              <div class="span6"><strong>Fecha de vencimiento</strong></div>
+              <div class="span6">{{ResumenCliente.factoring.fecha_vencimiento}}</div>
+            </div>
+            <!-- Línea 5 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Línea disponible</strong> </div>
+              <div class="span6">
+                <font {{#if ResumenCliente.factoring.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
+                  $ {{customFormatNumber ResumenCliente.factoring.linea_disponible}}
+                </font>
+              </div>
+            </div>
+            <!-- Línea 6 -->
             <div class="row-fluid" style="background-color: #ffffff">
-                <div class="span6"><strong>Tipo de Cuenta</strong> </div>
-                <div class="span6">{{ResumenCliente.factoring.tipo_cuenta}}</div>
+              <div class="span6"><strong>Fecha de pago</strong> </div>
+              <div class="span6">{{ResumenCliente.factoring.fecha_pago}}</div>
             </div>
-            <!-- Línea 3 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea autorizada</strong> </div>
-            <div class="span6">$ {{customFormatNumber ResumenCliente.factoring.linea_autorizada}}</div>
-          </div>
-          <!-- Línea 4 -->
-          <div class="row-fluid"  style="background-color: #ffffff">
-            <div class="span6"><strong>Fecha de vencimiento</strong></div>
-            <div class="span6">{{ResumenCliente.factoring.fecha_vencimiento}}</div>
-          </div>
-          <!-- Línea 5 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea disponible</strong> </div>
-            <div class="span6">
-              <font {{#if ResumenCliente.factoring.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
-                $ {{customFormatNumber ResumenCliente.factoring.linea_disponible}}
-              </font>
+            <!-- Cobranza -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Cobranza</strong> </div>
+              <div class="span6">{{ResumenCliente.factoring.cobranza}}</div>
+            </div>
+            <!-- Línea 7 -->
+            <div class="row-fluid" style="background-color: #ffffff">
+              <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+              <div class="span6">{{ResumenCliente.factoring.nivel_satisfaccion}}</div>
+            </div>
+            <!-- Línea 8 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Asesor</strong> </div>
+              <div class="span6">{{ResumenCliente.factoring.promotor}}</div>
+            </div>
+            <!-- Línea 9 -->
+            <div class="row-fluid">
+              <center>
+                <font color=#ffffff>
+                  <!-- Línea 9.1 -->
+                  <div id="openCesiones" class="span6 openModalCesiones pointer" style="background-color: #555555">
+                    <div class="row-fluid" style="background-color: #555">
+                      <div class="span7" style="text-align:right;" >
+                        <strong>{{ResumenCliente.factoring.anexos_activos}}</strong>
+                      </div>
+                      <div class="span5" style="text-align:right;">
+                        <i class="fa fa-eye" style="color:white"></i>
+                      </div>
+                    </div>
+                    Cesiones
+                    <br>activas
+                  </div>
+                  <!-- Línea 9.2 -->
+                  <div class="span6" style="background-color: #555555">
+                    <div class="row-fluid" style="background-color: #555">
+                      <div class="span12" style="text-align:center;" >
+                        <strong>{{ResumenCliente.factoring.anexos_historicos}}</strong>
+                      </div>
+                    </div>
+                    Cesiones
+                    <br>historicas
+                  </div>
+                </font>
+              </center>
             </div>
           </div>
-          <!-- Línea 6 -->
-          <div class="row-fluid" style="background-color: #ffffff">
-            <div class="span6"><strong>Fecha de pago</strong> </div>
-            <div class="span6">{{ResumenCliente.factoring.fecha_pago}}</div>
-          </div>
-          <!-- Cobranza -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Cobranza</strong> </div>
-            <div class="span6">{{ResumenCliente.factoring.cobranza}}</div>
-          </div>
-          <!-- Línea 7 -->
-          <div class="row-fluid" style="background-color: #ffffff">
-            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{ResumenCliente.factoring.nivel_satisfaccion}}</div>
-          </div>
-          <!-- Línea 8 -->
-          <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Asesor</strong> </div>
-            <div class="span6">{{ResumenCliente.factoring.promotor}}</div>
-          </div>
-          <!-- Línea 9 -->
-          <div class="row-fluid">
-            <center>
-              <font color=#ffffff>
-                <!-- Línea 9.1 -->
-                <div id="openCesiones" class="span6 openModalCesiones pointer" style="background-color: #555555">
-                  <div class="row-fluid" style="background-color: #555">
-                    <div class="span7" style="text-align:right;" >
-                      <strong>{{ResumenCliente.factoring.anexos_activos}}</strong>
-                    </div>
-                    <div class="span5" style="text-align:right;">
-                      <i class="fa fa-eye" style="color:white"></i>
-                    </div>
-                  </div>
-                  Cesiones
-                  <br>activas
-                </div>
-                <!-- Línea 9.2 -->
-                <div class="span6" style="background-color: #555555">
-                  <div class="row-fluid" style="background-color: #555">
-                    <div class="span12" style="text-align:center;" >
-                      <strong>{{ResumenCliente.factoring.anexos_historicos}}</strong>
-                    </div>
-                  </div>
-                  Cesiones
-                  <br>historicas
-                </div>
-              </font>
-            </center>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -718,7 +714,7 @@ AF - 18-01-18
 					<div class="row-fluid" style="background-color: #f9f9f9">
 						<div class="span6"><strong>Cobranza</strong> </div>
 						<div class="span6">{{ResumenCliente.fleet.cobranza}}</div>
-					</div>					
+					</div>
                     <!-- Línea 5 -->
                     <div class="row-fluid"  style="background-color: #ffffff">
                         <div class="span6"><strong>Asesor</strong></div>
@@ -729,7 +725,6 @@ AF - 18-01-18
             </div>
         </div>
     </div>
-
     <!-- Bloque 8 : Crédito SOS -->
     <div class="span4">
         <div style="background-color: #f9f9f9">
@@ -773,7 +768,7 @@ AF - 18-01-18
 					<div class="row-fluid" style="background-color: #ffffff">
 						<div class="span6"><strong>Cobranza</strong> </div>
 						<div class="span6">{{ResumenCliente.credito_sos.cobranza}}</div>
-					</div>					
+					</div>
                     <!-- Línea 6 -->
                     <div class="row-fluid"  style="background-color: #f9f9f9">
                         <div class="span6"><strong>Asesor</strong></div>
@@ -783,68 +778,75 @@ AF - 18-01-18
             </div>
         </div>
     </div>
-	
-	<!-- Bloque 9: Uniclick -->
-	<div class="span4">
-		<div style="background-color: #f9f9f9">
-		<div>
-			<!-- Encabezado -->
-			<div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseUni">
-				<font color=#ffffff>
-				<center><strong>Uniclick</strong></center>
-				</font>
-			</a>
-			</div>
-			<!-- Contenido -->
-			<div id="collapseUni" class="accordion-body in collapse" style="background-color: #ffffff">
-				<!-- Línea 1 -->
-				<div class="row-fluid" style="background-color: #f9f9f9">
-					<div class="span6"><strong>Estatus de Atención</strong> </div>
-					<div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</div>
-				</div>
-				<!-- Línea 2 -->
-				<div class="row-fluid" style="background-color: #ffffff">
-					<div class="span6"><strong>Tipo de Cuenta</strong> </div>
-					<div class="span6">{{ResumenCliente.uniclick.tipo_cuenta}}</div>
-				</div>
-				<!-- Línea 3 -->
-				<div class="row-fluid" style="background-color: #f9f9f9">
-					<div class="span6"><strong>Línea autorizada</strong> </div>
-					<div class="span6">$ {{customFormatNumber ResumenCliente.uniclick.linea_autorizada}}</div>
-				</div>
-				<!-- Línea 4 -->
-				<div class="row-fluid"  style="background-color: #ffffff">
-					<div class="span6"><strong>Fecha de vencimiento</strong></div>
-					<div class="span6">{{ResumenCliente.uniclick.fecha_vencimiento}}</div>
-				</div>
-				<!-- Línea 5 -->
-				<div class="row-fluid" style="background-color: #f9f9f9">
-					<div class="span6"><strong>Línea disponible</strong> </div>
-					<div class="span6">
-					<font {{#if ResumenCliente.uniclick.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
-						$ {{customFormatNumber ResumenCliente.uniclick.linea_disponible}}
-					</font>
-					</div>
-				</div>
-				<!-- Cobranza -->
-				<div class="row-fluid" style="background-color: #ffffff">
-					<div class="span6"><strong>Cobranza</strong> </div>
-					<div class="span6">{{ResumenCliente.uniclick.cobranza}}</div>
-				</div>
-				<!-- Línea 6 -->
-				<div class="row-fluid" style="background-color: #f9f9f9">
-					<div class="span6"><strong>Asesor</strong> </div>
-					<div class="span6">{{ResumenCliente.factoring.promotor}}</div>
-				</div>
-			</div>
-		</div>
+</div>
+<!-- Sección para diferenciar apartado de Productos Uniclick-->
+<br>
+<div id="spaceProductosUniclick" style="background-color:#000042; height:30px;">
+  <font color="#ffffff">
+    <center><strong>Productos Uniclick</strong></center>
+  </font>
+</div>
+<br>
+<!-- Fila 4 -->
+<div class="row-fluid">
+  <!-- Bloque 10: Uniclick-Unicredit -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseUni">
+				  <font color=#ffffff>
+				        <center><strong>Unicredit</strong></center>
+				  </font>
+			    </a>
+			  </div>
+  			<!-- Contenido -->
+  			<div id="collapseUni" class="accordion-body in collapse" style="background-color: #ffffff">
+  				<!-- Línea 1 -->
+  				<div class="row-fluid" style="background-color: #f9f9f9">
+  					<div class="span6"><strong>Estatus de Atención</strong> </div>
+  					<div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</div>
+  				</div>
+  				<!-- Línea 2 -->
+  				<div class="row-fluid" style="background-color: #ffffff">
+  					<div class="span6"><strong>Tipo de Cuenta</strong> </div>
+  					<div class="span6">{{ResumenCliente.uniclick.tipo_cuenta}}</div>
+  				</div>
+  				<!-- Línea 3 -->
+  				<div class="row-fluid" style="background-color: #f9f9f9">
+  					<div class="span6"><strong>Línea autorizada</strong> </div>
+  					<div class="span6">$ {{customFormatNumber ResumenCliente.uniclick.linea_autorizada}}</div>
+  				</div>
+  				<!-- Línea 4 -->
+  				<div class="row-fluid"  style="background-color: #ffffff">
+  					<div class="span6"><strong>Fecha de vencimiento</strong></div>
+  					<div class="span6">{{ResumenCliente.uniclick.fecha_vencimiento}}</div>
+  				</div>
+  				<!-- Línea 5 -->
+  				<div class="row-fluid" style="background-color: #f9f9f9">
+  					<div class="span6"><strong>Línea disponible</strong> </div>
+  					<div class="span6">
+  					<font {{#if ResumenCliente.uniclick.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
+  						$ {{customFormatNumber ResumenCliente.uniclick.linea_disponible}}
+  					</font>
+  					</div>
+  				</div>
+  				<!-- Cobranza -->
+  				<div class="row-fluid" style="background-color: #ffffff">
+  					<div class="span6"><strong>Cobranza</strong> </div>
+  					<div class="span6">{{ResumenCliente.uniclick.cobranza}}</div>
+  				</div>
+  				<!-- Línea 6 -->
+  				<div class="row-fluid" style="background-color: #f9f9f9">
+  					<div class="span6"><strong>Asesor</strong> </div>
+  					<div class="span6">{{ResumenCliente.uniclick.promotor}}</div>
+  				</div>
+			  </div>
+		  </div>
 		</div>
 	</div>
-	
-    </div>
 </div>
-
 <!-- Modal- Activos -->
 <div id="myModal1" class="row-fluid" style="display:none">
   <div class="modal" style="background-color: #21618C">
