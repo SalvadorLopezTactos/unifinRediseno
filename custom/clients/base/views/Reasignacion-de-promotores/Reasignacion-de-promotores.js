@@ -26,7 +26,7 @@
         this.seleccionados = [];
         this.persistNoSeleccionados=[];
         this.flagSeleccionados=0;
-        this.tipo_cuenta= App.lang.getAppListStrings('tipo_registro_list');
+        this.tipo_cuenta= App.lang.getAppListStrings('tipo_registro_cuenta_list');
         this.model.on('change:users_accounts_1users_ida', this._setOffset, this);
 
         this.loadView = false;

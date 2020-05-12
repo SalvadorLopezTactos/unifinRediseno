@@ -570,31 +570,31 @@
     },
 
     SaveUniProductos: function (fields, errors, callback) {
-        if (Oproductos.productos != undefined) {
+        if (cont_uni_p.ResumenProductos != undefined) {
             //Valida tipo de cuenta
             var guardaL = false;
             var guardaF = false;
             var guardaCA = false;
             var guardaFL = false;
             var guardaU = false;
-            //Valida Leasing
-            if (Oproductos.productos.tct_tipo_l_txf_c == 'Lead' || Oproductos.productos.tct_subtipo_l_txf_c == 'Contactado' || Oproductos.productos.tct_subtipo_l_txf_c == 'Interesado') {
+            //Valida Leasing TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.leasing.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 7) {
                 guardaL = true;
             }
-            //Valida Factoraje
-            if (Oproductos.productos.tct_tipo_f_txf_c == 'Lead' || Oproductos.productos.tct_subtipo_f_txf_c == 'Contactado' || Oproductos.productos.tct_subtipo_f_txf_c == 'Interesado') {
+            //Valida Factoraje TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.factoring.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.factoring.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.factoring.subtipo_cuenta == 7) {
                 guardaF = true;
             }
-            //Valida CA
-            if (Oproductos.productos.tct_tipo_ca_txf_c == 'Lead' || Oproductos.productos.tct_subtipo_ca_txf_c == 'Contactado' || Oproductos.productos.tct_subtipo_ca_txf_c == 'Interesado') {
+            //Valida CA TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta == 7) {
                 guardaCA = true;
             }
-            //Valida FLEET
-            if (Oproductos.productos.tct_tipo_fl_txf_c == 'Lead' || Oproductos.productos.tct_subtipo_fl_txf_c == 'Contactado' || Oproductos.productos.tct_subtipo_fl_txf_c == 'Interesado') {
+            //Valida FLEET TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.fleet.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.fleet.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.fleet.subtipo_cuenta == 7) {
                 guardaFL = true;
             }
-            //Valida UNICLICK
-            if (Oproductos.productos.tct_tipo_uc_txf_c == 'Lead' || Oproductos.productos.tct_subtipo_uc_txf_c == 'Contactado' || Oproductos.productos.tct_subtipo_uc_txf_c == 'Interesado') {
+            //Valida UNICLICK TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta == 7) {
                 guardaU = true;
             }
             //Evalua guardado de No viable
@@ -722,25 +722,25 @@
         var editaFL = true;
         var editaU = true;
         // Valida tipo de cuenta por producto
-        if (Oproductos.productos != undefined) {
-            //Valida Leasing
-            if (Oproductos.productos.tct_tipo_l_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_l_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_l_txf_c != 'Interesado' && this.model.get('user_id_c') != App.user.id) {
+        if (cont_uni_p.ResumenProductos != undefined) {
+            //Valida Leasing TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.leasing.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.leasing.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.leasing.subtipo_cuenta != 7 && this.model.get('user_id_c') != App.user.id) {
                 editaL = false;
             }
-            //Valida Factoraje
-            if (Oproductos.productos.tct_tipo_f_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_f_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_f_txf_c != 'Interesado' && this.model.get('user_id1_c') != App.user.id) {
+            //Valida Factoraje TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.factoring.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.factoring.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.factoring.subtipo_cuenta != 7 && this.model.get('user_id1_c') != App.user.id) {
                 editaF = false;
             }
-            //Valida CA
-            if (Oproductos.productos.tct_tipo_ca_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_ca_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_ca_txf_c != 'Interesado' && this.model.get('user_id2_c') != App.user.id) {
+            //Valida CA TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta != 7 && this.model.get('user_id2_c') != App.user.id) {
                 editaCA = false;
             }
-            //Valida FLEET
-            if (Oproductos.productos.tct_tipo_fl_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_fl_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_fl_txf_c != 'Interesado' && this.model.get('user_id6_c') != App.user.id) {
+            //Valida FLEET TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.fleet.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.fleet.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.fleet.subtipo_cuenta != 7 && this.model.get('user_id6_c') != App.user.id) {
                 editaFL = false;
             }
-            //Valida UNICLICK
-            if (Oproductos.productos.tct_tipo_uc_txf_c != 'Lead' && Oproductos.productos.tct_subtipo_uc_txf_c != 'Contactado' && Oproductos.productos.tct_subtipo_uc_txf_c != 'Interesado' && this.model.get('user_id7_c') != App.user.id) {
+            //Valida UNICLICK TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+            if (cont_uni_p.ResumenProductos.uniclick.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta != 7 && this.model.get('user_id7_c') != App.user.id) {
                 editaU = false;
             }
         }

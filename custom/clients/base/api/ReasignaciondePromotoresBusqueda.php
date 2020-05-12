@@ -60,17 +60,17 @@ class ReasignaciondePromotoresBusqueda extends SugarApi
              }
 
             $total_rows = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_c, idcliente_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if($user_id == "undefined"){
-                $total_rows .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
+                $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             }
 			else{
-				$total_rows .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
+				$total_rows .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
 			}
             if(!empty($filtroCliente)){
-                $total_rows .= " AND tipo_registro_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
+                $total_rows .= " AND tipo_registro_cuenta_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
 
@@ -81,18 +81,18 @@ SQL;
             }
 
             $query = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_c, rfc_c, idcliente_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
 SQL;
             if($user_id == "undefined"){
-                $query .= " WHERE tipo_registro_c IN({$tipos_query}) AND deleted =0";
+                $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             }
 			else{
-				$query .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_c IN({$tipos_query}) AND deleted =0";
+				$query .= " WHERE {$user_field} = '{$user_id}' AND tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
 			}
 
             if(!empty($filtroCliente)){
-                $query .= " AND tipo_registro_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
+                $query .= " AND tipo_registro_cuenta_c IN({$tipos_query}) AND name LIKE '%{$filtroCliente}%' ";
             }
             $query .= " ORDER BY name ASC LIMIT 20 OFFSET {$offset}";
             $queryResult = $db->query($query);

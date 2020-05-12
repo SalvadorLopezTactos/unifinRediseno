@@ -80,7 +80,7 @@ class PersonasRelacionadasLlamadas extends SugarApi
                     "name"=>$beanPersona->name,
                     "id"=>$beanPersona->id,
                     "apellidopaterno_c"=>$beanPersona->apellidopaterno_c,
-                    "tipo_registro_c"=>$beanPersona->tipo_registro_c
+                    "tipo_registro_c"=>$beanPersona->tipo_registro_cuenta_c
                 );
 
                 $records_in['records'][]=$account;
@@ -98,7 +98,7 @@ class PersonasRelacionadasLlamadas extends SugarApi
                     "name"=>$beanPersona->name,
                     "id"=>$beanPersona->id,
                     "apellidopaterno_c"=>$beanPersona->apellidopaterno_c,
-                    "tipo_registro_c"=>$beanPersona->tipo_registro_c
+                    "tipo_registro_c"=>$beanPersona->tipo_registro_cuenta_c
                 );
 
                 $records_in['records'][]=$account;

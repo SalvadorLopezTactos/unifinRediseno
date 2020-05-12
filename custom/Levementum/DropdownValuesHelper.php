@@ -76,24 +76,24 @@ class DropdownValuesHelper{
         AF - 2018-08-15
         Modificación para establecer Mismas validación en Prospecto a Cliente
       */
-			case 'Prospecto':
+			case '2':
 				//$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
         $tipoCliente = 1 + $EsProveedor; //($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
 				break;
-			case 'Cliente':
+			case '3':
 			 	$tipoCliente = 1 + $EsProveedor; ($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : cedente: " . $cedente. " deudor: " . $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Tipo Cliente: " . $tipoCliente);
                 break;
-			case 'Proveedor':
+			case '5':
 				if ($cedente > 1 || $deudor > 1 ){
                     $tipoCliente = $cedente + $deudor;
                 }
                 $tipoCliente= $tipoCliente + $EsProveedor;
 				break;
-			case 'Persona':
+			case '4':
 				if ($cedente > 1 || $deudor > 1 || $EsProveedor > 1){
 					 $tipoCliente = $cedente + $deudor + $EsProveedor;
 				}else{
