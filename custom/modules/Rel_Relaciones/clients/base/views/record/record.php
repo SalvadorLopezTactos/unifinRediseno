@@ -277,6 +277,26 @@ array (
               ),
             ),
           ),
+          2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'relaciones_producto',
+                'studio' => 'visible',
+                'label' => 'LBL_RELACIONES_PRODUCTO',
+                'span' => 12,
+              ),
+            ),
+          ),
         ),
         'templateMeta' => 
         array (
