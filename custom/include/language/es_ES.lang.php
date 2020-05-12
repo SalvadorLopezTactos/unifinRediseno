@@ -1463,6 +1463,7 @@ $app_list_strings['actividadeconomica_list']=array (
 );
 
 $app_list_strings['paises_list']=array (
+    ''   =>'',
     2   => 'MEXICO',
     3   => 'ESTADOS UNIDOS DE NORTEAMERICA',
     4   => 'AFGANISTAN',
