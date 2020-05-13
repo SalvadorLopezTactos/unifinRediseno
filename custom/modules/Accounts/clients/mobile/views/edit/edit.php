@@ -35,14 +35,14 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tipo_registro_c',
-                'label' => 'LBL_TIPO_REGISTRO',
+                'name' => 'tipo_registro_cuenta_c',
+                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
                 'readonly' => true,
               ),
               1 => 
               array (
-                'name' => 'subtipo_cuenta_c',
-                'label' => 'LBL_SUBTIPO_CUENTA',
+                'name' => 'subtipo_registro_cuenta_c',
+                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
               ),
               2 => 
               array (
