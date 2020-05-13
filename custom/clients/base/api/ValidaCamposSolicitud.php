@@ -128,7 +128,7 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Teléfono o Email');
         }
 
-        if ($telefono == 0 && $beanPersona->tipo_registro_c == "Prospecto") {
+        if ($telefono == 0 && $beanPersona->tipo_registro_cuenta_c == "2") { // Prospecto - 2
             array_push($array_errores, 'Teléfono');
         }
 

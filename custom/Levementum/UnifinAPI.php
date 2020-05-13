@@ -280,7 +280,7 @@ class UnifinAPI
                     $IntValue = new DropdownValuesHelper();
                     $RegimenFiscal = $IntValue->getTipodepersonaInt($objecto->tipodepersona_c);
                     $RegimenConyugal = $IntValue->getEstadoCivilInt($objecto->estadocivil_c);
-                    $TipoCliente = $IntValue->getTipoCliente($objecto->tipo_registro_c, $objecto->estatus_c, $objecto->esproveedor_c, $objecto->tipo_relacion_c, $objecto->cedente_factor_c, $objecto->deudor_factor_c);
+                    $TipoCliente = $IntValue->getTipoCliente($objecto->tipo_registro_cuenta_c, $objecto->estatus_c, $objecto->esproveedor_c, $objecto->tipo_relacion_c, $objecto->cedente_factor_c, $objecto->deudor_factor_c);
                     $_ClntFechaNacimiento = $RegimenFiscal == 3 ? $objecto->fechaconstitutiva_c : $objecto->fechadenacimiento_c;
                     /***CVV INICIO***/
                     $host = 'http://' . $GLOBALS['unifin_url'] . '/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/InsertaClienteCompleto';
@@ -340,11 +340,11 @@ class UnifinAPI
                     /***CVV INICIO***/
                     if ($cliente['UNI2_CTE_030_InsertaClienteCompletoResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
-                        $tipo_registro = (($objecto->tipo_registro_c == 'Lead' || $objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
-                        $objecto->tipo_registro_c = $tipo_registro;
+                        $tipo_registro = (($objecto->tipo_registro_cuenta_c == '1' || $objecto->tipo_registro_cuenta_c == '4' || $objecto->tipo_registro_cuenta_c == '5') ? $objecto->tipo_registro_cuenta_c : '3');
+                        $objecto->tipo_registro_cuenta_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                       //$query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                       //$query = " UPDATE accounts_cstm SET tipo_registro_cuenta_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         /*
                         * F. Javier G. Solar 13/07/2018
                          * se seleccionan los checks de Proveedor, Cedente
@@ -400,7 +400,7 @@ class UnifinAPI
                 $IntValue = new DropdownValuesHelper();
                 $RegimenFiscal = $IntValue->getTipodepersonaInt($objecto->tipodepersona_c);
                 $RegimenConyugal = $IntValue->getEstadoCivilInt($objecto->estadocivil_c);
-                $TipoCliente = $IntValue->getTipoCliente($objecto->tipo_registro_c, $objecto->estatus_c, $objecto->esproveedor_c, $objecto->tipo_relacion_c, $objecto->cedente_factor_c, $objecto->deudor_factor_c);
+                $TipoCliente = $IntValue->getTipoCliente($objecto->tipo_registro_cuenta_c, $objecto->estatus_c, $objecto->esproveedor_c, $objecto->tipo_relacion_c, $objecto->cedente_factor_c, $objecto->deudor_factor_c);
 				$_ClntFechaNacimiento = $RegimenFiscal == 3 ? $objecto->fechaconstitutiva_c : $objecto->fechadenacimiento_c;
 
                 $host = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/InsertaPersona";
@@ -460,15 +460,15 @@ class UnifinAPI
 
                     if ($cliente['UNI2_CTE_001_InsertaPersonaResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
-                        $tipo_registro = (($objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
+                        $tipo_registro = (($objecto->tipo_registro_cuenta_c == '4' || $objecto->tipo_registro_cuenta_c == '5') ? $objecto->tipo_registro_cuenta_c : '3');
                         /*
                             AF - 2018/08/14
                             Omite actualización de tipo de registro
                         */
-                        //$objecto->tipo_registro_c = $tipo_registro;
+                        //$objecto->tipo_registro_cuenta_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_cuenta_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         $this->usuarioProveedores($objecto);
@@ -1081,7 +1081,7 @@ SQL;
                 $IntValue = new DropdownValuesHelper();
                 $RegimenFiscal = $IntValue->getTipodepersonaInt($object->tipodepersona_c);
                 $RegimenConyugal = $IntValue->getEstadoCivilInt($object->estadocivil_c);
-                $TipoCliente = $IntValue->getTipoCliente($object->tipo_registro_c, $object->estatus_c, $object->esproveedor_c, $object->tipo_relacion_c, $object->cedente_factor_c, $object->deudor_factor_c);
+                $TipoCliente = $IntValue->getTipoCliente($object->tipo_registro_cuenta_c, $object->estatus_c, $object->esproveedor_c, $object->tipo_relacion_c, $object->cedente_factor_c, $object->deudor_factor_c);
 				$_ClntFechaNacimiento = $RegimenFiscal == 3 ? $object->fechaconstitutiva_c : $object->fechadenacimiento_c;
 
                 $host = 'http://' . $GLOBALS['unifin_url'] . '/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/ActualizaPersona';
@@ -1991,7 +1991,7 @@ SQL;
     }
 
         public function usuarioProveedores($account){
-            IF (($account->tipo_registro_c == 'Proveedor' || $account->esproveedor_c) && (empty($account->alta_proveedor_c) ? 0 : $account->alta_proveedor_c) == 0){
+            IF (($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c) && (empty($account->alta_proveedor_c) ? 0 : $account->alta_proveedor_c) == 0){
                 global $app_list_strings, $db, $current_user;
                 $host='http://' . $GLOBALS['esb_url'] . '/uni2/rest/creaUsuarioProveedor';
 
@@ -2009,12 +2009,12 @@ SQL;
                     }
                 }
 
-                $list = $app_list_strings['pais_nacimiento_c_list'];
+                $list = $app_list_strings['paises_list'];
                 if (isset($list)){
                     $paisConstitucion = $list[$account->pais_nacimiento_c];
                 }
 
-                $list = $app_list_strings['estado_nacimiento_list'];
+                $list = $app_list_strings['estados_list'];
                 if (isset($list)){
                     $estadoConstitucion = $list[$account->estado_nacimiento_c];
                 }

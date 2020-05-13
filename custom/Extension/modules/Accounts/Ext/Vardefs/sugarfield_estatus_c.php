@@ -2,7 +2,7 @@
  // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['estatus_c']['labelValue'] = 'Estatus';
 $dictionary['Account']['fields']['estatus_c']['dependency'] = '';
-$dictionary['Account']['fields']['estatus_c']['visibility_grid']['trigger'] = 'tipo_registro_c';
+$dictionary['Account']['fields']['estatus_c']['visibility_grid']['trigger'] = '$tipo_registro_cuenta_c';
 $dictionary['Account']['fields']['estatus_c']['visibility_grid']['values']['Prospecto'][0] = 'Seguimiento Futuro';
 $dictionary['Account']['fields']['estatus_c']['visibility_grid']['values']['Prospecto'][1] = 'No Interesado';
 $dictionary['Account']['fields']['estatus_c']['visibility_grid']['values']['Prospecto'][2] = 'Interesado';
