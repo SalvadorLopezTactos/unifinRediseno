@@ -191,6 +191,7 @@ class reAsignarCuentas extends SugarApi
                     $notifica->tct2_notificaciones_accountsaccounts_ida = $value;
                     $notifica->jefe_anterior_c = $jefeActual;
                     $notifica->jefe_nuevo_c = $jefeAsignado;
+                    $notifica->actual_c = $promoActual;
                     $notifica->save();
                     $notId = $notifica->id;
                     global $db;
