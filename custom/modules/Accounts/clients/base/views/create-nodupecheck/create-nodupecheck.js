@@ -1895,7 +1895,7 @@
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
         var webSite = this.model.get('website');
-        if (webSite != "") {
+        if(webSite != "" && webSite != undefined){
             //var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
             var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
 
@@ -1938,8 +1938,8 @@
                 });
 			      }
         }else{
-			      callback(null, fields, errors);
-		    }
+			callback(null, fields, errors);
+		}
     },
 
     rowebsite: function () {
