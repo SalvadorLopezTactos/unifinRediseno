@@ -613,6 +613,14 @@ class Meetings_Hooks
                                 $product->save();
                             }
                             break;
+                        case '9': //Unilease
+                          if($beanAccount->user_id7_c == $bean->assigned_user_id && ($tipoCuenta == '1' || $tipoCuenta == '')){
+                              $product->tipo_cuenta = '2';
+                              $product->subtipo_cuenta = '2';
+                              $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
+                              $product->save();
+                          }
+                          break;
                         default:
                             break;
                     }
