@@ -1263,8 +1263,8 @@ where rfc_c = '{$bean->rfc_c}' and
             $beanprod = null;
 
             $module = 'uni_Productos';
-            $key_productos = array('1','4','3','6','8','7');
-            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS');
+            $key_productos = array('1','4','3','6','8','7','9');
+            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS','-UNILEASE');
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
@@ -1314,6 +1314,9 @@ where rfc_c = '{$bean->rfc_c}' and
                     case '8': //Uniclick
                         $beanprod->assigned_user_id = $bean->user_id7_c;
               			break;
+                    case '9': //Unilease
+                        $beanprod->assigned_user_id = $bean->user_id7_c;
+                        break;
               	}
                 //Guarda registro y vincula a cuenta
               	$beanprod->save();

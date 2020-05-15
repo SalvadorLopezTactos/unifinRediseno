@@ -228,6 +228,10 @@ SQL;
                 return null;
             }
             $row = $bean->db->fetchByAssoc($queryResult);
+            //En caso de obtener Producto Unilease, se manda la petición como si fuera Producto Leasing id=1
+            if($row['tipo_producto_c']=='9'){
+                $row['tipo_producto_c']='1';
+            }
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
             $callApi = new UnifinAPI();
             $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
