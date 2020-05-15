@@ -175,3 +175,4 @@ $mod_strings['LBL_OPERACION_CURSO_CHK'] = 'Operación en Curso';
 $mod_strings['LBL_ULT_OPERACION_ACTIVA'] = 'ult operacion activa';
 $mod_strings['LBL_FECHA_INGRESO_ESTUDIO'] = 'Fecha de Primer Ingreso Estudio';
 $mod_strings['LBL_TCT_ID_MAMBU'] = 'tct id mambu';
+$mod_strings['LBL_UNILEASE_INTEGRACION'] = 'Integrado Unilease';

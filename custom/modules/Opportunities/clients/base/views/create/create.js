@@ -370,6 +370,10 @@
 
         self = this;
         var producto= this.model.get('tipo_producto_c');
+        //En caso de ser una solicitud de Unilease, se deben de validar los mismos campos que Leasing id=1
+        if(producto=='9'){
+            producto='1';
+        }
 
         if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
@@ -1557,6 +1561,16 @@
         else if(op2[0] == "6"){
             this.model.set('tipo_producto_c','6');
             //console.log("5");
+        }
+        else if(op2[0]=="8"){//Uniclick
+            this.model.set('tipo_producto_c','8');
+            this.model.set('tipo_producto_c','9');
+
+        }
+        else if(op2[0]=="9"){//Unilease
+            this.model.set('tipo_producto_c','8');
+            this.model.set('tipo_producto_c','9');
+
         }
         //Eliminar los productos CS, CA y Linea de Credito de la Lista
         Object.keys(op2).forEach(function(key){

@@ -465,6 +465,11 @@
     		var obid=this.model.get('account_id');
     		var caso="2";
     		var producto= this.model.get('tipo_producto_c');
+        //En caso de ser una solicitud de Unilease, se deben de validar los mismos campos que Leasing id=1
+    		if(producto=='9'){
+    		    producto='1';
+            }
+
     		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI'){
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2/'+ producto), null, {
             success: _.bind(function (data) {
