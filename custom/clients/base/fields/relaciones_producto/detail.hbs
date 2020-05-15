@@ -21,12 +21,12 @@
       </tr>
     </thead>
     <tbody>
-      <!-- {{#each oDirecciones.direccion}}
-        <tr>
-            <td>{{calle}}</td>
-            <td>{{getUnifinListValue 'tipodedirecion_list' tipodedireccion}}</td>
-        </tr>
-    {{/each}} -->
+      {{#each productoSeleccionado}}
+      <tr>
+        <td>{{relacion}}</td>
+        <td>{{producto}}</td>
+      </tr>
+      {{/each}}
     </tbody>
   </table>
 </div>
