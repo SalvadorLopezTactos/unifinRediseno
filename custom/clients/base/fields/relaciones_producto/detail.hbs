@@ -24,7 +24,11 @@
       {{#each productoSeleccionado}}
       <tr>
         <td>{{relacion}}</td>
-        <td>{{producto}}</td>
+        <td>
+        {{#each productoList}}
+          {{getUnifinListValue 'tipo_producto_list' this}},
+        {{/each}}
+        </td>
       </tr>
       {{/each}}
     </tbody>

@@ -21,13 +21,10 @@
 
     rel_Productos: function () {
 
-        // var rproducto = this.model.get('relaciones_producto_c');
+        // rel_product.productoSeleccionado = [];
 
-        // if (rproducto != '' && rproducto != undefined) { //No funciona se descompone la vista
-
-        rel_product.productoSeleccionado = [];
+        var relAtt = this.model._previousAttributes.relaciones_activas;
         var relActiva = this.model.get('relaciones_activas'); //Valores de Relaciones Activas
-        console.log("RelACtiva " + relActiva);
         var relProducto = App.lang.getAppListStrings('relaciones_producto_list'); //Lista nueva relaciones_producto_list
 
         for (var property in relProducto) {
@@ -43,7 +40,6 @@
         this.model.set('relaciones_producto_c', JSON.stringify(rel_product.productoSeleccionado));
         console.log(rel_product.productoSeleccionado);
 
-        // }
         this.render();
     },
 
@@ -53,28 +49,15 @@
 
         rel_product.productoSeleccionado[row.index()].producto = selectProducto.toString();  //elemento actual que se esta escogiendo en String
 
+        var list = selectProducto.toString().split(','); //se crea un elemento para la separacion de productos por coma
+        rel_product.productoSeleccionado[row.index()].productoList = list;
+
         //Guarda JSON en el campo relaciones producto
         this.model.set('relaciones_producto_c', JSON.stringify(rel_product.productoSeleccionado));
     },
 
     loadData: function () {
         var relacionProducto = this.model.get('relaciones_producto_c'); //campo relacion productos JSON
-        // var json = JSON.parse(relacionProducto);
-
-        // for (i = 0; i < json.length; i++) {
-        //     var keyproduct = json[i].producto; //ingreso al producto en el array
-        //     var arsplit = keyproduct.split(','); //separo con comas
-
-        //     var sConcat = ''; //inicia con vacio
-
-        //     for (var x = 0; x < arsplit.length; x++) {
-        //         sConcat += App.lang.getAppListStrings('tipo_producto_list').arsplit[i] + ','; //obtengo las etiquetas por id que recorren agregando una coma
-        //     }
-        //     json[i].producto = sConcat; //en mi producto agrego la conversion de id por las etiquetas
-
-        //     console.log(json[i].producto);
-        // }
-
         rel_product.productoSeleccionado = JSON.parse(relacionProducto);
 
         console.log(rel_product.productoSeleccionado);
