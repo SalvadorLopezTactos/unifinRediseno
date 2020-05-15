@@ -878,32 +878,32 @@ AF - 18-01-18
                     <!-- Línea 1 -->
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Estatus de Atención</strong> </div>
-                        <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</div>
+                        <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.unilease.estatus_atencion}}</div>
                     </div>
                     <!-- Línea 2 -->
                     <div class="row-fluid" style="background-color: #ffffff">
                         <div class="span6"><strong>Tipo de Cuenta</strong> </div>
                         <div class="span6">
-                            {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.uniclick.tipo_cuenta}}
-                            {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.uniclick.subtipo_cuenta}}
+                            {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.unilease.tipo_cuenta}}
+                            {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.unilease.subtipo_cuenta}}
                         </div>
                     </div>
                     <!-- Línea 3 -->
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Línea autorizada</strong> </div>
-                        <div class="span6">$ {{customFormatNumber ResumenCliente.uniclick.linea_autorizada}}</div>
+                        <div class="span6">$ {{customFormatNumber ResumenCliente.unilease.linea_autorizada}}</div>
                     </div>
                     <!-- Línea 4 -->
                     <div class="row-fluid"  style="background-color: #ffffff">
                         <div class="span6"><strong>Fecha de vencimiento</strong></div>
-                        <div class="span6">{{ResumenCliente.uniclick.fecha_vencimiento}}</div>
+                        <div class="span6">{{ResumenCliente.unilease.fecha_vencimiento}}</div>
                     </div>
                     <!-- Línea 5 -->
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Línea disponible</strong> </div>
                         <div class="span6">
-                            <font {{#if ResumenCliente.uniclick.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
-                                $ {{customFormatNumber ResumenCliente.uniclick.linea_disponible}}
+                            <font {{#if ResumenCliente.unilease.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
+                                $ {{customFormatNumber ResumenCliente.unilease.linea_disponible}}
                             </font>
                         </div>
                     </div>
@@ -911,7 +911,7 @@ AF - 18-01-18
                     <!-- Línea 6 -->
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Asesor</strong> </div>
-                        <div class="span6">{{ResumenCliente.uniclick.promotor}}</div>
+                        <div class="span6">{{ResumenCliente.unilease.promotor}}</div>
                     </div>
                 </div>
             </div>
