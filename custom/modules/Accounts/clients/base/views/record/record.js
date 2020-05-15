@@ -943,8 +943,8 @@
          @author Victo Martinez - 01/08/2018
          Deshabilita campos: Tipo de cuenta y subtipo de cuenta
          */
-        this.noEditFields.push('subtipo_registro_cuenta_c');
-        this.noEditFields.push('tipo_registro_cuenta_c');
+//        this.noEditFields.push('subtipo_registro_cuenta_c');
+//        this.noEditFields.push('tipo_registro_cuenta_c');
 
         /*
          *
@@ -958,6 +958,7 @@
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
             self.noEditFields.push('promotoruniclick_c');
+            self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
         var origen = this.model.get('origendelprospecto_c');
