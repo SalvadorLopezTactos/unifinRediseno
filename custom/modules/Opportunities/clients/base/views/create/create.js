@@ -645,6 +645,12 @@
                     case 6:
                         id:promotor = modelo.get('user_id6_c');
                         break;
+                    case 8:
+                        id:promotor = modelo.get('user_id7_c');
+                        break;
+                    case 9:
+                        id:promotor = modelo.get('user_id7_c');
+                        break;
                     default:
                         id:promotor = modelo.get('user_id_c');
                         break;
