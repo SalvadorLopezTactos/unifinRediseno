@@ -534,7 +534,7 @@
           //Recupera cuenta asociada
           var cuentaId=this.model.get('account_id');
           var faltantes= "";
-          if((cuentaId!=""|| cuentaId!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI' && this.model.get('tipo_producto_c')!="6"){
+          if((cuentaId!=""|| cuentaId!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI' && this.model.get('tipo_producto_c')!="6" && this.model.get('tipo_producto_c')!="8" && this.model.get('tipo_producto_c')!="9"){
 
           app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
               success: _.bind(function (cuenta) {
@@ -857,7 +857,7 @@
             }
 
             if (this.model.get('tct_etapa_ddw_c') == 'SI') {
-              if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && this.model.get('tipo_producto_c') == "1") {
+              if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9")) {
                   errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                   errors['ca_importe_enganche_c'].required = true;
 
@@ -869,7 +869,7 @@
 
               }
 
-              if (parseFloat(this.model.get('porciento_ri_c')) <= 0 && this.model.get('tipo_producto_c') == "1" || this.model.get('porciento_ri_c') == "" && this.model.get('tipo_producto_c') == "1") {
+              if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "")  && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") ) {
                   errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                   errors['porciento_ri_c'].required = true;
 
@@ -2219,10 +2219,10 @@ console.log(name);
             this.$("div.record-label[data-name='amount']").text("Monto Disponible");
         }
 
-        if (this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO'){
+        if ((this.model.get('tipo_operacion_c') == '1' || this.model.get('tipo_producto_c')=='9')  && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO'){
             this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
         }
-        if(this.model.get('tipo_producto_c')=='1'){
+        if(this.model.get('tipo_producto_c')=='1' || this.model.get('tipo_producto_c')=='9'){
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
             this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Único");
         }else{
