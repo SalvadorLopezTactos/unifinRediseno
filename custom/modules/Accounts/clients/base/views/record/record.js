@@ -5184,6 +5184,13 @@
                             Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
                             Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
+                        case "9": //Unilease
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            ResumenProductos['unilease'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                            break;
                         default:
                             break;
                     }
