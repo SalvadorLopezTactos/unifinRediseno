@@ -23,20 +23,19 @@
 
     rel_Productos: function () {
 
-        Array.prototype.unique = function (a) {
-            return function () {
-                return this.filter(a)
-            }
-        }(function (a, b, c) {
-            return c.indexOf(a, b + 1) < 0
-        });
+
         self_rel = this;
         var arr_rel_prev = self_rel.model._previousAttributes.relaciones_activas;
         var arr_re_selecc = self_rel.model.get('relaciones_activas');
         var list_rel_prod = App.lang.getAppListStrings('relaciones_producto_list');
         var arr_rel_nuevo = [];
+        console.log(arr_rel_prev);
+        arr_rel_prev= arr_rel_prev==undefined?arr_re_selecc:arr_rel_prev;
 
-        if (arr_rel_prev[0] != "" || arr_rel_prev!=undefined) {
+        if (self_rel.action !== 'edit') {
+        }
+
+            if (arr_rel_prev[0] != "") {
             for (var i = 0; i < arr_re_selecc.length; i++) { // conyugue contacto aval
                 var bandera = false;
                 var valor = "";
@@ -63,8 +62,6 @@
         }
 
 
-        console.log(arr_rel_nuevo.unique());
-        arr_rel_nuevo = arr_rel_nuevo.unique();
         var arr_final_rel = [];
         for (var property in list_rel_prod) {
             for (var k = 0; k < arr_rel_nuevo.length; k++) {
@@ -81,20 +78,6 @@
 
         self_rel.render();
 
-        /*  for (var property in relProducto) {
-         for (var i = 0; i < relActiva.length; i++) {
-         if (relProducto.hasOwnProperty(property) && relActiva[i] == property) {
-
-         rel_product.productoSeleccionado.push({ relacion: property, producto: '' });
-
-         }
-         }
-         }
-         //Guarda JSON en el campo relaciones producto
-         this.model.set('relaciones_producto_c', JSON.stringify(rel_product.productoSeleccionado));
-         console.log(rel_product.productoSeleccionado);
-
-         this.render();*/
     },
 
     relTipo_Producto: function (events) {
@@ -111,10 +94,17 @@
     },
 
     loadData: function () {
-        var relacionProducto = this.model.get('relaciones_producto_c'); //campo relacion productos JSON
+
+        var relacionProducto = rel_product.model.get('relaciones_producto_c'); //campo relacion productos JSON
         rel_product.productoSeleccionado = JSON.parse(relacionProducto);
 
         console.log(rel_product.productoSeleccionado);
+        rel_product.render();
     },
+
+    _render: function () {
+        this._super("_render");
+    },
+
 
 })
