@@ -14,12 +14,16 @@
         <tr>
             <td width="33%" valign="top" class="campoLeasing sborder">
                 <div><strong>Leasing/Crédito SOS</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
-                </div>
-                <div class="mpad">{{ResumenProductos.leasing.dias}} días
-                    <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
-                </div>
+                {{#if ResumenProductos.leasing.estatus_atencion}}
+                  <div class="mpad">
+                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
+                  </div>
+                {{/if}}
+                {{#if ResumenProductos.leasing.dias}}
+                  <div class="mpad">{{ResumenProductos.leasing.dias}} días
+                      <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
+                  </div>
+                {{/if}}
                 {{#if ResumenProductos.leasing.visible_noviable}}
                     <div class="l_nv mpad">
                         <label class="record-label mpad">No Viable Leasing</label>
@@ -91,12 +95,16 @@
 
             <td width="33%" valign="top" class="campoFactoraje sborder">
                 <div><strong>Factoraje</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.factoring.estatus_atencion}}
-                </div>
-                <div class="mpad">{{ResumenProductos.factoring.dias}} días
-                    <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
-                </div>
+                {{#if ResumenProductos.factoring.estatus_atencion}}
+                  <div class="mpad">
+                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.factoring.estatus_atencion}}
+                  </div>
+                {{/if}}
+                {{#if ResumenProductos.factoring.dias}}
+                  <div class="mpad">{{ResumenProductos.factoring.dias}} días
+                      <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
+                  </div>
+                {{/if}}
                 {{#if ResumenProductos.factoring.visible_noviable}}
                     <div class="f_nv mpad">
                         <label class="record-label mpad">No Viable Factoraje</label>
@@ -168,16 +176,20 @@
 
             <td width="33%" valign="top" class="campoCA sborder">
                 <div><strong>Crédito Automotriz</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.credito_auto.estatus_atencion}}
-                </div>
-                <div class="mpad">{{ResumenProductos.credito_auto.dias}} días
-                    <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
-                </div>
+                {{#if ResumenProductos.credito_auto.estatus_atencion}}
+                  <div class="mpad">
+                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.credito_auto.estatus_atencion}}
+                  </div>
+                {{/if}}
+                {{#if ResumenProductos.credito_auto.dias}}
+                  <div class="mpad">{{ResumenProductos.credito_auto.dias}} días
+                      <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
+                  </div>
+                {{/if}}
                 {{#if ResumenProductos.credito_auto.visible_noviable}}
                     <div class="ca_nv mpad">
                         <label class="record-label mpad">No Viable Crédito Automotriz</label>
-                        <input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}} 
+                        <input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}}
                             data-field="chk_ca_nv" />
                     </div>
                     <div class="ca_nv_razon">
@@ -248,12 +260,16 @@
         <tr>
             <td width="33%" valign="top" class="campoFleet sborder">
                 <div><strong>Fleet</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
-                </div>
-                <div class="mpad">{{ResumenProductos.fleet.dias}} días
-                    <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
-                </div>
+                {{#if ResumenProductos.fleet.estatus_atencion}}
+                  <div class="mpad">
+                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
+                  </div>
+                {{/if}}
+                {{#if ResumenProductos.fleet.dias}}
+                  <div class="mpad">{{ResumenProductos.fleet.dias}} días
+                      <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
+                  </div>
+                {{/if}}
                 {{#if ResumenProductos.fleet.visible_noviable}}
                     <div class="fl_nv mpad">
                         <label class="record-label mpad">No Viable Fleet</label>
@@ -325,12 +341,16 @@
 
             <td width="33%" valign="top" class="campoUniclick sborder">
                 <div><strong>Uniclick</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
-                </div>
-                <div class="mpad">{{ResumenProductos.uniclick.dias}} días
-                    <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
-                </div>
+                {{#if ResumenProductos.uniclick.estatus_atencion}}
+                  <div class="mpad">
+                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
+                  </div>
+                {{/if}}
+                {{#if ResumenProductos.uniclick.dias}}
+                  <div class="mpad">{{ResumenProductos.uniclick.dias}} días
+                      <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
+                  </div>
+                {{/if}}
                 {{#if ResumenProductos.uniclick.visible_noviable}}
                     <div class="u_nv mpad">
                         <label class="record-label mpad">No Viable Uniclick</label>
@@ -398,6 +418,15 @@
                         </select>
                     </div>
                 {{/if}}
+                <div class="u_canal">
+                    <label class="record-label mpad">Canal</label>
+                    <select class="row-fluid select2 list_u_canal " data-field="list_u_canal">
+                        {{#each canales_ddw_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ResumenProductos.uniclick.canal_c}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
             </td>
         </tr>
     </table>

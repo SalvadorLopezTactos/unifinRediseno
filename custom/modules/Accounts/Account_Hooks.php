@@ -193,7 +193,6 @@ SQL;
                 }else{
                     $telefono = BeanFactory::newBean('Tel_Telefonos');
                 }
-
                 $telefono->name = $a_telefono['telefono'] . ' ' . $a_telefono['extension'];
                 $telefono->secuencia = $a_telefono['secuencia'];
                 $telefono->telefono = $a_telefono['telefono'];
@@ -206,8 +205,8 @@ SQL;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
-                //add current records ids to list
-                //$GLOBALS['log']->fatal('>>>>llamada desde account_telefonos<<<<<<<');
+                $telefono->whatsapp_c = $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
+                $GLOBALS['log']->fatal('WhatsApp: '.$telefono->whatsapp_c);
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
@@ -430,7 +429,7 @@ SQL;
     public function crearFolioProspecto($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        if ($bean->idprospecto_c == '' && $bean->tipo_registro_c == 'Prospecto') {
+        if ($bean->idprospecto_c == '' && $bean->tipo_registro_cuenta_c == '2') { //2 = Propsecto
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(3);
@@ -443,7 +442,8 @@ SQL;
     public function crearFolioCliente($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' || $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado"))) {
+        //Tipo Cuenta: 3-Cliente, 4-Persona, 5-Proveedor **** SubTipo-Cuenta: 7-Interesado
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7"))) {
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(1,$bean);
@@ -582,7 +582,7 @@ SQL;
         // ** jsr ** inicio
         if(($bean->id_process_c == 0 || $bean->id_process_c == null || $bean->id_process_c == "") && ($bean->lista_negra_c == 1 || $bean->pep_c == 1)) {
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ** JSR ** if a ejecutar OFICIAL DE CUMPLIMIENTO   " . ": $bean->id_process_c ");
-            $liberacion = $callApi->liberacionLista($bean->id, $bean->lista_negra_c, $bean->pep_c, $bean->idprospecto_c, $bean->tipo_registro_c, $current_user->user_name, $bean->name);
+            $liberacion = $callApi->liberacionLista($bean->id, $bean->lista_negra_c, $bean->pep_c, $bean->idprospecto_c, $bean->tipo_registro_cuenta_c, $current_user->user_name, $bean->name);
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Inicia OFICIAL DE CUMPLIMIENTO   " . ": $liberacion ");
         }
         // ** jsr ** fin
@@ -602,10 +602,10 @@ SQL;
         }
         else
         {
+            //Tipo Cuenta = 4 - Persona  2 - Prospecto
+            if(($bean->tipo_registro_cuenta_c != '4' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == 0) {
 
-            if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == 0) {
-
-                if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_c != 'Prospecto' && $_SESSION['estadoPersona'] == 'insertando')) {
+                if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_cuenta_c != '2' && $_SESSION['estadoPersona'] == 'insertando')) {
                     $callApi = new UnifinAPI();
                     $cliente = $callApi->insertarClienteCompleto($bean);
                 }
@@ -617,8 +617,8 @@ SQL;
             *Conservar los campos que sean obligatorios de acuerdo a la opción
             *seleccionada
 
-             */
-            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
+             */ // Tipo Cuenta 2-Prospecto, subTipo Cuenta 7-Interesado
+            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
             {
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->insertarClienteCompleto($bean);
@@ -698,7 +698,7 @@ SQL;
     {
         if($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar') {
+                if ($bean->field_defs[$field]['type'] == 'varchar' && $field !='encodedkey_mambu_c') {
                     $value = mb_strtoupper($value, "UTF-8");
                     $bean->$field = $value;
                 }
@@ -728,7 +728,7 @@ SQL;
 
                 //Evalua si envía lead
                 $relacionado = 0;
-                if ($bean->tipo_registro_c == 'Lead') {
+                if ($bean->tipo_registro_cuenta_c == '1') { //Tipo Cuenta 1-Lead
                   // Consulta si tiene relación
                   $query = "select id_c from rel_relaciones_cstm
                           where account_id1_c ='". $bean->id ."'
@@ -741,7 +741,7 @@ SQL;
                 }
                 //CVV - valida que la persona ya se encuentre sincornizada con UNICS, de lo contrario manda a insertar completo
                 if($bean->sincronizado_unics_c == 1){
-                    if (($bean->tipo_registro_c == 'Lead' && ($relacionado==1 || $bean->esproveedor_c || $bean->deudor_factor_c)) || $bean->tipo_registro_c != 'Lead') {
+                    if (($bean->tipo_registro_cuenta_c == '1' && ($relacionado==1 || $bean->esproveedor_c || $bean->deudor_factor_c)) || $bean->tipo_registro_cuenta_c != '1') {
                       $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
                       $this->emailChangetoUnics($bean);
                     }
@@ -759,7 +759,7 @@ SQL;
     {
         global $current_user;
         try {
-            if (!empty($bean->idcliente_c) && ($bean->tipo_registro_c == 'Cliente' || $bean->tipo_registro_c == 'Persona')) {
+            if (!empty($bean->idcliente_c) && ($bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '4')) { //Tipo Cuenta 3-Cliente, 4-Persona
                 $callApi = new UnifinAPI();
                 $PLD = $callApi->insertaPLD($bean, $_SESSION['estadoPersona']);
                 $_SESSION['estadoPersona'] = '';
@@ -785,7 +785,7 @@ SQL;
                         $contactoRel->apellidopaterno_c = $contact_row['apellidoPaterno'];
                         $contactoRel->apellidomaterno_c = $contact_row['apellidoMaterno'];
                         $contactoRel->email1 = $contact_row['emailContacto'];
-                        $contactoRel->tipo_registro_c = "Persona";
+                        $contactoRel->tipo_registro_cuenta_c = "4"; //Tipo cuenta 4-Persona
                         $contactoRel->tipo_relacion_c = "^Contacto^";
                         $contactoRel->assigned_user_id = $bean->assigned_user_id;
                         $contactoRel->team_set_id = $bean->team_set_id;
@@ -954,11 +954,11 @@ where rfc_c = '{$bean->rfc_c}' and
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
 
         if ($bean_Resumen== null || empty($bean_Resumen)){
-            global $app_list_strings, $current_user; //Obtención de listas de valores
-            $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
-            $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
-            $etitipo= $tipo[$bean->tipo_registro_c];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
-            $etisubtipo= $subtipo[$bean->subtipo_cuenta_c]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
+            // global $app_list_strings, $current_user; //Obtención de listas de valores
+            // $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
+            // $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
+            // $etitipo= $tipo[$bean->tipo_registro_cuenta_c];      //Obtiene el valor del campo obtenido de la lista con Etiqueta
+            // $etisubtipo= $subtipo[$bean->subtipo_registro_cuenta_c]; //Obtiene el valor del campo obtenido de la lista con Etiqueta
 
             $GLOBALS['log']->fatal('Entra a condición para crear Resumen');
             $bean_Resumen = BeanFactory::newBean('tct02_Resumen');
@@ -968,46 +968,46 @@ where rfc_c = '{$bean->rfc_c}' and
 
             //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
             //LEASING
-            $bean_Resumen->tct_tipo_l_txf_c= $bean->tipo_registro_c;
-            $bean_Resumen->tct_subtipo_l_txf_c=$bean->subtipo_cuenta_c;
-            $bean_Resumen->tct_tipo_cuenta_l_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            // $bean_Resumen->tct_tipo_l_txf_c= $bean->tipo_registro_c;
+            // $bean_Resumen->tct_subtipo_l_txf_c=$bean->subtipo_cuenta_c;
+            // $bean_Resumen->tct_tipo_cuenta_l_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //FACTORAJE
-            $bean_Resumen->tct_tipo_f_txf_c= $bean->tipo_registro_c;
-            $bean_Resumen->tct_subtipo_f_txf_c=$bean->subtipo_cuenta_c;
-            $bean_Resumen->tct_tipo_cuenta_f_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            // $bean_Resumen->tct_tipo_f_txf_c= $bean->tipo_registro_c;
+            // $bean_Resumen->tct_subtipo_f_txf_c=$bean->subtipo_cuenta_c;
+            // $bean_Resumen->tct_tipo_cuenta_f_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //CREDITO AUTOMOTRIZ
-            $bean_Resumen->tct_tipo_ca_txf_c= $bean->tipo_registro_c;
-            $bean_Resumen->tct_subtipo_ca_txf_c=$bean->subtipo_cuenta_c;
-            $bean_Resumen->tct_tipo_cuenta_ca_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            // $bean_Resumen->tct_tipo_ca_txf_c= $bean->tipo_registro_c;
+            // $bean_Resumen->tct_subtipo_ca_txf_c=$bean->subtipo_cuenta_c;
+            // $bean_Resumen->tct_tipo_cuenta_ca_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //FLEET
-            $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
-            $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
-            $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            // $bean_Resumen->tct_tipo_fl_txf_c= $bean->tipo_registro_c;
+            // $bean_Resumen->tct_subtipo_fl_txf_c=$bean->subtipo_cuenta_c;
+            // $bean_Resumen->tct_tipo_cuenta_fl_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
             //UNICLICK
-            $bean_Resumen->tct_tipo_uc_txf_c= $bean->tipo_registro_c;
-            $bean_Resumen->tct_subtipo_uc_txf_c=$bean->subtipo_cuenta_c;
-            $bean_Resumen->tct_tipo_cuenta_uc_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+            // $bean_Resumen->tct_tipo_uc_txf_c= $bean->tipo_registro_c;
+            // $bean_Resumen->tct_subtipo_uc_txf_c=$bean->subtipo_cuenta_c;
+            // $bean_Resumen->tct_tipo_cuenta_uc_c= mb_strtoupper(trim($etitipo.' '.$etisubtipo));
 
             //Evalua tipo de cuenta
-            if ($bean->tipo_registro_c == 'Prospecto' && $bean->subtipo_cuenta_c == 'Integracion de Expediente' ) {
-                //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
-                //LEASING
-                $bean_Resumen->tct_tipo_l_txf_c= 'Lead';
-                $bean_Resumen->tct_subtipo_l_txf_c= 'En Calificacion';
-                $bean_Resumen->tct_tipo_cuenta_l_c= 'LEAD EN CALIFICACIÓN';
-                //FACTORAJE
-                $bean_Resumen->tct_tipo_f_txf_c= 'Lead';
-                $bean_Resumen->tct_subtipo_f_txf_c='En Calificacion';
-                $bean_Resumen->tct_tipo_cuenta_f_c= 'LEAD EN CALIFICACIÓN';
-                //FLEET
-                $bean_Resumen->tct_tipo_fl_txf_c= 'Lead';
-                $bean_Resumen->tct_subtipo_fl_txf_c='En Calificacion';
-                $bean_Resumen->tct_tipo_cuenta_fl_c= 'LEAD EN CALIFICACIÓN';
-                //UNICLICK
-                $bean_Resumen->tct_tipo_uc_txf_c= 'Lead';
-                $bean_Resumen->tct_subtipo_uc_txf_c='En Calificacion';
-                $bean_Resumen->tct_tipo_cuenta_uc_c= 'LEAD EN CALIFICACIÓN';
-            }
+            // if ($bean->tipo_registro_c == 'Prospecto' && $bean->subtipo_cuenta_c == 'Integracion de Expediente' ) {
+            //     //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
+            //     //LEASING
+            //     $bean_Resumen->tct_tipo_l_txf_c= 'Lead';
+            //     $bean_Resumen->tct_subtipo_l_txf_c= 'En Calificacion';
+            //     $bean_Resumen->tct_tipo_cuenta_l_c= 'LEAD EN CALIFICACIÓN';
+            //     //FACTORAJE
+            //     $bean_Resumen->tct_tipo_f_txf_c= 'Lead';
+            //     $bean_Resumen->tct_subtipo_f_txf_c='En Calificacion';
+            //     $bean_Resumen->tct_tipo_cuenta_f_c= 'LEAD EN CALIFICACIÓN';
+            //     //FLEET
+            //     $bean_Resumen->tct_tipo_fl_txf_c= 'Lead';
+            //     $bean_Resumen->tct_subtipo_fl_txf_c='En Calificacion';
+            //     $bean_Resumen->tct_tipo_cuenta_fl_c= 'LEAD EN CALIFICACIÓN';
+            //     //UNICLICK
+            //     $bean_Resumen->tct_tipo_uc_txf_c= 'Lead';
+            //     $bean_Resumen->tct_subtipo_uc_txf_c='En Calificacion';
+            //     $bean_Resumen->tct_tipo_cuenta_uc_c= 'LEAD EN CALIFICACIÓN';
+            // }
             //GUARDA REGISTRO DE RESUMEN
             $bean_Resumen->save();
         }
@@ -1028,7 +1028,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
         $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
         //Valida Cuenta tipo promotor
-        if($bean->tipo_registro_c == 'Prospecto'){
+        if($bean->tipo_registro_cuenta_c == '2'){ //2-Prospecto
           //Valida promotor Leasing
           if ((empty($bean->user_id_c) || $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
               $bean->user_id_c = $idSinGestor;
@@ -1099,7 +1099,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $bean->apellidomaterno_c=$limpiamaterno;
         $bean->razonsocial_c=$limpiarazon;
         $bean->nombre_comercial_c=$limpianomcomercial;
-        if ($bean->tipo_registro_c=="Persona Moral"){
+        if ($bean->tipodepersona_c=="Persona Moral"){
             $bean->name=$bean->razonsocial_c;
         }
 
@@ -1108,7 +1108,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
             $acronimos= $app_list_strings['validacion_duplicados_list'];
 
-            if ($bean->tipo_registro_c!="Persona Moral"){
+            if ($bean->tipodepersona_c!="Persona Moral"){
                 //$GLOBALS['log']->fatal(print_r($tipo,true));
                 //Cambia a mayúsculas y quita espacios a cada campo
                 //Concatena los tres campos para formar el clean_name
@@ -1216,7 +1216,7 @@ where rfc_c = '{$bean->rfc_c}' and
         * Tipo de cuenta = Proveedor
         * o Es Proveedor = True
         */
-        if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_c=="Proveedor" || $bean->esproveedor_c==1)){
+        if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_cuenta_c=="5" || $bean->esproveedor_c==1)){ //Tipo Cuenta 5-Proveedor
             $GLOBALS['log']->fatal('Genera Registro Analizate: Crear - Nuevo Proveedor');
             $this->RegistroAnalizate($bean);
 
@@ -1250,68 +1250,84 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->save();
     }
 
-	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
+  	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
         //Se ejecuta para creación productos para nuevos registros(cuentas):
         /* Dev: Erick de JEsus
         * Tipo de cuenta = Todas
         */
-		global $current_user;
-		$beanprod = null;
-        //$GLOBALS['log']->fatal($event);
-		//$GLOBALS['log']->fatal($args);
-		$module = 'uni_Productos';
-		$key_productos = array('1','4','3','6','8');
-		$name_productos = array('-LEASING','-FACTORAJE','-CREDITO AUTOMOTRIZ','-FLEET','-UNICLICK');
-		$count = count($name_productos);
-        $current_prod = null;
-        $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
+        //Sólo se ejecuta en la creación
         if (!$args['isUpdate']){
+            //Declara variables para generación de registros
+            global $current_user;
+            global $app_list_strings;
+            $beanprod = null;
 
-			for ($i = 0; $i < $count; $i++) {
-				//$current_prod = explode("," , str_replace("^", "", $current_user->productos_c));
-				//$GLOBALS['log']->fatal($current_prod);
+            $module = 'uni_Productos';
+            $key_productos = array('1','4','3','6','8','7');
+            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS');
+            $count = count($name_productos);
+            $current_prod = null;
+            $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
 
-				$beanprod = BeanFactory::newBean($module);
-				$beanprod->name = $bean->name.$name_productos[$i];
-				$beanprod->tipo_producto = $key_productos[$i];
-
-				switch ($key_productos[$i]) {
-					case '1': //Leasing
+            $tipo = $app_list_strings['tipo_registro_cuenta_list'];
+            $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
+            $etitipo= $tipo[$bean->tipo_registro_cuenta_c];
+            $etisubtipo= $subtipo[$bean->subtipo_registro_cuenta_c];
+            for ($i = 0; $i < $count; $i++) {
+              	//$GLOBALS['log']->fatal($current_prod);
+              	$beanprod = BeanFactory::newBean($module);
+              	$beanprod->name = $bean->name.$name_productos[$i];
+              	$beanprod->tipo_producto = $key_productos[$i];
+                $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
+                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '1' : $bean->tipo_registro_cuenta_c;
+                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta=='1') ? '5' : $bean->subtipo_registro_cuenta_c;
+                $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
+                //Caso especial: Alta portal CA
+                if ($beanprod->tipo_producto == '3' && $GLOBALS['service']->platform!= 'base' && $GLOBALS['service']->platform!= 'mobile') {
+                    $beanprod->tipo_cuenta = "2"; //2-Prospecto
+                    $beanprod->subtipo_cuenta = "8"; //Integración de expediente
+                    $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
+                    //Actualiza campo general
+                    global $db;
+                    $update = "update accounts_cstm set
+                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      where id_c = '{$bean->id}'";
+                    $updateExecute = $db->query($update);
+                }
+                //Asignación de usuario
+              	switch ($key_productos[$i]) {
+                    case '1': //Leasing
                         $beanprod->assigned_user_id = $bean->user_id_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-						break;
-					case '4': //Factoraje
+                    break;
+                    case '4': //Factoraje
                         $beanprod->assigned_user_id = $bean->user_id1_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-						break;
-					case '3': //Credito-Automotriz
+              			break;
+              		  case '3': //Credito-Automotriz
                         $beanprod->assigned_user_id = $bean->user_id2_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-						break;
-					case '6': //Fleet
+              			break;
+                    case '6': //Fleet
                         $beanprod->assigned_user_id = $bean->user_id6_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-						break;
-					case '8': //Uniclick
+              			break;
+                    case '7': //Credito-SOS
+                        $beanprod->assigned_user_id = $bean->user_id_c;
+                    break;
+                    case '8': //Uniclick
                         $beanprod->assigned_user_id = $bean->user_id7_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-						break;
-				}
-
-				$beanprod->save();
-
-				$bean->load_relationship('accounts_uni_productos_1');
-				$bean->accounts_uni_productos_1->add($beanprod->id);
-
-				$beanprod = null;
-			}
+              			break;
+              	}
+                //Guarda registro y vincula a cuenta
+              	$beanprod->save();
+              	$bean->load_relationship('accounts_uni_productos_1');
+              	$bean->accounts_uni_productos_1->add($beanprod->id);
+              	$beanprod = null;
+  		      }
         }
     }
 
     public function set_csv_linea_vigente($bean=null, $event= null, $args= null){
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
-        //Esta función se dispara a través de Proccess Author "Cliente con Línea"
-  	    if(($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' && !$bean->conversion_gclid_c) || ($bean->subtipo_cuenta_c=='Integracion de Expediente' && $bean->tipo_registro_c=='Prospecto' && $bean->fetched_row['subtipo_cuenta_c']!='Integracion de Expediente' && !$bean->conversion_gclid_c)){
+        //Esta función se dispara a través de Proccess Author "Cliente con Línea" ****** Tipo-Cuenta: 2-Prospecto, 3-Cliente **** SubTipo-Cuenta: 18-Con linea vigente, 8-Integracion de expediente
+  	    if(($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && $bean->fetched_row['subtipo_registro_cuenta_c']!='18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c=='8' && $bean->tipo_registro_cuenta_c=='2' && $bean->fetched_row['subtipo_registro_cuenta_c']!='8' && !$bean->conversion_gclid_c)){
             $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPARA DESDE PROCCESS AUTHOR------------');
             $gclid='';//este campo se obtiene del lead relacionado campo gclid
             $conversion_name='Conv CRM';
@@ -1372,14 +1388,13 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function set_account_mambu($bean=null, $event= null, $args= null){
         global $sugar_config;
-        if($bean->subtipo_cuenta_c=='Con Linea Vigente' && $bean->tipo_registro_c=='Cliente' && $bean->fetched_row['subtipo_cuenta_c']!='Con Linea Vigente' && $bean->encodedkey_mambu_c ==""){
-
+        //Cliente con Línea Vigente: 3,18
+        if($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && $bean->fetched_row['subtipo_registro_cuenta_c']!='18' && $bean->encodedkey_mambu_c ==""){
             //variables para consumo de servicio
-            $url=$sugar_config['url_mambu_clientes'];
+            $url=$sugar_config['url_mambu_clientes'];	
             $user=$sugar_config['user_mambu'];
             $pwd=$sugar_config['pwd_mambu'];
             $auth_encode=base64_encode( $user.':'.$pwd );
-
             //variables para payload
             $id_crm=$bean->id;
             $nombre='';
@@ -1387,16 +1402,13 @@ where rfc_c = '{$bean->rfc_c}' and
             $razon_social=$bean->razonsocial_c;
             $id_cliente_corto=$bean->idcliente_c;
             //$id_cliente_corto='52597';
-
             //Condicion para determinar el valor de $nombre en el caso de regimen fiscal
             $nombre = $bean->tipodepersona_c!='Persona Moral' ? $nombreaccount : $razon_social;
 
             //Obteniendo referencias bancarias
             $array_referencias=array();
             if ($bean->load_relationship('refba_referencia_bancaria_accounts')) {
-
                 $referencias=$bean->refba_referencia_bancaria_accounts->getBeans();
-
                 if (!empty($referencias)) {
                     foreach ($referencias as $ref) {
                         $ref_bancaria= $ref->numerocuenta_c;
@@ -1421,46 +1433,28 @@ where rfc_c = '{$bean->rfc_c}' and
                 "_Referencias_Bancarias_Clientes"=>$array_referencias,
 
             );
-
-            //$GLOBALS['log']->fatal(json_encode($body));
-
+            $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url,$body,$auth_encode);
-
             $GLOBALS['log']->fatal('--------------MAMBU RESPONSE-----------------');
             $GLOBALS['log']->fatal($resultado);
-
             if(!empty($resultado['encodedKey'])){
-
                 $bean->encodedkey_mambu_c=$resultado['encodedKey'];
-
             }
-
             //Obtener solicitudes
-
             if ($bean->load_relationship('opportunities')) {
-
                 //Fetch related beans
                 $solicitudes=$bean->opportunities->getBeans();
-
                 if (!empty($solicitudes)) {
                     foreach ($solicitudes as $sol) {
                         //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
                         if($sol->tipo_producto_c=='8' && $sol->tct_id_mambu_c=="" && $sol->estatus_c=='N'){
                             $sol->save();
                         }
-
                     }
                 }
             }
-
-
-
         }
-
-
-
     }
-
 
 }

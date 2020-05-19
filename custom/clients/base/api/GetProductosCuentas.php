@@ -24,17 +24,18 @@ class GetProductosCuentas extends SugarApi
         $id = $args['id'];
         $records_in = [];
 
+        /*****************SUBTIPO CUENTA = 2-Contactado or SUBTIPO CUENTA = 7-Interesado or TIPO CUENTA = 1-Lead**********/
         $query = "SELECT
         case
-            when up.tipo_producto = 1 and (rc.tct_subtipo_l_txf_c = 'Contactado' or rc.tct_subtipo_l_txf_c = 'Interesado'  or rc.tct_tipo_l_txf_c = 'Lead')  then
+            when up.tipo_producto = 1 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then  
             1
-            when up.tipo_producto = 3 and (rc.tct_subtipo_ca_txf_c = 'Contactado' or rc.tct_subtipo_ca_txf_c = 'Interesado'  or rc.tct_tipo_ca_txf_c = 'Lead' ) then
+            when up.tipo_producto = 3 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
             1
-            when up.tipo_producto = 4 and (rc.tct_subtipo_f_txf_c = 'Contactado' or rc.tct_subtipo_f_txf_c = 'Interesado'  or rc.tct_tipo_f_txf_c = 'Lead' ) then
+            when up.tipo_producto = 4 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
             1
-            when up.tipo_producto = 6 and (rc.tct_subtipo_fl_txf_c = 'Contactado' or rc.tct_subtipo_fl_txf_c = 'Interesado'  or rc.tct_tipo_fl_txf_c = 'Lead' ) then
+            when up.tipo_producto = 6 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
             1
-            when up.tipo_producto = 8 and (rc.tct_subtipo_uc_txf_c = 'Contactado' or rc.tct_subtipo_uc_txf_c = 'Interesado'  or rc.tct_tipo_uc_txf_c = 'Lead' ) then
+            when up.tipo_producto = 8 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
             1
             else 0
         end 'visible_noviable', up.*, upc.*, concat(u.first_name,' ',u.last_name) as full_name
@@ -43,9 +44,7 @@ class GetProductosCuentas extends SugarApi
         inner join uni_productos up on up.id = ap.accounts_uni_productos_1uni_productos_idb
         inner join uni_productos_cstm upc on upc.id_c = up.id
         inner join users u on u.id = up.assigned_user_id
-        inner join tct02_resumen_cstm rc on rc.id_c = a.id
-        where
-        a.id = '{$id}' and up.deleted = 0";
+        where a.id = '{$id}' and up.deleted = 0";
 
         $result = $GLOBALS['db']->query($query);
 

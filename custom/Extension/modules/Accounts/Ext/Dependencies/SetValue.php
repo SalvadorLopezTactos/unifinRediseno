@@ -10,7 +10,7 @@ $dependencies['Accounts']['esproveedor_check']= array
 (
     'hooks'=> array("all"),
     'trigger'=>'true',
-    'triggerFields'=> array('tipo_registro_c, id'),
+    'triggerFields'=> array('tipo_registro_cuenta_c, id'),
     'onload'=> true,
     'actions'=> array(
         array(
@@ -18,7 +18,7 @@ $dependencies['Accounts']['esproveedor_check']= array
             'params'=> array(
                 'target'=>'esproveedor_c',
                 'label'=>'LBL_ESPROVEEDOR',
-                'value'=>'ifElse(equal($tipo_registro_c,"Proveedor"),true, $esproveedor_c)'
+                'value'=>'ifElse(equal($tipo_registro_cuenta_c,"5"),true, $esproveedor_c)'
             ),
         ),
     ),

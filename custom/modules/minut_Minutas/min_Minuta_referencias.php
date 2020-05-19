@@ -30,8 +30,8 @@ class Minuta_Referencias
                     $beanCuentas->clean_name= $mReferencias[$r]['clean_name'];
                     $beanCuentas->phone_office = $mReferencias[$r]['telefono'];
                     $beanCuentas->email1 = $mReferencias[$r]['correo'];
-                    $beanCuentas->tipo_registro_c = "Lead";
-                    $beanCuentas->subtipo_cuenta_c = "En Calificacion";
+                    $beanCuentas->tipo_registro_cuenta_c = "1";
+                    $beanCuentas->subtipo_registro_cuenta_c = "5";
                     $beanCuentas->origendelprospecto_c = "Referido Cliente";
                     $beanCuentas->account_id1_c = $mReferencias[$r]['id_cuenta'];
 
@@ -75,8 +75,8 @@ class Minuta_Referencias
                     $beanCuentas->clean_name= $mReferencias[$r]['clean_name_moral'];
                     $beanCuentas->phone_office = $mReferencias[$r]['telefono'];
                     $beanCuentas->email1 = $mReferencias[$r]['correo'];
-                    $beanCuentas->tipo_registro_c = "Lead";
-                    $beanCuentas->subtipo_cuenta_c = "En Calificacion";
+                    $beanCuentas->tipo_registro_cuenta_c = "1";
+                    $beanCuentas->subtipo_registro_cuenta_c = "5";
                     $beanCuentas->origendelprospecto_c = "Referido Cliente";
                     $beanCuentas->account_id1_c = $mReferencias[$r]['id_cuenta'];
 
@@ -149,7 +149,7 @@ or accounts.phone_office = '{$mReferencias[$r]['telefono']}'
                             $beanCuentas->clean_name= $mReferencias[$r]['clean_name'];
                             $beanPersona->phone_office = $mReferencias[$r]['telefono'];
                             $beanPersona->email1 = $mReferencias[$r]['correo'];
-                            $beanPersona->tipo_registro_c = "Persona";
+                            $beanPersona->tipo_registro_cuenta_c = "4";
                             $beanPersona->tipo_relacion_c = "^Contacto^";
                             $beanPersona->account_id1_c = $mReferencias[$r]['id_cuenta'];
 

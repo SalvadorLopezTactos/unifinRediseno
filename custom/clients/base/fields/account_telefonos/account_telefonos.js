@@ -1,8 +1,9 @@
 ({
-
     tel_tipo_list: null,
     pais_list: null,
     estatus_list: null,
+    newWhatsapp: 0,
+    newArray: [], 
 
     events: {
         'keydown .existingTelephono': 'keyDownNewExtension',
@@ -18,7 +19,11 @@
         'change .Estatust': 'updateEstatust',           //Estatus
         'change .Extensiont': 'updateExtensiont',       //Extensión
         'change .Telefonot': 'updateTelefonot',         //Teléfono
+        'click .Whatsappt': 'updateWhatsapp',           //WhatsApp
+        'click .newWhatsapp': 'updateNewWhatsapp',      //Nuevo WhatsApp
+        'change .newTipotelefono': 'updateNewTipo',     //Nuevo Tipo
     },
+
     initialize: function (options) {
         //Inicializa campo custom
         options = options || {};
@@ -41,15 +46,33 @@
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
-                // this.render();
             }
         }, this);
     },
 
     _render: function () {
         this._super("_render");
-        //cont_tel = this;
         this.$("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
+        $('#nuevo').hide();
+        if(this.action == 'edit' && this.oTelefonos) {
+          for(var i = 0; i < this.oTelefonos.telefono.length; i++) {
+            if(this.oTelefonos.telefono[i].tipotelefono == 3 || this.oTelefonos.telefono[i].tipotelefono == 4) { 
+              document.getElementsByClassName('whatsapp-tel')[i].style.visibility = '';
+            } else {
+              document.getElementsByClassName('whatsapp-tel')[i].style.visibility = 'hidden';
+            }
+          }
+        }
+        if(this.newArray.length > 0) {
+          this.$('.newTipotelefono').select2('val',this.newArray[0]);
+          this.$('.newPais').select2('val',this.newArray[1]);
+          this.$('.newEstatus').select2('val',this.newArray[2]);
+          this.$('.newTelefono').val(this.newArray[3]);
+          this.$('.newExtension').val(this.newArray[4]);
+          this.newWhatsapp = this.newArray[5];
+          $('#nuevo').show();
+          this.newArray = [];
+        }
     },
 
     keyDownNewExtension: function (evt) {
@@ -57,7 +80,6 @@
         if(!this.checkNumOnly(evt)){
             return false;
         }
-
     },
 
     //UNI349 Control Telefonos - En el campo teléfono, extensión no se debe permitir caracteres diferentes a numéricos
@@ -111,10 +133,9 @@
         var valor2 = this.$('.newPais').select2('val');
         var valor3 = this.$('.newEstatus').select2('val');
         var valor4 = this.$('.newTelefono').val();
-        var valor5 = this.$('.newExtension').val();;
-
+        var valor5 = this.$('.newExtension').val();
+        var valor6 = this.newWhatsapp;
         var sec=this.oTelefonos.telefono.length+1;
-
 
         var telefono = {
             "name":valor4,
@@ -123,11 +144,14 @@
             "estatus": valor3,
             "extension": valor5,
             "telefono": valor4,
+            "whatsapp_c": valor6,
             "principal":1,
             "secuencia":sec,
             "id_cuenta": this.model.get('account_id_c')
         };
 
+        this.newWhatsapp = 0;
+        
         //Valida campos requeridos
         var faltantes = 0;
         if (valor1 == '') {
@@ -335,7 +359,24 @@
             index = inputs.index(input);
         var tipo = input.val();
         this.oTelefonos.telefono[index].tipotelefono = tipo;
-        //this.render();
+        if(tipo == 3 || tipo == 4) {
+          document.getElementsByClassName('whatsapp-tel')[index].style.visibility = '';
+        } else {
+          document.getElementsByClassName('whatsapp-tel')[index].style.visibility = 'hidden';
+        }
+    },
+
+    updateNewTipo: function(evt) {
+        var inputs = this.$('[data-field="campo1tel"].newTipotelefono'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        var tipo = input.val();
+        if(tipo == 3 || tipo == 4) {
+          document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = '';
+          $('#nuevo').show();
+        } else {
+          document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = 'hidden';
+        }
     },
 
     updatePaist: function(evt) {
@@ -396,4 +437,30 @@
         //this.render();
     },
 
+    updateWhatsapp: function(evt) {
+          var inputs = this.$('.Whatsappt'),
+              input = this.$(evt.currentTarget),
+              index = inputs.index(input);
+          if(this.oTelefonos.telefono[index].whatsapp_c) {
+              this.oTelefonos.telefono[index].whatsapp_c = 0;
+          }else{
+              this.oTelefonos.telefono[index].whatsapp_c = 1;
+          }
+          this.render();
+    },
+
+    updateNewWhatsapp: function(evt) {
+        if(this.newWhatsapp) {
+          this.newWhatsapp = 0;
+        }else{
+          this.newWhatsapp = 1;
+        }
+        this.newArray.push(this.$('.newTipotelefono').select2('val'));
+        this.newArray.push(this.$('.newPais').select2('val'));
+        this.newArray.push(this.$('.newEstatus').select2('val'));
+        this.newArray.push(this.$('.newTelefono').val());
+        this.newArray.push(this.$('.newExtension').val());
+        this.newArray.push(this.newWhatsapp);
+        this.render();
+    },
 })

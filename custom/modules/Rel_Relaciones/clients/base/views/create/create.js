@@ -638,7 +638,15 @@
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records <= 0) {
+
+                                            var flag_inactivo =0;
+                                            for(var i=0;i<data.records.length;i++){
+                                                if(data.records[i].inactivo==true){
+                                                    flag_inactivo++;
+                                                }   
+                                            }
+
+                                            if (data.records.length <= flag_inactivo) {
                                                 RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
                                             }
                                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
@@ -894,10 +902,18 @@
                                         if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
                                             RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
                                         }
-                                        if (data.tipo_registro_c!= 'Persona') {
+                                        if (data.tipo_registro_cuenta_c!= '4') {
                                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                                 success: _.bind(function (data) {
-                                                    if (data.records.length > 0) {
+
+                                                    var flag_inactivo =0;
+                                                    for(var i=0;i<data.records.length;i++){
+                                                        if(data.records[i].inactivo==true){
+                                                            flag_inactivo++;
+                                                        }   
+                                                    }
+
+                                                    if (data.records.length <= flag_inactivo) {
                                                         for (var d = 0; d < data.records.length; d++) {
                                                             if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
                                                                 RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
@@ -936,10 +952,18 @@
                                         if (data.rfc_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                         }
-                                        if (data.tipo_registro_c!= 'Persona') {
+                                        if (data.tipo_registro_cuenta_c!= '4') {
                                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                                 success: _.bind(function (data) {
-                                                    if (data.records <= 0) {
+                                                    
+                                                    var flag_inactivo =0;
+                                                    for(var i=0;i<data.records.length;i++){
+                                                        if(data.records[i].inactivo==true){
+                                                            flag_inactivo++;
+                                                        }   
+                                                    }
+
+                                                    if (data.records.length <= flag_inactivo) {
                                                         RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                                                     }
                                                     if (RequeridosProvRec != "") {
@@ -1015,7 +1039,7 @@
                                     if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
                                         RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
                                     }
-                                    if (data.tipo_registro_c!= 'Persona') {
+                                    if (data.tipo_registro_cuenta_c!= '4') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records.length > 0) {
@@ -1048,7 +1072,7 @@
                                     if (data.rfc_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.tipo_registro_c!= 'Persona') {
+                                    if (data.tipo_registro_cuenta_c!= '4') {
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records <= 0) {
@@ -1373,11 +1397,11 @@
                     //Itera direcciones
                     for (var d = 0; d < data[1].contents.records.length; d++) {
                         //Itera direccion Particular
-                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1')) {
+                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
                             direP++;
                         }
                         //Valida direccion Fiscal
-                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2')) {
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2') && data[1].contents.records[d].inactivo == false) {
                             direF++;
                         }
                     }

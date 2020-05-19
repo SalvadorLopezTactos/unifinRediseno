@@ -54,6 +54,7 @@ class ResumenClienteAPI extends SugarApi
         3 = CREDITO AUTOMOTRIZ
         4 = FACTORAJE
         5 = LINEA CREDITO SIMPLE
+		6 = UNICLICK
         */
 
         //Define colores:
@@ -104,6 +105,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['leasing'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "fecha_vencimiento" => "",//más proxima
             "fecha_completa_vencimiento" => "",
             "linea_disponible" => "",
@@ -118,6 +120,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['factoring'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "fecha_vencimiento" => "",
             "fecha_completa_vencimiento" => "",
             "linea_disponible" => "",
@@ -131,6 +134,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['credito_auto'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "fecha_vencimiento" => "",
             "fecha_completa_vencimiento" => "",
             "linea_disponible" => "",
@@ -144,6 +148,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['fleet'] = array("linea_aproximada" => "",
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "numero_vehiculos" => "",
             "promotor" => "",
             "color" => "");
@@ -153,6 +158,15 @@ class ResumenClienteAPI extends SugarApi
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "fecha_pago" => "",
+            "promotor" => "",
+            "color" => "");
+		 //Uniclick
+        $arr_principal['uniclick'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
+            "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
+            "fecha_vencimiento"=>"",
+            "linea_disponible" => "",
             "promotor" => "",
             "color" => "");
         //Historial de contactos
@@ -193,7 +207,8 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
-            $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+            $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -237,6 +252,8 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_sos = "";
 
             $vencimiento_sos='';
+			
+			$vencimiento_uniclick ='';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -390,7 +407,30 @@ class ResumenClienteAPI extends SugarApi
                     $arr_principal['fleet']['numero_vehiculos'] = $numero_vehiculos_fleet;
 
                 }
+				
+				// Uniclick
+                if ($opps->tipo_producto_c == 8 && $opps->estatus_c != 'K') {
+                    $linea_aprox_uniclick += $opps->monto_c;
+					$linea_disp_sos += $opps->amount;
+                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                    /*********************************/
 
+                    if (!empty($opps->vigencialinea_c)) {
+						//Establece fecha de vencimiento
+						$dateVL = $opps->vigencialinea_c;
+						$timedateVL = Date($dateVL);
+
+						//Compara fechas
+						if ($dateVL > $vencimiento_uniclick || empty($vencimiento_uniclick)) {
+							$vencimiento_uniclick = $dateVL;
+						}
+						
+						$arr_principal['uniclick']['linea_autorizada'] = $linea_aprox_uniclick;
+						$arr_principal['uniclick']['fecha_vencimiento'] = $vencimiento_uniclick;
+						$arr_principal['uniclick']['linea_disponible'] = $linea_disp_sos;
+					}
+                }
+				
             }
         }
 
@@ -596,7 +636,7 @@ class ResumenClienteAPI extends SugarApi
             //Procesa registro
             if($beanResumen){
                 //Recupera Leasing
-                $arr_principal['leasing']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_l_c;
+                // $arr_principal['leasing']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_l_c;
                 $arr_principal['leasing']['fecha_pago']= $beanResumen->leasing_fecha_pago;
                 //Victor
                 //codigo para cargar el contenido del .txt de la noticia actualizada
@@ -626,7 +666,7 @@ class ResumenClienteAPI extends SugarApi
 
 
                 //Recupera Factoring
-                $arr_principal['factoring']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_f_c;
+                // $arr_principal['factoring']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_f_c;
                 $arr_principal['factoring']['fecha_pago']= $beanResumen->factoring_fecha_pago;
                 if(!empty($beanResumen->factoring_anexos_activos) && $beanResumen->factoring_anexos_activos!="")
                 {
@@ -639,7 +679,7 @@ class ResumenClienteAPI extends SugarApi
 
 
                 //Recupera Credito Auto
-                $arr_principal['credito_auto']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_ca_c;
+                // $arr_principal['credito_auto']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_ca_c;
                 $arr_principal['credito_auto']['fecha_pago']= $beanResumen->cauto_fecha_pago;
                 if(!empty($beanResumen->cauto_anexos_activos) && $beanResumen->cauto_anexos_activos!="")
                 {
@@ -651,10 +691,15 @@ class ResumenClienteAPI extends SugarApi
                 }
 
                 //Recupera Fleet
-                $arr_principal['fleet']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_fl_c;
+                // $arr_principal['fleet']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_fl_c;
 
                 //Recupera Crédito SOS
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
+				
+				//Recupera Uniclick
+                // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
+                $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
+               
             }
         }
 
@@ -666,7 +711,9 @@ class ResumenClienteAPI extends SugarApi
             $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
             
             foreach ($relateProduct as $product) { 
-                
+
+                $tipoCuenta = $product->tipo_cuenta;
+                $subtipoCuenta = $product->subtipo_cuenta;
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
@@ -678,26 +725,36 @@ class ResumenClienteAPI extends SugarApi
                 switch ($tipoProducto) {
 
                     case '1': //Leasing
+                        $arr_principal['leasing']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['leasing']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         $arr_principal['leasing']['cobranza'] = $cobranza;
                         break;
                     case '3': //Credito-Automotriz
+                        $arr_principal['credito_auto']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['credito_auto']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['credito_auto']['estatus_atencion'] = $statusProducto;
                         $arr_principal['credito_auto']['cobranza'] = $cobranza;
                         break;
                     case '4': //Factoraje
+                        $arr_principal['factoring']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['factoring']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['factoring']['estatus_atencion'] = $statusProducto;
                         $arr_principal['factoring']['cobranza'] = $cobranza;
                         break;
                     case '6': //Fleet
+                        $arr_principal['fleet']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['fleet']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
                         $arr_principal['fleet']['cobranza'] = $cobranza;
                         break;
                     case '7': //Credito SOS
-                        $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
-                        $arr_principal['leasing']['cobranza'] = $cobranza;
+                        $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['credito_sos']['cobranza'] = $cobranza;
                         break;
                     case '8': //Uniclick
+                        $arr_principal['uniclick']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['uniclick']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
                         break;     

@@ -656,14 +656,14 @@
                 });
 
                 //Verificamos la lista a mostrar:
-                this.tipo = modelo.get('tipo_registro_c');
+                this.tipo = modelo.get('tipo_registro_cuenta_c');
                 //console.log("Registro: " + modelo.get('tipo_registro_c'));
-                if ( modelo.get('tipo_registro_c') != 'Cliente' ){
+                if ( modelo.get('tipo_registro_cuenta_c') != '3' ){ // 3 - Cliente
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
                     //this.model.set('estatus_c','OP');
                 }
-                if ( modelo.get('tipo_registro_c') == 'Cliente' ){
+                if ( modelo.get('tipo_registro_cuenta_c') == '3' ){ // 3 - Cliente
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
                     //this.model.set('estatus_c','P');
@@ -678,7 +678,7 @@
                 }else{
                     this.tipoDePersona = false;
                 }
-                if( modelo.get('tipo_registro_c') =='Prospecto'){
+                if( modelo.get('tipo_registro_cuenta_c') =='2'){ // 2 - Prospecto
                     this.prospecto = true;
                 }else{
                     this.prospecto = false;
@@ -1115,65 +1115,49 @@
     },
 
     personTypeCheck:function(fields, errors, callback) {
-       var self=this;
-       var tipo_registro;
-       //id de la Persona asociada
-       var id_person=this.model.get('account_id');
+        var self=this;
+        var tipo_registro;
+        //id de la Persona asociada
+        var id_person=this.model.get('account_id');
+        //Recupera productos asociados
+        if(id_person && id_person != '' && id_person.length>0){
+            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person ), null, {
+                success: _.bind(function(data){
+                    if(data!=null){
+                        //Procesa registros
+                        Productos = data;
+                        var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
+                        var tipoCuenta="";
+                        var tipoProducto = this.model.get('tipo_producto_c');
+                        _.each(Productos, function (value, key) {
+                            var tipoProductoIterado = Productos[key].tipo_producto;
+                            if (tipoProducto == tipoProductoIterado) {
+                                tipoCuenta = Productos[key].tipo_cuenta;
+                            }
 
-       if(id_person && id_person != '' && id_person.length>0){
-           app.api.call('GET', app.api.buildURL('tct02_Resumen/' + id_person ), null, {
-               success: _.bind(function(data){
-                   if(data!=null){
-                       var tipo="";
-
-                       switch (this.model.get('tipo_producto_c')) {
-                           case "1":
-                               tipo=data.tct_tipo_l_txf_c;
-                               break;
-                           case "3":
-                               tipo=data.tct_tipo_ca_txf_c
-                               break;
-                           case "4":
-                               tipo=data.tct_tipo_f_txf_c;
-                               break;
-                           case "6":
-                               tipo=data.tct_tipo_fl_txf_c;
-                               break;
-                           case "7":
-                               tipo=data.tct_tipo_l_txf_c;
-                               break;
-                       }
-                       if(tipo != "Prospecto" && tipo!= "Cliente"){
-                               app.alert.show("Cliente no v\u00E1lido", {
+                        });
+                        if(tipoCuenta != "2" && tipoCuenta!= "3"){
+                            app.alert.show("Cliente no v\u00E1lido", {
                                    level: "error",
-                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +tipo,
+                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
                                    autoClose: false
-                               });
+                            });
 
-                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                               errors['account_name_5'] = errors['account_name_5'] || {};
-                               errors['account_name_5'].custom_message1 = true;
-                               //this.cancelClicked();
-
-                       }
-
-                   }
-
-                   callback(null, fields, errors);
-
+                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                            errors['account_name_5'] = errors['account_name_5'] || {};
+                            errors['account_name_5'].custom_message1 = true;
+                        }
+                    }
+                    callback(null, fields, errors);
                },self),
            });
        }else{
-
            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
            errors['account_name_6'] = errors['account_name_6'] || {};
            errors['account_name_6'].custom_message1 = true;
            errors['account_name_6'].required = true;
-
            callback(null, fields, errors);
        }
-
-
    },
 
     calcularRI: function(){
@@ -1385,14 +1369,19 @@
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
         var admin=0;
+
         if (typeof this.model.get('account_id') != "undefined" && this.model.get('account_id')!= "" ) {
           app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
-                console.log('Info de Accounts:');
+
                 console.log(data);
+
                 for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].indicador!=""){
+
+                    if(data.records[i].indicador!="" && data.records[i].inactivo == false){
+
                         var array_indicador=this._getIndicador(data.records[i].indicador);
+
                         for(var j=0;j<array_indicador.length;j++){
                             if(array_indicador[j]=='16'){
                                 admin++;
@@ -1407,7 +1396,6 @@
                         });
                         errors['indicador_16'] = errors['indicador_16'] || {};
                         errors['indicador_16'].required = true;
-
                 }
                 callback(null, fields, errors);
             }, self),

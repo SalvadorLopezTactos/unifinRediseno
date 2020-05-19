@@ -5,5 +5,5 @@ $dictionary['Account']['fields']['idprospecto_c']['full_text_search']['enabled']
 $dictionary['Account']['fields']['idprospecto_c']['full_text_search']['searchable'] = true;
 $dictionary['Account']['fields']['idprospecto_c']['full_text_search']['boost'] = 1;
 $dictionary['Account']['fields']['idprospecto_c']['enforced'] = '';
-$dictionary['Account']['fields']['idprospecto_c']['dependency'] = 'equal($tipo_registro_c,"Prospecto")';
+$dictionary['Account']['fields']['idprospecto_c']['dependency'] = 'equal($tipo_registro_cuenta_c,"2")';
 

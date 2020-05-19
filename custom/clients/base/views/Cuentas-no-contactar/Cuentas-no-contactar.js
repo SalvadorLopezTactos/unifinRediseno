@@ -16,7 +16,7 @@
     initialize: function(options){
         this._super("initialize", [options]);
 
-        this.tipo_cuenta= App.lang.getAppListStrings('tipo_registro_list');
+        this.tipo_cuenta= App.lang.getAppListStrings('tipo_registro_cuenta_list');
 
         this.loadView = false;
         if(app.user.attributes.tct_no_contactar_chk_c=='1'){

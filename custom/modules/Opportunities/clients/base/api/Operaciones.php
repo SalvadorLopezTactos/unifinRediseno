@@ -29,7 +29,7 @@ class Operaciones extends SugarApi
 Select count(*) as cantidad from opportunities oc inner join
 accounts_opportunities ao on ao.opportunity_id = oc.id
 inner join accounts_cstm acs on acs.id_c = ao.account_id
-where ao.account_id = '{$cuenta}' and oc.deleted = 0 and acs.tipo_registro_c = 'Prospecto'
+where ao.account_id = '{$cuenta}' and oc.deleted = 0 and acs.tipo_registro_cuenta_c = '2'
 SQL;
         $queryResult = $db->query($query);
         $cantidades = $db->fetchByAssoc($queryResult);

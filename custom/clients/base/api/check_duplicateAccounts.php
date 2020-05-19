@@ -53,12 +53,15 @@ class check_duplicateAccounts extends SugarApi
         $result = $this->existLeadAccount($bean);
         $count = count($result);
         $GLOBALS['log']->fatal("existencia" . print_r($result, true));
+        $GLOBALS['log']->fatal("Count consulta: " . $count);
 
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                $GLOBALS['log']->fatal("nombre del LEads " . print_r($responsMeeting, true));
+                $GLOBALS['log']->fatal("nombre del Leads " . print_r($responsMeeting, true));
+
+                $GLOBALS['log']->fatal("Requeridos " . $requeridos);
 
                 $requeridos= $this->validaRequeridos($bean);
 
@@ -111,7 +114,7 @@ SITE;
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
 SITE;
                     }
-                    
+
                     $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 
                 }
@@ -166,20 +169,33 @@ SITE;
     {
         $bean_account = BeanFactory::newBean('Accounts');
         if ($rel) {
-            $bean_account->subtipo_cuenta_c = "";
-            $bean_account->tipo_registro_c = "Persona";
+            $bean_account->subtipo_registro_cuenta_c = "";
+            $bean_account->tipo_registro_cuenta_c = "4"; // Persona - 4
             $bean_account->user_id_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
 
         } else {
-            $bean_account->subtipo_cuenta_c = "En Calificacion";
-            $bean_account->tipo_registro_c = "Lead";
+            $bean_account->subtipo_registro_cuenta_c = "5"; // En Calificación - 5
+            $bean_account->tipo_registro_cuenta_c = "1"; //Lead - 1
         }
 
+        switch ($bean_Leads->regimen_fiscal_c) {
+            case 1:
+                $bean_account->tipodepersona_c = "Persona Fisica";
+                break;
+            case 2:
+                $bean_account->tipodepersona_c = "Persona Fisica con Actividad Empresarial";
+                break;
+            case 3:
+                $bean_account->tipodepersona_c = "Persona Moral";
+                break;
+            default:
+                $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
+                break;
+        }
 
-        $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
         $bean_account->origendelprospecto_c = $bean_Leads->origen_c;
         if ($bean_Leads->origen_c == 1) {
             $bean_account->origendelprospecto_c = "Marketing";
@@ -189,12 +205,119 @@ SITE;
 
         }
 
-        $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
+        //Switch para asignar los valores
+        switch ($bean_Leads->detalle_origen_c) {
+            case 1:
+                $bean_account->tct_detalle_origen_ddw_c = "Base de datos";
+                break;
+            case 2:
+                $bean_account->tct_detalle_origen_ddw_c = "Centro de Prospeccion";
+                break;
+            case 3:
+                $bean_account->tct_detalle_origen_ddw_c = "Digital";
+                break;
+            case 4:
+                $bean_account->tct_detalle_origen_ddw_c = "Campanas";
+                break;
+            case 5:
+                $bean_account->tct_detalle_origen_ddw_c = "Acciones Estrategicas";
+                break;
+            case 6:
+                $bean_account->tct_detalle_origen_ddw_c = "Afiliaciones";
+                break;
+            case 7:
+                $bean_account->tct_detalle_origen_ddw_c = "Llamdas Inbound";
+                break;
+            case 8:
+                $bean_account->tct_detalle_origen_ddw_c = "Parques Industriales";
+                break;
+            case 9:
+                $bean_account->tct_detalle_origen_ddw_c = "Offline";
+                break;
+            case 10:
+                $bean_account->tct_detalle_origen_ddw_c = "Cartera Promotores";
+                break;
+            case 11:
+                $bean_account->tct_detalle_origen_ddw_c = "Recomendacion";
+                break;
+            default:
+                $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
+                break;
+        }
+
         $bean_account->user_id3_c = $bean_Leads->user_id1_c; // Agente telefonico
         $bean_account->user_id4_c = $bean_Leads->user_id_c; // ¿Que Asesor?
 
-        $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
-        $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
+        switch ($bean_Leads->medio_digital_c) {
+            case 1:
+                $bean_account->medio_digital_c = "Facebook";
+                break;
+            case 2:
+                $bean_account->medio_digital_c = "Twitter";
+                break;
+            case 3:
+                $bean_account->medio_digital_c = "Instagram";
+                break;
+            case 4:
+                $bean_account->medio_digital_c = "Web";
+                break;
+            case 5:
+                $bean_account->medio_digital_c = "LinkedIn";
+                break;
+            case 6:
+                $bean_account->medio_digital_c = "Radio Online";
+                break;
+            case 7:
+                $bean_account->medio_digital_c = "Prensa Online";
+                break;
+            case 8:
+                $bean_account->medio_digital_c = "TV Online";
+                break;
+            case 9:
+                $bean_account->medio_digital_c = "Revistas Online";
+                break;
+            case 10:
+                $bean_account->medio_digital_c = "TV";
+                break;
+            case 11:
+                $bean_account->medio_digital_c = "Radio";
+                break;
+            case 12:
+                $bean_account->medio_digital_c = "Prensa";
+                break;
+            case 13:
+                $bean_account->medio_digital_c = "Revistas";
+                break;
+            case 14:
+                $bean_account->medio_digital_c = "Espectaculares";
+                break;
+
+            default:
+                $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
+                break;
+        }
+        switch ($bean_Leads->punto_contacto_c) {
+
+            case 1:
+                $bean_account->tct_punto_contacto_ddw_c = "Portal";
+
+                break;
+            case 2:
+                $bean_account->tct_punto_contacto_ddw_c = "Telefono";
+
+                break;
+            case 3:
+                $bean_account->tct_punto_contacto_ddw_c = "Chat";
+
+                break;
+            case 4:
+                $bean_account->tct_punto_contacto_ddw_c = "Publicacion";
+
+                break;
+            default:
+                $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
+                break;
+        }
         $bean_account->evento_c = $bean_Leads->evento_c;
         $bean_account->tct_origen_busqueda_txf_c = $bean_Leads->origen_busqueda_c;
         $bean_account->camara_c = $bean_Leads->camara_c;
@@ -208,7 +331,58 @@ SITE;
         $bean_account->ventas_anuales_c = $bean_Leads->ventas_anuales_c;
         $bean_account->potencial_cuenta_c = $bean_Leads->potencial_lead_c;
         $bean_account->zonageografica_c = $bean_Leads->zona_geografica_c;
-        $bean_account->puesto_c = $bean_Leads->puesto_c;
+
+        switch ($bean_Leads->puesto_c) {
+
+            case 1:
+                $bean_account->puesto_c = "Duenio";
+
+                break;
+            case 2:
+                $bean_account->puesto_c = "Accionistas";
+
+                break;
+            case 3:
+                $bean_account->puesto_c = "Director General";
+
+                break;
+            case 4:
+                $bean_account->puesto_c = "Director Comercial";
+
+                break;
+            case 5:
+                $bean_account->puesto_c = "Director de Finanzas";
+
+                break;
+            case 6:
+                $bean_account->puesto_c = "Director de Operaciones";
+
+                break;
+            case 7:
+                $bean_account->puesto_c = "Director de Sistemas";
+
+                break;
+            case 8:
+                $bean_account->puesto_c = "Tesorero_Contralor";
+
+                break;
+            case 9:
+                $bean_account->puesto_c = "Gerente";
+
+                break;
+            case 10:
+                $bean_account->puesto_c = "Administrativo";
+
+                break;
+            case 11:
+                $bean_account->puesto_c = "Otro";
+
+                break;
+            default:
+                $bean_account->puesto_c = $bean_Leads->punto_contacto_c;
+                break;
+        }
+
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
 
@@ -327,7 +501,7 @@ SITE;
         switch ($subTipoLead) {
             /*******SUB-TIPO SIN CONTACTAR*****/
             case '1':
-                if ($tipoPersona == 'Persona Moral') {
+                if ($tipoPersona == '3') {
                     array_push($campos_req, 'nombre_empresa_c');
                 } else {
                     array_push($campos_req, 'nombre_c', 'apellido_paterno_c');
@@ -335,7 +509,7 @@ SITE;
                 break;
             /********SUB-TIPO CONTACTADO*******/
             case '2':
-                if ($tipoPersona == 'Persona Moral') {
+                if ($tipoPersona == '3') {
                     array_push($campos_req, 'nombre_empresa_c');
                 } else {
                     array_push($campos_req, 'nombre_c', 'apellido_paterno_c', 'puesto_c');

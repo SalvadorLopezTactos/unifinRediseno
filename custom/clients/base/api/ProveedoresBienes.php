@@ -33,8 +33,9 @@ class ProveedoresBienes extends SugarApi
     {
         $tipo = $args['data'];
         global $db, $current_user;
+        /* Proveedor - 5*/
         $query = <<<SQL
-SELECT id, name FROM accounts a inner join accounts_cstm c on a.id=c.id_c where  c.tipo_registro_c='Proveedor' and c.tipo_proveedor_c like '%{$tipo}%'
+SELECT id, name FROM accounts a inner join accounts_cstm c on a.id=c.id_c where  c.tipo_registro_cuenta_c='5' and c.tipo_proveedor_c like '%{$tipo}%'
 SQL;
         $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> consulta: " .$query);
 

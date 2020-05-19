@@ -90,4 +90,11 @@ SQL;
         }
 
     }
+
+    public function cambiaPuesto($bean=null, $event= null, $args= null){
+        //Cambia el puesto a Otro si viene vacio.
+        if($bean->puesto_c == ''){
+          $bean->puesto_c = '11';
+        }
+    }
 }

@@ -321,3 +321,5 @@ $mod_strings['LBL_CONVERSION_GCLID'] = 'Conversión GCLID';
 $mod_strings['LBL_NO_WEBSITE'] = 'No tiene página web';
 $mod_strings['LBL_NIVEL_DIGITALIZACION_C'] = 'Nivel de Digitalización';
 $mod_strings['LBL_ENCODEDKEY_MAMBU'] = 'Encoded Key Mambu';
+$mod_strings['LBL_TIPO_REGISTRO_CUENTA'] = 'Tipo de Cuenta';
+$mod_strings['LBL_SUBTIPO_REGISTRO_CUENTA'] = 'Subtipo de Cuenta';

@@ -168,7 +168,7 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").attr('style', 'display:none;');
 
         //Oculta panel de uni_productos
-        this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
+       // this.$("[data-panelname='LBL_RECORDVIEW_PANEL19']").attr('style', 'display:none;');
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -184,9 +184,9 @@
         this.$('div[data-name=estatus_persona_c]').hide();
 
         if (this.model.dataFetched) {
-            this.model.on("change:tipo_registro_c", _.bind(function () {
+            this.model.on("change:tipo_registro_cuenta_c", _.bind(function () {
                 // Carlos Zaragoza: Se elimina el campo por defaiult de tipo de proveedor del registro pero sies proveedor, se selecciona bienes por default
-                // if(this.model.get('tipo_registro_c') == 'Proveedor'){
+                // if(this.model.get('tipo_registro_cuenta_c') == 'Proveedor'){
                 //     this.model.set('tipo_proveedor_c', '1');
                 // }
                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("id") + "/link/rel_relaciones_accounts_1", null, null, {
@@ -203,7 +203,7 @@
                                     ContacFlag = true;
                                 }
                             });
-                            if (this.model._syncedAttributes.tipo_registro_c != 'Cliente') {
+                            if (this.model._syncedAttributes.tipo_registro_cuenta_c != '3') {
                                 if (ContacFlag == false) {
                                     app.alert.show("Validar Relacion", {
                                         level: "error",
@@ -211,20 +211,20 @@
                                         autoClose: false
                                     });
 
-                                    this.model.set('tipo_registro_c', 'Prospecto');
+                                    this.model.set('tipo_registro_cuenta_c', '2');
                                     errors['account_contacts'] = errors['account_contacts'] || {};
                                 }
                             }
                         }
                         if (data.records.length <= 0) {
-                            if (this.model._syncedAttributes.tipo_registro_c != 'Cliente') {
+                            if (this.model._syncedAttributes.tipo_registro_cuenta_c != '3') {
 
                                 app.alert.show("Validar Relacion", {
                                     level: "error",
                                     title: "Debe capturar al menos un contacto.",
                                     autoClose: false
                                 });
-                                this.model.set('tipo_registro_c', 'Prospecto');
+                                this.model.set('tipo_registro_cuenta_c', '2');
                                 errors['account_contacts'] = errors['account_contacts'] || {};
                             }
                         }
@@ -269,8 +269,8 @@
 
         //Hide Vista360
         this._hideVista360();
-        //this.model.set("tipo_registro_c", 'Cliente');
-        //this.model.set("tipo_registro_c", 'Prospecto');
+        //this.model.set("tipo_registro_cuenta_c", 'Cliente');
+        //this.model.set("tipo_registro_cuenta_c", 'Prospecto');
         //callback(null, fields, errors);
 
         /* @author F. Javier Garcia S. 10/07/2018
@@ -279,18 +279,18 @@
          */
         if (App.user.attributes.tct_altaproveedor_chk_c) {
 
-            this.model.set("tipo_registro_c", 'Proveedor');
+            this.model.set("tipo_registro_cuenta_c", '5');
         }
         if (App.user.attributes.tct_alta_clientes_chk_c) {
 
-            this.model.set("tipo_registro_c", 'Cliente');
+            this.model.set("tipo_registro_cuenta_c", '3');
         }
-		
+
         //VM 14/09/2018
         this.checkProveedor();
 
         this.mostrarpaneldirec();
-		
+
 		    if (App.user.attributes.deudor_factoraje_c != true) {
 		    //Readonly check factoraje
 			    this.$('[data-name="deudor_factor_c"]').attr('style', 'pointer-events:none;');
@@ -328,11 +328,14 @@
         this.prev_ProductosPLD=[];
         //Potencial Autos
         this.Pautos=[];
+        // UniProductos
+        this.Oproductos=[];
+        this.Oproductos.productos=[];
 
         //Hide panels
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
-        this.model.on("change:tipo_registro_c", this._hideGuardar, this);
+        this.model.on("change:tipo_registro_cuenta_c", this._hideGuardar, this);
 
         //add validation tasks
         this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
@@ -390,8 +393,8 @@
          * */
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         /* END */
-        this.model.on('change:subtipo_cuenta_c', this.cambiaCliente, this);
-        //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
+        //this.model.on('change:subtipo_registro_cuenta_c', this.cambiaCliente, this);
+        //this.model.on('change:tipo_registro_cuenta_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
@@ -410,11 +413,11 @@
 
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
-		
+
 
         /***************Valida Campo de Página Web ****************************/
         this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
-		
+
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
@@ -491,11 +494,11 @@
 
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
-        var new_options = app.lang.getAppListStrings('tipo_registro_list');
+        var new_options = app.lang.getAppListStrings('tipo_registro_cuenta_list');
 
         if (App.user.attributes.tct_alta_cd_chk_c != 1) {
             Object.keys(new_options).forEach(function (key) {
-                if (key == "Persona") {
+                if (key == "4" || key=="" || key=="0") {
                     delete new_options[key];
                 }
             });
@@ -526,20 +529,20 @@
         //Establecer únicamente las opciones de Cliente y Proveedor cuando el usuario tenga las dos casillas seleccionadas
         if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1 ) {
             Object.keys(new_options).forEach(function (key) {
-                if (key != "Cliente" && key != "Proveedor") {
+                if (key != "3" && key != "5") {
                     delete new_options[key];
                 }
             });
         }else if(App.user.attributes.tct_alta_clientes_chk_c == 1) {
 
             Object.keys(new_options).forEach(function (key) {
-                if (key != "Cliente") {
+                if (key != "3") {
                     delete new_options[key];
                 }
             });
         }else if(App.user.attributes.tct_altaproveedor_chk_c==1) {
             Object.keys(new_options).forEach(function (key) {
-                if (key != "Proveedor") {
+                if (key != "5") {
                     delete new_options[key];
                 }
             });
@@ -547,13 +550,13 @@
         //En otro caso, solo mostrar Lead
         else{
             Object.keys(new_options).forEach(function (key) {
-                if (key != "Lead") {
+                if (key != "1") {
                     delete new_options[key];
                 }
             });
         }
         if (App.user.attributes.tct_alta_cd_chk_c == true || App.user.attributes.deudor_factoraje_c == true){
-            new_options["Persona"]="Persona";
+            new_options["4"]="Persona";
         }
         //Itera el valor del campo nuevo y de ser asi solo deja la opcion de Cliente disponible.
         /*if(App.user.attributes.tct_alta_credito_simple_chk_c == 1) {
@@ -565,7 +568,7 @@
             new_options["Cliente"]="Cliente";
         }*/
 
-        this.model.fields['tipo_registro_c'].options = new_options;
+        this.model.fields['tipo_registro_cuenta_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
         /*
@@ -581,12 +584,14 @@
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
-		
+
 		    /*Erick de Jesús Cruz: 11/02/2020 check factoraje valor predeterminado*/
-		    this.model.on('change:tipo_registro_c',this.check_factoraje, this);
-        this.model.on('change:no_website_c',this.rowebsite, this);    
+		    this.model.on('change:tipo_registro_cuenta_c',this.check_factoraje, this);
+        this.model.on('change:no_website_c',this.rowebsite, this);
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+
 
     },
 
@@ -619,17 +624,18 @@
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
-            strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
-                objDirecciones.eq(i).find('.numExtExisting').val() +
-                objDirecciones.eq(i).find('.numIntExisting').val() +
-                objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
-                objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
-                objDirecciones.eq(i).find('.postalInputTempExisting').val();
+			if(objDirecciones.eq(i).find('select.inactivo option:selected') == 0){
+				strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+					objDirecciones.eq(i).find('.numExtExisting').val() +
+					objDirecciones.eq(i).find('.numIntExisting').val() +
+					objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+					objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+					objDirecciones.eq(i).find('.postalInputTempExisting').val();
 
-            concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
-
+				concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+			}
         }
 
         // validamos  el arreglo generado
@@ -641,7 +647,6 @@
                     existe = true;
                 }
             }
-
         }
 
         if(existe)
@@ -703,16 +708,16 @@
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL7']").show();
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").show();
             //Muestra Propietario Real
-            if (this.model.get('tipo_registro_c') == "Cliente") {
+            if (this.model.get('tipo_registro_cuenta_c') == "3") {
                 this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").show();
             }
         }
     },
 
     _hideGuardar: function (fields, errors, callback) {
-        var tipo = this.model.get('tipo_registro_c');
+        var tipo = this.model.get('tipo_registro_cuenta_c');
         var puesto = app.user.get('puestousuario_c');
-        if ((tipo == "Prospecto" || tipo == "Cliente" || tipo == "Lead") && (puesto == 6 || puesto == 12 || puesto == 17)) {
+        if ((tipo == "2" || tipo == "3" || tipo == "1") && (puesto == 6 || puesto == 12 || puesto == 17)) {
             this.$('[name="save_button"]').hide();
         }
         else {
@@ -721,7 +726,7 @@
     },
 
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+        if (this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5') {
             if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono) ) {
                 app.alert.show("Correo requerido", {
                     level: "error",
@@ -741,7 +746,7 @@
     *La casilla proveedor se debe mantener activa al crear un proveedor
     * */
     checkProveedor:function(){
-        if(this.model.get('tipo_registro_c')=='Proveedor'){
+        if(this.model.get('tipo_registro_cuenta_c')=='5'){
             this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
         }
     },
@@ -895,7 +900,7 @@
           var indices=[];
           for (var i = 0; i < direccion.length; i++) {
               for (var j = 0; j < direccion.length; j++) {
-                  if (i!=j && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal) {
+                  if (i!=j &&  direccion[i].inactivo == 0 && direccion[j].calle.toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo) {
                       coincidencia++;
                       indices.push(i);
                       indices.push(j);
@@ -907,7 +912,7 @@
                   app.alert.show('error_direccion_duplicada', {
                       level: 'error',
                       autoClose: false,
-                      messages: 'Existen direcciones iguales,favor de corregir.'
+                      messages: 'Existen direcciones iguales, favor de corregir.'
                   });
                   //$($input).focus();
                   if(indices.length>0) {
@@ -985,10 +990,10 @@
     },
 
     validaExtranjerosRFC: function () {
-        if ((this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != "") && (this.model.get('tipo_registro_c') != 'Prospecto' && this.model.get('tipo_registro_c') != 'Persona')) {
+        if ((this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != "") && (this.model.get('tipo_registro_cuenta_c') != '2' && this.model.get('tipo_registro_cuenta_c') != '4')) {
             this.model.set('rfc_c', 'XXX010101XXX');
         }
-        if (this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('estatus_c') == 'Interesado' && this.model.get('pais_nacimiento_c') != 2) {
+        if (this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('estatus_c') == 'Interesado' && this.model.get('pais_nacimiento_c') != 2) {
             this.model.set('rfc_c', 'XXX010101XXX');
         }
 
@@ -1149,8 +1154,8 @@
 
     _doValidateTieneContactos: function (fields, errors, callback) {
         if (this.model.get('tipodepersona_c') == 'Persona Moral' &&
-            (/*this.model.get('tipo_registro_c') == "Cliente" || this.model.get('estatus_c') == "Interesado"
-             || */this.model.get('tipo_registro_c') == "Prospecto" )) {
+            (/*this.model.get('tipo_registro_cuenta_c') == "Cliente" || this.model.get('estatus_c') == "Interesado"
+             || */this.model.get('tipo_registro_cuenta_c') == "2" )) {
             if (_.isEmpty(this.model.get('account_contacts'))) {
                 app.alert.show("Persona sin contactos registrados", {
                     level: "error",
@@ -1185,19 +1190,19 @@
     },
 
     /*_ShowDireccionesTipoRegistro: function(){
-     if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('estatus_c') == "Interesado"){
+     if(this.model.get('tipo_registro_cuenta_c') == "Cliente" || this.model.get('estatus_c') == "Interesado"){
      this.$("div[data-name='account_direcciones']").show();
      }else{
      this.$("div[data-name='account_direcciones']").hide();
      }
      // Carlos Zaragoza: Se elimina el campo por defaiult de tipo de proveedor del registro pero sies proveedor, se selecciona bienes por default
-     if(this.model.get('tipo_registro_c') == 'Proveedor'){
+     if(this.model.get('tipo_registro_cuenta_c') == 'Proveedor'){
      this.model.set('tipo_proveedor_c', '1');
      }
      },*/
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
+        if (this.model.get('tipo_registro_cuenta_c') == "3" || this.model.get('tipo_registro_cuenta_c') == "5" || this.model.get('tipo_registro_cuenta_c') == "2" || this.model.get('esproveedor_c')==true) {
             if (_.isEmpty(this.oDirecciones.direccion)) {
                 //errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 //errors[$(".addDireccion")].required = true;
@@ -1211,31 +1216,55 @@
                     autoClose: false
                 });
             } else {
-                //Valdaci�n Nacional
-                if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                    var nacional = 0;
-                    console.log('Validacion Dir.Nacional');
-                    console.log(direcciones);
-                    var direcciones = this.oDirecciones.direccion;
-                    for (i = 0; i < direcciones.length; i++) {
-                        if (direcciones[i].pais == 2) {
-                            nacional = 1;
-                        }
-                    }
-                    //Valida variable nacional
-                    if (nacional != 1) {
-                        console.log('Dir. Nacional requerida');
-                        errors[$(".addDireccion")] = errors['account_direcciones'] || {};
-                        errors[$(".addDireccion")].required = true;
-
-                        $('.direcciondashlet').css('border-color', 'red');
-                        app.alert.show("Direccion nacional requerida", {
-                            level: "error",
-                            title: "Al menos una direcci\u00F3n nacional es requerida.",
-                            autoClose: false
-                        });
+				//Dirección activa
+                var activa = 0;
+                console.log('Validacion dir.activa');
+                console.log(direcciones);
+                var direcciones = this.oDirecciones.direccion;
+                for (i = 0; i < direcciones.length; i++) {
+                    if (direcciones[i].inactivo == 0) {
+                        activa ++;
                     }
                 }
+                //Valida variable nacional
+                if (activa > 0 ) {
+					//Valdaci�n Nacional
+					if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+						var nacional = 0;
+						console.log('Validacion Dir.Nacional');
+						console.log(direcciones);
+						var direcciones = this.oDirecciones.direccion;
+						for (i = 0; i < direcciones.length; i++) {
+							if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0) {
+								nacional = 1;
+							}
+						}
+						//Valida variable nacional
+						if (nacional != 1) {
+							console.log('Dir. Nacional requerida');
+							errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+							errors[$(".addDireccion")].required = true;
+
+							$('.direcciondashlet').css('border-color', 'red');
+							app.alert.show("Direccion nacional requerida", {
+								level: "error",
+								title: "Al menos una direcci\u00F3n nacional es requerida.",
+								autoClose: false
+							});
+						}
+					}
+                } else {
+					console.log('Dir. activa requerida');
+                    errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+                    errors[$(".addDireccion")].required = true;
+
+                    $('.direcciondashlet').css('border-color', 'red');
+                    app.alert.show("Direccion nacional activa requerida", {
+                        level: "error",
+                        title: "Al menos una direcci\u00F3n activa es requerida.",
+                        autoClose: false
+                    });
+				}
             }
         }
         callback(null, fields, errors);
@@ -1337,7 +1366,7 @@
 
     _doGenera_RFC_CURP: function () {
         if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
-            && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
+            && (this.model.get('tipo_registro_cuenta_c') != '2' || this.model.get('estatus_c') != 'Interesado')) {
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
                 this.model.set('rfc_c', 'XXXX010101XXX');
             } else {
@@ -1585,7 +1614,7 @@
      * @type function
      * */
     validaProveedorRequerido: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c')==true) {
+        if (this.model.get('tipo_registro_cuenta_c') == 'Proveedor' || this.model.get('esproveedor_c')==true) {
             this.model.set("esproveedor_c", true);
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
@@ -1854,8 +1883,10 @@
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
-                    var valorecupera = this._getIndicador(value[i].indicador);
-                    totalindicadores = totalindicadores + "," + valorecupera;
+					if( this._getIndicador(value[i].inactivo) != "1" ){
+						var valorecupera = this._getIndicador(value[i].indicador);
+						totalindicadores = totalindicadores + "," + valorecupera;
+					}
                 }
             }
 
@@ -1893,7 +1924,7 @@
                 $('.select2-choices').css('border-color', '');
             }
             //Validar campos adionales
-            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c') == 'Prospecto') {
+            if (this.model.get('tipo_registro_cuenta_c') == '4' || this.model.get('tipo_registro_cuenta_c') == '2') {
 
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                     errors['rfc_c'] = errors['rfc_c'] || {};
@@ -1952,8 +1983,10 @@
 
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
-                    var valorecupera = this._getIndicador(value[i].indicador);
-                    totalindicadores = totalindicadores + "," + valorecupera;
+					if( this._getIndicador(value[i].inactivo) != "1"){
+						var valorecupera = this._getIndicador(value[i].indicador);
+						totalindicadores = totalindicadores + "," + valorecupera;
+					}
                 }
             }
 
@@ -1970,15 +2003,17 @@
                 direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
             }
             if (direccionesfaltantes != "") {
-                
+
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                    messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', 'red');
-            
+				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
+
             } else {
                 this.$('#s2id_multiIndicadorNew .select2-choices').css('border-color', '');
             }
@@ -2062,7 +2097,7 @@
 
     validapotencial: function(fields, errors, callback) {
 
-        if ((this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente') || this.model.get('tipo_registro_c') == 'Cliente'  ) {
+        if ((this.model.get('tipo_registro_cuenta_c') == '2' && this.model.get('subtipo_registro_cuenta_c') == '8') || this.model.get('tipo_registro_cuenta_c') == '3'  ) {
             if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
@@ -2158,8 +2193,8 @@
         var faltantesAP = "";
         var faltantesFF = "";
         var faltantesCA = "";
-        var tipoCuenta = this.model.get('tipo_registro_c');
-        if (tipoCuenta == 'Cliente') {
+        var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
+        if (tipoCuenta == '3') {
           //Valida campos para AP
           if (App.user.attributes.tipodeproducto_c == '1') {
               //Pregunta: campo2ddw-ap
@@ -2357,7 +2392,7 @@
     },
 
     saveProdPLD:function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') != 'Persona') {
+        if (this.model.get('tipo_registro_cuenta_c') != '4') {
           // Actualizar modelo de pld.ProductosPLD
           var ProductosPLD = {
               'arrendamientoPuro' : {
@@ -2532,7 +2567,7 @@
                 var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
                     for(var i=0;i<tipodireccion.length;i++){
-                        if(tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7")){
+                        if(tipodireccion[i].inactivo == 0 && (tipodireccion[i].tipodedireccion.includes("1") || tipodireccion[i].tipodedireccion.includes("3") || tipodireccion[i].tipodedireccion.includes("5") || tipodireccion[i].tipodedireccion.includes("7"))){
                             direcciones++;
                         }
                     }
@@ -2577,9 +2612,14 @@
                 var direccionesm= 0;
                 var tipodireccion= this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
-                    direccionesm++;
-                }
-                if (direccionesm==0){
+					for (i = 0; i < value.length; i++) {
+						if( this._getIndicador(value[i].inactivo) == 1 ){
+							direccionesm++;
+						}
+					}
+				}
+
+                if (tipodireccion.length == 0 || direccionesm == tipodireccion.length){
                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
 
@@ -2676,9 +2716,9 @@
 
     cambiaCliente: function (){
         //Funcion que habilita la opcion credito simple al cambiar el tipo de registro (en tipo Cliente).
-        if (this.model.get('tipo_registro_c')=="Cliente" && App.user.attributes.tct_alta_credito_simple_chk_c == 1){
-                this.model.fields['subtipo_cuenta_c'].options="Credito Simple";
-                this.model.set("subtipo_cuenta_c", 'Credito Simple');
+        if (this.model.get('tipo_registro_cuenta_c')=="3" && App.user.attributes.tct_alta_credito_simple_chk_c == 1){
+                this.model.fields['subtipo_registro_cuenta_c'].options="Credito Simple";
+                this.model.set("subtipo_registro_cuenta_c", 'Credito Simple');
       }
     },
 
@@ -2717,7 +2757,7 @@
     },
 
     validaiva:function (fields, errors, callback){
-        if (this.model.get('tipo_registro_c')=="Proveedor" || this.model.get('esproveedor_c')== true) {
+        if (this.model.get('tipo_registro_cuenta_c')=="5" || this.model.get('esproveedor_c')== true) {
             if (this.model.get('iva_c') !== "" && this.model.get('iva_c') != undefined && (Number(this.model.get('iva_c')) <= 0 || Number(this.model.get('iva_c')) > 100.00)) {
                 if (parseFloat(this.model.get('iva_c')) <= 0.0000) {
                     errors['iva_c'] = errors['iva_c'] || {};
@@ -2825,7 +2865,7 @@
 
     /*Función para asignar los promotes por default a la cuenta, con base en los productos del usuario logueado.*/
     promotores_default: function (){
-        
+
         var userprod= App.user.attributes.productos_c;
         var nombrecompleto= App.user.attributes.full_name;
         var idusrlog= App.user.attributes.id;
@@ -2866,9 +2906,9 @@
                     this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
     },
-	
+
 	  check_factoraje: function () {
-  		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_c') == 'Persona') {
+  		if (App.user.attributes.deudor_factoraje_c == true && this.model.get('tipo_registro_cuenta_c') == '4') {
   			this.model.set('deudor_factor_c', true);
           }else{
   			this.model.set('deudor_factor_c', false);
@@ -2880,7 +2920,8 @@
         var webSite = this.model.get('website');
 
         if (webSite != "" && webSite != undefined) {
-            var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
+           // var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
+            var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
 
             if (!expreg.test(webSite)) {
 
@@ -2936,7 +2977,7 @@
   								autoClose: false,
   								messages: "La Página Web es correcta, no se puede borrar."
   							});
-                self.model.set('no_website_c',0); 
+                self.model.set('no_website_c',0);
   						}
               else {
                 self.model.set('website','');
@@ -2951,4 +2992,30 @@
         $('[data-name="website"]').attr('style','pointer-events:auto');
       }
     },
+
+    requeridosUniclickCanal:function (fields, errors, callback) {
+
+        var faltantesUniclickCanal = 0;
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+
+
+        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+            faltantesUniclickCanal += 1;
+        }
+        else {
+            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+        }
+        if (faltantesUniclickCanal > 0) {
+            app.alert.show("Faltante canal Uniclick", {
+                level: "error",
+                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+                autoClose: false
+            });
+            errors['error_UniclickCanal'] = errors['error_UniclickCanal'] || {};
+            errors['error_UniclickCanal'].required = true;
+        }
+
+        callback(null, fields, errors);
+    }
 })

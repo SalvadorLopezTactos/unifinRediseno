@@ -142,25 +142,47 @@ class reAsignarCuentas extends SugarApi
                 $User->retrieve($reAsignado);
                 $para = $User->email1;
                 if ($para != null) {
-                    if ($User->optout_c == 1) {
-                        $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
+                    if($User->status!='Active'){
+                        $reAsignado='';
+                    }else{
+                        if ($User->optout_c == 1) {
+                            $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
+                        }
                     }
+
                     $jefeAsignado = '';
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
-                    if ($User->optout_c != 1) {
-                        $jefeAsignado = $User->email1;
+                    //Establecer id a nuevo jefe solo si éste es Activo
+                    if($User->status=='Active'){
+                        if ($User->optout_c != 1) {
+                            $jefeAsignado = $User->email1;
+                        }
+                    }else{
+                        $jefeAsignado='';
                     }
+
                     $User->retrieve($promoActual);
-                    if ($User->optout_c == 1) {
-                        $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
+                    if($User->status=='Active'){
+                        if ($User->optout_c == 1) {
+                            $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
+                        }
+                    }else{
+                        $promoActual='';
                     }
+
                     $jefeActual = '';
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
-                    if ($User->optout_c != 1) {
-                        $jefeActual = $User->email1;
+                    //Establecer id a jefe Actual solo si éste es Activo
+                    if($User->status=='Active'){
+                        if ($User->optout_c != 1) {
+                            $jefeActual = $User->email1;
+                        }
+                    }else{
+                        $jefeActual='';
                     }
+
                     $notifica = BeanFactory::newBean('TCT2_Notificaciones');
                     $notifica->name = $para . ' ' . date("Y-m-d H:i:s");
                     $notifica->created_by = $promoActual;
@@ -169,6 +191,7 @@ class reAsignarCuentas extends SugarApi
                     $notifica->tct2_notificaciones_accountsaccounts_ida = $value;
                     $notifica->jefe_anterior_c = $jefeActual;
                     $notifica->jefe_nuevo_c = $jefeAsignado;
+                    $notifica->actual_c = $promoActual;
                     $notifica->save();
                     $notId = $notifica->id;
                     global $db;
