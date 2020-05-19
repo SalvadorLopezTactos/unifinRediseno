@@ -20,7 +20,6 @@
     closeOnSelect: false,
     containerCssClass: 'select2-choices-pills-close'
   });
-
 </script>
 
 <div class="tborder">
@@ -38,12 +37,7 @@
         <td>
           <select class="select2 row-fluid producto_list" multiple="multiple" size="3" style="width: 100%"
             data-field="producto_list">
-              {{log ../tipo_producto_list}}
-
               {{#each ../tipo_producto_list}}
-                {{log ../producto}}
-                  {{log "Info key"  @key}}
-
                   <option value="{{@key}}" {{ifMSelected @key ../producto}}>{{this}}</option>
             {{/each}}
           </select>
