@@ -1417,7 +1417,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         $ref_bancaria= $ref->numerocuenta_c;
                         $nombre_banco=$ref->institucion;
                         $new_referencia=array(
-                            "Nombre_del_Banco_Clientes"=>$nombre_banco,
+                            "_nombre_banco_cliente"=>$nombre_banco,
                             "_numero_cuenta_cliente"=>$ref_bancaria,
                             "_domiciliacion"=>"TRUE"
                         );
