@@ -1433,7 +1433,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     "_id_cliente_corto"=>$id_cliente_corto,
                     "_ref_bancaria"=>$bean->referencia_bancaria_c
                 ),
-                "_Referencias_Bancarias_Clientes"=>$array_referencias,
+                "_cuentas_bancarias_clientes"=>$array_referencias,
 
             );
             $GLOBALS['log']->fatal(json_encode($body));
