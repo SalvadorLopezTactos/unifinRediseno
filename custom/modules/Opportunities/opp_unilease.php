@@ -16,7 +16,7 @@ class ProductUnilease
             $GLOBALS['log']->fatal("Inicia Integracion UNILEASE");
             $url=$sugar_config['url_uni2_unilease'];
             $idSolicitud=$bean->idsolicitud_c;
-            $idLineaCredito=$bean->id_process_c;
+            $idLineaCredito=$bean->id_linea_credito_c;
 
             $body = array(
                 "idSolicitud" => $idSolicitud,
