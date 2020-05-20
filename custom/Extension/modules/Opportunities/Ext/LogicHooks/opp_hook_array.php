@@ -96,6 +96,14 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
+    9,
+    'Lanza petición a Unics cuando el producto es Unilease',
+    'custom/modules/Opportunities/opp_unilease.php',
+    'ProductUnilease', // name of the class
+    'setUnicsUnilease'
+);
+
+$hook_array['after_save'][] = Array(
     10,
     'Crea linea de credito para producto Uniclick solamente',
     'custom/modules/Opportunities/opp_mambu.php',
