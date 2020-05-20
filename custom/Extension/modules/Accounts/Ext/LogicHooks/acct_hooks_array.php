@@ -223,3 +223,11 @@ $hook_array['after_save'][] = Array(
     'Account_Hooks',
     'NuevaCuentaProductos'
 );
+
+$hook_array['after_save'][] = Array(
+    20,
+    'Actualiza campos viejos de Tipo y Subtipo',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'ActualizaTipo'
+);
