@@ -48,6 +48,7 @@ class PersonasRelacionadasLlamadas extends SugarApi
      */
     public function getRelatedPersonsCall($api, $args)
     {
+        global $app_list_strings;
         //Obtiene id de persona
         $idPersona=$args['record'];
 
@@ -80,7 +81,7 @@ class PersonasRelacionadasLlamadas extends SugarApi
                     "name"=>$beanPersona->name,
                     "id"=>$beanPersona->id,
                     "apellidopaterno_c"=>$beanPersona->apellidopaterno_c,
-                    "tipo_registro_c"=>$beanPersona->tipo_registro_cuenta_c
+                    "tipo_registro_cuenta_c"=>$app_list_strings['tipo_registro_cuenta_list'][$beanPersona->tipo_registro_cuenta_c]
                 );
 
                 $records_in['records'][]=$account;
@@ -98,7 +99,7 @@ class PersonasRelacionadasLlamadas extends SugarApi
                     "name"=>$beanPersona->name,
                     "id"=>$beanPersona->id,
                     "apellidopaterno_c"=>$beanPersona->apellidopaterno_c,
-                    "tipo_registro_c"=>$beanPersona->tipo_registro_cuenta_c
+                    "tipo_registro_cuenta_c"=>$app_list_strings['tipo_registro_cuenta_list'][$beanPersona->tipo_registro_cuenta_c]
                 );
 
                 $records_in['records'][]=$account;

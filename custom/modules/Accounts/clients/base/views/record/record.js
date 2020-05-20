@@ -943,8 +943,8 @@
          @author Victo Martinez - 01/08/2018
          Deshabilita campos: Tipo de cuenta y subtipo de cuenta
          */
-        this.noEditFields.push('subtipo_registro_cuenta_c');
-        this.noEditFields.push('tipo_registro_cuenta_c');
+//        this.noEditFields.push('subtipo_registro_cuenta_c');
+//        this.noEditFields.push('tipo_registro_cuenta_c');
 
         /*
          *
@@ -958,6 +958,7 @@
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
             self.noEditFields.push('promotoruniclick_c');
+            self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
         var origen = this.model.get('origendelprospecto_c');
@@ -5182,6 +5183,13 @@
                             ResumenProductos['uniclick'] = Productos[key];
                             Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
                             Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
+                            break;
+                        case "9": //Unilease
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            ResumenProductos['unilease'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;

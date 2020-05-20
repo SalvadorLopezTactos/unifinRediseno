@@ -81,7 +81,7 @@ WHERE ac.tipo_registro_cuenta_c='3' and (ac.encodedkey_mambu_c='' or ac.encodedk
                               WHERE id_c ='".$row['id']."'";
             $updateResult = $GLOBALS['db']->query($updateencoded);
             $contador++;
-            $GLOBALS['log']->fatal("Realiza actualizacion al campo id_mambu_c");
+            $GLOBALS['log']->fatal("Realiza actualizacion al campo encodedkey_mambu_c");
 
         }else if($resultado['errors']['errorSource']=='_id_crm'){
             $GLOBALS['log']->fatal("Cuenta ya existente en Mambu");
