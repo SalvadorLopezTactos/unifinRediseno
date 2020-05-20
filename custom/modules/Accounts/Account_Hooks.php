@@ -1459,11 +1459,13 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function ActualizaTipo($bean = null, $event = null, $args = null)
     {
+        global $db;
         global $app_list_strings;
         // Tipo y Subtipo de Cuenta
-        $bean->tipo_registro_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
-        $bean->subtipo_cuenta_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
-        $bean->save();
+        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
+        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
+        $query = "update accounts_cstm set tipo_registro_c = '{$tipo}', subtipo_cuenta_c = '{$subtipo}' where id_c = '{$bean->id}'";
+        $queryResult = $db->query($query);
         // Resumen Vista 360
         $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
         // uni_Productos 
