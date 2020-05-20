@@ -50,11 +50,14 @@ class MambuLogic
                     "holderKey"=> $beanCuenta->encodedkey_mambu_c,
                     "exposureLimitType"=> "APPROVED_AMOUNT",
                     "expireDate"=> $fechaexp,
-                    "holderType"=> "CLIENT",
+                    "holderType"=> "GROUP",
                     "startDate"=> $fecha_creacion,
                     "_datos_linea_credito"=>array (
                     "id_linea_credito"=> $bean->idsolicitud_c,
                     "monto_autorizado"=> $bean->amount
+                    ),
+                    "_productos"=> array(
+                     "39"=>"TRUE"
                     )
             );
 

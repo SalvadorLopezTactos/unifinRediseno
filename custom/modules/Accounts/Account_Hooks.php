@@ -1401,16 +1401,13 @@ where rfc_c = '{$bean->rfc_c}' and
             //variables para payload
             $id_crm=$bean->id;
             $nombre='';
-            $apellido='';
+            $nombreaccount=$bean->primernombre_c .' '.$bean->apellidopaterno_c .' '.$bean->apellidomaterno_c;
+            $razon_social=$bean->razonsocial_c;
             $id_cliente_corto=$bean->idcliente_c;
             //$id_cliente_corto='52597';
-            if($bean->tipodepersona_c!='Persona Moral'){
-                $nombre=$bean->primernombre_c;
-                $apellido=$bean->apellidopaterno_c .' '.$bean->apellidomaterno_c;
-            }else{
-                $nombre=$bean->razonsocial_c;
-                $apellido='PM';
-            }
+            //Condicion para determinar el valor de $nombre en el caso de regimen fiscal
+            $nombre = $bean->tipodepersona_c!='Persona Moral' ? $nombreaccount : $razon_social;
+
             //Obteniendo referencias bancarias
             $array_referencias=array();
             if ($bean->load_relationship('refba_referencia_bancaria_accounts')) {
@@ -1420,21 +1417,24 @@ where rfc_c = '{$bean->rfc_c}' and
                         $ref_bancaria= $ref->numerocuenta_c;
                         $nombre_banco=$ref->institucion;
                         $new_referencia=array(
-                            "Referencia_Bancaria"=>$ref_bancaria,
-                            "Nombre_del_Banco_Clientes"=>$nombre_banco
+                            "_nombre_banco_cliente"=>$nombre_banco,
+                            "_numero_cuenta_cliente"=>$ref_bancaria,
+                            "_domiciliacion"=>"TRUE"
                         );
                         array_push($array_referencias,$new_referencia);
+
                     }
                 }
             }
             $body = array(
-                "firstName" => $nombre,
-                "lastName" => $apellido,
-                "_Referencias_Bancarias_Clientes"=>$array_referencias,
-                "_Referencia_Crm"=>array(
-                    "Id_Crm"=> $id_crm,
-                    "id_cliente_corto"=>$id_cliente_corto
-                )
+                "groupName" => $nombre,
+                "_referencias_crm"=>array(
+                    "_id_crm"=> $id_crm,
+                    "_id_cliente_corto"=>$id_cliente_corto,
+                    "_ref_bancaria"=>$bean->referencia_bancaria_c
+                ),
+                "_cuentas_bancarias_clientes"=>$array_referencias,
+
             );
             $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
