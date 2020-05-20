@@ -9,4 +9,5 @@ $app_list_strings['canal_list']=array (
   4 => 'Closer',
   5 => 'Alianza',
   6 => 'Referenciador',
+  7 => 'Referenciación Interna',
 );
