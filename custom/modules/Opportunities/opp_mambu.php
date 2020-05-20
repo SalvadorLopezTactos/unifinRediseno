@@ -72,7 +72,8 @@ class MambuLogic
                //Realiza update al campo tct_id_mambu_c con el valor del encodedKey
                 $query = "UPDATE opportunities_cstm
                               SET tct_id_mambu_c ='".$resultado['encodedKey']."'
-                              WHERE id_c = '{$bean->id}'";
+                              WHERE id_c = '".$bean->id."'";
+               $GLOBALS['log']->fatal($query);
                 $queryResult = $db->query($query);
                 $GLOBALS['log']->fatal("Realiza actualizacion al campo id_mambu_c");
 
