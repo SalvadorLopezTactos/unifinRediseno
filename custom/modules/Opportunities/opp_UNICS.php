@@ -37,10 +37,11 @@ class LineaUNICS
             //Llama a UnifinAPI para que realice el consumo de servicio a Mambu
             $callApi = new UnifinAPI();
             $resultado = $callApi->postUNICS($url,$body);
-            $GLOBALS['log']->fatal($resultado);
+            $GLOBALS['log']->fatal(print_r($resultado, true));
 
             if($resultado['resultCode']==0){
                 $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a UNICS con la cuenta ' .$bean->name);
+                $bean->unics_integracion_c=1;
                 //Setear valor en campo nuevo 'resultCode'
                 $updatefield = "UPDATE opportunities_cstm
                               SET unics_integracion_c =1
