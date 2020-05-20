@@ -42,11 +42,11 @@ class LineaUNICS
             if($resultado['resultCode']==0){
                 $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a UNICS con la cuenta ' .$bean->name);
                 //Setear valor en campo nuevo 'resultCode'
-                /*$updatefield = "UPDATE opportunities_cstm
+                $updatefield = "UPDATE opportunities_cstm
                               SET unics_integracion_c =1
                               WHERE id_c = '".$bean->id."'";
                 $GLOBALS['log']->fatal($updatefield);
-                $queryResult = $db->query($updatefield);*/
+                $queryResult = $db->query($updatefield);
             }else{
                 $GLOBALS['log']->fatal("Error al procesar la solicitud, verifique información");
             }
