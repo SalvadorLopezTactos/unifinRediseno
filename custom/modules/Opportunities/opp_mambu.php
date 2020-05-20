@@ -20,7 +20,7 @@ class MambuLogic
         global $sugar_config,$db;
 
         //traer el bean de la cuenta para obtener el encodedkey_mambu_c
-        $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+        $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
         if ($bean->tipo_producto_c == '8' && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
 
