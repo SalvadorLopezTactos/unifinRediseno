@@ -1290,7 +1290,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     //Actualiza campo general
                     global $db;
                     $update = "update accounts_cstm set
-                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
