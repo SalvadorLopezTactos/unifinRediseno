@@ -6,8 +6,6 @@
  * Time: 2:35 PM
  */
 
-
-
 require_once("custom/Levementum/UnifinAPI.php");
 
 class Account_Hooks
@@ -206,7 +204,6 @@ SQL;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
                 $telefono->whatsapp_c = $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
-                $GLOBALS['log']->fatal('WhatsApp: '.$telefono->whatsapp_c);
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
@@ -1463,4 +1460,47 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
+    public function ActualizaTipo($bean = null, $event = null, $args = null)
+    {
+        global $db;
+        global $app_list_strings;
+        // Tipo y Subtipo de Cuenta
+        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
+        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
+        $query = "update accounts_cstm set tipo_registro_c = '{$tipo}', subtipo_cuenta_c = '{$subtipo}' where id_c = '{$bean->id}'";
+        $queryResult = $db->query($query);
+        // Resumen Vista 360
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
+        // uni_Productos 
+        $bean->load_relationship('accounts_uni_productos_1');
+        $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
+        foreach ($relatedBeans as $rel) {
+            if($rel->tipo_producto == 1) {
+                $beanResumen->tct_tipo_l_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_l_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_l_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 3) {
+                $beanResumen->tct_tipo_ca_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_ca_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_ca_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 4) {
+                $beanResumen->tct_tipo_f_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_f_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_f_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 6) {
+                $beanResumen->tct_tipo_fl_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_fl_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_fl_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 8) {
+                $beanResumen->tct_tipo_uc_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_uc_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_uc_c = $rel->tipo_subtipo_cuenta;
+            }
+        }
+        $beanResumen->save();
+    }
 }
