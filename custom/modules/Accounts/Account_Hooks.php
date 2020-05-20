@@ -1263,12 +1263,15 @@ where rfc_c = '{$bean->rfc_c}' and
             $beanprod = null;
 
             $module = 'uni_Productos';
-            $key_productos = array('1','4','3','6','8','7');
-            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS');
+            $key_productos = array('1','4','3','6','8','7','9');
+            $name_productos = array('-LEASING','-FACTORAJE','-CRÉDITO AUTOMOTRIZ','-FLEET','-UNICLICK','-CRÉDITO SOS','-UNILEASE');
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
-
+            //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
             $tipo = $app_list_strings['tipo_registro_cuenta_list'];
             $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
             $etitipo= $tipo[$bean->tipo_registro_cuenta_c];
@@ -1283,14 +1286,14 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta=='1') ? '5' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
                 //Caso especial: Alta portal CA
-                if ($beanprod->tipo_producto == '3' && $GLOBALS['service']->platform!= 'base' && $GLOBALS['service']->platform!= 'mobile') {
+                if ($beanprod->tipo_producto == '3' && $tipoCuentaServicio == 'Prospecto') {
                     $beanprod->tipo_cuenta = "2"; //2-Prospecto
                     $beanprod->subtipo_cuenta = "8"; //Integración de expediente
                     $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
                     //Actualiza campo general
                     global $db;
                     $update = "update accounts_cstm set
-                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
@@ -1314,6 +1317,9 @@ where rfc_c = '{$bean->rfc_c}' and
                     case '8': //Uniclick
                         $beanprod->assigned_user_id = $bean->user_id7_c;
               			break;
+                    case '9': //Unilease
+                        $beanprod->assigned_user_id = $bean->user_id7_c;
+                        break;
               	}
                 //Guarda registro y vincula a cuenta
               	$beanprod->save();

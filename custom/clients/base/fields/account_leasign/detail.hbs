@@ -861,6 +861,62 @@ AF - 18-01-18
 		  </div>
 		</div>
 	</div>
+    <!-- Bloque 11: Uniclick-Unilease -->
+    <div class="span4">
+        <div style="background-color: #f9f9f9">
+            <div>
+                <!-- Encabezado -->
+                <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseUnilease">
+                        <font color=#ffffff>
+                            <center><strong>Unilease</strong></center>
+                        </font>
+                    </a>
+                </div>
+                <!-- Contenido -->
+                <div id="collapseUnilease" class="accordion-body in collapse" style="background-color: #ffffff">
+                    <!-- Línea 1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Estatus de Atención</strong> </div>
+                        <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.unilease.estatus_atencion}}</div>
+                    </div>
+                    <!-- Línea 2 -->
+                    <div class="row-fluid" style="background-color: #ffffff">
+                        <div class="span6"><strong>Tipo de Cuenta</strong> </div>
+                        <div class="span6">
+                            {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.unilease.tipo_cuenta}}
+                            {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.unilease.subtipo_cuenta}}
+                        </div>
+                    </div>
+                    <!-- Línea 3 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Línea autorizada</strong> </div>
+                        <div class="span6">$ {{customFormatNumber ResumenCliente.unilease.linea_autorizada}}</div>
+                    </div>
+                    <!-- Línea 4 -->
+                    <div class="row-fluid"  style="background-color: #ffffff">
+                        <div class="span6"><strong>Fecha de vencimiento</strong></div>
+                        <div class="span6">{{ResumenCliente.unilease.fecha_vencimiento}}</div>
+                    </div>
+                    <!-- Línea 5 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Línea disponible</strong> </div>
+                        <div class="span6">
+                            <font {{#if ResumenCliente.unilease.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
+                                $ {{customFormatNumber ResumenCliente.unilease.linea_disponible}}
+                            </font>
+                        </div>
+                    </div>
+
+                    <!-- Línea 6 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Asesor</strong> </div>
+                        <div class="span6">{{ResumenCliente.unilease.promotor}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Modal- Activos -->
 <div id="myModal1" class="row-fluid" style="display:none">

@@ -169,6 +169,16 @@ class ResumenClienteAPI extends SugarApi
             "linea_disponible" => "",
             "promotor" => "",
             "color" => "");
+        //Unilease
+        $arr_principal['unilease'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
+            "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
+            "fecha_vencimiento"=>"",
+            "linea_disponible" => "",
+            "promotor" => "",
+            "color" => "");
+
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -209,6 +219,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
 			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
+            $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
@@ -252,8 +263,9 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_sos = "";
 
             $vencimiento_sos='';
-			
+
 			$vencimiento_uniclick ='';
+            $vencimiento_unilease ='';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -394,7 +406,52 @@ class ResumenClienteAPI extends SugarApi
                             $arr_principal['credito_sos']['fecha_pago'] = "";
 
                         }
+                    }
 
+                    //control para Uniclick
+                    if ($opps->tipo_producto_c == 8 && $opps->estatus_c != 'K') {
+                        $linea_aprox_uniclick += $opps->monto_c;
+    					          $linea_disp_sos += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+
+                        if (!empty($opps->vigencialinea_c)) {
+                						//Establece fecha de vencimiento
+                						$dateVL = $opps->vigencialinea_c;
+                						$timedateVL = Date($dateVL);
+
+                						//Compara fechas
+                						if ($dateVL > $vencimiento_uniclick || empty($vencimiento_uniclick)) {
+                						   $vencimiento_uniclick = $dateVL;
+                						}
+
+                						$arr_principal['uniclick']['linea_autorizada'] = $linea_aprox_uniclick;
+                						$arr_principal['uniclick']['fecha_vencimiento'] = $vencimiento_uniclick;
+                						$arr_principal['uniclick']['linea_disponible'] = $linea_disp_sos;
+                        }
+                    }
+
+                    //Control para Unilease
+                    if ($opps->tipo_producto_c == 9 && $opps->estatus_c != 'K') {
+                        $linea_aprox_unilease += $opps->monto_c;
+                        $linea_disp_sos += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+
+                        if (!empty($opps->vigencialinea_c)) {
+                            //Establece fecha de vencimiento
+                            $dateVL = $opps->vigencialinea_c;
+                            $timedateVL = Date($dateVL);
+
+                            //Compara fechas
+                            if ($dateVL > $vencimiento_unilease || empty($vencimiento_unilease)) {
+                                $vencimiento_unilease = $dateVL;
+                            }
+
+                            $arr_principal['unilease']['linea_autorizada'] = $linea_aprox_unilease;
+                            $arr_principal['unilease']['fecha_vencimiento'] = $vencimiento_unilease;
+                            $arr_principal['unilease']['linea_disponible'] = $linea_disp_sos;
+                        }
                     }
 
                 }
@@ -407,30 +464,7 @@ class ResumenClienteAPI extends SugarApi
                     $arr_principal['fleet']['numero_vehiculos'] = $numero_vehiculos_fleet;
 
                 }
-				
-				// Uniclick
-                if ($opps->tipo_producto_c == 8 && $opps->estatus_c != 'K') {
-                    $linea_aprox_uniclick += $opps->monto_c;
-					$linea_disp_sos += $opps->amount;
-                    /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
-                    /*********************************/
 
-                    if (!empty($opps->vigencialinea_c)) {
-						//Establece fecha de vencimiento
-						$dateVL = $opps->vigencialinea_c;
-						$timedateVL = Date($dateVL);
-
-						//Compara fechas
-						if ($dateVL > $vencimiento_uniclick || empty($vencimiento_uniclick)) {
-							$vencimiento_uniclick = $dateVL;
-						}
-						
-						$arr_principal['uniclick']['linea_autorizada'] = $linea_aprox_uniclick;
-						$arr_principal['uniclick']['fecha_vencimiento'] = $vencimiento_uniclick;
-						$arr_principal['uniclick']['linea_disponible'] = $linea_disp_sos;
-					}
-                }
-				
             }
         }
 
@@ -695,11 +729,15 @@ class ResumenClienteAPI extends SugarApi
 
                 //Recupera Crédito SOS
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
-				
+
 				//Recupera Uniclick
                 // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
-               
+
+                //Recupera Unilease
+                // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
+                $arr_principal['unilease']['fecha_pago']= $beanResumen->cauto_fecha_pago;
+
             }
         }
 
@@ -709,8 +747,8 @@ class ResumenClienteAPI extends SugarApi
         if ($beanPersona->load_relationship('accounts_uni_productos_1')) {
             //Recupera Productos
             $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
-            
-            foreach ($relateProduct as $product) { 
+
+            foreach ($relateProduct as $product) {
 
                 $tipoCuenta = $product->tipo_cuenta;
                 $subtipoCuenta = $product->subtipo_cuenta;
@@ -757,8 +795,14 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
-                        break;     
-                    default:                        
+                        break;
+                    case '9': //Uniclick
+                        $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
+                        $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['unilease']['cobranza'] = $cobranza;
+                        break;
+                    default:
                         break;
                 }
             }
