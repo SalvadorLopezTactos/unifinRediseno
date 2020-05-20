@@ -335,51 +335,63 @@ SITE;
         switch ($bean_Leads->puesto_c) {
 
             case 1:
-                $bean_account->puesto_c = "Duenio";
+                // $bean_account->puesto_c = "Duenio";
+                $bean_account->puesto_cuenta_c = "1";
 
                 break;
             case 2:
-                $bean_account->puesto_c = "Accionistas";
+                // $bean_account->puesto_c = "Accionistas";
+                $bean_account->puesto_cuenta_c = "2";
 
                 break;
             case 3:
-                $bean_account->puesto_c = "Director General";
+                // $bean_account->puesto_c = "Director General";
+                $bean_account->puesto_cuenta_c = "3";
 
                 break;
             case 4:
-                $bean_account->puesto_c = "Director Comercial";
+                // $bean_account->puesto_c = "Director Comercial";
+                $bean_account->puesto_cuenta_c = "4";
 
                 break;
             case 5:
-                $bean_account->puesto_c = "Director de Finanzas";
+                // $bean_account->puesto_c = "Director de Finanzas";
+                $bean_account->puesto_cuenta_c = "5";
 
                 break;
             case 6:
-                $bean_account->puesto_c = "Director de Operaciones";
+                // $bean_account->puesto_c = "Director de Operaciones";
+                $bean_account->puesto_cuenta_c = "6";
 
                 break;
             case 7:
-                $bean_account->puesto_c = "Director de Sistemas";
+                // $bean_account->puesto_c = "Director de Sistemas";
+                $bean_account->puesto_cuenta_c = "7";
 
                 break;
             case 8:
-                $bean_account->puesto_c = "Tesorero_Contralor";
+                // $bean_account->puesto_c = "Tesorero_Contralor";
+                $bean_account->puesto_cuenta_c = "8";
 
                 break;
             case 9:
-                $bean_account->puesto_c = "Gerente";
+                // $bean_account->puesto_c = "Gerente";
+                $bean_account->puesto_cuenta_c = "9";
 
                 break;
             case 10:
-                $bean_account->puesto_c = "Administrativo";
+                // $bean_account->puesto_c = "Administrativo";
+                $bean_account->puesto_cuenta_c = "10";
 
                 break;
             case 11:
-                $bean_account->puesto_c = "Otro";
+                // $bean_account->puesto_c = "Otro";
+                $bean_account->puesto_cuenta_c = "11";
 
                 break;
             default:
-                $bean_account->puesto_c = $bean_Leads->punto_contacto_c;
+                // $bean_account->puesto_c = $bean_Leads->punto_contacto_c;
+                $bean_account->puesto_cuenta_c = $bean_Leads->punto_contacto_c;
                 break;
         }
 
