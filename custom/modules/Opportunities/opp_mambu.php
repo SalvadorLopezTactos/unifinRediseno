@@ -20,7 +20,7 @@ class MambuLogic
         global $sugar_config,$db;
 
         //traer el bean de la cuenta para obtener el encodedkey_mambu_c
-        $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+        $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
         if ($bean->tipo_producto_c == '8' && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
 
@@ -61,22 +61,23 @@ class MambuLogic
                     )
             );
 
-            $GLOBALS['log']->fatal(print_r($body,true));
+            $GLOBALS['log']->fatal('Petición: '. json_encode($body));
             //Llama a UnifinAPI para que realice el consumo de servicio a Mambu
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url,$body,$auth_encode);
-            $GLOBALS['log']->fatal($resultado);
+            $GLOBALS['log']->fatal('Resultado: '. json_encode($resultado));
 
            if(!empty($resultado['encodedKey'])){
                $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a Mambu con la cuenta ' .$bean->name);
                $bean->tct_id_mambu_c=$resultado['encodedKey'];
                //Realiza update al campo tct_id_mambu_c con el valor del encodedKey
-                $query = "UPDATE opportunities_cstm
+               $query = "UPDATE opportunities_cstm
                               SET tct_id_mambu_c ='".$resultado['encodedKey']."'
                               WHERE id_c = '".$bean->id."'";
-               $GLOBALS['log']->fatal($query);
-                $queryResult = $db->query($query);
-                $GLOBALS['log']->fatal("Realiza actualizacion al campo id_mambu_c");
+
+               $queryResult = $db->query($query);
+               //$GLOBALS['log']->fatal($query);
+               //$GLOBALS['log']->fatal("Realiza actualizacion al campo id_mambu_c");
 
            }else{
                $GLOBALS['log']->fatal("Error al procesar la solicitud, verifique información");
