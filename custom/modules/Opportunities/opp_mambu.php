@@ -69,6 +69,7 @@ class MambuLogic
 
            if(!empty($resultado['encodedKey'])){
                $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a Mambu con la cuenta ' .$bean->name);
+               $bean->tct_id_mambu_c=$resultado['encodedKey'];
                //Realiza update al campo tct_id_mambu_c con el valor del encodedKey
                 $query = "UPDATE opportunities_cstm
                               SET tct_id_mambu_c ='".$resultado['encodedKey']."'
