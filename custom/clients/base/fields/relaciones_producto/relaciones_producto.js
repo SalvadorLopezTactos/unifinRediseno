@@ -2,7 +2,7 @@
     events: {
         'change .producto_list': 'relTipo_Producto',
     },
-
+    
     productoSeleccionado: "",
 
     initialize: function (options) {
@@ -11,95 +11,88 @@
         options = options || {};
         options.def = options.def || {};
         rel_product = this;
-        // this.productoSeleccionado = [];
 
-        this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list'); //Lista de Tipo Producto
-        delete this.tipo_producto_list[""]; //Quita el vacio de la lista de productos
-
+        this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list');
+        delete this.tipo_producto_list[""];
         this.model.on('change:relaciones_activas', this.rel_Productos, this);
-        //this.loadData(); //Creación
-        this.model.on('sync', this.loadData, this); //Registro
+        this.model.on('sync', this.loadData, this);
     },
 
-
     rel_Productos: function () {
-
         self_rel = this;
-        var arr_rel_prev = self_rel.model._previousAttributes.relaciones_activas;
         var arr_re_selecc = self_rel.model.get('relaciones_activas');
         var list_rel_prod = App.lang.getAppListStrings('relaciones_producto_list');
-        var arr_rel_nuevo = [];
-        console.log(arr_rel_prev);
-        arr_rel_prev = arr_rel_prev == undefined ? arr_re_selecc : arr_rel_prev;
+        var arr_final_rel = [];
 
-        if (arr_rel_prev[0] != "") {
-            for (var i = 0; i < arr_re_selecc.length; i++) { // valor seleccionado de rel activa
-                var bandera = false;
-                var valor = "";
-                for (var j = 0; j < arr_rel_prev.length; j++) { // valor previo de rel activa
+        for (var property in list_rel_prod) {
+            for (var k = 0; k < arr_re_selecc.length; k++) {
+                if (list_rel_prod.hasOwnProperty(property) && arr_re_selecc[k] == property) {
+                    arr_final_rel.push({ "rel": property, "prod": "" });
 
-                    if (arr_re_selecc[i] == arr_rel_prev[j]) {
-                        bandera = true;
-                        valor = arr_rel_prev[j];
+                }
+            }
+        }
+        var jsonCampo = self_rel.actualizaCampo(arr_final_rel);
+        self_rel.model.set('relaciones_producto_c', JSON.stringify(jsonCampo));
+        self_rel.productoSeleccionado = jsonCampo;
+        self_rel.render();
+
+    },
+
+    actualizaCampo: function (relacion) {
+        var array_temp = [];
+        var campo_json = self_rel.model.get('relaciones_producto_c') != undefined ? self_rel.model.get('relaciones_producto_c') : JSON.stringify([{
+            'rel': "",
+            'prod': ""
+        }]);
+        var campo_json = JSON.parse(campo_json);
+
+        if (relacion != null) {
+            for (var row in relacion) {
+                console.log("opciones " + relacion[row].rel);
+                var flag = false;
+                var temp_val = "";
+                for (row_json in campo_json) {
+                    if (relacion[row].rel == campo_json[row_json].rel) {
+                        flag = true;
+                        temp_val = campo_json[row_json];
                     }
                 }
-
-                if (bandera) {
-                    arr_rel_nuevo.push(valor);
-                }
-                else {
-                    arr_rel_nuevo.push(arr_re_selecc[i]);
+                if (flag) {
+                    array_temp.push(temp_val)
+                } else {
+                    array_temp.push(relacion[row]);
                 }
             }
         }
-        else {
-            for (var i = 0; i < arr_re_selecc.length; i++) {
-                arr_rel_nuevo.push(arr_re_selecc[i]);
-            }
-        }
-
-        var arr_final_rel = [];
-        for (var property in list_rel_prod) {
-            for (var k = 0; k < arr_rel_nuevo.length; k++) {
-                if (list_rel_prod.hasOwnProperty(property) && arr_rel_nuevo[k] == property) {
-
-                    arr_final_rel.push({ relacion: property, producto: '' });
-                    
-                }
-            }
-        }
-
-        console.log(arr_final_rel);
-
-        self_rel.productoSeleccionado = arr_final_rel.length > 0 ? arr_final_rel : "No data";
-        self_rel.model.set('relaciones_producto_c', JSON.stringify(self_rel.productoSeleccionado));
-
-        // console.log(JSON.stringify(self_rel.productoSeleccionado));
-        self_rel.render();
+        return array_temp;
     },
 
     relTipo_Producto: function (events) {
-        var row = $(events.currentTarget).closest("tr"); // busca los productos mediante el tr
-        var selectProducto = $(events.currentTarget).val(); // obtiene el valor de los productos que esta seleccionando en el multiselect
-        var selectProducto_det = $(events.currentTarget).val();
-        // Se agregan los gorritos ^ por cada producto seleccionado
+
+        var row = $(events.currentTarget).closest("tr");    // especifica al campo y busca el tr del producto seleccionado
+        var selectProducto = $(events.currentTarget).val();
+        var selectProducto_clsc = $(events.currentTarget).val();
+
         for (var i = 0; i < selectProducto.length; i++) {
             selectProducto[i] = '^' + selectProducto[i] + '^';
         }
 
-        rel_product.productoSeleccionado[row.index()].producto = selectProducto.toString();  //Productos separados con gorritos ^ para que se visualicen en el edit.hbs en el multiselect
-        rel_product.productoSeleccionado[row.index()].productoList = selectProducto_det.toString().split(',');; //Productos que se visualizan en el detail.hbs
+        var campo_temp = JSON.parse(rel_product.model.get('relaciones_producto_c'));
+        campo_temp[row.index()].prod = selectProducto.toString();
 
-        //Guarda JSON en el campo relaciones producto
-        this.model.set('relaciones_producto_c', JSON.stringify(rel_product.productoSeleccionado));
+        cadena_temp = "";
+        for (var j = 0; j < selectProducto_clsc.length; j++) {
+            cadena_temp += rel_product.tipo_producto_list[selectProducto_clsc[j]] + ",";
+        }
+        cadena_temp = cadena_temp.slice(0, -1);
+        campo_temp[row.index()].productoList = cadena_temp;
+        rel_product.model.set('relaciones_producto_c', JSON.stringify(campo_temp));
     },
 
     loadData: function () {
-        //Carga la información del campo que almacena un JSON para la carga de datos en la tabla de relaciones productos
-        var relacionProducto = rel_product.model.get('relaciones_producto_c'); //campo relacion productos JSON
+        var relacionProducto = rel_product.model.get('relaciones_producto_c');
         rel_product.productoSeleccionado = JSON.parse(relacionProducto);
-
-        // console.log(rel_product.productoSeleccionado);
         rel_product.render();
     },
 

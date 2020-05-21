@@ -33,12 +33,12 @@
     <tbody>
       {{#each productoSeleccionado}}
       <tr>
-        <td>{{relacion}}</td>
+        <td>{{rel}}</td>
         <td>
           <select class="select2 row-fluid producto_list" multiple="multiple" size="3" style="width: 100%"
             data-field="producto_list">
               {{#each ../tipo_producto_list}}
-                  <option value="{{@key}}" {{ifMSelected @key ../producto}}>{{this}}</option>
+                  <option value="{{@key}}" {{ifMSelected @key ../prod}}>{{this}}</option>
             {{/each}}
           </select>
         </td>
