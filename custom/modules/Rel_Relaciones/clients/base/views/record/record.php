@@ -275,6 +275,15 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_PUESTODESCRIPTION',
               ),
+              25 => 
+              array (
+                'name' => 'relaciones_producto_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RELACIONES_PRODUCTO_C',
+              ),
+              26 => 
+              array (
+              ),
             ),
           ),
           2 => 
