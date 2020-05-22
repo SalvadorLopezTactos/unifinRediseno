@@ -15,12 +15,10 @@
         this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list');
         delete this.tipo_producto_list[""];
         this.model.on('change:relaciones_activas', this.rel_Productos, this);
-        this.model.on('sync', this.loadData, this);
     },
 
     rel_Productos: function () {
-        self_rel = this;
-        var arr_re_selecc = self_rel.model.get('relaciones_activas');
+        var arr_re_selecc = rel_product.model.get('relaciones_activas');
         var list_rel_prod = App.lang.getAppListStrings('relaciones_producto_list');
         var arr_final_rel = [];
 
@@ -32,16 +30,16 @@
                 }
             }
         }
-        var jsonCampo = self_rel.actualizaCampo(arr_final_rel);
-        self_rel.model.set('relaciones_producto_c', JSON.stringify(jsonCampo));
-        self_rel.productoSeleccionado = jsonCampo;
-        self_rel.render();
+        var jsonCampo = rel_product.actualizaCampo(arr_final_rel);
+        rel_product.model.set('relaciones_producto_c', JSON.stringify(jsonCampo));
+        rel_product.productoSeleccionado = jsonCampo;
+        rel_product.render();
 
     },
 
     actualizaCampo: function (relacion) {
         var array_temp = [];
-        var campo_json = self_rel.model.get('relaciones_producto_c') != undefined ? self_rel.model.get('relaciones_producto_c') : JSON.stringify([{
+        var campo_json = rel_product.model.get('relaciones_producto_c') != undefined ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
             'rel': "",
             'prod': ""
         }]);
@@ -52,16 +50,20 @@
                 console.log("opciones " + relacion[row].rel);
                 var flag = false;
                 var temp_val = "";
+                if (relacion[row].rel!='' && relacion[row].rel!=undefined) {
                 for (row_json in campo_json) {
-                    if (relacion[row].rel == campo_json[row_json].rel) {
-                        flag = true;
-                        temp_val = campo_json[row_json];
+
+                        if (relacion[row].rel == campo_json[row_json].rel) {
+                            flag = true;
+                            temp_val = campo_json[row_json];
+                        }
                     }
-                }
-                if (flag) {
-                    array_temp.push(temp_val)
-                } else {
-                    array_temp.push(relacion[row]);
+
+                    if (flag==true) {
+                        array_temp.push(temp_val)
+                    } else {
+                        array_temp.push(relacion[row]);
+                    }
                 }
             }
         }
@@ -90,13 +92,4 @@
         rel_product.model.set('relaciones_producto_c', JSON.stringify(campo_temp));
     },
 
-    loadData: function () {
-        var relacionProducto = rel_product.model.get('relaciones_producto_c');
-        rel_product.productoSeleccionado = JSON.parse(relacionProducto);
-        rel_product.render();
-    },
-
-    _render: function () {
-        this._super("_render");
-    },
 })
