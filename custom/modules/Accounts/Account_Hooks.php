@@ -7,8 +7,6 @@
  * Time: 2:35 PM
  */
 
-
-
 require_once("custom/Levementum/UnifinAPI.php");
 
 class Account_Hooks
@@ -1259,7 +1257,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
-
+            //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
             $tipo = $app_list_strings['tipo_registro_cuenta_list'];
             $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
             $etitipo = $tipo[$bean->tipo_registro_cuenta_c];
@@ -1281,7 +1282,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     //Actualiza campo general
                     global $db;
                     $update = "update accounts_cstm set
-                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
