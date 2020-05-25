@@ -1,0 +1,49 @@
+<style>
+  .encabezado {
+    color: white;
+    background-color: #21618C;
+  }
+
+  .tborder {
+    border: #21618C 2px solid;
+    border-radius: 5px 5px 5px 5px;
+    padding-top: 7px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+</style>
+<script>
+  var $select = $('select.select2');
+  $select.select2({
+    width: '100%',
+    minimumResultsForSearch: 7,
+    closeOnSelect: false,
+    containerCssClass: 'select2-choices-pills-close'
+  });
+</script>
+
+<div class="tborder">
+  <table class="table table-striped table-condensed">
+    <thead class="encabezado">
+      <tr>
+        <th>Relación</th>
+        <th>Productos</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each productoSeleccionado}}
+      <tr>
+        <td>{{rel}}</td>
+        <td>
+          <select class="select2 row-fluid producto_list" multiple="multiple" size="3" style="width: 100%"
+            data-field="producto_list">
+              {{#each ../tipo_producto_list}}
+                  <option value="{{@key}}" {{ifMSelected @key ../prod}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
