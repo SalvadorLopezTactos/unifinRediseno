@@ -41,7 +41,7 @@
 
     actualizaCampo: function (relacion) {
         var array_temp = [];
-        var campo_json = rel_product.model.get('relaciones_producto_c') != undefined ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
+        var campo_json = (rel_product.model.get('relaciones_producto_c') != undefined && rel_product.model.get('relaciones_producto_c') != "")  ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
             'rel': "",
             'prod': ""
         }]);
