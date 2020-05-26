@@ -6,7 +6,7 @@ $app_list_strings['relaciones_producto_list']=array (
   'Aval' => 'Aval',
   'Propietario Real' => 'Propietario Real',
   'Representante' => 'Representante',
-  'Conyuge' => 'Conyuge',
+  'Conyuge' => 'Cónyuge',
   'Firmantes VR' => 'Firmantes VR',
   'Obligado solidario' => 'Obligado solidario',
 );
