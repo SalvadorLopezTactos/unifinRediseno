@@ -224,6 +224,13 @@ $hook_array['after_save'][] = Array(
     'NuevaCuentaProductos'
 );
 
+$hook_array['before_save'][] = Array(
+    19,
+    'Guarda valor de Puesto en el campo Puesto_Descriptivo',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'PuestoCuenta'
+);
 $hook_array['after_save'][] = Array(
     20,
     'Actualiza campos viejos de Tipo y Subtipo',

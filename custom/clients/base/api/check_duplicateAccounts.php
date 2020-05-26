@@ -331,58 +331,7 @@ SITE;
         $bean_account->ventas_anuales_c = $bean_Leads->ventas_anuales_c;
         $bean_account->potencial_cuenta_c = $bean_Leads->potencial_lead_c;
         $bean_account->zonageografica_c = $bean_Leads->zona_geografica_c;
-
-        switch ($bean_Leads->puesto_c) {
-
-            case 1:
-                $bean_account->puesto_c = "Duenio";
-
-                break;
-            case 2:
-                $bean_account->puesto_c = "Accionistas";
-
-                break;
-            case 3:
-                $bean_account->puesto_c = "Director General";
-
-                break;
-            case 4:
-                $bean_account->puesto_c = "Director Comercial";
-
-                break;
-            case 5:
-                $bean_account->puesto_c = "Director de Finanzas";
-
-                break;
-            case 6:
-                $bean_account->puesto_c = "Director de Operaciones";
-
-                break;
-            case 7:
-                $bean_account->puesto_c = "Director de Sistemas";
-
-                break;
-            case 8:
-                $bean_account->puesto_c = "Tesorero_Contralor";
-
-                break;
-            case 9:
-                $bean_account->puesto_c = "Gerente";
-
-                break;
-            case 10:
-                $bean_account->puesto_c = "Administrativo";
-
-                break;
-            case 11:
-                $bean_account->puesto_c = "Otro";
-
-                break;
-            default:
-                $bean_account->puesto_c = $bean_Leads->punto_contacto_c;
-                break;
-        }
-
+        $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
 
