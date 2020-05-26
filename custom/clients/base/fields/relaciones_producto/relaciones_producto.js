@@ -19,6 +19,14 @@
         this.model.on('sync', this.loadData, this);
     },
 
+    bindDataChange: function () {
+        this.model.on('change:' + this.name, function () {
+            if (this.action !== 'edit') {
+                this.render();
+            }
+        }, this);
+    },
+
     rel_Productos: function () {
         var arr_re_selecc = rel_product.model.get('relaciones_activas');
         var list_rel_prod = App.lang.getAppListStrings('relaciones_producto_list');
