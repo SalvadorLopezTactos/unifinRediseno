@@ -12,7 +12,7 @@
 			'apellidopaterno_c',
 			'apellidomaterno_c',
 			'razonsocial_c',
-			'origendelprospecto_c',
+			'origen_cuenta_c',
 			'motivo_c',
 			'ifepasaporte_c',
 			'tipo_relacion_c',

@@ -178,7 +178,7 @@ SQL;
 
          global $db;
          $query = <<<SQL
-SELECT origendelprospecto_c FROM accounts_cstm ac
+SELECT origen_cuenta_c FROM accounts_cstm ac
 INNER JOIN accounts a ON a.id = ac.id_c AND a.deleted = 0
 INNER JOIN accounts_opportunities ao ON ao.account_id = a.id AND ao.deleted = 0
 INNER JOIN opportunities o ON o.id = ao.opportunity_id AND o.deleted = 0
@@ -197,22 +197,22 @@ SQL;
 
          while($row = $db->fetchByAssoc($queryResult))
          {
-             if($row['origendelprospecto_c'] == 'Agencia Distribuidor'){
+             if($row['origen_cuenta_c'] == 'Agencia Distribuidor'){
                  $agencia_distribuidor = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
-             elseif ($row['origendelprospecto_c'] == 'Referenciador'){
+             elseif ($row['origen_cuenta_c'] == '6'){
                  $referenciador = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
-             elseif($row['origendelprospecto_c'] == 'Prospeccion propia'){
+             elseif($row['origen_cuenta_c'] == '3'){
                  $prospeccion_propia = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
-             elseif($row['origendelprospecto_c'] == 'Mercadotecnia'){
+             elseif($row['origen_cuenta_c'] == 'Mercadotecnia'){
                  $mercadotecnia = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
-             elseif($row['origendelprospecto_c'] == 'Director'){
+             elseif($row['origen_cuenta_c'] == 'Director'){
                  $director = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
-             elseif($row['origendelprospecto_c'] == 'Estrategia y planeacion'){
+             elseif($row['origen_cuenta_c'] == 'Estrategia y planeacion'){
                  $estrategia_planeacion = '<img src="./custom/themes/default/images/PDF-Check.jpg" alt="Check" />';
              }
              else{
