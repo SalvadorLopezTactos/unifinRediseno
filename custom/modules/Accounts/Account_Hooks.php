@@ -7,8 +7,6 @@
  * Time: 2:35 PM
  */
 
-
-
 require_once("custom/Levementum/UnifinAPI.php");
 
 class Account_Hooks
@@ -1259,7 +1257,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
-
+            //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
             $tipo = $app_list_strings['tipo_registro_cuenta_list'];
             $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
             $etitipo = $tipo[$bean->tipo_registro_cuenta_c];
@@ -1281,7 +1282,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     //Actualiza campo general
                     global $db;
                     $update = "update accounts_cstm set
-                      tipo_cuenta='2', subtipo_cuenta ='8'
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
@@ -1496,5 +1497,49 @@ where rfc_c = '{$bean->rfc_c}' and
                     break;
             }
         }
+    }
+    
+    public function ActualizaTipo($bean = null, $event = null, $args = null)
+    {
+        global $db;
+        global $app_list_strings;
+        // Tipo y Subtipo de Cuenta
+        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
+        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
+        $query = "update accounts_cstm set tipo_registro_c = '{$tipo}', subtipo_cuenta_c = '{$subtipo}' where id_c = '{$bean->id}'";
+        $queryResult = $db->query($query);
+        // Resumen Vista 360
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
+        // uni_Productos 
+        $bean->load_relationship('accounts_uni_productos_1');
+        $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
+        foreach ($relatedBeans as $rel) {
+            if($rel->tipo_producto == 1) {
+                $beanResumen->tct_tipo_l_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_l_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_l_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 3) {
+                $beanResumen->tct_tipo_ca_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_ca_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_ca_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 4) {
+                $beanResumen->tct_tipo_f_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_f_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_f_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 6) {
+                $beanResumen->tct_tipo_fl_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_fl_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_fl_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 8) {
+                $beanResumen->tct_tipo_uc_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_uc_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_uc_c = $rel->tipo_subtipo_cuenta;
+            }
+        }
+        $beanResumen->save();
     }
 }
