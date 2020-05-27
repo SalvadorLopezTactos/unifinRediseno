@@ -1651,6 +1651,5 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_account->tct_punto_contacto_ddw_c = $bean_account->punto_contacto_origen_c;
                 break;
         }
-        $bean_account->save();
     }
 }

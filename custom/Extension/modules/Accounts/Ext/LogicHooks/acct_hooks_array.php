@@ -232,8 +232,8 @@ $hook_array['after_save'][] = Array(
     'ActualizaTipo'
 );
 
-$hook_array['after_save'][] = Array(
-    21,
+$hook_array['before_save'][] = Array(
+    17,
     'Actualiza campos viejos de Origen',
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
