@@ -33,7 +33,7 @@
     <tbody>
       {{#each productoSeleccionado}}
       <tr>
-        <td>{{rel}}</td>
+        <td>{{getUnifinListValue 'relaciones_producto_list' rel}}</td>
         <td>
           <select class="select2 row-fluid producto_list" multiple="multiple" size="3" style="width: 100%"
             data-field="producto_list">
