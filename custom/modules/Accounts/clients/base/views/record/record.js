@@ -1254,7 +1254,6 @@
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
         var myField3 = this.getField("clienteuniclick");
-
         if (myField) {
             myField.listenTo(myField, "render", function () {
                 var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
@@ -1272,17 +1271,14 @@
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
                 myField.hide();
-
                 if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
                     (fleetprod == "Prospecto" && fleetsub == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
                     myField.show();
                 } else {
                     myField.hide();
                 }
-
             });
         }
-
         if (myField1) {
             myField1.listenTo(myField1, "render", function () {
                 myField1.hide();
@@ -1326,14 +1322,12 @@
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
                 myField2.hide();
-
                 if (((leasingprod == "Proveedor" || leasingprod == "Persona") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Proveedor" || factprod == "Persona") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Proveedor" || caprod == "Persona") && userprod.includes("3") && asesorCA == logueado) ||
                     ((fleetprod == "Proveedor" || fleetprod == "Persona") && userprod.includes('6') && asesorFL == logueado)) {
                     myField2.show();
                 } else {
                     myField2.hide();
                 }
-
             });
         }
         if (myField3) {
@@ -1349,13 +1343,11 @@
                 } else {
                     myField3.hide();
                 }
-
             });
         }
     },
 
     hideButton_Conversion_change: function () {
-
         var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
         var factprod = Oproductos.productos.tct_tipo_f_txf_c;
         var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
@@ -1367,7 +1359,6 @@
         var subtipofleet = Oproductos.productos.tct_subtipo_fl_txf_c;
         var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
         var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
-
         var logueado = App.user.id;
         var asesorL = this.model.get('user_id_c');
         var asesorF = this.model.get('user_id1_c');
@@ -1391,7 +1382,6 @@
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').hide();
-            $('[name="conviertelead"]').hide();
         }
 
         //Evaluación para mostrar botones
@@ -1402,7 +1392,6 @@
         if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
-            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1415,7 +1404,6 @@
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
-            $('[name="conviertelead"]').hide();
         }
 
         //Evaluación para mostrar botones
@@ -1439,7 +1427,6 @@
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
         }
     },
-
 
     /*
      @author Salvador Lopez
@@ -2477,9 +2464,10 @@
             });
             var productousuario = App.user.attributes.productos_c;
             var api_params = {};
-
+            var tipo_producto = 0;
             if ((Oproductos.productos.tct_tipo_l_txf_c == "Persona" || Oproductos.productos.tct_tipo_l_txf_c == "Proveedor") && productousuario.includes('1')) {
                 if (App.user.id == this.model.get('user_id_c')) {
+                    tipo_producto = 1;
                     api_params["tct_tipo_l_txf_c"] = "Lead";
                     api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                     api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
@@ -2488,6 +2476,7 @@
             }
             if ((Oproductos.productos.tct_tipo_ca_txf_c == "Persona" || Oproductos.productos.tct_tipo_ca_txf_c == "Proveedor") && productousuario.includes('3')) {
                 if (App.user.id == this.model.get('user_id2_c')) {
+                    tipo_producto = 3;                
                     api_params["tct_tipo_ca_txf_c"] = "Lead";
                     api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
@@ -2495,6 +2484,7 @@
             }
             if ((Oproductos.productos.tct_tipo_f_txf_c == "Persona" || Oproductos.productos.tct_tipo_f_txf_c == "Proveedor") && productousuario.includes('4')) {
                 if (App.user.id == this.model.get('user_id1_c')) {
+                    tipo_producto = 4;
                     api_params["tct_tipo_f_txf_c"] = "Lead";
                     api_params["tct_subtipo_f_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
@@ -2502,42 +2492,70 @@
             }
             if ((Oproductos.productos.tct_tipo_fl_txf_c == "Persona" || Oproductos.productos.tct_tipo_fl_txf_c == "Proveedor") && productousuario.includes('6')) {
                 if (App.user.id == this.model.get('user_id6_c')) {
+                    tipo_producto = 6;
                     api_params["tct_tipo_fl_txf_c"] = "Lead";
                     api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
                 }
             }
-            if (api_params != undefined) {
-
-                var idC = this.model.get('id');
-                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
-                app.api.call('update', url, api_params, {
-                    success: _.bind(function (data) {
-                        //this._render();
-                        app.alert.dismiss('conviertePaL');
-                        Oproductos.productos = data;
-                        app.alert.show('alert_change_success', {
-                            level: 'success',
-                            messages: 'Cambio realizado',
-                        });
-                        //Actualiza modelo vista v360
-                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
-                        Oproductos.render();
-                        v360.render();
-                        //Deja activa la pestaña de la vista360
-                        $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
-                        $("#recordTab>li.tab").removeClass('active');
-                        $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
-                    })
-                });
+            if ((Oproductos.productos.tct_tipo_uc_txf_c == "Persona" || Oproductos.productos.tct_tipo_uc_txf_c == "Proveedor") && productousuario.includes('8')) {
+                if (App.user.id == this.model.get('user_id7_c')) {
+                    tipo_producto = 8;
+                    api_params["tct_tipo_uc_txf_c"] = "Lead";
+                    api_params["tct_subtipo_uc_txf_c"] = "En Calificación";
+                    api_params["tct_tipo_cuenta_uc_c"] = "LEAD EN CALIFICACIÓN";
+                }
             }
-
-
+            // Actualiza Productos
+            _.each(Productos, function (value, key) {
+                var idprod = '';
+                if(app.user.id == this.model.get('user_id_c') && Productos[key].tipo_producto == 1) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id1_c') && Productos[key].tipo_producto == 4) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id2_c') && Productos[key].tipo_producto == 3) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id6_c') && Productos[key].tipo_producto == 6) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
+                if(idprod) {
+                  var params = {};
+                  params["tipo_cuenta"] = "1";
+                  params["subtipo_cuenta"] = "5";
+                  params["tipo_subtipo_cuenta"] = "LEAD EN CALIFICACIÓN";
+                  var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                  app.api.call('update', uni, params, {
+                      success: _.bind(function (data) {
+                      })
+                  });
+                }
+            },this);
+            // Actualiza Resumen
+            var idC = this.model.get('id');
+            setTimeout(function() {
+                if (api_params != undefined) {
+                    var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                    app.api.call('update', url, api_params, {
+                        success: _.bind(function (data) {
+                            //this._render();
+                            app.alert.dismiss('conviertePaL');
+                            Oproductos.productos = data;
+                            app.alert.show('alert_change_success', {
+                                level: 'success',
+                                messages: 'Cambio realizado',
+                            });
+                            //Actualiza modelo vista v360
+                            v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                            v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                            v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                            v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                            Oproductos.render();
+                            v360.render();
+                            //Deja activa la pestaña de la vista360
+                            $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                            $("#recordTab>li.tab").removeClass('active');
+                            $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                        })
+                    });
+                }
+            },2000);
         }
-
     },
 
 
@@ -5131,65 +5149,76 @@
         if (dd < 10) { dd = '0' + dd }
         if (mm < 10) { mm = '0' + mm }
         today = yyyy + '-' + mm + '-' + dd;
-
         //Recupera información
         var idCuenta = this.model.get('id');
         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
             success: function (data) {
-
                 Productos = data;
                 ResumenProductos = [];
                 _.each(Productos, function (value, key) {
-
                     var tipoProducto = Productos[key].tipo_producto;
                     var fechaAsignacion = Productos[key].fecha_asignacion_c;
                     var fecha1 = moment(today);
                     var fecha2 = moment(fechaAsignacion);
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
-
                     switch (tipoProducto) {
                         case "1": //Leasing
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['leasing'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_l = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_l = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_l_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
+                            Oproductos.productos.tct_subtipo_l_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
+                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_subtipo_cuenta'];
                             break;
                         case "3": //Credito-auto
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['credito_auto'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_ca = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_ca = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_ca_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
+                            Oproductos.productos.tct_subtipo_ca_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
+                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_subtipo_cuenta'];
                             break;
                         case "4": //Factoraje
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['factoring'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_f = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_f = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_f_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
+                            Oproductos.productos.tct_subtipo_f_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
+                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_subtipo_cuenta'];
                             break;
                         case "6": //Fleet
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['fleet'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_fl = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_fl = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_fl_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
+                            Oproductos.productos.tct_subtipo_fl_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
+                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_subtipo_cuenta'];
                             break;
                         case "8": //Uniclick
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['uniclick'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_uc = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_uc = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_uc_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
+                            Oproductos.productos.tct_subtipo_uc_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
+                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_subtipo_cuenta'];
                             break;
                         case "9": //Unilease
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['unilease'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tipo_registro_ul = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.subtipo_cuenta_ul = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;
