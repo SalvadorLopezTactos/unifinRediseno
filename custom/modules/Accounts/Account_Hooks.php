@@ -1618,8 +1618,6 @@ where rfc_c = '{$bean->rfc_c}' and
                 break;
         }
 
-
-
         switch ($bean_account->medio_detalle_origen_c) {
             case 1:
                 $bean_account->medio_digital_c = "Facebook";
@@ -1668,6 +1666,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_account->medio_digital_c = $bean_account->medio_detalle_origen_c;
                 break;
         }
+
         switch ($bean_account->punto_contacto_origen_c) {
 
             case 1:
@@ -1690,5 +1689,22 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_account->tct_punto_contacto_ddw_c = $bean_account->punto_contacto_origen_c;
                 break;
         }
+
+        switch ($bean_account->prospeccion_propia_c)
+        {
+            case 1:
+                $bean_account->metodo_prospeccion_c = "llamada_en_frio";
+
+                break;
+            case 2:
+                $bean_account->metodo_prospeccion_c = "prospeccion_en_campo";
+
+                break;
+            case 3:
+                $bean_account->metodo_prospeccion_c = "cartera";
+
+                break;
+        }
+
     }
 }
