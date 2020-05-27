@@ -306,8 +306,8 @@ array (
               ),
               50 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               51 => 
               array (

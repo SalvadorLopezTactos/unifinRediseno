@@ -280,8 +280,8 @@ array (
               ),
               48 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               49 => 'email',
               50 => 
@@ -403,29 +403,37 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORUNICLICK_C',
               ),
-              69 => 
+              69 =>
+              array (
+                  'name' => 'canal_uniclick_mobile',
+                  'type' => 'canal_uniclick_mobile',
+                  'studio' => 'visible',
+                  'label' => 'Producto Uniclick',
+              ),
+
+              70 =>
               array (
                 'name' => 'no_viable',
                 'type' => 'no_viable',
                 'studio' => 'visible',
                 'label' => 'Lead No viable',
               ),
-              70 => 'phone_office',
-              71 => 
+              71 => 'phone_office',
+              72 =>
               array (
                 'name' => 'clean_name',
                 'studio' => 'visible',
                 'label' => 'LBL_CLEAN_NAME',
                 'css_class' => 'hide',
               ),
-              72 => 
+              73 =>
               array (
                 'name' => 'account_uni_productos',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
                 'css_class' => 'hide',
               ),
-              73 => 
+              74 =>
               array (
               ),
             ),

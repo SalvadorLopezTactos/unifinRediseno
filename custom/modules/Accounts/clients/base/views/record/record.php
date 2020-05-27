@@ -589,8 +589,8 @@ array (
               ),
               25 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               26 => 
               array (
