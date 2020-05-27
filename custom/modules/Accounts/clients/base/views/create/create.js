@@ -397,7 +397,7 @@
         //this.model.on('change:tipo_registro_cuenta_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
-        this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
+        this.model.on('change:origen_cuenta_c', this.changeLabelMarketing, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -1818,27 +1818,27 @@
 
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
-        if (this.model.get('origendelprospecto_c') == 'Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Mercadotecnia') {
             console.log("Se eligio Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Detalle marketing");
         }
-        if (this.model.get('origendelprospecto_c') == 'Eventos Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Eventos Mercadotecnia') {
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
         }
     },
 
     doValidateInfoReq: function (fields, errors, callback) {
-        if (this.model.get('origendelprospecto_c') == 'Prospeccion propia') {
-            var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
-            if (metodoProspeccion.length == 0 || this.model.get('metodo_prospeccion_c') == null) {
+        if (this.model.get('origen_cuenta_c') == '3') {
+            var metodoProspeccion = new String(this.model.get('prospeccion_propia_c'));
+            if (metodoProspeccion.length == 0 || this.model.get('prospeccion_propia_c') == null) {
                 /*app.alert.show("Metodo de Prospeccion Requerido", {
                     level: "error",
                     title: "Debe indicar el metodo de prospecci\u00F3n",
                     autoClose: false
                 });*/
-                errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
-                errors['metodo_prospeccion_c'].required = true;
+                errors['prospeccion_propia_c'] = errors['prospeccion_propia_c'] || {};
+                errors['prospeccion_propia_c'].required = true;
             }
         }
         callback(null, fields, errors);

@@ -123,7 +123,7 @@
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
-        this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
+        this.model.on('change:origen_cuenta_c', this.changeLabelMarketing, this);
 
         //Se añade función para establecer phone_office
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
@@ -733,7 +733,7 @@
 
     readOnlyOrigen: function () {
         //Recupera variables
-        var origen = this.model.get('origendelprospecto_c');
+        var origen = this.model.get('origen_cuenta_c');
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         /*
          -- Bloquea campos si;
@@ -742,24 +742,24 @@
          */
         if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
             //Establece como no editables campos de origen
-            this.noEditFields.push('origendelprospecto_c');
-            this.noEditFields.push('tct_detalle_origen_ddw_c');
+            this.noEditFields.push('origen_cuenta_c');
+            this.noEditFields.push('detalle_origen_c');
             this.noEditFields.push('tct_origen_base_ddw_c');
             this.noEditFields.push('tct_origen_busqueda_txf_c');
-            this.noEditFields.push('medio_digital_c');
-            this.noEditFields.push('tct_punto_contacto_ddw_c');
+            this.noEditFields.push('medio_detalle_origen_c');
+            this.noEditFields.push('punto_contacto_origen_c');
             this.noEditFields.push('evento_c');
             this.noEditFields.push('camara_c');
             this.noEditFields.push('tct_que_promotor_rel_c');
             this.noEditFields.push('como_se_entero_c');
             this.noEditFields.push('cual_c');
             //Deshabilita campos de Origen
-            this.$("[data-name='origendelprospecto_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='tct_detalle_origen_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='origen_cuenta_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='detalle_origen_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_origen_base_ddw_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_origen_busqueda_txf_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='medio_digital_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='tct_punto_contacto_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='medio_detalle_origen_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='punto_contacto_origen_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='evento_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='camara_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_que_promotor_rel_c']").attr('style', 'pointer-events:none;');
@@ -961,16 +961,16 @@
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
-        var origen = this.model.get('origendelprospecto_c');
-        if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
+        var origen = this.model.get('origen_cuenta_c');
+        if (origen == "Marketing" || origen == "2") {
             var self = this;
-            self.noEditFields.push('origendelprospecto_c');
-            self.noEditFields.push('tct_detalle_origen_ddw_c');
+            self.noEditFields.push('origen_cuenta_c');
+            self.noEditFields.push('detalle_origen_c');
             self.noEditFields.push('tct_origen_base_ddw_c');
             self.noEditFields.push('tct_origen_ag_tel_rel_c');
             self.noEditFields.push('tct_origen_busqueda_txf_c');
-            self.noEditFields.push('medio_digital_c');
-            self.noEditFields.push('tct_punto_contacto_ddw_c');
+            self.noEditFields.push('medio_detalle_origen_c');
+            self.noEditFields.push('punto_contacto_origen_c');
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
@@ -2310,7 +2310,7 @@
     validaContactado: function () {
         var campos = "";
 
-        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+        if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
             campos = campos + '<b>Origen, </b>';
         }
 
@@ -3076,14 +3076,14 @@
         }
     },
 
-
+/**Pendiente de Validar*/
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
-        if (this.model.get('origendelprospecto_c') == 'Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Mercadotecnia') {
             console.log("Se eligio Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Detalle marketing");
         }
-        if (this.model.get('origendelprospecto_c') == 'Eventos Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Eventos Mercadotecnia') {
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
         }
@@ -3111,16 +3111,16 @@
     },
 
     doValidateInfoReq: function (fields, errors, callback) {
-        if (this.model.get('origendelprospecto_c') == 'Prospeccion propia') {
-            var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
-            if (metodoProspeccion.length == 0 || this.model.get('metodo_prospeccion_c') == null) {
+        if (this.model.get('origen_cuenta_c') == '3') {
+            var metodoProspeccion = new String(this.model.get('prospeccion_propia_c'));
+            if (metodoProspeccion.length == 0 || this.model.get('prospeccion_propia_c') == null) {
                 /*app.alert.show("Metodo de Prospeccion Requerido", {
                  level: "error",
                  title: "Debe indicar el metodo de prospecci\u00F3n",
                  autoClose: false
                  });*/
-                errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
-                errors['metodo_prospeccion_c'].required = true;
+                errors['prospeccion_propia_c'] = errors['prospeccion_propia_c'] || {};
+                errors['prospeccion_propia_c'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -4986,7 +4986,7 @@
         });
         var necesarios = "";
 
-        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+        if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
             necesarios = necesarios + '<b>Origen<br></b>';
         }
         if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {

@@ -1542,4 +1542,153 @@ where rfc_c = '{$bean->rfc_c}' and
         }
         $beanResumen->save();
     }
+    public function ActualizaOrigen($bean_account = null, $event = null, $args = null)
+    {
+        switch ($bean_account->origen_cuenta_c) {
+            case 1:
+                $bean_account->origendelprospecto_c = "Marketing";
+                break;
+            case 2:
+                $bean_account->origendelprospecto_c = "Inteligencia de Negocio";
+                break;
+            case 3:
+                $bean_account->origendelprospecto_c = "Prospeccion propia";
+                break;
+            case 4:
+                $bean_account->origendelprospecto_c = "Referido Cliente";
+                break;
+            case 5:
+                $bean_account->origendelprospecto_c = "Referido Proveedor";
+                break;
+            case 6:
+                $bean_account->origendelprospecto_c = "Referenciador";
+                break;
+            case 7:
+                $bean_account->origendelprospecto_c = "Referido Director";
+                break;
+            case 8:
+                $bean_account->origendelprospecto_c = "Referenciado Vendor";
+                break;
+            case 9:
+                $bean_account->origendelprospecto_c = "Portal Uniclick";
+                break;
+            case 10:
+                $bean_account->origendelprospecto_c = "Whatsapp";
+                break;
+
+        }
+
+        //Switch para asignar los valores
+        switch ($bean_account->detalle_origen_c) {
+            case 1:
+                $bean_account->tct_detalle_origen_ddw_c = "Base de datos";
+                break;
+            case 2:
+                $bean_account->tct_detalle_origen_ddw_c = "Centro de Prospeccion";
+                break;
+            case 3:
+                $bean_account->tct_detalle_origen_ddw_c = "Digital";
+                break;
+            case 4:
+                $bean_account->tct_detalle_origen_ddw_c = "Campanas";
+                break;
+            case 5:
+                $bean_account->tct_detalle_origen_ddw_c = "Acciones Estrategicas";
+                break;
+            case 6:
+                $bean_account->tct_detalle_origen_ddw_c = "Afiliaciones";
+                break;
+            case 7:
+                $bean_account->tct_detalle_origen_ddw_c = "Llamdas Inbound";
+                break;
+            case 8:
+                $bean_account->tct_detalle_origen_ddw_c = "Parques Industriales";
+                break;
+            case 9:
+                $bean_account->tct_detalle_origen_ddw_c = "Offline";
+                break;
+            case 10:
+                $bean_account->tct_detalle_origen_ddw_c = "Cartera Promotores";
+                break;
+            case 11:
+                $bean_account->tct_detalle_origen_ddw_c = "Recomendacion";
+                break;
+            default:
+                $bean_account->tct_detalle_origen_ddw_c = $bean_account->detalle_origen_c;
+                break;
+        }
+
+
+
+        switch ($bean_account->medio_detalle_origen_c) {
+            case 1:
+                $bean_account->medio_digital_c = "Facebook";
+                break;
+            case 2:
+                $bean_account->medio_digital_c = "Twitter";
+                break;
+            case 3:
+                $bean_account->medio_digital_c = "Instagram";
+                break;
+            case 4:
+                $bean_account->medio_digital_c = "Web";
+                break;
+            case 5:
+                $bean_account->medio_digital_c = "LinkedIn";
+                break;
+            case 6:
+                $bean_account->medio_digital_c = "Radio Online";
+                break;
+            case 7:
+                $bean_account->medio_digital_c = "Prensa Online";
+                break;
+            case 8:
+                $bean_account->medio_digital_c = "TV Online";
+                break;
+            case 9:
+                $bean_account->medio_digital_c = "Revistas Online";
+                break;
+            case 10:
+                $bean_account->medio_digital_c = "TV";
+                break;
+            case 11:
+                $bean_account->medio_digital_c = "Radio";
+                break;
+            case 12:
+                $bean_account->medio_digital_c = "Prensa";
+                break;
+            case 13:
+                $bean_account->medio_digital_c = "Revistas";
+                break;
+            case 14:
+                $bean_account->medio_digital_c = "Espectaculares";
+                break;
+
+            default:
+                $bean_account->medio_digital_c = $bean_account->medio_detalle_origen_c;
+                break;
+        }
+        switch ($bean_account->punto_contacto_origen_c) {
+
+            case 1:
+                $bean_account->tct_punto_contacto_ddw_c = "Portal";
+
+                break;
+            case 2:
+                $bean_account->tct_punto_contacto_ddw_c = "Telefono";
+
+                break;
+            case 3:
+                $bean_account->tct_punto_contacto_ddw_c = "Chat";
+
+                break;
+            case 4:
+                $bean_account->tct_punto_contacto_ddw_c = "Publicacion";
+
+                break;
+            default:
+                $bean_account->tct_punto_contacto_ddw_c = $bean_account->punto_contacto_origen_c;
+                break;
+        }
+    }
 }

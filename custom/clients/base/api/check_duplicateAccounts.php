@@ -63,9 +63,9 @@ class check_duplicateAccounts extends SugarApi
 
                 $GLOBALS['log']->fatal("Requeridos " . $requeridos);
 
-                $requeridos= $this->validaRequeridos($bean);
+                $requeridos = $this->validaRequeridos($bean);
 
-                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos=="") {
+                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
                     /** Creamos la Cuenta */
                     // $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
 
@@ -101,15 +101,13 @@ SITE;
 
                 } else {
 
-                    if($requeridos!="")
-                    {
-                        $msj_reunion= "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
+                    if ($requeridos != "") {
+                        $msj_reunion = "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
                     }
 
                     //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
                     // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
-                    if($responsMeeting['status'] == "stop")
-                    {
+                    if ($responsMeeting['status'] == "stop") {
                         $msj_reunion .= <<<SITE
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
 SITE;
@@ -196,128 +194,13 @@ SITE;
                 break;
         }
 
-        $bean_account->origendelprospecto_c = $bean_Leads->origen_c;
-        if ($bean_Leads->origen_c == 1) {
-            $bean_account->origendelprospecto_c = "Marketing";
-
-        } elseif ($bean_Leads->origen_c == 2) {
-            $bean_account->origendelprospecto_c = "Inteligencia de Negocio";
-
-        }
-
-        //Switch para asignar los valores
-        switch ($bean_Leads->detalle_origen_c) {
-            case 1:
-                $bean_account->tct_detalle_origen_ddw_c = "Base de datos";
-                break;
-            case 2:
-                $bean_account->tct_detalle_origen_ddw_c = "Centro de Prospeccion";
-                break;
-            case 3:
-                $bean_account->tct_detalle_origen_ddw_c = "Digital";
-                break;
-            case 4:
-                $bean_account->tct_detalle_origen_ddw_c = "Campanas";
-                break;
-            case 5:
-                $bean_account->tct_detalle_origen_ddw_c = "Acciones Estrategicas";
-                break;
-            case 6:
-                $bean_account->tct_detalle_origen_ddw_c = "Afiliaciones";
-                break;
-            case 7:
-                $bean_account->tct_detalle_origen_ddw_c = "Llamdas Inbound";
-                break;
-            case 8:
-                $bean_account->tct_detalle_origen_ddw_c = "Parques Industriales";
-                break;
-            case 9:
-                $bean_account->tct_detalle_origen_ddw_c = "Offline";
-                break;
-            case 10:
-                $bean_account->tct_detalle_origen_ddw_c = "Cartera Promotores";
-                break;
-            case 11:
-                $bean_account->tct_detalle_origen_ddw_c = "Recomendacion";
-                break;
-            default:
-                $bean_account->tct_detalle_origen_ddw_c = $bean_Leads->detalle_origen_c;
-                break;
-        }
+        $bean_account->origen_cuenta_c = $bean_Leads->origen_c;
+        $bean_account->detalle_origen_c = $bean_Leads->detalle_origen_c;
 
         $bean_account->user_id3_c = $bean_Leads->user_id1_c; // Agente telefonico
         $bean_account->user_id4_c = $bean_Leads->user_id_c; // ¿Que Asesor?
-
-        switch ($bean_Leads->medio_digital_c) {
-            case 1:
-                $bean_account->medio_digital_c = "Facebook";
-                break;
-            case 2:
-                $bean_account->medio_digital_c = "Twitter";
-                break;
-            case 3:
-                $bean_account->medio_digital_c = "Instagram";
-                break;
-            case 4:
-                $bean_account->medio_digital_c = "Web";
-                break;
-            case 5:
-                $bean_account->medio_digital_c = "LinkedIn";
-                break;
-            case 6:
-                $bean_account->medio_digital_c = "Radio Online";
-                break;
-            case 7:
-                $bean_account->medio_digital_c = "Prensa Online";
-                break;
-            case 8:
-                $bean_account->medio_digital_c = "TV Online";
-                break;
-            case 9:
-                $bean_account->medio_digital_c = "Revistas Online";
-                break;
-            case 10:
-                $bean_account->medio_digital_c = "TV";
-                break;
-            case 11:
-                $bean_account->medio_digital_c = "Radio";
-                break;
-            case 12:
-                $bean_account->medio_digital_c = "Prensa";
-                break;
-            case 13:
-                $bean_account->medio_digital_c = "Revistas";
-                break;
-            case 14:
-                $bean_account->medio_digital_c = "Espectaculares";
-                break;
-
-            default:
-                $bean_account->medio_digital_c = $bean_Leads->medio_digital_c;
-                break;
-        }
-        switch ($bean_Leads->punto_contacto_c) {
-
-            case 1:
-                $bean_account->tct_punto_contacto_ddw_c = "Portal";
-
-                break;
-            case 2:
-                $bean_account->tct_punto_contacto_ddw_c = "Telefono";
-
-                break;
-            case 3:
-                $bean_account->tct_punto_contacto_ddw_c = "Chat";
-
-                break;
-            case 4:
-                $bean_account->tct_punto_contacto_ddw_c = "Publicacion";
-
-                break;
-            default:
-                $bean_account->tct_punto_contacto_ddw_c = $bean_Leads->punto_contacto_c;
-                break;
-        }
+        $bean_account->medio_detalle_origen_c = $bean_Leads->medio_digital_c;
+        $bean_account->punto_contacto_origen_c = $bean_Leads->punto_contacto_c;
         $bean_account->evento_c = $bean_Leads->evento_c;
         $bean_account->tct_origen_busqueda_txf_c = $bean_Leads->origen_busqueda_c;
         $bean_account->camara_c = $bean_Leads->camara_c;
@@ -490,8 +373,8 @@ SITE;
         $GLOBALS['log']->fatal("Si Labels " . print_r($label, true));
 
         if ($beanLEad->phone_mobile == '' && $beanLEad->phone_home == '' &&
-            $beanLEad->phone_work == '' && $beanLEad->subtipo_registro_c == '2')
-        {
+            $beanLEad->phone_work == '' && $beanLEad->subtipo_registro_c == '2'
+        ) {
             $campos = $campos . '<b>' . 'Al menos un Teléfono' . '</b><br>';
         }
         $GLOBALS['log']->fatal("Si Labels  en vista " . $campos);

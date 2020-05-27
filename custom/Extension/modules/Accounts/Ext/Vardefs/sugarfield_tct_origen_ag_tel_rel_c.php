@@ -1,5 +1,6 @@
 <?php
- // created: 2019-04-15 17:19:11
-$dictionary['Account']['fields']['tct_origen_ag_tel_rel_c']['labelValue'] = 'Agente Telefónico';
-$dictionary['Account']['fields']['tct_origen_ag_tel_rel_c']['dependency'] = 'or(equal($tct_detalle_origen_ddw_c,"Centro de Prospeccion"),equal($tct_detalle_origen_ddw_c,"Parques Industriales"),equal($tct_detalle_origen_ddw_c,"Afiliaciones"),equal($tct_detalle_origen_ddw_c,"Acciones Estrategicas"),equal($tct_detalle_origen_ddw_c,"Campanas"),equal($tct_detalle_origen_ddw_c,"Digital"),equal($tct_detalle_origen_ddw_c,"Offline"),equal($tct_detalle_origen_ddw_c,"Bases de datos"),equal($tct_detalle_origen_ddw_c,"Cartera Promotores"))';
+ // created: 2020-05-26 10:15:53
+$dictionary['Account']['fields']['tct_origen_ag_tel_rel_c']['labelValue']='Agente Telefónico';
+$dictionary['Account']['fields']['tct_origen_ag_tel_rel_c']['dependency']='or(equal($detalle_origen_c,"2"),equal($detalle_origen_c,"8"),equal($detalle_origen_c,"6"),equal($detalle_origen_c,"5"),equal($detalle_origen_c,"4"),equal($detalle_origen_c,"3"),equal($detalle_origen_c,"9"),equal($detalle_origen_c,"1"),equal($detalle_origen_c,"10"))';
 
+ ?>
