@@ -29,6 +29,7 @@ class CustomCurrentUserMobileApi extends CurrentUserMobileApi
         $userArray['current_user']['esexterno_c'] = $current_user->esexterno_c;
         $userArray['current_user']['iniciales_c'] = $current_user->iniciales_c;
         $userArray['current_user']['producto_c'] = $current_user->producto_c;
+        $userArray['current_user']['productos_c'] = $current_user->productos_c;
         $userArray['current_user']['puesto_c'] = $current_user->puesto_c;
         $userArray['current_user']['puestousuario_c'] = $current_user->puestousuario_c;
         $userArray['current_user']['region_c'] = $current_user->region_c;

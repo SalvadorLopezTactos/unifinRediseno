@@ -4,7 +4,7 @@
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
   'Aval' => 'Aval',
-  'Conyuge' => 'Conyuge',
+  'Conyuge' => 'Cónyuge',
   'Contacto' => 'Contacto',
   'Fiador' => 'Fiador',
   'Representante' => 'Representante',
