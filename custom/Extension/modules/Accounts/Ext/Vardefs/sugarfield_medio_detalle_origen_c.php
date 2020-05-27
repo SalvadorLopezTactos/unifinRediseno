@@ -1,6 +1,7 @@
 <?php
- // created: 2020-05-22 14:02:17
+ // created: 2020-05-27 14:30:22
 $dictionary['Account']['fields']['medio_detalle_origen_c']['labelValue']='Medio';
+$dictionary['Account']['fields']['medio_detalle_origen_c']['dependency']='';
 $dictionary['Account']['fields']['medio_detalle_origen_c']['visibility_grid']=array (
   'trigger' => 'detalle_origen_c',
   'values' => 
@@ -14,15 +15,15 @@ $dictionary['Account']['fields']['medio_detalle_origen_c']['visibility_grid']=ar
     3 => 
     array (
       0 => '',
-      1 => 'Facebook',
-      2 => 'Twitter',
-      3 => 'Instagram',
-      4 => 'Web',
-      5 => 'LinkedIn',
-      6 => 'Radio Online',
-      7 => 'Prensa Online',
-      8 => 'TV Online',
-      9 => 'Revistas Online',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '6',
+      7 => '7',
+      8 => '8',
+      9 => '9',
     ),
     4 => 
     array (
@@ -42,11 +43,11 @@ $dictionary['Account']['fields']['medio_detalle_origen_c']['visibility_grid']=ar
     9 => 
     array (
       0 => '',
-      1 => 'TV',
-      2 => 'Radio',
-      3 => 'Prensa',
-      4 => 'Revistas',
-      5 => 'Espectaculares',
+      1 => '10',
+      2 => '11',
+      3 => '12',
+      4 => '13',
+      5 => '14',
     ),
     10 => 
     array (
