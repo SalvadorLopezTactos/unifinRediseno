@@ -2533,7 +2533,6 @@
                     var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
-                            //this._render();
                             app.alert.dismiss('conviertePaL');
                             Oproductos.productos = data;
                             app.alert.show('alert_change_success', {
@@ -2545,16 +2544,18 @@
                             v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
                             v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
                             v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                            cont_uni_p.render();
                             Oproductos.render();
                             v360.render();
                             //Deja activa la pestaña de la vista360
                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
                             $("#recordTab>li.tab").removeClass('active');
                             $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                            //window.location.reload();
                         })
                     });
                 }
-            },2000);
+            },5000);
         }
     },
 
@@ -5089,32 +5090,64 @@
                     }
                 }
             }
-            if (api_params != undefined) {
-                self = this;
-                var idC = this.model.get('id');
-                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
-                app.api.call('update', url, api_params, {
-                    success: _.bind(function (data) {
-                        //this._render();
-                        app.alert.dismiss('convierte_Cliente_uniclick');
-                        Oproductos.productos = data;
-                        if (self.model.get('tipo_registro_cuenta_c') != "3") {
-                            self.model.set("tipo_registro_cuenta_c", "3");
-                            self.model.set("subtipo_registro_cuenta_c", "18");
-                            self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
-                            self.model.save();
-                            v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
-                            v360.render();
-                        }
-                        app.alert.show('errorAlert', {
-                            level: 'success',
-                            messages: "Se ha realizado la conversión correctamente.",
-                            autoClose: true
-                        });
-                        Oproductos.render();
-                    }),
-                })
+            // Actualiza Cuenta
+            if (this.model.get('tipo_registro_cuenta_c') != "3") {
+                this.model.set("tipo_registro_cuenta_c", "3");
+                this.model.set("subtipo_registro_cuenta_c", "18");
+                this.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+                this.model.save();
             }
+            // Actualiza Productos
+            _.each(Productos, function (value, key) {
+                var idprod = '';
+                if(app.user.id == this.model.get('user_id_c') && Productos[key].tipo_producto == 1) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id1_c') && Productos[key].tipo_producto == 4) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id2_c') && Productos[key].tipo_producto == 3) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id6_c') && Productos[key].tipo_producto == 6) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
+                if(idprod) {
+                  var params = {};
+                  params["tipo_cuenta"] = "3";
+                  params["subtipo_cuenta"] = "18";
+                  params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
+                  var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                  app.api.call('update', uni, params, {
+                      success: _.bind(function (data) {
+                      })
+                  });
+                }
+            },this);
+            // Actualiza Resumen
+            var idC = this.model.get('id');
+            setTimeout(function() {            
+              if (api_params != undefined) {
+                  var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                  app.api.call('update', url, api_params, {
+                      success: _.bind(function (data) {
+                          Oproductos.productos = data;
+                          //Actualiza modelo vista v360
+                          v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                          v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                          v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                          v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                          v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
+                          app.alert.dismiss('convierte_Cliente_uniclick');
+                          app.alert.show('errorAlert', {
+                              level: 'success',
+                              messages: "Se ha realizado la conversión correctamente.",
+                          });
+                          cont_uni_p.render();
+                          Oproductos.render();
+                          v360.render();
+                          //Deja activa la pestaña de la vista360
+                          $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                          $("#recordTab>li.tab").removeClass('active');
+                          $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                          //window.location.reload();
+                      }),
+                  })
+              }
+            },5000);
         }
     },
 
