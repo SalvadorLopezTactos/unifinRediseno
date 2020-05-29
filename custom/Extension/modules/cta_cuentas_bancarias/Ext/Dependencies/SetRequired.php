@@ -17,7 +17,7 @@ $dependencies['cta_cuentas_bancarias']['Cuenta_required'] = array(
             'params' => array(
                 'target' => 'cuenta',
                 'label' => 'cuenta_label',
-                'value' => 'or(equal($cuenta,""),equal($clabe,""))',
+                'value' => 'and(equal($cuenta,""),equal($clabe,""))',
             ),
         ),
     ),
@@ -34,7 +34,7 @@ $dependencies['cta_cuentas_bancarias']['Clabe_required'] = array(
             'params' => array(
                 'target' => 'clabe',
                 'label' => 'clabe_label',
-                'value' => 'or(equal($cuenta,""),equal($clabe,""))',
+                'value' => 'and(equal($cuenta,""),equal($clabe,""))',
             ),
         ),
     ),
