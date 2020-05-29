@@ -9,7 +9,7 @@
 $dependencies['cta_cuentas_bancarias']['Cuenta_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('cuenta','banco'),
+    'triggerFields' => array('cuenta','clabe'),
     'onload' => true,
     'actions' => array(
         array(
