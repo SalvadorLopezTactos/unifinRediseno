@@ -128,6 +128,8 @@
     _render: function (fields, errors, callback) {
         this._super("_render");
 
+        //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="tct_no_contactar_chk_c"]').hide();
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta nombre de campo accounts_telefonosV2
