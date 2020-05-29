@@ -52,28 +52,19 @@ class check_duplicateAccounts extends SugarApi
 
         $result = $this->existLeadAccount($bean);
         $count = count($result);
-        $GLOBALS['log']->fatal("existencia" . print_r($result, true));
-        $GLOBALS['log']->fatal("Count consulta: " . $count);
 
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                $GLOBALS['log']->fatal("nombre del Leads " . print_r($responsMeeting, true));
-
-                $GLOBALS['log']->fatal("Requeridos " . $requeridos);
 
                 $requeridos = $this->validaRequeridos($bean);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
+
                     /** Creamos la Cuenta */
-                    // $GLOBALS['log']->fatal("Resultado Reunion  Exito -- " . print_r($responsMeeting['data'], true));
 
                     $bean_account = $this->createAccount($bean, $responsMeeting, false);
-
-                    // $GLOBALS['log']->fatal("Cuenta Creada--- " . $bean_account->id);
-
-                    //$this->getContactAssoc($bean, $bean_account);
 
                     if (!empty($bean_account->id)) {
                         $resultadoRelaciones = $this->getContactAssoc($bean, $bean_account);
@@ -105,9 +96,7 @@ SITE;
                         $msj_reunion = "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
                     }
 
-                    //  $GLOBALS['log']->fatal("Resultado Reunion " . print_r($responsMeeting, true));
-                    // throw new SugarApiExceptionInvalidParameter("El proceso no puede continuar Falta al menos una Reunion Planificada");
-                    if ($responsMeeting['status'] == "stop") {
+                    if ($responsMeeting['status'] == "stop" || $responsMeeting['vacio'] ) {
                         $msj_reunion .= <<<SITE
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
 SITE;
@@ -122,7 +111,6 @@ SITE;
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
                 $id_account = $result[0]['id'];
                 $responsMeeting = $this->getMeetingsUser($bean);
-                $GLOBALS['log']->fatal("usuarios en Lead  " . print_r($responsMeeting, true));
 
                 if ($responsMeeting['status'] == 'continue') {
                     $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
@@ -266,7 +254,9 @@ SITE;
         if ($beanL->load_relationship('meetings')) {
             $relatedBeans = $beanL->meetings->getBeans();
 
+
             if (!empty($relatedBeans)) {
+
                 foreach ($relatedBeans as $meeting) {
 
                     if ($meeting->status != "Not Held") {
@@ -285,6 +275,7 @@ SITE;
 
                         $productos = $sqlResult[0]['tipodeproducto_c'];
                         $puesto = $sqlResult[0]['puestousuario_c'];
+
 
                         // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
                         if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
@@ -307,6 +298,8 @@ SITE;
 
                             $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
                         }
+
+                        $procede['vacio']=empty($procede['data'])?true:false;
 
                     }
                 }
@@ -359,7 +352,6 @@ SITE;
                 array_push($flag_req, $req);
             }
         }
-        $GLOBALS['log']->fatal("Si exist " . print_r($flag_req, true));
         $label = [];
         foreach ($flag_req as $key => $valor) {
 
@@ -370,7 +362,6 @@ SITE;
             array_push($label, $str_label);
         }
 
-        $GLOBALS['log']->fatal("Si Labels " . print_r($label, true));
 
         if ($beanLEad->phone_mobile == '' && $beanLEad->phone_home == '' &&
             $beanLEad->phone_work == '' && $beanLEad->subtipo_registro_c == '2'
