@@ -1256,10 +1256,11 @@
         var myField3 = this.getField("clienteuniclick");
         if (myField) {
             myField.listenTo(myField, "render", function () {
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1270,9 +1271,10 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 myField.hide();
-                if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
-                    (fleetprod == "Prospecto" && fleetsub == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
+                if ((leasingprod == "2" && leasingsub == "2" && userprod.includes('1') && asesorL == logueado) || (factprod == "2" && factsub == "2" && userprod.includes("4") && asesorF == logueado) || (caprod == "2" && casub == "2" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "2" && fleetsub == "2" && userprod.includes('6') && asesorFL == logueado)) {
                     myField.show();
                 } else {
                     myField.hide();
@@ -1282,10 +1284,11 @@
         if (myField1) {
             myField1.listenTo(myField1, "render", function () {
                 myField1.hide();
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1296,9 +1299,10 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-                if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) ||
-                    (fleetprod == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
+                if ((leasingprod == "1" && userprod.includes('1') && asesorL == logueado) || (factprod == "1" && userprod.includes("4") && asesorF == logueado) || (caprod == "1" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "1" && userprod.includes('6') && asesorFL == logueado)) {
                     myField1.show();
                 } else {
                     myField1.hide();
@@ -1307,10 +1311,11 @@
         }
         if (myField2) {
             myField2.listenTo(myField2, "render", function () {
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1321,9 +1326,10 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 myField2.hide();
-                if (((leasingprod == "Proveedor" || leasingprod == "Persona") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Proveedor" || factprod == "Persona") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Proveedor" || caprod == "Persona") && userprod.includes("3") && asesorCA == logueado) ||
-                    ((fleetprod == "Proveedor" || fleetprod == "Persona") && userprod.includes('6') && asesorFL == logueado)) {
+                if (((leasingprod == "5" || leasingprod == "4") && userprod.includes('1') && asesorL == logueado) || ((factprod == "5" || factprod == "4") && userprod.includes("4") && asesorF == logueado) || ((caprod == "5" || caprod == "4") && userprod.includes("3") && asesorCA == logueado) ||
+                    ((fleetprod == "5" || fleetprod == "4") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
                     myField2.show();
                 } else {
                     myField2.hide();
@@ -1335,10 +1341,10 @@
                 var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
                 var userprod = App.user.attributes.productos_c;
                 var logueado = App.user.id;
-                var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
+                var uniclickval = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var asesorUC = this.model.get('user_id7_c');
                 myField3.hide();
-                if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+                if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
                     myField3.show();
                 } else {
                     myField3.hide();
@@ -1348,10 +1354,11 @@
     },
 
     hideButton_Conversion_change: function () {
-        var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-        var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-        var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-        var tipofleet = Oproductos.productos.tct_tipo_fl_txf_c;
+        var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+        var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+        var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+        var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+        var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
         var userprod = App.user.attributes.productos_c;
         var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
         var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
@@ -1377,8 +1384,8 @@
          * tipo_registro_cuenta_c = Prospecto
          * && subtipo_registro_cuenta_c = Contactado
          */
-        if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
-            (tipofleet == "Prospecto" && subtipofleet == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
+        if ((leasingprod == "2" && leasingsub == "2" && userprod.includes('1') && asesorL == logueado) || (factprod == "2" && factsub == "2" && userprod.includes("4") && asesorF == logueado) || (caprod == "2" && casub == "2" && userprod.includes("3") && asesorCA == logueado) ||
+            (fleetprod == "2" && subtipofleet == "2" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').hide();
@@ -1389,7 +1396,7 @@
          * Prospecto contactado:
          * tipo_registro_cuenta_c = Lead
          */
-        if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
+        if ((leasingprod == "1" && userprod.includes('1') && asesorL == logueado) || (factprod == "1" && userprod.includes("4") && asesorF == logueado) || (caprod == "1" && userprod.includes("3") && asesorCA == logueado) || (fleetprod == "1" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
             $('[name="conviertelead"]').hide();
@@ -1400,7 +1407,7 @@
          * tipo_registro_cuenta_c = Persona
          * OR tipo_registro_cuenta_c = Proveedor
          */
-        if (((leasingprod == "Persona" || leasingprod == "Proveedor") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Persona" || factprod == "Proveedor") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Persona" || caprod == "Proveedor") && userprod.includes("3") && asesorCA == logueado) || ((tipofleet == "Persona" || tipofleet == "Proveedor") && userprod.includes('6') && asesorFL == logueado)) {
+        if (((leasingprod == "4" || leasingprod == "5") && userprod.includes('1') && asesorL == logueado) || ((factprod == "4" || factprod == "5") && userprod.includes("4") && asesorF == logueado) || ((caprod == "4" || caprod == "5") && userprod.includes("3") && asesorCA == logueado) || ((fleetprod == "4" || fleetprod == "5") && userprod.includes('6') && asesorFL == logueado)  || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
@@ -1411,7 +1418,7 @@
          * Convertir Cliente Uniclick
          * tipo_registro_cuenta_c = Lead
          */
-        if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+        if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
             $('[name="regresalead"]').hide();
             $('[name="clienteuniclick"]').show();
             $('[name="conviertelead"]').hide();
@@ -2465,45 +2472,65 @@
             var productousuario = App.user.attributes.productos_c;
             var api_params = {};
             var tipo_producto = 0;
-            if ((Oproductos.productos.tct_tipo_l_txf_c == "Persona" || Oproductos.productos.tct_tipo_l_txf_c == "Proveedor") && productousuario.includes('1')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_l_c == "4" || Oproductos.productos.tct_tipo_cuenta_l_c == "5") && productousuario.includes('1')) {
                 if (App.user.id == this.model.get('user_id_c')) {
                     tipo_producto = 1;
                     api_params["tct_tipo_l_txf_c"] = "Lead";
                     api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                     api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_l_c = '1';
+                    Oproductos.productos.tct_subtipo_l_txf_c  = '5';
+                    v360.ResumenCliente.leasing.tipo_cuenta = '1';
+                    v360.ResumenCliente.leasing.subtipo_cuenta = '5';   
                 }
 
             }
-            if ((Oproductos.productos.tct_tipo_ca_txf_c == "Persona" || Oproductos.productos.tct_tipo_ca_txf_c == "Proveedor") && productousuario.includes('3')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_ca_c == "4" || Oproductos.productos.tct_tipo_cuenta_ca_c == "5") && productousuario.includes('3')) {
                 if (App.user.id == this.model.get('user_id2_c')) {
                     tipo_producto = 3;                
                     api_params["tct_tipo_ca_txf_c"] = "Lead";
                     api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_ca_c = '1';
+                    Oproductos.productos.tct_subtipo_ca_txf_c  = '5';                
+                    v360.ResumenCliente.credito_auto.tipo_cuenta = '1';
+                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '5';
                 }
             }
-            if ((Oproductos.productos.tct_tipo_f_txf_c == "Persona" || Oproductos.productos.tct_tipo_f_txf_c == "Proveedor") && productousuario.includes('4')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
                 if (App.user.id == this.model.get('user_id1_c')) {
                     tipo_producto = 4;
                     api_params["tct_tipo_f_txf_c"] = "Lead";
                     api_params["tct_subtipo_f_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_f_c = '1';
+                    Oproductos.productos.tct_subtipo_f_txf_c  = '5';  
+                    v360.ResumenCliente.factoring.tipo_cuenta = '1';
+                    v360.ResumenCliente.factoring.subtipo_cuenta = '5';                  
                 }
             }
-            if ((Oproductos.productos.tct_tipo_fl_txf_c == "Persona" || Oproductos.productos.tct_tipo_fl_txf_c == "Proveedor") && productousuario.includes('6')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
                 if (App.user.id == this.model.get('user_id6_c')) {
                     tipo_producto = 6;
                     api_params["tct_tipo_fl_txf_c"] = "Lead";
                     api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_fl_c = '1';
+                    Oproductos.productos.tct_subtipo_fl_txf_c  = '5';
+                    v360.ResumenCliente.fleet.tipo_cuenta = '1';
+                    v360.ResumenCliente.fleet.subtipo_cuenta = '5';
                 }
             }
-            if ((Oproductos.productos.tct_tipo_uc_txf_c == "Persona" || Oproductos.productos.tct_tipo_uc_txf_c == "Proveedor") && productousuario.includes('8')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
                 if (App.user.id == this.model.get('user_id7_c')) {
                     tipo_producto = 8;
                     api_params["tct_tipo_uc_txf_c"] = "Lead";
                     api_params["tct_subtipo_uc_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_uc_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_uc_c = '1';
+                    Oproductos.productos.tct_subtipo_uc_txf_c  = '5';
+                    v360.ResumenCliente.uniclick.tipo_cuenta = '1';
+                    v360.ResumenCliente.uniclick.subtipo_cuenta = '5';
                 }
             }
             // Actualiza Productos
@@ -2533,28 +2560,26 @@
                     var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
-                            //this._render();
                             app.alert.dismiss('conviertePaL');
-                            Oproductos.productos = data;
+                            //Oproductos.productos = data;
                             app.alert.show('alert_change_success', {
                                 level: 'success',
                                 messages: 'Cambio realizado',
                             });
-                            //Actualiza modelo vista v360
-                            v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                            v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                            v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                            v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                            
+
+                            cont_uni_p.render();
                             Oproductos.render();
                             v360.render();
                             //Deja activa la pestaña de la vista360
                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
                             $("#recordTab>li.tab").removeClass('active');
                             $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                            //window.location.reload();
                         })
                     });
                 }
-            },2000);
+            },5000);
         }
     },
 
@@ -5077,43 +5102,53 @@
             });
             return;
         } else {
-            if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente") {
+            if (Oproductos.productos.tipo_registro_uc != '3') {
                 var productousuario = App.user.attributes.productos_c;
-                var api_params = {};
 
-                if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente" && productousuario.includes('8')) {
-                    if (App.user.id == this.model.get('user_id7_c')) {
-                        api_params["tct_tipo_uc_txf_c"] = "Cliente";
-                        api_params["tct_subtipo_uc_txf_c"] = "Con Linea Vigente";
-                        api_params["tct_tipo_cuenta_uc_c"] = "CLIENTE CON LÍNEA VIGENTE";
-                    }
+                // Actualiza Cuenta
+                if (this.model.get('tipo_registro_cuenta_c') != "3") {
+                    this.model.set("tipo_registro_cuenta_c", "3");
+                    this.model.set("subtipo_registro_cuenta_c", "18");
+                    this.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+                    Oproductos.productos.tct_tipo_cuenta_uc_c = '3';
+                    Oproductos.productos.tct_subtipo_uc_txf_c = '18';
+                    this.model.save();
+
                 }
-            }
-            if (api_params != undefined) {
-                self = this;
-                var idC = this.model.get('id');
-                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
-                app.api.call('update', url, api_params, {
-                    success: _.bind(function (data) {
-                        //this._render();
-                        app.alert.dismiss('convierte_Cliente_uniclick');
-                        Oproductos.productos = data;
-                        if (self.model.get('tipo_registro_cuenta_c') != "3") {
-                            self.model.set("tipo_registro_cuenta_c", "3");
-                            self.model.set("subtipo_registro_cuenta_c", "18");
-                            self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
-                            self.model.save();
-                            v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
-                            v360.render();
-                        }
-                        app.alert.show('errorAlert', {
-                            level: 'success',
-                            messages: "Se ha realizado la conversión correctamente.",
-                            autoClose: true
-                        });
-                        Oproductos.render();
-                    }),
-                })
+                // Actualiza Productos
+                _.each(Productos, function (value, key) {
+                    var idprod = '';
+                    if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8){
+                      idprod = Productos[key].id;  
+                    } 
+                    if(idprod) {
+                      var params = {};
+                      params["tipo_cuenta"] = "3";
+                      params["subtipo_cuenta"] = "18";
+                      params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
+                      var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                      app.api.call('update', uni, params, {
+                          success: _.bind(function (data) {
+                              v360.ResumenCliente.uniclick.tipo_cuenta = '3';
+                              v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+                              v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+                              app.alert.dismiss('convierte_Cliente_uniclick');
+                              app.alert.show('errorAlert', {
+                                  level: 'success',
+                                  messages: "Se ha realizado la conversión correctamente.",
+                              });
+                              
+                              v360.render();
+                              Oproductos.render();
+                              //Deja activa la pestaña de la vista360
+                              $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                              $("#recordTab>li.tab").removeClass('active');
+                              $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                          })
+                      });
+                    }
+                },this);
+
             }
         }
     },
@@ -5167,58 +5202,43 @@
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['leasing'] = Productos[key];
-                            Oproductos.productos.tipo_registro_l = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_l = Productos[key]['subtipo_cuenta'];
-                            Oproductos.productos.tct_tipo_l_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
-                            Oproductos.productos.tct_subtipo_l_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
-                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "3": //Credito-auto
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['credito_auto'] = Productos[key];
-                            Oproductos.productos.tipo_registro_ca = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_ca = Productos[key]['subtipo_cuenta'];
-                            Oproductos.productos.tct_tipo_ca_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
-                            Oproductos.productos.tct_subtipo_ca_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
-                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "4": //Factoraje
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['factoring'] = Productos[key];
-                            Oproductos.productos.tipo_registro_f = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_f = Productos[key]['subtipo_cuenta'];
-                            Oproductos.productos.tct_tipo_f_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
-                            Oproductos.productos.tct_subtipo_f_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
-                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "6": //Fleet
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['fleet'] = Productos[key];
-                            Oproductos.productos.tipo_registro_fl = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_fl = Productos[key]['subtipo_cuenta'];
-                            Oproductos.productos.tct_tipo_fl_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
-                            Oproductos.productos.tct_subtipo_fl_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
-                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "8": //Uniclick
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['uniclick'] = Productos[key];
-                            Oproductos.productos.tipo_registro_uc = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_uc = Productos[key]['subtipo_cuenta'];
-                            Oproductos.productos.tct_tipo_uc_txf_c = app.lang.getAppListStrings('tipo_registro_cuenta_list')[Productos[key]['tipo_cuenta']];
-                            Oproductos.productos.tct_subtipo_uc_txf_c = app.lang.getAppListStrings('subtipo_registro_cuenta_list')[Productos[key]['subtipo_cuenta']];
-                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         case "9": //Unilease
                             var dias = fecha1.diff(fecha2, 'days');
                             Productos[key]['dias'] = dias;
                             ResumenProductos['unilease'] = Productos[key];
-                            Oproductos.productos.tipo_registro_ul = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.subtipo_cuenta_ul = Productos[key]['subtipo_cuenta'];
+                            Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;

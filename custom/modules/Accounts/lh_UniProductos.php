@@ -17,7 +17,7 @@ class clase_UniProducto
                     // $GLOBALS['log']->fatal("ID_PRODUCTO". print_r($key,true));
                     if ($key['id'] != '') {
                         // $GLOBALS['log']->fatal("Inserta Producto");
-                        $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id']);
+                        $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'],array('disable_row_level_security' => true));
                         $beanUP->no_viable = $key['no_viable'];
                         $beanUP->no_viable_razon = $key['no_viable_razon'];
                         $beanUP->no_viable_razon_fp = $key['no_viable_razon_fp'];
@@ -65,7 +65,7 @@ class clase_UniProducto
                     // $GLOBALS['log']->fatal("ID_PRODUCTO", $key['id']);
                     if ($key['id'] != '') {
                         // $GLOBALS['log']->fatal("Inserta Producto");
-                        $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id']);
+                        $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
                         $beanUP->no_viable = $key['no_viable'];
                         $beanUP->no_viable_razon = $key['no_viable_razon'];
                         $beanUP->no_viable_razon_fp = $key['no_viable_razon_fp'];
