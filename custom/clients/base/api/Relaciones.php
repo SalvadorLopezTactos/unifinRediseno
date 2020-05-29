@@ -1,0 +1,70 @@
+<?php
+
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+require_once("custom/Levementum/UnifinAPI.php");
+
+class Relaciones extends SugarApi
+{
+    public function registerApiRest()
+    {
+        return array(
+            'GETProductosAPI' => array(
+                'reqType' => 'GET',
+                'noLoginRequired' => false,
+                'path' => array('Relaciones','?','?','?'),
+                'pathVars' => array('module','id','relacion','producto'),
+                'method' => 'getRelProductos',
+                'shortHelp' => 'Obtiene los productos de relaciones por producto en cuentas',
+            ),
+        );
+    }
+    public function getRelProductos($api, $args)
+    {
+
+        try {
+
+            $id = $args['id'];
+            $relacion = $args['relacion'];
+            $relarray = preg_split("/\,/",$relacion);
+            $producto = $args['producto'];
+            $records_in = [];
+            $queryProductos = "";
+
+            for ($i=0; $i<count($relarray); $i++){
+
+                if ($i==0){
+                    $queryProductos .= "r.relaciones_activas LIKE '%{$relarray[$i]}%'";
+                } else {
+                    $queryProductos .= "OR r.relaciones_activas LIKE '%{$relarray[$i]}%'";
+                }
+            }
+            // $GLOBALS['log']->fatal("queryProductos: ".$queryProductos);
+            $query = "SELECT
+            ra.rel_relaciones_accounts_1accounts_ida idCuenta,
+            a.name nombreCuenta,
+            rc.id_c idRelacion,
+            rc.account_id1_c idCuentaRelacionada,
+            r.name nombreCuentaRelacionada,
+            r.relaciones_activas relacionesActivas,
+            rc.relaciones_producto_c relacionesProducto
+            FROM rel_relaciones_cstm rc
+            INNER JOIN rel_relaciones r on r.id=rc.id_c
+            INNER JOIN rel_relaciones_accounts_1_c ra on ra.rel_relaciones_accounts_1rel_relaciones_idb = rc.id_c
+            INNER JOIN accounts a on a.id = ra.rel_relaciones_accounts_1accounts_ida
+            WHERE ({$queryProductos})
+            AND ra.rel_relaciones_accounts_1accounts_ida='{$id}'
+            AND rc.relaciones_producto_c LIKE '%{$producto}%'";
+
+            $result = $GLOBALS['db']->query($query);
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                $records_in[] = $row;
+            }
+            return $records_in;
+
+        }catch (Exception $e){
+
+            $GLOBALS['log']->fatal("Error: ".$e->getMessage());
+        }
+    }
+}
