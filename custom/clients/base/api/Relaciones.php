@@ -11,8 +11,8 @@ class Relaciones extends SugarApi
             'GETProductosAPI' => array(
                 'reqType' => 'GET',
                 'noLoginRequired' => false,
-                'path' => array('Relaciones','?','?','?'),
-                'pathVars' => array('module','id','relacion','producto'),
+                'path' => array('Relaciones', '?', '?', '?'),
+                'pathVars' => array('module', 'id', 'relacion', 'producto'),
                 'method' => 'getRelProductos',
                 'shortHelp' => 'Obtiene los productos de relaciones por producto en cuentas',
             ),
@@ -25,14 +25,15 @@ class Relaciones extends SugarApi
 
             $id = $args['id'];
             $relacion = $args['relacion'];
-            $relarray = preg_split("/\,/",$relacion);
+            $relarray = preg_split("/\,/", $relacion);
             $producto = $args['producto'];
             $records_in = [];
             $queryProductos = "";
+            $mensajeData = false;
+            
+            for ($i = 0; $i < count($relarray); $i++) {
 
-            for ($i=0; $i<count($relarray); $i++){
-
-                if ($i==0){
+                if ($i == 0) {
                     $queryProductos .= "r.relaciones_activas LIKE '%{$relarray[$i]}%'";
                 } else {
                     $queryProductos .= "OR r.relaciones_activas LIKE '%{$relarray[$i]}%'";
@@ -58,13 +59,27 @@ class Relaciones extends SugarApi
             $result = $GLOBALS['db']->query($query);
 
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
                 $records_in[] = $row;
+                $mensajeData = true;
             }
-            return $records_in;
 
-        }catch (Exception $e){
+            if ($mensajeData) {
+                return $records_in;
 
-            $GLOBALS['log']->fatal("Error: ".$e->getMessage());
+            } else {
+                
+                $mensaje = '{"error":"no_records","error_message":"No se encontraron datos, validar Id Cuenta, Relación Activa o Producto que sean correctos"}';
+                $myJSON = json_decode($mensaje); 
+                $mensajeData = $myJSON;
+                // $GLOBALS['log']->fatal("Error SRP: No se encontraron datos, validar Id Cuenta, Relacion Activa o Producto que sean correctos");
+            }
+
+            return $mensajeData;
+
+        } catch (Exception $e) {
+
+            $GLOBALS['log']->fatal("Error: " . $e->getMessage());
         }
     }
 }
