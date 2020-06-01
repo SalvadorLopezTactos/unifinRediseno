@@ -428,7 +428,7 @@
         $dependencies['Accounts']['referenciador_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c','referenciador_c'),
+            'triggerFields' => array('origen_cuenta_c','referenciador_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -436,7 +436,7 @@
                     'params' => array(
                         'target' => 'referenciador_c',
                         'label' => 'referenciador_c_label',
-                        'value' => 'equal($origendelprospecto_c,"Referenciador")', //Formula
+                        'value' => 'equal($origen_cuenta_c,"6")', //Formula
                     ),
                 ),
             ),
@@ -445,7 +445,7 @@
         $dependencies['Accounts']['referido_cliente_prov_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c','referido_cliente_prov_c'),
+            'triggerFields' => array('origen_cuenta_c','referido_cliente_prov_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -453,7 +453,7 @@
                     'params' => array(
                         'target' => 'referido_cliente_prov_c',
                         'label' => 'referido_cliente_prov_c_label',
-                        'value' => 'or(equal($origendelprospecto_c,"Referido Cliente"), equal($origendelprospecto_c,"Referido Proveedor"),equal($origendelprospecto_c,"Referenciado Vendor"))',
+                        'value' => 'or(equal($origen_cuenta_c,"4"), equal($origen_cuenta_c,"5"),equal($origen_cuenta_c,"8"))',
                     ),
                 ),
             ),
