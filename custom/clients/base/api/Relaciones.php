@@ -24,13 +24,13 @@ class Relaciones extends SugarApi
         try {
 
             $id = $args['id'];
-            $relacion = $args['relacion'];
+            $relacion = empty($args['relacion']) ? '0' : $args['relacion'];
             $relarray = preg_split("/\,/", $relacion);
-            $producto = $args['producto'];
+            $producto = empty($args['producto']) ? '0' : $args['producto'];
             $records_in = [];
             $queryProductos = "";
             $mensajeData = false;
-            
+
             for ($i = 0; $i < count($relarray); $i++) {
 
                 if ($i == 0) {
@@ -55,26 +55,22 @@ class Relaciones extends SugarApi
             WHERE ({$queryProductos})
             AND ra.rel_relaciones_accounts_1accounts_ida='{$id}'
             AND rc.relaciones_producto_c LIKE '%{$producto}%'";
-
+            // $GLOBALS['log']->fatal("query ".$query);
             $result = $GLOBALS['db']->query($query);
 
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
                 $records_in[] = $row;
                 $mensajeData = true;
             }
 
             if ($mensajeData) {
                 return $records_in;
-
             } else {
-                
-                $mensaje = '{"error":"no_records","error_message":"No se encontraron datos, validar Id Cuenta, Relación Activa o Producto que sean correctos"}';
-                $myJSON = json_decode($mensaje); 
-                $mensajeData = $myJSON;
-                // $GLOBALS['log']->fatal("Error SRP: No se encontraron datos, validar Id Cuenta, Relacion Activa o Producto que sean correctos");
-            }
 
+                $mensaje = '{"error":"no_records","error_message":"No se encontraron datos, validar Id Cuenta, Relación Activa o Producto que sean correctos"}';
+                $myJSON = json_decode($mensaje);
+                $mensajeData = $myJSON;
+            }
             return $mensajeData;
 
         } catch (Exception $e) {
