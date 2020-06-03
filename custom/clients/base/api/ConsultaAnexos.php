@@ -118,6 +118,7 @@ class ConsultaAnexos extends SugarApi
                             "columna6" => $value['ProximaRenta'],
                             "columna7" => $value['VigenciaSeguro'],
                             "columna8" => $value['Monto'],
+                            "columna9" => $value['MontoRenta'],
                         );
                     }
                     break;
