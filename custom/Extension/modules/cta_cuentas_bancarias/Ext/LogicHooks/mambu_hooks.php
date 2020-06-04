@@ -13,3 +13,11 @@ $hook_array['after_save'][] = Array(
     'CBMambu_hook', // name of the class
     'Envia_mambu' // name of the function.
 );
+
+$hook_array['before_save'][] = Array(
+    1,
+    'Habilitar funcionalidar para duplicados en Cuentas_Bancarias',//Just a quick comment about the logic of it
+    'custom/modules/cta_cuentas_bancarias/CBduplicated.php', //path to the logic hook
+    'CBduplicados', // name of the class
+    'duplicadosCB' // name of the function.
+);
