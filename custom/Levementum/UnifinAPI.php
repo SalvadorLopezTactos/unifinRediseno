@@ -2132,4 +2132,81 @@ SQL;
         return $response;
 
     }
+
+    public function getMambu($host,$auth){
+
+        $url = $host;
+        $ch = curl_init();
+        $GLOBALS['log']->fatal('INICIA Funcion getMambu');
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 4000);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Accept: application/vnd.mambu.v1+json',
+                'Authorization: Basic '.$auth)
+        );
+        $result = curl_exec($ch);
+        $curl_info = curl_getinfo($ch);
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        $response = json_decode($result, true);
+        $GLOBALS['log']->fatal('END Funcion getMambu');
+        return $response;
+    }
+
+    public function updateMambuCB($host,$fields,$auth){
+        $url = $host;
+            $fields_string = json_encode($fields);
+            $GLOBALS['log']->fatal('Entra Funcion updateMambuCB');
+            $GLOBALS['log']->fatal($url);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Accept: application/vnd.mambu.v1+json',
+                    'Authorization: Basic '.$auth)
+            );
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            $response = json_decode($result, true);
+            $GLOBALS['log']->fatal('END Funcion updateMambuCB');
+            return $response;
+    }
+
+    public function postCBMambu($host, $fields,$auth){
+
+            $url = $host;
+            $fields_string = json_encode($fields);
+            $GLOBALS['log']->fatal('Entra Funcion postCBMambu');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Accept: application/vnd.mambu.v2+json',
+                    'Authorization: Basic '.$auth)
+            );
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            $response = json_decode($result, true);
+            $GLOBALS['log']->fatal('END Funcion postCBMambu');
+            return $response;
+
+        }
+
 }

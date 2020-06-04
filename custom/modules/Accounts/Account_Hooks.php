@@ -1382,16 +1382,16 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
-    public function set_account_mambu($bean = null, $event = null, $args = null)
-    {
-        global $sugar_config;
+    public function set_account_mambu($bean=null, $event= null, $args= null){
+        global $sugar_config,$app_list_strings;
+        $bank = $app_list_strings['banco_list']; 
         //Cliente con Línea Vigente: 3,18
-        if ($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '18' && $bean->encodedkey_mambu_c == "") {
+        if($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/ $bean->encodedkey_mambu_c ==""){
             //variables para consumo de servicio
-            $url = $sugar_config['url_mambu_clientes'];
-            $user = $sugar_config['user_mambu'];
-            $pwd = $sugar_config['pwd_mambu'];
-            $auth_encode = base64_encode($user . ':' . $pwd);
+            $url=$sugar_config['url_mambu_gral'].'groups';	
+            $user=$sugar_config['user_mambu'];
+            $pwd=$sugar_config['pwd_mambu'];
+            $auth_encode=base64_encode( $user.':'.$pwd );
             //variables para payload
             $id_crm = $bean->id;
             $nombre = '';
@@ -1403,19 +1403,32 @@ where rfc_c = '{$bean->rfc_c}' and
             $nombre = $bean->tipodepersona_c != 'Persona Moral' ? $nombreaccount : $razon_social;
 
             //Obteniendo referencias bancarias
-            $array_referencias = array();
-            if ($bean->load_relationship('refba_referencia_bancaria_accounts')) {
-                $referencias = $bean->refba_referencia_bancaria_accounts->getBeans();
-                if (!empty($referencias)) {
-                    foreach ($referencias as $ref) {
-                        $ref_bancaria = $ref->numerocuenta_c;
-                        $nombre_banco = $ref->institucion;
-                        $new_referencia = array(
-                            "_nombre_banco_cliente" => $nombre_banco,
-                            "_numero_cuenta_cliente" => $ref_bancaria,
-                            "_domiciliacion" => "TRUE"
+            $array_cta_bancaria=array();
+            if ($bean->load_relationship('cta_cuentas_bancarias_accounts')) {
+                $ctas_bancarias=$bean->cta_cuentas_bancarias_accounts->getBeans();
+                if (!empty($ctas_bancarias)) {
+                    foreach ($ctas_bancarias as $cta) {
+                         $domiciliacion="";
+                        //Condicion para envio de domiciliacion
+                        $comparacion= strpos($cta->usos, "^1^");
+                        if ($comparacion ===false){
+                            $domiciliacion="FALSE";
+                        }else{
+                            $domiciliacion="TRUE";
+                        }
+                        $nombre_banco=$bank[$cta->banco];
+                        $new_cta_bancaria=array(
+                            "_nombre_banco_cliente"=>$nombre_banco,
+                            "_domiciliacion"=>$domiciliacion,
+                            "_guid_crm"=>$cta->id
                         );
-                        array_push($array_referencias, $new_referencia);
+                        if($cta->cuenta!=""){
+                            $new_cta_bancaria['_numero_cuenta_cliente']=$cta->cuenta;
+                        }
+                        if($cta->clabe!=""){
+                            $new_cta_bancaria['_clabe_interbancaria']=$cta->clabe;
+                        }
+                        array_push($array_cta_bancaria,$new_cta_bancaria);
                     }
                 }
             }
@@ -1426,9 +1439,10 @@ where rfc_c = '{$bean->rfc_c}' and
                     "_id_cliente_corto" => $id_cliente_corto,
                     "_ref_bancaria" => $bean->referencia_bancaria_c
                 ),
-                "_cuentas_bancarias_clientes" => $array_referencias,
-
             );
+            if(count($array_cta_bancaria)>0){
+               $body['_cuentas_bancarias_clientes']=$array_cta_bancaria;
+            }
             $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url, $body, $auth_encode);
