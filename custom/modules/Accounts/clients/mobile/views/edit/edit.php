@@ -61,18 +61,18 @@ array (
               ),
               5 => 
               array (
-                'name' => 'origendelprospecto_c',
-                'label' => 'LBL_ORIGENDELPROSPECTO',
+                'name' => 'origen_cuenta_c',
+                'label' => 'LBL_ORIGEN_cUENTA_C',
               ),
               6 => 
               array (
-                'name' => 'tct_detalle_origen_ddw_c',
-                'label' => 'LBL_TCT_DETALLE_ORIGEN_DDW',
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN_C',
               ),
               7 => 
               array (
-                'name' => 'metodo_prospeccion_c',
-                'label' => 'LBL_METODO_PROSPECCION',
+                'name' => 'prospeccion_propia_c',
+                'label' => 'LBL_PROSPECCION_PROPIA_C',
               ),
               8 => 
               array (
@@ -103,13 +103,13 @@ array (
               ),
               13 => 
               array (
-                'name' => 'medio_digital_c',
-                'label' => 'LBL_MEDIO_DIGITAL',
+                'name' => 'medio_detalle_origen_c',
+                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
               ),
               14 => 
               array (
-                'name' => 'tct_punto_contacto_ddw_c',
-                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
+                'name' => 'punto_contacto_origen_c',
+                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
               ),
               15 => 
               array (
@@ -280,8 +280,8 @@ array (
               ),
               48 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               49 => 'email',
               50 => 
@@ -403,29 +403,37 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORUNICLICK_C',
               ),
-              69 => 
+              69 =>
+              array (
+                  'name' => 'canal_uniclick_mobile',
+                  'type' => 'canal_uniclick_mobile',
+                  'studio' => 'visible',
+                  'label' => 'Producto Uniclick',
+              ),
+
+              70 =>
               array (
                 'name' => 'no_viable',
                 'type' => 'no_viable',
                 'studio' => 'visible',
                 'label' => 'Lead No viable',
               ),
-              70 => 'phone_office',
-              71 => 
+              71 => 'phone_office',
+              72 =>
               array (
                 'name' => 'clean_name',
                 'studio' => 'visible',
                 'label' => 'LBL_CLEAN_NAME',
                 'css_class' => 'hide',
               ),
-              72 => 
+              73 =>
               array (
                 'name' => 'account_uni_productos',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
                 'css_class' => 'hide',
               ),
-              73 => 
+              74 =>
               array (
               ),
             ),

@@ -1,6 +1,6 @@
 <?php
 // created: 2020-06-03 21:21:36
-<?php
+
 // created: 2020-01-15 15:41:46
 $app_list_strings['moduleListSingular']['Home'] = 'Inicio';
 $app_list_strings['moduleListSingular']['Contacts'] = 'Contacto';

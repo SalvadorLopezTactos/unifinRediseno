@@ -314,6 +314,8 @@
 
     _render: function () {
         this._super("_render");
+        //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="tct_no_contactar_chk_c"]').hide();
         this._doValidateProfesionRisk();
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/

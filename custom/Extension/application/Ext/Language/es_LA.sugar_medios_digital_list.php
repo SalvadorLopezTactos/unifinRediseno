@@ -1,12 +1,12 @@
 <?php
- // created: 2020-05-04 15:12:12
+ // created: 2020-05-27 14:51:59
 
 $app_list_strings['medios_digital_list']=array (
   '' => '',
   1 => 'Facebook',
   2 => 'Twitter',
   3 => 'Instagram',
-  4 => 'Web',
+  4 => 'Buscadores Web (Google,Yahoo,etc)',
   5 => 'LinkedIn',
   6 => 'Radio Online',
   7 => 'Prensa Online',
