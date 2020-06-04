@@ -15,7 +15,7 @@ function accounts_mambu()
     $GLOBALS['log']->fatal('Job para mandar cuentas CLIENTE a Mambu: START');
 //Declaracion de variables para mandar al servicio de Mambu
 
-    $url = $sugar_config['url_mambu_clientes'];
+    $url = $sugar_config['url_mambu_gral'].'groups';
     $user = $sugar_config['user_mambu'];
     $pwd = $sugar_config['pwd_mambu'];
     $auth_encode = base64_encode($user . ':' . $pwd);
@@ -24,18 +24,28 @@ function accounts_mambu()
 ## 1.- Realiza consulta a db para obtener cuentas tipo Cliente con Linea (3,12)
 ##########################################
 //Estructura consulta
-    $sqlQueryAcc = "SELECT 
-DISTINCT
-CASE 
-WHEN ac.tipodepersona_c='Persona Moral' THEN ac.razonsocial_c
-ELSE concat(ac.primernombre_c,' ',ac.apellidopaterno_c,' ',ac.apellidomaterno_c)END as Nombre_del_Grupo,
-ac.idcliente_c as IdClienteCorto, ac.id_c as id, r.institucion as Nombre_del_Banco, 
-rc.numerocuenta_c as Numero_de_Cuenta, ac.referencia_bancaria_c as Referencia_Bancaria
-from accounts_cstm ac
-inner join refba_referencia_bancaria_accounts_c ra on ra.refba_referencia_bancaria_accountsaccounts_ida = ac.id_c
-inner join refba_referencia_bancaria r on r.id = ra.refba_referencia_bancaria_accountsrefba_referencia_bancaria_idb
-inner join refba_referencia_bancaria_cstm rc on rc.id_c = r.id
-WHERE ac.tipo_registro_cuenta_c='3' and (ac.encodedkey_mambu_c='' or ac.encodedkey_mambu_c is null) and ac.referencia_bancaria_c is not null and rc.numerocuenta_c is not null and r.institucion is not null and ac.idcliente_c is not null limit 50";
+    $sqlQueryAcc = "SELECT DISTINCT
+            CASE
+                WHEN ac.tipodepersona_c='Persona Moral' THEN ac.razonsocial_c
+                ELSE concat(ac.primernombre_c,' ',ac.apellidopaterno_c,' ',ac.apellidomaterno_c)
+            END as Nombre_del_Grupo,
+            ac.id_c as id,
+            ac.idcliente_c as IdClienteCorto, 
+            ac.referencia_bancaria_c as Referencia_Bancaria,
+            ctabc.banco as Nombre_del_Banco,    
+            ctabc.cuenta as Numero_de_Cuenta, 
+            ctabc.id as idCtaBancaria
+        from accounts_cstm ac
+        left join cta_cuentas_bancarias_accounts_c ctabc_ac on ctabc_ac.cta_cuentas_bancarias_accountsaccounts_ida = ac.id_c
+        left join cta_cuentas_bancarias ctabc on ctabc.id = ctabc_ac.cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb
+        WHERE 
+            ac.tipo_registro_cuenta_c='3' 
+            and (ac.encodedkey_mambu_c='' or ac.encodedkey_mambu_c is null) 
+            and ac.referencia_bancaria_c is not null 
+            and ac.idcliente_c is not null
+            -- and ctabc.cuenta is not null 
+            -- and ctabc.banco is not null 
+        limit 50";
 //Ejecuta Consulta
     $resultAcc = $GLOBALS['db']->query($sqlQueryAcc);
     $GLOBALS['log']->fatal('Registros a crear en Mambu: ' .count($resultAcc));
@@ -54,7 +64,8 @@ WHERE ac.tipo_registro_cuenta_c='3' and (ac.encodedkey_mambu_c='' or ac.encodedk
         $new_referencia = array(
             "_nombre_banco_cliente" => $nombre_banco,
             "_numero_cuenta_cliente" => $ref_bancaria,
-            "_domiciliacion" => "TRUE"
+            "_domiciliacion" => "TRUE",
+            "_guid_crm"=>$row['idCtaBancaria']
         );
         array_push($array_referencias, $new_referencia);
 
@@ -65,9 +76,10 @@ WHERE ac.tipo_registro_cuenta_c='3' and (ac.encodedkey_mambu_c='' or ac.encodedk
                 "_id_cliente_corto" => $id_cliente_corto,
                 "_ref_bancaria" => $row['Referencia_Bancaria']
             ),
-            "_cuentas_bancarias_clientes" => $array_referencias,
-
         );
+         if($row['idCtaBancaria']!=""){
+               $body['_cuentas_bancarias_clientes']=$array_referencias;
+            }
         $GLOBALS['log']->fatal('Body: ' .json_encode($body));
         $callApi = new UnifinAPI();
         $resultado = $callApi->postMambu($url, $body, $auth_encode);
