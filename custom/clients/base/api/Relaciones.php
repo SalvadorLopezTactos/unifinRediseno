@@ -43,6 +43,7 @@ class Relaciones extends SugarApi
             $query = "SELECT
             ra.rel_relaciones_accounts_1accounts_ida idCuenta,
             a.name nombreCuenta,
+            acstm.idcliente_c idCorto,
             rc.id_c idRelacion,
             rc.account_id1_c idCuentaRelacionada,
             r.name nombreCuentaRelacionada,
@@ -52,6 +53,7 @@ class Relaciones extends SugarApi
             INNER JOIN rel_relaciones r on r.id=rc.id_c
             INNER JOIN rel_relaciones_accounts_1_c ra on ra.rel_relaciones_accounts_1rel_relaciones_idb = rc.id_c
             INNER JOIN accounts a on a.id = ra.rel_relaciones_accounts_1accounts_ida
+            INNER JOIN accounts_cstm acstm on acstm.id_c = a.id
             WHERE ({$queryProductos})
             AND ra.rel_relaciones_accounts_1accounts_ida='{$id}'
             AND rc.relaciones_producto_c LIKE '%{$producto}%'";
