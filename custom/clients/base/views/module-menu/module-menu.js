@@ -20,12 +20,15 @@
         		//app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
         		break;
 
-        		/*
+
             case '#Expediente':
                 route = '#bwc/index.php?entryPoint=ExpedienteMod';
-                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
                 break;
-                */
+
+            case '#ExpedienteUniclick':
+                route = '#bwc/index.php?entryPoint=ExpedienteUniclick';
+                break;
+
 
             case '#CotizadorProspectos':
                 route = '#bwc/index.php?entryPoint=CotizadorProspectos';

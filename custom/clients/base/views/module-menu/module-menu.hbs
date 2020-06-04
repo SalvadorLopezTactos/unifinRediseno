@@ -16,29 +16,34 @@
         {{#if meta.alias}} title="{{module}} {{else}} title="{{str 'LBL_MODULE_NAME' module}} {{/if}}"
         >{{moduleIconLabel module}}</span>
 
-        <!--{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}-->
         {{#notEq module "Expediente"}}
             {{#notEq module "BuscaDisposicion"}}
             {{#notEq module "Cotizador"}}
                 {{#notEq module "CotizadorProspectos"}}
+                    {{#notEq module "ExpedienteUniclick"}}
                     {{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}
                 {{/notEq}}
             {{/notEq}}
             {{/notEq}}
         {{/notEq}}
+        {{/notEq}}
 
     {{#eq module "BuscaDisposicion"}} {{str 'Busca Disposición'}} {{/eq}}
     {{#eq module "Cotizador"}} {{str 'Cotizador UNI2'}} {{/eq}}
     {{#eq module "CotizadorProspectos"}} {{str 'Cotizador IPAD'}} {{/eq}}
-    {{#eq module "Expediente"}} {{str 'Expediente'}} {{/eq}}
+    {{#eq module "ExpedienteUniclick"}} {{str 'Expediente Uniclick'}} {{/eq}}
+    {{#eq module "Expediente"}} {{str 'Expediente Unifin'}} {{/eq}}
+
+    </a>
 {{else}}
 
     {{#notEq module "Expediente"}}
         {{#notEq module "Cotizador"}}
             {{#notEq module "CotizadorProspectos"}}
-
+                {{#notEq module "ExpedienteUniclick"}}
         <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{str 'LBL_MODULE_NAME' module}}</a>
-    {{/notEq}}{{/notEq}}{{/notEq}}
+    {{/notEq}}{{/notEq}}{{/notEq}}{{/notEq}}
+
 
     {{#eq module "Cotizador"}}
         <a class="btn btn-invisible btn-link module-name">Cotizadores</a>
@@ -55,18 +60,17 @@
     {{/eq}}
 
     {{#eq module "Expediente"}}
-            <!--<a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>-->
-            <a class="btn btn-invisible btn-link module-name">Expedientes</a>
-            <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-menu scroll">
-                <ul role="menu">
+        <a class="btn btn-invisible btn-link module-name">Expedientes</a>
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu scroll">
+            <ul role="menu">
 
-                    <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ExpedienteMod" track="click:{{module}}"><i class="fa fa-clipboard"></i>Expediente Unifin</a></li>
+                <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ExpedienteMod" track="click:{{module}}"><i class="fa fa-clipboard"></i>Expediente Unifin</a></li>
 
 
-                    <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=expedienteCreditoSimple" track="click:{{module}}"><i class="fa fa-clipboard"></i>Expediente Crédito Simple</a></li>
-                </ul>
-            </div>
+                <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=ExpedienteUniclick" track="click:{{module}}"><i class="fa fa-users"></i>Expediente Uniclick</a></li>
+            </ul>
+        </div>
     {{/eq}}
 
     {{#if actions}}
@@ -75,7 +79,7 @@
         <ul role="menu">
             {{#each actions}}
                 <li><a class="ellipsis_inline" tabindex="-1"
-                       data-navbar-menu-item="{{label}}"
+                       data-navbara-menu-item="{{label}}"
                     {{#if event}}
                        href="javascript:void(0);"
                        data-event="{{event}}"
