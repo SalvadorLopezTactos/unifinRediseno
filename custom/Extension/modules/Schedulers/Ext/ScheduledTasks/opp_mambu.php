@@ -16,7 +16,7 @@ function opp_mambu()
     //Inicia ejecución
     $GLOBALS['log']->fatal('Job para mandar Líneas de Crédito UNICLICK a Mambu: START');
     //Declaracion de variables para mandar al servicio de Mambu
-    $url=$sugar_config['url_mambu_linea'];
+    $url=$sugar_config['url_mambu_gral'].'creditarrangements';
     $user=$sugar_config['user_mambu'];
     $pwd=$sugar_config['pwd_mambu'];
     $auth_encode=base64_encode( $user.':'.$pwd );
@@ -28,7 +28,7 @@ function opp_mambu()
     $sqlQueryOpp = "select
       distinct
       oc.id_c as IdOpp, op.date_entered as FechaCreacion, oc.vigencialinea_c as FechaExp, oc.monto_c as amount, op.name as notes,
-      oc.idsolicitud_c as id_linea_credito, op.amount as monto_autorizado, ac.encodedkey_mambu_c as EncodedKey,
+      oc.id_linea_credito_c as id_linea_credito, op.amount as monto_autorizado, ac.encodedkey_mambu_c as EncodedKey,
       ac.id_c as id_cliente_CRM
       from accounts_cstm ac
       inner join accounts_opportunities ao on ao.account_id=ac.id_c
@@ -38,7 +38,7 @@ function opp_mambu()
       and oc.tipo_producto_c='8' -- Producto Uniclcik
       and oc.estatus_c = 'N' -- Autorizada
       and ac.encodedkey_mambu_c is not null
-      and oc.idsolicitud_c is not null
+      and oc.id_linea_credito_c is not null
       and oc.tct_id_mambu_c is null limit 10";
     //Ejecuta Consulta
     $resultOpp = $GLOBALS['db']->query($sqlQueryOpp);
