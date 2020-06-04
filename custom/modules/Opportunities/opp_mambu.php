@@ -26,7 +26,7 @@ class MambuLogic
 
             $GLOBALS['log']->fatal("Inicia MambuLogic para creacion de Linea de credito Mambu");
             //Declara variables globales para la peticion del servicio Mambu
-            $url=$sugar_config['url_mambu_linea'];
+            $url=$sugar_config['url_mambu_gral'].'creditarrangements';
             $user=$sugar_config['user_mambu'];
             $pwd=$sugar_config['pwd_mambu'];
             $auth_encode=base64_encode( $user.':'.$pwd );
@@ -53,7 +53,7 @@ class MambuLogic
                     "holderType"=> "GROUP",
                     "startDate"=> $fecha_creacion,
                     "_datos_linea_credito"=>array (
-                    "id_linea_credito"=> $bean->idsolicitud_c,
+                    "id_linea_credito"=> $bean->id_linea_credito_c,
                     "monto_autorizado"=> $bean->amount
                     ),
                     "_productos"=> array(
