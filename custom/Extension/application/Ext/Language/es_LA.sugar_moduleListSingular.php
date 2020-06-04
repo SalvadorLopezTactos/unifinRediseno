@@ -1,4 +1,6 @@
 <?php
+// created: 2020-06-03 21:21:36
+<?php
 // created: 2020-01-15 15:41:46
 $app_list_strings['moduleListSingular']['Home'] = 'Inicio';
 $app_list_strings['moduleListSingular']['Contacts'] = 'Contacto';
@@ -65,3 +67,5 @@ $app_list_strings['moduleListSingular']['bc_survey'] = 'Surveys';
 $app_list_strings['moduleListSingular']['bc_survey_submission'] = 'Survey Transactions';
 $app_list_strings['moduleListSingular']['bc_survey_automizer'] = 'Survey Automation';
 $app_list_strings['moduleListSingular']['tct_PLD'] = 'PLD';
+$app_list_strings['moduleListSingular']['cta_cuentas_bancarias'] = 'Cuenta Bancaria';
+
