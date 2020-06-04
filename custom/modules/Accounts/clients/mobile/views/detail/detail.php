@@ -71,20 +71,20 @@ array (
               ),
               6 => 
               array (
-                'name' => 'origendelprospecto_c',
+                'name' => 'origen_cuenta_c',
                 'studio' => 'visible',
-                'label' => 'LBL_ORIGENDELPROSPECTO',
+                'label' => 'LBL_ORIGEN_CUENTA_C',
               ),
               7 => 
               array (
-                'name' => 'tct_detalle_origen_ddw_c',
-                'label' => 'LBL_TCT_DETALLE_ORIGEN_DDW',
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN_C',
               ),
               8 => 
               array (
-                'name' => 'metodo_prospeccion_c',
+                'name' => 'prospeccion_propia_c',
                 'studio' => 'visible',
-                'label' => 'LBL_METODO_PROSPECCION',
+                'label' => 'LBL_PROSPECCION_PROPIA_C',
               ),
               9 => 
               array (
@@ -115,13 +115,13 @@ array (
               ),
               14 => 
               array (
-                'name' => 'medio_digital_c',
-                'label' => 'LBL_MEDIO_DIGITAL',
+                'name' => 'medio_detalle_origen_c',
+                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
               ),
               15 => 
               array (
-                'name' => 'tct_punto_contacto_ddw_c',
-                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
+                'name' => 'punto_contacto_origen_c',
+                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
               ),
               16 => 
               array (
@@ -306,8 +306,8 @@ array (
               ),
               50 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               51 => 
               array (

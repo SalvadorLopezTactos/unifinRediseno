@@ -697,17 +697,20 @@
         if(contexto_cuenta.createMode)
         {
             //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
-            this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
-
-            //Establece el objeto para guardar
-            this.model.set('account_uni_productos', this.tipoProducto);
+            if (this.tipoProducto.uniclick != null && typeof (this.$('.list_u_canal').select2('val')) == "string") {
+                this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
+                //Establece el objeto para guardar
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
 
         }
         else
         {
-            this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
-             this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
-            this.model.set('account_uni_productos', this.tipoProducto);
+            if (this.tipoProducto.uniclick != null && typeof (this.$('.list_u_canal').select2('val')) == "string") {
+                this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+                this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
         }
 
         callback(null, fields, errors);

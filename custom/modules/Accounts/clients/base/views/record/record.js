@@ -123,7 +123,7 @@
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
-        this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
+        this.model.on('change:origen_cuenta_c', this.changeLabelMarketing, this);
 
         //Se añade función para establecer phone_office
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
@@ -733,7 +733,7 @@
 
     readOnlyOrigen: function () {
         //Recupera variables
-        var origen = this.model.get('origendelprospecto_c');
+        var origen = this.model.get('origen_cuenta_c');
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         /*
          -- Bloquea campos si;
@@ -742,24 +742,24 @@
          */
         if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
             //Establece como no editables campos de origen
-            this.noEditFields.push('origendelprospecto_c');
-            this.noEditFields.push('tct_detalle_origen_ddw_c');
+            this.noEditFields.push('origen_cuenta_c');
+            this.noEditFields.push('detalle_origen_c');
             this.noEditFields.push('tct_origen_base_ddw_c');
             this.noEditFields.push('tct_origen_busqueda_txf_c');
-            this.noEditFields.push('medio_digital_c');
-            this.noEditFields.push('tct_punto_contacto_ddw_c');
+            this.noEditFields.push('medio_detalle_origen_c');
+            this.noEditFields.push('punto_contacto_origen_c');
             this.noEditFields.push('evento_c');
             this.noEditFields.push('camara_c');
             this.noEditFields.push('tct_que_promotor_rel_c');
             this.noEditFields.push('como_se_entero_c');
             this.noEditFields.push('cual_c');
             //Deshabilita campos de Origen
-            this.$("[data-name='origendelprospecto_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='tct_detalle_origen_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='origen_cuenta_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='detalle_origen_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_origen_base_ddw_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_origen_busqueda_txf_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='medio_digital_c']").attr('style', 'pointer-events:none;');
-            this.$("[data-name='tct_punto_contacto_ddw_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='medio_detalle_origen_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='punto_contacto_origen_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='evento_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='camara_c']").attr('style', 'pointer-events:none;');
             this.$("[data-name='tct_que_promotor_rel_c']").attr('style', 'pointer-events:none;');
@@ -961,16 +961,16 @@
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
-        var origen = this.model.get('origendelprospecto_c');
-        if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
+        var origen = this.model.get('origen_cuenta_c');
+        if (origen == "Marketing" || origen == "2") {
             var self = this;
-            self.noEditFields.push('origendelprospecto_c');
-            self.noEditFields.push('tct_detalle_origen_ddw_c');
+            self.noEditFields.push('origen_cuenta_c');
+            self.noEditFields.push('detalle_origen_c');
             self.noEditFields.push('tct_origen_base_ddw_c');
             self.noEditFields.push('tct_origen_ag_tel_rel_c');
             self.noEditFields.push('tct_origen_busqueda_txf_c');
-            self.noEditFields.push('medio_digital_c');
-            self.noEditFields.push('tct_punto_contacto_ddw_c');
+            self.noEditFields.push('medio_detalle_origen_c');
+            self.noEditFields.push('punto_contacto_origen_c');
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
@@ -1254,13 +1254,13 @@
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
         var myField3 = this.getField("clienteuniclick");
-
         if (myField) {
             myField.listenTo(myField, "render", function () {
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1271,25 +1271,24 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 myField.hide();
-
-                if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
-                    (fleetprod == "Prospecto" && fleetsub == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
+                if ((leasingprod == "2" && leasingsub == "2" && userprod.includes('1') && asesorL == logueado) || (factprod == "2" && factsub == "2" && userprod.includes("4") && asesorF == logueado) || (caprod == "2" && casub == "2" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "2" && fleetsub == "2" && userprod.includes('6') && asesorFL == logueado)) {
                     myField.show();
                 } else {
                     myField.hide();
                 }
-
             });
         }
-
         if (myField1) {
             myField1.listenTo(myField1, "render", function () {
                 myField1.hide();
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1300,9 +1299,10 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-                if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) ||
-                    (fleetprod == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
+                if ((leasingprod == "1" && userprod.includes('1') && asesorL == logueado) || (factprod == "1" && userprod.includes("4") && asesorF == logueado) || (caprod == "1" && userprod.includes("3") && asesorCA == logueado) ||
+                    (fleetprod == "1" && userprod.includes('6') && asesorFL == logueado)) {
                     myField1.show();
                 } else {
                     myField1.hide();
@@ -1311,10 +1311,11 @@
         }
         if (myField2) {
             myField2.listenTo(myField2, "render", function () {
-                var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-                var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-                var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-                var fleetprod = Oproductos.productos.tct_tipo_fl_txf_c;
+                var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+                var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+                var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+                var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+                var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
                 var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
                 var casub = Oproductos.productos.tct_subtipo_ca_txf_c;
@@ -1325,15 +1326,14 @@
                 var asesorF = this.model.get('user_id1_c');
                 var asesorCA = this.model.get('user_id2_c');
                 var asesorFL = this.model.get('user_id6_c');
+                var asesorUC = this.model.get('user_id7_c');
                 myField2.hide();
-
-                if (((leasingprod == "Proveedor" || leasingprod == "Persona") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Proveedor" || factprod == "Persona") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Proveedor" || caprod == "Persona") && userprod.includes("3") && asesorCA == logueado) ||
-                    ((fleetprod == "Proveedor" || fleetprod == "Persona") && userprod.includes('6') && asesorFL == logueado)) {
+                if (((leasingprod == "5" || leasingprod == "4") && userprod.includes('1') && asesorL == logueado) || ((factprod == "5" || factprod == "4") && userprod.includes("4") && asesorF == logueado) || ((caprod == "5" || caprod == "4") && userprod.includes("3") && asesorCA == logueado) ||
+                    ((fleetprod == "5" || fleetprod == "4") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
                     myField2.show();
                 } else {
                     myField2.hide();
                 }
-
             });
         }
         if (myField3) {
@@ -1341,25 +1341,24 @@
                 var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
                 var userprod = App.user.attributes.productos_c;
                 var logueado = App.user.id;
-                var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
+                var uniclickval = Oproductos.productos.tct_tipo_cuenta_uc_c;
                 var asesorUC = this.model.get('user_id7_c');
                 myField3.hide();
-                if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+                if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
                     myField3.show();
                 } else {
                     myField3.hide();
                 }
-
             });
         }
     },
 
     hideButton_Conversion_change: function () {
-
-        var leasingprod = Oproductos.productos.tct_tipo_l_txf_c;
-        var factprod = Oproductos.productos.tct_tipo_f_txf_c;
-        var caprod = Oproductos.productos.tct_tipo_ca_txf_c;
-        var tipofleet = Oproductos.productos.tct_tipo_fl_txf_c;
+        var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
+        var factprod = Oproductos.productos.tct_tipo_cuenta_f_c;
+        var caprod = Oproductos.productos.tct_tipo_cuenta_ca_c;
+        var fleetprod = Oproductos.productos.tct_tipo_cuenta_fl_c;
+        var ucprod = Oproductos.productos.tct_tipo_cuenta_uc_c;
         var userprod = App.user.attributes.productos_c;
         var leasingsub = Oproductos.productos.tct_subtipo_l_txf_c;
         var factsub = Oproductos.productos.tct_subtipo_f_txf_c;
@@ -1367,7 +1366,6 @@
         var subtipofleet = Oproductos.productos.tct_subtipo_fl_txf_c;
         var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
         var uniclickval = Oproductos.productos.tct_tipo_uc_txf_c;
-
         var logueado = App.user.id;
         var asesorL = this.model.get('user_id_c');
         var asesorF = this.model.get('user_id1_c');
@@ -1386,11 +1384,10 @@
          * tipo_registro_cuenta_c = Prospecto
          * && subtipo_registro_cuenta_c = Contactado
          */
-        if ((leasingprod == "Prospecto" && leasingsub == "Contactado" && userprod.includes('1') && asesorL == logueado) || (factprod == "Prospecto" && factsub == "Contactado" && userprod.includes("4") && asesorF == logueado) || (caprod == "Prospecto" && casub == "Contactado" && userprod.includes("3") && asesorCA == logueado) ||
-            (tipofleet == "Prospecto" && subtipofleet == "Contactado" && userprod.includes('6') && asesorFL == logueado)) {
+        if ((leasingprod == "2" && leasingsub == "2" && userprod.includes('1') && asesorL == logueado) || (factprod == "2" && factsub == "2" && userprod.includes("4") && asesorF == logueado) || (caprod == "2" && casub == "2" && userprod.includes("3") && asesorCA == logueado) ||
+            (fleetprod == "2" && subtipofleet == "2" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').show();
             $('[name="prospectocontactado"]').hide();
-            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1399,10 +1396,9 @@
          * Prospecto contactado:
          * tipo_registro_cuenta_c = Lead
          */
-        if ((leasingprod == "Lead" && userprod.includes('1') && asesorL == logueado) || (factprod == "Lead" && userprod.includes("4") && asesorF == logueado) || (caprod == "Lead" && userprod.includes("3") && asesorCA == logueado) || (tipofleet == "Lead" && userprod.includes('6') && asesorFL == logueado)) {
+        if ((leasingprod == "1" && userprod.includes('1') && asesorL == logueado) || (factprod == "1" && userprod.includes("4") && asesorF == logueado) || (caprod == "1" && userprod.includes("3") && asesorCA == logueado) || (fleetprod == "1" && userprod.includes('6') && asesorFL == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').show();
-            $('[name="conviertelead"]').hide();
             $('[name="conviertelead"]').hide();
         }
 
@@ -1411,11 +1407,10 @@
          * tipo_registro_cuenta_c = Persona
          * OR tipo_registro_cuenta_c = Proveedor
          */
-        if (((leasingprod == "Persona" || leasingprod == "Proveedor") && userprod.includes('1') && asesorL == logueado) || ((factprod == "Persona" || factprod == "Proveedor") && userprod.includes("4") && asesorF == logueado) || ((caprod == "Persona" || caprod == "Proveedor") && userprod.includes("3") && asesorCA == logueado) || ((tipofleet == "Persona" || tipofleet == "Proveedor") && userprod.includes('6') && asesorFL == logueado)) {
+        if (((leasingprod == "4" || leasingprod == "5") && userprod.includes('1') && asesorL == logueado) || ((factprod == "4" || factprod == "5") && userprod.includes("4") && asesorF == logueado) || ((caprod == "4" || caprod == "5") && userprod.includes("3") && asesorCA == logueado) || ((fleetprod == "4" || fleetprod == "5") && userprod.includes('6') && asesorFL == logueado)  || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
-            $('[name="conviertelead"]').hide();
         }
 
         //Evaluación para mostrar botones
@@ -1423,7 +1418,7 @@
          * Convertir Cliente Uniclick
          * tipo_registro_cuenta_c = Lead
          */
-        if ((uniclickval != "Cliente" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+        if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
             $('[name="regresalead"]').hide();
             $('[name="clienteuniclick"]').show();
             $('[name="conviertelead"]').hide();
@@ -1439,7 +1434,6 @@
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
         }
     },
-
 
     /*
      @author Salvador Lopez
@@ -2323,7 +2317,7 @@
     validaContactado: function () {
         var campos = "";
 
-        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+        if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
             campos = campos + '<b>Origen, </b>';
         }
 
@@ -2477,67 +2471,116 @@
             });
             var productousuario = App.user.attributes.productos_c;
             var api_params = {};
-
-            if ((Oproductos.productos.tct_tipo_l_txf_c == "Persona" || Oproductos.productos.tct_tipo_l_txf_c == "Proveedor") && productousuario.includes('1')) {
+            var tipo_producto = 0;
+            if ((Oproductos.productos.tct_tipo_cuenta_l_c == "4" || Oproductos.productos.tct_tipo_cuenta_l_c == "5") && productousuario.includes('1')) {
                 if (App.user.id == this.model.get('user_id_c')) {
+                    tipo_producto = 1;
                     api_params["tct_tipo_l_txf_c"] = "Lead";
                     api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                     api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_l_c = '1';
+                    Oproductos.productos.tct_subtipo_l_txf_c  = '5';
+                    v360.ResumenCliente.leasing.tipo_cuenta = '1';
+                    v360.ResumenCliente.leasing.subtipo_cuenta = '5';   
                 }
 
             }
-            if ((Oproductos.productos.tct_tipo_ca_txf_c == "Persona" || Oproductos.productos.tct_tipo_ca_txf_c == "Proveedor") && productousuario.includes('3')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_ca_c == "4" || Oproductos.productos.tct_tipo_cuenta_ca_c == "5") && productousuario.includes('3')) {
                 if (App.user.id == this.model.get('user_id2_c')) {
+                    tipo_producto = 3;                
                     api_params["tct_tipo_ca_txf_c"] = "Lead";
                     api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_ca_c = '1';
+                    Oproductos.productos.tct_subtipo_ca_txf_c  = '5';                
+                    v360.ResumenCliente.credito_auto.tipo_cuenta = '1';
+                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '5';
                 }
             }
-            if ((Oproductos.productos.tct_tipo_f_txf_c == "Persona" || Oproductos.productos.tct_tipo_f_txf_c == "Proveedor") && productousuario.includes('4')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
                 if (App.user.id == this.model.get('user_id1_c')) {
+                    tipo_producto = 4;
                     api_params["tct_tipo_f_txf_c"] = "Lead";
                     api_params["tct_subtipo_f_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_f_c = '1';
+                    Oproductos.productos.tct_subtipo_f_txf_c  = '5';  
+                    v360.ResumenCliente.factoring.tipo_cuenta = '1';
+                    v360.ResumenCliente.factoring.subtipo_cuenta = '5';                  
                 }
             }
-            if ((Oproductos.productos.tct_tipo_fl_txf_c == "Persona" || Oproductos.productos.tct_tipo_fl_txf_c == "Proveedor") && productousuario.includes('6')) {
+            if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
                 if (App.user.id == this.model.get('user_id6_c')) {
+                    tipo_producto = 6;
                     api_params["tct_tipo_fl_txf_c"] = "Lead";
                     api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_fl_c = '1';
+                    Oproductos.productos.tct_subtipo_fl_txf_c  = '5';
+                    v360.ResumenCliente.fleet.tipo_cuenta = '1';
+                    v360.ResumenCliente.fleet.subtipo_cuenta = '5';
                 }
             }
-            if (api_params != undefined) {
-
-                var idC = this.model.get('id');
-                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
-                app.api.call('update', url, api_params, {
-                    success: _.bind(function (data) {
-                        //this._render();
-                        app.alert.dismiss('conviertePaL');
-                        Oproductos.productos = data;
-                        app.alert.show('alert_change_success', {
-                            level: 'success',
-                            messages: 'Cambio realizado',
-                        });
-                        //Actualiza modelo vista v360
-                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
-                        Oproductos.render();
-                        v360.render();
-                        //Deja activa la pestaña de la vista360
-                        $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
-                        $("#recordTab>li.tab").removeClass('active');
-                        $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
-                    })
-                });
+            if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
+                if (App.user.id == this.model.get('user_id7_c')) {
+                    tipo_producto = 8;
+                    api_params["tct_tipo_uc_txf_c"] = "Lead";
+                    api_params["tct_subtipo_uc_txf_c"] = "En Calificación";
+                    api_params["tct_tipo_cuenta_uc_c"] = "LEAD EN CALIFICACIÓN";
+                    Oproductos.productos.tct_tipo_cuenta_uc_c = '1';
+                    Oproductos.productos.tct_subtipo_uc_txf_c  = '5';
+                    v360.ResumenCliente.uniclick.tipo_cuenta = '1';
+                    v360.ResumenCliente.uniclick.subtipo_cuenta = '5';
+                }
             }
+            // Actualiza Productos
+            _.each(Productos, function (value, key) {
+                var idprod = '';
+                if(app.user.id == this.model.get('user_id_c') && Productos[key].tipo_producto == 1) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id1_c') && Productos[key].tipo_producto == 4) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id2_c') && Productos[key].tipo_producto == 3) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id6_c') && Productos[key].tipo_producto == 6) idprod = Productos[key].id;
+                if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
+                if(idprod) {
+                  var params = {};
+                  params["tipo_cuenta"] = "1";
+                  params["subtipo_cuenta"] = "5";
+                  params["tipo_subtipo_cuenta"] = "LEAD EN CALIFICACIÓN";
+                  var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                  app.api.call('update', uni, params, {
+                      success: _.bind(function (data) {
+                      })
+                  });
+                }
+            },this);
+            // Actualiza Resumen
+            var idC = this.model.get('id');
+            setTimeout(function() {
+                if (api_params != undefined) {
+                    var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
+                    app.api.call('update', url, api_params, {
+                        success: _.bind(function (data) {
+                            app.alert.dismiss('conviertePaL');
+                            //Oproductos.productos = data;
+                            app.alert.show('alert_change_success', {
+                                level: 'success',
+                                messages: 'Cambio realizado',
+                            });
+                            
 
-
+                            cont_uni_p.render();
+                            Oproductos.render();
+                            v360.render();
+                            //Deja activa la pestaña de la vista360
+                            $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                            $("#recordTab>li.tab").removeClass('active');
+                            $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                            //window.location.reload();
+                        })
+                    });
+                }
+            },5000);
         }
-
     },
 
 
@@ -3058,14 +3101,14 @@
         }
     },
 
-
+/**Pendiente de Validar*/
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
-        if (this.model.get('origendelprospecto_c') == 'Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Mercadotecnia') {
             console.log("Se eligio Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Detalle marketing");
         }
-        if (this.model.get('origendelprospecto_c') == 'Eventos Mercadotecnia') {
+        if (this.model.get('origen_cuenta_c') == 'Eventos Mercadotecnia') {
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
         }
@@ -3093,16 +3136,16 @@
     },
 
     doValidateInfoReq: function (fields, errors, callback) {
-        if (this.model.get('origendelprospecto_c') == 'Prospeccion propia') {
-            var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
-            if (metodoProspeccion.length == 0 || this.model.get('metodo_prospeccion_c') == null) {
+        if (this.model.get('origen_cuenta_c') == '3') {
+            var metodoProspeccion = new String(this.model.get('prospeccion_propia_c'));
+            if (metodoProspeccion.length == 0 || this.model.get('prospeccion_propia_c') == null) {
                 /*app.alert.show("Metodo de Prospeccion Requerido", {
                  level: "error",
                  title: "Debe indicar el metodo de prospecci\u00F3n",
                  autoClose: false
                  });*/
-                errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
-                errors['metodo_prospeccion_c'].required = true;
+                errors['prospeccion_propia_c'] = errors['prospeccion_propia_c'] || {};
+                errors['prospeccion_propia_c'].required = true;
             }
         }
         callback(null, fields, errors);
@@ -4968,7 +5011,7 @@
         });
         var necesarios = "";
 
-        if (this.model.get('origendelprospecto_c') == "" || this.model.get('origendelprospecto_c') == null) {
+        if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
             necesarios = necesarios + '<b>Origen<br></b>';
         }
         if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
@@ -5059,43 +5102,53 @@
             });
             return;
         } else {
-            if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente") {
+            if (Oproductos.productos.tipo_registro_uc != '3') {
                 var productousuario = App.user.attributes.productos_c;
-                var api_params = {};
 
-                if (Oproductos.productos.tct_tipo_uc_txf_c != "Cliente" && productousuario.includes('8')) {
-                    if (App.user.id == this.model.get('user_id7_c')) {
-                        api_params["tct_tipo_uc_txf_c"] = "Cliente";
-                        api_params["tct_subtipo_uc_txf_c"] = "Con Linea Vigente";
-                        api_params["tct_tipo_cuenta_uc_c"] = "CLIENTE CON LÍNEA VIGENTE";
-                    }
+                // Actualiza Cuenta
+                if (this.model.get('tipo_registro_cuenta_c') != "3") {
+                    this.model.set("tipo_registro_cuenta_c", "3");
+                    this.model.set("subtipo_registro_cuenta_c", "18");
+                    this.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+                    Oproductos.productos.tct_tipo_cuenta_uc_c = '3';
+                    Oproductos.productos.tct_subtipo_uc_txf_c = '18';
+                    this.model.save();
+
                 }
-            }
-            if (api_params != undefined) {
-                self = this;
-                var idC = this.model.get('id');
-                var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
-                app.api.call('update', url, api_params, {
-                    success: _.bind(function (data) {
-                        //this._render();
-                        app.alert.dismiss('convierte_Cliente_uniclick');
-                        Oproductos.productos = data;
-                        if (self.model.get('tipo_registro_cuenta_c') != "3") {
-                            self.model.set("tipo_registro_cuenta_c", "3");
-                            self.model.set("subtipo_registro_cuenta_c", "18");
-                            self.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
-                            self.model.save();
-                            v360.ResumenCliente.general_cliente.tipo = "CLIENTE CON LÍNEA VIGENTE";
-                            v360.render();
-                        }
-                        app.alert.show('errorAlert', {
-                            level: 'success',
-                            messages: "Se ha realizado la conversión correctamente.",
-                            autoClose: true
-                        });
-                        Oproductos.render();
-                    }),
-                })
+                // Actualiza Productos
+                _.each(Productos, function (value, key) {
+                    var idprod = '';
+                    if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8){
+                      idprod = Productos[key].id;  
+                    } 
+                    if(idprod) {
+                      var params = {};
+                      params["tipo_cuenta"] = "3";
+                      params["subtipo_cuenta"] = "18";
+                      params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
+                      var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                      app.api.call('update', uni, params, {
+                          success: _.bind(function (data) {
+                              v360.ResumenCliente.uniclick.tipo_cuenta = '3';
+                              v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+                              v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+                              app.alert.dismiss('convierte_Cliente_uniclick');
+                              app.alert.show('errorAlert', {
+                                  level: 'success',
+                                  messages: "Se ha realizado la conversión correctamente.",
+                              });
+                              
+                              v360.render();
+                              Oproductos.render();
+                              //Deja activa la pestaña de la vista360
+                              $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                              $("#recordTab>li.tab").removeClass('active');
+                              $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                          })
+                      });
+                    }
+                },this);
+
             }
         }
     },
@@ -5131,23 +5184,19 @@
         if (dd < 10) { dd = '0' + dd }
         if (mm < 10) { mm = '0' + mm }
         today = yyyy + '-' + mm + '-' + dd;
-
         //Recupera información
         var idCuenta = this.model.get('id');
         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
             success: function (data) {
-
                 Productos = data;
                 ResumenProductos = [];
                 _.each(Productos, function (value, key) {
-
                     var tipoProducto = Productos[key].tipo_producto;
                     var fechaAsignacion = Productos[key].fecha_asignacion_c;
                     var fecha1 = moment(today);
                     var fecha2 = moment(fechaAsignacion);
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
-
                     switch (tipoProducto) {
                         case "1": //Leasing
                             var dias = fecha1.diff(fecha2, 'days');
