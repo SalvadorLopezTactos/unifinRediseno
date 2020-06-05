@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-03 10:35:40
+ // created: 2020-06-05 12:46:16
 
 $app_list_strings['banco_list']=array (
   1 => 'BANCOMER',
@@ -47,5 +47,6 @@ $app_list_strings['banco_list']=array (
   44 => 'ACCENDO BANCO, S.A. INSTITUCIÓN DE BANCA',
   45 => 'UNALANAPAY',
   46 => 'BANCOPPEL',
-  0 => '',
+  0 => 'VARIOS',
+  '' => '',
 );
