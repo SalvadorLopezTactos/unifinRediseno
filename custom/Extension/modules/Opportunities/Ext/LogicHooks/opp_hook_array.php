@@ -118,6 +118,3 @@ $hook_array['after_save'][] = Array(
     'LineaUNICS', // name of the class
     'create_LC_unics'
 );
-
-
-
