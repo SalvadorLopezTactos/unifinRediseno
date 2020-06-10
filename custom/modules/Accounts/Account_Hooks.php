@@ -1275,7 +1275,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '1') ? '5' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
                 //Caso especial: Alta portal CA
-                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
+                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c!='4' && $bean->tipo_registro_cuenta_c!='5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
                     $beanprod->tipo_cuenta = "2"; //2-Prospecto
                     $beanprod->subtipo_cuenta = "8"; //Integración de expediente
                     $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
