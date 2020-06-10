@@ -220,55 +220,62 @@ array (
             array (
               0 => 
               array (
+                'name' => 'rfc_qr',
+                'label' => 'LBL_RFC_QR',
+                'studio' => 'visible',
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'tipo_registro_cuenta_c',
                 'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
-              1 => 
+              2 => 
               array (
                 'name' => 'subtipo_registro_cuenta_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'nivel_digitalizacion_c',
                 'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'tct_prioridad_ddw_c',
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'tct_homonimo_chk_c',
                 'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
-              5 => 
+              6 => 
               array (
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              9 => 
+              10 => 
               array (
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              11 => 
+              12 => 
               array (
               ),
             ),
@@ -313,143 +320,142 @@ array (
               ),
             ),
           ),
-
-          5 =>
+          5 => 
           array (
-                    'newTab' => false,
-                    'panelDefault' => 'collapsed',
-                    'name' => 'LBL_RECORDVIEW_PANEL16',
-                    'label' => 'LBL_RECORDVIEW_PANEL16',
-                    'columns' => 2,
-                    'labelsOnTop' => 1,
-                    'placeholders' => 1,
-                    'fields' =>
-                        array (
-                            0 =>
-                                array (
-                                    'name' => 'origen_cuenta_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_ORIGEN_CUENTA_C',
-                                ),
-                            1 =>
-                                array (
-                                    'name' => 'detalle_origen_c',
-                                    'label' => 'LBL_DETALLE_ORIGEN_C',
-                                ),
-                            2 =>
-                                array (
-                                    'name' => 'prospeccion_propia_c',
-                                    'label' => 'LBL_PROSPECCION_PROPIA_C',
-                                ),
-                            3 =>
-                                array (
-                                ),
-                            4 =>
-                                array (
-                                    'name' => 'referenciador_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_REFERENCIADOR',
-                                ),
-                            5 =>
-                                array (
-                                ),
-                            6 =>
-                                array (
-                                    'name' => 'referido_cliente_prov_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_REFERIDO_CLIENTE_PROV',
-                                ),
-                            7 =>
-                                array (
-                                ),
-                            8 =>
-                                array (
-                                    'name' => 'referenciado_agencia_c',
-                                    'label' => 'LBL_REFERENCIADO_AGENCIA',
-                                ),
-                            9 =>
-                                array (
-                                ),
-                            10 =>
-                                array (
-                                    'name' => 'tct_referenciado_dir_rel_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_TCT_REFERENCIADO_DIR_REL',
-                                ),
-                            11 =>
-                                array (
-                                ),
-                            12 =>
-                                array (
-                                    'name' => 'tct_origen_busqueda_txf_c',
-                                    'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
-                                ),
-                            13 =>
-                                array (
-                                    'name' => 'tct_origen_base_ddw_c',
-                                    'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
-                                ),
-                            14 =>
-                                array (
-                                    'name' => 'medio_detalle_origen_c',
-                                    'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
-                                ),
-                            15 =>
-                                array (
-                                    'name' => 'punto_contacto_origen_c',
-                                    'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
-                                ),
-                            16 =>
-                                array (
-                                    'name' => 'evento_c',
-                                    'label' => 'LBL_EVENTO',
-                                ),
-                            17 =>
-                                array (
-                                ),
-                            18 =>
-                                array (
-                                    'name' => 'camara_c',
-                                    'label' => 'LBL_CAMARA',
-                                ),
-                            19 =>
-                                array (
-                                ),
-                            20 =>
-                                array (
-                                    'name' => 'como_se_entero_c',
-                                    'label' => 'LBL_COMO_SE_ENTERO',
-                                ),
-                            21 =>
-                                array (
-                                    'name' => 'cual_c',
-                                    'label' => 'LBL_CUAL',
-                                ),
-                            22 =>
-                                array (
-                                    'name' => 'tct_origen_ag_tel_rel_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
-                                    'initial_filter' => 'filterAgentesTelefonicosTemplate',
-                                    'initial_filter_label' => 'LBL_FILTER_USER_BY_PUESTO',
-                                    'filter_populate' =>
-                                        array (
-                                            'puestousuario_c' =>
-                                                array (
-                                                    0 => '27',
-                                                    1 => '31',
-                                                ),
-                                        ),
-                                ),
-                            23 =>
-                                array (
-                                    'name' => 'tct_que_promotor_rel_c',
-                                    'studio' => 'visible',
-                                    'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
-                                ),
-                        ),
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL16',
+            'label' => 'LBL_RECORDVIEW_PANEL16',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'origen_cuenta_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ORIGEN_CUENTA_C',
+              ),
+              1 => 
+              array (
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN_C',
+              ),
+              2 => 
+              array (
+                'name' => 'prospeccion_propia_c',
+                'label' => 'LBL_PROSPECCION_PROPIA_C',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'referenciador_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERENCIADOR',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+              ),
+              7 => 
+              array (
+              ),
+              8 => 
+              array (
+                'name' => 'referenciado_agencia_c',
+                'label' => 'LBL_REFERENCIADO_AGENCIA',
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
+                'name' => 'tct_referenciado_dir_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_REFERENCIADO_DIR_REL',
+              ),
+              11 => 
+              array (
+              ),
+              12 => 
+              array (
+                'name' => 'tct_origen_busqueda_txf_c',
+                'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
+              ),
+              13 => 
+              array (
+                'name' => 'tct_origen_base_ddw_c',
+                'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
+              ),
+              14 => 
+              array (
+                'name' => 'medio_detalle_origen_c',
+                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
+              ),
+              15 => 
+              array (
+                'name' => 'punto_contacto_origen_c',
+                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
+              ),
+              16 => 
+              array (
+                'name' => 'evento_c',
+                'label' => 'LBL_EVENTO',
+              ),
+              17 => 
+              array (
+              ),
+              18 => 
+              array (
+                'name' => 'camara_c',
+                'label' => 'LBL_CAMARA',
+              ),
+              19 => 
+              array (
+              ),
+              20 => 
+              array (
+                'name' => 'como_se_entero_c',
+                'label' => 'LBL_COMO_SE_ENTERO',
+              ),
+              21 => 
+              array (
+                'name' => 'cual_c',
+                'label' => 'LBL_CUAL',
+              ),
+              22 => 
+              array (
+                'name' => 'tct_origen_ag_tel_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
+                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter_label' => 'LBL_FILTER_USER_BY_PUESTO',
+                'filter_populate' => 
+                array (
+                  'puestousuario_c' => 
+                  array (
+                    0 => '27',
+                    1 => '31',
+                  ),
                 ),
-          6 =>
+              ),
+              23 => 
+              array (
+                'name' => 'tct_que_promotor_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
+              ),
+            ),
+          ),
+          6 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -707,7 +713,7 @@ array (
               ),
             ),
           ),
-          7 =>
+          7 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -824,7 +830,7 @@ array (
               ),
             ),
           ),
-          8 =>
+          8 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -894,7 +900,7 @@ array (
               ),
             ),
           ),
-          9 =>
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -958,7 +964,7 @@ array (
               ),
             ),
           ),
-          10 =>
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -978,7 +984,7 @@ array (
               ),
             ),
           ),
-          11 =>
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -998,7 +1004,7 @@ array (
               ),
             ),
           ),
-          12 =>
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1018,7 +1024,7 @@ array (
               ),
             ),
           ),
-          13 =>
+          13 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1081,7 +1087,7 @@ array (
               ),
             ),
           ),
-          14 =>
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1124,7 +1130,7 @@ array (
               ),
             ),
           ),
-          15 =>
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1177,7 +1183,7 @@ array (
               ),
             ),
           ),
-          16 =>
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1238,7 +1244,7 @@ array (
               ),
             ),
           ),
-          17 =>
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1289,7 +1295,7 @@ array (
               ),
             ),
           ),
-          18 =>
+          18 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
