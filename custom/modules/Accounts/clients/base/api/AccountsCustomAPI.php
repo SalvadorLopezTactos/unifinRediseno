@@ -99,7 +99,6 @@ SQL;
                         "promotor_credit" => $Ejecutivos['credit'],
                         "equipo_credit" => $Ejecutivos['eq_credit'],
                         "mail_credit" => $Ejecutivos['mail_credit'],
-
                         "user_uniclick" => $Ejecutivos['id_uniclick'],
                         "promotor_uniclick" => $Ejecutivos['uniclick'],
                         "equipo_uniclick" => $Ejecutivos['eq_uniclick'],
