@@ -444,7 +444,7 @@ SQL;
     {
         global $current_user;
         //Tipo Cuenta: 3-Cliente, 4-Persona, 5-Proveedor **** SubTipo-Cuenta: 7-Interesado
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7"))) {
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7") || !empty($bean->id_uniclick_c) )) {
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(1, $bean);
@@ -592,7 +592,7 @@ SQL;
     {
 
         /*** ALI INICIO ***/
-        if ($bean->canal_c == 1 && $bean->sincronizado_unics_c == 0) {
+        if (($bean->canal_c == 1 || (!empty($bean->id_uniclick_c) && !empty($bean->idcliente_c))) && $bean->sincronizado_unics_c == 0) {
             $GLOBALS['log']->fatal("1");
             $callApi = new UnifinAPI();
             $cliente = $callApi->InsertaPersona($bean);
