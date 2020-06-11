@@ -220,56 +220,62 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tipo_registro_cuenta_c',
-                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
+                'name' => 'rfc_qr',
+                'label' => 'LBL_RFC_QR',
+                'studio' => 'visible',
+                'span' => 12,
               ),
               1 => 
               array (
-                'name' => 'subtipo_registro_cuenta_c',
-                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
-                'readonly' => true,
+                'name' => 'tipo_registro_cuenta_c',
+                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
               2 => 
+              array (
+                'name' => 'subtipo_registro_cuenta_c',
+                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
+              ),
+              3 => 
               array (
                 'name' => 'nivel_digitalizacion_c',
                 'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'tct_prioridad_ddw_c',
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'tct_homonimo_chk_c',
                 'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
-              5 => 
+              6 => 
               array (
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              9 => 
+              10 => 
               array (
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              11 => 
+              12 => 
               array (
               ),
             ),
@@ -327,19 +333,19 @@ array (
             array (
               0 => 
               array (
-                'name' => 'origendelprospecto_c',
+                'name' => 'origen_cuenta_c',
                 'studio' => 'visible',
-                'label' => 'LBL_ORIGENDELPROSPECTO',
+                'label' => 'LBL_ORIGEN_CUENTA_C',
               ),
               1 => 
               array (
-                'name' => 'tct_detalle_origen_ddw_c',
-                'label' => 'LBL_TCT_DETALLE_ORIGEN_DDW',
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN_C',
               ),
               2 => 
               array (
-                'name' => 'metodo_prospeccion_c',
-                'label' => 'LBL_METODO_PROSPECCION',
+                'name' => 'prospeccion_propia_c',
+                'label' => 'LBL_PROSPECCION_PROPIA_C',
               ),
               3 => 
               array (
@@ -391,13 +397,13 @@ array (
               ),
               14 => 
               array (
-                'name' => 'medio_digital_c',
-                'label' => 'LBL_MEDIO_DIGITAL',
+                'name' => 'medio_detalle_origen_c',
+                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
               ),
               15 => 
               array (
-                'name' => 'tct_punto_contacto_ddw_c',
-                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
+                'name' => 'punto_contacto_origen_c',
+                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
               ),
               16 => 
               array (
@@ -598,8 +604,8 @@ array (
               ),
               25 => 
               array (
-                'name' => 'puesto_c',
-                'label' => 'LBL_PUESTO',
+                'name' => 'puesto_cuenta_c',
+                'label' => 'LBL_PUESTO_CUENTA_C',
               ),
               26 => 
               array (

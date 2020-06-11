@@ -314,6 +314,8 @@
 
     _render: function () {
         this._super("_render");
+        //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="tct_no_contactar_chk_c"]').hide();
         this._doValidateProfesionRisk();
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/
@@ -1895,7 +1897,7 @@
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
         var webSite = this.model.get('website');
-        if (webSite != "") {
+        if(webSite != "" && webSite != undefined){
             //var expreg = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.$|^[\w\-]+(\.[\w\-]+)+[/#?]?.$/;
             var expreg = /^(https?:\/\/)?([\da-z\.-i][\w\-.]+)\.([\da-z\.i]{1,6})([\/\w\.=#%?-]*)*\/?$/;
 
@@ -1938,8 +1940,8 @@
                 });
 			      }
         }else{
-			      callback(null, fields, errors);
-		    }
+			callback(null, fields, errors);
+		}
     },
 
     rowebsite: function () {

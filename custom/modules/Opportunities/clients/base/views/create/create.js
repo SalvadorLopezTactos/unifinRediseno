@@ -343,6 +343,8 @@
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
+        //Oculta etiqueta del campo custom pipeline_opp
+        $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
     },
     /*
     *Victor Martinez Lopez
@@ -370,6 +372,10 @@
 
         self = this;
         var producto= this.model.get('tipo_producto_c');
+        //En caso de ser una solicitud de Unilease, se deben de validar los mismos campos que Leasing id=1
+        if(producto=='9'){
+            producto='1';
+        }
 
         if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
@@ -640,6 +646,12 @@
                         break;
                     case 6:
                         id:promotor = modelo.get('user_id6_c');
+                        break;
+                    case 8:
+                        id:promotor = modelo.get('user_id7_c');
+                        break;
+                    case 9:
+                        id:promotor = modelo.get('user_id7_c');
                         break;
                     default:
                         id:promotor = modelo.get('user_id_c');
@@ -1115,65 +1127,49 @@
     },
 
     personTypeCheck:function(fields, errors, callback) {
-       var self=this;
-       var tipo_registro;
-       //id de la Persona asociada
-       var id_person=this.model.get('account_id');
+        var self=this;
+        var tipo_registro;
+        //id de la Persona asociada
+        var id_person=this.model.get('account_id');
+        //Recupera productos asociados
+        if(id_person && id_person != '' && id_person.length>0){
+            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person ), null, {
+                success: _.bind(function(data){
+                    if(data!=null){
+                        //Procesa registros
+                        Productos = data;
+                        var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
+                        var tipoCuenta="";
+                        var tipoProducto = this.model.get('tipo_producto_c');
+                        _.each(Productos, function (value, key) {
+                            var tipoProductoIterado = Productos[key].tipo_producto;
+                            if (tipoProducto == tipoProductoIterado) {
+                                tipoCuenta = Productos[key].tipo_cuenta;
+                            }
 
-       if(id_person && id_person != '' && id_person.length>0){
-           app.api.call('GET', app.api.buildURL('tct02_Resumen/' + id_person ), null, {
-               success: _.bind(function(data){
-                   if(data!=null){
-                       var tipo="";
-
-                       switch (this.model.get('tipo_producto_c')) {
-                           case "1":
-                               tipo=data.tct_tipo_l_txf_c;
-                               break;
-                           case "3":
-                               tipo=data.tct_tipo_ca_txf_c
-                               break;
-                           case "4":
-                               tipo=data.tct_tipo_f_txf_c;
-                               break;
-                           case "6":
-                               tipo=data.tct_tipo_fl_txf_c;
-                               break;
-                           case "7":
-                               tipo=data.tct_tipo_l_txf_c;
-                               break;
-                       }
-                       if(tipo != "Prospecto" && tipo!= "Cliente"){
-                               app.alert.show("Cliente no v\u00E1lido", {
+                        });
+                        if(tipoCuenta != "2" && tipoCuenta!= "3"){
+                            app.alert.show("Cliente no v\u00E1lido", {
                                    level: "error",
-                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +tipo,
+                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
                                    autoClose: false
-                               });
+                            });
 
-                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                               errors['account_name_5'] = errors['account_name_5'] || {};
-                               errors['account_name_5'].custom_message1 = true;
-                               //this.cancelClicked();
-
-                       }
-
-                   }
-
-                   callback(null, fields, errors);
-
+                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                            errors['account_name_5'] = errors['account_name_5'] || {};
+                            errors['account_name_5'].custom_message1 = true;
+                        }
+                    }
+                    callback(null, fields, errors);
                },self),
            });
        }else{
-
            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
            errors['account_name_6'] = errors['account_name_6'] || {};
            errors['account_name_6'].custom_message1 = true;
            errors['account_name_6'].required = true;
-
            callback(null, fields, errors);
        }
-
-
    },
 
     calcularRI: function(){
@@ -1385,11 +1381,11 @@
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
         var admin=0;
-        
+
         if (typeof this.model.get('account_id') != "undefined" && this.model.get('account_id')!= "" ) {
           app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
-                
+
                 console.log(data);
 
                 for(var i=0;i<data.records.length;i++){
@@ -1397,10 +1393,10 @@
                     if(data.records[i].indicador!="" && data.records[i].inactivo == false){
 
                         var array_indicador=this._getIndicador(data.records[i].indicador);
-                        
+
                         for(var j=0;j<array_indicador.length;j++){
                             if(array_indicador[j]=='16'){
-                                admin++; 
+                                admin++;
                             }
                         }
                     }
@@ -1573,6 +1569,16 @@
         else if(op2[0] == "6"){
             this.model.set('tipo_producto_c','6');
             //console.log("5");
+        }
+        else if(op2[0]=="8"){//Uniclick
+            this.model.set('tipo_producto_c','8');
+            this.model.set('tipo_producto_c','9');
+
+        }
+        else if(op2[0]=="9"){//Unilease
+            this.model.set('tipo_producto_c','8');
+            this.model.set('tipo_producto_c','9');
+
         }
         //Eliminar los productos CS, CA y Linea de Credito de la Lista
         Object.keys(op2).forEach(function(key){

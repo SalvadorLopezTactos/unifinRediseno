@@ -104,11 +104,16 @@
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
             }
+            //Establece nombre para pre-solicitud Uniclick por Anfexi
+            if(!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && $bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c=='SI') {
+                $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
+            }
             /* @Jesus Carrillo
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
              */
             //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-            if($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2'){ // Prospecto - 2  // Contactado - 2
+            if(($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1' && $bean->tipo_producto_c == '8') ){ // Prospecto - 2  // Contactado - 2
+                $beanCuenta->tipo_registro_cuenta_c='2'; //Interesado - 7
                 $beanCuenta->subtipo_registro_cuenta_c='7'; //Interesado - 7
                 $beanCuenta->save();
             }
@@ -228,6 +233,10 @@ SQL;
                 return null;
             }
             $row = $bean->db->fetchByAssoc($queryResult);
+            //En caso de obtener Producto Unilease, se manda la petición como si fuera Producto Leasing id=1
+            if($row['tipo_producto_c']=='9'){
+                $row['tipo_producto_c']='1';
+            }
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
             $callApi = new UnifinAPI();
             $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
@@ -953,207 +962,41 @@ SQL;
         }
 
         public function actualizatipoprod($bean = null, $event = null, $args = null){
-            global $db;
-            global $app_list_strings; //Obtención de listas de valores
-            $tipo = $app_list_strings['tipo_registro_cuenta_list']; //obtencion lista tipo de registro
-            $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
-
-            $cliente = $bean->account_id; //ID de la Cuenta
-            $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
-            $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$cliente);
-
+            //Declara variables de Oportunidad
             $producto= $bean->tipo_producto_c;
             $etapa=$bean->tct_etapa_ddw_c;
             $subetapa= $bean->estatus_c;
-            //Condiciones para actualizar los tipos de Prospecto
-            $GLOBALS['log']->fatal($bean->fetched_row['tct_etapa_ddw_c']);
-            //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado
-            $GLOBALS['log']->fatal('Valida solicitud inicial');
-            if($etapa=="SI" && $bean->fetched_row['tct_etapa_ddw_c']!= $etapa){
-                $GLOBALS['log']->fatal('Declara Prospecto Interesado');
-                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                 $etisubtipo = $subtipo["7"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 7 - Interesado
-                 switch ($producto) {
-                     case '1':
-                         if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
-                             $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
-                             $bean_Resumen->tct_subtipo_l_txf_c = "Interesado";
-                             $bean_Resumen->tct_tipo_cuenta_l_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                         }
-                         break;
-                     case '3':
-                         if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto") {
-                             $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
-                             $bean_Resumen->tct_subtipo_ca_txf_c = "Interesado";
-                             $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                         }
-                         break;
-                     case '4':
-                         if($bean_Resumen->tct_tipo_f_txf_c=="Prospecto") {
-                             $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
-                             $bean_Resumen->tct_subtipo_f_txf_c = "Interesado";
-                             $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                         }
-                         break;
-                     case '6':
-                         if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
-                             $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
-                             $bean_Resumen->tct_subtipo_fl_txf_c = "Interesado";
-                             $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                         }
-                         break;
-                     default:
-                 }
-                //GUARDA REGISTRO DE RESUMEN
-                $bean_Resumen->save();
-            }
-            //Actualiza en Integracion de Expediente y actualiza campos con valor Prospecto en Integracion de Expediente
-            if($subetapa=="PE" && $bean->fetched_row[estatus_c]!= $subetapa){
-                $GLOBALS['log']->fatal('Entra a validar Prospecto Integracion de Exp');
-                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["8"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 8 - Integracion de Expediente
-                switch ($producto) {
-                    case '1':
-                        if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_l_txf_c = "Integracion de Expediente";
-                            $bean_Resumen->tct_tipo_cuenta_l_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '3':
-                        if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto" || $bean_Resumen->tct_tipo_ca_txf_c=="Lead") {
-                            $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_ca_txf_c = "Integracion de Expediente";
-                            $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '4':
-                        if($bean_Resumen->tct_tipo_f_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_f_txf_c = "Integracion de Expediente";
-                            $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '6':
-                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_fl_txf_c = "Integracion de Expediente";
-                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    default:
+            $cliente = $bean->account_id;
+            //Evalua cambio en etapa o subetapa
+            if ($bean->fetched_row[estatus_c]!=$subetapa || $bean->fetched_row['tct_etapa_ddw_c']!=$etapa) {
+                //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+                //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
+                $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
+                if($etapa=="SI" && $bean->fetched_row['tct_etapa_ddw_c']!= $etapa){
+                    $GLOBALS['log']->fatal('Prospecto Interesado');
+                    $this->actualizaTipoCuenta('2','7',$cliente,$producto);
                 }
-                //GUARDA REGISTRO DE RESUMEN
-                $bean_Resumen->save();
-            }
-            //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito
-            if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row[estatus_c]!= $subetapa){
-                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["9"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 9 - En Crédito
-                switch ($producto) {
-                    case '1':
-                        if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_l_txf_c = "Credito";
-                            $bean_Resumen->tct_tipo_cuenta_l_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '3':
-                        if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_ca_txf_c = "Credito";
-                            $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '4':
-                        if($bean_Resumen->tct_tipo_f_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_f_txf_c = "Credito";
-                            $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '6':
-                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_fl_txf_c = "Credito";
-                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    default:
+                //Actualiza en Integracion de Expediente y actualiza campos con valor Prospecto en Integracion de Expediente: 2,8
+                if($subetapa=="PE" && $bean->fetched_row[estatus_c]!= $subetapa){
+                    $GLOBALS['log']->fatal('Prospecto Integración de expediente');
+                    $this->actualizaTipoCuenta('2','8',$cliente,$producto);
                 }
-                //GUARDA REGISTRO DE RESUMEN
-                $bean_Resumen->save();
-            }
-            //Actualiza en Rechazado y actualiza campos con valor Prospecto Rechazado
-            if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row[estatus_c]!= $subetapa){
-                $etitipo = $tipo["2"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 2 - Prospecto
-                $etisubtipo = $subtipo["10"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 10 - Rechazado
-                switch ($producto) {
-                    case '1':
-                        if($bean_Resumen->tct_tipo_l_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_l_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_l_txf_c = "Rechazado";
-                            $bean_Resumen->tct_tipo_cuenta_l_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '3':
-                        if($bean_Resumen->tct_tipo_ca_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_ca_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_ca_txf_c = "Rechazado";
-                            $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '4':
-                        if($bean_Resumen->tct_tipo_f_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_f_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_f_txf_c = "Rechazado";
-                            $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    case '6':
-                        if($bean_Resumen->tct_tipo_fl_txf_c=="Prospecto") {
-                            $bean_Resumen->tct_tipo_fl_txf_c = "Prospecto";
-                            $bean_Resumen->tct_subtipo_fl_txf_c = "Rechazado";
-                            $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                        }
-                        break;
-                    default:
+                //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito: 2,9
+                if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row[estatus_c]!= $subetapa){
+                    $GLOBALS['log']->fatal('Prospecto En Crédito');
+                    $this->actualizaTipoCuenta('2','9',$cliente,$producto);
                 }
-                //GUARDA REGISTRO DE RESUMEN
-                $bean_Resumen->save();
-            }
-            //Actualiza cuando la solicitud es Autorizada (N)
-            if (!empty($bean_Resumen && $bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c)) { //Etapa solicitud= N= Autorizada
-                $etitipo = $tipo["3"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 3 - Cliente
-                $etisubtipo = $subtipo["18"]; //Obtiene el valor del campo obtenido de la lista con Etiqueta - 18 - Con Linea Vigente
+                //Actualiza en Rechazado y actualiza campos con valor Prospecto Rechazado: 2,10
+                if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row[estatus_c]!= $subetapa){
+                    $GLOBALS['log']->fatal('Prospecto Rechazado');
+                    $this->actualizaTipoCuenta('2','10',$cliente,$producto);
+                }
+                //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
+                if ($bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c) { //Etapa solicitud= N= Autorizada
+                    $GLOBALS['log']->fatal('Cliente con Línea Vigente');
+                    $this->actualizaTipoCuenta('3','18',$cliente,$producto);
+                }
 
-                //Setea valores para los campos por producto (leasing, factoraje y CA en tipo y subtipo).
-                //LEASING
-                if ($bean->tipo_producto_c=="1") {
-                    $bean_Resumen->tct_tipo_l_txf_c = "Cliente";
-                    $bean_Resumen->tct_subtipo_l_txf_c = "Con Linea Vigente";
-                    $bean_Resumen->tct_tipo_cuenta_l_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                }
-                //FACTORAJE
-                if($bean->tipo_producto_c=="4") {
-                    $bean_Resumen->tct_tipo_f_txf_c = "Cliente";
-                    $bean_Resumen->tct_subtipo_f_txf_c = "Con Linea Vigente";
-                    $bean_Resumen->tct_tipo_cuenta_f_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                }
-                //CREDITO AUTOMOTRIZ
-                if($bean->tipo_producto_c=="3") {
-                    $bean_Resumen->tct_tipo_ca_txf_c = "Cliente";
-                    $bean_Resumen->tct_subtipo_ca_txf_c = "Con Linea Vigente";
-                    $bean_Resumen->tct_tipo_cuenta_ca_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                }
-                //FLEET
-                if($bean->tipo_producto_c=="6") {
-                    $bean_Resumen->tct_tipo_fl_txf_c = "Cliente";
-                    $bean_Resumen->tct_subtipo_fl_txf_c = "Con Linea Vigente";
-                    $bean_Resumen->tct_tipo_cuenta_fl_c = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo),'UTF-8');
-                }
-                //GUARDA REGISTRO DE RESUMEN -
-                $bean_Resumen->save();
             }
         }
 
@@ -1241,4 +1084,30 @@ SQL;
             }
         }
 
+        function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+        {
+            //Valuda cuenta Asociada y producto
+      		  if($idCuenta && $tipoProducto){
+                //Recupera cuenta
+          		  $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
+                //Recupera productos y actualiza Tipo y subtipo
+                if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
+                    $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
+                    //Recupera valores
+                    $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
+                    $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
+                    $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
+                    //Itera productos recuperados
+                    foreach ($relateProducts as $product) {
+                        if ($tipoProducto == $product->tipo_producto) {
+                            //Actualiza tipo y subtipo de producto
+                            $product->tipo_cuenta = $tipo;
+                            $product->subtipo_cuenta = $subtipo;
+                            $product->tipo_subtipo_cuenta = $tipoSubtipo;
+                            $product->save();
+                        }
+                    }
+                }
+      		  }
+    	  }
     }

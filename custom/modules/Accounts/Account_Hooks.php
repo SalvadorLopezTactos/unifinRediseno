@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by Levementum.com
  * User: Jorge
@@ -6,20 +7,17 @@
  * Time: 2:35 PM
  */
 
-
-
 require_once("custom/Levementum/UnifinAPI.php");
 
 class Account_Hooks
 {
     public function nivelSatisfaccion($bean = null, $event = null, $args = null)
     {
-        if($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c && $bean->nivel_satisfaccion_c != 'Sin Clasificar')
-        {
+        if ($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c && $bean->nivel_satisfaccion_c != 'Sin Clasificar') {
             //Crea Notificacion al Promotor Leasing
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $bean->user_id_c;
@@ -31,8 +29,8 @@ class Account_Hooks
             $User->retrieve($bean->user_id_c);
             $jefe = $User->reports_to_id;
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $jefe;
@@ -40,12 +38,11 @@ class Account_Hooks
             $notification_bean->is_read = 0;
             $notification_bean->save();
         }
-        if($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c && $bean->nivel_satisfaccion_factoring_c != 'Sin Clasificar')
-        {
+        if ($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c && $bean->nivel_satisfaccion_factoring_c != 'Sin Clasificar') {
             //Crea Notificacion al Promotor Factoraje
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_factoring_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_factoring_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $bean->user_id1_c;
@@ -57,8 +54,8 @@ class Account_Hooks
             $User->retrieve($bean->user_id1_c);
             $jefe = $User->reports_to_id;
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_factoring_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_factoring_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $jefe;
@@ -66,12 +63,11 @@ class Account_Hooks
             $notification_bean->is_read = 0;
             $notification_bean->save();
         }
-        if($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c && $bean->nivel_satisfaccion_ca_c != 'Sin Clasificar')
-        {
+        if ($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c && $bean->nivel_satisfaccion_ca_c != 'Sin Clasificar') {
             //Crea Notificacion al Promotor Leasing
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_ca_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_ca_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $bean->user_id2_c;
@@ -83,8 +79,8 @@ class Account_Hooks
             $User->retrieve($bean->user_id2_c);
             $jefe = $User->reports_to_id;
             $notification_bean = BeanFactory::getBean("Notifications");
-            $notification_bean->name = 'Resultado NPS '.$bean->name;
-            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de '.$bean->name.' es: '.$bean->nivel_satisfaccion_ca_c;
+            $notification_bean->name = 'Resultado NPS ' . $bean->name;
+            $notification_bean->description = 'ALERTA: El resultado de la encuesta de Nivel de Satisfacción de ' . $bean->name . ' es: ' . $bean->nivel_satisfaccion_ca_c;
             $notification_bean->parent_id = $bean->id;
             $notification_bean->parent_type = 'Accounts';
             $notification_bean->assigned_user_id = $jefe;
@@ -102,7 +98,7 @@ class Account_Hooks
         } else {
             $_SESSION['estadoPersona'] = 'actualizando';
         }
-        $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . "  <".$current_user->user_name."> : ESTADO: " . $_SESSION['estadoPersona'] );
+        $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : ESTADO: " . $_SESSION['estadoPersona']);
     }
 
     public function set_primary_team($bean = null, $event = null, $args = null)
@@ -185,12 +181,12 @@ SQL;
     {
         $current_id_list = array();
 
-        if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
+        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
             //add update current records
             foreach ($bean->account_telefonos as $a_telefono) {
-                if(!empty($a_telefono['id'])){
+                if (!empty($a_telefono['id'])) {
                     $telefono = BeanFactory::getBean('Tel_Telefonos', $a_telefono['id']);
-                }else{
+                } else {
                     $telefono = BeanFactory::newBean('Tel_Telefonos');
                 }
                 $telefono->name = $a_telefono['telefono'] . ' ' . $a_telefono['extension'];
@@ -206,7 +202,7 @@ SQL;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
                 $telefono->whatsapp_c = $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
-                $GLOBALS['log']->fatal('WhatsApp: '.$telefono->whatsapp_c);
+                $GLOBALS['log']->fatal('WhatsApp: ' . $telefono->whatsapp_c);
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
@@ -232,24 +228,24 @@ SQL;
      */
     public function account_direcciones(&$bean, $event, $args)
     {
-        global $current_user,$db;
+        global $current_user, $db;
         $current_id_list = array();
         // select type | Street (Calle) | primary | inactive
         // populate relationships from dropdowns
 
         //Nuevo account_direcciones_n
-        if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
+        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
 
-                if(empty($direccion_row['id'])){
+                if (empty($direccion_row['id'])) {
                     //generar el guid
                     $guid = create_guid();
                     $direccion->id = $guid;
                     $direccion->new_with_id = true;
                     $new = true;
-                }else{
+                } else {
                     $new = false;
                 }
                 $direccion->name = $direccion_row['calle'];
@@ -276,13 +272,13 @@ SQL;
                 // populate related account id
                 $direccion->accounts_dire_direccion_1accounts_ida = $bean->id;
 
-                $nombre_colonia_query = "Select name from dire_colonia where id ='". $direccion_row['colonia']."'";
-                $nombre_municipio_query = "Select name from dire_municipio where id ='". $direccion_row['municipio']."'";
+                $nombre_colonia_query = "Select name from dire_colonia where id ='" . $direccion_row['colonia'] . "'";
+                $nombre_municipio_query = "Select name from dire_municipio where id ='" . $direccion_row['municipio'] . "'";
                 $querycolonia = $db->query($nombre_colonia_query);
                 $coloniaName = $db->fetchByAssoc($querycolonia);
                 $querymunicipio = $db->query($nombre_municipio_query);
                 $municipioName = $db->fetchByAssoc($querymunicipio);
-                $direccion_completa =$direccion_row['calle']." ".$direccion_row['numext']." ".($direccion_row['numint']!=""?"Int: ".$direccion_row['numint']:""). ", Colonia ".$coloniaName['name'].", Municipio ".$municipioName['name'];
+                $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $coloniaName['name'] . ", Municipio " . $municipioName['name'];
                 $direccion->name = $direccion_completa;
 
 
@@ -323,7 +319,7 @@ SQL;
                             $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal']);
                         }
                     } catch (Exception $e) {
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                     }
                 }
 
@@ -334,18 +330,18 @@ SQL;
                     }
                 }
 
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : DIRECCION NOMBRE" . $direccion_completa);
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE" . $direccion_completa);
                 $current_id_list[] = $direccion->id;
-                if($new){
+                if ($new) {
                     $direccion->save();
-                }else{
-                    $inactivo= $direccion->inactivo==1?$direccion->inactivo:0;
-                    $principal = $direccion->principal==1?$direccion->principal:0;
+                } else {
+                    $inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
+                    $principal = $direccion->principal == 1 ? $direccion->principal : 0;
                     $query = <<<SQL
 update dire_direccion set  name = '{$direccion->name}', tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
 SQL;
-                    try{
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Update *784 " . $query);
+                    try {
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
                         $resultado = $db->query($query);
                         $callApi = new UnifinAPI();
                         if ($direccion->sincronizado_unics_c == '0') {
@@ -353,11 +349,10 @@ SQL;
                         } else {
                             $direccion = $callApi->actualizaDireccion($direccion);
                         }
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : resultado " . $db->getAffectedRowCount($resultado));
-                    }catch (Exception $e){
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
+                    } catch (Exception $e) {
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                     }
-
                 }
                 //$direccion->save();
             }
@@ -380,15 +375,21 @@ SQL;
             //login class located at custom/Levementum/UnifinAPI.php
             global $db;
             $callApi = new UnifinAPI();
-            $coincidencias = $callApi->listaNegra($bean->primernombre_c, $bean->segundonombre_c,
-                $bean->apellidopaterno_c, $bean->apellidomaterno_c, $bean->tipodepersona_c, $bean->razonsocial_c);
-            $bean->lista_negra_c = $coincidencias['listaNegra'] <= 0 ? 0 : 1 ;
-            $bean->pep_c = $coincidencias['PEP'] <= 0 ? 0 : 1 ;
+            $coincidencias = $callApi->listaNegra(
+                $bean->primernombre_c,
+                $bean->segundonombre_c,
+                $bean->apellidopaterno_c,
+                $bean->apellidomaterno_c,
+                $bean->tipodepersona_c,
+                $bean->razonsocial_c
+            );
+            $bean->lista_negra_c = $coincidencias['listaNegra'] <= 0 ? 0 : 1;
+            $bean->pep_c = $coincidencias['PEP'] <= 0 ? 0 : 1;
 
             // todo: Validar que el valor de Alto riesgo sea solo por valor del oficial de cumplimiento - Waldo //VAlor anterior 0
             if ($bean->lista_negra_c > 0 || $bean->pep_c > 0) {
                 $bean->riesgo_c = 'Alto';
-            } else{
+            } else {
                 //Validar riesgo pais y profesión antes de establecer el riesgo como bajo
                 global $db, $current_user;
                 $query = <<<SQL
@@ -399,9 +400,9 @@ where acc.id_c = '{$bean->user_id_c}'
 SQL;
                 $queryResult = $db->query($query);
                 while ($row = $db->fetchByAssoc($queryResult)) {
-                    if ($row['AltoRiesgo']==1){
+                    if ($row['AltoRiesgo'] == 1) {
                         $bean->riesgo_c = 'Alto';
-                    }else{
+                    } else {
                         //Valida el riesgo por profesión
                         /*
                         if(!_.isEmpty(this.model.get("profesion_c")) || this.model.get("profesion_c") != null) {
@@ -419,9 +420,9 @@ SQL;
                     }
                 }
             }
-            $GLOBALS['log']->fatal(" <".$current_user->user_name."> : coincidencias['PEP'] " . print_r($coincidencias['PEP'], 1));
-            $GLOBALS['log']->fatal(" <".$current_user->user_name."> : coincidencias['listaNegra'] " . print_r($coincidencias['listaNegra'], 1));
-            $GLOBALS['log']->fatal(" <".$current_user->user_name."> : $bean->riesgo_c " . print_r($bean->riesgo_c, 1));
+            $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : coincidencias['PEP'] " . print_r($coincidencias['PEP'], 1));
+            $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : coincidencias['listaNegra'] " . print_r($coincidencias['listaNegra'], 1));
+            $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : $bean->riesgo_c " . print_r($bean->riesgo_c, 1));
         }
     }
 
@@ -434,7 +435,7 @@ SQL;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(3);
             $bean->idprospecto_c = $numeroDeFolio;
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : numeroDeFolio   " . ": $numeroDeFolio ");
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : numeroDeFolio   " . ": $numeroDeFolio ");
         }
     }
 
@@ -443,18 +444,18 @@ SQL;
     {
         global $current_user;
         //Tipo Cuenta: 3-Cliente, 4-Persona, 5-Proveedor **** SubTipo-Cuenta: 7-Interesado
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7"))) {
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7") || !empty($bean->id_uniclick_c) )) {
             global $db;
             $callApi = new UnifinAPI();
-            $numeroDeFolio = $callApi->generarFolios(1,$bean);
+            $numeroDeFolio = $callApi->generarFolios(1, $bean);
             $bean->idcliente_c = $numeroDeFolio;
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> :numeroDeFolio   " . ": $numeroDeFolio ");
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :numeroDeFolio   " . ": $numeroDeFolio ");
 
             //$this->actualizaOportunidadProspecto($bean);
         }
 
         //Generación de referencia bancaria
-        if($bean->idcliente_c > 0 && (empty($bean->referencia_bancaria_c) || $bean->referencia_bancaria_c == '')){
+        if ($bean->idcliente_c > 0 && (empty($bean->referencia_bancaria_c) || $bean->referencia_bancaria_c == '')) {
             $bean->referencia_bancaria_c = $this->GeneraReferenciaBancaria($bean->idcliente_c);
         }
     }
@@ -465,7 +466,8 @@ SQL;
     // además de la funcionalidad actual (invocación de BPM y de folio de cliente), deberás de obtener un folio de solicitud
     // para actualizar el folio y estatus (“INTEGRACION DE EXPEDIENTE”) de dicha oportunidad.
     // TODO UNIFIN: Modificar función actualizaOportunidadProspecto de Account_Hook.php ya que está haciendo un Query buscando oportunidades en estatus "'Oportunidad de Prospecto'" para crear procesos
-    public function actualizaOportunidadProspecto($bean){
+    public function actualizaOportunidadProspecto($bean)
+    {
         //$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__."Carlos Zaragoza BEAN : " . print_r($bean,1));
         $callApi = new UnifinAPI();
         try {
@@ -554,7 +556,7 @@ SQL;
 
                 //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "CZ: parametros para UNI2-01 antes de obtenSolicitud: " . print_r($row, 1));
                 $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
-                $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : solicitudCreditoResultado " . print_r($solicitudCreditoResultado,1));
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : solicitudCreditoResultado " . print_r($solicitudCreditoResultado, 1));
 
                 //Actualiza la operacion con el id de solicitud y pon el estatus en Integracion de expediente
                 $opp = BeanFactory::getBean('Opportunities');
@@ -563,14 +565,11 @@ SQL;
                 $opp->idsolicitud_c = $solicitudCreditoResultado['idSolicitud'];
                 $opp->save();
 
-                $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Opportunity({$opp->id}) changed to Integracion de Expediente OP");
-
-
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Opportunity({$opp->id}) changed to Integracion de Expediente OP");
             } //while
-        } catch
-        (Exception $e) {
-            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
     }
 
@@ -580,10 +579,10 @@ SQL;
         global $current_user;
         $callApi = new UnifinAPI();
         // ** jsr ** inicio
-        if(($bean->id_process_c == 0 || $bean->id_process_c == null || $bean->id_process_c == "") && ($bean->lista_negra_c == 1 || $bean->pep_c == 1)) {
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ** JSR ** if a ejecutar OFICIAL DE CUMPLIMIENTO   " . ": $bean->id_process_c ");
+        if (($bean->id_process_c == 0 || $bean->id_process_c == null || $bean->id_process_c == "") && ($bean->lista_negra_c == 1 || $bean->pep_c == 1)) {
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** if a ejecutar OFICIAL DE CUMPLIMIENTO   " . ": $bean->id_process_c ");
             $liberacion = $callApi->liberacionLista($bean->id, $bean->lista_negra_c, $bean->pep_c, $bean->idprospecto_c, $bean->tipo_registro_cuenta_c, $current_user->user_name, $bean->name);
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Inicia OFICIAL DE CUMPLIMIENTO   " . ": $liberacion ");
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Inicia OFICIAL DE CUMPLIMIENTO   " . ": $liberacion ");
         }
         // ** jsr ** fin
     }
@@ -593,17 +592,14 @@ SQL;
     {
 
         /*** ALI INICIO ***/
-        if($bean->canal_c == 1 && $bean->sincronizado_unics_c == 0)
-        {
-            $GLOBALS['log']-> fatal ("1");
+        if (($bean->canal_c == 1 || (!empty($bean->id_uniclick_c) && !empty($bean->idcliente_c))) && $bean->sincronizado_unics_c == 0) {
+            $GLOBALS['log']->fatal("1");
             $callApi = new UnifinAPI();
             $cliente = $callApi->InsertaPersona($bean);
             $this->emailChangetoUnics($bean);
-        }
-        else
-        {
+        } else {
             //Tipo Cuenta = 4 - Persona  2 - Prospecto
-            if(($bean->tipo_registro_cuenta_c != '4' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == 0) {
+            if (($bean->tipo_registro_cuenta_c != '4' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == 0) {
 
                 if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_cuenta_c != '2' && $_SESSION['estadoPersona'] == 'insertando')) {
                     $callApi = new UnifinAPI();
@@ -613,21 +609,17 @@ SQL;
             /**
              * F. Javier G. Solar 12/07/2018
              * Se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
-            *realizado.
-            *Conservar los campos que sean obligatorios de acuerdo a la opción
-            *seleccionada
+             *realizado.
+             *Conservar los campos que sean obligatorios de acuerdo a la opción
+             *seleccionada
 
              */ // Tipo Cuenta 2-Prospecto, subTipo Cuenta 7-Interesado
-            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c=="2" && $bean->subtipo_registro_cuenta_c=="7")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
-            {
+            if ((($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c)) {
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->insertarClienteCompleto($bean);
-
-
             }
-
         }
-      //  $this->actualizaOportunidadProspecto($bean);
+        //  $this->actualizaOportunidadProspecto($bean);
         /*** ALI FIN ***/
     }
 
@@ -640,8 +632,10 @@ SQL;
     public function seguimiento_futuro($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        if ($bean->estatus_c != 'Seguimiento Futuro' || empty($bean->seguimiento_futuro_c)
-            || $bean->seguimiento_futuro_c == $bean->fetched_row['seguimiento_futuro_c']) {
+        if (
+            $bean->estatus_c != 'Seguimiento Futuro' || empty($bean->seguimiento_futuro_c)
+            || $bean->seguimiento_futuro_c == $bean->fetched_row['seguimiento_futuro_c']
+        ) {
             return null;
         }
         try {
@@ -670,7 +664,6 @@ SQL;
                 $call->name = $bean->name . " (Seguimiento Futuro)";
                 $call->description = $bean->descripciondetarea_c;
                 $call->save();
-
             }
             if ($bean->tiposeguimiento_c == 'Tarea') {
                 $task = BeanFactory::getBean('Tasks');
@@ -682,23 +675,20 @@ SQL;
                 $task->name = $bean->name . " (Seguimiento Futuro)";
                 $task->description = $bean->descripciondetarea_c;
                 $task->save();
-
             }
-
         } catch (Exception $e) {
-            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . $e->getMessage());
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
 
-        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : SEGUIMIENTO FUTURO: " . print_r($meeting, 1));
-
+        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : SEGUIMIENTO FUTURO: " . print_r($meeting, 1));
     }
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-        if($_REQUEST['module'] != 'Import') {
+        if ($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar') {
+                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c') {
                     $value = mb_strtoupper($value, "UTF-8");
                     $bean->$field = $value;
                 }
@@ -717,7 +707,7 @@ SQL;
         global $current_user;
         global $db;
         try {
-            $GLOBALS['log']->fatal(" <".$current_user->user_name."> :El estatus en sesion al actualizar Persona es:" . $_SESSION['estadoPersona']);
+            $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> :El estatus en sesion al actualizar Persona es:" . $_SESSION['estadoPersona']);
             /*
               AF - 2018/11/01
               Modica condición para  actualizar  registros que tengan idCliente y Leads que sean relación de otras cuentas
@@ -729,29 +719,29 @@ SQL;
                 //Evalua si envía lead
                 $relacionado = 0;
                 if ($bean->tipo_registro_cuenta_c == '1') { //Tipo Cuenta 1-Lead
-                  // Consulta si tiene relación
-                  $query = "select id_c from rel_relaciones_cstm
-                          where account_id1_c ='". $bean->id ."'
+                    // Consulta si tiene relación
+                    $query = "select id_c from rel_relaciones_cstm
+                          where account_id1_c ='" . $bean->id . "'
                           limit 1;";
-                  $queryResult = $db->query($query);
-                  //Si tiene relaciones envia petición
-                  while ($row = $db->fetchByAssoc($queryResult)) {
-                      $relacionado = 1;
-                  }
+                    $queryResult = $db->query($query);
+                    //Si tiene relaciones envia petición
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        $relacionado = 1;
+                    }
                 }
                 //CVV - valida que la persona ya se encuentre sincornizada con UNICS, de lo contrario manda a insertar completo
-                if($bean->sincronizado_unics_c == 1){
-                    if (($bean->tipo_registro_cuenta_c == '1' && ($relacionado==1 || $bean->esproveedor_c || $bean->deudor_factor_c)) || $bean->tipo_registro_cuenta_c != '1') {
-                      $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
-                      $this->emailChangetoUnics($bean);
+                if ($bean->sincronizado_unics_c == 1) {
+                    if (($bean->tipo_registro_cuenta_c == '1' && ($relacionado == 1 || $bean->esproveedor_c || $bean->deudor_factor_c)) || $bean->tipo_registro_cuenta_c != '1') {
+                        $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
+                        $this->emailChangetoUnics($bean);
                     }
-                }else{
+                } else {
                     $Actualizacliente = $callApi->insertarClienteCompleto($bean);
                 }
             }
         } catch (Exception $e) {
-            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . $e->getMessage());
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
     }
     /*** CVV FIN **/
@@ -765,22 +755,22 @@ SQL;
                 $_SESSION['estadoPersona'] = '';
             }
         } catch (Exception $e) {
-            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error: " . $e->getMessage());
-            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
+            error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
     }
 
     public function account_contacts(&$bean, $event, $args)
     {
-        if($bean->tipodepersona_c == 'Persona Moral') {
-            $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." bean->account_contacts :  " . print_r($bean->account_contacts,true));
+        if ($bean->tipodepersona_c == 'Persona Moral') {
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " bean->account_contacts :  " . print_r($bean->account_contacts, true));
 
             if ($bean->account_contacts != null && $bean->account_contacts != '') {
                 foreach ($bean->account_contacts as $contact_row) {
-                    if($contact_row['primerNombre'] != null) {
+                    if ($contact_row['primerNombre'] != null) {
                         $contactoRel = BeanFactory::getBean('Accounts');
                         $contactoRel->tipodepersona_c = "Persona Fisica";
-                        $contactoRel->primernombre_c = $contact_row['primerNombre'] . ($contact_row['segundoNombre'] != "" ? " ". $contact_row['segundoNombre'] : "");
+                        $contactoRel->primernombre_c = $contact_row['primerNombre'] . ($contact_row['segundoNombre'] != "" ? " " . $contact_row['segundoNombre'] : "");
                         //$contactoRel->segundonombre_c = $contact_row['segundoNombre'];
                         $contactoRel->apellidopaterno_c = $contact_row['apellidoPaterno'];
                         $contactoRel->apellidomaterno_c = $contact_row['apellidoMaterno'];
@@ -807,7 +797,7 @@ SQL;
                         $Rel->team_id = $bean->team_id;
                         $Rel->save();
 
-                        if(!empty($contact_row['telefonoContacto'])) {
+                        if (!empty($contact_row['telefonoContacto'])) {
                             $telefono = BeanFactory::getBean('Tel_Telefonos');
                             $telefono->name = $contact_row['telefonoContacto'];
                             $telefono->telefono = $contact_row['telefonoContacto'];
@@ -829,14 +819,15 @@ SQL;
      * @brief Envia lista de correos de un account al servicio de UNICs
      *
      * */
-    public function emailChangetoUnics($bean){
+    public function emailChangetoUnics($bean)
+    {
         global $current_user, $db;
-        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Entra a email");
+        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Entra a email");
         //Este es el correo anterior $bean->email1
-        $GLOBALS['log']->fatal(" <".$current_user->user_name."> : bean correo", $bean->email1);
+        $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : bean correo", $bean->email1);
         //$GLOBALS['log']->fatal(" <".$current_user->user_name."> : bean", print_r($bean,true));
 
-        $query=<<<SQL
+        $query = <<<SQL
 select ac.id_c, ac.idcliente_c, e.id, e.email_address,  er.deleted from email_addr_bean_rel er, email_addresses e, accounts_cstm ac
 where er.bean_id = '{$bean->id}'  and er.email_address_id = e.id and ac.id_c = er.bean_id;
 SQL;
@@ -855,27 +846,26 @@ SQL;
         $correos['GuidCliente'] = $id;
         $correos['IdCliente'] = $cliente;
         $correos['Emails'] = $correo;
-        $main['oCorreos']= $correos;
-        $GLOBALS['log']->fatal(" <".$current_user->user_name."> : bean addresses", print_r($correos, true));
+        $main['oCorreos'] = $correos;
+        $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : bean addresses", print_r($correos, true));
 
         $callApi = new UnifinAPI();
-        if($correos['GuidCliente'] != null){
+        if ($correos['GuidCliente'] != null) {
             $resultado = $callApi->correosDeCliente($main);
 
-            $GLOBALS['log']->fatal(" <".$current_user->user_name."> : RESULTADO", print_r($resultado, true));
+            $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : RESULTADO", print_r($resultado, true));
         }
-
     }
     /** @var Account $bean*/
     public function rfcDuplicate($bean, $event, $args)
     {
         global $db, $current_user;
-        if($bean->tipodepersona_c == 'Persona Moral'){
+        if ($bean->tipodepersona_c == 'Persona Moral') {
             $query = "Select count(*) as duplicados from accounts_cstm
 where rfc_c = '{$bean->rfc_c}' and
  razonsocial_c = '$bean->razonsocial_c' AND
  id_c <> '{$bean->id}'";
-        }else{
+        } else {
             $query = "Select count(*) as duplicados from accounts_cstm
 where rfc_c = '{$bean->rfc_c}' and
  primernombre_c = '$bean->primernombre_c' AND
@@ -891,7 +881,6 @@ where rfc_c = '{$bean->rfc_c}' and
         if ($queryResult > 0) {
             require_once 'include/api/SugarApiException.php';
             throw new SugarApiExceptionInvalidParameter("Ya existe una persona registrada con mismo nombre y RFC.");
-
         } else {
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : No hay duplicados " . $queryResult);
         }
@@ -902,48 +891,45 @@ where rfc_c = '{$bean->rfc_c}' and
         $sum = 0;
         $digits = str_split($idCliente);
         for ($i = 0; $i < strlen($idCliente); $i++) {
-            if((strlen($idCliente) - ($i+1)) % 2 == 0){
-                $sum = $sum + ($digits[$i] * 2 > 9 ? ($digits[$i] * 2) - 9 : $digits[$i] * 2 );
-            }else{
+            if ((strlen($idCliente) - ($i + 1)) % 2 == 0) {
+                $sum = $sum + ($digits[$i] * 2 > 9 ? ($digits[$i] * 2) - 9 : $digits[$i] * 2);
+            } else {
                 $sum = $sum + $digits[$i];
             }
         }
-        $sum = 10 - $sum %10;
+        $sum = 10 - $sum % 10;
         return $idCliente . ($sum % 10);
     }
 
     public function crearFolioRelacion($bean = null, $event = null, $args = null)
     {
-   		global $db;
-		$idCuenta = $bean->id;
-		$query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
+        global $db;
+        $idCuenta = $bean->id;
+        $query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
         $result = $db->query($query);
-    	$row = $db->fetchByAssoc($result);
-		if($row)
-    	{
-			if ($bean->idcliente_c == '' || $bean->idcliente_c == '0') {
-				$callApi = new UnifinAPI();
-				$numeroDeFolio = $callApi->generarFolios(1,$bean);
-				$bean->idcliente_c = $numeroDeFolio;
-			}
-		}
+        $row = $db->fetchByAssoc($result);
+        if ($row) {
+            if ($bean->idcliente_c == '' || $bean->idcliente_c == '0') {
+                $callApi = new UnifinAPI();
+                $numeroDeFolio = $callApi->generarFolios(1, $bean);
+                $bean->idcliente_c = $numeroDeFolio;
+            }
+        }
     }
 
     public function relacion2UNICS($bean = null, $event = null, $args = null)
     {
-   		global $db;
-		$idCuenta = $bean->id;
-		$query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
+        global $db;
+        $idCuenta = $bean->id;
+        $query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
         $result = $db->query($query);
-    	$row = $db->fetchByAssoc($result);
-		if($row)
-    	{
-			if($bean->sincronizado_unics_c == 0)
-			{
-				$callApi = new UnifinAPI();
-				$cliente = $callApi->insertarClienteCompleto($bean);
-			}
-		}
+        $row = $db->fetchByAssoc($result);
+        if ($row) {
+            if ($bean->sincronizado_unics_c == 0) {
+                $callApi = new UnifinAPI();
+                $cliente = $callApi->insertarClienteCompleto($bean);
+            }
+        }
     }
 
     public function creaResumen($bean = null, $event = null, $args = null)
@@ -951,9 +937,9 @@ where rfc_c = '{$bean->rfc_c}' and
         global $db;
         $idCuenta = $bean->id;
         $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
-        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
+        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $idCuenta);
 
-        if ($bean_Resumen== null || empty($bean_Resumen)){
+        if ($bean_Resumen == null || empty($bean_Resumen)) {
             // global $app_list_strings, $current_user; //Obtención de listas de valores
             // $tipo = $app_list_strings['tipo_registro_list']; //obtencion lista tipo de registro
             // $subtipo = $app_list_strings['subtipo_cuenta_list'];  //Obtiene lista de los subtipos de cuenta
@@ -1028,390 +1014,365 @@ where rfc_c = '{$bean->rfc_c}' and
 
         $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
         //Valida Cuenta tipo promotor
-        if($bean->tipo_registro_cuenta_c == '2'){ //2-Prospecto
-          //Valida promotor Leasing
-          if ((empty($bean->user_id_c) || $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
-              $bean->user_id_c = $idSinGestor;
-          }
-          //Valida promotor Factoraje
-          if ((empty($bean->user_id1_c) || $bean->user_id1_c =="") && empty($bean->promotorfactoraje_c)) {
-              $bean->user_id1_c = $idSinGestor;
-          }
-          //Valida promotor CA
-          if ((empty($bean->user_id2_c) || $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
-              $bean->user_id2_c = $idSinGestor;
-          }
-          //Valida promotor Fleet
-          if ((empty($bean->user_id6_c) || $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
-              $bean->user_id6_c = $idSinGestor;
-          }
-          //Valida promotor Uniclick
-          if ((empty($bean->user_id7_c) || $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
-             $bean->user_id7_c = $idSinGestor;
-          }
+        if ($bean->tipo_registro_cuenta_c == '2') { //2-Prospecto
+            //Valida promotor Leasing
+            if ((empty($bean->user_id_c) || $bean->user_id_c == "") && empty($bean->promotorleasing_c)) {
+                $bean->user_id_c = $idSinGestor;
+            }
+            //Valida promotor Factoraje
+            if ((empty($bean->user_id1_c) || $bean->user_id1_c == "") && empty($bean->promotorfactoraje_c)) {
+                $bean->user_id1_c = $idSinGestor;
+            }
+            //Valida promotor CA
+            if ((empty($bean->user_id2_c) || $bean->user_id2_c == "") && empty($bean->promotorcredit_c)) {
+                $bean->user_id2_c = $idSinGestor;
+            }
+            //Valida promotor Fleet
+            if ((empty($bean->user_id6_c) || $bean->user_id6_c == "") && empty($bean->promotorfleet_c)) {
+                $bean->user_id6_c = $idSinGestor;
+            }
+            //Valida promotor Uniclick
+            if ((empty($bean->user_id7_c) || $bean->user_id7_c == "") && empty($bean->promotoruniclick_c)) {
+                $bean->user_id7_c = $idSinGestor;
+            }
         }
     }
 
-    public function guardapotencial($bean=null, $event= null, $args= null){
+    public function guardapotencial($bean = null, $event = null, $args = null)
+    {
 
         global $db;
         $idCuenta = $bean->id;
         //$GLOBALS['log']->fatal('Entra a guardar autos Potencial en Resumen');
         $PotencialAutos = json_decode($bean->potencial_autos);
         //Recupera el bean de tct02_resumen
-        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
+        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $idCuenta);
         //$GLOBALS['log']->fatal(print_r($PotencialAutos,true));
         //$GLOBALS['log']->fatal(print_r($bean->potencial_autos,true));
 
-        if (!empty($bean_Resumen) && !empty($PotencialAutos)){
+        if (!empty($bean_Resumen) && !empty($PotencialAutos)) {
             //$GLOBALS['log']->fatal('Entra Resumen OK ');
             //$GLOBALS['log']->fatal($PotencialAutos->autos->tct_no_autos_u_int_c);
             //Setea los valores en los campos de tct02_resumen
             $bean_Resumen->tct_no_autos_u_int_c = $PotencialAutos->autos->tct_no_autos_u_int_c;
-            $bean_Resumen->tct_no_autos_e_int_c =$PotencialAutos->autos->tct_no_autos_e_int_c;
-            $bean_Resumen->tct_no_motos_int_c =$PotencialAutos->autos->tct_no_motos_int_c;
-            $bean_Resumen->tct_no_camiones_int_c =$PotencialAutos->autos->tct_no_camiones_int_c;
+            $bean_Resumen->tct_no_autos_e_int_c = $PotencialAutos->autos->tct_no_autos_e_int_c;
+            $bean_Resumen->tct_no_motos_int_c = $PotencialAutos->autos->tct_no_motos_int_c;
+            $bean_Resumen->tct_no_camiones_int_c = $PotencialAutos->autos->tct_no_camiones_int_c;
 
             //Guardar registro
             $bean_Resumen->save();
         }
-
     }
 
-    public function quitaespacios($bean=null, $event= null, $args= null){
+    public function quitaespacios($bean = null, $event = null, $args = null)
+    {
 
         global $db;
         global $app_list_strings, $current_user; //Obtención de listas de valores
         $idCuenta = $bean->id;
         //$GLOBALS['log']->fatal('Limpia espacios');
         //Se crean variables que limpien los excesos de espacios en los campos establecidos.
-        $limpianame= preg_replace('/\s\s+/', ' ', $bean->name);
-        $limpianombre= preg_replace('/\s\s+/', ' ', $bean->primernombre_c);
-        $limpiaapaterno= preg_replace('/\s\s+/', ' ', $bean->apellidopaterno_c);
-        $limpiamaterno= preg_replace('/\s\s+/', ' ', $bean->apellidomaterno_c);
-        $limpiarazon= preg_replace('/\s\s+/', ' ', $bean->razonsocial_c);
-        $limpianomcomercial= preg_replace('/\s\s+/', ' ', $bean->nombre_comercial_c);
+        $limpianame = preg_replace('/\s\s+/', ' ', $bean->name);
+        $limpianombre = preg_replace('/\s\s+/', ' ', $bean->primernombre_c);
+        $limpiaapaterno = preg_replace('/\s\s+/', ' ', $bean->apellidopaterno_c);
+        $limpiamaterno = preg_replace('/\s\s+/', ' ', $bean->apellidomaterno_c);
+        $limpiarazon = preg_replace('/\s\s+/', ' ', $bean->razonsocial_c);
+        $limpianomcomercial = preg_replace('/\s\s+/', ' ', $bean->nombre_comercial_c);
 
         //Actualiza valores limpios a los campos de la Cuenta
-        $bean->name= $limpianame;
-        $bean->primernombre_c= $limpianombre;
-        $bean->apellidopaterno_c= $limpiaapaterno;
-        $bean->apellidomaterno_c=$limpiamaterno;
-        $bean->razonsocial_c=$limpiarazon;
-        $bean->nombre_comercial_c=$limpianomcomercial;
-        if ($bean->tipodepersona_c=="Persona Moral"){
-            $bean->name=$bean->razonsocial_c;
+        $bean->name = $limpianame;
+        $bean->primernombre_c = $limpianombre;
+        $bean->apellidopaterno_c = $limpiaapaterno;
+        $bean->apellidomaterno_c = $limpiamaterno;
+        $bean->razonsocial_c = $limpiarazon;
+        $bean->nombre_comercial_c = $limpianomcomercial;
+        if ($bean->tipodepersona_c == "Persona Moral") {
+            $bean->name = $bean->razonsocial_c;
         }
 
         //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-        if ($bean->clean_name=="" || $bean->clean_name==null){
+        if ($bean->clean_name == "" || $bean->clean_name == null) {
             $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-            $acronimos= $app_list_strings['validacion_duplicados_list'];
+            $acronimos = $app_list_strings['validacion_duplicados_list'];
 
-            if ($bean->tipodepersona_c!="Persona Moral"){
+            if ($bean->tipodepersona_c != "Persona Moral") {
                 //$GLOBALS['log']->fatal(print_r($tipo,true));
                 //Cambia a mayúsculas y quita espacios a cada campo
                 //Concatena los tres campos para formar el clean_name
-                $nombre= $bean->name;
-                $nombre= mb_strtoupper($nombre, "UTF-8");
-                $separa= explode( " ",$nombre);
+                $nombre = $bean->name;
+                $nombre = mb_strtoupper($nombre, "UTF-8");
+                $separa = explode(" ", $nombre);
                 //$GLOBALS['log']->fatal(print_r($separa,true));
-                $longitud=count($separa);
+                $longitud = count($separa);
                 //Itera el arreglo separado
                 for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t=>$key){
-                        $separa[$i]=str_replace($key,"", $separa[$i]);
+                    foreach ($tipo as $t => $key) {
+                        $separa[$i] = str_replace($key, "", $separa[$i]);
                     }
                 }
-                $une= implode($separa);
-                $bean->clean_name= $une;
+                $une = implode($separa);
+                $bean->clean_name = $une;
                 //$GLOBALS['log']->fatal($bean->clean_name);
 
-            }else{
+            } else {
                 //$GLOBALS['log']->fatal($bean->razonsocial_c);
-                $nombre=$bean->name;
-                $nombre= mb_strtoupper($nombre, "UTF-8");
-                $separa= explode( " ",$nombre);
-                $separa_limpio=$separa;
-                $GLOBALS['log']->fatal(print_r($separa,true));
-                $longitud=count($separa);
-                $eliminados=0;
+                $nombre = $bean->name;
+                $nombre = mb_strtoupper($nombre, "UTF-8");
+                $separa = explode(" ", $nombre);
+                $separa_limpio = $separa;
+                $GLOBALS['log']->fatal(print_r($separa, true));
+                $longitud = count($separa);
+                $eliminados = 0;
                 //Itera el arreglo separado
                 for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t=>$key){
-                        $separa[$i]=str_replace($key,"", $separa[$i]);
-                        $separa_limpio[$i]=str_replace($key,"", $separa_limpio[$i]);
+                    foreach ($tipo as $t => $key) {
+                        $separa[$i] = str_replace($key, "", $separa[$i]);
+                        $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
                     }
-                    foreach ($acronimos as $a=>$key){
-                        if($separa[$i]==$a){
-                            $separa[$i]="";
+                    foreach ($acronimos as $a => $key) {
+                        if ($separa[$i] == $a) {
+                            $separa[$i] = "";
                             $eliminados++;
                         }
                         //$GLOBALS['log']->fatal($a);
-                        $GLOBALS['log']->fatal(print_r($separa,true));
-
-
+                        $GLOBALS['log']->fatal(print_r($separa, true));
                     }
                 }
                 //Condicion para eliminar los acronimos
-                if(($longitud-$eliminados)<=1){
-                    $separa=$separa_limpio;
+                if (($longitud - $eliminados) <= 1) {
+                    $separa = $separa_limpio;
                 }
                 //Convierte el array a string nuevamente
-                $une= implode($separa);
-                $bean->clean_name= $une;
+                $une = implode($separa);
+                $bean->clean_name = $une;
             }
         }
     }
 
-    public function asignaSinGestor($bean=null, $event= null, $args= null){
+    public function asignaSinGestor($bean = null, $event = null, $args = null)
+    {
 
-        $idSinGestor='569246c7-da62-4664-ef2a-5628f649537e';
+        $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
 
         //Promotor Leasing
-        if (($bean->user_id_c==null|| $bean->user_id_c =="") && empty($bean->promotorleasing_c)) {
+        if (($bean->user_id_c == null || $bean->user_id_c == "") && empty($bean->promotorleasing_c)) {
             $bean->user_id_c = $idSinGestor;
         }
 
         //Promotor Factoraje
-        if (($bean->user_id1_c==null|| $bean->user_id1_c =="") && empty($bean->promotorfactoraje_c)) {
+        if (($bean->user_id1_c == null || $bean->user_id1_c == "") && empty($bean->promotorfactoraje_c)) {
             $bean->user_id1_c = $idSinGestor;
         }
 
         //Promotor CA
-        if (($bean->user_id2_c==null|| $bean->user_id2_c =="") && empty($bean->promotorcredit_c)) {
+        if (($bean->user_id2_c == null || $bean->user_id2_c == "") && empty($bean->promotorcredit_c)) {
             $bean->user_id2_c = $idSinGestor;
         }
 
         //Promotor Fleet
-        if (($bean->user_id6_c==null|| $bean->user_id6_c =="") && empty($bean->promotorfleet_c)) {
+        if (($bean->user_id6_c == null || $bean->user_id6_c == "") && empty($bean->promotorfleet_c)) {
             $bean->user_id6_c = $idSinGestor;
         }
 
         //Promotor Uniclick
-        if (($bean->user_id7_c==null|| $bean->user_id7_c =="") && empty($bean->promotoruniclick_c)) {
+        if (($bean->user_id7_c == null || $bean->user_id7_c == "") && empty($bean->promotoruniclick_c)) {
             $bean->user_id7_c = $idSinGestor;
         }
-
     }
-    public function idUniclick($bean=null, $event= null, $args= null){
-      //Valida que no exista id uniclick duplicado
-      global $db;
-      if(!empty($bean->id_uniclick_c) && $bean->id!=""){
-        //Consulta id_uniclick_c
-        $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
+    public function idUniclick($bean = null, $event = null, $args = null)
+    {
+        //Valida que no exista id uniclick duplicado
+        global $db;
+        if (!empty($bean->id_uniclick_c) && $bean->id != "") {
+            //Consulta id_uniclick_c
+            $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
             WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}'";
-        //Ejecuta consulta
-        $queryResult = $db->query($query);
-        while ($row = $db->fetchByAssoc($queryResult)) {
-          require_once 'include/api/SugarApiException.php';
-          throw new SugarApiExceptionInvalidParameter("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
+            //Ejecuta consulta
+            $queryResult = $db->query($query);
+            while ($row = $db->fetchByAssoc($queryResult)) {
+                require_once 'include/api/SugarApiException.php';
+                throw new SugarApiExceptionInvalidParameter("Ya existe una cuenta registrada con el mismo Id Cliente Uniclick");
+            }
         }
-      }
     }
 
-    public function NuevoAnalizate($bean=null, $event= null, $args= null){
+    public function NuevoAnalizate($bean = null, $event = null, $args = null)
+    {
         //Se ejecuta para creación de nuevos registros:
         /*
         * Tipo de cuenta = Proveedor
         * o Es Proveedor = True
         */
-        if (!$args['isUpdate'] && $bean->email1!="" && ($bean->tipo_registro_cuenta_c=="5" || $bean->esproveedor_c==1)){ //Tipo Cuenta 5-Proveedor
+        if (!$args['isUpdate'] && $bean->email1 != "" && ($bean->tipo_registro_cuenta_c == "5" || $bean->esproveedor_c == 1)) { //Tipo Cuenta 5-Proveedor
             $GLOBALS['log']->fatal('Genera Registro Analizate: Crear - Nuevo Proveedor');
             $this->RegistroAnalizate($bean);
-
         }
     }
 
-    public function EditaAnalizate($bean=null, $event= null, $args= null){
-      //Se ejecuta para edición de registros existentes:
-      /*
+    public function EditaAnalizate($bean = null, $event = null, $args = null)
+    {
+        //Se ejecuta para edición de registros existentes:
+        /*
       * Se actualiza Es Proveedor = True
       */
-        if ($args['isUpdate'] && $bean->fetched_row['esproveedor_c']==0 && $bean->esproveedor_c==1 && $bean->email1!=""){
+        if ($args['isUpdate'] && $bean->fetched_row['esproveedor_c'] == 0 && $bean->esproveedor_c == 1 && $bean->email1 != "") {
             $GLOBALS['log']->fatal('Genera Registro Analizate: Edita - Nuevo Proveedor');
             $this->RegistroAnalizate($bean);
         }
     }
 
-    public function RegistroAnalizate($bean=null, $event= null, $args= null){
+    public function RegistroAnalizate($bean = null, $event = null, $args = null)
+    {
         //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
-        $url_portalFinanciera= '&UUID='.$bean->id.'&RFC_CIEC='.$bean->rfc_c;
+        $url_portalFinanciera = '&UUID=' . $bean->id . '&RFC_CIEC=' . $bean->rfc_c;
         $relacion = BeanFactory::newBean('ANLZT_analizate');
-        $relacion->anlzt_analizate_accountsaccounts_ida=$bean->id;
-        $relacion->empresa=1;
-        $relacion->estado=1;
-        $relacion->tipo=1;
-        $relacion->fecha_actualizacion=$bean->date_entered;
-        $relacion->url_portal=$url_portalFinanciera;
-        $relacion->assigned_user_id=$bean->user_id_c;
+        $relacion->anlzt_analizate_accountsaccounts_ida = $bean->id;
+        $relacion->empresa = 1;
+        $relacion->estado = 1;
+        $relacion->tipo = 1;
+        $relacion->fecha_actualizacion = $bean->date_entered;
+        $relacion->url_portal = $url_portalFinanciera;
+        $relacion->assigned_user_id = $bean->user_id_c;
         $relacion->load_relationship('anlzt_analizate_accounts');
         $relacion->anlzt_analizate_accounts->add($bean->id);
         $relacion->save();
     }
 
-	public function NuevaCuentaProductos ($bean=null, $event= null, $args= null){
+    public function NuevaCuentaProductos($bean = null, $event = null, $args = null)
+    {
         //Se ejecuta para creación productos para nuevos registros(cuentas):
         /* Dev: Erick de JEsus
         * Tipo de cuenta = Todas
         */
-        global $current_user;
-        global $app_list_strings;
-		$beanprod = null;
-       
-		$module = 'uni_Productos';
-        $key_productos = array('1','4','3','6','8','7');
-        $name_productos = array('-LEASING','-FACTORAJE','-CREDITO AUTOMOTRIZ','-FLEET','-UNICLICK','CRÉDITO SOS');
-		$count = count($name_productos);
-        $current_prod = null;
-        $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
-        
-        $tipo = $app_list_strings['tipo_registro_cuenta_list'];
-        $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
-        $etitipo= $tipo[$bean->tipo_registro_cuenta_c];
-        $etisubtipo= $subtipo[$bean->subtipo_registro_cuenta_c];
+        //Sólo se ejecuta en la creación
+        if (!$args['isUpdate']) {
+            //Declara variables para generación de registros
+            global $current_user;
+            global $app_list_strings;
+            $beanprod = null;
 
-        if (!$args['isUpdate']){
-
-			for ($i = 0; $i < $count; $i++) {
-				//$current_prod = explode("," , str_replace("^", "", $current_user->productos_c));
-				//$GLOBALS['log']->fatal($current_prod);
-				$beanprod = BeanFactory::newBean($module);
-				$beanprod->name = $bean->name.$name_productos[$i];
-				$beanprod->tipo_producto = $key_productos[$i];
-
-				switch ($key_productos[$i]) {
-					case '1': //Leasing
+            $module = 'uni_Productos';
+            $key_productos = array('1', '4', '3', '6', '8', '7', '9');
+            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-CRÉDITO SOS', '-UNILEASE');
+            $count = count($name_productos);
+            $current_prod = null;
+            $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
+            //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
+            $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
+            $tipo = $app_list_strings['tipo_registro_cuenta_list'];
+            $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
+            $etitipo = $tipo[$bean->tipo_registro_cuenta_c];
+            $etisubtipo = $subtipo[$bean->subtipo_registro_cuenta_c];
+            for ($i = 0; $i < $count; $i++) {
+                //$GLOBALS['log']->fatal($current_prod);
+                $beanprod = BeanFactory::newBean($module);
+                $beanprod->name = $bean->name . $name_productos[$i];
+                $beanprod->tipo_producto = $key_productos[$i];
+                $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
+                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '1' : $bean->tipo_registro_cuenta_c;
+                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '1') ? '5' : $bean->subtipo_registro_cuenta_c;
+                $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
+                //Caso especial: Alta portal CA
+                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c!='4' && $bean->tipo_registro_cuenta_c!='5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
+                    $beanprod->tipo_cuenta = "2"; //2-Prospecto
+                    $beanprod->subtipo_cuenta = "8"; //Integración de expediente
+                    $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
+                    //Actualiza campo general
+                    global $db;
+                    $update = "update accounts_cstm set
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
+                      where id_c = '{$bean->id}'";
+                    $updateExecute = $db->query($update);
+                }
+                //Asignación de usuario
+                switch ($key_productos[$i]) {
+                    case '1': //Leasing
                         $beanprod->assigned_user_id = $bean->user_id_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-					case '4': //Factoraje
+                        break;
+                    case '4': //Factoraje
                         $beanprod->assigned_user_id = $bean->user_id1_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-					case '3': //Credito-Automotriz
+                        break;
+                    case '3': //Credito-Automotriz
                         $beanprod->assigned_user_id = $bean->user_id2_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-						break;
-					case '6': //Fleet
+                        break;
+                    case '6': //Fleet
                         $beanprod->assigned_user_id = $bean->user_id6_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
+                        break;
                     case '7': //Credito-SOS
                         $beanprod->assigned_user_id = $bean->user_id_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
                         break;
-					case '8': //Uniclick
+                    case '8': //Uniclick
                         $beanprod->assigned_user_id = $bean->user_id7_c;
-                        $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                        $beanprod->tipo_cuenta = $bean->tipo_registro_cuenta_c;
-                        $beanprod->subtipo_cuenta = $bean->subtipo_registro_cuenta_c;
-                        $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo.' '.$etisubtipo));
-                        //Setea valores para los campos por producto - Tipo Cuenta 2-Prospecto, 8-Integracion de expediente.
-                        if ($bean->tipo_registro_cuenta_c == '2' && $bean->subtipo_registro_cuenta_c == '8' ) {
-                            $beanprod->tipo_cuenta = "1"; //1-Lead
-                            $beanprod->subtipo_cuenta = "5"; //En calificacion
-                            $beanprod->tipo_subtipo_cuenta = "LEAD EN CALIFICACIÓN";
-                        }
-						break;
-				}
-
-				$beanprod->save();
-
-				$bean->load_relationship('accounts_uni_productos_1');
-				$bean->accounts_uni_productos_1->add($beanprod->id);
-
-				$beanprod = null;
-			}
+                        break;
+                    case '9': //Unilease
+                        $beanprod->assigned_user_id = $bean->user_id7_c;
+                        break;
+                }
+                //Guarda registro y vincula a cuenta
+                $beanprod->save();
+                $bean->load_relationship('accounts_uni_productos_1');
+                $bean->accounts_uni_productos_1->add($beanprod->id);
+                $beanprod = null;
+            }
         }
     }
 
-    public function set_csv_linea_vigente($bean=null, $event= null, $args= null){
+    public function set_csv_linea_vigente($bean = null, $event = null, $args = null)
+    {
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea" ****** Tipo-Cuenta: 2-Prospecto, 3-Cliente **** SubTipo-Cuenta: 18-Con linea vigente, 8-Integracion de expediente
-  	    if(($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && $bean->fetched_row['subtipo_registro_cuenta_c']!='18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c=='8' && $bean->tipo_registro_cuenta_c=='2' && $bean->fetched_row['subtipo_registro_cuenta_c']!='8' && !$bean->conversion_gclid_c)){
+        if (($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c == '8' && $bean->tipo_registro_cuenta_c == '2' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '8' && !$bean->conversion_gclid_c)) {
             $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPARA DESDE PROCCESS AUTHOR------------');
-            $gclid='';//este campo se obtiene del lead relacionado campo gclid
-            $conversion_name='Conv CRM';
-            $tipo_producto_solicitud='';
+            $gclid = ''; //este campo se obtiene del lead relacionado campo gclid
+            $conversion_name = 'Conv CRM';
+            $tipo_producto_solicitud = '';
             //Obteniendo gclid de lead relacionado
             if ($bean->load_relationship('leads')) {
-                $params=array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
+                $params = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                 //Fetch related beans
-                $leads = $bean->leads->getBeans($bean->id,$params);
+                $leads = $bean->leads->getBeans($bean->id, $params);
                 //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
                 if (!empty($leads)) {
                     foreach ($leads as $lead) {
-                        if($lead->detalle_plataforma_c != "" && $lead->detalle_plataforma_c != null){
-                            $gclid=$lead->detalle_plataforma_c;
+                        if ($lead->detalle_plataforma_c != "" && $lead->detalle_plataforma_c != null) {
+                            $gclid = $lead->detalle_plataforma_c;
                         }
                     }
                 }
             }
 
             //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
-            if($gclid != '' && $gclid !=null){
+            if ($gclid != '' && $gclid != null) {
                 $GLOBALS['log']->fatal('------------LEAD SI CUENTA CON GCLID------------');
                 //Monto de línea= Campo Opps= monto_c
-                $conversion_value='0';
+                $conversion_value = '0';
                 if ($bean->load_relationship('opportunities')) {
-                    $parametros=array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
+                    $parametros = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                     //Fetch related beans
                     $opps_relacionadas = $bean->opportunities->getBeans($bean->id, $parametros);
                     //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
                     if (!empty($opps_relacionadas)) {
                         foreach ($opps_relacionadas as $opp) {
-                            $conversion_value=$opp->monto_c;
-                            $tipo_producto_solicitud=$opp->tipo_producto_c;
+                            $conversion_value = $opp->monto_c;
+                            $tipo_producto_solicitud = $opp->tipo_producto_c;
                         }
                     }
                 }
 
                 //Se escribe en csv cuando trae tipo de producto
-                if($tipo_producto_solicitud !=''){
+                if ($tipo_producto_solicitud != '') {
                     $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
                     //Estableciendo la hora en formato "24/03/2020 19:00:00"
                     date_default_timezone_set('America/Mexico_City');
-                    $conversion_time=date ('d/m/Y H:i:s');
+                    $conversion_time = date('d/m/Y H:i:s');
                     //Limpiando el monto, ya que en el csv espera solo cantidades enteras, sin decimales
-                    $conv_entero=explode('.',$conversion_value);
-                    $ruta_archivo="custom/plantillaCSV/clientes_lv.csv";
+                    $conv_entero = explode('.', $conversion_value);
+                    $ruta_archivo = "custom/plantillaCSV/clientes_lv.csv";
                     if (file_exists($ruta_archivo)) {
-                        $file = fopen($ruta_archivo,"a");
-                        fwrite($file, $gclid.','.$conversion_name.','.$conversion_time.','.$conv_entero[0].','.PHP_EOL);
+                        $file = fopen($ruta_archivo, "a");
+                        fwrite($file, $gclid . ',' . $conversion_name . ',' . $conversion_time . ',' . $conv_entero[0] . ',' . PHP_EOL);
                         fclose($file);
                     }
                     //Actualiza Cuenta a conversión GCLID
@@ -1420,6 +1381,344 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
+
+    public function set_account_mambu($bean=null, $event= null, $args= null){
+        global $sugar_config,$app_list_strings;
+        $bank = $app_list_strings['banco_list']; 
+        //Cliente con Línea Vigente: 3,18
+        if($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/ $bean->encodedkey_mambu_c ==""){
+            //variables para consumo de servicio
+            $url=$sugar_config['url_mambu_gral'].'groups';	
+            $user=$sugar_config['user_mambu'];
+            $pwd=$sugar_config['pwd_mambu'];
+            $auth_encode=base64_encode( $user.':'.$pwd );
+            //variables para payload
+            $id_crm = $bean->id;
+            $nombre = '';
+            $nombreaccount = $bean->primernombre_c . ' ' . $bean->apellidopaterno_c . ' ' . $bean->apellidomaterno_c;
+            $razon_social = $bean->razonsocial_c;
+            $id_cliente_corto = $bean->idcliente_c;
+            //$id_cliente_corto='52597';
+            //Condicion para determinar el valor de $nombre en el caso de regimen fiscal
+            $nombre = $bean->tipodepersona_c != 'Persona Moral' ? $nombreaccount : $razon_social;
+
+            //Obteniendo referencias bancarias
+            $array_cta_bancaria=array();
+            if ($bean->load_relationship('cta_cuentas_bancarias_accounts')) {
+                $ctas_bancarias=$bean->cta_cuentas_bancarias_accounts->getBeans();
+                if (!empty($ctas_bancarias)) {
+                    foreach ($ctas_bancarias as $cta) {
+                         $domiciliacion="";
+                        //Condicion para envio de domiciliacion
+                        $comparacion= strpos($cta->usos, "^1^");
+                        if ($comparacion ===false){
+                            $domiciliacion="FALSE";
+                        }else{
+                            $domiciliacion="TRUE";
+                        }
+                        $nombre_banco=$bank[$cta->banco];
+                        $new_cta_bancaria=array(
+                            "_nombre_banco_cliente"=>$nombre_banco,
+                            "_domiciliacion"=>$domiciliacion,
+                            "_guid_crm"=>$cta->id
+                        );
+                        if($cta->cuenta!=""){
+                            $new_cta_bancaria['_numero_cuenta_cliente']=$cta->cuenta;
+                        }
+                        if($cta->clabe!=""){
+                            $new_cta_bancaria['_clabe_interbancaria']=$cta->clabe;
+                        }
+                        array_push($array_cta_bancaria,$new_cta_bancaria);
+                    }
+                }
+            }
+            $body = array(
+                "groupName" => $nombre,
+                "_referencias_crm" => array(
+                    "_id_crm" => $id_crm,
+                    "_id_cliente_corto" => $id_cliente_corto,
+                    "_ref_bancaria" => $bean->referencia_bancaria_c
+                ),
+            );
+            if(count($array_cta_bancaria)>0){
+               $body['_cuentas_bancarias_clientes']=$array_cta_bancaria;
+            }
+            $GLOBALS['log']->fatal(json_encode($body));
+            $callApi = new UnifinAPI();
+            $resultado = $callApi->postMambu($url, $body, $auth_encode);
+            $GLOBALS['log']->fatal('--------------MAMBU RESPONSE-----------------');
+            $GLOBALS['log']->fatal($resultado);
+            if (!empty($resultado['encodedKey'])) {
+                $bean->encodedkey_mambu_c = $resultado['encodedKey'];
+            }
+            //Obtener solicitudes
+            if ($bean->load_relationship('opportunities')) {
+                //Fetch related beans
+                $solicitudes = $bean->opportunities->getBeans();
+                if (!empty($solicitudes)) {
+                    foreach ($solicitudes as $sol) {
+                        //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
+                        if ($sol->tipo_producto_c == '8' && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {
+                            $sol->save();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /******Funcion para guardar los valores del campo Puesto al campo de Puesto_Descriptivo*****/
+    public function PuestoCuenta($bean = null, $event = null, $args = null)
+    {
+        $puestoCuenta = $bean->puesto_cuenta_c; //nuevo campo de puesto
+
+        if ($puestoCuenta != '' || $puestoCuenta != null) {
+
+            //Asignación del puesto_cuenta nuevo al puesto_c old
+            switch ($puestoCuenta) {
+                case '1': //Dueño
+                    $bean->puesto_c = 'Duenio';
+                    break;
+                case '2': //Accionista
+                    $bean->puesto_c = 'Accionistas';
+                    break;
+                case '3': //Director-General
+                    $bean->puesto_c = 'Director General';
+                    break;
+                case '4': //Director-Comercial
+                    $bean->puesto_c = 'Director Comercial';
+                    break;
+                case '5': //Director de Finanzas
+                    $bean->puesto_c = 'Director de Finanzas';
+                    break;
+                case '6': //Director de Operaciones
+                    $bean->puesto_c = 'Director de Operaciones';
+                    break;
+                case '7': //Director de Sistemas
+                    $bean->puesto_c = 'Director de Sistemas';
+                    break;
+                case '8': //Tesorero - Contralor
+                    $bean->puesto_c = 'Tesorero_Contralor';
+                    break;
+                case '9': //Gerente
+                    $bean->puesto_c = 'Gerente';
+                    break;
+                case '10': //Administrativo
+                    $bean->puesto_c = 'Administrativo';
+                    break;
+                case '11': //Otro
+                    $bean->puesto_c = 'Otro';
+                    break;
+            }
+        }
+    }
+    
+    public function ActualizaTipo($bean = null, $event = null, $args = null)
+    {
+        global $db;
+        global $app_list_strings;
+        // Tipo y Subtipo de Cuenta
+        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
+        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
+        $query = "update accounts_cstm set tipo_registro_c = '{$tipo}', subtipo_cuenta_c = '{$subtipo}' where id_c = '{$bean->id}'";
+        $queryResult = $db->query($query);
+        // Resumen Vista 360
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
+        // uni_Productos 
+        $bean->load_relationship('accounts_uni_productos_1');
+        $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
+        foreach ($relatedBeans as $rel) {
+            if($rel->tipo_producto == 1) {
+                $beanResumen->tct_tipo_l_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_l_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_l_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 3) {
+                $beanResumen->tct_tipo_ca_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_ca_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_ca_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 4) {
+                $beanResumen->tct_tipo_f_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_f_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_f_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 6) {
+                $beanResumen->tct_tipo_fl_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_fl_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_fl_c = $rel->tipo_subtipo_cuenta;
+            }
+            if($rel->tipo_producto == 8) {
+                $beanResumen->tct_tipo_uc_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_uc_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+                $beanResumen->tct_tipo_cuenta_uc_c = $rel->tipo_subtipo_cuenta;
+            }
+        }
+        $beanResumen->save();
+    }
+    public function ActualizaOrigen($bean_account = null, $event = null, $args = null)
+    {
+        switch ($bean_account->origen_cuenta_c) {
+            case 1:
+                $bean_account->origendelprospecto_c = "Marketing";
+                break;
+            case 2:
+                $bean_account->origendelprospecto_c = "Inteligencia de Negocio";
+                break;
+            case 3:
+                $bean_account->origendelprospecto_c = "Prospeccion propia";
+                break;
+            case 4:
+                $bean_account->origendelprospecto_c = "Referido Cliente";
+                break;
+            case 5:
+                $bean_account->origendelprospecto_c = "Referido Proveedor";
+                break;
+            case 6:
+                $bean_account->origendelprospecto_c = "Referenciador";
+                break;
+            case 7:
+                $bean_account->origendelprospecto_c = "Referido Director";
+                break;
+            case 8:
+                $bean_account->origendelprospecto_c = "Referenciado Vendor";
+                break;
+            case 9:
+                $bean_account->origendelprospecto_c = "Portal Uniclick";
+                break;
+            case 10:
+                $bean_account->origendelprospecto_c = "Whatsapp";
+                break;
+
+        }
+
+        //Switch para asignar los valores
+        switch ($bean_account->detalle_origen_c) {
+            case 1:
+                $bean_account->tct_detalle_origen_ddw_c = "Base de datos";
+                break;
+            case 2:
+                $bean_account->tct_detalle_origen_ddw_c = "Centro de Prospeccion";
+                break;
+            case 3:
+                $bean_account->tct_detalle_origen_ddw_c = "Digital";
+                break;
+            case 4:
+                $bean_account->tct_detalle_origen_ddw_c = "Campanas";
+                break;
+            case 5:
+                $bean_account->tct_detalle_origen_ddw_c = "Acciones Estrategicas";
+                break;
+            case 6:
+                $bean_account->tct_detalle_origen_ddw_c = "Afiliaciones";
+                break;
+            case 7:
+                $bean_account->tct_detalle_origen_ddw_c = "Llamdas Inbound";
+                break;
+            case 8:
+                $bean_account->tct_detalle_origen_ddw_c = "Parques Industriales";
+                break;
+            case 9:
+                $bean_account->tct_detalle_origen_ddw_c = "Offline";
+                break;
+            case 10:
+                $bean_account->tct_detalle_origen_ddw_c = "Cartera Promotores";
+                break;
+            case 11:
+                $bean_account->tct_detalle_origen_ddw_c = "Recomendacion";
+                break;
+            default:
+                $bean_account->tct_detalle_origen_ddw_c = $bean_account->detalle_origen_c;
+                break;
+        }
+
+        switch ($bean_account->medio_detalle_origen_c) {
+            case 1:
+                $bean_account->medio_digital_c = "Facebook";
+                break;
+            case 2:
+                $bean_account->medio_digital_c = "Twitter";
+                break;
+            case 3:
+                $bean_account->medio_digital_c = "Instagram";
+                break;
+            case 4:
+                $bean_account->medio_digital_c = "Web";
+                break;
+            case 5:
+                $bean_account->medio_digital_c = "LinkedIn";
+                break;
+            case 6:
+                $bean_account->medio_digital_c = "Radio Online";
+                break;
+            case 7:
+                $bean_account->medio_digital_c = "Prensa Online";
+                break;
+            case 8:
+                $bean_account->medio_digital_c = "TV Online";
+                break;
+            case 9:
+                $bean_account->medio_digital_c = "Revistas Online";
+                break;
+            case 10:
+                $bean_account->medio_digital_c = "TV";
+                break;
+            case 11:
+                $bean_account->medio_digital_c = "Radio";
+                break;
+            case 12:
+                $bean_account->medio_digital_c = "Prensa";
+                break;
+            case 13:
+                $bean_account->medio_digital_c = "Revistas";
+                break;
+            case 14:
+                $bean_account->medio_digital_c = "Espectaculares";
+                break;
+
+            default:
+                $bean_account->medio_digital_c = $bean_account->medio_detalle_origen_c;
+                break;
+        }
+
+        switch ($bean_account->punto_contacto_origen_c) {
+
+            case 1:
+                $bean_account->tct_punto_contacto_ddw_c = "Portal";
+
+                break;
+            case 2:
+                $bean_account->tct_punto_contacto_ddw_c = "Telefono";
+
+                break;
+            case 3:
+                $bean_account->tct_punto_contacto_ddw_c = "Chat";
+
+                break;
+            case 4:
+                $bean_account->tct_punto_contacto_ddw_c = "Publicacion";
+
+                break;
+            default:
+                $bean_account->tct_punto_contacto_ddw_c = $bean_account->punto_contacto_origen_c;
+                break;
+        }
+
+        switch ($bean_account->prospeccion_propia_c)
+        {
+            case 1:
+                $bean_account->metodo_prospeccion_c = "llamada_en_frio";
+
+                break;
+            case 2:
+                $bean_account->metodo_prospeccion_c = "prospeccion_en_campo";
+
+                break;
+            case 3:
+                $bean_account->metodo_prospeccion_c = "cartera";
+
+                break;
+        }
+
+    }
 }
-
-

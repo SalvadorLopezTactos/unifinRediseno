@@ -53,9 +53,12 @@ class AccountsCustomAPI extends SugarApi
             $query = <<<SQL
 select acc.id_c id_cliente, ac.name, IFNULL(l.user_name,'') id_leasing, IFNULL(l_cs.nombre_completo_c,'') leasing, IFNULL(l_cs.equipo_c,'') eq_Leasing, IFNULL(l_mail.email_address,'') mail_leasing,
 IFNULL(f.user_name,'') id_factoraje, IFNULL(f_cs.nombre_completo_c,'') factoraje, IFNULL(f_cs.equipo_c,'') eq_factoraje, IFNULL(f_mail.email_address,'') mail_factoraje,
-IFNULL(c.user_name,'') id_credit, IFNULL(c_cs.nombre_completo_c,'') credit, IFNULL(c_cs.equipo_c,'') eq_credit, IFNULL(c_mail.email_address,'') mail_credit,IFNULL(l_cs.tct_team_address_txf_c,'') Dir_Equipo_Principal
+IFNULL(c.user_name,'') id_credit, IFNULL(c_cs.nombre_completo_c,'') credit, IFNULL(c_cs.equipo_c,'') eq_credit, IFNULL(c_mail.email_address,'') mail_credit,
+IFNULL(uck.user_name,'') id_uniclick, IFNULL(uck_cs.nombre_completo_c,'') uniclick, IFNULL(uck_cs.equipo_c,'') eq_uniclick, IFNULL(uck_mail.email_address,'') mail_uniclick,
+IFNULL(l_cs.tct_team_address_txf_c,'') Dir_Equipo_Principal
 FROM accounts ac
 INNER JOIN accounts_cstm acc ON ac.id = acc.id_c
+
 LEFT OUTER JOIN users l ON acc.user_id_c = l.id
 LEFT OUTER JOIN users_cstm l_cs ON acc.user_id_c = l_cs.id_c AND l.id = l_cs.id_c
 LEFT OUTER JOIN email_addr_bean_rel l_rel_mail ON l_rel_mail.bean_id = l.id
@@ -68,6 +71,10 @@ LEFT OUTER JOIN users c ON acc.user_id2_c = c.id
 LEFT OUTER JOIN users_cstm c_cs ON acc.user_id2_c = c_cs.id_c AND c.id = c_cs.id_c
 LEFT OUTER JOIN email_addr_bean_rel c_rel_mail ON c_rel_mail.bean_id = c.id
 LEFT OUTER JOIN email_addresses c_mail ON c_rel_mail.email_address_id = c_mail.id AND c_rel_mail.bean_module = 'Users'
+LEFT OUTER JOIN users uck ON acc.user_id7_c = uck.id
+LEFT OUTER JOIN users_cstm uck_cs ON acc.user_id7_c = uck_cs.id_c AND uck.id = uck_cs.id_c
+LEFT OUTER JOIN email_addr_bean_rel uck_rel_mail ON uck_rel_mail.bean_id = uck.id
+LEFT OUTER JOIN email_addresses uck_mail ON uck_rel_mail.email_address_id = uck_mail.id AND uck_rel_mail.bean_module = 'Users'
                 WHERE acc.id_c = '{$idCliente}'
 SQL;
 
@@ -92,6 +99,11 @@ SQL;
                         "promotor_credit" => $Ejecutivos['credit'],
                         "equipo_credit" => $Ejecutivos['eq_credit'],
                         "mail_credit" => $Ejecutivos['mail_credit'],
+                        "user_uniclick" => $Ejecutivos['id_uniclick'],
+                        "promotor_uniclick" => $Ejecutivos['uniclick'],
+                        "equipo_uniclick" => $Ejecutivos['eq_uniclick'],
+                        "mail_uniclick" => $Ejecutivos['mail_uniclick'],
+
 						"Dir_Equipo_Principal" => $Ejecutivos['Dir_Equipo_Principal']
                     );
                 }
