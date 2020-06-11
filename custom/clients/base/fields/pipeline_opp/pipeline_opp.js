@@ -4,9 +4,14 @@
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
-        cont_tel = this;
+
         this._super('initialize', [options]);
         this.model.on('sync', this.pipelineopp, this);
+    },
+
+    _render: function () {
+        this._super("_render");
+
     },
 
     pipelineopp: function (){

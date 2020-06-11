@@ -103,7 +103,7 @@
 
     //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
-	},
+    },
 
   fulminantcolor: function () {
       $( '#space' ).remove();
@@ -244,6 +244,8 @@
         $('[data-name=estatus_c]').hide();
         //Oculta etiqueta del campo custom pipeline_opp
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
+        //Desabilita edicion campo pipeline
+        this.noEditFields.push('pipeline_opp');
 
         //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
