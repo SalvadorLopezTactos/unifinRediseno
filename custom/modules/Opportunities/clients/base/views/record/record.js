@@ -238,8 +238,11 @@
         //Oculta campos nuevos para Credito SOS
         $('[data-name=ult_operacion_activa_c]').hide();
         $('[data-name=operacion_curso_chk_c]').hide();
-
-      //Victor M.L 19-07-2018
+        //Oculta campos de etapa y subetapa
+        $('[data-name=tct_etapa_ddw_c]').hide();
+        $('[data-name=estatus_c]').hide();
+        
+        //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         /*if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
             //no hace nada y muestra el panel

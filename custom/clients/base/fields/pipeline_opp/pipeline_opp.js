@@ -27,7 +27,7 @@
         }
         if (etapa=="P"){
             //Agrega clase current para sombrear en color actual al pipeline Int de Expediente
-            $('#IE').addClass('current');
+            $('#P').addClass('current');
             $('#SI').addClass('done');
             //Valida las subetapas 'En Espera', 'int de Exp','Devuelta por Credito' y 'Cancelada'
             if(subetapa=="PE"){
