@@ -458,6 +458,8 @@
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             }
         },this));
+        //Oculta etiqueta del campo custom pipeline_opp
+        $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
 	  },
 
     validacionCuentaSubcuentaCheck:function (fields, errors, callback) {
