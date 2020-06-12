@@ -7,6 +7,7 @@
         this._super('initialize', [options]);
         this.model.on('sync', this.tipoSubtipo_vista, this);
 
+
     },
 
     tipoSubtipo_vista: function () {
@@ -143,7 +144,6 @@
             $('#cell1').addClass('current');
             $('#cell1').addClass('done');
             $(".container2").hide();
-
         }
         if (tipoCuenta == 5) {
 
@@ -153,8 +153,10 @@
             $('#cell1').addClass('current');
             $('#cell1').addClass('done');
             $(".container2").hide();
-
         }
+
+        $('[data-name="tipo_registro_cuenta_c"]').hide();
+        $('[data-name="subtipo_registro_cuenta_c"]').hide();
 
     },
 
