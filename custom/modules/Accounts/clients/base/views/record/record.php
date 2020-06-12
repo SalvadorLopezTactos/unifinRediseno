@@ -218,64 +218,73 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
+              0 =>
+              array (
+                'name' => 'account_tipoSubtipo',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_TIPOSUBTIPO',
+                'span' => 12,
+                'readonly' => true,
+                'dismiss_label' => true,
+                ),
+              1 =>
               array (
                 'name' => 'rfc_qr',
                 'label' => 'LBL_RFC_QR',
                 'studio' => 'visible',
                 'span' => 12,
               ),
-              1 => 
+              2 =>
               array (
                 'name' => 'tipo_registro_cuenta_c',
                 'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
-              2 => 
+              3 =>
               array (
                 'name' => 'subtipo_registro_cuenta_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
               ),
-              3 => 
+              4 =>
               array (
                 'name' => 'nivel_digitalizacion_c',
                 'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
-              4 => 
+              5 =>
               array (
                 'name' => 'tct_prioridad_ddw_c',
               ),
-              5 => 
+              6 =>
               array (
                 'name' => 'tct_homonimo_chk_c',
                 'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
-              6 => 
+              7 =>
               array (
               ),
-              7 => 
+              8 =>
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              8 => 
+              9 =>
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              9 => 
+              10 =>
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              10 => 
+              11 =>
               array (
               ),
-              11 => 
+              12 =>
               array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              12 => 
+              13 =>
               array (
               ),
             ),
