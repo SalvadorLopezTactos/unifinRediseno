@@ -1,0 +1,162 @@
+<style>
+    /*Recuadros*/
+    .arrow-steps .step {
+        font-size: 12px;
+        text-align: center;
+        color: #666;
+        cursor: default;
+        margin: 0 3px;
+        padding: 10px 10px 10px 30px;
+        min-width: 180px;
+        float: left;
+        position: relative;
+        background-color: #d9e3f7;
+    }
+
+    /*Punta triángulos*/
+    .arrow-steps .step:after,
+    .arrow-steps .step:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: -17px;
+        width: 0;
+        height: 0;
+        border-top: 14px solid transparent;
+        border-bottom: 18px solid transparent;
+        border-left: 17px solid #d9e3f7;
+        z-index: 2;
+    }
+
+    /*Triángulo blanco*/
+    .arrow-steps .step:before {
+        right: auto;
+        left: 0;
+        border-left: 17px solid #fff;
+        z-index: 0;
+    }
+
+    /*Borde primer recuadro*/
+    .arrow-steps .step:first-child:before {
+        border: 0px solid #369;
+    }
+
+    .arrow-steps .step:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    /*Formato Palomita*/
+    .arrow-steps .step span:before {
+        opacity: 0;
+        content: "✔";
+        position: absolute;
+        top: -2px;
+        left: -20px;
+    }
+
+    /*Estilo Palomita*/
+    .arrow-steps .step.done span:before {
+        opacity: 1;
+        -webkit-transition: opacity 0.3s ease 0.5s;
+        -moz-transition: opacity 0.3s ease 0.5s;
+        -ms-transition: opacity 0.3s ease 0.5s;
+        transition: opacity 0.3s ease 0.5s;
+    }
+
+    /*Posición Palomas*/
+    .arrow-steps .step span {
+        position: relative;
+    }
+
+    /*Recuadro Actual*/
+    .arrow-steps .step.current {
+        color: #fff;
+        background-color: #23468c;
+    }
+
+    /*Triángulo Actual*/
+    .arrow-steps .step.current:after {
+        border-left: 18px solid #23468c;
+    }
+
+    /*Recuadro Actual OK subetapa*/
+    .arrow-steps .step.success {
+        color: #fff;
+        background-color: #00ab4d;
+    }
+
+    /*Triángulo Actual OK subetapa*/
+    .arrow-steps .step.success:after {
+        border-left: 18px solid #00ab4d;
+    }
+
+    /*Recuadro Actual error subetapa*/
+    .arrow-steps .step.error {
+        color: #fff;
+        background-color: #e40000;
+    }
+
+    /*Triángulo Actual error subetapa*/
+    .arrow-steps .step.error:after {
+        border-left: 18px solid #e40000;
+    }
+
+    /*Recuadro Actual warning subetapa*/
+    .arrow-steps .step.warning {
+        color: #fff;
+        background-color: #e47a07;
+    }
+
+    /*Triángulo Actual warning subetapa*/
+    .arrow-steps .step.warning:after {
+        border-left: 18px solid #e47a07;
+    }
+
+    /*Recuadro pasado hide subetapa*/
+    .arrow-steps .step.ocult {
+        color: #fff;
+        background-color: #ffffff;
+    }
+
+    /*Triángulo pasado hide subetapa*/
+    .arrow-steps .step.ocult:after {
+        border-left: 18px solid #ffffff;
+    }
+
+    /*Recuadro  alerta amarilla subetapa*/
+    .arrow-steps .step.alerta {
+        color: #fff;
+        background-color: #d8d74b;
+    }
+
+    /*Triángulo  alerta amarilla subetapa*/
+    .arrow-steps .step.alerta:after {
+        border-left: 18px solid #d8d74b;
+    }
+
+</style>
+<script>
+</script>
+
+    <div class="wrapper" >
+        <div class="arrow-steps">
+            <div class="step span4 record-label" id="cell1"><span>&nbsp</span></div>
+            <div class="step span4 record-label" id="cell2"><span>&nbsp</span></div>
+            <div class="step span4 record-label" id="cell3"><span>&nbsp</span></div>
+        </div>
+    </div>
+<br>
+<br>
+    <div class="container2 " >
+        <div class="wrapper">
+            <div class="arrow-steps">
+                <div class="step span4 record-label ocult" id="SE1"><span>&nbsp</span></div>
+                <div class="step span4 record-label ocult" id="SE2"><span>&nbsp</span></div>
+                <div class="step span4 record-label ocult" id="SE3"><span>&nbsp</span></div>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+
