@@ -400,6 +400,7 @@
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:origen_cuenta_c', this.changeLabelMarketing, this);
+        this.model.on('change:detalle_origen_c', this._cleanDependencies, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -1827,6 +1828,58 @@
         if (this.model.get('origen_cuenta_c') == 'Eventos Mercadotecnia') {
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
+        }
+
+        /*******Limpia campos dependientes de Origen*******/
+        //Origen: Prospección propia
+        if (this.model.get('origen_cuenta_c') != '3') {
+            this.model.set('prospeccion_propia_c', ''); //Limpia campo Prospeccion propia
+        } 
+        //Origen: Referenciado Socio Comercial
+        if (this.model.get('origen_cuenta_c') != '6') {
+            this.model.set('account_id_c', ''); //Elimina usuario referenciado por db
+            this.model.set('referenciador_c',''); //Elimina usuario referenciado por vista
+        } 
+        //Origen: Referenciado Unifin
+        if (this.model.get('origen_cuenta_c') != '7') {
+            this.model.set('user_id5_c', ''); //Elimina usuario referido por db
+            this.model.set('tct_referenciado_dir_rel_c',''); //Elimina usuario referido por vista
+        } 
+        //Origen: Referenciado Cliente = 4, Referenciado Proveedor = 5, Referenciado Vendor = 8
+        if (this.model.get('origen_cuenta_c') != '4' && this.model.get('origen_cuenta_c') != '5' && this.model.get('origen_cuenta_c') != '8') {
+            this.model.set('account_id1_c', ''); //Elimina usuario referido db
+            this.model.set('referido_cliente_prov_c',''); //Elimina usuario referido vista
+        } 
+    },
+
+    _cleanDependencies: function (){
+    
+        /*******Limpia campos dependientes de Detalle Origen*******/
+        //Acciones Estrategicas
+        if (this.model.get('detalle_origen_c') != '5') {
+            this.model.set('evento_c', ''); //Limpia campo que ¿Que evento?
+        }
+        //Base de datos Emp
+        if (this.model.get('detalle_origen_c') != '1') {
+            this.model.set('tct_origen_busqueda_txf_c', ''); //Limpia campo Base
+        } 
+        //Base de datos Afiliaciones
+        if (this.model.get('detalle_origen_c') != '6') {
+            this.model.set('camara_c', ''); //Limpia campo ¿De que Cámara Proviene?
+        }
+        //Cartera Asesores
+        if (this.model.get('detalle_origen_c') != '10') {
+            this.model.set('tct_que_promotor_rel_c',''); //Elimina ¿Que Asesor? Vista
+            this.model.set('user_id4_c',''); //Elimina ¿Que Asesor? DB
+        }
+        //Acciones Estrategicas = 5, Base de datos Emp = 1, Base de datos Afiliaciones = 6
+        //Digital = 3, Offline = 9, Cartera Asesores = 10
+        if (this.model.get('detalle_origen_c') != '5' && this.model.get('detalle_origen_c') != '1' &&
+            this.model.get('detalle_origen_c') != '6' && this.model.get('detalle_origen_c') != '3' &&
+            this.model.get('detalle_origen_c') != '9' && this.model.get('detalle_origen_c') != '10') {
+            
+            this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
+            this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
         }
     },
 
