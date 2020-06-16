@@ -15,6 +15,8 @@
     self.body = null;
     self.picturecam = false;
     this.loadView = true;
+    this.context.on('button:btn_rfc:click', this.btn_rfc_qr, this);
+
   },
 	
 	tieneSoporteUserMedia: function() {
@@ -26,7 +28,8 @@
 	},
 	
 	SubirImagen:function () {
-		var input = document.querySelector('input[type=file]');
+    subeImagen = this;
+		var input = this.$('input[type=file]')[0]; //document.querySelector('input[type=file]');
 		var file = input.files[0];
 		var filePath = input.value;
 		var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
@@ -36,30 +39,31 @@
 				messages: 'Favor de elegir un archivo',
 				autoClose: true
 			});
-      document.getElementById("img").src = '';
+      subeImagen.$('#img')[0].src = ''; //document.getElementById("img").src = '';
 		}else if(!allowedExtensions.exec(filePath)){
   		app.alert.show('errorAlert', {
 				level: 'error',
 				messages: 'Tipo de Archivo no compatible',
 				autoClose: true
 			});
-      document.getElementById("img").src = '';
+      subeImagen.$('#img')[0].src = ''; //document.getElementById("img").src = '';
 		}else{
 			var FR= new FileReader();
 			FR.addEventListener("load", function(e) {
-			document.getElementById("b64").innerHTML = e.target.result;
-			document.getElementById("img").src       = e.target.result;
+  			subeImagen.$('#b64')[0].innerHTML = e.target.result; // document.getElementById("b64").innerHTML 
+  			subeImagen.$('#img')[0].src = e.target.result; // document.getElementById("img").src       = e.target.result;
 			});
 			FR.readAsDataURL( input.files[0] );
-			var elemento = document.getElementById("img");
+			var elemento = subeImagen.$('#img')[0];// document.getElementById("img");
 			elemento.style.display = 'block';
-			var estado = document.getElementById("estado");
+			var estado = subeImagen.$('#estado')[0]; //document.getElementById("estado");
 		}
 	},
 	
 	validarServicioQR:function () {
-		var estado = document.getElementById("estado");
-		var input = document.querySelector('input[type=file]');
+    validaServicio = this;
+		var estado = this.$('#estado')[0]; //document.getElementById("estado");
+		var input = this.$('input[type=file]')[0]; //document.querySelector('input[type=file]');
 		var file = input.files[0];
 		var c = document.createElement("canvas")
 		var ctx = c.getContext('2d');
@@ -75,10 +79,10 @@
 			}else{
 				var FR= new FileReader();
 				FR.readAsDataURL( input.files[0] );
-				imgn.src = URL.createObjectURL($('#btnSubir')[0].files[0]);
+				imgn.src = URL.createObjectURL(validaServicio.$('#btnSubir')[0].files[0]);
 			}			
 		}else{
-			var elemento = document.getElementById("canvas");
+			var elemento = validaServicio.$('#canvas')[0]; //document.getElementById("canvas");
 			imgn.src = elemento.toDataURL();
 		}
 			
@@ -87,16 +91,16 @@
         level: 'process',
         title: 'Cargando...'
       });
-      $('#activar_camara').addClass('disabled');
-      $('#activar_camara').attr('style', 'pointer-events:none;');  
-      $('#archivo_qr').addClass('disabled');
-      $('#archivo_qr').attr('style', 'pointer-events:none;');  
-      $('#btnSubir').addClass('disabled');
-      $('#btnSubir').attr('style', 'pointer-events:none;margin:10px');
-      $('#validar_QR').addClass('disabled');
-      $('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
-      $('#btn_Cancelar').addClass('disabled');
-      $('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');    
+      validaServicio.$("#activar_camara").attr("disabled", true); //$('#activar_camara').addClass('disabled');
+      //$('#activar_camara').attr('style', 'pointer-events:none;');  
+      validaServicio.$("#archivo_qr").attr("disabled", true); //$('#archivo_qr').addClass('disabled');
+      //$('#archivo_qr').attr('style', 'pointer-events:none;');  
+      validaServicio.$("#btnSubir").attr("disabled", true); //$('#btnSubir').addClass('disabled');
+      //$('#btnSubir').attr('style', 'pointer-events:none;margin:10px');
+      validaServicio.$("#validar_QR").attr("disabled", true); //$('#validar_QR').addClass('disabled');
+      validaServicio.$('#validar_QR').attr('style', 'pointer-events:none;margin:5px');
+      validaServicio.$("#btn_Cancelar").attr("disabled", true); //$('#btn_Cancelar').addClass('disabled');
+      validaServicio.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:5px');    
 			c.width = imgn.width;
 			c.height = imgn.height;
 			ctx.drawImage(imgn,0,0)
@@ -109,26 +113,29 @@
           var Error = '';
           if(data) {
             Error = data[0]["Mensaje de error"];
+            if (Error) {
+              Error = 'Error con QR - ' + data[0]["Estatus de URL"] + ' - ' + data[0]["Mensaje de error"];
+            }
           }
           else {
-            Error = "Nulo";
+            Error = "Servicio no disponible. Por favor, intente más tarde.";
           }
           if(Error) {
             app.alert.dismiss('procesando');
             app.alert.show('error', {
               level: 'error',
-              messages: "No se recupero información con el QR proporcionado.",
+              messages: Error,
             });
-            $('#activar_camara').removeClass('disabled');
-            $('#activar_camara').attr('style', '');
-            $('#archivo_qr').removeClass('disabled');
-            $('#archivo_qr').attr('style', '');
-            $('#btnSubir').removeClass('disabled');
-            $('#btnSubir').attr('style', 'margin:10px');
-            $('#validar_QR').removeClass('disabled');
-            $('#validar_QR').attr('style', 'margin:10px');
-            $('#btn_Cancelar').removeClass('disabled');
-            $('#btn_Cancelar').attr('style', 'margin:10px');
+            validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+            //$('#activar_camara').attr('style', '');
+            validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+            //$('#archivo_qr').attr('style', '');
+            validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+            //$('#btnSubir').attr('style', 'margin:10px');
+            validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+            validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+            validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+            validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
           }
           else {
             var Completo = '';
@@ -175,36 +182,41 @@
                     level: 'error',
                     messages: "Ya existe la cuenta "+data.records[0].name,
                   });
-                  $('#activar_camara').removeClass('disabled');
-                  $('#activar_camara').attr('style', '');
-                  $('#archivo_qr').removeClass('disabled');
-                  $('#archivo_qr').attr('style', '');                  
-                  $('#btnSubir').removeClass('disabled');
-                  $('#btnSubir').attr('style', 'margin:10px');
-                  $('#validar_QR').removeClass('disabled');
-                  $('#validar_QR').attr('style', 'margin:10px');
-                  $('#btn_Cancelar').removeClass('disabled');
-                  $('#btn_Cancelar').attr('style', 'margin:10px');
+                  validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                  //$('#activar_camara').attr('style', '');
+                  validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                  //$('#archivo_qr').attr('style', '');
+                  validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                  //$('#btnSubir').attr('style', 'margin:10px');
+                  validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                  validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                  validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                  validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
                 }
                 else {
                   app.alert.show('errorAlert2', {
                     level: 'confirmation',
-                    messages: "La información recuperada con el QR proporcionado corresponde a: "+Completo+" ¿Desea actualizarla?",
+                    messages: "La información recuperada con el QR proporcionado corresponde a: "+Completo+" ¿Desea proceder con estos datos?",
                     autoClose: false,
                     onCancel: function(){
-                      $('#activar_camara').removeClass('disabled');
-                      $('#activar_camara').attr('style', '');
-                      $('#archivo_qr').removeClass('disabled');
-                      $('#archivo_qr').attr('style', '');
-                      $('#btnSubir').removeClass('disabled');
-                      $('#btnSubir').attr('style', 'margin:10px');
-                      $('#validar_QR').removeClass('disabled');
-                      $('#validar_QR').attr('style', 'margin:10px');
-                      $('#btn_Cancelar').removeClass('disabled');
-                      $('#btn_Cancelar').attr('style', 'margin:10px');
+                      validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                      //$('#activar_camara').attr('style', '');
+                      validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                      //$('#archivo_qr').attr('style', '');
+                      validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                      //$('#btnSubir').attr('style', 'margin:10px');
+                      validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                      validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                      validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                      validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
                     },
                     onConfirm: function() {
                       // Actualiza Datos Personales
+                      App.alert.show('set_data', {
+                        level: 'process',
+                        title: 'Cargando...'
+                      });
+                      self = validaServicio;
                       self.model.set('tipodepersona_c', Regimen);
                       if(!self.model.get('rfc_c')) self.model.set('rfc_c', RFC);
                       if(Regimen == "Persona Moral") {
@@ -256,16 +268,17 @@
                           cont_dir.oDirecciones.direccion = direccion;
                           cont_dir.render();
                           cDuplicado++;
-                          $('#activar_camara').removeClass('disabled');
-                          $('#activar_camara').attr('style', '');
-                          $('#archivo_qr').removeClass('disabled');
-                          $('#archivo_qr').attr('style', '');
-                          $('#btnSubir').removeClass('disabled');
-                          $('#btnSubir').attr('style', 'margin:10px');
-                          $('#validar_QR').removeClass('disabled');
-                          $('#validar_QR').attr('style', 'margin:10px');
-                          $('#btn_Cancelar').removeClass('disabled');
-                          $('#btn_Cancelar').attr('style', 'margin:10px');
+                          validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                          //$('#activar_camara').attr('style', '');
+                          validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                          //$('#archivo_qr').attr('style', '');
+                          validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                          //$('#btnSubir').attr('style', 'margin:10px');
+                          validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                          validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                          validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                          validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
+                          //App.alert.dismiss('set_data');
                         }
                       });
                       if(cDireccionFiscal >= 1) {
@@ -274,17 +287,19 @@
                           level: 'error',
                           messages: 'No se pueden agregar múltiples direcciones fiscales, favor de validar.'
                         });
-                        $('#activar_camara').removeClass('disabled');
-                        $('#activar_camara').attr('style', '');
-                        $('#archivo_qr').removeClass('disabled');
-                        $('#archivo_qr').attr('style', '');
-                        $('#btnSubir').removeClass('disabled');
-                        $('#btnSubir').attr('style', 'margin:10px');
-                        $('#validar_QR').removeClass('disabled');
-                        $('#validar_QR').attr('style', 'margin:10px');
-                        $('#btn_Cancelar').removeClass('disabled');
-                        $('#btn_Cancelar').attr('style', 'margin:10px');
+                        validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                        //$('#activar_camara').attr('style', '');
+                        validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                        //$('#archivo_qr').attr('style', '');
+                        validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                        //$('#btnSubir').attr('style', 'margin:10px');
+                        validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                        validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                        validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                        validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
                         cont_dir.render();
+                        App.alert.dismiss('set_data');
+                        
                       }
                       else {
                         if(cDuplicado == 0) {
@@ -394,34 +409,39 @@
                                 nuevaDireccion.listCiudad = listCiudad;
                                 nuevaDireccion.listCiudadFull = listCiudad;
                                 cont_dir.oDirecciones.direccion.push(nuevaDireccion);
+                                
+                                validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                                //$('#activar_camara').attr('style', '');
+                                validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                                //$('#archivo_qr').attr('style', '');
+                                validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                                //$('#btnSubir').attr('style', 'margin:10px');
+                                validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                                validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                                validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                                validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');
                                 cont_dir.render();
-                                app.alert.dismiss('precesando');
-                                $('#activar_camara').removeClass('disabled');
-                                $('#activar_camara').attr('style', '');
-                                $('#archivo_qr').removeClass('disabled');
-                                $('#archivo_qr').attr('style', '');                                
-                                $('#btnSubir').removeClass('disabled');
-                                $('#btnSubir').attr('style', 'margin:10px');
-                                $('#validar_QR').removeClass('disabled');
-                                $('#validar_QR').attr('style', 'margin:10px');
-                                $('#btn_Cancelar').removeClass('disabled');
-                                $('#btn_Cancelar').attr('style', 'margin:10px');
+                                App.alert.dismiss('set_data');
+                                App.alert.dismiss('precesando');
+                                validaServicio.$('#rfcModal').hide();
                               } else {
-                                app.alert.dismiss('precesando');
-                                app.alert.show('cp_not_found', {
+                                validaServicio.$('#rfcModal').hide();
+                                App.alert.dismiss('set_data');
+                                App.alert.dismiss('precesando');
+                                App.alert.show('cp_not_found', {
                                   level: 'error',
                                   messages: 'C\u00F3digo Postal no encontrado'
                                 });
-                                $('#activar_camara').removeClass('disabled');
-                                $('#activar_camara').attr('style', '');
-                                $('#archivo_qr').removeClass('disabled');
-                                $('#archivo_qr').attr('style', '');                                
-                                $('#btnSubir').removeClass('disabled');
-                                $('#btnSubir').attr('style', 'margin:10px');
-                                $('#validar_QR').removeClass('disabled');
-                                $('#validar_QR').attr('style', 'margin:10px');
-                                $('#btn_Cancelar').removeClass('disabled');
-                                $('#btn_Cancelar').attr('style', 'margin:10px');                                
+                                validaServicio.$("#activar_camara").attr("disabled", false); //$('#activar_camara').removeClass('disabled');
+                                //$('#activar_camara').attr('style', '');
+                                validaServicio.$("#archivo_qr").attr("disabled", false); //$('#archivo_qr').removeClass('disabled');
+                                //$('#archivo_qr').attr('style', '');
+                                validaServicio.$("#btnSubir").attr("disabled", false); //$('#btnSubir').removeClass('disabled');
+                                //$('#btnSubir').attr('style', 'margin:10px');
+                                validaServicio.$("#validar_QR").attr("disabled", false); //$('#validar_QR').removeClass('disabled');
+                                validaServicio.$('#validar_QR').attr('style', 'margin:5px');
+                                validaServicio.$("#btn_Cancelar").attr("disabled", false); //$('#btn_Cancelar').removeClass('disabled');
+                                validaServicio.$('#btn_Cancelar').attr('style', 'margin:5px');                               
                               }
                             })
                           });
@@ -440,21 +460,21 @@
 	
   activarCamara: function(){
 		var elemento = null;
-		var video = document.getElementById("video"),
-			canvas = document.getElementById("canvas"),
-			snap = document.getElementById("snap"),
-			estado = document.getElementById("estado");		
-		if(document.getElementById("activar_camara").checked == true){
+		var video = this.$('#video')[0]; //document.getElementById("video"),
+			canvas = this.$('#canvas')[0]; //document.getElementById("canvas"),
+			snap = this.$('#snap')[0]; //document.getElementById("snap"),
+			estado = this.$('#estado')[0]; //document.getElementById("estado");		
+		if(this.$('#activar_camara')[0].checked == true){
 			this.fileupload = false;
-			elemento = document.getElementById("div_video");
+			elemento = this.$('#div_video')[0]; //document.getElementById("div_video");
 			elemento.style.display = 'block';
-			elemento = document.getElementById("carga");
+			elemento = this.$('#carga')[0]; //document.getElementById("carga");
 			elemento.style.display = 'none';
-			elemento = document.getElementById("btnSubir");
+			elemento = this.$('#btnSubir')[0]; //document.getElementById("btnSubir");
 			elemento.value = '';
-			elemento = document.getElementById("b64");
+			elemento = this.$('#b64')[0]; //document.getElementById("b64");
 			elemento.value = "";
-			elemento = document.getElementById("img");
+			elemento = this.$('#img')[0]; //document.getElementById("img");
 			elemento.src = "";
 			elemento.style.display = 'none';
 			if (this.tieneSoporteUserMedia()) {
@@ -473,7 +493,7 @@
 							canvas.height = video.height;
 							contexto.drawImage(video, 0, 0, 280, 200);
 							var foto = canvas.toDataURL(); //Esta es la foto, en base 64
-							estado.innerHTML = "Foto tomada con exito...";
+							//estado.innerHTML = "Foto tomada con exito...";
 							canvas.style.display = 'block';
 							var body = {
 								"file" : foto
@@ -482,12 +502,22 @@
 							video.play();
 						});
 					 }, function (error) {
-						console.log("Permiso denegado o error: ", error);
-						this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
+						//console.log("Permiso denegado o error: ", error);
+						//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
+            App.alert.show('no_camara', {
+              level: 'error',
+              messages: 'No se puede acceder a la cámara o no ha dado permiso.',
+              autoClose: true
+            });
 					});
 			} else {
-				alert("Lo siento. Tu navegador no soporta esta característica");
-				this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
+				//alert("Lo siento. Tu navegador no soporta esta característica");
+				//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
+        App.alert.show('no_support', {
+          level: 'error',
+          messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
+          autoClose: true
+        });
 			}
 		}else{
 			this.picturecam = false;
@@ -495,9 +525,9 @@
 			var sprite = new Image();
 			var contexto = canvas.getContext("2d");
 			contexto.drawImage(sprite, 0, 0);
-			var estado = document.getElementById("estado");
-			estado.innerHTML = "";
-			elemento = document.getElementById("carga");
+			//var estado = this.$('#estado')[0]; //document.getElementById("estado");
+			//estado.innerHTML = "";
+			elemento = this.$('#carga')[0]; //document.getElementById("carga");
 			elemento.style.display = 'block';
 			elemento = document.getElementById("div_video");
 			elemento.style.display = 'none';
@@ -508,9 +538,9 @@
   },
 
   cargarArchivo: function() {
-		  elemento = document.getElementById("carga");
+      elemento = this.$('#carga')[0];
 			elemento.style.display = 'block';
-			elemento = document.getElementById("div_video");
+			elemento = this.$('#div_video')[0]; //document.getElementById("div_video");
 			elemento.style.display = 'none';
   },
   
