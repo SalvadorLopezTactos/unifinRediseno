@@ -1,0 +1,113 @@
+{{#if this.loadView}}
+    <style>
+        .container {
+            overflow-y: auto;
+            display: block;
+            width: 100%;
+        }
+
+        .cuentas {
+            display: table;
+            width: 90%;
+        }
+
+        .cuentasContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 300px;
+        }
+
+        #containerHeader {
+            font-size: 18px;
+            margin-top: 2%;
+            margin-left: 1%;
+            line-height: 10px;
+        }
+
+        #successful {
+            margin-top: 10%;
+            font-size: 25px;
+            color: #33800d;
+        }
+		
+    </style>
+	<div id="rfcModal" class="modalrfc" style="display:none">
+		<div class="row-fluid" style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+            	<div class="span8">
+                	<h1>
+	                    <p style="vertical-align: middle;  margin: 10px;">
+							Validar información de RFC por QR
+						</p>
+					</h1>
+				</div>
+				<div class="span4" style="text-align:right;">
+					<!-- Bototones el archivo -->
+					<a class="btn btn-danger" id="btn_Cancelar" style="margin:5px">Cancelar</a>
+					<a class="btn btn-success" id="validar_QR" style="margin:5px">Validar QR</a>
+				</div>
+		</div>
+		<div class="row-fluid span12" >
+			<h3 id="estado"></h3>
+		</div>
+		<div class="span12">
+			<input id="activar_camara" type="radio" value="activar_camara" name="QR_option">Tomar Foto de QR
+			<input id="archivo_qr" type="radio" value="archivo_qr" name="QR_option">Carga de Imagen QR
+		</div>
+		<div><br></div>
+		<div class="row-fluid panel_body" id="div_video" style="display: none;"  >
+			<div class="row-fluid" style="color: #e2efe2;background-color:#22608c;border-color:#22608c; border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+				<div class="span8">	
+					<h4>
+						<p style="vertical-align: middle;  margin: 10px;">
+						Tomar foto de QR
+						</p>
+					</h4>
+				</div>
+				<div class="span4" style="text-align:right;">
+					<button class="btn btn-primary" id="snap" type="button" style="margin:5px" >Tomar Foto<img
+						id='processing' style="display: none;" width="15" height="5"
+						src="custom/Levementum/images/icon_processing.gif"></button>
+				</div>
+			</div>
+			<div class="row-fluid panel_body" >
+				<div class="span2 record-cell" >
+					<video muted="muted" id="video" width = "400" height = "200"></video>
+				</div>
+				<div class = "span2 record-cell" width = "400" height = "200">
+					&nbsp;&nbsp;&nbsp;
+				</div>
+				<div class = "span2 record-cell" width = "400" height = "200">
+					<canvas id="canvas" width = "250" height = "200" ></canvas>
+				</div>
+			</div>
+        </div>
+		<div id = "carga" style="display: none;">
+			<div class="row-fluid">
+				<div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+					<h4>
+						<p style="vertical-align: middle;  margin: 10px;">
+						Carga de imagen QR
+						</p>
+					</h4>
+				</div>
+			</div>
+			<div class="record row-fluid panel_body">
+				<div class="span2 record-cell">
+					<div style="margin-left:6px;margin-right:15px;height: 35px;display: table;width: 97%;display:inline-block;">
+						<div class="span8 record-cell">
+							<input type="file" id="btnSubir" style="margin:10px" accept="image/png,.jpeg,.jpg" class="adjunto">
+						</div>
+					</div>
+				</div>
+				<div class="span1 record-cell"><p>&nbsp;</p></div>
+				<div class="span2 record-cell">
+					<img id="img" width= "100" height="50" style="display: none;" ></img>
+				</div>	
+				<div class="span2 record-cell">
+					<textarea id="b64" style="display: none;" ></textarea>
+				</div>
+			</div>
+		</div>
+		<hr style="width:100%">
+    </div>
+{{/if}}

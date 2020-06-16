@@ -104,11 +104,16 @@
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
             }
+            //Establece nombre para pre-solicitud Uniclick por Anfexi
+            if(!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && $bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c=='SI') {
+                $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
+            }
             /* @Jesus Carrillo
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
              */
             //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-            if($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2'){ // Prospecto - 2  // Contactado - 2
+            if(($beanCuenta->tipo_registro_cuenta_c=='2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1' && $bean->tipo_producto_c == '8') ){ // Prospecto - 2  // Contactado - 2
+                $beanCuenta->tipo_registro_cuenta_c='2'; //Interesado - 7
                 $beanCuenta->subtipo_registro_cuenta_c='7'; //Interesado - 7
                 $beanCuenta->save();
             }

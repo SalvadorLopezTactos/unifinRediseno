@@ -343,6 +343,8 @@
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
+        //Oculta etiqueta del campo custom pipeline_opp
+        $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
     },
     /*
     *Victor Martinez Lopez
