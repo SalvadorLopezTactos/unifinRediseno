@@ -120,7 +120,7 @@
             $('#P').addClass('done');
             $('#C').addClass('done');
             //Valida subetapa
-            if (subetapa="N") {
+            if (subetapa=="N") {
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('success');
                 $("#SE4").html("Autorizada");
@@ -135,12 +135,12 @@
             //Cambia texto a Rechazado
             $("#CL").html("Rechazado");
             //Valida subetapas
-            if(subetapa="CM"){
+            if(subetapa=="CM"){
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('error');
                 $("#SE4").html("Rechazada Comité");
             }
-            if(subetapa="R"){
+            if(subetapa=="R"){
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('error');
                 $("#SE4").html("Rechazada Crédito");
