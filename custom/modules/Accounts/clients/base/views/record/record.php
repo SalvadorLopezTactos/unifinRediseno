@@ -19,6 +19,17 @@ array (
           ),
           1 => 
           array (
+            'type' => 'button',
+            'name' => 'rfc_qr_button',
+            'label' => 'ESCANEAR QR',
+            'css_class' => 'btn_rfc_qr btn btn-primary',
+            'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:btn_rfc:click',
+            ),
+          ),
+          2 => 
+          array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -27,7 +38,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          3 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -157,7 +168,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
