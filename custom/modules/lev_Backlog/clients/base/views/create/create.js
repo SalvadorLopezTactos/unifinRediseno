@@ -99,7 +99,7 @@
         this.$('div[data-name=tipo]').hide();
         this.$('div[data-name=producto]').hide();
         this.$('div[data-name=region]').hide();
-        this.$('div[data-name=estatus_de_la_operacion]').hide();
+        this.$('div[data-name=backlog_estatus_operacion_c]').hide();
         this.$('div[data-name=lev_backlog_opportunities_name]').hide();
         this.$('div[data-name=numero_de_solicitud]').hide();
         this.$('div[data-name=monto_final_comprometido_c]').hide();
@@ -331,7 +331,7 @@
         if(id_account && id_account != '' && id_account.length>0){
 
 
-            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][backlog_estatus_operacion_c][$not_equals]=1&fields=id,mes,backlog_estatus_operacion_c',
                 null, null, null);
 
 

@@ -106,7 +106,7 @@ SQL;
             $queryResult = $db->query($query);
             while ($row = $db->fetchByAssoc($queryResult)) {
                 $backlog = BeanFactory::retrieveBean('lev_Backlog', $row['id']);
-                $backlog->estatus_de_la_operacion = "Cancelada";
+                $backlog->backlog_estatus_operacion_c = "1";
                 $backlog->monto_comprometido_cancelado = "-" . $backlog->monto_comprometido;
                 $backlog->renta_inicialcomp_can = "-" . $backlog->renta_inicial_comprometida;
                 $backlog->monto_real_logrado = 0;

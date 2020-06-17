@@ -99,7 +99,7 @@
         this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
         this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
         this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
-        this.estatus_list_html = app.lang.getAppListStrings('estatus_de_la_operacion_list');
+        this.estatus_list_html = app.lang.getAppListStrings('backlog_estatus_operacion_list');
 
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';
@@ -911,7 +911,7 @@
 
          var id_account=arr_p[1];
 
-         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
+         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][backlog_estatus_operacion_c][$not_equals]=1&fields=id,mes,backlog_estatus_operacion_c',
              null, null, null);
 
         $('#btn-Cancelar').prop('disabled',true);
@@ -1297,7 +1297,7 @@
                  var num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
                  var arr_p=str.split('#Accounts/');
                  var id_account=arr_p[1];
-                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion,name',
+                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,backlog_estatus_operacion_c,name',
                      null, null, null);
 
                 $('#btn-Cancelar').prop('disabled',true);
@@ -1840,11 +1840,11 @@
             "nameBacklog":backlog.name,
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
-            "status":backlog.estatus_de_la_operacion,
+            "status":backlog.backlog_estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
-        if (backlog.estatus_de_la_operacion != 'Cancelada'){
+        if (backlog.backlog_estatus_operacion_c != 'Cancelada'){
            app.alert.show('Operacion Activa', {
                level: 'error',
                messages: 'Unicamente pueden revivirse operaciones canceladas.',
@@ -1861,7 +1861,7 @@
                 autoClose: true
              });
         } else {
-            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_de_la_operacion]=Comprometida&fields=numero_de_backlog,mes";
+            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][backlog_estatus_operacion_c]=Comprometida&fields=numero_de_backlog,mes";
             app.api.call("read", app.api.buildURL (url), {}, {
                 success: _.bind(function (data) {
                     if (data.records.length>0) {
@@ -1920,7 +1920,7 @@
 
         //Valida existencia de backlog en el mes
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[this.newRevivir.idBacklog];
-        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][estatus_de_la_operacion]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
+        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][backlog_estatus_operacion_c]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
         app.api.call("read", app.api.buildURL (url), {}, {
             success: _.bind(function (data) {
                 if (data.records.length>0) {
@@ -1943,7 +1943,7 @@
                         success: _.bind(function (data) {
                             if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
                                 self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
-                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].backlog_estatus_operacion_c="Comprometida";
                             }
                             $('#btn-CancelarRe').prop('disabled',false);
                             $('#btn-GuardarRe').prop('disabled',false);
@@ -2045,7 +2045,7 @@
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
             "motivoCancelacion":'',
-            "status":backlog.estatus_de_la_operacion,
+            "status":backlog.backlog_estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
@@ -2319,7 +2319,7 @@
                 else{
                     //Marcar como cancelado, pintar en rojo y status en cancelada
                     self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#FF6666";
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_de_la_operacion="Cancelada";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].backlog_estatus_operacion_c="1";
                 }
                 $('#btn-CanCancelar').prop('disabled',false);
                 $('#btn-GuardarCan').prop('disabled',false);
@@ -2783,7 +2783,7 @@
                                     else{
                                         //Marcar como cancelado, pintar en rojo y status en cancelada
                                         self.backlogs.backlogs.MyBacklogs.linea[data[1]].color="#FF6666";
-                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_de_la_operacion="Cancelada";
+                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].backlog_estatus_operacion_c="1";
                                     }
                                     successCountCancelar++;
                                     if (self.disposed) {

@@ -404,7 +404,7 @@
 
         //CVV se cambia la validaci�n para permitir actualizar el BL hasta antes dek d�a 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida') {
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("backlog_estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 if (!_.isEmpty(this.model.get("monto_comprometido")) && !_.isEmpty(this.model.get("porciento_ri"))) {
                     var percent = ((this.model.get("monto_comprometido") * this.model.get("porciento_ri")) / 100).toFixed(2);
@@ -422,7 +422,7 @@
 
         //CVV se cambia la validaci�n para permitir actualizar el BL hasta antes dek d�a 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida'){
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("backlog_estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 if (this.model.get("renta_inicial_comprometida") == 0) {
                     this.model.set("porciento_ri", 0);
@@ -442,7 +442,7 @@
         var currentMonth = (new Date).getMonth() + 1;
         var mesBL = this.model.get("mes") - 2;
 
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("backlog_estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 this.model.set("monto_comprometido", this.model.get("monto_final_comprometido_c"));
                 this.model.set("renta_inicial_comprometida", this.model.get("ri_final_comprometida_c"));
@@ -550,12 +550,12 @@
             var MontoOperar = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("ri_final_comprometida_c"));
             if (parseFloat(this.model.get("monto_original")) >= MontoOperar) {
                 this.model.set("etapa", "Autorizada");
-                if (this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+                if (this.model.get("backlog_estatus_operacion_c") == 'Comprometida') {
                     this.model.set("etapa_preliminar", "Autorizada");
                 }
             } else {
                 this.model.set("etapa", "Prospecto");
-                if (this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+                if (this.model.get("backlog_estatus_operacion_c") == 'Comprometida') {
                     this.model.set("etapa_preliminar", "Prospecto");
                 }
             }

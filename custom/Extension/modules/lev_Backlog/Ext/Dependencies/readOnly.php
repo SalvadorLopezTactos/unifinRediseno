@@ -122,7 +122,7 @@ $dependencies['lev_Backlog']['estatus_de_la_operacion_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'estatus_de_la_operacion',
+                'target' => 'backlog_estatus_operacion_c',
                 'label' => 'estatus_de_la_operacion_label',
                 'value' => 'true',
             ),
@@ -365,7 +365,7 @@ $dependencies['lev_Backlog']['motivo_de_cancelacion_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'motivo_de_cancelacion',
+                'target' => 'backlog_motivo_cancelacion_c',
                 'label' => 'motivo_de_cancelacion_label',
                 'value' => 'true',
             ),

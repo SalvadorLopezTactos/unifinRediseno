@@ -284,16 +284,16 @@ SQL;
 SELECT lb.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
 a.name AS account_name, CONCAT(u.first_name, " " , u.last_name) AS promotor, lb.equipo AS equipo_c, o.id AS oportunityId,
 case when lb.description = '' then 'fa-comment-o' when lb.description is null then 'fa-comment-o' else 'fa-comment' end as comentado,
-case when lb.estatus_de_la_operacion = 'Cancelada' then '#FF6666'  when lb.estatus_de_la_operacion = 'Comprometida' then '#E5FFCC' else '#FFFFFF' end as color,
+case when lb.backlog_estatus_operacion_c = '1' then '#FF6666'  when lb.backlog_estatus_operacion_c = '2' then '#E5FFCC' else '#FFFFFF' end as color,
 case lb.equipo when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'LEO' then 15
 when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 when 'MER' then 19 when 'TOL' then 20 when 'CASA' then 21 else 50 end AS ordenEquipo,
-case lb.estatus_de_la_operacion when 'Comprometida' then 1 when 'Cancelada' then 2 when 'Activa' then 3
+case lb.backlog_estatus_operacion_c when '2' then 1 when 'Cancelada' then 2 when 'Activa' then 3
 when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Autom�tico' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
 uc.iniciales_c AS iniciales, IFNULL(blcs.monto_activado_anticipado_c,0) AS monto_anticipado, IFNULL(blcs.ri_activada_anticipada_c,0) AS ri_anticipada,
 IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c,
 ri_prospecto_c, ri_credito_c, ri_rechazada_c, ri_sin_solicitud_c, ri_con_solicitud_c,
-CASE WHEN lb.estatus_de_la_operacion = 'Cancelada' THEN 0 ELSE
+CASE WHEN lb.backlog_estatus_operacion_c = '1' THEN 0 ELSE
 0 + /*CASE '{$etapa}' WHEN '' THEN */ monto_prospecto_c + monto_credito_c + monto_rechazado_c + monto_sin_solicitud_c + monto_con_solicitud_c /*ELSE
     CASE WHEN '{$etapa}' LIKE '%Prospecto%' THEN  monto_prospecto_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%Credito%' THEN  monto_credito_c     ELSE 0 END
@@ -355,7 +355,7 @@ SQL;
             }else{
                 $estatus = "'" . implode("','", $estatus). "'";
             }
-            $query .= " AND lb.estatus_de_la_operacion IN ({$estatus})";
+            $query .= " AND lb.backlog_estatus_operacion_c IN ({$estatus})";
         }
 
         if(!empty($equipo) && $equipo != "Todos"){
@@ -375,7 +375,7 @@ SQL;
 
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
-            $response['linea'][$row['id']]['estatus_de_la_operacion'] = $row['estatus_de_la_operacion'];
+            $response['linea'][$row['id']]['estatus_de_la_operacion'] = $row['backlog_estatus_operacion_c'];
             $response['linea'][$row['id']]['mesanio'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3)."-".substr ($row['anio'],2,2);
             $response['linea'][$row['id']]['mes'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3);
             $response['linea'][$row['id']]['equipo'] = $row['equipo_c'];
@@ -434,7 +434,7 @@ SQL;
             $response['linea'][$row['id']]['etapa'] = $this->matchListLabel($row['etapa'], "estatus_c_operacion_list");
             $response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
-            if($row['estatus_de_la_operacion'] == "Comprometida"){
+            if($row['backlog_estatus_operacion_c'] == "2"){
                 $response['linea'][$row['id']]['estatus_checked'] = "checked";
                 $response['linea'][$row['id']]['mass_checked'] = "disabled";
             }
@@ -605,7 +605,7 @@ SQL;
          *  Se modifica condición
         //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
         */
-        if($motivo_de_cancelacion == 'Mes posterior'){
+        if($motivo_de_cancelacion == '10'){
             //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
             $currentYear = date("Y");
             $currentDay = date("d");
@@ -660,12 +660,12 @@ SQL;
             $backlog->deleted = 1;
         }
 
-        $backlog->estatus_de_la_operacion = "Cancelada";
+        $backlog->backlog_estatus_operacion_c = "1";
         $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
         $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
         $backlog->monto_real_logrado = 0;
         $backlog->renta_inicial_real = 0;
-        $backlog->motivo_de_cancelacion = $motivo_de_cancelacion;
+        $backlog->backlog_motivo_cancelacion_c = $motivo_de_cancelacion;
         $backlog->tct_competencia_quien_txf_c = $cam_competencia;
         $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
@@ -688,7 +688,7 @@ SQL;
         if($mes == $MesAnterior){
             //SI se esta reviviendo al mismo mes, solo actualiza el estatus a comprometida
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->backlog_estatus_operacion_c = "2";
             if ($comentarios != ""){
                 $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios;
             }
@@ -765,7 +765,7 @@ SQL;
             }
 
             if($backlog->mes < $mes){
-                if($backlog->tipo_de_operacion == "Original" && $backlog->estatus_de_la_operacion != "Comprometida"){
+                if($backlog->tipo_de_operacion == "Original" && $backlog->backlog_estatus_operacion_c != "2"){
                     $backlog->mes = $mes;
                     $backlog->anio = $anio;
                 }
@@ -799,13 +799,13 @@ SQL;
                     }
                 }
 
-                if($backlog->tipo_de_operacion == "Original" && $backlog->estatus_de_la_operacion == "Comprometida"){
+                if($backlog->tipo_de_operacion == "Original" && $backlog->backlog_estatus_operacion_c == "2"){
                     if($periodo_revision == true && $backlog->mes == $currentMonth && $backlog->anio == $currentYear) {
                         if($access == "Full_Access" || $rolAutorizacion=="Direccion") {
                             $backlog->mes = $mes;
                             $backlog->anio = $anio;
                             //CVV se cambia a comprometida para ajustes de eliminar concepto de "Comprometer"
-                            $backlog->estatus_de_la_operacion = "Comprometida"; //"Activa";
+                            $backlog->backlog_estatus_operacion_c = "2"; //"Activa";
                         }else{
                             $response = "Esta Operacion ya esta comprometida y solo podra ser movida por un Director en periodo de revison";
                         }
@@ -828,7 +828,7 @@ SQL;
                     $backlog->mes = $mes;
                     $backlog->anio = $anio;
                     //CVV se cambia a comprometida para ajustes de eliminar concepto de "Comprometer"
-                    $backlog->estatus_de_la_operacion = "Comprometida"; //"Activa";
+                    $backlog->backlog_estatus_operacion_c = "2"; //"Activa";
                 }
             }
         }else{
@@ -899,7 +899,7 @@ SQL;
                 $backlog->mes = $mes;
                 $backlog->anio = $anio;
                 $backlog->tipo_de_operacion = $tipo_operacion;
-                $backlog->estatus_de_la_operacion = "Comprometida";
+                $backlog->backlog_estatus_operacion_c = "2";
 
                 //CVV distribuye los montos en las etapas
                 if($backlog->monto_original >= ($backlog->monto_final_comprometido_c - $backlog->ri_final_comprometida_c)){
@@ -920,7 +920,7 @@ SQL;
             $backlog->mes = $mes;
             $backlog->anio = $anio;
             $backlog->tipo_de_operacion = $tipo_operacion;
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->backlog_estatus_operacion_c = "2";
 
             //CVV distribuye los montos en las etapas
             if($backlog->monto_original >= ($backlog->monto_final_comprometido_c - $backlog->ri_final_comprometida_c)){
@@ -947,7 +947,7 @@ SQL;
 
         foreach ($args['data']['backlogs'] as $index => $id) {
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $id);
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->backlog_estatus_operacion_c = "2";
             //$backlog->monto_comprometido = $monto_comprometido;
             //$backlog->renta_inicial_comprometida = $renta_comprometida;
             $backlog->mes = $mes;
@@ -966,7 +966,7 @@ SQL;
         $new_backlog->assigned_user_id = $original_backlog->assigned_user_id;
         $new_backlog->currency_id = $original_backlog->currency_id;
         $new_backlog->description = $original_backlog->description;
-        $new_backlog->estatus_de_la_operacion = $estatus;
+        $new_backlog->backlog_estatus_operacion_c = $estatus;
         $new_backlog->etapa = $original_backlog->etapa;
         $new_backlog->etapa_preliminar = $original_backlog->etapa_preliminar;
         $new_backlog->mes = $mes;
