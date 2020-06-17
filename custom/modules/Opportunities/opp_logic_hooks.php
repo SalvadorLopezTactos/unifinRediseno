@@ -666,7 +666,7 @@ SQL;
                                 $backlog->numero_de_solicitud = $bean->idsolicitud_c;
                                 $backlog->activo = $this->getActivos($bean);
 
-                                $backlog->estatus_de_la_operacion = 'Activa';
+                                $backlog->backlog_estatus_operacion_c = '2';
 
                                 $backlog->tipo_de_operacion = $this->getcurrentYearMonth($bean->mes_c, $bean->anio_c);
                                 if ($account->tipo_registro_cuenta_c == "2") { // Prospecto - 2

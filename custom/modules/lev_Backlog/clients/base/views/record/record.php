@@ -161,9 +161,8 @@ array (
               ),
               11 => 
               array (
-                'name' => 'estatus_de_la_operacion',
-                'studio' => 'visible',
-                'label' => 'LBL_ESTATUS_DE_LA_OPERACION',
+                'name' => 'backlog_estatus_operacion_c',
+                'label' => 'LBL_BACKLOG_ESTATUS_OPERACION_C',
               ),
               12 => 
               array (
@@ -283,9 +282,8 @@ array (
               ),
               28 => 
               array (
-                'name' => 'motivo_de_cancelacion',
-                'studio' => 'visible',
-                'label' => 'LBL_MOTIVO_DE_CANCELACION',
+                'name' => 'backlog_motivo_cancelacion_c',
+                'label' => 'LBL_BACKLOG_MOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
               29 => 

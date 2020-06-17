@@ -108,8 +108,8 @@
         }
         this.etapa_list_html = etapa_list_html;
 
-        var estatus_list = app.lang.getAppListStrings('estatus_de_la_operacion_list');
-        var estatus_keys = app.lang.getAppListKeys('estatus_de_la_operacion_list');
+        var estatus_list = app.lang.getAppListStrings('backlog_estatus_operacion_list');
+        var estatus_keys = app.lang.getAppListKeys('backlog_estatus_operacion_list');
         var estatus_list_html = '<option value=""></option>';
         for (estatus_keys in estatus_list) {
             estatus_list_html += '<option value="' + estatus_keys + '">' + estatus_list[estatus_keys] + '</option>'
@@ -127,8 +127,8 @@
         }
         this.equipo_list_html = equipo_list_html;
 */
-        var motivo_de_cancelacion_list = app.lang.getAppListStrings('motivo_de_cancelacion_list');
-        var motivo_de_cancelacion_keys = app.lang.getAppListKeys('motivo_de_cancelacion_list');
+        var motivo_de_cancelacion_list = app.lang.getAppListStrings('backlog_motivo_cancelacion_list');
+        var motivo_de_cancelacion_keys = app.lang.getAppListKeys('backlog_motivo_cancelacion_list');
         var motivo_de_cancelacion_list_html = '<option value=""></option>';
         for (motivo_de_cancelacion_keys in motivo_de_cancelacion_list) {
             motivo_de_cancelacion_list_html += '<option value="' + motivo_de_cancelacion_keys + '">' + motivo_de_cancelacion_list[motivo_de_cancelacion_keys] + '</option>'

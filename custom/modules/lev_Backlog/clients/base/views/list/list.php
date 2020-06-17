@@ -22,13 +22,11 @@ array (
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
-                'width' => '10%',
               ),
               1 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO_NAME',
-                'width' => '9%',
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
@@ -38,7 +36,6 @@ array (
                 'name' => 'estatus_de_la_operacion',
                 'label' => 'LBL_ESTATUS_DE_LA_OPERACION',
                 'enabled' => true,
-                'width' => '10%',
                 'default' => true,
               ),
               3 => 
@@ -46,7 +43,6 @@ array (
                 'name' => 'progreso',
                 'label' => 'LBL_PROGRESO',
                 'enabled' => true,
-                'width' => '10%',
                 'default' => true,
               ),
               4 => 
@@ -56,13 +52,11 @@ array (
                 'default' => true,
                 'name' => 'date_modified',
                 'readonly' => true,
-                'width' => '10%',
               ),
               5 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
-                'width' => '9%',
                 'default' => false,
                 'enabled' => true,
               ),
