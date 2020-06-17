@@ -68,3 +68,5 @@ $mod_strings['LBL_TCT_CARGA_MASIVA_CHK'] = 'Carga Masiva';
 $mod_strings['LBL_TCT_BLOQUEO_TXF'] = 'Bloqueo';
 $mod_strings['LBL_TCT_CONVERSION'] = 'Probabilidad de Conversión %';
 $mod_strings['LBL_MOTIVO_RECHAZO_TXF'] = 'Motivo de Rechazo';
+$mod_strings['LBL_BACKLOG_TIPO_OPERACION'] = 'Tipo de operación';
+$mod_strings['LBL_BACKLOG_TIPO'] = 'Tipo';
