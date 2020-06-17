@@ -4,9 +4,14 @@
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
-        cont_tel = this;
+
         this._super('initialize', [options]);
         this.model.on('sync', this.pipelineopp, this);
+    },
+
+    _render: function () {
+        this._super("_render");
+
     },
 
     pipelineopp: function (){
@@ -27,7 +32,7 @@
         }
         if (etapa=="P"){
             //Agrega clase current para sombrear en color actual al pipeline Int de Expediente
-            $('#IE').addClass('current');
+            $('#P').addClass('current');
             $('#SI').addClass('done');
             //Valida las subetapas 'En Espera', 'int de Exp','Devuelta por Credito' y 'Cancelada'
             if(subetapa=="PE"){
@@ -115,7 +120,7 @@
             $('#P').addClass('done');
             $('#C').addClass('done');
             //Valida subetapa
-            if (subetapa="N") {
+            if (subetapa=="N") {
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('success');
                 $("#SE4").html("Autorizada");
@@ -130,12 +135,12 @@
             //Cambia texto a Rechazado
             $("#CL").html("Rechazado");
             //Valida subetapas
-            if(subetapa="CM"){
+            if(subetapa=="CM"){
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('error');
                 $("#SE4").html("Rechazada Comité");
             }
-            if(subetapa="R"){
+            if(subetapa=="R"){
                 $("#SE4").removeClass('ocult');
                 $('#SE4').addClass('error');
                 $("#SE4").html("Rechazada Crédito");

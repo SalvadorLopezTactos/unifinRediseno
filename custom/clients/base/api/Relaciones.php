@@ -51,8 +51,8 @@ class Relaciones extends SugarApi
             r.relaciones_activas relacionesActivas,
             rc.relaciones_producto_c relacionesProducto
             FROM rel_relaciones_cstm rc
-            INNER JOIN rel_relaciones r on r.id=rc.id_c
-            INNER JOIN rel_relaciones_accounts_1_c ra on ra.rel_relaciones_accounts_1rel_relaciones_idb = rc.id_c
+            INNER JOIN rel_relaciones r on r.id=rc.id_c AND r.deleted = 0
+            INNER JOIN rel_relaciones_accounts_1_c ra on ra.rel_relaciones_accounts_1rel_relaciones_idb = rc.id_c AND ra.deleted = 0
             INNER JOIN accounts a on a.id = ra.rel_relaciones_accounts_1accounts_ida
             INNER JOIN accounts_cstm acstm on acstm.id_c = a.id
             INNER JOIN accounts_cstm acstm2 on acstm2.id_c = rc.account_id1_c
