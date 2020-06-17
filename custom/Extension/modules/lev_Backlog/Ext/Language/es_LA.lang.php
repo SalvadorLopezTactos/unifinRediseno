@@ -68,3 +68,6 @@ $mod_strings['LBL_TCT_CARGA_MASIVA_CHK'] = 'Carga Masiva';
 $mod_strings['LBL_TCT_BLOQUEO_TXF'] = 'Bloqueo';
 $mod_strings['LBL_TCT_CONVERSION'] = 'Probabilidad de Conversión %';
 $mod_strings['LBL_MOTIVO_RECHAZO_TXF'] = 'Motivo de Rechazo';
+$mod_strings['LBL_BACKLOG_PRODUCTO'] = 'Producto';
+$mod_strings['LBL_BACKLOG_ETAPA'] = 'Etapa';
+$mod_strings['LBL_BACKLOG_ETAPA_PRE'] = 'Etapa inicio mes';
