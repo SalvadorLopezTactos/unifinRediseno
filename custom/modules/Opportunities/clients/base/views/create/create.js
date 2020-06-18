@@ -343,6 +343,10 @@
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
+        //Oculta etiqueta del campo custom pipeline_opp
+        $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
+        $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
+        $('[data-name="estatus_c"]').attr('style','pointer-events:none');
     },
     /*
     *Victor Martinez Lopez

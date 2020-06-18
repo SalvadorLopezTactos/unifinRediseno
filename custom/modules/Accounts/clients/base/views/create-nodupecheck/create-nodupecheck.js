@@ -129,6 +129,15 @@
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 
         this.enableDuplicateCheck = true;
+		
+		
+		/*RFC_ValidatePadron
+		  Validación de rfc en el padron de contribuyentes
+		*/
+		self.rfc_antiguo = "";
+		this.model.on('change:rfc_c', this.cambioRFC, this);
+		this.model.addValidationTask('RFC_validateP', _.bind(this.RFC_ValidatePadron, this));
+
 
         //UNFIN TASK:
         //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC gen�rico (XXX010101XXX)
@@ -309,7 +318,9 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
 
-
+        //Limpia los campos dependientes de Origen y Detalle Origen
+        this.model.on('change:origen_cuenta_c', this._cleanDependenciesOrigen, this);
+        this.model.on('change:detalle_origen_c', this._cleanDependencies, this);
     },
 
     _render: function () {
@@ -412,6 +423,9 @@
         if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
           $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
         }  
+
+        this.$('[data-name="account_tipoSubtipo"]').hide();
+        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {
@@ -1995,5 +2009,140 @@
         }
 
         callback(null, fields, errors);
+    },
+	
+	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
+	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
+	RFC_ValidatePadron: function (fields, errors, callback) {
+		
+		var rfc = this.getField('rfc_c');
+		var valuerfc = this.model.get('rfc_c');
+		var anticrfc = this._get_rfc_antiguo();
+		        
+		if( (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
+			&& (anticrfc != valuerfc) 
+			&& (rfc.action === "edit" || rfc.action === "create")
+			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" )){
+			
+			app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
+				success: _.bind(function (data) {
+					if (data != "" && data != null) {
+						console.log("rfc");
+						console.log(data);
+						if (data.code == '1') {
+							this.model.set('estado_rfc_c', "");
+							app.alert.show("Error Validar RFC", {
+								level: "error",
+								title: 'Estructura del RFC incorrecta',
+								autoClose: false
+							});
+							errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+							errors['error_RFC_Padron'].required = true;
+                        }else if (data.code == '2') {
+							this.model.set('estado_rfc_c', '0');
+							app.alert.show("Error Validar RFC", {
+								level: "error",
+								title: 'RFC no registrado en el padrón de contribuyentes',
+								autoClose: false
+							});
+							errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+							errors['error_RFC_Padron'].required = true;
+                        }else if (data.code == '4') {
+							this.model.set('estado_rfc_c', '1');
+						}						
+					}else{
+						app.alert.show("Error Validar RFC", {
+							level: "error",
+							title: 'Error de envío para validar RFC',
+							autoClose: false
+						});
+						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+						errors['error_RFC_Padron'].required = true;
+					}		
+					callback(null, fields, errors);					
+				}, this),
+				error: _.bind(function (error) {
+					app.alert.show("Error Validar RFC", {
+						level: "error",
+						title: 'Error de envío',
+						autoClose: false
+					});
+					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+					errors['error_RFC_Padron'].required = true;
+                    console.log("Este fue el error:", error);
+					callback(null, fields, errors);
+                },this),
+			});
+		}else{
+	      	  callback(null, fields, errors);
+        }			
+    },
+	
+	cambioRFC: function(){
+		var original_rfc = this.model._previousAttributes.rfc_c;
+		this._set_rfc_antiguo(original_rfc);
+	},
+	
+	_get_rfc_antiguo: function(){
+		return self.rfc_antiguo;
+	},
+	
+	_set_rfc_antiguo: function(rfca){
+		self.rfc_antiguo = rfca;
+	},
+
+    _cleanDependenciesOrigen: function () {
+               
+        /*******Limpia campos dependientes de Origen*******/
+        //Origen: Prospección propia
+        if (this.model.get('origen_cuenta_c') != '3') {
+            this.model.set('prospeccion_propia_c', ''); //Limpia campo Prospeccion propia
+        } 
+        //Origen: Referenciado Socio Comercial
+        if (this.model.get('origen_cuenta_c') != '6') {
+            this.model.set('account_id_c', ''); //Elimina usuario referenciado por db
+            this.model.set('referenciador_c',''); //Elimina usuario referenciado por vista
+        } 
+        //Origen: Referenciado Unifin
+        if (this.model.get('origen_cuenta_c') != '7') {
+            this.model.set('user_id5_c', ''); //Elimina usuario referido por db
+            this.model.set('tct_referenciado_dir_rel_c',''); //Elimina usuario referido por vista
+        } 
+        //Origen: Referenciado Cliente = 4, Referenciado Proveedor = 5, Referenciado Vendor = 8
+        if (this.model.get('origen_cuenta_c') != '4' && this.model.get('origen_cuenta_c') != '5' && this.model.get('origen_cuenta_c') != '8') {
+            this.model.set('account_id1_c', ''); //Elimina usuario referido db
+            this.model.set('referido_cliente_prov_c',''); //Elimina usuario referido vista
+        } 
+    },
+
+    _cleanDependencies: function (){
+    
+        /*******Limpia campos dependientes de Detalle Origen*******/
+        //Acciones Estrategicas
+        if (this.model.get('detalle_origen_c') != '5') {
+            this.model.set('evento_c', ''); //Limpia campo que ¿Que evento?
+        }
+        //Base de datos Emp
+        if (this.model.get('detalle_origen_c') != '1') {
+            this.model.set('tct_origen_busqueda_txf_c', ''); //Limpia campo Base
+        } 
+        //Base de datos Afiliaciones
+        if (this.model.get('detalle_origen_c') != '6') {
+            this.model.set('camara_c', ''); //Limpia campo ¿De que Cámara Proviene?
+        }
+        //Cartera Asesores
+        if (this.model.get('detalle_origen_c') != '10') {
+            this.model.set('tct_que_promotor_rel_c',''); //Elimina ¿Que Asesor? Vista
+            this.model.set('user_id4_c',''); //Elimina ¿Que Asesor? DB
+        }
+        //Acciones Estrategicas = 5, Base de datos Emp = 1, Base de datos Afiliaciones = 6
+        //Digital = 3, Offline = 9, Cartera Asesores = 10
+        if (this.model.get('detalle_origen_c') != '5' && this.model.get('detalle_origen_c') != '1' &&
+            this.model.get('detalle_origen_c') != '6' && this.model.get('detalle_origen_c') != '3' &&
+            this.model.get('detalle_origen_c') != '9' && this.model.get('detalle_origen_c') != '10') {
+            
+            this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
+            this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
+        }
     },
 })
