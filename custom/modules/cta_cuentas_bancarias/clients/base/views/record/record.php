@@ -205,6 +205,8 @@ array (
               ),
               7 => 
               array (
+                'name' => 'idcorto_c',
+                'label' => 'LBL_IDCORTO_C',
               ),
             ),
           ),
