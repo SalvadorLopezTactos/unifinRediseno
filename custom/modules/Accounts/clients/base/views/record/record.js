@@ -1084,6 +1084,8 @@
         if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
             $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
         }
+
+        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
     },
 
     editClicked: function () {
