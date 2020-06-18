@@ -3114,7 +3114,9 @@
 							});
 							errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
 							errors['error_RFC_Padron'].required = true;
-                        }						
+                        }else if (data.code == '4') {
+							this.model.set('estado_rfc_c', '1');
+						}						
 					}else{
 						app.alert.show("Error Validar RFC", {
 							level: "error",
