@@ -302,6 +302,7 @@
         }
 
         this.$('[data-name="account_tipoSubtipo"]').hide();
+        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
     },
 
