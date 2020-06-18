@@ -738,10 +738,10 @@
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         /*
          -- Bloquea campos si;
-         1.- Origen es Marketing o Inteligencia de negocio
+         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2
          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
          */
-        if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
+        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31')) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origen_cuenta_c');
             this.noEditFields.push('detalle_origen_c');
