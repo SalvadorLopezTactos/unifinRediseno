@@ -5719,7 +5719,7 @@
 		var valuerfc = this.model.get('rfc_c');
 		var anticrfc = this._get_rfc_antiguo();
 		        
-		if( (!_.isEmpty(valuerfc) || valuerfc != "")
+		if( (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
 			&& (anticrfc != valuerfc) 
 			&& (rfc.action === "edit" || rfc.action === "create")
 			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" )){
@@ -5747,7 +5747,9 @@
 							});
 							errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
 							errors['error_RFC_Padron'].required = true;
-                        }						
+                        }else if (data.code == '4') {
+							this.model.set('estado_rfc_c', '1');
+						}
 					}else{
 						app.alert.show("Error Validar RFC", {
 							level: "error",

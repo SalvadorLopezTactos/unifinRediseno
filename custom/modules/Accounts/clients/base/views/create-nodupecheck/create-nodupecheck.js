@@ -2019,7 +2019,7 @@
 		var valuerfc = this.model.get('rfc_c');
 		var anticrfc = this._get_rfc_antiguo();
 		        
-		if( (!_.isEmpty(valuerfc) || valuerfc != "")
+		if( (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
 			&& (anticrfc != valuerfc) 
 			&& (rfc.action === "edit" || rfc.action === "create")
 			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" )){
