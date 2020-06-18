@@ -137,7 +137,7 @@ $dependencies['lev_Backlog']['etapa_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'etapa',
+                'target' => 'backlog_etapa_c',
                 'label' => 'etapa_label',
                 'value' => 'true',
             ),
@@ -216,7 +216,7 @@ $dependencies['lev_Backlog']['producto_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'producto',
+                'target' => 'backlog_producto_c',
                 'label' => 'producto_label',
                 'value' => 'true',
             ),
@@ -314,7 +314,7 @@ $dependencies['lev_Backlog']['assigned_user_name_readonly'] = array(
             'params' => array(
                 'target' => 'assigned_user_name',
                 'label' => 'assigned_user_name_label',
-                'value' => 'not(equal($estatus_de_la_operacion, "Activa"))',
+                'value' => 'not(equal($backlog_etapa_preliminar_c, "1"))',
             ),
         ),
     ),
