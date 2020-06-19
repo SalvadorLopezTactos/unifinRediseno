@@ -1,9 +1,12 @@
 <?php
- // created: 2020-06-19 08:16:20
+ // created: 2018-01-10 14:11:53
 
 $app_list_strings['tipo_operacion_c_list']=array (
-  '' => '',
-  1 => 'Carga General',
-  2 => 'Original',
-  3 => 'Adicional',
+  'Colocacion' => 'Colocación (nuevo)',
+  'Refinanciado' => 'Refinanciado',
+  'Recolocado' => 'Recolocado',
+  'Cesion' => 'Cesión',
+  'Reestructura' => 'Reestructura',
+  'Recontratado' => 'Recontratado',
+  'Promesa' => 'Promesa',
 );
