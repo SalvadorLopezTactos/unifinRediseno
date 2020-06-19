@@ -29,3 +29,11 @@ $hook_array['before_save'][] = Array(
     'backlog_hooks',
     'setMontosMultiEtapa'
 );
+
+$hook_array['before_save'][] = Array(
+    5,
+    'update fields old',
+    'custom/modules/lev_Backlog/update_fields_hooks.php',
+    'update_fields_hooks',
+    'actualizaCamposBacklog'
+);
