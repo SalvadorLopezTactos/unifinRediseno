@@ -745,10 +745,10 @@
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         /*
          -- Bloquea campos si;
-         1.- Origen es Marketing o Inteligencia de negocio
+         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2
          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
          */
-        if ((origen == "Marketing" || origen == "Inteligencia de Negocio") && (puesto != '27' && puesto != '31')) {
+        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31')) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origen_cuenta_c');
             this.noEditFields.push('detalle_origen_c');
@@ -5719,7 +5719,7 @@
 		var valuerfc = this.model.get('rfc_c');
 		var anticrfc = this._get_rfc_antiguo();
 		        
-		if( (!_.isEmpty(valuerfc) || valuerfc != "")
+		if( (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
 			&& (anticrfc != valuerfc) 
 			&& (rfc.action === "edit" || rfc.action === "create")
 			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" )){
@@ -5747,7 +5747,9 @@
 							});
 							errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
 							errors['error_RFC_Padron'].required = true;
-                        }						
+                        }else if (data.code == '4') {
+							this.model.set('estado_rfc_c', '1');
+						}
 					}else{
 						app.alert.show("Error Validar RFC", {
 							level: "error",
