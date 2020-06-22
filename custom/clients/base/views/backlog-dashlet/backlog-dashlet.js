@@ -91,16 +91,16 @@
         }
         this.progreso_list_html = progreso_list_html;
 
-        var tipo_operacion_list = app.lang.getAppListStrings('tipo_de_operacion_0');
-        var tipo_operacion_keys = app.lang.getAppListKeys('tipo_de_operacion_0');
+        var tipo_operacion_list = app.lang.getAppListStrings('tipo_operacion_bkl_list');
+        var tipo_operacion_keys = app.lang.getAppListKeys('tipo_operacion_bkl_list');
         var tipo_operacion_list_html = '<option value=""></option>';
         for (tipo_operacion_keys in tipo_operacion_list) {
             tipo_operacion_list_html += '<option value="' + tipo_operacion_keys + '">' + tipo_operacion_list[tipo_operacion_keys] + '</option>'
         }
         this.tipo_operacion_list_html = tipo_operacion_list_html;
 
-        var etapa_list = app.lang.getAppListStrings('etapa_backlog');
-        var etapa_keys = app.lang.getAppListKeys('etapa_backlog');
+        var etapa_list = app.lang.getAppListStrings('etapa_c_list');
+        var etapa_keys = app.lang.getAppListKeys('etapa_c_list');
         //delete etapa_list['Autorizada'];
         var etapa_list_html = '<option value=""></option>';
         for (etapa_keys in etapa_list) {
@@ -108,8 +108,8 @@
         }
         this.etapa_list_html = etapa_list_html;
 
-        var estatus_list = app.lang.getAppListStrings('estatus_de_la_operacion_list');
-        var estatus_keys = app.lang.getAppListKeys('estatus_de_la_operacion_list');
+        var estatus_list = app.lang.getAppListStrings('estatus_operacion_c_list');
+        var estatus_keys = app.lang.getAppListKeys('estatus_operacion_c_list');
         var estatus_list_html = '<option value=""></option>';
         for (estatus_keys in estatus_list) {
             estatus_list_html += '<option value="' + estatus_keys + '">' + estatus_list[estatus_keys] + '</option>'
@@ -127,8 +127,8 @@
         }
         this.equipo_list_html = equipo_list_html;
 */
-        var motivo_de_cancelacion_list = app.lang.getAppListStrings('motivo_de_cancelacion_list');
-        var motivo_de_cancelacion_keys = app.lang.getAppListKeys('motivo_de_cancelacion_list');
+        var motivo_de_cancelacion_list = app.lang.getAppListStrings('motivo_cancelacion_c_list');
+        var motivo_de_cancelacion_keys = app.lang.getAppListKeys('motivo_cancelacion_c_list');
         var motivo_de_cancelacion_list_html = '<option value=""></option>';
         for (motivo_de_cancelacion_keys in motivo_de_cancelacion_list) {
             motivo_de_cancelacion_list_html += '<option value="' + motivo_de_cancelacion_keys + '">' + motivo_de_cancelacion_list[motivo_de_cancelacion_keys] + '</option>'
@@ -466,7 +466,7 @@
             return;
         }
 
-        if(estatus == "Cancelada"){
+        if(estatus == "1"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
                 messages: 'No puede comprometer una operación cancelada',
@@ -578,7 +578,7 @@
         if(backlogAnio <= currentYear) {
             // Si el BL ya esta cancelado no puede moverse
             //if(backlogEstatus != 'Activa') {
-            if(backlogEstatus == 'Cancelada') {
+            if(backlogEstatus == '1') {
                 //if (currentBacklogMonth >= backlogMes) {
                     app.alert.show('backlog_pasado', {
                         level: 'error',
@@ -592,7 +592,7 @@
                 var currentDay = (new Date).getDate();
                 var BacklogCorriente = this.getElaborationBacklog();
 
-                if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
+                if(backlogMes <= BacklogCorriente && backlogEstatus != '1') {
                     if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
                         if (currentDay == 21 && rolAutorizacion != "DGA") {
                             app.alert.show('backlog corriente', {
@@ -692,7 +692,7 @@
             return;
         }
         */
-        if(estatus == "Cancelada"){
+        if(estatus == "1"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
                 messages: 'Esta operacion ya ha sido cancelada',
@@ -808,7 +808,7 @@
         var ProgresoBL = e.currentTarget.getAttribute('data-progreso');
         var estatus = e.currentTarget.getAttribute('data-estatus');
 
-        if (estatus != 'Cancelada'){
+        if (estatus != '1'){
             app.alert.show('Operacion Activa', {
                 level: 'error',
                 messages: 'Unicamente pueden revivirse operaciones canceladas.',
@@ -1104,7 +1104,7 @@
                 return;
             }
 
-            if (MotivoCancelacion == 'Mes posterior' && mes == 0){
+            if (MotivoCancelacion == '10' && mes == 0){
                 app.alert.show('Mes requerido', {
                     level: 'error',
                     messages: 'Debe indicar el mes para el nuevo Backlog.',
@@ -1185,15 +1185,15 @@
 
             if(anio_popup <= currentYear){
                 if(mes_popup > currentMonth){
-                    tipo_opp = "Original";
+                    tipo_opp = "2";
                 }
                 else if(mes_popup == currentMonth){
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }else{
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }
             }else{
-                tipo_opp = "Original";
+                tipo_opp = "2";
             }
             // CVV regresar a 20
             if(currentDay >= 15 && currentDay <= 19){
@@ -1250,15 +1250,15 @@
 
             if($('.anio_a_comprometer_popup').val() <= currentYear){
                 if($('#mes_a_comprometer_popup').val() > currentMonth){
-                    tipo_opp = "Original";
+                    tipo_opp = "2";
                 }
                 else if($('#mes_a_comprometer_popup').val() == currentMonth){
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }else{
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }
             }else{
-                tipo_opp = "Original";
+                tipo_opp = "2";
             }
 
             var Params = {
@@ -1298,15 +1298,15 @@
 
             if($('#anio_a_comprometer_mass_popup').val() <= currentYear){
                 if($('#mes_a_comprometer_mass_popup').val() > currentMonth){
-                    tipo_opp = "Original";
+                    tipo_opp = "2";
                 }
                 else if($('#mes_a_comprometer_popup').val() == currentMonth){
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }else{
-                    tipo_opp = "Adicional";
+                    tipo_opp = "3";
                 }
             }else{
-                tipo_opp = "Original";
+                tipo_opp = "2";
             }
 
             var Params = {
@@ -1902,7 +1902,7 @@
     },
 
     motivoCancelacion: function(){
-        if($('#motivo_de_cancelacion_popup').val() == "Mes posterior"){
+        if($('#motivo_de_cancelacion_popup').val() == "10"){
             //Solicitar mes
             $('#mes_cancelacion').show();
             $('#anio_cancelacion').show();
