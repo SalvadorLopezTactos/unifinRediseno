@@ -129,9 +129,8 @@ array (
               ),
               5 => 
               array (
-                'name' => 'tipo',
-                'studio' => 'visible',
-                'label' => 'LBL_TIPO',
+                'name' => 'tipo_c',
+                'label' => 'LBL_TIPO_C',
               ),
               6 => 'assigned_user_name',
               7 => 
@@ -142,9 +141,8 @@ array (
               ),
               8 => 
               array (
-                'name' => 'producto',
-                'studio' => 'visible',
-                'label' => 'LBL_PRODUCTO',
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO_C',
               ),
               9 => 
               array (
@@ -154,16 +152,13 @@ array (
               ),
               10 => 
               array (
-                'name' => 'tipo_de_operacion',
-                'studio' => 'visible',
-                'label' => 'LBL_TIPO_DE_OPERACION',
-                'readonly' => true,
+                'name' => 'tipo_operacion_c',
+                'label' => 'LBL_TIPO_OPERACION_C',
               ),
               11 => 
               array (
-                'name' => 'estatus_de_la_operacion',
-                'studio' => 'visible',
-                'label' => 'LBL_ESTATUS_DE_LA_OPERACION',
+                'name' => 'estatus_operacion_c',
+                'label' => 'LBL_ESTATUS_OPERACION_C',
               ),
               12 => 
               array (
@@ -271,21 +266,18 @@ array (
               ),
               26 => 
               array (
-                'name' => 'etapa',
-                'studio' => 'visible',
-                'label' => 'LBL_ETAPA',
+                'name' => 'etapa_c',
+                'label' => 'LBL_ETAPA_C',
               ),
               27 => 
               array (
-                'name' => 'etapa_preliminar',
-                'studio' => 'visible',
-                'label' => 'LBL_ETAPA_PRELIMINAR',
+                'name' => 'etapa_preliminar_c',
+                'label' => 'LBL_ETAPA_PRELIMINAR_C',
               ),
               28 => 
               array (
-                'name' => 'motivo_de_cancelacion',
-                'studio' => 'visible',
-                'label' => 'LBL_MOTIVO_DE_CANCELACION',
+                'name' => 'motivo_cancelacion_c',
+                'label' => 'LBL_MOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
               29 => 

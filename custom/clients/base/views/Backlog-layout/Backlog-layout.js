@@ -97,9 +97,9 @@
         this._super("initialize", [options]);
 
         this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
-        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
-        this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
-        this.estatus_list_html = app.lang.getAppListStrings('estatus_de_la_operacion_list');
+        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_operacion_bkl_list');
+        this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');
+        this.estatus_list_html = app.lang.getAppListStrings('estatus_operacion_c_list');
 
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';
@@ -758,7 +758,7 @@
         }
 
         //Valida estado Cancelado
-        if (backlogEstatus == 'Cancelada') {
+        if (backlogEstatus == '1') {
             app.alert.show('backlog_cancelada', {
                 level: 'error',
                 messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra ' + backlogEstatus,
@@ -817,7 +817,7 @@
                 var currentDay = (new Date).getDate();
                 var BacklogCorriente = this.getElaborationBacklog();
                 if (backlogAnio <= currentAnioSub) {
-                    if (backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
+                    if (backlogMes <= BacklogCorriente && backlogEstatus != '1') {
                         if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20) {
                             if (currentDay == 21 && rolAutorizacion != "DGA") {
                                 app.alert.show('backlog corriente', {
@@ -911,7 +911,7 @@
 
          var id_account=arr_p[1];
 
-         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
+         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
              null, null, null);
 
         $('#btn-Cancelar').prop('disabled',true);
@@ -982,15 +982,15 @@
 
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "Original";
+                 tipo_opp = "2";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }else{
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }
          }else{
-             tipo_opp = "Original";
+             tipo_opp = "2";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1096,7 +1096,7 @@
                  var backlogNum = this.array_checks[i].getAttribute('data-numbacklog');
 
                  //Valida estado Cancelado
-                 if(backlogEstatus == 'Cancelada') {
+                 if(backlogEstatus == '1') {
                      app.alert.show('backlog_pasado', {
                          level: 'error',
                          //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
@@ -1172,7 +1172,7 @@
                          var BacklogCorriente = this.getElaborationBacklog();
 
                          if(backlogAnio <= currentAnioSub){
-                             if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
+                             if(backlogMes <= BacklogCorriente && backlogEstatus != '1') {
                                  if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
                                      if (currentDay == 21 && rolAutorizacion != "DGA") {
 
@@ -1297,7 +1297,7 @@
                  var num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
                  var arr_p=str.split('#Accounts/');
                  var id_account=arr_p[1];
-                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion,name',
+                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_operacion_c,name',
                      null, null, null);
 
                 $('#btn-Cancelar').prop('disabled',true);
@@ -1383,15 +1383,15 @@
 
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "Original";
+                 tipo_opp = "2";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }else{
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }
          }else{
-             tipo_opp = "Original";
+             tipo_opp = "2";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1840,11 +1840,11 @@
             "nameBacklog":backlog.name,
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
-            "status":backlog.estatus_de_la_operacion,
+            "status":backlog.estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
-        if (backlog.estatus_de_la_operacion != 'Cancelada'){
+        if (backlog.estatus_operacion_c != '1'){
            app.alert.show('Operacion Activa', {
                level: 'error',
                messages: 'Unicamente pueden revivirse operaciones canceladas.',
@@ -1861,7 +1861,7 @@
                 autoClose: true
              });
         } else {
-            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_de_la_operacion]=Comprometida&fields=numero_de_backlog,mes";
+            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_operacion_c]=Comprometida&fields=numero_de_backlog,mes";
             app.api.call("read", app.api.buildURL (url), {}, {
                 success: _.bind(function (data) {
                     if (data.records.length>0) {
@@ -1920,7 +1920,7 @@
 
         //Valida existencia de backlog en el mes
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[this.newRevivir.idBacklog];
-        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][estatus_de_la_operacion]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
+        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][estatus_operacion_c]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
         app.api.call("read", app.api.buildURL (url), {}, {
             success: _.bind(function (data) {
                 if (data.records.length>0) {
@@ -1943,7 +1943,7 @@
                         success: _.bind(function (data) {
                             if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
                                 self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
-                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_operacion_c="Comprometida";
                             }
                             $('#btn-CancelarRe').prop('disabled',false);
                             $('#btn-GuardarRe').prop('disabled',false);
@@ -2032,7 +2032,7 @@
 
     cancelarNew:function(e){
         this.fechaCancelar();
-        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_cancelacion_c_list');
         var idBacklog=e.currentTarget.getAttribute('data-id');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
         var status=e.currentTarget.getAttribute('data-estatus');
@@ -2045,7 +2045,7 @@
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
             "motivoCancelacion":'',
-            "status":backlog.estatus_de_la_operacion,
+            "status":backlog.estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
@@ -2067,7 +2067,7 @@
         }
 
         //No se pueden cancelar operaciones canceladas
-        if (status == "Cancelada") {
+        if (status == "1") {
             app.alert.show('opp_cancelada', {
                 level: 'error',
                 messages: 'Solo se puede cancelar una operaci\u00F3n original si esta comprometida',
@@ -2170,7 +2170,7 @@
         if(flagShowModal){
 
             self.render();
-            if (status != "Cancelada") {
+            if (status != "1") {
                 var modal = $('#myModalCan');
                 modal.show();
                 $('.Quien').hide();
@@ -2184,8 +2184,8 @@
     },
 
     motivoCancelarC:function(){
-        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
-        if($('#motivoCancelarC').val()=='Competencia'){
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_cancelacion_c_list');
+        if($('#motivoCancelarC').val()=='2'){
             $('.Quien').show();
         }else{
             $('.Quien').hide();
@@ -2195,7 +2195,7 @@
         }else{
             $('.Producto').hide();
         }
-        if($('#motivoCancelarC').val()=='Mes posterior'){
+        if($('#motivoCancelarC').val()=='10'){
             $('.FechaCancelar').show();
         }else{
             $('.FechaCancelar').hide();
@@ -2223,7 +2223,7 @@
             return;
         }
 
-        if($('#motivoCancelarC').val()=="Competencia" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" || competenciava.trim().length==0 )){
+        if($('#motivoCancelarC').val()=="2" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" || competenciava.trim().length==0 )){
             app.alert.show('Competencia_requerida', {
                 level: 'error',
                 messages: 'El campo ¿Qui\u00E9n? es requerido',
@@ -2241,7 +2241,7 @@
             $('.ProductoInput').css('border-color', 'red');
             return;
         }
-        if($('#motivoCancelarC').val()=='Mes posterior' &&($('.mes_cancelar').val()==0 || $('.mes_cancelar').val()==null || $('.mes_cancelar').val()=="")){
+        if($('#motivoCancelarC').val()=='10' &&($('.mes_cancelar').val()==0 || $('.mes_cancelar').val()==null || $('.mes_cancelar').val()=="")){
             app.alert.show('mes_requerido', {
                 level: 'error',
                 messages: 'Debe indicar el mes para el nuevo Backlog',
@@ -2251,7 +2251,7 @@
             return;
         }
         //Valida que el mes a mover no sea igual al actual, de ser asi arroja alerta.
-        if($('#motivoCancelarC').val()=='Mes posterior' && $('#mes_cancelar').val()!="") {
+        if($('#motivoCancelarC').val()=='10' && $('#mes_cancelar').val()!="") {
             var mes= $('#mes_cancelar').val();
             var f = new Date();
             var mesok = f.getMonth() + 1;
@@ -2319,7 +2319,7 @@
                 else{
                     //Marcar como cancelado, pintar en rojo y status en cancelada
                     self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#FF6666";
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_de_la_operacion="Cancelada";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_operacion_c="1";
                 }
                 $('#btn-CanCancelar').prop('disabled',false);
                 $('#btn-GuardarCan').prop('disabled',false);
@@ -2412,7 +2412,7 @@
                  var ProgresoBL = this.array_checks_cancelar[i].getAttribute('data-progreso');
                  self.mesAnterior = this.array_checks_cancelar[i].getAttribute('data-mes');
 
-                 if(estatus == "Cancelada"){
+                 if(estatus == "1"){
 
                     app.alert.show('opp_cancelada', {
                         level: 'error',
@@ -2533,8 +2533,8 @@
         if(checks_cancelar.length > 0 ){
             this.checks_cancelar=checks_cancelar;
             this.checks_cancelar_error=checks_cancelar_error;
-            this.motivoCancelarMasivoList=app.lang.getAppListStrings('motivo_de_cancelacion_list');
-            this.motivoDefault="Mes posterior";
+            this.motivoCancelarMasivoList=app.lang.getAppListStrings('motivo_cancelacion_c_list');
+            this.motivoDefault="10";
 
              //Listas generadas para año y mes
              var lista_mes_anio=this.getMonthYear();
@@ -2564,13 +2564,13 @@
     motivoCancelacionMasivo: function(e){
         var valor=$(e.currentTarget).val();
 
-        if(valor=="Mes posterior"){
+        if(valor=="10"){
 
             $('.FechaCancelar').show();
             $('.Quien').hide();
             $('.Producto').hide();
 
-        }else if(valor == "Competencia"){
+        }else if(valor == "2"){
 
             $('.Quien').show();
             $('.FechaCancelar').hide();
@@ -2620,7 +2620,7 @@
 
         if( Competencia == null || Competencia == "" || Competencia.trim().length==0 ) {
 
-                    if(MotivoCancelacion == 'Competencia') {
+                    if(MotivoCancelacion == '2') {
 
                         $('#quienMasivo').attr('style','border-color:red');
 
@@ -2690,7 +2690,7 @@
                     return;
         }
 
-        if (MotivoCancelacion == 'Mes posterior' && $('select#mes_cancelar')[1].value==""){
+        if (MotivoCancelacion == '10' && $('select#mes_cancelar')[1].value==""){
                     $('select#mes_cancelar').attr('style',"border-color:red");
                     app.alert.show('Mes requerido', {
                         level: 'error',
@@ -2701,7 +2701,7 @@
         }
 
         //Valida que el mes a mover no sea igual al actual, de ser asi arroja alerta.
-        if(MotivoCancelacion=='Mes posterior' && $('select#mes_cancelar')[1].value!="") {
+        if(MotivoCancelacion=='10' && $('select#mes_cancelar')[1].value!="") {
             var mes= $('select#mes_cancelar')[1].value;
             var f = new Date();
             var mesok = f.getMonth() + 1;
@@ -2783,7 +2783,7 @@
                                     else{
                                         //Marcar como cancelado, pintar en rojo y status en cancelada
                                         self.backlogs.backlogs.MyBacklogs.linea[data[1]].color="#FF6666";
-                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_de_la_operacion="Cancelada";
+                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_operacion_c="1";
                                     }
                                     successCountCancelar++;
                                     if (self.disposed) {

@@ -96,18 +96,18 @@
 
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
-        this.$('div[data-name=tipo]').hide();
-        this.$('div[data-name=producto]').hide();
+        this.$('div[data-name=tipo_c]').hide();
+        this.$('div[data-name=producto_c]').hide();
         this.$('div[data-name=region]').hide();
-        this.$('div[data-name=estatus_de_la_operacion]').hide();
+        this.$('div[data-name=estatus_operacion_c]').hide();
         this.$('div[data-name=lev_backlog_opportunities_name]').hide();
         this.$('div[data-name=numero_de_solicitud]').hide();
         this.$('div[data-name=monto_final_comprometido_c]').hide();
         this.$('div[data-name=ri_final_comprometida_c]').hide();
         this.$('div[data-name=monto_real_logrado]').hide();
         this.$('div[data-name=renta_inicial_real]').hide();
-        this.$('div[data-name=etapa]').hide();
-        this.$('div[data-name=etapa_preliminar]').hide();
+        this.$('div[data-name=etapa_c]').hide();
+        this.$('div[data-name=etapa_preliminar_c]').hide();
         this.$('div[data-name=description]').hide();
         this.$('div[data-name=progreso]').hide();
         this.$('div[data-name=date_entered_by]').hide();
@@ -134,11 +134,11 @@
                 for (id in this.productos){
                     op2[this.productos[id]] = op[this.productos[id]];
                 }
-                var lista = this.getField('producto');
+                var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
 
-                this.model.set('producto',this.productos[0]);
+                this.model.set('producto_c',this.productos[0]);
                 /*
                 if(this.productos[0] == "4"){
                     this.model.set('producto','4');
@@ -331,7 +331,7 @@
         if(id_account && id_account != '' && id_account.length>0){
 
 
-            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
                 null, null, null);
 
 
@@ -464,9 +464,9 @@
             success: _.bind(function (data) {
                 var promotor = data.user_id_c;
                 if(data.tipo_registro_cuenta_c == "2"){ // 2 - Prospecto
-                    this.model.set("tipo","Prospecto");
-                    this.model.set("etapa_preliminar","Prospecto");
-                    this.model.set("etapa","Prospecto");
+                    this.model.set("tipo_c","2");
+                    this.model.set("etapa_preliminar_c","3");
+                    this.model.set("etapa_c","3");
                 }else if(data.tipo_registro_cuenta_c == "3"){ // 3 - Cliente
                     //console.log("Valida lineas de credito autorizadas para leasing");
                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c') + "/link/opportunities", null, null, {
@@ -488,12 +488,12 @@
                             });
                             //console.log(data.records.length);
                             if (data.records.length > 0) {
-                                this.model.set("tipo","Cliente");
+                                this.model.set("tipo_c","3");
                                 //this.model.set("etapa_preliminar","Autorizada");
                                 //this.model.set("etapa","Autorizada");
                                 this.model.set("monto_original",disponible);
                             }else{
-                                this.model.set("tipo","Prospecto");
+                                this.model.set("tipo_c","2");
                                 //this.model.set("etapa_preliminar","Prospecto");
                                 //this.model.set("etapa","Prospecto");
                                 this.model.set("monto_original",0);
@@ -507,17 +507,17 @@
 
                     if (disponible >= MontoOperar){
                         //console.log("Le alcanza, se va a autorizada");
-                        this.model.set("etapa_preliminar","Autorizada");
-                        this.model.set("etapa","Autorizada");
+                        this.model.set("etapa_preliminar_c","1");
+                        this.model.set("etapa_c","1");
                     }else{
                         //console.log("No le alcanza, se va a prospecto");
-                        this.model.set("etapa_preliminar","Prospecto");
-                        this.model.set("etapa","Prospecto");
+                        this.model.set("etapa_preliminar_c","3");
+                        this.model.set("etapa_c","3");
                     }
                 }else{
-                    this.model.set("tipo","Persona");
-                    this.model.set("etapa_preliminar","Prospecto");
-                    this.model.set("etapa","Prospecto");
+                    this.model.set("tipo_c","4");
+                    this.model.set("etapa_preliminar_c","3");
+                    this.model.set("etapa_c","3");
                 }
 
                 //Obtiene el promotor del cliente, equipo y region del mismo
@@ -531,7 +531,7 @@
                         this.model.set("assigned_user_name", modelo.get('name'));
 
                         //Asigna producto Leasing
-                        this.model.set('producto',1);
+                        this.model.set('producto_c',1);
                     },this)
                 });
             }, this)
@@ -556,13 +556,13 @@
         if(this.model.get("anio") <= currentYear){
 
             if(currentMonth == this.model.get("mes")){
-                this.model.set("tipo_de_operacion", "Adicional");
+                this.model.set("tipo_operacion_c", "3");
             }else{
-                this.model.set("tipo_de_operacion", "Original");
+                this.model.set("tipo_operacion_c", "2");
             }
 
         }else{
-            this.model.set("tipo_de_operacion", "Original");
+            this.model.set("tipo_operacion_c", "2");
         }
 
     },
@@ -614,11 +614,11 @@
         //console.log("Disponible: " + disponible);
         //console.log("Monto a operar: " + MontoOperar);
         if (disponible >= MontoOperar){
-            this.model.set("etapa_preliminar","Autorizada");
-            this.model.set("etapa","Autorizada");
+            this.model.set("etapa_preliminar_c","1");
+            this.model.set("etapa_c","1");
         }else{
-            this.model.set("etapa_preliminar","Prospecto");
-            this.model.set("etapa","Prospecto");
+            this.model.set("etapa_preliminar_c","3");
+            this.model.set("etapa_c","3");
         }
 
         if (parseFloat(this.model.get('monto_comprometido')) <= 0)
@@ -639,10 +639,10 @@
     },
 
     _ValidateTipo: function(fields, errors, callback){
-        if(this.model.get("tipo") == "Persona"){
+        if(this.model.get("tipo_c") == "4"){
 
-            errors['tipo'] = errors['tipo'] || {};
-            errors['tipo'].required = true;
+            errors['tipo_c'] = errors['tipo_c'] || {};
+            errors['tipo_c'].required = true;
 
             app.alert.show('tipo de persona', {
                 level: 'error',
@@ -701,11 +701,11 @@
         if(this.model.get("monto_original")>0){
             var MontoOperar = this.model.get("monto_comprometido") - this.model.get("renta_inicial_comprometida");
             if (this.model.get("monto_original") >= MontoOperar){
-                this.model.set("etapa_preliminar","Autorizada");
-                this.model.set("etapa","Autorizada");
+                this.model.set("etapa_preliminar_c","1");
+                this.model.set("etapa_c","1");
             }else{
-                this.model.set("etapa_preliminar","Prospecto");
-                this.model.set("etapa","Prospecto");
+                this.model.set("etapa_preliminar_c","3");
+                this.model.set("etapa_c","3");
             }
         }
 

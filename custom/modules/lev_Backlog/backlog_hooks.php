@@ -63,15 +63,15 @@ class backlog_hooks {
                 // $GLOBALS['log']->fatal('Actualiza Valores');
                 $bean->monto_sin_solicitud_c = $bean->monto_final_comprometido_c;
                 $bean->ri_sin_solicitud_c = $bean->ri_final_comprometida_c;
-                $bean->etapa = 'Autorizada';
-                $bean->etapa_preliminar='Autorizada';
+                $bean->etapa_c = '1';
+                $bean->etapa_preliminar_c='1';
 
             } else {
                 //$GLOBALS['log']->fatal('No cumple condicion');
                 $bean = backlog_hooks::ActualizaValores($bean);
             }
 
-            $bean->etapa_preliminar=$bean->etapa;
+            $bean->etapa_preliminar_c=$bean->etapa_c;
 
         } else {
             //$GLOBALS['log']->fatal('Si no existe registro, calcula valores-'.$bean->monto_final_comprometido_c.'-'.$bean->monto_con_solicitud_c);
@@ -88,7 +88,7 @@ class backlog_hooks {
                 //Actualiza
                 $bean->monto_sin_solicitud_c = $montoTMP;
                 $bean->ri_sin_solicitud_c = $RITMP;
-                $bean->etapa = 'Autorizada';
+                $bean->etapa_c = '1';
             } else {
                 $bean = backlog_hooks::ActualizaValores($bean);
             }
@@ -159,22 +159,22 @@ class backlog_hooks {
                 $GLOBALS['log']->fatal('Solcitudes de Credito');
                 $bean->monto_credito_c= $monto_faltante_c;
                 $bean->ri_credito_c = $bean->monto_credito_c * ($bean->porciento_ri/100);
-                $bean->etapa= 'Credito';
+                $bean->etapa_c= '4';
             }elseif ($credito==false && $rechazada==true){
                 $GLOBALS['log']->fatal('Solcitudes Rechazada');
                 $bean->monto_rechazado_c= $monto_faltante_c;
                 $bean->ri_rechazada_c = $bean->monto_rechazado_c * ($bean->porciento_ri/100);
-                $bean->etapa= 'Rechazada';
+                $bean->etapa_c= '2';
             }elseif ($credito==false && $rechazada==false && $prospecto==true){
                 $GLOBALS['log']->fatal('Solcitudes de Prospecto');
                 $bean->monto_prospecto_c= $monto_faltante_c;
                 $bean->ri_prospecto_c = $bean->monto_prospecto_c * ($bean->porciento_ri/100);
-                $bean->etapa= 'Prospecto';
+                $bean->etapa_c= '3';
             }
         }else{
              $GLOBALS['log']->fatal('No existen solicitudes de la consulta');
              $bean->monto_prospecto_c= $monto_faltante_c;
-             $bean->etapa= 'Prospecto';
+             $bean->etapa_c= '3';
         }
         return $bean;
     }
