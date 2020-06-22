@@ -73,21 +73,21 @@
                 for (id in this.productos) {
                     op2[this.productos[id]] = op[this.productos[id]];
                 }
-                var lista = this.getField('producto');
+                var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
 
                 if (this.productos[0] == "4") {
-                    this.model.set('producto', '4');
+                    this.model.set('producto_c', '4');
                 } else if (this.productos[0] == "1") {
-                    this.model.set('producto', '1');
+                    this.model.set('producto_c', '1');
                 } else if (this.productos[0] == "3") {
-                    this.model.set('producto', '3');
+                    this.model.set('producto_c', '3');
                 } else if (this.productos[0] == "2") {
-                    this.model.set('producto', '3');
+                    this.model.set('producto_c', '3');
                 }
                 else if (this.productos[0] == "5") {
-                    this.model.set('producto', '5');
+                    this.model.set('producto_c', '5');
                 }
 
                 //this.model.set("region", modelo.get("region_c"));
@@ -314,9 +314,9 @@
         }), null, {
             success: _.bind(function (data) {
                 if (data.tipo_registro_cuenta_c == "2") { // 2 - Prospecto
-                    this.model.set("tipo", "Prospecto");
-                    this.model.set("etapa_preliminar", "Prospecto");
-                    this.model.set("etapa", "Prospecto");
+                    this.model.set("tipo_c", "2");
+                    this.model.set("etapa_preliminar_c", "3");
+                    this.model.set("etapa_c", "3");
                 } else if (data.tipo_registro_cuenta_c == "3") { // 3 - Cliente
                     //console.log("Valida lineas de credito autorizadas para leasing");
                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c') + "/link/opportunities", null, null, {
@@ -339,22 +339,22 @@
                             });
                             //console.log(data.records.length);
                             if (data.records.length > 0) {
-                                this.model.set("tipo", "Cliente");
-                                this.model.set("etapa_preliminar", "Con_linea");
-                                this.model.set("etapa", "Con_linea");
+                                this.model.set("tipo_c", "3");
+                                this.model.set("etapa_preliminar_c", "Con_linea");
+                                this.model.set("etapa_c", "Con_linea");
                                 this.model.set("monto_original", disponible);
                             } else {
-                                this.model.set("tipo", "Prospecto");
-                                this.model.set("etapa_preliminar", "Prospecto");
-                                this.model.set("etapa", "Prospecto");
+                                this.model.set("tipo_c", "2");
+                                this.model.set("etapa_preliminar_c", "3");
+                                this.model.set("etapa_c", "3");
                                 this.model.set("monto_original", 0);
                             }
                         }, this)
                     });
                 } else {
-                    this.model.set("tipo", "Persona");
-                    this.model.set("etapa_preliminar", "Prospecto");
-                    this.model.set("etapa", "Prospecto");
+                    this.model.set("tipo_c", "4");
+                    this.model.set("etapa_preliminar_c", "3");
+                    this.model.set("etapa_c", "3");
                 }
                 /*
                  if(data.tipo_registro_c == "Cliente" && data.estatus_c == "Integracion de Expediente"){
@@ -382,10 +382,10 @@
     },
 
     _ValidateTipo: function (fields, errors, callback) {
-        if (this.model.get("tipo") == "Persona") {
+        if (this.model.get("tipo_c") == "4") {
 
-            errors['tipo'] = errors['tipo'] || {};
-            errors['tipo'].required = true;
+            errors['tipo_c'] = errors['tipo_c'] || {};
+            errors['tipo_c'].required = true;
 
             app.alert.show('tipo de persona', {
                 level: 'error',
@@ -404,7 +404,7 @@
 
         //CVV se cambia la validaci�n para permitir actualizar el BL hasta antes dek d�a 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida') {
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 if (!_.isEmpty(this.model.get("monto_comprometido")) && !_.isEmpty(this.model.get("porciento_ri"))) {
                     var percent = ((this.model.get("monto_comprometido") * this.model.get("porciento_ri")) / 100).toFixed(2);
@@ -422,7 +422,7 @@
 
         //CVV se cambia la validaci�n para permitir actualizar el BL hasta antes dek d�a 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida'){
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 if (this.model.get("renta_inicial_comprometida") == 0) {
                     this.model.set("porciento_ri", 0);
@@ -442,7 +442,7 @@
         var currentMonth = (new Date).getMonth() + 1;
         var mesBL = this.model.get("mes") - 2;
 
-        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida') {
+        if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_operacion_c") == 'Comprometida') {
             if (currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog) {
                 this.model.set("monto_comprometido", this.model.get("monto_final_comprometido_c"));
                 this.model.set("renta_inicial_comprometida", this.model.get("ri_final_comprometida_c"));
@@ -546,17 +546,17 @@
 
         //Calcula la etapa del Backlog
         //Si no tiene solicitud de compra se puede evaluar
-        if (this.model.get("progreso") == 2 && this.model.get("etapa") == "Prospecto" && this.model.get("monto_original") > 0) {
+        if (this.model.get("progreso") == 2 && this.model.get("etapa_c") == "3" && this.model.get("monto_original") > 0) {
             var MontoOperar = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("ri_final_comprometida_c"));
             if (parseFloat(this.model.get("monto_original")) >= MontoOperar) {
-                this.model.set("etapa", "Autorizada");
-                if (this.model.get("estatus_de_la_operacion") == 'Comprometida') {
-                    this.model.set("etapa_preliminar", "Autorizada");
+                this.model.set("etapa_c", "1");
+                if (this.model.get("estatus_operacion_c") == 'Comprometida') {
+                    this.model.set("etapa_preliminar_c", "1");
                 }
             } else {
-                this.model.set("etapa", "Prospecto");
-                if (this.model.get("estatus_de_la_operacion") == 'Comprometida') {
-                    this.model.set("etapa_preliminar", "Prospecto");
+                this.model.set("etapa_c", "3");
+                if (this.model.get("estatus_operacion_c") == 'Comprometida') {
+                    this.model.set("etapa_preliminar_c", "3");
                 }
             }
         }

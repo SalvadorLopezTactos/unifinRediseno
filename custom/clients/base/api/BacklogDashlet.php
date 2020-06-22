@@ -284,16 +284,16 @@ SQL;
 SELECT lb.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
 a.name AS account_name, CONCAT(u.first_name, " " , u.last_name) AS promotor, lb.equipo AS equipo_c, o.id AS oportunityId,
 case when lb.description = '' then 'fa-comment-o' when lb.description is null then 'fa-comment-o' else 'fa-comment' end as comentado,
-case when lb.estatus_de_la_operacion = 'Cancelada' then '#FF6666'  when lb.estatus_de_la_operacion = 'Comprometida' then '#E5FFCC' else '#FFFFFF' end as color,
+case when blcs.estatus_operacion_c = '1' then '#FF6666'  when blcs.estatus_operacion_c = '2' then '#E5FFCC' else '#FFFFFF' end as color,
 case lb.equipo when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'LEO' then 15
 when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 when 'MER' then 19 when 'TOL' then 20 when 'CASA' then 21 else 50 end AS ordenEquipo,
-case lb.estatus_de_la_operacion when 'Comprometida' then 1 when 'Cancelada' then 2 when 'Activa' then 3
+case blcs.estatus_operacion_c when '2' then 1 when '1' then 2 when '2' then 3
 when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Autom�tico' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
 uc.iniciales_c AS iniciales, IFNULL(blcs.monto_activado_anticipado_c,0) AS monto_anticipado, IFNULL(blcs.ri_activada_anticipada_c,0) AS ri_anticipada,
 IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c,
 ri_prospecto_c, ri_credito_c, ri_rechazada_c, ri_sin_solicitud_c, ri_con_solicitud_c,
-CASE WHEN lb.estatus_de_la_operacion = 'Cancelada' THEN 0 ELSE
+CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
 0 + /*CASE '{$etapa}' WHEN '' THEN */ monto_prospecto_c + monto_credito_c + monto_rechazado_c + monto_sin_solicitud_c + monto_con_solicitud_c /*ELSE
     CASE WHEN '{$etapa}' LIKE '%Prospecto%' THEN  monto_prospecto_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%Credito%' THEN  monto_credito_c     ELSE 0 END
@@ -341,11 +341,11 @@ SQL;
         }
 
         if(!empty($tipo_de_operacion)){
-            $query .= " AND lb.tipo_de_operacion = '{$tipo_de_operacion}'";
+            $query .= " AND blcs.tipo_operacion_c = '{$tipo_de_operacion}'";
         }
 
         if(!empty($etapa)){
-            $query .= " AND lb.etapa = '{$etapa}'";
+            $query .= " AND blcs.etapa_c = '{$etapa}'";
         }
 
         $estatus = array_filter($estatus);
@@ -355,7 +355,7 @@ SQL;
             }else{
                 $estatus = "'" . implode("','", $estatus). "'";
             }
-            $query .= " AND lb.estatus_de_la_operacion IN ({$estatus})";
+            $query .= " AND blcs.estatus_operacion_c IN ({$estatus})";
         }
 
         if(!empty($equipo) && $equipo != "Todos"){
@@ -375,7 +375,7 @@ SQL;
 
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
-            $response['linea'][$row['id']]['estatus_de_la_operacion'] = $row['estatus_de_la_operacion'];
+            $response['linea'][$row['id']]['estatus_operacion_c'] = $row['estatus_operacion_c'];
             $response['linea'][$row['id']]['mesanio'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3)."-".substr ($row['anio'],2,2);
             $response['linea'][$row['id']]['mes'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3);
             $response['linea'][$row['id']]['equipo'] = $row['equipo_c'];
@@ -429,12 +429,12 @@ SQL;
 
             $response['linea'][$row['id']]['monto_cancelado'] = $row['monto_comprometido_cancelado'];
             $response['linea'][$row['id']]['ri_cancelada'] = $row['renta_inicialcomp_can'];
-            $response['linea'][$row['id']]['tipo_operacion'] = $row['tipo_de_operacion'];
-            $response['linea'][$row['id']]['etapa_preliminar'] = $this->matchListLabel($row['etapa_preliminar'], "estatus_c_operacion_list");
-            $response['linea'][$row['id']]['etapa'] = $this->matchListLabel($row['etapa'], "estatus_c_operacion_list");
+            $response['linea'][$row['id']]['tipo_operacion'] = $row['tipo_operacion_c'];
+            $response['linea'][$row['id']]['etapa_preliminar'] = $this->matchListLabel($row['etapa_preliminar_c'], "estatus_c_operacion_list");
+            $response['linea'][$row['id']]['etapa'] = $this->matchListLabel($row['etapa_c'], "estatus_c_operacion_list");
             $response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
-            if($row['estatus_de_la_operacion'] == "Comprometida"){
+            if($row['estatus_operacion_c'] == "2"){
                 $response['linea'][$row['id']]['estatus_checked'] = "checked";
                 $response['linea'][$row['id']]['mass_checked'] = "disabled";
             }
@@ -605,7 +605,7 @@ SQL;
          *  Se modifica condición
         //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
         */
-        if($motivo_de_cancelacion == 'Mes posterior'){
+        if($motivo_de_cancelacion == '10'){
             //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
             $currentYear = date("Y");
             $currentDay = date("d");
@@ -621,12 +621,12 @@ SQL;
 
             if ($anio <= $currentYear){
                 if ($mes == $BacklogElaboracion){
-                    $this->copiarBacklog($backlog, $mes, $anio, 'Original',  'Comprometida', $backlog->numero_de_backlog);
+                    $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
                 }else{
-                    $this->copiarBacklog($backlog, $mes, $anio, 'Adicional', 'Comprometida', $backlog->numero_de_backlog);
+                    $this->copiarBacklog($backlog, $mes, $anio, '3', 'Comprometida', $backlog->numero_de_backlog);
                 }
             }else{
-                $this->copiarBacklog($backlog, $mes, $anio, 'Original',  'Comprometida', $backlog->numero_de_backlog);
+                $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
             }
 
             //$this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, $backlog->estatus_de_la_operacion, $backlog->numero_de_backlog);
@@ -660,12 +660,12 @@ SQL;
             $backlog->deleted = 1;
         }
 
-        $backlog->estatus_de_la_operacion = "Cancelada";
+        $backlog->estatus_operacion_c = "1";
         $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
         $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
         $backlog->monto_real_logrado = 0;
         $backlog->renta_inicial_real = 0;
-        $backlog->motivo_de_cancelacion = $motivo_de_cancelacion;
+        $backlog->motivo_cancelacion_c = $motivo_de_cancelacion;
         $backlog->tct_competencia_quien_txf_c = $cam_competencia;
         $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
@@ -688,7 +688,7 @@ SQL;
         if($mes == $MesAnterior){
             //SI se esta reviviendo al mismo mes, solo actualiza el estatus a comprometida
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->estatus_operacion_c = "2";
             if ($comentarios != ""){
                 $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios;
             }
@@ -716,15 +716,15 @@ SQL;
 
             if ($anio <= $currentYear){
                 if ($mes == $BacklogElaboracion){
-                    $backlog->tipo_de_operacion = 'Original';
+                    $backlog->tipo_operacion_c = '2';
                 }else{
-                    $backlog->tipo_de_operacion = 'Adicional';
+                    $backlog->tipo_operacion_c = '3';
                 }
             }else{
-                $backlog->tipo_de_operacion = 'Original';
+                $backlog->tipo_operacion_c = '2';
             }
 
-            $this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, "Comprometida", $backlog->numero_de_backlog);
+            $this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_operacion_c, "Comprometida", $backlog->numero_de_backlog);
             // Actualiza las cotizaciones de UNICS al nuevo Backlog
             $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
             $fields = array(
@@ -761,11 +761,11 @@ SQL;
             if($backlog->mes > $mes){
                 $backlog->mes = $mes;
                 $backlog->anio = $anio;
-                $backlog->tipo_de_operacion = $tipo_operacion;
+                $backlog->tipo_operacion_c = $tipo_operacion;
             }
 
             if($backlog->mes < $mes){
-                if($backlog->tipo_de_operacion == "Original" && $backlog->estatus_de_la_operacion != "Comprometida"){
+                if($backlog->tipo_operacion_c == "2" && $backlog->estatus_operacion_c != "2"){
                     $backlog->mes = $mes;
                     $backlog->anio = $anio;
                 }
@@ -786,26 +786,26 @@ SQL;
                 $GLOBALS['log']->fatal("Mes de Backlog en elaboraci�n: " . print_r($BacklogElaboracion,1));
 
                 //En caso de ser Bl de Carga general, asignar el tipo de operaci�n que corresponde
-                if($backlog->tipo_de_operacion == "Carga General"){
+                if($backlog->tipo_operacion_c == "1"){
                     //Evalua el tipo de operaci�n
                     if ($anio <= $currentYear){
                         if ($mes >= $BacklogElaboracion){
-                            $backlog->tipo_de_operacion = 'Original';
+                            $backlog->tipo_operacion_c = '2';
                         }else{
-                            $backlog->tipo_de_operacion = 'Adicional';
+                            $backlog->tipo_operacion_c = '3';
                         }
                     }else{
-                        $backlog->tipo_de_operacion = 'Original';
+                        $backlog->tipo_operacion_c = '2';
                     }
                 }
 
-                if($backlog->tipo_de_operacion == "Original" && $backlog->estatus_de_la_operacion == "Comprometida"){
+                if($backlog->tipo_operacion_c == "2" && $backlog->estatus_operacion_c == "2"){
                     if($periodo_revision == true && $backlog->mes == $currentMonth && $backlog->anio == $currentYear) {
                         if($access == "Full_Access" || $rolAutorizacion=="Direccion") {
                             $backlog->mes = $mes;
                             $backlog->anio = $anio;
                             //CVV se cambia a comprometida para ajustes de eliminar concepto de "Comprometer"
-                            $backlog->estatus_de_la_operacion = "Comprometida"; //"Activa";
+                            $backlog->estatus_operacion_c = "2"; //"Activa";
                         }else{
                             $response = "Esta Operacion ya esta comprometida y solo podra ser movida por un Director en periodo de revison";
                         }
@@ -822,13 +822,13 @@ SQL;
                     }
                 }
 
-                if($backlog->tipo_de_operacion == "Adicional"){
+                if($backlog->tipo_operacion_c == "3"){
                     //$this->copiarBacklog($backlog, $mes, $anio, "Original", "Activa");
                     //$backlog->estatus_de_la_operacion = "Enviada a otro mes";
                     $backlog->mes = $mes;
                     $backlog->anio = $anio;
                     //CVV se cambia a comprometida para ajustes de eliminar concepto de "Comprometer"
-                    $backlog->estatus_de_la_operacion = "Comprometida"; //"Activa";
+                    $backlog->estatus_operacion_c = "2"; //"Activa";
                 }
             }
         }else{
@@ -892,14 +892,14 @@ SQL;
             }
         }*/
 
-        if($backlog->tipo_de_operacion == 'Carga General') {
+        if($backlog->tipo_operacion_c == '1') {
             if ($monto_comprometido < $backlog->monto_original) {
                 $this->copiarBacklog($backlog, $mes, $anio, $tipo_operacion, "Comprometida", "");
             }else{
                 $backlog->mes = $mes;
                 $backlog->anio = $anio;
-                $backlog->tipo_de_operacion = $tipo_operacion;
-                $backlog->estatus_de_la_operacion = "Comprometida";
+                $backlog->tipo_operacion_c = $tipo_operacion;
+                $backlog->estatus_operacion_c = "2";
 
                 //CVV distribuye los montos en las etapas
                 if($backlog->monto_original >= ($backlog->monto_final_comprometido_c - $backlog->ri_final_comprometida_c)){
@@ -919,8 +919,8 @@ SQL;
         }else{
             $backlog->mes = $mes;
             $backlog->anio = $anio;
-            $backlog->tipo_de_operacion = $tipo_operacion;
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->tipo_operacion_c = $tipo_operacion;
+            $backlog->estatus_operacion_c = "2";
 
             //CVV distribuye los montos en las etapas
             if($backlog->monto_original >= ($backlog->monto_final_comprometido_c - $backlog->ri_final_comprometida_c)){
@@ -947,40 +947,39 @@ SQL;
 
         foreach ($args['data']['backlogs'] as $index => $id) {
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $id);
-            $backlog->estatus_de_la_operacion = "Comprometida";
+            $backlog->estatus_operacion_c = "2";
             //$backlog->monto_comprometido = $monto_comprometido;
             //$backlog->renta_inicial_comprometida = $renta_comprometida;
             $backlog->mes = $mes;
             $backlog->anio = $anio;
-            $backlog->tipo_de_operacion = $tipo_operacion;
+            $backlog->tipo_operacion_c = $tipo_operacion;
             $backlog->save();
         }
     }
 
     public function copiarBacklog($original_backlog, $mes, $anio, $tipo_operacion, $estatus, $numero_de_backlog = null){
         $new_backlog = BeanFactory::getBean('lev_Backlog');
-
         $new_backlog->activo = $original_backlog->activo;
         $new_backlog->anio = $anio;
         $new_backlog->account_id_c = $original_backlog->account_id_c;
         $new_backlog->assigned_user_id = $original_backlog->assigned_user_id;
         $new_backlog->currency_id = $original_backlog->currency_id;
         $new_backlog->description = $original_backlog->description;
-        $new_backlog->estatus_de_la_operacion = $estatus;
-        $new_backlog->etapa = $original_backlog->etapa;
-        $new_backlog->etapa_preliminar = $original_backlog->etapa_preliminar;
+        $new_backlog->estatus_operacion_c = $estatus;
+        $new_backlog->etapa_c = $original_backlog->etapa_c;
+        $new_backlog->etapa_preliminar_c = $original_backlog->etapa_preliminar_C;
         $new_backlog->mes = $mes;
         $new_backlog->monto_comprometido = $original_backlog->monto_comprometido;
         $new_backlog->monto_original = $original_backlog->monto_original;
         $new_backlog->monto_real_logrado = $original_backlog->monto_real_logrado;
         $new_backlog->name = $original_backlog->name;
-        $new_backlog->producto = $original_backlog->producto;
+        $new_backlog->producto_c = $original_backlog->producto_c;
         $new_backlog->progreso = $original_backlog->progreso;
         $new_backlog->region = $original_backlog->region;
         $new_backlog->renta_inicial_comprometida = $original_backlog->renta_inicial_comprometida;
         $new_backlog->renta_inicial_real = $original_backlog->renta_inicial_real;
-        $new_backlog->tipo = $original_backlog->tipo;
-        $new_backlog->tipo_de_operacion = $tipo_operacion;
+        $new_backlog->tipo_c = $original_backlog->tipo_c;
+        $new_backlog->tipo_operacion_c = $tipo_operacion;
         $new_backlog->numero_de_backlog = $numero_de_backlog;
         $new_backlog->equipo = $original_backlog->equipo;
         $new_backlog->lev_backlog_opportunitiesopportunities_ida = $original_backlog->lev_backlog_opportunitiesopportunities_ida;
