@@ -122,7 +122,7 @@ $dependencies['lev_Backlog']['estatus_de_la_operacion_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'estatus_de_la_operacion',
+                'target' => 'estatus_operacion_c',
                 'label' => 'estatus_de_la_operacion_label',
                 'value' => 'true',
             ),
@@ -137,7 +137,7 @@ $dependencies['lev_Backlog']['etapa_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'etapa',
+                'target' => 'etapa_c',
                 'label' => 'etapa_label',
                 'value' => 'true',
             ),
@@ -216,7 +216,7 @@ $dependencies['lev_Backlog']['producto_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'producto',
+                'target' => 'producto_c',
                 'label' => 'producto_label',
                 'value' => 'true',
             ),
@@ -280,7 +280,7 @@ $dependencies['lev_Backlog']['tipo_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'tipo',
+                'target' => 'tipo_c',
                 'label' => 'tipo_label',
                 'value' => 'true',
             ),
@@ -295,7 +295,7 @@ $dependencies['lev_Backlog']['tipo_de_operacion_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'tipo_de_operacion',
+                'target' => 'tipo_operacion_c',
                 'label' => 'tipo_de_operacion_label',
                 'value' => 'true',
             ),
@@ -314,7 +314,7 @@ $dependencies['lev_Backlog']['assigned_user_name_readonly'] = array(
             'params' => array(
                 'target' => 'assigned_user_name',
                 'label' => 'assigned_user_name_label',
-                'value' => 'not(equal($estatus_de_la_operacion, "Activa"))',
+                'value' => 'not(equal($estatus_operacion_c, "2"))',
             ),
         ),
     ),
@@ -365,7 +365,7 @@ $dependencies['lev_Backlog']['motivo_de_cancelacion_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'motivo_de_cancelacion',
+                'target' => 'motivo_cancelacion_c',
                 'label' => 'motivo_de_cancelacion_label',
                 'value' => 'true',
             ),
@@ -380,7 +380,7 @@ $dependencies['lev_Backlog']['etapa_preliminar_readonly'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
-                'target' => 'etapa_preliminar',
+                'target' => 'etapa_preliminar_c',
                 'label' => 'etapa_preliminar_label',
                 'value' => 'true',
             ),
