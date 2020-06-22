@@ -661,18 +661,18 @@ SQL;
                                 $backlog->monto_real_logrado = 0;
                                 $backlog->renta_inicial_comprometida = $bean->ca_importe_enganche_c;
                                 $backlog->renta_inicial_real = 0;
-                                $backlog->etapa = $this->backlogEtapa($bean->estatus_c);
-                                $backlog->etapa_preliminar = $this->backlogEtapa($bean->estatus_c);
+                                $backlog->etapa_c = $this->backlogEtapa($bean->estatus_c);
+                                $backlog->etapa_preliminar_c = $this->backlogEtapa($bean->estatus_c);
                                 $backlog->numero_de_solicitud = $bean->idsolicitud_c;
                                 $backlog->activo = $this->getActivos($bean);
 
-                                $backlog->estatus_de_la_operacion = 'Activa';
+                                $backlog->estatus_operacion_c = '2';
 
-                                $backlog->tipo_de_operacion = $this->getcurrentYearMonth($bean->mes_c, $bean->anio_c);
+                                $backlog->tipo_operacion_c = $this->getcurrentYearMonth($bean->mes_c, $bean->anio_c);
                                 if ($account->tipo_registro_cuenta_c == "2") { // Prospecto - 2
-                                    $backlog->tipo = 'Prospecto';
+                                    $backlog->tipo_c = '2';
                                 } elseif ($account->tipo_registro_cuenta_c == "3") { // Cliente - 3
-                                    $backlog->tipo = 'Cliente';
+                                    $backlog->tipo_c = '3';
                                 }
 
                                 $callApi = new UnifinAPI();

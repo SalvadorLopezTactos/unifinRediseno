@@ -967,7 +967,7 @@ SQL;
         $new_backlog->description = $original_backlog->description;
         $new_backlog->estatus_operacion_c = $estatus;
         $new_backlog->etapa_c = $original_backlog->etapa_c;
-        $new_backlog->etapa_preliminar_c = $original_backlog->etapa_preliminar_C;
+        $new_backlog->etapa_preliminar_c = $original_backlog->etapa_preliminar_c;
         $new_backlog->mes = $mes;
         $new_backlog->monto_comprometido = $original_backlog->monto_comprometido;
         $new_backlog->monto_original = $original_backlog->monto_original;
