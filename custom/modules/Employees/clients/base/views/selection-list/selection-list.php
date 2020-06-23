@@ -72,18 +72,18 @@ array (
               ),
               7 => 
               array (
-                'name' => 'employee_status',
-                'label' => 'LBL_EMPLOYEE_STATUS',
+                'name' => 'date_entered',
+                'label' => 'LBL_DATE_ENTERED',
                 'enabled' => true,
                 'default' => true,
                 'sortable' => true,
               ),
               8 => 
               array (
-                'name' => 'date_entered',
-                'label' => 'LBL_DATE_ENTERED',
+                'name' => 'employee_status',
+                'label' => 'LBL_EMPLOYEE_STATUS',
                 'enabled' => true,
-                'default' => true,
+                'default' => false,
                 'sortable' => true,
               ),
             ),
