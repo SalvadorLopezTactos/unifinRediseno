@@ -281,7 +281,7 @@ SQL;
         }*/
 
         $query = <<<SQL
-SELECT lb.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
+SELECT lb.*,blcs.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
 a.name AS account_name, CONCAT(u.first_name, " " , u.last_name) AS promotor, lb.equipo AS equipo_c, o.id AS oportunityId,
 case when lb.description = '' then 'fa-comment-o' when lb.description is null then 'fa-comment-o' else 'fa-comment' end as comentado,
 case when blcs.estatus_operacion_c = '1' then '#FF6666'  when blcs.estatus_operacion_c = '2' then '#E5FFCC' else '#FFFFFF' end as color,
