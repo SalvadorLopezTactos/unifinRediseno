@@ -2023,7 +2023,7 @@
 			&& ( !_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
 			&& (anticrfc != valuerfc) 
 			&& (rfc.action === "edit" || rfc.action === "create")
-			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" )){
+			&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == ""  || this.model.get('estado_rfc_c') == "0"))){
 			
 			app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
 				success: _.bind(function (data) {
