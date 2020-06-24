@@ -1844,7 +1844,7 @@
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
-        if (backlog.backlog_estatus_operacion_c != 'Cancelada'){
+        if (backlog.backlog_estatus_operacion_c != '1'){
            app.alert.show('Operacion Activa', {
                level: 'error',
                messages: 'Unicamente pueden revivirse operaciones canceladas.',
