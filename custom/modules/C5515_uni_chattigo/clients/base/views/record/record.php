@@ -112,7 +112,7 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
-			  10 => 
+              10 => 
               array (
                 'type' => 'divider',
               ),
@@ -189,83 +189,90 @@ array (
               ),
               2 => 
               array (
+                'name' => 'leads_c5515_uni_chattigo_1_name',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
                 'name' => 'state_chattigo',
                 'label' => 'LBL_STATE_CHATTIGO',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'id_chattigo',
                 'label' => 'LBL_ID_CHATTIGO',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'inicio_conversacion',
                 'label' => 'LBL_INICIO_CONVERSACION',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'fin_conversacion',
                 'label' => 'LBL_FIN_CONVERSACION',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'tipo_comunicacion',
                 'label' => 'LBL_TIPO_COMUNICACION',
               ),
-              7 => 
+              9 => 
               array (
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'typificaction_description',
                 'label' => 'LBL_TYPIFICACTION_DESCRIPTION',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'via_comunicacion',
                 'label' => 'LBL_VIA_COMUNICACION',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'id_destino',
                 'label' => 'LBL_ID_DESTINO',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'msisdn',
                 'label' => 'LBL_MSISDN',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'id_from',
                 'label' => 'LBL_ID_FROM',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'did',
                 'label' => 'LBL_DID',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'username',
                 'label' => 'LBL_USERNAME',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'agentname',
                 'label' => 'LBL_AGENTNAME',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'campaign_id_chattigo',
                 'label' => 'LBL_CAMPAIGN_ID_CHATTIGO',
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'campaign_name_chattigo',
                 'label' => 'LBL_CAMPAIGN_NAME_CHATTIGO',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'description',
                 'span' => 12,
