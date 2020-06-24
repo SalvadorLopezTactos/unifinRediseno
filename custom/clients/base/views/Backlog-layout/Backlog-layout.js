@@ -1861,7 +1861,7 @@
                 autoClose: true
              });
         } else {
-            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][backlog_estatus_operacion_c]=Comprometida&fields=numero_de_backlog,mes";
+            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_operacion_c]=2&fields=numero_de_backlog,mes";
             app.api.call("read", app.api.buildURL (url), {}, {
                 success: _.bind(function (data) {
                     if (data.records.length>0) {
