@@ -142,6 +142,7 @@
           else {
             var Completo = '';
             var RFC = data[0]["RFC"];
+            var PathQR=data[0]["path_img_qr"];
             var Correo = data[0]["Correo electrónico"];
             var CP = data[0]["CP"];
             var Calle = data[0]["Nombre de la vialidad"];
@@ -239,6 +240,7 @@
                         // Actualiza Datos Personales
                         self.model.set('tipodepersona_c', Regimen);
                         self.model.set('rfc_c', RFC);
+                        self.model.set('path_img_qr_c', PathQR);
                         if(Regimen == "Persona Moral") {
                           self.model.set('razonsocial_c', Denominacion);
                           self.model.set('nombre_comercial_c', Denominacion);

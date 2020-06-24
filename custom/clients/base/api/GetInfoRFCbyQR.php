@@ -62,7 +62,14 @@ class GetInfoRFCbyQR extends SugarApi
 
         $response=$this->callScanQR($url,$post);
 
-        $this->deleteFile($file_name_with_full_path);
+        if ($response[0]['Código de error']!="" && $response[0]['Código de error']!=null){
+            $this->deleteFile($file_name_with_full_path);
+        }else{
+            //Se agrega nuevo elemento a la respuesta para guardar ruta del QR creado
+            $response[0]['path_img_qr']=$file_name_with_full_path;
+        }
+
+       // $this->deleteFile($file_name_with_full_path);
 
         return $response;
 
@@ -75,7 +82,7 @@ class GetInfoRFCbyQR extends SugarApi
      * */
     public function generateImage($img){
 
-        $folderPath = "custom/pdf/";
+        $folderPath = "custom/qr/";
 
         $image_parts = explode(";base64,", $img);
 
