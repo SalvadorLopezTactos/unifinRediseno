@@ -97,9 +97,9 @@
         this._super("initialize", [options]);
 
         this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
-        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_operacion_bkl_list');
-        this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');
-        this.estatus_list_html = app.lang.getAppListStrings('estatus_operacion_c_list');
+        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
+        this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
+        this.estatus_list_html = app.lang.getAppListStrings('backlog_estatus_operacion_list');
 
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';
@@ -758,7 +758,7 @@
         }
 
         //Valida estado Cancelado
-        if (backlogEstatus == '1') {
+        if (backlogEstatus == 'Cancelada') {
             app.alert.show('backlog_cancelada', {
                 level: 'error',
                 messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra ' + backlogEstatus,
@@ -817,7 +817,7 @@
                 var currentDay = (new Date).getDate();
                 var BacklogCorriente = this.getElaborationBacklog();
                 if (backlogAnio <= currentAnioSub) {
-                    if (backlogMes <= BacklogCorriente && backlogEstatus != '1') {
+                    if (backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
                         if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20) {
                             if (currentDay == 21 && rolAutorizacion != "DGA") {
                                 app.alert.show('backlog corriente', {
@@ -911,7 +911,7 @@
 
          var id_account=arr_p[1];
 
-         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
+         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][backlog_estatus_operacion_c][$not_equals]=1&fields=id,mes,backlog_estatus_operacion_c',
              null, null, null);
 
         $('#btn-Cancelar').prop('disabled',true);
@@ -982,15 +982,15 @@
 
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "2";
+                 tipo_opp = "Original";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "3";
+                 tipo_opp = "Adicional";
              }else{
-                 tipo_opp = "3";
+                 tipo_opp = "Adicional";
              }
          }else{
-             tipo_opp = "2";
+             tipo_opp = "Original";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1096,7 +1096,7 @@
                  var backlogNum = this.array_checks[i].getAttribute('data-numbacklog');
 
                  //Valida estado Cancelado
-                 if(backlogEstatus == '1') {
+                 if(backlogEstatus == 'Cancelada') {
                      app.alert.show('backlog_pasado', {
                          level: 'error',
                          //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
@@ -1172,7 +1172,7 @@
                          var BacklogCorriente = this.getElaborationBacklog();
 
                          if(backlogAnio <= currentAnioSub){
-                             if(backlogMes <= BacklogCorriente && backlogEstatus != '1') {
+                             if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
                                  if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
                                      if (currentDay == 21 && rolAutorizacion != "DGA") {
 
@@ -1297,7 +1297,7 @@
                  var num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
                  var arr_p=str.split('#Accounts/');
                  var id_account=arr_p[1];
-                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_operacion_c,name',
+                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,backlog_estatus_operacion_c,name',
                      null, null, null);
 
                 $('#btn-Cancelar').prop('disabled',true);
@@ -1383,15 +1383,15 @@
 
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "2";
+                 tipo_opp = "Original";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "3";
+                 tipo_opp = "Adicional";
              }else{
-                 tipo_opp = "3";
+                 tipo_opp = "Adicional";
              }
          }else{
-             tipo_opp = "2";
+             tipo_opp = "Original";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1840,7 +1840,7 @@
             "nameBacklog":backlog.name,
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
-            "status":backlog.estatus_operacion_c,
+            "status":backlog.backlog_estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
@@ -1861,7 +1861,7 @@
                 autoClose: true
              });
         } else {
-            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_operacion_c]=Comprometida&fields=numero_de_backlog,mes";
+            var url = "lev_Backlog?filter[0][numero_de_backlog]="+backlog.numero_de_backlog+"&filter[1][estatus_operacion_c]=2&fields=numero_de_backlog,mes";
             app.api.call("read", app.api.buildURL (url), {}, {
                 success: _.bind(function (data) {
                     if (data.records.length>0) {
@@ -1920,7 +1920,7 @@
 
         //Valida existencia de backlog en el mes
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[this.newRevivir.idBacklog];
-        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][estatus_operacion_c]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
+        var url = "lev_Backlog?filter[0][account_id_c]="+backlog.clienteId+"&filter[1][backlog_estatus_operacion_c]=Comprometida&filter[2][mes]="+mes+"&fields=numero_de_backlog,mes,account_id_c";
         app.api.call("read", app.api.buildURL (url), {}, {
             success: _.bind(function (data) {
                 if (data.records.length>0) {
@@ -1943,7 +1943,7 @@
                         success: _.bind(function (data) {
                             if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
                                 self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
-                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_operacion_c="Comprometida";
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].backlog_estatus_operacion_c="Comprometida";
                             }
                             $('#btn-CancelarRe').prop('disabled',false);
                             $('#btn-GuardarRe').prop('disabled',false);
@@ -2044,8 +2044,8 @@
             "nameBacklog":backlog.name,
             "montoOriginalBacklog":backlog.monto_comprometido,
             "rentaInicialOriginal":backlog.ri_comprometida,
-            "motivoCancelacion":'',
-            "status":backlog.estatus_operacion_c,
+            "MotivoCancelacion":'',
+            "status":backlog.backlog_estatus_operacion_c,
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
@@ -2170,7 +2170,7 @@
         if(flagShowModal){
 
             self.render();
-            if (status != "1") {
+            if (status != "Cancelada") {
                 var modal = $('#myModalCan');
                 modal.show();
                 $('.Quien').hide();
@@ -2185,17 +2185,12 @@
 
     motivoCancelarC:function(){
         this.motivoCancelar=app.lang.getAppListStrings('motivo_cancelacion_c_list');
-        if($('#motivoCancelarC').val()=='2'){
+        if($('#motivoCancelarC').val()=='2'){ //Competencia
             $('.Quien').show();
         }else{
             $('.Quien').hide();
         }
-        if($('#motivoCancelarC').val()=='No tenemos el producto que requiere'){
-            $('.Producto').show();
-        }else{
-            $('.Producto').hide();
-        }
-        if($('#motivoCancelarC').val()=='10'){
+        if($('#motivoCancelarC').val()=='10'){  //Mes posterior
             $('.FechaCancelar').show();
         }else{
             $('.FechaCancelar').hide();
@@ -2222,7 +2217,6 @@
             $('#motivoCancelarC').css('border-color', 'red');
             return;
         }
-
         if($('#motivoCancelarC').val()=="2" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" || competenciava.trim().length==0 )){
             app.alert.show('Competencia_requerida', {
                 level: 'error',
@@ -2230,15 +2224,6 @@
                 autoClose: true
             });
             $('.QuienInput').css('border-color', 'red');
-            return;
-        }
-        if($('#motivoCancelarC').val()=="No tenemos el producto que requiere" && ($('.ProductoInput').val()==null || $('.ProductoInput').val()=="" || productova.trim().length==0)){
-            app.alert.show('Producto_requerido', {
-                level: 'error',
-                messages: 'El campo ¿Qué producto? es requerido',
-                autoClose: true
-            });
-            $('.ProductoInput').css('border-color', 'red');
             return;
         }
         if($('#motivoCancelarC').val()=='10' &&($('.mes_cancelar').val()==0 || $('.mes_cancelar').val()==null || $('.mes_cancelar').val()=="")){
@@ -2284,13 +2269,12 @@
         var currentMonth = ((new Date).getMonth()) + 1;
         var currentDay = (new Date).getDate();
         var fechaCancelacion = currentMonth + '/' + currentDay + '/' + currentYear;
-        comentarios += '\r\n' + "UNI2CRM - " + fechaCancelacion + ": MOTIVO DE CANCELACION -> " + motivo;
-
+        comentarios += '\r\n' + "UNI2CRM - " + fechaCancelacion + ": MOTIVO DE CANCELACION -> "+app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo];
         var Params={
             'backlogId':this.newCancelar.idBacklog,
             'backlogName':this.newCancelar.backlogName,
             'MontoReal':this.newCancelar.montoOriginalBacklog,
-            'motivoCancelacion':motivo,
+            'MotivoCancelacion':motivo,
             'RentaReal':this.newCancelar.rentaInicialOriginal,
             'Comentarios':comentarios,
             'Mes':mes,
@@ -2319,7 +2303,7 @@
                 else{
                     //Marcar como cancelado, pintar en rojo y status en cancelada
                     self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#FF6666";
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_operacion_c="1";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].backlog_estatus_operacion_c="1";
                 }
                 $('#btn-CanCancelar').prop('disabled',false);
                 $('#btn-GuardarCan').prop('disabled',false);
@@ -2412,7 +2396,7 @@
                  var ProgresoBL = this.array_checks_cancelar[i].getAttribute('data-progreso');
                  self.mesAnterior = this.array_checks_cancelar[i].getAttribute('data-mes');
 
-                 if(estatus == "1"){
+                 if(estatus == "Cancelada"){
 
                     app.alert.show('opp_cancelada', {
                         level: 'error',
@@ -2564,23 +2548,17 @@
     motivoCancelacionMasivo: function(e){
         var valor=$(e.currentTarget).val();
 
-        if(valor=="10"){
+        if(valor=="10"){ //Mes posterior
 
             $('.FechaCancelar').show();
             $('.Quien').hide();
             $('.Producto').hide();
 
-        }else if(valor == "2"){
+        }else if(valor == "2"){ //Competencia
 
             $('.Quien').show();
             $('.FechaCancelar').hide();
             $('.Producto').hide();
-
-        }else if(valor == "No tenemos el producto que requiere"){
-
-            $('.Quien').hide();
-            $('.Producto').show();
-            $('.FechaCancelar').hide();
 
         }else{
 
@@ -2620,7 +2598,7 @@
 
         if( Competencia == null || Competencia == "" || Competencia.trim().length==0 ) {
 
-                    if(MotivoCancelacion == '2') {
+                    if(MotivoCancelacion == '2') { //Competencia
 
                         $('#quienMasivo').attr('style','border-color:red');
 
@@ -2633,21 +2611,6 @@
                     }
 
         }
-        if(Producto == null || Producto == "" || Producto.trim().length==0) {
-
-                    if(MotivoCancelacion == 'No tenemos el producto que requiere') {
-
-                        $('#productoInputMasivo').attr('style','border-color:red');
-                        app.alert.show('alertproducto', {
-                            level: 'error',
-                            messages: 'El campo \u00bfQu\u00E9 Producto? es requerido',
-                            autoClose: true
-                        });
-                        return;
-                    }
-
-        }
-
         var countChecksCancelar=this.checks_cancelar.length;
 
         if(countChecksCancelar>0) {
@@ -2720,7 +2683,7 @@
         var currentMonth = ((new Date).getMonth()) + 1;
         var currentDay = (new Date).getDate();
         var fechaCancelacion = currentMonth + '/' + currentDay + '/' + currentYear;
-        comentarios += '\r\n' + "UNI2CRM - " + fechaCancelacion + ": MOTIVO DE CANCELACION -> " + MotivoCancelacion;
+        comentarios += '\r\n' + "UNI2CRM - " + fechaCancelacion + ": MOTIVO DE CANCELACION -> " + app.lang.getAppListStrings('motivo_cancelacion_c_list')[MotivoCancelacion];
 
         var long=arr_posiciones.length;
         //Ciclo que recorre el arreglo con las posiciones para limpiar los Backlogs que se cancelarán
@@ -2783,7 +2746,7 @@
                                     else{
                                         //Marcar como cancelado, pintar en rojo y status en cancelada
                                         self.backlogs.backlogs.MyBacklogs.linea[data[1]].color="#FF6666";
-                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_operacion_c="1";
+                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].backlog_estatus_operacion_c="1";
                                     }
                                     successCountCancelar++;
                                     if (self.disposed) {

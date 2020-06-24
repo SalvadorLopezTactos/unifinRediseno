@@ -1,5 +1,5 @@
 <?php
- // created: 2020-04-07 18:05:25
+ // created: 2020-06-22 11:23:19
 $dictionary['C5515_uni_chattigo']['fields']['name']['len']='255';
 $dictionary['C5515_uni_chattigo']['fields']['name']['audited']=false;
 $dictionary['C5515_uni_chattigo']['fields']['name']['massupdate']=false;
@@ -13,8 +13,8 @@ $dictionary['C5515_uni_chattigo']['fields']['name']['full_text_search']=array (
   'boost' => '1.55',
   'searchable' => true,
 );
-$dictionary['C5515_uni_chattigo']['fields']['name']['calculated']='true';
-$dictionary['C5515_uni_chattigo']['fields']['name']['formula']='concat(related($accounts_c5515_uni_chattigo_1,"name")," ",toString($date_entered))';
+$dictionary['C5515_uni_chattigo']['fields']['name']['calculated']='1';
+$dictionary['C5515_uni_chattigo']['fields']['name']['formula']='concat(related($accounts_c5515_uni_chattigo_1,"name"),related($leads_c5515_uni_chattigo_1,"name")," ",toString($date_entered))';
 $dictionary['C5515_uni_chattigo']['fields']['name']['enforced']=true;
 
  ?>

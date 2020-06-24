@@ -6,7 +6,6 @@ $popupMeta = array (
     'whereClauses' => array (
   'first_name' => 'employees.first_name',
   'last_name' => 'employees.last_name',
-  'employee_status' => 'employees.employee_status',
   'title' => 'employees.title',
   'phone' => 'employees.phone',
   'department' => 'employees.department',
@@ -21,7 +20,6 @@ $popupMeta = array (
     'searchInputs' => array (
   0 => 'first_name',
   1 => 'last_name',
-  2 => 'employee_status',
   3 => 'title',
   4 => 'phone',
   5 => 'department',
@@ -37,22 +35,17 @@ $popupMeta = array (
   'first_name' => 
   array (
     'name' => 'first_name',
-    'width' => 10,
+    'width' => '10',
   ),
   'last_name' => 
   array (
     'name' => 'last_name',
-    'width' => 10,
-  ),
-  'employee_status' => 
-  array (
-    'name' => 'employee_status',
-    'width' => 10,
+    'width' => '10',
   ),
   'title' => 
   array (
     'name' => 'title',
-    'width' => 10,
+    'width' => '10',
   ),
   'phone' => 
   array (
@@ -64,13 +57,13 @@ $popupMeta = array (
   'department' => 
   array (
     'name' => 'department',
-    'width' => 10,
+    'width' => '10',
   ),
   'puestousuario_c' => 
   array (
     'type' => 'enum',
     'label' => 'LBL_PUESTOUSUARIO',
-    'width' => 10,
+    'width' => '10',
     'name' => 'puestousuario_c',
   ),
   'email' => 
@@ -181,14 +174,6 @@ $popupMeta = array (
     'link' => true,
     'default' => true,
     'name' => 'phone_work',
-  ),
-  'EMPLOYEE_STATUS' => 
-  array (
-    'width' => 10,
-    'label' => 'LBL_LIST_EMPLOYEE_STATUS',
-    'link' => false,
-    'default' => true,
-    'name' => 'employee_status',
   ),
   'DATE_ENTERED' => 
   array (
