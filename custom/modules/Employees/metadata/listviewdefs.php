@@ -14,13 +14,6 @@ array (
     'orderBy' => 'last_name',
     'default' => true,
   ),
-  'employee_status' => 
-  array (
-    'width' => '10',
-    'label' => 'LBL_LIST_EMPLOYEE_STATUS',
-    'link' => false,
-    'default' => true,
-  ),
   'region_c' => 
   array (
     'type' => 'varchar',
@@ -47,7 +40,7 @@ array (
     'type' => 'enum',
     'default' => true,
     'label' => 'LBL_SUBPUESTO',
-    'width' => 10,
+    'width' => '10',
   ),
   'reports_to_name' => 
   array (
@@ -85,5 +78,12 @@ array (
     'width' => '10',
     'label' => 'LBL_DATE_ENTERED',
     'default' => true,
+  ),
+  'employee_status' => 
+  array (
+    'width' => '10',
+    'label' => 'LBL_LIST_EMPLOYEE_STATUS',
+    'link' => false,
+    'default' => false,
   ),
 );

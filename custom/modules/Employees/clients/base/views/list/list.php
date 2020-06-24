@@ -26,22 +26,13 @@ array (
               ),
               1 => 
               array (
-                'name' => 'employee_status',
-                'label' => 'LBL_LIST_EMPLOYEE_STATUS',
-                'enabled' => true,
-                'default' => true,
-                'sortable' => true,
-                'width' => '10',
-              ),
-              2 => 
-              array (
                 'name' => 'region_c',
                 'label' => 'LBL_REGION',
                 'enabled' => true,
                 'default' => true,
                 'width' => '10',
               ),
-              3 => 
+              2 => 
               array (
                 'name' => 'equipo_c',
                 'label' => 'LBL_EQUIPO',
@@ -49,7 +40,7 @@ array (
                 'default' => true,
                 'width' => '10',
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'puestousuario_c',
                 'label' => 'LBL_PUESTOUSUARIO',
@@ -57,14 +48,15 @@ array (
                 'default' => true,
                 'width' => '10',
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'subpuesto_c',
                 'label' => 'LBL_SUBPUESTO',
                 'enabled' => true,
                 'default' => true,
+                'width' => '10',
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'reports_to_name',
                 'label' => 'LBL_LIST_REPORTS_TO_NAME',
@@ -73,7 +65,7 @@ array (
                 'sortable' => true,
                 'width' => '15',
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_EMAIL',
@@ -82,7 +74,7 @@ array (
                 'sortable' => true,
                 'width' => '15',
               ),
-              8 => 
+              7 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -91,7 +83,7 @@ array (
                 'sortable' => true,
                 'width' => '10',
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'ext_c',
                 'label' => 'LBL_EXT',
@@ -99,12 +91,21 @@ array (
                 'default' => true,
                 'width' => '10',
               ),
-              10 => 
+              9 => 
               array (
                 'name' => 'date_entered',
                 'label' => 'LBL_DATE_ENTERED',
                 'enabled' => true,
                 'default' => true,
+                'sortable' => true,
+                'width' => '10',
+              ),
+              10 => 
+              array (
+                'name' => 'employee_status',
+                'label' => 'LBL_LIST_EMPLOYEE_STATUS',
+                'enabled' => true,
+                'default' => false,
                 'sortable' => true,
                 'width' => '10',
               ),
