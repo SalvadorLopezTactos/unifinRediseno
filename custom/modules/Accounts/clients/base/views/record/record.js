@@ -1005,6 +1005,9 @@
 
         this._super("_render");
 
+        //Ocultar campo "Ruta de Imagen QR" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="path_img_qr_c"]').hide();
+
         //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
         $('[data-name="tct_no_contactar_chk_c"]').hide();
 

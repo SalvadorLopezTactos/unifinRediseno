@@ -57,5 +57,21 @@ $viewdefs['C5515_uni_chattigo']['base']['view']['subpanel-for-leads-leads_c5515_
     'field' => 'date_modified',
     'direction' => 'desc',
   ),
+  'rowactions' => 
+  array (
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'rowaction',
+        'css_class' => 'btn',
+        'tooltip' => 'LBL_PREVIEW',
+        'event' => 'list:preview:fire',
+        'icon' => 'fa-eye',
+        'acl_action' => 'view',
+        'allow_bwc' => false,
+      ),
+    ),
+  ),
   'type' => 'subpanel-list',
 );

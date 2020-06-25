@@ -724,7 +724,7 @@ SQL;
                 $backlog->tipo_operacion_c = '2';
             }
 
-            $this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_operacion_c, "Comprometida", $backlog->numero_de_backlog);
+            $this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_operacion_c, "2", $backlog->numero_de_backlog);
             // Actualiza las cotizaciones de UNICS al nuevo Backlog
             $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
             $fields = array(
