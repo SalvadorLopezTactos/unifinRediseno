@@ -29,3 +29,11 @@ $hook_array['before_save'][] = Array(
     'Obtain_idCorto', // name of the class
     'idCortoCB' // name of the function.
 );
+
+$hook_array['before_save'][] = Array(
+    3,
+    'Consume servicio para envío de Cuentas_Bancarias a UNICS',//Just a quick comment about the logic of it
+    'custom/modules/cta_cuentas_bancarias/CB_unics.php', //path to the logic hook
+    'envio_unics', // name of the class
+    'Envia_UNICS' // name of the function.
+);
