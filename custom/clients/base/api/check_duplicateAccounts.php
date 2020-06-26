@@ -98,7 +98,7 @@ SITE;
 
                     if ($responsMeeting['status'] == "stop" || $responsMeeting['vacio'] ) {
                         $msj_reunion .= <<<SITE
-                        El proceso no puede continuar. Falta al menos una <b>Reunión Planificada asignada a un Asesor.</b>
+                        El proceso no puede continuar. Falta al menos una <b>Reunión Planificada o Realizada asignada a un Asesor.</b>
 SITE;
                     }
 
@@ -254,18 +254,13 @@ SITE;
         if ($beanL->load_relationship('meetings')) {
             $relatedBeans = $beanL->meetings->getBeans();
 
-
             if (!empty($relatedBeans)) {
 
                 foreach ($relatedBeans as $meeting) {
 
                     if ($meeting->status != "Not Held") {
 
-                        if ($meeting->status == "Planned") {
-                            $procede['status'] = "continue";
-
-                        }
-
+                        $procede['status'] = "continue";
                         $sqlUser = new SugarQuery();
                         $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
                         $sqlUser->from(BeanFactory::newBean('Users'));
@@ -275,7 +270,6 @@ SITE;
 
                         $productos = $sqlResult[0]['tipodeproducto_c'];
                         $puesto = $sqlResult[0]['puestousuario_c'];
-
 
                         // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
                         if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
