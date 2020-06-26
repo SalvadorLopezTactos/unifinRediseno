@@ -169,6 +169,13 @@ $popupMeta = array (
     'default' => true,
     'name' => 'user_name',
   ),
+  'PUESTOUSUARIO_C' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'label' => 'LBL_PUESTOUSUARIO',
+    'width' => 10,
+  ),
   'TITLE' => 
   array (
     'type' => 'varchar',

@@ -33,13 +33,20 @@ array (
               ),
               2 => 
               array (
+                'name' => 'puestousuario_c',
+                'label' => 'LBL_PUESTOUSUARIO',
+                'enabled' => true,
+                'default' => true,
+              ),
+              3 => 
+              array (
                 'name' => 'title',
                 'label' => 'LBL_TITLE',
                 'enabled' => true,
                 'default' => true,
                 'sortable' => true,
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'department',
                 'label' => 'LBL_DEPARTMENT',
@@ -47,7 +54,7 @@ array (
                 'default' => true,
                 'sortable' => true,
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'status',
                 'label' => 'LBL_STATUS',
@@ -55,7 +62,7 @@ array (
                 'default' => true,
                 'sortable' => true,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_EMAIL',
@@ -63,7 +70,7 @@ array (
                 'default' => false,
                 'sortable' => true,
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -71,7 +78,7 @@ array (
                 'default' => false,
                 'sortable' => true,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'is_admin',
                 'label' => 'LBL_IS_ADMIN',
