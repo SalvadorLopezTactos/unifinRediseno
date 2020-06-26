@@ -463,7 +463,7 @@ array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
-                'initial_filter' => 'filterAgentesTelefonicosTemplate',
+                'initial_filter' => 'filterAgenteTelefonicoTemplate',
                 'initial_filter_label' => 'LBL_FILTER_USER_BY_PUESTO',
                 'filter_populate' => 
                 array (

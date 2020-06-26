@@ -1,7 +1,7 @@
 <?php
 
 $viewdefs['Employees']['base']['filter']['basic']['filters'][] = array(
-    'id' => 'filterAgentesTelefonicosTemplate',
+    'id' => 'filterAgenteTelefonicoTemplate',
     'name' => 'LBL_FILTER_USER_BY_PUESTO',
     'filter_definition' => array(
         array(
