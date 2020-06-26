@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-26 15:51:59
+ // created: 2020-06-26 16:45:52
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -32,6 +32,7 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       15 => '22',
       16 => '23',
       17 => '24',
+	  18 => '25',
     ),
     4 => 
     array (
@@ -66,16 +67,16 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     '' => 
     array (
     ),
-    'Bases de datos' => 
+    '1' => 
     array (
     ),
-    'Centro de Prospeccion' => 
+    '2' => 
     array (
     ),
-    'Campanas' => 
+    '4' => 
     array (
     ),
-    'Digital' => 
+    '3' => 
     array (
       0 => '',
       1 => '15',
@@ -90,20 +91,21 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       10 => '24',
       11 => '25',
     ),
-    'Acciones Estrategicas' => 
+    '5' => 
     array (
     ),
-    'Afiliaciones' => 
+    '6' => 
     array (
-      0 => '25',
+	  0 => '',
+      1 => '25',      
     ),
-    'Llamadas Inbound' => 
-    array (
-    ),
-    'Parques Industriales' => 
+    '7' => 
     array (
     ),
-    'Offline' => 
+    '8' => 
+    array (
+    ),
+    '9' => 
     array (
       0 => '',
       1 => '10',
@@ -112,10 +114,10 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       4 => '13',
       5 => '14',
     ),
-    'Cartera Promotores' => 
+    '10' => 
     array (
     ),
-    'Recomendacion' => 
+    '11' => 
     array (
     ),
   ),
