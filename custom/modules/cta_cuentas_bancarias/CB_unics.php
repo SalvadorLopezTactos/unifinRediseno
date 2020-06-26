@@ -22,10 +22,9 @@ class envio_unics
         //Condicion para crear la cuenta en UNICS considerando $bean->ext2==""
         if ($bean->ext2 == "" && $bean->idcorto_c!= "" && $beanCuenta->idcliente_c!= "") {
             $GLOBALS['log']->fatal('Inicia Envio de CB a UNICS');
-             $GLOBALS['log']->fatal($url);
             //Variable para envío de información
             $url = $sugar_config['url_unics_cb'] .'rest/uniclick/unicsCreaLinea';
-
+            $GLOBALS['log']->fatal($url);
             //Variables y validaciones para el body
             $comparacion = strpos($bean->usos, "^1^");
             if ($comparacion === false) {
