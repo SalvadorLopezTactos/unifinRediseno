@@ -146,4 +146,52 @@ $popupMeta = array (
     'width' => '10',
   ),
 ),
+    'listviewdefs' => array (
+  'NAME' => 
+  array (
+    'width' => 10,
+    'label' => 'LBL_LIST_NAME',
+    'link' => true,
+    'related_fields' => 
+    array (
+      0 => 'last_name',
+      1 => 'first_name',
+    ),
+    'orderBy' => 'last_name',
+    'default' => true,
+    'name' => 'name',
+  ),
+  'USER_NAME' => 
+  array (
+    'width' => 10,
+    'label' => 'LBL_USER_NAME',
+    'link' => true,
+    'default' => true,
+    'name' => 'user_name',
+  ),
+  'TITLE' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_TITLE',
+    'width' => 10,
+    'default' => true,
+    'name' => 'title',
+  ),
+  'DEPARTMENT' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_DEPARTMENT',
+    'width' => 10,
+    'default' => true,
+    'name' => 'department',
+  ),
+  'STATUS' => 
+  array (
+    'width' => 10,
+    'label' => 'LBL_STATUS',
+    'link' => false,
+    'default' => true,
+    'name' => 'status',
+  ),
+),
 );
