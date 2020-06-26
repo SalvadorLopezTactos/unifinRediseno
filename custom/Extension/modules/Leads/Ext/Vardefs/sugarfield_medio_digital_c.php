@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-22 13:25:38
+ // created: 2020-06-26 08:55:09
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -72,7 +72,10 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     'Centro de Prospeccion' => 
     array (
     ),
-    'Digital' => 
+    'Campanas' => 
+    array (
+    ),
+	'Digital' => 
     array (
       0 => '',
       1 => 'Facebook',
@@ -95,9 +98,6 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       18 => '23',
       19 => '24',
       20 => '25',
-    ),
-    'Campanas' => 
-    array (
     ),
     'Acciones Estrategicas' => 
     array (
