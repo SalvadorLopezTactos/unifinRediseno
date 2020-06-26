@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-26 08:55:09
+ // created: 2020-06-26 15:51:59
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -75,29 +75,20 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     'Campanas' => 
     array (
     ),
-	'Digital' => 
+    'Digital' => 
     array (
       0 => '',
-      1 => 'Facebook',
-      2 => 'Twitter',
-      3 => 'Instagram',
-      4 => 'Web',
-      5 => 'LinkedIn',
-      6 => 'Radio Online',
-      7 => 'Prensa Online',
-      8 => 'TV Online',
-      9 => 'Revistas Online',
-      10 => '15',
-      11 => '16',
-      12 => '17',
-      13 => '18',
-      14 => '19',
-      15 => '20',
-      16 => '21',
-      17 => '22',
-      18 => '23',
-      19 => '24',
-      20 => '25',
+      1 => '15',
+      2 => '16',
+      3 => '17',
+      4 => '18',
+      5 => '19',
+      6 => '20',
+      7 => '21',
+      8 => '22',
+      9 => '23',
+      10 => '24',
+      11 => '25',
     ),
     'Acciones Estrategicas' => 
     array (
@@ -115,11 +106,11 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     'Offline' => 
     array (
       0 => '',
-      1 => 'TV',
-      2 => 'Radio',
-      3 => 'Prensa',
-      4 => 'Revistas',
-      5 => 'Espectaculares',
+      1 => '10',
+      2 => '11',
+      3 => '12',
+      4 => '13',
+      5 => '14',
     ),
     'Cartera Promotores' => 
     array (
