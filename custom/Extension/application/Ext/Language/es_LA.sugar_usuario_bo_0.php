@@ -29,4 +29,5 @@ $app_list_strings['usuario_bo_0']=array (
   'BACKOFFICE_F4' => 'BACKOFFICE F4',
   'BACKOFFICE_F5' => 'BACKOFFICE F5',
   'BACKOFFICE_EXP' => 'BACKOFFICE EXP',
+  'BACKOFFICE_CLIC' => 'BACKOFFICE CLIC'
 );
