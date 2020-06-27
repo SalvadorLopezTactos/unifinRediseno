@@ -68,8 +68,8 @@ class GetDireccionesCP extends SugarApi
   e.name                                                  AS nameEstado,
   e_p.dire_estado_dire_paisdire_pais_ida                  AS idPais,
   p.name                                                  AS namePais,
-  --      c_e.dire_ciudad_dire_estadodire_ciudad_idb as idCiudad,
-  --      c.name as nameCiudad,
+   c_e.dire_ciudad_dire_estadodire_ciudad_idb as idCiudad,
+        c.name as nameCiudad,
   co.id                                                   AS idColonia,
   co.name                                                 AS nameColonia
 FROM dire_codigopostal cp
@@ -85,10 +85,10 @@ FROM dire_codigopostal cp
     ON e_p.dire_estado_dire_paisdire_estado_idb = e.id
   RIGHT JOIN dire_pais p
     ON p.id = e_p.dire_estado_dire_paisdire_pais_ida
-  -- right join dire_ciudad_dire_estado_c c_e
-  -- 	on c_e.dire_ciudad_dire_estadodire_estado_ida = e.id
-  -- right join dire_ciudad c
-  -- 	on c.id = c_e.dire_ciudad_dire_estadodire_ciudad_idb
+   right join dire_ciudad_dire_estado_c c_e
+  	on c_e.dire_ciudad_dire_estadodire_estado_ida = e.id
+  right join dire_ciudad c
+   	on c.id = c_e.dire_ciudad_dire_estadodire_ciudad_idb
   RIGHT JOIN dire_colonia co
   -- on co.codigo_postal = cp.name
     ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%')
@@ -96,7 +96,7 @@ WHERE cp.name = '{$cp}'";
 
         $result = $GLOBALS['db']->query($query);
 
-        $arrPadre= array('paises'=>array(),'municipios'=>array(),'estados'=>array(),'colonias'=>array());
+        $arrPadre= array('paises'=>array(),'municipios'=>array(),'estados'=>array(),'colonias'=>array(),'ciudades'=>array());
 
 
         $pos=0;
@@ -115,15 +115,20 @@ WHERE cp.name = '{$cp}'";
             $idColonia=$row['idColonia'];
             $nameColonia = $row['nameColonia'];
 
+            $idCiudad=$row['idCiudad'];
+            $nameCiudad = $row['nameCiudad'];
+
             $arrPais=array('idPais'=>$idPais,'namePais'=>$namePais);
             $arrMunicipio=array('idMunicipio'=>$idMunicipio,'nameMunicipio'=>$nameMunicipio);
             $arrEstado=array('idEstado'=>$idEstado,'nameEstado'=>$nameEstado);
             $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia);
+            $arrCiudad=array('idCiudad'=>$idCiudad,'nameCiudad'=>$nameCiudad);
 
             $arrPadre['paises'][$pos]=$arrPais;
             $arrPadre['municipios'][$pos]=$arrMunicipio;
             $arrPadre['estados'][$pos]=$arrEstado;
             $arrPadre['colonias'][$pos]=$arrColonia;
+            $arrPadre['ciudades'][$pos]=$arrCiudad;
 
             $pos++;
         }
@@ -132,16 +137,19 @@ WHERE cp.name = '{$cp}'";
         $arrMunicipios=$arrPadre['municipios'];
         $arrEstados=$arrPadre['estados'];
         $arrColonias=$arrPadre['colonias'];
+        $arrCiudades=$arrPadre['ciudades'];
 
         $arrNewPaises=array_values(array_unique($arrPaises, SORT_REGULAR));
         $arrNewMunicipios=array_values(array_unique($arrMunicipios, SORT_REGULAR));
         $arrNewEstados=array_values(array_unique($arrEstados, SORT_REGULAR));
         $arrNewColonias=array_values(array_unique($arrColonias, SORT_REGULAR));
+        $arrNewCiudades=array_values(array_unique($arrCiudades, SORT_REGULAR));
 
         $arrPadre['paises']=$arrNewPaises;
         $arrPadre['municipios']=$arrNewMunicipios;
         $arrPadre['estados']=$arrNewEstados;
         $arrPadre['colonias']=$arrNewColonias;
+        $arrPadre['ciudades']=$arrNewCiudades;
 
         $queryIdCP="SELECT id FROM dire_codigopostal WHERE name='{$cp}' LIMIT 1;";
         $resultID = $GLOBALS['db']->query($queryIdCP);
