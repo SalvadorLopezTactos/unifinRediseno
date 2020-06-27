@@ -118,7 +118,8 @@
                             cont_dir.nuevaDireccion.postal = data.idCP;
                             var list_paises = data.paises;
                             var list_municipios = data.municipios;
-                            var city_list = App.metadata.getCities();
+                            //var city_list = App.metadata.getCities();
+                            var city_list = data.ciudades;
                             var list_estados = data.estados;
                             var list_colonias = data.colonias;
 
@@ -152,6 +153,7 @@
                             cont_dir.nuevaDireccion.listColonia = listColonia;
                             cont_dir.nuevaDireccion.listColoniaFull = listColonia;
                             //Ciudad
+                            /*
                             listCiudad = {}
                             ciudades = Object.values(city_list);
                             cont_dir.nuevaDireccion.estado = (Object.keys(cont_dir.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listEstado)[0] : "";
@@ -161,6 +163,12 @@
                                         listCiudad[ciudades[i].id] = ciudades[i].name;
                                     }
                                 }
+                            }
+                            */
+                            //Ciudad
+                            listCiudad = {};
+                            for (var i = 0; i < city_list.length; i++) {
+                                listCiudad[city_list[i].idCiudad] = city_list[i].nameCiudad;
                             }
                             cont_dir.nuevaDireccion.listCiudad = listCiudad;
                             cont_dir.nuevaDireccion.listCiudadFull = listCiudad;
@@ -248,7 +256,8 @@
                             cont_dir.oDirecciones.direccion[index].postal = data.idCP;
                             var list_paises = data.paises;
                             var list_municipios = data.municipios;
-                            var city_list = App.metadata.getCities();
+                            //var city_list = App.metadata.getCities();
+                            var city_list = data.ciudades;
                             var list_estados = data.estados;
                             var list_colonias = data.colonias;
 
@@ -282,6 +291,7 @@
                             cont_dir.oDirecciones.direccion[index].listColonia = listColonia;
                             cont_dir.oDirecciones.direccion[index].listColoniaFull = listColonia;
                             //Ciudad
+                            /*
                             listCiudad = {}
                             ciudades = Object.values(city_list);
                             cont_dir.oDirecciones.direccion[index].estado = (Object.keys(cont_dir.oDirecciones.direccion[index].listEstado)[0] != undefined) ? Object.keys(cont_dir.oDirecciones.direccion[index].listEstado)[0] : "";
@@ -291,6 +301,14 @@
                                         listCiudad[ciudades[i].id] = ciudades[i].name;
                                     }
                                 }
+                            }
+                            cont_dir.oDirecciones.direccion[index].listCiudad = listCiudad;
+                            cont_dir.oDirecciones.direccion[index].listCiudadFull = listCiudad;
+                            */
+                            //Ciudad
+                            listCiudad = {};
+                            for (var i = 0; i < city_list.length; i++) {
+                                listCiudad[city_list[i].idCiudad] = city_list[i].nameCiudad;
                             }
                             cont_dir.oDirecciones.direccion[index].listCiudad = listCiudad;
                             cont_dir.oDirecciones.direccion[index].listCiudadFull = listCiudad;
