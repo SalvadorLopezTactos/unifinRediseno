@@ -1,3 +1,3 @@
 <?php
- // created: 2018-08-01 10:57:08
-$dictionary['bc_survey_submit_question']['full_text_search']=true;
+ // created: 2020-06-27 13:07:21
+$dictionary['bc_survey_submit_question']['full_text_search']=false;
