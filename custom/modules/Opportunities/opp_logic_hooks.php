@@ -107,6 +107,8 @@
             //Establece nombre para pre-solicitud Uniclick por Anfexi
             if(!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && $bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c=='SI') {
                 $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
+            }elseif ($bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c=='CL'){
+                $bean->name = "LC " . $bean->id_linea_credito_c . " - " . $beanCuenta->name;
             }
             /* @Jesus Carrillo
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
@@ -968,7 +970,7 @@ SQL;
             $subetapa= $bean->estatus_c;
             $cliente = $bean->account_id;
             //Evalua cambio en etapa o subetapa
-            if ($bean->fetched_row[estatus_c]!=$subetapa || $bean->fetched_row['tct_etapa_ddw_c']!=$etapa) {
+            if ($bean->fetched_row['estatus_c']!=$subetapa || $bean->fetched_row['tct_etapa_ddw_c']!=$etapa) {
                 //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
                 //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
                 $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
@@ -977,22 +979,22 @@ SQL;
                     $this->actualizaTipoCuenta('2','7',$cliente,$producto);
                 }
                 //Actualiza en Integracion de Expediente y actualiza campos con valor Prospecto en Integracion de Expediente: 2,8
-                if($subetapa=="PE" && $bean->fetched_row[estatus_c]!= $subetapa){
+                if($subetapa=="PE" && $bean->fetched_row['estatus_c']!= $subetapa){
                     $GLOBALS['log']->fatal('Prospecto Integración de expediente');
                     $this->actualizaTipoCuenta('2','8',$cliente,$producto);
                 }
                 //Actualiza en Crédito y actualiza campos con valor Prospecto en Crédito: 2,9
-                if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row[estatus_c]!= $subetapa){
+                if(($subetapa=="BC" || $subetapa=="CC" || $subetapa=="RF" || $subetapa=="EF" || $subetapa=="RM" || $subetapa=="SC" ||$subetapa=="D" || $subetapa=="CN" || $subetapa=="E") && $bean->fetched_row['estatus_c']!= $subetapa){
                     $GLOBALS['log']->fatal('Prospecto En Crédito');
                     $this->actualizaTipoCuenta('2','9',$cliente,$producto);
                 }
                 //Actualiza en Rechazado y actualiza campos con valor Prospecto Rechazado: 2,10
-                if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row[estatus_c]!= $subetapa){
+                if(($subetapa=="R" || $subetapa=="CM") && $bean->fetched_row['estatus_c']!= $subetapa){
                     $GLOBALS['log']->fatal('Prospecto Rechazado');
                     $this->actualizaTipoCuenta('2','10',$cliente,$producto);
                 }
                 //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
-                if ($bean->estatus_c=="N" && $bean->fetched_row[estatus_c]!=$bean->estacus_c) { //Etapa solicitud= N= Autorizada
+                if ($bean->estatus_c=="N") { //Etapa solicitud= N= Autorizada
                     $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                     $this->actualizaTipoCuenta('3','18',$cliente,$producto);
                 }
