@@ -59,7 +59,7 @@ class reAsignarCuentas extends SugarApi
         $callApi = new UnifinAPI();
         foreach ($args['data']['seleccionados'] as $key => $value) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $value);
+            $account = BeanFactory::retrieveBean('Accounts', $value,array('disable_row_level_security' => true));
 
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 

@@ -329,4 +329,6 @@ $mod_strings['LBL_DETALLE_ORIGEN_C'] = ' Detalle Origen';
 $mod_strings['LBL_MEDIO_DETALLE_ORIGEN_C'] = 'Medio';
 $mod_strings['LBL_PUNTO_CONTACTO_ORIGEN_C'] = ' Punto de Contacto';
 $mod_strings['LBL_PUESTO_CUENTA_C'] = 'Puesto';
+$mod_strings['LBL_ESTADO_RFC'] = 'Estado de validación RFC';
 $mod_strings['LBL_RFC_QR'] = 'RFC QR';
+$mod_strings['LBL_PATH_IMG_QR'] = 'Ruta de imagen QR';

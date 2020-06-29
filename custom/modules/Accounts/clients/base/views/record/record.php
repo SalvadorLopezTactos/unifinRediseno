@@ -19,6 +19,18 @@ array (
           ),
           1 => 
           array (
+            'type' => 'button',
+            'name' => 'rfc_qr_button',
+            'label' => 'ESCANEAR QR',
+            'css_class' => 'btn_rfc_qr btn btn-primary',
+            'showOn' => 'edit',
+            'events' => 
+            array (
+              'click' => 'button:btn_rfc:click',
+            ),
+          ),
+          2 => 
+          array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -27,7 +39,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          3 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -157,7 +169,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -220,20 +232,25 @@ array (
             array (
               0 => 
               array (
+                'name' => 'account_tipoSubtipo',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_TIPOSUBTIPO',
+                'readonly' => true,
+                'dismiss_label' => true,
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'rfc_qr',
                 'label' => 'LBL_RFC_QR',
                 'studio' => 'visible',
                 'span' => 12,
               ),
-              1 => 
-              array (
-                'name' => 'tipo_registro_cuenta_c',
-                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
-              ),
               2 => 
               array (
-                'name' => 'subtipo_registro_cuenta_c',
-                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
+                'name' => 'path_img_qr_c',
+                'label' => 'LBL_PATH_IMG_QR',
+                'span' => 12,
               ),
               3 => 
               array (
@@ -242,40 +259,50 @@ array (
               ),
               4 => 
               array (
-                'name' => 'tct_prioridad_ddw_c',
+                'name' => 'tipo_registro_cuenta_c',
+                'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
               5 => 
+              array (
+                'name' => 'subtipo_registro_cuenta_c',
+                'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
+              ),
+              6 => 
+              array (
+                'name' => 'tct_prioridad_ddw_c',
+              ),
+              7 => 
               array (
                 'name' => 'tct_homonimo_chk_c',
                 'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
-              6 => 
+              8 => 
               array (
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              10 => 
-              array (
-              ),
-              11 => 
+              12 => 
               array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              12 => 
+              13 => 
+              array (
+              ),
+              14 => 
               array (
               ),
             ),

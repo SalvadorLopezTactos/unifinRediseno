@@ -129,6 +129,15 @@
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 
         this.enableDuplicateCheck = true;
+		
+		
+		/*RFC_ValidatePadron
+		  Validación de rfc en el padron de contribuyentes
+		*/
+		//self.rfc_antiguo = "";
+		//this.model.on('change:rfc_c', this.cambioRFC, this);
+		//this.model.addValidationTask('RFC_validateP', _.bind(this.RFC_ValidatePadron, this));
+
 
         //UNFIN TASK:
         //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC gen�rico (XXX010101XXX)
@@ -316,6 +325,10 @@
 
     _render: function () {
         this._super("_render");
+
+        //Ocultar campo "Ruta de Imagen QR" siempre. Se agregó a la vista para que esté disponible a través de this.model
+        $('[data-name="path_img_qr_c"]').hide();
+
         //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
         $('[data-name="tct_no_contactar_chk_c"]').hide();
         this._doValidateProfesionRisk();
@@ -414,6 +427,9 @@
         if(app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
           $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
         }  
+
+        this.$('[data-name="account_tipoSubtipo"]').hide();
+        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
     },
 
     _ActualizaEtiquetas: function () {
@@ -1998,6 +2014,87 @@
 
         callback(null, fields, errors);
     },
+	
+	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
+	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
+	//RFC_ValidatePadron: function (fields, errors, callback) {
+	//	
+	//	var rfc = this.getField('rfc_c');
+	//	var valuerfc = this.model.get('rfc_c');
+	//	var anticrfc = this._get_rfc_antiguo();
+	//	        
+	//	if( (this.model.get('pais_nacimiento_c') == "2")
+	//		&& ( !_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
+	//		&& (anticrfc != valuerfc) 
+	//		&& (rfc.action === "edit" || rfc.action === "create")
+	//		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == ""  || this.model.get('estado_rfc_c') == "0")){
+	//		
+	//		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
+	//			success: _.bind(function (data) {
+	//				if (data != "" && data != null) {
+	//					console.log("rfc");
+	//					console.log(data);
+	//					if (data.code == '1') {
+	//						this.model.set('estado_rfc_c', "");
+	//						app.alert.show("Error Validar RFC", {
+	//							level: "error",
+	//							title: 'Estructura del RFC incorrecta',
+	//							autoClose: false
+	//						});
+	//						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+	//						errors['error_RFC_Padron'].required = true;
+    //                    }else if (data.code == '2') {
+	//						this.model.set('estado_rfc_c', '0');
+	//						app.alert.show("Error Validar RFC", {
+	//							level: "error",
+	//							title: 'RFC no registrado en el padrón de contribuyentes',
+	//							autoClose: false
+	//						});
+	//						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+	//						errors['error_RFC_Padron'].required = true;
+    //                    }else if (data.code == '4') {
+	//						this.model.set('estado_rfc_c', '1');
+	//					}						
+	//				}else{
+	//					app.alert.show("Error Validar RFC", {
+	//						level: "error",
+	//						title: 'Error de envío para validar RFC',
+	//						autoClose: false
+	//					});
+	//					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+	//					errors['error_RFC_Padron'].required = true;
+	//				}		
+	//				callback(null, fields, errors);					
+	//			}, this),
+	//			error: _.bind(function (error) {
+	//				app.alert.show("Error Validar RFC", {
+	//					level: "error",
+	//					title: 'Error de envío',
+	//					autoClose: false
+	//				});
+	//				errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+	//				errors['error_RFC_Padron'].required = true;
+    //                console.log("Este fue el error:", error);
+	//				callback(null, fields, errors);
+    //            },this),
+	//		});
+	//	}else{
+	//      	  callback(null, fields, errors);
+    //    }			
+    //},
+	//
+	//cambioRFC: function(){
+	//	var original_rfc = this.model._previousAttributes.rfc_c;
+	//	this._set_rfc_antiguo(original_rfc);
+	//},
+	//
+	//_get_rfc_antiguo: function(){
+	//	return self.rfc_antiguo;
+	//},
+	//
+	//_set_rfc_antiguo: function(rfca){
+	//	self.rfc_antiguo = rfca;
+	//},
 
     _cleanDependenciesOrigen: function () {
                

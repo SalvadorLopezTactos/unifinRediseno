@@ -589,12 +589,12 @@
                             <td class="hide_acciones">
                                 <div class="btn-toolbar" style="margin: 0px; padding-left:0px;">
                                     <div class="btn-group">
-                                        <span class="btn Seleccionar switch-mini round-switch checkboxChange"> <input type="checkbox" title="Seleccionar" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}" data-numBacklog="{{numero_de_backlog}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-oppId="{{oppId}}" data-oppTipo="{{tipo_operacion}}"/></span>
-                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
-                                        <span class="btn MoverOperacion fa fa-hand-o-up " title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
-                                        <span class="btn Cancelar fa fa-times-circle updateCancelar" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Seleccionar switch-mini round-switch checkboxChange"> <input type="checkbox" title="Seleccionar" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}" data-numBacklog="{{numero_de_backlog}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-oppId="{{oppId}}" data-oppTipo="{{tipo_operacion}}"/></span>
+                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                        <span class="btn MoverOperacion fa fa-hand-o-up " title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Cancelar fa fa-times-circle updateCancelar" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Comentario fa {{comentado}} updateComentario" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
-                                        <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
                                     </div>
                                 </div>
                             </td>
@@ -602,7 +602,7 @@
                             <!--<td>
                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                         </td>-->
-                            <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                            <td class="hide_estatus">{{estatus_operacion_c}}</td>
                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                             <td class="hide_equipo">{{equipo}}</td>
                             <td class="hide_zona">{{zona}}</td>
@@ -627,8 +627,8 @@
                             <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
                             <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
                             <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
-                            <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
-                            <td class="hide_etapa">{{etapa}}</td>
+                            <td class="hide_etapa_preliminar">{{etapa_preliminar_c}}</td>
+                            <td class="hide_etapa">{{etapa_c}}</td>
                             <td class="hide_progreso">{{progreso}}</td>
                             <td class="hide_conversion">{{conversion}}</td>
                             <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
@@ -644,9 +644,9 @@
                                 <td class="hide_acciones">
                                     <div class="btn-toolbar" style="margin: 0px; padding-left:0px;">
                                         <div class="btn-group">
-                                            <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
-                                            <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
-                                            <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                            <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                            <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                            <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
                                             <span class="btn Comentario fa {{comentado}}" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
                                             <span class="btn Revivir fa fa-repeat" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
                                         </div>
@@ -656,7 +656,7 @@
                                 <!--<td>
                                 <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                             </td>-->
-                                <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                                <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                 <td class="hide_mes">{{mes}}-{{anio}}</td>
                                 <td class="hide_equipo">{{equipo}}</td>
                                 <td class="hide_zona">{{zona}}</td>
@@ -681,8 +681,8 @@
                                 <td class="hide_monto_cancelado" >{{customFormatNumber monto_cancelado}}</td>
                                 <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
                                 <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
-                                <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
-                                <td class="hide_etapa">{{etapa}}</td>
+                                <td class="hide_etapa_preliminar">{{etapa_preliminar_c}}</td>
+                                <td class="hide_etapa">{{etapa_c}}</td>
                                 <td class="hide_progreso">{{progreso}}</td>
                                 <td class="hide_conversion">{{conversion}}</td>
                                 <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
@@ -703,9 +703,9 @@
                                             <td class="hide_acciones">
                                                 <div class="btn-toolbar" style="margin: 0px;padding-left:0px;">
                                                     <div class="btn-group">
-                                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
-                                                        <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
-                                                        <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                                        <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
+                                                        <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_operacion_c}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_operacion_c}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
                                                         <span class="btn Comentario fa {{comentado}} " title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
                                                         <span class="btn Revivir fa fa-repeat " title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
                                                     </div>
@@ -715,7 +715,7 @@
                                             <!--<td>
                                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                                         </td>-->
-                                            <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                                            <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                                             <td class="hide_equipo">{{equipo}}</td>
                                             <td class="hide_zona">{{zona}}</td>
@@ -740,15 +740,14 @@
                                             <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
                                             <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
                                             <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
-                                            <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
-                                            <td class="hide_etapa">{{etapa}}</td>
+                                            <td class="hide_etapa_preliminar">{{etapa_preliminar_c}}</td>
+                                            <td class="hide_etapa">{{etapa_c}}</td>
                                             <td class="hide_progreso">{{progreso}}</td>
                                             <td class="hide_conversion">{{conversion}}</td>
                                             <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                             <!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
-
                                         </tr>
                                     {{/each}}
                                 {{/each}}
@@ -1073,7 +1072,7 @@
                     <td><b>Motivo de Cancelación</b></td>
                     <td>
                         <select id="motivoCancelarMasivo" class="motivoCancelarMasivo">
-                            <option value="{{motivoDefault}}">{{getUnifinListValue "motivo_de_cancelacion_list" motivoDefault}}</option>
+                            <option value="{{motivoDefault}}">{{getUnifinListValue "motivo_cancelacion_c_list" motivoDefault}}</option>
                             {{#each motivoCancelarMasivoList}}
                             <option value="{{@key}}">{{this}}</option>
                             {{/each}}

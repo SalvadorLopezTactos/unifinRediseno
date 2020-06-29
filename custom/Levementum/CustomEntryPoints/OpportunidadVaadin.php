@@ -94,7 +94,7 @@ if ($AccountId != null && $AccountId != '') {
     <script type="text/javascript">
         function factoraje(tipo){
             var empleado = '<?=$AccountId;?>';
-            if(tipo != 1){
+            if(tipo != 1 && tipo != 9 && tipo != 8){
                 if(empleado!=""){
                     console.log("Cerrar");
                     alert("Esta opci\u00F3n no est\u00E1 habilitada para Factoraje");

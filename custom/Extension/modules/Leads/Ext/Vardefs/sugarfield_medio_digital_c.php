@@ -1,5 +1,5 @@
 <?php
- // created: 2020-05-04 15:36:46
+ // created: 2020-06-26 16:45:52
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -32,6 +32,7 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       15 => '22',
       16 => '23',
       17 => '24',
+	  18 => '25',
     ),
     4 => 
     array (
@@ -66,63 +67,57 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     '' => 
     array (
     ),
-    'Bases de datos' => 
+    '1' => 
     array (
     ),
-    'Centro de Prospeccion' => 
+    '2' => 
     array (
     ),
-    'Digital' => 
-    array (
-      0 => '',
-      1 => 'Facebook',
-      2 => 'Twitter',
-      3 => 'Instagram',
-      4 => 'Web',
-      5 => 'LinkedIn',
-      6 => 'Radio Online',
-      7 => 'Prensa Online',
-      8 => 'TV Online',
-      9 => 'Revistas Online',
-      10 => '15',
-      11 => '16',
-      12 => '17',
-      13 => '18',
-      14 => '19',
-      15 => '20',
-      16 => '21',
-      17 => '22',
-      18 => '23',
-      19 => '24',
-    ),
-    'Campanas' => 
+    '4' => 
     array (
     ),
-    'Acciones Estrategicas' => 
-    array (
-    ),
-    'Afiliaciones' => 
-    array (
-    ),
-    'Llamadas Inbound' => 
-    array (
-    ),
-    'Parques Industriales' => 
-    array (
-    ),
-    'Offline' => 
+    '3' => 
     array (
       0 => '',
-      1 => 'TV',
-      2 => 'Radio',
-      3 => 'Prensa',
-      4 => 'Revistas',
-      5 => 'Espectaculares',
+      1 => '15',
+      2 => '16',
+      3 => '17',
+      4 => '18',
+      5 => '19',
+      6 => '20',
+      7 => '21',
+      8 => '22',
+      9 => '23',
+      10 => '24',
+      11 => '25',
     ),
-    'Cartera Promotores' => 
+    '5' => 
     array (
     ),
-    'Recomendacion' => 
+    '6' => 
+    array (
+	  0 => '',
+      1 => '25',      
+    ),
+    '7' => 
+    array (
+    ),
+    '8' => 
+    array (
+    ),
+    '9' => 
+    array (
+      0 => '',
+      1 => '10',
+      2 => '11',
+      3 => '12',
+      4 => '13',
+      5 => '14',
+    ),
+    '10' => 
+    array (
+    ),
+    '11' => 
     array (
     ),
   ),

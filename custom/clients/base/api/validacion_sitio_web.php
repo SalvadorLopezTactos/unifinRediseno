@@ -37,7 +37,7 @@ class validacion_sitio_web extends SugarApi
     public function ping_web($api, $args)
     {
         //Recupera página web
-		    $url = $args['website'];
+		$url = $args['website'];
         //Genera petición a dominio
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
@@ -50,7 +50,24 @@ class validacion_sitio_web extends SugarApi
         if(($httpcode>=200 && $httpcode<=400) || $httpcode==0){
             return '00';
         } else {
-            return '02';
+            //Segunda validación
+            $url = str_replace("www.", "", $url);
+            $url = str_replace("https://", "", $url);
+            $url = str_replace("http://", "", $url);
+            //Genera petición a dominio
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $data = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            //Interpreta resultado
+            if(($httpcode>=200 && $httpcode<=400) || $httpcode==0){
+                return '00';
+            } else {
+                return '02';
+            }
         }
     }
 

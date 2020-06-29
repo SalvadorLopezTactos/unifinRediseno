@@ -49,6 +49,7 @@
 /* Vars para URL del servidor de dashlets */
 global $sugar_config;
 $DASHLET_URL = $sugar_config['dashlet_url'];
+$CREDITO_URL = $sugar_config['credito_url'];
 ?>
 <!DOCTYPE html>
 <html lang="en" class="blue">
@@ -107,17 +108,14 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
         }
 
         body.tasks section.tasks,
-        body.detail {
-
+        body.detail section.detail,
+		    body.credito {
             display: block;
-
         }
 
-        section.detail {
-
+        section.credito {
             display: block;
             height: 90vh;
-
         }
 
         .v-tooltip {
@@ -245,6 +243,22 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 
 </section>
 
+<section class="credito">
+
+    <div style="width: 100%; height: 100%; border: 0px solid green;" id="credito" class="v-app">
+
+        <!-- Optional placeholder for the loading indicator -->
+
+        <div class=" v-app-loading"></div>
+
+        <!-- Alternative fallback text -->
+
+        <noscript>Se requiere habilitar javascript en el browser para visualizar el dashlet.</noscript>
+
+    </div>
+
+</section>
+
 <section>
 
     <div id="mensaje"></div>
@@ -288,6 +302,42 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
    });
 
                    }
+               ";
+
+			   echo "
+
+var id_task;
+var name_task;
+
+				   cargaUserCreditoTask = function() {
+
+                       com.unifin.analisis.ui.ActivitiCreditTaskDetailUI('{$current_user->user_name}', id_task);
+                       console.log('llamada a ActivitiCreditTaskDetailUI');
+					             console.log('Entrando al nuevo proyecto de credito: '+name_task);
+                       console.log('URL de credito:'+'{$CREDITO_URL}');
+                       $( document ).ready(function() {
+
+                         // Your code here.
+                      //$('#carga').hide();
+                     });
+                   }
+
+				   cargaServletCredito = function(id_task_dashlet, name_task_dashlet) {
+				   id_task = id_task_dashlet;
+				   name_task = name_task_dashlet;
+					 console.log('Id Task: '+id_task_dashlet);
+							 vaadin.initApplication('credito', {
+            'browserDetailsUrl': '{$CREDITO_URL}creditoTask/',
+            'serviceUrl': '{$CREDITO_URL}creditoTask/',
+            'widgetset': 'com.unifin.MyAppWidgetset',
+            'theme': 'mytheme',
+            'versionInfo': {'vaadinVersion': '7.6.0'},
+            'vaadinDir': '{$DASHLET_URL}VAADIN/',
+            'heartbeatInterval': 3000,
+            'standalone': false,
+            'debug': false,
+        });
+					   }
                ";
 
            ?>
@@ -340,13 +390,16 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
         });
 
         jump = function (name_section) {
-            console.log("jump: " + name_section);
+            console.log('jump: ' + name_section);
             switch (name_section) {
                 case 'activiti':
                     document.body.className = 'tasks';
                     break;
                 case 'activiti-taskdetail':
                     document.body.className = 'detail';
+                    break;
+				        case 'credito':
+                    document.body.className = 'credito';
                     break;
                 default:
                     document.body.className = 'tasks';
