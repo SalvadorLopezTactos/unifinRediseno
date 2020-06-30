@@ -1,10 +1,10 @@
 <?php
- // created: 2020-05-22 12:41:27
+ // created: 2020-06-30 13:19:56
 
 $app_list_strings['origen_lead_list']=array (
+  '' => '',
   1 => 'Marketing',
   2 => 'Inteligencia de Negocio',
-  '' => '',
   3 => 'Prospección propia',
   4 => 'Referenciado Cliente',
   5 => 'Referenciado Proveedor',
