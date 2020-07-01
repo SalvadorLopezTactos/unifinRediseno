@@ -59,7 +59,7 @@ class reAsignarCuentas extends SugarApi
         $callApi = new UnifinAPI();
         foreach ($args['data']['seleccionados'] as $key => $value) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $value);
+            $account = BeanFactory::retrieveBean('Accounts', $value,array('disable_row_level_security' => true));
 
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 
@@ -67,8 +67,8 @@ class reAsignarCuentas extends SugarApi
             } else {
 
                 /****************************Re-Asigna Fecha y Re-Asigna Asesor en UNI_PRODUCTOS*****************/
-                if ($account->load_relationship('accounts_uni_productos_1')) {
-                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
+                if ($account->load_relationship('accounts_uni_productos_1')){
+                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id,array('disable_row_level_security' => true));
 
                     $fechaReAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
 
@@ -142,9 +142,9 @@ class reAsignarCuentas extends SugarApi
                 $User->retrieve($reAsignado);
                 $para = $User->email1;
                 if ($para != null) {
-                    if ($User->status != 'Active') {
-                        $reAsignado = '';
-                    } else {
+                    if($User->status!='Active'){
+                        $reAsignado='';
+                    }else{
                         if ($User->optout_c == 1) {
                             $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
@@ -154,33 +154,33 @@ class reAsignarCuentas extends SugarApi
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a nuevo jefe solo si éste es Activo
-                    if ($User->status == 'Active') {
+                    if($User->status=='Active'){
                         if ($User->optout_c != 1) {
                             $jefeAsignado = $User->email1;
                         }
-                    } else {
-                        $jefeAsignado = '';
+                    }else{
+                        $jefeAsignado='';
                     }
 
                     $User->retrieve($promoActual);
-                    if ($User->status == 'Active') {
+                    if($User->status=='Active'){
                         if ($User->optout_c == 1) {
                             $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
-                    } else {
-                        $promoActual = '';
+                    }else{
+                        $promoActual='';
                     }
 
                     $jefeActual = '';
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a jefe Actual solo si éste es Activo
-                    if ($User->status == 'Active') {
+                    if($User->status=='Active'){
                         if ($User->optout_c != 1) {
                             $jefeActual = $User->email1;
                         }
-                    } else {
-                        $jefeActual = '';
+                    }else{
+                        $jefeActual='';
                     }
 
                     $notifica = BeanFactory::newBean('TCT2_Notificaciones');
@@ -208,9 +208,7 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FACTORAJE') $producto = 4;
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
-
                 $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
-
 
                 $query = <<<SQL
 UPDATE opportunities
@@ -261,7 +259,7 @@ SQL;
                         $User->retrieve($reAsignado);
                         while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'], array('disable_row_level_security' => true));
+                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'],array('disable_row_level_security' => true));
                             if ($bl != null) {
                                 //Actualiza valores
                                 $bl->assigned_user_id = $reAsignado;
