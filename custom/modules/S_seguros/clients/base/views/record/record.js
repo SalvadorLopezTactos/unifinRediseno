@@ -8,7 +8,7 @@
     _render: function() {
         this._super("_render");
 
-        //Oculta campos de etapa y subetapa
+        //Desabilita accion sobre pipeline
         $('[data-name="seguro_pipeline"]').attr('style', 'pointer-events:none');
 
         //Oculta etiqueta del campo custom pipeline_opp
