@@ -59,7 +59,7 @@ class reAsignarCuentas extends SugarApi
         $callApi = new UnifinAPI();
         foreach ($args['data']['seleccionados'] as $key => $value) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $value,array('disable_row_level_security' => true));
+            $account = BeanFactory::retrieveBean('Accounts', $value);
 
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 
@@ -67,8 +67,8 @@ class reAsignarCuentas extends SugarApi
             } else {
 
                 /****************************Re-Asigna Fecha y Re-Asigna Asesor en UNI_PRODUCTOS*****************/
-                if ($account->load_relationship('accounts_uni_productos_1')){
-                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id,array('disable_row_level_security' => true));
+                if ($account->load_relationship('accounts_uni_productos_1')) {
+                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
 
                     $fechaReAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
 
@@ -142,9 +142,9 @@ class reAsignarCuentas extends SugarApi
                 $User->retrieve($reAsignado);
                 $para = $User->email1;
                 if ($para != null) {
-                    if($User->status!='Active'){
-                        $reAsignado='';
-                    }else{
+                    if ($User->status != 'Active') {
+                        $reAsignado = '';
+                    } else {
                         if ($User->optout_c == 1) {
                             $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
@@ -154,33 +154,33 @@ class reAsignarCuentas extends SugarApi
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a nuevo jefe solo si éste es Activo
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c != 1) {
                             $jefeAsignado = $User->email1;
                         }
-                    }else{
-                        $jefeAsignado='';
+                    } else {
+                        $jefeAsignado = '';
                     }
 
                     $User->retrieve($promoActual);
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c == 1) {
                             $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
-                    }else{
-                        $promoActual='';
+                    } else {
+                        $promoActual = '';
                     }
 
                     $jefeActual = '';
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a jefe Actual solo si éste es Activo
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c != 1) {
                             $jefeActual = $User->email1;
                         }
-                    }else{
-                        $jefeActual='';
+                    } else {
+                        $jefeActual = '';
                     }
 
                     $notifica = BeanFactory::newBean('TCT2_Notificaciones');
@@ -208,24 +208,30 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FACTORAJE') $producto = 4;
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
+
+                $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
+
+
                 $query = <<<SQL
 UPDATE opportunities
 INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
 INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
 INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
-SET opportunities.assigned_user_id = '{$reAsignado}'
+SET opportunities.assigned_user_id = '{$reAsignado}',
+opportunities.team_id = '{$usr_bean->default_team}',
+opportunities.team_set_id = '{$usr_bean->team_set_id}'
 WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$producto}'
 SQL;
                 $queryResult = $db->query($query);
 
-                $queryUpdateTeams = "UPDATE opportunities
-                  INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
-                  INNER JOIN users ON opportunities.assigned_user_id = users.id
-                  SET
-                  	opportunities.team_id = users.team_set_id,
-                      opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
-                  WHERE accounts_opportunities.account_id ='" . $value . "';";
-                $resultUpdateTeams = $db->query($queryUpdateTeams);
+                /*   $queryUpdateTeams = "UPDATE opportunities
+                     INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+                     INNER JOIN users ON opportunities.assigned_user_id = users.id
+                     SET
+                         opportunities.team_id = users.team_set_id,
+                         opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
+                     WHERE accounts_opportunities.account_id ='" . $value . "';";
+                   $resultUpdateTeams = $db->query($queryUpdateTeams);*/
 
                 //Actualizar el usuario asignado a registros de Backlog relacionados a las cuentas
                 //Obtener Backlogs de la cuenta que sean de meses futuros
@@ -255,7 +261,7 @@ SQL;
                         $User->retrieve($reAsignado);
                         while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'],array('disable_row_level_security' => true));
+                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'], array('disable_row_level_security' => true));
                             if ($bl != null) {
                                 //Actualiza valores
                                 $bl->assigned_user_id = $reAsignado;
