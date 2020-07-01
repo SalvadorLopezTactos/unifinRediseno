@@ -208,24 +208,28 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FACTORAJE') $producto = 4;
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
+                $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
+
                 $query = <<<SQL
 UPDATE opportunities
 INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
 INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
 INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
-SET opportunities.assigned_user_id = '{$reAsignado}'
+SET opportunities.assigned_user_id = '{$reAsignado}',
+opportunities.team_id = '{$usr_bean->default_team}',
+opportunities.team_set_id = '{$usr_bean->team_set_id}'
 WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$producto}'
 SQL;
                 $queryResult = $db->query($query);
 
-                $queryUpdateTeams = "UPDATE opportunities
-                  INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
-                  INNER JOIN users ON opportunities.assigned_user_id = users.id
-                  SET
-                  	opportunities.team_id = users.team_set_id,
-                      opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
-                  WHERE accounts_opportunities.account_id ='" . $value . "';";
-                $resultUpdateTeams = $db->query($queryUpdateTeams);
+                /*   $queryUpdateTeams = "UPDATE opportunities
+                     INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+                     INNER JOIN users ON opportunities.assigned_user_id = users.id
+                     SET
+                         opportunities.team_id = users.team_set_id,
+                         opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
+                     WHERE accounts_opportunities.account_id ='" . $value . "';";
+                   $resultUpdateTeams = $db->query($queryUpdateTeams);*/
 
                 //Actualizar el usuario asignado a registros de Backlog relacionados a las cuentas
                 //Obtener Backlogs de la cuenta que sean de meses futuros
