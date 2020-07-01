@@ -100,9 +100,9 @@
             $('#E2').addClass('done');
             $('#E1').addClass('done');
             //Valida la etapa No Cotizado
-            $("#SE3").removeClass('ocult');
-            $('#SE3').addClass('success');
-            $("#SE3").html("Ganada");
+            $("#SE4").removeClass('ocult');
+            $('#SE4').addClass('success');
+            $("#SE4").html("Ganada");
         }
         if (etapa=="10"){
             //Agrega clase current para sombrear en color actual al pipeline No Ganada
@@ -111,9 +111,9 @@
             $('#E2').addClass('done');
             $('#E1').addClass('done');
             //Valida la etapa No Cotizado
-            $("#SE3").removeClass('ocult');
-            $('#SE3').addClass('error');
-            $("#SE3").html("No Ganada");
+            $("#SE4").removeClass('ocult');
+            $('#SE4').addClass('error');
+            $("#SE4").html("No Ganada");
         }
     },
 })
