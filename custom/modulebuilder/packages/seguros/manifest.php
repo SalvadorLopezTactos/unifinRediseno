@@ -24,14 +24,14 @@ $manifest = array (
   ),
   'readme' => '',
   'key' => 'S',
-  'author' => '',
+  'author' => 'Tactos',
   'description' => 'Módulo para el producto Seguros en la gestión de Sugar CRM',
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'seguros',
-  'published_date' => '2020-07-01 01:33:40',
+  'published_date' => '2020-07-01 17:51:37',
   'type' => 'module',
-  'version' => 1593567222,
+  'version' => 1593625898,
   'remove_tables' => 'prompt',
 );
 
