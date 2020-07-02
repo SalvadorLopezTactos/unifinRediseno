@@ -214,6 +214,7 @@ array (
                 'name' => 'ejecutivo',
                 'studio' => 'visible',
                 'label' => 'LBL_EJECUTIVO',
+                'readonly' => true,
               ),
               5 => 
               array (

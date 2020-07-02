@@ -790,6 +790,49 @@ AF - 18-01-18
             </div>
         </div>
     </div>
+    <!-- Bloque 9 : Seguros -->
+    <div class="span4">
+        <div style="background-color: #f9f9f9">
+            <div>
+                <!-- Encabezado -->
+                <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseSeguros">
+                        <font color=#ffffff>
+                            <center><strong>Seguros - Venta Cruzada</strong></center>
+                        </font>
+                    </a>
+                </div>
+                <!-- Contenido -->
+                <div id="collapseSeguros" class="accordion-body in collapse" style="background-color: #ffffff">
+                    <!-- Línea 1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Total de Oportunidades</strong> </div>
+                        <div class="span6">{{ResumenCliente.seguros.total}}</div>
+                    </div>
+                    <!-- Línea 2 -->
+                    <div class="row-fluid" style="background-color: #ffffff">
+                        <div class="span6"><strong>Oportunidades Ganadas</strong> </div>
+                        <div class="span6">{{ResumenCliente.seguros.ganadas}}</div>
+                    </div>
+                    <!-- Línea 3 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Oportunidades En proceso</strong> </div>
+                        <div class="span6">{{ResumenCliente.seguros.proceso}}</div>
+                    </div>
+                    <!-- Línea 4 -->
+                    <div class="row-fluid"  style="background-color: #ffffff">
+                        <div class="span6"><strong>Prima Objetivo</strong></div>
+                        <div class="span6">$ {{customFormatNumber ResumenCliente.seguros.prima}}</div>
+                    </div>
+                    <!-- Línea 5 -->
+                    <div class="row-fluid"  style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Ingreso Incentivo</strong></div>
+                        <div class="span6">$ {{customFormatNumber ResumenCliente.seguros.ingreso}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Sección para diferenciar apartado de Productos Uniclick-->
 <br>
