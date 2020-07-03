@@ -225,6 +225,7 @@ array (
               array (
                 'name' => 'region',
                 'label' => 'LBL_REGION',
+                'readonly' => true,
               ),
               7 => 
               array (
@@ -320,6 +321,7 @@ array (
               array (
                 'name' => 'forma_pago',
                 'label' => 'LBL_FORMA_PAGO',
+                'readonly' => true,
               ),
               25 => 
               array (
@@ -335,6 +337,7 @@ array (
                   1 => 'base_rate',
                 ),
                 'label' => 'LBL_INGRESO_REF',
+                'readonly' => true,
               ),
             ),
           ),
