@@ -1600,7 +1600,7 @@ SQL;
                     "tipoPersona" => $opportunidad['tipo_persona'],
                     "nombreProducto" => $opportunidad['tipo_producto_c'],
                     "tipoOperacion" =>$opportunidad['tipo_de_operacion_c'],
-                    "monto" => 0 + $opportunidad['monto_c'],
+                    "monto" => 0 + $opportunidad['monto_gpo_emp_c'],
                     "montoPropuesta" => $opportunidad['monto_c'],
                     "montoAOperar" => 0 + $opportunidad['amount'],
                     "listaNegra" => 0 +  $opportunidad['lista_negra_c'],
