@@ -153,7 +153,7 @@
             var Estado = data[0]["Entidad Federativa"];
             var Regimen = data[0]["Régimen"];
             var Pais = "MEXICO";
-            //if(RFC.length == 12) Regimen = "Persona Moral";
+            if(RFC.length == 12) Regimen = "Persona Moral";
             if(Regimen == "Régimen de las Personas Físicas con Actividades Empresariales y Profesionales") Regimen = "Persona Fisica con Actividad Empresarial";
             if(Regimen != "Persona Fisica con Actividad Empresarial" && RFC.length == 13) Regimen = "Persona Fisica";
             if(Estado == "MEXICO") Estado = "ESTADO DE MEXICO";
