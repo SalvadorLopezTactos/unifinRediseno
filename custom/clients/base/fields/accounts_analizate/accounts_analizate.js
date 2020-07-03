@@ -1,7 +1,9 @@
 ({
     events: {
-        'click  .btn-Reenviar': 'ReenviaCorreo',
-        'click  .btn-Descargar': 'DescargaArchivo',
+        'click  .btn-ReenviarF': 'ReenviaCorreoF',
+        'click  .btn-DescargarF': 'DescargaArchivoF',
+        'click  .btn-ReenviarC': 'ReenviaCorreoC',
+        'click  .btn-DescargarC': 'DescargaArchivoC',
     },
 
     initialize: function (options) {
@@ -15,16 +17,23 @@
     },
 
 
-    DescargaArchivo: function (options) {
-        if (cont_nlzt.Financiera != undefined) {
-            if (cont_nlzt.Financiera.url_documento != null && cont_nlzt.Financiera.url_documento != "") {
-                $('.btn-Descargar').bind('click', false);
+    DescargaArchivo: function (empresa) {
+        if (cont_nlzt.Financiera != undefined || cont_nlzt.Credit!= undefined) {
+            //Valida tipo de empresa
+            if (empresa==1){
+                var archivo = cont_nlzt.Financiera.url_documento;
+            }else{
+                var archivo = cont_nlzt.Credit.url_documento;
+            }
+            if (archivo != null && archivo != "") {
+                $('.btn-DescargarF').bind('click', false);
+                $('.btn-DescargarC').bind('click', false);
                 App.alert.show('enventoDescargaPDF', {
                     level: 'process',
                     title: 'Generando descarga, por favor espere.',
                 });
                 //Peticion de servicio para obtener el documento con el id en url_documento
-                var archivo = cont_nlzt.Financiera.url_documento;
+                                
                 var host = App.config.analizate;
                 var direccion = host + archivo;
                 direccion = btoa(direccion);
@@ -36,7 +45,8 @@
                     success: _.bind(function (data) {
                         if (data != null) {
                             App.alert.dismiss('enventoDescargaPDF');
-                            $('.btn-Descargar').unbind('click', false);
+                            $('.btn-DescargarF').unbind('click', false);
+                            $('.btn-DescargarC').unbind('click', false);
                             //Para descarga del pdf
                             var archivo = 'data:application/octet-stream;base64,' + data;
                             //Crea elemento
@@ -60,8 +70,7 @@
         }
     },
 
-    ReenviaCorreo: function () {
-        if(this.model.get('tipo_registro_cuenta_c')=="5" || this.model.get('esproveedor_c')==true) {
+    ReenviaCorreo: function (empresa) {
             if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
                 app.alert.show('No Envio', {
                     level: 'error',
@@ -70,7 +79,8 @@
                 });
                 return;
             }
-            $('.btn-Reenviar').bind('click', false);
+            $('.btn-ReenviarF').bind('click', false);
+            $('.btn-ReenviarC').bind('click', false);
             App.alert.show('eventoenviomail', {
                 level: 'process',
                 title: 'Cargando, por favor espere.',
@@ -80,6 +90,33 @@
             var id = this.model.get('id');
             var link = '&UUID=' + id + '&RFC_CIEC=' + rfc;
 
+            // FECHA ACTUAL
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth()+1; //January is 0!
+            var dd = today.getDate();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            var secs = today.getSeconds();
+            var zona= new Date().getTimezoneOffset()/60;       
+
+            if(mm<10) {
+            mm = '0'+mm
+            }  
+            if(dd<10) {
+            dd = '0'+dd
+            }
+            if(hour<10){
+            hour='0'+hour
+            }
+            if(min<10){
+            min='0'+min
+            }
+            if(secs<10){
+            secs='0'+secs
+            }
+            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+
             //enviar elementos de la cuenta
             var api_params = {
                 "tipo": "1",
@@ -87,15 +124,16 @@
                 "documento": "",
                 "url_portal": link,
                 "url_documento": "",
-                "empresa": "1",
-                "fecha_actualizacion": "2020-02-24T16:49:00-06:00",
+                "empresa": empresa,
+                "fecha_actualizacion": fecha,
                 "anlzt_analizate_accountsaccounts_ida": this.model.id
             };
             var url = app.api.buildURL('ANLZT_analizate/', null, null);
             app.api.call('create', url, api_params, {
                 success: function (data) {
                     App.alert.dismiss('eventoenviomail');
-                    $('.btn-Reenviar').unbind('click', false);
+                    $('.btn-ReenviarF').unbind('click', false);
+                    $('.btn-ReenviarC').unbind('click', false);
                     app.alert.show('Correo_reenviado', {
                         level: 'success',
                         messages: 'Se ha enviado un nuevo correo a la cuenta.',
@@ -104,7 +142,8 @@
                 },
                 error: function (e) {
                     App.alert.dismiss('eventoenviomail');
-                    $('.btn-Reenviar').unbind('click', false);
+                    $('.btn-ReenviarF').unbind('click', false);
+                    $('.btn-ReenviarC').unbind('click', false);
                     app.alert.show('Correo_no_reenviado', {
                         level: 'error',
                         messages: 'No se ha podido enviar un nuevo correo a la cuenta.',
@@ -112,13 +151,22 @@
                     });
                 }
             });
-        }else{
-            app.alert.show('Cuenta_no_Proveedor', {
-                level: 'error',
-                messages: 'No se puede realizar esta acción debido a que la cuenta no es de tipo Proveedor.',
-                autoClose: false
-            });
-        }
+    },
+
+    ReenviaCorreoF: function () {
+      this.ReenviaCorreo(1);
+    },
+
+    ReenviaCorreoC: function () {
+        this.ReenviaCorreo(2);
+    },
+
+    DescargaArchivoF: function () {
+      this.DescargaArchivo(1);
+    },
+
+    DescargaArchivoC: function () {
+        this.DescargaArchivo(2);
     },
 
 })

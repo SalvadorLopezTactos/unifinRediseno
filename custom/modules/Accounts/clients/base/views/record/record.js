@@ -5221,6 +5221,7 @@
     get_analizate: function () {
         //Extiende This
         this.Financiera = [];
+        this.Credit = [];
         //this.Credit = [];
         var id = this.model.id;
         //Forma Petición de datos
@@ -5230,7 +5231,8 @@
             var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null);
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
-                    cont_nlzt.Financiera = data;
+                    cont_nlzt.Financiera = data['Financiera'];
+                    cont_nlzt.Credit = data['Credit'];
                     cont_nlzt.render();
                 }, contexto_cuenta)
             });
