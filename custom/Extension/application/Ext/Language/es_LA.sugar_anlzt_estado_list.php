@@ -1,5 +1,5 @@
 <?php
- // created: 2020-02-19 17:40:58
+ // created: 2020-07-03 10:09:19
 
 $app_list_strings['anlzt_estado_list']=array (
   '' => '',
@@ -8,4 +8,5 @@ $app_list_strings['anlzt_estado_list']=array (
   3 => 'En descarga',
   4 => 'Descarga completada',
   5 => 'Analizate cargado',
+  6 => 'Incorrecta',
 );
