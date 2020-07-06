@@ -558,14 +558,22 @@
 		{
             success: _.bind(function (data)
 			{
-				var duplicado = 0;
+                var duplicado = 0;
+                var mensaje = '';
                 if (data.records.length > 0)
 				{
                     $(data.records).each(function (index, value)
 					{
                         if (value.estatus_c != "K" && value.tct_etapa_ddw_c != "CL" && value.tct_etapa_ddw_c != "R")
 						{
+                            mensaje = "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.";
                             duplicado = 1;
+                        
+                        } else if (value.tct_etapa_ddw_c == "CL" && (value.tipo_producto_c == "1" || value.tipo_producto_c == "4")){
+
+                            mensaje = "No es posible crear una Pre-solicitud cuando ya se tiene una línea de crédito autorizada.";
+                            duplicado = 1;
+
                         }
                     });
                 }
@@ -573,10 +581,10 @@
 				{
 					app.alert.show("Solicitud existente", {
 						level: "error",
-						title: "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.",
+						title: mensaje,
 						autoClose: false
 					});
-					app.error.errorName2Keys['custom_message'] = 'No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.';
+					app.error.errorName2Keys['custom_message'] = mensaje;
 					errors['account_name_2'] = errors['account_name_2'] || {};
 					errors['account_name_2'].custom_message = true;
 				}
