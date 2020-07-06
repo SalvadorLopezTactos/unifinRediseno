@@ -32,25 +32,17 @@ class getDireccionCPQR extends SugarApi
 
     }
 
-
     public function getAddressByCPQR($api, $args)
     {
         $colonia_QR = $args['colonia_rfc'];
         $cod_postal=$args['cp'];
-        //$colonia_QR = 'COLONIA CRM4';
         $ciudad_QR = $args['ciudad_rfc'];
-        $GLOBALS['log']->fatal("colonia " . $colonia_QR . "  ciudad " . $ciudad_QR);
-
         $call_api = new GetDireccionesCP();
         $resultado = $call_api->getAddressByCP($api, $args);
-
-       // $GLOBALS['log']->fatal("respuesta servicio uno " . print_r($resultado, true));
         $arr_colonias = $resultado['colonias'];
         $pais_id = intval(substr($resultado['idCP'], 0, 3));
         $estado_id = intval(substr($resultado['idCP'], 3, 3));
         $municipio_id = intval(substr($resultado['idCP'], 6, 3));
-
-        $GLOBALS['log']->fatal("pais" . $pais_id . " estado ". $estado_id ." municipio ". $municipio_id);
 
         $colonia_existe = false;
         foreach ($arr_colonias as $colonia) {
@@ -62,17 +54,10 @@ class getDireccionCPQR extends SugarApi
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
-
             $resultado = $call_api->getAddressByCP($api, $args);
-
         }
 
-        $GLOBALS['log']->fatal("colonias arreglo " . $result);
-        $GLOBALS['log']->fatal("nuevas colonias " . print_r($resultado,true));
-
-
         return $resultado;
-
     }
 
     public function insertColonia($pais,$estado,$municipio,$cp,$colonia)
