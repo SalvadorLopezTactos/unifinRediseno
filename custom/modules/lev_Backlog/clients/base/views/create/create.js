@@ -543,6 +543,9 @@
                     case '8':
                         promotor=data.user_id7_c; //uniclick
                         break;
+                    case '9':
+                        promotor=data.user_id7_c; //unilease, mismo que uniclick
+                        break;
                     default:
                         promotor=data.user_id_c;
                         break;
