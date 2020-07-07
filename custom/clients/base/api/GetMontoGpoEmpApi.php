@@ -44,7 +44,7 @@ class GetMontoGpoEmpApi extends SugarApi
             inner join opportunities opp on opp.id = ap.opportunity_id AND opp.deleted=0
             inner join opportunities_cstm oppc on oppc.id_c = opp.id
             where (a.id = '{$parentID}' or a.parent_id = '{$parentID}')
-            and oppc.estatus_c not in ('K','R','CN')";
+            and oppc.estatus_c = 'N'";
             // $GLOBALS['log']->fatal("query ".$query);
             $result = $GLOBALS['db']->query($query);
 

@@ -2425,6 +2425,15 @@
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
                     // console.log("montoTotalGpoEmp " + montoTotalGpoEmp);
                     // console.log("numCuentasGpoEmp " + numCuentasGpoEmp);
+                    if (self.model.get('estatus_c') != 'N' && checkRI != true){
+
+                        montoTotalGpoEmp = montoTotalGpoEmp + self.model.get('monto_c');
+
+                    } else if (self.model.get('estatus_c') == 'N' && checkRI == true){
+
+                        montoTotalGpoEmp = montoTotalGpoEmp + self.model.get('monto_ratificacion_increment_c');
+
+                    }
 
                     if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0 && numCuentasGpoEmp > 1) {
                         //Setea el monto total de grupo empresarial en el campo monto_gpo_emp_c
