@@ -233,23 +233,28 @@ SQL;
 
                 //Actualizar el usuario asignado a registros de Backlog relacionados a las cuentas
                 //Obtener Backlogs de la cuenta que sean de meses futuros
-                if ($product == 'LEASING') {
+
+//                $usr_prd_principal=$current_user->tipodeproducto_c;
+
+            //    if ($product == 'LEASING') {
                     $anio_actual = date("Y");
                     $mes_actual = intval(date("n"));
                     $hoy = date("d");
                     $condicion = '';
                     if ($optRadio == 'siguientes') {
-                        $condicion = " AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
+                        $condicion = "AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
                     } else {
                         $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
                     }
 
                     $bl_cuenta = "SELECT b.id, b.mes,b.description
-  FROM
-      lev_backlog b
-  WHERE
-      b.account_id_c = '{$value}'" . $condicion . "
-          AND deleted = 0;";
+FROM
+  lev_backlog b
+  INNER JOIN lev_backlog_cstm cstm
+  ON cstm.id_c=b.id
+WHERE
+  b.account_id_c = '{$value}'" . $condicion . "
+  AND cstm.producto_c='{$producto}' AND deleted = 0";
 
                     $result_bl_cuentas = $db->query($bl_cuenta);
 
@@ -271,7 +276,7 @@ SQL;
                         }
 
                     }
-                }
+//                }
 
 
                 $query = <<<SQL
