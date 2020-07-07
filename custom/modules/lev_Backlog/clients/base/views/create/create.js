@@ -552,7 +552,6 @@
 
                 //Obtiene el promotor del cliente, equipo y region del mismo
                 var usuario = app.data.createBean('Users',{id:promotor});
-                console.log('DESDENUEVOCREATEBL');
                 usuario.fetch({
                     success: _.bind(function(modelo) {
                         app.alert.dismiss('getDetailUser');
