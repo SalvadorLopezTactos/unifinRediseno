@@ -245,3 +245,11 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'ActualizaOrigen'
 );
+
+$hook_array['before_save'][] = Array(
+    22,
+    'Actualiza numero empleados intervalo',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'ActualizaEmpleadosDDW'
+);

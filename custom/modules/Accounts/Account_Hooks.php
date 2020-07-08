@@ -444,7 +444,7 @@ SQL;
     {
         global $current_user;
         //Tipo Cuenta: 3-Cliente, 4-Persona, 5-Proveedor **** SubTipo-Cuenta: 7-Interesado
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7") || !empty($bean->id_uniclick_c) )) {
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_cuenta_c == '3' || $bean->tipo_registro_cuenta_c == '5' || ($bean->tipo_registro_cuenta_c == '4' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7") || !empty($bean->id_uniclick_c))) {
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(1, $bean);
@@ -553,7 +553,6 @@ SQL;
                 //FIN DE PARAMETROS
 
 
-
                 //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "CZ: parametros para UNI2-01 antes de obtenSolicitud: " . print_r($row, 1));
                 $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : solicitudCreditoResultado " . print_r($solicitudCreditoResultado, 1));
@@ -612,7 +611,6 @@ SQL;
              *realizado.
              *Conservar los campos que sean obligatorios de acuerdo a la opción
              *seleccionada
-
              */ // Tipo Cuenta 2-Prospecto, subTipo Cuenta 7-Interesado
             if ((($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_cuenta_c == "2" && $bean->subtipo_registro_cuenta_c == "7")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c)) {
                 $callApi = new UnifinAPI();
@@ -744,6 +742,7 @@ SQL;
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
         }
     }
+
     /*** CVV FIN **/
     public function insertaPLDUNICS($bean = null, $event = null, $args = null)
     {
@@ -793,7 +792,7 @@ SQL;
                         $Rel->relaciones_activas = "^Contacto^";
                         $Rel->tipodecontacto = "^Promocion^";
                         $Rel->assigned_user_id = $bean->assigned_user_id;
-                        $Rel->team_set_id  = $bean->team_set_id;
+                        $Rel->team_set_id = $bean->team_set_id;
                         $Rel->team_id = $bean->team_id;
                         $Rel->save();
 
@@ -814,6 +813,7 @@ SQL;
             }
         }
     }
+
     /*
      * @author Carlos Zaragoza Ortiz
      * @brief Envia lista de correos de un account al servicio de UNICs
@@ -836,7 +836,7 @@ SQL;
         while ($row = $db->fetchByAssoc($queryResult)) {
             $id = $row['id'];
             $cliente = $row['idcliente_c'];
-            $correo[] =  array(
+            $correo[] = array(
                 "GuidMail" => $row['id'],
                 "Email" => $row['email_address'],
                 "Estado" => $row['deleted'],
@@ -856,7 +856,8 @@ SQL;
             $GLOBALS['log']->fatal(" <" . $current_user->user_name . "> : RESULTADO", print_r($resultado, true));
         }
     }
-    /** @var Account $bean*/
+
+    /** @var Account $bean */
     public function rfcDuplicate($bean, $event, $args)
     {
         global $db, $current_user;
@@ -1179,6 +1180,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean->user_id7_c = $idSinGestor;
         }
     }
+
     public function idUniclick($bean = null, $event = null, $args = null)
     {
         //Valida que no exista id uniclick duplicado
@@ -1275,7 +1277,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '1') ? '5' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
                 //Caso especial: Alta portal CA
-                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c!='4' && $bean->tipo_registro_cuenta_c!='5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
+                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
                     $beanprod->tipo_cuenta = "2"; //2-Prospecto
                     $beanprod->subtipo_cuenta = "8"; //Integración de expediente
                     $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
@@ -1382,16 +1384,18 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
-    public function set_account_mambu($bean=null, $event= null, $args= null){
-        global $sugar_config,$app_list_strings;
-        $bank = $app_list_strings['banco_list']; 
+    public function set_account_mambu($bean = null, $event = null, $args = null)
+    {
+        global $sugar_config, $app_list_strings;
+        $bank = $app_list_strings['banco_list'];
         //Cliente con Línea Vigente: 3,18
-        if($bean->subtipo_registro_cuenta_c=='18' && $bean->tipo_registro_cuenta_c=='3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/ $bean->encodedkey_mambu_c ==""){
+        if ($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/
+            $bean->encodedkey_mambu_c == "") {
             //variables para consumo de servicio
-            $url=$sugar_config['url_mambu_gral'].'groups';	
-            $user=$sugar_config['user_mambu'];
-            $pwd=$sugar_config['pwd_mambu'];
-            $auth_encode=base64_encode( $user.':'.$pwd );
+            $url = $sugar_config['url_mambu_gral'] . 'groups';
+            $user = $sugar_config['user_mambu'];
+            $pwd = $sugar_config['pwd_mambu'];
+            $auth_encode = base64_encode($user . ':' . $pwd);
             //variables para payload
             $id_crm = $bean->id;
             $nombre = '';
@@ -1403,32 +1407,32 @@ where rfc_c = '{$bean->rfc_c}' and
             $nombre = $bean->tipodepersona_c != 'Persona Moral' ? $nombreaccount : $razon_social;
 
             //Obteniendo referencias bancarias
-            $array_cta_bancaria=array();
+            $array_cta_bancaria = array();
             if ($bean->load_relationship('cta_cuentas_bancarias_accounts')) {
-                $ctas_bancarias=$bean->cta_cuentas_bancarias_accounts->getBeans();
+                $ctas_bancarias = $bean->cta_cuentas_bancarias_accounts->getBeans();
                 if (!empty($ctas_bancarias)) {
                     foreach ($ctas_bancarias as $cta) {
-                         $domiciliacion="";
+                        $domiciliacion = "";
                         //Condicion para envio de domiciliacion
-                        $comparacion= strpos($cta->usos, "^1^");
-                        if ($comparacion ===false){
-                            $domiciliacion="FALSE";
-                        }else{
-                            $domiciliacion="TRUE";
+                        $comparacion = strpos($cta->usos, "^1^");
+                        if ($comparacion === false) {
+                            $domiciliacion = "FALSE";
+                        } else {
+                            $domiciliacion = "TRUE";
                         }
-                        $nombre_banco=$bank[$cta->banco];
-                        $new_cta_bancaria=array(
-                            "_nombre_banco_cliente"=>$nombre_banco,
-                            "_domiciliacion"=>$domiciliacion,
-                            "_guid_crm"=>$cta->id
+                        $nombre_banco = $bank[$cta->banco];
+                        $new_cta_bancaria = array(
+                            "_nombre_banco_cliente" => $nombre_banco,
+                            "_domiciliacion" => $domiciliacion,
+                            "_guid_crm" => $cta->id
                         );
-                        if($cta->cuenta!=""){
-                            $new_cta_bancaria['_numero_cuenta_cliente']=$cta->cuenta;
+                        if ($cta->cuenta != "") {
+                            $new_cta_bancaria['_numero_cuenta_cliente'] = $cta->cuenta;
                         }
-                        if($cta->clabe!=""){
-                            $new_cta_bancaria['_clabe_interbancaria']=$cta->clabe;
+                        if ($cta->clabe != "") {
+                            $new_cta_bancaria['_clabe_interbancaria'] = $cta->clabe;
                         }
-                        array_push($array_cta_bancaria,$new_cta_bancaria);
+                        array_push($array_cta_bancaria, $new_cta_bancaria);
                     }
                 }
             }
@@ -1440,8 +1444,8 @@ where rfc_c = '{$bean->rfc_c}' and
                     "_ref_bancaria" => $bean->referencia_bancaria_c
                 ),
             );
-            if(count($array_cta_bancaria)>0){
-               $body['_cuentas_bancarias_clientes']=$array_cta_bancaria;
+            if (count($array_cta_bancaria) > 0) {
+                $body['_cuentas_bancarias_clientes'] = $array_cta_bancaria;
             }
             $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
@@ -1512,14 +1516,14 @@ where rfc_c = '{$bean->rfc_c}' and
             }
         }
     }
-    
+
     public function ActualizaTipo($bean = null, $event = null, $args = null)
     {
         global $db;
         global $app_list_strings;
         // Tipo y Subtipo de Cuenta
-        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c],$app_list_strings['tipo_registro_list']);
-        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c],$app_list_strings['subtipo_cuenta_list']);
+        $tipo = array_search($app_list_strings['tipo_registro_cuenta_list'][$bean->tipo_registro_cuenta_c], $app_list_strings['tipo_registro_list']);
+        $subtipo = array_search($app_list_strings['subtipo_registro_cuenta_list'][$bean->subtipo_registro_cuenta_c], $app_list_strings['subtipo_cuenta_list']);
         $query = "update accounts_cstm set tipo_registro_c = '{$tipo}', subtipo_cuenta_c = '{$subtipo}' where id_c = '{$bean->id}'";
         $queryResult = $db->query($query);
         // Resumen Vista 360
@@ -1528,34 +1532,35 @@ where rfc_c = '{$bean->rfc_c}' and
         $bean->load_relationship('accounts_uni_productos_1');
         $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
         foreach ($relatedBeans as $rel) {
-            if($rel->tipo_producto == 1) {
-                $beanResumen->tct_tipo_l_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
-                $beanResumen->tct_subtipo_l_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+            if ($rel->tipo_producto == 1) {
+                $beanResumen->tct_tipo_l_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta], $app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_l_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta], $app_list_strings['subtipo_cuenta_list']);
                 $beanResumen->tct_tipo_cuenta_l_c = $rel->tipo_subtipo_cuenta;
             }
-            if($rel->tipo_producto == 3) {
-                $beanResumen->tct_tipo_ca_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
-                $beanResumen->tct_subtipo_ca_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+            if ($rel->tipo_producto == 3) {
+                $beanResumen->tct_tipo_ca_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta], $app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_ca_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta], $app_list_strings['subtipo_cuenta_list']);
                 $beanResumen->tct_tipo_cuenta_ca_c = $rel->tipo_subtipo_cuenta;
             }
-            if($rel->tipo_producto == 4) {
-                $beanResumen->tct_tipo_f_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
-                $beanResumen->tct_subtipo_f_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+            if ($rel->tipo_producto == 4) {
+                $beanResumen->tct_tipo_f_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta], $app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_f_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta], $app_list_strings['subtipo_cuenta_list']);
                 $beanResumen->tct_tipo_cuenta_f_c = $rel->tipo_subtipo_cuenta;
             }
-            if($rel->tipo_producto == 6) {
-                $beanResumen->tct_tipo_fl_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
-                $beanResumen->tct_subtipo_fl_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+            if ($rel->tipo_producto == 6) {
+                $beanResumen->tct_tipo_fl_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta], $app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_fl_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta], $app_list_strings['subtipo_cuenta_list']);
                 $beanResumen->tct_tipo_cuenta_fl_c = $rel->tipo_subtipo_cuenta;
             }
-            if($rel->tipo_producto == 8) {
-                $beanResumen->tct_tipo_uc_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta],$app_list_strings['tipo_registro_list']);
-                $beanResumen->tct_subtipo_uc_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta],$app_list_strings['subtipo_cuenta_list']);
+            if ($rel->tipo_producto == 8) {
+                $beanResumen->tct_tipo_uc_txf_c = array_search($app_list_strings['tipo_registro_cuenta_list'][$rel->tipo_cuenta], $app_list_strings['tipo_registro_list']);
+                $beanResumen->tct_subtipo_uc_txf_c = array_search($app_list_strings['subtipo_registro_cuenta_list'][$rel->subtipo_cuenta], $app_list_strings['subtipo_cuenta_list']);
                 $beanResumen->tct_tipo_cuenta_uc_c = $rel->tipo_subtipo_cuenta;
             }
         }
         $beanResumen->save();
     }
+
     public function ActualizaOrigen($bean_account = null, $event = null, $args = null)
     {
         switch ($bean_account->origen_cuenta_c) {
@@ -1704,8 +1709,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 break;
         }
 
-        switch ($bean_account->prospeccion_propia_c)
-        {
+        switch ($bean_account->prospeccion_propia_c) {
             case 1:
                 $bean_account->metodo_prospeccion_c = "llamada_en_frio";
 
@@ -1719,6 +1723,41 @@ where rfc_c = '{$bean->rfc_c}' and
 
                 break;
         }
+
+    }
+
+    public function ActualizaEmpleadosDDW($bean_account = null, $event = null, $args = null)
+    {
+
+        $ddw_empleados = $bean_account->empleados_c;
+        $txt_empleados = $bean_account->total_empleados_c;
+
+        if (($txt_empleados > 0) && (!empty($txt_empleados))) {
+
+            if (($txt_empleados > 0) && ($txt_empleados <=10)) {
+                $bean_account->empleados_c = '0a10';
+            }
+            if (($txt_empleados > 10) && ($txt_empleados <=50)) {
+                $bean_account->empleados_c = '11a50';
+            }
+            if (($txt_empleados > 50) && ($txt_empleados <=100)) {
+                $bean_account->empleados_c = '51a100';
+            }
+            if (($txt_empleados > 100) && ($txt_empleados <=250)) {
+                $bean_account->empleados_c = '101a250';
+            }
+            if (($txt_empleados > 250) && ($txt_empleados <=500)) {
+                $bean_account->empleados_c = '251a500';
+            }
+            if (($txt_empleados > 500) && ($txt_empleados <=1000)) {
+                $bean_account->empleados_c = '501a100';
+            }
+            if ($txt_empleados > 1000) {
+                $bean_account->empleados_c = '1001';
+            }
+
+        }
+
 
     }
 }
