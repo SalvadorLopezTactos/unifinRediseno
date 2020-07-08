@@ -2440,6 +2440,8 @@
                         self.model.set('monto_gpo_emp_c', montoTotalGpoEmp);
                         //Mensaje del monto total de grupo empresarial cuando el check R/I se Activa
                         if (checkRI == true) {
+
+                            app.alert.dismiss('Moto Modificado');
                             app.alert.show('message-gpo-emp', {
                                 level: 'info',
                                 title: 'El disponible del grupo empresarial al que perteneces, después de autorizar esta solicitud de Incremento será de $' + montoTotalGpoEmp.formatMoney(2, '.', ','),
