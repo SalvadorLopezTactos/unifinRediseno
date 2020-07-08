@@ -2423,27 +2423,26 @@
                 success: function (data) {
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
-                    // console.log("montoTotalGpoEmp " + montoTotalGpoEmp);
-                    // console.log("numCuentasGpoEmp " + numCuentasGpoEmp);
+                    
                     if (self.model.get('estatus_c') != 'N' && checkRI != true){
 
-                        montoTotalGpoEmp = montoTotalGpoEmp + self.model.get('monto_c');
+                        montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
 
                     } else if (self.model.get('estatus_c') == 'N' && checkRI == true){
 
-                        montoTotalGpoEmp = montoTotalGpoEmp + self.model.get('monto_ratificacion_increment_c');
+                        montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
 
                     }
 
                     if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0 && numCuentasGpoEmp > 1) {
                         //Setea el monto total de grupo empresarial en el campo monto_gpo_emp_c
                         console.log("montoTotalGpoEmp " + montoTotalGpoEmp);
-                        self.model.set('monto_gpo_emp_c',montoTotalGpoEmp);
+                        self.model.set('monto_gpo_emp_c', montoTotalGpoEmp);
                         //Mensaje del monto total de grupo empresarial cuando el check R/I se Activa
                         if (checkRI == true) {
                             app.alert.show('message-gpo-emp', {
                                 level: 'info',
-                                title: 'El disponible del grupo empresarial al que perteneces, después de autorizar esta solicitud de Incremento será de $'+montoTotalGpoEmp.formatMoney(2, '.', ','),
+                                title: 'El disponible del grupo empresarial al que perteneces, después de autorizar esta solicitud de Incremento será de $' + montoTotalGpoEmp.formatMoney(2, '.', ','),
                                 autoClose: false
                             });
                         }
