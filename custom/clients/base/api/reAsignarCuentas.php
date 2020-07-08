@@ -113,7 +113,7 @@ class reAsignarCuentas extends SugarApi
                                 }
                                 break;
                             case 'UNILEASE':
-                                if ($asignaFecha->tipo_producto == '9') { //Uniclick
+                                if ($asignaFecha->tipo_producto == '8') { //Uniclick
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
