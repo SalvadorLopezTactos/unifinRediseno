@@ -59,7 +59,9 @@ SQL;
               $query = <<<SQL
 UPDATE opportunities_cstm
 SET /*tipo_de_operacion_c = 'LINEA_NUEVA', */ plazo_ratificado_incremento_c ="",
-ratificacion_incremento_c=0, monto_ratificacion_increment_c=0.00,
+ratificacion_incremento_c=0, 
+monto_gpo_emp_c = monto_gpo_emp_c-monto_ratificacion_increment_c,
+monto_ratificacion_increment_c=0.00,
 ri_ca_tasa_c = 0,
  ri_deposito_garantia_c = 0,
  ri_porcentaje_ca_c = 0,
