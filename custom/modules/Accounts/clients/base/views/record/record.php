@@ -813,12 +813,13 @@ array (
                     array (
                         'name' => 'total_empleados_c',
                         'label' => 'LBL_TOTAL_EMPLEADOS_C',
+                        'readonly' => true,
+
                     ),
               9 => 
               array (
                 'name' => 'empleados_c',
                 'label' => 'LBL_EMPLEADOS',
-                'readonly' => true,
               ),
                 10 =>
                     array (
