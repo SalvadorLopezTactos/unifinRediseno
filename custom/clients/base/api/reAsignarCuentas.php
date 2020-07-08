@@ -52,6 +52,8 @@ class reAsignarCuentas extends SugarApi
             $user_field = "user_id6_c";
         } else if ($product == "UNICLICK") {
             $user_field = "user_id7_c";
+        }else if ($product == "UNILEASE") {
+            $user_field = "user_id7_c";
         }
 
 
@@ -110,6 +112,13 @@ class reAsignarCuentas extends SugarApi
                                     $asignaFecha->assigned_user_id = $reAsignado;
                                 }
                                 break;
+                            case 'UNILEASE':
+                                if ($asignaFecha->tipo_producto == '9') { //Uniclick
+                                    // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
+                                    $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                    $asignaFecha->assigned_user_id = $reAsignado;
+                                }
+                                break;
                         }
                         $asignaFecha->save();
                     }
@@ -129,6 +138,9 @@ class reAsignarCuentas extends SugarApi
                         $account->user_id6_c = $reAsignado;
                         break;
                     case 'UNICLICK':
+                        $account->user_id7_c = $reAsignado;
+                        break;
+                    case 'UNILEASE':
                         $account->user_id7_c = $reAsignado;
                         break;
                 }
@@ -208,6 +220,8 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FACTORAJE') $producto = 4;
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
+                if ($product == 'UNILEASE') $producto = 9;
+
                 $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
 
                 $query = <<<SQL
