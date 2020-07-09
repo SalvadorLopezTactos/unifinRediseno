@@ -1750,7 +1750,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 $bean_account->empleados_c = '251a500';
             }
             if (($txt_empleados > 500) && ($txt_empleados <=1000)) {
-                $bean_account->empleados_c = '501a100';
+                $bean_account->empleados_c = '501a1000';
             }
             if ($txt_empleados > 1000) {
                 $bean_account->empleados_c = '1001';
