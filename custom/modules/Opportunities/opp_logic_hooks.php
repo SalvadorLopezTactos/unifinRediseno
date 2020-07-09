@@ -997,6 +997,7 @@ SQL;
                 if ($bean->estatus_c=="N") { //Etapa solicitud= N= Autorizada
                     $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                     $this->actualizaTipoCuenta('3','18',$cliente,$producto);
+                    $bean->tipo_operacion_c = '2';
                 }
 
             }
