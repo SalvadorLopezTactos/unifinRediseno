@@ -32,28 +32,16 @@ array (
               ),
               2 => 
               array (
-                'name' => 'prima_obj',
-                'label' => 'LBL_PRIMA_OBJ',
+                'name' => 'prima_obj_c',
+                'label' => 'LBL_PRIMA_OBJ_C',
                 'enabled' => true,
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'currency_format' => true,
                 'default' => true,
               ),
               3 => 
               array (
-                'name' => 'prima_neta',
-                'label' => 'LBL_PRIMA_NETA',
+                'name' => 'prima_neta_c',
+                'label' => 'LBL_PRIMA_NETA_C',
                 'enabled' => true,
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'currency_format' => true,
                 'default' => true,
               ),
               4 => 

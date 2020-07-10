@@ -1,5 +1,5 @@
 <?php
-// created: 2020-07-01 17:02:05
+// created: 2020-07-09 10:23:31
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -15,31 +15,19 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ETAPA',
     'width' => 10,
   ),
-  'prima_obj' => 
+  'prima_obj_c' => 
   array (
-    'type' => 'currency',
-    'default' => true,
-    'related_fields' => 
-    array (
-      0 => 'currency_id',
-      1 => 'base_rate',
-    ),
-    'vname' => 'LBL_PRIMA_OBJ',
-    'currency_format' => true,
+    'type' => 'decimal',
+    'vname' => 'LBL_PRIMA_OBJ_C',
     'width' => 10,
+    'default' => true,
   ),
-  'prima_neta' => 
+  'prima_neta_c' => 
   array (
-    'type' => 'currency',
-    'default' => true,
-    'related_fields' => 
-    array (
-      0 => 'currency_id',
-      1 => 'base_rate',
-    ),
-    'vname' => 'LBL_PRIMA_NETA',
-    'currency_format' => true,
+    'type' => 'decimal',
+    'vname' => 'LBL_PRIMA_NETA_C',
     'width' => 10,
+    'default' => true,
   ),
   'fecha_ini' => 
   array (

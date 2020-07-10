@@ -1032,7 +1032,7 @@ class ResumenClienteAPI extends SugarApi
             foreach($relatedSeguros as $seguro) {
               if($seguro->etapa == 9) {
                 $ganadas = $ganadas + 1;
-                $prima += $seguro->prima_obj;
+                $prima += $seguro->prima_obj_c;
                 $ingreso += $seguro->ingreso_inc;
               }
               else {

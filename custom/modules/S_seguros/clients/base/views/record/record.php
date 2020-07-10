@@ -223,9 +223,6 @@ array (
               ),
               6 => 
               array (
-                'name' => 'region',
-                'label' => 'LBL_REGION',
-                'readonly' => true,
               ),
               7 => 
               array (
@@ -235,49 +232,44 @@ array (
               ),
               8 => 
               array (
+                'name' => 'region',
+                'label' => 'LBL_REGION',
+                'readonly' => true,
               ),
               9 => 
+              array (
+                'name' => 'empleados_c',
+                'studio' => 'visible',
+                'label' => 'LBL_EMPLEADOS',
+              ),
+              10 => 
+              array (
+                'name' => 'departamento_c',
+                'label' => 'LBL_DEPARTAMENTO',
+                'readonly' => true,
+              ),
+              11 => 
               array (
                 'name' => 'etapa',
                 'label' => 'LBL_ETAPA',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'area',
                 'label' => 'LBL_AREA',
               ),
-              11 => 
-              array (
-                'name' => 'prima_obj',
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'label' => 'LBL_PRIMA_OBJ',
-              ),
-              12 => 
-              array (
-                'name' => 'tipo_cambio_n',
-                'label' => 'LBL_TIPO_CAMBIO_N',
-              ),
               13 => 
               array (
-                'name' => 'info_actual',
-                'label' => 'LBL_INFO_ACTUAL',
+                'name' => 'monedas_c',
+                'label' => 'LBL_MONEDAS',
               ),
               14 => 
               array (
               ),
               15 => 
               array (
-                'name' => 'prima_neta',
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'label' => 'LBL_PRIMA_NETA',
+                'name' => 'prima_obj_c',
+                'label' => 'LBL_PRIMA_OBJ_C',
               ),
               16 => 
               array (
@@ -286,49 +278,21 @@ array (
               ),
               17 => 
               array (
-                'name' => 'compania',
-                'label' => 'LBL_COMPANIA',
-              ),
-              18 => 
-              array (
-                'name' => 'forma_pago_act',
-                'label' => 'LBL_FORMA_PAGO_ACT',
-              ),
-              19 => 
-              array (
-                'name' => 'siniestralidad',
-                'label' => 'LBL_SINIESTRALIDAD',
-              ),
-              20 => 
-              array (
-              ),
-              21 => 
-              array (
-                'name' => 'fecha_ini',
-                'label' => 'LBL_FECHA_INI',
-              ),
-              22 => 
-              array (
-                'name' => 'fecha_fin',
-                'label' => 'LBL_FECHA_FIN',
-              ),
-              23 => 
-              array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              24 => 
+              18 => 
               array (
                 'name' => 'forma_pago',
                 'label' => 'LBL_FORMA_PAGO',
                 'readonly' => true,
               ),
-              25 => 
+              19 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              26 => 
+              20 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -339,9 +303,68 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
+              21 => 
+              array (
+                'name' => 'info_actual',
+                'label' => 'LBL_INFO_ACTUAL',
+              ),
+              22 => 
+              array (
+              ),
             ),
           ),
           2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'prima_neta_c',
+                'label' => 'LBL_PRIMA_NETA_C',
+              ),
+              1 => 
+              array (
+                'name' => 'tipo_cambio_n',
+                'label' => 'LBL_TIPO_CAMBIO_N',
+              ),
+              2 => 
+              array (
+                'name' => 'compania',
+                'label' => 'LBL_COMPANIA',
+              ),
+              3 => 
+              array (
+                'name' => 'forma_pago_act',
+                'label' => 'LBL_FORMA_PAGO_ACT',
+              ),
+              4 => 
+              array (
+                'name' => 'siniestralidad',
+                'label' => 'LBL_SINIESTRALIDAD',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'name' => 'fecha_ini',
+                'label' => 'LBL_FECHA_INI',
+              ),
+              7 => 
+              array (
+                'name' => 'fecha_fin',
+                'label' => 'LBL_FECHA_FIN',
+              ),
+            ),
+          ),
+          3 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
