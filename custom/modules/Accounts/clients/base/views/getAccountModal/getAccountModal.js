@@ -296,7 +296,13 @@
 		var user_pr="";
 		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
             success: _.bind(function (data) { 
-				user_pr = data.last_name;				
+				user_pr = data.last_name;
+				Object.values(list_solicitud).forEach(function (value) {
+					if (value == user_pr) {
+						console.log(value);
+						bandera = true;
+					}
+				});
             }, this),
             failure: _.bind(function (data) {
                 app.alert.dismiss('error');
@@ -305,13 +311,6 @@
 				app.alert.dismiss('error');
             }, this)
          });
-		 
-		Object.values(list_solicitud).forEach(function (value) {
-			if (value == user_pr) {
-				console.log(user_pr);
-				bandera = true;
-			}
-		});
 			
         return bandera;
     },

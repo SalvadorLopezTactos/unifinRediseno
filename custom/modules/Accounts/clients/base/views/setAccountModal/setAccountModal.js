@@ -227,26 +227,26 @@
 		
 		var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
 		var user_pr="";
-		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
-            success: _.bind(function (data) {                   
-				user_pr = data.last_name;
-            }, this),
-			failure: _.bind(function (data) {
-                app.alert.dismiss('error');
-            }, this),
-			error: _.bind(function (data) {
-				app.alert.dismiss('error');
-            }, this)
-			
-        });
 		
-		Object.values(list_solicitud).forEach(function (value) {
-			if (value == user_pr) {
-				console.log(user_pr);
-				bandera = true;
-			}
-		});
-			
+		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
+                success: _.bind(function (data) {                   
+					user_pr = data.last_name;
+					Object.values(list_solicitud).forEach(function (value) {
+						if (value == user_pr) {
+							console.log(user_pr);
+							bandera = true;
+						}
+					});
+                }, this),
+                failure: _.bind(function (data) {
+                    app.alert.dismiss('error');
+
+                }, this),
+                error: _.bind(function (data) {
+                    app.alert.dismiss('error');
+
+                }, this)
+            });
         return bandera;
     },
 	

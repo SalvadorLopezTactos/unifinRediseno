@@ -296,7 +296,7 @@
     /** Asignacion modal */
     hideButtonsModal_Account: function () {
         var Boton1 = this.getField("get_account_asesor");
-        var Boton2 = this.getField("send_accounts_asesor");
+        var Boton2 = this.getField("send_account_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
         var puestosBtn1 = ['27' , '31'];
