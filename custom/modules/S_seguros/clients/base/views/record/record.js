@@ -4,6 +4,7 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         this.model.on("change:referenciador",this.addRegion, this);
+        this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));        
     },
 
@@ -26,10 +27,22 @@
       });
     },
 
+    adDepartment: function() {
+      var empid = this.model.get('user_id2_c');
+      app.api.call("read", app.api.buildURL("Employees/" + empid, null, null, {}), null, {
+        success: _.bind(function (data) {
+          this.model.set('departamento_c',data.no_empleado_c);
+        }, this)
+      });
+    },
+
     validaFecha: function(fields, errors, callback) {
       var hoy = new Date();
       var fecha = new Date(this.model.get('fecha_req'));
-      hoy.setDate(hoy.getDate()-10);
+      for(dias = 1; dias < 10;) {
+        hoy.setDate(hoy.getDate()+1);
+        if(hoy.getDay() != 6 && hoy.getDay() != 0) dias++;
+      }
       if(fecha < hoy){
         errors['fecha_req'] = errors['fecha_req'] || {};
         errors['fecha_req'].required = true;
