@@ -213,20 +213,44 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-        var id_user_black = ['405cc6b7-fc4a-7cae-552f-5628f61fd849', // moroso
-            '36af9462-37e6-11ea-baed-a44e314beb18', // bloqueado
-            '569246c7-da62-4664-ef2a-5628f649537e', // sin gestor
-            '28f5b8b8-ab06-6bfd-dc85-5628f6e9f411', // Perdido
-            '42ee17c4-f67a-11e9-9711-00155d96730d', // express
-            'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
-        ];
+        //var id_user_black = ['405cc6b7-fc4a-7cae-552f-5628f61fd849', // moroso
+        //    '36af9462-37e6-11ea-baed-a44e314beb18', // bloqueado
+        //    '569246c7-da62-4664-ef2a-5628f649537e', // sin gestor
+        //    '28f5b8b8-ab06-6bfd-dc85-5628f6e9f411', // Perdido
+        //    '42ee17c4-f67a-11e9-9711-00155d96730d', // express
+        //    'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
+        //];
+		//
+        //if (id_user_black.includes(id_producto)) {
+        //    bandera = true;
+        //}
+		
+		var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
+		var user_pr="";
+		
+		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
+                success: _.bind(function (data) {                   
+					user_pr = data.last_name;
+					Object.values(list_solicitud).forEach(function (value) {
+						if (value == user_pr) {
+							console.log(user_pr);
+							bandera = true;
+						}
+					});
+                }, this),
+                failure: _.bind(function (data) {
+                    app.alert.dismiss('error');
 
-        if (id_user_black.includes(id_producto)) {
-            bandera = true;
-        }
+                }, this),
+                error: _.bind(function (data) {
+                    app.alert.dismiss('error');
+
+                }, this)
+            });
         return bandera;
     },
-
+	
+	
     validate_product_list: function (id_producto, status_producto, user_id) {
         exito = {'status': false, 'mensaje': ""};
         if (user_id == id_producto) {
@@ -271,7 +295,7 @@
         var user_select = $('#e6').select2('val') ;// usuario seleccionada
         var cuenta_id = modalAccount.context.get('model').attributes.id;
         console.log(user_select);
-
+		
         if (prod_select != "" && user_select != "" && !contextModal.validate_no_nueve(user_select)) {
 
             var usuario = App.data.createBean('Users');
@@ -416,9 +440,8 @@
                 }
             });
 
-        }
-        else {
-            contextModal.alert_message('Usuario no valido', 'Este usuario no es valido.');
+        }else {
+            contextModal.alert_message('Usuario no válido', 'Este usuario no es válido.');
         }
 
     },

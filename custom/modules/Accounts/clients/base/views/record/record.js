@@ -296,11 +296,11 @@
     /** Asignacion modal */
     hideButtonsModal_Account: function () {
         var Boton1 = this.getField("get_account_asesor");
-        var Boton2 = this.getField("send_accounts_asesor");
+        var Boton2 = this.getField("send_account_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
-        var puestosBtn2 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+        var puestosBtn1 = ['27' , '31'];
+        var puestosBtn2 = ['27' , '31'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
