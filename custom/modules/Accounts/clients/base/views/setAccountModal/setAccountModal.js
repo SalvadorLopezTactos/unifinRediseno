@@ -213,6 +213,12 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
+		var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
+		var id_user_black = new Array(); 
+		
+		Object.values(list_solicitud).forEach(function (value) {
+			id_user_black.push(value);
+		});
         //var id_user_black = ['405cc6b7-fc4a-7cae-552f-5628f61fd849', // moroso
         //    '36af9462-37e6-11ea-baed-a44e314beb18', // bloqueado
         //    '569246c7-da62-4664-ef2a-5628f649537e', // sin gestor
@@ -220,33 +226,11 @@
         //    '42ee17c4-f67a-11e9-9711-00155d96730d', // express
         //    'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
         //];
-		//
-        //if (id_user_black.includes(id_producto)) {
-        //    bandera = true;
-        //}
 		
-		var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
-		var user_pr="";
+        if (id_user_black.includes(id_producto)) {
+            bandera = true;
+        }
 		
-		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
-                success: _.bind(function (data) {                   
-					user_pr = data.last_name;
-					Object.values(list_solicitud).forEach(function (value) {
-						if (value == user_pr) {
-							console.log(user_pr);
-							bandera = true;
-						}
-					});
-                }, this),
-                failure: _.bind(function (data) {
-                    app.alert.dismiss('error');
-
-                }, this),
-                error: _.bind(function (data) {
-                    app.alert.dismiss('error');
-
-                }, this)
-            });
         return bandera;
     },
 	
