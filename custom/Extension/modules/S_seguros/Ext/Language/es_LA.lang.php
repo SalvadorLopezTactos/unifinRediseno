@@ -13,4 +13,4 @@ $mod_strings['LBL_PRIMA_NETA'] = 'Prima Neta Anterior';
 $mod_strings['LBL_CURRENCY_4'] = 'LBL_CURRENCY';
 $mod_strings['LBL_PRIMA_OBJ_C'] = 'Prima Objetivo';
 $mod_strings['LBL_PRIMA_NETA_C'] = 'Prima Neta Actual';
-$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Información Actual';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Información de la poliza actual';

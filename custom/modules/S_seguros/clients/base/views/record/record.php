@@ -260,39 +260,44 @@ array (
               ),
               13 => 
               array (
-                'name' => 'monedas_c',
-                'label' => 'LBL_MONEDAS',
+                'name' => 'prima_objetivo',
+                'label' => 'LBL_PRIMA_OBJ_C',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 =>
+                  array (
+                    'name' => 'monedas_c',
+                  ),
+                  1 =>
+                  array (
+                    'name' => 'prima_obj_c',
+                  ),
+                ),
               ),
               14 => 
-              array (
-              ),
-              15 => 
-              array (
-                'name' => 'prima_obj_c',
-                'label' => 'LBL_PRIMA_OBJ_C',
-              ),
-              16 => 
               array (
                 'name' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              18 => 
+              16 => 
               array (
                 'name' => 'forma_pago',
                 'label' => 'LBL_FORMA_PAGO',
                 'readonly' => true,
               ),
-              19 => 
+              17 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              20 => 
+              18 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -303,12 +308,12 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
-              21 => 
+              19 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              22 => 
+              20 => 
               array (
               ),
             ),
@@ -328,6 +333,19 @@ array (
               array (
                 'name' => 'prima_neta_c',
                 'label' => 'LBL_PRIMA_NETA_C',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 =>
+                  array (
+                    'name' => 'monedas_c',
+                  ),
+                  1 =>
+                  array (
+                    'name' => 'prima_neta_c',
+                  ),
+                ),
               ),
               1 => 
               array (

@@ -29,6 +29,8 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
           'name' => 'prima_obj_c',
           'label' => 'LBL_PRIMA_OBJ_C',
           'enabled' => true,
+          'type' => 'currency',
+          'currency_format' => true,          
           'default' => true,
         ),
         3 => 
@@ -36,6 +38,8 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
           'name' => 'prima_neta_c',
           'label' => 'LBL_PRIMA_NETA_C',
           'enabled' => true,
+          'type' => 'currency',
+          'currency_format' => true,          
           'default' => true,
         ),
         4 => 

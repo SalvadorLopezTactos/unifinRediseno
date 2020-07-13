@@ -35,6 +35,8 @@ array (
                 'name' => 'prima_obj_c',
                 'label' => 'LBL_PRIMA_OBJ_C',
                 'enabled' => true,
+                'type' => 'currency',
+                'currency_format' => true,
                 'default' => true,
               ),
               3 => 
@@ -42,6 +44,8 @@ array (
                 'name' => 'prima_neta_c',
                 'label' => 'LBL_PRIMA_NETA_C',
                 'enabled' => true,
+                'type' => 'currency',
+                'currency_format' => true,                
                 'default' => true,
               ),
               4 => 
