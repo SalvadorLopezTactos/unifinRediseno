@@ -37,7 +37,12 @@
     },
 
     validaFecha: function(fields, errors, callback) {
-      var hoy = new Date();
+      if(this.model.get('date_entered')) {
+        var hoy = new Date(this.model.get('date_entered'));
+      }
+      else {
+       var hoy = new Date();
+      }
       var fecha_req = new Date(this.model.get('fecha_req'));
       var festivos = app.lang.getAppListStrings('festivos_list');
       for(dias = 1; dias < 10;) {
