@@ -98,34 +98,41 @@
         var product_dispo = ['1', '3', '4', '6', '8'];
         var id_user = app.user.id; //id de usuario firmado
         var list_html = "";
-        if (userpuesto == "27") {
+		var prod_status = 0;
+        //if (userpuesto == "27") {
             list_html = '<option value="" >  </option>';
             _.each(productos, function (value, key) {
                 if (product_dispo.includes(key)) {
 
                     switch (key) {
                         case "1":
-                            if (cont_uni_p.ResumenProductos.leasing.dias > 30) {
+							prod_status = context360.leasing.estatus_atencion;
+                            if (cont_uni_p.ResumenProductos.leasing.dias > 30 && prod_status == 2 ) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+								
                             }
                             break;
                         case "3":
-                            if (cont_uni_p.ResumenProductos.credito_auto.dias > 30) {
+							prod_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+							if (cont_uni_p.ResumenProductos.credito_auto.dias > 30 && prod_status == 2) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "4":
-                            if (cont_uni_p.ResumenProductos.factoring.dias > 30) {
+							prod_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                            if (cont_uni_p.ResumenProductos.factoring.dias > 30 && prod_status == 2) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "6":
-                            if (cont_uni_p.ResumenProductos.fleet.dias > 30) {
+							prod_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                            if (cont_uni_p.ResumenProductos.fleet.dias > 30 && prod_status == 2) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "8":
-                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30) {
+							prod_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30 && prod_status == 2) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
@@ -135,78 +142,78 @@
 
                 }
             });
-        } else {
-            var temp_array = [];
-            _.each(userprod, function (value, key) {
-                console.log("valor" + value + " llave " + key);
-                switch (value) {
-                    case "1": // LEASING
-                        var leasing_id = objContext.attributes.user_id_c; // id user producto cuenta
-                        var leasig_status = context360.leasing.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-
-                        if (!self_modal.validate_no_nueve(leasing_id)) {
-                            var result = self_modal.validate_product_list(leasing_id, leasig_status, id_user);
-                            if (result['status']) {
-                                temp_array.push(value);
-                            }
-                        }
-                        break;
-                    case '3': //Credito-Automotriz
-                        var credito_id = objContext.attributes.user_id2_c; // id user producto cuenta
-                        var leasig_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-
-                        if (!self_modal.validate_no_nueve(credito_id)) {
-                            var result = self_modal.validate_product_list(credito_id, leasig_status, id_user);
-                            if (result['status']) {
-                                temp_array.push(value);
-                            }
-                        }
-                        break;
-
-                    case '4': // FACTORAJE
-                        var factoraje_id = objContext.attributes.user_id1_c; // id user producto cuenta
-                        var leasig_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-
-                        if (!self_modal.validate_no_nueve(factoraje_id)) {
-                            var result = self_modal.validate_product_list(factoraje_id, leasig_status, id_user);
-                            if (result['status']) {
-                                temp_array.push(value);
-                            }
-                        }
-                        break;
-
-                    case '6': // FLEET
-                        var fleet_id = objContext.attributes.user_id6_c; // id user producto cuenta
-                        var leasig_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-
-                        if (!self_modal.validate_no_nueve(fleet_id)) {
-                            var result = self_modal.validate_product_list(fleet_id, leasig_status, id_user);
-                            if (result['status']) {
-                                temp_array.push(value);
-                            }
-                        }
-                        break;
-
-                    case '8': // UNICLICK
-                        var uniclick_id = objContext.attributes.user_id7_c; // id user producto cuenta
-                        var leasig_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-
-                        if (!self_modal.validate_no_nueve(uniclick_id)) {
-                            var result = self_modal.validate_product_list(uniclick_id, leasig_status, id_user);
-                            if (result['status']) {
-                                temp_array.push(value);
-                            }
-                        }
-                        break;
-                }
-            })
-            list_html = '<option value="" >  </option>';
-            _.each(productos, function (value, key) {
-                if (temp_array.includes(key)) {
-                    list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                }
-            });
-        }
+        //} else {
+        //    var temp_array = [];
+        //    _.each(userprod, function (value, key) {
+        //        console.log("valor" + value + " llave " + key);
+        //        switch (value) {
+        //            case "1": // LEASING
+        //                var leasing_id = objContext.attributes.user_id_c; // id user producto cuenta
+        //                var leasig_status = context360.leasing.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+        //
+        //                if (!self_modal.validate_no_nueve(leasing_id)) {
+        //                    var result = self_modal.validate_product_list(leasing_id, leasig_status, id_user);
+        //                    if (result['status']) {
+        //                        temp_array.push(value);
+        //                    }
+        //                }
+        //                break;
+        //            case '3': //Credito-Automotriz
+        //                var credito_id = objContext.attributes.user_id2_c; // id user producto cuenta
+        //                var leasig_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+        //
+        //                if (!self_modal.validate_no_nueve(credito_id)) {
+        //                    var result = self_modal.validate_product_list(credito_id, leasig_status, id_user);
+        //                    if (result['status']) {
+        //                        temp_array.push(value);
+        //                    }
+        //                }
+        //                break;
+        //
+        //            case '4': // FACTORAJE
+        //                var factoraje_id = objContext.attributes.user_id1_c; // id user producto cuenta
+        //                var leasig_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+        //
+        //                if (!self_modal.validate_no_nueve(factoraje_id)) {
+        //                    var result = self_modal.validate_product_list(factoraje_id, leasig_status, id_user);
+        //                    if (result['status']) {
+        //                        temp_array.push(value);
+        //                    }
+        //                }
+        //                break;
+        //
+        //            case '6': // FLEET
+        //                var fleet_id = objContext.attributes.user_id6_c; // id user producto cuenta
+        //                var leasig_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+        //
+        //                if (!self_modal.validate_no_nueve(fleet_id)) {
+        //                    var result = self_modal.validate_product_list(fleet_id, leasig_status, id_user);
+        //                    if (result['status']) {
+        //                        temp_array.push(value);
+        //                    }
+        //                }
+        //                break;
+        //
+        //            case '8': // UNICLICK
+        //                var uniclick_id = objContext.attributes.user_id7_c; // id user producto cuenta
+        //                var leasig_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+        //
+        //                if (!self_modal.validate_no_nueve(uniclick_id)) {
+        //                    var result = self_modal.validate_product_list(uniclick_id, leasig_status, id_user);
+        //                    if (result['status']) {
+        //                        temp_array.push(value);
+        //                    }
+        //                }
+        //                break;
+        //        }
+        //    })
+        //    list_html = '<option value="" >  </option>';
+        //    _.each(productos, function (value, key) {
+        //        if (temp_array.includes(key)) {
+        //            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+        //        }
+        //    });
+        //}
         return list_html;
     },
 
