@@ -252,6 +252,7 @@ array (
               array (
                 'name' => 'etapa',
                 'label' => 'LBL_ETAPA',
+                'readonly' => true,
               ),
               12 => 
               array (
