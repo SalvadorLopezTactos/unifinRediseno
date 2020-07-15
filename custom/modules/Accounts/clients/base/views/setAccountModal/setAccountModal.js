@@ -106,33 +106,37 @@
 
                     switch (key) {
                         case "1":
+							var leasing_id = objContext.attributes.user_id_c; // id user producto cuenta
 							prod_status = context360.leasing.estatus_atencion;
-                            if (cont_uni_p.ResumenProductos.leasing.dias > 30 && prod_status == 2 ) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-								
+                            if (cont_uni_p.ResumenProductos.leasing.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(leasing_id)) ) {
+                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';								
                             }
                             break;
                         case "3":
+							var credito_id = objContext.attributes.user_id2_c; // id user producto cuenta
 							prod_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-							if (cont_uni_p.ResumenProductos.credito_auto.dias > 30 && prod_status == 2) {
+							if (cont_uni_p.ResumenProductos.credito_auto.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(credito_id))) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "4":
+							var factoraje_id = objContext.attributes.user_id1_c; // id user producto cuenta
 							prod_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.factoring.dias > 30 && prod_status == 2) {
+                            if (cont_uni_p.ResumenProductos.factoring.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(factoraje_id))) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "6":
+							var fleet_id = objContext.attributes.user_id6_c; // id user producto cuenta
 							prod_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.fleet.dias > 30 && prod_status == 2) {
+                            if (cont_uni_p.ResumenProductos.fleet.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(fleet_id))) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
                         case "8":
+							var uniclick_id = objContext.attributes.user_id7_c; // id user producto cuenta
 							prod_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30 && prod_status == 2) {
+                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(uniclick_id))) {
                                 list_html += '<option value="' + key + '">' + productos[key] + '</option>';
                             }
                             break;
@@ -234,6 +238,24 @@
         //    'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
         //];
 		
+        if (id_user_black.includes(id_producto)) {
+            bandera = true;
+        }
+		
+        return bandera;
+    },
+	
+	/** Valida que el id del producto no se ninguno del tipo
+	9.- Moroso,	9.- Bloqueado,	9.- Asesor Virtual Uniclick**/
+    validate_no_nueve_inicio: function (id_producto) {
+        var bandera = false;
+		var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
+		var id_user_black = new Array(); 
+		
+		Object.values(list_solicitud).forEach(function (value) {
+			id_user_black.push(value);
+		});
+        		
         if (id_user_black.includes(id_producto)) {
             bandera = true;
         }
