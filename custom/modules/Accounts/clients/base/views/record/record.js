@@ -4427,7 +4427,10 @@
                 delete lista[key];
             }
         });
-        lista[anoselect] = anoselect;
+        if(anoselect!=undefined)
+        {
+            lista[anoselect] = anoselect;
+        }
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
 
