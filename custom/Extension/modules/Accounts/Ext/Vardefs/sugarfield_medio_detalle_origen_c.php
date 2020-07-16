@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-27 13:14:13
+ // created: 2020-07-15 20:22:55
 $dictionary['Account']['fields']['medio_detalle_origen_c']['labelValue']='Medio';
 $dictionary['Account']['fields']['medio_detalle_origen_c']['dependency']='';
 $dictionary['Account']['fields']['medio_detalle_origen_c']['visibility_grid']=array (
@@ -25,6 +25,8 @@ $dictionary['Account']['fields']['medio_detalle_origen_c']['visibility_grid']=ar
       8 => '8',
       9 => '9',
       10 => '25',
+      11 => '26',
+      12 => '27',
     ),
     4 => 
     array (
