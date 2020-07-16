@@ -1,5 +1,5 @@
 <?php
-// created: 2020-06-19 10:48:59
+// created: 2020-07-15 20:21:49
 $viewdefs['C5515_uni_chattigo']['base']['view']['subpanel-for-leads-leads_c5515_uni_chattigo_1'] = array (
   'panels' => 
   array (
@@ -19,17 +19,18 @@ $viewdefs['C5515_uni_chattigo']['base']['view']['subpanel-for-leads-leads_c5515_
         ),
         1 => 
         array (
+          'name' => 'date_entered',
+          'label' => 'LBL_DATE_ENTERED',
+          'enabled' => true,
+          'readonly' => true,
+          'default' => true,
+        ),
+        2 => 
+        array (
           'label' => 'LBL_DATE_MODIFIED',
           'enabled' => true,
           'default' => true,
           'name' => 'date_modified',
-        ),
-        2 => 
-        array (
-          'name' => 'inicio_conversacion',
-          'label' => 'LBL_INICIO_CONVERSACION',
-          'enabled' => true,
-          'default' => true,
         ),
         3 => 
         array (

@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-27 13:09:04
+ // created: 2020-07-15 20:15:54
 
 $app_list_strings['medios_digital_list']=array (
   '' => '',
@@ -27,5 +27,7 @@ $app_list_strings['medios_digital_list']=array (
   22 => 'Instagram Ads',
   23 => 'Blog',
   24 => 'Facebook Ads',
-  25 => 'Chat',
+  25 => 'WhatsApp',
+  26 => 'Chatbot',
+  27 => 'Messenger',
 );
