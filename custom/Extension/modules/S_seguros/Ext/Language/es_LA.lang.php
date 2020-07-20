@@ -19,3 +19,6 @@ $mod_strings['LBL_OFICINA'] = 'Oficina';
 $mod_strings['LBL_SUBRAMOS'] = 'Subramos';
 $mod_strings['LBL_RAZON_PERDIDA'] = 'Razón de Pérdida';
 $mod_strings['LBL_KAM'] = 'KAM';
+$mod_strings['LBL_REQUIERE_AYUDA'] = 'Requiere Ayuda';
+$mod_strings['LBL_SERVICIOS_A_INCLUIR__C'] = 'Servicios a Incluir';
+$mod_strings['LBL_SERVICIOS_A_INCLUIR'] = 'Servicios a Incluir';
