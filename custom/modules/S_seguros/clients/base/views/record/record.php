@@ -267,11 +267,11 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_obj_c',
                   ),
@@ -317,6 +317,26 @@ array (
               20 => 
               array (
               ),
+              21 => 
+              array (
+                'name' => 'subramos_c',
+                'label' => 'LBL_SUBRAMOS',
+              ),
+              22 => 
+              array (
+                'name' => 'oficina_c',
+                'label' => 'LBL_OFICINA',
+              ),
+              23 => 
+              array (
+                'name' => 'kam_c',
+                'label' => 'LBL_KAM',
+              ),
+              24 => 
+              array (
+                'name' => 'razon_perdida_c',
+                'label' => 'LBL_RAZON_PERDIDA',
+              ),
             ),
           ),
           2 => 
@@ -338,11 +358,11 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_neta_c',
                   ),
