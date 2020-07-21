@@ -299,7 +299,7 @@
         var Boton2 = this.getField("send_account_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = ['27' , '31'];
+        var puestosBtn1 = ['18'];
         var puestosBtn2 = ['27' , '31'];
 
         if (Boton1) {
@@ -4427,7 +4427,10 @@
                 delete lista[key];
             }
         });
-        lista[anoselect] = anoselect;
+        if(anoselect!=undefined)
+        {
+            lista[anoselect] = anoselect;
+        }
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
 

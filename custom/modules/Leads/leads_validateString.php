@@ -12,7 +12,6 @@ class leads_validateString
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
         //$GLOBALS['log']->fatal('CONVIERTO A MAYUSCULAS');
-
         if ($_REQUEST['module'] != 'Import') {
             foreach ($bean as $field => $value) {
 
@@ -28,6 +27,13 @@ class leads_validateString
                     }
                 }
             }
+        }
+
+        //Validación de PM - Nombre empresa
+        if ($bean->regimen_fiscal_c == '3' && !empty($bean->nombre_c) && empty($bean->nombre_empresa_c)) {
+            $bean->nombre_empresa_c = $bean->nombre_c;
+            $bean->name_c = $bean->nombre_c;
+            $bean->nombre_c = '';
         }
     }
 
@@ -273,4 +279,3 @@ class leads_validateString
     }
 
 }
-

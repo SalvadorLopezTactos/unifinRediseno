@@ -285,33 +285,19 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-        //var id_user_black = ['36af9462-37e6-11ea-baed-a44e314beb18',
+        var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
+		//var id_user_black = ['36af9462-37e6-11ea-baed-a44e314beb18',
         //    '405cc6b7-fc4a-7cae-552f-5628f61fd849']; // dejar solo las dos opciones de moroso y bloqueado
-        //
-        //if (id_user_black.includes(id_producto)) {
-        //    bandera = true;
-        //}
+        var id_user_black = new Array(); 
 		
-		var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
-		var user_pr="";
-		app.api.call("read", app.api.buildURL("Users/" + id_producto , null, null, {}), null, {
-            success: _.bind(function (data) { 
-				user_pr = data.last_name;
-				Object.values(list_solicitud).forEach(function (value) {
-					if (value == user_pr) {
-						console.log(value);
-						bandera = true;
-					}
-				});
-            }, this),
-            failure: _.bind(function (data) {
-                app.alert.dismiss('error');
-            }, this),
-			error: _.bind(function (data) {
-				app.alert.dismiss('error');
-            }, this)
-         });
-			
+		Object.values(list_solicitud).forEach(function (value) {
+			id_user_black.push(value);
+		});
+        
+		if (id_user_black.includes(id_producto)) {
+            bandera = true;
+        }
+		
         return bandera;
     },
 
