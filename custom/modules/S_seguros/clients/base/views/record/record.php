@@ -261,16 +261,6 @@ array (
               ),
               13 => 
               array (
-                'name' => 'requiere_ayuda_c',
-                'label' => 'LBL_REQUIERE_AYUDA',
-              ),
-              14 => 
-              array (
-                'name' => 'servicios_a_incluir_c',
-                'label' => 'LBL_SERVICIOS_A_INCLUIR',
-              ),
-              15 => 
-              array (
                 'name' => 'prima_objetivo',
                 'label' => 'LBL_PRIMA_OBJ_C',
                 'inline' => true,
@@ -287,28 +277,28 @@ array (
                   ),
                 ),
               ),
-              16 => 
+              14 => 
               array (
                 'name' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              18 => 
+              16 => 
               array (
                 'name' => 'forma_pago',
                 'label' => 'LBL_FORMA_PAGO',
                 'readonly' => true,
               ),
-              19 => 
+              17 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              20 => 
+              18 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -319,13 +309,26 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
+              19 => 
+              array (
+                'name' => 'fecha_cierre_c',
+                'label' => 'LBL_FECHA_CIERRE',
+              ),
+              20 => 
+              array (
+                'name' => 'motivos_c',
+                'studio' => 'visible',
+                'label' => 'LBL_MOTIVOS',
+              ),
               21 => 
               array (
-                'name' => 'info_actual',
-                'label' => 'LBL_INFO_ACTUAL',
+                'name' => 'requiere_ayuda_c',
+                'label' => 'LBL_REQUIERE_AYUDA',
               ),
               22 => 
               array (
+                'name' => 'servicios_a_incluir_c',
+                'label' => 'LBL_SERVICIOS_A_INCLUIR',
               ),
               23 => 
               array (
@@ -344,8 +347,37 @@ array (
               ),
               26 => 
               array (
+                'name' => 'nacional_c',
+                'label' => 'LBL_NACIONAL',
+              ),
+              27 => 
+              array (
+                'name' => 'fee_c',
+                'label' => 'LBL_FEE',
+              ),
+              28 => 
+              array (
+                'name' => 'fee_p_c',
+                'label' => 'LBL_FEE_P',
+              ),
+              29 => 
+              array (
                 'name' => 'razon_perdida_c',
                 'label' => 'LBL_RAZON_PERDIDA',
+              ),
+              30 => 
+              array (
+                'name' => 'comentarios_c',
+                'studio' => 'visible',
+                'label' => 'LBL_COMENTARIOS',
+              ),
+              31 => 
+              array (
+                'name' => 'info_actual',
+                'label' => 'LBL_INFO_ACTUAL',
+              ),
+              32 => 
+              array (
               ),
             ),
           ),
