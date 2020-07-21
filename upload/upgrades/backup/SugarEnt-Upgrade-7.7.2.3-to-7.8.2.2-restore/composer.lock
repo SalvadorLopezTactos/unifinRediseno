@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "0763f754490e1044cb500b2ebf33615e",
-    "content-hash": "596a3914b1371282c384a3c41efb32f1",
+    "content-hash": "aa2d185398346f126338b55a826a913a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -72,19 +71,19 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2014-11-26 01:13:25"
+            "time": "2014-11-26T01:13:25+00:00"
         },
         {
             "name": "google/apiclient",
             "version": "1.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/google/google-api-php-client.git",
+                "url": "https://github.com/googleapis/google-api-php-client.git",
                 "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/2adb5ba90612858d4add0342eee6b8b9aaca398d",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/2adb5ba90612858d4add0342eee6b8b9aaca398d",
                 "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d",
                 "shasum": ""
             },
@@ -114,7 +113,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2015-05-21 19:35:32"
+            "time": "2015-05-21T19:35:32+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -210,7 +209,7 @@
                 "web service"
             ],
             "abandoned": "guzzlehttp/guzzle",
-            "time": "2015-03-18 18:23:50"
+            "time": "2015-03-18T18:23:50+00:00"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -252,7 +251,7 @@
                 "hashing",
                 "password"
             ],
-            "time": "2014-11-20 16:49:30"
+            "time": "2014-11-20T16:49:30+00:00"
         },
         {
             "name": "moontoast/math",
@@ -288,7 +287,8 @@
                 "bcmath",
                 "math"
             ],
-            "time": "2013-01-19 17:42:34"
+            "abandoned": "brick/math",
+            "time": "2013-01-19T17:42:34+00:00"
         },
         {
             "name": "onelogin/php-saml",
@@ -342,7 +342,7 @@
                 "onelogin",
                 "saml"
             ],
-            "time": "2017-03-13 09:56:49"
+            "time": "2017-03-13T09:56:49+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -390,7 +390,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-04-03T06:00:07+00:00"
         },
         {
             "name": "parsecsv/php-parsecsv",
@@ -426,28 +426,45 @@
                 }
             ],
             "description": "CSV data parser for PHP",
-            "time": "2014-06-03 00:37:04"
+            "time": "2014-06-03T00:37:04+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.22",
+            "version": "v5.2.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
+                "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/b18cb98131bd83103ccb26a888fdfe3177b8a663",
-                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/dde1db116511aa4956389d75546c5be4c2beb2a6",
+                "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
                 "php": ">=5.0.0"
             },
             "require-dev": {
-                "phpdocumentor/phpdocumentor": "*",
-                "phpunit/phpunit": "4.7.*"
+                "doctrine/annotations": "1.2.*",
+                "jms/serializer": "0.16.*",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "4.8.*",
+                "symfony/debug": "2.8.*",
+                "symfony/filesystem": "2.8.*",
+                "symfony/translation": "2.8.*",
+                "symfony/yaml": "2.8.*",
+                "zendframework/zend-cache": "2.5.1",
+                "zendframework/zend-config": "2.5.1",
+                "zendframework/zend-eventmanager": "2.5.1",
+                "zendframework/zend-filter": "2.5.1",
+                "zendframework/zend-i18n": "2.5.1",
+                "zendframework/zend-json": "2.5.1",
+                "zendframework/zend-math": "2.5.1",
+                "zendframework/zend-serializer": "2.5.*",
+                "zendframework/zend-servicemanager": "2.5.*",
+                "zendframework/zend-stdlib": "2.5.1"
             },
             "suggest": {
                 "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
@@ -486,7 +503,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-01-09 09:33:47"
+            "time": "2018-11-15T22:32:31+00:00"
         },
         {
             "name": "psr/log",
@@ -524,7 +541,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2012-12-21T11:40:51+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -576,12 +593,12 @@
             ],
             "authors": [
                 {
-                    "name": "Marijn Huizendveld",
-                    "email": "marijn.huizendveld@gmail.com"
-                },
-                {
                     "name": "Ben Ramsey",
                     "homepage": "http://benramsey.com"
+                },
+                {
+                    "name": "Marijn Huizendveld",
+                    "email": "marijn.huizendveld@gmail.com"
                 }
             ],
             "description": "A PHP 5.3+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -591,7 +608,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-03-22 18:20:19"
+            "time": "2016-03-22T18:20:19+00:00"
         },
         {
             "name": "ruflin/elastica",
@@ -643,7 +660,7 @@
                 "client",
                 "search"
             ],
-            "time": "2015-02-17 19:57:36"
+            "time": "2015-02-17T19:57:36+00:00"
         },
         {
             "name": "symfony/console",
@@ -700,7 +717,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-10 15:30:22"
+            "time": "2015-06-10T15:30:22+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -758,7 +775,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
+            "time": "2015-06-08T09:37:21+00:00"
         },
         {
             "name": "symfony/security-core",
@@ -821,7 +838,7 @@
             ],
             "description": "Symfony Security Component - Core Library",
             "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
+            "time": "2015-06-08T09:37:21+00:00"
         },
         {
             "name": "symfony/security-csrf",
@@ -875,7 +892,7 @@
             ],
             "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
-            "time": "2015-05-13 11:34:46"
+            "time": "2015-05-13T11:34:46+00:00"
         },
         {
             "name": "symfony/translation",
@@ -936,7 +953,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-11 17:26:34"
+            "time": "2015-06-11T17:26:34+00:00"
         },
         {
             "name": "symfony/validator",
@@ -1006,7 +1023,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
+            "time": "2015-06-08T09:37:21+00:00"
         }
     ],
     "packages-dev": [
@@ -1076,7 +1093,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-12-07 17:15:20"
+            "time": "2014-12-07T17:15:20+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -1130,7 +1147,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2015-06-14T21:17:01+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1196,7 +1213,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2015-07-13 05:06:53"
+            "time": "2015-07-13T05:06:53+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1258,7 +1275,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-07-13 11:25:58"
+            "time": "2015-07-13T11:25:58+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1303,7 +1320,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2013-10-10 15:34:57"
+            "time": "2013-10-10T15:34:57+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1344,7 +1361,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21 13:50:34"
+            "time": "2015-06-21T13:50:34+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -1385,7 +1402,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2015-06-13 07:35:30"
+            "time": "2015-06-13T07:35:30+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1434,7 +1451,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-06-19 03:43:16"
+            "time": "2015-06-19T03:43:16+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -1508,7 +1525,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-11-11 10:11:09"
+            "time": "2014-11-11T10:11:09+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1563,7 +1580,8 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-07-04 05:41:32"
+            "abandoned": true,
+            "time": "2015-07-04T05:41:32+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1627,7 +1645,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2015-01-29 16:28:08"
+            "time": "2015-01-29T16:28:08+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1679,7 +1697,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2015-02-22 15:13:53"
+            "time": "2015-02-22T15:13:53+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -1729,7 +1747,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2015-01-01 10:01:08"
+            "time": "2015-01-01T10:01:08+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -1795,7 +1813,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2015-01-27 07:23:06"
+            "time": "2015-01-27T07:23:06+00:00"
         },
         {
             "name": "sebastian/recursion-context",
@@ -1848,7 +1866,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2015-01-24 09:48:32"
+            "time": "2015-01-24T09:48:32+00:00"
         },
         {
             "name": "sebastian/version",
@@ -1883,7 +1901,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2015-06-21T13:59:46+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -1929,7 +1947,7 @@
                 "parser",
                 "validator"
             ],
-            "time": "2015-01-04 21:18:15"
+            "time": "2015-01-04T21:18:15+00:00"
         },
         {
             "name": "symfony/finder",
@@ -1978,7 +1996,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-04 20:11:48"
+            "time": "2015-06-04T20:11:48+00:00"
         },
         {
             "name": "symfony/process",
@@ -2027,7 +2045,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
+            "time": "2015-06-08T09:37:21+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -2076,7 +2094,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-10 15:30:22"
+            "time": "2015-06-10T15:30:22+00:00"
         }
     ],
     "aliases": [],
