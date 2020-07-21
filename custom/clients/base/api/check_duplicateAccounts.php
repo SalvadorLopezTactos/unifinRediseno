@@ -57,7 +57,7 @@ class check_duplicateAccounts extends SugarApi
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-
+                
                 $requeridos = $this->validaRequeridos($bean);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
@@ -291,6 +291,10 @@ SITE;
                         if ($productos == '8') {
 
                             $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
+                        }
+                        if ($productos == '9') {
+
+                            $procede['data']['UNILEASE'] = $meeting->assigned_user_id;
                         }
 
                         $procede['vacio']=empty($procede['data'])?true:false;
