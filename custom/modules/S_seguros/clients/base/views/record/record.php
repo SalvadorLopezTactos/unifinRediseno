@@ -261,44 +261,54 @@ array (
               ),
               13 => 
               array (
+                'name' => 'requiere_ayuda_c',
+                'label' => 'LBL_REQUIERE_AYUDA',
+              ),
+              14 => 
+              array (
+                'name' => 'servicios_a_incluir_c',
+                'label' => 'LBL_SERVICIOS_A_INCLUIR',
+              ),
+              15 => 
+              array (
                 'name' => 'prima_objetivo',
                 'label' => 'LBL_PRIMA_OBJ_C',
                 'inline' => true,
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_obj_c',
                   ),
                 ),
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'forma_pago',
                 'label' => 'LBL_FORMA_PAGO',
                 'readonly' => true,
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -309,13 +319,33 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              20 => 
+              22 => 
               array (
+              ),
+              23 => 
+              array (
+                'name' => 'subramos_c',
+                'label' => 'LBL_SUBRAMOS',
+              ),
+              24 => 
+              array (
+                'name' => 'oficina_c',
+                'label' => 'LBL_OFICINA',
+              ),
+              25 => 
+              array (
+                'name' => 'kam_c',
+                'label' => 'LBL_KAM',
+              ),
+              26 => 
+              array (
+                'name' => 'razon_perdida_c',
+                'label' => 'LBL_RAZON_PERDIDA',
               ),
             ),
           ),
@@ -338,11 +368,11 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_neta_c',
                   ),
