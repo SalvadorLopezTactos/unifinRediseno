@@ -267,11 +267,11 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_obj_c',
                   ),
@@ -338,11 +338,11 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'monedas_c',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'name' => 'prima_neta_c',
                   ),
