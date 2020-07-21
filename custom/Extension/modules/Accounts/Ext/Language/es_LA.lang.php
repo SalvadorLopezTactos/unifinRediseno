@@ -332,3 +332,4 @@ $mod_strings['LBL_PUESTO_CUENTA_C'] = 'Puesto';
 $mod_strings['LBL_ESTADO_RFC'] = 'Estado de validación RFC';
 $mod_strings['LBL_RFC_QR'] = 'RFC QR';
 $mod_strings['LBL_PATH_IMG_QR'] = 'Ruta de imagen QR';
+$mod_strings['LBL_SALESFORCE_ID'] = 'SalesForce ID';
