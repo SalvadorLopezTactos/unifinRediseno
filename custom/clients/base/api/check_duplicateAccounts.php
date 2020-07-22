@@ -212,8 +212,19 @@ SITE;
             $bean_account->user_id1_c = empty($idMeetings['data']['FACTORAJE']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FACTORAJE'];
             $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
             $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
-            $bean_account->user_id7_c = empty($idMeetings['data']['UNICLICK']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['UNICLICK'];
-            $bean_account->user_id7_c = empty($idMeetings['data']['UNILEASE']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['UNILEASE'];
+
+            if(empty($idMeetings['data']['UNICLICK']) && empty($idMeetings['data']['UNILEASE'])){
+
+                $bean_account->user_id7_c ='569246c7-da62-4664-ef2a-5628f649537e';
+
+            }else if(!empty($idMeetings['data']['UNICLICK'])){
+
+                $bean_account->user_id7_c=$idMeetings['data']['UNICLICK'];
+
+            }else if(!empty($idMeetings['data']['UNILEASE'])){
+
+                $bean_account->user_id7_c=$idMeetings['data']['UNILEASE'];
+            }
 
         }
 
