@@ -7,6 +7,7 @@
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
+        this.model.addValidationTask('fecha_cierre_c', _.bind(this.fechaCierre, this));
     },
 
     _render: function() {
@@ -33,6 +34,21 @@
           this.model.set('departamento_c',data.no_empleado_c);
         }, this)
       });
+    },
+
+    fechaCierre: function(fields, errors, callback) {
+      var hoy = new Date();
+      var fecha_cierre = new Date(this.model.get('fecha_cierre_c'));
+      if(fecha_cierre <= hoy){
+        errors['fecha_cierre_c'] = errors['fecha_cierre_c'] || {};
+        errors['fecha_cierre_c'].required = true;
+        app.alert.show("Fecha Cierre", {
+          level: "error",
+          title: "La Fecha Cierre debe ser mayor al día de hoy",
+          autoClose: false
+        });
+      }
+      callback(null, fields, errors);
     },
 
     validaFecha: function(fields, errors, callback) {
