@@ -1,7 +1,7 @@
 <?php
- // created: 2020-07-20 16:49:14
-$dictionary['S_seguros']['fields']['fee_p_c']['labelValue']='Comisión Internacional P';
+ // created: 2020-07-22 15:54:52
+$dictionary['S_seguros']['fields']['fee_p_c']['labelValue']='Porcentaje FEE';
 $dictionary['S_seguros']['fields']['fee_p_c']['enforced']='';
-$dictionary['S_seguros']['fields']['fee_p_c']['dependency']='';
+$dictionary['S_seguros']['fields']['fee_p_c']['dependency']='equal($nacional_c,1)';
 
  ?>
