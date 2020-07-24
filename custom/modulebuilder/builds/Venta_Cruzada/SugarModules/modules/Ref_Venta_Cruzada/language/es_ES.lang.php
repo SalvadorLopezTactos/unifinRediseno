@@ -1,0 +1,73 @@
+<?php
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+$mod_strings = array (
+  'LBL_TEAM' => 'Equipos',
+  'LBL_TEAMS' => 'Equipos',
+  'LBL_TEAM_ID' => 'Id Equipo',
+  'LBL_ASSIGNED_TO_ID' => 'Id del Usuario Asignado',
+  'LBL_ASSIGNED_TO_NAME' => 'Usuario',
+  'LBL_TAGS_LINK' => 'Etiquetas',
+  'LBL_TAGS' => 'Etiquetas',
+  'LBL_ID' => 'Id.',
+  'LBL_DATE_ENTERED' => 'Fecha de Creación',
+  'LBL_DATE_MODIFIED' => 'Última Modificación',
+  'LBL_MODIFIED' => 'Modificado por',
+  'LBL_MODIFIED_ID' => 'Modificado Por Id',
+  'LBL_MODIFIED_NAME' => 'Modificado por nombre',
+  'LBL_CREATED' => 'Creado Por',
+  'LBL_CREATED_ID' => 'Creado Por Id',
+  'LBL_DOC_OWNER' => 'Propietario del documento',
+  'LBL_USER_FAVORITES' => 'Usuarios Favoritos',
+  'LBL_DESCRIPTION' => 'Descripción',
+  'LBL_DELETED' => 'Eliminado',
+  'LBL_NAME' => 'Nombre',
+  'LBL_CREATED_USER' => 'Creado Por Usuario',
+  'LBL_MODIFIED_USER' => 'Modificado Por Usuario',
+  'LBL_LIST_NAME' => 'Nombre',
+  'LBL_EDIT_BUTTON' => 'Editar',
+  'LBL_REMOVE' => 'Quitar',
+  'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modificado por nombre',
+  'LBL_COMMENTLOG' => 'Comment Log',
+  'LBL_LIST_FORM_TITLE' => 'Referencias Vtas Cruzadas Lista',
+  'LBL_MODULE_NAME' => 'Referencias Vtas Cruzadas',
+  'LBL_MODULE_TITLE' => 'Referencias Vtas Cruzadas',
+  'LBL_MODULE_NAME_SINGULAR' => 'Referencia Vta Cruzada',
+  'LBL_HOMEPAGE_TITLE' => 'Mi Referencias Vtas Cruzadas',
+  'LNK_NEW_RECORD' => 'Crear Referencia Vta Cruzada',
+  'LNK_LIST' => 'Vista Referencias Vtas Cruzadas',
+  'LNK_IMPORT_REF_VENTA_CRUZADA' => 'Importar Referencias Vtas Cruzadas',
+  'LBL_SEARCH_FORM_TITLE' => 'Buscar Referencia Vta Cruzada',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'Ver Historial',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Flujo de actividad',
+  'LBL_REF_VENTA_CRUZADA_SUBPANEL_TITLE' => 'Referencias Vtas Cruzadas',
+  'LBL_NEW_FORM_TITLE' => 'Nuevo Referencia Vta Cruzada',
+  'LNK_IMPORT_VCARD' => 'Importar Referencia Vta Cruzada vCard',
+  'LBL_IMPORT' => 'Importar Referencias Vtas Cruzadas',
+  'LBL_IMPORT_VCARDTEXT' => 'Automatically create a new Referencia Vta Cruzada record by importing a vCard from your file system.',
+  'LBL_PRODUCTO_REFERENCIADO' => 'Producto Referenciado',
+  'LBL_USUARIO_PRODUCTO_USER_ID' => 'Asesor Producto Referenciado (relacionado Usuario ID)',
+  'LBL_USUARIO_PRODUCTO' => 'Asesor Producto Referenciado',
+  'LBL_USUARIO_RM_USER_ID' => 'Asesor RM Referenciado (relacionado Usuario ID)',
+  'LBL_USUARIO_RM' => 'Asesor RM Referenciado',
+  'LBL_PRODUCTO_ORIGEN' => 'Producto Origen',
+  'LBL_FECHA_ALTA' => 'Fecha Alta',
+  'LBL_ESTATUS' => 'Estatus',
+  'LBL_CANCELADO' => 'Cancelar',
+  'LBL_AVANCE_CLIENTE' => '¿Había un avance previo con el cliente?',
+  'LBL_MOTIVO_RECHAZO' => 'Motivo de rechazo',
+  'LBL_EXPLICACION_RECHAZO' => 'Explicación de rechazo',
+  'LBL_USUARIO_RECHAZO_USER_ID' => 'Rechazado por (relacionado Usuario ID)',
+  'LBL_USUARIO_RECHAZO' => 'Rechazado por',
+  'LBL_NUMERO_ANEXOS' => 'Número de anexos',
+  'LBL_PRIMER_FECHA_ANEXO' => 'Fecha Primer anexo',
+  'LBL_ULTIMA_FECHA_ANEXO' => 'Fecha Último anexo',
+);

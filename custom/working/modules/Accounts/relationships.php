@@ -1954,6 +1954,117 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
+  'accounts_c5515_uni_chattigo_1' => 
+  array (
+    'name' => 'accounts_c5515_uni_chattigo_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_c5515_uni_chattigo_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'C5515_uni_chattigo',
+        'rhs_table' => 'c5515_uni_chattigo',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_c5515_uni_chattigo_1_c',
+        'join_key_lhs' => 'accounts_c5515_uni_chattigo_1accounts_ida',
+        'join_key_rhs' => 'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+      ),
+    ),
+    'table' => 'accounts_c5515_uni_chattigo_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'accounts_c5515_uni_chattigo_1accounts_ida' => 
+      array (
+        'name' => 'accounts_c5515_uni_chattigo_1accounts_ida',
+        'type' => 'id',
+      ),
+      'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb' => 
+      array (
+        'name' => 'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_accounts_c5515_uni_chattigo_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_accounts_c5515_uni_chattigo_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_c5515_uni_chattigo_1accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_c5515_uni_chattigo_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_c5515_uni_chattigo_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'C5515_uni_chattigo',
+    'rhs_table' => 'c5515_uni_chattigo',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_c5515_uni_chattigo_1_c',
+    'join_key_lhs' => 'accounts_c5515_uni_chattigo_1accounts_ida',
+    'join_key_rhs' => 'accounts_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_c5515_uni_chattigo_1',
+    'rhs_subpanel' => 'ForAccountsAccounts_c5515_uni_chattigo_1',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
   'accounts_tct3_noviable_1' => 
   array (
     'name' => 'accounts_tct3_noviable_1',
@@ -2167,34 +2278,34 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
-  'bc_survey_accounts' => 
+  'accounts_uni_productos_1' => 
   array (
-    'name' => 'bc_survey_accounts',
-    'true_relationship_type' => 'many-to-many',
+    'name' => 'accounts_uni_productos_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
     'relationships' => 
     array (
-      'bc_survey_accounts' => 
+      'accounts_uni_productos_1' => 
       array (
-        'lhs_module' => 'bc_survey',
-        'lhs_table' => 'bc_survey',
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
         'lhs_key' => 'id',
-        'rhs_module' => 'Accounts',
-        'rhs_table' => 'accounts',
+        'rhs_module' => 'uni_Productos',
+        'rhs_table' => 'uni_productos',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'bc_survey_accounts_c',
-        'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
-        'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
+        'join_table' => 'accounts_uni_productos_1_c',
+        'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+        'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
       ),
     ),
-    'table' => 'bc_survey_accounts_c',
+    'table' => 'accounts_uni_productos_1_c',
     'fields' => 
     array (
       'id' => 
       array (
         'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
+        'type' => 'id',
       ),
       'date_modified' => 
       array (
@@ -2205,28 +2316,24 @@ $relationships = array (
       array (
         'name' => 'deleted',
         'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
+        'default' => 0,
       ),
-      'bc_survey_accountsbc_survey_ida' => 
+      'accounts_uni_productos_1accounts_ida' => 
       array (
-        'name' => 'bc_survey_accountsbc_survey_ida',
-        'type' => 'varchar',
-        'len' => 36,
+        'name' => 'accounts_uni_productos_1accounts_ida',
+        'type' => 'id',
       ),
-      'bc_survey_accountsaccounts_idb' => 
+      'accounts_uni_productos_1uni_productos_idb' => 
       array (
-        'name' => 'bc_survey_accountsaccounts_idb',
-        'type' => 'varchar',
-        'len' => 36,
+        'name' => 'accounts_uni_productos_1uni_productos_idb',
+        'type' => 'id',
       ),
     ),
     'indices' => 
     array (
       0 => 
       array (
-        'name' => 'bc_survey_accountsspk',
+        'name' => 'idx_accounts_uni_productos_1_pk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -2235,34 +2342,52 @@ $relationships = array (
       ),
       1 => 
       array (
-        'name' => 'bc_survey_accounts_alt',
+        'name' => 'idx_accounts_uni_productos_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_uni_productos_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_uni_productos_1uni_productos_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_uni_productos_1_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'bc_survey_accountsbc_survey_ida',
-          1 => 'bc_survey_accountsaccounts_idb',
+          0 => 'accounts_uni_productos_1uni_productos_idb',
         ),
       ),
     ),
-    'lhs_module' => 'bc_survey',
-    'lhs_table' => 'bc_survey',
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'Accounts',
-    'rhs_table' => 'accounts',
+    'rhs_module' => 'uni_Productos',
+    'rhs_table' => 'uni_productos',
     'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'bc_survey_accounts_c',
-    'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
-    'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_uni_productos_1_c',
+    'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
+    'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
     'readonly' => true,
-    'relationship_name' => 'bc_survey_accounts',
-    'rhs_subpanel' => NULL,
+    'relationship_name' => 'accounts_uni_productos_1',
+    'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-    'from_studio' => false,
   ),
   'anlzt_analizate_accounts' => 
   array (
@@ -2375,28 +2500,124 @@ $relationships = array (
     'for_activities' => false,
     'from_studio' => false,
   ),
-  'accounts_uni_productos_1' => 
+  'bc_survey_accounts' => 
   array (
-    'name' => 'accounts_uni_productos_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
+    'name' => 'bc_survey_accounts',
+    'true_relationship_type' => 'many-to-many',
     'relationships' => 
     array (
-      'accounts_uni_productos_1' => 
+      'bc_survey_accounts' => 
+      array (
+        'lhs_module' => 'bc_survey',
+        'lhs_table' => 'bc_survey',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Accounts',
+        'rhs_table' => 'accounts',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'bc_survey_accounts_c',
+        'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
+        'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
+      ),
+    ),
+    'table' => 'bc_survey_accounts_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'bc_survey_accountsbc_survey_ida' => 
+      array (
+        'name' => 'bc_survey_accountsbc_survey_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'bc_survey_accountsaccounts_idb' => 
+      array (
+        'name' => 'bc_survey_accountsaccounts_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'bc_survey_accountsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'bc_survey_accounts_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'bc_survey_accountsbc_survey_ida',
+          1 => 'bc_survey_accountsaccounts_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'bc_survey',
+    'lhs_table' => 'bc_survey',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Accounts',
+    'rhs_table' => 'accounts',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'bc_survey_accounts_c',
+    'join_key_lhs' => 'bc_survey_accountsbc_survey_ida',
+    'join_key_rhs' => 'bc_survey_accountsaccounts_idb',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_accounts',
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'cta_cuentas_bancarias_accounts' => 
+  array (
+    'name' => 'cta_cuentas_bancarias_accounts',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'cta_cuentas_bancarias_accounts' => 
       array (
         'lhs_module' => 'Accounts',
         'lhs_table' => 'accounts',
         'lhs_key' => 'id',
-        'rhs_module' => 'uni_Productos',
-        'rhs_table' => 'uni_productos',
+        'rhs_module' => 'cta_cuentas_bancarias',
+        'rhs_table' => 'cta_cuentas_bancarias',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_uni_productos_1_c',
-        'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
-        'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
+        'join_table' => 'cta_cuentas_bancarias_accounts_c',
+        'join_key_lhs' => 'cta_cuentas_bancarias_accountsaccounts_ida',
+        'join_key_rhs' => 'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb',
       ),
     ),
-    'table' => 'accounts_uni_productos_1_c',
+    'table' => 'cta_cuentas_bancarias_accounts_c',
     'fields' => 
     array (
       'id' => 
@@ -2415,14 +2636,14 @@ $relationships = array (
         'type' => 'bool',
         'default' => 0,
       ),
-      'accounts_uni_productos_1accounts_ida' => 
+      'cta_cuentas_bancarias_accountsaccounts_ida' => 
       array (
-        'name' => 'accounts_uni_productos_1accounts_ida',
+        'name' => 'cta_cuentas_bancarias_accountsaccounts_ida',
         'type' => 'id',
       ),
-      'accounts_uni_productos_1uni_productos_idb' => 
+      'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb' => 
       array (
-        'name' => 'accounts_uni_productos_1uni_productos_idb',
+        'name' => 'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb',
         'type' => 'id',
       ),
     ),
@@ -2430,7 +2651,7 @@ $relationships = array (
     array (
       0 => 
       array (
-        'name' => 'idx_accounts_uni_productos_1_pk',
+        'name' => 'idx_cta_cuentas_bancarias_accounts_pk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -2439,52 +2660,53 @@ $relationships = array (
       ),
       1 => 
       array (
-        'name' => 'idx_accounts_uni_productos_1_ida1_deleted',
+        'name' => 'idx_cta_cuentas_bancarias_accounts_ida1_deleted',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'accounts_uni_productos_1accounts_ida',
+          0 => 'cta_cuentas_bancarias_accountsaccounts_ida',
           1 => 'deleted',
         ),
       ),
       2 => 
       array (
-        'name' => 'idx_accounts_uni_productos_1_idb2_deleted',
+        'name' => 'idx_cta_cuentas_bancarias_accounts_idb2_deleted',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'accounts_uni_productos_1uni_productos_idb',
+          0 => 'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb',
           1 => 'deleted',
         ),
       ),
       3 => 
       array (
-        'name' => 'accounts_uni_productos_1_alt',
+        'name' => 'cta_cuentas_bancarias_accounts_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'accounts_uni_productos_1uni_productos_idb',
+          0 => 'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb',
         ),
       ),
     ),
     'lhs_module' => 'Accounts',
     'lhs_table' => 'accounts',
     'lhs_key' => 'id',
-    'rhs_module' => 'uni_Productos',
-    'rhs_table' => 'uni_productos',
+    'rhs_module' => 'cta_cuentas_bancarias',
+    'rhs_table' => 'cta_cuentas_bancarias',
     'rhs_key' => 'id',
     'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_uni_productos_1_c',
-    'join_key_lhs' => 'accounts_uni_productos_1accounts_ida',
-    'join_key_rhs' => 'accounts_uni_productos_1uni_productos_idb',
+    'join_table' => 'cta_cuentas_bancarias_accounts_c',
+    'join_key_lhs' => 'cta_cuentas_bancarias_accountsaccounts_ida',
+    'join_key_rhs' => 'cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb',
     'readonly' => true,
-    'relationship_name' => 'accounts_uni_productos_1',
+    'relationship_name' => 'cta_cuentas_bancarias_accounts',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
+    'from_studio' => false,
   ),
   'accounts_modified_user' => 
   array (
@@ -2941,13 +3163,124 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'accounts_c5515_uni_chattigo_1' => 
+  'accounts_ref_venta_cruzada_1' => 
   array (
-    'rhs_label' => 'Conversaciones en Chattigo',
+    'name' => 'accounts_ref_venta_cruzada_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_ref_venta_cruzada_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Ref_Venta_Cruzada',
+        'rhs_table' => 'ref_venta_cruzada',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_ref_venta_cruzada_1_c',
+        'join_key_lhs' => 'accounts_ref_venta_cruzada_1accounts_ida',
+        'join_key_rhs' => 'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb',
+      ),
+    ),
+    'table' => 'accounts_ref_venta_cruzada_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'accounts_ref_venta_cruzada_1accounts_ida' => 
+      array (
+        'name' => 'accounts_ref_venta_cruzada_1accounts_ida',
+        'type' => 'id',
+      ),
+      'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb' => 
+      array (
+        'name' => 'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_accounts_ref_venta_cruzada_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_accounts_ref_venta_cruzada_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_ref_venta_cruzada_1accounts_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_accounts_ref_venta_cruzada_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'accounts_ref_venta_cruzada_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Ref_Venta_Cruzada',
+    'rhs_table' => 'ref_venta_cruzada',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_ref_venta_cruzada_1_c',
+    'join_key_lhs' => 'accounts_ref_venta_cruzada_1accounts_ida',
+    'join_key_rhs' => 'accounts_ref_venta_cruzada_1ref_venta_cruzada_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_ref_venta_cruzada_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'accounts_ref_venta_cruzada_2' => 
+  array (
+    'rhs_label' => 'Referencias Vtas Cruzadas',
     'lhs_label' => 'Cuentas',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'Accounts',
-    'rhs_module' => 'C5515_uni_chattigo',
+    'rhs_module' => 'Ref_Venta_Cruzada',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -2955,6 +3288,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'accounts_c5515_uni_chattigo_1',
+    'relationship_name' => 'accounts_ref_venta_cruzada_2',
   ),
 );
