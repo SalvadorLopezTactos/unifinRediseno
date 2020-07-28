@@ -51,10 +51,27 @@ class AnexosVentaCruzada extends SugarApi
         $response=array();
 
         $idCuenta=$args['idCuenta'];
+        $idCorto=$args['idCorto'];
         $idProducto=$args['idProducto'];
-        $numeroAnexos=$args['anexosActivos'];
 
-        if(isset($idCuenta)){
+        if(isset($idCorto) && $idCorto !="" && empty($idCuenta)){
+            //Obtener id de cuenta con el idCliente del parámetro
+            $beanQuery = BeanFactory::newBean('Accounts');
+            $sugarQueryAcc = new SugarQuery();
+            $sugarQueryAcc->select(array('id'));
+            $sugarQueryAcc->from($beanQuery);
+            $sugarQueryAcc->where()->equals('idcliente_c',$idCorto);
+            $sugarQueryAcc->limit(1);
+            $resultAcc = $sugarQueryAcc->execute();
+
+            $countAcc = count($resultAcc);
+            if($countAcc>0){
+                $idCuenta=$resultAcc[0]['id'];
+            }
+
+        }
+
+        if(isset($idCuenta) && $idCuenta !=""){
             $beanCuenta=BeanFactory::retrieveBean('Accounts',$idCuenta);
 
             if(!empty($beanCuenta)){
@@ -73,8 +90,8 @@ class AnexosVentaCruzada extends SugarApi
                         foreach ($relatedBeans as $ref) {
                             if($ref->estatus==1 && $ref->producto_referenciado==$idProducto){
                                 $anexosActuales=$ref->numero_anexos;
-                                $anexosNuevos=$anexosActuales+$numeroAnexos;
-                                $ref->numero_anexos=$anexosNuevos;
+                                $nuevosAnexos=$anexosActuales+1;
+                                $ref->numero_anexos=$nuevosAnexos;
 
                                 if($ref->primer_fecha_anexo ==""){
                                     $ref->primer_fecha_anexo=date('Y-m-d');
