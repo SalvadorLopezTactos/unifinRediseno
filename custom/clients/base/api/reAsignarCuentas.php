@@ -54,6 +54,8 @@ class reAsignarCuentas extends SugarApi
             $user_field = "user_id7_c";
         }else if ($product == "UNILEASE") {
             $user_field = "user_id7_c";
+        }else if ($product == "RM") {
+            $user_field = "user_id8_c";
         }
 
 
@@ -120,6 +122,14 @@ class reAsignarCuentas extends SugarApi
                                 }
                                 break;
                         }
+                        /** Excepcion para actualiza SOS cuando es tipo producto LEASINGS */
+                        if($asignaFecha->tipo_producto == '7' && $product=='LEASING')
+                        {
+                            $GLOBALS['log']->fatal("Actualizar SOS");
+                            $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                            $asignaFecha->assigned_user_id = $reAsignado;
+                        }
+
                         $asignaFecha->save();
                     }
                 }
@@ -142,6 +152,9 @@ class reAsignarCuentas extends SugarApi
                         break;
                     case 'UNILEASE':
                         $account->user_id7_c = $reAsignado;
+                        break;
+                    case 'RM':
+                        $account->user_id8_c = $reAsignado;
                         break;
                 }
 
@@ -221,6 +234,7 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
                 if ($product == 'UNILEASE') $producto = 9;
+                if ($product == 'RM') $producto =11; # Validar si se debe reasignar las oportunidades
 
                 $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
 
@@ -261,6 +275,11 @@ SQL;
                         $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
                     }
 
+                    if($producto=='1')
+                    {
+                       $sos_condicion=" OR cstm.producto_c='7'";
+                    }
+
                     $bl_cuenta = "SELECT b.id, b.mes,b.description
 FROM
   lev_backlog b
@@ -268,7 +287,7 @@ FROM
   ON cstm.id_c=b.id
 WHERE
   b.account_id_c = '{$value}'" . $condicion . "
-  AND cstm.producto_c='{$producto}' AND deleted = 0";
+  AND (cstm.producto_c='{$producto}' ".$sos_condicion.") AND deleted = 0";
 
                     $result_bl_cuentas = $db->query($bl_cuenta);
 

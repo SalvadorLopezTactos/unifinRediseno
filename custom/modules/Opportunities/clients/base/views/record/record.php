@@ -362,122 +362,134 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_USUARIO_BO',
               ),
-              27 => 
+                27 =>
+                    array (
+                        'name' => 'asesor_operacion_c',
+                        'studio' => 'visible',
+                        'label' => 'LBL_ASESOR_OPERACION_C',
+                        'span' => 12,
+                        'readonly' => true,
+                    ),
+                28 =>
+                    array (
+
+                    ),
+              29 =>
               array (
                 'name' => 'f_tipo_factoraje_c',
                 'studio' => 'visible',
                 'label' => 'LBL_F_TIPO_FACTORAJE',
                 'span' => 12,
               ),
-              28 => 
+              30 =>
               array (
                 'name' => 'tipo_tasa_ordinario_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TIPO_TASA_ORDINARIO',
               ),
-              29 => 
+              31 =>
               array (
                 'name' => 'tasa_fija_ordinario_c',
                 'label' => 'LBL_TASA_FIJA_ORDINARIO',
               ),
-              30 => 
+              32 =>
               array (
                 'name' => 'instrumento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_INSTRUMENTO',
               ),
-              31 => 
+              33 =>
               array (
                 'name' => 'puntos_sobre_tasa_c',
                 'label' => 'LBL_PUNTOS_SOBRE_TASA',
               ),
-              32 => 
+              34 =>
               array (
                 'name' => 'porcentaje_ca_c',
                 'label' => 'LBL_PORCENTAJE_CA',
               ),
-              33 => 
+              35 =>
               array (
                 'name' => 'f_aforo_c',
                 'label' => 'LBL_F_AFORO',
               ),
-              34 => 
+              36 =>
               array (
                 'name' => 'tipo_tasa_moratorio_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TIPO_TASA_MORATORIO',
               ),
-              35 => 
+              37 =>
               array (
                 'name' => 'tasa_fija_moratorio_c',
                 'label' => 'LBL_TASA_FIJA_MORATORIO',
               ),
-              36 => 
+              38 =>
               array (
                 'name' => 'instrumento_moratorio_c',
                 'studio' => 'visible',
                 'label' => 'LBL_INSTRUMENTO_MORATORIO',
               ),
-              37 => 
+              39 =>
               array (
                 'name' => 'puntos_tasa_moratorio_c',
                 'label' => 'LBL_PUNTOS_TASA_MORATORIO',
               ),
-              38 => 
+              40 =>
               array (
                 'name' => 'factor_moratorio_c',
                 'label' => 'LBL_FACTOR_MORATORIO',
               ),
-              39 => 
+              41 =>
               array (
               ),
-              40 => 
+              42 =>
               array (
                 'name' => 'cartera_descontar_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CARTERA_DESCONTAR_C',
                 'span' => 12,
               ),
-              41 => 
+              43 =>
               array (
                 'name' => 'comision_c',
                 'label' => 'LBL_COMISION',
               ),
-              42 => 
+              44 =>
               array (
                 'name' => 'opportunities_ag_vendedores_1_name',
               ),
-              43 => 
+              45 =>
               array (
                 'name' => 'condiciones_financieras',
                 'studio' => 'visible',
                 'label' => 'LBL_CONDICIONES_FINANCIERAS',
                 'span' => 12,
               ),
-              44 => 
+              46 =>
               array (
                 'name' => 'ratificacion_incremento_c',
                 'label' => 'LBL_RATIFICACION_INCREMENTO',
               ),
-              45 => 
+              47 =>
               array (
                 'name' => 'ri_usuario_bo_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_USUARIO_BO',
               ),
-              46 => 
+              48 =>
               array (
                 'name' => 'ri_anio_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_ANIO_C',
               ),
-              47 => 
+              49 =>
               array (
                 'name' => 'ri_mes_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_MES_C',
               ),
-              48 => 
+              50 =>
               array (
                 'related_fields' => 
                 array (
@@ -487,154 +499,154 @@ array (
                 'name' => 'monto_ratificacion_increment_c',
                 'label' => 'LBL_MONTO_RATIFICACION_INCREMENT',
               ),
-              49 => 
+              51 =>
               array (
                 'name' => 'plazo_ratificado_incremento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PLAZO_RATIFICADO_INCREMENTO',
               ),
-              50 => 
+              52 =>
               array (
                 'name' => 'condiciones_financieras_incremento_ratificacion',
                 'studio' => 'visible',
                 'label' => 'LBL_CONDICIONES_FINANCIERAS_INCREMENTO_RATIFICACION',
                 'span' => 12,
               ),
-              51 => 
+              53 =>
               array (
                 'name' => 'ri_porcentaje_ca_c',
                 'label' => 'LBL_RI_PORCENTAJE_CA',
               ),
-              52 => 
+              54 =>
               array (
               ),
-              53 => 
+              55 =>
               array (
                 'name' => 'ri_tipo_tasa_ordinario_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_TIPO_TASA_ORDINARIO',
               ),
-              54 => 
+              56 =>
               array (
                 'name' => 'ri_tasa_fija_ordinario_c',
                 'label' => 'LBL_RI_TASA_FIJA_ORDINARIO',
               ),
-              55 => 
+              57 =>
               array (
                 'name' => 'ri_instrumento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_INSTRUMENTO',
               ),
-              56 => 
+              58 =>
               array (
                 'name' => 'ri_puntos_sobre_tasa_c',
                 'label' => 'LBL_RI_PUNTOS_SOBRE_TASA',
               ),
-              57 => 
+              59 =>
               array (
                 'name' => 'ri_tipo_tasa_moratorio_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_TIPO_TASA_MORATORIO',
               ),
-              58 => 
+              60 =>
               array (
                 'name' => 'ri_tasa_fija_moratorio_c',
                 'label' => 'LBL_RI_TASA_FIJA_MORATORIO',
               ),
-              59 => 
+              61 =>
               array (
                 'name' => 'ri_instrumento_moratorio_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_INSTRUMENTO_MORATORIO',
               ),
-              60 => 
+              62 =>
               array (
                 'name' => 'ri_puntos_tasa_moratorio_c',
                 'label' => 'LBL_RI_PUNTOS_TASA_MORATORIO',
               ),
-              61 => 
+              63 =>
               array (
                 'name' => 'ri_factor_moratorio_c',
                 'label' => 'LBL_RI_FACTOR_MORATORIO',
               ),
-              62 => 
+              64 =>
               array (
               ),
-              63 => 
+              65 =>
               array (
                 'name' => 'ri_cartera_descontar_c',
                 'studio' => 'visible',
                 'label' => 'LBL_RI_CARTERA_DESCONTAR',
                 'span' => 12,
               ),
-              64 => 
+              66 =>
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              65 => 
+              67 =>
               array (
               ),
-              66 => 
+              68 =>
               array (
                 'name' => 'referenciador_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REFERENCIADOR_C',
               ),
-              67 => 
+              69 =>
               array (
                 'name' => 'comision_referenciador_c',
                 'label' => 'LBL_COMISION_REFERENCIADOR_C',
               ),
-              68 => 
+              70 =>
               array (
                 'name' => 'vendedor_c',
                 'label' => 'LBL_VENDEDOR_C',
               ),
-              69 => 
+              71 =>
               array (
                 'name' => 'pago_referenciador_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAGO_REFERENCIADOR_C',
               ),
-              70 => 
+              72 =>
               array (
                 'name' => 'seguro_contado_c',
                 'label' => 'LBL_SEGURO_CONTADO_C',
               ),
-              71 => 
+              73 =>
               array (
                 'name' => 'seguro_financiado_c',
                 'label' => 'LBL_SEGURO_FINANCIADO_C',
               ),
-              72 => 
+              74 =>
               array (
                 'name' => 'garantia_adicional_c',
                 'label' => 'LBL_GARANTIA_ADICIONAL_C',
               ),
-              73 => 
+              75 =>
               array (
               ),
-              74 => 
+              76 =>
               array (
                 'name' => 'descripcion_garantia_adicion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_DESCRIPCION_GARANTIA_ADICION',
                 'span' => 12,
               ),
-              75 => 
+              77 =>
               array (
                 'name' => 'f_comentarios_generales_c',
                 'studio' => 'visible',
                 'label' => 'LBL_F_COMENTARIOS_GENERALES',
                 'span' => 12,
               ),
-              76 => 
+              78 =>
               array (
                 'name' => 'ult_operacion_activa_c',
                 'label' => 'LBL_ULT_OPERACION_ACTIVA',
               ),
-              77 => 
+              79 =>
               array (
                 'name' => 'operacion_curso_chk_c',
                 'label' => 'LBL_OPERACION_CURSO_CHK',

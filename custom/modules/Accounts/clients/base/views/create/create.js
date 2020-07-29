@@ -2968,6 +2968,13 @@
             this.model.set('promotoruniclick_c', '9 - Sin Gestor');
             this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
+        if (userprod.includes('11')) {
+            this.model.set('promotorrm_c', nombrecompleto);
+            this.model.set('user_id8_c', idusrlog);
+        } else {
+            this.model.set('promotorrm_c', '9 - Sin Gestor');
+            this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
+        }
     },
 
     check_factoraje: function () {
