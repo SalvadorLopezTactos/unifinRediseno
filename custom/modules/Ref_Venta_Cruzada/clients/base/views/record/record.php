@@ -179,34 +179,10 @@ array (
               ),
               2 => 
               array (
-                'name' => 'producto_referenciado',
-                'label' => 'LBL_PRODUCTO_REFERENCIADO',
-              ),
-              3 => 
-              array (
-                'name' => 'usuario_producto',
-                'studio' => 'visible',
-                'label' => 'LBL_USUARIO_PRODUCTO',
-              ),
-              4 => 
-              array (
                 'name' => 'description',
                 'span' => 6,
               ),
-              5 => 
-              array (
-                'span' => 6,
-              ),
-              6 => 
-              array (
-                'name' => 'producto_origen',
-                'label' => 'LBL_PRODUCTO_ORIGEN',
-              ),
-              7 => 
-              array (
-                'name' => 'assigned_user_name',
-              ),
-              8 => 
+              3 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -229,12 +205,36 @@ array (
                     'name' => 'created_by_name',
                   ),
                 ),
+                'span' => 6,
               ),
-              9 => 
+              4 => 
+              array (
+                'name' => 'assigned_user_name',
+              ),
+              5 => 
+              array (
+                'name' => 'producto_origen',
+                'label' => 'LBL_PRODUCTO_ORIGEN',
+              ),
+              6 => 
+              array (
+                'name' => 'usuario_producto',
+                'studio' => 'visible',
+                'label' => 'LBL_USUARIO_PRODUCTO',
+              ),
+              7 => 
+              array (
+                'name' => 'producto_referenciado',
+                'label' => 'LBL_PRODUCTO_REFERENCIADO',
+              ),
+              8 => 
               array (
                 'name' => 'usuario_rm',
                 'studio' => 'visible',
                 'label' => 'LBL_USUARIO_RM',
+              ),
+              9 => 
+              array (
               ),
               10 => 
               array (
