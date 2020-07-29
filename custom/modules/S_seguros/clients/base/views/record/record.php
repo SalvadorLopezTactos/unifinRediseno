@@ -393,13 +393,23 @@ array (
               ),
               35 => 
               array (
-                'name' => 'info_actual',
-                'label' => 'LBL_INFO_ACTUAL',
+                'name' => 'google_drive_c',
+                'label' => 'LBL_GOOGLE_DRIVE',
+                'readonly' => true,
               ),
               36 => 
               array (
-                'name' => 'google_drive_c',
-                'label' => 'LBL_GOOGLE_DRIVE',
+                'name' => 'doc_cliente_c',
+                'label' => 'LBL_DOC_CLIENTE',
+                'readonly' => true,
+              ),
+              37 => 
+              array (
+                'name' => 'info_actual',
+                'label' => 'LBL_INFO_ACTUAL',
+              ),
+              38 => 
+              array (
               ),
             ),
           ),

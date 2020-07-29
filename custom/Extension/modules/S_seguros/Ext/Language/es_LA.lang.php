@@ -31,3 +31,5 @@ $mod_strings['LBL_TIPO_REGISTRO_SF'] = 'Tipo Registro';
 $mod_strings['LBL_TIPO_SF'] = 'Tipo';
 $mod_strings['LBL_GOOGLE_DRIVE'] = 'Google Drive';
 $mod_strings['LBL_EJECUTIVO'] = 'Ejecutivo Asignado o KAM';
+$mod_strings['LBL_DOC_CLIENTE'] = 'Documento del Cliente';
+$mod_strings['LBL_CURRENCY_5'] = 'LBL_CURRENCY';
