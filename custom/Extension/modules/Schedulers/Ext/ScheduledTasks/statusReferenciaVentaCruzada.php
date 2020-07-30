@@ -1,10 +1,13 @@
 <?php
     //add the job key to the list of job strings
     array_push($job_strings, 'statusReferenciaVentaCruzada');
+    require_once 'include/SugarPHPMailer.php';
+    require_once 'include/utils/file_utils.php';
 
-    function statusReferenciaVentaCruzada()
+
+function statusReferenciaVentaCruzada()
     {
-        $GLOBALS['log']->fatal('DESDE CORE');
+        $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Ref_Venta_Cruzada/';
     	// Obtener Referencias que fueron creadas 3 meses atrás
         $hoy= date("Y-m-d H:i:s");
         $tres_meses=date( "Y-m-d H:i:s", strtotime( $hoy ." -3 month" ) );
@@ -12,14 +15,20 @@
         //Se obtiene un día menos a los tres meses para recuperar los registros creados en todo el día
         //y no solo casarlo con el operador (equals) ya que el campo es datetime y no solo date
         $tres_meses_un_dia_antes=date( "Y-m-d H:i:s", strtotime( $tres_meses ." -1 day" ) );
-        //2020-04-28 20:42:26
-        //2020-04-27 20:42:26
 
+        /*
         $query = <<<SQL
 select * from ref_venta_cruzada 
 where date_entered between '{$tres_meses_un_dia_antes}' and '{$tres_meses}' 
 order by date_entered desc
 SQL;
+        */
+        $query = <<<SQL
+select * from ref_venta_cruzada 
+where date_entered between '2020-07-27 23:06:04' and '2020-07-29 05:06:04'  
+order by date_entered desc
+SQL;
+
         $GLOBALS['log']->fatal("EL QUERY");
         $GLOBALS['log']->fatal($query);
         $result = $GLOBALS['db']->query($query);
@@ -37,24 +46,91 @@ SQL;
 
                     $numeroAnexos=$beanRef->numero_anexos;
                     if($numeroAnexos>0){
-                        $GLOBALS['log']->fatal("Tiene anexos, es exitosa");
+                        $GLOBALS['log']->fatal("Actualizando Referencia con id ".$beanRef->id." - EXITOSA");
                         //Exitosa
                         $beanRef->estatus='4';
                         $beanRef->save();
-                        //Crea Notificacion
-                        /*
-                        $notification_bean = BeanFactory::getBean("Notifications");
-                        $notification_bean->name = 'Referencia exitosa';
-                        $notification_bean->description = 'Se le informa que la referencia de venta cruzada para la cuenta:'..', ha sido exitosa y ya cuenta con anexos/contratos activos.\n
-Para ver el detalle de la referencia dé click aquí (link a registro de referencia en CRM)\nAtentamente Unifin
-';
-                        $notification_bean->parent_id = $resultRef[$current]['accounts_ref_venta_cruzada_1accounts_ida'];
-                        $notification_bean->parent_type = 'Accounts';
-                        $notification_bean->assigned_user_id = $resultRef[$current]['assigned_user_id'];
-                        $notification_bean->severity = "alert";
-                        $notification_bean->is_read = 0;
-                        $notification_bean->save();
-                        */
+
+                        //Sección para envío de correo a Asesores
+                        $idAsesorOrigen=$beanRef->assigned_user_id;
+                        $nombreAsesorOrigen=$beanRef->assigned_user_name;
+                        $correo_asesor_origen="";
+                        //Obteniendo correo de asesor Origen
+                        $beanAsesorOrigen = BeanFactory::retrieveBean('Users', $idAsesorOrigen);
+                        if(!empty($beanAsesorOrigen)){
+                            $correo_asesor_origen=$beanAsesorOrigen->email1;
+                        }
+
+                        $idAsesorRM=$beanRef->user_id1_c;/*Validar que no sea null*/
+                        $nombreAsesorRM=$beanRef->usuario_rm;
+                        $correo_asesor_rm="";
+                        if($idAsesorRM != "" && $idAsesorRM !=null){
+                            $beanAsesorRM = BeanFactory::retrieveBean('Users', $idAsesorRM);
+                            if(!empty($beanAsesorRM)){
+                                $correo_asesor_rm=$beanAsesorRM->email1;
+                            }
+                        }
+
+                        $nombreCuenta=$beanRef->accounts_ref_venta_cruzada_1_name;
+                        $idReferencia=$beanRef->id;
+
+                        $GLOBALS['log']->fatal("URL PARA LINK");
+                        $GLOBALS['log']->fatal($urlSugar.$idReferencia);
+
+
+                        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorOrigen . '</b>
+      <br><br>Se le informa que la referencia de venta cruzada para la cuenta: '. $nombreCuenta.', ha sido exitosa y ya cuenta con anexos/contratos activos.
+      <br><br>Para ver el detalle de la referencia <a id="downloadErrors" href="'. $urlSugar.$idReferencia.'">Da Click Aquí</a>
+      <br><br>Atentamente Unifin</font></p>
+      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+                        $GLOBALS['log']->fatal("ENVIANDO CORREO A ASESOR ORIGEN CON EMAIL ".$correo_asesor_origen);
+
+                        //Enviando correo a asesor origen
+                        $mailer = MailerFactory::getSystemDefaultMailer();
+                        $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                        $mailer->setSubject("Referencia exitosa");
+                        $body = trim($mailHTML);
+                        $mailer->setHtmlBody($body);
+                        $mailer->clearRecipients();
+                        $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $result = $mailer->send();
+
+                        $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
+      <br><br>Se le informa que la referencia de venta cruzada para la cuenta: '. $nombreCuenta.', ha sido exitosa y ya cuenta con anexos/contratos activos.
+      <br><br>Para ver el detalle de la referencia <a id="downloadErrors" href="'. $urlSugar.$idReferencia.'">Da Click Aquí</a>
+      <br><br>Atentamente Unifin</font></p>
+      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+                        //Enviando correo a asesor rm
+                        if($correo_asesor_rm!=""){
+                            $GLOBALS['log']->fatal("ENVIANDO CORREO A ASESOR RM CON EMAIL ".$correo_asesor_rm);
+                            $mailer = MailerFactory::getSystemDefaultMailer();
+                            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                            $mailer->setSubject("Referencia exitosa");
+                            $body = trim($mailHTMLRM);
+                            $mailer->setHtmlBody($body);
+                            $mailer->clearRecipients();
+                            $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $result = $mailer->send();
+
+                        }
+
+
                     }else{
                         //Expirada
                         $beanRef->estatus='5';
