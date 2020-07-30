@@ -455,8 +455,6 @@
                             case '11': // RM
                                 var rm_id = modalAccount.context.get('model').attributes.user_id8_c; // id user producto cuenta
                                 contextModal.call_service_reasignacion(cuenta_id, user_select, 'RM', prod_select, rm_id, data.full_name);
-                                alert("prodcuto RM" +  rm_id);
-                                alert("seleccionado " +  prod_select);
                                 break;
                         }
 
