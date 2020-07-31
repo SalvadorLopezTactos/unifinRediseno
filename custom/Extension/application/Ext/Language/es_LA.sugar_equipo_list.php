@@ -44,6 +44,7 @@ $app_list_strings['equipo_list']=array (
   'TOL' => 'TOL',
   'VER' => 'VER',
   'WorkOut' => 'Work out',
+  'RM' => 'RM',
   'CA6' => 'CA6',
   'CLIC' => 'UNICLICK',
   'TOR' => 'TOR',
