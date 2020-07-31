@@ -1,5 +1,5 @@
 <?php
- // created: 2019-08-20 17:52:55
+ // created: 2020-07-31 12:57:17
 
 $app_list_strings['equipo_list']=array (
   0 => '',
@@ -44,4 +44,5 @@ $app_list_strings['equipo_list']=array (
   'TOL' => 'TOL',
   'VER' => 'VER',
   'WorkOut' => 'Work out',
+  'RM' => 'RM',
 );
