@@ -41,13 +41,13 @@ include_once("include/workflow/custom_utils.php");
 	 $secondary_array = array(); 
 	 //Secondary Triggers 
 	 //Secondary Trigger number #1
-	 if( (isset($focus->persona_c) && $focus->persona_c ==  stripslashes('3'))	 ){ 
+	 if( (isset($focus->persona_c) && $focus->persona_c ==  stripslashes('Cliente'))	 ){ 
 	 
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['f2ba1cda_8fe9_11ea_8cce_a0481cdf89eb'])){
-		$triggeredWorkflows['f2ba1cda_8fe9_11ea_8cce_a0481cdf89eb'] = true;
+	if (!isset($triggeredWorkflows['b237cbbe_d34e_11ea_b399_8c705aab3706'])){
+		$triggeredWorkflows['b237cbbe_d34e_11ea_b399_8c705aab3706'] = true;
 		 $alertshell_array = array(); 
 
 	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
@@ -111,13 +111,13 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 	 $secondary_array = array(); 
 	 //Secondary Triggers 
 	 //Secondary Trigger number #1
-	 if( (isset($focus->persona_c) && $focus->persona_c ==  stripslashes('2'))	 ){ 
+	 if( (isset($focus->persona_c) && $focus->persona_c ==  stripslashes('Prospecto'))	 ){ 
 	 
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['f2bec97e_8fe9_11ea_94d3_a0481cdf89eb'])){
-		$triggeredWorkflows['f2bec97e_8fe9_11ea_94d3_a0481cdf89eb'] = true;
+	if (!isset($triggeredWorkflows['b2387352_d34e_11ea_a506_8c705aab3706'])){
+		$triggeredWorkflows['b2387352_d34e_11ea_a506_8c705aab3706'] = true;
 		 $alertshell_array = array(); 
 
 	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
