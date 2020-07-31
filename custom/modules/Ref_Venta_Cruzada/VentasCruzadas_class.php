@@ -33,16 +33,12 @@ class VentasCruzadas_class
 						$beans = $parentBean->accounts_uni_productos_1->getBeans();
 						if (!empty($beans)) {
 							foreach($beans as $prod){
-								
 								//Producto desatendido estatus =2
-								if($bean->producto_referenciado == $prod->tipo_producto){
-									$array = $GLOBALS['app_list_strings']['usuarios_no_ceder_list'];
-									//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
-									
-									//id no es null || vacio
-									if($prod->estatus_atencion = '1' ){
-										$no_valido = 1;
-									}
+								//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
+								//id no es null || vacio	
+								if($bean->producto_referenciado == $prod->tipo_producto && $prod->estatus_atencion = '1' ){
+									//$array = $GLOBALS['app_list_strings']['usuarios_no_ceder_list'];
+									$no_valido = 1;
 								}
 							}
 						}
