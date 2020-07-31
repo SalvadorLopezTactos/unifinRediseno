@@ -149,7 +149,7 @@ if(isset($_REQUEST['Oppid'])){
 /* Vars para URL del servidor de dashlets */
 global $sugar_config;
 $DASHLET_URL = $sugar_config['uni2_url'];
-
+$CREDITO_URL = $sugar_config['credito_url'];
 ?>
 
 <!-- Se agregan las credenciales de Vaddin para las peticiones, permitiendo las cookies de sesión -->
@@ -177,7 +177,7 @@ $DASHLET_URL = $sugar_config['uni2_url'];
 
 <script type="text/javascript"
 
-        src="<?php echo $DASHLET_URL; ?>VAADIN/vaadinBootstrap.js">
+        src="<?php echo $CREDITO_URL; ?>VAADIN/vaadinBootstrap.js">
 
 </script>
 
@@ -212,7 +212,7 @@ $DASHLET_URL = $sugar_config['uni2_url'];
 
 <script type="text/javascript">
 
-    <!-- Start the Vaadin application from $DASHLET_URL -->
+    <!-- Start the Vaadin application from $CREDITO_URL -->
 
     window.onload = function() {
 
@@ -222,9 +222,9 @@ $DASHLET_URL = $sugar_config['uni2_url'];
 
         vaadin.initApplication("expediente", {
 
-            "browserDetailsUrl": "<?php echo $DASHLET_URL; ?>expedienteCredito/",
+            "browserDetailsUrl": "<?php echo $CREDITO_URL; ?>expedienteCredito/",
 
-            "serviceUrl": "<?php echo $DASHLET_URL; ?>expedienteCredito/",
+            "serviceUrl": "<?php echo $CREDITO_URL; ?>expedienteCredito/",
 
             "widgetset": "com.unifin.MyAppWidgetset",
 
@@ -233,7 +233,7 @@ $DASHLET_URL = $sugar_config['uni2_url'];
 
             "versionInfo": {"vaadinVersion": "7.4.0"},
 
-            "vaadinDir": "<?php echo $DASHLET_URL; ?>VAADIN/",
+            "vaadinDir": "<?php echo $CREDITO_URL; ?>VAADIN/",
 
             "heartbeatInterval": 3000,
 
