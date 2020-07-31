@@ -20,6 +20,25 @@ $dependencies['Ref_Venta_Cruzada']['estatus'] = array
     ),
     'notActions' => array(),
 );
+
+$dependencies['Ref_Venta_Cruzada']['producto_origen'] = array
+(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('name'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'producto_origen',
+                'value' => 'true',
+            ),
+        ),
+    ),
+    'notActions' => array(),
+);
+
 $dependencies['Ref_Venta_Cruzada']['assigned_user_name'] = array
 (
     'hooks' => array("all"),
@@ -37,7 +56,6 @@ $dependencies['Ref_Venta_Cruzada']['assigned_user_name'] = array
     ),
     'notActions' => array(),
 );
-
 $dependencies['Ref_Venta_Cruzada']['cancelado_Visibility'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
