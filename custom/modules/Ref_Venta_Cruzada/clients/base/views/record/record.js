@@ -18,6 +18,9 @@
 		self.noEditFields.push('primer_fecha_anexo');
 		self.noEditFields.push('ultima_fecha_anexo');
 		
+		this.model.on("change:cancelado", _.bind(this.set_usuariorechazado, this));
+		this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
+
 		this._super('_renderHtml'); 
       
 	},
@@ -29,5 +32,46 @@
 	_render: function (options) {
         this._super("_render");
     },	
+	
+	set_usuariorechazado: function () {
+		if(this.model.get('cancelado') == '1' ){
+			this.model.set('usuario_rechazo',App.user.attributes.full_name);
+		}else{
+			this.model.set('usuario_rechazo', '');
+		}
+	},
+	
+	valida_requeridos: function (fields, errors, callback) {
+        var campos = "";   
+      
+        if ( this.model.get('cancelado') == '1' ) {
+            if (this.model.get('avance_cliente') == '') {
+				campos = campos + '<b>' + '¿Había un avance previo con el cliente?'+ '</b><br>';
+				errors['avance_cliente'] = errors['avance_cliente'] || {};
+				errors['avance_cliente'].required = true;
+			}
+			if (this.model.get('motivo_rechazo') == '') {
+				campos = campos + '<b>' + 'Motivo de rechazo'+ '</b><br>';
+				errors['motivo_rechazo'] = errors['motivo_rechazo'] || {};
+				errors['motivo_rechazo'].required = true;
+			}
+			if (this.model.get('explicacion_rechazo') == '') {
+				campos = campos + '<b>' + 'Explicación de rechazo'+ '</b><br>';
+				errors['explicacion_rechazo'] = errors['explicacion_rechazo'] || {};
+				errors['explicacion_rechazo'].required = true;
+			}
+        }
+        
+		
+        if (campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información para guardar una <b>Referencia Venta Cruzada: </b><br>" + campos,
+                autoClose: false
+            });
+        }
 
+        callback(null, fields, errors);
+    },
+	
 })
