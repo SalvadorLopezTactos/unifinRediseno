@@ -40,7 +40,7 @@ class VentasCruzadas_class
 									//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
 									//usuario no este en 9, lista usuarios_no_ceder_list
 									//id no es null || vacio
-									if($prod->estatus_atencion = '1' || !(in_array($prod->assigned_user_id, $array))){
+									if($prod->estatus_atencion == '1' || !(in_array($prod->assigned_user_id, $array))){
 										$no_valido = 1;
 									}
 								}
