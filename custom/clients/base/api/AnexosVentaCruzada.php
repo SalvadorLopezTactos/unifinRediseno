@@ -50,7 +50,7 @@ class AnexosVentaCruzada extends SugarApi
     {
         $response=array();
 
-        $idCuenta=$args['idCuenta'];
+        $idCuenta=$args['idCRM'];
         $idCorto=$args['idCorto'];
         $idProducto=$args['idProducto'];
 
