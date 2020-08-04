@@ -36,7 +36,7 @@ class VentasCruzadas_class
 								
 								//Producto desatendido estatus =2
 								if($bean->producto_referenciado == $prod->tipo_producto){
-									$array = $GLOBALS['app_list_strings']['usuarios_no_ceder_list'];
+									$array = $GLOBALS['app_list_strings']['usuarios_ref_no_validos_list'];
 									//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
 									//usuario no este en 9, lista usuarios_no_ceder_list
 									//id no es null || vacio
