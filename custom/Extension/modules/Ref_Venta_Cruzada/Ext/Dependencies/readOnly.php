@@ -25,14 +25,14 @@ $dependencies['Ref_Venta_Cruzada']['usuario_producto'] = array
 (
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('name'),
+    'triggerFields' => array('id'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'usuario_producto',
-                'value' => 'true',
+                'value' => 'not(equal($id,""))',
             ),
         ),
     ),
@@ -43,14 +43,14 @@ $dependencies['Ref_Venta_Cruzada']['usuario_rm'] = array
 (
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('name'),
+    'triggerFields' => array('id'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'usuario_rm',
-                'value' => 'true',
+                'value' => 'not(equal($id,""))',
             ),
         ),
     ),
@@ -61,14 +61,14 @@ $dependencies['Ref_Venta_Cruzada']['accounts_ref_venta_cruzada_1_name'] = array
 (
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('name'),
+    'triggerFields' => array('id'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'accounts_ref_venta_cruzada_1_name',
-                'value' => 'true',
+                'value' => 'not(equal($id,""))',
             ),
         ),
     ),
