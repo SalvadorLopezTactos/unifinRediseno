@@ -52,8 +52,10 @@ class reAsignarCuentas extends SugarApi
             $user_field = "user_id6_c";
         } else if ($product == "UNICLICK") {
             $user_field = "user_id7_c";
-        }else if ($product == "UNILEASE") {
+        } else if ($product == "UNILEASE") {
             $user_field = "user_id7_c";
+        } else if ($product == "RM") {
+            $user_field = "user_id8_c";
         }
 
 
@@ -61,7 +63,7 @@ class reAsignarCuentas extends SugarApi
         $callApi = new UnifinAPI();
         foreach ($args['data']['seleccionados'] as $key => $value) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $value,array('disable_row_level_security' => true));
+            $account = BeanFactory::retrieveBean('Accounts', $value, array('disable_row_level_security' => true));
 
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 
@@ -69,8 +71,8 @@ class reAsignarCuentas extends SugarApi
             } else {
 
                 /****************************Re-Asigna Fecha y Re-Asigna Asesor en UNI_PRODUCTOS*****************/
-                if ($account->load_relationship('accounts_uni_productos_1')){
-                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id,array('disable_row_level_security' => true));
+                if ($account->load_relationship('accounts_uni_productos_1')) {
+                    $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
 
                     $fechaReAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
 
@@ -120,6 +122,13 @@ class reAsignarCuentas extends SugarApi
                                 }
                                 break;
                         }
+                        /** Excepcion para actualiza SOS cuando es tipo producto LEASINGS */
+                        if ($asignaFecha->tipo_producto == '7' && $product == 'LEASING') {
+                            $GLOBALS['log']->fatal("Actualizar SOS");
+                            $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                            $asignaFecha->assigned_user_id = $reAsignado;
+                        }
+
                         $asignaFecha->save();
                     }
                 }
@@ -143,6 +152,9 @@ class reAsignarCuentas extends SugarApi
                     case 'UNILEASE':
                         $account->user_id7_c = $reAsignado;
                         break;
+                    case 'RM':
+                        $account->user_id8_c = $reAsignado;
+                        break;
                 }
 
                 $account->save();
@@ -154,9 +166,9 @@ class reAsignarCuentas extends SugarApi
                 $User->retrieve($reAsignado);
                 $para = $User->email1;
                 if ($para != null) {
-                    if($User->status!='Active'){
-                        $reAsignado='';
-                    }else{
+                    if ($User->status != 'Active') {
+                        $reAsignado = '';
+                    } else {
                         if ($User->optout_c == 1) {
                             $reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
@@ -166,34 +178,38 @@ class reAsignarCuentas extends SugarApi
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a nuevo jefe solo si éste es Activo
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c != 1) {
                             $jefeAsignado = $User->email1;
                         }
-                    }else{
-                        $jefeAsignado='';
+                    } else {
+                        $jefeAsignado = '';
                     }
 
                     $User->retrieve($promoActual);
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c == 1) {
                             $promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
                         }
-                    }else{
-                        $promoActual='';
+                    } else {
+                        $promoActual = '';
                     }
 
                     $jefeActual = '';
                     $jefe = $User->reports_to_id;
                     $User->retrieve($jefe);
                     //Establecer id a jefe Actual solo si éste es Activo
-                    if($User->status=='Active'){
+                    if ($User->status == 'Active') {
                         if ($User->optout_c != 1) {
                             $jefeActual = $User->email1;
                         }
-                    }else{
-                        $jefeActual='';
+                    } else {
+                        $jefeActual = '';
                     }
+                    $idrm = $account->user_id8_c;
+                    $UserRM = new User();
+                    $UserRM->retrieve($idrm);
+                    $paraRM = $UserRM->email1;
 
                     $notifica = BeanFactory::newBean('TCT2_Notificaciones');
                     $notifica->name = $para . ' ' . date("Y-m-d H:i:s");
@@ -204,11 +220,16 @@ class reAsignarCuentas extends SugarApi
                     $notifica->jefe_anterior_c = $jefeActual;
                     $notifica->jefe_nuevo_c = $jefeAsignado;
                     $notifica->actual_c = $promoActual;
+                    $notifica->emailrm_c = $paraRM;
+
                     $notifica->save();
+
                     $notId = $notifica->id;
                     global $db;
                     $query = "update tct2_notificaciones set created_by = '$promoActual' where id = '$notId'";
                     $result = $db->query($query);
+
+
                 }
 
                 //Restablece usuario por asignar
@@ -221,6 +242,7 @@ class reAsignarCuentas extends SugarApi
                 if ($product == 'FLEET') $producto = 6;
                 if ($product == 'UNICLICK') $producto = 8;
                 if ($product == 'UNILEASE') $producto = 9;
+                if ($product == 'RM') $producto = 11; # Validar si se debe reasignar las oportunidades
 
                 $usr_bean = BeanFactory::retrieveBean("Users", $reAsignado, array('disable_row_level_security' => true));
 
@@ -250,46 +272,50 @@ SQL;
 
 //                $usr_prd_principal=$current_user->tipodeproducto_c;
 
-            //    if ($product == 'LEASING') {
-                    $anio_actual = date("Y");
-                    $mes_actual = intval(date("n"));
-                    $hoy = date("d");
-                    $condicion = '';
-                    if ($optRadio == 'siguientes') {
-                        $condicion = "AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
-                    } else {
-                        $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
-                    }
+                //    if ($product == 'LEASING') {
+                $anio_actual = date("Y");
+                $mes_actual = intval(date("n"));
+                $hoy = date("d");
+                $condicion = '';
+                if ($optRadio == 'siguientes') {
+                    $condicion = "AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
+                } else {
+                    $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
+                }
 
-                    $bl_cuenta = "SELECT b.id, b.mes,b.description
+                if ($producto == '1') {
+                    $sos_condicion = " OR cstm.producto_c='7'";
+                }
+
+                $bl_cuenta = "SELECT b.id, b.mes,b.description
 FROM
   lev_backlog b
   INNER JOIN lev_backlog_cstm cstm
   ON cstm.id_c=b.id
 WHERE
   b.account_id_c = '{$value}'" . $condicion . "
-  AND cstm.producto_c='{$producto}' AND deleted = 0";
+  AND (cstm.producto_c='{$producto}' " . $sos_condicion . ") AND deleted = 0";
 
-                    $result_bl_cuentas = $db->query($bl_cuenta);
+                $result_bl_cuentas = $db->query($bl_cuenta);
 
-                    if ($result_bl_cuentas->num_rows > 0 && $result_bl_cuentas != null) {
-                        //Recupera nuevo usuario asignado
-                        $User = new User();
-                        $User->retrieve($reAsignado);
-                        while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
+                if ($result_bl_cuentas->num_rows > 0 && $result_bl_cuentas != null) {
+                    //Recupera nuevo usuario asignado
+                    $User = new User();
+                    $User->retrieve($reAsignado);
+                    while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
 
-                            $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'],array('disable_row_level_security' => true));
-                            if ($bl != null) {
-                                //Actualiza valores
-                                $bl->assigned_user_id = $reAsignado;
-                                $bl->description = $row['description'] . ' \n UNI2CRM - ' . $hoy . '/' . $mes_actual . '/' . $anio_actual . ': BL Reasignado a promotor ' . $IntValue->getUserName($reAsignado);
-                                $bl->equipo = $User->equipo_c;
-                                $bl->region = $User->region_c;
-                                $bl->save();
-                            }
+                        $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id'], array('disable_row_level_security' => true));
+                        if ($bl != null) {
+                            //Actualiza valores
+                            $bl->assigned_user_id = $reAsignado;
+                            $bl->description = $row['description'] . ' \n UNI2CRM - ' . $hoy . '/' . $mes_actual . '/' . $anio_actual . ': BL Reasignado a promotor ' . $IntValue->getUserName($reAsignado);
+                            $bl->equipo = $User->equipo_c;
+                            $bl->region = $User->region_c;
+                            $bl->save();
                         }
-
                     }
+
+                }
 //                }
 
 

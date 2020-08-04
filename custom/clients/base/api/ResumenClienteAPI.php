@@ -212,6 +212,8 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['general_cliente']['sector_economico'] = $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c];
             $arr_principal['general_cliente']['grupo_empresarial'] = $beanPersona->parent_name;
             $arr_principal['general_cliente']['nivel_satisfaccion'] = $app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c];
+            $arr_principal['general_cliente']['asesorRM'] = $beanPersona->promotorrm_c;
+
             //Promotores
             $arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
@@ -220,6 +222,8 @@ class ResumenClienteAPI extends SugarApi
 			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
+            $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
+
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
