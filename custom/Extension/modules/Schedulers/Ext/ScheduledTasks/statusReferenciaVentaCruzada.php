@@ -417,8 +417,8 @@ SQL;
         $beanQueryQuinceDias = new SugarQuery();
         $beanQueryQuinceDias->select(array('id'));
         $beanQueryQuinceDias->from($beanQueryQuince);
-        $beanQueryQuinceDias->where()->gte('date_entered','2020-07-27 23:06:04');
-        $beanQueryQuinceDias->where()->lte('date_entered','2020-07-29 05:06:04');
+        $beanQueryQuinceDias->where()->gte('date_entered',$quince_dias_un_dia_antes);
+        $beanQueryQuinceDias->where()->lte('date_entered',$quince_dias);
         $resultRefQuince = $beanQueryQuinceDias->execute();
         $countRefQuince = count($resultRefQuince);
 
