@@ -24,6 +24,35 @@ class Ref_Cruzadas_Hooks
             $nombreAsesorOrigen=$beanAsesorOrigen->full_name;
         }
 
+        //Validando que el Asesor referenciado no sea un 9-
+        $idCarloS='a951c644-c43b-11e9-9e17-00155d96730d';
+        /*usuario_producto*/
+        $idAsesorRef=$bean->user_id_c;
+        $nombreAsesorRef=$bean->usuario_producto;
+        $array = $GLOBALS['app_list_strings']['usuarios_ref_no_validos_list'];
+        $asesor_9=in_array($idAsesorRef, $array);
+        $correo_asesor_ref='';
+
+        if($idAsesorRef != "" && $idAsesorRef !=null){
+            if($asesor_9){
+                //Como el usuario Referenciado es uno de los 9-*, se asigna a carlos esquivel
+                $beanAsesorRF = BeanFactory::retrieveBean('Users', $idCarloS);
+                if(!empty($beanAsesorRF)){
+                    $correo_asesor_ref=$beanAsesorRF->email1;
+                    $nombreAsesorRef=$beanAsesorRF->full_name;
+                }
+            }else{
+
+                $beanAsesorRF = BeanFactory::retrieveBean('Users', $idAsesorRef);
+                if(!empty($beanAsesorRF)){
+                    $correo_asesor_ref=$beanAsesorRF->email1;
+                    $nombreAsesorRef=$beanAsesorRF->full_name;
+                }
+
+            }
+
+        }
+
         $idAsesorRM=$bean->user_id1_c;/*Validar que no sea null*/
         $nombreAsesorRM=$bean->usuario_rm;
         $correo_asesor_rm="";
@@ -60,6 +89,21 @@ class Ref_Cruzadas_Hooks
             }else{
                 $GLOBALS['log']->fatal("ASESOR ORIGEN ".$nombreAsesorOrigen." NO TIENE EMAIL");
             }
+
+            //Enviando correo a Asesor Producto Referenciado
+            if($correo_asesor_ref!=""){
+
+                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreAsesorRef,$nombreCuenta,$necesidad,$linkReferencia);
+
+                $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA VÁLIDA) A ASESOR PRODUCTO REFERENCIADO CON EMAIL ".$correo_asesor_ref);
+
+                //Enviando correo a asesor origen
+                $this->enviarNotificacionReferencia("Nueva referencia válida",$cuerpoCorreo,$correo_asesor_ref,$nombreAsesorRef);
+
+            }else{
+                $GLOBALS['log']->fatal("ASESOR PRODUCTO REFERENCIADO ".$nombreAsesorRef." NO TIENE EMAIL");
+            }
+
 
             if($correo_asesor_rm!=""){
 
