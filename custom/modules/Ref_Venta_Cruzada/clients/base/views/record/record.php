@@ -240,16 +240,19 @@ array (
               array (
                 'name' => 'primer_fecha_anexo',
                 'label' => 'LBL_PRIMER_FECHA_ANEXO',
+                'readonly' => true,
               ),
               11 => 
               array (
                 'name' => 'ultima_fecha_anexo',
                 'label' => 'LBL_ULTIMA_FECHA_ANEXO',
+                'readonly' => true,
               ),
               12 => 
               array (
                 'name' => 'numero_anexos',
                 'label' => 'LBL_NUMERO_ANEXOS',
+                'readonly' => true,
               ),
               13 => 
               array (
