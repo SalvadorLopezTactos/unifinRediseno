@@ -17,6 +17,7 @@ class Upload_documents
         //Instancia clases requeridas
         include_once 'include/utils/file_utils.php';
         include_once 'include/utils/sugar_file_utils.php';
+        global $sugar_config;
 
         //Recupera variables de documento por procesar
         $file_name = $bean->filename;
@@ -84,15 +85,19 @@ class Upload_documents
                 }
             //Envío de documento a Alfresco
                 try {
-                    /*if (!empty($seguros->s_seguros_accountsaccounts_ida && $bean->id_alfresco_c == "")) {
+                    if (!empty($seguros->s_seguros_accountsaccounts_ida && $bean->id_alfresco_c == "")) {
+                        $GLOBALS['log']->fatal('Sube archivo a Alfresco');
                         //crea body y declara URL
+                        $url=$sugar_config['url_alfresco'].'expediente/uploadDocument';
 
-                        $url = 'http://172.26.1.84:9009/expediente/uploadDocument';
+                        //Validación tipo documento
+                        $Doc = ($bean->tipo_documento_c == 1) ? "0028" : "0029";
+
                         $body = array(
                             "fileName" => $file_name,
                             "persona" => $seguros->s_seguros_accountsaccounts_ida,
                             "empresa" => "U_FI",
-                            "documento" => "1",
+                            "documento" => $Doc,
                             "identificador" => $seguros->id,
                             "key" => "",
                             "forceUpdate" => true,
@@ -108,9 +113,11 @@ class Upload_documents
                         //Actualiza campo Documentos (nuevo)
                         if ($resultado['resultCode'] == 0) {
                             $bean->id_alfresco_c = $resultado['data']['objectId'];
+                            $GLOBALS['log']->fatal('Actualiza campo id_alfresco_c');
+
                         }
 
-                    }*/
+                    }
                 }
                 catch (Exception $e) {
                     $GLOBALS['log']->fatal($e->getMessage());
