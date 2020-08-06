@@ -9,7 +9,7 @@ class VentasCruzadas_class
     {
 		$no_valido = 0;
 		$id_cuenta = '';
-		//$GLOBALS['log']->fatal($bean->producto_referenciado .'--'. $bean->producto_origen);
+		//$GLOBALS['log']->fatal($bean->id.'-'.$bean->date_entered);
 		if($bean->estatus != '2' && $bean->producto_referenciado == $bean->producto_origen){
 			$no_valido = 1;
 			
@@ -32,23 +32,22 @@ class VentasCruzadas_class
 						//$parentBean->load_relationship($auxrel);
 						$beans = $parentBean->accounts_uni_productos_1->getBeans();
 						if (!empty($beans)) {
-							$GLOBALS['log']->fatal($bean->producto_referenciado.' producto_referenciado producto');
+							//$GLOBALS['log']->fatal($bean->producto_referenciado.' producto_referenciado producto');
 							foreach($beans as $prod){
-								$GLOBALS['log']->fatal($prod->tipo_producto.' tipo_producto');
+								//$GLOBALS['log']->fatal($prod->tipo_producto.' tipo_producto');
 									
 								//Producto desatendido estatus =2
 								if($bean->producto_referenciado == $prod->tipo_producto){
 									$array = $GLOBALS['app_list_strings']['usuarios_ref_no_validos_list'];
-									$GLOBALS['log']->fatal(print_r($array,true));
-									$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
-									$GLOBALS['log']->fatal($prod->assigned_user_id.' assigned_user_id');
+									//$GLOBALS['log']->fatal(print_r($array,true));
+									//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
+									//$GLOBALS['log']->fatal($prod->assigned_user_id.' assigned_user_id');
 									//usuario no este en 9, lista usuarios_no_ceder_list
 									//id no es null || vacio
 									
-									if(!(in_array($prod->assigned_user_id, $array))){
-                                       $no_valido=1;
-									}else if($prod->estatus_atencion == '1'){
-                                       $no_valido=1
+									if($prod->estatus_atencion == '1' && !in_array($prod->assigned_user_id, $array)){
+										//$GLOBALS['log']->fatal('producto no valido');
+										$no_valido = 1;
 									}
 								}
 							}
@@ -60,12 +59,12 @@ class VentasCruzadas_class
 			if ($parentBean->load_relationship('opportunities')) {
 				//Fetch related beans
 				$relatedBeans = $parentBean->opportunities->getBeans();
-				$GLOBALS['log']->fatal('oportunidades');
+				//$GLOBALS['log']->fatal('oportunidades');
 				if (!empty($relatedBeans)) {
 					foreach($relatedBeans as $oppor){
 						//Producto desatendido estatus =2     //mismo producto
 						//$GLOBALS['log']->fatal($oppor->tipo_producto_c .'--'. $oppor->tct_opp_estatus_c.'-'.$oppor->estatus_c);
-		       			if($bean->producto_referenciado == $oppor->tipo_producto_c && $oppor->tct_opp_estatus_c=='1' 
+						if($bean->producto_referenciado == $oppor->tipo_producto_c && $oppor->tct_opp_estatus_c=='1' 
 							&& !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
 							$no_valido = 1;							
 						}
@@ -73,8 +72,8 @@ class VentasCruzadas_class
 				}
 			}
 			
-			$GLOBALS['log']->fatal($no_valido.'no_valido');
-
+			//$GLOBALS['log']->fatal($no_valido.'no_valido');
+		
 			$mesactual = date("n");
 			$anioactual = date("Y");
 			//$GLOBALS['log']->fatal('año - '.$mesactual.' , '.'mes - '.$anioactual);
@@ -92,16 +91,27 @@ class VentasCruzadas_class
 				}else if($row['anio'] == $anioactual && $row['mes'] > $mesactual){
 					$no_valido = 1;	
 				}				
-			}
-
-			$GLOBALS['log']->fatal($no_valido.'no_valido');
+			}	
+			//$GLOBALS['log']->fatal($no_valido.'no_valido');
 		}
 		
 		if($no_valido == 1){
 			$bean->estatus = 2;
 			$bean->save();
+		}else{
+			//$GLOBALS['log']->fatal('valido');
+			$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
+			$equipoPrincipal = $usuarioAsignado->equipo_c;
+			//$GLOBALS['log']->fatal($equipoPrincipal);
+			//Agrega teams de BO
+			$bean->teams->add(
+				array(
+					$equipoPrincipal
+				)
+			);
+			$bean->save();
 		}
-
+		
 	}
 }
 
