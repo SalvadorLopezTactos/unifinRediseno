@@ -116,20 +116,3 @@ $dependencies['Ref_Venta_Cruzada']['assigned_user_name'] = array
     'notActions' => array(),
 );
 
-/*
-$dependencies['Ref_Venta_Cruzada']['cancelado_Visibility'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('description'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetVisibility',
-            'params' => array(
-                'target' => 'cancelado',
-                'value' => 'ifElse(and(isInList('.$permiso.',createList("1")),equal($producto_referenciado, '.$producto.'),equal($estatus,"1")),"1","0")',
-            ),
-        ),
-    ),
-);
-*/

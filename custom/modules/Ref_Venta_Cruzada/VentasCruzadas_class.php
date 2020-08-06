@@ -97,7 +97,6 @@ class VentasCruzadas_class
 		
 		if($no_valido == 1){
 			$bean->estatus = 2;
-			$bean->save();
 		}
 	}
 }
