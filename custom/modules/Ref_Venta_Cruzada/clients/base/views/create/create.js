@@ -30,6 +30,7 @@
 
 	_render: function (options) {
         this._super("_render");
+        $('[data-name="cancelado"]').hide();
     },	
 	
 	valida_requeridos: function (fields, errors, callback) {
