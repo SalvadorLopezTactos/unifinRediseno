@@ -42,6 +42,9 @@ class reAsignarCuentas extends SugarApi
         $statusProducto = $args['data']['status_producto'];
         $idProducto = $args['data']['producto_seleccionado_id'];
 
+        $GLOBALS['log']->fatal("cuentas " . print_r($args['data']['seleccionados'], true));
+
+
         if ($product == "LEASING") {
             $user_field = "user_id_c"; //user_id_c = promotorleasing_c
         } else if ($product == "FACTORAJE") {
@@ -65,11 +68,12 @@ class reAsignarCuentas extends SugarApi
 
             $account = BeanFactory::retrieveBean('Accounts', $value, array('disable_row_level_security' => true));
 
+
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 
                 array_push($no_actualizados, $value);
-            } else {
 
+            } else {
                 /****************************Re-Asigna Fecha y Re-Asigna Asesor en UNI_PRODUCTOS*****************/
                 if ($account->load_relationship('accounts_uni_productos_1')) {
                     $uniProducto = $account->accounts_uni_productos_1->getBeans($account->id, array('disable_row_level_security' => true));
@@ -84,6 +88,34 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Leasing UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    # estatus_atencion
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
+                                            $GLOBALS['log']->fatal("Leasing  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regala3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 1);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
+                                            $GLOBALS['log']->fatal("Leasing  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . "Regla 3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
+
                                 }
                                 break;
                             case 'CREDITO AUTOMOTRIZ':
@@ -91,6 +123,33 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Credito UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 3);
+                                            $GLOBALS['log']->fatal("CA  Reasignado Prospecto" . " " . $regla1 . " Regla 2" . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 3);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 3);
+                                            $GLOBALS['log']->fatal("CA  Reasignado Cliente " . " " . $regla1 . " Regla 2  " . $regla2 . " Regla 3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 'FACTORAJE':
@@ -98,6 +157,33 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Factoraje UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 4);
+                                            $GLOBALS['log']->fatal("F  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 4);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 4);
+                                            $GLOBALS['log']->fatal("F  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 'FLEET':
@@ -105,6 +191,33 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Fleet UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 6);
+                                            $GLOBALS['log']->fatal("Fleet  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 6);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 6);
+                                            $GLOBALS['log']->fatal("Fleet  Reasignado Cliente " . " " . $regla1 . " Regla2" . $regla2 . " Regla 3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 'UNICLICK':
@@ -112,6 +225,33 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
+                                            $GLOBALS['log']->fatal("uniclick  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 8);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
+                                            $GLOBALS['log']->fatal("uniclick  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3" . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 'UNILEASE':
@@ -119,6 +259,33 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+
+                                    if ($asignaFecha->estatus_atencion == '2') {
+                                        /** diferente de Activo */
+#1-5 y 3 es cliente
+                                        if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                            $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                            $regla2 = $this->SolicitudCredito($account->id);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
+                                            $GLOBALS['log']->fatal("unilease  Reasignado Prospecto" . " " . $regla1 . " Regla2" . $regla2 . " Regla3" . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+
+                                        } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                            $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                            $regla2 = $this->getAnexos($account->idcliente_c, 8);
+                                            $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                            $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
+                                            $GLOBALS['log']->fatal("unilease  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                            if ($regla1 || $regla2 || $regla3) {
+                                                $asignaFecha->estatus_atencion = 1;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                         }
@@ -127,6 +294,33 @@ class reAsignarCuentas extends SugarApi
                             $GLOBALS['log']->fatal("Actualizar SOS");
                             $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                             $asignaFecha->assigned_user_id = $reAsignado;
+
+                            if ($asignaFecha->estatus_atencion == '2') {
+                                /** diferente de Activo */
+#1-5 y 3 es cliente
+                                if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
+                                    $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
+                                    $regla2 = $this->SolicitudCredito($account->id);
+                                    $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                    $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
+                                    $GLOBALS['log']->fatal("sos  Reasignado Prospecto" . " " . $regla1 . " REgla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                    if ($regla1 || $regla2 || $regla3) {
+                                        $asignaFecha->estatus_atencion = 1;
+                                    }
+
+                                } elseif ($account->tipo_registro_cuenta_c == 3) {
+                                    $regla1 = $this->MeetOrCallValid(90, $account->id, $reAsignado);
+                                    $regla2 = $this->getAnexos($account->idcliente_c, 1);
+                                    $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
+                                    $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
+                                    $GLOBALS['log']->fatal("sos  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
+
+                                    if ($regla1 || $regla2 || $regla3) {
+                                        $asignaFecha->estatus_atencion = 1;
+                                    }
+                                }
+                            }
                         }
 
                         $asignaFecha->save();
@@ -359,6 +553,126 @@ SQL;
         }
 
         return $main_array;
+
+    }
+
+    public function MeetOrCallValid($numDays, $idAccount, $nuevoAsesor)
+    {
+        /** Recupera Reuniones menores a ciertos dias segun el caso */
+
+        $today = date("Y-m-d");
+        $lastDays = date('Y-m-d', strtotime("-{$numDays} days"));
+        $callORmeeting = false;
+        $queryMeetings = "select * from calls where status='Held'
+                          AND  assigned_user_id='{$nuevoAsesor}'
+                          AND parent_id='{$idAccount}'
+                          AND parent_type='Accounts'
+                          AND (date_entered  >= '{$lastDays}'  AND date_entered <= '{$today}' )";
+
+        $queryCalls = "select * from calls where status='Held'
+                          AND  assigned_user_id='{$nuevoAsesor}'
+                          AND parent_id='{$idAccount}'
+                          AND parent_type='Accounts'
+                          AND (date_entered  >= '{$lastDays}'  AND date_entered <= '{$today}' )";
+
+        $resultM = $GLOBALS['db']->query($queryMeetings);
+        $resultC = $GLOBALS['db']->query($queryCalls);
+
+        if ($resultM->num_rows > 0 || $resultC->num_rows > 0) {
+            $callORmeeting = true;
+        }
+        return $callORmeeting;
+    }
+
+    public function getAnexos($idCorto, $idProducto)
+    {
+        global $sugar_config;
+        $host = $sugar_config['url_executeStoredCRM'];
+        $url = $host . '/unifinMiddleware/middlewareUni2/executeStoredCRM';
+        $timeout = 500;
+        $error_report = FALSE;
+
+        $headers = array(
+            'Content-Type:application/json',
+        );
+        $data = json_encode(
+            array(
+                "idCliente" => $idCorto,
+                "idProducto" => $idProducto
+            )
+        );
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, FALSE);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
+        curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+        $resultado=false;
+        try {
+            $response = curl_exec($curl);
+            $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response);
+            $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response['respStore']);
+
+            $responseArray= json_decode($response,true);
+            $GLOBALS['log']->fatal("Respuesta response Anexos Areglos " .  print_r($responseArray,true));
+            $GLOBALS['log']->fatal("Respuesta response Anexos valor " .  ($responseArray['respStore']==1 && $responseArray['respStore']!="")?'verdadero':'falso error');
+            curl_close($curl);
+            $resultado=($responseArray['respStore']==1 && $responseArray['respStore']!="")?true:false;
+
+        } catch (Exception $ex) {
+            $GLOBALS['log']->fatal("Error al " . $ex);
+
+        }
+
+        return $resultado;
+    }
+
+    public function grupoEmpresarial($idEmpresarial, $idCuenta, $idProducto)
+    {
+        $existeAtendido = false;
+        $buscagrupo = "select a.id ,a.name, a.parent_id ,u.name,u.estatus_atencion,u.tipo_producto from accounts a
+INNER JOIN accounts_uni_productos_1_c r
+ON r.accounts_uni_productos_1accounts_ida=a.id
+  INNER JOIN uni_productos u
+ON u.id=r.accounts_uni_productos_1uni_productos_idb
+  AND u.tipo_producto='{$idProducto}'
+  AND u.estatus_atencion='1'
+where (a.parent_id='{$idEmpresarial}' OR a.id='{$idEmpresarial}')
+      and a.id!='{$idCuenta}'";
+
+        $resultEmp = $GLOBALS['db']->query($buscagrupo);
+
+        if ($resultEmp->num_rows > 0) {
+            $existeAtendido = true;
+        }
+
+        return $existeAtendido;
+    }
+
+    public function SolicitudCredito($idCuenta)
+    {
+        $existeOpp = false;
+        $getOpportunities = "select * from accounts_opportunities rel
+INNER JOIN opportunities op
+on op.id=rel.opportunity_id
+INNER JOIN opportunities_cstm cstm
+on cstm.id_c=op.id
+where rel.account_id='{$idCuenta}'
+      AND cstm.tct_etapa_ddw_c='C'";
+
+        $resultOpp = $GLOBALS['db']->query($getOpportunities);
+
+        if ($resultOpp->num_rows > 0) {
+            $existeOpp = true;
+        }
+
+        return $existeOpp;
 
     }
 }
