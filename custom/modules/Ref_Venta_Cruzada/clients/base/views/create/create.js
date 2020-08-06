@@ -4,7 +4,11 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        self=this;
+
 		this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
+
+        this.model.on("change:producto_referenciado", _.bind(this.setPromotorProductoReferenciado, this));
 
 		//this.model.addValidationTask('mismo_producto', _.bind(this.mismo_producto, this));
     },
@@ -57,5 +61,42 @@
 
         callback(null, fields, errors);
     },
+
+    setPromotorProductoReferenciado:function () {
+        var idProducto=this.model.get('producto_referenciado');
+        var idCuenta=this.model.get('accounts_ref_venta_cruzada_1accounts_ida');
+
+        if(idCuenta!=null && idCuenta!=undefined && idCuenta!=""){
+            var url=app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_uni_productos_1');
+
+            app.alert.show('getUserProducto', {
+                level: 'process',
+                title: 'Cargando...',
+            });
+
+            app.api.call('GET', url, null, {
+                success: function (data) {
+                    app.alert.dismiss('getUserProducto');
+                    if(data.records.length>0){
+                        for(var i=0;i<data.records.length;i++){
+                            if(data.records[i].tipo_producto==self.model.get('producto_referenciado')){
+                                //Obtener el asesor del producto
+                                var idAsesorProducto=data.records[i].assigned_user_id;
+                                var nombreAsesorProducto=data.records[i].assigned_user_name;
+
+                                self.model.set('user_id_c',idAsesorProducto);
+                                self.model.set('usuario_producto',nombreAsesorProducto);
+
+                            }
+
+                        }
+                    }
+                }
+
+            });
+
+        }
+
+    }
 
 })
