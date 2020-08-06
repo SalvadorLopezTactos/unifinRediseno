@@ -613,22 +613,24 @@ SQL;
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
         curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
-
+        $resultado=false;
         try {
             $response = curl_exec($curl);
             $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response);
             $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response['respStore']);
 
-            $response= json_decode($response);
-            $GLOBALS['log']->fatal("Respuesta response Anexos array " .  $response['respStore']);
-
+            $responseArray= json_decode($response,true);
+            $GLOBALS['log']->fatal("Respuesta response Anexos Areglos " .  print_r($responseArray,true));
+            $GLOBALS['log']->fatal("Respuesta response Anexos valor " .  ($responseArray['respStore']==1 && $responseArray['respStore']!="")?'verdadero':'falso error');
             curl_close($curl);
+            $resultado=($responseArray['respStore']==1 && $responseArray['respStore']!="")?true:false;
+
         } catch (Exception $ex) {
             $GLOBALS['log']->fatal("Error al " . $ex);
 
         }
 
-        return $response['respStore']==1?true:false;
+        return $resultado;
     }
 
     public function grupoEmpresarial($idEmpresarial, $idCuenta, $idProducto)
