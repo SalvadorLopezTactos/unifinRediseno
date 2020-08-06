@@ -112,7 +112,11 @@ array (
             'name' => 'subpuesto_c',
             'label' => 'LBL_SUBPUESTO',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'no_empleado_c',
+            'label' => 'LBL_NO_EMPLEADO',
+          ),
         ),
         2 => 
         array (

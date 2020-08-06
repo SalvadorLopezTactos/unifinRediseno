@@ -65,7 +65,18 @@ array (
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO_NAME',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'tipo_documento_c',
+            'label' => 'LBL_TIPO_DOCUMENTO',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 's_seguros_documents_1_name',
+          ),
         ),
       ),
     ),

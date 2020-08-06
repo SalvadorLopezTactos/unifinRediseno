@@ -1,6 +1,5 @@
 <?php
- // created: 2020-07-21 14:25:07
-
+ // created: 2020-07-01 09:38:42
 $app_list_strings['tipo_producto_list']=array (
   '' => '',
   1 => 'LEASING',
@@ -12,5 +11,6 @@ $app_list_strings['tipo_producto_list']=array (
   7 => 'CRÉDITO SOS',
   8 => 'UNICLICK',
   9 => 'UNILEASE',
+  10 => 'SEGUROS',
   11 => 'RM',
 );

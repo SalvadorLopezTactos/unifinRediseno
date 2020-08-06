@@ -143,6 +143,15 @@ array (
             'label' => 'LBL_SUBPUESTO',
           ),
         ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'no_empleado_c',
+            'label' => 'LBL_NO_EMPLEADO',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_detailview_panel1' => 
       array (
