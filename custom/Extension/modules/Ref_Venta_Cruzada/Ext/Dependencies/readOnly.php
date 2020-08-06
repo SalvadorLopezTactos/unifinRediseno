@@ -2,6 +2,10 @@
 global $current_user;
 $puesto = $current_user->puestousuario_c;
 $id = $current_user->id;
+$permiso=$current_user->tct_cancelar_ref_cruzada_chk_c;
+$prooducto=$current_user->tipodeproducto_c;
+//$GLOBALS['log']->fatal("EL PERMISO: ".$permiso);
+//$GLOBALS['log']->fatal("PRODUCTO: ".$producto);
 
 //Dependencia Edición
 $dependencies['Ref_Venta_Cruzada']['estatus'] = array
@@ -112,6 +116,7 @@ $dependencies['Ref_Venta_Cruzada']['assigned_user_name'] = array
     'notActions' => array(),
 );
 
+/*
 $dependencies['Ref_Venta_Cruzada']['cancelado_Visibility'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -122,8 +127,9 @@ $dependencies['Ref_Venta_Cruzada']['cancelado_Visibility'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'cancelado',
-                'value' => 'ifElse(and(isInList('.$puesto.',createList("2","8","14","20","21")),greaterThan(strlen($description),0)),"1","0")',
+                'value' => 'ifElse(and(isInList('.$permiso.',createList("1")),equal($producto_referenciado, '.$producto.'),equal($estatus,"1")),"1","0")',
             ),
         ),
     ),
 );
+*/

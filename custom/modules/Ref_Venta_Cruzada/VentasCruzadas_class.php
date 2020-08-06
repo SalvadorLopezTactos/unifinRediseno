@@ -111,7 +111,6 @@ class VentasCruzadas_class
 			);
 			$bean->save();
 		}
-		
 	}
 }
 
