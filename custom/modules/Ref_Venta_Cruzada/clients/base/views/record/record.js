@@ -31,7 +31,8 @@
 
 	_render: function (options) {
         this._super("_render");
-        $('[data-name="cancelado"]').hide();
+        $('span[data-fieldname="cancelado"]').find('input').attr('disabled','');
+        $('[data-name="cancelado"]').attr('style',"pointer-events:none");
     },
 
     hideShowCancelar:function(){
@@ -41,7 +42,8 @@
 		var productoRef=this.model.get('producto_referenciado');
 
 		if(puedeCancelar && productoRef == productoUsuario && status=='1'){
-            $('[data-name="cancelado"]').show();
+            $('span[data-fieldname="cancelado"]').find('input').removeAttr('disabled');
+            $('[data-name="cancelado"]').attr('style',"pointer-events:block")
 
 		}
 	},
