@@ -17,7 +17,7 @@ class Upload_documents
         //Instancia clases requeridas
         include_once 'include/utils/file_utils.php';
         include_once 'include/utils/sugar_file_utils.php';
-        global $sugar_config;
+        global $sugar_config,$db;
 
         //Recupera variables de documento por procesar
         $file_name = $bean->filename;
@@ -112,9 +112,11 @@ class Upload_documents
                         //$GLOBALS['log']->fatal('Resultado: ' . json_encode($resultado));
                         //Actualiza campo Documentos (nuevo)
                         if ($resultado['resultCode'] == 0) {
-                            $bean->id_alfresco_c = $resultado['data']['objectId'];
+                            $update = "update documents_cstm set
+                            id_alfresco_c='{$resultado['data']['objectId']}'
+                            where id_c = '{$bean->id}'";
+                            $updateExecute = $db->query($update);
                             $GLOBALS['log']->fatal('Actualiza campo id_alfresco_c');
-
                         }
 
                     }
