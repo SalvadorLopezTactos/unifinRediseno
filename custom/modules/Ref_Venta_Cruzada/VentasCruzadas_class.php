@@ -98,18 +98,6 @@ class VentasCruzadas_class
 		if($no_valido == 1){
 			$bean->estatus = 2;
 			$bean->save();
-		}else{
-			//$GLOBALS['log']->fatal('valido');
-			$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
-			$equipoPrincipal = $usuarioAsignado->equipo_c;
-			//$GLOBALS['log']->fatal($equipoPrincipal);
-			//Agrega teams de BO
-			$bean->teams->add(
-				array(
-					$equipoPrincipal
-				)
-			);
-			$bean->save();
 		}
 	}
 }
