@@ -563,19 +563,21 @@ SQL;
         $today = date("Y-m-d", strtotime("+1 days"));
         $lastDays = date('Y-m-d', strtotime("-{$numDays} days"));
         $callORmeeting = false;
-        $queryMeetings = "select * from calls where status='Held'
+        $queryMeetings = "select * from meetings where status='Held'
                           AND  assigned_user_id='{$nuevoAsesor}'
                           AND parent_id='{$idAccount}'
                           AND parent_type='Accounts'
                            AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  >= '{$lastDays}'
-                          AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  <= '{$today}'";
+                          AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  <= '{$today}'
+                          AND deleted=0";
 
         $queryCalls = "select * from calls where status='Held'
                           AND  assigned_user_id='{$nuevoAsesor}'
                           AND parent_id='{$idAccount}'
                           AND parent_type='Accounts'
                           AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  >= '{$lastDays}'
-                          AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  <= '{$today}'";
+                          AND CONVERT_TZ(date_entered,'+00:00',@@global.time_zone)  <= '{$today}'
+                          AND deleted=0";
 
         $resultM = $GLOBALS['db']->query($queryMeetings);
         $resultC = $GLOBALS['db']->query($queryCalls);
