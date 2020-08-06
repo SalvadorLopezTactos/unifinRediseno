@@ -97,7 +97,7 @@
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
         this.$('div[data-name=tipo_c]').hide();
-        this.$('div[data-name=producto_c]').hide();
+        //this.$('div[data-name=producto_c]').hide();
         this.$('div[data-name=region]').hide();
         this.$('div[data-name=estatus_operacion_c]').hide();
         this.$('div[data-name=lev_backlog_opportunities_name]').hide();
@@ -458,11 +458,14 @@
     getTipoCliente: function(){
         //console.log("getTipoCliente");
         var disponible = 0;
+        app.alert.show('getDetailUser', {
+            level: 'process',
+            title: 'Cargando...'
+        });
         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c'), null, null, {
             fields: name,
         }), null, {
             success: _.bind(function (data) {
-                var promotor = data.user_id_c;
                 if(data.tipo_registro_cuenta_c == "2"){ // 2 - Prospecto
                     this.model.set("tipo_c","2");
                     this.model.set("etapa_preliminar_c","3");
@@ -520,18 +523,65 @@
                     this.model.set("etapa_c","3");
                 }
 
+                //var promotor = data.user_id_c;
+                var promotor = "";
+                //Obtener producto principal del usuario firmado
+                var producto_usuario=app.user.attributes.tipodeproducto_c;
+                switch(producto_usuario){
+                    case '1':
+                        promotor=data.user_id_c; //Leasing
+                        break;
+                    case '3':
+                        promotor=data.user_id2_c; //credito
+                        break;
+                    case '4':
+                        promotor=data.user_id1_c; //factoraje
+                        break;
+                    case '6':
+                        promotor=data.user_id6_c; //fleet
+                        break;
+                    case '8':
+                        promotor=data.user_id7_c; //uniclick
+                        break;
+                    case '9':
+                        promotor=data.user_id7_c; //unilease, mismo que uniclick
+                        break;
+                    default:
+                        promotor=data.user_id_c;
+                        break;
+                }
+
+
+
                 //Obtiene el promotor del cliente, equipo y region del mismo
                 var usuario = app.data.createBean('Users',{id:promotor});
                 usuario.fetch({
                     success: _.bind(function(modelo) {
-                        //console.log(modelo);
-                        this.model.set("region", modelo.get("region_c"));
-                        this.model.set("equipo", modelo.get("equipo_c"));
-                        this.model.set("assigned_user_id", modelo.get('id'));
-                        this.model.set("assigned_user_name", modelo.get('name'));
+                        app.alert.dismiss('getDetailUser');
+                        if(modelo.get('id')!=undefined){
+                            //establece las opciones disponibles en campo de producto, correspondientes
+                            var lista_productos= app.lang.getAppListStrings('tipo_producto_list');
+                            var productos_user=modelo.get('productos_c');
 
-                        //Asigna producto Leasing
-                        this.model.set('producto_c',1);
+                            Object.keys(lista_productos).forEach(function (key) {
+                                if(!productos_user.includes(key) && key !=""){
+                                    delete lista_productos[key];
+                                }
+                            });
+                            this.model.fields['producto_c'].options = lista_productos;
+                            //Estableciendo nuevas opciones en campo de producto
+                            var campo_producto=this.getField('producto_c');
+                            campo_producto.items=lista_productos;
+                            campo_producto.render()
+                            this.model.set("region", modelo.get("region_c"));
+                            this.model.set("equipo", modelo.get("equipo_c"));
+                            this.model.set("assigned_user_id", modelo.get('id'));
+                            this.model.set("assigned_user_name", modelo.get('name'));
+
+                            //Asigna producto Leasing
+                            //this.model.set('producto_c',1);
+                        }
+
                     },this)
                 });
             }, this)

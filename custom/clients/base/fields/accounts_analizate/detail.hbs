@@ -59,13 +59,13 @@
                 <div id="collapseFive" class="accordion-body in collapse" style="background-color: #ffffff">
                     <!-- Línea 1 -->
                     <div class="row-fluid" style="background-color: #f9f9f9">
-                        <div class="span6"><strong></strong> </div>
-                        <div class="span6"></div>
+                        <div class="span6"><strong>Estatus Actual</strong>  </div>
+                        <div class="span6">{{getUnifinListValue 'anlzt_estado_list' Credit.estado}}</div>
                     </div>
                     <!-- Línea 2 -->
                     <div class="row-fluid"  style="background-color: #ffffff">
-                        <div class="span6"><strong></strong></div>
-                        <div class="span6"></div>
+                        <div class="span6"><strong>Fecha Estatus</strong></div>
+                        <div class="span6">{{Credit.fecha}}</div>
                     </div>
 
                 </div>
@@ -77,14 +77,25 @@
 <div class="row-fluid">
     <div class="span6" align="left">
         <div class="span6 " align="left">
-            <a class="btn btn-primary  btn-Reenviar" id="btn-Guardar type=" submit"="">Reenviar Correo
+            <a class="btn btn-primary  btn-ReenviarF" id="btn-Guardar type=" submit"="">Reenviar Correo
             <i class="fa fa-envelope" style="color:white"></i></a>
     </div>
     <div class="span6" align="left">
-        <a class="btn btn-success  btn-Descargar" id="btn-Descargar">Descargar Archivo
+        <a class="btn btn-success  btn-DescargarF" id="btn-Descargar">Descargar Archivo
         <i class="fa fa-download" style="color:white"></i></a>
     </div>
-
-
+    </div>
+    <div class="span6" align="left">
+        <div class="span6 " align="left">
+            <a class="btn btn-primary btn-ReenviarC" id="btn-Guardar type=" submit"="">Reenviar Correo
+            <i class="fa fa-envelope" style="color:white"></i></a>
+        </div>
+        <div class="span6" align="left">
+            <a class="btn btn-success btn-DescargarC" id="btn-Descargar">Descargar Archivo
+                <i class="fa fa-download" style="color:white"></i></a>
+        </div>
     </div>
 </div>
+
+
+

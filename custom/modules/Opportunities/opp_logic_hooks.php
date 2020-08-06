@@ -303,7 +303,7 @@ SQL;
                 //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
                 $opp->tct_etapa_ddw_c="P";//Integración de Expediente
                 $opp->estatus_c="PE";//En Espera
-
+                $opp->monto_gpo_emp_c = $bean->monto_gpo_emp_c;
                 $opp->monto_c = $bean->monto_ratificacion_increment_c + $bean->monto_c;
                 $opp->amount = $bean->monto_ratificacion_increment_c + $bean->amount;
                 $opp->monto_ratificacion_increment_c = $bean->monto_ratificacion_increment_c;
@@ -997,6 +997,7 @@ SQL;
                 if ($bean->estatus_c=="N") { //Etapa solicitud= N= Autorizada
                     $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                     $this->actualizaTipoCuenta('3','18',$cliente,$producto);
+                    $bean->tipo_operacion_c = '2';
                 }
 
             }

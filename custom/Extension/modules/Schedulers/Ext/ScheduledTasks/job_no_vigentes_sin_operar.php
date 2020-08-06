@@ -38,13 +38,16 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 				op_c.fecha_estimada_cierre_c as fechaVencimiento,
 			    op_c.tipo_operacion_c as tipoOperacion,
 			    op_c.tipo_de_operacion_c as tipoDeOperacion,
-			    op_c.producto_c as tipoProducto,
+			    op_c.tipo_producto_c as tipoProducto,
 			    op.name as nombreOperacion,
 			    ac_op.account_id as idPersona,
 			    ac.name as nombrePersona,
 			    ac_c.user_id_c as promotorLeasing,
 			    ac_c.user_id1_c as promotorFactoraje,
 			    ac_c.user_id2_c as promotorCA,
+			    ac_c.user_id8_c as promotorRM,
+
+			    
 			    r.opero_leasing_c as operaLeasing,
 			    r.opero_factoraje_c as operaFactoraje,
 			    r.opero_ca_c as operaCA
@@ -76,7 +79,7 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 			$GLOBALS['log']->fatal('Job CNVSO: Tipo de Producto '.$row['tipoProducto'] );
 			//Tipos
 			switch ($row['tipoProducto']) {
-			    case "Leasing":
+			    case "1":
 			    	if ($row['operaLeasing'] == 'NO') {
 			    		//Genera Alerta 
 			    		$beanN = BeanFactory::newBean('Notifications');
@@ -87,9 +90,19 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 			    		$beanN->parent_id = $row['idPersona'];
 			    		$beanN->assigned_user_id = $row['promotorLeasing'];
 						$beanN->save();
+
+                        /** Notificación para Asesor RM */
+                        $beanRM = BeanFactory::newBean('Notifications');
+                        $beanRM->severity = 'alert';
+                        $beanRM->name = 'Cliente sin Operar ';
+                        $beanRM->description = 'ALERTA: La línea autorizada de '. $row['nombrePersona'] . ' vencerá dentro de 1 mes y no ha sido utilizada.';
+                        $beanRM->parent_type = 'Accounts';
+                        $beanRM->parent_id = $row['idPersona'];
+                        $beanRM->assigned_user_id = $row['promotorRM'];
+                        $beanRM->save();
 			    	}
 			        break;
-			    case "Factoraje":
+			    case "4":
 			        if ($row['operaFactoraje'] == 'NO') {
 			    		//Genera Alerta 
 			    		$beanN = BeanFactory::newBean('Notifications');
@@ -100,9 +113,19 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 			    		$beanN->parent_id = $row['idPersona'];
 			    		$beanN->assigned_user_id = $row['promotorFactoraje'];
 						$beanN->save();
+
+                        /** Notificación para Asesor RM */
+                        $beanRM = BeanFactory::newBean('Notifications');
+                        $beanRM->severity = 'alert';
+                        $beanRM->name = 'Cliente sin Operar ';
+                        $beanRM->description = 'ALERTA: La línea autorizada de '. $row['nombrePersona'] . ' vencerá dentro de 1 mes y no ha sido utilizada.';
+                        $beanRM->parent_type = 'Accounts';
+                        $beanRM->parent_id = $row['idPersona'];
+                        $beanRM->assigned_user_id = $row['promotorRM'];
+                        $beanRM->save();
 			    	}
 			        break;
-			    case "Credito Automotriz":
+			    case "3":
 			        if ($row['operaCA'] == 'NO') {
 			    		//Genera Alerta 
 			    		$beanN = BeanFactory::newBean('Notifications');
@@ -113,6 +136,16 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 			    		$beanN->parent_id = $row['idPersona'];
 			    		$beanN->assigned_user_id = $row['promotorCA'];
 						$beanN->save();
+
+                        /** Notificación para Asesor RM */
+                        $beanRM = BeanFactory::newBean('Notifications');
+                        $beanRM->severity = 'alert';
+                        $beanRM->name = 'Cliente sin Operar ';
+                        $beanRM->description = 'ALERTA: La línea autorizada de '. $row['nombrePersona'] . ' vencerá dentro de 1 mes y no ha sido utilizada.';
+                        $beanRM->parent_type = 'Accounts';
+                        $beanRM->parent_id = $row['idPersona'];
+                        $beanRM->assigned_user_id = $row['promotorRM'];
+                        $beanRM->save();
 			    	}
 			        break;
 			    default:
@@ -124,6 +157,7 @@ Job para ejecutar funcionalidad de alertas Clientes no vigentes y sin operar(CNV
 			
 			//Suma registro procesado
 			$totalRegistros++;
+
 		}
 
 		$GLOBALS['log']->fatal('Job CNVSO: Registros procesados '. $totalRegistros);
