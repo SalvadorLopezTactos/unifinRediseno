@@ -6,6 +6,7 @@
         contexto_cuenta = this;
         
 		this._super("initialize", [options]);
+        this.model.on('sync', this.hideShowCancelar, this);
 
     },
 	
@@ -21,8 +22,7 @@
 		this.model.on("change:cancelado", _.bind(this.set_usuariorechazado, this));
 		this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
 
-		this._super('_renderHtml'); 
-      
+		this._super('_renderHtml')
 	},
     
 	_dispose: function(){  
@@ -31,7 +31,20 @@
 
 	_render: function (options) {
         this._super("_render");
-    },	
+        $('[data-name="cancelado"]').hide();
+    },
+
+    hideShowCancelar:function(){
+		var puedeCancelar=App.user.get('tct_cancelar_ref_cruzada_chk_c');
+		var productoUsuario=App.user.get('tipodeproducto_c');
+		var status=this.model.get('estatus');
+		var productoRef=this.model.get('producto_referenciado');
+
+		if(puedeCancelar && productoRef == productoUsuario && status=='1'){
+            $('[data-name="cancelado"]').show();
+
+		}
+	},
 	
 	set_usuariorechazado: function () {
 		if(this.model.get('cancelado') == '1' ){

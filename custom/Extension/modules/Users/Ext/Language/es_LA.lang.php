@@ -49,3 +49,5 @@ $mod_strings['LBL_ID_ACTIVE_DIRECTORY_C'] = 'ID ACTIVE DIRECTORY';
 $mod_strings['LBL_DEUDOR_FACTORAJE'] = 'Alta Deudor Factoraje';
 $mod_strings['LBL_CUENTA_ESPECIAL'] = 'Marcar cuentas especiales';
 $mod_strings['LBL_DEPURAR_LEADS'] = 'Depurar Leads';
+$mod_strings['LBL_TCT_CANCELAR_REF_CRUZADA_CHK'] = 'Cancelar Referencia Cruzada';
+$mod_strings['LBL_DETAILVIEW_PANEL4'] = 'Nuevo Panel 4';
