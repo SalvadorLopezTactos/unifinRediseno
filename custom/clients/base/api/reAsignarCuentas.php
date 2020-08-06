@@ -97,7 +97,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
-                                            $GLOBALS['log']->fatal("Leasing  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("Leasing  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regala3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -108,7 +108,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 1);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
-                                            $GLOBALS['log']->fatal("Leasing  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("Leasing  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . "Regla 3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -132,7 +132,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 3);
-                                            $GLOBALS['log']->fatal("CA  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("CA  Reasignado Prospecto" . " " . $regla1 . " Regla 2" . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -143,7 +143,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 3);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 3);
-                                            $GLOBALS['log']->fatal("CA  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("CA  Reasignado Cliente " . " " . $regla1 . " Regla 2  " . $regla2 . " Regla 3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -166,7 +166,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 4);
-                                            $GLOBALS['log']->fatal("F  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("F  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -177,7 +177,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 4);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 4);
-                                            $GLOBALS['log']->fatal("F  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("F  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -200,7 +200,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 6);
-                                            $GLOBALS['log']->fatal("Fleet  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("Fleet  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -211,7 +211,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 6);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 6);
-                                            $GLOBALS['log']->fatal("Fleet  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("Fleet  Reasignado Cliente " . " " . $regla1 . " Regla2" . $regla2 . " Regla 3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -234,7 +234,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
-                                            $GLOBALS['log']->fatal("uniclick  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("uniclick  Reasignado Prospecto" . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -245,7 +245,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 8);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
-                                            $GLOBALS['log']->fatal("uniclick  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("uniclick  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3" . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -268,7 +268,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->SolicitudCredito($account->id);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
-                                            $GLOBALS['log']->fatal("unilease  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("unilease  Reasignado Prospecto" . " " . $regla1 . " Regla2" . $regla2 . " Regla3" . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -279,7 +279,7 @@ class reAsignarCuentas extends SugarApi
                                             $regla2 = $this->getAnexos($account->idcliente_c, 8);
                                             $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                             $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 8);
-                                            $GLOBALS['log']->fatal("unilease  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                            $GLOBALS['log']->fatal("unilease  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                             if ($regla1 || $regla2 || $regla3) {
                                                 $asignaFecha->estatus_atencion = 1;
@@ -303,7 +303,7 @@ class reAsignarCuentas extends SugarApi
                                     $regla2 = $this->SolicitudCredito($account->id);
                                     $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                     $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
-                                    $GLOBALS['log']->fatal("sos  Reasignado Prospecto" . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                    $GLOBALS['log']->fatal("sos  Reasignado Prospecto" . " " . $regla1 . " REgla2 " . $regla2 . " Regla3 " . $regla3);
 
                                     if ($regla1 || $regla2 || $regla3) {
                                         $asignaFecha->estatus_atencion = 1;
@@ -314,7 +314,7 @@ class reAsignarCuentas extends SugarApi
                                     $regla2 = $this->getAnexos($account->idcliente_c, 1);
                                     $idEmpresarial = $account->parent_id != "" ? $account->parent_id : $account->id;
                                     $regla3 = $this->grupoEmpresarial($idEmpresarial, $account->id, 1);
-                                    $GLOBALS['log']->fatal("sos  Reasignado Cliente " . " " . $regla1 . " " . $regla2 . " " . $regla3);
+                                    $GLOBALS['log']->fatal("sos  Reasignado Cliente " . " " . $regla1 . " Regla2 " . $regla2 . " Regla3 " . $regla3);
 
                                     if ($regla1 || $regla2 || $regla3) {
                                         $asignaFecha->estatus_atencion = 1;
@@ -619,13 +619,16 @@ SQL;
             $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response);
             $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response['respStore']);
 
+            $response= json_decode($response);
+            $GLOBALS['log']->fatal("Respuesta response Anexos array " .  $response['respStore']);
+
             curl_close($curl);
         } catch (Exception $ex) {
             $GLOBALS['log']->fatal("Error al " . $ex);
 
         }
 
-        return $response['respStore'];
+        return $response['respStore']==1?true:false;
     }
 
     public function grupoEmpresarial($idEmpresarial, $idCuenta, $idProducto)
