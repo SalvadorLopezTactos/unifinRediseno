@@ -51,7 +51,6 @@ class ExistentesVentasCruzadas_class
 					$equipoPrincipal
 				)
 			);
-			$bean->save();
 		}	
 
 		if($bean->cancelado == true){
