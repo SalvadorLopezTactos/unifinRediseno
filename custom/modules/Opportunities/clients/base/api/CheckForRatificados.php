@@ -28,7 +28,7 @@ class CheckForRatificados extends SugarApi
          global $db, $current_user;
          $query = <<<SQL
 SELECT * FROM opportunities_opportunities_1_c oo inner join opportunities_cstm oppc on oppc.id_c = oo.opportunities_opportunities_1opportunities_ida
-WHERE opportunities_opportunities_1opportunities_ida = '{$parentId}' AND deleted = 0 and tipo_de_operacion_c='RATIFICACION_INCREMENTO'
+WHERE opportunities_opportunities_1opportunities_ida = '{$parentId}' AND deleted = 0 and tipo_de_operacion_c='RATIFICACION_INCREMENTO' and oppc.estatus_c NOT IN('N','R','K','CM')
 SQL;
         $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : query: " . $query);
          $queryResult = $db->getOne($query);

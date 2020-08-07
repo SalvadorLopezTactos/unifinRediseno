@@ -314,7 +314,9 @@ class Meetings_Hooks
         $flag=true;
       }
     }
-    if($puesto == 27 && strstr($bean->productos_c,'8')) $flag=false;
+    if(($puesto == 27 && strstr($bean->productos_c,'8')) || ($puesto == 27 && strstr($bean->productos_c,'9'))) {
+        $flag=false;
+    }
     //Evaluación de resultado para crear reunión
     if($queryResult==0 && !$flag) {
       $GLOBALS['log']->fatal('TCT - RelationAdd - Agrega nueva reunión para usuario: ' . $idUsuario);

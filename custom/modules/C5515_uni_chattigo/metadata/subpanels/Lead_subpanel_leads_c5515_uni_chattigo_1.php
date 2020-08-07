@@ -1,5 +1,5 @@
 <?php
-// created: 2020-06-19 10:48:54
+// created: 2020-07-15 20:21:49
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -8,16 +8,21 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'date_modified' => 
+  'date_entered' => 
   array (
-    'vname' => 'LBL_DATE_MODIFIED',
+    'type' => 'datetime',
+    'studio' => 
+    array (
+      'portaleditview' => false,
+    ),
+    'readonly' => true,
+    'vname' => 'LBL_DATE_ENTERED',
     'width' => 10,
     'default' => true,
   ),
-  'inicio_conversacion' => 
+  'date_modified' => 
   array (
-    'type' => 'datetimecombo',
-    'vname' => 'LBL_INICIO_CONVERSACION',
+    'vname' => 'LBL_DATE_MODIFIED',
     'width' => 10,
     'default' => true,
   ),

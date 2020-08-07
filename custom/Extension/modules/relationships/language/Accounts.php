@@ -16,3 +16,7 @@ $mod_strings['LBL_ACCOUNTS_UNI_PRODUCTOS_1_FROM_UNI_PRODUCTOS_TITLE'] = 'Product
 $mod_strings['LBL_ACCOUNTS_UNI_PRODUCTOS_1_FROM_ACCOUNTS_TITLE'] = 'Productos';
 $mod_strings['LBL_ACCOUNTS_C5515_UNI_CHATTIGO_1_FROM_C5515_UNI_CHATTIGO_TITLE'] = 'Conversaciones en Chattigo';
 $mod_strings['LBL_ACCOUNTS_C5515_UNI_CHATTIGO_1_FROM_ACCOUNTS_TITLE'] = 'Conversaciones en Chattigo';
+$mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_1_FROM_REF_VENTA_CRUZADA_TITLE'] = 'Referencias Vtas Cruzadas';
+$mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_1_FROM_ACCOUNTS_TITLE'] = 'Referencias Vtas Cruzadas';
+$mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_2_FROM_REF_VENTA_CRUZADA_TITLE'] = 'Referencias Vtas Cruzadas';
+$mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_2_FROM_ACCOUNTS_TITLE'] = 'Referencias Vtas Cruzadas';

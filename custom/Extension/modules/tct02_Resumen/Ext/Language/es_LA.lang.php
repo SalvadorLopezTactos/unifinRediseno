@@ -57,3 +57,4 @@ $mod_strings['LBL_SOS_FECHA_PAGO'] = 'Crédito SOS Fecha pago';
 $mod_strings['LBL_TCT_TIPO_UC_TXF'] = 'Tipo Producto Uniclick';
 $mod_strings['LBL_TCT_SUBTIPO_UC_TXF'] = 'Subtipo Producto Uniclick';
 $mod_strings['LBL_TCT_TIPO_CUENTA_UC'] = 'Tipo de Cuenta Uniclick';
+$mod_strings['LBL_GOOGLEDRIVEAC'] = 'ID Google Drive Cliente';
