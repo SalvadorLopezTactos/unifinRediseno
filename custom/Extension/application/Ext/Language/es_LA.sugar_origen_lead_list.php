@@ -1,6 +1,5 @@
 <?php
  // created: 2020-06-29 17:44:54
-
 $app_list_strings['origen_lead_list']=array (
   '' => '',
   1 => 'Marketing',

@@ -463,7 +463,7 @@ array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
-                'initial_filter' => 'filterAgenteTelefonicoTemplate',
+                'initial_filter' => 'filterAgentesTelefonicosTemplate',
                 'initial_filter_label' => 'LBL_FILTER_USER_BY_PUESTO',
                 'filter_populate' => 
                 array (
@@ -809,22 +809,33 @@ array (
                 'name' => 'potencial_cuenta_c',
                 'label' => 'LBL_POTENCIAL_CUENTA',
               ),
-              8 => 
-              array (
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'name' => 'tct_depositos_promedio_c',
-                'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
-              ),
+              8 =>
+                    array (
+                        'name' => 'total_empleados_c',
+                        'label' => 'LBL_TOTAL_EMPLEADOS_C',
+                        'readonly' => true,
+
+                    ),
               9 => 
               array (
                 'name' => 'empleados_c',
                 'label' => 'LBL_EMPLEADOS',
               ),
-              10 => 
+                10 =>
+                    array (
+                        'related_fields' =>
+                            array (
+                                0 => 'currency_id',
+                                1 => 'base_rate',
+                            ),
+                        'name' => 'tct_depositos_promedio_c',
+                        'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
+                    ),
+                11 =>
+                    array (
+
+                    ),
+              12 =>
               array (
                 'related_fields' => 
                 array (
@@ -834,21 +845,21 @@ array (
                 'name' => 'tct_prom_cheques_cur_c',
                 'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
               ),
-              11 => 
+              13 =>
               array (
                 'name' => 'dates_account_statements',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
                 'type' => 'dates_account_statements',
               ),
-              12 => 
+              14 =>
               array (
                 'name' => 'tct_dates_acc_statements_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
                 'span' => 12,
               ),
-              13 => 
+              15 =>
               array (
                 'name' => 'potencial_autos',
                 'studio' => 'visible',
@@ -924,6 +935,15 @@ array (
               ),
               5 => 
               array (
+                  'name' => 'promotorrm_c',
+                  'studio' => 'visible',
+                  'label' => 'LBL_PROMOTORRM_C',
+                  'initial_filter' => 'filterPromotorTemplate',
+                  'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
+                  'filter_populate' =>
+                      array (
+                          'tipodeproducto_c' => '11',
+                      ),
               ),
             ),
           ),

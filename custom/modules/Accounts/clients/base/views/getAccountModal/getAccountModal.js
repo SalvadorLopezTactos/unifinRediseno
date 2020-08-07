@@ -285,12 +285,19 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-        var id_user_black = ['36af9462-37e6-11ea-baed-a44e314beb18',
-            '405cc6b7-fc4a-7cae-552f-5628f61fd849']; // dejar solo las dos opciones de moroso y bloqueado
-
-        if (id_user_black.includes(id_producto)) {
+        var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
+		//var id_user_black = ['36af9462-37e6-11ea-baed-a44e314beb18',
+        //    '405cc6b7-fc4a-7cae-552f-5628f61fd849']; // dejar solo las dos opciones de moroso y bloqueado
+        var id_user_black = new Array(); 
+		
+		Object.values(list_solicitud).forEach(function (value) {
+			id_user_black.push(value);
+		});
+        
+		if (id_user_black.includes(id_producto)) {
             bandera = true;
         }
+		
         return bandera;
     },
 

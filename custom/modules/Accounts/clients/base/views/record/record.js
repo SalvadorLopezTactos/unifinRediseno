@@ -296,11 +296,11 @@
     /** Asignacion modal */
     hideButtonsModal_Account: function () {
         var Boton1 = this.getField("get_account_asesor");
-        var Boton2 = this.getField("send_accounts_asesor");
+        var Boton2 = this.getField("send_account_asesor");
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
-        var puestosBtn1 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53'];
-        var puestosBtn2 = ['3', '4', '5', '9', '10', '11', '15', '16', '36', '53', '27'];
+        var puestosBtn1 = ['18'];
+        var puestosBtn2 = ['27' , '31'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
@@ -966,6 +966,7 @@
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
             self.noEditFields.push('promotoruniclick_c');
+            self.noEditFields.push('promotorrm_c');
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
@@ -1106,6 +1107,8 @@
         this.$('[data-name="promotorfactoraje_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
+
     },
 
     hideconfiinfo: function () {
@@ -2460,6 +2463,15 @@
                         this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                         this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
+
+                    if (contains.call(modelo.get('productos_c'), "11") && this.model.get('user_id_c') == "") {
+                        this.model.set('promotorrm_c', modelo.get('name'));
+                        this.model.set('user_id8_c', modelo.get('id'));
+                    } else if (this.model.get('user_id_c') == "") {
+                        this.model.set('promotorrm_c', '9 - Sin Gestor');
+                        this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    }
+
                     if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
@@ -2471,6 +2483,8 @@
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                         this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                        this.model.set('promotorrm_c', '9 - Sin Gestor');
+                        this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
@@ -4427,7 +4441,10 @@
                 delete lista[key];
             }
         });
-        lista[anoselect] = anoselect;
+        if(anoselect!=undefined)
+        {
+            lista[anoselect] = anoselect;
+        }
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
     },
 
@@ -5221,6 +5238,7 @@
     get_analizate: function () {
         //Extiende This
         this.Financiera = [];
+        this.Credit = [];
         //this.Credit = [];
         var id = this.model.id;
         //Forma Petición de datos
@@ -5230,7 +5248,8 @@
             var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null);
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
-                    cont_nlzt.Financiera = data;
+                    cont_nlzt.Financiera = data['Financiera'];
+                    cont_nlzt.Credit = data['Credit'];
                     cont_nlzt.render();
                 }, contexto_cuenta)
             });

@@ -2933,40 +2933,47 @@
         var nombrecompleto = App.user.attributes.full_name;
         var idusrlog = App.user.attributes.id;
 
-        if (userprod.includes('1')) {
+        if (userprod.includes('^1^')) {
             this.model.set('promotorleasing_c', nombrecompleto);
             this.model.set('user_id_c', idusrlog);
         } else {
             this.model.set('promotorleasing_c', '9 - Sin Gestor');
             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
-        if (userprod.includes('4')) {
+        if (userprod.includes('^4^')) {
             this.model.set('promotorfactoraje_c', nombrecompleto);
             this.model.set('user_id1_c', idusrlog);
         } else {
             this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
             this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
-        if (userprod.includes('3')) {
+        if (userprod.includes('^3^')) {
             this.model.set('promotorcredit_c', nombrecompleto);
             this.model.set('user_id2_c', idusrlog);
         } else {
             this.model.set('promotorcredit_c', '9 - Sin Gestor');
             this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
-        if (userprod.includes('6')) {
+        if (userprod.includes('^6^')) {
             this.model.set('promotorfleet_c', nombrecompleto);
             this.model.set('user_id6_c', idusrlog);
         } else {
             this.model.set('promotorfleet_c', '9 - Sin Gestor');
             this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
-        if (userprod.includes('8')) {
+        if (userprod.includes('^8^')) {
             this.model.set('promotoruniclick_c', nombrecompleto);
             this.model.set('user_id7_c', idusrlog);
         } else {
             this.model.set('promotoruniclick_c', '9 - Sin Gestor');
             this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
+        }
+        if (userprod.includes('^11^')) {
+            this.model.set('promotorrm_c', nombrecompleto);
+            this.model.set('user_id8_c', idusrlog);
+        } else {
+            this.model.set('promotorrm_c', '9 - Sin Gestor');
+            this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
         }
     },
 

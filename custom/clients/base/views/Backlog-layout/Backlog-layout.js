@@ -97,8 +97,8 @@
         this._super("initialize", [options]);
 
         this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
-        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
-        this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
+        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_operacion_bkl_list');//app.lang.getAppListStrings('tipo_de_operacion_0');
+        this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');//app.lang.getAppListStrings('etapa_backlog');
         this.estatus_list_html = app.lang.getAppListStrings('estatus_operacion_c_list');
 
         this.EquipoSortDirection = 'DESC';
@@ -979,18 +979,18 @@
          if (currentMonth > 12){  //Si resulta mayor a diciembre
              currentMonth = currentMonth - 12;
          }
-
+         //CArga General-1, Original-2 , Adicional-3
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "Original";
+                 tipo_opp = "2";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }else{
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }
          }else{
-             tipo_opp = "Original";
+             tipo_opp = "2";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1380,18 +1380,18 @@
          if (currentMonth > 12){  //Si resulta mayor a diciembre
              currentMonth = currentMonth - 12;
          }
-
+         //CArga General-1, Original-2 , Adicional-3
          if(anio_popup <= currentYear){
              if(mes_popup > currentMonth){
-                 tipo_opp = "Original";
+                 tipo_opp = "2";
              }
              else if(mes_popup == currentMonth){
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }else{
-                 tipo_opp = "Adicional";
+                 tipo_opp = "3";
              }
          }else{
-             tipo_opp = "Original";
+             tipo_opp = "2";
          }
          // CVV regresar a 20
          if(currentDay >= 15 && currentDay <= 19){
@@ -1831,8 +1831,14 @@
         var idBacklog=e.currentTarget.getAttribute('data-id');
         //var mes=e.currentTarget.getAttribute('data-mes');
         //var anio=e.currentTarget.getAttribute('data-anio');
-        var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        var backlog=App.utils.deepCopy(self.backlogs.backlogs.MyBacklogs.linea[idBacklog]);
+        //var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
         var backlogMes = backlog.mes_int;
+        Object.keys(App.lang.getAppListStrings('estatus_operacion_c_list')).forEach(function(key){
+            if (App.lang.getAppListStrings('estatus_operacion_c_list')[key] == backlog.estatus_operacion_c) {
+                backlog.estatus_operacion_c = key;
+            }
+        });
 
         this.fecha(backlogMes);
         this.newRevivir={
@@ -1943,7 +1949,7 @@
                         success: _.bind(function (data) {
                             if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
                                 self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
-                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_operacion_c="2";
+                                self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_operacion_c="Activa";
                             }
                             $('#btn-CancelarRe').prop('disabled',false);
                             $('#btn-GuardarRe').prop('disabled',false);
@@ -2031,10 +2037,18 @@
     },
 
     cancelarNew:function(e){
+
+
         this.fechaCancelar();
         this.motivoCancelar=app.lang.getAppListStrings('motivo_cancelacion_c_list');
         var idBacklog=e.currentTarget.getAttribute('data-id');
-        var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        //var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        var backlog=App.utils.deepCopy(self.backlogs.backlogs.MyBacklogs.linea[idBacklog]);
+        Object.keys(App.lang.getAppListStrings('estatus_operacion_c_list')).forEach(function(key){
+            if (App.lang.getAppListStrings('estatus_operacion_c_list')[key] == backlog.estatus_operacion_c) {
+                backlog.estatus_operacion_c = key;
+            }
+        });
         var status=e.currentTarget.getAttribute('data-estatus');
         var backlogAnio = e.currentTarget.getAttribute('data-anio');
         var rolAutorizacion = self.rolAutorizacion;
@@ -2303,7 +2317,7 @@
                 else{
                     //Marcar como cancelado, pintar en rojo y status en cancelada
                     self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#FF6666";
-                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_operacion_c="1";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_operacion_c="Cancelada";
                 }
                 $('#btn-CanCancelar').prop('disabled',false);
                 $('#btn-GuardarCan').prop('disabled',false);
@@ -2746,7 +2760,7 @@
                                     else{
                                         //Marcar como cancelado, pintar en rojo y status en cancelada
                                         self.backlogs.backlogs.MyBacklogs.linea[data[1]].color="#FF6666";
-                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_operacion_c="1";
+                                        self.backlogs.backlogs.MyBacklogs.linea[data[1]].estatus_operacion_c="Cancelada";
                                     }
                                     successCountCancelar++;
                                     if (self.disposed) {

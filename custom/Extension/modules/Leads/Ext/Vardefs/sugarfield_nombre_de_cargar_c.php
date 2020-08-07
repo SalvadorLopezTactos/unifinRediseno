@@ -1,6 +1,6 @@
 <?php
- // created: 2019-12-26 09:02:06
-$dictionary['Lead']['fields']['nombre_de_cargar_c']['labelValue']='Nombre de la Cargar';
+ // created: 2020-07-21 10:28:03
+$dictionary['Lead']['fields']['nombre_de_cargar_c']['labelValue']='Nombre de la Carga';
 $dictionary['Lead']['fields']['nombre_de_cargar_c']['full_text_search']=array (
   'enabled' => '0',
   'boost' => '1',

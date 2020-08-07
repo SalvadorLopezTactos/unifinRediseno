@@ -386,24 +386,28 @@ array (
                 'name' => 'promotorfactoraje_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORFACTORAJE',
+                'css_class' => 'promotor_class',
               ),
               66 => 
               array (
                 'name' => 'promotorcredit_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORCREDIT',
+                'css_class' => 'promotor_class',
               ),
               67 => 
               array (
                 'name' => 'promotorfleet_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORFLEET',
+                'css_class' => 'promotor_class',
               ),
               68 => 
               array (
                 'name' => 'promotoruniclick_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORUNICLICK_C',
+                'css_class' => 'promotor_class',
               ),
               69 => 
               array (

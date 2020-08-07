@@ -372,10 +372,12 @@ SQL;
             $query .= " ORDER BY  ordenEstatus, ordenEquipo, uc.iniciales_c, lb.monto_comprometido desc";
         }
 
+        //Recupera listas de valores
+        global $app_list_strings;
 
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
-            $response['linea'][$row['id']]['estatus_operacion_c'] = $row['estatus_operacion_c'];
+            $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estatus_operacion_c_list'][$row['estatus_operacion_c']];
             $response['linea'][$row['id']]['mesanio'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3)."-".substr ($row['anio'],2,2);
             $response['linea'][$row['id']]['mes'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3);
             $response['linea'][$row['id']]['equipo'] = $row['equipo_c'];
@@ -429,9 +431,9 @@ SQL;
 
             $response['linea'][$row['id']]['monto_cancelado'] = $row['monto_comprometido_cancelado'];
             $response['linea'][$row['id']]['ri_cancelada'] = $row['renta_inicialcomp_can'];
-            $response['linea'][$row['id']]['tipo_operacion'] = $row['tipo_operacion_c'];
-            $response['linea'][$row['id']]['etapa_preliminar'] = $this->matchListLabel($row['etapa_preliminar_c'], "estatus_c_operacion_list");
-            $response['linea'][$row['id']]['etapa'] = $this->matchListLabel($row['etapa_c'], "estatus_c_operacion_list");
+            $response['linea'][$row['id']]['tipo_operacion'] = $app_list_strings['tipo_operacion_bkl_list'][$row['tipo_operacion_c']];
+            $response['linea'][$row['id']]['etapa_preliminar'] = $app_list_strings['etapa_c_list'][$row['etapa_preliminar_c']];
+            $response['linea'][$row['id']]['etapa'] = $app_list_strings['etapa_c_list'][$row['etapa_c']];
             $response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
             if($row['estatus_operacion_c'] == "2"){

@@ -321,7 +321,7 @@
                         else {
                           if(cDuplicado == 0) {
                             // Agrega Dirección
-                            var strUrl = 'DireccionesCP/' + CP + '/0';
+                            var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio;
                             app.api.call('GET', app.api.buildURL(strUrl), null, {
                               success: _.bind(function (data) {
                                 if(data.idCP) {

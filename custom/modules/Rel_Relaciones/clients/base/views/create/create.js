@@ -1136,11 +1136,11 @@
                     //Itera direcciones
                     for (var d = 0; d < data[1].contents.records.length; d++) {
                         //Itera direccion Particular
-                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1')) {
+                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
                             direP++;
                         }
                         //Valida direccion Fiscal
-                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2')) {
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador].includes('2') && data[1].contents.records[d].inactivo == false) {
                             direF++;
                         }
                     }
@@ -1401,7 +1401,7 @@
                             direP++;
                         }
                         //Valida direccion Fiscal
-                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador[0]].includes('2') && data[1].contents.records[d].inactivo == false) {
+                        if (App.lang.getAppListStrings('dir_indicador_map_list')[data[1].contents.records[d].indicador].includes('2') && data[1].contents.records[d].inactivo == false) {
                             direF++;
                         }
                     }

@@ -210,19 +210,21 @@ $dependencies['lev_Backlog']['numero_de_solicitud_readonly'] = array(
 );
 
 $dependencies['lev_Backlog']['producto_readonly'] = array(
-    'hooks' => array("all"),
-    'onload' => true,
+    'hooks' => array("edit"),
+    'onload' => 'true',
+    'triggerFields' => array('id'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'producto_c',
                 'label' => 'producto_label',
-                'value' => 'true',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
 );
+
 
 $dependencies['lev_Backlog']['renta_inicial_comprometida_readonly'] = array(
     'hooks' => array("all"),

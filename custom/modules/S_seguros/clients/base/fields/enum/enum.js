@@ -7,7 +7,14 @@
 
     render: function() {
         var self = this;
+        alert(this.model.get('id'));
         if (self.name === 'etapa') {
+            //Creación
+            if(this.model.get('etapa') == 1 && this.model.get('id')) {
+              var newOptions = {
+                  '1': 'Prospecto'
+              };
+            }
             //Prospecto
             if(this.model.get('etapa') == 1) {
               var newOptions = {

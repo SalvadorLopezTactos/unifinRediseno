@@ -11,6 +11,6 @@
         "karma-jasmine": "~0.1.5",
         "karma-junit-reporter": "~0.2.2",
         "karma-phantomjs-launcher": "~0.1.2",
-        "lodash": "~2.4.1"
+        "lodash": "~4.17.19"
     }
 }
