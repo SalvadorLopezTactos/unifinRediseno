@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-20 15:45:40
+ // created: 2020-08-05 09:08:35
 
 $app_list_strings['forma_pago_list']=array (
   '' => '',

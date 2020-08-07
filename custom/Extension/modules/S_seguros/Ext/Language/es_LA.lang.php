@@ -37,3 +37,7 @@ $mod_strings['LBL_GOOGLE_DRIVE4'] = 'ID Folder TECNICA - Cliente';
 $mod_strings['LBL_GOOGLE_DRIVE5'] = 'ID Folder Art492 - Cliente';
 $mod_strings['LBL_DOC_CLIENTE'] = 'Documento del Cliente';
 $mod_strings['LBL_CURRENCY_5'] = 'LBL_CURRENCY';
+$mod_strings['LBL_CURRENCY_6'] = 'LBL_CURRENCY';
+$mod_strings['LBL_NO_RENOVABLE'] = 'Ramo No Renovable';
+$mod_strings['LBL_MOTIVOS_REVISION'] = 'Motivos de la Oportunidad en Revisión';
+$mod_strings['LBL_COMISION'] = 'Comisión';

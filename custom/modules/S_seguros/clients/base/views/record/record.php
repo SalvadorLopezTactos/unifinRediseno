@@ -272,7 +272,6 @@ array (
               array (
                 'name' => 'etapa',
                 'label' => 'LBL_ETAPA',
-                'readonly' => true,
               ),
               16 => 
               array (
@@ -393,22 +392,28 @@ array (
               ),
               35 => 
               array (
-                'name' => 'google_drive_c',
-                'label' => 'LBL_GOOGLE_DRIVE',
-                'readonly' => true,
+                'name' => 'no_renovable_c',
+                'label' => 'LBL_NO_RENOVABLE',
               ),
               36 => 
               array (
-                'name' => 'doc_cliente_c',
-                'label' => 'LBL_DOC_CLIENTE',
-                'readonly' => true,
+                'name' => 'motivos_revision_c',
+                'studio' => 'visible',
+                'label' => 'LBL_MOTIVOS_REVISION',
               ),
               37 => 
+              array (
+                'name' => 'google_drive_c',
+                'label' => 'LBL_GOOGLE_DRIVE',
+                'readonly' => true,
+                'span' => 12,
+              ),
+              38 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              38 => 
+              39 => 
               array (
               ),
             ),
