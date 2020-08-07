@@ -43,7 +43,7 @@ class ExistentesVentasCruzadas_class
 				$bean->estatus = '1';
 				$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
 				$equipoPrincipal = $usuarioAsignado->equipo_c;
-				//$GLOBALS['log']->fatal('asdfg',$equipoPrincipal);
+				//$GLOBALS['log']->fatal('est',$bean->estatus);
 				//Agrega teams de BO
 				if($equipoPrincipal != null && $equipoPrincipal != '' && $equipoPrincipal != '0'){
 					
