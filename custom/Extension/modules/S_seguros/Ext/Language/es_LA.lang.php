@@ -41,3 +41,4 @@ $mod_strings['LBL_CURRENCY_6'] = 'LBL_CURRENCY';
 $mod_strings['LBL_NO_RENOVABLE'] = 'Ramo No Renovable';
 $mod_strings['LBL_MOTIVOS_REVISION'] = 'Motivos de la Oportunidad en Revisión';
 $mod_strings['LBL_COMISION'] = 'Comisión';
+$mod_strings['LBL_CURRENCY_5'] = 'LBL_CURRENCY';

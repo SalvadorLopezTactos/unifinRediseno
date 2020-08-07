@@ -8,8 +8,14 @@
     render: function() {
         var self = this;
         if (self.name === 'etapa') {
+            //Creación
+            if(this.model.get('etapa') == 1 && this.model.get('id') == undefined) {
+              var newOptions = {
+                  '1': 'Prospecto'
+              };
+            }
             //Prospecto
-            if(this.model.get('etapa') == 1) {
+            if(this.model.get('etapa') == 1 && this.model.get('id') != undefined) {
               var newOptions = {
                   '1': 'Prospecto',
                   '2': 'Cotizando'
