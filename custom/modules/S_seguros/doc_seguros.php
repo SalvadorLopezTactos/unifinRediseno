@@ -15,7 +15,7 @@ class Drive_docs
         $GLOBALS['log']->fatal('Inicia proceso de creación de folder-Cuenta con GoogleDrive');
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida);
         $bean_Account = BeanFactory::retrieveBean('Accounts', $bean_Resumen->id);
-        global $app_list_strings;
+        global $app_list_strings, $sugar_config;
         //Condicion para crear el folder de la cuenta
         if (empty($bean->google_drive2_c && !empty($bean->s_seguros_accountsaccounts_ida))) {
             $GLOBALS['log']->fatal('Valida que haya valor en tct02_resumen');
@@ -36,7 +36,7 @@ class Drive_docs
                 //Creacion de la carpeta y atributos
                 $file->setName($nombreAC);
                 //ID del carpeta en Drive donde se creará el nuevo folder
-                $file->setParents(array("1KBpAuhWv-WSfrwzCBUckX4peeN8JaNvq"));
+                $file->setParents(array($sugar_config['Folder_Inter']));
                 $file->setMimeType('application/vnd.google-apps.folder');
                 $GLOBALS['log']->fatal('Crea Carpeta con nombre ' . $nombreAC);
                 //Crea archivo (directorio)
