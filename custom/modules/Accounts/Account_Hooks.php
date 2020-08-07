@@ -686,18 +686,18 @@ SQL;
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-        if ($_REQUEST['module'] != 'Import') {
-            foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
-                }
-                if ($bean->field_defs[$field]['name'] == 'name') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
-                }
-            }
+      if ($_REQUEST['module'] != 'Import') {
+        foreach ($bean as $field => $value) {
+          if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
+               $value = mb_strtoupper($value, "UTF-8");
+               $bean->$field = $value;
+          }
+          if ($bean->field_defs[$field]['name'] == 'name') {
+               $value = mb_strtoupper($value, "UTF-8");
+               $bean->$field = $value;
+          }
         }
+      }
     }
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/19/2015 Description: Logic hook to call WS Actualiza persona en UNICS*/

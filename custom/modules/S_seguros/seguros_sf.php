@@ -12,38 +12,278 @@ class Seguros_SF
       $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida);
       if($cuenta->tipo_registro_cuenta_c == 2)
       {
-    		$post_data = array(
-    			'grant_type'    => 'password',
-    			'client_id'     => '3MVG9vtcvGoeH2bhLFqJ90HqOGN4JHhmlzYkj9syKBhKTnMb413fNQcMXR__9SjkZ1mnXntt34hAloe5yWtiS',
-    			'client_secret' => '123ED469F215FE672F9A9160C7D71FA207A0C9ED922D61086D7663325F03A074',
-    			'username'      => 'eduardo.carrasco@curious-badger-g4y1nr.com',
-    			'password'      => 'Tactos-2020OnvieP9Lq6LQ4Xk3lIACoGgs'
-    		);
-    		$headers = array(
-    			'Content-type' => 'application/x-www-form-urlencoded;charset=UTF-8'
-    		);
-    		$curl = curl_init('https://curious-badger-g4y1nr-dev-ed.my.salesforce.com/services/oauth2/token');
-    		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    		curl_setopt($curl, CURLOPT_POST, true);
-    		curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-    		$response = curl_exec($curl);
-    		curl_close($curl);
-    		$sf_access_data = json_decode($response, true);
-    		$access_token = $sf_access_data['access_token'];
-    		$url = 'https://curious-badger-g4y1nr-dev-ed.my.salesforce.com/services/data/v42.0/sobjects/Account';
-    		$content = json_encode(array("Name" => $cuenta->name));
-    		$curl = curl_init($url);
-    		curl_setopt($curl, CURLOPT_HEADER, false);
-    		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    		curl_setopt($curl, CURLOPT_HTTPHEADER,
-    		array("Authorization: OAuth $access_token",
-    			"Content-type: application/json"));
-    		curl_setopt($curl, CURLOPT_POST, true);
-    		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-    		$json_response = curl_exec($curl);
-    		curl_close($curl);
-    		$response = json_decode($json_response, true);
+        global $app_list_strings;
+   			require_once 'include/api/SugarApiException.php';
+        //Consulta Cuenta
+        if(!$cuenta->salesforce_id_c)
+        {
+          $token = $this->getToken();
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/acoountExists';
+      		$content = json_encode(array("nameAccount" => $cuenta->name));
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$json_response = curl_exec($curl);
+      		curl_close($curl);
+      		$response = json_decode($json_response, true);
+          $id_sf = $response['id'];
+          if($id_sf)
+          {
+            $cuenta->salesforce_id_c = $id_sf;
+            $cuenta->save();
+          }
+        }
+        //Prospecto
+        if($bean->etapa == 1 && !$bean->id_salesforce)
+        {
+          $token = $this->getToken();
+          $recordTypeId = $app_list_strings['tipo_registro_id_list'][$bean->tipo_registro_sf_c];
+          $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
+          $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
+          $ramoC = $app_list_strings['subramos_list'][$bean->subramos_c];
+          $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
+          $oportunidadInternacionalC = $app_list_strings['nacional_list'][$bean->nacional_c];
+          $oficinaC = $app_list_strings['oficina_list'][$bean->oficina_c];
+          $kamC = $app_list_strings['kam_list'][$bean->kam_c];
+          $referenciadorDeLaOportunidadC = $app_list_strings['referenciador_list'][$bean->referenciador_c];
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $closeDate = $bean->fecha_cierre_c;
+          $closeDate = date("d/m/Y", strtotime($closeDate));
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/creaProspecto';
+          if(!$cuenta->salesforce_id_c)
+          {
+        		$content = json_encode(array(
+              "sugarId" => $bean->id,
+              "recordTypeId" => $recordTypeId,
+              "nameAccount" => $cuenta->name,
+              "name" => $cuenta->name,
+              "type" => $type,
+              "tipoDeRegistroC" => $tipoDeRegistroC,
+              "ramoC" => $ramoC,
+              "currencyIsoCode" => $currencyIsoCode,
+              "oportunidadInternacionalC" => $oportunidadInternacionalC,
+              "oficinaC" => $oficinaC,
+              "kamC" => $kamC,
+              "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
+              "stageName" => $stageName,
+              "closeDate" => $closeDate,
+              "primaTotalObjetivoC" => $bean->prima_obj_c,
+              "ingresoObjetivopC" => $bean->incentivo,
+              "ingresoObjetivoC" => $bean->ingreso_inc
+            ));
+          }
+          else
+          {
+        		$content = json_encode(array(
+              "sugarId" => $bean->id,
+              "recordTypeId" => $recordTypeId,
+              "accountId" => $cuenta->salesforce_id_c,
+              "name" => $cuenta->name,
+              "type" => $type,
+              "tipoDeRegistroC" => $tipoDeRegistroC,
+              "ramoC" => $ramoC,
+              "currencyIsoCode" => $currencyIsoCode,
+              "oportunidadInternacionalC" => $oportunidadInternacionalC,
+              "oficinaC" => $oficinaC,
+              "kamC" => $kamC,
+              "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
+              "stageName" => $stageName,
+              "closeDate" => $closeDate,
+              "primaTotalObjetivoC" => $bean->prima_obj_c,
+              "ingresoObjetivopC" => $bean->incentivo,
+              "ingresoObjetivoC" => $bean->ingreso_inc
+            ));          
+          }
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$json_response = curl_exec($curl);
+      		curl_close($curl);
+      		$response = json_decode($json_response, true);
+          $id_op = $response['oportunidadId'];
+          if($id_op)
+          {
+            $bean->id_salesforce = $id_op;
+          }
+          else
+          {
+            throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response[errores][0]['describeError']);
+          }
+        }
+        //Cotizando
+        if($bean->etapa == 2)
+        {
+          $token = $this->getToken();
+          $serviciosaincluirc = $app_list_strings['servicios_a_incluir_c_list'][$bean->servicios_a_incluir_c];
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $fechaRequierePropuestaC = $bean->fecha_req;
+          $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/createCotizando';
+      		$content = json_encode(array(
+            "oportunidadId" => $bean->id_salesforce,
+            "stageName" => $stageName,
+            "requiereAyudaDeReaTcnica" => $bean->requiere_ayuda_c,
+            "fechaRequierePropuestaC" => $fechaRequierePropuestaC,
+            "description" => $bean->description,
+            "serviciosaincluirc" => $serviciosaincluirc,
+            "linkdedoccotizacinc" => $bean->google_drive_c
+          ));
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //Presentación
+        if($bean->etapa == 6)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "PRESENTACION",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName
+          ));
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //Re-negociación
+        if($bean->etapa == 7)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "RENEGOCIADA",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName,
+            "motivosRenegociaciNC" => $bean->motivos_c
+          ));
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //Ganada
+        if($bean->etapa == 9)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $forma_pago = $app_list_strings['forma_pago_list'][$bean->forma_pago];
+          $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
+          $compania = $app_list_strings['aseguradoras_list'][$bean->compania];
+          $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
+          $fecha_ini = $bean->fecha_ini;
+          $fecha_ini = date("d/m/Y", strtotime($fecha_ini));
+          $fecha_fin = $bean->fecha_fin;
+          $fecha_fin = date("d/m/Y", strtotime($fecha_fin));          
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "GANADA",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName,
+            "primaNetaTotalC" => $bean->prima_neta_c,
+            "feeC" => $bean->fee_c,
+            "feePC" => $bean->fee_p_c,
+            "formaPagoEmitidaC" => $forma_pago,
+            "comisiNC" => $bean->comision_c,
+            "currencyIsoCode" => $currencyIsoCode,
+            "aseguradoraGanadoraC" => $compania,
+            "fechaInicioVigencia_ogC" => $fecha_ini,
+            "fechaFinVigenciaOgC" => $fecha_fin,
+            "ejecutivoAsignadoNuevoC" => $ejecutivo_c,
+            "linkDocClienteC" => $bean->doc_cliente_c
+          ));
+          $curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //Perdida
+        if($bean->etapa == 10)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $razonPerdida = $app_list_strings['razon_perdida_list'][$bean->razon_perdida_c];
+          $no_renovable_c = $app_list_strings['no_renovable_list'][$bean->no_renovable_c];
+      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "PERDIDA",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName,
+            "razonPerdida" => $razonPerdida,
+            "comentariosRazonPerdida" => $bean->comentarios_c,
+            "ramoNoRenovablec" => $no_renovable_c
+          ));
+      		$curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
       }
+    }
+
+    public function getToken()
+    {
+      //Obtiene Token
+      $loginurl = "http://201.175.16.43:8000/InterSugar/public/token";
+      $params = "user=generica"
+        . "&password=generica";
+      $curl = curl_init($loginurl);
+      curl_setopt($curl, CURLOPT_HEADER, false);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($curl, CURLOPT_POST, true);
+      curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+      $response = curl_exec($curl);
+      $response = json_decode($response, true);
+  		curl_close($curl);
+  		return $response['token'];
     }
 }
