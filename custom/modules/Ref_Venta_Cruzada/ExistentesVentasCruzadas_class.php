@@ -40,6 +40,7 @@ class ExistentesVentasCruzadas_class
 				require_once 'include/api/SugarApiException.php';
 				throw new SugarApiExceptionInvalidParameter("El producto seleccionado, tiene una referencia activa");
 			}else{
+				$bean->estatus = '1';
 				$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
 				$equipoPrincipal = $usuarioAsignado->equipo_c;
 				//$GLOBALS['log']->fatal('asdfg',$equipoPrincipal);
