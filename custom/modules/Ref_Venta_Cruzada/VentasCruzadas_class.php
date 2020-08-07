@@ -10,10 +10,10 @@ class VentasCruzadas_class
 		$no_valido = 0;
 		$id_cuenta = '';
 		//$GLOBALS['log']->fatal($bean->id.'-'.$bean->date_entered);
-		if($bean->estatus != '2' && $bean->producto_referenciado == $bean->producto_origen){
+		if(($bean->estatus == '' || $bean->estatus == null) && $bean->producto_referenciado == $bean->producto_origen){
 			$no_valido = 1;
 			
-		}else if($bean->estatus != '2'){
+		}else if($bean->estatus == '' || $bean->estatus == null){
 			if ($bean->load_relationship('accounts_ref_venta_cruzada_1')) {
 				//Fetch related beans
 				$relatedBeans = $bean->accounts_ref_venta_cruzada_1->getBeans();
@@ -97,6 +97,7 @@ class VentasCruzadas_class
 		
 		if($no_valido == 1){
 			$bean->estatus = 2;
+			$bean->save();
 		}
 	}
 }
