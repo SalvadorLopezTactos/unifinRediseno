@@ -10,8 +10,9 @@ class Seguros_SF
     public function getAccount($bean = null, $event = null, $args = null)
     {
       $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida);
-      if($cuenta->tipo_registro_cuenta_c == 2)
-      {
+      $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida);
+//      if($cuenta->tipo_registro_cuenta_c == 2)
+//      {
         global $app_list_strings;
    			require_once 'include/api/SugarApiException.php';
         //Consulta Cuenta
@@ -61,7 +62,7 @@ class Seguros_SF
               "sugarId" => $bean->id,
               "recordTypeId" => $recordTypeId,
               "nameAccount" => $cuenta->name,
-              "name" => $cuenta->name,
+              "name" => $bean->name,
               "type" => $type,
               "tipoDeRegistroC" => $tipoDeRegistroC,
               "ramoC" => $ramoC,
@@ -83,7 +84,7 @@ class Seguros_SF
               "sugarId" => $bean->id,
               "recordTypeId" => $recordTypeId,
               "accountId" => $cuenta->salesforce_id_c,
-              "name" => $cuenta->name,
+              "name" => $bean->name,
               "type" => $type,
               "tipoDeRegistroC" => $tipoDeRegistroC,
               "ramoC" => $ramoC,
@@ -136,7 +137,7 @@ class Seguros_SF
             "fechaRequierePropuestaC" => $fechaRequierePropuestaC,
             "description" => $bean->description,
             "serviciosaincluirc" => $serviciosaincluirc,
-            "linkdedoccotizacinc" => $bean->google_drive_c
+            "linkdedoccotizacinc" => "https://drive.google.com/drive/u/0/folders/".$bean->google_drive4_c
           ));
       		$curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -225,7 +226,7 @@ class Seguros_SF
             "fechaInicioVigencia_ogC" => $fecha_ini,
             "fechaFinVigenciaOgC" => $fecha_fin,
             "ejecutivoAsignadoNuevoC" => $ejecutivo_c,
-            "linkDocClienteC" => $bean->doc_cliente_c
+            "linkDocClienteC" => "https://drive.google.com/drive/u/0/folders/".$resumen->googledriveac_c
           ));
           $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -267,7 +268,7 @@ class Seguros_SF
       		curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
-      }
+//      }
     }
 
     public function getToken()
