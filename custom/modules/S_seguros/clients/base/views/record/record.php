@@ -403,17 +403,10 @@ array (
               ),
               37 => 
               array (
-                'name' => 'google_drive_c',
-                'label' => 'LBL_GOOGLE_DRIVE',
-                'readonly' => true,
-                'span' => 12,
-              ),
-              38 => 
-              array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              39 => 
+              38 => 
               array (
               ),
             ),
