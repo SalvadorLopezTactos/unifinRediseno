@@ -78,7 +78,7 @@ class VentasCruzadas_class
 				$mesactual = date("n");
 				$anioactual = date("Y");
 				//$GLOBALS['log']->fatal('año - '.$mesactual.' , '.'mes - '.$anioactual);
-				$query = 'SELECT bcl.id,bcl.anio, bcl.mes FROM accounts ac, lev_backlog bcl WHERE bcl.account_id_c = ac.id and ac.id = "'.$id_cuenta.'"';
+				$query = 'SELECT bcl.id,bcl.anio, bcl.mes FROM accounts ac, lev_backlog bcl WHERE bcl.account_id_c = ac.id and ac.id = "'.$id_cuenta.'" and bcl.deleted=0';
 				$results = $GLOBALS['db']->query($query);
 				//$GLOBALS['log']->fatal('results',$results);
 				while($row = $GLOBALS['db']->fetchByAssoc($results) )
