@@ -24,17 +24,14 @@
             //Cotizando
             if(this.model.get('etapa') == 2) {
               var newOptions = {
-                  '2': 'Cotizando',
-                  '3': 'En Revisión',
-                  '4': 'Cotizado',
-                  '5': 'No Cotizado'
+                  '2': 'Cotizando'
               };
             }
             //En Revisión
             if(this.model.get('etapa') == 3) {
               var newOptions = {
                   '3': 'En Revisión',
-                  '6': 'Presentación de Cotización al Cliente'
+                  '2': 'Cotizando'
               };
             }
             //Cotizado
