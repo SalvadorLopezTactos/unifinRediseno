@@ -17,4 +17,13 @@ $dictionary['Ref_Venta_Cruzada']['fields']['name']['calculated']='1';
 $dictionary['Ref_Venta_Cruzada']['fields']['name']['formula']='concat(related($accounts_ref_venta_cruzada_1,"name"),"-",getDropdownValue("tipo_producto_list",$producto_referenciado))';
 $dictionary['Ref_Venta_Cruzada']['fields']['name']['enforced']=true;
 
+$dictionary['Ref_Venta_Cruzada']['duplicate_check']['FilterDuplicateCheck']['filter_template'] = array(
+    array(
+        '$and' => array(
+            // array('first_name' => array('$starts' => '$first_name')),
+            // array('last_name' => array('$starts' => '$last_name')),
+            array('id' => array('$equals' => '$id')),
+        )
+    ),
+);
  ?>
