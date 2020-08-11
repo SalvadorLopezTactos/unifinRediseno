@@ -40,12 +40,10 @@ class VentasCruzadas_class
 									//Producto desatendido estatus =2
 									if($bean->producto_referenciado == $prod->tipo_producto){
 										$array = $GLOBALS['app_list_strings']['usuarios_ref_no_validos_list'];
-										//$GLOBALS['log']->fatal(print_r($array,true));
-										//$GLOBALS['log']->fatal($prod->estatus_atencion.' estatus producto');
-										//$GLOBALS['log']->fatal($prod->assigned_user_id.' assigned_user_id');
+										
 										//usuario no este en 9, lista usuarios_no_ceder_list
 										//id no es null || vacio
-										
+										//$GLOBALS['log']->fatal('producto no valido');
 										if($prod->estatus_atencion == '1' && !in_array($prod->assigned_user_id, $array)){
 											//$GLOBALS['log']->fatal('producto no valido');
 											$no_valido = 1;
@@ -56,18 +54,25 @@ class VentasCruzadas_class
 						}					
 					}
 				}
+				//$GLOBALS['log']->fatal($no_valido.'no_valido');
 				
 				if ($parentBean->load_relationship('opportunities')) {
 					//Fetch related beans
 					$relatedBeans = $parentBean->opportunities->getBeans();
 					//$GLOBALS['log']->fatal('oportunidades');
 					if (!empty($relatedBeans)) {
+						$hoy = date("Y-m-d");  
+						//$GLOBALS['log']->fatal('hoy: '.$hoy);
 						foreach($relatedBeans as $oppor){
-							//Producto desatendido estatus =2     //mismo producto
-							//$GLOBALS['log']->fatal($oppor->tipo_producto_c .'--'. $oppor->tct_opp_estatus_c.'-'.$oppor->estatus_c);
-							if($bean->producto_referenciado == $oppor->tipo_producto_c && $oppor->tct_opp_estatus_c=='1' 
-								&& !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
-								$no_valido = 1;							
+							//Producto desatendido estatus =2     //mismo producto							
+							if($bean->producto_referenciado == $oppor->tipo_producto_c){
+								$GLOBALS['log']->fatal($oppor->tipo_producto_c .'--'. $oppor->tct_opp_estatus_c.'-'.$oppor->tct_etapa_ddw_c.'-'.$oppor->estatus_c.'-'.$oppor->vigencialinea_c);
+								if($oppor->vigencialinea_c > $hoy && $oppor->tct_opp_estatus_c=='1' && $oppor->tct_etapa_ddw_c =='CL' && $oppor->estatus_c=='N' ){
+									//$GLOBALS['log']->fatal('expirado');
+									$no_valido = 1;	
+								}else if( $oppor->tct_opp_estatus_c=='1' && !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
+									$no_valido = 1;	
+								}
 							}
 						}
 					}
