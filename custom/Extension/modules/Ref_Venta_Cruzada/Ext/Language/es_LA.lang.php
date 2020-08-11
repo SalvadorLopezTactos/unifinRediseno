@@ -7,3 +7,5 @@ $mod_strings['LBL_ASSIGNED_TO'] = 'Asesor Origen';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Nuevo Panel 1';
 $mod_strings['LBL_DATE_ENTERED'] = 'Fecha Alta*';
 $mod_strings['LBL_ASSIGNED_TO_NAME'] = 'Asesor Origen';
+$mod_strings['LBL_PRIMER_FECHA_ANEXO'] = 'Fecha primer anexo activado';
+$mod_strings['LBL_ULTIMA_FECHA_ANEXO'] = 'Fecha último anexo activado';
