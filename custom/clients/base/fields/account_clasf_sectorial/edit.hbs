@@ -1,0 +1,94 @@
+<div class="row-fluid">
+    <table id="tableClasfSectorial" width="100%">
+        <tr>
+            <div style="padding-bottom: 10px;"><strong>CNBV</strong></div>
+            <div class="row-fluid">
+                <div class="campoAE span6">
+                    <label class="record-label" style="margin-left:0px">Actividad Económica</label>
+                    <select class="row-fluid select2 list_ae" data-field="list_ae">
+                        {{#each actividadeconomica_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ActividadEconomica.ae.id}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campoSSE span6">
+                    <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
+                    <select class="row-fluid select2 list_sse" data-field="list_sse">
+                        {{#each subsectoreconomico_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ActividadEconomica.sse.id}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
+                <div class="campoSE span6">
+                    <label class="record-label" style="margin-left:0px">Sector Económico</label>
+                    <select class="row-fluid select2 list_se" data-field="list_se">
+                        {{#each sectoreconomico_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ActividadEconomica.se.id}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campoMS span6">
+                    <label class="record-label" style="margin-left:0px">Macro Sector</label>
+                    <select class="row-fluid select2 list_ms" data-field="list_ms">
+                        {{#each tct_macro_sector_ddw_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ActividadEconomica.ms.id}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <div style="padding-top: 15px; padding-bottom: 10px;"><strong>INEGI</strong></div>
+            <div class="row-fluid">
+                <div class="campoIAE span6">
+                    <label class="record-label" style="margin-left:0px">Actividad Económica</label>
+                    <select class="row-fluid select2 list_iae" data-field="list_iae">
+                        {{#each inegi_actividad_c_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ResumenCliente.inegi.inegi_actividad}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campoISSE span6">
+                    <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
+                    <select class="row-fluid select2 list_isse" data-field="list_isse">
+                        {{#each inegi_subsector_c_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ResumenCliente.inegi.inegi_subsector}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
+                <div class="campoISE span6">
+                    <label class="record-label" style="margin-left:0px">Sector Económico</label>
+                    <select class="row-fluid select2 list_ise" data-field="list_ise">
+                        {{#each inegi_sector_c_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ResumenCliente.inegi.inegi_sector}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="campoIMS span6">
+                    <label class="record-label" style="margin-left:0px">Macro Sector</label>
+                    <select class="row-fluid select2 list_ims" data-field="list_ims">
+                        {{#each inegi_macro_c_list}}
+                        <option value="{{@key}}" {{ifSelected @key
+                                              ../ResumenCliente.inegi.inegi_macro}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </tr>
+    </table>
+</div>

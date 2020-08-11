@@ -197,6 +197,13 @@ class ResumenClienteAPI extends SugarApi
             "total" => 0
             //"alerta" => array()
         );
+        //Clasificacion Sectorial INEGI
+        $arr_principal['inegi'] = array(
+            "inegi_actividad" => "",
+            "inegi_subsector" => "",
+            "inegi_sector" => "",
+            "inegi_macro" => ""
+        );
 
         //String operaciones
         $operaciones_ids = "'".$id_cliente."'";
@@ -737,6 +744,12 @@ class ResumenClienteAPI extends SugarApi
                 //Recupera Unilease
                 // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['unilease']['fecha_pago']= $beanResumen->cauto_fecha_pago;
+
+                //Recupera Clasificación Sectorial INEGI
+                $arr_principal['inegi']['inegi_actividad'] = $beanResumen->inegi_actividad_c;
+                $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
+                $arr_principal['inegi']['inegi_sector'] = $beanResumen->inegi_sector_c;
+                $arr_principal['inegi']['inegi_macro'] = $beanResumen->inegi_macro_c;
 
             }
         }
