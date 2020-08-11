@@ -10,7 +10,7 @@ class VentasCruzadas_class
 		$no_valido = 0;
 		$id_cuenta = '';
 		//$GLOBALS['log']->fatal('datos -'.$bean->estatus.'-'.$bean->date_entered.'-'.$bean->producto_referenciado.'-'. $bean->producto_origen);
-		if( $bean->estatus == '1' ) {
+        if($bean->estatus == '1' && !$arguments['isUpdate']) {
 			if( $bean->producto_referenciado == $bean->producto_origen ){
 				$no_valido = 1;
 			
