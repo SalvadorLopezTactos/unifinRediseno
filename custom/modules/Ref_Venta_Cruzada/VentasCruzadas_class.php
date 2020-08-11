@@ -45,7 +45,7 @@ class VentasCruzadas_class
 										//id no es null || vacio
 										//$GLOBALS['log']->fatal('producto no valido');
 										if($prod->estatus_atencion == '1' && !in_array($prod->assigned_user_id, $array)){
-											//$GLOBALS['log']->fatal('producto no valido');
+											$GLOBALS['log']->fatal('producto no valido');
 											$no_valido = 1;
 										}
 									}
@@ -62,16 +62,22 @@ class VentasCruzadas_class
 					//$GLOBALS['log']->fatal('oportunidades');
 					if (!empty($relatedBeans)) {
 						$hoy = date("Y-m-d");  
-						//$GLOBALS['log']->fatal('hoy: '.$hoy);
+						$GLOBALS['log']->fatal('hoy: '.$hoy);
 						foreach($relatedBeans as $oppor){
 							//Producto desatendido estatus =2     //mismo producto							
 							if($bean->producto_referenciado == $oppor->tipo_producto_c){
-								$GLOBALS['log']->fatal($oppor->tipo_producto_c .'--'. $oppor->tct_opp_estatus_c.'-'.$oppor->tct_etapa_ddw_c.'-'.$oppor->estatus_c.'-'.$oppor->vigencialinea_c);
-								if($oppor->vigencialinea_c > $hoy && $oppor->tct_opp_estatus_c=='1' && $oppor->tct_etapa_ddw_c =='CL' && $oppor->estatus_c=='N' ){
-									//$GLOBALS['log']->fatal('expirado');
+								$auxdate = date($oppor->vigencialinea_c);
+								$GLOBALS['log']->fatal($oppor->tipo_producto_c .'--'. $oppor->tct_opp_estatus_c.'-'.$oppor->tct_etapa_ddw_c.'-'.$oppor->estatus_c.'-'.$auxdate);
+								if( $oppor->tct_opp_estatus_c=='1' && !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
 									$no_valido = 1;	
-								}else if( $oppor->tct_opp_estatus_c=='1' && !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
-									$no_valido = 1;	
+								} 
+								
+								if($oppor->tct_opp_estatus_c == 1 && $oppor->tct_etapa_ddw_c =='CL' && $oppor->estatus_c=='N' ){
+									//$GLOBALS['log']->fatal('linea activa');
+									if($auxdate < $hoy){
+										$GLOBALS['log']->fatal('expirado');
+										$no_valido = 0;	
+									}
 								}
 							}
 						}
@@ -85,7 +91,7 @@ class VentasCruzadas_class
 				//$GLOBALS['log']->fatal('año - '.$mesactual.' , '.'mes - '.$anioactual);
 				$query = 'SELECT bcl.id,bcl.anio, bcl.mes FROM accounts ac, lev_backlog bcl WHERE bcl.account_id_c = ac.id and ac.id = "'.$id_cuenta.'" and bcl.deleted=0';
 				$results = $GLOBALS['db']->query($query);
-				//$GLOBALS['log']->fatal('results',$results);
+				$GLOBALS['log']->fatal('results',$results);
 				while($row = $GLOBALS['db']->fetchByAssoc($results) )
 				{
 					//Use $row['id'] to grab the id fields value
