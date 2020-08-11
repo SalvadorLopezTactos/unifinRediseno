@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-21 10:49:10
+ // created: 2020-08-11 11:11:31
 $dictionary['S_seguros']['fields']['comentarios_c']['labelValue']='Comentarios';
 $dictionary['S_seguros']['fields']['comentarios_c']['full_text_search']=array (
   'enabled' => '0',

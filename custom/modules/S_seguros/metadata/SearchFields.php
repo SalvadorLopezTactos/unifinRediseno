@@ -1,5 +1,5 @@
 <?php
-// created: 2020-08-10 13:21:24
+// created: 2020-08-11 11:59:00
 $searchFields['S_seguros'] = array (
   'name' => 
   array (
