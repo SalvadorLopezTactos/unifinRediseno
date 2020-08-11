@@ -308,105 +308,86 @@ array (
               ),
               20 => 
               array (
-                'name' => 'forma_pago',
-                'label' => 'LBL_FORMA_PAGO',
-                'readonly' => true,
-              ),
-              21 => 
-              array (
-                'name' => 'incentivo',
-                'label' => 'LBL_INCENTIVO',
-              ),
-              22 => 
-              array (
-                'name' => 'ingreso_ref',
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'label' => 'LBL_INGRESO_REF',
-                'readonly' => true,
-              ),
-              23 => 
-              array (
                 'name' => 'fecha_cierre_c',
                 'label' => 'LBL_FECHA_CIERRE',
               ),
-              24 => 
+              21 => 
               array (
                 'name' => 'motivos_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS',
               ),
-              25 => 
+              22 => 
+              array (
+              ),
+              23 => 
               array (
                 'name' => 'requiere_ayuda_c',
                 'label' => 'LBL_REQUIERE_AYUDA',
               ),
-              26 => 
+              24 => 
               array (
                 'name' => 'servicios_a_incluir_c',
                 'label' => 'LBL_SERVICIOS_A_INCLUIR',
               ),
-              27 => 
+              25 => 
               array (
                 'name' => 'subramos_c',
                 'label' => 'LBL_SUBRAMOS',
               ),
-              28 => 
+              26 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              29 => 
+              27 => 
               array (
                 'name' => 'kam_c',
                 'label' => 'LBL_KAM',
               ),
-              30 => 
+              28 => 
               array (
                 'name' => 'nacional_c',
                 'label' => 'LBL_NACIONAL',
               ),
-              31 => 
+              29 => 
               array (
                 'name' => 'fee_c',
                 'label' => 'LBL_FEE',
               ),
-              32 => 
+              30 => 
               array (
                 'name' => 'fee_p_c',
                 'label' => 'LBL_FEE_P',
               ),
-              33 => 
+              31 => 
               array (
                 'name' => 'razon_perdida_c',
                 'label' => 'LBL_RAZON_PERDIDA',
               ),
-              34 => 
+              32 => 
               array (
                 'name' => 'comentarios_c',
                 'studio' => 'visible',
                 'label' => 'LBL_COMENTARIOS',
               ),
-              35 => 
+              33 => 
               array (
                 'name' => 'no_renovable_c',
                 'label' => 'LBL_NO_RENOVABLE',
               ),
-              36 => 
+              34 => 
               array (
                 'name' => 'motivos_revision_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS_REVISION',
               ),
-              37 => 
+              35 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              38 => 
+              36 => 
               array (
               ),
             ),
@@ -476,6 +457,94 @@ array (
             ),
           ),
           3 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL2',
+            'label' => 'LBL_RECORDVIEW_PANEL2',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'prima_neta_ganada_c',
+                'label' => 'LBL_PRIMA_NETA_GANADA',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'name' => 'monedas_c',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'prima_neta_ganada_c',
+                  ),
+                ),
+              ),
+              1 => 
+              array (
+                'name' => 'tipo_cambio_ganada_c',
+                'label' => 'LBL_TIPO_CAMBIO_GANADA',
+              ),
+              2 => 
+              array (
+                'name' => 'forma_pago',
+                'label' => 'LBL_FORMA_PAGO',
+              ),
+              3 => 
+              array (
+                'name' => 'comision_c',
+                'label' => 'LBL_COMISION',
+              ),
+              4 => 
+              array (
+                'name' => 'prima_neta',
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'label' => 'LBL_PRIMA_NETA',
+                'readonly' => true,
+              ),
+              5 => 
+              array (
+                'name' => 'aseguradora_c',
+                'label' => 'LBL_ASEGURADORA',
+              ),
+              6 => 
+              array (
+                'name' => 'incentivo',
+                'label' => 'LBL_INCENTIVO',
+              ),
+              7 => 
+              array (
+                'name' => 'ingreso_ref',
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'label' => 'LBL_INGRESO_REF',
+                'readonly' => true,
+              ),
+              8 => 
+              array (
+                'name' => 'fecha_ini_c',
+                'label' => 'LBL_FECHA_INI_C',
+              ),
+              9 => 
+              array (
+                'name' => 'fecha_fin_c',
+                'label' => 'LBL_FECHA_FIN_C',
+              ),
+            ),
+          ),
+          4 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
