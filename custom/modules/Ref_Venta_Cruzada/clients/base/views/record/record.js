@@ -46,8 +46,26 @@
             $('[data-name="cancelado"]').attr('style',"pointer-events:block")
 
 		}
+
+        this.setEtiquetasFechas(productoRef);
+
 	},
-	
+
+    setEtiquetasFechas:function(idProducto){
+        var etiqueta_original_inicio='Fecha primer anexo activado';
+        var etiqueta_original_fin='Fecha último anexo activado';
+        if(idProducto!= null && idProducto !=""){
+
+            if(idProducto=='4'){
+                $('.record-label[data-name="primer_fecha_anexo"]').html('Fecha de primera cesión liberada');
+                $('.record-label[data-name="ultima_fecha_anexo"]').html('Fecha de última cesión liberada');
+            }else {
+                $('.record-label[data-name="primer_fecha_anexo"]').html(etiqueta_original_inicio);
+                $('.record-label[data-name="ultima_fecha_anexo"]').html(etiqueta_original_fin);
+            }
+        }
+
+    },
 	set_usuariorechazado: function () {
 		if(this.model.get('cancelado') == '1' ){
 			this.model.set('usuario_rechazo',App.user.attributes.full_name);
