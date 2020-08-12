@@ -44,6 +44,24 @@ $dependencies['Ref_Venta_Cruzada']['usuario_producto'] = array
     'notActions' => array(),
 );
 
+$dependencies['Ref_Venta_Cruzada']['usuario_rechazo'] = array
+(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','cancelado'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'usuario_rechazo',
+                'value' => 'equal($cancelado,"1")',
+            ),
+        ),
+    ),
+    'notActions' => array(),
+);
+
 $dependencies['Ref_Venta_Cruzada']['usuario_rm'] = array
 (
     'hooks' => array("all"),

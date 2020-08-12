@@ -199,14 +199,21 @@ class Ref_Cruzadas_Hooks
 
     public function enviarNotificacionReferencia($asunto,$cuerpoCorreo,$correoAsesor,$nombreAsesor){
         //Enviando correo a asesor origen
-        $mailer = MailerFactory::getSystemDefaultMailer();
-        $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-        $mailer->setSubject($asunto);
-        $body = trim($cuerpoCorreo);
-        $mailer->setHtmlBody($body);
-        $mailer->clearRecipients();
-        $mailer->addRecipientsTo(new EmailIdentity($correoAsesor, $nombreAsesor));
-        $result = $mailer->send();
+        try{
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject($asunto);
+            $body = trim($cuerpoCorreo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            $mailer->addRecipientsTo(new EmailIdentity($correoAsesor, $nombreAsesor));
+            $result = $mailer->send();
+
+        }catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$correoAsesor);
+            $GLOBALS['log']->fatal("Exception ".$e);
+        }
+
 
     }
 
