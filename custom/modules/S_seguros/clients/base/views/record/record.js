@@ -17,6 +17,7 @@
         $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('seguro_pipeline');
+        pipe_s.render();
     },
 
     addRegion: function() {
