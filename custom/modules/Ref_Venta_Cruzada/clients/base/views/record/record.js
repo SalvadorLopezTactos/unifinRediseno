@@ -34,6 +34,9 @@
         this._super("_render");
         $('span[data-fieldname="cancelado"]').find('input').attr('disabled','');
         $('[data-name="cancelado"]').attr('style',"pointer-events:none");
+		
+		$('span[data-fieldname="usuario_rechazo"]').find('input').attr('disabled','');
+        $('[data-name="usuario_rechazo"]').attr('style',"pointer-events:none");
     },
 
     hideShowCancelar:function(){
