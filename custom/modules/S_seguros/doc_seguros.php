@@ -159,13 +159,13 @@ class Drive_docs
             $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
             if($etapa=="1"){
                 $GLOBALS['log']->fatal('Actualiza a Prospecto Interesado (cuenta)');
-                $this->actualizaTipoCuenta('2','7',$cliente,$producto);
+                Drive_docs::actualizaTipoCuenta('2','7',$cliente,$producto);
             }
 
             //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
             if ($bean->etapa=="9") { //Etapa solicitud 9 GANADA
                 $GLOBALS['log']->fatal('Cliente UNIFIN');
-                $this->actualizaTipoCuenta('3','14',$cliente,$producto);
+                Drive_docs::actualizaTipoCuenta('3','14',$cliente,$producto);
             }
         }
     }
