@@ -69,7 +69,7 @@
     },
 	set_usuariorechazado: function () {
 		if(this.model.get('cancelado') == '1' ){
-			this.model.set('usuario_rechazo', App.user.attributes.id);
+			this.model.set('user_id2_c', App.user.attributes.id);
 			this.model.set('usuario_rechazo', App.user.attributes.full_name);
 		}else{
 			this.model.set('usuario_rechazo', '');
