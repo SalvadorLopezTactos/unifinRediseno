@@ -2962,10 +2962,10 @@
             //Validacion de Actividad Economica - antes macrosector
             if ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
                 //Entra a modo edición el campo custom
-                fieldAE = this.getField('account_clasf_sectorial');
+                fieldAE1 = this.getField('account_clasf_sectorial');
                 this.inlineEditMode = true;
                 this.setButtonStates(this.STATE.EDIT);
-                this.toggleField(fieldAE);
+                this.toggleField(fieldAE1);
 
                 $('.campoAE').find('.record-label').css('color', 'red');
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
@@ -3234,7 +3234,7 @@
         //Validacion Actividad Economica - antes macro sector
         if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
-
+            
             $('.campoAE').find('.record-label').css('color', 'red');
             $('.list_ae').find('.select2-choice').css('border-color', 'red');
             errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
@@ -3615,6 +3615,12 @@
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
+                        //Entra a modo edición el campo custom
+                        fieldAE2 = this.getField('account_clasf_sectorial');
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldAE2);
+
                         $('.campoAE').find('.record-label').css('color', 'red');
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -3644,6 +3650,12 @@
                     }
 
                     if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+
+                        //Entra a modo edición el campo custom
+                        fieldAE3 = this.getField('account_clasf_sectorial');
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldAE3);
 
                         $('.campoAE').find('.record-label').css('color', 'red');
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
@@ -3703,6 +3715,12 @@
             }
             //Requerido Actividad Economica custom
             if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+
+                //Entra a modo edición el campo custom
+                fieldAE4 = this.getField('account_clasf_sectorial');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldAE4);
 
                 $('.campoAE').find('.record-label').css('color', 'red');
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');

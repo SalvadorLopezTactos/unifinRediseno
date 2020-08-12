@@ -1652,11 +1652,9 @@
             //Validacion de Actividad Economica - antes macrosector
             if ($('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
                 
-                $('.campoAE').find('.record-label').css('color', 'red'); 
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-
             }
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
@@ -2016,16 +2014,10 @@
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                        // app.alert.show("Actividad Economica requerido", {
-                        //     level: "error",
-                        //     title: "El campo Actividad Económica es requerido",
-                        //     autoClose: false
-                        // });
-                        $('.campoAE').find('.record-label').css('color', 'red'); 
+                        
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
-
                     }
                     if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                         errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
@@ -2051,12 +2043,7 @@
                     }
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                        // app.alert.show("Actividad Economica requerido", {
-                        //     level: "error",
-                        //     title: "El campo Actividad Económica es requerido",
-                        //     autoClose: false
-                        // });
-                        $('.campoAE').find('.record-label').css('color', 'red'); 
+                        
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
@@ -2114,16 +2101,10 @@
             }
             //Requerido Actividad Economica custom
             if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                // app.alert.show("Actividad Economica requerido", {
-                //     level: "error",
-                //     title: "El campo Actividad Económica es requerido",
-                //     autoClose: false
-                // });
-                $('.campoAE').find('.record-label').css('color', 'red'); 
+                
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
-
             }
             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                 errors['rfc_c'] = errors['rfc_c'] || {};
@@ -2641,28 +2622,24 @@
                 //Validacion Actividad Economica custom
                 if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                    $('.campoAE').find('.record-label').css('color', 'red');
                     $('.list_ae').find('.select2-choice').css('border-color', 'red');
                     // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido Subsector custom
                 if ($('.list_sse').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    $('.campoSSE').find('.record-label').css('color', 'red');
                     $('.list_sse').find('.select2-choice').css('border-color', 'red');
                     // $('[name=subsectoreconomico_c]').css('border-color', 'red');
                 }
                 //Requerido Sector custom
                 if ($('.list_se').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    $('.campoSE').find('.record-label').css('color', 'red');
                     $('.list_se').find('.select2-choice').css('border-color', 'red');
                     // $('[name=sectoreconomico_c]').css('border-color', 'red');
                 }
                 //Requerido macro sector custom
                 if ($('.list_ms').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('.campoMS').find('.record-label').css('color', 'red');
                     $('.list_ms').find('.select2-choice').css('border-color', 'red');
                     // $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
