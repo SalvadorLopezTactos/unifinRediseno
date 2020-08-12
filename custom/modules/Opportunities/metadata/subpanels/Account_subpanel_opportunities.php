@@ -1,5 +1,5 @@
 <?php
-// created: 2019-11-26 15:16:55
+// created: 2020-08-12 13:18:30
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -66,6 +66,19 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'Employees',
     'width' => 10,
     'default' => true,
+  ),
+  'asesor_operacion_c' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_ASESOR_OPERACION_C',
+    'id' => 'USER_ID_C',
+    'link' => true,
+    'width' => 10,
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Users',
+    'target_record_key' => 'user_id_c',
   ),
   'currency_id' => 
   array (
