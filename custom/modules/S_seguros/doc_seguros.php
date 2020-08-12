@@ -145,4 +145,65 @@ class Drive_docs
         }
         $GLOBALS['log']->fatal('Finaliza proceso de integración con GoogleDrive');
     }
+
+    function actualizatipoprod($bean = null, $event = null, $args = null){
+        //Declara variables de Oportunidad
+        $producto= "10"; //Seguros
+        $etapa=$bean->etapa;
+        $cliente = $bean->s_seguros_accountsaccounts_ida;
+
+        //Evalua cambio en etapa o subetapa
+        if ($bean->fetched_row['etapa']!=$etapa && $cliente) {
+
+            //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
+            $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
+            if($etapa=="1"){
+                $GLOBALS['log']->fatal('Actualiza a Prospecto Interesado (cuenta)');
+                $this->actualizaTipoCuenta('2','7',$cliente,$producto);
+            }
+
+            //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
+            if ($bean->etapa=="9") { //Etapa solicitud 9 GANADA
+                $GLOBALS['log']->fatal('Cliente UNIFIN');
+                $this->actualizaTipoCuenta('3','14',$cliente,$producto);
+            }
+        }
+    }
+
+    function actualizaTipoCuentaProd($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+    {
+        global $app_list_strings;
+        //Valuda cuenta Asociada y producto
+        if($idCuenta && $tipoProducto){
+            //Recupera cuenta
+            $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
+            //Recupera productos y actualiza Tipo y subtipo
+            if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
+                $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
+                //Recupera valores
+                $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
+                $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
+                $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
+                //Itera productos recuperados
+                foreach ($relateProducts as $product) {
+                    if ($tipoProducto == $product->tipo_producto) {
+                        if ($product->tipo_cuenta != "3" && $product->tipo_cuenta != "2" && $tipo == 2) {
+                            //Actualiza tipo y subtipo de producto
+                            $product->tipo_cuenta = $tipo;
+                            $product->subtipo_cuenta = $subtipo;
+                            $product->tipo_subtipo_cuenta = $tipoSubtipo;
+                            $product->save();
+                        }
+                        if ($product->tipo_cuenta != "3" && $tipo == 3) {
+                            //Actualiza tipo y subtipo de producto
+                            $product->tipo_cuenta = $tipo;
+                            $product->subtipo_cuenta = $subtipo;
+                            $product->tipo_subtipo_cuenta = $tipoSubtipo;
+                            $product->save();
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
