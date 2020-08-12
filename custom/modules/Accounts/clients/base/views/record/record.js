@@ -2961,7 +2961,12 @@
             }
             //Validacion de Actividad Economica - antes macrosector
             if ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
-                
+                //Entra a modo edición el campo custom
+                fieldAE = this.getField('account_clasf_sectorial');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldAE);
+
                 $('.campoAE').find('.record-label').css('color', 'red');
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -3229,7 +3234,7 @@
         //Validacion Actividad Economica - antes macro sector
         if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
-            
+
             $('.campoAE').find('.record-label').css('color', 'red');
             $('.list_ae').find('.select2-choice').css('border-color', 'red');
             errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
@@ -3609,7 +3614,7 @@
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
-                        
+
                         $('.campoAE').find('.record-label').css('color', 'red');
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -3639,7 +3644,7 @@
                     }
 
                     if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
-                        
+
                         $('.campoAE').find('.record-label').css('color', 'red');
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -3698,7 +3703,7 @@
             }
             //Requerido Actividad Economica custom
             if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
-                
+
                 $('.campoAE').find('.record-label').css('color', 'red');
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};

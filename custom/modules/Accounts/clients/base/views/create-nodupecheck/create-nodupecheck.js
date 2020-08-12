@@ -1457,57 +1457,26 @@
             if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == undefined || this.model.get('nacionalidad_c') == "0") {
                 errors['nacionalidad_c'] = errors['nacionalidad_c'] || {};
                 errors['nacionalidad_c'].required = true;
-            }
-            //    if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == undefined) {
-            //        errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
-            //        errors['sectoreconomico_c'].required = true;
-            //    }
-            //    if (this.model.get('tct_macro_sector_ddw_c')== "" || this.model.get('tct_macro_sector_ddw_c')== undefined){
-            //        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-            //        errors['tct_macro_sector_ddw_c'].required = true;
-            //    }
-            //    if (this.model.get('subsectoreconomico_c') == "" || this.model.get('subsectoreconomico_c') == undefined) {
-            //        errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
-            //        errors['subsectoreconomico_c'].required = true;
-            //    }
-            //    if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') ==undefined) {
-            //        errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
-            //        errors['actividadeconomica_c'].required = true;
-            //    }
+            }               
             //Validacion Actividad Economica custom
-            if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == undefined) {
-
-                $('.campoAE').find('.record-label').css('color', 'red');
-                $('.list_ae').find('.select2-choice').css('border-color', 'red');
+            if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
             }
             //Requerido Subsector custom
-            if ($('.list_sse').select2('val') == "" || $('.list_sse')[0].innerText.trim() == "") {
-
-                $('.campoSSE').find('.record-label').css('color', 'red');
-                $('.list_sse').find('.select2-choice').css('border-color', 'red');
+            if ($('.list_sse').select2('val') == "" || $('.list_sse').select2('val') == undefined) {
                 errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
                 errors['subsectoreconomico_c'].required = true;
-
             }
             //Requerido Sector custom
-            if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "") {
-
-                $('.campoSE').find('.record-label').css('color', 'red');
-                $('.list_se').find('.select2-choice').css('border-color', 'red');
+            if ($('.list_se').select2('val') == "" || $('.list_se').select2('val') == undefined) {
                 errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
                 errors['sectoreconomico_c'].required = true;
-
             }
             //Requerido macro sector custom
-            if ($('.list_ms').select2('val') == "" || $('.list_ms')[0].innerText.trim() == "") {
-
-                $('.campoMS').find('.record-label').css('color', 'red');
-                $('.list_ms').find('.select2-choice').css('border-color', 'red');
+            if ($('.list_ms').select2('val') == "" || $('.list_ms').select2('val') == undefined) {
                 errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                 errors['tct_macro_sector_ddw_c'].required = true;
-
             }
             if (this.oTelefonos.telefono.length == 0) {
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
@@ -1602,52 +1571,29 @@
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
-                // if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null || this.model.get('tct_macro_sector_ddw_c') == undefined) {
-                //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                //     $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
-                // }
-                // if (this.model.get('sectoreconomico_c') == "") {
-                //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                //     $('[name=sectoreconomico_c]').css('border-color', 'red');
-                // }
-                // if (this.model.get('subsectoreconomico_c') == "") {
-                //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                //     $('[name=subsectoreconomico_c]').css('border-color', 'red');
-                // }
-                // if (this.model.get('actividadeconomica_c') == "") {
-                //     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                //     $('[name=actividadeconomica_c]').css('border-color', 'red');
-                // }
                 //Validacion Actividad Economica custom
-                if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == undefined) {
-
+                if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                    $('.campoAE').find('.record-label').css('color', 'red');
-                    $('.list_ae').find('.select2-choice').css('border-color', 'red');
-                    
+                    // $('.campoAE').find('.record-label').css('color', 'red');
+                    // $('.list_ae').find('.select2-choice').css('border-color', 'red');                    
                 }
                 //Requerido Subsector custom
-                if ($('.list_sse').select2('val') == "" || $('.list_sse')[0].innerText.trim() == "") {
-
+                if ($('.list_sse').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    $('.campoSSE').find('.record-label').css('color', 'red');
-                    $('.list_sse').find('.select2-choice').css('border-color', 'red');
-                    
+                    // $('.campoSSE').find('.record-label').css('color', 'red');
+                    // $('.list_sse').find('.select2-choice').css('border-color', 'red');                    
                 }
                 //Requerido Sector custom
-                if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "") {
-
+                if ($('.list_se').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    $('.campoSE').find('.record-label').css('color', 'red');
-                    $('.list_se').find('.select2-choice').css('border-color', 'red');                   
-
+                    // $('.campoSE').find('.record-label').css('color', 'red');
+                    // $('.list_se').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido macro sector custom
-                if ($('.list_ms').select2('val') == "" || $('.list_ms')[0].innerText.trim() == "") {
-
+                if ($('.list_ms').select2('val') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('.campoMS').find('.record-label').css('color', 'red');
-                    $('.list_ms').find('.select2-choice').css('border-color', 'red');
+                    // $('.campoMS').find('.record-label').css('color', 'red');
+                    // $('.list_ms').find('.select2-choice').css('border-color', 'red');
                 }
 
                 var direcciones = 0;
