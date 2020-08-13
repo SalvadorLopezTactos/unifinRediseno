@@ -1,7 +1,7 @@
 <?php
 
-$hook_array['after_save'][] = Array(
-    1,
+$hook_array['before_save'][] = Array(
+    2,
     'validar venta cruzada',
     'custom/modules/Ref_Venta_Cruzada/VentasCruzadas_class.php',
     'VentasCruzadas_class',
@@ -9,7 +9,7 @@ $hook_array['after_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    2,
+    3,
     'Envio de notificaciones para referencias válidas y canceladas',
     'custom/modules/Ref_Venta_Cruzada/ref_cruzadas_hooks.php',
     'Ref_Cruzadas_Hooks', // name of the class

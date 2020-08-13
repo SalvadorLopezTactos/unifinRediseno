@@ -18,6 +18,7 @@
 		self.noEditFields.push('numero_anexos');
 		self.noEditFields.push('primer_fecha_anexo');
 		self.noEditFields.push('ultima_fecha_anexo');
+		self.noEditFields.push('usuario_rechazo');
 		
 		this.model.on("change:cancelado", _.bind(this.set_usuariorechazado, this));
 		this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
@@ -31,7 +32,11 @@
 
 	_render: function (options) {
         this._super("_render");
-        $('[data-name="cancelado"]').hide();
+        $('span[data-fieldname="cancelado"]').find('input').attr('disabled','');
+        $('[data-name="cancelado"]').attr('style',"pointer-events:none");
+		
+		$('span[data-fieldname="usuario_rechazo"]').find('input').attr('disabled','');
+        $('[data-name="usuario_rechazo"]').attr('style',"pointer-events:none");
     },
 
     hideShowCancelar:function(){
@@ -41,14 +46,34 @@
 		var productoRef=this.model.get('producto_referenciado');
 
 		if(puedeCancelar && productoRef == productoUsuario && status=='1'){
-            $('[data-name="cancelado"]').show();
+            $('span[data-fieldname="cancelado"]').find('input').removeAttr('disabled');
+            $('[data-name="cancelado"]').attr('style',"pointer-events:block")
 
 		}
+
+        this.setEtiquetasFechas(productoRef);
+
 	},
-	
+
+    setEtiquetasFechas:function(idProducto){
+        var etiqueta_original_inicio='Fecha primer anexo activado';
+        var etiqueta_original_fin='Fecha último anexo activado';
+        if(idProducto!= null && idProducto !=""){
+
+            if(idProducto=='4'){
+                $('.record-label[data-name="primer_fecha_anexo"]').html('Fecha de primera cesión liberada');
+                $('.record-label[data-name="ultima_fecha_anexo"]').html('Fecha de última cesión liberada');
+            }else {
+                $('.record-label[data-name="primer_fecha_anexo"]').html(etiqueta_original_inicio);
+                $('.record-label[data-name="ultima_fecha_anexo"]').html(etiqueta_original_fin);
+            }
+        }
+
+    },
 	set_usuariorechazado: function () {
 		if(this.model.get('cancelado') == '1' ){
-			this.model.set('usuario_rechazo',App.user.attributes.full_name);
+			this.model.set('user_id2_c', App.user.attributes.id);
+			this.model.set('usuario_rechazo', App.user.attributes.full_name);
 		}else{
 			this.model.set('usuario_rechazo', '');
 		}

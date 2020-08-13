@@ -66,6 +66,8 @@
         var idProducto=this.model.get('producto_referenciado');
         var idCuenta=this.model.get('accounts_ref_venta_cruzada_1accounts_ida');
 
+        this.setEtiquetasFechas(idProducto);
+
         if(idCuenta!=null && idCuenta!=undefined && idCuenta!=""){
             var url=app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_uni_productos_1');
 
@@ -95,6 +97,22 @@
 
             });
 
+        }
+
+    },
+
+    setEtiquetasFechas:function(idProducto){
+        var etiqueta_original_inicio='Fecha primer anexo activado';
+        var etiqueta_original_fin='Fecha último anexo activado';
+	    if(idProducto!= null && idProducto !=""){
+
+	        if(idProducto=='4'){
+                $('.record-label[data-name="primer_fecha_anexo"]').html('Fecha de primera cesión liberada');
+                $('.record-label[data-name="ultima_fecha_anexo"]').html('Fecha de última cesión liberada');
+            }else {
+                $('.record-label[data-name="primer_fecha_anexo"]').html(etiqueta_original_inicio);
+                $('.record-label[data-name="ultima_fecha_anexo"]').html(etiqueta_original_fin);
+            }
         }
 
     }

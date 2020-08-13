@@ -8,7 +8,7 @@ class ExistentesVentasCruzadas_class
     function BuscarExistentes($bean, $event, $arguments)
     {
 		//$GLOBALS['log']->fatal('bean',$bean);
-		if($bean->estatus == '1'){
+		if($bean->estatus == '' || $bean->estatus == null){
 			
 			if ($bean->load_relationship('accounts_ref_venta_cruzada_1')) {
 				//Fetch related beans
@@ -31,28 +31,34 @@ class ExistentesVentasCruzadas_class
 			where aref.accounts_ref_venta_cruzada_1accounts_ida = '".$id_cuenta."' 
 			and ref.producto_referenciado = '".$bean->producto_referenciado."' and ref.estatus = 1 and ref.deleted = 0";
 			
-			$GLOBALS['log']->fatal('query',$query);
+			//$GLOBALS['log']->fatal('query',$query);
 			$results = $GLOBALS['db']->query($query);
-			$GLOBALS['log']->fatal('results',$results);
-			$GLOBALS['log']->fatal('results_num',$results->num_rows);
+			//$GLOBALS['log']->fatal('results',$results);
+			//$GLOBALS['log']->fatal('results_num',$results->num_rows);
 			
 			if($results->num_rows > 0){
 				require_once 'include/api/SugarApiException.php';
 				throw new SugarApiExceptionInvalidParameter("El producto seleccionado, tiene una referencia activa");
-			}
-		}else{
-			//$GLOBALS['log']->fatal('valido');
-			$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
-			$equipoPrincipal = $usuarioAsignado->equipo_c;
-			//$GLOBALS['log']->fatal($equipoPrincipal);
-			//Agrega teams de BO
-			$bean->teams->add(
-				array(
-					$equipoPrincipal
-				)
-			);
-		}	
+			}else{
+				$bean->estatus = '1';
+				$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
+				$equipoPrincipal = $usuarioAsignado->equipo_c;
+				//$GLOBALS['log']->fatal('est',$bean->estatus);
+				//Agrega teams de BO
+				if($equipoPrincipal != null && $equipoPrincipal != '' && $equipoPrincipal != '0'){
+					
+					$bean->load_relationship('teams');
 
+					//Add the teams
+					$bean->teams->add(
+						array(
+							$equipoPrincipal
+						)
+					);
+				}
+			}
+		}
+		
 		if($bean->cancelado == true){
 			$bean->estatus = '3';
 		}
