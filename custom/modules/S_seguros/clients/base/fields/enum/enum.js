@@ -54,7 +54,7 @@
                   '6': 'Presentación de Cotización al Cliente',
                   '7': 'Re-negociación',
                   '9': 'Ganada',
-                  '10': 'Perdida'
+                  '10': 'No Ganada'
               };
             }
             //Re-negociación
@@ -77,10 +77,10 @@
                   '9': 'Ganada'
               };
             }
-            //Perdida
+            //No Ganada
             if(this.model.get('etapa') == 10) {
               var newOptions = {
-                  '10': 'Perdida'
+                  '10': 'No Ganada'
               };
             }
             self.items = newOptions;
