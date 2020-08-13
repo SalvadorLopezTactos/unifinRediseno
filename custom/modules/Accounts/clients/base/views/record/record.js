@@ -1098,6 +1098,10 @@
         }
 
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+
+        if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+            $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        }
     },
 
     editClicked: function () {

@@ -280,7 +280,11 @@ array (
             'name' => 'tct_cancelar_ref_cruzada_chk_c',
             'label' => 'LBL_TCT_CANCELAR_REF_CRUZADA_CHK',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'multilinea_c',
+            'label' => 'LBL_MULTILINEA_C',
+          ),
         ),
       ),
     ),
