@@ -101,7 +101,8 @@ class Seguros_SF
               "ingresoObjetivoC" => $bean->ingreso_inc
             ));          
           }
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -142,7 +143,8 @@ class Seguros_SF
             "serviciosaincluirc" => $serviciosaincluirc,
             "linkdedoccotizacinc" => "https://drive.google.com/drive/u/0/folders/".$bean->google_drive4_c
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -166,7 +168,8 @@ class Seguros_SF
             "oportinidadId" => $bean->id_salesforce,
             "stageName" => $stageName
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -190,7 +193,8 @@ class Seguros_SF
             "stageName" => $stageName,
             "motivosRenegociaciNC" => $bean->motivos_c
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -233,7 +237,9 @@ class Seguros_SF
             "ejecutivoAsignadoNuevoC" => $ejecutivo_c,
             "linkDocClienteC" => "https://drive.google.com/drive/u/0/folders/".$resumen->googledriveac_c
           ));
-          $curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
