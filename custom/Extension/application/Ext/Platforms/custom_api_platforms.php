@@ -5,3 +5,4 @@ $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
 $platforms[] = 'unicsWeb';
 $platforms[] = 'unics';
+$platforms[] = 'mambu';
