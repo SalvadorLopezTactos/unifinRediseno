@@ -35,7 +35,7 @@
 
                 $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente,array('disable_row_level_security' => true));
                 $multilinea = $beanCuenta->multilinea_c;
-                $GLOBALS['log']->fatal("Multilinea  " .$multilinea);
+              //  $GLOBALS['log']->fatal("Multilinea  " .$multilinea);
 
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
  where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
@@ -44,9 +44,9 @@
                 $result = $db->query($query);
 				$row = $db->fetchByAssoc($result);
 				$count = $row['total'];
-                $GLOBALS['log']->fatal("Multiliena valores " .$count . " ll ".$multilinea);
+                //$GLOBALS['log']->fatal("Multiliena valores " .$count . " ll ".$multilinea);
 
-                if($count > 0 && $multilinea!="1")
+                if($count > 0)
 				{
 					require_once 'include/api/SugarApiException.php';
 					throw new SugarApiExceptionInvalidParameter("No puede guardar la presolicitud, existe una abierta para el mismo cliente");

@@ -27,16 +27,11 @@ class customGetOpportunities extends SugarApi
 
     public function getOpportunities($api, $args)
     {
-        $GLOBALS['log']->fatal("argumentos " . print_r($args,true) );
-
         global $db;
         $accountId = $args['data']['account_id'];
         $prouctId = $args['data']['tipo_producto_c'];
         $duplicado = 0;
         $mensaje = "";
-        $GLOBALS['log']->fatal("id " .$accountId . "  producto " . $prouctId );
-
-
 
         $queryData = "select acstm.multilinea_c,op_cstm.estatus_c,op_cstm.tct_etapa_ddw_c,op_cstm.tipo_producto_c
 FROM opportunities_cstm  op_cstm
@@ -46,20 +41,17 @@ INNER JOIN accounts_cstm acstm
 on acstm.id_c=op_rel.account_id
 where acstm.id_c='{$accountId}' AND op_cstm.tipo_producto_c='{$prouctId}' AND op_rel.deleted=0";
 
-        $GLOBALS['log']->fatal("query " .$queryData );
-
         $result = $db->query($queryData);
 
-        $GLOBALS['log']->fatal("Del query " .$result->num_rows );
+       // $GLOBALS['log']->fatal("Del query " .$result->num_rows );
 
         while ($row = $db->fetchByAssoc($result)) {
-            $GLOBALS['log']->fatal(print_r($row, true));
             $estatus = $row['estatus_c'];
             $etapa_ddw = $row['tct_etapa_ddw_c'];
             $tipo_producto = $row['tipo_producto_c'];
             $multilinea = $row['multilinea_c'];
 
-            if ($estatus != "K" && $etapa_ddw != "CL" && $etapa_ddw != "R" && $multilinea != "1") {
+            if ($estatus != "K" && $etapa_ddw != "CL" && $etapa_ddw != "R" ) {
                 $mensaje = "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.";
                 $duplicado = 1;
 
