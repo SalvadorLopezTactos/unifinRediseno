@@ -430,6 +430,11 @@
 
         this.$('[data-name="account_tipoSubtipo"]').hide();
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+
+        //Deshabilita campo Actualizar Multilínea
+        if(app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+            $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        }
     },
 
     _ActualizaEtiquetas: function () {
