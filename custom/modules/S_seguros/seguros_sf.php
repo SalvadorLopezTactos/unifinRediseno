@@ -12,6 +12,7 @@ class Seguros_SF
       $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida);
       $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida);
 //      if($cuenta->tipo_registro_cuenta_c == 2)
+        $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
 //      {
         global $app_list_strings;
    			require_once 'include/api/SugarApiException.php';
@@ -100,7 +101,8 @@ class Seguros_SF
               "ingresoObjetivoC" => $bean->ingreso_inc
             ));          
           }
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -112,7 +114,9 @@ class Seguros_SF
       		curl_close($curl);
       		$response = json_decode($json_response, true);
           $id_op = $response['oportunidadId'];
-          if($id_op)
+            $GLOBALS['log']->fatal('Informacion de Prospecto enviada: ' .$response);
+
+            if($id_op)
           {
             $bean->id_salesforce = $id_op;
           }
@@ -139,7 +143,8 @@ class Seguros_SF
             "serviciosaincluirc" => $serviciosaincluirc,
             "linkdedoccotizacinc" => "https://drive.google.com/drive/u/0/folders/".$bean->google_drive4_c
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -149,7 +154,8 @@ class Seguros_SF
       		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
       		$response = curl_exec($curl);
       		curl_close($curl);
-          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+            $GLOBALS['log']->fatal('Informacion de Cotizando enviada: ' .$response);
+            if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Presentación
         if($bean->etapa == 6)
@@ -162,7 +168,8 @@ class Seguros_SF
             "oportinidadId" => $bean->id_salesforce,
             "stageName" => $stageName
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -186,7 +193,8 @@ class Seguros_SF
             "stageName" => $stageName,
             "motivosRenegociaciNC" => $bean->motivos_c
           ));
-      		$curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -195,7 +203,8 @@ class Seguros_SF
       		curl_setopt($curl, CURLOPT_POST, true);
       		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
       		$response = curl_exec($curl);
-      		curl_close($curl);
+            $GLOBALS['log']->fatal('Informacion de Re-negociacon enviada: ' .$response);
+            curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Ganada
@@ -228,7 +237,9 @@ class Seguros_SF
             "ejecutivoAsignadoNuevoC" => $ejecutivo_c,
             "linkDocClienteC" => "https://drive.google.com/drive/u/0/folders/".$resumen->googledriveac_c
           ));
-          $curl = curl_init($url);
+            $GLOBALS['log']->fatal($content);
+
+            $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -237,7 +248,8 @@ class Seguros_SF
       		curl_setopt($curl, CURLOPT_POST, true);
       		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
       		$response = curl_exec($curl);
-      		curl_close($curl);
+            $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$response);
+            curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Perdida
@@ -265,10 +277,14 @@ class Seguros_SF
       		curl_setopt($curl, CURLOPT_POST, true);
       		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
       		$response = curl_exec($curl);
-      		curl_close($curl);
+            $GLOBALS['log']->fatal('Informacion de Perdida enviada: ' .$response);
+
+            curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
 //      }
+        $GLOBALS['log']->fatal('Finaliza Seguros_SalesForce');
+
     }
 
     public function getToken()
