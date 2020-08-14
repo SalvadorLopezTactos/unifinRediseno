@@ -29,7 +29,7 @@ class Upload_documents
             $seguros = BeanFactory::retrieveBean('S_seguros', $bean->s_seguros_documents_1s_seguros_ida);
             $GLOBALS['log']->fatal('Carga modulo relacionado (Seguros)');
             //Valida que se tenga una url Folder
-            if (!empty($seguros->google_drive4_c)|| !empty($seguros->google_drive5_c)) {
+            if ((!empty($seguros->google_drive4_c)|| !empty($seguros->google_drive5_c)) && empty($seguros->id_salesforce)) {
 
                 $idGoogle = ($bean->tipo_documento_c==1) ? $seguros->google_drive4_c :$seguros->google_drive5_c;
 
