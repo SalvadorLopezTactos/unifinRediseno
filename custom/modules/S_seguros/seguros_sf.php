@@ -53,8 +53,11 @@ class Seguros_SF
           $oficinaC = $app_list_strings['oficina_list'][$bean->oficina_c];
           $kamC = $app_list_strings['kam_list'][$bean->kam_c];
           $referenciadorDeLaOportunidadC = $app_list_strings['referenciador_list'][$bean->referenciador_c];
-          if($bean->tipo_referenciador == 1) $referenciadorCuenta = $bean->referenciador." ".$bean->region;
-          if($bean->tipo_referenciador == 2) $referenciadorCuenta = $bean->empleados_c." ".$bean->departamento_c;
+          if($bean->tipo_referenciador == 1) $usuarios = BeanFactory::getBean('Users', $bean->user_id1_c);
+          if($bean->tipo_referenciador == 2) $usuarios = BeanFactory::getBean('Users', $bean->user_id2_c);
+          $referenciador = $usuarios->nombre_completo_c;
+          if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador." ".$bean->region;
+          if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador." ".$bean->departamento_c;
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
           $closeDate = $bean->fecha_cierre_c;
           $closeDate = date("d/m/Y", strtotime($closeDate));
@@ -97,6 +100,7 @@ class Seguros_SF
               "oficinaC" => $oficinaC,
               "kamC" => $kamC,
               "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
+              "referenciadorCuenta" => $referenciadorCuenta,
               "stageName" => $stageName,
               "closeDate" => $closeDate,
               "primaTotalObjetivoC" => $bean->prima_obj_c,
