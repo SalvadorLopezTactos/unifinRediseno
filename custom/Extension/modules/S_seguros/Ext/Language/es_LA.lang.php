@@ -49,3 +49,7 @@ $mod_strings['LBL_FECHA_FIN_C'] = 'Fecha de Fin de Vigencia';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Oportunidad Ganada';
 $mod_strings['LBL_CURRENCY_7'] = 'LBL_CURRENCY';
 $mod_strings['LBL_CURRENCY_8'] = 'LBL_CURRENCY';
+$mod_strings['LBL_ASEGURADOR_TEC'] = 'Aseguradora';
+$mod_strings['LBL_COMISION_TEC'] = 'Comisión';
+$mod_strings['LBL_PRIMA'] = 'Prima Neta';
+$mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Información Técnica';
