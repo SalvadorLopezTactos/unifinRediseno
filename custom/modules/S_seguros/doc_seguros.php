@@ -162,10 +162,15 @@ class Drive_docs
                 Drive_docs::actualizaTipoCuentaProd('2','7',$cliente,$producto);
             }
 
-            //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
+            //Actualiza cuando la solicitud es Autorizada (N) Cliente Nuevo: 3, 13
             if ($bean->etapa=="9") { //Etapa solicitud 9 GANADA
-                $GLOBALS['log']->fatal('Cliente UNIFIN');
-                Drive_docs::actualizaTipoCuentaProd('3','14',$cliente,$producto);
+                $GLOBALS['log']->fatal('Cliente Nuevo');
+                Drive_docs::actualizaTipoCuentaProd('3','13',$cliente,$producto);
+            }
+            //Oportunidad de Seguro NO Ganada pasa la cuenta a Prospecto Rechazado  2 :10
+            if ($bean->etapa=="10") { //Etapa solicitud 9 GANADA
+                $GLOBALS['log']->fatal('Op de Seguro NO Ganada');
+                Drive_docs::actualizaTipoCuentaProd('2','10',$cliente,$producto);
             }
         }
     }
@@ -187,8 +192,11 @@ class Drive_docs
                 //Itera productos recuperados
                 foreach ($relateProducts as $product) {
                     if ($tipoProducto == $product->tipo_producto) {
-                        if ($product->tipo_cuenta != "3" && $product->tipo_cuenta != "2" && $tipo == 2) {
+                        if ($product->tipo_cuenta != "3" && $tipo == 2) {
                             //Actualiza tipo y subtipo de producto
+                            $GLOBALS['log']->fatal('Actualiza tipo y subtipo de producto en CUENTA a '.$tipo .',' .$subtipo);
+                            $beanAccount->tipo_registro_cuenta_c=$tipo;
+                            $beanAccount->subtipo_registro_cuenta_c=$tipoSubtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -196,6 +204,8 @@ class Drive_docs
                         }
                         if ($product->tipo_cuenta != "3" && $tipo == 3) {
                             //Actualiza tipo y subtipo de producto
+                            $beanAccount->tipo_registro_cuenta_c=$tipo;
+                            $beanAccount->subtipo_registro_cuenta_c=$tipoSubtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -203,6 +213,7 @@ class Drive_docs
                         }
                     }
                 }
+                //$beanAccount->save();
             }
         }
     }
