@@ -14,13 +14,14 @@ class Seguros_SF
 //      if($cuenta->tipo_registro_cuenta_c == 2)
         $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
 //      {
+        global $sugar_config;
         global $app_list_strings;
    			require_once 'include/api/SugarApiException.php';
         //Consulta Cuenta
         if(!$cuenta->salesforce_id_c)
         {
           $token = $this->getToken();
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/acoountExists';
+      		$url = $sugar_config['seguros_sf'].'data/acoountExists';
       		$content = json_encode(array("nameAccount" => $cuenta->name));
       		$curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -61,10 +62,10 @@ class Seguros_SF
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
           $closeDate = $bean->fecha_cierre_c;
           $closeDate = date("d/m/Y", strtotime($closeDate));
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/creaProspecto';
+      		$url = $sugar_config['seguros_sf'].'data/creaProspecto';
           if(!$cuenta->salesforce_id_c)
           {
-        		$content = json_encode(array(
+        		$arreglo = array(
               "sugarId" => $bean->id,
               "recordTypeId" => $recordTypeId,
               "nameAccount" => $cuenta->name,
@@ -83,11 +84,11 @@ class Seguros_SF
               "primaTotalObjetivoC" => $bean->prima_obj_c,
               "ingresoObjetivopC" => $bean->incentivo,
               "ingresoObjetivoC" => $bean->ingreso_inc
-            ));
+            );
           }
           else
           {
-        		$content = json_encode(array(
+        		$arreglo = array(
               "sugarId" => $bean->id,
               "recordTypeId" => $recordTypeId,
               "accountId" => $cuenta->salesforce_id_c,
@@ -106,8 +107,10 @@ class Seguros_SF
               "primaTotalObjetivoC" => $bean->prima_obj_c,
               "ingresoObjetivopC" => $bean->incentivo,
               "ingresoObjetivoC" => $bean->ingreso_inc
-            ));          
+            );
           }
+          if($bean->tipo_registro_sf_c == 1) unset($arreglo['oportunidadInternacionalC']);
+          $content = json_encode($arreglo);
           $GLOBALS['log']->fatal($content);
           $curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -141,7 +144,7 @@ class Seguros_SF
           $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
           if($bean->requiere_ayuda_c == 1) $requiereAyudaDeReaTcnica = 0;
           if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 1;
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/createCotizando';
+      		$url = $sugar_config['seguros_sf'].'data/createCotizando';
       		$content = json_encode(array(
             "oportunidadId" => $bean->id_salesforce,
             "stageName" => $stageName,
@@ -170,7 +173,7 @@ class Seguros_SF
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "PRESENTACION",
             "oportinidadId" => $bean->id_salesforce,
@@ -194,7 +197,7 @@ class Seguros_SF
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "RENEGOCIADA",
             "oportinidadId" => $bean->id_salesforce,
@@ -228,7 +231,7 @@ class Seguros_SF
           $fecha_ini_c = date("d/m/Y", strtotime($fecha_ini_c));
           $fecha_fin_c = $bean->fecha_fin_c;
           $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));          
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "GANADA",
             "oportinidadId" => $bean->id_salesforce,
@@ -266,7 +269,7 @@ class Seguros_SF
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
           $razonPerdida = $app_list_strings['razon_perdida_list'][$bean->razon_perdida_c];
           $no_renovable_c = $app_list_strings['no_renovable_list'][$bean->no_renovable_c];
-      		$url = 'http://201.175.16.43:8000/InterSugar/data/cambioEtapa';
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "PERDIDA",
             "oportinidadId" => $bean->id_salesforce,
@@ -295,7 +298,8 @@ class Seguros_SF
     public function getToken()
     {
       //Obtiene Token
-      $loginurl = "http://201.175.16.43:8000/InterSugar/public/token";
+      global $sugar_config;
+      $loginurl = $sugar_config['seguros_sf'].'public/token';
       $params = "user=generica"
         . "&password=generica";
       $curl = curl_init($loginurl);
