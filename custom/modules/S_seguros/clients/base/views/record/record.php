@@ -460,6 +460,45 @@ array (
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL3',
+            'label' => 'LBL_RECORDVIEW_PANEL3',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'prima_c',
+                'label' => 'LBL_PRIMA',
+                'readonly' => true,
+              ),
+              1 => 
+              array (
+                'name' => 'comision_tec_c',
+                'label' => 'LBL_COMISION_TEC',
+                'readonly' => true,
+              ),
+              2 => 
+              array (
+                'name' => 'asegurador_tec_c',
+                'label' => 'LBL_ASEGURADOR_TEC',
+                'readonly' => true,
+              ),
+              3 => 
+              array (
+              ),
+            ),
+          ),
+          4 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL2',
             'label' => 'LBL_RECORDVIEW_PANEL2',
             'columns' => 2,
@@ -544,7 +583,7 @@ array (
               ),
             ),
           ),
-          4 => 
+          5 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
