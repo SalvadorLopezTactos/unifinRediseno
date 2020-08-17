@@ -6,6 +6,8 @@
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
+        this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
+
     },
 
     _render: function() {
@@ -16,7 +18,6 @@
         $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('seguro_pipeline');
-        pipe_s.render();
     },
 
     addRegion: function() {
@@ -72,7 +73,29 @@
           autoClose: false
         });
         this.model.set('fecha_req','');
+
       }
       callback(null, fields, errors);
+    },
+    valida_Req: function (fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "S_seguros") + '</b><br>';
+                    }
+                }
+            }, this);
+        }, this);
+
+        if (campos) {
+            app.alert.show("Campos_Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la oportunidad de <b>Seguro:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
