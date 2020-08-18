@@ -3,11 +3,11 @@
 
     initialize: function (options) {
         this._super("initialize", [options]);
+        this.model.on('sync', this.roFunction, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
-
     },
 
     _render: function() {
@@ -20,6 +20,19 @@
         this.noEditFields.push('seguro_pipeline');
     },
 
+    roFunction: function() {
+    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9)
+    		{
+    		  _.each(this.model.fields, function(field)
+       	  {
+       			this.noEditFields.push(field.name);
+            this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+         	},this);
+     			this.noEditFields.push('prima_objetivo');
+          this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+      	}        
+    },
+        
     addRegion: function() {
       var usrid = this.model.get('user_id1_c');
       app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
