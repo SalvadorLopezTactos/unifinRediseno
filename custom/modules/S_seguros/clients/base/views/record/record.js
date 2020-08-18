@@ -7,7 +7,7 @@
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
-
+        this.model.on('change:etapa', this.refrescaPipeLine, this);
     },
 
     _render: function() {
@@ -97,5 +97,13 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    refrescaPipeLine: function () {
+        //Limpia pipeline
+        pipe_s.render();
+        //Ejecuta funcion para actualizar pipeline
+        pipe_s.pipelineseguro();
+
     },
 })
