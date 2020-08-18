@@ -969,6 +969,7 @@
             self.noEditFields.push('promotorcredit_c');
             self.noEditFields.push('promotorfleet_c');
             self.noEditFields.push('promotoruniclick_c');
+            self.noEditFields.push('promotorrm_c');
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
@@ -1101,6 +1102,9 @@
 
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
+        if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+            $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        }
         //Oculta campos de Macro Sector
         this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
         this.$("div[data-name='sectoreconomico_c']").hide();
@@ -1116,6 +1120,8 @@
         this.$('[data-name="promotorfactoraje_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
+
     },
 
     hideconfiinfo: function () {
@@ -2470,6 +2476,15 @@
                         this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                         this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
+
+                    if (contains.call(modelo.get('productos_c'), "11") && this.model.get('user_id_c') == "") {
+                        this.model.set('promotorrm_c', modelo.get('name'));
+                        this.model.set('user_id8_c', modelo.get('id'));
+                    } else if (this.model.get('user_id_c') == "") {
+                        this.model.set('promotorrm_c', '9 - Sin Gestor');
+                        this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                    }
+
                     if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false && contains.call(modelo.get('productos_c'), "6") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
@@ -2481,6 +2496,8 @@
                         this.model.set('user_id6_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                         this.model.set('user_id7_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                        this.model.set('promotorrm_c', '9 - Sin Gestor');
+                        this.model.set('user_id8_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
@@ -5339,6 +5356,8 @@
                     var fecha2 = moment(fechaAsignacion);
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
+                    Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
+
                     switch (tipoProducto) {
                         case "1": //Leasing
                             var dias = fecha1.diff(fecha2, 'days');

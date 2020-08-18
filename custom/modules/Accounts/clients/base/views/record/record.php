@@ -737,6 +737,8 @@ array (
               ),
               49 => 
               array (
+                  /*'name' => 'multilinea_c',
+                  'label' => 'LBL_MULTILINEA_C',*/
               ),
             ),
           ),
@@ -976,6 +978,15 @@ array (
               ),
               5 => 
               array (
+                  'name' => 'promotorrm_c',
+                  'studio' => 'visible',
+                  'label' => 'LBL_PROMOTORRM_C',
+                  'initial_filter' => 'filterPromotorTemplate',
+                  'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
+                  'filter_populate' =>
+                      array (
+                          'tipodeproducto_c' => '11',
+                      ),
               ),
             ),
           ),

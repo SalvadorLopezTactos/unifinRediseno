@@ -15,27 +15,34 @@
             <td width="33%" valign="top" class="campoLeasing sborder">
                 <div><strong>Leasing/Crédito SOS</strong></div>
                 {{#if ResumenProductos.leasing.estatus_atencion}}
-                  <div class="mpad">
-                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
-                  </div>
+                    <div class="mpad">
+                        {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
+                    </div>
                 {{/if}}
                 {{#if ResumenProductos.leasing.dias}}
-                  <div class="mpad">{{ResumenProductos.leasing.dias}} días
-                      <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
-                  </div>
+                    <div class="mpad">{{ResumenProductos.leasing.dias}} días
+                        <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
+                    </div>
                 {{/if}}
+                <div class="ls_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_ls_multi"
+                           {{#if ResumenProductos.leasing.multilinea_c}}checked{{/if}}
+                           data-field="chk_ls_multi"/>
+                </div>
+
                 {{#if ResumenProductos.leasing.visible_noviable}}
                     <div class="l_nv mpad">
                         <label class="record-label mpad">No Viable Leasing</label>
                         <input type="checkbox" class="chk_l_nv" {{#if ResumenProductos.leasing.no_viable}}checked{{/if}}
-                            data-field="chk_l_nv" />
+                               data-field="chk_l_nv"/>
                     </div>
                     <div class="l_nv_razon">
                         <label class="record-label mpad">Razón de cuenta No viable</label>
                         <select class="row-fluid select2 list_l_nv_razon" data-field="list_l_nv_razon">
                             {{#each razones_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.leasing.no_viable_razon}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.leasing.no_viable_razon}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -43,27 +50,27 @@
                         <label class="record-label mpad">Fuera de Perfil (Razón)</label>
                         <select class="row-fluid select2 list_l_nv_razon_fp" data-field="list_l_nv_razon_fp">
                             {{#each fuera_de_perfil_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.leasing.no_viable_razon_fp}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.leasing.no_viable_razon_fp}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="l_nv_quien" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Quién?</label>
                         <input type="text" class="txt_l_nv_quien" value="{{ResumenProductos.leasing.no_viable_quien}}"
-                            data-field="txt_l_nv_quien" data-name="txt_l_nv_quien" maxlength="100" />
+                               data-field="txt_l_nv_quien" data-name="txt_l_nv_quien" maxlength="100"/>
                     </div>
                     <div class="l_nv_porque" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Por qué?</label>
                         <input type="text" class="txt_l_nv_porque" value="{{ResumenProductos.leasing.no_viable_porque}}"
-                            data-field="txt_l_nv_porque" data-name="txt_l_nv_porque" maxlength="255" />
+                               data-field="txt_l_nv_porque" data-name="txt_l_nv_porque" maxlength="255"/>
                     </div>
                     <div class="l_nv_producto" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <select class="row-fluid select2 list_l_nv_producto" data-field="list_l_nv_producto">
                             {{#each no_producto_requiere_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.leasing.no_viable_producto}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.leasing.no_viable_producto}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -71,22 +78,22 @@
                         <label class="record-label mpad">Condiciones Financieras</label>
                         <select class="row-fluid select2 list_l_nv_razon_cf" data-field="list_l_nv_razon_cf">
                             {{#each razones_cf_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.leasing.no_viable_razon_cf}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.leasing.no_viable_razon_cf}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="l_nv_otro" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <input type="text" class="txt_l_nv_otro" value="{{ResumenProductos.leasing.no_viable_otro_c}}"
-                            data-field="txt_l_nv_otro" data-name="txt_l_nv_otro" maxlength="255" />
+                               data-field="txt_l_nv_otro" data-name="txt_l_nv_otro" maxlength="255"/>
                     </div>
                     <div class="l_nv_razon_ni" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">Razón No se encuentra interesado</label>
                         <select class="row-fluid select2 list_l_nv_razon_ni" data-field="list_l_nv_razon_ni">
                             {{#each tct_razon_ni_l_ddw_c_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.leasing.no_viable_razon_ni}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.leasing.no_viable_razon_ni}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -96,27 +103,37 @@
             <td width="33%" valign="top" class="campoFactoraje sborder">
                 <div><strong>Factoraje</strong></div>
                 {{#if ResumenProductos.factoring.estatus_atencion}}
-                  <div class="mpad">
-                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.factoring.estatus_atencion}}
-                  </div>
+                    <div class="mpad">
+                        {{getUnifinListValue 'product_status_atencion_list'
+                                             ResumenProductos.factoring.estatus_atencion}}
+                    </div>
                 {{/if}}
+
+                <div class="fac_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_fac_multi"
+                           {{#if ResumenProductos.factoring.multilinea_c}}checked{{/if}}
+                           data-field="chk_fac_multi"/>
+                </div>
+
                 {{#if ResumenProductos.factoring.dias}}
-                  <div class="mpad">{{ResumenProductos.factoring.dias}} días
-                      <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
-                  </div>
+                    <div class="mpad">{{ResumenProductos.factoring.dias}} días
+                        <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
+                    </div>
                 {{/if}}
                 {{#if ResumenProductos.factoring.visible_noviable}}
                     <div class="f_nv mpad">
                         <label class="record-label mpad">No Viable Factoraje</label>
-                        <input type="checkbox" class="chk_f_nv" {{#if ResumenProductos.factoring.no_viable}}checked{{/if}}
-                            data-field="chk_f_nv" />
+                        <input type="checkbox" class="chk_f_nv"
+                               {{#if ResumenProductos.factoring.no_viable}}checked{{/if}}
+                               data-field="chk_f_nv"/>
                     </div>
                     <div class="f_nv_razon">
                         <label class="record-label mpad">Razón de cuenta No viable</label>
                         <select class="row-fluid select2 list_f_nv_razon" data-field="list_f_nv_razon">
                             {{#each razones_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.factoring.no_viable_razon}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.factoring.no_viable_razon}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -124,27 +141,28 @@
                         <label class="record-label mpad">Fuera de Perfil (Razón)</label>
                         <select class="row-fluid select2 list_f_nv_razon_fp" data-field="list_f_nv_razon_fp">
                             {{#each fuera_de_perfil_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.factoring.no_viable_razon_fp}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.factoring.no_viable_razon_fp}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="f_nv_quien" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Quién?</label>
                         <input type="text" class="txt_f_nv_quien" value="{{ResumenProductos.factoring.no_viable_quien}}"
-                            data-field="txt_f_nv_quien" data-name="txt_f_nv_quien" maxlength="100" />
+                               data-field="txt_f_nv_quien" data-name="txt_f_nv_quien" maxlength="100"/>
                     </div>
                     <div class="f_nv_porque" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Por qué?</label>
-                        <input type="text" class="txt_f_nv_porque" value="{{ResumenProductos.factoring.no_viable_porque}}"
-                            data-field="txt_f_nv_porque" data-name="txt_f_nv_porque" maxlength="255" />
+                        <input type="text" class="txt_f_nv_porque"
+                               value="{{ResumenProductos.factoring.no_viable_porque}}"
+                               data-field="txt_f_nv_porque" data-name="txt_f_nv_porque" maxlength="255"/>
                     </div>
                     <div class="f_nv_producto" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <select class="row-fluid select2 list_f_nv_producto" data-field="list_f_nv_producto">
                             {{#each no_producto_requiere_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.factoring.no_viable_producto}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.factoring.no_viable_producto}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -152,22 +170,22 @@
                         <label class="record-label mpad">Condiciones Financieras</label>
                         <select class="row-fluid select2 list_f_nv_razon_cf" data-field="list_f_nv_razon_cf">
                             {{#each razones_cf_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.factoring.no_viable_razon_cf}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.factoring.no_viable_razon_cf}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="f_nv_otro" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <input type="text" class="txt_f_nv_otro" value="{{ResumenProductos.factoring.no_viable_otro_c}}"
-                            data-field="txt_f_nv_otro" data-name="txt_f_nv_otro" maxlength="255" />
+                               data-field="txt_f_nv_otro" data-name="txt_f_nv_otro" maxlength="255"/>
                     </div>
                     <div class="f_nv_razon_ni" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">Razón No se encuentra interesado</label>
                         <select class="row-fluid select2 list_f_nv_razon_ni" data-field="list_f_nv_razon_ni">
                             {{#each tct_razon_ni_l_ddw_c_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.factoring.no_viable_razon_ni}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.factoring.no_viable_razon_ni}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -177,27 +195,37 @@
             <td width="33%" valign="top" class="campoCA sborder">
                 <div><strong>Crédito Automotriz</strong></div>
                 {{#if ResumenProductos.credito_auto.estatus_atencion}}
-                  <div class="mpad">
-                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.credito_auto.estatus_atencion}}
-                  </div>
+                    <div class="mpad">
+                        {{getUnifinListValue 'product_status_atencion_list'
+                                             ResumenProductos.credito_auto.estatus_atencion}}
+                    </div>
                 {{/if}}
                 {{#if ResumenProductos.credito_auto.dias}}
-                  <div class="mpad">{{ResumenProductos.credito_auto.dias}} días
-                      <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
-                  </div>
+                    <div class="mpad">{{ResumenProductos.credito_auto.dias}} días
+                        <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
+                    </div>
                 {{/if}}
+
+                <div class="ca_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_ca_multi"
+                           {{#if ResumenProductos.credito_auto.multilinea_c}}checked{{/if}}
+                           data-field="chk_ca_multi"/>
+                </div>
+
                 {{#if ResumenProductos.credito_auto.visible_noviable}}
                     <div class="ca_nv mpad">
                         <label class="record-label mpad">No Viable Crédito Automotriz</label>
-                        <input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}}
-                            data-field="chk_ca_nv" />
+                        <input type="checkbox" class="chk_ca_nv"
+                               {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}}
+                               data-field="chk_ca_nv"/>
                     </div>
                     <div class="ca_nv_razon">
                         <label class="record-label mpad">Razón de cuenta No viable</label>
                         <select class="row-fluid select2 list_ca_nv_razon" data-field="list_ca_nv_razon">
                             {{#each razones_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.credito_auto.no_viable_razon}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.credito_auto.no_viable_razon}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -205,28 +233,29 @@
                         <label class="record-label mpad">Fuera de Perfil (Razón)</label>
                         <select class="row-fluid select2 list_ca_nv_razon_fp" data-field="list_ca_nv_razon_fp">
                             {{#each fuera_de_perfil_ddw_list}}
-                            <option value="{{@key}}"{{ifSelected @key
-                                                                        ../ResumenProductos.credito_auto.no_viable_razon_fp}}>{{this}}</option>
+                                <option value="{{@key}}"{{ifSelected @key
+                                                                     ../ResumenProductos.credito_auto.no_viable_razon_fp}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="ca_nv_quien" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Quién?</label>
-                        <input type="text" class="txt_ca_nv_quien" value="{{ResumenProductos.credito_auto.no_viable_quien}}"
-                            data-field="txt_ca_nv_quien" data-name="txt_ca_nv_quien" maxlength="100" />
+                        <input type="text" class="txt_ca_nv_quien"
+                               value="{{ResumenProductos.credito_auto.no_viable_quien}}"
+                               data-field="txt_ca_nv_quien" data-name="txt_ca_nv_quien" maxlength="100"/>
                     </div>
                     <div class="ca_nv_porque" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Por qué?</label>
                         <input type="text" class="txt_ca_nv_porque"
-                            value="{{ResumenProductos.credito_auto.no_viable_porque}}" data-field="txt_ca_nv_porque"
-                            data-name="txt_ca_nv_porque" maxlength="255" />
+                               value="{{ResumenProductos.credito_auto.no_viable_porque}}" data-field="txt_ca_nv_porque"
+                               data-name="txt_ca_nv_porque" maxlength="255"/>
                     </div>
                     <div class="ca_nv_producto" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <select class="row-fluid select2 list_ca_nv_producto" data-field="list_ca_nv_producto">
                             {{#each no_producto_requiere_list}}
-                            <option value="{{@key}}"{{ifSelected @key
-                                                                        ../ResumenProductos.credito_auto.no_viable_producto}}>{{this}}</option>
+                                <option value="{{@key}}"{{ifSelected @key
+                                                                     ../ResumenProductos.credito_auto.no_viable_producto}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -234,22 +263,23 @@
                         <label class="record-label mpad">Condiciones Financieras</label>
                         <select class="row-fluid select2 list_ca_nv_razon_cf" data-field="list_ca_nv_razon_cf">
                             {{#each razones_cf_list}}
-                            <option value="{{@key}}"{{ifSelected @key
-                                                                        ../ResumenProductos.credito_auto.no_viable_razon_cf}}>{{this}}</option>
+                                <option value="{{@key}}"{{ifSelected @key
+                                                                     ../ResumenProductos.credito_auto.no_viable_razon_cf}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="ca_nv_otro" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
-                        <input type="text" class="txt_ca_nv_otro" value="{{ResumenProductos.credito_auto.no_viable_otro_c}}"
-                            data-field="txt_ca_nv_otro" data-name="txt_ca_nv_otro" maxlength="255" />
+                        <input type="text" class="txt_ca_nv_otro"
+                               value="{{ResumenProductos.credito_auto.no_viable_otro_c}}"
+                               data-field="txt_ca_nv_otro" data-name="txt_ca_nv_otro" maxlength="255"/>
                     </div>
                     <div class="ca_nv_razon_ni" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">Razón No se encuentra interesado</label>
                         <select class="row-fluid select2 list_ca_nv_razon_ni" data-field="list_ca_nv_razon_ni">
                             {{#each tct_razon_ni_l_ddw_c_list}}
-                            <option value="{{@key}}"{{ifSelected @key
-                                                                        ../ResumenProductos.credito_auto.no_viable_razon_ni}}>{{this}}</option>
+                                <option value="{{@key}}"{{ifSelected @key
+                                                                     ../ResumenProductos.credito_auto.no_viable_razon_ni}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -261,27 +291,34 @@
             <td width="33%" valign="top" class="campoFleet sborder">
                 <div><strong>Fleet</strong></div>
                 {{#if ResumenProductos.fleet.estatus_atencion}}
-                  <div class="mpad">
-                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
-                  </div>
+                    <div class="mpad">
+                        {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
+                    </div>
                 {{/if}}
                 {{#if ResumenProductos.fleet.dias}}
-                  <div class="mpad">{{ResumenProductos.fleet.dias}} días
-                      <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
-                  </div>
+                    <div class="mpad">{{ResumenProductos.fleet.dias}} días
+                        <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
+                    </div>
                 {{/if}}
+
+                <div class="fe_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_fe_multi" {{#if ResumenProductos.fleet.multilinea_c}}checked{{/if}}
+                           data-field="chk_fe_multi"/>
+                </div>
+
                 {{#if ResumenProductos.fleet.visible_noviable}}
                     <div class="fl_nv mpad">
                         <label class="record-label mpad">No Viable Fleet</label>
                         <input type="checkbox" class="chk_fl_nv" {{#if ResumenProductos.fleet.no_viable}}checked{{/if}}
-                            data-field="chk_fl_nv" />
+                               data-field="chk_fl_nv"/>
                     </div>
                     <div class="fl_nv_razon">
                         <label class="record-label mpad">Razón de cuenta No viable</label>
                         <select class="row-fluid select2 list_fl_nv_razon" data-field="list_fl_nv_razon">
                             {{#each razones_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.fleet.no_viable_razon}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.fleet.no_viable_razon}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -289,27 +326,27 @@
                         <label class="record-label mpad">Fuera de Perfil (Razón)</label>
                         <select class="row-fluid select2 list_fl_nv_razon_fp" data-field="list_fl_nv_razon_fp">
                             {{#each fuera_de_perfil_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.fleet.no_viable_razon_fp}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.fleet.no_viable_razon_fp}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="fl_nv_quien" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Quién?</label>
                         <input type="text" class="txt_fl_nv_quien" value="{{ResumenProductos.fleet.no_viable_quien}}"
-                            data-field="txt_fl_nv_quien" data-name="txt_fl_nv_quien" maxlength="100" />
+                               data-field="txt_fl_nv_quien" data-name="txt_fl_nv_quien" maxlength="100"/>
                     </div>
                     <div class="fl_nv_porque" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Por qué?</label>
                         <input type="text" class="txt_fl_nv_porque" value="{{ResumenProductos.fleet.no_viable_porque}}"
-                            data-field="txt_fl_nv_porque" data-name="txt_fl_nv_porque" maxlength="255" />
+                               data-field="txt_fl_nv_porque" data-name="txt_fl_nv_porque" maxlength="255"/>
                     </div>
                     <div class="fl_nv_producto" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <select class="row-fluid select2 list_fl_nv_producto" data-field="list_fl_nv_producto">
                             {{#each no_producto_requiere_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.fleet.no_viable_producto}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.fleet.no_viable_producto}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -317,22 +354,22 @@
                         <label class="record-label mpad">Condiciones Financieras</label>
                         <select class="row-fluid select2 list_fl_nv_razon_cf" data-field="list_fl_nv_razon_cf">
                             {{#each razones_cf_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.fleet.no_viable_razon_cf}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.fleet.no_viable_razon_cf}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="fl_nv_otro" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <input type="text" class="txt_fl_nv_otro" value="{{ResumenProductos.fleet.no_viable_otro_c}}"
-                            data-field="txt_fl_nv_otro" data-name="txt_fl_nv_otro" maxlength="255" />
+                               data-field="txt_fl_nv_otro" data-name="txt_fl_nv_otro" maxlength="255"/>
                     </div>
                     <div class="fl_nv_razon_ni" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">Razón No se encuentra interesado</label>
                         <select class="row-fluid select2 list_fl_nv_razon_ni" data-field="list_fl_nv_razon_ni">
                             {{#each tct_razon_ni_l_ddw_c_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.fleet.no_viable_razon_ni}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.fleet.no_viable_razon_ni}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -342,27 +379,36 @@
             <td width="33%" valign="top" class="campoUniclick sborder">
                 <div><strong>Uniclick (Unicredit/Unilease) </strong></div>
                 {{#if ResumenProductos.uniclick.estatus_atencion}}
-                  <div class="mpad">
-                      {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
-                  </div>
+                    <div class="mpad">
+                        {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
+                    </div>
                 {{/if}}
                 {{#if ResumenProductos.uniclick.dias}}
-                  <div class="mpad">{{ResumenProductos.uniclick.dias}} días
-                      <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
-                  </div>
+                    <div class="mpad">{{ResumenProductos.uniclick.dias}} días
+                        <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
+                    </div>
                 {{/if}}
+
+                <div class="uniclick_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_uniclick_multi"
+                           {{#if ResumenProductos.uniclick.multilinea_c}}checked{{/if}}
+                           data-field="chk_uniclick_multi"/>
+                </div>
+
                 {{#if ResumenProductos.uniclick.visible_noviable}}
                     <div class="u_nv mpad">
                         <label class="record-label mpad">No Viable Uniclick</label>
-                        <input type="checkbox" class="chk_u_nv" {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}}
-                            data-field="chk_u_nv" />
+                        <input type="checkbox" class="chk_u_nv"
+                               {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}}
+                               data-field="chk_u_nv"/>
                     </div>
                     <div class="u_nv_razon">
                         <label class="record-label mpad">Razón de cuenta No viable</label>
                         <select class="row-fluid select2 list_u_nv_razon" data-field="list_u_nv_razon">
                             {{#each razones_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.uniclick.no_viable_razon}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.uniclick.no_viable_razon}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -370,27 +416,28 @@
                         <label class="record-label mpad">Fuera de Perfil (Razón)</label>
                         <select class="row-fluid select2 list_u_nv_razon_fp" data-field="list_u_nv_razon_fp">
                             {{#each fuera_de_perfil_ddw_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.uniclick.no_viable_razon_fp}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.uniclick.no_viable_razon_fp}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="u_nv_quien" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Quién?</label>
                         <input type="text" class="txt_u_nv_quien" value="{{ResumenProductos.uniclick.no_viable_quien}}"
-                            data-field="txt_u_nv_quien" data-name="txt_u_nv_quien" maxlength="100" />
+                               data-field="txt_u_nv_quien" data-name="txt_u_nv_quien" maxlength="100"/>
                     </div>
                     <div class="u_nv_porque" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Por qué?</label>
-                        <input type="text" class="txt_u_nv_porque" value="{{ResumenProductos.uniclick.no_viable_porque}}"
-                            data-field="txt_u_nv_porque" data-name="txt_u_nv_porque" maxlength="255" />
+                        <input type="text" class="txt_u_nv_porque"
+                               value="{{ResumenProductos.uniclick.no_viable_porque}}"
+                               data-field="txt_u_nv_porque" data-name="txt_u_nv_porque" maxlength="255"/>
                     </div>
                     <div class="u_nv_producto" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <select class="row-fluid select2 list_u_nv_producto" data-field="list_u_nv_producto">
                             {{#each no_producto_requiere_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.uniclick.no_viable_producto}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.uniclick.no_viable_producto}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -398,22 +445,22 @@
                         <label class="record-label mpad">Condiciones Financieras</label>
                         <select class="row-fluid select2 list_u_nv_razon_cf" data-field="list_u_nv_razon_cf">
                             {{#each razones_cf_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.uniclick.no_viable_razon_cf}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.uniclick.no_viable_razon_cf}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="u_nv_otro" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">¿Qué producto?</label>
                         <input type="text" class="txt_u_nv_otro" value="{{ResumenProductos.uniclick.no_viable_otro_c}}"
-                            data-field="txt_u_nv_otro" data-name="txt_u_nv_otro" maxlength="255" />
+                               data-field="txt_u_nv_otro" data-name="txt_u_nv_otro" maxlength="255"/>
                     </div>
                     <div class="u_nv_razon_ni" style="margin: 12px 1px 1px 1px;">
                         <label class="record-label mpad">Razón No se encuentra interesado</label>
                         <select class="row-fluid select2 list_u_nv_razon_ni" data-field="list_u_nv_razon_ni">
                             {{#each tct_razon_ni_l_ddw_c_list}}
-                            <option value="{{@key}}" {{ifSelected @key
-                                                                        ../ResumenProductos.uniclick.no_viable_razon_ni}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                      ../ResumenProductos.uniclick.no_viable_razon_ni}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>

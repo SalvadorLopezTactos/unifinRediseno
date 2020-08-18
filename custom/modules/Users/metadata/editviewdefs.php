@@ -335,6 +335,19 @@ array (
             'label' => 'LBL_DEPURAR_LEADS',
           ),
         ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_cancelar_ref_cruzada_chk_c',
+            'label' => 'LBL_TCT_CANCELAR_REF_CRUZADA_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'multilinea_c',
+            'label' => 'LBL_MULTILINEA_C',
+          ),
+        ),
       ),
     ),
   ),

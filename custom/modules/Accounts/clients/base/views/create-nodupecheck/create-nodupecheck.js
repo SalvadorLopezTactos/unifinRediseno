@@ -431,6 +431,10 @@
         this.$('[data-name="account_tipoSubtipo"]').hide();
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
+        //Deshabilita campo Actualizar Multilínea
+        if(app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+            $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        }
         //Oculta campos de Macro Sector
         this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
         this.$("div[data-name='sectoreconomico_c']").hide();

@@ -70,23 +70,25 @@
         this.bindDataChange();
 
 
-
-
     },
 
     // forms range
     _renderHtml: function () {
         this._super('_renderHtml');
-        self_render=this;
+        self_render = this;
         $("#e6").select2({
             placeholder: "Selecciona un Asesor",
             minimumInputLength: 1,
 
-            data:{ results: self_render.list_filter_usr, text: 'full_name' },
+            data: {results: self_render.list_filter_usr, text: 'full_name'},
 
 
-            formatResult: function(m) { return m.full_name; },
-            formatSelection: function(m) { return m.full_name; }
+            formatResult: function (m) {
+                return m.full_name;
+            },
+            formatSelection: function (m) {
+                return m.full_name;
+            }
         });
     },
     create_list_options: function (objContext) {
@@ -95,57 +97,62 @@
         var productos = app.lang.getAppListStrings('tipo_producto_list');
         var context360 = v360.ResumenCliente; // contiene la información vista 360
         var userpuesto = app.user.attributes.puestousuario_c;
-        var product_dispo = ['1', '3', '4', '6', '8'];
+        var product_dispo = ['1', '3', '4', '6', '8','11'];
         var id_user = app.user.id; //id de usuario firmado
         var list_html = "";
-		var prod_status = 0;
+        var prod_status = 0;
         //if (userpuesto == "27") {
-            list_html = '<option value="" >  </option>';
-            _.each(productos, function (value, key) {
-                if (product_dispo.includes(key)) {
+        list_html = '<option value="" >  </option>';
+        _.each(productos, function (value, key) {
+            if (product_dispo.includes(key)) {
 
-                    switch (key) {
-                        case "1":
-							var leasing_id = objContext.attributes.user_id_c; // id user producto cuenta
-							prod_status = context360.leasing.estatus_atencion;
-                            if (cont_uni_p.ResumenProductos.leasing.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(leasing_id)) ) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';								
-                            }
-                            break;
-                        case "3":
-							var credito_id = objContext.attributes.user_id2_c; // id user producto cuenta
-							prod_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-							if (cont_uni_p.ResumenProductos.credito_auto.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(credito_id))) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }
-                            break;
-                        case "4":
-							var factoraje_id = objContext.attributes.user_id1_c; // id user producto cuenta
-							prod_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.factoring.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(factoraje_id))) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }
-                            break;
-                        case "6":
-							var fleet_id = objContext.attributes.user_id6_c; // id user producto cuenta
-							prod_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.fleet.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(fleet_id))) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }
-                            break;
-                        case "8":
-							var uniclick_id = objContext.attributes.user_id7_c; // id user producto cuenta
-							prod_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
-                            if (cont_uni_p.ResumenProductos.uniclick.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(uniclick_id))) {
-                                list_html += '<option value="' + key + '">' + productos[key] + '</option>';
-                            }
-                            break;
-
-                    }
-
-
+                switch (key) {
+                    case "1":
+                        var leasing_id = objContext.attributes.user_id_c; // id user producto cuenta
+                        prod_status = context360.leasing.estatus_atencion;
+                        if (cont_uni_p.ResumenProductos.leasing.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(leasing_id))) {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
+                    case "3":
+                        var credito_id = objContext.attributes.user_id2_c; // id user producto cuenta
+                        prod_status = context360.credito_auto.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                        if (cont_uni_p.ResumenProductos.credito_auto.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(credito_id))) {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
+                    case "4":
+                        var factoraje_id = objContext.attributes.user_id1_c; // id user producto cuenta
+                        prod_status = context360.factoring.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                        if (cont_uni_p.ResumenProductos.factoring.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(factoraje_id))) {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
+                    case "6":
+                        var fleet_id = objContext.attributes.user_id6_c; // id user producto cuenta
+                        prod_status = context360.fleet.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                        if (cont_uni_p.ResumenProductos.fleet.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(fleet_id))) {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
+                    case "8":
+                        var uniclick_id = objContext.attributes.user_id7_c; // id user producto cuenta
+                        prod_status = context360.uniclick.estatus_atencion; // estatus producto cuenta 1 atendido 2 desatendido
+                        if (cont_uni_p.ResumenProductos.uniclick.dias > 30 && prod_status == 2 && (!self_modal.validate_no_nueve_inicio(uniclick_id))) {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
+                    case "11":
+                        if(userprod.includes(key))
+                        {
+                            list_html += '<option value="' + key + '">' + productos[key] + '</option>';
+                        }
+                        break;
                 }
-            });
+
+
+            }
+        });
         //} else {
         //    var temp_array = [];
         //    _.each(userprod, function (value, key) {
@@ -224,12 +231,12 @@
     /** Valida que el id del producto no se ninguno del tipo 9 sin gestor**/
     validate_no_nueve: function (id_producto) {
         var bandera = false;
-		var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
-		var id_user_black = new Array(); 
-		
-		Object.values(list_solicitud).forEach(function (value) {
-			id_user_black.push(value);
-		});
+        var list_solicitud = app.lang.getAppListStrings('usuarios_no_ceder_list');
+        var id_user_black = new Array();
+
+        Object.values(list_solicitud).forEach(function (value) {
+            id_user_black.push(value);
+        });
         //var id_user_black = ['405cc6b7-fc4a-7cae-552f-5628f61fd849', // moroso
         //    '36af9462-37e6-11ea-baed-a44e314beb18', // bloqueado
         //    '569246c7-da62-4664-ef2a-5628f649537e', // sin gestor
@@ -237,33 +244,33 @@
         //    '42ee17c4-f67a-11e9-9711-00155d96730d', // express
         //    'cc736f7a-4f5f-11e9-856a-a0481cdf89eb' // no viable
         //];
-		
+
         if (id_user_black.includes(id_producto)) {
             bandera = true;
         }
-		
+
         return bandera;
     },
-	
-	/** Valida que el id del producto no se ninguno del tipo
-	9.- Moroso,	9.- Bloqueado,	9.- Asesor Virtual Uniclick**/
+
+    /** Valida que el id del producto no se ninguno del tipo
+     9.- Moroso,    9.- Bloqueado,    9.- Asesor Virtual Uniclick**/
     validate_no_nueve_inicio: function (id_producto) {
         var bandera = false;
-		var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
-		var id_user_black = new Array(); 
-		
-		Object.values(list_solicitud).forEach(function (value) {
-			id_user_black.push(value);
-		});
-        		
+        var list_solicitud = app.lang.getAppListStrings('usuarios_no_solicitud_list');
+        var id_user_black = new Array();
+
+        Object.values(list_solicitud).forEach(function (value) {
+            id_user_black.push(value);
+        });
+
         if (id_user_black.includes(id_producto)) {
             bandera = true;
         }
-		
+
         return bandera;
     },
-	
-	
+
+
     validate_product_list: function (id_producto, status_producto, user_id) {
         exito = {'status': false, 'mensaje': ""};
         if (user_id == id_producto) {
@@ -305,10 +312,10 @@
         var modalAccount = this.context_Account; // contiene información de la cuenta
 
         var prod_select = $('#productos').val(); // producto seleccionada
-        var user_select = $('#e6').select2('val') ;// usuario seleccionada
+        var user_select = $('#e6').select2('val');// usuario seleccionada
         var cuenta_id = modalAccount.context.get('model').attributes.id;
         console.log(user_select);
-		
+
         if (prod_select != "" && user_select != "" && !contextModal.validate_no_nueve(user_select)) {
 
             var usuario = App.data.createBean('Users');
@@ -327,22 +334,22 @@
                             case "1": // LEASING
                                 var leasing_id = modalAccount.context.get('model').attributes.user_id_c; // id user producto cuenta
 
-                              //  if (!contextModal.validate_no_nueve(leasing_id)) {
-                                    if (productos_tem['propietario']) {
-                                        console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                //  if (!contextModal.validate_no_nueve(leasing_id)) {
+                                if (productos_tem['propietario']) {
+                                    console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                    contextModal.call_service_reasignacion(cuenta_id, user_select, 'LEASING', prod_select, leasing_id, data.full_name);
+                                } else {
+                                    console.log("no es porpietario y validamos estatus");
+
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
+                                        console.log("esta desatendido");
+
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'LEASING', prod_select, leasing_id, data.full_name);
-                                    } else {
-                                        console.log("no es porpietario y validamos estatus");
-
-                                        if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
-                                            console.log("esta desatendido");
-
-                                            contextModal.call_service_reasignacion(cuenta_id, user_select, 'LEASING', prod_select, leasing_id, data.full_name);
-                                        }
-                                        else {
-                                            contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
-                                        }
                                     }
+                                    else {
+                                        contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
+                                    }
+                                }
                                 /*}
                                 else {
                                     contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
@@ -352,21 +359,21 @@
                                 var credito_id = modalAccount.context.get('model').attributes.user_id2_c; // id user producto cuenta
 
                                 //if (!contextModal.validate_no_nueve(credito_id)) {
-                                    if (productos_tem['propietario']) {
-                                        console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                if (productos_tem['propietario']) {
+                                    console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                    contextModal.call_service_reasignacion(cuenta_id, user_select, 'CREDITO AUTOMOTRIZ', prod_select, credito_id, data.full_name);
+                                } else {
+                                    console.log("no es porpietario y validamos estatus");
+
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
+                                        console.log("esta desatendido");
+
                                         contextModal.call_service_reasignacion(cuenta_id, user_select, 'CREDITO AUTOMOTRIZ', prod_select, credito_id, data.full_name);
-                                    } else {
-                                        console.log("no es porpietario y validamos estatus");
-
-                                        if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
-                                            console.log("esta desatendido");
-
-                                            contextModal.call_service_reasignacion(cuenta_id, user_select, 'CREDITO AUTOMOTRIZ', prod_select, credito_id, data.full_name);
-                                        }
-                                        else {
-                                            contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
-                                        }
                                     }
+                                    else {
+                                        contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
+                                    }
+                                }
 
                                 /*}
                                 else {
@@ -377,20 +384,20 @@
                             case '4': // FACTORAJE
                                 var factoraje_id = modalAccount.context.get('model').attributes.user_id1_c; // id user producto cuenta
                                 //if (!contextModal.validate_no_nueve(factoraje_id)) {
-                                    if (productos_tem['propietario']) {
-                                        console.log("Es porpietario de esta cuenta y no importa el estatus");
-                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'FACTORAJE', prod_select, factoraje_id, data.full_name);
-                                    } else {
-                                        console.log("no es porpietario y validamos estatus");
+                                if (productos_tem['propietario']) {
+                                    console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                    contextModal.call_service_reasignacion(cuenta_id, user_select, 'FACTORAJE', prod_select, factoraje_id, data.full_name);
+                                } else {
+                                    console.log("no es porpietario y validamos estatus");
 
-                                        if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
-                                            console.log("esta desatendido");
-                                            contextModal.call_service_reasignacion(cuenta_id, user_select, 'FACTORAJE', prod_select, factoraje_id, data.full_name);
-                                        }
-                                        else {
-                                            contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
-                                        }
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
+                                        console.log("esta desatendido");
+                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'FACTORAJE', prod_select, factoraje_id, data.full_name);
                                     }
+                                    else {
+                                        contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
+                                    }
+                                }
                                 /*}
                                 else {
                                     contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
@@ -401,20 +408,20 @@
                                 var fleet_id = modalAccount.context.get('model').attributes.user_id6_c; // id user producto cuenta
 
                                 //if (!contextModal.validate_no_nueve(fleet_id)) {
-                                    if (productos_tem['propietario']) {
-                                        console.log("Es porpietario de esta cuenta y no importa el estatus");
-                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'FLEET', prod_select, fleet_id, data.full_name);
-                                    } else {
-                                        console.log("no es porpietario y validamos estatus");
+                                if (productos_tem['propietario']) {
+                                    console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                    contextModal.call_service_reasignacion(cuenta_id, user_select, 'FLEET', prod_select, fleet_id, data.full_name);
+                                } else {
+                                    console.log("no es porpietario y validamos estatus");
 
-                                        if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
-                                            console.log("esta desatendido");
-                                            contextModal.call_service_reasignacion(cuenta_id, user_select, 'FLEET', prod_select, fleet_id, data.full_name);
-                                        }
-                                        else {
-                                            contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
-                                        }
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
+                                        console.log("esta desatendido");
+                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'FLEET', prod_select, fleet_id, data.full_name);
                                     }
+                                    else {
+                                        contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
+                                    }
+                                }
                                 /*}
                                 else {
                                     contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
@@ -424,25 +431,30 @@
                             case '8': // UNICLICK
                                 var uniclick_id = modalAccount.context.get('model').attributes.user_id7_c; // id user producto cuenta
 
-                               // if (!contextModal.validate_no_nueve(uniclick_id)) {
-                                    if (productos_tem['propietario']) {
-                                        console.log("Es porpietario de esta cuenta y no importa el estatus");
-                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'UNICLICK', prod_select, uniclick_id, data.full_name);
-                                    } else {
-                                        console.log("no es porpietario y validamos estatus");
+                                // if (!contextModal.validate_no_nueve(uniclick_id)) {
+                                if (productos_tem['propietario']) {
+                                    console.log("Es porpietario de esta cuenta y no importa el estatus");
+                                    contextModal.call_service_reasignacion(cuenta_id, user_select, 'UNICLICK', prod_select, uniclick_id, data.full_name);
+                                } else {
+                                    console.log("no es porpietario y validamos estatus");
 
-                                        if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
-                                            console.log("esta desatendido");
-                                            contextModal.call_service_reasignacion(cuenta_id, user_select, 'UNICLICK', prod_select, uniclick_id, data.full_name);
-                                        }
-                                        else {
-                                            contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
-                                        }
+                                    if (productos_tem['estusAtencion'] == "2" || productos_tem['estusAtencion'] == "0") {
+                                        console.log("esta desatendido");
+                                        contextModal.call_service_reasignacion(cuenta_id, user_select, 'UNICLICK', prod_select, uniclick_id, data.full_name);
                                     }
+                                    else {
+                                        contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
+                                    }
+                                }
                                 /*}
                                 else {
                                     contextModal.alert_message('Sin privilegios', 'No cuentas con los privilegios para operar esta Cuenta.');
                                 }*/
+                                break;
+
+                            case '11': // RM
+                                var rm_id = modalAccount.context.get('model').attributes.user_id8_c; // id user producto cuenta
+                                contextModal.call_service_reasignacion(cuenta_id, user_select, 'RM', prod_select, rm_id, data.full_name);
                                 break;
                         }
 
@@ -453,7 +465,7 @@
                 }
             });
 
-        }else {
+        } else {
             contextModal.alert_message('Usuario no válido', 'Este usuario no es válido.');
         }
 
@@ -581,6 +593,14 @@
                             cont_uni_p.ResumenProductos.uniclick.dias = 0;
                             cont_uni_p.ResumenProductos.uniclick.full_name = full_name;
                             cont_uni_p.ResumenProductos.uniclick.assigned_user_id = id_user_new;
+                            cont_uni_p.render();
+                            v360.render();
+                            break;
+                        case '11': // RM
+                            self.model.set('user_id8_c', id_user_new); // id del nuevo asesor
+                            self.model.set('promotorrm_c', full_name);// nombre
+                            v360.ResumenCliente.general_cliente.asesorRM = full_name;
+
                             cont_uni_p.render();
                             v360.render();
                             break;

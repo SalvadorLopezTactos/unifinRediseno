@@ -27,6 +27,17 @@
 			$notification_bean->severity = "alert";
 			$notification_bean->is_read = 0;
 			$notification_bean->save();
+
+			/** Notificación RM */
+            $notification_RM = BeanFactory::getBean("Notifications");
+            $notification_RM->name = 'Contacta a tu cliente '.$persona;
+            $notification_RM->description = 'ALERTA: La liberación de tu cliente '.$persona.' se hizo hace 3 semanas.';
+            $notification_RM->parent_id = $beanAcct->id;
+            $notification_RM->parent_type = 'Accounts';
+            $notification_RM->assigned_user_id = $beanAcct->user_id8_c;
+            $notification_RM->severity = "alert";
+            $notification_RM->is_read = 0;
+            $notification_RM->save();
 		}
       return true;
     }

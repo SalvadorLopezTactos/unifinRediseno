@@ -175,6 +175,8 @@ array (
               ),
               1 => 
               array (
+                  'name' => 'multilinea_c',
+                  'label' => 'LBL_MULTILINEA_C',
               ),
               2 => 
               array (
