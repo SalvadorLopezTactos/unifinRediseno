@@ -56,11 +56,11 @@
         this.model.addValidationTask('valida_potencial_campos_autos', _.bind(this.nodigitos, this));
 
         this.model.addValidationTask('valida_potencial', _.bind(this.validapotencial, this));
-		
+
         /***************Valida Campo de Página Web ****************************/
         this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
-		
-		
+
+
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
@@ -109,13 +109,13 @@
                 });
             }
         }, this));
-		
+
 		/*RFC_ValidatePadron
 		  Validación de rfc en el padron de contribuyentes
 		*/
-		//self.rfc_antiguo = "";
-		//this.model.on('change:rfc_c', this.cambioRFC, this);
-		//this.model.addValidationTask('RFC_validateP', _.bind(this.RFC_ValidatePadron, this));
+        //self.rfc_antiguo = "";
+        //this.model.on('change:rfc_c', this.cambioRFC, this);
+        //this.model.addValidationTask('RFC_validateP', _.bind(this.RFC_ValidatePadron, this));
 
 
         //Validacion para el formato de los campos nombre y apellidos.
@@ -188,7 +188,7 @@
         /* LEV FIN */
 
         this.model.on('change:name', this.cleanName, this);
-        this.model.on('change:no_website_c',this.rowebsite, this);
+        this.model.on('change:no_website_c', this.rowebsite, this);
 
         /*
          AF. 12-02-2018
@@ -247,7 +247,6 @@
         //this.get_noviable();
         this.get_uni_productos();
 
-
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique = function (a) {
             return function () {
@@ -300,7 +299,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userpuesto = app.user.attributes.puestousuario_c;
         var puestosBtn1 = ['18'];
-        var puestosBtn2 = ['27' , '31'];
+        var puestosBtn2 = ['27', '31'];
 
         if (Boton1) {
             Boton1.listenTo(Boton1, "render", function () {
@@ -485,18 +484,18 @@
         var concatDirecciones = [];
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length - 1; i++) {
-			if(objDirecciones.eq(i).find('select.inactivo option:selected') == 0){
-				strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
-					objDirecciones.eq(i).find('.numExtExisting').val() +
-					objDirecciones.eq(i).find('.numIntExisting').val() +
-					objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
-					objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
-					objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
-					objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
-					objDirecciones.eq(i).find('.postalInputTempExisting').val();
-	
-				concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
-			}
+            if (objDirecciones.eq(i).find('select.inactivo option:selected') == 0) {
+                strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                    objDirecciones.eq(i).find('.numExtExisting').val() +
+                    objDirecciones.eq(i).find('.numIntExisting').val() +
+                    objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                    objDirecciones.eq(i).find('.postalInputTempExisting').val();
+
+                concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+            }
         }
 
         // validamos  el arreglo generado
@@ -836,6 +835,10 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', '');
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
+        //Clasificacion Sectorial - Actividad Economica
+        clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
+        clasf_sectorial.render();
+
     },
 
     bindDataChange: function () {
@@ -951,8 +954,8 @@
          @author Victo Martinez - 01/08/2018
          Deshabilita campos: Tipo de cuenta y subtipo de cuenta
          */
-//        this.noEditFields.push('subtipo_registro_cuenta_c');
-//        this.noEditFields.push('tipo_registro_cuenta_c');
+        //        this.noEditFields.push('subtipo_registro_cuenta_c');
+        //        this.noEditFields.push('tipo_registro_cuenta_c');
 
         /*
          *
@@ -989,7 +992,7 @@
             //Readonly check factoraje
             self.noEditFields.push('deudor_factor_c');
         }
-  
+
         if (this.model.get('no_website_c')) {
             self.noEditFields.push('website');
         }
@@ -1102,6 +1105,12 @@
         if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
             $('div[data-name=multilinea_c]').css("pointer-events", "none");
         }
+        //Oculta campos de Macro Sector
+        this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
+        this.$("div[data-name='sectoreconomico_c']").hide();
+        this.$("div[data-name='subsectoreconomico_c']").hide();
+        this.$("div[data-name='actividadeconomica_c']").hide();
+
     },
 
     editClicked: function () {
@@ -1349,7 +1358,7 @@
                 var asesorUC = this.model.get('user_id7_c');
                 myField2.hide();
                 if (((leasingprod == "5" || leasingprod == "4") && userprod.includes('1') && asesorL == logueado) || ((factprod == "5" || factprod == "4") && userprod.includes("4") && asesorF == logueado) || ((caprod == "5" || caprod == "4") && userprod.includes("3") && asesorCA == logueado) ||
-                    ((fleetprod == "5" || fleetprod == "4") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
+                    ((fleetprod == "5" || fleetprod == "4") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado)) {
                     myField2.show();
                 } else {
                     myField2.hide();
@@ -1427,7 +1436,7 @@
          * tipo_registro_cuenta_c = Persona
          * OR tipo_registro_cuenta_c = Proveedor
          */
-        if (((leasingprod == "4" || leasingprod == "5") && userprod.includes('1') && asesorL == logueado) || ((factprod == "4" || factprod == "5") && userprod.includes("4") && asesorF == logueado) || ((caprod == "4" || caprod == "5") && userprod.includes("3") && asesorCA == logueado) || ((fleetprod == "4" || fleetprod == "5") && userprod.includes('6') && asesorFL == logueado)  || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado) ) {
+        if (((leasingprod == "4" || leasingprod == "5") && userprod.includes('1') && asesorL == logueado) || ((factprod == "4" || factprod == "5") && userprod.includes("4") && asesorF == logueado) || ((caprod == "4" || caprod == "5") && userprod.includes("3") && asesorCA == logueado) || ((fleetprod == "4" || fleetprod == "5") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado)) {
             $('[name="regresalead"]').hide();
             $('[name="prospectocontactado"]').hide();
             $('[name="conviertelead"]').show();
@@ -1779,44 +1788,44 @@
                     autoClose: false
                 });
             } else {
-				//Dirección activa
+                //Dirección activa
                 var activa = 0;
                 console.log('Validacion dir.activa');
                 console.log(direcciones);
                 var direcciones = this.oDirecciones.direccion;
                 for (i = 0; i < direcciones.length; i++) {
                     if (direcciones[i].inactivo == 0) {
-                        activa ++;
+                        activa++;
                     }
                 }
                 //Valida variable nacional
-                if (activa > 0 ) {
-					//Valdación Nacional
-					if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-						var nacional = 0;
-						console.log('Validacion Dir.Nacional');
-						var direcciones = this.oDirecciones.direccion;
-						for (i = 0; i < direcciones.length; i++) {
-							if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0 ) {
-								nacional = 1;
-							}
-						}
-						//Valida variable nacional
-						if (nacional != 1) {
-							console.log('Dir. Nacional requerida');
-							errors[$(".addDireccion")] = errors['account_direcciones'] || {};
-							errors[$(".addDireccion")].required = true;
-	
-							$('.direcciondashlet').css('border-color', 'red');
-							app.alert.show("Direccion nacional requerida", {
-								level: "error",
-								title: "Al menos una direcci\u00F3n nacional es requerida.",
-								autoClose: false
-							});
-						}
-					}
-				}else {
-					console.log('Dir. activa requerida');
+                if (activa > 0) {
+                    //Valdación Nacional
+                    if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                        var nacional = 0;
+                        console.log('Validacion Dir.Nacional');
+                        var direcciones = this.oDirecciones.direccion;
+                        for (i = 0; i < direcciones.length; i++) {
+                            if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0) {
+                                nacional = 1;
+                            }
+                        }
+                        //Valida variable nacional
+                        if (nacional != 1) {
+                            console.log('Dir. Nacional requerida');
+                            errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+                            errors[$(".addDireccion")].required = true;
+
+                            $('.direcciondashlet').css('border-color', 'red');
+                            app.alert.show("Direccion nacional requerida", {
+                                level: "error",
+                                title: "Al menos una direcci\u00F3n nacional es requerida.",
+                                autoClose: false
+                            });
+                        }
+                    }
+                } else {
+                    console.log('Dir. activa requerida');
                     errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                     errors[$(".addDireccion")].required = true;
 
@@ -1826,7 +1835,7 @@
                         title: "Al menos una direcci\u00F3n nacional activa es requerida.",
                         autoClose: false
                     });
-				}
+                }
             }
         }
         callback(null, fields, errors);
@@ -2510,20 +2519,20 @@
                     api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
                     api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
                     Oproductos.productos.tct_tipo_cuenta_l_c = '1';
-                    Oproductos.productos.tct_subtipo_l_txf_c  = '5';
+                    Oproductos.productos.tct_subtipo_l_txf_c = '5';
                     v360.ResumenCliente.leasing.tipo_cuenta = '1';
-                    v360.ResumenCliente.leasing.subtipo_cuenta = '5';   
+                    v360.ResumenCliente.leasing.subtipo_cuenta = '5';
                 }
 
             }
             if ((Oproductos.productos.tct_tipo_cuenta_ca_c == "4" || Oproductos.productos.tct_tipo_cuenta_ca_c == "5") && productousuario.includes('3')) {
                 if (App.user.id == this.model.get('user_id2_c')) {
-                    tipo_producto = 3;                
+                    tipo_producto = 3;
                     api_params["tct_tipo_ca_txf_c"] = "Lead";
                     api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
                     Oproductos.productos.tct_tipo_cuenta_ca_c = '1';
-                    Oproductos.productos.tct_subtipo_ca_txf_c  = '5';                
+                    Oproductos.productos.tct_subtipo_ca_txf_c = '5';
                     v360.ResumenCliente.credito_auto.tipo_cuenta = '1';
                     v360.ResumenCliente.credito_auto.subtipo_cuenta = '5';
                 }
@@ -2535,9 +2544,9 @@
                     api_params["tct_subtipo_f_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
                     Oproductos.productos.tct_tipo_cuenta_f_c = '1';
-                    Oproductos.productos.tct_subtipo_f_txf_c  = '5';  
+                    Oproductos.productos.tct_subtipo_f_txf_c = '5';
                     v360.ResumenCliente.factoring.tipo_cuenta = '1';
-                    v360.ResumenCliente.factoring.subtipo_cuenta = '5';                  
+                    v360.ResumenCliente.factoring.subtipo_cuenta = '5';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
@@ -2547,7 +2556,7 @@
                     api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
                     Oproductos.productos.tct_tipo_cuenta_fl_c = '1';
-                    Oproductos.productos.tct_subtipo_fl_txf_c  = '5';
+                    Oproductos.productos.tct_subtipo_fl_txf_c = '5';
                     v360.ResumenCliente.fleet.tipo_cuenta = '1';
                     v360.ResumenCliente.fleet.subtipo_cuenta = '5';
                 }
@@ -2559,7 +2568,7 @@
                     api_params["tct_subtipo_uc_txf_c"] = "En Calificación";
                     api_params["tct_tipo_cuenta_uc_c"] = "LEAD EN CALIFICACIÓN";
                     Oproductos.productos.tct_tipo_cuenta_uc_c = '1';
-                    Oproductos.productos.tct_subtipo_uc_txf_c  = '5';
+                    Oproductos.productos.tct_subtipo_uc_txf_c = '5';
                     v360.ResumenCliente.uniclick.tipo_cuenta = '1';
                     v360.ResumenCliente.uniclick.subtipo_cuenta = '5';
                 }
@@ -2567,26 +2576,26 @@
             // Actualiza Productos
             _.each(Productos, function (value, key) {
                 var idprod = '';
-                if(app.user.id == this.model.get('user_id_c') && Productos[key].tipo_producto == 1) idprod = Productos[key].id;
-                if(app.user.id == this.model.get('user_id1_c') && Productos[key].tipo_producto == 4) idprod = Productos[key].id;
-                if(app.user.id == this.model.get('user_id2_c') && Productos[key].tipo_producto == 3) idprod = Productos[key].id;
-                if(app.user.id == this.model.get('user_id6_c') && Productos[key].tipo_producto == 6) idprod = Productos[key].id;
-                if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
-                if(idprod) {
-                  var params = {};
-                  params["tipo_cuenta"] = "1";
-                  params["subtipo_cuenta"] = "5";
-                  params["tipo_subtipo_cuenta"] = "LEAD EN CALIFICACIÓN";
-                  var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
-                  app.api.call('update', uni, params, {
-                      success: _.bind(function (data) {
-                      })
-                  });
+                if (app.user.id == this.model.get('user_id_c') && Productos[key].tipo_producto == 1) idprod = Productos[key].id;
+                if (app.user.id == this.model.get('user_id1_c') && Productos[key].tipo_producto == 4) idprod = Productos[key].id;
+                if (app.user.id == this.model.get('user_id2_c') && Productos[key].tipo_producto == 3) idprod = Productos[key].id;
+                if (app.user.id == this.model.get('user_id6_c') && Productos[key].tipo_producto == 6) idprod = Productos[key].id;
+                if (app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
+                if (idprod) {
+                    var params = {};
+                    params["tipo_cuenta"] = "1";
+                    params["subtipo_cuenta"] = "5";
+                    params["tipo_subtipo_cuenta"] = "LEAD EN CALIFICACIÓN";
+                    var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                    app.api.call('update', uni, params, {
+                        success: _.bind(function (data) {
+                        })
+                    });
                 }
-            },this);
+            }, this);
             // Actualiza Resumen
             var idC = this.model.get('id');
-            setTimeout(function() {
+            setTimeout(function () {
                 if (api_params != undefined) {
                     var url = app.api.buildURL('tct02_Resumen/' + idC, null, null);
                     app.api.call('update', url, api_params, {
@@ -2597,7 +2606,7 @@
                                 level: 'success',
                                 messages: 'Cambio realizado',
                             });
-                            
+
 
                             cont_uni_p.render();
                             Oproductos.render();
@@ -2610,7 +2619,7 @@
                         })
                     });
                 }
-            },5000);
+            }, 5000);
         }
     },
 
@@ -2967,14 +2976,18 @@
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
-            if (this.model.get('tct_macro_sector_ddw_c') == '' || this.model.get('tct_macro_sector_ddw_c') == null) {
-                /*app.alert.show("Macro sector requerido", {
-                 level: "error",
-                 title: "El campo macro sector es requerido",
-                 autoClose: false
-                 });*/
-                errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                errors['tct_macro_sector_ddw_c'].required = true;
+            //Validacion de Actividad Economica - antes macrosector
+            if ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+                //Entra a modo edición el campo custom
+                fieldAE1 = this.getField('account_clasf_sectorial');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldAE1);
+
+                $('.campoAE').find('.record-label').css('color', 'red');
+                $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                errors['actividadeconomica_c'].required = true;
             }
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
@@ -3132,7 +3145,7 @@
         }
     },
 
-/**Pendiente de Validar*/
+    /**Pendiente de Validar*/
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
         if (this.model.get('origen_cuenta_c') == 'Mercadotecnia') {
@@ -3143,31 +3156,31 @@
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
         }
-        
+
         /*******Limpia campos dependientes de Origen*******/
         //Origen: Prospección propia
         if (this.model.get('origen_cuenta_c') != '3') {
             this.model.set('prospeccion_propia_c', ''); //Limpia campo Prospeccion propia
-        } 
+        }
         //Origen: Referenciado Socio Comercial
         if (this.model.get('origen_cuenta_c') != '6') {
             this.model.set('account_id_c', ''); //Elimina usuario referenciado por db
-            this.model.set('referenciador_c',''); //Elimina usuario referenciado por vista
-        } 
+            this.model.set('referenciador_c', ''); //Elimina usuario referenciado por vista
+        }
         //Origen: Referenciado Unifin
         if (this.model.get('origen_cuenta_c') != '7') {
             this.model.set('user_id5_c', ''); //Elimina usuario referido por db
-            this.model.set('tct_referenciado_dir_rel_c',''); //Elimina usuario referido por vista
-        } 
+            this.model.set('tct_referenciado_dir_rel_c', ''); //Elimina usuario referido por vista
+        }
         //Origen: Referenciado Cliente = 4, Referenciado Proveedor = 5, Referenciado Vendor = 8
         if (this.model.get('origen_cuenta_c') != '4' && this.model.get('origen_cuenta_c') != '5' && this.model.get('origen_cuenta_c') != '8') {
             this.model.set('account_id1_c', ''); //Elimina usuario referido db
-            this.model.set('referido_cliente_prov_c',''); //Elimina usuario referido vista
-        } 
+            this.model.set('referido_cliente_prov_c', ''); //Elimina usuario referido vista
+        }
     },
 
-    _cleanDependencies: function (){
-    
+    _cleanDependencies: function () {
+
         /*******Limpia campos dependientes de Detalle Origen*******/
         //Acciones Estrategicas
         if (this.model.get('detalle_origen_c') != '5') {
@@ -3176,22 +3189,22 @@
         //Base de datos Emp
         if (this.model.get('detalle_origen_c') != '1') {
             this.model.set('tct_origen_busqueda_txf_c', ''); //Limpia campo Base
-        } 
+        }
         //Base de datos Afiliaciones
         if (this.model.get('detalle_origen_c') != '6') {
             this.model.set('camara_c', ''); //Limpia campo ¿De que Cámara Proviene?
         }
         //Cartera Asesores
         if (this.model.get('detalle_origen_c') != '10') {
-            this.model.set('tct_que_promotor_rel_c',''); //Elimina ¿Que Asesor? Vista
-            this.model.set('user_id4_c',''); //Elimina ¿Que Asesor? DB
+            this.model.set('tct_que_promotor_rel_c', ''); //Elimina ¿Que Asesor? Vista
+            this.model.set('user_id4_c', ''); //Elimina ¿Que Asesor? DB
         }
         //Acciones Estrategicas = 5, Base de datos Emp = 1, Base de datos Afiliaciones = 6
         //Digital = 3, Offline = 9, Cartera Asesores = 10
         if (this.model.get('detalle_origen_c') != '5' && this.model.get('detalle_origen_c') != '1' &&
             this.model.get('detalle_origen_c') != '6' && this.model.get('detalle_origen_c') != '3' &&
             this.model.get('detalle_origen_c') != '9' && this.model.get('detalle_origen_c') != '10') {
-            
+
             this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
             this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
         }
@@ -3235,19 +3248,47 @@
     },
 
     macrosector: function (fields, errors, callback) {
-        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
+        //Validacion Actividad Economica - antes macro sector
+        if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
-            errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
-            errors['tct_macro_sector_ddw_c'].required = true;
+            
+            $('.campoAE').find('.record-label').css('color', 'red');
+            $('.list_ae').find('.select2-choice').css('border-color', 'red');
+            errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
+            errors['actividadeconomica_c'].required = true;
         }
+
+        //Validacion de php SetRequired para macro sector - ahora actividad economica
+        // if (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' ||
+        //     this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9') {
+
+        //     $('.campoAE').find('.record-label').css('color', 'red');
+        //     $('.list_ae').find('.select2-choice').css('border-color', 'red');
+        //     errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
+        //     errors['actividadeconomica_c'].required = true;
+
+        // }
         callback(null, fields, errors);
     },
 
     sectoreconomico: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
+        //Validacion de Sector Economico custom
+        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && ($('.list_se').select2('val') == '' || $('.list_se')[0].innerText.trim() == '') && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
+
+            $('.campoSE').find('.record-label').css('color', 'red');
+            $('.list_se').find('.select2-choice').css('border-color', 'red');
             errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
             errors['sectoreconomico_c'].required = true;
         }
+
+        //Validacion de php SetRequired para Sector Economico custom
+        // if (this.model.get('tipo_registro_cuenta_c') != '1' || this.model.get('tipo_registro_cuenta_c') != '3' || this.model.get('subtipo_registro_cuenta_c') != '2') {
+
+        //     $('.campoSE').find('.record-label').css('color', 'red');
+        //     $('.list_se').find('.select2-choice').css('border-color', 'red');
+        //     errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
+        //     errors['sectoreconomico_c'].required = true;
+        // }
         callback(null, fields, errors);
     },
 
@@ -3310,7 +3351,7 @@
             var indices = [];
             for (var i = 0; i < direccion.length; i++) {
                 for (var j = 0; j < direccion.length; j++) {
-                    if (i != j &&  direccion[i].inactivo == 0 && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo ) {
+                    if (i != j && direccion[i].inactivo == 0 && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -3532,10 +3573,10 @@
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
                     console.log("Valida Cedente");
-					if( this._getIndicador(value[i].inactivo) != "1"){
-						var valorecupera = this._getIndicador(value[i].indicador);
-						totalindicadores = totalindicadores + "," + valorecupera;
-					}
+                    if (this._getIndicador(value[i].inactivo) != "1") {
+                        var valorecupera = this._getIndicador(value[i].indicador);
+                        totalindicadores = totalindicadores + "," + valorecupera;
+                    }
                 }
             }
 
@@ -3588,9 +3629,19 @@
                     errors['estado_nacimiento_c'].required = true;
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
-                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
-                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                        errors['tct_macro_sector_ddw_c'].required = true;
+                    //Requerido Actividad Economica - antes macro sector
+                    if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+
+                        //Entra a modo edición el campo custom
+                        fieldAE2 = this.getField('account_clasf_sectorial');
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldAE2);
+
+                        $('.campoAE').find('.record-label').css('color', 'red');
+                        $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                        errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                        errors['actividadeconomica_c'].required = true;
                     }
                     if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                         errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
@@ -3615,9 +3666,18 @@
                         errors['genero_c'].required = true;
                     }
 
-                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
-                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                        errors['tct_macro_sector_ddw_c'].required = true;
+                    if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+
+                        //Entra a modo edición el campo custom
+                        fieldAE3 = this.getField('account_clasf_sectorial');
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldAE3);
+
+                        $('.campoAE').find('.record-label').css('color', 'red');
+                        $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                        errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                        errors['actividadeconomica_c'].required = true;
                     }
                 }
             }
@@ -3632,10 +3692,10 @@
 
             if (value != undefined) {
                 for (i = 0; i < value.length; i++) {
-					if( this._getIndicador(value[i].inactivo) != "1"){
-						var valorecupera = this._getIndicador(value[i].indicador);
-						totalindicadores = totalindicadores + "," + valorecupera;
-					}
+                    if (this._getIndicador(value[i].inactivo) != "1") {
+                        var valorecupera = this._getIndicador(value[i].indicador);
+                        totalindicadores = totalindicadores + "," + valorecupera;
+                    }
                 }
             }
 
@@ -3659,18 +3719,28 @@
                     messages: 'Debe tener las siguiente direcci\u00F3n: <br><b>' + direccionesfaltantes + '</b>'
                 })
                 /****************Se agrega requerido campo Tipo de Dirección para Fiscal************/
-				errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
                 errors['account_direcciones_c'].required = true;
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', 'red');
-            }else {
+            } else {
                 this.$('#s2id_multiIndicador .select2-choices').css('border-color', '');
             }
-			
+
             if (this.model.get('tipodepersona_c') == "Persona Moral" && (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null)) {
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
                 errors['razonsocial_c'].required = true;
             }
-            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+            //Requerido Actividad Economica custom
+            if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+
+                //Entra a modo edición el campo custom
+                fieldAE4 = this.getField('account_clasf_sectorial');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldAE4);
+
+                $('.campoAE').find('.record-label').css('color', 'red');
+                $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
             }
@@ -4445,8 +4515,7 @@
                 delete lista[key];
             }
         });
-        if(anoselect!=undefined)
-        {
+        if (anoselect != undefined) {
             lista[anoselect] = anoselect;
         }
         this.model.fields['tct_ano_ventas_ddw_c'].options = lista;
@@ -4469,7 +4538,7 @@
         }
 
     },
-    
+
     get_phones: function () {
         //Extiende This
         this.oTelefonos = [];
@@ -5103,10 +5172,12 @@
         if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
             necesarios = necesarios + '<b>RFC<br></b>';
         }
-        if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
-            necesarios = necesarios + '<b>Macro Sector<br></b>';
+        //Requerido Actividad Economica - antes macro sector
+        if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+            necesarios = necesarios + '<b>Actividad Económica<br></b>';
         }
-        if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == null) {
+        //Requerido Sector Económico custom
+        if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "" || $('.list_se').select2('val') == null) {
             necesarios = necesarios + '<b>Sector Económico<br></b>';
         }
         if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
@@ -5120,20 +5191,20 @@
         }
         if (_.isEmpty(this.oDirecciones.direccion)) {
             necesarios = necesarios + '<b>Dirección<br></b>';
-        }else{
-			var direcciones = 0;
-			var tipodireccion= this.oDirecciones.direccion;
+        } else {
+            var direcciones = 0;
+            var tipodireccion = this.oDirecciones.direccion;
             if (tipodireccion.length > 0) {
-                for(var i=0;i<tipodireccion.length;i++){
-                    if(tipodireccion[i].inactivo == 1 ){
+                for (var i = 0; i < tipodireccion.length; i++) {
+                    if (tipodireccion[i].inactivo == 1) {
                         direcciones++;
                     }
                 }
             }
-			if(direcciones == tipodireccion.length){
-				necesarios = necesarios + '<b>Dirección<br></b>';
-			}
-		}
+            if (direcciones == tipodireccion.length) {
+                necesarios = necesarios + '<b>Dirección<br></b>';
+            }
+        }
         if (this.model.get('tipodepersona_c') != "Persona Moral") {
             if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
                 necesarios = necesarios + '<b>Primer Nombre</b><br>';
@@ -5204,36 +5275,36 @@
                 // Actualiza Productos
                 _.each(Productos, function (value, key) {
                     var idprod = '';
-                    if(app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8){
-                      idprod = Productos[key].id;  
-                    } 
-                    if(idprod) {
-                      var params = {};
-                      params["tipo_cuenta"] = "3";
-                      params["subtipo_cuenta"] = "18";
-                      params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
-                      var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
-                      app.api.call('update', uni, params, {
-                          success: _.bind(function (data) {
-                              v360.ResumenCliente.uniclick.tipo_cuenta = '3';
-                              v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
-                              v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
-                              app.alert.dismiss('convierte_Cliente_uniclick');
-                              app.alert.show('errorAlert', {
-                                  level: 'success',
-                                  messages: "Se ha realizado la conversión correctamente.",
-                              });
-                              
-                              v360.render();
-                              Oproductos.render();
-                              //Deja activa la pestaña de la vista360
-                              $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
-                              $("#recordTab>li.tab").removeClass('active');
-                              $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
-                          })
-                      });
+                    if (app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) {
+                        idprod = Productos[key].id;
                     }
-                },this);
+                    if (idprod) {
+                        var params = {};
+                        params["tipo_cuenta"] = "3";
+                        params["subtipo_cuenta"] = "18";
+                        params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
+                        var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+                        app.api.call('update', uni, params, {
+                            success: _.bind(function (data) {
+                                v360.ResumenCliente.uniclick.tipo_cuenta = '3';
+                                v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+                                v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+                                app.alert.dismiss('convierte_Cliente_uniclick');
+                                app.alert.show('errorAlert', {
+                                    level: 'success',
+                                    messages: "Se ha realizado la conversión correctamente.",
+                                });
+
+                                v360.render();
+                                Oproductos.render();
+                                //Deja activa la pestaña de la vista360
+                                $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+                                $("#recordTab>li.tab").removeClass('active');
+                                $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+                            })
+                        });
+                    }
+                }, this);
 
             }
         }
@@ -5650,74 +5721,74 @@
                 });
                 errors['website'] = errors['website'] || {};
                 errors['website'].required = true;
-        				callback(null, fields, errors);
-            }else{
-        				app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' +webSite) ,null, {
-        					success: _.bind(function (data) {
-        						//console.log(data);
-        						if (data == "02") {
-        							app.alert.show("error-website", {
-        								level: "error",
-        								autoClose: false,
-        								messages: "El dominio ingresado en <b>Página Web</b> no existe."
-        							});
-        							errors['website'] = errors['website'] || {};
-        							errors['website'].required = true;
-        							//callback(null, fields, errors);
-        						}
-        						if (data == "01" ) {
-        							app.alert.show("error-website", {
-        								level: "error",
-        								autoClose: false,
-        								messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
-        							});
-        							errors['website'] = errors['website'] || {};
-        							errors['website'].required = true;
-        							//callback(null, fields, errors);
-        						}
-        						callback(null, fields, errors);
-        					}, this),
-        				});
+                callback(null, fields, errors);
+            } else {
+                app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' + webSite), null, {
+                    success: _.bind(function (data) {
+                        //console.log(data);
+                        if (data == "02") {
+                            app.alert.show("error-website", {
+                                level: "error",
+                                autoClose: false,
+                                messages: "El dominio ingresado en <b>Página Web</b> no existe."
+                            });
+                            errors['website'] = errors['website'] || {};
+                            errors['website'].required = true;
+                            //callback(null, fields, errors);
+                        }
+                        if (data == "01") {
+                            app.alert.show("error-website", {
+                                level: "error",
+                                autoClose: false,
+                                messages: "El dominio ingresado en <b>Página Web</b> no existe o no esta activa."
+                            });
+                            errors['website'] = errors['website'] || {};
+                            errors['website'].required = true;
+                            //callback(null, fields, errors);
+                        }
+                        callback(null, fields, errors);
+                    }, this),
+                });
             }
-        }else{
-	      	  callback(null, fields, errors);
+        } else {
+            callback(null, fields, errors);
         }
     },
 
     rowebsite: function () {
-      if(this.model.get('no_website_c')) {
-        if(this.model.get('website')){
-          app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website='+this.model.get('website')),null, {
-  				  success: _.bind(function (data) {
-  				    if(data == "00") {
-  						  app.alert.show("error-website", {
-  							  level: "error",
-  								autoClose: false,
-  								messages: "La Página Web es correcta, no se puede borrar."
-  							});
-                self.model.set('no_website_c',0); 
-  						}
-              else {
-                self.model.set('website','');
-                self.noEditFields.push('website');
-  						}
-  					}, self),
-  				});
+        if (this.model.get('no_website_c')) {
+            if (this.model.get('website')) {
+                app.api.call('GET', app.api.buildURL('validacion_sitio_web/?website=' + this.model.get('website')), null, {
+                    success: _.bind(function (data) {
+                        if (data == "00") {
+                            app.alert.show("error-website", {
+                                level: "error",
+                                autoClose: false,
+                                messages: "La Página Web es correcta, no se puede borrar."
+                            });
+                            self.model.set('no_website_c', 0);
+                        }
+                        else {
+                            self.model.set('website', '');
+                            self.noEditFields.push('website');
+                        }
+                    }, self),
+                });
+            }
+            $('[data-name="website"]').attr('style', 'pointer-events:none');
         }
-        $('[data-name="website"]').attr('style','pointer-events:none');
-      }
-      else {
-        $('[data-name="website"]').attr('style','pointer-events:auto');
-      }
+        else {
+            $('[data-name="website"]').attr('style', 'pointer-events:auto');
+        }
     },
 
-    requeridosUniclickCanal:function (fields, errors, callback) {
+    requeridosUniclickCanal: function (fields, errors, callback) {
 
         var faltantesUniclickCanal = 0;
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
 
 
-        if ($('.list_u_canal').select2('val')=="0" && userprod.includes('8') ) {
+        if ($('.list_u_canal').select2('val') == "0" && userprod.includes('8')) {
             $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
             faltantesUniclickCanal += 1;
         }
@@ -5737,86 +5808,86 @@
 
         callback(null, fields, errors);
     },
-	
-	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
-	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
-	
-	//RFC_ValidatePadron: function (fields, errors, callback) {
-	//	
-	//	var rfc = this.getField('rfc_c');
-	//	var valuerfc = this.model.get('rfc_c');
-	//	var anticrfc = this._get_rfc_antiguo();
-	//	        
-	//	if( (this.model.get('pais_nacimiento_c') == "2") 
-	//		&& (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
-	//		&& (anticrfc != valuerfc) && (rfc.action === "edit" || rfc.action === "create")
-	//		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" || this.model.get('estado_rfc_c') == "0")){
-	//		
-	//		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
-	//			success: _.bind(function (data) {
-	//				if (data != "" && data != null) {
-	//					console.log("rfc");
-	//					console.log(data);
-	//					if (data.code == '1') {
-	//						this.model.set('estado_rfc_c', "");
-	//						app.alert.show("Error Validar RFC", {
-	//							level: "error",
-	//							title: 'Estructura del RFC incorrecta',
-	//							autoClose: false
-	//						});
-	//						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
-	//						errors['error_RFC_Padron'].required = true;
+
+    /* Valida RFC con servicio de revisión del padron de contribuyentes */
+    //        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
+
+    //RFC_ValidatePadron: function (fields, errors, callback) {
+    //	
+    //	var rfc = this.getField('rfc_c');
+    //	var valuerfc = this.model.get('rfc_c');
+    //	var anticrfc = this._get_rfc_antiguo();
+    //	        
+    //	if( (this.model.get('pais_nacimiento_c') == "2") 
+    //		&& (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
+    //		&& (anticrfc != valuerfc) && (rfc.action === "edit" || rfc.action === "create")
+    //		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" || this.model.get('estado_rfc_c') == "0")){
+    //		
+    //		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
+    //			success: _.bind(function (data) {
+    //				if (data != "" && data != null) {
+    //					console.log("rfc");
+    //					console.log(data);
+    //					if (data.code == '1') {
+    //						this.model.set('estado_rfc_c', "");
+    //						app.alert.show("Error Validar RFC", {
+    //							level: "error",
+    //							title: 'Estructura del RFC incorrecta',
+    //							autoClose: false
+    //						});
+    //						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+    //						errors['error_RFC_Padron'].required = true;
     //                    }else if (data.code == '2') {
-	//						this.model.set('estado_rfc_c', '0');
-	//						app.alert.show("Error Validar RFC", {
-	//							level: "error",
-	//							title: 'RFC no registrado en el padrón de contribuyentes',
-	//							autoClose: false
-	//						});
-	//						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
-	//						errors['error_RFC_Padron'].required = true;
+    //						this.model.set('estado_rfc_c', '0');
+    //						app.alert.show("Error Validar RFC", {
+    //							level: "error",
+    //							title: 'RFC no registrado en el padrón de contribuyentes',
+    //							autoClose: false
+    //						});
+    //						errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+    //						errors['error_RFC_Padron'].required = true;
     //                    }else if (data.code == '4') {
-	//						this.model.set('estado_rfc_c', '1');
-	//					}
-	//				}else{
-	//					app.alert.show("Error Validar RFC", {
-	//						level: "error",
-	//						title: 'Error de envío para validar RFC',
-	//						autoClose: false
-	//					});
-	//					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
-	//					errors['error_RFC_Padron'].required = true;
-	//				}		
-	//				callback(null, fields, errors);					
-	//			}, this),
-	//			error: _.bind(function (error) {
-	//				app.alert.show("Error Validar RFC", {
-	//					level: "error",
-	//					title: 'Error de envío',
-	//					autoClose: false
-	//				});
-	//				errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
-	//				errors['error_RFC_Padron'].required = true;
+    //						this.model.set('estado_rfc_c', '1');
+    //					}
+    //				}else{
+    //					app.alert.show("Error Validar RFC", {
+    //						level: "error",
+    //						title: 'Error de envío para validar RFC',
+    //						autoClose: false
+    //					});
+    //					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+    //					errors['error_RFC_Padron'].required = true;
+    //				}		
+    //				callback(null, fields, errors);					
+    //			}, this),
+    //			error: _.bind(function (error) {
+    //				app.alert.show("Error Validar RFC", {
+    //					level: "error",
+    //					title: 'Error de envío',
+    //					autoClose: false
+    //				});
+    //				errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
+    //				errors['error_RFC_Padron'].required = true;
     //                console.log("Este fue el error:", error);
-	//				callback(null, fields, errors);
+    //				callback(null, fields, errors);
     //            },this),
-	//		});
-	//	}else{
-	//      	  callback(null, fields, errors);
+    //		});
+    //	}else{
+    //      	  callback(null, fields, errors);
     //    }			
     //},
-	
-	//cambioRFC: function(){
-	//	var original_rfc = this.model._previousAttributes.rfc_c;
-	//	this._set_rfc_antiguo(original_rfc);
-	//},
-	//
-	//_get_rfc_antiguo: function(){
-	//	return self.rfc_antiguo;
-	//},
-	//
-	//_set_rfc_antiguo: function(rfca){
-	//	self.rfc_antiguo = rfca;
-	//},
-	
+
+    //cambioRFC: function(){
+    //	var original_rfc = this.model._previousAttributes.rfc_c;
+    //	this._set_rfc_antiguo(original_rfc);
+    //},
+    //
+    //_get_rfc_antiguo: function(){
+    //	return self.rfc_antiguo;
+    //},
+    //
+    //_set_rfc_antiguo: function(rfca){
+    //	self.rfc_antiguo = rfca;
+    //},
+
 })

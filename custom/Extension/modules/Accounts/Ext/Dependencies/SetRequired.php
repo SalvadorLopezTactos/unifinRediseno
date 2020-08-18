@@ -216,23 +216,23 @@ $dependencies['Accounts']['EstadoNacimiento_required'] = array(
     ),
 );
 //Actualizacion para la condicion del regimen fiscal para el prospecto/interesado. Adrian Arauz 13/07/18. Se añade cuenta cliente. 17/07/18 se añade excepcion para proveedor.
-$dependencies['Accounts']['SectorEconomico_required'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_cuenta_c', 'sectoreconomico_c', 'subtipo_registro_cuenta_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired',
-            'params' => array(
-                'target' => 'sectoreconomico_c',
-                'label' => 'sectoreconomico_c_label',
-                'value' => 'or(and(not(equal($tipo_registro_cuenta_c,"1")),not(equal("$subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"3"))))',
-            ),
-        ),
-    ),
-);
 
+    // $dependencies['Accounts']['SectorEconomico_required'] = array(
+    //         'hooks' => array("all"),
+    //         'trigger' => 'true',
+    //         'triggerFields' => array('tipo_registro_cuenta_c','sectoreconomico_c','subtipo_registro_cuenta_c'),
+    //         'onload' => true,
+    //         'actions' => array(
+    //                 array(
+    //                         'name' => 'SetRequired',
+    //                         'params' => array(
+    //                                 'target' => 'sectoreconomico_c',
+    //                                 'label' => 'sectoreconomico_c_label',
+    //                                 'value' => 'or(and(not(equal($tipo_registro_cuenta_c,"1")),not(equal("$subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"3"))))',
+    //                         ),
+    //                 ),
+    //         ),
+    // );
 
 $dependencies['Accounts']['TipoMotivo_required'] = array(
     'hooks' => array("all"),
@@ -923,22 +923,23 @@ $dependencies['Accounts']['Numero_Empleados_required'] = array(
         ),
     ),
 );
-$dependencies['Accounts']['MacroSector'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_cuenta_c', 'tct_macro_sector_ddw_c', 'subtipo_registro_cuenta_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired',
-            'params' => array(
-                'target' => 'tct_macro_sector_ddw_c',
-                'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
-                'value' => 'or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"7"),equal($subtipo_registro_cuenta_c,"8"),equal($subtipo_registro_cuenta_c,"9"),equal($tipo_registro_cuenta_c,"5"))',
-            ),
-        ),
-    ),
-);
+
+// $dependencies['Accounts']['MacroSector'] = array(
+//     'hooks' => array("all"),
+//     'trigger' => 'true',
+//     'triggerFields' => array('tipo_registro_cuenta_c','tct_macro_sector_ddw_c','subtipo_registro_cuenta_c'),
+//     'onload' => true,
+//     'actions' => array(
+//         array(
+//             'name' => 'SetRequired',
+//             'params' => array(
+//                 'target' => 'tct_macro_sector_ddw_c',
+//                 'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
+//                 'value' => 'or(equal($tipo_registro_cuenta_c,"3"),equal($subtipo_registro_cuenta_c,"7"),equal($subtipo_registro_cuenta_c,"8"),equal($subtipo_registro_cuenta_c,"9"),equal($tipo_registro_cuenta_c,"5"))',
+//             ),
+//         ),
+//     ),
+// );
 
 $dependencies['Accounts']['NoregistroCNBV_required'] = array(
     'hooks' => array("all"),
