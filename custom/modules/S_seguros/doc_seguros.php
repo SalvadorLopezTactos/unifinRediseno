@@ -17,6 +17,12 @@ class Drive_docs
         $bean_Account = BeanFactory::retrieveBean('Accounts', $bean_Resumen->id);
         global $app_list_strings, $sugar_config;
         //Condicion para crear el folder de la cuenta
+        if (empty($bean_Resumen->googledriveac_c)|| empty($bean->google_drive4_c) || empty($bean->google_drive5_c)){
+            putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
+            $client = new Google_Client();
+            $client->useApplicationDefaultCredentials();
+            $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
+        }
         if (empty($bean->google_drive2_c && !empty($bean->s_seguros_accountsaccounts_ida))) {
             $GLOBALS['log']->fatal('Valida que haya valor en tct02_resumen');
             if(empty($bean_Resumen->googledriveac_c)){
@@ -24,11 +30,6 @@ class Drive_docs
                 $nombreAC=$bean_Account->name;
                 $GLOBALS['log']->fatal($nombreAC);
 
-                //configurar variable de entorno
-                putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
-                $client = new Google_Client();
-                $client->useApplicationDefaultCredentials();
-                $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
@@ -57,10 +58,7 @@ class Drive_docs
                 $seguro = $tipo[$bean->tipo];
                 //Mandamos a crear un nuevo folder, dentro del folderAc
                 //configurar variable de entorno
-                putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
-                $client = new Google_Client();
-                $client->useApplicationDefaultCredentials();
-                $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
+                //putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
 
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
@@ -84,7 +82,7 @@ class Drive_docs
                 //Ahora creamos carpeta del año
                 $anio = date("Y");
                 //configurar variable de entorno
-                putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
+                //putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
@@ -107,7 +105,7 @@ class Drive_docs
             if (!empty($bean->google_drive3_c)) {
                 //Carpeta TECNICA
                 //configurar variable de entorno
-                putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
+                //putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
@@ -126,7 +124,7 @@ class Drive_docs
             if (!empty($bean->google_drive4_c)) {
                 //Carpeta Artículo 492
                 //configurar variable de entorno
-                putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
+                //putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
