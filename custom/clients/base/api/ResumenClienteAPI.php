@@ -199,10 +199,12 @@ class ResumenClienteAPI extends SugarApi
         );
         //Clasificacion Sectorial INEGI
         $arr_principal['inegi'] = array(
-            "inegi_actividad" => "",
-            "inegi_subsector" => "",
+            "inegi_rama" => "",
+            "inegi_subrama" => "",
             "inegi_sector" => "",
-            "inegi_macro" => ""
+            "inegi_subsector" => "",
+            "inegi_clase" => "",
+            "inegi_descripcion" => ""
         );
 
         //String operaciones
@@ -746,10 +748,12 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['unilease']['fecha_pago']= $beanResumen->cauto_fecha_pago;
 
                 //Recupera Clasificación Sectorial INEGI
-                $arr_principal['inegi']['inegi_actividad'] = $beanResumen->inegi_actividad_c;
-                $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
+                $arr_principal['inegi']['inegi_rama'] = $beanResumen->inegi_rama_c;
+                $arr_principal['inegi']['inegi_subrama'] = $beanResumen->inegi_subrama_c;
                 $arr_principal['inegi']['inegi_sector'] = $beanResumen->inegi_sector_c;
-                $arr_principal['inegi']['inegi_macro'] = $beanResumen->inegi_macro_c;
+                $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
+                $arr_principal['inegi']['inegi_clase'] = $beanResumen->inegi_clase_c;
+                $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
 
             }
         }

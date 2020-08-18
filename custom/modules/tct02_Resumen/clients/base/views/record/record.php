@@ -519,13 +519,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'inegi_actividad_c',
-                'label' => 'LBL_INEGI_ACTIVIDAD_C',
+                'name' => 'inegi_rama_c',
+                'label' => 'LBL_INEGI_RAMA_C',
               ),
               1 => 
               array (
-                'name' => 'inegi_subsector_c',
-                'label' => 'LBL_INEGI_SUBSECTOR_C',
+                'name' => 'inegi_subrama_c',
+                'label' => 'LBL_INEGI_SUBRAMA_C',
               ),
               2 => 
               array (
@@ -534,8 +534,18 @@ array (
               ),
               3 => 
               array (
-                'name' => 'inegi_macro_c',
-                'label' => 'LBL_INEGI_MACRO_C',
+                'name' => 'inegi_subsector_c',
+                'label' => 'LBL_INEGI_SUBSECTOR_C',
+              ),
+              4 => 
+              array (
+                'name' => 'inegi_clase_c',
+                'label' => 'LBL_INEGI_CLASE_C',
+              ),
+              5 => 
+              array (
+                'name' => 'inegi_descripcion_c',
+                'label' => 'LBL_INEGI_DESCRIPCION_C',
               ),
             ),
           ),
