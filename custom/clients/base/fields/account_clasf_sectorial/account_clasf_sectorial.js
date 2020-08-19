@@ -22,6 +22,7 @@
         this.model.addValidationTask('GuardaClasfSectorial', _.bind(this.SaveClasfSectorial, this));
         this.model.on('sync', this.loadData, this);
         clasf_sectorial.renderlista = 0;
+        clasf_sectorial.check_uni2 = 0;
 
         this.ActividadEconomica = {
             'combinaciones': '',
@@ -63,7 +64,7 @@
         clasf_sectorial.ActividadEconomica.sse.id = this.model.get("subsectoreconomico_c");
         clasf_sectorial.ActividadEconomica.se.id = this.model.get("sectoreconomico_c");
         clasf_sectorial.ActividadEconomica.ms.id = this.model.get("tct_macro_sector_ddw_c");
-        
+
         clasf_sectorial['prevActEconomica'] = app.utils.deepCopy(clasf_sectorial.ActividadEconomica);
         clasf_sectorial.render();
         $('.list_ae').trigger('change');
@@ -76,6 +77,8 @@
             app.api.call('GET', url, {}, {
                 success: function (data) {
                     clasf_sectorial.ResumenCliente = data;
+                    clasf_sectorial.check_uni2 = clasf_sectorial.ResumenCliente.inegi.inegi_acualiza_uni2;
+                    
                     _.extend(this, clasf_sectorial.ResumenCliente);
                     clasf_sectorial.render();
                 }
@@ -103,6 +106,15 @@
         $select.select2();
         //Muestra campos dependientes de Actividad Economica
         this.MuestraCamposAE();
+
+        if (clasf_sectorial.check_uni2 != 0) {
+            //Campos ReadOnly de Actividad Economica dependiendo del check de uni2
+            $(".campoAE").attr('style', 'pointer-events:none;');
+            $(".campoSSE").attr('style', 'pointer-events:none;');
+            $(".campoSE").attr('style', 'pointer-events:none;');
+            $(".campoMS").attr('style', 'pointer-events:none;');
+        }
+
         //Campos INEGI de Solo Lectura 
         $(".campoIR").attr('style', 'pointer-events:none;');
         $(".campoISR").attr('style', 'pointer-events:none;');
@@ -146,7 +158,7 @@
         dataCS = [];
         var idActEconomica = "";
 
-        if ($(evt.currentTarget).val() == '' || $(evt.currentTarget).val() == null || $(evt.currentTarget).val() == undefined){
+        if ($(evt.currentTarget).val() == '' || $(evt.currentTarget).val() == null || $(evt.currentTarget).val() == undefined) {
             idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
         } else {
             idActEconomica = $('.list_ae').select2('val');
@@ -224,7 +236,7 @@
         var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
         var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
 
-        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector!= null && idSubSector != undefined) {
+        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != null && idSubSector != undefined) {
 
             var arrsector = clasf_sectorial.combinaciones[idActEconomica][idSubSector];
             var sector_list = app.lang.getAppListStrings('sectoreconomico_list');
@@ -253,7 +265,7 @@
         var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
         var idSector = clasf_sectorial.ActividadEconomica.se.id;
 
-        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != undefined && 
+        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != undefined &&
             idSector != '' && idSector != null && idSector != undefined) {
 
             var arrmacro = clasf_sectorial.combinaciones[idActEconomica][idSubSector][idSector];
@@ -264,7 +276,7 @@
                 var elementom = arrmacro[i];
                 // console.log(elementom);
                 Object.keys(macro_list).forEach(function (key) {
-    
+
                     if (key == elementom) {
                         newMacro_list[key] = macro_list[key];
                     }

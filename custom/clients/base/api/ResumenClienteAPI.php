@@ -204,7 +204,8 @@ class ResumenClienteAPI extends SugarApi
             "inegi_sector" => "",
             "inegi_subsector" => "",
             "inegi_clase" => "",
-            "inegi_descripcion" => ""
+            "inegi_descripcion" => "",
+            "inegi_acualiza_uni2" => ""
         );
 
         //String operaciones
@@ -758,6 +759,7 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
                 $arr_principal['inegi']['inegi_clase'] = $beanResumen->inegi_clase_c;
                 $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
+                $arr_principal['inegi']['inegi_acualiza_uni2'] = $beanResumen->inegi_acualiza_uni2_c;
 
             }
         }
