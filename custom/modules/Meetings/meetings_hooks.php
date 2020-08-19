@@ -525,14 +525,16 @@ class Meetings_Hooks
 //      if ($beanUser->puestousuario_c!='27'){
 //        if(!strstr($bean->productos_c,$beanUser->tipodeproducto_c)) $bean->productos_c = $bean->productos_c.',^'.$beanUser->tipodeproducto_c.'^';
             if ($bean->parent_meeting_c) {
-                $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c);
+                    $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c);
 //                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
 //                if ($beanUserPadre->puestousuario_c!='27'){
-                    $Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";
+                //$Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";
+                $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$bean->id}'";
                     $Result=$db->query($Update);
-                    $saveproductos=array();
+
+                    /*$saveproductos=array();
                     $valorinicial=$beanparentmeeting->productos_c;
-                    //$GLOBALS['log']->fatal("Valor Inicial: '.$valorinicial.'");
+
                     if ($valorinicial==""){
                         $beanparentmeeting->productos_c=$bean->productos_c;
                         $valorinicial=$beanparentmeeting->productos_c;
@@ -542,10 +544,9 @@ class Meetings_Hooks
                     $saveproductos=explode(",", $beanparentmeeting->productos_c);
                     $valoresunicos=array_unique($saveproductos);
                     $valorupdate=implode(",",$valoresunicos);
-//                    $GLOBALS['log']->fatal("Setea valor con implode a productos_c de la cuenta Padre");
                     $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
                     $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$beanparentmeeting->id}'";
-                    $Result=$db->query($Update);
+                    $Result=$db->query($Update);*/
 //                }
             }
 //      }
