@@ -63,9 +63,10 @@
         clasf_sectorial.ActividadEconomica.sse.id = this.model.get("subsectoreconomico_c");
         clasf_sectorial.ActividadEconomica.se.id = this.model.get("sectoreconomico_c");
         clasf_sectorial.ActividadEconomica.ms.id = this.model.get("tct_macro_sector_ddw_c");
-
+        
         clasf_sectorial['prevActEconomica'] = app.utils.deepCopy(clasf_sectorial.ActividadEconomica);
         clasf_sectorial.render();
+        $('.list_ae').trigger('change');
 
         //Api ResumenCliente para los campos de INEGI
         var idCuenta = clasf_sectorial.model.id; //Id de la Cuenta
@@ -112,7 +113,7 @@
 
         //Carga los valores en los campos dependientes de Actividad Económica al momento de hacer el change
         $('.list_ae').change(function (evt) {
-            clasf_sectorial.ClasfSectorialApi();
+            clasf_sectorial.ClasfSectorialApi(evt);
             clasf_sectorial.MuestraCamposAE();
         });
         //carga los valores del sector dependientes del sub sector
@@ -139,12 +140,17 @@
         }
     },
 
-    ClasfSectorialApi: function () {
+    ClasfSectorialApi: function (evt) {
 
         clasf_sectorial = this;
         dataCS = [];
+        var idActEconomica = "";
 
-        var idActEconomica = $('.list_ae').select2('val');
+        if ($(evt.currentTarget).val() == '' || $(evt.currentTarget).val() == null || $(evt.currentTarget).val() == undefined){
+            idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+        } else {
+            idActEconomica = $('.list_ae').select2('val');
+        }
         // console.log("AE " + idActEconomica);
         if (idActEconomica != '' && idActEconomica != null && idActEconomica != undefined) {
 
@@ -215,8 +221,8 @@
 
     obtenerSubSector: function () {
         //Se obtiene el ID del Subsector para setear el Sector que le corresponde
-        var idActEconomica = $('.list_ae').select2('val');
-        var idSubSector = $('.list_sse').select2('val');
+        var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+        var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
 
         if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector!= null && idSubSector != undefined) {
 
@@ -243,9 +249,9 @@
 
     obtenerSector: function () {
         //Se obtiene el ID Sector para poder setear el Macro Sector que le corresponde
-        var idActEconomica = $('.list_ae').select2('val');
-        var idSubSector = $('.list_sse').select2('val');
-        var idSector = $('.list_se').select2('val');
+        var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+        var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
+        var idSector = clasf_sectorial.ActividadEconomica.se.id;
 
         if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != undefined && 
             idSector != '' && idSector != null && idSector != undefined) {
