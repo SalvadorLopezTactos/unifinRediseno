@@ -561,23 +561,33 @@
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
         if (productos.includes("1") && cont_uni_p.action == "edit") { //PRODUCTO LEASING
             $('[data-field="chk_l_nv"]').attr('style', 'pointer-events:block;');
-            $('[data-field="chk_ls_multi"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_ls_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("4") && cont_uni_p.action == "edit") {  //PRODUCTO FACTORAJE
             $('[data-field="chk_f_nv"]').attr('style', 'pointer-events:block;');
-            $('[data-field="chk_fac_multi"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_fac_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("3") && cont_uni_p.action == "edit") { //PRODUCTO CREDITO AUTOMOTRIZ
             $('[data-field="chk_ca_nv"]').attr('style', 'pointer-events:block;');
-            $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1) {
+                $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
             $('[data-field="chk_fl_nv"]').attr('style', 'pointer-events:block;');
-            $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("8") && cont_uni_p.action == "edit") { //PRODUCTO UNICLICK
             $('[data-field="chk_u_nv"]').attr('style', 'pointer-events:block;');
-            $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
     },
 
@@ -710,23 +720,23 @@
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
             // Asigna multilinea_c value
-            if ( this.tipoProducto.leasing != null ) {
+            if (this.tipoProducto.leasing != null) {
                 this.tipoProducto.leasing.multilinea_c = $('.chk_ls_multi')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
 
             }
             if (this.tipoProducto.factoring != null) {
-            //    this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring
+                //    this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring
                 this.tipoProducto.factoring.multilinea_c = $('.chk_fac_multi')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
             if (this.tipoProducto.credito_auto != null) {
-            //    this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto
+                //    this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto
                 this.tipoProducto.credito_auto.multilinea_c = $('.chk_ca_multi')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
-            if ( this.tipoProducto.fleet != null) {
-            //    this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet
+            if (this.tipoProducto.fleet != null) {
+                //    this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet
                 this.tipoProducto.fleet.multilinea_c = $('.chk_fe_multi')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
