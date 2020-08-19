@@ -300,8 +300,9 @@ class Seguros_SF
       //Obtiene Token
       global $sugar_config;
       $loginurl = $sugar_config['seguros_sf'].'public/token';
-      $params = "user=generica"
-        . "&password=generica";
+      $usr = $sugar_config['seguros_usr'];
+      $psw = $sugar_config['seguros_psw'];
+      $params = "user=".$usr."&password=".$psw;
       $curl = curl_init($loginurl);
       curl_setopt($curl, CURLOPT_HEADER, false);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
