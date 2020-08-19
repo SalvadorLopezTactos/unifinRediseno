@@ -29,7 +29,6 @@ class Drive_docs
                 $GLOBALS['log']->fatal('No existe valor en resumen, crea folder Cliente');
                 $nombreAC=$bean_Account->name;
                 $GLOBALS['log']->fatal($nombreAC);
-
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
@@ -59,7 +58,6 @@ class Drive_docs
                 //Mandamos a crear un nuevo folder, dentro del folderAc
                 //configurar variable de entorno
                 //putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
-
                 //Instanciar el servicio
                 $service = new Google_Service_Drive($client);
                 //Instacia de archivo
@@ -67,7 +65,6 @@ class Drive_docs
                 //Creacion de la carpeta y atributos
                 $file->setName($seguro);
                 //ID del carpeta en Drive donde se creará el nuevo folder
-
                 $file->setParents(array($folderAc));
                 $file->setMimeType('application/vnd.google-apps.folder');
                 $GLOBALS['log']->fatal('Crea Carpeta con oportunidad de seguro :' . $seguro);
@@ -149,17 +146,14 @@ class Drive_docs
         $producto= "10"; //Seguros
         $etapa=$bean->etapa;
         $cliente = $bean->s_seguros_accountsaccounts_ida;
-
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['etapa']!=$etapa && $cliente) {
-
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
             $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
             if($etapa=="1"){
                 $GLOBALS['log']->fatal('Actualiza a Prospecto Interesado (cuenta)');
                 Drive_docs::actualizaTipoCuentaProd('2','7',$cliente,$producto);
             }
-
             //Actualiza cuando la solicitud es Autorizada (N) Cliente Nuevo: 3, 13
             if ($bean->etapa=="9") { //Etapa solicitud 9 GANADA
                 $GLOBALS['log']->fatal('Cliente Nuevo');
@@ -190,11 +184,13 @@ class Drive_docs
                 //Itera productos recuperados
                 foreach ($relateProducts as $product) {
                     if ($tipoProducto == $product->tipo_producto) {
-                        if ($product->tipo_cuenta != "3" && $tipo == 2) {
+                        if ($product->tipo_cuenta != "3" && $tipo == 2 && $tipo<$beanAccount->fetched_row['tipo_registro_cuenta_c']) {
                             //Actualiza tipo y subtipo de producto
                             $GLOBALS['log']->fatal('Actualiza tipo y subtipo de producto en CUENTA a '.$tipo .',' .$subtipo);
+                            $GLOBALS['log']->fatal('Cuenta '.  $beanAccount->tipo_registro_cuenta_c);
+                            $GLOBALS['log']->fatal('Cuenta '.  $beanAccount->subtipo_registro_cuenta_c);
                             $beanAccount->tipo_registro_cuenta_c=$tipo;
-                            $beanAccount->subtipo_registro_cuenta_c=$tipoSubtipo;
+                            $beanAccount->subtipo_registro_cuenta_c=$subtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -203,7 +199,7 @@ class Drive_docs
                         if ($product->tipo_cuenta != "3" && $tipo == 3) {
                             //Actualiza tipo y subtipo de producto
                             $beanAccount->tipo_registro_cuenta_c=$tipo;
-                            $beanAccount->subtipo_registro_cuenta_c=$tipoSubtipo;
+                            $beanAccount->subtipo_registro_cuenta_c=$subtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -211,7 +207,7 @@ class Drive_docs
                         }
                     }
                 }
-                //$beanAccount->save();
+                $beanAccount->save();
             }
         }
     }
