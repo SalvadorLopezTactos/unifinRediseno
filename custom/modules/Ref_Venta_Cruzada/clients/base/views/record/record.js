@@ -18,6 +18,7 @@
 		self.noEditFields.push('numero_anexos');
 		self.noEditFields.push('primer_fecha_anexo');
 		self.noEditFields.push('ultima_fecha_anexo');
+		self.noEditFields.push('usuario_rechazo');
 		
 		this.model.on("change:cancelado", _.bind(this.set_usuariorechazado, this));
 		this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
@@ -33,6 +34,9 @@
         this._super("_render");
         $('span[data-fieldname="cancelado"]').find('input').attr('disabled','');
         $('[data-name="cancelado"]').attr('style',"pointer-events:none");
+		
+		$('span[data-fieldname="usuario_rechazo"]').find('input').attr('disabled','');
+        $('[data-name="usuario_rechazo"]').attr('style',"pointer-events:none");
     },
 
     hideShowCancelar:function(){
@@ -68,7 +72,8 @@
     },
 	set_usuariorechazado: function () {
 		if(this.model.get('cancelado') == '1' ){
-			this.model.set('usuario_rechazo',App.user.attributes.full_name);
+			this.model.set('user_id2_c', App.user.attributes.id);
+			this.model.set('usuario_rechazo', App.user.attributes.full_name);
 		}else{
 			this.model.set('usuario_rechazo', '');
 		}

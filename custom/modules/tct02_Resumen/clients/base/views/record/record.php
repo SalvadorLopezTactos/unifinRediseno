@@ -508,6 +508,49 @@ array (
           ),
           10 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL9',
+            'label' => 'LBL_RECORDVIEW_PANEL9',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'inegi_rama_c',
+                'label' => 'LBL_INEGI_RAMA_C',
+              ),
+              1 => 
+              array (
+                'name' => 'inegi_subrama_c',
+                'label' => 'LBL_INEGI_SUBRAMA_C',
+              ),
+              2 => 
+              array (
+                'name' => 'inegi_sector_c',
+                'label' => 'LBL_INEGI_SECTOR_C',
+              ),
+              3 => 
+              array (
+                'name' => 'inegi_subsector_c',
+                'label' => 'LBL_INEGI_SUBSECTOR_C',
+              ),
+              4 => 
+              array (
+                'name' => 'inegi_clase_c',
+                'label' => 'LBL_INEGI_CLASE_C',
+              ),
+              5 => 
+              array (
+                'name' => 'inegi_descripcion_c',
+                'label' => 'LBL_INEGI_DESCRIPCION_C',
+              ),
+            ),
+          ),
+          11 => 
+          array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,

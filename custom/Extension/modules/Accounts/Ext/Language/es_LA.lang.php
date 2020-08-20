@@ -336,3 +336,4 @@ $mod_strings['LBL_TOTAL_EMPLEADOS_C'] = 'Número Exacto Empleados';
 $mod_strings['LBL_VENTAS_ANUALES_UNI2_C'] = 'Ventas Anuales Uni2';
 $mod_strings['LBL_PROMOTORRM_C'] = 'Asesor RM';
 $mod_strings['LBL_MULTILINEA_C'] = 'Multilínea';
+$mod_strings['LBL_RECORDVIEW_PANEL21'] = 'Clasificación Sectorial';

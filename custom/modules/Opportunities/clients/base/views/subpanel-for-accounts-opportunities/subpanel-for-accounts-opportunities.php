@@ -1,5 +1,5 @@
 <?php
-// created: 2019-11-26 15:16:55
+// created: 2020-08-12 13:18:30
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -95,6 +95,16 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'target_module' => 'Employees',
           'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
           'enabled' => true,
+          'default' => true,
+        ),
+        7 => 
+        array (
+          'name' => 'asesor_operacion_c',
+          'label' => 'LBL_ASESOR_OPERACION_C',
+          'enabled' => true,
+          'id' => 'USER_ID_C',
+          'link' => true,
+          'sortable' => false,
           'default' => true,
         ),
       ),

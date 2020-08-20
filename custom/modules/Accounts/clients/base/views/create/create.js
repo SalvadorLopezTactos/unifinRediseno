@@ -310,6 +310,12 @@
         if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
             $('div[data-name=multilinea_c]').css("pointer-events", "none");
         }
+        //Oculta campos de Macro Sector
+        this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
+        this.$("div[data-name='sectoreconomico_c']").hide();
+        this.$("div[data-name='subsectoreconomico_c']").hide();
+        this.$("div[data-name='actividadeconomica_c']").hide();
+
     },
 
     initialize: function (options) {
@@ -1646,14 +1652,12 @@
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
-            if (this.model.get('tct_macro_sector_ddw_c') == '' || this.model.get('tct_macro_sector_ddw_c') == null) {
-                /*app.alert.show("Macro sector requerido", {
-                 level: "error",
-                 title: "El campo macro sector es requerido",
-                 autoClose: false
-                 });*/
-                errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                errors['tct_macro_sector_ddw_c'].required = true;
+            //Validacion de Actividad Economica - antes macrosector
+            if ($('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
+                
+                $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                errors['actividadeconomica_c'].required = true;
             }
             if (this.model.get('rfc_c') == '' || this.model.get('rfc_c') == null) {
                 /*app.alert.show("RFC requerido", {
@@ -2011,9 +2015,12 @@
                     errors['estado_nacimiento_c'].required = true;
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
-                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
-                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                        errors['tct_macro_sector_ddw_c'].required = true;
+                    //Requerido Actividad Economica - antes macro sector
+                    if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                        
+                        $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                        errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                        errors['actividadeconomica_c'].required = true;
                     }
                     if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                         errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
@@ -2037,10 +2044,12 @@
                         errors['genero_c'] = errors['genero_c'] || {};
                         errors['genero_c'].required = true;
                     }
-
-                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
-                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                        errors['tct_macro_sector_ddw_c'].required = true;
+                    //Requerido Actividad Economica - antes macro sector
+                    if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                        
+                        $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                        errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+                        errors['actividadeconomica_c'].required = true;
                     }
                 }
             }
@@ -2093,7 +2102,10 @@
                 errors['razonsocial_c'] = errors['razonsocial_c'] || {};
                 errors['razonsocial_c'].required = true;
             }
-            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+            //Requerido Actividad Economica custom
+            if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                
+                $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
             }
@@ -2610,21 +2622,29 @@
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
-                if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null || this.model.get('tct_macro_sector_ddw_c') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
-                }
-                if (this.model.get('sectoreconomico_c') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    $('[name=sectoreconomico_c]').css('border-color', 'red');
-                }
-                if (this.model.get('subsectoreconomico_c') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    $('[name=subsectoreconomico_c]').css('border-color', 'red');
-                }
-                if (this.model.get('actividadeconomica_c') == "") {
+                //Validacion Actividad Economica custom
+                if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                    $('[name=actividadeconomica_c]').css('border-color', 'red');
+                    $('.list_ae').find('.select2-choice').css('border-color', 'red');
+                    // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
+                }
+                //Requerido Subsector custom
+                if ($('.list_sse').select2('val') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                    $('.list_sse').find('.select2-choice').css('border-color', 'red');
+                    // $('[name=subsectoreconomico_c]').css('border-color', 'red');
+                }
+                //Requerido Sector custom
+                if ($('.list_se').select2('val') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                    $('.list_se').find('.select2-choice').css('border-color', 'red');
+                    // $('[name=sectoreconomico_c]').css('border-color', 'red');
+                }
+                //Requerido macro sector custom
+                if ($('.list_ms').select2('val') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                    $('.list_ms').find('.select2-choice').css('border-color', 'red');
+                    // $('[name=actividadeconomica_c]').css('border-color', 'red');
                 }
                 var direcciones = 0;
                 var tipodireccion = this.oDirecciones.direccion;
