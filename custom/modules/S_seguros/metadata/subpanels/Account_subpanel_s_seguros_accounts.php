@@ -1,5 +1,5 @@
 <?php
-// created: 2020-07-09 10:23:31
+// created: 2020-08-20 10:38:26
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -18,21 +18,21 @@ $subpanel_layout['list_fields'] = array (
   'prima_obj_c' => 
   array (
     'type' => 'decimal',
+    'default' => true,
     'vname' => 'LBL_PRIMA_OBJ_C',
     'width' => 10,
-    'default' => true,
   ),
-  'prima_neta_c' => 
+  'prima_neta_ganada_c' => 
   array (
     'type' => 'decimal',
-    'vname' => 'LBL_PRIMA_NETA_C',
+    'vname' => 'LBL_PRIMA_NETA_GANADA',
     'width' => 10,
     'default' => true,
   ),
-  'fecha_ini' => 
+  'fecha_ini_c' => 
   array (
     'type' => 'date',
-    'vname' => 'LBL_FECHA_INI',
+    'vname' => 'LBL_FECHA_INI_C',
     'width' => 10,
     'default' => true,
   ),
