@@ -1099,9 +1099,9 @@
 
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
-        if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
-            $('div[data-name=multilinea_c]').css("pointer-events", "none");
-        }
+        // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+        //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        // }
     },
 
     editClicked: function () {
@@ -5285,6 +5285,8 @@
                     var fecha2 = moment(fechaAsignacion);
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
+                    Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
+
                     switch (tipoProducto) {
                         case "1": //Leasing
                             var dias = fecha1.diff(fecha2, 'days');

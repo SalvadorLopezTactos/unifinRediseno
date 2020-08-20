@@ -18,11 +18,17 @@
                 <div class="mpad">{{ResumenProductos.leasing.dias}} días
                     <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
                 </div>
+                <div class="ls_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_ls_multi"
+                           {{#if ResumenProductos.leasing.multilinea_c}}checked{{/if}}
+                           data-field="chk_ls_multi"/>
+                </div>
                 {{#if ResumenProductos.leasing.visible_noviable}}
                     <div class="l_nv mpad">
                         <label class="record-label mpad" style="margin-left:0px">No Viable Leasing</label>
                         <input type="checkbox" class="chk_l_nv" {{#if ResumenProductos.leasing.no_viable}}checked{{/if}}
-                            data-field="chk_l_nv" />
+                               data-field="chk_l_nv"/>
                     </div>
                     <div class="l_nv_razon">
                         <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
@@ -33,7 +39,8 @@
                     <div class="l_nv_razon_fp">
                         <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
                         <label class="normal row-fluid select2  list_l_nv_razon_fp" data-field="list_l_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.leasing.no_viable_razon_fp}}
+                            {{getUnifinListValue 'fuera_de_perfil_ddw_list'
+                                                 ResumenProductos.leasing.no_viable_razon_fp}}
                         </label>
                     </div>
                     <div class="l_nv_quien">
@@ -51,7 +58,8 @@
                     <div class="l_nv_producto">
                         <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
                         <label class="normal row-fluid select2 list_l_nv_producto" data-name="list_l_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.leasing.no_viable_producto}}
+                            {{getUnifinListValue 'no_producto_requiere_list'
+                                                 ResumenProductos.leasing.no_viable_producto}}
                         </label>
                     </div>
                     <div class="l_nv_razon_cf">
@@ -70,7 +78,8 @@
                         <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra
                             interesado</label>
                         <label class="normal row-fluid select2 list_l_nv_razon_ni" data-name="list_l_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.leasing.no_viable_razon_ni}}
+                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list'
+                                                 ResumenProductos.leasing.no_viable_razon_ni}}
                         </label>
                     </div>
                 {{/if}}
@@ -84,11 +93,20 @@
                 <div class="mpad">{{ResumenProductos.factoring.dias}} días
                     <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
                 </div>
+
+                <div class="fac_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_fac_multi"
+                           {{#if ResumenProductos.factoring.multilinea_c}}checked{{/if}}
+                           data-field="chk_fac_multi"/>
+                </div>
+
                 {{#if ResumenProductos.factoring.visible_noviable}}
                     <div class="f_nv mpad">
                         <label class="record-label mpad" style="margin-left:0px">No Viable Factoraje</label>
-                        <input type="checkbox" class="chk_f_nv" {{#if ResumenProductos.factoring.no_viable}}checked{{/if}}
-                            data-field="chk_f_nv" />
+                        <input type="checkbox" class="chk_f_nv"
+                               {{#if ResumenProductos.factoring.no_viable}}checked{{/if}}
+                               data-field="chk_f_nv"/>
                     </div>
                     <div class="f_nv_razon">
                         <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
@@ -99,7 +117,8 @@
                     <div class="f_nv_razon_fp">
                         <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
                         <label class="normal row-fluid select2  list_f_nv_razon_fp" data-field="list_f_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.factoring.no_viable_razon_fp}}
+                            {{getUnifinListValue 'fuera_de_perfil_ddw_list'
+                                                 ResumenProductos.factoring.no_viable_razon_fp}}
                         </label>
                     </div>
                     <div class="f_nv_quien">
@@ -117,7 +136,8 @@
                     <div class="f_nv_producto">
                         <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
                         <label class="normal row-fluid select2 list_f_nv_producto" data-name="list_f_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.factoring.no_viable_producto}}
+                            {{getUnifinListValue 'no_producto_requiere_list'
+                                                 ResumenProductos.factoring.no_viable_producto}}
                         </label>
                     </div>
                     <div class="f_nv_razon_cf">
@@ -136,7 +156,8 @@
                         <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra
                             interesado</label>
                         <label class="normal row-fluid select2 list_f_nv_razon_ni" data-name="list_f_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.factoring.no_viable_razon_ni}}
+                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list'
+                                                 ResumenProductos.factoring.no_viable_razon_ni}}
                         </label>
                     </div>
                 {{/if}}
@@ -150,11 +171,18 @@
                 <div class="mpad">{{ResumenProductos.credito_auto.dias}} días
                     <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
                 </div>
+                <div class="ca_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_ca_multi"
+                           {{#if ResumenProductos.credito_auto.multilinea_c}}checked{{/if}}
+                           data-field="chk_ca_multi"/>
+                </div>
                 {{#if ResumenProductos.credito_auto.visible_noviable}}
                     <div class="ca_nv mpad">
                         <label class="record-label mpad" style="margin-left:0px">No Viable Crédito Automotriz</label>
-                        <input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}} 
-                            data-field="chk_ca_nv" />
+                        <input type="checkbox" class="chk_ca_nv"
+                               {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}}
+                               data-field="chk_ca_nv"/>
                     </div>
                     <div class="ca_nv_razon">
                         <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
@@ -165,7 +193,8 @@
                     <div class="ca_nv_razon_fp">
                         <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
                         <label class="normal row-fluid select2  list_ca_nv_razon_fp" data-field="list_ca_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.credito_auto.no_viable_razon_fp}}
+                            {{getUnifinListValue 'fuera_de_perfil_ddw_list'
+                                                 ResumenProductos.credito_auto.no_viable_razon_fp}}
                         </label>
                     </div>
                     <div class="ca_nv_quien">
@@ -183,7 +212,8 @@
                     <div class="ca_nv_producto">
                         <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
                         <label class="normal row-fluid select2 list_ca_nv_producto" data-name="list_ca_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.credito_auto.no_viable_producto}}
+                            {{getUnifinListValue 'no_producto_requiere_list'
+                                                 ResumenProductos.credito_auto.no_viable_producto}}
                         </label>
                     </div>
                     <div class="ca_nv_razon_cf">
@@ -202,7 +232,8 @@
                         <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra
                             interesado</label>
                         <label class="normal row-fluid select2 list_ca_nv_razon_ni" data-name="list_ca_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.credito_auto.no_viable_razon_ni}}
+                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list'
+                                                 ResumenProductos.credito_auto.no_viable_razon_ni}}
                         </label>
                     </div>
                 {{/if}}
@@ -218,11 +249,18 @@
                 <div class="mpad">{{ResumenProductos.fleet.dias}} días
                     <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
                 </div>
+
+                <div class="fe_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_fe_multi" {{#if ResumenProductos.fleet.multilinea_c}}checked{{/if}}
+                           data-field="chk_fe_multi"/>
+                </div>
+
                 {{#if ResumenProductos.fleet.visible_noviable}}
                     <div class="fl_nv mpad">
                         <label class="record-label mpad" style="margin-left:0px">No Viable Fleet</label>
                         <input type="checkbox" class="chk_fl_nv" {{#if ResumenProductos.fleet.no_viable}}checked{{/if}}
-                            data-field="chk_fl_nv" />
+                               data-field="chk_fl_nv"/>
                     </div>
                     <div class="fl_nv_razon">
                         <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
@@ -284,11 +322,20 @@
                 <div class="mpad">{{ResumenProductos.uniclick.dias}} días
                     <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
                 </div>
+
+                <div class="uniclick_multi mpad">
+                    <label class="record-label mpad" style="margin-left:0px">Multilinea</label>
+                    <input type="checkbox" class="chk_uniclick_multi"
+                           {{#if ResumenProductos.uniclick.multilinea_c}}checked{{/if}}
+                           data-field="chk_uniclick_multi"/>
+                </div>
+
                 {{#if ResumenProductos.uniclick.visible_noviable}}
                     <div class="u_nv mpad">
                         <label class="record-label mpad" style="margin-left:0px">No Viable Uniclick</label>
-                        <input type="checkbox" class="chk_u_nv" {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}}
-                            data-field="chk_u_nv" />
+                        <input type="checkbox" class="chk_u_nv"
+                               {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}}
+                               data-field="chk_u_nv"/>
                     </div>
                     <div class="u_nv_razon">
                         <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
@@ -299,7 +346,8 @@
                     <div class="u_nv_razon_fp">
                         <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
                         <label class="normal row-fluid select2  list_u_nv_razon_fp" data-field="list_u_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.uniclick.no_viable_razon_fp}}
+                            {{getUnifinListValue 'fuera_de_perfil_ddw_list'
+                                                 ResumenProductos.uniclick.no_viable_razon_fp}}
                         </label>
                     </div>
                     <div class="u_nv_quien">
@@ -317,7 +365,8 @@
                     <div class="u_nv_producto">
                         <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
                         <label class="normal row-fluid select2 list_u_nv_producto" data-name="list_u_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.uniclick.no_viable_producto}}
+                            {{getUnifinListValue 'no_producto_requiere_list'
+                                                 ResumenProductos.uniclick.no_viable_producto}}
                         </label>
                     </div>
                     <div class="u_nv_razon_cf">
@@ -336,7 +385,8 @@
                         <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra
                             interesado</label>
                         <label class="normal row-fluid select2 list_u_nv_razon_ni" data-name="list_u_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.uniclick.no_viable_razon_ni}}
+                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list'
+                                                 ResumenProductos.uniclick.no_viable_razon_ni}}
                         </label>
                     </div>
                 {{/if}}

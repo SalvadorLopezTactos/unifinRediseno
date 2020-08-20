@@ -12,19 +12,16 @@ class Drive_docs
 {
     function Load_docs($bean = null, $event = null, $args = null)
     {
-        $GLOBALS['log']->fatal('Inicia proceso de creación de folder-Cuenta con GoogleDrive');
-        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida);
-        $bean_Account = BeanFactory::retrieveBean('Accounts', $bean_Resumen->id);
+        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida,array('disable_row_level_security' => true));
+        $bean_Account = BeanFactory::retrieveBean('Accounts', $bean_Resumen->id,array('disable_row_level_security' => true));
         global $app_list_strings, $sugar_config;
         //Condicion para crear el folder de la cuenta
-        if (empty($bean_Resumen->googledriveac_c)|| empty($bean->google_drive4_c) || empty($bean->google_drive5_c)){
+        if ((empty($bean_Resumen->googledriveac_c) || empty($bean->google_drive4_c) || empty($bean->google_drive5_c)) && !empty($bean->s_seguros_accountsaccounts_ida) ){
+            $GLOBALS['log']->fatal('Inicia proceso de creación de folder-Cuenta con GoogleDrive');
             putenv("GOOGLE_APPLICATION_CREDENTIALS=./custom/aux_libraries/Inter_drive_keys/Credenciales.json");
             $client = new Google_Client();
             $client->useApplicationDefaultCredentials();
             $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
-        }
-        if (empty($bean->google_drive2_c && !empty($bean->s_seguros_accountsaccounts_ida))) {
-            $GLOBALS['log']->fatal('Valida que haya valor en tct02_resumen');
             if(empty($bean_Resumen->googledriveac_c)){
                 $GLOBALS['log']->fatal('No existe valor en resumen, crea folder Cliente');
                 $nombreAC=$bean_Account->name;
@@ -40,13 +37,19 @@ class Drive_docs
                 $file->setMimeType('application/vnd.google-apps.folder');
                 $GLOBALS['log']->fatal('Crea Carpeta con nombre ' . $nombreAC);
                 //Crea archivo (directorio)
-                $result = $service->files->create($file);
-                $GLOBALS['log']->fatal("ID del folder CLIENTE es " .$result->id);
-                //$GLOBALS['log']->fatal(print_r($result,true));
+                $result="";
+                try {
+                  $result = $service->files->create($file);
+                  $GLOBALS['log']->fatal("ID del folder CLIENTE es " .$result->id);
+                } catch (\Exception $e) {
+                  $GLOBALS['log']->fatal("Error al crear directorio: " .$e->getMessage());
+                }
                 //Asignar valor del campo drive al registro
-                $bean->google_drive_c= "https://drive.google.com/drive/u/0/folders/" . $result->id;
-                $bean_Resumen->googledriveac_c= $result->id;
-                $bean_Resumen->save();
+                if (!empty($result)) {
+                  $bean->google_drive_c= "https://drive.google.com/drive/u/0/folders/" . $result->id;
+                  $bean_Resumen->googledriveac_c= $result->id;
+                  $bean_Resumen->save();
+                }
             }
             //Condición para crear subdirectorio con el tipo de seguro
             if(!empty($bean_Resumen->googledriveac_c)) {
@@ -69,11 +72,17 @@ class Drive_docs
                 $file->setMimeType('application/vnd.google-apps.folder');
                 $GLOBALS['log']->fatal('Crea Carpeta con oportunidad de seguro :' . $seguro);
                 //Crea archivo (directorio)
-                $result = $service->files->create($file);
-                $GLOBALS['log']->fatal("ID del folder de Op de Seguro es " . $result->id);
-                //$GLOBALS['log']->fatal(print_r($result, true));
-                //Asignar valor del campo SEGURO del drive al registro
-                $bean->google_drive2_c = $result->id;
+                $result="";
+                try {
+                  $result = $service->files->create($file);
+                  $GLOBALS['log']->fatal("ID del folder de Op de Seguro es " . $result->id);
+                } catch (\Exception $e) {
+                  $GLOBALS['log']->fatal("Error al crear directorio: " .$e->getMessage());
+                }
+                //Asignar valor del campo drive al registro
+                if (!empty($result)) {
+                  $bean->google_drive2_c = $result->id;
+                }
             }
             if (!empty($bean->google_drive2_c)) {
                 //Ahora creamos carpeta del año
@@ -92,11 +101,17 @@ class Drive_docs
                 $file->setMimeType('application/vnd.google-apps.folder');
                 $GLOBALS['log']->fatal('Crea Carpeta con anio :' . $anio);
                 //Crea archivo (directorio)
-                $result = $service->files->create($file);
-                $GLOBALS['log']->fatal("ID del folder ANIO es " . $result->id);
-                //$GLOBALS['log']->fatal(print_r($result, true));
-                //Asignar valor del campo ANIO del drive al registro
-                $bean->google_drive3_c = $result->id;
+                $result="";
+                try {
+                  $result = $service->files->create($file);
+                  $GLOBALS['log']->fatal("ID del folder ANIO es " . $result->id);
+                } catch (\Exception $e) {
+                  $GLOBALS['log']->fatal("Error al crear directorio: " .$e->getMessage());
+                }
+                //Asignar valor del campo drive al registro
+                if (!empty($result)) {
+                  $bean->google_drive3_c = $result->id;
+                }
             }
             //Creación de dos subcarpetas dentro de la carpeta ANIO
             if (!empty($bean->google_drive3_c)) {
@@ -113,10 +128,17 @@ class Drive_docs
                 $file->setParents(array($bean->google_drive3_c));
                 $file->setMimeType('application/vnd.google-apps.folder');
                 //Crea archivo (directorio)
-                $result = $service->files->create($file);
-                $GLOBALS['log']->fatal("ID del folder TECNICA es " . $result->id);
-                //Asignar valor del campo ANIO del drive al registro
-                $bean->google_drive4_c = $result->id;
+                $result="";
+                try {
+                  $result = $service->files->create($file);
+                  $GLOBALS['log']->fatal("ID del folder TECNICA es " . $result->id);
+                } catch (\Exception $e) {
+                  $GLOBALS['log']->fatal("Error al crear directorio: " .$e->getMessage());
+                }
+                //Asignar valor del campo drive al registro
+                if (!empty($result)) {
+                  $bean->google_drive4_c = $result->id;
+                }
             }
             if (!empty($bean->google_drive4_c)) {
                 //Carpeta Artículo 492
@@ -132,13 +154,20 @@ class Drive_docs
                 $file->setParents(array($bean->google_drive3_c));
                 $file->setMimeType('application/vnd.google-apps.folder');
                 //Crea archivo (directorio)
-                $result = $service->files->create($file);
-                $GLOBALS['log']->fatal("ID del folder Artículo 492 es " . $result->id);
-                //Asignar valor del campo Articulo 492 del drive al registro
-                $bean->google_drive5_c = $result->id;
+                $result="";
+                try {
+                  $result = $service->files->create($file);
+                  $GLOBALS['log']->fatal("ID del folder Artículo 492 es " . $result->id);
+                } catch (\Exception $e) {
+                  $GLOBALS['log']->fatal("Error al crear directorio: " .$e->getMessage());
+                }
+                //Asignar valor del campo drive al registro
+                if (!empty($result)) {
+                  $bean->google_drive5_c = $result->id;
+                }
             }
+            $GLOBALS['log']->fatal('Finaliza proceso de integración con GoogleDrive');
         }
-        $GLOBALS['log']->fatal('Finaliza proceso de integración con GoogleDrive');
     }
 
     function actualizatipoprod($bean = null, $event = null, $args = null){
@@ -149,7 +178,7 @@ class Drive_docs
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['etapa']!=$etapa && $cliente) {
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
-            $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: '.$producto);
+            $GLOBALS['log']->fatal('Seguros: Actualiza tipo de Cuenta para producto: '.$producto);
             if($etapa=="1"){
                 $GLOBALS['log']->fatal('Actualiza a Prospecto Interesado (cuenta)');
                 Drive_docs::actualizaTipoCuentaProd('2','7',$cliente,$producto);
@@ -173,7 +202,7 @@ class Drive_docs
         //Valuda cuenta Asociada y producto
         if($idCuenta && $tipoProducto){
             //Recupera cuenta
-            $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
+            $beanAccount = BeanFactory::getBean('Accounts', $idCuenta,array('disable_row_level_security' => true));
             //Recupera productos y actualiza Tipo y subtipo
             if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
                 $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
@@ -184,13 +213,8 @@ class Drive_docs
                 //Itera productos recuperados
                 foreach ($relateProducts as $product) {
                     if ($tipoProducto == $product->tipo_producto) {
-                        if ($product->tipo_cuenta != "3" && $tipo == 2 && $tipo<$beanAccount->fetched_row['tipo_registro_cuenta_c']) {
+                        if ($product->tipo_cuenta != "3" && $tipo == 2) {
                             //Actualiza tipo y subtipo de producto
-                            $GLOBALS['log']->fatal('Actualiza tipo y subtipo de producto en CUENTA a '.$tipo .',' .$subtipo);
-                            $GLOBALS['log']->fatal('Cuenta '.  $beanAccount->tipo_registro_cuenta_c);
-                            $GLOBALS['log']->fatal('Cuenta '.  $beanAccount->subtipo_registro_cuenta_c);
-                            $beanAccount->tipo_registro_cuenta_c=$tipo;
-                            $beanAccount->subtipo_registro_cuenta_c=$subtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -198,8 +222,6 @@ class Drive_docs
                         }
                         if ($product->tipo_cuenta != "3" && $tipo == 3) {
                             //Actualiza tipo y subtipo de producto
-                            $beanAccount->tipo_registro_cuenta_c=$tipo;
-                            $beanAccount->subtipo_registro_cuenta_c=$subtipo;
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
                             $product->tipo_subtipo_cuenta = $tipoSubtipo;
@@ -207,7 +229,25 @@ class Drive_docs
                         }
                     }
                 }
-                $beanAccount->save();
+                //$beanAccount->save();
+                //Valita Tipo de Cuenta
+                if ($tipo==2 && $beanAccount->tipo_registro_cuenta_c!=3 && $beanAccount->subtipo_registro_cuenta_c!=8 && $beanAccount->subtipo_registro_cuenta_c!=9) {
+                  //Actualiza a Prospecto Interesado
+                  global $db;
+                  $update = "update accounts_cstm set
+                    tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='7', tct_tipo_subtipo_txf_c='PROSPECTO INTERESADO'
+                    where id_c = '{$beanAccount->id}'";
+                  $updateExecute = $db->query($update);
+                }
+                if ($tipo==3 && $beanAccount->tipo_registro_cuenta_c!=3) {
+                  //Actualiza a Cliente Nuevo
+                  global $db;
+                  $update = "update accounts_cstm set
+                    tipo_registro_cuenta_c='3', subtipo_registro_cuenta_c ='13', tct_tipo_subtipo_txf_c='CLIENTE NUEVO'
+                    where id_c = '{$beanAccount->id}'";
+                  $updateExecute = $db->query($update);
+
+                }
             }
         }
     }
