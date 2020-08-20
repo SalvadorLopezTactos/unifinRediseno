@@ -1,5 +1,5 @@
 <?php
-// created: 2020-07-09 10:23:31
+// created: 2020-08-20 10:38:27
 $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts'] = array (
   'panels' => 
   array (
@@ -30,22 +30,20 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
           'label' => 'LBL_PRIMA_OBJ_C',
           'enabled' => true,
           'type' => 'currency',
-          'currency_format' => true,          
+          'currency_format' => true,
           'default' => true,
         ),
         3 => 
         array (
-          'name' => 'prima_neta_c',
-          'label' => 'LBL_PRIMA_NETA_C',
+          'name' => 'prima_neta_ganada_c',
+          'label' => 'LBL_PRIMA_NETA_GANADA',
           'enabled' => true,
-          'type' => 'currency',
-          'currency_format' => true,          
           'default' => true,
         ),
         4 => 
         array (
-          'name' => 'fecha_ini',
-          'label' => 'LBL_FECHA_INI',
+          'name' => 'fecha_ini_c',
+          'label' => 'LBL_FECHA_INI_C',
           'enabled' => true,
           'default' => true,
         ),

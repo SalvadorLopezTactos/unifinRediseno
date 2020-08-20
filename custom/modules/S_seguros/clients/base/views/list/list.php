@@ -41,11 +41,9 @@ array (
               ),
               3 => 
               array (
-                'name' => 'prima_neta_c',
-                'label' => 'LBL_PRIMA_NETA_C',
+                'name' => 'prima_neta_ganada_c',
+                'label' => 'LBL_PRIMA_NETA_GANADA',
                 'enabled' => true,
-                'type' => 'currency',
-                'currency_format' => true,                
                 'default' => true,
               ),
               4 => 
