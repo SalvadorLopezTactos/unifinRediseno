@@ -27,7 +27,8 @@
     		  _.each(this.model.fields, function(field)
        	  {
        			this.noEditFields.push(field.name);
-            this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+            //this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+            $('.record-edit-link-wrapper[data-name='+field.name+']').remove();
          	},this);
      			this.noEditFields.push('prima_objetivo');
           this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
