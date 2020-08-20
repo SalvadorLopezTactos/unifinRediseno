@@ -9,8 +9,8 @@ class Seguros_SF
 {
     public function getAccount($bean = null, $event = null, $args = null)
     {
-      $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida);
-      $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida);
+      $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
+      $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
 //      if($cuenta->tipo_registro_cuenta_c == 2)
         $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
 //      {
@@ -37,13 +37,19 @@ class Seguros_SF
           $id_sf = $response['id'];
           if($id_sf)
           {
-            $cuenta->salesforce_id_c = $id_sf;
-            $cuenta->save();
+            global $db;
+            $update = "update accounts_cstm set
+              salesforce_id_c='{$id_sf}'
+              where id_c = '{$cuenta->id}'";
+            $updateExecute = $db->query($update);
+            // $cuenta->salesforce_id_c = $id_sf;
+            // $cuenta->save();
           }
         }
         //Prospecto
         if($bean->etapa == 1 && !$bean->id_salesforce)
         {
+          global $db;
           $token = $this->getToken();
           $recordTypeId = $app_list_strings['tipo_registro_id_list'][$bean->tipo_registro_sf_c];
           $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
@@ -53,12 +59,13 @@ class Seguros_SF
           $oportunidadInternacionalC = $app_list_strings['nacional_list'][$bean->nacional_c];
           $oficinaC = $app_list_strings['oficina_list'][$bean->oficina_c];
           $kamC = $app_list_strings['kam_list'][$bean->kam_c];
+          $idUsuario = ($bean->tipo_referenciador == 1) ? $bean->user_id1_c : $bean->user_id2_c;
           $referenciadorDeLaOportunidadC = $app_list_strings['referenciador_list'][$bean->referenciador_c];
-          if($bean->tipo_referenciador == 1) $usuarios = BeanFactory::getBean('Users', $bean->user_id1_c);
-          if($bean->tipo_referenciador == 2) $usuarios = BeanFactory::getBean('Users', $bean->user_id2_c);
-          $referenciador = $usuarios->nombre_completo_c;
-          if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador." ".$bean->region;
-          if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador." ".$bean->departamento_c;
+          $nombreUsuarioQuery = "Select nombre_completo_c from users_cstm where id_c ='{$idUsuario}'";
+          $resultUsuario = $db->query($nombreUsuarioQuery);
+          $referenciador = $db->fetchByAssoc($resultUsuario);
+          if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->region;
+          if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->departamento_c;
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
           $closeDate = $bean->fecha_cierre_c;
           $closeDate = date("d/m/Y", strtotime($closeDate));
@@ -125,6 +132,7 @@ class Seguros_SF
       		$response = json_decode($json_response, true);
           $id_op = $response['oportunidadId'];
           $GLOBALS['log']->fatal('Informacion de Prospecto enviada: ' .$response);
+          $GLOBALS['log']->fatal(json_encode(print_r($response,true)));
           if($id_op)
           {
             $bean->id_salesforce = $id_op;
@@ -230,7 +238,7 @@ class Seguros_SF
           $fecha_ini_c = $bean->fecha_ini_c;
           $fecha_ini_c = date("d/m/Y", strtotime($fecha_ini_c));
           $fecha_fin_c = $bean->fecha_fin_c;
-          $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));          
+          $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));
       		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "GANADA",
