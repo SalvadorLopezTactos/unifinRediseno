@@ -746,8 +746,8 @@ array (
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
-            'name' => 'LBL_RECORDVIEW_PANEL12',
-            'label' => 'LBL_RECORDVIEW_PANEL12',
+            'name' => 'LBL_RECORDVIEW_PANEL21',
+            'label' => 'LBL_RECORDVIEW_PANEL21',
             'columns' => 2,
             'labelsOnTop' => 1,
             'placeholders' => 1,
@@ -755,27 +755,69 @@ array (
             array (
               0 => 
               array (
+                'name' => 'account_clasf_sectorial',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_CLASF_SECTORIAL',
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'tct_macro_sector_ddw_c',
                 'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
               ),
-              1 => 
+              2 => 
               array (
                 'name' => 'sectoreconomico_c',
                 'label' => 'LBL_SECTORECONOMICO',
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'subsectoreconomico_c',
                 'studio' => 'visible',
                 'label' => 'LBL_SUBSECTORECONOMICO',
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'actividadeconomica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ACTIVIDADECONOMICA',
               ),
-              4 => 
+            ),
+          ),
+          8 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL12',
+            'label' => 'LBL_RECORDVIEW_PANEL12',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              // 0 => 
+              // array (
+              //   'name' => 'tct_macro_sector_ddw_c',
+              //   'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
+              // ),
+              // 1 => 
+              // array (
+              //   'name' => 'sectoreconomico_c',
+              //   'label' => 'LBL_SECTORECONOMICO',
+              // ),
+              // 2 => 
+              // array (
+              //   'name' => 'subsectoreconomico_c',
+              //   'studio' => 'visible',
+              //   'label' => 'LBL_SUBSECTORECONOMICO',
+              // ),
+              // 3 => 
+              // array (
+              //   'name' => 'actividadeconomica_c',
+              //   'studio' => 'visible',
+              //   'label' => 'LBL_ACTIVIDADECONOMICA',
+              // ),
+              0 => 
               array (
                 'related_fields' => 
                 array (
@@ -785,12 +827,12 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES',
               ),
-              5 => 
+              1 => 
               array (
                 'name' => 'tct_ano_ventas_ddw_c',
                 'label' => 'LBL_TCT_ANO_VENTAS_DDW',
               ),
-              6 => 
+              2 => 
               array (
                 'related_fields' => 
                 array (
@@ -800,7 +842,7 @@ array (
                 'name' => 'activo_fijo_c',
                 'label' => 'LBL_ACTIVO_FIJO',
               ),
-              7 => 
+              3 => 
               array (
                 'readonly' => true,
                 'related_fields' => 
@@ -811,33 +853,32 @@ array (
                 'name' => 'potencial_cuenta_c',
                 'label' => 'LBL_POTENCIAL_CUENTA',
               ),
-              8 =>
-                    array (
-                        'name' => 'total_empleados_c',
-                        'label' => 'LBL_TOTAL_EMPLEADOS_C',
-                        'readonly' => true,
-
-                    ),
-              9 => 
+              4 =>
+              array (
+                'name' => 'total_empleados_c',
+                'label' => 'LBL_TOTAL_EMPLEADOS_C',
+                'readonly' => true,
+              ),
+              5 => 
               array (
                 'name' => 'empleados_c',
                 'label' => 'LBL_EMPLEADOS',
               ),
-                10 =>
-                    array (
-                        'related_fields' =>
-                            array (
-                                0 => 'currency_id',
-                                1 => 'base_rate',
-                            ),
-                        'name' => 'tct_depositos_promedio_c',
-                        'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
-                    ),
-                11 =>
-                    array (
-
-                    ),
-              12 =>
+              6 =>
+              array (
+                'related_fields' =>
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'tct_depositos_promedio_c',
+                'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
+              ),
+              7 =>
+              array (
+                
+              ),
+              8 =>
               array (
                 'related_fields' => 
                 array (
@@ -847,21 +888,21 @@ array (
                 'name' => 'tct_prom_cheques_cur_c',
                 'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
               ),
-              13 =>
+              9 =>
               array (
                 'name' => 'dates_account_statements',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
                 'type' => 'dates_account_statements',
               ),
-              14 =>
+              10 =>
               array (
                 'name' => 'tct_dates_acc_statements_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
                 'span' => 12,
               ),
-              15 =>
+              11 =>
               array (
                 'name' => 'potencial_autos',
                 'studio' => 'visible',
@@ -870,7 +911,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -949,7 +990,7 @@ array (
               ),
             ),
           ),
-          9 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1013,7 +1054,7 @@ array (
               ),
             ),
           ),
-          10 => 
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1033,7 +1074,7 @@ array (
               ),
             ),
           ),
-          11 => 
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1053,7 +1094,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1073,7 +1114,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1136,7 +1177,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1179,7 +1220,7 @@ array (
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1232,7 +1273,7 @@ array (
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1293,7 +1334,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1344,7 +1385,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
