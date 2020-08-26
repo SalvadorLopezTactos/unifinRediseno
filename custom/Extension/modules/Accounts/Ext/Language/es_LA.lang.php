@@ -337,3 +337,4 @@ $mod_strings['LBL_VENTAS_ANUALES_UNI2_C'] = 'Ventas Anuales Uni2';
 $mod_strings['LBL_PROMOTORRM_C'] = 'Asesor RM';
 $mod_strings['LBL_MULTILINEA_C'] = 'Multilínea';
 $mod_strings['LBL_RECORDVIEW_PANEL21'] = 'Clasificación Sectorial';
+$mod_strings['LBL_CONTROL_DYNAMICS_365_C'] = 'Control Dynamics 365';
