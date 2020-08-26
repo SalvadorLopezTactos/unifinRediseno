@@ -97,5 +97,12 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'true',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'nombre_de_cargar_c',
+                'value' => 'true',
+            ),
+        ),
     ),
 );
