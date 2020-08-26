@@ -1,6 +1,5 @@
 <?php
- // created: 2020-06-30 13:19:56
-
+ // created: 2020-06-29 17:44:54
 $app_list_strings['origen_lead_list']=array (
   '' => '',
   1 => 'Marketing',
@@ -13,4 +12,5 @@ $app_list_strings['origen_lead_list']=array (
   8 => 'Referenciado Vendor',
   9 => 'Portal Uniclick',
   10 => 'Whatsapp',
+  11 => 'Seguros',
 );

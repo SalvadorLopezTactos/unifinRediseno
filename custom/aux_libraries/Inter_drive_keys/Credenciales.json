@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "integracioncrm-285718",
+  "private_key_id": "582cb681f571b09655a2e46759d732d81f8d7b51",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC02WPVyJ5T/nYO\nKs0Osp4mye11S1XAgpBY/lWz8TyqrDLQHcHpDerydZ0UeWASVdb+/O0a9vafT6lX\nk23jxHTvyCXDWajtQKBJJ/dSWkPbSxBXHgAwIAcj6iEZVIcpFQi9CW1MR4UWJ5OQ\n0xhhiXjf09PGbat/ezlYTkVxSSBrogFrbXRO/C8jlMKR7KPmxyscgqIyfw688Uws\nL/1ooSpAEA5DAsl7GVZKVFyfPRu0R9EAytSpAZzw4BhWJlTnlNFW6XKfyNCbTDir\n/T7qHbcNPzperZofGvdmD6a7fXiH8oKVngSFViX9uw7eK3L2kkV3lMTxnM17rPLG\nXTEjr37LAgMBAAECggEAAnwGD2wieLGYj5iY7pMXnHLOYfvMoXNpu5SVkCjylhRS\n3QxmRecHYO4ACsWhbem4pWd2Hmu2zE4nhmjObABJQaNfRBrEOQDX8t6rWs9F+rTs\n9DVuTTrzaNPmQSx/GtpgygVfd1p4LUC9RJJnKwKHeD5hvL/Jnlu5WEmNp1ZuLUGr\nlal6eu190q/BDdAafigsDE0uGX8tS/MKOVWc3yLAB7u7Bb/Z1RS0LGAe3S9R8amN\nD8awvA9vNtuQFtM0URzxsoDtjAVRC2KsIn8WL9XkOPyEb3d16PzBhDfuIyVGBvAd\neOjPjws4d0jva9Lb4SNyPEEOV7YxGxqO2syCagIxGQKBgQDjFPBA0MhziE104Fi7\nriz6loGTppq0o1Y6rSGxKDhQKd8PDQjgUmFyBmThcazjNWj2xP62inIEPZHpRZxZ\nratEDYBcVhGjNAlVBAxA2c6JrANUXQVRtrATD5MRYqdkJycVE7lZbb0R+vdO47OX\nnFyySOXRjkdh28Bri7BaU12J/QKBgQDL4TqH04MKINk+Rdz9ePVPMTTJiz6kFkma\ncPrnejzr9RYmH6Tq4m3L4msZwJvvzfcxz9GowhpGogYqmC4ZdykbtUgW3whKTRZ6\nr9cEoCmgwu5X763EiWasVI8PHg0AstVblkkAb209YW4nEo6wOnXS9aNQDckCPYsb\nRLaKdq0CZwKBgQCiZtkkIa0aI0Lx8XjEUN7OIFFvXVmLEr2anTNZVaBghHGIfBP7\nCi+ysqv3J6szm4ED6wMXXZAJRFdT83rMEA5KTzWb09otVAvQh2KUBrFVeHWxIg2p\n0PO/zgWqC1oXoICs7DxEntz3PPsdqm9IYIVS5BuocQ7QB69nurFXCAP/qQKBgQCg\nXt8qfk7iRap82HmXjHDxxRPvwS8Z5UoqSNqkADwxosy0WkngVRHmwYhbbm16uTnL\nndweceg3TTWqhaAled0FJZi6HOApie+3u99XjSCRiyPuWeMG6MmxnqYVTx8NQJ6h\nd1qfFAcKtDvwUiGZL7MEqSG4U8+cioqEfY1U5zr52wKBgQCw3l2M9ZRl8c1rxv0c\nlN+iq+qF1bQ6pdOGulWJVfd1jCTMNJD6zVrmvQqkrmJEPq8/T6pshvjTGfaMNQfy\nmwBU5LHZ3n/6QkR+IeJLVbhji/wvrbj9g7FP607nMr6ue0W7ITUvpLEa2bAIoAAW\noLQ5nejNrHuqTZxpGoRUNxF0lg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "integracioncrminter@integracioncrm-285718.iam.gserviceaccount.com",
+  "client_id": "107709674298546900723",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/integracioncrminter%40integracioncrm-285718.iam.gserviceaccount.com"
+}
