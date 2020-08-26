@@ -299,32 +299,40 @@ array (
               ),
               32 => 
               array (
-                'name' => 'lead_cancelado_c',
-                'label' => 'LBL_LEAD_CANCELADO_C',
+                'name' => 'nombre_de_cargar_c',
+                'label' => 'LBL_NOMBRE_DE_CARGAR',
               ),
               33 => 
               array (
               ),
               34 => 
               array (
+                'name' => 'lead_cancelado_c',
+                'label' => 'LBL_LEAD_CANCELADO_C',
+              ),
+              35 => 
+              array (
+              ),
+              36 => 
+              array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              35 => 
+              37 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
               ),
-              36 => 
+              38 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              37 => 
+              39 => 
               array (
               ),
-              38 => 
+              40 => 
               array (
                 'name' => 'assigned_user_name',
                 'span' => 12,
