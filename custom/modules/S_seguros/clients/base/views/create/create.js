@@ -9,6 +9,7 @@
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('fecha_cierre_c', _.bind(this.fechaCierre, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
+        this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
     },
 
     _render: function() {
@@ -112,4 +113,27 @@
         }
         callback(null, fields, errors);
     },
+
+    validauser: function(fields, errors, callback) {
+        //Validación para el referenciador asignado no sea un usuario inactivo
+        var usrid = this.model.get('user_id1_c');
+        app.api.call("read", app.api.buildURL("Recuperauser/" + usrid, null, null, {}), null, {
+            success: _.bind(function (data) {
+                if(data== "Inactive"){
+                    errors['referenciador'] = errors['referenciador'] || {};
+                    errors['referenciador'].required = true;
+                    app.alert.show("Error Referenciador", {
+                        level: "error",
+                        title: "El referenciador seleccionado no se encuentra activo, favor de elegir otro.",
+                        autoClose: false
+                    });
+                }
+            }, this),
+        error: function (e) {
+            throw e;
+        }
+    });
+        callback(null, fields, errors);
+    },
+
 })
