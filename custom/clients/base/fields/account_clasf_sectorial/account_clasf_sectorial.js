@@ -38,6 +38,12 @@
             'ms': {
                 'id': '',
             },
+            'inegi_sector': '',
+            'inegi_subsector': '',
+            'inegi_rama': '',
+            'inegi_subrama': '',
+            'inegi_clase': '',
+            'inegi_descripcion': ''
         };
 
         this.prevActEconomica = {
@@ -54,6 +60,23 @@
             'ms': {
                 'id': '',
             },
+            'inegi_sector': '',
+            'inegi_subsector': '',
+            'inegi_rama': '',
+            'inegi_subrama': '',
+            'inegi_clase': '',
+            'inegi_descripcion': ''
+        };
+
+        this.ResumenCliente = {
+            'inegi': {
+                'inegi_sector': '',
+                'inegi_subsector': '',
+                'inegi_rama': '',
+                'inegi_subrama': '',
+                'inegi_clase': '',
+                'inegi_descripcion': ''
+            }
         };
     },
 
@@ -71,14 +94,23 @@
 
         //Api ResumenCliente para los campos de INEGI
         var idCuenta = clasf_sectorial.model.id; //Id de la Cuenta
-        if (idCuenta != '' && idCuenta != undefined && idCuenta != null) {
+        if (idCuenta != '' && idCuenta != undefined && idCuenta != null && clasf_sectorial.prevActEconomica.inegi_sector == '') {
             var url = app.api.buildURL('ResumenCliente/' + idCuenta, null, null,);
 
             app.api.call('GET', url, {}, {
                 success: function (data) {
                     clasf_sectorial.ResumenCliente = data;
                     clasf_sectorial.check_uni2 = clasf_sectorial.ResumenCliente.inegi.inegi_acualiza_uni2;
-                    
+
+                    clasf_sectorial.ActividadEconomica.inegi_sector = clasf_sectorial.ResumenCliente.inegi.inegi_sector;
+                    clasf_sectorial.ActividadEconomica.inegi_subsector = clasf_sectorial.ResumenCliente.inegi.inegi_subsector;
+                    clasf_sectorial.ActividadEconomica.inegi_rama = clasf_sectorial.ResumenCliente.inegi.inegi_rama;
+                    clasf_sectorial.ActividadEconomica.inegi_subrama = clasf_sectorial.ResumenCliente.inegi.inegi_subrama;
+                    clasf_sectorial.ActividadEconomica.inegi_clase = clasf_sectorial.ResumenCliente.inegi.inegi_clase;
+                    clasf_sectorial.ActividadEconomica.inegi_descripcion = clasf_sectorial.ResumenCliente.inegi.inegi_descripcion;
+
+                    clasf_sectorial['prevActEconomica'] = app.utils.deepCopy(clasf_sectorial.ActividadEconomica);
+
                     _.extend(this, clasf_sectorial.ResumenCliente);
                     clasf_sectorial.render();
                 }
@@ -125,8 +157,8 @@
 
         //Carga los valores en los campos dependientes de Actividad Económica al momento de hacer el change
         $('.list_ae').change(function (evt) {
-            clasf_sectorial.ClasfSectorialApi(evt);
             clasf_sectorial.MuestraCamposAE();
+            clasf_sectorial.ClasfSectorialApi(evt);
         });
         //carga los valores del sector dependientes del sub sector
         $('.list_sse').change(function (evt) {
@@ -183,7 +215,7 @@
                         for (var key in clasf_sectorial.combinaciones) { //actividad economica
                             // console.log(key);
                             var contador = 0;
-                            for (llave in clasf_sectorial.combinaciones[key]) {  //subsector
+                            for (llave in clasf_sectorial.combinaciones[key]) {  //subsector economico
                                 arrSubSector[contador] = llave;
                                 contador++;
                             }
@@ -257,6 +289,41 @@
             clasf_sectorial.render();
             $('.list_sse').select2('val', idSubSector);
         }
+
+        /*************************************************API INEGI*************************************************/
+        app.alert.show('obtiene_INEGI', {
+            level: 'process',
+            title: 'Cargando...',
+        });
+
+        app.api.call('GET', app.api.buildURL('clasificacionSectorialCNVB/' + idActEconomica + '/' + idSubSector), null, {
+            success: function (data) {
+                dataInegi = data;
+                app.alert.dismiss('obtiene_INEGI');
+                // console.log(data);
+                if (dataInegi != '') {
+                    //Envia los valores de los campos de INEGI a la vista HBS
+                    clasf_sectorial.ResumenCliente.inegi.inegi_sector = dataInegi['id_sector_inegi'];
+                    clasf_sectorial.ResumenCliente.inegi.inegi_subsector = dataInegi['id_subsector_inegi'];
+                    clasf_sectorial.ResumenCliente.inegi.inegi_rama = dataInegi['id_rama_inegi'];
+                    clasf_sectorial.ResumenCliente.inegi.inegi_subrama = dataInegi['id_subrama_inegi'];
+                    clasf_sectorial.ResumenCliente.inegi.inegi_clase = dataInegi['id_clase_inegi'];
+                    clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = dataInegi['id_descripcion_inegi'];
+                    //Envia los valores al LH para guardarlos en el modulo de Resumen
+                    clasf_sectorial.ActividadEconomica.inegi_sector = dataInegi['id_sector_inegi'];
+                    clasf_sectorial.ActividadEconomica.inegi_subsector = dataInegi['id_subsector_inegi'];
+                    clasf_sectorial.ActividadEconomica.inegi_rama = dataInegi['id_rama_inegi'];
+                    clasf_sectorial.ActividadEconomica.inegi_subrama = dataInegi['id_subrama_inegi'];
+                    clasf_sectorial.ActividadEconomica.inegi_clase = dataInegi['id_clase_inegi'];
+                    clasf_sectorial.ActividadEconomica.inegi_descripcion = dataInegi['id_descripcion_inegi'];
+
+                    clasf_sectorial.render();
+                }
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
     },
 
     obtenerSector: function () {

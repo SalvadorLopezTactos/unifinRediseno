@@ -22,9 +22,9 @@ class clasificacionSectorialCNVB extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('clasificacionSectorialCNVB'),
+                'path' => array('clasificacionSectorialCNVB','?','?'),
                 //endpoint variables
-                'pathVars' => array(),
+                'pathVars' => array('module','idActividadEconomica','idSubSector'),
                 //method to call
                 'method' => 'getSectorCNVB',
                 //short help string to be displayed in the help documentation
@@ -60,7 +60,7 @@ class clasificacionSectorialCNVB extends SugarApi
 			$query = 'select * from catalogo_clasificacion_sectorial where id_actividad_economica_cnbv = "'.$ActividadEconomica.'" and id_subsector_economico_cnbv = "'.$SubSector.'"';
 			$results = $GLOBALS['db']->query($query);
 			$row = $GLOBALS['db']->fetchByAssoc($results);
-			$GLOBALS['log']->fatal('row',$row);
+			// $GLOBALS['log']->fatal('row',$row);
         }
 		
 		if( $results->num_rows > 0 ){

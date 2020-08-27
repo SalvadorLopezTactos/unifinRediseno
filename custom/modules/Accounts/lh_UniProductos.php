@@ -32,7 +32,7 @@ class clase_UniProducto
                     }
 
                     if (!$args['isUpdate']) {
-                        $GLOBALS['log']->fatal("bean id cuenta" . $bean->id);
+                        // $GLOBALS['log']->fatal("bean id cuenta" . $bean->id);
 
                         if ($bean->load_relationship('accounts_uni_productos_1')) {
                             $listProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
