@@ -39,20 +39,20 @@
 		 * En operaciones de solicitud de crédito quitar opción de pipeline en lista de Forecast
 		 * */
         // CVV - 28/03/2016 - Se oculto el campo de forecast
-		/*
-		var opciones_forecast = app.lang.getAppListStrings('forecast_list');
-		var operacion = this.model.get('tipo_operacion_c');
-		Object.keys(opciones_forecast).forEach(function(key){
-			//console.log("CZ tipo forecast: " + key);
-			if(key == "Pipeline"){
-				if(operacion == 1){
-					delete opciones_forecast[key];
-				}
-			}
+        /*
+        var opciones_forecast = app.lang.getAppListStrings('forecast_list');
+        var operacion = this.model.get('tipo_operacion_c');
+        Object.keys(opciones_forecast).forEach(function(key){
+            //console.log("CZ tipo forecast: " + key);
+            if(key == "Pipeline"){
+                if(operacion == 1){
+                    delete opciones_forecast[key];
+                }
+            }
 
-		});
-		this.model.fields['forecast_c'].options = opciones_forecast;
-		*/
+        });
+        this.model.fields['forecast_c'].options = opciones_forecast;
+        */
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         //this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
@@ -64,8 +64,11 @@
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
-        this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
+        this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
+        /* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
         this.model.addValidationTask('pagounico', _.bind(this.validapagounico, this));
+
+        this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld', _.bind(this.valida_pld, this));
@@ -104,6 +107,11 @@
 
         //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
+
+        this.showSubpanels();
+        this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
+        this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
+
     },
 
     fulminantcolor: function () {
@@ -632,7 +640,7 @@
     multiSearchOr: function (text, searchWords) {
         var regex = searchWords
             .map(word => "(?=.*\\b" + word + "\\b)")
-            .join('');
+    .join('');
         var searchExp = new RegExp(regex, "gi");
         return (searchExp.test(text)) ? "1" : "0";
     },
@@ -651,19 +659,19 @@
         this.context.on('button:expediente_credito_button:click', this.expedienteCredito, this);
         this.context.on('button:votacion_comite_button:click', this.votacionComite, this);
     },
-	/*
-  	 _ValidateAmount: function (){
-  	 var monto = this.model.get("amount");
-  	 if (monto <= 0)
-  	 {
-  	 app.alert.show("Valida Monto de Operación", {
-  	 level: "error",
-  	 title: "El monto debe ser mayor a cero.",
-  	 autoClose: false
-  	 });
-  	 }
-  	 },
-  	 */
+    /*
+       _ValidateAmount: function (){
+       var monto = this.model.get("amount");
+       if (monto <= 0)
+       {
+       app.alert.show("Valida Monto de Operación", {
+       level: "error",
+       title: "El monto debe ser mayor a cero.",
+       autoClose: false
+       });
+       }
+       },
+       */
     expedienteClicked: function () {
         if (this.model.get('id_process_c') == '-1') {
             app.alert.show("Expediente no disponible", {
@@ -723,7 +731,7 @@
 
         if (id_cuenta != '' && id_cuenta != undefined) {
 
-            var account = app.data.createBean('Accounts', { id: this.model.get('account_id') });
+            var account = app.data.createBean('Accounts', {id: this.model.get('account_id')});
             account.fetch({
                 success: _.bind(function (model) {
                     if (model.get('tct_no_contactar_chk_c') == true) {
@@ -801,7 +809,7 @@
                     'parentId': this.model.get("id"),
                 };
                 var dnbProfileUrl = app.api.buildURL("Opportunities/Ratificado", '', {}, {});
-                app.api.call("create", dnbProfileUrl, { data: OppParams }, {
+                app.api.call("create", dnbProfileUrl, {data: OppParams}, {
                     success: _.bind(function (data) {
                         if (data != null) {
                             newOppId = data;
@@ -825,7 +833,7 @@
             'parentId': this.model.get("id"),
         };
         var dnbProfileUrl = app.api.buildURL("Opportunities/CheckForRatificados", '', {}, {});
-        app.api.call("create", dnbProfileUrl, { data: OppParams }, {
+        app.api.call("create", dnbProfileUrl, {data: OppParams}, {
             success: _.bind(function (data) {
                 if (data != null) {
                     if (data == true || this.model.get("ratificacion_incremento_c")) {
@@ -928,45 +936,45 @@
         /*
          * Obtiene las condidionces financieras
          * */
-		/*
-		if(this.model.get('tipo_producto_c')=='4') {
-			var OppParams = {
-				'plazo_c': this.model.get('plazo_ratificado_incremento_c'),
-				'tipo_producto_c': this.model.get('tipo_producto_c'),
-			};
-			//console.log(OppParams);
-			var dnbProfileUrl = app.api.buildURL("Opportunities/CondicionesFinancieras", '', {}, {});
-			app.api.call("create", dnbProfileUrl, {data: OppParams}, {
-				success: _.bind(function (data) {
-					if (data != null) {
-						//CVV - 28/03/2016 - Se reemplaza por control de condiciones financieras
+        /*
+        if(this.model.get('tipo_producto_c')=='4') {
+            var OppParams = {
+                'plazo_c': this.model.get('plazo_ratificado_incremento_c'),
+                'tipo_producto_c': this.model.get('tipo_producto_c'),
+            };
+            //console.log(OppParams);
+            var dnbProfileUrl = app.api.buildURL("Opportunities/CondicionesFinancieras", '', {}, {});
+            app.api.call("create", dnbProfileUrl, {data: OppParams}, {
+                success: _.bind(function (data) {
+                    if (data != null) {
+                        //CVV - 28/03/2016 - Se reemplaza por control de condiciones financieras
 
-						 if(this.model.get('tipo_producto_c')=='1'){
-						 this.model.set('ri_porcentaje_ca_c',data.porcentaje_ca_c);
-						 this.model.set('ri_vrc_c',data.vrc_c);
-						 this.model.set('ri_vri_c',data.vri_c);
-						 this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
-						 this.model.set('ri_porcentaje_renta_inicial_c',data.porcentaje_renta_inicial_c);
-						 }else if(this.model.get('tipo_producto_c')=='3'){
-						 this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
-						 this.model.set('ri_porcentaje_ca_c',data.porcentaje_ca_c);
-						 this.model.set('ri_porcentaje_renta_inicial_c',data.porcentaje_renta_inicial_c);
-						 this.model.set('ri_vrc_c','0.0');
-						 this.model.set('ri_vri_c','0.0');
-						 }else
-						if (this.model.get('tipo_producto_c') == '4') {
-							//this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
-							this.model.set('puntos_sobre_tasa_c', data.ca_tasa_c);
-							this.model.set('ri_porcentaje_ca_c', data.porcentaje_ca_c);
-							//this.model.set('ri_porcentaje_renta_inicial_c','0.0');
-							//this.model.set('ri_vrc_c','0.0');
-							//this.model.set('ri_vri_c','0.0');
-						}
+                         if(this.model.get('tipo_producto_c')=='1'){
+                         this.model.set('ri_porcentaje_ca_c',data.porcentaje_ca_c);
+                         this.model.set('ri_vrc_c',data.vrc_c);
+                         this.model.set('ri_vri_c',data.vri_c);
+                         this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
+                         this.model.set('ri_porcentaje_renta_inicial_c',data.porcentaje_renta_inicial_c);
+                         }else if(this.model.get('tipo_producto_c')=='3'){
+                         this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
+                         this.model.set('ri_porcentaje_ca_c',data.porcentaje_ca_c);
+                         this.model.set('ri_porcentaje_renta_inicial_c',data.porcentaje_renta_inicial_c);
+                         this.model.set('ri_vrc_c','0.0');
+                         this.model.set('ri_vri_c','0.0');
+                         }else
+                        if (this.model.get('tipo_producto_c') == '4') {
+                            //this.model.set('ri_ca_tasa_c',data.ca_tasa_c);
+                            this.model.set('puntos_sobre_tasa_c', data.ca_tasa_c);
+                            this.model.set('ri_porcentaje_ca_c', data.porcentaje_ca_c);
+                            //this.model.set('ri_porcentaje_renta_inicial_c','0.0');
+                            //this.model.set('ri_vrc_c','0.0');
+                            //this.model.set('ri_vri_c','0.0');
+                        }
 
-					}
-				}, this)
-			});
-		}*/
+                    }
+                }, this)
+            });
+        }*/
     },
     validaCondicionesFinancerasRI: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
@@ -1204,7 +1212,7 @@
                                     'tipo_operacion_c': this.model.get('tipo_operacion_c'),
                                 };
                                 var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
-                                app.api.call("create", cancelarOperacionPadre, { data: parametros }, {
+                                app.api.call("create", cancelarOperacionPadre, {data: parametros}, {
                                     success: _.bind(function (data) {
                                         if (data != null) {
                                             console.log("Se cancelo padre1");
@@ -1226,7 +1234,7 @@
                                         'usuarioAutenticado': app.user.get('user_name'),
                                     };
                                     var cancelaOperacionUrl = app.api.buildURL("cancelaOperacionBPM", '', {}, {});
-                                    app.api.call("create", cancelaOperacionUrl, { data: OppParams }, {
+                                    app.api.call("create", cancelaOperacionUrl, {data: OppParams}, {
                                         success: _.bind(function (data) {
                                             if (data != null) {
                                                 if (data['estatus'] == 'error') {
@@ -1257,7 +1265,7 @@
                                     };
                                     console.log(parametros);
                                     var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
-                                    app.api.call("create", cancelarOperacionPadre, { data: parametros }, {
+                                    app.api.call("create", cancelarOperacionPadre, {data: parametros}, {
                                         success: _.bind(function (data) {
                                             if (data != null) {
                                                 console.log("Se cancelo padre2");
@@ -2413,7 +2421,7 @@
 
         var idCuenta = this.model.get('account_id');
 
-        if (idCuenta != '' && idCuenta != undefined){
+        if (idCuenta != '' && idCuenta != undefined) {
 
             // console.log("Id de la cuenta "+idCuenta);
             var checkRI = this.model.get('ratificacion_incremento_c');
@@ -2423,12 +2431,12 @@
                 success: function (data) {
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
-                    
-                    if (self.model.get('estatus_c') != 'N' && checkRI != true){
+
+                    if (self.model.get('estatus_c') != 'N' && checkRI != true) {
 
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
 
-                    } else if (self.model.get('estatus_c') == 'N' && checkRI == true){
+                    } else if (self.model.get('estatus_c') == 'N' && checkRI == true) {
 
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
 
@@ -2448,7 +2456,7 @@
                                 autoClose: false
                             });
                         }
-                    } 
+                    }
 
                     callback(null, fields, errors);
                 },
@@ -2462,5 +2470,112 @@
             callback(null, fields, errors);
         }
     },
+
+    showSubpanels: function () {
+        if (typeof this.model.get('tipo_producto_c') != "undefined" && this.model.get('tipo_producto_c') != ""
+            && typeof this.model.get('account_id') != "undefined" && this.model.get('account_id') != "") {
+            app.alert.show('obtiene_BenefSuby', {
+                level: 'process',
+                title: 'Cargando...',
+            });
+            app.api.call('GET', app.api.buildURL('multilienaUniprod/' + this.model.get('account_id') + "/" + this.model.get('tipo_producto_c')), null, {
+                success: _.bind(function (data) {
+                    app.alert.dismiss('obtiene_BenefSuby');
+                    multilinea_prod = data;
+                    if (multilinea_prod == 1) {
+                        /** Mostrar paneles Area beneficiada y subyacente **/
+                        $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
+                        $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').show();
+                    }
+                    else {
+                        $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').hide();
+                        $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
+                    }
+
+                }, self),
+            });
+        }
+    },
+
+    reqBenefSuby: function (fields, errors, callback) {
+
+        /** Requerido Area Beneficiada**/
+        if ((this.model.get('estado_benef_c') == undefined || this.model.get('estado_benef_c') == "")
+            && (this.model.get('municipio_benef_c') == undefined || this.model.get('municipio_benef_c') == "")
+            && (this.model.get('ent_gob_benef_c') == undefined || this.model.get('ent_gob_benef_c') == "")
+            && (this.model.get('cuenta_benef_c') == undefined || this.model.get('cuenta_benef_c') == "")
+            && (this.model.get('emp_no_reg_benef_c') == undefined || this.model.get('emp_no_reg_benef_c') == "")
+        ) {
+            //error
+            errors['estado_benef_c'] = errors['estado_benef_c'] || {};
+            errors['estado_benef_c'].required = true;
+            errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
+            errors['municipio_benef_c'].required = true;
+            errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
+            errors['ent_gob_benef_c'].required = true;
+            errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
+            errors['cuenta_benef_c'].required = true;
+            errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
+            errors['emp_no_reg_benef_c'].required = true;
+        }
+
+
+        callback(null, fields, errors);
+    },
+
+    _duplicateBenefeSuby: function (fields, errors, callback) {
+
+
+        if (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
+            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != ""
+        ) {
+            app.alert.show('duplicado_BenefSuby', {
+                level: 'process',
+                title: 'Cargando...',
+            });
+
+            console.log("duplicados parte uno");
+            var cliente = this.model.get('account_id');
+            var tipo = this.model.get('tipo_producto_c');
+            var edobenefe = this.model.get('estado_benef_c')==undefined?'':this.model.get('estado_benef_c');
+            var munibenefe = this.model.get('municipio_benef_c')==undefined?'':this.model.get('municipio_benef_c');
+            var entibenefe = this.model.get('ent_gob_benef_c')==undefined?'':this.model.get('ent_gob_benef_c');
+            var empbenefe = this.model.get('cuenta_benef_c')==undefined?'':this.model.get('cuenta_benef_c');
+            var noEmpbenefe = this.model.get('emp_no_reg_benef_c')==undefined?'':this.model.get('emp_no_reg_benef_c');
+            var idOportunidad = this.model.get('id');
+
+            var concatenado=edobenefe+munibenefe+entibenefe+empbenefe+noEmpbenefe;
+
+            var args = {
+                'idOportunidad': idOportunidad,
+                'account_id': cliente,
+                'tipo_producto_c': tipo,
+                'concatenado':concatenado
+            };
+
+            var opportunities = app.api.buildURL("duplicateOpp", '', {}, {});
+            app.api.call("create", opportunities, {data: args}, {
+                success: _.bind(function (data) {
+                    var duplicado = data['duplicado'];
+                    var mensaje = data['mensaje'];
+
+                    app.alert.dismiss('duplicado_BenefSuby');
+
+                    if (duplicado === 1) {
+                        app.alert.show("Solicitud existente", {
+                            level: "error",
+                            title: mensaje,
+                            autoClose: false
+                        });
+                        app.error.errorName2Keys['custom_message'] = mensaje;
+                        errors['benefeysuby'] = errors['benefeysuby'] || {};
+                        errors['benefeysuby'].custom_message = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }
+    }
+
 
 })
