@@ -2481,7 +2481,7 @@
             app.api.call('GET', app.api.buildURL('multilienaUniprod/' + this.model.get('account_id') + "/" + this.model.get('tipo_producto_c')), null, {
                 success: _.bind(function (data) {
                     app.alert.dismiss('obtiene_BenefSuby');
-                    multilinea_prod = data;
+                    self.multilinea_prod = data;
                     if (multilinea_prod == 1) {
                         /** Mostrar paneles Area beneficiada y subyacente **/
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
@@ -2505,6 +2505,7 @@
             && (this.model.get('ent_gob_benef_c') == undefined || this.model.get('ent_gob_benef_c') == "")
             && (this.model.get('cuenta_benef_c') == undefined || this.model.get('cuenta_benef_c') == "")
             && (this.model.get('emp_no_reg_benef_c') == undefined || this.model.get('emp_no_reg_benef_c') == "")
+            && self.multilinea_prod==1
         ) {
             //error
             errors['estado_benef_c'] = errors['estado_benef_c'] || {};
@@ -2575,6 +2576,7 @@
                 }, this)
             });
         }
+        else{callback(null, fields, errors);}
     }
 
 
