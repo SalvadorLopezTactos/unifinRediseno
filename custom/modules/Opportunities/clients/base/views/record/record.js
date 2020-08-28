@@ -2482,7 +2482,7 @@
                 success: _.bind(function (data) {
                     app.alert.dismiss('obtiene_BenefSuby');
                     self.multilinea_prod = data;
-                    if (multilinea_prod == 1) {
+                    if (self.multilinea_prod == 1) {
                         /** Mostrar paneles Area beneficiada y subyacente **/
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').show();
