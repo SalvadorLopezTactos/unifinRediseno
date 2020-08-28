@@ -2527,8 +2527,9 @@
     _duplicateBenefeSuby: function (fields, errors, callback) {
 
 
-        if (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
-            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != ""
+        if ( (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
+            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
+            && self.multilinea_prod==1
         ) {
             app.alert.show('duplicado_BenefSuby', {
                 level: 'process',
