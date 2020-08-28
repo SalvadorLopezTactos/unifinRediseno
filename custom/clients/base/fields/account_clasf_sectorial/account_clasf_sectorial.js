@@ -129,6 +129,10 @@
         this._super("_render");
         //campo custom account_clasf_sectorial ocualta la Etiqueta
         $("div.record-label[data-name='account_clasf_sectorial']").attr('style', 'display:none;');
+        //Muestra y Oculta campos dependientes de Actividad Economica
+        if ($('.list_ae').select2('val') == "" || clasf_sectorial.ActividadEconomica.ae.id == "") {
+            clasf_sectorial.MuestraCamposAE();
+        }
         //funcion de cargar listas
         if (clasf_sectorial.renderlista != 1) {
             this.cargalistas();
@@ -136,8 +140,6 @@
         //Funcion para dar estilo select2 a las listas deplegables.
         var $select = $('select.select2');
         $select.select2();
-        //Muestra campos dependientes de Actividad Economica
-        this.MuestraCamposAE();
 
         if (clasf_sectorial.check_uni2 != 0) {
             //Campos ReadOnly de Actividad Economica dependiendo del check de uni2
@@ -157,7 +159,7 @@
 
         //Carga los valores en los campos dependientes de Actividad Económica al momento de hacer el change
         $('.list_ae').change(function (evt) {
-            clasf_sectorial.MuestraCamposAE();
+            clasf_sectorial.MuestraCamposAE(evt);
             clasf_sectorial.ClasfSectorialApi(evt);
         });
         //carga los valores del sector dependientes del sub sector
@@ -170,17 +172,35 @@
         });
     },
 
-    MuestraCamposAE: function () {
+    MuestraCamposAE: function (evt) {
         //Muestra los campos dependientes de Actividad Economica
-        if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") {
-            $('.campoSSE').hide();
-            $('.campoSE').hide();
-            $('.campoMS').hide();
+        if (evt != undefined) {
+            //Validacion evt para record y create
+            if ($(evt.currentTarget).val() == "") {
+                
+                $('.campoSSE').hide();
+                $('.campoSE').hide();
+                $('.campoMS').hide();
+
+            } else {
+                $('.campoSSE').show();
+                $('.campoSE').show();
+                $('.campoMS').show();
+            }
 
         } else {
-            $('.campoSSE').show();
-            $('.campoSE').show();
-            $('.campoMS').show();
+            //Validación al momento de cargar la vista de la cuenta por render
+            if ($('.list_ae').select2('val') == "" || $('.list_ae').val() == undefined || $('.list_ae').val() == "") {
+                
+                $('.campoSSE').hide();
+                $('.campoSE').hide();
+                $('.campoMS').hide();
+
+            } else {
+                $('.campoSSE').show();
+                $('.campoSE').show();
+                $('.campoMS').show();
+            }
         }
     },
 
