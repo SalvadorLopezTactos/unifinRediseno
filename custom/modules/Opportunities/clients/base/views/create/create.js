@@ -1662,7 +1662,7 @@
             app.api.call('GET', app.api.buildURL('multilienaUniprod/' + this.model.get('account_id') + "/" + this.model.get('tipo_producto_c')), null, {
                 success: _.bind(function (data) {
                     app.alert.dismiss('obtiene_BenefSuby');
-                    multilinea_prod = data;
+                    self.multilinea_prod = data;
                     if (multilinea_prod == 1) {
                         /** Mostrar paneles Area beneficiada y subyacente **/
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
@@ -1752,6 +1752,7 @@
                 }, this)
             });
         }
+        else{ callback(null, fields, errors);}
     }
 
 
