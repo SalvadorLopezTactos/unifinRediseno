@@ -1211,9 +1211,6 @@
         $('[data-name="municipio_suby_c"]').show();
         $('[data-name="ent_gob_suby_c"]').show();
         $('[data-name="otro_suby_c"]').show();
-        /** Oculta paneles Area beneficiada y subyacente **/
-        $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
-        $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
 
         //Ocultando el panel de Oportunidad perdida
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
@@ -1708,8 +1705,10 @@
     _duplicateBenefeSuby: function (fields, errors, callback) {
 
 
-        if ( this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != ""  || this.model.get('ent_gob_benef_c') != ""
-            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != ""
+        if ( (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != ""  || this.model.get('ent_gob_benef_c') != ""
+            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
+            && self.multilinea_prod==1
+
         ) {
             var cliente = this.model.get('account_id');
             var tipo = this.model.get('tipo_producto_c');
