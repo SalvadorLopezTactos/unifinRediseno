@@ -36,7 +36,7 @@
 
         this.tipoProducto = {
             'leasing': {
-                'producto':'1',
+                'producto': '1',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -50,7 +50,7 @@
                 'assigned_user_id': ''
             },
             'factoring': {
-                'producto':'4',
+                'producto': '4',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -64,7 +64,7 @@
                 'assigned_user_id': ''
             },
             'credito_auto': {
-                'producto':'3',
+                'producto': '3',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -78,7 +78,7 @@
                 'assigned_user_id': ''
             },
             'fleet': {
-                'producto':'6',
+                'producto': '6',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -92,7 +92,7 @@
                 'assigned_user_id': ''
             },
             'uniclick': {
-                'producto':'8',
+                'producto': '8',
                 'id': '',
                 'no_viable': '',
                 'no_viable_razon': '',
@@ -109,9 +109,9 @@
     },
 
     /**
-    * When data changes, re-render the field only if it is not on edit (see MAR-1617).
-    * @inheritdoc
-    */
+     * When data changes, re-render the field only if it is not on edit (see MAR-1617).
+     * @inheritdoc
+     */
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
@@ -183,6 +183,13 @@
         $('[data-field="chk_ca_nv"]').attr('style', 'pointer-events:none;'); //Check Credito-Auto
         $('[data-field="chk_fl_nv"]').attr('style', 'pointer-events:none;'); //Check Fleet
         $('[data-field="chk_u_nv"]').attr('style', 'pointer-events:none;'); //Check Uniclick
+
+        $('[data-field="chk_ls_multi"]').attr('style', 'pointer-events:none;'); //Check Leasing
+        $('[data-field="chk_fac_multi"]').attr('style', 'pointer-events:none;'); //Check Factoraje
+        $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:none;'); //Check Credito-Auto
+        $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:none;'); //Check Fleet
+        $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:none;'); //Check Uniclick
+
         try {
 
             cont_uni_p.nvproductos(); //HABILITA LOS CHECK DEPENDIENDO LOS PRODUCTOS QUE TIENE EL USUARIO
@@ -554,18 +561,33 @@
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
         if (productos.includes("1") && cont_uni_p.action == "edit") { //PRODUCTO LEASING
             $('[data-field="chk_l_nv"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_ls_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("4") && cont_uni_p.action == "edit") {  //PRODUCTO FACTORAJE
             $('[data-field="chk_f_nv"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_fac_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("3") && cont_uni_p.action == "edit") { //PRODUCTO CREDITO AUTOMOTRIZ
             $('[data-field="chk_ca_nv"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1) {
+                $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
             $('[data-field="chk_fl_nv"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
         if (productos.includes("8") && cont_uni_p.action == "edit") { //PRODUCTO UNICLICK
             $('[data-field="chk_u_nv"]').attr('style', 'pointer-events:block;');
+            if (app.user.attributes.multilinea_c == 1 ) {
+                $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:block;');
+            }
         }
     },
 
@@ -597,6 +619,7 @@
             if (cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.uniclick.subtipo_cuenta == 7) {
                 guardaU = true;
             }
+
             //Evalua guardado de No viable
             if ((guardaL || guardaF || guardaCA || guardaFL || guardaU) && this.model.get('id') != "" && this.model.get('id') != undefined && Object.entries(errors).length == 0) {
                 //Mapea los campos del modulo UNI PRODUCTOS con producto LEASING en el objeto cont_uni_p.leadNoViable
@@ -682,35 +705,82 @@
                         this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
                     }
                 }
-                // Guarda campo Canala unilcik
-                console.log(this.tipoProducto);
-               // this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
-               // this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
 
-                //Establece el objeto para guardar
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
 
 
         }
 
-        if(contexto_cuenta.createMode)
-        {
+        if (contexto_cuenta.createMode) {
             //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
             if (this.tipoProducto.uniclick != null && typeof (this.$('.list_u_canal').select2('val')) == "string") {
                 this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
                 //Establece el objeto para guardar
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
+            // Asigna multilinea_c value
+            if (this.tipoProducto.leasing != null) {
+                this.tipoProducto.leasing.multilinea_c = $('.chk_ls_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
 
-        }
-        else
-        {
-            if (this.tipoProducto.uniclick != null && typeof (this.$('.list_u_canal').select2('val')) == "string") {
-                this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
-                this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val'); //lista Canal uniclcick
+            }
+            if (this.tipoProducto.factoring != null) {
+                //    this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring
+                this.tipoProducto.factoring.multilinea_c = $('.chk_fac_multi')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
+            if (this.tipoProducto.credito_auto != null) {
+                //    this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto
+                this.tipoProducto.credito_auto.multilinea_c = $('.chk_ca_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if (this.tipoProducto.fleet != null) {
+                //    this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet
+                this.tipoProducto.fleet.multilinea_c = $('.chk_fe_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if (this.tipoProducto.uniclick != null) {
+                //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.leasing
+                this.tipoProducto.uniclick.multilinea_c = $('.chk_uniclick_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+
+
+        }
+        else {
+            if (this.tipoProducto.uniclick != null && typeof (this.$('.list_u_canal').select2('val')) == "string") {
+                this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+                this.tipoProducto.uniclick.canal_c = $('.list_u_canal').select2('val');
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            // Asigna multilinea_c value
+            if ($('.chk_ls_multi')[0] != undefined) {
+                this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing
+                this.tipoProducto.leasing.multilinea_c = $('.chk_ls_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if ($('.chk_fac_multi')[0] != undefined) {
+                this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring
+                this.tipoProducto.factoring.multilinea_c = $('.chk_fac_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if ($('.chk_ca_multi')[0] != undefined) {
+                this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto
+                this.tipoProducto.credito_auto.multilinea_c = $('.chk_ca_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if ($('.chk_fe_multi')[0] != undefined) {
+                this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet
+                this.tipoProducto.fleet.multilinea_c = $('.chk_fe_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if ($('.chk_uniclick_multi')[0] != undefined) {
+                //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.leasing
+                this.tipoProducto.uniclick.multilinea_c = $('.chk_uniclick_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+
         }
 
         callback(null, fields, errors);

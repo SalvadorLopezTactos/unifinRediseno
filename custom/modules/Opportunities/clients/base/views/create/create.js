@@ -538,45 +538,34 @@
 	{
 		var cliente = this.model.get('account_id');
 		var tipo = this.model.get('tipo_producto_c');
-		var fields = ["account_id", "tct_etapa_ddw_c", "estatus_c", "tipo_producto_c"];
-        app.api.call("read", app.api.buildURL("Opportunities/", null, null,
-		{
-            fields: fields.join(','),
-            max_num: 5,
-            "filter":
-			[
-                {
-                    "account_id": cliente,
-					"tipo_producto_c": tipo,
-                    "id":
-					{
-                        $not_equals: this.model.id,
-                    }
-                }
-            ]
-        }), null,
-		{
+        var args = {
+            'account_id': cliente,
+            'tipo_producto_c': tipo
+        };
+        var opportunities = app.api.buildURL("getOpportunities", '', {}, {});
+        app.api.call("create", opportunities, {data:args}, {
             success: _.bind(function (data)
 			{
-                var duplicado = 0;
-                var mensaje = '';
-                if (data.records.length > 0)
+                var duplicado = data['duplicado'];
+                var mensaje = data['mensaje'];
+                console.log(data);
+               /* if (data.records.length > 0)
 				{
                     $(data.records).each(function (index, value)
 					{
-                        if (value.estatus_c != "K" && value.tct_etapa_ddw_c != "CL" && value.tct_etapa_ddw_c != "R")
+                        if (value.estatus_c != "K" && value.tct_etapa_ddw_c != "CL" && value.tct_etapa_ddw_c != "R" && check!=1)
 						{
                             mensaje = "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.";
                             duplicado = 1;
                         
-                        } else if (value.tct_etapa_ddw_c == "CL" && (value.tipo_producto_c == "1" || value.tipo_producto_c == "4")){
+                        } else if (value.tct_etapa_ddw_c == "CL" && (value.tipo_producto_c == "1" || value.tipo_producto_c == "4") && check!=1){
 
                             mensaje = "No es posible crear una Pre-solicitud cuando ya se tiene una línea de crédito autorizada.";
                             duplicado = 1;
 
                         }
                     });
-                }
+                }*/
 				if (duplicado === 1)
 				{
 					app.alert.show("Solicitud existente", {
