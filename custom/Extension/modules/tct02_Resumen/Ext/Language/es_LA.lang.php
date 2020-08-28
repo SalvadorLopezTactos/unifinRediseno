@@ -67,3 +67,4 @@ $mod_strings['LBL_INEGI_SUBRAMA_C'] = 'Subrama';
 $mod_strings['LBL_INEGI_CLASE_C'] = 'Clase';
 $mod_strings['LBL_INEGI_DESCRIPCION_C'] = 'Descripción';
 $mod_strings['LBL_INEGI_ACUALIZA_UNI2'] = 'INEGI Actualizado por Uni2';
+$mod_strings['LBL_GOOGLEDRIVEAC'] = 'ID Google Drive Cliente';

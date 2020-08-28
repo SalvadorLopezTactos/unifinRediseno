@@ -1107,9 +1107,10 @@
 
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
-        if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
-            $('div[data-name=multilinea_c]').css("pointer-events", "none");
-        }
+        // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+        //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        // }
+
         //Oculta campos de Macro Sector
         this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
         this.$("div[data-name='sectoreconomico_c']").hide();
@@ -5405,6 +5406,13 @@
                             ResumenProductos['unilease'] = Productos[key];
                             Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
                             Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                            break;
+                        case "10": //Seguros
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            ResumenProductos['seguros'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;

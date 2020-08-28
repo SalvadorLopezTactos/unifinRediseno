@@ -4,8 +4,7 @@ class clase_UniProducto
 {
     public function func_UniProducto($bean = null, $event = null, $args = null)
     {
-        $GLOBALS['log']->fatal("ACTUALIZA UNI PRODUCTOS CUSTOM ---- " );
-
+        $GLOBALS['log']->fatal("ACTUALIZA UNI PRODUCTOS CUSTOM ---- ");
         //Campo custom Uni Productos
         if ($GLOBALS['service']->platform != 'mobile') {
             $uniProducto = $bean->account_uni_productos;
@@ -13,7 +12,6 @@ class clase_UniProducto
             if (!empty($uniProducto)) {
                 foreach ($uniProducto as $key) {
                     if ($key['id'] != '') {
-                        // $GLOBALS['log']->fatal("Inserta Producto");
                         $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
                         $beanUP->no_viable = $key['no_viable'];
                         $beanUP->no_viable_razon = $key['no_viable_razon'];
@@ -28,11 +26,30 @@ class clase_UniProducto
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'];
 
+                        if ($bean->load_relationship('accounts_uni_productos_1') && ($key['tipo_producto'] == 1 || $key['tipo_producto'] == 8)) {
+                            $updateProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
+                            foreach ($updateProductos as $udpate) {
+
+                                switch ($udpate->tipo_producto) {
+                                    case 7:
+                                        if ($key['tipo_producto'] == '1') {
+                                            $udpate->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
+                                            $udpate->save();
+                                        }
+                                        break;
+                                    case 9:
+                                        if ($key['tipo_producto'] == '8') {
+                                            $udpate->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
+                                            $udpate->save();
+                                        }
+                                        break;
+                                }
+                            }
+                        }
                         $beanUP->save();
                     }
 
                     if (!$args['isUpdate']) {
-                        // $GLOBALS['log']->fatal("bean id cuenta" . $bean->id);
 
                         if ($bean->load_relationship('accounts_uni_productos_1')) {
                             $listProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
@@ -65,7 +82,15 @@ class clase_UniProducto
                                             $beanProducto->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "0";
                                         }
                                         break;
+                                    case 7:
+                                        if ($key['producto'] == '1') {
+                                            $beanProducto->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
+                                        }
+                                        break;
                                     case 9:
+                                        if ($key['producto'] == '8') {
+                                            $beanProducto->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
+                                        }
                                         break;
                                 }
                                 $beanProducto->save();
@@ -82,9 +107,7 @@ class clase_UniProducto
             if (!empty($uniProducto)) {
 
                 foreach ($uniProducto as $key) {
-                    // $GLOBALS['log']->fatal("ID_PRODUCTO", $key['id']);
                     if ($key['id'] != '') {
-                        // $GLOBALS['log']->fatal("Inserta Producto");
                         $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
                         $beanUP->no_viable = $key['no_viable'];
                         $beanUP->no_viable_razon = $key['no_viable_razon'];
@@ -99,12 +122,9 @@ class clase_UniProducto
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'] != "" ? $key['multilinea_c'] : "";
                         $beanUP->save();
-                        // $GLOBALS['log']->fatal("Termina de guardar datos de NV a UP");
                     }
 
                     if (!$args['isUpdate'] && $key['producto'] == '8') {
-                        // $GLOBALS['log']->fatal("Esta creando producto uniclick");
-
                         if ($bean->load_relationship('accounts_uni_productos_1')) {
                             $listProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
 

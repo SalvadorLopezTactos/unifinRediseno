@@ -63,25 +63,32 @@ array (
               ),
               6 => 
               array (
+                'name' => 'nombre_de_cargar_c',
+                'label' => 'LBL_NOMBRE_DE_CARGAR',
+                'enabled' => true,
+                'default' => true,
+              ),
+              7 => 
+              array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => false,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_LIST_PHONE',
                 'enabled' => true,
                 'default' => false,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_LIST_EMAIL_ADDRESS',
                 'enabled' => true,
                 'default' => false,
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'status',
                 'label' => 'LBL_LIST_STATUS',
