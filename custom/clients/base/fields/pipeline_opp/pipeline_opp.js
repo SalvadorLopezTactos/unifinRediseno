@@ -18,11 +18,19 @@
         //Obtiene Etapa y SubEtapa de la solicitud
         var etapa= this.model.get('tct_etapa_ddw_c');
         var subetapa=this.model.get('estatus_c');
+        var producto=this.model.get('tipo_producto_c');
 
       //Validaciones para asignar etapas de la solicitud en formado Pipeline SOLICITUD INICIAL
         if (etapa=="SI"){
             //Agrega clase current para sombrear en color actual al pipeline
             $('#SI').addClass('current');
+            //Añade sub etapa (solo para Leasing)
+            if (producto==1) {
+                $("#SE0").removeClass('ocult');
+                $('#SE0').addClass('alerta');
+                $("#SE0").html("En validación comercial");
+            }
+
             //Valida si tiene subetapa "cancelada"
             if (subetapa=="K"){
                 $("#SE1").removeClass('ocult');

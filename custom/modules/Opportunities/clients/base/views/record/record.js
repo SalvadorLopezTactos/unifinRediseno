@@ -72,6 +72,7 @@
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
         this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
         this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
+        this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -2461,6 +2462,20 @@
         } else {
             callback(null, fields, errors);
         }
+    },
+
+    validaScoring: function (fields, errors, callback) {
+
+        var documento= this.model.get('opportunities_documents_1opportunities_ida');
+
+        if(documento==""){
+            app.alert.show("Error_documento", {
+                level: "warning",
+                messages: "Se debe adjuntar el documento de scoring comercial para notificar y solicitar la autorización del director.",
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 
 })
