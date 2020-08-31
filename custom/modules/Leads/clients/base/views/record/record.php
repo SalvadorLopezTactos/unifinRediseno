@@ -304,6 +304,8 @@ array (
               ),
               33 => 
               array (
+                'name' => 'alianza_c',
+                'label' => 'LBL_ALIANZA_C',
               ),
               34 => 
               array (
