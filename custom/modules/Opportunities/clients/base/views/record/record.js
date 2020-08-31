@@ -68,8 +68,6 @@
         /* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
         this.model.addValidationTask('pagounico', _.bind(this.validapagounico, this));
 
-        this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
-
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld', _.bind(this.valida_pld, this));
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
@@ -110,6 +108,7 @@
 
         this.showSubpanels();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
+        this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
 
     },
@@ -2518,6 +2517,11 @@
             errors['cuenta_benef_c'].required = true;
             errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
             errors['emp_no_reg_benef_c'].required = true;
+            app.alert.show("Requeridos Benef", {
+                level: "error",
+                messages: "Hace falta completar al menos uno de los campos de <b>Área beneficiada</b>.",
+                autoClose: false
+            });
         }
 
 

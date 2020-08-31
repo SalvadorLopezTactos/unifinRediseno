@@ -78,7 +78,6 @@
         * Valida que los campos de la cuenta esten completos.
         * **/
         this.model.addValidationTask('Valida al Guardar', _.bind(this.validacion_proceso_guardar, this));
-        this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
 
@@ -140,6 +139,7 @@
         this.set_lista_productos();
         this.showSubpanels();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
+        this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
 
     },
@@ -1696,6 +1696,11 @@
             errors['cuenta_benef_c'].required = true;
             errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
             errors['emp_no_reg_benef_c'].required = true;
+            app.alert.show("Requeridos Benef", {
+                level: "error",
+                messages: "Hace falta completar al menos uno de los campos de <b>Área beneficiada</b>.",
+                autoClose: false
+            });
         }
 
 
