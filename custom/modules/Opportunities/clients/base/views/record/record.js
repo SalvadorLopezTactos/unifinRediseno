@@ -2504,7 +2504,7 @@
             && (this.model.get('ent_gob_benef_c') == undefined || this.model.get('ent_gob_benef_c') == "")
             && (this.model.get('cuenta_benef_c') == undefined || this.model.get('cuenta_benef_c') == "")
             && (this.model.get('emp_no_reg_benef_c') == undefined || this.model.get('emp_no_reg_benef_c') == "")
-            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K'
+            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K' && this.model.get('tct_oportunidad_perdida_chk_c')!=true
         ) {
             //error
             errors['estado_benef_c'] = errors['estado_benef_c'] || {};
@@ -2533,7 +2533,7 @@
 
         if ( (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
             || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
-            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K'
+            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K' && this.model.get('tct_oportunidad_perdida_chk_c')!=true
         ) {
             app.alert.show('duplicado_BenefSuby', {
                 level: 'process',
