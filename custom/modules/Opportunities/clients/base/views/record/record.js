@@ -2642,6 +2642,18 @@
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
+
+        //this.ShowHideDirectorSolicitud();
+;
     },
+
+    ShowHideDirectorSolicitud:function () {
+        if(this.model.get('tipo_producto_c')=="1"){
+            $('[data-name="opportunities_directores"]').show();
+        }else{
+            $('[data-name="opportunities_directores"]').hide();
+        }
+    }
+
 
     })

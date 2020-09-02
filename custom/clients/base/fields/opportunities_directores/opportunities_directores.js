@@ -13,37 +13,42 @@
         cont_tel = this;
         this._super('initialize', [options]);
 
-        this.setDirectores();
+        //this.setDirectores();
+        this.model.on('data:sync:complete', this.setDirectores, this);
 
     },
 
     setDirectores:function () {
         var self=this;
-        var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
 
-        app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
-            success: _.bind(function (data) {
+        //var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
+        var id_usuario=this.model.get('assigned_user_id');
+        if(id_usuario != null && id_usuario!= undefined && id_usuario!=""){
 
-                if (data != "") {
-                    var directores_list=[];
-                    if(data.length>0){
-                        //Añadiendo valor vacio para obligar que se ejecute evento change del director de solicitud
-                        directores_list.push({"id": "","text": ""});
-                        for(var i=0;i<data.length;i++){
-                            //directores_list[{"id": data[i].id,"text": data[i].name}];
-                            directores_list.push({"id": data[i].id,"text": data[i].name});
+            app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
+                success: _.bind(function (data) {
+
+                    if (data != "") {
+                        var directores_list=[];
+                        if(data.length>0){
+                            //Añadiendo valor vacio para obligar que se ejecute evento change del director de solicitud
+                            directores_list.push({"id": "","text": ""});
+                            for(var i=0;i<data.length;i++){
+                                //directores_list[{"id": data[i].id,"text": data[i].name}];
+                                directores_list.push({"id": data[i].id,"text": data[i].name});
+                            }
+                            //Establecer nuevas opciones al campo de director
+                            //this.model.fields['director_seleccionado_c'].options = directores_list;
+                            self.directores_list=directores_list;
+                            self.render();
                         }
-                        //Establecer nuevas opciones al campo de director
-                        //this.model.fields['director_seleccionado_c'].options = directores_list;
-                        self.directores_list=directores_list;
-                        self.render();
+
                     }
 
-                }
+                }, self),
+            });
 
-            }, self),
-        });
-
+        }
 
     },
 
@@ -76,6 +81,15 @@
         }else{
             this.directorSolicitud="";
         }
+
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1'){
+                $('[data-type="opportunities_directores"]').hide();
+            }else{
+                $('[data-type="opportunities_directores"]').show();
+            }
+        }
+
 
         this._super("_render");
 
