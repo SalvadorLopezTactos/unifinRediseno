@@ -1715,7 +1715,7 @@ SQL;
                 }
 
                 $time_start = microtime(true);
-                if($opportunidad['estatus_c']!='K' && $opportunidad['tipo_producto_c']==1 && $opportunidad['vobo_dir_c']==true || ($opportunidad['estatus_c']!='K' && $opportunidad['tipo_producto_c']!=1) ){
+                if(($opportunidad['estatus_c']!='K' && $opportunidad['tipo_producto_c']==1 && $opportunidad['vobo_dir_c']==true) || ($opportunidad['estatus_c']!='K' && $opportunidad['tipo_producto_c']!=1) ){
                     $resultado = $this->unifinpostCall($host, $fields);
                 }
                 $time_end = microtime(true);

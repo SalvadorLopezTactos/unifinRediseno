@@ -291,7 +291,7 @@ SQL;
         public function creaRatificacion($bean = null, $event = null, $args = null){
             global $current_user;
             $_REQUEST['crea_ratificacion'] += 1;
-            if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA' && $bean->vobo_dir_c==true){
+            if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
                 // CVV - 30/03/2016 - Crea una nueva operacion para la solicitud de R/I
                 $opp = BeanFactory::getBean('Opportunities');
 
