@@ -2513,7 +2513,7 @@
         var producto=this.model.get('tipo_producto_c');
 
         if(producto==1) {
-            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$in]=3"), null, {
+            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
                         app.alert.show("Error_documento", {
