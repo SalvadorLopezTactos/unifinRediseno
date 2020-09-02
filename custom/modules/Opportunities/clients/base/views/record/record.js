@@ -2590,11 +2590,11 @@
     },
     noauthsol: function () {
             this.model.set("vobo_dir_c", false);
-        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
             App.alert.show('rechazaSol', {
                 level: 'process',
-                title: 'Autorizando, por favor espere.',
+                title: 'Rechazando, por favor espere.',
             });
             //validacion para fecha actual
             var today = new Date();
@@ -2638,7 +2638,8 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI"){
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
+            (this.model.set("fecha_validacion_c")=="" || this.model.set("fecha_validacion_c")==null)){
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
