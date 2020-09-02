@@ -4,6 +4,7 @@
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
+        pipeopp=this;
 
         this._super('initialize', [options]);
         this.model.on('sync', this.pipelineopp, this);
@@ -25,7 +26,7 @@
             //Agrega clase current para sombrear en color actual al pipeline
             $('#SI').addClass('current');
             //Añade sub etapa (solo para Leasing)
-            if (producto==1) {
+            if (producto==1 && subetapa==1) {
                 $("#SE1").removeClass('ocult');
                 $('#SE1').addClass('alerta');
                 $("#SE1").html("En validación comercial");
