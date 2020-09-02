@@ -9,7 +9,31 @@ array (
       array (
         'buttons' => 
         array (
-          0 => 
+            0 =>
+                array (
+                    'type' => 'button',
+                    'name' => 'vobo_leasing',
+                    'label' => 'Autorizar',
+                    'css_class' => 'btn-success',
+                    'showOn' => 'view',
+                    'events' =>
+                        array (
+                            'click' => 'button:btn_auth_button:click',
+                        ),
+                ),
+            1 =>
+                array (
+                    'type' => 'button',
+                    'name' => 'rechazo_leasing',
+                    'label' => 'Rechazar',
+                    'css_class' => 'btn-danger',
+                    'showOn' => 'view',
+                    'events' =>
+                        array (
+                            'click' => 'button:btn_noauth_button:click',
+                        ),
+                ),
+          2 =>
           array (
             'type' => 'button',
             'name' => 'cancel_button',
@@ -17,7 +41,7 @@ array (
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
           ),
-          1 => 
+          3 =>
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -27,7 +51,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          4 =>
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -117,7 +141,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          5 =>
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -202,9 +226,14 @@ array (
               ),
               4 => 
               array (
+<<<<<<< HEAD
                 'name' => 'opportunities_directores',
                 'label' => 'Director de la solicitud',
                 'studio' => 'visible',
+=======
+                'name' => 'vobo_dir_c',
+                'label' => 'LBL_VOBO_DIR',
+>>>>>>> 505939c95f0de6ec14dcf7a002e60f23aa7bf1f3
               ),
               5 => 
               array (

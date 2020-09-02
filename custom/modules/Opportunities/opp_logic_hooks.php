@@ -197,9 +197,13 @@
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
         global $db, $current_user;
-
-        //$GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || $bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO'){//@jesus
+            $GLOBALS['log']->fatal('Inicia creaSolicitud');
+            $generaSolicitud = false;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c!='6' && $bean->tipo_producto_c!='1') ? true : $generaSolicitud;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $bean->vobo_dir_c== true) ? true : $generaSolicitud;
+            $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO') ? true : $generaSolicitud;
+            if($generaSolicitud){
+                $GLOBALS['log']->fatal('valor generaSolicitud: '.$generaSolicitud);
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
@@ -287,7 +291,7 @@ SQL;
         public function creaRatificacion($bean = null, $event = null, $args = null){
             global $current_user;
             $_REQUEST['crea_ratificacion'] += 1;
-            if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
+            if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA' && $bean->vobo_dir_c==true){
                 // CVV - 30/03/2016 - Crea una nueva operacion para la solicitud de R/I
                 $opp = BeanFactory::getBean('Opportunities');
 
