@@ -219,21 +219,16 @@ array (
                 'name' => 'estatus_c',
                 'label' => 'LBL_ESTATUS',
               ),
-              3 => 
+              3 =>
               array (
-                'name' => 'director_seleccionado_c',
-                'label' => 'LBL_DIRECTOR_SELECCIONADO',
-              ),
-              4 => 
-              array (
-<<<<<<< HEAD
                 'name' => 'opportunities_directores',
                 'label' => 'Director de la solicitud',
                 'studio' => 'visible',
-=======
+              ),
+              4=>
+              array(
                 'name' => 'vobo_dir_c',
                 'label' => 'LBL_VOBO_DIR',
->>>>>>> 505939c95f0de6ec14dcf7a002e60f23aa7bf1f3
               ),
               5 => 
               array (
