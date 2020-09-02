@@ -2139,6 +2139,9 @@
         this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
         this.oFinancieraRI.ratificacion = condiciones_financierasRI;
         contRI.render();
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
     },
 
     getcfRI: function () {
@@ -2510,7 +2513,7 @@
         var producto=this.model.get('tipo_producto_c');
 
         if(producto==1) {
-            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1"), null, {
+            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$in]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
                         app.alert.show("Error_documento", {

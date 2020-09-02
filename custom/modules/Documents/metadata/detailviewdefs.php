@@ -73,12 +73,6 @@ array (
         ),
         2 => 
         array (
-          0 => 
-          array (
-            'name' => 'scoring_comercial_c',
-            'label' => 'LBL_SCORING_COMERCIAL',
-          ),
-          1 => '',
         ),
         3 => 
         array (
