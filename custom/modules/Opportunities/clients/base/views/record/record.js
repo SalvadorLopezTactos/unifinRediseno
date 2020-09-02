@@ -2546,6 +2546,12 @@
 
     authsol: function () {
             this.model.set("vobo_dir_c", true);
+            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            App.alert.show('autorizaSol', {
+                level: 'process',
+                title: 'Autorizando, por favor espere.',
+            });
             //validacion para fecha actual
             var today = new Date();
             var yyyy = today.getFullYear();
@@ -2574,11 +2580,19 @@
             var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
             this.model.set("fecha_validacion_c", fecha );
             this.model.save();
+            App.alert.dismiss('autorizaSol');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
 
     },
     noauthsol: function () {
             this.model.set("vobo_dir_c", false);
-
+        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            App.alert.show('rechazaSol', {
+                level: 'process',
+                title: 'Autorizando, por favor espere.',
+            });
             //validacion para fecha actual
             var today = new Date();
             var yyyy = today.getFullYear();
@@ -2608,7 +2622,11 @@
             this.model.set("fecha_validacion_c", fecha );
             this.model.set("tct_oportunidad_perdida_chk_c", true);
             this.model.set("tct_razon_op_perdida_ddw_c", "10");
+            this.model.set('estatus_c', 'K');
             this.model.save();
+            App.alert.dismiss('rechazaSol');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
 
     },
     autorizapre: function (){
