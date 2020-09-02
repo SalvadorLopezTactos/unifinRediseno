@@ -26,14 +26,14 @@
             $('#SI').addClass('current');
             //Añade sub etapa (solo para Leasing)
             if (producto==1) {
-                $("#SE0").removeClass('ocult');
-                $('#SE0').addClass('alerta');
-                $("#SE0").html("En validación comercial");
+                $("#SE1").removeClass('ocult');
+                $('#SE1').addClass('alerta');
+                $("#SE1").html("En validación comercial");
             }
 
             //Valida si tiene subetapa "cancelada"
             if (subetapa=="K"){
-                $("#SE1").removeClass('ocult');
+                $("#SE1").removeClass('alerta');
                 $('#SE1').addClass('error');
                 $("#SE1").html("Cancelada");
             }
