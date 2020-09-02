@@ -184,3 +184,5 @@ $mod_strings['LBL_FECHA_VALIDACION'] = 'Fecha Autorización/Rechazo';
 $mod_strings['LBL_DIRECTOR_ASIGNADO'] = 'Director';
 $mod_strings['LBL_DIRECTOR_SELECCIONADO'] = 'Director Selección';
 $mod_strings['LBL_DIRECTOR_NOTIFICADO'] = 'Director notificado';
+$mod_strings['LBL_DIRECTOR_SOLICITUD'] = 'Director solicitud descripción';
+$mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Nuevo Panel 2';
