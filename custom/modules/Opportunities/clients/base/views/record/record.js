@@ -105,6 +105,8 @@
 
         //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
+        //this.model.on('sync', this.setDirectores, this);
+        //this.setDirectores();
     },
 
     fulminantcolor: function () {
@@ -156,6 +158,32 @@
         }
     },
 
+    setDirectores:function () {
+        var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
+
+        app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
+            success: _.bind(function (data) {
+
+                if (data != "") {
+
+                    if(data.length>0){
+                        var directores_list = app.lang.getAppListStrings('director_seleccion_list');
+                        for(var i=0;i<data.length;i++){
+                            directores_list[data[i].id] = data[i].name;
+                        }
+                        //Establecer nuevas opciones al campo de director
+                        this.model.fields['director_seleccionado_c'].options = directores_list;
+
+                    }
+
+
+                }
+
+            }, self),
+        });
+
+
+    },
 
     cancelClicked: function () {
         this._super('cancelClicked');
@@ -248,6 +276,9 @@
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('pipeline_opp');
+
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -1130,7 +1161,7 @@
         callback(null, fields, errors);
     },
 
-    condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
+    condicionesFinancierasIncrementoCheck: function(fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
             if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
                 if (contRI.oFinancieraRI.ratificacion.length == 0) {
@@ -1152,7 +1183,7 @@
         callback(null, fields, errors);
     },
 
-    oportunidadperdidacheck: function (fields, errors, callback) {
+    oportunidadperdidacheck: function(fields, errors, callback) {
         var omitir = [];
         _.each(errors, function (value, key) {
             if ((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0)) {
