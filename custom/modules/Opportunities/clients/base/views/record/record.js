@@ -2512,7 +2512,7 @@
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
 
-        if(producto==1) {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI") {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
