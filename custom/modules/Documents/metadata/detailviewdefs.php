@@ -75,6 +75,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'scoring_comercial_c',
+            'label' => 'LBL_SCORING_COMERCIAL',
+          ),
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
             'name' => 's_seguros_documents_1_name',
           ),
           1 => 
