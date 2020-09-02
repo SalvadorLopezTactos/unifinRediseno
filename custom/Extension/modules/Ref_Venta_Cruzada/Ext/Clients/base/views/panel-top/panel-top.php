@@ -17,6 +17,12 @@ $viewdefs['Ref_Venta_Cruzada']['base']['view']['panel-top']['buttons'] = array(
 				'acl_action' => 'create',
 				'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
             ),
+			array(
+                    'type' => 'link-action',
+                    'name' => 'select_button',
+                    'label' => 'LBL_ASSOC_RELATED_RECORD',
+                    'css_class'=>'disabled',
+                ),
         ),
     ),
 ); 
