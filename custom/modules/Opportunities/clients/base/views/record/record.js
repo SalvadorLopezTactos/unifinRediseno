@@ -2633,6 +2633,8 @@
 
     },
     autorizapre: function (){
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
         var infoDirector=this.model.get('director_solicitud_c');
         if(infoDirector!=null && infoDirector!=""){
             var res = infoDirector.split(",");
