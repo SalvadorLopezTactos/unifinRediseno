@@ -2638,7 +2638,7 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1"){
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI"{
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
