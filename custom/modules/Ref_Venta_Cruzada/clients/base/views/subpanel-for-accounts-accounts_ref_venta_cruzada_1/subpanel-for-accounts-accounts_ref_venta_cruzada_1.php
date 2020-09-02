@@ -56,6 +56,22 @@ $viewdefs['Ref_Venta_Cruzada']['base']['view']['subpanel-for-accounts-accounts_r
       ),
     ),
   ),
+  'rowactions' => 
+  array (
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'rowaction',
+        'css_class' => 'btn',
+        'tooltip' => 'LBL_PREVIEW',
+        'event' => 'list:preview:fire',
+        'icon' => 'fa-eye',
+        'acl_action' => 'view',
+        'allow_bwc' => false,
+      ),
+    ),
+  ),
   'orderBy' => 
   array (
     'field' => 'date_modified',
