@@ -73,6 +73,7 @@
         this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
         this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
         this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
+        this.model.addValidationTask('checkvobo', _.bind(this.notifvobo, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -105,6 +106,8 @@
 
         //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
+        //Validación para poder autorizar o rechazar la pre-solicitud
+        this.model.on('sync', this.autorizapre, this);
     },
 
     fulminantcolor: function () {
@@ -248,6 +251,11 @@
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('pipeline_opp');
+        //Oculta check de vobo_dir_c para que se puede obtener mediante this.model...
+        $('[data-name="vobo_dir_c"]').hide();
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -651,6 +659,9 @@
         this.context.on('button:cancela_operacion_button:click', this.cancelaOperacion, this);
         this.context.on('button:expediente_credito_button:click', this.expedienteCredito, this);
         this.context.on('button:votacion_comite_button:click', this.votacionComite, this);
+        this.context.on('button:btn_auth_button:click', this.authsol, this);
+        this.context.on('button:btn_noauth_button:click', this.noauthsol, this);
+
     },
 	/*
   	 _ValidateAmount: function (){
@@ -2466,16 +2477,116 @@
 
     validaScoring: function (fields, errors, callback) {
 
-        var documento= this.model.get('opportunities_documents_1opportunities_ida');
+        var id= this.model.get('id');
+        var producto=this.model.get('tipo_producto_c');
 
-        if(documento==""){
-            app.alert.show("Error_documento", {
-                level: "warning",
-                messages: "Se debe adjuntar el documento de scoring comercial para notificar y solicitar la autorización del director.",
-                autoClose: false
+        if(producto==1) {
+            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1"), null, {
+                success: function  (data) {
+                    if (data.records.length == 0) {
+                        app.alert.show("Error_documento", {
+                            level: "warning",
+                            messages: "Se debe adjuntar el documento de scoring comercial para notificar y solicitar la autorización del director.",
+                            autoClose: false
+                        });
+                    }
+                    callback(null, fields, errors);
+                },
+                    error: function (e) {
+                        throw e;
+                    }
             });
+        }else{
+            callback(null, fields, errors);
         }
-        callback(null, fields, errors);
     },
 
-})
+    notifvobo: function (fields, errors, callback){
+        var check=this.model.get('vobo_dir_c');
+        var producto= this.model.get('tipo_producto_c');
+        var operacion=this.model.get('tipo_de_operacion_c');
+    if ((check==false || check==undefined)&& producto==1 && operacion=='LINEA_NUEVA'){
+        app.alert.show("Error_vobo", {
+            level: "info",
+            messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
+            autoClose: false
+        });
+    }
+    callback(null, fields, errors);
+    },
+
+    authsol: function () {
+            this.model.set("vobo_dir_c", true);
+            //validacion para fecha actual
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth()+1; //January is 0!
+            var dd = today.getDate();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            var secs = today.getSeconds();
+            var zona= new Date().getTimezoneOffset()/60;
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+            if(dd<10) {
+                dd = '0'+dd
+            }
+            if(hour<10){
+                hour='0'+hour
+            }
+            if(min<10){
+                min='0'+min
+            }
+            if(secs<10){
+                secs='0'+secs
+            }
+            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+            this.model.set("fecha_validacion_c", fecha );
+            this.model.save();
+
+    },
+    noauthsol: function () {
+            this.model.set("vobo_dir_c", false);
+
+            //validacion para fecha actual
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth()+1; //January is 0!
+            var dd = today.getDate();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            var secs = today.getSeconds();
+            var zona= new Date().getTimezoneOffset()/60;
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+            if(dd<10) {
+                dd = '0'+dd
+            }
+            if(hour<10){
+                hour='0'+hour
+            }
+            if(min<10){
+                min='0'+min
+            }
+            if(secs<10){
+                secs='0'+secs
+            }
+            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+            this.model.set("fecha_validacion_c", fecha );
+            this.model.set("tct_oportunidad_perdida_chk_c", true);
+            this.model.set("tct_razon_op_perdida_ddw_c", "10");
+            this.model.save();
+
+    },
+    autorizapre: function (){
+        if (app.user.attributes.id== this.model.get('director_seleccionado_c')){
+            $('[name="vobo_leasing"]').show();
+            $('[name="rechazo_leasing"]').show();
+        }
+    },
+
+    })
