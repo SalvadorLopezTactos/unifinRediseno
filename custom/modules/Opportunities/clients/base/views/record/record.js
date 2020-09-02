@@ -2512,7 +2512,7 @@
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
 
-        if(producto==1) {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI") {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2590,11 +2590,11 @@
     },
     noauthsol: function () {
             this.model.set("vobo_dir_c", false);
-        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
             App.alert.show('rechazaSol', {
                 level: 'process',
-                title: 'Autorizando, por favor espere.',
+                title: 'Rechazando, por favor espere.',
             });
             //validacion para fecha actual
             var today = new Date();
@@ -2633,12 +2633,15 @@
 
     },
     autorizapre: function (){
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
         var infoDirector=this.model.get('director_solicitud_c');
         if(infoDirector!=null && infoDirector!=""){
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI"){
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
+            (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }

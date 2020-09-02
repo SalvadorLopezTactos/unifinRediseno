@@ -121,6 +121,8 @@
         this.model.set('date_closed', FechaCierre.getFullYear() + '-' + (FechaCierre.getMonth()+1) + '-' + FechaCierre.getDate());
         */
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+        //Valida que sea producto Leasing y SI, para setear estatus_c como 1 (En validacion Comercial)
+        this.model.addValidationTask('estatus_y_etapa', _.bind(this.setValidacionComercial, this));
 
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
@@ -1639,4 +1641,11 @@
         this.render();
       }
     },
-})
+    setValidacionComercial: function (fields, errors, callback){
+        if(this.model.get('tipo_producto_c')==1 && this.model.get('tct_etapa_ddw_c')=="SI" && $.isEmptyObject(errors)){
+            this.model.set('tct_etapa_ddw_c', "1");
+        }
+        callback(null, fields, errors);
+    },
+
+    })
