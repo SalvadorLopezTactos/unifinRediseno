@@ -2612,7 +2612,12 @@
 
     },
     autorizapre: function (){
-        if (app.user.attributes.id== this.model.get('director_seleccionado_c')){
+        var infoDirector=this.model.get('director_solicitud_c');
+        if(infoDirector!=null && infoDirector!=""){
+            var res = infoDirector.split(",");
+            this.directorSolicitudId=res[0];
+        }
+        if (app.user.attributes.id== this.directorSolicitudId){
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
