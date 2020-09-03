@@ -1,5 +1,5 @@
 ({
-    visible: falST,
+    visible: false,
     initialize: function (options) {
         //Inicializa campo custom
         options = options || {};
