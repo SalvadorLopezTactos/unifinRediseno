@@ -86,7 +86,11 @@
             if(this.model.get('tipo_producto_c')!='1'){
                 $('[data-type="opportunities_directores"]').hide();
             }else{
-                $('[data-type="opportunities_directores"]').show();
+                if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
+                  $('[data-type="opportunities_directores"]').hide();
+                }else{
+                  $('[data-type="opportunities_directores"]').show();
+                }
             }
         }
 
