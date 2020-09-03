@@ -32,6 +32,14 @@
         this.oFinanciera.condicion = [];
         this.prev_oFinanciera = [];
         this.prev_oFinanciera.prev_condicion = [];
+        
+        //Condificiones financieras RI
+        contRI = this;
+        contRI.oFinancieraRI = [];
+        contRI.oFinancieraRI.ratificacion = [];
+        contRI.prev_oFinancieraRI = [];
+        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        
         /*
 
 		 * @author Carlos Zaragoza Ortiz
@@ -61,7 +69,7 @@
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
-        this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        // this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
         this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
@@ -1140,6 +1148,7 @@
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
             if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
                 if (contRI.oFinancieraRI.ratificacion.length == 0) {
+                    // console.log("contRI = 0");
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
@@ -1150,6 +1159,7 @@
                         autoClose: false
                     });
                 } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
+                    // console.log("contRI > 1");
                     contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
 
                 }
@@ -2108,12 +2118,12 @@
     },
 
     getcfRI: function () {
-
         //Condificiones financieras RI
-        this.oFinancieraRI = [];
-        this.oFinancieraRI.ratificacion = [];
-        this.prev_oFinancieraRI = [];
-        this.prev_oFinancieraRI.prev_ratificacion = [];
+        
+        contRI.oFinancieraRI = [];
+        contRI.oFinancieraRI.ratificacion = [];
+        contRI.prev_oFinancieraRI = [];
+        contRI.prev_oFinancieraRI.prev_ratificacion = [];
 
         if (cont_RI.model.get('ratificacion_incremento_c') == true) {
 
