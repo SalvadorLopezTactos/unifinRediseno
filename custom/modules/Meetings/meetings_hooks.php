@@ -525,7 +525,7 @@ class Meetings_Hooks
 //      if ($beanUser->puestousuario_c!='27'){
 //        if(!strstr($bean->productos_c,$beanUser->tipodeproducto_c)) $bean->productos_c = $bean->productos_c.',^'.$beanUser->tipodeproducto_c.'^';
             if ($bean->parent_meeting_c) {
-                    $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c);
+                    $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c,array('disable_row_level_security' => true));
 //                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
 //                if ($beanUserPadre->puestousuario_c!='27'){
                 //$Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";

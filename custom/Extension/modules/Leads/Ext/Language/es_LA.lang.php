@@ -88,3 +88,4 @@ $mod_strings['LBL_CAMPANA'] = 'Campaña';
 $mod_strings['LBL_COMPANIA'] = 'Compañía';
 $mod_strings['LBL_PB_ID'] = 'PB ID';
 $mod_strings['LBL_DUNS_ID'] = 'DUNS ID';
+$mod_strings['LBL_ALIANZA_C'] = 'Alianza';

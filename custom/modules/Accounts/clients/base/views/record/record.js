@@ -825,7 +825,7 @@
         pld.render();
         //Potencial Autos
         Pautos.autos = app.utils.deepCopy(Pautos.prev_autos);
-        this.model.set('potencial_autos', Pautos);
+        // this.model.set('potencial_autos', Pautos);
         Pautos.render();
         // this.model._previousAttributes.account_telefonos = account_telefonos;
         // this.model._previousAttributes.account_direcciones = account_direcciones;
@@ -835,10 +835,15 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', '');
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
-        //Clasificacion Sectorial - Actividad Economica
+        //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
+        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
+        clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = clasf_sectorial.prevActEconomica.inegi_descripcion;
         clasf_sectorial.render();
-
     },
 
     bindDataChange: function () {
