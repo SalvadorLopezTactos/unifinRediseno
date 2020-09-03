@@ -87,7 +87,8 @@ class GetBossLeasing extends SugarApi
         }
 
         //Obtener usuario Gabriel
-        $idGabriel="c57e811e-b81a-cde4-d6b4-5626c9961772";
+        //$idGabriel="c57e811e-b81a-cde4-d6b4-5626c9961772";
+        $idGabriel="d0bf3b56-ed54-11ea-b6ba-a0481cdf89eb";//Usuario Gabriel Martin del Campo
         $beanUsuarioGabriel = BeanFactory::getBean('Users', $idGabriel,array('disable_row_level_security' => true));
         array_push($array_users,array('id'=>$beanUsuarioGabriel->id,'name'=>$beanUsuarioGabriel->full_name));
 
