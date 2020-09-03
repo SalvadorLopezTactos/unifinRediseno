@@ -1643,7 +1643,7 @@
     },
     setValidacionComercial: function (fields, errors, callback){
         if(this.model.get('tipo_producto_c')==1 && this.model.get('tct_etapa_ddw_c')=="SI" && $.isEmptyObject(errors)){
-            this.model.set('tct_etapa_ddw_c', "1");
+            this.model.set('estatus_c', "1");
         }
         callback(null, fields, errors);
     },
