@@ -108,6 +108,7 @@
         this.model.on('sync', this.mensajessos, this);
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
+        this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
     fulminantcolor: function () {
@@ -1249,8 +1250,8 @@
                                     success: _.bind(function (data) {
                                         if (data != null) {
                                             console.log("Se cancelo padre1");
-                                            this.model.set('estatus_c', 'K');
-                                            this.model.save();
+                                            self.model.set('estatus_c', 'K');
+                                            self.model.save();
                                             self.render();
                                             app.alert.dismiss('EstatusCancelcacion');
                                         } else {
@@ -2467,7 +2468,7 @@
                 success: function (data) {
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
-                    
+
                     if (self.model.get('estatus_c') != 'N' && checkRI != true){
 
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
@@ -2492,7 +2493,7 @@
                                 autoClose: false
                             });
                         }
-                    } 
+                    }
 
                     callback(null, fields, errors);
                 },
@@ -2549,6 +2550,7 @@
 
     authsol: function () {
             this.model.set("vobo_dir_c", true);
+            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
             $('[name="vobo_leasing"]').attr('style','pointer-events:none');
             $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
             App.alert.show('autorizaSol', {
@@ -2590,6 +2592,7 @@
     },
     noauthsol: function () {
             this.model.set("vobo_dir_c", false);
+            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
             $('[name="vobo_leasing"]').attr('style','pointer-events:none');
             $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
             App.alert.show('rechazaSol', {
@@ -2645,9 +2648,6 @@
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
-
-        //this.ShowHideDirectorSolicitud();
-;
     },
 
     ShowHideDirectorSolicitud:function () {
@@ -2656,7 +2656,14 @@
         }else{
             $('[data-name="opportunities_directores"]').hide();
         }
+    },
+
+    refrescaPipeLine: function () {
+        //Limpia pipeline
+        pipeopp.render();
+        //Ejecuta funcion para actualizar pipeline
+        pipeopp.pipelineopp();
     }
 
 
-    })
+})
