@@ -139,6 +139,8 @@
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
 
     },
 
@@ -349,8 +351,7 @@
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
         $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
         $('[data-name="estatus_c"]').attr('style','pointer-events:none');
-        //Oculta campo de control para director de la solicitud
-        $('[data-name="director_solicitud_c"]').hide();
+
     },
     /*
     *Victor Martinez Lopez
