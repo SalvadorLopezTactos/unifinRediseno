@@ -8,7 +8,22 @@ class NotificacionDirector
     function notificaDirector($bean, $event, $arguments)
     {
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
+
+            $documento="";
             //ToDo Comprobar que tiene documento adjunto
+            if($bean->load_relationship('opportunities_documents_1')){
+                $beansDocs = $bean->opportunities_documents_1->getBeans();
+                if (!empty($beansDocs)) {
+                    foreach($beansDocs as $doc){
+
+                        if($doc->tipo_documento_c=='3'){
+                            $documento=$doc->document_revision_id;
+                        }
+                    }
+
+                }
+
+            }
 
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
@@ -30,17 +45,26 @@ class NotificacionDirector
             }
 
             $urlSugarDoc=$GLOBALS['sugar_config']['site_url'].'/#Documents/';
-            $idDocumento="94d7e8f4-66cd-11e9-8eaa-00155da0710c";
-            $linkDocumento=$urlSugarDoc.$idDocumento;
 
             if($correo_director!=""){
+                $adjunto="";
+                if($documento!=""){
+                    $adjunto = "upload/".$documento;
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$linkDocumento);
+                    $file_contents=file_get_contents($adjunto);
+
+                    $archivo="upload/ScoringComercial_".$documento;
+                    file_put_contents($archivo, $file_contents);
+                    $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
+                }
+
+
+                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud);
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector);
+                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo);
                 $bean->director_notificado_c=1;
 
             }else{
@@ -86,7 +110,7 @@ class NotificacionDirector
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS RECHAZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"");
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -121,7 +145,7 @@ class NotificacionDirector
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"");
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -132,13 +156,13 @@ class NotificacionDirector
 
     }
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$linkDocumento){
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
       <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su autorización.
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
-      <br><br>Se adjunta documento con scoring comercial <a id="linkDocumento" href="'. $linkDocumento.'">click aquí</a>
+      <br><br>Se adjunta documento con scoring comercial
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
@@ -173,7 +197,7 @@ class NotificacionDirector
 
     }
 
-    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector){
+    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjunto){
         //Enviando correo a asesor origen
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -183,6 +207,9 @@ class NotificacionDirector
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
             $mailer->addRecipientsTo(new EmailIdentity($correoDirector, $nombreDirector));
+            if($adjunto!=""){
+                $mailer->addAttachment(new \Attachment($adjunto));
+            }
             $result = $mailer->send();
 
         }catch (Exception $e){
