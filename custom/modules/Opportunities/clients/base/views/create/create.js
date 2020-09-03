@@ -349,6 +349,8 @@
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
         $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
         $('[data-name="estatus_c"]').attr('style','pointer-events:none');
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
     },
     /*
     *Victor Martinez Lopez
