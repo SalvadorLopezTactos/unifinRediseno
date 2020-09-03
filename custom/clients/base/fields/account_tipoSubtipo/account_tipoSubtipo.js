@@ -1,5 +1,5 @@
 ({
-    visible: false,
+    visible: falST,
     initialize: function (options) {
         //Inicializa campo custom
         options = options || {};
@@ -28,14 +28,14 @@
 
             if (subtipoCuenta == 5) {
 
-                $("#SE1").removeClass('ocult');
-                $('#SE1').addClass('success');
-                $("#SE1").html("En Calificación");
+                $("#ST1").removeClass('ocult');
+                $('#ST1').addClass('success');
+                $("#ST1").html("En Calificación");
             }
             if (subtipoCuenta == 6) {
-                $("#SE1").removeClass('ocult');
-                $('#SE1').addClass('alerta');
-                $("#SE1").html("No Viable");
+                $("#ST1").removeClass('ocult');
+                $('#ST1').addClass('alerta');
+                $("#ST1").html("No Viable");
             }
 
         }
@@ -49,29 +49,29 @@
 
             if (subtipoCuenta == 2) {
 
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('success');
-                $("#SE2").html("Contactado");
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("Contactado");
             }
             if (subtipoCuenta == 7) {
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('success');
-                $("#SE2").html("Interesado");
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("Interesado");
             }
             if (subtipoCuenta == 8) {
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('success');
-                $("#SE2").html("Integración de Expediente");
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("Integración de Expediente");
             }
             if (subtipoCuenta == 9) {
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('success');
-                $("#SE2").html("En Crédito");
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("En Crédito");
             }
             if (subtipoCuenta == 10) {
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('error');
-                $("#SE2").html("Rechazado");
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('error');
+                $("#ST2").html("Rechazado");
             }
 
         }
@@ -85,54 +85,54 @@
             $('#cell2').addClass('done');
 
             if (subtipoCuenta == 11) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('success');
-                $("#SE3").html("Venta Activo");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('success');
+                $("#ST3").html("Venta Activo");
             }
             if (subtipoCuenta == 12) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('success');
-                $("#SE3").html("Con Linea");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('success');
+                $("#ST3").html("Con Linea");
             }
             if (subtipoCuenta == 13) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('success');
-                $("#SE3").html("Nuevo");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('success');
+                $("#ST3").html("Nuevo");
             }
             if (subtipoCuenta == 14) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('success');
-                $("#SE3").html("Unifin");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('success');
+                $("#ST3").html("Unifin");
             }
             if (subtipoCuenta == 15) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('alerta');
-                $("#SE3").html("Inactivo");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('alerta');
+                $("#ST3").html("Inactivo");
             }
             if (subtipoCuenta == 16) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('alerta');
-                $("#SE3").html("Dormido");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('alerta');
+                $("#ST3").html("Dormido");
             }
             if (subtipoCuenta == 17) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('error');
-                $("#SE3").html("Perdido");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('error');
+                $("#ST3").html("Perdido");
             }
             if (subtipoCuenta == 18) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('success');
-                $("#SE3").html("Con Línea Vigente");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('success');
+                $("#ST3").html("Con Línea Vigente");
             }
             if (subtipoCuenta == 19) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('error');
-                $("#SE3").html("Con Línea Vencida");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('error');
+                $("#ST3").html("Con Línea Vencida");
             }
             if (subtipoCuenta == 20) {
-                $("#SE3").removeClass('ocult');
-                $('#SE3').addClass('error');
-                $("#SE3").html("Con Más de un Año sin Operar");
+                $("#ST3").removeClass('ocult');
+                $('#ST3').addClass('error');
+                $("#ST3").html("Con Más de un Año sin Operar");
             }
         }
 
