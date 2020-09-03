@@ -144,4 +144,19 @@ class Upload_documents
             $GLOBALS['log']->fatal('Finaliza proceso de subida de documento a GoogleDrive');
         }
     }
+
+    function set_field_to_notification($bean, $event, $arguments){
+        if($bean->tipo_documento_c=="3"){
+            //Establecer el check de la cuenta relacionada para lanzar notificacion
+            $idSolicitud=$bean->opportunities_documents_1opportunities_ida;
+
+            $beanOpp = BeanFactory::retrieveBean('Opportunities', $idSolicitud);
+            if(!empty($beanOpp)){
+                $beanOpp->doc_scoring_chk_c=1;
+                $beanOpp->save();
+            }
+
+        }
+
+    }
 }

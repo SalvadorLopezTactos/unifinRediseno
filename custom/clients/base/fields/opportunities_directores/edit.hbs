@@ -1,0 +1,11 @@
+<script>
+    var ddwDirectores = this.$('select.director_solicitud');
+    ddwDirectores.select2();
+</script>
+<div class="span6 record-cell {{#if isVisibleDirector}}hide{{/if}}" data-type="enum" data-name="director_seleccionado_c">
+    <select class="row-fluid select2 director_solicitud">
+        {{#each directores_list}}
+            <option value="{{this.id}}" {{ifSelected this.id ../directorSolicitudId}}>{{this.text}}</option>
+        {{/each}}
+    </select>
+</div>

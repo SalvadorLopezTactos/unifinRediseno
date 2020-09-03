@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-22 11:54:48
+ // created: 2020-08-28 18:20:59
 
 $app_list_strings['tct_razon_op_perdida_list']=array (
   '' => '',
@@ -12,4 +12,5 @@ $app_list_strings['tct_razon_op_perdida_list']=array (
   'CNC' => 'EL CLIENTE NO COMPLETÓ EL EXPEDIENTE',
   'TR' => 'TIEMPO DE RESPUESTA',
   'DI' => 'DATOS INCORRECTOS/DUPLICIDAD',
+  10 => 'No cumple scoring comercial',
 );
