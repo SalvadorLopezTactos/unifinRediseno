@@ -525,14 +525,17 @@ class Meetings_Hooks
 //      if ($beanUser->puestousuario_c!='27'){
 //        if(!strstr($bean->productos_c,$beanUser->tipodeproducto_c)) $bean->productos_c = $bean->productos_c.',^'.$beanUser->tipodeproducto_c.'^';
             if ($bean->parent_meeting_c) {
-                    $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c,array('disable_row_level_security' => true));
+                $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c,array('disable_row_level_security' => true));
+
+                if(strpos( $beanparentmeeting->productos_c,"^8^")=== false
+                    && strpos( $beanparentmeeting->productos_c,"^9^")===false )
+                {
 //                $beanUserPadre=  BeanFactory:: getBean('Meetings', $beanparentmeeting->assigned_user_id);
 //                if ($beanUserPadre->puestousuario_c!='27'){
-                //$Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";
-                $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$bean->id}'";
+                    $Update="update meetings_cstm set productos_c = '{$bean->productos_c}' where id_c = '{$bean->id}'";
                     $Result=$db->query($Update);
 
-                    /*$saveproductos=array();
+                    $saveproductos=array();
                     $valorinicial=$beanparentmeeting->productos_c;
 
                     if ($valorinicial==""){
@@ -546,8 +549,19 @@ class Meetings_Hooks
                     $valorupdate=implode(",",$valoresunicos);
                     $beanparentmeeting->productos_c = empty($valorupdate) ? $valorinicial : $valorupdate;
                     $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$beanparentmeeting->id}'";
-                    $Result=$db->query($Update);*/
+                    $Result=$db->query($Update);
 //                }
+                }
+                else
+                {
+                    if ($bean->parent_meeting_c) {
+                        $beanparentmeeting = BeanFactory::getBean('Meetings', $bean->parent_meeting_c,array('disable_row_level_security' => true));
+
+                        $Update="update meetings_cstm set productos_c = '{$beanparentmeeting->productos_c}' where id_c = '{$bean->id}'";
+                        $Result=$db->query($Update);
+
+                    }
+                }
             }
 //      }
   }
