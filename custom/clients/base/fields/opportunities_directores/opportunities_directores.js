@@ -83,12 +83,15 @@
         }
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1'){
+            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
             }else{
                 if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
                   $('[data-type="opportunities_directores"]').hide();
-                }else{
+                }else if(this.model.get('tipo_de_operacion_c')=='RATIFICACION_INCREMENTO'){
+                    $('[data-type="opportunities_directores"]').hide();
+                }
+                else{
                   $('[data-type="opportunities_directores"]').show();
                 }
             }
