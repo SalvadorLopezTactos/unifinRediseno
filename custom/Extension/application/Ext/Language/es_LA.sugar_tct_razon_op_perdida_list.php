@@ -12,5 +12,5 @@ $app_list_strings['tct_razon_op_perdida_list']=array (
   'CNC' => 'EL CLIENTE NO COMPLETÓ EL EXPEDIENTE',
   'TR' => 'TIEMPO DE RESPUESTA',
   'DI' => 'DATOS INCORRECTOS/DUPLICIDAD',
-  10 => 'No cumple scoring comercial',
+  10 => 'NO CUMPLE SCORING COMERCIAL',
 );
