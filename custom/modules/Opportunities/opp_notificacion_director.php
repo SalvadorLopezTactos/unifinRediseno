@@ -10,6 +10,7 @@ class NotificacionDirector
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
 
             $documento="";
+            $extensionArchivo="";
             //ToDo Comprobar que tiene documento adjunto
             if($bean->load_relationship('opportunities_documents_1')){
                 $beansDocs = $bean->opportunities_documents_1->getBeans();
@@ -18,6 +19,9 @@ class NotificacionDirector
 
                         if($doc->tipo_documento_c=='3'){
                             $documento=$doc->document_revision_id;
+                            $nombreArchivo=$doc->filename;
+                            $explodeNameArchivo=explode(".", $nombreArchivo);
+                            $extensionArchivo=$explodeNameArchivo[1];
                         }
                     }
 
@@ -28,7 +32,7 @@ class NotificacionDirector
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
             $infoDirector=$bean->director_solicitud_c;
-            $infoDirectorSplit=explode(",", $infoDirector);;
+            $infoDirectorSplit=explode(",", $infoDirector);
             $idDirector=$infoDirectorSplit[0];
             $nombreDirector=$infoDirectorSplit[1];
             $nombreCuenta=$bean->account_name;
@@ -53,7 +57,7 @@ class NotificacionDirector
 
                     $file_contents=file_get_contents($adjunto);
 
-                    $archivo="upload/ScoringComercial_".$documento;
+                    $archivo="upload/ScoringComercial_".$documento.".".$extensionArchivo;
                     file_put_contents($archivo, $file_contents);
                     $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                 }
