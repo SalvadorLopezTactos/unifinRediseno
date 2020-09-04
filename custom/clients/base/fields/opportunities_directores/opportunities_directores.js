@@ -97,7 +97,7 @@
 
         this._super("_render");
 
-        $('#director_solicitud').select2({width: '500px'});
+        $('#director_solicitud').select2({width: '400px'});
     },
 
 })
