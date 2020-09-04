@@ -2599,10 +2599,10 @@
                     messages: "<br>La presolicitud fue autorizada corectamente.",
                     autoClose: false
                 });
+            }, error: function (model, response) {
                 $('[name="vobo_leasing"]').attr('style','pointer-events:block');
                 $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
-
-            }, error: function (model, response) { console.log("error"); } });
+            } });
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -2643,6 +2643,8 @@
         this.model.set("tct_oportunidad_perdida_chk_c", true);
         this.model.set("tct_razon_op_perdida_ddw_c", "10");
         this.model.set('estatus_c', 'K');
+
+
         this.model.save(null, { success: function (model, response) {
                 App.alert.dismiss('rechazaSol');
                 App.alert.show("autorizacion_director_ok", {
@@ -2650,9 +2652,10 @@
                     messages: "<br>La presolicitud fue rechazada corectamente.",
                     autoClose: false
                 });
-                $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-                $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
-            }, error: function (model, response) { console.log("error"); } });
+
+            }, error: function (model, response){
+            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');} });
     },
     autorizapre: function (){
         $('[name="vobo_leasing"]').hide();
