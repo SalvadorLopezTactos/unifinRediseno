@@ -97,6 +97,10 @@
             }
         }
 
+        if(this.model.get("vobo_dir_c")==true){
+            $('[data-type="opportunities_directores"]').attr('style', 'pointer-events:none;');
+        }
+
 
         this._super("_render");
 
