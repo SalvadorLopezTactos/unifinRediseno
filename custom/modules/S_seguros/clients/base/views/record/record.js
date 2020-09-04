@@ -4,13 +4,12 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         this.model.on('sync', this.roFunction, this);
+        this.model.on('change:etapa', this.refrescaPipeLine, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
+        this.model.addValidationTask('referenciado', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
-        this.model.on('change:etapa', this.refrescaPipeLine, this);
-        this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
-
     },
 
     _render: function() {
@@ -24,12 +23,11 @@
     },
 
     roFunction: function() {
-    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9)
+    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9 || app.user.get('puestousuario_c') != 55)
     		{
     		  _.each(this.model.fields, function(field)
        	  {
        			this.noEditFields.push(field.name);
-            //this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
             $('.record-edit-link-wrapper[data-name='+field.name+']').remove();
          	},this);
      			this.noEditFields.push('prima_objetivo');
@@ -94,6 +92,7 @@
       }
       callback(null, fields, errors);
     },
+
     valida_Req: function (fields, errors, callback) {
         var campos = "";
         _.each(errors, function (value, key) {
@@ -126,23 +125,30 @@
 
     validauser: function(fields, errors, callback) {
         //Validación para el referenciador asignado no sea un usuario inactivo
-        var usrid = this.model.get('user_id1_c');
+        if(this.model.get('user_id1_c')) var usrid = this.model.get('user_id1_c');
+        if(this.model.get('user_id2_c')) var usrid = this.model.get('user_id2_c');
         app.api.call("read", app.api.buildURL("Recuperauser/" + usrid, null, null, {}), null, {
             success: _.bind(function (data) {
-                if(data== "Inactive"){
+                if(data=="Inactive"){
+                  if(this.model.get('user_id1_c')) {
                     errors['referenciador'] = errors['referenciador'] || {};
                     errors['referenciador'].required = true;
-                    app.alert.show("Error Referenciador", {
-                        level: "error",
-                        title: "El referenciador seleccionado no se encuentra activo, favor de elegir otro.",
-                        autoClose: false
-                    });
+                  }
+                  if(this.model.get('user_id2_c')) {
+                    errors['empleados_c'] = errors['empleados_c'] || {};
+                    errors['empleados_c'].required = true;
+                  }
+                  app.alert.show("Error Referenciador", {
+                    level: "error",
+                    title: "El referenciador seleccionado no se encuentra activo, favor de elegir otro.",
+                    autoClose: false
+                  });
                 }
+                callback(null, fields, errors);
             }, this),
             error: function (e) {
                 throw e;
             }
         });
-        callback(null, fields, errors);
     },
 })
