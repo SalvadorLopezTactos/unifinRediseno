@@ -120,7 +120,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }else if($estatus=='P' && $bean->assigned_user_id!=""){ //Solicitud Aprobada
+        }else if($estatus=='PE' && $bean->assigned_user_id!=""){ //Solicitud Aprobada
 
             //Comprobando el fetched_row
             $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
