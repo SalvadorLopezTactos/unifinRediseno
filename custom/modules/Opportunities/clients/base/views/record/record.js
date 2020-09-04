@@ -2599,11 +2599,10 @@
                     messages: "<br>La presolicitud fue autorizada corectamente.",
                     autoClose: false
                 });
-            }, error: function (model, response) { console.log("error"); } });
-        
-        $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-        $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+                $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+                $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
 
+            }, error: function (model, response) { console.log("error"); } });
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -2651,10 +2650,9 @@
                     messages: "<br>La presolicitud fue rechazada corectamente.",
                     autoClose: false
                 });
+                $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+                $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
             }, error: function (model, response) { console.log("error"); } });
-        $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-        $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
-
     },
     autorizapre: function (){
         $('[name="vobo_leasing"]').hide();
