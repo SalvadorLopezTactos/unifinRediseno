@@ -676,7 +676,7 @@
     multiSearchOr: function (text, searchWords) {
         var regex = searchWords
             .map(word => "(?=.*\\b" + word + "\\b)")
-    .join('');
+            .join('');
         var searchExp = new RegExp(regex, "gi");
         return (searchExp.test(text)) ? "1" : "0";
     },
@@ -2516,8 +2516,9 @@
 
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
+        var operacion=this.model.get('tipo_de_operacion_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI") {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2529,9 +2530,9 @@
                     }
                     callback(null, fields, errors);
                 },
-                    error: function (e) {
-                        throw e;
-                    }
+                error: function (e) {
+                    throw e;
+                }
             });
         }else{
             callback(null, fields, errors);
@@ -2542,101 +2543,117 @@
         var check=this.model.get('vobo_dir_c');
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
-    if ((check==false || check==undefined)&& producto==1 && operacion=='LINEA_NUEVA'){
-        app.alert.show("Error_vobo", {
-            level: "info",
-            messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
-            autoClose: false
-        });
-    }
-    callback(null, fields, errors);
+        if (operacion!='RATIFICACION_INCREMENTO') {
+            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA') {
+                app.alert.show("Error_vobo", {
+                    level: "info",
+                    messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
+                    autoClose: false
+                });
+            }
+        }
+        callback(null, fields, errors);
     },
 
     authsol: function () {
-            this.model.set("vobo_dir_c", true);
-            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
-            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
-            App.alert.show('autorizaSol', {
-                level: 'process',
-                title: 'Autorizando, por favor espere.',
-            });
-            //validacion para fecha actual
-            var today = new Date();
-            var yyyy = today.getFullYear();
-            var mm = today.getMonth()+1; //January is 0!
-            var dd = today.getDate();
-            var hour = today.getHours();
-            var min = today.getMinutes();
-            var secs = today.getSeconds();
-            var zona= new Date().getTimezoneOffset()/60;
+        this.model.set("vobo_dir_c", true);
+        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+        App.alert.show('autorizaSol', {
+            level: 'process',
+            title: 'Autorizando, por favor espere.',
+        });
+        //validacion para fecha actual
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth()+1; //January is 0!
+        var dd = today.getDate();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        var secs = today.getSeconds();
+        var zona= new Date().getTimezoneOffset()/60;
 
-            if(mm<10) {
-                mm = '0'+mm
-            }
-            if(dd<10) {
-                dd = '0'+dd
-            }
-            if(hour<10){
-                hour='0'+hour
-            }
-            if(min<10){
-                min='0'+min
-            }
-            if(secs<10){
-                secs='0'+secs
-            }
-            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
-            this.model.set("fecha_validacion_c", fecha );
-            this.model.save();
-            App.alert.dismiss('autorizaSol');
-            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(hour<10){
+            hour='0'+hour
+        }
+        if(min<10){
+            min='0'+min
+        }
+        if(secs<10){
+            secs='0'+secs
+        }
+        var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+        this.model.set("fecha_validacion_c", fecha );
+        //this.model.save(),
+        this.model.save(null, { success: function (model, response) {
+                App.alert.dismiss('autorizaSol');
+                App.alert.show("autorizacion_director_ok", {
+                    level: "success",
+                    messages: "<br>La presolicitud fue autorizada corectamente.",
+                    autoClose: false
+                });
+            }, error: function (model, response) { console.log("error"); } });
+        
+        $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
 
     },
     noauthsol: function () {
-            this.model.set("vobo_dir_c", false);
-            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
-            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
-            App.alert.show('rechazaSol', {
-                level: 'process',
-                title: 'Rechazando, por favor espere.',
-            });
-            //validacion para fecha actual
-            var today = new Date();
-            var yyyy = today.getFullYear();
-            var mm = today.getMonth()+1; //January is 0!
-            var dd = today.getDate();
-            var hour = today.getHours();
-            var min = today.getMinutes();
-            var secs = today.getSeconds();
-            var zona= new Date().getTimezoneOffset()/60;
+        this.model.set("vobo_dir_c", false);
+        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+        App.alert.show('rechazaSol', {
+            level: 'process',
+            title: 'Rechazando, por favor espere.',
+        });
+        //validacion para fecha actual
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth()+1; //January is 0!
+        var dd = today.getDate();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        var secs = today.getSeconds();
+        var zona= new Date().getTimezoneOffset()/60;
 
-            if(mm<10) {
-                mm = '0'+mm
-            }
-            if(dd<10) {
-                dd = '0'+dd
-            }
-            if(hour<10){
-                hour='0'+hour
-            }
-            if(min<10){
-                min='0'+min
-            }
-            if(secs<10){
-                secs='0'+secs
-            }
-            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
-            this.model.set("fecha_validacion_c", fecha );
-            this.model.set("tct_oportunidad_perdida_chk_c", true);
-            this.model.set("tct_razon_op_perdida_ddw_c", "10");
-            this.model.set('estatus_c', 'K');
-            this.model.save();
-            App.alert.dismiss('rechazaSol');
-            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(hour<10){
+            hour='0'+hour
+        }
+        if(min<10){
+            min='0'+min
+        }
+        if(secs<10){
+            secs='0'+secs
+        }
+        var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+        this.model.set("fecha_validacion_c", fecha );
+        this.model.set("tct_oportunidad_perdida_chk_c", true);
+        this.model.set("tct_razon_op_perdida_ddw_c", "10");
+        this.model.set('estatus_c', 'K');
+        this.model.save(null, { success: function (model, response) {
+                App.alert.dismiss('rechazaSol');
+                App.alert.show("autorizacion_director_ok", {
+                    level: "error",
+                    messages: "<br>La presolicitud fue rechazada corectamente.",
+                    autoClose: false
+                });
+            }, error: function (model, response) { console.log("error"); } });
+        $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
 
     },
     autorizapre: function (){
@@ -2781,7 +2798,7 @@
             });
         }
         else{
-          callback(null, fields, errors);
+            callback(null, fields, errors);
         }
     }
 
