@@ -290,6 +290,15 @@ array (
             'label' => 'LBL_MULTILINEA_C',
           ),
         ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'notifica_fiscal_c',
+            'label' => 'LBL_NOTIFICA_FISCAL',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
