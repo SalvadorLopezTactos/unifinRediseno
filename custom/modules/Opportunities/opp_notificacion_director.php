@@ -7,7 +7,7 @@ class NotificacionDirector
 {
     function notificaDirector($bean, $event, $arguments)
     {
-        if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
+        if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->tipo_de_operacion_c!='RATIFICACION_INCREMENTO'){
 
             $documento="";
             $extensionArchivo="";
