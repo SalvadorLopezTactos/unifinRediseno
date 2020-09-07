@@ -115,13 +115,19 @@
 
         //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
-        //Validación para poder autorizar o rechazar la pre-solicitud
-        this.model.on('sync', this.autorizapre, this);
-        this.model.on('change:estatus_c', this.refrescaPipeLine, this);
-        this.showSubpanels();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
         this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
+
+        this.model.on("change:area_benef_c", _.bind(this.showfieldBenef, this));
+        this.model.on("change:subyacente_c", _.bind(this.showfieldSuby, this));
+        this.showSubpanels();
+        this.showfieldBenef();
+        this.showfieldSuby();
+
+        //Validación para poder autorizar o rechazar la pre-solicitud
+        this.model.on('sync', this.autorizapre, this);
+        this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
     fulminantcolor: function () {
@@ -684,7 +690,7 @@
     multiSearchOr: function (text, searchWords) {
         var regex = searchWords
             .map(word => "(?=.*\\b" + word + "\\b)")
-    .join('');
+            .join('');
         var searchExp = new RegExp(regex, "gi");
         return (searchExp.test(text)) ? "1" : "0";
     },
@@ -2526,8 +2532,9 @@
 
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
+        var operacion=this.model.get('tipo_de_operacion_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI") {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2539,9 +2546,9 @@
                     }
                     callback(null, fields, errors);
                 },
-                    error: function (e) {
-                        throw e;
-                    }
+                error: function (e) {
+                    throw e;
+                }
             });
         }else{
             callback(null, fields, errors);
@@ -2552,102 +2559,119 @@
         var check=this.model.get('vobo_dir_c');
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
-    if ((check==false || check==undefined)&& producto==1 && operacion=='LINEA_NUEVA'){
-        app.alert.show("Error_vobo", {
-            level: "info",
-            messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
-            autoClose: false
-        });
-    }
-    callback(null, fields, errors);
+        if (operacion!='RATIFICACION_INCREMENTO') {
+            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA') {
+                app.alert.show("Error_vobo", {
+                    level: "info",
+                    messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
+                    autoClose: false
+                });
+            }
+        }
+        callback(null, fields, errors);
     },
 
     authsol: function () {
-            this.model.set("vobo_dir_c", true);
-            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
-            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
-            App.alert.show('autorizaSol', {
-                level: 'process',
-                title: 'Autorizando, por favor espere.',
-            });
-            //validacion para fecha actual
-            var today = new Date();
-            var yyyy = today.getFullYear();
-            var mm = today.getMonth()+1; //January is 0!
-            var dd = today.getDate();
-            var hour = today.getHours();
-            var min = today.getMinutes();
-            var secs = today.getSeconds();
-            var zona= new Date().getTimezoneOffset()/60;
+        this.model.set("vobo_dir_c", true);
+        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+        App.alert.show('autorizaSol', {
+            level: 'process',
+            title: 'Autorizando, por favor espere.',
+        });
+        //validacion para fecha actual
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth()+1; //January is 0!
+        var dd = today.getDate();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        var secs = today.getSeconds();
+        var zona= new Date().getTimezoneOffset()/60;
 
-            if(mm<10) {
-                mm = '0'+mm
-            }
-            if(dd<10) {
-                dd = '0'+dd
-            }
-            if(hour<10){
-                hour='0'+hour
-            }
-            if(min<10){
-                min='0'+min
-            }
-            if(secs<10){
-                secs='0'+secs
-            }
-            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
-            this.model.set("fecha_validacion_c", fecha );
-            this.model.save();
-            App.alert.dismiss('autorizaSol');
-            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
-
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(hour<10){
+            hour='0'+hour
+        }
+        if(min<10){
+            min='0'+min
+        }
+        if(secs<10){
+            secs='0'+secs
+        }
+        var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+        this.model.set("fecha_validacion_c", fecha );
+        //this.model.save(),
+        this.model.save(null, { success: function (model, response) {
+                App.alert.dismiss('autorizaSol');
+                App.alert.show("autorizacion_director_ok", {
+                    level: "success",
+                    messages: "<br>La presolicitud fue autorizada corectamente.",
+                    autoClose: false
+                });
+            }, error: function (model, response) {
+                $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+                $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+            } });
     },
     noauthsol: function () {
-            this.model.set("vobo_dir_c", false);
-            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
-            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
-            App.alert.show('rechazaSol', {
-                level: 'process',
-                title: 'Rechazando, por favor espere.',
-            });
-            //validacion para fecha actual
-            var today = new Date();
-            var yyyy = today.getFullYear();
-            var mm = today.getMonth()+1; //January is 0!
-            var dd = today.getDate();
-            var hour = today.getHours();
-            var min = today.getMinutes();
-            var secs = today.getSeconds();
-            var zona= new Date().getTimezoneOffset()/60;
+        this.model.set("vobo_dir_c", false);
+        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+        $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+        $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+        App.alert.show('rechazaSol', {
+            level: 'process',
+            title: 'Rechazando, por favor espere.',
+        });
+        //validacion para fecha actual
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth()+1; //January is 0!
+        var dd = today.getDate();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        var secs = today.getSeconds();
+        var zona= new Date().getTimezoneOffset()/60;
 
-            if(mm<10) {
-                mm = '0'+mm
-            }
-            if(dd<10) {
-                dd = '0'+dd
-            }
-            if(hour<10){
-                hour='0'+hour
-            }
-            if(min<10){
-                min='0'+min
-            }
-            if(secs<10){
-                secs='0'+secs
-            }
-            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
-            this.model.set("fecha_validacion_c", fecha );
-            this.model.set("tct_oportunidad_perdida_chk_c", true);
-            this.model.set("tct_razon_op_perdida_ddw_c", "10");
-            this.model.set('estatus_c', 'K');
-            this.model.save();
-            App.alert.dismiss('rechazaSol');
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(hour<10){
+            hour='0'+hour
+        }
+        if(min<10){
+            min='0'+min
+        }
+        if(secs<10){
+            secs='0'+secs
+        }
+        var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+        this.model.set("fecha_validacion_c", fecha );
+        this.model.set("tct_oportunidad_perdida_chk_c", true);
+        this.model.set("tct_razon_op_perdida_ddw_c", "10");
+        this.model.set('estatus_c', 'K');
+
+
+        this.model.save(null, { success: function (model, response) {
+                App.alert.dismiss('rechazaSol');
+                App.alert.show("autorizacion_director_ok", {
+                    level: "error",
+                    messages: "<br>La presolicitud fue rechazada corectamente.",
+                    autoClose: false
+                });
+
+            }, error: function (model, response){
             $('[name="vobo_leasing"]').attr('style','pointer-events:block');
-            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
-
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');} });
     },
     autorizapre: function (){
         $('[name="vobo_leasing"]').hide();
@@ -2706,31 +2730,58 @@
     },
 
     reqBenefSuby: function (fields, errors, callback) {
+        var optionBenef = this.model.get('area_benef_c');
 
-        /** Requerido Area Beneficiada**/
-        if ((this.model.get('estado_benef_c') == undefined || this.model.get('estado_benef_c') == "")
-            && (this.model.get('municipio_benef_c') == undefined || this.model.get('municipio_benef_c') == "")
-            && (this.model.get('ent_gob_benef_c') == undefined || this.model.get('ent_gob_benef_c') == "")
-            && (this.model.get('cuenta_benef_c') == undefined || this.model.get('cuenta_benef_c') == "")
-            && (this.model.get('emp_no_reg_benef_c') == undefined || this.model.get('emp_no_reg_benef_c') == "")
-            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K' && this.model.get('tct_oportunidad_perdida_chk_c')!=true
-        ) {
-            //error
-            errors['estado_benef_c'] = errors['estado_benef_c'] || {};
-            errors['estado_benef_c'].required = true;
-            errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
-            errors['municipio_benef_c'].required = true;
-            errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
-            errors['ent_gob_benef_c'].required = true;
-            errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
-            errors['cuenta_benef_c'].required = true;
-            errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
-            errors['emp_no_reg_benef_c'].required = true;
-            app.alert.show("Requeridos Benef", {
-                level: "error",
-                messages: "Hace falta completar al menos uno de los campos de <b>Área beneficiada</b>.",
-                autoClose: false
-            });
+
+        if (optionBenef != "" && optionBenef != null && self.multilinea_prod == 1 && this.model.get('estatus_c') != 'K'
+            && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+
+            if ((optionBenef == 1 || optionBenef == 2) && this.model.get('estado_benef_c') == "") {
+                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
+                errors['estado_benef_c'].required = true;
+            }
+
+            if (optionBenef == 2 && (this.model.get('estado_benef_c') == "" || this.model.get('municipio_benef_c') == "")) {
+                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
+                errors['estado_benef_c'].required = true;
+                errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
+                errors['municipio_benef_c'].required = true;
+            }
+
+            if (optionBenef == 3 && this.model.get('ent_gob_benef_c') == "") {
+                errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
+                errors['ent_gob_benef_c'].required = true;
+            }
+
+            if (optionBenef == 4 && this.model.get('cuenta_benef_c') == "") {
+                errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
+                errors['cuenta_benef_c'].required = true;
+            }
+
+            if (optionBenef == 5 && this.model.get('emp_no_reg_benef_c') == "") {
+                errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
+                errors['emp_no_reg_benef_c'].required = true;
+            }
+
+            var campos = "";
+            _.each(errors, function (value, key) {
+                _.each(this.model.fields, function (field) {
+                    if (_.isEqual(field.name, key)) {
+                        if (field.vname) {
+                            campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                        }
+                    }
+                }, this);
+
+            }, this);
+
+            if (campos) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información de <b>Área beneficiada</b><br>" + campos,
+                    autoClose: false
+                });
+            }
         }
 
 
@@ -2740,9 +2791,9 @@
     _duplicateBenefeSuby: function (fields, errors, callback) {
 
 
-        if ( (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
-            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
-            && self.multilinea_prod==1 && this.model.get('estatus_c')!='K' && this.model.get('tct_oportunidad_perdida_chk_c')!=true
+        if ((this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
+                || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
+            && self.multilinea_prod == 1 && this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true
         ) {
             app.alert.show('duplicado_BenefSuby', {
                 level: 'process',
@@ -2752,20 +2803,20 @@
             console.log("duplicados parte uno");
             var cliente = this.model.get('account_id');
             var tipo = this.model.get('tipo_producto_c');
-            var edobenefe = this.model.get('estado_benef_c')==undefined?'':this.model.get('estado_benef_c');
-            var munibenefe = this.model.get('municipio_benef_c')==undefined?'':this.model.get('municipio_benef_c');
-            var entibenefe = this.model.get('ent_gob_benef_c')==undefined?'':this.model.get('ent_gob_benef_c');
-            var empbenefe = this.model.get('cuenta_benef_c')==undefined?'':this.model.get('cuenta_benef_c');
-            var noEmpbenefe = this.model.get('emp_no_reg_benef_c')==undefined?'':this.model.get('emp_no_reg_benef_c');
+            var edobenefe = this.model.get('estado_benef_c') == undefined ? '' : this.model.get('estado_benef_c');
+            var munibenefe = this.model.get('municipio_benef_c') == undefined ? '' : this.model.get('municipio_benef_c');
+            var entibenefe = this.model.get('ent_gob_benef_c') == undefined ? '' : this.model.get('ent_gob_benef_c');
+            var empbenefe = this.model.get('cuenta_benef_c') == undefined ? '' : this.model.get('cuenta_benef_c');
+            var noEmpbenefe = this.model.get('emp_no_reg_benef_c') == undefined ? '' : this.model.get('emp_no_reg_benef_c');
             var idOportunidad = this.model.get('id');
 
-            var concatenado=edobenefe+munibenefe+entibenefe+empbenefe+noEmpbenefe;
+            var concatenado = edobenefe + munibenefe + entibenefe + empbenefe + noEmpbenefe;
 
             var args = {
                 'idOportunidad': idOportunidad,
                 'account_id': cliente,
                 'tipo_producto_c': tipo,
-                'concatenado':concatenado
+                'concatenado': concatenado
             };
 
             var opportunities = app.api.buildURL("duplicateOpp", '', {}, {});
@@ -2790,9 +2841,108 @@
                 }, this)
             });
         }
-        else{
-          callback(null, fields, errors);
+        else {
+            callback(null, fields, errors);
         }
-    }
+    },
+
+    showfieldBenef: function () {
+        var optionBenef = this.model.get('area_benef_c');
+
+        this.model.set('estado_benef_c','');
+        this.model.set('municipio_benef','');
+        this.model.set('ent_gob_benef_c','');
+        this.model.set('cuenta_benef_c');
+        this.model.set('emp_no_reg_benef_c');
+
+
+        if ( optionBenef !="" && optionBenef !=null )
+        {
+
+            if (optionBenef == 1 || optionBenef == 2) {
+                $('[data-name="estado_benef_c"]').show();
+            } else {
+                $('[data-name="estado_benef_c"]').hide();
+            }
+
+            if (optionBenef == 2) {
+                $('[data-name="municipio_benef_c"]').show();
+            } else {
+                $('[data-name="municipio_benef_c"]').hide();
+            }
+            if (optionBenef == 3) {
+                $('[data-name="ent_gob_benef_c"]').show();
+            } else {
+                $('[data-name="ent_gob_benef_c"]').hide();
+            }
+            if (optionBenef == 4) {
+                $('[data-name="cuenta_benef_c"]').show();
+            } else {
+                $('[data-name="cuenta_benef_c"]').hide();
+            }
+            if (optionBenef == 5) {
+                $('[data-name="emp_no_reg_benef_c"]').show();
+            } else {
+                $('[data-name="emp_no_reg_benef_c"]').hide();
+            }
+        }
+        else {
+            $('[data-name="estado_benef_c"]').hide();
+            $('[data-name="municipio_benef_c"]').hide();
+            $('[data-name="ent_gob_benef_c"]').hide();
+            $('[data-name="cuenta_benef_c"]').hide();
+            $('[data-name="emp_no_reg_benef_c"]').hide();
+        }
+
+
+    },
+
+    showfieldSuby: function () {
+
+        var optionSuby = this.model.get('subyacente_c');
+
+        this.model.set('estado_suby_c');
+        this.model.set('municipio_suby_c');
+        this.model.set('ent_gob_suby_c');
+        this.model.set('otro_suby_c');
+
+        if (optionSuby != "") {
+            if (optionSuby == 1 || optionSuby == 2) {
+                $('[data-name="estado_suby_c"]').show();
+
+            } else {
+                $('[data-name="estado_suby_c"]').hide();
+            }
+
+            if (optionSuby == 2) {
+                $('[data-name="municipio_suby_c"]').show();
+
+            } else {
+                $('[data-name="municipio_suby_c"]').hide();
+
+            }
+            if (optionSuby == 3) {
+                $('[data-name="ent_gob_suby_c"]').show();
+
+            } else {
+                $('[data-name="ent_gob_suby_c"]').hide();
+
+            }
+            if (optionSuby == 4) {
+                $('[data-name="otro_suby_c"]').show();
+
+            } else {
+                $('[data-name="otro_suby_c"]').hide();
+
+            }
+        }
+        else {
+            $('[data-name="estado_suby_c"]').hide();
+            $('[data-name="municipio_suby_c"]').hide();
+            $('[data-name="ent_gob_suby_c"]').hide();
+            $('[data-name="otro_suby_c"]').hide();
+        }
+    },
+
 
 })
