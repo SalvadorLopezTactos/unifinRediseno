@@ -32,6 +32,14 @@
         this.oFinanciera.condicion = [];
         this.prev_oFinanciera = [];
         this.prev_oFinanciera.prev_condicion = [];
+        
+        //Condificiones financieras RI
+        contRI = this;
+        contRI.oFinancieraRI = [];
+        contRI.oFinancieraRI.ratificacion = [];
+        contRI.prev_oFinancieraRI = [];
+        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        
         /*
 
 		 * @author Carlos Zaragoza Ortiz
@@ -61,7 +69,7 @@
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
-        this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        // this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
         this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
@@ -73,6 +81,8 @@
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
         this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
         this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
+        this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
+        this.model.addValidationTask('checkvobo', _.bind(this.notifvobo, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -115,6 +125,9 @@
         this.showfieldBenef();
         this.showfieldSuby();
 
+        //Validación para poder autorizar o rechazar la pre-solicitud
+        this.model.on('sync', this.autorizapre, this);
+        this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
     fulminantcolor: function () {
@@ -166,6 +179,32 @@
         }
     },
 
+    setDirectores:function () {
+        var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
+
+        app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
+            success: _.bind(function (data) {
+
+                if (data != "") {
+
+                    if(data.length>0){
+                        var directores_list = app.lang.getAppListStrings('director_seleccion_list');
+                        for(var i=0;i<data.length;i++){
+                            directores_list[data[i].id] = data[i].name;
+                        }
+                        //Establecer nuevas opciones al campo de director
+                        this.model.fields['director_seleccionado_c'].options = directores_list;
+
+                    }
+
+
+                }
+
+            }, self),
+        });
+
+
+    },
 
     cancelClicked: function () {
         this._super('cancelClicked');
@@ -258,6 +297,14 @@
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('pipeline_opp');
+        //Oculta check de vobo_dir_c para que se puede obtener mediante this.model...
+        $('[data-name="vobo_dir_c"]').hide();
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
+
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -661,6 +708,9 @@
         this.context.on('button:cancela_operacion_button:click', this.cancelaOperacion, this);
         this.context.on('button:expediente_credito_button:click', this.expedienteCredito, this);
         this.context.on('button:votacion_comite_button:click', this.votacionComite, this);
+        this.context.on('button:btn_auth_button:click', this.authsol, this);
+        this.context.on('button:btn_noauth_button:click', this.noauthsol, this);
+
     },
     /*
        _ValidateAmount: function (){
@@ -1140,10 +1190,11 @@
         callback(null, fields, errors);
     },
 
-    condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
+    condicionesFinancierasIncrementoCheck: function(fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
             if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
                 if (contRI.oFinancieraRI.ratificacion.length == 0) {
+                    // console.log("contRI = 0");
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                     errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
@@ -1154,6 +1205,7 @@
                         autoClose: false
                     });
                 } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
+                    // console.log("contRI > 1");
                     contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
 
                 }
@@ -1162,7 +1214,7 @@
         callback(null, fields, errors);
     },
 
-    oportunidadperdidacheck: function (fields, errors, callback) {
+    oportunidadperdidacheck: function(fields, errors, callback) {
         var omitir = [];
         _.each(errors, function (value, key) {
             if ((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0)) {
@@ -1219,8 +1271,8 @@
                                     success: _.bind(function (data) {
                                         if (data != null) {
                                             console.log("Se cancelo padre1");
-                                            this.model.set('estatus_c', 'K');
-                                            this.model.save();
+                                            self.model.set('estatus_c', 'K');
+                                            self.model.save();
                                             self.render();
                                             app.alert.dismiss('EstatusCancelcacion');
                                         } else {
@@ -2109,15 +2161,18 @@
         this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
         this.oFinancieraRI.ratificacion = condiciones_financierasRI;
         contRI.render();
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
     },
 
     getcfRI: function () {
-
         //Condificiones financieras RI
-        this.oFinancieraRI = [];
-        this.oFinancieraRI.ratificacion = [];
-        this.prev_oFinancieraRI = [];
-        this.prev_oFinancieraRI.prev_ratificacion = [];
+        
+        contRI.oFinancieraRI = [];
+        contRI.oFinancieraRI.ratificacion = [];
+        contRI.prev_oFinancieraRI = [];
+        contRI.prev_oFinancieraRI.prev_ratificacion = [];
 
         if (cont_RI.model.get('ratificacion_incremento_c') == true) {
 
@@ -2435,8 +2490,7 @@
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
 
-                    if (self.model.get('estatus_c') != 'N' && checkRI != true) {
-
+                    if (self.model.get('estatus_c') != 'N' && checkRI != true){
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
 
                     } else if (self.model.get('estatus_c') == 'N' && checkRI == true) {
@@ -2472,6 +2526,163 @@
         } else {
             callback(null, fields, errors);
         }
+    },
+
+    validaScoring: function (fields, errors, callback) {
+
+        var id= this.model.get('id');
+        var producto=this.model.get('tipo_producto_c');
+
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI") {
+            app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
+                success: function  (data) {
+                    if (data.records.length == 0) {
+                        app.alert.show("Error_documento", {
+                            level: "warning",
+                            messages: "Se debe adjuntar el documento de scoring comercial para notificar y solicitar la autorización del director.",
+                            autoClose: false
+                        });
+                    }
+                    callback(null, fields, errors);
+                },
+                    error: function (e) {
+                        throw e;
+                    }
+            });
+        }else{
+            callback(null, fields, errors);
+        }
+    },
+
+    notifvobo: function (fields, errors, callback){
+        var check=this.model.get('vobo_dir_c');
+        var producto= this.model.get('tipo_producto_c');
+        var operacion=this.model.get('tipo_de_operacion_c');
+    if ((check==false || check==undefined)&& producto==1 && operacion=='LINEA_NUEVA'){
+        app.alert.show("Error_vobo", {
+            level: "info",
+            messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
+            autoClose: false
+        });
+    }
+    callback(null, fields, errors);
+    },
+
+    authsol: function () {
+            this.model.set("vobo_dir_c", true);
+            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            App.alert.show('autorizaSol', {
+                level: 'process',
+                title: 'Autorizando, por favor espere.',
+            });
+            //validacion para fecha actual
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth()+1; //January is 0!
+            var dd = today.getDate();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            var secs = today.getSeconds();
+            var zona= new Date().getTimezoneOffset()/60;
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+            if(dd<10) {
+                dd = '0'+dd
+            }
+            if(hour<10){
+                hour='0'+hour
+            }
+            if(min<10){
+                min='0'+min
+            }
+            if(secs<10){
+                secs='0'+secs
+            }
+            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+            this.model.set("fecha_validacion_c", fecha );
+            this.model.save();
+            App.alert.dismiss('autorizaSol');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+
+    },
+    noauthsol: function () {
+            this.model.set("vobo_dir_c", false);
+            solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+            $('[name="vobo_leasing"]').attr('style','pointer-events:none');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:none');
+            App.alert.show('rechazaSol', {
+                level: 'process',
+                title: 'Rechazando, por favor espere.',
+            });
+            //validacion para fecha actual
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth()+1; //January is 0!
+            var dd = today.getDate();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            var secs = today.getSeconds();
+            var zona= new Date().getTimezoneOffset()/60;
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+            if(dd<10) {
+                dd = '0'+dd
+            }
+            if(hour<10){
+                hour='0'+hour
+            }
+            if(min<10){
+                min='0'+min
+            }
+            if(secs<10){
+                secs='0'+secs
+            }
+            var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
+            this.model.set("fecha_validacion_c", fecha );
+            this.model.set("tct_oportunidad_perdida_chk_c", true);
+            this.model.set("tct_razon_op_perdida_ddw_c", "10");
+            this.model.set('estatus_c', 'K');
+            this.model.save();
+            App.alert.dismiss('rechazaSol');
+            $('[name="vobo_leasing"]').attr('style','pointer-events:block');
+            $('[name="rechazo_leasing"]').attr('style','pointer-events:block');
+
+    },
+    autorizapre: function (){
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
+        var infoDirector=this.model.get('director_solicitud_c');
+        if(infoDirector!=null && infoDirector!=""){
+            var res = infoDirector.split(",");
+            this.directorSolicitudId=res[0];
+        }
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
+            (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
+            $('[name="vobo_leasing"]').show();
+            $('[name="rechazo_leasing"]').show();
+        }
+    },
+
+    ShowHideDirectorSolicitud:function () {
+        if(this.model.get('tipo_producto_c')=="1"){
+            $('[data-name="opportunities_directores"]').show();
+        }else{
+            $('[data-name="opportunities_directores"]').hide();
+        }
+    },
+
+    refrescaPipeLine: function () {
+        //Limpia pipeline
+        pipeopp.render();
+        //Ejecuta funcion para actualizar pipeline
+        pipeopp.pipelineopp();
     },
 
     showSubpanels: function () {
@@ -2714,5 +2925,6 @@
             $('[data-name="otro_suby_c"]').hide();
         }
     },
+
 
 })

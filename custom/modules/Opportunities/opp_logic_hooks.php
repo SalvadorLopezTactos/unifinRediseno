@@ -197,9 +197,13 @@
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
         global $db, $current_user;
-
-        //$GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c !='6') || $bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO'){//@jesus
+            $GLOBALS['log']->fatal('Inicia creaSolicitud');
+            $generaSolicitud = false;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c!='6' && $bean->tipo_producto_c!='1') ? true : $generaSolicitud;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $bean->vobo_dir_c== true) ? true : $generaSolicitud;
+            $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO') ? true : $generaSolicitud;
+            if($generaSolicitud){
+                $GLOBALS['log']->fatal('valor generaSolicitud: '.$generaSolicitud);
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO

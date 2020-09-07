@@ -39,7 +39,7 @@
         //this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-        this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+        // this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('checkpromotorFactoraje', _.bind(this.validacrearfactoraje, this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
@@ -121,6 +121,8 @@
         this.model.set('date_closed', FechaCierre.getFullYear() + '-' + (FechaCierre.getMonth()+1) + '-' + FechaCierre.getDate());
         */
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+        //Valida que sea producto Leasing y SI, para setear estatus_c como 1 (En validacion Comercial)
+        this.model.addValidationTask('estatus_y_etapa', _.bind(this.setValidacionComercial, this));
 
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
@@ -137,6 +139,8 @@
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
         this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
@@ -352,8 +356,9 @@
         }
         //Oculta etiqueta del campo custom pipeline_opp
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
-        $('[data-name="tct_etapa_ddw_c"]').attr('style', 'pointer-events:none');
-        $('[data-name="estatus_c"]').attr('style', 'pointer-events:none');
+        $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
+        $('[data-name="estatus_c"]').attr('style','pointer-events:none');
+
     },
     /*
     *Victor Martinez Lopez
@@ -1110,23 +1115,23 @@
         callback(null, fields, errors);
     },
 
-    condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
+    // condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
 
-        if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
-            if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
-                errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
-                errors[$(".add_incremento_CondicionFinanciera")].required = true;
+    //     if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
+    //         if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
+    //             errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
+    //             errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
-                $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
-                app.alert.show("CondicionFinanciera requerida", {
-                    level: "error",
-                    title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
-                    autoClose: false
-                });
-            }
-        }
-        callback(null, fields, errors);
-    },
+    //             $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
+    //             app.alert.show("CondicionFinanciera requerida", {
+    //                 level: "error",
+    //                 title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
+    //                 autoClose: false
+    //             });
+    //         }
+    //     }
+    //     callback(null, fields, errors);
+    // },
 
     personTypeCheck: function (fields, errors, callback) {
         var self = this;
@@ -1683,6 +1688,13 @@
         }
     },
 
+    setValidacionComercial: function (fields, errors, callback){
+        if(this.model.get('tipo_producto_c')==1 && this.model.get('tct_etapa_ddw_c')=="SI" && $.isEmptyObject(errors)){
+            this.model.set('estatus_c', "1");
+        }
+        callback(null, fields, errors);
+    },
+
     reqBenefSuby: function (fields, errors, callback) {
 
         /** Requerido Area Beneficiada**/
@@ -1850,7 +1862,7 @@
 
         var optionSuby = this.model.get('subyacente_c');
 
-       this.model.set('estado_suby_c');
+        this.model.set('estado_suby_c');
         this.model.set('municipio_suby_c');
         this.model.set('ent_gob_suby_c');
         this.model.set('otro_suby_c');
