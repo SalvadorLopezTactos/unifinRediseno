@@ -14,11 +14,18 @@
                   '1': 'Prospecto'
               };
             }
-            //Prospecto
-            if(this.model.get('etapa') == 1 && this.model.get('id') != undefined) {
+            //Prospecto Empresarial
+            if(this.model.get('etapa') == 1 && this.model.get('id') != undefined && this.model.get('tipo_registro_sf_c') == 2) {
               var newOptions = {
                   '1': 'Prospecto',
                   '2': 'Cotizando'
+              };
+            }
+            //Prospecto Individual
+            if(this.model.get('etapa') == 1 && this.model.get('id') != undefined && this.model.get('tipo_registro_sf_c') == 1) {
+              var newOptions = {
+                  '1': 'Prospecto',
+                  '11': 'Solicitud de Cotización'
               };
             }
             //Cotizando
@@ -48,11 +55,19 @@
                   '6': 'Presentación de Cotización al Cliente'
               };
             }
-            //Presentación de Cotización al Cliente
-            if(this.model.get('etapa') == 6) {
+            //Presentación de Cotización al Cliente Empresarial
+            if(this.model.get('etapa') == 6 && this.model.get('tipo_registro_sf_c') == 2) {
               var newOptions = {
                   '6': 'Presentación de Cotización al Cliente',
                   '7': 'Re-negociación',
+                  '9': 'Ganada',
+                  '10': 'No Ganada'
+              };
+            }
+            //Presentación de Cotización al Cliente Individual
+            if(this.model.get('etapa') == 6 && this.model.get('tipo_registro_sf_c') == 1) {
+              var newOptions = {
+                  '6': 'Presentación de Cotización al Cliente',
                   '9': 'Ganada',
                   '10': 'No Ganada'
               };
@@ -81,6 +96,14 @@
             if(this.model.get('etapa') == 10) {
               var newOptions = {
                   '10': 'No Ganada'
+              };
+            }
+            //Solicitud de Cotización
+            if(this.model.get('etapa') == 11) {
+              var newOptions = {
+                  '11': 'Solicitud de Cotización',
+                  '4': 'Cotizado',
+                  '5': 'No Cotizado'
               };
             }
             self.items = newOptions;

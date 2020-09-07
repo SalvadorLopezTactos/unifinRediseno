@@ -39,7 +39,7 @@
         //this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-        this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+        // this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('checkpromotorFactoraje', _.bind(this.validacrearfactoraje, this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
@@ -141,11 +141,14 @@
         this.set_lista_productos();
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
-
-        this.showSubpanels();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
         this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
         this.model.addValidationTask('duplicateBenefeSuby', _.bind(this._duplicateBenefeSuby, this));
+        this.model.on("change:area_benef_c", _.bind(this.showfieldBenef, this));
+        this.model.on("change:subyacente_c", _.bind(this.showfieldSuby, this));
+        this.showSubpanels();
+        this.showfieldBenef();
+        this.showfieldSuby();
 
     },
 
@@ -1112,23 +1115,23 @@
         callback(null, fields, errors);
     },
 
-    condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
+    // condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
 
-        if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
-            if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
-                errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
-                errors[$(".add_incremento_CondicionFinanciera")].required = true;
+    //     if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
+    //         if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
+    //             errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
+    //             errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
-                $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
-                app.alert.show("CondicionFinanciera requerida", {
-                    level: "error",
-                    title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
-                    autoClose: false
-                });
-            }
-        }
-        callback(null, fields, errors);
-    },
+    //             $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
+    //             app.alert.show("CondicionFinanciera requerida", {
+    //                 level: "error",
+    //                 title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
+    //                 autoClose: false
+    //             });
+    //         }
+    //     }
+    //     callback(null, fields, errors);
+    // },
 
     personTypeCheck: function (fields, errors, callback) {
         var self = this;
@@ -1208,7 +1211,7 @@
         $('[data-name="tct_numero_vehiculos_c"]').show();
 
         /**Muestra campos de area Beneficiada y Subyacente **/
-        $('[data-name="estado_benef_c"]').show();
+       /* $('[data-name="estado_benef_c"]').show();
         $('[data-name="municipio_benef_c"]').show();
         $('[data-name="ent_gob_benef_c"]').show();
         $('[data-name="cuenta_benef_c"]').show();
@@ -1216,9 +1219,8 @@
         $('[data-name="estado_suby_c"]').show();
         $('[data-name="municipio_suby_c"]').show();
         $('[data-name="ent_gob_suby_c"]').show();
-        $('[data-name="otro_suby_c"]').show();
-
-        //Ocultando el panel de Oportunidad perdida
+        $('[data-name="otro_suby_c"]').show();*/
+               //Ocultando el panel de Oportunidad perdida
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
 
 
@@ -1670,10 +1672,15 @@
                         /** Mostrar paneles Area beneficiada y subyacente **/
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').show();
+                        $('[data-name="area_benef_c"]').show();
+                        $('[data-name="subyacente_c"]').show();
+
                     }
                     else {
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').hide();
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
+                        $('[data-name="area_benef_c"]').hide();
+                        $('[data-name="subyacente_c"]').hide();
                     }
 
                 }, self),
@@ -1691,31 +1698,58 @@
     reqBenefSuby: function (fields, errors, callback) {
 
         /** Requerido Area Beneficiada**/
-        if ((this.model.get('estado_benef_c') == undefined || this.model.get('estado_benef_c') == "")
-            && (this.model.get('municipio_benef_c') == undefined || this.model.get('municipio_benef_c') == "")
-            && (this.model.get('ent_gob_benef_c') == undefined || this.model.get('ent_gob_benef_c') == "")
-            && (this.model.get('cuenta_benef_c') == undefined || this.model.get('cuenta_benef_c') == "")
-            && (this.model.get('emp_no_reg_benef_c') == undefined || this.model.get('emp_no_reg_benef_c') == "")
-            && self.multilinea_prod==1
-        ) {
-            //error
-            errors['estado_benef_c'] = errors['estado_benef_c'] || {};
-            errors['estado_benef_c'].required = true;
-            errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
-            errors['municipio_benef_c'].required = true;
-            errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
-            errors['ent_gob_benef_c'].required = true;
-            errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
-            errors['cuenta_benef_c'].required = true;
-            errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
-            errors['emp_no_reg_benef_c'].required = true;
-            app.alert.show("Requeridos Benef", {
-                level: "error",
-                messages: "Hace falta completar al menos uno de los campos de <b>Área beneficiada</b>.",
-                autoClose: false
-            });
-        }
 
+        var optionBenef = this.model.get('area_benef_c');
+
+        if(optionBenef!='' && optionBenef!=null)
+        {
+            if ((optionBenef == 1 || optionBenef == 2) && this.model.get('estado_benef_c') == "") {
+                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
+                errors['estado_benef_c'].required = true;
+            }
+
+            if (optionBenef == 2 && (this.model.get('estado_benef_c') == "" || this.model.get('municipio_benef_c') == "")) {
+                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
+                errors['estado_benef_c'].required = true;
+                errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
+                errors['municipio_benef_c'].required = true;
+            }
+
+            if (optionBenef == 3 && this.model.get('ent_gob_benef_c') == "") {
+                errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
+                errors['ent_gob_benef_c'].required = true;
+            }
+
+            if (optionBenef == 4 && this.model.get('cuenta_benef_c') == "") {
+                errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
+                errors['cuenta_benef_c'].required = true;
+            }
+            if (optionBenef == 5 && this.model.get('emp_no_reg_benef_c') == "") {
+                errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
+                errors['emp_no_reg_benef_c'].required = true;
+            }
+
+            var campos = "";
+            _.each(errors, function (value, key) {
+                _.each(this.model.fields, function (field) {
+                    if (_.isEqual(field.name, key)) {
+                        if (field.vname) {
+                            campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                        }
+                    }
+                }, this);
+
+            }, this);
+
+            if (campos) {
+                app.alert.show("Campos Requeridos", {
+                    level: "error",
+                    messages: "Hace falta completar la siguiente información de <b>Área beneficiada</b><br>" + campos,
+                    autoClose: false
+                });
+            }
+
+        }
 
         callback(null, fields, errors);
     },
@@ -1723,25 +1757,25 @@
     _duplicateBenefeSuby: function (fields, errors, callback) {
 
 
-        if ( (this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != ""  || this.model.get('ent_gob_benef_c') != ""
-            || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
-            && self.multilinea_prod==1
+        if ((this.model.get('estado_benef_c') != "" || this.model.get('municipio_benef_c') != "" || this.model.get('ent_gob_benef_c') != ""
+                || this.model.get('cuenta_benef_c') != "" || this.model.get('emp_no_reg_benef_c') != "")
+            && self.multilinea_prod == 1
 
         ) {
             var cliente = this.model.get('account_id');
             var tipo = this.model.get('tipo_producto_c');
-            var edobenefe = this.model.get('estado_benef_c')==undefined?'':this.model.get('estado_benef_c');
-            var munibenefe = this.model.get('municipio_benef_c')==undefined?'':this.model.get('municipio_benef_c');
-            var entibenefe = this.model.get('ent_gob_benef_c')==undefined?'':this.model.get('ent_gob_benef_c');
-            var empbenefe = this.model.get('cuenta_benef_c')==undefined?'':this.model.get('cuenta_benef_c');
-            var noEmpbenefe = this.model.get('emp_no_reg_benef_c')==undefined?'':this.model.get('emp_no_reg_benef_c');
+            var edobenefe = this.model.get('estado_benef_c') == undefined ? '' : this.model.get('estado_benef_c');
+            var munibenefe = this.model.get('municipio_benef_c') == undefined ? '' : this.model.get('municipio_benef_c');
+            var entibenefe = this.model.get('ent_gob_benef_c') == undefined ? '' : this.model.get('ent_gob_benef_c');
+            var empbenefe = this.model.get('cuenta_benef_c') == undefined ? '' : this.model.get('cuenta_benef_c');
+            var noEmpbenefe = this.model.get('emp_no_reg_benef_c') == undefined ? '' : this.model.get('emp_no_reg_benef_c');
 
-            var concatenado=edobenefe+munibenefe+entibenefe+empbenefe+noEmpbenefe;
+            var concatenado = edobenefe + munibenefe + entibenefe + empbenefe + noEmpbenefe;
 
             var args = {
                 'account_id': cliente,
                 'tipo_producto_c': tipo,
-                'concatenado':concatenado
+                'concatenado': concatenado
             };
             app.alert.show('duplicado_BenefSuby', {
                 level: 'process',
@@ -1769,7 +1803,106 @@
                 }, this)
             });
         }
-        else{ callback(null, fields, errors);}
-    }
+        else {
+            callback(null, fields, errors);
+        }
+    },
+
+    showfieldBenef: function () {
+        var optionBenef = this.model.get('area_benef_c');
+
+        this.model.set('estado_benef_c','');
+        this.model.set('municipio_benef','');
+        this.model.set('ent_gob_benef_c','');
+        this.model.set('cuenta_benef_c','');
+        this.model.set('emp_no_reg_benef_c','');
+
+
+        if ( optionBenef!="" && optionBenef!=null )
+        {
+
+            if (optionBenef == 1 || optionBenef == 2) {
+                $('[data-name="estado_benef_c"]').show();
+            } else {
+                $('[data-name="estado_benef_c"]').hide();
+            }
+
+            if (optionBenef == 2) {
+                $('[data-name="municipio_benef_c"]').show();
+            } else {
+                $('[data-name="municipio_benef_c"]').hide();
+            }
+            if (optionBenef == 3) {
+                $('[data-name="ent_gob_benef_c"]').show();
+            } else {
+                $('[data-name="ent_gob_benef_c"]').hide();
+            }
+            if (optionBenef == 4) {
+                $('[data-name="cuenta_benef_c"]').show();
+            } else {
+                $('[data-name="cuenta_benef_c"]').hide();
+            }
+            if (optionBenef == 5) {
+                $('[data-name="emp_no_reg_benef_c"]').show();
+            } else {
+                $('[data-name="emp_no_reg_benef_c"]').hide();
+            }
+        }
+        else {
+            $('[data-name="estado_benef_c"]').hide();
+            $('[data-name="municipio_benef_c"]').hide();
+            $('[data-name="ent_gob_benef_c"]').hide();
+            $('[data-name="cuenta_benef_c"]').hide();
+            $('[data-name="emp_no_reg_benef_c"]').hide();
+        }
+
+
+    },
+    showfieldSuby: function () {
+
+        var optionSuby = this.model.get('subyacente_c');
+
+        this.model.set('estado_suby_c');
+        this.model.set('municipio_suby_c');
+        this.model.set('ent_gob_suby_c');
+        this.model.set('otro_suby_c');
+
+        if (optionSuby != "" && optionSuby!=null) {
+            if (optionSuby == 1 || optionSuby == 2) {
+                $('[data-name="estado_suby_c"]').show();
+
+            } else {
+                $('[data-name="estado_suby_c"]').hide();
+            }
+
+            if (optionSuby == 2) {
+                $('[data-name="municipio_suby_c"]').show();
+
+            } else {
+                $('[data-name="municipio_suby_c"]').hide();
+
+            }
+            if (optionSuby == 3) {
+                $('[data-name="ent_gob_suby_c"]').show();
+
+            } else {
+                $('[data-name="ent_gob_suby_c"]').hide();
+
+            }
+            if (optionSuby == 4) {
+                $('[data-name="otro_suby_c"]').show();
+
+            } else {
+                $('[data-name="otro_suby_c"]').hide();
+
+            }
+        }
+        else {
+            $('[data-name="estado_suby_c"]').hide();
+            $('[data-name="municipio_suby_c"]').hide();
+            $('[data-name="ent_gob_suby_c"]').hide();
+            $('[data-name="otro_suby_c"]').hide();
+        }
+    },
 
 })

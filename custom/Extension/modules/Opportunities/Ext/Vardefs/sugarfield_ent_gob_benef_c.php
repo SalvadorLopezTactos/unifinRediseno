@@ -1,6 +1,6 @@
 <?php
- // created: 2020-08-26 11:16:15
-$dictionary['Opportunity']['fields']['ent_gob_benef_c']['labelValue']='Entidad Gubernamental B';
+ // created: 2020-09-07 00:03:51
+$dictionary['Opportunity']['fields']['ent_gob_benef_c']['labelValue']='Entidad Gubernamental';
 $dictionary['Opportunity']['fields']['ent_gob_benef_c']['full_text_search']=array (
   'enabled' => '0',
   'boost' => '1',

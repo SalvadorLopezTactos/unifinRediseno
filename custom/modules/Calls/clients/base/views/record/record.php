@@ -362,6 +362,9 @@ array (
               ),
               12 => 
               array (
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO_C',
+                'readonly' => true,
               ),
               13 => 
               array (

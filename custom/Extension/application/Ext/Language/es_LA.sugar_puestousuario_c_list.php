@@ -1,6 +1,5 @@
 <?php
- // created: 2020-09-02 14:35:23
-
+ // created: 2020-09-07 10:26:55
 $app_list_strings['puestousuario_c_list']=array (
   '' => '',
   1 => 'DGA COMERCIAL LEASING',
@@ -58,4 +57,5 @@ $app_list_strings['puestousuario_c_list']=array (
   53 => 'ASESOR UNICLICK',
   54 => 'ASESOR RM',
   55 => 'DIRECTOR SEGUIMIENTO LEASING',
+  56 => 'SEGUROS',
 );

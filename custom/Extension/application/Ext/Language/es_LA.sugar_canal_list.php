@@ -1,5 +1,5 @@
 <?php
- // created: 2020-04-28 17:26:28
+ // created: 2020-09-03 11:37:36
 
 $app_list_strings['canal_list']=array (
   0 => '',
@@ -10,4 +10,5 @@ $app_list_strings['canal_list']=array (
   5 => 'Alianza',
   6 => 'Referenciador',
   7 => 'Referenciación Interna',
+  8 => 'Referenciador Cliente',
 );
