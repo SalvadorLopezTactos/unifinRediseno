@@ -11,9 +11,7 @@ class Seguros_SF
     {
       $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
       $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
-//      if($cuenta->tipo_registro_cuenta_c == 2)
         $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
-//      {
         global $sugar_config;
         global $app_list_strings;
    			require_once 'include/api/SugarApiException.php';
@@ -42,8 +40,6 @@ class Seguros_SF
               salesforce_id_c='{$id_sf}'
               where id_c = '{$cuenta->id}'";
             $updateExecute = $db->query($update);
-            // $cuenta->salesforce_id_c = $id_sf;
-            // $cuenta->save();
           }
         }
         //Prospecto
@@ -81,7 +77,6 @@ class Seguros_SF
               "tipoDeRegistroC" => $tipoDeRegistroC,
               "ramoC" => $ramoC,
               "currencyIsoCode" => $currencyIsoCode,
-              "oportunidadInternacionalC" => $oportunidadInternacionalC,
               "oficinaC" => $oficinaC,
               "kamC" => $kamC,
               "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
@@ -104,7 +99,6 @@ class Seguros_SF
               "tipoDeRegistroC" => $tipoDeRegistroC,
               "ramoC" => $ramoC,
               "currencyIsoCode" => $currencyIsoCode,
-              "oportunidadInternacionalC" => $oportunidadInternacionalC,
               "oficinaC" => $oficinaC,
               "kamC" => $kamC,
               "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
@@ -116,7 +110,6 @@ class Seguros_SF
               "ingresoObjetivoC" => $bean->ingreso_inc
             );
           }
-          if($bean->tipo_registro_sf_c == 1) unset($arreglo['oportunidadInternacionalC']);
           $content = json_encode($arreglo);
           $GLOBALS['log']->fatal($content);
           $curl = curl_init($url);
@@ -174,6 +167,54 @@ class Seguros_SF
       		$response = curl_exec($curl);
       		curl_close($curl);
           $GLOBALS['log']->fatal('Informacion de Cotizando enviada: ' .$response);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //Cotizado
+        if($bean->etapa == 4)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "COTIZADO",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName
+          ));
+          $GLOBALS['log']->fatal($content);
+          $curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
+        //No Cotizado
+        if($bean->etapa == 5)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "NOCOTIZADO",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName
+          ));
+          $GLOBALS['log']->fatal($content);
+          $curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Presentación
@@ -270,7 +311,7 @@ class Seguros_SF
           curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
-        //Perdida
+        //No Ganada
         if($bean->etapa == 10)
         {
           $token = $this->getToken();
@@ -278,14 +319,16 @@ class Seguros_SF
           $razonPerdida = $app_list_strings['razon_perdida_list'][$bean->razon_perdida_c];
           $no_renovable_c = $app_list_strings['no_renovable_list'][$bean->no_renovable_c];
       		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
-      		$content = json_encode(array(
+      		$arreglo = array(
             "etapa" => "PERDIDA",
             "oportinidadId" => $bean->id_salesforce,
             "stageName" => $stageName,
             "razonPerdida" => $razonPerdida,
             "comentariosRazonPerdida" => $bean->comentarios_c,
             "ramoNoRenovablec" => $no_renovable_c
-          ));
+          );
+          if($bean->tipo_registro_sf_c == 1) unset($arreglo['ramoNoRenovablec']);
+          $content = json_encode($arreglo);
       		$curl = curl_init($url);
       		curl_setopt($curl, CURLOPT_HEADER, false);
       		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -299,7 +342,30 @@ class Seguros_SF
           curl_close($curl);
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
-//      }
+        //Solicitud de Cotización
+        if($bean->etapa == 11)
+        {
+          $token = $this->getToken();
+          $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+      		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
+      		$content = json_encode(array(
+            "etapa" => "SOLICITUDCOTIZACION",
+            "oportinidadId" => $bean->id_salesforce,
+            "stageName" => $stageName
+          ));
+          $GLOBALS['log']->fatal($content);
+          $curl = curl_init($url);
+      		curl_setopt($curl, CURLOPT_HEADER, false);
+      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      		curl_setopt($curl, CURLOPT_HTTPHEADER,
+      		array("Authorization: Bearer $token",
+      			"Content-type: application/json"));
+      		curl_setopt($curl, CURLOPT_POST, true);
+      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+      		$response = curl_exec($curl);
+      		curl_close($curl);
+          if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+        }
         $GLOBALS['log']->fatal('Finaliza Seguros_SalesForce');
     }
 

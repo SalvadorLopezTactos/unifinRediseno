@@ -39,7 +39,7 @@
         //this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-        this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+        // this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('checkpromotorFactoraje', _.bind(this.validacrearfactoraje, this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
@@ -1112,23 +1112,23 @@
         callback(null, fields, errors);
     },
 
-    condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
+    // condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
 
-        if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
-            if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
-                errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
-                errors[$(".add_incremento_CondicionFinanciera")].required = true;
+    //     if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4) {
+    //         if (_.isEmpty(this.model.get('condiciones_financieras_incremento_ratificacion'))) {
+    //             errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
+    //             errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
-                $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
-                app.alert.show("CondicionFinanciera requerida", {
-                    level: "error",
-                    title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
-                    autoClose: false
-                });
-            }
-        }
-        callback(null, fields, errors);
-    },
+    //             $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
+    //             app.alert.show("CondicionFinanciera requerida", {
+    //                 level: "error",
+    //                 title: "Al menos una Condicion Financiera de Incremento/Ratificacion es requerida.",
+    //                 autoClose: false
+    //             });
+    //         }
+    //     }
+    //     callback(null, fields, errors);
+    // },
 
     personTypeCheck: function (fields, errors, callback) {
         var self = this;
