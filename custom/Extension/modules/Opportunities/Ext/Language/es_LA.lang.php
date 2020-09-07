@@ -199,3 +199,5 @@ $mod_strings['LBL_MUNICIPIO_BENEF_C'] = 'Municipio';
 $mod_strings['LBL_ENT_GOB_BENEF_C'] = 'Entidad Gubernamental';
 $mod_strings['LBL_CUENTA_BENEF_C'] = 'Empresa Registrada UNIFIN';
 $mod_strings['LBL_EMP_NO_REG_BENEF_C'] = 'Empresa No Registrada UNIFIN';
+$mod_strings['LBL_AREA_BENEF_C'] = 'Área beneficiada';
+$mod_strings['LBL_SUBYACENTE_C'] = 'Subyacente';
