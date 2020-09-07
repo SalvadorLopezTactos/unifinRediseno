@@ -20,3 +20,4 @@ $mod_strings['LNK_NEW_OPPORTUNITY'] = 'Nueva Solicitud y Línea';
 $mod_strings['LBL_TCT_CALL_FROM_ISSABEL_C'] = 'Llamada realizada desde issabel';
 $mod_strings['LBL_CALL_MEETING'] = 'Reunión / Llamada';
 $mod_strings['LBL_TCT_PARENT_CALL_ID_TXF'] = 'ID Llamada padre';
+$mod_strings['LBL_PRODUCTO_C'] = 'Producto';

@@ -1,6 +1,5 @@
 <?php
  // created: 2020-09-07 10:26:55
-
 $app_list_strings['puestousuario_c_list']=array (
   '' => '',
   1 => 'DGA COMERCIAL LEASING',

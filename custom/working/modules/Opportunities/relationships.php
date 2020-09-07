@@ -656,6 +656,117 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
+  'tct2_notificaciones_opportunities' => 
+  array (
+    'name' => 'tct2_notificaciones_opportunities',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'tct2_notificaciones_opportunities' => 
+      array (
+        'lhs_module' => 'Opportunities',
+        'lhs_table' => 'opportunities',
+        'lhs_key' => 'id',
+        'rhs_module' => 'TCT2_Notificaciones',
+        'rhs_table' => 'tct2_notificaciones',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'tct2_notificaciones_opportunities_c',
+        'join_key_lhs' => 'tct2_notificaciones_opportunitiesopportunities_ida',
+        'join_key_rhs' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
+      ),
+    ),
+    'table' => 'tct2_notificaciones_opportunities_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'tct2_notificaciones_opportunitiesopportunities_ida' => 
+      array (
+        'name' => 'tct2_notificaciones_opportunitiesopportunities_ida',
+        'type' => 'id',
+      ),
+      'tct2_notificaciones_opportunitiestct2_notificaciones_idb' => 
+      array (
+        'name' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_tct2_notificaciones_opportunities_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_tct2_notificaciones_opportunities_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tct2_notificaciones_opportunitiesopportunities_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_tct2_notificaciones_opportunities_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'tct2_notificaciones_opportunities_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Opportunities',
+    'lhs_table' => 'opportunities',
+    'lhs_key' => 'id',
+    'rhs_module' => 'TCT2_Notificaciones',
+    'rhs_table' => 'tct2_notificaciones',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'tct2_notificaciones_opportunities_c',
+    'join_key_lhs' => 'tct2_notificaciones_opportunitiesopportunities_ida',
+    'join_key_rhs' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
+    'readonly' => true,
+    'relationship_name' => 'tct2_notificaciones_opportunities',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
   'opportunities_opportunities_1' => 
   array (
     'name' => 'opportunities_opportunities_1',
@@ -756,6 +867,216 @@ $relationships = array (
     'relationship_name' => 'opportunities_opportunities_1',
     'rhs_subpanel' => 'ForOpportunitiesOpportunities_opportunities_1',
     'lhs_subpanel' => 'ForOpportunitiesOpportunities_opportunities_1',
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'lev_backlog_opportunities' => 
+  array (
+    'name' => 'lev_backlog_opportunities',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'lev_backlog_opportunities' => 
+      array (
+        'lhs_module' => 'Opportunities',
+        'lhs_table' => 'opportunities',
+        'lhs_key' => 'id',
+        'rhs_module' => 'lev_Backlog',
+        'rhs_table' => 'lev_backlog',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'lev_backlog_opportunities_c',
+        'join_key_lhs' => 'lev_backlog_opportunitiesopportunities_ida',
+        'join_key_rhs' => 'lev_backlog_opportunitieslev_backlog_idb',
+      ),
+    ),
+    'table' => 'lev_backlog_opportunities_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'lev_backlog_opportunitiesopportunities_ida' => 
+      array (
+        'name' => 'lev_backlog_opportunitiesopportunities_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'lev_backlog_opportunitieslev_backlog_idb' => 
+      array (
+        'name' => 'lev_backlog_opportunitieslev_backlog_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'lev_backlog_opportunitiesspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'lev_backlog_opportunities_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'lev_backlog_opportunitiesopportunities_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'lev_backlog_opportunities_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'lev_backlog_opportunitieslev_backlog_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Opportunities',
+    'lhs_table' => 'opportunities',
+    'lhs_key' => 'id',
+    'rhs_module' => 'lev_Backlog',
+    'rhs_table' => 'lev_backlog',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'lev_backlog_opportunities_c',
+    'join_key_lhs' => 'lev_backlog_opportunitiesopportunities_ida',
+    'join_key_rhs' => 'lev_backlog_opportunitieslev_backlog_idb',
+    'readonly' => true,
+    'relationship_name' => 'lev_backlog_opportunities',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
+  'accounts_opportunities_1' => 
+  array (
+    'name' => 'accounts_opportunities_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'accounts_opportunities_1' => 
+      array (
+        'lhs_module' => 'Accounts',
+        'lhs_table' => 'accounts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Opportunities',
+        'rhs_table' => 'opportunities',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'accounts_opportunities_1_c',
+        'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
+        'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+      ),
+    ),
+    'table' => 'accounts_opportunities_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'accounts_opportunities_1accounts_ida' => 
+      array (
+        'name' => 'accounts_opportunities_1accounts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'accounts_opportunities_1opportunities_idb' => 
+      array (
+        'name' => 'accounts_opportunities_1opportunities_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'accounts_opportunities_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'accounts_opportunities_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'accounts_opportunities_1accounts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'accounts_opportunities_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'accounts_opportunities_1opportunities_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Opportunities',
+    'rhs_table' => 'opportunities',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'accounts_opportunities_1_c',
+    'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
+    'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
+    'readonly' => true,
+    'relationship_name' => 'accounts_opportunities_1',
+    'rhs_subpanel' => 'ForAccountsOpportunities',
+    'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
@@ -971,327 +1292,6 @@ $relationships = array (
     'for_activities' => false,
     'from_studio' => false,
   ),
-  'tct2_notificaciones_opportunities' => 
-  array (
-    'name' => 'tct2_notificaciones_opportunities',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'tct2_notificaciones_opportunities' => 
-      array (
-        'lhs_module' => 'Opportunities',
-        'lhs_table' => 'opportunities',
-        'lhs_key' => 'id',
-        'rhs_module' => 'TCT2_Notificaciones',
-        'rhs_table' => 'tct2_notificaciones',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'tct2_notificaciones_opportunities_c',
-        'join_key_lhs' => 'tct2_notificaciones_opportunitiesopportunities_ida',
-        'join_key_rhs' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
-      ),
-    ),
-    'table' => 'tct2_notificaciones_opportunities_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'id',
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'default' => 0,
-      ),
-      'tct2_notificaciones_opportunitiesopportunities_ida' => 
-      array (
-        'name' => 'tct2_notificaciones_opportunitiesopportunities_ida',
-        'type' => 'id',
-      ),
-      'tct2_notificaciones_opportunitiestct2_notificaciones_idb' => 
-      array (
-        'name' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
-        'type' => 'id',
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'idx_tct2_notificaciones_opportunities_pk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'idx_tct2_notificaciones_opportunities_ida1_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'tct2_notificaciones_opportunitiesopportunities_ida',
-          1 => 'deleted',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'idx_tct2_notificaciones_opportunities_idb2_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
-          1 => 'deleted',
-        ),
-      ),
-      3 => 
-      array (
-        'name' => 'tct2_notificaciones_opportunities_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Opportunities',
-    'lhs_table' => 'opportunities',
-    'lhs_key' => 'id',
-    'rhs_module' => 'TCT2_Notificaciones',
-    'rhs_table' => 'tct2_notificaciones',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'tct2_notificaciones_opportunities_c',
-    'join_key_lhs' => 'tct2_notificaciones_opportunitiesopportunities_ida',
-    'join_key_rhs' => 'tct2_notificaciones_opportunitiestct2_notificaciones_idb',
-    'readonly' => true,
-    'relationship_name' => 'tct2_notificaciones_opportunities',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'lev_backlog_opportunities' => 
-  array (
-    'name' => 'lev_backlog_opportunities',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'lev_backlog_opportunities' => 
-      array (
-        'lhs_module' => 'Opportunities',
-        'lhs_table' => 'opportunities',
-        'lhs_key' => 'id',
-        'rhs_module' => 'lev_Backlog',
-        'rhs_table' => 'lev_backlog',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'lev_backlog_opportunities_c',
-        'join_key_lhs' => 'lev_backlog_opportunitiesopportunities_ida',
-        'join_key_rhs' => 'lev_backlog_opportunitieslev_backlog_idb',
-      ),
-    ),
-    'table' => 'lev_backlog_opportunities_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'lev_backlog_opportunitiesopportunities_ida' => 
-      array (
-        'name' => 'lev_backlog_opportunitiesopportunities_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'lev_backlog_opportunitieslev_backlog_idb' => 
-      array (
-        'name' => 'lev_backlog_opportunitieslev_backlog_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'lev_backlog_opportunitiesspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'lev_backlog_opportunities_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'lev_backlog_opportunitiesopportunities_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'lev_backlog_opportunities_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'lev_backlog_opportunitieslev_backlog_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Opportunities',
-    'lhs_table' => 'opportunities',
-    'lhs_key' => 'id',
-    'rhs_module' => 'lev_Backlog',
-    'rhs_table' => 'lev_backlog',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'lev_backlog_opportunities_c',
-    'join_key_lhs' => 'lev_backlog_opportunitiesopportunities_ida',
-    'join_key_rhs' => 'lev_backlog_opportunitieslev_backlog_idb',
-    'readonly' => true,
-    'relationship_name' => 'lev_backlog_opportunities',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
-  ),
-  'accounts_opportunities_1' => 
-  array (
-    'name' => 'accounts_opportunities_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'accounts_opportunities_1' => 
-      array (
-        'lhs_module' => 'Accounts',
-        'lhs_table' => 'accounts',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Opportunities',
-        'rhs_table' => 'opportunities',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'accounts_opportunities_1_c',
-        'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
-        'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
-      ),
-    ),
-    'table' => 'accounts_opportunities_1_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'accounts_opportunities_1accounts_ida' => 
-      array (
-        'name' => 'accounts_opportunities_1accounts_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'accounts_opportunities_1opportunities_idb' => 
-      array (
-        'name' => 'accounts_opportunities_1opportunities_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'accounts_opportunities_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'accounts_opportunities_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'accounts_opportunities_1accounts_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'accounts_opportunities_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'accounts_opportunities_1opportunities_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Opportunities',
-    'rhs_table' => 'opportunities',
-    'rhs_key' => 'id',
-    'relationship_type' => 'one-to-many',
-    'join_table' => 'accounts_opportunities_1_c',
-    'join_key_lhs' => 'accounts_opportunities_1accounts_ida',
-    'join_key_rhs' => 'accounts_opportunities_1opportunities_idb',
-    'readonly' => true,
-    'relationship_name' => 'accounts_opportunities_1',
-    'rhs_subpanel' => 'ForAccountsOpportunities',
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-  ),
   'opportunities_ag_vendedores_1' => 
   array (
     'name' => 'opportunities_ag_vendedores_1',
@@ -1392,6 +1392,108 @@ $relationships = array (
     'relationship_name' => 'opportunities_ag_vendedores_1',
     'rhs_subpanel' => NULL,
     'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'opportunities_opportunities_2' => 
+  array (
+    'name' => 'opportunities_opportunities_2',
+    'true_relationship_type' => 'one-to-one',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'opportunities_opportunities_2' => 
+      array (
+        'lhs_module' => 'Opportunities',
+        'lhs_table' => 'opportunities',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Opportunities',
+        'rhs_table' => 'opportunities',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'opportunities_opportunities_2_c',
+        'join_key_lhs' => 'opportunities_opportunities_2opportunities_ida',
+        'join_key_rhs' => 'opportunities_opportunities_2opportunities_idb',
+      ),
+    ),
+    'table' => 'opportunities_opportunities_2_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'opportunities_opportunities_2opportunities_ida' => 
+      array (
+        'name' => 'opportunities_opportunities_2opportunities_ida',
+        'type' => 'id',
+      ),
+      'opportunities_opportunities_2opportunities_idb' => 
+      array (
+        'name' => 'opportunities_opportunities_2opportunities_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_opportunities_opportunities_2_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_opportunities_opportunities_2_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'opportunities_opportunities_2opportunities_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_opportunities_opportunities_2_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'opportunities_opportunities_2opportunities_idb',
+          1 => 'deleted',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Opportunities',
+    'lhs_table' => 'opportunities',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Opportunities',
+    'rhs_table' => 'opportunities',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-one',
+    'join_table' => 'opportunities_opportunities_2_c',
+    'join_key_lhs' => 'opportunities_opportunities_2opportunities_ida',
+    'join_key_rhs' => 'opportunities_opportunities_2opportunities_idb',
+    'readonly' => true,
+    'relationship_name' => 'opportunities_opportunities_2',
+    'rhs_subpanel' => 'ForOpportunitiesOpportunities_opportunities_1',
+    'lhs_subpanel' => 'ForOpportunitiesOpportunities_opportunities_1',
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
@@ -1748,17 +1850,20 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'opportunities_opportunities_2' => 
+  'opportunities_documents_1' => 
   array (
+    'rhs_label' => 'Documentos',
+    'lhs_label' => 'Solicitudes y Líneas',
+    'rhs_subpanel' => 'default',
     'lhs_module' => 'Opportunities',
-    'rhs_module' => 'Opportunities',
-    'relationship_type' => 'one-to-one',
+    'rhs_module' => 'Documents',
+    'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'opportunities_opportunities_2',
+    'relationship_name' => 'opportunities_documents_1',
   ),
 );
