@@ -23,6 +23,9 @@
         this.events['click a[name=amount]'] = 'formatcoin';
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
         this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
 
         /*
         Contexto campos custom
@@ -2665,7 +2668,7 @@
         this.model.save(null, { success: function (model, response) {
                 App.alert.dismiss('rechazaSol');
                 App.alert.show("autorizacion_director_ok", {
-                    level: "error",
+                    level: "success",
                     messages: "<br>La presolicitud fue rechazada corectamente.",
                     autoClose: false
                 });
@@ -2684,6 +2687,8 @@
         }
         if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
             (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
+            $('[name="vobo_leasing"]').removeClass('hidden');
+            $('[name="rechazo_leasing"]').removeClass('hidden');
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
@@ -2733,6 +2738,7 @@
     reqBenefSuby: function (fields, errors, callback) {
         var optionBenef = this.model.get('area_benef_c');
 
+        var campos_err = [];
 
         if (optionBenef != "" && optionBenef != null && self.multilinea_prod == 1 && this.model.get('estatus_c') != 'K'
             && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
@@ -2740,41 +2746,45 @@
             if ((optionBenef == 1 || optionBenef == 2) && this.model.get('estado_benef_c') == "") {
                 errors['estado_benef_c'] = errors['estado_benef_c'] || {};
                 errors['estado_benef_c'].required = true;
+
+                campos_err.push('estado_benef_c');
             }
 
             if (optionBenef == 2 && (this.model.get('estado_benef_c') == "" || this.model.get('municipio_benef_c') == "")) {
-                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
-                errors['estado_benef_c'].required = true;
                 errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
                 errors['municipio_benef_c'].required = true;
+                campos_err.push('municipio_benef_c');
             }
 
             if (optionBenef == 3 && this.model.get('ent_gob_benef_c') == "") {
                 errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
                 errors['ent_gob_benef_c'].required = true;
+                campos_err.push('ent_gob_benef_c');
             }
 
             if (optionBenef == 4 && this.model.get('cuenta_benef_c') == "") {
                 errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
                 errors['cuenta_benef_c'].required = true;
+                campos_err.push('cuenta_benef_c');
             }
-
             if (optionBenef == 5 && this.model.get('emp_no_reg_benef_c') == "") {
                 errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
                 errors['emp_no_reg_benef_c'].required = true;
+                campos_err.push('emp_no_reg_benef_c');
             }
 
             var campos = "";
-            _.each(errors, function (value, key) {
+
+            for (var i = 0; i < campos_err.length; i++) {
                 _.each(this.model.fields, function (field) {
-                    if (_.isEqual(field.name, key)) {
+                    if (_.isEqual(field.name, campos_err[i])) {
                         if (field.vname) {
                             campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
                         }
                     }
                 }, this);
 
-            }, this);
+            }
 
             if (campos) {
                 app.alert.show("Campos Requeridos", {
