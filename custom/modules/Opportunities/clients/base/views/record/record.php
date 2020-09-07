@@ -746,34 +746,48 @@ array (
             'placeholders' => 1,
             'fields' => 
             array (
-              0 => 
+               0 =>
+               array (
+                'name' => 'area_benef_c',
+               'label' => 'LBL_AREA_BENEF_C',
+               'studio' => 'visible',
+              ),
+              1 =>
+              array (
+                ),
+              2 =>
               array (
                 'name' => 'estado_benef_c',
                 'label' => 'LBL_ESTADO_BENEF_C',
-                'studio' => 'visible',
               ),
-              1 => 
+              3 =>
               array (
                 'name' => 'municipio_benef_c',
                 'label' => 'LBL_MUNICIPIO_BENEF_C',
               ),
-              2 => 
+              4 =>
               array (
                 'name' => 'ent_gob_benef_c',
                 'label' => 'LBL_ENT_GOB_BENEF_C',
               ),
-              3 => 
+              5 =>
+                    array (
+                    ),
+              6 =>
               array (
                 'name' => 'cuenta_benef_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CUENTA_BENEF_C',
               ),
-              4 => 
+              7 =>
+                    array (
+                    ),
+              8 =>
               array (
                 'name' => 'emp_no_reg_benef_c',
                 'label' => 'LBL_EMP_NO_REG_BENEF_C',
               ),
-              5 => 
+              9 =>
               array (
               ),
             ),
@@ -789,22 +803,33 @@ array (
             'placeholders' => 1,
             'fields' => 
             array (
-              0 => 
+              0 =>
+               array (
+                'name' => 'subyacente_c',
+                'label' => 'LBL_SUBYACENTE_C',
+               ),
+              1 =>
+               array (
+                ),
+              2 =>
               array (
                 'name' => 'estado_suby_c',
                 'label' => 'LBL_ESTADO_SUBY_C',
               ),
-              1 => 
+              3 =>
               array (
                 'name' => 'municipio_suby_c',
                 'label' => 'LBL_MUNICIPIO_SUBY_C',
               ),
-              2 => 
+              4 =>
               array (
                 'name' => 'ent_gob_suby_c',
                 'label' => 'LBL_ENT_GOB_SUBY_C',
               ),
-              3 => 
+                5 =>
+                array (
+                ),
+              6 =>
               array (
                 'name' => 'otro_suby_c',
                 'studio' => 'visible',
