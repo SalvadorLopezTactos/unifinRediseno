@@ -2948,7 +2948,7 @@
 
                 app.alert.show("cAMPO bENEF", {
                     level: "error",
-                    messages: "Denbe seleccionar un valor en  Área beneficiada .",
+                    messages: "<br>Debe seleccionar un valor de Área beneficiada.</br> ",
                     autoClose: false
                 });
             }
