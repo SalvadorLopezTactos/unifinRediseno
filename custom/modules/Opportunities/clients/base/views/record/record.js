@@ -2738,6 +2738,7 @@
     reqBenefSuby: function (fields, errors, callback) {
         var optionBenef = this.model.get('area_benef_c');
 
+        var campos_err = [];
 
         if (optionBenef != "" && optionBenef != null && self.multilinea_prod == 1 && this.model.get('estatus_c') != 'K'
             && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
@@ -2745,41 +2746,45 @@
             if ((optionBenef == 1 || optionBenef == 2) && this.model.get('estado_benef_c') == "") {
                 errors['estado_benef_c'] = errors['estado_benef_c'] || {};
                 errors['estado_benef_c'].required = true;
+
+                campos_err.push('estado_benef_c');
             }
 
             if (optionBenef == 2 && (this.model.get('estado_benef_c') == "" || this.model.get('municipio_benef_c') == "")) {
-                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
-                errors['estado_benef_c'].required = true;
                 errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
                 errors['municipio_benef_c'].required = true;
+                campos_err.push('municipio_benef_c');
             }
 
             if (optionBenef == 3 && this.model.get('ent_gob_benef_c') == "") {
                 errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
                 errors['ent_gob_benef_c'].required = true;
+                campos_err.push('ent_gob_benef_c');
             }
 
             if (optionBenef == 4 && this.model.get('cuenta_benef_c') == "") {
                 errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
                 errors['cuenta_benef_c'].required = true;
+                campos_err.push('cuenta_benef_c');
             }
-
             if (optionBenef == 5 && this.model.get('emp_no_reg_benef_c') == "") {
                 errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
                 errors['emp_no_reg_benef_c'].required = true;
+                campos_err.push('emp_no_reg_benef_c');
             }
 
             var campos = "";
-            _.each(errors, function (value, key) {
+
+            for (var i = 0; i < campos_err.length; i++) {
                 _.each(this.model.fields, function (field) {
-                    if (_.isEqual(field.name, key)) {
+                    if (_.isEqual(field.name, campos_err[i])) {
                         if (field.vname) {
                             campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
                         }
                     }
                 }, this);
 
-            }, this);
+            }
 
             if (campos) {
                 app.alert.show("Campos Requeridos", {
