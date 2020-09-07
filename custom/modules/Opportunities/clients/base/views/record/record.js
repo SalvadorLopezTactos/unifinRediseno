@@ -23,6 +23,9 @@
         this.events['click a[name=amount]'] = 'formatcoin';
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
         this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
 
         /*
         Contexto campos custom
@@ -2648,7 +2651,7 @@
         this.model.save(null, { success: function (model, response) {
                 App.alert.dismiss('rechazaSol');
                 App.alert.show("autorizacion_director_ok", {
-                    level: "error",
+                    level: "success",
                     messages: "<br>La presolicitud fue rechazada corectamente.",
                     autoClose: false
                 });
