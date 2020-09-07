@@ -2670,6 +2670,8 @@
         }
         if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
             (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
+            $('[name="vobo_leasing"]').removeClass('hidden');
+            $('[name="rechazo_leasing"]').removeClass('hidden');
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
