@@ -1911,7 +1911,7 @@
 
         var optionBenef = this.model.get('area_benef_c');
 
-        if ((optionBenef == "" && optionBenef == null) && self.multilinea_prod == 1) {
+        if ((optionBenef == "" || optionBenef == null) && self.multilinea_prod == 1) {
             errors['area_benef_c'] = errors['area_benef_c'] || {};
             errors['area_benef_c'].required = true;
 
