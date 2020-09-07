@@ -2893,12 +2893,6 @@
     showfieldSuby: function () {
 
         var optionSuby = this.model.get('subyacente_c');
-
-        this.model.set('estado_suby_c');
-        this.model.set('municipio_suby_c');
-        this.model.set('ent_gob_suby_c');
-        this.model.set('otro_suby_c');
-
         if (optionSuby != "") {
             if (optionSuby == 1 || optionSuby == 2) {
                 $('[data-name="estado_suby_c"]').show();
