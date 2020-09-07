@@ -2940,6 +2940,12 @@
                 && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
                 errors['area_benef_c'] = errors['area_benef_c'] || {};
                 errors['area_benef_c'].required = true;
+
+                app.alert.show("cAMPO bENEF", {
+                    level: "error",
+                    messages: "Denbe seleccionar un valor en  Área beneficiada .",
+                    autoClose: false
+                });
             }
 
         callback(null, fields, errors);
