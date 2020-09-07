@@ -124,6 +124,7 @@
         this.showSubpanels();
         this.showfieldBenef();
         this.showfieldSuby();
+        this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
 
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
@@ -2849,13 +2850,6 @@
     showfieldBenef: function () {
         var optionBenef = this.model.get('area_benef_c');
 
-        this.model.set('estado_benef_c','');
-        this.model.set('municipio_benef','');
-        this.model.set('ent_gob_benef_c','');
-        this.model.set('cuenta_benef_c');
-        this.model.set('emp_no_reg_benef_c');
-
-
         if ( optionBenef !="" && optionBenef !=null )
         {
 
@@ -2900,12 +2894,6 @@
     showfieldSuby: function () {
 
         var optionSuby = this.model.get('subyacente_c');
-
-        this.model.set('estado_suby_c');
-        this.model.set('municipio_suby_c');
-        this.model.set('ent_gob_suby_c');
-        this.model.set('otro_suby_c');
-
         if (optionSuby != "") {
             if (optionSuby == 1 || optionSuby == 2) {
                 $('[data-name="estado_suby_c"]').show();
@@ -2944,5 +2932,18 @@
         }
     },
 
+    reqBenfArea :function (fields, errors, callback) {
+
+        var optionBenef = this.model.get('area_benef_c');
+
+            if ((optionBenef == "" && optionBenef == null) && self.multilinea_prod == 1
+                && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+                errors['area_benef_c'] = errors['area_benef_c'] || {};
+                errors['area_benef_c'].required = true;
+            }
+
+        callback(null, fields, errors);
+
+    },
 
 })
