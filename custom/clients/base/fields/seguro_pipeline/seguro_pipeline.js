@@ -1,24 +1,20 @@
 ({
-
     initialize: function (options) {
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
         pipe_s=this;
-
         this._super('initialize', [options]);
         this.model.on('sync', this.pipelineseguro, this);
     },
 
     _render: function () {
         this._super("_render");
-
     },
 
     pipelineseguro: function (){
         //Obtiene Etapa y SubEtapa de la solicitud
         var etapa= this.model.get('etapa');
-
         //Validaciones para asignar etapas del Seguro formado Pipeline Prospección
         if (etapa=="1"){
             //Agrega clase current para sombrear en color actual al pipeline
@@ -33,9 +29,9 @@
             $('#E2').addClass('current');
             $('#E1').addClass('done');
             //Valida la etapa Cotizacion
-                $("#SE2").removeClass('ocult');
-                $('#SE2').addClass('success');
-                $("#SE2").html("Cotizando");
+            $("#SE2").removeClass('ocult');
+            $('#SE2').addClass('success');
+            $("#SE2").html("Cotizando");
         }
         if (etapa=="3"){
             //Agrega clase current para sombrear en color actual al pipeline En revision
@@ -115,6 +111,15 @@
             $("#SE4").removeClass('ocult');
             $('#SE4').addClass('error');
             $("#SE4").html("No Ganada");
+        }
+        if (etapa=="11"){
+            //Agrega clase current para sombrear en color actual al pipeline Cotización
+            $('#E2').addClass('current');
+            $('#E1').addClass('done');
+            //Valida la etapa Solicitud de Cotización
+            $("#SE2").removeClass('ocult');
+            $('#SE2').addClass('success');
+            $("#SE2").html("Solicitud de Cotización");
         }
     },
 })
