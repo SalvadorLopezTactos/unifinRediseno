@@ -14,8 +14,9 @@ array (
             'type' => 'button',
             'name' => 'vobo_leasing',
             'label' => 'Autorizar',
-            'css_class' => 'btn-success',
+            'css_class' => 'btn-success','hidden',
             'showOn' => 'view',
+            'hidden' =>'on',
             'events' => 
             array (
               'click' => 'button:btn_auth_button:click',
@@ -26,8 +27,9 @@ array (
             'type' => 'button',
             'name' => 'rechazo_leasing',
             'label' => 'Rechazar',
-            'css_class' => 'btn-danger',
+            'css_class' => 'btn-danger','hidden',
             'showOn' => 'view',
+            'hidden' =>'on',
             'events' => 
             array (
               'click' => 'button:btn_noauth_button:click',
