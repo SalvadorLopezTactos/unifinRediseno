@@ -2678,7 +2678,7 @@
         this.model.set('otro_suby_c');
 
         if (optionSuby != "") {
-            if (optionSuby == 1) {
+            if (optionSuby == 1 || optionSuby == 2) {
                 $('[data-name="estado_suby_c"]').show();
 
             } else {
@@ -2686,11 +2686,9 @@
             }
 
             if (optionSuby == 2) {
-                $('[data-name="estado_suby_c"]').show();
                 $('[data-name="municipio_suby_c"]').show();
 
             } else {
-                $('[data-name="estado_suby_c"]').hide();
                 $('[data-name="municipio_suby_c"]').hide();
 
             }
