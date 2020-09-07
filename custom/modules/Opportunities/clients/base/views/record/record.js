@@ -2849,13 +2849,6 @@
     showfieldBenef: function () {
         var optionBenef = this.model.get('area_benef_c');
 
-        this.model.set('estado_benef_c','');
-        this.model.set('municipio_benef','');
-        this.model.set('ent_gob_benef_c','');
-        this.model.set('cuenta_benef_c');
-        this.model.set('emp_no_reg_benef_c');
-
-
         if ( optionBenef !="" && optionBenef !=null )
         {
 
