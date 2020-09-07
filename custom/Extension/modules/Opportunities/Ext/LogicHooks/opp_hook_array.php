@@ -110,3 +110,19 @@ $hook_array['after_save'][] = Array(
     'MambuLogic', // name of the class
     'create_LC'
 );
+
+$hook_array['after_save'][] = Array(
+    11,
+    'Envía notificación a director de la solicitud',
+    'custom/modules/Opportunities/opp_notificacion_director.php',
+    'NotificacionDirector', // name of the class
+    'notificaDirector'
+);
+
+$hook_array['after_save'][] = Array(
+    12,
+    'Envía notificación a asesor asignado cuando se cancela o autoriza solicitud',
+    'custom/modules/Opportunities/opp_notificacion_director.php',
+    'NotificacionDirector', // name of the class
+    'notificaEstatusAsesor'
+);

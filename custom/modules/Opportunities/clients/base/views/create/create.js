@@ -121,6 +121,8 @@
         this.model.set('date_closed', FechaCierre.getFullYear() + '-' + (FechaCierre.getMonth()+1) + '-' + FechaCierre.getDate());
         */
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+        //Valida que sea producto Leasing y SI, para setear estatus_c como 1 (En validacion Comercial)
+        this.model.addValidationTask('estatus_y_etapa', _.bind(this.setValidacionComercial, this));
 
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
@@ -137,6 +139,9 @@
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
+        //Oculta campo de control para director de la solicitud
+        $('[data-name="director_solicitud_c"]').hide();
+
         this.showSubpanels();
         this.model.on("change:tipo_producto_c", _.bind(this.showSubpanels, this));
         this.model.addValidationTask('benef_suby', _.bind(this.reqBenefSuby, this));
@@ -348,8 +353,9 @@
         }
         //Oculta etiqueta del campo custom pipeline_opp
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
-        $('[data-name="tct_etapa_ddw_c"]').attr('style', 'pointer-events:none');
-        $('[data-name="estatus_c"]').attr('style', 'pointer-events:none');
+        $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
+        $('[data-name="estatus_c"]').attr('style','pointer-events:none');
+
     },
     /*
     *Victor Martinez Lopez
@@ -1675,6 +1681,13 @@
         }
     },
 
+    setValidacionComercial: function (fields, errors, callback){
+        if(this.model.get('tipo_producto_c')==1 && this.model.get('tct_etapa_ddw_c')=="SI" && $.isEmptyObject(errors)){
+            this.model.set('estatus_c', "1");
+        }
+        callback(null, fields, errors);
+    },
+
     reqBenefSuby: function (fields, errors, callback) {
 
         /** Requerido Area Beneficiada**/
@@ -1758,6 +1771,5 @@
         }
         else{ callback(null, fields, errors);}
     }
-
 
 })

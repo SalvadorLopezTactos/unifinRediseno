@@ -1,5 +1,5 @@
 <?php
- // created: 2019-04-23 19:07:21
+ // created: 2020-09-02 14:03:50
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -20,4 +20,5 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'SG' => 'SUGERENCIAS DE CREDITO',
   'PE' => 'EN ESPERA',
   '' => '',
+  1 => 'EN VALIDACIÓN COMERCIAL',
 );
