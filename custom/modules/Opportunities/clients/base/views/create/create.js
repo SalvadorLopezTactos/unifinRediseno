@@ -149,6 +149,8 @@
         this.showSubpanels();
         this.showfieldBenef();
         this.showfieldSuby();
+        this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
+
 
     },
 
@@ -1905,4 +1907,17 @@
         }
     },
 
+    reqBenfArea :function (fields, errors, callback) {
+
+        var optionBenef = this.model.get('area_benef_c');
+
+        if ((optionBenef == "" && optionBenef == null) && self.multilinea_prod == 1
+            && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+            errors['area_benef_c'] = errors['area_benef_c'] || {};
+            errors['area_benef_c'].required = true;
+        }
+
+        callback(null, fields, errors);
+
+    },
 })
