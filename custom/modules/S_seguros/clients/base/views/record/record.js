@@ -23,7 +23,7 @@
     },
 
     roFunction: function() {
-    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9 || app.user.get('puestousuario_c') != 55)
+    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9 || app.user.get('puestousuario_c') != 56)
     		{
     		  _.each(this.model.fields, function(field)
        	  {

@@ -1,5 +1,5 @@
 <?php
- // created: 2020-08-31 17:15:07
+ // created: 2020-09-07 10:26:55
 
 $app_list_strings['puestousuario_c_list']=array (
   '' => '',
@@ -57,5 +57,6 @@ $app_list_strings['puestousuario_c_list']=array (
   52 => 'CLOSER',
   53 => 'ASESOR UNICLICK',
   54 => 'ASESOR RM',
-  55 => 'SEGUROS',
+  55 => 'DIRECTOR SEGUIMIENTO LEASING',
+  56 => 'SEGUROS',
 );
