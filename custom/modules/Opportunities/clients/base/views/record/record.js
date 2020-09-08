@@ -23,6 +23,9 @@
         this.events['click a[name=amount]'] = 'formatcoin';
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
         this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
+        //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
+        $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
 
         /*
         Contexto campos custom
@@ -2664,7 +2667,7 @@
         this.model.save(null, { success: function (model, response) {
                 App.alert.dismiss('rechazaSol');
                 App.alert.show("autorizacion_director_ok", {
-                    level: "error",
+                    level: "success",
                     messages: "<br>La presolicitud fue rechazada corectamente.",
                     autoClose: false
                 });
@@ -2683,6 +2686,8 @@
         }
         if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
             (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
+            $('[name="vobo_leasing"]').removeClass('hidden');
+            $('[name="rechazo_leasing"]').removeClass('hidden');
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
         }
