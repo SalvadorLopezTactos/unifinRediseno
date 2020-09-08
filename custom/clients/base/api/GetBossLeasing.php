@@ -43,6 +43,7 @@ class GetBossLeasing extends SugarApi
 
     public function getBossLeasingMethod($api, $args)
     {
+        global $app_list_strings;
         //id de usuario ejemplo cdf63b76-233b-11e8-a1ec-00155d967307 alvaro.alonso
         $id_usuario=$args['id_user'];
 
@@ -52,13 +53,19 @@ class GetBossLeasing extends SugarApi
 
         if(!empty($beanUsuario)){
 
+            //Comprobar que el usuario tenga el permiso especial de Responsable de oficina
+            if($beanUsuario->responsable_oficina_chk_c==1){
+                array_push($array_users,array('id'=>$beanUsuario->id,'name'=>$beanUsuario->full_name));
+            }
+
             while ($bandera){
                 $id_reporta=$beanUsuario->reports_to_id;
                 if($id_reporta!=null && $id_reporta!=""){
                     //Obteniendo el Jefe Director Leasing
                     $beanUsuarioJefe = BeanFactory::getBean('Users', $id_reporta,array('disable_row_level_security' => true));
                     if (!empty($beanUsuarioJefe)){
-                        if($beanUsuarioJefe->puestousuario_c=='2'){ //Puesto 2= Director Leasing
+                        //if($beanUsuarioJefe->puestousuario_c=='2'){ //Puesto 2= Director Leasing
+                        if($beanUsuarioJefe->responsable_oficina_chk_c==1){ //Jefe cuenta con privilegio de Responsable de Oficina
                             array_push($array_users,array('id'=>$beanUsuarioJefe->id,'name'=>$beanUsuarioJefe->full_name));
 
                             //Obteniendo jefe inmediato del Director Leasing
@@ -86,14 +93,41 @@ class GetBossLeasing extends SugarApi
 
         }
 
-        //Obtener usuario Gabriel
-        //$idGabriel="c57e811e-b81a-cde4-d6b4-5626c9961772";
-        $idGabriel="d0bf3b56-ed54-11ea-b6ba-a0481cdf89eb";//Usuario Gabriel Martin del Campo
-        $beanUsuarioGabriel = BeanFactory::getBean('Users', $idGabriel,array('disable_row_level_security' => true));
-        array_push($array_users,array('id'=>$beanUsuarioGabriel->id,'name'=>$beanUsuarioGabriel->full_name));
+        //Obteniendo valores de lista de Responsables de oficina
+        $lista_responsables=$app_list_strings['responsables_leasing_list'];
+        foreach ($lista_responsables as $key=>$value) {
+            $beanUsuarioLista = BeanFactory::getBean('Users', $value,array('disable_row_level_security' => true));
+            if (!empty($beanUsuarioLista)){
+                if($beanUsuarioLista->status=='Active'){
+                    //Antes de agregar el usuario, comprobar que no exista en la lista, para evitar duplicados en valores mostrados en lista desplegable
+                    $existe=$this->existeUsuario($beanUsuarioLista->id, $array_users);
+                    if($existe==false){
+                        array_push($array_users,array('id'=>$beanUsuarioLista->id,'name'=>$beanUsuarioLista->full_name));
+                    }
+                }
+
+            }
+
+        }
 
         return $array_users;
 
+    }
+
+    public function existeUsuario($clave,$arreglo){
+        $existe=false;
+        $num_elementos=count($arreglo);
+        if(count($arreglo)>0){
+            for ($i=0;$i<$num_elementos;$i++){
+                if($arreglo[$i]['id']==$clave){
+                    $existe=true;
+                    $num_elementos=count($arreglo);
+                }
+            }
+
+        }
+
+        return $existe;
     }
 
 

@@ -352,6 +352,15 @@ array (
             'label' => 'LBL_MULTILINEA_C',
           ),
         ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'responsable_oficina_chk_c',
+            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
