@@ -50,14 +50,14 @@ class Notificacion_Fiscal_class
 					$enviocorreo = 1;
                 }
             }
-            $GLOBALS['log']->fatal('enviocorreo ' . $enviocorreo);
+            //$GLOBALS['log']->fatal('enviocorreo ' . $enviocorreo);
             if ($enviocorreo == 1) {
                 $query1 = "SELECT nombre_completo_c, email_address FROM (SELECT A.id, B.nombre_completo_c FROM users A INNER JOIN users_cstm B   ON B.id_c=A.id  
  AND A.status='Active' AND A.deleted=0 AND B.notifica_fiscal_c = 1 ) USUARIOS
 , (select erel.bean_id, email.email_address from email_addr_bean_rel erel join email_addresses email on
 erel.bean_id = email.id where erel.bean_module = 'Users' and erel.primary_address = 1 AND erel.deleted = 0 AND email.deleted = 0 ) EMAILS
 WHERE EMAILS.bean_id=USUARIOS.id";
-				$GLOBALS['log']->fatal('query ' . $query1);
+				//$GLOBALS['log']->fatal('query ' . $query1);
                 $results1 = $GLOBALS['db']->query($query1);
                 while ($row = $GLOBALS['db']->fetchByAssoc($results1)) {
                     //Use $row['id'] to grab the id fields value
