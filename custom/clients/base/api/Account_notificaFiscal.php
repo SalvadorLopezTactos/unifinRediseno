@@ -46,57 +46,56 @@ class Account_notificaFiscal extends SugarApi
         $nombreUsuario = $args['nombreUsuario'];
         $d = strtotime("now");
         $hoy = date("Y-m-d H:i:s", $d);
+        if (!empty($idCuenta)) {
+            $beanAccount = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
 
-        $beanAccount = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
+            if (!empty($beanAccount) && $beanAccount != null) {
+                $mailTo = $this->getmailTo();
 
-        $mailTo = $this->getmailTo();
-
-        $noti_accounts = "SELECT * FROM notification_accounts
+                $noti_accounts = "SELECT * FROM notification_accounts
 WHERE account_id = '{$idCuenta}'
       AND notification_type = '3'
       AND date_entered > DATE_SUB(now(), INTERVAL 3 MONTH)
 ORDER BY date_entered DESC";
 
-        try {
-            $results = $GLOBALS['db']->query($noti_accounts);
-        } catch (Exception $exception) {
-            $GLOBALS['log']->fatal("Exception " . $exception);
-        }
+                $results = $GLOBALS['db']->query($noti_accounts);
 
-        if ($exception == "") {
-            $row = $GLOBALS['db']->fetchByAssoc($results);
-            $fechaEnvio = date("Y-m-d", $row['date_entered']);
-            $GLOBALS['log']->fatal('numrows - ' . $fechaEnvio);
-            $responses = [];
+                $row = $GLOBALS['db']->fetchByAssoc($results);
+                $fechaEnvio = date("Y-m-d", $row['date_entered']);
+                $GLOBALS['log']->fatal('numrows - ' . $fechaEnvio);
+                $responses = [];
 
-            if ($results->num_rows == 0) {
-                $enviado = $this->sendmailTo($nombreUsuario, $beanAccount->name, $beanAccount->rfc_c, $idCuenta, $mailTo);
-                //$GLOBALS['log']->fatal('envio de correo - ' . $enviado);
+                if ($results->num_rows == 0) {
+                    $enviado = $this->sendmailTo($nombreUsuario, $beanAccount->name, $beanAccount->rfc_c, $idCuenta, $mailTo);
+                    //$GLOBALS['log']->fatal('envio de correo - ' . $enviado);
 
-                if ($enviado == "") {
-                    $insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
+                    if ($enviado == "") {
+                        $insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
 					values ( uuid() , '" . $idCuenta . "','" . $hoy . "','3','Petición de UNI2')";
-                    try {
-                        $GLOBALS['db']->query($insert);
-                    } catch (Exception $ex) {
-                        $GLOBALS['log']->fatal("Exception " . $ex);
-                    }
-                    if ($ex == "") {
-                        $responses = array("code" => "200", "status" => "success", "description" => "Notificación enviada exitosamente al área fiscal.");
+                        try {
+                            $GLOBALS['db']->query($insert);
+                        } catch (Exception $ex) {
+                            $GLOBALS['log']->fatal("Exception " . $ex);
+                        }
+                        if ($ex == "") {
+                            $responses = array("code" => "200", "status" => "success", "description" => "Notificación enviada exitosamente al área fiscal.");
+                        } else {
+                            $responses = array("code" => "400", "status" => "error", "description" => $ex);
+                        }
                     } else {
-                        $responses = array("code" => "400", "status" => "error", "description" => $ex);
+                        $responses = array("code" => "400", "status" => "error", "description" => $enviado);
                     }
+
                 } else {
-                    $responses = array("code" => "400", "status" => "error", "description" => $enviado);
+                    $responses = array("code" => "200", "status" => "success", "description" => "La última actualización de este proveedor fue el $fechaEnvio. Por lo tanto no se notificó al área fiscal ");
                 }
 
             } else {
-                $responses = array("code" => "200", "status" => "success", "description" => "La última actualización de este proveedor fue el $fechaEnvio. Por lo tanto no se notificó al área fiscal ");
+                $responses = array("code" => "400", "status" => "error", "description" => "No existe la cuenta");
             }
         } else {
-            $responses = array("code" => "400", "status" => "error", "description" => "No existe la Cuenta");
+            $responses = array("code" => "400", "status" => "error", "description" => "Información incompleta");
         }
-
         return $responses;
     }
 
@@ -149,7 +148,7 @@ WHERE B.notifica_fiscal_c = 1
 
         if (count($mailTo) > 0) {
             try {
-                $result="";
+                $result = "";
                 $mailer = MailerFactory::getSystemDefaultMailer();
                 $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
                 $mailer->setSubject("Nueva cotización de precio asociada a un Proveedor");
@@ -157,8 +156,11 @@ WHERE B.notifica_fiscal_c = 1
                 $mailer->setHtmlBody($body);
                 $mailer->clearRecipients();
                 foreach ($mailTo as $email => $name) {
-                    $mailer->addRecipientsTo(new EmailIdentity($email, $name));
-                    $mailer->send();
+                    if ($email != "") {
+                        $mailer->addRecipientsTo(new EmailIdentity($email, $name));
+                        $mailer->send();
+                    }
+
                 }
 
 
