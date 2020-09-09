@@ -135,7 +135,7 @@ WHERE B.notifica_fiscal_c = 1
         $linkReferencia = $urlSugar . $idAccount;
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que el usuario <b>' . $nameUser . '</b> 
-		, relaciono a una cotización de precio al Proveedor ' . $nameAccount . ' , que tiene RFC: ' . $rfc . '.
+		, relaciono a una cotización de precio al Proveedor <b>' . $nameAccount . '</b> , que tiene RFC: <b>' . $rfc . '</b>.
 		<br><br>Para ver el detalle del proveedor dé <a id="downloadErrors" href="' . $linkReferencia . '">click aquí</a>
 		<br><br>Atentamente Unifin</font></p>
 		<br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
