@@ -182,10 +182,15 @@ class NotificacionDirector
     }
 
     public function estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatus,$linkSolicitud){
-
+        if($estatus=="Autorizada"){
+            $estatus="cuenta con el VoBo del director de producto";
+        }
+        if($estatus=="Rechazada"){
+            $estatus="ha sido Rechazada";
+        }
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>
-      <br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> ha sido '.$estatus.'.
+      <br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> '.$estatus.'.
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
