@@ -17,7 +17,7 @@ class Account_notificaFiscal extends SugarApi
                 //request type
                 'reqType' => 'POST',
                 //set authentication
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 //endpoint path
                 'path' => array('notificaFiscal'),
                 //endpoint variables
@@ -46,7 +46,7 @@ class Account_notificaFiscal extends SugarApi
         $nombreUsuario = $args['nombreUsuario'];
         $d = strtotime("now");
         $hoy = date("Y-m-d H:i:s", $d);
-        if (!empty($idCuenta)) {
+        if (!empty($idCuenta) && !empty($nombreUsuario)) {
             $beanAccount = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
 
             if (!empty($beanAccount) && $beanAccount != null) {
@@ -61,9 +61,11 @@ ORDER BY date_entered DESC";
                 $results = $GLOBALS['db']->query($noti_accounts);
 
                 $row = $GLOBALS['db']->fetchByAssoc($results);
-                $fechaEnvio = date("Y-m-d", $row['date_entered']);
-                $GLOBALS['log']->fatal('numrows - ' . $fechaEnvio);
-                $responses = [];
+                
+				$d = strtotime( $row['date_entered'] );
+				$fechaEnvio = date("Y-m-d", $d);
+                
+				$responses = [];
 
                 if ($results->num_rows == 0) {
                     $enviado = $this->sendmailTo($nombreUsuario, $beanAccount->name, $beanAccount->rfc_c, $idCuenta, $mailTo);
@@ -116,16 +118,15 @@ WHERE B.notifica_fiscal_c = 1
       AND A.status = 'Active' AND A.deleted = 0";
         $results = $GLOBALS['db']->query($query);
         $mailTo = [];
+		
         while ($row = $GLOBALS['db']->fetchByAssoc($results)) {
-            /*array_push($mailTo,array("id"=>$row['id'],
-                "name"=> $row['first_name'] ." ". $row['last_name'],
-                "email"=>$row['email_address']));*/
-            $mailTo["{$row['email_address']}"] = $row['first_name'] . " " . $row['last_name'];
-
-
+            
+			//$GLOBALS['log']->fatal('nombre' .  $row['first_name'] . ' - correo ' . $row['email_address']);
+			$full_name =$row['first_name'] . " " . $row['last_name'];
+            $mailTo["{$full_name}"] = $row['email_address'];
         }
-
-        return $mailTo;
+		
+		return $mailTo;
     }
 
     public function sendmailTo($nameUser, $nameAccount, $rfc, $idAccount, $mailTo)
@@ -155,13 +156,14 @@ WHERE B.notifica_fiscal_c = 1
                 $body = trim($mailHTML);
                 $mailer->setHtmlBody($body);
                 $mailer->clearRecipients();
-                foreach ($mailTo as $email => $name) {
+				//$GLOBALS['log']->fatal('Para enviar',print_r($mailTo,true));
+                foreach ($mailTo as $full_name => $email) {
+					//$GLOBALS['log']->fatal('dentro del for '.$full_name.' - '.$email);
                     if ($email != "") {
-                        $mailer->addRecipientsTo(new EmailIdentity($email, $name));
-                        $mailer->send();
+                        $mailer->addRecipientsTo(new EmailIdentity($email, $full_name));                        
                     }
-
                 }
+				$mailer->send();
 
 
             } catch (Exception $e) {

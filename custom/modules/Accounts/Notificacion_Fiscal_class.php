@@ -52,6 +52,8 @@ class Notificacion_Fiscal_class
             }
             //$GLOBALS['log']->fatal('enviocorreo ' . $enviocorreo);
             if ($enviocorreo == 1) {
+				$cuerpoCorreo = $this->estableceCuerpoNotificacion($nombrecreado, $NombreProveedor, $rfc, $linkReferencia);
+                        
                 $query1 = "SELECT nombre_completo_c, email_address FROM (SELECT A.id, B.nombre_completo_c FROM users A INNER JOIN users_cstm B   ON B.id_c=A.id  
  AND A.status='Active' AND A.deleted=0 AND B.notifica_fiscal_c = 1 ) USUARIOS
 , (select erel.bean_id, email.email_address from email_addr_bean_rel erel join email_addresses email on
@@ -59,25 +61,33 @@ erel.bean_id = email.id where erel.bean_module = 'Users' and erel.primary_addres
 WHERE EMAILS.bean_id=USUARIOS.id";
 				//$GLOBALS['log']->fatal('query ' . $query1);
                 $results1 = $GLOBALS['db']->query($query1);
-                while ($row = $GLOBALS['db']->fetchByAssoc($results1)) {
-                    //Use $row['id'] to grab the id fields value
-                    
-                    $correo = $row['email_address'];
-                    $nombre = $row['nombre_completo_c'];
-                    
-                    //$GLOBALS['log']->fatal('nombre' . $nombre . ' - correo ' . $correo);
-                    if ($correo != "") {
-                        $cuerpoCorreo = $this->estableceCuerpoNotificacion($nombrecreado, $NombreProveedor, $rfc, $linkReferencia);
-                        $GLOBALS['log']->fatal('$enviocorreo' . $enviocorreo);
-                        $GLOBALS['log']->fatal("ENVIANDO CORREO NOTIFICACION FISCAL " . $correo);
-
-                        //Enviando correo a asesor origen
-                        $this->enviarNotificacionReferencia("Nuevo Proveedor", $cuerpoCorreo, $correo, $nombre);
-
-                    } else {
-                        $GLOBALS['log']->fatal($nombre . " NO TIENE EMAIL");
-                    }
-                }
+				try {
+					$result = "";
+					$mailer = MailerFactory::getSystemDefaultMailer();
+					$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+					$mailer->setSubject("Nuevo Proveedor");
+					$body = trim($cuerpoCorreo);
+					$mailer->setHtmlBody($body);
+					$mailer->clearRecipients();
+					
+					while ($row = $GLOBALS['db']->fetchByAssoc($results1)) {
+						$correo = $row['email_address'];
+						$nombre = $row['nombre_completo_c'];
+						
+						if ($correo != "") {
+							$mailer->addRecipientsTo(new EmailIdentity($correo, $nombre)); 
+							$GLOBALS['log']->fatal('Envío de correo proveedor '.$nombre.' - '.$correo);
+						}else {
+							$GLOBALS['log']->fatal($nombre . " NO TIENE EMAIL");
+						}						
+					}
+					$mailer->send();
+	
+	
+				} catch (Exception $e) {
+					//  $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email " . $correo);
+					$GLOBALS['log']->fatal("Exception " . $e);
+				}
             }
         }
     }
@@ -102,25 +112,6 @@ WHERE EMAILS.bean_id=USUARIOS.id";
 
     }
 
-    public function enviarNotificacionReferencia($asunto, $cuerpoCorreo, $correo, $nombre)
-    {
-        //Enviando correo a asesor origen
-        try {
-            $mailer = MailerFactory::getSystemDefaultMailer();
-            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-            $mailer->setSubject($asunto);
-            $body = trim($cuerpoCorreo);
-            $mailer->setHtmlBody($body);
-            $mailer->clearRecipients();
-            $mailer->addRecipientsTo(new EmailIdentity($correo, $nombre));
-            $result = $mailer->send();
-
-        } catch (Exception $e) {
-            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email " . $correo);
-            $GLOBALS['log']->fatal("Exception " . $e);
-        }
-
-    }
 }
 
 ?>
