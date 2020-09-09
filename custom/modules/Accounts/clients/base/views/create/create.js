@@ -3092,7 +3092,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
 
 
-        if ($('.list_u_canal').select2('val') == "0" && userprod.includes('8')) {
+        if ($('.list_u_canal').select2('val') == "0" && (userprod.includes('8') || userprod.includes('9'))) {
             $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
             faltantesUniclickCanal += 1;
         }
