@@ -2563,7 +2563,8 @@
         var check=this.model.get('vobo_dir_c');
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
-        if (operacion!='RATIFICACION_INCREMENTO') {
+        var chk=this.model.get('ratificacion_incremento_c');
+        if (operacion!='RATIFICACION_INCREMENTO'&& chk!=true) {
             if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA') {
                 app.alert.show("Error_vobo", {
                     level: "info",

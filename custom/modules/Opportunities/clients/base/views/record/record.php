@@ -16,7 +16,6 @@ array (
             'label' => 'Autorizar',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
-            'hidden' =>'on',
             'events' => 
             array (
               'click' => 'button:btn_auth_button:click',
@@ -29,7 +28,6 @@ array (
             'label' => 'Rechazar',
             'css_class' => 'btn-danger hidden',
             'showOn' => 'view',
-            'hidden' =>'on',
             'events' => 
             array (
               'click' => 'button:btn_noauth_button:click',

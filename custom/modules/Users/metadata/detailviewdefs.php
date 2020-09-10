@@ -295,9 +295,12 @@ array (
           0 => 
           array (
             'name' => 'notifica_fiscal_c',
-            'label' => 'LBL_NOTIFICA_FISCAL',
+            'label' => 'LBL_NOTIFICA_FISCAL',            
           ),
-          1 => '',
+          1 => array(
+            'name' => 'responsable_oficina_chk_c',
+            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
+          ),
         ),
       ),
     ),
