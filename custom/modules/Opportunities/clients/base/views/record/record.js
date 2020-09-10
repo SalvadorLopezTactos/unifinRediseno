@@ -24,8 +24,8 @@
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
         this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
-        $('[name="vobo_leasing"]').hide();
-        $('[name="rechazo_leasing"]').hide();
+        //$('[name="vobo_leasing"]').hide();
+        //$('[name="rechazo_leasing"]').hide();
 
         /*
         Contexto campos custom
@@ -84,8 +84,8 @@
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
         this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
         this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
-        this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
-        this.model.addValidationTask('checkvobo', _.bind(this.notifvobo, this));
+        //this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
+        //this.model.addValidationTask('checkvobo', _.bind(this.notifvobo, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -129,7 +129,7 @@
         this.showfieldSuby();
 
         //Validación para poder autorizar o rechazar la pre-solicitud
-        this.model.on('sync', this.autorizapre, this);
+        //this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
@@ -180,33 +180,6 @@
                 }
             }
         }
-    },
-
-    setDirectores:function () {
-        var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
-
-        app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
-            success: _.bind(function (data) {
-
-                if (data != "") {
-
-                    if(data.length>0){
-                        var directores_list = app.lang.getAppListStrings('director_seleccion_list');
-                        for(var i=0;i<data.length;i++){
-                            directores_list[data[i].id] = data[i].name;
-                        }
-                        //Establecer nuevas opciones al campo de director
-                        this.model.fields['director_seleccionado_c'].options = directores_list;
-
-                    }
-
-
-                }
-
-            }, self),
-        });
-
-
     },
 
     cancelClicked: function () {
@@ -301,13 +274,13 @@
         //Desabilita edicion campo pipeline
         this.noEditFields.push('pipeline_opp');
         //Oculta check de vobo_dir_c para que se puede obtener mediante this.model...
-        $('[data-name="vobo_dir_c"]').hide();
+        //$('[data-name="vobo_dir_c"]').hide();
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
-        $('[name="vobo_leasing"]').hide();
-        $('[name="rechazo_leasing"]').hide();
+        //$('[name="vobo_leasing"]').hide();
+        //$('[name="rechazo_leasing"]').hide();
 
         //Oculta campo de control para director de la solicitud
-        $('[data-name="director_solicitud_c"]').hide();
+        //$('[data-name="director_solicitud_c"]').hide();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -711,8 +684,8 @@
         this.context.on('button:cancela_operacion_button:click', this.cancelaOperacion, this);
         this.context.on('button:expediente_credito_button:click', this.expedienteCredito, this);
         this.context.on('button:votacion_comite_button:click', this.votacionComite, this);
-        this.context.on('button:btn_auth_button:click', this.authsol, this);
-        this.context.on('button:btn_noauth_button:click', this.noauthsol, this);
+        //this.context.on('button:btn_auth_button:click', this.authsol, this);
+        //this.context.on('button:btn_noauth_button:click', this.noauthsol, this);
 
     },
     /*
@@ -2165,8 +2138,8 @@
         this.oFinancieraRI.ratificacion = condiciones_financierasRI;
         contRI.render();
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
-        $('[name="vobo_leasing"]').hide();
-        $('[name="rechazo_leasing"]').hide();
+        //$('[name="vobo_leasing"]').hide();
+        //$('[name="rechazo_leasing"]').hide();
     },
 
     getcfRI: function () {

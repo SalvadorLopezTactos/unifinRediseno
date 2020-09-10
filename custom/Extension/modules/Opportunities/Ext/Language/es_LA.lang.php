@@ -179,6 +179,7 @@ $mod_strings['LBL_UNICS_INTEGRACION'] = 'Integración Unics';
 $mod_strings['LBL_UNILEASE_INTEGRACION'] = 'Integrado Unilease';
 $mod_strings['LBL_MONTO_GPO_EMP_C'] = 'Monto Grupo Empresarial';
 $mod_strings['LBL_ASESOR_OPERACION_C'] = 'Asesor de Operación';
+/*
 $mod_strings['LBL_VOBO_DIR'] = 'Vo.Bo Director';
 $mod_strings['LBL_FECHA_VALIDACION'] = 'Fecha Autorización/Rechazo';
 $mod_strings['LBL_DIRECTOR_ASIGNADO'] = 'Director';
@@ -187,6 +188,7 @@ $mod_strings['LBL_DIRECTOR_NOTIFICADO'] = 'Director notificado';
 $mod_strings['LBL_DIRECTOR_SOLICITUD'] = 'Director solicitud descripción';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Nuevo Panel 2';
 $mod_strings['LBL_DOC_SCORING_CHK'] = 'Cuenta con documento de scoring';
+*/
 $mod_strings['LBL_ESTADO_SUBY_C'] = 'Estado';
 $mod_strings['LBL_MUNICIPIO_SUBY_C'] = 'Municipio';
 $mod_strings['LBL_ENT_GOB_SUBY_C'] = 'Entidad Gubernamental';

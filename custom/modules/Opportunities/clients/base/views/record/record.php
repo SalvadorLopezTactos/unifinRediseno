@@ -11,6 +11,7 @@ array (
         array (
           0 => 
           array (
+              /*
             'type' => 'button',
             'name' => 'vobo_leasing',
             'label' => 'Autorizar',
@@ -20,9 +21,11 @@ array (
             array (
               'click' => 'button:btn_auth_button:click',
             ),
+              */
           ),
           1 => 
           array (
+              /*
             'type' => 'button',
             'name' => 'rechazo_leasing',
             'label' => 'Rechazar',
@@ -32,6 +35,7 @@ array (
             array (
               'click' => 'button:btn_noauth_button:click',
             ),
+              */
           ),
           2 => 
           array (
@@ -219,21 +223,28 @@ array (
                 'name' => 'estatus_c',
                 'label' => 'LBL_ESTATUS',
               ),
+
               3 =>
               array (
+                  /*
                 'name' => 'opportunities_directores',
                 'label' => 'Director de la solicitud',
                 'studio' => 'visible',
+                  */
               ),
               4 =>
               array (
+                  /*
                 'name' => 'vobo_dir_c',
                 'label' => 'LBL_VOBO_DIR',
+                  */
               ),
               5 => 
               array (
+                  /*
                 'name' => 'director_solicitud_c',
                 'label' => 'LBL_DIRECTOR_SOLICITUD',
+                  */
               ),
               6 => 
               array (
