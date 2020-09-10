@@ -17,7 +17,7 @@ $dependencies['S_seguros']['tipo_cambio_obj'] = array(
             'params' => array(
                 'target' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
-                'value' => 'not(equal($monedas_c,1))',
+                'value' => 'and(not(equal($prima_obj_c,"")),not(equal($monedas_c,1)))',
             ),
         ),
     ),
@@ -34,7 +34,7 @@ $dependencies['S_seguros']['tipo_cambio_n'] = array(
             'params' => array(
                 'target' => 'tipo_cambio_n',
                 'label' => 'LBL_TIPO_CAMBIO_N',
-                'value' => 'and(equal($info_actual,1),not(equal($monedas_c,1)))',
+                'value' => 'and(not(equal($prima_neta_c,"")),equal($info_actual,1),not(equal($monedas_c,1)))',
             ),
         ),
     ),
@@ -43,7 +43,7 @@ $dependencies['S_seguros']['tipo_cambio_n'] = array(
 $dependencies['S_seguros']['tipo_cambio_ganada_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('monedas_c','etapa'),
+    'triggerFields' => array('monedas_c','etapa','prima_neta_ganada_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -51,7 +51,7 @@ $dependencies['S_seguros']['tipo_cambio_ganada_c'] = array(
             'params' => array(
                 'target' => 'tipo_cambio_ganada_c',
                 'label' => 'LBL_TIPO_CAMBIO_GANADA',
-                'value' => 'and(equal($etapa,9),not(equal($monedas_c,1)))',
+                'value' => 'and(not(equal($prima_neta_ganada_c,"")),equal($etapa,9),not(equal($monedas_c,1)))',
             ),
         ),
     ),

@@ -10,6 +10,7 @@
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('referenciado', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
+        this.model.addValidationTask('prima_neta_ganada_c', _.bind(this.valida_PN, this));
     },
 
     _render: function() {
@@ -23,8 +24,9 @@
     },
 
     roFunction: function() {
-    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 9 || app.user.get('puestousuario_c') != 56)
+    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || app.user.get('puestousuario_c') != 56)
     		{
+          $('[name="edit_button"]').hide();
     		  _.each(this.model.fields, function(field)
        	  {
        			this.noEditFields.push(field.name);
@@ -150,5 +152,19 @@
                 throw e;
             }
         });
+    },
+
+    valida_PN: function(fields, errors, callback) {
+      //Validación de Prima Neta Ganada mayor a 0
+      if(this.model.get('prima_neta_ganada_c') <= 0 && this.model.get('etapa') == 9) {
+        errors['prima_neta_ganada_c'] = errors['prima_neta_ganada_c'] || {};
+        errors['prima_neta_ganada_c'].required = true;
+        app.alert.show("Error Prima Neta", {
+          level: "error",
+          title: "La Prima Neta Ganada debe ser mayor a cero.",
+          autoClose: false
+        });
+      }
+      callback(null, fields, errors);
     },
 })
