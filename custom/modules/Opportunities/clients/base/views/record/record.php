@@ -9,9 +9,10 @@ array (
       array (
         'buttons' => 
         array (
+/*
           0 => 
           array (
-              /*
+              
             'type' => 'button',
             'name' => 'vobo_leasing',
             'label' => 'Autorizar',
@@ -21,11 +22,11 @@ array (
             array (
               'click' => 'button:btn_auth_button:click',
             ),
-              */
+              
           ),
           1 => 
           array (
-              /*
+              
             'type' => 'button',
             'name' => 'rechazo_leasing',
             'label' => 'Rechazar',
@@ -35,8 +36,9 @@ array (
             array (
               'click' => 'button:btn_noauth_button:click',
             ),
-              */
+              
           ),
+*/
           2 => 
           array (
             'type' => 'button',
