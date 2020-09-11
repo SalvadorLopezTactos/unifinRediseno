@@ -13,7 +13,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'vobo_leasing',
-            'label' => 'Autorizar',
+            'label' => 'Vo.Bo.',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 
