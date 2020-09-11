@@ -112,10 +112,11 @@ FROM users A
        AND rel.bean_module = 'Users'
        AND rel.deleted = 0
   INNER JOIN email_addresses E
-    ON E.id = rel.bean_id
+    ON E.id = rel.email_address_id
   AND E.deleted=0
-WHERE B.notifica_fiscal_c = 1
-      AND A.status = 'Active' AND A.deleted = 0";
+WHERE B.notifica_fiscal_c = 1 AND
+ A.employee_status = 'Active' AND A.deleted = 0
+ AND (A.status IS NULL OR A.status = 'Active') ";
         $results = $GLOBALS['db']->query($query);
         $mailTo = [];
 		
