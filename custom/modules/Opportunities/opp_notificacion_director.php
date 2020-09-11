@@ -7,6 +7,8 @@ class NotificacionDirector
 {
     function notificaDirector($bean, $event, $arguments)
     {
+        global $current_user;
+        global $db;
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->tipo_de_operacion_c!='RATIFICACION_INCREMENTO'){
 
             $documento="";
@@ -62,6 +64,41 @@ class NotificacionDirector
                     $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                 }
 
+                //Obtener correo de director regional
+                $idUsuarioAsignado=$bean->assigned_user_id;
+                $region_asignado="";
+                $correo_regional="";
+                $id_regional="";
+                $nombre_regional="";
+                $beanAsignado = BeanFactory::retrieveBean('Users', $idUsuarioAsignado);
+                if(!empty($beanAsignado)){
+                    $region_asignado=$beanAsignado->region_c;
+                }
+
+                if($region_asignado!=""){
+                    //PUESTO USUARIO DIRECTOR REGIONAL LEASING =33
+                    $queryDirectorRegional=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='33' AND u.status='Active' and uc.region_c='{$region_asignado}' and u.deleted=0;
+SQL;
+                    $queryResult = $db->query($queryDirectorRegional);
+                    if($queryResult->num_rows>0){
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            $id_regional = $row['id'];
+                        }
+
+                        if($id_regional!=""){
+                            $beanRegional = BeanFactory::retrieveBean('Users', $id_regional);
+                            if(!empty($beanRegional)){
+                                $correo_regional=$beanRegional->email1;
+                                $nombre_regional=$beanRegional->full_name;
+                            }
+
+                        }
+                    }
+
+                }
+
 
                 $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud);
 
@@ -69,6 +106,21 @@ class NotificacionDirector
 
                 //Enviando correo a asesor origen
                 $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo);
+
+                //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
+                if($correo_regional!=""){
+                    $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
+
+                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
+
+                    //Enviando correo a asesor origen
+                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
+
+                }else{
+                    $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                }
+
+
                 $bean->director_notificado_c=1;
 
             }else{
