@@ -166,7 +166,7 @@ SQL;
 
             if($correo_asesor!=""){
 
-                if($equipoPrincipal!=""){
+                if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
                     //Puesto 6 = Backoffice Leasing
                     $queryBackOffice=<<<SQL
  SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
@@ -232,7 +232,7 @@ SQL;
 
             if($correo_asesor!=""){
 
-                if($equipoPrincipal!=""){
+                if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
                     //Puesto 6 = Backoffice Leasing
                     $queryBackOffice=<<<SQL
  SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
