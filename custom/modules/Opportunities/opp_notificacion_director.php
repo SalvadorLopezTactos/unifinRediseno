@@ -70,6 +70,7 @@ class NotificacionDirector
                 $correo_regional="";
                 $id_regional="";
                 $nombre_regional="";
+                $array_user_regional=array();
                 $beanAsignado = BeanFactory::retrieveBean('Users', $idUsuarioAsignado);
                 if(!empty($beanAsignado)){
                     $region_asignado=$beanAsignado->region_c;
@@ -90,8 +91,8 @@ SQL;
                         if($id_regional!=""){
                             $beanRegional = BeanFactory::retrieveBean('Users', $id_regional);
                             if(!empty($beanRegional)){
-                                $correo_regional=$beanRegional->email1;
-                                $nombre_regional=$beanRegional->full_name;
+
+                                array_push($array_user_regional,array('correo'=>$beanRegional->email1,"nombre"=>$beanRegional->full_name));
                             }
 
                         }
@@ -104,10 +105,11 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
-                //Enviando correo a asesor origen
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo);
+                //Enviando correo a director de solicitud con copia  a director regional leasing
+                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo,$array_user_regional);
 
                 //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
+                /*
                 if($correo_regional!=""){
                     $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
 
@@ -119,6 +121,7 @@ SQL;
                 }else{
                     $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
                 }
+                */
 
 
                 $bean->director_notificado_c=1;
@@ -295,15 +298,19 @@ SQL;
     }
 
     public function estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatus,$linkSolicitud){
+        $mensaje="";
         if($estatus=="Autorizada"){
             $estatus="cuenta con el VoBo del director de producto";
+            $mensaje='<br><br>Se le informa que la propuesta a nombre de:  <b>'. $nombreCuenta.'</b> recibió el VoBo para continuar con la integración del expediente';
         }
         if($estatus=="Rechazada"){
             $estatus="ha sido Rechazada";
+            $mensaje='<br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> '.$estatus.'';
         }
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>
-      <br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> '.$estatus.'.
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>'.
+      $mensaje.'
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
