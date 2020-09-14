@@ -22,45 +22,45 @@ class Notificacion_Fiscal_class
         if (!empty($creado)) {
             $nombrecreado = $creado->full_name;
         }
-        $enviocorreo = 0;
-        // $array = $GLOBALS['app_list_strings']['tipo_registro_cuenta_list'];
+        
+		// $array = $GLOBALS['app_list_strings']['tipo_registro_cuenta_list'];
         //$GLOBALS['log']->fatal('$esproveedor' . $esproveedor . '- tipo_registro_cuenta' . $tipo_registro_cuenta);
         if ($esproveedor == '1' || $tipo_registro_cuenta == '5') {
 
             $d = strtotime("now");
             $hoy = date("Y-m-d H:i:s", $d);
-            //$GLOBALS['log']->fatal('$isUpdate' . $args['isUpdate']);
-            //$GLOBALS['log']->fatal('$hoy' . $hoy);
-            if (isset($args['isUpdate']) && $args['isUpdate'] == false) {
-                //new record
-                $enviocorreo = 1;
-                $insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
-				values ( uuid() , '" . $idAccount . "','" . $hoy . "','1','Valor utilizado para guardar registro de notificación en creación de nuevo proveedor.')";
-                $GLOBALS['db']->query($insert);
-            } else {
-                //existing record
-                $query = "select * from notification_accounts where account_id = '" . $idAccount . "' and  notification_type in ('1','2')";
-                //$GLOBALS['log']->fatal('query - ' . $query);
-                $results = $GLOBALS['db']->query($query);
-                
-				if ($results->num_rows < 1) {
-                    $insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
-					values ( uuid() , '" . $idAccount . "','" . $hoy . "','2','Valor utilizado para guardar registro de notificación en actualización de cuenta como proveedor.')";
-                    $GLOBALS['db']->query($insert);
-					$enviocorreo = 1;
-                }
-            }
-            //$GLOBALS['log']->fatal('enviocorreo ' . $enviocorreo);
-            if ($enviocorreo == 1) {
-				$cuerpoCorreo = $this->estableceCuerpoNotificacion($nombrecreado, $NombreProveedor, $rfc, $linkReferencia);
-                        
-                $query1 = "SELECT nombre_completo_c, email_address FROM (SELECT A.id, B.nombre_completo_c FROM users A INNER JOIN users_cstm B   ON B.id_c=A.id  
- AND A.employee_status = 'Active' and B.notifica_fiscal_c = 1 AND (A.status IS NULL OR A.status = 'Active') AND A.deleted=0 AND B.notifica_fiscal_c = 1 ) USUARIOS
-, (select erel.bean_id, email.email_address from email_addr_bean_rel erel join email_addresses email on
-erel.email_address_id = email.id where erel.bean_module = 'Users' and erel.primary_address = 1 AND erel.deleted = 0 AND email.deleted = 0 ) EMAILS
-WHERE EMAILS.bean_id=USUARIOS.id";
-				//$GLOBALS['log']->fatal('query ' . $query1);
-                $results1 = $GLOBALS['db']->query($query1);
+           
+			$cuerpoCorreo = $this->estableceCuerpoNotificacion($nombrecreado, $NombreProveedor, $rfc, $linkReferencia);
+            
+            $query1 = "SELECT nombre_completo_c, email_address FROM (SELECT A.id, B.nombre_completo_c FROM users A INNER JOIN users_cstm B   ON B.id_c=A.id  
+			AND A.employee_status = 'Active' and B.notifica_fiscal_c = 1 AND (A.status IS NULL OR A.status = 'Active') AND A.deleted=0 AND B.notifica_fiscal_c = 1 ) USUARIOS
+			, (select erel.bean_id, email.email_address from email_addr_bean_rel erel join email_addresses email on
+			erel.email_address_id = email.id where erel.bean_module = 'Users' and erel.primary_address = 1 AND erel.deleted = 0 AND email.deleted = 0 ) EMAILS
+			WHERE EMAILS.bean_id=USUARIOS.id";
+			//$GLOBALS['log']->fatal('query ' . $query1);
+            $results1 = $GLOBALS['db']->query($query1);
+			if ($results1->num_rows > 0) {
+				 //$GLOBALS['log']->fatal('$isUpdate' . $args['isUpdate']);
+				//$GLOBALS['log']->fatal('$hoy' . $hoy);
+				if (isset($args['isUpdate']) && $args['isUpdate'] == false) {
+					//new record
+					
+					$insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
+					values ( uuid() , '" . $idAccount . "','" . $hoy . "','1','Valor utilizado para guardar registro de notificación en creación de nuevo proveedor.')";
+					$GLOBALS['db']->query($insert);
+				} else {
+					//existing record
+					$query = "select * from notification_accounts where account_id = '" . $idAccount . "' and  notification_type in ('1','2')";
+					//$GLOBALS['log']->fatal('query - ' . $query);
+					$results = $GLOBALS['db']->query($query);
+					
+					if ($results->num_rows < 1) {
+						$insert = "insert notification_accounts (id ,account_id,date_entered,notification_type,description)
+						values ( uuid() , '" . $idAccount . "','" . $hoy . "','2','Valor utilizado para guardar registro de notificación en actualización de cuenta como proveedor.')";
+						$GLOBALS['db']->query($insert);
+					}
+				}
+				
 				try {
 					$result = "";
 					$mailer = MailerFactory::getSystemDefaultMailer();
@@ -82,13 +82,12 @@ WHERE EMAILS.bean_id=USUARIOS.id";
 						}						
 					}
 					$mailer->send();
-	
-	
+		
 				} catch (Exception $e) {
 					//  $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email " . $correo);
 					$GLOBALS['log']->fatal("Exception " . $e);
 				}
-            }
+			}
         }
     }
 
