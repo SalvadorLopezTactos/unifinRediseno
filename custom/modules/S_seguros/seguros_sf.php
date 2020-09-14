@@ -198,12 +198,13 @@ class Seguros_SF
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
       		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "NOCOTIZADO",
             "oportinidadId" => $bean->id_salesforce,
-            "stageName" => $stageName
-            //"noCotizado" => $bean->motivos_revision_c
+            "stageName" => $stageName,
+            "motivosNoCotizada" => $motivo
           ));
           $GLOBALS['log']->fatal($content);
           $curl = curl_init($url);
