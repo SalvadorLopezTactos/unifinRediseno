@@ -88,6 +88,20 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Leasing UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    //Valida que sea 9 no viable para desmarcar los campos no Viable por producto
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                            }
+                                    }
                                     # estatus_atencion
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
@@ -123,6 +137,19 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Credito UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                        }
+                                    }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
@@ -157,6 +184,19 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Factoraje UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                        }
+                                    }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
@@ -191,6 +231,19 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Fleet UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                        }
+                                    }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
@@ -225,6 +278,19 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                        }
+                                    }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
@@ -259,6 +325,19 @@ class reAsignarCuentas extends SugarApi
                                     // $GLOBALS['log']->fatal("Uniclick UniProductos - Reasignado");
                                     $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
                                     $asignaFecha->assigned_user_id = $reAsignado;
+                                    if ($promoActual=="cc736f7a-4f5f-11e9-856a-a0481cdf89eb"){
+                                        if ($asignaFecha->no_viable==1) {
+                                            $asignaFecha->no_viable=0;
+                                            $asignaFecha->no_viable_razon="";
+                                            $asignaFecha->no_viable_razon_fp="";
+                                            $asignaFecha->no_viable_quien="";
+                                            $asignaFecha->no_viable_porque="";
+                                            $asignaFecha->no_viable_producto="";
+                                            $asignaFecha->no_viable_razon_cf="";
+                                            $asignaFecha->no_viable_otro_c="";
+                                            $asignaFecha->no_viable_razon_ni="";
+                                        }
+                                    }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
                                         /** diferente de Activo */
