@@ -307,6 +307,8 @@ array (
               ),
               20 => 
               array (
+                'name' => 'motivo_no_cotizado_c',
+                'label' => 'LBL_MOTIVO_NO_COTIZADO',
               ),
               21 => 
               array (
