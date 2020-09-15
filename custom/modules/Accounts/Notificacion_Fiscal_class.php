@@ -14,7 +14,7 @@ class Notificacion_Fiscal_class
         $rfc = $bean->rfc_c;
         $d = strtotime("now");
         $hoy = date("Y-m-d H:i:s", $d);
-        if ($esproveedor == '1' || $tipo_registro_cuenta == '5') {
+        if ($esproveedor  || $tipo_registro_cuenta == '5') {
             $bean_user = BeanFactory::retrieveBean('Users', $bean->created_by, array('disable_row_level_security' => true));
             if (!empty($bean_user)) {
                 $name_user = $bean_user->full_name;
@@ -70,6 +70,8 @@ WHERE EMAILS.bean_id=USUARIOS.id";
                 $mailTo ["$correo"] = $nombre;
             }
         }
+        $GLOBALS['log']->fatal("Correos -- " . print_r($mailTo,true));
+
         return $mailTo;
     }
 
@@ -102,7 +104,7 @@ WHERE EMAILS.bean_id=USUARIOS.id";
             $body = trim($bodyMail);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
-            foreach ($mailTo as $full_name => $email) {
+            foreach ($mailTo as  $email => $full_name) {
                 if ($email != "") {
                     $mailer->addRecipientsTo(new EmailIdentity($email, $full_name));
                 }
