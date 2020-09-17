@@ -12,7 +12,7 @@ class Drive_docs
 {
     function Load_docs($bean = null, $event = null, $args = null)
     {
-      if($bean->tipo_registro_sf_c == 2 || ($bean->tipo_registro_sf_c == 1 && $bean->etapa = 9)) {
+      if($bean->tipo_registro_sf_c == 2 || ($bean->tipo_registro_sf_c == 1 && $bean->etapa == 9)) {
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida,array('disable_row_level_security' => true));
         $bean_Account = BeanFactory::retrieveBean('Accounts', $bean_Resumen->id,array('disable_row_level_security' => true));
         global $app_list_strings, $sugar_config;
