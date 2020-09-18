@@ -170,7 +170,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Cotizado
-        if($bean->etapa == 4)
+        if($bean->etapa == 4 && $bean->tipo_registro_sf_c == 1)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -194,15 +194,17 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //No Cotizado
-        if($bean->etapa == 5)
+        if($bean->etapa == 5 && $bean->tipo_registro_sf_c == 1)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+          $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
       		$url = $sugar_config['seguros_sf'].'data/cambioEtapa';
       		$content = json_encode(array(
             "etapa" => "NOCOTIZADO",
             "oportinidadId" => $bean->id_salesforce,
-            "stageName" => $stageName
+            "stageName" => $stageName,
+            "motivosNoCotizada" => $motivo
           ));
           $GLOBALS['log']->fatal($content);
           $curl = curl_init($url);

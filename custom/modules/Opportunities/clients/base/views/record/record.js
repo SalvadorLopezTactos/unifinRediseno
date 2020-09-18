@@ -4,7 +4,7 @@
     initialize: function (options) {
         self = this;
         solicitud_cf = this;
-        cont_RI = this;
+        solicitud_RI = this;
         this._super("initialize", [options]);
         this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
         this.events['keydown input[name=monto_c]'] = 'checkmoney';
@@ -36,12 +36,11 @@
         this.prev_oFinanciera = [];
         this.prev_oFinanciera.prev_condicion = [];
         
-        //Condificiones financieras RI
-        contRI = this;
-        contRI.oFinancieraRI = [];
-        contRI.oFinancieraRI.ratificacion = [];
-        contRI.prev_oFinancieraRI = [];
-        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        // Condificiones financieras RI
+        this.oFinancieraRI = [];
+        this.oFinancieraRI.ratificacion = [];
+        this.prev_oFinancieraRI = [];
+        this.prev_oFinancieraRI.prev_ratificacion = [];
         
         /*
 
@@ -127,6 +126,7 @@
         this.showSubpanels();
         this.showfieldBenef();
         this.showfieldSuby();
+        this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
 
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
@@ -2184,7 +2184,7 @@
 
         //Condiciones_financieras Ratificacion e Incremento
         var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
-        this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
+        // this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
         this.oFinancieraRI.ratificacion = condiciones_financierasRI;
         contRI.render();
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
@@ -2195,12 +2195,12 @@
     getcfRI: function () {
         //Condificiones financieras RI
         
-        contRI.oFinancieraRI = [];
-        contRI.oFinancieraRI.ratificacion = [];
-        contRI.prev_oFinancieraRI = [];
-        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        this.oFinancieraRI = [];
+        this.oFinancieraRI.ratificacion = [];
+        this.prev_oFinancieraRI = [];
+        this.prev_oFinancieraRI.prev_ratificacion = [];
 
-        if (cont_RI.model.get('ratificacion_incremento_c') == true) {
+        if (solicitud_RI.model.get('ratificacion_incremento_c') == true) {
 
 
             var api_params = {
@@ -2285,10 +2285,10 @@
                                 "activo_nuevo": activo_nuevo
                             };
                             //Genera objeto con valores previos para control de cancelar
-                            cont_RI.oFinancieraRI.ratificacion.push(condfinRI);
-                            cont_RI.prev_oFinancieraRI.prev_ratificacion.push(prev_condfinRI);
+                            solicitud_RI.oFinancieraRI.ratificacion.push(condfinRI);
+                            solicitud_RI.prev_oFinancieraRI.prev_ratificacion.push(prev_condfinRI);
                         }
-                        contRI.oFinancieraRI = cont_RI.oFinancieraRI;
+                        contRI.oFinancieraRI = solicitud_RI.oFinancieraRI;
                         contRI.render();
                     }
                 });
@@ -2763,6 +2763,7 @@
     reqBenefSuby: function (fields, errors, callback) {
         var optionBenef = this.model.get('area_benef_c');
 
+        var campos_err = [];
 
         if (optionBenef != "" && optionBenef != null && self.multilinea_prod == 1 && this.model.get('estatus_c') != 'K'
             && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
@@ -2770,41 +2771,45 @@
             if ((optionBenef == 1 || optionBenef == 2) && this.model.get('estado_benef_c') == "") {
                 errors['estado_benef_c'] = errors['estado_benef_c'] || {};
                 errors['estado_benef_c'].required = true;
+
+                campos_err.push('estado_benef_c');
             }
 
             if (optionBenef == 2 && (this.model.get('estado_benef_c') == "" || this.model.get('municipio_benef_c') == "")) {
-                errors['estado_benef_c'] = errors['estado_benef_c'] || {};
-                errors['estado_benef_c'].required = true;
                 errors['municipio_benef_c'] = errors['municipio_benef_c'] || {};
                 errors['municipio_benef_c'].required = true;
+                campos_err.push('municipio_benef_c');
             }
 
             if (optionBenef == 3 && this.model.get('ent_gob_benef_c') == "") {
                 errors['ent_gob_benef_c'] = errors['ent_gob_benef_c'] || {};
                 errors['ent_gob_benef_c'].required = true;
+                campos_err.push('ent_gob_benef_c');
             }
 
             if (optionBenef == 4 && this.model.get('cuenta_benef_c') == "") {
                 errors['cuenta_benef_c'] = errors['cuenta_benef_c'] || {};
                 errors['cuenta_benef_c'].required = true;
+                campos_err.push('cuenta_benef_c');
             }
-
             if (optionBenef == 5 && this.model.get('emp_no_reg_benef_c') == "") {
                 errors['emp_no_reg_benef_c'] = errors['emp_no_reg_benef_c'] || {};
                 errors['emp_no_reg_benef_c'].required = true;
+                campos_err.push('emp_no_reg_benef_c');
             }
 
             var campos = "";
-            _.each(errors, function (value, key) {
+
+            for (var i = 0; i < campos_err.length; i++) {
                 _.each(this.model.fields, function (field) {
-                    if (_.isEqual(field.name, key)) {
+                    if (_.isEqual(field.name, campos_err[i])) {
                         if (field.vname) {
                             campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
                         }
                     }
                 }, this);
 
-            }, this);
+            }
 
             if (campos) {
                 app.alert.show("Campos Requeridos", {
@@ -2880,13 +2885,6 @@
     showfieldBenef: function () {
         var optionBenef = this.model.get('area_benef_c');
 
-        this.model.set('estado_benef_c','');
-        this.model.set('municipio_benef','');
-        this.model.set('ent_gob_benef_c','');
-        this.model.set('cuenta_benef_c');
-        this.model.set('emp_no_reg_benef_c');
-
-
         if ( optionBenef !="" && optionBenef !=null )
         {
 
@@ -2931,12 +2929,6 @@
     showfieldSuby: function () {
 
         var optionSuby = this.model.get('subyacente_c');
-
-        this.model.set('estado_suby_c');
-        this.model.set('municipio_suby_c');
-        this.model.set('ent_gob_suby_c');
-        this.model.set('otro_suby_c');
-
         if (optionSuby != "") {
             if (optionSuby == 1 || optionSuby == 2) {
                 $('[data-name="estado_suby_c"]').show();
@@ -2975,5 +2967,24 @@
         }
     },
 
+    reqBenfArea :function (fields, errors, callback) {
+
+        var optionBenef = this.model.get('area_benef_c');
+
+            if ((optionBenef == "" || optionBenef == null) && self.multilinea_prod == 1
+                && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+                errors['area_benef_c'] = errors['area_benef_c'] || {};
+                errors['area_benef_c'].required = true;
+
+                app.alert.show("cAMPO bENEF", {
+                    level: "error",
+                    messages: "<b>Debe seleccionar un valor de Área beneficiada.</b> ",
+                    autoClose: false
+                });
+            }
+
+        callback(null, fields, errors);
+
+    },
 
 })

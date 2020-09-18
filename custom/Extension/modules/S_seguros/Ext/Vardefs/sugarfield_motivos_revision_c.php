@@ -1,5 +1,5 @@
 <?php
- // created: 2020-08-04 09:28:08
+ // created: 2020-09-14 10:47:24
 $dictionary['S_seguros']['fields']['motivos_revision_c']['labelValue']='Motivos de la Oportunidad en Revisión';
 $dictionary['S_seguros']['fields']['motivos_revision_c']['full_text_search']=array (
   'enabled' => '0',
