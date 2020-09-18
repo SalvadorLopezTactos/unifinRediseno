@@ -13,7 +13,7 @@ class NotificacionDirector
 
             $documento="";
             $extensionArchivo="";
-            //ToDo Comprobar que tiene documento adjunto
+            $documentos=array();
             if($bean->load_relationship('opportunities_documents_1')){
                 $beansDocs = $bean->opportunities_documents_1->getBeans();
                 if (!empty($beansDocs)) {
@@ -24,6 +24,9 @@ class NotificacionDirector
                             $nombreArchivo=$doc->filename;
                             $explodeNameArchivo=explode(".", $nombreArchivo);
                             $extensionArchivo=$explodeNameArchivo[1];
+
+                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo));
+
                         }
                     }
 
@@ -40,6 +43,7 @@ class NotificacionDirector
             $nombreCuenta=$bean->account_name;
             $idSolicitud=$bean->id;
             $linkSolicitud=$urlSugar.$idSolicitud;
+            $descripcion=$bean->vobo_descripcion_txa_c;
 
             $correo_director="";
 
@@ -52,8 +56,11 @@ class NotificacionDirector
 
             $urlSugarDoc=$GLOBALS['sugar_config']['site_url'].'/#Documents/';
 
+            $rutasAdjuntos=array();
+
             if($correo_director!=""){
                 $adjunto="";
+                /*
                 if($documento!=""){
                     $adjunto = "upload/".$documento;
 
@@ -62,6 +69,23 @@ class NotificacionDirector
                     $archivo="upload/ScoringComercial_".$documento.".".$extensionArchivo;
                     file_put_contents($archivo, $file_contents);
                     $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
+                }
+                */
+                if(count($documentos)>0){
+
+                    for($i=0;$i<count($documentos);$i++){
+                        //$recipients[$i]['correo']
+                        $adjunto = "upload/".$documentos[$i]['archivo'];
+
+                        $file_contents=file_get_contents($adjunto);
+
+                        $archivo="upload/ScoringComercial_".$documentos[$i]['archivo'].".".$documentos[$i]['extension'];
+                        file_put_contents($archivo, $file_contents);
+                        $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
+                        array_push($rutasAdjuntos,$archivo);
+
+                    }
+
                 }
 
                 //Obtener correo de director regional
@@ -101,12 +125,12 @@ SQL;
                 }
 
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud);
+                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
                 //Enviando correo a director de solicitud con copia  a director regional leasing
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo,$array_user_regional);
+                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
 
                 //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
                 /*
@@ -276,13 +300,14 @@ SQL;
 
     }
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud){
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
       <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su autorización.
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Se adjunta documento con scoring comercial
+      <br><br>Descripción de asesor:<br>'.$descripcion.'
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
@@ -326,7 +351,7 @@ SQL;
 
     }
 
-    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjunto,$recipients=array()){
+    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjuntos=array(),$recipients=array()){
         //Enviando correo a asesor origen
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -342,8 +367,12 @@ SQL;
                 }
 
             }
-            if($adjunto!=""){
-                $mailer->addAttachment(new \Attachment($adjunto));
+            //Añadiendo múltiples adjuntos
+            if(count($adjuntos)>0){
+                for($i=0;$i<count($adjuntos);$i++){
+                    $mailer->addAttachment(new \Attachment($adjuntos[$i]));
+                    $GLOBALS['log']->fatal("SE ADJUNTA ARCHIVO: ".$adjuntos[$i]);
+                }
             }
             $result = $mailer->send();
 

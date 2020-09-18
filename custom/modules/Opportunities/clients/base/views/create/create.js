@@ -359,6 +359,10 @@
         $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
         $('[data-name="estatus_c"]').attr('style','pointer-events:none');
 
+        //Oculta campo de solicitud para Vobo
+        $('[data-name="vobo_descripcion_txa_c"]').hide();
+        $('[data-name="director_notificado_c"]').hide();
+
     },
     /*
     *Victor Martinez Lopez
@@ -1660,6 +1664,7 @@
     showSubpanels: function () {
         if (typeof this.model.get('tipo_producto_c') != "undefined" && this.model.get('tipo_producto_c') != ""
             && typeof this.model.get('account_id') != "undefined" && this.model.get('account_id') != "") {
+
             app.alert.show('obtiene_BenefSuby', {
                 level: 'process',
                 title: 'Cargando...',

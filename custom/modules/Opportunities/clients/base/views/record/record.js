@@ -309,6 +309,8 @@
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
 
+        this.evaluaCampoSolicitudVobo();
+
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         /*if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
@@ -531,6 +533,27 @@
 
         //oculta campo de monto grupo empresarial
         this.$('div[data-name=monto_gpo_emp_c]').hide();
+
+        //Oculta campo de Director Notificado
+        this.$('div[data-name="director_notificado_c"]').hide();
+    },
+
+    evaluaCampoSolicitudVobo:function () {
+
+        if(this.model.get('tipo_producto_c')=='1'){
+            $('[data-name="vobo_descripcion_txa_c"]').show();
+            if(this.model.get('director_notificado_c')){
+                //Se establece como solo lectura el campo
+                $('[name="vobo_descripcion_txa_c"]').attr('disabled','disabled');
+                $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
+            }
+        }else{
+
+            $('[data-name="vobo_descripcion_txa_c"]').hide();
+
+        }
+
+
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
@@ -2733,6 +2756,8 @@
                 }, self),
             });
         }
+
+        this.evaluaCampoSolicitudVobo();
     },
 
     reqBenefSuby: function (fields, errors, callback) {
