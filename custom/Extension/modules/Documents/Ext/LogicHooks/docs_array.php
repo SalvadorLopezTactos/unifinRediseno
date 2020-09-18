@@ -12,7 +12,7 @@ $hook_array['after_save'][] = Array(
     'upload_documents', // name of the class
     'file_to_drive' // name of the function.
 );
-
+/*
 $hook_array['after_save'][] = Array(
     2,
     'Establece campo check de cuenta para lanzar accion de notificación y adjuntar archivo a correo',
@@ -20,3 +20,4 @@ $hook_array['after_save'][] = Array(
     'upload_documents', // name of the class
     'set_field_to_notification' // name of the function.
 );
+*/
