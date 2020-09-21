@@ -1,5 +1,5 @@
 <?php
- // created: 2020-04-06 10:32:58
+ // created: 2020-09-21 17:28:01
 $dictionary['uni_Productos']['fields']['no_viable_otro_c']['labelValue']='¿Qué producto?';
 $dictionary['uni_Productos']['fields']['no_viable_otro_c']['full_text_search']=array (
   'enabled' => '0',
