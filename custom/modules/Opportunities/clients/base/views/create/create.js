@@ -1570,6 +1570,43 @@
                 op2[productos[id]] = op[productos[id]];
             }
         }
+
+        var i=0;
+        for (var prop in op2) {
+            if(prop==4 && i==0){ //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
+                this.model.set('tipo_producto_c', '4');
+            }else if (prop == 1 && i==0) {
+                this.model.set('tipo_producto_c', '1');
+                this.model.set('tipo_producto_c', '7')
+                //console.log("LEASING");
+            } else if (prop == 3 && i==0) {
+                this.model.set('tipo_producto_c', '3');
+                //console.log("AUTMOTRIZ");
+            } else if (prop == 2 && i==0) {
+                this.model.set('tipo_producto_c', '3');
+                //console.log("3");
+            }
+            else if (prop == 5 && i==0) {
+                this.model.set('tipo_producto_c', '5');
+                //console.log("5");
+            }
+            else if (prop == 6 && i==0) {
+                this.model.set('tipo_producto_c', '6');
+                //console.log("5");
+            }
+            else if (prop == 8 && i==0) {//Uniclick
+                this.model.set('tipo_producto_c', '8');
+                this.model.set('tipo_producto_c', '9');
+
+            }
+            else if (prop == 9 && i==0) {//Unilease
+                this.model.set('tipo_producto_c', '8');
+                this.model.set('tipo_producto_c', '9');
+
+            }
+            i++;
+        }
+        /*
         if (op2[0] == "4") {
             this.model.set('tipo_producto_c', '4');
             //console.log("FACTORAJE");
@@ -1602,6 +1639,7 @@
             this.model.set('tipo_producto_c', '9');
 
         }
+        */
         //Eliminar los productos CS, CA y Linea de Credito de la Lista
         Object.keys(op2).forEach(function (key) {
             if (key == 2 || key == 5 || key == 3) {
