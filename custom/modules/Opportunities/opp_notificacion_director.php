@@ -9,6 +9,7 @@ class NotificacionDirector
     {
         global $current_user;
         global $db;
+
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->tipo_de_operacion_c!='RATIFICACION_INCREMENTO'){
 
             $documento="";
@@ -148,7 +149,9 @@ SQL;
                 */
 
 
-                $bean->director_notificado_c=1;
+                //$bean->director_notificado_c=1;
+                $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
+                $result_actualiza = $db->query($query_actualiza);
 
             }else{
                 $GLOBALS['log']->fatal("DIRECTOR LEASING ".$nombreDirector." NO TIENE EMAIL");
@@ -161,12 +164,21 @@ SQL;
     function notificaEstatusAsesor($bean, $event, $arguments){
 
         global $app_list_strings;
+        global $current_user;
         global $db;
 
         $estatus=$bean->estatus_c;
         $idAsesor=$bean->assigned_user_id;
         $nombreAsesor=$bean->assigned_user_name;
-        if($estatus=='K' && $bean->assigned_user_id!=""){//Solicitud cancelada
+
+        $infoDirector=$bean->director_solicitud_c;
+        $idDirector="";
+        if($infoDirector!=""){
+            $infoDirectorSplit=explode(",", $infoDirector);
+            $idDirector=$infoDirectorSplit[0];
+        }
+
+        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector){//Solicitud cancelada
             //Comprobando el fetched_row
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
@@ -230,7 +242,7 @@ SQL;
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }else if($estatus=='PE' && $bean->assigned_user_id!=""){ //Solicitud Aprobada
+        }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector){ //Solicitud Aprobada
 
             //Comprobando el fetched_row
             $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
