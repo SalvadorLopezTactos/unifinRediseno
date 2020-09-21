@@ -170,6 +170,7 @@ SQL;
         $estatus=$bean->estatus_c;
         $idAsesor=$bean->assigned_user_id;
         $nombreAsesor=$bean->assigned_user_name;
+        $producto=$bean->tipo_producto_c;
 
         $infoDirector=$bean->director_solicitud_c;
         $idDirector="";
@@ -178,7 +179,7 @@ SQL;
             $idDirector=$infoDirectorSplit[0];
         }
 
-        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector){//Solicitud cancelada
+        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
             //Comprobando el fetched_row
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
@@ -242,7 +243,7 @@ SQL;
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector){ //Solicitud Aprobada
+        }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Comprobando el fetched_row
             $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
