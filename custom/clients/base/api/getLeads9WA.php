@@ -54,7 +54,7 @@ class getLeads9WA extends SugarApi
         $select_9WA = "select id_c from users_cstm WHERE nombre_completo_c LIKE '%9 - WhatsApp Chattigo%'";
         $results = $db->query($select_9WA);
         $row = $db->fetchByAssoc($results);
-        $usr_9WA = strtotime($row['id_c']);
+        $usr_9WA = $row['id_c'];
 
         if (!empty($usr_9WA)) {
 
