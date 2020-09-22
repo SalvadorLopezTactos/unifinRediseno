@@ -11,6 +11,7 @@
         this.model.addValidationTask('referenciado', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
         this.model.addValidationTask('prima_neta_ganada_c', _.bind(this.valida_PN, this));
+        this.model.addValidationTask('comision_c', _.bind(this.comision, this));
     },
 
     _render: function() {
@@ -162,6 +163,20 @@
         app.alert.show("Error Prima Neta", {
           level: "error",
           title: "La Prima Neta Ganada debe ser mayor a cero.",
+          autoClose: false
+        });
+      }
+      callback(null, fields, errors);
+    },
+
+    comision: function(fields, errors, callback) {
+      //Validación de Comisión Ganada mayor a 0
+      if(this.model.get('comision_c') <= 0 && this.model.get('etapa') == 9) {
+        errors['comision_c'] = errors['comision_c'] || {};
+        errors['comision_c'].required = true;
+        app.alert.show("Error Comision", {
+          level: "error",
+          title: "La Comisión debe ser mayor a cero.",
           autoClose: false
         });
       }
