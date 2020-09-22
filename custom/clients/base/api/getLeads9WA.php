@@ -67,13 +67,13 @@ class getLeads9WA extends SugarApi
   cstm.subtipo_registro_c,
   cstm.tipo_subtipo_registro_c,  
   cstm.regimen_fiscal_c,
-  Lead.date_modified
+  Lead.date_modified,
   Users.nombre_completo_c
 FROM leads Lead
   INNER JOIN leads_cstm cstm
     ON cstm.id_c = Lead.id
     INNER JOIN users_cstm Users
-  ON user.id_c=Lead.assigned_user_id
+  ON Users.id_c=Lead.assigned_user_id
 WHERE Lead.assigned_user_id = '{$usr_9WA}'";
             if (!empty($busqueda)) {
                 $selectLeadsPage .= "AND cstm.name_c LIKE '%{$busqueda}%'";
@@ -96,13 +96,13 @@ ORDER BY Lead.date_modified DESC;";
   cstm.subtipo_registro_c,
   cstm.tipo_subtipo_registro_c,  
   cstm.regimen_fiscal_c,
-  Lead.date_modified
+  Lead.date_modified,
   Users.nombre_completo_c
 FROM leads Lead
   INNER JOIN leads_cstm cstm
     ON cstm.id_c = Lead.id
     INNER JOIN users_cstm Users
-  ON user.id_c=Lead.assigned_user_id
+  ON Users.id_c=Lead.assigned_user_id
 WHERE Lead.assigned_user_id = '{$usr_9WA}'";
 
             if (!empty($busqueda)) {
