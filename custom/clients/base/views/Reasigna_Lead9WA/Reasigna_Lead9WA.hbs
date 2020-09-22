@@ -1,0 +1,160 @@
+<style>
+    .container {
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cuentas {
+        display: table;
+        width: 90%;
+    }
+
+    .cuentasContainer {
+        margin-top: 1%;
+        overflow-y: auto;
+        height: 300px;
+    }
+
+    #containerHeader {
+        font-size: 18px;
+        margin-top: 2%;
+        margin-left: 1%;
+        line-height: 10px;
+    }
+
+    #successful {
+        margin-top: 10%;
+        font-size: 25px;
+        color: #33800d;
+    }
+
+    #titulo{
+        color: #e2efe2;
+        background-color:#22608c;
+        border-color:#22608c;
+        border-radius: 10px;
+        margin-right:15px;
+        height: 35px;
+        display: table;
+        width: 96%;
+        font-size: 18px;
+        margin-top: 2%;
+        margin-left: 1%;
+        line-height: 30px;
+        padding-left: 10px;
+
+    }
+
+</style>
+
+
+<div class="container">
+    <h2 id="titulo" align="left" ><b>Reasignación de Leads 9-Whatsapp Chattigo</b></h2>
+    <br>
+    <div style="margin-left: 15px;">
+        <input id="filtroLead" type="text" value="">
+        <i style="color: white" class="fa fa-search btn btn-primary" id="btn_search" type="button"> Buscar</i>
+    </div>
+    <br>
+    <div class="cuentasContainer">
+        {{#if leads}}
+
+            <table class="cuentas tcenter" align="center" border="1">
+
+                <tr>
+                    <th width="5%">
+                        <input type="checkbox" value="Todo" id="btn_STodo" class="btn btn-primary" btnState="Off"/>
+                    </th>
+                    <th width="40%">NOMBRE</th>
+                    <th width="10%">TIPO</th>
+                    <th width="10%">SUBTIPO</th>
+                    <th width="10%">REGIMEN FISCAL</th>
+                    <th width="15%">ASIGNADO</th>
+                    <th width="10%">FECHA</th>
+                </tr>
+                {{#each leads}}
+                    <tr class='single'>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input
+                                    type="checkbox" name="selected" value="{{id}}" class="selected"/></span>
+                          </div>
+                    </span>
+                        </td>
+
+                        <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{name}}</span>
+                          </div>
+                    </span>
+                        </td>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue
+                                      'tipo_registro_cuenta_list' type}}</span>
+                          </div>
+                    </span>
+                        </td>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue
+                                      'subtipo_registro_c_list' subtipo}}</span>
+                          </div>
+                    </span>
+                        </td>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue
+                                      'regimen_fiscal_list' reg_fiscal}}</span>
+                          </div>
+                    </span>
+                        </td>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                        <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{user}}</span>
+                        </div>
+                    </span>
+                        </td>
+                        <td>
+                    <span sfuuid='880' class='list'>
+                        <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{fecha}}</span>
+                        </div>
+                    </span>
+                        </td>
+
+                    </tr>
+                {{/each}}
+                <tr>
+                    <td><input type="button" value="Reasignar" id="btn_ReAsignar" class="btn btn-success"/></td>
+
+                    <td colspan="5"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn fa fa-caret-left" id="previous_offset"></a>
+                            <a class="btn disabled" id="offset_value" from_set="" to_set=""
+                               total="{{../total_page}}"></a>
+                            <a class="btn fa fa-caret-right" id="next_offset"></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        {{else}}
+            <div class="block-footer">
+                {{str "LBL_NO_DATA_AVAILABLE"}}
+            </div>
+        {{/if}}
+        <textarea style="display: none" id="crossSeleccionados" value=""></textarea>
+
+    </div>
+
+
+</div>
