@@ -14,7 +14,7 @@
     .cuentasContainer {
         margin-top: 1%;
         overflow-y: auto;
-        height: 300px;
+        height: 100%;
     }
 
     #containerHeader {
@@ -54,11 +54,12 @@
     <h2 id="titulo" align="left" ><b>Reasignación de Leads 9-Whatsapp Chattigo</b></h2>
     <br>
     <div style="margin-left: 15px;">
-        <input id="filtroLead" type="text" value="">
+        <input id="filtroLead" type="text" value="" placeholder="Nombre del Lead">
         <i style="color: white" class="fa fa-search btn btn-primary" id="btn_search" type="button"> Buscar</i>
     </div>
     <br>
     <div class="cuentasContainer">
+
         {{#if leads}}
 
             <table class="cuentas tcenter" align="center" border="1">
