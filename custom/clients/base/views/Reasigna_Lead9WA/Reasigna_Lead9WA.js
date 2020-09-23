@@ -159,7 +159,7 @@
         var crossSeleccionados = $("#crossSeleccionados").val();
         context = this;
 
-        if (this.flagSeleccionados == 1) {
+        if (this.flagSeleccionados == 1 && $('#btn_STodo').is(":checked")) {
             $('#btn_STodo').attr('btnstate', 'On');
             var context = this;
             $('.selected').each(function (index, value) {
