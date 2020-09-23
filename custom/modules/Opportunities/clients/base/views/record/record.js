@@ -4,7 +4,7 @@
     initialize: function (options) {
         self = this;
         solicitud_cf = this;
-        cont_RI = this;
+        solicitud_RI = this;
         this._super("initialize", [options]);
         this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
         this.events['keydown input[name=monto_c]'] = 'checkmoney';
@@ -36,12 +36,11 @@
         this.prev_oFinanciera = [];
         this.prev_oFinanciera.prev_condicion = [];
         
-        //Condificiones financieras RI
-        contRI = this;
-        contRI.oFinancieraRI = [];
-        contRI.oFinancieraRI.ratificacion = [];
-        contRI.prev_oFinancieraRI = [];
-        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        // Condificiones financieras RI
+        this.oFinancieraRI = [];
+        this.oFinancieraRI.ratificacion = [];
+        this.prev_oFinancieraRI = [];
+        this.prev_oFinancieraRI.prev_ratificacion = [];
         
         /*
 
@@ -2162,7 +2161,7 @@
 
         //Condiciones_financieras Ratificacion e Incremento
         var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
-        this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
+        // this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
         this.oFinancieraRI.ratificacion = condiciones_financierasRI;
         contRI.render();
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
@@ -2173,12 +2172,12 @@
     getcfRI: function () {
         //Condificiones financieras RI
         
-        contRI.oFinancieraRI = [];
-        contRI.oFinancieraRI.ratificacion = [];
-        contRI.prev_oFinancieraRI = [];
-        contRI.prev_oFinancieraRI.prev_ratificacion = [];
+        this.oFinancieraRI = [];
+        this.oFinancieraRI.ratificacion = [];
+        this.prev_oFinancieraRI = [];
+        this.prev_oFinancieraRI.prev_ratificacion = [];
 
-        if (cont_RI.model.get('ratificacion_incremento_c') == true) {
+        if (solicitud_RI.model.get('ratificacion_incremento_c') == true) {
 
 
             var api_params = {
@@ -2263,10 +2262,10 @@
                                 "activo_nuevo": activo_nuevo
                             };
                             //Genera objeto con valores previos para control de cancelar
-                            cont_RI.oFinancieraRI.ratificacion.push(condfinRI);
-                            cont_RI.prev_oFinancieraRI.prev_ratificacion.push(prev_condfinRI);
+                            solicitud_RI.oFinancieraRI.ratificacion.push(condfinRI);
+                            solicitud_RI.prev_oFinancieraRI.prev_ratificacion.push(prev_condfinRI);
                         }
-                        contRI.oFinancieraRI = cont_RI.oFinancieraRI;
+                        contRI.oFinancieraRI = solicitud_RI.oFinancieraRI;
                         contRI.render();
                     }
                 });
