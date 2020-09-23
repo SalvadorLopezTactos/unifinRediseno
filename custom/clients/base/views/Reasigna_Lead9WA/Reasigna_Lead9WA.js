@@ -227,7 +227,8 @@
             app.api.call("create", dnbProfileUrl, {data: Params}, {
                 success: _.bind(function (data) {
                     app.alert.dismiss('reasignando');
-                    if (data == "") {
+console.log(data);
+                    if (data == "" || data==null) {
                         app.alert.show('Reasignado', {
                             level: 'success',
                             messages: '¡Reasignación Completa!',
