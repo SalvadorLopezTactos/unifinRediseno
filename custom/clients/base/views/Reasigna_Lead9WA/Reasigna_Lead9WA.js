@@ -307,7 +307,7 @@ console.log(data);
                 seleccionarTodo.push(value.id);
             });
         } else {
-            seleccionarTodo = [];
+            seleccionarTodo = "";
         }
 
         this.seleccionados = seleccionarTodo;
