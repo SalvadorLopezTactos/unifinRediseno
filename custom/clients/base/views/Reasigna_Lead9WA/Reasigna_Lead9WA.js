@@ -180,7 +180,7 @@
             });
         }
 
-        if (!_.isEmpty(crossSeleccionados)) {
+        if (crossSeleccionados!="" && crossSeleccionados!='[]') {
 
             this.seleccionados = JSON.parse(crossSeleccionados);
             //Validar que los nuevos checks seleccionados no existen en crossSeleccionados
@@ -256,6 +256,8 @@ console.log(data);
 
     seleccionarTodo: function (e) {
 
+        var seleccionarTodo = [];
+
         if (this.persistNoSeleccionados != undefined && this.persistNoSeleccionados.length > 0) {
 
             for (var i = 0; i < this.persistNoSeleccionados.length; i++) {
@@ -272,7 +274,6 @@ console.log(data);
 
             this.persistNoSeleccionados = [];
         }
-
 
         if (this.flagSeleccionados == 0) {
             this.flagSeleccionados = 1;
@@ -296,7 +297,6 @@ console.log(data);
             }
         });
 
-        var seleccionarTodo = [];
         var crossSeleccionados = $("#crossSeleccionados").val();
         if (!_.isEmpty(crossSeleccionados)) {
             seleccionarTodo = JSON.parse(crossSeleccionados);
@@ -307,10 +307,11 @@ console.log(data);
                 seleccionarTodo.push(value.id);
             });
         } else {
-            seleccionarTodo = "";
+            seleccionarTodo = [];
         }
 
         this.seleccionados = seleccionarTodo;
+
         $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
     },
 
