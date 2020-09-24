@@ -557,6 +557,9 @@
 
         }
 
+        /*Se oculta tooltip de Candado que muestra el Texto "Este campo está bloqueado porque está implicado en un proceso en ejecución" (bug)*/
+        $('[data-name="vobo_descripcion_txa_c"]').find('.fa-lock').hide();
+
 
     },
 
