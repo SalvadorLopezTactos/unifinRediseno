@@ -24,9 +24,10 @@ class NotificacionDirector
                             $documento=$doc->document_revision_id;
                             $nombreArchivo=$doc->filename;
                             $explodeNameArchivo=explode(".", $nombreArchivo);
+                            $nombreDocAdjunto=$explodeNameArchivo[0];
                             $extensionArchivo=$explodeNameArchivo[1];
 
-                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo));
+                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo,"nombreDocumento"=>$nombreDocAdjunto));
 
                         }
                     }
@@ -80,7 +81,7 @@ class NotificacionDirector
 
                         $file_contents=file_get_contents($adjunto);
 
-                        $archivo="upload/ScoringComercial_".$documentos[$i]['archivo'].".".$documentos[$i]['extension'];
+                        $archivo="upload/".$documentos[$i]['nombreDocumento'].".".$documentos[$i]['extension'];
                         file_put_contents($archivo, $file_contents);
                         $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                         array_push($rutasAdjuntos,$archivo);
@@ -125,33 +126,38 @@ SQL;
 
                 }
 
+                if(count($rutasAdjuntos)>0){
+                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
+                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
-                $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
+                    //Enviando correo a director de solicitud con copia  a director regional leasing
+                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
 
-                //Enviando correo a director de solicitud con copia  a director regional leasing
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
+                    //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
+                    /*
+                    if($correo_regional!=""){
+                        $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
 
-                //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
-                /*
-                if($correo_regional!=""){
-                    $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
+                        $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
 
-                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
+                        //Enviando correo a asesor origen
+                        $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
 
-                    //Enviando correo a asesor origen
-                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
+                    }else{
+                        $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                    }
+                    */
+
+
+                    //$bean->director_notificado_c=1;
+                    $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
+                    $result_actualiza = $db->query($query_actualiza);
 
                 }else{
-                    $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                    $GLOBALS['log']->fatal("NO SE ENVIA NOTIFICACION PUES NO TIENE DOCUMENTOS ADJUNTOS");
                 }
-                */
 
-
-                //$bean->director_notificado_c=1;
-                $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
-                $result_actualiza = $db->query($query_actualiza);
 
             }else{
                 $GLOBALS['log']->fatal("DIRECTOR LEASING ".$nombreDirector." NO TIENE EMAIL");
