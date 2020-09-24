@@ -568,9 +568,11 @@
         //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
         if(this.model.get('director_notificado_c')){
             //Se establece como solo lectura el campo
-            $('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+            //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+
         }else{
-            $('span[data-name="doc_scoring_chk_c"]').attr('style', '');
+            $('[data-name="doc_scoring_chk_c"]').attr('style', '');
         }
     },
 
