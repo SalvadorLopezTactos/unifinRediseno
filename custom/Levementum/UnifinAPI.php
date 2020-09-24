@@ -1585,6 +1585,8 @@ SQL;
 
             $host = 'http://' . $GLOBALS['bpm_url'] . '/uni2/rest/bpm/iniciar-proceso';
 
+            if ($opportunidad['estatus_c'] != 'K' && $opportunidad['tct_etapa_ddw_c'] != 'R') {
+
             $monto = ($opportunidad['monto_gpo_emp_c'] != 0)? $opportunidad['monto_gpo_emp_c'] : $opportunidad['monto_c']; 
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : TIPO_PRODUCTO " . $opportunidad['tipo_producto_c']);
                 //CVV - 29/03/2016 - Se crea el arreglo con los campos que aplican para todos los productos
@@ -1701,7 +1703,7 @@ SQL;
 					$fields['vrc'] = "0";
                     $fields['vri'] = "0";
                 }
-
+            }
                 //CVV - 29/03/2016 - Si el proceso es para un BO se elimina el item de promotor y se agrega el grupo de asignación
                 if ($backoffice) {
                     unset($fields['promotor']);
