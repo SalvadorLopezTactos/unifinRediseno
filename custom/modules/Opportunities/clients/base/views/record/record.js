@@ -281,6 +281,9 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
 
         }
+
+        this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
     },
 
     _render: function () {
