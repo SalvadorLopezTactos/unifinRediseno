@@ -310,6 +310,7 @@
         $('[data-name="director_solicitud_c"]').hide();
 
         this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -554,6 +555,17 @@
         }
 
 
+    },
+
+    evaluaCampoEnviarNotificacion:function(){
+
+        //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+        if(this.model.get('director_notificado_c')){
+            //Se establece como solo lectura el campo
+            $('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+        }else{
+            $('span[data-name="doc_scoring_chk_c"]').attr('style', '');
+        }
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
@@ -2758,6 +2770,7 @@
         }
 
         this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
     },
 
     reqBenefSuby: function (fields, errors, callback) {
