@@ -156,6 +156,8 @@ SQL;
 
                 }else{
                     $GLOBALS['log']->fatal("NO SE ENVIA NOTIFICACION PUES NO TIENE DOCUMENTOS ADJUNTOS");
+                    $query_actualiza_check = "UPDATE opportunities_cstm SET doc_scoring_chk_c=0 WHERE id_c='{$bean->id}'";
+                    $result_actualiza = $db->query($query_actualiza_check);
                 }
 
 
