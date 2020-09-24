@@ -24,9 +24,10 @@ class NotificacionDirector
                             $documento=$doc->document_revision_id;
                             $nombreArchivo=$doc->filename;
                             $explodeNameArchivo=explode(".", $nombreArchivo);
+                            $nombreDocAdjunto=$explodeNameArchivo[0];
                             $extensionArchivo=$explodeNameArchivo[1];
 
-                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo));
+                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo,"nombreDocumento"=>$nombreDocAdjunto));
 
                         }
                     }
@@ -80,7 +81,7 @@ class NotificacionDirector
 
                         $file_contents=file_get_contents($adjunto);
 
-                        $archivo="upload/ScoringComercial_".$documentos[$i]['archivo'].".".$documentos[$i]['extension'];
+                        $archivo="upload/".$documentos[$i]['nombreDocumento'].".".$documentos[$i]['extension'];
                         file_put_contents($archivo, $file_contents);
                         $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                         array_push($rutasAdjuntos,$archivo);
