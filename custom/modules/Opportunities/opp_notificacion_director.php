@@ -243,7 +243,7 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS RECHAZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -251,8 +251,6 @@ SQL;
 
         }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
-            //Comprobando el fetched_row
-            $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
@@ -308,7 +306,7 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -387,6 +385,7 @@ SQL;
 
             }
             //Añadiendo múltiples adjuntos
+            $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
             if(count($adjuntos)>0){
                 for($i=0;$i<count($adjuntos);$i++){
                     $mailer->addAttachment(new \Attachment($adjuntos[$i]));
