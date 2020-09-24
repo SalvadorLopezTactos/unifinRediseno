@@ -97,6 +97,7 @@ ORDER BY Lead.date_modified DESC;";
   cstm.tipo_subtipo_registro_c,  
   cstm.regimen_fiscal_c,
   Lead.date_modified,
+  CONVERT_TZ(Lead.date_modified,'+00:00',@@global.time_zone) 'Fecha',
   Users.nombre_completo_c
 FROM leads Lead
   INNER JOIN leads_cstm cstm
@@ -125,7 +126,9 @@ ORDER BY Lead.date_modified DESC LIMIT 20 OFFSET {$offset}";
                 $tiposubtipo_text = $row['tipo_subtipo_registro_c'];
                 $reg_fiscal = $row['regimen_fiscal_c'];
                 $nombre_user = $row['nombre_completo_c'];
-                $date_modif = $row['date_modified'];
+                //$date_modif = $row['date_modified'];
+                $d = strtotime($row['Fecha']);
+                $date_modif = date("Y-m-d g:i a", $d);
 
                 array_push($record_9Wa, array('id' => "{$id_Lead}", 'name' => "{$name_Lead}", 'type' => "{$tipo_registro}",
                     'user' => "{$nombre_user}", 'subtipo' => "{$subtipo}", 'reg_fiscal' => "{$reg_fiscal}", 'fecha' => "{$date_modif}"));
