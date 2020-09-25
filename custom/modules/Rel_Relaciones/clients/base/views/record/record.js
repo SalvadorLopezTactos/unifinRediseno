@@ -1733,6 +1733,189 @@ extendsFrom: 'RecordView',
                               }
                             }
                         }
+						//Valida Relación: Garante
+						var terceros = 0;
+						var recursos = 0;
+                        if (this.model.get('relaciones_activas').includes('Garante')){
+							relacionesActivas.push("Garante");
+							//Itera PLD PRoductos
+							var productuser =App.user.attributes.tipodeproducto_c;
+							for (var t = 0; t < data[3].contents.records.length; t++) {
+								if( (data[3].contents.records[t].description == 'CS' && productuser == '5') ||
+									(data[3].contents.records[t].description == 'CA' && productuser == '3') ||
+									(data[3].contents.records[t].description == 'FF' && productuser == '4') ||
+									(data[3].contents.records[t].description == 'AP' && productuser == '1') 
+								){
+									if (data[3].contents.records[t].tct_pld_campo2_ddw != '' ) {
+										terceros++;
+									}
+									if (data[3].contents.records[t].tct_pld_campo4_ddw != '' ) {
+										recursos++;
+									}
+								}
+							}
+							if (data[0].contents.tipodepersona_c != "Persona Moral") {
+								if (data[0].contents.primernombre_c == "") {
+									faltantes.push('Nombre');
+								}
+								if (data[0].contents.apellidopaterno_c == "") {
+									faltantes.push('Apellido Paterno');
+								}
+								if (data[0].contents.apellidomaterno_c == "") {
+									faltantes.push('Apellido Materno');
+								}                               
+								if (data[0].contents.profesion_c == "") {
+									faltantes.push('Profesión');
+								}
+								if (data[0].contents.fechadenacimiento_c == "") {
+									faltantes.push('Fecha de Nacimiento');
+								}
+								if (data[0].contents.pais_nacimiento_c == "") {
+									faltantes.push('País de Nacimiento');
+								}
+								if (data[0].contents.estado_nacimiento_c == "") {
+									faltantes.push('Estado de Nacimiento');
+								}
+								if (data[0].contents.genero_c == "") {
+									faltantes.push('Género');
+								}
+								if (data[0].contents.curp_c == "") {
+									faltantes.push('CURP');
+								}
+                                //Pregunta por la direccion
+								if (direF == 0) {
+									faltantes.push('Dirección Particular');
+								}
+								//Validación PF y PFAE
+								if (data[0].contents.tipodepersona_c == "Persona Fisica") {
+									//Pregunta por el telefono Casa
+									if (telCyC == 0) {
+										faltantes.push('Teléfono Casa o Celular');
+									}
+								}else{									
+									//Pregunta por el telefono Trabajo
+									if (telO == 0) {
+										faltantes.push('Teléfono Casa o Trabajo');
+									}
+								}
+								if (terceros == 0) {
+									faltantes.push('PLD - Actúa por cuenta propia o un tercero');
+								}
+								if(data[0].contents.ctpldfuncionespublicas_c == "1"){
+									if (data[0].contents.ctpldfuncionespublicascargo_c == "") {
+										faltantes.push('PLD - Cargo Público que tiene o tuvo');
+									}
+									if (data[0].contents.ctpldfuncionespublicascargo_c == "") {
+										faltantes.push('PLD - Cargo Público que tiene o tuvo');
+									}
+									if (data[0].contents.tct_dependencia_pf_c == "") {
+										faltantes.push('PLD - Dependencia del cargo');
+									}
+									if (data[0].contents.tct_fecha_ini_pf_c == "") {
+										faltantes.push('PLD - Fecha inicio del cargo');
+									}
+									if (data[0].contents.tct_fecha_fin_pf_c == "") {
+										faltantes.push('PLD - Fecha fin del cargo');
+									}
+								}
+								if(data[0].contents.ctpldconyuge_c == "1"){
+									if (data[0].contents.ctpldconyugecargo_c == "") {
+										faltantes.push('PLD - Parentesco o relación');
+									}
+									if (data[0].contents.tct_nombre_pf_peps_c == "") {
+										faltantes.push('PLD - Nombre de la persona');
+									}
+									if (data[0].contents.tct_cargo2_pf_c == "") {
+										faltantes.push('PLD - Cargo público que tiene o tuvo');
+									}
+									if (data[0].contents.tct_dependencia2_pf_c == "") {
+										faltantes.push('PLD - Dependencia del cargo');
+									}
+									if (data[0].contents.tct_fecha_ini2_pf_c == "") {
+										faltantes.push('PLD - Fecha inicio del cargo');
+									}
+									if (data[0].contents.tct_fecha_fin2_pf_c == "") {
+										faltantes.push('PLD - Fecha fin del cargo');
+									}
+								}
+							} else {
+								if (data[0].contents.razonsocial_c == "") {
+									faltantes.push('Razón Social');
+								}
+								if (data[0].contents.fechaconstitutiva_c == "") {
+									faltantes.push('Fecha Constitutiva');
+								}
+								//Pregunta por el telefono Trabajo
+								if (telO== 0) {
+									faltantes.push('Teléfono Casa o Trabajo');
+								}
+								//Pregunta por la direccion
+								if (direF == 0) {
+									faltantes.push('Dirección Fiscal');
+								}
+								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
+									if (data[0].contents.tct_socio2_pm_c == "") {
+										faltantes.push('PLD - Nombre del socio o accionista');
+									}
+									if (data[0].contents.tct_nombre_pm_c == "") {
+										faltantes.push('PLD - Nombre del que ocupa el puesto');
+									}
+									if (data[0].contents.ctpldaccionistasconyugecargo_c == "") {
+									faltantes.push('PLD - Especificar parentesco o relación');
+									}
+									if (data[0].contents.tct_cargo_pm_c == "") {
+									faltantes.push('PLD - Cargo público que tiene o tuvo');
+									}
+									if (data[0].contents.tct_dependencia2_pm_c == "") {
+									faltantes.push('PLD - Dependencia del cargo');
+									}										
+									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
+									faltantes.push('PLD - Fecha inicio del cargo');
+									}
+									if (data[0].contents.tct_fecha_fin2_pm_c == "") {
+									faltantes.push('PLD - Fecha fin del cargo');
+									}
+								}
+								if(data[0].contents.ctpldaccionistas_c == "1"){
+									if (data[0].contents.tct_socio_pm_c == "") {
+										faltantes.push('PLD - Nombre del socio o accionista');
+									}
+									if (data[0].contents.ctpldaccionistascargo_c == "") {
+										faltantes.push('PLD - Cargo público que tiene o tuvo');
+									}
+									if (data[0].contents.tct_dependencia_pm_c == "") {
+										faltantes.push('PLD - Dependencia del cargo');
+									}
+									if (data[0].contents.tct_fecha_ini_pm_c == "") {
+										faltantes.push('PLD - Fecha inicio del cargo');
+									}
+									if (data[0].contents.tct_fecha_fin_pm_c == "") {
+										faltantes.push('PLD - Fecha fin del cargo');
+									}
+								}
+							}
+							if (data[0].contents.email.length == 0) {
+								faltantes.push('Correo electrónico');
+							}
+							if (data[0].contents.actividadeconomica_c == "") {
+								faltantes.push('Actividad Económica');
+							}
+							if (data[0].contents.nacionalidad_c == "") {
+								faltantes.push('Nacionalidad');
+							}
+							if (data[0].contents.rfc_c == "") {
+								faltantes.push('RFC');
+							}
+							if (data[0].contents.tct_pais_expide_rfc_c == "") {
+								faltantes.push('País que expide el RFC ');
+							}							
+							if (data[0].contents.ctpldnoseriefiel_c == "") {
+								faltantes.push('No serie FIEL');
+							}							
+							if ( recursos == 0) {
+								faltantes.push('PLD - Recursos Propios o Terceros');
+							}
+                        }
                     }
                     if (faltantes.length >  0) {
                         faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);

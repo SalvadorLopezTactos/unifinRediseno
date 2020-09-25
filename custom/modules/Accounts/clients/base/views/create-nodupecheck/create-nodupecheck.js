@@ -335,8 +335,8 @@
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/
         //Oculta la etiqueta del campo PLD
-        this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-
+        $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+		$('[data-name=tct_nuevo_pld_c]').hide();
         try {
             if (relContext != null) {
                 self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
@@ -381,8 +381,13 @@
         $("#drawers li.tab").removeClass('active');
         $('#drawers li.tab.panel_body').addClass("active");
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL8').hide();
-        $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
+        //$('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL2').hide();
+		
+		//Oculta Peps de Persona Moral
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL7']").hide();
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
         if (this.context.parent.attributes.module == "Accounts" && this.model.get('tipo_relacion_c').includes('Propietario Real')) {
             $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').show();
