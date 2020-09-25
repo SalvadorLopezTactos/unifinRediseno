@@ -72,7 +72,7 @@
         /*
         AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
       */
-        this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
+        //this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -352,7 +352,7 @@
         $('div[data-name=tct_homonimo_chk_c]').hide();
 
         //campo Pais que expide el RFC nace oculto.
-        $('[data-name=tct_pais_expide_rfc_c]').hide();
+        //$('[data-name=tct_pais_expide_rfc_c]').hide();
         //Oculta panel del campo Tipo de Cuenta por Producto
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL17']").hide();
         //Oculta nombre de campo Potencial_Autos
