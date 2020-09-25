@@ -27,6 +27,10 @@
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
 
+        //Contexto para exlcuir_check
+        banderaExcluye= this;
+        banderaExcluye.check=[];
+
         /*
         Contexto campos custom
         */
@@ -127,9 +131,10 @@
         this.showfieldBenef();
         this.showfieldSuby();
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
-
+        //Evento para obtener el valor del campo exluye_precalificacion para poder determinar validaciones de precalificacion V1 y V2
+        this.model.on('sync', this.exluyeFunc, this);
         //Validación para poder autorizar o rechazar la pre-solicitud
-        this.model.on('sync', this.autorizapre, this);
+        //this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
@@ -185,28 +190,25 @@
     setDirectores:function () {
         var id_usuario="cdf63b76-233b-11e8-a1ec-00155d967307";
 
-        app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
-            success: _.bind(function (data) {
+        if(banderaExcluye.check.includes(1)) {
+            app.api.call('GET', app.api.buildURL('GetBossLeasing/' + id_usuario), null, {
+                success: _.bind(function (data) {
 
-                if (data != "") {
+                    if (data != "") {
 
-                    if(data.length>0){
-                        var directores_list = app.lang.getAppListStrings('director_seleccion_list');
-                        for(var i=0;i<data.length;i++){
-                            directores_list[data[i].id] = data[i].name;
+                        if (data.length > 0) {
+                            var directores_list = app.lang.getAppListStrings('director_seleccion_list');
+                            for (var i = 0; i < data.length; i++) {
+                                directores_list[data[i].id] = data[i].name;
+                            }
+                            //Establecer nuevas opciones al campo de director
+                            this.model.fields['director_seleccionado_c'].options = directores_list;
                         }
-                        //Establecer nuevas opciones al campo de director
-                        this.model.fields['director_seleccionado_c'].options = directores_list;
-
                     }
 
-
-                }
-
-            }, self),
-        });
-
-
+                }, self),
+            });
+        }
     },
 
     cancelClicked: function () {
@@ -2560,7 +2562,7 @@
         var producto=this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA" && banderaExcluye.check.includes(1)) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2587,7 +2589,7 @@
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
         if (operacion!='RATIFICACION_INCREMENTO'&& chk!=true) {
-            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA') {
+            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(1)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
                     messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
@@ -2708,8 +2710,8 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && this.model.get('tct_etapa_ddw_c')=="SI" &&
-            (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && (this.model.get('tct_etapa_ddw_c')=="SI" || this.model.get('tct_etapa_ddw_c')=="P") && banderaExcluye.check.includes(1)
+            && (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
             $('[name="vobo_leasing"]').removeClass('hidden');
             $('[name="rechazo_leasing"]').removeClass('hidden');
             $('[name="vobo_leasing"]').show();
@@ -2718,7 +2720,7 @@
     },
 
     ShowHideDirectorSolicitud:function () {
-        if(this.model.get('tipo_producto_c')=="1"){
+        if(this.model.get('tipo_producto_c')=="1" && banderaExcluye.check.includes(1)){
             $('[data-name="opportunities_directores"]').show();
         }else{
             $('[data-name="opportunities_directores"]').hide();
@@ -2987,4 +2989,22 @@
 
     },
 
+    exluyeFunc: function () {
+        var operacion=this.model.get('tipo_de_operacion_c');
+        var producto= this.model.get('tipo_producto_c');
+        var etapa= this.model.get('tct_etapa_ddw_c');
+        var status= this.model.get('estatus_c');
+        var cuenta=this.model.get('account_id');
+
+        if (producto== "1" && operacion == 'LINEA_NUEVA' && (etapa=="SI"|| etapa=="P") && status!='K'){
+            app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
+                success: _.bind(function (data) {
+                    if(data=='1'){
+                        banderaExcluye.check.push(1);
+                        this.autorizapre();
+                    }
+                }, self),
+            });
+        }
+    },
 })

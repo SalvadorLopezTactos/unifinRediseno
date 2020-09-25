@@ -290,6 +290,9 @@
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
 
+        //Validacion para poder Excluir pre-calificación.
+        this.model.on('sync', this.validaExcluir, this);
+
     },
 
     /** Asignacion modal */
@@ -1019,7 +1022,8 @@
 
         //Ocultar campo "No Contactar" siempre. Se agregó a la vista para que esté disponible a través de this.model
         $('[data-name="tct_no_contactar_chk_c"]').hide();
-
+        //Oculta campo excluir precalificacion
+        $('.chk_ls_excluir').hide();
         //campo Pais que expide el RFC nace oculto.
         // $('[data-name=tct_pais_expide_rfc_c]').hide();
         // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
@@ -5902,5 +5906,11 @@
     //_set_rfc_antiguo: function(rfca){
     //	self.rfc_antiguo = rfca;
     //},
-
+    //Funcion para poder permitir la edicion del campo excluir precalificacion si el user tiene el privilegio
+    validaExcluir : function (){
+        var permiso= App.user.attributes.excluir_precalifica_c;
+        if(permiso== 1){
+            cont_uni_p.$('.ls_excluir').show();
+        }
+    },
 })
