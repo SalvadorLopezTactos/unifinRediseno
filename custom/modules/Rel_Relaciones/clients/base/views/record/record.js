@@ -1900,11 +1900,11 @@ extendsFrom: 'RecordView',
 							if (data[0].contents.actividadeconomica_c == "") {
 								faltantes.push('Actividad Económica');
 							}
-							if (data[0].contents.nacionalidad_c == "") {
+							if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
 								faltantes.push('Nacionalidad');
 							}
 							if (data[0].contents.rfc_c == "") {
-								faltantes.push('RFC');
+								faltantes.push('RFC con homoclave');
 							}
 							if (data[0].contents.tct_pais_expide_rfc_c == "") {
 								faltantes.push('País que expide el RFC ');
