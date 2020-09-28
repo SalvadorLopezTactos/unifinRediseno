@@ -128,6 +128,10 @@
         this.showfieldSuby();
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
 
+        //Se agrega validationTask únicamente para mostrar mensaje de aviso para indicar notificación a director cuando check
+        //de ratificacion_incremento_c se haya seleccionado
+        this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
+
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
@@ -3007,5 +3011,19 @@
         callback(null, fields, errors);
 
     },
+
+    alertaDirectorNotificacion:function (fields, errors, callback) {
+
+        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0){
+            app.alert.show("alert_director_ratificacion", {
+                level: "info",
+                title: "Se debe de enviar la notificación para VoBo del director dentro de la solicitud generada para Ratificación/Incremento",
+                autoClose: false
+            });
+
+        }
+
+        callback(null, fields, errors);
+    }
 
 })
