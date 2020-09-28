@@ -70,6 +70,7 @@
         //this.model.addValidationTask('check_valida_multiactivo', _.bind(this.validaMultiactivo, this));
 
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
+        this.model.addValidationTask('setRequiredAforoTipoFactoraje', _.bind(this.setRequiredAforoTipoFactoraje, this));
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
 
         /*
@@ -1062,6 +1063,20 @@
                 errors['porcentaje_ca_c'].required = true;
             }
         }
+        callback(null, fields, errors);
+    },
+
+    setRequiredAforoTipoFactoraje: function (fields, errors, callback) {
+        if(this.model.get('tipo_producto_c')=='4' && this.model.get('tct_oportunidad_perdida_chk_c')==false && $('[data-name="f_tipo_factoraje_c"]').is(':visible')){
+            errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
+            errors['f_tipo_factoraje_c'].required = true;
+        }
+
+        if(this.model.get('tipo_producto_c')=='4' && this.model.get('tct_oportunidad_perdida_chk_c')==false && $('[data-name="f_aforo_c"]').is(':visible')){
+            errors['f_aforo_c'] = errors['f_aforo_c'] || {};
+            errors['f_aforo_c'].required = true;
+        }
+
         callback(null, fields, errors);
     },
 
