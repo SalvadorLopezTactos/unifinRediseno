@@ -106,6 +106,8 @@
                 'assigned_user_id': ''
             }
         };
+
+
     },
 
     /**
@@ -123,9 +125,9 @@
     _render: function () {
         this._super("_render");
         $("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;'); //campo custom account_uni_productos
-        //oculta campo check excluye_precalifiacion
-        cont_uni_p.$('.ls_excluir').hide();
         this.cargalistas(); //funcion de cargar listas
+
+
 
         /*********************Funciones de visibilidad para campos conforme al check en cada producto*************************/
         /*************Producto Leasing*************/
@@ -192,6 +194,9 @@
         $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:none;'); //Check Fleet
         $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:none;'); //Check Uniclick
 
+        //inabilita campo check excluye_precalifiacion
+        $('[data-field="ls_excluir"]').attr('style','pointer-events:none');
+
         try {
 
             cont_uni_p.nvproductos(); //HABILITA LOS CHECK DEPENDIENDO LOS PRODUCTOS QUE TIENE EL USUARIO
@@ -218,6 +223,11 @@
         //Funcion para dar estilo select2 a las listas deplegables.
         var $select = $('select.select2');
         $select.select2();
+
+        //Validacion para campo exluir precalificacion
+        if(App.user.attributes.excluir_precalifica_c== 1){
+            $('[data-field="ls_excluir"]').attr('style','pointer-events:block');
+        }
     },
 
     /*************************************PRODUCTO LEASING*********************************************/
