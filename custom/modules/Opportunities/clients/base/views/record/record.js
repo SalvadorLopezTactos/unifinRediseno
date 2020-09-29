@@ -2584,7 +2584,7 @@
         var producto=this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA" && banderaExcluye.check.includes(1)) {
+        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA" && banderaExcluye.check.includes(0)) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2611,7 +2611,7 @@
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
         if (operacion!='RATIFICACION_INCREMENTO'&& chk!=true) {
-            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(1)) {
+            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
                     messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
@@ -2732,20 +2732,12 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && (this.model.get('tct_etapa_ddw_c')=="SI" || this.model.get('tct_etapa_ddw_c')=="P") && banderaExcluye.check.includes(1)
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && (this.model.get('tct_etapa_ddw_c')=="SI" || this.model.get('tct_etapa_ddw_c')=="P")
             && (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
             $('[name="vobo_leasing"]').removeClass('hidden');
             $('[name="rechazo_leasing"]').removeClass('hidden');
             $('[name="vobo_leasing"]').show();
             $('[name="rechazo_leasing"]').show();
-        }
-    },
-
-    ShowHideDirectorSolicitud:function () {
-        if(this.model.get('tipo_producto_c')=="1" && banderaExcluye.check.includes(1)){
-            $('[data-name="opportunities_directores"]').show();
-        }else{
-            $('[data-name="opportunities_directores"]').hide();
         }
     },
 
@@ -3025,6 +3017,8 @@
                     if(data=='1'){
                         banderaExcluye.check.push(1);
                         this.autorizapre();
+                    }else{
+                        banderaExcluye.check.push(0);
                     }
                 }, self),
             });
