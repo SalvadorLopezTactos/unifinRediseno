@@ -1593,12 +1593,13 @@
             }
         });
         this.model.fields['tipo_producto_c'].options = op2;
-
+      
         var i=0;
         for (var prop in op2) {
             if(prop==4 && i==0){ //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
                 this.model.set('tipo_producto_c', '4');
             }else if (prop == 1 && i==0) {
+              
                 //Solo hacer set al modelo, cuando en las opciones del campo se tenga el producto s setear
                 if(this.model.fields['tipo_producto_c'].options[prop]!=undefined){
                     this.model.set('tipo_producto_c', '1');
@@ -1624,6 +1625,7 @@
                 //console.log("5");
             }
             else if (prop == 8 && i==0) {//Uniclick
+
                 if(8 in this.model.fields['tipo_producto_c'].options){
                     this.model.set('tipo_producto_c', '8');
                 }
@@ -1678,7 +1680,6 @@
 
         }
         */
-
         if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
             //Realiza llamada para recuperar oportunidades de la cuenta, estas son solicitudes de Leasing con Linea y solicitudes SOS (Si las tiene)
             app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {

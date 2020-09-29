@@ -160,7 +160,6 @@ SQL;
                     $result_actualiza = $db->query($query_actualiza_check);
                 }
 
-
             }else{
                 $GLOBALS['log']->fatal("DIRECTOR LEASING ".$nombreDirector." NO TIENE EMAIL");
             }
