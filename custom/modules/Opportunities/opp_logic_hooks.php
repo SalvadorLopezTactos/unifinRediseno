@@ -331,6 +331,9 @@ SQL;
                 $opp->f_comentarios_generales_c = $bean->f_comentarios_generales_c;
                 $opp->ca_pago_mensual_c = $bean->ca_pago_mensual_c;
 
+                //Se hereda director de solicitud
+                $opp->director_solicitud_c = $bean->director_solicitud_c;
+
                 //AF - 16/03/2018 - Cambio de porcentaje de renta incial: Hereda valor de la línea nueva y no de condiciones financieras
                 $opp->porciento_ri_c = $bean->porciento_ri_c;
                 //CVV - 31/03/2016 - Se deben crear los campos de mes y año Backlog para la operacion de R/I y tomar los datos de esos nuevos campos

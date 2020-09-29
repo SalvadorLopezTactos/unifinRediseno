@@ -7,11 +7,14 @@ class NotificacionDirector
 {
     function notificaDirector($bean, $event, $arguments)
     {
+        global $current_user;
+        global $db;
+
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->tipo_de_operacion_c!='RATIFICACION_INCREMENTO'){
 
             $documento="";
             $extensionArchivo="";
-            //ToDo Comprobar que tiene documento adjunto
+            $documentos=array();
             if($bean->load_relationship('opportunities_documents_1')){
                 $beansDocs = $bean->opportunities_documents_1->getBeans();
                 if (!empty($beansDocs)) {
@@ -22,6 +25,9 @@ class NotificacionDirector
                             $nombreArchivo=$doc->filename;
                             $explodeNameArchivo=explode(".", $nombreArchivo);
                             $extensionArchivo=$explodeNameArchivo[1];
+
+                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo));
+
                         }
                     }
 
@@ -38,6 +44,7 @@ class NotificacionDirector
             $nombreCuenta=$bean->account_name;
             $idSolicitud=$bean->id;
             $linkSolicitud=$urlSugar.$idSolicitud;
+            $descripcion=$bean->vobo_descripcion_txa_c;
 
             $correo_director="";
 
@@ -50,8 +57,11 @@ class NotificacionDirector
 
             $urlSugarDoc=$GLOBALS['sugar_config']['site_url'].'/#Documents/';
 
+            $rutasAdjuntos=array();
+
             if($correo_director!=""){
                 $adjunto="";
+                /*
                 if($documento!=""){
                     $adjunto = "upload/".$documento;
 
@@ -61,15 +71,87 @@ class NotificacionDirector
                     file_put_contents($archivo, $file_contents);
                     $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                 }
+                */
+                if(count($documentos)>0){
+
+                    for($i=0;$i<count($documentos);$i++){
+                        //$recipients[$i]['correo']
+                        $adjunto = "upload/".$documentos[$i]['archivo'];
+
+                        $file_contents=file_get_contents($adjunto);
+
+                        $archivo="upload/ScoringComercial_".$documentos[$i]['archivo'].".".$documentos[$i]['extension'];
+                        file_put_contents($archivo, $file_contents);
+                        $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
+                        array_push($rutasAdjuntos,$archivo);
+
+                    }
+
+                }
+
+                //Obtener correo de director regional
+                $idUsuarioAsignado=$bean->assigned_user_id;
+                $region_asignado="";
+                $correo_regional="";
+                $id_regional="";
+                $nombre_regional="";
+                $array_user_regional=array();
+                $beanAsignado = BeanFactory::retrieveBean('Users', $idUsuarioAsignado);
+                if(!empty($beanAsignado)){
+                    $region_asignado=$beanAsignado->region_c;
+                }
+
+                if($region_asignado!=""){
+                    //PUESTO USUARIO DIRECTOR REGIONAL LEASING =33
+                    $queryDirectorRegional=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='33' AND u.status='Active' and uc.region_c='{$region_asignado}' and u.deleted=0;
+SQL;
+                    $queryResult = $db->query($queryDirectorRegional);
+                    if($queryResult->num_rows>0){
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            $id_regional = $row['id'];
+                        }
+
+                        if($id_regional!=""){
+                            $beanRegional = BeanFactory::retrieveBean('Users', $id_regional);
+                            if(!empty($beanRegional)){
+
+                                array_push($array_user_regional,array('correo'=>$beanRegional->email1,"nombre"=>$beanRegional->full_name));
+                            }
+
+                        }
+                    }
+
+                }
 
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud);
+                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
-                //Enviando correo a asesor origen
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$archivo);
-                $bean->director_notificado_c=1;
+                //Enviando correo a director de solicitud con copia  a director regional leasing
+                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
+
+                //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
+                /*
+                if($correo_regional!=""){
+                    $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
+
+                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
+
+                    //Enviando correo a asesor origen
+                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
+
+                }else{
+                    $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                }
+                */
+
+
+                //$bean->director_notificado_c=1;
+                $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
+                $result_actualiza = $db->query($query_actualiza);
 
             }else{
                 $GLOBALS['log']->fatal("DIRECTOR LEASING ".$nombreDirector." NO TIENE EMAIL");
@@ -82,13 +164,23 @@ class NotificacionDirector
     function notificaEstatusAsesor($bean, $event, $arguments){
 
         global $app_list_strings;
+        global $current_user;
+        global $db;
 
         $estatus=$bean->estatus_c;
         $idAsesor=$bean->assigned_user_id;
         $nombreAsesor=$bean->assigned_user_name;
-        if($estatus=='K' && $bean->assigned_user_id!=""){//Solicitud cancelada
+        $producto=$bean->tipo_producto_c;
+
+        $infoDirector=$bean->director_solicitud_c;
+        $idDirector="";
+        if($infoDirector!=""){
+            $infoDirectorSplit=explode(",", $infoDirector);
+            $idDirector=$infoDirectorSplit[0];
+        }
+
+        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
             //Comprobando el fetched_row
-            $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
@@ -98,14 +190,45 @@ class NotificacionDirector
 
             $correo_asesor="";
 
+            $equipoPrincipal="";
+            $users_bo_emails=array();
+
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
                 $correo_asesor=$beanAsesor->email1;
                 $nombreAsesor=$beanAsesor->full_name;
+                $equipoPrincipal=$beanAsesor->equipo_c;
             }
 
             if($correo_asesor!=""){
+
+                if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
+                    //Puesto 6 = Backoffice Leasing
+                    $queryBackOffice=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='6' AND uc.equipo_c='{$equipoPrincipal}'AND u.status='Active'  and u.deleted=0;
+SQL;
+                    $queryResult = $db->query($queryBackOffice);
+                    $users_bo=array();
+                    if($queryResult->num_rows>0){
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            array_push($users_bo,$row['id']);
+                        }
+
+                        if(count($users_bo)>0){
+
+                            for ($i=0;$i<count($users_bo);$i++){
+                                $beanAsignado = BeanFactory::retrieveBean('Users', $users_bo[$i]);
+                                if(!empty($beanAsignado)){
+                                    array_push($users_bo_emails,array('correo'=>$beanAsignado->email1,"nombre"=>$beanAsignado->full_name));
+                                }
+                            }
+
+                        }
+                    }
+
+                }
 
                 //$estatus=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Rechazada";
@@ -114,13 +237,13 @@ class NotificacionDirector
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS RECHAZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"");
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }else if($estatus=='PE' && $bean->assigned_user_id!=""){ //Solicitud Aprobada
+        }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Comprobando el fetched_row
             $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
@@ -133,14 +256,44 @@ class NotificacionDirector
 
             $correo_asesor="";
 
+            $equipoPrincipal="";
+            $users_bo_emails=array();
+
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
                 $correo_asesor=$beanAsesor->email1;
                 $nombreAsesor=$beanAsesor->full_name;
+                $equipoPrincipal=$beanAsesor->equipo_c;
             }
 
             if($correo_asesor!=""){
+
+                if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
+                    //Puesto 6 = Backoffice Leasing
+                    $queryBackOffice=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='6' AND uc.equipo_c='{$equipoPrincipal}'AND u.status='Active'  and u.deleted=0;
+SQL;
+                    $queryResult = $db->query($queryBackOffice);
+                    $users_bo=array();
+                    if($queryResult->num_rows>0){
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            array_push($users_bo,$row['id']);
+                        }
+
+                        if(count($users_bo)>0){
+                            for ($i=0;$i<count($users_bo);$i++){
+                                $beanAsignado = BeanFactory::retrieveBean('Users', $users_bo[$i]);
+                                if(!empty($beanAsignado)){
+                                    array_push($users_bo_emails,array('correo'=>$beanAsignado->email1,"nombre"=>$beanAsignado->full_name));
+                                }
+                            }
+
+                        }
+                    }
+
+                }
 
                 //$estatusString=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Autorizada";
@@ -149,7 +302,7 @@ class NotificacionDirector
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"");
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -160,13 +313,14 @@ class NotificacionDirector
 
     }
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud){
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
       <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su autorización.
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Se adjunta documento con scoring comercial
+      <br><br>Descripción de asesor:<br>'.$descripcion.'
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
@@ -182,10 +336,19 @@ class NotificacionDirector
     }
 
     public function estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatus,$linkSolicitud){
+        $mensaje="";
+        if($estatus=="Autorizada"){
+            $estatus="cuenta con el VoBo del director de producto";
+            $mensaje='<br><br>Se le informa que la propuesta a nombre de:  <b>'. $nombreCuenta.'</b> recibió el VoBo para continuar con la integración del expediente';
+        }
+        if($estatus=="Rechazada"){
+            $estatus="ha sido Rechazada";
+            $mensaje='<br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> '.$estatus.'';
+        }
 
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>
-      <br><br>Se le informa que la solicitud para la cuenta:  <b>'. $nombreCuenta.'</b> ha sido '.$estatus.'.
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>'.
+      $mensaje.'
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
@@ -201,7 +364,7 @@ class NotificacionDirector
 
     }
 
-    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjunto){
+    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjuntos=array(),$recipients=array()){
         //Enviando correo a asesor origen
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -211,8 +374,18 @@ class NotificacionDirector
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
             $mailer->addRecipientsTo(new EmailIdentity($correoDirector, $nombreDirector));
-            if($adjunto!=""){
-                $mailer->addAttachment(new \Attachment($adjunto));
+            if(count($recipients)>0){
+                for($i=0;$i<count($recipients);$i++){
+                    $mailer->addRecipientsCc(new EmailIdentity($recipients[$i]['correo'], $recipients[$i]['nombre']));
+                }
+
+            }
+            //Añadiendo múltiples adjuntos
+            if(count($adjuntos)>0){
+                for($i=0;$i<count($adjuntos);$i++){
+                    $mailer->addAttachment(new \Attachment($adjuntos[$i]));
+                    $GLOBALS['log']->fatal("SE ADJUNTA ARCHIVO: ".$adjuntos[$i]);
+                }
             }
             $result = $mailer->send();
 

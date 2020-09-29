@@ -359,10 +359,20 @@ array (
             'name' => 'notifica_fiscal_c',
             'label' => 'LBL_NOTIFICA_FISCAL',
           ),
-          1 => array(
+          1 => 
+          array (
             'name' => 'responsable_oficina_chk_c',
             'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
           ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'excluir_precalifica_c',
+            'label' => 'LBL_EXCLUIR_PRECALIFICA',
+          ),
+          1 => '',
         ),
       ),
     ),
