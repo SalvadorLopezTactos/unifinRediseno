@@ -2710,7 +2710,7 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId=res[0];
         }
-        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && (this.model.get('tct_etapa_ddw_c')=="SI" || this.model.get('tct_etapa_ddw_c')=="P") && banderaExcluye.check.includes(1)
+        if (app.user.attributes.id== this.directorSolicitudId && this.model.get('tipo_producto_c')=="1" && (this.model.get('tct_etapa_ddw_c')=="SI" || this.model.get('tct_etapa_ddw_c')=="P")
             && (this.model.get("fecha_validacion_c")=="" || this.model.get("fecha_validacion_c")==null)){
             $('[name="vobo_leasing"]').removeClass('hidden');
             $('[name="rechazo_leasing"]').removeClass('hidden');
