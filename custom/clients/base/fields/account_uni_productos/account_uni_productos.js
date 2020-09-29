@@ -195,7 +195,7 @@
         $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:none;'); //Check Uniclick
 
         //inabilita campo check excluye_precalifiacion
-        $('[data-field="ls_excluir"]').attr('style','pointer-events:none');
+        $('[data-field="chk_ls_excluir"]').attr('style','pointer-events:none');
 
         try {
 
@@ -226,7 +226,7 @@
 
         //Validacion para campo exluir precalificacion
         if(App.user.attributes.excluir_precalifica_c== 1){
-            $('[data-field="ls_excluir"]').attr('style','pointer-events:block');
+            $('[data-field="chk_ls_excluir"]').attr('style','pointer-events:block');
         }
     },
 
