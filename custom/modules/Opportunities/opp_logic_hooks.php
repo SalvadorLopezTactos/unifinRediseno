@@ -201,7 +201,7 @@
             $generaSolicitud = false;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c!='6' && $bean->tipo_producto_c!='1') ? true : $generaSolicitud;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $bean->vobo_dir_c== true) ? true : $generaSolicitud;
-            $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || $bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO') ? true : $generaSolicitud;
+            $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c!='1')) ? true : $generaSolicitud;
             if($generaSolicitud){
                 $GLOBALS['log']->fatal('valor generaSolicitud: '.$generaSolicitud);
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
@@ -314,9 +314,16 @@ SQL;
                 // Generales de la operación
                 $opp->name = " R/I " . $bean->name;
                 //author: Salvador Lopez
-                //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
-                $opp->tct_etapa_ddw_c="P";//Integración de Expediente
-                $opp->estatus_c="PE";//En Espera
+                //SECION DE PRECALIFICACION COMERCIAL
+                if($bean->tipo_producto_c=='1'){
+                    $opp->tct_etapa_ddw_c="SI";//SOLICITUD INICIAL
+                    $opp->estatus_c="1";//VALIDACION COMERCIAL
+                }else{
+                    //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
+                    $opp->tct_etapa_ddw_c="P";//Integración de Expediente
+                    $opp->estatus_c="PE";//En Espera
+                }
+
                 $opp->monto_gpo_emp_c = $bean->monto_gpo_emp_c;
                 $opp->monto_c = $bean->monto_ratificacion_increment_c + $bean->monto_c;
                 $opp->amount = $bean->monto_ratificacion_increment_c + $bean->amount;
