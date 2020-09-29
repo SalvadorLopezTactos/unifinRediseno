@@ -280,14 +280,67 @@ array (
               27 => 
               array (
                 'name' => 'phone_mobile',
+                'label' => 'LBL_MOBILE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_mobile:click',
+                    'css_class' => 'fa fa-phone fa-large btn-success',
+                    'acl_action' => 'edit',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_mobile',
+                  ),
+                ),                
               ),
               28 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
                 'label' => 'LBL_HOME_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_home:click',
+                    'css_class' => 'fa fa-phone fa-large btn-success',
+                    'acl_action' => 'edit',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_home',
+                  ),
+                ),                
               ),
-              29 => 'phone_work',
+              29 =>
+              array (
+                'name' => 'phone_work',
+                'label' => 'LBL_OFFICE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_work:click',
+                    'css_class' => 'fa fa-phone fa-large btn-success',
+                    'acl_action' => 'edit',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_work',
+                  ),
+                ),                
+              ),
               30 => 
               array (
                 'name' => 'detalle_plataforma_c',

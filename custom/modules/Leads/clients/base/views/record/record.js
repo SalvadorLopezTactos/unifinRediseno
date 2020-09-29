@@ -21,6 +21,9 @@
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
+        this.context.on('button:llamada_mobile:click', this.llamar_movil, this);
+        this.context.on('button:llamada_home:click', this.llamar_casa, this);
+        this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
     },
 
     _disableActionsSubpanel: function () {
@@ -595,6 +598,7 @@
             });
 
     },
+
     bindDataChange: function () {
         this._super("bindDataChange");
         //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
@@ -622,5 +626,83 @@
                 }
             }
         }, this));
+    },
+
+    llamar_movil: function () {
+      var tel_client = this.model.get('phone_mobile');
+      this.llamar_vicidial(tel_client);
+    },
+
+    llamar_casa: function () {
+      var tel_client = this.model.get('phone_home');
+      this.llamar_vicidial(tel_client);
+    },
+
+    llamar_trabajo: function () {
+      var tel_client = this.model.get('phone_work');
+      this.llamar_vicidial(tel_client);
+    },
+
+    llamar_vicidial: function (tel_client) {
+        var tel_usr = app.user.attributes.ext_c;
+        var leadid = this.model.get('id');
+        vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client + '&leadid=' + leadid;
+        _.extend(this, vicidial);
+        if(tel_usr!='' || tel_usr!=null){
+            if(tel_client!='' || tel_client!=null){
+                context=this;
+                app.alert.show('do-call', {
+                    level: 'confirmation',
+                    messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                    autoClose: false,
+                    onConfirm: function(){
+                        context.createcall(context.resultCallback);
+                    },
+                });
+            }else{
+                app.alert.show('error_tel_client', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                });
+            }
+        }else {
+            app.alert.show('error_tel_usr', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+            });
+        }
+    },
+
+    createcall: function (callback) {
+        self=this;
+        var id_call='';
+        var name_client=this.model.get('name');
+        var id_client=this.model.get('id');
+        var modulo='Leads';
+        var Params=[id_client,name_client,modulo];
+        app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
+            success: _.bind(function (data) {
+                id_call=data;
+                console.log('Llamada creada, id: '+id_call);
+                app.alert.show('message-to', {
+                    level: 'info',
+                    messages: 'Usted esta llamando a '+name_client,
+                    autoClose: true
+                });
+                callback(id_call,self);
+            }, this),
+        });
+    },
+
+    resultCallback:function(id_call,context) {
+        self=context;
+        //vicidial+='&id_call='+id_call;
+        $.ajax({
+            cache:false,
+            type: "get",
+            url: vicidial,
+        });
     },
 })
