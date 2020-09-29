@@ -10,7 +10,7 @@ class NotificacionDirector
         global $current_user;
         global $db;
 
-        if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->tipo_de_operacion_c!='RATIFICACION_INCREMENTO'){
+        if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
 
             $documento="";
             $extensionArchivo="";
@@ -24,9 +24,10 @@ class NotificacionDirector
                             $documento=$doc->document_revision_id;
                             $nombreArchivo=$doc->filename;
                             $explodeNameArchivo=explode(".", $nombreArchivo);
+                            $nombreDocAdjunto=$explodeNameArchivo[0];
                             $extensionArchivo=$explodeNameArchivo[1];
 
-                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo));
+                            array_push($documentos,array('archivo'=>$documento,"extension"=>$extensionArchivo,"nombreDocumento"=>$nombreDocAdjunto));
 
                         }
                     }
@@ -80,7 +81,7 @@ class NotificacionDirector
 
                         $file_contents=file_get_contents($adjunto);
 
-                        $archivo="upload/ScoringComercial_".$documentos[$i]['archivo'].".".$documentos[$i]['extension'];
+                        $archivo="upload/".$documentos[$i]['nombreDocumento'].".".$documentos[$i]['extension'];
                         file_put_contents($archivo, $file_contents);
                         $GLOBALS['log']->fatal("SE GENERO ARCHIVO DE SCORING ".$archivo);
                         array_push($rutasAdjuntos,$archivo);
@@ -125,33 +126,39 @@ SQL;
 
                 }
 
+                if(count($rutasAdjuntos)>0){
+                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
+                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
-                $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
+                    //Enviando correo a director de solicitud con copia  a director regional leasing
+                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
 
-                //Enviando correo a director de solicitud con copia  a director regional leasing
-                $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
+                    //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
+                    /*
+                    if($correo_regional!=""){
+                        $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
 
-                //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
-                /*
-                if($correo_regional!=""){
-                    $cuerpoCorreoRegional= $this->estableceCuerpoNotificacion($nombre_regional,$nombreCuenta,$linkSolicitud);
+                        $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
 
-                    $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR REGIONAL DE SOLICITUD ".$correo_regional);
+                        //Enviando correo a asesor origen
+                        $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
 
-                    //Enviando correo a asesor origen
-                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreoRegional,$correo_regional,$nombre_regional,$archivo);
+                    }else{
+                        $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                    }
+                    */
+
+
+                    //$bean->director_notificado_c=1;
+                    $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
+                    $result_actualiza = $db->query($query_actualiza);
 
                 }else{
-                    $GLOBALS['log']->fatal("DIRECTOR REGIONAL LEASING ".$nombre_regional." NO TIENE EMAIL");
+                    $GLOBALS['log']->fatal("NO SE ENVIA NOTIFICACION PUES NO TIENE DOCUMENTOS ADJUNTOS");
+                    $query_actualiza_check = "UPDATE opportunities_cstm SET doc_scoring_chk_c=0 WHERE id_c='{$bean->id}'";
+                    $result_actualiza = $db->query($query_actualiza_check);
                 }
-                */
-
-
-                //$bean->director_notificado_c=1;
-                $query_actualiza = "UPDATE opportunities_cstm SET director_notificado_c=1 WHERE id_c='{$bean->id}'";
-                $result_actualiza = $db->query($query_actualiza);
 
             }else{
                 $GLOBALS['log']->fatal("DIRECTOR LEASING ".$nombreDirector." NO TIENE EMAIL");
@@ -237,7 +244,7 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS RECHAZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -245,8 +252,6 @@ SQL;
 
         }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
-            //Comprobando el fetched_row
-            $GLOBALS['log']->fatal("VALOR ANTERIOR DE ESTATUS ".$bean->fetched_row['estatus_c']);
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
@@ -302,7 +307,7 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,"",$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -381,6 +386,7 @@ SQL;
 
             }
             //Añadiendo múltiples adjuntos
+            $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
             if(count($adjuntos)>0){
                 for($i=0;$i<count($adjuntos);$i++){
                     $mailer->addAttachment(new \Attachment($adjuntos[$i]));

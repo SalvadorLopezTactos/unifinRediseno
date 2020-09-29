@@ -133,6 +133,9 @@
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
         //Evento para obtener el valor del campo exluye_precalificacion para poder determinar validaciones de precalificacion V1 y V2
         this.model.on('sync', this.exluyeFunc, this);
+        //Se agrega validationTask únicamente para mostrar mensaje de aviso para indicar notificación a director cuando check
+        //de ratificacion_incremento_c se haya seleccionado
+        this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
         //this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
@@ -283,6 +286,9 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
 
         }
+
+        this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
     },
 
     _render: function () {
@@ -312,6 +318,7 @@
         $('[data-name="director_solicitud_c"]').hide();
 
         this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -555,7 +562,22 @@
 
         }
 
+        /*Se oculta tooltip de Candado que muestra el Texto "Este campo está bloqueado porque está implicado en un proceso en ejecución" (bug)*/
+        $('[data-name="vobo_descripcion_txa_c"]').find('.fa-lock').hide();
 
+    },
+
+    evaluaCampoEnviarNotificacion:function(){
+
+        //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+        if(this.model.get('director_notificado_c')){
+            //Se establece como solo lectura el campo
+            //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+
+        }else{
+            $('[data-name="doc_scoring_chk_c"]').attr('style', '');
+        }
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
@@ -2760,6 +2782,7 @@
         }
 
         this.evaluaCampoSolicitudVobo();
+        this.evaluaCampoEnviarNotificacion();
     },
 
     reqBenefSuby: function (fields, errors, callback) {
@@ -3007,4 +3030,19 @@
             });
         }
     },
+  
+    alertaDirectorNotificacion:function (fields, errors, callback) {
+
+        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0){
+            app.alert.show("alert_director_ratificacion", {
+                level: "info",
+                title: "Se debe de enviar la notificación para VoBo del director dentro de la solicitud generada para Ratificación/Incremento",
+                autoClose: false
+            });
+
+        }
+
+        callback(null, fields, errors);
+    }
+
 })
