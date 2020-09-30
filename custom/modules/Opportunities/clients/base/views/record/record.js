@@ -138,7 +138,7 @@
         //de ratificacion_incremento_c se haya seleccionado
         this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
-        //this.model.on('sync', this.autorizapre, this);
+        this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
