@@ -339,7 +339,7 @@ SQL;
                 $opp->ca_pago_mensual_c = $bean->ca_pago_mensual_c;
 
                 //Se hereda director de solicitud
-                $opp->director_solicitud_c = $bean->director_solicitud_c;
+                //$opp->director_solicitud_c = $bean->director_solicitud_c;
 
                 //AF - 16/03/2018 - Cambio de porcentaje de renta incial: Hereda valor de la línea nueva y no de condiciones financieras
                 $opp->porciento_ri_c = $bean->porciento_ri_c;
