@@ -1799,43 +1799,43 @@ extendsFrom: 'RecordView',
 									}
 								}
 								if (terceros == 0) {
-									faltantes.push('PLD - Actúa por cuenta propia o un tercero');
+									faltantes.push('PLD-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
 								}
 								if(data[0].contents.ctpldfuncionespublicas_c == "1"){
 									if (data[0].contents.ctpldfuncionespublicascargo_c == "") {
-										faltantes.push('PLD - Cargo Público que tiene o tuvo');
+										faltantes.push('PLD-Cargo público que tiene o tuvo');
 									}
 									if (data[0].contents.ctpldfuncionespublicascargo_c == "") {
-										faltantes.push('PLD - Cargo Público que tiene o tuvo');
+										faltantes.push('PLD-Cargo público que tiene o tuvo');
 									}
 									if (data[0].contents.tct_dependencia_pf_c == "") {
-										faltantes.push('PLD - Dependencia del cargo');
+										faltantes.push('PLD-Dependencia donde ejerce o ejerció el cargo');
 									}
 									if (data[0].contents.tct_fecha_ini_pf_c == "") {
-										faltantes.push('PLD - Fecha inicio del cargo');
+										faltantes.push('PLD-Fecha de inicio del cargo');
 									}
 									if (data[0].contents.tct_fecha_fin_pf_c == "") {
-										faltantes.push('PLD - Fecha fin del cargo');
+										faltantes.push('PLD-Fecha de término del cargo');
 									}
 								}
 								if(data[0].contents.ctpldconyuge_c == "1"){
 									if (data[0].contents.ctpldconyugecargo_c == "") {
-										faltantes.push('PLD - Parentesco o relación');
+										faltantes.push('PLD-Especificar parentesco o relación');
 									}
 									if (data[0].contents.tct_nombre_pf_peps_c == "") {
-										faltantes.push('PLD - Nombre de la persona');
+										faltantes.push('PLD-Nombre de la persona que ocupa el puesto');
 									}
 									if (data[0].contents.tct_cargo2_pf_c == "") {
-										faltantes.push('PLD - Cargo público que tiene o tuvo');
+										faltantes.push('PLD-Cargo público que tiene o tuvo');
 									}
 									if (data[0].contents.tct_dependencia2_pf_c == "") {
-										faltantes.push('PLD - Dependencia del cargo');
+										faltantes.push('PLD-Dependencia donde ejerce o ejerció el cargo');
 									}
 									if (data[0].contents.tct_fecha_ini2_pf_c == "") {
-										faltantes.push('PLD - Fecha inicio del cargo');
+										faltantes.push('PLD-Fecha de inicio del cargo');
 									}
 									if (data[0].contents.tct_fecha_fin2_pf_c == "") {
-										faltantes.push('PLD - Fecha fin del cargo');
+										faltantes.push('PLD-Fecha de término del cargo');
 									}
 								}
 							} else {
@@ -1855,42 +1855,42 @@ extendsFrom: 'RecordView',
 								}
 								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
 									if (data[0].contents.tct_socio2_pm_c == "") {
-										faltantes.push('PLD - Nombre del socio o accionista');
+										faltantes.push('PLD-Nombre del socio o accionista');
 									}
 									if (data[0].contents.tct_nombre_pm_c == "") {
-										faltantes.push('PLD - Nombre del que ocupa el puesto');
+										faltantes.push('PLD-Nombre de la persona que ocupa el puesto');
 									}
 									if (data[0].contents.ctpldaccionistasconyugecargo_c == "") {
-									faltantes.push('PLD - Especificar parentesco o relación');
+										faltantes.push('PLD-Especificar parentesco o relación');
 									}
 									if (data[0].contents.tct_cargo_pm_c == "") {
-									faltantes.push('PLD - Cargo público que tiene o tuvo');
+										faltantes.push('PLD-Cargo público que tiene o tuvo');
 									}
 									if (data[0].contents.tct_dependencia2_pm_c == "") {
-									faltantes.push('PLD - Dependencia del cargo');
+										faltantes.push('PLD-Dependencia donde ejerce o ejerció el cargo');
 									}										
 									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
-									faltantes.push('PLD - Fecha inicio del cargo');
+										faltantes.push('PLD-Fecha de inicio del cargo');
 									}
 									if (data[0].contents.tct_fecha_fin2_pm_c == "") {
-									faltantes.push('PLD - Fecha fin del cargo');
+										faltantes.push('PLD-Fecha de término del cargo');
 									}
 								}
 								if(data[0].contents.ctpldaccionistas_c == "1"){
 									if (data[0].contents.tct_socio_pm_c == "") {
-										faltantes.push('PLD - Nombre del socio o accionista');
+										faltantes.push('PLD-Nombre del Socio o Accionista');
 									}
 									if (data[0].contents.ctpldaccionistascargo_c == "") {
-										faltantes.push('PLD - Cargo público que tiene o tuvo');
+										faltantes.push('PLD-Cargo público que tiene o tuvo');
 									}
 									if (data[0].contents.tct_dependencia_pm_c == "") {
-										faltantes.push('PLD - Dependencia del cargo');
+										faltantes.push('PLD-Dependencia donde ejerce o ejerció el cargo');
 									}
 									if (data[0].contents.tct_fecha_ini_pm_c == "") {
-										faltantes.push('PLD - Fecha inicio del cargo');
+										faltantes.push('PLD-Fecha de inicio del cargo');
 									}
 									if (data[0].contents.tct_fecha_fin_pm_c == "") {
-										faltantes.push('PLD - Fecha fin del cargo');
+										faltantes.push('PLD-Fecha de término del cargo');
 									}
 								}
 							}
@@ -1900,20 +1900,20 @@ extendsFrom: 'RecordView',
 							if (data[0].contents.actividadeconomica_c == "") {
 								faltantes.push('Actividad Económica');
 							}
-							if (data[0].contents.nacionalidad_c == "") {
+							if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
 								faltantes.push('Nacionalidad');
 							}
 							if (data[0].contents.rfc_c == "") {
-								faltantes.push('RFC');
+								faltantes.push('RFC con homoclave');
 							}
 							if (data[0].contents.tct_pais_expide_rfc_c == "") {
 								faltantes.push('País que expide el RFC ');
 							}							
 							if (data[0].contents.ctpldnoseriefiel_c == "") {
-								faltantes.push('No serie FIEL');
+								faltantes.push('PLD-No serie FIEL');
 							}							
 							if ( recursos == 0) {
-								faltantes.push('PLD - Recursos Propios o Terceros');
+								faltantes.push('PLD-¿Los recursos son propios o los recursos son de un tercero?');
 							}
                         }
                     }
