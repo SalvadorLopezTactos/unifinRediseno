@@ -638,7 +638,7 @@
                 if ($('.chk_l_nv')[0] != undefined) {
                     if ($('.chk_l_nv')[0].checked == true && typeof $('.list_l_nv_razon').select2('val') == "string") {
                         cont_uni_p.ResumenProductos.leasing.no_viable = $('.chk_l_nv')[0].checked; //check No Viable Leasing
-                        cont_uni_p.ResumenProductos.leasing.excluir=$('.chk_ls_excluir').checked; //Check Excluir Pre-Calificación
+                        cont_uni_p.ResumenProductos.leasing.excluir=$('.chk_ls_excluir')[0].checked; //Check Excluir Pre-Calificación
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon = $('.list_l_nv_razon').select2('val'); //lista Razón de Lead no viable Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon_fp = $('.list_l_nv_razon_fp').select2('val'); //lista Fuera de Perfil (Razón) Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_quien = $('.txt_l_nv_quien').val().trim(); //texto ¿Quién? Leasing
