@@ -26,7 +26,7 @@
             //Agrega clase current para sombrear en color actual al pipeline
             $('#SI').addClass('current');
             //Añade sub etapa (solo para Leasing)
-            if (producto==1 && subetapa==1 && banderaExcluye.check.includes(0)) {
+            if (producto==1 && subetapa==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
                 $("#SE1").removeClass('ocult');
                 $('#SE1').addClass('alerta');
                 $("#SE1").html("En validación comercial");
