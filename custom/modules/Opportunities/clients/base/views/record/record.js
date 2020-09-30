@@ -3034,6 +3034,9 @@
                     if(data=='1'){
                         banderaExcluye.check.push(1);
                         this.autorizapre();
+                        $('[data-name="opportunities_directores"]').hide();
+                        $('[data-name="vobo_descripcion_txa_c"]').hide();
+                        $('[data-name="doc_scoring_chk_c"]').hide();
                     }else{
                         banderaExcluye.check.push(0);
                     }
