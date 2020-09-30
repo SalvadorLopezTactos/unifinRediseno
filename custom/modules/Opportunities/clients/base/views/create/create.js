@@ -1785,9 +1785,12 @@
                         callback(null, fields, errors);
                     }, self),
                 });
+            }else{
+                callback(null, fields, errors);
             }
+        }else{
+            callback(null, fields, errors);
         }
-        callback(null, fields, errors);
     },
 
     reqBenefSuby: function (fields, errors, callback) {
