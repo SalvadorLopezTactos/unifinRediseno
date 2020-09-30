@@ -196,12 +196,22 @@
     */
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
+        require_once("custom/clients/base/api/excluir_productos.php");
+
         global $db, $current_user;
+            $args_uni_producto=[];
+            $args_uni_producto['idCuenta']=$bean->account_id;
+            $args_uni_producto['Producto']=$bean->tipo_producto_c;
+            $EjecutaApi = new excluir_productos();
+            $response_exluye = $EjecutaApi->Excluyeprecalif(null,$args_uni_producto);
             $GLOBALS['log']->fatal('Inicia creaSolicitud');
+            $GLOBALS['log']->fatal('Respuesta Excluyeprecalif: '.$response_exluye);
             $generaSolicitud = false;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c!='6' && $bean->tipo_producto_c!='1') ? true : $generaSolicitud;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $bean->vobo_dir_c== true) ? true : $generaSolicitud;
             $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c!='1')) ? true : $generaSolicitud;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $response_exluye== 1) ? true : $generaSolicitud;
+
             if($generaSolicitud){
                 $GLOBALS['log']->fatal('valor generaSolicitud: '.$generaSolicitud);
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
