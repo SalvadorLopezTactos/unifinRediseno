@@ -795,6 +795,7 @@
             if($('.chk_ls_excluir')[0]!=undefined){
                //Check Excluir Pre-Calificación
                 this.tipoProducto.leasing.excluir = $('.chk_ls_excluir')[0].checked;
+                cont_uni_p.ResumenProductos.leasing.excluir=$('.chk_ls_excluir')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
 
