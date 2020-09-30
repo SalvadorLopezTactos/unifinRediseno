@@ -19,6 +19,7 @@
         this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
         this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
         this.events['click a[name=cancel_button]'] = 'cancelClicked';
+        this.events['click a[name=edit_button]'] = 'editClicked';
         this.events['click a[name=monto_c]'] = 'formatcoin';
         this.events['click a[name=amount]'] = 'formatcoin';
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
@@ -217,6 +218,12 @@
     cancelClicked: function () {
         this._super('cancelClicked');
         window.contador = 0;
+        this.autorizapre();
+    },
+
+    editClicked:function(){
+        this._super('editClicked');
+        this.autorizapre();
     },
 
     //No muestra en alert en algunos casos
@@ -293,6 +300,7 @@
 
     _render: function () {
         this._super("_render");
+
         //Victor M.L 30-08-2018
         //Agrega validación para restringir edición de Gestión Comercial
         this.noEdita();
@@ -2584,7 +2592,8 @@
         var producto=this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA" && banderaExcluye.check.includes(0)) {
+        //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
+        if(producto==1 && banderaExcluye.check.includes(0)) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2610,8 +2619,9 @@
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
-        if (operacion!='RATIFICACION_INCREMENTO'&& chk!=true) {
-            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
+        if (chk!=true) {
+            if ((check == false || check == undefined) && producto == 1 && banderaExcluye.check.includes(0)) {
+            //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
                     messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
