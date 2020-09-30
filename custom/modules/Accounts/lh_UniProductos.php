@@ -15,6 +15,7 @@ class clase_UniProducto
                         $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
                         $beanUP->no_viable = $key['no_viable'];
                         $beanUP->no_viable_razon = $key['no_viable_razon'];
+                        $beanUP->exclu_precalif_c=$key['excluir']== true ? 1 : 0;
                         $beanUP->no_viable_razon_fp = $key['no_viable_razon_fp'];
                         $beanUP->no_viable_quien = $key['no_viable_quien'];
                         $beanUP->no_viable_porque = $key['no_viable_porque'];
