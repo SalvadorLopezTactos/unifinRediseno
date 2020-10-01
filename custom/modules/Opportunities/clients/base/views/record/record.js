@@ -224,6 +224,7 @@
         window.contador = 0;
         this.autorizapre();
         //this.muestraOcultaCampoDirector();
+        this.controlVistaCamposPrecalificacion();
     },
 
     editClicked:function(){
