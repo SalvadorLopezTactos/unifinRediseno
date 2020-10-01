@@ -298,7 +298,15 @@ SQL;
     }
 
         public function creaRatificacion($bean = null, $event = null, $args = null){
+
+            require_once("custom/clients/base/api/excluir_productos.php");
             global $current_user;
+            $args_uni_producto=[];
+            $args_uni_producto['idCuenta']=$bean->account_id;
+            $args_uni_producto['Producto']=$bean->tipo_producto_c;
+            $EjecutaApi = new excluir_productos();
+            $response_exluye = $EjecutaApi->Excluyeprecalif(null,$args_uni_producto);
+
             $_REQUEST['crea_ratificacion'] += 1;
             if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
                 // CVV - 30/03/2016 - Crea una nueva operacion para la solicitud de R/I
@@ -324,7 +332,7 @@ SQL;
                 $opp->name = " R/I " . $bean->name;
                 //author: Salvador Lopez
                 //SECION DE PRECALIFICACION COMERCIAL
-                if($bean->tipo_producto_c=='1'){
+                if($bean->tipo_producto_c=='1'&& $response_exluye==0){
                     $opp->tct_etapa_ddw_c="SI";//SOLICITUD INICIAL
                     $opp->estatus_c="1";//VALIDACION COMERCIAL
                 }else{
