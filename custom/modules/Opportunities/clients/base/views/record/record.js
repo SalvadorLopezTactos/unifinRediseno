@@ -27,6 +27,10 @@
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
+        //Oculta campos referentes a Precalificacion comercial
+        $('[data-name="opportunities_directores"]').hide();
+        $('[data-name="vobo_descripcion_txa_c"]').hide();
+        $('[data-name="doc_scoring_chk_c"]').hide();
 
         //Contexto para exlcuir_check
         banderaExcluye= this;
@@ -3039,6 +3043,9 @@
                         $('[data-name="doc_scoring_chk_c"]').hide();
                     }else{
                         banderaExcluye.check.push(0);
+                        $('[data-name="opportunities_directores"]').show();
+                        $('[data-name="vobo_descripcion_txa_c"]').show();
+                        $('[data-name="doc_scoring_chk_c"]').show();
                     }
                 }, self),
             });
