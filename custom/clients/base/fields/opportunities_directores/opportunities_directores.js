@@ -88,6 +88,8 @@
             }else{
                 if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
                   $('[data-type="opportunities_directores"]').hide();
+                }else if(banderaExcluye.check.incudes(1)){
+                    $('[data-type="opportunities_directores"]').hide();
                 }
                 else{
                   $('[data-type="opportunities_directores"]').show();
