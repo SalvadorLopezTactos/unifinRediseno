@@ -3098,21 +3098,26 @@
 
     controlVistaCamposPrecalificacion:function () {
 
-        if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
-            $('[data-name="opportunities_directores"]').hide();
-            $('[data-name="vobo_descripcion_txa_c"]').hide();
-            $('[data-name="doc_scoring_chk_c"]').hide();
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
+                $('[data-name="opportunities_directores"]').hide();
+                $('[data-name="vobo_descripcion_txa_c"]').hide();
+                $('[data-name="doc_scoring_chk_c"]').hide();
 
-        }else{
+            }else{
 
-            if(this.model.get('director_notificado_c') || this.model.get('estatus_c')=='K' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='N'){
-                $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
-                $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
-                $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
+                if(this.model.get('director_notificado_c') || this.model.get('estatus_c')=='K' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='N'){
+                    $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
+                    $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
+                    $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
+
+                }
 
             }
 
         }
+
+
 
     }
 
