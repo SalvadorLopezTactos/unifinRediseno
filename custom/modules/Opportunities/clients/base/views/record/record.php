@@ -248,6 +248,8 @@ array (
               ),
               8 => 
               array (
+                'name' => 'bandera_excluye_chk_c',
+                'label' => 'LBL_BANDERA_EXCLUYE_CHK',
               ),
               9 => 
               array (
