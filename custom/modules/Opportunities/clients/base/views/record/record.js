@@ -2621,9 +2621,10 @@
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
+        var status=this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
+        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2649,7 +2650,8 @@
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
-        if (chk!=true) {
+        var status=this.model.get('estatus_c');
+        if (chk!=true && status!="K") {
             if ((check == false || check == undefined) && producto == 1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
             //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
