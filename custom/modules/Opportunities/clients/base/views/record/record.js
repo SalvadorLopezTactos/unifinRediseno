@@ -28,9 +28,9 @@
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
         //Oculta campos referentes a Precalificacion comercial
-        $('[data-name="opportunities_directores"]').hide();
-        $('[data-name="vobo_descripcion_txa_c"]').hide();
-        $('[data-name="doc_scoring_chk_c"]').hide();
+        //$('[data-name="opportunities_directores"]').hide();
+        //$('[data-name="vobo_descripcion_txa_c"]').hide();
+        //$('[data-name="doc_scoring_chk_c"]').hide();
 
         //Contexto para exlcuir_check
         banderaExcluye= this;
@@ -223,13 +223,14 @@
         this._super('cancelClicked');
         window.contador = 0;
         this.autorizapre();
-        this.muestraOcultaCampoDirector();
+        //this.muestraOcultaCampoDirector();
     },
 
     editClicked:function(){
         this._super('editClicked');
         this.autorizapre();
-        this.muestraOcultaCampoDirector();
+        //this.muestraOcultaCampoDirector();
+        this.controlVistaCamposPrecalificacion();
 
     },
 
@@ -318,8 +319,8 @@
 
         }
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
     },
 
     _render: function () {
@@ -349,8 +350,9 @@
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
+        this.controlVistaCamposPrecalificacion();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -2819,8 +2821,8 @@
             });
         }
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
     },
 
     reqBenefSuby: function (fields, errors, callback) {
@@ -3062,16 +3064,17 @@
                     if(data=='1'){
                         banderaExcluye.check.push(1);
                         this.autorizapre();
-                        $('[data-name="opportunities_directores"]').hide();
-                        $('[data-name="vobo_descripcion_txa_c"]').hide();
-                        $('[data-name="doc_scoring_chk_c"]').hide();
+                        //$('[data-name="opportunities_directores"]').hide();
+                        //$('[data-name="vobo_descripcion_txa_c"]').hide();
+                        //$('[data-name="doc_scoring_chk_c"]').hide();
                         self.model.set('bandera_excluye_chk_c',1);
                     }else{
                         banderaExcluye.check.push(0);
-                        $('[data-name="opportunities_directores"]').show();
-                        $('[data-name="vobo_descripcion_txa_c"]').show();
-                        $('[data-name="doc_scoring_chk_c"]').show();
+                        //$('[data-name="opportunities_directores"]').show();
+                        //$('[data-name="vobo_descripcion_txa_c"]').show();
+                        //$('[data-name="doc_scoring_chk_c"]').show();
                     }
+                    this.controlVistaCamposPrecalificacion();
                 }, self),
             });
         }
@@ -3090,6 +3093,26 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    controlVistaCamposPrecalificacion:function () {
+
+        if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
+            $('[data-name="opportunities_directores"]').hide();
+            $('[data-name="vobo_descripcion_txa_c"]').hide();
+            $('[data-name="doc_scoring_chk_c"]').hide();
+
+        }else{
+
+            if(this.model.get('director_notificado_c') || this.model.get('estatus_c')=='K' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='N'){
+                $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
+                $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
+                $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
+
+            }
+
+        }
+
     }
 
 })
