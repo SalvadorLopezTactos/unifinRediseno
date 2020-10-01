@@ -27,6 +27,10 @@
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
+        //Oculta campos referentes a Precalificacion comercial
+        $('[data-name="opportunities_directores"]').hide();
+        $('[data-name="vobo_descripcion_txa_c"]').hide();
+        $('[data-name="doc_scoring_chk_c"]').hide();
 
         //Contexto para exlcuir_check
         banderaExcluye= this;
@@ -3047,13 +3051,12 @@
     },
 
     exluyeFunc: function () {
-        var operacion=this.model.get('tipo_de_operacion_c');
+
         var producto= this.model.get('tipo_producto_c');
-        var etapa= this.model.get('tct_etapa_ddw_c');
         var status= this.model.get('estatus_c');
         var cuenta=this.model.get('account_id');
 
-        if (producto== "1" && operacion == 'LINEA_NUEVA' && (etapa=="SI"|| etapa=="P") && status!='K'){
+        if (producto== "1" && status!='K'){
             app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                 success: _.bind(function (data) {
                     if(data=='1'){
@@ -3065,6 +3068,9 @@
                         self.model.set('bandera_excluye_chk_c',1);
                     }else{
                         banderaExcluye.check.push(0);
+                        $('[data-name="opportunities_directores"]').show();
+                        $('[data-name="vobo_descripcion_txa_c"]').show();
+                        $('[data-name="doc_scoring_chk_c"]').show();
                     }
                 }, self),
             });
@@ -3073,7 +3079,8 @@
   
     alertaDirectorNotificacion:function (fields, errors, callback) {
 
-        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0){
+        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0
+        && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             app.alert.show("alert_director_ratificacion", {
                 level: "info",
                 title: "Se debe de enviar la notificación para VoBo del director dentro de la solicitud generada para Ratificación/Incremento",
