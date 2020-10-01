@@ -235,7 +235,7 @@
             if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
             }else{
-                if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
+                if (banderaExcluye.check.includes(1)) {
                     $('[data-type="opportunities_directores"]').hide();
                 }
                 else{
