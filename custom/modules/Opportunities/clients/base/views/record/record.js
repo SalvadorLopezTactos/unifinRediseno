@@ -609,7 +609,7 @@
             $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
 
         }else{
-            $('[data-name="doc_scoring_chk_c"]').attr('style', '');
+            $('[data-name="doc_scoring_chk_c"]').removeAttr('style');
         }
 
         if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
