@@ -553,6 +553,7 @@
 
         //Oculta campo de Director Notificado
         this.$('div[data-name="director_notificado_c"]').hide();
+        this.$('div[data-name="bandera_excluye_chk_c"]').hide();
     },
 
     evaluaCampoSolicitudVobo:function () {
@@ -3039,6 +3040,7 @@
                         $('[data-name="opportunities_directores"]').hide();
                         $('[data-name="vobo_descripcion_txa_c"]').hide();
                         $('[data-name="doc_scoring_chk_c"]').hide();
+                        self.model.set('bandera_excluye_chk_c',1);
                     }else{
                         banderaExcluye.check.push(0);
                     }

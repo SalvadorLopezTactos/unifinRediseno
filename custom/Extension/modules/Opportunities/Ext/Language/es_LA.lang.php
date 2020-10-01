@@ -201,3 +201,4 @@ $mod_strings['LBL_EMP_NO_REG_BENEF_C'] = 'Empresa No Registrada UNIFIN';
 $mod_strings['LBL_AREA_BENEF_C'] = 'Área beneficiada';
 $mod_strings['LBL_SUBYACENTE_C'] = 'Subyacente';
 $mod_strings['LBL_VOBO_DESCRIPCION_TXA'] = 'Comentarios para solicitud';
+$mod_strings['LBL_BANDERA_EXCLUYE_CHK'] = 'Bandera excluye precalificacion';
