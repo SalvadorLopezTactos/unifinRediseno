@@ -577,13 +577,6 @@
 
     evaluaCampoEnviarNotificacion:function(){
 
-        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
-            $('[data-name="doc_scoring_chk_c"]').show();
-        }else{
-
-            $('[data-name="doc_scoring_chk_c"]').hide();
-        }
-
         //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
         if(this.model.get('director_notificado_c')){
             //Se establece como solo lectura el campo
@@ -593,6 +586,15 @@
         }else{
             $('[data-name="doc_scoring_chk_c"]').attr('style', '');
         }
+
+        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+            $('[data-name="doc_scoring_chk_c"]').show();
+        }else{
+
+            $('[data-name="doc_scoring_chk_c"]').hide();
+        }
+
+
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
