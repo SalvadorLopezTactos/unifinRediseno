@@ -100,7 +100,7 @@
                     $numeroDeFolio = $callApi->generarFolios(2);
                     $bean->idsolicitud_c = $numeroDeFolio;
                 }
-                if($bean->tct_etapa_ddw_c=='SI') {//@jesus
+                if($bean->tct_etapa_ddw_c=='SI' && $bean->tipo_de_operacion_c != 'RATIFICACION_INCREMENTO') {//@jesus
                     $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
                 }else{
                     if($bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO"){

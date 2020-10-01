@@ -142,7 +142,7 @@
         //de ratificacion_incremento_c se haya seleccionado
         this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
-        //this.model.on('sync', this.autorizapre, this);
+        this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
@@ -223,11 +223,31 @@
         this._super('cancelClicked');
         window.contador = 0;
         this.autorizapre();
+        this.muestraOcultaCampoDirector();
     },
 
     editClicked:function(){
         this._super('editClicked');
         this.autorizapre();
+        this.muestraOcultaCampoDirector();
+
+    },
+
+    muestraOcultaCampoDirector:function(){
+
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+                $('[data-type="opportunities_directores"]').hide();
+            }else{
+                if (banderaExcluye.check.includes(1)) {
+                    $('[data-type="opportunities_directores"]').hide();
+                }
+                else{
+                    $('[data-type="opportunities_directores"]').show();
+                }
+            }
+        }
+
     },
 
     //No muestra en alert en algunos casos
@@ -557,6 +577,7 @@
 
         //Oculta campo de Director Notificado
         this.$('div[data-name="director_notificado_c"]').hide();
+        this.$('div[data-name="bandera_excluye_chk_c"]').hide();
     },
 
     evaluaCampoSolicitudVobo:function () {
@@ -581,13 +602,6 @@
 
     evaluaCampoEnviarNotificacion:function(){
 
-        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
-            $('[data-name="doc_scoring_chk_c"]').show();
-        }else{
-
-            $('[data-name="doc_scoring_chk_c"]').hide();
-        }
-
         //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
         if(this.model.get('director_notificado_c')){
             //Se establece como solo lectura el campo
@@ -597,6 +611,15 @@
         }else{
             $('[data-name="doc_scoring_chk_c"]').attr('style', '');
         }
+
+        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+            $('[data-name="doc_scoring_chk_c"]').show();
+        }else{
+
+            $('[data-name="doc_scoring_chk_c"]').hide();
+        }
+
+
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
@@ -3041,6 +3064,7 @@
                         $('[data-name="opportunities_directores"]').hide();
                         $('[data-name="vobo_descripcion_txa_c"]').hide();
                         $('[data-name="doc_scoring_chk_c"]').hide();
+                        self.model.set('bandera_excluye_chk_c',1);
                     }else{
                         banderaExcluye.check.push(0);
                         $('[data-name="opportunities_directores"]').show();
