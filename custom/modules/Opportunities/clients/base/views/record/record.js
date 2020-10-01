@@ -219,11 +219,31 @@
         this._super('cancelClicked');
         window.contador = 0;
         this.autorizapre();
+        this.muestraOcultaCampoDirector();
     },
 
     editClicked:function(){
         this._super('editClicked');
         this.autorizapre();
+        this.muestraOcultaCampoDirector();
+
+    },
+
+    muestraOcultaCampoDirector:function(){
+
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+                $('[data-type="opportunities_directores"]').hide();
+            }else{
+                if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
+                    $('[data-type="opportunities_directores"]').hide();
+                }
+                else{
+                    $('[data-type="opportunities_directores"]').show();
+                }
+            }
+        }
+
     },
 
     //No muestra en alert en algunos casos
