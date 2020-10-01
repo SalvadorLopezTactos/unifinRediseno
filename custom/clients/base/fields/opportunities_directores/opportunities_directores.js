@@ -111,13 +111,6 @@
 
         $('#director_solicitud').select2({width: '400px'});
 
-        if(this.model.get('director_notificado_c')){
-            //Se establece como solo lectura el campo
-            $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
-
-        }else{
-            $('[data-name="doc_scoring_chk_c"]').removeAttr('style');
-        }
     },
 
 })
