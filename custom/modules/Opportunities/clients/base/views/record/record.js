@@ -3078,6 +3078,8 @@
                     this.controlVistaCamposPrecalificacion();
                 }, self),
             });
+        }else {
+            this.controlVistaCamposPrecalificacion();
         }
     },
   
