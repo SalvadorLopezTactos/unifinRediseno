@@ -1763,10 +1763,7 @@ extendsFrom: 'RecordView',
 								}
 								if (data[0].contents.apellidomaterno_c == "") {
 									faltantes.push('Apellido Materno');
-								}                               
-								if (data[0].contents.profesion_c == "") {
-									faltantes.push('Profesión');
-								}
+								} 								
 								if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
 								}
@@ -1786,11 +1783,14 @@ extendsFrom: 'RecordView',
 								if (direF == 0) {
 									faltantes.push('Dirección Particular');
 								}
-								//Validación PF y PFAE
+								//Validación exclusica para PF o PFAE
 								if (data[0].contents.tipodepersona_c == "Persona Fisica") {
 									//Pregunta por el telefono Casa
 									if (telCyC == 0) {
 										faltantes.push('Teléfono Casa o Celular');
+									}
+									if (data[0].contents.profesion_c == "") {
+										faltantes.push('Profesión');
 									}
 								}else{									
 									//Pregunta por el telefono Trabajo
