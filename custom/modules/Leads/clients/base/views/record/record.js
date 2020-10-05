@@ -1,5 +1,4 @@
 ({
-
     extendsFrom: 'RecordView',
 
     initialize: function (options) {
@@ -24,6 +23,8 @@
         this.context.on('button:llamada_mobile:click', this.llamar_movil, this);
         this.context.on('button:llamada_home:click', this.llamar_casa, this);
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
+        this.context.on('button:edit_button:click', this.noLlamar, this);
+        this.model.on('sync', this.siNumero, this);
     },
 
     _disableActionsSubpanel: function () {
@@ -646,7 +647,7 @@
     llamar_vicidial: function (tel_client) {
         var tel_usr = app.user.attributes.ext_c;
         var leadid = this.model.get('id');
-        vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client + '&leadid=' + leadid;
+        vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
         _.extend(this, vicidial);
         if(tel_usr!='' || tel_usr!=null){
             if(tel_client!='' || tel_client!=null){
@@ -698,11 +699,25 @@
 
     resultCallback:function(id_call,context) {
         self=context;
-        //vicidial+='&id_call='+id_call;
-        $.ajax({
-            cache:false,
-            type: "get",
-            url: vicidial,
+        vicidial+='&leadid='+id_call;
+  			var body = {
+				  "url" : vicidial
+  			}
+	  		app.api.call('create', app.api.buildURL("callvicidial"), body , {
+            success: _.bind(function (data) {
+            }, this),
         });
+    },
+
+    siNumero: function() {
+      if(!this.model.get('phone_mobile')) $('.llamada_mobile').hide();
+      if(!this.model.get('phone_home')) $('.llamada_home').hide();
+      if(!this.model.get('phone_work')) $('.llamada_work').hide();
+    },
+
+    noLlamar: function() {
+      $('.llamada_mobile').hide();
+      $('.llamada_home').hide();
+      $('.llamada_work').hide();
     },
 })
