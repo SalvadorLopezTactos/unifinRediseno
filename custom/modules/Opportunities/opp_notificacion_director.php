@@ -409,7 +409,7 @@ SQL;
 			//$GLOBALS['log']->fatal('mailer',$mailer);
 			
 			if($correoDirector != ''){
-				$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
 				VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$correoDirector}', '{$asunto}','TO', 'Solicitudes','OK', 'Correo exitosamente enviado')";
 			}
 			//$GLOBALS['log']->fatal($insert);
@@ -421,7 +421,7 @@ SQL;
 			}
 			
 			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-			VALUES (uuid() , '{$userid}' , '{$recordid}' , '{$hoy}','{$mailcco}', '{$asunto}','BCC', 'Solicitudes','OK', 'Correo exitosamente enviado')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','BCC', 'Solicitudes','OK', 'Correo exitosamente enviado')";
 			$GLOBALS['db']->query($insert);
 
         } catch (MailerException $me) {
@@ -435,7 +435,7 @@ SQL;
 					break;
 			}
 			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-		VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' ,'{$correoDirector}-{$cc}-{$mailcco}', '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e}')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','01'', '{$message}')";
 			//$GLOBALS['log']->fatal($insert);
 			$GLOBALS['db']->query($insert);
 			
@@ -443,8 +443,8 @@ SQL;
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
             $GLOBALS['log']->fatal("Exception ".$e);
 			
-			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' , '{$hoy}' ,'{$correoDirector}-{$cc}-{$mailcco}' , '{$asunto}','to', 'Solicitudes','ERROR','02', '{$e}')";
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','02', '{$e->getMessage()}')";
 			//$GLOBALS['log']->fatal($insert);
 			$GLOBALS['db']->query($insert);
 		}
