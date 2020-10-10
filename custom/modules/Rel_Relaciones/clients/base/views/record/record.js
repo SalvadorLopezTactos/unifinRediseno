@@ -1763,10 +1763,7 @@ extendsFrom: 'RecordView',
 								}
 								if (data[0].contents.apellidomaterno_c == "") {
 									faltantes.push('Apellido Materno');
-								}                               
-								if (data[0].contents.profesion_c == "") {
-									faltantes.push('Profesión');
-								}
+								} 								
 								if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
 								}
@@ -1786,11 +1783,14 @@ extendsFrom: 'RecordView',
 								if (direF == 0) {
 									faltantes.push('Dirección Particular');
 								}
-								//Validación PF y PFAE
+								//Validación exclusica para PF o PFAE
 								if (data[0].contents.tipodepersona_c == "Persona Fisica") {
 									//Pregunta por el telefono Casa
 									if (telCyC == 0) {
 										faltantes.push('Teléfono Casa o Celular');
+									}
+									if (data[0].contents.profesion_c == "") {
+										faltantes.push('Profesión');
 									}
 								}else{									
 									//Pregunta por el telefono Trabajo
@@ -1859,35 +1859,6 @@ extendsFrom: 'RecordView',
 								if (direF == 0) {
 									faltantes.push('Dirección Fiscal');
 								}
-								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
-									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == "" 
-									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == "" 
-									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == "" 
-									|| data[0].contents.tct_fecha_fin2_pm_c == "") {
-										faltantes.push("PLD Pep's Familiar: ");
-									}
-									if (data[0].contents.tct_socio2_pm_c == "") {
-										faltantes.push(" -Nombre del socio o accionista");
-									}
-									if (data[0].contents.tct_nombre_pm_c == "") {
-										faltantes.push(" -Nombre de la persona que ocupa el puesto");
-									}
-									if (data[0].contents.ctpldaccionistasconyugecargo_c == "") {
-										faltantes.push(" -Especificar parentesco o relación");
-									}
-									if (data[0].contents.tct_cargo_pm_c == "") {
-										faltantes.push(" -Cargo público que tiene o tuvo");
-									}
-									if (data[0].contents.tct_dependencia2_pm_c == "") {
-										faltantes.push(" -Dependencia donde ejerce o ejerció el cargo");
-									}										
-									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
-										faltantes.push(" -Fecha de inicio del cargo");
-									}
-									if (data[0].contents.tct_fecha_fin2_pm_c == "") {
-										faltantes.push(" -Fecha de término del cargo");
-									}
-								}
 								if(data[0].contents.ctpldaccionistas_c == "1"){
 									if (data[0].contents.tct_socio_pm_c == "" || data[0].contents.ctpldaccionistascargo_c == ""
 									|| data[0].contents.tct_dependencia_pm_c == "" || data[0].contents.tct_fecha_ini_pm_c == ""
@@ -1908,6 +1879,32 @@ extendsFrom: 'RecordView',
 									}
 									if (data[0].contents.tct_fecha_fin_pm_c == "") {
 										faltantes.push(" - Fecha de término del cargo");
+									}
+								}
+								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
+									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == "" 
+									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == "" 
+									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == "" 
+									|| data[0].contents.tct_fecha_fin2_pm_c == "") {
+										faltantes.push("PLD Pep's Familiar: ");
+									}
+									if (data[0].contents.ctpldaccionistasconyugecargo_c == "") {
+										faltantes.push(" -Especificar parentesco o relación");
+									}
+									if (data[0].contents.tct_nombre_pm_c == "") {
+										faltantes.push(" -Nombre de la persona que ocupa el puesto");
+									}									
+									if (data[0].contents.tct_cargo_pm_c == "") {
+										faltantes.push(" -Cargo público que tiene o tuvo");
+									}
+									if (data[0].contents.tct_dependencia2_pm_c == "") {
+										faltantes.push(" -Dependencia donde ejerce o ejerció el cargo");
+									}										
+									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
+										faltantes.push(" -Fecha de inicio del cargo");
+									}
+									if (data[0].contents.tct_fecha_fin2_pm_c == "") {
+										faltantes.push(" -Fecha de término del cargo");
 									}
 								}
 							}
