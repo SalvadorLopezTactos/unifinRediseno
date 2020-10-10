@@ -394,7 +394,7 @@ SQL;
             /*Se agregan como copia oculta Correos de Wendy Reyes y Cristian Carral*/
             $mailer->addRecipientsBcc(new EmailIdentity('wendy.reyes@unifin.com.mx', 'Wendy Reyes Peralta'));
             $mailer->addRecipientsBcc(new EmailIdentity('ccarral@unifin.com.mx', 'Cristian Carral'));
-			$mailcco = 'wendy.reyes@unifin.com.mx,ccarral@unifin.com.mx';
+      			$mailcco = 'wendy.reyes@unifin.com.mx,ccarral@unifin.com.mx';
 			
             //Añadiendo múltiples adjuntos
             $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
