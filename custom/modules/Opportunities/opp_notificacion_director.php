@@ -416,15 +416,23 @@ SQL;
 			$GLOBALS['db']->query($insert);
 			if($cc !=''){
 				$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-				VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK', 'Correo exitosamente enviado')";
+				VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK','Correo exitosamente enviado')";
 				$GLOBALS['db']->query($insert);
 			}
 			
 			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','BCC', 'Solicitudes','OK', 'Correo exitosamente enviado')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
 			$GLOBALS['db']->query($insert);
 
-        } catch (MailerException $me) {
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
+            $GLOBALS['log']->fatal("Exception ".$e);
+			
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
+			VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}','".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e->getMessage()}')";
+			//$GLOBALS['log']->fatal($insert);
+			$GLOBALS['db']->query($insert);
+		} catch (MailerException $me) {
 			$message = $me->getMessage();
 			switch ($me->getCode()) {
 				case \MailerException::FailedToConnectToRemoteServer:
@@ -435,19 +443,11 @@ SQL;
 					break;
 			}
 			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','01'', '{$message}')";
-			//$GLOBALS['log']->fatal($insert);
-			$GLOBALS['db']->query($insert);
-			
-		} catch (Exception $e){
-            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
-            $GLOBALS['log']->fatal("Exception ".$e);
-			
-			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}' , '{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','02', '{$e->getMessage()}')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','02', '{$message}')";
 			//$GLOBALS['log']->fatal($insert);
 			$GLOBALS['db']->query($insert);
 		}
+		
     }
 
 }
