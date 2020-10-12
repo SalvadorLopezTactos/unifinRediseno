@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Vis aktive brugere',
-		  'ShowLastModifiedRecords' => 'Sidste 10 ændrede poster',
-		  'ShowTopUser' => 'Hyppigste bruger',
-		  'ShowMyModuleUsage' => 'Min modulbrug',
-		  'ShowMyWeeklyActivities' => 'Min ugentlige aktivitet',
-		  'ShowTop3ModulesUsed' => 'Mine tre mest brugte moduler',
-		  'ShowLoggedInUserCount' => 'Antal aktive brugere',
-		  'ShowMyCumulativeLoggedInTime' => 'Min akkumulerede tid logged på "denne uge"',
-		  'ShowUsersCumulativeLoggedInTime' => 'Brugeres akkumulerede tid logged på "denne uge"',
-		  
+
 		  //Column header mapping
 		  'action' => 'Handling',
 		  'active_users' => 'Antal aktive brugere',

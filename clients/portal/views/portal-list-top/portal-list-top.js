@@ -8,8 +8,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-({
 
+({
     events: {
         'click .search': 'showSearch'
     },
@@ -22,9 +22,7 @@
     },
 
     showSearch: function() {
-        // Toggle on search filter and off the pagination buttons
-        this.$('.search').toggleClass('active');
-        this.layout.trigger("list:search:toggle");
-    }
-
-})
+        app.logger.warn('View.Views.Portal.PortalListTop#showSearch is deprecated. ' +
+            'The functionality is handled by the FilterApi.');
+    },
+});

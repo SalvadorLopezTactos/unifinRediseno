@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kapcsolat',
     'LBL_DISCOUNT_TOTAL' => 'Kedvezmény összesen',
     'LBL_DISCOUNT_AMOUNT' => 'Kedvezmény összege',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Kedvezmény összeg mértéke',
     'LBL_EXT_PRICE' => 'Kibővített ár',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Pénznem szimbólum neve',

@@ -322,4 +322,7 @@ Na het bevestigen van elke vereiste en gewenste module, klikt u op de "Opslaan e
     'LBL_FILTER_LEADS_REPORTS' => 'Lead rapporten',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Toestemming zakelijke doeleinden voor',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Toestemming voor het laatst bijgewerkt',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Kan de status {{moduleSingular}} niet wijzigen. Deze {{moduleSingular}} is reeds geconverteerd.',
 );

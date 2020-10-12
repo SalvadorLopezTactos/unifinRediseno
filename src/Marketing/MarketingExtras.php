@@ -44,7 +44,12 @@ class MarketingExtras
 
         if ($this->areMarketingExtrasEnabled()) {
             $url = $this->getMarketingExtrasUrl();
-            return $this->fetchMarketingContentInfo($url, $queryParams)['content_url'];
+            $contentUrl = $this->fetchMarketingContentInfo($url, $queryParams)['content_url'];
+            if (!$this->validateUrl($contentUrl)) {
+                throw new \Exception('content_url is not actually an HTTP(S) URL');
+            } else {
+                return $contentUrl;
+            }
         }
         return '';
     }
@@ -84,13 +89,29 @@ class MarketingExtras
         if (empty($marketingExtrasUrl)) {
             throw new \Exception('marketing_extras_url is not provided');
         }
-        $validator = $this->getValidator();
-        $constraints = $this->getUrlConstraints();
-        $errors = $validator->validate($marketingExtrasUrl, $constraints);
-        if (count($errors) > 0) {
+        if (!$this->validateUrl($marketingExtrasUrl)) {
             throw new \Exception('marketing_extras_url is not actually an HTTP(S) URL');
         }
         return $marketingExtrasUrl;
+    }
+
+    /**
+     * Get background image URL, with check to make sure it's actually a URL.
+     * @return string The background image URL.
+     * @throws \Exception If there is an issue with the background image URL.
+     */
+    public function getBackgroundImageUrl(): string
+    {
+        $backgroundImageUrl = $this->getSugarConfig('background_image');
+        if (!empty($backgroundImageUrl) && $this->validateUrl($backgroundImageUrl)) {
+            return $backgroundImageUrl;
+        }
+        $defaultBackgroundImage = $this->getSugarConfig('default_background_image');
+        if (!empty($defaultBackgroundImage) && $this->validateFile($defaultBackgroundImage)) {
+            $backgroundImageUrl = rtrim($this->getSugarConfig('site_url'), '/') . '/' . $defaultBackgroundImage;
+            return $backgroundImageUrl;
+        }
+        throw new \Exception('background_image is not provided');
     }
 
     /**
@@ -196,7 +217,7 @@ class MarketingExtras
      * @param * $default Default value.
      * @return * The value of the config flag, or the default.
      */
-    private function getSugarConfig(string $key, $default = null)
+    protected function getSugarConfig(string $key, $default = null)
     {
         $container = Container::getInstance();
         $config = $container->get(SugarConfig::class);
@@ -231,11 +252,26 @@ class MarketingExtras
     }
 
     /**
+     * Creates a Constraint enforcing that an argument is a valid file.
+     * @return \Symfony\Component\Validator\Constraint[] The created constraints.
+     */
+    private function getFileConstraints()
+    {
+        $fileConstraintBuilder = new ConstraintBuilder();
+        return $fileConstraintBuilder->build(
+            [
+                // only allows files under webroot
+                'Assert\File',
+            ]
+        );
+    }
+
+    /**
      * Retrieve the build number, flavor, and version of this Sugar instance.
      * @return array An array consisting of build number, flavor, and version
      *   details.
      */
-    private function getSugarDetails(): array
+    protected function getSugarDetails(): array
     {
         global $sugar_build, $sugar_flavor, $sugar_version;
 
@@ -244,5 +280,31 @@ class MarketingExtras
             'flavor' => $sugar_flavor,
             'build' => $sugar_build,
         );
+    }
+
+    /**
+     * Validate url.
+     * @param string $url The url to validate.
+     * @return bool True if the url is valid, false otherwise.
+     */
+    private function validateUrl(string $url): bool
+    {
+        $validator = $this->getValidator();
+        $constraints = $this->getUrlConstraints();
+        $errors = $validator->validate($url, $constraints);
+        return count($errors) === 0;
+    }
+
+    /**
+     * Validate file.
+     * @param string $file The file to validate.
+     * @return bool True if the file is valid, false otherwise.
+     */
+    private function validateFile(string $file): bool
+    {
+        $validator = $this->getValidator();
+        $constraints = $this->getFileConstraints();
+        $errors = $validator->validate($file, $constraints);
+        return count($errors) === 0;
     }
 }

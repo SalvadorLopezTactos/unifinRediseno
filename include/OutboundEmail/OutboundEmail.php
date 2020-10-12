@@ -12,6 +12,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 /**
  * Outbound email management
@@ -613,7 +614,7 @@ class OutboundEmail extends SugarBean
      * @uses OutboundEmail::populateFromUser() to set `name`, `email_address`, and `email_address_id` from the current
      * user's data when populating the system configuration and the user is allowed to use the system configuration.
      */
-    public function populateFromRow(array $row, $convert = false)
+    public function populateFromRow(array $row, $convert = false, $getMoreData = true)
     {
         $row = parent::populateFromRow($row, $convert);
 
@@ -652,6 +653,10 @@ class OutboundEmail extends SugarBean
      */
     public function populateFromUser(User $user)
     {
+        // For SugarBPM, we don't want to send emails as the current user
+        if (Registry\Registry::getInstance()->get('bpm_request') === true) {
+            return;
+        }
         $userData = $user->getUsersNameAndEmail();
         $this->name = $userData['name'];
 

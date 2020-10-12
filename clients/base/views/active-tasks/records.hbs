@@ -14,7 +14,7 @@
     {{#if collection.length}}
         <ul class="unstyled listed" data-action="pagination-body">
             {{#each collection.models}}
-                <li>
+                <li data-record-id="#{{buildRoute model=this action="detail"}}">
                     {{#if ../../row_actions}}
                         <div class="actions pull-right">
                             {{#each ../../row_actions}}

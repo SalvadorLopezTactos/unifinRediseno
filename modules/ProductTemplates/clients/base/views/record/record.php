@@ -83,6 +83,13 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                     'acl_action' => 'create',
                 ),
                 array(
+                    'type' => 'rowaction',
+                    'event' => 'button:audit_button:click',
+                    'name' => 'audit_button',
+                    'label' => 'LNK_VIEW_CHANGE_LOG',
+                    'acl_action' => 'view',
+                ),
+                array(
                     'type' => 'divider',
                 ),
                 array(
@@ -111,15 +118,13 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                     'readonly'      => true,
                 ),
+                'name',
                 array(
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
                 ),
-                array(
-                    'name' => 'name',
-                )
             )
         ),
         array(
@@ -127,20 +132,43 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'status',
                 array(
                     'name' => 'website',
-                    'type' => 'url'),
+                    'type' => 'url',
+                ),
                 'date_available',
                 'tax_class',
                 'qty_in_stock',
                 'category_name',
                 'manufacturer_name',
                 'mft_part_num',
-                'vendor_part_num',
+                'service',
+                array(
+                    'name' => 'service_duration',
+                    'type' => 'fieldset',
+                    'css_class' => 'service-duration-field',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ),
+                        array(
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ),
+                    ),
+                ),
+                'renewable',
+                array(
+                    'name' => 'vendor_part_num',
+                    'span' => 12,
+                ),
                 'weight',
                 'type_name',
                 array(
@@ -200,6 +228,7 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                 'support_description',
                 'support_contact',
                 'support_term',
+                'team_name',
                 array(
                     'name' => 'tag',
                     'span' => 12,

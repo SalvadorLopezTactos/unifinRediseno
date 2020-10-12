@@ -39,7 +39,10 @@
     enableHeaderPane: true,
 
     events: {
+        'mousemove .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseMove',
+        'mouseleave .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseLeave',
         'click .record-edit-link-wrapper': 'handleEdit',
+        'click .label-pill .record-label': 'handleEdit',
         'click a[name=cancel_button]': '_deprecatedCancelClicked',
         'click [data-action=scroll]': 'paginateRecord',
         'click .record-panel-header': 'togglePanel',
@@ -76,6 +79,12 @@
      * @type {boolean}
      */
     _hasLockedFields: false,
+
+    /**
+     * Name of the field that contains the field and its surrounding elements
+     * like the label, pencil icon, etc.
+     */
+    decoratorField: 'record-decor',
 
     /**
      * @inheritdoc
@@ -203,6 +212,23 @@
         }, this);
 
         this.on('render', this.registerShortcuts, this);
+
+        // Option to specify additional noEdit/readonly fields
+        this.extraNoEditFields = this.context.get('noEditFields') || [];
+
+        // Option to open the record view to immediately validate/save
+        this.saveImmediately = this.context.get('saveImmediately') || false;
+
+        // Option to make this view edit-only
+        this.editOnly = this.context.get('editOnly') || false;
+
+        // Optional callbacks for after-save, after-cancel, and after-validation
+        this.saveCallback = this.context.get('saveCallback') || null;
+        this.cancelCallback = this.context.get('cancelCallback') || null;
+        this.validationCallback = this.context.get('validationCallback') || null;
+
+        // Option to avoid navigating to other routes during edit/save (useful for opening in a drawer)
+        this.skipRouting = this.context.get('skipRouting') || false;
     },
 
     /**
@@ -418,7 +444,8 @@
     },
 
     setLabel: function(context, value) {
-        this.$('.record-label[data-name="' + value.field + '"]').text(value.label);
+        var plus = '<i class="fa fa-plus label-plus"></i>';
+        this.$('.record-label[data-name="' + value.field + '"]').html(plus + value.label);
     },
 
     /**
@@ -434,8 +461,14 @@
         if (isValid) {
             this.handleSave();
         }
+        if (typeof this.validationCallback === 'function') {
+            this.validationCallback(isValid);
+        }
     },
 
+    /**
+     * Assign events to button clicks.
+     */
     delegateButtonEvents: function() {
         this.context.on('button:edit_button:click', this.editClicked, this);
         this.context.on('button:save_button:click', this.saveClicked, this);
@@ -449,7 +482,8 @@
         if (this.meta && this.meta.panels) {
             this._initTabsAndPanels();
         }
-
+        // it seems like this.fields gets set somewhere here...
+        // but that makes no sense.
         app.view.View.prototype._render.call(this);
 
         if (this.context.get('record_label')) {
@@ -480,6 +514,12 @@
         if ($.contains(document.documentElement, this.$el[0])) {
             this.handleActiveTab();
             this.overflowTabs();
+        }
+
+        // If saveImmediately is set, programmatically click Edit -> Save
+        if (this.saveImmediately) {
+            this.editClicked();
+            this.saveClicked();
         }
     },
 
@@ -645,12 +685,14 @@
                         return !_.isUndefined(self.model.get(fieldSetField.name));
                     });
 
-                    if (field.readonly || _.every(fieldSetFields, function(f) {
+                    if (field.readonly || this.extraNoEditFields.indexOf(field.name) !== -1 ||
+                        _.every(fieldSetFields, function(f) {
                         return !app.acl.hasAccessToModel('edit', this.model, f.name);
                     }, this)) {
                         this.noEditFields.push(field.name);
                     }
-                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name)) {
+                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name) ||
+                    this.extraNoEditFields.indexOf(field.name) !== -1) {
                     this.noEditFields.push(field.name);
                 }
             }, this);
@@ -664,6 +706,9 @@
      */
     _getNonButtonFields: function() {
         return _.filter(this.fields, _.bind(function(field) {
+            if (field.type === this.decoratorField) {
+                return false;
+            }
             if (field.name) {
                 return !this.buttons[field.name];
             }
@@ -701,7 +746,7 @@
      * @protected
      */
     _initButtons: function() {
-        buttons = this.meta.buttons;
+        var buttons = this.meta.buttons;
         _.each(buttons, function(button) {
             this.registerFieldAsButton(button.name);
         }, this);
@@ -721,6 +766,11 @@
         }
     },
 
+    /**
+     * Adds a button field into `this.buttons`.
+     *
+     * @param {string} buttonName Name of the button.
+     */
     registerFieldAsButton: function(buttonName) {
         var button = this.getField(buttonName);
         if (button) {
@@ -734,6 +784,15 @@
         this._initButtons();
         this.setEditableFields();
         this.adjustHeaderpane();
+    },
+
+    /**
+     * Calls setEditable fields after the fields are rendered
+     * @private
+     */
+    _renderFields: function() {
+        app.view.View.prototype._renderFields.call(this);
+        this.setEditableFields();
     },
 
     bindDataChange: function() {
@@ -883,6 +942,9 @@
         });
     },
 
+    /**
+     * Event handler for click event.
+     */
     editClicked: function() {
         this.setButtonStates(this.STATE.EDIT);
         this.action = 'edit';
@@ -933,6 +995,10 @@
         this.clearValidationErrors(this.editableFields);
         this.setRoute();
         this.unsetContextAction();
+
+        if (typeof this.cancelCallback === 'function') {
+            this.cancelCallback();
+        }
     },
 
     deleteClicked: function(model) {
@@ -946,6 +1012,10 @@
      *   otherwise.
      */
     toggleEdit: function(isEdit) {
+        if (this.editOnly) {
+            isEdit = true;
+        }
+
         var self = this;
         this.$('.record-lock-link').toggleClass('record-lock-link-on', isEdit);
         if (this.hasLockedFields()) {
@@ -955,6 +1025,68 @@
             self.toggleViewButtons(isEdit);
             self.adjustHeaderpaneFields();
         });
+    },
+
+    /**
+     * Gets target fields in a record-cell for a mouse event.
+     * For now it only returns fields with tooltips.
+     *
+     * @param {Event} event Event object
+     * @return {Object} collection of DOM elements of the target fields
+     * @private
+     */
+    _getMouseTargetFields: function(event) {
+        var target = this.$(event.target);
+        var cell = target.parents('.record-cell');
+        var fields = cell.find('[title]');
+        return fields;
+    },
+
+    /**
+     * Checks if tooltip is visible.
+     *
+     * @param {Object} field
+     * @return {boolean}
+     * @private
+     */
+    _isTooltipOn: function(field) {
+        return !!$(field).attr('aria-describedby');
+    },
+
+    /**
+     * Handles mousemove event.
+     *
+     * @param {Event} event Event object
+     */
+    handleMouseMove: function(event) {
+        var fields = this._getMouseTargetFields(event);
+        _.each(fields, function(field) {
+            var rect = field.getBoundingClientRect();
+            var tooltipOn = this._isTooltipOn(field);
+            if (event.clientX >= rect.left && event.clientX < (rect.left + rect.width) &&
+                event.clientY >= rect.top && event.clientY < (rect.top + rect.height)) {
+                if (!tooltipOn) {
+                    $(field).tooltip('show');
+                }
+            } else if (tooltipOn) {
+                $(field).tooltip('hide');
+            }
+        }, this);
+    },
+
+    /**
+     * Handles mouseleave event.
+     *
+     * @param {Event} event Event object
+     */
+    handleMouseLeave: function(event) {
+        var fields = this._getMouseTargetFields(event);
+        _.each(fields, function(field) {
+            var tooltipOn = this._isTooltipOn(field);
+            if (tooltipOn) {
+                $(field).tooltip('hide');
+            }
+        }, this);
     },
 
     /**
@@ -972,6 +1104,8 @@
         if (e) { // If result of click event, extract target and cell.
             target = this.$(e.target);
             cell = target.parents('.record-cell');
+            // hide tooltip
+            this.handleMouseLeave(e);
         }
 
         cellData = cell.data();
@@ -1011,18 +1145,47 @@
         this.$('.record-save-prompt').hide();
 
         if (!this.disposed) {
-            this.setButtonStates(this.STATE.VIEW);
-            this.action = 'detail';
-            this.setRoute();
-            this.unsetContextAction();
-            this.toggleEdit(false);
-            this.inlineEditMode = false;
+            if (this.editOnly) {
+                // If we are in edit-only mode, prevent multiple saves at a time.
+                // Buttons will be re-enabled after save call is complete
+                this.toggleButtons(false);
+            } else {
+                this.setButtonStates(this.STATE.VIEW);
+                this.action = 'detail';
+                this.setRoute();
+                this.unsetContextAction();
+                this.toggleEdit(false);
+                this.inlineEditMode = false;
+            }
         }
+    },
+
+    /**
+     * Checks if the given field, represents a temporary file type.
+     *
+     * @param {string} key A field name.
+     * @return {boolean} True if the field is of a temporary file type.
+     */
+    isTemporaryFileType: function(key) {
+        return this.model.fields[key] && this.model.fields[key].type === 'file_temp';
+    },
+
+    /**
+     * Clears a model of any temporary file type field values in order to
+     * avoid sending the same value again with another, successive update.
+     */
+    resetTemporaryFileFields: function() {
+        _.each(Object.keys(this.model.attributes), function(key) {
+            if (this.isTemporaryFileType(key)) {
+                delete this.model.attributes[key];
+            }
+        }, this);
     },
 
     _saveModel: function() {
         var options,
             successCallback = _.bind(function() {
+                this.resetTemporaryFileFields();
                 // Loop through the visible subpanels and have them sync. This is to update any related
                 // fields to the record that may have been changed on the server on save.
                 _.each(this.context.children, function(child) {
@@ -1034,11 +1197,15 @@
                         }
                     }
                 });
-                if (this.createMode) {
+                if (this.createMode && !this.skipRouting) {
                     app.navigate(this.context, this.model);
                 } else if (!this.disposed && !app.acl.hasAccessToModel('edit', this.model)) {
                     //re-render the view if the user does not have edit access after save.
                     this.render();
+                }
+
+                if (typeof this.saveCallback === 'function') {
+                    this.saveCallback(true);
                 }
             }, this);
 
@@ -1066,7 +1233,16 @@
                 } else {
                     this.editClicked();
                 }
+
+                if (typeof this.saveCallback === 'function') {
+                    this.saveCallback(false);
+                }
             }, this),
+            complete: function() {
+                if (this.editOnly) {
+                    this.toggleButtons(true);
+                }
+            },
             lastModified: this.model.get('date_modified'),
             viewed: true
         };
@@ -1227,6 +1403,32 @@
     },
 
     /**
+     * Verify if the current target is the last one from an address block field.
+     *
+     * @param {View.Field} field Current focused field (field in inline-edit mode).
+     * @param {String} currentTargetName attribute of the current target.
+     *
+     * @return {Boolean} `true` if field is the address block last field, `false` otherwise.
+     **/
+    isLastAddressBlockFieldSetField: function(field, currentTargetName) {
+        var isFieldSet = field.type === 'fieldset';
+        var lastField = _.last(field.fields);
+
+        if (isFieldSet) {
+            if (!lastField) {
+                return false;
+            }
+            // Alternate and shipping address has no name attribute on their last field
+            if (!currentTargetName) {
+                return true;
+            }
+            return lastField.name === currentTargetName;
+        } else {
+            return false;
+        }
+    },
+
+    /**
      * Key handlers for inline edit mode.
      *
      * Jump into the next or prev target field if `tab` key is pressed.
@@ -1239,8 +1441,15 @@
         var whichField = e.shiftKey ? 'prevField' : 'nextField';
 
         if (e.which === 9) { // If tab
-            e.preventDefault();
-            this.nextField(field, whichField);
+            var isFieldSet = field.type === 'fieldset';
+            var isLastAddressBlockFieldSetField = this.isLastAddressBlockFieldSetField(field, e.currentTarget.name);
+            // If the current field is not an address block
+            // or it's the last field of an address block
+            // then jumping to other fields.
+            if (!isFieldSet || isLastAddressBlockFieldSetField) {
+                e.preventDefault();
+                this.nextField(field, whichField);
+            }
             if (field.$el.closest('.headerpane').length > 0) {
                 this.toggleViewButtons(false);
                 this.adjustHeaderpaneFields();
@@ -1289,7 +1498,7 @@
             if (fieldPanel && fieldPanel.is(':hidden')) {
                 fieldPanel.toggle();
                 var fieldPanelArrow = fieldPanel.prev().find('i');
-                fieldPanelArrow.toggleClass('fa-chevron-up fa-chevron-down');
+                fieldPanelArrow.toggleClass('fa-chevron-down fa-chevron-right');
             }
         } else if (field.$el.is(':hidden')) {
             this.$('.more[data-moreless]').trigger('click');
@@ -1307,6 +1516,10 @@
      * @param {String} state The {@link #STATE} of the current view.
      */
     setButtonStates: function(state) {
+        if (this.editOnly) {
+            state = this.STATE.EDIT;
+        }
+
         this.currentState = state;
 
         _.each(this.buttons, function(field) {
@@ -1371,6 +1584,9 @@
         this.noEditFields = [];
 
         _.each(panels, function(panel) {
+            // get user preference for labelsOnTop before iterating through
+            // fields
+            panel.labelsOnTop = this.getLabelPlacement();
             // it is assumed that a field is an object but it can also be a string
             // while working with the fields, might as well take the opportunity to check the user's ACLs for the field
             _.each(panel.fields, function(field, index) {
@@ -1387,14 +1603,19 @@
 
                 // disable the pencil icon if the user doesn't have ACLs
                 if (field.fields && _.isArray(field.fields)) {
-                    if (field.readonly || _.every(field.fields, function(field) {
+                    if (field.readonly || this.extraNoEditFields.indexOf(field.name) !== -1 ||
+                        _.every(field.fields, function(field) {
                         return !app.acl.hasAccessToModel('edit', this.model, field.name);
                     }, this)) {
                         this.noEditFields.push(field.name);
                     }
-                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name)) {
+                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name) ||
+                    this.extraNoEditFields.indexOf(field.name) !== -1) {
                     this.noEditFields.push(field.name);
                 }
+
+                // set field labelsOnTop value for use in rendering
+                field.labelsOnTop = panel.labelsOnTop;
             }, this);
 
             // Set flag so that show more link can be displayed to show hidden panel.
@@ -1421,6 +1642,16 @@
                 lastTabIndex = gridResults.lastTabIndex;
             }
         }, this);
+    },
+
+    /**
+     * Used to set labelsOnTop in views. Returns true if user preference is
+     * 'field_on_top', else false.
+     *
+     * @return {boolean} True if user prefers 'field_on_top' otherwise false
+     */
+    getLabelPlacement: function() {
+        return app.user.getPreference('field_name_placement') === 'field_on_top';
     },
 
     /**
@@ -1481,7 +1712,7 @@
      *   with {@link Core.Router#buildRoute}.
      */
     setRoute: function(action) {
-        if (!this.meta.hashSync) {
+        if (!this.meta.hashSync || this.skipRouting) {
             return;
         }
         app.router.navigate(app.router.buildRoute(this.module, this.model.id, action), {trigger: false});
@@ -1555,17 +1786,16 @@
      * is set to 100% on view.  On edit, the first field is set to 100%.
      */
     adjustHeaderpaneFields: function() {
-        var $ellipsisCell,
-            ellipsisCellWidth,
-            $recordCells;
+        var $ellipsisCell;
+        var ellipsisCellWidth;
 
         if (this.disposed) {
             return;
         }
 
-        $recordCells = this.$('.headerpane h1').children('.record-cell, .btn-toolbar');
+        var $recordCells = this._getRecordCells();
 
-        if (($recordCells.length > 0) && (this.getContainerWidth() > 0)) {
+        if ($recordCells && ($recordCells.length > 0) && (this.getContainerWidth() > 0)) {
             $ellipsisCell = $(this._getCellToEllipsify($recordCells));
 
             if ($ellipsisCell.length > 0) {
@@ -1582,6 +1812,17 @@
         if (this.layout) {
             this.layout.trigger('headerpane:adjust_fields');
         }
+    },
+
+    /**
+     * Get the collection of headerpane record-cell and btn-toolbar elements.
+     *
+     * @return {jQuery} The collection of headerpane record-cell and
+     *   btn-toolbar elements.
+     * @protected
+     */
+    _getRecordCells: function() {
+        return this.$('.headerpane h1').children('.record-cell, .btn-toolbar');
     },
 
     /**
@@ -1693,7 +1934,8 @@
             $panelHeader.toggleClass('panel-inactive panel-active');
         }
         if ($panelHeader && $panelHeader.find('i')) {
-            $panelHeader.find('i').toggleClass('fa-chevron-up fa-chevron-down');
+            var $panelArrow = $panelHeader.find('i');
+            $panelArrow.toggleClass('fa-chevron-down fa-chevron-right');
         }
         var panelName = this.$(e.currentTarget).parent().data('panelname');
         var state = 'collapsed';

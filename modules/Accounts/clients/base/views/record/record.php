@@ -150,13 +150,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'website',
                 'industry',
                 'parent_name',
                 'account_type',
+                'business_center_name',
                 'service_level',
                 'assigned_user_name',
                 'phone_office',
@@ -171,7 +171,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

@@ -629,19 +629,27 @@ class PMSEEngineApi extends SugarApi
         $time_data = $GLOBALS['timedate'];
         global $current_user;
         global $db;
-        $res = array(); //new stdClass();
-        $res['success'] = true;
-        $get_actIds = "SELECT pmse_inbox.name,pmse_inbox.cas_id,cas_user_id,cas_delegate_date, cas_due_date, act_expected_time, act_assignment_method, act_assign_team, cas_index, act_assignment_method FROM pmse_inbox
-                        LEFT JOIN pmse_bpm_flow ON pmse_inbox.cas_id = pmse_bpm_flow.cas_id
-                        LEFT JOIN pmse_bpmn_activity ON pmse_bpm_flow.bpmn_type = 'bpmnActivity' and pmse_bpm_flow.bpmn_id  = pmse_bpmn_activity.id
-                        INNER JOIN pmse_bpm_activity_definition ON pmse_bpmn_activity.id = pmse_bpm_activity_definition.id
-                        WHERE pmse_inbox.cas_id = " . $args['cas_id'] . " AND cas_flow_status = 'FORM';";
-        $result = $db->query($get_actIds);
-        $tmpArray = array();
 
-        while ($row = $db->fetchByAssoc($result)) {
+        $query = <<<SQL
+SELECT pmse_inbox.name, pmse_inbox.cas_id, cas_user_id, cas_delegate_date, cas_due_date, act_expected_time,
+act_assignment_method, act_assign_team, cas_index, act_assignment_method
+FROM pmse_inbox
+LEFT JOIN pmse_bpm_flow ON pmse_inbox.cas_id = pmse_bpm_flow.cas_id
+LEFT JOIN pmse_bpmn_activity ON pmse_bpm_flow.bpmn_type='bpmnActivity' AND pmse_bpm_flow.bpmn_id=pmse_bpmn_activity.id
+INNER JOIN pmse_bpm_activity_definition ON pmse_bpmn_activity.id = pmse_bpm_activity_definition.id
+WHERE pmse_inbox.cas_id = ? AND cas_flow_status = 'FORM'
+SQL;
+
+        $stmt = $db->getConnection()
+            ->executeQuery(
+                $query,
+                [$args['cas_id']]
+            );
+
+        $results = [];
+        foreach ($stmt as $row) {
             $time = json_decode(base64_decode($row['act_expected_time']));
-            $tmpArray[] = array(
+            $results[] = array(
                 'act_name' => $row['act_name'],
                 'cas_id' => $row['cas_id'],
                 'cas_user_id' => $row['cas_user_id'],
@@ -654,13 +662,15 @@ class PMSEEngineApi extends SugarApi
                 'act_expected_time' => $time->time . ' ' . $time->unit,
             );
         }
-        $res['result'] = $tmpArray;
-        return $res;
+        return ['results' => $results, 'success' => true];
     }
 
     /**
      * Method that returns the user roles as Sugar
-     * @return object
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws Exception
      */
     public function userListByTeam(ServiceBase $api, array $args)
     {
@@ -669,15 +679,21 @@ class PMSEEngineApi extends SugarApi
         global $db;
         $res = array(); //new stdClass();
         $res['success'] = true;
-        $teams = (isset($args['id']) && !empty($args['id'])) ? "AND teams.id ='" . $args['id'] . "'" : '';
+        $teams = !empty($args['id']) ? 'AND teams.id = ?' : '';
         $get_actIds = "SELECT DISTINCT(users.id) as id,first_name,last_name  FROM teams
                         LEFT JOIN team_memberships ON team_id = teams.id
                         INNER JOIN users ON users.id = team_memberships.user_id
-                        WHERE private = 0 " . $teams;
-        $result = $db->query($get_actIds);
+                        WHERE private = 0 $teams";
+
+        $params = [];
+        if (!empty($args['id'])) {
+            $params = [$args['id']];
+        }
+        $result= $db->getConnection()->executeQuery($get_actIds, $params);
+
         $tmpArray = array();
 
-        while ($row = $db->fetchByAssoc($result)) {
+        foreach ($result as $row) {
             $tmpArray[$row['id']] = $row['first_name'] . ' ' . $row['last_name'];
         }
         $res['result'] = $tmpArray;
@@ -965,26 +981,21 @@ class PMSEEngineApi extends SugarApi
         $q = new SugarQuery();
         $q->from($beanInbox, $queryOptions);
         $q->distinct(false);
-        $q->where()
-                ->equals('cas_status', 'IN PROGRESS');
+        $q->where()->equals('cas_status', 'IN PROGRESS');
 
         $q->select($fields);
         if ($args['module_list'] == 'all' && !empty($args['q'])) {
-            $q->where()->queryAnd()
-                ->addRaw("pmse_inbox.pro_title LIKE '%" . $args['q'] . "%' ");
-        } else if (!empty($args['q'])){
-            switch($args['module_list']){
+            $q->where()->contains('pmse_inbox.pro_title', $args['q']);
+        } elseif (!empty($args['q'])) {
+            switch ($args['module_list']) {
                 case translate('LBL_CAS_ID', 'pmse_Inbox'):
-                $q->where()->queryAnd()
-                    ->addRaw("pmse_inbox.cas_id = " . $db->quoted($args['q']));
+                    $q->where()->equals('pmse_inbox.cas_id', $args['q']);
                     break;
                 case translate('LBL_PROCESS_DEFINITION_NAME', 'pmse_Inbox'):
-                $q->where()->queryAnd()
-                    ->addRaw("pmse_inbox.pro_title LIKE '%" . $args['q'] . "%'");
+                    $q->where()->contains('pmse_inbox.pro_title', $args['q']);
                     break;
                 case translate('LBL_OWNER', 'pmse_Inbox'):
-                    $q->where()->queryAnd()
-                        ->addRaw("pmse_inbox.cas_init_user LIKE '%" . $args['q'] . "%'");
+                    $q->where()->contains('pmse_inbox.cas_init_user', $args['q']);
                     break;
             }
         }

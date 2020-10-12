@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Tillverkare',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Produktkategorier',
   'LNK_NEW_PRODUCT_TYPE' => 'Produtkttyper',
-  'LNK_NEW_PRODUCT' => 'Skapa produkt för katalogen',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Leverantörer',
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Produktkategorier',
   'LBL_MANUFACTURERS' => 'Tillverkare',
   'LBL_PRODUCT_TYPES' => 'Produkttyper',
-
+  'LBL_RENEWABLE' => 'Förnybar',
+  'LBL_SERVICE' => 'Service',
 );
-
-
-?>

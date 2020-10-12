@@ -26,6 +26,10 @@ class OpportunitiesSeedData {
 
     public static $pc_ids = array();
 
+    public static $serviceOppIds;
+
+    public static $oppForRenewal;
+
     /**
      * @var $db DBManager
      */
@@ -66,7 +70,8 @@ class OpportunitiesSeedData {
         /* @var $opp Opportunity */
         $opp = BeanFactory::newBean('Opportunities');
         $oppFieldDefs = $opp->getFieldDefinitions();
-        $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys($opp->toArray(true))) . ') VALUES';
+        $oppDbData = self::toDatabaseArray($opp);
+        $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys($oppDbData)) . ') VALUES';
         $oppRows = array();
         $oppAccRows = array();
         $oppAccRow = array(
@@ -82,8 +87,9 @@ class OpportunitiesSeedData {
 
         if ($usingRLIs) {
             // load up the product template_ids
-            $sql = 'SELECT id, list_price, cost_price, discount_price, category_id, mft_part_num,
-                      list_usdollar, cost_usdollar, discount_usdollar, tax_class, weight
+            $sql = 'SELECT id, list_price, cost_price, discount_price, category_id, mft_part_num, list_usdollar, 
+                        cost_usdollar, discount_usdollar, tax_class, weight, service, renewable, service_duration_value,
+                        service_duration_unit
                   FROM product_templates WHERE deleted = 0';
 
             $results = self::$db->query($sql);
@@ -106,7 +112,8 @@ class OpportunitiesSeedData {
 
         $fwFieldDefs = $fw->getFieldDefinitions();
         $fwRows = array();
-        $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fw->toArray(true))) . ') VALUES';
+        $fwDbData = self::toDatabaseArray($fw);
+        $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
 
         while ($records-- > 0) {
             $key = array_rand($accounts);
@@ -180,7 +187,7 @@ class OpportunitiesSeedData {
             if ($usingRLIs) {
                 $return = static::createRevenueLineItems($opp, rand(3, 5), $app_list_strings);
             }
-            $values = array_merge($opp->toArray(true), $return);
+            $values = array_merge(self::toDatabaseArray($opp), $return);
 
             $sqlValues = array();
             foreach($values as $key => $value) {
@@ -195,7 +202,7 @@ class OpportunitiesSeedData {
 
                 $fw->id = create_guid();
                 $fw->parent_id = $opp->id;
-                $fwValues = $fw->toArray(true);
+                $fwValues = self::toDatabaseArray($fw);
 
                 $sqlValues = array();
                 foreach ($fwValues as $key => $value) {
@@ -217,6 +224,250 @@ class OpportunitiesSeedData {
     }
 
     /**
+     * populateServiceData
+     *
+     * This is a static function to create Renewal Opportunities.
+     *
+     * @static
+     * @param $app_list_strings Array of application language strings
+     * @param $accounts Array of Account instances to randomly build data against
+     */
+    public static function populateServiceData($app_list_strings, $accounts)
+    {
+        // get the additional currencies from the table
+        /* @var $currency Currency */
+        $currency = SugarCurrency::getCurrencyByISO('EUR');
+        $baseRate = '1.0';
+        $currencyId = '-99';
+
+        $oppBestCase = 0;
+        $oppWorstCase = 0;
+        $oppAmount = 0;
+        $oppUnits = 0;
+        $oppDateClosed = '';
+        $oppDateClosedTimestamp = 0;
+
+        if (empty($accounts) || empty($app_list_strings)) {
+            return array();
+        }
+
+        $oppConfig = Opportunity::getSettings(true);
+        $usingRLIs = ($oppConfig['opps_view_by'] === 'RevenueLineItems');
+
+        self::$db = DBManagerFactory::getInstance();
+
+        $oppIds = array();
+        $timedate = TimeDate::getInstance();
+
+        // get the additional currencies from the table
+        /* @var $currency Currency */
+        $currency = SugarCurrency::getCurrencyByISO('EUR');
+
+        $now = $GLOBALS['timedate']->nowDb();
+
+        if ($usingRLIs) {
+            // get all the service RLIs from the RLI table
+            $sql = 'SELECT * FROM revenue_line_items WHERE deleted = 0 AND service = 1';
+
+            $results = self::$db->query($sql);
+            while ($row = self::$db->fetchByAssoc($results)) {
+                static::$serviceOppIds[$row['opportunity_id']] = $row;
+            }
+        }
+
+        foreach (static::$serviceOppIds as $keys => $serviceOpp) {
+            /* @var $opp Opportunity */
+            $opp = BeanFactory::newBean('Opportunities');
+            $oppFieldDefs = $opp->getFieldDefinitions();
+            $oppSalesStageFieldDef = $oppFieldDefs['sales_stage'];
+            $opp->id = create_guid();
+
+            $opp->base_rate = $baseRate;
+            $opp->currency_id = $currencyId;
+
+            /* @var $fw ForecastWorksheet */
+            $fw = BeanFactory::newBean('ForecastWorksheets');
+            $fw->parent_type = 'Opportunities';
+            $fw->draft = 1;
+            $fw->date_entered = $now;
+            $fw->date_modified = $now;
+
+            $fwFieldDefs = $fw->getFieldDefinitions();
+            $fwRows = array();
+            $fwDbData = self::toDatabaseArray($fw);
+            $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
+
+            /* @var $rli RevenueLineItem */
+            $rli = BeanFactory::newBean('RevenueLineItems');
+            $rliFieldDefs = $rli->getFieldDefinitions();
+            $rliSql = array();
+            $rliDbData = self::toDatabaseArray($rli);
+            $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys($rliDbData)) . ') VALUES';
+
+            foreach (array_keys($serviceOpp) as $arrKey) {
+                $rli->$arrKey = $serviceOpp[$arrKey];
+            }
+
+            // Updating RLI for renewal opp
+            $rli->service_start_date = $timedate->fromString($rli->service_end_date)->modify('+1 day')->asDbDate();
+            //service_end_date should be set to null in order to calculate a new one for the Renewal Opp related RLI
+            $rli->service_end_date = null;
+            $rli->service_end_date = self::setServiceEndDate($rli);
+            $rli->opportunity_id = $opp->id;
+            $rli->sales_stage = $app_list_strings['sales_stage_dom']['Prospecting'];
+            $rli->date_closed = $rli->service_start_date;
+            $rli->date_closed_timestamp = $timedate->fromDbDate($rli->date_closed)->getTimestamp();
+            $rli->id = create_guid();
+
+            $rli->name = $serviceOpp['name'] . ' New Service';
+
+            $opp->name = $rli->name;
+
+            $values = self::toDatabaseArray($rli);
+
+            $sqlValues = array();
+            foreach ($values as $key => $value) {
+                $sqlValues[] = self::$db->massageValue($value, $rliFieldDefs[$key]);
+            }
+
+            $rliSql[] = '(' . join(',', $sqlValues) . ')';
+
+            $fw->copyValues($fw->productFieldMap, $rli);
+
+            $fw->id = create_guid();
+            $fw->parent_id = $rli->id;
+            $fwValues = self::toDatabaseArray($fw);
+            $sqlValues = array();
+            foreach ($fwValues as $key => $value) {
+                $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
+            }
+            $fwRows[] = $sqlValues;
+
+            $oppUnits += $rli->quantity;
+
+            $rli->opportunity_id = $opp->id;
+
+            $oppDateClosed = $rli->service_start_date;
+            $oppDateClosedTimestamp = $timedate->fromDbDate($rli->date_closed)->getTimestamp();
+            if ($oppDateClosedTimestamp < $rli->date_closed_timestamp) {
+                $oppDateClosedTimestamp = $rli->date_closed_timestamp;
+                $oppDateClosed = $rli->date_closed;
+            }
+
+            $oppAmount = SugarMath::init($oppAmount)
+                ->add(SugarCurrency::convertWithRate($rli->likely_case, $baseRate, $opp->base_rate))
+                ->result();
+            $oppBestCase = SugarMath::init($oppBestCase)
+                ->add(SugarCurrency::convertWithRate($rli->best_case, $baseRate, $opp->base_rate))
+                ->result();
+            $oppWorstCase = SugarMath::init($oppWorstCase)
+                ->add(SugarCurrency::convertWithRate($rli->worst_case, $baseRate, $opp->base_rate))
+                ->result();
+
+            $return = array(
+                'date_closed' => $oppDateClosed,
+                'date_closed_timestamp' => $oppDateClosedTimestamp,
+                'amount' => $oppAmount,
+                'best_case' => $oppBestCase,
+                'worst_case' => $oppWorstCase,
+            );
+
+            self::insertAndCommit($sqlRli, $rliSql);
+
+            // process all the forecast worksheet rows since we have the correct opp name now
+            $tRows = array();
+            foreach ($fwRows as $row) {
+                $row['opportunity_name'] = self::$db->quoted($opp->name);
+                $tRows[] = '(' . join(',', $row) . ')';
+            }
+
+            self::insertAndCommit($fwSql, $tRows);
+
+            //Renewal Opp
+            if ($usingRLIs) {
+                // get all the fields from the opportunities table for the given Opportunity Id
+                $sql = 'SELECT * FROM opportunities WHERE deleted = 0 AND id = '. self::$db->quoted($serviceOpp['opportunity_id']);
+                $oppResults = self::$db->query($sql);
+                while ($row = self::$db->fetchByAssoc($oppResults)) {
+                    static::$oppForRenewal[] = $row;
+                }
+            }
+
+            foreach (static::$oppForRenewal as $renewalOpp) {
+                foreach (array_keys($renewalOpp) as $keys => $renewalOppKey) {
+                    $opp->$renewalOppKey = $renewalOpp[$renewalOppKey];
+                }
+            }
+
+            $opp->id = $rli->opportunity_id;
+            $opp->renewal_parent_id = $serviceOpp['opportunity_id'];
+            $opp->renewal = 1;
+            $opp->sales_stage = $rli->sales_stage;
+            $opp->name .= ' - ' . $oppUnits . ' Renewal';
+            $opp->sales_status = $app_list_strings['sales_status_dom']['In Progress'];
+
+            if (!$usingRLIs) {
+                $seed = rand(1, 15);
+                if ($seed % 2 == 0) {
+                    $currencyId = $currency->id;
+                    $baseRate = $currency->conversion_rate;
+                }
+            }
+
+            $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys(self::toDatabaseArray($opp))) . ') VALUES';
+            $oppRows = array();
+            $oppAccRows = array();
+            $oppAccRow = array(
+                'id' => '',
+                'opportunity_id' => '',
+                'account_id' => '',
+                'date_modified' => self::$db->quoted($now),
+                'deleted' => 0,
+            );
+            $oppAccSql = 'INSERT INTO accounts_opportunities ('. join(',', array_keys($oppAccRow)) . ') VALUES';
+
+            $oppAccRows[] = '(' . join(',', array_merge($oppAccRow, array(
+                    'id' => self::$db->quoted(create_guid()),
+                    'account_id' => self::$db->quoted($serviceOpp['account_id']),
+                    'opportunity_id' => self::$db->quoted($opp->id),
+                ))) . ')';
+
+            $values = array_merge(self::toDatabaseArray($opp), $return);
+
+            $sqlValues = array();
+            foreach ($values as $key => $value) {
+                $sqlValues[] = self::$db->massageValue($value, $oppFieldDefs[$key]);
+            }
+            $oppRows[] = '(' . join(',', $sqlValues) . ')';
+
+            if (!$usingRLIs) {
+                $fw->modified_user_id = $account->assigned_user_id;
+                $fw->created_by = $account->assigned_user_id;
+                $fw->copyValues($fw->opportunityFieldMap, $opp);
+
+                $fw->id = create_guid();
+                $fw->parent_id = $opp->id;
+                $fwValues = self::toDatabaseArray($fw);
+
+                $sqlValues = array();
+                foreach ($fwValues as $key => $value) {
+                    $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
+                }
+                $fwRows[] = '(' . join(',', $sqlValues) . ')';
+            }
+
+            self::insertAndCommit($oppSql, $oppRows);
+            self::insertAndCommit($oppAccSql, $oppAccRows);
+            if (!$usingRLIs) {
+                self::insertAndCommit($fwSql, $fwRows);
+            }
+
+            $oppIds[] = $opp->id;
+        }
+        return $oppIds;
+    }
+
+    /**
      * @param Opportunity $opp
      * @param int $rlis_to_create
      * @param array $app_list_strings
@@ -224,6 +475,8 @@ class OpportunitiesSeedData {
     private static function createRevenueLineItems(&$opp, $rlis_to_create, $app_list_strings) {
         $currency_id = $opp->currency_id;
         $base_rate = $opp->base_rate;
+
+        $pt = null;
 
         $seed = rand(1, 15);
         if ($seed%2 == 0) {
@@ -251,7 +504,7 @@ class OpportunitiesSeedData {
         $rli = BeanFactory::newBean('RevenueLineItems');
         $rliFieldDefs = $rli->getFieldDefinitions();
         $rliSql = array();
-        $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys($rli->toArray(true))) . ') VALUES';
+        $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys(self::toDatabaseArray($rli))) . ') VALUES';
 
 
         /* @var $fw ForecastWorksheet */
@@ -264,18 +517,29 @@ class OpportunitiesSeedData {
         $fw->created_by = $opp->created_by;
         $fwFieldDefs = $fw->getFieldDefinitions();
         $fwRows = array();
-        $fwSql = 'INSERT INTO '. $fw->table_name . '('. join(',', array_keys($fw->toArray(true))) . ') VALUES';
+        $fwSql = 'INSERT INTO '. $fw->table_name . '('. join(',', array_keys(self::toDatabaseArray($fw))) . ') VALUES';
 
         $opp_date_closed = '';
         $opp_date_closed_timestamp = 0;
 
+        //Retrieve the first option of the sales stage dom for default
+        $salesStageDomOptions = $app_list_strings['sales_stage_dom'];
+        reset($salesStageDomOptions);
+        $salesStageFirstOption = key($salesStageDomOptions);
 
-        //SugarBean::enterOperation('saving_related');
+        $oppFieldDefs = $opp->getFieldDefinitions();
+        $oppSalesStageFieldDef = $oppFieldDefs['sales_stage'];
+
+        $defaultSalesStage = isset($oppSalesStageFieldDef['default']) ? $oppSalesStageFieldDef['default'] : $salesStageFirstOption;
+
+        $latestRliSalesStageIndex = 0;
+        $latestRliSalesStageKey = '';
+
         while($rlis_created < $rlis_to_create) {
-            $amount = rand(1000, 7500);
-            $rand_best_worst = rand(100, 900);
+            $amount = mt_rand(1000, 7500);
+            $rand_best_worst = mt_rand(100, 900);
             $doPT = false;
-            $quantity = rand(1, 100);
+            $quantity = mt_rand(1, 100);
             $cost_price = $amount/2;
             $list_price = $amount;
             $discount_price = ($amount / $quantity);
@@ -287,7 +551,20 @@ class OpportunitiesSeedData {
                 $list_price = $pt['list_price'];
                 $discount_price = ($pt['discount_price'] / $quantity);
                 $amount = $pt['discount_price'];
-                $rand_best_worst = rand(100, $cost_price);
+                $rand_best_worst = mt_rand(100, $cost_price);
+                $service = $pt['service'];
+                if ($service === '1') {
+                    $rlis_to_create = 1;
+                    $renewable = $pt['renewable'];
+                    $service_duration_unit = $pt['service_duration_unit'];
+                    $service_duration_value = $pt['service_duration_value'];
+                }
+            }
+
+            if ($service === '1') {
+                $rli->sales_stage = $app_list_strings['sales_stage_dom']['Closed Won'];
+            } else {
+                $rli->sales_stage = array_rand($app_list_strings['sales_stage_dom']);
             }
 
             $rli->team_id = $opp->team_id;
@@ -305,7 +582,7 @@ class OpportunitiesSeedData {
             $rli->discount_amount = '0.00';
             $rli->book_value = '0.00';
             $rli->deal_calc = '0.00';
-            $rli->sales_stage = array_rand($app_list_strings['sales_stage_dom']);
+
             $rli->probability = $app_list_strings['sales_probability_dom'][$rli->sales_stage];
             $isClosed = false;
             $isClosedLost = false;
@@ -321,6 +598,13 @@ class OpportunitiesSeedData {
                     $closedLost++;
                 }
                 $opp->closed_revenue_line_items++;
+            } else {
+                //Determine the latest sales stage based on index of sales stage dom
+                $currentSalesStageIndex = array_search($rli->sales_stage, array_keys($salesStageDomOptions));
+                if ($currentSalesStageIndex >= $latestRliSalesStageIndex) {
+                    $latestRliSalesStageIndex = $currentSalesStageIndex;
+                    $latestRliSalesStageKey = $rli->sales_stage;
+                }
             }
             $rli->commit_stage = $rli->probability >= 70 ? 'include' : 'exclude';
             $rli->date_closed = ($isClosed) ? self::createPastDate() : self::createDate();
@@ -351,14 +635,23 @@ class OpportunitiesSeedData {
                 // if this is not an even number, assign a product category only
                 $rli->category_id = static::$pc_ids[array_rand(static::$pc_ids, 1)];
             }
+
+            if ($service === '1') {
+                $rli->name = $service_duration_value . ' ' . $service_duration_unit . ' Service';
+                $opp->name = $rli->name;
+                $rli->service_start_date = $rli->date_closed;
+                $rli->service_end_date = self::setServiceEndDate($rli);
+            }
+
             $rli->total_amount = (($rli->discount_price-$rli->discount_amount)*$rli->quantity);
             $rli->id = create_guid();
             $rli->date_entered = $now;
             $rli->date_modified = $now;
             $rli->modified_user_id = $opp->modified_user_id;
             $rli->created_by = $opp->created_by;
-            //$rli->save();
-            $values = $rli->toArray(true);
+
+
+            $values = self::toDatabaseArray($rli);
 
             $sqlValues = array();
             foreach($values as $key => $value) {
@@ -371,7 +664,7 @@ class OpportunitiesSeedData {
 
             $fw->id = create_guid();
             $fw->parent_id = $rli->id;
-            $fwValues = $fw->toArray(true);
+            $fwValues = self::toDatabaseArray($fw);
 
             $sqlValues = array();
             foreach($fwValues as $key => $value) {
@@ -413,6 +706,17 @@ class OpportunitiesSeedData {
             }
         }
 
+        //populate sales stage data
+        if ($rlis_created === 0) {
+            $opp->sales_stage = $defaultSalesStage;
+        } elseif ($closedLost === $rlis_created) {
+            $opp->sales_stage = Opportunity::STATUS_CLOSED_LOST;
+        } elseif (($closedWon + $closedLost) === $rlis_created) {
+            $opp->sales_stage = Opportunity::STATUS_CLOSED_WON;
+        } else {
+            $opp->sales_stage = $latestRliSalesStageKey;
+        }
+
         $opp->name .= ' - ' . $opp_units . ' Units';
         self::insertAndCommit($sqlRli, $rliSql);
 
@@ -432,6 +736,25 @@ class OpportunitiesSeedData {
             'best_case' => $opp_best_case,
             'worst_case' => $opp_worst_case
         );
+    }
+
+    /**
+     * Calculate service_end_date for service RLI.
+     */
+    public static function setServiceEndDate($rli)
+    {
+        if (!empty($rli->service) &&
+            !empty($rli->service_start_date) &&
+            !empty($rli->service_duration_value) &&
+            !empty($rli->service_duration_unit) &&
+            empty($rli->service_end_date)
+        ) {
+            $timeDate = TimeDate::getInstance();
+            $duration = '+' . $rli->service_duration_value . ' ' . $rli->service_duration_unit;
+            $endDate = $timeDate->fromDbDate($rli->service_start_date)->modify($duration);
+            $rli->service_end_date = $endDate->modify('-1 day')->asDbDate();
+        }
+        return $rli->service_end_date;
     }
 
     protected static function insertAndCommit($sql, array $rows, $table = '')
@@ -532,5 +855,17 @@ class OpportunitiesSeedData {
         $now->setTime(0, 0, 0); // always default it to midnight
         return $timedate->asDbDate($now->get_day_begin($day));
     }
-}
 
+    /**
+     * Returns an associative array where the keys are the names of the fields that are stored in the database and the values are their values
+     * @param SugarBean $bean
+     * @return array
+     */
+    private static function toDatabaseArray(SugarBean $bean): array
+    {
+        return array_filter($bean->toArray(), static function ($key) use ($bean) : bool {
+            $data = $bean->field_defs[$key];
+            return !isset($data['source']) || $data['source'] === 'db';
+        }, ARRAY_FILTER_USE_KEY);
+    }
+}

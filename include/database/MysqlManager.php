@@ -137,7 +137,6 @@ abstract class MysqlManager extends DBManager
 		"select_rows" => true,
 		"inline_keys" => true,
 		"create_user" => true,
-		"fulltext" => true,
 	    "collation" => true,
 	    "create_db" => true,
 	    "disable_keys" => true,
@@ -684,10 +683,6 @@ WHERE TABLE_SCHEMA = ?
 			else
 				$columns[] = " KEY $name ($fields)";
 			break;
-		case 'fulltext':
-			if ($this->full_text_indexing_installed())
-				$columns[] = " FULLTEXT ($fields)";
-			break;
 		}
 	}
 	$columns = implode(", $alter_action ", $columns);
@@ -700,7 +695,7 @@ WHERE TABLE_SCHEMA = ?
 	/**
 	 * @see DBManager::setAutoIncrement()
 	 */
-	protected function setAutoIncrement($table, $field_name)
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
 	{
 		return "auto_increment";
 	}
@@ -875,14 +870,6 @@ FROM information_schema.statistics';
 	}
 
 	/**
-	 * @see DBManager::full_text_indexing_installed()
-	 */
-	public function full_text_indexing_installed($dbname = null)
-	{
-		return $this->isEngineEnabled('MyISAM');
-	}
-
-    /**
      * {@inheritDoc}
      */
     public function massageFieldDef(array &$fieldDef) : void
@@ -1018,29 +1005,6 @@ FROM information_schema.statistics';
 			return '"'.$term.'"';
 		}
 		return $term;
-	}
-
-	/**
-	 * Generate fulltext query from set of terms
-	 * @param string $fields Field to search against
-	 * @param array $terms Search terms that may be or not be in the result
-	 * @param array $must_terms Search terms that have to be in the result
-	 * @param array $exclude_terms Search terms that have to be not in the result
-	 */
-	public function getFulltextQuery($field, $terms, $must_terms = array(), $exclude_terms = array())
-	{
-		$condition = array();
-		foreach($terms as $term) {
-			$condition[] = $this->quoteTerm($term);
-		}
-		foreach($must_terms as $term) {
-			$condition[] = "+".$this->quoteTerm($term);
-		}
-		foreach($exclude_terms as $term) {
-			$condition[] = "-".$this->quoteTerm($term);
-		}
-		$condition = $this->quoted(join(" ",$condition));
-		return "MATCH($field) AGAINST($condition IN BOOLEAN MODE)";
 	}
 
 	/**

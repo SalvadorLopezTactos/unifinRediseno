@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Ciljani modul',
+  'LBL_PRJ_RUN_ORDER' => 'Primeni redosled',
   'LBL_PMSE_BUTTON_SAVE' => 'Sačuvaj',
   'LBL_PMSE_BUTTON_CANCEL' => 'Otkaži',
   'LBL_PMSE_BUTTON_YES' => 'Da',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Procesna definicija je uvezena ali sadrži jednu ili više akcija Poslovnog pravila za koje poslovna pravila nisu odabrana.',
     'LBL_BPM_IMPORT_SELECT' => 'Ova definicija procesa sadrži sledeća poslovna pravila i predloške e-pošte. '
         . 'Odaberite one koje želite uvesti.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Poslovna pravila',
     'LBL_EMAIL_TEMPLATES' => 'Predlošci e-pošte',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Nadzornik',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Kreirao korisnik',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Poslednji put promenio korisnik',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistemska e-poruka',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Poslovna pravila',
     'LBL_PMSE_LABEL_RULE' => 'Pravilo',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Dodeliti korisniku',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Ažuriraj „dodeljeno“ na evidenciji',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Dodati srodni zapis',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Povezani modul',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Naziv aktivnosti je prazan.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Naziv "%s" već postoji u obliku porodice.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dana',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'sati',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minuta',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'radno vreme',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Poslovni centar',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Iz ciljanog modula',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Od ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Kanal, broj i binarna vrednost',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Broj',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Vrednost',

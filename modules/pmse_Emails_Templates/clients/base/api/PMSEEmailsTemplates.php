@@ -162,7 +162,8 @@ class PMSEEmailsTemplates extends vCardApi
         $fieldsData = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
         foreach ($fieldsData as $field) {
             //$retrieveId = isset($additionalArgs['retrieveId']) && !empty($additionalArgs['retrieveId']) && $field['name'] == 'id' ? $additionalArgs['retrieveId'] : false;
-            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'ET')) {
+            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'ET') &&
+                PMSEEngineUtils::isSupportedField($moduleBean->object_name, $field['name'], 'ET')) {
                 $tmpField = array();
                 $tmpField['id'] = $field['name'];
                 $tmpField['_module'] = $newModuleFilter;

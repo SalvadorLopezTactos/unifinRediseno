@@ -72,11 +72,32 @@ class PMSEImporter
     protected $dependencyKeys = [];
 
     /**
+     * Dependency keys by type index
+     * @var array
+     */
+    protected $dependencyKeysByType = [];
+
+    /**
+     * Mapping of dependency types to indexes for install
+     * @var array
+     */
+    protected $dependencyTypeIndexes = [
+        'email_template' => 'pet',
+        'business_rule' => 'pbr',
+    ];
+
+    /**
      * Options that can be set on this importer to handle during saving of project
      * data
      * @var array
      */
     protected $options = [];
+
+    /**
+     * Flag that tells this object if it should update existing records on import
+     * @var boolean
+     */
+    protected $updateOnImport = false;
 
     /**
      * Template method that allows child classes to define things to be done
@@ -93,6 +114,33 @@ class PMSEImporter
         LoggerManager::getLogger()->deprecated($msg);
         $this->setBean();
         $this->initialize();
+    }
+
+    /**
+     * Sets the `$updateOnImport` marker
+     * @param bool $flag
+     */
+    public function setUpdateOnImport(bool $flag)
+    {
+        $this->updateOnImport = $flag;
+    }
+
+    /**
+     * Toggles the existing state of `$updateOnImport`
+     * @return void
+     */
+    public function toggleUpdateOnImport()
+    {
+        $this->updateOnImport = !$this->updateOnImport;
+    }
+
+    /**
+     * Gets the existing `$updateOnImport` marker
+     * @return bool
+     */
+    public function updateOnImport()
+    {
+        return $this->updateOnImport;
     }
 
     /**
@@ -234,6 +282,15 @@ class PMSEImporter
     }
 
     /**
+     * Gets installed dependencies by type
+     * @return array
+     */
+    public function getDependencyKeysByType()
+    {
+        return $this->dependencyKeysByType;
+    }
+
+    /**
      * Method to upload a file and read content for import in database
      * @param $file
      * @param $options
@@ -317,9 +374,24 @@ class PMSEImporter
                 // Save the old and new ids so that we can link the dependent elements later
                 if (isset($oldId) && isset($newId)) {
                     $this->dependencyKeys[$oldId] = $newId;
+
+                    // Now mark this by type if we can
+                    if (($index = $this->getDependencyTypeIndex($type)) !== null) {
+                        $this->dependencyKeysByType[$index][$newId] = true;
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Gets the index for a given dependency type
+     * @param string $type Either email_template or business_rule
+     * @return string|null
+     */
+    protected function getDependencyTypeIndex(string $type)
+    {
+        return $this->dependencyTypeIndexes[$type] ?? null;
     }
 
     /**
@@ -421,7 +493,7 @@ class PMSEImporter
                     $q->where()->equals('rst_module', $project['project']['prj_module']);
                 }
                 $result = $q->execute();
-                
+
                 // Match the business rules by definition and set their new ID references
                 foreach ($result as $existingBusinessRule) {
                     $existingBRDef = $existingBusinessRule['rst_source_definition'];
@@ -585,21 +657,52 @@ class PMSEImporter
     }
 
     /**
+     * Checks to see if the ID for this project bean already exists. This is
+     * important for imports because imports on install and upgrade may include
+     * project data that has IDs in them.
+     * @param SugarBean $bean The project bean (ET, BR, or Project)
+     * @return boolean
+     */
+    protected function beanIDExists(SugarBean $bean)
+    {
+        // If there is an ID for this bean already then we need to make sure it
+        // is a new bean and not an existing bean
+        $ret = false;
+        if ($bean->id) {
+            $q = new \SugarQuery;
+            $q->select(['id']);
+            $q->from($bean, [
+                'team_security' => false,
+                'add_deleted' => false,
+            ]);
+            $q->where()->equals('id', $bean->id);
+            $ret = $q->getOne() !== false;
+        }
+
+        return $ret;
+    }
+
+    /**
      * Handles saving the project bean as well as tagging the bean
      * @param array $projectData The project data
      */
     protected function handleProjectBeanSave($projectData)
     {
-        // Load up the bean with the project data
-        $this->loadBeanFromArray($this->getBean(), $projectData);
+        // We will need this object for a few operations here
+        $bean = $this->getBean();
 
-        // Get the ID of the bean we just saved
-        $this->getBean()->save();
+        // Load up the bean with the project data
+        $this->loadBeanFromArray($bean, $projectData);
+
+        // Save the bean if we are supposed to
+        if ($bean->isUpdate() === false || $this->updateOnImport()) {
+            $bean->save();
+        }
 
         // Save has to happen first in case it is a new bean, so that
         // proper relationships can be made
         if (isset($projectData['tag'])) {
-            $this->addTagsToBean($this->getBean(), $projectData['tag']);
+            $this->addTagsToBean($bean, $projectData['tag']);
         }
     }
 
@@ -647,7 +750,7 @@ class PMSEImporter
         }
 
         if (!empty($bean->id)) {
-            $bean->new_with_id = true;
+            $bean->new_with_id = $this->beanIDExists($bean) === false;
         }
     }
 

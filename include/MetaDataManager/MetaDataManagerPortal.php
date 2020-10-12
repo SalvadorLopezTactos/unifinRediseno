@@ -10,25 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
+
 class MetaDataManagerPortal extends MetaDataManager
 {
     /**
      * Find all modules with Portal metadata
-     * 
+     *
+     * @param boolean $filtered Ignored
      * @return array List of Portal module names
      */
     protected function getModules($filtered = true)
     {
         $modules = array();
-        foreach (SugarAutoLoader::getDirFiles("modules", true) as $mdir) {
-            // strip modules/ from name
-            $mname = substr($mdir, 8);
-            if (file_exists("$mdir/clients/portal/")) {
+        foreach (SugarAutoLoader::getDirFiles('modules', true) as $mdir) {
+            // do we have a core or custom portal directory for the module
+            if (SugarAutoLoader::existingCustomOne($mdir . '/clients/portal/')) {
+                // strip modules/ from name
+                $mname = substr($mdir, 8);
                 $modules[] = $mname;
             }
         }
         $modules[] = 'Users';
         $modules[] = 'Filters';
+
+        // If you don't have Serve, you don't get Dashboards in your Portal
+        if (PortalFactory::getInstance('Settings')->isServe()) {
+            $modules[] = 'Dashboards';
+        }
+
         return $modules;
     }
 
@@ -58,12 +68,20 @@ class MetaDataManagerPortal extends MetaDataManager
 
     /**
      * Gets configs
-     * 
+     *
      * @return array
      */
     protected function getConfigs() {
+        global $sugar_config;
+
         $admin = new Administration();
         $configs = $admin->getConfigForModule('portal', 'support');
+
+        $configs['smtpServerSet'] = false;
+        if (!empty(BeanFactory::getBean('OutboundEmail')->getSystemMailerSettings()->mail_smtpserver)) {
+            $configs['smtpServerSet'] = true;
+        }
+        $configs['passwordsetting'] = $sugar_config['passwordsetting'];
 
         return $configs;
     }
@@ -71,7 +89,7 @@ class MetaDataManagerPortal extends MetaDataManager
 
     /**
      * Fills in additional app list strings data as needed by the client
-     * 
+     *
      * @param array $public Public app list strings
      * @param array $main Core app list strings
      * @return array
@@ -79,7 +97,7 @@ class MetaDataManagerPortal extends MetaDataManager
     protected function fillInAppListStrings(Array $public, Array $main) {
         $public['countries_dom'] = $main['countries_dom'];
         $public['state_dom'] = $main['state_dom'];
-        
+
         return $public;
     }
 
@@ -126,6 +144,8 @@ class MetaDataManagerPortal extends MetaDataManager
 
     /**
      * Load Portal specific metadata (heavily pruned to only show modules enabled for Portal)
+     * @param array $args
+     * @param MetaDataContextInterface $context
      * @return array Portal metadata
      */
     protected function loadMetadata($args = array(), MetaDataContextInterface $context)
@@ -137,6 +157,22 @@ class MetaDataManagerPortal extends MetaDataManager
                 if (!empty($modMeta['isBwcEnabled'])) {
                     // portal has no concept of bwc so get rid of it
                     unset($data['modules'][$modKey]['isBwcEnabled']);
+                }
+            }
+
+            // Serve-only restrictions
+            if (isset($data['modules']['Cases']) && !PortalFactory::getInstance('Settings')->isServe()) {
+                $contentSearchViews = ['contentsearch-footer', 'contentsearch-results', 'contentsearchdashlet'];
+                $contentSearchLayouts = ['contentsearch-dropdown'];
+                foreach ($contentSearchViews as $view) {
+                    if (isset($data['modules']['Cases']['views'][$view])) {
+                        unset($data['modules']['Cases']['views'][$view]);
+                    }
+                }
+                foreach ($contentSearchLayouts as $layout) {
+                    if (isset($data['modules']['Cases']['layouts'][$layout])) {
+                        unset($data['modules']['Cases']['layouts'][$layout]);
+                    }
                 }
             }
         }

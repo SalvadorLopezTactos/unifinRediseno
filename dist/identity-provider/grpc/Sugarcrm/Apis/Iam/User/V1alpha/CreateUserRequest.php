@@ -28,21 +28,9 @@ class CreateUserRequest extends \Google\Protobuf\Internal\Message
      */
     private $send_email = false;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\User $user
-     *     @type bool $send_email
-     *           Should we send email to the newly created user?
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

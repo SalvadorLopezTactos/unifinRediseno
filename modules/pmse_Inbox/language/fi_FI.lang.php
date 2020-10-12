@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Asetettu käyttäjälle',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Prosessin suunnittelunäkymä',
+    'LBL_PROJECT_RUN_ORDER' => 'Suoritusjärjestys',
 );
 

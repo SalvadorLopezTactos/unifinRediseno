@@ -322,4 +322,7 @@ Tras confirmar cada módulo necesario y deseado, haga clic en el botón Guardar 
     'LBL_FILTER_LEADS_REPORTS' => 'Reportes de prospecto',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ha consentido los fines comerciales',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consentimiento actualizado por última vez',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'No se puede cambiar el estado de {{moduleSingular}}. Este {{moduleSingular}} ya se convirtió.',
 );

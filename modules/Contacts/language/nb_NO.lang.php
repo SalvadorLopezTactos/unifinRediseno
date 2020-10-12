@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashbord for kontaktliste',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashbord for kontaktoppføring',
-
+    'LBL_SITE_USER_ID' => 'Hash for site_url og contact_id',
+    'LBL_COOKIE_CONSENT' => 'Samtykke til informasjonskapsler',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Samtykke til informasjonskapsler mottatt',
     'LNK_CONTACT_REPORTS' => 'Kontaktrapport',
     'ERR_DELETE_RECORD' => 'Et registreringsnummer må oppgis for å slette denne kontakten.',
     'LBL_ACCOUNT_ID' => 'Bedrift-ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portalinformasjon',
     'LBL_PORTAL_NAME' => 'Portalens navn:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portalpassordet er definert:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portal-bruker firmanavn',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du lykkes i å opprette {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Gate',
     'LBL_POSTAL_CODE' => 'Postnummer:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Muligheter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Forespørsler',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Tilbud (Send Til)',
     'LBL_QUOTES_BILL_TO' => 'Tilbud (Fakturér)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klikk her for å redigere din profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Her er hvor du kan stille inn foretrukket språk. Dette vil endre språket som brukes av Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Du kan gå tilbake til din profil når som helst ved hjelp av brukermenyen.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portalnavnet {0} finnes allerede. Dubpliserte portalnavn er ikke tillatt. Endre portalnavnet slik at det blir unikt.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal Id',
@@ -273,4 +278,8 @@ For å opprette {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakters rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykket for',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sist oppdatert',
+
+    'LBL_ENTRY_SOURCE' => 'Kontaktkilde',
+    'LBL_SOURCE_EXTERNAL' => 'Ekstern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

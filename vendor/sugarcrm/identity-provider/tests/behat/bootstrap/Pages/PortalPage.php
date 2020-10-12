@@ -19,6 +19,9 @@ class PortalPage extends LoginPage
     protected $userMenuCss = "#userList";
     protected $logoutCss = "i.fa-sign-out";
 
+    protected $acceptUseCookiesCheckBoxCss = 'div.consent-cookie input[type=checkbox]';
+    protected $acceptUseCookiesBtnCss = 'a.btn-primary';
+
     /**
      * Is user on portal page
      * @return bool
@@ -38,6 +41,16 @@ class PortalPage extends LoginPage
         $this->clickByCss($this->userMenuCss);
         $this->clickByCss($this->logoutCss);
         $this->waitLoadingDisappear();
+        $this->waitAjaxComplete();
+    }
+
+    /**
+     * Accept Use Cookies after firs login
+     */
+    public function acceptUseCookies()
+    {
+        $this->clickByCss($this->acceptUseCookiesCheckBoxCss);
+        $this->clickByCss($this->acceptUseCookiesBtnCss);
         $this->waitAjaxComplete();
     }
 }

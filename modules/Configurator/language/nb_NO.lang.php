@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'The aspect ratio of the image should be between 1:1 and 10:1. The image will be resized.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'The aspect ratio of the image must be between 3:1 and 20:1. Upload a new File with this ratio.',
     'ERR_ALERT_FILE_UPLOAD' => 'Feil ved bildeopplastingen.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Kan ikke opprette katalog for bilder',
     'LBL_LOGGER'=>'log innstillinger',
 	'LBL_LOGGER_FILENAME'=>'Navn på log fil',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Filtype',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimum størrelse på log',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Standard dato format',
 	'LBL_LOGGER_LOG_LEVEL'=>'Loggnivå',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Kommentarlogginnstillinger',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimum tegn å vise per kommentaroppføring',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

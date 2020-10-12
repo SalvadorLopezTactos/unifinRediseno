@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Aucune liste de cibles du type par défaut n&#39;a été trouvée',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Aucune entrée n&#39;a été trouvée',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Les entrées ont été traitées',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Paramètres e-mails entrants',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Paramètres d&#39;e-mails de système',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nom du Tracker :',
   'LBL_EDIT_TRACKER_URL'=>'URL :',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Pas de paramètres optimaux sauvegardés avec votre boîte email entrante.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Veuillez revoir vos paramètre emails entrants.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} leads qui ont été créés par cette campagne ont été effacés depuis la création.',
+    'LBL_PROSPECT_LIST' => 'Liste cible',
 );
 
 

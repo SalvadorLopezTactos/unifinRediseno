@@ -38,25 +38,9 @@ class OneTimeToken extends \Google\Protobuf\Internal\Message
      */
     private $expire_time = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $token
-     *           Token hash
-     *     @type string $tenant_id
-     *           User tenant
-     *     @type string $user_id
-     *           User who ask the token
-     *     @type \Google\Protobuf\Timestamp $expire_time
-     *           Time when token was expired.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\Onetimetoken::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

@@ -4,13 +4,18 @@
 
 namespace Sugarcrm\Apis\Iam\Provider\V1alpha;
 
-if (false) {
+/**
+ * Protobuf enum <code>Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig\SigningMethod</code>
+ */
+class SamlConfig_SigningMethod
+{
     /**
-     * This class is deprecated. Use Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig\SigningMethod instead.
-     * @deprecated
+     * Generated from protobuf enum <code>RSA_SHA256 = 0;</code>
      */
-    class SamlConfig_SigningMethod {}
+    const RSA_SHA256 = 0;
+    /**
+     * Generated from protobuf enum <code>RSA_SHA512 = 1;</code>
+     */
+    const RSA_SHA512 = 1;
 }
-class_exists(SamlConfig\SigningMethod::class);
-@trigger_error('Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig_SigningMethod is deprecated and will be removed in the next major release. Use Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig\SigningMethod instead', E_USER_DEPRECATED);
 

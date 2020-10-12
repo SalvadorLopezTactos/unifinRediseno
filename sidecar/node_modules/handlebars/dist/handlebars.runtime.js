@@ -1,6 +1,6 @@
 /*!
 
- handlebars v1.3.0-sugarcrm-temporary
+ handlebars v1.3.2-sugarcrm-temporary
 
 Copyright (C) 2011 by Yehuda Katz
 

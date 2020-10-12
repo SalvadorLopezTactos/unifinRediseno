@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Aktív felhasználók mutatása',
-		  'ShowLastModifiedRecords' => 'Utolsó 10 módosított rekord',
-		  'ShowTopUser' => 'Top felhasználó',
-		  'ShowMyModuleUsage' => 'Általam használt modulok',
-		  'ShowMyWeeklyActivities' => 'Heti aktivitásom',
-		  'ShowTop3ModulesUsed' => '3 legtöbbet használt modulom',
-		  'ShowLoggedInUserCount' => 'Aktív felhasználók száma',
-		  'ShowMyCumulativeLoggedInTime' => 'Összes bejelentkezve töltött időm (heti)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Felhasználók összes bejelentkezve töltött ideje (heti)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Feladat',
 		  'active_users' => 'Aktív felhasználók száma',

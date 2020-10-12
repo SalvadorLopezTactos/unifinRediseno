@@ -68,7 +68,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         padding: 0 4px 0 0;
-        position: relative;
+        position: static;
 
         &:last-child {
           padding-right: 0;
@@ -192,7 +192,7 @@
     }
 
     .image_rounded img {
-      border: 2px solid rgba(0, 0, 0, 0.4);
+      border: 2px solid fade(@black, 40%);
       border-radius: 23px;
     }
   }
@@ -360,7 +360,7 @@
     }
 
     .btn:not(.btn-invisible):not(.btn-primary):not(.btn-secondary) {
-      border-color: #ccc;
+      border-color: @grayMid;
     }
 
     .drillthrough-headerpane .btn {

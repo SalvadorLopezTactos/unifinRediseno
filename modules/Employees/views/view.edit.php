@@ -22,10 +22,6 @@ class EmployeesViewEdit extends ViewEdit {
         $idpConfig = new IdmConfig(\SugarConfig::getInstance());
 
         if (is_admin($GLOBALS['current_user'])) {
-            if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate()) {
-                $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
-            }
-
             $json = getJSONobj();
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $sqs_objects = array('EditView_reports_to_name' => $qsd->getQSUser());
@@ -64,8 +60,8 @@ class EmployeesViewEdit extends ViewEdit {
 
         // Check for IDM mode.
         $isIDMModeEnabled = (new Authentication\Config(\SugarConfig::getInstance()))->isIDMModeEnabled();
-        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $isIDMModeEnabled);
-        if ($isIDMModeEnabled) {
+        if ($isIDMModeEnabled && !$this->ev->isEmployeeEditable()) {
+            $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $isIDMModeEnabled);
             if ($GLOBALS['current_user']->isAdminForModule('Users')) {
                 $tenantSrn = Srn\Converter::fromString($idpConfig->getIDMModeConfig()['tid']);
                 $srnManager = new Srn\Manager([
@@ -87,15 +83,10 @@ class EmployeesViewEdit extends ViewEdit {
  	}
 
     /**
-     * Show redirect to cloud console
-     * @param string $url cloud console url
+     * Get EditView object
      */
-    protected function showRedirectToCloudConsole($url)
+    protected function getEditView(): EmployeesEditView
     {
-        $ss = new Sugar_Smarty();
-        $error = string_format($GLOBALS['mod_strings']['ERR_CREATE_EMPLOYEE_FOR_IDM_MODE'], [$url]);
-        $ss->assign("error", $error);
-        $ss->display('modules/Users/tpls/errorMessage.tpl');
-        sugar_cleanup(true);
+        return new EmployeesEditView();
     }
 }

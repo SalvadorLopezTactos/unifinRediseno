@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Vorschau',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'WARNUNG: Wenn Sie das Primarmodul ändern, müssen Sie alle hinzugefügten Felder entfernen.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Hier ist die Datei, die sie angefordert haben (Dieser Text kann geändert werden)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Angebot',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Diese Vorlage wird zum Drucken von Angeboten zu PDF verwendet.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'Angebot',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Angebot (mit Services)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Diese Vorlage wird zum Drucken eines Angebots inklusive Serviceinformationen in PDF verwendet.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Rechnung',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Diese Vorlage wird zum Drucken von Rechnungen in PDF verwendet.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'Rechnung',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Rechnung (mit Services)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Diese Vorlage wird zum Drucken einer Rechnung inklusive Serviceinformationen in PDF verwendet.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Angebot-Nummer:',
   'LBL_TPL_SALES_PERSON' => 'Verkäufer/in:',
   'LBL_TPL_VALID_UNTIL' => 'Gültig bis:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Teilenummer',
   'LBL_TPL_PRODUCT' => 'Produkt',
   'LBL_TPL_RLI' => 'Umsatzposten',
+  'LBL_TPL_DURATION' => 'Dauer',
+  'LBL_TPL_DURATION_STARTS' => 'Beginnt:',
+  'LBL_TPL_DURATION_ENDS' => 'Endet:',
   'LBL_TPL_LIST_PRICE' => 'Listenpreis',
   'LBL_TPL_UNIT_PRICE' => 'Stück Preis',
   'LBL_TPL_EXT_PRICE' => 'Ext. Preis',

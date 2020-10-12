@@ -334,12 +334,13 @@
     },
 
     /**
-     * Checks all Products in bundles to make sure each Product has quote_id set
+     * Checks all Products in bundles to make sure each Product has quote_id and account_id set
      *
      * @private
      */
     _checkProductsQuoteLink: function() {
         var quoteId = this.model.get('id');
+        var accountId = this.model.get('billing_account_id');
         var bundles = this.model.get('bundles');
         var prodId;
         var pbItems;
@@ -351,11 +352,11 @@
             pbItems = pbModel.get('product_bundle_items');
 
             _.each(pbItems.models, function(itemModel) {
-                if (itemModel.module === 'Products') {
                     prodId = itemModel.get('id');
 
+                if (itemModel.module === 'Products' && prodId) {
                     // if the product exists but doesn't have a quote ID saved, save it
-                    if (prodId && _.isEmpty(itemModel.get('quote_id'))) {
+                    if (_.isEmpty(itemModel.get('quote_id'))) {
                         bulkUrl = app.api.buildURL('Products/' + prodId + '/link/quotes/' + quoteId);
                         bulkRequest = {
                             url: bulkUrl.substr(4),
@@ -366,6 +367,24 @@
                                 relatedId: quoteId,
                                 related: {
                                     quote_id: quoteId
+                                }
+                            }
+                        };
+                        bulkCalls.push(bulkRequest);
+                    }
+
+                    // if the product exists but doesn't have a account ID saved, save it
+                    if (_.isEmpty(itemModel.get('account_id')) && accountId) {
+                        bulkUrl = app.api.buildURL('Products/' + prodId + '/link/account_link/' + accountId);
+                        bulkRequest = {
+                            url: bulkUrl.substr(4),
+                            method: 'POST',
+                            data: {
+                                id: prodId,
+                                link: 'account_link',
+                                relatedId: accountId,
+                                related: {
+                                    account_id: accountId
                                 }
                             }
                         };
@@ -385,18 +404,22 @@
                         var relatedRecord = response.contents.related_record;
                         var bundles = this.model.get('bundles');
 
-                        _.each(bundles.models, function(pbModel) {
-                            var pbItems = pbModel.get('product_bundle_items');
-                            _.each(pbItems.models, function(itemModel) {
-                                if (itemModel.get('id') === record.id) {
-                                    // update the product model
-                                    this._updateModelWithRecord(itemModel, record);
-                                }
+                        if (!_.isUndefined(record)) {
+                            _.each(bundles.models, function(pbModel) {
+                                var pbItems = pbModel.get('product_bundle_items');
+                                _.each(pbItems.models, function(itemModel) {
+                                    if (itemModel.get('id') === record.id) {
+                                        // update the product model
+                                        this._updateModelWithRecord(itemModel, record);
+                                    }
+                                }, this);
                             }, this);
-                        }, this);
+                        }
 
                         // update the quote model
-                        this._updateModelWithRecord(this.model, relatedRecord);
+                        if (relatedRecord._module === 'Quotes') {
+                            this._updateModelWithRecord(this.model, relatedRecord);
+                        }
                     }, this);
                 }, this)
             });

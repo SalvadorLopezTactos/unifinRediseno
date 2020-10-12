@@ -140,7 +140,6 @@ $viewdefs['Products']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -243,6 +242,40 @@ $viewdefs['Products']['base']['view']['record'] = array(
                         ),
                     ),
                 ),
+                array(
+                    'name' => 'service_duration',
+                    'type' => 'fieldset',
+                    'css_class' => 'service-duration-field',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ),
+                        array(
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ),
+                    ),
+                ),
+                'service',
+                'service_start_date' => array(
+                    'name' => 'service_start_date',
+                    'label' => 'LBL_SERVICE_START_DATE',
+                    'type' => 'date',
+                ),
+                'service_end_date' => array(
+                    'name' => 'service_end_date',
+                    'label' => 'LBL_SERVICE_END_DATE',
+                    'type' => 'service-enddate',
+                ),
+                'renewable' => array(
+                    'name' => 'renewable',
+                    'label' => 'LBL_RENEWABLE',
+                    'type' => 'bool',
+                ),
                 'contact_name',
                 array(
                     'name' => 'tag',
@@ -255,7 +288,6 @@ $viewdefs['Products']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'assigned_user_name',

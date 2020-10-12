@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'عرض الشركات المصنعة',
   'LNK_NEW_PRODUCT_CATEGORY' => 'عرض فئات المنتج',
   'LNK_NEW_PRODUCT_TYPE' => 'عرض أنواع المنتج',
-  'LNK_NEW_PRODUCT' => 'إنشاء منتج للكتالوج',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'مزودي الشحن',
   'LNK_PRODUCT_LIST' => 'عرض كتالوج المنتج',
   'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'فئات المنتج',
   'LBL_MANUFACTURERS' => 'الشركات المصنعة',
   'LBL_PRODUCT_TYPES' => 'أنواع المنتج',
-
+  'LBL_RENEWABLE' => 'القابلية للتجديد',
+  'LBL_SERVICE' => 'الخدمة',
 );
-
-
-?>

@@ -266,7 +266,8 @@ class PMSEActivityDefinitionWrapper
 
         $output = array();
         foreach ($fieldsData as $field) {
-            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR')) {
+            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR') &&
+                PMSEEngineUtils::isSupportedField($bean->object_name, $field['name'], 'ROF')) {
                 $tmpField = array();
                 $tmpField['name'] = $field['name'];
                 $tmpField['label'] = str_replace(':', '',
@@ -297,7 +298,8 @@ class PMSEActivityDefinitionWrapper
 
         $output = array();
         foreach ($fieldsData as $field) {
-            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR')) {
+            if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR') &&
+                PMSEEngineUtils::isSupportedField($bean->object_name, $field['name'], 'RQF')) {
                 if ($field['type'] != 'bool' && $field['type'] != 'radioenum' ) {
                     if (!(isset($field['required']) && $field['required'])) {
                         $tmpField = array();

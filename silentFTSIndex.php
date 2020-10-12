@@ -11,6 +11,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 
@@ -35,6 +36,10 @@ $app_strings = return_application_language($current_language);
 global $current_user;
 $current_user = BeanFactory::newBean('Users');
 $current_user->getSystemUser();
+
+// allow admin to access everything
+$adminWork = new AdminWork();
+$adminWork->startAdminWork();
 
 // Pop off the filename
 array_shift($argv);

@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Shikim paraprak',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'Rrezik: Nëse ju ndryshoni modulin primar, të gjitha fushat e shtuara në mostër do të duhet të fshihen.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Këtu është fajlli që ju kërkuat( Ju mund të ndryshoni këtë tekst)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Ofertë',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Kjo mostër përdoret për të printuar kuota në PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'ofertë',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Kuota (me shërbime)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Ky shabllon përdoret për të printuar një ofertë, duke përfshirë informacionin për shërbimin në PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'oferta e shërbimit',
+
   'LBL_TPL_INVOICE_NAME' => 'Fatura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Kjo mostër përdoret për të printuar faturë në PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'fatura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Fatura (me shërbimet)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Ky shabllon përdoret për të printuar një faturë, duke përfshirë informacionin për shërbimin në PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'fatura e shërbimit',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Numri i ofertës',
   'LBL_TPL_SALES_PERSON' => 'Shitsi',
   'LBL_TPL_VALID_UNTIL' => 'E valide deri',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Numri i pjesës',
   'LBL_TPL_PRODUCT' => 'Produkti',
   'LBL_TPL_RLI' => 'Rreshti i llojeve të të ardhurave',
+  'LBL_TPL_DURATION' => 'Kohëzgjatja',
+  'LBL_TPL_DURATION_STARTS' => 'Fillon:',
+  'LBL_TPL_DURATION_ENDS' => 'Përfundon:',
   'LBL_TPL_LIST_PRICE' => 'Lista e çmimeve',
   'LBL_TPL_UNIT_PRICE' => 'Çmimi për njësi',
   'LBL_TPL_EXT_PRICE' => 'Çmimi i pritur',

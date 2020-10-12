@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'הצעות מחיר (שלח אל)',
 	'LNK_ACCOUNT_REPORTS' => 'צפה בדוחות על חשבונות',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'מסמכים',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת חשבונות',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת חשבונות',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'פרטי חשבון',
+    'LBL_NEXT_RENEWAL_DATE' => 'תאריך החידוש הבא',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'שם חשבון/ענף',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'מיקום',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'טבלאות',

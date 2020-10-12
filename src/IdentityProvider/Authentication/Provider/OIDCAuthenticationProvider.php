@@ -209,7 +209,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $user = $this->userProvider->loadUserBySrn($result['sub']);
 
         if ($user->isServiceAccount()) {
-            if (!$this->SAChecker->isAllowed($result['sub'])) {
+            if (!$this->SAChecker->isAllowed($result)) {
                 throw new AuthenticationException(
                     sprintf('Service account is not allowed: %s', $result['sub'])
                 );
@@ -235,6 +235,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
 
         $userInfo = $this->oAuthProvider->getUserInfo($accessToken);
         $user->setAttribute('oidc_data', $this->userMapping->map($userInfo));
+        $user->setAttribute('updated_at', $userInfo['updated_at']);
         $user->setAttribute('oidc_identify', $this->userMapping->mapIdentity($result));
 
         foreach ($result as $key => $value) {

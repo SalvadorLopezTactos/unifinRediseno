@@ -42,6 +42,16 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
     }
 
     /**
+     * Restore the activity stream behaviour
+     *
+     * @access public
+     */
+    public function __destruct()
+    {
+        Activity::restoreToPreviousState();
+    }
+
+    /**
      * This method implements setJob from RunnableSchedulerJob and sets the SchedulersJob instance for the class
      *
      * @param SchedulersJob $job the SchedulersJob instance set by the job queue

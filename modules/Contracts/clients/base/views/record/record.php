@@ -131,7 +131,6 @@ $viewdefs['Contracts']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'reference_code',
@@ -168,7 +167,6 @@ $viewdefs['Contracts']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'assigned_user_name',

@@ -67,4 +67,3 @@ $fields_array['Contact'] = array ('column_fields' => Array("id"
 		),
         'required_fields' => array("last_name"=>1),
 );
-?>

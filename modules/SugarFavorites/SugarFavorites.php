@@ -40,14 +40,17 @@ class SugarFavorites extends Basic
     public $record_name;
     public $disable_row_level_security = true;
 
-	public static function generateStar(
-	    $on,
-	    $module,
-	    $record
-	    )
-	{
-        return '<div class="star"><div class="'. ($on ? 'on': 'off') .'" onclick="var self=this; parent.SUGAR.App.api.favorite(\''.$module. '\',  \''.$record. '\', $(self).hasClass(\'off\'), { success: function() {$(self).toggleClass(\'on off\');} });">&nbsp;</div></div>';
-	}
+    public static function generateStar($on, $module, $record): string
+    {
+        $cssClass = $on ? 'on' : 'off';
+        $moduleJS = JSON::encode($module);
+        $recordJS = JSON::encode($record);
+        $onClick = "var self=this; parent.SUGAR.App.api.favorite($moduleJS, $recordJS, $(self).hasClass('off'), { success: function() { $(self).toggleClass('on off'); } });";
+        $onClickHTML = htmlspecialchars($onClick);
+        return <<<HTML
+<div class="star"><div class="{$cssClass}" onclick="{$onClickHTML}">&nbsp;</div></div>
+HTML;
+    }
 
 	public static function generateGUID(
 	    $module,

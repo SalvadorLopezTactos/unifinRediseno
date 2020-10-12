@@ -118,14 +118,14 @@ class PMSECasesListApi extends FilterApi
         // Replacement for using .* to get all columns
         // Fields from inbox that are needed
         // Removed the pro_title column because it contains old data and is never updated
-        $inboxFields = array(
+        $inboxFields = [
             'id', 'name', 'date_entered', 'date_modified',
             'modified_user_id', 'created_by', 'deleted',
             'cas_id', 'cas_parent', 'cas_status', 'pro_id',
             'cas_title', 'cas_custom_status', 'cas_init_user', 'cas_create_date',
-            'cas_update_date', 'cas_finish_date', 'cas_pin cas_pin', 'cas_assigned_status',
+            'cas_update_date', 'cas_finish_date', 'cas_pin', 'cas_assigned_status',
             'cas_module', 'team_id', 'team_set_id', 'assigned_user_id',
-        );
+        ];
 
         // Now put them into a format that SugarQuery likes
         foreach ($inboxFields as $field) {
@@ -138,7 +138,7 @@ class PMSECasesListApi extends FilterApi
         $q->joinTable('users', array('alias' => 'u', 'joinType' => 'INNER', 'linkingTable' => true))
             ->on()
             ->equalsField('u.id', 'a.created_by');
-        $fields[] = array("u.last_name", 'assigned_user_name');
+        $fields[] = ['u.last_name', 'assigned_user_name'];
 
         //INNER PROCESS TABLE
         $q->joinTable('pmse_bpmn_process', array('alias' => 'pr', 'joinType' => 'INNER', 'linkingTable' => true))
@@ -151,8 +151,9 @@ class PMSECasesListApi extends FilterApi
         $q->joinTable('pmse_project', array('alias' => 'prj', 'joinType' => 'INNER', 'linkingTable' => true))
             ->on()
             ->equalsField('prj.id', 'pr.prj_id');
-        $fields[] = array("prj.assigned_user_id", 'prj_created_by');
-        $fields[] = array("prj.prj_module", 'prj_module');
+        $fields[] = ['prj.assigned_user_id', 'prj_created_by'];
+        $fields[] = ['prj.prj_module', 'prj_module'];
+        $fields[] = ['prj.prj_run_order', 'prj_run_order'];
 
         //INNER BPM FLOW
         // This relationship is adding several duplicated rows to the query
@@ -161,8 +162,8 @@ class PMSECasesListApi extends FilterApi
             ->on()
             ->equalsField('pf.cas_id', 'a.cas_id');
 
-        $fields[] = array("pf.cas_sugar_module", 'cas_sugar_module');
-        $fields[] = array("pf.cas_sugar_object_id", 'cas_sugar_object_id');
+        $fields[] = ['pf.cas_sugar_module', 'cas_sugar_module'];
+        $fields[] = ['pf.cas_sugar_object_id', 'cas_sugar_object_id'];
 
         // Since we are retrieving deleted project's processes, we need to know
         // which of them are from deleted projects.
@@ -426,7 +427,7 @@ class PMSECasesListApi extends FilterApi
         $q->where()->addRaw("pdef.pro_status <> 'INACTIVE'");
 
         if ($filter !== 'all') {
-            $q->where()->addRaw("pdef.prj_id = '" . $filter . "'");
+            $q->where()->equals('pdef.prj_id', $filter);
         }
 
         $data_bean = $q->execute();

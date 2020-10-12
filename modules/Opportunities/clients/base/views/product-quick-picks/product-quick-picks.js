@@ -10,8 +10,8 @@
  */
 
 /**
- * @class View.Views.Base.Opportunities.RecentUsedProductView
- * @alias SUGAR.App.view.views.BaseOpportunitiesRecentUsedProductView
+ * @class View.Views.Base.Opportunities.ProductQuickPicksView
+ * @alias SUGAR.App.view.views.OpportunitiesProductQuickPicksView
  * @extends View.Views.Base.TabbedDashletView
  */
 ({

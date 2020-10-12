@@ -158,9 +158,6 @@ class ViewHistory extends SugarView
         } else if ($this->layout == 'basic_search' || $this->layout == 'advanced_search')
         {
             $view = new ViewSearchView ( ) ;
-        } else if ($this->layout == 'dashlet' || $this->layout == 'dashletsearch')
-        {
-        	$view = new ViewDashlet ( ) ;
         }  else if ($this->layout == 'popuplist' || $this->layout == 'popupsearch' || $this->layout == 'selection-list')
         {
         	$view = new ViewPopupview ( ) ;

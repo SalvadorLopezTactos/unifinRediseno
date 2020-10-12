@@ -3,7 +3,7 @@
 @br-table-row-selected-hover: #d1e2fa;
 @br-table-cell: #e7e7e7;
 @br-table-btn: #bfbfbf;
-@br-table-btn-hover: #717171;
+@br-table-btn-hover: @grayLight;
 @br-table-container: #f1f1f1;
 @br-table-active-cell-border: @br-table-container;
 @br-table-dummy-highlight: #babfc7;
@@ -40,7 +40,7 @@
       }
 
       &.row-index {
-        border-color: transparent;
+        border-color: @transparent;
       }
 
       table {
@@ -52,8 +52,8 @@
     }
 
     th {
-      border-color: transparent;
-      background: transparent;
+      border-color: @transparent;
+      background: @transparent;
       font-weight: normal;
       text-shadow: none;
       white-space: nowrap;
@@ -63,15 +63,15 @@
     tfoot {
       tr td {
         background: @br-table-cell;
-        border-bottom: transparent;
+        border-bottom: @transparent;
 
         &:first-child {
-          border-color: transparent;
-          background: transparent;
+          border-color: @transparent;
+          background: @transparent;
         }
 
         &:nth-child(2) .btn {
-          color: white;
+          color: @white;
           padding: 0;
           line-height: 26px;
         }

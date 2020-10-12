@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter;
 
+use Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig\SigningMethod;
+
 use OneLogin\Saml2\Constants;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -33,7 +35,7 @@ class SamlConfigAdapter extends AbstractConfigAdapter
     }
 
     /**
-     * modify IPD-API config to SAML library
+     * Get IPD-API config in SAML library format
      * @param $config
      * @return array
      */
@@ -82,10 +84,11 @@ class SamlConfigAdapter extends AbstractConfigAdapter
                 'logoutRequestSigned' => isset($config['sign_logout_request']) ? $config['sign_logout_request'] : false,
                 'logoutResponseSigned' => isset($config['sign_logout_response'])
                     ? $config['sign_logout_response'] : false,
-                'signatureAlgorithm' => isset($config['sign_authn_request'])
-                        && $config['request_signing_method'] == 'RSA_SHA512'
+                'signatureAlgorithm' => isset($config['request_signing_method'])
+                        && $config['request_signing_method'] == SigningMethod::RSA_SHA512
                     ? XMLSecurityKey::RSA_SHA512 : XMLSecurityKey::RSA_SHA256,
                 'validateRequestId' => isset($config['validate_request_id']) ? $config['validate_request_id'] : false,
+                'requestedAuthnContext' => false,
             ],
         ];
     }

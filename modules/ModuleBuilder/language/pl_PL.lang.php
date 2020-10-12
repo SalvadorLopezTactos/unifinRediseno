@@ -117,11 +117,11 @@ $mod_strings = array(
         'defaultdetailview'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok szczegółowy</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
-        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Szybkie tworzenie</b>.<br><br>Formularz Szybkie tworzenie jest wyświetlany w panelach podrzędnych modułu po kliknięciu przycisku Utwórz.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości formuły.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie formuły.'
+        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Szybkie tworzenie</b>.<br><br>Formularz Szybkie tworzenie jest wyświetlany w panelach podrzędnych modułu po kliknięciu przycisku Utwórz.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je między obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
@@ -372,6 +372,8 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_LAYOUTS'=>'Układy',
 'LBL_LISTVIEW'=>'Widok listy',
 'LBL_RECORDVIEW'=>'Widok rekordu',
+'LBL_RECORDDASHLETVIEW'=>'Pulpit podrzędny widoku rekordu',
+'LBL_PREVIEWVIEW'=>'Preview View',
 'LBL_MODULE_TITLE' => 'Studio',
 'LBL_NEW_PACKAGE' => 'Nowy pakiet',
 'LBL_NEW_PANEL'=>'Nowy panel',
@@ -454,7 +456,8 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_VISIBILITY_EDITOR' => 'Edytor widoczności',
 'LBL_ROLLUP' => 'Rozwinięcie',
 'LBL_RELATED_FIELD' => 'Pole powiązane',
-'LBL_CONFIG_PORTAL_URL'=>'URL niestandardowego obrazu loga. Zalecane wymiary logo to 163 x 18 pikseli.',
+'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'Adres URL do niestandardowego obrazu znaku logo. Zalecane wymiary znaku logo to 22 x 22 piksele. Każdy przesłany obraz, który będzie większy w dowolnym z kierunków, zostanie zeskalowany do tych wymiarów maksymalnych.',
+'LBL_CONFIG_PORTAL_LOGO_URL'=> 'Adres URL do niestandardowego obrazu logo. Zalecana szerokość logo to 200 pikseli. Każdy przesłany obraz, który będzie większy w dowolnym z kierunków zostanie zeskalowany do tych wymiarów maksymalnych. Logo będzie używane na ekranie logowania. Jeśli żaden obraz nie zostanie przesłany, używany będzie znak logo.',
 'LBL_PORTAL_ROLE_DESC' => 'Nie usuwaj tej roli. Rola klienta Portal samoobsługowy jest rolą generowaną przez system podczas procesu aktywacji portalu Sugar. Użyj kontroli dostępu w tej roli, aby włączyć i/lub wyłączyć Błędy, Zgłoszenia lub Bazę wiedzy w portalu Sugar. Nie modyfikuj innych kontroli dostępu dla tej roli, aby uniknąć nieznanych i nieprzewidzianych zachowań systemu. W razie przypadkowego usunięcia tej roli, odtwórz ją poprzez wyłącznie i włącznie portalu Sugar.',
 
 //RELATIONSHIPS
@@ -595,15 +598,31 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
     'LBL_PORTAL_DISABLED_MODULES' => 'Następujące moduły są wyłączone:',
     'LBL_PORTAL_ENABLE_MODULES' => 'Jeśli chcesz je włączyć w portalu, możesz to zrobić <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">tutaj</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfiguracja portalu',
+    'LBL_PORTAL_ENABLE_PORTAL' => 'Włącz portal',
+    'LBL_PORTAL_ENABLE_SEARCH' => 'Włącz wyszukiwanie przed otwarciem zgłoszenia',
     'LBL_PORTAL_THEME' => 'Motyw portalu',
     'LBL_PORTAL_ENABLE' => 'Włącz',
     'LBL_PORTAL_SITE_URL' => 'Strona Twojego portalu jest dostępna pod adresem:',
     'LBL_PORTAL_APP_NAME' => 'Nazwa aplikacji',
+    'LBL_PORTAL_LOGOMARK_URL' => 'Adres URL znaku logo',
+    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Podgląd znaku logo',
     'LBL_PORTAL_LOGO_URL' => 'URL logo',
+    'LBL_PORTAL_LOGO_PREVIEW' => 'Podgląd logo',
+    'LBL_PORTAL_CONTACT_PHONE' => 'Nr telefonu',
+    'LBL_PORTAL_CONTACT_EMAIL' => 'Adres e-mail',
+    'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Musisz wprowadzić prawidłowy adres e-mail',
+    'LBL_PORTAL_CONTACT_URL' => 'Adres URL',
+    'LBL_PORTAL_CONTACT_INFO_ERROR' => 'Musisz określić przynajmniej jedną metodę kontaktu',
     'LBL_PORTAL_LIST_NUMBER' => 'Liczba rekordów do wyświetlania na liście',
     'LBL_PORTAL_DETAIL_NUMBER' => 'Liczba pól do wyświetlania w widoku szczegółowym',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Liczba wyników do wyświetlania w wyszukiwaniu globalnym',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Ustawienia domyślne przypisane dla nowych rejestracji w portalu',
+    'LBL_PORTAL_MODULES' => 'Moduły portalu',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO' => 'Informacje kontaktowe portalu',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO_HELP' => 'Skonfiguruj informacje kontaktowe, które są wyświetlane użytkownikom portalu potrzebującym pomocy z ich kontem. Musisz skonfigurować przynajmniej jedną opcję.',
+    'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Przeciągnij i upuść nazwy modułów portalu, aby ustawić ich wyświetlanie bądź ukrywanie w górnym pasku nawigacyjnym portalu. Aby kontrolować dostęp użytkowników portalu do modułów, skorzystaj z funkcji <a href="?module=ACLRoles&action=index">Zarządzanie rolami.</a>',
+    'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Wyświetlane moduły',
+    'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Ukryte moduły',
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Układy Portalu',
@@ -745,7 +764,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
         . ' Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać.'
         . '\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
         . '\n\nCzy chcesz kontynuować?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno usunąć tę relację?<br>Uwaga: ta operacja może zostać wykonana dopiero po kilku minutach.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno usunąć tę relację?<br>Uwaga: Ta operacja może zostać wykonana dopiero po kilku minutach.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Spowoduje to ustawienie relacji jako trwałej. Czy na pewno chcesz zamieścić tę relację?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od ostatniego zapisu zostały wprowadzone zmiany. Czy chcesz zapisać je teraz?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Zapisać zmiany?',
@@ -762,11 +781,11 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Włączone</b>: to pole będzie wyświetlane w funkcji Scalanie duplikatów, ale nie będzie go można użyć dla warunków filtra w funkcji Znajdź duplikaty.<br><b>Wyłączone</b>: to pole nie będzie wyświetlane w funkcji Scalanie duplikatów i nie będzie dostępne do użycia dla warunków filtra w funkcji Znajdź duplikaty.'
 . '<br><b>W filtrze</b>: pole będzie wyświetlane w funkcji Scalanie duplikatów, a także będzie dostępne w funkcji Znajdź duplikaty.<br><b>Tylko filtr</b>: pole nie będzie wyświetlane w funkcji Scalanie duplikatów, ale będzie dostępne w funkcji Znajdź duplikaty.<br><b>Domyślny wybrany filtr</b>: pole będzie użyte dla warunku filtra domyślnie na stronie Znajdź duplikaty i będzie również wyświetlane w funkcji Scalanie duplikatów.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Utwórz formułę służącą do określania wartości tego pola.<br>"
+'LBL_POPHELP_CALCULATED'=>"Utwórz formułę, aby określić wartość w tym polu.<br>"
    . "Definicje workflow zawierające czynność, które mają aktualizować wartość tego pola, nie będą już wykonywać danej czynności.<br>"
    . "Pola wykorzystujące formuły nie będą obliczane w czasie rzeczywistym w układach "
-   . "Portal samoobsługowy Sugar ani "
-   . "Mobilny widok edycji.",
+   . "portalu samoobsługowego Sugar lub "
+   . "układach mobilnego widoku edycji.",
 
 'LBL_POPHELP_DEPENDENT'=>"Utwórz formułę służącą do określania, czy to pole jest widoczne w układach.<br/>"
         . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki,<br/>"

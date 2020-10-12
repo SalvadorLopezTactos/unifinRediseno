@@ -634,7 +634,8 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
          * @param labels an array of grouping labels
          */
         extractGroupLabel: function(state, labels) {
-            return _.isEmpty(labels) ? null : labels[state.pointIndex || state.groupIndex];
+            var index = _.isUndefined(state.pointIndex) ? state.groupIndex : state.pointIndex;
+            return _.isEmpty(labels) ? null : labels[index];
         },
 
         /**
@@ -733,57 +734,62 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
             var d2;
             var values = [];
 
-            switch (type) {
+            if (_.isEmpty(label)) {
+                // empty label, don't bother to process
+                startDate = '';
+                endDate = '';
+            } else {
+                switch (type) {
 
-                case 'fiscalYear':
-                    // 2017
-                    var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
-                    fy.setUTCFullYear(label);
-                    y1 = fy.getUTCFullYear();
-                    m1 = fy.getUTCMonth() + 1;
-                    d1 = fy.getUTCDate();
-                    fy.setUTCMonth(fy.getUTCMonth() + 12);
-                    fy.setUTCDate(fy.getUTCDate() - 1);
-                    y2 = fy.getUTCFullYear();
-                    m2 = fy.getUTCMonth() + 1;
-                    d2 = fy.getUTCDate(); //1-31
-                    startDate = y1 + '-' + m1 + '-' + d1;
-                    endDate = y2 + '-' + m2 + '-' + d2;
-                    break;
+                    case 'fiscalYear':
+                        // 2017
+                        var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
+                        fy.setUTCFullYear(label);
+                        y1 = fy.getUTCFullYear();
+                        m1 = fy.getUTCMonth() + 1;
+                        d1 = fy.getUTCDate();
+                        fy.setUTCMonth(fy.getUTCMonth() + 12);
+                        fy.setUTCDate(fy.getUTCDate() - 1);
+                        y2 = fy.getUTCFullYear();
+                        m2 = fy.getUTCMonth() + 1;
+                        d2 = fy.getUTCDate(); //1-31
+                        startDate = y1 + '-' + m1 + '-' + d1;
+                        endDate = y2 + '-' + m2 + '-' + d2;
+                        break;
 
-                case 'fiscalQuarter':
-                    // Q1 2017
-                    var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
-                    var re = /Q([1-4]{1})\s(\d{4})/;
-                    var rm = label.match(re);
-                    fy.setUTCFullYear(rm[2]);
-                    fy.setUTCMonth((rm[1] - 1) * 3 + fy.getUTCMonth());
-                    y1 = fy.getUTCFullYear();
-                    m1 = fy.getUTCMonth() + 1;
-                    d1 = fy.getUTCDate();
-                    fy.setUTCMonth(m1 + 2);
-                    fy.setUTCDate(fy.getUTCDate() - 1);
-                    y2 = fy.getUTCFullYear();
-                    m2 = fy.getUTCMonth() + 1;
-                    d2 = fy.getUTCDate();
-                    startDate = y1 + '-' + m1 + '-' + d1;
-                    endDate = y2 + '-' + m2 + '-' + d2;
-                    break;
+                    case 'fiscalQuarter':
+                        // Q1 2017
+                        var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
+                        var re = /Q([1-4]{1})\s(\d{4})/;
+                        var rm = label.match(re);
+                        fy.setUTCFullYear(rm[2]);
+                        fy.setUTCMonth((rm[1] - 1) * 3 + fy.getUTCMonth());
+                        y1 = fy.getUTCFullYear();
+                        m1 = fy.getUTCMonth() + 1;
+                        d1 = fy.getUTCDate();
+                        fy.setUTCMonth(m1 + 2);
+                        fy.setUTCDate(fy.getUTCDate() - 1);
+                        y2 = fy.getUTCFullYear();
+                        m2 = fy.getUTCMonth() + 1;
+                        d2 = fy.getUTCDate();
+                        startDate = y1 + '-' + m1 + '-' + d1;
+                        endDate = y2 + '-' + m2 + '-' + d2;
+                        break;
 
-                case 'day':
-                    var pattern = datePatterns[type];
-                    var parsedDate = dateParser(label, pattern, userLangPref);
-                    startDate = parsedDate.formatServer(true); //2017-12-31
-                    endDate = 'on';
-                    break;
+                    case 'day':
+                        var pattern = datePatterns[type];
+                        var parsedDate = dateParser(label, pattern, userLangPref);
+                        startDate = parsedDate.formatServer(true); //2017-12-31
+                        break;
 
-                default:
-                    var pattern = datePatterns[type] || 'YYYY';
-                    var parsedDate = dateParser(label, pattern, userLangPref);
-                    var momentType = type === 'week' ? 'isoweek' : type;
-                    startDate = parsedDate.startOf(momentType).formatServer(true); //2017-01-01
-                    endDate = parsedDate.endOf(momentType).formatServer(true); //2017-12-31
-                    break;
+                    default:
+                        var pattern = datePatterns[type] || 'YYYY';
+                        var parsedDate = dateParser(label, pattern, userLangPref);
+                        var momentType = type === 'week' ? 'isoweek' : type;
+                        startDate = parsedDate.startOf(momentType).formatServer(true); //2017-01-01
+                        endDate = parsedDate.endOf(momentType).formatServer(true); //2017-12-31
+                        break;
+                }
             }
 
             values.push(startDate);
@@ -832,6 +838,11 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                     case 'enum':
                     case 'radioenum':
                         values.push(enums[def.table_key + ':' + def.name][label]);
+                        break;
+                    case 'date':
+                        // convert to server format before sending
+                        var date = new this.sugarApp.date(label, this.sugarApp.date.getUserDateFormat());
+                        values.push(date.formatServer(true));
                         break;
                     default:
                         // returns [label]
@@ -1273,11 +1284,11 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                                 key: pickLabel(d.label),
                                 values: isDiscreteData ?
                                     d.values.map(function(e, j) {
-                                        return {x: i + 1, y: parseFloat(e)};
-                                    }) :
+                                        return {x: i + 1, y: parseFloat(e), label: pickValueLabel(this, j)};
+                                    }, d) :
                                     d.values.map(function(e, j) {
-                                        return {x: j + 1, y: parseFloat(e)};
-                                    })
+                                        return {x: j + 1, y: parseFloat(e), label: pickValueLabel(this, j)};
+                                    }, d)
                             };
                         });
                         break;

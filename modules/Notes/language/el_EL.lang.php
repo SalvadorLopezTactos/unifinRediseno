@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Ημερομηνία Τροποποίησης',
     'LBL_DELETED' => 'Διαγράφηκε',
     'LBL_REVENUELINEITEMS' => 'Γραμμή Στοιχείου Εσόδων',
+    'LBL_ENTRY_SOURCE' => 'Πηγή σημείωσης',
+    'LBL_SOURCE_EXTERNAL' => 'Εξωτερικά',
+    'LBL_SOURCE_INTERNAL' => 'Εσωτερικά',
 
     // Help Text
     // List View Help Text

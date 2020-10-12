@@ -14,10 +14,12 @@ namespace Sugarcrm\IdentityProvider\App\Controller;
 use Sugarcrm\IdentityProvider\App\Application;
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
 use Sugarcrm\IdentityProvider\App\Constraints as CustomAssert;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
 use Sugarcrm\IdentityProvider\Srn;
 
+use Sugarcrm\IdentityProvider\Srn\Converter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -154,7 +156,12 @@ class ChangePasswordController extends SetPasswordController
      */
     protected function refreshUser(Application $app, Srn\Srn $tenant, User $user, UsernamePasswordToken $token): void
     {
-        $localProvider = new LocalUserProvider($app->getDoctrineService(), $tenant->getTenantId());
+        $localProvider = new LocalUserProvider(
+            $app->getDoctrineService(),
+            $tenant->getTenantId(),
+            $app->getOAuth2Service()->getClientID(),
+            $app->getAudit()
+        );
         $user = $localProvider->refreshUser($user);
         $token->setUser($user);
         $app->getRememberMeService()->store($token);

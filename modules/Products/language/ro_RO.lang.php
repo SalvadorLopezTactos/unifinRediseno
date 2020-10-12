@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Contact',
     'LBL_DISCOUNT_TOTAL' => 'Reducere totala',
     'LBL_DISCOUNT_AMOUNT' => 'Suma reducere',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Sumă reducere',
     'LBL_EXT_PRICE' => 'Preţ ext.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Simbol Moneda',

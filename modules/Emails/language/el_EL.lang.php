@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Emails: Επαφές',
     'LBL_EMAILS_LEADS_REL' => 'Emails: Δυνητικοί Πελάτες',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Emails: Ευκαιρίες',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Emails: Σημειώσεις',
     'LBL_EMAILS_PROJECT_REL' => 'Emails: Έργα',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Emails: Εργασίες Έργων',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Από:',
     'LBL_REPLY_TO' => 'Απάντηση Σε:',
     'LBL_HTML_BODY' => 'Σώμα HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Παραλήπτες',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Δυνητικοί Πελάτες',
     'LBL_MESSAGE_SENT' => 'Το μήνυμα εστάλη',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Απάντηση στην Ταυτότητα',
     'LBL_TYPE' => 'Τύπος:',
     'LBL_EMAIL_STATE' => 'Περιοχή',
+    'LBL_EMAIL_DIRECTION' => 'Κατεύθυνση',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Παρακαλώ Ελέγξτε!',

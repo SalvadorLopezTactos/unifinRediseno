@@ -17,7 +17,6 @@
 		    'print' => array('param_value' => true,
 		                     'config' => array(
 		                                  'show_header' => true,
-		                                  'show_footer' => false,
 		                                  'view_print'  => true,
 		                                  'show_title' => false,
                                           'show_subpanels' => false,

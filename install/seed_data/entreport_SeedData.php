@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,9 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
 
 //Create new Custom Queries
 $query_object1 = new CustomQuery();
@@ -282,6 +278,3 @@ $scalar_body_array = array(
 			$body_object->$key = $value;
 		}
 		$body_object->save();
-
-
-?>

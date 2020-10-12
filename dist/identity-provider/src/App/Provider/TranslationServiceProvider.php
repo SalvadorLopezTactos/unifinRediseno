@@ -23,6 +23,8 @@ use Symfony\Component\Translation\Loader\XliffFileLoader;
 
 class TranslationServiceProvider implements ServiceProviderInterface, EventListenerProviderInterface
 {
+    const LOCALE_DELIMITER = '-';
+
     /**
      * @var array
      */
@@ -44,7 +46,7 @@ class TranslationServiceProvider implements ServiceProviderInterface, EventListe
         if (empty($this->config['default'])) {
             throw new \LogicException('Can\'t init translation without default locale');
         }
-        $this->config['fallback'] = $this->config['fallback'] ?? [explode('-', $this->config['default'])[0]];
+        $this->config['fallback'] = $this->config['fallback'] ?? [];
         $this->config['resources'] = $this->config['resources'] ?? [];
 
         $this->localeParamName = $localeParamName;
@@ -54,7 +56,7 @@ class TranslationServiceProvider implements ServiceProviderInterface, EventListe
     {
         $app['translator'] = function ($app) {
             $translator = new Translator(
-                $app['app.locale'],
+                $app['locale'],
                 $app['translator.message_selector'],
                 $this->joinPaths($app->getRootDir(), '/var/cache/translation'),
                 $app['debug']
@@ -67,7 +69,7 @@ class TranslationServiceProvider implements ServiceProviderInterface, EventListe
                 $translator->addResource('xliff', $this->joinPaths($app->getRootDir(), $resource), $resourceLocale);
             }
 
-            $this->addValidatorTranslation($translator, $app->getRootDir(), $app['app.locale']);
+            $this->addValidatorTranslation($translator, $app->getRootDir(), $app['locale']);
 
             return $translator;
         };
@@ -80,7 +82,6 @@ class TranslationServiceProvider implements ServiceProviderInterface, EventListe
             return new TranslationSubscriber($app, $this->localeParamName);
         };
         $app['locale'] = $this->config['default'];
-        $app['app.locale'] = explode('-', $app['locale'])[0];
     }
 
     public function subscribe(Container $app, EventDispatcherInterface $dispatcher)
@@ -111,10 +112,22 @@ class TranslationServiceProvider implements ServiceProviderInterface, EventListe
     protected function addValidatorTranslation(Translator $translator, $appRootDir, $locale)
     {
         $basePath = $this->joinPaths($appRootDir, '/vendor/symfony/validator/Resources/translations');
-        $file = $basePath . DIRECTORY_SEPARATOR . 'validators.' . $locale . '.xlf';
+        $file = $basePath . DIRECTORY_SEPARATOR . 'validators.' . $this->getShortLocale($locale) . '.xlf';
         if (file_exists($file)) {
             $translator->addResource('xliff', $file, $locale, 'validators');
         }
         return;
+    }
+
+    /**
+     * Get two-letter locale used by vendor libs
+     * @todo Replace with `intl` extension
+     *
+     * @param string $locale
+     * @return string
+     */
+    protected function getShortLocale(string $locale): string
+    {
+        return explode(self::LOCALE_DELIMITER, $locale)[0];
     }
 }

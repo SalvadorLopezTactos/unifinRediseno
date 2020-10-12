@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -15,6 +14,8 @@ require('config.php');
 global $sugar_config;
 global $timedate;
 global $mod_strings;
+
+use Sugarcrm\Sugarcrm\Security\Password\Utilities;
 
 $Team = new Team();
 $Team_id = $Team->retrieve_team_id('Administrator');
@@ -63,5 +64,13 @@ $sugar_config['passwordsetting']['minpwdlength'] = 6;
 $sugar_config['passwordsetting']['oneupper'] = true;
 $sugar_config['passwordsetting']['onelower'] = true;
 $sugar_config['passwordsetting']['onenumber'] = true;
+
+// Create Portal Start Reset Password Email Template
+$id = Utilities::addPortalPasswordSeedData($Team_id, $mod_strings, 'lostpasswordtmpl');
+$sugar_config['portalpasswordsetting']['lostpasswordtmpl'] = $id;
+
+// Create Portal Confirm Reset Password Email Template
+$id = Utilities::addPortalPasswordSeedData($Team_id, $mod_strings, 'resetpasswordtmpl');
+$sugar_config['portalpasswordsetting']['resetpasswordtmpl'] = $id;
 
 write_array_to_file("sugar_config", $sugar_config, "config.php");

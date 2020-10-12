@@ -18,20 +18,24 @@
             {{#if feed.link}}</a>{{/if}}
         </h4>
         <ul>
-        {{#each feed.entries}}
-            <li class="news-article">
-                <a href="{{link}}">{{title}}</a>
-                {{#if author}} - {{str "LBL_RSS_FEED_AUTHOR"}} {{author}}{{/if}}
-            </li>
-        {{/each}}
-        <ul>
+            {{#each feed.entries}}
+                <li class="news-article">
+                    {{#if isClickable}}
+                        <a href="{{link}}">{{title}}</a>
+                    {{else}}
+                        <span>{{link}}</span>
+                    {{/if}}
+                    {{#if author}} - {{str "LBL_RSS_FEED_AUTHOR"}} {{author}}{{/if}}
+                </li>
+            {{/each}}
+        </ul>
     </div>
 {{else}}
     <div class="block-footer">
         {{#if errorThrown}}
-        {{str "LBL_NO_DATA_AVAILABLE"}}
+            {{str "LBL_NO_DATA_AVAILABLE"}}
         {{else}}
-        {{loading 'LBL_ALERT_TITLE_LOADING'}}
+            {{loading 'LBL_ALERT_TITLE_LOADING'}}
         {{/if}}
     </div>
 {{/if}}

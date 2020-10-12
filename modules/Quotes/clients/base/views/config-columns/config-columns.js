@@ -74,6 +74,32 @@
 
         this.productsFieldMeta = app.metadata.getModule('Products', 'fields');
 
+        //If service duration value and unit exists
+        //Add a custom service_duration field in the productsFieldMeta
+        if (!_.isUndefined(this.productsFieldMeta.service_duration_value) &&
+            !_.isUndefined(this.productsFieldMeta.service_duration_unit)) {
+
+            var durationField = {
+                'name': 'service_duration',
+                'type': 'fieldset',
+                'css_class': 'service-duration-field',
+                'label': 'LBL_SERVICE_DURATION',
+                'inline': true,
+                'show_child_labels': false,
+                'fields': [
+                    this.productsFieldMeta.service_duration_value,
+                    this.productsFieldMeta.service_duration_unit,
+                ],
+                'related_fields': [
+                    'service_start_date',
+                    'service_end_date',
+                    'renewable',
+                    'service',
+                ],
+            };
+            this.productsFieldMeta.service_duration = durationField;
+        }
+
         this.defaultFields = [];
 
         // pluck all the fields arrays from panels and flatten into one array
@@ -298,6 +324,13 @@
         var isUnchecked = newState === 'unchecked';
         var columnChanged = false;
         var toggleRelatedFields;
+        var serviceRelatedFieldsArr = [
+            'service_duration',
+            'service_start_date',
+            'service_end_date',
+            'renewable',
+            'service'
+        ];
 
         if (!wasVisible && isNowVisible) {
             // field was not visible, but now is visible
@@ -328,12 +361,34 @@
             // add the column to header fields
             this.listHeaderView.addColumnHeaderField(fieldViewDef);
 
+            // if a service field is added, then add all its related fields to the worksheet column as well
+            if (_.intersection(fieldVarDef.related_fields, serviceRelatedFieldsArr).length > 0) {
+                _.each(fieldVarDef.related_fields, function(relField) {
+                    var relatedFieldVarDef = this.productsFieldMeta[relField];
+                    fieldViewDef = {};
+                    fieldViewDef = {
+                        name: relatedFieldVarDef.name,
+                        type: relatedFieldVarDef.type,
+                        label: relatedFieldVarDef.vname || relatedFieldVarDef.label
+                    };
+                    fieldViewDef.labelModule = this._getFieldLabelModule(relatedFieldVarDef);
+                    this.listHeaderView.addColumnHeaderField(fieldViewDef);
+                }, this);
+            }
+
             toggleRelatedFields = true;
             columnChanged = true;
         } else if (wasVisible && !isNowVisible) {
             // field was visible, but now is not visible, so remove from columns
             // remove the column from header fields
             this.listHeaderView.removeColumnHeaderField(fieldVarDef);
+            // if a service field is removed, then remove all its related fields to the worksheet column as well
+            if (_.intersection(fieldVarDef.related_fields, serviceRelatedFieldsArr).length > 0) {
+                _.each(fieldVarDef.related_fields, function(relField) {
+                    var relatedFieldVarDef = this.productsFieldMeta[relField];
+                    this.listHeaderView.removeColumnHeaderField(relatedFieldVarDef);
+                }, this);
+            }
 
             toggleRelatedFields = false;
             columnChanged = true;
@@ -404,6 +459,45 @@
      */
     onConfigPanelShow: function() {
         if (this.dependentFields) {
+            //picking the service duration value and unit
+            //these will be reinserted in the panelFields as a single fieldset
+            var durationValueField =
+                _.find(this.panelFields, function(field) { return field.name === 'service_duration_value'; });
+            var durationUnitField =
+                _.find(this.panelFields, function(field) { return field.name === 'service_duration_unit'; });
+
+            //If service duration value and unit exists, don't add these to the howto panel columns
+            //instead, add a custom service_duration field that ecapsulates both
+            if (!_.isUndefined(durationValueField) && !_.isUndefined(durationUnitField)) {
+                //removing the service duration unit and value fields from the howto panel
+                this.panelFields = _.without(this.panelFields, durationUnitField, durationValueField);
+
+                var durationField = {
+                    'name': 'service_duration',
+                    'type': 'tristate-checkbox',
+                    'css_class': 'service-duration-field',
+                    'label': 'LBL_SERVICE_DURATION',
+                    'labelModule': 'Products',
+                    'fields': [
+                        {
+                            'name': 'service_duration_value',
+                            'label': 'LBL_SERVICE_DURATION_VALUE',
+                        },
+                        {
+                            'name': 'service_duration_unit',
+                            'label': 'LBL_SERVICE_DURATION_UNIT',
+                        }
+                    ],
+                    'relatedFields': [
+                        'service',
+                        'service_start_date',
+                        'service_end_date',
+                        'renewable',
+                    ],
+                    'eventViewName': this.eventViewName,
+                };
+                this.panelFields = _.union(this.panelFields, [durationField]);
+            }
             this.context.trigger('config:fields:change', this.eventViewName, this.panelFields);
         }
     },

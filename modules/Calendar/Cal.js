@@ -875,9 +875,6 @@
 		var rd = CAL.get("cal-edit");
 		var content = CAL.get("edit-dialog-content");
 		
-		if(CAL.dashlet && rd){
-			document.getElementById("content").appendChild(rd);
-		}
 			
 		rd.style.width = params.width + "px";				
 		content.style.height = params.height + "px";

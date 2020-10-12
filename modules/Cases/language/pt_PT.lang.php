@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard de lista de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard de registo de casos',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalhes da ocorrência',
 
 	'ERR_DELETE_RECORD'					=> 'Um número de registo deverá ser especificado para eliminar a Conta.',
 	'LBL_ACCOUNT_ID'					=> 'ID da Entidade',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contactos',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Ocorrências',
 	'LBL_DESCRIPTION'					=> 'Descrição:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Anexar Ficheiro',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Anexar Ficheiro',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Histórico',
 	'LBL_INVITEE'						=> 'Contactos',
 	'LBL_MEMBER_OF'						=> 'Entidade',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Criado Por Nome do Utilizador',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome do Utilizador Atribuído',
     'LBL_EXPORT_TEAM_COUNT' => 'Total de Equipas',
+    'LBL_CHANGETIMERS' => 'Alterar temporizadores',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Histórico de Contactos',
@@ -141,4 +144,11 @@ Para criar um {{module_name}}:
 - Os campos marcados como "Obrigatório" deverão ser preenchidos antes de gravar.
 - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
 2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Não encontrou o que procura?',
+    'LBL_CREATE_CASE' => 'Crie um {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detalhes de SLA',
+    'LBL_HOURS' => 'Horas',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

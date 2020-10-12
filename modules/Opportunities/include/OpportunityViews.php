@@ -77,13 +77,26 @@ class OpportunityViews
                 // lets make sure the field is Available
                 foreach ($fields as $k => $val) {
                     if ($val['name'] == $fieldName) {
-                        $handleSave = $handleSave | $parser->addField($val);
+                        // Special case in which the renewal badge field must be
+                        // added to the record header rather than the body
+                        if ($fieldName === 'renewal') {
+                            $val['type'] = 'renewal';
+                            $val['dismiss_label'] = true;
+                            $status = $parser->addFieldToHeader($val);
+                            $handleSave = $handleSave | $status;
+                        } else {
+                            $handleSave = $handleSave | $parser->addField($val);
+                        }
                         break;
                     }
                 }
             } else {
                 if ($fieldAction === false) {
-                    $handleSave = $handleSave | $parser->removeField($fieldName);
+                    $status = $parser->removeField($fieldName);
+                    if (!$status) {
+                        $status = $parser->removeFieldFromHeader($fieldName);
+                    }
+                    $handleSave = $handleSave | $status;
                 }
             }
         }

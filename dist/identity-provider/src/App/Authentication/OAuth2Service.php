@@ -175,7 +175,7 @@ class OAuth2Service
         /** @var User $user */
         $user = $userToken->getUser();
 
-        $claims = $this->claimsService->getUserClaims($user);
+        $claims = $this->claimsService->getUserClaims($user, $token->getScopes());
         $claims['tid'] = $token->getTenantSRN();
 
         $body = [
@@ -268,5 +268,14 @@ class OAuth2Service
     public function refreshAccessToken()
     {
         return $this->oAuth2Provider->refreshAccessToken();
+    }
+
+    /**
+     * Get client ID for the application
+     * @return string
+     */
+    public function getClientID(): string
+    {
+        return $this->oAuth2Provider->getClientID();
     }
 }

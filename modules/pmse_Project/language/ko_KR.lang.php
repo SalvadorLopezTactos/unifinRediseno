@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => '상태',
   'LBL_PRJ_MODULE' => '대상 모듈',
+  'LBL_PRJ_RUN_ORDER' => '주문 실행',
   'LBL_PMSE_BUTTON_SAVE' => '저장하기',
   'LBL_PMSE_BUTTON_CANCEL' => '취소',
   'LBL_PMSE_BUTTON_YES' => '예',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '프로세스 정의 가져오기가 완료되었지만 비즈니스 규칙이 선택되지 않은 비즈니스 규칙 작업이 하나 이상 포함되어 있습니다.',
     'LBL_BPM_IMPORT_SELECT' => '이 프로세스 정의에는 다음 비즈니스 규칙 및 이메일 템플릿이 포함됩니다.'
         . '가져올 항목을 선택하십시오.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => '비즈니스 규칙',
     'LBL_EMAIL_TEMPLATES' => '이메일 템플릿',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => '감독자',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '사용자에 의해 생성',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '사용자에 의해 최종 수정',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => '시스템 이메일',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '비즈니스 규칙',
     'LBL_PMSE_LABEL_RULE' => '규칙',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '사용자 할당',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '레코드에서 "~에게 할당됨"을 업데이트',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '관련 레코드 추가',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '연관 모듈',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '활동의 이름은 비어 있습니다.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '이름 "% s 님이"이미 모양 가족에 존재합니다.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => '날',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => '시',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => '분',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => '업무 시간',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => '업무 센터',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => '발신 목표 모듈',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => '발신',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' 모듈',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => '문자열, 숫자 및 부울',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => '번호',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => '가치',

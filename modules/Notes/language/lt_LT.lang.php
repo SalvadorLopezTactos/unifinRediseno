@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Redaguota',
     'LBL_DELETED' => 'Ištrintas',
     'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
+    'LBL_ENTRY_SOURCE' => 'Pastabos šaltinis',
+    'LBL_SOURCE_EXTERNAL' => 'Išorinis',
+    'LBL_SOURCE_INTERNAL' => 'Vidinis',
 
     // Help Text
     // List View Help Text

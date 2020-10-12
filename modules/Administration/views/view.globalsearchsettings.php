@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\AdminSettings;
 
@@ -89,6 +90,10 @@ class AdministrationViewGlobalsearchsettings extends SugarView
      */
     public function display()
     {
+        // give admin unrestricted access to all modules
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
+
         global $mod_strings, $app_strings, $app_list_strings, $current_user;
         $sugarConfig = SugarConfig::getInstance();
 

@@ -14,6 +14,7 @@ namespace Sugarcrm\IdentityProvider\App\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotExistsException;
 use Sugarcrm\IdentityProvider\Authentication\Tenant;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 
@@ -38,7 +39,7 @@ class TenantRepository
      * @param string $id
      * @return Tenant
      *
-     * @throws \RuntimeException
+     * @throws TenantNotExistsException
      */
     public function findTenantById(string $id): Tenant
     {
@@ -48,12 +49,11 @@ class TenantRepository
                 [Converter::normalizeTenantId($id)]
             );
         } catch (DBALException $e) {
-            throw new \RuntimeException('Tenant not found');
+            throw new TenantNotExistsException('Tenant not found');
         }
 
-
         if (empty($data)) {
-            throw new \RuntimeException('Tenant not found');
+            throw new TenantNotExistsException('Tenant not found');
         }
 
         return Tenant::fromArray($data);

@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Udgiv godkendte artikler og udløbne KB-artikler.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlagt job',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Genopbyg unormale team-sikkerhedsdata',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Kør e-mail-påmindelser sender',
 'LBL_CLEANJOBQUEUE' => 'Rens job kø',
 'LBL_CLEANOLDRECORDLISTS' => 'Oprydning i gamle rekord lister',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
 'LBL_PMSEENGINECRON' => 'SugarBPM-planlægger',
 );
 

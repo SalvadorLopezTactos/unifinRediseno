@@ -56,12 +56,6 @@ Touched:
 - modules/KBOLDDocuments/SearchUtils.php
 - modules/EmailMan/EmailMan.php
 - modules/EmailMan/EmailManDelivery.php
-- modules/Charts/Dashlets/MyForecastingChartDashlet/MyForecastingChartDashlet.php
-- modules/Charts/Dashlets/MyModulesUsedChartDashlet/MyModulesUsedChartDashlet.php
-- modules/Charts/Dashlets/MyTeamModulesUsedChartDashlet/MyTeamModulesUsedChartDashlet.php
-- modules/Charts/code/Chart_lead_source_by_outcome.php
-- modules/Charts/code/Chart_pipeline_by_lead_source.php
-- modules/Charts/PredefinedChart.php
 - modules/ProjectTask/ProjectTask.php
 - modules/ProjectTask/MyProjectTasks.php
 - modules/ProductBundles/ProductBundle.php
@@ -112,10 +106,8 @@ Touched:
 - modules/TeamNotices/DisplayNotices.php
 - modules/TeamNotices/DefaultNotices.php
 - modules/TeamNotices/EditView.php
-- modules/TeamNotices/Dashlets/TeamNoticesDashlet/TeamNoticesDashlet.php
 - modules/DCEActions/dceActionUtils.php
 - modules/ProspectLists/Duplicate.php
-- modules/Trackers/TrackerReporter.php
 - modules/Trackers/populateSeedData.php
 - data/Link.php
 - data/SugarBean.php
@@ -134,13 +126,10 @@ Touched:
 - include/MVC/View/SugarView.php
 - include/MVC/SugarApplication.php
 - include/ListView/ListViewData.php
-- soap/SoapPortalUsers.php
 - install/populateSeedData.php
 - install/seed_data/dceSeedData.php
 - examples/SoapTestDCE.php
-- examples/SoapTestPortal.php
 - examples/SoapFullTest.php
-- examples/SoapPortalFullTest.php
 
 r29406 - 2007-11-08 16:36:28 -0800 (Thu, 08 Nov 2007) - bsoufflet - Bug 17690 : [RC] No license and/or entry point check in the files
 

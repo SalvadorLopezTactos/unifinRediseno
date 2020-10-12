@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Moduł docelowy',
+  'LBL_PRJ_RUN_ORDER' => 'Kolejność uruchamiania',
   'LBL_PMSE_BUTTON_SAVE' => 'Zapisz',
   'LBL_PMSE_BUTTON_CANCEL' => 'Anuluj',
   'LBL_PMSE_BUTTON_YES' => 'Tak',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Zaimportowano Definicję procesu, ale zawiera ona jedną lub więcej akcji Reguł biznesowych, dla których Reguły biznesowe nie zostały określone.',
     'LBL_BPM_IMPORT_SELECT' => 'Ta definicja procesu zawiera następujące reguły biznesowe i szablony wiadomości e-mail. '
         . 'Wybierz pliki do zaimportowania.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Reguły biznesowe',
     'LBL_EMAIL_TEMPLATES' => 'Szablony wiadomości e-mail',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Przełożony',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Utworzono przez',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Ostatnio zmodyfikowane przez:',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail systemu',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Zasada biznesowa',
     'LBL_PMSE_LABEL_RULE' => 'Zasada',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Przydziel użytkownika',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aktualizuj pole Przypisane do rekordu',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Dodaj powiązany rekord',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Moduł powiązany',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Nazwa działania jest pusta.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Nazwa %s istnieje już w rodzinie kształtów.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dni',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'godzin',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minut',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'godziny pracy',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Centrum biznesowe',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Z modułu docelowego',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Od ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Moduł',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Szereg, numer i wartość logiczna',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Numer',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Wartość',

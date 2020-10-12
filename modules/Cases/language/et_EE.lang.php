@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Juhtumite loendi töölaud',
     'LBL_CASES_RECORD_DASHBOARD' => 'Juhtumikirjete töölaud',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Juhtumi üksikasjad',
 
 	'ERR_DELETE_RECORD'					=> 'Konto kustutamiseks täpsustage kirje numbrit.',
 	'LBL_ACCOUNT_ID'					=> 'Konto ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontaktid',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Juhtumid',
 	'LBL_DESCRIPTION'					=> 'Kirjeldus:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Faili manus',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Faili manus',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Ajalugu',
 	'LBL_INVITEE'						=> 'Kontaktid',
 	'LBL_MEMBER_OF'						=> 'Konto',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Looja kasutajanimi',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutajanimi',
     'LBL_EXPORT_TEAM_COUNT' => 'Meeskonna arv',
+    'LBL_CHANGETIMERS' => 'Muuda taimereid',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Seotud kontakti meilid',
@@ -140,4 +143,11 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
 - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
 - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Kas te ei leidnud, mida otsisite?',
+    'LBL_CREATE_CASE' => 'Loo {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA üksikasjad',
+    'LBL_HOURS' => 'Tundi',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

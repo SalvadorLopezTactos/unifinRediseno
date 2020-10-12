@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'שונה בתאריך',
     'LBL_DELETED' => 'נמחק',
     'LBL_REVENUELINEITEMS' => 'שורות פרטי הכנסה',
+    'LBL_ENTRY_SOURCE' => 'מקור הפתק',
+    'LBL_SOURCE_EXTERNAL' => 'חיצוני',
+    'LBL_SOURCE_INTERNAL' => 'פנימי',
 
     // Help Text
     // List View Help Text

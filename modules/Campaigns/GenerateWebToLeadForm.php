@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -545,23 +544,17 @@ if(!empty($boolean_fields)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='bool_id' name='bool_id' value='$boolean_fields'></td></tr>";
 }
 
-
 $Web_To_Lead_Form_html .= "</table >";
 $Web_To_Lead_Form_html .="</form>";
 
 $Web_To_Lead_Form_html .="<script type='text/javascript'>
  function submit_form(){
- 	if(typeof(validateCaptchaAndSubmit)!='undefined'){
- 		validateCaptchaAndSubmit();
- 	}else{
- 		check_webtolead_fields();
- 	}
+ 	check_webtolead_fields();
  }
  function check_webtolead_fields(){
      if(document.getElementById('bool_id') != null){
         var reqs=document.getElementById('bool_id').value;
         bools = reqs.substring(0,reqs.lastIndexOf(';'));
-        var bool_fields = new Array();
         var bool_fields = bools.split(';');
         nbr_fields = bool_fields.length;
         for(var i=0;i<nbr_fields;i++){
@@ -576,7 +569,6 @@ $Web_To_Lead_Form_html .="<script type='text/javascript'>
     if(document.getElementById('req_id') != null){
         var reqs=document.getElementById('req_id').value;
         reqs = reqs.substring(0,reqs.lastIndexOf(';'));
-        var req_fields = new Array();
         var req_fields = reqs.split(';');
         nbr_fields = req_fields.length;
         var req = true;

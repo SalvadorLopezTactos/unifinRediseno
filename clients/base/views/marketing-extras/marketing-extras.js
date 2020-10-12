@@ -17,6 +17,12 @@
     marketingContentUrl: '',
 
     /**
+     * Url of background image.
+     * @property {string}
+     */
+    backgroundImageUrl: '',
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -62,8 +68,9 @@
             var url = app.api.buildURL('login/content', null, null, {selected_language: language});
             app.api.call('read', url, null, {
                 success: _.bind(function(contents) {
-                    if (contents && !_.isEmpty(contents.content_url)) {
+                    if (contents && !_.isEmpty(contents.content_url) && !_.isEmpty(contents.image_url)) {
                         this.marketingContentUrl = contents.content_url;
+                        this.backgroundImageUrl = contents.image_url;
                         this.render();
                     }
                 }, this)

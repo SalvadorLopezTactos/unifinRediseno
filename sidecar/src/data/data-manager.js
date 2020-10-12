@@ -753,12 +753,15 @@ const DataManager = _.extend({
         if (!meta || !meta.fields || !meta.fields[link]) {
             return false;
         }
-        if (meta.fields[link].link_type) {
-            return meta.fields[link].link_type === 'many';
+
+        var linkType = meta.fields[link].link_type || meta.fields[link]['link-type'];
+        if (linkType) {
+            return linkType === 'many';
         }
         var name = meta.fields[link].relationship;
         var relationship = SUGAR.App.metadata.getRelationship(name);
-        var t = relationship.relationship_type.split('-');
+        var rel = relationship.true_relationship_type || relationship.relationship_type;
+        var t = rel.split('-');
         var type;
         if (meta.fields[link].side) {
             type = meta.fields[link].side === 'left' ? t[0] : t[2];

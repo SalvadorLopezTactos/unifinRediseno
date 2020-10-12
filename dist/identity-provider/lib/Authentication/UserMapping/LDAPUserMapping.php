@@ -21,6 +21,7 @@ use Symfony\Component\Ldap\Entry;
  */
 class LDAPUserMapping implements MappingInterface
 {
+    use FieldMapper;
     /**
      * IdP to App mapping fields.
      * @var array
@@ -40,13 +41,14 @@ class LDAPUserMapping implements MappingInterface
      */
     public function map($entry)
     {
-        $result = [];
+        $entryData = [];
         foreach ($this->mapping as $idpKey => $appKey) {
             $value = $this->getEntryValue($entry, $idpKey);
             if (!is_null($value)) {
-                $result[$appKey] = $value;
+                $entryData[$idpKey] = $value;
             }
         }
+        $result = $this->mapEntry($entryData, $this->mapping);
         return $result;
     }
 

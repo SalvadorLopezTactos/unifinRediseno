@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Priekšteča ID',
     'LBL_READ' => 'Izlasīts',
     'LBL_UNREAD' => 'Nelasīts',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Jūs pieminēja',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Jūs pieminēja',
 );

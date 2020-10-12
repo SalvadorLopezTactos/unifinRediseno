@@ -29,7 +29,6 @@ class File implements Factory
     protected static $defaults = array(
         'dir' => '.',
         'name' => 'sugarcrm',
-        'ext' => 'log',
         'suffix' => '',
         'dateFormat' => '%c',
     );
@@ -43,7 +42,7 @@ class File implements Factory
     {
         $config = array_merge(self::$defaults, $config);
 
-        $path = $this->getFilePath($config['dir'], $config['name'], $config['ext'], $config['suffix']);
+        $path = $this->getFilePath($config['dir'], $config['name'], $config['suffix']);
         $handler = new StreamHandler($path, $level);
 
         $formatter = new BackwardCompatibleFormatter($config['dateFormat']);
@@ -61,10 +60,9 @@ class File implements Factory
      * @param string $suffix File suffix
      * @return string
      */
-    protected function getFilePath($dir, $name, $ext, $suffix)
+    protected function getFilePath($dir, $name, $suffix)
     {
         $dir = rtrim($dir, '/');
-        $ext = ltrim($ext, '.');
         $path = $dir . '/' . $name;
 
         if ($suffix && $this->isFileNameSuffixValid($suffix)) {
@@ -72,9 +70,7 @@ class File implements Factory
             $path .= '_' . date(str_replace('%', '', $suffix));
         }
 
-        if ($ext) {
-            $path .= '.' . $ext;
-        }
+        $path .= '.log';
 
         return $path;
     }

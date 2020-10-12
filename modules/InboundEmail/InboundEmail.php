@@ -12,7 +12,6 @@
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
-use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /**
  * Stub for certain interactions;
@@ -44,7 +43,10 @@ class InboundEmail extends SugarBean {
 	var $modified_by_name;
 	var $name;
 	var $status;
-	var $server_url;
+    /**
+     * @var RemoteSystemName
+     */
+    private $remoteSystemName;
 	var $email_user;
 	var $email_password;
 	var $port;
@@ -101,7 +103,7 @@ class InboundEmail extends SugarBean {
 	// object attributes
 	var $compoundMessageId; // concatenation of messageID and deliveredToEmail
 	var $serverConnectString;
-	var $InboundEmailCachePath;
+    public $EmailCachePath;
 	var $InboundEmailCacheFile			= 'InboundEmail.cache.php';
 	var $object_name					= 'InboundEmail';
 	var $module_dir					= 'InboundEmail';
@@ -139,10 +141,9 @@ class InboundEmail extends SugarBean {
 	 * Sole constructor
 	 */
 	public function __construct() {
-	    $this->InboundEmailCachePath = sugar_cached('modules/InboundEmail');
 	    $this->EmailCachePath = sugar_cached('modules/Emails');
 	    parent::__construct();
-		if(function_exists("imap_timeout")) {
+        if (extension_loaded('imap')) {
 			/*
 			 * 1: Open
 			 * 2: Read
@@ -159,7 +160,51 @@ class InboundEmail extends SugarBean {
 		$this->imagePrefix = "{$GLOBALS['sugar_config']['site_url']}/cache/images/";
 	}
 
-	/**
+    public function __set($name, $value)
+    {
+        switch ($name) {
+            case 'server_url':
+                if ($value === null || $value === '') {
+                    $this->remoteSystemName = null;
+
+                    return;
+                }
+
+                try {
+                    $this->remoteSystemName = RemoteSystemName::fromString($value);
+                } catch (\DomainException $exception) {
+                    $GLOBALS['log']->fatal(
+                        'Unable to set InboundEmail::$server_url: ' . $exception->getMessage()
+                    );
+                }
+                break;
+            default:
+                $this->$name = $value;
+        }
+    }
+
+    public function &__get($name)
+    {
+        switch ($name) {
+            case 'server_url':
+                $server_url = $this->remoteSystemName !== null? $this->remoteSystemName->value() : null;
+                return $server_url;
+            default:
+                return parent::__get($name);
+        }
+    }
+
+    public function __isset($name)
+    {
+        switch ($name) {
+            case 'server_url':
+                return $this->remoteSystemName !== null;
+            default:
+                return parent::__isset($name);
+        }
+    }
+
+    /**
 	 * retrieves I-E bean
 	 * @param string id
 	 * @return object Bean
@@ -239,17 +284,16 @@ class InboundEmail extends SugarBean {
 	 */
 	function renameFolder($oldName, $newName) {
 		$this->connectMailserver();
-        $oldConnect = $this->getConnectString('', $oldName);
-        $newConnect = $this->getConnectString('', $newName);
+        $oldConnect = $this->getMailbox('', $oldName)->value();
+        $newConnect = $this->getMailbox('', $newName)->value();
 		if(!imap_renamemailbox($this->conn, $oldConnect , $newConnect)) {
 			$GLOBALS['log']->debug("***INBOUNDEMAIL: failed to rename mailbox [ {$oldConnect} ] to [ {$newConnect} ]");
 		} else {
         	$this->mailbox = str_replace($oldName, $newName, $this->mailbox);
         	$this->save();
-        	$sessionFoldersString  = $this->getSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol);
+            $sessionFoldersString = $this->getSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
         	$sessionFoldersString = str_replace($oldName, $newName, $sessionFoldersString);
-			$this->setSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol, $sessionFoldersString);
-
+            $this->setSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $sessionFoldersString);
 		}
 	}
 
@@ -898,7 +942,7 @@ class InboundEmail extends SugarBean {
 			$GLOBALS['log']->info("*** INBOUNDEMAIL: opening socket connection");
 			$exServ = explode('::', $this->service);
 			$socket  = ($exServ[2] == 'ssl') ? "ssl://" : "tcp://";
-			$socket .= $this->server_url;
+            $socket .= $this->remoteSystemName->value();
 			$this->pop3socket = fsockopen($socket, $this->port);
 		} else {
 			$GLOBALS['log']->info("*** INBOUNDEMAIL: REUSING socket connection");
@@ -1907,16 +1951,16 @@ class InboundEmail extends SugarBean {
 	/**
 	 * Deletes the specified folder
 	 * @param string $mbox "::" delimited IMAP mailbox path, ie, INBOX.saved.stuff
-	 * @return bool
+     * @return array
 	 */
-    public function deleteFolder($mbox)
+    public function deleteFolder($mbox): array
     {
         $returnArray = array();
         if ($this->getCacheCount($mbox) > 0) {
             $returnArray['status']       = false;
             $returnArray['errorMessage'] = "Can not delete {$mbox} as it has emails.";
         } else {
-            $connectString = $this->getConnectString('', $mbox);
+            $connectString = $this->getMailbox('', $mbox)->value();
             //Remove Folder cache
             unlink("{$this->EmailCachePath}/{$this->id}/folders/folders.php");
             if (imap_unsubscribe($this->conn, imap_utf7_encode($connectString))) {
@@ -1924,14 +1968,14 @@ class InboundEmail extends SugarBean {
                     $this->mailbox = str_replace(("," . $mbox), "", $this->mailbox);
                     $this->save();
                     $sessionFoldersString = $this->getSessionInboundFoldersString(
-                        $this->server_url,
+                        $this->remoteSystemName,
                         $this->email_user,
                         $this->port,
                         $this->protocol
                     );
                     $sessionFoldersString = str_replace(("," . $mbox), "", $sessionFoldersString);
                     $this->setSessionInboundFoldersString(
-                        $this->server_url,
+                        $this->remoteSystemName,
                         $this->email_user,
                         $this->port,
                         $this->protocol,
@@ -1976,16 +2020,16 @@ class InboundEmail extends SugarBean {
 
         $newFolder = $mbox . $delimiter . $name;
         $mbox .= $delimiter.str_replace($delimiter, "_", $name);
-        $connectString = $this->getConnectString('', $mbox);
+        $connectString = $this->getMailbox('', $mbox)->value();
 
 		if(imap_createmailbox($this->conn, imap_utf7_encode($connectString))) {
 			imap_subscribe($this->conn, imap_utf7_encode($connectString));
 			$status = imap_status($this->conn, str_replace("{$delimiter}{$name}","",$connectString), SA_ALL);
         	$this->mailbox = $this->mailbox . "," . $newFolder;
         	$this->save();
-        	$sessionFoldersString  = $this->getSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol);
+            $sessionFoldersString = $this->getSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
         	$sessionFoldersString = $sessionFoldersString . "," . $newFolder;
-			$this->setSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol, $sessionFoldersString);
+            $this->setSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $sessionFoldersString);
 
 			echo json_encode($status);
 			return true;
@@ -2210,7 +2254,7 @@ class InboundEmail extends SugarBean {
 		$this->name = $ie_name;
 		$this->group_id = $groupId;
 		$this->status = $_REQUEST['ie_status'];
-		$this->server_url = trim($_REQUEST['server_url']);
+        $this->remoteSystemName = RemoteSystemName::fromString(trim($_REQUEST['server_url']));
 		$this->email_user = trim($_REQUEST['email_user']);
 		if(!empty($_REQUEST['email_password'])) {
 		    $this->email_password = html_entity_decode($_REQUEST['email_password'], ENT_QUOTES);
@@ -2245,7 +2289,7 @@ class InboundEmail extends SugarBean {
 		}
 
 		$this->protocol = $_REQUEST['protocol']; // need to set this again since we safe the "service" string to empty explode values
-		$opts = $this->getSessionConnectionString($this->server_url, $this->email_user, $this->port, $this->protocol);
+        $opts = $this->getSessionConnectionOptions($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
 		$detectedOpts = $this->findOptimumSettings($useSsl);
 
 		//If $detectedOpts is empty, there was an error connecting, so clear $opts. If $opts was empty, use $detectedOpts
@@ -2253,7 +2297,7 @@ class InboundEmail extends SugarBean {
 		{
 		  $opts = $detectedOpts;
 		}
-		$delimiter = $this->getSessionInboundDelimiterString($this->server_url, $this->email_user, $this->port, $this->protocol);
+        $delimiter = $this->getSessionInboundDelimiterString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
 
 		if(isset($opts['serial']) && !empty($opts['serial'])) {
 			$this->service = $opts['serial'];
@@ -2334,12 +2378,12 @@ class InboundEmail extends SugarBean {
 
 	function getFoldersListForMailBox() {
 		$return = array();
-		$foldersList = $this->getSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol);
+        $foldersList = $this->getSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
 		if (empty($foldersList)) {
 			global $mod_strings;
 			$msg = $this->connectMailserver(true);
 			if (strpos($msg, "successfully")) {
-				$foldersList = $this->getSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol);
+                $foldersList = $this->getSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol);
 				$return['status'] = true;
 				$return['foldersList'] = $foldersList;
 				$return['statusMessage'] = "";
@@ -2357,9 +2401,17 @@ class InboundEmail extends SugarBean {
 	/**
 	 * Programatically determines best-case settings for imap_open()
 	 */
-	function findOptimumSettings($useSsl=false, $user='', $pass='', $server='', $port='', $prot='', $mailbox='') {
+    public function findOptimumSettings(
+        $useSsl = false,
+        $user = '',
+        $pass = '',
+        ?RemoteSystemName $remoteSystemName = null,
+        $port = '',
+        $prot = '',
+        $mailboxName = ''
+    ) {
 		global $mod_strings;
-		$serviceArr = array();
+        $mailboxes = [];
 		$returnService = array();
 		$badService = array();
 		$goodService = array();
@@ -2369,7 +2421,7 @@ class InboundEmail extends SugarBean {
 							'bad' => $badService,
 							'err' => $errorArr);
 
-		if(!function_exists('imap_open')) {
+        if (!extension_loaded('imap')) {
 			$retArray['err'][0] = $mod_strings['ERR_NO_IMAP'];
 			return $retArray;
 		}
@@ -2413,10 +2465,10 @@ class InboundEmail extends SugarBean {
 		if(isset($user) && !empty($user) && isset($pass) && !empty($pass)) {
 			$this->email_password = $pass;
 			$this->email_user = $user;
-			$this->server_url = $server;
+            $this->remoteSystemName = $remoteSystemName;
 			$this->port = $port;
 			$this->protocol = $prot;
-			$this->mailbox = $mailbox;
+            $this->mailbox = $mailboxName;
 		}
 
 		// in case we flip from IMAP to POP3
@@ -2427,22 +2479,13 @@ class InboundEmail extends SugarBean {
 		$a_mailbox = explode(",", $this->mailbox);
 		$tmpMailbox = isset($a_mailbox[0]) ? $a_mailbox[0] : "";
 
-		if($useSsl == true)
-		{
-			foreach($ssl as $k => $service)
-			{
-				$returnService[$k] = 'foo'.$service;
-				$serviceArr[$k] = '{'.$this->server_url.':'.$this->port.'/service='.$this->protocol.$service.'}'.$tmpMailbox;
-			}
-		}
-		else
-		{
-			foreach($nonSsl as $k => $service)
-			{
-				$returnService[$k] = 'foo'.$service;
-				$serviceArr[$k] = '{'.$this->server_url.':'.$this->port.'/service='.$this->protocol.$service.'}'.$tmpMailbox;
-			}
-		}
+        if (null !== $this->remoteSystemName) {
+            $servicesList = $useSsl ? $ssl : $nonSsl;
+            foreach ($servicesList as $k => $service) {
+                $returnService[$k] = 'foo' . $service;
+                $mailboxes[$k] = $this->getMailbox($service, $tmpMailbox);
+            }
+        }
 
 		$GLOBALS['log']->debug('---------------STARTING FINDOPTIMUMS LOOP----------------');
 		$l = 1;
@@ -2454,13 +2497,12 @@ class InboundEmail extends SugarBean {
 		$login = $this->email_user;
 		$passw = $this->email_password;
 		$foundGoodConnection = false;
-		foreach($serviceArr as $k => $serviceTest) {
-			$errors = '';
-			$alerts = '';
-			$GLOBALS['log']->debug($l.': I-E testing string: '.$serviceTest);
+        foreach ($mailboxes as $k => $mailbox) {
+            $serviceTest = $mailbox->value();
+            $GLOBALS['log']->debug($l . ': I-E testing string: ' . $serviceTest);
 
-			// open the connection and try the test string
-			$this->conn = $this->getImapConnection($serviceTest, $login, $passw);
+            // open the connection and try the test string
+            $this->conn = $this->getImapConnection($mailbox, $login, $passw);
 
 			if(($errors = imap_last_error()) || ($alerts = imap_alerts())) {
 				if($errors == 'Too many login failures' || $errors == '[CLOSED] IMAP connection broken (server response)') { // login failure means don't bother trying the rest
@@ -2496,7 +2538,7 @@ class InboundEmail extends SugarBean {
 							$delimiter = $mbox->delimiter;
 						} // if
 					} // foreach
-					$this->setSessionInboundDelimiterString($this->server_url, $this->email_user, $this->port, $this->protocol, $delimiter);
+                    $this->setSessionInboundDelimiterString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $delimiter);
 				} // if
 
 				if(!imap_close($this->conn)) $GLOBALS['log']->debug('imap_close() failed!');
@@ -2547,8 +2589,9 @@ class InboundEmail extends SugarBean {
 			$goodStr['serial'] = $newTls.'::'.$newCert.'::'.$newSsl.'::'.$this->protocol.'::'.$newNovalidate_cert.'::'.$newNotls.'::'.$secure;
 			$goodStr['service'] = $good;
 			$testConnectString = str_replace('foo','', $good);
-			$testConnectString = '{'.$this->server_url.':'.$this->port.'/service='.$this->protocol.$testConnectString.'}';
-			$this->setSessionConnectionString($this->server_url, $this->email_user, $this->port, $this->protocol, $goodStr);
+            $testConnectString = '{' . $this->remoteSystemName->value() . ':' . $this->port
+                . '/service=' . $this->protocol . $testConnectString . '}';
+            $this->setSessionConnectionOptions($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $goodStr);
 			$i = 0;
 			foreach($raw as $mbox)
 			{
@@ -2556,42 +2599,58 @@ class InboundEmail extends SugarBean {
 				$i++;
 			} // foreach
 			sort($raw);
-			$this->setSessionInboundFoldersString($this->server_url, $this->email_user, $this->port, $this->protocol, implode(",", $raw));
+            $this->setSessionInboundFoldersString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, implode(",", $raw));
 			return $goodStr;
 		} else {
 			return false;
 		}
 	}
 
-	function getSessionConnectionString($server_url, $email_user, $port, $protocol) {
-		$sessionConnectionString = $server_url . $email_user . $port . $protocol;
-		return (isset($_SESSION[$sessionConnectionString]) ? $_SESSION[$sessionConnectionString] : "");
-	}
+    public function getSessionConnectionOptions(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
+    {
+        $sessionConnectionString = $remoteSystemName->value() . $email_user . $port . $protocol;
+        return (isset($_SESSION[$sessionConnectionString]) ? $_SESSION[$sessionConnectionString] : "");
+    }
 
-	function setSessionConnectionString($server_url, $email_user, $port, $protocol, $goodStr) {
-		$sessionConnectionString = $server_url . $email_user . $port . $protocol;
-		$_SESSION[$sessionConnectionString] = $goodStr;
-	}
+    public function setSessionConnectionOptions(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol, $goodStr)
+    {
+        $sessionConnectionString = $remoteSystemName->value() . $email_user . $port . $protocol;
+        $_SESSION[$sessionConnectionString] = $goodStr;
+    }
 
-	function getSessionInboundDelimiterString($server_url, $email_user, $port, $protocol) {
-		$sessionInboundDelimiterString = $server_url . $email_user . $port . $protocol . "delimiter";
-		return (isset($_SESSION[$sessionInboundDelimiterString]) ? $_SESSION[$sessionInboundDelimiterString] : "");
-	}
+    public function getSessionInboundDelimiterString(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
+    {
+        $sessionInboundDelimiterString = $remoteSystemName->value() . $email_user . $port . $protocol . 'delimiter';
+        return (isset($_SESSION[$sessionInboundDelimiterString]) ? $_SESSION[$sessionInboundDelimiterString] : "");
+    }
 
-	function setSessionInboundDelimiterString($server_url, $email_user, $port, $protocol, $delimiter) {
-		$sessionInboundDelimiterString = $server_url . $email_user . $port . $protocol . "delimiter";
-		$_SESSION[$sessionInboundDelimiterString] = $delimiter;
-	}
+    public function setSessionInboundDelimiterString(
+        RemoteSystemName $remoteSystemName,
+        $email_user,
+        $port,
+        $protocol,
+        $delimiter
+    ) {
+        $sessionInboundDelimiterString = $remoteSystemName->value() . $email_user . $port . $protocol . 'delimiter';
+        $_SESSION[$sessionInboundDelimiterString] = $delimiter;
+    }
 
-	function getSessionInboundFoldersString($server_url, $email_user, $port, $protocol) {
-		$sessionInboundFoldersListString = $server_url . $email_user . $port . $protocol . "foldersList";
-		return (isset($_SESSION[$sessionInboundFoldersListString]) ? $_SESSION[$sessionInboundFoldersListString] : "");
-	}
+    public function getSessionInboundFoldersString(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
+    {
+        $sessionInboundFoldersListString = $remoteSystemName->value() . $email_user . $port . $protocol . 'foldersList';
+        return (isset($_SESSION[$sessionInboundFoldersListString]) ? $_SESSION[$sessionInboundFoldersListString] : "");
+    }
 
-	function setSessionInboundFoldersString($server_url, $email_user, $port, $protocol, $foldersList) {
-		$sessionInboundFoldersListString = $server_url . $email_user . $port . $protocol . "foldersList";
-		$_SESSION[$sessionInboundFoldersListString] = $foldersList;
-	}
+    public function setSessionInboundFoldersString(
+        RemoteSystemName $remoteSystemName,
+        $email_user,
+        $port,
+        $protocol,
+        $foldersList
+    ) {
+        $sessionInboundFoldersListString = $remoteSystemName->value() . $email_user . $port . $protocol . 'foldersList';
+        $_SESSION[$sessionInboundFoldersListString] = $foldersList;
+    }
 
 	/**
 	 * Checks for duplicate Group User names when creating a new one at save()
@@ -2731,6 +2790,9 @@ class InboundEmail extends SugarBean {
 			$email->parent_id = $caseId;
 			// assign the email to the case owner
 			$email->assigned_user_id = $c->assigned_user_id;
+            // Tell the case to recalc its SLAs
+            $c->pending_processing = true;
+            $c->save();
 			$email->save();
 			$GLOBALS['log']->debug('InboundEmail found exactly 1 match for a case: '.$c->name);
 			return true;
@@ -2801,6 +2863,7 @@ class InboundEmail extends SugarBean {
 			$c->team_id = $_REQUEST['team_id'];
 			$c->team_set_id = $_REQUEST['team_set_id'];
             $c->acl_team_set_id = $_REQUEST['acl_team_set_id'];
+            $c->pending_processing = true;
 			if(!empty($email->reply_to_email)) {
 				$contactAddr = $email->reply_to_email;
 			} else {
@@ -4725,20 +4788,25 @@ eoq;
 		return $ret;
 	}
 
-	/**
-	 * Constructs the resource connection string that IMAP needs
-	 * @param string $service Service string, will generate if not passed
-	 * @return string
-	 */
-	function getConnectString($service='', $mbox='', $includeMbox=true) {
-		$service = empty($service) ? $this->getServiceString() : $service;
-		$mbox = empty($mbox) ? $this->mailbox : $mbox;
-
-		$connectString = '{'.$this->server_url.':'.$this->port.'/service='.$this->protocol.$service.'}';
-		$connectString .= ($includeMbox) ? $mbox : "";
-
-		return $connectString;
-	}
+    /**
+     * @param string $service Service string, will generate if not passed
+     * @return Mailbox
+     */
+    public function getMailbox($service = '', $mbox = '', $includeMbox = true): Mailbox
+    {
+        $mbox = $mbox ?: $this->mailbox;
+        $service = $service ?: $this->service;
+        $flags = ['/service=' . $this->protocol];
+        if (!empty($service)) {
+            $services = array_filter(explode('::', str_replace('/', '::', $service)));
+            foreach ($services as $v) {
+                if (!empty($v) && ($v !== 'imap' && $v !== 'pop3')) {
+                    $flags[] = '/' . $v;
+                }
+            }
+        }
+        return Mailbox::fromRemoteSystemName($this->remoteSystemName, $this->port, $flags, $includeMbox ? $mbox : '');
+    }
 
 	function disconnectMailserver() {
 		if(is_resource($this->conn)) {
@@ -4756,7 +4824,7 @@ eoq;
 	 */
 	function connectMailserver($test=false, $force=false) {
 		global $mod_strings;
-		if(!function_exists("imap_open")) {
+        if (!extension_loaded('imap')) {
 			$GLOBALS['log']->debug('------------------------- IMAP libraries NOT available!!!! die()ing thread.----');
 			return $mod_strings['LBL_WARN_NO_IMAP'];
 		}
@@ -4782,7 +4850,7 @@ eoq;
 			$service = $this->getServiceString();
 		}
 
-		$connectString = $this->getConnectString($service, $this->mailbox);
+        $mailbox = $this->getMailbox($service, $this->mailbox);
 
 		/*
 		 * Try to recycle the current connection to reduce response times
@@ -4795,21 +4863,21 @@ eoq;
 
 			if(imap_ping($this->conn)) {
 				// we have a live connection
-				imap_reopen($this->conn, $connectString, CL_EXPUNGE);
+                imap_reopen($this->conn, $mailbox->value(), CL_EXPUNGE);
 			}
 		}
 
 		// final test
 		if(!is_resource($this->conn) && !$test) {
-			$this->conn = $this->getImapConnection($connectString, $this->email_user, $this->email_password, CL_EXPUNGE);
+            $this->conn = $this->getImapConnection($mailbox, $this->email_user, $this->email_password, CL_EXPUNGE);
 		}
 
 		if($test) {
 			if ($opts == false && !is_resource($this->conn)) {
-				$this->conn = $this->getImapConnection($connectString, $this->email_user, $this->email_password, CL_EXPUNGE);
+                $this->conn = $this->getImapConnection($mailbox, $this->email_user, $this->email_password, CL_EXPUNGE);
 			}
-			$errors = '';
 			$alerts = '';
+            $msg = '';
 			$successful = false;
 			if(($errors = imap_last_error()) || ($alerts = imap_alerts())) {
 				if($errors == 'Mailbox is empty') { // false positive
@@ -4826,31 +4894,6 @@ eoq;
 			if($successful) {
 				if($this->protocol == 'imap') {
 					$msg .= $mod_strings['LBL_TEST_SUCCESSFUL'];
-					/*
-					$testConnectString = '{'.$this->server_url.':'.$this->port.'/service='.$this->protocol.$service.'}';
-					if (!is_resource($this->conn)) {
-						$this->conn = imap_open($connectString, $this->email_user, $this->email_password, CL_EXPUNGE);
-					}
-					$list = imap_getmailboxes($this->conn, $testConnectString, "*");
-					if(isset($_REQUEST['personal']) && $_REQUEST['personal'] == 'true') {
-						$msg .= $mod_strings['LBL_TEST_SUCCESSFUL'];
-					} elseif (is_array($list)) {
-						sort($list);
-						_ppd($boxes);
-
-						$msg .= '<b>'.$mod_strings['LBL_FOUND_MAILBOXES'].'</b><p>';
-						foreach ($list as $key => $val) {
-							$mb = imap_utf7_decode(str_replace($testConnectString,'',$val->name));
-							$msg .= '<a onClick=\'setMailbox(\"'.$mb.'\"); window.close();\'>';
-							$msg .= $mb;
-							$msg .= '</a><br>';
-						}
-					} else {
-						$msg .= $errors;
-						$msg .= '<p>'.$mod_strings['ERR_MAILBOX_FAIL'].imap_last_error().'</p>';
-						$msg .= '<p>'.$mod_strings['ERR_TEST_MAILBOX'].'</p>';
-					}
-					*/
 				} else {
 					$msg .= $mod_strings['LBL_POP3_SUCCESS'];
 				}
@@ -4871,7 +4914,7 @@ eoq;
 	function checkImap() {
 		global $mod_strings;
 
-		if(!function_exists('imap_open')) {
+        if (!extension_loaded('imap')) {
 			echo '
 			<table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view">
 				<tr height="20">
@@ -4895,14 +4938,14 @@ eoq;
      * Attempt to create an IMAP connection using passed in parameters
      * return either the connection resource or false if unable to connect
      *
-     * @param  string  $mailbox  Mailbox to be used to create imap connection
+     * @param  Mailbox  $mailbox  Mailbox to be used to create imap connection
      * @param  string  $username The user name
      * @param  string  $password The password associated with the username
      * @param  integer $options  Bitmask for options parameter to the imap_open function
      *
      * @return resource|boolean  Connection resource on success, FALSE on failure
      */
-    protected function getImapConnection($mailbox, $username, $password, $options = 0)
+    protected function getImapConnection(Mailbox $mailbox, $username, $password, $options = 0)
     {
         $connection = null;
         $authenticators = array('', 'GSSAPI', 'NTLM');
@@ -4916,7 +4959,7 @@ eoq;
                 $params = array();
             }
 
-            $connection = imap_open($mailbox, $username, $password, $options, 0, $params);
+            $connection = imap_open($mailbox->value(), $username, $password, $options, 0, $params);
         }
 
         return $connection;
@@ -5210,7 +5253,7 @@ eoq;
 					$GLOBALS['log']->debug("INBOUNDEMAIL: could not imap_mail_copy() [ {$uids} ] to folder [ {$toFolder} ] from folder [ {$fromFolder} ]");
 				}
 			} else {
-                $connectStringToFolder = $this->getConnectString('', $toFolder);
+                $connectStringToFolder = $this->getMailbox('', $toFolder)->value();
                 $imapStatus = imap_status($this->conn, $connectStringToFolder, SA_UIDNEXT);
 
                 if ($imapStatus && imap_mail_move($this->conn, $uids, $toFolder, CP_UID)) {

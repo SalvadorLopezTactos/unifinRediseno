@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Omjer proporcija slike mora biti između 1:1 i 10:1. Veličina slike bit će promijenjena.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Omjer proporcija slike mora biti između 3:1 i 20:1. Učitajte novu datoteku ovih proporcija.',
     'ERR_ALERT_FILE_UPLOAD' => 'Pogreška tijekom učitavanja slike.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Izrada direktorija za slike neuspješna',
     'LBL_LOGGER'=>'Postavke zapisivača',
 	'LBL_LOGGER_FILENAME'=>'Naziv datoteke zapisnika',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Nastavak',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimalna veličina zapisnika',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Zadani oblik datuma',
 	'LBL_LOGGER_LOG_LEVEL'=>'Razina zapisnika',
@@ -458,6 +458,10 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Postavke zapisnika komentara',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimalni broj znakova za prikaz po unosu komentara',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

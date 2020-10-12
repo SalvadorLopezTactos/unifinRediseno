@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Komerciniai pasiūlymai (adresas siuntoms)',
 	'LNK_ACCOUNT_REPORTS' => 'Klientų ataskaitos',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentai',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paskyrų sąrašo ataskaitų sritis',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paskyrų duomenų ataskaitų sritis',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kliento informacija',
+    'LBL_NEXT_RENEWAL_DATE' => 'Kito atnaujinimo data',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kliento pavadinimas / pramonės šaka',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vieta',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikai',

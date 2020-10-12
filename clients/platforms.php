@@ -15,3 +15,5 @@ $platforms[] = 'mobile';
 $platforms[] = 'portal';
 $platforms[] = 'opi';
 $platforms[] = 'lpi';
+$platforms[] = 'collabspot';
+$platforms[] = 'collabspotbackend';

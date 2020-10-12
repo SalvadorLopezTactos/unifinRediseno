@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Производители',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Продуктови категории',
   'LNK_NEW_PRODUCT_TYPE' => 'Типове продукти',
-  'LNK_NEW_PRODUCT' => 'Въвеждане на продукт',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Транспортни фирми',
   'LNK_PRODUCT_LIST' => 'Продуктов каталог',
   'NTC_DELETE_CONFIRMATION' => 'Сигурни ли сте, че желаете да изтриете този запис?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Продуктови категории',
   'LBL_MANUFACTURERS' => 'Производители',
   'LBL_PRODUCT_TYPES' => 'Типове продукти',
-
+  'LBL_RENEWABLE' => 'Подновяема',
+  'LBL_SERVICE' => 'Услуга',
 );
-
-
-?>

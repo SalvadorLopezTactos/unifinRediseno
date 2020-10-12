@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Connection;
 
 /**
  * OpportunitiesCurrencyRateUpdate
@@ -49,31 +50,27 @@ class OpportunitiesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
     public function doCustomUpdateRate($table, $column, $currencyId)
     {
         // get the conversion rate
-        $rate = $this->db->getOne(sprintf("SELECT conversion_rate FROM currencies WHERE id = '%s'", $currencyId));
+        $rate = $this->db->getConnection()
+            ->executeQuery(
+                'SELECT conversion_rate FROM currencies WHERE id = ?',
+                [$currencyId]
+            )->fetchColumn();
 
         $stages = $this->getClosedStages();
 
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = '%s'
-        WHERE sales_stage NOT IN ('%s')
-        AND currency_id = '%s'",
-            $table,
-            $column,
-            $rate,
-            implode("','", $stages),
-            $currencyId
-        );
-        // execute
-        $result = $this->db->query(
-            $query,
-            true,
-            string_format(
-                $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array('OpportunitiesCurrencyRateUpdate',$query
-                )
-            )
-        );
-        return !empty($result);
+        $query = <<<SQL
+UPDATE {$table} SET {$column} = ?
+WHERE sales_stage NOT IN (?)
+AND currency_id = ?
+SQL;
+        $this->db->getConnection()
+            ->executeUpdate(
+                $query,
+                [$rate, $stages, $currencyId],
+                [null, Connection::PARAM_STR_ARRAY, null]
+            );
+        return true;
     }
 
     /**
@@ -95,26 +92,19 @@ class OpportunitiesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
 
         $stages = $this->getClosedStages();
 
-        // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s / base_rate
-            WHERE sales_stage NOT IN ('%s')
-            AND currency_id = '%s'",
-            $tableName,
-            $usDollarColumn,
-            $amountColumn,
-            implode("','", $stages),
-            $currencyId
-        );
-        // execute
-        $result = $this->db->query(
-            $query,
-            true,
-            string_format(
-                $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array('OpportunitiesCurrencyRateUpdate', $query)
-            )
-        );
-        return !empty($result);
+        $query = <<<SQL
+UPDATE {$tableName} SET {$usDollarColumn} = {$amountColumn} / base_rate
+WHERE sales_stage NOT IN (?)
+AND currency_id = ?
+SQL;
+        $this->db->getConnection()
+            ->executeUpdate(
+                $query,
+                [$stages, $currencyId],
+                [Connection::PARAM_STR_ARRAY, null]
+            );
+
+        return true;
     }
 
     /**

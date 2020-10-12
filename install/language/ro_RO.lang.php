@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pentru o experienta optima in utilizarea IIS/FastCGI sapi, setati fastcgi.logging la valoarea 0 in fisierul dumneavoastrà php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalarea versiunii PHP nu este acceptata:(ver',
     'LBL_DB_UNAVAILABLE'                => 'Baza de date indisponibila',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nu s-a găsit Asistență baze de date. Asiguraţi-vă că dețineți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. Va trebui să eliminați extensia din fişierul php.ini sau să recompilaţi cu fişierul binar corect, în funcţie de versiunea dumneavoastră de PHP. Consultaţi Manualul PHP pentru mai multe informaţii despre cum să activaţi Asistență baze de date.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nu s-a găsit Asistență baze de date. Asiguraţi-vă că aveți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. Va trebui să eliminați extensia din fişierul php.ini sau să recompilaţi cu fişierul binar corect, în funcţie de versiunea dumneavoastră de PHP. Consultaţi Manualul PHP pentru mai multe informaţii despre cum să activaţi Asistență baze de date.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functiile asociate cu Librariile de parsare XML care sunt necesare aplicatiei Sugar nu au fost gasite. S-ar putea sa fie nevoie sa scoateti extensia in fisierul php.ini, sau sa recompilati cu fisierul binar corect, in functie de versiunea dumneavoastra de PHP. Va rugam sa reveniti la manualul PHP pentru mai multe informatii.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator de numere aleatorii',
     'ERR_CHECKSYS_MBSTRING'             => 'Functii asociate cu extensia "Multibyte Strings" (mbstring) care sunt necesare pentru Sugar nu au fost gasite pe server. <br />In general modulul mbstring nu este activat in mod implicit si trebuie activat cu directiva --enable-mbstring cand binarul Php este construit. Va rugam consultati manualul Php pentru mai multe informatii asupra modului in care poate fi activat suportul pentru mbstring',
@@ -476,6 +475,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Selectaţi un fişier patch de pe computerul local',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Modulul de compatibilitate PHP Backward este activat.Seteaza zend.ze1_compatibility_modela Off pt a trece mai departe',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Informatii de cont noi',
         'description' => 'Acest şablon este folosit când administratorul de sistem trimite o nouă parolă pentru un utilizator',
@@ -492,4 +627,32 @@ $mod_strings = array(
 'Solicitarea dvs privind $contact_user_pwd_last_changed resetarea parolei contului<br />Faceţi clic pe link-ul de mai jos pentru a reseta parola:<br /><br />$ contact_user_link_guid',
         'name' => 'Specifica Nume',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'E-mail cu parola uitată pentru portal',
+    'subject' => 'Resetați parola contului dumneavoastră',
+    'description' => 'Acest șablon este folosit pentru a trimite utilizatorului un link pe care să facă clic pentru a reseta parola pentru contul de utilizator al portalului.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ați solicitat recent să resetați parola contului dumneavoastră. </p><p>Faceți clic pe link-ul de mai jos pentru a reseta parola:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Ați solicitat recent să resetați parola contului dumneavoastră.
+
+    Faceți clic pe link-ul de mai jos pentru a reseta parola:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'E-mail de confirmare a resetării parolei portalului',
+        'subject' => 'Parola contului dumneavoastră a fost resetată',
+        'description' => 'Acest șablon este folosit pentru a trimite o confirmare la un utilizator al portalului privind resetarea parolei contului său.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Acest e-mail vă confirmă că parola contului dumneavoastră de portal a fost resetată. </p><p>Folosiți link-ul de mai jos pentru a vă conecta la portal:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Acest e-mail vă confirmă că parola contului dumneavoastră de portal a fost resetată.
+
+    Folosiți link-ul de mai jos pentru vă conecta la portal:
+
+    $portal_login_url',
+    ],
 );

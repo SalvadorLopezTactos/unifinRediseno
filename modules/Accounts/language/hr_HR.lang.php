@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Ponude (dostaviti korisniku)',
 	'LNK_ACCOUNT_REPORTS' => 'Prikaz izvješća o računu',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis računa',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o računu',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalji računa',
+    'LBL_NEXT_RENEWAL_DATE' => 'Datum sljedeće obnove',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Naziv računa / industrija',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Lokacija',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikoni',

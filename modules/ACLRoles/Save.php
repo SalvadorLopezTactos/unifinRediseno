@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /** @var ACLRole $role */
 $role = BeanFactory::newBean('ACLRoles');
@@ -50,6 +50,10 @@ if(!empty($_REQUEST['name'])){
             ) {
                 $value = $tbaConfigurator->getFallbackByAccess($value);
             }
+            if (!AccessControlManager::instance()->allowModuleAccess($aclAction->category)) {
+                $value = $tbaConfigurator->getFallbackByAccess($value);
+            }
+
     		$role->setAction($role->id,$name, $value);
     	}
     	if(substr_count($name, 'flc_guid') > 0){
@@ -60,6 +64,11 @@ if(!empty($_REQUEST['name'])){
             ) {
                 $value = $tbaConfigurator->getFallbackByAccess($value);
             }
+
+            if (!AccessControlManager::instance()->allowFieldAccess($aclAction->category, $name)) {
+                $value = $tbaConfigurator->getFallbackByAccess($value);
+            }
+
     		ACLField::setAccessControl($flc_module, $role->id, $name, $value);
     	}
     	

@@ -237,10 +237,14 @@ EOD
                     'region' => $tenantSrn->getRegion(),
                 ]);
                 $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $this->bean->id);
-                $msg = sprintf(
-                    translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
-                    $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
-                );
+                if (empty($this->bean->user_name)) {
+                    $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY', 'Users');
+                } else {
+                    $msg = sprintf(
+                        translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
+                        $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
+                    );
+                }
             } else {
                 $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER', 'Users');
             }

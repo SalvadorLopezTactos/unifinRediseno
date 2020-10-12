@@ -37,7 +37,7 @@ $viewdefs['Meetings']['mobile']['view']['edit'] = array(
                         array(
                             'name' => 'date_end',
                             'required' => true,
-                            'readonly' => false,  
+                            'readonly' => false,
                         ),
                     ),
                 ),
@@ -77,6 +77,7 @@ $viewdefs['Meetings']['mobile']['view']['edit'] = array(
                     ),
                 ),
                 'description',
+                'tag',
                 'parent_name',
                 'assigned_user_name',
                 'team_name',

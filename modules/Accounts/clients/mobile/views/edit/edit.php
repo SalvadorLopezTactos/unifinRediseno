@@ -42,6 +42,7 @@ $viewdefs['Accounts']['mobile']['view']['edit'] = array(
                     ),
                 ),
                 'email',
+                'tag',
                 'billing_address_street',
                 'billing_address_city',
                 'billing_address_state',

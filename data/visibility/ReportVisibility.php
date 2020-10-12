@@ -9,6 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * Visibility limitations for Reports
@@ -17,6 +19,8 @@
 class ReportVisibility extends SugarVisibility
 {
     protected $disallowed_modules;
+
+    public const DISALLOWED_MODULES_CACHE_SUFFIX = 'reportsDisallowedModules';
 
     /**
      * (non-PHPdoc)
@@ -58,6 +62,7 @@ class ReportVisibility extends SugarVisibility
      */
     public function getDisallowedModules()
     {
+        global $current_user, $report_modules;
         if(!is_null($this->disallowed_modules)) {
             return $this->disallowed_modules;
         }
@@ -68,12 +73,18 @@ class ReportVisibility extends SugarVisibility
                 return array_keys($GLOBALS['beanList']);
             }
         }
-        $this->disallowed_modules = array();
-        foreach($GLOBALS['report_modules'] as $module => $name) {
-            $seed = BeanFactory::newBean($module);
-            if(empty($seed) || !$seed->ACLAccess("view")) {
-                $this->disallowed_modules[] = $module;
+        $cache = Container::getInstance()->get(CacheInterface::class);
+        $userCacheKey = $current_user->id . self::DISALLOWED_MODULES_CACHE_SUFFIX;
+        $this->disallowed_modules = $cache->get($userCacheKey, null);
+        if ($this->disallowed_modules === null) {
+            $this->disallowed_modules = array();
+            foreach ($report_modules as $module => $name) {
+                $seed = BeanFactory::newBean($module);
+                if (empty($seed) || !$seed->ACLAccess("view")) {
+                    $this->disallowed_modules[] = $module;
+                }
             }
+            $cache->set($userCacheKey, $this->disallowed_modules);
         }
         return $this->disallowed_modules;
     }

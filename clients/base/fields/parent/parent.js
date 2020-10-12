@@ -131,9 +131,17 @@
             module = app.lang.getModuleName(this.def.module);
         }
 
+        var label;
+        if (!_.isUndefined(module) &&
+            !this.isFieldEmpty() &&
+            this.tplName === 'detail') {
+            label = module;
+        } else {
+            label = app.lang.get(this.def.label, this.module);
+        }
         this.context.set('record_label', {
             field: this.name,
-            label: (this.tplName === 'detail') ? module : app.lang.get(this.def.label, this.module)
+            label: label
         });
 
         var parentCtx = this.context && this.context.parent,

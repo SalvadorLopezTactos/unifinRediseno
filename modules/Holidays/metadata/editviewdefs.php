@@ -39,6 +39,12 @@ $viewdefs['Holidays']['EditView'] = array(
             ),
             array(
                 array(
+                    'name' => 'name',
+                    'displayParams' => array('required' => false),
+                ),
+            ),
+            array(
+                array(
                     'name' => 'description',
                 ),
             ),
@@ -57,4 +63,4 @@ $viewdefs['Holidays']['EditView'] = array(
         ),
     )
 );
-?>
+

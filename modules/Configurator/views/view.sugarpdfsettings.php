@@ -140,41 +140,52 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
 
     private function checkUploadImage()
     {
-        $error="";
-        $files = array('sugarpdf_pdf_small_header_logo'=>$_FILES['new_small_header_logo']);
-        foreach($files as $k=>$v){
-            if(empty($error) && isset($v) && !empty($v['name'])){
-                $file_name = K_PATH_CUSTOM_IMAGES .'pdf_logo_'. basename($v['name']);
-                if(file_exists($file_name))
-                    rmdir_recursive($file_name);
-                if (!empty($v['error']))
-                    $error='ERR_ALERT_FILE_UPLOAD';
-                if(!mkdir_recursive(K_PATH_CUSTOM_IMAGES))
-                   $error='ERR_ALERT_FILE_UPLOAD';
-                if(empty($error)){
-                    if (!move_uploaded_file($v['tmp_name'], $file_name))
-                        die("Possible file upload attack!\n");
-                    if(file_exists($file_name) && is_file($file_name)){
-                        if(!empty($_REQUEST['sugarpdf_pdf_class']) && $_REQUEST['sugarpdf_pdf_class'] == "EZPDF") {
-                            if(!verify_uploaded_image($file_name, true)) {
-                                $error='LBL_ALERT_TYPE_IMAGE_EZPDF';
-                            }
-                        } else {
-                            if(!verify_uploaded_image($file_name)) {
-                                $error='LBL_ALERT_TYPE_IMAGE';
-                            }
-                        }
-                        if(!empty($error)){
-                            rmdir_recursive($file_name);
-                        }else{
-                            $_POST[$k]='pdf_logo_'. basename($v['name']);
-                        }
-                    }else{
-                        $error='ERR_ALERT_FILE_UPLOAD';
-                    }
-                }
-            }
+        if (!isset($_FILES['new_small_header_logo'])) {
+            return 'ERR_ALERT_FILE_UPLOAD';
         }
-        return $error;
+
+        $file = $_FILES['new_small_header_logo'];
+        if (!empty($file['error'])) {
+            return 'ERR_ALERT_FILE_UPLOAD';
+        }
+
+        $tmpFileName = $file['tmp_name'];
+        if (!file_exists($tmpFileName)) {
+            return 'ERR_ALERT_FILE_UPLOAD';
+        }
+
+        $jpeg_only = !empty($_REQUEST['sugarpdf_pdf_class']) && $_REQUEST['sugarpdf_pdf_class'] === 'EZPDF';
+        if (!verify_uploaded_image($tmpFileName, $jpeg_only)) {
+            unlink($tmpFileName);
+            return $jpeg_only? 'LBL_ALERT_JPG_IMAGE' : 'LBL_ALERT_TYPE_IMAGE';
+        }
+
+        $imgSize = getimagesize($tmpFileName);
+        $fileType = $imgSize['mime'];
+
+        /**
+         * Only jpeg and png are allowed, @see \verify_uploaded_image
+         */
+        switch ($fileType) {
+            case 'image/jpeg':
+                $fileExt = '.jpg';
+                break;
+            case 'image/png':
+                $fileExt = '.png';
+                break;
+            default:
+                return 'LBL_ALERT_TYPE_IMAGE';
+        }
+
+        $fileName = K_PATH_CUSTOM_IMAGES . 'sugarpdf_small_header_logo' . $fileExt;
+        if (!mkdir_recursive(K_PATH_CUSTOM_IMAGES)) {
+            return 'ERR_ALERT_CUSTOM_IMAGES_PATH';
+        }
+
+        if (move_uploaded_file($tmpFileName, $fileName)) {
+            $_POST['sugarpdf_pdf_small_header_logo'] = 'sugarpdf_small_header_logo' . $fileExt;
+        } else {
+            return 'ERR_ALERT_FILE_UPLOAD';
+        }
     }
 }

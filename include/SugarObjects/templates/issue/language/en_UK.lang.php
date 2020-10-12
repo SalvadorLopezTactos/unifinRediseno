@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Resolution',
   'LBL_LAST_MODIFIED' => 'Last Modified',
   'LBL_ASSIGNED_TO_ID'=>'Assigned To:',
-  'LBL_ASSIGNED_TO_NAME' => 'User:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'User:',
   'LBL_WORK_LOG' => 'Work Log:',
+    'LBL_FOLLOW_UP' => 'Follow Up',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Resolved Date',
+    'LBL_HOURS_TO_RESOLUTION' => 'Hours to Resolution',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Business Hours to Resolution',
+    'LBL_PENDING_PROCESSING' => 'Pending Processing',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Created by:',
   'LBL_DATE_CREATED' => 'Date Created:',
   'LBL_DATE_ENTERED' => 'Date Created:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Edit',
     'LBL_REMOVE' => 'Remove',
 
-  
+
   );

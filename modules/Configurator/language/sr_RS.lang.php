@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => '&#39;Razmera slike mora biti između 1:1 i 10:1. Veličina slike će biti promenjena.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Razmera slike mora biti između 3:1 i 20:1. Uvezite novi fajl sa ovom razmerom.',
     'ERR_ALERT_FILE_UPLOAD' => 'Greška prilikom uvoza slike.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Kreiranje direktorijuma za slike nije uspelo',
     'LBL_LOGGER'=>'Podešavanja logera',
 	'LBL_LOGGER_FILENAME'=>'Ime log fajla',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Ekstenzija',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimalna veličina loga',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Podrazumevani format datuma',
 	'LBL_LOGGER_LOG_LEVEL'=>'Nivo loga',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Podešavanja evidencije komentara',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimalan broj znakova koji mogu da se prikažu po komentaru',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

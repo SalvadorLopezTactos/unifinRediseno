@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Hinnapakkumised (saaja aadress)',
 	'LNK_ACCOUNT_REPORTS' => 'Vaata konto aruandeid',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kontode loendi töölaud',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kontokirjete töölaud',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Ettevõtte üksikasjad',
+    'LBL_NEXT_RENEWAL_DATE' => 'Järgmise uuendamise kuupäev',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Ettevõtte nimi/tööstusharu',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Asukoht',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammid',

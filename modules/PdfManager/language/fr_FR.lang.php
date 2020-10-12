@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Aperçu',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ATTENTION : Si vous changez le module principal, tous les champs déjà ajoutés au modèle devront être supprimés.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Voici le fichier que vous avez demandé (Vous pouvez changer ce texte)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Devis',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Ce modèle est utilisé pour imprimer des devis en PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'devis',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Devis (avec services)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Ce modèle est utilisé pour imprimer un devis, y compris les informations de service, en format PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'devisdeservice',
+
   'LBL_TPL_INVOICE_NAME' => 'Facture',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Ce modèle est utilisé pour imprimer des factures en PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'facture',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Facture (avec services)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Ce modèle est utilisé pour imprimer une facture, y compris les informations de service, en format PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'facturedeservice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'N° devis :',
   'LBL_TPL_SALES_PERSON' => 'Commercial :',
   'LBL_TPL_VALID_UNTIL' => 'Valide jusqu&#39;à :',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Référence',
   'LBL_TPL_PRODUCT' => 'Produit',
   'LBL_TPL_RLI' => 'Lignes de revenu',
+  'LBL_TPL_DURATION' => 'Durée',
+  'LBL_TPL_DURATION_STARTS' => 'Début:',
+  'LBL_TPL_DURATION_ENDS' => 'Fin:',
   'LBL_TPL_LIST_PRICE' => 'Prix catalogue',
   'LBL_TPL_UNIT_PRICE' => 'Prix unitaire',
   'LBL_TPL_EXT_PRICE' => 'Prix ext.',

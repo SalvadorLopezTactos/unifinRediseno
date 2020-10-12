@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Tila',
   'LBL_PRJ_MODULE' => 'Kantamoduuli',
+  'LBL_PRJ_RUN_ORDER' => 'Suoritusjärjestys',
   'LBL_PMSE_BUTTON_SAVE' => 'Tallenna',
   'LBL_PMSE_BUTTON_CANCEL' => 'Peruuta',
   'LBL_PMSE_BUTTON_YES' => 'Kyllä',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Prosessimääritelmä on tuotu, mutta se sisältää vähintään yhden yrityssäännön toiminnon, jonka yrityssääntöjä ei ole valittu.',
     'LBL_BPM_IMPORT_SELECT' => 'Tämän prosessin määrityksessä on seuraavat Liiketoimintasäännöt ja sähköpostimallit. '
         . 'Ole hyvä ja valitse ne, jotka haluat tuoda.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Liiketoimintasäännöt',
     'LBL_EMAIL_TEMPLATES' => 'Sähköpostimallit',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Ohjaaja',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Luonut käyttäjä',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Muokattu viimeksi käyttäjä',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Järjestelmäsähköposti',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Yrityssääntö',
     'LBL_PMSE_LABEL_RULE' => 'Sääntö',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Aseta käyttäjälle',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Päivitä tietueen "Vastuuhenkilö"',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Lisää liittyvä tietue',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Liittyvä moduuli',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Tämän tehtävän nimi on tyhjä.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Tehtävä “%s” on jo olemassa muotoperheessä',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'päivää',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'Kesto tunteja:',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'Kesto minuuttia:',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'aukioloajat',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Liiketoimintakeskus',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Kohdemoduulista',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Lähettäjä ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Moduuli',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Merkkijono, numero, ja boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Numero',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Arvo',

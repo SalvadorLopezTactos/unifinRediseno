@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Modul ţintă',
+  'LBL_PRJ_RUN_ORDER' => 'Aplicați ordinea',
   'LBL_PMSE_BUTTON_SAVE' => 'Salveaza',
   'LBL_PMSE_BUTTON_CANCEL' => 'Anulare',
   'LBL_PMSE_BUTTON_YES' => 'Da',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definiţia de proces a fost importată, însă conţine una sau mai multe acţiuni de tip regulă operativă pentru care regulile operative nu au fost selectate.',
     'LBL_BPM_IMPORT_SELECT' => 'Această definiție de proces conține următoarele reguli operative și modele de e-mail. '
         . 'Vă rugăm să le selectați pe cele pe care doriți să le importați.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Reguli operative',
     'LBL_EMAIL_TEMPLATES' => 'Modele de e-mail',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Supervizor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creat de utilizator',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Ultima modificare de către utilizator',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Mesaj e-mail sistem',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Regulă operativă',
     'LBL_PMSE_LABEL_RULE' => 'Regulă',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Alocă utilizator',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Actualizare „Alocat lui” din înregistrare',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Adaugă înregistrare aferentă',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Modul inrudit',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Numele activităţii nu este completat',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Numele „%s” există deja în familia de modele.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'zile',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'ore',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minute',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'program de lucru',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Centru de afaceri',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Din Modulul țintă',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'De la ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Şir, număr şi valoare booleană',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Număr',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Valoare',

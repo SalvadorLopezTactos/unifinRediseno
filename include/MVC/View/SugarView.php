@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
 /**
  * Base Sugar view
@@ -63,11 +64,11 @@ class SugarView
         'show_title' => true,
         'show_subpanels' => false,
         'show_search' => true,
-        'show_footer' => false,
         'show_javascript' => true,
         'view_print' => false,
         'use_table_container' => true
     );
+
     var $type = null;
     var $responseTime;
     var $fileResources;
@@ -81,7 +82,7 @@ class SugarView
     protected $browserTitle;
 
     /**
-     * @var Request 
+     * @var Request
      */
     protected $request;
 
@@ -168,7 +169,6 @@ class SugarView
             //this is needed for a faster loading login page ie won't render unless the tables are closed
             ob_flush();
         }
-        if ($this->_getOption('show_footer')) $this->displayFooter();
         $GLOBALS['logic_hook']->call_custom_logic('', 'after_ui_footer');
 
         //Do not track if there is no module or if module is not a String
@@ -187,29 +187,51 @@ class SugarView
             return;
         }
 
-        $config = SugarConfig::getInstance()->get('analytics');
+        $config = \SugarConfig::getInstance()->get('analytics');
 
         if (!empty($config) && !empty($config['enabled']) &&
             !empty($config['connector']) && $config['connector'] === 'Pendo' && !empty($config['id'])) {
             $apiKey = $config['id'];
 
-            // user data
+            // User data
             $visitorId = $current_user->site_user_id ?? 'unknown_user';
+
             $userType = $current_user->isAdmin() ? CurrentUserApi::TYPE_ADMIN : CurrentUserApi::TYPE_USER;
+
             $locale = Container::getInstance()->get(Localization::class);
             $language = $locale->getAuthenticatedUserLanguage();
             $language = htmlspecialchars($language, ENT_QUOTES, 'UTF-8');
+
             $roles = ACLRole::getUserRoles($current_user->id);
             $roles = count($roles) >= 1 ? implode(',', $roles) : 'no_roles';
             $roles = htmlspecialchars($roles, ENT_QUOTES, 'UTF-8');
 
-            // account data
-            $manager = new MetaDataManager();
-            $serverInfo = $manager->getServerInfo();
-            $accountId = $serverInfo['site_id'] ?? 'unknown_account';
-            $siteUrl = Container::getInstance()->get(SugarConfig::class)->get('site_url');
-            $version = $serverInfo['version'] ?? 'unknown_version';
-            $flavor = $serverInfo['flavor'] ?? 'unknown_edition';
+            $licenses = Subscription::SUGAR_BASIC_KEY;
+            try {
+                $lt = $current_user->getLicenseTypes();
+                if (is_array($lt) && !empty($lt)) {
+                    $licenses = implode(',', $lt);
+                }
+            } catch (SugarApiException $e) {
+                LoggerManager::getLogger()->fatal(
+                    sprintf(
+                        'Could not get user license types: %s',
+                        $e->getMessage()
+                    )
+                );
+            }
+
+            // For analytics
+            $info = MetaDataManager::getManager()->getServerInfo();
+            $account = array_merge(
+                [
+                    'id' => $info['site_id'] ?? 'unknown_account',
+                    'domain' => Container::getInstance()->get(SugarConfig::class)->get('site_url'),
+                    'edition' => $info['flavor'] ?? 'unknown_edition',
+                    'version' => $info['version'] ?? 'unknown_version',
+                ],
+                Administration::getSettings(false, true)->getUpdatedAnalyticData($info)
+            );
 
             echo "<script>
                 (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];
@@ -223,14 +245,10 @@ class SugarView
                         id: '$visitorId',
                         user_type: '$userType',
                         language: '$language',
-                        roles: '$roles'
+                        roles: '$roles',
+                        licenses: '$licenses'
                     },
-                    account: {
-                        id: '$accountId',
-                        domain: '$siteUrl',
-                        edition: '$flavor',
-                        version: '$version'
-                    }
+                    account: " . json_encode($account) . "
                 });
             </script>";
         }
@@ -246,7 +264,7 @@ class SugarView
         $errors = '';
 
         foreach($this->errors as $error) {
-            $errors .= '<span class="error">' . $error . '</span><br>';
+            $errors .= '<span class="error">' . htmlspecialchars($error) . '</span><br>';
         }
 
         if ( !$this->suppressDisplayErrors ) {
@@ -489,10 +507,6 @@ class SugarView
                 ? $current_user->user_name : $current_user->full_name );
             $ss->assign("CURRENT_USER_ID", $current_user->id);
 
-            // get the last viewed records
-            $tracker = BeanFactory::newBean('Trackers');
-            $history = $tracker->get_recently_viewed($current_user->id);
-            $ss->assign("recentRecords",$this->processRecentRecords($history));
         }
 
         $bakModStrings = $mod_strings;
@@ -730,163 +744,6 @@ EOHTML;
 		return getVersionedScript("cache/jsLanguage/{$this->module}/". $GLOBALS['current_language'] . '.js', $GLOBALS['sugar_config']['js_lang_version']);
 	}
 
-    /**
-     * Called from process(). This method will display the footer on the page.
-     * @deprecated since 7.0, will be removed from 7.2.
-     */
-    public function displayFooter()
-    {
-        // TODO make me a function
-        $message = sprintf(
-            "Deprecated as of '%s'. Will be removed with '%s'; in '%s'.",
-            '7.0',
-            '7.2',
-            __FILE__
-        );
-        $GLOBALS['log']->deprecated($message);
-
-        // TODO check if we need this on flav < PRO
-
-        /*
-        if (empty($this->responseTime)) {
-            $this->_calculateFooterMetrics();
-        }
-        global $sugar_config;
-        global $app_strings;
-        global $mod_strings;
-		$themeObject = SugarThemeRegistry::current();
-        //decide whether or not to show themepicker, default is to show
-        $showThemePicker = true;
-        if (isset($sugar_config['showThemePicker'])) {
-            $showThemePicker = $sugar_config['showThemePicker'];
-        }
-
-        $ss = new Sugar_Smarty();
-        $ss->assign("AUTHENTICATED",isset($_SESSION["authenticated_user_id"]));
-        $ss->assign('MOD',return_module_language($GLOBALS['current_language'], 'Users'));
-        $ss->assign('use_table_container', (isset($this->options['use_table_container']) ? $this->options['use_table_container'] : false));
-
-		$bottomLinkList = array();
-		 if (isset($this->action) && $this->action != "EditView") {
-			 $bottomLinkList['print'] = array($app_strings['LNK_PRINT'] => getPrintLink());
-		}
-		$bottomLinkList['backtotop'] = array($app_strings['LNK_BACKTOTOP'] => 'javascript:SUGAR.util.top();');
-
-		$bottomLinksStr = "";
-		foreach($bottomLinkList as $key => $value) {
-			foreach($value as $text => $link) {
-				   $href = $link;
-				   if(substr($link, 0, 11) == "javascript:") {
-                       $onclick = " onclick=\"".substr($link,11)."\"";
-                       $href = "javascript:void(0)";
-                   } else {
-                   		$onclick = "";
-                   	}
-                $imageURL = SugarThemeRegistry::current()->getImageURL($key.'.gif');
-				$bottomLinksStr .= "<a href=\"{$href}\"";
-				$bottomLinksStr .= (isset($onclick)) ? $onclick : "";
-				$bottomLinksStr .= "><img src='{$imageURL}' alt=''>"; //keeping alt blank on purpose for 508 (text will be read instead)
-				$bottomLinksStr .= " ".$text."</a>";
-			}
-		}
-		$ss->assign("BOTTOMLINKS",$bottomLinksStr);
-        if (SugarConfig::getInstance()->get('calculate_response_time', false))
-            $ss->assign('STATISTICS',$this->_getStatistics());
-
-        // Under the License referenced above, you are required to leave in all copyright statements in both
-        // the code and end-user application.
-
-
-
-
-
-        $copyright = '&copy; 2004-2013 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br>';
-
-
-        // You are required to leave in all copyright statements in both the
-        // code and end-user application as well as the the powered by image.
-        // You can not change the url or the image below.
-        $attribLinkImg = "<A href='http://www.sugarcrm.com' target='_blank'><img style='margin-top: 2px' border='0' width='120' height='34' src='".getJSPath('include/images/poweredby_sugarcrm_65.png')."' alt='Powered By SugarCRM'></A>\n";
-
-		// handle resizing of the company logo correctly on the fly
-        $companyLogoURL = $themeObject->getImageURL('company_logo.png', true, true);
-        $companyLogoURL_arr = explode('?', $companyLogoURL);
-        $companyLogoURL = $companyLogoURL_arr[0];
-
-        $company_logo_attributes = sugar_cache_retrieve('company_logo_attributes');
-        if(!empty($company_logo_attributes)) {
-            $ss->assign("COMPANY_LOGO_MD5", $company_logo_attributes[0]);
-            $ss->assign("COMPANY_LOGO_WIDTH", $company_logo_attributes[1]);
-            $ss->assign("COMPANY_LOGO_HEIGHT", $company_logo_attributes[2]);
-        }
-        else {
-            // Always need to md5 the file
-            $ss->assign("COMPANY_LOGO_MD5", md5_file($companyLogoURL));
-
-            list($width,$height) = getimagesize($companyLogoURL);
-            if ( $width > 212 || $height > 40 ) {
-                $resizePctWidth  = ($width - 212)/212;
-                $resizePctHeight = ($height - 40)/40;
-                if ( $resizePctWidth > $resizePctHeight )
-                    $resizeAmount = $width / 212;
-                else
-                    $resizeAmount = $height / 40;
-                $ss->assign("COMPANY_LOGO_WIDTH", round($width * (1/$resizeAmount)));
-                $ss->assign("COMPANY_LOGO_HEIGHT", round($height * (1/$resizeAmount)));
-            }
-            else {
-                $ss->assign("COMPANY_LOGO_WIDTH", $width);
-                $ss->assign("COMPANY_LOGO_HEIGHT", $height);
-            }
-
-            // Let's cache the results
-            sugar_cache_put('company_logo_attributes',
-                            array(
-                                $ss->get_template_vars("COMPANY_LOGO_MD5"),
-                                $ss->get_template_vars("COMPANY_LOGO_WIDTH"),
-                                $ss->get_template_vars("COMPANY_LOGO_HEIGHT")
-                                )
-            );
-        }
-        $ss->assign("COMPANY_LOGO_URL",getJSPath($companyLogoURL)."&logo_md5=".$ss->get_template_vars("COMPANY_LOGO_MD5"));
-
-        // Bug 38594 - Add in Trademark wording
-        $copyright .= 'SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.<br />';
-
-        //rrs bug: 20923 - if this image does not exist as per the license, then the proper image will be displayed regardless, so no need
-        //to display an empty image here.
-        if(file_exists('include/images/poweredby_sugarcrm_65.png')){
-            $copyright .= $attribLinkImg;
-        }
-        // End Required Image
-        $ss->assign('COPYRIGHT',$copyright);
-        if(isset($GLOBALS['current_user']) && !empty($GLOBALS['current_user']->id))
-        {
-            $dcm = DCFactory::getContainer(null, 'DCMenu');
-            $ss->assign('DYNAMICDCACTIONS',$dcm->getPartnerIconMenus());
-        }
-
-        // here we allocate the help link data
-        $help_actions_blacklist = array('Login'); // we don't want to show a context help link here
-        if (!in_array($this->action,$help_actions_blacklist)) {
-            $url = 'javascript:void(window.open(\'index.php?module=Administration&action=SupportPortal&view=documentation&version='.$GLOBALS['sugar_version'].'&edition='.$GLOBALS['sugar_flavor'].'&lang='.$GLOBALS['current_language'].
-                        '&help_module='.$this->module.'&help_action='.$this->action.'&key='.$GLOBALS['server_unique_key'].'\'))';
-            $label = (isset($GLOBALS['app_list_strings']['moduleList'][$this->module]) ?
-                        $GLOBALS['app_list_strings']['moduleList'][$this->module] : $this->module). ' '.$app_strings['LNK_HELP'];
-            $ss->assign('HELP_LINK',SugarThemeRegistry::current()->getLink($url, $label, "id='help_link_two'",
-                '', '',null,null,'','',"<i class='icon-question-circle icon'></i>"));
-        }
-        // end
-
-        $ss->assign('TOUR_LINK',SugarThemeRegistry::current()->getLink("javascript: void(0);", $app_strings['LNK_TOUR'], "id='tour_link'",
-            '', '',null,null,'','',"<i class='icon-road icon'></i>"));
-
-        if (!empty($GLOBALS['sugar_config']['disabled_feedback_widget']))
-            $ss->assign('DISABLE_FEEDBACK_WIDGET', TRUE);
-
-        $ss->display(SugarThemeRegistry::current()->getTemplate('footer.tpl'));
-        */
-    }
 
     /**
      * Called from process(). This method will display subpanels.
@@ -1514,22 +1371,6 @@ EOHTML;
     protected function fetchTemplate($file)
     {
         return $this->ss->fetch($file);
-    }
-
-    /**
-     * handles the tracker output, and adds a link and a shortened name.
-     * given html safe input, it will preserve html safety
-     *
-     * @param array $history - returned from the tracker
-     * @return array augmented history with image link and shortened name
-     */
-    protected function processRecentRecords($history) {
-        foreach ( $history as $key => $row ) {
-            $history[$key]['item_summary_short'] = to_html(getTrackerSubstring($row['item_summary'])); //bug 56373 - need to re-HTML-encode
-            $history[$key]['image'] = SugarThemeRegistry::current()
-                ->getImage($row['module_name'],'border="0" align="absmiddle"',null,null,'.gif',$row['item_summary']);
-        }
-        return $history;
     }
 
     /**

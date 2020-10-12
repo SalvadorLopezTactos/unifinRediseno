@@ -216,6 +216,7 @@ class registry {
 			array(
 				'user_name'=>array('name'=>'user_name', 'type'=>'xsd:string'),
 				'password' => array('name'=>'password', 'type'=>'xsd:string'),
+                'encryption' => ['name' => 'encryption', 'type' => 'xsd:string', 'minOccurs' => '0'],
 			)
 		);
 		

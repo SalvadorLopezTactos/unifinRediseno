@@ -47,6 +47,56 @@ class PMSEExpressionEvaluator
      */
     public $condition;
 
+    /**
+     * exception codes
+     */
+    protected static $exceptionCodes = array(
+        'NO_BUSINESS_CENTER' => 100,
+    );
+
+    /**
+     * Get exception code
+     * @param string $key Key of exception code
+     * @return int Exception code, or 0 if no $key is found.
+     */
+    public static function getExceptionCode(string $key) : int
+    {
+        return static::$exceptionCodes[$key] ?? 0;
+    }
+
+    /**
+     * Add exception code
+     * @param string $key Key of exception code
+     * @param int $code Exception code
+     * @return void
+     */
+    public static function addExceptionCode(string $key, int $code) : void
+    {
+        static::$exceptionCodes[$key] = $code;
+    }
+
+    /**
+     * Remove exception code
+     * @param string $key Key of exception code
+     * @return bool
+     */
+    public static function removeExceptionCode(string $key) : bool
+    {
+        $ret = static::hasExceptionCode($key);
+        unset(static::$exceptionCodes[$key]);
+        return $ret;
+    }
+
+    /**
+     * Has exception code
+     * @param string $key Key of exception code
+     * @return bool
+     */
+    public static function hasExceptionCode(string $key) : bool
+    {
+        return isset(static::$exceptionCodes[$key]);
+    }
+
     public function getCondition()
     {
         return $this->condition;
@@ -125,7 +175,10 @@ class PMSEExpressionEvaluator
                 $operationGroup,
                 $firstToken->expValue,
                 $token->expValue,
-                $secondToken->expValue
+                $secondToken->expValue,
+                null,
+                false,
+                $secondToken->expBean ?? null
             );
             $this->processTokenAttributes($resultToken);
         }
@@ -143,7 +196,11 @@ class PMSEExpressionEvaluator
                 strtolower($secondTokenExpSubtype)=='datetime') {
                 $key = 'dateDateOp';
             } elseif (strtolower($secondTokenExpSubtype)=='timespan') {
-                $key = 'dateSpanOp';
+                if (PMSEEngineUtils::isForBusinessTimeOp($secondToken->expValue)) {
+                    $key = 'dateSpanBusinessOp';
+                } else {
+                    $key = 'dateSpanOp';
+                }
             }
         } elseif (strtolower($firstTokenExpSubtype)=='timespan') {
             if (strtolower($secondTokenExpSubtype)=='date' ||
@@ -211,7 +268,8 @@ class PMSEExpressionEvaluator
         $operator,
         $secondOperand = null,
         $tokenType = null,
-        $isUpdate = false
+        $isUpdate = false,
+        $secondOperandBean = null
     ) {
         switch ($operation) {
             case 'unary':
@@ -234,6 +292,9 @@ class PMSEExpressionEvaluator
                 break;
             case 'spanDateOp':
                 $result = $this->executeSpanDateOp($firstOperand, $operator, $secondOperand);
+                break;
+            case 'dateSpanBusinessOp':
+                $result = $this->executeDateSpanBCOp($firstOperand, $operator, $secondOperand, $secondOperandBean);
                 break;
             case 'spanSpanOp':
                 $result = $this->executeSpanSpanOp($firstOperand, $operator, $secondOperand);
@@ -474,6 +535,65 @@ class PMSEExpressionEvaluator
             $dateObject->sub($intervalObject);
         }
         return $dateObject;
+    }
+
+    /**
+     * A function that fetches business center related time
+     *
+     * @param $value1 a DateTime object
+     * @param String $operator '+' or '-' (only + is supported at the moment)
+     * @param String $value2 business center based time interval
+     * @param String $bid business center id
+     * @return DateTime The resulting DateTime value
+     */
+    public function executeDateSpanBCOp($value1, String $operator, String $value2, String $bid) : DateTime
+    {
+        $bean = BeanFactory::getBean('BusinessCenters', $bid);
+        if (empty($bean) || empty($bean->id)) {
+            // can't find business center, throw an exception for the caller to handle
+            PMSELogger::getInstance()->error('Invalid Business Center bean, id: ' . $bid);
+            throw new PMSEExpressionEvaluationException(
+                'Invalid Business Center bean.',
+                func_get_args(),
+                static::getExceptionCode('NO_BUSINESS_CENTER')
+            );
+        }
+
+        $pattern = PMSEEngineUtils::getBusinessTimePattern(false);
+        if (!preg_match($pattern, $value2, $matches)) {
+            PMSELogger::getInstance()->error('Invalid Business Center string: ' . $value2);
+            throw new PMSEExpressionEvaluationException(
+                'Invalid Business Center string: ' . $value2,
+                func_get_args(),
+                static::getExceptionCode('NO_BUSINESS_CENTER')
+            );
+        }
+
+        // If `$value1` is not a DateTime object then it is either a date string
+        // or the string `'now'`. Both of these strings can be made into a DateTime
+        // object, which we need for the date calculations coming up.
+        if (!$value1 instanceof DateTime) {
+            $value1 = new DateTime($value1);
+        }
+
+        if ($bean->timezone) {
+            $value1->setTimeZone(new DateTimeZone($bean->timezone)); // convert to business center time zone
+        } else {
+            $value1->setTimeZone(new DateTimeZone(date_default_timezone_get())); // convert to server time zone
+        }
+        $beforeTime = $value1->format('m/d/Y H:i:s');
+        $unit = PMSEEngineUtils::getBusinessTimeUnit($matches[2]);
+        if (empty($unit)) {
+            PMSELogger::getInstance()->error('Invalid Business Center unit: ' . $matches[2]);
+            throw new PMSEExpressionEvaluationException(
+                'Invalid Business Center unit:' . $matches[2],
+                func_get_args(),
+                static::getExceptionCode('NO_BUSINESS_CENTER')
+            );
+        }
+
+        $result = $bean->getIncrementedBusinessDatetime($beforeTime, $matches[1], $unit);
+        return new DateTime($result);
     }
 
     /*

@@ -28,15 +28,17 @@ global $mod_strings,$app_list_strings,$app_strings,$current_user;
 if (!is_admin($current_user)&& !is_admin_for_module($GLOBALS['current_user'],'Campaigns')) sugar_die("Unauthorized access to administration.");
 
 $params = array();
-$params[] = "<a href='index.php?module=Campaigns&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-$params[] = $mod_strings['LBL_EMAIL_SETUP_WIZARD_TITLE'];
+$q = http_build_query([
+    'module' => 'Campaigns',
+    'action' => 'index',
+]);
+$params[] = '<a href="index.php?'.$q.'">'.htmlspecialchars($mod_strings['LBL_MODULE_NAME']).'</a>';
+$params[] = htmlspecialchars($mod_strings['LBL_EMAIL_SETUP_WIZARD_TITLE']);
 
 echo getClassicModuleTitle('Campaigns', $params, true);
 
 
 global $theme, $currentModule, $sugar_config;
-
-
 
 
 
@@ -136,7 +138,7 @@ $mboxTable .= "</table>";
 $ss->assign("MAILBOXES_DETECTED_MESSAGE", $mboxTable);
 $ss->assign("MBOX_NEEDED", $need_mbox);          
 $ss->assign('ROLLOVER', $email->rolloverStyle);
-if(!function_exists('imap_open')) {
+if (!extension_loaded('imap')) {
     $ss->assign('IE_DISABLED', 'DISABLED');   
 }
 /**************************** SUMMARY UI DIV Stuff *******************/

@@ -18,13 +18,9 @@ class ListUsersRequest extends \Google\Protobuf\Internal\Message
      */
     private $tenant = '';
     /**
-     * Generated from protobuf field <code>string filter = 2;</code>
+     * Generated from protobuf field <code>map<string, string> filter = 2;</code>
      */
-    private $filter = '';
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp create_time = 3;</code>
-     */
-    private $create_time = null;
+    private $filter;
     /**
      * Generated from protobuf field <code>int32 page_size = 4;</code>
      */
@@ -34,22 +30,9 @@ class ListUsersRequest extends \Google\Protobuf\Internal\Message
      */
     private $page_token = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *     @type string $filter
-     *     @type \Google\Protobuf\Timestamp $create_time
-     *     @type int $page_size
-     *     @type string $page_token
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
@@ -75,8 +58,8 @@ class ListUsersRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string filter = 2;</code>
-     * @return string
+     * Generated from protobuf field <code>map<string, string> filter = 2;</code>
+     * @return \Google\Protobuf\Internal\MapField
      */
     public function getFilter()
     {
@@ -84,36 +67,14 @@ class ListUsersRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string filter = 2;</code>
-     * @param string $var
+     * Generated from protobuf field <code>map<string, string> filter = 2;</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
     public function setFilter($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->filter = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp create_time = 3;</code>
-     * @return \Google\Protobuf\Timestamp
-     */
-    public function getCreateTime()
-    {
-        return $this->create_time;
-    }
-
-    /**
-     * Generated from protobuf field <code>.google.protobuf.Timestamp create_time = 3;</code>
-     * @param \Google\Protobuf\Timestamp $var
-     * @return $this
-     */
-    public function setCreateTime($var)
-    {
-        GPBUtil::checkMessage($var, \Google\Protobuf\Timestamp::class);
-        $this->create_time = $var;
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->filter = $arr;
 
         return $this;
     }

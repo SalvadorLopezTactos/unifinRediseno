@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Tildel bruger anvendt',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Forhåndsvisning af procesdesign',
+    'LBL_PROJECT_RUN_ORDER' => 'Kørselsrækkefølge',
 );
 

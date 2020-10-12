@@ -15,7 +15,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Sugarcrm\IdentityProvider\App\Encoder\EncoderFactory;
 
 /**
  * Class EncoderFactoryProvider
@@ -27,9 +27,13 @@ class EncoderFactoryProvider implements ServiceProviderInterface
     {
         $app['encoderFactory'] = function ($app) {
             $encoderBuilder = new EncoderBuilder();
-            return new EncoderFactory([
-                User::class => $encoderBuilder->buildEncoder($app['config']),
-            ]);
+            return new EncoderFactory(
+                [
+                    User::class => $encoderBuilder->buildEncoder($app['config'], false),
+                    'legacy_md5_support' => $encoderBuilder->buildEncoder($app['config'], true),
+                ],
+                $app
+            );
         };
     }
 }

@@ -322,4 +322,7 @@ Po potvrdení všetkých povinných a požadovaných modulov kliknite na tlačid
     'LBL_FILTER_LEADS_REPORTS' => 'Hlásenia záujemcov',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Odsúhlasené podnikateľské účely',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posledná aktualizácia súhlasu',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nie je možné zmeniť stav {{moduleSingular}}. Tento {{moduleSingular}} bol už skonvertovaný.',
 );

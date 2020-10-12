@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Allahindlus kokku',
     'LBL_DISCOUNT_AMOUNT' => 'Allahindlus kokku',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Allahindluse summa väärtus',
     'LBL_EXT_PRICE' => 'Ext. Price',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valuuta sümboli nimi',

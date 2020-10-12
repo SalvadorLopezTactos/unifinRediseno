@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Julkaise hyväksytyt artikkelit ja vanhentuneet tietämyskannan artikkelit.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Vuoronnettu tehtävä',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktiviteettivirran poistaminen',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Aikaväli:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Suorita sähköpostimuistutusten lähetys',
 'LBL_CLEANJOBQUEUE' => 'Puhdista työjono',
 'LBL_CLEANOLDRECORDLISTS' => 'Siisti vanhat tietuelistat',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktiviteettivirran poistaminen',
 'LBL_PMSEENGINECRON' => 'SugarBPM-vuorontaja',
 );
 

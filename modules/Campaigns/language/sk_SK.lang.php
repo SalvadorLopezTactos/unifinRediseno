@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nepodarilo sa nájsť zoznam cieľov typu predvolené',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nenašli sa žiadne záznamy',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Záznamy boli spracované',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Názov stopára:',
   'LBL_EDIT_TRACKER_URL'=>'URL stopára:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Žiadne optimá neboli uložené s vaším účtom prichádzajúcej pošty.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Skontrolujte nastavenia prichádzajúcej pošty.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => 'Záujemcovia {0}, ktorí boli počas kampane vytvorení, boli medzičasom vymazaní.',
+    'LBL_PROSPECT_LIST' => 'Zoznam cieľov',
 );
 
 

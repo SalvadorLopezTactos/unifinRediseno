@@ -10,25 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(isset($_GET['DynamicAction']) && $_GET['DynamicAction'] == "saveImage") {
-	$filename = pathinfo($_POST['filename'], PATHINFO_BASENAME);
-	$ext = pathinfo($filename, PATHINFO_EXTENSION);
-	if(!in_array(strtolower($ext), array('jpg', 'png', 'jpeg'))) {
-	    return false;
-	}
-	$image = str_replace(" ", "+", $_POST["imageStr"]);
-	$data = substr($image, strpos($image, ","));
-    if(sugar_mkdir(sugar_cached("images"), 0777, true))
-    {
-        $filepath = sugar_cached("images/$filename");
-        file_put_contents($filepath, base64_decode($data));
-        if(!verify_uploaded_image($filepath)) {
-            unlink($filepath);
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
+if (!isset($_GET['DynamicAction']) || $_GET['DynamicAction'] !== 'saveImage') {
+    return;
+}
+if (!sugar_mkdir(sugar_cached("images"), 0777, true)) {
+    throw new \RuntimeException(sprintf("Can't create directory '%s'", sugar_cached('images')));
+}
+$filename = pathinfo($_POST['filename'], PATHINFO_BASENAME);
+if (strpos($filename, chr(0)) || strpos($filename, '..')) {
+    throw new \RuntimeException(sprintf("Filename '%s' contains forbidden characters", $filename));
+}
+$filepath = sugar_cached("images/$filename");
+
+$image = str_replace(' ', '+', $_POST['imageStr']);
+$data = substr($image, strpos($image, ","));
+$tmpFile = tempnam(sugar_cached('images'), 'charts');
+if (false === file_put_contents($tmpFile, base64_decode($data))) {
+    throw new \RuntimeException(sprintf("Can't write data into '%s'", $tmpFile));
+}
+if (!verify_uploaded_image($tmpFile)) {
+    unlink($tmpFile);
+    throw new \RuntimeException('Uploaded file is not a valid image');
+}
+if (!rename($tmpFile, $filepath)) {
+    throw new \RuntimeException("Can't rename tmp file '%s' to '%s'", $tmpFile, $filepath);
 }

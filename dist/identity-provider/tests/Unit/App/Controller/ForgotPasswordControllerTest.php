@@ -181,17 +181,18 @@ class ForgotPasswordControllerTest extends \PHPUnit_Framework_TestCase
                 'region' => 'region',
             ],
         ]);
+        $this->application['locale'] = 'en-US';
 
         $this->request = $this->createMock(Request::class);
 
         $this->request->method('get')->willReturnMap([
-            ['tid', null, '0000000001'],
+            ['tid', null, '1000000001'],
             ['user_name', null, 'username'],
             ['csrf_token', null, 'csrfToken'],
         ]);
 
         $this->userProviderInfo = UserProvider::fromArray([
-            'tenant_id' => '0000000001',
+            'tenant_id' => '1000000001',
             'user_id' => 'userId',
             'provider_code' => 'local',
             'identity_value' => 'username',
@@ -213,7 +214,7 @@ class ForgotPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->userProvidersRepository->expects($this->once())
             ->method('findLocalByTenantAndIdentity')
-            ->with('0000000001', 'username')
+            ->with('1000000001', 'username')
             ->willThrowException(new \RuntimeException());
 
         $this->validator->method('validate')->willReturn([]);
@@ -230,7 +231,7 @@ class ForgotPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->userProvidersRepository->expects($this->once())
             ->method('findLocalByTenantAndIdentity')
-            ->with('0000000001', 'username')
+            ->with('1000000001', 'username')
             ->willReturn($this->userProviderInfo);
 
         $this->validator->method('validate')->willReturn([]);
@@ -258,9 +259,10 @@ class ForgotPasswordControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testForgotPasswordActionTestEmailSendSuccess(): void
     {
+        $this->application['locale'] = 'en-UK';
         $this->userProvidersRepository->expects($this->once())
             ->method('findLocalByTenantAndIdentity')
-            ->with('0000000001', 'username')
+            ->with('1000000001', 'username')
             ->willReturn($this->userProviderInfo);
 
         $this->validator->method('validate')->willReturn([]);
@@ -270,7 +272,8 @@ class ForgotPasswordControllerTest extends \PHPUnit_Framework_TestCase
         $this->grpcUserApi->expects($this->once())
             ->method('SendEmailForResetPassword')
             ->willReturnCallback(function (SendEmailForResetPasswordRequest $sendEmailRequest) {
-                $this->assertEquals('srn:dev:iam::0000000001:user:userId', $sendEmailRequest->getName());
+                $this->assertEquals('srn:dev:iam::1000000001:user:userId', $sendEmailRequest->getName());
+                $this->assertEquals('en-UK', $sendEmailRequest->getLocale());
                 return $this->unaryCall;
             });
 

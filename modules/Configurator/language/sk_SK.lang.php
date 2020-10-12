@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Pomer strán obrázka by mal byť v rozpätí 1:1 – 10:1. Veľkosť obrázku sa upraví.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Pomer strán obrázka musí byť v rozpätí od 3:1 až 20:1. Nahrajte nový súbor s týmto pomerom.',
     'ERR_ALERT_FILE_UPLOAD' => 'Chyba pri nahratí obrázka.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nepodarilo sa vytvoriť adresár pre obrázky',
     'LBL_LOGGER'=>'Nastavenia zapisovača',
 	'LBL_LOGGER_FILENAME'=>'Názov súboru denníka',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Prípona',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximálna veľkosť denníka',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Predvolený formát dátumu',
 	'LBL_LOGGER_LOG_LEVEL'=>'Úroveň denníka',
@@ -458,6 +458,10 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Nastavenia denníka komentárov',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximálny počet znakov, ktoré je možné zobraziť pri jednej položke komentára',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

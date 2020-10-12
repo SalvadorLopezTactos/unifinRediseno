@@ -54,10 +54,10 @@ class UserProvidersRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM user_providers WHERE tenant_id = ? AND provider_code = ? AND identity_value = ?',
-            ['0000000001', 'local', 'identityValue']
+            ['1000000001', 'local', 'identityValue']
         )->willThrowException(new DBALException());
 
-        $this->repository->findLocalByTenantAndIdentity('1', 'identityValue');
+        $this->repository->findLocalByTenantAndIdentity('1000000001', 'identityValue');
     }
 
     /**
@@ -69,10 +69,10 @@ class UserProvidersRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM user_providers WHERE tenant_id = ? AND provider_code = ? AND identity_value = ?',
-            ['0000000001', 'local', 'identityValue']
+            ['1000000001', 'local', 'identityValue']
         )->willReturn(null);
 
-        $this->repository->findLocalByTenantAndIdentity('1', 'identityValue');
+        $this->repository->findLocalByTenantAndIdentity('1000000001', 'identityValue');
     }
 
     /**
@@ -82,17 +82,17 @@ class UserProvidersRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM user_providers WHERE tenant_id = ? AND provider_code = ? AND identity_value = ?',
-            ['0000000001', 'local', 'identityValue']
+            ['1000000001', 'local', 'identityValue']
         )->willReturn([
-            'tenant_id' => '0000000001',
+            'tenant_id' => '1000000001',
             'user_id' => 'userId',
             'provider_code' => 'local',
             'identity_value' => 'identityValue',
         ]);
 
-        $userProvider = $this->repository->findLocalByTenantAndIdentity('01', 'identityValue');
+        $userProvider = $this->repository->findLocalByTenantAndIdentity('1000000001', 'identityValue');
 
-        $this->assertEquals('0000000001', $userProvider->getTenantId());
+        $this->assertEquals('1000000001', $userProvider->getTenantId());
         $this->assertEquals('userId', $userProvider->getUserId());
         $this->assertEquals('identityValue', $userProvider->getIdentityValue());
         $this->assertEquals('local', $userProvider->getProviderCode());

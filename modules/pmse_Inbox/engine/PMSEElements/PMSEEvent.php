@@ -83,7 +83,6 @@ class PMSEEvent extends PMSEShape
         $where = "flo_element_dest='" . $element->bpmn_id . "' AND flo_element_dest_type='" . $element->bpmn_type . "'";
         $result = $flowBean->get_list("", $where);
         $flowElement = array_pop($result['list']);
-//        $flowElement = array_pop($resultFlow['list']);
 
         if ($flowElement->flo_element_origin_type == 'bpmnGateway') {
             $gateway = $this->caseFlowHandler->retrieveBean('pmse_BpmnGateway',
@@ -105,45 +104,43 @@ class PMSEEvent extends PMSEShape
      */
     public function checkIfExistEventBased($cas_id, $cas_previous, $isEventBased = false)
     {
-        $bean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow'); //$this->beanFactory->getBean('BpmFlow');
-        $where = "cas_id='" . $cas_id . "' AND cas_index='" . $cas_previous . "'";
+        $bean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow');
+        $where = sprintf(
+            'cas_id=%s AND cas_index=%s',
+            $this->dbHandler->quoted($cas_id),
+            $this->dbHandler->quoted($cas_previous)
+        );
         $result = $bean->get_list("", $where);
         $flow = array_pop($result['list']);
 
-        //$this->bpmLog('INFO', "[$cas_id][$cas_index] check If Exist Event Based");
-        //select current thread record
-
-//        $query = "select * from pmse_bpm_thread where cas_id=$cas_id and cas_flow_index=$flow->cas_previous ";
-        $query = "select * from pmse_bpm_thread where cas_id=$cas_id and cas_flow_index=$flow->cas_previous ";
-        $result = $this->dbHandler->Query($query);
-        $rowThread = $this->dbHandler->fetchByAssoc($result);
+        $rowThread = $this->dbHandler
+            ->getConnection()
+            ->executeQuery(
+                'SELECT * FROM pmse_bpm_thread WHERE cas_id=? and cas_flow_index=?',
+                [$cas_id, $flow->cas_previous]
+            )->fetch();
         $cas_thread_index = $rowThread['cas_thread_index'];
         $cas_thread_parent = $rowThread['cas_thread_parent'];
 
         if (!empty($cas_thread_parent) && !empty($cas_thread_index)) {
-            //select parent
-            $query = "select * from pmse_bpm_thread where cas_id = $cas_id and cas_thread_index= $cas_thread_parent ";
-            $result = $this->dbHandler->Query($query);
-            $rowParent = $this->dbHandler->fetchByAssoc($result);
-
             //select siblings
-            $query = "select * from pmse_bpm_thread where " .
-                "cas_id = $cas_id and cas_thread_parent= $cas_thread_parent " .
-                "and cas_thread_index != $cas_thread_index";
-            $result = $this->dbHandler->Query($query);
-            //        if (!is_array($row)) {
-            //            $this->bpmLog('DEBUG', "[$cas_id][$cas_index] Event Based is not present");
-            //        }
-            //        
-            //closing siblings
-            while (($row = $this->dbHandler->fetchByAssoc($result)) && $isEventBased) {
-                $this->caseFlowHandler->closeThreadByThreadIndex($cas_id, $row['cas_thread_index']);
-                $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow');
-                $flowBean->retrieve_by_string_fields(array('cas_id' => $cas_id, 'cas_previous' => $row['cas_flow_index']));
-                $this->caseFlowHandler->closeFlow($cas_id, $flowBean->cas_index);
-                //$row = $this->dbHandler->fetchByAssoc($result);
+            if ($isEventBased) {
+                $stmt = $this->dbHandler
+                    ->getConnection()
+                    ->executeQuery(
+                        'select * from pmse_bpm_thread where cas_id=? and cas_thread_parent=? and cas_thread_index !=?',
+                        [$cas_id, $cas_thread_parent, $cas_thread_index]
+                    );
+                foreach ($stmt as $row) {
+                    $this->caseFlowHandler->closeThreadByThreadIndex($cas_id, $row['cas_thread_index']);
+                    $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow');
+                    $flowBean->retrieve_by_string_fields(array(
+                        'cas_id' => $cas_id,
+                        'cas_previous' => $row['cas_flow_index'],
+                    ));
+                    $this->caseFlowHandler->closeFlow($cas_id, $flowBean->cas_index);
+                }
             }
-       
             //closing parent
             $this->caseFlowHandler->closeThreadByThreadIndex($cas_id, $rowThread['cas_thread_parent']);
         }
@@ -164,8 +161,6 @@ class PMSEEvent extends PMSEShape
             $resultEvaluation = true;
         } else {
             $resultEvaluation = $this->evaluator->evaluateExpression(trim($flowData['evn_criteria']), $bean);
-            //$condition = $this->expressionEvaluator->condition();
-            //$this->bpmLog('DEBUG', "eval: $condition returned " . ($resultEvaluation ? 'true' : 'false'));
         }
 
         return $resultEvaluation;

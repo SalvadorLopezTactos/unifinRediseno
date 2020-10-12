@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Peržiūra',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'PERSPĖJIMAS: Jeigu Jūs pakeisite pagrindinį modulį, Jūsų šablone esančius laukus reikės išimti.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Štai failas kurio Jūs prašėte (Jūs galėsite pakeisti šį tekstą)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Pasiūlymas',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Šis šablonas yra naudojamas pasiūlymų generavimui PDF formate.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'pasiūlymas',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Pasiūlymas (su paslaugomis)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Šis šablonas naudojamas pasiūlymams generuoti PDF formatu.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Sąskaita',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Šis šablonas yra naudojamas sąskaitų generavimui PDF formate.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'sąskaita',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Sąskaita (su paslaugomis)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Šis šablonas naudojamas sąskaitoms generuoti PDF formatu.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Pasiūlymo Nr.:',
   'LBL_TPL_SALES_PERSON' => 'Vadybininkas:',
   'LBL_TPL_VALID_UNTIL' => 'Galioja iki:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Tiekėjo prekės Nr',
   'LBL_TPL_PRODUCT' => 'Prekė',
   'LBL_TPL_RLI' => 'Revenue Line Items',
+  'LBL_TPL_DURATION' => 'Trukmė',
+  'LBL_TPL_DURATION_STARTS' => 'Pradžia:',
+  'LBL_TPL_DURATION_ENDS' => 'Pabaiga:',
   'LBL_TPL_LIST_PRICE' => 'Standartinė kaina',
   'LBL_TPL_UNIT_PRICE' => 'Vieneto kaina',
   'LBL_TPL_EXT_PRICE' => 'Ext. kaina',

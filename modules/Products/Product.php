@@ -347,10 +347,47 @@ class Product extends SugarBean
 
         $this->calculateDiscountPrice();
 
+        $this->setServiceEndDate();
+
         $id = parent::save($check_notify);
 
         return $id;
 	}
+
+    /**
+     * Calculate service_end_date for a service Product.
+     */
+    protected function setServiceEndDate()
+    {
+        $clearServiceValues = false;
+        if (!empty($this->service) &&
+            !empty($this->service_start_date) &&
+            !empty($this->service_duration_value) &&
+            !empty($this->service_duration_unit)
+        ) {
+            try {
+                $this->service_end_date = TimeDate::getInstance()->fromString($this->service_start_date)
+                    ->modify('+' . $this->service_duration_value . ' ' . $this->service_duration_unit)
+                    ->modify('-1 day')
+                    ->asDbDate(false);
+            } catch (Exception $e) {
+                $GLOBALS['log']->error('Error calculating service end date:' . $e->getMessage());
+                $clearServiceValues = true;
+            }
+        } else {
+            $clearServiceValues = true;
+        }
+        // If this is not a service Product, or we encountered an error trying to
+        // calculate the end date, clear the related service fields to avoid
+        // any problems due to partial service data
+        if ($clearServiceValues) {
+            $this->service = false;
+            $this->service_start_date = null;
+            $this->service_end_date = null;
+            $this->service_duration_value = null;
+            $this->service_duration_unit = null;
+        }
+    }
 
     /**
      * @deprecated
@@ -494,6 +531,15 @@ class Product extends SugarBean
                 // when the re-save happens because of the relationships
                 $rli->fetched_row[$field['name']] = $this->fetched_row[$field['name']];
             }
+        }
+
+        // convert for services
+        $rli->service = $this->service;
+        $rli->renewable = $this->renewable;
+        if ($this->service) {
+            $datetime = new SugarDateTime($this->service_start_date, new DateTimeZone('UTC'));
+            $endDate = $datetime->modify($this->service_duration_value . ' ' . $this->service_duration_unit);
+            $rli->service_end_date = $datetime->asDbDate($endDate, false);
         }
 
         if ($this->discount_select == 1) {

@@ -123,6 +123,12 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
 function bpminbox_get_href($temp_module, $field, $field_value, $adv_type = null, $ext1 = null, $context = null)
 {
     global $sugar_config;
+
+    if (empty($temp_module)) {
+        PMSELogger::getInstance()->alert("Module object \$temp_module is null in function bpminbox_get_href.");
+        return '';
+    }
+
     $link = $sugar_config['site_url'];
     if (isModuleBWC($temp_module->module_dir)) {
         $params = array(
@@ -138,7 +144,7 @@ function bpminbox_get_href($temp_module, $field, $field_value, $adv_type = null,
         }
     }
 
-    return "<a href=\"$link\">{$temp_module->name}</a>";
+    return "<a href=\"$link\">{$temp_module->getRecordName()}</a>";
 }
 
 //////////////////////Processing actions

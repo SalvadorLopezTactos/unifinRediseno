@@ -321,4 +321,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'Справки за потенциални клиенти',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Одобрени бизнес цели',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последна актуализация на одобрението',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Не е възможна промяна на статуса на {{moduleSingular}}. Този {{moduleSingular}} вече е конвертиран.',
 );

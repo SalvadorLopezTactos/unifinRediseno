@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Teklifler (Gönderim Yeri)',
 	'LNK_ACCOUNT_REPORTS' => 'Müşteri Raporlarını Gör',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokümanlar',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Hesaplar Listesi Panosu',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Hesaplar Kaydı Panosu',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Hesap Bilgileri',
+    'LBL_NEXT_RENEWAL_DATE' => 'Sonraki Yenileme Tarihi',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Hesap Adı/Endüstri',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Yer',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikler',

@@ -23,6 +23,8 @@ class pmse_EmailMessage extends Basic
 
     public $from_addr;
     public $from_name;
+    public $reply_to_addr;
+    public $reply_to_name;
     public $to_addrs;
     public $cc_addrs;
     public $bcc_addrs;
@@ -30,6 +32,7 @@ class pmse_EmailMessage extends Basic
     public $body_html;
     public $subject;
     public $flow_id;
+    public $outbound_email_id;
 
     /**
      * @inheritDoc

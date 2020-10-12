@@ -37,5 +37,5 @@ Feature: Password Management
     And I wait for element "#userList"
     And I go to administration
     And I follow "Password Management"
-    Then The document should open in a new tab with url "http://console.sugarcrm.local/password-management"
+    Then The document should open in a new tab with url "http://console.sugarcrm.local/password-management?tenant_hint=srn%3Acloud%3Aiam%3Aeu%3A2000000001%3Atenant"
     And I logout

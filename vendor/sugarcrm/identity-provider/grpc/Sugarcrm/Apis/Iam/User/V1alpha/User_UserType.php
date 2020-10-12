@@ -4,13 +4,20 @@
 
 namespace Sugarcrm\Apis\Iam\User\V1alpha;
 
-if (false) {
+/**
+ * User type
+ *
+ * Protobuf enum <code>Sugarcrm\Apis\Iam\User\V1alpha\User\UserType</code>
+ */
+class User_UserType
+{
     /**
-     * This class is deprecated. Use Sugarcrm\Apis\Iam\User\V1alpha\User\UserType instead.
-     * @deprecated
+     * Generated from protobuf enum <code>REGULAR_USER = 0;</code>
      */
-    class User_UserType {}
+    const REGULAR_USER = 0;
+    /**
+     * Generated from protobuf enum <code>ADMINISTRATOR = 1;</code>
+     */
+    const ADMINISTRATOR = 1;
 }
-class_exists(User\UserType::class);
-@trigger_error('Sugarcrm\Apis\Iam\User\V1alpha\User_UserType is deprecated and will be removed in the next major release. Use Sugarcrm\Apis\Iam\User\V1alpha\User\UserType instead', E_USER_DEPRECATED);
 

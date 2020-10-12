@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Kontrolna tabla liste predmeta',
     'LBL_CASES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa predmeta',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informacije o slučaju',
 
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da bi obrisali kompaniju.',
 	'LBL_ACCOUNT_ID'					=> 'ID broj kompanije',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakti',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Slučajevi',
 	'LBL_DESCRIPTION'					=> 'Opis:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Prilog fajl',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Prilog fajl',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Istorija',
 	'LBL_INVITEE'						=> 'Kontakti',
 	'LBL_MEMBER_OF'						=> 'Kompanija',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Korisnik koji je kreirao',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodeljenog korisnika',
     'LBL_EXPORT_TEAM_COUNT' => 'Veličina tima',
+    'LBL_CHANGETIMERS' => 'Promeni tajmere',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email adrese srodnih kontakata',
@@ -140,4 +143,11 @@ Da bi {{module_name}} bio kreiran:
 - Polja označena kao "Obavezna" moraju biti uneta pre čuvanja podataka. 
 - Kliknite na "Pokaži više" za prikaz dodatnih polja ako je potrebno. 
 2. Kliknite na "Sačuvaj" da dovršite novi zapis i povratak na predhodnu stranu.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Niste uspeli da pronađete to što ste tražili?',
+    'LBL_CREATE_CASE' => 'Kreiraj modul {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA detalji',
+    'LBL_HOURS' => 'Sati',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

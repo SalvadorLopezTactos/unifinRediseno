@@ -65,6 +65,13 @@
                 }
             }
         });
+
+        // allow explicitly enabling and disabling the save button
+        var dashletConfig = this.closestComponent('dashletconfiguration');
+        this.listenTo(dashletConfig, 'dashletconfig:save:toggle', function(enabled) {
+            var saveButton = this.getField('save_button');
+            saveButton.setDisabled(!enabled);
+        });
     },
 
     /**
@@ -104,6 +111,9 @@
         }, this));
     },
 
+    /**
+     * Closes the containing drawer.
+     */
     close: function() {
         app.drawer.close();
     },

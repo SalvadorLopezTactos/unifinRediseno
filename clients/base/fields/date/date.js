@@ -178,13 +178,11 @@
     },
 
     /**
-     * Retrieve an element against which the date picker should be appended to.
+     * Retrieve an element to which the datepicker should be appended.
      *
-     * FIXME: find a proper way to do this and avoid scrolling issues SC-2739
-     *
-     * @return {jQuery/undefined} Element against which the date picker should
-     *   be appended to, `undefined` if none.
-     * @private
+     * @return {jQuery|undefined} Element to which the datepicker should be
+     *   appended.
+     * @protected
      */
     _getAppendToTarget: function() {
         var component = this.closestComponent('main-pane') ||
@@ -194,8 +192,6 @@
         if (component) {
             return component.$el;
         }
-
-        return;
     },
 
     /**

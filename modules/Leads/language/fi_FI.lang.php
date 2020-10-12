@@ -328,4 +328,7 @@ Tietueiden vahvistamisen jälkeen paina ylhäällä olevaa ‘Tallenna ja muunna
     'LBL_FILTER_LEADS_REPORTS' => 'Liidien raportit',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Suostumus liiketoimintatarkoituksiin kohteelle',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Suostumus päivitetty viimeksi',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Moduulin {{moduleSingular}} tilaa ei voida muuttaa. {{moduleSingular}} on jo muunnettu.',
 );

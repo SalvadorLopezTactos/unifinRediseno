@@ -13,11 +13,11 @@
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\LoadUserOnSessionListener;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDCSessionListener;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\PostLoginAuthListener;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\RehashPasswordListener;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\UpdateUserLastLoginListener;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\UserPasswordListener;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC\SessionListener;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC\PostLoginAuthListener;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC\UpdateUserLanguageListener;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC\UpdateUserLastLoginListener;
+use Sugarcrm\Sugarcrm\IdentityProvider\SessionProxy;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -31,10 +31,11 @@ class AuthProviderOIDCManagerBuilder extends AuthProviderManagerBuilder
     protected function getAuthenticationEventDispatcher()
     {
         $dispatcher = new EventDispatcher();
+        $session = new SessionProxy();
 
         $dispatcher->addListener(
             AuthenticationEvents::AUTHENTICATION_SUCCESS,
-            [new OIDCSessionListener(), 'execute'],
+            [new SessionListener(), 'execute'],
             999
         );
 
@@ -45,11 +46,17 @@ class AuthProviderOIDCManagerBuilder extends AuthProviderManagerBuilder
 
         $dispatcher->addListener(
             AuthenticationEvents::AUTHENTICATION_SUCCESS,
-            [new UpdateUserLastLoginListener(), 'execute']
+            [new UpdateUserLastLoginListener($session), 'execute']
+        );
+
+        $dispatcher->addListener(
+            AuthenticationEvents::AUTHENTICATION_SUCCESS,
+            [new UpdateUserLanguageListener(), 'execute']
         );
         $dispatcher->addListener(
             AuthenticationEvents::AUTHENTICATION_SUCCESS,
-            [new PostLoginAuthListener(), 'execute']
+            [new PostLoginAuthListener($session), 'execute'],
+            -999
         );
 
         return $dispatcher;

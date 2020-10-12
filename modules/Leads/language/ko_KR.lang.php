@@ -310,4 +310,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => '리드 (Lead) &#39;보고서',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '동의한 사업 목적',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '동의서 최종 업데이트',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => '{{moduleSingular}}의 상태를 변경할 수 없습니다. 이 {{moduleSingular}}은(는) 이미 전환되었습니다.',
 );

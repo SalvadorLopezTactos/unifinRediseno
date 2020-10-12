@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,11 +30,15 @@ $branch_leafs = "3";	//Products per category
 
 $depth_flag = "1";
 
+global $serviceCount;
+$serviceCount = 0;
+
 traverse_tree("", $depth_flag, $tree_depth, $tree_branches, $branch_leafs);
 
 
 function traverse_tree($parent_id, $depth_flag, &$tree_depth, &$tree_branches, &$branch_leafs){
-	//control how deep the tree goes
+    global $serviceCount;
+    //control how deep the tree goes
 	$depth_flag = $depth_flag + 1;
 
 
@@ -105,6 +108,9 @@ function create_product($category_id)
 {
     global $sugar_demodata;
     global $app_list_strings;
+    global $serviceCount;
+    $serviceDurationUnitArray = ['year', 'month', 'day', 'month'];
+    $serviceDurationValueArray = [1, 6, 14, 24];
     $first_name_array = $sugar_demodata['first_name_array'];
     $first_name_count = count($sugar_demodata['first_name_array']);
     $company_name_array = $sugar_demodata['company_name_array'];
@@ -143,6 +149,15 @@ function create_product($category_id)
     $template->date_available = "2004-10-15";
     $template->qty_in_stock = rand(0, 150);
     $template->category_id = $category_id;
+    if ($serviceCount <= 3) {
+        $template->service = true;
+        $template->renewable = true;
+        $template->service_duration_unit = $serviceDurationUnitArray[$serviceCount];
+        $template->service_duration_value = $serviceDurationValueArray[$serviceCount];
+        $template->name = $template->service_duration_value . ' ' . $template->service_duration_unit . ' Service';
+        $serviceCount++;
+    }
+
     $template->calculateDiscountPrice();
     $template->save();
 

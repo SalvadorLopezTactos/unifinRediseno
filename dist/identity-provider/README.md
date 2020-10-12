@@ -18,29 +18,36 @@
 # Mango library releases
 | Mango version | Library version |
 |----|---|
-| 9.0.0 | 1.5.0 |
+| 10.0.0 | 1.9.0 |
+| 9.3.0 | 1.8.0 |
+| 9.2.0 | 1.7.0 |
+| 9.1.0 | 1.6.2 |
+| 9.0.0 | 1.5.1 |
 | 8.3.0 | 1.4.2 |
 | 8.2.1 | 1.3.2 |
 | 8.1.0 | 1.2.1 |
 | 8.0.1 | 1.1.7 |
 | 7.11.0 | 1.1.0|
 
-To release new version:
+To release a new version:
 
+1. Make sure that all changes scheduled for this release are merged into master
 1. Update IdentityProvider composer with new version
+1. Update "Mango library releases" section in README
 1. Create new branch if necessary
-1. Create new release on github
-1. Update and checkout required branch for identity-provider git submodule
+1. Create new release on Github
+1. Update and checkout required branch for identity-provider git submodule in Mango
 1. Update composer in Mango with new identity-provider release
+1. Test Mango with the new library (manually and/or with IdentityProvider CI against Mango build containing new identity-provider release)
 
 # Installation
 ---
 
 
 ### Environment
-* PHP 7.1
+* PHP 7.1 - 7.3
     required extensions:
-    * mcrypt
+    * mcrypt for PHP 7.1
     * zip
     * mysqli
     * gmp
@@ -99,6 +106,9 @@ $params['monolog']['monolog.handlers'] = [
 
 * Rebuild grpc client classes
 ``` make grpc ```
+
+* Rebuild grpc client classes (with the help of a dockerized protoc compiler)
+``` make grpc-dockerized ```
 
 * Build and rebuild CSS from LESS files
 ``` make css ```

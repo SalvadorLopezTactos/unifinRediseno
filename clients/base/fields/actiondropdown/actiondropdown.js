@@ -178,7 +178,8 @@
             orderedFields = fields || this.fields;
         this.dropdownFields = _.filter(orderedFields, function(field) {
             var actionHidden = (_.isFunction(field.hasAccess) && !field.hasAccess()) ||
-                (_.isFunction(field.isVisible) && !field.isVisible());
+                (_.isFunction(field.isVisible) && !field.isVisible()) ||
+                (_.isFunction(field.isOnForbiddenLayout) && field.isOnForbiddenLayout());
 
             if (actionHidden || (field.type === 'divider' && prevIsDivider)) {
                 return false;
@@ -385,10 +386,12 @@
         this._super('setDisabled', [disable]);
         disable = _.isUndefined(disable) ? true : disable;
         this.tabIndex = disable ? -1 : 0;
-        this.$(this.actionDropDownTag)
-            .toggleClass('disabled', disable)
-            .attr('aria-haspopup', !disable)
-            .attr('tabindex', this.tabIndex);
+        if (this.$el) {
+            this.$(this.actionDropDownTag)
+                .toggleClass('disabled', disable)
+                .attr('aria-haspopup', !disable)
+                .attr('tabindex', this.tabIndex);
+        }
     },
 
     /**

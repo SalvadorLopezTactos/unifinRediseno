@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הזדמנויות',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת הזדמנויות',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'פרטי הזדמנות',
 
     'LBL_MODULE_NAME' => 'הזדמנויות',
     'LBL_MODULE_NAME_SINGULAR' => 'הזדמנות',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'שם ההזדמנות:',
     'LBL_OPPORTUNITY' => 'הזדמנות:',
     'LBL_NAME' => 'שם ההזדמנות',
+    'LBL_TIME' => 'זמן',
     'LBL_INVITEE' => 'אנשי קשר',
     'LBL_CURRENCIES' => 'מטבעות',
     'LBL_LIST_OPPORTUNITY_NAME' => 'שם',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'סוג:',
     'LBL_CAMPAIGN' => 'קמפיין:',
     'LBL_NEXT_STEP' => 'השלב הבא:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'מקור הליד:',
     'LBL_SALES_STAGE' => 'שלב במכירות:',
     'LBL_SALES_STATUS' => 'מצב',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'תחזית',
     'LBL_WORKSHEET' => 'גיליון עבודה',
 
+    'LBL_RENEWAL' => 'חידוש',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'הזדמנויות חידוש',
+    'LBL_RENEWAL_PARENT' => 'הזדמנות אב',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'מזהה אב חידוש',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'הזדמנות חייבת לכלול פריט שורת הכנסה מקושר',
     'TPL_RLI_CREATE_LINK_TEXT' => 'צור פריט שורת הכנסה',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'שורות הצעות מחיר',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'לא ניתן למחוק הזדמנויות המכילות פרטי שורות רווח',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'רשומה אחת או יותר שנבחרו מכילות פרטי שורות רווח סגורות ואינן ניתנות למחיקה',
     'LBL_INCLUDED_RLIS' => '# פריטי שורת רווח כלולים',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'הצעות מחיר',
 
@@ -186,22 +200,22 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'לאחר החלת שינוי זה, הערות הסיכום של פריטי שורות ההכנסות יווצרו ברקע עבור כל {{module_name}} קיים. ברגע שפריטי שורות ההכנסות יסתיימו להיווצר ויהיו זמינות, תישלח אליך הודעה לכתובת הדוא"ל המופיעה בפרופיל המשתמש שלך. שים לב שהמופע שלך חייב להיות מוגד לשליחת הודעות דוא"ל בהגדרות Admin>Email על מנת שההתראות יישלחו.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחר מכירות נפרדות מתחילתן ועד לסיומן. כל רשומה של {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתונים רלוונטיים למכירה וכן נתונים הנוגעים לרשומות חשובות אחרות כגון {{quotes_module}}, {{contacts_module}}, ועוד. מודול {{module_name}} יתקדם בדרך כלל מספר שלבי מכירות עד שיסומן כ"נסגר בהצלחה" או "נסגר ואבד". ניתן למנף את {{plural_module_name}} אפילו יותר באמצעות מודול {{forecasts_singular_module}} של Sugar כדי להבין ולחזות מגמות מכירה וכדי למקד את העבודה על מנת להשיג הצעות מחיר למכירות.',
+    'LBL_HELP_RECORDS' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחר מכירות בודדות מתחילתן ועד לסיומן. כל רשומת {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתוני מכירות רלוונטיים וכן נתונים הקשורים לרשומות חשובות נוספות כגון {{quotes_module}}‏, {{contacts_module}} וכו&#39;. מודול {{module_name}} יתקדם בדרך כלל מספר שלבי מכירה עד שיסומן כ"נסגר בהצלחה" או "נסגר ואבד". ניתן למנף את {{plural_module_name}} אף יותר באמצעות מודול {{forecasts_singular_module}} של Sugar כדי להבין ולחזות מגמות מכירה ולמקד את העבודה בהשגת מיכסות מכירה.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחר מכירות בודדות ושורות הפריטים השייכות למכירות אלה מתחילתן ועד לסיומן. כל רשומה של {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתוני מכירות רלוונטיים וכן נתונים בנוגע לרשומות חשובות נוספות כגון {{quotes_module}}, {{contacts_module}}, ועוד.
+    'LBL_HELP_RECORD' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחר מכירות בודדות ואחר שורות פריטים השייכות למכירות אלה מתחילתן ועד לסיומן. כל רשומת {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתוני מכירות רלוונטיים וכן נתונים בנוגע לרשומות חשובות נוספות כגון {{quotes_module}}, {{contacts_module}} וכו&#39;.
 
-- ערוך את שדות הרשומה על ידי לחיצה על כל שדה בודד או על לחצן &#39;ערוך&#39;.
+- ערוך את שדות הרשומה על ידי לחיצה על כל שדה בנפרד או על לחצן "ערוך".
 - הצג או שנה קישורים לרשומות אחרות בתת-לוחות על ידי החלפת מצב החלון השמאלי התחתון ל"תצוגת נתונים".
-- כתוב והצג הערות משתמש ותעד את היסטוריית השינויים ב{{activitystream_singular_module}} על ידי החלפת מצב החלון השמאלי התחתון ל"זרם פעילות".
-- עקוב אחר רשומה זו או הוסף אותה לרשימת המועדפים על ידי השימוש בסמלים שמימין לשם הרשומה.
-- פעולות נוספות זמינות בתפריט הפעולות הנפתח מימין ללחצן &#39;ערוך&#39;.',
+- כתוב והצג הערות משתמש ותעד את היסטוריית השינויים במודול {{activitystream_singular_module}} על ידי החלפת מצב החלון השמאלי התחתון ל"זרם פעילות".
+- עקוב אחר רשומה זו או הוסף אותה לרשימת המועדפים באמצעות הסמלים שמימין לשם הרשומה.
+- פעולות נוספות זמינות בתפריט הנפתח "פעולות" מימין ללחצן "ערוך".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחרי מכירות בודדות ושורות פריטים השייכות למכירות אלו מתחילתן ועד לסיומן. כל רשומה של {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתוני מכירות רלוונטיים וכן נתונים הקשורים לרשומות חשובות נוספות כגון {{quotes_module}}, {{contacts_module}}, ועוד.
+    'LBL_HELP_CREATE' => 'המודול {{plural_module_name}} מאפשר לך לעקוב אחר מכירות בודדות ושורות פריטים השייכות למכירות אלו מתחילתן ועד לסיומן. כל רשומת {{module_name}} מייצגת מכירה פוטנציאלית וכוללת נתוני מכירות רלוונטיים וכן נתונים הקשורים לרשומות חשובות נוספות כגון {{quotes_module}}‏, {{contacts_module}} וכו&#39;.
 
 כדי ליצור {{module_name}}:
-1. סמן ערכים לשדות לפי רצונך.
+1. הזן ערכים בשדות לפי הצורך.
  - יש להשלים שדות המסומנים כ"חובה" לפני השמירה.
  - לחץ על "הצג עוד" כדי לחשוף שדות נוספים במידת הצורך.
 2. לחץ על "שמור" כדי לסיים את תיעוד הרשומה החדשה ולחזור לדף הקודם.',
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'מציג 10 שורות פרטי רווח הטובים ביותר בתרשים בועות',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'ההזדמנויות שלי',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "ההזדמנויות של הצוות שלי",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

@@ -46,7 +46,13 @@ $params['idm'] = [
     ],
 ];
 
+$params['cookie.options'] = [
+    'domain' => getenv('COOKIE_DOMAIN'),
+    'secure' => getenv('COOKIE_SECURE'),
+];
+
 $params['session.storage.options'] = [
+    'name' => 'login-session-' . getenv('IDM_REGION'),
     'cookie_secure' => getenv('COOKIE_SECURE'),
     'cookie_httponly' => true,
     'cookie_domain' => getenv('COOKIE_DOMAIN'),
@@ -54,7 +60,6 @@ $params['session.storage.options'] = [
 ];
 
 $params['logout.options'] = [
-    'cookie_secure' => getenv('COOKIE_SECURE'),
     'cookie_name' => getenv('LOGOUT_COOKIE_NAME'),
 ];
 
@@ -123,3 +128,9 @@ $params['marketingExtras'] = [
     'baseUrl' => getenv('MARKETING_EXTRAS_BASE_URL'),
     'flavor' => getenv('MARKETING_EXTRAS_FLAVOR'),
 ];
+
+$params['regions'] = [
+    'file' => getenv('REGIONS_FILE'),
+];
+
+$params['redirectAdditionalAllowedDomains'] = '';

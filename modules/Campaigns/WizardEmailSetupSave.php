@@ -17,6 +17,11 @@
  ********************************************************************************/
 require_once('include/formbase.php');
 
+global $current_user;
+if (!$current_user->isDeveloperForModule('Campaigns')) {
+    ACLController::displayNoAccess();
+    sugar_die('');
+}
 
 global $mod_strings;
 

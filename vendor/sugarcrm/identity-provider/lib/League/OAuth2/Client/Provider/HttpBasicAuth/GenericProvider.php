@@ -35,11 +35,9 @@ class GenericProvider extends BasicGenericProvider
      */
     public function getAccessToken($grant, array $options = [])
     {
-        if (!empty($this->accessTokenFile) && is_readable($this->accessTokenFile)) {
-            $tokenData = include $this->accessTokenFile;
-            if (is_array($tokenData) && array_key_exists('access_token', $tokenData)) {
-                return new AccessToken($tokenData);
-            }
+        $tokenData = $this->getAccessTokenFileData();
+        if (array_key_exists('access_token', $tokenData)) {
+            return new AccessToken($tokenData);
         }
         $this->logger->warning("Failed to read file '{file_name}' with access_token. Using direct request for it.", [
             'file_name' => $this->accessTokenFile,
@@ -150,5 +148,43 @@ class GenericProvider extends BasicGenericProvider
             ]);
         }
         return $result;
+    }
+
+    /**
+     * Get OAuth2 client ID for the application
+     *
+     * @return string
+     */
+    public function getClientID(): string
+    {
+        // clientId from config takes precedence if set
+        if ($this->clientId) {
+            return $this->clientId;
+        }
+        // then we try to get it from injected access-token aux information
+        $accessTokenData = $this->getAccessTokenFileData();
+        if (array_key_exists('client_id', $accessTokenData)) {
+            return $accessTokenData['client_id'];
+        }
+
+        return '';
+    }
+
+    /**
+     * Get contents of accessToken file.
+     * We assume this is a PHP file.
+     * Also useful for testing.
+     *
+     * @return array
+     */
+    public function getAccessTokenFileData(): array
+    {
+        if (is_readable($this->accessTokenFile)) {
+            $accessTokenData = include $this->accessTokenFile;
+        }
+        if (isset($accessTokenData) && is_array($accessTokenData)) {
+            return $accessTokenData;
+        }
+        return [];
     }
 }

@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'דואר אלקטרוני:אנשי קשר',
     'LBL_EMAILS_LEADS_REL' => 'דואר אלקטרוני:לידים',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'דואר אלקטרוני:הזדמנויות',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'דואר אלקטרוני:פתקים',
     'LBL_EMAILS_PROJECT_REL' => 'דואר אלקטרוני:פרויקט',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'דואר אלקטרוני:משימה בפרויקט',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'מאת:',
     'LBL_REPLY_TO' => 'השב אל:',
     'LBL_HTML_BODY' => 'HTML Body',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'נמענים',
     'LBL_LEADS_SUBPANEL_TITLE' => 'לידים',
     'LBL_MESSAGE_SENT' => 'ההודעה נשלחה',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'השב אל מזהה',
     'LBL_TYPE' => 'סוג:',
     'LBL_EMAIL_STATE' => 'מדינה',
+    'LBL_EMAIL_DIRECTION' => 'כיוון',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'בדוק בבקשה!',

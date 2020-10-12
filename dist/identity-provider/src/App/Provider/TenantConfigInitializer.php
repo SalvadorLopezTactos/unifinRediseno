@@ -13,6 +13,8 @@
 namespace Sugarcrm\IdentityProvider\App\Provider;
 
 use Sugarcrm\IdentityProvider\App\Application;
+use Sugarcrm\IdentityProvider\App\Authentication\CookieService;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantInDifferentRegionException;
 use Sugarcrm\IdentityProvider\Srn;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -83,7 +85,35 @@ class TenantConfigInitializer
         return $request->get(self::REQUEST_KEY)
             || $request->get('tid')
             || $request->getSession()->has(self::SESSION_KEY)
-            || $this->getTenantFromAuthorizedUser();
+            || $this->getTenantFromAuthorizedUser()
+            || $request->cookies->has(CookieService::SAML_TENANT_COOKIE_NAME);
+    }
+
+    /**
+     * Get tenant id from request, session or the user
+     *
+     * @param Request $request
+     *
+     * @return string|null
+     */
+    protected function getTenantId(Request $request): ?string
+    {
+        if (!empty($request->get('tid'))) {
+            $tenantString = $request->get('tid');
+        } elseif (!empty($request->get('tenant_hint'))) {
+            $tenantString = $request->get('tenant_hint');
+        } elseif (!empty($request->get(self::REQUEST_KEY))) {
+            $tenantString = $request->get(self::REQUEST_KEY);
+        } elseif ($request->getSession()->has(self::SESSION_KEY)) {
+            $tenantString = $request->getSession()->get(self::SESSION_KEY);
+        } elseif (!empty($this->getTenantFromAuthorizedUser())) {
+            $tenantString = $this->getTenantFromAuthorizedUser();
+        } elseif ($request->cookies->has(CookieService::SAML_TENANT_COOKIE_NAME)) {
+            $tenantString = $request->cookies->get(CookieService::SAML_TENANT_COOKIE_NAME);
+        } else {
+            return null;
+        }
+        return $tenantString;
     }
 
     /**
@@ -91,23 +121,20 @@ class TenantConfigInitializer
      *
      * @param Request $request
      * @return \Sugarcrm\IdentityProvider\Srn\Srn
+     * @throws TenantInDifferentRegionException
      */
     protected function getTenant(Request $request)
     {
-        if (!empty($request->get('tid'))) {
-            $tenantString = $request->get('tid');
-        } elseif (!empty($request->get(self::REQUEST_KEY))) {
-            $tenantString = $request->get(self::REQUEST_KEY);
-        } elseif ($request->getSession()->has(self::SESSION_KEY)) {
-            $tenantString = $request->getSession()->get(self::SESSION_KEY);
-        } elseif (!empty($this->getTenantFromAuthorizedUser())) {
-            $tenantString = $this->getTenantFromAuthorizedUser();
-        } else {
+        $tenantString = $this->getTenantId($request);
+        if (is_null($tenantString)) {
             return null;
         }
         try {
-            return Srn\Converter::fromString($tenantString);
+            $tenantSrn =  Srn\Converter::fromString($tenantString);
+            $this->checkTenantRegion($tenantSrn->getTenantId());
+            return $tenantSrn;
         } catch (\InvalidArgumentException $e) {
+            $this->checkTenantRegion($tenantString);
             $storedTenant = $this->app->getTenantRepository()->findTenantById($tenantString);
             //make double convertion to validate generated SRN
             return Srn\Converter::fromString(
@@ -115,6 +142,14 @@ class TenantConfigInitializer
                     $this->app->getSrnManager($storedTenant->getRegion())->createTenantSrn($storedTenant->getId())
                 )
             );
+        }
+    }
+
+    private function checkTenantRegion(string $tenantId)
+    {
+        $tenantRegion = $this->app->getTenantRegion()->getRegion($tenantId);
+        if (!empty($tenantRegion) && $tenantRegion !== $this->app->getConfig()['idm']['region']) {
+            throw new TenantInDifferentRegionException($tenantRegion, $tenantId);
         }
     }
 

@@ -37,6 +37,7 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = array(
                     'name' => 'phone_work',
                 ),
                 'email',
+                'tag',
                 'assigned_user_name',
 			    'team_name',
             ),

@@ -7,7 +7,7 @@
     </div>
     <section class="content">
         <h3>{{ "Can't log in? Forget your password?"|trans }}</h3>
-        <p>{{ "Enter your email address below and we'll send you password reset instructions."|trans }}</p>
+        <p>{{ "Enter your user name below and we'll send you password reset instructions."|trans }}</p>
     </section>
     <form name="forgot-password" id="submit_section"  method="post" action="{{ path('forgotPasswordProcess') }}" class="tcenter">
         {% if tid %}
@@ -27,9 +27,11 @@
                      class="inherit-width" aria-label="username">
             </span>
         </div>
-        <div class="control-group" style="text-align: right">
-            {% include 'recaptcha.html.twig' %}
-        </div>
+        {% if recaptcha_sitekey %}
+            <div class="control-group" style="text-align: right">
+                {% include 'recaptcha.html.twig' %}
+            </div>
+        {% endif %}
         {% include 'honeypot.html.twig' %}
         <div class="login-footer">
             <span class="edit">

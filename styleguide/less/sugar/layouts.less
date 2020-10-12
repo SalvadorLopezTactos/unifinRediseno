@@ -24,6 +24,7 @@
 #content {
   position: fixed;
   width: 100%;
+  top: 0;
   right: 0;
   bottom: 44px;
   left: 0;
@@ -44,7 +45,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-top: 0 !important;
-  background: #fff;
+  background: @white;
 
   .list-view {
     overflow-y: auto;
@@ -106,10 +107,12 @@
 
 #content {
   /* override */
-  top: 45px;
-
-  /* override */
   background: none;
+}
+
+#header:not(.hide) + #content {
+  /* override */
+  top: 45px;
 }
 
 .main-pane {

@@ -355,8 +355,7 @@ class PMSEEngineFilterApi extends FilterApi
                 //more dirty hack
                 //will be fixed when we redo relationships with vardefs
                 if ($field === 'act_name') {
-                    $sql = "activity.name = '$value'";
-                    $where->queryOr()->addRaw($sql);
+                    $where->queryOr()->equals('activity.name', $value);
                 } else {
                     $where->equals($field, $value);
                 }
@@ -376,8 +375,7 @@ class PMSEEngineFilterApi extends FilterApi
             case '$starts':
                 //Dirty hack to allow quicksearch filtering by activity name (process name)
                 if ($field === 'act_name') {
-                    $sql = "activity.name LIKE '" . $value . "%'";
-                    $where->queryOr()->addRaw($sql);
+                    $where->queryOr()->starts('activity.name', $value);
                 } else {
                     $where->starts($field, $value);
                 }

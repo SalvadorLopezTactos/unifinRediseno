@@ -39,6 +39,7 @@ There are several users configured in the ldap server with the following data:
 | 5 | user3 | user3 | Group2 | cn=user3,ou=people,dc=openldap,dc=com |
 | 6 | user, comma | usercomma | Group1 | cn=user\, comma,ou=people,dc=openldap,dc=com |
 | 7 | user1, comma | user1comma | Group1 | cn=user1\, comma,ou=people,dc=openldap,dc=com |
+| 8 | david | david | Group1 | cn=david,ou=people,dc=openldap,dc=com |
 
 
 ## IDM ldap sample config

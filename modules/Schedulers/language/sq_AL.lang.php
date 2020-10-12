@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiko artikujt e miratuar dhe artikujt e skaduar të bazës së njohurive.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Punë e planifikuar',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Pastruesi i listës së aktiviteteve',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervali',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Aktivizo dërgimin e rikujtesave me email',
 'LBL_CLEANJOBQUEUE' => 'Pastrim i punës së reshtit',
 'LBL_CLEANOLDRECORDLISTS' => 'Pastro listat e vjetra të regjistrimit',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Pastruesi i listës së aktiviteteve',
 'LBL_PMSEENGINECRON' => 'Planifikuesi i SugarBPM',
 );
 

@@ -9,33 +9,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
-
 $module_name = 'Employees';
-$idpConfig  = new Config(\SugarConfig::getInstance());
-$isIDMModeEnabled  = $idpConfig->isIDMModeEnabled();
-if ($isIDMModeEnabled) {
-    $newEmployeeLink = [
-        'route' => $idpConfig->buildCloudConsoleUrl('userCreate'),
-        'openwindow' => true,
-        'label' =>'LNK_NEW_EMPLOYEE',
-        'acl_action'=>'admin',
-        'acl_module'=>$module_name,
-        'icon' => 'fa-plus',
-    ];
-} else {
-    $newEmployeeLink = [
-        'route' => '#bwc/index.php?' . http_build_query([
-                'module' => $module_name,
-                'action' => 'EditView',
-            ]),
-        'label' =>'LNK_NEW_EMPLOYEE',
-        'acl_action'=>'admin',
-        'acl_module'=>$module_name,
-        'icon' => 'fa-plus',
-    ];
-}
+$newEmployeeLink = [
+    'route' => '#bwc/index.php?' . http_build_query([
+            'module' => $module_name,
+            'action' => 'EditView',
+        ]),
+    'label' =>'LNK_NEW_EMPLOYEE',
+    'acl_action'=>'admin',
+    'acl_module'=>$module_name,
+    'icon' => 'fa-plus',
+];
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     $newEmployeeLink,
     array(

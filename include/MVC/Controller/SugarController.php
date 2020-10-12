@@ -743,54 +743,6 @@ class SugarController
 		$this->view = 'classic';
 	}
 
-	/**
-	 * this method id used within a Dashlet when performing an ajax call
-	 */
-	protected function action_callmethoddashlet(){
-		if(!empty($_REQUEST['id'])) {
-		    $id = $_REQUEST['id'];
-		    $requestedMethod = $_REQUEST['method'];
-		    $dashletDefs = $GLOBALS['current_user']->getPreference('dashlets', 'Home'); // load user's dashlets config
-		    if(!empty($dashletDefs[$id])) {
-                $dashlet = Dashlet::instantiate($id, $dashletDefs[$id]);
-
-		        if(method_exists($dashlet, $requestedMethod) || method_exists($dashlet, '__call')) {
-		            echo $dashlet->$requestedMethod();
-		        }
-		        else {
-		            echo 'no method';
-		        }
-		    }
-		}
-	}
-
-	/**
-	 * this method is used within a Dashlet when the options configuration is posted
-	 */
-	protected function action_configuredashlet(){
-		global $current_user, $mod_strings;
-
-		if(!empty($_REQUEST['id'])) {
-		    $id = $_REQUEST['id'];
-		    $dashletDefs = $current_user->getPreference('dashlets', $_REQUEST['module']); // load user's dashlets config
-            $dashlet = Dashlet::instantiate($id, $dashletDefs[$id]);
-
-		    if(!empty($_REQUEST['configure']) && $_REQUEST['configure']) { // save settings
-		        $dashletDefs[$id]['options'] = $dashlet->saveOptions($_REQUEST);
-		        $current_user->setPreference('dashlets', $dashletDefs, 0, $_REQUEST['module']);
-		    }
-		    else { // display options
-		        $json = getJSONobj();
-		        return $json->encode((array('header' => $dashlet->title . ' : ' . $mod_strings['LBL_OPTIONS'],
-		                                                 'body'  => $dashlet->displayOptions())));
-
-		    }
-		}
-		else {
-		    return '0';
-		}
-	}
-
     /**
      * Global method to delete an attachment
      *

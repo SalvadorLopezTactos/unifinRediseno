@@ -22,16 +22,28 @@ Feature: SOAP login check
   Examples:
     | instance                      | version |   user      |  password  | plain? |
     | behat-tests-mango             | 4_1     |   admin     |  admin     | false  |
+    | behat-tests-mango             | 4_1     |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 4_1     |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 4_1     |   admin     |  admin     | true   |
     | behat-tests-mango             | 4       |   admin     |  admin     | false  |
+    | behat-tests-mango             | 4       |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 4       |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 4       |   admin     |  admin     | true   |
     | behat-tests-mango             | 3_1     |   admin     |  admin     | false  |
+    | behat-tests-mango             | 3_1     |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 3_1     |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 3_1     |   admin     |  admin     | true   |
     | behat-tests-mango             | 3       |   admin     |  admin     | false  |
+    | behat-tests-mango             | 3       |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 3       |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 3       |   admin     |  admin     | true   |
     | behat-tests-mango             | 2_1     |   admin     |  admin     | false  |
+    | behat-tests-mango             | 2_1     |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 2_1     |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 2_1     |   admin     |  admin     | true   |
     | behat-tests-mango             | 2       |   admin     |  admin     | false  |
+    | behat-tests-mango             | 2       |   admin     |  admin     | true   |
+    | behat-tests-mango-oidc        | 2       |   admin     |  admin     | false  |
     | behat-tests-mango-oidc        | 2       |   admin     |  admin     | true   |
 
 

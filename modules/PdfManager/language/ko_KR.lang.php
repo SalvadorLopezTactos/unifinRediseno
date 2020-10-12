@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => '미리 보기',
   'LBL_ALERT_SWITCH_BASE_MODULE' => '경고:기본모듈을 변경했다면 전체 필드가 제거되어야할 템플릿에 이미 추가되었습니다.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => '요청하신 파일입니다.',
-  
 
   'LBL_TPL_QUOTE_NAME' => '견적',
   'LBL_TPL_QUOTE_DESCRIPTION' => '이 템플릿은 견적을 PDF로 출력하는데 사용됩니다.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => '견적',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => '견적서 (서비스 포함)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => '이 양식은 서비스 정보를 포함한 견적서를 PDF로 인쇄하는 데 사용됩니다.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => '서비스견적',
+
   'LBL_TPL_INVOICE_NAME' => '청구서',
   'LBL_TPL_INVOICE_DESCRIPTION' => '이 템플릿은 청구서를 PDF로 출력하는데 사용됩니다.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => '청구서',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => '청구서 (서비스 포함)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => '이 양식은 서비스 정보를 포함한 청구서를 PDF로 인쇄하는 데 사용됩니다.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => '서비스청구서',
+
   'LBL_TPL_QUOTE_NUMBER' => '견적 번호',
   'LBL_TPL_SALES_PERSON' => '영업 직원',
   'LBL_TPL_VALID_UNTIL' => '유효 기한',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => '부분 번호',
   'LBL_TPL_PRODUCT' => '상품',
   'LBL_TPL_RLI' => '매출라인 품목목록',
+  'LBL_TPL_DURATION' => '기간',
+  'LBL_TPL_DURATION_STARTS' => '시작:',
+  'LBL_TPL_DURATION_ENDS' => '완료:',
   'LBL_TPL_LIST_PRICE' => '가격 목록',
   'LBL_TPL_UNIT_PRICE' => '가격 단위',
   'LBL_TPL_EXT_PRICE' => 'Ext. 가격',

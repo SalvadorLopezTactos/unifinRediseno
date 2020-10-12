@@ -52,50 +52,56 @@ class EmailMarketing extends SugarBean
 		return $this->name;
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data()
+    {
 
-		$temp_array = $this->get_list_view_array();
+        $temp_array = $this->get_list_view_array();
 
-		$id = $temp_array['ID'];
-		$template_id = $temp_array['TEMPLATE_ID'];
+        $id = $temp_array['ID'];
 
-		//mode is set by schedule.php from campaigns module.
-		if (!isset($this->mode) or empty($this->mode) or $this->mode!='test') {
-			$this->mode='rest';
-		}
+        //mode is set by schedule.php from campaigns module.
+        if (!isset($this->mode) or empty($this->mode) or $this->mode != 'test') {
+            $this->mode = 'rest';
+        }
 
-		if ($temp_array['ALL_PROSPECT_LISTS']==1) {
-			$query="SELECT name from prospect_lists ";
-			$query.=" INNER JOIN prospect_list_campaigns plc ON plc.prospect_list_id = prospect_lists.id";
-			$query.=" WHERE plc.campaign_id='{$temp_array['CAMPAIGN_ID']}'";
-			$query.=" AND prospect_lists.deleted=0";
-			$query.=" AND plc.deleted=0";
-			if ($this->mode=='test') {
-				$query.=" AND prospect_lists.list_type='test'";
-			} else {
-				$query.=" AND prospect_lists.list_type!='test'";
-			}
-		} else {
-			$query="SELECT name from prospect_lists ";
-			$query.=" INNER JOIN email_marketing_prospect_lists empl ON empl.prospect_list_id = prospect_lists.id";
-			$query.=" WHERE empl.email_marketing_id='{$id}'";
-			$query.=" AND prospect_lists.deleted=0";
-			$query.=" AND empl.deleted=0";
-			if ($this->mode=='test') {
-				$query.=" AND prospect_lists.list_type='test'";
-			} else {
-				$query.=" AND prospect_lists.list_type!='test'";
-			}
-		}
-		$res = $this->db->query($query);
-		while (($row = $this->db->fetchByAssoc($res)) != null) {
-			if (!empty($temp_array['PROSPECT_LIST_NAME'])) {
-				$temp_array['PROSPECT_LIST_NAME'].="<BR>";
-			}
-			$temp_array['PROSPECT_LIST_NAME'].=$row['name'];
-		}
-		return $temp_array;
-	}
+        if ($temp_array['ALL_PROSPECT_LISTS'] == 1) {
+            $query = "SELECT name from prospect_lists ";
+            $query .= " INNER JOIN prospect_list_campaigns plc ON plc.prospect_list_id = prospect_lists.id";
+            $query .= " WHERE plc.campaign_id=?";
+            $query .= " AND prospect_lists.deleted=0";
+            $query .= " AND plc.deleted=0";
+            if ($this->mode == 'test') {
+                $query .= " AND prospect_lists.list_type='test'";
+            } else {
+                $query .= " AND prospect_lists.list_type!='test'";
+            }
+            $param = $temp_array['CAMPAIGN_ID'];
+        } else {
+            $query = "SELECT name from prospect_lists ";
+            $query .= " INNER JOIN email_marketing_prospect_lists empl ON empl.prospect_list_id = prospect_lists.id";
+            $query .= " WHERE empl.email_marketing_id=?";
+            $query .= " AND prospect_lists.deleted=0";
+            $query .= " AND empl.deleted=0";
+            if ($this->mode == 'test') {
+                $query .= " AND prospect_lists.list_type='test'";
+            } else {
+                $query .= " AND prospect_lists.list_type!='test'";
+            }
+            $param = $id;
+        }
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $query,
+                [$param]
+            );
+        foreach ($stmt as $row) {
+            if (!empty($temp_array['PROSPECT_LIST_NAME'])) {
+                $temp_array['PROSPECT_LIST_NAME'] .= "<BR>";
+            }
+            $temp_array['PROSPECT_LIST_NAME'] .= $row['name'];
+        }
+        return $temp_array;
+    }
 
 	function bean_implements($interface){
 		switch($interface){

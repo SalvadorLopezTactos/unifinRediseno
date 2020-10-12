@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'אין תיבות דואר בדומיין הזה',
   'LBL_LIST_PROSPECTLIST_NAME'=>'שם',
 	'LBL_MORE_DETAIL' => 'פרטים נוספים' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'חשבונות',
+    'LBL_CAMPAIGNS' => 'קמפיינים',
+    'LBL_CONTACTS' => 'אנשי קשר',
+    'LBL_LEADS' => 'לידים',
+    'LBL_PROSPECTS' => 'מטרות',
+    'LBL_USERS' => 'משתמשים',
 
     // Help Text
     // List View Help Text

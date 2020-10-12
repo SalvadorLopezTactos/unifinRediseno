@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Tilbud (Send Til)',
 	'LNK_ACCOUNT_REPORTS' => 'Vis bedriftsrapporter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashbord for kontoliste',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashbord for kontooppføring',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontodetaljer',
+    'LBL_NEXT_RENEWAL_DATE' => 'Dato for neste fornyelse',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kontonavn/bransje',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Plassering',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammer',

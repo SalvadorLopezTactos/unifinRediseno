@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class UsefulnessLink extends Link2
 {
@@ -79,6 +80,6 @@ class UsefulnessLink extends Link2
      */
     public function getPortalContact()
     {
-        return BeanFactory::getBean('Contacts', $_SESSION['contact_id']);
+        return PortalFactory::getInstance('Session')->getContact();
     }
 }

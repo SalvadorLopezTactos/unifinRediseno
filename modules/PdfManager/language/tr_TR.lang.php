@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Ön izleme',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UYARI: Birincil modülü değiştirirseniz, şablona önceden eklenen tüm alanların kaldırılması gerekir.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'İstemiş olduğunuz dosya (Bu metni değiştirebilirsiniz)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Teklif',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Bu şablon Teklifi PDF formatında yazmak için kullanılır.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'teklif',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Teklif (hizmetleriyle)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Bu şablon, PDF formatında hizmet bilgisi dahil bir Teklifin yazdırılması için kullanılır.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'hizmet teklifi',
+
   'LBL_TPL_INVOICE_NAME' => 'Fatura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Bu şablon Faturayı PDF formatında yazmak için kullanılır.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'fatura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Fatura (hizmetleriyle)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Bu şablon, PDF formatında hizmet bilgisi dahil bir Faturanın yazdırılması için kullanılır.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'hizmet faturası',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Teklif numarası:',
   'LBL_TPL_SALES_PERSON' => 'Satıcı:',
   'LBL_TPL_VALID_UNTIL' => 'Geçerlilik tarihi:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Parça Numarası',
   'LBL_TPL_PRODUCT' => 'Ürün',
   'LBL_TPL_RLI' => 'Gelir Kalemleri',
+  'LBL_TPL_DURATION' => 'Süre',
+  'LBL_TPL_DURATION_STARTS' => 'Başlama:',
+  'LBL_TPL_DURATION_ENDS' => 'Bitiş:',
   'LBL_TPL_LIST_PRICE' => 'Liste Fiyatı',
   'LBL_TPL_UNIT_PRICE' => 'Birim Fiyatı',
   'LBL_TPL_EXT_PRICE' => 'Tutar',

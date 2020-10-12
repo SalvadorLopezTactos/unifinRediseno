@@ -2374,6 +2374,7 @@ SearchableCombobox.prototype.initObject = function (options, parent) {
         searchValue: "value",
         searchDelay: 1500,
         searchMore: false,
+        _searchMoreLayout: 'selection-list',
         isValid: true
     };
 
@@ -2388,6 +2389,7 @@ SearchableCombobox.prototype.initObject = function (options, parent) {
         .setSearchValue(defaults.searchValue)
         .setSearchLabel(defaults.searchLabel)
         .setSearchURL(defaults.searchURL)
+        .setSearchMoreLayout(defaults._searchMoreLayout)
         .setOptions(defaults.options)
         .setValid(defaults.isValid);
 
@@ -2474,6 +2476,17 @@ SearchableCombobox.prototype.setSearchLabel = function(label) {
         throw new Error("setSearchLabel(): The parameter must be a string or a function or null.")
     }
     this._searchLabel = label;
+    return this;
+};
+
+/**
+ * Set the layout to load when clicking on Search and Select
+ *
+ * @param {string} layoutName The name of the layout
+ * @return {SearchableCombobox}
+ */
+SearchableCombobox.prototype.setSearchMoreLayout = function(layoutName) {
+    this._searchMoreLayout = layoutName;
     return this;
 };
 
@@ -2689,7 +2702,7 @@ SearchableCombobox.prototype.getSelectedText = function () {
     if (this.controlObject) {
         data = $(this.controlObject).select2("data");
     }
-    return data.text || "";
+    return data && data.text ? data.text : '';
 };
 
 SearchableCombobox.prototype._openSearchMore = function() {
@@ -2700,7 +2713,7 @@ SearchableCombobox.prototype._openSearchMore = function() {
         self.controlObject.select2('close');
         $(self.html).closest('.adam-modal').css('zIndex', -1);
         App.drawer.open({
-                layout: 'selection-list',
+                layout: self._searchMoreLayout,
                 context: self._searchMore
             },
             _.bind(function (drawerValues) {

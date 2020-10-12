@@ -16,7 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ============================================================ */
-
+/*
+ *THIS FILE WAS MODIFIED BY SUGARCRM INC. ON JULY 16, 2019
+ */
 
 !function ($) {
 
@@ -31,7 +33,10 @@
     this.options = $.extend({}, $.fn.collapse.defaults, options)
 
     if (this.options.parent) {
-      this.$parent = $(this.options.parent)
+     /* PX-481: Bootstrap upgrade, changes needed to files that could not be upgraded to v3.4.1,
+      * int order to fix 'data-target' XSS vulnerability, by replacing '$(this.options.parent)'
+      * with '$(document).find(this.options.parent)'*/
+      this.$parent = $(document).find(this.options.parent)
     }
 
     this.options.toggle && this.toggle()
@@ -143,14 +148,16 @@
  /* COLLAPSIBLE DATA-API
   * ==================== */
 
+ /* PX-481: Bootstrap upgrade, changes needed to files that could not be upgraded to v3.4.1,
+  * int order to fix 'data-target' XSS vulnerability, by replacing '$(target)' with '$(document).find(target)'*/
   $(document).on('click.collapse.data-api', '[data-toggle=collapse]', function (e) {
     var $this = $(this), href
       , target = $this.attr('data-target')
         || e.preventDefault()
         || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
-      , option = $(target).data('collapse') ? 'toggle' : $this.data()
-    $this[$(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
-    $(target).collapse(option)
+      , option = $(document).find(target).data('collapse') ? 'toggle' : $this.data()
+    $this[$(document).find(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
+    $(document).find(target).collapse(option)
   })
 
 }(window.jQuery);

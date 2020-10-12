@@ -61,8 +61,8 @@ $dictionary['Opportunity'] = array(
             'required' => true,
             'importable' => 'required',
             'required' => true,
-            'related_field' => array(
-                'account_id'
+            'related_fields' => array(
+                'account_id',
             ),
             'exportable'=> true,
             'export_link_type' => 'one',//relationship type to be used during export
@@ -100,6 +100,9 @@ $dictionary['Opportunity'] = array(
             'id_name' => 'campaign_id',
             'vname' => 'LBL_CAMPAIGN',
             'type' => 'relate',
+            'related_fields' => array(
+                'campaign_id',
+            ),
             'link' => 'campaign_opportunities',
             'isnull' => true,
             'table' => 'campaigns',
@@ -134,7 +137,6 @@ $dictionary['Opportunity'] = array(
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
             'audited' => true,
-            'validation' => array('type' => 'range', 'min' => 0),
             'related_fields' => array(
                 'currency_id',
                 'base_rate'
@@ -268,7 +270,6 @@ $dictionary['Opportunity'] = array(
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
-            'validation' => array('type' => 'range', 'min' => 0),
             'audited' => true,
             'related_fields' => array(
                 'currency_id',
@@ -283,7 +284,6 @@ $dictionary['Opportunity'] = array(
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
-            'validation' => array('type' => 'range', 'min' => 0),
             'audited' => true,
             'related_fields' => array(
                 'currency_id',
@@ -342,6 +342,50 @@ $dictionary['Opportunity'] = array(
             'reportable' => false,
             'importable' => false
         ),
+        'renewal_opportunities' => [
+            'name' => 'renewal_opportunities',
+            'type' => 'link',
+            'relationship' => 'renewals_opportunities',
+            'module' => 'Opportunities',
+            'bean_name' => 'Opportunity',
+            'source' => 'non-db',
+            'vname' => 'LBL_RENEWAL_OPPORTUNITIES',
+            'side' => 'left',
+        ],
+        'renewal_parent' => [
+            'name' => 'renewal_parent',
+            'type' => 'link',
+            'relationship' => 'renewals_opportunities',
+            'module' => 'Opportunities',
+            'bean_name' => 'Opportunity',
+            'link_type' => 'one',
+            'source' => 'non-db',
+            'vname' => 'LBL_RENEWAL_PARENT',
+            'side' => 'right',
+        ],
+        'renewal_parent_id' => [
+            'name' => 'renewal_parent_id',
+            'vname' => 'LBL_PARENT_RENEWAL_OPPORTUNITY_ID',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => false,
+            'audited' => true,
+        ],
+        'renewal_parent_name' => [
+            'name' => 'renewal_parent_name',
+            'rname' => 'name',
+            'id_name' => 'renewal_parent_id',
+            'vname' => 'LBL_RENEWAL_PARENT',
+            'type' => 'relate',
+            'isnull' => 'true',
+            'module' => 'Opportunities',
+            'table' => 'opportunities',
+            'massupdate' => false,
+            'source' => 'non-db',
+            'link' => 'renewal_parent',
+            'unified_search' => true,
+            'importable' => 'true',
+        ],
         'accounts' => array(
             'name' => 'accounts',
             'type' => 'link',
@@ -534,12 +578,23 @@ $dictionary['Opportunity'] = array(
                 'reportable' => true,
                 'importable' => 'false',
             ),
+        'renewal' => array(
+            'name' => 'renewal',
+            'vname' => 'LBL_RENEWAL',
+            'type' => 'bool',
+            'default' => 0,
+            'comment' => 'Indicates whether the opportunity is a renewal',
+        ),
     ),
     'indices' => array(
         array(
             'name' => 'idx_opp_name',
             'type' => 'index',
-            'fields' => array('name'),
+            'fields' => array(
+                'deleted',
+                'name',
+                'date_modified',
+            ),
         ),
         array(
             'name' => 'idx_opp_assigned_timestamp',
@@ -549,7 +604,15 @@ $dictionary['Opportunity'] = array(
         array('name' => 'idx_opportunity_sales_status', 'type' => 'index', 'fields' => array('sales_status')),
         array('name' => 'idx_opportunity_opportunity_type', 'type' => 'index', 'fields' => array('opportunity_type')),
         array('name' => 'idx_opportunity_lead_source', 'type' => 'index', 'fields' => array('lead_source')),
-        array('name' => 'idx_opportunity_next_step', 'type' => 'index', 'fields' => array('next_step')),
+        array(
+            'name' => 'idx_opportunity_next_step',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'next_step',
+                'date_modified',
+            ),
+        ),
         array(
             'name' => 'idx_opportunity_mkto_id',
             'type' => 'index',
@@ -657,6 +720,15 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'opportunity_id',
             'relationship_type' => 'one-to-many',
         ),
+        'renewals_opportunities' => [
+            'lhs_module' => 'Opportunities',
+            'lhs_table' => 'opportunities',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Opportunities',
+            'rhs_table' => 'opportunities',
+            'rhs_key' => 'renewal_parent_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'duplicate_check' => array(
         'enabled' => true,

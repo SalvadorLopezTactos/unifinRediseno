@@ -28,16 +28,44 @@
     <tbody>
     <tr>
         <td>
+            <code>last_name</code>
+        </td>
+        <td>
+            String
+        </td>
+        <td>
+            The last name of the Lead
+        </td>
+        <td>
+            True
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>lead_source</code>
+        </td>
+        <td>
+            String
+        </td>
+        <td>
+            The source of the Lead
+        </td>
+        <td>
+            True
+        </td>
+    </tr>
+    <tr>
+        <td>
             &lt;record field&gt;
         </td>
         <td>
             &lt;record field type&gt;
         </td>
         <td>
-            The name value list of fields to populate.
+            The value for any given field on the Lead record
         </td>
         <td>
-            True
+            False
         </td>
     </tr>
     </tbody>
@@ -47,7 +75,8 @@
 <pre class="pre-scrollable">
 {
    "first_name":"John",
-   "last_name":"Smith"
+   "last_name":"Smith",
+   "lead_source":"Web Site"
 }
 </pre>
 
@@ -107,6 +136,14 @@
     <tr>
         <th>Version</th>
         <th>Change</th>
+    </tr>
+    <tr>
+        <td>
+            v11_6
+        </td>
+        <td>
+            <code>lead_source</code> is a required field.
+        </td>
     </tr>
     <tr>
         <td>

@@ -33,8 +33,8 @@
         // we use this wrapper because our spec
         // requires us to set the button.isHidden = true
         // if we don't render it.
-        this.before("render", function() {
-            if (self.hasAccess()) {
+        this.before('render', function() {
+            if (self.hasAccess() && !self.isOnForbiddenLayout()) {
                 this._show();
                 return true;
             }
@@ -60,6 +60,12 @@
     getFieldElement: function() {
         return this.$(this.fieldTag);
     },
+
+    /**
+     * Enable or disable this button.
+     * @param {boolean} [disable=true] If true, disable. If false, enable.
+     * @inheritdoc
+     */
     setDisabled: function(disable) {
         disable = _.isUndefined(disable) ? true : disable;
         this.def.css_class = this.def.css_class || '';
@@ -108,6 +114,10 @@
             this.trigger('show');
         }
     },
+
+    /**
+     * Show this button if permissible, otherwise mark it as hidden.
+     */
     show: function() {
         if(this.hasAccess()) {
             this._show();
@@ -115,6 +125,13 @@
             this.isHidden = true;
         }
     },
+
+    /**
+     * Hide this button.
+     *
+     * @return {boolean} `false` if hiding was prevented by a before-event.
+     *   `undefined` otherwise.
+     */
     hide: function() {
         if (this.isHidden !== true) {
             if (!this.triggerBefore("hide")) {
@@ -126,10 +143,11 @@
             this.trigger('hide');
         }
     },
+
     /**
      * Track using the flag that is set on the hide and show from above.
      *
-     * It should check the visivility by isHidden instead of DOM visibility testing
+     * It should check the visibility by isHidden instead of DOM visibility testing
      * since actiondropdown renders its dropdown lazy
      *
      * @return {boolean}
@@ -137,6 +155,7 @@
     isVisible: function() {
         return !this.isHidden;
     },
+
     /**
      * @inheritdoc
      *
@@ -177,5 +196,57 @@
         } else {
             return app.acl.hasAccess(acl_action, acl_module);
         }
+    },
+
+    /**
+     * Check if this button is on a layout.
+     *
+     * @param {Object} layout the layout def
+     * @return {boolean} `true` if this button is on the layout. `false` otherwise.
+     * @private
+     */
+    _isOnLayout: function(layout) {
+        var comp = this.closestComponent(layout.name);
+        return comp && (layout.name !== 'dashboard' ||
+             // for dashboard, either dashboard id or type should match
+             // dashboard id is used by service console. type is used by new consoles
+             (!_.isUndefined(layout.id) && comp.model.get('id') === layout.id) ||
+             (!_.isUndefined(layout.type) && comp.model.get('metadata').type === layout.type));
+    },
+
+    /**
+     * Check if this button is on a forbidden layout.
+     *
+     * @return {boolean} `true` if this button is on a forbidden layout, or if
+     *  it is a descendant of a forbidden layout. `false` otherwise.
+     */
+    isOnForbiddenLayout: function() {
+        if (!this.def || (!this.def.disallowed_layouts && !this.def.allowed_layouts)) {
+            return false;
+        }
+
+        if (this.def.disallowed_layouts) {
+            // ban this button if it has any ancestor component in the list of disallowed layouts
+            if (_.any(this.def.disallowed_layouts, function(layout) {
+                return this._isOnLayout(layout);
+            }, this)
+            ) {
+                return true;
+            }
+        }
+
+        if (this.def.allowed_layouts) {
+            // don't ban this button if it has any ancestor component in the list of allowed layouts
+            if (_.any(this.def.allowed_layouts, function(layout) {
+                return this._isOnLayout(layout);
+            }, this)
+            ) {
+                return false;
+            }
+            // ban this button if it doesn't have any ancestor component in the list of allowed layouts
+            return true;
+        }
+
+        return false;
     }
 })

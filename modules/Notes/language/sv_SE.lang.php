@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Senast ändrad',
     'LBL_DELETED' => 'Raderad',
     'LBL_REVENUELINEITEMS' => 'Intäktsposter',
+    'LBL_ENTRY_SOURCE' => 'Notering källa',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

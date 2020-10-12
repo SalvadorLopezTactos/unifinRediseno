@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Talepler Listesi Panosu',
     'LBL_CASES_RECORD_DASHBOARD' => 'Talepler Kaydı Panosu',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Talep Detayları',
 
 	'ERR_DELETE_RECORD'					=> 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
 	'LBL_ACCOUNT_ID'					=> 'Müşteri ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontaklar',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Talepler',
 	'LBL_DESCRIPTION'					=> 'Tanım:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Dosya Eki',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Dosya Eki',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Tarihçe',
 	'LBL_INVITEE'						=> 'Kontaklar',
 	'LBL_MEMBER_OF'						=> 'Müşteri',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Oluşturan Kullanıcı İsmi',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atanmış Kullanıcı İsmi',
     'LBL_EXPORT_TEAM_COUNT' => 'Takım Sayısı',
+    'LBL_CHANGETIMERS' => 'Zamanlayıcıları Değiştirin',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'İlişkilenmiş Kontakların E-Postaları',
@@ -141,4 +144,11 @@ Sugar içinde {{plural_module_name}} kaydı oluşturmak için farklı yöntemler
 - "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
 - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
 2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Didn&#39;t find what you are looking for?',
+    'LBL_CREATE_CASE' => 'Create a {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA Bilgileri',
+    'LBL_HOURS' => 'Saat',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

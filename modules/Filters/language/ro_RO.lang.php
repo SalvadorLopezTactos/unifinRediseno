@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'anul trecut',
     'LBL_OPERATOR_THIS_YEAR' => 'anul acesta',
     'LBL_OPERATOR_NEXT_YEAR' => 'anul urmator',
+    'LBL_OPEN_ISSUES' => 'Deschis {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Soluționat recent',
 );

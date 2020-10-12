@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'előző év',
     'LBL_OPERATOR_THIS_YEAR' => 'aktuális év',
     'LBL_OPERATOR_NEXT_YEAR' => 'következő év',
+    'LBL_OPEN_ISSUES' => '{0} megnyitása',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Legutóbb megoldott',
 );

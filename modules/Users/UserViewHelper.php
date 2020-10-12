@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 /**
@@ -81,6 +83,7 @@ class UserViewHelper {
         $this->assignUserTypes();
         $this->setupButtonsAndTabs();
         $this->setupUserTypeDropdown();
+        $this->setupLicenseTypeDropdown();
         $this->setupPasswordTab();
         $this->setupEmailSettings();
         $this->setupAdvancedTab();
@@ -274,6 +277,70 @@ class UserViewHelper {
         $this->ss->assign('USER_TYPE_READONLY',$userTypes[$userType]['label'] . "<input type='hidden' id='UserType' value='{$userType}'><div id='UserTypeDesc'>&nbsp;</div>");
 
         $this->ss->assign('IDM_MODE_ENABLED', $idpConfig->isIDMModeEnabled());
+    }
+
+    /**
+     * setupLicenseTypeDropdown
+     *
+     * This function handles setting up the license type dropdown field.  It determines which license types are available for the current user.
+     * At the end of the function two Smarty variables (LICENSE_TYPE_DROPDOWN and LICENSE_TYPE_READONLY) are assigned.
+     *
+     */
+    public function setupLicenseTypeDropdown()
+    {
+        $userLicenseType = SubscriptionManager::instance()->getUserSubscriptions($this->bean);
+        global $current_user;
+        if ($current_user->is_admin) {
+            $availableLicenseTypes = array_keys(SubscriptionManager::instance()->getSystemSubscriptionKeys());
+        } else {
+            $availableLicenseTypes = $userLicenseType;
+        }
+
+        if (empty($availableLicenseTypes)) {
+            $GLOBALS['log']->fatal('no valid license for this instance');
+        }
+        // multi-selection
+        $licenseTypesDropdown = '<select multiple="true" id="license_type" name="LicenseTypes[]" ';
+        if (count($availableLicenseTypes) == 1) {
+            $licenseTypesDropdown .= ' disabled ';
+        }
+        $licenseTypesDropdown .= '>';
+
+        foreach ($availableLicenseTypes as $type) {
+            if (in_array($type, $userLicenseType)) {
+                $licenseTypesDropdown .= '<option value="' . $type . '" SELECTED>'
+                    . User::getLicenseTypeDescription($type) . '</option>';
+            } else {
+                $licenseTypesDropdown .= '<option value="' . $type . '">'
+                    . User::getLicenseTypeDescription($type) . '</option>';
+            }
+        }
+        $licenseTypesDropdown .= '</select><div id="LicenseTypeDesc">&nbsp;</div>';
+
+        $licenseTypesInString = '';
+
+        // send hidden value for single license type
+        if (count($availableLicenseTypes) == 1) {
+            $licenseTypesDropdown .= '<input type="hidden" name="LicenseTypes[]" value="' . $availableLicenseTypes[0] . '" />';
+        }
+
+        // display invalid license types in red
+        foreach ($userLicenseType as $type) {
+            $licenseTypesInString .= User::getLicenseTypeDescription($type) . '</br>';
+        }
+
+        $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($this->bean);
+        foreach ($invalidLicenseTypes as $type) {
+            $licenseTypesInString .= '<p class="error">' . User::getLicenseTypeDescription($type) . '</p>';
+        }
+        $this->ss->assign('LICENSE_TYPE_DROPDOWN', $licenseTypesDropdown);
+        $licenseString = json_encode($userLicenseType);
+
+        $this->ss->assign(
+            'LICENSE_TYPE_READONLY',
+            $licenseTypesInString
+            . "<input type='hidden' id='LicenseType' value='{$licenseString}'><div id='LicenseTypeDesc'>&nbsp;</div>"
+        );
     }
 
     protected function setupPasswordTab() {
@@ -535,6 +602,16 @@ class UserViewHelper {
         $this->ss->assign('CHOOSER_SCRIPT','set_chooser();');
         $this->ss->assign('CHOOSE_WHICH', translate('LBL_CHOOSE_WHICH','Users'));
 
+        // Gets the translated preference. If it doesn't exist, use 'field_on_side' as default.
+        $field_name_placement = $this->bean->getPreference('field_name_placement') ?? 'field_on_side';
+        $field_name_placement_options = [
+            'field_on_side' => translate('LBL_BESIDE_FIELD_VALUE', 'Users'),
+            'field_on_top' => translate('LBL_ABOVE_FIELD_VALUE', 'Users'),
+        ];
+        $this->ss->assign(
+            'FIELD_NAME_PLACEMENT',
+            get_select_options_with_id($field_name_placement_options, $field_name_placement)
+        );
     }
 
     protected function setupAdvancedTabLocaleSettings() {

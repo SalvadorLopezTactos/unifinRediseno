@@ -86,6 +86,9 @@ $dictionary['Category'] = array(
         'taggable',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'Categories',
+    ],
 );
 
 VardefManager::createVardef(

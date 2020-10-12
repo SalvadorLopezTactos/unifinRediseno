@@ -2583,7 +2583,10 @@ sugarListView.prototype.send_mass_update = function(mode, no_record_txt, del) {
 				alert(no_record_txt);
 				return false;
 			}
-			if(typeof(document.MassUpdate.current_admin_id)!='undefined' && document.MassUpdate.module!= 'undefined' && document.MassUpdate.module.value == 'Users' && (document.MassUpdate.UserType.value!='' || document.MassUpdate.status.value!='')) {
+            if (typeof(document.MassUpdate.current_admin_id) != 'undefined' &&
+                document.MassUpdate.module != 'undefined' && document.MassUpdate.module.value == 'Users' &&
+                ((document.MassUpdate.UserType && document.MassUpdate.UserType.value != '') ||
+                (document.MassUpdate.status && document.MassUpdate.status.value != ''))) {
 				var current_admin_id = document.MassUpdate.current_admin_id.value;
 				var reg_for_current_admin_id = new RegExp('^'+current_admin_id+'[\s]*,|,[\s]*'+current_admin_id+'[\s]*,|,[\s]*'+current_admin_id+'$|^'+current_admin_id+'$');
 				if(reg_for_current_admin_id.test(document.MassUpdate.uid.value)) {
@@ -2599,7 +2602,9 @@ sugarListView.prototype.send_mass_update = function(mode, no_record_txt, del) {
 			entireInput.type = 'hidden';
 			entireInput.value = 'index';
 			document.MassUpdate.appendChild(entireInput);
-			if(document.MassUpdate.module!= 'undefined' && document.MassUpdate.module.value == 'Users' && (document.MassUpdate.UserType.value!='' || document.MassUpdate.status.value!='')) {
+            if (document.MassUpdate.module != 'undefined' && document.MassUpdate.module.value == 'Users' &&
+                ((document.MassUpdate.UserType && document.MassUpdate.UserType.value != '') ||
+                (document.MassUpdate.status && document.MassUpdate.status.value != ''))) {
 				alert(SUGAR.language.get('Users','LBL_LAST_ADMIN_NOTICE'));
 				return false;
 			}

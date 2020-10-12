@@ -130,6 +130,3 @@ $first_name_max = $first_name_count - 1;
 
 //end function create_product
 }
-
-
-?>

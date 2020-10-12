@@ -72,7 +72,7 @@
      * @protected
      */
     _defaultSettings: {
-        dashboards: 20,
+        dashboards: 50,
         favorites: 3,
         recently_viewed: 10,
         recently_viewed_toggle: 3
@@ -110,10 +110,22 @@
         });
 
         this._initCollections();
-        this._initLegacyDashboards();
 
         this.meta.last_state = { id: 'recent' };
         this._recentToggleKey = app.user.lastState.key(this.TOGGLE_RECENTS_KEY, this);
+
+        this._setLogoImage();
+    },
+
+    /**
+     * Sets the logo for Sugar top left corner
+     * @protected
+     */
+    _setLogoImage: function() {
+        // let's put Sugar logo here instead of hbs template
+        var logoUrl = app.utils.buildUrl('styleguide/assets/img/logo.svg');
+        var altStr = app.lang.get('str', 'LBL_SUGAR_CUBE_ALT', this.module);
+        this.logoImage = '<img src="' + logoUrl + '" alt="' + altStr + '">';
     },
 
     /**
@@ -133,24 +145,6 @@
         this.dashboards = app.data.createBeanCollection('Dashboards');
         this.recentlyViewed = app.data.createMixedBeanCollection();
 
-        return this;
-    },
-
-    /**
-     * Sets the legacy dashboards link if it is configured to be enabled.
-     *
-     * We are not using the `hide_dashboard_bwc` form, because we don't provide
-     * this feature by default and it is enabled only on upgrades from 6.x..
-     * This will be removed in the future, when all dashlets are available in
-     * 7.x..
-     *
-     * @chainable
-     * @private
-     */
-    _initLegacyDashboards: function() {
-        if (app.config.enableLegacyDashboards && app.config.enableLegacyDashboards === true) {
-            this.dashboardBwcLink = app.bwc.buildRoute(this.module, null, 'bwc_dashboard');
-        }
         return this;
     },
 

@@ -7,15 +7,15 @@ div.opportunity-metrics-wrapper {
     min-width: 250px;
 
     .won {
-      fill: @green;
+      fill: @darkArmy;
     }
 
     .lost {
-      fill: @red;
+      fill: @darkRed;
     }
 
     .active {
-      fill: @blue;
+      fill: @darkOcean;
     }
   }
 }
@@ -48,15 +48,18 @@ div.opportunity-metric {
     border: none;
 
     &.won {
-      background-color: @green;
+      background-color: @lightArmy;
+      color: @darkArmy;
     }
 
     &.lost {
-      background-color: @red;
+      background-color: @lightRed;
+      color: @darkRed;
     }
 
     &.active {
-      background-color: @blue;
+      background-color: @lightOcean;
+      color: @darkOcean;
     }
   }
 
@@ -67,7 +70,7 @@ div.opportunity-metric {
       font-weight: bold;
       font-size: 10px;
       text-align: center;
-      text-shadow: 0 1px 0 #636363;
+      text-shadow: 0 1px 0 @grayLight;
       margin-right: 3px !important;
     }
   }
@@ -78,15 +81,15 @@ div.opportunity-metric {
     box-sizing: border-box;
 
     &.won {
-      color: @green;
+      color: @darkArmy;
     }
 
     &.lost {
-      color: @red;
+      color: @darkRed;
     }
 
     &.active {
-      color: @blue;
+      color: @darkOcean;
     }
   }
 }

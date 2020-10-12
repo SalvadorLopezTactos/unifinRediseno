@@ -26,6 +26,7 @@ if(isset($_SESSION['EMAILTEMPLATE_FROM_LIST_VIEW']))
 global $app_strings;
 global $mod_strings;
 
+/** @var EmailTemplate $focus */
 $focus = BeanFactory::newBean('EmailTemplates');
 
 $detailView = new DetailView();
@@ -63,11 +64,10 @@ if(isset($_REQUEST['account_id']) && is_null($focus->parent_id)) {
 	$focus->parent_id = $_REQUEST['account_id'];
 }
 
-$params = array();
-$params[] = $focus->name;
-
-echo getClassicModuleTitle($focus->module_dir, $params, true);
-
+echo getClassicModuleTitle(htmlspecialchars($focus->module_dir), [
+    htmlspecialchars($focus->name),
+    htmlspecialchars($focus->module_dir),
+], true);
 
 $GLOBALS['log']->info("EmailTemplate detail view");
 
@@ -101,17 +101,17 @@ if(isset($_REQUEST['return_action'])) $xtpl->assign("RETURN_ACTION", $_REQUEST['
 if(isset($_REQUEST['return_id'])) $xtpl->assign("RETURN_ID", $_REQUEST['return_id']);
 $xtpl->assign("GRIDLINE", $gridline);
 $xtpl->assign("ID", $focus->id);
-$xtpl->assign("CREATED_BY", $focus->created_by_name);
-$xtpl->assign("MODIFIED_BY", $focus->modified_by_name);
+$xtpl->assign("CREATED_BY", htmlspecialchars($focus->created_by_name));
+$xtpl->assign("MODIFIED_BY", htmlspecialchars($focus->modified_by_name));
 //if text only is set to true, then make sure input is checked and value set to 1
-if(isset($focus->text_only) && $focus->text_only){
+if ($focus->text_only || $focus->isForgotPasswordTemplate()) {
     $xtpl->assign("TEXT_ONLY_CHECKED","CHECKED");
 }
 $xtpl->assign("NAME", $focus->name);
 $xtpl->assign("DESCRIPTION", $focus->description);
 $xtpl->assign("SUBJECT", $focus->subject);
 $xtpl->assign("BODY", $focus->body);
-$xtpl->assign("BODY_HTML", json_encode(from_html($focus->body_html)));
+$xtpl->assign("BODY_HTML", $focus->body_html);
 $xtpl->assign("DATE_MODIFIED", $focus->date_modified);
 $xtpl->assign("DATE_ENTERED", $focus->date_entered);
 $xtpl->assign("ASSIGNED_USER_NAME", $focus->assigned_user_name);
@@ -174,5 +174,3 @@ require_once('modules/DynamicFields/templates/Files/DetailView.php');
 $xtpl->parse("main");
 
 $xtpl->out("main");
-
-?>

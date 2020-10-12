@@ -13,7 +13,6 @@ class ViewIndex extends SugarView
 {
     public function __construct()
     {
-		$this->options['show_footer'] = false;
 		$this->options['show_header'] = true;
         parent::__construct();
  	}

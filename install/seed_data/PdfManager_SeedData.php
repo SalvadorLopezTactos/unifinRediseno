@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -69,5 +67,36 @@ if (empty($templatesArray)) {
     $pdfTemplate->deleted = 0;
     $pdfTemplate->team_id = 1;
     $pdfTemplate->save();
-}
 
+    $ss->assign('withServices', true);
+
+    $pdfTemplate = new PdfManager();
+    $pdfTemplate->base_module = 'Quotes';
+    $pdfTemplate->name = $modStringSrc['LBL_TPL_QUOTE_SERVICES_NAME'];
+    $pdfTemplate->description = $modStringSrc['LBL_TPL_QUOTE_SERVICES_DESCRIPTION'];
+    $pdfTemplate->body_html = to_html($ss->fetch('modules/PdfManager/tpls/templateQuote.tpl'));
+    $pdfTemplate->template_name = $modStringSrc['LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME'];
+    $pdfTemplate->author = PDF_AUTHOR;
+    $pdfTemplate->title = PDF_TITLE;
+    $pdfTemplate->subject = PDF_SUBJECT;
+    $pdfTemplate->keywords = PDF_KEYWORDS;
+    $pdfTemplate->published = 'yes';
+    $pdfTemplate->deleted = 0;
+    $pdfTemplate->team_id = 1;
+    $pdfTemplate->save();
+
+    $pdfTemplate = new PdfManager();
+    $pdfTemplate->base_module = 'Quotes';
+    $pdfTemplate->name = $modStringSrc['LBL_TPL_INVOICE_SERVICES_NAME'];
+    $pdfTemplate->description = $modStringSrc['LBL_TPL_INVOICE_SERVICES_DESCRIPTION'];
+    $pdfTemplate->body_html = to_html($ss->fetch('modules/PdfManager/tpls/templateInvoice.tpl'));
+    $pdfTemplate->template_name = $modStringSrc['LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME'];
+    $pdfTemplate->author = PDF_AUTHOR;
+    $pdfTemplate->title = PDF_TITLE;
+    $pdfTemplate->subject = PDF_SUBJECT;
+    $pdfTemplate->keywords = PDF_KEYWORDS;
+    $pdfTemplate->published = 'yes';
+    $pdfTemplate->deleted = 0;
+    $pdfTemplate->team_id = 1;
+    $pdfTemplate->save();
+}

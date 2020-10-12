@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'ดูผู้ผลิต',
   'LNK_NEW_PRODUCT_CATEGORY' => 'ดูหมวดหมู่ผลิตภัณฑ์',
   'LNK_NEW_PRODUCT_TYPE' => 'ดูประเภทผลิตภัณฑ์',
-  'LNK_NEW_PRODUCT' => 'สร้างแคตตาล็อกสำหรับผลิตภัณฑ์',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'ผู้ให้บริการการส่งสินค้า',
   'LNK_PRODUCT_LIST' => 'ดูแคตตาล็อกผลิตภัณฑ์',
   'NTC_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนนี้',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'หมวดหมู่ผลิตภัณฑ์',
   'LBL_MANUFACTURERS' => 'ผู้ผลิต',
   'LBL_PRODUCT_TYPES' => 'ประเภทผลิตภัณฑ์',
-
+  'LBL_RENEWABLE' => 'ต่ออายุ',
+  'LBL_SERVICE' => 'บริการ',
 );
-
-
-?>

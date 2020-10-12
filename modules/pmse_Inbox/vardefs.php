@@ -364,6 +364,9 @@ $dictionary['pmse_Inbox'] = array(
         'lockable_fields',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'uses' => array(
         'basic',
         'team_security',

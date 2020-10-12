@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => '預測工作表',
     'ForecastManagerWorksheets' => '預測管理員工作表',
     'MergeRecords'=>'合併記錄',
+      'VisualPipeline'=>'視覺管道',
+      'ConsoleConfiguration' => '控制台配置',
     'Quotas' => '配額',
     'Teams' => '小組',
     'TeamNotices' => '小組通知',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => '流程定義',
     'pmse_Business_Rules' => '流程商務規則',
     'pmse_Emails_Templates' => '流程電子郵件範本',
+    'BusinessCenters' => '商務中心',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => '工作流程定義',
     'EAPM' => '外部帳戶',
     'Worksheet' => '工作表',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => '數據隱私',
     'ReportSchedules' => '報表排程',
     'CommentLog' => '評論日誌',
+    'Holidays' => '假日',
+    'ChangeTimers' => '更改計時器',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'BC',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => '行事曆',
     'Leads' => '潛在客戶',
     'Manufacturers' => '製造商',
+    'VisualPipeline' => '視覺管道',
+    'ConsoleConfiguration' => '控制台配置',
     'Contracts'=>'合約',
     'Quotes' => '報價',
     'Products' => '報價項目',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => '流程定義',
     'pmse_Business_Rules' => '流程商務規則',
     'pmse_Emails_Templates' => '流程電子郵件範本',
+    'BusinessCenters' => '商務中心',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => '工作流程',
     'EAPM' => '外部帳戶',
     'Worksheet' => '工作表',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => '註解',
     'CommentLog' => '評論日誌',
     'Currencies' => '貨幣',
-    'ProductTemplates' => '產品範本',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => '產品類型',
     'Shippers' => '運輸服務供應商',
     'Subscriptions' => '訂閱',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => '電子郵件的參與者',
     'DataPrivacy' => '數據隱私',
     'ReportSchedules' => '報表排程',
+    'Holidays' => '假日',
+    'ChangeTimers' => '更改計時器',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => '第3層',
     'T4' => '第4層',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => '自我產生式',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => '常規使用者',
     'Administrator' => '管理員',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => '目前產品',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Sugar Sell',
+    ),
   'user_status_dom' =>
   array (
     'Active' => '使用中',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => '會議',
     'Calls' => '通話',
       'KBContents' => '知識庫',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '帳戶',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => '目標',
       'KBContents' => '知識庫',
       'Notes' => '附註',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => '實例',
+  ],
 
   'product_status_default_key' => '運送',
   'product_status_quote_key' => '報價',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => '論壇',
     'Web' => '網路',
     'InboundEmail' => '電子郵件',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => '入口網站',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => '中',
         'High' => '高',
     ),
+    'business_day_status_dom' => [
+        'Open' => '開啟',
+        'Open 24 Hours' => '24小時營業',
+        'Closed' => '關門',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => '草案',
         'Archived' => '已存檔',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => '未知',
+        'Outbound' => '外寄',
+        'Inbound' => '傳入',
+        'Internal' => '內部',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => '每4分鐘',
         300000 => '每5分鐘',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => '是',
+        'No' => '否',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => '預測',
         'sales_stage' => '銷售階段',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => '記錄',
         'records' => '清單',
         'activities' => '活動流',
+        'multi-line' => '多行清單',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => '每小時',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => '每 2 週',
         '2419200' => '每 4 週',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => '年',
+            'month' => '月',
+            'day' => '天',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '關注連結',
   'LBL_TOGGLE_VISIBILITY' => '切換可見度', // Record view header panel element
   'LBL_ACTIVITIES' => '活動流',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         'SugarCRM ®、Sugar Enterprise™ 和 Sugar™ 是 SugarCRM 公司的商標。',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => '否',
     'LBL_EMAIL_NOT_SENT'                    => '發送請求電子郵件時遇到問題。請連絡系統管理員。',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => '無法插入 users_password_link。',
 
     'LBL_EMAIL_OK'                          => '確定',
     'LBL_EMAIL_ONE_MOMENT'                  => '請稍等片刻...',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '需要一個使用中工作階段才能匯出內容。',
     'ERR_NO_HEADER_ID' => '該功能在此主題中不可用。',
     'ERR_NOT_ADMIN' => "未經授權存取管理。",
-    'ERR_DISABLED_FOR_IDM_MODE' => '密碼管理僅在雲設置中可用。',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        '只有在<a href="%s" target="_blank">雲端設定</a>上方才有提供密碼管理。',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '如果要更改唯讀欄位, 請與您的Sugar管理員聯繫。',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填欄位：',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM {0} 檔案只能在 Sugar CRM {1} 資料庫中使用。',
     'ERR_DB_QUERY' => '{0}：查詢失敗：{1}',
     'ERR_UW_RETIRED' => '此版本的升級精靈不可用。',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Sugar 的執行個體既非 SugarCloud 執行個體，也沒有設定成 SugarCloud 見解。',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => '您沒有權限建立 {moduleName}。如需權限，請連絡您的管理員。',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => '您需要登入以執行此動作。',
     'EXCEPTION_INVALID_TOKEN'           => '您的驗證權杖無效。',
     'EXCEPTION_NOT_AUTHORIZED'          => '您沒有權限執行此動作。如需權限，請連絡您的管理員。',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => '您沒有權限檢視檔案 。如需權限，請連絡您的管理員。',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => '您無法存取入口網站，因為您的入口網站帳戶還未激活。如需權限，請連絡您的管理員。',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => '入口網站未正確設定。請連絡您的入口網站管理員取得援助。',
     'EXCEPTION_NO_METHOD'               => '不支援您的請求。找不到您為此路徑請求的 HTTP 方法。',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => '搜尋引擎執行階段出錯。請連絡您的系統管理員。',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => '無法編輯流程鎖定的欄位。',
+    'EXCEPTION_MODULE_DISABLED'         => '此模塊已針對當前用戶禁用。',
+    'EXCEPTION_FIELD_DISABLED'          => '此字段已針對當前用戶禁用。',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => '由於一般故障或錯誤而發生異常狀況。但此異常範圍的原因通常不是由於更具體的 API 異常範圍。',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => '無法對執行中流程當前鎖定的欄位進行編輯。',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s 已被執行中流程鎖定，無法編輯。',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s 已被執行中流程鎖定，無法編輯。',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => '此模塊已針對當前用戶禁用。',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => '此字段已針對當前用戶禁用。',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => '系統中已經存在具有相同名稱的檔案。',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => '關閉和新建',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => '關閉和新建',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => '複製記錄網址',
     'LBL_OPEN_ITEMS' => '打開項目：',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => '撰寫電子郵件',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'文件',
     'LBL_DATE_ENTERED' => '建立日期：',
     'LBL_DATE_MODIFIED' => '修改日期：',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => '編輯概述選項卡',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => '編輯模組選項卡',
     'LBL_EDIT_BUTTON' => '編輯',
     'LBL_DUPLICATE_BUTTON' => '複製',
     'LBL_DELETE_BUTTON' => '刪除',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => '應用程式要求應用日光節約時間修復。請造訪管理員主控台中的<a href="index.php?module=Administration&action=DstFix">修復</a>連結並應用日光節約時間修復。',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => '編輯時新建',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => '編輯時新建',
+    'LBL_EDIT_IN_NEW_TAB' => '編輯新分頁',
     'LBL_FAVORITES' => '最愛',
     'LBL_FILTER' => '篩選條件',
     'LBL_DEFAULT_DATA_FILTER' => '預設資料篩選器',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'按 ID 修改',
     'LBL_MORE' => '更多',
     'LBL_MORE_MODULES' => '更多模組',
+    'LBL_MORE_TABS' => '更多分頁',
     'LBL_MULTIPLE_MODULES' => '多個模組',
     'LBL_MY_ACCOUNT' => '我的設定',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => '系統預設',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => '打開至：',
     'LBL_OPENTO_BUTTON_TITLE' => '打開至：',
+    'LBL_OPEN_IN_NEW_TAB' => '開啟新分頁',
     'LBL_OPPORTUNITIES'=>'商機',
     'LBL_OPPORTUNITY_NAME' => '商機名稱',
     'LBL_OPPORTUNITY'=>'商機',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有權利。<br />SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         '與此類名稱有關的公司的商標。',
@@ -3456,7 +3544,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => '查看稽核紀錄',
     'TPL_AUDIT_LOG_TITLE' => '{{{name}}} 稽核記錄',
     'LBL_AUDIT_EMAIL_TOOLTIP' => '點擊查看電子郵件地址審核記錄',
-
+    'LBL_NO_SEARCH_RESULTS' => '沒有找到搜尋結果',
     'NTC_CLICK_BACK' => '請按一下瀏覽器返回按鈕，並修復此錯誤。',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
     'NTC_DATE_TIME_FORMAT' => '(yyyy-mm-dd 24:00)',
@@ -3494,12 +3582,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "警告：現用使用者的數量超過了授權允許的最大數量。",
     'ERROR_LICENSE_SEATS_MAXED'=>
         '活動使用者數超過了許可證限制。請與管理員聯繫。',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => '只有管理員才能登入。',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         '用戶通行證已達上限。只有現存用戶可以登入。',
     'WARN_ONLY_ADMINS'=> "只有管理員才能登入。",
     'WARN_UNSAVED_CHANGES'=> "您將在未儲存您對記錄做出的任何修改的情況下離開此記錄。您確定要離開這個記錄瀏覽嗎？",
     'LBL_WARN_UNSAVED_CHANGES' => '您還有未儲存的變更。您確定要離開此頁面並放棄變更嗎？',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '一個或多個Dashlet包含為保存的更改。是否確定關閉抽屜?',
     'LBL_NAVIGATE_TO_REPORTS' => '您將移動至報表模組。系統將不會儲存您對 Dashlet 做出的變更。繼續？',
     'ERROR_NO_RECORD' => '抓取記錄時出錯。此記錄可能已刪除或您沒有此記錄的檢視權限。',
     'ERROR_TYPE_NOT_VALID' => '錯誤。此類型無效。',
@@ -3516,7 +3607,10 @@ $app_strings = array (
     'ERROR_DATETIME' => '錯誤。此欄位需填寫有效日期。',
     'ERROR_IS_BEFORE' => '錯誤。此欄位日期必須早於 {{this}} 欄位的日期。',
     'ERROR_IS_AFTER' => '錯誤。此欄位日期必須晚於 {{this}} 欄位的日期。',
+    'ERROR_TIME_IS_BEFORE' => '出現錯誤。此欄位的時間必須早於{{this}} 欄位的時間。',
+    'ERROR_TIME_IS_AFTER' => '出現錯誤。此欄位的時間必須晚於{{this}} 欄位的時間。',
     'ERROR_NUMBER' => '錯誤。此欄位需填寫有效數字。',
+    'ERROR_INT' => '出現錯誤。無效整數。',
     'ERROR_NO_BEAN' => '無法取得 Bean。',
     'ERROR_ACCESS_MODULE' => '您沒有此模組的存取權限。',
     'ERROR_MAX_FILESIZE_EXCEEDED' => '附件太大。',
@@ -3602,6 +3696,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => '排程會議',
     'LBL_CREATE_TASK' => '建立工作',
     'LBL_REMOVE_FROM_FAVORITES' => '從我的最愛中移除',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => '產生表單',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'將網路儲存至潛在客戶表單',
@@ -3630,36 +3725,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => '錯誤：displayParams 數組中「key 」和「copy」 元素的引數數量不相等。',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'displayParams 數組中缺少索引：',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Dashlet',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => '一般',
     'LBL_DASHLET_CONFIGURE_FILTERS' => '篩選器',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => '僅限我的項目',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => '只有我的最愛',
     'LBL_DASHLET_CONFIGURE_TITLE' => '標題',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => '顯示列',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => '關聯至目前記錄',
     'LBL_DASHLET_CONFIGURE_LINKED' => '已連結欄位',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => '正在建立新頁面 ...',
-    'LBL_NEW_PAGE_FEEDBACK' => '已建立新頁面。您可以使用「新增 Sugar Dashlet」功能表選項新增內容。',
-    'LBL_DELETE_PAGE_CONFIRM' => '您確定要刪除這個頁面嗎？',
-    'LBL_SAVING_PAGE_TITLE' => '正在儲存頁面標題 ...',
-    'LBL_RETRIEVING_PAGE' => '正在抓取頁面 ...',
-    'LBL_MAX_DASHLETS_REACHED' => '您已經達到管理員設定的最大 Sugar Dashlet 數目。請移除一個 Sugar Dashlet 以繼續新增。',
-    'LBL_ADDING_DASHLET' => '新增 Sugar Dashlet ...',
-    'LBL_ADDED_DASHLET' => '已新增 Sugar Dashlet',
     'LBL_REMOVE_DASHLET_CONFIRM' => '您確定要移除 Sugar Dashlet 嗎？',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => '您確定要移除此列嗎？',
-    'LBL_REMOVING_DASHLET' => '正在移除 Sugar Dashlet ...',
-    'LBL_REMOVED_DASHLET' => '已移除 Sugar Dashlet',
     'LBL_MAXIMUM_OF' => '最大值',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' 欄可顯示。',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => '儀表板',
-    'LBL_DASHBOARD_BWC' => '我的傳統儀表板',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '我的儀表板',
     'LBL_COLLAPSE_ALL' => '摺疊所有',
     'LBL_EXPAND_ALL' => '展開所有',
@@ -3690,9 +3770,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => '清單檢視表',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '按照您定義的標準列出來自特定模組的記錄。',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => '記錄檢視',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => '在分頁中顯示紀錄，可選擇是否要標為相關記錄。',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => '基準記錄類型',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '此{{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => '分頁',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => '基本版面配置預覽',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => '警告，只有 {{numWord}} ({{num}}) 模組可以顯示在分頁上。 ' .
+        '在新增其他模組之前，請將一個以上的模組先移除。',
+    'LBL_SIX' => '六', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => '評論日誌',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => '按記錄顯示評論',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => '尚無可用評論',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => '新增',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => '新增評論',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => '檢視全部',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '我的 {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => '顯示部分尚無指定記錄',
+    'LBL_CONTENT_SEARCH_DASHLET' => '內容搜尋 Dashlet',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => '我們能幫助你什麼，{{username}}？',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => '要創立一個案件嗎?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '商機計量',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '關聯帳戶的商機指標。',
@@ -3700,6 +3804,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> '列出最近使用的專案和產品，并保存為最愛',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '最近使用',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '最愛',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => '清單檢視',
+    'LBL_PIPELINE_VIEW_NAME' => '並排檢視',
+    'LBL_PIPELINE_VIEW_BTN' => '並排檢視',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '按{{fieldName}} 的{{module}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => '尚未啟用並排檢視',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => '目前未找到任何記錄。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '實例摘要',
@@ -3755,37 +3867,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => '文章有用程度',
     'LBL_DASHLET_USEFULNESS_DESC' => '顯示說明知識庫文章有用程度的圖表',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => '新增頁面',
-    'LBL_DELETE_PAGE' => '刪除頁面',
-    'LBL_CHANGE_LAYOUT' => '更改版面配置',
-    'LBL_RENAME_PAGE' => '重新命名頁面',
-
     'LBL_LOADING_PAGE' => '正在載入頁面，請稍等...',
-
-    'LBL_RELOAD_PAGE' => '請<a href="javascript: window.location.reload()">重新載入此視窗</a>以使用 Sugar Dashlet。',
-    'LBL_ADD_DASHLETS' => '新增 Dashlet',
-    'LBL_CLOSE_DASHLETS' => '關閉',
-    'LBL_OPTIONS' => '選項',
-    'LBL_NUMBER_OF_COLUMNS' => '選取欄數量',
-    'LBL_1_COLUMN' => '1 欄',
-    'LBL_2_COLUMN' => '2 欄',
-    'LBL_3_COLUMN' => '3 欄',
-    'LBL_PAGE_NAME' => '頁面名稱',
-
     'LBL_SEARCH_RESULTS' => '搜尋結果',
-    'TPL_SEARCH_RESULTS_FOR' => '搜尋結果用途：{{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => '搜尋結果用途：',
-    'LBL_SEARCH_MODULES' => '模組',
-    'LBL_SEARCH_CHARTS' => '圖表',
-    'LBL_SEARCH_REPORT_CHARTS' => '報表圖表',
-    'LBL_SEARCH_TOOLS' => '工具',
     'LBL_SEARCH_HELP_TITLE' => '搜尋提示',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => '關閉',
     'LBL_SEARCH_RESULTS_FOUND' => '找到搜尋結果',
     'LBL_SEARCH_RESULTS_TIME' => '女士',
-    'ERR_BLANK_PAGE_NAME' => '請輸入頁面名稱',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => '我的案源',
@@ -3939,6 +4027,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => '已指派至',
     'LBL_DESCRIPTION' => '描述',
+    'LBL_PRIMARY_CONTACT_NAME' => '主要連絡人',
+    'LBL_PRIMARY_CONTACT_ID' => '主要連絡人 ID',
 
   'LBL_NONE' => '-無-',
   'LBL_YESTERDAY'=> '昨天',
@@ -4325,6 +4415,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => '報價項目',
     'LBL_DISCOUNT_TOTAL' => '總折扣',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => '稅',
     'LBL_SHIPPING' => '運送',
     'LBL_GRAND_TOTAL' => '總計',
@@ -4371,6 +4463,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '（無存取權限）',
     'LBL_NO_ACCESS_LOWER' => '沒有存取權限',
     'LBL_NO_FIELD_ACCESS' => '沒有存取權限',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => '值已刪除',
     'LBL_VALUE_ERASED_TOOLTIP' => '此資訊已通過資料隱私請求刪除',
     'LBL_CREATE_RELATED_RECORD' => '建立關聯記錄',
@@ -4540,6 +4633,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => '輸入 @ 提到其他使用者。輸入 # 參考其他記錄。',
     'LBL_MOBILE_NEW_COMMENT' => '新註解',
     'LBL_RECENTLY_VIEWED' => '最近檢視',
+    'LBL_FILE_STORED_LOCALLY' => '文件儲存於本地空間，在設備連上網路時將立刻同步。',
+    'LBL_IDM_USER_PROFILE_READONLY' => '如果您想要更改某些不可編輯的字段，請聯絡管理員，告知想更改的內容。',
+    'LBL_ACTIVITY_POST' => '{{{link}}} 上的 {{{value}}}',
+    'LBL_COMMENTLOG_EMPTY' => '無評論',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => '顯示下 {{{commentsLeft}}} 條評論',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => '摺疊',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => '確認創建評論',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => '評論日誌不能為空白',
+    'LBL_MOBILE_PDF_DOWNLOAD' => '下載 {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => '無法與伺服器同步',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO 登入不可用。請確保實例為 Sugar 7.5 或更高版本並已設定為可用 SSO。',
@@ -4750,6 +4852,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => '右功能表按鈕',
     'LBL_VO_ADD_BTN' => '添加按鈕',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => '此應用程式使用 cookies',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => '選擇以接受(必選)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => '此應用程式使用 cookies 來幫助為您提供更好的體驗。如果繼續，則表示您同意我們根據<a href="{{href}}" target="_blank">隱私政策</a>使用 cookies。',
+
     //begin portal
 
     //portal record tutorial
@@ -4759,20 +4866,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => '按一下這些圖示檢視附加附註的詳細資料。',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => '首頁儀表板',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => '所有開放實例',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => '最近已解決的案件',
     'LBL_PORTAL_SEARCH' => '按名稱、編號搜尋',
     'LBL_SIGNUP_BUTTON_LABEL' => '註冊',
+    'LBL_PORTAL_NO_EMAIL' => '沒有收到電子郵寄嗎?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => '忘記密碼',
+    'LBL_PORTAL_FORGOT_USERNAME' => '忘記使用者名稱',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => '請輸入兩次密碼。密碼必須符合。',
+    'LBL_PORTAL_RESET_PASSWORD' => '重設密碼',
+    'LBL_PORTAL_REENTER_PASSWORD' => '再次輸入密碼',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => '密碼不符合，請再試一次',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => '密碼已經重新設定成功。',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => '發生錯誤。請發起重設新密碼的請求。',
     'LBL_PORTAL_SIGNUP_PROCESS' => '正在註冊',
-    'LBL_PORTAL_SIGNUP_TITLE' => '感謝您的註冊！',
-    'LBL_PORTAL_SIGNUP' => '客戶服務代表很快就會連絡您，以設定您的帳戶。',
+    'LBL_PORTAL_SIGNUP_TITLE' => '感謝您的註冊',
+    'LBL_PORTAL_SIGNUP' => '我們將會在確認詳細訊息後通知您。',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => '名字',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => '姓氏',
-    'LBL_PORTAL_SIGNUP_EMAIL' => '電子郵件',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => '使用者名稱',
+    'LBL_PORTAL_SIGNUP_EMAIL' => '電子郵件地址',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (可選)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => '國家',
     'LBL_PORTAL_SIGNUP_STATE' => '狀態',
-    'LBL_PORTAL_SIGNUP_COMPANY' => '公司',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => '公司名稱',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => '職務 (可選)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => '密碼',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => '確認密碼',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => '忘記登入',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => '忘記密碼？',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => '請連絡 Sugar 管理員以重置密碼。',
     'LBL_PORTAL_LOGIN_USERNAME' => '使用者名稱',
@@ -4782,9 +4905,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => '頁面不可用',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "抱歉，該功能目前不可用。",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => '顯示 "{query}" 的搜尋結果',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => '沒有收到電子郵寄嗎?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => '如需要協助或需要聯繫我們，請使用下列任一方法： ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => '電話: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => '電子郵件: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => '網路: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => '您提供的使用者名稱/密碼組合不正確，請再試一次。',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => '登入失敗。請重試一次。',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => '無效認證',
     'LBL_PORTAL_INVALID_GRANT' => '您的 Token 無效或已過期。請重新登入。',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token 已過期',
@@ -4807,7 +4935,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'載入模組時遇到問題。請稍候再試一次或連絡支援。',
     'LBL_PORTAL_OFFLINE' =>'抱歉，應用程式目前不可用。請連絡網站管理員。',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => '變更密碼',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => '用戶名已經被註冊。請送出忘記密碼請求或選擇其他用戶名。',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => '所提供的電子郵件無效。',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => '密碼不一致。',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => '概觀',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => '續訂控制台',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => '概觀',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => '階段/狀態',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => '姓名/帳戶名稱',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => '使用者設定檔',
@@ -4852,10 +5000,22 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => '您輸入的密碼與系統儲存的密碼不一致。',
     'LBL_CANNOT_SEND_PASSWORD' => '無法傳送密碼',
     'LBL_REQUEST_PASSWORD' => '請求密碼',
+    'LBL_RESET_PASSWORD' => '重設密碼',
+    'LBL_RESET_PASSWORD_MESSAGE' => '請輸入您的用戶名，我們將發送重設密碼的連結。',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => '請查看您的電子郵件 <br><br> 我們已經向儲存的電子郵件地址發送密碼重設的指示。',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => '錯誤：更新此使用者密碼時遇到問題。',
     'LBL_INCORRECT_PASSWORD' => '錯誤：密碼不正確。',
+    'LBL_PASSWORD_ENFORCE_TITLE' => '您輸入的密碼不滿足密碼要求。請再試一次。',
+    'LBL_PASSWORD_MIN_LENGTH' => '最小長度為 {0}。',
+    'LBL_PASSWORD_MAX_LENGTH' => '最大長度為 {0}。',
+    'LBL_PASSWORD_ONE_UPPERCASE' => '必須包含大寫字母 (A-Z)。',
+    'LBL_PASSWORD_ONE_LOWERCASE' => '必須包含小寫字母 (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => '必須包含數字 (0-9)。',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => '必須包含特殊符號 (~!@#$%^&*()_+-={}|)。',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => '密碼不能與正則表達式模式相符合: {0}。',
 
     'LBL_PREFERRED_LANGUAGE' => '語言喜好設定：',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => '無法寄送重設密碼的電子郵件。',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => '選取一個報表',
@@ -4997,6 +5157,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => '我的工作',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '小組工作',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => '目前檢視過的案件',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => '按照用戶和狀態排列公開案件',
+    'LBL_REPORT_DASHLET_TITLE_125' => '按月搜尋商務中心的新案件',
+    'LBL_REPORT_DASHLET_TITLE_126' => '最近建立的案件',
+    'LBL_REPORT_DASHLET_TITLE_127' => '按月搜尋客戶層新案件',
+    'LBL_REPORT_DASHLET_TITLE_128' => '按客戶層按優先次序公開案件',
+    'LBL_REPORT_DASHLET_TITLE_129' => '本月商務中心已解決的案件總數',
+    'LBL_REPORT_DASHLET_TITLE_130' => '本月代理商已解決的案件總數',
+    'LBL_REPORT_DASHLET_TITLE_131' => '最近已解決的案件清單',
+    'LBL_REPORT_DASHLET_TITLE_132' => '按月搜尋本週已解決的案件',
+    'LBL_REPORT_DASHLET_TITLE_133' => '今日截止逾期的案件',
+    'LBL_REPORT_DASHLET_TITLE_134' => '今日截止逾期的所有案件',
+    'LBL_REPORT_DASHLET_TITLE_135' => '按待處理日期搜尋公開案件',
+    'LBL_REPORT_DASHLET_TITLE_136' => '按待處理日期搜尋所有公開案件',
+    'LBL_REPORT_DASHLET_TITLE_137' => '按狀態搜尋公開案件',
+    'LBL_REPORT_DASHLET_TITLE_138' => '按狀態搜尋上週案件',
+    'LBL_REPORT_DASHLET_TITLE_139' => '經我指派的公開任務狀態',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5127,6 +5306,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '重新整理清單',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '更多',
@@ -5407,6 +5588,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => '此記錄正參與一項流程，可能包含一些鎖定欄位。',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => '商務中心',
+    'LBL_BUSINESS_CENTER_ID' => '商務中心識別碼',
+    'LBL_BUSINESS_CENTER_NAME' => '商務中心名稱',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(新標籤)',
     'LBL_TAG_FETCH_ERROR' => '抓取標籤時出錯。',
@@ -5444,14 +5631,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '標記擦除',
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 的個人資訊',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => '更改計時器',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '複製到剪貼簿!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '無法複製到剪貼簿',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '複製確認鏈接',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => '互動',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} 互動',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => '顯示更多...',
     'LBL_COMMENT_LOG_SHOW_LESS' => '顯示小於...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '無數據可用',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => '活動訂閱',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => '特定帳戶的活動訂閱',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => '，數量 {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => '總計:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => '無活動訂閱',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => '此 Dashlet 需要 {{module_name}} 才可運作。請聯絡您的管理員請求啟用 {{module_name}}。',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => '使用Studio來編輯記錄，即可前往並檢視dashlet版面配置 ' .
+        'Studio > {{module}} > 布局 > 紀錄 Dashlet 視圖。 <a href={{linkToStudio}}>在 Studio 中編輯</a>。',
+    'LBL_SERVICE_LEVEL' => '服務等級',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => '編號',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => '待處理',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => '優先次序/狀態',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => '主旨/描述',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => '服務持續時間',
+    'LBL_SERVICE_DURATION_VALUE' => '服務持續時間值',
+    'LBL_SERVICE_DURATION_UNIT' => '服務持續時間單位',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6448,7 +6668,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '已嵌入檔案';
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J $',
@@ -6477,18 +6697,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '已嵌入檔案';
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6510,7 +6730,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '已嵌入檔案';
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

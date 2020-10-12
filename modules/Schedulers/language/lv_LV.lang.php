@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicēt apstiprinātos rakstus un KB rakstus, kam beidzies termiņš.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ieplānotais uzdevums',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atjaunot denormalizētos komandas drošības datus',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Darbību plūsmas attīrīšana',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervāls:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Ieslēgt e-pasta atgādinājumu sūtīšanu',
 'LBL_CLEANJOBQUEUE' => 'Attīrīšanas uzdevumu rinda',
 'LBL_CLEANOLDRECORDLISTS' => 'Iztīrīt vecos ierakstus',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Darbību plūsmas attīrīšana',
 'LBL_PMSEENGINECRON' => 'SugarBPM Plānotājs',
 );
 

@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Výrobcovia',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Kategórie produktov',
   'LNK_NEW_PRODUCT_TYPE' => 'Typy produktov',
-  'LNK_NEW_PRODUCT' => 'Vytvoriť produkt pre katalóg',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Prepravcovia',
   'LNK_PRODUCT_LIST' => 'Zobrazenie katalógu produktov',
   'NTC_DELETE_CONFIRMATION' => 'Skutočne, chcete vymazať tento záznam?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Kategórie produktov',
   'LBL_MANUFACTURERS' => 'Výrobcovia',
   'LBL_PRODUCT_TYPES' => 'Typy produktov',
-
+  'LBL_RENEWABLE' => 'Obnoviteľné',
+  'LBL_SERVICE' => 'Služba',
 );
-
-
-?>

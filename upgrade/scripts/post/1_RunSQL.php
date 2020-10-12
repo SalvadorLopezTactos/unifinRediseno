@@ -16,7 +16,7 @@
  */
 class SugarUpgradeRunSQL extends UpgradeScript
 {
-    public $order = 1000;
+    public $order = 1001;
     public $type = self::UPGRADE_DB;
 
     public function run()

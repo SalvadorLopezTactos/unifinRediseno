@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 {
@@ -56,6 +57,9 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 
     public function save($check_notify = false)
     {
+        if (!AccessControlManager::instance()->allowModuleAccess($this->webhook_target_module)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
         $hook = $this->getActionArray();
         if (!empty($this->fetched_row)) {
             $oldhook = $hook;

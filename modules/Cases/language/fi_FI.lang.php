@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tapauslistojen työpöytä',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tapaustietueiden työpöytä',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Palvelupyynnön tiedot',
 
 	'ERR_DELETE_RECORD'					=> 'Tietuenumero tulee määritellä jotta voit poistaa asiakkaan.',
 	'LBL_ACCOUNT_ID'					=> 'Asiakkaan ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Yhteystiedot',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Palvelupyynnöt',
 	'LBL_DESCRIPTION'					=> 'Kuvaus',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Liitetiedosto',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Liitetiedosto',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historia',
 	'LBL_INVITEE'						=> 'Yhteystiedot',
 	'LBL_MEMBER_OF'						=> 'Jäsen',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Tekijän käyttäjätunnus',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
     'LBL_EXPORT_TEAM_COUNT' => 'Ryhmän Count',
+    'LBL_CHANGETIMERS' => 'Muuta ajastimia',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Liittyvien kontaktien sähköpostit',
@@ -148,4 +151,11 @@ $mod_strings = array (
 - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää.
 
 2. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Etkö löytänyt etsimääsi?',
+    'LBL_CREATE_CASE' => 'Luo {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Palvelutasosopimuksen tiedot',
+    'LBL_HOURS' => 'Tuntia',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Não enviar para este Domínio:',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Nome',
 	'LBL_MORE_DETAIL' => 'Mais Detalhe' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Contas',
+    'LBL_CAMPAIGNS' => 'Campanhas',
+    'LBL_CONTACTS' => 'Contactos',
+    'LBL_LEADS' => 'Clientes Potenciais',
+    'LBL_PROSPECTS' => 'Targets',
+    'LBL_USERS' => 'Utilizadores',
 
     // Help Text
     // List View Help Text

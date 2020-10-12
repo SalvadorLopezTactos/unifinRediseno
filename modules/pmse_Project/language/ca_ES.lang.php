@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Estat',
   'LBL_PRJ_MODULE' => 'Mòdul objectiu',
+  'LBL_PRJ_RUN_ORDER' => 'Executa la comanda',
   'LBL_PMSE_BUTTON_SAVE' => 'Desa',
   'LBL_PMSE_BUTTON_CANCEL' => 'Cancel·la',
   'LBL_PMSE_BUTTON_YES' => 'Si',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'La definició del procés s&#39;ha importat, però conté una o més accions de regla empresarial per a les quals no s&#39;han seleccionat regles.',
     'LBL_BPM_IMPORT_SELECT' => 'Aquesta Definició de procés conté les següents Normes de negoci i Plantilles de correu electrònic. '
         . 'Seleccioneu les que voleu importar.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Normes de negoci',
     'LBL_EMAIL_TEMPLATES' => 'Plantilles de correu electrònic',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Supervisor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creat per usuari',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Modificat per darrera vegada per usuari',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Correu electrònic del sistema',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Norma empresarial',
     'LBL_PMSE_LABEL_RULE' => 'Norma',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Assigna usuari',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Actualitzar "Assignat a" al registre',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Afegeix registre relacionat',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Mòdul Relacionat',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'El nom de l&#39;activitat està buit.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'El nom "%s" ja existeix a la família de formes.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dies',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'hores',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minuts',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'horari laboral',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Centre de negocis',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Des del mòdul Objectiu',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'De ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Mòdul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Cadena, nombre i booleà',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Número',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Valor',

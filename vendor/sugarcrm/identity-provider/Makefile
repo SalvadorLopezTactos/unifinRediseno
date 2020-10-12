@@ -23,6 +23,11 @@ deps:
 grpc:
 	bin/protogen.sh
 
+# Build grpc php library with dockerized protoc (you don't need to install protoc stuff on your machine)
+.PHONY: grpc-dockerized
+grpc-dockerized:
+	bin/protogen-dockerized.sh
+
 # Build and rebuild CSS from LESS files
 .PHONY: css
 css:

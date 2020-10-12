@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '報價（送貨至）',
 	'LNK_ACCOUNT_REPORTS' => '檢視帳戶報表',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文件',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '帳號列表儀表板',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '帳號記錄儀表板',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '帳戶詳細訊息',
+    'LBL_NEXT_RENEWAL_DATE' => '下次續訂日期',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '帳戶名稱/行業',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => '地點',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '圖表',

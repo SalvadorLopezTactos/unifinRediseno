@@ -27,7 +27,6 @@ class ViewWizard extends SugarView
         parent::__construct();
 
         $this->options['show_header'] = false;
-        $this->options['show_footer'] = false;
         $this->options['show_javascript'] = false;
 	}
 

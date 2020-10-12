@@ -45,7 +45,17 @@
                     $(window).on('beforeunload.' + this.cid, _.bind(this.warnUnsavedChangesOnRefresh, this));
 
                     this.before('unsavedchange', this.beforeViewChange, this);
-                    //If drawer is initialized, bind addtional before handler to prevent closing creation view
+
+                    var sideDrawer = this.closestComponent('side-drawer');
+                    if (sideDrawer) {
+                        sideDrawer.before(
+                            'side-drawer:close side-drawer:content-changed',
+                            this.beforeSideDrawerChange,
+                            this
+                        );
+                    }
+
+                    // If drawer is initialized, bind additional before handler to prevent closing creation view
                     if (_.isEmpty(app.additionalComponents['drawer'])) {
                         return;
                     }
@@ -76,8 +86,10 @@
              *
              * Pass custom callback to continue the following logic after confirmation.
              *
-             * @param {Object} param Parameters that is passed from caller. Must contains 'callback'.
-             * @return {Boolean} true only if it contains unsaved changes.
+             * @param {Object} param Parameters that is passed from caller.
+             * @param {Function} param.callback Callback function.
+             * @param {string} [param.message] Custom message.
+             * @return {boolean} `true` only if it contains unsaved changes.
              */
             beforeViewChange: function(param) {
                 if (!(param && _.isFunction(param.callback))) {
@@ -93,24 +105,39 @@
             },
 
             /**
+             * Pre-event handler for closing or changing the side-drawer component.
+             *
+             * @param {Object} params Parameters passed from caller.
+             * @param {Function} params.callback Callback function.
+             * @param {string} [params.message] Custom (translatable) message.
+             * @return {boolean} `true` only if it contains unsaved changes.
+             */
+            beforeSideDrawerChange: function(params) {
+                var callback = params.callback;
+                var message = params.message || 'LBL_ONE_OR_MORE_UNSAVED_CHANGES';
+                return this.beforeViewChange({callback: callback, message: message});
+            },
+
+            /**
              * Popup dialog message to confirm the unsaved changes.
              *
              * View must override `hasUnsavedChanges` and return true to active the warning dialog.
              *
              * @param {Function} onConfirm Callback function which is executed once the user clicks "ok".
-             * @param {String} (customMessage) Custom warning message.
-             * @param {Function} (onCancel) Callback function which is executed once the users clicks "cancel".
-             * @return {Boolean} True only if it contains unsaved changes.
+             * @param {string} [customMessage] Custom warning message.
+             * @param {Function} [onCancel] Callback function which is executed once the users clicks "cancel".
+             * @return {boolean} `true` only if it contains unsaved changes.
              */
             warnUnsavedChanges: function(onConfirm, customMessage, onCancel) {
-                //When we reload the page after retrying a save, never block it
-                if (this.resavingAfterMetadataSync) {
+                // When we reload the page after retrying a save or when this is from a disposed component,
+                // never block it
+                if (this.resavingAfterMetadataSync || this.disposed) {
                     return false;
                 }
                 this.$(':focus').trigger('change');
                 if (_.isFunction(this.hasUnsavedChanges) && this.hasUnsavedChanges()) {
                     this._targetUrl = Backbone.history.getFragment();
-                    //Replace the url hash back to the current staying page
+                    // Replace the url hash back to the current staying page
                     app.router.navigate(this._currentUrl, {trigger: false, replace: true});
 
                     app.alert.show('leave_confirmation', {
@@ -135,7 +162,6 @@
                 if (_.isFunction(this.hasUnsavedChanges) && this.hasUnsavedChanges()) {
                     return app.lang.get('LBL_WARN_UNSAVED_CHANGES', this.module);
                 }
-                return;
             },
 
             /**
@@ -471,9 +497,17 @@
              * Detach the event handlers for warning unsaved changes.
              */
             unbindBeforeHandler: function() {
-
                 app.routing.offBefore('route', this.beforeRouteChange, this);
                 $(window).off('beforeunload.' + this.cid);
+
+                var sideDrawer = this.closestComponent('side-drawer');
+                if (sideDrawer) {
+                    sideDrawer.offBefore(
+                        'side-drawer:close side-drawer:content-changed',
+                        this.beforeSideDrawerChange,
+                        this
+                    );
+                }
 
                 if (_.isEmpty(app.additionalComponents['drawer'])) {
                     return;

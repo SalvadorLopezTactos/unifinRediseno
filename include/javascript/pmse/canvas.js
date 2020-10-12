@@ -279,6 +279,10 @@ AdamCanvas.prototype.getContextMenu = function () {
                 dataURL: "pmse_Project/CrmData/related/" + PROJECT_MODULE,
                 dataRoot: "result",
                 fieldDataURL: 'pmse_Project/CrmData/fields/{{MODULE}}',
+                fieldDataURLAttr: {
+                    // CN = Canvas
+                    call_type: 'CN'
+                },
                 fieldDataRoot: "result"
             });
             processName.setValue(project.name);

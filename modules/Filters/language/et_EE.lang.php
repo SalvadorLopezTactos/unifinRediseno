@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'eelmisel aastal',
     'LBL_OPERATOR_THIS_YEAR' => 'sel aastal',
     'LBL_OPERATOR_NEXT_YEAR' => 'järgmisel aastal',
+    'LBL_OPEN_ISSUES' => 'Ava {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Hiljuti lahendatud',
 );

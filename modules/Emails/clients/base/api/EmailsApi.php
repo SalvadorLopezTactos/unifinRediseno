@@ -78,7 +78,7 @@ class EmailsApi extends ModuleApi
 
         if ($isReady) {
             $loadArgs = array('module' => 'Emails', 'record' => $result['id']);
-            $email = $this->loadBean($api, $loadArgs, 'save', array('source' => 'module_api'));
+            $email = $this->loadBean($api, $loadArgs, 'save', array('source' => 'module_api', 'use_cache' => false));
 
             try {
                 $this->sendEmail($email);

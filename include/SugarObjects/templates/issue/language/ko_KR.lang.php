@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => '해결',
   'LBL_LAST_MODIFIED' => '최종 수정',
   'LBL_ASSIGNED_TO_ID'=>'담당자:',
-  'LBL_ASSIGNED_TO_NAME' => '사용자:',  	  
+  'LBL_ASSIGNED_TO_NAME' => '사용자:',
   'LBL_WORK_LOG' => '활동기록:',
+    'LBL_FOLLOW_UP' => '후속 조치',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => '해결 일자',
+    'LBL_HOURS_TO_RESOLUTION' => '해결 시간',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => '해결 업무 시간',
+    'LBL_PENDING_PROCESSING' => '처리 중',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => '생성자:',
   'LBL_DATE_CREATED' => '생성일자:',
   'LBL_DATE_ENTERED' => '생성일자:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => '편집하기',
     'LBL_REMOVE' => '제거하기',
 
-  
+
   );

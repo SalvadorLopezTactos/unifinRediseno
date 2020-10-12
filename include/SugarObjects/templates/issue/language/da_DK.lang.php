@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Opløsning',
   'LBL_LAST_MODIFIED' => 'Sidst ændret',
   'LBL_ASSIGNED_TO_ID'=>'Tildelt til:',
-  'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',
   'LBL_WORK_LOG' => 'Arbejdslog:',
+    'LBL_FOLLOW_UP' => 'Opfølgning',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Løst dato',
+    'LBL_HOURS_TO_RESOLUTION' => 'Timer til løsning',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Arbejdstimer til løsning',
+    'LBL_PENDING_PROCESSING' => 'Afventer behandling',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Oprettet af:',
   'LBL_DATE_CREATED' => 'Oprettet den:',
   'LBL_DATE_ENTERED' => 'Oprettet den:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Rediger',
     'LBL_REMOVE' => 'Fjern',
 
-  
+
   );

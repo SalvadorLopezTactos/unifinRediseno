@@ -297,7 +297,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testConsentInitAction(): void
     {
-        $tenantId = '0000000001';
+        $tenantId = '1000000001';
         $tenantSrn = 'srn:cloud:iam:eu:' . $tenantId . ':tenant';
 
         $srn = new Srn\Srn();
@@ -410,7 +410,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->exactly(2))
             ->method('getScopes')
@@ -418,11 +418,11 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willReturn($this->consent);
 
         $this->consent->setScopes(['notMatch']);
@@ -453,7 +453,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->exactly(2))
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->once())
             ->method('getScopes')
@@ -461,11 +461,11 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willReturn($this->consent);
 
         $this->consent->setScopes(['match']);
@@ -477,7 +477,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->sessionService->expects($this->once())
             ->method('set')
-            ->with(TenantConfigInitializer::SESSION_KEY, 'srn:cloud:iam:eu:0000000001:tenant');
+            ->with(TenantConfigInitializer::SESSION_KEY, 'srn:cloud:iam:eu:1000000001:tenant');
 
         $this->application->expects($this->once())
             ->method('redirect')
@@ -508,7 +508,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->once())
             ->method('getScopes')
@@ -516,11 +516,11 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willReturn($this->consent);
 
         $this->consent->setScopes(['match']);
@@ -586,7 +586,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->exactly(2))
             ->method('getScopes')
@@ -594,11 +594,11 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willReturn($this->consent);
 
         $this->consent->setScopes(['notMatch']);
@@ -624,7 +624,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->once())
             ->method('getScopes')
@@ -632,11 +632,11 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willReturn($this->consent);
 
         $this->consent->setScopes(['match']);
@@ -662,18 +662,18 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->consentToken->expects($this->once())
             ->method('getTenantSRN')
-            ->willReturn('srn:cloud:iam:eu:0000000001:tenant');
+            ->willReturn('srn:cloud:iam:eu:1000000001:tenant');
 
         $this->consentToken->expects($this->never())
             ->method('getScopes');
 
         $this->consentToken->expects($this->once())
             ->method('getClientId')
-            ->willReturn($clientId = 'srn:staging:iam:na:0000000001:app:login');
+            ->willReturn($clientId = 'srn:staging:iam:na:1000000001:app:login');
 
         $this->consentRepository->expects($this->once())
             ->method('findConsentByClientIdAndTenantId')
-            ->with($clientId, '0000000001')
+            ->with($clientId, '1000000001')
             ->willThrowException(new ConsentNotFoundException());
 
         $this->consent->setScopes(['match']);
@@ -693,8 +693,8 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
     public function autoApprovedApplications(): array
     {
         return [
-            'crm' => ['clientId' => 'srn:dev:iam:na:0000000001:app:crm:bd0f3e90-9570-47c9-bb11-6233225ee099'],
-            'web' => ['clientId' => 'srn:dev:iam:na:0000000002:app:web:f7cf6d39-f557-4feb-b088-e0eb3fb55af8'],
+            'crm' => ['clientId' => 'srn:dev:iam:na:1000000001:app:crm:bd0f3e90-9570-47c9-bb11-6233225ee099'],
+            'web' => ['clientId' => 'srn:dev:iam:na:1000000002:app:web:f7cf6d39-f557-4feb-b088-e0eb3fb55af8'],
         ];
     }
 
@@ -711,7 +711,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
             ->willReturn($clientId);
         $this->consentToken
             ->method('getTenantSRN')
-            ->willReturn('srn:dev:iam:na:0000000001:tenant');
+            ->willReturn('srn:dev:iam:na:1000000001:tenant');
         $this->consentToken
             ->method('getScopes')
             ->willReturn(['match']);
@@ -761,15 +761,15 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'native'        => [
-                'clientId' => 'srn:dev:iam:na:0000000001:app:native:c023f52-460-4a2-81a7-99c975694f2e',
+                'clientId' => 'srn:dev:iam:na:1000000001:app:native:c023f52-460-4a2-81a7-99c975694f2e',
                 'appName' => 'native app name',
             ],
             'userAgent'     => [
-                'clientId' => 'srn:dev:iam:na:0000000002:app:ua:264588c3-74df-4f3a-a61a-4f3bf109791c',
+                'clientId' => 'srn:dev:iam:na:1000000002:app:ua:264588c3-74df-4f3a-a61a-4f3bf109791c',
                 'appName' => '',
             ],
             'someNewType'   => [
-                'clientId' => 'srn:dev:iam:na:0000000003:app:some-new-type:4c74bc07-4953-4a09-a61a',
+                'clientId' => 'srn:dev:iam:na:1000000003:app:some-new-type:4c74bc07-4953-4a09-a61a',
                 'appName' => 'other app name',
             ],
             'globalNative'   => [
@@ -792,7 +792,7 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
             ->willReturn($clientId);
         $this->consentToken
             ->method('getTenantSRN')
-            ->willReturn('srn:dev:iam:na:0000000001:tenant');
+            ->willReturn('srn:dev:iam:na:1000000001:tenant');
         $this->consentToken
             ->method('getScopes')
             ->willReturn(['match']);
@@ -839,13 +839,13 @@ class ConsentControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConsentConfirmationActionWrongGrpcResponseStatus(): void
     {
-        $clientId = 'srn:dev:iam:na:0000000001:app:native:c023f52-460-4a2-81a7-99c975694f2e';
+        $clientId = 'srn:dev:iam:na:1000000001:app:native:c023f52-460-4a2-81a7-99c975694f2e';
         $this->consentToken
             ->method('getClientId')
             ->willReturn($clientId);
         $this->consentToken
             ->method('getTenantSRN')
-            ->willReturn('srn:dev:iam:na:0000000001:tenant');
+            ->willReturn('srn:dev:iam:na:1000000001:tenant');
         $this->consentToken
             ->method('getScopes')
             ->willReturn(['match']);

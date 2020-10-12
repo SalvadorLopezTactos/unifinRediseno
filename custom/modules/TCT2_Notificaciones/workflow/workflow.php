@@ -46,8 +46,8 @@ include_once("include/workflow/custom_utils.php");
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['c069a38e_d35c_11ea_a831_00155da0710c'])){
-		$triggeredWorkflows['c069a38e_d35c_11ea_a831_00155da0710c'] = true;
+	if (!isset($triggeredWorkflows['bc83779c_0cad_11eb_b048_00155da0710c'])){
+		$triggeredWorkflows['bc83779c_0cad_11eb_b048_00155da0710c'] = true;
 		 $alertshell_array = array(); 
 
 	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
@@ -116,8 +116,8 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['c06a4bd6_d35c_11ea_a55d_00155da0710c'])){
-		$triggeredWorkflows['c06a4bd6_d35c_11ea_a55d_00155da0710c'] = true;
+	if (!isset($triggeredWorkflows['bc8420d4_0cad_11eb_98dd_00155da0710c'])){
+		$triggeredWorkflows['bc8420d4_0cad_11eb_98dd_00155da0710c'] = true;
 		 $alertshell_array = array(); 
 
 	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
@@ -137,7 +137,7 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 
 	 process_workflow_alerts($focus, $alert_meta_array['TCT2_Notificaciones1_alert1'], $alertshell_array, false); 
  	 unset($alertshell_array); 
-		$action_meta_array['TCT2_Notificaciones1_action0']['trigger_id'] = 'c06a4bd6_d35c_11ea_a55d_00155da0710c';
+		$action_meta_array['TCT2_Notificaciones1_action0']['trigger_id'] = 'bc8420d4_0cad_11eb_98dd_00155da0710c';
 	$action_meta_array['TCT2_Notificaciones1_action0']['action_id'] = '47203f02-9170-11ea-875a-00155da0710c';
 	 $action_meta_array['TCT2_Notificaciones1_action0']['workflow_id'] = '88187024-766f-11e8-b6d9-00155d967407';
 	 process_workflow_actions($focus, $action_meta_array['TCT2_Notificaciones1_action0']); 

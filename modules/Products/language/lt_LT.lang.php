@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontaktas',
     'LBL_DISCOUNT_TOTAL' => 'Viso nuolaida',
     'LBL_DISCOUNT_AMOUNT' => 'Nuolaidos suma',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Nuolaidos sumos vertė',
     'LBL_EXT_PRICE' => 'Ext. kaina',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valiutos pavadinimas',

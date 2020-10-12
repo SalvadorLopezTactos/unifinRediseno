@@ -11,6 +11,10 @@ JavaScriptCompiler.prototype = {
   // PUBLIC API: You can override these methods in a subclass to provide
   // alternative compiled forms for name lookup and buffering semantics
   nameLookup: function(parent, name /* , type*/) {
+    // Do not allow to access constructor of any object/class
+    if (name === 'constructor') {
+      return parent + '.propertyIsEnumerable(\'constructor\') ? ' + parent + '.constructor : undefined';
+    }
     var wrap,
         ret;
     if (parent.indexOf('depth') === 0) {

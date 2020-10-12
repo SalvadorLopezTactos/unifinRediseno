@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Quotes (Ship To)',
 	'LNK_ACCOUNT_REPORTS' => 'Shiko raportet e llogarive',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentacionet',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paneli i listës së llogarive',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të llogarive',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detajet e llogarisë',
+    'LBL_NEXT_RENEWAL_DATE' => 'Data e rinovimit tjetër',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Emri i llogarisë/industria',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vendndodhja',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafiket',

@@ -29,10 +29,12 @@ class EncoderBuilder
      * Get proper encoder according to the config. Config parameters names are identical to Mango's.
      *
      * @param array $config Configuration
+     * @param bool  $legacy_md5_support Should we use legacy MD5 passwords\
+     * @param bool  $strict_verify If false we'll try both plain text and MD5 hashed password for verification
      *
      * @return PasswordEncoderInterface
      */
-    public function buildEncoder(array $config)
+    public function buildEncoder(array $config, bool $legacy_md5_support, bool $strict_verify = false): PasswordEncoderInterface
     {
         $backend = isset($config['passwordHash']['backend'])
             ? $config['passwordHash']['backend']
@@ -46,26 +48,46 @@ class EncoderBuilder
 
         switch ($backend) {
             case self::BACKEND_SHA2:
-                $encoder = new CryptPasswordEncoder(
-                    $algo,
-                    isset($options['rounds']) ? $options['rounds'] : CryptPasswordEncoder::DEFAULT_ITERATIONS
-                );
+                if ($legacy_md5_support) {
+                    if ($strict_verify) {
+                        $encoder = new CryptLegacyMD5StrictPasswordEncoder(
+                            $algo,
+                            isset($options['rounds']) ? $options['rounds'] : CryptPasswordEncoder::DEFAULT_ITERATIONS
+                        );
+                    } else {
+                        $encoder = new CryptLegacyMD5PasswordEncoder(
+                            $algo,
+                            isset($options['rounds']) ? $options['rounds'] : CryptPasswordEncoder::DEFAULT_ITERATIONS
+                        );
+                    }
+                } else {
+                    $encoder = new CryptPasswordEncoder(
+                        $algo,
+                        isset($options['rounds']) ? $options['rounds'] : CryptPasswordEncoder::DEFAULT_ITERATIONS
+                    );
+                }
                 break;
             case self::DEFAULT_BACKEND:
             default:
                 switch ($algo) {
-                    case PASSWORD_DEFAULT:
                     case null:
-                        // PASSWORD_DEFAULT and PASSWORD_BCRYPT matches at the moment
-                        // but it may be changed over time in future PHP versions
-                        if (PASSWORD_DEFAULT != PASSWORD_BCRYPT) {
-                            throw new \RuntimeException('Default encryption is different from Blowfish');
-                        }
-                        // no break
+                    case PASSWORD_DEFAULT:
                     case PASSWORD_BCRYPT:
-                        $encoder = new BCryptPasswordEncoder(
-                            isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
-                        );
+                        if ($legacy_md5_support) {
+                            if ($strict_verify) {
+                                $encoder = new BCryptLegacyMD5StrictPasswordEncoder(
+                                    isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
+                                );
+                            } else {
+                                $encoder = new BCryptLegacyMD5PasswordEncoder(
+                                    isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
+                                );
+                            }
+                        } else {
+                            $encoder = new BCryptPasswordEncoder(
+                                isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
+                            );
+                        }
                         break;
                 }
                 break;

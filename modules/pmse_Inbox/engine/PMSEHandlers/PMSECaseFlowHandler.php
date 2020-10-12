@@ -1072,7 +1072,8 @@ class PMSECaseFlowHandler
         $this->sugarQueryObject->from($flowBean);
         $this->sugarQueryObject->where()
             ->queryAnd()
-            ->addRaw('cas_id=' . $flowData['cas_id'] . ' AND bpmn_id=\'' . $flowData['bpmn_id'] . '\'');
+            ->equals('cas_id', $flowData['cas_id'])
+            ->equals('bpmn_id', $flowData['bpmn_id']);
 
         $rows = $this->sugarQueryObject->execute();
         return $rows;

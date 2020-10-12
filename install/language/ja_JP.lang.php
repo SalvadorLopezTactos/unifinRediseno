@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,8 +58,8 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '整合性チェックの際にエラーが検出されました。SugarCRMを正常に動作させるため、以下にリストされた問題を解決し、再チェックボタンをクリックするか、インストールをやり直してください。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass ReferenceがOnになっています（php.iniでOffに設定してください）',
 
-	'ERR_CHECKSYS_CURL'					=> '見つかりません: Sugar スケジューラーは機能が制限された状態で実行されます。Eメールアーカイブサービスは実行されません。',
-    'ERR_CHECKSYS_IMAP'					=> '見つかりません: インバウンドEメールとキャンペーンEメールを利用するためにはIMAPライブラリが必要です。この２つは動作しません。',
+	'ERR_CHECKSYS_CURL'					=> '見つかりません: Sugar Schedulerは機能が制限された状態で実行します。Eメールアーカイブサービスは実行しません。',
+    'ERR_CHECKSYS_IMAP'					=> '見つかりません: インバウンドメールとキャンペーンメールを利用するためにはIMAPライブラリが必要です。この２つは動作しません。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'SQL Serverを使用する場合はMagic Quotes GPCをOnにできません。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告:',
 	'ERR_CHECKSYS_MEM_LIMIT_1'			=> '警告:  $memory_limit （php.iniで',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI SAPIを適切に使用するためには、php.iniファイルで fastcgi.logging を 0 に設定してください。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'このPHPのバージョンはサポート外です:  ( ver',
     'LBL_DB_UNAVAILABLE'                => 'データベースが利用不可能です。',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースサポートが見つかりませんでした。 サポートされているいずれかの種類のデータベース（MySQL、MS SQLServer、Oracle、DB2）に必要なドライバーがあることを確認してください。PHP のバージョンによっては、php.ini ファイルでエクステンションのコメントを解除するか、適切なバイナリ・ファイルを使ってコンパイルし直す必要があるかもしれません。データベースの有効化に関する詳細情報については、PHP マニュアルをご覧ください。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースサポートが見つかりません。サポートされているデータベースタイプ(MySQL、MS SQLServer、Oracle、DB2)のうち、いずれか必要なドライバがあることを確認してください。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、適切なバイナリファイルをコンパイルし直す必要があります。データベースサポートを有効にする方法については、PHPのマニュアルを参照してください。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XMLパーサライブラリに関連する機能が見つかりません。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、PHPをコンパイルし直す必要があります。データベースをサポートする詳しい方法についてはPHPのマニュアルを参照ください。',
     'LBL_CHECKSYS_CSPRNG' => '乱数ジェネレーター',
     'ERR_CHECKSYS_MBSTRING'             => 'マルチバイトストリングをサポートするエクステンション（mbstring）が見つかりません。エクステンションがインストールされていないか、PHPがコンパイルされる際にmbstringモジュールが有効になっていない可能性があります。mbstringを有効にする方法についてはPHPのマニュアルを参照ください。',
@@ -89,7 +88,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZLIB'					=> '見つかりません: zlib圧縮はSugarCRMのパフォーマンスを大きく向上させます。',
     'ERR_CHECKSYS_ZIP'					=> 'ZIPサポートが見つかりません: 圧縮ファイルを処理するためにZIPサポートが必要です。',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATHサポートは見つかりません: SugarCRMは任意精度演算のためにBCMATHサポートが必要です。',
-    'ERR_CHECKSYS_HTACCESS'             => '.htaccessの再書き込みテストに失敗しました。これは通常SugarディレクトリのためのAllowOverride設定が無いことを意味します。',
+    'ERR_CHECKSYS_HTACCESS'             => '.htaccessの再書き込みテストに失敗しました。これは通常SugarディレクトリのためのAllowOverride設定がないことを意味します。',
     'ERR_CHECKSYS_CSPRNG' => 'CSPRNG例外',
 	'ERR_DB_ADMIN'						=> '入力されたデータベースの管理者ユーザ名またはパスワードが不正なため、データベースとの接続を確立できません。正しいユーザ名とパスワードを入力してください。（エラー:',
     'ERR_DB_ADMIN_MSSQL'                => '入力されたデータベースの管理者ユーザ名またはパスワードが不正なため、データベースとの接続を確立できません。正しいユーザ名とパスワードを入力してください。',
@@ -355,7 +354,7 @@ $mod_strings = array(
 	'LBL_PERFORM_DONE'					=> '完了<br>',
 	'LBL_PERFORM_DROPPING'				=> '削除中 /',
 	'LBL_PERFORM_FINISH'				=> '完了',
-	'LBL_PERFORM_LICENSE_SETTINGS'		=> 'ライセンス情報をアップデートしています',
+	'LBL_PERFORM_LICENSE_SETTINGS'		=> 'ライセンス情報を更新しています',
 	'LBL_PERFORM_OUTRO_1'				=> 'Sugar',
 	'LBL_PERFORM_OUTRO_2'				=> 'のインストールが完了しました。',
 	'LBL_PERFORM_OUTRO_3'				=> '実行時間:',
@@ -393,8 +392,8 @@ $mod_strings = array(
 	'LBL_SITECFG_SESSION_PATH'			=> 'セッションディレクトリパス<br> (書き込み可である必要があります)',
 	'LBL_SITECFG_SITE_SECURITY'			=> 'セキュリティオプションの選択',
 	'LBL_SITECFG_SUGAR_UP_DIRECTIONS'	=> '選択した場合、システムは定期的にアプリケーションの更新ファイルを確認します。',
-	'LBL_SITECFG_SUGAR_UP'				=> '自動的にアップデートをチェック?',
-	'LBL_SITECFG_SUGAR_UPDATES'			=> 'Sugarアップデート設定',
+	'LBL_SITECFG_SUGAR_UP'				=> '自動的に更新をチェック?',
+	'LBL_SITECFG_SUGAR_UPDATES'			=> 'Sugarの更新設定',
 	'LBL_SITECFG_TITLE'					=> 'サイト設定',
     'LBL_SITECFG_TITLE2'                => 'Sugarインスタンスの定義',
     'LBL_SITECFG_SECURITY_TITLE'        => 'サイトセキュリティ',
@@ -428,7 +427,7 @@ $mod_strings = array(
                     'インストールを開始すると、システムはSugarCRMファイルが存在するWebサーバ上でチェックを開始し、システムが適切に構成され必要なコンポーネントがインストールされていることを確認します。<br><br><br />システムは以下をチェックします:<br><ul><li><b>PHPバージョン</b> - アプリケーションがサポートするPHPバージョンが必要です。</li><li><b>セッション変数</b> - 正常に動作する必要があります。</li><li> <b>MB Strings</b> - エクステンションがインストールされている必要があります。</li><li> <b>データベースサポート</b> - MySQL、SQL Server、Oracle、DB2のいずれかが必要です。</li><li> <b>Config.php</b> - このファイルが存在し、書き込みが可能である必要があります。</li><li>以下のディレクトリまたはファイルが書き込み可である必要があります。:<b><ul><li>/custom</li><li>/cache</li><li>/modules</li><li>/upload</b></li></ul></li></ul>チェックでエラーが表示された場合、次には進めず、チェックが完了しなかったというエラーメッセージが表示されます。必要な修復をした後、再度チェックをすることで次に進むことができます。<br><br><br />システムチェックのエラーについてはインストールガイドを参照ください。<br>',
     'REQUIRED_INSTALLTYPE' => '通常またはカスタムインストール',
     'REQUIRED_INSTALLTYPE_MSG' =>
-                    "システムチェックの完了後、通常またはカスタムインストールのどちらかを選択できます。<br><br><br /><b>通常</b>および<b>カスタム</b>インストールのどちらにおいても以下が必要になります:<br><br /><ul><li> <b>Sugarデータを保持するデータベースのタイプ</b> <ul><li>サポートされるデータベースタイプ: MySQL、MS SQL Server、Oracle、DB2<br><br></li></ul></li><li> <b>データベースが動作するサーバのマシン（ホスト）名</b><br /><ul><li>データベースがWebサーバと同じローカルコンピュータにある場合はこの値は<i>localhost</i>となります。<br><br></li></ul></li><li><b>Sugarデータを保持するデータベース名</b><br /><ul><li> 既にデータベースが存在する場合、それと同じ名前を入力すると、インストール中にデータベースは削除されます。</li><li> 既存のデータベースが存在しない場合、インストール処理中にこの名前で新たなデータベースが作成されます。<br><br></li><br /></ul></li><li><b>データベース管理者のユーザ名とパスワード</b> <ul><li>データベース管理者はテーブルやユーザを作成し、データベースへの書き込みができる必要があります。</li><li>データベースがローカルコンピュータになく、あなたがデータベースで管理者でない場合は、データベース管理者に連絡してください。<br><br></li></ul></li><li> <b>Sugarデータベースのみに使われるデータベースユーザ</b><ul><li> ユーザはデータベース管理者でも構いませんし、既存のデータベースの管理者ユーザでも構いません。</li><li> 新しいユーザを作成する場合は、新しいユーザ名とパスワードを入力してください。インストール処理中に作成されます。</li><br /></ul></ul><p><br /><b>カスタム</b>セットアップの場合、追加で以下が必要になります:<br><br /> <ul><br /> <li> <b>インストール後にSugarインスタンスにアクセスするためのURL </b>このURLはWebサーバのマシン名もしくはIPアドレスになります。<br><br></li><li> [オプション] <b>セッションディレクトリのパス</b>共有サーバなどでセッション情報を脆弱性から守るため、セッション情報を特別なディレクトリに格納する場合に指定します。<br><br></li><li> [オプション] <b>カスタムログディレクトリのパス</b>デフォルトのログディレクトリを上書きする場合に指定します。<br><br></li><li> [オプション] <b>アプリケーションID</b>自動生成されるアプリケーションIDを上書きしたい場合に指定します。このIDは当インスタンスを他と区別するために用いられます。<br><br></li><li>このロケールで一般的に用いられる<b>キャラクタセット</b><br><br></li></ul>より詳細な情報についてはインストールガイドをご覧ください。",
+                    "システムチェックの完了後、通常またはカスタムインストールのどちらかを選択できます。<br><br><br /><b>通常</b>および<b>カスタム</b>インストールのどちらにおいても以下が必要になります:<br><br /><ul><li> <b>Sugarデータを保持するデータベースのタイプ</b> <ul><li>サポートされるデータベースタイプ: MySQL、MS SQL Server、Oracle、DB2<br><br></li></ul></li><li> <b>データベースが動作するサーバのマシン（ホスト）名</b><br /><ul><li>データベースがWebサーバと同じローカルコンピュータにある場合はこの値は<i>localhost</i>となります。<br><br></li></ul></li><li><b>Sugarデータを保持するデータベース名</b><br /><ul><li> 既にデータベースが存在する場合、それと同じ名前を入力すると、インストール中にデータベースは削除されます。</li><li> 既存のデータベースが存在しない場合、インストール処理中にこの名前で新たなデータベースが作成されます。<br><br></li><br /></ul></li><li><b>データベース管理者のユーザ名とパスワード</b> <ul><li>データベース管理者はテーブルやユーザを作成し、データベースへの書き込みができる必要があります。</li><li>データベースがローカルコンピュータになく、あなたがデータベースで管理者でない場合は、データベース管理者にお問い合わせください。<br><br></li></ul></li><li> <b>Sugarデータベースのみに使われるデータベースユーザ</b><ul><li> ユーザはデータベース管理者でも構いませんし、既存のデータベースの管理者ユーザでも構いません。</li><li> 新しいユーザを作成する場合は、新しいユーザ名とパスワードを入力してください。インストール処理中に作成されます。</li><br /></ul></ul><p><br /><b>カスタム</b>セットアップの場合、追加で以下が必要になります:<br><br /> <ul><br /> <li> <b>インストール後にSugarインスタンスにアクセスするためのURL </b>このURLはWebサーバのマシン名もしくはIPアドレスになります。<br><br></li><li> [オプション] <b>セッションディレクトリのパス</b>共有サーバなどでセッション情報を脆弱性から守るため、セッション情報を特別なディレクトリに格納する場合に指定します。<br><br></li><li> [オプション] <b>カスタムログディレクトリのパス</b>デフォルトのログディレクトリを上書きする場合に指定します。<br><br></li><li> [オプション] <b>アプリケーションID</b>自動生成されるアプリケーションIDを上書きしたい場合に指定します。このIDは当インスタンスを他と区別するために用いられます。<br><br></li><li>このロケールで一般的に用いられる<b>キャラクタセット</b><br><br></li></ul>より詳細な情報についてはインストールガイドをご覧ください。",
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'インストールを進める前に以下の重要な情報をお読みください。この情報は、インストールの準備ができているかどうかを判断することに役立ちます。',
 
 
@@ -444,8 +443,8 @@ $mod_strings = array(
 	'LBL_OOTB_WORKFLOW'		=> 'ワークフロータスクを実行',
 	'LBL_OOTB_REPORTS'		=> 'レポート生成タスクを実行',
 	'LBL_OOTB_IE'			=> 'インバウンドメール受信箱を確認',
-	'LBL_OOTB_BOUNCE'		=> 'バウンスしたキャンペーンEメールの処理を夜間に実行',
-    'LBL_OOTB_CAMPAIGN'		=> 'キャンペーンEメールの送信を夜間に実行',
+	'LBL_OOTB_BOUNCE'		=> 'バウンスしたキャンペーンメールの処理を夜間に実行',
+    'LBL_OOTB_CAMPAIGN'		=> 'キャンペーンメールの送信を夜間に実行',
 	'LBL_OOTB_PRUNE'		=> '月初め（１日）に不要なデータベースのデータを削除',
     'LBL_OOTB_TRACKER'		=> '月始め（1日）に不要なトラッカーテーブルを削除',
     'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Eメールリマインダ通知を実行',
@@ -453,14 +452,14 @@ $mod_strings = array(
     'LBL_OOTB_CLEANUP_QUEUE' => 'ジョブキューの削除',
 
 
-    'LBL_FTS_TABLE_TITLE'     => 'フルテキスト検索設定の入力',
+    'LBL_FTS_TABLE_TITLE'     => 'フルテキスト検索の設定の入力',
     'LBL_FTS_HOST'     => 'ホスト',
     'LBL_FTS_PORT'     => 'ポート',
     'LBL_FTS_TYPE'     => '検索エンジンタイプ',
     'LBL_FTS_HELP'      => 'フルテキスト検索を有効にするには、検索エンジンのタイプを選択し、検索エンジンがホストしているホスト名とポート番号を入力してください。Sugarにはあらかじめelasticsearchエンジンが含まれています。',
     'LBL_FTS_REQUIRED'    => 'Elastic Searchが必要です。',
-    'LBL_FTS_CONN_ERROR'    => '全文検索サーバーに接続できません。設定を確認してください。',
-    'LBL_FTS_NO_VERSION_AVAILABLE'    => '全文検索サーバーのバージョンが利用できません。設定を確認してください。',
+    'LBL_FTS_CONN_ERROR'    => '全文検索サーバに接続できません。設定を確認してください。',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => '全文検索サーバのバージョンが利用できません。設定を確認してください。',
     'LBL_FTS_UNSUPPORTED_VERSION'    => 'Elastic 検索でサポートされているバージョンが検出されませんでした。%sのバージョンを使用してください。',
 
     'LBL_PATCHES_TITLE'     => '最新パッチのインストール',
@@ -475,6 +474,142 @@ $mod_strings = array(
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Sugarインスタンスのシステム名を入力してください。',
 	'LBL_PATCH_UPLOAD' => 'ローカルコンピュータからパッチを選択してください。',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP下位互換モードが有効になっています。先に進めるためにzend.ze1_compatibility_modeをOffにセットしてください。',
+
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
 
     'advanced_password_new_account_email' => array(
         'subject' => 'アカウント情報',
@@ -492,4 +627,32 @@ $mod_strings = array(
 'あなたは、$contact_user_pwd_last_changed にパスワードのリセットを依頼しました。<br /><br />以下のリンクをクリックしてパスワードをリセットしてください:<br /><br />$contact_user_link_guid',
         'name' => 'パスワードのリセットのお知らせ',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'ポータルパスワードのリセットのお知らせ',
+    'subject' => 'アカウントパスワードのリセット',
+    'description' => 'このテンプレートは、ポータルユーザのアカウントパスワードをリセットするためのリンクを送信する際に用います。',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>あなたは、アカウントパスワードのリセットを依頼しました。</p><p>以下のリンクをクリックしてパスワードをリセットしてください:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    あなたは、アカウントパスワードのリセットを依頼しました。
+
+    以下のリンクをクリックしてパスワードをリセットしてください:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'ポータルパスワードの確認メール',
+        'subject' => 'アカウントパスワードがリセットされました',
+        'description' => 'このテンプレートは、アカウントパスワードがリセットされた旨の確認をポータルユーザに送る際に使用します。',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>このEメールは、ポータルアカウントパスワードがリセットされたことを確認するためのものです。</p><p>以下のリンクを使用してポータルにログインしてください:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    このEメールは、ポータルアカウントパスワードがリセットされたことを確認するためのものです。
+
+    以下のリンクを使用してポータルにログインしてください:
+
+    $portal_login_url',
+    ],
 );

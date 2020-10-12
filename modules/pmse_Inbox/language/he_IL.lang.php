@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'הקצאת המשתמש חלה',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'תצוגה מקדימה של תהליך עיצוב',
+    'LBL_PROJECT_RUN_ORDER' => 'סדר הפעלה',
 );
 

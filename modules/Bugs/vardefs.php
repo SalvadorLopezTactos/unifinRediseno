@@ -147,7 +147,7 @@ $dictionary['Bug'] = array(
             'name' => 'portal_viewable',
             'vname' => 'LBL_SHOW_IN_PORTAL',
             'type' => 'bool',
-            'default' => 0,
+            'default' => 1,
             'reportable' => false,
         ),
         'tasks' => array(
@@ -391,6 +391,13 @@ $dictionary['Bug'] = array(
 
     // This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
+    'portal_visibility' => [
+        'class' => 'Bugs',
+        'links' => [
+            'Accounts' => 'accounts',
+            'Contacts' => 'contacts',
+        ],
+    ],
 );
 
 VardefManager::createVardef('Bugs', 'Bug', array(

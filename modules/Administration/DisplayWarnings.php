@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
 function displayAdminError($errorString){
 	$output = '<p class="error">' . $errorString .'</p>';
 	if(!empty($GLOBALS['buffer_system_notifications'])){
@@ -166,15 +168,33 @@ if($smtp_error) {
     }
 
     if (!isset($_SESSION['license_seats_needed'])) {
-        $licenseInfo = getLicenseUsers();
-        $_SESSION['license_seats_needed'] =  $licenseInfo['active_users'] - $licenseInfo['license_users'];
+        $license_seats_needed = 0;
+        $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed);
+        $_SESSION['license_seats_needed'] = $license_seats_needed;
     }
 
     if ($_SESSION['license_seats_needed'] > 0) {
-        $licenseInfo = $licenseInfo ?? getLicenseUsers();
+        $seatNeeded = 0;
+        $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($seatNeeded);
+
+        $msg = '';
+        $i = 0;
+        foreach ($exceededLicenseTypes as $type => $extraNumbers) {
+            if ($extraNumbers > 0) {
+                $totalPurchased = SubscriptionManager::instance()->getSystemSubscriptionSeatsByType($type);
+                $totalUsersByType = $extraNumbers + $totalPurchased;
+                if ($i > 0) {
+                    $msg .= ' and ';
+                }
+                $msg .= ' ' . $totalUsersByType . ' ' . User::getLicenseTypeDescription($type) . ' '
+                    . translate('WARN_LICENSE_SEATS2', 'Administration') . ' '
+                    . $totalPurchased;
+                $i++;
+            }
+        }
+
         displayAdminError(translate('WARN_LICENSE_SEATS', 'Administration')
-            . $licenseInfo['active_users'] . translate('WARN_LICENSE_SEATS2', 'Administration')
-            .  $licenseInfo['license_users'] . translate('WARN_LICENSE_SEATS3', 'Administration'));
+            . $msg . translate('WARN_LICENSE_SEATS3', 'Administration'));
     }
         //END REQUIRED CODE DO NOT MODIFY
         if(empty($GLOBALS['sugar_config']['admin_access_control'])){

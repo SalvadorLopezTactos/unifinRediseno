@@ -10,59 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 class CasesApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'create' => array(
+        return [
+            'create' => [
                 'reqType'   => 'POST',
-                'path'      => array('Cases'),
-                'pathVars'  => array('module'),
+                'path'      => ['Cases'],
+                'pathVars'  => ['module'],
                 'method'    => 'createRecord',
-                'shortHelp' => 'This method creates a new Case record with option to add Contact and Account relationships',
-                'longHelp'  => 'modules/Cases/api/help/CasesApi.html',
-            ),
-        );
+                'shortHelp' => 'Deprecated api kept for backward compatibility',
+                'longHelp'  => 'include/api/help/module_post_help.html',
+                'maxVersion' => '11.5',
+            ],
+        ];
     }
 
     /**
-     * Create the case record and optionally perform post-save actions for Portal
+     * @deprecated
      */
     public function createRecord(ServiceBase $api, array $args)
     {
-        //create the case using the ModuleApi
-
-        $contact = null;
-        if (isset($_SESSION['type']) && $_SESSION['type'] == 'support_portal') {
-            $contact = BeanFactory::getBean('Contacts', $_SESSION['contact_id'], array('strict_retrieve' => true));
-
-            if (!empty($contact)) {
-                $args['assigned_user_id'] = $contact->assigned_user_id;
-                $args['account_id']       = $contact->account_id;
-                $args['team_id'] = $contact->team_id;
-                $args['team_set_id'] = $contact->team_set_id;
-                $args['acl_team_set_id'] = $contact->acl_team_set_id;
-            }
-        }
-
-        $data = parent::createRecord($api, $args);
-
-        $caseId = null;
-        if (isset($data['id']) && !empty($data['id'])) {
-            $caseId = $data['id'];
-        } else {
-            //case not created, can't do post-processes - bail out
-            return $data;
-        }
-
-        if (!empty($caseId) && !empty($contact)) {
-            $case = BeanFactory::getBean('Cases', $caseId);
-            $case->load_relationship('contacts');
-            $case->contacts->add($contact->id);
-        }
-
-        return $data;
+        $msg = sprintf(
+            '%s::%s is deprecated and will be removed in a future release.',
+            __CLASS__,
+            __METHOD__
+        );
+        $msg .= ' For Portal specific API customizations please use ModulePortalApi.';
+        LoggerManager::getLogger()->deprecated($msg);
+        return parent::createRecord($api, $args);
     }
 }

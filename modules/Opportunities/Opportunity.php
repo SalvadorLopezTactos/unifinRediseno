@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
 // Opportunity is used to store customer information.
 class Opportunity extends SugarBean
 {
@@ -524,32 +526,6 @@ class Opportunity extends SugarBean
         return $array_assign;
     }
 
-
-    /**
-     * Static helper function for getting releated account info, This will be removed in a future versions
-     * @deprecated
-     */
-    public function get_account_detail($opp_id)
-    {
-        $GLOBALS['log']->deprecated('Opportunity::get_account_detail() has been deprecated in 7.8');
-        $ret_array = array();
-        $db = DBManagerFactory::getInstance();
-        $query = "SELECT acc.id, acc.name, acc.assigned_user_id "
-            . "FROM accounts acc, accounts_opportunities a_o "
-            . "WHERE acc.id=a_o.account_id"
-            . " AND a_o.opportunity_id='$opp_id'"
-            . " AND a_o.deleted=0"
-            . " AND acc.deleted=0";
-        $result = $db->query($query, true, "Error filling in opportunity account details: ");
-        $row = $db->fetchByAssoc($result);
-        if ($row != null) {
-            $ret_array['name'] = $row['name'];
-            $ret_array['id'] = $row['id'];
-            $ret_array['assigned_user_id'] = $row['assigned_user_id'];
-        }
-        return $ret_array;
-    }
-
     /**
      * getClosedStages
      *
@@ -597,5 +573,222 @@ class Opportunity extends SugarBean
         }
 
         return static::$settings;
+    }
+
+    /**
+     * Return an array of RLI closed won stage names.
+     *
+     * @return array array of RLI closed won stage values
+     */
+    public function getRliClosedWonStages(): array
+    {
+        return Forecast::getSettings()['sales_stage_won'] ?? ['Closed Won'];
+    }
+
+    /**
+     * Check if we can renew opportunity.
+     *
+     * @return bool
+     */
+    public function canRenew(): bool
+    {
+        // get the OpportunitySettings
+        $settings = Opportunity::getSettings();
+        $useRli = isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems';
+        // get licenses
+        $licenses = SubscriptionManager::instance()->getSystemSubscriptionKeysInSortedValueArray();
+        return $useRli && in_array('SUGAR_SELL', $licenses);
+    }
+
+    /**
+     * Retrieve and update fetched_row['sales_status'] from db.
+     */
+    public function retrieveSalesStatus()
+    {
+        if (!empty($this->id)) {
+            $query = new \SugarQuery();
+            $query->from($this, ['add_deleted' => 1, 'team_security' => false]);
+            $query->select('sales_status');
+            $query->where()->equals('id', $this->id);
+            $query->limit(1);
+            $results = $query->execute();
+            if (!empty($results)) {
+                $row = $results[0];
+                $row = $this->convertRow($row);
+                if (empty($this->fetched_row)) {
+                    $this->fetched_row = [];
+                }
+                $this->fetched_row['sales_status'] = $row['sales_status'];
+            }
+        }
+    }
+
+    /**
+     * Get renewal parent.
+     *
+     * @return Opportunity|NULL
+     */
+    public function getRenewalParent(): ?Opportunity
+    {
+        if (!empty($this->renewal_parent_id)) {
+            return BeanFactory::getBean($this->getModuleName(), $this->renewal_parent_id);
+        }
+        return null;
+    }
+
+    /**
+     * Get 'Closed Won' and renewable RLIs for this opportunity.
+     *
+     * @return array
+     */
+    public function getClosedWonRenewableRLIs(): array
+    {
+        $rliBeans = [];
+        $closedWon = $this->getRliClosedWonStages();
+
+        if ($this->load_relationship('revenuelineitems')) {
+            $rliBean = BeanFactory::getBean($this->revenuelineitems->getRelatedModuleName());
+            $whereTable = $rliBean->getTableName();
+
+            $params = [
+                "$whereTable.service = 1",
+                "$whereTable.sales_stage in ('" . implode("','", $closedWon) . "')",
+                "$whereTable.renewable = 1",
+            ];
+
+            $rliBeans = $this->revenuelineitems->getBeans([
+                'where' => implode(' AND ', $params),
+            ]);
+        }
+
+        return $rliBeans;
+    }
+
+    /**
+     * Get existing renewal opportunity.
+     *
+     * @return Opportunity|NULL
+     */
+    public function getExistingRenewalOpportunity(): ?Opportunity
+    {
+        $renewalBean = null;
+        if ($this->load_relationship('renewal_opportunities')) {
+            $whereTable = $this->getTableName();
+
+            $params = [
+                "$whereTable.sales_status != " . $this->db->quoted(Opportunity::STATUS_CLOSED_WON),
+                "$whereTable.sales_status != " . $this->db->quoted(Opportunity::STATUS_CLOSED_LOST),
+                "$whereTable.renewal = 1",
+            ];
+
+            $renewalBeans = $this->renewal_opportunities->getBeans([
+                'where' => implode(' AND ', $params),
+            ]);
+
+            if (!empty($renewalBeans)) {
+                $renewalBean = array_shift($renewalBeans);
+            }
+        }
+
+        return $renewalBean;
+    }
+
+    /**
+     * Create a new renewal opportuinty.
+     *
+     * @return Opportunity
+     */
+    public function createNewRenewalOpportunity(): Opportunity
+    {
+        $copyOpFields = [
+            'name',
+            'assigned_user_id',
+            'assigned_user_name',
+            'team_id',
+            'team_set_id',
+            'acl_team_set_id',
+        ];
+
+        $newBean = BeanFactory::newBean($this->getModuleName());
+        $newBean->renewal = 1;
+        $newBean->renewal_parent_id = $this->id;
+
+        foreach ($copyOpFields as $field) {
+            if (isset($this->$field)) {
+                $newBean->$field = $this->$field;
+            }
+        }
+
+        $duplicates = $newBean->findDuplicates();
+        if (!empty($duplicates['records'])) {
+            // check if its renewal
+            foreach ($duplicates['records'] as $opp) {
+                if (!empty($opp->renewal) && $opp->renewal_parent_id === $this->id) {
+                    return $opp;
+                }
+            }
+        }
+
+        $newBean->save();
+
+        if ($newBean->load_relationship('accounts')) {
+            $newBean->accounts->add([$this->account_id]);
+        }
+
+        return $newBean;
+    }
+
+    /**
+     * Create a new renewal RLI from an existing RLI.
+     *
+     * @param RevenueLineItem $rli
+     * @return RevenueLineItem
+     */
+    public function createNewRenewalRLI(RevenueLineItem $rli): RevenueLineItem
+    {
+        $copyRliFields = [
+            'name',
+            'account_id',
+            'product_template_id',
+            'category_id',
+            'tax_class',
+            'likely_case',
+            'currency_id',
+            'base_rate',
+            'quantity',
+            'list_price',
+            'cost_price',
+            'discount_price',
+            'renewable',
+            'service',
+            'service_duration_value',
+            'service_duration_unit',
+            'assigned_user_id',
+            'team_id',
+            'team_set_id',
+            'acl_team_set_id',
+        ];
+
+        $newRliBean = BeanFactory::newBean($rli->getModuleName());
+        $timeDate = TimeDate::getInstance();
+        $newStartDate = $timeDate->fromDbDate($rli->service_end_date)->modify('+1 day')->asDbDate();
+        $newRliBean->service_start_date = $newStartDate;
+        $newRliBean->date_closed = $newStartDate;
+        $newRliBean->product_type = 'Existing Business';
+        $newRliBean->opportunity_id = $this->id;
+
+        foreach ($copyRliFields as $field) {
+            if (isset($rli->$field)) {
+                $newRliBean->$field = $rli->$field;
+            }
+        }
+
+        $newRliBean->save();
+
+        if ($this->load_relationship('revenuelineitems')) {
+            $this->revenuelineitems->add($newRliBean);
+        }
+
+        return $newRliBean;
     }
 }

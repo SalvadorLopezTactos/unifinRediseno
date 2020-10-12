@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Offertes (verzenden aan)',
 	'LNK_ACCOUNT_REPORTS' => 'Bekijk Organisatierapporten',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenten',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard accountlijst',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard accountrecord',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Accountgegevens',
+    'LBL_NEXT_RENEWAL_DATE' => 'Datum volgende verlenging',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Accountnaam/industrie',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Locatie',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafieken',

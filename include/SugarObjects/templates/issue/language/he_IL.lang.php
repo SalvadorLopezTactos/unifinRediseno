@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'החלטה',
   'LBL_LAST_MODIFIED' => 'שונה לאחרונה',
   'LBL_ASSIGNED_TO_ID'=>'הוקצה עבור:',
-  'LBL_ASSIGNED_TO_NAME' => 'משתמש:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'משתמש:',
   'LBL_WORK_LOG' => 'יומן עבודה:',
+    'LBL_FOLLOW_UP' => 'המשך טיפול',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'תאריך הפתרון',
+    'LBL_HOURS_TO_RESOLUTION' => 'מספר השעות עד לפתרון',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'שעות עבודה עד לפתרון',
+    'LBL_PENDING_PROCESSING' => 'בהמתנה לעיבוד',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'נוצר על ידי:',
   'LBL_DATE_CREATED' => 'נוצר בתאריך:',
   'LBL_DATE_ENTERED' => 'נוצר בתאריך:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'ערוך',
     'LBL_REMOVE' => 'הסר',
 
-  
+
   );

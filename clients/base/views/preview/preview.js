@@ -134,6 +134,7 @@
         this.unsetContextAction();
         this.toggleFields(this.editableFields, false);
         this.toggleLocks(false);
+        this.setButtonStates(this.STATE.VIEW);
     },
 
     /**

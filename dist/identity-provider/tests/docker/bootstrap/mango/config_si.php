@@ -45,6 +45,6 @@ $sugar_config_si = [
     'demoData' => 'no', // Demo Data by default, 'yes' or 'no'
     'fts_type' => 'Elastic',
     'setup_fts_type' => 'Elastic',
-    'setup_fts_host' => 'behat-tests-env-elastic', //Your Elastic server host
+    'setup_fts_host' =>  '54.elasticsearch.sugarcrm.io', //Your Elastic server host
     'setup_fts_port' => '9200', //Your Elastic server port
 ];

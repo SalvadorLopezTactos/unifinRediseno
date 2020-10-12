@@ -31,7 +31,7 @@ return array(
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
                                 'display_columns' => array(
-                                    'full_name',
+                                    'name',
                                     'account_name',
                                     'phone_work',
                                     'title',

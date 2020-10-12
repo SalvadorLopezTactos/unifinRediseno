@@ -12,6 +12,7 @@
  * @class View.Views.Portal.FooterActionsView
  * @alias SUGAR.App.view.views.PortalFooterActionsView
  * @extends View.View.Base.FooterActionsView
+ * @deprecated This file will be deleted in a future release
  */
 ({
     events: {
@@ -19,6 +20,11 @@
         'click [data-action=support]': 'support',
     },
 
+
+    initialize: function(options) {
+        app.logger.warn('View.Views.Portal.FooterActionsView is deprecated and will be removed in a future release');
+        this._super('initialize', [options]);
+    },
     /**
      * Support page differs between different clients.
      * @override

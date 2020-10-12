@@ -123,6 +123,16 @@ $dictionary['Scheduler'] = array('table' => 'schedulers',
 			'bean_name'		=> 'Scheduler',
 			'source'		=> 'non-db',
 		),
+        // System job can't be viewed, edited or deleted. It isn't showed on listview.
+        'system_job' => [
+            'name' => 'system_job',
+            'vname' => 'LBL_SYSTEM_JOB',
+            'type' => 'bool',
+            'len' => 1,
+            'required' => false,
+            'default' => '0',
+            'reportable' => false,
+        ],
 	),
     'acls' => array('SugarACLAdminOnly' => true),
 	'indices' => array (

@@ -142,6 +142,50 @@ $fields = array(
         'enabled' => true,
         'default' => true,
     ),
+    'service' => array(
+        'name' => 'service',
+        'label' => 'LBL_SERVICE',
+    ),
+    'service_start_date' => array(
+        'name' => 'service_start_date',
+        'label' => 'LBL_SERVICE_START_DATE',
+        'type' => 'date',
+    ),
+    'service_end_date' => array(
+        'name' => 'service_end_date',
+        'label' => 'LBL_SERVICE_END_DATE',
+        'type' => 'service-enddate',
+        'default' => false,
+    ),
+    array(
+        'name' => 'service_duration',
+        'type' => 'fieldset',
+        'css_class' => 'service-duration-field',
+        'label' => 'LBL_SERVICE_DURATION',
+        'inline' => true,
+        'default' => false,
+        'show_child_labels' => false,
+        'fields' => array(
+            array(
+                'name' => 'service_duration_value',
+                'label' => 'LBL_SERVICE_DURATION_VALUE',
+            ),
+            array(
+                'name' => 'service_duration_unit',
+                'label' => 'LBL_SERVICE_DURATION_UNIT',
+            ),
+        ),
+        'orderBy' => 'service_duration_unit',
+        'related_fields' => array(
+            'service_duration_value',
+            'service_duration_unit',
+        ),
+    ),
+    'renewable' => array(
+        'name' => 'renewable',
+        'label' => 'LBL_RENEWABLE',
+        'type' => 'bool',
+    ),
 );
 
 $viewdefs['RevenueLineItems']['base']['view']['list'] = array(

@@ -40,6 +40,9 @@ class SugarSAMLUserMapping extends SAMLUserMapping
     }
 
     /**
+     * Get associative array where 'attributes' key contains separate attributes that will be
+     * taken into account when performing User creation (in 'create') and User update (in 'update') actions.
+     *
      * @param Response $response
      * @return array
      */
@@ -58,7 +61,7 @@ class SugarSAMLUserMapping extends SAMLUserMapping
             }
         }
 
-        return $result;
+        return ['attributes' => $result];
     }
 
     /**

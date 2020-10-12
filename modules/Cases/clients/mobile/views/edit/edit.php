@@ -45,6 +45,7 @@ $viewdefs['Cases']['mobile']['view']['edit'] = array(
                 'status',
                 'description',
                 'resolution',
+                'tag',
                 'assigned_user_name',
 
                 'team_name',

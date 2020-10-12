@@ -226,6 +226,7 @@ function template_summary_list_view(&$reporter,&$args) {
 	} // if	
 	
 	$reporter->run_summary_query();
+        $reporter->fixGroupLabels();
 	$start_link_wrapper= "javascript:set_sort('";
 	$end_link_wrapper =  "','summary');";
 	$report_smarty->assign('reporter', $reporter);

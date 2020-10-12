@@ -46,7 +46,7 @@ $collect = function (?string $statement) use (&$collectors) : void {
     }
 };
 
-if (is_admin($current_user) || isset ($from_sync_client) || is_admin_for_any_module($current_user)) {
+if (is_admin($current_user) || isset($from_sync_client)) {
 	isset($_REQUEST['execute'])? $execute=$_REQUEST['execute'] : $execute= false;
 	$export = false;
 

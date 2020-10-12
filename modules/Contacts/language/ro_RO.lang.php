@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Tabloul de bord Listă contacte',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare contacte',
-
+    'LBL_SITE_USER_ID' => 'Cod hash al site_url și id contact',
+    'LBL_COOKIE_CONSENT' => 'Consimțământ cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Consimțământ cookie primit la',
     'LNK_CONTACT_REPORTS' => 'Vezi Rapoarte Contact',
     'ERR_DELETE_RECORD' => 'Specifcați numărul înregistrării pentru a sterge contactul.',
     'LBL_ACCOUNT_ID' => 'ID Cont:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informatie Portal',
     'LBL_PORTAL_NAME' => 'Nume Portal:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Parola Portal este Setata:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nume companie utilizator portal',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ai creeat cu succes {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Strada',
     'LBL_POSTAL_CODE' => 'Cod Postal:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Oportunitati',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documente',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Oferte',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Oferte (Expediere la)',
     'LBL_QUOTES_BILL_TO' => 'Oferte (Facturaţi către)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produse din ofertă',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Click aici pentru a edita profilul tau.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Aici este locul unde puteți seta limba preferată. Acest lucru se va schimba limba utilizată de către portalul Sugar',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Puteți reveni la profilul în orice moment, utilizând meniul utilizator.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Numele de portal {0} există deja. Numele de portal duplicate nu sunt permise. Modificați numele de portal pentru a fi unic.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID principal D&B',
@@ -273,4 +278,8 @@ Pentru a crea {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Rapoarte contacte',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopuri comerciale permise pentru',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultima actualizare a consimțământului',
+
+    'LBL_ENTRY_SOURCE' => 'Sursă contact',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

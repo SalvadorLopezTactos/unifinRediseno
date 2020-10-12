@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Değiştirilme Tarihi',
     'LBL_DELETED' => 'Silindi',
     'LBL_REVENUELINEITEMS' => 'Gelir Satır Öğeleri',
+    'LBL_ENTRY_SOURCE' => 'Not Kaynağı',
+    'LBL_SOURCE_EXTERNAL' => 'Harici',
+    'LBL_SOURCE_INTERNAL' => 'Dahili',
 
     // Help Text
     // List View Help Text

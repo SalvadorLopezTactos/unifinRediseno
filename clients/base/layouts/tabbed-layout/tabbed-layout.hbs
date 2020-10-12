@@ -10,9 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="tabbable">
-    <ul class="nav nav-tabs related-tabs{{#if options.meta.notabs}} hide{{/if}}">
-    </ul>
+<div class="tabbable{{#if meta.notabs}} hide-tabs{{/if}}">
+    <div class="tabs">
+        <ul class="nav nav-tabs related-tabs{{#if meta.notabs}} hide{{/if}}">
+            <li class="more-tabs hidden">
+                <a track="click:actiondropdown"
+                   class="btn dropdown-toggle btn-invisible"
+                   data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom"
+                   rel="tooltip" title="{{str 'LBL_MORE_TABS'}}"
+                   role="button" tabindex="{{tabIndex}}" aria-haspopup="true" aria-expanded="false"
+                   aria-label="{{str 'LBL_MORE_TABS'}}"><span class="fa fa-ellipsis-v"></span></a>
+                <ul data-menu="dropdown" class="dropdown-menu" role="menu" data-container="overflow"></ul>
+            </li>
+        </ul>
+    </div>
     <div class="tab-content">
     </div>
 </div>

@@ -322,4 +322,7 @@ Nach der Bestätigung der einzelnen gewünschten Module klicken Sie auf "Speiche
     'LBL_FILTER_LEADS_REPORTS' => 'Interessenten-Berichte',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Geschäftszwecke, zugestimmt für',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Zustimmung zuletzt aktualisiert',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Der Status {{moduleSingular}} kann nicht geändert werden. Dieses {{moduleSingular}} wurde bereits konvertiert.',
 );

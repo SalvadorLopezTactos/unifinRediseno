@@ -40,10 +40,15 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        app.error.errorName2Keys.integer = 'ERROR_INT';
 
         this.model.addValidationTask(
             'min_max_int_validator_' + this.cid,
             _.bind(this._doValidateMinMaxInt, this)
+        );
+        this.model.addValidationTask(
+            'is_pure_integer_validator_' + this.cid,
+            _.bind(this._doValidateIntNumber, this)
         );
     },
 
@@ -78,7 +83,8 @@
      *   preferences.
      */
     format: function(value) {
-        var numberGroupSeparator = '', decimalSeparator = '';
+        var numberGroupSeparator = '';
+        var decimalSeparator = '';
         if (!this._isSafeInt(value)) {
             return value;
         }
@@ -90,7 +96,8 @@
         return app.utils.formatNumber(
             value, 0, 0,
             numberGroupSeparator,
-            decimalSeparator
+            decimalSeparator,
+            true
         );
     },
 
@@ -121,7 +128,35 @@
     },
 
     /**
+     * This validates int number.
+     *
+     * @param {Object} fields The list of field names and their definitions.
+     * @param {Object} errors The list of field names and their errors.
+     * @param {Function} callback Async.js waterfall callback.
+     * */
+    _doValidateIntNumber: function(fields, errors, callback) {
+        if (this.model) {
+            var value = this.model.get(this.name);
+        }
+
+        if (!this._isInteger(value)) {
+            errors[this.name] = {'integer': true};
+        }
+        callback(null, fields, errors);
+    },
+
+    /**
+     * Checks if value is pure integer.
+     * @param {string|number} value
+     * @return {boolean}
+     * */
+    _isInteger: function(value) {
+        return !value || parseInt(value) === parseFloat(value);
+    },
+
+    /**
      * Checks if value is too big to format/unformat.
+     *
      * @param {string|number} value
      * @return {boolean}
      * @private
@@ -136,5 +171,5 @@
     _dispose: function() {
         this.model.removeValidationTask('min_max_int_validator_' + this.cid);
         this._super('_dispose');
-    }
-})
+    },
+});

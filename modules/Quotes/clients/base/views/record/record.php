@@ -169,6 +169,7 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                                 array(
                                     'name' => 'product_bundle_items',
                                     'fields' => array(
+                                        'account_id',
                                         'name',
                                         'quote_id',
                                         'description',
@@ -187,6 +188,12 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                                         'base_rate',
                                         'discount_select',
                                         'total_amount',
+                                        'service',
+                                        'service_start_date',
+                                        'service_end_date',
+                                        'renewable',
+                                        'service_duration_value',
+                                        'service_duration_unit',
                                     ),
                                     'max_num' => -1,
                                 ),
@@ -236,7 +243,6 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'quote_num',
@@ -265,7 +271,6 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
             'label' => 'LBL_SHIPPING_BODY',
             'panelDefault' => 'collapsed',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'billing_account_name',
@@ -359,7 +364,6 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
             'label' => 'LBL_QUOTESETTINGS',
             'panelDefault' => 'collapsed',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -393,7 +397,6 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'panelDefault' => 'collapsed',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

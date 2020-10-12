@@ -10,7 +10,7 @@
  */
 
 /**
- * @class View.Views.Base.Opportunities.ProductQuickPicksDashletView
+ * @class View.Views.Base.OpportunitiesProductQuickPicksDashletView
  * @alias SUGAR.App.view.views.BaseOpportunitiesProductQuickPicksDashletView
  * @extends View.Views.Base.Opportunities.ProductQuickPicksView
  */

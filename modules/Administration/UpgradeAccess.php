@@ -15,14 +15,15 @@ global $mod_strings;
 global $sugar_config;
 
 $ignoreCase = (substr_count(strtolower($_SERVER['SERVER_SOFTWARE']), 'apache/2') > 0)?'(?i)':'';
+
 $htaccess_file   = getcwd() . "/.htaccess";
 $contents = getHtaccessData($htaccess_file);
 
 $status =  file_put_contents($htaccess_file, $contents);
-if( !$status ){
-    echo '<p>' . $mod_strings['LBL_HT_NO_WRITE'] . "<span class=stop>{$htaccess_file}</span></p>\n";
-    echo '<p>' . $mod_strings['LBL_HT_NO_WRITE_2'] . "</p>\n";
-    echo "{$contents}\n";
+if (!$status) {
+    echo '<p>'.htmlspecialchars($mod_strings['LBL_HT_NO_WRITE']).'<span class="stop">'.htmlspecialchars($htaccess_file).'</span></p>'.PHP_EOL;
+    echo '<p>'.htmlspecialchars($mod_strings['LBL_HT_NO_WRITE_2']).'</p>'.PHP_EOL;
+    echo htmlspecialchars($contents).PHP_EOL;
 }
 
 

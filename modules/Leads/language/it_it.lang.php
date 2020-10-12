@@ -315,4 +315,7 @@ Per creare un {{module_name}}:
     'LBL_FILTER_LEADS_REPORTS' => 'Report Lead',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopi commerciali consentiti per',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultimo aggiornamento consenso',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Impossibile modificare lo stato di {{moduleSingular}}. Questo modulo {{moduleSingular}} è stato già convertito.',
 );

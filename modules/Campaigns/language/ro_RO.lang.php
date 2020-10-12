@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista ţintă de tip implicit nu a fost găsita',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nu s-au găsit înregistrări',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Candidaturile au fost prelucrate',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Numele Tracker-ului:',
   'LBL_EDIT_TRACKER_URL'=>'URL al Tracker-ului:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nu au fost salvate optime cu contul dumneavoastra de Email de Intrare. Va rugam sa revedeti setarile',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Vă rugăm să revizuiți setările Inbound e-mail.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} piste care au fost create prin această campanie a fost şterse de la creare.',
+    'LBL_PROSPECT_LIST' => 'Listă ținte',
 );
 
 

@@ -44,10 +44,13 @@ class ACLAction  extends SugarBean
             foreach($ACLActions[$type]['actions'] as $action_name =>$action_def){
 
                 $action = BeanFactory::newBean('ACLActions');
-                $query = "SELECT * FROM " . $action->table_name . " WHERE name='$action_name' AND category = '$category' AND acltype='$type' AND deleted=0 ";
-                $row = $db->fetchOne($query);
+                $id = $db->getConnection()
+                    ->executeQuery(
+                        "SELECT id FROM {$action->table_name} WHERE name=? AND category=? AND acltype=? and deleted=0",
+                        [$action_name, $category, $type]
+                    )->fetchColumn();
                 //only add if an action with that name and category don't exist
-                if (empty($row)) {
+                if (false === $id) {
                     $action->name = $action_name;
                     $action->category = $category;
                     $action->aclaccess = $action_def['default'];
@@ -55,7 +58,6 @@ class ACLAction  extends SugarBean
                     $action->modified_user_id = 1;
                     $action->created_by = 1;
                     $action->save();
-
                 }
             }
 
@@ -78,12 +80,13 @@ class ACLAction  extends SugarBean
             foreach($ACLActions[$type]['actions'] as $action_name =>$action_def){
 
                 $action = BeanFactory::newBean('ACLActions');
-                $query = "SELECT * FROM " . $action->table_name . " WHERE name='$action_name' AND category = '$category' AND acltype='$type' and deleted=0";
-                $result = $db->query($query);
-                //only add if an action with that name and category don't exist
-                $row=$db->fetchByAssoc($result);
-                if ($row != null) {
-                    $action->mark_deleted($row['id']);
+                $id = $db->getConnection()
+                    ->executeQuery(
+                        "SELECT id FROM {$action->table_name} WHERE name=? AND category=? AND acltype=? and deleted=0",
+                        [$action_name, $category, $type]
+                    )->fetchColumn();
+                if (false !== $id) {
+                    $action->mark_deleted($id);
                 }
             }
         }else{
@@ -168,20 +171,25 @@ class ACLAction  extends SugarBean
     *
     *
     */
-    public static function getDefaultActions($type='module', $action=''){
+    public static function getDefaultActions($type = 'module', $action = '')
+    {
         $query = "SELECT * FROM acl_actions WHERE deleted=0 ";
-        if(!empty($type)){
-            $query .= " AND acltype='$type'";
+        $params = [];
+        if (!empty($type)) {
+            $query .= ' AND acltype=?';
+            $params[] = $type;
         }
-        if(!empty($action)){
-            $query .= "AND name='$action'";
+        if (!empty($action)) {
+            $query .= 'AND name=?';
+            $params[] = $action;
         }
         $query .= " ORDER BY category";
 
         $db = DBManagerFactory::getInstance();
-        $result = $db->query($query);
-        $default_actions = array();
-        while($row = $db->fetchByAssoc($result) ){
+        $stmt = $db->getConnection()
+            ->executeQuery($query, $params);
+        $default_actions = [];
+        foreach ($stmt as $row) {
             $acl = BeanFactory::newBean('ACLActions');
             $acl->populateFromRow($row);
             $default_actions[] = $acl;
@@ -236,76 +244,9 @@ class ACLAction  extends SugarBean
             }
         }
         //if we don't have it loaded then lets check against the db
-        $db = DBManagerFactory::getInstance();
-        $conn = $db->getConnection();
-        $qbSubQuery = $conn->createQueryBuilder();
-        $qbSubQuery
-            ->select('acl_roles_users.user_id', 'acl_roles_actions.action_id', 'acl_roles_actions.access_override')
-            ->from('acl_roles_users')
-            ->leftJoin(
-                'acl_roles_users',
-                'acl_roles_actions',
-                'acl_roles_actions',
-                'acl_roles_actions.role_id = acl_roles_users.role_id AND acl_roles_actions.deleted=0'
-            )
-            ->where($qbSubQuery->expr()->eq(
-                'acl_roles_users.user_id',
-                $qbSubQuery->createPositionalParameter($user_id)
-            ))
-            ->andWhere($qbSubQuery->expr()->eq('acl_roles_users.deleted', '0'));
+        $overridden_actions = self::getOverriddenActions($user_id);
 
-        $qb = $conn->createQueryBuilder();
-        $qb->select(
-            'acl_actions.id',
-            'acl_actions.name',
-            'acl_actions.category',
-            'acl_actions.acltype',
-            'acl_actions.aclaccess',
-            'tt.access_override'
-        )
-            ->from('acl_actions')
-            ->leftJoin(
-                'acl_actions',
-                '(' . $qb->importSubQuery($qbSubQuery) . ')',
-                'tt',
-                'tt.action_id = acl_actions.id'
-            )
-            ->andWhere($qb->expr()->eq('acl_actions.deleted', 0))
-            ->addOrderBy('acl_actions.category')
-            ->addOrderBy('acl_actions.name');
-
-        if(!empty($category)){
-            $qb->andWhere($qb->expr()->eq('acl_actions.category', $qb->createPositionalParameter($category)));
-        }
-        if(!empty($action)){
-            $qb->andWhere($qb->expr()->eq('acl_actions.name', $qb->createPositionalParameter($action)));
-        }
-        if(!empty($type)){
-            $qb->andWhere($qb->expr()->eq('acl_actions.acltype', $qb->createPositionalParameter($type)));
-        }
-        $stmt = $qb->execute();
-
-        $selected_actions = array();
-        while ($row = $stmt->fetch()) {
-            $isOverride = !empty($row['access_override']);
-            if ($isOverride) {
-                $row['aclaccess'] = $row['access_override'];
-            }
-
-            if (!isset($selected_actions[$row['category']][$row['acltype']][$row['name']])
-                || ($isOverride
-                    && ($selected_actions[$row['category']][$row['acltype']][$row['name']]['aclaccess'] > $row['aclaccess']
-                        || $selected_actions[$row['category']][$row['acltype']][$row['name']]['isDefault']
-                    )
-                )
-            ) {
-                $selected_actions[$row['category']][$row['acltype']][$row['name']] = array(
-                    'id' => $row['id'],
-                    'aclaccess' => $row['aclaccess'],
-                    'isDefault' => !$isOverride,
-                );
-            }
-        }
+        $selected_actions = self::getAllActionsWithOverride($overridden_actions, $category, $type, $action);
 
         //only set the session variable if it was a full list;
         if(empty($category) && empty($action)){
@@ -519,35 +460,117 @@ class ACLAction  extends SugarBean
         return $names;
     }
 
-
-
     /**
-    * function toArray()
-    * returns this acl as an array
-    *
-    * @return array of fields with id, name, access and category
-    */
-    public function toArray($dbOnly = false, $stringOnly = false, $upperKeys=false)
+     * Getting list of overridden
+     *
+     * @param string $user_id User's id to get the list of overridden actions
+     * @return array
+     */
+    private static function getOverriddenActions(string $user_id): array
     {
-        $array_fields = array('id', 'aclaccess');
-        $arr = array();
-        foreach($array_fields as $field){
-            $arr[$field] = $this->$field;
+        $query = <<<SQL
+SELECT
+    acl_roles_users.user_id,
+    acl_roles_actions.action_id,
+    acl_roles_actions.access_override
+FROM
+    acl_roles_users
+LEFT JOIN acl_roles_actions acl_roles_actions ON
+    acl_roles_actions.role_id = acl_roles_users.role_id
+    AND acl_roles_actions.deleted = 0
+WHERE
+    acl_roles_users.user_id = ?
+    AND acl_roles_users.deleted = ?
+SQL;
+        $conn = DBManagerFactory::getInstance()->getConnection();
+        $stmt = $conn->executeQuery(
+            $query,
+            [$user_id, 0]
+        );
+        $actions = [];
+        foreach ($stmt as $row) {
+            $actions[] = $row;
         }
-        return $arr;
+        return self::keepMostRestrictiveActions($actions);
     }
 
-    /**
-    * function fromArray($arr)
-    * converts an array into an acl mapping name value pairs into files
-    *
-    * @param Array $arr
-    */
-    function fromArray($arr){
-        foreach($arr as $name=>$value){
-            $this->$name = $value;
+    private static function getAllActionsWithOverride(array $overridden_actions, string $category, string $type, string $action): array
+    {
+        $conn = DBManagerFactory::getInstance()->getConnection();
+        $qb = $conn->createQueryBuilder();
+        $qb->select(
+            'acl_actions.id',
+            'acl_actions.name',
+            'acl_actions.category',
+            'acl_actions.acltype',
+            'acl_actions.aclaccess'
+        )
+            ->from('acl_actions')
+            ->andWhere($qb->expr()->eq('acl_actions.deleted', 0));
+
+        if (!empty($category)) {
+            $qb->andWhere($qb->expr()->eq('acl_actions.category', $qb->createPositionalParameter($category)));
         }
+        if (!empty($action)) {
+            $qb->andWhere($qb->expr()->eq('acl_actions.name', $qb->createPositionalParameter($action)));
+        }
+        if (!empty($type)) {
+            $qb->andWhere($qb->expr()->eq('acl_actions.acltype', $qb->createPositionalParameter($type)));
+        }
+        $stmt = $qb->execute();
+
+        $selected_actions = array();
+        while ($row = $stmt->fetch()) {
+            $isOverride = !empty($overridden_actions[$row['id']]['access_override']);
+            if ($isOverride) {
+                $row['aclaccess'] = $overridden_actions[$row['id']]['access_override'];
+            }
+            $selected_actions = self::applyOverride($selected_actions, $row, $isOverride);
+        }
+        return $selected_actions;
     }
+
+    private static function applyOverride(array $selected_actions, array $row, bool $isOverride): array
+    {
+        $category = $row['category'];
+        $acltype = $row['acltype'];
+        $name = $row['name'];
+        $aclaccess = $row['aclaccess'];
+        $id = $row['id'];
+        $overriddenAction = array(
+            'id' => $id,
+            'aclaccess' => $aclaccess,
+            'isDefault' => !$isOverride,
+        );
+        if (!isset($selected_actions[$category][$acltype][$name])) {
+            $selected_actions[$category][$acltype][$name] = $overriddenAction;
+        } else {
+            $current_action = $selected_actions[$category][$acltype][$name];
+            $isCurrentAccessHigher = $current_action['aclaccess'] > $aclaccess;
+            if ($isOverride && ($isCurrentAccessHigher || $current_action['isDefault'])) {
+                $selected_actions[$category][$acltype][$name] = $overriddenAction;
+            }
+        }
+        return $selected_actions;
+    }
+
+    private static function keepMostRestrictiveActions(array $actions): array
+    {
+        $overridden_actions = [];
+        foreach ($actions as $row) {
+            if (!empty($row['access_override'])) {
+                if (!isset($overridden_actions[$row['action_id']])) {
+                    $overridden_actions[$row['action_id']] = $row;
+                } else {
+                    if ($overridden_actions[$row['action_id']]['access_override'] > $row['access_override']) {
+                        $overridden_actions[$row['action_id']] = $row;
+                    }
+                }
+            }
+        }
+        return $overridden_actions;
+    }
+
 
     /**
      * @deprecated

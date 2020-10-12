@@ -11,6 +11,7 @@
  */
 -->
 <!-- BEGIN: main -->
+{PAGE_TITLE}
 <style>
 	#subjectfield { height: 1.6em; }
 </style>
@@ -149,7 +150,8 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td colspan='4'>
-						<input  name="toggle_textonly"  id="toggle_textonly" onclick="toggle_text_only();" type="checkbox" {TEXTONLY_CHECKED}/>
+						<input name="toggle_textonly" id="toggle_textonly" onclick="toggle_text_only();"
+								type="checkbox" {TEXTONLY_CHECKED} {TEXTONLY_DISABLED} />
 						<input  name="text_only"  id="text_only"  type="hidden" value='{TEXTONLY_VALUE}'/>
 							&nbsp;{MOD.LBL_SEND_AS_TEXT}
 						</td>

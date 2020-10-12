@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard elenco casi',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard record casi',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Dettagli reclami',
 
 	'ERR_DELETE_RECORD'					=> 'Per eliminare l´azienda deve essere specificato il numero del record.',
 	'LBL_ACCOUNT_ID'					=> 'ID Azienda',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contatti',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Reclami',
 	'LBL_DESCRIPTION'					=> 'Descrizione:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'File Allegato',	
+    'LBL_FILENANE_ATTACHMENT'           => 'File Allegato',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Cronologia',
 	'LBL_INVITEE'						=> 'Contatti',
 	'LBL_MEMBER_OF'						=> 'Azienda',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creato da Nome Utente',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome Utente Assegnato',
     'LBL_EXPORT_TEAM_COUNT' => 'Totale Gruppo',
+    'LBL_CHANGETIMERS' => 'Modifica timer',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email Contatti Relazionati',
@@ -134,4 +137,11 @@ Per creare un {{module_name}}:
 - I campi contrassegnati con "Richiesto" devono essere compilati prima del salvataggio.
 - Fare clic su "Altri dettagli" per visualizzare ulteriori campi, se necessario.
 2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Non hai trovato quello che cercavi?',
+    'LBL_CREATE_CASE' => 'Crea un {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Dettagli SLA',
+    'LBL_HOURS' => 'Ore',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

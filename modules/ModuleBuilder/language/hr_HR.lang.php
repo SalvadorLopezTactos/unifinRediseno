@@ -117,12 +117,12 @@ $mod_strings = array(
         'defaultdetailview'=>'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>Prikaza detalja</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
     ,
-        'defaultquickcreate'=>'Područje <b>izgleda</b> sadržava polja koja se trenutačno prikazuju unutar obrasca za <b>brzo stvaranje</b>.<br><br>Obrazac za brzo stvaranje pojavljuje se u podpločama za modul nakon što se klikne na gumb za stvaranje.<br/><br/><b>Alatni okvir</b> sadržava <b>koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
+        'defaultquickcreate'=>'Područje <b>Izgled</b> sadržava polja koja se trenutačno pojavljuju u obrascu <b>Brza izrada</b>.<br><br>Obrazac Brza izrada pojavljuju se u podpločama modula kada kliknete na gumb Izradi.<br/><br/><b>Alatni okvir</b> sadržava <b>Koš za smeće</b> te polja i elemente izgleda koje je moguće dodati izgledu.<br><br>Promijenite izgled povlačenjem i ispuštanjem elemenata i polja između <b>Alatnog okvira</b> i <b>Izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, povucite polje u <b>Koš za smeće</b>. Polje će zatim biti dostupno u Alatnom okviru kako biste ga mogli dodati izgledu.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava ovisno polje koje može ili ne mora biti vidljivo, ovisno o vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski određuje s pomoću jednadžbe.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>prikaza za uređivanje</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
+        'default'	=> 'Područje <b>Izgled</b> sadržava polja koja se trenutačno pojavljuju u obrascu <b>Prikaz za uređivanje</b>.<br/><br/><b>Alatni okvir</b> sadržava <b>Koš za smeće</b> te polja i elemente izgleda koje je moguće dodati izgledu.<br><br>Promijenite izgled povlačenjem i ispuštanjem elemenata i polja između <b>Alatnog okvira</b> i <b>Izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, povucite polje u <b>Koš za smeće</b>. Polje će zatim biti dostupno u Alatnom okviru kako biste ga mogli dodati izgledu.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava ovisno polje koje može ili ne mora biti vidljivo, ovisno o vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski određuje s pomoću jednadžbe.'
     ,
         //this defualt will be used for edit view
         'defaultrecordview'   => 'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>Prikaza zapisa</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
@@ -374,6 +374,8 @@ $mod_strings = array(
 'LBL_LAYOUTS'=>'Izgledi',
 'LBL_LISTVIEW'=>'Prikaz popisa',
 'LBL_RECORDVIEW'=>'Prikaz zapisa',
+'LBL_RECORDDASHLETVIEW'=>'Dashlet prikaza zapisa',
+'LBL_PREVIEWVIEW'=>'Preview View',
 'LBL_MODULE_TITLE' => 'Studio',
 'LBL_NEW_PACKAGE' => 'Novi paket',
 'LBL_NEW_PANEL'=>'Nova ploča',
@@ -456,7 +458,8 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Uređivač vidljivosti',
 'LBL_ROLLUP' => 'Skup. vrij.',
 'LBL_RELATED_FIELD' => 'Povezano polje',
-'LBL_CONFIG_PORTAL_URL'=>'URL adresa slike prilagođenog logotipa. Preporučene dimenzije logotipa: 163 x 18 piksela.',
+'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL na sliku s prilagođenom oznakom logotipa. Preporučene dimenzije oznake logotipa iznose 22 x 22 piksela. Sve prenesene slike čija je veličina prevelika u bilo kojem smjeru smanjit će se na navedene najveće dopuštene dimenzije.',
+'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL na sliku s prilagođenim logotipom. Preporučena širina logotipa iznosi 200 piksela. Sve prenesene slike čija je veličina prevelika u bilo kojem smjeru smanjit će se na navedene najveće dopuštene dimenzije. Taj će se logotip upotrebljavati na zaslonu za prijavu. Ako ne prenesete ni jednu sliku, upotrebljavat će se oznaka logotipa.',
 'LBL_PORTAL_ROLE_DESC' => 'Nemojte izbrisati ovu ulogu. Uloga klijenta za samouslužni portal uloga je koju generira sustav stvorena tijekom postupka aktivacije Sugar Portala. Upotrijebite kontrole pristupa u ovoj ulozi da biste omogućili i/ili onemogućili module pogrešaka, slučajeva ili baze znanja na Sugar Portalu. Nemojte mijenjati ostale kontrole pristupa za ovu ulogu da biste izbjegli nepoznato i nepredvidljivo ponašanje sustava. U slučaju slučajnog brisanja ove uloge, ponovno je stvorite tako da isključite i uključite Sugar Portal.',
 
 //RELATIONSHIPS
@@ -597,15 +600,31 @@ $mod_strings = array(
     'LBL_PORTAL_DISABLED_MODULES' => 'Sljedeći je modul (ili moduli) onemogućen:',
     'LBL_PORTAL_ENABLE_MODULES' => 'Ako želite ih omogućiti na portalu, omogućite ih <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">ovdje</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfiguriraj portal',
+    'LBL_PORTAL_ENABLE_PORTAL' => 'Omogući portal',
+    'LBL_PORTAL_ENABLE_SEARCH' => 'Omogući pretraživanje prije otvaranja slučaja',
     'LBL_PORTAL_THEME' => 'Portal teme',
     'LBL_PORTAL_ENABLE' => 'Omogući',
     'LBL_PORTAL_SITE_URL' => 'Web-mjesto portala dostupno je na:',
     'LBL_PORTAL_APP_NAME' => 'Naziv aplikacije',
+    'LBL_PORTAL_LOGOMARK_URL' => 'URL oznake logotipa',
+    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Pretpregled oznake logotipa',
     'LBL_PORTAL_LOGO_URL' => 'URL logotipa',
+    'LBL_PORTAL_LOGO_PREVIEW' => 'Pretpregled logotipa',
+    'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
+    'LBL_PORTAL_CONTACT_EMAIL' => 'E-pošta',
+    'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Potrebno je unijeti valjanu adresu e-pošte',
+    'LBL_PORTAL_CONTACT_URL' => 'URL',
+    'LBL_PORTAL_CONTACT_INFO_ERROR' => 'Potrebno je odrediti najmanje jedan način kontakta',
     'LBL_PORTAL_LIST_NUMBER' => 'Broj zapisa za prikaz na popisu',
     'LBL_PORTAL_DETAIL_NUMBER' => 'Broj polja za prikaz na prikazu detalja',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Broj rezultata za prikaz u globalnom pretraživanju',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Zadana vrijednost za nove registracije na portalu',
+    'LBL_PORTAL_MODULES' => 'Moduli portala',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO' => 'Podaci za kontakt na portalu',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO_HELP' => 'Konfigurirajte podatke za kontakt koji se prikazuju korisnicima portala kojima je potrebna dodatna pomoć s računom. Potrebno je konfigurirati najmanje jednu opciju.',
+    'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Povucite i ispustite nazive modula na portalu kako biste ih prikazali ili sakrili u gornjoj navigacijskoj traci portala. Za upravljanje pristupom korisnika modulima na portalu, upotrijebite <a href="?module=ACLRoles&action=index">Upravljanje ulogama.</a>',
+    'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Prikazani moduli',
+    'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Skriveni moduli',
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Izgledi portala',
@@ -747,7 +766,7 @@ $mod_strings = array(
         . ' Ako je polje uključeno u formulu za izračunavanje vrijednosti za polja, formula više neće raditi.'
         . '\n\nPolje više neće biti dostupno za upotrebu u izvješćima; ova će se promjena primijeniti nakon odjave i ponovne prijave u aplikaciju. Izvješća koja sadrže polje morat će se ažurirati da bi mogla raditi.'
         . '\n\nŽelite li nastaviti?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jeste li sigurni da želite izbrisati ovaj odnos?<br>Napomena: Ova radnja možda će potrajati nekoliko minuta.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jeste li sigurni da želite izbrisati ovaj odnos?<br>Napomena: ova radnja može potrajati nekoliko minuta.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Ovo će odnos učiniti trajnim. Jeste li sigurni da želite implementirati ovaj odnos?',
 'LBL_CONFIRM_DONT_SAVE' => 'Napravljene su promjene od posljednjeg spremanja, želite li spremiti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Spremiti promjene?',
@@ -764,17 +783,17 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Omogućeno</b>: polje će se prikazati u značajki Spajanje duplikata, no neće biti dostupno za upotrebu za uvjete filtra u značajki Traženje duplikata.<br><b>Onemogućeno</b>: polje se neće prikazati u značajki Spajanje duplikata i neće biti dostupno za upotrebu za uvjete filtra u značajki Traženje duplikata.'
 . '<br><b>U filtru</b>: polje će se prikazati u značajki Spajanje duplikata i bit će dostupno za upotrebu u značajki Traženje duplikata.<br><b>Samo filtar</b>: polje se neće prikazati u značajki Spajanje duplikata, no bit će dostupno za upotrebu u značajki Traženje duplikata.<br><b>Zadani odabrani filtar</b>: polje će se zadano upotrijebiti za uvjet filtra na stranici traženja duplikata te će se prikazati u značajki Spajanje duplikata.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Stvorite formulu za određivanje vrijednosti u ovom polju.<br>"
-   . "Definicije tijeka rada koje sadržavaju radnju i koje su postavljene za ažuriranje ovog polja više neće izvršavati radnju.<br>"
-   . "Polja koja se koriste formulama neće se izračunati u stvarnom vremenu na "
-   . "samoslužnom portalu Sugar ili "
-   . "u izgledima Mobilnog prikaza za uređivanje.",
+'LBL_POPHELP_CALCULATED'=>"Izradite jednadžbu kako biste odredili vrijednost ovog polja.<br>"
+   . "Definicije tijeka rada koje sadržavaju radnju i njome prema trenutačnim postavkama ažuriraju ovo polje više neće izvršavati tu radnju.<br>"
+   . "Vrijednosti u poljima za koja se upotrebljavaju jednadžbe neće se izračunati u stvarnom vremenu na "
+   . "samouslužnom portalu Sugar ili "
+   . "izgledima s prikazom za uređivanje u mobilnoj aplikaciji.",
 
-'LBL_POPHELP_DEPENDENT'=>"Stvorite formulu za određivanje hoće li ovo polje biti vidljivo u izgledima.<br/>"
-        . "Zavisna polja slijedit će formulu zavisnosti u mobilnom prikazu utemeljenom na pregledniku,<br/>"
-        . "no neće slijediti formulu u izvornim aplikacijama, kao što je Sugar Mobile za iPhone.<br/>"
-        . "Neće slijediti formulu u samoslužnom portalu Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite za uporabu ovog polja pri pretraživanju zapisa s pomoću globalnog pretraživanja na ovom modulu.',
+'LBL_POPHELP_DEPENDENT'=>"Izradite jednadžbu kako biste odredili hoće li ovo polje biti vidljivo u izgledima.<br/>"
+        . "Za ovisna polja u mobilnom prikazu preglednika upotrebljavat će se jednadžba ovisnosti, <br/>"
+        . "no ta se jednadžba neće upotrebljavati u izvornim aplikacijama kao što je Sugar Mobile za iPhone.<br/>"
+        . "Jednadžba se neće upotrebljavati na samouslužnom portalu Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite kako biste ovo polje upotrijebili pri pretraživanju zapisa s pomoću globalnog pretraživanja u ovom modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Pon. post.',
 'LBL_RESET_MODULE' => 'Ponovno postavi modul',

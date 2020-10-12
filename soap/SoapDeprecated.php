@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// the types/methods defined in this file are deprecated -- please see SoapSugarUsers.php, SoapPortalUsers.php, SoapStudio.php, etc.
+// the types/methods defined in this file are deprecated -- please see SoapSugarUsers.php, SoapStudio.php, etc.
 
 $server->wsdl->addComplexType(
     'contact_detail',

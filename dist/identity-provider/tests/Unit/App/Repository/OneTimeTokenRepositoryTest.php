@@ -50,10 +50,10 @@ class OneTimeTokenRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM one_time_token WHERE token = ? and tenant_id = ? AND expire_time > NOW()',
-            ['token', '0000000001']
+            ['token', '1000000001']
         )->willReturn([]);
 
-        $this->repository->findUserByTokenAndTenant('token', '0000000001');
+        $this->repository->findUserByTokenAndTenant('token', '1000000001');
     }
 
     /**
@@ -65,10 +65,10 @@ class OneTimeTokenRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM one_time_token WHERE token = ? and tenant_id = ? AND expire_time > NOW()',
-            ['token', '0000000001']
+            ['token', '1000000001']
         )->willThrowException(new DBALException());
 
-        $this->repository->findUserByTokenAndTenant('token', '0000000001');
+        $this->repository->findUserByTokenAndTenant('token', '1000000001');
     }
 
     /**
@@ -78,16 +78,16 @@ class OneTimeTokenRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM one_time_token WHERE token = ? and tenant_id = ? AND expire_time > NOW()',
-            ['token', '0000000001']
+            ['token', '1000000001']
         )->willReturn([
             'token' => 'token',
-            'tenant_id' => '0000000001',
+            'tenant_id' => '1000000001',
             'user_id' => 'userId',
         ]);
 
-        $result = $this->repository->findUserByTokenAndTenant('token', '0000000001');
+        $result = $this->repository->findUserByTokenAndTenant('token', '1000000001');
         $this->assertEquals('token', $result->getToken());
-        $this->assertEquals('0000000001', $result->getTenantId());
+        $this->assertEquals('1000000001', $result->getTenantId());
         $this->assertEquals('userId', $result->getUserId());
     }
 
@@ -96,10 +96,10 @@ class OneTimeTokenRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete(): void
     {
-        $token = (new OneTimeToken())->setToken('token')->setTenantId('0000000001');
+        $token = (new OneTimeToken())->setToken('token')->setTenantId('1000000001');
         $this->db->expects($this->once())->method('delete')->with(
             'one_time_token',
-            ['token' => 'token', 'tenant_id' => '0000000001']
+            ['token' => 'token', 'tenant_id' => '1000000001']
         );
 
         $this->repository->delete($token);

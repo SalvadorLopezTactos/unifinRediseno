@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Призначити застосовуваного користувача',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Попередній перегляд розробки процесу',
+    'LBL_PROJECT_RUN_ORDER' => 'Порядок виконання',
 );
 

@@ -67,7 +67,7 @@ class SugarOIDCUserChecker extends UserChecker
             $sugarUser = $this->localUserProvider
                 ->loadUserByField($identify['value'], $identify['field'])
                 ->getSugarUser();
-            $this->setUserData($sugarUser, $userAttributes);
+            $this->setUserData($sugarUser, $user, $userAttributes);
         } catch (UsernameNotFoundException $e) {
             $userAttributes = array_merge(
                 [$identify['field'] => $identify['value']],
@@ -81,7 +81,7 @@ class SugarOIDCUserChecker extends UserChecker
                 throw $e;
             }
 
-            $this->setUserData($sugarUser, $userAttributes);
+            $this->setUserData($sugarUser, $user, $userAttributes);
         }
         $user->setSugarUser($sugarUser);
     }
@@ -92,8 +92,15 @@ class SugarOIDCUserChecker extends UserChecker
      * @param \User $sugarUser
      * @param array $attributes
      */
-    protected function setUserData(\User $sugarUser, array $attributes)
+    protected function setUserData(\User $sugarUser, User $user, array $attributes)
     {
+        $timeDate = \TimeDate::getInstance();
+        $lastLogin = $timeDate->fromDb($sugarUser->last_login);
+
+        if ($lastLogin && $user->hasAttribute('updated_at') &&
+            $user->getAttribute('updated_at') < $lastLogin->getTimestamp()) {
+            return;
+        }
         $isDataChanged = false;
         $email = null;
         if (isset($attributes['email'])) {

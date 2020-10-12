@@ -34,7 +34,7 @@ $mod_strings = array (
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'インポート',
 
     'LBL_PMSE_MY_EMAIL_TEMPLATES' => '私のプロセスEメールテンプレート',
-    'LBL_PMSE_ALL_EMAIL_TEMPLATES' => '全てのプロセスEメールテンプレート',
+    'LBL_PMSE_ALL_EMAIL_TEMPLATES' => 'すべてのプロセスEメールテンプレート',
 
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => '自動的に、a *.petファイルをあなたのファイルシステムから輸入して新しいプロセスEメールテンプレートレコードを作成しなさい。',
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS' => 'プロセスEメールテンプレートのシステムへのインポートに成功しました。',

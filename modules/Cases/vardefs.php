@@ -19,6 +19,10 @@ $dictionary['Case'] = array(
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
     'comment' => 'Cases are issues or problems that a customer asks a support representative to resolve',
+    'change_timer_fields' => [
+        'status',
+        'assigned_user_id',
+    ],
     'fields' => array(
         'account_name' => array(
             'name' => 'account_name',
@@ -26,6 +30,9 @@ $dictionary['Case'] = array(
             'id_name' => 'account_id',
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'relate',
+            'related_fields' => array(
+                'account_id',
+            ),
             'link' => 'accounts',
             'table' => 'accounts',
             'join_name' => 'accounts',
@@ -56,6 +63,63 @@ $dictionary['Case'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The account to which the case is associated',
+        ),
+        'service_level' => array(
+            'name' => 'service_level',
+            'rname' => 'service_level',
+            'id_name' => 'account_id',
+            'vname' => 'LBL_SERVICE_LEVEL',
+            'type' => 'relate',
+            'link' => 'accounts',
+            'table' => 'accounts',
+            'join_name' => 'accounts',
+            'isnull' => 'true',
+            'module' => 'Accounts',
+            'source' => 'non-db',
+            'reportable' => false,
+            'massupdate' => false,
+            'comment' => 'Service level of the associated account of case',
+            'readonly' => true,
+        ),
+        'business_center_name' => array(
+            'name' => 'business_center_name',
+            'rname' => 'name',
+            'id_name' => 'business_center_id',
+            'vname' => 'LBL_BUSINESS_CENTER_NAME',
+            'type' => 'relate',
+            'link' => 'business_centers',
+            'table' => 'business_centers',
+            'join_name' => 'business_centers',
+            'isnull' => 'true',
+            'module' => 'BusinessCenters',
+            'dbType' => 'varchar',
+            'len' => 255,
+            'source' => 'non-db',
+            'unified_search' => true,
+            'comment' => 'The name of the business center represented by the business_center_id field',
+            'required' => false,
+        ),
+        'business_center_id' => array(
+            'name' => 'business_center_id',
+            'type' => 'relate',
+            'dbType' => 'id',
+            'rname' => 'id',
+            'module' => 'BusinessCenters',
+            'id_name' => 'business_center_id',
+            'reportable' => false,
+            'vname' => 'LBL_BUSINESS_CENTER_ID',
+            'audited' => true,
+            'massupdate' => false,
+            'comment' => 'The business center to which the case is associated',
+        ),
+        'business_centers' => array(
+            'name' => 'business_centers',
+            'type' => 'link',
+            'relationship' => 'business_center_cases',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_BUSINESS_CENTER',
         ),
         'source' => array(
             'name' => 'source',
@@ -102,9 +166,16 @@ $dictionary['Case'] = array(
             'name' => 'portal_viewable',
             'vname' => 'LBL_SHOW_IN_PORTAL',
             'type' => 'bool',
-            'default' => 0,
+            'default' => 1,
             'reportable' => false,
         ),
+        'changetimers' => [
+            'name' => 'changetimers',
+            'type' => 'link',
+            'relationship' => 'cases_changetimers',
+            'source' => 'non-db',
+            'vname' => 'LBL_CHANGETIMERS',
+        ],
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -201,19 +272,73 @@ $dictionary['Case'] = array(
             'link_type' => 'many',
             'side' => 'right',
         ),
+        'primary_contact_name' => [
+            'name' => 'primary_contact_name',
+            'rname' => 'name',
+            'db_concat_fields' => [
+                0 => 'first_name',
+                1 => 'last_name',
+            ],
+            'related_fields' => [
+                'primary_contact_id',
+            ],
+            'source' => 'non-db',
+            'len' => '255',
+            'group' => 'primary_contact_name',
+            'vname' => 'LBL_PRIMARY_CONTACT_NAME',
+            'reportable' => true,
+            'id_name' => 'primary_contact_id',
+            'join_name' => 'case_contact',
+            'type' => 'relate',
+            'module' => 'Contacts',
+            'link' => 'case_contact',
+            'table' => 'contacts',
+            'studio' => 'visible',
+            'audited' => true,
+        ],
+        'primary_contact_id' => [
+            'name' => 'primary_contact_id',
+            'type' => 'id',
+            'group' => 'primary_contact_name',
+            'reportable' => true,
+            'vname' => 'LBL_PRIMARY_CONTACT_ID',
+            'audited' => true,
+        ],
+        'case_contact' => [
+            'name' => 'case_contact',
+            'type' => 'link',
+            'relationship' => 'contact_cases',
+            'source' => 'non-db',
+            'side' => 'right',
+            'vname' => 'LBL_CONTACT',
+            'module' => 'Contacts',
+            'bean_name' => 'Contact',
+            'id_name' => 'primary_contact_id',
+            'link_type' => 'one',
+            'audited' => true,
+            'populate_list' => [
+                'account_id',
+                'account_name',
+            ],
+        ],
     ),
     'indices' => array(
         array(
-            'name' => 'idx_case_name',
+            'name' => 'idx_case_del_nam_dm',
             'type' => 'index',
             'fields' => array(
+                'deleted',
                 'name',
+                'date_modified',
+                'id',
+                'team_set_id',
             ),
         ),
         array(
             'name' => 'idx_account_id',
             'type' => 'index',
             'fields' => array(
+                'deleted',
                 'account_id',
             ),
         ),
@@ -223,6 +348,14 @@ $dictionary['Case'] = array(
             'fields' => array(
                 'assigned_user_id',
                 'status',
+                'deleted',
+            ),
+        ),
+        array(
+            'name' => 'idx_cases_del_prim_contact_id',
+            'type' => 'index',
+            'fields' => array(
+                'primary_contact_id',
                 'deleted',
             ),
         ),
@@ -310,6 +443,15 @@ $dictionary['Case'] = array(
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many',
         ),
+        'contact_cases' => [
+            'lhs_module' => 'Contacts',
+            'lhs_table' => 'contacts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Cases',
+            'rhs_table' => 'cases',
+            'rhs_key' => 'primary_contact_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'acls' => array(
         'SugarACLStatic' => true,
@@ -353,6 +495,13 @@ $dictionary['Case'] = array(
 
     // This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
+    'portal_visibility' => [
+        'class' => 'Cases',
+        'links' => [
+            'Accounts' => 'accounts',
+            'Contacts' => 'contacts',
+        ],
+    ],
 );
 
 VardefManager::createVardef('Cases', 'Case', array(
@@ -360,11 +509,15 @@ VardefManager::createVardef('Cases', 'Case', array(
     'assignable',
     'team_security',
     'issue',
+    'sla_fields',
 ), 'case');
 
 //jc - adding for refactor for import to not use the required_fields array
 //defined in the field_arrays.php file
 $dictionary['Case']['fields']['name']['importable'] = 'required';
+
+//need to handle large mail
+$dictionary['Case']['fields']['description']['dbtype'] = 'longtext';
 
 //boost value for full text search
 $dictionary['Case']['fields']['name']['full_text_search']['boost'] = 1.53;

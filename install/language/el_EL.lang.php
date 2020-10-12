@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Λάθη έχουν ανιχνευθεί κατά τη διάρκεια του ελέγχου συμβατότητας. Για για να λειτουργήσει σωστά η εγκατάσταση του SugarCRM σας, παρακαλούμε να λάβετε τα κατάλληλα μέτρα για την αντιμετώπιση των ζητημάτων που αναφέρονται παρακάτω και πιέστε το κουμπί επανέλεγχος, ή δοκιμάστε να εγκαταστήσετε ξανά.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Επιτρέπει Αναφορά Χρονικών Περασμάτων Ανοικτής Κλήσης ( αυτό θα πρέπει να ρυθμιστεί Κλειστό στο php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Δεν βρέθηκε: Ο χρονοπρογραμματιστής εργασιών Sugar θα εκτελεστεί με περιορισμένη λειτουργικότητα. Η υπηρεσία αρχειοθέτησης ηλεκτρονικού ταχυδρομείου δεν θα εκτελεστεί.',
+	'ERR_CHECKSYS_CURL'					=> 'Δεν βρέθηκε: Ο προγραμματιστής Sugar θα λειτουργεί με περιορισμένη λειτουργικότητα. Η υπηρεσία αρχειοθέτησης ηλεκτρονικού ταχυδρομείου δεν θα εκτελεστεί.',
     'ERR_CHECKSYS_IMAP'					=> 'Δεν βρέθηκαν: Εισερχόμενα Email και Εκστρατείες (Email) απαιτεί τις βιβλιοθήκες IMAP. Ούτε θα είναι λειτουργικό.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Οι μαγικές Προσφορές GPC δεν μπορούν να γυρίσουν σε "Ανοικτές" κατά την χρήση του Διακομιστή MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Προειδοποίηση:',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Για βέλτιστη εμπειρία χρησιμοποιώντας IIS/FastCGI sapi, καθορίστε fastcgi.logging σε 0 στο δικό σας php.ini αρχείο.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Δεν υποστηρίζεται η εγκατάσταση της PHP Έκδοσης: ( έλεγχος',
     'LBL_DB_UNAVAILABLE'                => 'Βάση δεδομένων μη διαθέσιμη',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Δεν βρέθηκε η υποστήριξη βάσης δεδομένων. Παρακαλώ βεβαιωθείτε ότι έχετε τα απαραίτητα προγράμματα οδήγησης για έναν από τους ακόλουθους τύπους υποστηριζόμενης βάσης δεδομένων: MySQL, MS SQLServer, Oracle ή DB2. Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο php.ini ή να μεταγλωττίσετε ξανά με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοση της PHP. Παρακαλούμε συμβουλευτείτε το εγχειρίδιο PHP για περισσότερες πληροφορίες σχετικά με το πώς να ενεργοποιήσετε την υποστήριξη βάσης δεδομένων.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Δεν βρέθηκε η υποστήριξη βάσης δεδομένων. Παρακαλώ βεβαιωθείτε ότι έχετε τα απαραίτητα προγράμματα οδήγησης για έναν από τους ακόλουθους τύπους υποστηριζόμενης βάσης δεδομένων: MySQL, MS SQLServer, Oracle ή DB2. Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο php.ini ή να μεταγλωττίσετε ξανά με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοση της PHP. Παρακαλώ συμβουλευτείτε το εγχειρίδιο PHP για περισσότερες πληροφορίες σχετικά με το πώς να ενεργοποιήσετε την υποστήριξη βάσης δεδομένων.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Λειτουργίες που σχετίζονται με  XML Βιβλιοθήκες Parser που απαιτούνται από την εφαρμογή Sugar, δεν βρέθηκαν.  Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο  php.ini, ή να ξανά-μεταγλωττίσετε με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοσή του PHP σας. Ανατρέξτε στο Εγχειρίδιο PHP σας για περισσότερες πληροφορίες.',
     'LBL_CHECKSYS_CSPRNG' => 'Γεννήτρια τυχαίου αριθμού',
     'ERR_CHECKSYS_MBSTRING'             => 'Λειτουργίες που σχετίζονται με  Multibyte Strings επέκτασης PHP (mbstring) που απαιτούνται από την εφαρμογή του Sugar, δεν βρέθηκαν. <br/><br/>Γενικά, η mbstring ενότητα δεν είναι διαθέσιμη από προεπιλογή σε PHP και πρέπει να ενεργοποιηθεί με --διαθέσιμη-mbstring όταν το δυαδικό PHP είναι χτισμένο. Παρακαλώ, ανατρέξτε στο Εγχειρίδιο PHP σας για περισσότερες πληροφορίες σχετικά με το πώς να ενεργοποιήσετε mbstring υποστήριξη.',
@@ -476,6 +475,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Επιλέξτε ένα αρχείο επιδιόρθωσης από τον τοπικό σας υπολογιστή',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Προς τα πίσω Συμβατότητα η λειτουργία είναι ενεργοποιημένη. Καθορίστε zend.ze1_compatibility_mode σε Σνενεργή για να προχωρήσει περαιτέρω',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Νέα Πληροφορία Λογαριασμού',
         'description' => 'Αυτό το πρότυπο χρησιμοποιείται όταν στέλνει ο Διαχειριστής Συστήματος έναν νέο κωδικό πρόσβασης σε έναν χειριστή.',
@@ -492,4 +627,32 @@ $mod_strings = array(
 'Ζητήσατε πρόσφατα στο  $contact_user_pwd_last_changed να είναι σε θέση να επαναρυθμίσει τον κωδικό πρόσβασης λογαριασμού σας. Πατήστε παρακάτω για να επαναρυθμίσει τον κωδικό πρόσβασης: $contact_user_link_guid',
         'name' => 'Ξεχάσατε τον Κωδικό Πρόσβασης του email',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'Email απώλειας κωδικού πρόσβασης πύλης',
+    'subject' => 'Επαναφορά του κωδικού πρόσβασης του λογαριασμού σας',
+    'description' => 'Αυτό το πρότυπο χρησιμοποιείται για να στείλει στον χρήστη σύνδεσμο για κλικ, για να επαναφέρετε τον κωδικό πρόσβασης του λογαριασμού χρήστη του Portal.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ζητήσατε πρόσφατα επαναφορά του κωδικού πρόσβασής σας. </p><p>Κάντε κλικ στον παρακάτω σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Ζητήσατε πρόσφατα να επαναφέρετε τον κωδικό πρόσβασης του λογαριασμού σας.
+
+   Κάντε κλικ στον παρακάτω σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Email επιβεβαίωσης επαναφοράς κωδικού πρόσβασης πύλης',
+        'subject' => 'Ο κωδικός πρόσβασης του λογαριασμού σας έχει επαναφερθεί',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται για την αποστολή επιβεβαίωσης σε έναν χρήστη της πύλης ότι έχει γίνει επαναφορά του κωδικού πρόσβασης του λογαριασμού του.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Αυτό το email είναι για να επιβεβαιώσει ότι ο κωδικός πρόσβασής σας στην πύλη έχει επαναφερθεί. </p><p>Χρησιμοποιήστε τον παρακάτω σύνδεσμο για να συνδεθείτε στην πύλη:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Αυτό το email επιβεβαιώνει την επαναφορά του κωδικού πρόσβασης του λογαριασμού πύλης σας.
+
+   Χρησιμοποιήστε τον παρακάτω σύνδεσμο για να συνδεθείτε στην πύλη:
+
+    $portal_login_url',
+    ],
 );

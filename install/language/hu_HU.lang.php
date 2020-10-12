@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'A kompatibilitás ellenőrzése során a rendszer hibákat talált. A hibátlan telepítés érdekében kérem, tekintse át az alább felsorolt problémákat és orvosolja őket, majd ellenőrizze az elemeket újra, esetleg ismételje meg a telepítést!',
     'ERR_CHECKSYS_CALL_TIME'            => 'Hívásidő referencia engedélyezése bekapcsolva (kikapcsolása a php.ini fájlban történik)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nem található: a Sugar Ütemező korlátozott funkcionalitással fog működni. Az E-mail archiválás nem fog működni.',
+	'ERR_CHECKSYS_CURL'					=> 'Nem található: a Sugar Scheduler működése korlátozott. Az e-mail archiválás nem működik.',
     'ERR_CHECKSYS_IMAP'					=> 'Nincs találat: a bejövő emailek és az email kampányok megkövetelik az IMAP könyvtárak használatát. Egyik sem fog működni.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'A Magic Quotes GPC nem kapcsolható be az MS SQL szerver használatakor.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Figyelmeztetés:',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Az optimális élmény érdekében használjon IIS/FastCGI sapi-t; állítsa 0-ra a fastcgi.logging paramétert a php.ini fájl-ban!',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nem támogatott PHP verzió van telepítve: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Adatbázis nem elérhető',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Az adatbázis támogatása nem érhető el. Bizonyosodjon meg arról, hogy adottak a szükséges illesztőprogramok az alábbi támogatott adatbázistípusok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2. Előfordulhat, hogy szükséges törölnie a kiterjesztéshez tartozó megjegyzést a php.ini fájlban, vagy szükség lehet a megfelelő bináris fájllal való újrafordításra, a PHP verzió függvényében. Az adatbázis támogatás engedélyezésének módja ügyében tájékozódjon a PHP kézikönyvből.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Az adatbázis támogatása nem található. Ellenőrizze, hogy rendelkezik a szükséges meghajtókkal a következő támogatott adatbázistípusok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2. Elképzelhető, hogy törölnie kell a php.ini fájlban található kiterjesztés megjelölését, vagy újra össze kell állítania a megfelelő bináris fájllal a PHP verziójától függően. Tekintse meg a PHP kezelési utasításokat további információért az adatbázis támogatásának engedélyezéséhez.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Egyes XML-feldolgozó könyvtárakhoz kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében!',
     'LBL_CHECKSYS_CSPRNG' => 'Véletlenszerű számgenerátor',
     'ERR_CHECKSYS_MBSTRING'             => 'Egyes Multibyte Strings (mbstring) PHP kiterjesztéshez kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. <br /><br />Az alapértelmezett beállítások szerint az mbstring modul le van tiltva a PHP-ben, amit aktiválni kell az --enable-mbstring kifejezéssel. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az mbstring támogatást!',
@@ -476,6 +475,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Válasszon ki egy javító csomagot a számítógépéről!',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php visszamenőleges kompatibilitási mód be van kapcsolva. A folytatáshoz állítsa a zend.ze1_compatibility_mode -ot  "off"-ra',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Új kliens információ',
         'description' => 'A sablont akkor használják, amikor a rendszergazda új jelszót küld egy felhasználónak.',
@@ -492,4 +627,28 @@ $mod_strings = array(
 'Ön nemrég kezdeményezte a $contact_user_pwd_last_changed oldalon fiókja jelszavának visszaállítását. Kattintson az alábbi linkre a jelszó visszaállításához: $contact_user_link_guid',
         'name' => 'Elfelejtett jelszó email',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'Portál elfelejtett jelszó e-mail',
+    'subject' => 'Kliens jelszavának visszaállítása',
+    'description' => 'A sablont akkor használják, amikor egy felhasználónak e-mailt küldenek a portál jelszavának visszaállítására mutató linkkel.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ön nemrég kezdeményezte a kliens jelszavának visszaállítását. </p><p>Kattintson az alábbi linkre a jelszó visszaállításához:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Ön nemrég kezdeményezte a kliens jelszavának visszaállítását.
+    Kattintson az alábbi linkre a jelszó visszaállításához:
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Portál jelszavának visszaállítását megerősítő e-mail',
+        'subject' => 'Visszaállítottuk a kliens jelszavát',
+        'description' => 'Ezt a sablont megerősítés küldésére használjuk a portál felhasználójának a kliens jelszó visszaállításáról.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ez az e-mail igazolja, hogy a portál kliens jelszavát visszaállítottuk. </p><p>Jelentkezzen be a portálba az alábbi link használatával:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Ez az e-mail igazolja, hogy a portál kliens jelszavát visszaállítottuk.
+    Jelentkezzen be a portálba az alábbi link használatával:
+    $portal_login_url',
+    ],
 );

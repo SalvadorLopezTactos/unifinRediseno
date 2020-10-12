@@ -97,48 +97,22 @@ class User extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.sugarcrm.apis.iam.user.v1alpha.User.UserType user_type = 14;</code>
      */
     private $user_type = 0;
-
     /**
-     * Constructor.
+     * SRN (Resource name) of the User who created this particular User
      *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           Resource name of the user using the following format:
-     *           srn:cloud:iam::1234567890:user:e9b578dc-b5ae-41b6-a680-195cfc018f30
-     *     @type \Google\Protobuf\Timestamp $create_time
-     *           Timestamp the resource was created
-     *     @type \Google\Protobuf\Timestamp $modify_time
-     *           Timestamp the resource was modified
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\Attributes $attributes
-     *           User attributes
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\CustomAttribute[]|\Google\Protobuf\Internal\RepeatedField $custom_attributes
-     *           Custom attributes
-     *     @type int $status
-     *     @type array|\Google\Protobuf\Internal\MapField $provider_ids
-     *           External ids associated to this user for each provider. If no external
-     *           id is set for a given provider, then this user cannot be authenticated
-     *           as such using that provider. This also applies for the local provider
-     *           where a key/value map of `local` => `sub_id` is required.
-     *     @type \Google\Protobuf\Timestamp $last_login
-     *           Time when User was last logged-in to the system
-     *     @type int $login_attempts
-     *           User attempts to login counter
-     *     @type \Google\Protobuf\Timestamp $password_last_changed
-     *           Time when User password was last changed
-     *     @type \Google\Protobuf\Timestamp $lockout_time
-     *           Time when User is locked-out
-     *     @type bool $is_locked_out
-     *           Is User locked-out?
-     *     @type int $failed_login_attempts
-     *           Counter of failed login attempts
-     *     @type int $user_type
-     * }
+     * Generated from protobuf field <code>string created_by = 15;</code>
      */
-    public function __construct($data = NULL) {
+    private $created_by = '';
+    /**
+     * SRN (Resource name) of the User who modified this particular User
+     *
+     * Generated from protobuf field <code>string modified_by = 16;</code>
+     */
+    private $modified_by = '';
+
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
@@ -501,6 +475,58 @@ class User extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Sugarcrm\Apis\Iam\User\V1alpha\User_UserType::class);
         $this->user_type = $var;
+
+        return $this;
+    }
+
+    /**
+     * SRN (Resource name) of the User who created this particular User
+     *
+     * Generated from protobuf field <code>string created_by = 15;</code>
+     * @return string
+     */
+    public function getCreatedBy()
+    {
+        return $this->created_by;
+    }
+
+    /**
+     * SRN (Resource name) of the User who created this particular User
+     *
+     * Generated from protobuf field <code>string created_by = 15;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCreatedBy($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->created_by = $var;
+
+        return $this;
+    }
+
+    /**
+     * SRN (Resource name) of the User who modified this particular User
+     *
+     * Generated from protobuf field <code>string modified_by = 16;</code>
+     * @return string
+     */
+    public function getModifiedBy()
+    {
+        return $this->modified_by;
+    }
+
+    /**
+     * SRN (Resource name) of the User who modified this particular User
+     *
+     * Generated from protobuf field <code>string modified_by = 16;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setModifiedBy($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->modified_by = $var;
 
         return $this;
     }

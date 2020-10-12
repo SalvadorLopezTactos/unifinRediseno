@@ -21,10 +21,10 @@
       left: 1px;
       margin-top: 0;
       font-size: 0;
-      background: #fff;
+      background: @white;
       border: 1px solid darken(@grayLighter, 10%);
       border-radius: 0 0 3px 3px;
-      box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 1px fade(@black, 10%);
       box-sizing: border-box;
 
       &.hide {
@@ -47,7 +47,7 @@
         }
 
         a {
-          color: #555;
+          color: @gray;
           padding: 0;
           border-top: 0;
         }
@@ -103,7 +103,7 @@
         left: 0;
         right: 0;
         height: 34px;
-        background-color: transparent;
+        background-color: @transparent;
         pointer-events: all;
       }
 
@@ -345,7 +345,7 @@ li.search-result {
       margin-top: 0;
       line-height: 18px;
       font-weight: normal;
-      display: inline;
+      display: inline-block;
 
       .ellipsis_inline {
         display: inherit !important;

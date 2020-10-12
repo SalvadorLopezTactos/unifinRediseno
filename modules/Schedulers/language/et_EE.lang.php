@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Avaldage heakskiidetud artiklid ja aegunud teadmusbaasiartiklid.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Plaanitud töö',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Taasta meeskonna denormaliseeritud turbeandmed',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Tegevuste voo puhastaja',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Käivita meili meeldetuletuste saatmine',
 'LBL_CLEANJOBQUEUE' => 'Puhasta tööde järjekord',
 'LBL_CLEANOLDRECORDLISTS' => 'Puhasta vanade kirjete loendid',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Tegevuste voo puhastaja',
 'LBL_PMSEENGINECRON' => 'SugarBPM-i planeerija',
 );
 

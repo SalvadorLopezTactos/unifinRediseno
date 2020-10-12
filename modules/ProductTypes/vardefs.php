@@ -32,7 +32,7 @@ $dictionary['ProductType'] = array(
             'required' => true,
         ),
     ),
-    'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Products', 'allowUserRead' => true)),
+    'acls' => array('SugarACLProduct' => true),
     'uses' => array(
         'basic',
     ),

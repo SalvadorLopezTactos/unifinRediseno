@@ -140,13 +140,15 @@
             {capture assign="otherAttributes"}class="le_edit" style="float:left; cursor:pointer;" onclick="editPanelProperties('{$idCount}');"{/capture}
             {sugar_getimage name="edit_inline" ext=".gif" other_attributes=$otherAttributes}
         {/if}
-
+        {if $no_tabs != true}
         <span id="le_paneltype_{$idCount}" style="float:left;">
         &nbsp;&nbsp;{sugar_translate label="LBL_TABDEF_TYPE" module="ModuleBuilder"}&nbsp;{sugar_help text=$mod.LBL_TABDEF_TYPE_OPTION_HELP}:
+        {/if}
         {if $idCounter == 1}
             {assign var="firstpanelid" value=$panelid}
             {assign var="firstpanelidcount" value=$idCount}
         {/if}
+        {if $no_tabs != true}
         <select id="le_paneltype_select_{$idCount}" onchange="document.forms.prepareForSave.tabDefs_{$panelid}_newTab.value=this.value; showHideBox(this.value, {$idCount}, '{$panelid}', '{$firstpanelid}', {$firstpanelidcount});"
                 title="{sugar_translate label="LBL_TABDEF_TYPE_HELP" module="ModuleBuilder"}">
           <option value="0" {if $tabDefs[$panel_upper].newTab == false}selected="selected"{/if}>{sugar_translate label="LBL_TABDEF_TYPE_OPTION_PANEL" module="ModuleBuilder"}</option>
@@ -155,11 +157,14 @@
           {/if}
         </select>
         </span>
+        {/if}
+        {if $no_collapse != true}
         <span id="le_panelcollapse_{$idCount}" style="float:right;{if isset($tabDefs[$panel_upper].newTab) && $tabDefs[$panel_upper].newTab == true}display:none;{/if}">
         &nbsp;{sugar_translate label="LBL_TABDEF_COLLAPSE" module="ModuleBuilder"}{sugar_translate label="LBL_QUESTION_MARK"}
         <input type="checkbox" title="{sugar_translate label="LBL_TABDEF_COLLAPSE_HELP" module="ModuleBuilder"}" {if $tabDefs[$panel_upper].panelDefault == "collapsed"}checked="checked"{/if}
           onclick="{literal}if(this.checked) { document.forms.prepareForSave.tabDefs_{/literal}{$panelid}{literal}_panelDefault.value='collapsed'; } else { document.forms.prepareForSave.tabDefs_{/literal}{$panelid}{literal}_panelDefault.value='expanded';}{/literal}" />
         </span>
+        {/if}
         {counter name='idCount' assign='idCount' print=false}
 
         {foreach from=$panel item='row' key='rid'}

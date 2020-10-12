@@ -1057,7 +1057,7 @@ class MBModule
     {
         // hardcoded list of types for now, as also hardcoded in a different form in getNodes
         // TODO: replace by similar mechanism to StudioModule to determine the list of available views for this module
-        $views = array ('recordview' , 'editview' , 'detailview' , 'listview' , 'basic_search' , 'advanced_search' , 'dashlet' , 'popuplist');
+        $views = array ('recordview' , 'editview' , 'detailview' , 'listview' , 'basic_search' , 'advanced_search', 'popuplist');
     	foreach ($this->getWirelessLayouts() as $layout)
     		$views[] = $layout['type'];
 

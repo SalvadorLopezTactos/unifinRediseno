@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => '預覽',
   'LBL_ALERT_SWITCH_BASE_MODULE' => '警告：如果您變更主模組，則需移除已新增至範本的所有欄位。',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => '這是您請求的檔案（您可變更此文字）',
-  
 
   'LBL_TPL_QUOTE_NAME' => '報價',
   'LBL_TPL_QUOTE_DESCRIPTION' => '此範本用於列印 PDF 版本「報價」。',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => '報價',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => '報稅(含服務)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => '此模板用於以PDF格式列印報價，包含服務訊息。',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => '服務報價',
+
   'LBL_TPL_INVOICE_NAME' => '發票',
   'LBL_TPL_INVOICE_DESCRIPTION' => '此範本用於列印 PDF 版本「發票」。',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => '發票',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => '發票(含服務)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => '此模板用於以PDF格式列印發票，包含服務訊息。',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => '服務發票',
+
   'LBL_TPL_QUOTE_NUMBER' => '報價編號：',
   'LBL_TPL_SALES_PERSON' => '銷售人員：',
   'LBL_TPL_VALID_UNTIL' => '滿足以下條件方有效：',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => '部件編號',
   'LBL_TPL_PRODUCT' => '報價項目',
   'LBL_TPL_RLI' => '營收項目',
+  'LBL_TPL_DURATION' => '持續時間',
+  'LBL_TPL_DURATION_STARTS' => '開始:',
+  'LBL_TPL_DURATION_ENDS' => '結束:',
   'LBL_TPL_LIST_PRICE' => '清單價格',
   'LBL_TPL_UNIT_PRICE' => '單價',
   'LBL_TPL_EXT_PRICE' => '附加價',

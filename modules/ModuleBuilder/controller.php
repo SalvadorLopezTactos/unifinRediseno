@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 require_once 'modules/DynamicFields/FieldCases.php';
 
@@ -85,22 +86,9 @@ class ModuleBuilderController extends SugarController
     public function process()
     {
         $GLOBALS ['log']->info(get_class($this) . ":");
-        global $current_user;
-
-        // Handle BC for studio help
         $this->normalizeModStrings();
-
-        $access = $current_user->getDeveloperModules();
-            if ($current_user->isAdmin() || ($current_user->isDeveloperForAnyModule() && !isset($_REQUEST['view_module']) && (isset($_REQUEST['action']) && $_REQUEST['action'] != 'package')) ||
-                (isset($_REQUEST['view_module']) && (in_array($_REQUEST['view_module'], $access) || empty($_REQUEST['view_module']))) ||
-                (isset($_REQUEST['type']) && (($_REQUEST['type'] == 'dropdowns' && $current_user->isDeveloperForAnyModule()) ||
-                    ($_REQUEST['type'] == 'studio' && displayStudioForCurrentUser() == true))) ||
-                (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'jslang' && $current_user->isDeveloperForAnyModule())
-            ) {
-                $this->hasAccess = true;
-            } else {
-                $this->hasAccess = false;
-            }
+        $viewModule = $_REQUEST['view_module']?? null;
+        $this->hasAccess = $this->hasAccessToAction($GLOBALS['current_user'], $viewModule);
         parent::process();
     }
 
@@ -110,7 +98,11 @@ class ModuleBuilderController extends SugarController
         $found = false;
         //Check the StudioModule first for mapping overrides
         if (empty($_REQUEST ['view_package']) || $_REQUEST ['view_package'] == "studio") {
-            $sm = StudioModuleFactory::getStudioModule($_REQUEST ['view_module']);
+            $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+            if (!AccessControlManager::instance()->allowModuleAccess($viewModule)) {
+                throw new SugarApiExceptionModuleDisabled();
+            }
+            $sm = StudioModuleFactory::getStudioModule($viewModule);
             foreach ($sm->sources as $file => $def) {
                 if (!empty($def['type']) && !empty($def['view']) && $def['view'] == $view) {
                     $view = $def['type'];
@@ -123,6 +115,8 @@ class ModuleBuilderController extends SugarController
                 case MB_DETAILVIEW :
                 case MB_QUICKCREATE :
                 case MB_RECORDVIEW :
+                case MB_RECORDDASHLETVIEW:
+                case MB_PREVIEWVIEW:
                 case MB_WIRELESSEDITVIEW :
                 case MB_WIRELESSDETAILVIEW :
                     $this->view = 'layoutView';
@@ -136,10 +130,6 @@ class ModuleBuilderController extends SugarController
                 case MB_WIRELESSBASICSEARCH :
                 case MB_WIRELESSADVANCEDSEARCH :
                     $this->view = 'searchView';
-                    break;
-                case MB_DASHLET :
-                case MB_DASHLETSEARCH :
-                    $this->view = 'dashlet';
                     break;
                 case MB_POPUPLIST :
                 case MB_POPUPSEARCH :
@@ -381,7 +371,7 @@ class ModuleBuilderController extends SugarController
         if ($viewModule && !empty($_REQUEST ['labelValue'])) {
             $_REQUEST ["label_" . $_REQUEST ['label']] = $_REQUEST ['labelValue'];
 
-            // Since the following loop will change aspects of the $_REQUEST 
+            // Since the following loop will change aspects of the $_REQUEST
             // array read it into a copy to preserve state on $_REQUEST
             $req = $_REQUEST;
             $packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
@@ -390,7 +380,7 @@ class ModuleBuilderController extends SugarController
                 $req['view_module'] = $key;
                 $parser = new ParserLabel($req['view_module'], $packageName);
                 $parser->handleSave($req, $GLOBALS['current_language']);
-                
+
                 // Clear the language cache to make sure the view picks up the latest
                 $cache_key = LanguageManager::getLanguageCacheKey($req['view_module'], $GLOBALS['current_language']);
                 sugar_cache_clear($cache_key);
@@ -480,7 +470,7 @@ class ModuleBuilderController extends SugarController
                     $relatedMods = array_merge($relatedMods, VardefManager::getLinkedModulesFromFormula($bean, $field->formula));
                 }
 
-                // But only if there are related modules to work on, otherwise 
+                // But only if there are related modules to work on, otherwise
                 // we end up handling these processes for ALL THE MODULES
                 if ($relatedMods) {
                     $repair->repairAndClearAll(array('clearVardefs', 'clearTpls', 'rebuildExtensions'), array_values($relatedMods), true, false);
@@ -621,11 +611,19 @@ class ModuleBuilderController extends SugarController
         }
 
         if (empty($_REQUEST ['view_package'])) {
-            $relationships = new DeployedRelationships ($_REQUEST ['view_module']);
-            if (!empty ($_REQUEST ['relationship_name'])) {
-                if ($relationship = $relationships->get($_REQUEST ['relationship_name'])) {
+            $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+            $relationshipName = $this->request->getValidInputRequest('relationship_name', 'Assert\ComponentName');
+            $relationships = new DeployedRelationships($viewModule);
+            if (!empty($relationshipName)) {
+                if (!AccessControlManager::instance()->allowFieldAccess(
+                    $viewModule,
+                    $relationshipName
+                )) {
+                    throw new SugarApiExceptionFieldDisabled();
+                }
+                if ($relationship = $relationships->get($relationshipName)) {
                     $metadata = $relationship->buildLabels(true);
-                    $parser = new ParserLabel ($_REQUEST['view_module']);
+                    $parser = new ParserLabel($viewModule);
                     $parser->handleSaveRelationshipLabels($metadata, $selected_lang);
                 }
             }
@@ -639,6 +637,15 @@ class ModuleBuilderController extends SugarController
     {
         if (!empty($GLOBALS['current_user']) && empty($GLOBALS['modListHeader'])) {
             $GLOBALS['modListHeader'] = query_module_access_list($GLOBALS['current_user']);
+        }
+
+        $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        $lhsModule = $this->request->getValidInputRequest('lhs_module', 'Assert\ComponentName');
+        $rhsModule = $this->request->getValidInputRequest('rhs_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($viewModule)
+            || !AccessControlManager::instance()->allowModuleAccess($lhsModule)
+            || !AccessControlManager::instance()->allowModuleAccess($rhsModule)) {
+            throw new SugarApiExceptionModuleDisabled();
         }
 
         if (empty($_REQUEST ['view_package'])) {
@@ -669,6 +676,13 @@ class ModuleBuilderController extends SugarController
         $packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
         if ($relationshipName) {
             $videModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+            if (!AccessControlManager::instance()->allowFieldAccess(
+                $videModule,
+                $relationshipName
+            )) {
+                throw new SugarApiExceptionFieldDisabled();
+            }
+
             if (!$packageName) {
                 if (!empty($_REQUEST['remove_tables']))
                     $GLOBALS['mi_remove_tables'] = $_REQUEST['remove_tables'];
@@ -688,12 +702,12 @@ class ModuleBuilderController extends SugarController
 
     public function action_SaveDropDown()
     {
+        /** @var ParserDropDown $parser */
         $parser = ParserFactory::getParser('dropdown');
         $parser->saveDropDown($_REQUEST);
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_LABELS);
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_ORDEREDLABELS);
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_EDITDDFILTERS);
-        LanguageManager::invalidateJsLanguageCache();
         $this->view = 'dropdowns';
     }
 
@@ -940,9 +954,9 @@ class ModuleBuilderController extends SugarController
             $subpanelName = (!empty ($_REQUEST ['subpanel'])) ? $_REQUEST ['subpanel'] : null;
             $parser = ParserFactory::getParser($_REQUEST ['view'], $_REQUEST ['view_module'], $packageName, $subpanelName);
             $this->view = 'listView';
-            
+
             // To make sure that dashlets can render customized list views on BWC
-            // modules, we need to save list customizations for BWC modules in 
+            // modules, we need to save list customizations for BWC modules in
             // the new style as well.
             if (isModuleBWC($_REQUEST['view_module']) && empty($packageName) && empty($subpanelName)) {
                 $sidecarListParser = new SidecarListLayoutMetaDataParser(MB_SIDECARLISTVIEW, $_REQUEST['view_module'], null, 'base');
@@ -1217,5 +1231,20 @@ class ModuleBuilderController extends SugarController
                 $GLOBALS['log']->warning('ModuleBuilder deleted a temp file: ' . $filePath);
             }
         }
+    }
+
+    /**
+     * Check if user has access to current action
+     */
+    private function hasAccessToAction(User $user, ?string $viewModule) : bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        if (!empty($viewModule)) {
+            return $user->isDeveloperForModule($viewModule);
+        }
+
+        return $user->isDeveloperForAnyModule();
     }
 }

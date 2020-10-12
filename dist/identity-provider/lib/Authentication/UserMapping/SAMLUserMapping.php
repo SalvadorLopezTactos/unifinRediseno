@@ -19,6 +19,8 @@ use Sugarcrm\IdentityProvider\Authentication\User;
  */
 class SAMLUserMapping implements MappingInterface
 {
+    use FieldMapper;
+
     /**
      * IdP to App mapping fields.
      * @var array
@@ -38,20 +40,22 @@ class SAMLUserMapping implements MappingInterface
      */
     public function map($response)
     {
-        $result = [];
         $idpUserAttributes = $response->getAttributes();
 
+        $responseData = [];
         foreach ($this->mapping as $idpKey => $appKey) {
             // add field mapped to 'name_id' to regular fields.
             if ($idpKey === 'name_id') {
                 $nameId = $response->getNameId();
-                $result[$appKey] = $nameId;
+                $responseData[$idpKey] = $nameId;
                 continue;
             }
+
             if (array_key_exists($idpKey, $idpUserAttributes)) {
-                $result[$appKey] = $this->processValue($idpUserAttributes[$idpKey]);
+                $responseData[$idpKey] = $this->processValue($idpUserAttributes[$idpKey]);
             }
         }
+        $result = $this->mapEntry($responseData, $this->mapping);
         return $result;
     }
 
@@ -88,7 +92,7 @@ class SAMLUserMapping implements MappingInterface
      * Get meaningful value.
      *
      * @param array $value
-     * @return array
+     * @return string
      */
     protected function processValue(array $value)
     {

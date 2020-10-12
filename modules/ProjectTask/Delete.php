@@ -10,11 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-
-
-
 $sugarbean = BeanFactory::newBean('ProjectTask');
 
 // perform the delete if given a record to delete
@@ -46,16 +41,19 @@ $return_action = empty($_REQUEST['return_action']) ? 'index'
 $return_id = empty($_REQUEST['return_id']) ? ''
 	: $_REQUEST['return_id'];
 
-$return_location = "index.php?module=$return_module&action=$return_action";
+
+$query_params = [
+     'module' => $return_module,
+     'action' => $return_action,
+];
 
 // append the return_id if given
-
-if(!empty($return_id))
-{
-	$return_location .= "&record=$return_id";
+if (!empty($return_id)) {
+     $query_params['record'] = $return_id;
 }
 
-// now that the delete has been performed, return to given location
+$return_location = 'index.php?'.http_build_query($query_params);
 
-header("Location: $return_location");
+// now that the delete has been performed, return to given location
+header('Location: '.$return_location);
 ?>

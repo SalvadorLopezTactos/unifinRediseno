@@ -16,7 +16,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
+/*
+    THIS FILE WAS MODIFIED BY SUGARCRM INC.
+
+    Date	    Brief Description
+    06/09/2016	Changes to parseDate to support 2-digit years
+    03/02/2016	Various changes to support Chinese date short names
+    03/27/2015	Set date after looping through different parts of a date format
+    12/31/2014	Partially apply a patch from a later version to date selection from next and previous year
+    12/18/2014	Change selector for error state
+    04/24/2014	Remove code from keydown handler because of issues with non-US keyboard layouts
+    02/28/2014	Move this.hidden = true to earlier up in the hide function to ensure it is always done
+    02/13/2014	Changes to how pasted values are handled in hide function
+    11/13/2013	Fixed show days in the weekday word for the datepicker in chinese
+    09/05/2013	Changes proxy selector to ensure clicking the time icon in datetimecombos doesn't open the datepicker
+*/
+
 !function( $ ) {
 
 	// Picker object

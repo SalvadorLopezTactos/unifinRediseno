@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Paneli i listës së rasteve',
     'LBL_CASES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të rasteve',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detajet e rastit',
 
 	'ERR_DELETE_RECORD'					=> 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
 	'LBL_ACCOUNT_ID'					=> 'ID e Llogarisë',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontaktet',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'rastet',
 	'LBL_DESCRIPTION'					=> 'Përshkrim',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'dokument i bashkëngjitur',	
+    'LBL_FILENANE_ATTACHMENT'           => 'dokument i bashkëngjitur',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historia',
 	'LBL_INVITEE'						=> 'Kontaktet',
 	'LBL_MEMBER_OF'						=> 'Llogari',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Krijuar Nga emri i përdoruesit',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Emri i përdoruesit të caktuar',
     'LBL_EXPORT_TEAM_COUNT' => 'Numërim i grupit',
+    'LBL_CHANGETIMERS' => 'Ndrysho kohëmatësin',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Emailet e kontakteve të lidhur',
@@ -134,4 +137,11 @@ Për të krijuar një {{module_name}}:
  - Fushat e shënuara me "Patjetër" duhet të plotësohen para se të ruhen. 
  - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme. 
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Nuk e gjetët atë që po kërkonit?',
+    'LBL_CREATE_CASE' => 'Krijo një {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detajet e Marrëveshjes së Nivelit të Shërbimit (SLA)',
+    'LBL_HOURS' => 'Orë',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

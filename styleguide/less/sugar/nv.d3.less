@@ -110,7 +110,7 @@ svg .title {
 
 .nv-labels text {
   font-weight: bold;
-  fill: #666;
+  fill: @gray;
 }
 
 .nv-label-value text,
@@ -119,7 +119,7 @@ text.nv-label-value {
 }
 
 .nv-label-box {
-  fill: transparent;
+  fill: @transparent;
 }
 
 .nvtooltip {
@@ -141,8 +141,8 @@ text.nv-label-value {
 }
 
 .nv-brush .resize path {
-  fill: #eee;
-  stroke: #666;
+  fill: @grayLighter;
+  stroke: @gray;
 }
 
 .nv-brush .extent {
@@ -174,12 +174,12 @@ text.nv-label-value {
 }
 
 .nv-legend .disabled circle {
-  fill: #fff;
+  fill: @white;
 }
 
 .nv-legend-background {
-  fill: rgba(255, 255, 255, 0.9);
-  stroke: rgba(161, 160, 160, 0.75);
+  fill: fade(@white, 90%);
+  stroke: fade(@grayLightish, 75%);
   stroke-width: 1px;
 }
 
@@ -227,7 +227,7 @@ text.nv-label-value {
 
 .nv-axis path.domain {
   stroke-width: 2px;
-  stroke: #bbb;
+  stroke: @grayLightish;
 }
 
 .nv-axis .nv-axisMaxMin text {
@@ -292,8 +292,8 @@ text.nv-label-value {
 
 .calc-text-strings,
 .nv-multibar .nv-groups text {
-  fill: rgba(0, 0, 0, 1);
-  stroke: rgba(0, 0, 0, 0);
+  fill: @black;
+  stroke: @transparent;
   pointer-events: none;
 }
 
@@ -342,7 +342,7 @@ text.nv-pie-hole-label {
 .nv-line .nv-scatter .nv-groups .nv-point {
   fill-opacity: 1;
   stroke-opacity: 1;
-  stroke: #fff;
+  stroke: @white;
 }
 
 .nv-scatter.nv-single-point .nv-groups .nv-point {
@@ -449,7 +449,7 @@ text.nv-pie-hole-label {
 
 .nv-sparklineplus .nv-xValue,
 .nv-sparklineplus .nv-yValue {
-  stroke: #666;
+  stroke: @gray;
   font-size: 0.5em;
   font-weight: normal;
 }
@@ -468,11 +468,11 @@ text.nv-pie-hole-label {
 }
 
 .nv-arc-group {
-  fill: steelblue;
+  fill: @pacific;
 }
 
 .nv-pointer {
-  fill: #888;
+  fill: @grayLightish;
   stroke: @white;
 }
 
@@ -522,7 +522,7 @@ text.nv-pie-hole-label {
 .nv-pareto {
   .nv-quotaWrap line {
     opacity: 0.8;
-    stroke: #444;
+    stroke: @gray;
     stroke-width: 4px;
     fill: none;
 
@@ -530,7 +530,7 @@ text.nv-pie-hole-label {
   }
 
   .nv-quotaWrap line.nv-quotaLineTarget {
-    stroke: #777;
+    stroke: @grayLight;
   }
 
   .nv-quotaWrap line.nv-quotaLineBackground {
@@ -624,8 +624,8 @@ text.nv-pie-hole-label {
 */
 
 .nv-card {
-  fill: #e9efef;
-  stroke: #aaa;
+  fill: @grayLighter;
+  stroke: @grayLightish;
   stroke-width: 0.5px;
 
   .nv-circ-front {
@@ -644,7 +644,7 @@ text.nv-pie-hole-label {
 .nv-tree {
   path.link {
     fill: none;
-    stroke: #ccc;
+    stroke: @grayLighter;
     stroke-width: 1.5px;
   }
 }

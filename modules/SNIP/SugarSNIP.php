@@ -499,7 +499,7 @@ class SugarSNIP
     }
 
     /**
-     * Imports an email from the SNIP serice
+     * Imports an email from the SNIP service
      *
      * @param array $email
      */
@@ -579,19 +579,31 @@ class SugarSNIP
         $e->call_custom_logic("before_email_import");
         // If custom logic cleared the object, skip it
         if(empty($e->id)) return;
-        $e->save(FALSE);
-        $e->from_addr_name = $from_name;
-        // Object creation hook
-        if(!empty($e->all_addrs)) {
-        	$this->createObject($e);
-        }
 
         //Process attachments
         if(isset($email['message']['attachments']) && count($email['message']['attachments'])) {
             foreach ($email['message']['attachments'] as $attach)
             {
-                $this->processEmailAttachment($attach,$e);
+                $note = $this->processEmailAttachment($attach, $e);
+                if (!empty($note)) {
+                    list($image, $subtype) = explode('/', $note->file_mime_type);
+                    if ($image === 'image' && !empty($subtype) && !empty($attach['partid'])) {
+                        // A File Attachment was created in a Note object. If it represents an inline image, we
+                        // need to update any 'cid:' references in the description html to reference this note id
+                        $cidFrom = 'src="cid:' . $attach['partid'];
+                        $cidTo   = ' class="image" src="cid:' . $note->id . '.' . strtolower($subtype);
+                        $e->description_html = str_replace($cidFrom, $cidTo, $e->description_html);
+                    }
+                }
             }
+        }
+
+        $e->save(false);
+
+        $e->from_addr_name = $from_name;
+        // Object creation hook
+        if (!empty($e->all_addrs)) {
+            $this->createObject($e);
         }
 
         // Relate records
@@ -711,7 +723,7 @@ class SugarSNIP
 
     /**
     * Save a snip email attachment and associated it to a parent email.  Content is base64 encoded.
-    *
+    * @return note object if one was created, otherwise null
     */
     protected function processEmailAttachment($data, $email)
     {
@@ -724,8 +736,10 @@ class SugarSNIP
                 $GLOBALS['log']->info("Could not process calendar attachment: ".$e->getMessage());
             }
         } else {
-            $this->createNote($data, $email);
+            $note = $this->createNote($data, $email);
+            return $note;
         }
+        return null;
     }
 
     /**
@@ -766,6 +780,7 @@ class SugarSNIP
         // Move the file before saving so that the file size is captured during save.
         $upload_file->final_move($note->id);
         $note->save();
+        return $note;
     }
 
     /**

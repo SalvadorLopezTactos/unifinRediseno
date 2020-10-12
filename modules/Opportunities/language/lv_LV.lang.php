@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Darījumu saraksta instrumentu panelis',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Darījumu ierakstu instrumentu panelis',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Informācija par darījumu',
 
     'LBL_MODULE_NAME' => 'Iespējas',
     'LBL_MODULE_NAME_SINGULAR' => 'Iespēja',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Iespējas nosaukums:',
     'LBL_OPPORTUNITY' => 'Iespēja:',
     'LBL_NAME' => 'Iespējas nosaukums',
+    'LBL_TIME' => 'Laiks',
     'LBL_INVITEE' => 'Kontaktpersonas',
     'LBL_CURRENCIES' => 'Valūtas',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Nosaukums',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Veids',
     'LBL_CAMPAIGN' => 'Kampaņa:',
     'LBL_NEXT_STEP' => 'Nākamā darbība:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Interesenta avots',
     'LBL_SALES_STAGE' => 'Pārdošanas posms:',
     'LBL_SALES_STATUS' => 'Statuss',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoze',
     'LBL_WORKSHEET' => 'Darblapa',
 
+    'LBL_RENEWAL' => 'Atjaunošana',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Atjaunojamie darījumi',
+    'LBL_RENEWAL_PARENT' => 'Sākotnējais darījums',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Athaunojamais sākotnējais ID',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Iespējai jābūt piesaistītam Ieņēmumu postenim. <a href="javascript:void(0);" id="createRLI"Izveidot Ieņēmumu posteni</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Izveidot ieņēmumu posteni.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Piedāvājuma rindas',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Jūs nevarat dzēst iespējas, kuras satur aizvērtus ieņēmumu posteņus',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Viens vai vairāki no atlasītajiem ierakstiem satur aizvērtus ieņēmumu posteņus un nevar tikt dzēsti.',
     'LBL_INCLUDED_RLIS' => '# no ietvertajiem ieņēmumu posteņiem',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Piedāvājumi',
 
@@ -216,4 +230,6 @@ Lai izveidotu moduli {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Attēlo 10 labākas iespējas burbuļu diagrammā.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Manas Iespējas',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Manas darba grupas iespējas",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

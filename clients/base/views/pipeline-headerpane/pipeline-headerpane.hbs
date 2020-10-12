@@ -1,0 +1,39 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="headerpane row-fluid">
+    <div class="headerpaneContainer">
+            <ul class="nav nav-tabs pull-left">
+                {{#each pipelineTypes}}
+                    <li class="tab">
+                        {{field ../this model=../this.model template='detail'}}
+                    </li>
+                {{/each}}
+            </ul>
+        <div class="pull-right btn-toolbar">
+            <div class="btn-group" data-toggle="buttons-radio">
+                <a type="button" class="btn active" data-view="pipeline" data-mode="view"
+                   rel="tooltip" title="" track="click:pipeline" data-original-title="{{str 'LBL_PIPELINE_VIEW_NAME'}}" tabindex="-1"
+                   name="pipeline_view">
+                    <i class="fa  fa-align-left"></i>
+                </a>
+                <a type="button" class="btn" href="#{{module}}" data-view="list" data-mode="view" rel="tooltip" title=""
+                   track="click:list" data-original-title="{{str 'LBL_LIST_VIEW__NAME'}}" tabindex="-1" name="back_to_list_view">
+                    <i class="fa fa-table"></i>
+                </a>
+            </div>
+            {{#each meta.buttons}}
+                {{field ../this}}
+            {{/each}}
+        </div>
+    </div>
+</div>

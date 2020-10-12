@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Дата изменения',
     'LBL_DELETED' => 'Удалено',
     'LBL_REVENUELINEITEMS' => 'Позиции продаж',
+    'LBL_ENTRY_SOURCE' => 'Источник заметки',
+    'LBL_SOURCE_EXTERNAL' => 'Внешний',
+    'LBL_SOURCE_INTERNAL' => 'Внутренний',
 
     // Help Text
     // List View Help Text

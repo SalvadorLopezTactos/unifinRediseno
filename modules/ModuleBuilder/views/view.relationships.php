@@ -11,6 +11,8 @@
  */
 require_once ('modules/ModuleBuilder/MB/ModuleBuilder.php') ;
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 class ViewRelationships extends SugarView
 {
     /**
@@ -33,6 +35,9 @@ class ViewRelationships extends SugarView
             'Assert\ComponentName',
             $this->request->getValidInputRequest('edit_module', 'Assert\ComponentName')
         );
+        if (!AccessControlManager::instance()->allowModuleAccess($moduleName)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
         $packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
         // set the mod_strings as we can be called after doing a Repair and the mod_strings are set to Administration
         $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'ModuleBuilder');

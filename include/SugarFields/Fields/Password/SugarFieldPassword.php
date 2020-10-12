@@ -12,7 +12,7 @@
  */
 
 
-class SugarFieldPassword extends SugarFieldBase 
+class SugarFieldPassword extends SugarFieldBase
 {
     /**
      * @see SugarFieldBase::importSanitize()
@@ -25,7 +25,7 @@ class SugarFieldPassword extends SugarFieldBase
         )
     {
         $value = User::getPasswordHash($value);
-        
+
         return $value;
     }
 
@@ -63,5 +63,26 @@ class SugarFieldPassword extends SugarFieldBase
         } elseif($params[$fieldName] !== true) {
             $bean->$fieldName = User::getPasswordHash($params[$fieldName]);
         }
+    }
+
+    /**
+     * Validate password from api
+     *
+     * @param SugarBean $bean
+     * @param array $params
+     * @param string $field
+     * @param array $properties
+     * @return boolean
+     */
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties)
+    {
+        // We only enforce portal password here. Free form passwords are still used in other areas,
+        // enforcing all of them would cause existing behaviors change and test failures.
+        if (!empty($params[$field]) &&
+            !empty($properties['group']) &&
+            $properties['group'] === 'portal') {
+            return BeanFactory::getBean('Users')->check_password_rules($params[$field]);
+        }
+        return parent::apiValidate($bean, $params, $field, $properties);
     }
 }

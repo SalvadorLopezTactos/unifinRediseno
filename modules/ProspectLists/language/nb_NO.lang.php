@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Ingen e-postmeldinger til domene',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Navn',
 	'LBL_MORE_DETAIL' => 'Flere Detaljer' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Kontoer',
+    'LBL_CAMPAIGNS' => 'Kampanjer',
+    'LBL_CONTACTS' => 'Kontakter',
+    'LBL_LEADS' => 'Emner',
+    'LBL_PROSPECTS' => 'Mål',
+    'LBL_USERS' => 'Brukere',
 
     // Help Text
     // List View Help Text

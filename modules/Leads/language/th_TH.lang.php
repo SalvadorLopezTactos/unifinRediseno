@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'รายงานของผู้ใช้สนใจ',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'ยอมรับจุดประสงค์ต่าง ๆ ทางธุรกิจเพื่อ',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ยอมรับการปรับปรุงครั้งล่าสุด',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'ไม่สามารถเปลี่ยนแปลงสถานะ {{moduleSingular}} ได้ {{moduleSingular}} นี้ได้ถูกแปลงค่าแล้ว',
 );

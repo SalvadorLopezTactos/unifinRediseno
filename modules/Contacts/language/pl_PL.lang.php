@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Pulpit listy kontaktów',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Pulpit rekordów kontaktów',
-
+    'LBL_SITE_USER_ID' => 'Skrót site_url i identyfikatora kontaktu',
+    'LBL_COOKIE_CONSENT' => 'Zgoda na pliki cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Data udzielenia zgody na pliki cookie',
     'LNK_CONTACT_REPORTS' => 'Wyświetl raporty kontaktu',
     'ERR_DELETE_RECORD' => 'Należy podać numer rekordu, aby usunąć kontakt.',
     'LBL_ACCOUNT_ID' => 'ID kontrahenta:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informacje o portalu',
     'LBL_PORTAL_NAME' => 'Nazwa portalu:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Hasło portalu jest ustawione:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nazwa firmy użytkownika portalu',
     'LBL_RECORD_SAVED_SUCCESS' => 'Pomyślnie utworzono {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Ulica',
     'LBL_POSTAL_CODE' => 'Kod pocztowy:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Szanse',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Oferty',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Oferty (Adres dostawy)',
     'LBL_QUOTES_BILL_TO' => 'Oferty (Zafakturuj do)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pozycje oferty',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Kliknij tutaj, aby edytować Twój profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Tutaj możesz ustawić preferowany język. Zmieni to język używany w portalu Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Zawsze możesz wrócić do swojego profilu, korzystając z menu użytkownika.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Nazwa portalu {0} już istnieje. Zduplikowane nazwy nie są dozwolone. Zmień nazwę portalu, aby była unikatowa.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'Główne ID D&B',
@@ -279,4 +284,8 @@ Aby utworzyć {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Raporty Kontaktów',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Wyrażono zgodę na cele biznesowe dla',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ostatnia aktualizacja zgody',
+
+    'LBL_ENTRY_SOURCE' => 'Źródło kontaktu',
+    'LBL_SOURCE_EXTERNAL' => 'Zewnętrzne',
+    'LBL_SOURCE_INTERNAL' => 'Wewnętrzne',
 );

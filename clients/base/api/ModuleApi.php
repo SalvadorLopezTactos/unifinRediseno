@@ -845,11 +845,15 @@ class ModuleApi extends SugarApi {
         $api = $this->getRelateRecordApi();
         foreach ($data as $linkName => $records) {
             foreach ($records as $record) {
-                $api->createRelatedRecord($service, array_merge($record, array(
-                    'module' => $bean->module_name,
-                    'record' => $bean->id,
-                    'link_name' => $linkName,
-                )));
+                $api->createRelatedBean(
+                    $service,
+                    array_merge($record, [
+                        'module' => $bean->module_name,
+                        'record' => $bean->id,
+                        'link_name' => $linkName,
+                    ]),
+                    $bean
+                );
             }
         }
     }

@@ -31,6 +31,7 @@ $viewdefs['Products']['mobile']['view']['detail'] = array(
                 'quote_name',
                 'quantity',
                 'discount_price',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

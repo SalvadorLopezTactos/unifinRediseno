@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحالات',
     'LBL_CASES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحالات',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'تفاصيل الحالة',
 
 	'ERR_DELETE_RECORD'					=> 'يجب تحديد رقم السجل لحذف الحساب.',
 	'LBL_ACCOUNT_ID'					=> 'معرّف الحساب',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'جهات الاتصال',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'الحالات',
 	'LBL_DESCRIPTION'					=> 'الوصف:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'إرفاق ملف',	
+    'LBL_FILENANE_ATTACHMENT'           => 'إرفاق ملف',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'السجل',
 	'LBL_INVITEE'						=> 'جهات الاتصال',
 	'LBL_MEMBER_OF'						=> 'الحساب',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'تم الإنشاء بواسطة اسم المستخدم',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'اسم المستخدم المعين',
     'LBL_EXPORT_TEAM_COUNT' => 'عدد الفرق',
+    'LBL_CHANGETIMERS' => 'تغيير المؤقتات',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'رسائل البريد الإلكتروني الخاصة بجهات الاتصال ذات الصلة',
@@ -140,4 +143,11 @@ $mod_strings = array (
  - يجب أن يتم إكمال الحقول المميزة على أنها "مطلوبة" قبل الحفظ.
  - انقر فوق "إظهار المزيد" لعرض حقول إضافية إذا لزم الأمر.
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'لم تعثر على ما كنت تبحث عنه؟',
+    'LBL_CREATE_CASE' => 'إنشاء {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'تفاصيل SLA',
+    'LBL_HOURS' => 'ساعات',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

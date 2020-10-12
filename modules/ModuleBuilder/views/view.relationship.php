@@ -12,6 +12,8 @@
 require_once ('modules/ModuleBuilder/MB/ModuleBuilder.php') ;
 require_once ('modules/ModuleBuilder/parsers/constants.php') ;
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 class ViewRelationship extends SugarView
 {
     /**
@@ -55,7 +57,9 @@ class ViewRelationship extends SugarView
         }
         $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
         $viewPackage = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
-
+        if (!AccessControlManager::instance()->allowModuleAccess($viewModule)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
         $this->smarty = new Sugar_Smarty();
         $ac = new AjaxCompose();
         $this->fromModuleBuilder = isset($_REQUEST['MB']) || (!empty($viewPackage) && $viewPackage != 'studio');
@@ -106,6 +110,9 @@ class ViewRelationship extends SugarView
 
         // if a description for this relationship already exists, then load it so it can be modified
         if (!empty($relationshipName)) {
+            if (!AccessControlManager::instance()->allowFieldAccess($viewModule, $relationshipName)) {
+                throw new SugarApiExceptionFieldDisabled();
+            }
             $relationship = $relationships->get($relationshipName);
             $relationship->setName($relationshipName);
             $definition = $relationship->getDefinition();
@@ -139,6 +146,10 @@ class ViewRelationship extends SugarView
         }
         // load the relationship from post - required as we can call view.relationship.php from Ajax when changing the rhs_module for example
         $definition = $this->overrideDefinitionFromPOST($definition);
+
+        if (!AccessControlManager::instance()->allowModuleAccess($definition['rhs_module'])) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
 
         if (empty($definition ['rhs_label'])) {
             $definition['rhs_label'] = translate($definition['rhs_module']);

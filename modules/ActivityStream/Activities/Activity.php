@@ -70,9 +70,11 @@ class Activity extends Basic
     {
         // TODO: Fix this after ENGRD-17 is resolved.
         $encode = false;
-        parent::retrieve($id, $encode, $deleted);
-        $this->last_comment_bean->populateFromRow(json_decode($this->last_comment, true));
-        return $this;
+        $ret = parent::retrieve($id, $encode, $deleted);
+        if ($ret) {
+            $this->last_comment_bean->populateFromRow(json_decode($this->last_comment, true));
+        }
+        return $ret;
     }
 
     /**

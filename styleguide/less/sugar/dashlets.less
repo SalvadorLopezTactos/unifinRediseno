@@ -397,7 +397,7 @@
     h4 {
       font-weight: bold;
       margin: 0 0 0 -10px;
-      color: #759eef;
+      color: @ocean;
     }
 
     .dnb-inner-nav {
@@ -471,8 +471,7 @@
       font-size: 14px;
     }
 
-    .sucrose .sc-x.sc-axis text,
-    .nvd3 .nv-x.nv-axis text {
+    .sucrose .sc-x.sc-axis text {
       font-size: 12px;
     }
 
@@ -737,7 +736,7 @@
       .block-footer {
         text-align: center;
         padding: 0;
-        border-top: 1px solid #ddd;
+        border-top: 1px solid @grayLighter;
 
         ul {
           box-shadow: none;
@@ -801,7 +800,7 @@
 
               &:active {
                 background-color: @btnSecondaryBackgroundActive;
-                color: #094268;
+                color: @night;
               }
 
               &.disabled {
@@ -814,7 +813,7 @@
           //Previous button
           .nav-previous {
             padding: 3px 6px;
-            border: 1px solid #ddd;
+            border: 1px solid @grayLighter;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
           }
@@ -822,7 +821,7 @@
           //Next button
           .nav-next {
             padding: 3px 6px;
-            border: 1px solid #ddd;
+            border: 1px solid @grayLighter;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
           }
@@ -882,6 +881,184 @@
           border-bottom: none;
         }
       }
+    }
+  }
+}
+
+// record view dashlet
+.dashlet-title.record-toolbar {
+  padding-top: 11px;
+  padding-bottom: 11px;
+
+  .record-cell {
+    padding-left: 20px;
+  }
+
+  .record-cell[data-type="avatar"],
+    .record-cell[data-type="image"] {
+    padding: 2px 0 0 20px;
+    margin-right: 20px;
+
+    .image_rounded img {
+      border: 2px solid fade(@black, 40%);
+      border-radius: 23px;
+    }
+  }
+
+  .table-cell-wrapper {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 19px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.dashablerecord .dashlet-tabs .dashlet-tabs-row .dashlet-tab {
+  height: 30px;
+}
+
+// record view dashlet embedded in record view dashlet configuration drawer ("pseudo dashlet")
+.dashablerecord.dashablerecord-config .dashlet-tabs-row .dashlet-tab {
+  height: 35px;
+
+  a {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+  }
+}
+
+.dashablerecord.dashablerecord-config {
+  float: left;
+  border: 1px solid @inputBorderColor;
+  margin: 10px;
+  width: 75%;
+}
+
+.dashablerecord-studio-text {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.dashablerecord {
+  .record {
+    padding: 13px;
+  }
+}
+
+/* Active Subscriptions Dashlet */
+.active-subscriptions {
+  .subscription-entry {
+    padding: 11px;
+    border-bottom: @borderWidget;
+
+    .content-row {
+      width: 100%;
+
+      .row-left {
+        display: flex;
+      }
+
+      .row-cell {
+        white-space: nowrap;
+        vertical-align: middle;
+
+        .timeline-active-subscription {
+          border-top: 13pt solid #8f1988;
+          margin-top: -13pt;
+        }
+
+        .timeline-active-subscription > div {
+          background: #d0d3d4;
+          height: 13pt;
+          margin-top: -13pt;
+        }
+      }
+
+      .secondary {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .pull-right {
+        padding-left: 10px;
+      }
+
+      .currency-field {
+        margin-left: 5px;
+
+        .original {
+          padding: 0;
+        }
+
+        .converted {
+          width: unset;
+        }
+      }
+    }
+  }
+}
+
+/* Activity Timeline Dashlet */
+.activity-timeline {
+  .timeline-entry {
+    .static-contents {
+      height: 35px;
+      padding: 11px;
+      border-bottom: @borderWidget;
+
+      &.expanded {
+        background-color: @grayLighter;
+      }
+
+      .content-col {
+        &.record-icon {
+          width: 20px;
+          height: 20px;
+          padding: 6px;
+          margin: 2px;
+          background-color: @blue;
+          border-radius: 50%;
+          text-align: center;
+
+          .fa {
+            color: @white;
+            font-size: 20px;
+            width: 20px;
+          }
+        }
+
+        &.record-text {
+          width: calc(~"100% - 42px");
+          font-size: 12px;
+          line-height: 17px;
+          margin-left: 42px;
+
+          .content-cell {
+            &.primary {
+              color: @grayDarker;
+            }
+
+            &.secondary {
+              color: lighten(@gray, 25%);
+            }
+
+            .row-cell {
+              display: inline-block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+    }
+
+    .expanded-contents {
+      border-bottom: @borderWidget;
+      padding: 6px;
     }
   }
 }

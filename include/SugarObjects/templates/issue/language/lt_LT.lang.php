@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Sprendimas',
   'LBL_LAST_MODIFIED' => 'Paskutinį kartą modifikuota',
   'LBL_ASSIGNED_TO_ID'=>'Kam priskirta:',
-  'LBL_ASSIGNED_TO_NAME' => 'Vartotojas:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Vartotojas:',
   'LBL_WORK_LOG' => 'Darbo istorija',
+    'LBL_FOLLOW_UP' => 'Tolesnė veikla',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Išsprendimo data',
+    'LBL_HOURS_TO_RESOLUTION' => 'Liko valandų iki išsprendimo',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Liko darbo valandų iki išsprendimo',
+    'LBL_PENDING_PROCESSING' => 'Laukiama apdorojimo',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Kas sukūrė:',
   'LBL_DATE_CREATED' => 'Sukūrimo data:',
   'LBL_DATE_ENTERED' => 'Sukūrimo data:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Redaguoti',
     'LBL_REMOVE' => 'Pašalinti',
 
-  
+
   );

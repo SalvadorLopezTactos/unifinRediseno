@@ -46,11 +46,11 @@
         var convertedCurrencyId = transactionalCurrencyId;
         var origTransactionValue = value;
 
-        // convert value to Quote preferred currency
-        var context = this.context.parent || this.context;
-        var quotePreferredCurrencyId = context.get('model').get('currency_id');
-        if (quotePreferredCurrencyId !== transactionalCurrencyId) {
-            convertedCurrencyId = quotePreferredCurrencyId;
+        // If necessary, do a conversion to the preferred currency. Otherwise,
+        // just display the currency as-is.
+        var preferredCurrencyId = this.getPreferredCurrencyId();
+        if (preferredCurrencyId && preferredCurrencyId !== transactionalCurrencyId) {
+            convertedCurrencyId = preferredCurrencyId;
 
             this.transactionValue = app.currency.formatAmountLocale(
                 this.model.get(this.name) || 0,
@@ -60,7 +60,7 @@
             value = app.currency.convertWithRate(
                 value,
                 this.model.get('base_rate'),
-                app.metadata.getCurrency(quotePreferredCurrencyId).conversion_rate
+                app.metadata.getCurrency(preferredCurrencyId).conversion_rate
             );
         } else {
             // user preferred same as transactional, no conversion required
@@ -71,6 +71,26 @@
         return app.currency.formatAmountLocale(value, convertedCurrencyId);
     },
 
+    /**
+     * Determines the correct preferred currency ID to convert to depending on
+     * the context this currency field is being displayed in
+     * @return {string|undefined} the ID of the preferred currency if it exists
+     */
+    getPreferredCurrencyId: function() {
+        // If this is a QLI subpanel, and the user has opted to show in their
+        // preferred currency, use that currency. Otherwise, use the system currency.
+        if (this.context.get('isSubpanel')) {
+            if (app.user.getPreference('currency_show_preferred')) {
+                return app.user.getPreference('currency_id');
+            }
+            return app.currency.getBaseCurrencyId();
+        }
+
+        // Get the preferred currency of the parent context or this context. For
+        // Quotes record view, this will get the Quote's preferred currency
+        var context = this.context.parent || this.context;
+        return context.get('model').get('currency_id');
+    },
 
     /**
      * @inheritdoc

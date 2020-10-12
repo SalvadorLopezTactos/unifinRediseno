@@ -19,10 +19,10 @@ body {
   border: 1px solid #717171;
   background-color: #f6f6f6;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-  &.alert-process {
+.alert.alert-process {
     line-height: 46px;
-  }
 }
 
 .alert-top {

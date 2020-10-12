@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'דוחות לליד',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'הסכמה למטרות עסקיות עבור',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ההסכמה עודכנה לאחרונה בתאריך',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'לא ניתן לשנות את הסטטוס של {{moduleSingular}}.‏ {{moduleSingular}} זה כבר עבר המרה.',
 );

@@ -54,7 +54,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "ในการใช้การเก็บถาวรอีเมล คุณต้องซื้อใบอนุญาตสำหรับอินสแตนซ์ SugarCRM ของคุณ",
     "LBL_SNIP_PURCHASE" => "คลิกที่นี่เพื่อซื้อ",
     'LBL_SNIP_EMAIL' => 'ที่อยู่ของการเก็บถาวรอีเมล',
-    'LBL_SNIP_AGREE' => "ฉันยอมรับเงื่อนไขข้างต้นและ <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>ข้อตกลงเกี่ยวกับความเป็นส่วนตัว</a>",
+    'LBL_SNIP_AGREE' => "ฉันยอมรับเงื่อนไขและ <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>นโยบายความเป็นส่วนตัว</a>ข้างต้น",
     'LBL_SNIP_PRIVACY' => 'ข้อตกลงเกี่ยวกับความเป็นส่วนตัว',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'ปิงกลับไม่สำเร็จ',

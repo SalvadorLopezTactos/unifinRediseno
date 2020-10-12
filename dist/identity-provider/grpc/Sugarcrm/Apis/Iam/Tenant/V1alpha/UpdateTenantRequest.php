@@ -18,18 +18,9 @@ class UpdateTenantRequest extends \Google\Protobuf\Internal\Message
      */
     private $tenant = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant $tenant
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Tenant\V1Alpha\Tenant::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

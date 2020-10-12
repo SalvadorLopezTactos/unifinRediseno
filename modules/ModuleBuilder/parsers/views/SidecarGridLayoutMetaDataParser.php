@@ -64,7 +64,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
     /**
      * Gets the maximum span units for for a panel
-     * 
+     *
      * @return int
      */
     public function getMaxSpan()
@@ -73,7 +73,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
     }
 
     /**
-     * Sets the fields that are part of fieldsets. This is used when setting 
+     * Sets the fields that are part of fieldsets. This is used when setting
      * available fields.
      */
     protected function setFieldsetMemberFields()
@@ -400,7 +400,6 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                 'name' => $panelName,
                 'label' => $panelName,
                 'columns' =>$panelColumns,
-                'labelsOnTop' => 1,
                 'placeholders' => 1
             );
 
@@ -523,7 +522,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
     /**
      * Sets a base span entry
-     * 
+     *
      * @param string $name The field name to record the span for
      * @param int $value The span value for this field
      */
@@ -615,7 +614,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
     /**
      * Gets current field's span based on the last field and adjust last field's base span if necessary
-     * 
+     *
      * @param array $lastField The last field that was touched
      * @param int $singleSpanUnit The number of spaces occupied by a single span
      * @param int $fieldCount The number of fields in the row of fields
@@ -628,7 +627,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
         } else {
             // calculate span of the filler based on span of the field it complements
             if (is_array($lastField) && isset($lastField['name'], $this->baseSpans[$lastField['name']])) {
-                // The span for this field should be the max span 
+                // The span for this field should be the max span
                 // minus the last field span plus a single unit
                 // span
                 $fullBaseSpan = $this->baseSpans[$lastField['name']]['span'] + $this->baseSpans[$lastField['name']]['adjustment'];
@@ -677,7 +676,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
         foreach ($panels as $n => $panel) {
             // If we are on a record view we need to hide the header panel from
             // studio. This is to prevent breaking the client side application.
-            if ($this->_view == MB_RECORDVIEW && $n == $this->headerPanelIndex) {
+            if (in_array($this->_view, [MB_RECORDVIEW, MB_RECORDDASHLETVIEW, MB_PREVIEWVIEW]) && $n == $this->headerPanelIndex) {
                 $this->headerPanelMeta = $panel;
                 continue;
             }
@@ -741,6 +740,29 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
     {
         $row = array();
         $rowSpan = 0;
+    }
+
+    /**
+     * Adds the specified field to the header in the specified position.
+     * Position should be an integer - field positions are index-based from
+     * left-right where 0 is the leftmost field in the header
+     * @param array $fieldDef Definition of the field to add to the header panel
+     * @param int $position Position index in which to insert the field into the header
+     * @return bool true if the field was added to the header panel
+     */
+    public function addFieldToHeader($fieldDef, $position = null) : bool
+    {
+        $result = false;
+        if (!empty($this->headerPanelMeta['fields']) && is_array($this->headerPanelMeta['fields'])) {
+            // Insert the field at the specified position of the header, or at
+            // the end if no position was specified
+            $fields = $this->headerPanelMeta['fields'];
+            $position = !empty($position) ? $position : count($fields);
+            array_splice($fields, $position, 0, [$fieldDef]);
+            $this->headerPanelMeta['fields'] = $fields;
+            $result = true;
+        }
+        return $result;
     }
 
     /**
@@ -833,6 +855,32 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
             }
         }
         return $out;
+    }
+
+    /**
+     *
+     * Remove a field from the header panel which is hidden from the viewdef
+     *
+     * @param string $fieldName Name of the field to remove
+     * @return boolean True if the field was removed; false otherwise
+     */
+
+    public function removeFieldFromHeader($fieldName)
+    {
+        $result = false;
+
+        if (!empty($this->headerPanelMeta['fields']) && is_array($this->headerPanelMeta['fields'])) {
+            foreach ($this->headerPanelMeta['fields'] as $fieldIndex => $field) {
+                // Need strict equality here to prevent upgrade issues
+                // like with Cases, that have an empty field placeholder
+                // in it's layout
+                if ($field['name'] === $fieldName) {
+                    unset($this->headerPanelMeta['fields'][$fieldIndex]);
+                    $result = true;
+                }
+            }
+        }
+        return $result;
     }
 
     /**
@@ -954,7 +1002,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                     }
                 }
 
-                // Now see if this field is inside of a combination field and 
+                // Now see if this field is inside of a combination field and
                 // remove the combination field if it is. This removes the combo
                 // field if a component of the combo field is on the layout.
                 if (!empty($this->fieldsetMemberFields[$remove])) {
@@ -965,9 +1013,9 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
     }
 
     /**
-     * Removes a field from the available field array. This is a helper method 
+     * Removes a field from the available field array. This is a helper method
      * now since this is handled in more than one place.
-     * 
+     *
      * @param array $availableFields Array of available fields
      * @param string $field Name of the field to remove
      */
@@ -1031,7 +1079,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                     return $field['name'];
                 }
 
-                // This handles non-field fields like favorite and follow that 
+                // This handles non-field fields like favorite and follow that
                 // may not have a name property
                 if (!empty($field['readonly']) && empty($field['name'])) {
                     return $field['type'];
@@ -1095,10 +1143,10 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
             }
         }
     }
-    
+
     /**
      * Gets a field span
-     * 
+     *
      * @param array|string $field A field definition
      * @param integer $singleSpanUnit Default value of span for a single-column unit
      *

@@ -122,6 +122,9 @@ $dictionary['Dashboard'] = array(
         'taggable',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'Dashboards',
+    ],
 );
 
 if (!class_exists('VardefManager')) {

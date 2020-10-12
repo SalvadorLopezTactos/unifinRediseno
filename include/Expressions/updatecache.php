@@ -11,13 +11,10 @@
  */
 if (!defined('sugarEntry')) {
     //This script is designed to be runnable stand alone
+    require_once 'vendor/autoload.php';
     require_once 'include/utils.php';
     require_once 'include/utils/array_utils.php';
-    require_once 'include/SugarObjects/SugarConfig.php';
-    require_once 'include/utils/autoloader.php';
-    SugarAutoLoader::init();
 }
-
 
 /**
  * Traverses the Arithmetic directory and builds the cache of

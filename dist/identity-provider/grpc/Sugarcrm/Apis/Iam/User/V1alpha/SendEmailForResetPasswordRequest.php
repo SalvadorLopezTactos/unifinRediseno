@@ -17,19 +17,14 @@ class SendEmailForResetPasswordRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string name = 2;</code>
      */
     private $name = '';
-
     /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     * }
+     * Generated from protobuf field <code>string locale = 3;</code>
      */
-    public function __construct($data = NULL) {
+    private $locale = '';
+
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
@@ -50,6 +45,28 @@ class SendEmailForResetPasswordRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->name = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string locale = 3;</code>
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Generated from protobuf field <code>string locale = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setLocale($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->locale = $var;
 
         return $this;
     }

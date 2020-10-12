@@ -44,5 +44,6 @@ return array(
         ),
     ),
     'name' => 'LBL_LEADS_RECORD_DASHBOARD',
+    'id' => '5d670ec4-7b52-11e9-b9e0-f218983a1c3e',
 );
 

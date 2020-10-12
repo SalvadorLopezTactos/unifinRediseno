@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'τελευταίο έτος',
     'LBL_OPERATOR_THIS_YEAR' => 'αυτό το έτος',
     'LBL_OPERATOR_NEXT_YEAR' => 'επόμενο έτος',
+    'LBL_OPEN_ISSUES' => 'Ανοιχτό {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Επιλύθηκαν πρόσφατα',
 );

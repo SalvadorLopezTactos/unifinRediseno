@@ -56,6 +56,7 @@ $viewdefs['RevenueLineItems']['mobile']['view']['edit'] = array(
                     'name' => 'quote_name',
                     'readonly' => true,
                 ),
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

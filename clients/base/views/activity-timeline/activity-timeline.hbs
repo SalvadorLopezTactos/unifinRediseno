@@ -1,0 +1,64 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="activity-timeline">
+	{{#if relatedCollection.dataFetched}}
+		{{#if models.length}}
+			{{#each models}}
+				<div class="timeline-entry" data-id="{{attributes.id}}">
+					<div class="static-contents">
+						<div class="content-col record-icon pull-left">
+							<i class="fa{{#if attributes.icon_class}} {{attributes.icon_class}}{{/if}}"></i>
+			        	</div>
+			        	<div class="content-col record-text">
+				        	<div class="content-cell primary">
+				            	<span class="row-cell">{{str attributes.name}}</span>
+								<span class="row-cell pull-right"><i class="fa fa-chevron-down expand-collapse"></i></span>
+				        	</div>
+				        	<div class="content-cell secondary">
+					            <span class="row-cell">
+					            	{{#if attributes.status}}
+					            		{{str ../attributes.status}}
+					            	{{/if}}
+					           </span>
+					            <span class="row-cell pull-right">{{relativeTime attributes.record_date class="date"}}</span>
+							</div>
+			        	</div>
+					</div>
+					<div class="expanded-contents hide block preview-data">
+						{{#each attributes.fieldsMeta.panels}}
+							{{#each fields}}
+							<div class="record-cell field-row">
+		        				<div class="field-label ellipsis_inline" data-name="{{../name}}">
+									{{#unless dismiss_label}}
+										{{str  label ../../../attributes.moduleName}}
+									{{/unless}}
+						        </div>
+		        				<div class="field-value" data-type="{{../type}}" name="{{../name}}" data-name="{{../name}}">
+		            				{{field ../../../this model=../../this template="preview"}}
+		        				</div>						
+							</div>
+							{{/each}}
+						{{/each}}
+					</div>
+				</div>
+			{{/each}}
+			{{#unless fetchCompleted}}
+				<div class="dashlet-footer">
+					<button class="more btn btn-link btn-invisible">Show More ...</button>
+				</div>
+			{{/unless}}
+		{{else}}
+			<div class="block-footer">{{str "LBL_NO_DATA_AVAILABLE"}}</div>
+		{{/if}}
+	{{/if}}
+</div>

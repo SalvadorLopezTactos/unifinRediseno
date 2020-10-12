@@ -35,7 +35,7 @@ class ApiHelper
     public static function getHelper(ServiceBase $api, SugarBean $bean)
     {
         $modulePath = $bean->module_dir;
-        $moduleName = $bean->module_name;
+        $moduleName = $bean->getModuleName();
 
         if (!isset(self::$moduleHelpers[$moduleName])) {
             if (SugarAutoLoader::requireWithCustom('modules/' . $modulePath . '/' . $moduleName . 'ApiHelper.php')) {

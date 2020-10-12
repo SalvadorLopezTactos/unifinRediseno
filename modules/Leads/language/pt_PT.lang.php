@@ -322,4 +322,7 @@ Depois de confirmar cada módulo pretendido, clique no botão Gravar e Converter
     'LBL_FILTER_LEADS_REPORTS' => 'Relatórios de clientes potenciais',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Não é possível alterar o estado do {{moduleSingular}}. Este {{moduleSingular}} já foi convertido.',
 );

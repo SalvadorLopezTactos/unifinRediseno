@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis kontakata',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o kontaktima',
-
+    'LBL_SITE_USER_ID' => 'Raspršivanje elemenata site_url i contact id',
+    'LBL_COOKIE_CONSENT' => 'Privola za kolačiće',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Privola za kolačiće primljena je',
     'LNK_CONTACT_REPORTS' => 'Prikaži izvješća o kontaktu',
     'ERR_DELETE_RECORD' => 'Navedite broj zapisa da biste izbrisali kontakt.',
     'LBL_ACCOUNT_ID' => 'ID računa:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informacije o portalu',
     'LBL_PORTAL_NAME' => 'Naziv portala:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Postavljena je lozinka portala:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Naziv tvrtke korisnika portala',
     'LBL_RECORD_SAVED_SUCCESS' => 'Uspješno ste stvorili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Ulica',
     'LBL_POSTAL_CODE' => 'Poštanski broj:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Prilike',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Ponude',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Ponude (dostaviti korisniku)',
     'LBL_QUOTES_BILL_TO' => 'Ponude (naplatiti korisniku)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Prodane stavke',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Kliknite ovdje da biste uredili profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Ovdje možete postaviti željeni jezik. Time će se promijeniti jezik koji se upotrebljava na Sugar Portalu.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'U bilo kojem trenutku možete se vratiti na svoj profil putem korisničkog izbornika.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Naziv {0} već postoji na portalu. Duplikati naziva na portalu nisu dozvoljeni. Promijenite naziv na portalu kako bi bio jedinstven.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'Glavni ID baze D&B',
@@ -279,4 +284,8 @@ Da biste stvorili {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Izvješća kontakta',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Privola dana za poslovne svrhe',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posljednje ažuriranje privole',
+
+    'LBL_ENTRY_SOURCE' => 'Obratite se izvoru',
+    'LBL_SOURCE_EXTERNAL' => 'Vanjski',
+    'LBL_SOURCE_INTERNAL' => 'Unutarnji',
 );

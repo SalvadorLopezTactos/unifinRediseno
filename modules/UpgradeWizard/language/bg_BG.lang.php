@@ -258,8 +258,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Не подлежи на деинсталация',
     'LBL_ML_VERSION' => 'Версия',
 	'LBL_ML_INSTALL'=>'Инсталиране',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Потребителска активност',
 	'LBL_MODULE_NAME' => 'Електронен помощник за надстройка',
 	'LBL_MODULE_NAME_SINGULAR' => 'Електронен помощник за надстройка',
 	'LBL_UPLOAD_SUCCESS' => 'Обновяването на пакета е успешно качен. Натиснете бутона Следващ за извършване на окончателна проверка.',

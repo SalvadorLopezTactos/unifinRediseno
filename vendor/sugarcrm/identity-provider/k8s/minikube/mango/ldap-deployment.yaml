@@ -7,11 +7,14 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: behat-tests-mango-ldap
 spec:
+  selector:
+    matchLabels:
+      app: behat-tests-mango-ldap
   replicas: 1
   template:
     metadata:

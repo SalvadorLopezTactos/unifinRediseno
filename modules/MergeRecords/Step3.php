@@ -71,10 +71,16 @@ if (isset($_REQUEST['change_parent']) && $_REQUEST['change_parent']=='1') {
 }
 $focus = BeanFactory::newBean('MergeRecords');
 $focus->load_merge_bean($_REQUEST['merge_module'], true, $base_id);
+
+$q = http_build_query([
+    'module' => $focus->merge_bean->module_dir,
+    'action' => 'index',
+]);
+
 $params = array();
-$params[] = "<a href='index.php?module={$focus->merge_bean->module_dir}&action=index'>{$GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]}</a>";
-$params[] = $mod_strings['LBL_MODULE_NAME'];
-$params[] = $focus->merge_bean->name;
+$params[] = '<a href="'.htmlspecialchars('index.php?module='.$q).'">'.htmlspecialchars($GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]).'</a>';
+$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME']);
+$params[] = htmlspecialchars($focus->merge_bean->name);
 echo getClassicModuleTitle($focus->merge_bean->module_dir, $params, true);
 
 $mergeBeanArray = array ();

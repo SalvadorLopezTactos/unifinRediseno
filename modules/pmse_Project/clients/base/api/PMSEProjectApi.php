@@ -275,6 +275,7 @@ class PMSEProjectApi extends ModuleApi
     public function getCrmData(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
+        $this->crmDataWrapper->setService($api);
         return $this->crmDataWrapper->_get($args, $this);
     }
 

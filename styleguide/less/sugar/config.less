@@ -1,3 +1,9 @@
+/*
+ * MAIN VARIABLES
+ */
+
+@baseUrl: "@{siteUrl}/styleguide/assets";
+@fa-font-path: "@{siteUrl}/styleguide/assets/fonts";
 
 /*
  * THIRD PARTY
@@ -8,7 +14,6 @@
 @import "../lib/colorpicker.less"; //ext lib: http://www.eyecon.ro/bootstrap-colorpicker/
 @import "../lib/select2.less"; //ext lib: http://ivaynberg.github.com/select2/
 @import "../lib/jquery.timepicker.less";
-@fa-font-path: "../../../../../styleguide/assets/fonts";
 @import "../lib/font-awesome/font-awesome.less"; //ext lib: http://fortawesome.github.com/Font-Awesome/
 @import "../lib/sucrose/sucrose.less";
 @import "./font.less";
@@ -98,7 +103,8 @@
 @import "tree-component.less";
 @import "animation.less";
 @import "dependency-picker.less";
-
+@import "pipeline.less";
+@import "side-drawer.less";
 @import "process-list.less";
 @import "process-business-rules.less";
 @import "process-definitions.less";
@@ -110,3 +116,10 @@
 @import "commentLog.less"; // css for commentlog
 
 @import "bpm.less"; // SugarBPM(TM)
+
+// Renewal Console imports
+@import "boxplot.less"; // BoxPlot CSS
+@import "opportunities.less";
+
+// Console config imports
+@import "console-config.less";

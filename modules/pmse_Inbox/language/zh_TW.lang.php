@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => '指派使用者已套用',
 
     'LBL_PMSE_LABEL_PREVIEW' => '流程設計預覽',
+    'LBL_PROJECT_RUN_ORDER' => '運行順序',
 );
 

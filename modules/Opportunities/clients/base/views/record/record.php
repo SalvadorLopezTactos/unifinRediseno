@@ -147,6 +147,11 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'readonly' => true,
                     'dismiss_label' => true,
                 ),
+                [
+                    'name' => 'renewal',
+                    'type' => 'renewal',
+                    'dismiss_label' => true,
+                ],
             ),
         ),
         array(
@@ -154,7 +159,6 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -224,12 +228,12 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'columns' => 2,
             'fields' => array(
                 'next_step',
                 'opportunity_type',
+                'renewal_parent_name',
                 'lead_source',
                 'campaign_name',
                 array(

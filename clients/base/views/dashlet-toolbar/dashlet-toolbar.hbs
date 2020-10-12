@@ -11,23 +11,56 @@
  */
 --}}
 <div class="btn-toolbar pull-right">
-{{#each meta.buttons}}
+{{#each buttons}}
     {{#if type}}
         {{field ../../this model=../../this.model}}
     {{else}}
         {{#if dropdown_buttons}}
-        <div class="btn-group">
-            {{#if ../../../this.canEdit}}
-                <button type="button" data-toggle="dropdown" rel="tooltip" title="{{str "LBL_DASHLET_CONFIGURE"}}" class="btn btn-invisible dropdown-toggle" data-placement="bottom" aria-label="{{str "LBL_DASHLET_CONFIGURE"}}" aria-haspopup="true" aria-expanded="false"><i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i></button>
-            {{/if}}
-            <ul class="dropdown-menu left" role="menu">
-                {{#each dropdown_buttons}}
-                    <li role="menuitem">{{field ../../../../this model=../../../../this.model}}</li>
-                {{/each}}
-            </ul>
-        </div>
+            <div class="btn-group">
+                {{#if ../../../this.canEdit}}
+                    <button
+                        type="button"
+                        data-toggle="dropdown"
+                        rel="tooltip"
+                        title="{{str "LBL_DASHLET_CONFIGURE"}}"
+                        class="btn btn-invisible dropdown-toggle"
+                        data-placement="bottom"
+                        aria-label="{{str "LBL_DASHLET_CONFIGURE"}}"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i>
+                    </button>
+                {{/if}}
+                <ul class="dropdown-menu left" role="menu">
+                    {{#each dropdown_buttons}}
+                        <li role="menuitem">{{field ../../../../this model=../../../../this.model}}</li>
+                    {{/each}}
+                </ul>
+            </div>
         {{/if}}
     {{/if}}
 {{/each}}
 </div>
-<h4 data-toggle="dashlet" class="dashlet-title">{{meta.label}}</h4>
+{{#if headerFields}}
+    <h4 data-toggle="dashlet" class="dashlet-title record-toolbar">
+        {{#each ../headerFields}}
+            <span class="record-cell" data-type="{{type}}" data-name="{{name}}">
+                <span class="table-cell-wrapper">
+                    {{#if ../../labels}}
+                        {{#unless dismiss_label}}
+                            <span class="record-label" data-name="{{name}}">
+                                {{str label ../../dashletModel.module}}
+                            </span>
+                        {{/unless}}
+                    {{/if}}
+                    <span class="index{{index}}" data-fieldname="{{name}}" data-index="{{index}}">
+                        {{field ../this model=../dashletModel template="detail"}}
+                    </span>
+                </span>
+            </span>
+        {{/each}}
+    </h4>
+{{else}}
+    <h4 data-toggle="dashlet" class="dashlet-title">{{meta.label}}</h4>
+{{/if}}

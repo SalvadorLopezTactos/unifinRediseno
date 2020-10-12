@@ -45,11 +45,11 @@ if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
 	$focus->id = "";
 }
 
-$params = array();
-$params[] = "<a href='index.php?module=WorkFlow&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-$params[] = $focus->get_summary_text();
 
-echo getClassicModuleTitle("WorkFlow", $params, true);
+echo getClassicModuleTitle("WorkFlow", [
+    sprintf('<a href="index.php?module=WorkFlow&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
+    htmlspecialchars($focus->get_summary_text()),
+], true);
 
 $GLOBALS['log']->info("WorkFlow detail view");
 
@@ -164,4 +164,3 @@ $sub_xtpl->parse("subpanel");
 $sub_xtpl->out("subpanel");
 
 echo $javascript->getScript(true, false);
-?>

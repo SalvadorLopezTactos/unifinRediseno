@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Kanta-ID',
     'LBL_READ' => 'Luettu',
     'LBL_UNREAD' => 'Lukematon',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Sinut on maininnut',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Sinut on mainittu',
 );

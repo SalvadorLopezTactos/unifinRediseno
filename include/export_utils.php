@@ -65,7 +65,12 @@ function export($type, $records = null, $members = false, $sample = false)
     if ($records) {
         $where = sprintf(
             "{$focus->table_name}.id IN (%s)",
-            implode(',', array_map([$db, 'quoted'], $records))
+            implode(',', array_map(
+                function ($id) use ($db): string {
+                    return $db->quoted($id);
+                },
+                $records
+            ))
         );
     } elseif (isset($_REQUEST['all'])) {
         $where = '';
@@ -146,7 +151,13 @@ function export($type, $records = null, $members = false, $sample = false)
             true,
             $app_strings['ERR_EXPORT_TYPE'] . $type . ": <BR>." . $query
         );
-        $sample = $focus->_get_num_rows_in_query($query) < 1;
+        
+        $q = new SugarQuery();
+        $q->from($focus)
+            ->limit(1);
+        $q->select->selectReset()->fieldRaw('NULL');
+        $countResult = $q->execute();
+        $sample = count($countResult) < 1;
     } else {
         $result = $db->query($query, true, $app_strings['ERR_EXPORT_TYPE'] . $type . ": <BR>." . $query);
     }
@@ -201,9 +212,15 @@ function exportFromApi($args, $sample = false)
     $db = DBManagerFactory::getInstance();
 
     if ($records) {
+        $records = is_array($records) ? $records : [$records];
         $where = sprintf(
             "{$focus->table_name}.id IN (%s)",
-            implode(',', array_map([$db, 'quoted'], is_array($records) ? $records : [$records]))
+            implode(
+                ',',
+                array_map(function (string $record) use ($db) : string {
+                    return $db->quoted($record);
+                }, $records)
+            )
         );
     } elseif (isset($args['all'])) {
         $where = '';

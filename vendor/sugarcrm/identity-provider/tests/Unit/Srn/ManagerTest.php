@@ -30,11 +30,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         ];
 
         $srnManager = new Manager($config);
-        $userSrn = $srnManager->createUserSrn('0000000001', 'userId');
+        $userSrn = $srnManager->createUserSrn('1000000001', 'userId');
         $this->assertEquals('cluster', $userSrn->getPartition());
         $this->assertEquals('iam', $userSrn->getService());
         $this->assertEquals('', $userSrn->getRegion());
-        $this->assertEquals('0000000001', $userSrn->getTenantId());
+        $this->assertEquals('1000000001', $userSrn->getTenantId());
         $this->assertEquals(['user', 'userId'], $userSrn->getResource());
     }
 
@@ -49,11 +49,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         ];
 
         $srnManager = new Manager($config);
-        $userSrn = $srnManager->createUserSrn('0000000001', 'userId');
+        $userSrn = $srnManager->createUserSrn('1000000001', 'userId');
         $this->assertEquals('cluster', $userSrn->getPartition());
         $this->assertEquals('iam', $userSrn->getService());
         $this->assertEquals('', $userSrn->getRegion());
-        $this->assertEquals('0000000001', $userSrn->getTenantId());
+        $this->assertEquals('1000000001', $userSrn->getTenantId());
         $this->assertEquals(['user', 'userId'], $userSrn->getResource());
     }
 
@@ -95,22 +95,22 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'crm' => [
-                'srn' => 'srn:dev:iam:na:0000000001:app:crm:bd0f3e90-9570-47c9-bb11-6233225ee099',
+                'srn' => 'srn:dev:iam:na:1000000001:app:crm:bd0f3e90-9570-47c9-bb11-6233225ee099',
                 'isWeb' => false,
                 'isCrm' => true,
             ],
             'web' => [
-                'srn' => 'srn:dev:iam:na:0000000002:app:web:f7cf6d39-f557-4feb-b088-e0eb3fb55af8',
+                'srn' => 'srn:dev:iam:na:1000000002:app:web:f7cf6d39-f557-4feb-b088-e0eb3fb55af8',
                 'isWeb' => true,
                 'isCrm' => false,
             ],
             'native' => [
-                'srn' => 'srn:dev:iam:na:0000000002:app:native:f7cf6d39-f557-4b-b088-e0eb3fb55af8',
+                'srn' => 'srn:dev:iam:na:1000000002:app:native:f7cf6d39-f557-4b-b088-e0eb3fb55af8',
                 'isWeb' => false,
                 'isCrm' => false,
             ],
             'sa' => [
-                'srn' => 'srn:dev:iam:na:0000000002:sa:f7cf6d39-f557-4b-b088-e0eb3fb55af8',
+                'srn' => 'srn:dev:iam:na:1000000002:sa:f7cf6d39-f557-4b-b088-e0eb3fb55af8',
                 'isWeb' => false,
                 'isCrm' => false,
             ],

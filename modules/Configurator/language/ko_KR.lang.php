@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => '이미지의 가로세로비는 반드시 1:1 과 10:1 사이여야 합니다. 이미지는 크기가 조정됩니다.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => '이미지의 가로세로비는 반드시 3:1 과 20:1 사이여야 합니다. 이 비율로 새 파일을 전송합니다.',
     'ERR_ALERT_FILE_UPLOAD' => '이미지 전송중 오류',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => '이미지를 위한 경로를 생성할 수 없음',
     'LBL_LOGGER'=>'접속자 설정',
 	'LBL_LOGGER_FILENAME'=>'파일명 일지',
-	'LBL_LOGGER_FILE_EXTENSION'=>'확장',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'최대 접속 크기',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'날짜형식 초기설정',
 	'LBL_LOGGER_LOG_LEVEL'=>'접속 단계',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => '코멘트 로그 설정',
     'LBL_COMMENT_LOG_MAX_CHARS' => '코멘트 항목마다 표시할 최대 글자 수',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

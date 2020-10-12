@@ -48,7 +48,9 @@ class RevokeAccessTokensService
      */
     public function revokeAccessTokens(TokenInterface $token)
     {
-        $this->logger->info('Sending revoke tokens {user_srn} of tenant {tid_srn}', [
+        $userName = $token->getUsername();
+        $this->logger->info('Sending revoke tokens for user {user_name} with SRN {user_srn} of tenant {tid_srn}', [
+            'user_name' => $userName,
             'user_srn' => $token->getAttribute('srn'),
             'tid_srn' => $token->getAttribute('tenantSrn'),
             'tags' => ['IdM.revoke.token'],
@@ -60,7 +62,8 @@ class RevokeAccessTokensService
         $isValid = $status && $status->code === \GRPC\CALL_OK;
         $revokedTokens = $isValid && $response->getCode() === Rpc\Code::OK;
         if (!$revokedTokens) {
-            $this->logger->warning('Incorrect response by revoke tokens', [
+            $this->logger->warning('Incorrect response by revoke tokens for user {user_name} with SRN {user_srn}', [
+                'user_name' => $userName,
                 'user_srn' => $token->getAttribute('srn'),
                 'tid' => $token->getAttribute('tenantSrn'),
                 'response' => $response,

@@ -56,6 +56,16 @@ class MassUpdate
         $this->idmConfig =  new IdmConfig(\SugarConfig::getInstance());
     }
 
+    /**
+     * Restore the activity stream behaviour
+     *
+     * @access public
+     */
+    public function __destruct()
+    {
+        Activity::restoreToPreviousState();
+    }
+
 	/**
 	  * set the sugar bean to its internal member
 	  * @param sugar bean reference
@@ -540,7 +550,9 @@ class MassUpdate
 		} else if($this->sugarbean->object_name == 'InboundEmail'){
 			$this->sugarbean->field_defs['status']['type'] = 'enum';
 			$this->sugarbean->field_defs['status']['options'] = 'user_status_dom';
-		}
+        } elseif ($this->sugarbean->object_name == 'User') {
+            $this->sugarbean->field_defs['license_type']['type'] = 'enum';
+        }
 
 		//These fields should never appear on mass update form
 		static $banned = array('date_modified'=>1, 'date_entered'=>1, 'created_by'=>1, 'modified_user_id'=>1, 'deleted'=>1,'modified_by_name'=>1,);
@@ -559,6 +571,12 @@ class MassUpdate
 
             if ($this->sugarbean->object_name == 'User' && $field['name'] == 'is_admin') {
                 // already have 'User Type'
+                continue;
+            }
+            if ($this->idmConfig->isIDMModeEnabled()
+                && $this->sugarbean->object_name == 'User'
+                && $field['name'] == 'UserType') {
+                // Explicitly disabled for IDM-mode
                 continue;
             }
 			 if(!isset($banned[$field['name']]) && (!isset($field['massupdate']) || !empty($field['massupdate'])))
@@ -614,9 +632,28 @@ class MassUpdate
 						case "bool": $even = !$even; $newhtml .= $this->addBool($displayname,  $field["name"]); break;
 						case "enum":
 						case "multienum":
-							if(!empty($field['isMultiSelect']))
-							{
-								$even = !$even; $newhtml .= $this->addStatusMulti($displayname,  $field["name"], translate($field["options"])); break;
+                            if (!empty($field['isMultiSelect'])) {
+                                if (!empty($field['function'])) {
+                                    $functionValue = getFunctionValue(
+                                        $field['function_bean'] ?? null,
+                                        $field['function'],
+                                        array($this->sugarbean, $field['name'], '', 'MassUpdate')
+                                    );
+                                    $field['options'] = $functionValue;
+                                }
+
+                                // translate the value
+                                if (is_string($field['options'])) {
+                                    $translatedOptions = translate($field['options']);
+                                } else {
+                                    foreach ($field['options'] as $key => $value) {
+                                        $translatedOptions[$key] = translate($value);
+                                    }
+                                }
+                                $even = !$even;
+                                $showNullOption = !(isset($field['showNullOption']) && empty($field['showNullOption']));
+                                $newhtml .= $this->addStatusMulti($displayname, $field['name'], $translatedOptions, $showNullOption);
+                                break;
 							}else if(!empty($field['options'])) {
 								$even = !$even; $newhtml .= $this->addStatus($displayname,  $field["name"], translate($field["options"])); break;
 							}else if(!empty($field['function'])){
@@ -1173,9 +1210,17 @@ EOQ;
 		global $app_strings, $app_list_strings;
 		return $this->addStatus($displayname, $varname, $app_list_strings['checkbox_dom']);
 	}
-	function addStatusMulti($displayname, $varname, $options){
-		global $app_strings, $app_list_strings;
 
+    /**
+     * display selection dropdown
+     * @param string $displayname
+     * @param string $varname
+     * @param array $options
+     * @param bool $showNullOption, option to show empty option
+     * @return string
+     */
+    public function addStatusMulti($displayname, $varname, $options, $showNullOption = true)
+    {
 		if(!isset($options['']) && !isset($options['0'])){
 		   $new_options = array();
 		   $new_options[''] = '';
@@ -1184,7 +1229,7 @@ EOQ;
 		   }
 		   $options = $new_options;
 		}
-		$options = get_select_options_with_id_separate_key($options, $options, '', true);;
+        $options = get_select_options_with_id_separate_key($options, $options, '', $showNullOption);
 
 		// cn: added "mass_" to the id tag to differentiate from the status id in StoreQuery
 		$html = '<td scope="row" width="15%">'.$displayname.'</td>

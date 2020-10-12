@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Datum gewijzigd',
     'LBL_DELETED' => 'Verwijderd',
     'LBL_REVENUELINEITEMS' => 'Opportunityregels',
+    'LBL_ENTRY_SOURCE' => 'Bron notitie',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

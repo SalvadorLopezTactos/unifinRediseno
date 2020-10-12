@@ -92,7 +92,7 @@ class TemplateMultiEnum extends TemplateEnum{
 			// turn off error reporting in case we are unpacking a value that hasn't been packed...
 			// this is kludgy, but unserialize doesn't throw exceptions correctly
             if (strpos($this->ext4, 'a:') === 0) {
-			    $unpacked = @unserialize ( $this->ext4 ) ;
+                $unpacked = @unserialize($this->ext4, ['allowed_classes' => false]);
 			} else {
 			    $unpacked = false;
 			}

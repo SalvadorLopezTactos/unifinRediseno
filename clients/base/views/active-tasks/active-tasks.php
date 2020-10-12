@@ -57,6 +57,7 @@ $viewdefs['base']['view']['active-tasks'] = array(
                         'label' => 'LBL_CREATE_TASK',
                         'acl_action' => 'create',
                         'acl_module' => 'Tasks',
+                        'name' => 'create_task',
                     ),
                 ),
             ),

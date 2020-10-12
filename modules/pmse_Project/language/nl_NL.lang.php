@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Doel Module',
+  'LBL_PRJ_RUN_ORDER' => 'Volgorde uitvoering',
   'LBL_PMSE_BUTTON_SAVE' => 'Opslaan',
   'LBL_PMSE_BUTTON_CANCEL' => 'Annuleren',
   'LBL_PMSE_BUTTON_YES' => 'Ja',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'De proces-definitie is geïmporteerd maar bevat een of meer zakelijke regelacties waarvoor er geen bedrijfsregels zijn geselecteerd.',
     'LBL_BPM_IMPORT_SELECT' => 'Deze procesdefinitie bevat de volgende bedrijfsregels en e-mailsjablonen. '
         . 'Selecteer de onderdelen die u wilt importeren.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Zakelijke regels',
     'LBL_EMAIL_TEMPLATES' => 'E-mailsjablonen',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Supervisor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Aangemaakt door Gebruiker',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Laatst gewijzigd door gebruiker',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mailadres systeem',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Zakelijke regel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Gebruiker toewijzen',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '"Toegewezen aan" van record bijwerken',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Gerelateerd record toevoegen',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Gerelateerde Module',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'De naam van de activiteit is leeg.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'De naam "%s" bestaat reeds in de vorm van de familie.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dagen',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'uren',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minuten',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'kantoortijden',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Zakencentrum',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Van doelmodule',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Van ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Module',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'String, nummer en boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Nummer',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Waarde',

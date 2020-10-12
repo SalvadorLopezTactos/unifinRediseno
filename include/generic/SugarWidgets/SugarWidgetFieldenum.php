@@ -12,48 +12,125 @@
 
 class SugarWidgetFieldEnum extends SugarWidgetReportField
 {
-    public function queryFilterEmpty($layout_def)
+    /**
+     * Create a partial SQL query to do an is-empty query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do an "is empty" filter.
+     */
+    public function queryFilterEmpty($layoutDef)
     {
-        $column = $this->_get_column_select($layout_def);
+        // For empty queries, important to ifnull because LENGTH(NULL) is NULL, not 0
+        // we cannot use indices on this filter either way, so the performance impact is negligible
+        $column = $this->_get_column_select($layoutDef, true);
         return "(coalesce(" . $this->reporter->db->convert($column, "length") . ",0) = 0 OR $column = '^^')";
     }
 
-    public function queryFilterNot_Empty($layout_def)
+    /**
+     * Create a partial SQL query to do a not-empty query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do an "is not empty" filter.
+     */
+    public function queryFilterNot_Empty($layoutDef)
     {
-        $column = $this->_get_column_select($layout_def);
+        // For not-empty queries, important to ifnull because LENGTH(NULL) is NULL, not 0
+        // we cannot use indices on this filter either way, so the performance impact is negligible
+        $column = $this->_get_column_select($layoutDef, true);
         return "(coalesce(" . $this->reporter->db->convert($column, "length") . ",0) > 0 AND $column != '^^' )\n";
     }
 
-	public function queryFilteris($layout_def) {
-        $input_name0 = $this->getInputValue($layout_def);
-		return $this->_get_column_select($layout_def)." = ".$this->reporter->db->quoted($input_name0)."\n";
+    /**
+     * Create a partial SQL query to do an equal query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do an "is equal to" filter.
+     */
+    public function queryFilteris($layoutDef)
+    {
+        $input_name0 = $this->getInputValue($layoutDef);
+        return $this->_get_column_select($layoutDef, false) . ' = ' . $this->reporter->db->quoted($input_name0) . "\n";
 	}
 
-	public function queryFilteris_not($layout_def) {
-        $input_name0 = $this->reporter->db->quoted($this->getInputValue($layout_def));
-        $field_name = $this->_get_column_select($layout_def);
-        return "{$field_name} <> {$input_name0} OR ({$field_name} IS NULL AND {$input_name0} IS NOT NULL)";
+    /**
+     * Create a partial SQL query to do a not-equal query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do a "not equal" filter.
+     */
+    public function queryFilteris_not($layoutDef)
+    {
+        $inputName0 = $this->reporter->db->quoted($this->getInputValue($layoutDef));
+        $fieldName = $this->_get_column_select($layoutDef, false);
+        $nullPart = $this->reporter->db->getIsNullSQL($fieldName);
+        $notNullPart = $this->reporter->db->getIsNotNullSQL($inputName0);
+        return "{$fieldName} <> {$inputName0} OR ({$nullPart} AND {$notNullPart})";
 	}
 
-	public function queryFilterone_of($layout_def) {
+    /**
+     * Create a partial SQL query to do an IN query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do an "is one of" filter.
+     */
+    public function queryFilterone_of($layoutDef)
+    {
 		$arr = array ();
-		foreach ($layout_def['input_name0'] as $value)
-        {
+        foreach ($layoutDef['input_name0'] as $value) {
             $arr[] = $this->reporter->db->quoted($value);
 		}
-		$str = implode(",", $arr);
-		return $this->_get_column_select($layout_def)." IN (".$str.")\n";
+        $str = implode(',', $arr);
+
+        // suppress IFNULL to allow use of database indices over full table scans
+        // note that filters of the type "is one of <blank>" are not possible
+        return $this->_get_column_select($layoutDef, false) . ' IN (' . $str . ")\n";
 	}
 
-	public function queryFilternot_one_of($layout_def) {
-		$arr = array ();
-		foreach ($layout_def['input_name0'] as $value)
-        {
+    /**
+     * Create a partial SQL query to do a NOT IN query in a WHERE clause.
+     *
+     * @param array $layoutDef Field definition from the report.
+     * @return string Partial SQL query to do an "is not one of" filter.
+     */
+    public function queryFilternot_one_of($layoutDef)
+    {
+        $arr = array();
+        foreach ($layoutDef['input_name0'] as $value) {
             $arr[] = $this->reporter->db->quoted($value);
 		}
-		$str = implode(",", $arr);
-		return $this->_get_column_select($layout_def)." NOT IN (".$str.")\n";
+        $str = implode(',', $arr);
+
+        $fieldName = $this->_get_column_select($layoutDef, false);
+        $notInPart = $fieldName . ' NOT IN (' . $str . ')';
+
+        // note, "not one of (null)" is not an option
+        $nullPart = $this->reporter->db->getIsNullSQL($fieldName);
+        return $notInPart . ' OR ' . $nullPart . "\n";
 	}
+
+    /**
+     * Retrieves this column for use in a select statement.
+     *
+     * @param array $layoutDef Layout definition.
+     * @param bool $shouldIfNull If true, wrap return value in IFNULL.
+     *   Defaults to true; set to false if needed to enable database indices.
+     * @return string|null Partial SQL query for select statement.
+     */
+    // @codingStandardsIgnoreStart
+    public function _get_column_select($layoutDef, bool $shouldIfNull = true)
+    {
+    // @codingStandardsIgnoreEnd
+        // NULL and '' are displayed as None at least for enum fields
+        $alias = parent::_get_column_select($layoutDef);
+        $columnSelect = $alias;
+
+        if ($shouldIfNull) {
+            $db = $this->reporter->db;
+            $columnSelect = $db->convert($alias, 'IFNULL', array($db->emptyValue('enum')));
+        }
+
+        return $columnSelect;
+    }
 
     function displayList($layout_def)
     {

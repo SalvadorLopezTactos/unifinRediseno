@@ -101,7 +101,7 @@ $mod_strings = array (
 //DROP DOWN EDITOR
 'LBL_DD_DISPALYVALUE'=>'表示する値',
 'LBL_DD_DATABASEVALUE'=>'データベースの値',
-'LBL_DD_ALL'=>'すべての',
+'LBL_DD_ALL'=>'すべて',
 
 //BUTTONS
 'LBL_BTN_SAVE'=>'保存',

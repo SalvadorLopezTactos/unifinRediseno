@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID หลัก',
     'LBL_READ' => 'อ่านแล้ว',
     'LBL_UNREAD' => 'ยังไม่ได้อ่าน',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'คุณถูกพูดถึง',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'คุณถูกพูดถึง',
 );

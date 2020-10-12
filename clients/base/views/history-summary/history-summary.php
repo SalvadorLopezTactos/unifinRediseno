@@ -80,14 +80,6 @@ $viewdefs['base']['view']['history-summary'] = array(
                     'default' => true,
                 ),
                 array(
-                    'name' => 'related_contact',
-                    'label' => 'LBL_RELATED_CONTACT',
-                    'enabled' => true,
-                    'default' => true,
-                    'type' => 'related-contact',
-                    'link' => true
-                ),
-                array(
                     'name' => 'date_entered',
                     'label' => 'LBL_LIST_DATE_ENTERED',
                     'type' => 'datetimecombo',

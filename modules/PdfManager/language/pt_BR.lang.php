@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Pré-Visualização',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'AVISO: Se você mudar o módulo primário, todos os campos já inseridos no modelo precisarão ser removidos.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Aqui está o campo que você solicitou (você pode alterar este texto)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Cotação',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Este modelo é utilizado para imprimir uma Cotação em PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'cotação',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Cotação (com serviços)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Este modelo é usado para imprimir uma Cotação, incluindo informações do serviço, em PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'cotaçãoserviço',
+
   'LBL_TPL_INVOICE_NAME' => 'Fatura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Este modelo é usado para imprimir uma fatura em PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'fatura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Fatura (com serviços)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Este modelo é usado para imprimir uma fatura, incluindo informações do serviço, em PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'faturaserviço',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Número da cotação:',
   'LBL_TPL_SALES_PERSON' => 'Vendedor:',
   'LBL_TPL_VALID_UNTIL' => 'Válido até:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Número da peça',
   'LBL_TPL_PRODUCT' => 'Item de Linha de Cotação',
   'LBL_TPL_RLI' => 'Itens da linha de receita',
+  'LBL_TPL_DURATION' => 'Duração',
+  'LBL_TPL_DURATION_STARTS' => 'Início:',
+  'LBL_TPL_DURATION_ENDS' => 'Fim:',
   'LBL_TPL_LIST_PRICE' => 'Preço de tabela',
   'LBL_TPL_UNIT_PRICE' => 'Preço unitário',
   'LBL_TPL_EXT_PRICE' => 'Preço externo',

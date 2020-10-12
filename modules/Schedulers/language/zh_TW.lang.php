@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '發佈經核准的文章和過期KB文章。',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 已排程工作',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '重建非規範化團隊安全性數據',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => '活動流清除器',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '間隔：',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> '執行電子郵件提醒傳送',
 'LBL_CLEANJOBQUEUE' => '清理工作佇列',
 'LBL_CLEANOLDRECORDLISTS' => '清理舊記錄清單',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => '活動流清除器',
 'LBL_PMSEENGINECRON' => 'SugarBPM排程器',
 );
 

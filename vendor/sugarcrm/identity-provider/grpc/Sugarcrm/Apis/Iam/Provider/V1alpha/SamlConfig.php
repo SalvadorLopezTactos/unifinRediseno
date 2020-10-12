@@ -92,44 +92,9 @@ class SamlConfig extends \Google\Protobuf\Internal\Message
      */
     private $sign_logout_response = false;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $idp_sso_url
-     *           IDP single sign on url (Login URL)
-     *     @type string $idp_slo_url
-     *           IDP single log out URL
-     *     @type string $idp_entity_id
-     *           Identifier of the IdP entity, should be a valid URI.
-     *     @type string $sp_entity_id
-     *           Identifier of the Service Provider entity should be a valid URI
-     *     @type string $x509_cert
-     *           X509 PEM-encoded certificate
-     *     @type bool $provision_user
-     *           If the authenticated user does not exist one will be created using the
-     *           bind attribute as `User.sub_id`.
-     *     @type bool $same_window
-     *           This option will load SAML login screen in the same window to avoid
-     *           pop-up blocking.
-     *     @type string $request_signing_pkey
-     *           PEM-encoded private key to be used for AuthN/Logout request signing.
-     *     @type string $request_signing_cert
-     *           PEM-encoded X509 certificate to be used for AuthN/Logout request signing.
-     *     @type int $request_signing_method
-     *     @type bool $sign_authn_request
-     *           Sign AuthN request
-     *     @type bool $sign_logout_request
-     *           Sign logout request
-     *     @type bool $sign_logout_response
-     *           Sign logout response
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

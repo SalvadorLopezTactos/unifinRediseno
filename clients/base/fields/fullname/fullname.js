@@ -161,5 +161,10 @@
             this.def.link = _.isUndefined(this.def.link) ? true : this.def.link;
         }
         this._super('_render');
+
+        // set max width if this field is in headerpane
+        if (this.$el.parents('.headerpane').length > 0 && _.isFunction(this.view.adjustHeaderpaneFields)) {
+            this.view.adjustHeaderpaneFields();
+        }
     }
 })

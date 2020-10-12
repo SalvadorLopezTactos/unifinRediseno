@@ -4,13 +4,36 @@
 
 namespace Sugarcrm\Apis\Iam\Tenant\V1alpha;
 
-if (false) {
+/**
+ * Indicates if the tenant is active or not
+ *
+ * Protobuf enum <code>Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant\Status</code>
+ */
+class Tenant_Status
+{
     /**
-     * This class is deprecated. Use Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant\Status instead.
-     * @deprecated
+     * Generated from protobuf enum <code>ACTIVE = 0;</code>
      */
-    class Tenant_Status {}
+    const ACTIVE = 0;
+    /**
+     * Generated from protobuf enum <code>INACTIVE = 1;</code>
+     */
+    const INACTIVE = 1;
+    /**
+     * Generated from protobuf enum <code>SUSPENDED = 2;</code>
+     */
+    const SUSPENDED = 2;
+    /**
+     * Generated from protobuf enum <code>PROVISIONING = 3;</code>
+     */
+    const PROVISIONING = 3;
+    /**
+     * Generated from protobuf enum <code>DEPROVISION = 4;</code>
+     */
+    const DEPROVISION = 4;
+    /**
+     * Generated from protobuf enum <code>DEPROVISIONED = 5;</code>
+     */
+    const DEPROVISIONED = 5;
 }
-class_exists(Tenant\Status::class);
-@trigger_error('Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant_Status is deprecated and will be removed in the next major release. Use Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant\Status instead', E_USER_DEPRECATED);
 

@@ -476,7 +476,7 @@ $script_to_call ='';
     if (!empty($focus->id)){
         $script_to_call = "link_navs(1,4);";
         if(isset($_REQUEST['direct_step']) and !empty($_REQUEST['direct_step'])){
-            $script_to_call .='   direct('.$_REQUEST['direct_step'].');';
+            $script_to_call .='   direct('. intval($_REQUEST['direct_step']) .');';
         }
     }
     $ss->assign("HILITE_ALL", $script_to_call);

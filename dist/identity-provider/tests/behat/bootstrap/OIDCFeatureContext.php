@@ -127,14 +127,23 @@ class OIDCFeatureContext extends FeatureContext
     /**
      * Verifies IdP login page is opened
      *
+     * @Then I should see IdP tenant page
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function iShouldSeeIdpTenantPage(): void
+    {
+        $this->assertSession()->elementExists('css', '#tenant_hint');
+    }
+
+    /**
+     * Verifies IdP login page is opened
+     *
      * @Then I should see IdP login page
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function iShouldSeeIdpLoginPage()
     {
-        $this->assertSession()->elementExists('css', "#submit_section");
-        $this->assertSession()->elementExists('css', "#username");
-        $this->assertSession()->elementExists('css', "#password");
+        $this->assertSession()->elementExists('css', "#loginFormBox");
     }
 
     /**
@@ -161,6 +170,13 @@ class OIDCFeatureContext extends FeatureContext
     public function iDoIdPLogin($username, $password)
     {
         $page = $this->getSession()->getPage();
+        // If tenant is configured with SAML provider along with Local, SAML form is always shown the first.
+        // We need to switch to local/LDAP login-form
+        $simpleLoginFormButton = $page->findById('show_login_form_btn');
+        if ($simpleLoginFormButton && $simpleLoginFormButton->isVisible()) {
+            $simpleLoginFormButton->click();
+            $this->waitForElement('#username');
+        }
         if (!empty($username)) {
             $page->fillField('user_name', $username);
         }
@@ -215,6 +231,39 @@ class OIDCFeatureContext extends FeatureContext
                 default:
                     throw new \RuntimeException("Unsupported method");
             }
+            $this->responseBody = $response->getBody();
+            return $this->responseBody;
+        } else {
+            throw new \RuntimeException("Access token is empty");
+        }
+    }
+
+    /**
+     * Finds out what is the ID of the current user, then uses that ID to get full user information.
+     * rest/me endpoint simply does not return all Users fields.
+     *
+     * @param string $restVersion
+     *
+     * @And /^I use access_token to get my full user information for version "([^"]*)"$/
+     * @Then /^I use access_token to get my full user information for version "([^"]*)"$/
+     * @throws \RuntimeException
+     *
+     * @return string
+     */
+    public function iUseAccessTokenToGetOwnUserInformation($restVersion)
+    {
+        if (!empty($this->accessToken)) {
+            $baseUrl = rtrim($this->getMinkParameter('base_url'), '/');
+            $client = new GuzzleHttp\Client();
+            $meResource = sprintf('/rest/%s/me', $restVersion);
+            $meUrl = $baseUrl . $meResource;
+            $response = $client->get($meUrl, ['headers' => ['OAuth-Token' => $this->accessToken]]);
+            $userId = json_decode((string) $response->getBody(), true)['current_user']['id'] ?? '';
+            if (!$userId) {
+                throw new \RuntimeException('Failed to find user ID in REST %s response', $meResource);
+            }
+            $userUrl = $baseUrl . sprintf('/rest/%s/Users/%s?erased_fields=true', $restVersion, $userId);
+            $response = $client->get($userUrl, ['headers' => ['OAuth-Token' => $this->accessToken]]);
             $this->responseBody = $response->getBody();
             return $this->responseBody;
         } else {
@@ -278,14 +327,7 @@ class OIDCFeatureContext extends FeatureContext
      */
     public function iVerifyResponseContainsCorrectValue($field, $value)
     {
-        $list = json_decode((string) $this->responseBody, true);
-        $fieldValue = $list['current_user'];
-        foreach (explode('.', $field) as $key) {
-            if (!array_key_exists($key, $fieldValue)) {
-                throw new \RuntimeException(sprintf('Field "current_user.%s" not found', $field));
-            }
-            $fieldValue = $fieldValue[$key];
-        }
+        $fieldValue = $this->getNestedFieldValueFromResponse($field);
         assertEquals($value, $fieldValue);
     }
 
@@ -300,14 +342,7 @@ class OIDCFeatureContext extends FeatureContext
      */
     public function iVerifyResponseContainsCorrectlyMatchingRegexpValue($field, $regexpValue)
     {
-        $list = json_decode((string) $this->responseBody, true);
-        $fieldValue = $list['current_user'];
-        foreach (explode('.', $field) as $key) {
-            if (!array_key_exists($key, $fieldValue)) {
-                throw new \RuntimeException(sprintf('Field "current_user.%s" not found', $field));
-            }
-            $fieldValue = $fieldValue[$key];
-        }
+        $fieldValue = $this->getNestedFieldValueFromResponse($field);
         assertRegExp($regexpValue, $fieldValue);
     }
 
@@ -360,5 +395,24 @@ class OIDCFeatureContext extends FeatureContext
             $defaultKey = array_keys($this->oidcClients)[0];
         }
         $this->iUseClient($defaultKey);
+    }
+
+    /**
+     * Helper for extracting possibly nested dot-separated value from JSON response.
+     * E.g.: `current_user.address.city`, or `title`
+     *
+     * @param $field
+     * @return mixed
+     */
+    private function getNestedFieldValueFromResponse($field)
+    {
+        $fieldValue = json_decode((string) $this->responseBody, true);
+        foreach (explode('.', $field) as $key) {
+            if (!array_key_exists($key, $fieldValue)) {
+                throw new \RuntimeException(sprintf('Field "%s" not found', $field));
+            }
+            $fieldValue = $fieldValue[$key];
+        }
+        return $fieldValue;
     }
 }

@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'The aspect ratio of the image should be between 1:1 and 10:1.  The image will be resized.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'The aspect ratio of the image must be between 3:1 and 20:1.  Upload a new file with this ratio.',
     'ERR_ALERT_FILE_UPLOAD' => 'Error during the upload of the image.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Unable to create directory for images',
     'LBL_LOGGER'=>'Logger Settings',
 	'LBL_LOGGER_FILENAME'=>'Log File Name',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Extension',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximum log size',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Default date format',
 	'LBL_LOGGER_LOG_LEVEL'=>'Log Level',
@@ -429,6 +429,9 @@ To configure additional system settings, click <a href="index.php?module=Adminis
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* The Reports module is not available for the browser-based mobile view.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maximum Length should be greater than Minimum Length',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimum Length should be positive value',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maximum Length should be positive value',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL can not be empty',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificate can not be empty',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML Entity ID cannot be empty',
@@ -458,6 +461,10 @@ To configure additional system settings, click <a href="index.php?module=Adminis
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Comment Log Settings',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximum characters to show per comment entry',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

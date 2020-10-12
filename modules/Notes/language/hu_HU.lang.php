@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Módosítás dátuma',
     'LBL_DELETED' => 'Törölve',
     'LBL_REVENUELINEITEMS' => 'Bevételi sor tételek',
+    'LBL_ENTRY_SOURCE' => 'Megjegyzés forrása',
+    'LBL_SOURCE_EXTERNAL' => 'Külső',
+    'LBL_SOURCE_INTERNAL' => 'Belső',
 
     // Help Text
     // List View Help Text

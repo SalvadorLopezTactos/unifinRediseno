@@ -185,7 +185,12 @@ class LdapAuthenticationProvider extends LdapBindAuthenticationProvider
         $identityMap = $this->mapper->mapIdentity($token);
         $user->setAttribute('identityField', $identityMap['field']);
         $user->setAttribute('identityValue', $identityMap['value']);
-        $user->setAttribute('attributes', $this->mapper->map($entry));
+
+        $mapped = $this->mapper->map($entry);
+        $user->setAttribute('attributes', $mapped['attributes'] ?? []);
+        if (array_key_exists('custom_attributes', $mapped)) {
+            $user->setAttribute('custom_attributes', $mapped['custom_attributes']);
+        }
     }
 
     /**

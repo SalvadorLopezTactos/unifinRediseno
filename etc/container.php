@@ -219,9 +219,16 @@ return new Container([
     },
     RedisCache::class => function (ContainerInterface $container) : RedisCache {
         $config = $container->get(SugarConfig::class)->get('external_cache.redis');
+        $persistentId = $container->get(SugarConfig::class)->get('unique_key');
 
         try {
-            return new RedisCache($config['host'] ?? null, $config['port'] ?? null);
+            return new RedisCache(
+                $config['host'] ?? '127.0.0.1',
+                $config['port'] ?? 6379,
+                $config['persistent'] ?? false,
+                $config['timeout'] ?? 0,
+                $persistentId ?? ''
+            );
         } catch (CacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
@@ -241,6 +248,9 @@ return new Container([
         } catch (CacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
+    },
+    \TimeDate::class => function (): \TimeDate {
+        return \TimeDate::getInstance();
     },
     Validator::class => function () {
         return Validator::getService();

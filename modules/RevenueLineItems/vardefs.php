@@ -63,6 +63,12 @@ $dictionary['RevenueLineItem'] = array(
                 'manufacturer_name' => 'manufacturer_name',
                 'type_id' => 'type_id',
                 'type_name' => 'type_name',
+                'service_start_date' => 'service_start_date',
+                'service_end_date' => 'service_end_date',
+                'service_duration_value' => 'service_duration_value',
+                'service_duration_unit' => 'service_duration_unit',
+                'renewable' => 'renewable',
+                'service' => 'service',
             ),
         ),
         'account_id' => array(
@@ -198,19 +204,6 @@ $dictionary['RevenueLineItem'] = array(
             'len' => '50',
             'comment' => 'Manufacturer part number'
         ),
-        'vendor_part_num' => array(
-            'name' => 'vendor_part_num',
-            'vname' => 'LBL_VENDOR_PART_NUM',
-            'type' => 'varchar',
-            'len' => '50',
-            'comment' => 'Vendor part number'
-        ),
-        'date_purchased' => array(
-            'name' => 'date_purchased',
-            'vname' => 'LBL_DATE_PURCHASED',
-            'type' => 'date',
-            'comment' => 'Date product purchased'
-        ),
         'cost_price' => array(
             'name' => 'cost_price',
             'vname' => 'LBL_COST_PRICE',
@@ -333,18 +326,6 @@ $dictionary['RevenueLineItem'] = array(
             'calculated' => true,
             'enforced' => true,
         ),
-        'list_price' => array(
-            'name' => 'list_price',
-            'vname' => 'LBL_LIST_PRICE',
-            'type' => 'currency',
-            'len' => '26,6',
-            'audited' => true,
-            'comment' => 'List price of product ("List" in Quote)',
-            'related_fields' => array(
-                'currency_id',
-                'base_rate'
-            )
-        ),
         'cost_usdollar' => array(
             'name' => 'cost_usdollar',
             'vname' => 'LBL_COST_USDOLLAR',
@@ -429,111 +410,6 @@ $dictionary['RevenueLineItem'] = array(
             'len' => 100,
             'comment' => 'Tax classification (ex: Taxable, Non-taxable)'
         ),
-        'website' => array(
-            'name' => 'website',
-            'vname' => 'LBL_URL',
-            'type' => 'varchar',
-            'len' => '255',
-            'comment' => 'Product URL'
-        ),
-        'weight' =>  array(
-            'name' => 'weight',
-            'vname' => 'LBL_WEIGHT',
-            'type' => 'decimal',
-            'len' => '12,2',
-            'precision' => 2,
-            'comment' => 'Weight of the product'
-        ),
-        'quantity' => array(
-            'name' => 'quantity',
-            'vname' => 'LBL_QUANTITY',
-            'type' => 'decimal',
-            'len' => 12,
-            'precision' => 2,
-            'validation' => array('type' => 'range', 'greaterthan' => -1),
-            'comment' => 'Quantity in use',
-            'default' => 1.0
-        ),
-        'support_name' => array(
-            'name' => 'support_name',
-            'vname' => 'LBL_SUPPORT_NAME',
-            'type' => 'varchar',
-            'len' => '50',
-            'comment' => 'Name of product for support purposes'
-        ),
-        'support_description' => array(
-            'name' => 'support_description',
-            'vname' => 'LBL_SUPPORT_DESCRIPTION',
-            'type' => 'varchar',
-            'len' => '255',
-            'comment' => 'Description of product for support purposes'
-        ),
-        'support_contact' => array(
-            'name' => 'support_contact',
-            'vname' => 'LBL_SUPPORT_CONTACT',
-            'type' => 'varchar',
-            'len' => '50',
-            'comment' => 'Contact for support purposes'
-        ),
-        'support_term' => array(
-            'name' => 'support_term',
-            'vname' => 'LBL_SUPPORT_TERM',
-            'type' => 'varchar',
-            'len' => 100,
-            'comment' => 'Term (length) of support contract'
-        ),
-        'date_support_expires' => array(
-            'name' => 'date_support_expires',
-            'vname' => 'LBL_DATE_SUPPORT_EXPIRES',
-            'type' => 'date',
-            'comment' => 'Support expiration date'
-        ),
-        'date_support_starts' => array(
-            'name' => 'date_support_starts',
-            'vname' => 'LBL_DATE_SUPPORT_STARTS',
-            'type' => 'date',
-            'comment' => 'Support start date'
-        ),
-        'pricing_formula' => array(
-            'name' => 'pricing_formula',
-            'vname' => 'LBL_PRICING_FORMULA',
-            'type' => 'varchar',
-            'len' => 100,
-            'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)'
-        ),
-        'pricing_factor' => array(
-            'name' => 'pricing_factor',
-            'vname' => 'LBL_PRICING_FACTOR',
-            'type' => 'int',
-            'group' => 'pricing_formula',
-            'len' => '4',
-            'comment' => 'Variable pricing factor depending on pricing_formula'
-        ),
-        'serial_number' => array(
-            'name' => 'serial_number',
-            'vname' => 'LBL_SERIAL_NUMBER',
-            'type' => 'varchar',
-            'len' => '50',
-            'comment' => 'Serial number of product in use'
-        ),
-        'asset_number' => array(
-            'name' => 'asset_number',
-            'vname' => 'LBL_ASSET_NUMBER',
-            'type' => 'varchar',
-            'len' => '50',
-            'comment' => 'Asset tag number of product in use'
-        ),
-        'book_value' => array(
-            'name' => 'book_value',
-            'vname' => 'LBL_BOOK_VALUE',
-            'type' => 'currency',
-            'len' => '26,6',
-            'comment' => 'Book value of product in use',
-            'related_fields' => array(
-                'currency_id',
-                'base_rate'
-            )
-        ),
         'book_value_usdollar' => array(
             'name' => 'book_value_usdollar',
             'vname' => 'LBL_BOOK_VALUE_USDOLLAR',
@@ -554,12 +430,6 @@ $dictionary['RevenueLineItem'] = array(
             'formula' => 'ifElse(isNumeric($book_value), currencyDivide($book_value, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'book_value_date' => array(
-            'name' => 'book_value_date',
-            'vname' => 'LBL_BOOK_VALUE_DATE',
-            'type' => 'date',
-            'comment' => 'Date of book value for product in use'
         ),
         'quotes' => array(
             'name' => 'quotes',
@@ -1013,16 +883,46 @@ $dictionary['RevenueLineItem'] = array(
             'name' => 'idx_rli_account_id_del',
             'type' => 'index',
             'fields' => array(
-                'account_id',
                 'deleted',
+                'account_id',
+                'id',
             ),
         ),
         array(
             'name' => 'idx_rli_quote_id_del',
             'type' => 'index',
             'fields' => array(
-                'quote_id',
                 'deleted',
+                'quote_id',
+                'id',
+            ),
+        ),
+        array(
+            'name' => 'idx_rli_name_dm',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'name',
+                'date_modified',
+            ),
+        ),
+        array(
+            'name' => 'idx_rli_del_created_by_pt_id',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'created_by',
+                'product_template_id',
+            ),
+        ),
+        array(
+            'name' => 'idx_accountid_type_ren_dateclosed',
+            'type' => 'index',
+            'fields' => array(
+                'account_id',
+                'product_type',
+                'renewable',
+                'date_closed',
             ),
         ),
     ),
@@ -1152,7 +1052,7 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
-        'currency',
+        'sales_item',
     )
 );
 

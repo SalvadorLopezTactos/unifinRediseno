@@ -26,7 +26,8 @@
             return;
         }
 
-        var contextBro = this.context.parent.getChildContext({module: 'Home'});
+        var contextBro = this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
+            this.context.parent : this.context.parent.getChildContext({module: 'Home'});
         var collection = contextBro.get('collection').clone();
         var pattern = /^(LBL|TPL|NTC|MSG)_(_|[a-zA-Z0-9])*$/;
         collection.remove(self.model, {silent: true});
@@ -53,9 +54,10 @@
      * Navigate the user to the manage dashboards view
      */
     managerClicked: function() {
-        var controllerContext = app.controller.context;
-        var dashboardModule = controllerContext.get('module');
-        var dashboardLayout = controllerContext.get('layout');
+        var ctx = this.context && this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
+            this.context.parent : app.controller.context;
+        var dashboardModule = ctx.get('module');
+        var dashboardLayout = ctx.get('layout');
         app.router.navigate('#Dashboards?moduleName=' + dashboardModule +
             '&viewName=' + dashboardLayout, {trigger: true});
     },

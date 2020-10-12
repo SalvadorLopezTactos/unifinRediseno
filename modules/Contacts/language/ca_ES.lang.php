@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de contactes',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de contactes',
-
+    'LBL_SITE_USER_ID' => 'Hash de site_url i id de contacte',
+    'LBL_COOKIE_CONSENT' => 'Consentiment de cookies',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Consentiment de cookies rebut el',
     'LNK_CONTACT_REPORTS' => 'Informes de contactes',
     'ERR_DELETE_RECORD' => 'Per suprimir el contacte, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_ID' => 'ID del compte:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informació del portal',
     'LBL_PORTAL_NAME' => 'Nom del Portal:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Clau de pas de Portal Fixada:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nom de l&#39;empresa de l&#39;usuari del portal',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ha creat satisfactòriament el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Carrer',
     'LBL_POSTAL_CODE' => 'Codi postal:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Oportunitats',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pressupostos',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Pressupostos (enviats a)',
     'LBL_QUOTES_BILL_TO' => 'Pressupostos (Facturat a)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Elements de línies d&#39;oferta',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Clic aquí per editar el seu perfil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Aquí és on pot establir el seu llenguatge preferit. Això canviarà el llenguatge utilitzat pel Portal de Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Pot tornar al seu Perfil a qualsevol moment utilitzant el menú d&#39;Usuari.',
+    'ERR_PORTAL_NAME_EXISTS' => 'El nom de portal {0} ja existeix. No es permeten noms de portal duplicats. Canviï el nom de portal perquè sigui únic.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principal de la D&B',
@@ -279,4 +284,8 @@ Per crear un {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Informes de contactes',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectius empresarials consentits',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Darrera actualització del consetiment',
+
+    'LBL_ENTRY_SOURCE' => 'Origen del contacte',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

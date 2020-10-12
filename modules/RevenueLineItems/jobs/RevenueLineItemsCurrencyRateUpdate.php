@@ -142,39 +142,45 @@ SQL;
 
             $stages = $this->getClosedStages();
 
-            $queries = array();
+            $queryParams = [];
             // skip closed opps
-            $sql_tpl = "UPDATE opportunities SET
-                            amount = %s * base_rate,
-                            best_case = %s * base_rate,
-                            worst_case = %s * base_rate
-                        WHERE id = %s AND sales_status NOT IN (%s)";
             while ($row = $this->db->fetchrow($results)) {
-                $queries[] = sprintf(
-                    $sql_tpl,
-                    $this->db->quoted($row['likely']),
-                    $this->db->quoted($row['best']),
-                    $this->db->quoted($row['worst']),
-                    $this->db->quoted($row['opp_id']),
-                    implode(",", array_map(function ($stage) {
-                        return $this->db->quoted($stage);
-                    }, $stages))
-                );
+                $queryParams[] = [
+                    $row['likely'],
+                    $row['best'],
+                    $row['worst'],
+                    $row['opp_id'],
+                    $stages,
+                ];
             }
-            if (count($queries) < self::CHUNK_SIZE) {
+            if (count($queryParams) < self::CHUNK_SIZE) {
+                $sql = <<<SQL
+UPDATE opportunities
+SET amount = ? * base_rate,
+    best_case = ? * base_rate,
+    worst_case = ? * base_rate
+WHERE id = ?
+  AND sales_status NOT IN (?)
+SQL;
+
+                $conn = $this->db->getConnection();
                 // do queries in this process
-                foreach ($queries as $query) {
-                    $this->db->query($query);
+                foreach ($queryParams as $params) {
+                    $conn->executeUpdate(
+                        $sql,
+                        $params,
+                        [null, null, null, null, Connection::PARAM_STR_ARRAY]
+                    );
                 }
             } else {
                 // schedule queries to SQLRunner job scheduler
-                $chunks = array_chunk($queries, self::CHUNK_SIZE);
+                $chunks = array_chunk($queryParams, self::CHUNK_SIZE);
                 global $timedate, $current_user;
                 foreach ($chunks as $chunk) {
                     $job = BeanFactory::newBean('SchedulersJobs');
-                    $job->name = "SugarJobSQLRunner: " . $timedate->getNow()->asDb();
-                    $job->target = "class::SugarJobSQLRunner";
-                    $job->data = serialize($chunk);
+                    $job->name = "SugarJobOpportunitiesCurrencyRateBatchUpdate: " . $timedate->getNow()->asDb();
+                    $job->target = "class::SugarJobOpportunitiesCurrencyRateBatchUpdate";
+                    $job->data = json_encode($chunk);
                     $job->retry_count = 0;
                     $job->assigned_user_id = $current_user->id;
                     $jobQueue = new SugarJobQueue();

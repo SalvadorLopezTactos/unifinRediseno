@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => '父代 ID',
     'LBL_READ' => '已讀取',
     'LBL_UNREAD' => '未讀取',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => '有人提起過您',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => '有人提及您',
 );

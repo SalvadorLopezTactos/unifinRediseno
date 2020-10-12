@@ -11,7 +11,6 @@
  */
 
 // For $exemptModules, set the value to the module name is be exempt
-$exemptModules[] = 'ProspectLists';
 $exemptModules[] = 'Reports';
 $exemptModules[] = 'WebLogicHooks';
 $exemptModules[] = 'pmse_Project';

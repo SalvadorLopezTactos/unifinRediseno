@@ -33,23 +33,29 @@ use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\CsrfServiceProvider;
 
 use Sugarcrm\Apis\Iam\App\V1alpha\AppAPIClient;
+use Sugarcrm\Apis\Iam\Consent\V1alpha\ConsentAPIClient;
 use Sugarcrm\Apis\Iam\User\V1alpha\UserAPIClient;
 use Sugarcrm\IdentityProvider\App\Authentication\BearerAuthentication;
 use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\ConfigAdapterFactory;
+use Sugarcrm\IdentityProvider\App\Authentication\CookieService;
 use Sugarcrm\IdentityProvider\App\Authentication\LogoutService;
 use Sugarcrm\IdentityProvider\App\Authentication\OpenId\StandardClaimsService;
+use Sugarcrm\IdentityProvider\App\Authentication\RedirectURLService;
 use Sugarcrm\IdentityProvider\App\Authentication\RevokeAccessTokensService;
 use Sugarcrm\IdentityProvider\App\MarketingExtras\MarketingExtrasService;
 use Sugarcrm\IdentityProvider\App\Provider\BearerAuthenticationProvider;
 use Sugarcrm\IdentityProvider\App\Provider\ConfigAdapterFactoryServiceProvider;
+use Sugarcrm\IdentityProvider\App\Provider\CookieServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\EncoderFactoryProvider;
 use Sugarcrm\IdentityProvider\App\Provider\GrpcServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\MarketingExtrasServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\TranslationServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\UserPasswordCheckerProvider;
 use Sugarcrm\IdentityProvider\App\User\PasswordChecker;
-use Symfony\Component\Translation\Translator;
+use Sugarcrm\IdentityProvider\App\Regions\TenantRegion;
+use Sugarcrm\IdentityProvider\App\Provider\AuditProvider;
 use Sugarcrm\IdentityProvider\App\Provider\LogoutServiceProvider;
+use Sugarcrm\IdentityProvider\App\Provider\RedirectURLServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\RepositoriesProvider;
 use Sugarcrm\IdentityProvider\App\Provider\RevokeAccessTokensServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\JoseServiceProvider;
@@ -57,6 +63,7 @@ use Sugarcrm\IdentityProvider\App\Provider\ListenerProvider;
 use Sugarcrm\IdentityProvider\App\Provider\OAuth2ServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\AuthProviderManagerProvider;
 use Sugarcrm\IdentityProvider\App\Provider\ConfigServiceProvider;
+use Sugarcrm\IdentityProvider\App\Provider\TenantRegionProvider;
 use Sugarcrm\IdentityProvider\App\Provider\SrnManagerServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\UserMappingServiceProvider;
 use Sugarcrm\IdentityProvider\App\Provider\RememberMeServiceProvider;
@@ -65,16 +72,19 @@ use Sugarcrm\IdentityProvider\App\Provider\ConsentRequestProvider;
 use Sugarcrm\IdentityProvider\App\Provider\UsernamePasswordTokenFactoryProvider;
 use Sugarcrm\IdentityProvider\App\Provider\ErrorPageHandlerProvider;
 use Sugarcrm\IdentityProvider\App\Provider\OIDCClaimsServiceProvider;
+use Sugarcrm\IdentityProvider\App\Provider\RegionCheckerProvider;
 use Sugarcrm\IdentityProvider\App\Repository\ConsentRepository;
 use Sugarcrm\IdentityProvider\App\Repository\OneTimeTokenRepository;
 use Sugarcrm\IdentityProvider\App\Repository\TenantRepository;
 use Sugarcrm\IdentityProvider\App\Repository\UserProvidersRepository;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
-
-
-
 use Sugarcrm\IdentityProvider\Srn\Manager;
+use Sugarcrm\IdentityProvider\App\Instrumentation;
+use Sugarcrm\IdentityProvider\App\Regions\RegionChecker;
+
+use Symfony\Component\Translation\Translator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
@@ -82,12 +92,11 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
-use Sugarcrm\IdentityProvider\App\Instrumentation;
 
 class Application extends SilexApplication
 {
     // Cookie or query parameter name
-    const LOCALE_PARAM_NAME = 'locale';
+    const LOCALE_PARAM_NAME = 'lcid';
 
     const ENV_PROD = 'prod';
     const ENV_DEV = 'dev';
@@ -135,6 +144,7 @@ class Application extends SilexApplication
         $this->register(new ConfigServiceProvider(isset($values['configOverride']) ? $values['configOverride'] : []));
 
         $this->register(new TranslationServiceProvider($this['config']['translation'], self::LOCALE_PARAM_NAME));
+        $this->register(new TenantRegionProvider());
 
         $this->register(new MonologServiceProvider(), $this['config']['monolog']);
         $this->extend('monolog', function (Logger $monolog, Application $app) {
@@ -152,10 +162,12 @@ class Application extends SilexApplication
         });
 
         $this->register(new AssetServiceProvider(), [
+            'assets.version' => 'v4',
+            'assets.version_format' => '%s?version=%s',
             'assets.named_packages' => [
-                'css' => ['base_path' => 'css'],
-                'js' => ['base_path' => 'js'],
-                'images' => ['base_path' => 'img'],
+                'css' => ['base_path' => 'css', 'version' => 'v1', 'version_format' => '%s?version=%s'],
+                'js' => ['base_path' => 'js', 'version' => 'v1', 'version_format' => '%s?version=%s'],
+                'images' => ['base_path' => 'img', 'version' => 'v1', 'version_format' => '%s?version=%s'],
             ],
         ]);
 
@@ -173,6 +185,7 @@ class Application extends SilexApplication
         });
 
         $this->register(new ValidatorServiceProvider());
+        $this->register(new RegionCheckerProvider());
 
         $this->register(new DoctrineServiceProvider(), $this['config']['db']);
         $this->register(new RepositoriesProvider());
@@ -223,6 +236,9 @@ class Application extends SilexApplication
         $this->register(new MarketingExtrasServiceProvider());
         $this->register(new RevokeAccessTokensServiceProvider());
         $this->register(new BearerAuthenticationProvider());
+        $this->register(new CookieServiceProvider(self::LOCALE_PARAM_NAME));
+        $this->register(new RedirectURLServiceProvider());
+        $this->register(new AuditProvider());
 
         // bind routes
         $this->mount('', new ControllerProvider());
@@ -481,6 +497,14 @@ class Application extends SilexApplication
     }
 
     /**
+     * @return ConsentAPIClient|null
+     */
+    public function getGrpcConsentApi(): ?ConsentAPIClient
+    {
+        return $this['grpc.consentapi'];
+    }
+
+    /**
      * @return RevokeAccessTokensService|null
      */
     public function getRevokeAccessTokensService(): ?RevokeAccessTokensService
@@ -494,6 +518,14 @@ class Application extends SilexApplication
     public function getLogoutService(): LogoutService
     {
         return $this['logout'];
+    }
+
+    /**
+     * @return RedirectURLService
+     */
+    public function getRedirectURLService(): RedirectURLService
+    {
+        return $this['redirectURLService'];
     }
 
     /**
@@ -534,5 +566,37 @@ class Application extends SilexApplication
     public function getBearerAuthentication(): BearerAuthentication
     {
         return $this['bearerAuthentication'];
+    }
+
+    /**
+     * @return CookieService
+     */
+    public function getCookieService(): CookieService
+    {
+        return $this['cookies'];
+    }
+
+    /**
+     * @return TenantRegion
+     */
+    public function getTenantRegion(): TenantRegion
+    {
+        return $this['TenantRegion'];
+    }
+
+    /**
+     * @return RegionChecker
+     */
+    public function getRegionChecker(): RegionChecker
+    {
+        return $this['RegionChecker'];
+    }
+
+    /**
+     * @return Audit
+     */
+    public function getAudit(): Audit
+    {
+        return $this['audit'];
     }
 }

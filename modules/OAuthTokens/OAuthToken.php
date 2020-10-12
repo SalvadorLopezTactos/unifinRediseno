@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-require_once 'vendor/Zend/Oauth/Provider.php';
+use Doctrine\DBAL\Connection;
 
 /**
  * OAuth token
@@ -227,40 +226,61 @@ class OAuthToken extends SugarBean
      */
     public function cleanupOldUserTokens($limit = 1)
     {
-        global $db;
+        $ids = [];
+        $skip[$this->id] = $this->id;
 
-        $ids = array($db->quote($this->id));
+        $conn = DBManagerFactory::getInstance()->getConnection();
 
-        if ($limit > 1) {
-            // Find request tokens that are under the limit but still not this token
-            $query = "SELECT id FROM oauth_tokens WHERE "
-                . " tstate = " . self::ACCESS
-                . " AND id <> " . $db->quoted($this->id)
-                . " AND platform = " . $db->quoted($this->platform)
-                . " AND assigned_user_id = " . $db->quoted($this->assigned_user_id);
-            if (!empty($this->contact_id)) {
-                $query .= " AND contact_id = " . $db->quoted($this->contact_id);
-            }
-            $query .= " ORDER BY expire_ts DESC";
-            $ret = $db->limitQuery($query, 0, $limit - 1, true);
+        $query = <<<SQL
+SELECT
+	id
+FROM
+	oauth_tokens
+WHERE
+	tstate = ?
+	AND platform = ?
+	AND assigned_user_id = ?
+SQL;
+        $params = [
+            self::ACCESS,
+            $this->platform,
+            $this->assigned_user_id,
+        ];
 
-            while ($row = $db->fetchByAssoc($ret)) {
-                $ids[] = $db->quote($row['id']);
-            }
+        if (!empty($this->contact_id)) {
+            $query .= '
+    AND contact_id = ?';
+            $params[] = $this->contact_id;
         }
 
-        // delete request tokens from this user on this platform that aren't for this user
-        $query = "DELETE FROM oauth_tokens WHERE "
-            ." tstate = ".self::ACCESS
-            ." AND id NOT IN ('".implode("', '",$ids)."') "
-            ." AND platform = '".$db->quote($this->platform)."' "
-            ." AND assigned_user_id = '".$db->quote($this->assigned_user_id)."' ";
+        if ($limit > 1) {
+            $query .= '
+ORDER BY expire_ts DESC';
+        }
+        $stmt = $conn->executeQuery(
+            $query,
+            $params
+        );
 
-            if (!empty($this->contact_id)) {
-                $query .= " AND contact_id = '".$db->quote($this->contact_id)."' ";
+        foreach ($stmt as $row) {
+            if (count($skip) < $limit) {
+                $skip[$row['id']] = $row['id'];
+            } else {
+                $ids[$row['id']] = $row['id'];
             }
-            
-        $db->query($query);
+        }
+        $ids = array_diff($ids, $skip);
+
+        if (!empty($ids)) {
+            $qb = $conn->createQueryBuilder();
+            $qb->delete($this->getTableName())->where(
+                $qb->expr()->in(
+                    'id',
+                    $qb->createPositionalParameter(array_values($ids), Connection::PARAM_STR_ARRAY)
+                )
+            );
+            $qb->execute();
+        }
     }
 
 	/**

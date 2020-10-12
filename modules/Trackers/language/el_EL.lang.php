@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Εμφάνιση Ενεργών Χειριστών',
-		  'ShowLastModifiedRecords' => 'Τελευταίες (10) Τροποποιημένες Εγγραφές',
-		  'ShowTopUser' => 'Καλύτερος Χειριστής',
-		  'ShowMyModuleUsage' => 'Ενότητα Χρήσης Μου',
-		  'ShowMyWeeklyActivities' => 'Εβδομαδιαία Δραστηριότητά Μου',
-		  'ShowTop3ModulesUsed' => 'Καλύτερες (3) Ενότητες Χρήσης Μου',
-		  'ShowLoggedInUserCount' => 'Καταμέτρηση Ενεργών Χειριστών',
-		  'ShowMyCumulativeLoggedInTime' => 'Συνολικός Χρόνος Σύνδεσής Μου (Αυτή την Εβδομάδα)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Συνολικός Χρόνος Σύνδεσης των Χειριστών (Αυτή την Εβδομάδα)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Δράση',
 		  'active_users' => 'Καταμέτρηση Ενεργών Χειριστών',

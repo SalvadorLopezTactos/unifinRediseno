@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-maily: Kontakty',
     'LBL_EMAILS_LEADS_REL' => 'E-maily: Příležitosti',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-maily: Obchodů',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-maily: Poznámky',
     'LBL_EMAILS_PROJECT_REL' => 'E-maily:Projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-maily:Projektový úkol',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Odesílatel:',
     'LBL_REPLY_TO' => 'Odpovědět:',
     'LBL_HTML_BODY' => 'Tělo HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'příjemci',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Zájemci',
     'LBL_MESSAGE_SENT' => 'Zpráva byla odeslána',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Id odpovědi',
     'LBL_TYPE' => 'Typ:',
     'LBL_EMAIL_STATE' => 'Stav',
+    'LBL_EMAIL_DIRECTION' => 'Směr',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Zkontrolujte prosím!',

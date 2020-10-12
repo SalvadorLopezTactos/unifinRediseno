@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'ดูตัวอย่าง',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'คำเตือน: ถ้าคุณเปลี่ยนโมดูลหลัก ฟิลด์ทั้งหมดที่เพิ่มในเทมเพลทจะต้องถูกนำออก',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'ต่อไปนี้เป็นไฟล์ที่คุณต้องการ (คุณสามารถแก้ไขข้อความนี้ได้)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'การเสนอราคา',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'เทมเพลทนี้ใช้สำหรับพิมพ์การเสนอราคาเป็น PDF',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'การเสนอราคา',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'ใบเสนอราคา (พร้อมบริการ)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'เทมเพลตนี้ใช้เพื่อพิมพ์ใบเสนอราคาพร้อมข้อมูลการบริการในรูปแบบไฟล์ PDF',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'ใบเสนอราคาบริการ',
+
   'LBL_TPL_INVOICE_NAME' => 'ใบแจ้งหนี้',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'เทมเพลทนี้ใช้สำหรับพิมพ์ใบแจ้งหนี้เป็น PDF',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'ใบแจ้งหนี้',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'ใบแจ้งหนี้ (พร้อมบริการ)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'เทมเพลตนี้ใช้เพื่อพิมพ์ใบแจ้งหนี้พร้อมข้อมูลการบริการในรูปแบบไฟล์ PDF',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'ใบแจ้งหนี้การบริการ',
+
   'LBL_TPL_QUOTE_NUMBER' => 'เลขที่การเสนอราคา:',
   'LBL_TPL_SALES_PERSON' => 'พนักงานขาย:',
   'LBL_TPL_VALID_UNTIL' => 'ใช้ได้จนถึง:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'เลขที่ชิ้นส่วน',
   'LBL_TPL_PRODUCT' => 'รายการบรรทัดการเสนอราคา',
   'LBL_TPL_RLI' => 'รายการบรรทัดรายได้',
+  'LBL_TPL_DURATION' => 'ระยะเวลา',
+  'LBL_TPL_DURATION_STARTS' => 'เริ่มต้น:',
+  'LBL_TPL_DURATION_ENDS' => 'สิ้นสุด:',
   'LBL_TPL_LIST_PRICE' => 'ราคาตามบัญชี',
   'LBL_TPL_UNIT_PRICE' => 'ราคาต่อหน่วย',
   'LBL_TPL_EXT_PRICE' => 'ราคารวม',

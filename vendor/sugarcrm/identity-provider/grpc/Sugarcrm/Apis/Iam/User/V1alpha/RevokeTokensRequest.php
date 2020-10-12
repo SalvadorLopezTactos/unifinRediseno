@@ -20,19 +20,9 @@ class RevokeTokensRequest extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           Subject whose tokens will be revoked
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

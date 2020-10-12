@@ -322,4 +322,7 @@ Efter bekræftelse af hvert enkelt påkrævet og ønsket modul, skal du klikke p
     'LBL_FILTER_LEADS_REPORTS' => 'Lead rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykke givet til',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sidst opdateret',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Kan ikke ændre statussen for {{moduleSingular}}. Dette {{moduleSingular}} er allerede konverteret.',
 );

@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktiluettelon työpöytä',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktitietueiden työpöytä',
-
+    'LBL_SITE_USER_ID' => 'Tunnisteet kohteille site_url ja contact id',
+    'LBL_COOKIE_CONSENT' => 'Evästeiden hyväksyminen',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Evästeiden hyväksyminen vastaanotettu',
     'LNK_CONTACT_REPORTS' => 'Näytä kontaktiraportit',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta kontakti voidaan poistaa.',
     'LBL_ACCOUNT_ID' => 'Asiakkaan ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portaalin tiedot',
     'LBL_PORTAL_NAME' => 'Portaalin nimi:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portaalin salasana on asetettu:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portaalin käyttäjän yrityksen nimi',
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{full_name}}</a> on luotu.',
     'LBL_STREET' => 'Katu',
     'LBL_POSTAL_CODE' => 'Postinumero:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Myyntimahdollisuudet',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentit',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Tarjoukset',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Tarjoukset (lähetä kohteeseen)',
     'LBL_QUOTES_BILL_TO' => 'Tarjoukset (laskuta)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Tarjotut tuoterivit',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klikkaa tästä muokataksesi profiiliasi.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Tässä valitset haluamasi kielen. Tätä kieltä käytetään Sugar-portaalissa.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Voit palata profiiliisi milloin tahansa käyttäjävalikosta.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portaalin nimi {0} on jo olemassa. Päällekkäisiä käyttäjänimiä ei hyväksytä. Muuta portaalin nimi yksilölliseksi.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal ID',
@@ -284,4 +289,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktien raportit',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Suostumus liiketoimintatarkoituksiin kohteelle',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Suostumus päivitetty viimeksi',
+
+    'LBL_ENTRY_SOURCE' => 'Yhteystiedon lähde',
+    'LBL_SOURCE_EXTERNAL' => 'Ulkoinen',
+    'LBL_SOURCE_INTERNAL' => 'Sisäinen',
 );

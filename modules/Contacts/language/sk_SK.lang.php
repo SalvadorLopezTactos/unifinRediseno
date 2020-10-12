@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom kontaktov',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom kontaktov',
-
+    'LBL_SITE_USER_ID' => 'Hash položiek site_url a id kontaktu',
+    'LBL_COOKIE_CONSENT' => 'Súhlas so súbormi cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Súhlas so súbormi cookie prijatý dňa',
     'LNK_CONTACT_REPORTS' => 'Zobraziť hlásenia kontaktov',
     'ERR_DELETE_RECORD' => 'Ak chcete odstrániť kontakt, musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'ID účtu:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informácie o portále',
     'LBL_PORTAL_NAME' => 'Názov portálu:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Heslo portálu je nastavené:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Názov spoločnosti používateľa portálu',
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspešne ste vytvorili {{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Ulica',
     'LBL_POSTAL_CODE' => 'PSČ:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Príležitosti',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Ponuky',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Ponuky (poslať komu)',
     'LBL_QUOTES_BILL_TO' => 'Ponuky (fakturovať komu)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky ponuky',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Kliknite tu a upravte svoj profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Tu je miesto, kde môžete nastaviť svoj ​​predvolený jazyk. Tým sa zmení jazyk používaný v Sugar portále.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Do svojho profilu sa môžete kedykoľvek vrátiť pomocou používateľskej ponuky.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Názov portálu {0} už existuje. Duplikované názvy portálov nie sú povolené. Zmeňte názov portálu tak, aby bol jedinečný.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B hlavné Id',
@@ -279,4 +284,8 @@ Ak chcete vytvoriť modul {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Hlásenia kontaktov',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Odsúhlasené podnikateľské účely',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posledná aktualizácia súhlasu',
+
+    'LBL_ENTRY_SOURCE' => 'Zdroj kontaktu',
+    'LBL_SOURCE_EXTERNAL' => 'Externý',
+    'LBL_SOURCE_INTERNAL' => 'Interný',
 );

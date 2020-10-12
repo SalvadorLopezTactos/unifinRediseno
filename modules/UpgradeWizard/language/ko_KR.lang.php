@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => '설치 불가능',
     'LBL_ML_VERSION' => '버전',
 	'LBL_ML_INSTALL'=>'설치',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => '추적기',
 	'LBL_MODULE_NAME' => '업그레이드 마법사',
 	'LBL_MODULE_NAME_SINGULAR' => '업그레이드 마법사',
 	'LBL_UPLOAD_SUCCESS' => '패키지 업그레이드가 성공적으로 전송되었습니다. 최종 확인을 위한 다음 버튼을 클릭하십시오,',

@@ -12,11 +12,11 @@
  */
 
 
-$sugar_version      = '9.0.0';
-$sugar_db_version   = '9.0.0';
+$sugar_version      = '10.0.2';
+$sugar_db_version   = '10.0.2';
 $sugar_flavor       = 'ENT';
-$sugar_build        = '151';
-$sugar_timestamp    = '2019-03-20 11:33pm';
-$sugar_mar_version  = 'Spring \'19';
+$sugar_build        = '182';
+$sugar_timestamp    = '2020-09-01 6:30pm';
+$sugar_mar_version  = 'Q2 2020';
 
 ?>

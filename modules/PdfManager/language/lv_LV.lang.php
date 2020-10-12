@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Priekšapskate',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UZMANĪBU: Ja nomainīsiet primāro moduli , visi sagatavei pievienotie datu lauki būs jānoņem.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Te ir jūsu pieprasītais fails (variet mainīt šo tekst)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Piedāvājums',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Sagatave tiek izmantota lai drukātu piedāvājumu pdf failā.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'piedāvājums',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Piedāvājums (ar pakalpojumiem)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Šī veidne tiek izmantota, la izdrukātu PDF formātā piedāvājumu, tostarp informāciju par pakalpojumiem.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'pakalpojumu piedāvājums',
+
   'LBL_TPL_INVOICE_NAME' => 'Rēķins',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Sagatave tiek izmantota lai drukātu rēķinu pdf failā.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'rēķins',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Rēķins (ar pakalpojumiem)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Šī veidne tiek izmantota, la izdrukātu PDF formātā rēķinu, tostarp informāciju par pakalpojumiem.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'pakalpojumu rēķins',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Piedāvājuma numurs:',
   'LBL_TPL_SALES_PERSON' => 'Pārdevējs:',
   'LBL_TPL_VALID_UNTIL' => 'Derīgs līdz:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Detaļas Numurs:',
   'LBL_TPL_PRODUCT' => 'Produkts',
   'LBL_TPL_RLI' => 'Ieņēmumu posteņi',
+  'LBL_TPL_DURATION' => 'Ilgums',
+  'LBL_TPL_DURATION_STARTS' => 'Sākas:',
+  'LBL_TPL_DURATION_ENDS' => 'Beidzas:',
   'LBL_TPL_LIST_PRICE' => 'Kataloga cena',
   'LBL_TPL_UNIT_PRICE' => 'Vienības cena',
   'LBL_TPL_EXT_PRICE' => 'Kopējā cena',

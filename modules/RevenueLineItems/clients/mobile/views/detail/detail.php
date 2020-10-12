@@ -31,6 +31,7 @@ $viewdefs['RevenueLineItems']['mobile']['view']['detail'] = array(
                 'product_template_name',
                 'likely_case',
                 'date_closed',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Eelvaade',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'HOIATUS: esmase mooduli muutmisel tuleb eemaldada kõik väljad, mis on juba malli lisatud.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Siin on teie nõutud tekst (saate seda teksti muuta siin)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Pakkumus',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Seda malli kasutatakse PDF-vormingus pakkumuse printimiseks.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'pakkumus',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Pakkumus (koos teenustega)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Seda malli kasutatakse PDF-vormingus pakkumuse, sh teeninduse teabe, printimiseks.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'teenusepakkumus',
+
   'LBL_TPL_INVOICE_NAME' => 'Arve',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Seda malli kasutatakse PDF-vormingus arve printimiseks.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'arve',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Arve (koos teenustega)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Seda malli kasutatakse PDF-vormingus arve, sh teenuse teabe, printimiseks.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'teenusearve',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Pakkumuse number:',
   'LBL_TPL_SALES_PERSON' => 'Müüja:',
   'LBL_TPL_VALID_UNTIL' => 'Kehtiv kuni:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Osa number',
   'LBL_TPL_PRODUCT' => 'Pakkumuse artikkel',
   'LBL_TPL_RLI' => 'Tuluartiklid',
+  'LBL_TPL_DURATION' => 'Kestus',
+  'LBL_TPL_DURATION_STARTS' => 'Algab:',
+  'LBL_TPL_DURATION_ENDS' => 'Lõpeb:',
   'LBL_TPL_LIST_PRICE' => 'Hinnakirja hind',
   'LBL_TPL_UNIT_PRICE' => 'Ühiku hind',
   'LBL_TPL_EXT_PRICE' => 'Laiendatud hind',

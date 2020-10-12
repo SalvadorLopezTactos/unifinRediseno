@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Target Module',
+  'LBL_PRJ_RUN_ORDER' => 'Run Order',
   'LBL_PMSE_BUTTON_SAVE' => 'Save',
   'LBL_PMSE_BUTTON_CANCEL' => 'Cancel',
   'LBL_PMSE_BUTTON_YES' => 'Yes',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'The Process Definition has been imported but contains one or more Business Rule actions for which business rules have not been selected.',
     'LBL_BPM_IMPORT_SELECT' => 'This Process Definition contains the following Business Rules and Email Templates. '
         . 'Please select the ones you want to import.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Business Rules',
     'LBL_EMAIL_TEMPLATES' => 'Email Templates',
 
@@ -193,6 +195,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Supervisor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Created by User',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Last Modified by User',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'System Email',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Business Rule',
     'LBL_PMSE_LABEL_RULE' => 'Rule',
@@ -310,6 +313,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'days',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'hours',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minutes',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'business hours',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Business Center',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'From Target Module',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'From ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Module',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'String, Number and Boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Number',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Value',

@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Προσφορές (Αποστολή σε)',
 	'LNK_ACCOUNT_REPORTS' => 'Προβολή Αναφορών Λογαριασμών',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Έγγραφα',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Πίνακας λίστας λογαριασμών',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Πίνακας Εγγραφής Λογαριασμών',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Στοιχεία λογαριασμού',
+    'LBL_NEXT_RENEWAL_DATE' => 'Ημερομηνία της επόμενης ανανέωσης',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Όνομα/Βιομηχανία Λογαριασμού',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Τοποθεσία',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Γραφήματα',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -131,4 +130,3 @@ $out.=<<<EOQ
 </html>
 EOQ;
 echo $out;
-?>

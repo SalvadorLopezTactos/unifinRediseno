@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Correus:Contactes',
     'LBL_EMAILS_LEADS_REL' => 'Correus:Clients Potencials',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Correus:Oportunitats',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Correus:Notes',
     'LBL_EMAILS_PROJECT_REL' => 'Emails:Projecte',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Emails:ProjecteTasca',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'De:',
     'LBL_REPLY_TO' => 'Respondre A:',
     'LBL_HTML_BODY' => 'Cos de HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Destinataris',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Clients potencials',
     'LBL_MESSAGE_SENT' => 'Missatge Enviat',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Id Respondre A',
     'LBL_TYPE' => 'Tipus:',
     'LBL_EMAIL_STATE' => 'Estat',
+    'LBL_EMAIL_DIRECTION' => 'Direcció',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Si us plau, comprovi el següent!',

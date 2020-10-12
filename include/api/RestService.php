@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
 use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfTokenStorage;
 use Sugarcrm\Sugarcrm\Security\Subject\User;
 use Sugarcrm\Sugarcrm\Security\Subject\IdentityAwareServiceAccount;
 use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Rest as RestApiClient;
@@ -54,7 +55,7 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.4';
+    protected $max_version = '11.8';
 
     /**
      * An array of api settings
@@ -73,6 +74,17 @@ class RestService extends ServiceBase
      * @var RestRequest
      */
     protected $request;
+
+    /**
+     * access allowed methods for user api
+     * @var array
+     */
+    protected $accessAllowedMethodsForUsersModuleApi = [
+        'retrieveRecord',
+        'createRecord',
+        'updateRecord',
+        'deleteRecord',
+    ];
 
     /**
      * Get request object
@@ -214,8 +226,13 @@ class RestService extends ServiceBase
                 && empty($route['ignoreSystemStatusError'])) {
                 // The system is unhappy and the route isn't flagged to let them through
                 // but user detail request needs to be honored to check if user should be deactivated
-                if (!(!empty($argArray['module']) && $argArray['module'] === 'Users'
-                    && !empty($route['method']) && $route['method'] === 'retrieveRecord')) {
+                if (isset($this->user) && $this->user->allowNonAdminToContinue($systemStatus)) {
+                    // let non admin with valid license go through
+                } elseif (!(!empty($argArray['module'])
+                    && $argArray['module'] === 'Users'
+                    && !empty($route['method'])
+                    && in_array($route['method'], $this->accessAllowedMethodsForUsersModuleApi))
+                ) {
                     $e = new SugarApiExceptionMaintenance(
                         $systemStatus['message'],
                         null,
@@ -525,10 +542,16 @@ class RestService extends ServiceBase
         }
 
         if (!$valid) {
+            // copy old csrf token into new session
+            $csrfTokens = $_SESSION[CsrfTokenStorage::SESSION_NAMESPACE] ?? null;
+
             // If token is invalid, clear the session for bwc
             // It looks like a big upload can cause no auth error,
             // so we do it here instead of the catch block above
             $_SESSION = array();
+            if ($csrfTokens) {
+                $_SESSION[CsrfTokenStorage::SESSION_NAMESPACE] = $csrfTokens;
+            }
             $exception = (isset($e)) ? $e : false;
 
             return array('isLoggedIn' => false, 'exception' => $exception);

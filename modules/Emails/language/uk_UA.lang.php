@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Email-повідомлення: Контакти',
     'LBL_EMAILS_LEADS_REL' => 'Email-повідомлення: Інтереси',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Email-повідомлення: Угоди',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Email-повідомлення: Примітки',
     'LBL_EMAILS_PROJECT_REL' => 'Email-повідомлення: Проект',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Email-повідомлення: Задача проекту',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Від:',
     'LBL_REPLY_TO' => 'Відповісти:',
     'LBL_HTML_BODY' => 'Текст HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Одержувачі',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Інтереси',
     'LBL_MESSAGE_SENT' => 'Повідомлення надіслано',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Ідентифікатор адреси для відповіді',
     'LBL_TYPE' => 'Тип:',
     'LBL_EMAIL_STATE' => 'Стан',
+    'LBL_EMAIL_DIRECTION' => 'Напрямок',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Будь ласка, перевірте!',

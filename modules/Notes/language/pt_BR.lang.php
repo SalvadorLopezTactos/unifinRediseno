@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Data de Modificação',
     'LBL_DELETED' => 'Excluído',
     'LBL_REVENUELINEITEMS' => 'Itens da linha de receita',
+    'LBL_ENTRY_SOURCE' => 'Origem da nota',
+    'LBL_SOURCE_EXTERNAL' => 'Externo',
+    'LBL_SOURCE_INTERNAL' => 'Interno',
 
     // Help Text
     // List View Help Text

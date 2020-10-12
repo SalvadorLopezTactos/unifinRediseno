@@ -1,0 +1,21 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{str 'LBL_CONSOLE_DIRECTIONS_DEFAULT_PRIMARY_SORT_ORDER' module}}: {{#if primarySortName}}{{primarySortName}}, {{primarySortDirection}}{{else}}{{str 'LBL_CONSOLE_DIRECTIONS_UNDEFINED' module}}{{/if}}
+<br>
+{{str 'LBL_CONSOLE_DIRECTIONS_DEFAULT_SECONDARY_SORT_ORDER' module}}: {{#if secondarySortName}}{{secondarySortName}}, {{secondarySortDirection}}{{else}}{{str 'LBL_CONSOLE_DIRECTIONS_UNDEFINED' module}}{{/if}}
+<br>
+{{str 'LBL_CONSOLE_DIRECTIONS_DEFAULT_FILTER' module}}: {{#if filterString}}{{filterString}}{{else}}{{str 'LBL_CONSOLE_DIRECTIONS_UNDEFINED' module}}{{/if}}
+<br>
+{{str 'LBL_CONSOLE_DIRECTIONS_RESTORE_DEFAULTS' module}}: <a href="javascript:void(0)" class="restore-defaults-btn" role="button">{{str 'LBL_CONSOLE_DIRECTIONS_RESTORE_DEFAULTS_LINK' module}}</a>
+<br>
+{{str 'LBL_CONSOLE_DIRECTIONS_CHANGE' module}}

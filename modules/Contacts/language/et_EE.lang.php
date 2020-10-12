@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktide loendi töölaud',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktikirjete töölaud',
-
+    'LBL_SITE_USER_ID' => 'Suvandi site_url ja kontakti ID räsi',
+    'LBL_COOKIE_CONSENT' => 'Küpsistega nõusolek',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Küpsistega nõusolek saadud',
     'LNK_CONTACT_REPORTS' => 'Vaata kontakti aruandeid',
     'ERR_DELETE_RECORD' => 'Kontakti kustutamiseks täpsustage kirje numbrit.',
     'LBL_ACCOUNT_ID' => 'Konto ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portaali teave',
     'LBL_PORTAL_NAME' => 'Portaali nimi:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portaali parool on määratud:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portaali kasutaja ettevõtte nimi',
     'LBL_RECORD_SAVED_SUCCESS' => 'Lõite edukalt järgmise: {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Tänav',
     'LBL_POSTAL_CODE' => 'Sihtnumber:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Müügivõimalused',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pakkumised',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Hinnapakkumised (saaja aadress)',
     'LBL_QUOTES_BILL_TO' => 'Hinnapakkumised (arve saaja)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pakkumuse artiklid',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Profiili redigeerimiseks klõpsake siin.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Siin saate seada oma eelistatud keele. See muudab Sugari portaalis kasutatava keele.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Saate profiili naasta igal ajal, kasutades menüüd Kasutaja.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portaali nimi {0} on juba olemas. Korduvad portaali nimed pole lubatud. Muutke portaali nimi kordumatuks.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B peamine ID',
@@ -279,4 +284,8 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktide aruanded',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Nõustutud ärieesmärgid:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Nõusoleku viimane värskendus',
+
+    'LBL_ENTRY_SOURCE' => 'Kontakti allikas',
+    'LBL_SOURCE_EXTERNAL' => 'Väline',
+    'LBL_SOURCE_INTERNAL' => 'Sisemine',
 );

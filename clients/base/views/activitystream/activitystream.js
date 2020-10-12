@@ -433,7 +433,12 @@
                 if ((url.indexOf('http://') !== 0) && (url.indexOf('https://') !== 0)) {
                     href = 'http://' + url;
                 }
-                return '<a href="' + href + '" target="_blank">' + url + '</a>';
+                let a = document.createElement('a');
+                a.href = href;
+                a.innerText = url;
+                a.target = '_blank';
+
+                return a.outerHTML;
             });
         }
 

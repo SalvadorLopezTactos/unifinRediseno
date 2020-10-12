@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'未找到類型預設值目標清單',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'未找到項目',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => '項目已處理',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'追蹤器名稱：',
   'LBL_EDIT_TRACKER_URL'=>'追蹤器 URL：',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> '「輸入電子郵件」帳戶未儲存最高限度。',
     'ERR_REVIEW_EMAIL_SETTINGS' => '請檢查「輸入電子郵件」設定。',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} 透過此推廣活動建立的潛在客戶自建立起就已刪除。',
+    'LBL_PROSPECT_LIST' => '目標清單',
 );
 
 

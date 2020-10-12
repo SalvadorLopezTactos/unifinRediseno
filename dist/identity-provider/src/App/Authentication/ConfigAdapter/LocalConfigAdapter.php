@@ -54,6 +54,7 @@ class LocalConfigAdapter extends AbstractConfigAdapter
                 'attempt' => (int)$config['login_lockout']['attempt'],
                 'time' => (int)$config['login_lockout']['time']['seconds'],
             ],
+            'legacy_md5_support' => (bool)$config['legacy_md5_support'],
         ];
     }
 
@@ -82,6 +83,7 @@ class LocalConfigAdapter extends AbstractConfigAdapter
                 'attempt' => 0,
                 'time' => ['seconds' => 0],
             ],
+            'legacy_md5_support' => false,
         ];
     }
 

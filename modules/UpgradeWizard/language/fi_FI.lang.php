@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Poistettavissa',
     'LBL_ML_VERSION' => 'Versio',
 	'LBL_ML_INSTALL'=>'Asenna',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Seuraaja',
 	'LBL_MODULE_NAME' => 'Päivitystyökalu',
 	'LBL_MODULE_NAME_SINGULAR' => 'Päivitystyökalu',
 	'LBL_UPLOAD_SUCCESS' => 'Päivityspakkaus ladattiin. Klikkaa Seuraava suorittaaksesi viimeisen tarkistuksen.',

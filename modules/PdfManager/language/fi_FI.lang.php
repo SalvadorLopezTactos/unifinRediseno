@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Esikatselu',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'VAROITUS: Jos muutat ensisijaista moduulia, kaikki malliin jo lisätyt kentät pitää poistaa.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Tässä on pyytämäsi tiedosto (voit muuttaa tätä tekstiä).',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Tarjous',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Tätä mallia käytetään tarjouksen tulostukseen PDF-muodossa.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'tarjous',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Tarjous (sisältäen palvelut)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Tätä mallia käytetään palvelutiedot sisältävän tarjouksen tulostamiseen PDF-muodossa.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'palvelutarjous',
+
   'LBL_TPL_INVOICE_NAME' => 'Lasku',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Tätä mallia käytetään laskun tulostukseen PDF-muodossa.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'lasku',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Lasku (sisältäen palvelut)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Tätä mallia käytetään palvelutiedot sisältävän laskun tulostamiseen PDF-muodossa.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'palvelulasku',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Tarjouksen numero:',
   'LBL_TPL_SALES_PERSON' => 'Myyntihenkilö:',
   'LBL_TPL_VALID_UNTIL' => 'Validi kunnes:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Osanumero:',
   'LBL_TPL_PRODUCT' => 'Tarjottu tuoterivi',
   'LBL_TPL_RLI' => 'Tuoterivit',
+  'LBL_TPL_DURATION' => 'Kesto',
+  'LBL_TPL_DURATION_STARTS' => 'Alkaa:',
+  'LBL_TPL_DURATION_ENDS' => 'Päättyy:',
   'LBL_TPL_LIST_PRICE' => 'Ohjehinta',
   'LBL_TPL_UNIT_PRICE' => 'Yksikköhinta',
   'LBL_TPL_EXT_PRICE' => 'Ulk. hinta',

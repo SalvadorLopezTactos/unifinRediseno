@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => '제조자',
   'LNK_NEW_PRODUCT_CATEGORY' => '상품 범주',
   'LNK_NEW_PRODUCT_TYPE' => '상품 유형',
-  'LNK_NEW_PRODUCT' => '책자를 위한 상품 새로 만들기',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => '배송 공급자',
   'LNK_PRODUCT_LIST' => '상품 책자 보기',
   'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => '상품 범주',
   'LBL_MANUFACTURERS' => '제조자',
   'LBL_PRODUCT_TYPES' => '상품 유형',
-
+  'LBL_RENEWABLE' => '갱신 가능',
+  'LBL_SERVICE' => '서비스',
 );
-
-
-?>

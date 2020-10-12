@@ -142,7 +142,6 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -152,8 +151,19 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
                 'priority',
                 'status',
                 'follow_up_datetime',
+                'resolved_datetime',
                 'type',
                 'resolution',
+                [
+                    'name' => 'hours_to_resolution',
+                    'type' => 'decimal',
+                    'readonly' => true,
+                ],
+                [
+                    'name' => 'business_hours_to_resolution',
+                    'type' => 'decimal',
+                    'readonly' => true,
+                ],
                 'assigned_user_name',
                 array(
                     'name' => 'description',
@@ -170,7 +180,6 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

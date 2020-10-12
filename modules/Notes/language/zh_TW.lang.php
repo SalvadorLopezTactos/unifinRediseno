@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => '修改日期',
     'LBL_DELETED' => '已刪除',
     'LBL_REVENUELINEITEMS' => '營收項目',
+    'LBL_ENTRY_SOURCE' => '備註來源',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '內部',
 
     // Help Text
     // List View Help Text

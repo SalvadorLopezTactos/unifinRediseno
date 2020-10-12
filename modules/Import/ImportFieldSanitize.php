@@ -80,36 +80,6 @@ class ImportFieldSanitize
     }
 
     /**
-     * Validate date fields
-     *
-     * @param  $value  string
-     * @param  $vardef array
-     * @param  $focus  object bean of the module we're importing into
-     * @return string sanitized and validated value on success, bool false on failure
-     */
-    public function date(
-        $value,
-        $vardef,
-        &$focus
-        )
-    {
-        global $timedate;
-
-        $format = $this->dateformat;
-
-        if ( !$timedate->check_matching_format($value, $format) )
-            return false;
-
-        if ( !$this->isValidTimeDate($value, $format) )
-            return false;
-
-        $value = $timedate->swap_formats(
-            $value, $format, $timedate->get_date_format());
-
-        return $value;
-    }
-
-    /**
      * Validate email fields
      *
      * @param  $value  string

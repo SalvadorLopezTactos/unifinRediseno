@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => '可解除安裝',
     'LBL_ML_VERSION' => '版本',
 	'LBL_ML_INSTALL'=>'安裝',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => '追蹤器',
 	'LBL_MODULE_NAME' => '升級精靈',
 	'LBL_MODULE_NAME_SINGULAR' => '升級精靈',
 	'LBL_UPLOAD_SUCCESS' => '升級封裝已成功上載。按一下「下一步」以執行最終檢查。',

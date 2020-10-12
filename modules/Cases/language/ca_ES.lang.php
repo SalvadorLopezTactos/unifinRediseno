@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de casos',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalls del cas',
 
 	'ERR_DELETE_RECORD'					=> 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
 	'LBL_ACCOUNT_ID'					=> 'ID del compte',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contactes',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Casos',
 	'LBL_DESCRIPTION'					=> 'Descripció:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Arxivar Adjunt',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Arxivar Adjunt',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Històrial',
 	'LBL_INVITEE'						=> 'Contactes',
 	'LBL_MEMBER_OF'						=> 'Compte',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creat per l&#39;usuari',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nom d&#39;usuari assignat',
     'LBL_EXPORT_TEAM_COUNT' => 'Conté l&#39;equip',
+    'LBL_CHANGETIMERS' => 'Canvia els temporitzadors',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Els correus electrònics de contactes relacionats',
@@ -140,4 +143,11 @@ Per crear un {{module_name}}:
  - Els camps marcats "Obligatori" s&#39;han de completar abans de desar.
  - Feu clic a "Mostra més" per exposar camps addicionals si és necessari.
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'No ha trobat el que estava buscant?',
+    'LBL_CREATE_CASE' => 'Crea un {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detalls d&#39;SLA',
+    'LBL_HOURS' => 'Hores',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

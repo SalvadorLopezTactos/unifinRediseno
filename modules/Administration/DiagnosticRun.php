@@ -11,6 +11,7 @@
  */
 
 
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 
 require_once( 'include/utils/progress_bar_utils.php' );
 require_once( 'include/utils/zip_utils.php' );
@@ -603,6 +604,9 @@ function executemd5($filesmd5, $md5calculated)
 
 function executevardefs()
 {
+    // enable full access control
+    $adminWork = new AdminWork();
+    $adminWork->startAdminWork();
     //BEGIN DUMP OF SUGAR SCHEMA (VARDEFS)
 
     //END DUMP OF SUGAR SCHEMA (VARDEFS)

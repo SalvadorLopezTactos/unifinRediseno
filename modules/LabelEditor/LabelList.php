@@ -25,8 +25,16 @@ if(isset($_REQUEST['refreshparent'])){
 		$sugar_body_only = $_REQUEST['sugar_body_only'];
 	}
 	foreach($the_strings as $key=>$value){
-        echo "<tr><td nowrap>$key &nbsp;=>&nbsp; <a href='index.php?action=EditView&module=LabelEditor&
-            module_name=$module_name&record=$key&sugar_body_only=$sugar_body_only&style=popup'> $value </a></td></tr>";
+
+        $href = 'index.php?'.http_build_query([
+                'action' => 'EditView',
+                'module' => 'LabelEditor',
+                'module_name' => $module_name,
+                'record' => $key,
+                'sugar_body_only' => $sugar_body_only,
+                'style' => 'popup',
+        ]);
+        echo '<tr><td nowrap>'. htmlspecialchars($key).'&nbsp;=>&nbsp; <a href="'.htmlspecialchars($href).'"> '.htmlspecialchars($value).'</a></td></tr>';
 	}
 	echo '</table>';
 } elseif (!empty($module_name)) {
