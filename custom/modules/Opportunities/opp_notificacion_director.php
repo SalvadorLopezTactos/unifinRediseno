@@ -421,7 +421,7 @@ SQL;
 			}
 			
 			$insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','BCC', 'Solicitudes','OK','Correo exitosamente enviado')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
 			$GLOBALS['db']->query($insert);
 
         } catch (Exception $e){
