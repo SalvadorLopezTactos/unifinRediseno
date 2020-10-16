@@ -42,7 +42,7 @@
 
             case '#RefinanciamientosMasivos':
                 route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
-                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
+
                 break;
         }
 

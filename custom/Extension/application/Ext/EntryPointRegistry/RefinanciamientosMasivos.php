@@ -8,4 +8,5 @@
 $entry_point_registry['RefinanciamientosMasivos'] = array(
 'file' => 'custom/Levementum/CustomEntryPoints/RefinanciamientosMasivos.php',
 'auth' => true
+
 );

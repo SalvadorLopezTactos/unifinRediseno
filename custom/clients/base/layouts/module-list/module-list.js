@@ -13,7 +13,6 @@
         moduleList.push('CotizadorProspectos');
         moduleList.push('BuscaDisposicion');
         moduleList.push('RefinanciamientosMasivos');
-
         _.each(moduleList, function(module) {
             this._addMenu(module, true);
         }, this);

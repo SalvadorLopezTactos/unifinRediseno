@@ -17,6 +17,7 @@ global $current_user,$sugar_config;
         var TOKEN=localStorage.getItem('prod:SugarCRM:AuthAccessToken');
         //Setea valor de la url con atributos como puerto, el id del user y el token.
         const url= `<?php echo $Host?>?user=<?php echo $current_user->user_name;?>&token=${TOKEN.replace(/['"]+/g, '')}`;
+
         //Setea el valor de la url al scr del iframe con id Theme
         document.getElementById("theme").setAttribute("src",url);
     };
