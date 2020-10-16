@@ -39,6 +39,11 @@
                 route = '#bwc/index.php?entryPoint=BuscaDisposicion';
                 //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
                 break;
+
+            case '#RefinanciamientosMasivos':
+                route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
+                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
+                break;
         }
 
         event.preventDefault();

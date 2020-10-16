@@ -12,6 +12,7 @@
         //moduleList.splice(8, 0, 'Expediente');
         moduleList.push('CotizadorProspectos');
         moduleList.push('BuscaDisposicion');
+        moduleList.push('RefinanciamientosMasivos');
 
         _.each(moduleList, function(module) {
             this._addMenu(module, true);
@@ -40,6 +41,11 @@
                 break;
 
             case 'BuscaDisposicion':
+                filter = 'all_records';
+                alias = true;
+                break;
+
+             case 'RefinanciamientosMasivos':
                 filter = 'all_records';
                 alias = true;
                 break;
